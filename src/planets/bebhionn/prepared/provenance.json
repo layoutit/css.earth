@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "bebhionn",
   "basis": "recovered",
   "manifest": {
@@ -270,7 +270,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -296,7 +296,7 @@
       "sha256": "827c9f265f08b7ef35f357a7ee9217203a727b7478da3a1c8d2b9aa8c76b6151",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -313,7 +313,7 @@
       "sha256": "2b5f277c0705fa6a023b154bd19c85ae27d3b63de4fa2c734a80d1af995fcff7",
       "bytes": 3651,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -351,13 +351,13 @@
           "url": "/scenes/bebhionn/bebhionn-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/bebhionn/bebhionn-model-surface@2x.webp",
           "bytes": 55124,
           "sha256": "ca1aefb3cb5c3f410192810dbf5e64bdb3f075319aad64562a103b8e4e3fd78c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

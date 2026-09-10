@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "metis",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4df26b24b4df8090b8d39f406a270f5ebc646beced6dc251abdee6d1af17f4d1"
+    "sha256": "417c5ddd92869c2abb5da3ecbba47a13d3663ce49f19a78318336708fe1c186d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -389,15 +389,19 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532890500R.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532890500R.IMG",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "4c3501a4e341b74405b89b285b404361fcff442b4819423a745cd6dbf26fe811",
       "bytes": 857088,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -422,15 +426,19 @@
       "acquisition": "Original reconstructed SSI product, unchanged.",
       "redistribution": "Retain NASA/JPL and PDS attribution.",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532890500R.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532890500R.LBL",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "05b777e7781d3ade918ccbb7ce8993b54624cd7ac1c5a4f237f16f2a6f672bd0",
       "bytes": 5033,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -462,15 +470,19 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420681401R.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420681401R.IMG",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "9a3e93326e589847d6033a75cae9dbbd884ff52a9022c6f96ae722321f3f8895",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -495,15 +507,19 @@
       "acquisition": "Original reconstructed SSI product, unchanged.",
       "redistribution": "Retain NASA/JPL and PDS attribution.",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420681401R.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420681401R.LBL",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "a2d5298b3f28aaa247d402ae7269d8744233bf97c123fd2d800e09d3c1cfc3a7",
       "bytes": 4837,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -535,15 +551,19 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420685801R.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420685801R.IMG",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "d34cbf3bafcc2d7f079c3ad250287660d0dac936082b183436ecc7d1f92c2e3b",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -568,15 +588,19 @@
       "acquisition": "Original reconstructed SSI product, unchanged.",
       "redistribution": "Retain NASA/JPL and PDS attribution.",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420685801R.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420685801R.LBL",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "9e63ce4fcadfc499663fffca4460971ff94b7f7514e13ac55842d9fd18d3dbda",
       "bytes": 4837,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -608,15 +632,19 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/G8/SML_SATS/C0394682801R.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/G8/SML_SATS/C0394682801R.IMG",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "4daafe1c0c21cdaca61cc258f7835d31561ec76e7ac2ef8e07f033471ec67d71",
       "bytes": 810000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -641,15 +669,19 @@
       "acquisition": "Original reconstructed SSI product, unchanged.",
       "redistribution": "Retain NASA/JPL and PDS attribution.",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/G8/SML_SATS/C0394682801R.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/G8/SML_SATS/C0394682801R.LBL",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "9d258a9ae9a4229a9e66d5af9379b205ea50e412c90e64ce7e871bb89b1930db",
       "bytes": 4835,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -681,15 +713,19 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401751800R.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401751800R.IMG",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "9df4199697827534e3d6429f4a879d2cc851c5a17f287c8d6b46925227ad3f69",
       "bytes": 808000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -714,15 +750,19 @@
       "acquisition": "Original reconstructed SSI product, unchanged.",
       "redistribution": "Retain NASA/JPL and PDS attribution.",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401751800R.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401751800R.LBL",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "73057c454d46f4fa7cc024ab8b005a4742935f38375718255f919e02e0f3693a",
       "bytes": 4728,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -753,7 +793,7 @@
       "sha256": "e7dc2d82d1e95a2cfb35ed9466bfcc21196b883887ce48981e96bf61b2c93a91",
       "bytes": 67525,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -770,7 +810,7 @@
       "sha256": "b06500a9dcaec1ea5512947eb93b91d7607c4a02813f329926f95714a5056e84",
       "bytes": 4561,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -813,13 +853,13 @@
           "url": "/scenes/metis/metis-normal-thumbnail.webp",
           "bytes": 2544,
           "sha256": "4a4959fe7939793e83855433f0d1be8f1a4e5b6bf6d7e4e6c8827d9ed4beae67",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/metis/metis-normal-surface@2x.webp",
           "bytes": 32284,
           "sha256": "6b524a2ca6fbf47d05c4856dd44a65012adedda355c4dbc1df995d99592ab791",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

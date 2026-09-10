@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "moshup",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "2bdeafb28dbb20b0aa74d79dbee76021ca7dd09e43fc72ff6cf43445dcc812bf",
       "bytes": 288969,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -350,7 +350,7 @@
       "sha256": "310a09e6ccaf021e88272c4fafdb3c865e085dfc20f739f7573f60fd8ee99670",
       "bytes": 8235,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -383,19 +383,19 @@
           "url": "/scenes/moshup/moshup-elevation-thumbnail.webp",
           "bytes": 7032,
           "sha256": "4f4349d30da1c7ae976b9324ea5319173fa5de0cf7304192b631d9db7b2ea58d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moshup/moshup-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moshup/moshup-elevation-surface@2x.webp",
           "bytes": 485900,
           "sha256": "fedefd2e58a2c29ee079ff827b11d64748864a9e2203bbcbd87548c93ab9b468",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -427,13 +427,13 @@
           "url": "/scenes/moshup/moshup-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moshup/moshup-shape-surface@2x.webp",
           "bytes": 218166,
           "sha256": "6977379ae49a98610ff415def80217c71c85a75340db5e25bc1243d571170c5b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

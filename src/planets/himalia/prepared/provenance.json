@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "himalia",
   "basis": "recovered",
   "manifest": {
@@ -254,7 +254,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -280,7 +280,7 @@
       "sha256": "4ff1572bad2cc0ff840d4088ad575af66ed0cf5eaba02d8d5d7b13a1db96b8ee",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -297,7 +297,7 @@
       "sha256": "3f6f9d4ea316aa9923e2dabf6b9e341bad0ab939d640e3f9bc86cc129b7f83e5",
       "bytes": 3100,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -335,13 +335,13 @@
           "url": "/scenes/himalia/himalia-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/himalia/himalia-model-surface@2x.webp",
           "bytes": 57272,
           "sha256": "13b5839d0f36561cbe7e7a8a7bd9f767490aba1eb0dd80abb3eadb06f1af3ac1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

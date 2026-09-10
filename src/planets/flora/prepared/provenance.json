@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "flora",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "e023ac4feda25e06599505cccb6c442ccb258b0d01d6d9b921717eab44c7d21f",
       "bytes": 480379,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "406164778c4aaf1052a1d53dde5a8853263b936835c0ff99581ace0293d6077a",
       "bytes": 6812,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/flora/flora-elevation-thumbnail.webp",
           "bytes": 6162,
           "sha256": "6177ec8ccefb65120562f6c98944ef78a55be5548468145f0eec3abc29a81dd4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/flora/flora-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/flora/flora-elevation-surface@2x.webp",
           "bytes": 337492,
           "sha256": "dac64ed2fec75a7f763e09ff1d960a450320b206a3b3aa1df04e51f3601ba251",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/flora/flora-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/flora/flora-shape-surface@2x.webp",
           "bytes": 223488,
           "sha256": "dd59aa84099b04355652f9823030688a34fa4de94d4b30f74be9643e4a5cfe23",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

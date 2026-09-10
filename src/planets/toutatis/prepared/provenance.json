@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "toutatis",
   "basis": "recovered",
   "manifest": {
@@ -273,7 +273,7 @@
       "sha256": "28c94e3c5c4fadab97c6f1fc78dbb3800a4248b86302681cf1c629e48df5f00a",
       "bytes": 2879779,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -298,7 +298,7 @@
       "sha256": "4f719cf2484fb9bdc6086035cd31f55546cfa573cc36162f189ea8d0342eca8e",
       "bytes": 8347,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -331,13 +331,13 @@
           "url": "/scenes/toutatis/toutatis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/toutatis/toutatis-shape-surface@2x.webp",
           "bytes": 243256,
           "sha256": "89dbe6aa8d80304ffe388f9eaa16457f3306bfc24970aab8b70380a887d5f176",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

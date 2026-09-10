@@ -206,9 +206,21 @@
       "checkedOn": "2026-09-10"
     },
     {
-      "id": "hayabusa2-vehicles",
-      "title": "JAXA: Hayabusa2 onboard instruments and small vehicles",
-      "url": "https://global.jaxa.jp/projects/sas/hayabusa2/instruments.html",
+      "id": "minerva-ii1",
+      "title": "JAXA: The small exploration rovers, MINERVA-II1",
+      "url": "https://www.hayabusa2.jaxa.jp/en/topics/20180919e/",
+      "checkedOn": "2026-09-10"
+    },
+    {
+      "id": "minerva-ii2",
+      "title": "JAXA: MINERVA-II2 (Rover2) separation operation",
+      "url": "https://www.hayabusa2.jaxa.jp/en/topics/20191001e_MNRVII2/",
+      "checkedOn": "2026-09-10"
+    },
+    {
+      "id": "mascot",
+      "title": "JAXA: The small asteroid lander, MASCOT",
+      "url": "https://www.hayabusa2.jaxa.jp/en/topics/20181002e_MSC/",
       "checkedOn": "2026-09-10"
     }
   ],
@@ -1151,20 +1163,20 @@
       "name": {
         "value": "MINERVA-II Rover-1A",
         "referenceIds": [
-          "hayabusa2-vehicles"
+          "minerva-ii1"
         ]
       },
       "aliases": [],
       "description": {
         "value": "Hayabusa2 carried MINERVA-II Rover-1A as a small rover for exploring Ryugu.",
         "referenceIds": [
-          "hayabusa2-vehicles"
+          "minerva-ii1"
         ]
       },
       "kind": {
         "value": "rover",
         "referenceIds": [
-          "hayabusa2-vehicles"
+          "minerva-ii1"
         ]
       }
     },
@@ -1173,20 +1185,20 @@
       "name": {
         "value": "MINERVA-II Rover-1B",
         "referenceIds": [
-          "hayabusa2-vehicles"
+          "minerva-ii1"
         ]
       },
       "aliases": [],
       "description": {
         "value": "Hayabusa2 carried MINERVA-II Rover-1B as a small rover for exploring Ryugu.",
         "referenceIds": [
-          "hayabusa2-vehicles"
+          "minerva-ii1"
         ]
       },
       "kind": {
         "value": "rover",
         "referenceIds": [
-          "hayabusa2-vehicles"
+          "minerva-ii1"
         ]
       }
     },
@@ -1195,20 +1207,20 @@
       "name": {
         "value": "MINERVA-II Rover-2",
         "referenceIds": [
-          "hayabusa2-vehicles"
+          "minerva-ii2"
         ]
       },
       "aliases": [],
       "description": {
         "value": "Hayabusa2 carried MINERVA-II Rover-2 as a small rover for exploring Ryugu.",
         "referenceIds": [
-          "hayabusa2-vehicles"
+          "minerva-ii2"
         ]
       },
       "kind": {
         "value": "rover",
         "referenceIds": [
-          "hayabusa2-vehicles"
+          "minerva-ii2"
         ]
       }
     },
@@ -1217,20 +1229,20 @@
       "name": {
         "value": "MASCOT",
         "referenceIds": [
-          "hayabusa2-vehicles"
+          "mascot"
         ]
       },
       "aliases": [],
       "description": {
         "value": "Hayabusa2 carried MASCOT as a small lander for exploring Ryugu.",
         "referenceIds": [
-          "hayabusa2-vehicles"
+          "mascot"
         ]
       },
       "kind": {
         "value": "lander",
         "referenceIds": [
-          "hayabusa2-vehicles"
+          "mascot"
         ]
       }
     }
@@ -2004,28 +2016,28 @@
           "spacecraftId": "minerva-ii-1a",
           "role": "rover",
           "referenceIds": [
-            "hayabusa2-vehicles"
+            "minerva-ii1"
           ]
         },
         {
           "spacecraftId": "minerva-ii-1b",
           "role": "rover",
           "referenceIds": [
-            "hayabusa2-vehicles"
+            "minerva-ii1"
           ]
         },
         {
           "spacecraftId": "minerva-ii-2",
           "role": "rover",
           "referenceIds": [
-            "hayabusa2-vehicles"
+            "minerva-ii2"
           ]
         },
         {
           "spacecraftId": "mascot",
           "role": "lander",
           "referenceIds": [
-            "hayabusa2-vehicles"
+            "mascot"
           ]
         }
       ],

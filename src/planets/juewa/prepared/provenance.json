@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "juewa",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "299db30077ce9e5c022971c38780e16113ad0716ce7de0ce6ffd9288a55acb0c",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 8345,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/juewa/juewa-elevation-thumbnail.webp",
           "bytes": 6604,
           "sha256": "3fc6aa7ce6eb7ea5275ace2b81fb4523c71772dbfd3fba1e09467a584d89009a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/juewa/juewa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/juewa/juewa-elevation-surface@2x.webp",
           "bytes": 336066,
           "sha256": "e6a5d1c0ffa2f60ab67dcd702f59ad4230d0dc4f7e0188c2fc4a7bfc7430e465",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/juewa/juewa-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/juewa/juewa-shape-surface@2x.webp",
           "bytes": 231234,
           "sha256": "9368b77530ebd39c6cb6261071ab7ca2129a7a24878eb39f42a02d41db3cff19",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

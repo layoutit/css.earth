@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "proteus",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "843a3091b289a85b65f37d845c0a6b5ce9021c3b93f45c1e1071db5be73ce2ad"
+    "sha256": "36e2b4f56c519ec0eb55ecffd48d7bacd19ee5e239f31508e18ddadbbee68949"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -518,7 +518,7 @@
       "sha256": "d079c8eac52d84224d5cb413526ff9415ab33afd48965e7e025544832ddd1868",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -550,15 +550,19 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.IMG",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "2cbc85b09e7424100cc70ae04e2c3e6348de9c16e3d2b470cfcd3c80a6a7dcc5",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -583,15 +587,19 @@
       "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.LBL",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "db382dbdddf392fc4bd259eae704f29d2079a79b0eab16667d3ab564c74f11c2",
       "bytes": 3310,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -623,15 +631,19 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.IMG",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "37251119522eb390347b918920b14621f9b28ec6aecd12ebe48d79d64fd4223b",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -656,15 +668,19 @@
       "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.LBL",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "647c4c8715e93c784e4fa007640cde04e176a5623507364440edce797abdb257",
       "bytes": 3337,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -689,10 +705,14 @@
       "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.IMG",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "width": 1000,
       "height": 1000,
@@ -704,7 +724,7 @@
       "sha256": "f37a64e7ac1c2e9e141f59cd20fa2f34f517bcf0e657d0540a60b0a424769111",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -729,15 +749,19 @@
       "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.LBL",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "289c5ced3819a5dab6ee26fa1f4b7f0c099d051404b5174fc30d089543f7f9f9",
       "bytes": 3311,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -762,10 +786,14 @@
       "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.IMG",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "width": 1000,
       "height": 1000,
@@ -777,7 +805,7 @@
       "sha256": "bdd224a33a5c5f160ef7340b435cd554f0c1103beb1d9b239eaaf3566bc9b758",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -802,15 +830,19 @@
       "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.LBL",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "baddb97ebd6d2bcfef48e09338dd95d6777744265246c4ba24de75bcf2dbe497",
       "bytes": 3310,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -835,10 +867,14 @@
       "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.IMG",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "width": 1000,
       "height": 1000,
@@ -850,7 +886,7 @@
       "sha256": "963eeafe558de0d75d1afc2de2ca38558a1dfc4e4d1e322755bfe3d8b05e20de",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -875,15 +911,19 @@
       "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.LBL",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "ab9d944237a41b7c3b5d432c0805d863b12538c1339ea13bd244aa2420afea42",
       "bytes": 3296,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -907,7 +947,7 @@
       "sha256": "5efb6760a5f50e233be36cdb24d6b3ecbb39910eabf674910348b0d131eb74b0",
       "bytes": 6415,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -940,19 +980,19 @@
           "url": "/scenes/proteus/proteus-elevation-thumbnail.webp",
           "bytes": 7376,
           "sha256": "ff525fb48621156a083633751a9fbf82bb7e69a7a419ad534da93dad3572b064",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/proteus/proteus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/proteus/proteus-elevation-surface@2x.webp",
           "bytes": 376918,
           "sha256": "f44442af0337975d7e9d87ae64de2803245d3a183d0f7ce96ccadf845fa50b28",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -988,13 +1028,13 @@
           "url": "/scenes/proteus/proteus-normal-thumbnail.webp",
           "bytes": 3420,
           "sha256": "93c16a2ac7a30062c0f44c64d611f8cf86afe248e3a3128314fa3c36bb282015",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/proteus/proteus-normal-surface@2x.webp",
           "bytes": 426212,
           "sha256": "3569954d7533c338ad73a0a25f737e54278b3b05aeeb3235842e23908f656153",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1032,13 +1072,13 @@
           "url": "/scenes/proteus/proteus-filter-color-thumbnail.webp",
           "bytes": 2584,
           "sha256": "2053e1e0086f86217939322a359aadde5b42edaa76ed8df0f72a681480a2f22f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/proteus/proteus-filter-color-surface@2x.webp",
           "bytes": 185760,
           "sha256": "8f7546054163722d68ed54f322bbaf48cf447c858c238da9d8ed460c0348cb00",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

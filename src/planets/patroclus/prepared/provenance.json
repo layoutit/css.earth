@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "patroclus",
   "basis": "recovered",
   "manifest": {
@@ -259,7 +259,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -284,7 +284,7 @@
       "sha256": "d42d1b58ea65d003fb1b31f8b32bc0c79e833c5bcb7aa060fd395039ae0ee9c4",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -301,7 +301,7 @@
       "sha256": "191e0628a0ca040390a8b886792d31ba79b4a42b6b0ce191635aa616b1247779",
       "bytes": 3999,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -339,13 +339,13 @@
           "url": "/scenes/patroclus/patroclus-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/patroclus/patroclus-model-surface@2x.webp",
           "bytes": 54756,
           "sha256": "c3c3d1453704acce233544c959810f7a2bc768b54fea7a535eabc21e6e90109e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "amphitrite",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "2f5544aa2a2d416094b1367d833a44077f83ed2fa9a0d64ab13154f2a843c18b",
       "bytes": 81979,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "6f247f0e256cb2a485f558f360f381848b94aa28f8dc17087fe575a018eb4e9a",
       "bytes": 8807,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/amphitrite/amphitrite-elevation-thumbnail.webp",
           "bytes": 5974,
           "sha256": "a8a320075b3def059de09d7576ec5bfdab4b7d65b0ced603d18826099adfc1e0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/amphitrite/amphitrite-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/amphitrite/amphitrite-elevation-surface@2x.webp",
           "bytes": 315570,
           "sha256": "98e6f6c0798e747a5e4fc9d12b86e0cf49c2d81b9496b1306b272cff03d009be",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/amphitrite/amphitrite-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/amphitrite/amphitrite-shape-surface@2x.webp",
           "bytes": 224540,
           "sha256": "f96c1014bd1bcca8e3a6aaacdd63fe493e9897e48f5440930ade8faca70a6eef",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

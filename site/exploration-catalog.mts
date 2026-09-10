@@ -10,7 +10,7 @@ import type { Cited } from '../src/platform/exploration-catalog.mts';
 // HTML; the catalogue, provenance and compiler never enter the scene runtime.
 export const EXPLORATION = parsePreparedExploration(input);
 for (const [path, expected] of Object.entries(EXPLORATION.closure)) {
-  const bytes = await readFile(resolve(import.meta.dirname, '..', path));
+  const bytes = await readFile(resolve(process.cwd(), path));
   if (createHash('sha256').update(bytes).digest('hex') !== expected) throw new Error(`Stale exploration catalogue: ${path}. Run pnpm prepare:provenance.`);
 }
 export const SPACECRAFT = Object.freeze(Object.fromEntries(EXPLORATION.catalog.spacecraft.map(record => [record.id, record])));

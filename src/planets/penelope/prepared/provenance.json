@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "penelope",
   "basis": "recovered",
   "manifest": {
@@ -327,7 +327,7 @@
       "sha256": "0a169c305b444f8163b677a60de14d126a71717887f51bbbe980befd42279262",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "c3cf06338dd02e5524db412fc126a86292ce57daf1c64e34a04dd276f7b05600",
       "bytes": 8921,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/penelope/penelope-elevation-thumbnail.webp",
           "bytes": 5238,
           "sha256": "5168d93a9299375adb7ea67d30733acce6558afbe6d2c34d3dd1e0ddf5291c09",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/penelope/penelope-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/penelope/penelope-elevation-surface@2x.webp",
           "bytes": 312508,
           "sha256": "3f0842cad0dc3cfd178dd7cebe86e8b7e9c88f06975f6c43fe5e895648509aaa",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/penelope/penelope-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/penelope/penelope-shape-surface@2x.webp",
           "bytes": 208936,
           "sha256": "91e07fd7fc0426d4b1ad0cee2cd8a374202db3b2395a4748dd01396727f25fcf",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "thule",
   "basis": "recovered",
   "manifest": {
@@ -327,7 +327,7 @@
       "sha256": "c0fec70b7a5816ef0fc92feeeae0c558d5f30efde18b6bfcc84a9146b8a35e98",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "c5c612ca167572369c08cf101f22949fc435306903c13d7d4b9c1741532c974e",
       "bytes": 6358,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/thule/thule-elevation-thumbnail.webp",
           "bytes": 6070,
           "sha256": "26c47fd9f2452d9de20198e644879584716093483e5aa74271e115f19fc98720",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/thule/thule-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/thule/thule-elevation-surface@2x.webp",
           "bytes": 344876,
           "sha256": "96f0a1a587a12c13dbefd792ac5c4621444f391463d5337a6a6489a56fa7687b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/thule/thule-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/thule/thule-shape-surface@2x.webp",
           "bytes": 248164,
           "sha256": "988dea28dff5d5edb860c5e9b35a8ce71e2fdc34628e06c1e1007431da4d9806",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

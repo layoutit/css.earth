@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "kressmannia",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "401f6b6b3ac21253ebf4d13a34e2ed951e3f7212652bd0f84fd0099989e2bec6",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 11974,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/kressmannia/kressmannia-elevation-thumbnail.webp",
           "bytes": 5440,
           "sha256": "2d435fe9e9f3b33c9d1a7b3eedeb0a712fa0ee865a26a8eaaeae7d94ddb713fa",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/kressmannia/kressmannia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/kressmannia/kressmannia-elevation-surface@2x.webp",
           "bytes": 290772,
           "sha256": "e74fbdd491434c2c6b658618320e39db121e05297808d02e51e0dfbfce1369d3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/kressmannia/kressmannia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/kressmannia/kressmannia-shape-surface@2x.webp",
           "bytes": 219672,
           "sha256": "9c3ebfd445924aa6e557dec0851f0fde1b0c5cdcba79b18852ab7e41f7746e0e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

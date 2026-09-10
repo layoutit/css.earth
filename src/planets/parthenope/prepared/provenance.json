@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "parthenope",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "c394cac9367b968629aa7f008d28a414738a83f9c6442a301974fe929e78ddf3",
       "bytes": 272059,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "b9f36d1b01ad844f7e3190476f02a46b29b9338cfaa4d031c0b5a73988bf707d",
       "bytes": 10256,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/parthenope/parthenope-elevation-thumbnail.webp",
           "bytes": 5878,
           "sha256": "dfa4433cee30e0c651fd6ec6fa81f31afec67a260ef4ef4cefc3767c8d784a8a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/parthenope/parthenope-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/parthenope/parthenope-elevation-surface@2x.webp",
           "bytes": 335310,
           "sha256": "f1ef8ef58ad43ca63fab6f351e6e6b2a8ca8984f92dc32cfa159fd13812fe702",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/parthenope/parthenope-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/parthenope/parthenope-shape-surface@2x.webp",
           "bytes": 222234,
           "sha256": "0438fa1172968a4b37407289043ebf720c24e5aa19a721ddcaedc864bf8503bb",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

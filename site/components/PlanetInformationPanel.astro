@@ -14,7 +14,7 @@ import DatasetDescription from "./DatasetDescription.astro";
 const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], provenance, lenses, destinations } = Astro.props;
 const hasLenses = Boolean(lenses && lenses.controls.length > 0);
 const sources = objectSources(provenance);
-const exploration = objectExploration(objectId);
+const exploration = Astro.props.deferMissionContent ? null : objectExploration(objectId);
 const orderedCharts = orderScientificCharts(charts);
 const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?? orderedCharts[0];
 ---
@@ -230,7 +230,8 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
         {!provenance && <p>Preparation provenance has not been recorded for this object.</p>}
       </div>
       <div class="planet-card-tabpanel" id={`${objectId}-missions-content`} data-information-panel="missions"
+        data-prepared-detail="missions" data-deferred-detail={Astro.props.deferMissionContent ? 'true' : undefined}
         role="tabpanel" aria-labelledby={`${objectId}-missions-tab`} tabindex="0" hidden>
-        <PlanetMissions {objectId} {...exploration} />
+        {exploration && <PlanetMissions {objectId} {...exploration} />}
       </div>
     </PlanetCard>

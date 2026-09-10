@@ -15,6 +15,7 @@ import { writePreparedSet } from './write-prepared-set.mts';
 export const explorationCompilerClosure = [
   'tools/prepare-spacecraft.mts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
   'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'site/objects.mts', 'site/object-schema.mts',
+  'site/object-catalog.mts', 'site/prepared-object-catalog.mts', 'tools/prepare-catalog.mts',
   'site/source/spacecraft/catalog.json', 'site/source/spacecraft/render-library.json', 'site/source/spacecraft/emblem-library.json',
   'site/source/agency-logos.json',
   'tools/objects/provenance.mts', 'tools/objects/provenance-records.mts', 'tools/objects/provenance-recipes.mts', 'tools/prepare-provenance.mts',

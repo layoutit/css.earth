@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "comet-143p",
   "basis": "recovered",
   "manifest": {
@@ -270,7 +270,7 @@
       "sha256": "d191f56540f31b93e2c48626907b55af2c4f37aa07dc5e1f0d747343e92a3f88",
       "bytes": 1325,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -287,7 +287,7 @@
       "sha256": "552a95ec8543c3e19d6b17f0dea782f5f937e8d0e3d85ce1c002b16856e4e71d",
       "bytes": 2941,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -320,13 +320,13 @@
           "url": "/scenes/comet-143p/comet-143p-model-thumbnail.webp",
           "bytes": 1504,
           "sha256": "53888388312bde6fad84f7ac5506007cc6385f483da75c051023951f0e030e1c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-143p/comet-143p-model-surface@2x.webp",
           "bytes": 112240,
           "sha256": "288ceec39fa3f1b52ea6e9cf1218ab62f3a4e307a5b14e42ef504d3e8a7fa1ee",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

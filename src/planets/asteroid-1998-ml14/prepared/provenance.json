@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "asteroid-1998-ml14",
   "basis": "recovered",
   "manifest": {
@@ -334,7 +334,7 @@
       "sha256": "8166bb5a7f6d8baa5cc82cec22304c011202f1254a403be1ff19eba0abfe6abe",
       "bytes": 29003,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -359,7 +359,7 @@
       "sha256": "ca538e7c9579ca1f609a59b9bfa0d202ae8594971c4e31d73a2ffd028c02f0ac",
       "bytes": 9947,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -392,19 +392,19 @@
           "url": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-elevation-thumbnail.webp",
           "bytes": 7792,
           "sha256": "4e656410a0aa9f83b2926e35e2873e8ae02a8bf775176d19c19718bfb811950c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-elevation-surface@2x.webp",
           "bytes": 345938,
           "sha256": "c75288a51098a47aee47119967feec0f5730f9071aa1d4ed4c839c9a67303a82",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -436,13 +436,13 @@
           "url": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-shape-surface@2x.webp",
           "bytes": 208362,
           "sha256": "11c15e3ede9047b2461985bea04221cda7cb1239ed53c05f39fb121ecce57a82",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "atalante",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "8e623150e9c87568b82037ea5fae18d26f649948b9f7bb1a765c54d0c56abe03",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "eff95890ff4e65d2b2e358689255028db3915be4e8b0d0c8178259699e0c2485",
       "bytes": 10493,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/atalante/atalante-elevation-thumbnail.webp",
           "bytes": 6020,
           "sha256": "9db13980d4a5d8d6750d8ce922718b05936f1cf52c5589ae0b6af6756083c462",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/atalante/atalante-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/atalante/atalante-elevation-surface@2x.webp",
           "bytes": 302344,
           "sha256": "c57fea8d0257d1885ba3cfa4b7c546bf716dd64df69e4a2f667c52bff1845967",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/atalante/atalante-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/atalante/atalante-shape-surface@2x.webp",
           "bytes": 222294,
           "sha256": "15b450dead68d966317170a19ef498567b3fb8cd784c85594e2f678895181494",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

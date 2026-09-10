@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "hyperion",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2cf2a3b3f402d428cad448f4acc81f95b120ebd34ef06dcfcd0926c89c5da372"
+    "sha256": "df0ec0e1a7fa0a19696db4fb0fe9c3493dee0cb80bb94296492064b0ba615125"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -570,15 +570,19 @@
       },
       "coverage": "Radius above a 135 km reference sphere from the Cassini stereo and limb shape model. This shows global relief and elongation, not a finely resolved terrain DEM; shape uncertainty reaches 6 km on the less-observed side.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/hyperion_30k_plt.tab"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/hyperion_30k_plt.tab",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "cf90156a297d3078375583a99c2367bfe265bc5175710772e173544a25c37002",
       "bytes": 2195250,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -606,15 +610,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506383441_2_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506383441_2_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "737553c1ebb0de17daa91d5c3fb5a81e3b3607b3b12db623a606a73f5b539d8e",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -642,15 +650,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506383441_2_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506383441_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "bbfa8326d1cf52d27a6502106d1692569d6944be85732a80337be36a0ace4907",
       "bytes": 3824,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -678,15 +690,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506388174_2_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506388174_2_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "b255f7921c6a03784e0de245bca7b36477058ad6d4b57f3e82ff5c7121c83002",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -714,15 +730,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506388174_2_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506388174_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "270ed65bab34a60ad9ad619b4874dfda1f48fca2ae9c627714171f6ed77431fa",
       "bytes": 3824,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -750,15 +770,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388518_2_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388518_2_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "049a41fa5fa30efa56bd3e5d929e60bccc2f8b3359f9a14329f8897f75461d80",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -786,15 +810,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388518_2_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388518_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "f28dba2654e87e842fd9a620abce361f5fb43f5249b493497f03a930f40b2aeb",
       "bytes": 3824,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -822,15 +850,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388840_2_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388840_2_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "7fd3bb4d4c4fd1b8b26dfa6cf35c48a1f7711bfe5da307762720cb801a43f85e",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -858,15 +890,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388840_2_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388840_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "e40148cd2d9fee3eee273de248ed9b9de65667ee6c8432645ba74b0d88e8856d",
       "bytes": 3826,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -894,15 +930,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389178_2_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389178_2_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "29ff6539441b348e70fe0d5327d5666275ace1a337f287afe2a93b92dd828854",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -930,15 +970,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389178_2_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389178_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "bc997dbf344cf676ddc22688e9fb2332b27df8a634b72af0911aaff166f137e1",
       "bytes": 3826,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -966,15 +1010,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "13b6d5694f2e9024f220e7564d5cb5ae8227047fa7a1659b62b7655769f97183",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1002,15 +1050,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "43892adf0226af67675dfcfccc6550e912520507d76cae00bc29c5f5a1b935a2",
       "bytes": 3824,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1038,15 +1090,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530158136_1530199809/N1530182624_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530158136_1530199809/N1530182624_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "7ea627f7f51829068d449d9ae8b066dea1add7d878aa3f0486352321cfe71be3",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1074,15 +1130,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530158136_1530199809/N1530182624_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530158136_1530199809/N1530182624_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "5cb00f73b654a2b487d69b94fb1ace72f0ed94b6353ea953ca72a1d229ef3add",
       "bytes": 3818,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1110,15 +1170,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530199842_1530335021/N1530201013_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530199842_1530335021/N1530201013_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "467a117f2e9068662ea944ba03e779fccc4c843e33daabcb59681c36e51dcd1e",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1146,15 +1210,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530199842_1530335021/N1530201013_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530199842_1530335021/N1530201013_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "5ff322200c549f14d70c5e17b80b05b95468aed8cc8625e210191e6f66e8b816",
       "bytes": 3830,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1182,15 +1250,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2069/data/1692994130_1693342058/N1692997492_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2069/data/1692994130_1693342058/N1692997492_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "d1b49a960d1fd6188c68a816cca69058c0ad81d607e4f73deea8592426841444",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1218,15 +1290,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2069/data/1692994130_1693342058/N1692997492_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2069/data/1692994130_1693342058/N1692997492_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "880b961befcc824747e8a42d366dd226411f7629775e625c9d37909225ee2eba",
       "bytes": 3851,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1254,15 +1330,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2069/data/1694815211_1694893186/N1694888328_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2069/data/1694815211_1694893186/N1694888328_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "48c5e31fbc53dcca25a079494af57f2aca0713326184fbba04ca04c01f6b6e64",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1290,15 +1370,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2069/data/1694815211_1694893186/N1694888328_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2069/data/1694815211_1694893186/N1694888328_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "7de79939a35619ab13ca0ad0c05b392b41cde038c18914f0d62b756e456cb8ef",
       "bytes": 3849,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1326,15 +1410,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1811750343_1811933464/N1811772616_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1811750343_1811933464/N1811772616_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "97471861a6b170aba8e84a04fbba79bfe54a485d568943219d2a974cf55e02fa",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1362,15 +1450,19 @@
       "height": 1024,
       "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1811750343_1811933464/N1811772616_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1811750343_1811933464/N1811772616_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "f1698496de0c66100faa2683a33270d803d079867f9dd6ee3dfc21b0039b6c09",
       "bytes": 3855,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1398,15 +1490,19 @@
       "height": 1024,
       "coverage": "Regional FULL calibrated clear-filter close observation; Thomas camera corrected by disjoint image registration, as documented in validation/n1506391424-registration.json.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506391424_2_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506391424_2_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "b212dac15ff2cec9213da76d2f0a540a1d6dfb10646e727bc472db0a99e25669",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1434,15 +1530,19 @@
       "height": 1024,
       "coverage": "Regional FULL calibrated clear-filter close observation; Thomas camera corrected by disjoint image registration, as documented in validation/n1506391424-registration.json.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506391424_2_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506391424_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "0b98753adc1818c17392dc8590f90f6526ee576373589ffa4f871d3ade8b726c",
       "bytes": 3825,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1466,7 +1566,7 @@
       "sha256": "e8feec52261253013e54e285b48d1d8fe3a19944d6f0ea0886f9d72aba835191",
       "bytes": 5858,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1499,19 +1599,19 @@
           "url": "/scenes/hyperion/hyperion-elevation-thumbnail.webp",
           "bytes": 6440,
           "sha256": "34a8a891482eb762488bc26159d222c233303a77baeae7633b3432bcde431f58",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hyperion/hyperion-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hyperion/hyperion-elevation-surface@2x.webp",
           "bytes": 893378,
           "sha256": "30370bc79e49f4372164b19fc9ea490fae15725781d296ba599d3d413b65137d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1567,13 +1667,13 @@
           "url": "/scenes/hyperion/hyperion-normal-thumbnail.webp",
           "bytes": 4314,
           "sha256": "af9fb9ee2775cf477952cc9510a677b8e85e0a8fd309c0d515678fc020de43ff",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hyperion/hyperion-normal-surface@2x.webp",
           "bytes": 1361026,
           "sha256": "be463cf8477fc34d4426d152b0c9c2b9872aca12bfbbb03046281c3ab86a12ac",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

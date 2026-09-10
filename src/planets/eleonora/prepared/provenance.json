@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "eleonora",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "2da6bda1b665dcd08c075f9704b16a04daab11c7129356dc6a0f1bb8d4bbd69d",
       "bytes": 240379,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "541c86cf059954b12c384b7e2a010d01d1b093f20c06c126fed49d9b5b10e31a",
       "bytes": 8564,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/eleonora/eleonora-elevation-thumbnail.webp",
           "bytes": 5584,
           "sha256": "c49a8f6dfab00c84e077e320cff4427880ba3cfd1369ec3af68961128d74ddc7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eleonora/eleonora-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eleonora/eleonora-elevation-surface@2x.webp",
           "bytes": 327584,
           "sha256": "4703383e4ddf5819b027240b79e73ce7aecce91e43bf47c8a4318d5c476dc2de",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/eleonora/eleonora-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eleonora/eleonora-shape-surface@2x.webp",
           "bytes": 224160,
           "sha256": "473dedce29242e62baeb97ae1cc5fabbbb402c06c8ea1e82c7b1090ecfc95cdd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

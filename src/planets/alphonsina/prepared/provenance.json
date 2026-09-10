@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "alphonsina",
   "basis": "recovered",
   "manifest": {
@@ -327,7 +327,7 @@
       "sha256": "8ca5c066f8feda632970baa9fe3dc73797d253c9fce1fe34901ef1d711a23708",
       "bytes": 82546,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "d74d5a374508b8930a738c82c37d12eb5e41b088eb5ea082ddb4721a4d493469",
       "bytes": 9517,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/alphonsina/alphonsina-elevation-thumbnail.webp",
           "bytes": 5036,
           "sha256": "5a820f5d00e2fb7357d93f04725cf904ac548e40886986c13a79fd1b077b0fc5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/alphonsina/alphonsina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/alphonsina/alphonsina-elevation-surface@2x.webp",
           "bytes": 360286,
           "sha256": "1cc1fc386de0ffc662ae2be3076a6c89c1b623477ea66ef639898302c8d26464",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/alphonsina/alphonsina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/alphonsina/alphonsina-shape-surface@2x.webp",
           "bytes": 196568,
           "sha256": "121e191e9293f251dd4d904da857af0e58673b6badf60311292d7197e4eca5c7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

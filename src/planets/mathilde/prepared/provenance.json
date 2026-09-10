@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "mathilde",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "41389b411179d71eeac7cdfbc83efe8547e673cfa12849ae4c5c957465b1a7e4"
+    "sha256": "e82785bb72f0e38b6f174772741f6e6662415ec86f0fce9f2babd42f852f8e75"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -356,15 +356,19 @@
         "reference/stooke-map-guide.html"
       ],
       "capture": {
-        "spacecraftIds": [
-          "near-shoemaker"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/253mathilde/matcyl1.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "near-shoemaker",
+            "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/253mathilde/matcyl1.jpg",
+            "missionId": "near-shoemaker"
+          }
+        ]
       },
       "sha256": "67437ac67da5fa50723b657d472191131d7cebe7d62358270e5c03c1bb98181e",
       "bytes": 330486,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -399,15 +403,19 @@
       },
       "coverage": "Published visualization shape: Thomas nominal model resampled to 5 degrees; Stooke smoothed unobserved areas and aesthetically modified shadowed crater floors. Not wholly measured terrain.",
       "capture": {
-        "spacecraftIds": [
-          "near-shoemaker"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/253mathilde.tab"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "near-shoemaker",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/253mathilde.tab",
+            "missionId": "near-shoemaker"
+          }
+        ]
       },
       "sha256": "fa5b9836c7085dcccfd9e579e225720c87aac53952626292bff6c74a260e0720",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -443,15 +451,19 @@
       },
       "coverage": "Incomplete Thomas measured-region radius model; exact 26.5 km unobserved placeholders are masked before interpolation. The coordinate axes and prime meridian are arbitrary.",
       "capture": {
-        "spacecraftIds": [
-          "near-shoemaker"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathilde.tab"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "near-shoemaker",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathilde.tab",
+            "missionId": "near-shoemaker"
+          }
+        ]
       },
       "sha256": "0b4acb5a2bc47697b9bb4d7c1e2a6a42e330bda3b241c10da2376c2a19ebae66",
       "bytes": 236192,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -479,7 +491,7 @@
       "sha256": "ba9e7d83d9c64f66293d66b313d91da0184c346a1b1876c9b0538fb997ad4642",
       "bytes": 10219,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -522,13 +534,13 @@
           "url": "/scenes/mathilde/mathilde-normal-thumbnail.webp",
           "bytes": 3222,
           "sha256": "70fdcc159376b4f0d82ffe49e0436ca7553c913d9aa285f32dc12df825cf7bf7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mathilde/mathilde-normal-surface@2x.webp",
           "bytes": 479000,
           "sha256": "6ba111d9845e1e8c1c1ffc50b6aa693836e969656a55221c8c07d76615a21201",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -561,19 +573,19 @@
           "url": "/scenes/mathilde/mathilde-elevation-thumbnail.webp",
           "bytes": 6858,
           "sha256": "933f66de7271aead1403e2bbefd7be5fb7202c2d629bfe5739727778bcdf4160",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mathilde/mathilde-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mathilde/mathilde-elevation-surface@2x.webp",
           "bytes": 517788,
           "sha256": "5e4bf08d0e4630afc04f3e88f23f370d3ccc53c9fdb4bfcb4874b15ba7719332",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

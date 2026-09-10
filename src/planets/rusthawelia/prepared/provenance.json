@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "rusthawelia",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "890c5ddc5bf62360d5e4369a8f35b30f4868233baf3da1eb4b8622c9ccb8af6a",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 11484,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/rusthawelia/rusthawelia-elevation-thumbnail.webp",
           "bytes": 6240,
           "sha256": "9d406bab4fe500ea5063d066d0baf627149a8b23ec4b9aaaa5e8eba82531aa31",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/rusthawelia/rusthawelia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/rusthawelia/rusthawelia-elevation-surface@2x.webp",
           "bytes": 306704,
           "sha256": "e14782e00b963f38a3844d95aba3df89f385229e84f2873f24e40745f512cd39",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/rusthawelia/rusthawelia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/rusthawelia/rusthawelia-shape-surface@2x.webp",
           "bytes": 236318,
           "sha256": "9d1d3333a2f8e884f17120eb509b31a036fa214199e8a64ef5c0b39e0823f998",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

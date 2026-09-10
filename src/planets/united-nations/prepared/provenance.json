@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "united-nations",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "9f8df63e5658a5f6657a6f9abaa9ca55ed8adbc4712304e6d313c23e28f9167a",
       "bytes": 45528,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 12121,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/united-nations/united-nations-elevation-thumbnail.webp",
           "bytes": 5036,
           "sha256": "17b7f67678d52760e977846bbc1d15b8cffb50fdf4a4b192849482dd74e994be",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/united-nations/united-nations-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/united-nations/united-nations-elevation-surface@2x.webp",
           "bytes": 295412,
           "sha256": "7191457b3d8bed8757562495f7add54d5b722a1470f601b748ca3d749897bb0f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/united-nations/united-nations-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/united-nations/united-nations-shape-surface@2x.webp",
           "bytes": 198478,
           "sha256": "ac65dd16aa4f2a329f51b9668afe71a4050aff066aae9c02b313ffa9111bb470",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "miranda",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e564cf30a395a932b47d527b6cb2cf74b690b4499f1302c11e71096fb10bcd60"
+    "sha256": "12f669273db621b127057149a94da86e8ff6646346c50e565aed6cff5de03f3b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -647,15 +647,19 @@
       "falseColor": false,
       "coverage": "Voyager 2 mosaic with source photometric correction. Native detail varies; local cast shadows and image seams remain. Gray grid marks missing observations.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://repository.hou.usra.edu/bitstreams/bc39b4c9-3f85-403b-a2d6-1f0d7206eaf6/download"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://repository.hou.usra.edu/bitstreams/bc39b4c9-3f85-403b-a2d6-1f0d7206eaf6/download",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "70e1c06a87dbedf5c59d6f714626947b606c41a19cc659e66367e80b57b48a0c",
       "bytes": 33170078,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -704,15 +708,19 @@
       "falseColor": true,
       "coverage": "Stereogrammetry and photoclinometry, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 240 m grid spacing is not uniform effective resolution.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://repository.hou.usra.edu/bitstreams/9181435b-9c9c-4645-ba6d-673d4a959e72/download"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://repository.hou.usra.edu/bitstreams/9181435b-9c9c-4645-ba6d-673d4a959e72/download",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "45149e3a69211d3199be6986734a6827663cff73b559b7104e9f864efbbba570",
       "bytes": 31117604,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -741,7 +749,7 @@
       "sha256": "29af000760d36c23883e88f4a5de39acbc45a9ed0c69a3e8747794b327a50fd8",
       "bytes": 35464,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -758,7 +766,7 @@
       "sha256": "a42739d91f1bf6decd2846a771ae8d11175cef5cdf0016566da14466b180398d",
       "bytes": 14761,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -815,19 +823,19 @@
           "url": "/scenes/miranda/miranda-normal-thumbnail.webp",
           "bytes": 2732,
           "sha256": "5ad3ad0c4f2633a4ea648e34a702be25e4782d3b97de558d2593e2d60d2b7c5d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/miranda/miranda-normal-surface@2x.webp",
           "bytes": 2683924,
           "sha256": "7d497d404ae0b876d14547f382681cfd6bdaf0898cb0168ef6a88ebfef0fc711",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/miranda/miranda-normal-poles@2x.webp",
           "bytes": 101248,
           "sha256": "aa0122ac2e363919a43ad59922c9fa7a46e072c79f58b2e5e71380e5111d5f2e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -860,25 +868,25 @@
           "url": "/scenes/miranda/miranda-elevation-thumbnail.webp",
           "bytes": 4690,
           "sha256": "8142242bde81c47cb0e0f841fc05b55d3fda3d1bbafa5251748deca610316dc9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/miranda/miranda-elevation-legend.webp",
           "bytes": 180,
           "sha256": "a61050d5ca54e9972808c8df55940f212c48dfa1bce97d6adb9ea43969a40362",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/miranda/miranda-elevation-surface@2x.webp",
           "bytes": 3374940,
           "sha256": "c275fb7465b05d6e71767521d9d75b40e76eca4bc45cd724a02916e56d926ba4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/miranda/miranda-elevation-poles@2x.webp",
           "bytes": 268828,
           "sha256": "ceb1348181eeb52e2e2c3147a90212064ad429cce957d2498619662d6ffacf2b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -911,19 +919,19 @@
           "url": "/scenes/miranda/miranda-geology-thumbnail.webp",
           "bytes": 644,
           "sha256": "34573f97bdd52456deafda8918e8dfafc8f51a526a565dad88df97528ebd3217",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/miranda/miranda-geology-surface@2x.webp",
           "bytes": 84622,
           "sha256": "8e7e97616ad5546a0b51238b78bde7e249242448be052e6df64c501586cd92dd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/miranda/miranda-geology-poles@2x.webp",
           "bytes": 29738,
           "sha256": "214b12df33cf63e23940d096040be2e987c3bd3c87b73d74b892495463131227",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

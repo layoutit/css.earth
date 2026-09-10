@@ -90,6 +90,13 @@ exposes `MISSIONS` and `SPACECRAFT`. A stale catalogue fails the build. Astro
 renders the current body's cards and relevant vehicle details; the browser does
 not receive the complete graph or walk source provenance.
 
+The shared inert sidebar previews omit mission details. Selecting a body still
+shows its prepared preview immediately; the existing `/navigation/<id>/` content
+request supplies its mission panel before the destination controls become active.
+The content transport fills that deferred panel while retaining the preview's
+overview and controls. It does not create a separate catalogue fetch or preload
+every body's mission markup.
+
 ## Migration inventory
 
 The starting catalogue contained 24 mixed mission/vehicle/group entries. The
@@ -120,6 +127,13 @@ is the sole compatibility boundary. Normal consumers validate
 Preparation validates the full prospective output set before staging files and
 replacing them. A validation failure leaves the previous prepared files intact;
 closure checking rejects interrupted or stale mixed output.
+
+The schema migration recovers records from the existing source, recipe and output
+pins. It does not claim a new scientific preparation run or fresh source-byte
+verification. Records whose metadata changed therefore use `recovered` and
+manifest-based verification; their source and rendered-asset hashes remain the
+same. A subsequent verified preparation can establish new byte-verification
+evidence through the existing provenance workflow.
 
 ## Dataset navigation
 
@@ -164,6 +178,14 @@ platform and shell test suites, and the production build. Focused tests include
 `src/platform/object-selection-runtime.test.mjs` and
 `site/test/navigation-router.test.mjs`. They cover malformed records, source
 conservation, reverse links, deterministic output, cancellation and history.
+
+Run `pnpm test:browser:datasets <production-preview-url>` against an assembled
+build. The [browser regression](../../site/test/dataset-navigation-browser.mts)
+uses the public shell and records its cases, browser version, requests and
+screenshots under `output/playwright/dataset-navigation/`. It checks direct,
+same-body and cross-body dataset navigation, manual selection and history,
+invalid links, keyboard details, individual contribution labels, namespace
+isolation and the phone layout.
 
 Browser qualification must use the real shared shell: direct dataset loads,
 same-body and cross-body links, manual selection, back/forward, failed links,

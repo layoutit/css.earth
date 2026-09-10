@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "oberon",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0b52ede8dc045dd071e4b502a6e5e548bae522db4e3e45d2bfe122fc557865a2"
+    "sha256": "d6e615ec59d33ca470fd4c0ba3adc9f9ddc729e5fdb1c0dc0d862689dbc78fee"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -303,15 +303,19 @@
       "falseColor": false,
       "coverage": "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://repository.hou.usra.edu/bitstreams/33526bf8-69e4-4246-b995-0b238a8b31d0/download"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://repository.hou.usra.edu/bitstreams/33526bf8-69e4-4246-b995-0b238a8b31d0/download",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "31699c5761b5b57e6e7e8eb7ff3da85293c5ffb2ea8aa6b60f3a795d8dbcc7e1",
       "bytes": 687286,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -335,7 +339,7 @@
       "sha256": "cfb19d2257c3227c07b80a2ba24c7c42490aba86bec4ca546dad72641bfe0d97",
       "bytes": 7830,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -392,19 +396,19 @@
           "url": "/scenes/oberon/oberon-normal-thumbnail.webp",
           "bytes": 2024,
           "sha256": "932626e748e2d4a13041e28b569d68b3e6b22b784bfcf4f6eaa5145a3705340c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/oberon/oberon-normal-surface@2x.webp",
           "bytes": 692024,
           "sha256": "889a24ef1df21da317d41eefb8395aa3b1c41819d9a00b2b2dfe88a710d3f35a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/oberon/oberon-normal-poles@2x.webp",
           "bytes": 39620,
           "sha256": "d7b5a3da4779ed70c3aca89ddfd939a38dc7bb12bb051d36d56c809a4111b420",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

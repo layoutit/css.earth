@@ -68,9 +68,21 @@ export function createNavigationContent({ documentTarget, windowTarget, fetchPag
             styles = next.map(({ element }) => element);
             committed = true; signal.removeEventListener('abort', dispose);
             for (const selector of ['.planet-information-panel', '.planet-settings-panel']) {
-              if (preserveSidebar && selector === '.planet-information-panel') continue;
               const target = documentTarget.querySelector<HTMLElement>(selector), incoming = source.querySelector<HTMLElement>(selector);
               if (!target || !incoming) throw new Error(`Object shell content disappeared: ${selector}.`);
+              if (preserveSidebar && selector === '.planet-information-panel') {
+                // Preview cards retain their overview and controls. Large detail
+                // sections arrive with the existing destination fragment instead
+                // of being repeated in every inert card on every route.
+                for (const deferred of target.querySelectorAll<HTMLElement>('[data-deferred-detail]')) {
+                  const detail = [...incoming.querySelectorAll<HTMLElement>('[data-prepared-detail]')]
+                    .find(node => node.dataset.preparedDetail === deferred.dataset.preparedDetail);
+                  if (!detail || detail.hasAttribute('data-deferred-detail')) throw new Error('Prepared destination detail is missing.');
+                  deferred.replaceChildren(...[...detail.childNodes].map(node => documentTarget.importNode(node, true)));
+                  deferred.removeAttribute('data-deferred-detail');
+                }
+                continue;
+              }
               target.replaceChildren(...[...incoming.childNodes].map(node => documentTarget.importNode(node, true)));
             }
             for (const selector of [...required, '.planet-sidebar-view-all', '.planet-sheet-handle',

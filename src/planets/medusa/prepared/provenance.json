@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "medusa",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "ac8826e64a7f1eb168ab78c9ed24005a668817f2f32137eecf417ce94a9ee6c0",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "4b0053d7de63b1a83b684f98cd14b95ce4c0c63e182ffebc2a9b7fd6fb616527",
       "bytes": 10614,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/medusa/medusa-elevation-thumbnail.webp",
           "bytes": 4326,
           "sha256": "d1a4e753ed02ff3de47f2fc879e7c225d23021309d662ca0b6ece563f33ad7df",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/medusa/medusa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/medusa/medusa-elevation-surface@2x.webp",
           "bytes": 268304,
           "sha256": "179fff3d9221f86e87148a253021a9334195b85e4c347d381adc5563a7e3e673",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/medusa/medusa-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/medusa/medusa-shape-surface@2x.webp",
           "bytes": 164036,
           "sha256": "852362e8593423a53bcfc8a5be61ca79cb7ad1c024c1963cb2fb82e46903488d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

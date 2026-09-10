@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "aemilia",
   "basis": "recovered",
   "manifest": {
@@ -352,7 +352,7 @@
       "sha256": "4d412ad36155b974bdc0d1d676d426449c60f883b18f64a7ee609bdc753d08c9",
       "bytes": 239882,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -377,7 +377,7 @@
       "sha256": "4f658c937daf3edb14ba6fe786f0ed2ed7a244160db5f2fa724d986ecde8057e",
       "bytes": 9510,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -410,19 +410,19 @@
           "url": "/scenes/aemilia/aemilia-elevation-thumbnail.webp",
           "bytes": 5034,
           "sha256": "6e8c59e77fef271728ba6cc2fefd0830c1084c8886b2742006c1ea8989a2015f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/aemilia/aemilia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/aemilia/aemilia-elevation-surface@2x.webp",
           "bytes": 328966,
           "sha256": "19041771fe239b7f3b8c4d6cff1a2b8e1194d82b37156604edb86e12639161e2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -454,13 +454,13 @@
           "url": "/scenes/aemilia/aemilia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/aemilia/aemilia-shape-surface@2x.webp",
           "bytes": 238734,
           "sha256": "55c3b3070059105b00034fa6dd2db87ad871993031c1cd7d18a68e7ea822ada7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

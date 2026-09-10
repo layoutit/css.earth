@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "bettina",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "a57d764a9b9b83bb318bd9e36a6048f50f05326584a343092351d81c25a85489",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "f9979d6feb7efd4376bddb05127eceabcab8890217b0df48811d71deb27fcc7d",
       "bytes": 9801,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/bettina/bettina-elevation-thumbnail.webp",
           "bytes": 5218,
           "sha256": "bc90731b9af660d1b92a6a9a3aafcee8e969e26da1f7881af8dcd66a6ea23df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/bettina/bettina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/bettina/bettina-elevation-surface@2x.webp",
           "bytes": 246638,
           "sha256": "eb1c736b31a9f377f825ae5d6c3c00a448876fd4cb1e8253a502b3cf19761fb9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/bettina/bettina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/bettina/bettina-shape-surface@2x.webp",
           "bytes": 210746,
           "sha256": "98d21a11307ced7097ba5e97b21b95ca9002992c6a98cf0d83b683f46c7f40af",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

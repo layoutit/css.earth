@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "umbriel",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8d740a3f36a102e674f09660af23caf8d6e2b7f26eda5c900467db23c88e6dd5"
+    "sha256": "8204f5cc898e09a0ff6b9df211d782bb075a4a871c71025aa11f3d9f945e1261"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -303,15 +303,19 @@
       "falseColor": false,
       "coverage": "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://repository.hou.usra.edu/bitstreams/c98739ae-8739-4065-85a3-8096a5500104/download"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://repository.hou.usra.edu/bitstreams/c98739ae-8739-4065-85a3-8096a5500104/download",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "d20a2962f9343736a2cb82f7b18b746fdc606bbe301bbde9c99fe8cef8da84ad",
       "bytes": 629366,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -335,7 +339,7 @@
       "sha256": "f754139ceafa0bd90a66f1188645659ee2af40e36b75baed2b1f980de00b2485",
       "bytes": 7594,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -392,19 +396,19 @@
           "url": "/scenes/umbriel/umbriel-normal-thumbnail.webp",
           "bytes": 1652,
           "sha256": "381dc7262914955e220ed1719904bcb9ac4001c761cbb995e99e99953a33f2af",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/umbriel/umbriel-normal-surface@2x.webp",
           "bytes": 580432,
           "sha256": "12d26f5d86c3551f2b5c17fdb7fd239832f5cc243324ab37614984becc54b751",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/umbriel/umbriel-normal-poles@2x.webp",
           "bytes": 32990,
           "sha256": "7a61db2f315c0ee02a27b97f68267e6d8157537dd725653f78fb7b53d9aa0d6f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

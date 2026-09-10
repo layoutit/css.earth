@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "irene",
   "basis": "recovered",
   "manifest": {
@@ -327,7 +327,7 @@
       "sha256": "edc70e0c7e153dc6f5197a709bcc5a4aa396ce1a9a9f9a26da75b657a236ec21",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "f4dd752e7d18c49869ee85ea9b9a8c997d41bc47b2f474e6097f3e75ce914d79",
       "bytes": 6812,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/irene/irene-elevation-thumbnail.webp",
           "bytes": 5744,
           "sha256": "5ff363a38230a621331a76463eca8bfe3ddb33aac80baa6260a65a1a6b543326",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/irene/irene-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/irene/irene-elevation-surface@2x.webp",
           "bytes": 310018,
           "sha256": "f52ed7365e38f5e2b0327fed9ddd5e341b9f83497e8cf68e2e93b4f01112acfd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/irene/irene-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/irene/irene-shape-surface@2x.webp",
           "bytes": 212648,
           "sha256": "a8c81d73b5c490127322e4e6d539cbc1e2a3fc7b13bdd66b19bb60c72745411d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

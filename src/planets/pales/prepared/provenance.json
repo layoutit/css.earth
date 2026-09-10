@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "pales",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "eb435f1eed2b7bdab2a018e10e761e55375947842b4627375cab9e9380a55e78",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "b76bf6eebe6724b6425eb9cc6f2bce9429d8c418e78fe6ca205d7ec498be224f",
       "bytes": 9312,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/pales/pales-elevation-thumbnail.webp",
           "bytes": 5278,
           "sha256": "f7fee2eabf7210e4e694ce7c82195279e6e0727708fc277b6120c85d0e9804ec",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pales/pales-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pales/pales-elevation-surface@2x.webp",
           "bytes": 267258,
           "sha256": "667dfe2a06ca9f5ea4bd10c88ef1ba67e4e310234ab4aa3d7806ea087a0ccd1a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/pales/pales-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pales/pales-shape-surface@2x.webp",
           "bytes": 196820,
           "sha256": "5dc36667425b7d9eeb8585171806d66cec58db3c5c181e7dd5ac3ff4a42622ba",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "mimas",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5615248a8ad994402a1483d5543a1fb06ead92751d84e59897101f449c666e16"
+    "sha256": "defeeeb17fe3c729934d255b4da070c8905576c24f6886a7f86068e975f2e1cc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -412,15 +412,19 @@
       "coverage": "Published full rectangular mosaic; no separate validity mask or documented missing code. Preserve every supplied pixel, including black shadows. Native resolution and illumination vary.",
       "catalog": "https://science.nasa.gov/resource/mimas-global-map-june-2017/",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/p/i/a/1/PIA17214_unlabeled.png"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/p/i/a/1/PIA17214_unlabeled.png",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "f8ffa667b2c35ec890973ea3300a33d3ee506f596b53d3818cdfee56943e038b",
       "bytes": 6959979,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -451,15 +455,19 @@
       "coverage": "Complete released Q128 OBJ model: 98,306 vertices and 196,608 triangular faces, approximately 2.2 km source spacing. Regional accuracy varies. Runtime geometry is sampled from this model, without height exaggeration or terrain filling.",
       "units": "Cartesian coordinates in kilometers; preparation converts to meters.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_128_o.obj"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_128_o.obj",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "e8191c356f899817536ef1d71dbddedc21077bd6bc44f1883264df2929a540ca",
       "bytes": 17694840,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -508,15 +516,19 @@
       "coverage": "Published full rectangular mosaic; no separate validity mask or documented missing code. Preserve every supplied pixel, including black shadows. Native resolution and illumination vary.",
       "catalog": "https://www.jpl.nasa.gov/images/pia18437-color-maps-of-mimas-2014/",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18437.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18437.jpg",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "303d5653875d507e8859a26d0afdedd0173c7d4e691f27c3266ca63d1aa4f97f",
       "bytes": 1848860,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -560,15 +572,19 @@
       "coverage": "All 2,468,642 raster cells are finite and valid. The geotransform covers less than the global bounding box advertised in the label; preserve the eastern and southern edge gaps.",
       "units": "Radius from center in meters; height relative to 198.2 km sphere is derived during preparation.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_radius_g.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_radius_g.tif",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "cb2368b033cde32ae6cda6831d248299929518cbcf747bc832e671cc5751fc2c",
       "bytes": 9881891,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -595,7 +611,7 @@
       "sha256": "70dc83fe97e2c4f964556e8478803dee03e7d5c749a03e2393a1f92e2179db70",
       "bytes": 10641,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -633,13 +649,13 @@
           "url": "/scenes/mimas/mimas-normal-thumbnail.webp",
           "bytes": 3512,
           "sha256": "5a2389f1edc4b94f766810fee2b2bfa95a546ad0e8f05d91b98adf86d603b981",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mimas/mimas-normal-surface@2x.webp",
           "bytes": 5022396,
           "sha256": "d75ebf0ccac010e33b6af02c79fd708a78978332ec39bfd003c70cbb35f55108",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -676,13 +692,13 @@
           "url": "/scenes/mimas/mimas-enhanced-thumbnail.webp",
           "bytes": 6952,
           "sha256": "8dd35129a7c0920bf379219fa69c54e4f5c46ecea83609576dc46b7866fc7391",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mimas/mimas-enhanced-surface@2x.webp",
           "bytes": 5763164,
           "sha256": "7df5425573da46ed36fcd0ff643f2dda2d20ecd1a8c6ee2bbd4cb726e50afdd3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -716,19 +732,19 @@
           "url": "/scenes/mimas/mimas-elevation-thumbnail.webp",
           "bytes": 7984,
           "sha256": "1f562fc11bd7a38e18555734c15bb7d7abda51c8dae1491c2a6894ff418084a3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mimas/mimas-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mimas/mimas-elevation-surface@2x.webp",
           "bytes": 2419150,
           "sha256": "cd244dd80eb2a96e0d2c2714d7eff15a492306598eb5aa21ff88b5c9bc7763f5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

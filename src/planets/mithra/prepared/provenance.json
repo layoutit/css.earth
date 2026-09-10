@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "mithra",
   "basis": "recovered",
   "manifest": {
@@ -329,7 +329,7 @@
       "sha256": "b38955afe05b2e941d5d8306fc5b644e09f3b125fbb493c8d25326f5d5b81b7e",
       "bytes": 186529,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -354,7 +354,7 @@
       "sha256": "94caf2c76cb115715ae367901b19de758f5b326c70ab28d6cc5f29b832f445fb",
       "bytes": 8245,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -387,19 +387,19 @@
           "url": "/scenes/mithra/mithra-elevation-thumbnail.webp",
           "bytes": 6276,
           "sha256": "f9169169b11664bc02a8787c4bd4e1234c137aa220565aa115162e69aebd6264",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mithra/mithra-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mithra/mithra-elevation-surface@2x.webp",
           "bytes": 425398,
           "sha256": "ae9c144a0228777ae9aa9a2e425d30dab8098042fb0ad4a2b4635a88fb03c57c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -431,13 +431,13 @@
           "url": "/scenes/mithra/mithra-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mithra/mithra-shape-surface@2x.webp",
           "bytes": 228108,
           "sha256": "ca8fc8319e60b8320c83633fbb8cb3e40f5eb96dd592a277ed9b08cc9624a1aa",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

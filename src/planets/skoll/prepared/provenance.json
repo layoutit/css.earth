@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "skoll",
   "basis": "recovered",
   "manifest": {
@@ -270,7 +270,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -296,7 +296,7 @@
       "sha256": "7c156195b24799a342d02e27bd58285f0602fc9c6d702343d5fc30e9ddd6ef04",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -313,7 +313,7 @@
       "sha256": "fd2c7f66d65c77a0541a969369a0a131b1efc83c493ded812ceeecc6f1ceaec7",
       "bytes": 3675,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -351,13 +351,13 @@
           "url": "/scenes/skoll/skoll-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/skoll/skoll-model-surface@2x.webp",
           "bytes": 56604,
           "sha256": "15bb95e02fd461f6ea75bea2984f1c17ca553ccb3b85171e9d38e44c30ee00b7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

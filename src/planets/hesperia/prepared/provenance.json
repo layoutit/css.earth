@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "hesperia",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "cbe8efe6448bf2e9ba29a52ca5f60b47f50d301f8f77c9610cf3d8ea63cf01c9",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "9689466fde65c0befffe987adeec1f5d647e4c29510972b4da6c0659e5122765",
       "bytes": 10793,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/hesperia/hesperia-elevation-thumbnail.webp",
           "bytes": 5180,
           "sha256": "00b5eb466e24d6be28a5063b3b320662776349042419ee86553e51b77c8d51af",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hesperia/hesperia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hesperia/hesperia-elevation-surface@2x.webp",
           "bytes": 266458,
           "sha256": "dc34ee7339f19b12b8aaa2a5bae17c62f71f52d82c4c5d9675a23300d81a4e68",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/hesperia/hesperia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hesperia/hesperia-shape-surface@2x.webp",
           "bytes": 218050,
           "sha256": "14cb558f27b1bff32cd80832d787b92614156ee599325fc58a2b1756179586d0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

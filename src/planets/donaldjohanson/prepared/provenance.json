@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "donaldjohanson",
   "basis": "recovered",
   "manifest": {
@@ -316,7 +316,7 @@
       "sha256": "783fe0cc28d0aff318fb356fe8eac81671ced86b68af5bd4829827168991aaf7",
       "bytes": 11193210,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -332,7 +332,7 @@
       "sha256": "74d897d04b791320f1acd63ab93726936bdea402d7f188201d3942af6f472557",
       "bytes": 10526400,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -356,7 +356,7 @@
       "sha256": "7acf747416aebcf252585d62d36b43aa98b299d308de5c7e1bb8fdf1b84e60ac",
       "bytes": 9023,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -373,7 +373,7 @@
       "sha256": "6b1e91afe3a792eda78ec69e4399a38b8a8cd57ff154d98fe0dc80ec9632c8e2",
       "bytes": 13437,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -406,13 +406,13 @@
           "url": "/scenes/donaldjohanson/donaldjohanson-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-shape-surface@2x.webp",
           "bytes": 205278,
           "sha256": "fdab40973f952fad5e32ed40a551d22a998f19da6ad9cc84c86638b353694a99",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -446,13 +446,13 @@
           "url": "/scenes/donaldjohanson/donaldjohanson-llorri-thumbnail.webp",
           "bytes": 1404,
           "sha256": "04819d89aada26cfc41338c4eda34be652c50440eb5e78d3ca8d7ae68d3f185f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-llorri-surface@2x.webp",
           "bytes": 588884,
           "sha256": "1e6511e38006f9be67994da3cab08c4313b115757349ebe91904a96eaf8ca4c9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

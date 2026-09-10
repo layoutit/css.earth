@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "mundilfari",
   "basis": "recovered",
   "manifest": {
@@ -270,7 +270,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -296,7 +296,7 @@
       "sha256": "a0336f06626b022432ccfa9686400891c605332ebe826f6f134faae71bd17594",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -313,7 +313,7 @@
       "sha256": "089f69d4c6f915722d2962e77e43df881b693b33263f1b941e81cc950295b5a3",
       "bytes": 3676,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -351,13 +351,13 @@
           "url": "/scenes/mundilfari/mundilfari-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mundilfari/mundilfari-model-surface@2x.webp",
           "bytes": 55544,
           "sha256": "7ed6c16d23077146020d1d9fa5147122faa590d96ab6cc1f67f2bb44bb107e92",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

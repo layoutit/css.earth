@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "pallas",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "5bb49df2e0e0879a6377fa20c94a8ac47eea27e626fb3ec8f618c22f90f8184e",
       "bytes": 2703739,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "1bd83333676afe2915505fd366c88dcb7be3d93c33c9662f72107976f2757ed7",
       "bytes": 7949,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/pallas/pallas-elevation-thumbnail.webp",
           "bytes": 5258,
           "sha256": "47250e3b32ad389d3118910ef46cd914bb3ae5773a2966cb542a93ab6937882c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pallas/pallas-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pallas/pallas-elevation-surface@2x.webp",
           "bytes": 308912,
           "sha256": "862dec3052332666ef5d697f9f5c1f6b0391e711169475ba022033defaf7e2bd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/pallas/pallas-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pallas/pallas-shape-surface@2x.webp",
           "bytes": 214080,
           "sha256": "e305dce0f49b3f0fed1a8314c557e26c3664c5b6a5979eda5ba8c4ac0c93f7c9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

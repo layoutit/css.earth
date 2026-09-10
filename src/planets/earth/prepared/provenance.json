@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "earth",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "85ea5c4642208d483ba309f7551c555ffce0c4f9038749ee742f0e6310b03450"
+    "sha256": "140e330cccf87c67273db9c61ccaf6da7bbfae62d2a9a8e249a50010b0837223"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1199,10 +1199,14 @@
       "acquisition": "NASA Blue Marble Next Generation July 2004 cloud-free monthly composite; 21600 x 10800 equirectangular RGB JPEG downloaded 2026-09-09",
       "redistribution": "NASA image with credit and no endorsement claim",
       "capture": {
-        "spacecraftIds": [
-          "terra"
-        ],
-        "evidence": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "terra",
+            "evidence": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg",
+            "missionId": "terra"
+          }
+        ]
       },
       "sha256": "dea8b4dc8a4f93f5f8bce0c8c85a508a178e7901e9ed8e6bf86e6ce7ef6d61e2",
       "bytes": 21125326,

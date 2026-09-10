@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "arethusa",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "d0e611cbfa92edf2dc21d0d4efae8ce2b4efb7460e63d038e63f61e115b11429",
       "bytes": 82546,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "db9800fcf05477362ad5e1413a7de2b12cfa9a674dd0d797be24db33a49d3c41",
       "bytes": 10252,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/arethusa/arethusa-elevation-thumbnail.webp",
           "bytes": 5700,
           "sha256": "9c4fbba8f2995da7f0e7884a1a1a0f22a34091963c7bb4faa4e26679ca442537",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arethusa/arethusa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arethusa/arethusa-elevation-surface@2x.webp",
           "bytes": 287382,
           "sha256": "13b5a48f83035f72e6c3dc445aaa50e57f336d57da9f054820f29718f955cf02",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/arethusa/arethusa-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arethusa/arethusa-shape-surface@2x.webp",
           "bytes": 233752,
           "sha256": "83e71731bc09e3affcb38a6071c91b842238ae83b8ca99ad86e8019c60954881",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

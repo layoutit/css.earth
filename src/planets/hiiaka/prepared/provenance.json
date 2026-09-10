@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "hiiaka",
   "basis": "recovered",
   "manifest": {
@@ -264,7 +264,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -289,7 +289,7 @@
       "sha256": "3c597729d6757a71b82aa7500dd9779f6ac80aed57f715cb33b5e4c0eb92423a",
       "bytes": 65105,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -306,7 +306,7 @@
       "sha256": "69dc6c66b862d22d405b35595b1f37017b56e387c489e4cab53d1ee9454f5761",
       "bytes": 3771,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -344,13 +344,13 @@
           "url": "/scenes/hiiaka/hiiaka-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hiiaka/hiiaka-model-surface@2x.webp",
           "bytes": 50996,
           "sha256": "56f2b3de723f746906e426735eafa3b49b9a5ca809ce01139d0fbd4a4f41c24a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

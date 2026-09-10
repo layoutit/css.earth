@@ -217,7 +217,7 @@ export function createSceneRouter({
       const datasetController = request?.controller ?? new AbortController();
       session.lifetime.onDispose(() => datasetController.abort());
       try {
-        const selected = await selectDataset(session, session.url!, datasetController.signal);
+        const selected = session.url ? await selectDataset(session, session.url, datasetController.signal, { initial: true }) : true;
         if (active !== session || datasetController.signal.aborted) return false;
         if (!selected) throw new Error('Dataset selection was superseded.');
       } catch (error) {
@@ -291,11 +291,11 @@ export function createSceneRouter({
     session.shell?.setDatasetNotice?.(null);
   }
 
-  function selectDataset(session: Session, href: string, signal: AbortSignal): boolean | Promise<boolean> {
+  function selectDataset(session: Session, href: string, signal: AbortSignal, { initial = false } = {}): boolean | Promise<boolean> {
     const { id, requested } = readDatasetUrl(new URL(href));
     const datasets = session.mount?.datasets;
     if (requested && (!datasets || !datasets.ids.includes(id!))) throw new RangeError(`Dataset “${id}” is unavailable on this object.`);
-    if (!datasets) return true;
+    if (!datasets || initial && !requested) return true;
     const selected = id ?? datasets.defaultId;
     const finish = (committed: boolean) => {
       if (!committed || signal.aborted) return false;

@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "enceladus",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0a20f44c52fe80c2f93a1c3b9e2de30808012c58d571746af2b4bfb8c8bd1d32"
+    "sha256": "0ec5ab2bd5310aab2d6e5cb3c01241fc4d97fa59ec58faa3d7ffe550b9d440dd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -582,15 +582,19 @@
       "coverage": "Published Cassini mosaic/model. Exact PDS missing constant and floating-point special values are excluded; observed zero values remain valid.",
       "units": "Published display DN",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "1738c5cf8e856c7ae262d858261af0fbb32503a68a524884d36194afb23afcc5",
       "bytes": 518340175,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -619,7 +623,7 @@
       "sha256": "0f7971cbf4bb493c17b9bbb640b3affa5f390f7c55c8db06d8e39faa3ad59b5c",
       "bytes": 10207923,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "dsk-mesh",
         "groups": [
@@ -675,15 +679,19 @@
       "coverage": "Published Cassini mosaic/model. Exact PDS missing constant and floating-point special values are excluded; observed zero values remain valid.",
       "units": "km above the Thomas et al. (2016) reference ellipsoid: 256.2 × 251.4 × 248.6 km.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_DEM_global_200m_schenk2024.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_DEM_global_200m_schenk2024.tif",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "7c08c46238cde6528c9143f0c667d42cd3bc6ac60c572595a7e6cad2d6775f91",
       "bytes": 129613723,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -731,7 +739,7 @@
       "sha256": "2e3d5caa47220371e2b8e4ad12192f4613b3f6f1de4f933881b1a277ae4a9d4d",
       "bytes": 101934,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -772,7 +780,7 @@
       "sha256": "1857dd4eadd3af1e7808941bfb0e4dfa57f61a04b6dc48d3157b292c9ef601ec",
       "bytes": 109752,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -789,7 +797,7 @@
       "sha256": "7427b79e3ae0f58d3c9b158cb5887655be993ef72299a48193a85bfe91632a6f",
       "bytes": 15752,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -837,13 +845,13 @@
           "url": "/scenes/enceladus/enceladus-normal-thumbnail.webp",
           "bytes": 1850,
           "sha256": "b1f5ecdd4895028a00197aab2cf9583d37846f0daf3aa171e3f9cfa839c092b5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-normal-surface@2x.webp",
           "bytes": 6337990,
           "sha256": "6c043a2fd0389034fb71739fce4d7a0726575b81b3111007e6bbea854a3ce1c2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -877,19 +885,19 @@
           "url": "/scenes/enceladus/enceladus-elevation-thumbnail.webp",
           "bytes": 8066,
           "sha256": "eef7b61cc108d1146a560fb5d5b7dded77dcda4e03e29df0342609a5fc431588",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-elevation-surface@2x.webp",
           "bytes": 10574576,
           "sha256": "90ec8ae36835ca0c5a83d0cf2a83f7182fddf281f4e9a387b73624f9617d1900",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -923,19 +931,19 @@
           "url": "/scenes/enceladus/enceladus-ice-absorption-thumbnail.webp",
           "bytes": 1520,
           "sha256": "12fff2fb2f5df848aedc72db8598c2192a5b75521ac4c6e9b286805d743b10cc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-ice-absorption-legend.webp",
           "bytes": 146,
           "sha256": "ed82e428e522e7e2d075c9f2d7989d8f3adb9c3ed7989f80445ad69750361b6e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-ice-absorption-surface@2x.webp",
           "bytes": 67618,
           "sha256": "530427bb129a342b15aaa01415a6d3106c64a389bcd125101d2a74d1c3bd3717",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -969,19 +977,19 @@
           "url": "/scenes/enceladus/enceladus-infrared-ratio-thumbnail.webp",
           "bytes": 2166,
           "sha256": "7ce993b429aa895f5d6f306b27ca52b08e5b53d4e8c7ceb99ba1eebf76301ae2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-infrared-ratio-legend.webp",
           "bytes": 196,
           "sha256": "cb891375c261f05e633ed9af6366e538fe4a3551f53ea2e5edcdd8c0c7897c7f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-infrared-ratio-surface@2x.webp",
           "bytes": 68880,
           "sha256": "db9135d4a85f658a52b89c269b1eb624d262b12248bbc3b526aa60c826f188d6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1013,13 +1021,13 @@
           "url": "/scenes/enceladus/enceladus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "7cbf01ce5434f5fcede86cd13c94e775de945744f9c116cb76c3a3ba97f3761d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-shape-surface@2x.webp",
           "bytes": 460676,
           "sha256": "8cad6dfddbf10543a581ab03a6737292410e7e9821afd1db57ee2fedf339150f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

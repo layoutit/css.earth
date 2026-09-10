@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "semele",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "1f263e11028e2a01358e54a68391c8cc9ccd70f4d4e7eae4fbcf09489d26c765",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "aaeca74e5b794990896d1bec200516a800cd1c56cba89eff180cc6a2b0d9ae8e",
       "bytes": 10109,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/semele/semele-elevation-thumbnail.webp",
           "bytes": 5498,
           "sha256": "e98219f97a25eb2abcfaa3aa7907eaed0c995123e950fe2cac0fe4117265fa18",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/semele/semele-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/semele/semele-elevation-surface@2x.webp",
           "bytes": 287280,
           "sha256": "51a2a4b2b37f084e63d2eba6979dd12fe4b14403dd260c7b2cba2abe6d449058",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/semele/semele-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/semele/semele-shape-surface@2x.webp",
           "bytes": 243886,
           "sha256": "64b90a8e8d34ea1ab4487e4dd5dbe900e4a4ce19ae378d9994db778353eba185",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

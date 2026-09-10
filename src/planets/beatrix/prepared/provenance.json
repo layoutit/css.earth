@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "beatrix",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "b6849947b8a92ca5438a2e91740256fc20bef247cdadb94b6ad8bdda723e4d4a",
       "bytes": 82546,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "7000992096e8a97f833d436dbceceea6d01e2668e7169d5981bdb1f44f827758",
       "bytes": 9999,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/beatrix/beatrix-elevation-thumbnail.webp",
           "bytes": 5642,
           "sha256": "515f153a881bc8618e670b1fe47af3b39ecc9d80d7ba2150105069d1596d7ce8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/beatrix/beatrix-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/beatrix/beatrix-elevation-surface@2x.webp",
           "bytes": 305838,
           "sha256": "3e87cd7d6f461d301d09138d7fbf88582771131db403e997cfc39768228c5182",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/beatrix/beatrix-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/beatrix/beatrix-shape-surface@2x.webp",
           "bytes": 221166,
           "sha256": "aca21d292c2156d7bde40a7f82d93e15c706a5f860129d9354a9f699c797c91f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

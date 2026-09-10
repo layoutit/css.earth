@@ -45,6 +45,7 @@
     "test:browser": "node site/test/dom-cleanliness-browser.mjs",
     "test:browser:conformance": "node site/test/planet-browser-conformance.mjs",
     "test:browser:view-url": "node site/test/view-url-browser.mjs",
+    "test:browser:datasets": "node site/test/dataset-navigation-browser.mts",
     "test:browser:universe": "node site/test/universe-environments-browser.mjs",
     "test:browser:universe-labels": "node site/test/universe-labels-browser.mjs",
     "test:browser:galaxy-handoff": "node site/test/galaxy-handoff-browser.mjs",

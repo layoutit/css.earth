@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "hersilia",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "8e2c5f76b6378e942e105825b60568612becb8902a67d2c7c4dfc34d92b31b2f",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "b512f6c4c4902773629a802bbf5b29a7321ecc77449601bd2dabdb809bd1283f",
       "bytes": 9823,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/hersilia/hersilia-elevation-thumbnail.webp",
           "bytes": 5608,
           "sha256": "c902259a675829b40098723e593f847013445d2e17e0ec38f1358130c033e092",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hersilia/hersilia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hersilia/hersilia-elevation-surface@2x.webp",
           "bytes": 265880,
           "sha256": "3f5e4821382fab8b91d74611c06c286cc0c0d102c678bb93b7eb867c96d53a04",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/hersilia/hersilia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hersilia/hersilia-shape-surface@2x.webp",
           "bytes": 256840,
           "sha256": "189fbb35c2691dbe13e667cd8caba86927fc96dc5fc5225987ffdf9b1bbd444b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

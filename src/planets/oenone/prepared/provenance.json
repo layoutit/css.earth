@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "oenone",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "27a2a816bb4696dec5bc7a31dd1bc50cf6018abaaca213311ba81a0fdb33a4b9",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "7e664aa44655b8c1bc3796dd5dc74d26ff4a0f80afff7c5e36c24f8c779d7283",
       "bytes": 9424,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/oenone/oenone-elevation-thumbnail.webp",
           "bytes": 5680,
           "sha256": "56daf6489c6864e101217178eebb1b2319bc03d67a8ebd15b40f29f599ed9ed8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/oenone/oenone-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/oenone/oenone-elevation-surface@2x.webp",
           "bytes": 291172,
           "sha256": "eaf7d00b33af94c5cc850ce707ad0d4f665b4ce17ca04001d62c1233b16f3912",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/oenone/oenone-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/oenone/oenone-shape-surface@2x.webp",
           "bytes": 225988,
           "sha256": "3f0465593a42f84ddd4efaaf506e94dfd0d96a72bb5a5dcbc12ef23c61d40b51",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

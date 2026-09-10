@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "gryphia",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "05dc8e3b5778e2b2ae9b724299774be438553eb90b49329958fae9e42660f16b",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 9210,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/gryphia/gryphia-elevation-thumbnail.webp",
           "bytes": 5312,
           "sha256": "cd166ac5400b7b54ac69f828bd1b4d9fff944588df4e45e5829ad6b1dff3bc25",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/gryphia/gryphia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/gryphia/gryphia-elevation-surface@2x.webp",
           "bytes": 289840,
           "sha256": "1af2dcaaaf30480e13d289f7d3ddd3b13282124f1b67fcbc2801d157f2194f9c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/gryphia/gryphia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/gryphia/gryphia-shape-surface@2x.webp",
           "bytes": 208148,
           "sha256": "3dff1c4c69afd1629a26466bb8024b24108a06b7de821c2ecfcf4bd4677710d9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

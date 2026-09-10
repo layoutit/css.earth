@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "kalypso",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "c93cad2380849e859383f912f5f1ef6042c6be167151571b7dc9a27f261165b6",
       "bytes": 82060,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "beed30d34ae2d88ed596e7a7067922a5ead7e643a4c31c85cfce0dbb3d81b34b",
       "bytes": 10244,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/kalypso/kalypso-elevation-thumbnail.webp",
           "bytes": 5176,
           "sha256": "4c823cdb5cd3810ec70df53de5354b28a25fb898812acd70095749ea41f761bf",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/kalypso/kalypso-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/kalypso/kalypso-elevation-surface@2x.webp",
           "bytes": 273968,
           "sha256": "94fb70083ed307f5b4537447dd1abb44aab056d4df8e470d45c3207a99d96937",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/kalypso/kalypso-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/kalypso/kalypso-shape-surface@2x.webp",
           "bytes": 221236,
           "sha256": "2ebe9104e3568959f4455d9e8af23335083a9e2b9acfb62f8e2d843073c2f344",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "auravictrix",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "477d88385d0212d76042c2ce706f5ea0b0adafc70b55e44bb0c73291e1a2256f",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 9801,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/auravictrix/auravictrix-elevation-thumbnail.webp",
           "bytes": 5430,
           "sha256": "4f24b608cd9fba496e35352b2732d6b011b405e13ec37bdac3e515f8d40d73b9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/auravictrix/auravictrix-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/auravictrix/auravictrix-elevation-surface@2x.webp",
           "bytes": 287974,
           "sha256": "838d9a268e09fda9cd5a2f370b5a5131836117fcac54481822faa7698f09ad73",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/auravictrix/auravictrix-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/auravictrix/auravictrix-shape-surface@2x.webp",
           "bytes": 209274,
           "sha256": "8862485177e6b317f967bba50bc15bfef18feed67baf638aff324a69d073934a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

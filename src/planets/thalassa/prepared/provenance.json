@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "thalassa",
   "basis": "recovered",
   "manifest": {
@@ -263,7 +263,7 @@
       "sha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73",
       "bytes": 135,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -288,7 +288,7 @@
       "sha256": "f22264ce2d158afd700f19ef0e7dcb56df5cdedac9629d428f069eca2e20101e",
       "bytes": 14147,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -305,7 +305,7 @@
       "sha256": "0770103ac03758f932bce7f231e9d0d76b9dc47d4c2a6a462e9477f9a4d515fa",
       "bytes": 3742,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -343,13 +343,13 @@
           "url": "/scenes/thalassa/thalassa-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/thalassa/thalassa-model-surface@2x.webp",
           "bytes": 45126,
           "sha256": "ecb4f801a198c7efc0d6444f4b84643919a443c312e0f763502ecbc066d28986",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

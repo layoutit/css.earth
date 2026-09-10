@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "scylla",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "6ee6620929ec650a72d7f2133a74f796fd91c07e8b3e24463808f878170adab2",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "494a0727c96fe969c1ad75dd6f7964b679c16057a194961042368535c454d526",
       "bytes": 9556,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/scylla/scylla-elevation-thumbnail.webp",
           "bytes": 5452,
           "sha256": "804d4d7b94e918d6fb02a2d3cbe1fa923089bd20c1e62827fd3f0e6b21f7dbe9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/scylla/scylla-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/scylla/scylla-elevation-surface@2x.webp",
           "bytes": 294390,
           "sha256": "567353615397f0fc37edf271da850d57dd62b8701db106583315a602166bd428",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/scylla/scylla-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/scylla/scylla-shape-surface@2x.webp",
           "bytes": 232326,
           "sha256": "0f9acf77da7eeab89a7a50363281492591886b2f5d4dd32a63ab15e96e301b3d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

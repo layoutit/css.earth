@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "hidalgo",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "8dcf880fd622ce2d704c95bae87e662a63ae63c5a92d4649ff232341222e4f00",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 9003,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/hidalgo/hidalgo-elevation-thumbnail.webp",
           "bytes": 4836,
           "sha256": "0807dbc0e8b8b76c79521cd974a899980767f6b993b811af3acabd9ba77801c7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hidalgo/hidalgo-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hidalgo/hidalgo-elevation-surface@2x.webp",
           "bytes": 294198,
           "sha256": "e83b7ca6d0b0c5094b720b140e4b4049f4ab2583fa0d7a027df2f7299a857c1a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/hidalgo/hidalgo-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hidalgo/hidalgo-shape-surface@2x.webp",
           "bytes": 173796,
           "sha256": "7e2f47ac04711c93f7cf2fce0b96e1a9425e546d6f2750848d866e36e343dbc4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

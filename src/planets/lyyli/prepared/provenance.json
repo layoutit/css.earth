@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "lyyli",
   "basis": "recovered",
   "manifest": {
@@ -355,7 +355,7 @@
       "sha256": "5e9053bcc76b8f3f71cffec390e72d1b48e0043d8f9208949cd84b623e5dbf48",
       "bytes": 46257,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -380,7 +380,7 @@
       "sha256": "4fe90667dfc141afbe1ad01b19926c97ef28bd7bc7e0813ae6a59e0661408faa",
       "bytes": 7598,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -413,19 +413,19 @@
           "url": "/scenes/lyyli/lyyli-elevation-thumbnail.webp",
           "bytes": 5400,
           "sha256": "6f2fcfdd675910943c2ba37fe41d7dae99936ec6c68cb72896e1d6ae6edf449d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lyyli/lyyli-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lyyli/lyyli-elevation-surface@2x.webp",
           "bytes": 287796,
           "sha256": "358acc767c98405b4ca9cc7552c4d5aae50bc28956845ac84934e4f3d7d5bbdc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -457,13 +457,13 @@
           "url": "/scenes/lyyli/lyyli-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lyyli/lyyli-shape-surface@2x.webp",
           "bytes": 232608,
           "sha256": "9e035edf8c28e8f402dd5991400ddf1771561b0371803700a64809315d435179",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

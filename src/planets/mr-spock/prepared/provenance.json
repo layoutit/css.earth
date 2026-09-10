@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "mr-spock",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "ff1b2b9b522e5f7acc86b42876904882375f591146b706775e37525eac39b065",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 9854,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/mr-spock/mr-spock-elevation-thumbnail.webp",
           "bytes": 4944,
           "sha256": "dd8abe8369df7a069ed92fb4e821fa377fcdc44a384fe58070dade2db8939b4e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mr-spock/mr-spock-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mr-spock/mr-spock-elevation-surface@2x.webp",
           "bytes": 304118,
           "sha256": "9f0d439c778f9924e82ea3164e78077152dc5a4932fa1d51f30b9160c1ab71d5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/mr-spock/mr-spock-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mr-spock/mr-spock-shape-surface@2x.webp",
           "bytes": 202258,
           "sha256": "ee9337446a2883435647e9cbf21edd4ca227fc0c05664f7b833d523d6805d191",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "hera",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "155404c32e4202324ad5e4aaa574252ac2688e6f9f2b1c3fbc56ddc6514afa36",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "7055f0c8d01b8192f99a41e80a36f739f51a12dfe39013cf5176ac7909dbd77c",
       "bytes": 8640,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/hera/hera-elevation-thumbnail.webp",
           "bytes": 5548,
           "sha256": "a7b639934a3ece997f44685cb496c4307ada2ee913babe7c8f0c81829a25a9b2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hera/hera-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hera/hera-elevation-surface@2x.webp",
           "bytes": 282858,
           "sha256": "2f7c303605d74d47a0d74aa35be7871f8523d70f92b2f22c971f7d5a8da7e997",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/hera/hera-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hera/hera-shape-surface@2x.webp",
           "bytes": 220920,
           "sha256": "b0c9266dc437abed3c944791d86b29d87d100045bbd529810fd38706544d1c03",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

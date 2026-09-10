@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "portia",
   "basis": "recovered",
   "manifest": {
@@ -263,7 +263,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -288,7 +288,7 @@
       "sha256": "4d7d73d3c6b92bd7105e11a2737d3de21a4e12fa32e807d03ed4c719d0510bef",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -305,7 +305,7 @@
       "sha256": "0c483972a6c46c05cbd8bddf81b4a15a07d36a03dee84a0f93965dcb7b46e3ba",
       "bytes": 3549,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -343,13 +343,13 @@
           "url": "/scenes/portia/portia-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/portia/portia-model-surface@2x.webp",
           "bytes": 56192,
           "sha256": "84252a62810d7cdb0bf89e974455f881ea10319833cc8ebddc213a958a95ecf3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

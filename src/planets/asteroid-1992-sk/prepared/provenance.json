@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "asteroid-1992-sk",
   "basis": "recovered",
   "manifest": {
@@ -327,7 +327,7 @@
       "sha256": "c5edada6befa4cad50d4f73a2a11ff1e1dede7728bd3d39fb21c9de2974fe05c",
       "bytes": 29083,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "2a9da5aeb9ee98e7efb7eec9687fb492caa56e70805da28d3f95ee2c98bd5f4a",
       "bytes": 9480,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/asteroid-1992-sk/asteroid-1992-sk-elevation-thumbnail.webp",
           "bytes": 5794,
           "sha256": "ffc4b504c3a2344bd090d8cfadca944c319cd4903913462bf3c570bd6b00721f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-1992-sk/asteroid-1992-sk-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-1992-sk/asteroid-1992-sk-elevation-surface@2x.webp",
           "bytes": 293980,
           "sha256": "3460ae47533593d05562d2116a79a66ed99fee6d756cd643e42cb86122c521be",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/asteroid-1992-sk/asteroid-1992-sk-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-1992-sk/asteroid-1992-sk-shape-surface@2x.webp",
           "bytes": 208566,
           "sha256": "c8e24c6f70b28db0cbca36ba0e73c6790d6b58dc3d15d79263b5305130c7fdfe",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

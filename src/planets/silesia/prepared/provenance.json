@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "silesia",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "a32b67db173623ddbff30c471278e92fb0925f0d0a1b787b0f9a7ed23c24ce96",
       "bytes": 82384,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "168cd7cdad21a50b884951c4b450fa586b9fc81ef6311060e8daf0ea97281ff0",
       "bytes": 10321,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/silesia/silesia-elevation-thumbnail.webp",
           "bytes": 5248,
           "sha256": "e32cf5e7b6157137aa7559488d4c9fc27f777f29bfeefb99b361519347edf7fe",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/silesia/silesia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/silesia/silesia-elevation-surface@2x.webp",
           "bytes": 282984,
           "sha256": "9e927707e5d13f3cccebab68d68b83eb61ee6da97730a59c711f17c4a3f1e8ff",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/silesia/silesia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/silesia/silesia-shape-surface@2x.webp",
           "bytes": 211944,
           "sha256": "fe9ea59b504612fa4d3b4eb6810f029c60cb52694f4ccb35b8d0215551838330",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "menoetius",
   "basis": "recovered",
   "manifest": {
@@ -246,7 +246,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -271,7 +271,7 @@
       "sha256": "9f853500baa4d63714786dafd8b129565e4c7225f09cc8abc78f5eb6db18d767",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -288,7 +288,7 @@
       "sha256": "b4a4a0948362a674ead4d8c02262fb705f78badd3374e76d3bd989d49f25b7a1",
       "bytes": 3101,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -326,13 +326,13 @@
           "url": "/scenes/menoetius/menoetius-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/menoetius/menoetius-model-surface@2x.webp",
           "bytes": 55310,
           "sha256": "ac6d0f1ca55903faaf0419e176a4cbe9f2beef2802a765a33094ee3d97ef98d6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

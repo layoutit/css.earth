@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "comet-81p",
   "basis": "recovered",
   "manifest": {
@@ -379,7 +379,7 @@
       "sha256": "cbe16ca5372858e816d725a210beed6c5b7a7a614dfb028240d061448fbf766b",
       "bytes": 6258,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -398,7 +398,7 @@
       "sha256": "e3950d0afae8b0c1ede31f64197ec68c215d9814bb41c101158912edbaa61e80",
       "bytes": 1392840,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -424,7 +424,7 @@
       "sha256": "49729e94642129eccf402c03241a21717c31150725cc48826ecf31afa03d6fb0",
       "bytes": 13668480,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -450,7 +450,7 @@
       "sha256": "ff61f12cc61b6113de1ebca60526de757fbb1aeb41663267d8833d5684f93e00",
       "bytes": 18720,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -476,7 +476,7 @@
       "sha256": "ee8baf4db4bdddc9606823ead83f6585709b7f04be79b2c2be80fc8c28e39e6a",
       "bytes": 22375,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -495,7 +495,7 @@
       "sha256": "f6944a7e778a556afd929e365585bbd0919ccdd573e1422b4b2c0379b33c035f",
       "bytes": 13668480,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -521,7 +521,7 @@
       "sha256": "005c37d785b6622598e76ecb528feb07ac82d16f7fb7dbf5bfa35ad7f15c6180",
       "bytes": 18720,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -547,7 +547,7 @@
       "sha256": "0267d6fe1f8a4c779b0821783337227af8b694bbf060848a8f4c0ab805c02239",
       "bytes": 10236,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -566,7 +566,7 @@
       "sha256": "9973470135bcc89507adceaba79f4bd2d499893277f62eabebee353d96b2b575",
       "bytes": 13668480,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -592,7 +592,7 @@
       "sha256": "a99e07f4e073b00a448122f111b99660d55f6d172aa516befde9b40dfcfb59d0",
       "bytes": 18720,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -618,7 +618,7 @@
       "sha256": "33930e6c289d2e6325455bd36947806fb80c6bf482ce03cb77449bbcfd131771",
       "bytes": 16501,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -637,7 +637,7 @@
       "sha256": "bf498d851c2189b0baca42c3f79a3969c1cc95d2f28e07f08f3141a7eea79b34",
       "bytes": 13668480,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -663,7 +663,7 @@
       "sha256": "74248fbcbc0ae603ea29c950cc8f93ea377084e53da95542da0593870292b984",
       "bytes": 18720,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -689,7 +689,7 @@
       "sha256": "803cbfb265ad3020894b642bef466fb3a1acd27bfe400c0ffbcbd984fa45c7cd",
       "bytes": 8964,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -706,7 +706,7 @@
       "sha256": "54dd5e5150b7c8cd7792d9e38034486f1073561fe154dfe528793d1b32ed9ef0",
       "bytes": 4471,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -744,13 +744,13 @@
           "url": "/scenes/comet-81p/comet-81p-model-thumbnail.webp",
           "bytes": 1788,
           "sha256": "f5ac73cc2f83aaafa758cf0203e256866e8c568ebf1de74d153e364e7298c95e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-81p/comet-81p-model-surface@2x.webp",
           "bytes": 186642,
           "sha256": "f88884c2c902f84a9d01448ea9595a35a3b45e971ec75039618eb7241f3d5c73",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -794,13 +794,13 @@
           "url": "/scenes/comet-81p/comet-81p-navcam-thumbnail.webp",
           "bytes": 2120,
           "sha256": "64733abb289cee4aad02f6e27f17cbf15faafad8891bafc92843f6fdb4f35534",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-81p/comet-81p-navcam-surface@2x.webp",
           "bytes": 298840,
           "sha256": "a2165e55f26c2bbe2df7a6d9641191991b97014f5c95bcf7cdba4f0189d1bbe4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

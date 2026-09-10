@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "sylvia",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "4fe61233cee4cd479cfb38977c47c5e13236fa394b22bd03277a8ec267dcd7a6",
       "bytes": 347899,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "72a6fdc5589abaff52203872aa06e43ed5bfaddbd10695da4850c2511b499997",
       "bytes": 7531,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/sylvia/sylvia-elevation-thumbnail.webp",
           "bytes": 4888,
           "sha256": "a5a5a30c014603f5b6fd7a414792deac0cefa2a05c5800e44c1c69ee9c098741",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/sylvia/sylvia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/sylvia/sylvia-elevation-surface@2x.webp",
           "bytes": 291540,
           "sha256": "b618699e4c7cd8d2184193ff1180ed42701e70b7d9d9cd5d47d540945bbbe2e4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/sylvia/sylvia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/sylvia/sylvia-shape-surface@2x.webp",
           "bytes": 215930,
           "sha256": "8affa97d201d5c58455ab761e991b95798149a37481188b898a3024ac9f4b626",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

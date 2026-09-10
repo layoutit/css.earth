@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "lachesis",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "71ab4e0c28a09ae451115ee438139b1772bdfcc1373ed9981d3fb216f6122262",
       "bytes": 81250,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "93e5177ace69deb11efe4845ffed9698bae25f53c6183a5be157d3fee7565714",
       "bytes": 11095,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/lachesis/lachesis-elevation-thumbnail.webp",
           "bytes": 5392,
           "sha256": "6fbbc9d3ac36102ca86475181a9d9779f8ca0c743b533a57511e751ca068e0f0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lachesis/lachesis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lachesis/lachesis-elevation-surface@2x.webp",
           "bytes": 283658,
           "sha256": "34e77d33c2864c80b725095d7ac2ec336c7f9c535ae1824d66c333fe595c3fb2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/lachesis/lachesis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lachesis/lachesis-shape-surface@2x.webp",
           "bytes": 224876,
           "sha256": "95e8caf95a33e6587ef47fbd2aae480f3ec0059e3fde2128be29eba3b5f6dfd9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

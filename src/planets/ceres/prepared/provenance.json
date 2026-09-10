@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "ceres",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e0bb32876fc9782713e67e455adf1bb6b0404b5a5f3b5aac38c44b30f02a18a6"
+    "sha256": "b23b085f66aaa99965db239f381bb1bc49c15021d4afb43fb419be7263116e0c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -376,15 +376,19 @@
       },
       "coverage": "Observed pixels, shadows, and mosaic seams are preserved. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting.",
       "capture": {
-        "spacecraftIds": [
-          "dawn"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/asteroid_belt/ceres_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Ceres_FC_global&STYLES=&SRS=EPSG:4326&BBOX=0,-90,360,90&WIDTH=4096&HEIGHT=2048&FORMAT=image/png"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "dawn",
+            "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/asteroid_belt/ceres_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Ceres_FC_global&STYLES=&SRS=EPSG:4326&BBOX=0,-90,360,90&WIDTH=4096&HEIGHT=2048&FORMAT=image/png",
+            "missionId": "dawn"
+          }
+        ]
       },
       "sha256": "44de5317d0989d3e1b05feaf970c21c36f51b193c0972dc19bb678ecd8e89c7c",
       "bytes": 9750062,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -427,15 +431,19 @@
       },
       "coverage": "Observed pixels, shadows, and mosaic seams are preserved. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting.",
       "capture": {
-        "spacecraftIds": [
-          "dawn"
-        ],
-        "evidence": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/i/a/1/PIA19977.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1538&w=3078"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "dawn",
+            "evidence": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/i/a/1/PIA19977.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1538&w=3078",
+            "missionId": "dawn"
+          }
+        ]
       },
       "sha256": "e974d7e46e9feff4f6910ada38eeffc8ae65b057d576c4bd9d12d710c323a116",
       "bytes": 1033656,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -462,15 +470,19 @@
       "format": "geotiff",
       "coverage": "Height above the source's 470 km reference sphere. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
       "capture": {
-        "spacecraftIds": [
-          "dawn"
-        ],
-        "evidence": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Ceres_Dawn_FC_HAMO_DTM_DLR_Global_60ppd_Oct2016.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "dawn",
+            "evidence": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Ceres_Dawn_FC_HAMO_DTM_DLR_Global_60ppd_Oct2016.tif",
+            "missionId": "dawn"
+          }
+        ]
       },
       "sha256": "81da73151b4353c03d7ca18fa85972d1cb9c8530b3c5496df9ade7cb75af1915",
       "bytes": 466647217,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -494,7 +506,7 @@
       "sha256": "db7c4c51c376cf2660e70126ed0205b4697898637654804eeebbfd0f77cb7b05",
       "bytes": 9815,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -529,19 +541,19 @@
           "url": "/scenes/ceres/ceres-normal-thumbnail.webp",
           "bytes": 3756,
           "sha256": "57e7cb49b24c76096f5df3942cc926e9ae5e0422f6964d4a6c0cbcd6f7a47dd2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ceres/ceres-normal-surface@2x.webp",
           "bytes": 4533902,
           "sha256": "d6d6c665ea67a1742ab7781778c4fe49149c49c693c3dee64e3d6af10144c560",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ceres/ceres-normal-poles@2x.webp",
           "bytes": 163390,
           "sha256": "49c47235bc306821f7cc5924561db009aa459a907624652f85caac2ddec5ce32",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -575,19 +587,19 @@
           "url": "/scenes/ceres/ceres-enhanced-thumbnail.webp",
           "bytes": 9784,
           "sha256": "df339adeaa99dcb0dfce95bfc03e7cc40e8f6cb6b2c2883817273ebaa4356ed6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ceres/ceres-enhanced-surface@2x.webp",
           "bytes": 2584476,
           "sha256": "a16a55ad059afd9c70845cc782e534ac620fc28650ef0042da7fc99af406eebb",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ceres/ceres-enhanced-poles@2x.webp",
           "bytes": 126134,
           "sha256": "8d8016973c60d7fb3833267a1edc46a275e04e2d1ff9e8ce830827eb7061b849",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -620,25 +632,25 @@
           "url": "/scenes/ceres/ceres-elevation-thumbnail.webp",
           "bytes": 6496,
           "sha256": "333407659f6bc7b91073dcd7b1e0d6e896baae376c7131d52ca170ba2e96e94b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ceres/ceres-elevation-legend.webp",
           "bytes": 216,
           "sha256": "c1cb75a0ff10d78c262808c8188b385da4e98881290b8dc68bd7aa18ba4bc66f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ceres/ceres-elevation-surface@2x.webp",
           "bytes": 1445458,
           "sha256": "c733b1c283e7cca5b2a07a6cb0e87da224c3d1301e2696f27fa1f0f73c6322e4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ceres/ceres-elevation-poles@2x.webp",
           "bytes": 9906,
           "sha256": "f496d03b0cd8655b0d5ced0abb7271abb3474cab9a5060c0f0fec3fc916cc3ab",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

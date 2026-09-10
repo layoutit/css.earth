@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "juno",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "447ce4f05c48460e381bfcb1d9e132cd190c8d40d3bda9bbf5eee9a3231b3764",
       "bytes": 1620859,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "a4b6689c0df304a8c1519ef86d826c9eab4fb4891062a318fd3612a170158f3f",
       "bytes": 6291,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/juno/juno-elevation-thumbnail.webp",
           "bytes": 6228,
           "sha256": "d2a93b695f30cdce0f24f3e9c175b75f91e0dfa93a815bc34420963c4dc094c3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/juno/juno-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/juno/juno-elevation-surface@2x.webp",
           "bytes": 354640,
           "sha256": "951b298a754452aae7e311880996670457dd9f34cfbe4e523dce9f5bfc6499bc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/juno/juno-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/juno/juno-shape-surface@2x.webp",
           "bytes": 227372,
           "sha256": "46542293eefda68f5e2ff05f17c309ccc0ffa8c7d6def3501bc459b25565e393",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

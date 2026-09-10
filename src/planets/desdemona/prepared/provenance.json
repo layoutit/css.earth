@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "desdemona",
   "basis": "recovered",
   "manifest": {
@@ -258,7 +258,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -283,7 +283,7 @@
       "sha256": "11129d8df0c5a62592e2f3a5ce65950352607cc0d4d7fd34d58c88c7de401b80",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -300,7 +300,7 @@
       "sha256": "ffc98a48a8863d9f585db1ca44782a18b855d16e7a4bf483005100ab9ca7e0dc",
       "bytes": 3381,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -338,13 +338,13 @@
           "url": "/scenes/desdemona/desdemona-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/desdemona/desdemona-model-surface@2x.webp",
           "bytes": 53648,
           "sha256": "a1d8205927f2bce28be1680814dc67681ee929b54f5a60f5f399ca96c8b95f49",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

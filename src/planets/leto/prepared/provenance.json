@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "leto",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "22c388028d5da32840503e4aaa9a0985447afaf34909ca834b26e941a313f019",
       "bytes": 82222,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "3e2b98c945df56b188f7b0fb6ec04d5e67d5aedff9680030845db23f0cdd53f3",
       "bytes": 7852,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/leto/leto-elevation-thumbnail.webp",
           "bytes": 5360,
           "sha256": "2801bb1e16ba68412f2e7b7e5cdd98900e940e22b0598d5001c06cb7eea5136b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/leto/leto-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/leto/leto-elevation-surface@2x.webp",
           "bytes": 294400,
           "sha256": "0c75b6addead906b6e6c0dc24930a6073bb2c1a47d1b1dc2e8255ddc0e29671c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/leto/leto-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/leto/leto-shape-surface@2x.webp",
           "bytes": 251982,
           "sha256": "0f9570e630d5b8e44e561c74d3eb2c1551e80e7e607b794112c3012e1eefdf70",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

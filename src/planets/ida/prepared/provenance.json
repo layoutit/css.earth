@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "ida",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a8ec2e8d99db810a50d74dfe03c76c9fd58c8b46fafd5082e6c80f2c9ca05454"
+    "sha256": "81a92dc4eabd0d0d57b8c5604cd2382aa1f4680a43c3cd0f9fad62ccb2fb8fcf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -450,15 +450,19 @@
       },
       "coverage": "High-pass Galileo montage on a low-pass coarse-image background. 7 pixels per degree; best contributing images approximately 25 m/pixel. Exact zero marks unprojectable surface.",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243idam.fit"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243idam.fit",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "f54c5cb55c6b6577dcfa64befa50367c3d3a6e0e75be6c2405495678a09559d7",
       "bytes": 3179520,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -494,15 +498,19 @@
       },
       "coverage": "Released 2-degree stereogrammetry and limb-fit radial model; source resolution and confidence vary.",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243ida.tab"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243ida.tab",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "44a3a6752ce6bd34a4796485144429dc3d7cd9d2c7a6409636348f30876c95df",
       "bytes": 527072,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -533,7 +541,7 @@
       "sha256": "172489ebbefee3c7c1a1630d7c72fc7269b7de5c38459eedc2450e5c2dbd0d8f",
       "bytes": 2563200,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -560,7 +568,7 @@
       "sha256": "16cf058e26018e77098c2c3aca9ee92a25a8eeb029eba04c942051773a25bfed",
       "bytes": 12912,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -587,7 +595,7 @@
       "sha256": "af8478f44f435e9e38c2cf82de05a910082aef34f730c503a9eb2236b4dc413a",
       "bytes": 4320,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -614,7 +622,7 @@
       "sha256": "7b95b9bb6272cce8d831ef8ac35f94d5dc2cd0413bba07de0bfda9d28587ba13",
       "bytes": 8830,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -641,7 +649,7 @@
       "sha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652",
       "bytes": 9964,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -668,7 +676,7 @@
       "sha256": "f80c9991b7ed9f81ebefddf71a0a37f53ee499b1658ba1bd909895f8d393bb16",
       "bytes": 645120,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -695,7 +703,7 @@
       "sha256": "35ea4cf95507fdf3d9c5de4f245c9494c69e6753bbb5168933993d6df3a51750",
       "bytes": 10480,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -722,7 +730,7 @@
       "sha256": "bb373b59c8fd72325d61167cf7af67f1e69d3dea7c8b8919ee9ba1b07cb7cb47",
       "bytes": 23270,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -749,7 +757,7 @@
       "sha256": "f2ff4a49703b6e1d9b8be59f866f149d5b5f9a926e239ee3a546215eb208f441",
       "bytes": 9760,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -778,7 +786,7 @@
       "sha256": "1ff454dd43d90c53bb0523dd258f7870e0d1f9cf2d5de41b6002fa6f2bd59886",
       "bytes": 2563200,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -805,7 +813,7 @@
       "sha256": "9f768a86363250f11a288cf587e2813df7b8df7273d32b6bbc60196caaa461df",
       "bytes": 12909,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -832,7 +840,7 @@
       "sha256": "b8c6440f6e2b96ab139e9093ed2a88b6a7e41d1ff3b531405b5f2880e942d4a1",
       "bytes": 645120,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -859,7 +867,7 @@
       "sha256": "2899b9d445d1947dc0ab1b852cf80a32d0198e6c59531ea8c885e17a4799a82c",
       "bytes": 10480,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -887,7 +895,7 @@
       "sha256": "ed181ef75b5ae936b52a0142964ca7c7647f6d150f4a419ca6fad0c6c5859e7a",
       "bytes": 8544,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -932,13 +940,13 @@
           "url": "/scenes/ida/ida-normal-thumbnail.webp",
           "bytes": 3264,
           "sha256": "b895e1c40342f4cf5596adea903f2a73ac217a8c463707443d9e8ceabfaadfaf",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ida/ida-normal-surface@2x.webp",
           "bytes": 1050172,
           "sha256": "d1f446ce067526b98d3bed50aca3f5ee68fcce6b52733c133a11426ea596abe2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -970,19 +978,19 @@
           "url": "/scenes/ida/ida-elevation-thumbnail.webp",
           "bytes": 5744,
           "sha256": "8599e109b2ab1d6e7e2311c0292eb7dbc229031eb7a0a76a8d0521f7d3181158",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ida/ida-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ida/ida-elevation-surface@2x.webp",
           "bytes": 327638,
           "sha256": "424be56e7d03996a3d92386268b158a50735c842bcf6817cd80d9266364a2736",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1027,13 +1035,13 @@
           "url": "/scenes/ida/ida-calibrated-thumbnail.webp",
           "bytes": 1880,
           "sha256": "cf9fafd617363f81d1061a653b1ae4f45e1ef52e4f4402b4d36415d0ed000002",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ida/ida-calibrated-surface@2x.webp",
           "bytes": 284728,
           "sha256": "57da5425aca952a853ecd56d2a8cb47d59052f20c2192876f3dfa8a1531404f5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

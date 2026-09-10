@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "urania",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "ec4173950efc55a112dcfff8b5b5f40ac684f5514b1f2c987cd0605192f881a9",
       "bytes": 165979,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "624ebfa9662731c6ae1e0a854aaa3b96824eaa0fcdc2f8059a424ddffabda487",
       "bytes": 8046,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/urania/urania-elevation-thumbnail.webp",
           "bytes": 5392,
           "sha256": "fc1e4a28606e25ebaa1592103bf1cd8cc396a7d7478b71a71c9eeff3033c9ed5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/urania/urania-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/urania/urania-elevation-surface@2x.webp",
           "bytes": 323862,
           "sha256": "75094755a7d7cd3372a37e970c7867095dac4208c1a303b8f169f4103f8c4467",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/urania/urania-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/urania/urania-shape-surface@2x.webp",
           "bytes": 220222,
           "sha256": "c2ded0ad80a618185d42e9521fe90a8d1c7d93c55794dd0dc95389df29746d5f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

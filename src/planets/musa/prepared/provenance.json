@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "musa",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "5d72411f25fa692b22c7b8ccb786afcbaf6bbddc37b9b44b4975d75b4e10382b",
       "bytes": 77766,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 8209,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/musa/musa-elevation-thumbnail.webp",
           "bytes": 5500,
           "sha256": "9c5d93cfea1b75afd2f39da34531da5b76dc4c3737832c9936e3024b11653ef3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/musa/musa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/musa/musa-elevation-surface@2x.webp",
           "bytes": 313290,
           "sha256": "52e507121f274f3d673bda9abf04af794864516b281a4ef30b18ba046e5f4438",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/musa/musa-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/musa/musa-shape-surface@2x.webp",
           "bytes": 240004,
           "sha256": "11d5a694ee9160af1c632c1c384e44a8401275a4b2455ae4447353636a4d4ad0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

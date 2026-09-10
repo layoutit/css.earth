@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "vanadis",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "616f9e9caf14dd14bfb662642e787d1d22478f53727d8f3eef207287cdfd109b",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "c41bdcc007cc5c8c3419e5951e6361420099ce1313431640ceacff3f17c7c561",
       "bytes": 10643,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/vanadis/vanadis-elevation-thumbnail.webp",
           "bytes": 5362,
           "sha256": "df39766986d82405c6f2e53f2b4357e92b4e3e30688dd0b4847f2fd5b560b374",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/vanadis/vanadis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/vanadis/vanadis-elevation-surface@2x.webp",
           "bytes": 269418,
           "sha256": "fdbc97a77d3e49e022667d597f9e422f9d3364a8562d1135953955a18a1e17ef",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/vanadis/vanadis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/vanadis/vanadis-shape-surface@2x.webp",
           "bytes": 233370,
           "sha256": "4e5b8928d77a5aa6922ca3d4d66eddec44c981eb01282c3e507e15db564011ce",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

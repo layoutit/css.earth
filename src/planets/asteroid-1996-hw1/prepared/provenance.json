@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "asteroid-1996-hw1",
   "basis": "recovered",
   "manifest": {
@@ -327,7 +327,7 @@
       "sha256": "f40ee6ba66abccd5393f991fdfe240b54df49c31559e07a431760996024d2996",
       "bytes": 83069,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "3a50b3c8d37da24915f6a03ea993cd1ac8409d6542a6bb0ca5297e08a196baa8",
       "bytes": 9550,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-elevation-thumbnail.webp",
           "bytes": 5714,
           "sha256": "b8fa624375ce6b8c51090f6d326522b96297b1a0c87def366ddeae0660d23144",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-elevation-surface@2x.webp",
           "bytes": 362878,
           "sha256": "f4b7bcf01bfcc1aed14573c063e93f0bfc3da7c53eea0788891e14ad70f74850",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-shape-surface@2x.webp",
           "bytes": 221278,
           "sha256": "f39f66258eebb62ca9cb0c888de3b503636477004ff88f4629e66c8c0fcf71ff",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
