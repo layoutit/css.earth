@@ -1,5 +1,5 @@
 {
-  "schema": "cssdike-authoritative-sources@1",
+  "schema": "cssdike-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/dike/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "dike-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Published convex light-curve model 1144. Convex light-curve shape with published thermophysical size calibration: 66.5 ± 0.9 km equivalent diameter. The nominal archived pole differs by 1° from the varied-model fit. Grid marks unavailable surface imagery; rotational phase is illustrative. The displayed nominal DAMIT2016 model has beta50°, while the varied-shape thermophysical table reports beta49° and rounded period18.1191h. This transfer uses the same published shape/pole family, not identical thermophysical ensemble mesh bytes. Only a uniform physical scale is transferred; no thermal terrain or measured albedo map is added.",
       "expectedBytes": 82708,
-      "expectedSha256": "fa976b4d7167a12345ebcc95c09b74f06e4700a16ce25c9a8381e2a8de94626f"
+      "expectedSha256": "fa976b4d7167a12345ebcc95c09b74f06e4700a16ce25c9a8381e2a8de94626f",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-4173",
+            "role": "material",
+            "evidence": "src/planets/dike/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/dike/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -95,7 +125,11 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 6720,
       "expectedSha256": "63faf33f4fe6414f2bd658c9e5912279529af49c5b562407954837123c6963b3",
-      "sha256": "1257ce847f27d462c227deb2a992474757a23ca8a4a4697693dade871e0f879d"
+      "sha256": "1257ce847f27d462c227deb2a992474757a23ca8a4a4697693dade871e0f879d",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

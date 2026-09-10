@@ -1,5 +1,5 @@
 {
-  "schema": "cssdiomedes-authoritative-sources@1",
+  "schema": "cssdiomedes-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/diomedes/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "diomedes-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Convex light-curve model fitted to a stellar occultation: 118.8 ± 0.6 km volume-equivalent diameter. Grid marks unavailable imagery; rotational phase is illustrative. The published occultation fit uses this same 574-vertex, 1144-facet dimensionless model, refining its uniform size, pole and period. Three observed chords constrain the silhouette; this remains an inverse model, without resolved local terrain. No albedo, craters or regolith are inferred.",
       "expectedBytes": 46419,
-      "expectedSha256": "cf6512831a00fabbe4b577fc396a7164c99325bcc0a8e35eb7d142dde7ac5a18"
+      "expectedSha256": "cf6512831a00fabbe4b577fc396a7164c99325bcc0a8e35eb7d142dde7ac5a18",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-13159",
+            "role": "material",
+            "evidence": "src/planets/diomedes/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/diomedes/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -94,7 +124,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 10980,
-      "expectedSha256": "dcbf53cc83b294e8111cf242e58a88a3c2269f0a16761ca6f4f85898add15395"
+      "expectedSha256": "dcbf53cc83b294e8111cf242e58a88a3c2269f0a16761ca6f4f85898add15395",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

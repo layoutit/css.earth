@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "camilla",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e38cab7ef18cbc4d4fe8c68d4697e9626367cf7d7a0f8776dcd46086a40ca316"
+    "sha256": "62f136f8e77f1fc79529e8b0830573ce7c5006281354c247e1e38a4572470f93"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -324,6 +324,16 @@
         "referenceRadiusMeters": 130000
       },
       "coverage": "Calibrated nonconvex ground-based reconstruction. The grid is an explicit no-imagery treatment; no small-scale surface detail is inferred.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-357",
+            "role": "material",
+            "evidence": "src/planets/camilla/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "bd8661133eeacfe7aaab1e2a102c0bfe69c20def0219ac29e2fdff0ee278e544",
       "bytes": 32486,
       "dependencies": [],
@@ -342,6 +352,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

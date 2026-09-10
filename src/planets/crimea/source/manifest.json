@@ -1,5 +1,5 @@
 {
-  "schema": "csscrimea-authoritative-sources@1",
+  "schema": "csscrimea-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/crimea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "crimea-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Published convex light-curve model 403. Approximate scale from a thermal diameter of 29.179 ± 0.155 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects. The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
       "expectedBytes": 82708,
-      "expectedSha256": "8facba4b82f8c0b8a07506e24100ae6c721bb21661d113b7df51b6f9fd6d0117"
+      "expectedSha256": "8facba4b82f8c0b8a07506e24100ae6c721bb21661d113b7df51b6f9fd6d0117",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-1545",
+            "role": "material",
+            "evidence": "src/planets/crimea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/crimea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -95,7 +125,11 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 9087,
       "expectedSha256": "dd683f185dc2218a34efa5b4f28a5b4499c182520ad5a21e355d8f9ed02d6721",
-      "sha256": "4ee8da83625bf30c539af09c8c9adf3fadbd8eac7c6ff9fcc30bf685cb464729"
+      "sha256": "4ee8da83625bf30c539af09c8c9adf3fadbd8eac7c6ff9fcc30bf685cb464729",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

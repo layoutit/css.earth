@@ -1,5 +1,5 @@
 {
-  "schema": "cssjulia-authoritative-sources@1",
+  "schema": "cssjulia-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/julia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "julia-shape",
@@ -41,7 +51,17 @@
       },
       "coverage": "Closed MPCD shape from resolved VLT/SPHERE images and an ADAM starting model. Observational detail is nonuniform. The shared grid is an explicit no-imagery treatment.",
       "expectedBytes": 363259,
-      "expectedSha256": "aa0104b2bd32fcf228a7abdacc8b5223890562bb11c74f61a4dcbefb5e2dead2"
+      "expectedSha256": "aa0104b2bd32fcf228a7abdacc8b5223890562bb11c74f61a4dcbefb5e2dead2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-shape",
+            "role": "material",
+            "evidence": "src/planets/julia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -58,7 +78,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/julia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "julia-survey-research",
@@ -73,7 +103,17 @@
         "rotation"
       ],
       "expectedBytes": 25270498,
-      "expectedSha256": "85c45bbcf5705a5173fa1da7593aba777f3c083c61bb6a88ecf15a6513a7725f"
+      "expectedSha256": "85c45bbcf5705a5173fa1da7593aba777f3c083c61bb6a88ecf15a6513a7725f",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vernazza-2021-survey",
+            "role": "method",
+            "evidence": "src/planets/julia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -108,7 +148,11 @@
       "path": "content/object.json",
       "purpose": "Pinned source evidence or authored preparation input.",
       "expectedBytes": 6668,
-      "expectedSha256": "a13327d2fac6c271ab24b9ba7867e57feda5358ff3837cbeb3fa556a0489ad17"
+      "expectedSha256": "a13327d2fac6c271ab24b9ba7867e57feda5358ff3837cbeb3fa556a0489ad17",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

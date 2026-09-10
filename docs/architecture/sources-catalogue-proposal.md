@@ -1,5 +1,7 @@
 # Proposal: a SOURCES catalogue
 
+Implementation is described in the maintained [Sources catalogue guide](../sources-catalogue.md). This proposal preserves the design and its measured pre-implementation baseline.
+
 **Status:** Proposed; application changes have not started.
 
 **Date:** 10 September 2026.

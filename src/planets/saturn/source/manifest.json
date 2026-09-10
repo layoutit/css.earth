@@ -1,5 +1,5 @@
 {
-  "schema": "csssaturn-authoritative-sources@1",
+  "schema": "csssaturn-authoritative-sources@2",
   "inputs": [
     {
       "id": "openspace-saturn-surface",
@@ -18,7 +18,17 @@
         "navigation",
         "scene"
       ],
-      "expectedBytes": 1036492
+      "expectedBytes": 1036492,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-openspace-saturn-surface",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-saturn-ring-color",
@@ -36,7 +46,17 @@
         "assets",
         "starfield"
       ],
-      "expectedBytes": 2059
+      "expectedBytes": 2059,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-openspace-saturn-ring-color",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-saturn-ring-transparency",
@@ -53,7 +73,17 @@
       "consumers": [
         "assets"
       ],
-      "expectedBytes": 2303
+      "expectedBytes": 2303,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-openspace-saturn-ring-transparency",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "cassini-pia21611-polar-map",
@@ -82,6 +112,16 @@
             "evidence": "https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-cassini-pia21611-polar-map",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
       }
     },
     {
@@ -96,7 +136,11 @@
       "consumers": [
         "scene"
       ],
-      "expectedBytes": 154240
+      "expectedBytes": 154240,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record explicitly identifies a cssEarth preparation snapshot or adapter-owned presentation specification. Published input dependencies and qualifications remain in the existing product lineage and source recipe."
+      }
     },
     {
       "id": "saturn-approved-static-weather",
@@ -111,7 +155,11 @@
         "scene",
         "weather"
       ],
-      "expectedBytes": 1692
+      "expectedBytes": 1692,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record explicitly identifies a cssEarth preparation snapshot or adapter-owned presentation specification. Published input dependencies and qualifications remain in the existing product lineage and source recipe."
+      }
     },
     {
       "id": "nasa-psg-saturn-expanded-configuration",
@@ -126,7 +174,13 @@
         "spectrum",
         "temperature-pressure-profile"
       ],
-      "expectedBytes": 8260
+      "expectedBytes": 8260,
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-saturn-expanded-configuration",
+        "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "nasa-psg-saturn-r240-rif-response",
@@ -140,7 +194,13 @@
       "consumers": [
         "spectrum"
       ],
-      "expectedBytes": 11913
+      "expectedBytes": 11913,
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-saturn-r240-rif-response",
+        "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "hyg-v41-saturn-field",
@@ -154,7 +214,17 @@
       "consumers": [
         "assets"
       ],
-      "expectedBytes": 144992
+      "expectedBytes": 144992,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-hyg-v41-saturn-field",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     },
     {
       "id": "saturn-interior-model",
@@ -168,7 +238,11 @@
       "consumers": [
         "interior"
       ],
-      "expectedBytes": 5097
+      "expectedBytes": 5097,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record explicitly identifies a cssEarth preparation snapshot or adapter-owned presentation specification. Published input dependencies and qualifications remain in the existing product lineage and source recipe."
+      }
     },
     {
       "id": "saturn-moon-catalog",
@@ -187,7 +261,13 @@
       "consumers": [
         "moons"
       ],
-      "expectedBytes": 226054
+      "expectedBytes": 226054,
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "saturn-moon-catalog",
+        "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "openspace-dione-map",
@@ -204,7 +284,17 @@
       "consumers": [
         "moons"
       ],
-      "expectedBytes": 5159886
+      "expectedBytes": 5159886,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-openspace-dione-map",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-enceladus-map",
@@ -221,7 +311,17 @@
       "consumers": [
         "moons"
       ],
-      "expectedBytes": 4858450
+      "expectedBytes": 4858450,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-openspace-enceladus-map",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-iapetus-map",
@@ -238,7 +338,17 @@
       "consumers": [
         "moons"
       ],
-      "expectedBytes": 3998916
+      "expectedBytes": 3998916,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-openspace-iapetus-map",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-mimas-map",
@@ -255,7 +365,17 @@
       "consumers": [
         "moons"
       ],
-      "expectedBytes": 1370319
+      "expectedBytes": 1370319,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-openspace-mimas-map",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-rhea-map",
@@ -272,7 +392,17 @@
       "consumers": [
         "moons"
       ],
-      "expectedBytes": 7578314
+      "expectedBytes": 7578314,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-openspace-rhea-map",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-tethys-map",
@@ -289,7 +419,17 @@
       "consumers": [
         "moons"
       ],
-      "expectedBytes": 1483819
+      "expectedBytes": 1483819,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-openspace-tethys-map",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-titan-cassini-mosaic",
@@ -306,7 +446,17 @@
       "consumers": [
         "moons"
       ],
-      "expectedBytes": 8169258
+      "expectedBytes": 8169258,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-openspace-titan-cassini-mosaic",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+          }
+        ]
+      }
     },
     {
       "id": "hubble-opal-2025a-f225w",
@@ -328,6 +478,16 @@
             "spacecraftId": "hubble",
             "missionId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-hubble-opal-2025a-f225w",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
           }
         ]
       }
@@ -354,6 +514,16 @@
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-hubble-opal-2025b-f225w",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+          }
+        ]
       }
     },
     {
@@ -376,6 +546,16 @@
             "spacecraftId": "hubble",
             "missionId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-hubble-opal-2025a-fq889n",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
           }
         ]
       }
@@ -402,6 +582,16 @@
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-hubble-opal-2025b-fq889n",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
+          }
+        ]
       }
     },
     {
@@ -420,7 +610,17 @@
       "consumers": [
         "starfield",
         "scene"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22"
+          }
+        ]
+      }
     },
     {
       "id": "google-maps-saturn-cubic-sky-sun-oracle-asset",
@@ -436,7 +636,17 @@
         "starfield",
         "sun-oracle",
         "scene"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-google-maps-saturn-cubic-sky-sun-oracle-asset",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
+          }
+        ]
+      }
     },
     {
       "id": "google-maps-saturn-cubic-sky-sun-oracle-measurements",
@@ -453,7 +663,13 @@
         "sun-oracle",
         "scene",
         "lighting"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "google-maps-saturn-cubic-sky-sun-oracle-measurements",
+        "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/24",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "saturn-authored-preparation-rings",
@@ -467,7 +683,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "radial-layers"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "saturn-authored-preparation-navigation",
@@ -481,7 +701,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "navigation"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "saturn-authored-presentation-title-mark",
@@ -495,7 +719,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "saturn-authored-editorial-object",
@@ -509,7 +737,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "content"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "saturn-authored-content",
@@ -523,7 +755,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "content"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "saturn-authored-geometry",
@@ -537,7 +773,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "geometry"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "saturn-authored-surface",
@@ -551,7 +791,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "surface"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "saturn-authored-materials",
@@ -565,7 +809,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "materials"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "saturn-authored-radial-motion",
@@ -579,7 +827,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "radial-motion"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "saturn-authored-presentation",
@@ -593,7 +845,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "presentation"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "saturn-authored-celestial",
@@ -607,7 +863,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "celestial"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "saturn-authored-charts",
@@ -621,7 +881,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "charts"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "saturn-authored-acquisition",
@@ -635,7 +899,13 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "acquisition"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "saturn-authored-acquisition",
+        "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/37",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "saturn-authored-satellite-catalog",
@@ -649,7 +919,13 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "acquisition"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "saturn-authored-satellite-catalog",
+        "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/38",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     }
   ],
   "generatedIntermediates": [

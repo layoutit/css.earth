@@ -1,5 +1,5 @@
 {
-  "schema": "cssdione-authoritative-sources@1",
+  "schema": "cssdione-authoritative-sources@2",
   "inputs": [
     {
       "credit": "NASA/JPL/Space Science Institute",
@@ -53,6 +53,16 @@
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-cassini-voyager-2010-dione",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
       }
     },
     {
@@ -91,6 +101,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18434.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-cassini-iss-2014-dione-color",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
       }
@@ -135,6 +155,16 @@
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_eqradius_g.tif"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-cassini-spc-2025-dione-eq",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
       }
     },
     {
@@ -173,6 +203,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_npradius_g.tif"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-cassini-spc-2025-dione-np",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
         ]
       }
@@ -215,6 +255,16 @@
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_spradius_g.tif"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-cassini-spc-2025-dione-sp",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
       }
     },
     {
@@ -232,7 +282,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -249,7 +309,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
@@ -269,7 +339,17 @@
       "units": "Native Cartesian coordinates in kilometres, +X at 0° longitude and +Z north; no height exaggeration.",
       "coverage": "Global Q128 SPC shape, 98,306 vertices and 196,608 faces; source mesh is simplified under a measured preparation error budget. Native image support and accuracy vary.",
       "expectedBytes": 17694840,
-      "expectedSha256": "6fa66be6d8065fccb55bda4f9b272aefddbd2ddb1402ff284c00ca21e15df9ad"
+      "expectedSha256": "6fa66be6d8065fccb55bda4f9b272aefddbd2ddb1402ff284c00ca21e15df9ad",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-cassini-spc-2025-dione-q128-shape",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
@@ -294,7 +374,17 @@
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
       "expectedBytes": 6044025,
-      "expectedSha256": "e08ad608fd0786dd507f290a6df8d29fbad9f24631d21aafd91c2dc4732fdfb6"
+      "expectedSha256": "e08ad608fd0786dd507f290a6df8d29fbad9f24631d21aafd91c2dc4732fdfb6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-cassini-spc-2025-dione-dione-eqalbedo-g",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
@@ -319,7 +409,17 @@
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
       "expectedBytes": 790785,
-      "expectedSha256": "3b809800678f9a21574bd4ea45dda127ce8f122e35d13d9881c823ab4c4b2a4d"
+      "expectedSha256": "3b809800678f9a21574bd4ea45dda127ce8f122e35d13d9881c823ab4c4b2a4d",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-cassini-spc-2025-dione-dione-npalbedo-g",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
@@ -344,7 +444,17 @@
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
       "expectedBytes": 790785,
-      "expectedSha256": "10c4f91d0686b03e554e8da9f9bc44acf60dccefae2406c8351e6bf01852a3b8"
+      "expectedSha256": "10c4f91d0686b03e554e8da9f9bc44acf60dccefae2406c8351e6bf01852a3b8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-cassini-spc-2025-dione-dione-spalbedo-g",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
     },
     {
       "id": "dione-vims-source-information-file-pdf",
@@ -362,7 +472,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-dione-vims-source-information-file-pdf",
+            "role": "method",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "dione-vims-source-information-file-xml",
@@ -380,7 +500,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-dione-vims-source-information-file-xml",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
     },
     {
       "id": "dione-vims-source-vims-wavelengths-ir-tab",
@@ -398,7 +528,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-dione-vims-source-vims-wavelengths-ir-tab",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
     },
     {
       "id": "dione-vims-source-vims-wavelengths-ir-xml",
@@ -416,7 +556,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-dione-vims-source-vims-wavelengths-ir-xml",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
     },
     {
       "id": "dione-vims-source-dione-notnorm-pc-modified-2-xml",
@@ -434,7 +584,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-dione-vims-source-dione-notnorm-pc-modified-2-xml",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      }
     },
     {
       "id": "dione-vims-source-dione-notnorm-pc-modified-2-hdr",
@@ -452,7 +612,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-dione-vims-source-dione-notnorm-pc-modified-2-hdr",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+          }
+        ]
+      }
     },
     {
       "id": "dione-vims-source-dione-notnorm-pc-modified-2-img",
@@ -470,7 +640,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-dione-vims-source-dione-notnorm-pc-modified-2-img",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+          }
+        ]
+      }
     },
     {
       "id": "dione-vims-source-dione-phase-function-parameters-tab",
@@ -488,7 +668,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-dione-vims-source-dione-phase-function-parameters-tab",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
+      }
     },
     {
       "id": "dione-vims-source-dione-phase-function-parameters-xml",
@@ -506,7 +696,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-dione-vims-source-dione-phase-function-parameters-xml",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+          }
+        ]
+      }
     },
     {
       "id": "dione-vims-source-dione-vims-cubes-list-tab",
@@ -524,7 +724,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-dione-vims-source-dione-vims-cubes-list-tab",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
+          }
+        ]
+      }
     },
     {
       "id": "dione-vims-source-dione-vims-cubes-list-xml",
@@ -542,7 +752,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-dione-vims-source-dione-vims-cubes-list-xml",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
+          }
+        ]
+      }
     },
     {
       "id": "dione-vims-infrared",
@@ -579,7 +799,17 @@
       "coverage": "Guide-based one-degree global bins; original missing spectra retained. Absolute subpixel registration unresolved.",
       "lensId": "infrared",
       "label": "Infrared",
-      "falseColor": true
+      "falseColor": true,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-dione-vims-infrared",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22"
+          }
+        ]
+      }
     },
     {
       "id": "dione-vims-ice-absorption",
@@ -613,7 +843,17 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 561400
       },
-      "coverage": "Guide-based one-degree global bins; original missing spectra retained. Absolute subpixel registration unresolved."
+      "coverage": "Guide-based one-degree global bins; original missing spectra retained. Absolute subpixel registration unresolved.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-dione-vims-ice-absorption",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
+          }
+        ]
+      }
     }
   ],
   "documents": [
@@ -687,7 +927,11 @@
       "path": "content/object.json",
       "expectedBytes": 14510,
       "expectedSha256": "af8920c60f1daefe1900ab861139460a83af14c4406545de3a52a1ebc9814ac2",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "purpose": "Source metadata, license evidence, or authored preparation and content.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "presentation/title-mark.json",

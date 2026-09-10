@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "diomedes",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c32faefd970d7690224bc65d3f19be35dada81eee93d5dde39a190a32df58efd"
+    "sha256": "2f767fa5ae73a0aa2625967b5370449f943878d3e147846f1dc40d1ba4ac273c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -352,6 +352,16 @@
         "referenceRadiusMeters": 59400
       },
       "coverage": "Convex light-curve model fitted to a stellar occultation: 118.8 ± 0.6 km volume-equivalent diameter. Grid marks unavailable imagery; rotational phase is illustrative. The published occultation fit uses this same 574-vertex, 1144-facet dimensionless model, refining its uniform size, pole and period. Three observed chords constrain the silhouette; this remains an inverse model, without resolved local terrain. No albedo, craters or regolith are inferred.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-13159",
+            "role": "material",
+            "evidence": "src/planets/diomedes/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "cf6512831a00fabbe4b577fc396a7164c99325bcc0a8e35eb7d142dde7ac5a18",
       "bytes": 46419,
       "dependencies": [],
@@ -370,6 +380,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

@@ -1,14 +1,14 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "comet-8p",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f4008223140258ffd61b00ff9bac03b1b1d2ab92358625512f82a24962f54bc1"
+    "sha256": "2f9991286853f4af643ed4efa21f70c4383d85950e740d83adf71da2d8b1da55"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -384,6 +384,10 @@
       "lensId": "model",
       "label": "Hubble · Spitzer",
       "falseColor": false,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
       "bytes": 137,
       "dependencies": [],
@@ -404,6 +408,16 @@
       ],
       "acquisition": "Checked-in numeric model and uncertainty; no source image is a texture.",
       "redistribution": "Preserve attribution and inferred-model qualification.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1911-04897",
+            "role": "method",
+            "evidence": "src/planets/comet-8p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "5e77878847b22470f97526a424915efd34a6feef44d11482b2104b320c33d12e",
       "bytes": 896,
       "dependencies": [],
@@ -434,6 +448,10 @@
       "lensId": "arecibo",
       "label": "Arecibo",
       "falseColor": false,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
       "bytes": 137,
       "dependencies": [],
@@ -454,6 +472,16 @@
       ],
       "acquisition": "Checked-in published radar shape parameters; full lobe dimensions divided by two.",
       "redistribution": "Preserve attribution and inferred-model qualification.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-8p-arecibo-model",
+            "role": "method",
+            "evidence": "src/planets/comet-8p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      },
       "sha256": "1ce08f3c47306e7bd0fa70685e55e111cfdbd01ede582c167bb9eb2093bc2022",
       "bytes": 1154,
       "dependencies": [],
@@ -464,6 +492,10 @@
     {
       "path": "content/object.json",
       "purpose": "Tuttle source evidence or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

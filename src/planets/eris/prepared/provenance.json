@@ -1,14 +1,14 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "eris",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "67d4a2eefdea529a973168a2f3790fa3fdb1ee5b3845163b35881de8463393b6"
+    "sha256": "033aefabcf2316bdda8cacd2f052defa216df892820c0702990678f3aa1e5c50"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -187,6 +187,16 @@
       "license": "NASA media usage guidelines; NASA-provided illustrative model with attribution",
       "acquisition": "Original GLB downloaded from NASA Science",
       "redistribution": "NASA media; illustrative terrain, not spacecraft mapping",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eris-nasa-vtad-eris-model",
+            "role": "material",
+            "evidence": "src/planets/eris/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "1b97f1b9eea244b047a72c2a3ac0db315715b7d421033d860d669ffd78681d54",
       "bytes": 4398964,
       "dependencies": [],
@@ -204,6 +214,10 @@
     {
       "path": "content/object.json",
       "purpose": "Object-owned preparation, content or attribution",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

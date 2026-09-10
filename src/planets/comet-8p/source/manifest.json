@@ -1,5 +1,5 @@
 {
-  "schema": "csscomet-8p-authoritative-sources@1",
+  "schema": "csscomet-8p-authoritative-sources@2",
   "inputs": [
     {
       "id": "contact-model",
@@ -17,7 +17,17 @@
       "redistribution": "Preserve attribution and inferred-model qualification.",
       "consumers": [
         "shape"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1911-04897",
+            "role": "method",
+            "evidence": "src/planets/comet-8p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "model-surface",
@@ -45,7 +55,11 @@
       "height": 32,
       "lensId": "model",
       "label": "Hubble · Spitzer",
-      "falseColor": false
+      "falseColor": false,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -62,7 +76,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/comet-8p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -79,7 +103,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/comet-8p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "arecibo-model",
@@ -97,7 +131,17 @@
       "redistribution": "Preserve attribution and inferred-model qualification.",
       "consumers": [
         "shape"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-8p-arecibo-model",
+            "role": "method",
+            "evidence": "src/planets/comet-8p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "arecibo-surface",
@@ -125,7 +169,11 @@
       "height": 32,
       "lensId": "arecibo",
       "label": "Arecibo",
-      "falseColor": false
+      "falseColor": false,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -167,7 +215,11 @@
       "path": "content/object.json",
       "expectedBytes": 4066,
       "expectedSha256": "9e5b017fbb350310376ebb6eac625c3194ab5848f5cd535b93ef4a430a188ba5",
-      "purpose": "Tuttle source evidence or authored preparation input."
+      "purpose": "Tuttle source evidence or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

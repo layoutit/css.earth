@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-1994-cc",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "81552d60cd4862e2f3bf8d3d46842fc17606cdf9e37806f32251eac95adcc1e2"
+    "sha256": "e985121042ca25dba9481567eea4f9426d70bbec8497fcffecf1e43636a9641e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -322,6 +322,16 @@
         "referenceRadiusMeters": 310
       },
       "coverage": "The archive explicitly identifies this mesh as Alpha, the primary; Beta and Gamma are not modeled here. The adopted nominal solution is model 17, with ecliptic pole (336°, 22°). Many radar pole solutions remain plausible, so the nominal orientation does not establish a unique spin pole.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-asteroid-1994-cc-asteroid-1994-cc-shape",
+            "role": "material",
+            "evidence": "src/planets/asteroid-1994-cc/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "8df685e9f555ba71a07ba4364af3ea59e485fcb5afa43fb54e5a12f645fca78b",
       "bytes": 120595,
       "dependencies": [],
@@ -340,6 +350,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

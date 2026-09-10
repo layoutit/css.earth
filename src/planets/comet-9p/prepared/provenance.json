@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "comet-9p",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4a6c8273b06c9de5da31b6ee84de26c00265e195aa6be75b85b5ea5b0399556d"
+    "sha256": "7ee338cd63643d7f716412857053224eee792d79da91edd58cd71a8c781ea3ac"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -531,6 +531,10 @@
           3
         ]
       },
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "b5a1d39f0f0b7453507a01ba1507958be6ec0a8090ac3f2cc6abc783d9a75add",
       "bytes": 7580,
       "dependencies": [],
@@ -550,6 +554,16 @@
       ],
       "acquisition": "Download the original PDS table; verify exact bytes and SHA-256.",
       "redistribution": "Public scientific data; retain dataset identification and author attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-pds-shape",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "2174b6448b482f65feb64a745b0c617802b0bbc274af116692d4fc2d9fa00777",
       "bytes": 1634142,
       "dependencies": [],
@@ -601,6 +615,16 @@
           3
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-constraint-surface",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "4d5d83e2c82109d4747de00e22df1ef50f862f85a66330ed7c5ce4d8873221dd",
       "bytes": 7711,
       "dependencies": [],
@@ -620,6 +644,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-iv05070405-9000632-001-r-path",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      },
       "sha256": "53884c4e586680b1d7d286c253bb1f220c03208edb88a8481963781947659c81",
       "bytes": 2436480,
       "dependencies": [],
@@ -646,6 +680,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-iv05070405-9000632-001-r-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      },
       "sha256": "fb1f2818491dc9044faedc2be1088d6400b13ff8e8549a9c905a610ceb5f5a90",
       "bytes": 32880,
       "dependencies": [],
@@ -672,6 +716,10 @@
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "2b145f846105a7b972360041c31a94d1f01fdb4e756520a88b8248c44fef4f51",
       "bytes": 22719,
       "dependencies": [],
@@ -691,6 +739,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-iv05070405-9000639-001-r-path",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      },
       "sha256": "acacb9588329abd83d742ba0f558fafd84c0aad554c7c0ead1ead2f913345599",
       "bytes": 662400,
       "dependencies": [],
@@ -717,6 +775,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-iv05070405-9000639-001-r-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      },
       "sha256": "00474e4d21fded4b78524f21f7b4e25b34c9496cf1d413e2dbf27de1d8538cc5",
       "bytes": 32880,
       "dependencies": [],
@@ -743,6 +811,10 @@
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "f43b5c3747b1b2fbc55c696067dc5fdea036a0ae6286c64e32a495967fd41628",
       "bytes": 17827,
       "dependencies": [],
@@ -762,6 +834,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-iv05070405-9000654-001-r-path",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      },
       "sha256": "fc64a20ea7c923e0c208fb3597632182ceaa44a6d2a0f4656968a4e6e1b48afb",
       "bytes": 662400,
       "dependencies": [],
@@ -788,6 +870,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-iv05070405-9000654-001-r-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      },
       "sha256": "981707f100e66c0cb36c555ad2a9d269e18e19ddbf9a654fa0d2873c08dc98e1",
       "bytes": 32880,
       "dependencies": [],
@@ -814,6 +906,10 @@
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "3f7535c22735e89e43f77f77b32ee423ea0fb8a18bfeba6b2a43c137bdb4234d",
       "bytes": 14834,
       "dependencies": [],
@@ -833,6 +929,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-iv05070405-9000644-001-r-path",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
+          }
+        ]
+      },
       "sha256": "2f9aa28cc08a216e56884e950fc83fcb79f6480e695d0c4dc5e3f9933cfbd087",
       "bytes": 662400,
       "dependencies": [],
@@ -859,6 +965,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-iv05070405-9000644-001-r-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/24"
+          }
+        ]
+      },
       "sha256": "454beb14950398f963f0b7db0595cbc259993420296ed81fee65bd79f80a60cb",
       "bytes": 32880,
       "dependencies": [],
@@ -885,6 +1001,10 @@
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "696ffa2a70e8f1eb26b135d786af0789c6b7943f47f68bbaf1a111d63b8c8452",
       "bytes": 17997,
       "dependencies": [],
@@ -904,6 +1024,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-iv05070405-9000673-001-r-path",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/26"
+          }
+        ]
+      },
       "sha256": "26ecb6a0e4f51ea717f922aea44702585d73303c858771a8417368135a1ab026",
       "bytes": 662400,
       "dependencies": [],
@@ -930,6 +1060,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-iv05070405-9000673-001-r-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/27"
+          }
+        ]
+      },
       "sha256": "c07fa63ecc2bdb86466e5927419c94a966f5d2defaf79576d735db1b217b9d1c",
       "bytes": 32880,
       "dependencies": [],
@@ -956,6 +1096,10 @@
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "41a8b4f8558f50db5dfd8fa7e54aa2bee03d0c5f8a6ef1a0944d914314ef36e1",
       "bytes": 13379,
       "dependencies": [],
@@ -975,6 +1119,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-n30033te02-rr-path",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/29"
+          }
+        ]
+      },
       "sha256": "7b6b3ea7dc38f0c00430538caa172037ecfdb8a87aaf3bbd548c71102bd087bc",
       "bytes": 13665600,
       "dependencies": [],
@@ -1001,6 +1155,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-n30033te02-rr-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/30"
+          }
+        ]
+      },
       "sha256": "99e77ed612f4323d72076ddbf82fde723dd5093f779acd33183eb63c1f2bd97a",
       "bytes": 17520,
       "dependencies": [],
@@ -1027,6 +1191,10 @@
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "ff0de3863638c44954eec125b8ecedf6228d13a127913e575ea11ebf269bbd15",
       "bytes": 17740,
       "dependencies": [],
@@ -1046,6 +1214,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-n30039te02-rr-path",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+          }
+        ]
+      },
       "sha256": "7991991b7dbbb8c84b1f5777feb22d1687eb55453c719af64d533d466c1ce68a",
       "bytes": 13665600,
       "dependencies": [],
@@ -1072,6 +1250,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-n30039te02-rr-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
+      },
       "sha256": "99fb4fa6678e66610566b1137fbd62e120d5c6f58f6601066367191e1ba1a92c",
       "bytes": 17520,
       "dependencies": [],
@@ -1098,6 +1286,10 @@
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "90c0459b6a86faab62a1ca22e4bd3c079e3bae88e786d82260bb32925f577691",
       "bytes": 16354,
       "dependencies": [],
@@ -1117,6 +1309,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-n30036te02-rr-path",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      },
       "sha256": "3bad06293d092e0be85d473086dc7babdb5a00040fc449649d9603b2188fbe24",
       "bytes": 13665600,
       "dependencies": [],
@@ -1143,6 +1345,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-n30036te02-rr-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      },
       "sha256": "fa2b468b95fe75d16c432b42343168938f61f4b5785dbf9594579a7940373e92",
       "bytes": 17520,
       "dependencies": [],
@@ -1169,6 +1381,10 @@
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "0cf2cdb79d4e5a10173125aa102e628820ec61f31b15793490133dcea8c886e4",
       "bytes": 23080,
       "dependencies": [],
@@ -1188,6 +1404,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-n30042te02-rr-path",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
+          }
+        ]
+      },
       "sha256": "d2c82af5395924f21660bf3466f22b63173c3adf1ac23b0b533b54bbf2eb1a95",
       "bytes": 13665600,
       "dependencies": [],
@@ -1214,6 +1440,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-n30042te02-rr-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
+          }
+        ]
+      },
       "sha256": "bef821e9f2d607ed4ccf45722f0a5c854f73c9247e644bd6f2285f41ab7d7822",
       "bytes": 17520,
       "dependencies": [],
@@ -1240,6 +1476,10 @@
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "9e799a22bcfe3363817a606f77a5a9dbb60eaad94d1836221e65337d2e84447e",
       "bytes": 17694,
       "dependencies": [],
@@ -1259,6 +1499,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-n30045te02-rr-path",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/32"
+          }
+        ]
+      },
       "sha256": "40012e16420e8a54f1528b8281cc7547a80243ee7693b7ab0684261ff3bba2b4",
       "bytes": 13665600,
       "dependencies": [],
@@ -1285,6 +1535,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-n30045te02-rr-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/33"
+          }
+        ]
+      },
       "sha256": "73f982e326d08c0aa3b4c0921ad187ec5259187899eab514080534a5536ba408",
       "bytes": 17520,
       "dependencies": [],
@@ -1311,6 +1571,10 @@
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "3c0ce1af03d4a374b68c6cde5ae4fba4f8f9e8182272e8f2baffdd95a88ec781",
       "bytes": 17370,
       "dependencies": [],
@@ -1330,6 +1594,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-n30048te02-rr-path",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/35"
+          }
+        ]
+      },
       "sha256": "fe0f92dd79880c4e39d646277e06e957844de800b15747e9b92a7685f7e03506",
       "bytes": 13665600,
       "dependencies": [],
@@ -1356,6 +1630,16 @@
       ],
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-n30048te02-rr-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/36"
+          }
+        ]
+      },
       "sha256": "8bbcfa09263bf4109e3fcb9e44557451ca64a5c6ef4a419b0aca10f860c19aa2",
       "bytes": 17520,
       "dependencies": [],
@@ -1382,6 +1666,10 @@
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "1c07ba7d6547cb8e51d959fb38c6ba9bb3a4b020eb1b8b6020ab4f2d6bac9904",
       "bytes": 17360,
       "dependencies": [],
@@ -1392,6 +1680,10 @@
     {
       "path": "content/object.json",
       "purpose": "9P/Tempel 1 source evidence or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

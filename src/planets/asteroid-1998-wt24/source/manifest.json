@@ -1,5 +1,5 @@
 {
-  "schema": "cssasteroid-1998-wt24-authoritative-sources@1",
+  "schema": "cssasteroid-1998-wt24-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/asteroid-1998-wt24/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "asteroid-1998-wt24-shape",
@@ -41,7 +51,17 @@
       },
       "coverage": "The published model has uneven latitude coverage, including an unseen region near the north pole. Its small depressions and rounded outline are radar-derived geometry; no measured optical surface texture is supplied.",
       "expectedBytes": 248733,
-      "expectedSha256": "dade62d25e160a1d19099aae9b1e316946d034e7ae9d8cd234888c60387c37a8"
+      "expectedSha256": "dade62d25e160a1d19099aae9b1e316946d034e7ae9d8cd234888c60387c37a8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-asteroid-1998-wt24-asteroid-1998-wt24-shape",
+            "role": "material",
+            "evidence": "src/planets/asteroid-1998-wt24/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -58,7 +78,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/asteroid-1998-wt24/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "asteroid-1998-wt24-research-wt24",
@@ -73,7 +103,17 @@
         "rotation"
       ],
       "expectedBytes": 1152440,
-      "expectedSha256": "38233a2a6b90f545a644f45508fba7256fad53ac570268fafdaad52cab2d2306"
+      "expectedSha256": "38233a2a6b90f545a644f45508fba7256fad53ac570268fafdaad52cab2d2306",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-asteroid-1998-wt24-asteroid-1998-wt24-research-wt24",
+            "role": "method",
+            "evidence": "src/planets/asteroid-1998-wt24/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -108,7 +148,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 9446,
-      "expectedSha256": "18378301825528cbe8c2fad7e4f70384c4f53907ebfb026630c237a6ed3cc1a2"
+      "expectedSha256": "18378301825528cbe8c2fad7e4f70384c4f53907ebfb026630c237a6ed3cc1a2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "steins",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "34b6cf3a3879e3c03f7f6ab673121427f8a9194df7dd0fac9d47e98009c5ca24"
+    "sha256": "7085ca7e4c817614c8b7382356f5bb57b4297beb83e968d5379e1326fbc8f70a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -442,6 +442,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-steins-steins-normal",
+            "role": "material",
+            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "3362a9e73ddf7b4d11e9a4a2076e9c181d1c3e6e70a2ff71f742e27b6a96e9c9",
       "bytes": 725269,
       "dependencies": [],
@@ -478,6 +488,16 @@
         "referenceRadiusMeters": 2580
       },
       "coverage": "Closed published shape. Approximately60% was imaged; unseen areas are constrained by lightcurve inversion. Source contains an acknowledged artificial elevation step at the SPC/lightcurve seam.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-steins-steins-shape",
+            "role": "material",
+            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "4ef16c6d805336dc4dd878835e900b62c8ba4f0f8056da1ae18189cb6dc67aff",
       "bytes": 2470000,
       "dependencies": [],
@@ -505,6 +525,16 @@
       "license": "Public scientific archive; retain original notices and full source attribution.",
       "redistribution": "Attributed scientific display derivatives and original source records.",
       "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-steins-steins-observations-w20080905t183606461id4df17-img",
+            "role": "material",
+            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
       "sha256": "8bfed974937fd7efc870911d9d7c6c8e2938e56633f0987f51bcfbd1388678f6",
       "bytes": 615424,
       "dependencies": [],
@@ -529,6 +559,10 @@
       "license": "Public scientific archive; retain original notices and full source attribution.",
       "redistribution": "Attributed scientific display derivatives and original source records.",
       "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "3b855f3764ab7baa2606a03fa3495e84ee8f4e3f0971d7a8757e5f29371069e9",
       "bytes": 2899,
       "dependencies": [],
@@ -545,6 +579,16 @@
       "license": "Public scientific archive; retain original notices and full source attribution.",
       "redistribution": "Attributed scientific display derivatives and original source records.",
       "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-steins-steins-w20080905t183630497id4df17-img",
+            "role": "material",
+            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      },
       "sha256": "f3c3f69503c25b4508d9d9b3fc37a602b0d25b8b7c843016c099c31d72e1791d",
       "bytes": 615424,
       "dependencies": [],
@@ -572,6 +616,10 @@
       "license": "Public scientific archive; retain original notices and full source attribution.",
       "redistribution": "Attributed scientific display derivatives and original source records.",
       "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "c300b7604f69398ee30f89554bd79e5aaeaa722ef48e4fb58a9d0425ca87430e",
       "bytes": 2932,
       "dependencies": [],
@@ -582,6 +630,10 @@
     {
       "path": "content/object.json",
       "purpose": "Source evidence or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

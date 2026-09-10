@@ -1,14 +1,14 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "daphne",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d2f186dec76fbc295b7ad50cf3e8656f788b0c1e12e1e3131ccfaca72f2d01ff"
+    "sha256": "bffed89a3f7597bf960ec3b9afa2e8fab407c1b19ca1a63d12bd4a521730b36f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -322,6 +322,16 @@
         "referenceRadiusMeters": 93500
       },
       "coverage": "Closed MPCD shape from resolved VLT/SPHERE images and an ADAM starting model. Observational detail is nonuniform. The shared grid is an explicit no-imagery treatment.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-daphne-daphne-shape",
+            "role": "material",
+            "evidence": "src/planets/daphne/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "46e59ffff48f91e62bac9d3d3c195549698092e721b487e8187b0ae0980d026d",
       "bytes": 344059,
       "dependencies": [],
@@ -343,6 +353,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source evidence or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

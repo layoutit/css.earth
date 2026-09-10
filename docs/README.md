@@ -55,3 +55,5 @@ For a Git snapshot inventory of body records, retained HTML and duplicate bytes,
 run `python3 tools/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output /tmp/provenance-inventory.json`.
 This reads committed files; add `--index` to include the staged change. It does
 not acquire sources or qualify scientific claims.
+
+- [Sources catalogue](sources-catalogue.md): published identities, bindings, preparation and coverage.

@@ -1,14 +1,14 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "selam",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9b95b8d823e19e8a4bfefd0e6b4e76c9b90e490fb356fadf6665c6e1cd54b4e5"
+    "sha256": "bbb1bd4fed998f3163845fe66702e0af9a9fe0fbcb9a36d1fe683c79503c4e59"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -222,6 +222,16 @@
       "acquisition": "The checked-in shape/model.json transcribes the cited numerical dimensions; the shared ellipsoid preparer tessellates these parameters.",
       "redistribution": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
       "coverage": "Two touching ellipsoids reproduce the lobe dimensions inferred from Lucy images: 240 × 200 × 200 m and 280 × 220 × 210 m, each uncertain by about 10%. This is a smooth shape envelope; the neck, craters and surface imagery are unresolved in this representation.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1038-s41586-024-07378-0",
+            "role": "method",
+            "evidence": "src/planets/selam/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "7b5a16b99d453beddac8a2c98113f020732b1a9fbfd7299855a4a7ac4f920409",
       "bytes": 316,
       "dependencies": [],
@@ -232,6 +242,10 @@
     {
       "path": "content/object.json",
       "purpose": "Source evidence or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "transvaalia",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fe676b280720f67d09e944c1e455a70634b023213d7943d1a55c649a2bb09fa5"
+    "sha256": "e935201c7e316a11d8706525f0ddacf94ba31a3f0551b96ca8dd288df05be672"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -339,6 +339,16 @@
         "referenceRadiusMeters": 12729
       },
       "coverage": "Published convex light-curve model 3722. Approximate scale from a thermal diameter of 25.458 ± 0.591 km. Quoted fit error excludes about 20% survey systematic uncertainty and shape/aspect effects. The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-11680",
+            "role": "material",
+            "evidence": "src/planets/transvaalia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "e9273c2a279f53c89a3d5df3735e5c836f2e4edb88bef6cee4dce35b2874fd1e",
       "bytes": 46419,
       "dependencies": [],
@@ -358,6 +368,10 @@
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "sha256": "226343e8d47f3a21baf46c1fa9e5355fa5abb3974af3ca320dda6733ce06adc7",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

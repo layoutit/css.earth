@@ -3,7 +3,7 @@
 ## Lineage contract
 
 Every registered object uses the same `prepared/provenance.json` contract,
-`cssearth-object-provenance@2`. The Sources card reads this record. It does not
+`cssearth-object-provenance@3`. The Sources card reads this record. It does not
 infer inputs from factsheet citations, lens labels, URLs or publisher names.
 
 ## Ownership and data flow
@@ -146,3 +146,5 @@ Mercury coverage, Saturn material dependencies, Earth noise identity, preview
 inheritance, and preservation of source entries across the full registry.
 Those checks qualify this contract; they do not replace complete object or
 scientific qualification.
+
+Published identities and input bindings are maintained through the [Sources catalogue](sources-catalogue.md). Local input IDs, file pins and product lineage remain here.

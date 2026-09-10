@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "nysa",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b95d845684728357c48ceb7d737f540401d73b3e542351c446c1a342a4978cf2"
+    "sha256": "5eff6c11fdfb343a60594158f5222dd6f826e688c29ba3a96560a6446e27872d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -324,6 +324,16 @@
         "referenceRadiusMeters": 37500
       },
       "coverage": "Calibrated nonconvex ground-based reconstruction. The grid is an explicit no-imagery treatment; no small-scale surface detail is inferred.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-130725",
+            "role": "material",
+            "evidence": "src/planets/nysa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "49ddba465ca9b6391d7dc8299c49c2309a360f30268bece4d8c1a7adadee7fa5",
       "bytes": 129688,
       "dependencies": [],
@@ -342,6 +352,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

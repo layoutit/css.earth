@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "unitas",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "88795f380f7ec511459f004361a59a8e3f2f79ca83bbb10579db99cb5da830ad"
+    "sha256": "adf0ef9a24c21270a5f2a0e37930ba6fe83f74329f4f89de54ed12a7faa2f7df"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 24500
       },
       "coverage": "Convex light-curve reconstruction, 49 ± 5 km volume-equivalent diameter. The grid marks unavailable imagery; rotational phase is illustrative. The pole(79,−35) is preferred by both IRAS thermal fits and the2004 occultation negative chord. Delbo and Tanga2009 obtain a volume-equivalent thermal size range55–57 km, represented in DAMIT as56±1 km. The later Ďurech2011 Table3 fits the same pole family to five occultation chords at49±5 km. This explicit occultation volume scale is transferred uniformly to the archived shape; the distinct thermal estimate is retained as a comparison rather than silently averaged.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-578",
+            "role": "material",
+            "evidence": "src/planets/unitas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "e3b4f00f07c7daec58d937c2ec27613c00c336979c81241dcfeb593048bbca64",
       "bytes": 82708,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

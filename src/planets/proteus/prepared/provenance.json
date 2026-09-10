@@ -1,14 +1,14 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "proteus",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "36e2b4f56c519ec0eb55ecffd48d7bacd19ee5e239f31508e18ddadbbee68949"
+    "sha256": "6fbe806dbf321fa0244092565c5a00fc73c8870c5db462cf7e469130ea8c12bd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -515,6 +515,16 @@
         "longitudeDirection": "west-positive"
       },
       "coverage": "Radial height above a 208 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proteus-stooke-shape",
+            "role": "material",
+            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      },
       "sha256": "d079c8eac52d84224d5cb413526ff9415ab33afd48965e7e025544832ddd1868",
       "bytes": 70226,
       "dependencies": [],
@@ -559,6 +569,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11373xx-c1137317-geomed",
+            "role": "material",
+            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "2cbc85b09e7424100cc70ae04e2c3e6348de9c16e3d2b470cfcd3c80a6a7dcc5",
       "bytes": 2002000,
       "dependencies": [],
@@ -593,6 +613,16 @@
             "spacecraftId": "voyager-2",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.LBL",
             "missionId": "voyager-2"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11373xx-c1137317-geomed",
+            "role": "material",
+            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
       },
@@ -640,6 +670,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11389xx-c1138920-geomed",
+            "role": "material",
+            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "37251119522eb390347b918920b14621f9b28ec6aecd12ebe48d79d64fd4223b",
       "bytes": 2002000,
       "dependencies": [],
@@ -674,6 +714,16 @@
             "spacecraftId": "voyager-2",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.LBL",
             "missionId": "voyager-2"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11389xx-c1138920-geomed",
+            "role": "material",
+            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
         ]
       },
@@ -721,6 +771,16 @@
         "coordinates": "geometry/color-registration.json",
         "longitudeDirection": "west-positive"
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11373xx-c1137350-geomed",
+            "role": "material",
+            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      },
       "sha256": "f37a64e7ac1c2e9e141f59cd20fa2f34f517bcf0e657d0540a60b0a424769111",
       "bytes": 2002000,
       "dependencies": [],
@@ -755,6 +815,16 @@
             "spacecraftId": "voyager-2",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.LBL",
             "missionId": "voyager-2"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11373xx-c1137350-geomed",
+            "role": "material",
+            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
           }
         ]
       },
@@ -802,6 +872,16 @@
         "coordinates": "geometry/color-registration.json",
         "longitudeDirection": "west-positive"
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11373xx-c1137339-geomed",
+            "role": "material",
+            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      },
       "sha256": "bdd224a33a5c5f160ef7340b435cd554f0c1103beb1d9b239eaaf3566bc9b758",
       "bytes": 2002000,
       "dependencies": [],
@@ -836,6 +916,16 @@
             "spacecraftId": "voyager-2",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.LBL",
             "missionId": "voyager-2"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11373xx-c1137339-geomed",
+            "role": "material",
+            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
           }
         ]
       },
@@ -883,6 +973,16 @@
         "coordinates": "geometry/color-registration.json",
         "longitudeDirection": "west-positive"
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11373xx-c1137328-geomed",
+            "role": "material",
+            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      },
       "sha256": "963eeafe558de0d75d1afc2de2ca38558a1dfc4e4d1e322755bfe3d8b05e20de",
       "bytes": 2002000,
       "dependencies": [],
@@ -920,6 +1020,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11373xx-c1137328-geomed",
+            "role": "material",
+            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      },
       "sha256": "ab9d944237a41b7c3b5d432c0805d863b12538c1339ea13bd244aa2420afea42",
       "bytes": 3296,
       "dependencies": [],
@@ -937,6 +1047,10 @@
     {
       "path": "content/object.json",
       "purpose": "Authored source interpretation or preparation metadata.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

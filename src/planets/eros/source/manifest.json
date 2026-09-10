@@ -1,5 +1,5 @@
 {
-  "schema": "csseros-authoritative-sources@1",
+  "schema": "csseros-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/eros/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "eros-shape",
@@ -48,6 +58,16 @@
             "spacecraftId": "near-shoemaker",
             "missionId": "near-shoemaker",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eros-eros-shape",
+            "role": "material",
+            "evidence": "src/planets/eros/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
       }
@@ -86,6 +106,16 @@
             "evidence": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eros-eros-normal",
+            "role": "material",
+            "evidence": "src/planets/eros/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
       }
     },
     {
@@ -120,6 +150,16 @@
             "spacecraftId": "near-shoemaker",
             "missionId": "near-shoemaker",
             "evidence": "NEAR MSI filter 4 (950 nm); pinned eros_nearmsi_filter4.lbl and PDS4 XML in the Golish 2023 archive."
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eros-eros-infrared",
+            "role": "material",
+            "evidence": "src/planets/eros/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
         ]
       }
@@ -158,7 +198,11 @@
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 8561,
-      "expectedSha256": "e109d54d8fca87d8728247124508db74bfec5cbbc9a4b56ab0df9547c3a4b354"
+      "expectedSha256": "e109d54d8fca87d8728247124508db74bfec5cbbc9a4b56ab0df9547c3a4b354",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

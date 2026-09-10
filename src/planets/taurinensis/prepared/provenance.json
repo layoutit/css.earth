@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "taurinensis",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "995bab76cdb91790a9ae0138c62d8b54b8e3d8923e41771b28fbc7af99c109e9"
+    "sha256": "8768626ecd3d190f8c91b8678e349788715cacf3873a8046a04da0792b28278b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -352,6 +352,16 @@
         "referenceRadiusMeters": 10435
       },
       "coverage": "Convex lightcurve reconstruction at approximate thermal scale: 20.87 km effective diameter (catalog ±0.36 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes. AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-1914",
+            "role": "material",
+            "evidence": "src/planets/taurinensis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "23d5892b451e70763b68e7edc06b731de621fd79a98820621f63c11de034580e",
       "bytes": 82222,
       "dependencies": [],
@@ -370,6 +380,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

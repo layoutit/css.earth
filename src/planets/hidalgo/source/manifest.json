@@ -1,5 +1,5 @@
 {
-  "schema": "csshidalgo-authoritative-sources@1",
+  "schema": "csshidalgo-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/hidalgo/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "hidalgo-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Published convex light-curve model 1057. Approximate scale from a thermal diameter of 61.4 ± 12.7 km. Quoted uncertainty does not fully include thermal-model and viewing-geometry effects. The convex inversion resolves the broad shape; craters and concavities are unresolved.",
       "expectedBytes": 82708,
-      "expectedSha256": "8dcf880fd622ce2d704c95bae87e662a63ae63c5a92d4649ff232341222e4f00"
+      "expectedSha256": "8dcf880fd622ce2d704c95bae87e662a63ae63c5a92d4649ff232341222e4f00",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-3904",
+            "role": "material",
+            "evidence": "src/planets/hidalgo/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/hidalgo/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -95,7 +125,11 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 9003,
       "expectedSha256": "e0f8f558951f236d6805c56530f5e2d4969dbbf8206f7911c8ea6fd048b7b171",
-      "sha256": "f30c7a641723b33c5d7b9f14c451d70ee8b357a909bd640ec704b302918f703a"
+      "sha256": "f30c7a641723b33c5d7b9f14c451d70ee8b357a909bd640ec704b302918f703a",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

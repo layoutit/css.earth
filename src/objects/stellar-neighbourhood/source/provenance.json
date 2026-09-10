@@ -34,5 +34,24 @@
       "modifications": "Complete row set reordered into a spatial hierarchy; luminosity-weighted proxies and 32-color display quantization. No astrometry propagation."
     }
   ],
-  "qualification": "Local generated assets; no network publication. HYG astrometry is a local stellar neighbourhood, not a full Milky Way stellar census."
+  "qualification": "Local generated assets; no network publication. HYG astrometry is a local stellar neighbourhood, not a full Milky Way stellar census.",
+  "sourceBinding": {
+    "kind": "catalogued",
+    "references": [
+      {
+        "catalogueId": "hyg-v44",
+        "role": "material",
+        "evidence": "src/objects/stellar-neighbourhood/source/provenance.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/sources/0"
+      }
+    ]
+  },
+  "catalogueDisplay": {
+    "feature": "stars",
+    "label": "HYG",
+    "credit": "Star catalogue · David Nash / Astronexus · CC BY-SA 4.0.",
+    "description": "HYG Stellar Database by David Nash / Astronexus. Prepared derivatives licensed CC-BY-SA-4.0.",
+    "footerAliases": [
+      "https://codeberg.org/astronexus/hyg/raw/branch/main/data/hyg/CURRENT/LICENSE"
+    ]
+  }
 }

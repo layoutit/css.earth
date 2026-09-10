@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "sn263-gamma",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d42f63f999820d5af344d2e7b2128275e1acda095fcaaf6882fac7949aacf75f"
+    "sha256": "b3acbef16ed061a659d6cce106a806c4379eacbef1b14dc123ab06cf51be5954"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -257,6 +257,16 @@
         "latitudeType": "planetocentric",
         "referenceRadiusMeters": 224.2032362372403
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sn263-gamma-radar-shape",
+            "role": "material",
+            "evidence": "src/planets/sn263-gamma/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "d792dca903b3b557e97b22c00f788a5000847a0cfe251b43250b275859429f31",
       "bytes": 144480,
       "dependencies": [],
@@ -275,6 +285,10 @@
     {
       "path": "content/object.json",
       "purpose": "Source metadata, numerical interpretation or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

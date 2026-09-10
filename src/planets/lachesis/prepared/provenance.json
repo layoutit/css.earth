@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "lachesis",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9e088f943d0e05186fabec6f36cd48eb54b1e67e160c9abb121615e783bb9007"
+    "sha256": "8b875ab64aedec067fd04b70d336333f68d46530d90d7d363bdaaea45b507368"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 78265
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 156.53 km effective diameter (catalog ±1.67 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš2016 reports35 dense curves across four apparitions and467 sparse measurements. Hanuš2021 sparse-data result has period46.541 h versus archive46.55076 h, so the later survey is a comparison, not silently substituted geometry. The scene rotation is illustrative; no precision phase claim is made.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-3549",
+            "role": "material",
+            "evidence": "src/planets/lachesis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "71ab4e0c28a09ae451115ee438139b1772bdfcc1373ed9981d3fb216f6122262",
       "bytes": 81250,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

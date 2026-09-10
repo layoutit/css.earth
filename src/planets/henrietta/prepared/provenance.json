@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "henrietta",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "32c5711102d905ff12d1ff75ab817332b505372a28420d5306990b8789f89cde"
+    "sha256": "4de2c3e67daab35c890d7e15d5f9611c69fce675facfc9a76fee601d0acf79ed"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 53785
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 107.57 km effective diameter (catalog ±1.5 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative. ATLAS2015–2018 photometry gives448 orange and151 cyan measurements; convex and ellipsoid period searches agree. The selected release supplies one pole and an uncalibrated convex shape. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-54825",
+            "role": "material",
+            "evidence": "src/planets/henrietta/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "02061f1763d9d4005b8cf226e8abace734b5796a9ee5d651bf1e767ce8ab04f3",
       "bytes": 46419,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

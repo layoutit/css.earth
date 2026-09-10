@@ -1,5 +1,5 @@
 {
-  "schema": "cssgolevka-authoritative-sources@1",
+  "schema": "cssgolevka-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/golevka/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "golevka-shape",
@@ -41,7 +51,17 @@
       },
       "coverage": "The 1995 radar reconstruction resolves global shape at tens of meters. Its angular edges and concavities are modeled geometry, not measured optical texture; the archived Cartesian X/Y/Z extents correspond to the intermediate/long/short principal axes.",
       "expectedBytes": 123654,
-      "expectedSha256": "294881d2e3988029b35a9cef93e38e6b53cb02574b2c59df938759cf286af79d"
+      "expectedSha256": "294881d2e3988029b35a9cef93e38e6b53cb02574b2c59df938759cf286af79d",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-golevka-golevka-shape",
+            "role": "material",
+            "evidence": "src/planets/golevka/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -58,7 +78,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/golevka/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "golevka-research-golevka",
@@ -73,7 +103,17 @@
         "rotation"
       ],
       "expectedBytes": 665422,
-      "expectedSha256": "9c28c792ea386d85815ba3b034cd780c90ccca41266b28f3bde02a12357bdd5f"
+      "expectedSha256": "9c28c792ea386d85815ba3b034cd780c90ccca41266b28f3bde02a12357bdd5f",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-golevka-golevka-research-golevka",
+            "role": "method",
+            "evidence": "src/planets/golevka/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -108,7 +148,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 8984,
-      "expectedSha256": "640c0356e11f86da7a5f7695fd74aa14164683479b2869d7705b2e899d9f7a21"
+      "expectedSha256": "640c0356e11f86da7a5f7695fd74aa14164683479b2869d7705b2e899d9f7a21",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

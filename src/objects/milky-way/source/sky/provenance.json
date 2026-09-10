@@ -51,5 +51,21 @@
     "radiusM": 6.171355162982735e+20,
     "handoffCompleteDistanceM": 1.5428387907456837e+20,
     "meaning": "Visual depth approximation for continuous camera-relative parallax. NASA supplies angular radiance, not measured depths. One closed six-face shell reuses the prepared image bank; the volume replaces it by the time the observer reaches one quarter of the shell radius."
+  },
+  "sourceBinding": {
+    "kind": "catalogued",
+    "references": [
+      {
+        "catalogueId": "nasa-deep-star-maps-2020",
+        "role": "material",
+        "evidence": "src/objects/milky-way/source/sky/provenance.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/sourcePage"
+      }
+    ]
+  },
+  "catalogueDisplay": {
+    "feature": "sky",
+    "label": "NASA SVS",
+    "credit": "Deep Star Maps 2020 · NASA/Goddard, Ernie Wright (USRA), ESA/Gaia/DPAC.",
+    "description": "NASA Deep Star Maps 2020 — Milky Way-only celestial map. NASA/Goddard Space Flight Center Scientific Visualization Studio; Ernie Wright (USRA), visualizer; ESA/Gaia/DPAC, Gaia Data Release 2."
   }
 }
