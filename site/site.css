@@ -51,6 +51,15 @@ body {
   background: var(--shell-background);
 }
 
+.planet-world-stage {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  container-type: size;
+  isolation: isolate;
+  pointer-events: none;
+}
+
 .planet-stage {
   /* Divide fitted scales by 1 / .88 for consistent breathing room. */
   --planet-viewport-zoom-divisor: 1.136364;
@@ -66,6 +75,10 @@ body {
   overflow: hidden;
   background-color: var(--shell-background);
 }
+
+/* The selected detail occupies depth band 0..3. Persistent world bodies sit
+   before or after that band without inheriting its changing object selectors. */
+.planet-world-stage > .planet-stage { background-color: transparent; }
 
 .planet-stage > .planet-render-root {
   transform-origin: 50% 50%;
@@ -93,7 +106,7 @@ body.priming .planet-viewport::after {
 
 /* Initial loading hides unprepared content. A prepared scene handoff keeps the
    celestial view visible while incoming controls and materials settle. */
-html:not([data-scene-presented="true"]) .planet-stage { opacity: 0.001; }
+html:not([data-scene-presented="true"]) .planet-world-stage { opacity: 0.001; }
 
 .planet-input-surface {
   position: absolute;

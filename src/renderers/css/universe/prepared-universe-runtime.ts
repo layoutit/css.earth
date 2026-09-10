@@ -49,13 +49,13 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
   };
   return Object.freeze({ assets,
     createFramePlanner: () => createWorldContextPlannerClient(plan, undefined, annotationPriorities),
-    mount(stage: HTMLElement, requestPublication?: () => boolean) {
+    mount(stage: HTMLElement, requestPublication?: () => boolean, presentationHost: HTMLElement = stage) {
       const document = stage.ownerDocument;
       const root = document.createElement('div');
       root.className = 'prepared-universe';
       // Keep the background below every depth-sorted body in the isolated stage.
       root.style.cssText = `position:absolute;inset:0;pointer-events:none;z-index:${-plan.bodies.length - 2}`;
-      stage.insertBefore(root, stage.firstChild);
+      presentationHost.insertBefore(root, presentationHost.firstChild);
       const end = document.createElement('span'); end.hidden = true; root.appendChild(end);
       const volumeHost = document.createElement('div');
       volumeHost.className = 'prepared-volume-context';
@@ -104,11 +104,13 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
         volumeLayer = mountPreparedCssVolume({ host: volumeImage, before: volumeEnd, payload, resolveResource });
         pointField = mountPreparedCssPointField({ host: root, before: end, payload: stars, resolveResource: resolveStarResource, occluder: plan.focus, showLabels: false });
         for (const shell of shells) shellLayers.push(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell }));
-        // Billboards share the detail stage, so a nearer body can cover the selected detail.
-        spatial = mountPreparedWorldContext({ host: stage, before: root, plan, sprites, requestPublication, annotationPriorities });
+        // Keep picking/navigation on the shared input owner. Presentation can
+        // live outside the selected detail's changing CSS scope while sharing
+        // the same viewport and reserved depth band.
+        spatial = mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationPriorities });
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: stars, resolveResource: resolveStarResource, pickingHost: stage });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload) });
-        return Object.freeze({ root, destroy,
+        return Object.freeze({ root, roots: Object.freeze([root, spatial.root]), destroy,
           captureFrame: (world: WorldCameraPose, viewport: WorldCameraViewport) => spatial!.captureFrame(world, viewport),
           previewSelection(id?: string | null) { selectionPreview = id; spatial!.previewSelection(id); },
           setOverview(enabled: boolean) { overview = enabled; spatial!.setOverview(enabled); },

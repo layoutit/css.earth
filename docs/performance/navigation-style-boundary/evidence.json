@@ -1,0 +1,539 @@
+{
+  "baselineHead": "3badfb535c106afa80a0888a7e9f488f0d06506b",
+  "captures": {
+    "baseline-3badfb535": {
+      "synchronization": {
+        "video": "journey.mp4",
+        "recordingId": "9aaff2ac-5086-4fa9-8475-8ff612cdb405",
+        "anchors": [
+          {
+            "phase": "started",
+            "traceUs": 36993913698,
+            "recorderMs": 3619.8000000044703,
+            "offset": 36990293897.99999,
+            "pid": 28174
+          },
+          {
+            "phase": "stopped",
+            "traceUs": 37047331705,
+            "recorderMs": 57037.80000000447,
+            "offset": 36990293904.99999,
+            "pid": 28174
+          }
+        ],
+        "videoTimeOriginRecorderMs": 3650.23388671875,
+        "clockDriftUs": 7,
+        "maxPtsErrorMs": 1.1260742187514552,
+        "videoFrames": 2294,
+        "encodedFrames": 2294,
+        "traceDataLoss": false,
+        "errors": [],
+        "limitations": [
+          "Recorder and screencast add overhead.",
+          "Video observations and presentation intervals do not count every physical refresh.",
+          "Cold means first destination visits after Sun startup; warm repeats in the same document with natural camera continuity."
+        ],
+        "valid": true
+      },
+      "retained": {
+        "world": true,
+        "input": true,
+        "document": true,
+        "cameras": 1,
+        "selected": "sun"
+      },
+      "files": {
+        "trace.json.gz": {
+          "bytes": 90344136,
+          "sha256": "ba57b2b88fe0cb5b5778365e9d1e6b8994b95f480481bb66a37333f36f1dde86"
+        },
+        "journey.mp4": {
+          "bytes": 17615898,
+          "sha256": "86c406aefa5e6e05dbfbdcb8a708616168f282512ffc33d7f22ffec9aa78b1c9"
+        },
+        "cssearth-diagnostics-9aaff2ac-5086-4fa9-8475-8ff612cdb405.json": {
+          "bytes": 4638877,
+          "sha256": "437b936ff879c3f2c8a0b20a3bd1b7869babdbe0e2eb2a5764d91bfe510702bf"
+        },
+        "source.patch": {
+          "bytes": 2802,
+          "sha256": "aaf086f710de8525404de7e664850b83c583994c3fc801accc41bbdc7b3d125a"
+        },
+        "report.json": {
+          "bytes": 691111,
+          "sha256": "4be413145c8ecd1603da617f053611c1ea2533333fd8355fb4f5517d6be2c1f5"
+        }
+      }
+    },
+    "isolated-world-v3": {
+      "synchronization": {
+        "video": "journey.mp4",
+        "recordingId": "b64dfbad-388e-44cf-bc8b-b2bea6ce06b7",
+        "anchors": [
+          {
+            "phase": "started",
+            "traceUs": 39227000472,
+            "recorderMs": 3552.39999999851,
+            "offset": 39223448072,
+            "pid": 51491
+          },
+          {
+            "phase": "stopped",
+            "traceUs": 39281416273,
+            "recorderMs": 57968.19999999553,
+            "offset": 39223448073.00001,
+            "pid": 51491
+          }
+        ],
+        "videoTimeOriginRecorderMs": 3574.85888671875,
+        "clockDriftUs": 1.0000076293945312,
+        "maxPtsErrorMs": 1.160087890624709,
+        "videoFrames": 2318,
+        "encodedFrames": 2318,
+        "traceDataLoss": false,
+        "errors": [],
+        "limitations": [
+          "Recorder and screencast add overhead.",
+          "Video observations and presentation intervals do not count every physical refresh.",
+          "Cold means first destination visits after Sun startup; warm repeats in the same document with natural camera continuity."
+        ],
+        "valid": true
+      },
+      "retained": {
+        "world": true,
+        "input": true,
+        "document": true,
+        "cameras": 1,
+        "selected": "sun"
+      },
+      "files": {
+        "trace.json.gz": {
+          "bytes": 91361617,
+          "sha256": "6407a348a9bed1487a042336b0d767e0e0275497cdce0ce6dee5f44408981697"
+        },
+        "journey.mp4": {
+          "bytes": 17912828,
+          "sha256": "8bb9c9f8474e71535f8b7fc86dba4a9a3dc2fbfde82b82491eee519e96ce3076"
+        },
+        "cssearth-diagnostics-b64dfbad-388e-44cf-bc8b-b2bea6ce06b7.json": {
+          "bytes": 4808874,
+          "sha256": "79dee7ce121f1af8a692be1f2b6995522634743250f61393b131fd123555580d"
+        },
+        "source.patch": {
+          "bytes": 55839,
+          "sha256": "ed6240c7ac6c5ab0f62b23fa5529ab5d27b7f3b82994f0dd0519a4aad6cf9b97"
+        },
+        "report.json": {
+          "bytes": 690082,
+          "sha256": "720de570e8fbd39e4586a6204b934d3510cef6e63485ed815ed1145cccab0d5e"
+        }
+      }
+    },
+    "verified-world-boundary": {
+      "synchronization": {
+        "video": "journey.mp4",
+        "recordingId": "01643fef-85d8-4a5c-9abc-da28e15e80f1",
+        "anchors": [
+          {
+            "phase": "started",
+            "traceUs": 40783369931,
+            "recorderMs": 3603.5,
+            "offset": 40779766431,
+            "pid": 37581
+          },
+          {
+            "phase": "stopped",
+            "traceUs": 40837532702,
+            "recorderMs": 57766.30000000447,
+            "offset": 40779766401.99999,
+            "pid": 37581
+          }
+        ],
+        "videoTimeOriginRecorderMs": 3629.5009765625,
+        "clockDriftUs": -29.00000762939453,
+        "maxPtsErrorMs": 1.1399257812518044,
+        "videoFrames": 2306,
+        "encodedFrames": 2306,
+        "traceDataLoss": false,
+        "errors": [],
+        "limitations": [
+          "Recorder and screencast add overhead.",
+          "Video observations and presentation intervals do not count every physical refresh.",
+          "Cold means first destination visits after Sun startup; warm repeats in the same document with natural camera continuity."
+        ],
+        "valid": true
+      },
+      "retained": {
+        "world": true,
+        "input": true,
+        "document": true,
+        "cameras": 1,
+        "selected": "sun"
+      },
+      "files": {
+        "trace.json.gz": {
+          "bytes": 91428566,
+          "sha256": "feb63227d78b167d1ae8863c63c4f198f76bb552e823cdc3a67f51796807c541"
+        },
+        "journey.mp4": {
+          "bytes": 17861858,
+          "sha256": "0a8d6da2c94b0c56b84be72eb87433f4b45db7fcf3db7600e282f586eb4b403b"
+        },
+        "cssearth-diagnostics-01643fef-85d8-4a5c-9abc-da28e15e80f1.json": {
+          "bytes": 4798341,
+          "sha256": "a4b4245573bd365997ba5f0c8be9e94dba3ca41bba087f1fd311154eba42105f"
+        },
+        "source.patch": {
+          "bytes": 63681,
+          "sha256": "c0e1e58af6dc200bdc6174612fb309fd242790872154f734250e8a9128e74e95"
+        },
+        "report.json": {
+          "bytes": 690467,
+          "sha256": "ba004c39d6b0aa6c33beb57226118e245c9fb45a5551d004d8616261b44093ea"
+        }
+      }
+    }
+  },
+  "visual": {
+    "report": {
+      "baselineHead": "3badfb535c106afa80a0888a7e9f488f0d06506b",
+      "browser": "155.0.8048.0",
+      "errors": [],
+      "checkpoints": [
+        {
+          "variant": "baseline",
+          "name": "sun",
+          "active": "sun",
+          "overview": false,
+          "stage": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "camera": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "focal": 1727.72,
+          "cssFocal": 1727.72,
+          "worldInsideDetail": true,
+          "worldNodeCount": 7482,
+          "detailNodeCount": 109264,
+          "initialSunSheetRetained": true
+        },
+        {
+          "variant": "baseline",
+          "name": "overview",
+          "active": "sun",
+          "overview": true,
+          "stage": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "camera": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "focal": 1727.72,
+          "cssFocal": 1727.72,
+          "worldInsideDetail": true,
+          "worldNodeCount": 7482,
+          "detailNodeCount": 109264,
+          "initialSunSheetRetained": true
+        },
+        {
+          "variant": "baseline",
+          "name": "search",
+          "active": "sun",
+          "overview": true,
+          "stage": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "camera": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "focal": 1727.72,
+          "cssFocal": 1727.72,
+          "worldInsideDetail": true,
+          "worldNodeCount": 7482,
+          "detailNodeCount": 109264,
+          "initialSunSheetRetained": true
+        },
+        {
+          "variant": "baseline",
+          "name": "earth",
+          "active": "earth",
+          "overview": false,
+          "stage": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "camera": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "focal": 1727.72,
+          "cssFocal": 1727.72,
+          "worldInsideDetail": true,
+          "worldNodeCount": 7482,
+          "detailNodeCount": 109727,
+          "initialSunSheetRetained": false
+        },
+        {
+          "variant": "baseline",
+          "name": "portrait",
+          "active": "earth",
+          "overview": false,
+          "stage": [
+            0,
+            111,
+            700,
+            350
+          ],
+          "camera": [
+            0,
+            111,
+            700,
+            350
+          ],
+          "focal": 606.218,
+          "cssFocal": 606.218,
+          "worldInsideDetail": true,
+          "worldNodeCount": 7482,
+          "detailNodeCount": 109727,
+          "initialSunSheetRetained": false
+        },
+        {
+          "variant": "baseline",
+          "name": "cached-sun",
+          "active": "sun",
+          "overview": false,
+          "stage": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "camera": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "focal": 1727.72,
+          "cssFocal": 1727.72,
+          "worldInsideDetail": true,
+          "worldNodeCount": 7482,
+          "detailNodeCount": 109264,
+          "initialSunSheetRetained": false
+        },
+        {
+          "variant": "candidate",
+          "name": "sun",
+          "active": "sun",
+          "overview": false,
+          "stage": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "camera": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "focal": 1727.72,
+          "cssFocal": 1727.72,
+          "worldInsideDetail": false,
+          "worldNodeCount": 7482,
+          "detailNodeCount": 525,
+          "initialSunSheetRetained": true
+        },
+        {
+          "variant": "candidate",
+          "name": "overview",
+          "active": "sun",
+          "overview": true,
+          "stage": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "camera": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "focal": 1727.72,
+          "cssFocal": 1727.72,
+          "worldInsideDetail": false,
+          "worldNodeCount": 7482,
+          "detailNodeCount": 525,
+          "initialSunSheetRetained": true
+        },
+        {
+          "variant": "candidate",
+          "name": "search",
+          "active": "sun",
+          "overview": true,
+          "stage": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "camera": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "focal": 1727.72,
+          "cssFocal": 1727.72,
+          "worldInsideDetail": false,
+          "worldNodeCount": 7482,
+          "detailNodeCount": 525,
+          "initialSunSheetRetained": true
+        },
+        {
+          "variant": "candidate",
+          "name": "earth",
+          "active": "earth",
+          "overview": false,
+          "stage": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "camera": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "focal": 1727.72,
+          "cssFocal": 1727.72,
+          "worldInsideDetail": false,
+          "worldNodeCount": 7482,
+          "detailNodeCount": 988,
+          "initialSunSheetRetained": false
+        },
+        {
+          "variant": "candidate",
+          "name": "portrait",
+          "active": "earth",
+          "overview": false,
+          "stage": [
+            0,
+            111,
+            700,
+            350
+          ],
+          "camera": [
+            0,
+            111,
+            700,
+            350
+          ],
+          "focal": 606.218,
+          "cssFocal": 606.218,
+          "worldInsideDetail": false,
+          "worldNodeCount": 7482,
+          "detailNodeCount": 988,
+          "initialSunSheetRetained": false
+        },
+        {
+          "variant": "candidate",
+          "name": "cached-sun",
+          "active": "sun",
+          "overview": false,
+          "stage": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "camera": [
+            0,
+            0,
+            1995,
+            1236
+          ],
+          "focal": 1727.72,
+          "cssFocal": 1727.72,
+          "worldInsideDetail": false,
+          "worldNodeCount": 7482,
+          "detailNodeCount": 525,
+          "initialSunSheetRetained": false
+        }
+      ],
+      "reference": "Exact baseline JS/CSS bytes verified against the baseline capture; shared HTML with the new presentation wrapper reversed."
+    },
+    "pixelComparison": [
+      {
+        "name": "sun",
+        "pixels": 9863280,
+        "different": 653,
+        "maxChannelDelta": 7,
+        "above16": 0
+      },
+      {
+        "name": "overview",
+        "pixels": 9863280,
+        "different": 0,
+        "maxChannelDelta": 0,
+        "above16": 0
+      },
+      {
+        "name": "search",
+        "pixels": 9863280,
+        "different": 1,
+        "maxChannelDelta": 1,
+        "above16": 0
+      },
+      {
+        "name": "earth",
+        "pixels": 9863280,
+        "different": 268,
+        "maxChannelDelta": 1,
+        "above16": 0
+      },
+      {
+        "name": "portrait",
+        "pixels": 2800000,
+        "different": 126,
+        "maxChannelDelta": 1,
+        "above16": 0
+      },
+      {
+        "name": "cached-sun",
+        "pixels": 9863280,
+        "different": 655,
+        "maxChannelDelta": 7,
+        "above16": 0
+      }
+    ]
+  }
+}

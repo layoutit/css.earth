@@ -1,0 +1,38 @@
+{
+  "before": "output/playwright/navigation-consistency/baseline-3badfb535",
+  "after": "output/playwright/navigation-consistency/verified-world-boundary",
+  "results": [
+    {
+      "variant": "before",
+      "pass": "cold",
+      "count": 1557,
+      "p95": 19.24,
+      "max": 110.14,
+      "over25": 43
+    },
+    {
+      "variant": "before",
+      "pass": "warm",
+      "count": 1584,
+      "p95": 18.695,
+      "max": 113.125,
+      "over25": 44
+    },
+    {
+      "variant": "after",
+      "pass": "cold",
+      "count": 1597,
+      "p95": 19.039,
+      "max": 103.531,
+      "over25": 45
+    },
+    {
+      "variant": "after",
+      "pass": "warm",
+      "count": 1591,
+      "p95": 18.881,
+      "max": 111.992,
+      "over25": 40
+    }
+  ]
+}

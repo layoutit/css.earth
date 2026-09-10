@@ -5,3 +5,4 @@ export { loadPreparedCssVolume } from '../volume/loader.js';
 export { loadPreparedCssPointField } from '../stars/loader.js';
 export { loadPreparedCssSurfaceShell } from '../shell/loader.js';
 export { prepareObjectResources } from '../runtime/prepared-resource-lease.js';
+export { createRetainedGeometrySnapshot } from '../rendering/retained-leaf-pool.js';

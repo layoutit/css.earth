@@ -84,12 +84,14 @@ const seo = objectSeo(objectRecord);
     </div>
     {!navigation && <PlanetaryScale activeObjectId={objectRecord.id} />}
     <div class="planet-viewport">
+      <div class="planet-world-stage">
       <main
         class="planet-stage example-stage"
         data-object-id={objectRecord.id}
         aria-label={`Interactive 3D CSS visualization of ${objectRecord.name}`}
         aria-busy="true"
       ></main>
+      </div>
       <div class="planet-input-surface" tabindex="0" role="group" aria-label={`Explore ${objectRecord.name}`} />
       <div class="planet-scene-overlays"></div>
     </div>

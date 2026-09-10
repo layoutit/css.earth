@@ -106,14 +106,15 @@ try {
       }
       function sample(time) {
         const scene = stage.querySelector('.polycss-scene'), id = stage.dataset.objectId;
+        const world = stage.closest('.planet-world-stage');
         if (scene) {
           checkPose(scene, id, scene !== previousScene);
           previousScene = scene; previousId = id;
           previousDiagnostics = window[`__${id}`] ?? previousDiagnostics;
         }
         proof.frames.push({ time, id: stage.dataset.objectId, ready: document.documentElement.dataset.ready,
-          opacity: Number(getComputedStyle(stage).opacity), scenes: stage.querySelectorAll('.polycss-scene').length,
-          universes: stage.querySelectorAll('.prepared-universe').length });
+          opacity: Number(getComputedStyle(stage).opacity) * Number(getComputedStyle(world).opacity), scenes: stage.querySelectorAll('.polycss-scene').length,
+          universes: world.querySelectorAll('.prepared-universe').length });
         proof.raf = requestAnimationFrame(sample);
       }
       proof.raf = requestAnimationFrame(sample);

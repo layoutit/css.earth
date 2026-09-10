@@ -1,6 +1,6 @@
 import { mountSpaceMinimap } from './minimap/minimap.mjs';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mjs';
-import { createPreparedUniverse, createWorldFrameQueue, prepareObjectResources, loadPreparedCssVolume, loadPreparedCssPointField, loadPreparedCssSurfaceShell } from '../src/renderers/css/dist/universe.js';
+import { createPreparedUniverse, createWorldFrameQueue, createRetainedGeometrySnapshot, prepareObjectResources, loadPreparedCssVolume, loadPreparedCssPointField, loadPreparedCssSurfaceShell } from '../src/renderers/css/dist/universe.js';
 import applicationContext from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 import { contextMarkerSprite } from '../src/navigation/marker-presentation.mjs';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
@@ -76,7 +76,8 @@ export function createApplicationWorldContext() {
         await resources.ready;
         if (signal?.aborted) throw signal.reason;
         let refreshWorld = () => false;
-        layer = prepared.mount(stage, () => refreshWorld());
+        const presentationHost = stage.closest('.planet-world-stage') ?? stage;
+        layer = prepared.mount(stage, () => refreshWorld(), presentationHost);
         layer.setHiddenOrbits(cometIds);
         framePlanner = prepared.createFramePlanner();
         const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector('.planet-sidebar'));
@@ -107,7 +108,11 @@ export function createApplicationWorldContext() {
           } };
         });
         refreshWorld = () => frameQueue.refresh();
-        const diagnostics = DIAGNOSTICS_ENABLED ? Object.freeze({ inspect: layer.inspect, frames: frameQueue.stats }) : null;
+        // Shared membership is captured once for this owner's lifetime. Detail
+        // diagnostics no longer rescan these retained leaves at every arrival.
+        const diagnostics = DIAGNOSTICS_ENABLED ? Object.freeze({ inspect: layer.inspect, frames: frameQueue.stats,
+          ...(presentationHost === stage ? {} : {
+            geometry: createRetainedGeometrySnapshot(layer.roots.flatMap(root => [root, ...root.querySelectorAll('*')])) }) }) : null;
         if (diagnostics) target.__cssEarthUniverse = diagnostics;
         return { ...layer, viewport, publish,
           createFramePresenter() {

@@ -491,9 +491,17 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     ...distanceOrder.filter(item => item.dataset.objectClassification !== 'planet'),
   ];
   let activeCategory = tabs.find(tab => tab.getAttribute('aria-selected') === 'true')?.dataset.objectTab ?? 'planet';
-  // Reset the outgoing layout before changing result visibility. Hidden panels
-  // were reset when closed, so opening one needs no synchronous layout readback.
-  const resetResultsScroll = () => { if (!browser.hidden) resultsPanel.scrollTop = 0; };
+  // Scroll events arrive after layout. Retain that state so publishing an
+  // unchanged camera/selection never forces layout to write an already-zero offset.
+  let resultsScrolled = false;
+  const onResultsScroll = () => { resultsScrolled = resultsPanel.scrollTop !== 0; };
+  resultsPanel.addEventListener('scroll', onResultsScroll, { passive: true });
+  lifetime.onDispose(() => resultsPanel.removeEventListener('scroll', onResultsScroll));
+  const resetResultsScroll = () => {
+    if (!resultsScrolled) return;
+    resultsPanel.scrollTop = 0;
+    resultsScrolled = false;
+  };
   const selectTab = (classification, { focus = false, resetScroll = true } = {}) => {
     if (resetScroll) resetResultsScroll();
     if (classification !== activeCategory) {
@@ -543,13 +551,18 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
       button.ariaPressed = String(button.dataset.searchClassification === classification);
     }
   };
+  let filteredQuery = null, filteredClassification = null;
   const filter = (resetScroll = true) => {
-    if (resetScroll) resetResultsScroll();
-    markCategory();
     // Search text belongs to the user; the card context is only a fallback.
     const query = (browsing ? search.value.trim().toLocaleLowerCase("en") : "")
       || (overview ? overviewName().toLocaleLowerCase("en") : "");
     setPanelHidden(information, query.length > 0);
+    setPanelHidden(browser, query.length === 0);
+    if (query === filteredQuery) { markCategory(filteredClassification); return; }
+    filteredQuery = query;
+    filteredClassification = null;
+    if (resetScroll) resetResultsScroll();
+    markCategory();
     destinations?.setOpen(query.length > 0);
     const galactic = query === 'milky way';
     if (galaxy) setPanelHidden(galaxy, !galactic);
@@ -565,6 +578,7 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
       const name = item.dataset.objectClassificationName;
       return name && (query === name || query === `${name}s` || query === item.dataset.objectClassification);
     })?.dataset.objectClassification;
+    filteredClassification = classification;
     markCategory(classification);
     const systemName = items.find(item =>
       query === item.dataset.objectSystemName)?.dataset.objectSystemName;
@@ -596,16 +610,18 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     empty.hidden = visibleObjects !== 0 || Boolean(destinations && !classification && !showAll);
   };
   const render = (next, { resetQuery = false } = {}) => {
-    resetResultsScroll();
     if (!next) browsing = false;
     if (overview && !next) next = true;
+    if (open !== next) resetResultsScroll();
     open = next;
     if (next && resetQuery) search.value = "";
     destinations?.setOpen(next);
-    setPanelHidden(information, next);
-    setPanelHidden(browser, !next);
-    if (next) filter(false);
-    else markCategory();
+    if (next) filter();
+    else {
+      setPanelHidden(information, false);
+      setPanelHidden(browser, true);
+      markCategory();
+    }
   };
 
   trigger.addEventListener("click", () => {

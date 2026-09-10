@@ -18,10 +18,11 @@ try {
       window.__productionSamples = [];
       const sample = () => {
         const stage = document.querySelector('.planet-stage');
+        const world = stage.closest('.planet-world-stage');
         const scene = document.querySelector('.planet-stage [class$="-scene"]');
         window.__productionSamples.push({ count: document.querySelectorAll('.polycss-camera').length,
-          transform: scene?.style.transform, opacity: Number(getComputedStyle(stage).opacity),
-          universes: stage.querySelectorAll('.prepared-universe').length });
+          transform: scene?.style.transform, opacity: Number(getComputedStyle(stage).opacity) * Number(getComputedStyle(world).opacity),
+          universes: world.querySelectorAll('.prepared-universe').length });
         window.__productionFrame = requestAnimationFrame(sample);
       };
       sample();

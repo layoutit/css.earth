@@ -88,6 +88,32 @@ function mount(scale: number, requestPublication?: () => boolean) {
   return layer.root as unknown as FakeElement;
 }
 
+test('world presentation leaves the detail scope while retaining its input registry and focus updates', () => {
+  const document = new FakeDocument(), host = document.createElement('main'), presentationHost = document.createElement('section');
+  presentationHost.append(host);
+  const request = vi.fn(() => true);
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, presentationHost: presentationHost as unknown as HTMLElement,
+    before: host as unknown as Element, plan: plan(1), sprites: { sun: sprite, mercury: sprite, venus: sprite }, requestPublication: request });
+  const world = { referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000] as const, orientationXyzw: [0, 0, 0, 1] as const } };
+  const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const, widthPixels: 800, heightPixels: 600 };
+  layer.publish(world, viewport);
+  expect(host.children).toHaveLength(0);
+  expect((layer.root as unknown as FakeElement).parentNode).toBe(presentationHost);
+  expect(screenPicking(host as unknown as HTMLElement).pick(30, -20)).not.toBeNull();
+  expect(screenPicking(presentationHost as unknown as HTMLElement).pick(30, -20)).toBeNull();
+  const stale = layer.captureFrame(world, viewport);
+  presentationHost.dispatchEvent(new Event('focusin'));
+  document.defaultView.advance(16);
+  expect(stale.current()).toBe(false);
+  expect(request).toHaveBeenCalledOnce();
+  layer.destroy();
+  presentationHost.dispatchEvent(new Event('focusin'));
+  document.defaultView.advance(16);
+  expect(request).toHaveBeenCalledOnce();
+  expect(presentationHost.children).toEqual([host]);
+});
+
 test('semantic changes invalidate worker snapshots without synchronously republishing geometry', () => {
   const request = vi.fn(() => true), root = mount(1, request), layer = mounted.get(root)!;
   const clock = root.ownerDocument.defaultView;

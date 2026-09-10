@@ -284,8 +284,9 @@ export function preparedVolumeOpacity(distanceM: number, profile?: PreparedVolum
 }
 
 /** Existing retained segment/sprite rendering, driven by the same observer as the detailed body. */
-export function mountPreparedWorldContext({ host, before, plan, sprites, requestPublication, annotationPriorities = {} }: {
+export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationPriorities = {} }: {
   host: HTMLElement; before: Element; plan: PreparedWorldContext; sprites: Readonly<Record<string, SpriteWithUrl>>;
+  presentationHost?: HTMLElement;
   requestPublication?: () => boolean;
   annotationPriorities?: Readonly<Record<string, number>>;
 }) {
@@ -293,7 +294,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites, request
   root.className = 'prepared-world-context';
   root.style.cssText = 'position:absolute;inset:0;pointer-events:none';
   root.dataset.worldContext = plan.focus.id;
-  host.insertBefore(root, before);
+  presentationHost.insertBefore(root, before);
   const picking = screenPicking(host);
   let presentationRevision = 0;
   let pickTargets: ScreenPickTarget[] = [];
@@ -673,9 +674,11 @@ export function mountPreparedWorldContext({ host, before, plan, sprites, request
     },
     destroy() { if (!destroyed) { destroyed = true; picking.remove(root);
       if (annotationFrame !== null) windowTarget.cancelAnimationFrame(annotationFrame);
-      for (const event of ['objecthoverchange', 'focusin', 'focusout']) host.removeEventListener(event, refreshAnnotations);
+      host.removeEventListener('objecthoverchange', refreshAnnotations);
+      for (const event of ['focusin', 'focusout']) presentationHost.removeEventListener(event, refreshAnnotations);
       markerResize?.disconnect(); fader.destroy(); lineFader.destroy(); fonts?.removeEventListener('loadingdone', invalidateLabelSizes); labelExclusions = []; backgroundExclusions = []; for (const entry of bodies) { clearHide(entry.fade); entry.navigation.destroy(); entry.indicatorNavigation.destroy(); entry.labelNavigation.destroy(); entry.orbitNavigation?.destroy(); } root.remove(); } },
   });
-  for (const event of ['objecthoverchange', 'focusin', 'focusout']) host.addEventListener(event, refreshAnnotations);
+  host.addEventListener('objecthoverchange', refreshAnnotations);
+  for (const event of ['focusin', 'focusout']) presentationHost.addEventListener(event, refreshAnnotations);
   return layer;
 }

@@ -104,6 +104,10 @@ export function mountDiagnosticRecorder({ documentTarget: d, windowTarget: w, re
     const camera = readCamera();
     const view = runtime?.runtime.view() ?? null;
     const requestedCamera = camera?.navigation?.capture() ?? null;
+    const detailGeometry = geometry();
+    const worldGeometry = w.__cssEarthUniverse?.geometry?.();
+    const totalGeometry = worldGeometry ? Object.fromEntries(Object.keys(detailGeometry)
+      .map(key => [key, detailGeometry[key] + worldGeometry[key]])) : detailGeometry;
     return {
       active: id ?? null, selected: app?.selectedObjectId ?? null, overview: app?.overview ?? null,
       mountedObjects: app?.mountedObjectCount ?? null, lifecycle: app?.lifecycle ?? null,
@@ -112,7 +116,8 @@ export function mountDiagnosticRecorder({ documentTarget: d, windowTarget: w, re
       framePublication: runtime?.camera?.publication?.() ?? null, worldFrames: w.__cssEarthUniverse?.frames?.() ?? null,
       view, selection: runtime?.runtime.selection() ?? null,
       resources: runtime?.runtime.resources() ?? null, materials: runtime?.material.state() ?? null,
-      geometry: geometry(),
+      geometry: totalGeometry,
+      geometryOwners: { detail: detailGeometry, world: worldGeometry ?? null },
     };
   };
   const api = createDiagnosticRecorder({ windowTarget: w, button, capture,

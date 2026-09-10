@@ -104,6 +104,37 @@ test('retained catalogue groups follow filters and release their visibility obse
   assert.equal(observer.disconnected, true);
 });
 
+test('camera handoffs retain filtered results and reset only a scrolled results panel', () => {
+  const f = fixture(), browser = f.selectors.get('.planet-object-browser');
+  const results = browser.querySelector('#object-category-results');
+  let scrollTop = 0, scrollWrites = 0, countWrites = 0;
+  Object.defineProperty(results, 'scrollTop', {
+    get: () => scrollTop,
+    set(value) { scrollTop = value; scrollWrites++; },
+  });
+  for (const tab of browser.querySelectorAll('[data-object-tab]')) {
+    Object.defineProperty(tab.querySelector('.planet-object-tab-count'), 'textContent', {
+      set() { countWrites++; },
+    });
+  }
+  const shell = f.mount();
+  shell.setOverview(true);
+  const publishedCounts = countWrites;
+  shell.setCamera({ navigation: { capture: () => null, subscribe: () => () => {} } });
+  shell.setOverview(true);
+  assert.equal(countWrites, publishedCounts, 'The same catalogue query is not republished at camera handoff');
+  assert.equal(scrollWrites, 0, 'An unscrolled catalogue never triggers a synchronous scroll reset');
+  scrollTop = 120;
+  results.dispatchEvent(new Event('scroll'));
+  shell.setOverview(false);
+  assert.equal(scrollTop, 0, 'Closing a scrolled catalogue restores its next opening position');
+  assert.equal(scrollWrites, 1);
+  shell.setOverview(true);
+  assert.equal(browser.hidden, false, 'Cached results reopen without another filter');
+  assert.equal(countWrites, publishedCounts);
+  shell.destroy();
+});
+
 test('Asteroids Orbits starts off and retains its independent preference across body navigation', () => {
   const changes = [], f = fixture({ onAsteroidOrbitsChange: value => changes.push(value) }), shell = f.mount();
   const toggle = f.selectors.get('.planet-asteroid-orbits-setting');
@@ -492,6 +523,9 @@ test('category pills reuse search, retain the query through navigation, and dism
   assert.equal(f.documentTarget.activeElement, search);
   assert.equal(browser.hidden, true);
   assert.ok(buttons.every(button => button.ariaPressed === 'false'));
+  f.selectors.get('.planet-sidebar-view-all').dispatchEvent(new Event('click'));
+  assert.equal(browser.hidden, false, 'Reopening a retained query shows its results');
+  assert.equal(buttons[2].ariaPressed, 'true', 'Reopening a cached category restores its selected chip');
   shell.destroy();
   assert.ok(buttons.every(button => button.listeners.size === 0));
 });
