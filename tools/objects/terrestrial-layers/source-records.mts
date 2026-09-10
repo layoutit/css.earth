@@ -131,8 +131,9 @@ export const parseContactModel = shape({schema:text,origin:text,lobes:array(shap
 export function choice<const T extends readonly string[]>(...values: T): Decoder<T[number]> { return value => {const match=values.find(item=>item===value);if(match===undefined)throw new TypeError('Unsupported source choice');return match;}; }
 export const parseEncounterControl = shape({bodyToJ2000:array(array(number)),offsetPixels:array(number),maximumOffsetPixels:number});
 export const parseEncounterRegistration = shape({sourceShapeSha256:text,method:text,maximumRmsMeters:number,maximumResidualMeters:number,
+  reference:optional(shape({id:text,imageSha256:text,controlSha256:text})),
   nominalPixelScaleMeters:number,limitations:text,controls:array(shape({id:text,partition:choice('fit','holdout'),sourcePointMeters:array(number),
-    sourcePixel:array(number),projectionOffsetPixels:optional(array(number)),normal:optional(array(number))}))});
+    sourcePixel:array(number),referencePixel:optional(array(number)),projectionOffsetPixels:optional(array(number)),normal:optional(array(number))}))});
 export const sipCameraFields = {matrix:array(array(number)),sip:shape({referencePixel:array(number),a:array(array(number)),b:array(array(number)),offsetPixels:array(number)})};
 export const parseSipCamera = shape(sipCameraFields);
 export const parseLlorriCamera = shape({...sipCameraFields,imageSha256:text,startTime:text,width:number,height:number});
