@@ -1,5 +1,6 @@
 import { mkdir as ensureReportDirectory } from 'node:fs/promises';
-await ensureReportDirectory('output/distant-worlds', {recursive:true});
+const reportDirectory=process.env.CSSEARTH_AUDIT_OUTPUT ?? 'output/distant-worlds';
+await ensureReportDirectory(reportDirectory, {recursive:true});
 import assert from 'node:assert/strict';
 import {readFile,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
@@ -27,5 +28,5 @@ for(const {id} of OBJECTS){
 // Empty selection skips presentation compilation and refreshes contexts from
 // the already finalized descriptor frames through the existing context owner.
 await prepareObjectJson([]);
-await writeFile('output/distant-worlds/transports.json',JSON.stringify(results,null,2)+'\n');
+await writeFile(`${reportDirectory}/transports.json`,JSON.stringify(results,null,2)+'\n');
 console.log('Marker bindings, transports and contexts refreshed:',results.length,'; zero presentation recompiles');

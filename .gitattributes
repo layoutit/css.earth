@@ -62,3 +62,11 @@ src/planets/*/source/cassini-ice/evidence/*.html -text -whitespace
 
 # Preserve original Diviner GHRM product labels byte-for-byte.
 src/planets/moon/source/science/diviner-ghrm/*.xml -text -whitespace
+
+# Original Horizons records for the occultation and thermal-size models.
+src/planets/ixion/source/reference/horizons-*.txt -text -whitespace
+src/planets/huya/source/reference/horizons-*.txt -text -whitespace
+src/planets/asteroid-2003-vs2/source/reference/horizons-*.txt -text -whitespace
+src/planets/asteroid-2002-tc302/source/reference/horizons-*.txt -text -whitespace
+src/planets/asteroid-2002-tx300/source/reference/horizons-*.txt -text -whitespace
+src/planets/deedee/source/reference/horizons-*.txt -text -whitespace

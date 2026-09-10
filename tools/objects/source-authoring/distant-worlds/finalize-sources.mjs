@@ -13,7 +13,9 @@ import { renderRadialSnapshot } from '../../../../tools/objects/terrestrial-laye
 import { paintMissingCoverage } from '../../../../src/platform/prepare-missing-coverage.mjs';
 const root = resolve(import.meta.dirname, '../../../..');
 if (process.cwd() !== root) throw new Error('Run from the repository root.');
-const { bodies } = JSON.parse(await readFile('tools/objects/source-authoring/distant-worlds/inputs.json'));
+const inputIndex = process.argv.indexOf('--inputs');
+if (inputIndex >= 0 && !process.argv[inputIndex + 1]) throw new Error('--inputs requires a JSON path.');
+const { bodies } = JSON.parse(await readFile(inputIndex >= 0 ? process.argv[inputIndex + 1] : 'tools/objects/source-authoring/distant-worlds/inputs.json'));
 const hash = data => createHash('sha256').update(data).digest('hex');
 const write = (path, value) => writeFile(path, Buffer.isBuffer(value) ? value : JSON.stringify(value, null, 2) + '\n');
 const files = async path => (await Promise.all((await readdir(path, {withFileTypes:true})).map(e => e.isDirectory() ? files(resolve(path,e.name)) : [resolve(path,e.name)]))).flat();

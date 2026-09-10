@@ -1,7 +1,7 @@
 # Check distant-world packages
 
 Run these helpers from the repository root with the supported Node version.
-They cover the nine models listed in the
+By default they cover the nine models listed in the
 [source-authoring inputs](../../objects/source-authoring/distant-worlds/inputs.json).
 Reports and captures are written to ignored `output/`; retain selected evidence
 with its tested revision and link it from the affected body's README.
@@ -15,7 +15,19 @@ with its tested revision and link it from the affected body's README.
 | `browser-check.mjs` | Production default views at DPR 1/2, retained drag and navigation |
 | `final-interactions.mjs` | World-marker selection, designation searches, lighting and mobile layout |
 | `drag-trace.mjs` | Headless interaction trace using the shared browser launch and trace parser |
-| `contact-sheet.mjs` | Nine-model overview from the actual DPR 1 default captures |
+| `contact-sheet.mjs` | Overview from the selected actual DPR 1 default captures |
+
+Select another authored batch without copying the checks:
+
+```sh
+export CSSEARTH_AUDIT_INPUTS=tools/objects/source-authoring/outer-worlds/inputs.json
+export CSSEARTH_AUDIT_OUTPUT=output/outer-worlds
+export CSSEARTH_AUDIT_CAPTURES=output/playwright/outer-worlds
+```
+
+These variables apply to `qualify`, `fresh-sources`, `fresh-install`,
+`surface-fit`, `browser-check` and `contact-sheet`. `final-interactions`
+retains its original named scenarios. `contact-sheet` writes `worlds.webp`.
 
 For example, `node tools/audits/distant-worlds/qualify.mjs` reads the current
 prepared packages. `python3 tools/audits/distant-worlds/surface-fit.py` compares
@@ -23,7 +35,7 @@ them with the adopted ellipsoids. Its finite samples are not a Hausdorff bound
 or a scientific measurement uncertainty.
 
 Fresh-source and fresh-runtime checks require empty destinations beneath
-`output/distant-worlds/`. The browser checks use the existing production preview
+the selected report directory (by default `output/distant-worlds/`). The browser checks use the existing production preview
 on port 4278; `browser-check.mjs` uses the fresh runtime installation. They do
 not start a server. Run only one acquisition, build, preparation or browser
 capture at a time. `drag-trace.mjs` accepts origin, DPR, output directory and

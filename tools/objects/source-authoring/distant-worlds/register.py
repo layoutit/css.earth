@@ -1,9 +1,9 @@
 """Register this batch through the existing catalogue, astronomy and scene owners."""
 from pathlib import Path
-import json, re
+import json, re, sys
 
 ROOT=Path(__file__).resolve().parents[4]
-bodies=json.loads((ROOT/'tools/objects/source-authoring/distant-worlds/inputs.json').read_text())['bodies']
+bodies=json.loads((ROOT/(sys.argv[1] if len(sys.argv)>1 else 'tools/objects/source-authoring/distant-worlds/inputs.json')).read_text())['bodies']
 def update(path, transform):
     p=ROOT/path; old=p.read_text(); new=transform(old)
     if old!=new:p.write_text(new)

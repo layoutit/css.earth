@@ -36,6 +36,14 @@ astronomy catalog and Sun navigation data. It is unnecessary for an existing
 registered body. `finalize-sources.mjs --refresh-pins` only refreshes source
 pins; omitting that flag also prepares title and context source images.
 
+`author.py` and `register.py` accept an input JSON path as their first argument;
+`finalize-sources.mjs` accepts `--inputs <path>`. This selects the exact bodies
+to rewrite. The six later models use [outer-worlds/inputs.json](../outer-worlds/inputs.json).
+An input file may set `referenceDirectory` for its downloaded originals.
+After new astronomy records are built, run `node tools/prepare-solar-geometry.mjs`
+before preparing their surfaces. `refresh-transports.mjs` accepts
+`CSSEARTH_AUDIT_OUTPUT` for its receipt directory.
+
 The extraction samples the analytical ellipsoid on a 5° longitude/latitude
 grid. The existing terrestrial recipe and meshoptimizer reduce its 5,040
 triangles to 480 native PolyCSS `u` raster triangles. The normal grid marks
@@ -57,5 +65,9 @@ reuse rests on unchanged source, prepared data and shared runtime dependencies.
 
 The initial marker-preservation experiment used the historical
 [navigation helper](https://github.com/layoutit/cssEarth/blob/5ccf1eafa396d7cbe91e62b28fe81db8c0626a35/docs/lucy-targets/navigation.mjs)
-against its recorded base. Use the maintained shared navigation preparer for
-future atlas changes, rather than depending on that historical experiment.
+against its recorded base. Its maintained version is
+[`navigation-additions.mjs`](../navigation-additions.mjs). For a batch that
+only adds markers, pass `--base=<commit> --inputs=<json> --evidence=<json>`.
+It uses the shared marker renderer, verifies unchanged existing recipes and
+preserves their atlas pixels. Use the shared full navigation preparer when
+existing marker recipes change.

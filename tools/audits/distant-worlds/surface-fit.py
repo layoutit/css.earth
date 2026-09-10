@@ -1,8 +1,9 @@
 """Finite radial samples against the adopted analytical models, not a Hausdorff proof."""
-import json, math
+import json, math, os
 from pathlib import Path
-Path('output/distant-worlds').mkdir(parents=True,exist_ok=True)
-bodies=json.loads(Path('tools/objects/source-authoring/distant-worlds/inputs.json').read_text())['bodies']
+output=Path(os.environ.get('CSSEARTH_AUDIT_OUTPUT','output/distant-worlds'))
+output.mkdir(parents=True,exist_ok=True)
+bodies=json.loads(Path(os.environ.get('CSSEARTH_AUDIT_INPUTS','tools/objects/source-authoring/distant-worlds/inputs.json')).read_text())['bodies']
 results=[]
 for b in bodies:
     terrain=json.loads(Path(f'src/planets/{b["id"]}/prepared/terrain.json').read_text())
@@ -25,5 +26,5 @@ for b in bodies:
     results.append(dict(id=b['id'],samples=len(errors),maximumSampledRadialErrorMeters=max_error,
       maximumShareOfModelRadius=max_error/(b['radiusKm']*1000),fullAxesKm=b['fullAxesKm'],
       meshBoundsMeters=[[min(p[a] for p in points),max(p[a] for p in points)] for a in range(3)]))
-Path('output/distant-worlds/surface-fit.json').write_text(json.dumps(dict(scope='Vertices, edge midpoints and triangle centroids compared radially with the adopted published/illustrative ellipsoid. This finite sample does not bound all surface distances and is not a Hausdorff proof.',results=results),indent=2)+'\n')
-print('Nine adopted ellipsoids: finite radial deviations recorded separately from meshoptimizer error; closed connected topology.')
+(output/'surface-fit.json').write_text(json.dumps(dict(scope='Vertices, edge midpoints and triangle centroids compared radially with the adopted published/illustrative ellipsoid. This finite sample does not bound all surface distances and is not a Hausdorff proof.',results=results),indent=2)+'\n')
+print(len(bodies), 'adopted ellipsoids: finite radial deviations recorded separately from meshoptimizer error; closed connected topology.')
