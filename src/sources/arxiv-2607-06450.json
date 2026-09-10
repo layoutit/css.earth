@@ -1,0 +1,29 @@
+{
+  "id": "arxiv-2607-06450",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · arXiv 2607.06450",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2607.06450"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2607.06450",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/quaoar/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "657465112fec842b0f3e320cf0688eb746f0b258e313ec0323c5809ab1883c19",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

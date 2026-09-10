@@ -1,0 +1,29 @@
+{
+  "id": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2060-data-1646318829-1646527563-n1646319549-1-calib",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PDS archive product · N1646319549_1_CALIB",
+  "identifiers": [
+    {
+      "type": "PDS archive resource path",
+      "value": "/holdings/calibrated/COISS_2xxx/COISS_2060/data/1646318829_1646527563/N1646319549_1_CALIB"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1646318829_1646527563/N1646319549_1_CALIB.LBL",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/helene/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "c3d247a195ec0013211cefbb123303d2df76a84f7eee570e579178b654e3eeaf",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

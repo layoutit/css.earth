@@ -1,0 +1,24 @@
+{
+  "id": "source-donaldjohanson-donaldjohanson-observations-lor-0798443290-04598-00035-1x1-sci-03-fit",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Donaldjohanson · donaldjohanson observations lor_0798443290_04598_00035_1x1_sci_03 fit",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443290_04598_00035_1x1_sci_03.fit",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/donaldjohanson/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "d21c753d2677fe37478aee56c2ca7e2231755e40dc1260904f78f859d7fdb19c",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-3075",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 3075 · Cybele",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "3075"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3075/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/cybele/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "22481afd29115f129c7932feef3f3272aa204201a2c44d1c131a34780fe6e6c5",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

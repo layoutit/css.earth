@@ -1,0 +1,24 @@
+{
+  "id": "source-dimorphos-dimorphos-relative-albedo",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Dimorphos · dimorphos relative albedo",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/dimorphos/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "6eae21ce420d8fe6af683c7013a139b8c8326c1162125167eef93c3a891564d8",
+      "locator": "/inputs/4"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

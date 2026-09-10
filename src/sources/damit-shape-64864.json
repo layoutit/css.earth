@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-64864",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 64864 · Thisbe",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "64864"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/64864/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/thisbe/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "247faa8f4a3abad641300e6a78b7736e37c3c6f767935cdbf3fe3032ee3efd0d",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

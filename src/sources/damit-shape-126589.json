@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-126589",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 126589 · Sapientia",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "126589"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/126589/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/sapientia/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "0fae2783639d50f540976a0ab64629e6f71b5c801dbafbd6c669359d14fc8a5d",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

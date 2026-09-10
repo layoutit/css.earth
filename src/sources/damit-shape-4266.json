@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-4266",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 4266 · Virtanen",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "4266"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/4266/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/virtanen/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "cc107cd03df3a357b937495721ea594c884681693c5316bef79cb94db762e3ec",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

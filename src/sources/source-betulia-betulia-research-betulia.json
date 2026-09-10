@@ -1,0 +1,24 @@
+{
+  "id": "source-betulia-betulia-research-betulia",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Betulia · betulia research betulia",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://echo.jpl.nasa.gov/asteroids/1580_Betulia/magri.etal.2007.betulia.pdf",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/betulia/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "3bdf418ac34d513d7ef02cc565eef103207b66dc1b2003aeb286604fa23d4a06",
+      "locator": "/inputs/3"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

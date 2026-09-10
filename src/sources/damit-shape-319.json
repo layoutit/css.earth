@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-319",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 319 · Alkmene",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "319"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/319/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/alkmene/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "bbcaa43a951d377ba9ca95de42df1070b95e5aca89b0f3e44bb82a3aaa7980b4",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

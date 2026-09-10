@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-66477",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 66477 · Beatrix",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "66477"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/66477/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/beatrix/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "8ae8aa9d8c7063d5a6cb4390263d109d81fca348220889294ad5332ed998aca9",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "doi-10-7910-dvn-ww3ih0",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · DOI 10.7910/DVN/WW3IH0",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.7910/DVN/WW3IH0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.7910/DVN/WW3IH0",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/ryugu/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "84fff7de794cd26d8812d5f2d1e3afd1a08c5da7783b75bb22040b06aeb922d1",
+      "locator": "/inputs/3"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

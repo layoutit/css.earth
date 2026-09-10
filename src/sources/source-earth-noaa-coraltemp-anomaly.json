@@ -1,0 +1,24 @@
+{
+  "id": "source-earth-noaa-coraltemp-anomaly",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Earth · noaa coraltemp anomaly",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.star.nesdis.noaa.gov/pub/socd/mecb/crw/data/5km/v3.1-clim19912020-v1/nc/v1.0/daily/ssta/2026/ct5km_ssta_v3.1-clim19912020-v1_20260907.nc",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/earth/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "bd42c8943697a61ab922cb82f1da71744803ab78ed519fb2839a1f138bb61d16",
+      "locator": "/inputs/25"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

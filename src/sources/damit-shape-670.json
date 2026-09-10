@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-670",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 670 · Diotima",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "670"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/670/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/diotima/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "92f10e65676103d7d5f015acd970f3fbac002711d73a775aeec0c0e40b2ddb9a",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,24 @@
+{
+  "id": "source-triton-usgs-2023-triton-clear-frames",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Monochrome",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.sciencebase.gov/catalog/file/get/6515fe80d34e469cabfce1bb?f=__disk__9c%2F3f%2F3a%2F9c3f3acb71a18cd818ce74c4703f23ca940b4594",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/triton/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "723d65e146ae88aa8dac3b6c4f92cb1c2035959b265cff5e13f9b9548ac3a188",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

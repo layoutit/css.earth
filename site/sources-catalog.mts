@@ -1,16 +1,12 @@
 import input from './prepared-sources.json' with { type: 'json' };
-import { readFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
-import { resolve } from 'node:path';
 import { parsePreparedSources } from '../src/platform/prepared-sources.mts';
 import { sourceCitationUrl } from '../src/platform/source-catalog.mts';
 import type { SourceCitation } from '../src/platform/source-catalog.mts';
 import { sourceDatasetViews } from '../src/platform/source-usage.mts';
+import { checkSourceCatalog } from '../tools/read-source-catalogue.mts';
 // Astro/build only. No catalogue or graph is imported by the browser runtime.
 export const SOURCE_CATALOGUE = parsePreparedSources(input);
-for (const [path, expected] of Object.entries(SOURCE_CATALOGUE.closure)) {
-  if (createHash('sha256').update(await readFile(resolve(process.cwd(),path))).digest('hex') !== expected) throw new Error(`Stale sources catalogue: ${path}. Run pnpm prepare:sources.`);
-}
+await checkSourceCatalog(process.cwd(), SOURCE_CATALOGUE);
 export const SOURCES = SOURCE_CATALOGUE.sources;
 export const sourceHref = (id: string) => sourceCitationUrl(SOURCES[id]);
 export const sourceDatasets = (id: string, objectId?: string) => sourceDatasetViews(SOURCE_CATALOGUE.usage,SOURCES[id].id,objectId);

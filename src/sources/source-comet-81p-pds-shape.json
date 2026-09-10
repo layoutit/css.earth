@@ -1,0 +1,24 @@
+{
+  "id": "source-comet-81p-pds-shape",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Comet 81P · pds shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_full.tab",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/comet-81p/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "ce5b33745be02e08ea2a8b5a64f1312ca25d8a758872398e47b4e62da0a26eb4",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-5716",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 5716 · Auravictrix",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "5716"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/5716/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/auravictrix/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "a66d10dd82054906761707d522e19e64b3c3d276f66c619269f2ae8575b4d6dd",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

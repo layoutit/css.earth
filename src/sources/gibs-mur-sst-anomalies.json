@@ -1,0 +1,36 @@
+{
+  "id": "gibs-mur-sst-anomalies",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "MUR sea surface temperature anomalies: NASA GIBS imagery",
+  "identifiers": [
+    {
+      "type": "GIBS layer",
+      "value": "GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/earth/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "bd42c8943697a61ab922cb82f1da71744803ab78ed519fb2839a1f138bb61d16",
+      "locator": "/inputs/29"
+    },
+    {
+      "path": "src/planets/earth/source/science/mur-gibs-receipt.json",
+      "revision": "c601cd5a54414fe6e500aba9b3c95c48b8870a30",
+      "sha256": "c5cafbea0d3627a3e0cf3956de4b0450141877212021de809c390fe615fb5d2d",
+      "locator": "/layer"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "NASA GIBS"
+}

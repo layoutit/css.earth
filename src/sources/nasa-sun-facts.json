@@ -1,0 +1,24 @@
+{
+  "id": "nasa-sun-facts",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "NASA Science · Sun facts",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://science.nasa.gov/sun/facts/",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/sun/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "18978bdf36bb03e1c6ed36f0d7e2f8dc3c203c6c4a4e1e17b7f23dd70da11602",
+      "locator": "/inputs/33"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,24 @@
+{
+  "id": "source-comet-67p-mtp019",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Comet 67P · mtp019",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_ESA/MTP019/CSHP_DV_130_01_LORES_OBJ.OBJ",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/comet-67p/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "0e233e5a52d4557bbc92303bcf4812a3da3bbfaae422d2dda011bafeb4d77e17",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

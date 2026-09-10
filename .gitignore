@@ -154,6 +154,8 @@ src/planets/*/source/**/*.bpc
 !src/planets/moon/source/science/diviner-ghrm/tbol_m-compact.tif
 
 # Combined catalogues and navigation are rebuilt from individual body records.
+/site/prepared-sources.json
+/site/prepared-spacecraft.json
 /site/prepared-object-catalog.mts
 /packages/astronomy/src/data/generated/
 /site/prepared-navigation-markers.mjs

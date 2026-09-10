@@ -1,0 +1,24 @@
+{
+  "id": "source-ariel-schenk-2020-ariel-normal",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Monochrome",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://repository.hou.usra.edu/bitstreams/fcdd781c-765e-4686-928f-257395918dc8/download",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/ariel/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "cea9a06d4bd1b9ce4ea09d095e7884925beb5c2dbaf6650f2cc974b07f6483f5",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

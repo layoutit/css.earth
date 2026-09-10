@@ -1,0 +1,24 @@
+{
+  "id": "source-moon-usgs-moon-geologic-units-grid",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Moon · usgs moon geologic units grid",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/moon/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "5bd482ea796fdcecd4cfdaf9be66f4d52fe30897fcdaf4ff42d892249854a31c",
+      "locator": "/inputs/10"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,24 @@
+{
+  "id": "source-charon-new-horizons-charon-monochrome",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Monochrome",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://planetarymaps.usgs.gov/mosaic/Charon_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/charon/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "e13feee9bed4cce3d978237abbf5297f38bdb425552bd4f4c619019d9d6c5505",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

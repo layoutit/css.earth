@@ -1,0 +1,29 @@
+{
+  "id": "doi-10-17632-f6jrtyfp66-2",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · DOI 10.17632/f6jrtyfp66.2",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.17632/f6jrtyfp66.2"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.17632/f6jrtyfp66.2",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/titan/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "0769f339817ad3841ca5401de4d4b04b430356edb0074324e6eb42017a93f35e",
+      "locator": "/inputs/53"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

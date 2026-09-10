@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-2757",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 2757 · Phocaea",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "2757"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/2757/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/phocaea/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "f2833c4314d4a647df7bf06f810590718b492aff8da7be4bd5484a282d72cb31",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

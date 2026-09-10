@@ -73,20 +73,20 @@ builds disable them. Keep the built assets unchanged throughout the matrix.
 Choose checks for the changed behavior after building and preparing its inputs:
 
 ```sh
-node --test tools/prepared-activation-registry.test.mjs
-node --test tools/prepared-activation-transport.test.mjs
+node --test tools/prepared-activation-registry.test.mts
+node --test tools/prepared-activation-transport.test.mts
 HOPS=30 ORIGIN=http://127.0.0.1:4221 pnpm test:browser:navigation-stress:matrix
 ORIGIN=http://127.0.0.1:4221 pnpm test:browser:interaction-chain
 DPR=2 ORIGIN=http://127.0.0.1:4221 pnpm test:browser:interaction-chain
-ORIGIN=http://127.0.0.1:4221 node site/test/replacement-flight-browser.mjs
-ORIGIN=http://127.0.0.1:4221 node site/test/natural-navigation-browser.mjs
-node site/test/flight-registry-browser.mjs http://127.0.0.1:4221
-node site/test/flight-activation-browser.mjs http://127.0.0.1:4221 mars
-DPR=2 node site/test/flight-activation-browser.mjs http://127.0.0.1:4221 saturn
-node site/test/shared-camera-viewport-browser.mjs http://127.0.0.1:4221
-node site/test/lazy-surface-preview-browser.mjs http://127.0.0.1:4221
-node site/test/shell-surface-browser.mjs http://127.0.0.1:4221
-DPR=2 node site/test/shell-surface-browser.mjs http://127.0.0.1:4221
+ORIGIN=http://127.0.0.1:4221 node site/test/replacement-flight-browser.mts
+ORIGIN=http://127.0.0.1:4221 node site/test/natural-navigation-browser.mts
+node site/test/flight-registry-browser.mts http://127.0.0.1:4221
+node site/test/flight-activation-browser.mts http://127.0.0.1:4221 mars
+DPR=2 node site/test/flight-activation-browser.mts http://127.0.0.1:4221 saturn
+node site/test/shared-camera-viewport-browser.mts http://127.0.0.1:4221
+node site/test/lazy-surface-preview-browser.mts http://127.0.0.1:4221
+node site/test/shell-surface-browser.mts http://127.0.0.1:4221
+DPR=2 node site/test/shell-surface-browser.mts http://127.0.0.1:4221
 ```
 
 The registry browser suite covers every object at DPR 1 and 2. The interruption

@@ -1,0 +1,24 @@
+{
+  "id": "source-phoebe-phoebe-cassini-original-n1465671822-1-ir-cub",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Phoebe · phoebe cassini original n1465671822_1_ir cub",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://vims.univ-nantes.fr/cube/N1465671822_1_ir.cub",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/phoebe/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "7ecd0e3eea5059d79e58bd923dd9bdfeece4fad60c3c76b7a2520dcfd1851ace",
+      "locator": "/inputs/10"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

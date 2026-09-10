@@ -1,0 +1,29 @@
+{
+  "id": "doi-10-3847-2041-8213-aa64d8",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · DOI 10.3847/2041-8213/aa64d8",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/aa64d8"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/aa64d8",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/deedee/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "1cdb2fc1362f8877fb34092401e53b9b41fe4a9fc33fb454b6a358d40a54fe76",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

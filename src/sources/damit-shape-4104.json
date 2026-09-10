@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-4104",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 4104 · China",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "4104"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/4104/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/china/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "b0ecb4d2ab9362b8c17c422fedc25175bc014b4a6c3b978f56219bf60687288c",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

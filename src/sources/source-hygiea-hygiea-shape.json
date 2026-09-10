@@ -1,0 +1,24 @@
+{
+  "id": "source-hygiea-hygiea-shape",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Hygiea · hygiea shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/3Dshape/10_Hygiea_mpcd.obj",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/hygiea/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "31502123970fc81ab6c97fa09af160127de5ce8f0db468324bf7c56b01c15b69",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

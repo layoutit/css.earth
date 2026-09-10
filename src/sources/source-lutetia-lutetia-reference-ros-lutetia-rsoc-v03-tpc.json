@@ -1,0 +1,24 @@
+{
+  "id": "source-lutetia-lutetia-reference-ros-lutetia-rsoc-v03-tpc",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Lutetia · lutetia reference ROS_LUTETIA_RSOC_V03 TPC",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/pck/ROS_LUTETIA_RSOC_V03.TPC",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/lutetia/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "53e9317e68341468b8006cf1cd0b4caf9484ce18e37c2e853311d4227ef154bd",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "arxiv-1710-01356",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · arXiv 1710.01356",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1710.01356"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/pdf/1710.01356",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/lutetia/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "53e9317e68341468b8006cf1cd0b4caf9484ce18e37c2e853311d4227ef154bd",
+      "locator": "/inputs/10"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

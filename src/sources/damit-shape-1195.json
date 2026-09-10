@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-1195",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 1195 · Laurentia",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "1195"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1195/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/laurentia/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "1f54dee2d6c4eca6de0de72227191abf9024d73556354f5094b54e497ebade97",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

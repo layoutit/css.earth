@@ -1,0 +1,35 @@
+{
+  "id": "galileo-callisto-pia03456",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Galileo SSI colour mosaic of Callisto (PIA03456)",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Callisto%20-%20Galileo%20SSI%20Color%20Mosaic.png"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Callisto%20-%20Galileo%20SSI%20Color%20Mosaic.png",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/callisto/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "4ebe4dae350c76f1c482b5d7c422caf840d09eb73c4e446e3a76e6f98c3ba215",
+      "locator": "/inputs/5"
+    },
+    {
+      "path": "src/planets/callisto/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "4ebe4dae350c76f1c482b5d7c422caf840d09eb73c4e446e3a76e6f98c3ba215",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

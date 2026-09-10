@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-13639",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 13639 · Hestia",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "13639"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/13639/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/hestia/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "99e9ed33ba6df348a0354621ee9a3e1f37d3a9b625bab00c9b134425493e150e",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

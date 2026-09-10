@@ -1,0 +1,24 @@
+{
+  "id": "source-iapetus-cassini-iss-2014-iapetus-color",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Enhanced color",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18436.jpg",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/iapetus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "a1d9372621940a56439908fd51f5a33db40d6ce2621e6dbdd95caa34e23b3da1",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

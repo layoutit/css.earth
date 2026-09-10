@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-1135",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 1135 · Fides",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "1135"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1135/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/fides/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "63ca646243f145c01b5784a4ebf68c02bf8c0cd394f660806c9061d26b6344cc",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

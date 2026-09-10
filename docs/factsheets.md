@@ -55,9 +55,9 @@ and the View more/View less disclosure.
 ## Checks
 
 ```sh
-node --test tools/prepare-factsheets.test.mjs site/test/fact-order.test.mjs \
-  site/test/prepared-factsheet-model.test.mjs site/test/planet-shell.test.mjs \
-  site/test/object-package-contract.test.mjs site/test/scene-sources.test.mjs
+node --test tools/prepare-factsheets.test.mts site/test/fact-order.test.mts \
+  site/test/prepared-factsheet-model.test.mts site/test/planet-shell.test.mts \
+  site/test/object-package-contract.test.mts site/test/scene-sources.test.mts
 ```
 
 Browser checks should include long values and narrow viewports at DPR 1 and 2:

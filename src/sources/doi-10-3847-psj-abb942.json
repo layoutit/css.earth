@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-psj-abb942",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Convex Shape and Rotation Model of Lucy Target (11351) Leucus from Lightcurves and Occultations",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/PSJ/abb942"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/PSJ/abb942",
+      "label": "Publication"
+    },
+    {
+      "role": "mirror",
+      "url": "https://elib.dlr.de/139387/1/Mottola_2020_Planet._Sci._J._1_73.pdf",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/leucus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "759e7335d66426cd9cdf17d9020771f4767c5227ec710ca8578240abf0f810d0",
+      "locator": "/inputs/2"
+    },
+    {
+      "path": "src/planets/leucus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "759e7335d66426cd9cdf17d9020771f4767c5227ec710ca8578240abf0f810d0",
+      "locator": "/inputs/3"
+    },
+    {
+      "url": "https://elib.dlr.de/139387/",
+      "checkedOn": "2026-09-10",
+      "locator": "Title, authors, publication date and DOI"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "creators": [
+    "S. Mottola",
+    "S. Hellmich",
+    "M. W. Buie",
+    "A. M. Zangari",
+    "S. Marchi",
+    "Michael E. Brown",
+    "H. F. Levison"
+  ],
+  "publicationDate": "2020-12",
+  "publisher": "IOP Publishing"
+}

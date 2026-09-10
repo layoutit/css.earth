@@ -1,0 +1,24 @@
+{
+  "id": "source-ida-ida-0202560500rcal-gre-xml",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Ida · ida 0202560500rcal_gre xml",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202560500rcal_gre.xml",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/ida/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "b1c8d2e0429523d1fc9024287e2061661955989eeada3e53c1f8fe60259ba692",
+      "locator": "/inputs/15"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

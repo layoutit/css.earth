@@ -1,0 +1,24 @@
+{
+  "id": "source-europa-mapped-science-nims-17englobal01a-minn-mv01-ciof-24-gcp-projective-export-from-gdal-tif",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Europa · mapped science nims 17englobal01a minn mv01 ciof 24 gcp projective export from gdal tif",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/europa_go_nims_reprojected_malaska_2023/data/primary_registered_files/17ENGLOBAL01A_MINN_MV01_CIOF_24_GCP_projective_EXPORT_from_gdal.tif",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/europa/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "0686fe673474b00624a9aa620b81b2b0dd1da8df0d76b306ecb0dbcb4408a90d",
+      "locator": "/inputs/50"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

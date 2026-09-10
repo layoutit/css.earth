@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-3479",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 3479 · Scylla",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "3479"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3479/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/scylla/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "9be32c10877eddd092a10f06ad0bfbcda20bc58a7f634c19d8796c1d2b58254d",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

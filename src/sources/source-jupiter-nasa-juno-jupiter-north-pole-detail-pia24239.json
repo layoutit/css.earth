@@ -1,0 +1,24 @@
+{
+  "id": "source-jupiter-nasa-juno-jupiter-north-pole-detail-pia24239",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Jupiter · nasa juno jupiter north pole detail pia24239",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia24/pia24239/PIA24239.tif",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/jupiter/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "2ffa5896b236cbe154361b47f7344ab3a3c21d31cc3689973284597326e15341",
+      "locator": "/inputs/4"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
