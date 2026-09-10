@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7ee338cd63643d7f716412857053224eee792d79da91edd58cd71a8c781ea3ac"
+    "sha256": "253c99e83e608f24a5711c09063550918075178dc97d3a11fd9e44884b93ada7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "bea0cfd4dfda09a4706f9e101fe59e47ab1122dcbbcedc28524b8b90273867fd",
+      "sha256": "89f308b718a7729029a33a51e7ac3ba8a1727b99ce01ad265e54868f4def0430",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,6 +97,24 @@
                   "path": "photography/deep-impact/iv05070405_9000673_001_r.fit",
                   "labelPath": "photography/deep-impact/iv05070405_9000673_001_r.lbl",
                   "controlPath": "photography/deep-impact/iv05070405_9000673_001_r.json"
+                },
+                {
+                  "id": "iv05070405-9000675-001-r",
+                  "path": "photography/deep-impact/iv05070405_9000675_001_r.fit",
+                  "labelPath": "photography/deep-impact/iv05070405_9000675_001_r.lbl",
+                  "controlPath": "photography/deep-impact/iv05070405_9000675_001_r.json"
+                },
+                {
+                  "id": "iv05070405-9000680-001-r",
+                  "path": "photography/deep-impact/iv05070405_9000680_001_r.fit",
+                  "labelPath": "photography/deep-impact/iv05070405_9000680_001_r.lbl",
+                  "controlPath": "photography/deep-impact/iv05070405_9000680_001_r.json"
+                },
+                {
+                  "id": "iv05070405-9000688-001-r",
+                  "path": "photography/deep-impact/iv05070405_9000688_001_r.fit",
+                  "labelPath": "photography/deep-impact/iv05070405_9000688_001_r.lbl",
+                  "controlPath": "photography/deep-impact/iv05070405_9000688_001_r.json"
                 }
               ],
               "transfer": {
@@ -111,7 +129,7 @@
               },
               "selection": "finest-resolution",
               "levelMatching": {
-                "samplesPerTriangle": 32,
+                "samplesPerTriangle": 64,
                 "minimumPairs": 64,
                 "maximumLogMad": 0.3,
                 "maximumGain": 1.5
@@ -284,7 +302,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "371a9b1b35e34b3f31ff17034d78e8c2d1fd677c729567a8d3122a3c106d1c04",
+      "sha256": "d0ec3bbfd36638a1f8cadda2f7544ae52cceed8dc2b0f1e33f7fe041aac31e8c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -378,7 +396,7 @@
             {
               "id": "deep-impact",
               "label": "Deep Impact · 2005",
-              "description": "Deep Impact photographed Tempel 1 shortly before impact in 2005. These views retain the original shadows. The gray grid marks gaps or poorly constrained shape.",
+              "description": "Eight images follow Deep Impact’s approach in 2005. The closest views reveal finer ridges and depressions within the earlier photographs. Original shadows remain; the grid marks gaps or uncertain shape.",
               "title": "ITS mosaic",
               "detail": "ITS",
               "thumbnail": "/scenes/comet-9p/comet-9p-deep-impact-thumbnail.webp",
@@ -398,10 +416,10 @@
                 {
                   "id": "scale",
                   "label": "Image scale",
-                  "value": "11–34 m/pixel"
+                  "value": "3–34 m/pixel"
                 }
               ],
-              "summary": "These views show the surface just before the 2005 impact, with original shadows. The grid marks gaps or uncertain shape."
+              "summary": "Eight approach images show the surface before impact. Close-ups add detail in smaller patches. Original shadows remain; the grid marks gaps or uncertain shape."
             },
             {
               "id": "next",
@@ -1109,6 +1127,297 @@
     },
     {
       "kind": "source-input",
+      "id": "iv05070405_9000675_001_r-fit",
+      "path": "photography/deep-impact/iv05070405_9000675_001_r.fit",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000675_001_r.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-iv05070405-9000675-001-r",
+            "role": "material",
+            "evidence": "Native PDS label src/planets/comet-9p/source/photography/deep-impact/iv05070405_9000675_001_r.lbl at 51315639ea9b3a104d2dc2fc4ee94282fb7ba3ed identifies the FITS product and its detached label.",
+            "locator": "PRODUCT_ID; DATA_SET_ID"
+          }
+        ]
+      },
+      "sha256": "1e16220cef4edf6961f06b0a0651be5bb1202c8cf716ebdb0e2c74c7fe115520",
+      "bytes": 662400,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photography/deep-impact/iv05070405_9000675_001_r.fit",
+        "url": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000675_001_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "iv05070405_9000675_001_r-lbl",
+      "path": "photography/deep-impact/iv05070405_9000675_001_r.lbl",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000675_001_r.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-iv05070405-9000675-001-r",
+            "role": "material",
+            "evidence": "Native PDS label src/planets/comet-9p/source/photography/deep-impact/iv05070405_9000675_001_r.lbl at 51315639ea9b3a104d2dc2fc4ee94282fb7ba3ed identifies the FITS product and its detached label.",
+            "locator": "PRODUCT_ID; DATA_SET_ID"
+          }
+        ]
+      },
+      "sha256": "72fa11fcdd26d2259f5bc1c0764cf7c651c8776b2658f543181d04c33ce671db",
+      "bytes": 32880,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photography/deep-impact/iv05070405_9000675_001_r.lbl",
+        "url": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000675_001_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "iv05070405_9000675_001_r-control",
+      "path": "photography/deep-impact/iv05070405_9000675_001_r.json",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Reproduce with node tools/objects/comet-9p/prepare-closeups.mts --write.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Repository-owned image registration controls and preparation recipe; the measured source photographs retain separate material bindings."
+      },
+      "sha256": "87d8b0a9e4992ad62bd57fd7c8165f0cce39e639ce7873d7bff67634c583eacb",
+      "bytes": 57084,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "iv05070405_9000680_001_r-fit",
+      "path": "photography/deep-impact/iv05070405_9000680_001_r.fit",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000680_001_r.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-iv05070405-9000680-001-r",
+            "role": "material",
+            "evidence": "Native PDS label src/planets/comet-9p/source/photography/deep-impact/iv05070405_9000680_001_r.lbl at 51315639ea9b3a104d2dc2fc4ee94282fb7ba3ed identifies the FITS product and its detached label.",
+            "locator": "PRODUCT_ID; DATA_SET_ID"
+          }
+        ]
+      },
+      "sha256": "8cf1f35342c0caec7a22e6a610d66b2d8a91f866d70b4c0f5a9a41de6b799a70",
+      "bytes": 216000,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photography/deep-impact/iv05070405_9000680_001_r.fit",
+        "url": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000680_001_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "iv05070405_9000680_001_r-lbl",
+      "path": "photography/deep-impact/iv05070405_9000680_001_r.lbl",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000680_001_r.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-iv05070405-9000680-001-r",
+            "role": "material",
+            "evidence": "Native PDS label src/planets/comet-9p/source/photography/deep-impact/iv05070405_9000680_001_r.lbl at 51315639ea9b3a104d2dc2fc4ee94282fb7ba3ed identifies the FITS product and its detached label.",
+            "locator": "PRODUCT_ID; DATA_SET_ID"
+          }
+        ]
+      },
+      "sha256": "b74737563964f780b19367d8c9418498f7aa3a536f5407cb9401f16013472d40",
+      "bytes": 32880,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photography/deep-impact/iv05070405_9000680_001_r.lbl",
+        "url": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000680_001_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "iv05070405_9000680_001_r-control",
+      "path": "photography/deep-impact/iv05070405_9000680_001_r.json",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Reproduce with node tools/objects/comet-9p/prepare-closeups.mts --write.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Repository-owned image registration controls and preparation recipe; the measured source photographs retain separate material bindings."
+      },
+      "sha256": "75faeb131deaf390f5931556db492878570eb94fb72d185b6ef55d70fb69c7b1",
+      "bytes": 15703,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "iv05070405_9000688_001_r-fit",
+      "path": "photography/deep-impact/iv05070405_9000688_001_r.fit",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000688_001_r.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-iv05070405-9000688-001-r",
+            "role": "material",
+            "evidence": "Native PDS label src/planets/comet-9p/source/photography/deep-impact/iv05070405_9000688_001_r.lbl at 51315639ea9b3a104d2dc2fc4ee94282fb7ba3ed identifies the FITS product and its detached label.",
+            "locator": "PRODUCT_ID; DATA_SET_ID"
+          }
+        ]
+      },
+      "sha256": "360666794a059670d870c3049354c0a1f6cdbc53619a005817cb2fe940f9fe82",
+      "bytes": 216000,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photography/deep-impact/iv05070405_9000688_001_r.fit",
+        "url": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000688_001_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "iv05070405_9000688_001_r-lbl",
+      "path": "photography/deep-impact/iv05070405_9000688_001_r.lbl",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000688_001_r.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-9p-iv05070405-9000688-001-r",
+            "role": "material",
+            "evidence": "Native PDS label src/planets/comet-9p/source/photography/deep-impact/iv05070405_9000688_001_r.lbl at 51315639ea9b3a104d2dc2fc4ee94282fb7ba3ed identifies the FITS product and its detached label.",
+            "locator": "PRODUCT_ID; DATA_SET_ID"
+          }
+        ]
+      },
+      "sha256": "be1f12db5f5bf473485a9c575d669a6b3274b6a6e524ebecf09307066cbd2d9f",
+      "bytes": 32880,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photography/deep-impact/iv05070405_9000688_001_r.lbl",
+        "url": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000688_001_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "iv05070405_9000688_001_r-control",
+      "path": "photography/deep-impact/iv05070405_9000688_001_r.json",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Reproduce with node tools/objects/comet-9p/prepare-closeups.mts --write.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Repository-owned image registration controls and preparation recipe; the measured source photographs retain separate material bindings."
+      },
+      "sha256": "5c081d34acb7869b2432322ff1bc13ace9b9d935ed4aaee412b8d335e1e7156d",
+      "bytes": 16038,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
       "id": "n30033te02-rr-path",
       "path": "photography/next/n30033te02_rr.fit",
       "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30033te02_rr.fit",
@@ -1691,8 +2000,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "371a9b1b35e34b3f31ff17034d78e8c2d1fd677c729567a8d3122a3c106d1c04",
-      "bytes": 6943,
+      "sha256": "d0ec3bbfd36638a1f8cadda2f7544ae52cceed8dc2b0f1e33f7fe041aac31e8c",
+      "bytes": 7026,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1794,7 +2103,7 @@
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [
-        "Deep Impact photographed Tempel 1 shortly before impact in 2005. These views retain the original shadows. The gray grid marks gaps or poorly constrained shape."
+        "Eight images follow Deep Impact’s approach in 2005. The closest views reveal finer ridges and depressions within the earlier photographs. Original shadows remain; the grid marks gaps or uncertain shape."
       ],
       "lensIds": [
         "deep-impact"
@@ -1821,19 +2130,28 @@
         "iv05070405-9000673-001-r-path",
         "iv05070405-9000673-001-r-labelPath",
         "iv05070405-9000673-001-r-controlPath",
+        "iv05070405_9000675_001_r-fit",
+        "iv05070405_9000675_001_r-lbl",
+        "iv05070405_9000675_001_r-control",
+        "iv05070405_9000680_001_r-fit",
+        "iv05070405_9000680_001_r-lbl",
+        "iv05070405_9000680_001_r-control",
+        "iv05070405_9000688_001_r-fit",
+        "iv05070405_9000688_001_r-lbl",
+        "iv05070405_9000688_001_r-control",
         "pds-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/comet-9p/comet-9p-deep-impact-thumbnail.webp",
-          "bytes": 2060,
-          "sha256": "0280ee24095cab24d6c29f9d008a283c31ecbf2509d315d68de1fe7f9c59ec6a",
+          "bytes": 2062,
+          "sha256": "416ffb53b24aec606c8a4e80991e0461d9fa4eb35e4faa46b9495de1d73fc7ac",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-9p/comet-9p-deep-impact-surface@2x.webp",
-          "bytes": 214818,
-          "sha256": "3ed43aaef482ff3291a74958f475ca722a23fedb459c4ea097b2314641c6046b",
+          "bytes": 228984,
+          "sha256": "7bf85add71c15b7c83635aec718f18da1207f363c68a9403738f3dbe3c39f8dc",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -1962,8 +2280,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/deep-impact.webp",
-          "bytes": 12412,
-          "sha256": "b766f60813a8c39ba273ce85eabf3fcfa51ad8a8c81d58d68708c246319dc8e1",
+          "bytes": 12636,
+          "sha256": "2b60b595aca080693f52546cff3006fabb9d2651a4e58eaca2d4049834c122fe",
           "verification": "bytes-verified"
         }
       ]

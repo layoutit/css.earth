@@ -139,3 +139,11 @@ desktop and mobile layouts from the browser run above.
 ![Mercury Sources disclosure on desktop](images/catalogue-sources-desktop.png)
 
 ![Mercury Sources disclosure on mobile](images/catalogue-sources-mobile.png)
+
+Integration with Tempel 1 photography PR #113 (`51315639ea9b3a104d2dc2fc4ee94282fb7ba3ed`)
+preserves every new source field and scientific artifact. Its three native PDS
+product labels identify three additional catalogue records; local registration
+controls remain local. Both catalogues were regenerated together, and the
+[11 integration checks](../tests/evidence/sources-catalogue/main-integration.log)
+passed. The browser screenshots above precede this integration and cover unchanged
+Mercury, Moon and shared navigation code; they do not qualify the new Tempel images.

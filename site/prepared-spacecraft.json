@@ -3827,7 +3827,7 @@
       "credit": "ESA"
     }
   ],
-  "sourceCatalogSha256": "16ea4acd98dbab77ef2e2b9a3633956453076cd1277fe6725f614bb139e6c007",
+  "sourceCatalogSha256": "52a213c5c5c60dd65e0d30a3232c0227993cd3b7d235d0f6e75b885ef0299cfd",
   "graph": {
     "edges": [
       {
@@ -19683,7 +19683,7 @@
     "site/source/spacecraft/render-library.json": "9c0b19625b57c8bb914774baa39577d226b3874c80d37e128fe2c869c73daee9",
     "site/source/spacecraft/emblem-library.json": "cc64e031e29eab76f2324ea29b06ac4cc4d06209a9642caabcfc51019ca200ec",
     "site/source/agency-logos.json": "137c345279a3c25374cac261b81d8b3040becc56b4960ad5c4ebcc1467db788c",
-    "src/sources/catalog.json": "16ea4acd98dbab77ef2e2b9a3633956453076cd1277fe6725f614bb139e6c007",
+    "src/sources/catalog.json": "52a213c5c5c60dd65e0d30a3232c0227993cd3b7d235d0f6e75b885ef0299cfd",
     "tests/fixtures/sources/migration.json": "8a008c378b71d79165cfc4e038b689127d783cedc6272d6ec7f733f22ea03b7c",
     "src/platform/source-catalog.mts": "2729668365fed6cfc7d4cc81abc84f9665f45b040ac5f17192e5ecc96b8b1d5b",
     "src/platform/source-usage.mts": "48fa47990409216ddfa849f0c062717ec6be80262680cc07345fc483ee041ea8",
@@ -20075,10 +20075,10 @@
     "src/planets/comet-103p/source/manifest.json": "bf4273903e9e209aa34fefc8a446447922b16dc3f57e74ace6ba48ad4bb3ac98",
     "src/planets/comet-103p/prepared/page.json": "be9e44eb8639e2a8b53c7bd48316a7a8b2acf189c00ee165b960ac4be1769496",
     "src/planets/comet-103p/prepared/provenance.json": "a0d33785f9cecdb720e3f31a56eb3db4c3354df508478220bffc1116c075d517",
-    "src/planets/comet-9p/object.json": "123ebab681df2bc9b8f239f35ab257bc1c6415997bd58f3cc19b35e6bdffe32d",
-    "src/planets/comet-9p/source/manifest.json": "7ee338cd63643d7f716412857053224eee792d79da91edd58cd71a8c781ea3ac",
-    "src/planets/comet-9p/prepared/page.json": "4d008abd7929464a6782b96248a074587e27322457e68d6db5c6e575a118609c",
-    "src/planets/comet-9p/prepared/provenance.json": "204f714f75779f16bb75645b1c12deef1bd33bc2d433389c655ede8bc88ae07e",
+    "src/planets/comet-9p/object.json": "21d07acb80e97795cff234bd8e7970db4a01c37233b2c2888fa7708f7c8d8b98",
+    "src/planets/comet-9p/source/manifest.json": "253c99e83e608f24a5711c09063550918075178dc97d3a11fd9e44884b93ada7",
+    "src/planets/comet-9p/prepared/page.json": "e9f974edc315d0ce24ab1063ff1201e493e87d9ed38b8045d6bcd234edd9a80c",
+    "src/planets/comet-9p/prepared/provenance.json": "bb1febd7fa82f5a95dc6e252a7cda85437de9b2b6bf12648ec547f3a12f3e4ec",
     "src/planets/comet-67p/object.json": "71e5b4325faa487c23015b35724fe6652e9b39cf0ef3e443d54e0a1dc65cc0fb",
     "src/planets/comet-67p/source/manifest.json": "86551b929c0c4fd276018932e2e4b4265e10a81e213d13ea46eb6511929385fe",
     "src/planets/comet-67p/prepared/page.json": "8fbbf83ff8f0e6b0c577fa0a133315121ae2a4359d908ab3bab53c2272668cc3",
