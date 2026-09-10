@@ -1,0 +1,141 @@
+{
+  "checkedAt": "2026-09-10T03:14:18.388Z",
+  "scope": "Empty source roots. Checked-in inputs and the reviewed CC BY 4.0 Salacia conference HTML copied; other upstream originals reacquired with the normal pinned acquisition implementation. Identical common originals reuse the first newly downloaded and SHA-256 verified copy.",
+  "uniqueDownloadedOriginals": 19,
+  "results": [
+    {
+      "id": "oumuamua",
+      "inputCount": 4,
+      "generatedIntermediateCount": 1,
+      "documentCount": 14,
+      "verifiedCount": 19,
+      "downloaded": [
+        "stars/eso0932a.tif",
+        "presentation/InterVariable.ttf",
+        "reference/oumuamua-mashchenko-2019.html"
+      ],
+      "reusedFreshPinnedDownloads": []
+    },
+    {
+      "id": "sedna",
+      "inputCount": 4,
+      "generatedIntermediateCount": 1,
+      "documentCount": 16,
+      "verifiedCount": 21,
+      "downloaded": [
+        "reference/sedna-gaudi-2005.pdf",
+        "reference/sedna-gonggong-emery-2024.html",
+        "reference/sedna-pal-2012.pdf"
+      ],
+      "reusedFreshPinnedDownloads": [
+        "stars/eso0932a.tif",
+        "presentation/InterVariable.ttf"
+      ]
+    },
+    {
+      "id": "gonggong",
+      "inputCount": 4,
+      "generatedIntermediateCount": 1,
+      "documentCount": 16,
+      "verifiedCount": 21,
+      "downloaded": [
+        "reference/gonggong-kiss-2019.pdf",
+        "reference/gonggong-pal-2016.html"
+      ],
+      "reusedFreshPinnedDownloads": [
+        "stars/eso0932a.tif",
+        "presentation/InterVariable.ttf",
+        "reference/sedna-gonggong-emery-2024.html"
+      ]
+    },
+    {
+      "id": "orcus",
+      "inputCount": 4,
+      "generatedIntermediateCount": 1,
+      "documentCount": 15,
+      "verifiedCount": 20,
+      "downloaded": [
+        "reference/orcus-brown-butler-2018.pdf",
+        "reference/orcus-brown-butler-2023.html"
+      ],
+      "reusedFreshPinnedDownloads": [
+        "stars/eso0932a.tif",
+        "presentation/InterVariable.ttf"
+      ]
+    },
+    {
+      "id": "salacia",
+      "inputCount": 4,
+      "generatedIntermediateCount": 1,
+      "documentCount": 16,
+      "verifiedCount": 21,
+      "downloaded": [
+        "reference/salacia-collyer-2025.html",
+        "reference/salacia-wong-2025.html"
+      ],
+      "reusedFreshPinnedDownloads": [
+        "stars/eso0932a.tif",
+        "presentation/InterVariable.ttf"
+      ]
+    },
+    {
+      "id": "varuna",
+      "inputCount": 4,
+      "generatedIntermediateCount": 1,
+      "documentCount": 14,
+      "verifiedCount": 19,
+      "downloaded": [
+        "reference/varuna-fernandez-2019.html"
+      ],
+      "reusedFreshPinnedDownloads": [
+        "stars/eso0932a.tif",
+        "presentation/InterVariable.ttf"
+      ]
+    },
+    {
+      "id": "varda",
+      "inputCount": 4,
+      "generatedIntermediateCount": 1,
+      "documentCount": 15,
+      "verifiedCount": 20,
+      "downloaded": [
+        "reference/varda-proudfoot-2026.pdf",
+        "reference/varda-souami-2020.pdf"
+      ],
+      "reusedFreshPinnedDownloads": [
+        "stars/eso0932a.tif",
+        "presentation/InterVariable.ttf"
+      ]
+    },
+    {
+      "id": "mani",
+      "inputCount": 4,
+      "generatedIntermediateCount": 1,
+      "documentCount": 15,
+      "verifiedCount": 20,
+      "downloaded": [
+        "reference/mani-wgsbn-2025-011.pdf",
+        "reference/ms4-rommel-2023.html"
+      ],
+      "reusedFreshPinnedDownloads": [
+        "stars/eso0932a.tif",
+        "presentation/InterVariable.ttf"
+      ]
+    },
+    {
+      "id": "achlys",
+      "inputCount": 4,
+      "generatedIntermediateCount": 1,
+      "documentCount": 15,
+      "verifiedCount": 20,
+      "downloaded": [
+        "reference/achlys-wgsbn-2025-015.pdf",
+        "reference/az84-dias-oliveira-2017.html"
+      ],
+      "reusedFreshPinnedDownloads": [
+        "stars/eso0932a.tif",
+        "presentation/InterVariable.ttf"
+      ]
+    }
+  ]
+}

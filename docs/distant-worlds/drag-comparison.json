@@ -1,0 +1,397 @@
+{
+  "scope": "Production DPR2 native vertical drag, one browser at a time. Same 480-body-leaf budget and shared-context node count. Object appearance and projected area differ; this is a matched-budget reference, not a claim of identical GPU workload.",
+  "reports": [
+    {
+      "route": "http://127.0.0.1:4278/oumuamua/?v=MMY_0dFL-k_7o0FCxzNAAAAAv9vveEx9Sga_1ZX-u2btED_HJHi-yTKfAAA",
+      "browser": "152.0.7977.84",
+      "headless": true,
+      "dpr": 2,
+      "capturedAt": "2026-09-10T03:37:26.261Z",
+      "codeRevision": "cfec37dfbefed8a0c5578da5be91644d2c26bfaf",
+      "worktreeDiffSha256": "4da28792fa2a1c76e6f7daacf7a923eb022f5ae3ff6dbbad167304648f4bcc15",
+      "diagnosticsAvailable": false,
+      "hardware": [
+        "Mac15,11",
+        "38654705664",
+        "Apple M3 Max"
+      ],
+      "gpu": {
+        "devices": [
+          {
+            "vendorId": 4203,
+            "deviceId": 0,
+            "vendorString": "Google Inc. (Apple)",
+            "deviceString": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Max, Version 15.7.7 (Build 24G720))",
+            "driverVendor": "Apple",
+            "driverVersion": "15.7.7"
+          }
+        ],
+        "auxAttributes": {
+          "amdSwitchable": false,
+          "canSupportThreadedTextureMailbox": false,
+          "directRenderingVersion": "",
+          "displayType": "ANGLE_METAL",
+          "glExtensions": "GL_AMD_performance_monitor GL_ANGLE_base_vertex_base_instance_shader_builtin GL_ANGLE_blob_cache GL_ANGLE_client_arrays GL_ANGLE_clip_cull_distance GL_ANGLE_compressed_texture_etc GL_ANGLE_depth_texture GL_ANGLE_framebuffer_blit GL_ANGLE_framebuffer_multisample GL_ANGLE_get_serialized_context_string GL_ANGLE_get_tex_level_parameter GL_ANGLE_instanced_arrays GL_ANGLE_memory_size GL_ANGLE_pack_reverse_row_order GL_ANGLE_polygon_mode GL_ANGLE_program_binary_readiness_query GL_ANGLE_program_cache_control GL_ANGLE_provoking_vertex GL_ANGLE_renderability_validation GL_ANGLE_request_extension GL_ANGLE_rgbx_internal_format GL_ANGLE_robust_client_memory GL_ANGLE_shader_pixel_local_storage GL_ANGLE_shader_pixel_local_storage_coherent GL_ANGLE_stencil_texturing GL_ANGLE_texture_compression_dxt3 GL_ANGLE_texture_compression_dxt5 GL_ANGLE_texture_multisample GL_ANGLE_translated_shader_source GL_APPLE_clip_distance GL_ARM_rgba8 GL_CHROMIUM_bind_generates_resource GL_CHROMIUM_bind_uniform_location GL_CHROMIUM_copy_texture GL_CHROMIUM_lose_context GL_EXT_base_instance GL_EXT_blend_func_extended GL_EXT_blend_minmax GL_EXT_clip_control GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_compressed_ETC1_RGB8_sub_texture GL_EXT_conservative_depth GL_EXT_debug_label GL_EXT_debug_marker GL_EXT_depth_clamp GL_EXT_discard_framebuffer GL_EXT_disjoint_timer_query GL_EXT_draw_buffers GL_EXT_draw_buffers_indexed GL_EXT_draw_elements_base_vertex GL_EXT_float_blend GL_EXT_frag_depth GL_EXT_instanced_arrays GL_EXT_map_buffer_range GL_EXT_multisampled_render_to_texture GL_EXT_occlusion_query_boolean GL_EXT_polygon_offset_clamp GL_EXT_pvrtc_sRGB GL_EXT_read_format_bgra GL_EXT_render_snorm GL_EXT_robustness GL_EXT_sRGB GL_EXT_shader_texture_lod GL_EXT_texture_compression_bptc GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc_srgb GL_EXT_texture_filter_anisotropic GL_EXT_texture_format_BGRA8888 GL_EXT_texture_mirror_clamp_to_edge GL_EXT_texture_norm16 GL_EXT_texture_rg GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_EXT_texture_shadow_lod GL_EXT_texture_storage GL_IMG_texture_compression_pvrtc GL_KHR_debug GL_KHR_parallel_shader_compile GL_KHR_robustness GL_KHR_texture_compression_astc_hdr GL_KHR_texture_compression_astc_ldr GL_KHR_texture_compression_astc_sliced_3d GL_MESA_framebuffer_flip_y GL_NV_fence GL_NV_framebuffer_blit GL_NV_pixel_buffer_object GL_NV_shader_noperspective_interpolation GL_OES_EGL_image GL_OES_EGL_sync GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth24 GL_OES_depth32 GL_OES_depth_texture GL_OES_draw_buffers_indexed GL_OES_draw_elements_base_vertex GL_OES_element_index_uint GL_OES_fbo_render_mipmap GL_OES_get_program_binary GL_OES_mapbuffer GL_OES_packed_depth_stencil GL_OES_required_internalformat GL_OES_rgb8_rgba8 GL_OES_sample_variables GL_OES_shader_multisample_interpolation GL_OES_standard_derivatives GL_OES_surfaceless_context GL_OES_texture_3D GL_OES_texture_float GL_OES_texture_float_linear GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_texture_npot GL_OES_texture_stencil8 GL_OES_vertex_array_object GL_QCOM_render_shared_exponent ",
+          "glImplementationParts": "(gl=egl-angle,angle=metal)",
+          "glRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Max, Version 15.7.7 (Build 24G720))",
+          "glResetNotificationStrategy": 33362,
+          "glVendor": "Google Inc. (Apple)",
+          "glVersion": "OpenGL ES 3.0 (ANGLE 2.1.28468 git hash: 7df613367a1d)",
+          "glWsExtensions": "",
+          "glWsVendor": "",
+          "glWsVersion": "",
+          "inProcessGpu": false,
+          "initializationTime": 0.049067,
+          "isAsan": false,
+          "isClangCoverage": false,
+          "jpegDecodeAcceleratorSupported": false,
+          "maxMsaaSamples": "4",
+          "optimus": false,
+          "passthroughCmdDecoder": true,
+          "pixelShaderVersion": "3.00",
+          "processCrashCount": 0,
+          "sandboxed": false,
+          "skiaBackendType": "GraphiteDawnMetal",
+          "subpixelFontRendering": true,
+          "targetCpuBits": 64,
+          "vertexShaderVersion": "3.00",
+          "visibilityCallbackCallCount": 0
+        },
+        "featureStatus": {
+          "2d_canvas": "enabled",
+          "direct_rendering_display_compositor": "disabled_off_ok",
+          "gpu_compositing": "enabled",
+          "multiple_raster_threads": "enabled_on",
+          "opengl": "enabled_on",
+          "rasterization": "enabled",
+          "raw_draw": "disabled_off_ok",
+          "skia_graphite": "enabled_on",
+          "trees_in_viz": "disabled_off",
+          "video_decode": "enabled",
+          "video_encode": "enabled",
+          "webgl": "enabled",
+          "webgpu": "enabled",
+          "webnn": "disabled_off"
+        },
+        "driverBugWorkarounds": [
+          "disable_2d_canvas_auto_flush",
+          "enable_webgl_timer_query_extensions",
+          "disabled_extension_GL_KHR_blend_equation_advanced",
+          "disabled_extension_GL_KHR_blend_equation_advanced_coherent"
+        ],
+        "videoDecoding": [],
+        "videoEncoding": []
+      },
+      "workload": {
+        "cycles": 3,
+        "stepsPerLeg": 60,
+        "x": 0.6,
+        "startY": 0.485,
+        "upperY": 0.283,
+        "lowerY": 0.582,
+        "shadows": false,
+        "wheels": 0
+      },
+      "initial": {
+        "sceneTransform": "matrix3d(0.0141421, -0.00483689, 0.0132893, 0, 0, 0.0187939, 0.0068404, 0, -0.0141421, -0.00483689, 0.0132893, 0, 0.001559, -0.001798, -806.451, 1)",
+        "nodes": 118051,
+        "bodyLeaves": 480,
+        "atlasUrls": [
+          "url(\"http://127.0.0.1:4278/scenes/oumuamua/oumuamua-model-surface@2x.webp\")"
+        ],
+        "diagnosticsAvailable": false
+      },
+      "final": {
+        "sceneTransform": "matrix3d(0.0141421, 0.0117776, 0.00782871, 0, 0, 0.0110715, -0.016656, 0, -0.0141421, 0.0117776, 0.00782871, 0, -0.00272, -0.001621, -806.453, 1)",
+        "nodes": 118051,
+        "retainedIdentity": true,
+        "atlasUrls": [
+          "url(\"http://127.0.0.1:4278/scenes/oumuamua/oumuamua-model-surface@2x.webp\")"
+        ]
+      },
+      "errors": [],
+      "interactionRequests": [],
+      "prepared": {
+        "src/planets/oumuamua/prepared/object.json": {
+          "bytes": 6344562,
+          "sha256": "2ee11178eed685c0d15fc04c4fab99ff575cbe6713eab2df34f5055e84506b4c"
+        },
+        "src/planets/oumuamua/prepared/runtime.json": {
+          "bytes": 6344445,
+          "sha256": "15806970898016ba8cbb1500c534f5e0c3ea4591ab215d077d3333c65a348cb2"
+        },
+        "src/planets/oumuamua/runtime-assets.json": {
+          "bytes": 5443,
+          "sha256": "4849588601f24934698e74887033b87d5d01e891188cce86224cd68e2d8fc4a1"
+        },
+        "src/planets/oumuamua/prepared/terrain.json": {
+          "bytes": 217556,
+          "sha256": "ce8e645534cdfa52714498dc7c3b388c75d44e790f3e1d5b1363a32a44e4397f"
+        }
+      },
+      "loaded": [
+        {
+          "url": "http://127.0.0.1:4278/_astro/packaged-object-runtime.cEmehwFt.js",
+          "bytes": 211134,
+          "sha256": "4ab3a8c02c5ef414799aff78eeea46455fc930b4acf1ff50f18c7c8a2b7143e7"
+        },
+        {
+          "url": "http://127.0.0.1:4278/_astro/PlanetLayout.astro_astro_type_script_index_0_lang.BAk0qBQW.js",
+          "bytes": 6466820,
+          "sha256": "7975e30a5428134ed53ff2afbb84a73bed8af6946758ca069c0d9ed50bb0329e"
+        },
+        {
+          "url": "http://127.0.0.1:4278/_astro/point-field-selection-worker-CMrTEVt-.js",
+          "bytes": 8296,
+          "sha256": "cb4bbe0c3d7a50cce711f453092c07064c766fe59c9e11da2fb9ed59a8dd44e8"
+        },
+        {
+          "url": "http://127.0.0.1:4278/_astro/prepared-object-worker-DmK6HlcO.js",
+          "bytes": 87312,
+          "sha256": "c9148e8e3d4c733629fe57cbee4c7ecdb57db3da758e1c153b150369ddec0ce7"
+        },
+        {
+          "url": "http://127.0.0.1:4278/_astro/world-context-planner-worker-HoX0FuXI.js",
+          "bytes": 15561,
+          "sha256": "be151f80eefb839f6e60d69dead3abc0ef4fb0acad819ba24d745d54bc4bdddc"
+        },
+        {
+          "url": "http://127.0.0.1:4278/objects/oumuamua/2ee11178eed685c0d15fc04c4fab99ff575cbe6713eab2df34f5055e84506b4c.json",
+          "bytes": 6344562,
+          "sha256": "2ee11178eed685c0d15fc04c4fab99ff575cbe6713eab2df34f5055e84506b4c"
+        },
+        {
+          "url": "http://127.0.0.1:4278/scenes/oumuamua/oumuamua-model-surface@2x.webp",
+          "bytes": 33918,
+          "sha256": "d9f697a43cac2561a70400c087eab01fc72c7ad8afdee8ece7c890b70ac57f08"
+        }
+      ],
+      "durationMs": 6283.734,
+      "rafIntervals": {
+        "count": 377,
+        "totalMs": 6283.1,
+        "medianMs": 16.7,
+        "p95Ms": 16.7,
+        "maxMs": 16.8,
+        "over33ms": 0,
+        "over50ms": 0
+      },
+      "drawCadence": [
+        {
+          "thread": "30342:8966128",
+          "count": 374,
+          "intervals": {
+            "count": 373,
+            "totalMs": 6219.982,
+            "medianMs": 16.659,
+            "p95Ms": 18.435,
+            "maxMs": 31.069,
+            "over33ms": 0,
+            "over50ms": 0
+          }
+        }
+      ],
+      "trace": {
+        "filename": "chrome-trace.json.gz",
+        "bytes": 6136173,
+        "sha256": "9d3b12d5dbcf61f48572f43a429bf17d6f4577058d5f1ea39fb22a5d6c9a50c9"
+      }
+    },
+    {
+      "route": "http://127.0.0.1:4278/gkunhomdima/?v=MMZAmTlC1qWj6UFCxzNAAAAAv9C0h7bf152_135zWWxzhj-7rZZN4m41AAA",
+      "browser": "152.0.7977.84",
+      "headless": true,
+      "dpr": 2,
+      "capturedAt": "2026-09-10T03:37:45.774Z",
+      "codeRevision": "cfec37dfbefed8a0c5578da5be91644d2c26bfaf",
+      "worktreeDiffSha256": "8442258faba5e15527676c222dc03511003f8d676fa73372908a93fd405bdbb4",
+      "diagnosticsAvailable": false,
+      "hardware": [
+        "Mac15,11",
+        "38654705664",
+        "Apple M3 Max"
+      ],
+      "gpu": {
+        "devices": [
+          {
+            "vendorId": 4203,
+            "deviceId": 0,
+            "vendorString": "Google Inc. (Apple)",
+            "deviceString": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Max, Version 15.7.7 (Build 24G720))",
+            "driverVendor": "Apple",
+            "driverVersion": "15.7.7"
+          }
+        ],
+        "auxAttributes": {
+          "amdSwitchable": false,
+          "canSupportThreadedTextureMailbox": false,
+          "directRenderingVersion": "",
+          "displayType": "ANGLE_METAL",
+          "glExtensions": "GL_AMD_performance_monitor GL_ANGLE_base_vertex_base_instance_shader_builtin GL_ANGLE_blob_cache GL_ANGLE_client_arrays GL_ANGLE_clip_cull_distance GL_ANGLE_compressed_texture_etc GL_ANGLE_depth_texture GL_ANGLE_framebuffer_blit GL_ANGLE_framebuffer_multisample GL_ANGLE_get_serialized_context_string GL_ANGLE_get_tex_level_parameter GL_ANGLE_instanced_arrays GL_ANGLE_memory_size GL_ANGLE_pack_reverse_row_order GL_ANGLE_polygon_mode GL_ANGLE_program_binary_readiness_query GL_ANGLE_program_cache_control GL_ANGLE_provoking_vertex GL_ANGLE_renderability_validation GL_ANGLE_request_extension GL_ANGLE_rgbx_internal_format GL_ANGLE_robust_client_memory GL_ANGLE_shader_pixel_local_storage GL_ANGLE_shader_pixel_local_storage_coherent GL_ANGLE_stencil_texturing GL_ANGLE_texture_compression_dxt3 GL_ANGLE_texture_compression_dxt5 GL_ANGLE_texture_multisample GL_ANGLE_translated_shader_source GL_APPLE_clip_distance GL_ARM_rgba8 GL_CHROMIUM_bind_generates_resource GL_CHROMIUM_bind_uniform_location GL_CHROMIUM_copy_texture GL_CHROMIUM_lose_context GL_EXT_base_instance GL_EXT_blend_func_extended GL_EXT_blend_minmax GL_EXT_clip_control GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_compressed_ETC1_RGB8_sub_texture GL_EXT_conservative_depth GL_EXT_debug_label GL_EXT_debug_marker GL_EXT_depth_clamp GL_EXT_discard_framebuffer GL_EXT_disjoint_timer_query GL_EXT_draw_buffers GL_EXT_draw_buffers_indexed GL_EXT_draw_elements_base_vertex GL_EXT_float_blend GL_EXT_frag_depth GL_EXT_instanced_arrays GL_EXT_map_buffer_range GL_EXT_multisampled_render_to_texture GL_EXT_occlusion_query_boolean GL_EXT_polygon_offset_clamp GL_EXT_pvrtc_sRGB GL_EXT_read_format_bgra GL_EXT_render_snorm GL_EXT_robustness GL_EXT_sRGB GL_EXT_shader_texture_lod GL_EXT_texture_compression_bptc GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc_srgb GL_EXT_texture_filter_anisotropic GL_EXT_texture_format_BGRA8888 GL_EXT_texture_mirror_clamp_to_edge GL_EXT_texture_norm16 GL_EXT_texture_rg GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_EXT_texture_shadow_lod GL_EXT_texture_storage GL_IMG_texture_compression_pvrtc GL_KHR_debug GL_KHR_parallel_shader_compile GL_KHR_robustness GL_KHR_texture_compression_astc_hdr GL_KHR_texture_compression_astc_ldr GL_KHR_texture_compression_astc_sliced_3d GL_MESA_framebuffer_flip_y GL_NV_fence GL_NV_framebuffer_blit GL_NV_pixel_buffer_object GL_NV_shader_noperspective_interpolation GL_OES_EGL_image GL_OES_EGL_sync GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth24 GL_OES_depth32 GL_OES_depth_texture GL_OES_draw_buffers_indexed GL_OES_draw_elements_base_vertex GL_OES_element_index_uint GL_OES_fbo_render_mipmap GL_OES_get_program_binary GL_OES_mapbuffer GL_OES_packed_depth_stencil GL_OES_required_internalformat GL_OES_rgb8_rgba8 GL_OES_sample_variables GL_OES_shader_multisample_interpolation GL_OES_standard_derivatives GL_OES_surfaceless_context GL_OES_texture_3D GL_OES_texture_float GL_OES_texture_float_linear GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_texture_npot GL_OES_texture_stencil8 GL_OES_vertex_array_object GL_QCOM_render_shared_exponent ",
+          "glImplementationParts": "(gl=egl-angle,angle=metal)",
+          "glRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Max, Version 15.7.7 (Build 24G720))",
+          "glResetNotificationStrategy": 33362,
+          "glVendor": "Google Inc. (Apple)",
+          "glVersion": "OpenGL ES 3.0 (ANGLE 2.1.28468 git hash: 7df613367a1d)",
+          "glWsExtensions": "",
+          "glWsVendor": "",
+          "glWsVersion": "",
+          "inProcessGpu": false,
+          "initializationTime": 0.043456,
+          "isAsan": false,
+          "isClangCoverage": false,
+          "jpegDecodeAcceleratorSupported": false,
+          "maxMsaaSamples": "4",
+          "optimus": false,
+          "passthroughCmdDecoder": true,
+          "pixelShaderVersion": "3.00",
+          "processCrashCount": 0,
+          "sandboxed": false,
+          "skiaBackendType": "GraphiteDawnMetal",
+          "subpixelFontRendering": true,
+          "targetCpuBits": 64,
+          "vertexShaderVersion": "3.00",
+          "visibilityCallbackCallCount": 0
+        },
+        "featureStatus": {
+          "2d_canvas": "enabled",
+          "direct_rendering_display_compositor": "disabled_off_ok",
+          "gpu_compositing": "enabled",
+          "multiple_raster_threads": "enabled_on",
+          "opengl": "enabled_on",
+          "rasterization": "enabled",
+          "raw_draw": "disabled_off_ok",
+          "skia_graphite": "enabled_on",
+          "trees_in_viz": "disabled_off",
+          "video_decode": "enabled",
+          "video_encode": "enabled",
+          "webgl": "enabled",
+          "webgpu": "enabled",
+          "webnn": "disabled_off"
+        },
+        "driverBugWorkarounds": [
+          "disable_2d_canvas_auto_flush",
+          "enable_webgl_timer_query_extensions",
+          "disabled_extension_GL_KHR_blend_equation_advanced",
+          "disabled_extension_GL_KHR_blend_equation_advanced_coherent"
+        ],
+        "videoDecoding": [],
+        "videoEncoding": []
+      },
+      "workload": {
+        "cycles": 3,
+        "stepsPerLeg": 60,
+        "x": 0.6,
+        "startY": 0.485,
+        "upperY": 0.283,
+        "lowerY": 0.582,
+        "shadows": false,
+        "wheels": 0
+      },
+      "initial": {
+        "sceneTransform": "matrix3d(0.0141421, -0.00483689, 0.0132893, 0, 0, 0.0187939, 0.0068404, 0, -0.0141421, -0.00483689, 0.0132893, 0, 0, 0, 75.4158, 1)",
+        "nodes": 118051,
+        "bodyLeaves": 480,
+        "atlasUrls": [
+          "url(\"http://127.0.0.1:4278/scenes/gkunhomdima/gkunhomdima-model-surface@2x.webp\")"
+        ],
+        "diagnosticsAvailable": false
+      },
+      "final": {
+        "sceneTransform": "matrix3d(0.0141421, 0.00766545, 0.0118845, 0, 0, 0.0168072, -0.0108406, 0, -0.0141421, 0.00766545, 0.0118845, 0, 0, 0, 75.4158, 1)",
+        "nodes": 118051,
+        "retainedIdentity": true,
+        "atlasUrls": [
+          "url(\"http://127.0.0.1:4278/scenes/gkunhomdima/gkunhomdima-model-surface@2x.webp\")"
+        ]
+      },
+      "errors": [],
+      "interactionRequests": [],
+      "prepared": {
+        "src/planets/gkunhomdima/prepared/object.json": {
+          "bytes": 6333651,
+          "sha256": "b264f4ef30ef38f13c6164e434b48fff4885aff6cbd320c15bb4c16a8eb744d6"
+        },
+        "src/planets/gkunhomdima/prepared/runtime.json": {
+          "bytes": 6333531,
+          "sha256": "2826809e6f36c5ed7fd56c174986cffd8d63428d3719fa095cd5a30f4494ef17"
+        },
+        "src/planets/gkunhomdima/runtime-assets.json": {
+          "bytes": 5539,
+          "sha256": "1f1b532896abf10f9ae5a441abc88d93773fec75562e6b13d7e2ca485715c22c"
+        },
+        "src/planets/gkunhomdima/prepared/terrain.json": {
+          "bytes": 220871,
+          "sha256": "7b2977949b0ec8af3875b38dcae7c1fe729a8fca0556e53cf1ba2a0a24034101"
+        }
+      },
+      "loaded": [
+        {
+          "url": "http://127.0.0.1:4278/_astro/packaged-object-runtime.cEmehwFt.js",
+          "bytes": 211134,
+          "sha256": "4ab3a8c02c5ef414799aff78eeea46455fc930b4acf1ff50f18c7c8a2b7143e7"
+        },
+        {
+          "url": "http://127.0.0.1:4278/_astro/PlanetLayout.astro_astro_type_script_index_0_lang.BAk0qBQW.js",
+          "bytes": 6466820,
+          "sha256": "7975e30a5428134ed53ff2afbb84a73bed8af6946758ca069c0d9ed50bb0329e"
+        },
+        {
+          "url": "http://127.0.0.1:4278/_astro/point-field-selection-worker-CMrTEVt-.js",
+          "bytes": 8296,
+          "sha256": "cb4bbe0c3d7a50cce711f453092c07064c766fe59c9e11da2fb9ed59a8dd44e8"
+        },
+        {
+          "url": "http://127.0.0.1:4278/_astro/prepared-object-worker-DmK6HlcO.js",
+          "bytes": 87312,
+          "sha256": "c9148e8e3d4c733629fe57cbee4c7ecdb57db3da758e1c153b150369ddec0ce7"
+        },
+        {
+          "url": "http://127.0.0.1:4278/_astro/world-context-planner-worker-HoX0FuXI.js",
+          "bytes": 15561,
+          "sha256": "be151f80eefb839f6e60d69dead3abc0ef4fb0acad819ba24d745d54bc4bdddc"
+        },
+        {
+          "url": "http://127.0.0.1:4278/objects/gkunhomdima/b264f4ef30ef38f13c6164e434b48fff4885aff6cbd320c15bb4c16a8eb744d6.json",
+          "bytes": 6333651,
+          "sha256": "b264f4ef30ef38f13c6164e434b48fff4885aff6cbd320c15bb4c16a8eb744d6"
+        },
+        {
+          "url": "http://127.0.0.1:4278/scenes/gkunhomdima/gkunhomdima-model-surface@2x.webp",
+          "bytes": 56174,
+          "sha256": "42e8495a96632291d0cbe2d23dd157aa35ab9fe9ea98d5c0156196ec062cccdc"
+        }
+      ],
+      "durationMs": 6274.838,
+      "rafIntervals": {
+        "count": 376,
+        "totalMs": 6266.4,
+        "medianMs": 16.7,
+        "p95Ms": 16.8,
+        "maxMs": 16.8,
+        "over33ms": 0,
+        "over50ms": 0
+      },
+      "drawCadence": [
+        {
+          "thread": "31465:8968510",
+          "count": 373,
+          "intervals": {
+            "count": 372,
+            "totalMs": 6204.531,
+            "medianMs": 16.653,
+            "p95Ms": 18.164,
+            "maxMs": 34.543,
+            "over33ms": 1,
+            "over50ms": 0
+          }
+        }
+      ],
+      "trace": {
+        "filename": "chrome-trace.json.gz",
+        "bytes": 5909783,
+        "sha256": "3c5212766cefd5d5375640d5f3effc97bc17590ad96b07b47b55813b0a2fe124"
+      }
+    }
+  ]
+}

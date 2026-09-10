@@ -1,6 +1,6 @@
 export const OBJECT_CATEGORIES = [
   ['all', 'All'], ['planet', 'Planets'],
-  ['satellite', 'Moons'], ['comet', 'Comets'], ['asteroid', 'Other'], ['trans-neptunian', 'Trans-Neptunian'],
+  ['satellite', 'Moons'], ['comet', 'Comets'], ['asteroid', 'Other'], ['trans-neptunian', 'Trans-Neptunian'], ['interstellar', 'Interstellar'],
 ];
 
 export const objectCategory = classification => classification === 'dwarf-planet' ? 'planet' : classification === 'star' ? 'all' : classification;

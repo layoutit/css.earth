@@ -1,0 +1,312 @@
+{
+  "schema": "cssearth-distant-worlds-qualification@1",
+  "scope": "Nine own packages: complete source and runtime byte closures, scene/page binding, native triangle budgets, source topology and defaults. Browser evidence is reported separately.",
+  "bodies": [
+    {
+      "id": "oumuamua",
+      "assetCount": 31,
+      "sourceInputCount": 4,
+      "assetBytes": 6992718,
+      "faceCount": 480,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 5040,
+        "sourceVertices": 2522,
+        "weldedVertices": 2522,
+        "targetFaces": 480,
+        "outputFaces": 480,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 0.7795335650243075,
+        "estimatedErrorMeters": 0.1612553596496582,
+        "topology": {
+          "vertices": 242,
+          "edges": 720,
+          "faces": 480,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 121405.96346293631
+        }
+      },
+      "pageMetadataSha256": "ad99fa6556a26bac1b1a200795bd5d4422ecfa8d3b2b8be9d0a99f8f068be749",
+      "defaultLens": "model",
+      "shadows": false,
+      "orbit": false
+    },
+    {
+      "id": "sedna",
+      "assetCount": 31,
+      "sourceInputCount": 4,
+      "assetBytes": 7021176,
+      "faceCount": 480,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 5040,
+        "sourceVertices": 2522,
+        "weldedVertices": 2522,
+        "targetFaces": 480,
+        "outputFaces": 480,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 12437.499999999996,
+        "estimatedErrorMeters": 8499.4775390625,
+        "topology": {
+          "vertices": 242,
+          "edges": 720,
+          "faces": 480,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 500673118884814000
+        }
+      },
+      "pageMetadataSha256": "33a2bce0a4e5f599753856700c979b4cf27946a26383d32c27b15a3f819dafb9",
+      "defaultLens": "model",
+      "shadows": false,
+      "orbit": false
+    },
+    {
+      "id": "gonggong",
+      "assetCount": 31,
+      "sourceInputCount": 4,
+      "assetBytes": 7021912,
+      "faceCount": 480,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 5040,
+        "sourceVertices": 2522,
+        "weldedVertices": 2522,
+        "targetFaces": 480,
+        "outputFaces": 480,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 15374.999999999995,
+        "estimatedErrorMeters": 10436.908203125,
+        "topology": {
+          "vertices": 242,
+          "edges": 720,
+          "faces": 480,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 945416040669011700
+        }
+      },
+      "pageMetadataSha256": "60de7459309e4c871d6b0e3ebfcfe86fab654207ac9f179e07c5ef4bc00fb1c9",
+      "defaultLens": "model",
+      "shadows": false,
+      "orbit": false
+    },
+    {
+      "id": "orcus",
+      "assetCount": 31,
+      "sourceInputCount": 4,
+      "assetBytes": 7019702,
+      "faceCount": 480,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 5040,
+        "sourceVertices": 2522,
+        "weldedVertices": 2522,
+        "targetFaces": 480,
+        "outputFaces": 480,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 11374.999999999996,
+        "estimatedErrorMeters": 7615.38525390625,
+        "topology": {
+          "vertices": 242,
+          "edges": 720,
+          "faces": 480,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 382626268207982700
+        }
+      },
+      "pageMetadataSha256": "7ad1b1f2277ee17d1d647fcf32a9c98b737a45cd1eedf2cacc281c840115033c",
+      "defaultLens": "model",
+      "shadows": false,
+      "orbit": false
+    },
+    {
+      "id": "salacia",
+      "assetCount": 31,
+      "sourceInputCount": 4,
+      "assetBytes": 7025272,
+      "faceCount": 480,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 5040,
+        "sourceVertices": 2522,
+        "weldedVertices": 2522,
+        "targetFaces": 480,
+        "outputFaces": 480,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 10474.999999999996,
+        "estimatedErrorMeters": 7096.8046875,
+        "topology": {
+          "vertices": 242,
+          "edges": 720,
+          "faces": 480,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 298791452385915300
+        }
+      },
+      "pageMetadataSha256": "e02ab970d2687719a061ee00e5f1dcf13459dee27900e8c8143b99f979265d22",
+      "defaultLens": "model",
+      "shadows": false,
+      "orbit": false
+    },
+    {
+      "id": "varuna",
+      "assetCount": 31,
+      "sourceInputCount": 4,
+      "assetBytes": 7006384,
+      "faceCount": 480,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 5040,
+        "sourceVertices": 2522,
+        "weldedVertices": 2522,
+        "targetFaces": 480,
+        "outputFaces": 480,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 8750.000001696591,
+        "estimatedErrorMeters": 5851.1953125,
+        "topology": {
+          "vertices": 242,
+          "edges": 720,
+          "faces": 480,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 174025015016892400
+        }
+      },
+      "pageMetadataSha256": "fc572459ed31c100afd1cf8da4e0bdf2480d4ae1df62196ccbf931dfa700c9f5",
+      "defaultLens": "model",
+      "shadows": false,
+      "orbit": false
+    },
+    {
+      "id": "varda",
+      "assetCount": 31,
+      "sourceInputCount": 4,
+      "assetBytes": 7018704,
+      "faceCount": 480,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 5040,
+        "sourceVertices": 2522,
+        "weldedVertices": 2522,
+        "targetFaces": 480,
+        "outputFaces": 480,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 8103.363816496898,
+        "estimatedErrorMeters": 5250.60498046875,
+        "topology": {
+          "vertices": 242,
+          "edges": 720,
+          "faces": 480,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 138309641898356030
+        }
+      },
+      "pageMetadataSha256": "bce01f811a6dcdadec3b39bb52bc8ec72c04de1da1e96aba34e55acacf5625df",
+      "defaultLens": "model",
+      "shadows": false,
+      "orbit": false
+    },
+    {
+      "id": "mani",
+      "assetCount": 31,
+      "sourceInputCount": 4,
+      "assetBytes": 7022968,
+      "faceCount": 480,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 5040,
+        "sourceVertices": 2522,
+        "weldedVertices": 2522,
+        "targetFaces": 480,
+        "outputFaces": 480,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 10069.897791541332,
+        "estimatedErrorMeters": 6374.216796875,
+        "topology": {
+          "vertices": 242,
+          "edges": 720,
+          "faces": 480,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 265546745833612540
+        }
+      },
+      "pageMetadataSha256": "8e2e3c62e84af7dfb4e98fc4b516dcd7b149282bfcee263a780792bec83df1bf",
+      "defaultLens": "model",
+      "shadows": false,
+      "orbit": false
+    },
+    {
+      "id": "achlys",
+      "assetCount": 31,
+      "sourceInputCount": 4,
+      "assetBytes": 7004960,
+      "faceCount": 480,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 5040,
+        "sourceVertices": 2522,
+        "weldedVertices": 2522,
+        "targetFaces": 480,
+        "outputFaces": 480,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 8832.715607884573,
+        "estimatedErrorMeters": 5945.02392578125,
+        "topology": {
+          "vertices": 242,
+          "edges": 720,
+          "faces": 480,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 178951567303208670
+        }
+      },
+      "pageMetadataSha256": "7eef212c41b68e179f9436fa8e8bc73ff41bb95681f414494b55c62d8f14c861",
+      "defaultLens": "model",
+      "shadows": false,
+      "orbit": false
+    }
+  ]
+}

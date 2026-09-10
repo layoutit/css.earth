@@ -9,7 +9,7 @@ import { OBJECTS } from './objects.mjs';
 import { CONTEXT_ANNOTATION_PRIORITY } from './runtime-policy.mjs';
 
 const asteroidIds = OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
-const hiddenOrbitIds = OBJECTS.filter(object => ['comet', 'trans-neptunian'].includes(object.classification)).map(object => object.id);
+const hiddenOrbitIds = OBJECTS.filter(object => ['comet', 'trans-neptunian', 'interstellar'].includes(object.classification)).map(object => object.id);
 const annotationPriorities = Object.fromEntries(OBJECTS.map(object =>
   [object.id, CONTEXT_ANNOTATION_PRIORITY[object.classification] ?? 0]));
 

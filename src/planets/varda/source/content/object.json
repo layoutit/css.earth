@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "varda",
+  "displayName": "Varda",
+  "panel": {
+    "introduction": "Varda is a distant binary-system primary whose outline was measured as it eclipsed a star. Its companion’s orbit helps orient this model, but Varda’s depth remains uncertain.",
+    "facts": [
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Published triaxial example model"
+      },
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "778 × 706 × 496 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation",
+        "value": "Unresolved; photometric aliases and synchronous rotation remain alternatives"
+      },
+      {
+        "id": "class",
+        "label": "Population",
+        "value": "Trans-Neptunian object"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "uncertainty",
+        "label": "Shape interpretation",
+        "value": "One published allowable triaxial model, with semiaxes 389, 353 and 248 km. The line-of-sight depth is unconstrained; these best-fit values illustrate a solution rather than a uniquely measured body shape."
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "One published allowable triaxial model, with semiaxes 389, 353 and 248 km. The line-of-sight depth is unconstrained; these best-fit values illustrate a solution rather than a uniquely measured body shape. Assumes the spin pole aligns with Ilmarë’s orbit: J2000 RA 272.6° and declination −10.8°. This is a model prior; rotational phase and meridian are illustrative. The grid marks unmapped terrain.",
+        "title": "Published triaxial example model",
+        "detail": "Inferred shape · unmapped surface grid",
+        "thumbnail": "/scenes/varda/varda-model-thumbnail.webp",
+        "surface": "varda-model-surface@2x.webp",
+        "poles": "varda-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2605.28636"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "Proudfoot et al. (2026), occult3d reanalysis of Souami et al. (2020) occultation chords",
+      "href": "https://arxiv.org/abs/2605.28636"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://doi.org/10.1051/0004-6361/202038526"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://arxiv.org/abs/2008.04818"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://github.com/benp175/occult3d"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2605.28636",
+      "credit": "Proudfoot et al. (2026), occult3d reanalysis of Souami et al. (2020) occultation chords"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Proudfoot et al. (2026), occult3d reanalysis of Souami et al. (2020) occultation chords"
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "oumuamua",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "ʻOumuamua",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "9c9293ac94fcc3b567b34ca005d225e4a7f38a70b62e6ad70d82109e4fba9cec"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "eb4eda40e7c250fd9e0820e4b4093ec6fd17d47db9b8243d3d7e0f9bca022db9"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "bfb2d5a3a5eb358a271c78a1f3652eeaff3bfcf771ae03b1354ccd4741f21c85"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "7151fadeaeecfd6975b3e0697b0b52e19ac1486f87330860f7280d57db632c3f"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "47d19431be381f3365b4a0a43d511a0fbc369b7280f5ca3f2a929fcec7e2fedc"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "53525af1eb4012149cd288bec87647e5506c620a1572e6cf6b2639bfbc5b7266"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 0.0311813426009723
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/oumuamua-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ad99fa6556a26bac1b1a200795bd5d4422ecfa8d3b2b8be9d0a99f8f068be749"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        7391343872076.318,
+        -165695894334.4593,
+        3338018235733.6655
+      ],
+      "presentationToReference": [
+        0.987583026771252,
+        0,
+        -0.1570979478966307,
+        0.14413454918303764,
+        0.3977771559319137,
+        0.9060897118666122,
+        0.06248997491706172,
+        -0.9174820620691818,
+        0.3928379676356996
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 0.1355710547868361,
+      "bodyRadiusM": 31.1813426009723
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "2ee11178eed685c0d15fc04c4fab99ff575cbe6713eab2df34f5055e84506b4c"
+  }
+}

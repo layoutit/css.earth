@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "salacia",
+  "displayName": "Salacia",
+  "panel": {
+    "introduction": "Salacia is a large, dark Kuiper-belt world with the moon Actaea. Long-term photometry supports a synchronized binary. This grid-covered illustration uses a separately estimated primary size, not a resolved surface.",
+    "facts": [
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Published size model; shape unresolved"
+      },
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "838 × 838 × 838 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation",
+        "value": "About 5.494 days (131.86 hours); 2025 photometry supports synchronous rotation with Actaea."
+      },
+      {
+        "id": "class",
+        "label": "Population",
+        "value": "Hot classical trans-Neptunian object"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "uncertainty",
+        "label": "Shape interpretation",
+        "value": "Size-constrained spherical illustration at the primary-only 838 ±44 km ALMA/NEATM estimate. This value is from a 2025 conference abstract; no resolved three-axis shape is provided."
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Size-constrained spherical illustration at the primary-only 838 ±44 km ALMA/NEATM estimate. This value is from a 2025 conference abstract; no resolved three-axis shape is provided. Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed. The grid marks unmapped terrain.",
+        "title": "Published size model; shape unresolved",
+        "detail": "Inferred shape · unmapped surface grid",
+        "thumbnail": "/scenes/salacia/salacia-model-thumbnail.webp",
+        "surface": "salacia-model-surface@2x.webp",
+        "poles": "salacia-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.5194/epsc-dps2025-905"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "Kiss et al. (2025), EPSC-DPS conference thermal-model result; Collyer et al. (2025), synchronous rotation.",
+      "href": "https://doi.org/10.5194/epsc-dps2025-905"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://arxiv.org/abs/2509.02734"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://doi.org/10.3847/PSJ/ae0b6a"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://arxiv.org/abs/2508.17101"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.5194/epsc-dps2025-905",
+      "credit": "Kiss et al. (2025), EPSC-DPS conference thermal-model result; Collyer et al. (2025), synchronous rotation."
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Kiss et al. (2025), EPSC-DPS conference thermal-model result; Collyer et al. (2025), synchronous rotation."
+    }
+  }
+}

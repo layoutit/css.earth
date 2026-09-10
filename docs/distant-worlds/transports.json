@@ -1,0 +1,2648 @@
+[
+  {
+    "id": "achlys",
+    "bytes": 6329182,
+    "sha256": "d90d2d10e7b13767784763475ca435774e338b4b9d094136417983a3e7db784a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "mani",
+    "bytes": 6327017,
+    "sha256": "f43ba149cb3e0f2150e27983dc4555c5e64f8e14701da9af16cb515a7d0e670a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "varda",
+    "bytes": 6329218,
+    "sha256": "959a2b4a6b635391dcbf94d44fa32dd74d5f56009e434748b918efec4cab10f0",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "varuna",
+    "bytes": 6328176,
+    "sha256": "bd99fbdc25bb75d47271f836d32e56084802eccccc32257e32c6002f551e57e3",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "salacia",
+    "bytes": 6329972,
+    "sha256": "01509e1d2cfdcea52d4080487bd76001fe6efcf7f9542ea6b16f2e3a13d1441e",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "orcus",
+    "bytes": 6330008,
+    "sha256": "dc5e21a8ccd5ba01c8342ecb59d1381afb37545928adad36071f68e9134a356a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "gonggong",
+    "bytes": 6329209,
+    "sha256": "2dbfa194fbb742c1cf92b1c49ef6fa853e898a30aa2fb8097c2d9db3dc740eb8",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "sedna",
+    "bytes": 6331762,
+    "sha256": "dcd14e33210e1f828b35fae3b356fbfe38bd303ebc0a63bbb3edd68c8484d930",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "oumuamua",
+    "bytes": 6344562,
+    "sha256": "2ee11178eed685c0d15fc04c4fab99ff575cbe6713eab2df34f5055e84506b4c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "polymele",
+    "bytes": 6332237,
+    "sha256": "30ac33a996cc5833b109b11fc919f776a0f5c7c693551ebba9cdecc837eb63ab",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "leucus",
+    "bytes": 6329905,
+    "sha256": "e2668e344259865cda4ce2a5e70b744fae4d8d8810a2c24833e6bd69a1cffcfd",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "orus",
+    "bytes": 6328220,
+    "sha256": "2f4575cf7c6dd7a63b050dffc411a45d14d632c7747d4bc1439ffc5e96a44fa7",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "eurybates",
+    "bytes": 6330302,
+    "sha256": "6f9f4cfc38767408c3cf44c72158e7e9c5218325d0ba93f4e7e228f7b7a60d87",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "patroclus",
+    "bytes": 6329653,
+    "sha256": "5bf77a7c74d1e615f4ce6faad9e965066ca8e8bf610115d96b1da5927e897107",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hiiaka",
+    "bytes": 6319706,
+    "sha256": "0cef234018a904376f0cf1fc567bcf2c857da6a92ae118c7f8ff33d6cc3c3437",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "squannit",
+    "bytes": 6901775,
+    "sha256": "b59479d5076ee938ddfaff4d0e4c7de22f22f52124db76d426baa751f285922c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "romulus",
+    "bytes": 6722358,
+    "sha256": "18a67b8351ed835906c996da244341b27f7d8852b8ee037ad54f07086c6e2d63",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "menoetius",
+    "bytes": 6718169,
+    "sha256": "15f76df3ab6fbc5c30ca12fa1f71f5cc563e6c2f243b758b0a674f54acab3cf9",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "caliban",
+    "bytes": 6327500,
+    "sha256": "148e24c3e8dc6e8c33ef471c3ce9d827c6d3294e17150d32f4ebaee4695edeeb",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "sycorax",
+    "bytes": 6323716,
+    "sha256": "ff28b5a5c2df8287eb54ac00f1c8d17cb4da6067c549a463ec12fd3ddcd730b2",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "prospero",
+    "bytes": 6326762,
+    "sha256": "d1fa29fe5caacc32e7e776c419e2cabda8f7195b479f2d9ea787b60e8805d98d",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "setebos",
+    "bytes": 6327925,
+    "sha256": "95b6447c4fd9bad3e0e9b95d71779b0fb4d154c9754abc1966566e5e34dec09e",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "paaliaq",
+    "bytes": 6329940,
+    "sha256": "b8e044dfaac4c9832f84b898cc6f62a07a4994df0aee917ae64b4b66a942d1de",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "tarvos",
+    "bytes": 6329933,
+    "sha256": "317b741509a0db06d0d436560389e27b050d266781a35774fcdeb3c27c09fc69",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ijiraq",
+    "bytes": 6330782,
+    "sha256": "85aa26930c877be22fcc344b02afe44e52334a794b575f8d19e4f0775721e971",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "suttungr",
+    "bytes": 6333338,
+    "sha256": "7f2516c132329dc01a4a371cdc5a396c406d08897d972723f92c40c2e68a8791",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "mundilfari",
+    "bytes": 6333816,
+    "sha256": "b3365c1f567d283dff02354982394e994787e41b550c18fd0ff305a666ebe197",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "skathi",
+    "bytes": 6331643,
+    "sha256": "ed2d3549349425b49dbd82a968e887e7fa1e2732ba3929a05fa32b5fb8745f83",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "erriapus",
+    "bytes": 6332099,
+    "sha256": "8e01c187f5f411f4983f3d29a7cf13181e086f4328a9eb024d85e958ce6cb000",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "thrymr",
+    "bytes": 6331440,
+    "sha256": "113a7fb162dce4c187209979e486aa7671f836f6dfefed1572fa6a4ba8ce07b6",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "bebhionn",
+    "bytes": 6333125,
+    "sha256": "04f9f9b274d307fc99ba13921142065556095944014b6d17d5aafaa7f5f7b548",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "bergelmir",
+    "bytes": 6335207,
+    "sha256": "c4d511d70db0d07ec83de74ffab56866c989ad6abcfabbc6c2003c18b03e46d3",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "bestla",
+    "bytes": 6332444,
+    "sha256": "fcc4cf5a5e81f51d778ac8bd4d5394935b0f23c2eb158cf7eb63ea3d913c0aa9",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "fornjot",
+    "bytes": 6333463,
+    "sha256": "9e9e8414103202c58b66f2268bccc2f5749c3fcadd9ae6f7e828e9876adb5b66",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hati",
+    "bytes": 6331622,
+    "sha256": "4aa7a9140e6c1b52afa0a2aba50a41781b885fb130a75e75d6fbf42825990877",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hyrrokkin",
+    "bytes": 6334242,
+    "sha256": "0a8ad2d314ce1d28b07e314eebf7fc105805d380706e779e7835a23e17bc6fd1",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "loge",
+    "bytes": 6332420,
+    "sha256": "aadd6629c04d9f078d37a7100d60b933013668645eb85c6750b58fb750dccc60",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "skoll",
+    "bytes": 6332963,
+    "sha256": "549851d1d797fe4ad89afb36ba9cce83ecd4c362ef84f4c75b6f41e7def9606b",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "greip",
+    "bytes": 6332900,
+    "sha256": "79539e102613058631123ca97916297fca7c0268ceba73ec511019b77222d29f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "tarqeq",
+    "bytes": 6333599,
+    "sha256": "0f0c64a6a032a9c0d3f600edaafe9be0be389344b8bafedbdf7dc0422026bd07",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "albiorix",
+    "bytes": 6330120,
+    "sha256": "ff178a62f1085c32f9a84f3533203e8c1f9b6fb98df0e4dfbca29d90a38adf38",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "kiviuq",
+    "bytes": 6314259,
+    "sha256": "b3ddedb817211fed805665cc0eec856ff1941d9162abc8772fb19ce389fe35ed",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "comet-2p",
+    "bytes": 6602471,
+    "sha256": "2ca0955ef510339c20fd195bff14402a1ab042cccddd9cb0a16a63a88c752c61",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "comet-209p",
+    "bytes": 6631185,
+    "sha256": "9bfd98d15570343221c554c5b4b39502da6f3024b3835efe20a119f31b175e09",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "comet-137p",
+    "bytes": 6624193,
+    "sha256": "b7adb653448a288bd981a92f0b8579fe2cefa65891cd0d598410ddeadb5fc6f5",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "comet-143p",
+    "bytes": 6627362,
+    "sha256": "987a8f0535bedbb8073ceab1958e2c4ff039a7ea7932a78195a79aa0921717a9",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "comet-162p",
+    "bytes": 6600559,
+    "sha256": "61f14f8ca2eb620000459e733fbce254452f2838f991b45c8bea0277352e7fc1",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "comet-19p",
+    "bytes": 8195002,
+    "sha256": "a77a287140fe07275b2316cc0ae0c1630075b831ddc2f0f6ba54a75f5294daca",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "comet-8p",
+    "bytes": 7541456,
+    "sha256": "5ff350f5dd4644831572a70a3d71de1f07469932100327c7265053d511f02ab1",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "comet-1p",
+    "bytes": 6786540,
+    "sha256": "5a90eaac407392bf06d93ee3a3ea3aa18341be55f51e97b5546d3aa7d6534688",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "comet-81p",
+    "bytes": 6783712,
+    "sha256": "00c6fce62bc2d7e4e355e1d70de9e00fcbf705ead8a7da2ee1c1c2a166ec9a37",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "comet-103p",
+    "bytes": 6797721,
+    "sha256": "73553697b8900eeca9ceef26c1082c9f116f7227b6caf3b275326ffbf1d16bf9",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "comet-9p",
+    "bytes": 6793876,
+    "sha256": "e19fb6d8eb810c263d7f217174953abc8c713a657a25b2922356506ad0984bc9",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "comet-67p",
+    "bytes": 6813847,
+    "sha256": "10b29069b3c91302847ccf65e66d5f2932827e14f0fca975cf51dd5523fcd63c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ymir",
+    "bytes": 6313223,
+    "sha256": "64d72a963e571930f1dad51a3217cedc7d2afe5c772d39da9759f5e9920072bc",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "siarnaq",
+    "bytes": 6326247,
+    "sha256": "43508cd2753cc7429a19fda254570d6134d6fa169e582d1560369b6175c770f2",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "himalia",
+    "bytes": 6321277,
+    "sha256": "ab1194a1c71e523bf9fd50d34eb804b612d49bcf4b2aa592bf84627d5f170608",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "nereid",
+    "bytes": 6319983,
+    "sha256": "d6c03d6454f3f0763e5ef2b83dcc1e04004a21d9ee22777dbe597b379ac1c6fe",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "aegaeon",
+    "bytes": 6320044,
+    "sha256": "2e2e06b0deb9530ed5936ec5287b6dd70aafa79861f5ef434026a9257592b80c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "anthe",
+    "bytes": 6331880,
+    "sha256": "fcaed991787e2ff09b342260b01dd1e245b5ecdf1ffe6c5e52a7db450174bcce",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "polydeuces",
+    "bytes": 6333240,
+    "sha256": "028780f72059da185013f0753b41a0ff53071c190630fa59e87c2615f3620ce2",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "rosalind",
+    "bytes": 6321538,
+    "sha256": "6d75fa3b190a5c0bd34903775120c6b920ec4efe2713356de5dbf7c42abfbb41",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "desdemona",
+    "bytes": 6322438,
+    "sha256": "32900c990fac2213f3cafd01365de3e5c887700726db4f6bfb7f9b9a5870d4da",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "cressida",
+    "bytes": 6322057,
+    "sha256": "7a4df79258348e6aeedc741b9ce070cffd927338d64333cbe1f3d2424e6cf527",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "bianca",
+    "bytes": 6320703,
+    "sha256": "39a1ab0de96792449cf285832dee8242ba9bbd783294ec4824111bb218623eb0",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ophelia",
+    "bytes": 6324438,
+    "sha256": "ae9a2bd0d36becd8799ab29385484848d988823bf3159979309e7662b9cbb0a8",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "cordelia",
+    "bytes": 6323361,
+    "sha256": "dbb33d3fe11f7a2bcd37d94b9f7a3a2bc2ea3ce2d59c3e2cd93792de5b2ba268",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "belinda",
+    "bytes": 6319286,
+    "sha256": "e61533e682b2354289673be73de1cda6583d7bc88cc77b964b6e2997b118096e",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "juliet",
+    "bytes": 6323559,
+    "sha256": "5a929e8923725e5ab23c061f328611dc0194a009ba53b9bf5379c3beac5e1a05",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "portia",
+    "bytes": 6319235,
+    "sha256": "0d61fa352e7c8b83c783712e807d73ab92eee0ca4904b7972925c4f2e715d484",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "pallene",
+    "bytes": 6329092,
+    "sha256": "57ec31b6177ff0b73329da1d5e1d569e765f62e8b5897cb10fc7e5f1dc2c7e3e",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "methone",
+    "bytes": 6329893,
+    "sha256": "3f717ddea76ac76e89e8391b9406edc030862f757f9b24d6aaf17e5ece3586d8",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "puck",
+    "bytes": 6316393,
+    "sha256": "d0255a73fcf052b59995740c4fc75de9480a637b0863518a750e85bf5daeeb27",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "amalthea",
+    "bytes": 6591801,
+    "sha256": "3b726777871a865d1bbfdb244665e7ef1ac1e998a64d03e167f73033a68a2c88",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "thebe",
+    "bytes": 6517644,
+    "sha256": "aee75874acfcc4eb67d51edd1ccc0612fab6d0bd5db252de431bee9ac8bb0b89",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "metis",
+    "bytes": 6316267,
+    "sha256": "2f6a718f92b97ea18ea0cee791fc25ab1e544e188d47a2f83d14fe9d90e8c275",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "adrastea",
+    "bytes": 6323170,
+    "sha256": "c9880bb2ef7c40e83db4725c296df8a793cef90b1860943d54bfd5749991e808",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "naiad",
+    "bytes": 6323031,
+    "sha256": "2d7c78b7ba92539b684fd984bdcc98cb3b80def7dbb963654d1103aaf9f653f4",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "thalassa",
+    "bytes": 6321686,
+    "sha256": "2182875077a79c880c9381e2a3d157fa284baa5a4e720d5223fd9b3132f2b66d",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "despina",
+    "bytes": 6321020,
+    "sha256": "8303684abce0d698cbcaca37843a40f34b62ddc96456f0463828c21e70291026",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "galatea",
+    "bytes": 6321322,
+    "sha256": "ac8f624e64e6faa89ad2635e5a3fdde99b25b5b91f9031a12c0063663faa2f17",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "proteus",
+    "bytes": 6865270,
+    "sha256": "7cf550c12cb7397613516b64c05147bb1111c57277389b01dc69c332e57e3c67",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "larissa",
+    "bytes": 6416889,
+    "sha256": "599c63f971612fb284cc95dfb73abcc9a5c3cf2a391a88bdc1edb7308572b3a8",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "daphnis",
+    "bytes": 6248952,
+    "sha256": "e7b5ff74f2bdc37e7adaa334c2d291c4e371df0fa0ccbba4e7858732ea1fbfdd",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "calypso",
+    "bytes": 6425297,
+    "sha256": "df1679c13b005c827c83c49314d4aceeac2dced587ce9fffda90a912b17d8005",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "telesto",
+    "bytes": 6425640,
+    "sha256": "821dc6cfc79157d1f1ec05c96afbebf0df7b617a8a89bfd0ae05f48fd755e7ec",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "helene",
+    "bytes": 6601064,
+    "sha256": "1dd20899f33f1738d8716d6788dc9420871700bb7420d81a01911103a5f95b0a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "sun",
+    "bytes": 411713,
+    "sha256": "5647bd56888848f3259678383d4e22e4eb7b6de092fa0734973e8ed2c8f93197",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "mercury",
+    "bytes": 6197697,
+    "sha256": "d4e82d220039c24dc3910380bc2b805aecbf9942c0fd4b30dce0365de3f63b52",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "venus",
+    "bytes": 5850617,
+    "sha256": "9f1cfc3f196417928c1cf1d24691992f9023788448000ef05c866fff9ef19eb3",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "earth",
+    "bytes": 1191693,
+    "sha256": "5a239b9477fd557c0592a79100148c5b43b2cf56225468a6ea3ceb414a8c190b",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "moon",
+    "bytes": 372802,
+    "sha256": "eb5e099df1cdc80ee84fa3667b7073602702a70af9a9c3538885f508f147c4d6",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "mars",
+    "bytes": 545902,
+    "sha256": "ee222a24804f1b090f283dba12e395f1ae54a5e7a0bda2f433e0a24eac6a0175",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ryugu",
+    "bytes": 6617633,
+    "sha256": "7a162b9904054278f1195de5e17143752c51eee8d512bfa827539bd118501b37",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "bennu",
+    "bytes": 6642562,
+    "sha256": "d71459726749b2c04a8095fc193ac2123453d47469daecd3da16d72f25edc953",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "itokawa",
+    "bytes": 6620664,
+    "sha256": "5ae6e147bfd64f99b17d901173369972e829c5b30e5e12a4c0270926b52d258a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ivar",
+    "bytes": 6616843,
+    "sha256": "8e87030c899bcd772a4fe888a9b472d7c8f9c8514d7256956eec9a6a5919be80",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "toro",
+    "bytes": 6616499,
+    "sha256": "dcc967a69b3b16f34ee2366874db7c8ab53840d3fbec11d43afd948867cf639b",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "cerberus",
+    "bytes": 6621985,
+    "sha256": "1be882115aa79cc96056795fe2cbe1e8fa8f234cbbb34619991ecc06696e02c6",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "tantalus",
+    "bytes": 6632637,
+    "sha256": "81e371366f329d68b88ce82c1563cb609323258fa1af4243074d187d02d0a4f2",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "eros",
+    "bytes": 6623743,
+    "sha256": "762a85fb4e66c4315ae2f62d1c11daed000b9903ef57e8fb32341e5e81363d1f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ida",
+    "bytes": 6610935,
+    "sha256": "7349e6f33ed6922c7b80277bfe88592c221aef949275f8196faf958fbc9075f3",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "gaspra",
+    "bytes": 6634786,
+    "sha256": "3f20edb0c72719c1a8e39c084a036c5862388898ae91ab924e0ec8c4099db99e",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "mathilde",
+    "bytes": 6611148,
+    "sha256": "07571d08c5d35cdcfe2ba248ca244508121ae7113b897ca42c2a3cdf37b39401",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "lutetia",
+    "bytes": 6634113,
+    "sha256": "d9d1e191293d09c166a193ceedd869d189e8940052616df31d209e4e7527962e",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "steins",
+    "bytes": 6620383,
+    "sha256": "c82bb528fe1801e468ccc7e3d205bfb059fcb11b1edf1536d774b16e46e1802d",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "didymos",
+    "bytes": 6622799,
+    "sha256": "af2a59c25b65793f2e79ec672687a791afa06be9f44af621630f771439170c3f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "dimorphos",
+    "bytes": 6900447,
+    "sha256": "eb82375d5e1c2457136ffd28460c38eced1d4d81280ead0cb0728d6bd0fcbcb2",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "kleopatra",
+    "bytes": 6607834,
+    "sha256": "72e711dd574c74959c91f0f826454370effef60f52b14b225cfb965d2af26910",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "toutatis",
+    "bytes": 6609337,
+    "sha256": "8899317e3ad43b8d39af8ed031751568ea1fa0fa7807db7fa6b4c9f1c570f241",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "pallas",
+    "bytes": 6623355,
+    "sha256": "87b32c2c47a29b769d6142d7d915c8df1cd9eea76fd5a3952caa7d5766a2d12f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hygiea",
+    "bytes": 6632488,
+    "sha256": "bb34e33b3a8790995d052aa12b694dabee5d4b9347e8a2d5ca7e2ef8f1f62e59",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "juno",
+    "bytes": 6608899,
+    "sha256": "7036da82d16a37c52f8e0f1b1fd3b271d62f0233b42d1ccdb877398270f0d350",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "psyche",
+    "bytes": 6622298,
+    "sha256": "75d0d8cd810d9a8b8f080771152807eb5100f0874509c29ca1149704515da1a5",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "interamnia",
+    "bytes": 6636248,
+    "sha256": "2714d6111c8b1b5d286ea28880fb6f6c87fb87c5bd484987ef94dbcac9c30f24",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "davida",
+    "bytes": 6624039,
+    "sha256": "02b363c66ed73fda2f885edad27ac299521a3fa4a47f6b2de02009ac37abaede",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "sylvia",
+    "bytes": 6623657,
+    "sha256": "dc2b73108079988f1f600b0ec2b9a81bdabc830953d5386fdaeaddce9509a621",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "eunomia",
+    "bytes": 6625204,
+    "sha256": "aa46acd4dbb8fde130be430ddd0bb60c31f2e3b9be14023d45356ea9141ab0aa",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "euphrosyne",
+    "bytes": 6640617,
+    "sha256": "24206e325aae1a237387f053dd526813ec6409b6829f2206c06517604fc1c378",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "bamberga",
+    "bytes": 6640571,
+    "sha256": "a46be9c27efe0164edbd4afb75b14de83adba79f1b956e491659275fcaba1012",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "fortuna",
+    "bytes": 6620526,
+    "sha256": "0a3d45a918ca8e73d31b2bde606b07e1fa1c6993ab11e860b7df885c9547e0d4",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "themis",
+    "bytes": 6634917,
+    "sha256": "f7e2d4847f1d3ef33672762e4f5413d63f6f58e460157f5cf78ddfb25d37d39d",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "amphitrite",
+    "bytes": 6634056,
+    "sha256": "0c5328b164a0e80acde5aabd103d50a4b540474856c101cbf0a9fdfbe60d309a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "egeria",
+    "bytes": 6602195,
+    "sha256": "38a3e4e60ac3000b6f2a565fa852da3464b01e5bce9ae9837e2ea609bd7e5fef",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "elektra",
+    "bytes": 6624452,
+    "sha256": "93cd3817032bcf4767e64ce67314b94b291a9bf438325921109223f1d4288962",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "iris",
+    "bytes": 6601006,
+    "sha256": "070aa96f744459626c8bb78a8fd52667ce6c87fd0bce1183a6ddae6e35405fb5",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hebe",
+    "bytes": 6615832,
+    "sha256": "976ec78bee203fcdb0093443d96d5f4716758f3090f47fef637fe4bae6b97fca",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "eugenia",
+    "bytes": 6623782,
+    "sha256": "caa554bda1f5dd7bb99efd7acc7ab456101dbf4855f5382497e05b77020e3219",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "daphne",
+    "bytes": 6619059,
+    "sha256": "f0c6c2debff0fc44a146509cc27310c0dca13008e98ce804903f6f1e7e10bebd",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "eleonora",
+    "bytes": 6625521,
+    "sha256": "8fb07f67cbafb8f32080b1ea486ef658192d4b1f5b260bf10aba03a2bccdbe3e",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "nemesis",
+    "bytes": 6616784,
+    "sha256": "49d439555db7db00961d1f628c5f502a05c6cc8aad2bfc681c9143914b98f418",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "kalliope",
+    "bytes": 6606775,
+    "sha256": "c80c7f6d2db4a559744816bd9c918072c794e7ca214a088659899f9a85109053",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "nemausa",
+    "bytes": 6594432,
+    "sha256": "ba1a3c4e18a64cf7e2b3c42d908d89fcf52ec437178b9c131049fbb8e5b5b5cf",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "parthenope",
+    "bytes": 6624928,
+    "sha256": "017b6d50554e5bad4a2e95e8e64b97c7c62a5b663fd66f5d4abef7d1f13e760a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "melpomene",
+    "bytes": 6626325,
+    "sha256": "765fa8e36b164429e2762a097dd346b54d42d538ec3efc47f2a0a26826457cde",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "julia",
+    "bytes": 6614796,
+    "sha256": "1a29d016879bfa7f3e74fca828108651e14b68e2e49222ad26dce8be9470c64c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "victoria",
+    "bytes": 6618548,
+    "sha256": "4374b1aa51d6f6218cff5e9000f297c385c4b203d484d78b34824ca0822b5dc5",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "urania",
+    "bytes": 6619632,
+    "sha256": "2183ff238d63d069120deb9e391033500b22129f747abab59d51ecf6c10a3fb2",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "flora",
+    "bytes": 6619068,
+    "sha256": "8cf9aab714335e10474f6d0e302e2e96162fbff2fd6a551e05a3e28a80f98ae3",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "europa-52",
+    "bytes": 6652014,
+    "sha256": "f1e20acd0bb4e9f56b0a5c7857c55a7bce0ab609f8031f7a714a9451ca21fb2c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "metis-9",
+    "bytes": 6615934,
+    "sha256": "23c8a8963117834d33b009ffd8ccd476e49f005094a262a1b14a1a133be11b53",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "camilla",
+    "bytes": 6627917,
+    "sha256": "82d5188bb1b623d237926fdc8dbc7a80729cd1c7f4549d4d12d3086c6f31cef1",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "thisbe",
+    "bytes": 6634918,
+    "sha256": "d3677fc3b1219a966b11ca13943298ce14c0b04f951bf73a40a6b20d8389fcc0",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "doris",
+    "bytes": 6620950,
+    "sha256": "1074a9d7e3b98df552ddd1de12f9851e2d88d18e712385cf20d91935b2f230f0",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hermione",
+    "bytes": 6600252,
+    "sha256": "ca522a810b343adeaed2a7de0d84806f1387a4162a0c42d7cc92f7521f06dcdb",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "diotima",
+    "bytes": 6625815,
+    "sha256": "d43b11cbd6ceefa7fa69cbe658d03c8de28de1f4fe0964e917def41efc520c7a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "herculina",
+    "bytes": 6633050,
+    "sha256": "e3a93094d095717dfb1ae33de1052fbe5af03367259ca9e94fadcb8a7a41215a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "nausikaa",
+    "bytes": 6604983,
+    "sha256": "f34ff6e99df58c9a0c60a1aa7f31eefd6a9551481bd3ed039097c5d17ae8e3a0",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "astraea",
+    "bytes": 6623524,
+    "sha256": "0b14af93adebcd3d8428c3559e64b0164aa2d79f923405b709b107653879af31",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "irene",
+    "bytes": 6622159,
+    "sha256": "d9c005a60953b11d31446d8d142046544a717eff8c592a64bb4df45d2bd6607c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "nysa",
+    "bytes": 6608352,
+    "sha256": "08abafb882a15a26fe946487c0a0c4ec3ba07211df2fc9a08dc550971472425f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "sappho",
+    "bytes": 6620333,
+    "sha256": "2f0c6afaf6f793d95a5c96ac45145f9be5593154cd4ece1310a0754a16a0acd6",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "betulia",
+    "bytes": 6629067,
+    "sha256": "e86020ea0d7f095064a18d955c9b409c08d838f210b70be4d6284d8d74d2c849",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "castalia",
+    "bytes": 6629310,
+    "sha256": "14bc0775cfbb1503c871e7a2c0d1b54d5f0a66233a81d37faf488e28f6e20abf",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "asteroid-1998-wt24",
+    "bytes": 6641812,
+    "sha256": "dedd95b76dad23cfdf3745422ea5c8b7f09f1221b9d549956913a41ea38eeeee",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "asteroid-1994-cc",
+    "bytes": 6634175,
+    "sha256": "d826e9961d29d4db7a7b9552dafc85a650358dd6e873d7c90f247a9f77b3dce8",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "fides",
+    "bytes": 6602264,
+    "sha256": "733851ee3e1af69242ef61712e867ecd026ae7cc2eec7a9c5b973dcb7da3eb7a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "penelope",
+    "bytes": 6604049,
+    "sha256": "b08ec96c855454ca0496cf1295d5e6a6173d960d9a5a6e2c2f805dce7e87d53e",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "alphonsina",
+    "bytes": 6609348,
+    "sha256": "220c4c6dc08fd34f59b0bb3f4349540a34ec8161156959dd7cc028a726278fb2",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "angelina",
+    "bytes": 6604842,
+    "sha256": "564d54770c4fc241773619bcbd469e4e4a8c453d83bbf85227a8a809d9c3800c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ganymed",
+    "bytes": 6646511,
+    "sha256": "d28e2575b65fb46f498282c0921306a8d1ec47a049c263e6a4b1cd02a08cfba7",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "moshup",
+    "bytes": 6611121,
+    "sha256": "f7405e11016570707338e3cc9544bda70ac7fe23f1c1b04dd132c59e714d07c6",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "cybele",
+    "bytes": 6632745,
+    "sha256": "2ede39280b8bd6ad247a2708e971ed704736cfd32332d4177b29cb92ce553160",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "aurora",
+    "bytes": 6623248,
+    "sha256": "b2cf8941f719a10e0e54804ae2653d4cf937e3212358956f5fc990db16c5aa92",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "palma",
+    "bytes": 6603339,
+    "sha256": "730f24a8d10183bd7fabccb25ca1121a1805b93fc1187a4de38fa315addb1072",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "thule",
+    "bytes": 6601248,
+    "sha256": "1fc3407c96e58716f4bedbe00e7a516522dcc26b237f41a0198522352a7a1ba6",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hektor",
+    "bytes": 6602847,
+    "sha256": "8548e53e503b91da35d63e7affb04012c83332ead9223fbfa8aa8939814a0f78",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hekate",
+    "bytes": 6604757,
+    "sha256": "fbf1b75fa33ca29887efd02ac0052ee8117e4a0c8ba703dea879dcb330536ca3",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "phaethon",
+    "bytes": 6611687,
+    "sha256": "af825aa8144ceefceb077b488e7b1b59b5411fdee0f6375653290ca7f2722376",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "harmonia",
+    "bytes": 6628396,
+    "sha256": "2342085445ce4266030ae603083f5f7effa892268a3b72cb04eca3ffbd65032b",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "panopaea",
+    "bytes": 6592257,
+    "sha256": "a8b16130aeabb04471be11df946be16ccf824b71544794b603692ae86e61e20a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "desdemona-666",
+    "bytes": 6614631,
+    "sha256": "4e4d62cdaf73661e10fabd0bbc3d0c5f81ed904889ce0f04ad0272ea79ac7b6b",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "asteroid-1950-da",
+    "bytes": 6643256,
+    "sha256": "ded0fc4ff967a5f5e6e532562ff5da145b0c27c880413dfb6e4cca915ad38c5c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "apophis",
+    "bytes": 6621444,
+    "sha256": "8369c570b39ed865ce642a2a7f92e47f602785ea6f96442a4012b635cc0b1a2e",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "donaldjohanson",
+    "bytes": 6620916,
+    "sha256": "9c2f1f98e2b2d80e1332f91b6f9f6422e2a16e58618608b25871ee0ae3cbf8c3",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "geographos",
+    "bytes": 6619855,
+    "sha256": "6aa12b3d3cfe9cd7be5c659d19448c6e1745044b851f6d4770c7cc70c9a12ff1",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "bacchus",
+    "bytes": 6360121,
+    "sha256": "ca16588766edec616688fa474005dd6503e9292d5b2cc7973398ff49aae46bb2",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "mithra",
+    "bytes": 6620031,
+    "sha256": "571a702bcca7ff76381323c3881f85b084bc68b295b28449682c359f359687c4",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "nereus",
+    "bytes": 6628995,
+    "sha256": "436970f8954b0cdd79127e7c751a5d04c17ad0d99580b95f143abb10a252f54d",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "golevka",
+    "bytes": 6613884,
+    "sha256": "068f8715846108b024fd15695fb5e09fbd37efde3ad38ba8544f878a3c88329c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "yorp",
+    "bytes": 6416734,
+    "sha256": "8465c72e4a367e0694a057494b1890b9d40ac9b1c30aaef02fff92a6bdb4bf90",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "asteroid-1996-hw1",
+    "bytes": 6636609,
+    "sha256": "43847fcd74de9f67cd976b016b0e805f031316958c7a83dcc023ce0696307314",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "asteroid-2008-ev5",
+    "bytes": 6607263,
+    "sha256": "87a1f8d4499b83736376ed865cd65f545855eb60f2bf7db10c651429def53e94",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ra-shalom",
+    "bytes": 6580809,
+    "sha256": "a8298dbbca58e414edfdea848499c2eff9e7fab0292c5d1e578d796f8c23e3ea",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "asteroid-1992-sk",
+    "bytes": 6597698,
+    "sha256": "b3784b0a18e84265eee1416689f806b95f3369ec33f44712ec9b558a0abaea24",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "asteroid-1998-ml14",
+    "bytes": 6595315,
+    "sha256": "bb3c5b828a98511255f40d9a0003517083013965c310611a20a96f803d44f0d4",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "asteroid-2002-ce26",
+    "bytes": 6644066,
+    "sha256": "e7d4cd931b7eb63ea12c435a14b0ee2f45d76f07805b4110cbfed0040b837043",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "thetis",
+    "bytes": 6607582,
+    "sha256": "10b6c4c5a56b962998cc680ba7a37c5b8262e77c4f77240c464f965221b4067c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "thalia",
+    "bytes": 6628609,
+    "sha256": "990cbb092a4a2eb0a2e8402579dc73acdb0e65d062699cceb697a9b3e2cfdd92",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "phocaea",
+    "bytes": 6610866,
+    "sha256": "473f29a55c02d6692ef9c3b37c481b3aad4ef139ad4e38311a4f68c0fcb95909",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "euterpe",
+    "bytes": 6608108,
+    "sha256": "c0ee5a91c7467607cc4218817d9963698ade909a2d2061cd07443c6fc62807fc",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "bellona",
+    "bytes": 6649118,
+    "sha256": "6405ed2948a43163beca47533a1ce3d904b494eba690b95b02b3d0a345fa9edc",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "pomona",
+    "bytes": 6608881,
+    "sha256": "1befe0b034351416e417c474553e5274679e897a2fd2379ab79e24e420f4aa79",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "circe",
+    "bytes": 6606682,
+    "sha256": "fab29f0cf90eb1dc4b98c3d5d4ba5e1d461a0f6e4ca02c649c0ada8cbb35789c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "atalante",
+    "bytes": 6611057,
+    "sha256": "bd16ee35040bb6ca57ab03db728c45ffedc8d0b8bb3419d1e9022d55b8cc9a34",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "leda-38",
+    "bytes": 6608329,
+    "sha256": "d174d0c808d73e3a68c35c6217b3b1945236572fa37af0c490686c2051ebd928",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "laetitia",
+    "bytes": 6631551,
+    "sha256": "a83c04e99ce45d480d7c405fcc17322a22bde54b21388fd71b7b4adf39aeb47f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "isis",
+    "bytes": 6630250,
+    "sha256": "804e13939980139d13edc862e7289c137a050129b0cf73081b49e87458f2109d",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ariadne",
+    "bytes": 6628251,
+    "sha256": "d0ae9a9e0c35e22f4d3cbe09018d1317d5e223700dd8e907a4ee2859f8ee2c5f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hestia",
+    "bytes": 6607168,
+    "sha256": "4e1fdd9b5bc8fbc486e77aa8c7ce72c7c5f6e7d68a66468b4b30f43efbc32a6d",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "aglaja",
+    "bytes": 6606819,
+    "sha256": "4c41728ee866df847aa9120d64baa9025a49240c00eae6bee90053dacf9dae16",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "pales",
+    "bytes": 6605430,
+    "sha256": "703f3fbab6a206991882738bf2648a4e16918d50e6e1bed22b4c9991c9275646",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "kalypso",
+    "bytes": 6609162,
+    "sha256": "f915239f4d2a0434fcdf9d07ef93682bef101b385c486b6674dbf917a842e4cd",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "alexandra",
+    "bytes": 6631166,
+    "sha256": "2976a565568d257349ba807054e0c5f72baa8d122760b4faa77123d44f53443f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "pandora-55",
+    "bytes": 6613495,
+    "sha256": "8a29e61cebc13b00daa7528c25dd71dd01b67aa2518437feaaa89d777b805a4b",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "melete",
+    "bytes": 6626630,
+    "sha256": "fddd8832558922203504b99007894d45bafc2f25c0d3c79ff1212b3c7c3417f4",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "elpis",
+    "bytes": 6607308,
+    "sha256": "0b3e9bf46655874e7271686cd1688c309800cf4abeecee4079aa4b497b215a3f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "erato",
+    "bytes": 6607403,
+    "sha256": "7116aa381ce850aa2eec67ae92178d1a4f207dc9c2224b9a2c4f9fa6a56bdd44",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ausonia",
+    "bytes": 6608404,
+    "sha256": "0a5baa1bffea4d223d3b4350db93d8b2c8aa9e0024f13c91ba339188838a76f8",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "asia",
+    "bytes": 6607156,
+    "sha256": "9ca39af9c0ba7ce5e302c540451990fe328a57e42b8aff8ff32ec103c8f5222a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "leto",
+    "bytes": 6604331,
+    "sha256": "590b8ac4028a6a711b252b60dbe5db4dba3673da11eebb1d7e56d1e1da00f47b",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hesperia",
+    "bytes": 6609451,
+    "sha256": "a3cef7940d7b1dac352b261b2de344f488fe11403748080695189dcabadb5725",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "niobe",
+    "bytes": 6607622,
+    "sha256": "c09c28851ab6e99f2606449450809cf2c2b1c98afcd0d396a217aff51ec1121a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "feronia",
+    "bytes": 6628747,
+    "sha256": "41f30c421e0009cd11992f4a6ff30a5bf50881a64b0c3b7d4c20e37f0d9156b3",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "klytia",
+    "bytes": 6609128,
+    "sha256": "1001ddc31af8c323e203e50f26436cc6652dc840e53b2c36aaefe3942e7464bf",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "galatea-74",
+    "bytes": 6611447,
+    "sha256": "2f5ae4e9b0aeaa8ea74a462fc6e690f36b71e45b3fe5207cc13706e308211903",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "freia",
+    "bytes": 6606633,
+    "sha256": "e02fbdf8b121aa02a8fbe6f7103fbe771cf243ca733539ba1e3ee137915f8655",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "eurynome",
+    "bytes": 6609756,
+    "sha256": "c29eaa7031b8ca4465151b07297cc26d783d4d4c68a58a776fb9e2699ea62cfa",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "alkmene",
+    "bytes": 6609632,
+    "sha256": "7e3391dcbfe5f106c9d760200d25769bb3ce2329b22719ab6b24c241a42f3767",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "beatrix",
+    "bytes": 6607580,
+    "sha256": "9924abf4d99018aed4a626bf453d98598419f29160efb2543d8ea2a1d0019c71",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "klio",
+    "bytes": 6605611,
+    "sha256": "84dccb0353408e5f55a871dfb797aac741d23af4dcf1e0ae167874aeb262b89c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "io-85",
+    "bytes": 6632816,
+    "sha256": "d15319ff551052e68ce05b258475303aeeebc5edb8b68452f1f6e436351485b3",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "semele",
+    "bytes": 6606502,
+    "sha256": "343789f743d7628ce55dcd2afe490d2122154cc4e2b0a2f4e5de38862df21e94",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "aegina",
+    "bytes": 6607102,
+    "sha256": "e92f198c09b615549309cf4c56f5002adff060606f8c83e82e168e745b98789d",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "minerva",
+    "bytes": 6637457,
+    "sha256": "20ce6019aa93e56985e38207c777017798dddf3f6a93f2134bc2ebdca70190b7",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "arethusa",
+    "bytes": 6609456,
+    "sha256": "08cde0abd867eb12bf2066f1c2d7d90c42e5c11b6349678e626c416b35f50e72",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "klotho",
+    "bytes": 6608806,
+    "sha256": "980b774e585a8abfa48b8f2e3d6c6e312bd7101da3f40887c2ec8a9787d81111",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ianthe",
+    "bytes": 6607631,
+    "sha256": "b139a9b6c75be2602561adb8f318ca53c2abd56b310de957c2bfa9d7830d6cb8",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hertha",
+    "bytes": 6629198,
+    "sha256": "563a836fe0345a64bc0df31a81a7247c4eb9c1fda00a4e2143d6a5692f5b4dc5",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hera",
+    "bytes": 6608638,
+    "sha256": "2110f60c76362f147ea8341d19f0dfce7ce9031b960ab6df38362d147ebdd663",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "klymene",
+    "bytes": 6609157,
+    "sha256": "630aa3174e387e039452c8d2e0d64b78fd650e5802919222467f1e3e3435d280",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "artemis",
+    "bytes": 6611875,
+    "sha256": "5a162061e5bd303d632c571e35b398639dd3a0ebfe98b2f2e9828da3555c9f74",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "dione-106",
+    "bytes": 6612251,
+    "sha256": "758fd9cc8907f5c89bea47c485785eb34780adab7337e1006f4e84be0f09b4aa",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "felicitas",
+    "bytes": 6614324,
+    "sha256": "04fd745cf7ad2674585df4f69979aa29bea1c350021739951b646811ddf410b5",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "lydia",
+    "bytes": 6609078,
+    "sha256": "a8b764a920481a2c0bd2b704b47c14d42ae12cc7123569544aeff87feb99456e",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "iphigenia",
+    "bytes": 6612604,
+    "sha256": "2bf96f0311d3b4c0b2e2ee221cfc20449ed70d8978e082fc36629df95620ef23",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "thyra",
+    "bytes": 6608033,
+    "sha256": "974a4c05445b5091685c82cf476728ecfbfed441919c6e698352bc982a18e661",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "lomia",
+    "bytes": 6608388,
+    "sha256": "5b77fb29b1f5b7956953be676357c65ebb17883455d94cf27930adae028630ad",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "peitho",
+    "bytes": 6611940,
+    "sha256": "6738ee3b33734a543351bd84c3691519f2a5f36ecb0b418c1ded76564f8c32d0",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "althaea",
+    "bytes": 6612542,
+    "sha256": "f12f4e43caef3caa385c6ba37ff159f48febf5053943a739d879259986baf0a0",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "lachesis",
+    "bytes": 6611753,
+    "sha256": "6c59eba1330b30cf65e01de2788bb6c4791de6a5ae34bcf5532ec7db2e6ba370",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "gerda",
+    "bytes": 6608307,
+    "sha256": "84ec778dbdfd05fcb9a370e5fa82cd9c9762827b46c9abc594c4802e9c65b253",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "brunhild",
+    "bytes": 6613208,
+    "sha256": "2cda94790eade323c3dfc9778eac60c9488c1b751e367a0c22783beeeb1e837d",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "alkeste",
+    "bytes": 6610244,
+    "sha256": "10ff253678567bbd0f10aa7fd4007c3c57f321ecf1bb139696b36a4b86a9ed46",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "liberatrix",
+    "bytes": 6614280,
+    "sha256": "c656d49d10869307422f646db46cd8e74da9445b8c00355422a85cb8ba5c9576",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "velleda",
+    "bytes": 6612347,
+    "sha256": "b22dbda8bf97b064a85f10bc550081169fe22e2ce10b87857160c74d296c9d42",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "johanna",
+    "bytes": 6611739,
+    "sha256": "34f71168a9a740f7cb6d31fbc1c377dad8954011f56b2db418eaf23d1ff94bfa",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "antigone",
+    "bytes": 6658363,
+    "sha256": "c33f6430c7cced1f6682aa60b063218433d4a0b9d4191824894ccfda4ba8beca",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "cyrene",
+    "bytes": 6611318,
+    "sha256": "f14bf67fc1aee86ac7119bb3cf5653513275fe3a9e5b25e76ba54826de4c4515",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "sophrosyne",
+    "bytes": 6613315,
+    "sha256": "659728d93c5edd991d61172b780a6909817e2aa28fece87e5602b4268bd4711f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "meliboea",
+    "bytes": 6612098,
+    "sha256": "43a1ebbaa2be5d82043e4003b8f21d565a0dcf31f9c86e86316cd3131710a50c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "siwa",
+    "bytes": 6607272,
+    "sha256": "93e70409200aa141927c81e9dadf5de0727cedac9f5c40e3b3e918f82e3692c4",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "vibilia",
+    "bytes": 6637725,
+    "sha256": "0bbaa50e1efbb643e01457211dc7009d93da04028a1c2e73e096d4f312c258f8",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "lucina",
+    "bytes": 6631834,
+    "sha256": "75dcfbd30807b1d78f4f7085b1bfcb486245364dc648f566559c5e60a52069cc",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "protogeneia",
+    "bytes": 6613648,
+    "sha256": "e42c86359d39928c183f79beb9b79cf41d4aa10c6df254b722723834bd4540fa",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "gallia",
+    "bytes": 6610566,
+    "sha256": "9d5203c8d0d4288281f75255103e88e0fa15c08afb7b0b05c89cc850cddaf8d3",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "medusa",
+    "bytes": 6613285,
+    "sha256": "9a882c241b36b2344dda2217f2f6e178d79c5437bd1887737b341238c5b10cc0",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "nuwa",
+    "bytes": 6607257,
+    "sha256": "37cf45da5e4b6c94c53b138f9a5bb11f94876ff26092bcac2c24d2c140dad130",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "abundantia",
+    "bytes": 6614666,
+    "sha256": "61923fc1e24114e5f8bae506b510c737e19788cff8447b8cee2b58dcbb29dda8",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "scylla",
+    "bytes": 6612758,
+    "sha256": "77f704a06117740eb088641011dbb0a091e58678e59a60a5713d40f10b2f3885",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "xanthippe",
+    "bytes": 6612890,
+    "sha256": "fc60eeb23907995c2c64dc259a2a196c0e15fea2dc213dd402c9112ed09e9932",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "dejanira",
+    "bytes": 6615163,
+    "sha256": "680d0bca536a9f140459d536a2432c3a0e3622b34d193b16569c1908d3ed6245",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "aemilia",
+    "bytes": 6609969,
+    "sha256": "79a490516c96c6c40d6fe63b5c411d740434082f3043eabcfc199ada86554584",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "una",
+    "bytes": 6608470,
+    "sha256": "91d219c7c146f6e5070cf81ad7451460320d820c209f7c825a52972fb076c9ad",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "athor",
+    "bytes": 6610021,
+    "sha256": "77bb813fec8609d24d4fd16324bfd46f91bfcf4354853bac5c1d4c5ad88f8fcb",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "laurentia",
+    "bytes": 6612927,
+    "sha256": "9166225d201a04f670fa6efa3949aa54011d26a2f78d7d08989f9ccd54520c43",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "erigone",
+    "bytes": 6612047,
+    "sha256": "1f8303b7912d138475da6f188e7ef6b620dedb8d00918554577db05d9eb86bec",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "eva",
+    "bytes": 6608478,
+    "sha256": "63eab7937912ea124da7ebbe8c959554c2fd992d54b44abfe9b88a6c6550eafe",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "loreley",
+    "bytes": 6630538,
+    "sha256": "b4dbb18b86dfaa1995a9bad90606b7ca24e2ce13f8111d1f7592f3fb8044ee8f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "rhodope",
+    "bytes": 6613514,
+    "sha256": "855ea34b1e1b639001ffb89991191a40735e5e6ca02663632af112e0d8e426a6",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "urda",
+    "bytes": 6609324,
+    "sha256": "0603a451a9aea5778591658cbbaa770c45f86ca7860801e0fef0a2a9d40232a4",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "sibylla",
+    "bytes": 6610871,
+    "sha256": "965be2cc59a0ce1f4b8f76b66415688f357da3419fc54ee89a47a76b26cdbc25",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "baucis",
+    "bytes": 6610444,
+    "sha256": "6836f93dc39550560c0c972b94d005485e0d12041855837b0bb7fb2005128220",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ino",
+    "bytes": 6605575,
+    "sha256": "bf67907f3b4863102bd662494fbb6f72d2206b2f866ad6ecc8271b586e97b1b9",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "phaedra",
+    "bytes": 6612603,
+    "sha256": "cede75e83c77fed5295763f9007a003e14f8db7ee776d60ee2a7e70a36107208",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "dejopeja",
+    "bytes": 6612208,
+    "sha256": "96ef1fe0e6572c8d2db2bd0f48d0ac4e8b27603b57a4522b544f175b9b8b1aeb",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "lamberta",
+    "bytes": 6610757,
+    "sha256": "103bb291aad292217e56e64bc444ec588b52f0434d2726dccb3bfed8d47cb0d4",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "menippe",
+    "bytes": 6612541,
+    "sha256": "3c1a65a664997c163fb5ffb14026b820cbdb34ccbbb8ee970847f2a82d15a630",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "kolga",
+    "bytes": 6610432,
+    "sha256": "aad7c21840b65ee3e8fdb0499a3e57d21561247babc5ffcbd868a805f318bd51",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ambrosia",
+    "bytes": 6615214,
+    "sha256": "32d76a1f42c3ec3585f65dd73c0790a6c22a36536f7dbdef49bd138e0fabd7c4",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "eurykleia",
+    "bytes": 6613869,
+    "sha256": "6866285c039d0f4aa0918d544220fdbeb3bd92b049603d77d749b3b76a072373",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "byblis",
+    "bytes": 6611831,
+    "sha256": "bac29903f4ef3ae407099ff179a8d1fcf777b395e6209f8bca16815d00ada105",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "kallisto",
+    "bytes": 6612702,
+    "sha256": "cf1da5c81cd5e860762599391e044b34d4a42679294957f1829040fa6d7cbfca",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hersilia",
+    "bytes": 6611128,
+    "sha256": "960d8df1dce1e4e717761be2d61bbf1cf52a9a6b38f4e8014d400e5d9c38b989",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hedda",
+    "bytes": 6610026,
+    "sha256": "fdd3d2a27b89a0924ee852f0edc50204ec51b9e51779f8eccadc25b57ee1ea8d",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "dido",
+    "bytes": 6607561,
+    "sha256": "b1a439f8811f5bf0db262ec34765a2b20721f355656b0579fb84aeb264a0830a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "isabella",
+    "bytes": 6613672,
+    "sha256": "74e0151b4fd2c03beceedd2bf4de00a8e2414cdded42a4d707a1081558d9a39a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "medea",
+    "bytes": 6607358,
+    "sha256": "57b8cabee5ba81157395f243ea78b549518b67ec7eb093b8f07df734f556b028",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "lilaea",
+    "bytes": 6610252,
+    "sha256": "b20a693126780d40f8ae9fb40ecf50ca2ab564e9b27df9a8bad9e5754faf570a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "aschera",
+    "bytes": 6613527,
+    "sha256": "08eafc3c78c1cd1bf1cef03ea2d221b425ccf7448e57c9610fb6621f718b00c8",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "oenone",
+    "bytes": 6611700,
+    "sha256": "ac8fb88dfb1d9fba4fc686e9654a83a8443d1dd0a12ff9d39e0f32054300db18",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "eudora",
+    "bytes": 6610123,
+    "sha256": "b156e6b3134719d45dcd44b77a58b8493fb5305785e5fba8fa55140a91f61f05",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "stephania",
+    "bytes": 6615117,
+    "sha256": "2247e5e892c1fc6d0f4ee35a8b744d1f6ceb3021699d20df17f8b62159c4480a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "eos",
+    "bytes": 6607766,
+    "sha256": "260ca0c75ceaf789279faf91915a3512b0c44510cca8f99b74a8d431924f8f5a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "henrietta",
+    "bytes": 6613017,
+    "sha256": "469e11ce9fa59f3caac922979d03ffaf2f54f0d3f1dff1a7fda02ad42e8d4db0",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "weringia",
+    "bytes": 6616596,
+    "sha256": "69e2dafad8026779e5ae7afc257b929817435a94b66b88abc4fdd26f3f61f94f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "philosophia",
+    "bytes": 6615496,
+    "sha256": "7640eebfa1ad39e2e4d49db5e498631542b04a2572889c4c0856670532a883af",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "athamantis",
+    "bytes": 6612212,
+    "sha256": "dbf7c261b20fef6d0f4bb4964aa6acc1529e2583274795a27e69c57cd273d77e",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "vindobona",
+    "bytes": 6614446,
+    "sha256": "9092e250fc118c597638de746d8dc03c79cac1bbef0c5100deefb0b3f9a96c7e",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "asterope",
+    "bytes": 6629597,
+    "sha256": "7fb18cdaf0e6d3425beb2baa23c0f9bdfe0dd24a4bd038ded7ca9d5e0545684a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "coelestina",
+    "bytes": 6615637,
+    "sha256": "f6efbcad190bbb322e64fbffdc8c3eccfd3d70c5069b6e0628bdee5ecf68d64e",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hypatia",
+    "bytes": 6609824,
+    "sha256": "7d2567d7ae4e7561158c265296a71884bae5b30e6df359b7c3ca6b8a7fea16d1",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "vanadis",
+    "bytes": 6610349,
+    "sha256": "52ceca5d61c0398fe4e91ae11e6bee1fc8a2f6219aa274c83df4355a253518ea",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "kriemhild",
+    "bytes": 6615050,
+    "sha256": "a4cd8d4f55e2a5590364d7b3fe63a08c462c3ba9d3066fd8d538b80e6d881279",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "vera",
+    "bytes": 6608308,
+    "sha256": "7f1c721bc114ed63b78333b2eb5e5b5c7abc84d968d724d3777b80190e2520ab",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "asporina",
+    "bytes": 6612935,
+    "sha256": "17a682c2b0f5848b1f5a140c9312c4d4a6c7c89ca0f53f6b5665ec5b1cd3b648",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "eukrate",
+    "bytes": 6611765,
+    "sha256": "3f041c2e1ccb2b08d163ff39f69ba2d7294eec9cadccb0678d156cdb061c8ea5",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ilse",
+    "bytes": 6610577,
+    "sha256": "a2fc22488ba32a6867f91ff4124f1e81e6f25bc4cea55a1a261ee3926702e9b5",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "bettina",
+    "bytes": 6628008,
+    "sha256": "2fa9a659014a0f1108eef7dcdf81e3fe059128df6d236ac9073969dd86a16c95",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "clementina",
+    "bytes": 6614788,
+    "sha256": "7aec332d24950944b4b901a03853efdc3fb7d4ea7aaf7b80ef6f1d65bef39ce8",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "augusta",
+    "bytes": 6617273,
+    "sha256": "5c04cb4103fa39c9b8156ca908124d150881fb033d790202a4ab82e0e398104b",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "silesia",
+    "bytes": 6611051,
+    "sha256": "b7da70cd6f5222938652e42a22dc415de0c981f1e5019da6311476cff4231a8f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "tyche",
+    "bytes": 6609552,
+    "sha256": "b585478e0dcebcacef2acd87a0d5d95917c0f8e6c013cdc66cd48a421b66b7c4",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "huberta",
+    "bytes": 6611126,
+    "sha256": "a8f42686f9b3b1bcaaa2d027b2d971a74bea04f753d12005954b5c01294fa49b",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "dresda",
+    "bytes": 6612299,
+    "sha256": "30bafc04cd257858052f4ab5233d2c98413c2035427a4b212be390edabd23e3b",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "libussa",
+    "bytes": 6613646,
+    "sha256": "d9102ba2d8866bf5756a78e8cb944006c892660dc5d7ff0f638ef59498dc058a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "anna",
+    "bytes": 6611522,
+    "sha256": "e26f7ee5e95d62ff799577c2d28575a4bfafddad8e3ecd2b63ce389622103277",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "anahita",
+    "bytes": 6611992,
+    "sha256": "97c3eec731b5260b5f92d9448939db3aa70add9548973d553b1b4fbd7c58018b",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "penthesilea",
+    "bytes": 6615821,
+    "sha256": "ccd2855614f7b21c75a1df3a897a9c7b666abbeacca106f702c8a270717a382a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "antonia",
+    "bytes": 6613829,
+    "sha256": "40cb765803d62b55d8c672c8c2f96240bf4d20b24acf52a7dd69e5db7e6469bd",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "philagoria",
+    "bytes": 6616467,
+    "sha256": "a3df6f8fcfd972cea2e0b4da79beca24204c9fb8e5a745cbc0a2a025ff24f9af",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "sapientia",
+    "bytes": 6612281,
+    "sha256": "3591d47f5046ddf9db79890468d6942e41bb02caf96de870783eeb47210172d6",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "adelheid",
+    "bytes": 6611920,
+    "sha256": "ce991893b7bad4ce610a45c4bac220a0634a79af4b77acf86bcc07fc95ff42c6",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "emma",
+    "bytes": 6633854,
+    "sha256": "3f0ec27b1ede756ad58e40450d45474b7cb5a046a1e1150e039e2e6ffa1fcea3",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "iclea",
+    "bytes": 6609012,
+    "sha256": "e6ec44979f8494ec73c813e65ba9604506d04f735e17434e1d6d368097eee4f8",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "bavaria",
+    "bytes": 6612893,
+    "sha256": "315085a7be8cace8c55c8730902ab0fbd61a5273725a58820b3cab2b89701667",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "clarissa",
+    "bytes": 6612777,
+    "sha256": "633552977c59de76e8425dda02bf8c9e4f7b1405d8cbdd52875d3d4f9eaf5fe7",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "unitas",
+    "bytes": 6610906,
+    "sha256": "d692c16bcfa1ab303421d3c6891ae7dfbada706d570d1a54875e9d60406b23ea",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "arrokoth",
+    "bytes": 6818975,
+    "sha256": "08b737487fe43d1ad94ab8569b68a1c76941750ed55460e632d8342adc257d3d",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "quaoar",
+    "bytes": 6325828,
+    "sha256": "65db0bd302424b97f9cde8d2425a8c0b25dfa86e8bb46cabfaec743a6883a729",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "gkunhomdima",
+    "bytes": 6333651,
+    "sha256": "b264f4ef30ef38f13c6164e434b48fff4885aff6cbd320c15bb4c16a8eb744d6",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "annefrank",
+    "bytes": 6338848,
+    "sha256": "d965a958c3c790d7e5666ad7a5113ce892103d7cc73d6f243701889b32841390",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "braille",
+    "bytes": 6341116,
+    "sha256": "22a66fa91e0232ec1d8c691c809ee4f81a0fb543d31409fc2582f6ae34767daa",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "diomedes",
+    "bytes": 6614292,
+    "sha256": "ce6d2f341bef402c195170f66f4b114ccab16ad4e69cb464de62fcf55a93800f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ajax",
+    "bytes": 6610909,
+    "sha256": "0589844934835968478a81b77952719263be7c2b4ade2dcf9f06689df7546174",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ilioneus",
+    "bytes": 6613223,
+    "sha256": "1ca8390aa807c9ac258f3cdc584e48e480c8016c25ccd6b8c625e919e72a9aa8",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "pyrrhus",
+    "bytes": 6614544,
+    "sha256": "a1e155257c06e7a1eac68f7e0069e9aa9b1b0e6fa6f7c958d6da70e49a188ebf",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "eumelos",
+    "bytes": 6615621,
+    "sha256": "b1d6c437f8f46d36f1edde2fc06f9195b7b2372a64df1275d8995f0b7c1d774e",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "lycomedes",
+    "bytes": 6617035,
+    "sha256": "0b0c85e70ec702fa3048988caf81e2d7ac342063b8f96543f770febe7e719562",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "demodokus",
+    "bytes": 6615569,
+    "sha256": "f1f1836391f04a8bc9230c199bad7e8ce79a6794c6c6e1a8a7a9f8fca3ac7819",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "menelaus",
+    "bytes": 6615678,
+    "sha256": "18bfcba2c3ea38f867d6079f16d4730477b580d195fa10ea40474cfe306e4a84",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "agenor",
+    "bytes": 6614589,
+    "sha256": "9cda3251a89f9e4d4bd34ac489e113bf5d739065f8dc22e707be2186b0b4fc13",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "mentor",
+    "bytes": 6613226,
+    "sha256": "e1067829cbfc6ee2858cf667358277bf805f3130f1e2e7fa05213179f5454e95",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "dike",
+    "bytes": 6605449,
+    "sha256": "589274911e496a59ce1bb0f4a62d16cc494ffe8237e89cf7815a1fe63bc08dd8",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "massalia",
+    "bytes": 6606535,
+    "sha256": "b326fab99c72c4d26fd461857741d22a540b0cc8825e262326f4617c1d3bb559",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "proserpina",
+    "bytes": 6610344,
+    "sha256": "6e793dd803b7dc191de51fa302bed691eb9cb2f06eb47f97c675c21618e7e75c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "polyhymnia",
+    "bytes": 6611154,
+    "sha256": "15dbc6ec22980ea44f4d055be9acb5cad60faf9dda9345384c17c14480a2d36a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "leukothea",
+    "bytes": 6609761,
+    "sha256": "bb31f95f19467b83d3c73c0b98328dfb498ccf00effe5490e95e3d7daf4f62f9",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "virginia",
+    "bytes": 6609237,
+    "sha256": "74f9f522a59cc0fc1e5c69e29efe58dee41bb879cd00b0f618f74edd8b641ed5",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "echo",
+    "bytes": 6605687,
+    "sha256": "60389905bc6b1e2cf50959e929e0eab1cf31af6137300bc1107e783b941fc28c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "maja",
+    "bytes": 6606122,
+    "sha256": "a37f5e63d1bfcda84ed7f0dc367c28aa5b021c8c4a01632dab7a2f2656479c2b",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "juewa",
+    "bytes": 6605417,
+    "sha256": "2732cc2b34abbbc1da5b4b76a3d49728c80bd13dc30ffe0236f84130c5329392",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "bertha",
+    "bytes": 6606264,
+    "sha256": "e4765221add73d1d6c97aea72c1cce59f980eede108336e2ff3ac68302f5b203",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "lucia",
+    "bytes": 6606152,
+    "sha256": "0d8ffc63dd86c1ec2f431738fff28cb4cf8fcc86794b0c91db0592adc062383f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "brucia",
+    "bytes": 6609129,
+    "sha256": "737597f97bf3e56896f1b19be17ca33ed561a0769768f1cf2a6939c7823b17cc",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "badenia",
+    "bytes": 6607649,
+    "sha256": "bd21503f190bddefb403f9c73651f9f136f6626974f8252faf3dc2e38915b443",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ducrosa",
+    "bytes": 6610234,
+    "sha256": "b13a0a8245d98c19d8ca006b14e2e5b9e96764b2c7bbef1a2e71ac2f7cdad3ea",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "gyptis",
+    "bytes": 6606780,
+    "sha256": "949391081a7c501c8c49e20d4199b7e48ea547ef2074b5df83a0113f539761c1",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "petrina",
+    "bytes": 6609901,
+    "sha256": "9fd69f98db94975f54ad216c5a8b504410731d689ffea4f3008c41abb67157a2",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "veritas",
+    "bytes": 6607307,
+    "sha256": "6b4d8d4d27762830fdb90b29d486605b9060992ca308603774bb40eebe88dc22",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "gryphia",
+    "bytes": 6612516,
+    "sha256": "9a3d3c70d9422ce79dc6c46f1668a399339f4b4f8f5b5d0c15eadf8a8e78f990",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "selinur",
+    "bytes": 6610025,
+    "sha256": "33c46f8109aba7e1b56a9d0365af8f192675b02ab1a8f5c7f497616b93403f2d",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "achilles",
+    "bytes": 6609645,
+    "sha256": "0b82c6b9c153665b21fed5c8e09c6867f1476b40a59cab7d1d5662e8b049e75f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "musa",
+    "bytes": 6607786,
+    "sha256": "42a5efa4d884f038ec4861c8b5ba8e90b1cf9924532c842ee1fda17ab345fab8",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "auravictrix",
+    "bytes": 6614668,
+    "sha256": "ff48b175ae5277a66e0634e20613c495390a0a502090790a045ab8e74902e6bc",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "transvaalia",
+    "bytes": 6615084,
+    "sha256": "eb1e754cf4141bccb0e26554e3091d5aa35ac594695df1cbed92bc4e8b2cbba8",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "moskva",
+    "bytes": 6610436,
+    "sha256": "59ade425f54ca239fdaf8a51d81b6889eb37dac0e456b593777cfe781eb80d02",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "kressmannia",
+    "bytes": 6614649,
+    "sha256": "74348d741156b2bbf89bb2eeb5014ace154800b73fd9b8c37c42a6a129a1c7ef",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "parysatis",
+    "bytes": 6611287,
+    "sha256": "38c5e20f7e5c57a1fa61cff08c98b957474dba95c654921a9af30be897224d9a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "rosalinde",
+    "bytes": 6612604,
+    "sha256": "e715dfb89d928f7da61549696f77f12a6970a06a2827949a47d693ed946a5b55",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "susi",
+    "bytes": 6607430,
+    "sha256": "056363129d2b4b5fac137c18aca6af90818386a99738eef035f32548e7e4d7b4",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hidalgo",
+    "bytes": 6611314,
+    "sha256": "2e6515130cc6d2628d9d0e2701e1292029b037a301652afba0703f2bf997218c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "zachia",
+    "bytes": 6612184,
+    "sha256": "0121545a9649ef30c8e2caaeb7c2d9424ac547ad3ec22ed4c93d972572dfc2ea",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "piazzia",
+    "bytes": 6609590,
+    "sha256": "aadd2a9ae05f55af590d06f07c9519730712fc83990843ee91fdb68c414c809c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "tulipa",
+    "bytes": 6610143,
+    "sha256": "92b125e4da31f076c36b2f4401b1dbf716a03fbe9c5e0a1221c39fe667264e2b",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "reinmuthia",
+    "bytes": 6614071,
+    "sha256": "d4d3a44775b5669608b437ce0d9cc162a3b10d5b955bee4dd0b76ea194a250ce",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "china",
+    "bytes": 6608473,
+    "sha256": "0fcfffeb58ef1c4158ef458e56341acf9d2c831088bbb1b100873fd667923ee2",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "crimea",
+    "bytes": 6609220,
+    "sha256": "6ed42b0f76f25e5b5bc0d748e90bae3c3c9b9160875153a8e3fc4d4efd7ecd3b",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "rusthawelia",
+    "bytes": 6612487,
+    "sha256": "54aff10f04d34f95a7c474587f20cdf461ed7ecba55e20ffebd1055719c65d42",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "schorria",
+    "bytes": 6616335,
+    "sha256": "cdbedd6dad816ac0a12d3bdda4a2e7de1b8b05432d305345ade7d54462f0fbd1",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "silvretta",
+    "bytes": 6612137,
+    "sha256": "a21eb33445c1a77914c752ab6abf08e1e9319b6fb328c99d674a8dd8319e197b",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "virtanen",
+    "bytes": 6615957,
+    "sha256": "b30edc01efbd2f791669d414ad58541f1bda5e3544f6c470519e568157107a81",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "mr-spock",
+    "bytes": 6611823,
+    "sha256": "0a28f067fc0d72647d44d3b87b1ad6c8c8fe8f4d963381f947ca00397ba4f52a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "educatio",
+    "bytes": 6614833,
+    "sha256": "9ed53ff8503c8bc8990e796cfe403485939206dfa3360ab7cfdd557d07cd4b64",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hopi",
+    "bytes": 6609513,
+    "sha256": "8af1d38771e890c6599f936f392ed0bb3cf078c6aadf0aca41824ca33828a21f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "schaber",
+    "bytes": 6612569,
+    "sha256": "33197e621a73e6f9737df464e2d74b33fe82a376d1f30f5e900c911835f5f885",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "iau",
+    "bytes": 6611652,
+    "sha256": "0584f46d79d7a17d8afd4cdbbe574d376da029c5af85ec21bb85d7fd586cd863",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "united-nations",
+    "bytes": 6619639,
+    "sha256": "09fe6e24aa2b5222705c75fe46efde56a2e628951af948abba8f0eb92669a491",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "tartaglia",
+    "bytes": 6615468,
+    "sha256": "4f4c71a31add8d687f64ea73805a8d818e3024d79c4217934e714781e5ff2288",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "raup",
+    "bytes": 6612801,
+    "sha256": "16baa5299a2f504bd5fc17f6d7099ec71f6cee05ba15bd06f44740b4ae8ca0aa",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "asteroid-2001-qw16",
+    "bytes": 6623930,
+    "sha256": "45df28a44fadfb261fb9bb720b1813a41b21a4a59a8f71b2d6a1a88b5431d5ec",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "asteroid-1999-fr33",
+    "bytes": 6623941,
+    "sha256": "49316e896df87cf3730a817e3e5e04efc6441f6d56509b197074d4a6f8bea279",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "vesta",
+    "bytes": 6621010,
+    "sha256": "7777824a3e32ad2c3f2b7d015b319f905bc3a3a6939008a8bafe65a8eb2897a7",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "phobos",
+    "bytes": 7105215,
+    "sha256": "0bf74b6e5a873d2fc6835136f331dfa3f9c147dd5e57384f1bf75e7c901f6ec8",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "deimos",
+    "bytes": 7108158,
+    "sha256": "f224ad4866c00a242643bc868a09fee80dfc0905524e0caad0be23035683ae60",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ceres",
+    "bytes": 5857511,
+    "sha256": "141c593ab88e2eaa81285d755a93415bb91071c35802b14d1874a35079822778",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "jupiter",
+    "bytes": 605425,
+    "sha256": "f16aa312f4eafcfec43c2c544e5b23e8d4ac1a1e2dbb85c9b4683192ace4190a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "io",
+    "bytes": 6322870,
+    "sha256": "4d5c35b53dfffeae12373a19d6c1e9506b135d9e492184274181807dc4fcd2bf",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "europa",
+    "bytes": 6326536,
+    "sha256": "ff5b574514a362b1f14a1846c2ec35c2e69327c964398f54e8ea6322bfffe2b7",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ganymede",
+    "bytes": 6327012,
+    "sha256": "d49114e04df1af6ebeeac3de8bbc1aaadc304cbe300c76c688d473db6fcaa1e9",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "callisto",
+    "bytes": 6319899,
+    "sha256": "aada86ba095191451f220fed9a12f3aa044e0c69bf72b474b7babd777406ec91",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "saturn",
+    "bytes": 1736055,
+    "sha256": "f277fabbb13089194a0eeaa6bdc49487c6e6837f467fe3777ba3945ebcece43f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "pan",
+    "bytes": 6594433,
+    "sha256": "ef784b48801dc5aaed59552b9b181ab915b214557b43bba5505774fb789a662f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "atlas",
+    "bytes": 6598297,
+    "sha256": "d208abffcf9dd58edb7d34409d644d248dc0352d483acaf0e755e8e3a6aa6261",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "prometheus",
+    "bytes": 6530692,
+    "sha256": "a1de64e59d07daf93add311240fa145e4483317d81f1209d722954cd94aa45a4",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "pandora",
+    "bytes": 6456033,
+    "sha256": "ec5b5735b31ee3e9f1578b39b2bc7b35b0ff5b00d3166233d7f08b226fa23918",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "janus",
+    "bytes": 6526164,
+    "sha256": "e475bdfb7960ef2c1ccf321d659e9d7a8062cb9ea8da06a89fbb43d84d0eaee8",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "epimetheus",
+    "bytes": 6531052,
+    "sha256": "fe06334445517e39ce1ca758a0b93ba0138f127bd66d44f151b3be701a4b255f",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hyperion",
+    "bytes": 6961634,
+    "sha256": "b9f26c03fd2231db7541ef23ab465a12c93cc15c1766401ba0187bc87191b382",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "mimas",
+    "bytes": 6561575,
+    "sha256": "aaf8bd6b352ff790aa4feb4f04ee3568a4c131ce3f64d52535e29953d7ea1e15",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "enceladus",
+    "bytes": 7418578,
+    "sha256": "9b87733c177f27e1f01a8280b43d5651c69dee9ee83e8db85539b50eb4990de6",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "tethys",
+    "bytes": 7412969,
+    "sha256": "f9f20e18b25bfe6dc5b456ee1baed75f19122a1c15b9f8a3682e8eb4b1c534ae",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "dione",
+    "bytes": 7408937,
+    "sha256": "45ff7281515b028f8b7da158d4adbe334ae0fd33cbf7c874ccf7661895d23d3e",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "rhea",
+    "bytes": 7409545,
+    "sha256": "e74afd59f6204fe5a5329f39391300d04bbb56cc2ac480bc63abbd0a15a73938",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "titan",
+    "bytes": 6328349,
+    "sha256": "40429682648b7ed82351f89970f134ba4a9874ce354419269f2e021e860f5e69",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "iapetus",
+    "bytes": 6324830,
+    "sha256": "e8667bd8dc7e2092b6c51020141c21c7c27fa6168552f39310e9cca67b6b4e94",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "phoebe",
+    "bytes": 9074626,
+    "sha256": "a6fb1f41a798c575ffdfad3bd1eae5dae19f5592274e17f544dd5a38f742ddc0",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "uranus",
+    "bytes": 1007173,
+    "sha256": "f40a849c512d169c0ad21f7f9d67f8fe0f9aa4efa9a5d1b230089c26125d532a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "miranda",
+    "bytes": 6339820,
+    "sha256": "b13a1c74f02ad3a1393b607126391460f24242397a9752e73e7fc75c25d363af",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "ariel",
+    "bytes": 6332716,
+    "sha256": "1c7d2ee40cefe581fb2d9970e17c3b74fdc989b3bb9ad7853b87afd6b4527753",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "umbriel",
+    "bytes": 6331555,
+    "sha256": "bc4a9aaddc79175c63b56d5f8d9c3ff78bdd0ff9c9edc1303063090c01737be1",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "titania",
+    "bytes": 6336655,
+    "sha256": "bd9b118f69f8ba2f84acda6ff470b2dc2bebdc8179c5776072485f4add5290f2",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "oberon",
+    "bytes": 6329318,
+    "sha256": "da288446efe102aeeda2f5a369092d45cd50ad35ff451021d6739f9710382034",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "neptune",
+    "bytes": 711499,
+    "sha256": "3d8ba475cbbe912a718070f252ce058e1ed609be7ca1eb36aca9bea2a1d991a4",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "triton",
+    "bytes": 6320466,
+    "sha256": "41a243caa1ae04f6fd538f9500b567209ceaa0b78017c1a8c3759100d9160b9e",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "pluto",
+    "bytes": 360793,
+    "sha256": "7929486b08c06bb514808c5b4ea71cd75816d8e0f8783e4bc9e996b291185e7b",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "charon",
+    "bytes": 6335136,
+    "sha256": "ce2dd3f2384807f5d614532d4aca2ec1319f2a951f916ccb2e8e2ce295c5d9dd",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "styx",
+    "bytes": 6329242,
+    "sha256": "2d2b77a38f7d38aa1d8bd235c5b9c59f0b13c9a14929ff2d7931544b1f57bf19",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "nix",
+    "bytes": 6593048,
+    "sha256": "4006dc2f063ae2771d49b30c7f82c80fb4c0d88ac7202aa403558cdb37a95c29",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "kerberos",
+    "bytes": 6328473,
+    "sha256": "6b3620a7a2b5e71a4fa573aaa03a178ceff950bf1f35c51c503559cd1ca34105",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hydra",
+    "bytes": 6595472,
+    "sha256": "416350c06eb00052f24944e0cc64cf3ccba07bd058e0a3cfb9bf1c33608713c7",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "haumea",
+    "bytes": 6762110,
+    "sha256": "585d5b97b05fbc758f1a50e866b36f79d924d288f8491efbb117c211873074f7",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "makemake",
+    "bytes": 5847084,
+    "sha256": "3d771853c1a69a5f241039272d1e2f46416dc571a2c124ff05ed7f2282a9f59a",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "eris",
+    "bytes": 5840582,
+    "sha256": "73ec0280adccbd1f5f1ad1c0430a7edcbe39901815e4bb5e8a17a81b610aac41",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "chariklo",
+    "bytes": 6326902,
+    "sha256": "230d3adbbeec46a00bbf77ef0e7b15df95a0b8ca6d8d20b5c3d058f43e4cea10",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "bienor",
+    "bytes": 6317626,
+    "sha256": "3e13adcc679d1f1586fb7cb591789e73131800ec2ca23dd505152449094e9398",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "aethra",
+    "bytes": 6612983,
+    "sha256": "6830ba7d3a55b22a7213a73159166357f119852a07e953fef3557ebc5d18a1aa",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "lyyli",
+    "bytes": 6611852,
+    "sha256": "8bf110ad0f2cbf60ae6d30968f0e0d9c625b15fdd618c45d2186d66eb7f002d4",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "hela",
+    "bytes": 6615635,
+    "sha256": "5c04c0564ef85a8ad5586ac6ba02c2eb430aad0a892cdca5f0ab182b4eb24f2c",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "kemi",
+    "bytes": 6612350,
+    "sha256": "ceaf4703a7ce07e20f0b29061a702953f3eb6a99ad14a03d6ade75717a3c2262",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  },
+  {
+    "id": "taurinensis",
+    "bytes": 6619095,
+    "sha256": "a2dca7cb20ceb7e0665eb968193d9d556a33d763d421ae0d2b7c91d71e022c11",
+    "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+  }
+]

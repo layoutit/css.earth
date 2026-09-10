@@ -1,0 +1,423 @@
+{
+  "checkedOn": "2026-09-09",
+  "scope": "Sedna, Gonggong, Orcus and Salacia scientific inputs for the single distant-worlds PR. No geometry or renderer technique added.",
+  "reuseMeaning": "Factual numeric inputs and original explanatory text. Reference downloads are research copies; publisher copyright remains with each work. The selected Salacia abstract is CC BY4.0.",
+  "bodies": [
+    {
+      "periodHours": null,
+      "poleIcrfDegrees": [
+        0,
+        90
+      ],
+      "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed color or terrain.",
+      "orientationMeaning": "Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed.",
+      "axesStatus": "Illustrative equal axes at the published effective diameter; these are not three independently measured axes.",
+      "radiusMeaning": "Volume-equivalent radius of the chosen illustrative equal-axis model, not a measured 3D-volume radius.",
+      "id": "sedna",
+      "name": "Sedna",
+      "jplId": "90377",
+      "horizons": "90377;",
+      "fullName": "90377 Sedna (2003 VB12)",
+      "fullAxesKm": [
+        995,
+        995,
+        995
+      ],
+      "radiusKm": 497.5,
+      "diameterKm": 995,
+      "diameterUncertaintyKm": {
+        "minus": 80,
+        "plus": 80
+      },
+      "population": "Detached trans-Neptunian object",
+      "periodText": "About 10.3 hours from photometry; aliases and a possible doubled shape period remain unresolved.",
+      "source": "https://arxiv.org/abs/1204.0899",
+      "credit": "Pál et al. (2012), Herschel/PACS thermophysical analysis; Gaudi et al. (2005), rotational photometry.",
+      "shapeMeaning": "Size-constrained spherical illustration at the 995 ±80 km thermal diameter. Herschel constrains effective size, not three axes; no resolved global shape or topography is represented.",
+      "introduction": "Sedna follows an exceptionally distant, elongated orbit beyond the planetary region. This grid-covered illustration conveys its thermal size estimate; its actual shape and surface terrain remain unresolved.",
+      "papers": [
+        "https://doi.org/10.1051/0004-6361/201218874",
+        "https://doi.org/10.1086/444355",
+        "https://doi.org/10.1016/j.icarus.2024.116017"
+      ],
+      "referencePins": [
+        {
+          "path": "output/distant-worlds/references/sedna-pal-2012.pdf",
+          "url": "https://arxiv.org/pdf/1204.0899",
+          "resolvedUrl": "https://arxiv.org/pdf/1204.0899",
+          "bytes": 379111,
+          "sha256": "762181442ff374c35e500b6d7a916ebe8e9a63d5ba7fee68546c5f00ee535b08",
+          "contentType": "application/pdf",
+          "purpose": "Sedna thermal primary diameter, Pal et al. 2012"
+        },
+        {
+          "path": "output/distant-worlds/references/sedna-gaudi-2005.pdf",
+          "url": "https://www.astronomy.ohio-state.edu/gaudi.1/sedna.pdf",
+          "resolvedUrl": "https://www.astronomy.ohio-state.edu/gaudi.1/sedna.pdf",
+          "bytes": 95262,
+          "sha256": "7ec1bc5110ad945d48fa8c86f929ec6aad066e84ac884a21c811659f009523bd",
+          "contentType": "application/pdf",
+          "purpose": "Sedna photometric rotation, Gaudi et al. 2005"
+        },
+        {
+          "path": "output/distant-worlds/references/sedna-gonggong-emery-2024.html",
+          "url": "https://arxiv.org/abs/2309.15230",
+          "resolvedUrl": "https://arxiv.org/abs/2309.15230",
+          "bytes": 45900,
+          "sha256": "2fab5cb01d246ac9bf94782e573d096cd261198c9eeb6f97ea788ad1fe3d3919",
+          "contentType": "text/html; charset=utf-8",
+          "purpose": "JWST integrated spectroscopy; no mapped surface"
+        }
+      ],
+      "numericAnchors": [
+        {
+          "quantity": "thermal effective diameter",
+          "value": 995,
+          "unit": "km",
+          "uncertainty": "±80 km",
+          "location": "Pál et al. 2012 abstract and thermophysical-model discussion"
+        },
+        {
+          "quantity": "photometric period candidate",
+          "value": 10.273,
+          "unit": "hours",
+          "location": "Gaudi et al. 2005 abstract; neighboring aliases and approximately 18 h solution remain"
+        }
+      ],
+      "sourceSurvey": [
+        {
+          "url": "https://arxiv.org/abs/1204.0899",
+          "status": "included",
+          "adds": "Herschel effective primary diameter; equal axes remain illustrative."
+        },
+        {
+          "url": "https://doi.org/10.1086/444355",
+          "status": "included",
+          "adds": "Small photometric variation and rotation candidates; insufficient to select unique 3D axes."
+        },
+        {
+          "url": "https://doi.org/10.1016/j.icarus.2024.116017",
+          "status": "excluded-from-surface",
+          "adds": "JWST spectroscopy constrains integrated composition; it supplies no registered terrain or albedo map."
+        }
+      ],
+      "unresolved": [
+        "Thermal diameter does not establish a spherical surface; flattening, axis ratios and spin pole are unmeasured here.",
+        "No absolute meridian or sidereal spin solution is installed."
+      ]
+    },
+    {
+      "periodHours": null,
+      "poleIcrfDegrees": [
+        0,
+        90
+      ],
+      "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed color or terrain.",
+      "orientationMeaning": "Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed.",
+      "axesStatus": "Illustrative equal axes at the published effective diameter; these are not three independently measured axes.",
+      "radiusMeaning": "Volume-equivalent radius of the chosen illustrative equal-axis model, not a measured 3D-volume radius.",
+      "id": "gonggong",
+      "name": "Gonggong",
+      "jplId": "225088",
+      "horizons": "225088;",
+      "fullName": "225088 Gonggong (2007 OR10)",
+      "fullAxesKm": [
+        1230,
+        1230,
+        1230
+      ],
+      "radiusKm": 615,
+      "diameterKm": 1230,
+      "diameterUncertaintyKm": {
+        "minus": 50,
+        "plus": 50
+      },
+      "population": "Scattered trans-Neptunian object",
+      "periodText": "22.4 or 44.8 hours; the single- versus double-peaked interpretation is unresolved.",
+      "source": "https://doi.org/10.1016/j.icarus.2019.03.013",
+      "credit": "Kiss et al. (2019), thermophysical modeling with Hubble satellite-orbit constraints.",
+      "shapeMeaning": "Published spherical thermophysical interpretation, diameter 1230 ±50 km. It assumes Xiangliu orbits near Gonggong’s equatorial plane; the unknown local surface is shown with the grid.",
+      "introduction": "Gonggong is a large, distant trans-Neptunian world with the moon Xiangliu. Its smooth model follows a published thermal size interpretation; the viewing pole and surface detail are illustrative.",
+      "papers": [
+        "https://arxiv.org/abs/1903.05439",
+        "https://doi.org/10.1016/j.icarus.2024.116017"
+      ],
+      "referencePins": [
+        {
+          "path": "output/distant-worlds/references/gonggong-kiss-2019.pdf",
+          "url": "https://ntrs.nasa.gov/api/citations/20210012934/downloads/21-51.pdf?attachment=true",
+          "resolvedUrl": "https://ntrs.nasa.gov/api/citations/20210012934/downloads/21-51.pdf?attachment=true",
+          "bytes": 951981,
+          "sha256": "a9dde2eb150a8e275b2c347dbce7c3766353a728263322ff4cec420fdc63ba01",
+          "contentType": "application/pdf",
+          "purpose": "Gonggong spherical thermophysical fit, Kiss et al. 2019"
+        },
+        {
+          "path": "output/distant-worlds/references/sedna-gonggong-emery-2024.html",
+          "url": "https://arxiv.org/abs/2309.15230",
+          "resolvedUrl": "https://arxiv.org/abs/2309.15230",
+          "bytes": 45900,
+          "sha256": "2fab5cb01d246ac9bf94782e573d096cd261198c9eeb6f97ea788ad1fe3d3919",
+          "contentType": "text/html; charset=utf-8",
+          "purpose": "JWST integrated spectroscopy; no mapped surface"
+        },
+        {
+          "path": "output/distant-worlds/references/gonggong-pal-2016.html",
+          "url": "https://arxiv.org/abs/1603.03090",
+          "resolvedUrl": "https://arxiv.org/abs/1603.03090",
+          "bytes": 45567,
+          "sha256": "a20e1b3623e07a0198a08e9206a2fb2a7d28d0db87744a93e391af5045cbe0e8",
+          "contentType": "text/html; charset=utf-8",
+          "purpose": "Gonggong rotation alternatives and superseded size"
+        }
+      ],
+      "numericAnchors": [
+        {
+          "quantity": "primary spherical thermal diameter",
+          "value": 1230,
+          "unit": "km",
+          "uncertainty": "±50 km",
+          "location": "Kiss et al. 2019 abstract and section 3; primary size, not combined binary diameter"
+        }
+      ],
+      "sourceSurvey": [
+        {
+          "url": "https://doi.org/10.1016/j.icarus.2019.03.013",
+          "status": "included",
+          "adds": "1230 ±50 km spherical-model size conditioned on satellite equatorial alignment. Mirror orbit/spin alternatives remain."
+        },
+        {
+          "url": "https://arxiv.org/abs/1603.03090",
+          "status": "superseded-size",
+          "adds": "Earlier equator-on estimate 1535 +75/-225 km, revisited after satellite orbit constraints; not the selected diameter."
+        },
+        {
+          "url": "https://doi.org/10.1016/j.icarus.2024.116017",
+          "status": "excluded-from-surface",
+          "adds": "Integrated JWST composition, not a registered photographic texture."
+        }
+      ],
+      "unresolved": [
+        "Sphere is a stated thermophysical-model assumption, not an observed resolved silhouette.",
+        "Pole alignment and rotation alternatives change the thermal solution; no absolute attitude is installed."
+      ]
+    },
+    {
+      "periodHours": null,
+      "poleIcrfDegrees": [
+        0,
+        90
+      ],
+      "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed color or terrain.",
+      "orientationMeaning": "Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed.",
+      "axesStatus": "Illustrative equal axes at the published effective diameter; these are not three independently measured axes.",
+      "radiusMeaning": "Volume-equivalent radius of the chosen illustrative equal-axis model, not a measured 3D-volume radius.",
+      "id": "orcus",
+      "name": "Orcus",
+      "jplId": "90482",
+      "horizons": "90482;",
+      "fullName": "90482 Orcus (2004 DW)",
+      "fullAxesKm": [
+        910,
+        910,
+        910
+      ],
+      "radiusKm": 455,
+      "diameterKm": 910,
+      "diameterUncertaintyKm": {
+        "minus": 40,
+        "plus": 50
+      },
+      "population": "Resonant trans-Neptunian object (plutino)",
+      "periodText": "Possibly synchronized with Vanth’s roughly 9.54-day orbit; no qualified sidereal spin is installed.",
+      "source": "https://arxiv.org/abs/1801.07221",
+      "credit": "Brown and Butler (2018), resolved ALMA binary photometry with Spitzer/Herschel thermal modeling.",
+      "shapeMeaning": "Size-constrained spherical illustration at Orcus’s primary-only thermal diameter, 910 +50/−40 km. ALMA separated the binary components but did not resolve Orcus’s terrain or measure three shape axes.",
+      "introduction": "Orcus is a large resonant world beyond Neptune, partnered with the substantial moon Vanth. The displayed size belongs to Orcus alone; its smooth shape and grid surface are illustrative.",
+      "papers": [
+        "https://doi.org/10.3847/1538-3881/aad9f2",
+        "https://arxiv.org/abs/2307.04848",
+        "https://arxiv.org/abs/2508.17101"
+      ],
+      "referencePins": [
+        {
+          "path": "output/distant-worlds/references/orcus-brown-butler-2018.pdf",
+          "url": "https://arxiv.org/pdf/1801.07221",
+          "resolvedUrl": "https://arxiv.org/pdf/1801.07221",
+          "bytes": 1598645,
+          "sha256": "a939fef5976cf9986bf1d1b4fba067b26f24caa0b9984155211073213d67764d",
+          "contentType": "application/pdf",
+          "purpose": "Spatially separated Orcus and Vanth thermal diameters"
+        },
+        {
+          "path": "output/distant-worlds/references/orcus-brown-butler-2023.html",
+          "url": "https://arxiv.org/abs/2307.04848",
+          "resolvedUrl": "https://arxiv.org/abs/2307.04848",
+          "bytes": 41968,
+          "sha256": "379184924496c714fec5aad30e176cac81b2209eb04a0822de14d84be0ec1eb9",
+          "contentType": "text/html; charset=utf-8",
+          "purpose": "Orcus-Vanth synchronized evolution context"
+        }
+      ],
+      "numericAnchors": [
+        {
+          "quantity": "Orcus primary thermal diameter",
+          "value": 910,
+          "unit": "km",
+          "uncertainty": "+50/−40 km (median with 16th/84th percentiles)",
+          "location": "Brown and Butler 2018 section 3, PDF page 3"
+        },
+        {
+          "quantity": "Vanth diameter, context only",
+          "value": 475,
+          "unit": "km",
+          "uncertainty": "±75 km",
+          "location": "Same paragraph; deliberately not included in Orcus scale"
+        }
+      ],
+      "sourceSurvey": [
+        {
+          "url": "https://arxiv.org/abs/1801.07221",
+          "status": "included",
+          "adds": "Separately modeled Orcus and Vanth thermal fluxes avoid using a system-equivalent diameter."
+        },
+        {
+          "url": "https://arxiv.org/abs/2307.04848",
+          "status": "included-context",
+          "adds": "Binary astrometric mass ratio and likely double-synchronous evolution; not unique spin attitude or shape."
+        },
+        {
+          "url": "https://arxiv.org/abs/2508.17101",
+          "status": "excluded-from-surface",
+          "adds": "JWST spectral characterization references include Orcus; no resolved longitude-latitude map."
+        },
+        {
+          "url": "https://arxiv.org/abs/1810.08977",
+          "status": "excluded-wrong-component",
+          "adds": "The 2017 occultation constrains Vanth, not Orcus; cannot use its 443 km diameter for the primary."
+        }
+      ],
+      "unresolved": [
+        "Thermal-model scale is not a unique resolved 3D shape.",
+        "Vanth, its orbital pole and combined-system thermal diameters must not be confused with primary body dimensions."
+      ]
+    },
+    {
+      "periodHours": null,
+      "poleIcrfDegrees": [
+        0,
+        90
+      ],
+      "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed color or terrain.",
+      "orientationMeaning": "Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed.",
+      "axesStatus": "Illustrative equal axes at the published effective diameter; these are not three independently measured axes.",
+      "radiusMeaning": "Volume-equivalent radius of the chosen illustrative equal-axis model, not a measured 3D-volume radius.",
+      "id": "salacia",
+      "name": "Salacia",
+      "jplId": "120347",
+      "horizons": "120347;",
+      "fullName": "120347 Salacia (2004 SB60)",
+      "fullAxesKm": [
+        838,
+        838,
+        838
+      ],
+      "radiusKm": 419,
+      "diameterKm": 838,
+      "diameterUncertaintyKm": {
+        "minus": 44,
+        "plus": 44
+      },
+      "population": "Hot classical trans-Neptunian object",
+      "periodText": "About 5.494 days (131.86 hours); 2025 photometry supports synchronous rotation with Actaea.",
+      "source": "https://doi.org/10.5194/epsc-dps2025-905",
+      "credit": "Kiss et al. (2025), EPSC-DPS conference thermal-model result; Collyer et al. (2025), synchronous rotation.",
+      "shapeMeaning": "Size-constrained spherical illustration at the primary-only 838 ±44 km ALMA/NEATM estimate. This value is from a 2025 conference abstract; no resolved three-axis shape is provided.",
+      "introduction": "Salacia is a large, dark Kuiper-belt world with the moon Actaea. Long-term photometry supports a synchronized binary. This grid-covered illustration uses a separately estimated primary size, not a resolved surface.",
+      "papers": [
+        "https://arxiv.org/abs/2509.02734",
+        "https://doi.org/10.3847/PSJ/ae0b6a",
+        "https://arxiv.org/abs/2508.17101"
+      ],
+      "referencePins": [
+        {
+          "path": "output/distant-worlds/references/salacia-kiss-2025.html",
+          "url": "https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-905.html",
+          "resolvedUrl": "https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-905.html",
+          "bytes": 162166,
+          "sha256": "c2a3f501ffb53a50a82ee7da61ea93d15f7750f3d2b61989fd54b73b37568ba4",
+          "contentType": "text/html; charset=utf-8",
+          "purpose": "Resolved primary and satellite thermal diameters; conference abstract"
+        },
+        {
+          "path": "output/distant-worlds/references/salacia-collyer-2025.html",
+          "url": "https://arxiv.org/html/2509.02734v1",
+          "resolvedUrl": "https://arxiv.org/html/2509.02734v1",
+          "bytes": 265567,
+          "sha256": "39a29b49b2b0dcb92dda03ee3af61c5f7af7d5e4f021b6df47daebd705121acf",
+          "contentType": "text/html; charset=utf-8",
+          "purpose": "Synchronous rotation and albedo versus shape interpretation"
+        },
+        {
+          "path": "output/distant-worlds/references/salacia-wong-2025.html",
+          "url": "https://arxiv.org/html/2508.17101v1",
+          "resolvedUrl": "https://arxiv.org/html/2508.17101v1",
+          "bytes": 182847,
+          "sha256": "cbbb424ed5fdd7862fbe2b26682f361e6c49dbbf85351a9ea9b045d48dca8318",
+          "contentType": "text/html; charset=utf-8",
+          "purpose": "JWST blended Salacia-Actaea spectrum; not mapped imagery"
+        }
+      ],
+      "numericAnchors": [
+        {
+          "quantity": "Salacia primary thermal diameter",
+          "value": 838,
+          "unit": "km",
+          "uncertainty": "±44 km",
+          "location": "Kiss et al. 2025 EPSC-DPS905 abstract paragraph beginning Using the same approach"
+        },
+        {
+          "quantity": "Actaea diameter, context only",
+          "value": 393,
+          "unit": "km",
+          "uncertainty": "±33 km",
+          "location": "Same paragraph; not merged into Salacia radius"
+        },
+        {
+          "quantity": "sidereal rotation estimate",
+          "value": 5.49403,
+          "unit": "days",
+          "uncertainty": "±0.00016 days",
+          "location": "Collyer et al. 2025 section5.2; descriptive only, display phase arbitrary"
+        }
+      ],
+      "sourceSurvey": [
+        {
+          "url": "https://doi.org/10.5194/epsc-dps2025-905",
+          "status": "included",
+          "adds": "New ALMA observations separate Salacia and Actaea, with distinct diameters and albedos. Conference abstract status retained."
+        },
+        {
+          "url": "https://arxiv.org/abs/2509.02734",
+          "status": "included-context",
+          "adds": "16 years of photometry favor albedo variation and a 5.494-day synchronous rotation, rather than a triaxial explanation of the lightcurve."
+        },
+        {
+          "url": "https://arxiv.org/abs/2508.17101",
+          "status": "excluded-from-surface",
+          "adds": "JWST Salacia-Actaea spectrum is spatially blended; its901 km discussion concerns the system and cannot set this primary’s axes."
+        },
+        {
+          "url": "https://doi.org/10.3847/1538-3881/aa6346",
+          "status": "superseded-size",
+          "adds": "Older 866 ±37 km estimate used equal-albedo binary partitioning; newer resolved-component result selected."
+        }
+      ],
+      "unresolved": [
+        "838 ±44 km remains a conference result; a full peer-reviewed resolved-ALMA analysis was not located in this bounded survey.",
+        "Spherical axes and pole are illustrative; the lightcurve paper favors surface-albedo variation and does not provide measured terrain.",
+        "The standard grid carries no observed albedo pattern or JWST spectral map."
+      ]
+    }
+  ]
+}

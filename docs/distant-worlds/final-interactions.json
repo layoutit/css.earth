@@ -1,0 +1,74 @@
+{
+  "capturedAt": "2026-09-10T03:37:06.800Z",
+  "browser": "152.0.7977.84",
+  "headless": true,
+  "build": "production",
+  "worldMarker": {
+    "from": "varuna",
+    "to": "oumuamua",
+    "input": "native mouse click at visible prepared marker",
+    "target": {
+      "r": {
+        "x": 410.9545593261719,
+        "y": 669.6436767578125,
+        "width": 16,
+        "height": 16,
+        "top": 669.6436767578125,
+        "right": 426.9545593261719,
+        "bottom": 685.6436767578125,
+        "left": 410.9545593261719
+      },
+      "visibility": "visible",
+      "opacity": "1",
+      "tag": "I"
+    }
+  },
+  "searchAliases": [
+    "2002 MS4",
+    "Máni",
+    "2003 AZ84",
+    "Achlys"
+  ],
+  "optInControls": {
+    "shadows": true,
+    "bodyPixelsChanged": true,
+    "orbit": true
+  },
+  "mobile": [
+    {
+      "id": "oumuamua",
+      "position": "relative",
+      "viewport": {
+        "x": 0,
+        "y": 111,
+        "width": 390,
+        "height": 295.390625,
+        "top": 111,
+        "right": 390,
+        "bottom": 406.390625,
+        "left": 0
+      },
+      "cardTop": 406.390625,
+      "overflow": false,
+      "diagnostics": false
+    },
+    {
+      "id": "gkunhomdima",
+      "position": "relative",
+      "viewport": {
+        "x": 0,
+        "y": 111,
+        "width": 390,
+        "height": 295.390625,
+        "top": 111,
+        "right": 390,
+        "bottom": 406.390625,
+        "left": 0
+      },
+      "cardTop": 406.390625,
+      "overflow": false,
+      "diagnostics": false
+    }
+  ],
+  "errors": []
+}

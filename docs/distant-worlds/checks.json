@@ -1,0 +1,51 @@
+{
+  "astronomy": {
+    "command": "pnpm --filter @cssearth/astronomy exec vitest run src/asteroids.test.ts src/kepler.test.ts src/kepler-hyperbolic.test.ts --maxWorkers=1 --minWorkers=1",
+    "passed": 20
+  },
+  "sharedIntegration": {
+    "command": "node --test --test-concurrency=1 site/test/object-schema.test.mjs site/test/navigation-router.test.mjs site/test/scene-contract.test.mjs src/platform/prepare-planetary-system.test.mjs",
+    "passed": 62
+  },
+  "typechecks": {
+    "renderer": "passed",
+    "preparation": "passed"
+  },
+  "productionBuild": {
+    "command": "pnpm exec astro build",
+    "pages": 884,
+    "status": "passed"
+  },
+  "publication": {
+    "files": 279,
+    "bytes": 63133796,
+    "freshInstalled": 279,
+    "reused": 0
+  },
+  "bodyPreparation": {
+    "concurrency": 1,
+    "nodeHeapMiB": 3072,
+    "uvThreadpoolSize": 1,
+    "vipsConcurrency": 1,
+    "bodies": 9
+  },
+  "diagnosticConformance": {
+    "desktop": "passed",
+    "mobile": "passed",
+    "datasetInteractionsDpr1": "passed",
+    "datasetInteractionsDpr2": "passed"
+  },
+  "productionFinal": {
+    "markerClick": "Varuna to Oumuamua passed",
+    "mobile": "Oumuamua and existing Gkunhomdima scene above card; no horizontal overflow",
+    "optInShadows": "body pixels changed",
+    "searchAliases": "four names/designations passed"
+  },
+  "lint": {
+    "status": "existing max-lines violation remains in packages/astronomy/src/bodies.ts",
+    "baselineMainLines": 633,
+    "currentLines": 644,
+    "maximumAllowed": 600,
+    "otherSelectedFiles": "passed"
+  }
+}
