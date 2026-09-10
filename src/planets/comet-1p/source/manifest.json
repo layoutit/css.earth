@@ -182,10 +182,10 @@
       "licenseEvidence": [
         "https://www2.mps.mpg.de/de/projekte/giotto/hmc/"
       ],
-      "acquisition": "Reproduce with node tools/objects/comet-1p/prepare-giotto.mjs --write using the pinned registration and original inputs.",
+      "acquisition": "Reproduce with node tools/objects/comet-1p/prepare-giotto.mts --write using the pinned registration and original inputs.",
       "redistribution": "The projected photograph retains the MPS source-image terms, separate from the MIT application code.",
       "consumers": [
-        "surfaces"
+        "giotto-reference"
       ],
       "lensId": "giotto",
       "width": 512,
@@ -232,6 +232,161 @@
       "consumers": [
         "giotto-registration"
       ]
+    },
+    {
+      "id": "vega-t11190-hdr",
+      "path": "vega/t11190.hdr",
+      "expectedBytes": 5760,
+      "expectedSha256": "e6e43ac52b037d69cf5f12cb6a1e5a0f0ad79e30e11a96353dd2e73dfa1a5904",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11190.hdr",
+      "credit": "Vega 2 TVS team; KFKI processing team; International Halley Watch; NASA PDS",
+      "license": "Public scientific archive data; preserve the original investigators and dataset citation",
+      "licenseEvidence": [
+        "https://pds-ppi.igpp.ucla.edu/faq.jsp",
+        "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/catalog/dataset.cat"
+      ],
+      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count and SHA-256.",
+      "redistribution": "Preserve the original team credit and PDS dataset identifier. These archive inputs are not relicensed as MIT application code.",
+      "consumers": [
+        "encounter-registration"
+      ]
+    },
+    {
+      "id": "vega-t11190-lbl",
+      "path": "vega/t11190.lbl",
+      "expectedBytes": 1920,
+      "expectedSha256": "ea1f4083f2030845cff45f988800b935af6bd69f87759211ab5793a923b920ee",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11190.lbl",
+      "credit": "Vega 2 TVS team; KFKI processing team; International Halley Watch; NASA PDS",
+      "license": "Public scientific archive data; preserve the original investigators and dataset citation",
+      "licenseEvidence": [
+        "https://pds-ppi.igpp.ucla.edu/faq.jsp",
+        "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/catalog/dataset.cat"
+      ],
+      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count and SHA-256.",
+      "redistribution": "Preserve the original team credit and PDS dataset identifier. These archive inputs are not relicensed as MIT application code.",
+      "consumers": [
+        "encounter-registration"
+      ]
+    },
+    {
+      "id": "vega-t11190-img",
+      "path": "vega/t11190.img",
+      "expectedBytes": 264960,
+      "expectedSha256": "17b1aa86cdb268f4ae6e9aff3dda6c2059a015885cf0ce6eb7e2c60fcb2a9e9d",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11190.img",
+      "credit": "Vega 2 TVS team; KFKI processing team; International Halley Watch; NASA PDS",
+      "license": "Public scientific archive data; preserve the original investigators and dataset citation",
+      "licenseEvidence": [
+        "https://pds-ppi.igpp.ucla.edu/faq.jsp",
+        "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/catalog/dataset.cat"
+      ],
+      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count and SHA-256.",
+      "redistribution": "Preserve the original team credit and PDS dataset identifier. These archive inputs are not relicensed as MIT application code.",
+      "consumers": [
+        "encounter-registration"
+      ]
+    },
+    {
+      "id": "vega-t11194-hdr",
+      "path": "vega/t11194.hdr",
+      "expectedBytes": 5760,
+      "expectedSha256": "d8756d103854206ff497dc2d4ba2c582bd839a08c647177a6a488a3828310021",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.hdr",
+      "credit": "Vega 2 TVS team; KFKI processing team; International Halley Watch; NASA PDS",
+      "license": "Public scientific archive data; preserve the original investigators and dataset citation",
+      "licenseEvidence": [
+        "https://pds-ppi.igpp.ucla.edu/faq.jsp",
+        "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/catalog/dataset.cat"
+      ],
+      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count and SHA-256.",
+      "redistribution": "Preserve the original team credit and PDS dataset identifier. These archive inputs are not relicensed as MIT application code.",
+      "consumers": [
+        "encounter-registration"
+      ]
+    },
+    {
+      "id": "vega-t11194-lbl",
+      "path": "vega/t11194.lbl",
+      "expectedBytes": 1920,
+      "expectedSha256": "55a0ae640f1c47743720cc2bee2ccc7ca1871768873f164121e01b982f7e066d",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.lbl",
+      "credit": "Vega 2 TVS team; KFKI processing team; International Halley Watch; NASA PDS",
+      "license": "Public scientific archive data; preserve the original investigators and dataset citation",
+      "licenseEvidence": [
+        "https://pds-ppi.igpp.ucla.edu/faq.jsp",
+        "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/catalog/dataset.cat"
+      ],
+      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count and SHA-256.",
+      "redistribution": "Preserve the original team credit and PDS dataset identifier. These archive inputs are not relicensed as MIT application code.",
+      "consumers": [
+        "encounter-registration"
+      ]
+    },
+    {
+      "id": "vega-t11194-img",
+      "path": "vega/t11194.img",
+      "expectedBytes": 264960,
+      "expectedSha256": "627a11052348a8e5ab01f69fadd7d81d59f6b9dbd4ec79b25f9ee72bedc1130e",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.img",
+      "credit": "Vega 2 TVS team; KFKI processing team; International Halley Watch; NASA PDS",
+      "license": "Public scientific archive data; preserve the original investigators and dataset citation",
+      "licenseEvidence": [
+        "https://pds-ppi.igpp.ucla.edu/faq.jsp",
+        "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/catalog/dataset.cat"
+      ],
+      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count and SHA-256.",
+      "redistribution": "Preserve the original team credit and PDS dataset identifier. These archive inputs are not relicensed as MIT application code.",
+      "consumers": [
+        "encounter-registration"
+      ]
+    },
+    {
+      "id": "vega-tvs_proc-doc",
+      "path": "vega/tvs_proc.doc",
+      "expectedBytes": 10160,
+      "expectedSha256": "e0b5281528b3b2266b43a84b2ba230b38966b5cb3410e6622b849f5e5ebcf7fd",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/document/tvs_proc.doc",
+      "credit": "Vega 2 TVS team; KFKI processing team; International Halley Watch; NASA PDS",
+      "license": "Public scientific archive data; preserve the original investigators and dataset citation",
+      "licenseEvidence": [
+        "https://pds-ppi.igpp.ucla.edu/faq.jsp",
+        "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/catalog/dataset.cat"
+      ],
+      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count and SHA-256.",
+      "redistribution": "Preserve the original team credit and PDS dataset identifier. These archive inputs are not relicensed as MIT application code.",
+      "consumers": [
+        "encounter-registration"
+      ]
+    },
+    {
+      "id": "encounter-projection",
+      "path": "material/encounters.png",
+      "expectedBytes": 26573,
+      "expectedSha256": "8b3877838dfe861e7a9ba0878e38b1aab9bfbb01ab2809fd670a41fbe8b0adfe",
+      "origin": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif",
+      "credit": "© MPS; Giotto HMC team; Vega 2 TVS and KFKI teams; IHW / NASA PDS; shape by Stooke with pointing by Abergel",
+      "license": "MPS educational image terms for Giotto portions; cited PDS scientific data for Vega portions",
+      "licenseEvidence": [
+        "https://www2.mps.mpg.de/de/projekte/giotto/hmc/",
+        "https://pds-ppi.igpp.ucla.edu/faq.jsp"
+      ],
+      "acquisition": "Reproduce with node tools/objects/comet-1p/prepare-encounters.mts --write from pinned original pixels, encounter geometry and authored registration controls.",
+      "redistribution": "Keep the MPS image terms and Vega source credits with derived maps, atlases and thumbnails. The photographic material is not relicensed MIT.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "giotto",
+      "width": 512,
+      "height": 256,
+      "label": "Giotto + Vega",
+      "falseColor": false,
+      "coverage": "Giotto’s close-up joins two Vega 2 views. Visible and near-infrared photographs retain their original lighting and dust haze. Placement is approximate; uncertain or missing areas remain grid.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 4579.06433330178
+      }
     }
   ],
   "generatedIntermediates": [
@@ -269,14 +424,14 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4110,
-      "expectedSha256": "d26b02d9f0e0a792f074078568b0cf251d5121a5da5ba8ee9958b4494608611d",
+      "expectedBytes": 4293,
+      "expectedSha256": "bf88b81e1a75015c01dd98ad266f47bd029df8579738aa239cd8e4894b2812fd",
       "purpose": "Halley source evidence or authored preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2660,
-      "expectedSha256": "6ab242f75421f9445a70f56e425b74c4389b946128f0eab640827830cdbd0c1a",
+      "expectedBytes": 4304,
+      "expectedSha256": "42e44c6cad46a27c63fd3e48c82d165e81f773c376015ecfc3fabc43ce5c5851",
       "purpose": "Halley source evidence or authored preparation input."
     },
     {
@@ -293,8 +448,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3679,
-      "expectedSha256": "b60fbf7331a5045a0a1ec54d99b43cd83e5d1fdd9d55e68d840ab54026155eb6",
+      "expectedBytes": 3638,
+      "expectedSha256": "5494e1f6ddce35dde8a998547dbe984691495bbe99dc42f13fc21bab4ed96c67",
       "purpose": "Halley source evidence or authored preparation input."
     },
     {
@@ -374,6 +529,24 @@
       "expectedBytes": 131072,
       "expectedSha256": "816281ded6c5ad23a5daf851dc14b6dc12cfd58d2b5b4d70d856f4fe98292673",
       "purpose": "Giotto source registration, sampled coverage, or lossless observation/gap provenance."
+    },
+    {
+      "path": "reference/encounter-registration.json",
+      "expectedBytes": 8899,
+      "expectedSha256": "f7d99dc745d4a265c916fc5a0fe410caaac69b5e1abea5329cb3f0a0ce421678",
+      "purpose": "Halley encounter camera controls, sampled common-area comparison, or lossless source attribution."
+    },
+    {
+      "path": "reference/encounter-attribution.bin",
+      "expectedBytes": 131072,
+      "expectedSha256": "9260d89e0ef378e8f32b83b4b050c0522ddfd1544268a694bfdf5ae2c9ba429f",
+      "purpose": "Halley encounter camera controls, sampled common-area comparison, or lossless source attribution."
+    },
+    {
+      "path": "reference/encounter-projection-report.json",
+      "expectedBytes": 10475,
+      "expectedSha256": "b3a527b9d38ad25d8118f2ba6c572c3316625ae2fbaac1f28f14fe6800b18172",
+      "purpose": "Halley encounter camera controls, sampled common-area comparison, or lossless source attribution."
     }
   ]
 }

@@ -1,0 +1,56 @@
+Halley projection and dataset-spacecraft checks:
+✔ capture attribution follows the selected dataset, including derived maps (8.202875ms)
+✔ multi-mission composites preserve every evidenced contributor without repeating dataset destinations (3.235166ms)
+✔ schematic and synthetic views do not inherit observations from their outer texture (8.193458ms)
+✔ agency choices count individual missions and preserve joint credits (0.217167ms)
+✔ every migrated capture stays bound to its source; the full prepared graph is deterministic (476.237375ms)
+✔ OSIRIS-REx retains Bennu observations and successor participation creates no APEX observations (0.205208ms)
+✔ approved artwork and emblems retain source bytes, dimensions and transparency (108.671583ms)
+✔ unknown identities, impossible capture pairs, stale lenses and damaged indexes fail closed (7.366458ms)
+✔ Halley keeps east-positive source anchors, asymmetric origin and closed retained geometry (137.663125ms)
+✔ Halley display attitude stays fixed without inventing a physical spin (2.74575ms)
+✔ Vega cameras recover the published longitude anchor and independent header geometry (13.613583ms)
+✔ KFKI detector decoding rejects changed samples, headers and truncated padding (14.211958ms)
+✔ Source visibility and all interpolation corners guard coverage without using brightness (1.211292ms)
+✔ Display matching withholds sparse, excessive and inconsistent fits (0.228791ms)
+✔ Observation selection favors resolution and keeps deterministic ties independent of brightness (0.087458ms)
+✔ The reproducible mosaic adds measured area while preserving every Giotto map texel (1146.309042ms)
+✔ Giotto preparation reproduces the reviewed image and lossless footprint (519.570375ms)
+✔ Source darkness does not remove an otherwise visible photographic sample (35.765667ms)
+✔ The coverage inset respects a concave notch and both sides of its boundary (0.199833ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1343.256
+
+Provenance and exploration-catalogue checks:
+✔ catalogue records are immutable and separate entity domains may use the same ID (1.053375ms)
+✔ duplicates, unknown references, invalid agencies and ambiguous participation are rejected (0.563292ms)
+✔ dates preserve source precision and reject only provable interval contradictions (0.193666ms)
+✔ capture validation separates membership from observation and rejects legacy browser inference (0.243333ms)
+✔ preparation binds exact input and output bytes and excludes unused archive entries (8.919208ms)
+✔ changed source bytes invalidate provenance even when references and credit text are unchanged (2.75475ms)
+✔ acquired products retain their configuration input and verify its exact bytes (4.349291ms)
+✔ upstream verification requests are recorded without inventing acquisition history (2.981125ms)
+✔ changed output bytes invalidate a prepared record (2.98275ms)
+✔ changed recipe bytes cannot retain the old lineage identity (3.230583ms)
+✔ recovery preserves pins without claiming execution or requiring ignored source downloads (2.822417ms)
+✔ changing a binding or an output identity invalidates an existing preparation record (4.734708ms)
+✔ invalid source edges and cyclic products are rejected (2.222417ms)
+✔ an operation must resolve inside its pinned recipe (2.345958ms)
+✔ Saturn binds its actual base material and all contributing recipe identities (9.54ms)
+✔ Earth globe provenance excludes the retired local noise dataset (11.28975ms)
+✔ spacecraft photographs bind their image, registration, and source-shape dependencies (20.723458ms)
+✔ Mercury coverage completion binds all three maps; previews retain their parent lineage (9.884083ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 303.204459

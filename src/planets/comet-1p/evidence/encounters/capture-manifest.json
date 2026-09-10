@@ -1,0 +1,196 @@
+{
+  "schema": "cssearth-halley-encounter-browser-evidence@1",
+  "testedRuntimeRevision": "4c9ba7bb163aa2b87c8ff4030690513943cb2390",
+  "baselineRevision": "1991273ff91753ad901f199b6187be5a240c5500",
+  "scope": "Production before/after at the same 30 km camera distance and exact saved pose matrices. Same viewport and DPR. Baseline shared shell predates the independently merged moon-system PR106; no renderer or Halley geometry is changed by this PR. Different photography is expected; this is a coverage comparison, not an image-parity claim.",
+  "images": [
+    {
+      "name": "before-giotto-side-dpr-1.webp",
+      "view": "giotto-side",
+      "phase": "before",
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "query": "?v=MEZAPf_______0FCxzNAAAAAP5-IzRO5zBM_rdenegGHRD_d1TELiShKAAA",
+      "pngSha256": "ff701f388ace2955e7ce4bff9d205085d0753f02ae359606cbb7c429d3666249",
+      "webpSha256": "726905913002665e8a06ba9d170788b3a1e857aa89598c5ace292e721073b724",
+      "rgbSha256": "9b5eb19ea89ee3331339d6906ed81d72486ac26ae3d3729f5d065063a2a921c3",
+      "conversion": "Lossless WebP; decoded RGB checked equal to the browser PNG."
+    },
+    {
+      "name": "before-vega-side-dpr-1.webp",
+      "view": "vega-side",
+      "phase": "before",
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "query": "?v=MMZAPf_______0FCxzNAAAAAPz6jrpUKt8Y_4i43VFVKWj-w4BnbK9Q5AAA",
+      "pngSha256": "5daf2adcbf08877e24c4835b98d60a284f0e76905015018f6c68533358e3742d",
+      "webpSha256": "7a33815e07c02f545a2b9076e86ed43f096d9e4140a81aa491e3b4073e1220c6",
+      "rgbSha256": "6b74c974bb9f924ee6de89a9c37fd3a602011d723a5f2ec84c0a0c7e6b4708e3",
+      "conversion": "Lossless WebP; decoded RGB checked equal to the browser PNG."
+    },
+    {
+      "name": "before-far-side-dpr-1.webp",
+      "view": "far-side",
+      "phase": "before",
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "query": "?v=MMZAPf_______0FCxzNAAAAAv6TisTXV8Ne_sX-HIiLZzD-qg3fsMKpzAAA",
+      "pngSha256": "8f58eae3657e62fe0b5a907903b250cf3eb942442913bf95d4593c5dc69889e4",
+      "webpSha256": "090dac466ae256ba9862cee31261db5fa756d40e277fdeebfba28c1c89ce0071",
+      "rgbSha256": "c29fe52790231dcd7fee624e54fbba4b051739b3335de214553d04081e62b6ee",
+      "conversion": "Lossless WebP; decoded RGB checked equal to the browser PNG."
+    },
+    {
+      "name": "before-giotto-side-dpr-2.webp",
+      "view": "giotto-side",
+      "phase": "before",
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "query": "?v=MEZAPf_______0FCxzNAAAAAP5-IzRO5zBM_rdenegGHRD_d1TELiShKAAA",
+      "pngSha256": "caa316cdffe1ba4eee9c1bfe4de6d257f9bf3d070655039f6c3138d5b312a063",
+      "webpSha256": "1bd35bf717ea5f7bfd29d2b9c40f237a106ab5e3a450fbaf94f1557a8c72c60d",
+      "rgbSha256": "fb5f101218cd014239b72a696ed89b38e65a865fed4b22542dfe6992658bfaea",
+      "conversion": "Lossless WebP; decoded RGB checked equal to the browser PNG."
+    },
+    {
+      "name": "before-vega-side-dpr-2.webp",
+      "view": "vega-side",
+      "phase": "before",
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "query": "?v=MMZAPf_______0FCxzNAAAAAPz6jrpUKt8Y_4i43VFVKWj-w4BnbK9Q5AAA",
+      "pngSha256": "2ad1d532d9ee745b49fd19d6a5d8c77bed1b35a0eb80756372fe2fde50e55f10",
+      "webpSha256": "66d3e3eb9c24e3b4fbbdfeea1fb601bd24178a3ef2cee20edd07d75a80354218",
+      "rgbSha256": "727861f41c0a79d56d4821c41b988b70c3439692346d02a80d13e208094098db",
+      "conversion": "Lossless WebP; decoded RGB checked equal to the browser PNG."
+    },
+    {
+      "name": "before-far-side-dpr-2.webp",
+      "view": "far-side",
+      "phase": "before",
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "query": "?v=MMZAPf_______0FCxzNAAAAAv6TisTXV8Ne_sX-HIiLZzD-qg3fsMKpzAAA",
+      "pngSha256": "3e7e2804e38993fa69e3b35111900eb36322833d1750d3afc177e91ea3d65ba5",
+      "webpSha256": "0f1c4a61bcdc4782c9e9de72b769e8998469fa87932db699c58abeccad981c68",
+      "rgbSha256": "dcb65cca6618f73bb56462fe297e61f6beaeccf4a2af85529363248ff8fdc45a",
+      "conversion": "Lossless WebP; decoded RGB checked equal to the browser PNG."
+    },
+    {
+      "name": "after-giotto-side-dpr-1.webp",
+      "view": "giotto-side",
+      "phase": "after",
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "query": "?v=MEZAPf_______0FCxzNAAAAAP5-IzRO5zBM_rdenegGHRD_d1TELiShKAAA",
+      "pngSha256": "bc0b7dddaa91639315dede3ff7a03f6cfa8554f231fd8031534b3896004a712d",
+      "webpSha256": "00b26b5116eee330dec19ebce2bd5fae25fb8a9bb7b85415a442c79389f28c69",
+      "rgbSha256": "d4c643d339a8e6c937e1df8d4ee001ed3286d27b2331e5fcc8da22051ab07d7f",
+      "conversion": "Lossless WebP; decoded RGB checked equal to the browser PNG."
+    },
+    {
+      "name": "after-vega-side-dpr-1.webp",
+      "view": "vega-side",
+      "phase": "after",
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "query": "?v=MMZAPf_______0FCxzNAAAAAPz6jrpUKt8Y_4i43VFVKWj-w4BnbK9Q5AAA",
+      "pngSha256": "35ec31475200b7079158f0ce4ac59f5acaffbc8ab11e63c0758c2f051a30c1a8",
+      "webpSha256": "955af6f969927055e64c9cd9b356a9a0ac82602db4b22a577b31f89a19622665",
+      "rgbSha256": "ed3b724264d22079c35441f6ec83cacc55664d0785e149a1efe14e60322e2451",
+      "conversion": "Lossless WebP; decoded RGB checked equal to the browser PNG."
+    },
+    {
+      "name": "after-far-side-dpr-1.webp",
+      "view": "far-side",
+      "phase": "after",
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "query": "?v=MMZAPf_______0FCxzNAAAAAv6TisTXV8Ne_sX-HIiLZzD-qg3fsMKpzAAA",
+      "pngSha256": "7d65703bdf976b5d10569b238912c6636eda3866a9c8dbf53d53633d77daef72",
+      "webpSha256": "a2cb378bbd9cc4aa376cc8272cde83988b857b489bbcddbd5d6cbf494ca093fd",
+      "rgbSha256": "24a400d35688e529fcd8b3e815a0d7c6b0aa11d97d99729f1ec6ddbadcc96e2b",
+      "conversion": "Lossless WebP; decoded RGB checked equal to the browser PNG."
+    },
+    {
+      "name": "after-giotto-side-dpr-2.webp",
+      "view": "giotto-side",
+      "phase": "after",
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "query": "?v=MEZAPf_______0FCxzNAAAAAP5-IzRO5zBM_rdenegGHRD_d1TELiShKAAA",
+      "pngSha256": "47662d5c6f54b0611b3b64deb018d096396cd2e34b0252c9bc7d7dbf2f844a9a",
+      "webpSha256": "27625f4e30414ec8e411e9cd9b07e2347ef7087b42304c4b74a794448e754ac5",
+      "rgbSha256": "6c58e270964e0c21097b8f4825464962178d913f298c73b916798c5d37e26f00",
+      "conversion": "Lossless WebP; decoded RGB checked equal to the browser PNG."
+    },
+    {
+      "name": "after-vega-side-dpr-2.webp",
+      "view": "vega-side",
+      "phase": "after",
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "query": "?v=MMZAPf_______0FCxzNAAAAAPz6jrpUKt8Y_4i43VFVKWj-w4BnbK9Q5AAA",
+      "pngSha256": "9748c677c73ada649d17538aa9bfc0545d858a59caccde873c87696119039567",
+      "webpSha256": "2c6e40c82388ed6e362e26dd23f0808151fd870743e31bd182b73a9aa0e38f07",
+      "rgbSha256": "b8538189c9b192b248123c00a9394705230fc66e6712f892d43bee98c22ad06a",
+      "conversion": "Lossless WebP; decoded RGB checked equal to the browser PNG."
+    },
+    {
+      "name": "after-far-side-dpr-2.webp",
+      "view": "far-side",
+      "phase": "after",
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "query": "?v=MMZAPf_______0FCxzNAAAAAv6TisTXV8Ne_sX-HIiLZzD-qg3fsMKpzAAA",
+      "pngSha256": "882017ccf09bed19703c5e63de2c211155bb7e7a4f2baab5f126f1fa6c202bb5",
+      "webpSha256": "4e6dbd26c15b37d004a37cba08aece28cbf2411dd73327a26bdfdc861c477c01",
+      "rgbSha256": "4ee29da38a9abcfd4f1b64475e7876a3687b4554dea21a8f6f29ead679ca85dd",
+      "conversion": "Lossless WebP; decoded RGB checked equal to the browser PNG."
+    }
+  ],
+  "terrain.json": {
+    "sha256": "c25b5c4bef1f55e616930c2c34787a2b641933580d10dda9e02804da737b097d",
+    "unchanged": true
+  },
+  "scene.json": {
+    "sha256": "fcc1a06b33158bff0c881151d523e7430840ba80c1d5e6e0e0165a057901e25b",
+    "unchanged": true
+  }
+}

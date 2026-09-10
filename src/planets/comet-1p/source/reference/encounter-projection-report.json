@@ -1,0 +1,303 @@
+{
+  "schema": "cssearth-halley-encounter-projection-report@1",
+  "registrationSha256": "f7d99dc745d4a265c916fc5a0fe410caaac69b5e1abea5329cb3f0a0ce421678",
+  "shapeSha256": "e9437ac850060a4c527d1045e028ac28f58bfe0386fc1da0bf50405b8128b824",
+  "interpretation": "Approximate mixed-filter, mixed-date photographic mosaic; original illumination and coma contamination retained. Not albedo or true colour.",
+  "sourcePins": [
+    {
+      "path": "giotto/hmc_best.gif",
+      "url": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif",
+      "bytes": 203241,
+      "sha256": "d1485de0bfb126c17fcca8b9d1b8936538694f86fd3bc867c6f07ab781dbff18"
+    },
+    {
+      "path": "giotto/fig67.tif",
+      "url": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/catalog/fig67.tif",
+      "bytes": 1312466,
+      "sha256": "0567352ef7ef86de5effe92b9c1ed2f374e91b012f7258a286d210a609b99487"
+    },
+    {
+      "path": "giotto/rotation-2004.tab",
+      "url": "https://pdssbn.astro.umd.edu/holdings/ear-c-compil-5-comet-nuc-rotation-v1.0/data/rotation.tab",
+      "bytes": 2750,
+      "sha256": "d7fb84ee47f3fd2440466ca22b460e55c04e45ade69ab6f8f432f6d84c2873c0"
+    },
+    {
+      "path": "giotto/rotation-2004.lbl",
+      "url": "https://pdssbn.astro.umd.edu/holdings/ear-c-compil-5-comet-nuc-rotation-v1.0/data/rotation.lbl",
+      "bytes": 25760,
+      "sha256": "2239825938bffe4b1ad4b4bcf464a5cb9904239c59d32faa2bd5390bdcca6b39"
+    },
+    {
+      "path": "giotto/vega2-flyby.txt",
+      "url": "https://spdf.gsfc.nasa.gov/pub/data/vega/mag/flyby_1m.vg2",
+      "bytes": 116646,
+      "sha256": "622c541ef4b9a3c94dc06fe084a9c62c436a9093c5b7fcf07aeb0dcae7d10bdd"
+    },
+    {
+      "path": "giotto/vega2-trajectory.txt",
+      "url": "https://spdf.gsfc.nasa.gov/pub/data/vega/mag/vega2.trj",
+      "bytes": 48384,
+      "sha256": "bb51d1e2d5a2115a82593086cbd9116abba356c19c1b9fa1ec636a044e10e491"
+    },
+    {
+      "path": "giotto/vega-readme.txt",
+      "url": "https://spdf.gsfc.nasa.gov/pub/data/vega/mag/00readme.txt",
+      "bytes": 7358,
+      "sha256": "30ce73522c61f6c9822e85f987c2cf2b21c8caec16995c2adcd33d7cd4331d7f"
+    },
+    {
+      "path": "giotto/vega2-t01174.hdr",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/t01174.hdr",
+      "bytes": 5760,
+      "sha256": "c7061dfb00ec013854527b88539a574a658538d501faa6f459981ed07907bab9"
+    },
+    {
+      "path": "giotto/hmc01814.hdr",
+      "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01814.hdr",
+      "bytes": 5760,
+      "sha256": "956e3752d620376369bde2ad1adc1f705e179cdb8ac2266aace7d2e59d14998d"
+    },
+    {
+      "path": "vega/t11190.hdr",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11190.hdr",
+      "bytes": 5760,
+      "sha256": "e6e43ac52b037d69cf5f12cb6a1e5a0f0ad79e30e11a96353dd2e73dfa1a5904"
+    },
+    {
+      "path": "vega/t11190.lbl",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11190.lbl",
+      "bytes": 1920,
+      "sha256": "ea1f4083f2030845cff45f988800b935af6bd69f87759211ab5793a923b920ee"
+    },
+    {
+      "path": "vega/t11190.img",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11190.img",
+      "bytes": 264960,
+      "sha256": "17b1aa86cdb268f4ae6e9aff3dda6c2059a015885cf0ce6eb7e2c60fcb2a9e9d"
+    },
+    {
+      "path": "vega/t11194.hdr",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.hdr",
+      "bytes": 5760,
+      "sha256": "d8756d103854206ff497dc2d4ba2c582bd839a08c647177a6a488a3828310021"
+    },
+    {
+      "path": "vega/t11194.lbl",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.lbl",
+      "bytes": 1920,
+      "sha256": "55a0ae640f1c47743720cc2bee2ccc7ca1871768873f164121e01b982f7e066d"
+    },
+    {
+      "path": "vega/t11194.img",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.img",
+      "bytes": 264960,
+      "sha256": "627a11052348a8e5ab01f69fadd7d81d59f6b9dbd4ec79b25f9ee72bedc1130e"
+    },
+    {
+      "path": "vega/tvs_proc.doc",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/document/tvs_proc.doc",
+      "bytes": 10160,
+      "sha256": "e0b5281528b3b2266b43a84b2ba230b38966b5cb3410e6622b849f5e5ebcf7fd"
+    }
+  ],
+  "observations": [
+    {
+      "id": "giotto",
+      "displayGain": 1
+    },
+    {
+      "id": "t11190",
+      "filter": "NIR",
+      "geometry": {
+        "bodyEye": [
+          -5.551115123125783e-17,
+          -0.8064728362653553,
+          -0.5912711428491276
+        ],
+        "bodySun": [
+          -0.33379131587678196,
+          -0.9118383833708434,
+          -0.23902744624183433
+        ],
+        "bodyRight": [
+          0.3702765304218691,
+          0.5492445207958883,
+          -0.7491500166151217
+        ],
+        "bodyUp": [
+          0.9289215742024415,
+          -0.2189338273127483,
+          0.2986179636918198
+        ],
+        "eastLongitudeDegrees": 270,
+        "latitudeDegrees": -36.24726433181219,
+        "rangeKm": 8022.337462025778,
+        "phaseDegrees": 28.752839371939228,
+        "sunCounterclockwiseFromUpDegrees": 112.20745987455496,
+        "extrapolationSeconds": 148
+      },
+      "outline": {
+        "heldOutCount": 11,
+        "rmsKm": 0.26168956512957764,
+        "maximumKm": 0.49190894694287585,
+        "precisionKm": 0.01,
+        "errorsKm": [
+          0.030531879439664785,
+          0.07843612348134421,
+          0.09731064820976326,
+          0.266530075008506,
+          0.03563871373455122,
+          0.2540020277301246,
+          0.43762163238861523,
+          0.2567846984027525,
+          0.49190894694287585,
+          0.31631148160477557,
+          0.020929912886697107
+        ],
+        "comparison": "Full projected source mesh; authored image scale and centre only, fixed camera orientation. Outline consistency does not establish absolute feature accuracy."
+      },
+      "displayGain": 1
+    },
+    {
+      "id": "t11194",
+      "filter": "VIS",
+      "geometry": {
+        "bodyEye": [
+          -0.17008572387022725,
+          -0.9778131497253479,
+          0.12227955986073494
+        ],
+        "bodySun": [
+          -0.33534660785182835,
+          -0.9108036198470246,
+          -0.24078915813596888
+        ],
+        "bodyRight": [
+          0.12534765928276906,
+          -0.14454751177242312,
+          -0.9815263527551014
+        ],
+        "bodyUp": [
+          0.9774245806443949,
+          -0.1516161635993848,
+          0.14715205770743692
+        ],
+        "eastLongitudeDegrees": 260.1324149621314,
+        "latitudeDegrees": 7.0236807816111755,
+        "rangeKm": 10983.974068976842,
+        "phaseDegrees": 23.337133519086525,
+        "sunCounterclockwiseFromUpDegrees": 235.37010823131203,
+        "extrapolationSeconds": 248
+      },
+      "outline": {
+        "heldOutCount": 9,
+        "rmsKm": 0.3657080554785403,
+        "maximumKm": 0.6828385961444645,
+        "precisionKm": 0.01,
+        "errorsKm": [
+          0.35706062666157634,
+          0.2701291588200399,
+          0.3325682776109578,
+          0.21659910564731505,
+          0.11641257139696375,
+          0.5925059112785886,
+          0.010677660904651087,
+          0.6828385961444645,
+          0.12126355047448605
+        ],
+        "comparison": "Full projected source mesh; authored image scale and centre only, fixed camera orientation. Outline consistency does not establish absolute feature accuracy."
+      },
+      "displayGain": 1.9590866725162979
+    }
+  ],
+  "selection": "Retain every accepted Giotto RGB sample. Else choose the qualified Vega sample with the smallest foreshortening-adjusted pixel size; ties follow observation order.",
+  "masks": {
+    "physicalInsetKm": 1,
+    "maximumEmissionDegrees": 75,
+    "maximumIncidenceDegrees": 80,
+    "reason": "One-kilometre image-plane guard for the 0.5-1 km historical shape uncertainty, blurred limbs and surrounding coma. Full source-mesh visibility is also required."
+  },
+  "photometricCorrection": "None. Only T11194 receives a fitted relative display gain; this is not a spectral or reflectance calibration.",
+  "clippedPixels": 0,
+  "map": {
+    "width": 512,
+    "height": 256,
+    "bytes": 26573,
+    "sha256": "8b3877838dfe861e7a9ba0878e38b1aab9bfbb01ab2809fd670a41fbe8b0adfe",
+    "attributionCounts": [
+      97333,
+      4842,
+      18990,
+      9907
+    ]
+  },
+  "attribution": {
+    "width": 512,
+    "height": 256,
+    "bytes": 131072,
+    "sha256": "9260d89e0ef378e8f32b83b4b050c0522ddfd1544268a694bfdf5ae2c9ba429f",
+    "encoding": "One unsigned byte per input-map texel, row-major; no padding or bleed. Same orientation as encounters.png.",
+    "codes": [
+      "gap",
+      "giotto",
+      "t11190",
+      "t11194"
+    ]
+  },
+  "coverage": {
+    "sourceAreaSquareKm": 307.7859609260954,
+    "samplesPerTriangle": 7,
+    "triangles": 5040,
+    "beforePercent": 4.3140367335892025,
+    "afterPercent": 27.80668506085065,
+    "perSourcePercent": [
+      4.3140367335892025,
+      15.692000717370327,
+      18.374767161578458
+    ]
+  },
+  "overlap": [
+    {
+      "a": 0,
+      "b": 1,
+      "samples": 0,
+      "medianRatio": null,
+      "logMad": null,
+      "distinctTwoPixelCells": 0,
+      "displayFit": {
+        "accepted": false,
+        "reason": "Fewer than 64 distinct paired detector blocks."
+      }
+    },
+    {
+      "a": 0,
+      "b": 2,
+      "samples": 75,
+      "medianRatio": 1.2865344440340578,
+      "logMad": 0.07591674243370036,
+      "distinctTwoPixelCells": 6,
+      "displayFit": {
+        "accepted": false,
+        "reason": "Fewer than 64 distinct paired detector blocks."
+      }
+    },
+    {
+      "a": 1,
+      "b": 2,
+      "samples": 3449,
+      "medianRatio": 1.9701904766514908,
+      "logMad": 0.049178445268791005,
+      "distinctTwoPixelCells": 164,
+      "displayFit": {
+        "accepted": true,
+        "gain": 1.9590866725162979,
+        "trainingBlocks": 82,
+        "heldOutBlocks": 82,
+        "heldOutMedianLogError": 0.010976580284549287,
+        "heldOutP95AbsoluteLogError": 0.15567027142576184,
+        "reason": "Consistent connected overlap; original illumination and band differences remain."
+      }
+    }
+  ]
+}

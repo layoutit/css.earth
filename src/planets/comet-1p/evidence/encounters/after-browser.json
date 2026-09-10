@@ -1,0 +1,380 @@
+{
+  "phase": "after",
+  "base": "http://127.0.0.1:53137",
+  "browser": "Installed Google Chrome, headless",
+  "runtimeInventorySha256": "62d7b0c801e9ad2bbe36ec3d2331336e1aa32085d79b16dea5c3d82ed65a8f18",
+  "reports": [
+    {
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "views": [
+        {
+          "view": "giotto-side",
+          "state": {
+            "url": "http://127.0.0.1:53137/comet-1p/?v=MEZAPf_______0FCxzNAAAAAP5-IzRO5zBM_rdenegGHRD_d1TELiShKAAA",
+            "shadows": false,
+            "lens": "giotto",
+            "sceneCount": 1,
+            "unloadedImages": 0
+          }
+        },
+        {
+          "view": "vega-side",
+          "state": {
+            "url": "http://127.0.0.1:53137/comet-1p/?v=MMZAPf_______0FCxzNAAAAAPz6jrpUKt8Y_4i43VFVKWj-w4BnbK9Q5AAA",
+            "shadows": false,
+            "lens": "giotto",
+            "sceneCount": 1,
+            "unloadedImages": 0
+          }
+        },
+        {
+          "view": "far-side",
+          "state": {
+            "url": "http://127.0.0.1:53137/comet-1p/?v=MMZAPf_______0FCxzNAAAAAv6TisTXV8Ne_sX-HIiLZzD-qg3fsMKpzAAA",
+            "shadows": false,
+            "lens": "giotto",
+            "sceneCount": 1,
+            "unloadedImages": 0
+          }
+        }
+      ],
+      "errors": [],
+      "network": [
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-directional-sun@2x.webp",
+          "status": 200,
+          "bytes": 12530,
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-system-point.webp",
+          "status": 200,
+          "bytes": 96,
+          "sha256": "dd7c504b5a406ac058922c6731b63a25dd7ed58e30b84a3c6c8deb68ba2ffa05"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-lighting.webp",
+          "status": 200,
+          "bytes": 1050836,
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-model-surface@2x.webp",
+          "status": 200,
+          "bytes": 92752,
+          "sha256": "9277d8d953863a8117f32ac0624eb3f8cea2567540605b9ab4791192b8479250"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-model-thumbnail.webp",
+          "status": 200,
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-giotto-thumbnail.webp",
+          "status": 200,
+          "bytes": 2416,
+          "sha256": "87505842ef01f312fbeee474ebc4d5274a923023c2a7673d6b451c26dab0363b"
+        },
+        {
+          "url": "http://127.0.0.1:53137/objects/comet-1p/5fa1766a37c221cd9d1f324abc0e3767918682cc6429d2417ca810c301e9d6d7.json",
+          "status": 200,
+          "bytes": 6787323,
+          "sha256": "5fa1766a37c221cd9d1f324abc0e3767918682cc6429d2417ca810c301e9d6d7"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-giotto-surface@2x.webp",
+          "status": 200,
+          "bytes": 125222,
+          "sha256": "600eca0c4295947aab5108a0cf1b8fc99e2d6f03c18e055f2d649d79f78b1ac6"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-directional-sun@2x.webp",
+          "status": 200,
+          "bytes": 12530,
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-lighting.webp",
+          "status": 200,
+          "bytes": 1050836,
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-system-point.webp",
+          "status": 200,
+          "bytes": 96,
+          "sha256": "dd7c504b5a406ac058922c6731b63a25dd7ed58e30b84a3c6c8deb68ba2ffa05"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-model-surface@2x.webp",
+          "status": 200,
+          "bytes": 92752,
+          "sha256": "9277d8d953863a8117f32ac0624eb3f8cea2567540605b9ab4791192b8479250"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-model-thumbnail.webp",
+          "status": 200,
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-giotto-thumbnail.webp",
+          "status": 200,
+          "bytes": 2416,
+          "sha256": "87505842ef01f312fbeee474ebc4d5274a923023c2a7673d6b451c26dab0363b"
+        },
+        {
+          "url": "http://127.0.0.1:53137/objects/comet-1p/5fa1766a37c221cd9d1f324abc0e3767918682cc6429d2417ca810c301e9d6d7.json",
+          "status": 200,
+          "bytes": 6787323,
+          "sha256": "5fa1766a37c221cd9d1f324abc0e3767918682cc6429d2417ca810c301e9d6d7"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-giotto-surface@2x.webp",
+          "status": 200,
+          "bytes": 125222,
+          "sha256": "600eca0c4295947aab5108a0cf1b8fc99e2d6f03c18e055f2d649d79f78b1ac6"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-directional-sun@2x.webp",
+          "status": 200,
+          "bytes": 12530,
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-lighting.webp",
+          "status": 200,
+          "bytes": 1050836,
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-system-point.webp",
+          "status": 200,
+          "bytes": 96,
+          "sha256": "dd7c504b5a406ac058922c6731b63a25dd7ed58e30b84a3c6c8deb68ba2ffa05"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-model-surface@2x.webp",
+          "status": 200,
+          "bytes": 92752,
+          "sha256": "9277d8d953863a8117f32ac0624eb3f8cea2567540605b9ab4791192b8479250"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-model-thumbnail.webp",
+          "status": 200,
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-giotto-thumbnail.webp",
+          "status": 200,
+          "bytes": 2416,
+          "sha256": "87505842ef01f312fbeee474ebc4d5274a923023c2a7673d6b451c26dab0363b"
+        },
+        {
+          "url": "http://127.0.0.1:53137/objects/comet-1p/5fa1766a37c221cd9d1f324abc0e3767918682cc6429d2417ca810c301e9d6d7.json",
+          "status": 200,
+          "bytes": 6787323,
+          "sha256": "5fa1766a37c221cd9d1f324abc0e3767918682cc6429d2417ca810c301e9d6d7"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-giotto-surface@2x.webp",
+          "status": 200,
+          "bytes": 125222,
+          "sha256": "600eca0c4295947aab5108a0cf1b8fc99e2d6f03c18e055f2d649d79f78b1ac6"
+        }
+      ]
+    },
+    {
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "views": [
+        {
+          "view": "giotto-side",
+          "state": {
+            "url": "http://127.0.0.1:53137/comet-1p/?v=MEZAPf_______0FCxzNAAAAAP5-IzRO5zBM_rdenegGHRD_d1TELiShKAAA",
+            "shadows": false,
+            "lens": "giotto",
+            "sceneCount": 1,
+            "unloadedImages": 0
+          }
+        },
+        {
+          "view": "vega-side",
+          "state": {
+            "url": "http://127.0.0.1:53137/comet-1p/?v=MMZAPf_______0FCxzNAAAAAPz6jrpUKt8Y_4i43VFVKWj-w4BnbK9Q5AAA",
+            "shadows": false,
+            "lens": "giotto",
+            "sceneCount": 1,
+            "unloadedImages": 0
+          }
+        },
+        {
+          "view": "far-side",
+          "state": {
+            "url": "http://127.0.0.1:53137/comet-1p/?v=MMZAPf_______0FCxzNAAAAAv6TisTXV8Ne_sX-HIiLZzD-qg3fsMKpzAAA",
+            "shadows": false,
+            "lens": "giotto",
+            "sceneCount": 1,
+            "unloadedImages": 0
+          }
+        }
+      ],
+      "errors": [],
+      "network": [
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-directional-sun@2x.webp",
+          "status": 200,
+          "bytes": 12530,
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-system-point.webp",
+          "status": 200,
+          "bytes": 96,
+          "sha256": "dd7c504b5a406ac058922c6731b63a25dd7ed58e30b84a3c6c8deb68ba2ffa05"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-model-surface@2x.webp",
+          "status": 200,
+          "bytes": 92752,
+          "sha256": "9277d8d953863a8117f32ac0624eb3f8cea2567540605b9ab4791192b8479250"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-model-thumbnail.webp",
+          "status": 200,
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-lighting.webp",
+          "status": 200,
+          "bytes": 1050836,
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-giotto-thumbnail.webp",
+          "status": 200,
+          "bytes": 2416,
+          "sha256": "87505842ef01f312fbeee474ebc4d5274a923023c2a7673d6b451c26dab0363b"
+        },
+        {
+          "url": "http://127.0.0.1:53137/objects/comet-1p/5fa1766a37c221cd9d1f324abc0e3767918682cc6429d2417ca810c301e9d6d7.json",
+          "status": 200,
+          "bytes": 6787323,
+          "sha256": "5fa1766a37c221cd9d1f324abc0e3767918682cc6429d2417ca810c301e9d6d7"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-giotto-surface@2x.webp",
+          "status": 200,
+          "bytes": 125222,
+          "sha256": "600eca0c4295947aab5108a0cf1b8fc99e2d6f03c18e055f2d649d79f78b1ac6"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-directional-sun@2x.webp",
+          "status": 200,
+          "bytes": 12530,
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-lighting.webp",
+          "status": 200,
+          "bytes": 1050836,
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-system-point.webp",
+          "status": 200,
+          "bytes": 96,
+          "sha256": "dd7c504b5a406ac058922c6731b63a25dd7ed58e30b84a3c6c8deb68ba2ffa05"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-model-surface@2x.webp",
+          "status": 200,
+          "bytes": 92752,
+          "sha256": "9277d8d953863a8117f32ac0624eb3f8cea2567540605b9ab4791192b8479250"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-model-thumbnail.webp",
+          "status": 200,
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-giotto-thumbnail.webp",
+          "status": 200,
+          "bytes": 2416,
+          "sha256": "87505842ef01f312fbeee474ebc4d5274a923023c2a7673d6b451c26dab0363b"
+        },
+        {
+          "url": "http://127.0.0.1:53137/objects/comet-1p/5fa1766a37c221cd9d1f324abc0e3767918682cc6429d2417ca810c301e9d6d7.json",
+          "status": 200,
+          "bytes": 6787323,
+          "sha256": "5fa1766a37c221cd9d1f324abc0e3767918682cc6429d2417ca810c301e9d6d7"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-giotto-surface@2x.webp",
+          "status": 200,
+          "bytes": 125222,
+          "sha256": "600eca0c4295947aab5108a0cf1b8fc99e2d6f03c18e055f2d649d79f78b1ac6"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-directional-sun@2x.webp",
+          "status": 200,
+          "bytes": 12530,
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-lighting.webp",
+          "status": 200,
+          "bytes": 1050836,
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-system-point.webp",
+          "status": 200,
+          "bytes": 96,
+          "sha256": "dd7c504b5a406ac058922c6731b63a25dd7ed58e30b84a3c6c8deb68ba2ffa05"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-model-surface@2x.webp",
+          "status": 200,
+          "bytes": 92752,
+          "sha256": "9277d8d953863a8117f32ac0624eb3f8cea2567540605b9ab4791192b8479250"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-model-thumbnail.webp",
+          "status": 200,
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-giotto-thumbnail.webp",
+          "status": 200,
+          "bytes": 2416,
+          "sha256": "87505842ef01f312fbeee474ebc4d5274a923023c2a7673d6b451c26dab0363b"
+        },
+        {
+          "url": "http://127.0.0.1:53137/objects/comet-1p/5fa1766a37c221cd9d1f324abc0e3767918682cc6429d2417ca810c301e9d6d7.json",
+          "status": 200,
+          "bytes": 6787323,
+          "sha256": "5fa1766a37c221cd9d1f324abc0e3767918682cc6429d2417ca810c301e9d6d7"
+        },
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-giotto-surface@2x.webp",
+          "status": 200,
+          "bytes": 125222,
+          "sha256": "600eca0c4295947aab5108a0cf1b8fc99e2d6f03c18e055f2d649d79f78b1ac6"
+        }
+      ]
+    }
+  ]
+}
