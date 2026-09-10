@@ -14,7 +14,7 @@
     "lab:nebula": "vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 --strictPort",
     "lab:nebula:extract": "node --experimental-strip-types labs/nebula/src/run.ts extract",
     "test:lab:nebula": "node --experimental-strip-types labs/nebula/src/run.ts test",
-    "lab:nebula:overlays": "node --experimental-strip-types labs/nebula/src/run.ts prepare-overlays labs/nebula/models/image-overlays.json",
+    "lab:nebula:overlays": "node --experimental-strip-types labs/nebula/src/run.ts prepare-overlays labs/nebula/models/image-candidates.json",
     "lab:nebula:full-density": "node --experimental-strip-types labs/nebula/src/run.ts prepare-full-density labs/nebula/models/full-density.json",
     "lab:nebula:density": "node --experimental-strip-types labs/nebula/src/run.ts prepare-full-density labs/nebula/models/full-density.json",
     "test:browser:nebula-overlays": "node --experimental-strip-types labs/nebula/src/run.ts browser-overlays",
