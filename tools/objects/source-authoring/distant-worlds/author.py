@@ -4,11 +4,13 @@ Run from the repository root after restoring pinned source inputs. This is the
 same radial ellipsoid extraction used by tools/objects/source-authoring/trans-neptunian/author.py.
 """
 from pathlib import Path
-import hashlib, json, math, shutil, subprocess
+import hashlib, json, math, shutil, subprocess, sys
 
 ROOT = Path(__file__).resolve().parents[4]
 BASE = '8666462797772dc50bbebecd8618014f5e7bd16c'
-INPUTS = json.loads((ROOT / 'tools/objects/source-authoring/distant-worlds/inputs.json').read_text())
+INPUT_PATH = Path(sys.argv[1]) if len(sys.argv) > 1 else Path('tools/objects/source-authoring/distant-worlds/inputs.json')
+INPUTS = json.loads((ROOT / INPUT_PATH).read_text())
+REFERENCE_ROOT = ROOT / INPUTS.get('referenceDirectory', 'output/distant-worlds/references')
 
 def write(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -67,6 +69,7 @@ for body in INPUTS['bodies']:
     content['resources'] = [dict(label='Shape source',role='surface',description=body['credit'],href=body['source'])] + [dict(label='Scientific source',role='facts',description='Published observations and interpretation',href=url) for url in body['papers']] + [content['resources'][-1]]
     content['provenance']['editorial'] = dict(url=body['source'],credit=body['credit'])
     content['provenance']['physical'] = dict(path='../measurements.json',credit=body['credit'])
+    content['displayName'] = body.get('titleLabel', name)
     write(source/'content/object.json',content)
     write(source/'preparation/terrestrial.json',config)
     write(source/'preparation/rotation.json',dict(schema='cssearth-display-orientation@1',rightAscensionDegrees=body['poleIcrfDegrees'][0],declinationDegrees=body['poleIcrfDegrees'][1],displayMeridianDegrees=0,phase='arbitrary-display-phase',source=body['source'],qualification=body['orientationMeaning']))
@@ -78,7 +81,7 @@ for body in INPUTS['bodies']:
     # Upstream papers stay ignored, reacquirable and hashed in the manifest.
     for ref in body.get('references',[]):
         target = source / 'reference' / ref['file']
-        cached = ROOT / 'output/distant-worlds/references' / ref['file']
+        cached = REFERENCE_ROOT / ref['file']
         if cached.exists():
             target.parent.mkdir(parents=True,exist_ok=True)
             shutil.copyfile(cached,target)
@@ -101,7 +104,7 @@ for body in INPUTS['bodies']:
     for entry in manifest['inputs']:
         # Preserve the historical recipe text when reproducing its pinned bytes.
         # The maintained helper location is documented in this directory's README.
-        entry.setdefault('acquisition','Restore pinned originals through acquisition; reproduce authored numbers with docs/distant-worlds/author.py.')
+        entry.setdefault('acquisition',INPUTS.get('acquisitionNote','Restore pinned originals through acquisition; reproduce authored numbers with docs/distant-worlds/author.py.'))
         entry.setdefault('redistribution','Retain source attribution and model qualifications; upstream papers are not relicensed.')
     write(source/'manifest.json',manifest)
     descriptor=template('object.json',body)

@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-10",
+  "id": "asteroid-2003-vs2",
+  "name": "2003 VS2",
+  "horizons": "84922;",
+  "distanceAu": 36.97977310285473,
+  "fullAxesKm": [
+    678,
+    470,
+    452
+  ],
+  "radiusKm": 262.0949581014582,
+  "poleIcrfDegrees": [
+    236.316247476407,
+    20.344326162113052
+  ],
+  "periodHours": null,
+  "periodText": "7.41753 ±0.00001 hours; arbitrary phase",
+  "population": "Plutino (3:2 resonance with Neptune)",
+  "classification": "trans-neptunian",
+  "shapeLabel": "Occultation and light-curve shape",
+  "source": "https://doi.org/10.1051/0004-6361/202141842",
+  "credit": "Vara-Lubiano et al. (2022), A&A, Table 7 and §4.3 (2019 occultation).",
+  "papers": [
+    "https://doi.org/10.1051/0004-6361/202141842"
+  ],
+  "shapeMeaning": "Published triaxial interpretation with semiaxes 339 ±5, 235 ±6 and 226 ±8 km, using the observed light-curve amplitude and original occultation chords. It is not a homogeneous Jacobi-equilibrium figure. The smooth model does not reproduce local terrain.",
+  "orientationMeaning": "Uses the published model-derived ecliptic pole (longitude 228°, latitude 39°), converted using J2000 mean obliquity 23.439291111°; J2000 is assumed because the paper does not specify equinox. The 59°/121° aspect ambiguity and unquoted pole uncertainty remain; prime meridian and rotational phase are arbitrary.",
+  "introduction": "2003 VS2 is an elongated world beyond Neptune. A multi-site occultation and rotational brightness measurements support this smooth triaxial shape.",
+  "survey": [
+    "Selected: the 2022 observed-amplitude/original-chords solution, not the alternative aligned-chord scenarios.",
+    "The older 2019 shape fit used a lower light-curve amplitude; the 2022 work explains why it is superseded.",
+    "The 2026 combined thermal/occultation preprint does not require a sizable satellite for this body. No resolved global imagery is available in these source products."
+  ],
+  "references": [
+    {
+      "file": "vs2-vara-lubiano-2022-publisher.pdf",
+      "url": "https://openaccess.inaf.it/bitstreams/4baff601-4106-46cd-99b6-82bae843593a/download",
+      "sha256": "8cc2589921d078f7d88fd6c38b2fddedcd91e1e98e630070b84cc5c1a327b810",
+      "bytes": 2151178,
+      "license": "© Authors2022; published by EDP Sciences under Creative Commons Attribution4.0.",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "extraction": "Table 7 PDF p. 10 column observed amplitude/original chords; §4.3 inferred ecliptic pole 228°,39°."
+    },
+    {
+      "file": "outer-worlds-gomez-limon-2026.pdf",
+      "url": "https://arxiv.org/pdf/2605.22296",
+      "sha256": "7cfae421b8edec8742552721a4d559d4e9dc83209dc426f40a9c56830355f7d9",
+      "bytes": 6130177,
+      "license": "Original paper remains author/publisher copyright and is restored from its pinned public URL; numerical scientific facts are credited. No source figures are used as terrain.",
+      "licenseEvidence": [
+        "https://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      ],
+      "extraction": "Current thermal/occultation comparison; VS2 does not require a sizable satellite."
+    }
+  ]
+}

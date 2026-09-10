@@ -1,6 +1,12 @@
 import selamDescriptor from "../src/planets/selam/object.json" with { type: "json" };
 import dinkineshDescriptor from "../src/planets/dinkinesh/object.json" with { type: "json" };
 import dactylDescriptor from "../src/planets/dactyl/object.json" with { type: "json" };
+import deedeeDescriptor from "../src/planets/deedee/object.json" with { type: "json" };
+import asteroid_2002_tx300Descriptor from "../src/planets/asteroid-2002-tx300/object.json" with { type: "json" };
+import asteroid_2002_tc302Descriptor from "../src/planets/asteroid-2002-tc302/object.json" with { type: "json" };
+import asteroid_2003_vs2Descriptor from "../src/planets/asteroid-2003-vs2/object.json" with { type: "json" };
+import huyaDescriptor from "../src/planets/huya/object.json" with { type: "json" };
+import ixionDescriptor from "../src/planets/ixion/object.json" with { type: "json" };
 import achlysDescriptor from "../src/planets/achlys/object.json" with { type: "json" };
 import maniDescriptor from "../src/planets/mani/object.json" with { type: "json" };
 import vardaDescriptor from "../src/planets/varda/object.json" with { type: "json" };
@@ -476,6 +482,18 @@ export const OBJECTS = defineObjects([
     "Dinkinesh was Lucy’s first asteroid encounter. Its equatorial ridge and trough accompany a remarkable moon: the contact binary Selam.", packaged(dinkineshDescriptor), dinkineshDescriptor.properties.worldFrame),
   object("dactyl", "Dactyl", "satellite", "#a0a0a0", 2.861,
     "Dactyl, discovered beside Ida in Galileo images, was the first moon found orbiting an asteroid.", packaged(dactylDescriptor), dactylDescriptor.properties.worldFrame),
+  object("deedee", "DeeDee (2014 UZ224)", "trans-neptunian", "#aaaaaa", 87.06785037265145,
+    "DeeDee, the informal nickname of 2014 UZ224, is a distant world discovered by the Dark Energy Survey. ALMA measured its faint thermal emission; the displayed sphere illustrates its inferred size, while its actual shape and surface remain unresolved.", packaged(deedeeDescriptor), deedeeDescriptor.properties.worldFrame),
+  object("asteroid-2002-tx300", "2002 TX300", "trans-neptunian", "#aaaaaa", 43.528810315844204,
+    "2002 TX300 is an icy member of the Haumea family. Reanalysis of a two-chord occultation supports a range of sizes and shapes; this view illustrates one published flattened solution.", packaged(asteroid_2002_tx300Descriptor), asteroid_2002_tx300Descriptor.properties.worldFrame),
+  object("asteroid-2002-tc302", "2002 TC302", "trans-neptunian", "#aaaaaa", 42.69638663728584,
+    "2002 TC302 has a flattened outline measured during a stellar occultation. Its displayed depth is assumed; newer thermal analysis suggests a possible companion, which is not part of this primary-body model.", packaged(asteroid_2002_tc302Descriptor), asteroid_2002_tc302Descriptor.properties.worldFrame),
+  object("asteroid-2003-vs2", "2003 VS2", "trans-neptunian", "#aaaaaa", 36.97977310285473,
+    "2003 VS2 is an elongated world beyond Neptune. A multi-site occultation and rotational brightness measurements support this smooth triaxial shape.", packaged(asteroid_2003_vs2Descriptor), asteroid_2003_vs2Descriptor.properties.worldFrame),
+  object("huya", "Huya", "trans-neptunian", "#aaaaaa", 29.392166722642536,
+    "Huya is a trans-Neptunian world with a moon. Occultations and the satellite orbit constrain this oblate model of Huya itself; the grid marks its unmapped surface.", packaged(huyaDescriptor), huyaDescriptor.properties.worldFrame),
+  object("ixion", "Ixion", "trans-neptunian", "#aaaaaa", 37.41243146579822,
+    "Ixion is a large world beyond Neptune. Several stellar occultations constrain its flattened outline; the displayed depth is assumed and its surface is unmapped.", packaged(ixionDescriptor), ixionDescriptor.properties.worldFrame),
   object("achlys", "Achlys (2003 AZ84)", "trans-neptunian", "#aaaaaa", 43.53477215772988,
     "Formerly 2003 AZ84, Achlys is a plutino in Neptune’s 3: 2 orbital resonance. Its changing occultation silhouette supports a flattened, elongated model, while a grazing event hints at a local depression.", packaged(achlysDescriptor), achlysDescriptor.properties.worldFrame),
   object("mani", "Máni (2002 MS4)", "trans-neptunian", "#aaaaaa", 45.97552197787258,

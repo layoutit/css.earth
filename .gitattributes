@@ -78,3 +78,22 @@ src/planets/moon/source/science/diviner-ghrm/*.xml -text -whitespace
 # Retain Galileo/Lucy catalog and Horizons responses exactly as retrieved.
 src/planets/dactyl/source/reference/asteroids.ssc -text -whitespace
 src/planets/dinkinesh/source/reference/horizons-*.txt -text -whitespace
+# Original Horizons records for the occultation and thermal-size models.
+src/planets/ixion/source/reference/horizons-*.txt -text -whitespace
+src/planets/huya/source/reference/horizons-*.txt -text -whitespace
+src/planets/asteroid-2003-vs2/source/reference/horizons-*.txt -text -whitespace
+src/planets/asteroid-2002-tc302/source/reference/horizons-*.txt -text -whitespace
+src/planets/asteroid-2002-tx300/source/reference/horizons-*.txt -text -whitespace
+src/planets/deedee/source/reference/horizons-*.txt -text -whitespace
+
+# Preserve SN263 archive bytes without adding non-data files to body packages.
+src/planets/asteroid-2001-sn263/source/orbit/*.txt -text -whitespace
+src/planets/asteroid-2001-sn263/source/reference/* -text -whitespace
+src/planets/asteroid-2001-sn263/source/shape/*.tab -text -whitespace
+src/planets/asteroid-2001-sn263/evidence/*.log -whitespace
+src/planets/sn263-beta/source/orbit/*.txt -text -whitespace
+src/planets/sn263-beta/source/reference/* -text -whitespace
+src/planets/sn263-beta/source/shape/*.tab -text -whitespace
+src/planets/sn263-gamma/source/orbit/*.txt -text -whitespace
+src/planets/sn263-gamma/source/reference/* -text -whitespace
+src/planets/sn263-gamma/source/shape/*.tab -text -whitespace

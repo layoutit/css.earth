@@ -1292,7 +1292,7 @@
     },
     {
       "id": "hiiaka",
-      "name": "Hiʻiaka",
+      "name": "Hi\u02bbiaka",
       "color": "#a0a0a0"
     },
     {
@@ -1547,12 +1547,12 @@
     },
     {
       "id": "comet-137p",
-      "name": "Shoemaker–Levy 2",
+      "name": "Shoemaker\u2013Levy 2",
       "color": "#b8b6b2"
     },
     {
       "id": "comet-143p",
-      "name": "Kowal–Mrkos",
+      "name": "Kowal\u2013Mrkos",
       "color": "#b8b6b2"
     },
     {
@@ -2172,7 +2172,7 @@
     },
     {
       "id": "gkunhomdima",
-      "name": "Gǃkúnǁʼhòmdímà",
+      "name": "G\u01c3k\u00fan\u01c1\u02bch\u00f2md\u00edm\u00e0",
       "color": "#9d9388"
     },
     {
@@ -2202,7 +2202,7 @@
     },
     {
       "id": "oumuamua",
-      "name": "ʻOumuamua",
+      "name": "\u02bbOumuamua",
       "color": "#aaaaaa"
     },
     {
@@ -2237,7 +2237,7 @@
     },
     {
       "id": "mani",
-      "name": "Máni",
+      "name": "M\u00e1ni",
       "color": "#aaaaaa"
     },
     {
@@ -2252,17 +2252,17 @@
     },
     {
       "id": "comet-21p",
-      "name": "Giacobini–Zinner",
+      "name": "Giacobini\u2013Zinner",
       "color": "#b8b6b2"
     },
     {
       "id": "comet-26p",
-      "name": "Grigg–Skjellerup",
+      "name": "Grigg\u2013Skjellerup",
       "color": "#b8b6b2"
     },
     {
       "id": "comet-29p",
-      "name": "Schwassmann–Wachmann 1",
+      "name": "Schwassmann\u2013Wachmann 1",
       "color": "#b8b6b2"
     },
     {
@@ -2272,7 +2272,7 @@
     },
     {
       "id": "comet-55p",
-      "name": "Tempel–Tuttle",
+      "name": "Tempel\u2013Tuttle",
       "color": "#b8b6b2"
     },
     {
@@ -2282,7 +2282,7 @@
     },
     {
       "id": "comet-109p",
-      "name": "Swift–Tuttle",
+      "name": "Swift\u2013Tuttle",
       "color": "#b8b6b2"
     },
     {
@@ -2292,17 +2292,17 @@
     },
     {
       "id": "comet-153p",
-      "name": "Ikeya–Zhang",
+      "name": "Ikeya\u2013Zhang",
       "color": "#b8b6b2"
     },
     {
       "id": "comet-c1983-h1",
-      "name": "IRAS–Araki–Alcock",
+      "name": "IRAS\u2013Araki\u2013Alcock",
       "color": "#b8b6b2"
     },
     {
       "id": "comet-c1956-r1",
-      "name": "Arend–Roland",
+      "name": "Arend\u2013Roland",
       "color": "#b8b6b2"
     },
     {
@@ -2312,7 +2312,7 @@
     },
     {
       "id": "comet-c1995-o1",
-      "name": "Hale–Bopp",
+      "name": "Hale\u2013Bopp",
       "color": "#b8b6b2"
     },
     {
@@ -2332,7 +2332,7 @@
     },
     {
       "id": "comet-c2014-un271",
-      "name": "Bernardinelli–Bernstein",
+      "name": "Bernardinelli\u2013Bernstein",
       "color": "#b8b6b2"
     },
     {
@@ -2342,7 +2342,7 @@
     },
     {
       "id": "comet-c2023-a3",
-      "name": "Tsuchinshan–ATLAS",
+      "name": "Tsuchinshan\u2013ATLAS",
       "color": "#b8b6b2"
     },
     {
@@ -2359,6 +2359,36 @@
       "id": "sn263-gamma",
       "name": "2001 SN263 Gamma",
       "color": "#a0a0a0"
+    },
+    {
+      "id": "ixion",
+      "name": "Ixion",
+      "color": "#aaaaaa"
+    },
+    {
+      "id": "huya",
+      "name": "Huya",
+      "color": "#aaaaaa"
+    },
+    {
+      "id": "asteroid-2003-vs2",
+      "name": "2003 VS2",
+      "color": "#aaaaaa"
+    },
+    {
+      "id": "asteroid-2002-tc302",
+      "name": "2002 TC302",
+      "color": "#aaaaaa"
+    },
+    {
+      "id": "asteroid-2002-tx300",
+      "name": "2002 TX300",
+      "color": "#aaaaaa"
+    },
+    {
+      "id": "deedee",
+      "name": "DeeDee (2014 UZ224)",
+      "color": "#aaaaaa"
     },
     {
       "id": "dactyl",

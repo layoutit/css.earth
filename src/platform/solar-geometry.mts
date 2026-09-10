@@ -452,6 +452,42 @@ export const BODY_FIXED_SUN_DIRECTIONS: Readonly<Record<string, readonly number[
     -0.941514715563587,
     0.15629598307152406,
   ]),
+  // subsolar latitude 9.067°, longitude 140.887°
+  deedee: Object.freeze([
+    -0.7662137237108192,
+    0.6229632507950384,
+    0.15758590595633398,
+  ]),
+  // subsolar latitude -40.008°, longitude 121.696°
+  "asteroid-2002-tx300": Object.freeze([
+    -0.40244006943791927,
+    0.6517150689045693,
+    -0.6428914834352027,
+  ]),
+  // subsolar latitude -37.596°, longitude 135.854°
+  "asteroid-2002-tc302": Object.freeze([
+    -0.5685543110776091,
+    0.5518466111619335,
+    -0.6100912334267352,
+  ]),
+  // subsolar latitude 27.258°, longitude -53.413°
+  "asteroid-2003-vs2": Object.freeze([
+    0.5298536817358652,
+    -0.7137878966911984,
+    0.45799772323462873,
+  ]),
+  // subsolar latitude 23.448°, longitude -6.616°
+  huya: Object.freeze([
+    0.9113132602878173,
+    -0.1056945180190046,
+    0.39791558210796313,
+  ]),
+  // subsolar latitude 32.315°, longitude 9.101°
+  ixion: Object.freeze([
+    0.8344869963303685,
+    0.13367070984980026,
+    0.5345686057783139,
+  ]),
   // subsolar latitude -5.339°, longitude -137.593°
   achlys: Object.freeze([
     -0.735174095963707,
@@ -3250,6 +3286,42 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS: Readonly<Record<string, reado
     0.39014751766322486,
     -0.031016972199384853,
     -0.9202297875513518,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 26.703°
+  deedee: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude -25.452°
+  "asteroid-2002-tx300": Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude -19.487°
+  "asteroid-2002-tc302": Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 51.000°, Sun ecliptic latitude -7.283°
+  "asteroid-2003-vs2": Object.freeze([
+    0.22061058632937422,
+    0.7451756937852237,
+    0.6293203910498374,
+  ]),
+  // pole tilt to the ecliptic 65.853°, Sun ecliptic latitude -15.317°
+  huya: Object.freeze([
+    -0.3718522988489341,
+    0.8332922056955684,
+    0.4090843039860825,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 9.121°
+  ixion: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
   ]),
   // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 11.951°
   achlys: Object.freeze([
@@ -6051,6 +6123,42 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS: Readonly<Record<string, readonl
     -1.734723475976807e-18,
     6.938893903907228e-18,
     1,
+  ]),
+  // orbital inclination to the ecliptic 26.776°, obliquity to the orbit 20.418°
+  deedee: Object.freeze([
+    -0.08279505091424569,
+    -0.3389023411497229,
+    0.937171373179604,
+  ]),
+  // orbital inclination to the ecliptic 25.860°, obliquity to the orbit 46.843°
+  "asteroid-2002-tx300": Object.freeze([
+    -0.684567716118975,
+    0.2520128379646404,
+    0.6840004177985991,
+  ]),
+  // orbital inclination to the ecliptic 35.034°, obliquity to the orbit 57.152°
+  "asteroid-2002-tc302": Object.freeze([
+    -0.8073937021500073,
+    -0.23218089515917884,
+    0.5424089247528915,
+  ]),
+  // orbital inclination to the ecliptic 14.759°, obliquity to the orbit 36.908°
+  "asteroid-2003-vs2": Object.freeze([
+    0.10530394790737252,
+    0.5912274104538112,
+    0.7996006676355405,
+  ]),
+  // orbital inclination to the ecliptic 15.478°, obliquity to the orbit 55.801°
+  huya: Object.freeze([
+    -0.1511068730096393,
+    0.8131738157400231,
+    0.5620632155941712,
+  ]),
+  // orbital inclination to the ecliptic 19.659°, obliquity to the orbit 34.855°
+  ixion: Object.freeze([
+    -0.47469788435066057,
+    -0.3182361873786272,
+    0.8206020031877342,
   ]),
   // orbital inclination to the ecliptic 13.550°, obliquity to the orbit 22.945°
   achlys: Object.freeze([
@@ -8854,6 +8962,42 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS: Readonly<Record<string, rea
     1,
     -6.93889390390723e-18,
   ]),
+  // flight-path angle -38.984°
+  deedee: Object.freeze([
+    0.013296065268030977,
+    0.9399407899575843,
+    0.3410784748738927,
+  ]),
+  // flight-path angle 6.952°
+  "asteroid-2002-tx300": Object.freeze([
+    0.6520330485617866,
+    0.6312284014634126,
+    0.42000429613179896,
+  ]),
+  // flight-path angle -11.023°
+  "asteroid-2002-tc302": Object.freeze([
+    0.04605717178570023,
+    0.8917096236550245,
+    0.4502584635607832,
+  ]),
+  // flight-path angle 2.459°
+  "asteroid-2003-vs2": Object.freeze([
+    -0.8634878965554724,
+    -0.3444666409540133,
+    0.36841740698841113,
+  ]),
+  // flight-path angle 6.457°
+  huya: Object.freeze([
+    -0.48304100612983475,
+    -0.5568256985121186,
+    0.6757340659413053,
+  ]),
+  // flight-path angle -13.805°
+  ixion: Object.freeze([
+    0.47084650653790944,
+    -0.8795347820160727,
+    -0.06871778885402151,
+  ]),
   // flight-path angle -8.399°
   achlys: Object.freeze([
     -0.6985864744742822,
@@ -11655,6 +11799,42 @@ export const BODY_FIXED_TO_ICRF_MATRICES: Readonly<Record<string, readonly numbe
     -0.1949191397216209, -0.9795632359398654, -0.04962253283743783,
     -0.980819315149423, 0.19466951792567178, 0.009861532355740492,
     0, 0.050592940076713395, -0.9987193571841861,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  deedee: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  "asteroid-2002-tx300": Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  "asteroid-2002-tc302": Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 236.316°, Dec 20.344°, prime meridian W 0.000°
+  "asteroid-2003-vs2": Object.freeze([
+    0.8321114269993095, 0.1928158151028736, -0.5200121484190413,
+    -0.5546084862830469, 0.2892928020784084, -0.7802045254985708,
+    0, 0.9376202515474147, 0.34766113370372986,
+  ]),
+  // pole RA 20.800°, Dec 34.900°, prime meridian W 0.000°
+  huya: Object.freeze([
+    -0.35510696240813705, -0.5348566531408933, 0.7666990321111591,
+    0.9348256763960144, -0.20317298317358767, 0.2912416413548707,
+    0, 0.8201518758737721, 0.5721458734455163,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  ixion: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
   ]),
   // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
   achlys: Object.freeze([
@@ -14490,6 +14670,96 @@ export const BODY_ORBITS: Readonly<Record<string, BodyOrbit>> = Object.freeze({
     inclinationDegrees: 156.95969845199548,
     perihelionAu: 4.676202921382893e-7,
     aphelionAu: 6.326627481870973e-7,
+  }),
+  // a 109.65 AU, e 0.64916, perihelion 38.470 AU, aphelion 180.83 AU
+  deedee: Object.freeze({
+    semiMajorAxisAu: 109.64949121182705,
+    eccentricity: 0.6491581096527983,
+    heliocentricDistanceAu: 87.06785037265152,
+    perihelionDirection: Object.freeze([
+      0.2586186082676258,
+      0.9008757516580732,
+      0.34862486361735295,
+    ]),
+    trueAnomalyDegrees: 245.2920123915502,
+    inclinationDegrees: 26.776343315571214,
+    perihelionAu: 38.469634772366284,
+    aphelionAu: 180.82934765128783,
+  }),
+  // a 43.389 AU, e 0.12108, perihelion 38.135 AU, aphelion 48.643 AU
+  "asteroid-2002-tx300": Object.freeze({
+    semiMajorAxisAu: 43.388870857866536,
+    eccentricity: 0.12108268204861578,
+    heliocentricDistanceAu: 43.52881031584421,
+    perihelionDirection: Object.freeze([
+      -0.660422518457009,
+      -0.6116130469899175,
+      -0.4356277973988928,
+    ]),
+    trueAnomalyDegrees: 98.46727177217736,
+    inclinationDegrees: 25.859867582277097,
+    perihelionAu: 38.13523000333503,
+    aphelionAu: 48.64251171239804,
+  }),
+  // a 55.740 AU, e 0.29886, perihelion 39.082 AU, aphelion 72.399 AU
+  "asteroid-2002-tc302": Object.freeze({
+    semiMajorAxisAu: 55.740412425750485,
+    eccentricity: 0.29886236805532107,
+    heliocentricDistanceAu: 42.69638663728582,
+    perihelionDirection: Object.freeze([
+      0.4815479724832327,
+      0.2718834128348916,
+      0.8331812287987168,
+    ]),
+    trueAnomalyDegrees: 309.20262450369137,
+    inclinationDegrees: 35.03383069077539,
+    perihelionAu: 39.08170077181045,
+    aphelionAu: 72.39912407969052,
+  }),
+  // a 39.679 AU, e 0.080375, perihelion 36.490 AU, aphelion 42.868 AU
+  "asteroid-2003-vs2": Object.freeze({
+    semiMajorAxisAu: 39.67886757764741,
+    eccentricity: 0.08037471109170277,
+    heliocentricDistanceAu: 36.97977310285476,
+    perihelionDirection: Object.freeze([
+      0.043942303065007356,
+      0.8005193850619863,
+      -0.5976937243616687,
+    ]),
+    trueAnomalyDegrees: 34.72853489551416,
+    inclinationDegrees: 14.759330137137686,
+    perihelionAu: 36.48969005964806,
+    aphelionAu: 42.86804509564676,
+  }),
+  // a 39.270 AU, e 0.27408, perihelion 28.507 AU, aphelion 50.033 AU
+  huya: Object.freeze({
+    semiMajorAxisAu: 39.270149510523076,
+    eccentricity: 0.27407968740761385,
+    heliocentricDistanceAu: 29.39216672264251,
+    perihelionDirection: Object.freeze([
+      -0.5883034541368245,
+      0.38295673301108235,
+      -0.7122100718834014,
+    ]),
+    trueAnomalyDegrees: 30.682894836835825,
+    inclinationDegrees: 15.478196308936633,
+    perihelionAu: 28.50699920822865,
+    aphelionAu: 50.0332998128175,
+  }),
+  // a 39.351 AU, e 0.24336, perihelion 29.774 AU, aphelion 48.928 AU
+  ixion: Object.freeze({
+    semiMajorAxisAu: 39.3509932875797,
+    eccentricity: 0.2433614704954014,
+    heliocentricDistanceAu: 37.412431465798214,
+    perihelionDirection: Object.freeze([
+      0.31547784413634394,
+      -0.9319150127570645,
+      -0.1789081855508166,
+    ]),
+    trueAnomalyDegrees: 267.5324409463894,
+    inclinationDegrees: 19.658988362309742,
+    perihelionAu: 29.77447769565963,
+    aphelionAu: 48.92750887949977,
   }),
   // a 39.662 AU, e 0.17511, perihelion 32.717 AU, aphelion 46.608 AU
   achlys: Object.freeze({

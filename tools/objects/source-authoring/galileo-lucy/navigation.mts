@@ -9,7 +9,7 @@ import { OBJECTS } from '../../../../site/objects.mts';
 import { loadMarkerDescriptors, prepareContextMarkers } from '../../../prepare-navigation.mts';
 import { renderMarker } from '../../../../src/navigation/marker-recipe.mts';
 import { bodies } from './catalog.mts';
-const baseline = '7ceddde4dab731abc2521c5833b1cedffd11fb3b';
+const baseline = '16774548b140b45e1f8cf50e21b9671055e0823f';
 const original = (path: string) => execFileSync('git', ['show', `${baseline}:${path}`], { maxBuffer: 8 * 1024 * 1024 });
 const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const old = (await import('data:text/javascript;base64,' + original('site/prepared-navigation-markers.mjs').toString('base64'))).PREPARED_NAVIGATION_MARKERS;
