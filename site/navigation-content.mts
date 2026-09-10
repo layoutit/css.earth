@@ -78,7 +78,9 @@ export function createNavigationContent({ documentTarget, windowTarget, fetchPag
                   const detail = [...incoming.querySelectorAll<HTMLElement>('[data-prepared-detail]')]
                     .find(node => node.dataset.preparedDetail === deferred.dataset.preparedDetail);
                   if (!detail || detail.hasAttribute('data-deferred-detail')) throw new Error('Prepared destination detail is missing.');
-                  deferred.replaceChildren(...[...detail.childNodes].map(node => documentTarget.importNode(node, true)));
+                  const sourceContent = detail instanceof windowTarget.HTMLTemplateElement ? detail.content : detail;
+                  const targetContent = deferred instanceof windowTarget.HTMLTemplateElement ? deferred.content : deferred;
+                  targetContent.replaceChildren(...[...sourceContent.childNodes].map(node => documentTarget.importNode(node, true)));
                   deferred.removeAttribute('data-deferred-detail');
                 }
                 continue;
@@ -102,7 +104,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fetchPag
                 footer.setAttribute('aria-label', incomingFooter.getAttribute('aria-label') ?? '');
               }
             } else if (incomingFooter) {
-              const uiLayer = documentTarget.querySelector('.planet-ui-layer') ?? documentTarget.body;
+              const uiLayer = documentTarget.querySelector('.planet-footer') ?? documentTarget.body;
               uiLayer.append(documentTarget.importNode(incomingFooter, true));
             }
             documentTarget.title = source.title;

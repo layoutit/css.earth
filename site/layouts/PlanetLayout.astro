@@ -1,5 +1,4 @@
 ---
-import { DIAGNOSTICS_ENABLED } from "../diagnostics-policy.mts";
 import PreparedSidebarCards from "../components/PreparedSidebarCards.astro";
 import PlanetaryScale from "../components/PlanetaryScale.astro";
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
@@ -56,29 +55,6 @@ const seo = objectSeo(objectRecord);
     <ObjectSwatchStyles />
   </head>
   <body class="loading" data-object-shell={objectRecord.id}>
-    <div class="planet-view-readout" aria-label="View information">
-      {DIAGNOSTICS_ENABLED && <button type="button" class="planet-diagnostic-record" data-diagnostic-record aria-label="Record diagnostic data" aria-pressed="false" hidden>Record</button>}
-      <span class="planet-view-date" title="Date of the scene's prepared orbital positions (Terrestrial Time)" hidden>
-        <span>Epoch: <span data-view-date></span></span>
-        <span class="planet-view-separator" aria-hidden="true">·</span>
-      </span>
-      <span class="planet-view-coordinates" title="Coordinates at the center of the view" hidden>
-        <span data-view-latitude></span>
-        <span class="planet-view-separator" aria-hidden="true">·</span>
-        <span data-view-longitude></span>
-        <span class="planet-view-separator" aria-hidden="true">·</span>
-      </span>
-      <span class="planet-view-altitude" title="Camera altitude above the selected object's reference surface">
-        <span data-view-distance-label>Altitude:</span> <span data-view-altitude>—</span>
-      </span>
-      <span class="planet-view-scale" hidden>
-        <span class="planet-view-separator" aria-hidden="true">·</span>
-        <span class="planet-view-ruler-slot" aria-hidden="true">
-          <span class="planet-view-ruler"><span class="planet-view-measure"></span></span>
-        </span>
-        <span data-view-scale-label></span>
-      </span>
-    </div>
     <div class="planet-ui-layer">
       <slot name="planet-ui" />
     </div>

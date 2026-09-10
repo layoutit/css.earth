@@ -49,8 +49,9 @@ valid dates and web URLs, unique fact IDs, and matching bytes for local evidence
 Each fact names its own source even when several references share one evidence
 file. A source on one fact does not support its neighbors. Sources checks the
 canonical IDs and that published facts match the authored content, then includes
-the cited facts in the body's Sources tab. It reports how many facts still lack
-individual citations; those facts acquire no inferred source.
+the cited facts in the prepared source catalogue. The dataset's Sources card
+shows product citations, not this factsheet index. Preparation reports how many
+facts still lack individual citations; those facts acquire no inferred source.
 
 The facts-only preparer preserves the other content and scene data. It also
 rejects changed source pins and an introduction mismatch. For introduction and
