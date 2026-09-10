@@ -1,0 +1,19 @@
+{
+  "baseline": "7ceddde4dab731abc2521c5833b1cedffd11fb3b",
+  "objects": 467,
+  "method": "Preserve every existing decoded visible pixel; render additions from their source-pinned navigation recipes; encode losslessly.",
+  "densities": [
+    {
+      "density": 1,
+      "baselineSha256": "60e0ceae5200f55843abb5641a6986fb1cbc1f4962a20607fe526771e76295dd",
+      "outputSha256": "74c1fec3a039ab1076e8c9d8609a2a33a3fa5f1a984131cf36d3f5e74756a80d",
+      "changedExistingVisiblePixels": 0
+    },
+    {
+      "density": 2,
+      "baselineSha256": "632990f9f2324f60a764721da74daa373db9f51551b08ece5020eb18c02710af",
+      "outputSha256": "26bf55c4ed05d206b14d00eb5c1d4c5080f73f6b7d9cf5b71b1674b51aeba995",
+      "changedExistingVisiblePixels": 0
+    }
+  ]
+}

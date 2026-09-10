@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import test from 'node:test';
 import { SMALL_BODY_IDS, asteroidPositionKm, COMET_IDS, cometPositionKm, BODIES, DWARF_PLANET_IDS, dwarfPlanetPositionKm, moonPositionRelativeToPlanetKm,
-  systemBarycentreHeliocentricAu, M_PER_AU } from '@cssearth/astronomy';
+  systemBarycentreHeliocentricAu, M_PER_AU, SCENE_SATELLITE_IDS } from '@cssearth/astronomy';
 import type { SmallBodyId, CometId, BodyId, DwarfPlanetId, Vsop87BodyKey } from '@cssearth/astronomy';
 import { prepareSpatialContext } from './prepare-spatial-context.js';
 
@@ -86,7 +86,7 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
       sourcePositions.set(record.id, row.slice(2, 5).map(Number));
     }
     const sourcePrimaries = new Map<string, number[]>();
-    for (const id of ['hiiaka', 'menoetius', 'squannit', 'romulus']) {
+    for (const id of SCENE_SATELLITE_IDS) {
       const record = JSON.parse(await readFile(resolve(root, `src/planets/${id}/source/validation/epoch-state.json`), 'utf8'));
       sourcePositions.set(id, record.positionKm);
       if (record.parentHeliocentricState) sourcePrimaries.set(record.centerBodyId, record.parentHeliocentricState.positionKm);
