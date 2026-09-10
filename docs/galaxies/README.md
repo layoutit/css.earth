@@ -65,7 +65,7 @@ pnpm dev
 node docs/galaxies/capture.mjs http://127.0.0.1:4210
 ```
 
-The [bake guide](../../labs/nebula/docs/baking.md) explains acquisition and stage/cache behavior. First use needs the pinned native images, NOX model and Python packages; the command acquires them. It consumes the tracked density grid, so it does not rerun the N-body simulation. Six extraction previews and 432 LMC app textures are generated and Git-ignored; inputs, settings and expected hashes stay versioned. These three small documentation screenshots are review evidence, separate from runtime textures.
+The [bake guide](../../labs/nebula/docs/baking.md) explains acquisition and stage/cache behavior. First use needs the pinned native images, NOX model and Python packages; the command acquires them. It consumes the tracked density grid, so it does not rerun the N-body simulation. All runtime environment images and derived lab previews are generated and Git-ignored; inputs, settings and expected hashes stay versioned. The three small documentation screenshots are retained review evidence. `pnpm prepare:environment-images` restores M31/M33/SMC, the Milky Way, heliosphere and stellar atlas from pinned inputs; normal app startup also runs it.
 
 [captures.json](captures.json) records the rendering commit, camera URLs, viewport, selected lenses, image hashes and successful checks. [capture.mjs](capture.mjs) uses an isolated browser context and the real app, verifies all 943 stars and unchanged camera, and reports script/HTTP errors. No image processing jobs or user browser settings are changed. The screenshots are compressed WebPs with no cropping, resizing or color adjustment.
 

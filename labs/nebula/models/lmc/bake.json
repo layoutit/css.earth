@@ -133,5 +133,9 @@
       "path": "src/objects/lmc/source/lens-manifest.json",
       "sha256": "a6748babbb14411e3a5784792c5a24836b754fd6447829b2dd67de78e5cd943e"
     }
+  },
+  "starCalibration": {
+    "path": "labs/nebula/models/lmc/stars/source/catalogue.json",
+    "sha256": "49c1eb40446ea782d34beba3f2ad85f6a2a042387c1821b04912d0f9d171f8b8"
   }
 }

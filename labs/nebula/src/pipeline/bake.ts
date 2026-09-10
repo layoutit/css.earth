@@ -9,6 +9,7 @@ import { bakeDensity, bakePreviews, bakeSeparationPreviews } from './assets.js';
 import { prepareBaseline, prepareEnvironment } from './removal.js';
 import { hash, json, localPath, pinned, writeAtomic } from './io.js';
 import { deliveryReady, restoreDelivery } from './delivery.js';
+import { bakeReferenceTarget } from './reference-target.js';
 
 export async function bakeNebula(root: string, args: string[]) {
   const options = parseBakeArgs(args), recipePath = localPath(root, options.recipe);
@@ -50,7 +51,10 @@ export async function bakeNebula(root: string, args: string[]) {
     console.log(`BAKE ${recipe.id}: ${selected.map(image => image.imageId).join(', ')}; through ${options.stage}`);
     for (const object of recipe.densityObjects) { controller.signal.throwIfAborted(); await bakeDensity(root, object); }
     controller.signal.throwIfAborted();
-    if (options.stage !== 'density') await bakePreviews(root, catalogue, selected.map(image => image.imageId));
+    if (options.stage !== 'density') {
+      await bakePreviews(root, catalogue, selected.map(image => image.imageId));
+      if (recipe.starCalibration) await bakeReferenceTarget(root, recipe.starCalibration.path);
+    }
     if (!['density', 'assets'].includes(options.stage)) {
       const python = await prepareEnvironment(root, recipe, options.python);
       const remove = createStarRemover(root, { pythonPath: python });

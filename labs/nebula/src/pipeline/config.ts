@@ -8,7 +8,7 @@ import type { BakeDelivery } from './delivery.js';
 export interface BakeRecipe {
   schema: 'cssearth-nebula-bake@1'; id: string; subjectId: string; densityObjects: string[];
   catalogue: Pin; separationPlan: Pin; stars: Pin; starAlignment: Pin; promotion: Pin;
-  delivery?: BakeDelivery;
+  delivery?: BakeDelivery; starCalibration?: Pin;
   environment: { pythonVersions: string[]; packages: string[] };
   removal: { method: string; script: Pin; baselineScript: Pin; model: Pin & { url: string };
     tilePixels: number; stridePixels: number; paddingPixels: number; batchSize: number };
@@ -23,6 +23,7 @@ export async function readRecipe(root: string, path: string): Promise<BakeRecipe
   assert.equal(new Set(recipe.images.map(image => image.imageId)).size, recipe.images.length);
   for (const pin of [recipe.catalogue, recipe.separationPlan, recipe.stars, recipe.starAlignment, recipe.promotion,
     recipe.removal.script, recipe.removal.baselineScript]) await pinned(root, pin);
+  if (recipe.starCalibration) await pinned(root, recipe.starCalibration);
   assert.equal(recipe.removal.method, 'nox-positive-union-with-saved-baseline');
   // These are the pinned worker's actual settings; changing the algorithm requires a new script pin too.
   assert.deepEqual([recipe.removal.tilePixels, recipe.removal.stridePixels, recipe.removal.paddingPixels, recipe.removal.batchSize], [512, 384, 64, 2]);

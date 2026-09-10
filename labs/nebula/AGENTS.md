@@ -4,7 +4,7 @@ Local development tooling, separate from the production website. Current objects
 
 ## Usage
 
-From the repository root: `pnpm install --frozen-lockfile`, then `pnpm lab:nebula`. Startup recreates missing neutral density textures from tracked scalar grids. `pnpm lab:nebula:bake` rebuilds the three accepted LMC lenses from their saved recipe; see [docs/baking.md](docs/baking.md). The default server is `http://127.0.0.1:4331`.
+From the repository root: `pnpm install --frozen-lockfile`, then `pnpm lab:nebula`. Startup recreates missing neutral density textures and inspection/reference images from pinned sources, downloading missing originals without running extraction or reconstruction. `pnpm lab:nebula:bake` rebuilds the three accepted LMC lenses from their saved recipe; see [docs/baking.md](docs/baking.md). The default server is `http://127.0.0.1:4331`.
 
 - `/alignment`: inspect the complete density field, choose an image, adjust placement/tone, compare Original / Without stars / Residual, and run optional Quick preview or full Remove stars.
 - `/reconstruction`: choose the saved starless source and press Preview. Completed variants load without processing when selected. Show progress and Cancel; refresh reconnects to the same job.
@@ -36,7 +36,7 @@ models/
 - Keep image/object choices in data. Shared algorithms must not gain per-image branches. Tests live beside the module; browser checks live in `browser/`.
 - Source originals and large native/intermediate outputs stay in the ignored local cache. Keep credits, source hashes, registration evidence and reproducible recipes with the model. No copies of large assets just to rearrange folders.
 - Keep only the selected VISTA, Horálek and WISE image candidates. Do not recommit retired cloud render banks or auto-discover old cache images. Preserve shared density/stars, coordinate-only calibration and research notes; new candidates require explicit scope.
-- Keep `models/lmc/bake.json` synchronized with deliberately accepted placements and material settings. Do not infer them from the newest cache or browser defaults. Native outputs, separation previews and density/app slice textures are ignored; compact grids, star inputs, recipes and registration metadata remain tracked. The full bake restores the configured app textures against immutable delivery hashes; `prepare:nebulae` verifies or rebuilds them before app startup/build.
+- Keep `models/lmc/bake.json` synchronized with deliberately accepted placements and material settings. Do not infer them from the newest cache or browser defaults. All derived images (including original-image previews, reference panels, separation previews and density/app slices) are ignored; compact grids, star inputs, recipes and registration metadata remain tracked. The full bake restores the configured app textures against immutable delivery hashes; `prepare:nebulae` verifies or rebuilds them before app startup/build.
 - Historical receipts retain their original bytes and hashes. Resolve relocated historical paths at explicit loading boundaries; do not fabricate replacement provenance.
 
 ## Processing boundaries

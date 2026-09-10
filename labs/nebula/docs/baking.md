@@ -4,6 +4,7 @@ From a clean checkout with Node 22, pnpm and Python 3.9–3.12 installed:
 
 ```sh
 pnpm install --frozen-lockfile
+pnpm prepare:environment-images
 pnpm lab:nebula:bake
 pnpm lab:nebula
 ```
@@ -46,6 +47,8 @@ Options with values use `--name=value`. Stages include their preceding dependenc
 
 Only LMC has accepted color reconstructions. SMC currently supplies its neutral density field, not invented color lenses. New objects require their own approved source/registration/prior configuration and lab subject records before the same processors can be used.
 
+`pnpm prepare:environment-images` restores the M31/M33/SMC layers, Milky Way slices and sky faces, heliosphere atlas and stellar point atlas from their pinned sources. It only bakes missing banks and verifies every restored byte against the accepted resource manifests. Pass `--verify-replay` to independently rebake even a complete bank. These operations preserve the descriptors and saved rendering settings. App startup/build and universe CI restore these images automatically.
+
 `pnpm prepare:nebulae` runs the `--if-missing` check automatically before app development, builds and shell tests. The first run on a clean checkout needs the same Python environment/downloads as a full bake. Later starts only verify the accepted files. A changed file is an error, not permission to silently replace it.
 
 ## Files and recovery
@@ -57,13 +60,16 @@ models/
   {lmc,smc}/full-density/prepared/
     *.json                        tracked reference geometry and resource hashes
     slices/                       ignored, regenerated textures
-  lmc/candidates/                 tracked registration and three inspection previews
+  lmc/candidates/                 tracked registration and expected preview hashes
+    prepared/*.webp              ignored, regenerated inspection previews
+  lmc/clouds-observation/source/
+    target.png                    ignored, regenerated historical star-calibration panel
   lmc/stars/                      tracked catalogue input and sky-to-model reference
   lmc/star-separation/
     *.json, receipts/             tracked extraction configuration and reference hashes
     prepared/                     ignored, regenerated starless/residual previews
-src/objects/lmc/
-  prepared/*/slices/              ignored, regenerated app textures
+src/objects/*/
+  prepared/**/*.webp, *.png       ignored, regenerated runtime images
   object.json, source/, prepared/*.json
                                  tracked descriptor, settings and delivery manifest
 .local/
@@ -77,7 +83,7 @@ src/objects/lmc/
       lmc-<hash>/                 assembled local lens bank
 ```
 
-Reference metadata and the three original image inspection previews remain versioned for the alignment tool. The six starless/residual previews, neutral density textures and production LMC slice images are generated, not committed. Until extraction previews exist, Alignment offers the originals; completed removal jobs supply their own verified layers. The bake can recreate all these previews from the native originals.
+Reference metadata stays versioned. Every derived lab image, including the three original-image inspection previews and historical SMASH star-calibration panel, is regenerated. Lab startup runs the assets stage: it restores density and inspection/reference images, acquiring missing originals, without running NOX or reconstruction. The six starless/residual previews and production slice images also remain untracked. Until extraction previews exist, Alignment offers the originals; completed removal jobs supply their own verified layers. The bake can recreate all these previews from the native originals.
 
 `BAKE_COMPLETE` is printed only after validating the output. The receipt identifies the recipe hash, source/result IDs and final output directory. Full lens-bank manifests pin every delivered file. App delivery preserves the checked-in metadata and restores texture bytes only after checking the whole selected set against its manifest. A failed stage exits nonzero and leaves the previous completed results intact. Source mismatches are errors, never silent replacements.
 
