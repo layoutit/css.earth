@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "asteroid-2001-sn263",
+  "displayName": "2001 SN263 Alpha",
+  "publicBase": "/scenes/asteroid-2001-sn263/",
+  "distanceAu": 1.9869,
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [],
+    "observedColors": [],
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 1.2482944893607866,
+    "camera": {
+      "initialScenePitchDegrees": 20,
+      "defaultControlYawDegrees": -45,
+      "framingScale": 0.8295302664304641
+    },
+    "mapUrl": "/scenes/asteroid-2001-sn263/asteroid-2001-sn263-shape-surface@2x.webp",
+    "polesUrl": "/scenes/asteroid-2001-sn263/asteroid-2001-sn263-shape-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/a153591alpha.tab",
+      "format": "wavefront-obj",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 1148,
+        "expectedFaces": 2292
+      },
+      "faceBudget": 800,
+      "tileSize": 64,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 35,
+        "regularize": false
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "Heliocentric placement uses a retained JPL state. The shape is a radar reconstruction from 2008 observations. Published radar and light-curve shape of the primary. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. Rotational phase is illustrative."
+  },
+  "presentation": {
+    "defaultLens": "shape",
+    "pointColor": [
+      160,
+      160,
+      160
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}
