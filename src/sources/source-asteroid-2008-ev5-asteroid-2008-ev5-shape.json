@@ -1,0 +1,24 @@
+{
+  "id": "source-asteroid-2008-ev5-asteroid-2008-ev5-shape",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Asteroid 2008 Ev5 · asteroid 2008 ev5 shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://echo.jpl.nasa.gov/asteroids/shapes/2008ev5.obj",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/asteroid-2008-ev5/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "d81ca68eb074ddde49b659b918b9db794674d88273087f839b6de1f35b947fa6",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

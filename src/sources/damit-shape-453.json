@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-453",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 453 · Una",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "453"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/453/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/una/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "0d20aeb61763120c09c04a8444e7eabfc9d1844f9c406011691177c2163e659f",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

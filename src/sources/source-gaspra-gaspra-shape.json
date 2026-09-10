@@ -1,0 +1,24 @@
+{
+  "id": "source-gaspra-gaspra-shape",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Gaspra · gaspra shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspra.tab",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/gaspra/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "8e87d572c855abd6cb708fe6dda3a1a8d016b80b53ff3ac0ebea611fc78be5c8",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

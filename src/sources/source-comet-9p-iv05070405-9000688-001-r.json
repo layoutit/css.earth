@@ -1,0 +1,35 @@
+{
+  "id": "source-comet-9p-iv05070405-9000688-001-r",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "version": "DII-C-ITS-3/4-9P-ENCOUNTER-V3.0",
+  "title": "Deep Impact ITS · IV05070405_9000688_001_R_FIT",
+  "identifiers": [
+    {
+      "type": "pds3-product-id",
+      "value": "IV05070405_9000688_001_R_FIT"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000688_001_r.lbl",
+      "label": "PDS product label"
+    },
+    {
+      "role": "archive",
+      "url": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000688_001_r.fit",
+      "label": "FITS image"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/comet-9p/source/photography/deep-impact/iv05070405_9000688_001_r.lbl",
+      "revision": "51315639ea9b3a104d2dc2fc4ee94282fb7ba3ed",
+      "sha256": "be1f12db5f5bf473485a9c575d669a6b3274b6a6e524ebecf09307066cbd2d9f",
+      "locator": "/PRODUCT_ID; DATA_SET_ID"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

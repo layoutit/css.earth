@@ -1,0 +1,24 @@
+{
+  "id": "source-titania-geology-2026-source-5",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Titania · geology 2026 source 5",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/api/records/20819132/files/Titania%20geologic%20map%20.lyrx/content",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/titania/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "06e8b722199c43a315483aa550faa9d913efe2ee296e23e2b6c1572264dd1c11",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

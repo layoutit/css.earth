@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-9829",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 9829 · Eurykleia",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "9829"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/9829/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/eurykleia/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "6c71bc1c0d2c7b02dbd33b372eb3b2d2912b4576aa05ea23513413bb8eb89584",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

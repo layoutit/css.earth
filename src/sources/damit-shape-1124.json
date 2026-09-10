@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-1124",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 1124 · Irene",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "1124"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1124/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/irene/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "eb0d5562a5f194da9792af96b45b9dcb160554d87be183677c776ac7326e4ddd",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

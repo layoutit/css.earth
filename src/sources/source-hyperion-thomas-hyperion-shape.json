@@ -1,0 +1,24 @@
+{
+  "id": "source-hyperion-thomas-hyperion-shape",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Elevation",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/hyperion_30k_plt.tab",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/hyperion/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "df0ec0e1a7fa0a19696db4fb0fe9c3493dee0cb80bb94296492064b0ba615125",
+      "locator": "/inputs/22"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

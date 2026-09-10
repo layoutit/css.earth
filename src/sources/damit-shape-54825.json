@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-54825",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 54825 · Henrietta",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "54825"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/54825/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/henrietta/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "32c5711102d905ff12d1ff75ab817332b505372a28420d5306990b8789f89cde",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

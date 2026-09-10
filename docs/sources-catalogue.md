@@ -8,16 +8,16 @@ input bytes, processing, credits and limits.
 
 | Record | Content |
 | --- | --- |
-| [Source catalogue](../src/sources/catalog.json) | Published title, identifiers, version, citation links and identity evidence |
+| [Source records](../src/sources/) (`<id>.json`) | One published identity per file: title, identifiers, version, citation links and evidence |
 | Body `source/manifest.json` | Local input IDs, paths, hashes, acquisition, credits and `sourceBinding` |
 | Body `README.md` | Adopted values, source choices, processing, results and known problems |
 | [Mission and spacecraft catalogue](../site/source/spacecraft/catalog.json) | Citations for individual claims, with checked dates and locators |
 | [Render library](../site/source/spacecraft/render-library.json) and [emblem library](../site/source/spacecraft/emblem-library.json) | Artwork bindings, original credits and file pins |
 | Shared environment `source/provenance.json` | The source binding and meaning of that environment |
 
-[Prepared sources](../site/prepared-sources.json) and
-[prepared missions](../site/prepared-spacecraft.json) are generated from these
-records and the existing product lineage. Do not edit either output by hand.
+`site/prepared-sources.json` and `site/prepared-spacecraft.json` are generated
+from these records and the existing product lineage. They are ignored build
+outputs; do not edit or commit them.
 The [provenance contract](provenance/CONTRACT.md) governs citations, retained data,
 evidence and plain language. Keep scientific tables in their existing records.
 
@@ -27,7 +27,9 @@ evidence and plain language. Keep scientific tables in their existing records.
    bodies and file conversions. Preserve distinct releases and distinct products
    within a collection. A publisher, shared download endpoint or matching hash
    alone does not establish equivalence.
-2. If it is absent, add its published title, provider identifiers and citation link.
+2. If it is absent, create `src/sources/<id>.json`, with `id` matching the filename.
+   Use the existing [source record fields](../src/platform/source-catalog.mts).
+   Add its published title, provider identifiers and citation link.
    Record authors, date and version when established by the source. Cite the
    provider page with a checked date and locator, or an existing record at its
    exact Git revision with its hash and field. Do not invent a release or archive
@@ -49,28 +51,33 @@ bindings and remove the redundant records. Each local input keeps its own pins.
 Preparation rejects missing, unknown or unresolved bindings. Establish the source
 identity from its evidence before publishing the prepared catalogue.
 
+Independent additions touch separate files. Changes to the same published source
+still need to be reconciled. There is no shared index to update: preparation
+reads the files in ID order and rejects duplicate identities.
+
 ## Prepare and check
 
 Run `pnpm prepare:sources` after changing catalogue metadata, bindings or capture
 records. `pnpm prepare:provenance` and `pnpm prepare:spacecraft` are aliases for
 this coordinated operation. It validates all prospective object provenance and
 both catalogues before replacing outputs. Astro checks their dependency hashes
-and rejects stale or mixed sets. It does not acquire scientific data or rebake
-surface assets.
+and the source file list, rejecting stale or mixed sets. It does not acquire
+scientific data or rebake surface assets.
 
 Source-refresh tools must preserve bindings, source metadata and capture evidence
 while updating byte pins. Newly discovered files need an authored classification;
 a refresh must not guess one from a filename or copied template.
 
-Run the focused checks:
+For source identities, bindings or catalogue code, run:
 
 ```sh
-node --test src/platform/source-catalog.test.mts tools/source-catalogue.test.mts
-pnpm typecheck
+pnpm test:sources
 ```
 
-These cover identities, bindings, product dependencies and deterministic
-catalogue generation. Use the [exploration guide](architecture/exploration-catalog.md#preparing-and-checking-a-change)
+This prepares the catalogues and checks identities, bindings, product dependencies,
+independent additions and deterministic output. CI runs the same command.
+It needs installed dependencies, without scientific downloads or a surface bake.
+Use the [exploration guide](architecture/exploration-catalog.md#preparing-and-checking-a-change)
 for changes to mission attribution or dataset navigation. Scientific changes still
 need their body and preparation checks.
 

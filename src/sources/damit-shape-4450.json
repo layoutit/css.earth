@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-4450",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 4450 · Maja",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "4450"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/4450/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/maja/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "f24b2d89349086f7a794bbaf4341d742a65a66f8665abec66e6283ae577838dd",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

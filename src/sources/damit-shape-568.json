@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-568",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 568 · Emma",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "568"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/568/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/emma/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "d4dc62faa4af08cd9f32ec9ce5b3259c2360d10e5b0b5604b8e8e7530548cef1",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506110127-1506288646-n1506184171-1-calib",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PDS archive product · N1506184171_1_CALIB",
+  "identifiers": [
+    {
+      "type": "PDS archive resource path",
+      "value": "/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506110127_1506288646/N1506184171_1_CALIB"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506110127_1506288646/N1506184171_1_CALIB.LBL",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/calypso/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "a58f3a2ed4d840013655c47a642a99e243ea13479720a9244a645e6958ec0d73",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

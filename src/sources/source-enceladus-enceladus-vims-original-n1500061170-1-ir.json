@@ -1,0 +1,24 @@
+{
+  "id": "source-enceladus-enceladus-vims-original-n1500061170-1-ir",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Enceladus · enceladus vims original n1500061170_1_ir",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://vims.univ-nantes.fr/cube/N1500061170_1_ir.cub",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/enceladus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "6d88e446812b26cd241cb335af4874f8f99390216e50a94602e111e3b823b3ca",
+      "locator": "/inputs/17"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

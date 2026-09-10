@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-2280",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 2280 · Huberta",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "2280"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/2280/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/huberta/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "7465e65e3554b7236ad267e1f3653bfcde97c986d8191514018c197ff9ecb808",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

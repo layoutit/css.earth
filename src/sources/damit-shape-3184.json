@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-3184",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 3184 · Atalante",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "3184"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3184/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/atalante/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "e7ba7001184c351770a051221c13393378e0110bdfe896003358d46e8a85f308",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

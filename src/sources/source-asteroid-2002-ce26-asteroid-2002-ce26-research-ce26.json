@@ -1,0 +1,24 @@
+{
+  "id": "source-asteroid-2002-ce26-asteroid-2002-ce26-research-ce26",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Asteroid 2002 Ce26 · asteroid 2002 ce26 research ce26",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://echo.jpl.nasa.gov/asteroids/2002CE26/shepard.etal.2006.2002ce26.pdf",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/asteroid-2002-ce26/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "c4d57dc4648d51c8fd5949fda290a83d7841f8e95faf38e05f0f5bbebaa5a6f9",
+      "locator": "/inputs/3"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

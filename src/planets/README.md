@@ -41,7 +41,7 @@ site/pages/[id].astro           one shared route for all body ids
 ```
 
 Use the current authored branch of `tools/object-package-contract.mts` for
-required files and `tests/objects/source-closure.test.mjs` for source ownership.
+required files and `tests/objects/source-closure.test.mts` for source ownership.
 The latter requires data-only body packages. Acquisition/preparation code lives
 in shared `tools/objects/` families; runtime and presentation behavior live in
 the shared renderer and shell. Do not copy private `runtime/`, `site/` or
@@ -107,14 +107,17 @@ Read the current `package.json` and runner arguments before using commands:
 | Acquire missing pins / verify present sources | `node tools/objects/dist/operations.js acquire <id>` / add `--verify-only` |
 | Prepare one authored package | `pnpm prepare:planets -- --object=<id>` |
 | Update source and mission catalogues | `pnpm prepare:sources` |
-| Run body tests | `node --test tests/objects/unit/<id>/*.test.mjs` |
+| Run body tests | `node --test tests/objects/unit/<id>/*.test.mts` |
 | Run shared package, renderer, platform and shell tests | `pnpm test` |
-| Run relevant preparation tests | `pnpm test:preparation` with the supported selection |
+| Check source identities, bindings and catalogue generation | `pnpm test:sources` |
+| Run a preparation test | `node --test tools/objects/<recipe>/<name>.test.mts` when the selected test uses Node |
 | Production build and assembly | `pnpm build` |
 | Shared DOM/browser checks | `pnpm test:browser <served-worktree-url> <id>` |
 | Extended behavior conformance | `pnpm test:browser:conformance <served-worktree-url> <id>` |
 
 Build the shared preparation tools before invoking their `dist/` entry points.
+Select checks using the [PR rules](../../docs/provenance/CONTRACT.md#pull-requests);
+this table lists available commands, not a checklist for every body addition.
 `pnpm test:planets` runs the registry; its current runner does not implement an
 `--object` filter. Use the direct body test path for focused checks.
 `pnpm test` excludes the separate body and preparation runners. Read the browser

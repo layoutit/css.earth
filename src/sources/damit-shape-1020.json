@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-1020",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 1020 · Loreley",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "1020"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1020/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/loreley/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "3e9762de1abb2299a9f502bcbe04941810abcc4781d6b44cc5fc8776b72df643",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

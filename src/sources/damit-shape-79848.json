@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-79848",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 79848 · Menelaus",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "79848"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/79848/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/menelaus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "bbccd3f17780f67b9cc0537724217ebc64e595ba976ed88b94008fa7a9211572",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "doi-10-1006-icar-1996-0045",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · DOI 10.1006/icar.1996.0045",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1006/icar.1996.0045"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1006/icar.1996.0045",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/dactyl/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "487b18f16050765fd4d562e965a7af43ebd94c37222b80b8e04d9f1814815506",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

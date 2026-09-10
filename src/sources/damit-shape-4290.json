@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-4290",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 4290 · Anahita",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "4290"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/4290/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/anahita/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "0afb0a03d4bbeaf17232c7ecea7012693565f1f81bd55916a8e06ba4dde533ab",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,24 @@
+{
+  "id": "source-comet-67p-n20151026-125938-qualitypath",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Comet 67P · n20151026 125938 qualityPath",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/data/img/n20151026t125938783id40f22.img",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/comet-67p/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "0e233e5a52d4557bbc92303bcf4812a3da3bbfaae422d2dda011bafeb4d77e17",
+      "locator": "/inputs/33"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

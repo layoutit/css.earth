@@ -1,0 +1,29 @@
+{
+  "id": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2100-data-1828129458-1828242442-n1828134597-1-calib",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PDS archive product · N1828134597_1_CALIB",
+  "identifiers": [
+    {
+      "type": "PDS archive resource path",
+      "value": "/holdings/calibrated/COISS_2xxx/COISS_2100/data/1828129458_1828242442/N1828134597_1_CALIB"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2100/data/1828129458_1828242442/N1828134597_1_CALIB.LBL",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/prometheus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "58a51fc5dc861c60cb74fedc29928710f93d912c4c69d101f4b56423a157adee",
+      "locator": "/inputs/12"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

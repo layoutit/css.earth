@@ -47,6 +47,8 @@ jobs:
           pnpm build:preparation
           pnpm prepare:world-context
           pnpm prepare:minimap
+      - name: Test source records, provenance and scientific credits
+        run: pnpm test:sources
       - name: Check source restoration and tracked inputs
         run: |
           node --test tools/restore-source-inputs.test.mts
@@ -62,11 +64,6 @@ jobs:
         run: |
           pnpm test:preparation --universe
           node --test tools/objects/material-composition/coplanar-raster.test.mts
-      - name: Test provenance and scientific source credits
-        run: >-
-          node --test tools/object-provenance.test.mts
-          site/test/object-sources.test.mts site/test/dataset-spacecraft.test.mts
-          site/test/scene-sources.test.mts
       - name: Restore pinned JSON transports for runtime and shell tests
         run: |
           node --test tools/restore-object-json.test.mts

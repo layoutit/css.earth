@@ -92,11 +92,10 @@ After changing either kind of attribution, use the
 
 ## Validation
 
-Run:
+For source bindings or product-lineage changes, run:
 
 ```sh
-node --test tools/object-provenance.test.mjs site/test/object-sources.test.mjs site/test/scene-sources.test.mjs site/test/dataset-spacecraft.test.mjs
-pnpm typecheck:preparation
+pnpm test:sources
 ```
 The suite checks tampered inputs/outputs/recipes, recovery semantics, compound
 Mercury coverage, Saturn material dependencies, Earth noise identity, preview

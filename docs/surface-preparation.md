@@ -161,7 +161,7 @@ after building the tools and restoring Arrokoth's inputs:
 ```sh
 node tools/objects/dist/operations.js acquire arrokoth --verify-only
 node tools/objects/dist/prepare-authored.js arrokoth --write
-node --test tools/objects/terrestrial-layers/obj-uv-fits.test.mjs
+node --test tools/objects/terrestrial-layers/obj-uv-fits.test.mts
 ```
 
 The UV test checks interpolation, row order, missing values and bounded transfer.

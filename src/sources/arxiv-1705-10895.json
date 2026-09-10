@@ -1,0 +1,29 @@
+{
+  "id": "arxiv-1705-10895",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · arXiv 1705.10895",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1705.10895"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1705.10895",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/achlys/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "e33234eb223fe3601c27eca2459cdb3b603125641813483b5d5b4cbd772af947",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-10501",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 10501 · Ajax",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "10501"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/10501/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/ajax/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "52ac2eac67a5dedc7f959e7b274ff911a76b481f1e8e79f7a90954283da4bdbc",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

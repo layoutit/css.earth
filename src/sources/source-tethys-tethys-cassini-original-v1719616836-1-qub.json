@@ -1,0 +1,24 @@
+{
+  "id": "source-tethys-tethys-cassini-original-v1719616836-1-qub",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Tethys · tethys cassini original v1719616836_1 qub",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://vims.univ-nantes.fr/cube/1719616836_1.qub",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/tethys/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "606a7b66b8a624781983e1ca55bc94abe8849d7905ab500cfdfe7ffd4f3591d2",
+      "locator": "/inputs/34"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

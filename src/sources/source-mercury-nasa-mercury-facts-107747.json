@@ -1,0 +1,24 @@
+{
+  "id": "source-mercury-nasa-mercury-facts-107747",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Mercury · nasa mercury facts 107747",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://science.nasa.gov/wp-json/wp/v2/topic/107747",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/mercury/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "2c66d93686fe80a9cecb39cf8b6b6e486d2e4cebc900a62534185a26c5f565ec",
+      "locator": "/inputs/14"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

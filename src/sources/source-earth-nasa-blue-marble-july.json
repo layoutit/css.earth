@@ -1,0 +1,24 @@
+{
+  "id": "source-earth-nasa-blue-marble-july",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Earth · nasa blue marble july",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/earth/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "bd42c8943697a61ab922cb82f1da71744803ab78ed519fb2839a1f138bb61d16",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

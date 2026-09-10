@@ -143,16 +143,15 @@ Use the [Sources preparation workflow](../sources-catalogue.md#prepare-and-check
 after changing capture records, catalogue metadata or artwork. It publishes object
 provenance, Sources and Missions together without acquiring or rendering images.
 
-Run `pnpm typecheck` and `pnpm check:typescript-ownership`, the package, renderer,
-platform and shell test suites, and the production build. Focused tests include
-`src/platform/exploration-catalog.test.mts`,
-`site/test/dataset-spacecraft.test.mjs`,
-`src/platform/object-selection-runtime.test.mjs` and
-`site/test/navigation-router.test.mjs`. They cover malformed records, source
-conservation, reverse links, deterministic output, cancellation and history.
+Run `pnpm test:sources` for metadata, bindings and catalogue compilation. It covers
+malformed records, source conservation, reverse links and deterministic output.
+For changes to dataset selection or routing, also run the affected
+[selection](../../src/platform/object-selection-runtime.test.mts) and
+[router](../../site/test/navigation-router.test.mts) tests for cancellation and history.
 
-Run `pnpm test:browser:datasets <production-preview-url>` against an assembled
-build. The [browser regression](../../site/test/dataset-navigation-browser.mts)
+For dataset navigation or card presentation changes, run
+`pnpm test:browser:datasets <production-preview-url>` against an assembled build.
+The [browser regression](../../site/test/dataset-navigation-browser.mts)
 uses the public shell and records its cases, browser version, requests and
 screenshots under `output/playwright/dataset-navigation/`. It checks direct,
 same-body and cross-body dataset navigation, manual selection and history,

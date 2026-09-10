@@ -1,7 +1,8 @@
-import { parseSourceCatalog, sourceResolver, parseSourceBinding } from '../src/platform/source-catalog.mts';
+import { sourceResolver, parseSourceBinding } from '../src/platform/source-catalog.mts';
 import { compileSourceUsage } from '../src/platform/source-usage.mts';
 import type { SourceUse } from '../src/platform/source-usage.mts';
-import { parsePreparedSources } from '../src/platform/prepared-sources.mts';
+import { parsePreparedSources, sourceCatalogDigest } from '../src/platform/prepared-sources.mts';
+import { readSourceCatalog } from './read-source-catalogue.mts';
 import { sourceInventory, metadataCitations } from './source-catalogue-inputs.mts';
 import type { SourceInventoryEntry } from './source-catalogue-inputs.mts';
 import { createHash } from 'node:crypto';
@@ -23,7 +24,7 @@ export const explorationCompilerClosure = [
   'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'site/objects.mts', 'site/object-schema.mts',
   'site/object-catalog.mts', 'site/prepared-object-catalog.mts', 'tools/prepare-catalog.mts',
   'site/source/spacecraft/catalog.json', 'site/source/spacecraft/render-library.json', 'site/source/spacecraft/emblem-library.json',
-  'site/source/agency-logos.json', 'src/sources/catalog.json',
+  'site/source/agency-logos.json', 'tools/read-source-catalogue.mts',
   'src/platform/source-catalog.mts', 'src/platform/source-usage.mts', 'src/platform/source-manifest.mts',
   'src/platform/prepared-sources.mts', 'tools/source-catalogue-inputs.mts',
   'src/objects/milky-way/source/sky/provenance.json', 'src/objects/milky-way/source/provenance.json',
@@ -41,7 +42,7 @@ export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '.
   const json = async (path: string): Promise<unknown> => JSON.parse((await input(path)).toString('utf8'));
   for (const path of explorationCompilerClosure) await input(path);
   const agencies = parseAgencies(await json('site/source/agency-logos.json'));
-  const sourceCatalog = parseSourceCatalog(await json('src/sources/catalog.json')), sources = sourceResolver(sourceCatalog);
+  const sourceCatalog = await readSourceCatalog(root, input), sources = sourceResolver(sourceCatalog);
   const catalog = parseExplorationCatalog(await json('site/source/spacecraft/catalog.json'), agencies, sources);
   const metadata: SourceUse[] = metadataCitations(catalog, 'site/source/spacecraft/catalog.json', sources);
   const inventory: SourceInventoryEntry[] = [];
@@ -102,7 +103,7 @@ export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '.
     inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(document.sources.map(source => source.path))));
     objects.push({ id: object.id, name: object.name, route: object.route, controls: lenses, provenance: document });
   }
-  const sourcePayload = {schema:'cssearth-prepared-sources@1',catalog:sourceCatalog,catalogSha256:closure['src/sources/catalog.json'],
+  const sourcePayload = {schema:'cssearth-prepared-sources@1',catalog:sourceCatalog,catalogSha256:sourceCatalogDigest(sourceCatalog),
     usage:compileSourceUsage(objects,sources,metadata),inventory,closure};
   const preparedSources = parsePreparedSources(sourcePayload);
   const payload = { schema: 'cssearth-prepared-exploration@2', catalog, agencies, images, emblems,

@@ -1,0 +1,24 @@
+{
+  "id": "source-comet-67p-navcam-20150720",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Comet 67P · navcam 20150720",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://blogs.esa.int/rosetta/files/2015/07/ESA_ROSETTA_NAVCAM_20150720.jpg",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/comet-67p/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "0e233e5a52d4557bbc92303bcf4812a3da3bbfaae422d2dda011bafeb4d77e17",
+      "locator": "/inputs/4"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,24 @@
+{
+  "id": "source-venus-openspace-venus-clouds",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Venus · openspace venus clouds",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/venus/textures/2/venus_clouds.jpg",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/venus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "380fd3c49e698d4028d1dc6472507d98b037445472b1815c978f57ed7e225d91",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

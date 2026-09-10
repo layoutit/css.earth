@@ -1,0 +1,24 @@
+{
+  "id": "source-asteroid-1950-da-asteroid-1950-da-shape",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Asteroid 1950 Da · asteroid 1950 da shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://echo.jpl.nasa.gov/asteroids/shapes/1950DA_RetrogradeModel.wf",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/asteroid-1950-da/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "fb0cc2655b2c2ae9aefb332c6de6777923f591a026a321a47aa9eb4cf4799d08",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

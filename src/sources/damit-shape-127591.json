@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-127591",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 127591 · Iclea",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "127591"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/127591/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/iclea/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "b263d1b4196fe653fcb989b242d1158a4cf5d2dce05711d24656e08a5e2ca124",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

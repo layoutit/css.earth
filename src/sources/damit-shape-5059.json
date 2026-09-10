@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-5059",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 5059 · Aschera",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "5059"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/5059/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/aschera/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "2f5813dd9ff3686d17d0e2c6c282a896c7cb4c3a8d4730be59ad2ce02501cd66",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-1140",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 1140 · Harmonia",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "1140"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1140/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/harmonia/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "b77137a1c7a0b54d49f291c2b5aa90d5ecb44fd7671c4eb80b700c8defc4852b",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-369",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 369 · Thyra",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "369"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/369/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/thyra/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "31ed88bf865f2421a65e2bd7e776160b4dc842d595c76a99303e8fa6bf8944ec",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

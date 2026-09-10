@@ -1,0 +1,29 @@
+{
+  "id": "pds-resource-holdings-volumes-go-0xxx-go-0020-e11-io-c0420626379r",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PDS archive product · C0420626379R",
+  "identifiers": [
+    {
+      "type": "PDS archive resource path",
+      "value": "/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.LBL",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/amalthea/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "0cdd486a717831e2b91c4e8def1e8a4b6401e68535a7761ae52171664f671a91",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

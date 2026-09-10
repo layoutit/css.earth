@@ -1,0 +1,24 @@
+{
+  "id": "source-itokawa-itokawa-shape",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Itokawa · itokawa shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/itokawa/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "68f0a649374d571041553b384acadd0cda7cf496674ecd2976944794c0559ec5",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

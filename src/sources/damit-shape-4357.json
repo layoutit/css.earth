@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-4357",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 4357 · Kemi",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "4357"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/4357/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/kemi/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "15d775e794483233b5cfa9712d6c3b8b6bcad305477b28fcb72620494f02feb9",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

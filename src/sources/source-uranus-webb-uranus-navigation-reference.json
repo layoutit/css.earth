@@ -1,0 +1,24 @@
+{
+  "id": "source-uranus-webb-uranus-navigation-reference",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Uranus · webb uranus navigation reference",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/missions/webb/science/2023/04/STScI-01GWQDPJTF1MY8ZGN4WBMWMACJ.png?crop=faces%2Cfocalpoint&fit=clip&h=1268&w=1268",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/uranus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "75d2dc8312a10ac087b17086d8a728769ceeca4b46d7e860d3225b82b5bedf0e",
+      "locator": "/inputs/5"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

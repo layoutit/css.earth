@@ -1,0 +1,24 @@
+{
+  "id": "source-gaspra-gaspra-e8326-lbl",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Gaspra · gaspra e8326 lbl",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspra/e8326.lbl",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/gaspra/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "8e87d572c855abd6cb708fe6dda3a1a8d016b80b53ff3ac0ebea611fc78be5c8",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

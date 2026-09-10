@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-1032",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 1032 · Clarissa",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "1032"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1032/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/clarissa/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "e640b7b0f288df309bd910c83331473837dbdb502162fbdc5933f08138cd4f3a",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

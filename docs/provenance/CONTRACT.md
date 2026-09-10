@@ -38,12 +38,12 @@ PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XM
 | --- | --- |
 | Body `README.md` | The single account of sources and evidence described below |
 | Body `NOTICE.md` and supplied license files | Required acknowledgments and reuse terms; link here instead of duplicating credits |
-| [Source catalogue](../../src/sources/catalog.json) | Shared published identities, versions, citation links and evidence |
+| [Source records](../../src/sources/) (`<id>.json`) | One shared published identity per file, with versions, citation links and evidence |
 | `source/manifest.json` | Local input identities, canonical bindings, byte pins, acquisition and per-input credits |
 | `object.json` and `source/preparation/` | Executable choices and exact parameters; explain their meaning without copying parameter lists |
 | `prepared/provenance.json` | Generated connections between inputs, processing and outputs; never edit by hand |
 | `runtime-assets.json` at the body root | Generated delivery inventory used by installation and publication |
-| `site/prepared-sources.json` and `site/prepared-spacecraft.json` | Generated source usage and mission attribution; prepare together |
+| `site/prepared-sources.json` and `site/prepared-spacecraft.json` | Ignored source usage and mission attribution outputs; prepare together |
 | Shared guides and illustrations under `docs/` | Maintained explanations used across bodies |
 | Test fixtures under `tests/`; processing code under `tools/` | Inputs and implementation used by executable checks and preparation |
 | Root README and [body contributor guide](../../src/planets/README.md) | Shared installation, controls, commands and contribution workflow |
@@ -203,6 +203,15 @@ Use the [template](../../.github/pull_request_template.md) as a starting point;
 a small PR can be one paragraph and its relevant check. Remove unused prompts.
 Summarize checks and limitations. GitHub records CI revisions; local and reused
 evidence must identify the tested revision and relevant differences.
+
+**Choose checks by what changed.** Run the affected tests locally; required CI
+checks still apply. A new body needs its source, package and browser checks,
+without automatically rerunning every body or shared suite. Broaden local checks
+when shared behavior changes or a failure points beyond the package. Reuse a pass
+while its code, inputs and relevant environment remain unchanged; committing or
+editing prose alone does not invalidate it. For an unrelated failure, record it
+once and continue the checks that can still give useful results. Report omitted
+checks; do not call a focused pass a full-suite pass.
 
 Each added artifact must support a named claim, explanation or test. Explain
 unusually large additions. Preserve relevant failures and replace needed links

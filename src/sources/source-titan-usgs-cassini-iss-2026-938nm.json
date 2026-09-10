@@ -1,0 +1,24 @@
+{
+  "id": "source-titan-usgs-cassini-iss-2026-938nm",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Near-infrared",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.sciencebase.gov/catalog/file/get/68a5107ad4be02198e361c35?f=__disk__40%2Ffc%2F6b%2F40fc6b3d12f9356149245c46522fc4aca6cb9d5f",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/titan/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "0769f339817ad3841ca5401de4d4b04b430356edb0074324e6eb42017a93f35e",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

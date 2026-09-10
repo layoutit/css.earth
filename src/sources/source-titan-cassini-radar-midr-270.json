@@ -1,0 +1,24 @@
+{
+  "id": "source-titan-cassini-radar-midr-270",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Titan · cassini radar midr 270",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/titan/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "0769f339817ad3841ca5401de4d4b04b430356edb0074324e6eb42017a93f35e",
+      "locator": "/inputs/4"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
