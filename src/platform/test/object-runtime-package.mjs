@@ -201,9 +201,13 @@ export async function preparedSelectionFixture(definition, { silhouetteDiameter 
   for (const lens of definition.controls.lenses.controls) buttons.push(input({ name: "lens", value: lens.id, tagName: "BUTTON", type: "button" }));
   for (const control of definition.controls.settings.controls) inputs.set(control.name, input({ name: control.name,
     tagName: "INPUT", type: control.kind === "toggle" ? "checkbox" : "range", min: "0", max: "4", step: "1" }));
+  const information = f.document.createElement("section");
   const lensRoot = f.document.createElement("div"), settingsRoot = f.document.createElement("div");
-  lensRoot.querySelectorAll = () => buttons; settingsRoot.querySelectorAll = () => [...inputs.values()];
-  f.document.querySelector = selector => selector === ".planet-lenses" ? lensRoot : settingsRoot;
+  information.querySelector = selector => selector === ".planet-lenses" ? lensRoot : null;
+  lensRoot.querySelectorAll = selector => selector === 'button[name="lens"]' ? buttons : [];
+  settingsRoot.querySelectorAll = selector => selector === 'input[name], button[name]' ? [...inputs.values()] : [];
+  f.document.querySelector = selector => selector === ".planet-information-panel" ? information
+    : selector === ".planet-settings" ? settingsRoot : null;
   let binding;
   const selection = createObjectSelectionRuntime({ definition, presentation, residency, lifetime: f.lifetime,
     onCommit: state => f.playback.setSelection(state),
