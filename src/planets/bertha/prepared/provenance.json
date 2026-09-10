@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "bertha",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "6abfad40c2918c98a2918bcf4257174cb58c7a75871bb00f9f4cdf382241a32f",
       "bytes": 81736,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 8751,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/bertha/bertha-elevation-thumbnail.webp",
           "bytes": 5856,
           "sha256": "fd632cfbded318d3842f087634caf35a0847fb640ffc8016d16a89cb9aa08ca3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/bertha/bertha-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/bertha/bertha-elevation-surface@2x.webp",
           "bytes": 314000,
           "sha256": "b690e831c8b28017bc5a88e5acff8136033741dba5f5784216960a38d2144835",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/bertha/bertha-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/bertha/bertha-shape-surface@2x.webp",
           "bytes": 248554,
           "sha256": "a57a8746fe824aabaccdb3a31bc42cadd3f5db8195d2d80d5d028cd16f7a3995",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "dejopeja",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "e455562c300f5594cb401f42d3237cb86e3e415ad7c03f54f2569637b435f9db",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "eec526a75bd8dd2884a11f7b43990fb58bee6464dfc69ddfd7a0554c700200db",
       "bytes": 11089,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/dejopeja/dejopeja-elevation-thumbnail.webp",
           "bytes": 6000,
           "sha256": "a10c682203a1b786433e75469aa37bb80c87b9e9b0be0b4f6dee008ec63db739",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/dejopeja/dejopeja-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/dejopeja/dejopeja-elevation-surface@2x.webp",
           "bytes": 299024,
           "sha256": "887aca2c893315364f262fef08510b810adc5450372a2e844057228480346dfe",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/dejopeja/dejopeja-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/dejopeja/dejopeja-shape-surface@2x.webp",
           "bytes": 222144,
           "sha256": "9983a1c1fe33122488668b4e80248be9f720ce907c41cbb8085c958f2ddc7350",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

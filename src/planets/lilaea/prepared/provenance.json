@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "lilaea",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "0086f2f76f18239a5345be68633ff70bec9e91ef0e30318c0157c07c72bfd27d",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "58903f29c18916234ef1ab95a4acce66f17f6b36b61d233d3d7552081bf43c39",
       "bytes": 9516,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/lilaea/lilaea-elevation-thumbnail.webp",
           "bytes": 5954,
           "sha256": "b94deef21f1ef5b455813160423bd645cc7d2c0361a434dd0b794c03b648875b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lilaea/lilaea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lilaea/lilaea-elevation-surface@2x.webp",
           "bytes": 304710,
           "sha256": "333771bbaf1a9921976c001ca8391e02d69e6bc4f9d949f4193b51cd509cb24c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/lilaea/lilaea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lilaea/lilaea-shape-surface@2x.webp",
           "bytes": 246298,
           "sha256": "82c61441e4e5baf9713d4fcad1ea58a1a8276ed7d753a88c656210a0c3d0b75e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

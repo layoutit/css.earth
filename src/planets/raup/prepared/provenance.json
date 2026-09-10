@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "raup",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "ffae22baf0155a59ff90c8363569c60c3261fce268cd2871126416261159367b",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 8001,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/raup/raup-elevation-thumbnail.webp",
           "bytes": 5086,
           "sha256": "f18dedd07f2f346786deaaa6e66aafcdaf84f5e40a5392f96a48c86801d090c5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/raup/raup-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/raup/raup-elevation-surface@2x.webp",
           "bytes": 319528,
           "sha256": "76325529b70bb9d62ee619eb50553c7e1897e864d2c2406e0044c8dd9af584af",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/raup/raup-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/raup/raup-shape-surface@2x.webp",
           "bytes": 177216,
           "sha256": "4d565f01521523de25d09ea6da09409f6221e3dc6f217d14899dfd1fd9e88063",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

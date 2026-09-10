@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "aurora",
   "basis": "recovered",
   "manifest": {
@@ -327,7 +327,7 @@
       "sha256": "077f4ed954d70bbe9f8f6f6a9d5da5f1a31a4bdc8bf81b051900b6b25b4463de",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "26a1b3e085c5905d38fdf1955242e3cbfbf2c51bc0c3a02bec7ffbb085530b28",
       "bytes": 7657,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/aurora/aurora-elevation-thumbnail.webp",
           "bytes": 5638,
           "sha256": "1499b7a4ded9141020e2f689fcd48decc56a0b3766c7acc32169a140e4ed6b2b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/aurora/aurora-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/aurora/aurora-elevation-surface@2x.webp",
           "bytes": 293982,
           "sha256": "c451f6861aff845f42a25bca2588eb4161792e664c6a525c1a17909edbcb2d7f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/aurora/aurora-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/aurora/aurora-shape-surface@2x.webp",
           "bytes": 198560,
           "sha256": "f9914f9e291ddd612f23bb96243c441a2fea7d1099b597437cd202c2bb1b2532",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

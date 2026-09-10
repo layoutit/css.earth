@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "polymele",
   "basis": "recovered",
   "manifest": {
@@ -253,7 +253,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -278,7 +278,7 @@
       "sha256": "daeaea36b368b7012b45c0bc626085f87478d74d2f79fc75ab4be47a1ebba01c",
       "bytes": 60316,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -295,7 +295,7 @@
       "sha256": "3cd158fac21b7e49237b3438b21d206eba817b8b13d3ddd3f29ee43526ec20ea",
       "bytes": 3591,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -333,13 +333,13 @@
           "url": "/scenes/polymele/polymele-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/polymele/polymele-model-surface@2x.webp",
           "bytes": 43844,
           "sha256": "c78078a9cc51a8e4ca1a8509933b6da44fae7f9718c7a76dc98eef763d688c8d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "comet-2p",
   "basis": "recovered",
   "manifest": {
@@ -270,7 +270,7 @@
       "sha256": "b9b625659f98d6eafd05de9007a9f76db36bd5422fc6f3cd2f64ae472d60ca55",
       "bytes": 1077,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -287,7 +287,7 @@
       "sha256": "9a4134de896f7711b620da9334799668bffe1cf1bdef709450c83b91aaf567d3",
       "bytes": 2961,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -320,13 +320,13 @@
           "url": "/scenes/comet-2p/comet-2p-model-thumbnail.webp",
           "bytes": 1102,
           "sha256": "4095a8b3a8221be2a84a513c69d4ec068eee3d3ce03dc903db0a63962461b3d5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-2p/comet-2p-model-surface@2x.webp",
           "bytes": 110952,
           "sha256": "6ff963d7393a952ea3b43ab8c7a10be2ca029bff58219fcc8fb2b7df856a03a6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

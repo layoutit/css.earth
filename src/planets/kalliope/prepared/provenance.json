@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "kalliope",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "034f925d1e76ae7022d29ffa0488ffbc322f2cc0b8c5d32f7eabc82060f83b0c",
       "bytes": 154459,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "8048113de4c71e16d54b06d9a967cf004e2d9c707a0e96c6460ab73ca8743567",
       "bytes": 8323,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/kalliope/kalliope-elevation-thumbnail.webp",
           "bytes": 5202,
           "sha256": "672e1399769c300a422b4d124415554069acd94cbe692e518c02feceb1f2c716",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/kalliope/kalliope-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/kalliope/kalliope-elevation-surface@2x.webp",
           "bytes": 320338,
           "sha256": "4b91419175b297c4835cf91727b7758e0023d3275f623db61d2e5068b72908a7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/kalliope/kalliope-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/kalliope/kalliope-shape-surface@2x.webp",
           "bytes": 219510,
           "sha256": "cbb092ef83d169f6ee7bc351e1adef73c0ec39a9839cf95f7778853aa065d24e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

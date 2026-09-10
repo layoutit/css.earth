@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "callisto",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "440058bf9a72d062985e9b07afd3178057cd2fd9deb50fe6b427de5074ace1b4"
+    "sha256": "4ebe4dae350c76f1c482b5d7c422caf840d09eb73c4e446e3a76e6f98c3ba215"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -417,17 +417,31 @@
       "coverage": "GeoTIFF GDAL_NODATA=0. Missing pixels and resampled boundaries receive the shared gray cartographic grid. USGS source resolution ranges from 400 m to 60 km per pixel; low-resolution observed fill remains observed data.",
       "photometry": "USGS Lunar-Lambert normalization with empirical parameters and linear overlap matching; photographed relief and residual seams remain.",
       "capture": {
-        "spacecraftIds": [
-          "galileo",
-          "voyager-1",
-          "voyager-2"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif",
+            "missionId": "galileo"
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-1",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif",
+            "missionId": "voyager-1"
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "e1f0bd2e0e05de605d067d6b5f5ededddaf31ca6c064562a1ca770f15a7dbaa3",
       "bytes": 114640717,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -476,15 +490,19 @@
       "coverage": "28.735% spherical coverage: fixed perspective projection, emission <=65 degrees and fully opaque original contributors. Gray grid elsewhere; no globally filled color. GDAL_NODATA=0 is reserved for all-zero RGBA, with explicit all-channels RGB validity.",
       "photometry": "Published processed display colors, not calibrated I/F or albedo. Source photographed shading and color fringing remain. No new radiometric correction.",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://science.nasa.gov/photojournal/global-callisto-in-color/"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://science.nasa.gov/photojournal/global-callisto-in-color/",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "1b838efd6caffb313f90578222b4ac7015cdfd98bff6fe240b52047e740cde32",
       "bytes": 771611,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -522,15 +540,19 @@
       "coverage": "Intersection of valid samples in all three selected bands; no-data and ISIS special values remain missing. Earlier listed observation has priority; no blending or gap fill.",
       "photometry": "Archive Minnaert-corrected I/F; fixed RGB display ranges, no independent frame normalization.",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://doi.org/10.17189/4sq6-x165"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://doi.org/10.17189/4sq6-x165",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "23021089312fecb6c42df4502f93f57db52efe7fb4fa452c194fe5f1fcd17588",
       "bytes": 193313,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -547,7 +569,7 @@
       "sha256": "c58df6c6f62d029f053d5f876fdd8deb481b061f958b58c51d86ee8a861914cb",
       "bytes": 11802,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -584,19 +606,19 @@
           "url": "/scenes/callisto/callisto-normal-thumbnail.webp",
           "bytes": 3134,
           "sha256": "61e32f4d6d753f30b3bbb3ed561f52133f1d0d32ef99c5d3ee47f0d4428342c4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/callisto/callisto-normal-surface@2x.webp",
           "bytes": 6169044,
           "sha256": "a3426f1dae912070335ede461e32150bf082c6f6203e0db50a158ad143fef367",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/callisto/callisto-normal-poles@2x.webp",
           "bytes": 163564,
           "sha256": "6781b161a0af4b85676bfba78f75ab0698893c9dfebef5a5514ba6c646a92eba",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -635,19 +657,19 @@
           "url": "/scenes/callisto/callisto-enhanced-thumbnail.webp",
           "bytes": 3584,
           "sha256": "64cd37bb4a98fcd073a999a8ca38b4a3eef03f1849b233367d6d3aa01f36cf60",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/callisto/callisto-enhanced-surface@2x.webp",
           "bytes": 993738,
           "sha256": "1ae112da832085a9c7849db3c9bf2d8cd18f925b2b9f6039f0fe73d79871d40d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/callisto/callisto-enhanced-poles@2x.webp",
           "bytes": 22082,
           "sha256": "946ad57e6dcf0390cdffad9713b8ff1c36f00686b45a17d14026146fbcb94313",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -686,19 +708,19 @@
           "url": "/scenes/callisto/callisto-infrared-thumbnail.webp",
           "bytes": 3108,
           "sha256": "4f3edbfa6472b3c7c92253523ba5e6879e7dde5b3119825ef7c39b65a925a9d6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/callisto/callisto-infrared-surface@2x.webp",
           "bytes": 82426,
           "sha256": "48d6c8424b144291123b0189346c95a18af644000ddd2a2a69d385f391c3b1a4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/callisto/callisto-infrared-poles@2x.webp",
           "bytes": 5376,
           "sha256": "69161aa114ce5412b0bbb3aa2002987906e61f2d74d8d6819525cb7d5954fb8b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

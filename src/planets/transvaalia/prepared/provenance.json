@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "transvaalia",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "e9273c2a279f53c89a3d5df3735e5c836f2e4edb88bef6cee4dce35b2874fd1e",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 11751,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/transvaalia/transvaalia-elevation-thumbnail.webp",
           "bytes": 6038,
           "sha256": "30701e4f558d18884cd01c0f99c1d3aecd5ddf6b9dc01154c2c52981c0027887",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/transvaalia/transvaalia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/transvaalia/transvaalia-elevation-surface@2x.webp",
           "bytes": 301674,
           "sha256": "7a8ad7c8986a130cbd527089f0c708c09f3be5219a0f5278730ec7f0814d31f5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/transvaalia/transvaalia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/transvaalia/transvaalia-shape-surface@2x.webp",
           "bytes": 248764,
           "sha256": "f8593f648a3dbceaca0fa7574913486ab390db403a6f92bfb8bd92550409b48b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "schorria",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "4a415264ae5f3a3d9feb32668b739e2a6b0750b285553425be2a5243f86760ea",
       "bytes": 82546,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 9765,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/schorria/schorria-elevation-thumbnail.webp",
           "bytes": 4850,
           "sha256": "732ef62f62e72d93d015e58df92cbc0f3dc15ff64ad6719daa4ab3f03335b680",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/schorria/schorria-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/schorria/schorria-elevation-surface@2x.webp",
           "bytes": 290212,
           "sha256": "c843fecf85e8539112e96a082f14c9dbf5819163d9aa51b1816fd5263d330983",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/schorria/schorria-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/schorria/schorria-shape-surface@2x.webp",
           "bytes": 177366,
           "sha256": "891a6d008d4bcfdae3de179d70f5bbdf13b7e79023a43d5732a3ce0c08b26435",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

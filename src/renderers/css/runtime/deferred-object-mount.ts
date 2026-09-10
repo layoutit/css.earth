@@ -8,11 +8,20 @@ export interface ObjectSharedView {
   restore(view: SharedView): Promise<boolean>;
   subscribe(listener: () => void): () => void;
 }
+/** Prepared dataset choices, published only after the scene is ready. */
+export interface ObjectDatasets {
+  readonly ids: readonly string[];
+  readonly defaultId: string;
+  current(): string | null;
+  select(id: string, options?: { signal?: AbortSignal }): Promise<boolean>;
+  subscribe(listener: (id: string) => void): () => void;
+}
 export interface ObjectSceneLifecycle {
   readonly ready: Promise<void>;
   readonly sharedView: ObjectSharedView;
   readonly destinations?: PreparedDestinationRuntime;
   readonly navigation?: ObjectWorldNavigation;
+  readonly datasets?: ObjectDatasets;
   refineTextures?(): void;
   pause(): void;
   resume(): void;
@@ -50,6 +59,7 @@ export function createDeferredObjectMount<T, Stage, Options extends DeferredMoun
       ready, sharedView,
       get destinations() { return lifetime.disposed ? undefined : mounted?.destinations; },
       get navigation() { return published && !lifetime.disposed ? mounted?.navigation : undefined; },
+      get datasets() { return published && !lifetime.disposed ? mounted?.datasets : undefined; },
       refineTextures() { forward(() => mounted?.refineTextures?.()); },
       pause() { allowed = false; forward(() => mounted?.pause()); },
       resume() { allowed = true; forward(() => mounted?.resume()); },

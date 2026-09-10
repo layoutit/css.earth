@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "galatea",
   "basis": "recovered",
   "manifest": {
@@ -269,7 +269,7 @@
       "sha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73",
       "bytes": 135,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -294,7 +294,7 @@
       "sha256": "880268acd131560411d7771635192b22afd7e56396598a5f6543397d47479023",
       "bytes": 67525,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -311,7 +311,7 @@
       "sha256": "e6ef85b0c4e456f30a73460be427de606aefed7bd515b727a2f7cd99ad3683b6",
       "bytes": 3835,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -349,13 +349,13 @@
           "url": "/scenes/galatea/galatea-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/galatea/galatea-model-surface@2x.webp",
           "bytes": 54276,
           "sha256": "452e487907cd7457165cff799566b6139d708b72c9030bebbe78f4eb12fb0cd3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "thisbe",
   "basis": "recovered",
   "manifest": {
@@ -327,7 +327,7 @@
       "sha256": "858ad06aadb3d69ffb57caa027a1d6b252f82f6b409aa1ab6f4e56a72978154b",
       "bytes": 46743,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "c54fcb3596221f809c93ba81be80e97ca647abf58ede677f50b257ed5c05426b",
       "bytes": 7518,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/thisbe/thisbe-elevation-thumbnail.webp",
           "bytes": 5454,
           "sha256": "2e69e130db923e23c1ea9b610ada2badeb06b9162aba95f4aa48770daf8b6b5c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/thisbe/thisbe-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/thisbe/thisbe-elevation-surface@2x.webp",
           "bytes": 301382,
           "sha256": "60f2038f68e1fb9341824fd193c2fb97cc653c1336f364e2f377bd66a3bd84e2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/thisbe/thisbe-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/thisbe/thisbe-shape-surface@2x.webp",
           "bytes": 211306,
           "sha256": "f0976506e0f7ae7d2b7de2809b0cf5fbd091c9a4709fd10ae0d6e4038dcfc0ba",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

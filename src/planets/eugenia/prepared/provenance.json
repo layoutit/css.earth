@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "eugenia",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "4270363c28eb82e2174a7768bdce96f8cb0522fd4947c4f8a73499edbe9396d2",
       "bytes": 436219,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "6130776d6a192eb6c0275103d8b20fe88108362cd133bd5a1c33a8696a73786d",
       "bytes": 8502,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/eugenia/eugenia-elevation-thumbnail.webp",
           "bytes": 4922,
           "sha256": "fe7a88c59409b59437edc3f93698bc262b29a855651b5d276c1a7e08288370fc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eugenia/eugenia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eugenia/eugenia-elevation-surface@2x.webp",
           "bytes": 305880,
           "sha256": "e04bef44f8df97e3837ed3fa7bf4d7993b7717a36fe27b487932f5a71a68c891",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/eugenia/eugenia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eugenia/eugenia-shape-surface@2x.webp",
           "bytes": 211188,
           "sha256": "309b9f2c210d0be1974874cc1b9dc30e77fc153c841c4deaab5976f350cf0b62",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

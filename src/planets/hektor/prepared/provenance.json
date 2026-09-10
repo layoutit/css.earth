@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "hektor",
   "basis": "recovered",
   "manifest": {
@@ -327,7 +327,7 @@
       "sha256": "7246356c688dc0fab0e78353e900d7593dea83c90776a3e1d55b37a9d060e5b5",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "44b170c087d3b680c1daa3000a93f3aa0f2210c997d4b4d6efe3b4cc4bc80f1d",
       "bytes": 7070,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/hektor/hektor-elevation-thumbnail.webp",
           "bytes": 5184,
           "sha256": "6b10fc521717930329adefa0f39b94cd324b55d179240d48b4b284338a853113",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hektor/hektor-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hektor/hektor-elevation-surface@2x.webp",
           "bytes": 331524,
           "sha256": "ccc3a891996658e40b3252faf046d27168de1a7cd26daed24afbc5dc788249c1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/hektor/hektor-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hektor/hektor-shape-surface@2x.webp",
           "bytes": 210074,
           "sha256": "f2d988e9fe5c08d5f72bc0d180b432ab76115a5e18102ec564e6aadbf4240276",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

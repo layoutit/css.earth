@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "eris",
   "basis": "recovered",
   "manifest": {
@@ -190,7 +190,7 @@
       "sha256": "1b97f1b9eea244b047a72c2a3ac0db315715b7d421033d860d669ffd78681d54",
       "bytes": 4398964,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -214,7 +214,7 @@
       "sha256": "641eee8ead357712179e462aa1f6efe05b7ae5ff9ca2cf97b03459a64e630d0b",
       "bytes": 3810,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -249,19 +249,19 @@
           "url": "/scenes/eris/illustration-thumbnail.webp",
           "bytes": 2774,
           "sha256": "690d89c43950f653138d4836619252bd7ae0d39a18d68e1fb54427f94ecc92a0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eris/surface.webp",
           "bytes": 1980854,
           "sha256": "018b117099d3fa9442b7511413970afc4a1f3b289a6b5a1a964c80c6aafc21f8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eris/poles.webp",
           "bytes": 63748,
           "sha256": "42251e11cfc2cef403b60cfd41e95523d48a76c569746c9dfb2284e29168c53c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

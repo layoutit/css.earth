@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "isis",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "69468466831b229d880e8d0f58a4046ae973653da5d1155733fbbf8185ac9611",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "502ac9369c07efe10bb7391074ead26e5bfbb2fa56e40041e45c62e96ba168b9",
       "bytes": 7915,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/isis/isis-elevation-thumbnail.webp",
           "bytes": 5448,
           "sha256": "70632f159c8fd93006d69e1371c076df86f37e24de2e321076dfd04af62bcf25",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/isis/isis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/isis/isis-elevation-surface@2x.webp",
           "bytes": 295034,
           "sha256": "df2fe249728328eae822eeb3f22eb1434697eefa5a9ae042fc49f51a9df8ee2b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/isis/isis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/isis/isis-shape-surface@2x.webp",
           "bytes": 211044,
           "sha256": "552fcfb40c5b1bbdf7ff210726f7bd2e2f2d766e33d17126a63a31da553c8247",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

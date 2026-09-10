@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "niobe",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "8b8480da8e3b48bf4e1a93f8e3ae2de0a69315a13dc947a105fe05a0c169338d",
       "bytes": 82384,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "3b568585d8867e11fb832b592071f1e3913b9ce1a8485675545d2ce6598b1b3f",
       "bytes": 9050,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/niobe/niobe-elevation-thumbnail.webp",
           "bytes": 5276,
           "sha256": "f71d9ee2f282af3a54cb7e385a01e42a974840b28e8a999dbab9df80b1cee4bb",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/niobe/niobe-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/niobe/niobe-elevation-surface@2x.webp",
           "bytes": 267514,
           "sha256": "658c89a9a885585183874692f2a18476426fb5b29ecd57b78236483e080b5615",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/niobe/niobe-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/niobe/niobe-shape-surface@2x.webp",
           "bytes": 209388,
           "sha256": "e444090d93d33ff3889a0b4831edcb3bd65cd0a461d458ff8de2679a54abcfb9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

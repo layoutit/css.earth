@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "veritas",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "4b038d538898e8c11f692d3f034461d6cd06c41ece0c30f1d0b72d7ee4bca39a",
       "bytes": 82465,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 8878,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/veritas/veritas-elevation-thumbnail.webp",
           "bytes": 5962,
           "sha256": "d11cc33b7e21a1e57a862717a4adb167777f1259744a42b4b440b48f5da667b0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/veritas/veritas-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/veritas/veritas-elevation-surface@2x.webp",
           "bytes": 313132,
           "sha256": "93228f06d87d14f615297af6d83aac37428bab01bf68e5d37d49522eebcfa721",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/veritas/veritas-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/veritas/veritas-shape-surface@2x.webp",
           "bytes": 225162,
           "sha256": "cf918e80d7df690319d73da2f90466dad65a94102fa88de18a63afcea43795a0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

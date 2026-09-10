@@ -8,14 +8,13 @@ import PlanetCardHeader from "./PlanetCardHeader.astro";
 import PlanetFactsheet from "./PlanetFactsheet.astro";
 import { objectSources } from "../object-sources.mts";
 import PlanetMissions from "./PlanetMissions.astro";
-import spacecraftCatalog from "../prepared-spacecraft.json";
-import { objectSpacecraft } from "../dataset-spacecraft.mts";
+import { objectExploration } from "../exploration-catalog.mts";
 import DatasetLegend from "./DatasetLegend.astro";
 import DatasetDescription from "./DatasetDescription.astro";
 const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], provenance, lenses, destinations } = Astro.props;
 const hasLenses = Boolean(lenses && lenses.controls.length > 0);
 const sources = objectSources(provenance);
-const missions = objectSpacecraft(provenance, spacecraftCatalog);
+const exploration = Astro.props.deferMissionContent ? null : objectExploration(objectId);
 const orderedCharts = orderScientificCharts(charts);
 const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?? orderedCharts[0];
 ---
@@ -41,6 +40,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
         <button type="button" role="tab" id={`${objectId}-sources-tab`} data-information-tab="sources"
           aria-controls={`${objectId}-sources-content`} aria-selected="false" tabindex="-1">Sources</button>
       </div>
+      <p data-dataset-notice role="status" aria-live="polite" hidden></p>
       <div class="planet-card-tabpanel" id={`${objectId}-dataset-content`} data-information-panel="dataset"
         role="tabpanel" aria-labelledby={`${objectId}-dataset-tab`} tabindex="0">
       {defaultChart && <details
@@ -230,7 +230,8 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
         {!provenance && <p>Preparation provenance has not been recorded for this object.</p>}
       </div>
       <div class="planet-card-tabpanel" id={`${objectId}-missions-content`} data-information-panel="missions"
+        data-prepared-detail="missions" data-deferred-detail={Astro.props.deferMissionContent ? 'true' : undefined}
         role="tabpanel" aria-labelledby={`${objectId}-missions-tab`} tabindex="0" hidden>
-        <PlanetMissions {objectId} {missions} />
+        {exploration && <PlanetMissions {objectId} {...exploration} />}
       </div>
     </PlanetCard>

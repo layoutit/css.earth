@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "hygiea",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "caaf2ab054168680b4962a16b480998ed1c2a5364c7e392ebb99fb211d6ba4bd",
       "bytes": 1060219,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "a151c671d65f1cb2baf046a145b41b09b1395efe8676d8f9a9476fe4fdf38d9a",
       "bytes": 8183,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/hygiea/hygiea-elevation-thumbnail.webp",
           "bytes": 5814,
           "sha256": "c6f27892beee4b3ebeddb030c3a63710e1649a7795eecb16a02f7fe6ccdfa8c5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hygiea/hygiea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hygiea/hygiea-elevation-surface@2x.webp",
           "bytes": 282434,
           "sha256": "098f17f46803025d64f81754d66f38ff8f0ed96acea1f19028e3f1256d0a370d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/hygiea/hygiea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hygiea/hygiea-shape-surface@2x.webp",
           "bytes": 226980,
           "sha256": "a3cbef8d9ab9f5f389f639578d42db5365c1fa0cc58c2034dd96ca0666500c27",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "china",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "3e128e4dda6c3ed434637ef727dc7e325b813107470d8c5a0964b7cfb6fe7d44",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 8156,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/china/china-elevation-thumbnail.webp",
           "bytes": 6152,
           "sha256": "b28e3b4f6d0cf12e724afe0dc7fdda8dcf3936b14fb013b29b32b388a547863f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/china/china-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/china/china-elevation-surface@2x.webp",
           "bytes": 308518,
           "sha256": "39f786919ffebb62af683f9c8ad2d6b3e13d2cab9afcb79e181f17da9d3ba56a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/china/china-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/china/china-shape-surface@2x.webp",
           "bytes": 232114,
           "sha256": "dd072ac825584cb4502c711022ab5ea622eae9bfaeb328b703278f62558b2e93",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

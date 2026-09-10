@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "sycorax",
   "basis": "recovered",
   "manifest": {
@@ -252,7 +252,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -277,7 +277,7 @@
       "sha256": "be764e8107e368f4ff439caa85f46fd0c313453ae851ff4ba9681ebf681f0dbf",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -294,7 +294,7 @@
       "sha256": "b162fa98e4f2f41a59ed2aa71abf49b5a9c146773c3ffc491abc0cab1d1fabf2",
       "bytes": 3381,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -332,13 +332,13 @@
           "url": "/scenes/sycorax/sycorax-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/sycorax/sycorax-model-surface@2x.webp",
           "bytes": 56556,
           "sha256": "2b76092f42976541ccb5f59e2922cf0fa67ca8ff375c1e2bf744d581dd6604d9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

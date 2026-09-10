@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "clarissa",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "5953c0a8528106a185d0da899f40a1ef7bfe63457888c10ffa3062affe29eaa7",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "aaf995395f2426427d12be6f0d763e24bd91f3625e55a54f4c696229886d2ca8",
       "bytes": 10995,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/clarissa/clarissa-elevation-thumbnail.webp",
           "bytes": 4550,
           "sha256": "80755252e6de20fb41c291bc6edb9bfc08cf12d0e8d084d78ed52dab529994ec",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/clarissa/clarissa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/clarissa/clarissa-elevation-surface@2x.webp",
           "bytes": 268734,
           "sha256": "810fe01c7b25a05ef53406259317c08d8b2872557817470fcee337d292f389f0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/clarissa/clarissa-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/clarissa/clarissa-shape-surface@2x.webp",
           "bytes": 186798,
           "sha256": "9b2410550cc14bd4f311b40fee4709a5aea99c5bea32ab92375780b1c0724b1b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

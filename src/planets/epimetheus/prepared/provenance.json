@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "epimetheus",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2a773e18ddb006596c387b370a810cf4efe295ccb3c746f451da1fd3d95e1728"
+    "sha256": "318146692df23a3d9991ad1fdf37b6b5d6352dba5f62f1e056422a644660dea5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -450,15 +450,19 @@
       },
       "coverage": "Radial height above a 58.2 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/epimetheus_30k_plt.tab"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/epimetheus_30k_plt.tab",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "12f47732aacc340512e4238b9125483fd278dc02d249cfa2b226203a2a84b311",
       "bytes": 2087100,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -490,15 +494,19 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1866225336_1866366879/N1866366029_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1866225336_1866366879/N1866366029_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "eb1ddba6720b202ad2b57361e17906cb22972bb6c8b106c75dce5e96c0eec7f2",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -523,15 +531,19 @@
       "acquisition": "Download the pinned CISSCAL calibrated product.",
       "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1866225336_1866366879/N1866366029_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1866225336_1866366879/N1866366029_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "c417a0b6735446be7b6f360206816a0460c062f6ec9500d0f6e4799cb902a41c",
       "bytes": 3853,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -563,15 +575,19 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2110/data/1864498146_1864511329/N1864504671_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2110/data/1864498146_1864511329/N1864504671_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "f5719bd13edae4db8b7e60540702080f78990f7cc8e3cd4598ea16f44ad5d9be",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -596,15 +612,19 @@
       "acquisition": "Download the pinned CISSCAL calibrated product.",
       "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2110/data/1864498146_1864511329/N1864504671_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2110/data/1864498146_1864511329/N1864504671_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "5390a413e8ffbdb76ab8e8d183ba7b39b154ba7a68eb033bb9a98b025dadb968",
       "bytes": 3860,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -636,15 +656,19 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2110/data/1864498146_1864511329/N1864504186_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2110/data/1864498146_1864511329/N1864504186_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "168db88616145852557edd3e38c48497390bc9af4cf32fa649d423182e5895a3",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -669,15 +693,19 @@
       "acquisition": "Download the pinned CISSCAL calibrated product.",
       "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2110/data/1864498146_1864511329/N1864504186_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2110/data/1864498146_1864511329/N1864504186_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "a9ca2486aa0da9972af0d62e34582f6719e895a808a60f85596faaf0b0517c1e",
       "bytes": 3861,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -709,15 +737,19 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2100/data/1828077869_1828129423/N1828124037_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2100/data/1828077869_1828129423/N1828124037_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "9e7023b2e220dc7395945fcac09eea9e9d49d390f61b51ce57fd1d78f4fd17b4",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -742,15 +774,19 @@
       "acquisition": "Download the pinned CISSCAL calibrated product.",
       "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2100/data/1828077869_1828129423/N1828124037_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2100/data/1828077869_1828129423/N1828124037_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "0e5f2acfc3b9f4b8f27f16ce13ced44c669e4d4fc85f2d6c901d9decad8a7fe6",
       "bytes": 3843,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -782,15 +818,19 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2039/data/1575313792_1575487821/N1575363079_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2039/data/1575313792_1575487821/N1575363079_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "6433b25a8dcccc76637bffdb98caa77f9f46f90bd86e41200f7e65483957c620",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -815,15 +855,19 @@
       "acquisition": "Download the pinned CISSCAL calibrated product.",
       "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2039/data/1575313792_1575487821/N1575363079_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2039/data/1575313792_1575487821/N1575363079_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "c3adedf29c062fc081488671650b5c1476dc275c7053bb77c04d6aef0e3cb727",
       "bytes": 3831,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -847,7 +891,7 @@
       "sha256": "a27b62d60a74a7f77df3aee3b91daf1c94886a421ec9a6a0e1ae065eae3f3b33",
       "bytes": 5698,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -881,19 +925,19 @@
           "url": "/scenes/epimetheus/epimetheus-elevation-thumbnail.webp",
           "bytes": 6760,
           "sha256": "c340c1607ca4ac044247dd00682efb90965561caa04eac0f3da67d5f1acdd8ce",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/epimetheus/epimetheus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/epimetheus/epimetheus-elevation-surface@2x.webp",
           "bytes": 581466,
           "sha256": "d76eb406f0b7f47a6efdaeba9b35b2ec4a79e0873f90d98bdeee3451d44a3875",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -935,13 +979,13 @@
           "url": "/scenes/epimetheus/epimetheus-normal-thumbnail.webp",
           "bytes": 4184,
           "sha256": "c015a3fed83bfff4736d59d311d7e912887f0daf877fe31ca71331f04dda6bd7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/epimetheus/epimetheus-normal-surface@2x.webp",
           "bytes": 854942,
           "sha256": "3c580e07ba1b12aa4ea2ad9f530efd41a50add41888ef8eef37f919a5b416ae7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

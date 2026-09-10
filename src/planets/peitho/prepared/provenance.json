@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "peitho",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "9586fd3156698a4c8021a37ba6ad8868551a540f5412c7f3a6f06c049442488d",
       "bytes": 81655,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "b5ade93a76f27b1e1214d122b6949e7fcc038dced80f4f330be4798c8ad00c00",
       "bytes": 9104,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/peitho/peitho-elevation-thumbnail.webp",
           "bytes": 5262,
           "sha256": "b0634bdb4f9b9ed1b7682fc0b0cf54cdd6e327d8829153698a99ec965dcb2191",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/peitho/peitho-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/peitho/peitho-elevation-surface@2x.webp",
           "bytes": 298438,
           "sha256": "c63c404798888c6a058f3eb04de12bf1f123959d764e2caf9d023ba55fa35b13",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/peitho/peitho-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/peitho/peitho-shape-surface@2x.webp",
           "bytes": 199668,
           "sha256": "b8a77222e656f2900b97b9173ebbe0e5ee53b7a10e48c61255b06eaaa311a2f9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

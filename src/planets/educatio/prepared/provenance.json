@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "educatio",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "1aa7bf28a3514adb552d13c7061f7734b81e281b2d8e5a2f97958256ea2700f0",
       "bytes": 45933,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 9616,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/educatio/educatio-elevation-thumbnail.webp",
           "bytes": 4738,
           "sha256": "2a2bd40e3fd9b6cc72ab87b20447813a7be1be44f299d50dca265200e630bfef",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/educatio/educatio-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/educatio/educatio-elevation-surface@2x.webp",
           "bytes": 293944,
           "sha256": "c4124f6a4ac4b4833f6fa49471c52eaf4dd2b4d5e752eeff583436210b2343c2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/educatio/educatio-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/educatio/educatio-shape-surface@2x.webp",
           "bytes": 181068,
           "sha256": "f60060748a4ccde42529bad722a94ac161dd5dad6ae59cd362661ae3cb7aad2b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

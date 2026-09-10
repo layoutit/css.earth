@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "melpomene",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "fae676cee24081eaf0a64d460c09b13b848db90c68b2fc1df89b3ccf9c55b495",
       "bytes": 259579,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "bd9a3b2c2e0789d07ea2dc151408fb5ca6368117223613fb5094467ca2943edf",
       "bytes": 10004,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/melpomene/melpomene-elevation-thumbnail.webp",
           "bytes": 5378,
           "sha256": "71451e376286893fcb552e34e788af8c508f3dc1a28906647b38099597fb081c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/melpomene/melpomene-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/melpomene/melpomene-elevation-surface@2x.webp",
           "bytes": 318574,
           "sha256": "73a2604e041aa696a186aeaa54c22b39653b56305c428f19141db3337f29f357",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/melpomene/melpomene-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/melpomene/melpomene-shape-surface@2x.webp",
           "bytes": 226080,
           "sha256": "12f2cb1166507cd3c7f9e756169fadb785c5ac32eee84fa8ea80695fe2f554de",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

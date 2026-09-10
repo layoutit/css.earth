@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "tartaglia",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "ee1a402a083d8aa2ce1aad16d6efd9ad71641e82cf788c45c0b0c9b8fb171514",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 10595,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/tartaglia/tartaglia-elevation-thumbnail.webp",
           "bytes": 4644,
           "sha256": "e916232ed7221057ba0cdce0889899795cf01f209a53cff2ebc7cbedbfd03b6f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tartaglia/tartaglia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tartaglia/tartaglia-elevation-surface@2x.webp",
           "bytes": 264724,
           "sha256": "2f678b53c4481c2c1c997391c8784c745af493da58d84259a6fd6442b7c8981e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/tartaglia/tartaglia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tartaglia/tartaglia-shape-surface@2x.webp",
           "bytes": 203220,
           "sha256": "0ac22696a65c1a4c92861c24e2687c24e1af65e192af88ace646b4dec6bb5a8a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

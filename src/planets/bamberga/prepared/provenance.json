@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "bamberga",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "3d482651df43b25da8753a3eb4cd356664fbf365ddce2c88170d3013a81fcd38",
       "bytes": 539899,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "8495ac91c62b68b1f8fecc24aacce6d156b9600c30d0726d0564f425fb39aff6",
       "bytes": 10815,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/bamberga/bamberga-elevation-thumbnail.webp",
           "bytes": 5002,
           "sha256": "d003ccc1d55447c4c57e15391b60babce9b4f08647f2060476677c90bf8d1f5c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/bamberga/bamberga-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/bamberga/bamberga-elevation-surface@2x.webp",
           "bytes": 270080,
           "sha256": "1b3d34f14f6675e4921800b292256018c209c23b5ac50c697f7d45d31c879282",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/bamberga/bamberga-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/bamberga/bamberga-shape-surface@2x.webp",
           "bytes": 227066,
           "sha256": "8c07b8fb859c2667e9671df697e7297e84db54e5cd10e9af22280cc9a73fe370",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

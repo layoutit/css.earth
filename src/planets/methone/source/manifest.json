@@ -26,10 +26,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2074/data/1715959973_1716194018/N1716192103_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2074/data/1715959973_1716194018/N1716192103_1_CALIB.IMG"
+          }
+        ]
       }
     },
     {
@@ -50,10 +54,14 @@
         "cassini-frames"
       ],
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2074/data/1715959973_1716194018/N1716192103_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2074/data/1715959973_1716194018/N1716192103_1_CALIB.LBL"
+          }
+        ]
       }
     },
     {

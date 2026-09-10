@@ -1,6 +1,6 @@
 # Halley encounter mosaic evidence
 
-Validated runtime revision: `4c9ba7bb163aa2b87c8ff4030690513943cb2390`, after integrating main's PR106. Later changes add documentation and evidence only.
+Validated runtime revision: `4c9ba7bb163aa2b87c8ff4030690513943cb2390`, after integrating main's PR106. That revision predates the later spacecraft/missions integration from main (`310fb173f`). Its source projection, terrain, scene and runtime assets remain byte-identical after that integration; the recorded browser checks describe the earlier shared shell. The merge regenerates provenance in schema 2 and refreshes the spacecraft catalogue pins. The merge also passed [37 focused source, provenance and catalogue tests](merge-tests.log), [the full TypeScript checks](merge-typecheck.log), and [the Halley dataset-switching browser case](merge-conformance.json). Both comparison images were inspected on the published GitHub PR after repairing their embed URLs.
 
 | Check | Result |
 | --- | --- |

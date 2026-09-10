@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "adrastea",
   "basis": "recovered",
   "manifest": {
@@ -269,7 +269,7 @@
       "sha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73",
       "bytes": 135,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -294,7 +294,7 @@
       "sha256": "d9b3466827f7dd7ebe80fbc16885035f635257cadaaba8f6b43adc302732dc88",
       "bytes": 13447,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -311,7 +311,7 @@
       "sha256": "a35f062da2dbcbbc6bc9f939c03bcc3fe393d6d427f34dbe690cdbf8f7f8cb94",
       "bytes": 3932,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -349,13 +349,13 @@
           "url": "/scenes/adrastea/adrastea-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/adrastea/adrastea-model-surface@2x.webp",
           "bytes": 49466,
           "sha256": "1afa25a76c7da6c9c2bed59345bcb530a0a0f9ac9b19e6d21c1435da1c911f63",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

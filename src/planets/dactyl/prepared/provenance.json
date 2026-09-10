@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "dactyl",
   "basis": "recovered",
   "manifest": {
@@ -231,7 +231,7 @@
       "sha256": "ad79a5bea948b73c0f842a3609939da15914a0dbb1d88ecc8f371ffefe50c2b4",
       "bytes": 163,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -248,7 +248,7 @@
       "sha256": "06ab52cf7b5a8fd767b87d4f6f8e1c807b3199a982984fe35c6d81a788710aaa",
       "bytes": 3273,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -281,13 +281,13 @@
           "url": "/scenes/dactyl/dactyl-shape-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/dactyl/dactyl-shape-surface@2x.webp",
           "bytes": 53806,
           "sha256": "2e56e5dd6f8a78adf8602c84239a2ceb028916917e3b630aac864a584a1a1582",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "liberatrix",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "4142c7bbb6839eac603668cbe025516b0f70887c5d70202b39c2e0d2e954552a",
       "bytes": 129364,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "aa74582c1fab33b91ec704c2ed732b7ffe981fcb7dcedcfce20ea90b892fa595",
       "bytes": 10444,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/liberatrix/liberatrix-elevation-thumbnail.webp",
           "bytes": 5372,
           "sha256": "4154b22f892787d2a1ff7127f339a3fc4ca31d1663a13266ef3deb9feca22b06",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/liberatrix/liberatrix-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/liberatrix/liberatrix-elevation-surface@2x.webp",
           "bytes": 288282,
           "sha256": "f077a9552c5f4c5ea07b3f600ec1bc6c4563b0cce7ecc4eb799baa58b7f2cd11",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/liberatrix/liberatrix-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/liberatrix/liberatrix-shape-surface@2x.webp",
           "bytes": 214296,
           "sha256": "5c90c79409cff4b3bde9682ee8babb398d2dba339b7fe33da6ec3e92b0092fb0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

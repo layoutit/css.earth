@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "euphrosyne",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "7c99a8af18219166e1b4046dbbb879d83f289d8288e98b41d226c566f3a6a0d3",
       "bytes": 384379,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "d25ddb0bfabb65fe2bc9da5ab045d44a9cf563971ff00e10c915b81c71d900e0",
       "bytes": 9496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/euphrosyne/euphrosyne-elevation-thumbnail.webp",
           "bytes": 5366,
           "sha256": "03889a0a928e0dc5064ac5b101dc22e0fd10f877f3376c3ef3d7efc974b79ce8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/euphrosyne/euphrosyne-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/euphrosyne/euphrosyne-elevation-surface@2x.webp",
           "bytes": 290612,
           "sha256": "998f072bbbe74e71652b68969a4af0d9ad68e7780cdeffc1c01f9c2eda52be1f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/euphrosyne/euphrosyne-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/euphrosyne/euphrosyne-shape-surface@2x.webp",
           "bytes": 226420,
           "sha256": "e7f7e7fbd35220e6b2006d57879203960aeae4094a4b8cd8610f6abb11f1955f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

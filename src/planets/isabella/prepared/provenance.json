@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "isabella",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "80fd70c2bfa59866664269efb052469476bfd35078b8842e6c21cbee4c9b1108",
       "bytes": 82546,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "5657517b9d9790d8fa0c1f7386907c276e671b27a8a6a6a856e1c7a5542b9523",
       "bytes": 10664,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/isabella/isabella-elevation-thumbnail.webp",
           "bytes": 5318,
           "sha256": "2cd024ad0a4f6b0ecd11e555103e48a07101477a53f86f092ecf4bc48ab1c14c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/isabella/isabella-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/isabella/isabella-elevation-surface@2x.webp",
           "bytes": 283980,
           "sha256": "bc6a82562ace3fa71766d973268bbdc9e5869fe236e5010b1c66cd219d3d56a2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/isabella/isabella-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/isabella/isabella-shape-surface@2x.webp",
           "bytes": 223976,
           "sha256": "87f96452ccbf3347ae2e058e618606e9bb89358901bddcc7cdf14db4600e53e1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

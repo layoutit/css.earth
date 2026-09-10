@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "philagoria",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "d00a5edc3e2c3ccfd5fc8ec04d264eb5fc651bf5b4015258f7878aa48f1bae1d",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "3450e7812eadae7cf8b66e364d08f5e90d30ca24118e6e51c41b3c25f9bf8176",
       "bytes": 11781,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/philagoria/philagoria-elevation-thumbnail.webp",
           "bytes": 4978,
           "sha256": "f01cf6bda46f75dd532a4802360a036afc5a61ea6d0d0cf5119dfc433518d611",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/philagoria/philagoria-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/philagoria/philagoria-elevation-surface@2x.webp",
           "bytes": 293490,
           "sha256": "3aebafa0e8e35b6e7b37caa186fe4caec7768ce00027bb41b7642fcbe2c66e43",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/philagoria/philagoria-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/philagoria/philagoria-shape-surface@2x.webp",
           "bytes": 183704,
           "sha256": "18dcbf4fcd1c9e0db73cc7c1c0e9fdb817db138e2661d6c1f6e9ae88019a86e9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

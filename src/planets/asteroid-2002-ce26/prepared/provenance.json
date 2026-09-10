@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "asteroid-2002-ce26",
   "basis": "recovered",
   "manifest": {
@@ -327,7 +327,7 @@
       "sha256": "4b625ea6906aba4d5828836c44d733ca4ad8c2a501739dc74f305ef84bb42c12",
       "bytes": 67313,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "b787e46acb4a642fc4a20b4d9255eb64835a4710972d8feb001e65cdcb0dc0ba",
       "bytes": 13538,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-elevation-thumbnail.webp",
           "bytes": 6264,
           "sha256": "565ad07b9b2b9ab31f8350d7f717368f3f8f091c0e6c3b09998f1105aec251ba",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-elevation-surface@2x.webp",
           "bytes": 351038,
           "sha256": "ace0a02ce77c7b4275dfae29be347d454f90ea54bbe8c4d8d6e4e32e22efba5e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-shape-surface@2x.webp",
           "bytes": 221742,
           "sha256": "d92cbba755a433725a78e63633e56f612e0731d95acc627686e38c016295b12b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

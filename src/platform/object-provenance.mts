@@ -1,4 +1,6 @@
 import { isArray } from './is-array.mts';
+import { parseCapture } from './exploration-catalog.mts';
+import type { Capture } from './exploration-catalog.mts';
 export type ProvenanceJson = null | boolean | number | string | readonly ProvenanceJson[] | { readonly [key: string]: ProvenanceJson };
 export interface ProvenanceOperation { readonly url?: string; readonly [key: string]: ProvenanceJson | undefined; }
 export interface ProvenanceSource {
@@ -7,7 +9,7 @@ export interface ProvenanceSource {
   readonly dependencies: readonly string[]; readonly verification: string; readonly license?: string;
   readonly redistribution?: string; readonly sourceUrl?: string;
   readonly displayCredit?: string; readonly title?: string; readonly label?: string; readonly attributionGroup?: { readonly id: string };
-  readonly capture?: { readonly spacecraftIds: readonly string[]; readonly evidence: string };
+  readonly capture?: Capture;
   readonly acquisitionOperation?: ProvenanceOperation | null;
   readonly verificationOperations?: readonly ProvenanceOperation[];
 }
@@ -27,7 +29,7 @@ export interface ProvenanceDocument {
   readonly coverage: { readonly scope: string; readonly unresolved: readonly ProvenanceJson[] };
 }
 /** Portable, prepared source-to-product lineage. No file access or UI inference. */
-export const OBJECT_PROVENANCE_SCHEMA = 'cssearth-object-provenance@1';
+export const OBJECT_PROVENANCE_SCHEMA = 'cssearth-object-provenance@2';
 const digest = (value: unknown) => typeof value === 'string' && /^[a-f0-9]{64}$/u.test(value);
 const nonempty = (value: unknown): value is string => typeof value === 'string' && value.trim().length > 0;
 const unique = (values: readonly unknown[], label: string) => {
@@ -65,9 +67,12 @@ function sourceShape(value: unknown): value is ProvenanceSource {
     && typeof value.bytes === 'number' && strings(value.dependencies)
     && ['kind','license','redistribution','sourceUrl','displayCredit','title','label'].every(key => optionalString(value[key]))
     && (value.attributionGroup === undefined || record(value.attributionGroup) && typeof value.attributionGroup.id === 'string')
-    && (value.capture === undefined || record(value.capture) && strings(value.capture.spacecraftIds) && typeof value.capture.evidence === 'string')
+    && (value.capture === undefined || validCapture(value.capture))
     && (value.acquisitionOperation == null || operation(value.acquisitionOperation))
     && (value.verificationOperations === undefined || isArray(value.verificationOperations) && value.verificationOperations.every(operation));
+}
+function validCapture(value: unknown): value is Capture {
+  try { parseCapture(value); return true; } catch { return false; }
 }
 function recipeShape(value: unknown): value is ProvenanceRecipe {
   return record(value) && ['id','path','sha256'].every(key => typeof value[key] === 'string') && json(value.parameters);
@@ -110,12 +115,7 @@ export function validateObjectProvenance(input: unknown, objectId?: string): Pro
     if (![source.id, source.path, source.origin, source.credit, source.acquisition].every(nonempty)
         || !digest(source.sha256) || !Number.isSafeInteger(source.bytes) || source.bytes < 0)
       throw new TypeError(`Invalid provenance source: ${source.id}.`);
-    if (source.capture) {
-      const ids = source.capture.spacecraftIds;
-      if (!isArray(ids) || !ids.length || ids.some((id: string) => !/^[a-z][a-z0-9-]*$/u.test(id))
-          || !nonempty(source.capture.evidence)) throw new TypeError(`Invalid source capture: ${source.id}.`);
-      unique(ids, 'capture spacecraft');
-    }
+    if (source.capture) parseCapture(source.capture);
   }
   for (const recipe of value.recipes) {
     if (![recipe.id, recipe.path].every(nonempty) || !digest(recipe.sha256) || !recipe.parameters) throw new TypeError('Invalid provenance recipe.');

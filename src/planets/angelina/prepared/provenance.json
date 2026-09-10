@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "angelina",
   "basis": "recovered",
   "manifest": {
@@ -327,7 +327,7 @@
       "sha256": "407c69944a62497de88e485c514c9eb71ec90fb57d63e3dbd32fbad8953f7b47",
       "bytes": 81250,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "6b61126f25a3257199a18d2b19201d15783a2daed331f9a65e73956d4d4f4dee",
       "bytes": 8718,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/angelina/angelina-elevation-thumbnail.webp",
           "bytes": 5700,
           "sha256": "cb664453eae801d9e1931433d92655de64636a9bcae6f6c632b1caa22f285919",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/angelina/angelina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/angelina/angelina-elevation-surface@2x.webp",
           "bytes": 341138,
           "sha256": "522efb6dd3408c2b42e16958f87570fa45daa878579c1121e95e36d3a8537ac2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/angelina/angelina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/angelina/angelina-shape-surface@2x.webp",
           "bytes": 216842,
           "sha256": "07b93e7395d1d16eb80b18b6bb6b41a3049a451704a2729ca96c5fcc2a0542df",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

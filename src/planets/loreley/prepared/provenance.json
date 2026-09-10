@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "loreley",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "0da05739bf0a1b246d7930dbcc5e8d8a7198a16b02fb97ea8ff9d3f38703c9d6",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "298ebec6215c0a9ecb25dda6f94f4ef34e0c7049e2f478e61430793f6980c1fb",
       "bytes": 9070,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/loreley/loreley-elevation-thumbnail.webp",
           "bytes": 6112,
           "sha256": "4d6358501add844df181936f27c1fe21cf4646713c86d025130e7d00db22946f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/loreley/loreley-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/loreley/loreley-elevation-surface@2x.webp",
           "bytes": 340198,
           "sha256": "7c6315aee17c59dce2ab498784a55fd065d73c73ae852ac2e4033d6ad7e8d071",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/loreley/loreley-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/loreley/loreley-shape-surface@2x.webp",
           "bytes": 207384,
           "sha256": "f65254d68da63dc4e01c94733a04e1f3617c8e53399ac60fffa4a9cb55fe163f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

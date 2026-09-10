@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "moskva",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "76ada158146d485d5ca583742e60825d7cdf15f7d4febff30655d63234863503",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 8844,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/moskva/moskva-elevation-thumbnail.webp",
           "bytes": 5132,
           "sha256": "dd21a3302d903e7ae7b40a6531b562812594b682da8d21ff2a9d63b4d680ab4a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moskva/moskva-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moskva/moskva-elevation-surface@2x.webp",
           "bytes": 281352,
           "sha256": "8b0703f02e7eccd862223e06f9966fd3409c07b9f19b943b7a1e088b6de7312a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/moskva/moskva-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moskva/moskva-shape-surface@2x.webp",
           "bytes": 202348,
           "sha256": "cdc0a3757ffe955ee49c57275b4965bdcf2347d8edb4c8189666bbffaba76c5c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "artemis",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "94fc92d360a1f3a2717868f1d57a9198a413398e84683329b60707f2f5a10b9b",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "3184974f6143bf29af87dee1d60152976d4328025c53c9be934a78a15920cb44",
       "bytes": 9579,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/artemis/artemis-elevation-thumbnail.webp",
           "bytes": 5074,
           "sha256": "e3d6524e636bf5c3430d0969cffe8bfcac188424e553d712f40a50fdcc6e86bb",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/artemis/artemis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/artemis/artemis-elevation-surface@2x.webp",
           "bytes": 279928,
           "sha256": "8f8e06a6a31672e1b60028f9e9f4fde8d4191c4c26e34a7bb983043cecaea99f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/artemis/artemis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/artemis/artemis-shape-surface@2x.webp",
           "bytes": 206420,
           "sha256": "6d0ccec7f1e8dc60cd65a41b65d2ad93e90fe5798d31c3a6b35d7944ad864b38",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

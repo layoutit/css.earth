@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "ryugu",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ec2ddddead390e5f700eb7d3e5989ecc2005e5f560e1f291c774ba93c836fd2d"
+    "sha256": "bbb5057c47f9eacc6d3f824926d5daf80a5a87ca9e646f3112b6cbcb69d9293f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -380,15 +380,19 @@
       },
       "coverage": "JAXA’s mapped 548.9 nm reflectance from the 10 July 2018 BOX-A observations. The source grid is 0.2° per pixel and missing values are explicitly marked. This monochrome view uses the published corrected reflectance, with a display stretch; it does not reconstruct missing poles.",
       "capture": {
-        "spacecraftIds": [
-          "hayabusa2"
-        ],
-        "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/hyb2_onc_20180710_BOX-A_l3em_v06.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hayabusa2",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/hyb2_onc_20180710_BOX-A_l3em_v06.tif",
+            "missionId": "hayabusa2"
+          }
+        ]
       },
       "sha256": "b01f45512c7028865cc656712d8982f837a29bcbea07df6460f4d7acd0c1c969",
       "bytes": 12965947,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -419,15 +423,19 @@
       },
       "coverage": "Released global model; detailed geometry is simplified for the display.",
       "capture": {
-        "spacecraftIds": [
-          "hayabusa2"
-        ],
-        "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hayabusa2",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds",
+            "missionId": "hayabusa2"
+          }
+        ]
       },
       "sha256": "da62f1d56deab22343b301d7972a1a8a14867c1714c626411617698a78e32595",
       "bytes": 3150352,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -453,15 +461,19 @@
       },
       "coverage": "The mapping team’s published color composite assigns the p, v and ul filters to red, green and blue. It includes near-infrared light and is not natural color. Global brightness and contrast were matched across observations, so these mosaic values are unsuitable for quantitative photometry. Local residual shadows remain.",
       "capture": {
-        "spacecraftIds": [
-          "hayabusa2"
-        ],
-        "evidence": "https://doi.org/10.7910/DVN/WW3IH0"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hayabusa2",
+            "evidence": "https://doi.org/10.7910/DVN/WW3IH0",
+            "missionId": "hayabusa2"
+          }
+        ]
       },
       "sha256": "984780a02a343e13873e76030b56dd9f34fbb476baf983f52af6ac12b4741974",
       "bytes": 9557231,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "zip-member",
         "groups": [
@@ -489,7 +501,7 @@
       "sha256": "876031d92196120e35c87565e50d927027c02960840bad06681bc7a6ccfa1ce1",
       "bytes": 9289,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -539,13 +551,13 @@
           "url": "/scenes/ryugu/ryugu-normal-thumbnail.webp",
           "bytes": 3246,
           "sha256": "8d3fd455c4117bc51b2cc022229b7544f80d41b26d311db27752d52f2894d1e5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ryugu/ryugu-normal-surface@2x.webp",
           "bytes": 719664,
           "sha256": "79502ba6edea06184a5e384b869861b7d82326155179c16dc36fb0699e4ffb52",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -582,13 +594,13 @@
           "url": "/scenes/ryugu/ryugu-enhanced-thumbnail.webp",
           "bytes": 6194,
           "sha256": "1438099ab967c8e2ae9687620752424bce56ff9b8f830bfa190ee2ee84c75247",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ryugu/ryugu-enhanced-surface@2x.webp",
           "bytes": 2916650,
           "sha256": "0b9ea2d81e0ab8a1b9104f833f4af9dedf5e26296bf02ae9472249ba6dfcbf23",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -620,19 +632,19 @@
           "url": "/scenes/ryugu/ryugu-elevation-thumbnail.webp",
           "bytes": 8348,
           "sha256": "b8e016ee261c5d3c576c84802d7d06eb4245d9c1e8c91a84de9df9dca1ca7676",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ryugu/ryugu-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ryugu/ryugu-elevation-surface@2x.webp",
           "bytes": 1295984,
           "sha256": "1ee247140b3f768061042fbaf4ede07849181451c6a29892f32e9aeb827f753f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

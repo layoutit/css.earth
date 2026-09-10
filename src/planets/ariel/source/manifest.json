@@ -44,10 +44,14 @@
       "falseColor": false,
       "coverage": "Voyager 2 mosaic with source photometric correction. Detail varies and local shadows, seams, and processing marks remain. Gray grid marks missing observations; this is not a true albedo map.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://repository.hou.usra.edu/bitstreams/fcdd781c-765e-4686-928f-257395918dc8/download"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "missionId": "voyager-2",
+            "evidence": "https://repository.hou.usra.edu/bitstreams/fcdd781c-765e-4686-928f-257395918dc8/download"
+          }
+        ]
       }
     },
     {
@@ -92,10 +96,14 @@
       "falseColor": true,
       "coverage": "Stereo, photoclinometry, and limb terrain model, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 1 km grid spacing is not uniform effective resolution.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://repository.hou.usra.edu/bitstreams/55639bf1-6c1c-4824-8634-d4a4500fb095/download"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "missionId": "voyager-2",
+            "evidence": "https://repository.hou.usra.edu/bitstreams/55639bf1-6c1c-4824-8634-d4a4500fb095/download"
+          }
+        ]
       }
     },
     {

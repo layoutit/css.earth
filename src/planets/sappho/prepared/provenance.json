@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "sappho",
   "basis": "recovered",
   "manifest": {
@@ -327,7 +327,7 @@
       "sha256": "7411239fff379cfd4fb0d9ad54651ea58f077056e999fdb528188903e290ad0e",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "d35bc072f9f6b8b3e4d88ddc6276cb4b6b3c98b3e18a92248044111b44dd5611",
       "bytes": 8919,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/sappho/sappho-elevation-thumbnail.webp",
           "bytes": 4868,
           "sha256": "5b55f73e9a9314762caa2572284599859a5b749c0eb01bf0351163a5671f2127",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/sappho/sappho-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/sappho/sappho-elevation-surface@2x.webp",
           "bytes": 266666,
           "sha256": "32b14af3c312a09d74bd7054f2473e9b74a16f4625f6f4086555568bb7697ff4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/sappho/sappho-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/sappho/sappho-shape-surface@2x.webp",
           "bytes": 183768,
           "sha256": "b07a588f71e116c57c6ddfc54b3ad05c578904d3e4e37a0f36b93e524007f89e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

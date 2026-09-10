@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "hydra",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8fae2b670b2014e120d1058324af805ef790895250911ee1fde9f933f8960f18"
+    "sha256": "854784256392ef2218834da58fad39ea054c4796fe635168e118b70f8ed8ed60"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -268,7 +268,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -294,15 +294,19 @@
         "referenceRadiusMeters": 18114.55731342771
       },
       "capture": {
-        "spacecraftIds": [
-          "new-horizons"
-        ],
-        "evidence": "https://ndownloader.figshare.com/files/24176603"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "new-horizons",
+            "evidence": "https://ndownloader.figshare.com/files/24176603",
+            "missionId": "new-horizons"
+          }
+        ]
       },
       "sha256": "8bbfce67597caf2bfef95e3f526f66cac7d967e9b425cb183a1088fc0e97d163",
       "bytes": 3043916,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -326,7 +330,7 @@
       "sha256": "e2505a65631f159607e19fb11daf7591d46a2561bf1c1d262389893df5df46bd",
       "bytes": 3883,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -364,13 +368,13 @@
           "url": "/scenes/hydra/hydra-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hydra/hydra-model-surface@2x.webp",
           "bytes": 71382,
           "sha256": "a44dab31a19630cf501154fcfac5c659aa9ca5fe20da3e214dc040d58593a5ba",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

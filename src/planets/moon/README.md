@@ -200,3 +200,7 @@ Exact bytes, coordinates and validity rules are in the intake plans and receipts
 See the [mapped-science conversion method](../../../tools/objects/acquisition/MAPPED-SCIENCE.md).
 
 </details>
+
+## Catalogue attribution
+
+The GRAIL crustal-thickness print is attributed to the GRAIL mission. GRAIL-A (Ebb) and GRAIL-B (Flow) have separate vehicle records and are mission participants. The preserved print credit does not itself establish separate vehicle-level contribution edges. LRO-derived datasets retain their explicit LRO spacecraft/mission attribution. See the [shared catalogue contract](../../../docs/architecture/exploration-catalog.md) and this body’s [source manifest](source/manifest.json). Dataset bytes and rendering are unchanged by this metadata migration.

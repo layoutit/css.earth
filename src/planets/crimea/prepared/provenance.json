@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "crimea",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "8facba4b82f8c0b8a07506e24100ae6c721bb21661d113b7df51b6f9fd6d0117",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 9087,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/crimea/crimea-elevation-thumbnail.webp",
           "bytes": 4838,
           "sha256": "5866cba328e98a92636fb0f64733bc812fb9d564243d85da203a6e0e4258de4a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/crimea/crimea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/crimea/crimea-elevation-surface@2x.webp",
           "bytes": 285008,
           "sha256": "08b001a8a7aec202b067eaec9cdaf7dfde6f94f775565927e9c5f4459d68e4d9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/crimea/crimea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/crimea/crimea-shape-surface@2x.webp",
           "bytes": 191116,
           "sha256": "26c269753c94d2fb4370d07c49f1064a909106ea532d719c6ff5277cc6927e8c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

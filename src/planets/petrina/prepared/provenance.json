@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "petrina",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "1189e6d6480532a0b3bd0dc2b18f9663f4e0154145640f0638bd5e6348033632",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 8662,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/petrina/petrina-elevation-thumbnail.webp",
           "bytes": 5506,
           "sha256": "69529a35362dbcfaf75be07e4cddca8f70ccc77e18afe778f588d8ec3f9b6d9d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/petrina/petrina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/petrina/petrina-elevation-surface@2x.webp",
           "bytes": 308346,
           "sha256": "3a196b12e3bc9f50e35b47132a07f0d8f27756b90baba4be32ffb5f5e5665a91",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/petrina/petrina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/petrina/petrina-shape-surface@2x.webp",
           "bytes": 216980,
           "sha256": "ba8f53bf8c4052e3841c9640364a96c0ade7d6385b23f3b322973b79d4c48647",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

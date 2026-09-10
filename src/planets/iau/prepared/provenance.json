@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "iau",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "2ca32a686baf5562f447d268d0f7e7debeb9244b60871fb49dd6c70eb085aca7",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 6191,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/iau/iau-elevation-thumbnail.webp",
           "bytes": 4600,
           "sha256": "a9ccda53db0e7c93dab1d810dda35890787c921ef5c778782324d18f04308cdd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iau/iau-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iau/iau-elevation-surface@2x.webp",
           "bytes": 275110,
           "sha256": "73df795ca062c331dfe6b25cedc10b4ff4ac7fb7b860df33671e0fdf9af11302",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/iau/iau-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iau/iau-shape-surface@2x.webp",
           "bytes": 188790,
           "sha256": "cd2cca8cc2bb24518e5f5ba093bb94cc3486cd896bad12e33a4fa8c490daee82",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

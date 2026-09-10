@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "phaethon",
   "basis": "recovered",
   "manifest": {
@@ -327,7 +327,7 @@
       "sha256": "c800be46f47775bd0d1d777265503c2dd20db422a3a41b5c29aa5ae179ffb948",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "634e10a736af743818dfe783529407f35db7b8b5595d8171e2e2e19137601101",
       "bytes": 8959,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/phaethon/phaethon-elevation-thumbnail.webp",
           "bytes": 5726,
           "sha256": "35fc592cf7808f7b8f8c43fe8733c2dbd5bdb67b1541664e691fa3d4585352a0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/phaethon/phaethon-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/phaethon/phaethon-elevation-surface@2x.webp",
           "bytes": 339952,
           "sha256": "caf2915fb199a34eb703be5b07da18c9b3aa453c278ea414574ce9e38fe4dd94",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/phaethon/phaethon-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/phaethon/phaethon-shape-surface@2x.webp",
           "bytes": 230964,
           "sha256": "a814d025cfef8f33e915bc80076a20c3aa375b816af132e4e433413ca8f4a848",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

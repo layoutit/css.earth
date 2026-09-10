@@ -44,10 +44,14 @@
       "expectedBytes": 527072,
       "expectedSha256": "44a3a6752ce6bd34a4796485144429dc3d7cd9d2c7a6409636348f30876c95df",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243ida.tab"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243ida.tab"
+          }
+        ]
       }
     },
     {
@@ -77,10 +81,14 @@
       "expectedBytes": 3179520,
       "expectedSha256": "f54c5cb55c6b6577dcfa64befa50367c3d3a6e0e75be6c2405495678a09559d7",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243idam.fit"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243idam.fit"
+          }
+        ]
       }
     },
     {

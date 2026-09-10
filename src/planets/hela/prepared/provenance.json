@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "hela",
   "basis": "recovered",
   "manifest": {
@@ -355,7 +355,7 @@
       "sha256": "722e4c9fad0c1b885eca9329149668e8397b4380ff0c96100c014c03fad8d77a",
       "bytes": 128392,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -380,7 +380,7 @@
       "sha256": "581d2b740810991eb06e547c11122795ed937fe4ee70b26fe264c45cbebe84d5",
       "bytes": 8271,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -413,19 +413,19 @@
           "url": "/scenes/hela/hela-elevation-thumbnail.webp",
           "bytes": 4614,
           "sha256": "de54c42dd7605979ca7ee3aff1049f45660abc5ee94b309fde636f1f1a24e1db",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hela/hela-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hela/hela-elevation-surface@2x.webp",
           "bytes": 290106,
           "sha256": "5eafab36e9370b715d37e2fd86e37e60494a4ca0243dfbc71597538c39ba544c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -457,13 +457,13 @@
           "url": "/scenes/hela/hela-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hela/hela-shape-surface@2x.webp",
           "bytes": 185374,
           "sha256": "689746603b7869ca546ba813dd682f91bb5af5c129264fb514f58a7e40be8c7f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

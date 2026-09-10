@@ -38,10 +38,14 @@
       "coverage": "Published Cassini mosaic/model. Exact PDS missing constant and floating-point special values are excluded; observed zero values remain valid.",
       "units": "Published display DN",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif"
+          }
+        ]
       }
     },
     {
@@ -80,10 +84,14 @@
       "coverage": "Published Cassini mosaic/model. Exact PDS missing constant and floating-point special values are excluded; observed zero values remain valid.",
       "units": "km above the Thomas et al. (2016) reference ellipsoid: 256.2 × 251.4 × 248.6 km.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_DEM_global_200m_schenk2024.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_DEM_global_200m_schenk2024.tif"
+          }
+        ]
       }
     },
     {

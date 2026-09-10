@@ -25,6 +25,11 @@ For contribution steps, use the [body contributor guide](../src/planets/README.m
 [celestial skill](../.agents/skills/celestial-skill/SKILL.md) points agents to the
 same workflow and implementation.
 
+## Proposals under discussion
+
+- [Missions, spacecraft and dataset attribution](architecture/exploration-catalog.md) — catalogue ownership, capture migration, preparation and dataset navigation.
+- [Spacecraft and individual mission catalogues](architecture/spacecraft-missions-proposal.md)
+
 ## Where work belongs
 
 Keep maintained Markdown guides here and their illustrations in `images/`.

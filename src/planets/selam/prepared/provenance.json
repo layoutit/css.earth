@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "selam",
   "basis": "recovered",
   "manifest": {
@@ -225,7 +225,7 @@
       "sha256": "7b5a16b99d453beddac8a2c98113f020732b1a9fbfd7299855a4a7ac4f920409",
       "bytes": 316,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -242,7 +242,7 @@
       "sha256": "8ed02b573b2a405fa64a0db58dc7ccaae1a630caae4f847a29903837892c4354",
       "bytes": 3229,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -275,13 +275,13 @@
           "url": "/scenes/selam/selam-shape-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/selam/selam-shape-surface@2x.webp",
           "bytes": 85782,
           "sha256": "7dc35b640776a076939f24a34a5233082c0bd4db9009482b9506fd9cc981bf11",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

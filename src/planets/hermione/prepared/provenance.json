@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "hermione",
   "basis": "recovered",
   "manifest": {
@@ -327,7 +327,7 @@
       "sha256": "32071aa3e5dc9787edcf17b8f37bd65962df8357a75bcb76b2ea0cb2bbb74f7c",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "c9ab3237218bf662af60707cd721db6d83423485855a52c06a2ee8615e37251e",
       "bytes": 8487,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/hermione/hermione-elevation-thumbnail.webp",
           "bytes": 4860,
           "sha256": "3c05dfd2e4360c27dc8ac9d15eacfffd08ef6d8f1a1e78669bc32dc6fa7fb31e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hermione/hermione-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hermione/hermione-elevation-surface@2x.webp",
           "bytes": 265422,
           "sha256": "afa12b4dba9c9ed384ddd705ac4b26ccd14bb4fe59e8c4565f0903eb3ef33cc0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/hermione/hermione-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hermione/hermione-shape-surface@2x.webp",
           "bytes": 196418,
           "sha256": "4b31d6cdb3bae5c18774f4223ac8c985deed297c36a27ad566025725e310f34d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

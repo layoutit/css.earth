@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "polydeuces",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f199a26ccc2d090f2a47aa205f21d5ca2833e92e84441bd2edba94588546d241"
+    "sha256": "a8db86f6e29cbe2924edcf888d425d5b761e1a1d81716f8eb5aaa9f04b9eebb5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -286,15 +286,19 @@
       "label": "Monochrome",
       "falseColor": false,
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "30e586a1594776e581f559be522b2a93643753ad2c5a909350e723f1cd7396c1",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -324,15 +328,19 @@
         "referenceRadiusMeters": 1525.973578806757
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "e97f2e076e4d3e41d9197c51ad4c52ad08f18165d2185404440a5e30914e5555",
       "bytes": 3858,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -364,7 +372,7 @@
       "sha256": "529125f91d71589dda0a4ae68991fc1dace4448dd3bf768bcb13015d19fd053b",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -381,7 +389,7 @@
       "sha256": "f1d7ece683cb3cfccf8b51cf05521e4bf4cf955049f09fb395f60161b83534bb",
       "bytes": 3659,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -416,13 +424,13 @@
           "url": "/scenes/polydeuces/polydeuces-normal-thumbnail.webp",
           "bytes": 1240,
           "sha256": "4da59854667e11fbd32419149309e6af1a3295717cf9452cfb5e90ee06f85bef",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/polydeuces/polydeuces-normal-surface@2x.webp",
           "bytes": 65250,
           "sha256": "83e435f20b47d081d9c815623e430602cae06189f0fcc5899603a99e414186c7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

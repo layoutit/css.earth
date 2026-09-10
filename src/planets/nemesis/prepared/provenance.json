@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "nemesis",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "901457d4b545e16eb6fa7c3094c9ba54961fbc3554628df147d836d0500cac7c",
       "bytes": 328699,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "e8b6c93472c4eddd711f64e288ce303fe94a08591d3a3f99effcb2fc4b85d4ab",
       "bytes": 8887,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/nemesis/nemesis-elevation-thumbnail.webp",
           "bytes": 5830,
           "sha256": "48f7c4d716113a42016037419b1bb48130b1ab59e52b291b53f3d422ca730f5b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/nemesis/nemesis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/nemesis/nemesis-elevation-surface@2x.webp",
           "bytes": 320354,
           "sha256": "e4568fbf6d9053ae5182368199a7a6bf13d06df80fa227ec70304ad874f08c58",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/nemesis/nemesis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/nemesis/nemesis-shape-surface@2x.webp",
           "bytes": 226724,
           "sha256": "79d0a3635b468e5350bae1670bee5c3e5969856cfbfeb2db953772c9334fe64a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

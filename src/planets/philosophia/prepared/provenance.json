@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "philosophia",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "e21f6191a0e78785b81cf603e3e0f86281aca58b705fc1cadfebb5a043afef6f",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "3cffed9b75f3b22374720d925ebddff2346d0fd1120582d7bdaeab8930b52ae5",
       "bytes": 11540,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/philosophia/philosophia-elevation-thumbnail.webp",
           "bytes": 5364,
           "sha256": "fbe96ce78e3d340bde803f92602a3f3b0642e815d7bea79a9c30531d59bc4a3e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/philosophia/philosophia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/philosophia/philosophia-elevation-surface@2x.webp",
           "bytes": 258184,
           "sha256": "827e280d842b75c1c6c6d3396c3cd35efc59876c4adfce8ed41b81130e02ad08",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/philosophia/philosophia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/philosophia/philosophia-shape-surface@2x.webp",
           "bytes": 222580,
           "sha256": "1f02b12079e412751c963988f1efa8eda4b000ecfe44910d835e0a819f1ac4bc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

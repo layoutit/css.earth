@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "rhodope",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "dae8593e45bf9983934225c5d78355e71944cbfb2c023b762170ca7683b1f441",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "9d3907c1ca2f433e94b34c754933f0ec1ebe79438431317461d82d8ab9d0733e",
       "bytes": 10473,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/rhodope/rhodope-elevation-thumbnail.webp",
           "bytes": 4866,
           "sha256": "93365d63f7507f0b9b31b9053921c2dedc0db8049b39f2470690f5392a3fa3ea",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/rhodope/rhodope-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/rhodope/rhodope-elevation-surface@2x.webp",
           "bytes": 248858,
           "sha256": "de6b4196c143304c04ee8e95781f8e4209b68297748847137c6f2254af32a59d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/rhodope/rhodope-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/rhodope/rhodope-shape-surface@2x.webp",
           "bytes": 210714,
           "sha256": "cfbdf07329e917f68b5de32ecf592d8e7d6ef4af36149c2345f227677b8687eb",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

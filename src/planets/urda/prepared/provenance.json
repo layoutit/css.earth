@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "urda",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "3dec127404347426e9b9f9cdcf8449c1c078b91e7e2f14f0d7fed7a4b6320dc4",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "51839ea5a86a89b73455bf83600e9354be76433421eef5d6c1862abf5e214fbe",
       "bytes": 8549,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/urda/urda-elevation-thumbnail.webp",
           "bytes": 6156,
           "sha256": "86447fd18e8ff1dfcc175e572f2364461bda3ed81d37ece0faad98abc80354e3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/urda/urda-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/urda/urda-elevation-surface@2x.webp",
           "bytes": 309340,
           "sha256": "52377fa0a2ea3df5c45f2562961c689895044780a08f0b8ae4663db4b159a01d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/urda/urda-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/urda/urda-shape-surface@2x.webp",
           "bytes": 219726,
           "sha256": "9611a4dac46f55d321242b55cf3efeb9e33d2feebc53bbfc4d0f3d7222dd3f53",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

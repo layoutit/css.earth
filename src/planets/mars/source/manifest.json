@@ -131,10 +131,14 @@
       ],
       "expectedBytes": 36708552,
       "capture": {
-        "spacecraftIds": [
-          "viking"
-        ],
-        "evidence": "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg"
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Viking orbiters",
+            "evidence": "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg",
+            "reason": "The preserved source credits Viking collectively and does not identify which individual orbiter supplied these observations."
+          }
+        ]
       }
     },
     {
@@ -153,10 +157,14 @@
       "title": "MOLA global color shaded relief",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_global_color_shaded_relief_463m",
       "capture": {
-        "spacecraftIds": [
-          "mars-global-surveyor"
-        ],
-        "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "mars-global-surveyor",
+            "missionId": "mars-global-surveyor",
+            "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}"
+          }
+        ]
       }
     },
     {
@@ -175,10 +183,14 @@
       "title": "THEMIS daytime infrared mosaic",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_odyssey_themis_ir_day_global_mosaic_100m_v12",
       "capture": {
-        "spacecraftIds": [
-          "odyssey"
-        ],
-        "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "odyssey",
+            "missionId": "odyssey",
+            "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}"
+          }
+        ]
       }
     },
     {

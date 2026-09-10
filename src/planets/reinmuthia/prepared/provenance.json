@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "reinmuthia",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "50276c546e6204efae333bb272a73d20881e5c435aa9d864ea4e348138a545bf",
       "bytes": 82384,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 10201,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/reinmuthia/reinmuthia-elevation-thumbnail.webp",
           "bytes": 4586,
           "sha256": "3feeb38deb7b34ac869d9c26af058eb3230838b2af356c5bea632bd0ca844be6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/reinmuthia/reinmuthia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/reinmuthia/reinmuthia-elevation-surface@2x.webp",
           "bytes": 303804,
           "sha256": "4c11a810d9569f0cb0e1d7b7c3000d910430b06377a305a6cc347f6ce23a2baf",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/reinmuthia/reinmuthia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/reinmuthia/reinmuthia-shape-surface@2x.webp",
           "bytes": 177876,
           "sha256": "95561427ff43efafe641eaf8b8fbee601b4d465d4648ff0534b25bd64bb1b4d8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

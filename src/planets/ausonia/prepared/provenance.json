@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "ausonia",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "aa9daa8b781ee63a11e7a9efe3519ced4c1582ba90c9be3fd366ebaa6e177e76",
       "bytes": 46743,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "7e1ffb27c4d661e7a9197d8d2d12f7861cd76de6dc5944eaf9f47ce65ef7820f",
       "bytes": 9771,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/ausonia/ausonia-elevation-thumbnail.webp",
           "bytes": 5032,
           "sha256": "98b4d06a2f68538b69ed024100f883d98af4ab7005d2dcba30114bee2a69fe22",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ausonia/ausonia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ausonia/ausonia-elevation-surface@2x.webp",
           "bytes": 270646,
           "sha256": "ea4492153dd564225601af6aad81a0386cd1fbda90c2c13049d00d76b83e89bc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/ausonia/ausonia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ausonia/ausonia-shape-surface@2x.webp",
           "bytes": 209004,
           "sha256": "cdf2690d3b4a043a6a3280c35171930f59d0ed1001087b10854657abc36d336d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

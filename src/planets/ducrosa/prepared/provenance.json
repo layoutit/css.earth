@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "ducrosa",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "7ba02ff5a7a468e10461083f8b0fbc9bb54d6ac6cfc6c1ac14f7acf2445f24fa",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 9505,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/ducrosa/ducrosa-elevation-thumbnail.webp",
           "bytes": 5470,
           "sha256": "00adbb4d6f5551fcdff2998478d380f19abd91f0ca52e407f58643229a43e6bc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ducrosa/ducrosa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ducrosa/ducrosa-elevation-surface@2x.webp",
           "bytes": 287452,
           "sha256": "03b9de61aece456a964b3dd9809f16932bf322a267330b1c0a66daac6ada97b9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/ducrosa/ducrosa-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ducrosa/ducrosa-shape-surface@2x.webp",
           "bytes": 216974,
           "sha256": "0338a6c65fdda789f58d4102748e877c361372fe2f4f51da6777a4e328202388",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

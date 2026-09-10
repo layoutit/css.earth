@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "lucina",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "667acd4065c0ea2b9930418669bc923020620d6bb64268b432a4f60cd2daa19c",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "6151da319a5001ee50ac3d99c35ccfcda8fade393dc489c5c007716120de8174",
       "bytes": 8997,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/lucina/lucina-elevation-thumbnail.webp",
           "bytes": 5834,
           "sha256": "a3222691b381851c60718a8045f1d89cdb1961df505fa8b7c2977fd2406d632d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lucina/lucina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lucina/lucina-elevation-surface@2x.webp",
           "bytes": 318976,
           "sha256": "a992b3fb173bc71b7a858b0080e967ad21f289db4c55f86b4dc72bbbf8cc3a1a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/lucina/lucina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lucina/lucina-shape-surface@2x.webp",
           "bytes": 209104,
           "sha256": "0f84ae8ae65d199aab4ec59fcbc54200bd4a54289a2b1d20314de541074956a1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

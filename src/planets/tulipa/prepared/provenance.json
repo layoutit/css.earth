@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "tulipa",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "e9ca02b70409de00bfcf17b56680e573a8f3840e5e4a0a1446ae83c842206c55",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 7856,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/tulipa/tulipa-elevation-thumbnail.webp",
           "bytes": 6516,
           "sha256": "45be12b4c7eeb8723cfdcd3ca77bce74bf941f74ca7c6726a36500b55a1905db",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tulipa/tulipa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tulipa/tulipa-elevation-surface@2x.webp",
           "bytes": 325920,
           "sha256": "7fdb53a6fe92e241b3b196500ab2dc6e2e70582a02a9a4ffe484c9a0ff20fc32",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/tulipa/tulipa-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tulipa/tulipa-shape-surface@2x.webp",
           "bytes": 229270,
           "sha256": "2e57360472da90bcbea1ad9e4d9407ff808a7b20af0d6e69ea84019b8192412d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
