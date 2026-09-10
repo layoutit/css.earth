@@ -3,7 +3,7 @@
 **Status:** Implemented. The maintained architecture and authoring rules are in
 [Missions, spacecraft and dataset attribution](exploration-catalog.md).
 
-The [accepted proposal, including the review revisions](https://github.com/layoutit/cssEarth/blob/b86fc245ee539da753c53f5b7c04b84a439041f2/docs/architecture/spacecraft-missions-proposal.md)
+The [accepted proposal, including the review revisions](https://github.com/layoutit/cssEarth/blob/5d64c923f7d2cd3bb4342dd9cd226b605e00327c/docs/architecture/spacecraft-missions-proposal.md)
 is preserved at its implementation-source commit. It examined the earlier
 `16774548b140b45e1f8cf50e21b9671055e0823f` baseline. Its acceptance table describes
 the intended checks, not test results.

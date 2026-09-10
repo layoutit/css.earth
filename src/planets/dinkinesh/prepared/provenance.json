@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "dinkinesh",
   "basis": "recovered",
   "manifest": {
@@ -231,7 +231,7 @@
       "sha256": "fb25e4125e5743c6d8599986dc966acefa775c69e5ae30bed840ed90eb2fd04c",
       "bytes": 8490675,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -248,7 +248,7 @@
       "sha256": "600f7fa7918f799141a098e023a1af66d461e8b76c7bc3550f7b7dda25563f49",
       "bytes": 3579,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -281,13 +281,13 @@
           "url": "/scenes/dinkinesh/dinkinesh-shape-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/dinkinesh/dinkinesh-shape-surface@2x.webp",
           "bytes": 98238,
           "sha256": "d5968fdbef52eea2f5ab8fccb6a81cb2cd56818a1009216770d8ca1fcf62265c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
