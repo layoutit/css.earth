@@ -65,7 +65,7 @@ test('approximate orbit cues stay on retained groups through selection and publi
   layer.selectObject('mercury');
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
   expect(group.dataset.contextPlacement).toBe('approximate');
-  expect(find(root, 'contextLabel', 'mercury').textContent).toBe('Mercury · Approx.');
+  expect(find(root, 'contextLabel', 'mercury').textContent).toBe('Mercury (approx)');
   expect(find(root, 'contextGroup', 'venus').dataset.contextPlacement).toBeUndefined();
   expect(all(root).length).toBe(count);
   layer.destroy();

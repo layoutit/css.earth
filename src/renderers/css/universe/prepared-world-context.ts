@@ -343,7 +343,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites, request
     indicator.appendChild(anchorCorners);
     const label = host.ownerDocument.createElement('span');
     label.dataset.contextLabel = body.id;
-    label.textContent = approximate ? `${body.name} · Approx.` : body.name;
+    label.textContent = approximate ? `${body.name} (approx)` : body.name;
     if (approximate) label.title = `${body.name} · Approximate orbital placement`;
     label.style.cssText = 'position:absolute;left:50%;top:50%;white-space:nowrap;visibility:hidden';
     label.style.opacity = '0';

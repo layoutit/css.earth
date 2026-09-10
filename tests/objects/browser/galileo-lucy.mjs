@@ -38,7 +38,7 @@ try {
         dashColors: [...new Set([...group.querySelectorAll('.context-orbit s:nth-child(odd)')].map(segment => getComputedStyle(segment).backgroundColor))] };
     });
     assert.equal(cue.placement, 'approximate');
-    assert.match(cue.label, /Approx\./);
+    assert.match(cue.label, /\(approx\)/);
     assert.deepEqual(cue.gapColors, ['rgba(0, 0, 0, 0)']);
     assert(cue.dashColors.every(color => color !== 'rgba(0, 0, 0, 0)'));
     assert.equal(cue.indicatorRadius, '50%');
