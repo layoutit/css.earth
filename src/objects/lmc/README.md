@@ -28,14 +28,17 @@ All three use saved cloud attenuation 1 on each axis, cutoff 0, softness 0.25, s
 
 `source/lenses.json` pins exact reconstruction IDs and display choices. `source/lenses/<image>/` retains each result, processing provenance, star catalogue and selected parts. `source/lens-manifest.json` pins delivery bytes. The previous SMASH source image, recipe and provenance remain as historical inputs; the old prepared image-layer bank is superseded.
 
-From a clean checkout, restore the pinned native inputs and completed reconstruction cache described in [the lab workflow](../../../labs/nebula/docs/workflows.md), then:
+From a clean checkout with Node 22, pnpm and Python 3.9–3.12:
 
 ```sh
 pnpm install --frozen-lockfile
-node --experimental-strip-types labs/nebula/src/run.ts promote-volume-lenses src/objects/lmc/source/lenses.json .local/lmc-promoted
+pnpm lab:nebula:bake
+pnpm dev
 ```
 
-Native originals and completed lab cache are deliberately local and are not fetched by that command. Missing pinned inputs fail rather than producing substitutes. Verify the staged manifest and fixed-camera views before replacing the checked-in bank.
+The bake acquires hash-pinned originals and the NOX model, prepares its Python environment, and recreates star removal, density colors and catalogue placement from saved settings. No previous processing cache is required. All 432 app slice WebPs are ignored generated outputs; the bake verifies every texture against the accepted manifest before restoring it locally. Descriptors, settings and provenance remain versioned. See [baking](../../../labs/nebula/docs/baking.md) for dependencies, stages and cache recovery.
+
+App development/build and shell tests run `pnpm prepare:nebulae` automatically: a complete verified delivery is reused; missing textures trigger the bake. This does not publish assets or alter the accepted geometry/material metadata.
 
 ## Remaining visual limits
 
