@@ -9,7 +9,7 @@ pnpm install --frozen-lockfile
 pnpm lab:nebula
 ```
 
-Open [Alignment](http://127.0.0.1:4331/alignment). Existing prepared LMC/SMC assets can be inspected immediately. Processing additionally needs the pinned native source, the local NOX environment/model for star removal, and the existing density prior. Missing inputs produce an actionable error; starting the viewer does not download or bake them. See [star-removal dependencies](star-removal.md#model-and-dependencies).
+Open [Alignment](http://127.0.0.1:4331/alignment). Startup recreates any missing LMC/SMC density slices from the tracked scalar grids; repeat starts verify and reuse them. Processing additionally needs the pinned native source, the local NOX environment/model for star removal, and the existing density prior. Missing inputs produce an actionable error; starting the viewer does not download or bake them. See [star-removal dependencies](star-removal.md#model-and-dependencies).
 
 Do not restart an already running server to switch views. Legacy `?subject=…&tab=alignment|reconstruction` links normalize to the corresponding path. Object selection remains in the URL; camera and per-image adjustments are retained locally.
 
@@ -64,3 +64,7 @@ For a handoff, click **Save lens settings** once in the browser where you adjust
 For UI/backend changes, run the lab typecheck and only the affected colocated tests during iteration. At the final lab boundary, run its suite and affected browser flow. No unrelated production build is needed for a lab-only change.
 
 Read [AGENTS.md](../AGENTS.md) for module ownership and development rules. Historical decomposition experiments are under [research](research/README.md); their former tabs and removed objects are not part of this workflow.
+
+## Replay without browser state
+
+Use the [bake command](baking.md) to rebuild the accepted three-source LMC bank. It owns acquisition, the saved baseline and NOX pass, fixed-density coloring, catalogue-star placement and saved display settings. Interactive jobs and the running server remain independent.

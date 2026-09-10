@@ -1,0 +1,130 @@
+{
+  "schema": "cssearth-nebula-bake@1",
+  "id": "lmc",
+  "subjectId": "lmc-clouds",
+  "densityObjects": [
+    "labs/nebula/models/lmc/full-density",
+    "labs/nebula/models/smc/full-density"
+  ],
+  "catalogue": {
+    "path": "labs/nebula/models/image-candidates.json",
+    "sha256": "a8b7554a9919b5fcd65290d6715572ff1a63d7ab41f263637a93b6f881766583"
+  },
+  "separationPlan": {
+    "path": "labs/nebula/models/lmc/star-separation/plan.json",
+    "sha256": "8efdd86661ba8e9bdb2123bec253c1224f8256b6dfa2e1af3d68c37e97dcf498"
+  },
+  "stars": {
+    "path": "labs/nebula/models/lmc/stars/prepared/stars.json",
+    "sha256": "533b2fc01c71ce258e4bb5d5d4d3799ce80bb4ea65dfe7b3d9c9529feda89922"
+  },
+  "starAlignment": {
+    "path": "labs/nebula/models/lmc/stars/source/alignment.json",
+    "sha256": "d2213aeb75b7b0a9084a482a6baa361834360599320044c0b18e248043066d12"
+  },
+  "promotion": {
+    "path": "labs/nebula/models/lmc/app-lenses.json",
+    "sha256": "28ac14bbe85c93c834bd3b606f8f6a7f712ea80adab319bd855ecdd3a4ac32e6"
+  },
+  "environment": {
+    "pythonVersions": [
+      "3.9",
+      "3.10",
+      "3.11",
+      "3.12"
+    ],
+    "packages": [
+      "tensorflow==2.16.2",
+      "numpy==1.26.4",
+      "opencv-python-headless==4.11.0.86",
+      "scipy==1.13.1"
+    ]
+  },
+  "removal": {
+    "method": "nox-positive-union-with-saved-baseline",
+    "script": {
+      "path": "labs/nebula/src/star-removal/star-removal.py",
+      "sha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752"
+    },
+    "baselineScript": {
+      "path": "labs/nebula/src/star-removal/star-separation.py",
+      "sha256": "0dfaa6eb36a60fb1543233f660430a312b2a766104692bbd77f840eaff18b96e"
+    },
+    "model": {
+      "path": ".local/open-star-removal/noxGeneratorColor.pb",
+      "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546",
+      "url": "https://github.com/charvey2718/nox/releases/download/v1.1.0/noxGeneratorColor.pb"
+    },
+    "tilePixels": 512,
+    "stridePixels": 384,
+    "paddingPixels": 64,
+    "batchSize": 2
+  },
+  "reconstruction": {
+    "analysisWidth": 1024,
+    "originalWidth": 2048,
+    "quality": 92
+  },
+  "images": [
+    {
+      "imageId": "vista-infrared",
+      "placement": {
+        "x": -0.9001341686099777,
+        "y": 1.6901640670280988,
+        "z": 0,
+        "rotationX": 0,
+        "rotationY": 0,
+        "rotationZ": 39,
+        "scale": 3
+      },
+      "appearance": {
+        "saturation": 1.3,
+        "detailStrength": 1,
+        "detailScale": 24,
+        "brightness": 0.85,
+        "gamma": 0.9
+      },
+      "baselineSha256": "12bc69a795b0b04c06ed68f98573b42bf7433b7c97e53d78196245ae91fc74b1"
+    },
+    {
+      "imageId": "horalek-widefield",
+      "placement": {
+        "x": 0.6184424860783384,
+        "y": 2.3793520276221836,
+        "z": 0,
+        "rotationX": 0,
+        "rotationY": 0,
+        "rotationZ": 39,
+        "scale": 3
+      },
+      "appearance": {
+        "saturation": 2.5,
+        "detailStrength": 1.95,
+        "detailScale": 96,
+        "brightness": 1.3,
+        "gamma": 1.3
+      },
+      "baselineSha256": "fd86857dac0755ebd420a48b0b2f37d6ad413f10961850760d3c8abf01ac8cc6"
+    },
+    {
+      "imageId": "wise-wide-infrared",
+      "placement": {
+        "x": 1.5626367397788687,
+        "y": 2.1726510201541025,
+        "z": 0,
+        "rotationX": 0,
+        "rotationY": 0,
+        "rotationZ": 39,
+        "scale": 3
+      },
+      "appearance": {
+        "saturation": 1,
+        "detailStrength": 0,
+        "detailScale": 24,
+        "brightness": 1,
+        "gamma": 1
+      },
+      "baselineSha256": "1044f3f7f8f6678ee9b75e28d5f4299fda068edc3c0af705be03b8655f2f4b56"
+    }
+  ]
+}

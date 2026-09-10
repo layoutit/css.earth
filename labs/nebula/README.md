@@ -11,8 +11,8 @@ Open [Alignment](http://127.0.0.1:4331/alignment) or [Reconstruction](http://127
 
 - **Alignment:** inspect the full density field and registered image footprint. Adjust the saved fit, run automatic NOX removal, and compare Original / Without stars / Residual.
 - **Reconstruction:** choose a completed starless source, adjust brightness/gamma/color/detail, then press **Preview**. Settings persist per image. Progress and Cancel are explicit; refresh reconnects to the job. Switching completed sources loads their saved banks at the retained camera pose.
-- **Current LMC variants:** ESO VISTA, NASA/IPAC WISE and Horálek optical. They use separate color treatments and an approximate stellar-density depth prior. SMC has prepared density/image models; extending this new reconstruction flow requires its own registered sources and recipe.
-- Large originals, native removal products and newly processed volumes stay in the ignored local cache. Processing does not publish or replace production assets.
+- **Current LMC variants:** ESO VISTA, NASA/IPAC WISE and Horálek optical. They use separate color treatments and an approximate stellar-density depth prior. SMC has a neutral density model; extending this new reconstruction flow requires its own registered sources and recipe.
+- Large originals, native removal products and newly processed volumes stay in the ignored local cache. Density slice textures are also ignored and regenerated automatically at lab startup. Processing does not publish or replace production assets.
 
 The image catalogue contains only **ESO VISTA, Horálek optical and NASA WISE**. Retired image candidates and experimental render banks are removed. Reconstruction starts with the unpainted density reference when no saved result is selected. SMC retains its density field for future work.
 
@@ -27,6 +27,7 @@ labs/nebula/
 │   ├── components/       # React UI
 │   ├── alignment/        # Registration and saved image placement
 │   ├── star-removal/     # Automatic NOX pipeline
+│   ├── pipeline/         # Reproducible command and stage orchestration
 │   ├── reconstruction/   # Volume model, worker and saved variants
 │   ├── density/          # Full prior and cutoff preparation
 │   ├── stars/            # Catalogue and particle tooling
@@ -39,5 +40,7 @@ labs/nebula/
 │   └── smc/              # SMC recipes, evidence and prepared models
 └── sources/              # Acquisition metadata and credits
 ```
+
+Rebuild the selected sources with **`pnpm lab:nebula:bake`**. See [baking](docs/baking.md) for prerequisites, stages, saved settings and outputs.
 
 Start with [next steps](NEXTSTEPS.md), [research and papers](RESEARCH.md), [the workflow](docs/workflows.md), [processing method](METHOD.md), or [documentation index](docs/README.md). Source/registration evidence and prior failed experiments remain accessible without adding more UI tabs.
