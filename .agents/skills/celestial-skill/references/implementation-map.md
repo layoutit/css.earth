@@ -56,6 +56,11 @@ fallback requirements are not the current authored-package template.
 | Search and marker presentation | `site/planet-search-objects.mts`, `tools/prepare-navigation.mts`, `src/navigation/marker-presentation.mts` |
 | Open hyperbolic trajectories | `packages/astronomy/src/kepler.ts`, `src/platform/prepare-hyperbolic-path.mts`, shared world-context preparation and orbit validation/projector |
 
+Minimap preparation accepts authored source paths and prepared source records.
+For a prepared surface, `map.url` identifies the preview image; its `source`
+object records provenance and must not be treated as a file path. The parser
+lives in `tools/surface-preview-source.mts`.
+
 For an unbound body, use the shared prepared hyperbolic path with explicit open
 endpoints and an epoch vertex. Do not wrap its anomaly, close its last edge or
 invent a revolution period. The finite display window is not a physical bound
