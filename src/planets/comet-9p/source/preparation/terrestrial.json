@@ -24,7 +24,7 @@
         "metadata": {
           "label": "Shape model",
           "modeled": true,
-          "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255°, Dec +64.5°. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed."
+          "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255\u00b0, Dec +64.5\u00b0. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed."
         }
       },
       {
@@ -37,7 +37,7 @@
         "metadata": {
           "label": "Source constraints",
           "modeled": true,
-          "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255°, Dec +64.5°. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed."
+          "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255\u00b0, Dec +64.5\u00b0. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed."
         }
       }
     ],
@@ -79,6 +79,24 @@
             "path": "photography/deep-impact/iv05070405_9000673_001_r.fit",
             "labelPath": "photography/deep-impact/iv05070405_9000673_001_r.lbl",
             "controlPath": "photography/deep-impact/iv05070405_9000673_001_r.json"
+          },
+          {
+            "id": "iv05070405-9000675-001-r",
+            "path": "photography/deep-impact/iv05070405_9000675_001_r.fit",
+            "labelPath": "photography/deep-impact/iv05070405_9000675_001_r.lbl",
+            "controlPath": "photography/deep-impact/iv05070405_9000675_001_r.json"
+          },
+          {
+            "id": "iv05070405-9000680-001-r",
+            "path": "photography/deep-impact/iv05070405_9000680_001_r.fit",
+            "labelPath": "photography/deep-impact/iv05070405_9000680_001_r.lbl",
+            "controlPath": "photography/deep-impact/iv05070405_9000680_001_r.json"
+          },
+          {
+            "id": "iv05070405-9000688-001-r",
+            "path": "photography/deep-impact/iv05070405_9000688_001_r.fit",
+            "labelPath": "photography/deep-impact/iv05070405_9000688_001_r.lbl",
+            "controlPath": "photography/deep-impact/iv05070405_9000688_001_r.json"
           }
         ],
         "transfer": {
@@ -93,7 +111,7 @@
         },
         "selection": "finest-resolution",
         "levelMatching": {
-          "samplesPerTriangle": 32,
+          "samplesPerTriangle": 64,
           "minimumPairs": 64,
           "maximumLogMad": 0.3,
           "maximumGain": 1.5
@@ -103,7 +121,7 @@
           99.5
         ],
         "metadata": {
-          "label": "Deep Impact · 2005",
+          "label": "Deep Impact \u00b7 2005",
           "coverage": "Photographs taken as the impactor approached Tempel 1, before the collision. Wider views surround a closer view of the impact region. The gray grid marks gaps; the original shadows remain."
         }
       },
@@ -171,7 +189,7 @@
           99.5
         ],
         "metadata": {
-          "label": "Stardust-NExT · 2011",
+          "label": "Stardust-NExT \u00b7 2011",
           "coverage": "Stardust returned six years after Deep Impact. These photographs show a different encounter and viewing direction, rather than a direct before-and-after comparison. Original shadows remain; the gray grid marks gaps."
         }
       }
@@ -250,7 +268,7 @@
   },
   "celestial": {
     "sunSource": "JPL Horizons osculating elements; PDS source orientation held at arbitrary phase.",
-    "qualification": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255°, Dec +64.5°. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed."
+    "qualification": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255\u00b0, Dec +64.5\u00b0. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed."
   },
   "presentation": {
     "defaultLens": "constraints",
