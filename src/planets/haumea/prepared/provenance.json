@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4d9f38daa699134257bd10e440dfdaf9bfac7c57fa2abd4fc15873596258f8b8"
+    "sha256": "42a8886f582bcdc394a15ae4b1e74827124e3f65d7173328205b34323790ff39"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -49,7 +49,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a3e1fd7c30b7e985569744f05db8fd6bf355817f972965023a1aa4ec9468a1af",
+      "sha256": "2e2bdd7262085f7533eea21959a71dea038f22ce696a93f7ecb1394d4721ccec",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,7 +111,9 @@
                 "url": "https://science.nasa.gov/dwarf-planets/haumea/",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "nasa-haumea",
+                "locator": "/references/0; orbital-period"
               }
             }
           ]
@@ -221,20 +223,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Object preparation, content, or attribution",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Object preparation, content, or attribution",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a3e1fd7c30b7e985569744f05db8fd6bf355817f972965023a1aa4ec9468a1af",
-      "bytes": 3798,
+      "sha256": "2e2bdd7262085f7533eea21959a71dea038f22ce696a93f7ecb1394d4721ccec",
+      "bytes": 3892,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -306,8 +307,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6426,
-          "sha256": "3144b8bd8233aaa4be590bef0f6660694ca4ffafaf56babb5188775565f98d6f",
+          "bytes": 6496,
+          "sha256": "cd6d64517a24b59258887368d426df65bff2a83e9280494303e479e7b28df05c",
           "verification": "bytes-verified"
         }
       ],

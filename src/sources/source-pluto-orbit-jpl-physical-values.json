@@ -2,7 +2,7 @@
   "id": "source-pluto-orbit-jpl-physical-values",
   "kind": "data-product",
   "identityLevel": "work",
-  "title": "Pluto · orbit jpl physical values",
+  "title": "JPL Planetary Physical Parameters",
   "identifiers": [],
   "links": [
     {
@@ -20,5 +20,6 @@
     }
   ],
   "relations": [],
-  "statements": []
+  "statements": [],
+  "publisher": "NASA/JPL Solar System Dynamics"
 }

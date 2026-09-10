@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "562d32760c5a04dec3ccaf470aa9250db8d640d7dc0f89bdc25f417931de6899"
+    "sha256": "e3be7faac28f2649cb1cba6db694c4eedffac8113cc2e63da8ac6fe8efb30c3a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0668bd612af26f07d651c1c54e3fbdef48b023b257077b705aff1497ddc63a42",
+      "sha256": "de9385cc8dc7a81b7a1ade7a618756c0df0a380951c2bf232fb2a4ed7ed37449",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -183,7 +183,9 @@
                 "url": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D2938",
                 "label": "Masiero et al. (2014), ApJ 791, 121",
                 "checked": "2026-09-08",
-                "path": "source/reference/calibration.json"
+                "path": "source/reference/calibration.json",
+                "catalogueId": "neowise-diameters-albedos-v2",
+                "locator": "/diameterKm; radius = diameterKm / 2"
               }
             },
             {
@@ -204,7 +206,9 @@
                 "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/10234",
                 "label": "DAMIT model 10234",
                 "checked": "2026-09-08",
-                "path": "source/reference/damit-model.json"
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "Model 10234; /periodHours"
               }
             }
           ],
@@ -366,20 +370,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "0668bd612af26f07d651c1c54e3fbdef48b023b257077b705aff1497ddc63a42",
+      "sha256": "de9385cc8dc7a81b7a1ade7a618756c0df0a380951c2bf232fb2a4ed7ed37449",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 7168,
+      "bytes": 7377,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -487,8 +490,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4360,
-          "sha256": "d973506f7110d20e1e1a7c3b8d67ae411eff48b4f08ca1cf39c23cbdb4a4ac36",
+          "bytes": 4521,
+          "sha256": "03ff7e5477bad9ca18f2130cf1781d7b96be1f06300b34ea6a74904c442dac1c",
           "verification": "bytes-verified"
         }
       ],

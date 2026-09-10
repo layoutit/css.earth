@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "03e661b802e8bd10233d2e69483f9dd5975c375a173875b81278b8c199f7c663"
+    "sha256": "7b46d868e5fbc6de181e7acee2912ef08d66acde2e3672918e9f3f9a74f72bc0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -535,7 +535,7 @@
       "lensId": "model",
       "label": "Shape model",
       "falseColor": false,
-      "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mjs",
+      "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mts",
       "recipe": {
         "width": 512,
         "height": 256,
@@ -551,7 +551,7 @@
       },
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-generated display material marking the PDS shape model constraint flags."
       },
       "sha256": "b5a1d39f0f0b7453507a01ba1507958be6ec0a8090ac3f2cc6abc783d9a75add",
       "bytes": 7580,
@@ -736,7 +736,7 @@
       "redistribution": "Retain source attribution and product identity.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for iv05070405_9000632_001_r."
       },
       "sha256": "2b145f846105a7b972360041c31a94d1f01fdb4e756520a88b8248c44fef4f51",
       "bytes": 22719,
@@ -831,7 +831,7 @@
       "redistribution": "Retain source attribution and product identity.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for iv05070405_9000639_001_r."
       },
       "sha256": "f43b5c3747b1b2fbc55c696067dc5fdea036a0ae6286c64e32a495967fd41628",
       "bytes": 17827,
@@ -926,7 +926,7 @@
       "redistribution": "Retain source attribution and product identity.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for iv05070405_9000654_001_r."
       },
       "sha256": "3f7535c22735e89e43f77f77b32ee423ea0fb8a18bfeba6b2a43c137bdb4234d",
       "bytes": 14834,
@@ -1021,7 +1021,7 @@
       "redistribution": "Retain source attribution and product identity.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for iv05070405_9000644_001_r."
       },
       "sha256": "696ffa2a70e8f1eb26b135d786af0789c6b7943f47f68bbaf1a111d63b8c8452",
       "bytes": 17997,
@@ -1116,7 +1116,7 @@
       "redistribution": "Retain source attribution and product identity.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for iv05070405_9000673_001_r."
       },
       "sha256": "41a8b4f8558f50db5dfd8fa7e54aa2bee03d0c5f8a6ef1a0944d914314ef36e1",
       "bytes": 13379,
@@ -1502,7 +1502,7 @@
       "redistribution": "Retain source attribution and product identity.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for n30033te02_rr."
       },
       "sha256": "ff0de3863638c44954eec125b8ecedf6228d13a127913e575ea11ebf269bbd15",
       "bytes": 17740,
@@ -1597,7 +1597,7 @@
       "redistribution": "Retain source attribution and product identity.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for n30039te02_rr."
       },
       "sha256": "90c0459b6a86faab62a1ca22e4bd3c079e3bae88e786d82260bb32925f577691",
       "bytes": 16354,
@@ -1692,7 +1692,7 @@
       "redistribution": "Retain source attribution and product identity.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for n30036te02_rr."
       },
       "sha256": "0cf2cdb79d4e5a10173125aa102e628820ec61f31b15793490133dcea8c886e4",
       "bytes": 23080,
@@ -1787,7 +1787,7 @@
       "redistribution": "Retain source attribution and product identity.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for n30042te02_rr."
       },
       "sha256": "9e799a22bcfe3363817a606f77a5a9dbb60eaad94d1836221e65337d2e84447e",
       "bytes": 17694,
@@ -1882,7 +1882,7 @@
       "redistribution": "Retain source attribution and product identity.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for n30045te02_rr."
       },
       "sha256": "3c0ce1af03d4a374b68c6cde5ae4fba4f8f9e8182272e8f2baffdd95a88ec781",
       "bytes": 17370,
@@ -1977,7 +1977,7 @@
       "redistribution": "Retain source attribution and product identity.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for n30048te02_rr."
       },
       "sha256": "1c07ba7d6547cb8e51d959fb38c6ba9bb3a4b020eb1b8b6020ab4f2d6bac9904",
       "bytes": 17360,
@@ -1988,15 +1988,14 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "9P/Tempel 1 source evidence or authored preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "9P/Tempel 1 source evidence or authored preparation input.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",

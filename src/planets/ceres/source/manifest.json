@@ -223,7 +223,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored texture axes and CSS surface selector."
       }
     }
   ],
@@ -256,36 +256,31 @@
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 2893,
-      "expectedSha256": "be6a65986876dfd24e2df64f3f0038f934894692fae8a3eb260b271b3955d46c",
-      "purpose": "Authored scientific and presentation recipe for reusable capability preparation."
+      "expectedSha256": "be6a65986876dfd24e2df64f3f0038f934894692fae8a3eb260b271b3955d46c"
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 9815,
-      "expectedSha256": "db7c4c51c376cf2660e70126ed0205b4697898637654804eeebbfd0f77cb7b05",
-      "purpose": "Authored scientific and presentation recipe for reusable capability preparation.",
+      "expectedBytes": 10040,
+      "expectedSha256": "7ce4889f588f2f57bcc0844b117fb4d939e4a24ccca8b69f66c92f33211802a2",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 3555,
-      "expectedSha256": "2c3e48c89492b374466d01b25d39c3d6dc45317a1b8543a42b20963df60c4c08",
-      "purpose": "Authored scientific and presentation recipe for reusable capability preparation."
+      "expectedSha256": "2c3e48c89492b374466d01b25d39c3d6dc45317a1b8543a42b20963df60c4c08"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 897,
-      "expectedSha256": "a47655aefe82e5b07960ed532403171543890b56b27ba3a8992756aa0b1de98a",
-      "purpose": "Authored scientific and presentation recipe for reusable capability preparation."
+      "expectedSha256": "a47655aefe82e5b07960ed532403171543890b56b27ba3a8992756aa0b1de98a"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 1387,
-      "expectedSha256": "bbd89c12f8573468cdd8f6ccc3e010e88480841ab53f84189df01e59a20720d8",
-      "purpose": "Authored scientific and presentation recipe for reusable capability preparation."
+      "expectedSha256": "bbd89c12f8573468cdd8f6ccc3e010e88480841ab53f84189df01e59a20720d8"
     },
     {
       "path": "editorial/factsheet-review.json",

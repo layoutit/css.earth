@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6fbe806dbf321fa0244092565c5a00fc73c8870c5db462cf7e469130ea8c12bd"
+    "sha256": "1fde73247d213c74a673f233b1b189ef1955cf6487ccc7d727353ab57a3b00fc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -312,7 +312,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5efb6760a5f50e233be36cdb24d6b3ecbb39910eabf674910348b0d131eb74b0",
+      "sha256": "499a4d858072cb1c0ee05e7d12824b4ac1ed5f6a494c0525a9ef8262ffb130b2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -329,7 +329,9 @@
                 "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-physical-parameters",
+                "locator": "/references/0; radius"
               }
             },
             {
@@ -340,7 +342,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-approximate-planetary-positions",
+                "locator": "/references/1; distance-from-sun"
               }
             },
             {
@@ -1046,20 +1050,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Authored source interpretation or preparation metadata.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Authored source interpretation or preparation metadata.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5efb6760a5f50e233be36cdb24d6b3ecbb39910eabf674910348b0d131eb74b0",
-      "bytes": 6415,
+      "sha256": "499a4d858072cb1c0ee05e7d12824b4ac1ed5f6a494c0525a9ef8262ffb130b2",
+      "bytes": 6644,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1215,8 +1218,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5601,
-          "sha256": "123fd7af476268715795d93efe70d2c1568addd553bf2a51c9778e170a6b1e97",
+          "bytes": 5782,
+          "sha256": "b80a7010690c7962ae0ba53f5b23a8b88301059d36882ac8bcdf2ba32319f976",
           "verification": "bytes-verified"
         }
       ],

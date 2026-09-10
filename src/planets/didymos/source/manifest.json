@@ -177,119 +177,100 @@
   "documents": [
     {
       "path": "content/object.json",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 11172,
       "expectedSha256": "fa54f4213898bfbaaa4c3d83235897b5c4170eb9fc5e8893138acee69cc2a132",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "preparation/acquisition.json",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 1513,
       "expectedSha256": "07b03f6a742284db83016e119953946deb3b8903f1ac06d2c4eaee1d6ea06725"
     },
     {
       "path": "preparation/navigation.json",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 1368,
       "expectedSha256": "9196dce7632ddbb3fdccae7e7c0a91184c0d1d0e655a79f8b0470eecc462aaee"
     },
     {
       "path": "preparation/rotation.json",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 668,
       "expectedSha256": "8977cdc0c88fdb6f5119838f0f80fed7a72617a9fa2e572bdcfc079a0aca6f14"
     },
     {
       "path": "preparation/terrestrial.json",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 4155,
       "expectedSha256": "449e777a60b31fbeaa21b6608cd284db06059b1650fc94ef356612372659774d"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 4370,
       "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
     },
     {
       "path": "presentation/title-mark.json",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 4231,
       "expectedSha256": "e0d5dcf47be0d58535ff1e587ea79bf49126bd3027dbc24ea9a4269980b4f049"
     },
     {
       "path": "reference/Sunshine_LPSC.pdf",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 299449,
       "expectedSha256": "8682cd20f739939f16a6261a904665e6b5ab610cb1c9b1c8a769bf1ca033d7e8"
     },
     {
       "path": "reference/albedo.xml",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 6724,
       "expectedSha256": "6fd1eede1d4c1bb8c5edd83c95b4c5de24dfdea2ca41e1263583fdb389b7a9e5"
     },
     {
       "path": "reference/collection.xml",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 6902,
       "expectedSha256": "4a10a40cd590f8b5dd6c004bb8816f1a7db3a276c888915205e85a5192a0bf8c"
     },
     {
       "path": "reference/dart_shapemodel_sis.pdf",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 1197607,
       "expectedSha256": "618cbcead6ec54925d2db3a44449b8357cc354d539a2712fe77efe4b79f97bd8"
     },
     {
       "path": "reference/didymos_coordinate_system_description_v1.pdf",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 535720,
       "expectedSha256": "7630b118eeab841e7fb16c6ac74fb0ba85e50cdf7d9fa2242103b07737224064"
     },
     {
       "path": "reference/didymos_system_15.tpc",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 7968,
       "expectedSha256": "c36bf56a5f93cb1f4ddc1eb09623a628b82ac225bb08e86c8a34c03cf7355600"
     },
     {
       "path": "reference/horizons-primary-physical.txt",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 1783,
       "expectedSha256": "0fa74403995309fc8f8c896eafd1a1104343fd004c506b815594dd6f55a6ccb4"
     },
     {
       "path": "reference/shape-overview.txt",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 4128,
       "expectedSha256": "7b97a88f194c39024ff891c09f0ba29136e9dd38901b5621261060675252ea38"
     },
     {
       "path": "reference/shape.xml",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 9121,
       "expectedSha256": "f09a8a3364c6fc9e9c6df54206b03e550f0da16a896d3d65c6e5d74b0d525564"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 2177,
       "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
     },
     {
       "path": "stars/LICENSE.md",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 595,
       "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
     },
     {
       "path": "stars/hyg-v41-field.json",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 89773,
       "expectedSha256": "38a2fcf37a4fd7a1cc568c05f264df12503fde572c293cd52be539e827e88a11"
     }

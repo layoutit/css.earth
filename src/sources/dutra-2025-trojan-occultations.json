@@ -1,0 +1,29 @@
+{
+  "id": "dutra-2025-trojan-occultations",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Dutra et al. (2025), Philosophical Transactions A 383, 20240187",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1098/rsta.2024.0187"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1098/rsta.2024.0187",
+      "label": "Dutra et al. (2025), Philosophical Transactions A 383, 20240187"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/diomedes/source/content/object.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "dcbf53cc83b294e8111cf242e58a88a3c2269f0a16761ca6f4f85898add15395",
+      "locator": "/panel/facts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

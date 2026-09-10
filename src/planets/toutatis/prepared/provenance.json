@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "82ee5a89e0ddafabecf6bc02fdbb67df54b1dbd09e1e9af9b158f742ccbef047"
+    "sha256": "b9a68bac828d05078bd8d32a66aba7dcf97da1909d05757acbb90cfa2b0485a9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4f719cf2484fb9bdc6086035cd31f55546cfa573cc36162f189ea8d0342eca8e",
+      "sha256": "c4b8a1028284c0ee6670046313beb027dbdf49f6c0626c09110c1aa4d9a4f220",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -158,7 +158,9 @@
                 "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=Toutatis&phys-par=1",
                 "label": "JPL SBDB / NEOWISE estimate",
                 "checked": "2026-09-08",
-                "path": "source/reference/sbdb-physical.json"
+                "path": "source/reference/sbdb-physical.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par: albedo"
               }
             }
           ]
@@ -297,20 +299,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Pinned source documentation or authored preparation input.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4f719cf2484fb9bdc6086035cd31f55546cfa573cc36162f189ea8d0342eca8e",
-      "bytes": 8347,
+      "sha256": "c4b8a1028284c0ee6670046313beb027dbdf49f6c0626c09110c1aa4d9a4f220",
+      "bytes": 8440,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -374,8 +375,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6268,
-          "sha256": "2af9d13c7bcec22ae14bd721b5962b98c465e4353ec7c985bf137956cd9f7202",
+          "bytes": 6337,
+          "sha256": "ea7642028ce328bf674e064de540fc8e8acad9fc2c5b764da51752b2fa2e536a",
           "verification": "bytes-verified"
         }
       ],

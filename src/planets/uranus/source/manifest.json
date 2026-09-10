@@ -344,7 +344,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored ring geometry and display settings; measurements are cited in this recipe."
       }
     },
     {
@@ -362,14 +362,14 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored marker, caption and camera settings."
       }
     },
     {
       "id": "uranus-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 14483,
-      "expectedSha256": "bc585a6133fb7151c1d5e32a7c06323ed86e9bf0934651f917273be49ab668b7",
+      "expectedBytes": 15395,
+      "expectedSha256": "e6934925bc2eded248d70f7baf6f06ad63068458489191bb76e886a804404197",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -380,7 +380,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
@@ -398,7 +398,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored title lettering from the font identified in this record."
       }
     },
     {
@@ -406,17 +406,24 @@
       "path": "editorial/object.json",
       "expectedBytes": 4662,
       "expectedSha256": "ac0971c8bf730c39b94204377ecc6e15e2ac3fe2882139e43fd7b1a15d301c7e",
-      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "origin": "https://science.nasa.gov/uranus/facts/",
       "credit": "NASA Science",
-      "license": "Project-authored specification; referenced observations retain their source terms",
-      "acquisition": "checked repository source",
-      "redistribution": "checked authored source with embedded provenance",
+      "license": "NASA content usage guidelines: https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "acquisition": "NASA Science page text extracted into the existing editorial record.",
+      "redistribution": "Retained NASA Science text extract with provider attribution; consult the linked reuse terms.",
       "consumers": [
         "content"
       ],
       "sourceBinding": {
-        "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-uranus-facts",
+            "role": "reference",
+            "evidence": "NASA Science text extract; source page 108091.",
+            "locator": "/sourceUrl"
+          }
+        ]
       }
     },
     {

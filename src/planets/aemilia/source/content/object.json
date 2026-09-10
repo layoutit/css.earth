@@ -14,7 +14,9 @@
           "url": "https://hebe.astro.amu.edu.pl/docs/5_models.pdf",
           "label": "Marciniak et al. (2018), Table 4: SAGE pole 1",
           "checked": "2026-09-09",
-          "path": "source/reference/calibration.json"
+          "path": "source/reference/calibration.json",
+          "catalogueId": "marciniak-2018-slow-asteroids",
+          "locator": "/diameterKm; radius = diameterKm / 2"
         }
       },
       {
@@ -25,7 +27,9 @@
           "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27159%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
           "label": "JPL Horizons, 2026-09-03 epoch",
           "checked": "2026-09-09",
-          "path": "source/reference/horizons-elements.txt"
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; A (km) / 149597870.7"
         }
       },
       {
@@ -36,7 +40,9 @@
           "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27159%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
           "label": "JPL Horizons, 2026-09-03 epoch",
           "checked": "2026-09-09",
-          "path": "source/reference/horizons-elements.txt"
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; PR (days) / 365.25"
         }
       },
       {
@@ -47,7 +53,9 @@
           "url": "http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102",
           "label": "ISAM/SAGE102 original OBJ rotation header",
           "checked": "2026-09-09",
-          "path": "source/reference/isam-model.json"
+          "path": "source/reference/isam-model.json",
+          "catalogueId": "source-aemilia-aemilia-shape",
+          "locator": "/periodHours; ISAM model 102"
         }
       }
     ],

@@ -325,7 +325,7 @@
       "expectedSha256": "e96bd42b06e9259e667c04bc595cf1a7c4859f05096ad299f32930eff3dbb6ac",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Camera geometry calculated from the pinned image and mission kernels for 21 LUTETIA at 2010-07-10T15:41:06.632."
       }
     },
     {
@@ -343,7 +343,7 @@
       "expectedSha256": "619648154d976db683f43838d45668a140e9fac3ee508335eaf53076f2866fde",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Camera geometry calculated from the pinned image and mission kernels for 21 LUTETIA at 2010-07-10T15:41:54.488."
       }
     },
     {
@@ -419,131 +419,110 @@
   "documents": [
     {
       "path": "content/object.json",
-      "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 10094,
-      "expectedSha256": "8e1e2637ce07eb7f672c0270b747831c3bd371ea786e32ef38ff40849fab7c89",
+      "expectedBytes": 10209,
+      "expectedSha256": "bd587a259341019b545870b8ec95df98192d86003d5dee82bac00122471b0ce1",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "preparation/acquisition.json",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 3193,
       "expectedSha256": "36dc0e5039804978b7f8356925ea78c011e96d6f60a60d2c3eea7abbea136d31"
     },
     {
       "path": "preparation/navigation.json",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 1337,
       "expectedSha256": "30b69785f621a11b2e228038377f2324daeacbe13f158546b6928ad60df5c791"
     },
     {
       "path": "preparation/rotation.json",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 419,
       "expectedSha256": "ac51093359c7090b9af0c940126b79a71ebe29471c1d4de2d62b390a79bcea82"
     },
     {
       "path": "preparation/terrestrial.json",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 4867,
       "expectedSha256": "0e289d02429797207c6067110d1ca4e4390b75cb29ebac48bee9c57ce0703425"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 4370,
       "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
     },
     {
       "path": "presentation/title-mark.json",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 3488,
       "expectedSha256": "66b61e0c640562a0355f525012460c85856f1710da801f2882a3439c0d6aaeed"
     },
     {
       "path": "reference/dataset.cat",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 14720,
       "expectedSha256": "38385e9b54b1dbd93fc4d2c751fb7ddff721ddc5fefcc733ea121f99b48993fb"
     },
     {
       "path": "reference/esa-coverage.jpg",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 700991,
       "expectedSha256": "68906de5b12f11022030d1a783308f5735cc7045686b84f3777b14f01fa9ff46"
     },
     {
       "path": "reference/horizons-physical.txt",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 1289,
       "expectedSha256": "f4cfa64a0c0decbd32561f2f9aa84911489f66a6704316fc464ca72bc3796acf"
     },
     {
       "path": "reference/lutetia_025k_cart.lbl",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 10000,
       "expectedSha256": "cc31291601551f5f3555c7a5ec3ca93dbb48319eaa76726fc9ff3ecab7f52a24"
     },
     {
       "path": "reference/lutetia_0n0e.png",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 80177,
       "expectedSha256": "59854cccb0e49ffac99fd6e91012610ccb8693e498a4468d6e5fb59e2feb4702"
     },
     {
       "path": "reference/lutetia_90n.png",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 136033,
       "expectedSha256": "49ad0789054d26dc054df9312bb1e954e5e75d518968c082c6f2a35a23cc1cda"
     },
     {
       "path": "reference/lutetia_rotation.pdf",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 1090650,
       "expectedSha256": "c7b362305104aaaa578d10f2aa5295995312428e7daf88418e3012a2004962a7"
     },
     {
       "path": "reference/lutetia_shape_defects.lbl",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 1680,
       "expectedSha256": "c978d10512ea99e42ddad8bdd705edb4b189c527a149c0a6b0c5614f41632e8c"
     },
     {
       "path": "reference/osiris-example-label.txt",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 27648,
       "expectedSha256": "5111f7ea57a1b54fa3b03c9b3cf15659b6ed361d9995d3dda9c07355911132f9"
     },
     {
       "path": "reference/osiris-str-refl-dataset.cat",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 5935,
       "expectedSha256": "9c300606cc8fabe1372ab7bb22586ed2d0205e09be403ae69a7dcafddd00479a"
     },
     {
       "path": "reference/plate_shape_definition.asc",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 6640,
       "expectedSha256": "cc775dc2d1d15cedb26b4badbeb777f480689510fa34652b75cdc6ba85ef677a"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 2177,
       "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
     },
     {
       "path": "stars/hyg-v41-field.json",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 89773,
       "expectedSha256": "f613473b1e268a1f3f2b29ea43c0b2c76c921b85b9904fb8c2c0263f8cf8e4f6"
     },
     {
       "path": "stars/LICENSE.md",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 595,
       "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
     }

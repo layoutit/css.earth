@@ -212,67 +212,57 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7586,
-      "expectedSha256": "fb3b4056001a0384a0c9077ac8b64e05d86f85a6ba65a9c43da83a91f60c2a2c",
-      "purpose": "Source metadata, license evidence, or authored preparation and content.",
+      "expectedBytes": 7924,
+      "expectedSha256": "487062ba7cba76e661c8d61a90ccad34cdebb77c6a873fd11b6d17e266f87cff",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "observations/usgs-metadata.xml",
       "expectedBytes": 18754,
-      "expectedSha256": "c7f20eeb2022f308eb002914a01f36943d75e3aa1dd916f3b143470d759d05c7",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "c7f20eeb2022f308eb002914a01f36943d75e3aa1dd916f3b143470d759d05c7"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 978,
-      "expectedSha256": "2f8ee7265450143ec1652b65ff793dd1fcd25feabf988b1c167dcdae57c70ffb",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "2f8ee7265450143ec1652b65ff793dd1fcd25feabf988b1c167dcdae57c70ffb"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 2044,
-      "expectedSha256": "7a0b31bc9c5fb16ebd8b4c631d13248d9219aac6539286fff8cb398fb3db53e6",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "7a0b31bc9c5fb16ebd8b4c631d13248d9219aac6539286fff8cb398fb3db53e6"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 3846,
-      "expectedSha256": "931308680fdd1456c0dd0d1a16a14b4880c3084043aad766c5eb06d84fded2e0",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "931308680fdd1456c0dd0d1a16a14b4880c3084043aad766c5eb06d84fded2e0"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 29,
-      "expectedSha256": "7439571ba65953b5180445c9bc1b68d6086904d7182c157a468f0f23b8698bd6",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "7439571ba65953b5180445c9bc1b68d6086904d7182c157a468f0f23b8698bd6"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 2409,
-      "expectedSha256": "410024b9808e2301697c2d8467849104ddc56f239e33d50dd291d58e8b1b1d24",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "410024b9808e2301697c2d8467849104ddc56f239e33d50dd291d58e8b1b1d24"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 849,
-      "expectedSha256": "cb4de5e6903336c7735cc075cd6671337eecf351e8e938eb8e7e9fd4b914b452",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "cb4de5e6903336c7735cc075cd6671337eecf351e8e938eb8e7e9fd4b914b452"
     },
     {
       "path": "editorial/factsheet-review.json",

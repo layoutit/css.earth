@@ -132,107 +132,90 @@
       "path": "content/object.json",
       "expectedBytes": 3711,
       "expectedSha256": "972b8c5ca1a43dae92cf3fef1ec7531591c3171e965c1db9583985ced320def4",
-      "purpose": "Styx source evidence or authored preparation data.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "measurements.json",
       "expectedBytes": 1154,
-      "expectedSha256": "ba60aa21d863f484abdc828b0b0e41b49dbb5b5c13c53ff32bae0d158f7a60a6",
-      "purpose": "Styx source evidence or authored preparation data."
+      "expectedSha256": "ba60aa21d863f484abdc828b0b0e41b49dbb5b5c13c53ff32bae0d158f7a60a6"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 488,
-      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
-      "purpose": "Styx source evidence or authored preparation data."
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1306,
-      "expectedSha256": "51bc761e0b31925c7b62771a4bc6c22386f50aece7b9db245dd94473f69d3a27",
-      "purpose": "Styx source evidence or authored preparation data."
+      "expectedSha256": "51bc761e0b31925c7b62771a4bc6c22386f50aece7b9db245dd94473f69d3a27"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 2378,
-      "expectedSha256": "d09f4e9f3840bf5fedc1da1e5669eab5c9e034132005bf0e845a0bb87acdffc9",
-      "purpose": "Styx source evidence or authored preparation data."
+      "expectedSha256": "d09f4e9f3840bf5fedc1da1e5669eab5c9e034132005bf0e845a0bb87acdffc9"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Styx source evidence or authored preparation data."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 2471,
-      "expectedSha256": "48c01924d05c8bd99afa690b5425e152dd5fb343f3f5da76e7328635c7a31d73",
-      "purpose": "Styx source evidence or authored preparation data."
+      "expectedSha256": "48c01924d05c8bd99afa690b5425e152dd5fb343f3f5da76e7328635c7a31d73"
     },
     {
       "path": "shape/publication.json",
       "expectedBytes": 1026,
-      "expectedSha256": "fcd635de9fc001dfff42c9e8e26fe1e060f805f8195f3e1775351a0cd9faa99d",
-      "purpose": "Styx source evidence or authored preparation data."
+      "expectedSha256": "fcd635de9fc001dfff42c9e8e26fe1e060f805f8195f3e1775351a0cd9faa99d"
     },
     {
       "path": "shape/rotation.json",
       "expectedBytes": 839,
-      "expectedSha256": "f531a97ba073afd2e7c922a8630f0ae96dc6d434e1de4b5c385d5775db9ca949",
-      "purpose": "Styx source evidence or authored preparation data."
+      "expectedSha256": "f531a97ba073afd2e7c922a8630f0ae96dc6d434e1de4b5c385d5775db9ca949"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Styx source evidence or authored preparation data."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Styx source evidence or authored preparation data."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 847,
-      "expectedSha256": "775dab2a1cb8e98d71fdbe0ec99dd6bb6a383fbcea034b426ffa742e2dec66ee",
-      "purpose": "Styx source evidence or authored preparation data."
+      "expectedSha256": "775dab2a1cb8e98d71fdbe0ec99dd6bb6a383fbcea034b426ffa742e2dec66ee"
     },
     {
       "path": "survey/lorri-best-metadata.json",
       "expectedBytes": 14008,
-      "expectedSha256": "c75540426c959498c3e185d0c2bf259814077233251a3469c43c71c4d9c60b3e",
-      "purpose": "Styx source evidence or authored preparation data."
+      "expectedSha256": "c75540426c959498c3e185d0c2bf259814077233251a3469c43c71c4d9c60b3e"
     },
     {
       "path": "survey/lorri-best.lbl",
       "expectedBytes": 46080,
-      "expectedSha256": "320423f5cb093480917250ebf24ff2df21cd766dffda3dda0c92c26399e4e696",
-      "purpose": "Styx source evidence or authored preparation data."
+      "expectedSha256": "320423f5cb093480917250ebf24ff2df21cd766dffda3dda0c92c26399e4e696"
     },
     {
       "path": "survey/lorri-search.json",
       "expectedBytes": 2370,
-      "expectedSha256": "99a9d665a45831fff918d29a7962c9f7010352e1bc79978e1d594db448d578d8",
-      "purpose": "Styx source evidence or authored preparation data."
+      "expectedSha256": "99a9d665a45831fff918d29a7962c9f7010352e1bc79978e1d594db448d578d8"
     },
     {
       "path": "survey/mvic-search.json",
       "expectedBytes": 211,
-      "expectedSha256": "b23082f8da076df5178ed51ab6c5919cda3c5e84f13d7f15da707a10f2011510",
-      "purpose": "Styx source evidence or authored preparation data."
+      "expectedSha256": "b23082f8da076df5178ed51ab6c5919cda3c5e84f13d7f15da707a10f2011510"
     },
     {
       "path": "survey/native-inspection.json",
       "expectedBytes": 764,
-      "expectedSha256": "88fffb320e2a113f2dc9723d78c6fd5673a9abc6d5f0d0bb308ff9bf3305509f",
-      "purpose": "Styx source evidence or authored preparation data."
+      "expectedSha256": "88fffb320e2a113f2dc9723d78c6fd5673a9abc6d5f0d0bb308ff9bf3305509f"
     }
   ],
   "generatedIntermediates": [

@@ -31,7 +31,9 @@
           "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/603/A55/table1.dat",
           "label": "Alí-Lagoa & Delbo (2017), A&A603,A55",
           "checked": "2026-09-08",
-          "path": "source/reference/calibration.json"
+          "path": "source/reference/calibration.json",
+          "catalogueId": "ali-lagoa-delbo-2017-table1",
+          "locator": "/diameterKm; radius = diameterKm / 2"
         }
       },
       {
@@ -52,7 +54,9 @@
           "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5955",
           "label": "DAMIT model 5955",
           "checked": "2026-09-08",
-          "path": "source/reference/damit-model.json"
+          "path": "source/reference/damit-model.json",
+          "catalogueId": "damit-models",
+          "locator": "Model 5955; /periodHours"
         }
       }
     ],

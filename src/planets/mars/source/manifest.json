@@ -522,11 +522,10 @@
       "path": "preparation/ellipsoid.json",
       "expectedBytes": 622,
       "expectedSha256": "a21e86fe560a46396cea1568b44a757be8b258b9ef40277b5261ef11c380d768",
-      "purpose": "Authored source-informed capability preparation recipe.",
       "kind": "authored-document",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored ellipsoid tessellation and display orientation."
       }
     },
     {
@@ -544,47 +543,41 @@
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 4511,
-      "expectedSha256": "d5bbb1f85e50f6fd5ced773093faa5d369179e553df255dd3e659febaa6c2712",
-      "purpose": "Authored source-informed capability preparation recipe."
+      "expectedSha256": "d5bbb1f85e50f6fd5ced773093faa5d369179e553df255dd3e659febaa6c2712"
     },
     {
       "path": "preparation/atmosphere.json",
       "expectedBytes": 918,
       "expectedSha256": "672ce4a68c97c9d005f3721aad971b8e0b2bdb24eca1d6d863e14ed08bf41acb",
-      "purpose": "Authored source-informed capability preparation recipe.",
       "kind": "authored-document",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored atmosphere sampling and display response using the cited PSG model and photographic reference."
       }
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 13163,
-      "expectedSha256": "8b3b389c493308dd22d6f94001e85706903ca9d4e33bc3934b510ad0b7d42e76",
-      "purpose": "Authored source-informed capability preparation recipe.",
+      "expectedBytes": 13979,
+      "expectedSha256": "3157f4357e1c6e128d6feaac4e618bed81012fb1584eb2b829f65409de106cc8",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "content/charts.json",
       "expectedBytes": 4247,
-      "expectedSha256": "0f880b44549b5c6c7b2a532b65727c7d54fd05fa10c17b33c576ebe3d0f1d541",
-      "purpose": "Authored source-informed capability preparation recipe."
+      "expectedSha256": "0f880b44549b5c6c7b2a532b65727c7d54fd05fa10c17b33c576ebe3d0f1d541"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 903,
-      "expectedSha256": "17ba60da96dbefa063058fcc0974a44b2393fa325a9411a4fcabf12fc31d90e3",
-      "purpose": "Authored source-informed capability preparation recipe."
+      "expectedSha256": "17ba60da96dbefa063058fcc0974a44b2393fa325a9411a4fcabf12fc31d90e3"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 4757,
-      "expectedSha256": "a84ca43388d33a4db02ef6bc983deb6d60b48e9aab83f69420e723b05e7a3790",
-      "purpose": "Authored source-informed capability preparation recipe."
+      "expectedSha256": "a84ca43388d33a4db02ef6bc983deb6d60b48e9aab83f69420e723b05e7a3790"
     },
     {
       "path": "preparation/material-delivery.json",

@@ -31,7 +31,9 @@
           "url": "https://arxiv.org/pdf/1803.06116",
           "label": "Hanuš et al. (2018), Table A.3",
           "checked": "2026-09-08",
-          "path": "source/reference/calibration.json"
+          "path": "source/reference/calibration.json",
+          "catalogueId": "hanus-2018-thermophysical-models",
+          "locator": "/diameterKm; radius = diameterKm / 2"
         }
       },
       {
@@ -52,7 +54,9 @@
           "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1144",
           "label": "DAMIT model 1144",
           "checked": "2026-09-08",
-          "path": "source/reference/damit-model.json"
+          "path": "source/reference/damit-model.json",
+          "catalogueId": "damit-models",
+          "locator": "Model 1144; version 2016-01-04; /periodHours"
         }
       }
     ],

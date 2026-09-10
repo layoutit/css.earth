@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ebce620717ca732ca182053080ff36f923a1f382749d75577573f48168b8c65a"
+    "sha256": "ea0a44c8537f734ce9ad38c9c415e9ed6cfdf941c15b61a3d5c98a99abf92565"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -101,7 +101,7 @@
     {
       "id": "content",
       "path": "source/content/static.json",
-      "sha256": "48f7b40b718034e143ed4e17308fcd55a7b20b0c5d2b49fa9f3ae46fcd685c84",
+      "sha256": "9ede7bc869b0ef857d53914fa143681dfcfb1d701dabf3e2045c222bde6e436d",
       "parameters": {
         "schema": "cssearth-static-surface-content@1",
         "id": "pluto",
@@ -121,7 +121,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-approximate-planetary-positions",
+                "locator": "/references/0; distance-from-sun"
               }
             },
             {
@@ -132,7 +134,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "source-pluto-orbit-jpl-physical-values",
+                "locator": "/references/1; radius"
               }
             },
             {
@@ -143,7 +147,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "source-pluto-orbit-jpl-physical-values",
+                "locator": "/references/1; orbital-period"
               }
             },
             {
@@ -154,7 +160,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "source-pluto-orbit-jpl-physical-values",
+                "locator": "/references/1; rotation-period"
               }
             },
             {
@@ -165,7 +173,9 @@
                 "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/plutofact.html?level=1",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "nssdc-pluto-factsheet",
+                "locator": "/references/2; axial-tilt"
               }
             },
             {
@@ -188,7 +198,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "source-pluto-orbit-jpl-physical-values",
+                "locator": "/references/1; mass"
               }
             },
             {
@@ -199,7 +211,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "source-pluto-orbit-jpl-physical-values",
+                "locator": "/references/1; density"
               }
             }
           ]
@@ -538,20 +552,19 @@
     },
     {
       "path": "content/static.json",
-      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicit authored content document in the retained provenance record."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/static.json",
       "kind": "authored-content",
       "origin": "object:source/content/static.json",
-      "title": "Authored preparation configuration and scientific interpretation pinned for reproducibility.",
+      "title": "content/static.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "48f7b40b718034e143ed4e17308fcd55a7b20b0c5d2b49fa9f3ae46fcd685c84",
-      "bytes": 10753,
+      "sha256": "9ede7bc869b0ef857d53914fa143681dfcfb1d701dabf3e2045c222bde6e436d",
+      "bytes": 11555,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -792,8 +805,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5289,
-          "sha256": "4a8ed32b64df1c710888bd4b74c4c5986c4b35dd7a38512424f0b8a44161f042",
+          "bytes": 5923,
+          "sha256": "fc916076e651978f544a0fabf3b5b1b8042cf5df7decf6817379a7023cbcb000",
           "verification": "bytes-verified"
         }
       ],

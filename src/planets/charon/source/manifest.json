@@ -285,67 +285,57 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 12035,
-      "expectedSha256": "d52c3e5617fbff1e26d1703e8035af4f72f0c6d9e3a718baa21856d3546e9d91",
-      "purpose": "Source metadata, license evidence, or authored preparation and content.",
+      "expectedBytes": 12373,
+      "expectedSha256": "c8d61908e6aa09a19ef00f47b77a01a97df26aa3819bfeb4eb90e27bd75e689e",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "observations/dataset.cat",
       "expectedBytes": 35600,
-      "expectedSha256": "b2a0a6f7e0eea428d82de3a5ca8e91722510275634e540ea05ed31cc724f3d60",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "b2a0a6f7e0eea428d82de3a5ca8e91722510275634e540ea05ed31cc724f3d60"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 1776,
-      "expectedSha256": "326ce205234a4666cd6968f7eb49053baf4821796048fbbed94dc6eaf2bf2b8f",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "326ce205234a4666cd6968f7eb49053baf4821796048fbbed94dc6eaf2bf2b8f"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 2274,
-      "expectedSha256": "d92a8c44e5085a010315acf1c365d5b793a0c02e346fbcbb175e048d55dcc24d",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "d92a8c44e5085a010315acf1c365d5b793a0c02e346fbcbb175e048d55dcc24d"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 5351,
-      "expectedSha256": "4e4b1df6415a820d771b2b31ce65cd2170de5b40324e9a40febee252e743a812",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "4e4b1df6415a820d771b2b31ce65cd2170de5b40324e9a40febee252e743a812"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 3829,
-      "expectedSha256": "06158211a49a37af331a98d83e1121974aae114dd20d3bc7df5905fb7d28d3df",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "06158211a49a37af331a98d83e1121974aae114dd20d3bc7df5905fb7d28d3df"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 849,
-      "expectedSha256": "3ecb64dfaad394158f12cd0bf2733268a7c58ab76a17f774149b421d30c2937b",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "3ecb64dfaad394158f12cd0bf2733268a7c58ab76a17f774149b421d30c2937b"
     },
     {
       "path": "editorial/factsheet-review.json",
@@ -383,20 +373,17 @@
     {
       "path": "science/nh_charon_bond.lblx",
       "expectedBytes": 10737,
-      "expectedSha256": "daa71e1c658e8c497203177290dc105c3ecad1c0280943affffaaa8ceddab867",
-      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+      "expectedSha256": "daa71e1c658e8c497203177290dc105c3ecad1c0280943affffaaa8ceddab867"
     },
     {
       "path": "science/prepare-bond-map.json",
       "expectedBytes": 1919,
-      "expectedSha256": "07f9e0888d48d121243cd736165a91a5c365758b24a8309dfe8939882623575f",
-      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+      "expectedSha256": "07f9e0888d48d121243cd736165a91a5c365758b24a8309dfe8939882623575f"
     },
     {
       "path": "science/nh-charon-bond-georeferenced.json",
       "expectedBytes": 557,
-      "expectedSha256": "23bac0c15b44cb683ec4c3d55c647fad6c73036b68b56d79c62f8dee44ce0101",
-      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+      "expectedSha256": "23bac0c15b44cb683ec4c3d55c647fad6c73036b68b56d79c62f8dee44ce0101"
     }
   ],
   "generatedIntermediates": []

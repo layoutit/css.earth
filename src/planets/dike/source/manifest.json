@@ -122,60 +122,51 @@
   "documents": [
     {
       "path": "content/object.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 6720,
-      "expectedSha256": "63faf33f4fe6414f2bd658c9e5912279529af49c5b562407954837123c6963b3",
+      "expectedBytes": 6952,
+      "expectedSha256": "2ead20f0984be8b80835b14a955e149cb7863910d9fc663d41411e9fc7b71996",
       "sha256": "1257ce847f27d462c227deb2a992474757a23ca8a4a4697693dade871e0f879d",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "preparation/acquisition.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 945,
       "expectedSha256": "954ce08f509f36dbecae01f06d916ac82ac0b04efe89464fab1ccdbc58ef891e"
     },
     {
       "path": "preparation/navigation.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 1273,
       "expectedSha256": "dbb24fb3c934186a643309f3fcb04906965504900157de99348814a3ae3648f7"
     },
     {
       "path": "preparation/rotation.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 907,
       "expectedSha256": "0f84d78e2bc4ef81cd00aae0a600c2b78fce71bd452ec66a0bccd8f01bf46f5f"
     },
     {
       "path": "preparation/terrestrial.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 3157,
       "expectedSha256": "ff82cb7312a1bafe92e96344356fc5c878cf77818a36d69d140134a27732f968"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 4370,
       "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
     },
     {
       "path": "presentation/title-mark.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 2033,
       "expectedSha256": "9cadacb16fd9a3beceab55f9e95a43af217dd7f05467ac8e49cb0728a73f5451"
     },
     {
       "path": "reference/1144-IAUspin.txt",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 34,
       "expectedSha256": "1ad012a1b4b859813e7b854546cb8c2a0858981d84a88f59665d7e216a506842"
     },
     {
       "path": "reference/calibration.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 1481,
       "expectedSha256": "f9d0f44d959cef245b5bc922a07660ee621d4aa4146ccf5decafe06b8a46f03b"
     },
@@ -190,49 +181,41 @@
     },
     {
       "path": "reference/hanus-2018.pdf",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 1636683,
       "expectedSha256": "3f3f26a7a5a7469e64f0ddc20947c350f8581defa09b74518fb987c2ce4289f8"
     },
     {
       "path": "reference/horizons-elements.txt",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 7353,
       "expectedSha256": "b921dfdd1378ec6c39f393c312db785fb495115cfdac4e6d835cef262b37336e"
     },
     {
       "path": "reference/horizons-physical.txt",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 1390,
       "expectedSha256": "46a6eec2473b0a40f3cde95340c6198f380296cf53947f8bc7010125972350aa"
     },
     {
       "path": "reference/horizons-vectors.txt",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 6643,
       "expectedSha256": "ccd78d89082531347e544a915db76c2ef4b60f0a9974693d1a6cee257e4f09ab"
     },
     {
       "path": "reference/model-properties.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 3722,
       "expectedSha256": "02c76fd1e13c06ec3214af0b31cb11df85c541f55a682b4814297db28eca6559"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 2177,
       "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
     },
     {
       "path": "stars/hyg-v41-field.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 144973,
       "expectedSha256": "5438fe8ce69aa36638ac03b41e4247fb4394184b65aa99bc354bc63fe77270cd"
     },
     {
       "path": "stars/LICENSE.md",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 595,
       "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
     }

@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "362c85224665355c028c6410ba40d63ac5827b9fb7ddcf1a0683e8a164082335"
+    "sha256": "8b7688c9bbf51383a878c6229b25d37dd23c28b04bc0a483452f039138aa562e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -129,7 +129,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "db7c4c51c376cf2660e70126ed0205b4697898637654804eeebbfd0f77cb7b05",
+      "sha256": "7ce4889f588f2f57bcc0844b117fb4d939e4a24ccca8b69f66c92f33211802a2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -190,7 +190,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "source-pluto-orbit-jpl-physical-values",
+                "locator": "/references/0; mass"
               }
             },
             {
@@ -201,7 +203,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "source-pluto-orbit-jpl-physical-values",
+                "locator": "/references/0; density"
               }
             }
           ]
@@ -525,20 +529,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Authored scientific and presentation recipe for reusable capability preparation.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Authored scientific and presentation recipe for reusable capability preparation.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "db7c4c51c376cf2660e70126ed0205b4697898637654804eeebbfd0f77cb7b05",
-      "bytes": 9815,
+      "sha256": "7ce4889f588f2f57bcc0844b117fb4d939e4a24ccca8b69f66c92f33211802a2",
+      "bytes": 10040,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -707,8 +710,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5626,
-          "sha256": "5a696b6f7238d67a1029c4f7c64b4d3195d2421c2f54f80411e3fd8dc6b7ff72",
+          "bytes": 5803,
+          "sha256": "d0f7add1beb0f70b6651b50627119750789a33f937754f8ca634469973f0916e",
           "verification": "bytes-verified"
         }
       ],

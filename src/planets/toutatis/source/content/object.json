@@ -53,7 +53,9 @@
           "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=Toutatis&phys-par=1",
           "label": "JPL SBDB / NEOWISE estimate",
           "checked": "2026-09-08",
-          "path": "source/reference/sbdb-physical.json"
+          "path": "source/reference/sbdb-physical.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "phys_par: albedo"
         }
       }
     ]

@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3072fdb958ad2c4248325be8e7804070fc3f3dadc720ef0ef75293eee7dc2cf6"
+    "sha256": "5f3576baf3111dc6108586aa30a88dac54bef7abae563c48262876293bd025c6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "65a656bbe9df25651907bcc08e62a5b31b00095cb407962d09b9593a7f815f02",
+      "sha256": "a4cdd3b617823da4c039753377dc8ee17850b2d7d6cf070128b99dc3d721bd2f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -183,7 +183,9 @@
                 "url": "https://arxiv.org/pdf/2005.01479",
                 "label": "Alí-Lagoa et al.(2020), A&A638,A84, Table2, doi:10.1051/0004-6361/202037718; SAGE model reference Podlewska-Gaca et al.(2020), A&A638,A11",
                 "checked": "2026-09-08",
-                "path": "source/reference/calibration.json"
+                "path": "source/reference/calibration.json",
+                "catalogueId": "ali-lagoa-2020-herschel",
+                "locator": "/diameterKm; radius = diameterKm / 2"
               }
             },
             {
@@ -204,7 +206,9 @@
                 "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16321",
                 "label": "DAMIT model 16321",
                 "checked": "2026-09-08",
-                "path": "source/reference/damit-model.json"
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "Model 16321; version 2026-04-30 15:07:16; /periodHours"
               }
             }
           ],
@@ -366,20 +370,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "65a656bbe9df25651907bcc08e62a5b31b00095cb407962d09b9593a7f815f02",
+      "sha256": "a4cdd3b617823da4c039753377dc8ee17850b2d7d6cf070128b99dc3d721bd2f",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11176,
+      "bytes": 11409,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -487,8 +490,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8316,
-          "sha256": "c0322e04d233d371da74b820da8a11d6a8268ae74ecf03fbe01576b65696c84e",
+          "bytes": 8501,
+          "sha256": "9efcfee04497096e4f6ab61d087e22eb72d7bf81238f6cae7b8dd793313018a6",
           "verification": "bytes-verified"
         }
       ],

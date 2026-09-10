@@ -114,7 +114,7 @@
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored grid marking unavailable surface imagery."
       }
     }
   ],
@@ -123,83 +123,70 @@
       "path": "content/object.json",
       "expectedBytes": 4140,
       "expectedSha256": "ccb4984a3f9c4abf41b9b7b02d50e3c1bb30ec8641b9ea3b59b41427bb83c651",
-      "purpose": "Pinned source observation, interpretation or preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "measurements.json",
       "expectedBytes": 1857,
-      "expectedSha256": "48ff3af8fe4397f6a282bc8a3152e405972c7ecac607bfa360b7a7fd515c5e17",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "48ff3af8fe4397f6a282bc8a3152e405972c7ecac607bfa360b7a7fd515c5e17"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 488,
-      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1262,
-      "expectedSha256": "ea0d71f861afe44c2d14decb8911afadb5c6146a9109fded42129fde3881ac40",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "ea0d71f861afe44c2d14decb8911afadb5c6146a9109fded42129fde3881ac40"
     },
     {
       "path": "preparation/rotation.json",
       "expectedBytes": 448,
-      "expectedSha256": "fc185925619556f375aaccd95a90ca34e08084be144dc439f4781a9d78f19520",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "fc185925619556f375aaccd95a90ca34e08084be144dc439f4781a9d78f19520"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 3704,
-      "expectedSha256": "342ce2b481e6f55e18445023022f549826b0f56a580ee25eabd8b86c97883dc4",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "342ce2b481e6f55e18445023022f549826b0f56a580ee25eabd8b86c97883dc4"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 4504,
-      "expectedSha256": "f75966f4164ebb6dd509d22c4dc159c437966ca9fa1ad77af54cd4fcf56f0d61",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "f75966f4164ebb6dd509d22c4dc159c437966ca9fa1ad77af54cd4fcf56f0d61"
     },
     {
       "path": "reference/horizons-elements.txt",
       "expectedBytes": 7355,
-      "expectedSha256": "da03338dcb2a72110d581a1d8fec15f814538b05184d5d36dc39f90b0e256d13",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "da03338dcb2a72110d581a1d8fec15f814538b05184d5d36dc39f90b0e256d13"
     },
     {
       "path": "reference/horizons-vectors.txt",
       "expectedBytes": 6645,
-      "expectedSha256": "33270acb14ba6bfc481aeea35b006884af53c552b7bdfd8af02d9050c2afcdc5",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "33270acb14ba6bfc481aeea35b006884af53c552b7bdfd8af02d9050c2afcdc5"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 849,
-      "expectedSha256": "914af773d618df2c7c9a18d6b1d635a6b3de0838276e5c1139665abb2ae6ca8d",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "914af773d618df2c7c9a18d6b1d635a6b3de0838276e5c1139665abb2ae6ca8d"
     }
   ],
   "generatedIntermediates": [

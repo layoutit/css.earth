@@ -9,6 +9,11 @@
       "role": "landing",
       "url": "https://science.nasa.gov/neptune/neptune-facts/",
       "label": "Source"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "label": "NASA content usage guidelines"
     }
   ],
   "evidence": [
@@ -20,5 +25,6 @@
     }
   ],
   "relations": [],
-  "statements": []
+  "statements": [],
+  "publisher": "NASA Science"
 }

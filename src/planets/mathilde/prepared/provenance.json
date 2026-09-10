@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "41380dc9ef3b4029c11c350ed390e11a53ca40a929c1bb70fa1ad244a7759031"
+    "sha256": "d13f0516d3692a339fc6cecf250b95682377817fc159c5e0ca2467fde7254fa9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -157,7 +157,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ba9e7d83d9c64f66293d66b313d91da0184c346a1b1876c9b0538fb997ad4642",
+      "sha256": "c02c00c4643e0f2648ee09ffaeac963e75e5355cf7087d29742b86ea6d413d8b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,9 @@
                 "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
                 "label": "JPL Horizons pinned physical record",
                 "checked": "2026-09-08",
-                "path": "source/reference/horizons-physical.txt"
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: geometric albedo"
               }
             }
           ]
@@ -510,20 +512,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Pinned source label, survey evidence or authored package input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Pinned source label, survey evidence or authored package input.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ba9e7d83d9c64f66293d66b313d91da0184c346a1b1876c9b0538fb997ad4642",
-      "bytes": 10219,
+      "sha256": "c02c00c4643e0f2648ee09ffaeac963e75e5355cf7087d29742b86ea6d413d8b",
+      "bytes": 10334,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -642,8 +643,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6541,
-          "sha256": "7aeeff6d2fb751c177ac28b49022a765ce4e8260ea6ce95efa57609ae642c73b",
+          "bytes": 6632,
+          "sha256": "683de8ee1f2bbe72364ebb1d2bfd227ca1f148d8a7a3a74249f07f3b0afdbaaf",
           "verification": "bytes-verified"
         }
       ],

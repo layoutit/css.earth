@@ -1,0 +1,25 @@
+{
+  "id": "jpl-satellite-physical-parameters",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "JPL Planetary Satellite Physical Parameters",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "label": "JPL Planetary Satellite Physical Parameters"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/adrastea/source/content/object.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "a35f062da2dbcbbc6bc9f939c03bcc3fe393d6d427f34dbe690cdbf8f7f8cb94",
+      "locator": "/panel/facts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "NASA/JPL Solar System Dynamics"
+}

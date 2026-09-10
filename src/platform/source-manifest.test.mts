@@ -4,11 +4,24 @@ import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
+import { parseSourceManifest } from '../../tools/objects/dist/operations.js';
 
 import {
   validateSourceManifest,
   verifySourceManifest,
 } from "./source-manifest.mts";
+
+test('document descriptions are optional without weakening source pins or generator identity', () => {
+  const base = sourceManifest({ 'input/source.txt': Buffer.from('input') });
+  const { purpose, ...document } = base.documents[0];
+  const manifest = { ...base, documents: [document] };
+  for (const parse of [(value: unknown) => validateSourceManifest('fixture', value), (value: unknown) => parseSourceManifest(value, 'fixture')]) {
+    assert.deepEqual(parse(manifest).documents[0], document);
+    assert.throws(() => parse({ ...manifest, documents: [{ ...document, purpose: '' }] }), /empty purpose/);
+    assert.throws(() => parse({ ...manifest, documents: [{ ...document, expectedSha256: 'invalid' }] }));
+    assert.throws(() => parse({ ...manifest, generatedIntermediates: [{ ...base.generatedIntermediates[0], generator: '' }] }), /generator/);
+  }
+});
 
 test("validates and verifies every authoritative source entry class", async (t) => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-source-manifest-"));

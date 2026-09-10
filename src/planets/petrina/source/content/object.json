@@ -31,7 +31,9 @@
           "url": "https://arxiv.org/pdf/1803.06116",
           "label": "Hanuš, Delbo, Ďurech and Alí-Lagoa (2018), Icarus309,297–337, TableA.3; doi:10.1016/j.icarus.2018.03.016",
           "checked": "2026-09-08",
-          "path": "source/reference/calibration.json"
+          "path": "source/reference/calibration.json",
+          "catalogueId": "hanus-2018-thermophysical-models",
+          "locator": "/diameterKm; radius = diameterKm / 2"
         }
       },
       {
@@ -52,7 +54,9 @@
           "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1152",
           "label": "DAMIT model 1152",
           "checked": "2026-09-08",
-          "path": "source/reference/damit-model.json"
+          "path": "source/reference/damit-model.json",
+          "catalogueId": "damit-models",
+          "locator": "Model 1152; version 2016-01-04; /periodHours"
         }
       }
     ],
