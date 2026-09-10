@@ -112,6 +112,7 @@ src/planets/*/source/**/*.bpc
 !src/planets/*/source/cassini-ice/*.tif
 !src/planets/*/source/geology/*-geologic-units.tif
 !src/planets/*/source/science/*-georeferenced.tif
+!src/planets/moon/source/science/diviner-ghrm/*-compact.tif
 !src/planets/*/source/science/geology-*/categories.tif
 !src/planets/*/source/science/geology-*/nomenclature.zip
 !src/planets/*/source/observations/*-registered-rgba.tif
