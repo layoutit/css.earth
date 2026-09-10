@@ -1,0 +1,14 @@
+{
+  "revision": "d535aee0f61f31871afca06cccb8a217be62d471",
+  "command": "node tools/check-object-runtime-ownership.mts --object comet-1p",
+  "complete": true,
+  "entries": [
+    {
+      "id": "comet-1p",
+      "migrated": true,
+      "violations": []
+    }
+  ],
+  "sharedViolations": [],
+  "scope": "Static runtime/source closure; not a native rendering or resource-lifetime proof."
+}
