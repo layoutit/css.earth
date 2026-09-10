@@ -76,6 +76,7 @@ test('The reproducible mosaic adds measured area while preserving every Giotto m
   const result=await prepareEncounters(source);
   assert.deepEqual(result.png,await readFile(resolve(source,'material/encounters.png')));
   assert.deepEqual(result.attribution,await readFile(resolve(source,'reference/encounter-attribution.bin')));
+  assert.deepEqual(result.report,JSON.parse(await readFile(resolve(source,'reference/encounter-projection-report.json'),'utf8')));
   const before=await sharp(resolve(source,'material/giotto.png')).removeAlpha().raw().toBuffer();
   const after=await sharp(result.png).removeAlpha().raw().toBuffer();
   const oldValidity=await readFile(resolve(source,'reference/giotto-validity.bin'));
