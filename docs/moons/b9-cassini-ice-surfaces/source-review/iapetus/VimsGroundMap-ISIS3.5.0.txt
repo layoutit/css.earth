@@ -1,0 +1,388 @@
+    1 
+   21 #include "VimsGroundMap.h"
+   22 
+   23 #include <iostream>
+   24 #include <iomanip>
+   25 
+   26 #include <QDebug>
+   27 #include <QVector>
+   28 
+   29 #include "BasisFunction.h"
+   30 #include "Camera.h"
+   31 #include "Constants.h"
+   32 #include "Distance.h"
+   33 #include "FileName.h"
+   34 #include "IException.h"
+   35 #include "IString.h"
+   36 #include "iTime.h"
+   37 #include "Latitude.h"
+   38 #include "LeastSquares.h"
+   39 #include "Longitude.h"
+   40 #include "PolynomialBivariate.h"
+   41 #include "Preference.h"
+   42 #include "SpecialPixel.h"
+   43 #include "Target.h"
+   44 
+   45 using namespace std;
+   46 
+   47 namespace Isis {
+   54   VimsGroundMap::VimsGroundMap(Camera *parent, Pvl &lab) :
+   55     CameraGroundMap(parent) {
+   56 
+   57     p_minX = DBL_MAX;
+   58     p_maxX = -DBL_MAX;
+   59     p_minY = DBL_MAX;
+   60     p_maxY = -DBL_MAX;
+   61     p_minZ = DBL_MAX;
+   62     p_maxZ = -DBL_MAX;
+   63 
+   64     if (parent->ParentSamples() > 64 || parent->ParentLines() > 64) {
+   65       IString msg = "The Vims ground map does not understand cubes that "
+   66                     "initially have more than 64 lines or 64 samples.";
+   67       throw IException(IException::Programmer, msg, _FILEINFO_);
+   68     }
+   69   }
+   70 
+   71 
+   72 
+   76   VimsGroundMap::~VimsGroundMap() {
+   77 
+   78   }
+   79 
+   80 
+   81 
+  128   void VimsGroundMap::Init(Pvl &lab) {
+  129 
+  130     PvlGroup inst = lab.findGroup("Instrument", Pvl::Traverse);
+  131 
+  132     //  Vis or IR
+  133     p_channel = (QString) inst ["Channel"];
+  134     // Get the start time in et
+  135     QString stime = (QString) inst ["NativeStartTime"];
+  136     QString intTime = stime.split(".").first();
+  137     stime = stime.split(".").last();
+  138 
+  139     p_etStart = p_camera->getClockTime(intTime).Et();
+  140     p_etStart += toDouble(stime) / 15959.0;
+  141     //----------------------------------------------------------------------
+  142     //  Because of inaccuracy with the 15 Mhz clock, the IR exposure and
+  143     //  interline delay need to be adjusted.
+  144     //----------------------------------------------------------------------
+  145     p_irExp = (toDouble(inst ["ExposureDuration"][0]) * 1.01725) / 1000.;
+  146     p_visExp = (toDouble(inst ["ExposureDuration"][1])) / 1000.;
+  147     p_interlineDelay = (toDouble(inst ["InterlineDelayDuration"]) * 1.01725) / 1000.;
+  148 
+  149     // Get summation mode
+  150     QString sampMode = QString((QString)inst ["SamplingMode"]).toUpper();
+  151 
+  152     //  Get sample/line offsets
+  153     int sampOffset = inst ["XOffset"];
+  154     int lineOffset = inst ["ZOffset"];
+  155 
+  156     //  Get swath width/length which will be image size unless occultation image
+  157     p_swathWidth = inst ["SwathWidth"];
+  158     p_swathLength = inst ["SwathLength"];
+  159 
+  160     if (p_channel == "VIS") {
+  161       if (sampMode == "NORMAL") {
+  162         p_xPixSize = p_yPixSize = 0.00051;
+  163         p_xBore = p_yBore = 31;
+  164         p_camSampOffset = sampOffset - 1;
+  165         p_camLineOffset = lineOffset - 1;
+  166 
+  167       }
+  168       else if (sampMode == "HI-RES") {
+  169         p_xPixSize = p_yPixSize = 0.00051 / 3.0;
+  170         p_xBore = p_yBore = 94;
+  171         //New as of 2009-08-04 per Dyer Lytle's email
+  172         // Old Values:p_camSampOffset = 3 * (sampOffset - 1) + p_swathWidth;
+  173         //            p_camLineOffset = 3 * (lineOffset - 1) + p_swathLength;
+  174         p_camSampOffset = (3 * (sampOffset + p_swathWidth / 2)) - p_swathWidth / 2;
+  175         p_camLineOffset = (3 * (lineOffset + p_swathLength / 2)) - p_swathLength / 2;
+  176       }
+  177       else {
+  178         string msg = "Unsupported SamplingMode [" + IString(sampMode) + "]";
+  179         throw IException(IException::Programmer, msg, _FILEINFO_);
+  180       }
+  181     }
+  182     else if (p_channel == "IR") {
+  183       if (sampMode == "NORMAL") {
+  184         p_xPixSize = p_yPixSize = 0.000495;
+  185         p_xBore = p_yBore = 31;
+  186         p_camSampOffset = sampOffset - 1;
+  187         p_camLineOffset = lineOffset - 1;
+  188       }
+  189       else if (sampMode == "HI-RES") {
+  190         p_xPixSize = 0.000495 / 2.0;
+  191         p_yPixSize = 0.000495;
+  192         p_xBore = 62.5;
+  193         p_yBore = 31;
+  194         p_camSampOffset = 2 * ((sampOffset - 1) + ((p_swathWidth - 1) / 4));
+  195         p_camLineOffset = lineOffset - 1;
+  196       }
+  197       else {
+  198         string msg = "Unsupported SamplingMode [" + IString(sampMode) + "]";
+  199         throw IException(IException::Programmer, msg, _FILEINFO_);
+  200       }
+  201     }
+  202 
+  203     //---------------------------------------------------------------------
+  204     //  Loop for each pixel in cube, get pointing information and calculate
+  205     //  control point (line, sample, x, y, z) for later use in latlon_to_linesamp.
+  206     //---------------------------------------------------------------------
+  207     p_camera->IgnoreProjection(true);
+  208     for (int line = 0; line < p_camera->ParentLines(); line++) {
+  209 
+  210       //  VIS exposure is for a single line.  According to SIS,
+  211       //  NATIVE_START_TIME is for the first pixel of the IR exposure.
+  212       //  "The offset from IR start to VIS start is calculated by
+  213       //   IrExposMsec - VisExposMsec)/2".
+  214       //  This needs to be moved to forward routine
+  215 
+  216       if (p_channel == "VIS") {
+  217         double et = ((double)p_etStart + (((p_irExp * p_swathWidth) - p_visExp) / 2.)) +
+  218                     ((line + 0.5) * p_visExp);
+  219         p_camera->setTime(et);
+  220       }
+  221 
+  222       for (int samp = 0; samp < p_camera->ParentSamples(); samp++) {
+  223         if (p_channel == "IR") {
+  224           double et = (double)p_etStart +
+  225                       (line * p_camera->ParentSamples() * p_irExp) +
+  226                       (line * p_interlineDelay) + ((samp + 0.5) * p_irExp);
+  227           p_camera->setTime(et);
+  228         }
+  229 
+  230         if (p_camera->SetImage((double) samp + 1, (double)line + 1)) {
+  231 
+  232           double xyz[3];
+  233           p_camera->Coordinate(xyz);
+  234 
+  235           if (xyz[0] != Null && xyz[1] != Null && xyz[2] != Null) {
+  236             p_xyzMap[line][samp].setX(xyz[0]);
+  237             p_xyzMap[line][samp].setY(xyz[1]);
+  238             p_xyzMap[line][samp].setZ(xyz[2]);
+  239 
+  240 //          if (samp !=0 ) {
+  241 //            QVector3D deltaXyz = p_xyzMap[line][samp-1] - p_xyzMap[line][samp];
+  242 //            qDebug()<<"samp:line = "<<samp<<" : "<<line<<" xyzMap[line][samp-1] = "<<p_xyzMap[line][samp-1]<<"  xyzMap[line][samp] = "<<p_xyzMap[line][samp]<<"  delta = "<<deltaXyz.length();
+  243 //          }
+  244 
+  245             // Find min/max x,y,z for use in SetGround method to make sure incoming lat/lon falls
+  246             // within image.
+  247             if (xyz[0] < p_minX) p_minX = xyz[0];
+  248             if (xyz[0] > p_maxX) p_maxX = xyz[0];
+  249             if (xyz[1] < p_minY) p_minY = xyz[1];
+  250             if (xyz[1] > p_maxY) p_maxY = xyz[1];
+  251             if (xyz[2] < p_minZ) p_minZ = xyz[2];
+  252             if (xyz[2] > p_maxZ) p_maxZ = xyz[2];
+  253           }
+  254         }
+  255       }
+  256     }
+  257 
+  258     //  Fine tune min/max Z so that if the pole is actually in the image, it will be found in
+  259     //  the SetGround method.  If the min/max values found for pixels centers is used, the pole
+  260     //  will not be found even if it is actually in the image.  if the min/max z values are within
+  261     //  1 km of the radius, set to the radius.
+  262 
+  263     //  NOTE:  IF THERE ARE PROBLEMS FOUND IN THE CAMERA MODEL,  THIS WOULD BE THE FIRST PLACE
+  264     //         I WOULD LOOK.
+  265     Distance radii[3];
+  266     p_camera->radii(radii);
+  267     if (abs(abs(p_minZ) - radii[2].kilometers()) < 1.0) {
+  268       p_minZ = radii[2].kilometers() * (int(abs(p_minZ) / p_minZ));
+  269     }
+  270     if (abs(abs(p_maxZ) - radii[2].kilometers()) < 1.0) {
+  271       p_maxZ = radii[2].kilometers() * (int(abs(p_maxZ) / p_maxZ));
+  272     }
+  273 
+  274     p_camera->IgnoreProjection(false);
+  275   }
+  276 
+  277 
+  299   bool VimsGroundMap::SetFocalPlane(const double ux, const double uy,
+  300                                     const double uz) {
+  301 
+  302     p_ux = ux;
+  303     p_uy = uy;
+  304     p_uz = uz;
+  305 
+  306     double imgSamp = ux;
+  307     double imgLine = uy;
+  308 
+  309     if ((imgLine < 0.5) || (imgLine > p_camera->ParentLines() + 0.5) ||
+  310         (imgSamp < 0.5) || (imgSamp > p_camera->ParentSamples() + 0.5)) {
+  311       return false;
+  312     }
+  313     imgLine--;
+  314     imgSamp--;
+  315 
+  316     // does interline_delay & exposure-duration account for summing modes?
+  317     // if not, won't use p_parentLine/p_parentSample
+  318     double et = 0.;
+  319     if (p_channel == "VIS") {
+  320       et = (p_etStart + ((p_irExp * p_swathWidth) - p_visExp) / 2.) +
+  321            ((imgLine + 0.5) * p_visExp);
+  322     }
+  323     else if (p_channel == "IR") {
+  324       et = (double)p_etStart +
+  325            (imgLine * p_camera->ParentSamples() * p_irExp) +
+  326            (imgLine * p_interlineDelay) + ((imgSamp + 0.5) * p_irExp);
+  327     }
+  328     p_camera->setTime(et);
+  329 
+  330     //  get Look Direction
+  331     SpiceDouble lookC[3];
+  332     LookDirection(lookC);
+  333 
+  334     SpiceDouble unitLookC[3];
+  335     vhat_c(lookC, unitLookC);
+  336     return p_camera->SetLookDirection(unitLookC);
+  337   }
+  338 
+  339 
+  371   bool VimsGroundMap::SetGround(const Latitude &lat, const Longitude &lon) {
+  372 
+  373 
+  374     //  Make sure at least 1 pixel in image has projected onto surface
+  375     if (p_minX == DBL_MAX || p_maxX == -DBL_MAX ||
+  376         p_minY == DBL_MAX || p_maxY == -DBL_MAX ||
+  377         p_minZ == DBL_MAX || p_maxZ == -DBL_MAX) return false;
+  378 
+  379     QVector3D xyz;
+  380     if (p_camera->target()->shape()->name() == "Plane") {
+  381         double radius = lat.degrees();
+  382         if(radius <= 0.0)
+  383           return false;
+  384 
+  385         double xCheck = radius * 0.001 * cos(lon.radians());
+  386         double yCheck = radius * 0.001 * sin(lon.radians());
+  387 
+  388         xyz.setX(xCheck);
+  389         xyz.setY(yCheck);
+  390         xyz.setZ(0.);
+  391       }
+  392     else {
+  393         //  Convert lat/lon to x/y/z
+  394         Distance radius = p_camera->LocalRadius(lat, lon);
+  395         SpiceDouble pB[3];
+  396         latrec_c(radius.kilometers(), lon.radians(), lat.radians(), pB);
+  397 
+  398         //  Make sure this point falls within range of image
+  399         if (pB[0] < p_minX || pB[0] > p_maxX ||
+  400             pB[1] < p_minY || pB[1] > p_maxY ||
+  401             pB[2] < p_minZ || pB[2] > p_maxZ) return false;
+  402 
+  403         xyz.setX(pB[0]);
+  404         xyz.setY(pB[1]);
+  405         xyz.setZ(pB[2]);
+  406     }
+  407 
+  408     double minDist = DBL_MAX;
+  409     int minSamp = -1;
+  410     int minLine = -1;
+  411 
+  412     //  Find closest points  ??? what tolerance ???
+  413     for (int line = 0; line < p_camera->ParentLines(); line++) {
+  414       for (int samp = 0; samp < p_camera->ParentSamples(); samp++) {
+  415 
+  416         if (p_xyzMap[line][samp].isNull()) continue;
+  417 
+  418         //  Subtract map from coordinate then get length
+  419         QVector3D deltaXyz = xyz - p_xyzMap[line][samp];
+  420         if (deltaXyz.length() < minDist) {
+  421           minDist = deltaXyz.length();
+  422           minSamp = samp;
+  423           minLine = line;
+  424         }
+  425       }
+  426     }
+  427 
+  428     //-----------------------------------------------------------------
+  429     //  If dist is less than some ??? tolerance ??? this is the
+  430     //  closest point.  Use this point and surrounding 8 pts as
+  431     //  control pts.
+  432     //----------------------------------------------------------------
+  433     if (minDist >= DBL_MAX) return false;
+  434 
+  435     //-------------------------------------------------------------
+  436     //  Set-up for LU decomposition (least2 fit).
+  437     //  Assume we will have 9 control points, this may not be true
+  438     //  and will need to be adjusted before the final solution.
+  439     //-------------------------------------------------------------
+  440     BasisFunction sampXyzBasis("Sample", 4, 4);
+  441     BasisFunction lineXyzBasis("Line", 4, 4);
+  442     LeastSquares sampXyzLsq(sampXyzBasis);
+  443     LeastSquares lineXyzLsq(lineXyzBasis);
+  444     vector<double> knownXyz(4);
+  445 
+  446     //  Solve using x/y/z
+  447     for (int line = minLine - 1; line < minLine + 2; line++) {
+  448       if (line < 0 || line > p_camera->ParentLines() - 1) continue;
+  449       for (int samp = minSamp - 1; samp < minSamp + 2; samp++) {
+  450         //  Check for edges
+  451         if (samp < 0 || samp > p_camera->ParentSamples() - 1) continue;
+  452         if (p_xyzMap[line][samp].isNull()) continue;
+  453 
+  454         knownXyz[0] = p_xyzMap[line][samp].x();
+  455         knownXyz[1] = p_xyzMap[line][samp].y();
+  456         knownXyz[2] = p_xyzMap[line][samp].z();
+  457         knownXyz[3] = 1;
+  458         sampXyzLsq.AddKnown(knownXyz, samp + 1);
+  459         lineXyzLsq.AddKnown(knownXyz, line + 1);
+  460       }
+  461     }
+  462 
+  463     if (sampXyzLsq.Knowns() < 4) return false;
+  464 
+  465     sampXyzLsq.Solve();
+  466     lineXyzLsq.Solve();
+  467 
+  468     //  Solve for sample, line position corresponding to input lat, lon
+  469     knownXyz[0] = xyz.x();
+  470     knownXyz[1] = xyz.y();
+  471     knownXyz[2] = xyz.z();
+  472     knownXyz[3] = 1;
+  473     double inSamp = sampXyzLsq.Evaluate(knownXyz);
+  474     double inLine = lineXyzLsq.Evaluate(knownXyz);
+  475 
+  476 
+  477     if (inSamp < 0.5 || inSamp > p_camera->ParentSamples() + 0.5 ||
+  478         inLine < 0.5 || inLine > p_camera->ParentLines() + 0.5) {
+  479       return false;
+  480     }
+  481 
+  482     // Sanity check
+  483     p_camera->IgnoreProjection(true);
+  484     p_camera->SetImage(inSamp, inLine);
+  485     p_camera->IgnoreProjection(false);
+  486     if (!p_camera->HasSurfaceIntersection()) return false;
+  487 
+  488     p_focalPlaneX = inSamp;
+  489     p_focalPlaneY = inLine;
+  490 
+  491     return true;
+  492   }
+  493 
+  494 
+  504   bool VimsGroundMap::SetGround(const SurfacePoint &surfacePoint) {
+  505     return SetGround(surfacePoint.GetLatitude(), surfacePoint.GetLongitude());
+  506 //    return SetGroundwithLatitudeLongitude(surfacePoint.GetLatitude(), surfacePoint.GetLongitude());
+  507   }
+  508 
+  509 
+  523   void VimsGroundMap::LookDirection(double v[3]) {
+  524 
+  525     double x = p_ux - 1. + p_camSampOffset;
+  526     double y = p_uy - 1. + p_camLineOffset;
+  527 
+  528     //  Compute pointing angles based on pixel size separation
+  529     double theta = Isis::HALFPI - (y - p_yBore) * p_yPixSize;
+  530     double phi = (-1. * Isis::HALFPI) + (x - p_xBore) * p_xPixSize;
+  531 
+  532     v[0] = sin(theta) * cos(phi);
+  533     v[1] = cos(theta);
+  534     v[2] = sin(theta) * sin(phi) / -1.;
+  535   }
+  536 }

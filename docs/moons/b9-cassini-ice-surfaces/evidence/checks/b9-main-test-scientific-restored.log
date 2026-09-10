@@ -1,0 +1,35 @@
+✔ reduced science textures preserve every normalized band and gutter address (1.003625ms)
+✔ 16-bit color bands preserve RGB identity, alpha validity, dark samples and map registration (6.721083ms)
+✔ geographic 64-bit reflectance respects longitude, latitude, zero and missing values (1.591917ms)
+✔ explicit source no-data distinguishes any-channel and complete-pixel masks (0.135333ms)
+✔ documented polar and synthetic-channel exclusions operate in source geographic coordinates (0.063334ms)
+✔ authored scientific body profiles dispatch without body-named executable recipes (4.883959ms)
+✔ observation recipes reject ambiguous masks and fallback ordering (0.82975ms)
+✔ disk normalization rejects unsupported physical or display assumptions (1.369625ms)
+✔ a shape display requires a source mesh and consumer for the shared no-imagery grid (0.505959ms)
+✔ georeferenced photographs bind quality, physical distances and bounded disk normalization (1.7865ms)
+✔ native radial fallback preserves numeric/missing cells through actual lossless flood and shadow encoding (10.570625ms)
+✔ a smaller baked atlas preserves original face plans and normalized CSS addresses (3.911333ms)
+✔ Agenor focus transforms actual solid leaf coordinates to the camera centre (18.797291ms)
+✔ scientific quality masks intersect measured support without erasing valid zero or blending across boundaries (5.139875ms)
+✔ source-surface relief uses the actual local facet normal without radial finite differences (0.470083ms)
+✔ polar stereographic grids preserve cardinal orientation in both hemispheres (0.411917ms)
+✔ scientific interpolation converts radius to height without extending source coverage (0.158625ms)
+✔ relief preserves height units, latitude spacing, wrapping and coverage boundaries (0.172458ms)
+✔ numeric color scale clamps endpoints and interpolates authored colors (0.100333ms)
+✔ kilometre DEMs produce the same relief as their metre equivalents (0.077334ms)
+✔ float sampling uses pixel centers and excludes special values without masking black observations (0.097167ms)
+✔ observed color retains dark valid pixels and rejects incomplete footprints (0.077875ms)
+✔ channel composition uses all three bands from one observation and source density precedence (0.402209ms)
+✔ Lambert atlas is transparent outside the body and carries distinct full-phase shading (0.199916ms)
+✔ capability selection and validity policy are independent of body names (3.428208ms)
+✔ a measured elevation lens can be the only surface capability (0.760959ms)
+✔ a declared output meridian shifts presentation without changing source coordinates (1.406416ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 937.409916

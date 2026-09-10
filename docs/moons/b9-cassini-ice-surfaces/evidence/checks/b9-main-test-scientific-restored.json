@@ -1,0 +1,43 @@
+{
+  "command": [
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "tools/objects/terrestrial-layers/scientific-raster.test.mjs",
+    "tools/objects/terrestrial-layers/scientific-quality.test.mjs",
+    "tools/objects/terrestrial-layers/scientific-focus.test.mjs",
+    "tools/objects/terrestrial-layers/lens-texture-scale.test.mjs",
+    "tools/objects/terrestrial-layers/radial-scientific-raster.test.mjs",
+    "tools/objects/terrestrial-layers/observed-geotiff.test.mjs",
+    "tools/objects/terrestrial-layers/profile.test.mjs"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 160628736,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 278528,
+      "freePercent": 55
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 130088960,
+      "freePercent": 55
+    },
+    {
+      "seconds": 0.6,
+      "rssBytes": 129433600,
+      "freePercent": 55
+    },
+    {
+      "seconds": 0.8,
+      "rssBytes": 160628736,
+      "freePercent": 55
+    }
+  ],
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 1.1
+}

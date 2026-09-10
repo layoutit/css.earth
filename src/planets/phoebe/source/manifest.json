@@ -289,6 +289,139 @@
         ],
         "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_numimg_c.cub"
       }
+    },
+    {
+      "id": "phoebe-cassini-original-c1465671822_1_ir-cub",
+      "path": "cassini-ice/native/C1465671822_1_ir.cub",
+      "expectedBytes": 1090377,
+      "expectedSha256": "e3d284051d290a154a692a5fccc4388bcb33220fed68345991a9055b8d6228ee",
+      "origin": "https://vims.univ-nantes.fr/cube/C1465671822_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "phoebe-cassini-original-n1465671822_1_ir-cub",
+      "path": "cassini-ice/native/N1465671822_1_ir.cub",
+      "expectedBytes": 226310,
+      "expectedSha256": "97fee2316839da6b2f5849b35b4ed8bd04af9e26f6cc8842f3254309c915a5a3",
+      "origin": "https://vims.univ-nantes.fr/cube/N1465671822_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "phoebe-cassini-original-v1465671822_1-qub",
+      "path": "cassini-ice/raw/v1465671822_1.qub",
+      "expectedBytes": 680448,
+      "expectedSha256": "df43d42c42ab29cf00eee62c6f22796d85631b60f6c8b4da56ba590cb01f3030",
+      "origin": "https://vims.univ-nantes.fr/cube/1465671822_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "phoebe-cassini-ice-absorption",
+      "path": "cassini-ice/phoebe-ice-absorption.tif",
+      "expectedBytes": 57492,
+      "expectedSha256": "d4b6945058358ceb42460ef5966e1ece2a5e1eb6bf481847b25ab42ff835ca1b",
+      "origin": "https://vims.univ-nantes.fr/cube/1465671822_1",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Reproduce from pinned original C/N and raw QUB inputs with tools/objects/acquisition/cassini-phoebe-surfaces.py and cassini-ice/prepare.json.",
+      "redistribution": "Derived source map under CC BY 4.0 with full archive attribution; original observations and lossless values retained.",
+      "consumers": [
+        "ice-absorption"
+      ],
+      "lensId": "ice-absorption",
+      "label": "Ice absorption",
+      "falseColor": true,
+      "width": 1440,
+      "height": 720,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 0,
+        "referenceRadiusMeters": 106500,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "Supported detector apertures cover approximately 1.84% of the reference sphere by angular grid weighting, not measured physical mesh area. Native resolution varies; output grid spacing is not observation detail. Preserve unsupported gaps. No photometric correction; registration limits are in cassini-ice/evidence/registration.md.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://vims.univ-nantes.fr/cube/1465671822_1"
+      }
+    },
+    {
+      "id": "phoebe-cassini-infrared",
+      "path": "cassini-ice/phoebe-infrared-display.tif",
+      "expectedBytes": 52468,
+      "expectedSha256": "f22812b0e21b9f448bd83482bd2a664cafe67ea6f8dc23e8c0e205dd0c3e2e8b",
+      "origin": "https://vims.univ-nantes.fr/cube/1465671822_1",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Reproduce from pinned original C/N and raw QUB inputs with tools/objects/acquisition/cassini-phoebe-surfaces.py and cassini-ice/prepare.json.",
+      "redistribution": "Derived source map under CC BY 4.0 with full archive attribution; original observations and lossless values retained.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "infrared",
+      "label": "Infrared",
+      "falseColor": true,
+      "width": 1440,
+      "height": 720,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 180,
+        "referenceRadiusMeters": 106500,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "Supported detector apertures cover approximately 1.84% of the reference sphere by angular grid weighting, not measured physical mesh area. Native resolution varies; output grid spacing is not observation detail. Preserve unsupported gaps. No photometric correction; registration limits are in cassini-ice/evidence/registration.md.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://vims.univ-nantes.fr/cube/1465671822_1"
+      }
     }
   ],
   "generatedIntermediates": [
@@ -325,8 +458,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9452,
-      "expectedSha256": "e48d48ce5f724909c52934209145e077d677172db951b5b89312bcdf8d361938",
+      "expectedBytes": 13158,
+      "expectedSha256": "b9b8d32239e44ba08108e7bd064c22dcab4874a5fc94d8751427be79d1013923",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {
@@ -343,8 +476,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2286,
-      "expectedSha256": "bb9c243ce9a33fb04fe6475d3cd82d4a26c4025aa279ded13590e067884ee47d",
+      "expectedBytes": 2906,
+      "expectedSha256": "2b19a56f223fa38db69e30275699579456e5ef36ac429ae232b1933b7dd76027",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {
@@ -361,8 +494,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 9433,
-      "expectedSha256": "07bd55495c3a96a3ba45203a2f9bb69df5aa70c55701571f0ff0d1380a0dcb3c",
+      "expectedBytes": 11547,
+      "expectedSha256": "18231157d84925b7f5fe8f1842d3b406aec949cb2831ab571a1c8ed2379a7fab",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {
@@ -515,6 +648,84 @@
       "purpose": "Pinned paired-source context generation and bit-identical repeat receipt.",
       "expectedBytes": 2239,
       "expectedSha256": "6a8ab7858925801e7b75e7b43bb7e793d5f1e948d23a76cac07d4e1802b7812a"
+    },
+    {
+      "path": "cassini-ice/evidence/download-receipts.json",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 946,
+      "expectedSha256": "41944b166965998dff08963811ebc9bd83f637215ab3a8e1f8411e81f6cacce0"
+    },
+    {
+      "path": "cassini-ice/evidence/license-about.html",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 22564,
+      "expectedSha256": "02f560a51d6e075f91264a56b6aad8c23cfca448a4c17f0b3f0408568bf175a9"
+    },
+    {
+      "path": "cassini-ice/evidence/native-registration-fit.json",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 19553,
+      "expectedSha256": "e7e8d9b030135adc5e802c28daa9092bc77e37246bb2d50b59d36bdbb8d9b26a"
+    },
+    {
+      "path": "cassini-ice/evidence/regional-mask.json",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 77024,
+      "expectedSha256": "545127b529e97e3d0cd296cca6d826166ddc7fd0f025045f2550ed09a7d045fb"
+    },
+    {
+      "path": "cassini-ice/evidence/registration.md",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 1173,
+      "expectedSha256": "9e4897df64a6eb8cfc335083fd8c4d253fdac67e6ad7a6968544d0f9f89c028c"
+    },
+    {
+      "path": "cassini-ice/evidence/source-model-comparison.json",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 59202,
+      "expectedSha256": "d8ec9e389a1dd49bdeea35f739ed38312632d427f992f5dcd60b7c775469358d"
+    },
+    {
+      "path": "cassini-ice/phoebe-ice-absorption-observation.tif",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 16591,
+      "expectedSha256": "f2a90d476eaa584fb9897b4defe05c2b170bd48824ff6a600c2196ca9c778147"
+    },
+    {
+      "path": "cassini-ice/phoebe-ice-absorption-source-pixel.tif",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 18611,
+      "expectedSha256": "e4afd786788e5f3a048e7404d3305db6b9d10a3aa630d97e67840027d88695a7"
+    },
+    {
+      "path": "cassini-ice/phoebe-infrared-if-observation.tif",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 16591,
+      "expectedSha256": "f2a90d476eaa584fb9897b4defe05c2b170bd48824ff6a600c2196ca9c778147"
+    },
+    {
+      "path": "cassini-ice/phoebe-infrared-if-source-pixel.tif",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 18611,
+      "expectedSha256": "e4afd786788e5f3a048e7404d3305db6b9d10a3aa630d97e67840027d88695a7"
+    },
+    {
+      "path": "cassini-ice/phoebe-infrared-if.tif",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 90215,
+      "expectedSha256": "83d7e9574e3a52eda73590dbf0359b587003623140e2b2570528c3ecad0a7500"
+    },
+    {
+      "path": "cassini-ice/preparation-receipt.json",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 10611,
+      "expectedSha256": "82b121ab41e63420200fdcceb08311c155c62e743833fb60000f55fd155be4b6"
+    },
+    {
+      "path": "cassini-ice/prepare.json",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 3417,
+      "expectedSha256": "68162ebf0bc13325bf7d9ae295cf34903c1f100f3b13a7d35bd5d7db11689647"
     }
   ]
 }

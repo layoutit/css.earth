@@ -1,0 +1,68 @@
+{
+  "base": "bd265cf3a091c4ef17e9be76dfeb23410364884f",
+  "bodies": {
+    "tethys": {
+      "prepared/scene.json": {
+        "bytes": 7292180,
+        "sha256": "b7046e9658cc47abe79a4a20cf13796c0de8876bd31a319dd367d590a48c590d"
+      },
+      "prepared/terrain.json": {
+        "bytes": 927807,
+        "sha256": "91cc9755d124bf817df16cd25dc9cd1165804ce6081b3bfb68c63f0b2ab92d57"
+      },
+      "prepared/runtime.json": {
+        "bytes": 7404396,
+        "sha256": "8a81736052911a25b7899fd0f0419c1433f717cb67bcf7d24a3b3a175ba9e535"
+      },
+      "source/preparation/terrestrial.json": {
+        "bytes": 8981,
+        "sha256": "2017e62d3c0886001a529d72cfd2f39775ef32dde2e66c134a0430be6370165e"
+      },
+      "runtime-assets.json": {
+        "bytes": 6250,
+        "sha256": "7ad37c5ad3cbc0f7e9c61097d6dc1a8b0d70ed4010f2b911a35424812551e870"
+      }
+    },
+    "iapetus": {
+      "prepared/scene.json": {
+        "bytes": 6134285,
+        "sha256": "52c9c11c82d8446288fcacf67fc64de0cfa2b90f938a1a1937323abea1f90660"
+      },
+      "prepared/runtime.json": {
+        "bytes": 6315064,
+        "sha256": "a7b5585e30b90bfbf2a9de0b4734a8c2f44e42e1148417af2ffbcb562fdee8e4"
+      },
+      "source/preparation/terrestrial.json": {
+        "bytes": 1751,
+        "sha256": "97a253269119c064bf6a8b950f5a7c18dc683aa4bb7348b9417cdbe540091e05"
+      },
+      "runtime-assets.json": {
+        "bytes": 5930,
+        "sha256": "08d635f5287794a8eb51933473135363afbb3f3d414d9dcf547c96afae37ba8d"
+      }
+    },
+    "phoebe": {
+      "prepared/scene.json": {
+        "bytes": 8403609,
+        "sha256": "a55ce0b586a61465888b0054934945bd53a2393e31ea9b3b0a5b9023d1eff5a9"
+      },
+      "prepared/terrain.json": {
+        "bytes": 1624525,
+        "sha256": "a6eb3c92075986288ddfc6e59d85391891ca0d96dc0f2c427ea7fbab2e576178"
+      },
+      "prepared/runtime.json": {
+        "bytes": 9055441,
+        "sha256": "e763a1c3a859e9133c158c0bfea6f31a884ab3d9e0ae874ef2760294f11708c2"
+      },
+      "source/preparation/terrestrial.json": {
+        "bytes": 9433,
+        "sha256": "07bd55495c3a96a3ba45203a2f9bb69df5aa70c55701571f0ff0d1380a0dcb3c"
+      },
+      "runtime-assets.json": {
+        "bytes": 7638,
+        "sha256": "1b76df04ff0d8e7fad8995bc545912dc4c60127e5b65790ae9e3f9c6d6e0d1e8"
+      }
+    }
+  },
+  "originalQualificationBase": "3badfb535c106afa80a0888a7e9f488f0d06506b"
+}

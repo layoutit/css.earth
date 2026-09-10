@@ -1,0 +1,116 @@
+{
+  "schema": "cssearth-cassini-ice-surfaces@1",
+  "target": "IAPETUS",
+  "status": "Qualified regional source mapping under the recorded registration and detector limits; mounted-view qualification is separate.",
+  "observations": [
+    {
+      "id": "1568129671_1",
+      "calibrated": "native/C1568129671_1_ir.cub",
+      "navigation": "native/N1568129671_1_ir.cub",
+      "rawOriginal": "raw/v1568129671_1.qub",
+      "wavelengthsMicrometers": {
+        "25": 1.28142,
+        "44": 1.59305,
+        "58": 1.82362,
+        "70": 2.02129,
+        "81": 2.2031
+      }
+    },
+    {
+      "id": "1568133146_2",
+      "calibrated": "native/C1568133146_2_ir.cub",
+      "navigation": "native/N1568133146_2_ir.cub",
+      "rawOriginal": "raw/v1568133146_2.qub",
+      "wavelengthsMicrometers": {
+        "25": 1.28142,
+        "44": 1.59305,
+        "58": 1.82362,
+        "70": 2.02129,
+        "81": 2.2031
+      }
+    },
+    {
+      "id": "1568157352_4",
+      "calibrated": "native/C1568157352_4_ir.cub",
+      "navigation": "native/N1568157352_4_ir.cub",
+      "rawOriginal": "raw/v1568157352_4.qub",
+      "wavelengthsMicrometers": {
+        "25": 1.28142,
+        "44": 1.59305,
+        "58": 1.82362,
+        "70": 2.02129,
+        "81": 2.2031
+      }
+    }
+  ],
+  "channels": {
+    "rgb": [
+      70,
+      44,
+      25
+    ],
+    "depth": [
+      58,
+      70,
+      81
+    ]
+  },
+  "pins": {
+    "native/C1568129671_1_ir.cub": "e7a4d85a4e30022e9a0af4de5ba06e799e0ee0f9ddb6e36c77068eb251a6b861",
+    "native/N1568129671_1_ir.cub": "64a4d7636de33d6458ed95640d8f6cbb3ed8c943e8ddb23fa94e16097ac229fd",
+    "raw/v1568129671_1.qub": "56726dd22fd5f13764d53798ffa2dc57dc40bc006e8a1b3ac03b66c2720df648",
+    "native/C1568133146_2_ir.cub": "8c70f0c76666038d19a08efefbdc0a15f988a8b5bbd0bf69c6813b62248807a2",
+    "native/N1568133146_2_ir.cub": "a7da80d17d7f17ae10bbc0e8340dcd779f71c760692a689b18edbfb9c43b904f",
+    "raw/v1568133146_2.qub": "fe7cd0d2e408988f0e11e2c9cfdc33b698fb8150697e3afce12db971c346a5af",
+    "native/C1568157352_4_ir.cub": "e8693e98d929f20d38d32659852d157c38a8d48ef13d5a38a6f4ea0fc00bc572",
+    "native/N1568157352_4_ir.cub": "9fc00478957d7afa5668e724977e784b2cfa9ba6e1b2e7abb9018e3a40c293e7",
+    "raw/v1568157352_4.qub": "990bbd6f476f0a3530d250285d5b153b415604cbd01aab0550f07eb6cf5dc676"
+  },
+  "photometricCorrection": "none",
+  "absolutePointingAccuracy": "unresolved",
+  "aperturePolicy": "rc19-nominal-aperture-unknown-step-order@1",
+  "apertureInsetRadians": [
+    1e-07,
+    1e-07
+  ],
+  "detectorQualityPolicy": "pds3-ir-adc-background-and-filter-dependencies@1",
+  "detectorQualityPreparerSha256": "e02acd15b1af115d3482a6272ba78d79071db2757d45854fb0d0527681dc314e",
+  "registrationEvidence": {
+    "file": "evidence/registration.md",
+    "qualification": "Native source-camera center reconstruction and independent dense aperture checks qualify physical detector support. A conservative angular inset guards tested between-pose boundary motion. Independent exact USGS image comparisons support gross longitude and latitude framing; precise absolute registration remains unqualified.",
+    "sha256": "6754186ab44f6f4a3c68ed1bf5eca50578c2921410dd47e0f9934131bda7f800"
+  },
+  "width": 1024,
+  "height": 512,
+  "radiusMeters": 736000,
+  "outputs": {
+    "depth": "iapetus-ice-absorption.tif",
+    "rgb": "iapetus-infrared-if.tif",
+    "rgbDisplay": "iapetus-infrared-display.tif"
+  },
+  "rgbDisplay": {
+    "ranges": [
+      [
+        0,
+        0.45
+      ],
+      [
+        0,
+        0.45
+      ],
+      [
+        0,
+        0.45
+      ]
+    ],
+    "gamma": 2.2
+  },
+  "receipt": "preparation-receipt.json",
+  "policy": {
+    "minimumPhaseDegrees": 10,
+    "maximumPhaseDegrees": 120,
+    "maximumIncidenceEmissionDegrees": 70,
+    "maximumResolutionMeters": 40000,
+    "maximumCenterErrorPixels": 0.01
+  }
+}

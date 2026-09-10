@@ -1,0 +1,418 @@
+{
+  "scope": "Source-only feasibility check for a second observation-specific two-offset fit; no fit or registration acceptance.",
+  "observationId": "1465670650_1",
+  "sourceSha256": "9b4645d37dcf102e4e4ec9a7b79c4d7b3c1953e88e9cc7cec7006c133ced67a4",
+  "bandsOneBased": [
+    57,
+    83
+  ],
+  "wavelengthsMicrometers": [
+    1.80374,
+    2.23295
+  ],
+  "selection": "Each column independently. Source background envelope from two visibly dark far-right columns. Retain unique strongest signed first difference above background only when two continuum bands agree exactly and the respective top/bottom endpoint is below background. No smoothing or model input.",
+  "backgrounds": [
+    {
+      "columnsZeroBased": [
+        46,
+        47
+      ],
+      "maximumIf": 0.00046536329318769276,
+      "maxPositiveDifference": 0.0006248483259696513,
+      "maxNegativeDifference": 0.0006200202915351838
+    },
+    {
+      "columnsZeroBased": [
+        46,
+        47
+      ],
+      "maximumIf": 0.0005104453884996474,
+      "maxPositiveDifference": 0.0006872603698866442,
+      "maxNegativeDifference": 0.000698629577527754
+    }
+  ],
+  "families": [
+    {
+      "name": "top-rising",
+      "candidates": [
+        {
+          "sampleZeroBased": 0,
+          "linePosition": 9.5
+        },
+        {
+          "sampleZeroBased": 1,
+          "linePosition": 8.5
+        },
+        {
+          "sampleZeroBased": 2,
+          "linePosition": 7.5
+        },
+        {
+          "sampleZeroBased": 3,
+          "linePosition": 7.5
+        },
+        {
+          "sampleZeroBased": 5,
+          "linePosition": 6.5
+        },
+        {
+          "sampleZeroBased": 6,
+          "linePosition": 6.5
+        },
+        {
+          "sampleZeroBased": 7,
+          "linePosition": 6.5
+        },
+        {
+          "sampleZeroBased": 8,
+          "linePosition": 5.5
+        },
+        {
+          "sampleZeroBased": 9,
+          "linePosition": 5.5
+        },
+        {
+          "sampleZeroBased": 10,
+          "linePosition": 5.5
+        },
+        {
+          "sampleZeroBased": 11,
+          "linePosition": 7.5
+        },
+        {
+          "sampleZeroBased": 12,
+          "linePosition": 4.5
+        },
+        {
+          "sampleZeroBased": 13,
+          "linePosition": 4.5
+        },
+        {
+          "sampleZeroBased": 14,
+          "linePosition": 4.5
+        },
+        {
+          "sampleZeroBased": 15,
+          "linePosition": 14.5
+        },
+        {
+          "sampleZeroBased": 16,
+          "linePosition": 5.5
+        },
+        {
+          "sampleZeroBased": 17,
+          "linePosition": 5.5
+        },
+        {
+          "sampleZeroBased": 19,
+          "linePosition": 5.5
+        },
+        {
+          "sampleZeroBased": 21,
+          "linePosition": 4.5
+        },
+        {
+          "sampleZeroBased": 22,
+          "linePosition": 4.5
+        }
+      ],
+      "rejected": [
+        {
+          "sampleZeroBased": 4,
+          "reason": "source-boundary-at-frame-or-background-exceedance"
+        },
+        {
+          "sampleZeroBased": 18,
+          "reason": "source-boundary-at-frame-or-background-exceedance"
+        },
+        {
+          "sampleZeroBased": 20,
+          "reason": "source-boundary-at-frame-or-background-exceedance"
+        },
+        {
+          "sampleZeroBased": 23,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 24,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 25,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 26,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 27,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 28,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 29,
+          "reason": "source-boundary-at-frame-or-background-exceedance"
+        },
+        {
+          "sampleZeroBased": 30,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 31,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 32,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 33,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 34,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 35,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 36,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 37,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 38,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 39,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 40,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 41,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 42,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 43,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 44,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 45,
+          "reason": "source-gradient-within-background"
+        }
+      ]
+    },
+    {
+      "name": "bottom-falling",
+      "candidates": [
+        {
+          "sampleZeroBased": 0,
+          "linePosition": 14.5
+        },
+        {
+          "sampleZeroBased": 1,
+          "linePosition": 14.5
+        },
+        {
+          "sampleZeroBased": 2,
+          "linePosition": 13.5
+        },
+        {
+          "sampleZeroBased": 3,
+          "linePosition": 12.5
+        },
+        {
+          "sampleZeroBased": 4,
+          "linePosition": 11.5
+        },
+        {
+          "sampleZeroBased": 5,
+          "linePosition": 8.5
+        },
+        {
+          "sampleZeroBased": 6,
+          "linePosition": 19.5
+        },
+        {
+          "sampleZeroBased": 7,
+          "linePosition": 9.5
+        },
+        {
+          "sampleZeroBased": 9,
+          "linePosition": 19.5
+        },
+        {
+          "sampleZeroBased": 10,
+          "linePosition": 19.5
+        },
+        {
+          "sampleZeroBased": 12,
+          "linePosition": 19.5
+        },
+        {
+          "sampleZeroBased": 13,
+          "linePosition": 18.5
+        },
+        {
+          "sampleZeroBased": 14,
+          "linePosition": 18.5
+        },
+        {
+          "sampleZeroBased": 15,
+          "linePosition": 16.5
+        },
+        {
+          "sampleZeroBased": 16,
+          "linePosition": 7.5
+        },
+        {
+          "sampleZeroBased": 19,
+          "linePosition": 6.5
+        },
+        {
+          "sampleZeroBased": 20,
+          "linePosition": 6.5
+        },
+        {
+          "sampleZeroBased": 21,
+          "linePosition": 5.5
+        },
+        {
+          "sampleZeroBased": 22,
+          "linePosition": 5.5
+        },
+        {
+          "sampleZeroBased": 37,
+          "linePosition": 12.5
+        }
+      ],
+      "rejected": [
+        {
+          "sampleZeroBased": 8,
+          "reason": "source-boundary-at-frame-or-background-exceedance"
+        },
+        {
+          "sampleZeroBased": 11,
+          "reason": "source-boundary-at-frame-or-background-exceedance"
+        },
+        {
+          "sampleZeroBased": 17,
+          "reason": "source-boundary-at-frame-or-background-exceedance"
+        },
+        {
+          "sampleZeroBased": 18,
+          "reason": "source-boundary-at-frame-or-background-exceedance"
+        },
+        {
+          "sampleZeroBased": 23,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 24,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 25,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 26,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 27,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 28,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 29,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 30,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 31,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 32,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 33,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 34,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 35,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 36,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 38,
+          "reason": "continuum-bands-disagree"
+        },
+        {
+          "sampleZeroBased": 39,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 40,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 41,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 42,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 43,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 44,
+          "reason": "source-gradient-within-background"
+        },
+        {
+          "sampleZeroBased": 45,
+          "reason": "source-gradient-within-background"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,546 @@
+Object = IsisCube
+  Object = Core
+    StartByte   = 65537
+    Format      = Tile
+    TileSamples = 40
+    TileLines   = 40
+
+    Group = Dimensions
+      Samples = 40
+      Lines   = 40
+      Bands   = 256
+    End_Group
+
+    Group = Pixels
+      Type       = Real
+      ByteOrder  = Lsb
+      Base       = 0.0
+      Multiplier = 1.0
+    End_Group
+  End_Object
+
+  Group = Instrument
+    SpacecraftName            = Cassini-Huygens
+    InstrumentId              = VIMS
+    TargetName                = IAPETUS
+    SpacecraftClockStartCount = 1568129677.064
+    SpacecraftClockStopCount  = 1568129885.094
+    StartTime                 = 2007-253T14:59:30.820
+    StopTime                  = 2007-253T15:02:58.571
+    NativeStartTime           = 1568129671.13979
+    NativeStopTime            = 1568129879.10006
+    InterlineDelayDuration    = 313.000000
+    XOffset                   = 10
+    ZOffset                   = 12
+    SwathWidth                = 40
+    SwathLength               = 40
+    SamplingMode              = NORMAL
+    Channel                   = IR
+    ExposureDuration          = (120.000000 <IR>, 4800.000000 <VIS>)
+    GainMode                  = LOW
+  End_Group
+
+  Group = Archive
+    MissionPhaseName    = TOUR
+    SequenceId          = S33
+    SequenceTitle       = VIMS_049IA_ORSHIRES001_PRIME
+    ObservationId       = VIMS_049IA_ORSHIRES001_PRIME
+    ProductId           = 1_1568129671.13979
+    InstrumentModeId    = IMAGE
+    CompressorId        = 1
+    PowerStateFlag      = (ON, ON)
+    SpectralSummingFlag = OFF
+    SpectralEditingFlag = OFF
+    StarTracking        = OFF
+    SnapshotMode        = ON
+  End_Group
+
+  Group = BandBin
+    OriginalBand   = (97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108,
+                      109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119,
+                      120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130,
+                      131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141,
+                      142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152,
+                      153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163,
+                      164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174,
+                      175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185,
+                      186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196,
+                      197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207,
+                      208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218,
+                      219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229,
+                      230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240,
+                      241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251,
+                      252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262,
+                      263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273,
+                      274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284,
+                      285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295,
+                      296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306,
+                      307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317,
+                      318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328,
+                      329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339,
+                      340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350,
+                      351, 352)
+    Center         = (0.88761, 0.904067, 0.920522, 0.936972, 0.95341,
+                      0.969852, 0.986281, 1.00271, 1.01913, 1.03555, 1.05196,
+                      1.06835, 1.08476, 1.10116, 1.11757, 1.13396, 1.15035,
+                      1.16674, 1.18313, 1.19951, 1.2159, 1.23228, 1.24867,
+                      1.26505, 1.28142, 1.2978, 1.31419, 1.33057, 1.34696,
+                      1.36334, 1.37972, 1.3961, 1.4125, 1.42889, 1.44529,
+                      1.46169, 1.47809, 1.49449, 1.51091, 1.52733, 1.54375,
+                      1.56018, 1.57661, 1.59305, 1.60952, 1.62594, 1.6424,
+                      1.65886, 1.67533, 1.69179, 1.70827, 1.72474, 1.74122,
+                      1.7577, 1.77418, 1.79066, 1.80714, 1.82362, 1.8401,
+                      1.85658, 1.87306, 1.88953, 1.90601, 1.92248, 1.93895,
+                      1.95541, 1.97188, 1.98834, 2.00481, 2.02129, 2.03776,
+                      2.05424, 2.07073, 2.08723, 2.10374, 2.12027, 2.1368,
+                      2.15335, 2.16992, 2.18651, 2.2031, 2.21972, 2.23635,
+                      2.25298, 2.26962, 2.28625, 2.30289, 2.31952, 2.33614,
+                      2.35276, 2.36936, 2.38596, 2.40255, 2.41914, 2.43572,
+                      2.45229, 2.46887, 2.48544, 2.50201, 2.51858, 2.53515,
+                      2.55173, 2.5683, 2.58488, 2.60147, 2.61807, 2.63466,
+                      2.65126, 2.66787, 2.6845, 2.70112, 2.71774, 2.7344,
+                      2.75103, 2.76767, 2.78433, 2.80099, 2.81766, 2.83432,
+                      2.85099, 2.86766, 2.88434, 2.90101, 2.9177, 2.93438,
+                      2.95106, 2.96774, 2.98441, 3.00117, 3.01783, 3.03452,
+                      3.05124, 3.06793, 3.08463, 3.10133, 3.11801, 3.13472,
+                      3.15142, 3.16811, 3.18481, 3.20151, 3.2182, 3.2349,
+                      3.25159, 3.26828, 3.28496, 3.30164, 3.31831, 3.33499,
+                      3.35166, 3.36832, 3.38498, 3.40165, 3.41831, 3.43497,
+                      3.45163, 3.46829, 3.48494, 3.5016, 3.51824, 3.5349,
+                      3.55156, 3.56821, 3.58487, 3.60151, 3.61817, 3.63483,
+                      3.65149, 3.66814, 3.6848, 3.70146, 3.71813, 3.73479,
+                      3.75145, 3.76811, 3.78478, 3.80144, 3.81811, 3.83479,
+                      3.85146, 3.8681, 3.88481, 3.90149, 3.91818, 3.93487,
+                      3.95157, 3.96827, 3.98497, 4.00168, 4.01838, 4.0351,
+                      4.05183, 4.06854, 4.08528, 4.102, 4.11873, 4.13547,
+                      4.15221, 4.16896, 4.1857, 4.20244, 4.21918, 4.23593,
+                      4.25267, 4.26942, 4.28617, 4.30292, 4.31966, 4.33641,
+                      4.35316, 4.3699, 4.38664, 4.40338, 4.42013, 4.43688,
+                      4.45362, 4.47039, 4.48714, 4.50389, 4.52065, 4.53741,
+                      4.55419, 4.57094, 4.58772, 4.60449, 4.62127, 4.63804,
+                      4.65484, 4.67161, 4.68841, 4.70519, 4.72199, 4.7388,
+                      4.75561, 4.77243, 4.78926, 4.80609, 4.82292, 4.83976,
+                      4.85662, 4.87348, 4.89034, 4.90723, 4.92412, 4.94101,
+                      4.95791, 4.97483, 4.99174, 5.00865, 5.02557, 5.04251,
+                      5.05943, 5.07635, 5.09329, 5.1102, 5.12682)
+    MissionAverage = (0.890346, 0.906803, 0.923258, 0.939708, 0.956146,
+                      0.972588, 0.989017, 1.00544, 1.02187, 1.03828, 1.0547,
+                      1.07109, 1.08749, 1.1039, 1.1203, 1.1367, 1.15309,
+                      1.16947, 1.18586, 1.20225, 1.21863, 1.23502, 1.2514,
+                      1.26778, 1.28416, 1.30054, 1.31692, 1.33331, 1.34969,
+                      1.36608, 1.38245, 1.39884, 1.41523, 1.43163, 1.44802,
+                      1.46442, 1.48082, 1.49723, 1.51364, 1.53006, 1.54649,
+                      1.56291, 1.57935, 1.59579, 1.61225, 1.62867, 1.64513,
+                      1.6616, 1.67806, 1.69453, 1.711, 1.72748, 1.74395,
+                      1.76043, 1.77691, 1.79339, 1.80987, 1.82636, 1.84284,
+                      1.85932, 1.8758, 1.89227, 1.90875, 1.92521, 1.94168,
+                      1.95815, 1.97461, 1.99108, 2.00755, 2.02402, 2.0405,
+                      2.05698, 2.07347, 2.08997, 2.10648, 2.123, 2.13954,
+                      2.15609, 2.17266, 2.18924, 2.20584, 2.22246, 2.23908,
+                      2.25572, 2.27235, 2.28899, 2.30562, 2.32226, 2.33888,
+                      2.35549, 2.3721, 2.3887, 2.40529, 2.42187, 2.43845,
+                      2.45503, 2.4716, 2.48817, 2.50474, 2.52132, 2.53789,
+                      2.55446, 2.57104, 2.58762, 2.60421, 2.6208, 2.63739,
+                      2.654, 2.6706, 2.68723, 2.70385, 2.72048, 2.73714,
+                      2.75377, 2.7704, 2.78707, 2.80373, 2.82039, 2.83706,
+                      2.85373, 2.8704, 2.88707, 2.90375, 2.92043, 2.93711,
+                      2.95379, 2.97048, 2.98715, 3.0039, 3.02057, 3.03726,
+                      3.05397, 3.07067, 3.08736, 3.10406, 3.12075, 3.13745,
+                      3.15416, 3.17085, 3.18755, 3.20425, 3.22094, 3.23764,
+                      3.25432, 3.27101, 3.2877, 3.30437, 3.32105, 3.33772,
+                      3.35439, 3.37106, 3.38772, 3.40438, 3.42105, 3.43771,
+                      3.45437, 3.47102, 3.48768, 3.50434, 3.52098, 3.53764,
+                      3.55429, 3.57094, 3.5876, 3.60425, 3.62091, 3.63756,
+                      3.65422, 3.67088, 3.68754, 3.7042, 3.72086, 3.73752,
+                      3.75418, 3.77085, 3.78751, 3.80418, 3.82085, 3.83752,
+                      3.8542, 3.87084, 3.88754, 3.90423, 3.92092, 3.9376,
+                      3.9543, 3.971, 3.9877, 4.00441, 4.02112, 4.03783,
+                      4.05456, 4.07128, 4.08801, 4.10474, 4.12147, 4.13821,
+                      4.15495, 4.17169, 4.18843, 4.20518, 4.22192, 4.23866,
+                      4.25541, 4.27216, 4.2889, 4.30565, 4.3224, 4.33914,
+                      4.35589, 4.37264, 4.38938, 4.40611, 4.42287, 4.43961,
+                      4.45636, 4.47312, 4.48987, 4.50663, 4.52338, 4.54015,
+                      4.55692, 4.57368, 4.59045, 4.60723, 4.62401, 4.64078,
+                      4.65757, 4.67435, 4.69114, 4.70792, 4.72472, 4.74154,
+                      4.75835, 4.77517, 4.79199, 4.80883, 4.82566, 4.8425,
+                      4.85936, 4.87622, 4.89308, 4.90996, 4.92685, 4.94374,
+                      4.96064, 4.97756, 4.99448, 5.01139, 5.0283, 5.04525,
+                      5.06217, 5.07909, 5.09602, 5.11294, 5.12956)
+  End_Group
+
+  Group = Kernels
+    NaifFrameCode             = -82371
+    LeapSecond                = $base/kernels/lsk/naif0012.tls
+    TargetAttitudeShape       = ($base/kernels/pck/pck00009.tpc,
+                                 $cassini/kernels/pck/cpck15Dec2017.tpc)
+    TargetPosition            = (Table, $base/kernels/spk/de405.bsp)
+    InstrumentPointing        = (Table, $cassini/kernels/ck/07252_07257ra.bc,
+                                 $cassini/kernels/fk/cas_v40_usgs.tf)
+    Instrument                = Null
+    SpacecraftClock           = $cassini/kernels/sclk/cas00172.tsc
+    InstrumentPosition        = (Table,
+                                 $cassini/kernels/spk/180628RU_SCPSE_07221_072-
+                                 62.bsp)
+    InstrumentAddendum        = $cassini/kernels/iak/vimsAddendum03.ti
+    ShapeModel                = Null
+    InstrumentPositionQuality = Reconstructed
+    InstrumentPointingQuality = Reconstructed
+    CameraVersion             = 1
+  End_Group
+
+  Group = RadiometricCalibration
+    CalibrationVersion        = RC19
+    SolarMultiplier           = 1000.00
+    IR_Multiplier             = 8112.34
+    VIS_Multiplier            = 39474.13
+    Wave-CalMultiplier        = 1000.00
+    OutputUnits               = I/F
+    SolarColorFile            = $cassini/calibration/vims/RC19/solar-spectrum-
+                                /solar.2007_v0001.cub
+    Vis                       = false
+    SideplaneCorrection       = "Fit Delta"
+    FlatFile                  = $cassini/calibration/vims/flatfield/ir_flatfi-
+                                eld_v0002.cub
+    SpecificEnergyFile        = $cassini/calibration/vims/RC19/RC19-mults/RC1-
+                                9.2007_v0001.cub
+    WavelengthCalibrationFile = $cassini/calibration/vims/RC19/wave-cal/wave.-
+                                cal.2007_v0001.cub
+    BandwidthFile             = $cassini/calibration/vims/RC19/band-wavelengt-
+                                hs/wavelengths.2007_v0001.cub
+    AverageBandwidthFile      = $cassini/calibration/vims/RC19/band-wavelengt-
+                                hs/wavelengths_average_v0001.cub
+  End_Group
+End_Object
+
+Object = Label
+  Bytes = 65536
+End_Object
+
+Object = Table
+  Name        = SideplaneVis
+  StartByte   = 1703937
+  Bytes       = 46080
+  Records     = 3840
+  ByteOrder   = Lsb
+  Association = Lines
+
+  Group = Field
+    Name = Line
+    Type = Integer
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = Band
+    Type = Integer
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = Value
+    Type = Integer
+    Size = 1
+  End_Group
+End_Object
+
+Object = Table
+  Name        = SideplaneIr
+  StartByte   = 1750017
+  Bytes       = 122880
+  Records     = 10240
+  ByteOrder   = Lsb
+  Association = Lines
+
+  Group = Field
+    Name = Line
+    Type = Integer
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = Band
+    Type = Integer
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = Value
+    Type = Integer
+    Size = 1
+  End_Group
+End_Object
+
+Object = Table
+  Name                = InstrumentPointing
+  StartByte           = 1872897
+  Bytes               = 3520
+  Records             = 55
+  ByteOrder           = Lsb
+  TimeDependentFrames = (-82000, 1)
+  ConstantFrames      = (-82371, -82000)
+  ConstantRotation    = (0.9999721418876, 0.0021350009585028,
+                         0.00715242753357, -0.0071506344863711,
+                         -8.46289657981879e-04, 0.9999740757741,
+                         0.0021409986357068, -0.99999736277888,
+                         -8.30999470467163e-04)
+  CkTableStartTime    = 242708433.99477
+  CkTableEndTime      = 242708645.99346
+  CkTableOriginalSize = 4096
+  FrameTypeCode       = 3
+  Description         = "Created by spiceinit"
+  Kernels             = ($cassini/kernels/ck/07252_07257ra.bc,
+                         $cassini/kernels/fk/cas_v40_usgs.tf)
+
+  Group = Field
+    Name = J2000Q0
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Q1
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Q2
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Q3
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = AV1
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = AV2
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = AV3
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = ET
+    Type = Double
+    Size = 1
+  End_Group
+End_Object
+
+Object = Table
+  Name                 = InstrumentPosition
+  StartByte            = 1876417
+  Bytes                = 168
+  Records              = 3
+  ByteOrder            = Lsb
+  CacheType            = HermiteSpline
+  SpkTableStartTime    = 242708433.99477
+  SpkTableEndTime      = 242708645.99346
+  SpkTableOriginalSize = 4096.0
+  Description          = "Created by spiceinit"
+  Kernels              = $cassini/kernels/spk/180628RU_SCPSE_07221_07262.bsp
+
+  Group = Field
+    Name = J2000X
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Y
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Z
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000XV
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000YV
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000ZV
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = ET
+    Type = Double
+    Size = 1
+  End_Group
+End_Object
+
+Object = Table
+  Name                = BodyRotation
+  StartByte           = 1876585
+  Bytes               = 128
+  Records             = 2
+  ByteOrder           = Lsb
+  TimeDependentFrames = (10046, 1)
+  CkTableStartTime    = 242708433.99477
+  CkTableEndTime      = 242708645.99346
+  CkTableOriginalSize = 2
+  FrameTypeCode       = 2
+  PoleRa              = (318.16, -3.949, 0.0)
+  PoleDec             = (75.03, -1.143, 0.0)
+  PrimeMeridian       = (355.2, 4.5379572, 0.0)
+  Description         = "Created by spiceinit"
+  Kernels             = ($base/kernels/spk/de405.bsp,
+                         $base/kernels/pck/pck00009.tpc,
+                         $cassini/kernels/pck/cpck15Dec2017.tpc)
+  SolarLongitude      = 4.3839133892335
+
+  Group = Field
+    Name = J2000Q0
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Q1
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Q2
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Q3
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = AV1
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = AV2
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = AV3
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = ET
+    Type = Double
+    Size = 1
+  End_Group
+End_Object
+
+Object = Table
+  Name                 = SunPosition
+  StartByte            = 1876713
+  Bytes                = 112
+  Records              = 2
+  ByteOrder            = Lsb
+  CacheType            = Linear
+  SpkTableStartTime    = 242708433.99477
+  SpkTableEndTime      = 242708645.99346
+  SpkTableOriginalSize = 2.0
+  Description          = "Created by spiceinit"
+  Kernels              = $base/kernels/spk/de405.bsp
+
+  Group = Field
+    Name = J2000X
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Y
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Z
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000XV
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000YV
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000ZV
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = ET
+    Type = Double
+    Size = 1
+  End_Group
+End_Object
+
+Object = History
+  Name      = IsisCube
+  StartByte = 1907121
+  Bytes     = 3933
+End_Object
+
+Object = NaifKeywords
+  BODY608_RADII                    = (747.4, 747.4, 712.4)
+  BODY_FRAME_CODE                  = 10046
+  CLOCK_ET_-82_1568129671_COMPUTED = e1d83ca6dfeeac41
+  CLOCK_ET_-82_1568129879_COMPUTED = f92b3c46e1eeac41
+  INS-82371_TRANSX                 = (0.0, 1.0, 0.0)
+  INS-82371_TRANSY                 = (0.0, 0.0, 1.0)
+  INS-82371_ITRANSS                = (0.0, 1.0, 0.0)
+  INS-82371_ITRANSL                = (0.0, 0.0, 1.0)
+End_Object
+
+Object = OriginalLabel
+  Name      = IsisCube
+  StartByte = 1876825
+  Bytes     = 30296
+End_Object
+End

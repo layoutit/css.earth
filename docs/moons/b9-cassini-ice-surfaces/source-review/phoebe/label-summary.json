@@ -1,0 +1,742 @@
+[
+  {
+    "file": "C1465670650_1.header",
+    "dimensions": {
+      "Samples": 48,
+      "Lines": 24,
+      "Bands": 256
+    },
+    "coreBytes": 1179648,
+    "declaredFileEndBytes": 1384521,
+    "declaredSizeNotHttpVerified": true,
+    "StartTime": "2004-163T18:20:06.600",
+    "StopTime": "2004-163T18:23:23.274",
+    "NativeStartTime": "1465670650.13981",
+    "NativeStopTime": "1465670847.08779",
+    "tables": [
+      {
+        "Name": "SideplaneVis",
+        "StartByte": "1245185",
+        "Bytes": "27648",
+        "Records": "2304"
+      },
+      {
+        "Name": "SideplaneIr",
+        "StartByte": "1272833",
+        "Bytes": "73728",
+        "Records": "6144"
+      },
+      {
+        "Name": "InstrumentPointing",
+        "StartByte": "1346561",
+        "Bytes": "3328",
+        "Records": "52"
+      },
+      {
+        "Name": "InstrumentPosition",
+        "StartByte": "1349889",
+        "Bytes": "168",
+        "Records": "3"
+      },
+      {
+        "Name": "BodyRotation",
+        "StartByte": "1350057",
+        "Bytes": "128",
+        "Records": "2"
+      },
+      {
+        "Name": "SunPosition",
+        "StartByte": "1350185",
+        "Bytes": "112",
+        "Records": "2"
+      }
+    ],
+    "nearbyNominalBandMetadata": [
+      {
+        "nominalMicrometers": 1.35,
+        "irBandOneBased": 29,
+        "wavelengthMicrometers": 1.34356
+      },
+      {
+        "nominalMicrometers": 1.5,
+        "irBandOneBased": 39,
+        "wavelengthMicrometers": 1.50751
+      },
+      {
+        "nominalMicrometers": 1.78,
+        "irBandOneBased": 56,
+        "wavelengthMicrometers": 1.78726
+      },
+      {
+        "nominalMicrometers": 1.8,
+        "irBandOneBased": 57,
+        "wavelengthMicrometers": 1.80374
+      },
+      {
+        "nominalMicrometers": 2,
+        "irBandOneBased": 69,
+        "wavelengthMicrometers": 2.00141
+      },
+      {
+        "nominalMicrometers": 2.23,
+        "irBandOneBased": 83,
+        "wavelengthMicrometers": 2.23295
+      },
+      {
+        "nominalMicrometers": 3.1,
+        "irBandOneBased": 135,
+        "wavelengthMicrometers": 3.09792
+      },
+      {
+        "nominalMicrometers": 3.6,
+        "irBandOneBased": 165,
+        "wavelengthMicrometers": 3.59811
+      }
+    ]
+  },
+  {
+    "file": "C1465671822_1.header",
+    "dimensions": {
+      "Samples": 36,
+      "Lines": 24,
+      "Bands": 256
+    },
+    "coreBytes": 884736,
+    "declaredFileEndBytes": 1090377,
+    "declaredSizeNotHttpVerified": true,
+    "StartTime": "2004-163T18:39:38.594",
+    "StopTime": "2004-163T18:43:41.988",
+    "NativeStartTime": "1465671822.13980",
+    "NativeStopTime": "1465672066.04313",
+    "tables": [
+      {
+        "Name": "SideplaneVis",
+        "StartByte": "950273",
+        "Bytes": "27648",
+        "Records": "2304"
+      },
+      {
+        "Name": "SideplaneIr",
+        "StartByte": "977921",
+        "Bytes": "73728",
+        "Records": "6144"
+      },
+      {
+        "Name": "InstrumentPointing",
+        "StartByte": "1051649",
+        "Bytes": "4096",
+        "Records": "64"
+      },
+      {
+        "Name": "InstrumentPosition",
+        "StartByte": "1055745",
+        "Bytes": "168",
+        "Records": "3"
+      },
+      {
+        "Name": "BodyRotation",
+        "StartByte": "1055913",
+        "Bytes": "128",
+        "Records": "2"
+      },
+      {
+        "Name": "SunPosition",
+        "StartByte": "1056041",
+        "Bytes": "112",
+        "Records": "2"
+      }
+    ],
+    "nearbyNominalBandMetadata": [
+      {
+        "nominalMicrometers": 1.35,
+        "irBandOneBased": 29,
+        "wavelengthMicrometers": 1.34356
+      },
+      {
+        "nominalMicrometers": 1.5,
+        "irBandOneBased": 39,
+        "wavelengthMicrometers": 1.50751
+      },
+      {
+        "nominalMicrometers": 1.78,
+        "irBandOneBased": 56,
+        "wavelengthMicrometers": 1.78726
+      },
+      {
+        "nominalMicrometers": 1.8,
+        "irBandOneBased": 57,
+        "wavelengthMicrometers": 1.80374
+      },
+      {
+        "nominalMicrometers": 2,
+        "irBandOneBased": 69,
+        "wavelengthMicrometers": 2.00141
+      },
+      {
+        "nominalMicrometers": 2.23,
+        "irBandOneBased": 83,
+        "wavelengthMicrometers": 2.23295
+      },
+      {
+        "nominalMicrometers": 3.1,
+        "irBandOneBased": 135,
+        "wavelengthMicrometers": 3.09792
+      },
+      {
+        "nominalMicrometers": 3.6,
+        "irBandOneBased": 165,
+        "wavelengthMicrometers": 3.59811
+      }
+    ]
+  },
+  {
+    "file": "C1465673806_6.header",
+    "dimensions": {
+      "Samples": 24,
+      "Lines": 40,
+      "Bands": 256
+    },
+    "coreBytes": 983040,
+    "declaredFileEndBytes": 1254879,
+    "declaredSizeNotHttpVerified": true,
+    "StartTime": "2004-163T19:12:42.582",
+    "StopTime": "2004-163T19:15:16.361",
+    "NativeStartTime": "1465673806.13981",
+    "NativeStopTime": "1465673960.10461",
+    "tables": [
+      {
+        "Name": "SideplaneVis",
+        "StartByte": "1048577",
+        "Bytes": "46080",
+        "Records": "3840"
+      },
+      {
+        "Name": "SideplaneIr",
+        "StartByte": "1094657",
+        "Bytes": "122880",
+        "Records": "10240"
+      },
+      {
+        "Name": "InstrumentPointing",
+        "StartByte": "1217537",
+        "Bytes": "2688",
+        "Records": "42"
+      },
+      {
+        "Name": "InstrumentPosition",
+        "StartByte": "1220225",
+        "Bytes": "168",
+        "Records": "3"
+      },
+      {
+        "Name": "BodyRotation",
+        "StartByte": "1220393",
+        "Bytes": "128",
+        "Records": "2"
+      },
+      {
+        "Name": "SunPosition",
+        "StartByte": "1220521",
+        "Bytes": "112",
+        "Records": "2"
+      }
+    ],
+    "nearbyNominalBandMetadata": [
+      {
+        "nominalMicrometers": 1.35,
+        "irBandOneBased": 29,
+        "wavelengthMicrometers": 1.34356
+      },
+      {
+        "nominalMicrometers": 1.5,
+        "irBandOneBased": 39,
+        "wavelengthMicrometers": 1.50751
+      },
+      {
+        "nominalMicrometers": 1.78,
+        "irBandOneBased": 56,
+        "wavelengthMicrometers": 1.78726
+      },
+      {
+        "nominalMicrometers": 1.8,
+        "irBandOneBased": 57,
+        "wavelengthMicrometers": 1.80374
+      },
+      {
+        "nominalMicrometers": 2,
+        "irBandOneBased": 69,
+        "wavelengthMicrometers": 2.00141
+      },
+      {
+        "nominalMicrometers": 2.23,
+        "irBandOneBased": 83,
+        "wavelengthMicrometers": 2.23295
+      },
+      {
+        "nominalMicrometers": 3.1,
+        "irBandOneBased": 135,
+        "wavelengthMicrometers": 3.09792
+      },
+      {
+        "nominalMicrometers": 3.6,
+        "irBandOneBased": 165,
+        "wavelengthMicrometers": 3.59811
+      }
+    ]
+  },
+  {
+    "file": "C1465674952_1.header",
+    "dimensions": {
+      "Samples": 30,
+      "Lines": 18,
+      "Bands": 256
+    },
+    "coreBytes": 552960,
+    "declaredFileEndBytes": 731021,
+    "declaredSizeNotHttpVerified": true,
+    "StartTime": "2004-163T19:31:48.580",
+    "StopTime": "2004-163T19:33:34.863",
+    "NativeStartTime": "1465674952.13980",
+    "NativeStopTime": "1465675059.02541",
+    "tables": [
+      {
+        "Name": "SideplaneVis",
+        "StartByte": "618497",
+        "Bytes": "20736",
+        "Records": "1728"
+      },
+      {
+        "Name": "SideplaneIr",
+        "StartByte": "639233",
+        "Bytes": "55296",
+        "Records": "4608"
+      },
+      {
+        "Name": "InstrumentPointing",
+        "StartByte": "694529",
+        "Bytes": "1856",
+        "Records": "29"
+      },
+      {
+        "Name": "InstrumentPosition",
+        "StartByte": "696385",
+        "Bytes": "168",
+        "Records": "3"
+      },
+      {
+        "Name": "BodyRotation",
+        "StartByte": "696553",
+        "Bytes": "128",
+        "Records": "2"
+      },
+      {
+        "Name": "SunPosition",
+        "StartByte": "696681",
+        "Bytes": "112",
+        "Records": "2"
+      }
+    ],
+    "nearbyNominalBandMetadata": [
+      {
+        "nominalMicrometers": 1.35,
+        "irBandOneBased": 29,
+        "wavelengthMicrometers": 1.34356
+      },
+      {
+        "nominalMicrometers": 1.5,
+        "irBandOneBased": 39,
+        "wavelengthMicrometers": 1.50751
+      },
+      {
+        "nominalMicrometers": 1.78,
+        "irBandOneBased": 56,
+        "wavelengthMicrometers": 1.78726
+      },
+      {
+        "nominalMicrometers": 1.8,
+        "irBandOneBased": 57,
+        "wavelengthMicrometers": 1.80374
+      },
+      {
+        "nominalMicrometers": 2,
+        "irBandOneBased": 69,
+        "wavelengthMicrometers": 2.00141
+      },
+      {
+        "nominalMicrometers": 2.23,
+        "irBandOneBased": 83,
+        "wavelengthMicrometers": 2.23295
+      },
+      {
+        "nominalMicrometers": 3.1,
+        "irBandOneBased": 135,
+        "wavelengthMicrometers": 3.09792
+      },
+      {
+        "nominalMicrometers": 3.6,
+        "irBandOneBased": 165,
+        "wavelengthMicrometers": 3.59811
+      }
+    ]
+  },
+  {
+    "file": "C1465679932_1.header",
+    "dimensions": {
+      "Samples": 48,
+      "Lines": 48,
+      "Bands": 256
+    },
+    "coreBytes": 2359296,
+    "declaredFileEndBytes": 2677389,
+    "declaredSizeNotHttpVerified": true,
+    "StartTime": "2004-163T20:54:48.537",
+    "StopTime": "2004-163T21:10:24.604",
+    "NativeStartTime": "1465679932.13981",
+    "NativeStopTime": "1465680868.15055",
+    "tables": [
+      {
+        "Name": "SideplaneVis",
+        "StartByte": "2424833",
+        "Bytes": "55296",
+        "Records": "4608"
+      },
+      {
+        "Name": "SideplaneIr",
+        "StartByte": "2480129",
+        "Bytes": "147456",
+        "Records": "12288"
+      },
+      {
+        "Name": "InstrumentPointing",
+        "StartByte": "2627585",
+        "Bytes": "15168",
+        "Records": "237"
+      },
+      {
+        "Name": "InstrumentPosition",
+        "StartByte": "2642753",
+        "Bytes": "168",
+        "Records": "3"
+      },
+      {
+        "Name": "BodyRotation",
+        "StartByte": "2642921",
+        "Bytes": "128",
+        "Records": "2"
+      },
+      {
+        "Name": "SunPosition",
+        "StartByte": "2643049",
+        "Bytes": "112",
+        "Records": "2"
+      }
+    ],
+    "nearbyNominalBandMetadata": [
+      {
+        "nominalMicrometers": 1.35,
+        "irBandOneBased": 29,
+        "wavelengthMicrometers": 1.34356
+      },
+      {
+        "nominalMicrometers": 1.5,
+        "irBandOneBased": 39,
+        "wavelengthMicrometers": 1.50751
+      },
+      {
+        "nominalMicrometers": 1.78,
+        "irBandOneBased": 56,
+        "wavelengthMicrometers": 1.78726
+      },
+      {
+        "nominalMicrometers": 1.8,
+        "irBandOneBased": 57,
+        "wavelengthMicrometers": 1.80374
+      },
+      {
+        "nominalMicrometers": 2,
+        "irBandOneBased": 69,
+        "wavelengthMicrometers": 2.00141
+      },
+      {
+        "nominalMicrometers": 2.23,
+        "irBandOneBased": 83,
+        "wavelengthMicrometers": 2.23295
+      },
+      {
+        "nominalMicrometers": 3.1,
+        "irBandOneBased": 135,
+        "wavelengthMicrometers": 3.09792
+      },
+      {
+        "nominalMicrometers": 3.6,
+        "irBandOneBased": 165,
+        "wavelengthMicrometers": 3.59811
+      }
+    ]
+  },
+  {
+    "file": "N1465670650_1.header",
+    "dimensions": {
+      "Samples": 48,
+      "Lines": 24,
+      "Bands": 6
+    },
+    "coreBytes": 27648,
+    "declaredFileEndBytes": 232454,
+    "declaredSizeNotHttpVerified": true,
+    "StartTime": "2004-163T18:20:06.600",
+    "StopTime": "2004-163T18:23:23.274",
+    "NativeStartTime": "1465670650.13981",
+    "NativeStopTime": "1465670847.08779",
+    "tables": [
+      {
+        "Name": "SideplaneVis",
+        "StartByte": "93185",
+        "Bytes": "27648",
+        "Records": "2304"
+      },
+      {
+        "Name": "SideplaneIr",
+        "StartByte": "120833",
+        "Bytes": "73728",
+        "Records": "6144"
+      },
+      {
+        "Name": "InstrumentPointing",
+        "StartByte": "194561",
+        "Bytes": "3328",
+        "Records": "52"
+      },
+      {
+        "Name": "InstrumentPosition",
+        "StartByte": "197889",
+        "Bytes": "168",
+        "Records": "3"
+      },
+      {
+        "Name": "BodyRotation",
+        "StartByte": "198057",
+        "Bytes": "128",
+        "Records": "2"
+      },
+      {
+        "Name": "SunPosition",
+        "StartByte": "198185",
+        "Bytes": "112",
+        "Records": "2"
+      }
+    ]
+  },
+  {
+    "file": "N1465671822_1.header",
+    "dimensions": {
+      "Samples": 36,
+      "Lines": 24,
+      "Bands": 6
+    },
+    "coreBytes": 20736,
+    "declaredFileEndBytes": 226310,
+    "declaredSizeNotHttpVerified": true,
+    "StartTime": "2004-163T18:39:38.594",
+    "StopTime": "2004-163T18:43:41.988",
+    "NativeStartTime": "1465671822.13980",
+    "NativeStopTime": "1465672066.04313",
+    "tables": [
+      {
+        "Name": "SideplaneVis",
+        "StartByte": "86273",
+        "Bytes": "27648",
+        "Records": "2304"
+      },
+      {
+        "Name": "SideplaneIr",
+        "StartByte": "113921",
+        "Bytes": "73728",
+        "Records": "6144"
+      },
+      {
+        "Name": "InstrumentPointing",
+        "StartByte": "187649",
+        "Bytes": "4096",
+        "Records": "64"
+      },
+      {
+        "Name": "InstrumentPosition",
+        "StartByte": "191745",
+        "Bytes": "168",
+        "Records": "3"
+      },
+      {
+        "Name": "BodyRotation",
+        "StartByte": "191913",
+        "Bytes": "128",
+        "Records": "2"
+      },
+      {
+        "Name": "SunPosition",
+        "StartByte": "192041",
+        "Bytes": "112",
+        "Records": "2"
+      }
+    ]
+  },
+  {
+    "file": "N1465673806_6.header",
+    "dimensions": {
+      "Samples": 24,
+      "Lines": 40,
+      "Bands": 6
+    },
+    "coreBytes": 23040,
+    "declaredFileEndBytes": 294812,
+    "declaredSizeNotHttpVerified": true,
+    "StartTime": "2004-163T19:12:42.582",
+    "StopTime": "2004-163T19:15:16.361",
+    "NativeStartTime": "1465673806.13981",
+    "NativeStopTime": "1465673960.10461",
+    "tables": [
+      {
+        "Name": "SideplaneVis",
+        "StartByte": "88577",
+        "Bytes": "46080",
+        "Records": "3840"
+      },
+      {
+        "Name": "SideplaneIr",
+        "StartByte": "134657",
+        "Bytes": "122880",
+        "Records": "10240"
+      },
+      {
+        "Name": "InstrumentPointing",
+        "StartByte": "257537",
+        "Bytes": "2688",
+        "Records": "42"
+      },
+      {
+        "Name": "InstrumentPosition",
+        "StartByte": "260225",
+        "Bytes": "168",
+        "Records": "3"
+      },
+      {
+        "Name": "BodyRotation",
+        "StartByte": "260393",
+        "Bytes": "128",
+        "Records": "2"
+      },
+      {
+        "Name": "SunPosition",
+        "StartByte": "260521",
+        "Bytes": "112",
+        "Records": "2"
+      }
+    ]
+  },
+  {
+    "file": "N1465674952_1.header",
+    "dimensions": {
+      "Samples": 30,
+      "Lines": 18,
+      "Bands": 6
+    },
+    "coreBytes": 12960,
+    "declaredFileEndBytes": 190954,
+    "declaredSizeNotHttpVerified": true,
+    "StartTime": "2004-163T19:31:48.580",
+    "StopTime": "2004-163T19:33:34.863",
+    "NativeStartTime": "1465674952.13980",
+    "NativeStopTime": "1465675059.02541",
+    "tables": [
+      {
+        "Name": "SideplaneVis",
+        "StartByte": "78497",
+        "Bytes": "20736",
+        "Records": "1728"
+      },
+      {
+        "Name": "SideplaneIr",
+        "StartByte": "99233",
+        "Bytes": "55296",
+        "Records": "4608"
+      },
+      {
+        "Name": "InstrumentPointing",
+        "StartByte": "154529",
+        "Bytes": "1856",
+        "Records": "29"
+      },
+      {
+        "Name": "InstrumentPosition",
+        "StartByte": "156385",
+        "Bytes": "168",
+        "Records": "3"
+      },
+      {
+        "Name": "BodyRotation",
+        "StartByte": "156553",
+        "Bytes": "128",
+        "Records": "2"
+      },
+      {
+        "Name": "SunPosition",
+        "StartByte": "156681",
+        "Bytes": "112",
+        "Records": "2"
+      }
+    ]
+  },
+  {
+    "file": "N1465679932_1.header",
+    "dimensions": {
+      "Samples": 48,
+      "Lines": 48,
+      "Bands": 6
+    },
+    "coreBytes": 55296,
+    "declaredFileEndBytes": 373322,
+    "declaredSizeNotHttpVerified": true,
+    "StartTime": "2004-163T20:54:48.537",
+    "StopTime": "2004-163T21:10:24.604",
+    "NativeStartTime": "1465679932.13981",
+    "NativeStopTime": "1465680868.15055",
+    "tables": [
+      {
+        "Name": "SideplaneVis",
+        "StartByte": "120833",
+        "Bytes": "55296",
+        "Records": "4608"
+      },
+      {
+        "Name": "SideplaneIr",
+        "StartByte": "176129",
+        "Bytes": "147456",
+        "Records": "12288"
+      },
+      {
+        "Name": "InstrumentPointing",
+        "StartByte": "323585",
+        "Bytes": "15168",
+        "Records": "237"
+      },
+      {
+        "Name": "InstrumentPosition",
+        "StartByte": "338753",
+        "Bytes": "168",
+        "Records": "3"
+      },
+      {
+        "Name": "BodyRotation",
+        "StartByte": "338921",
+        "Bytes": "128",
+        "Records": "2"
+      },
+      {
+        "Name": "SunPosition",
+        "StartByte": "339049",
+        "Bytes": "112",
+        "Records": "2"
+      }
+    ]
+  }
+]

@@ -1,0 +1,63 @@
+{
+  "schema": "cssearth-b9-source-review-evidence@1",
+  "reviewDate": "2026-09-09",
+  "scope": "Small metadata and two ASCII coefficient tables only; no maps or cubes downloaded.",
+  "files": [
+    {
+      "file": "1-s2.0-S0019103521004504-mmc1.txt",
+      "bytes": 6858,
+      "sha256": "8c46a5596996daf0188f18bba26ff4f8885e667bbc1ce4cb59e19e55dd204c59"
+    },
+    {
+      "file": "1-s2.0-S0019103521004504-mmc3.txt",
+      "bytes": 6886,
+      "sha256": "17196f487b89a3cd11225a71c6c04c7ebf90074fa298c2c9ef981b62f6425a2f"
+    },
+    {
+      "file": "crossref.json",
+      "bytes": 38979,
+      "sha256": "296810666b78648ae375bfe5fc266ea5d959b7e5e59af6d226ff86ecf89e0099"
+    },
+    {
+      "file": "datacite-related.json",
+      "bytes": 5477,
+      "sha256": "a97c46759afc6c82a60f4d18d58ad6e28340451748198adddfd9abb8c6e32e0f"
+    },
+    {
+      "file": "elsevier-object-eid.xml",
+      "bytes": 609,
+      "sha256": "86ff5ca4623559aff5c5061771eaf1ce013421529392acd02c95e676c94df12c"
+    },
+    {
+      "file": "endpoint-probes.json",
+      "bytes": 1500,
+      "sha256": "c943027b00ff38a9ad0d757a7c8b9885fc2a8cd564df052a1bcc5c61a6fb4739"
+    },
+    {
+      "file": "final-attachment-probes.json",
+      "bytes": 1187,
+      "sha256": "185103bb354f2e84a3b54272cc586498d19716bf4d8bbfc2bd19ad11c4e5cc22"
+    },
+    {
+      "file": "inaf-original-bitstreams.json",
+      "bytes": 5270,
+      "sha256": "1b639f95c89466adc73725db7240585c917d97a2dcbd8e852725a0611fa31b76"
+    },
+    {
+      "file": "publisher-article-status.json",
+      "bytes": 123,
+      "sha256": "5c6a5e23abf0a6a0598b42a03b6b6cb1cd092c2f551ddb5f054d5c4a5b8c7acc"
+    },
+    {
+      "file": "supplement-archive-probes.json",
+      "bytes": 1154,
+      "sha256": "f7a52b2865cec292cbd0723c72145fc0645faa4518e95863aa0a15cd0f1066dc"
+    },
+    {
+      "file": "supplement-sequence-probes.json",
+      "bytes": 2628,
+      "sha256": "69f9fffbf0368f3cea0afb52e058c7bbd924083e25c8b87d042f32e166cfeca0"
+    }
+  ],
+  "totalBytesExcludingManifest": 70671
+}

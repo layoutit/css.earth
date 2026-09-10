@@ -1,0 +1,68 @@
+[
+  {
+    "file": "cube-1568129671_1.html",
+    "url": "https://vims.univ-nantes.fr/cube/1568129671_1",
+    "finalUrl": "https://vims.univ-nantes.fr/cube/1568129671_1",
+    "status": 206,
+    "contentLength": "18997",
+    "contentRange": "bytes 0-18996/18997",
+    "bytesRetained": 18997,
+    "sha256": "319552fe7a7d84884694dc2a4593ef829b60fb9550c5eb62ef7896c27d8488a4",
+    "rangeRequested": "0-65535"
+  },
+  {
+    "file": "C1568129671_1_ir.header.bin",
+    "url": "https://vims.univ-nantes.fr/cube/C1568129671_1_ir.cub",
+    "finalUrl": "https://vims.univ-nantes.fr/cube/C1568129671_1_ir.cub",
+    "status": 200,
+    "contentLength": null,
+    "contentRange": null,
+    "bytesRetained": 65536,
+    "sha256": "547b0c5dc8537a6e233b16ff3658a22b1df23f77a22f21028a1473c583b5595b",
+    "rangeRequested": "0-65535"
+  },
+  {
+    "file": "N1568129671_1_ir.header.bin",
+    "url": "https://vims.univ-nantes.fr/cube/N1568129671_1_ir.cub",
+    "finalUrl": "https://vims.univ-nantes.fr/cube/N1568129671_1_ir.cub",
+    "status": 200,
+    "contentLength": null,
+    "contentRange": null,
+    "bytesRetained": 65536,
+    "sha256": "1a0550e54f236178246b37d6f0073a1439a455a7ff15cf30a289474e0e92b113",
+    "rangeRequested": "0-65535"
+  },
+  {
+    "file": "C1568133146_2_ir.header.bin",
+    "url": "https://vims.univ-nantes.fr/cube/C1568133146_2_ir.cub",
+    "finalUrl": "https://vims.univ-nantes.fr/cube/C1568133146_2_ir.cub",
+    "status": 200,
+    "contentLength": null,
+    "contentRange": null,
+    "bytesRetained": 65536,
+    "sha256": "c501f5609162e89c7e674445cb92f24e9f4e05d72d059a8a1c250bda334c409d",
+    "rangeRequested": "0-65535"
+  },
+  {
+    "file": "N1568133146_2_ir.header.bin",
+    "url": "https://vims.univ-nantes.fr/cube/N1568133146_2_ir.cub",
+    "finalUrl": "https://vims.univ-nantes.fr/cube/N1568133146_2_ir.cub",
+    "status": 200,
+    "contentLength": null,
+    "contentRange": null,
+    "bytesRetained": 65536,
+    "sha256": "39509ccf740c69462f4ed66c4cb6ddc4444d8da0cae4745a4c623165c7b26736",
+    "rangeRequested": "0-65535"
+  },
+  {
+    "file": "isis-calibration.html",
+    "url": "https://vims.univ-nantes.fr/info/isis-calibration",
+    "finalUrl": "https://vims.univ-nantes.fr/info/isis-calibration",
+    "status": 206,
+    "contentLength": "25098",
+    "contentRange": "bytes 0-25097/25098",
+    "bytesRetained": 25098,
+    "sha256": "4824a5fb1426ffbda1fdc63b8f8fe7911bfd52a882a80314c308d8ba28b0adef",
+    "rangeRequested": "0-65535"
+  }
+]

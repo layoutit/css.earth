@@ -72,6 +72,30 @@
       ],
       "path": "science/2023/phoebe_numimg_c.cub",
       "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_numimg_c.cub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "cassini-ice/native/C1465671822_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/C1465671822_1_ir.cub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "cassini-ice/native/N1465671822_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/N1465671822_1_ir.cub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "cassini-ice/raw/v1465671822_1.qub",
+      "url": "https://vims.univ-nantes.fr/cube/1465671822_1.qub"
     }
   ]
 }

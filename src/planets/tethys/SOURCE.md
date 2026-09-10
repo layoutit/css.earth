@@ -25,16 +25,49 @@ The source model spacing is about 1.5 km. The product description’s one-to-two
 
 The astronomy package provides the Saturn-relative orbit and IAU orientation. The old spherical display reference is retained only as the package’s scale normalization; the native model now supplies vertex positions. Numeric height datums and factsheet mean radii remain independent quantities. [NASA](https://science.nasa.gov/saturn/moons/tethys/) describes a mildly nonspherical body; the newly selected source model supplies a finite-resolution approximation to silhouette and topography.
 
-Map preparation uses the shared 8192 × 4096 intermediate layout and 1024-pixel pole products. The final source-mesh scene samples these maps into prepared per-triangle atlases. Terminal surface and pole atlases use WebP quality 90 with lossless alpha. Sources and intermediate maps retain their original detail; only prepared files reach runtime. No visible atmosphere or cutaway is added.
+The pre-existing photographic and SPC map preparation uses the shared 8192 × 4096 intermediate layout and 1024-pixel pole products. The final source-mesh scene samples these maps into prepared per-triangle atlases. Terminal surface and pole atlases use WebP quality 90 with lossless alpha. Sources and intermediate maps retain their original detail; only prepared files reach runtime. No visible atmosphere or cutaway is added.
 
 Pinned files, URLs and hashes are in `source/manifest.json`; acquisition and preparation use the shared authored-object pipeline.
 
 ## B2 source shape and relative albedo
 
-The native global Q128 OBJ is 98,306 vertices and 196,608 triangles in kilometres, north along +Z and longitude zero along +X. Exact source topology is retained before simplification. Preparation uses the measured candidate of 2,000 faces with regularize:false, under a 5,310 m display approximation ceiling (1% of the model reference radius). This is a display approximation budget, not scientific uncertainty. The closed candidate has Euler characteristic 2, one component and 2,000 faces. Its 8,000 one-way barycentric source-distance samples have maximum 3974.44 m, 95th percentile 2023.05 m and RMS 1036.86 m. These samples do not establish a full Hausdorff bound. Geographic registration, silhouette and feature review remain pending. The original photographic-map projection radii remain separate from shape geometry and the numeric elevation datum.
+The native global Q128 OBJ is 98,306 vertices and 196,608 triangles in kilometres, north along +Z and longitude zero along +X. Exact source topology is retained before simplification. Preparation uses the measured candidate of 2,000 faces with regularize:false, under a 5,310 m display approximation ceiling (1% of the model reference radius). This is a display approximation budget, not scientific uncertainty. The closed candidate has Euler characteristic 2, one component and 2,000 faces. Its 8,000 one-way barycentric source-distance samples have maximum 3974.44 m, 95th percentile 2023.05 m and RMS 1036.86 m. These samples do not establish a full Hausdorff bound. These numerical samples alone do not qualify geographic registration, silhouette or individual features. The original photographic-map projection radii remain separate from shape geometry and the numeric elevation datum.
 
 New relative albedo uses the published 2025 GeoTIFFs and their original equatorial/polar projections. Values are dimensionless and normalized around 1; the archive gives a nominal 0–2 domain. The visible 0.5–1.5 scale saturates above 1.5. No height conversion or relief shading is applied to this quantity. It is a secondary SPC brightness product, less validated than topography, and is neither geometric albedo nor calibrated reflectance. Tethys used uncalibrated ISS inputs; Dione and Rhea used calibrated frames. Source sigma is internal maplet agreement, not absolute height uncertainty.
 
 The Shape lens uses the shared neutral grid over the source mesh to distinguish geometry from imagery. The Photographic views retain pre-existing image seams, shadows and local control differences. Source reference radii and projections do not become spherical geometry constraints. The original Q128 spacing is about 5.96 km; finer numeric maps do not imply the simplified silhouette retains that full detail.
 
-Qualification status: source intake and recipe proposal. Final mesh selection (where applicable), restored-source and prepared browser/visual gates remain pending. No readiness is claimed.
+The B2 intake originally recorded mesh selection and prepared visual checks as pending. Its selected 2,000-face mesh is now the existing body geometry, preserved byte for byte by B9. The numerical approximation checks above do not establish absolute cartographic accuracy; B9 source and mounted-view evidence is recorded separately in the review linked below.
+
+## Cassini VIMS infrared and water-ice maps (B9)
+
+The two additional surface views use original calibrated RC19 C cubes, matched
+navigation N cubes and original PDS QUB detector/background data from the
+[Nantes VIMS archive](https://vims.univ-nantes.fr/). Originals, exact wavelengths,
+source masks, calibration arithmetic, observer timing and prepared source maps
+are pinned in `source/cassini-ice/prepare.json` and `source/manifest.json`.
+
+Infrared assigns native channels near 2.02, 1.59 and 1.28 µm to red, green and blue.
+It is false color with an explicit common per-body stretch. Ice absorption is
+`1 - R(near 2.02 µm) / continuum(near 1.82 µm, near 2.20 µm)` at the exact per-cube
+wavelengths. It is not abundance. Calibrated float32 I/F and derived depth values
+are retained, including valid negative measurements; only display colors saturate at
+the authored legend/stretch limits. No photometric correction or observation
+level matching is applied. Grain size, viewing geometry, illumination, noise
+and archive filtering affect the signal.
+
+Source support comes from native detector apertures and sampled exposure
+geometry. Original saturation, special values, missing background and their
+archive-filter dependencies are excluded per band. Numerical source maps do
+not interpolate gaps into new measured coverage. The source grid is a sampling
+choice, not additional native resolution. Exact observation/source-pixel
+companion TIFFs preserve ownership. Infrared display packing follows the existing
+photographic bilinear/WebP path, which can soften mask edges; the scalar ice
+view uses nearest sampling. The final colors use the existing preparation,
+meshes and retained CSS scene.
+
+Registration limits and source-selection dispositions are recorded in
+`source/cassini-ice/evidence/registration.md` and the
+[B9 review](../../../docs/moons/b9-cassini-ice-surfaces/README.md).
+
+All 9 selected observations contribute ice absorption; 7 contribute infrared after clipping exclusions. The exact-USGS brightness comparison is non-diagnostic for absolute alignment; no resolved Odysseus-center claim is made.

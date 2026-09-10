@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "selectedCases": 21,
+  "objects": [
+    {
+      "body": "tethys",
+      "passed": 7,
+      "skipped": 8,
+      "report": "conformance/tethys.json"
+    },
+    {
+      "body": "iapetus",
+      "passed": 7,
+      "skipped": 8,
+      "report": "conformance/iapetus.json"
+    },
+    {
+      "body": "phoebe",
+      "passed": 7,
+      "skipped": 8,
+      "report": "conformance/phoebe.json"
+    }
+  ],
+  "scope": "Seven existing OBJECTS-derived cases per body: mobile, dataset interactions at DPR1/2, lens race, reacquire, rejection/retry and destroy. Other cases are skipped."
+}
