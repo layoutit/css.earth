@@ -2,6 +2,76 @@
 import type { SceneSatelliteRecord } from '../sceneSatellites.js'
 
 export const SCENE_SATELLITE_STATES = {
+  "dactyl": {
+    "epochJdTt": 2461286.5,
+    "positionKm": [
+      -13.63556841922599,
+      -68.61321519127789,
+      0
+    ],
+    "velocityKmPerDay": [
+      -610.3393011041204,
+      121.29330007269124,
+      31.52308963248956
+    ],
+    "centerBodyId": "ida",
+    "gravitationalParametersKm3PerS2": {
+      "combined": 0.003163524143427717,
+      "body": 0,
+      "parent": 0.003163524143427717
+    },
+    "systemGmKm3PerS2": 0.003163524143427717,
+    "provenance": {
+      "model": "Illustrative phase at prepared epoch using published orbital constraints",
+      "epochJdTt": 2461286.5,
+      "placement": "approximate",
+      "referenceFrame": "ICRF",
+      "source": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/asteroids.ssc",
+      "sourcePath": "src/planets/dactyl/source/orbit/published-parameters.json",
+      "sha256": "64e0bceb305b89bbc469edef488afba4c9c82c1e6e8e1a0fd1a5d11ea53afd0e",
+      "timeQualification": "An illustrative zero mean anomaly is assigned at the shared TT scene epoch. This is not a propagation of a measured encounter phase or a prediction of present position.",
+      "limitations": [
+        "Approximate orbital placement. The 1993 encounter did not determine a unique orbit; the present orbital phase is illustrative. A synchronous orientation is assumed, not measured.",
+        "Plane taken opposite the existing Ida pole (RA 348.76, Dec 87.1 degrees). This neglects the roughly 8-degree mutual inclination and does not select a unique stable solution. Periapsis and phase are illustrative.",
+        "Effective GM=a^3(2pi/P)^2 ensures the display conic agrees with its chosen period. The zero moon GM is a massless display approximation, not a mass measurement."
+      ]
+    }
+  },
+  "selam": {
+    "epochJdTt": 2461286.5,
+    "positionKm": [
+      -3.0955256781045932,
+      -0.27497042433661745,
+      -0.11921426900852444
+    ],
+    "velocityKmPerDay": [
+      -0.856920033821891,
+      7.93824235458263,
+      3.9411062447384504
+    ],
+    "centerBodyId": "dinkinesh",
+    "gravitationalParametersKm3PerS2": {
+      "combined": 3.3030052618709104e-8,
+      "body": 0,
+      "parent": 3.3030052618709104e-8
+    },
+    "systemGmKm3PerS2": 3.3030052618709104e-8,
+    "provenance": {
+      "model": "Illustrative phase at prepared epoch using published orbital constraints",
+      "epochJdTt": 2461286.5,
+      "placement": "approximate",
+      "referenceFrame": "ICRF",
+      "source": "https://doi.org/10.1038/s41586-024-07378-0",
+      "sourcePath": "src/planets/selam/source/orbit/published-parameters.json",
+      "sha256": "b0320fd5cf6ae56cffed5d03920b522e2c574c8630be0d2e61a53a163cc25324",
+      "timeQualification": "An illustrative zero mean anomaly is assigned at the shared TT scene epoch. This is not a propagation of a measured encounter phase or a prediction of present position.",
+      "limitations": [
+        "Approximate orbital placement. The 3.11 km separation and 52.67-hour period are measured; circular equatorial motion and synchronous orientation are approximations. The present orbital phase is illustrative.",
+        "Circular equatorial approximation using the primary pole: i=90−beta, ascending node=lambda+90. No node or phase fit is claimed.",
+        "Effective GM=a^3(2pi/P)^2 ensures the display conic agrees with its chosen period. The zero moon GM is a massless display approximation, not a mass measurement."
+      ]
+    }
+  },
   "hiiaka": {
     "epochJdTt": 2461286.5,
     "positionKm": [

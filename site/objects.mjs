@@ -1,3 +1,6 @@
+import selamDescriptor from "../src/planets/selam/object.json" with { type: "json" };
+import dinkineshDescriptor from "../src/planets/dinkinesh/object.json" with { type: "json" };
+import dactylDescriptor from "../src/planets/dactyl/object.json" with { type: "json" };
 import achlysDescriptor from "../src/planets/achlys/object.json" with { type: "json" };
 import maniDescriptor from "../src/planets/mani/object.json" with { type: "json" };
 import vardaDescriptor from "../src/planets/varda/object.json" with { type: "json" };
@@ -467,6 +470,12 @@ import comet19pDescriptor from "../src/planets/comet-19p/object.json" with { typ
 import comet1pDescriptor from "../src/planets/comet-1p/object.json" with { type: "json" };
 
 export const OBJECTS = defineObjects([
+  object("selam", "Selam", "satellite", "#a0a0a0", 2.073581431805674,
+    "Selam is the first contact-binary moon discovered around an asteroid. Lucy revealed its two touching lobes while passing Dinkinesh in November 2023.", packaged(selamDescriptor), selamDescriptor.properties.worldFrame),
+  object("dinkinesh", "Dinkinesh", "asteroid", "#a0a0a0", 2.073581431805674,
+    "Dinkinesh was Lucy’s first asteroid encounter. Its equatorial ridge and trough accompany a remarkable moon: the contact binary Selam.", packaged(dinkineshDescriptor), dinkineshDescriptor.properties.worldFrame),
+  object("dactyl", "Dactyl", "satellite", "#a0a0a0", 2.861,
+    "Dactyl, discovered beside Ida in Galileo images, was the first moon found orbiting an asteroid.", packaged(dactylDescriptor), dactylDescriptor.properties.worldFrame),
   object("achlys", "Achlys (2003 AZ84)", "trans-neptunian", "#aaaaaa", 43.53477215772988,
     "Formerly 2003 AZ84, Achlys is a plutino in Neptune’s 3: 2 orbital resonance. Its changing occultation silhouette supports a flattened, elongated model, while a grazing event hints at a local depression.", packaged(achlysDescriptor), achlysDescriptor.properties.worldFrame),
   object("mani", "Máni (2002 MS4)", "trans-neptunian", "#aaaaaa", 45.97552197787258,

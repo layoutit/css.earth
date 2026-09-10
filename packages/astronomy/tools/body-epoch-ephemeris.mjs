@@ -176,7 +176,10 @@ async function loadPublishedRecord({ record, bodyRoot, bodyId, centerBodyId, epo
     velocityKmPerDay: Object.freeze(computed.velocityKmPerDay), centerBodyId,
     gravitationalParametersKm3PerS2: Object.freeze({ ...gm }), systemGmKm3PerS2: gm.combined,
     ...(parentHeliocentricState ? { parentHeliocentricState } : {}),
-    provenance: Object.freeze({ model: 'Published mutual-orbit model evaluated once at prepared epoch', epochJdTt,
+    provenance: Object.freeze({ model: parameters.placement === 'approximate'
+      ? 'Illustrative phase at prepared epoch using published orbital constraints'
+      : 'Published mutual-orbit model evaluated once at prepared epoch', epochJdTt,
+      ...(parameters.placement === 'approximate' ? { placement: 'approximate' } : {}),
       referenceFrame: 'ICRF', source: parameters.citation.url, sourcePath: `src/planets/${bodyId}/${record.source.path}`,
       sha256: record.source.sha256, timeQualification: parameters.timeQualification,
       limitations: record.limitations, validation: record.validation }) });

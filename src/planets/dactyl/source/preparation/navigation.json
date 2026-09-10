@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "dactyl",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
+    "origin": "https://doi.org/10.1006/icar.1996.0045",
+    "credit": "Veverka et al. (1996), Galileo imaging team",
+    "license": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
+    "consumers": [
+      "navigation"
+    ],
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "shape-model"
+      ],
+      "size": 512,
+      "longitudeDegrees": 55,
+      "latitudeDegrees": 20,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "shape"
+    },
+    "expectedBytes": 73514,
+    "expectedSha256": "26ce08947ecd58fb000983ef0b80801cbb930e5308a6c0555a0037573a949229"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

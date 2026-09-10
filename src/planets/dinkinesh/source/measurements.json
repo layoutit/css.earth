@@ -1,0 +1,34 @@
+{
+  "body": "dinkinesh",
+  "representation": "Celestia contributors’ reconstruction inspired by Lucy images, uniformly scaled to the published 738 m volume-equivalent diameter. This is an authored approximation, not the mission photogrammetric shape model. The grid marks missing qualified surface imagery.",
+  "size": "738 m equivalent diameter",
+  "radiusKm": 0.369,
+  "radiusMeaning": "Published volume-equivalent radius used for uniform model scaling",
+  "shapeParameters": null,
+  "citations": [
+    [
+      "Levison et al. (2024)",
+      "Lucy discovery, ridge and contact-binary satellite",
+      "https://doi.org/10.1038/s41586-024-07378-0"
+    ],
+    [
+      "Bierhaus et al. (2025)",
+      "Revised shape, geology and 738 m equivalent diameter",
+      "https://doi.org/10.3847/PSJ/ae1968"
+    ],
+    [
+      "Jackson et al. (2025)",
+      "Rotation pole and thermal constraints",
+      "https://doi.org/10.3847/PSJ/ade23c"
+    ]
+  ],
+  "limitations": "JPL supplies the heliocentric orbit. The reconstruction has an illustrative meridian; its detailed geometry and unseen hemisphere are not measured terrain.",
+  "sourceSelection": {
+    "missionImages": "Encounter images establish resolved shape, but a camera-controlled texture is not yet qualified.",
+    "celestia": {
+      "commit": "1993a082ee6307c0df7fdc0828eb117a0e8e9958",
+      "status": "Selected attributed authored reconstruction; not a mission mesh. Original UVs preserved but texture omitted because observed-versus-filled coverage is undocumented."
+    },
+    "imagery": "Shared missing-imagery grid. No stock rock texture, inferred albedo, or invented terrain."
+  }
+}

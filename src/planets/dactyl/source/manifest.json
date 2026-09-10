@@ -1,0 +1,180 @@
+{
+  "schema": "cssdactyl-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    },
+    {
+      "id": "shape-model",
+      "path": "shape/model.json",
+      "origin": "https://doi.org/10.1006/icar.1996.0045",
+      "credit": "Veverka et al. (1996), Galileo imaging team",
+      "license": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
+      "acquisition": "Reproduce from the published numerical dimensions through scaffold.mjs and the shared ellipsoid preparer.",
+      "redistribution": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
+      "consumers": [
+        "terrain",
+        "shape"
+      ],
+      "coverage": "A smooth ellipsoid at the dimensions measured from Galileo images: 1.6 × 1.4 × 1.2 km. Craters and surface imagery are not represented; the grid marks missing imagery.",
+      "expectedBytes": 163,
+      "expectedSha256": "ad79a5bea948b73c0f842a3609939da15914a0dbb1d88ecc8f371ffefe50c2b4"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.1006/icar.1996.0045",
+      "credit": "Veverka et al. (1996), Galileo imaging team",
+      "license": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
+      "consumers": [
+        "navigation"
+      ],
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "shape-model"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "expectedBytes": 73514,
+      "expectedSha256": "26ce08947ecd58fb000983ef0b80801cbb930e5308a6c0555a0037573a949229"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3273,
+      "expectedSha256": "06ab52cf7b5a8fd767b87d4f6f8e1c807b3199a982984fe35c6d81a788710aaa",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 1572,
+      "expectedSha256": "550ae32feddcf243762b1aee2bd4e6aeff7e6e9107fe82da0c222b72071822ae",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "orbit/published-parameters.json",
+      "expectedBytes": 1662,
+      "expectedSha256": "64e0bceb305b89bbc469edef488afba4c9c82c1e6e8e1a0fd1a5d11ea53afd0e",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 526,
+      "expectedSha256": "179dcbdf58198c6218d0fbf511a76a3661e0db2ce9558eedb4022e632384b554",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1238,
+      "expectedSha256": "87437d6e6012a10cd25ef0b9d1ae2456c8735a038fa0252c9537b1b5424b7f2c",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 581,
+      "expectedSha256": "f5cbdd4577e22481dc57cdc9b6d419f7861734a2dd181fbf8e7b512eee8e1b7f",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2187,
+      "expectedSha256": "5461764de06dc7fb0009ea66e2cea0b687c95358c11c566b79dc3ed38f33ea1b",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3414,
+      "expectedSha256": "2e1e43bca0ff0a5bcc125f3aa5861c9eb41973e328cf39ae5496de28f51e0a24",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/asteroids.ssc",
+      "expectedBytes": 67921,
+      "expectedSha256": "7858a930a83aaf6ff9fcea86b4a6b1e2711658fe0a2d07dc0925161ed296fbd5",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/celestia.json",
+      "expectedBytes": 324,
+      "expectedSha256": "0f07960200c3375fa0966549bb5e2e0d10971ccd6113ccd3111fcda4ba15c9cc",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/GPL-2.0-or-later.txt",
+      "expectedBytes": 17337,
+      "expectedSha256": "aaf135472f81c5b4a0dca9367e5bb5e9750032b5bebe5442b36e4c0a47430df3",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 144975,
+      "expectedSha256": "5a8718e7bff53fc50edcf38c47964f7b850a56ccb8c299ca1c2f6ca5dee6c645",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "validation/epoch-state.json",
+      "expectedBytes": 1724,
+      "expectedSha256": "e129722404c4366e34a05feb988e4f0d17d3afe925e3d08a15c7092538176dd4",
+      "purpose": "Source evidence or authored preparation input."
+    }
+  ]
+}

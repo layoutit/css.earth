@@ -48,6 +48,28 @@ class Clock {
 class FakeDocument { defaultView = new Clock(); createElement(tagName: string): FakeElement { return new FakeElement(this, tagName); } }
 
 const mounted = new WeakMap<FakeElement, ReturnType<typeof mountPreparedWorldContext>>();
+
+test('approximate orbit cues stay on retained groups through selection and publication', () => {
+  const original = plan(1);
+  const input = { ...original, bodies: [{ ...original.bodies[0], placement: 'approximate' }, original.bodies[1]] };
+  const prepared = parsePreparedWorldContext(input);
+  expect(prepared.bodies[0]!.placement).toBe('approximate');
+  expect(prepared.bodies[0]!.orbit).toEqual(original.bodies[0]!.orbit);
+  expect(() => parsePreparedWorldContext({ ...input, bodies: [{ ...input.bodies[0], placement: 'unknown' }] })).toThrow(/placement/);
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: prepared, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  const root = layer.root as unknown as FakeElement;
+  const group = find(root, 'contextGroup', 'mercury'), count = all(root).length;
+  layer.selectObject('mercury');
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  expect(group.dataset.contextPlacement).toBe('approximate');
+  expect(find(root, 'contextLabel', 'mercury').textContent).toBe('Mercury · Approx.');
+  expect(find(root, 'contextGroup', 'venus').dataset.contextPlacement).toBeUndefined();
+  expect(all(root).length).toBe(count);
+  layer.destroy();
+});
 const sprite = { url: '/marker.png', index: 0, count: 1, size: 16 };
 const presentation = {
   projection: { model: 'css-perspective-shared-with-sky', cssPerspective: '86.60254037844386cqw' },

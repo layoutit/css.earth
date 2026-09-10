@@ -1,0 +1,47 @@
+{
+  "body": "selam",
+  "representation": "Two touching ellipsoids reproduce the lobe dimensions inferred from Lucy images: 240 × 200 × 200 m and 280 × 220 × 210 m, each uncertain by about 10%. This is a smooth shape envelope; the neck, craters and surface imagery are unresolved in this representation.",
+  "size": "About 520 m end to end",
+  "radiusKm": 0.14123064709924582,
+  "radiusMeaning": "Volume-equivalent radius of the declared smooth envelope",
+  "shapeParameters": {
+    "schema": "cssearth-contact-ellipsoids@1",
+    "origin": "equal-density-volume-centroid",
+    "lobes": [
+      {
+        "semiaxesKm": [
+          0.12,
+          0.1,
+          0.1
+        ]
+      },
+      {
+        "semiaxesKm": [
+          0.14,
+          0.11,
+          0.105
+        ]
+      }
+    ],
+    "fluxScale": 1,
+    "subdivisions": 3
+  },
+  "citations": [
+    [
+      "Levison et al. (2024)",
+      "Lobe dimensions, separation and mutual period",
+      "https://doi.org/10.1038/s41586-024-07378-0"
+    ],
+    [
+      "Bierhaus et al. (2025)",
+      "Later geology and limits of the Selam shape evidence",
+      "https://doi.org/10.3847/PSJ/ae1968"
+    ]
+  ],
+  "limitations": "Approximate orbital placement. The 3.11 km separation and 52.67-hour period are measured; circular equatorial motion and synchronous orientation are approximations. The present orbital phase is illustrative.",
+  "sourceSelection": {
+    "missionImages": "Encounter images establish resolved shape, but a camera-controlled texture is not yet qualified.",
+    "celestia": "Generic Dactyl texture and unregistered Selam reconstruction excluded.",
+    "imagery": "Shared missing-imagery grid. No stock rock texture, inferred albedo, or invented terrain."
+  }
+}

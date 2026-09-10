@@ -6,6 +6,8 @@ import { loadBodyEpochEphemeris } from './body-epoch-ephemeris.mjs';
 const root = fileURLToPath(new URL('../../../', import.meta.url));
 const epochJdTt = 2461286.5;
 const sources = [
+  ['dactyl', 'ida', null, null],
+  ['selam', 'dinkinesh', null, null],
   ['hiiaka', 'haumea', 120136108, 920136108],
   ['menoetius', 'patroclus', 120000617, 920000617],
   ['squannit', 'moshup', null, null],

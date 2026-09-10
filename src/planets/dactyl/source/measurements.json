@@ -1,0 +1,40 @@
+{
+  "body": "dactyl",
+  "representation": "A smooth ellipsoid at the dimensions measured from Galileo images: 1.6 × 1.4 × 1.2 km. Craters and surface imagery are not represented; the grid marks missing imagery.",
+  "size": "1.6 × 1.4 × 1.2 km",
+  "radiusKm": 0.6952053289772899,
+  "radiusMeaning": "Volume-equivalent radius of the declared smooth envelope",
+  "shapeParameters": {
+    "schema": "cssearth-ellipsoid-parameters@1",
+    "scaleConvention": "published-semiaxes",
+    "semiaxesKm": [
+      0.8,
+      0.7,
+      0.6
+    ],
+    "subdivisions": 3
+  },
+  "citations": [
+    [
+      "Veverka et al. (1996)",
+      "Galileo dimensions, shape and surface observations",
+      "https://doi.org/10.1006/icar.1996.0045"
+    ],
+    [
+      "Belton et al. (1996)",
+      "Discovery and encounter orbit constraints",
+      "https://doi.org/10.1006/icar.1996.0044"
+    ],
+    [
+      "Petit et al. (1997)",
+      "Long-term orbit stability and candidate solutions",
+      "https://doi.org/10.1006/icar.1997.5788"
+    ]
+  ],
+  "limitations": "Approximate orbital placement. The 1993 encounter did not determine a unique orbit; the present orbital phase is illustrative. A synchronous orientation is assumed, not measured.",
+  "sourceSelection": {
+    "missionImages": "Encounter images establish resolved shape, but a camera-controlled texture is not yet qualified.",
+    "celestia": "Generic Dactyl texture and unregistered Selam reconstruction excluded.",
+    "imagery": "Shared missing-imagery grid. No stock rock texture, inferred albedo, or invented terrain."
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "dinkinesh",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Dinkinesh",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "3203dab2bec21a047c6c4298e67c47151a7e6894541aa094d8d65e5137644a89"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "600f7fa7918f799141a098e023a1af66d461e8b76c7bc3550f7b7dda25563f49"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "e22fa67c086c632aa0cb23c657fcd3a2b99775d2219d032554023fb44803e5e5"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "73748cb959d3efeceab3faa1816710fbf3d904dd53f549fcb0250875498e312e"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "179dcbdf58198c6218d0fbf511a76a3661e0db2ce9558eedb4022e632384b554"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "b2c56e934ae3152b4188c7755e84101dee3e8ea2a346f4c8a740ce650ff464a5"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 0.369
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/dinkinesh-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "598cd4e0388e43e77428582540a77d65b2270deaf1ddca92e4096e51c817c327"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -282231298529.8608,
+        114639206353.66275,
+        58561722532.6488
+      ],
+      "presentationToReference": [
+        -0.9101391966298745,
+        -8.673617379884035e-19,
+        -0.4143025980583832,
+        0.38011520198722476,
+        0.3977771559319137,
+        -0.8350363868939659,
+        0.16480010915086646,
+        -0.9174820620691818,
+        -0.3620325811375883
+      ],
+      "orbitUpReference": [
+        8.673617379884035e-19,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1.6043478260869566,
+      "bodyRadiusM": 369
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "6728a90f03034fb0960160e317aa8728c29b10962460400e98e9696b9d73748c"
+  }
+}

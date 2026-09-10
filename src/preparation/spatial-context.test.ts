@@ -7,6 +7,21 @@ import type { OrbitalState } from './spatial-context.js';
 
 const sourcePath = 'src/planets/sun/source/navigation/universe.json';
 
+test('approximate placement survives preparation without changing the orbit geometry', async () => {
+  const raw = JSON.parse(await readFile(sourcePath, 'utf8'));
+  const body = { ...raw.bodies[0], placement: 'approximate' };
+  const source = parseWorldContextSource({ ...raw, bodies: [body] });
+  const facts = { [body.id]: { radiusM: 1 } };
+  const states = { [body.id]: { positionM: [7, 0, 0], centerBodyId: source.focus.id,
+    centerPositionM: source.frame.originM, normal: [0, 0, 1], perihelionDirection: [1, 0, 0],
+    semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 } } as Record<string, OrbitalState>;
+  const prepared = prepareWorldContext(source, facts, states);
+  const original = prepareWorldContext({ ...source, bodies: [{ id: body.id, name: body.name, color: body.color }] }, facts, states);
+  assert.equal(prepared.bodies[0]!.placement, 'approximate');
+  assert.deepEqual(prepared.bodies[0]!.orbit, original.bodies[0]!.orbit);
+  assert.throws(() => parseWorldContextSource({ ...raw, bodies: [{ ...body, placement: 'exact-ish' }] }), /placement/);
+});
+
 test('prepared volume opacity preserves authored grading and validates bounded levels and ordered distances', async () => {
   const raw = JSON.parse(await readFile(sourcePath, 'utf8'));
   const source = parseWorldContextSource(raw), profile = source.volume.opacityProfile!;

@@ -100,6 +100,36 @@ export const BODY_POSITION_PROVENANCE = Object.freeze({
     "sha256": "34591ceb0064d9450c05273365df520cf9cc3a6a4d134ce1cfb700b06d41a855",
     "timeQualification": "Horizons UT vector output uses UTC after 1962. TT = UTC + 69.184 seconds at this epoch; float64 JD conversion and output rounding are below 0.1 ms."
   },
+  "dactyl": {
+    "model": "Illustrative phase at prepared epoch using published orbital constraints",
+    "epochJdTt": 2461286.5,
+    "placement": "approximate",
+    "referenceFrame": "ICRF",
+    "source": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/asteroids.ssc",
+    "sourcePath": "src/planets/dactyl/source/orbit/published-parameters.json",
+    "sha256": "64e0bceb305b89bbc469edef488afba4c9c82c1e6e8e1a0fd1a5d11ea53afd0e",
+    "timeQualification": "An illustrative zero mean anomaly is assigned at the shared TT scene epoch. This is not a propagation of a measured encounter phase or a prediction of present position.",
+    "limitations": [
+      "Approximate orbital placement. The 1993 encounter did not determine a unique orbit; the present orbital phase is illustrative. A synchronous orientation is assumed, not measured.",
+      "Plane taken opposite the existing Ida pole (RA 348.76, Dec 87.1 degrees). This neglects the roughly 8-degree mutual inclination and does not select a unique stable solution. Periapsis and phase are illustrative.",
+      "Effective GM=a^3(2pi/P)^2 ensures the display conic agrees with its chosen period. The zero moon GM is a massless display approximation, not a mass measurement."
+    ]
+  },
+  "selam": {
+    "model": "Illustrative phase at prepared epoch using published orbital constraints",
+    "epochJdTt": 2461286.5,
+    "placement": "approximate",
+    "referenceFrame": "ICRF",
+    "source": "https://doi.org/10.1038/s41586-024-07378-0",
+    "sourcePath": "src/planets/selam/source/orbit/published-parameters.json",
+    "sha256": "b0320fd5cf6ae56cffed5d03920b522e2c574c8630be0d2e61a53a163cc25324",
+    "timeQualification": "An illustrative zero mean anomaly is assigned at the shared TT scene epoch. This is not a propagation of a measured encounter phase or a prediction of present position.",
+    "limitations": [
+      "Approximate orbital placement. The 3.11 km separation and 52.67-hour period are measured; circular equatorial motion and synchronous orientation are approximations. The present orbital phase is illustrative.",
+      "Circular equatorial approximation using the primary pole: i=90−beta, ascending node=lambda+90. No node or phase fit is claimed.",
+      "Effective GM=a^3(2pi/P)^2 ensures the display conic agrees with its chosen period. The zero moon GM is a massless display approximation, not a mass measurement."
+    ]
+  },
   "hiiaka": {
     "model": "Horizons geometric state at prepared epoch",
     "epochJdTt": 2461286.5,
@@ -404,6 +434,24 @@ export const BODY_HELIOCENTRIC_STATES = Object.freeze({
 });
 
 export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
+  // subsolar latitude 0.025°, longitude -154.910°
+  selam: Object.freeze([
+    -0.9056445551810557,
+    -0.4240374333352948,
+    0.0004413630285597657,
+  ]),
+  // subsolar latitude 0.025°, longitude -154.910°
+  dinkinesh: Object.freeze([
+    -0.9056445530528877,
+    -0.4240374378805588,
+    0.00044136303239039615,
+  ]),
+  // subsolar latitude 8.992°, longitude -72.407°
+  dactyl: Object.freeze([
+    0.2985324204385912,
+    -0.941514715563587,
+    0.15629598307152406,
+  ]),
   // subsolar latitude -5.339°, longitude -137.593°
   achlys: Object.freeze([
     -0.735174095963707,
@@ -3185,6 +3233,24 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
 });
 
 export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
+  // pole tilt to the ecliptic 177.050°, Sun ecliptic latitude -1.502°
+  selam: Object.freeze([
+    0.004440407150313624,
+    0.05127254846165041,
+    -0.9986748262365419,
+  ]),
+  // pole tilt to the ecliptic 177.050°, Sun ecliptic latitude -1.502°
+  dinkinesh: Object.freeze([
+    0.004440407150313624,
+    0.05127254846165041,
+    -0.9986748262365419,
+  ]),
+  // pole tilt to the ecliptic 156.960°, Sun ecliptic latitude 0.106°
+  dactyl: Object.freeze([
+    0.39014751766322486,
+    -0.031016972199384853,
+    -0.9202297875513518,
+  ]),
   // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 11.951°
   achlys: Object.freeze([
     -0.3977771559319137,
@@ -5968,6 +6034,24 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
 // The orbit lies in the plane perpendicular to this direction; every
 // direction from the body to another point of its orbit does too.
 export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
+  // orbital inclination to the ecliptic 177.050°, obliquity to the orbit 0.000°
+  selam: Object.freeze([
+    -1.6219664500383144e-16,
+    6.10622663543836e-16,
+    1,
+  ]),
+  // orbital inclination to the ecliptic 2.093°, obliquity to the orbit 178.904°
+  dinkinesh: Object.freeze([
+    -0.008508362152576233,
+    0.017131198582312213,
+    -0.9998170481686208,
+  ]),
+  // orbital inclination to the ecliptic 156.960°, obliquity to the orbit 0.000°
+  dactyl: Object.freeze([
+    -1.734723475976807e-18,
+    6.938893903907228e-18,
+    1,
+  ]),
   // orbital inclination to the ecliptic 13.550°, obliquity to the orbit 22.945°
   achlys: Object.freeze([
     -0.3199635997320434,
@@ -8752,6 +8836,24 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
 // the epoch, perpendicular to the orbit normal but not to the Sun direction
 // (the flight-path angle is the orbit's eccentricity showing).
 export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
+  // flight-path angle 0.000°
+  selam: Object.freeze([
+    0.0862810273558492,
+    0.9962708388377225,
+    -6.106226635438361e-16,
+  ]),
+  // flight-path angle 5.690°
+  dinkinesh: Object.freeze([
+    0.5116542430562583,
+    -0.8589797363511456,
+    -0.019072181328941066,
+  ]),
+  // flight-path angle 0.000°
+  dactyl: Object.freeze([
+    2.775557561562892e-17,
+    1,
+    -6.93889390390723e-18,
+  ]),
   // flight-path angle -8.399°
   achlys: Object.freeze([
     -0.6985864744742822,
@@ -11536,6 +11638,24 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
 // (prime meridian), +Y and +Z (north pole) axes in ICRF, so an ICRF direction
 // is the matrix times a body-fixed direction and the transpose goes back.
 export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
+  // pole RA 90.640°, Dec -63.623°, prime meridian W 0.000°
+  selam: Object.freeze([
+    -0.9999376911917456, -0.01000086822619433, -0.004959472637642044,
+    -0.01116305218662098, 0.8958343038115535, 0.44424800098632744,
+    0, 0.4442756832746887, -0.8958901256576102,
+  ]),
+  // pole RA 90.640°, Dec -63.623°, prime meridian W 0.000°
+  dinkinesh: Object.freeze([
+    -0.9999376911917456, -0.01000086822619433, -0.004959472637642044,
+    -0.01116305218662098, 0.8958343038115535, 0.44424800098632744,
+    0, 0.4442756832746887, -0.8958901256576102,
+  ]),
+  // pole RA 168.760°, Dec -87.100°, prime meridian W 0.000°
+  dactyl: Object.freeze([
+    -0.1949191397216209, -0.9795632359398654, -0.04962253283743783,
+    -0.980819315149423, 0.19466951792567178, 0.009861532355740492,
+    0, 0.050592940076713395, -0.9987193571841861,
+  ]),
   // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
   achlys: Object.freeze([
     6.123233995736766e-17, -1, 0,
@@ -14322,6 +14442,55 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
 // frame; inclinationDegrees is the same value as
 // BODY_FIXED_ORBIT_NORMAL_DIRECTIONS' orbital inclination comment above.
 export const BODY_ORBITS = Object.freeze({
+  // a 2.0789e-8 AU, e 1.1159e-16, perihelion 2.0789e-8 AU, aphelion 2.0789e-8 AU
+  selam: Object.freeze({
+    centerBodyId: "dinkinesh",
+    centerPositionAu: Object.freeze([-2.071154017291315e-8,1.7937019679564937e-9,-4.4460957924725245e-24]),
+    semiMajorAxisAu: 2.078906595025487e-8,
+    eccentricity: 1.1158876376629385e-16,
+    heliocentricDistanceAu: 2.0735814498023704,
+    perihelionDirection: Object.freeze([
+      0.9998120910743319,
+      -0.019385111337617784,
+      1.717376241217039e-16,
+    ]),
+    trueAnomalyDegrees: 356.1610616546587,
+    inclinationDegrees: 177.05000000000018,
+    perihelionAu: 2.0789065950254866e-8,
+    aphelionAu: 2.0789065950254873e-8,
+  }),
+  // a 2.1915 AU, e 0.11268, perihelion 1.9446 AU, aphelion 2.4385 AU
+  dinkinesh: Object.freeze({
+    semiMajorAxisAu: 2.1915236134373757,
+    eccentricity: 0.11268416766975647,
+    heliocentricDistanceAu: 2.0735814318056742,
+    perihelionDirection: Object.freeze([
+      -0.04187752690878465,
+      0.9989699519835531,
+      0.01747305851824294,
+    ]),
+    trueAnomalyDegrees: 67.31485818483513,
+    inclinationDegrees: 2.093261550521914,
+    perihelionAu: 1.9445735991285678,
+    aphelionAu: 2.4384736277461836,
+  }),
+  // a 5.5014e-7 AU, e 0.15000, perihelion 4.6762e-7 AU, aphelion 6.3266e-7 AU
+  dactyl: Object.freeze({
+    centerBodyId: "ida",
+    centerPositionAu: Object.freeze([-4.676202921382892e-7,0,-8.271806125530279e-25]),
+    semiMajorAxisAu: 5.501415201626933e-7,
+    eccentricity: 0.15000000000000002,
+    heliocentricDistanceAu: 2.8174542165148337,
+    perihelionDirection: Object.freeze([
+      1,
+      -1.9479772730838344e-16,
+      1.3682291262270493e-18,
+    ]),
+    trueAnomalyDegrees: 8.537736462515939e-7,
+    inclinationDegrees: 156.95969845199548,
+    perihelionAu: 4.676202921382893e-7,
+    aphelionAu: 6.326627481870973e-7,
+  }),
   // a 39.662 AU, e 0.17511, perihelion 32.717 AU, aphelion 46.608 AU
   achlys: Object.freeze({
     semiMajorAxisAu: 39.662203504209764,

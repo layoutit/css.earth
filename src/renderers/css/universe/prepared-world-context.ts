@@ -46,6 +46,7 @@ export interface PreparedContextFocus extends PreparedContextPoint {
   readonly systemView?: PreparedContextBody['systemView'];
 }
 export interface PreparedContextBody extends PreparedContextPoint {
+  readonly placement?: 'approximate';
   readonly systemView?: { readonly memberIds: readonly string[]; readonly memberRadiiM: readonly number[];
     readonly candidates: readonly { readonly cameraToReference: readonly number[];
       readonly minimumM: PositionM; readonly maximumM: PositionM; readonly memberPositionsM: readonly PositionM[] }[] };
@@ -185,10 +186,12 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
   const focus = focusPoint(input.focus);
   if (!equalPosition(focus.positionM, frame.originM)) throw new TypeError('World context focus must be at its frame origin.');
   const bodies = array(input.bodies, 'context bodies').map<PreparedContextBody>(value => {
-    const input = record(value, 'context body', ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView']);
-    const rawBody = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView']);
+    const input = record(value, 'context body', ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement']);
+    const rawBody = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement']);
     const systemView = parseSystemView(input.systemView);
-    const body = systemView ? { ...rawBody, systemView } : rawBody;
+    if (input.placement !== undefined && input.placement !== 'approximate') throw new TypeError('Unsupported orbital placement qualification.');
+    const body = { ...rawBody, ...(systemView ? { systemView } : {}),
+      ...(input.placement === 'approximate' ? { placement: 'approximate' as const } : {}) };
     if (input.orbit === undefined) return body;
     const orbit = record(input.orbit, 'body orbit', ['centerBodyId', 'centerPositionM', 'verticesM', 'trail', 'bounds', 'activeChords', 'extentChords',
       'closed', 'bodyVertexIndex', 'displayExtentAu', 'trailModel']);
@@ -321,6 +324,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites, request
     if (!sprite) { root.remove(); throw new TypeError(`Missing prepared navigation sprite ${body.id}.`); }
     const group = host.ownerDocument.createElement('div');
     group.dataset.contextGroup = body.id;
+    const approximate = 'placement' in body && body.placement === 'approximate';
+    if (approximate) group.dataset.contextPlacement = 'approximate';
     group.style.cssText = 'position:absolute;inset:0;pointer-events:none';
     root.appendChild(group);
     const marker = host.ownerDocument.createElement('s');
@@ -338,7 +343,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites, request
     indicator.appendChild(anchorCorners);
     const label = host.ownerDocument.createElement('span');
     label.dataset.contextLabel = body.id;
-    label.textContent = body.name;
+    label.textContent = approximate ? `${body.name} · Approx.` : body.name;
+    if (approximate) label.title = `${body.name} · Approximate orbital placement`;
     label.style.cssText = 'position:absolute;left:50%;top:50%;white-space:nowrap;visibility:hidden';
     label.style.opacity = '0';
     const orbit = 'orbit' in body ? (body as PreparedContextBody).orbit : null;
