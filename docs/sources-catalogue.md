@@ -1,7 +1,8 @@
 # Sources catalogue
 
-The Sources tab links published works and data products to the datasets and
-factsheets that cite them. A shared source has one identity across bodies;
+The Sources card links the selected dataset to its published works and data
+products. The catalogue also retains citations for factsheets, missions and
+shared environments. A shared source has one identity across bodies;
 each body keeps its own input bytes, processing, credits and limits.
 
 ## Find the record to change
@@ -107,11 +108,18 @@ claim index. A missing edge does not establish that a source is unused throughou
 the repository. File checks establish identity; scientific review establishes
 whether the source supports the displayed quantity.
 
-Only relevant source cards become the current body's page HTML. The inert
-navigation previews omit Sources and Missions; the existing page transport fills
-those panels. The complete catalogue and graph remain build inputs.
+The current body's HTML includes prepared mission and source cards for each
+dataset. The Sources card follows product dependencies for the selected lens,
+keeps distinct published products as separate links, and groups their shared
+credit. Factsheet and shared-environment citations do not create dataset links.
+The inert navigation previews omit these cards; the existing page transport
+fills their template. The complete catalogue and graph remain build inputs.
 
 ## Interface examples
+
+These images show the earlier Sources tab. The current interface shows the
+selected dataset's sources in a separate card on the right, or below the body
+card on narrow screens.
 
 ![Mercury Sources disclosure on desktop](images/catalogue-sources-desktop.png)
 

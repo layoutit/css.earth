@@ -106,14 +106,13 @@ test('selecting the system root pulls back from a planet to all major planets, w
 test('system fit leaves clearance for the visible sidebar, header and footer', () => {
   const boxes = {
     '.planet-stage': { left: 0, top: 0, width: 1524, height: 1237 },
-    '.planet-sidebar': { left: 12, right: 352, top: 111, bottom: 720, width: 340, height: 609 },
-    '.explorer-shell-header': { left: 12, right: 352, top: 8, bottom: 103, width: 340, height: 95 },
-    '.planet-view-readout': { left: 1000, right: 1524, top: 0, bottom: 32, width: 524, height: 32 },
-    '.planet-attribution-footer': { left: 0, right: 1524, top: 1219, bottom: 1237, width: 1524, height: 18 },
+    '.planet-sidebar': { left: 12, right: 352, top: 60, bottom: 720, width: 340, height: 660 },
+    '.explorer-shell-header': { left: 12, right: 1512, top: 8, bottom: 52, width: 1500, height: 44 },
+    '.planet-footer': { left: 0, right: 1524, top: 1219, bottom: 1237, width: 1524, height: 18 },
   };
   const documentTarget = { querySelector: selector => boxes[selector] && { getBoundingClientRect: () => boxes[selector] } };
   assert.deepEqual(systemFramingRect({ ...optics, widthPixels: 1524, heightPixels: 1237 }, documentTarget),
-    { left: 352 - 762 + 48, right: 762 - 48, top: 32 - 618.5 + 48, bottom: 1219 - 618.5 - 48 });
+    { left: 352 - 762 + 48, right: 762 - 48, top: 52 - 618.5 + 48, bottom: 1219 - 618.5 - 48 });
 });
 
 test('adding a small distant moon does not pull the initial camera away from the larger moons', () => {

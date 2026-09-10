@@ -7,6 +7,6 @@ const { provenance, lens } = Astro.props;
 const caption = datasetCaption(provenance, lens);
 const description = lens.summary ?? lens.description;
 ---
-<SelectedContent title={caption.title} {description} descriptionDetail={lens.description} href={caption.href}>
+<SelectedContent title={caption.title} {description} descriptionDetail={lens.description}>
   <slot />
 </SelectedContent>

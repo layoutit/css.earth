@@ -1,0 +1,9 @@
+---
+import type { ObjectEntry } from '../object-schema.mts';
+import PlanetObjectResult from './PlanetObjectResult.astro';
+interface Props { moons: readonly ObjectEntry[]; }
+const { moons } = Astro.props;
+---
+{moons.length > 0 ? <ul class="planet-object-list">
+  {moons.map(object => <PlanetObjectResult {object} />)}
+</ul> : <p class="planet-object-empty">No moons in the catalogue</p>}

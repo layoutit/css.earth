@@ -4,18 +4,14 @@ interface Props { objectId: string; title: PlanetTitle; introduction?: string; f
 import '../body-overview.css';
 import PlanetCardHeader from './PlanetCardHeader.astro';
 import PlanetBreadcrumbs from './PlanetBreadcrumbs.astro';
-import PlanetObjectResult from './PlanetObjectResult.astro';
+import PlanetMoonList from './PlanetMoonList.astro';
 import PlanetFactsheet from './PlanetFactsheet.astro';
-import { PLANET_SEARCH_OBJECTS } from '../planet-search-objects.mts';
-import preparedWorld from '../../src/planets/sun/prepared/world-context.json';
+import { prepareBodyMoons } from '../prepare-body-moons.mts';
 import { prepareBodyOverview } from '../prepare-body-overview.mts';
 
 const { objectId, title, introduction, facts = [], moreFacts = [] } = Astro.props;
 const overview = await prepareBodyOverview(objectId);
-const children = new Set(preparedWorld.bodies
-  .filter(body => body.orbit?.centerBodyId === objectId).map(body => body.id));
-const moons = PLANET_SEARCH_OBJECTS.filter(object =>
-  object.classification === 'satellite' && children.has(object.id));
+const moons = prepareBodyMoons(objectId);
 const tabs = [
   { id: 'moons', label: 'Moons' },
   { id: 'factsheet', label: 'Factsheet' },
@@ -44,9 +40,7 @@ const tabs = [
 <div class="planet-object-results-scroll planet-card-tabpanel" data-body-overview
   data-information-group="overview" data-information-panel="moons" id={`${objectId}-overview-moons-content`}
   role="tabpanel" aria-labelledby={`${objectId}-overview-moons-tab`} tabindex="0">
-  {moons.length > 0 ? <ul class="planet-object-list">
-    {moons.map(object => <PlanetObjectResult {object} />)}
-  </ul> : <p class="planet-object-empty">No moons in the catalogue</p>}
+  <PlanetMoonList {moons} />
 </div>
 <div class="planet-object-results-scroll planet-card-tabpanel" data-body-overview
   data-information-group="overview" data-information-panel="factsheet" id={`${objectId}-overview-factsheet-content`}
