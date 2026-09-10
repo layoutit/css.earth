@@ -424,7 +424,7 @@ async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, roo
     if (!path) fail('prepared catalogue entries must name their JSON imports');
     const descriptor = relative(root, resolve(root, dirname(descriptorFile), path));
     const value: unknown = JSON.parse(await readSource(resolve(root, descriptor)));
-    if (!isRecord(value) || typeof value.id !== 'string' || descriptor !== `src/planets/${value.id}/object.json` || entries.has(value.id)) fail('catalogue loader must bind its own actual JSON descriptor');
+    if (!isRecord(value) || typeof value.id !== 'string' || descriptor !== `src/planets/${value.id}/object.json` || entries.has(value.id)) fail('descriptor identity must match its own actual JSON descriptor');
     entries.set(value.id, {kind: 'descriptor', client: 'site/packaged-object-runtime.mts', descriptor, exported: 'loadPackagedObject'});
   }
   return {entries, importOffsets: new Set([sourceStart(imported)]), descriptorImports, descriptorFile};
