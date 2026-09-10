@@ -33,6 +33,8 @@ paths and `CAPTURED_UNREVIEWED` status. Human acceptance is recorded separately.
 | Phoebe | 7 | 1,955,458 | 19,070 bytes |
 | Total | 21 | 2,356,820 | 37,178 bytes |
 
+All 21 new images are published. A completely empty installation downloaded and hash-verified all 144 images with zero local reuse: [delivery receipt](evidence/delivery.json).
+
 The complete three-body image inventory has 144 files and 136,830,248 bytes,
 including unchanged existing datasets. This is an inventory measure, not a
 first-load transfer benchmark. Numeric source cubes/TIFFs are preparation inputs.
@@ -72,7 +74,7 @@ violation lists against that base. This is recorded as
 audit. Missing sparse-checkout metadata was restored from exact main before the
 successful selected-package rerun.
 
-Image delivery and the final material replay receipt are recorded with the final PR evidence.
+The final [material replay](evidence/material-reproduction.json) and transport finalization pass for all three bodies. All 245 captured package/image/shared-file pins still match exactly. The replay retains the accepted heliocentric navigation while preparing surfaces.
 
 ## Interpretation and visual limits
 
