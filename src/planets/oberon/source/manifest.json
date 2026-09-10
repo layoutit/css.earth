@@ -124,66 +124,56 @@
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 2017,
-      "expectedSha256": "efb77e160705b1e37cc0cb741bd509100d822ff3046aa68d308f74aceb32510e",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "efb77e160705b1e37cc0cb741bd509100d822ff3046aa68d308f74aceb32510e"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 3309,
-      "expectedSha256": "78486153ffe348b27e7ccc5f92fc03c28a08d8fdd22013962ae6c107a316efb0",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "78486153ffe348b27e7ccc5f92fc03c28a08d8fdd22013962ae6c107a316efb0"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 776,
-      "expectedSha256": "333f3601b3d83789de49568a731fec28b09000e39056aaa71549c62f0b1cb0e9",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "333f3601b3d83789de49568a731fec28b09000e39056aaa71549c62f0b1cb0e9"
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 7830,
-      "expectedSha256": "cfb19d2257c3227c07b80a2ba24c7c42490aba86bec4ca546dad72641bfe0d97",
-      "purpose": "Source metadata, license evidence, or authored preparation and content.",
+      "expectedBytes": 8168,
+      "expectedSha256": "cd2fb8b0e5a1f7f2f12b6b10dd1ab7365be24b737a22ee58aeb13e8aecb81c4f",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 3687,
-      "expectedSha256": "394897e785637b983033c7d67484b78941ef5078b81d838ac77b121725220944",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "394897e785637b983033c7d67484b78941ef5078b81d838ac77b121725220944"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 849,
-      "expectedSha256": "d2058f7ce1ecbca7a3c1405d08f5f8a7f5d2023ad9a612eaf9a1b7abd016918d",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "d2058f7ce1ecbca7a3c1405d08f5f8a7f5d2023ad9a612eaf9a1b7abd016918d"
     },
     {
       "path": "observations/aaReadMe_uranian_MAP_DEM.txt",
       "expectedBytes": 2426,
-      "expectedSha256": "655661b4e4d5f5ada71d7b4b797afffefc2e908ae63b51d9d1fe3fca964d51a3",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "expectedSha256": "655661b4e4d5f5ada71d7b4b797afffefc2e908ae63b51d9d1fe3fca964d51a3"
     },
     {
       "path": "editorial/factsheet-review.json",

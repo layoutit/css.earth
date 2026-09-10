@@ -1,0 +1,24 @@
+{
+  "id": "source-prometheus-thomas-2018-shape",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Elevation",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/prometheus_30k_plt.tab",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/prometheus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "58a51fc5dc861c60cb74fedc29928710f93d912c4c69d101f4b56423a157adee",
+      "locator": "/inputs/14"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

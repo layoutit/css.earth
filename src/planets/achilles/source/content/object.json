@@ -31,7 +31,9 @@
           "url": "https://doi.org/10.1051/0004-6361/202346022",
           "label": "Hanuš et al. (2023), A&A 679, A56, Fig.A.2 and TableB.3",
           "checked": "2026-09-08",
-          "path": "source/reference/calibration.json"
+          "path": "source/reference/calibration.json",
+          "catalogueId": "hanus-2023-trojans",
+          "locator": "/diameterKm; radius = diameterKm / 2"
         }
       },
       {
@@ -52,7 +54,9 @@
           "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3934",
           "label": "DAMIT model 3934",
           "checked": "2026-09-08",
-          "path": "source/reference/damit-model.json"
+          "path": "source/reference/damit-model.json",
+          "catalogueId": "damit-models",
+          "locator": "Model 3934; /periodHours"
         }
       }
     ],

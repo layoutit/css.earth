@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "98fb4f8b7da35060a4ea35c0694d38245c9875573e28f22cfb0a08b1e98bf68d"
+    "sha256": "2ef8a87c3eee637d1dffc1a3213f2cd15e1b3e8b5219fa45ba2d9244e1b9a0fe"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "63faf33f4fe6414f2bd658c9e5912279529af49c5b562407954837123c6963b3",
+      "sha256": "2ead20f0984be8b80835b14a955e149cb7863910d9fc663d41411e9fc7b71996",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -183,7 +183,9 @@
                 "url": "https://arxiv.org/pdf/1803.06116",
                 "label": "Hanuš et al. (2018), Table A.3",
                 "checked": "2026-09-08",
-                "path": "source/reference/calibration.json"
+                "path": "source/reference/calibration.json",
+                "catalogueId": "hanus-2018-thermophysical-models",
+                "locator": "/diameterKm; radius = diameterKm / 2"
               }
             },
             {
@@ -204,7 +206,9 @@
                 "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1144",
                 "label": "DAMIT model 1144",
                 "checked": "2026-09-08",
-                "path": "source/reference/damit-model.json"
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "Model 1144; version 2016-01-04; /periodHours"
               }
             }
           ],
@@ -366,20 +370,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "63faf33f4fe6414f2bd658c9e5912279529af49c5b562407954837123c6963b3",
+      "sha256": "2ead20f0984be8b80835b14a955e149cb7863910d9fc663d41411e9fc7b71996",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 6720,
+      "bytes": 6952,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -487,8 +490,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3970,
-          "sha256": "81815a07a84039f449ed4a286dca5b0e9d778f21936efa6c4e8596b2309841bd",
+          "bytes": 4154,
+          "sha256": "21e0afbdac1f965165121aba34b56087b98b19c41a364dccd64e6a4a68dc95cc",
           "verification": "bytes-verified"
         }
       ],

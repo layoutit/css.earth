@@ -31,7 +31,9 @@
           "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
           "label": "NASA/JPL reference",
           "checked": "2026-09-08",
-          "path": "source/editorial/factsheet-review.json"
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-physical-parameters",
+          "locator": "/references/0; radius"
         }
       },
       {
@@ -42,7 +44,9 @@
           "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
           "label": "NASA/JPL reference",
           "checked": "2026-09-08",
-          "path": "source/editorial/factsheet-review.json"
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-approximate-planetary-positions",
+          "locator": "/references/1; distance-from-sun"
         }
       },
       {
@@ -75,7 +79,9 @@
           "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
           "label": "NASA/JPL reference",
           "checked": "2026-09-08",
-          "path": "source/editorial/factsheet-review.json"
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-physical-parameters",
+          "locator": "/references/0; density"
         }
       }
     ]

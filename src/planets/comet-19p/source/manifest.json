@@ -260,7 +260,7 @@
       "falseColor": false,
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored neutral display material."
       }
     },
     {
@@ -292,7 +292,7 @@
       "falseColor": false,
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored neutral display material for the DLR shape model."
       }
     }
   ],
@@ -338,125 +338,105 @@
       "path": "content/object.json",
       "expectedBytes": 8285,
       "expectedSha256": "7d6a42940651ce580bffa72001fa8240c3edc1ffe2323ab33868d7845335e4f5",
-      "purpose": "Borrelly source evidence or authored preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 1974,
-      "expectedSha256": "60b7af01f0d830d6b39e0145fac721344e330474cfb22c2fed993a5dd6604508",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "60b7af01f0d830d6b39e0145fac721344e330474cfb22c2fed993a5dd6604508"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1805,
-      "expectedSha256": "32c964555e3bcf01ddc490344fbba201574ca8076ec669503f6fc3656e42f19b",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "32c964555e3bcf01ddc490344fbba201574ca8076ec669503f6fc3656e42f19b"
     },
     {
       "path": "preparation/rotation.json",
       "expectedBytes": 406,
-      "expectedSha256": "e09bf4cea77b4c1f18ab48677999bc113db54f08c91eec0d615d7c3f7ebefe82",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "e09bf4cea77b4c1f18ab48677999bc113db54f08c91eec0d615d7c3f7ebefe82"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 9661,
-      "expectedSha256": "59bc50d4d8e791303287442207f0e1dff48d70e9ee2e2d2d8954d812e8ecaaed",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "59bc50d4d8e791303287442207f0e1dff48d70e9ee2e2d2d8954d812e8ecaaed"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 96,
-      "expectedSha256": "0fbb1439975415737998003dd16df7fd1cd5bf2cd5ba6c0feb629f397843ec65",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "0fbb1439975415737998003dd16df7fd1cd5bf2cd5ba6c0feb629f397843ec65"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 3519,
-      "expectedSha256": "82c7edeecf35e49f13897925a908014d7f5a93905d0425604773044ffdee11c3",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "82c7edeecf35e49f13897925a908014d7f5a93905d0425604773044ffdee11c3"
     },
     {
       "path": "reference/completion.json",
       "expectedBytes": 1787,
-      "expectedSha256": "c9ffbf810924055b739d5590b529b8436490e2f1b0d252150191851e73ece194",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "c9ffbf810924055b739d5590b529b8436490e2f1b0d252150191851e73ece194"
     },
     {
       "path": "reference/coords.txt",
       "expectedBytes": 3440,
-      "expectedSha256": "7e280ddaebb0acaa1e554b858c4fd572ccff048ccb56d26ecefb567a64103c98",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "7e280ddaebb0acaa1e554b858c4fd572ccff048ccb56d26ecefb567a64103c98"
     },
     {
       "path": "reference/dem-dataset.cat",
       "expectedBytes": 15840,
-      "expectedSha256": "97f561e75de298b11f10d06142ade73ac5a9d76f1b9aa1c318105b828752d723",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "97f561e75de298b11f10d06142ade73ac5a9d76f1b9aa1c318105b828752d723"
     },
     {
       "path": "reference/dlrdem.lbl",
       "expectedBytes": 6880,
-      "expectedSha256": "25227b4b7ac184e420369c430a561789fdf101f603901f37fc5b0374821de2dd",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "25227b4b7ac184e420369c430a561789fdf101f603901f37fc5b0374821de2dd"
     },
     {
       "path": "reference/horizons-elements.txt",
       "expectedBytes": 7689,
-      "expectedSha256": "d75585d846f298f83421ad68d1052f9ee7a95f85402e32497fd74d6d306ce1de",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "d75585d846f298f83421ad68d1052f9ee7a95f85402e32497fd74d6d306ce1de"
     },
     {
       "path": "reference/horizons-vectors.txt",
       "expectedBytes": 6979,
-      "expectedSha256": "cc1b2ea7a37f9321d40f0406b94a4c5877fef2e68c83c6b1e9e516342e242264",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "cc1b2ea7a37f9321d40f0406b94a4c5877fef2e68c83c6b1e9e516342e242264"
     },
     {
       "path": "reference/readmeTopoModel.txt",
       "expectedBytes": 1645,
-      "expectedSha256": "9b25a97ec342dfcbbac01de6726773e8bc7914ec396416aa5923fabd0445bd68",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "9b25a97ec342dfcbbac01de6726773e8bc7914ec396416aa5923fabd0445bd68"
     },
     {
       "path": "reference/registration.json",
       "expectedBytes": 9125,
-      "expectedSha256": "585be2ad4d22faea279f031f5bcff367b80aedcefa468ccd9c5c406e2cc24c96",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "585be2ad4d22faea279f031f5bcff367b80aedcefa468ccd9c5c406e2cc24c96"
     },
     {
       "path": "reference/rescued-dataset.cat",
       "expectedBytes": 5200,
-      "expectedSha256": "d3ddc5974007e75754e5049e0a62d685139d861dc278baf4e74afbe2c8b0adf8",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "d3ddc5974007e75754e5049e0a62d685139d861dc278baf4e74afbe2c8b0adf8"
     },
     {
       "path": "reference/usgsdem.lbl",
       "expectedBytes": 10640,
-      "expectedSha256": "ca91ad8342a3de5b90139a4c8896cb0706ceae3e36faffd5f9b3a1ff2b0d81fd",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "ca91ad8342a3de5b90139a4c8896cb0706ceae3e36faffd5f9b3a1ff2b0d81fd"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 852,
-      "expectedSha256": "b8d9ce865fbfc7c1b113bae3a2517da9b33422633163ea8b1e78a6015fc5ac77",
-      "purpose": "Borrelly source evidence or authored preparation input."
+      "expectedSha256": "b8d9ce865fbfc7c1b113bae3a2517da9b33422633163ea8b1e78a6015fc5ac77"
     }
   ]
 }

@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-417",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 417 · Aethra",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "417"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/417/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/aethra/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "65de75c99768e432a94c6f307bdb9cd305c4b46253faf3c7b6b6c3dcc385b89b",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

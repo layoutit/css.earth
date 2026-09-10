@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-981",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 981 · Leto",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "981"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/981/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/leto/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "65907ce3e4e2583dd7eff65784f06f08a28c6aeeb0c38dc46f55d1d3221ce296",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

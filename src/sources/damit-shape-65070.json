@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-65070",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 65070 · Dione 106",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "65070"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/65070/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/dione-106/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "f679ae155d1dc145783ade25c73bed839bb7f394bf69b097d87a4f98fc50a3a7",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

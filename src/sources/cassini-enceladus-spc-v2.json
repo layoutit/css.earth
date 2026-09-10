@@ -1,0 +1,35 @@
+{
+  "id": "cassini-enceladus-spc-v2",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Cassini Enceladus SPC shape kernel: cas_enceladus_ssd_spc_0256icq_v2.bds",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/cas_enceladus_ssd_spc_0256icq_v2.bds"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/cas_enceladus_ssd_spc_0256icq_v2.bds",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/enceladus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "6d88e446812b26cd241cb335af4874f8f99390216e50a94602e111e3b823b3ca",
+      "locator": "/inputs/4"
+    },
+    {
+      "path": "src/planets/enceladus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "6d88e446812b26cd241cb335af4874f8f99390216e50a94602e111e3b823b3ca",
+      "locator": "/inputs/5"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-95335",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 95335 · Schaber",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "95335"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/95335/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/schaber/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "1dbb118ec7cf4089d21e9ca604b9c6c7fe1a55fe7d9d900ae9318d06af4f6098",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

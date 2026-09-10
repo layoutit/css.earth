@@ -146,95 +146,80 @@
   "documents": [
     {
       "path": "content/object.json",
-      "purpose": "Pinned source evidence or authored preparation input.",
       "expectedBytes": 8046,
       "expectedSha256": "624ebfa9662731c6ae1e0a854aaa3b96824eaa0fcdc2f8059a424ddffabda487",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "preparation/acquisition.json",
-      "purpose": "Pinned source evidence or authored preparation input.",
       "expectedBytes": 1120,
       "expectedSha256": "3d3213a272987fcf4a88a94d988cc7f92a958d8ba36136e49051a9b00e8f874d"
     },
     {
       "path": "preparation/navigation.json",
-      "purpose": "Pinned source evidence or authored preparation input.",
       "expectedBytes": 1336,
       "expectedSha256": "6f503029883855b37c8e7ae799b81b7c7d1f202b4b3ace7b18581941f212dc94"
     },
     {
       "path": "preparation/rotation.json",
-      "purpose": "Pinned source evidence or authored preparation input.",
       "expectedBytes": 672,
       "expectedSha256": "1eab34187808bcbe6f107d979985cfd15e630c450e8595261aa18a126e2213d0"
     },
     {
       "path": "preparation/terrestrial.json",
-      "purpose": "Pinned source evidence or authored preparation input.",
       "expectedBytes": 3007,
       "expectedSha256": "782dad7b074e6ff58591a2804d43f899b43357d8cc2c41744cad5b61ee768a99"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
-      "purpose": "Pinned source evidence or authored preparation input.",
       "expectedBytes": 4370,
       "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
     },
     {
       "path": "presentation/title-mark.json",
-      "purpose": "Pinned source evidence or authored preparation input.",
       "expectedBytes": 3836,
       "expectedSha256": "c70dbafc4c6a245ff30068f68c53a25f9e3de614d6fc81b702b56308f84329a1"
     },
     {
       "path": "reference/horizons-elements.txt",
-      "purpose": "Pinned source evidence or authored preparation input.",
       "expectedBytes": 7353,
       "expectedSha256": "e50732ded8bc84ede2199206a20bbc8e4b9b55e74989d3a2e376ec3cdb838a8a"
     },
     {
       "path": "reference/horizons-physical.txt",
-      "purpose": "Pinned source evidence or authored preparation input.",
       "expectedBytes": 1391,
       "expectedSha256": "a6ff9b0ba97cd4d944b7ad9e33c9aeeecbc60e2c2397470b53fdcffd82c23035"
     },
     {
       "path": "reference/horizons-vectors.txt",
-      "purpose": "Pinned source evidence or authored preparation input.",
       "expectedBytes": 6643,
       "expectedSha256": "8b71d1a84de2e6920aeb6a46698ec9c695b936474bfe3a5fc8c13f0ec7877efb"
     },
     {
       "path": "reference/model-properties.json",
-      "purpose": "Pinned source evidence or authored preparation input.",
       "expectedBytes": 1833,
       "expectedSha256": "34801266301623286585860bcaadcc38c729ad557e26d9ef2d21124be10683d8"
     },
     {
       "path": "reference/release-parameters.txt",
-      "purpose": "Pinned source evidence or authored preparation input.",
       "expectedBytes": 41,
       "expectedSha256": "4771e7982379d20f022a41e269f31f7d47424cd60b342a979e539c41db5d14cc"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
-      "purpose": "Pinned source evidence or authored preparation input.",
       "expectedBytes": 2177,
       "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
     },
     {
       "path": "stars/LICENSE.md",
-      "purpose": "Pinned source evidence or authored preparation input.",
       "expectedBytes": 595,
       "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
     },
     {
       "path": "stars/hyg-v41-field.json",
-      "purpose": "Pinned source evidence or authored preparation input.",
       "expectedBytes": 144975,
       "expectedSha256": "fafdfcf34b5ad56f3ccde3ee200955f5c4037dd3e99d30d22fcb15a1d8746475"
     }

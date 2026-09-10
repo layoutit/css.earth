@@ -1,0 +1,30 @@
+{
+  "id": "usgs-magellan-topography",
+  "title": "Magellan colourized topography",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "identifiers": [
+    {
+      "type": "USGS WMS layer",
+      "value": "MAGELLAN_topography"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=%2Fmaps%2Fvenus%2Fvenus_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=MAGELLAN_topography&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=2048&HEIGHT=1024&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/venus/source/preparation/acquisition.json",
+      "revision": "c601cd5a54414fe6e500aba9b3c95c48b8870a30",
+      "sha256": "e7823986cd2e74825b769fc5e22147b61a4e7f2aa132ead6dce9c36043176c42",
+      "locator": "/operations/12"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "USGS Astrogeology"
+}

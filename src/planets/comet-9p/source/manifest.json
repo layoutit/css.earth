@@ -55,7 +55,7 @@
       "lensId": "model",
       "label": "Shape model",
       "falseColor": false,
-      "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mjs",
+      "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mts",
       "recipe": {
         "width": 512,
         "height": 256,
@@ -71,7 +71,7 @@
       },
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-generated display material marking the PDS shape model constraint flags."
       }
     },
     {
@@ -252,7 +252,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for iv05070405_9000632_001_r."
       }
     },
     {
@@ -327,7 +327,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for iv05070405_9000639_001_r."
       }
     },
     {
@@ -402,7 +402,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for iv05070405_9000654_001_r."
       }
     },
     {
@@ -477,7 +477,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for n30036te02_rr."
       }
     },
     {
@@ -552,7 +552,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for n30039te02_rr."
       }
     },
     {
@@ -627,7 +627,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for n30042te02_rr."
       }
     },
     {
@@ -702,7 +702,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for iv05070405_9000644_001_r."
       }
     },
     {
@@ -777,7 +777,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for iv05070405_9000673_001_r."
       }
     },
     {
@@ -852,7 +852,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for n30033te02_rr."
       }
     },
     {
@@ -927,7 +927,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for n30045te02_rr."
       }
     },
     {
@@ -1002,7 +1002,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for n30048te02_rr."
       }
     },
     {
@@ -1296,107 +1296,90 @@
       "path": "content/object.json",
       "expectedBytes": 7026,
       "expectedSha256": "d0ec3bbfd36638a1f8cadda2f7544ae52cceed8dc2b0f1e33f7fe041aac31e8c",
-      "purpose": "9P/Tempel 1 source evidence or authored preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 8529,
-      "expectedSha256": "ba81ddbcdea80bdc3a6a2e600fab4cbf980e75c8e21f484fc085d856ab5588eb",
-      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+      "expectedSha256": "ba81ddbcdea80bdc3a6a2e600fab4cbf980e75c8e21f484fc085d856ab5588eb"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1624,
-      "expectedSha256": "4a9775255e083e8ca3bca4e995a1bf5f2bd0d479520afc06e75912ec7172d2d7",
-      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+      "expectedSha256": "4a9775255e083e8ca3bca4e995a1bf5f2bd0d479520afc06e75912ec7172d2d7"
     },
     {
       "path": "preparation/rotation.json",
       "expectedBytes": 407,
-      "expectedSha256": "0b095c218de9507ce7c95a006f17b4cf8346e20ec9743c294f5fe5657040655a",
-      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+      "expectedSha256": "0b095c218de9507ce7c95a006f17b4cf8346e20ec9743c294f5fe5657040655a"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 10733,
-      "expectedSha256": "89f308b718a7729029a33a51e7ac3ba8a1727b99ce01ad265e54868f4def0430",
-      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+      "expectedSha256": "89f308b718a7729029a33a51e7ac3ba8a1727b99ce01ad265e54868f4def0430"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 41,
-      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68",
-      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 3446,
-      "expectedSha256": "221a3d3352f0f326de337017b175028c31bf753069b9176ba83267de55cefb59",
-      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+      "expectedSha256": "221a3d3352f0f326de337017b175028c31bf753069b9176ba83267de55cefb59"
     },
     {
       "path": "reference/dataset.cat",
       "expectedBytes": 17440,
-      "expectedSha256": "24887b4f6f74ffb68e705bb132d24fbae83088fd2444ef0e3208ad7e69ead138",
-      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+      "expectedSha256": "24887b4f6f74ffb68e705bb132d24fbae83088fd2444ef0e3208ad7e69ead138"
     },
     {
       "path": "shape/tempel1_2012_plan.lbl",
       "expectedBytes": 12720,
-      "expectedSha256": "a8ceea25c3526ebb30f12adc6daf9d19551d34a87d13064338ca295e07c61e69",
-      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+      "expectedSha256": "a8ceea25c3526ebb30f12adc6daf9d19551d34a87d13064338ca295e07c61e69"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 851,
-      "expectedSha256": "d3d973560809865e2a94fd5f50fedabbbbb65f6b39d3f9df13bff887a41d18a8",
-      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+      "expectedSha256": "d3d973560809865e2a94fd5f50fedabbbbb65f6b39d3f9df13bff887a41d18a8"
     },
     {
       "path": "reference/encounter-photography.md",
       "expectedBytes": 10460,
-      "expectedSha256": "13b2379ca63ac16934d439f69dc7e33a7d0f969b7cc45f1d7c219d8e089cfeba",
-      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+      "expectedSha256": "13b2379ca63ac16934d439f69dc7e33a7d0f969b7cc45f1d7c219d8e089cfeba"
     },
     {
       "path": "reference/its-dataset.cat",
       "expectedBytes": 46560,
-      "expectedSha256": "578f0d61df8566c6aa7d52827c0466fa6d773ab2bc52a748b232729e3a33ee15",
-      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+      "expectedSha256": "578f0d61df8566c6aa7d52827c0466fa6d773ab2bc52a748b232729e3a33ee15"
     },
     {
       "path": "reference/next-dataset.cat",
       "expectedBytes": 49440,
-      "expectedSha256": "6966339e8ae56bcc51dff297e6a45927c73c3dbad33eeb75c969a019b54fc3b3",
-      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+      "expectedSha256": "6966339e8ae56bcc51dff297e6a45927c73c3dbad33eeb75c969a019b54fc3b3"
     },
     {
       "path": "reference/epoxi-sis.pdf",
       "expectedBytes": 6311705,
-      "expectedSha256": "3f5e960fd23d2d36dea0480583cc416acb0cd8445535e61703f44136ec3375aa",
-      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+      "expectedSha256": "3f5e960fd23d2d36dea0480583cc416acb0cd8445535e61703f44136ec3375aa"
     },
     {
       "path": "reference/tempel1_2012_cart.wrl",
       "expectedBytes": 3871120,
-      "expectedSha256": "0a2baed9f6c3f6c243968310b949b07c57b5a249925903b6926a84be2b168d35",
-      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+      "expectedSha256": "0a2baed9f6c3f6c243968310b949b07c57b5a249925903b6926a84be2b168d35"
     }
   ]
 }

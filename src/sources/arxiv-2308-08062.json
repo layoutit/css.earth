@@ -1,0 +1,29 @@
+{
+  "id": "arxiv-2308-08062",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · arXiv 2308.08062",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2308.08062"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2308.08062",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/mani/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "4c5135f54ea4e391a7fa7e91e1dea5a76f0e1715047f21bb257b7998cf9055dd",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

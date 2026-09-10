@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-12508",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 12508 · Eudora",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "12508"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/12508/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/eudora/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "cd729bce7af3ced1c778193fa44b893371d52ee3896e078a0f0b7f9d2370cf77",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

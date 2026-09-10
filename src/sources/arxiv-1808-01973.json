@@ -1,0 +1,39 @@
+{
+  "id": "arxiv-1808-01973",
+  "title": "Computing Apparent Planetary Magnitudes for The Astronomical Almanac",
+  "kind": "publication",
+  "identityLevel": "work",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1808.01973"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1808.01973",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1808.01973",
+      "checkedOn": "2026-09-10",
+      "locator": "Title, authors and submission date"
+    },
+    {
+      "path": "src/planets/jupiter/source/photometry/phase.json",
+      "revision": "c601cd5a54414fe6e500aba9b3c95c48b8870a30",
+      "sha256": "3df5f516dc2b6cdd61bdfc9193f06749d9426205cfa8c73d724e5ac8af732ede",
+      "locator": "/authority"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "creators": [
+    "Anthony Mallama",
+    "James L. Hilton"
+  ],
+  "publicationDate": "2018-08-06"
+}

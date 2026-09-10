@@ -1,0 +1,24 @@
+{
+  "id": "source-donaldjohanson-donaldjohanson-research-coordinate-system",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Donaldjohanson · donaldjohanson research coordinate system",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.mission:document-v2.0/Donaldjohanson_Coordinate_System_Description_v1.pdf",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/donaldjohanson/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "d21c753d2677fe37478aee56c2ca7e2231755e40dc1260904f78f859d7fdb19c",
+      "locator": "/inputs/5"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

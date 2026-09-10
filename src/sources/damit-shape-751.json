@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-751",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 751 · Hektor",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "751"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/751/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/hektor/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "6f4d35f29b73e5caf5364034f41a2a730db5b7c3100ca7e341bd30d322fc5692",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

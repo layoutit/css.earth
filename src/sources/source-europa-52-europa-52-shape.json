@@ -1,0 +1,24 @@
+{
+  "id": "source-europa-52-europa-52-shape",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Europa 52 · europa 52 shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/3Dshape/52_Europa_mpcd.obj",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/europa-52/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "66f5deb6ff9ab2d3ad2c9227cc126d5038bb045474fcd63de29e92dc2a43224f",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

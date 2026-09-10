@@ -36,7 +36,7 @@ For the camera handoff and interruption behavior, read [flight lifecycle](flight
 After building the packages and renderer, check page metadata with:
 
 ```sh
-node --test site/test/object-page-data.test.mjs
+node --test site/test/object-page-data.test.mts
 ```
 
 Worker reuse, cancellation and disposal are covered by

@@ -14,7 +14,9 @@
           "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
           "label": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
           "checked": "2026-09-09",
-          "path": "source/reference/calibration.json"
+          "path": "source/reference/calibration.json",
+          "catalogueId": "akari-acua-v1",
+          "locator": "/diameterKm; radius = diameterKm / 2"
         }
       },
       {
@@ -25,7 +27,9 @@
           "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2786%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
           "label": "JPL Horizons, 2026-09-03 epoch",
           "checked": "2026-09-09",
-          "path": "source/reference/horizons-elements.txt"
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; A (km) / 149597870.7"
         }
       },
       {
@@ -36,7 +40,9 @@
           "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2786%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
           "label": "JPL Horizons, 2026-09-03 epoch",
           "checked": "2026-09-09",
-          "path": "source/reference/horizons-elements.txt"
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; PR (days) / 365.25"
         }
       },
       {
@@ -47,7 +53,9 @@
           "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5799",
           "label": "DAMIT model 5799",
           "checked": "2026-09-09",
-          "path": "source/reference/damit-model.json"
+          "path": "source/reference/damit-model.json",
+          "catalogueId": "damit-models",
+          "locator": "Model 5799; version 2019-10-23; /periodHours"
         }
       }
     ],

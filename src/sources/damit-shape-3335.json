@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-3335",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 3335 · Asporina",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "3335"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3335/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/asporina/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "e49a1077e992ab5e4c8b8da2bf3a4455b26f5599586558a3631dddbfa383a2e1",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

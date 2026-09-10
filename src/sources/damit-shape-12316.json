@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-12316",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 12316 · Achilles",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "12316"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/12316/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/achilles/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "414621ebcea0db5576997e28a37582d64697ac42dad359ebc7e6df9d8d437065",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

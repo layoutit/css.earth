@@ -1,0 +1,24 @@
+{
+  "id": "source-yorp-yorp-research-yorp",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Yorp · yorp research yorp",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://echo.jpl.nasa.gov/asteroids/taylor%2B2007_PH5.pdf",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/yorp/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "1fe4afea9adcaefdd8784fca7e968558f50a087df20777712c08018ded99dab6",
+      "locator": "/inputs/3"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

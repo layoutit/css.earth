@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "96ce69a32e2ab8347dfd001ab8ca1fdf791b1d4fad55f5b03fc8fc13705809b8"
+    "sha256": "b12bad442f78be6eb4ed1b8366cea09379fad8587b3e8ce0657d9708791dc576"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -109,7 +109,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e6ef85b0c4e456f30a73460be427de606aefed7bd515b727a2f7cd99ad3683b6",
+      "sha256": "e48f2a6442ababce7b50883023d86c7170c58b99cffb232445b2617a9599b8ad",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -126,7 +126,9 @@
                 "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-physical-parameters",
+                "locator": "/references/0; radius"
               }
             },
             {
@@ -320,20 +322,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Galatea scientific source or authored preparation evidence.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Galatea scientific source or authored preparation evidence.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e6ef85b0c4e456f30a73460be427de606aefed7bd515b727a2f7cd99ad3683b6",
-      "bytes": 3835,
+      "sha256": "e48f2a6442ababce7b50883023d86c7170c58b99cffb232445b2617a9599b8ad",
+      "bytes": 3943,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -402,8 +403,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7065,
-          "sha256": "9947d478d839436085906f6f07f78cf855ee46eb3865e6827c0feaccbe0e2e53",
+          "bytes": 7149,
+          "sha256": "ff56a71a7cfd72e727333eb92980f206686c887cf8ad5830b45be38327c348e8",
           "verification": "bytes-verified"
         }
       ],

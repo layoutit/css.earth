@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-65258",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 65258 · Sophrosyne",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "65258"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/65258/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/sophrosyne/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "c8282d3d16a15e869c4ba8e2d4f1791ceec0b356e36aa47e4a38666e57813952",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

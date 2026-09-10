@@ -171,89 +171,75 @@
   "documents": [
     {
       "path": "content/object.json",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 8206,
       "expectedSha256": "167441bbc17f93dbfb13d9e48dfe75ec213ef70fae7a11784222d6fc903b3966",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "preparation/acquisition.json",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 1235,
       "expectedSha256": "3ce1c68bd8b831614afb201da0e8051f38eaf212990a72726f9883cdb0b0ea51"
     },
     {
       "path": "preparation/navigation.json",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 1358,
       "expectedSha256": "69f8a70bdec7240440893536c5e4609f3cfa5c6f611f90e87ac3ca6399fc21da"
     },
     {
       "path": "preparation/rotation.json",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 960,
       "expectedSha256": "b828f90c1081e643e4ecc667b726fbdbabaabbed6eaba69bc7dd9d2745229a3b"
     },
     {
       "path": "preparation/terrestrial.json",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 3040,
       "expectedSha256": "862f537cd58571f476367a5177b02bf4e2e7569dc30b0635bab8338e958c68b4"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 4370,
       "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
     },
     {
       "path": "presentation/title-mark.json",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 3477,
       "expectedSha256": "bbd006552554970416ef70da83e396b5cf5efa605ca7b8e5a64646bcfebca5f4"
     },
     {
       "path": "reference/horizons-elements.txt",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 7756,
       "expectedSha256": "752bbed98064bacf2d26fa5936c3952d5539ae5a96109216f2dc0f33c6ab48ba"
     },
     {
       "path": "reference/horizons-physical.txt",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 1695,
       "expectedSha256": "2578d4c0f4fd9b053d39077ab0f55d5e663221ba28ab807d73a281d88ae75b2d"
     },
     {
       "path": "reference/horizons-vectors.txt",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 7046,
       "expectedSha256": "07163be4d5d90da05e886a082cb21c6c4da119d6ff06b5e4952f7cd80a3aeeb8"
     },
     {
       "path": "reference/model-properties.json",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 1959,
       "expectedSha256": "7b136bf8ddc1c22da4ec889576b08d4d4f372bd6c0906862716c4b1b70ca9bd7"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 2177,
       "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
     },
     {
       "path": "stars/LICENSE.md",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 595,
       "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
     },
     {
       "path": "stars/hyg-v41-field.json",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 144985,
       "expectedSha256": "c64af24cd5526afbdaf008e2c3db3cd47cf189ce7ac1e41c0e9a467bc7ef29ce"
     }

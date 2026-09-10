@@ -1,0 +1,29 @@
+{
+  "id": "masiero-2012-neowise",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Masiero et al. (2012), ApJ Letters 759, L8",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1088/2041-8205/759/1/L8"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/2041-8205/759/1/L8",
+      "label": "Masiero et al. (2012), ApJ Letters 759, L8"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/gryphia/source/content/object.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "c6935b2d6c3ca294946425f23b4136b6b5aa94d83763e375e39600c9a647d1d7",
+      "locator": "/panel/facts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

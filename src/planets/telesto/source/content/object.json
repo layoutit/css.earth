@@ -19,7 +19,9 @@
           "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
           "label": "NASA/JPL reference",
           "checked": "2026-09-08",
-          "path": "source/editorial/factsheet-review.json"
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-approximate-planetary-positions",
+          "locator": "/references/0; distance-from-sun"
         }
       },
       {

@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b619b1c4e71b03e6a9a97f0b0495075ba425b4b097b0ec52abd0c940a3d4004e"
+    "sha256": "805c4e96cec6444ded76cfc69801141da4e3fddb62114e19031a1fce43a4ee0b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -109,7 +109,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a35f062da2dbcbbc6bc9f939c03bcc3fe393d6d427f34dbe690cdbf8f7f8cb94",
+      "sha256": "5ea563039827a4a2d65d74627b9e13992183eee756f22e76af17dbe075cf4bf5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -126,7 +126,9 @@
                 "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-physical-parameters",
+                "locator": "/references/0; radius"
               }
             },
             {
@@ -320,20 +322,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Adrastea scientific source or authored preparation evidence.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Adrastea scientific source or authored preparation evidence.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a35f062da2dbcbbc6bc9f939c03bcc3fe393d6d427f34dbe690cdbf8f7f8cb94",
-      "bytes": 3932,
+      "sha256": "5ea563039827a4a2d65d74627b9e13992183eee756f22e76af17dbe075cf4bf5",
+      "bytes": 4040,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -402,8 +403,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7403,
-          "sha256": "80a0740feeffa8934b42419d2410d3bbcbbfba58272d8df50c4b2af8d68eef95",
+          "bytes": 7487,
+          "sha256": "a3a0da9d6c1554efc8126ba052de9c9c1c0bfcd6b422e7dd52cd8e9e595af659",
           "verification": "bytes-verified"
         }
       ],

@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-3368",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 3368 · Philagoria",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "3368"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3368/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/philagoria/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "5eb2139f68dbd76c7473c40ac4535cdcecafe4f2e55684a511acdb90f65dfd5a",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

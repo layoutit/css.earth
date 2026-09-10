@@ -1,0 +1,35 @@
+{
+  "id": "lro-diviner-ghrm-tbol-anomaly",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "LRO Diviner GHRM bolometric temperature anomaly",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.img"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.img",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/moon/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "5bd482ea796fdcecd4cfdaf9be66f4d52fe30897fcdaf4ff42d892249854a31c",
+      "locator": "/inputs/18"
+    },
+    {
+      "path": "src/planets/moon/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "5bd482ea796fdcecd4cfdaf9be66f4d52fe30897fcdaf4ff42d892249854a31c",
+      "locator": "/inputs/19"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-481",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 481 · Dejopeja",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "481"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/481/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/dejopeja/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "f64ea68ca63f37a204ffe1177eb4311c858d3b93f67e57ed6ce9f0e2aa1022fa",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

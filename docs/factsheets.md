@@ -32,18 +32,29 @@ uncertainty threshold; those dated selections are not a current catalogue.
 
 1. Edit `panel.facts`/`panel.moreFacts` in the content source referenced by
    `object.json`. Use stable semantic IDs, units and meaningful precision.
-2. Pin new references in `source/editorial/factsheet-review.json`, or cite an
-   existing pinned source. `fact.source` records its URL, label, checked date and
-   local evidence path. Add the reference's byte count and SHA-256 to the manifest.
+2. Cite the source on the fact itself. `fact.source` records `catalogueId`, URL,
+   label, checked date, and a locator such as a table row or model parameter.
+   Reuse the [published source identity](sources-catalogue.md#add-or-update-a-source).
+   For extracted values, also set `path` to the existing pinned evidence, or
+   `source/editorial/factsheet-review.json`, and pin that file in the manifest.
+   Keep the source units, uncertainty and any calculation in that record.
 3. Update the content SHA-256 in the descriptor and source manifest, and its
    `expectedBytes` in the manifest.
 4. Run `pnpm prepare:factsheets -- <object-id>` to publish facts and refresh their
    preparation references. Add `--check` to verify without writing; omit the ID
    only when intentionally processing all bodies.
 
-The facts-only preparer preserves the other content and scene data. It rejects
-changed source pins, missing evidence pins, duplicate IDs and an introduction
-mismatch. For introduction and lens prose/label changes, use
+Full preparation, facts-only edits and Sources use the same citation checks:
+valid dates and web URLs, unique fact IDs, and matching bytes for local evidence.
+Each fact names its own source even when several references share one evidence
+file. A source on one fact does not support its neighbors. Sources checks the
+canonical IDs and that published facts match the authored content, then includes
+the cited facts in the body's Sources tab. It reports how many facts still lack
+individual citations; those facts acquire no inferred source.
+
+The facts-only preparer preserves the other content and scene data. It also
+rejects changed source pins and an introduction mismatch. For introduction and
+lens prose or label changes, use
 `pnpm prepare:factsheets -- --editorial <object-id>`; add `--check` for verification.
 After writing editorial changes, run `node tools/prepare-object-json.mts <object-id>`
 with the preparation tools built to publish the scene transport and page controls.
@@ -55,12 +66,11 @@ and the View more/View less disclosure.
 ## Checks
 
 ```sh
-node --test tools/prepare-factsheets.test.mjs site/test/fact-order.test.mjs \
-  site/test/prepared-factsheet-model.test.mjs site/test/planet-shell.test.mjs \
-  site/test/object-package-contract.test.mjs site/test/scene-sources.test.mjs
+pnpm test:sources
 ```
 
-Browser checks should include long values and narrow viewports at DPR 1 and 2:
+For changes to ordering or display, also run the affected factsheet and shell
+tests. Browser checks should include long values and narrow viewports at DPR 1 and 2:
 readable labels, contained rows, four-row previews and both disclosure directions.
 Include the body classes affected by the change. These checks do not replace
 renderer, asset or scientific qualification.

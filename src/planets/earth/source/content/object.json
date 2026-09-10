@@ -31,7 +31,9 @@
           "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
           "label": "NASA/JPL reference",
           "checked": "2026-09-08",
-          "path": "source/editorial/factsheet-review.json"
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-approximate-planetary-positions",
+          "locator": "/references/0; distance-from-sun"
         }
       },
       {
@@ -42,7 +44,9 @@
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
           "checked": "2026-09-08",
-          "path": "source/editorial/factsheet-review.json"
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "source-pluto-orbit-jpl-physical-values",
+          "locator": "/references/1; radius"
         }
       },
       {
@@ -53,7 +57,9 @@
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
           "checked": "2026-09-08",
-          "path": "source/editorial/factsheet-review.json"
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "source-pluto-orbit-jpl-physical-values",
+          "locator": "/references/1; orbital-period"
         }
       },
       {
@@ -64,7 +70,9 @@
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
           "checked": "2026-09-08",
-          "path": "source/editorial/factsheet-review.json"
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "source-pluto-orbit-jpl-physical-values",
+          "locator": "/references/1; rotation-period"
         }
       },
       {
@@ -102,7 +110,9 @@
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
           "checked": "2026-09-08",
-          "path": "source/editorial/factsheet-review.json"
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "source-pluto-orbit-jpl-physical-values",
+          "locator": "/references/1; mass"
         }
       },
       {
@@ -113,7 +123,9 @@
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
           "checked": "2026-09-08",
-          "path": "source/editorial/factsheet-review.json"
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "source-pluto-orbit-jpl-physical-values",
+          "locator": "/references/1; density"
         }
       },
       {
@@ -124,7 +136,9 @@
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
           "checked": "2026-09-08",
-          "path": "source/editorial/factsheet-review.json"
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "source-pluto-orbit-jpl-physical-values",
+          "locator": "/references/1; gravity"
         }
       }
     ]

@@ -1,0 +1,24 @@
+{
+  "id": "source-polymele-model-surface",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Shape model",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://occultations.org/publications/rasc/2023/2184Polymele1.pdf",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/polymele/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "d64d4f148eecca840b04b1778f9e4049dad30e2cf8b9eeb218553ef4e70f3249",
+      "locator": "/inputs/3"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

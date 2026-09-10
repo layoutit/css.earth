@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1a2a194adeeb13a70a5747390e07f7397fe40a69c1e7968060cbbde153548568"
+    "sha256": "52b9920087d0b7c2863792d60e6e610c2e21a12b93d10836c8fcb4239ad72632"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8f6e40b15a415a6ca474c0f602fb540793753cea8219fa869588f5abea99958f",
+      "sha256": "71fdecbb08c5efeae31020ac850de02f0d57aacee072ac81ed4f98804246c8a8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -183,7 +183,9 @@
                 "url": "https://doi.org/10.1088/0004-637X/791/2/121",
                 "label": "Masiero et al. (2014), PDS NEOWISE Diameters and Albedos V2.0, reference codeMas14",
                 "checked": "2026-09-08",
-                "path": "source/reference/calibration.json"
+                "path": "source/reference/calibration.json",
+                "catalogueId": "masiero-2014-neowise",
+                "locator": "/diameterKm; radius = diameterKm / 2"
               }
             },
             {
@@ -204,7 +206,9 @@
                 "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1654",
                 "label": "DAMIT model 1654",
                 "checked": "2026-09-08",
-                "path": "source/reference/damit-model.json"
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "Model 1654; /periodHours"
               }
             }
           ],
@@ -366,20 +370,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "8f6e40b15a415a6ca474c0f602fb540793753cea8219fa869588f5abea99958f",
+      "sha256": "71fdecbb08c5efeae31020ac850de02f0d57aacee072ac81ed4f98804246c8a8",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9801,
+      "bytes": 10001,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -487,8 +490,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6921,
-          "sha256": "6d7fbfc03fdf481c78ec0ea32c57c3b18c82e7ed3efa2789bd48d3639bdc43ad",
+          "bytes": 7073,
+          "sha256": "66b995d3bf87dac2f1e5c4913bf8f72e6a6fd76e6e6d00bd5f723ab4a7342313",
           "verification": "bytes-verified"
         }
       ],

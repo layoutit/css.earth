@@ -114,7 +114,7 @@
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored grid marking unavailable surface imagery."
       }
     }
   ],
@@ -123,95 +123,80 @@
       "path": "content/object.json",
       "expectedBytes": 3923,
       "expectedSha256": "7bd1c4f7324ecf7397b210eee6f1f3c7cc6f6f272cf01dc6834e9e0c47fd629c",
-      "purpose": "Pinned source observation, interpretation or preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "measurements.json",
       "expectedBytes": 3226,
-      "expectedSha256": "254197ebafe89ef280dac1d416f9b30ae5a003140a0afc38d691248d5bb226e3",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "254197ebafe89ef280dac1d416f9b30ae5a003140a0afc38d691248d5bb226e3"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 1003,
-      "expectedSha256": "88b2e16fd89eb2c864813d23095e0114696c4295ec8e3e53589bf17021b5021b",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "88b2e16fd89eb2c864813d23095e0114696c4295ec8e3e53589bf17021b5021b"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1285,
-      "expectedSha256": "7bf4788219148b4f10e8e92599c82827eb9d0271b455a2535d3b61831a5112f3",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "7bf4788219148b4f10e8e92599c82827eb9d0271b455a2535d3b61831a5112f3"
     },
     {
       "path": "preparation/rotation.json",
       "expectedBytes": 604,
-      "expectedSha256": "749f0066bb87789ebac3a1f163b4d3b005c7dae3d8ea030a735dbe4c7c4dbf21",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "749f0066bb87789ebac3a1f163b4d3b005c7dae3d8ea030a735dbe4c7c4dbf21"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 3181,
-      "expectedSha256": "c92e72deb05a163144a3ea1df3afd21bffe77b5d11fdefe31ae5a6811d552720",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "c92e72deb05a163144a3ea1df3afd21bffe77b5d11fdefe31ae5a6811d552720"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 4805,
-      "expectedSha256": "5df4697e235e0e749459f5d0401fc86817520e0235e5d8c994963611fbbbeb4d",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "5df4697e235e0e749459f5d0401fc86817520e0235e5d8c994963611fbbbeb4d"
     },
     {
       "path": "reference/horizons-elements.txt",
       "expectedBytes": 7355,
-      "expectedSha256": "4229f5f5e19a63f58c84ed80a4f7f33ded7417f2b54362b9fa85951c505f1a04",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "4229f5f5e19a63f58c84ed80a4f7f33ded7417f2b54362b9fa85951c505f1a04"
     },
     {
       "path": "reference/horizons-vectors.txt",
       "expectedBytes": 6645,
-      "expectedSha256": "816820675fd162dd1549ae510e1a4502dd26632ad5ae0d171814909a0ab6874d",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "816820675fd162dd1549ae510e1a4502dd26632ad5ae0d171814909a0ab6874d"
     },
     {
       "path": "reference/outer-worlds-gomez-limon-2026.pdf",
       "expectedBytes": 6130177,
-      "expectedSha256": "7cfae421b8edec8742552721a4d559d4e9dc83209dc426f40a9c56830355f7d9",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "7cfae421b8edec8742552721a4d559d4e9dc83209dc426f40a9c56830355f7d9"
     },
     {
       "path": "reference/vs2-vara-lubiano-2022-publisher.pdf",
       "expectedBytes": 2151178,
-      "expectedSha256": "8cc2589921d078f7d88fd6c38b2fddedcd91e1e98e630070b84cc5c1a327b810",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "8cc2589921d078f7d88fd6c38b2fddedcd91e1e98e630070b84cc5c1a327b810"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 860,
-      "expectedSha256": "655888307edc7cb18ea54356ae93c1339fc57e63a0f0058791f12f74517879ac",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "expectedSha256": "655888307edc7cb18ea54356ae93c1339fc57e63a0f0058791f12f74517879ac"
     }
   ],
   "generatedIntermediates": [

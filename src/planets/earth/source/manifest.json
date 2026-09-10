@@ -418,7 +418,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project measurements from a patched Google Earth Pro 7.3.7.1327 atmosphere reference, used to choose a display response."
       }
     },
     {
@@ -1570,7 +1570,7 @@
       "kind": "authored-document",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored schematic layer geometry and colors using NASA Science structure values; mantle tomography has its own input."
       }
     },
     {
@@ -1606,48 +1606,41 @@
     {
       "path": "preparation/paged-ellipsoid.json",
       "expectedBytes": 13886,
-      "expectedSha256": "3644c336b0dab1d58934826b3195bf01858c537463f0b3d477ed7606869a0e7f",
-      "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
+      "expectedSha256": "3644c336b0dab1d58934826b3195bf01858c537463f0b3d477ed7606869a0e7f"
     },
     {
       "path": "preparation/celestial.json",
       "expectedBytes": 83,
-      "expectedSha256": "1d473392f7977901ae43bd7a30318cd620ebbe8915a526a72c5455a94952a55a",
-      "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
+      "expectedSha256": "1d473392f7977901ae43bd7a30318cd620ebbe8915a526a72c5455a94952a55a"
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 17864,
-      "expectedSha256": "5fff010f61535248c8795144eed23cb29d3eedb4b5e7844e2996f81fb88d0157",
-      "purpose": "Authored source recipe and retained scientific evidence for shared preparation.",
+      "expectedBytes": 18680,
+      "expectedSha256": "50e9a88dc17065449cad996166561eb11c968dc6e4a500f2b26eae7d8b69345f",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "content/lens-bindings.json",
       "expectedBytes": 5760,
-      "expectedSha256": "56897b899d614f9a36c5eb834123eb7188b374ea008774d0cf80c8cad8dd1f0a",
-      "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
+      "expectedSha256": "56897b899d614f9a36c5eb834123eb7188b374ea008774d0cf80c8cad8dd1f0a"
     },
     {
       "path": "content/charts.json",
       "expectedBytes": 3429,
-      "expectedSha256": "521b6a287e04cae5daf6dfa2922b543d3eeaed1c96329f6c09aeb18cfd02c0fa",
-      "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
+      "expectedSha256": "521b6a287e04cae5daf6dfa2922b543d3eeaed1c96329f6c09aeb18cfd02c0fa"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 2587,
-      "expectedSha256": "72515c37abfd6e66e8cdac6eef3fa85ca2d42c137ba91b6b6f5c670226398cf9",
-      "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
+      "expectedSha256": "72515c37abfd6e66e8cdac6eef3fa85ca2d42c137ba91b6b6f5c670226398cf9"
     },
     {
       "path": "editorial/earth.json",
       "expectedBytes": 10001,
-      "expectedSha256": "afd5014507e89812e7ebd6f553324efce7c0dbec55b749dae552d7ba55f0f80d",
-      "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
+      "expectedSha256": "afd5014507e89812e7ebd6f553324efce7c0dbec55b749dae552d7ba55f0f80d"
     },
     {
       "path": "preparation/navigation.json",
@@ -1694,7 +1687,7 @@
       "kind": "authored-document",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored sampling, units, color scale and coverage notes for VJ146A4.002."
       }
     }
   ]

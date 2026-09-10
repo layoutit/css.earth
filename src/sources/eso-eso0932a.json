@@ -1,0 +1,29 @@
+{
+  "id": "eso-eso0932a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "ESO Milky Way panorama · eso0932a",
+  "identifiers": [
+    {
+      "type": "ESO image",
+      "value": "eso0932a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso0932a/",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/abundantia/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "c64c67bba56722c3b40bf0cbf612b47c1912027df89bc7ca9c192e3a96ac280a",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

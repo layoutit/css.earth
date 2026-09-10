@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-12046",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 12046 · Hypatia",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "12046"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/12046/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/hypatia/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "601f2461d5528c67cce529769f3d158ce08b97a0b31e37acad9f1f4bd9ceffb3",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

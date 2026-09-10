@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-3214",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 3214 · Veritas",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "3214"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3214/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/veritas/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "2b6eb0116fbbb16197054210d8232dfc87cf91f4a44c47590d7b3811ec7f2957",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

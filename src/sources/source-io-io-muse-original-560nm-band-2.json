@@ -1,0 +1,24 @@
+{
+  "id": "source-io-io-muse-original-560nm-band-2",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Io · io muse original 560nm band 2",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/54aa6d283d18ad16f98e0212f1274f52e728efb1",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/io/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "dce758afabfcc911072bab5ac04de6408ae909c0b79e19de9432181fba0dad4f",
+      "locator": "/inputs/13"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

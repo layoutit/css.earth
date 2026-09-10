@@ -1,0 +1,24 @@
+{
+  "id": "source-moon-mapped-science-geology-geounits-shp",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Moon · mapped science geology geounits shp",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Moon/Geology/Unified_Geologic_Map_of_the_Moon_GIS_v2.zip",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/moon/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "5bd482ea796fdcecd4cfdaf9be66f4d52fe30897fcdaf4ff42d892249854a31c",
+      "locator": "/inputs/11"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

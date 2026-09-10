@@ -31,7 +31,9 @@
           "url": "https://doi.org/10.1088/2041-8205/759/1/L8",
           "label": "Masiero et al. (2012), PDS NEOWISE Diameters and Albedos V2.0, reference codeMas12",
           "checked": "2026-09-08",
-          "path": "source/reference/calibration.json"
+          "path": "source/reference/calibration.json",
+          "catalogueId": "masiero-2012-neowise",
+          "locator": "/diameterKm; radius = diameterKm / 2"
         }
       },
       {
@@ -52,7 +54,9 @@
           "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/833",
           "label": "DAMIT model 833",
           "checked": "2026-09-08",
-          "path": "source/reference/damit-model.json"
+          "path": "source/reference/damit-model.json",
+          "catalogueId": "damit-models",
+          "locator": "Model 833; /periodHours"
         }
       }
     ],

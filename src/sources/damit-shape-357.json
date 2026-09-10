@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-357",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 357 · Camilla",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "357"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/357/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/camilla/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "e38cab7ef18cbc4d4fe8c68d4697e9626367cf7d7a0f8776dcd46086a40ca316",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

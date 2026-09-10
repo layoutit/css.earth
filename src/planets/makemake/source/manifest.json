@@ -82,63 +82,53 @@
       "path": "content/object.json",
       "expectedBytes": 3478,
       "expectedSha256": "2590c1da57f7796eee39b41c930242fd950242c4cdeea89e40748319d139ce51",
-      "purpose": "Object preparation, content, or attribution",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 478,
-      "expectedSha256": "c225d749e019370943458a69a661efcf6762396d69fd5a41e847c667731b1024",
-      "purpose": "Object preparation, content, or attribution"
+      "expectedSha256": "c225d749e019370943458a69a661efcf6762396d69fd5a41e847c667731b1024"
     },
     {
       "path": "preparation/rotation.json",
       "expectedBytes": 391,
-      "expectedSha256": "7de294c96ac9f9914b71cd6aef7bc3b4e3de750016d61b5c085ff36ac0d79644",
-      "purpose": "Object preparation, content, or attribution"
+      "expectedSha256": "7de294c96ac9f9914b71cd6aef7bc3b4e3de750016d61b5c085ff36ac0d79644"
     },
     {
       "path": "preparation/shape-model.json",
       "expectedBytes": 458,
-      "expectedSha256": "5adc6f1688a27cb18b51373e8c6451ad9f0fac4b8aaab0ea2651728e787f50d1",
-      "purpose": "Object preparation, content, or attribution"
+      "expectedSha256": "5adc6f1688a27cb18b51373e8c6451ad9f0fac4b8aaab0ea2651728e787f50d1"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 5764,
-      "expectedSha256": "bb3cead01202fec51e67c135c2ee6c170de285ebace0e18701aefffac1d1ef1f",
-      "purpose": "Object preparation, content, or attribution"
+      "expectedSha256": "bb3cead01202fec51e67c135c2ee6c170de285ebace0e18701aefffac1d1ef1f"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2177,
-      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96",
-      "purpose": "Object preparation, content, or attribution"
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 595,
-      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe",
-      "purpose": "Object preparation, content, or attribution"
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 100844,
-      "expectedSha256": "2fe5171f1a8ba5081b963443ba67a122f9c8e471087d3bc736266212117e41c2",
-      "purpose": "Object preparation, content, or attribution"
+      "expectedSha256": "2fe5171f1a8ba5081b963443ba67a122f9c8e471087d3bc736266212117e41c2"
     },
     {
       "path": "preparation/navigation.json",
-      "purpose": "Object-owned preparation source",
       "expectedBytes": 831,
       "expectedSha256": "ceddfb717190b468d25b110136ae48551fb348c1cd7f7c3bd762dac22e1f67c7"
     },
     {
       "path": "presentation/navigation-marker.svg",
-      "purpose": "Object-owned preparation source",
       "expectedBytes": 137,
       "expectedSha256": "008ea868cd5512c2e4cecc519c3daae78ee1f54f27b40cec01d5a53e97206ce5"
     }

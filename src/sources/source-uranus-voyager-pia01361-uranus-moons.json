@@ -1,0 +1,24 @@
+{
+  "id": "source-uranus-voyager-pia01361-uranus-moons",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Uranus · voyager pia01361 uranus moons",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia01/pia01361/PIA01361.tif?fit=clip&h=800&w=2537",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/uranus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "75d2dc8312a10ac087b17086d8a728769ceeca4b46d7e860d3225b82b5bedf0e",
+      "locator": "/inputs/3"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -38,7 +38,7 @@ function assertIdentity(actual: Identity, expected: Identity, path: string) {
  * publishing its record. Source acquisition history remains attributed to the
  * source manifest/operation, not retroactively invented by this compiler.
  */
-export async function prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory = resolve(objectDirectory, 'prepared'), basis = 'prepared', verify = basis === 'prepared', write = true }: PreparationOptions) {
+export async function prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory = resolve(objectDirectory, 'prepared'), basis = 'recovered', verify = basis === 'prepared', write = true }: PreparationOptions) {
   if (!['prepared', 'recovered'].includes(basis) || (basis === 'prepared' && !verify)) throw new TypeError('Prepared provenance requires byte verification.');
   const sourceDirectory = resolve(objectDirectory, 'source');
   const descriptor = await json(resolve(objectDirectory, 'object.json')), id = text(descriptor.id);

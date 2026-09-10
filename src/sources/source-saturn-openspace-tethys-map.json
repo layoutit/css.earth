@@ -1,0 +1,24 @@
+{
+  "id": "source-saturn-openspace-tethys-map",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Saturn · openspace tethys map",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/tethys/textures/1/tethys.jpg",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/saturn/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "769d516be08271c9d2e91af225e515b1200803f25c389998dbfdaef9f40fc7b5",
+      "locator": "/inputs/16"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

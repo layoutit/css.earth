@@ -4,11 +4,13 @@ import { readFile, mkdtemp, mkdir, copyFile, writeFile, rm } from 'node:fs/promi
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { execFile } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { promisify } from 'node:util';
 import { OBJECTS } from '../site/objects.mts';
 import { sourceInventory } from './source-catalogue-inputs.mts';
 import { sourceObject, sourceArray, sourceText, parseSourceCatalog, sourceResolver } from '../src/platform/source-catalog.mts';
-import { parsePreparedSources } from '../src/platform/prepared-sources.mts';
+import { parsePreparedSources, sourceCatalogDigest } from '../src/platform/prepared-sources.mts';
+import { readSourceCatalog, checkSourceCatalog } from './read-source-catalogue.mts';
 import { parsePreparedExploration } from '../src/platform/prepared-exploration.mts';
 import { compileSourceUsage, parseSourceUsage, sourceDatasetViews } from '../src/platform/source-usage.mts';
 import { validateObjectProvenance } from '../src/platform/object-provenance.mts';
@@ -17,6 +19,73 @@ import { refreshSourceRecord } from './source-authoring-templates.mts';
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(path,'utf8'));
 const prepared = parsePreparedSources(await read('site/prepared-sources.json'));
 const exploration = parsePreparedExploration(await read('site/prepared-spacecraft.json'),prepared.sources);
+const sourceFixture = (id: string) => ({
+  id, title: `Synthetic source ${id}`, kind: 'publication', identityLevel: 'work',
+  identifiers: [{type: 'test', value: id}],
+  links: [{role: 'landing', url: `https://example.invalid/${id}`, label: 'Test provider'}],
+  evidence: [{url: `https://example.invalid/${id}`, checkedOn: '2026-09-10', locator: 'Test identity'}],
+  relations: [], statements: [],
+});
+
+test('independent source additions merge and compile without changing shared tracked files', async t => {
+  const root = await mkdtemp(join(tmpdir(), 'cssearth-source-branches-'));
+  t.after(() => rm(root, {recursive: true, force: true}));
+  const git = async (...args: string[]) => (await promisify(execFile)('git', args, {cwd: root})).stdout.trim();
+  await git('init', '-b', 'main');
+  await git('config', 'user.name', 'Source addition test');
+  await git('config', 'user.email', 'test@example.invalid');
+  await git('config', 'commit.gpgsign', 'false');
+  await git('config', 'core.hooksPath', '/dev/null');
+  await copyFile('.gitignore', join(root, '.gitignore'));
+  await mkdir(join(root, 'src/sources'), {recursive: true});
+  await mkdir(join(root, 'site'), {recursive: true});
+  const add = (id: string) => writeFile(join(root, `src/sources/${id}.json`), JSON.stringify(sourceFixture(id)));
+  await add('existing');
+  await git('add', '.'); await git('commit', '-m', 'Base source');
+  const base = await git('rev-parse', 'HEAD');
+  for (const id of ['new-moon-source', 'new-comet-source']) {
+    await git('checkout', '-b', id, base);
+    await add(id);
+    const catalog = await readSourceCatalog(root);
+    // Exercise the actual ignore rules with distinct derived output on each branch.
+    for (const path of ['site/prepared-sources.json', 'site/prepared-spacecraft.json']) await writeFile(join(root, path), JSON.stringify(catalog));
+    await git('add', '.'); await git('commit', '-m', `Add ${id}`);
+    assert.equal(await git('diff', '--name-only', base, 'HEAD'), `src/sources/${id}.json`);
+  }
+  await git('checkout', 'main');
+  for (const id of ['new-moon-source', 'new-comet-source']) await git('merge', '--no-edit', id);
+  const catalog = await readSourceCatalog(root);
+  assert.deepEqual(catalog.records.map(record => record.id), ['existing', 'new-comet-source', 'new-moon-source']);
+  assert.equal(await git('status', '--porcelain'), '');
+});
+
+test('source files reject mismatched IDs, duplicate provider identities and stale or tampered catalogues', async t => {
+  const root = await mkdtemp(join(tmpdir(), 'cssearth-source-records-'));
+  t.after(() => rm(root, {recursive: true, force: true}));
+  await mkdir(join(root, 'src/sources'), {recursive: true});
+  const first = 'src/sources/first.json', second = 'src/sources/second.json';
+  await writeFile(join(root, first), JSON.stringify(sourceFixture('wrong')));
+  await assert.rejects(readSourceCatalog(root), /identity differs from filename/);
+  await writeFile(join(root, first), JSON.stringify(sourceFixture('first')));
+  await writeFile(join(root, second), JSON.stringify(sourceFixture('second')));
+  const closure: Record<string, string> = {};
+  for (const path of [first, second]) closure[path] = createHash('sha256').update(await readFile(join(root, path))).digest('hex');
+  const original = await readSourceCatalog(root);
+  const prepared = {catalogSha256: sourceCatalogDigest(original), closure};
+  await checkSourceCatalog(root, prepared);
+  await writeFile(join(root, second), JSON.stringify({...sourceFixture('second'), identifiers: sourceFixture('first').identifiers}));
+  await assert.rejects(readSourceCatalog(root), /Duplicate/);
+  await assert.rejects(checkSourceCatalog(root, prepared), /Stale sources catalogue/);
+  await rm(join(root, second));
+  await assert.rejects(checkSourceCatalog(root, prepared), /differs from its records/);
+  await writeFile(join(root, second), JSON.stringify(sourceFixture('second')));
+  const added = join(root, 'src/sources/third.json');
+  await writeFile(added, JSON.stringify(sourceFixture('third')));
+  await assert.rejects(checkSourceCatalog(root, prepared), /Stale sources catalogue/);
+  await rm(added);
+  const tampered = {...original, records: original.records.map(record => ({...record, title: 'Invented title'}))};
+  await assert.rejects(checkSourceCatalog(root, {...prepared, catalogSha256: sourceCatalogDigest(tampered)}), /differs from its records/);
+});
 const objectInput = async (id: string) => {
   const object = OBJECTS.find(object => object.id === id)!;
   const page = sourceObject(await read(`src/planets/${id}/prepared/page.json`)), controls = sourceObject(page.controls);
@@ -32,7 +101,7 @@ test('source uses conserve all product dependencies, include models, and never c
   assert.equal(metadata.filter(edge=>edge.kind==='shared-context').length,4);
   const artworkCount = (await Promise.all(['render','emblem'].map(async kind => sourceArray(sourceObject(await read(`site/source/spacecraft/${kind}-library.json`)).entries,sourceObject).length))).reduce((a,b)=>a+b,0);
   assert.equal(metadata.filter(edge=>edge.kind==='artwork').length,artworkCount);
-  assert.ok(metadata.every(edge=>!edge.objectId && !edge.lensIds.length));
+  assert.ok(metadata.every(edge=>!edge.lensIds.length && (edge.consumerKind==='object-fact' || !edge.objectId)));
   assert.equal(prepared.usage.bySource['eso-eso0932a'],undefined,'unused retained panorama creates no active use');
   assert.ok(prepared.usage.edges.filter(edge => edge.kind === 'shared-context').every(edge => edge.catalogueId !== 'hyg-v41'), 'the current shared sky uses HYG v4.4');
   assert.ok(prepared.usage.bySource['hyg-v44'].length===1);
@@ -87,6 +156,14 @@ test('refreshing document pins retains bindings and native source metadata', asy
 });
 test('both catalogues prepare deterministically from the same input closure before publication', async () => {
   const result=await prepareSpacecraft({publish:false});
+  const facts = prepared.usage.edges.filter(edge => edge.consumerKind === 'object-fact');
+  assert.equal(facts.length, result.factsheets.cited);
+  assert.equal(result.factsheets.facts, result.factsheets.cited + result.factsheets.uncited.length);
+  assert.ok(facts.some(edge => edge.objectId === 'earth' && edge.consumerId === 'earth/radius'));
+  assert.ok(facts.some(edge => edge.objectId === 'abundantia' && edge.citationUrl?.includes('/4625')));
+  assert.ok(Object.hasOwn(result.preparedSources.closure, 'src/planets/earth/source/editorial/factsheet-review.json'));
+  assert.ok(Object.hasOwn(result.preparedSources.closure, 'src/planets/abundantia/source/reference/damit-model.json'));
+  assert.deepEqual(sourceDatasetViews(prepared.usage, 'damit-models'), [], 'factsheet metadata is not a shape or imagery contribution');
   for (const output of result.outputs) assert.equal(output.text,await readFile(output.path,'utf8'),output.path);
   assert.equal(result.prepared.sourceCatalogSha256,result.preparedSources.catalogSha256);
   assert.deepEqual(result.prepared.closure,result.preparedSources.closure);
@@ -97,6 +174,31 @@ test('both catalogues prepare deterministically from the same input closure befo
   const before=await Promise.all(result.outputs.map(output=>readFile(output.path,'utf8')));
   await assert.rejects(prepareSpacecraft({provenance:new Map([['mercury',corrupted]])}),/Unknown canonical source/);
   assert.deepEqual(await Promise.all(result.outputs.map(output=>readFile(output.path,'utf8'))),before);
+});
+
+test('changed fact evidence and stale displayed facts leave both published catalogues intact', async t => {
+  const root = await mkdtemp(join(tmpdir(), 'cssearth-citation-publication-'));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const outputs = ['site/prepared-sources.json', 'site/prepared-spacecraft.json'];
+  // Only the compiler's declared inputs are needed; no body assets or downloads.
+  for (const path of [...Object.keys(prepared.closure), ...outputs]) {
+    const target = join(root, path);
+    await mkdir(join(target, '..'), { recursive: true });
+    await copyFile(path, target);
+  }
+  const before = await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8')));
+  const evidencePath = join(root, 'src/planets/abundantia/source/reference/calibration.json');
+  const evidence = await readFile(evidencePath, 'utf8');
+  await writeFile(evidencePath, evidence.replace('42.18', '52.18'));
+  await assert.rejects(prepareSpacecraft({ root }), /fact evidence pin differs/);
+  assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
+  await writeFile(evidencePath, evidence);
+  const contentPath = join(root, 'src/planets/abundantia/prepared/content.json');
+  const content = sourceObject(await read(contentPath));
+  sourceObject(sourceArray(content.facts, sourceObject)[0]).value = '99 km';
+  await writeFile(contentPath, JSON.stringify(content));
+  await assert.rejects(prepareSpacecraft({ root }), /Stale factsheet for abundantia/);
+  assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
 });
 
 test('numerical extraction uses current package records and preserves reviewed source bindings', async () => {

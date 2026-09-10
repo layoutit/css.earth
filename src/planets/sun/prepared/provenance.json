@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d11d920f2e60b372fdf58f2826ef06c3983999d000d8e645c74a6d8770a1c747"
+    "sha256": "f6ebe58bd0aa283be5d973ee24478923e7ec2b47b853511eb0bc430121663d70"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -214,7 +214,7 @@
     {
       "id": "content",
       "path": "source/content/static.json",
-      "sha256": "f5b6ecd76597ff594505f40a946840645add4d749887ff8e922aaf18dbbe8cf0",
+      "sha256": "eff4d5a3ee2f3a1e4fa77638774944588271838379db85ed8c6675e26597c864",
       "parameters": {
         "schema": "cssearth-static-surface-content@1",
         "id": "sun",
@@ -245,7 +245,9 @@
                 "url": "https://science.nasa.gov/sun/facts/",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "nasa-sun-facts",
+                "locator": "/references/0; rotation-period"
               }
             },
             {
@@ -283,7 +285,9 @@
                 "url": "https://science.nasa.gov/heliophysics/focus-areas/solar-science/",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "nasa-solar-science",
+                "locator": "/references/1; activity-cycle"
               }
             },
             {
@@ -294,7 +298,9 @@
                 "url": "https://science.nasa.gov/heliophysics/focus-areas/solar-science/",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "nasa-solar-science",
+                "locator": "/references/1; magnetic-cycle"
               }
             }
           ]
@@ -2228,20 +2234,19 @@
     },
     {
       "path": "content/static.json",
-      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicit authored content document in the retained provenance record."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/static.json",
       "kind": "authored-content",
       "origin": "object:source/content/static.json",
-      "title": "Authored preparation configuration and scientific interpretation pinned for reproducibility.",
+      "title": "content/static.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f5b6ecd76597ff594505f40a946840645add4d749887ff8e922aaf18dbbe8cf0",
-      "bytes": 18248,
+      "sha256": "eff4d5a3ee2f3a1e4fa77638774944588271838379db85ed8c6675e26597c864",
+      "bytes": 18548,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -2725,8 +2730,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4533,
-          "sha256": "dec23820c8dacdb708c7f05c6959a53ed8b2e4ac53d0c41f22c51b0b6fc95178",
+          "bytes": 4761,
+          "sha256": "0a897cfd00b53e8093445c0cb2473b10df00446ad2676cc0d479191f6a5587e1",
           "verification": "bytes-verified"
         }
       ],

@@ -1,0 +1,24 @@
+{
+  "id": "source-itokawa-amica-sep29-labelpath",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Itokawa · amica sep29 labelPath",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2417589964_v_ddr.lbl",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/itokawa/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "68f0a649374d571041553b384acadd0cda7cf496674ecd2976944794c0559ec5",
+      "locator": "/inputs/9"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

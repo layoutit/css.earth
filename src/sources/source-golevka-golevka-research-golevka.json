@@ -1,0 +1,24 @@
+{
+  "id": "source-golevka-golevka-research-golevka",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Golevka · golevka research golevka",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://echo.jpl.nasa.gov/asteroids/6489_Golevka/hudson.etal.2000.golevka.pdf",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/golevka/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "67de10eb05d318daddf990564eaa73ee733509741581e065a5355224a477b017",
+      "locator": "/inputs/3"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

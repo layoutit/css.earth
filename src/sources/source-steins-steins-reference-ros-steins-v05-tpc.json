@@ -1,0 +1,24 @@
+{
+  "id": "source-steins-steins-reference-ros-steins-v05-tpc",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Steins · steins reference ROS_STEINS_V05 TPC",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/pck/ROS_STEINS_V05.TPC",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/steins/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "34b6cf3a3879e3c03f7f6ab673121427f8a9194df7dd0fac9d47e98009c5ca24",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

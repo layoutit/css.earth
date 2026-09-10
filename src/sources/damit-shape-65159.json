@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-65159",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 65159 · Velleda",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "65159"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/65159/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/velleda/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "9313f02ff63d38ac5811413dd5b3544e2d391851dd22ab96cb836ad71809d8be",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,34 @@
+{
+  "id": "iras-minor-planet-survey-v6",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "IRAS Minor Planet Survey V6.0",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.26033/pf3k-m168"
+    },
+    {
+      "type": "PDS dataset",
+      "value": "IRAS-A-FPA-3-RDR-IMPS-V6.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.26033/pf3k-m168",
+      "label": "IRAS Minor Planet Survey V6.0"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/piazzia/source/content/object.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "823e808fc5c42e2a49e2a7c805ee5b7d6ce502f8cd1133cde4b4a64ad64a080a",
+      "locator": "/panel/facts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "version": "6.0"
+}

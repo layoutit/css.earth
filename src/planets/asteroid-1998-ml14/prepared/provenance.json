@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "01a3ec49c1c40937d337f23d7d9893dc6acdf5c78a8ab8af115d925d9b15e505"
+    "sha256": "b793a64fc31dc46ef6545d9f71beb64bf491a0b733c51164142bd7ca03e06737"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -148,7 +148,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ca538e7c9579ca1f609a59b9bfa0d202ae8594971c4e31d73a2ffd028c02f0ac",
+      "sha256": "d4350bce0df08dc6bd56cabf1a9055b7c4ded95e8e1ae96078dbbae056cc4bda",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -197,7 +197,9 @@
                 "url": "https://mpbulletin.org/issues/MPB_41-2.pdf",
                 "label": "Warner (2014), 2013 photometry",
                 "path": "source/reference/warner-2014.pdf",
-                "checked": "2026-09-08"
+                "checked": "2026-09-08",
+                "catalogueId": "source-asteroid-1998-ml14-asteroid-1998-ml14-warner-2014",
+                "locator": "Warner (2014), 2013 photometry"
               }
             }
           ],
@@ -358,20 +360,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Pinned original scientific reference or authored preparation input.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ca538e7c9579ca1f609a59b9bfa0d202ae8594971c4e31d73a2ffd028c02f0ac",
-      "bytes": 9947,
+      "sha256": "d4350bce0df08dc6bd56cabf1a9055b7c4ded95e8e1ae96078dbbae056cc4bda",
+      "bytes": 10087,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -479,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6708,
-          "sha256": "0f92bfee3bdbcfe6c4807353ad18e22e408ad20895865735c9ea9f0cda0dc6d9",
+          "bytes": 6824,
+          "sha256": "bfe5a9967574a36f837899f8c30b6aaa33a0d3395acf58dd7c3544b70a8174e8",
           "verification": "bytes-verified"
         }
       ],

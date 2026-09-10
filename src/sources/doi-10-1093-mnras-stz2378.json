@@ -1,0 +1,29 @@
+{
+  "id": "doi-10-1093-mnras-stz2378",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · DOI 10.1093/mnras/stz2378",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stz2378"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stz2378",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/oumuamua/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "e577f8143bde61a2f0102f07eea9b4e3b6ce9280b6efecb9158e6d1a1f6f1546",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,30 @@
+{
+  "id": "nasa-uranus-facts",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "NASA Science · Uranus facts",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://science.nasa.gov/uranus/facts/",
+      "label": "NASA Science · Uranus facts"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "label": "NASA content usage guidelines"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/uranus/source/editorial/object.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "ac0971c8bf730c39b94204377ecc6e15e2ac3fe2882139e43fd7b1a15d301c7e",
+      "locator": "/sourceUrl"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "NASA Science"
+}

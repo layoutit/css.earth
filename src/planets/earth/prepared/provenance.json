@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c6cef622d58b21dab727c86ff462403cc01dbf664d6caabff755d54e9fd42aa5"
+    "sha256": "9bcf0d025fa6e5620557e20afdb595d7549a5745c8e4b6d06dc17c4e915a8d5a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -532,7 +532,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5fff010f61535248c8795144eed23cb29d3eedb4b5e7844e2996f81fb88d0157",
+      "sha256": "50e9a88dc17065449cad996166561eb11c968dc6e4a500f2b26eae7d8b69345f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -566,7 +566,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-approximate-planetary-positions",
+                "locator": "/references/0; distance-from-sun"
               }
             },
             {
@@ -577,7 +579,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "source-pluto-orbit-jpl-physical-values",
+                "locator": "/references/1; radius"
               }
             },
             {
@@ -588,7 +592,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "source-pluto-orbit-jpl-physical-values",
+                "locator": "/references/1; orbital-period"
               }
             },
             {
@@ -599,7 +605,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "source-pluto-orbit-jpl-physical-values",
+                "locator": "/references/1; rotation-period"
               }
             },
             {
@@ -637,7 +645,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "source-pluto-orbit-jpl-physical-values",
+                "locator": "/references/1; mass"
               }
             },
             {
@@ -648,7 +658,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "source-pluto-orbit-jpl-physical-values",
+                "locator": "/references/1; density"
               }
             },
             {
@@ -659,7 +671,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "source-pluto-orbit-jpl-physical-values",
+                "locator": "/references/1; gravity"
               }
             }
           ]
@@ -2116,7 +2130,7 @@
       "kind": "authored-document",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored sampling, units, color scale and coverage notes for VJ146A4.002."
       },
       "id": "authored-document:science/night-lights-2025/provenance.json",
       "origin": "object:source/science/night-lights-2025/provenance.json",
@@ -2282,7 +2296,7 @@
       "kind": "authored-document",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored schematic layer geometry and colors using NASA Science structure values; mantle tomography has its own input."
       },
       "id": "authored-document:interior/earth-interior.json",
       "origin": "object:source/interior/earth-interior.json",
@@ -2329,20 +2343,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Authored source recipe and retained scientific evidence for shared preparation.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Authored source recipe and retained scientific evidence for shared preparation.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5fff010f61535248c8795144eed23cb29d3eedb4b5e7844e2996f81fb88d0157",
-      "bytes": 17864,
+      "sha256": "50e9a88dc17065449cad996166561eb11c968dc6e4a500f2b26eae7d8b69345f",
+      "bytes": 18680,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -3877,8 +3890,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7549,
-          "sha256": "a4bf274ecd6ecf94ed2afd646614a4908d46af7aad144bb4a98f693faae52895",
+          "bytes": 8197,
+          "sha256": "e32319b1870f5039e301be2cd3ce71e9d6e432c999d4167388f6a687fcec2303",
           "verification": "bytes-verified"
         }
       ],

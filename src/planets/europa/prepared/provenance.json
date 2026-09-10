@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0f58702f821049c834fba71a41f3eedfd72e0aab696d09c9ee79792b7d7d91be"
+    "sha256": "21f87d4d41874ea573ce4e4fd16dd0b3c21f5a2c48239bf0ddbf1bc7259d4ad4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -361,7 +361,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b7cd3a7d52d8b7ae1fe55fbc71eb313827b966d250e5edf80c644b26d05b8d6a",
+      "sha256": "c07b3a4a304f992e6b46500b051a3838d80967e131556f0fcabf96c103ff18ee",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -395,7 +395,9 @@
                 "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-physical-parameters",
+                "locator": "/references/0; radius"
               }
             },
             {
@@ -406,7 +408,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-approximate-planetary-positions",
+                "locator": "/references/1; distance-from-sun"
               }
             },
             {
@@ -417,7 +421,9 @@
                 "url": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-J-MAG-3-RDR-HIGHRES-V1.0",
                 "label": "PDS/IAU sidereal rate",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "galileo-jupiter-magnetometer-highres-v1",
+                "locator": "/references/2; orbital-period"
               }
             },
             {
@@ -428,7 +434,9 @@
                 "url": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-J-MAG-3-RDR-HIGHRES-V1.0",
                 "label": "PDS/IAU sidereal rate",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "galileo-jupiter-magnetometer-highres-v1",
+                "locator": "/references/2; rotation-period"
               }
             },
             {
@@ -451,7 +459,9 @@
                 "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-physical-parameters",
+                "locator": "/references/0; density"
               }
             }
           ]
@@ -2027,20 +2037,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b7cd3a7d52d8b7ae1fe55fbc71eb313827b966d250e5edf80c644b26d05b8d6a",
-      "bytes": 15322,
+      "sha256": "c07b3a4a304f992e6b46500b051a3838d80967e131556f0fcabf96c103ff18ee",
+      "bytes": 15905,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -2329,8 +2338,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6315,
-          "sha256": "8cd4b23bae0abd5ffc5404e9a93c188b3e42535d4cb04c0980bb527d6a3b8cd7",
+          "bytes": 6778,
+          "sha256": "dd85e130b4ffa6999fca529f99a0979408a20e5bd62b02af48ed419b02132c8c",
           "verification": "bytes-verified"
         }
       ],

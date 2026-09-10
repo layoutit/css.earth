@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-3904",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 3904 · Hidalgo",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "3904"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3904/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/hidalgo/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "0b943eeaad617184228c50defdcb9073a0afce0b01cb5a483b60e952b26ea491",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

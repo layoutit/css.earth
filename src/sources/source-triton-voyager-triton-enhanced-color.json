@@ -1,0 +1,24 @@
+{
+  "id": "source-triton-voyager-triton-enhanced-color",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Enhanced color",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.lpi.usra.edu/icy_moons/images/tnmap-cyl-KH.jpg",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/triton/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "723d65e146ae88aa8dac3b6c4f92cb1c2035959b265cff5e13f9b9548ac3a188",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

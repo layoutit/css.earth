@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-2822",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 2822 · Minerva",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "2822"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/2822/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/minerva/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "28e4d9f0b05b57a5d0cb842951b1cba3058ea41f6cd8b21e08d5e299c1a476fb",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

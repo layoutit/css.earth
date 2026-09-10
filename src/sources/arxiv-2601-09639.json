@@ -1,0 +1,29 @@
+{
+  "id": "arxiv-2601-09639",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · arXiv 2601.09639",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2601.09639"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2601.09639",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/ixion/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "01bf2f518b72f3e1158fc001697415187ef9c293a3c5a7d53d91f42cce371c28",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

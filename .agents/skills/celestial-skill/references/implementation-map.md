@@ -128,7 +128,7 @@ instead of editing a shared list or atlas position.
 | Source sampling, native triangle planning and per-texel lighting bake | `tools/objects/terrestrial-layers/radial-terrain.mts` |
 | Position welding, compaction, meshoptimizer simplification and topology checks | `tools/objects/terrestrial-layers/radial-meshoptimizer.mts` |
 | PDS radius values / OBJ radial intersections | `tools/objects/terrestrial-layers/pds-scalar-grid.mts`, `tools/objects/terrestrial-layers/obj-shape.mts` |
-| Geometry regressions and independent body anchors | `tools/objects/terrestrial-layers/radial-meshoptimizer.test.mjs`, `tools/objects/terrestrial-layers/radial-terrain.test.mjs`, `tests/objects/unit/vesta/source.test.mjs` |
+| Geometry regressions and independent body anchors | `tools/objects/terrestrial-layers/radial-meshoptimizer.test.mts`, `tools/objects/terrestrial-layers/radial-terrain.test.mts`, `tests/objects/unit/vesta/source.test.mts` |
 
 The OBJ sampler supplies radius by ray intersection; this route resamples the
 shape and does not retain arbitrary OBJ connectivity or UVs. It is not proof of
@@ -153,7 +153,7 @@ for availability; this reference does not establish merge or deployment status.
 | Disjoint camera validation, source-mesh correspondence and visibility | `tools/objects/terrestrial-layers/observed-geo-surface.mts` |
 | Deterministic surface samples, bounded overlap gains and observation selection | `tools/objects/terrestrial-layers/observation-mosaic.mts` |
 | Atlas baking and lossless observation-index output | `tools/objects/terrestrial-layers/radial-terrain.mts` |
-| Selection/level regressions and prepared provenance checks | `tools/objects/terrestrial-layers/observation-mosaic.test.mjs`, `tests/objects/unit/comet-67p/mosaic.test.mjs` |
+| Selection/level regressions and prepared provenance checks | `tools/objects/terrestrial-layers/observation-mosaic.test.mts`, `tests/objects/unit/comet-67p/mosaic.test.mts` |
 | Worked method, limitations and measured evidence | [67P source and evidence account](../../../../src/planets/comet-67p/README.md) |
 
 Inspect the actual recipe/schema before reuse. The OSIRIS decoder and quality
@@ -189,8 +189,8 @@ authored commands. It routes `test:planets` to `tests/objects/unit/<id>/`.
 
 `pnpm test:browser` currently runs DOM cleanliness. Shared interaction
 conformance is `pnpm test:browser:conformance`. Browser profiles live in
-`tests/objects/browser/<id>/`, use `site/test/object-browser-profile.mjs`, and
-consume prepared controls. `site/test/load-browser-profile.mjs` already handles
+`tests/objects/browser/<id>/`, use `site/test/object-browser-profile.mts`, and
+consume prepared controls. `site/test/load-browser-profile.mts` already handles
 absent lenses and requires race inputs only when more than one lens exists.
 Use the actual command coverage when reporting proof; readiness requirements
 belong to the user's contract and [qualification](qualification.md).

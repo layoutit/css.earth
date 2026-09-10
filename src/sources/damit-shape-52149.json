@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-52149",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 52149 · Brunhild",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "52149"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/52149/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/brunhild/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "8f55c79902787acb2aaf87012f2c2f73074c7010d99fecf835041d4c1155ab82",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

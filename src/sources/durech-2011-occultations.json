@@ -1,0 +1,29 @@
+{
+  "id": "durech-2011-occultations",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Ďurech et al. (2011): Combining asteroid models derived by lightcurve inversion with asteroidal occultation silhouettes",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1104.4227"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/pdf/1104.4227",
+      "label": "Ďurech et al. (2011): Combining asteroid models derived by lightcurve inversion with asteroidal occultation silhouettes"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/unitas/source/content/object.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "a140c2d2cc0a729532ddafb788d9ab43334e4ef32ba3c28430ce45696869a897",
+      "locator": "/panel/facts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,40 @@
+{
+  "id": "doi-10-1088-0004-637x-812-1-55",
+  "title": "First Results from the Hubble OPAL Program: Jupiter in 2015",
+  "kind": "publication",
+  "identityLevel": "work",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/812/1/55"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/812/1/55",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/jupiter/source/atmosphere/hubble-opal-minnaert.json",
+      "revision": "c601cd5a54414fe6e500aba9b3c95c48b8870a30",
+      "sha256": "86bc3c4b7b60d77e5088c1804521619bb077cd53ea6e1538549b80f603356fbe",
+      "locator": "/source"
+    },
+    {
+      "url": "https://esahubble.org/static/archives/releases/science_papers/heic1522a.pdf",
+      "checkedOn": "2026-09-10",
+      "locator": "Page 1: title, authors, DOI and publication date"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "creators": [
+    "Amy A. Simon",
+    "Michael H. Wong",
+    "Glenn S. Orton"
+  ],
+  "publicationDate": "2015-10-07"
+}

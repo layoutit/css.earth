@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0b759f20311de193c7ab8e390d1b029fba48bafd8b22198e985dba43cae85d21"
+    "sha256": "d5b1e3d570bfbbf0816ee556a369ce53ccdce91bb527dc447c4567bc65ba7ce4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -577,7 +577,7 @@
     {
       "id": "content",
       "path": "source/content/static.json",
-      "sha256": "6f893fad567f43ae9bfb9232762bec8c2a8f7417b34543f22cd6994d59909d05",
+      "sha256": "9cbf4a5fdb11412dbacf29e2fba7f9bcc7f748be0867d1a6c93671a73e7bf587",
       "parameters": {
         "schema": "cssearth-static-surface-content@1",
         "id": "moon",
@@ -603,7 +603,9 @@
                 "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-physical-parameters",
+                "locator": "/references/0; radius"
               }
             },
             {
@@ -619,7 +621,9 @@
                 "url": "https://science.nasa.gov/moon/facts/",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "nasa-moon-facts",
+                "locator": "/references/1; rotation-period"
               }
             },
             {
@@ -640,7 +644,9 @@
                 "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-physical-parameters",
+                "locator": "/references/0; density"
               }
             }
           ],
@@ -1659,20 +1665,19 @@
     },
     {
       "path": "content/static.json",
-      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicit authored content document in the retained provenance record."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/static.json",
       "kind": "authored-content",
       "origin": "object:source/content/static.json",
-      "title": "Authored preparation configuration and scientific interpretation pinned for reproducibility.",
+      "title": "content/static.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6f893fad567f43ae9bfb9232762bec8c2a8f7417b34543f22cd6994d59909d05",
-      "bytes": 31326,
+      "sha256": "9cbf4a5fdb11412dbacf29e2fba7f9bcc7f748be0867d1a6c93671a73e7bf587",
+      "bytes": 31642,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -2146,8 +2151,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5698,
-          "sha256": "45762db7dc355f707429db742db7873e195bba0bb4c29134155ff10f7e6ebf35",
+          "bytes": 5942,
+          "sha256": "881dbdb9189f026ad648833d65c526021b3ee8f5639f59781b73bba0abd3f833",
           "verification": "bytes-verified"
         }
       ],
