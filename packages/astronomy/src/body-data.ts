@@ -20,6 +20,12 @@ import { SATELLITE_ELEMENTS } from './data/satelliteElements.data.js'
  * three numbers and should not get them from here.
  */
 export const BODIES: Record<BodyId, BodyData> = {
+  'deedee': body('deedee', "DeeDee (2014 UZ224)", '2014 UZ224;', 317.5, 0, 'sun'),
+  'asteroid-2002-tx300': body('asteroid-2002-tx300', "2002 TX300", '55636;', 168.21847903786332, 0, 'sun'),
+  'asteroid-2002-tc302': body('asteroid-2002-tc302', "2002 TC302", '84522;', 256.86505029826975, 0, 'sun'),
+  'asteroid-2003-vs2': body('asteroid-2003-vs2', "2003 VS2", '84922;', 262.0949581014582, 0, 'sun'),
+  'huya': body('huya', "Huya", '38628;', 207.35021245858007, 0, 'sun'),
+  'ixion': body('ixion', "Ixion", '28978;', 353.3290693408871, 0, 'sun'),
   // PDS Becker radar meshes: source-volume radii; GM unknown in Horizons.
   'asteroid-2001-sn263': body('asteroid-2001-sn263', '2001 SN263', '153591;', 1.2482944893607866, 0, 'sun'),
   'sn263-beta': body('sn263-beta', '2001 SN263 Beta', null, 0.39455452137070834, 0, 'asteroid-2001-sn263'),

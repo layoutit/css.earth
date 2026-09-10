@@ -93,6 +93,13 @@ it. Adding a body does not require a hand-maintained component presentation map.
   `tools/objects/shape-model/`. Inspect both the authored schema and that
   preparer's actual shape support before choosing it for another body; verify
   camera picking in the shared renderer if the new geometry requires it.
+- **Published ellipsoids and unresolved outlines:**
+  `tools/objects/source-authoring/distant-worlds/README.md` documents the existing
+  analytical radius-table extraction. Its helpers accept a selected input file;
+  `outer-worlds/inputs.json` supplies the later occultation and thermal examples.
+  Keep a projected ellipse distinct from a 3D shape, disclose any assumed depth,
+  and use the normal unmapped grid. A short title must match the content display
+  name; a longer designation can remain in the shared registry for search.
 - **Measured irregular radial terrain:** Vesta's
   `source/preparation/terrestrial.json` selects `geometry.radialTerrain`, native
   `primitive: "u"`, and optional meshoptimizer simplification. Read

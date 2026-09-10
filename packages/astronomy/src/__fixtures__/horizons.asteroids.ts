@@ -4,10 +4,12 @@ import { ASTEROID_FIXTURES_1 } from './horizons.asteroids-1.js'
 import { ASTEROID_FIXTURES_2 } from './horizons.asteroids-2.js'
 import { ASTEROID_FIXTURES_3 } from './horizons.asteroids-3.js'
 import { ASTEROID_FIXTURES_4 } from './horizons.asteroids-4.js'
+import { ASTEROID_FIXTURES_5 } from './horizons.asteroids-5.js'
 
 export const ASTEROID_FIXTURES = {
   ...ASTEROID_FIXTURES_1,
   ...ASTEROID_FIXTURES_2,
   ...ASTEROID_FIXTURES_3,
   ...ASTEROID_FIXTURES_4,
+  ...ASTEROID_FIXTURES_5,
 } as const

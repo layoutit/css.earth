@@ -5,10 +5,12 @@ import { ASTEROID_ELEMENTS_1 } from './asteroidElements-1.data.js'
 import { ASTEROID_ELEMENTS_2 } from './asteroidElements-2.data.js'
 import { ASTEROID_ELEMENTS_3 } from './asteroidElements-3.data.js'
 import { ASTEROID_ELEMENTS_4 } from './asteroidElements-4.data.js'
+import { ASTEROID_ELEMENTS_5 } from './asteroidElements-5.data.js'
 
 export const ASTEROID_ELEMENTS = {
   ...ASTEROID_ELEMENTS_1,
   ...ASTEROID_ELEMENTS_2,
   ...ASTEROID_ELEMENTS_3,
   ...ASTEROID_ELEMENTS_4,
+  ...ASTEROID_ELEMENTS_5,
 } satisfies Record<string, {query: string; elements: KeplerianElements}>
