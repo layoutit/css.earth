@@ -6,7 +6,7 @@ import { test } from 'node:test';
 import sharp from 'sharp';
 import { parseImageLayerRecipe, type ImageLayerRecipe } from './config.js';
 import { prepareImageLayers, sha256 } from './prepare.js';
-import { restoreEnvironmentObject } from '../environment-images.js';
+import { assertImageLayerReplay, restoreEnvironmentObject } from '../environment-images.js';
 import { resizeRgbaLanczos3 } from './resize-rgba.js';
 
 test('production preparation preserves canonical flux and supplies nondegenerate edge banks',async()=>{
@@ -70,4 +70,51 @@ test('diffuse resize rejects malformed dimensions and unsupported enlargement', 
   assert.throws(() => resizeRgbaLanczos3(pixel, 1.5, 1, 1, 1), /positive integers/);
   assert.throws(() => resizeRgbaLanczos3(pixel, 2, 1, 1, 1), /input bytes/);
   assert.throws(() => resizeRgbaLanczos3(pixel, 1, 1, 2, 1), /downsampling only/);
+});
+
+
+test('image-layer replay permits only bounded coordinate drift and leaves accepted metadata untouched', () => {
+  const accepted = {
+    id: 'fixture', frame: { originM: [1.6e20, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
+      boundsUnits: { min: [-20, -10, -1], max: [20, 10, 1] }, epochJdTt: 2461286.5, metersPerUnit: 3e19 },
+    banks: [{ normalUnits: [0, 0, 1], samplingStepUnits: .1, leaves: [{ id: 'z-0', offsetKpc: -.5,
+      centerUnits: [0, 0, -.5], verticesUnits: [[-1, -1, -.5], [1, -1, -.5], [1, 1, -.5], [-1, 1, -.5]],
+      uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], widthPx: 320, heightPx: 268,
+      sha256: 'a'.repeat(64), bytes: 1234, style: { transform: 'matrix3d(accepted)' } }] }],
+    resources: [{ path: 'layers/z-0.webp', sha256: 'a'.repeat(64), bytes: 1234, width: 320, height: 268 }],
+  };
+  const before = JSON.stringify(accepted), drifted = structuredClone(accepted);
+  drifted.frame.originM[0] += 70000;
+  drifted.frame.localToReferenceXyzw[3] += Number.EPSILON;
+  drifted.frame.boundsUnits.min[0] += 1e-13;
+  drifted.banks[0].normalUnits[0] += Number.EPSILON;
+  drifted.banks[0].samplingStepUnits += Number.EPSILON;
+  const leaf = drifted.banks[0].leaves[0];
+  leaf.offsetKpc += Number.EPSILON;
+  leaf.centerUnits[2] += Number.EPSILON;
+  leaf.verticesUnits[0][2] += Number.EPSILON;
+  assert.doesNotThrow(() => assertImageLayerReplay(drifted, accepted));
+  assert.equal(JSON.stringify(accepted), before);
+
+  const mutations: Array<(value: typeof accepted) => void> = [
+    value => { value.frame.originM[0] += 1e8; },
+    value => { value.banks[0].normalUnits[0] += 1e-10; },
+    value => { value.banks[0].leaves[0].verticesUnits[0][2] += 1e-10; },
+    value => { value.banks[0].leaves[0].sha256 = 'b' + 'a'.repeat(63); },
+    value => { value.resources[0].sha256 = 'b' + 'a'.repeat(63); },
+    value => { value.resources[0].bytes += 1; },
+    value => { value.banks[0].leaves[0].bytes += 1; },
+    value => { value.banks[0].leaves[0].widthPx += 1; },
+    value => { value.banks[0].leaves[0].id = 'z-1'; },
+    value => { value.id = 'other'; },
+    value => { value.banks[0].leaves[0].style.transform = 'matrix3d(changed)'; },
+    value => { value.banks[0].leaves[0].uvs[0][0] += Number.EPSILON; },
+    value => { value.frame.metersPerUnit += 4096; },
+    value => { value.frame.originM.pop(); },
+    value => { Object.assign(value.frame, { extra: 0 }); },
+  ];
+  for (const mutate of mutations) {
+    const changed = structuredClone(accepted); mutate(changed);
+    assert.throws(() => assertImageLayerReplay(changed, accepted), /changed accepted metadata/);
+  }
 });
