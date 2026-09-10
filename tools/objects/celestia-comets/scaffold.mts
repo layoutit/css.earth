@@ -68,6 +68,36 @@ for(const c of intake){
  await writeFile(`src/renderers/css/styles/${c.id}-surfaces.css`,(await readFile('src/renderers/css/styles/comet-209p-surfaces.css','utf8')).replaceAll('comet-209p',c.id));
  const profile=`tests/objects/browser/${c.id}/browser-profile.mjs`;await mkdir(dirname(profile),{recursive:true});await writeFile(profile,(await readFile('tests/objects/browser/comet-209p/browser-profile.mjs','utf8')).replaceAll('comet-209p',c.id));
  await writeFile(`${p}/NOTICE.md`,`# Sources and reuse\n\nCelestia catalog: ${credit}. GPL-2.0-or-later; see source/reference/celestia.ssc and source/reference/GPL-2.0-or-later.txt. The catalog excerpt and derived size parameters retain these terms. Independent cssEarth code is MIT. Original Celestia mesh code and exported geometry retain GPL-2.0-or-later; no photographic texture is redistributed.\n\nJPL Horizons: fixed-epoch scientific orbit records. ESO/S. Brunier panorama: CC BY 4.0. HYG and Inter retain their notices beside the pinned sources.\n`);
- await writeFile(`${p}/README.md`,`# ${full}\n\n${introduction}\n\n## Representation\n\nAn **illustrative nucleus**, with Celestia’s catalog radius (${c.radiusKm} km). The native Celestia CMS mesh is reused; it is illustrative, not a measured shape. The full surface uses the normal missing-imagery grid. Shadows and Orbit default off. Rotation is a fixed illustration; the catalog’s assumed spin and generic rock texture are not imported.\n\n## Sources\n\n[Catalog entry](source/reference/celestia.ssc) · [Selection and assumptions](source/reference/source-record.json) · [JPL elements](source/reference/horizons-elements.txt) · [Independent vectors](source/reference/horizons-vectors.txt) · [Credits](NOTICE.md).\n\nPosition: heliocentric ICRF at JD2461286.5 (3 September 2026 TT; Horizons TDB differs by less than 2 ms). The scene is fixed at that epoch. Nearby conics are an approximation, not a long-term ephemeris or an outgassing model.\n\nPrepared through the shared authored-object pipeline; no object-specific runtime. [Catalog import and reproduction](../../../tools/objects/celestia-comets/README.md).\n`);
+ await writeFile(`${p}/README.md`,`# ${full}
+
+${introduction}
+
+## Sources
+
+| Source | What the view uses |
+| --- | --- |
+| [Celestia catalog entry](source/reference/celestia.ssc) | Illustrative CMS mesh and approximate radius, ${c.radiusKm} km. |
+| [JPL elements](source/reference/horizons-elements.txt) and [independent vectors](source/reference/horizons-vectors.txt) | Heliocentric ICRF position at JD2461286.5 (3 September 2026 TT; Horizons TDB differs by less than 2 ms). |
+
+[Selection and assumptions](source/reference/source-record.json) · [Credits](NOTICE.md).
+
+## Evidence
+
+This scaffold has not qualified the prepared body. Record source comparisons,
+preparation results and inspected browser views here, with the tested revision
+and links to the original evidence.
+
+## Known problems
+
+The native Celestia mesh is illustrative, not a measured shape. The grid marks
+missing surface imagery. Rotation is a fixed illustration. Nearby conics are
+an approximation at the scene epoch, not a long-term ephemeris or outgassing model.
+
+## Methods
+
+Shadows and Orbit default off. The catalog’s assumed spin and generic rock
+texture are not imported. Preparation uses the shared authored-object pipeline.
+See [catalog import and reproduction](../../../tools/objects/celestia-comets/README.md).
+`);
  console.log(c.id,name,c.radiusKm);
 }

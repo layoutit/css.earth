@@ -134,12 +134,6 @@
       "expectedSha256": "65eb23ebcfe579e5c096d3e578722e629bff835946c88c9952b175d13771b3d3"
     },
     {
-      "path": "reference/148.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 94842,
-      "expectedSha256": "1b7b7a53fabc07dac2aa3d26be4431290772997851e205a11f3a84195943c7a0"
-    },
-    {
       "path": "reference/561-IAUspin.txt",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 34,
@@ -162,12 +156,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 1311,
       "expectedSha256": "ff129df414b2d5afaa19d59b98072a5f1e1a3caeb89a112db4072e39e853bc25"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "85a611ab240d42198406b1f6f1a78abfbdbc011a28ef34ac9d5046b3fe243936"
     },
     {
       "path": "reference/horizons-elements.txt",

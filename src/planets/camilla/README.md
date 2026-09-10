@@ -43,6 +43,8 @@ The record gives diameter 260 km, period 4.843928 h and ecliptic J2000 pole (76�
 
 This package displays the original 2017 DAMIT model at its published 260 km diameter. It does not rescale the released vertices to later or averaged size estimates.
 
+- [Hanuš et al. (2017), Volumes and bulk densities of forty asteroids from ADAM shape modeling](https://ui.adsabs.harvard.edu/abs/2017A%26A...601A.114H) — selected model publication.
+
 </details>
 
 <a id="appearance-and-preparation"></a>

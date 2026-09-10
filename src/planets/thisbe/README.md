@@ -43,6 +43,8 @@ The record gives diameter 218 km, period 6.041319 h and ecliptic J2000 pole (74Â
 
 The selected paired DAMIT model record provides a valid pole. The separate MPCD survey table reports an impossible latitude for Thisbe, so that table is not used to orient this mesh. No value is wrapped or reinterpreted to repair that source.
 
+- [Vernazza et al. (2021), VLT/SPHERE imaging survey of the largest main-belt asteroids: Final results and synthesis](https://ui.adsabs.harvard.edu/abs/2021A&A...654A..56V) â€” selected model publication.
+
 </details>
 
 <a id="appearance-and-preparation"></a>

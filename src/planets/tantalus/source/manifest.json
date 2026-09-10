@@ -99,8 +99,8 @@
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 1845,
-      "expectedSha256": "f5804373a5f5c69b42409165260279fd13019ba77744dc4bdf8d7b2979e7443f"
+      "expectedBytes": 1403,
+      "expectedSha256": "a66582d3a5a622eb8e6940eb6903a5d109aae10c18d8df1a38f452c48bb2fbe9"
     },
     {
       "path": "preparation/navigation.json",
@@ -147,14 +147,8 @@
     {
       "path": "reference/damit-model.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 7352,
-      "expectedSha256": "ed878b320f85c1cc48a1bf2b7e85a7d434a02044d635f1d475e83d8ea1be1c69"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "d70fe161d8ed5e5079301c51a7c5ad9b14c8b0f15930e2f44e3ee3c7139581c9"
+      "expectedBytes": 7267,
+      "expectedSha256": "65fdb6a2c310b629317f0e4a5cd082abfbe4342432703b2fa4692c255ce52164"
     },
     {
       "path": "reference/horizons-elements.txt",
@@ -179,12 +173,6 @@
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 3578,
       "expectedSha256": "ef08748ed8bf560a4f5ec228e51f8460dce82874cd42d6959120da221eae51d3"
-    },
-    {
-      "path": "reference/reference-663.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 13731,
-      "expectedSha256": "58b64c86e57e144de51b10ad77b57d6fe19420fc37915b1dfd7630c83a18d4dd"
     },
     {
       "path": "reference/rozek-2022.html",

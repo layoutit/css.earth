@@ -43,6 +43,8 @@ The record gives diameter 209 km, period 4.775377 h and ecliptic J2000 pole (354
 
 DAMIT links this model to its Hanuš et al. (2018) reference record. That bibliographic association is preserved as published, but this package relies on the explicitly identified model file and its own numerical record; it does not infer an observing campaign or a more specific reconstruction method from the linked paper.
 
+- [Hanuš et al. (2018), Spin states of asteroids in the Eos collisional family](https://ui.adsabs.harvard.edu/abs/2018Icar..299...84H) — selected model publication.
+
 </details>
 
 <a id="appearance-and-preparation"></a>

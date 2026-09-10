@@ -49,6 +49,8 @@ Its vertices, outward winding and co-rotating frame remain unchanged. Positive Z
 
 The record gives diameter 116 km, period 23.8964 h and ecliptic J2000 pole (58°, 2°). The original mesh has measured volume-equivalent radius 58.000000 km and Cartesian extents 117.334 × 121.877 × 116.858 km. The rounded catalog diameter is used as the reference-sphere scale; the original coordinates are not rescaled.
 
+- [Choukroun et al. (2025), Asteroid sizes determined with thermophysical model and stellar occultations](https://ui.adsabs.harvard.edu/abs/2025A&A...698A.298C) — selected model publication.
+
 </details>
 
 <a id="appearance-and-preparation"></a>

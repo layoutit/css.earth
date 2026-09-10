@@ -100,8 +100,8 @@
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 942,
-      "expectedSha256": "e0bd0308c748b5e3819da2dd3bf6760c87ee6aa91f204e3e92b87a2ee281ee6b"
+      "expectedBytes": 1195,
+      "expectedSha256": "99bb11203f49d6522ee3d0346a1e8cf24467749b46c0a085ae123f06760f3288"
     },
     {
       "path": "preparation/navigation.json",
@@ -134,12 +134,6 @@
       "expectedSha256": "b2a382d647ef979866e6ac3be34c74bab7af3a71b429bbf06bad4e7d6b2915ed"
     },
     {
-      "path": "reference/148.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 94842,
-      "expectedSha256": "64bdf8ce05925c6137762e881fceac7efab205818adcbfb22ffaa0a2727751ec"
-    },
-    {
       "path": "reference/AcuA_V1.txt.gz",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 120256,
@@ -162,12 +156,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 1805,
       "expectedSha256": "6009a4909c76e38e33df43daaa8e19fa6a3f541dbdd287f823511a33650973be"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "b057eb24b9cc831043904a10c596e9f28d554a79748baecd32ef76b245e873af"
     },
     {
       "path": "reference/horizons-elements.txt",

@@ -49,4 +49,6 @@ The source header declares +Z-axis pole (138.85848,65.93886)° and 24.478724 h, 
 - [DAMIT convex 1869](https://damit.cuni.cz/projects/damit/asteroid_models/view/1869): excluded from the displayed source, retained as comparison. Its archive 140±7 km and the paper's convex 130±7 km refer to different reported scales; neither is substituted into SAGE geometry.
 - AKARI AcuA v1.0 is retained only for comparison. A thermal effective-sphere diameter is not used when the source-supported occultation calibration exists.
 
+- [Marciniak et al. (2018), Photometric survey, modelling, and scaling of long-period and low-amplitude asteroids](https://ui.adsabs.harvard.edu/abs/2018A%26A...610A...7M) — selected model publication.
+
 </details>

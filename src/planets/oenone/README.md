@@ -51,7 +51,7 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 
 - [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/16312) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/129887/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
-- [Choukroun et al. (2025)](https://damit.cuni.cz/projects/damit/references/view/678) — original model publication record.
+- [Choukroun et al. (2025), Asteroid sizes determined with thermophysical model and stellar occultations](https://ui.adsabs.harvard.edu/abs/2025A&A...698A.298C) — original model publication record.
 - [AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — retained for comparison; the documented physical calibration supplies the selected scale. Its fitted nonrotating-sphere diameter is 35.92 ± 0.41 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.
 - [Choukroun et al. (2025), A&A 698, A298](https://arxiv.org/pdf/2505.09437) — retained primary publication; see the body-specific selection and calibration above.
 

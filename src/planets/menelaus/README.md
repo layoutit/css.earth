@@ -39,7 +39,7 @@ Original +Z spin axis and +X reference meridian are retained. The selected eclip
 
 The [original mesh](https://damit.cuni.cz/projects/damit/stored_files/open/79848/shape.txt) is retained without changing its coordinates or connectivity. [DAMIT documentation](https://damit.cuni.cz/pages/documentation) supplies the coordinate units, pole and sidereal-period conventions; its CC BY 4.0 terms and other credits are linked from [NOTICE.md](NOTICE.md).
 
-Disk-integrated colors do not constrain a regolith map. The selected original Gr12b catalog row marks diameter as fitted (`D` in `FIT_CODE`). The CSV row, original query and column definitions are pinned in [the source manifest](source/manifest.json).
+Disk-integrated colors do not constrain a regolith map. The selected original Gr12b catalog row marks diameter as fitted (`D` in `FIT_CODE`). The CSV row and original query are pinned in [the source manifest](source/manifest.json); [column definitions](../../../tools/objects/source-references/neowise-v2-columns.html) are shared.
 
 Alternative archive solution: [model 8132](https://damit.cuni.cz/projects/damit/asteroid_models/view/8132), ecliptic pole (148°, 49°).
 
@@ -48,5 +48,9 @@ Alternative archive solution: [model 8132](https://damit.cuni.cz/projects/damit/
 The [terrestrial recipe](source/preparation/terrestrial.json) reads the original mesh through `source-meshoptimizer` and targets at most 800 native PolyCSS `u` raster triangles with 128 px raster cells. Its error allowance is 427.16 m. Sampled source-fit distances measure preparation error separately from source accuracy; they are not exhaustive Hausdorff bounds.
 
 Shadows and asteroid orbit visibility are off by default. The [family report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trojan-population.md#preparation-and-validation) records source/result comparisons, numerical checks, runtime cases and delivery. [Orbit fixtures](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/trojan-population/orbit-errors.json) sample the epoch and ±30 days; they do not bound the whole interval or establish long-term accuracy.
+
+[Grav et al. (2012), WISE/NEOWISE Observations of the Jovian Trojan Population: Taxonomy](https://arxiv.org/abs/1209.1549).
+
+[Ďurech & Hanuš (2023), Reconstruction of asteroid spin states from Gaia DR3 photometry](https://ui.adsabs.harvard.edu/abs/2023A&A...675A..24D).
 
 </details>

@@ -160,3 +160,6 @@ src/planets/*/source/**/*.bpc
 /src/platform/solar-geometry.mts
 /src/planets/sun/prepared/world-context.json
 /site/minimap/prepared.json
+
+# AKARI AcuA v1: restored and verified from each body source manifest.
+/src/planets/*/source/reference/AcuA_V1.txt.gz

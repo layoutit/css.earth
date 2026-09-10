@@ -159,14 +159,8 @@
     {
       "path": "reference/damit-model.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 6159,
-      "expectedSha256": "159b5246f3ae5dcb08be8c8c75ff063a1ed3301362f5d633c11503b18c7e3768"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "d70fe161d8ed5e5079301c51a7c5ad9b14c8b0f15930e2f44e3ee3c7139581c9"
+      "expectedBytes": 6347,
+      "expectedSha256": "7367b21d10b37bab948948a1000ed486b59a403fcb280387357a1f5f0c4e65a6"
     },
     {
       "path": "reference/horizons-elements.txt",
@@ -181,12 +175,6 @@
       "expectedSha256": "6dadf10c699ba8e20e3d163cbd7e62de705ec2aaa98c82f43a2abcf61b39553e"
     },
     {
-      "path": "reference/jaxa-data-policy.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 15999,
-      "expectedSha256": "bd4096c907073e9d524ecac5b8d0882d5f9ecbf4de1a53c957f7145886c35bfd"
-    },
-    {
       "path": "reference/model-319.html",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 128384,
@@ -197,18 +185,6 @@
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 3392,
       "expectedSha256": "362b1a24d45b43107b8281737f305dd4cfe635d107bebfa9cda3239318d1c15e"
-    },
-    {
-      "path": "reference/reference-141.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 14032,
-      "expectedSha256": "4183af1189fa5947dd120182a7e45e176906870641bb94b373e1d1a8375e7c71"
-    },
-    {
-      "path": "reference/reference-149.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 15086,
-      "expectedSha256": "5c8c699abd065ca012fb30f87db810b9e883d7d3333de87608a167bd68a6b33c"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",

@@ -100,8 +100,8 @@
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 1135,
-      "expectedSha256": "cc2b430fcbc64279e1131229a3e2807fe9f42cd8e80a208da83494ee4961112c"
+      "expectedBytes": 1388,
+      "expectedSha256": "a8f6eae026e499a5f4d09188a2d1ff2af298e3ee4fbd845eabc425acae083520"
     },
     {
       "path": "preparation/navigation.json",
@@ -134,12 +134,6 @@
       "expectedSha256": "aea463dcf4a99985e6c9f98e34b36561dbb92f184ce4eaf0152815ae29c9c742"
     },
     {
-      "path": "reference/141.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 14032,
-      "expectedSha256": "ec5d8a496510cb6b8eab4903c67ca4670efd9f367e50b7668762da49bfd8bf66"
-    },
-    {
       "path": "reference/352-IAUspin.txt",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 35,
@@ -164,12 +158,6 @@
       "expectedSha256": "be6d3b42146f6642b229ef68bd7fc14ef329047bb7bcadb2f35a79905d2aee8b"
     },
     {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "d70fe161d8ed5e5079301c51a7c5ad9b14c8b0f15930e2f44e3ee3c7139581c9"
-    },
-    {
       "path": "reference/hanus-2018.pdf",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 1636683,
@@ -192,12 +180,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 6643,
       "expectedSha256": "fd3ef6b4c0d36ea1a3a2da60b333c85a882d97404b2bfd902d09d5c729be1f28"
-    },
-    {
-      "path": "reference/jaxa-data-policy.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 15999,
-      "expectedSha256": "bd4096c907073e9d524ecac5b8d0882d5f9ecbf4de1a53c957f7145886c35bfd"
     },
     {
       "path": "reference/model-352.html",

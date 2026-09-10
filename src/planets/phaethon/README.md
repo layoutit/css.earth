@@ -50,6 +50,10 @@ Its vertices, outward winding and co-rotating frame remain unchanged. Positive Z
 
 The record gives diameter 5.1 km, period 3.603957 h and ecliptic J2000 pole (318°, -47°). The original mesh has measured volume-equivalent radius 2.550000 km and Cartesian extents 5.691 × 5.955 × 4.853 km. The rounded catalog diameter is used as the reference-sphere scale; the original coordinates are not rescaled.
 
+- [Hanuš et al. (2016), Near-Earth asteroid (3200) Phaethon. Characterization of its orbit, spin state, and thermophysical parameters](https://ui.adsabs.harvard.edu/abs/2016A%26A...592A..34H) — selected model publication.
+
+- [Hanuš et al. (2018), (3200) Phaethon: Bulk density from Yarkovsky drift detection](https://ui.adsabs.harvard.edu/abs/2018A&A...620L...8H) — selected model publication.
+
 </details>
 
 <a id="appearance-and-preparation"></a>

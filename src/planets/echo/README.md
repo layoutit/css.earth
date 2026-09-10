@@ -76,7 +76,7 @@ The original co-rotating Cartesian frame is kept: positive Z is the rotation axi
 - [AcuA primary catalog](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) and [Usui et al. (2011)](https://arxiv.org/abs/1106.1948) — thermal diameter, field meanings and limitations.
 - [Hanuš et al. (2018)](https://arxiv.org/abs/1803.06116) — survey of accepted shape-aware size fits; included for Dike, Ducrosa and Petrina.
 - [Broughton’s occultation synthesis](https://www.asteroidoccultation.com/observations/Asteroid_Dimensions_from_Occultations.html) — independent empirical size comparison, not a scale fit to this mesh.
-- [Ďurech et al. (2016) ](https://damit.cuni.cz/projects/damit/references/view/162)
+- [Ďurech et al. (2016), Asteroid models from the Lowell Photometric Database](https://ui.adsabs.harvard.edu/abs/2016A%26A...587A..48D)
 
 The [source manifest](source/manifest.json) records input bytes and the calibration record. Source preparation keeps the established native PolyCSS `u` raster triangles, meshoptimizer reduction and prepared atlas path.
 

@@ -140,12 +140,6 @@
       "expectedSha256": "28cc0f2503119407e86a643200b7073582ba89fbfacc5709b9275b2a33db5beb"
     },
     {
-      "path": "reference/658.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 195843,
-      "expectedSha256": "e881341fb2c665c4be63f24b3746cd78dfba5f558aaca2d3e06ae04c7ecf6e66"
-    },
-    {
       "path": "reference/bundle_description.txt",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 20512,
@@ -162,12 +156,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 1095,
       "expectedSha256": "a713821d1414994e4218a0b3fc8acf7cbafd6d8e117c3443e2c42818aca3bd85"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "85a611ab240d42198406b1f6f1a78abfbdbc011a28ef34ac9d5046b3fe243936"
     },
     {
       "path": "reference/horizons-elements.txt",

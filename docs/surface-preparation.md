@@ -32,6 +32,26 @@ current datasets and retained source history.
 
 ## Decode the source before choosing its display
 
+### Shared source references
+
+These snapshots preserve the format definitions and reuse terms used by multiple
+body packages. Keep one copy here; cite research papers in the body README.
+Native measurements and their restoration recipes remain with each body.
+
+| Snapshot | Origin and purpose | SHA-256 of saved bytes |
+| --- | --- | --- |
+| [DAMIT documentation](../tools/objects/source-references/damit-documentation.html), 40,661 bytes | [Charles University, DAMIT](https://damit.cuni.cz/projects/damit/pages/documentation): mesh units, spin, coordinate frames and file formats. | `d70fe161d8ed5e5079301c51a7c5ad9b14c8b0f15930e2f44e3ee3c7139581c9` |
+| [ISAS data policy](../tools/objects/source-references/isas-data-policy-2018.html), 15,999 bytes | [JAXA/ISAS](https://www.isas.jaxa.jp/en/researchers/data-policy/): terms accompanying AKARI AcuA measurements. | `bd4096c907073e9d524ecac5b8d0882d5f9ecbf4de1a53c957f7145886c35bfd` |
+| [NEOWISE v2 column definitions](../tools/objects/source-references/neowise-v2-columns.html), 18,419 bytes | [NASA/IPAC IRSA](https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html): thermal-fit fields, units and flags. | `86e58305e65ba7c6872acbba10fe821479dcd849085e91885a403ad6e06be4ac` |
+
+The upstream pages can change; these hashes identify the saved copies, not a
+publisher-assigned release. AKARI AcuA v1 is restored through each body's
+acquisition plan and checked against its manifest, so the full catalogue need
+not be committed repeatedly. Its selected measurements and interpretation stay
+in the body package.
+
+### Image and numeric readers
+
 [readObservation](../tools/objects/terrestrial-layers/solid-raster.mts) selects
 the decoder named by the recipe. Ordinary images use Sharp; PDS, FITS, ISIS and
 GeoTIFF observations use format-specific readers that check the expected grid

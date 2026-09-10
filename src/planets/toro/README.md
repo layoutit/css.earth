@@ -43,7 +43,7 @@ Source pole: ecliptic J2000 (71°,-69°). Reference sidereal period: 10.1978 h. 
 
 - [Original numerical mesh](https://damit.cuni.cz/projects/damit/stored_files/open/6127/shape.txt) — selected, pinned unchanged.
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — pole, period, units and archive diameter definitions; CC BY 4.0.
-- [Ďurech et al. (2018)](https://damit.cuni.cz/projects/damit/references/view/172)
+- [Ďurech et al. (2018), YORP and Yarkovsky effects in asteroids (1685) Toro, (2100) Ra-Shalom, (3103) Eger, and (161989) Cacus](https://ui.adsabs.harvard.edu/abs/2018A%26A...609A..86D)
 - [Ďurech et al. (2018), Toro thermophysical scale and YORP](https://arxiv.org/html/1711.05987)
 
 Alternative shapes/poles: None in the checked target listing.

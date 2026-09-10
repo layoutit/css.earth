@@ -43,6 +43,8 @@ The record gives diameter 52 km, period 8.75033 h and ecliptic J2000 pole (138°
 
 The selected model is explicitly marked preferred by DAMIT. Its alternative pole is preserved in the catalog survey but is not mixed with the chosen mesh and spin record.
 
+- [Ďurech et al. (2011), Combining asteroid models derived by lightcurve inversion with asteroidal occultation silhouettes](https://ui.adsabs.harvard.edu/abs/2011Icar..214..652D) — selected model publication.
+
 </details>
 
 <a id="appearance-and-preparation"></a>

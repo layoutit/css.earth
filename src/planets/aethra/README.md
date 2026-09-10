@@ -41,8 +41,8 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
 - [AKARI AcuA catalog](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) and [Usui et al. (2011)](https://arxiv.org/abs/1106.1948) — retained original catalog and field definitions. Row number 132, 5 detections. The quoted error is the catalog thermal-model error, not total shape-scale uncertainty.
 - [JPL SBDB](https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=132) — retained independent MCA population classification, checked 2026-09-09.
-- [J. Ďurech et al. (2009)](https://damit.cuni.cz/projects/damit/references/view/123) — original model publication record.
-- [Hanuš (2011)](https://damit.cuni.cz/projects/damit/references/view/141) — original model publication record.
+- [J. Ďurech et al. (2009), Asteroid models from combined sparse and dense photometric data](https://ui.adsabs.harvard.edu/abs/2009A%26A...493..291A) — original model publication record.
+- [Hanuš (2011), A study of asteroid pole-latitude distribution based on an extended set of shape models derived by the lightcurve inversion method](https://ui.adsabs.harvard.edu/abs/2011A%26A...530A.134H) — original model publication record.
 
 
 JPL SBDB class MCA confirms this body is a Mars-crosser. The original convex lightcurve inversion is not resolved terrain. Only the checked listed source model is used.

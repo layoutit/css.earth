@@ -1047,7 +1047,8 @@
       "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
       "consumers": [
         "enso"
-      ]
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors"
     }
   ],
   "documents": [
@@ -1091,7 +1092,8 @@
       "path": "interior/earth-interior.json",
       "expectedSha256": "26c32ab22618b14d98c582dcf2e924e5a52d20f8715447a6bd1a60475d7d1c4a",
       "expectedBytes": 1106,
-      "purpose": "Source-qualified schematic Earth interior presentation specification"
+      "purpose": "Source-qualified schematic Earth interior presentation specification",
+      "kind": "authored-document"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -1206,7 +1208,8 @@
       "path": "science/night-lights-2025/provenance.json",
       "expectedSha256": "e6a1704233f77c3721264de924a5b6e14a291ef78fd4d52db034a89ad32fc5a0",
       "expectedBytes": 3060,
-      "purpose": "Actual 2025 public Black Marble archive identity, GeoTIFF metadata, native numerical anchors, display transfer and coverage/QA limitations."
+      "purpose": "Actual 2025 public Black Marble archive identity, GeoTIFF metadata, native numerical anchors, display transfer and coverage/QA limitations.",
+      "kind": "authored-document"
     }
   ]
 }

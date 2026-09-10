@@ -134,12 +134,6 @@
       "expectedSha256": "b6768e9005cea5568ba0e7bff8e938c983419c592eeca3465e68ac44c8fc5d87"
     },
     {
-      "path": "reference/665.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 762402,
-      "expectedSha256": "05dac500e28880be5b339bcebb4d9d72bc5e0e30a52ea5f8f68d39ad6a040bd7"
-    },
-    {
       "path": "reference/calibration.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 3238,
@@ -150,12 +144,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 1506,
       "expectedSha256": "095575257169f2c7fa1cdb5a40e2811d13febe2db87f7b727730ec8145279586"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "b057eb24b9cc831043904a10c596e9f28d554a79748baecd32ef76b245e873af"
     },
     {
       "path": "reference/horizons-elements.txt",
@@ -192,12 +180,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 5236,
       "expectedSha256": "5b49f4c1deb8f658ea9008abf0b31ee3a69dac6e4482a4294df1c77a06813fce"
-    },
-    {
-      "path": "reference/neowise-definition.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 18419,
-      "expectedSha256": "86e58305e65ba7c6872acbba10fe821479dcd849085e91885a403ad6e06be4ac"
     },
     {
       "path": "reference/neowise.csv",

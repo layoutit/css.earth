@@ -140,12 +140,6 @@
       "expectedSha256": "8e7c7417786c48e675a9e05e800c79e68d690f10ee8daf168fb0fbb397169754"
     },
     {
-      "path": "reference/662.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 28594,
-      "expectedSha256": "600d3a24640d2c950a8717b13b0a354b5229413445b5cbf36864ba6c2fe54cc9"
-    },
-    {
       "path": "reference/bundle_description.txt",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 20512,
@@ -162,12 +156,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 1319,
       "expectedSha256": "713b423fb8fa83c1bf50108fdba6f8f6b4c8063649d36b7fe554327f56f96187"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "85a611ab240d42198406b1f6f1a78abfbdbc011a28ef34ac9d5046b3fe243936"
     },
     {
       "path": "reference/hanus-2021-asassn.pdf",

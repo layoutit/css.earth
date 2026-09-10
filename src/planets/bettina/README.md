@@ -51,7 +51,7 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 
 - [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/1850) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/528/shape.txt) — included unchanged. Nonconvex ADAM shape constrained by resolved AO imaging and light curves; fine relief is unresolved.
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
-- [Viikinkoski et al. (2017)](https://damit.cuni.cz/projects/damit/references/view/171) — original model publication record.
+- [Viikinkoski et al. (2017), Adaptive optics and lightcurve data of asteroids: twenty shape models and information content analysis](https://ui.adsabs.harvard.edu/abs/2017A%26A...607A.117V) — original model publication record.
 - [AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — retained for comparison; the documented physical calibration supplies the selected scale. Its fitted nonrotating-sphere diameter is 109.37 ± 1.48 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.
 - [Viikinkoski et al. (2017), A&A 607, A117](https://arxiv.org/pdf/1708.05191) — retained primary publication; see the body-specific selection and calibration above.
 

@@ -89,6 +89,10 @@ that the dataset does not exist. Respect explicit user exclusions and scope.
 Stop once the promising candidates have a disposition; do not build an exhaustive
 catalog or repeat this survey for an unrelated repair.
 
+Use the contract's [reference retention rules](../../../docs/provenance/CONTRACT.md#references-and-retained-files)
+to distinguish citations, executable inputs and necessary snapshots. A research
+download does not automatically belong in the body package.
+
 Record the following for selected inputs in the existing source record and
 manifest:
 

@@ -43,6 +43,10 @@ The record gives diameter 94 km, period 13.62523 h and ecliptic J2000 pole (139�
 
 This is a convex light-curve reconstruction at a calibrated size. It cannot establish craters, concavities or fine topography; Elevation only restates the radius of this same convex model.
 
+- [Kaasalainen et al. (2002), Models of twenty asteroids from photometric data](https://ui.adsabs.harvard.edu/abs/2002Icar..159..369K) — selected model publication.
+
+- [Marchis et al. (2006), Shape, size and multiplicity of main-belt asteroids. I. Keck Adaptive Optics survey](https://ui.adsabs.harvard.edu/abs/2006Icar..185...39M) — selected model publication.
+
 </details>
 
 <a id="appearance-and-preparation"></a>

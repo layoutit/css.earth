@@ -45,8 +45,8 @@ Source pole: ecliptic J2000 (334°,39°). Reference sidereal period: 4.79517 h. 
 
 - [Original numerical mesh](https://damit.cuni.cz/projects/damit/stored_files/open/913/shape.txt) — selected, pinned unchanged.
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — pole, period, units and archive diameter definitions; CC BY 4.0.
-- [Hanuš et al. (2015)](https://damit.cuni.cz/projects/damit/references/view/163)
-- [Kaasalainen et al. (2004)](https://damit.cuni.cz/projects/damit/references/view/107)
+- [Hanuš et al. (2015), Thermophysical modeling of asteroids from WISE thermal infrared data - Significance of the shape model and the pole orientation uncertainties](https://ui.adsabs.harvard.edu/abs/2015Icar..256..101H)
+- [Kaasalainen et al. (2004), Photometry and models of eight near-Earth asteroids](https://ui.adsabs.harvard.edu/abs/2004Icar..167..178K)
 - [Hanuš et al. (2015), thermophysical fits with shape and pole uncertainty](https://arxiv.org/html/1504.04199)
 
 Alternative shapes/poles: [model 272](https://damit.cuni.cz/projects/damit/asteroid_models/view/272), pole ['336', '39']

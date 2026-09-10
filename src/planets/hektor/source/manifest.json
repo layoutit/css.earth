@@ -138,12 +138,6 @@
       "expectedSha256": "e2b08ef819c6d78e1d3271b03c878f64f7aa4f5a73947794e146e341ce7e6353"
     },
     {
-      "path": "reference/damit-documentation.html",
-      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "db492ddc44b5d537ace468dd7937dd4f430d9d54a7ebd9fcd3ff615053c99237"
-    },
-    {
       "path": "reference/damit-model.html",
       "purpose": "Pinned original model record, source documentation, or authored preparation input.",
       "expectedBytes": 127213,
@@ -154,18 +148,6 @@
       "purpose": "Pinned original model record, source documentation, or authored preparation input.",
       "expectedBytes": 1355,
       "expectedSha256": "33bec94d142c7a61a24e6155a856c42453da4cdcfcfb9700cd0d95b160e9dd84"
-    },
-    {
-      "path": "reference/damit-reference-104.html",
-      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
-      "expectedBytes": 13298,
-      "expectedSha256": "7a8d839670914d596c6ff0f2c242e7ddf46c962163b7ce960851e217d4c05130"
-    },
-    {
-      "path": "reference/damit-reference-163.html",
-      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
-      "expectedBytes": 13367,
-      "expectedSha256": "98e6df703aa719544a8627c7d8e63088a3455dc02ce44cd2c619e08ca5b5d196"
     },
     {
       "path": "reference/horizons-elements.txt",

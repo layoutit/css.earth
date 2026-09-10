@@ -134,12 +134,6 @@
       "expectedSha256": "e76f046559e90dc659b993e32f80056ce0763338c369226942e5233a947de1ee"
     },
     {
-      "path": "reference/662.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 28594,
-      "expectedSha256": "e70a2b8a20f703bb643cfbeabef04cc1fa9e3ff95e1d30f020ec45d8dfacb15d"
-    },
-    {
       "path": "reference/ali-lagoa-delbo-2017.pdf",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 403097,
@@ -156,12 +150,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 1809,
       "expectedSha256": "406ffa640bb34f5588dee0566106b7758d5a58931d6ada6fa685f20a3cafef68"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "b057eb24b9cc831043904a10c596e9f28d554a79748baecd32ef76b245e873af"
     },
     {
       "path": "reference/horizons-elements.txt",

@@ -4,7 +4,7 @@
 
 ## Sources
 
-The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original 1994CC_nominal.mod.wf](https://echo.jpl.nasa.gov/asteroids/shapes/1994CC_nominal.mod.wf). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/1994CC/brozovic.etal.2011.1994cc.pdf): Brozović et al. (2011), Icarus 216, 241–256; Goldstone, Arecibo and NASA/JPL. The paper, original OBJ and public index are pinned beside the recipe.
+The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original 1994CC_nominal.mod.wf](https://echo.jpl.nasa.gov/asteroids/shapes/1994CC_nominal.mod.wf). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/1994CC/brozovic.etal.2011.1994cc.pdf): Brozović et al. (2011), Icarus 216, 241–256; Goldstone, Arecibo and NASA/JPL. The paper and original geometry are pinned beside the recipe.
 
 Shape uses the shared missing-imagery grid. Elevation shows original model radius minus the 0.31 km sphere, from -0.03 to 0.04 km. This is another view of the same radar reconstruction, not independent topography or height above a gravitational equipotential. Cartographic relief and lighting are display treatments.
 

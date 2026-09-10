@@ -140,12 +140,6 @@
       "expectedSha256": "1ad012a1b4b859813e7b854546cb8c2a0858981d84a88f59665d7e216a506842"
     },
     {
-      "path": "reference/161.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 34300,
-      "expectedSha256": "0b2233afe2861b33a0d7c505674530246eb124b1152347e3748ec3be468281cd"
-    },
-    {
       "path": "reference/calibration.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 1481,
@@ -156,12 +150,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 1862,
       "expectedSha256": "7d107e395828e7d183fef5f8994100d80fe9c0f89d2e59cbb37c31a5afdb7dc9"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "d70fe161d8ed5e5079301c51a7c5ad9b14c8b0f15930e2f44e3ee3c7139581c9"
     },
     {
       "path": "reference/hanus-2018.pdf",

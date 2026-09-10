@@ -41,6 +41,10 @@ Its vertices, outward winding and co-rotating frame remain unchanged. Positive Z
 
 The record gives diameter 200 km, period 5.550877 h and ecliptic J2000 pole (3°, 15°). The original mesh has measured volume-equivalent radius 100.135902 km and Cartesian extents 271.486 × 224.438 × 148.524 km. The rounded catalog diameter is used as the reference-sphere scale; the original coordinates are not rescaled.
 
+- [P. Descamps et al. (2009), New insights on the binary asteroid 121 Hermione](https://ui.adsabs.harvard.edu/abs/2009Icar..203...88D) — selected model publication.
+
+- [Viikinkoski et al. (2017), Adaptive optics and lightcurve data of asteroids: twenty shape models and information content analysis](https://ui.adsabs.harvard.edu/abs/2017A%26A...607A.117V) — selected model publication.
+
 </details>
 
 <a id="appearance-and-preparation"></a>

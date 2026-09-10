@@ -100,8 +100,8 @@
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 944,
-      "expectedSha256": "eda68e624bc2348d15149aa060d151550a48ac7f550e68463e02912fea715935"
+      "expectedBytes": 1197,
+      "expectedSha256": "352bee92f14221705553b339c07053125d3c7b1f0ea6958d9bfc7b0dda9ca8d7"
     },
     {
       "path": "preparation/navigation.json",
@@ -134,12 +134,6 @@
       "expectedSha256": "6c5c86600dc6faa4ce611129e0bb9af968d8b3cf5298367b6eeb35ccaa36a94b"
     },
     {
-      "path": "reference/182.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 13337,
-      "expectedSha256": "82b13b9baec43967515eba1f745cbfecf906907d19f9efe6b145c0cd7b03e9aa"
-    },
-    {
       "path": "reference/3298-IAUspin.txt",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 34,
@@ -164,12 +158,6 @@
       "expectedSha256": "d3f7cfb7472279790a1e5c067f5fb8f5a840c6b4964fcc3f93eced4937d0d6a8"
     },
     {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "d70fe161d8ed5e5079301c51a7c5ad9b14c8b0f15930e2f44e3ee3c7139581c9"
-    },
-    {
       "path": "reference/horizons-elements.txt",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 7353,
@@ -186,12 +174,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 6643,
       "expectedSha256": "523a457b7ae7e543e4160c67909c846ba5d844658b172d6894133399738bd976"
-    },
-    {
-      "path": "reference/jaxa-data-policy.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 15999,
-      "expectedSha256": "bd4096c907073e9d524ecac5b8d0882d5f9ecbf4de1a53c957f7145886c35bfd"
     },
     {
       "path": "reference/model-3298.html",

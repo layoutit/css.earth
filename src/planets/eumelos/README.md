@@ -40,9 +40,9 @@ Original +Z spin axis and +X reference meridian are retained. The selected eclip
 
 The [original mesh](https://damit.cuni.cz/projects/damit/stored_files/open/12274/shape.txt) is retained without changing its coordinates or connectivity. [DAMIT documentation](https://damit.cuni.cz/pages/documentation) supplies the coordinate units, pole and sidereal-period conventions; its CC BY 4.0 terms and other credits are linked from [NOTICE.md](NOTICE.md).
 
-Disk-integrated colors do not constrain a regolith map. The selected original Gr12b catalog row marks diameter as fitted (`D` in `FIT_CODE`). The CSV row, original query and column definitions are pinned in [the source manifest](source/manifest.json).
+Disk-integrated colors do not constrain a regolith map. The selected original Gr12b catalog row marks diameter as fitted (`D` in `FIT_CODE`). The CSV row and original query are pinned in [the source manifest](source/manifest.json); [column definitions](../../../tools/objects/source-references/neowise-v2-columns.html) are shared.
 
-[Hanuš et al. (2023), Table B.3](https://arxiv.org/abs/2308.05380) — adopts this existing DAMIT shape/spin solution. No replacement mesh is required by that survey.
+Hanuš et al. (2023), [*Shape models and spin states of Jupiter Trojans: Testing the streaming instability formation scenario*](https://arxiv.org/abs/2308.05380v1), Table B.3 — adopts this existing DAMIT shape/spin solution. No replacement mesh is required by that survey.
 
 Alternative archive solution: [model 3921](https://damit.cuni.cz/projects/damit/asteroid_models/view/3921), ecliptic pole (96°, 11°).
 
@@ -51,5 +51,9 @@ Alternative archive solution: [model 3921](https://damit.cuni.cz/projects/damit/
 The [terrestrial recipe](source/preparation/terrestrial.json) reads the original mesh through `source-meshoptimizer` and targets at most 800 native PolyCSS `u` raster triangles with 128 px raster cells. Its error allowance is 376.96 m. Sampled source-fit distances measure preparation error separately from source accuracy; they are not exhaustive Hausdorff bounds.
 
 Shadows and asteroid orbit visibility are off by default. The [family report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trojan-population.md#preparation-and-validation) records source/result comparisons, numerical checks, runtime cases and delivery. [Orbit fixtures](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/trojan-population/orbit-errors.json) sample the epoch and ±30 days; they do not bound the whole interval or establish long-term accuracy.
+
+[Grav et al. (2012), WISE/NEOWISE Observations of the Jovian Trojan Population: Taxonomy](https://arxiv.org/abs/1209.1549).
+
+[Ďurech et al. (2019), Inversion of asteroid photometry from Gaia DR2 and the Lowell Observatory photometric database](https://ui.adsabs.harvard.edu/abs/2019A&A...631A...2D).
 
 </details>

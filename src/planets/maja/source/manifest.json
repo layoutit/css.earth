@@ -100,8 +100,8 @@
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 943,
-      "expectedSha256": "e713cbd07b95f413cbc274afad8d4615d57f47ac22eccbe34eb82382b8d687ca"
+      "expectedBytes": 1196,
+      "expectedSha256": "ef5933b3507620dee5f961e52461fa779ea76999ebbeb5ba9aa5ccc1cde4e13b"
     },
     {
       "path": "preparation/navigation.json",
@@ -140,12 +140,6 @@
       "expectedSha256": "b3839f9495ee7d86becba7b34fbd33b7495de133adfe04b38daf731727bfdb4b"
     },
     {
-      "path": "reference/161.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 34300,
-      "expectedSha256": "0b2233afe2861b33a0d7c505674530246eb124b1152347e3748ec3be468281cd"
-    },
-    {
       "path": "reference/AcuA_V1.txt.gz",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 120256,
@@ -164,12 +158,6 @@
       "expectedSha256": "8f2bf1d047d1a9f1db41549d4bf4747ec8c9988b3b6f57a8c6722f7bfce2c7f1"
     },
     {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "d70fe161d8ed5e5079301c51a7c5ad9b14c8b0f15930e2f44e3ee3c7139581c9"
-    },
-    {
       "path": "reference/horizons-elements.txt",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 7352,
@@ -186,12 +174,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 6642,
       "expectedSha256": "77fa7744800c856dd79cb4448fca2c32625176627e2a59522095c85518d29984"
-    },
-    {
-      "path": "reference/jaxa-data-policy.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 15999,
-      "expectedSha256": "bd4096c907073e9d524ecac5b8d0882d5f9ecbf4de1a53c957f7145886c35bfd"
     },
     {
       "path": "reference/model-1233.html",

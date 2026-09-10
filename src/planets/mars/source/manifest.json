@@ -372,7 +372,8 @@
       "path": "preparation/ellipsoid.json",
       "expectedBytes": 622,
       "expectedSha256": "a21e86fe560a46396cea1568b44a757be8b258b9ef40277b5261ef11c380d768",
-      "purpose": "Authored source-informed capability preparation recipe."
+      "purpose": "Authored source-informed capability preparation recipe.",
+      "kind": "authored-document"
     },
     {
       "path": "stars/LICENSE.md",
@@ -396,7 +397,8 @@
       "path": "preparation/atmosphere.json",
       "expectedBytes": 918,
       "expectedSha256": "672ce4a68c97c9d005f3721aad971b8e0b2bdb24eca1d6d863e14ed08bf41acb",
-      "purpose": "Authored source-informed capability preparation recipe."
+      "purpose": "Authored source-informed capability preparation recipe.",
+      "kind": "authored-document"
     },
     {
       "path": "content/object.json",

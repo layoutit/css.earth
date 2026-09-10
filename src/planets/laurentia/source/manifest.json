@@ -99,8 +99,8 @@
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 2348,
-      "expectedSha256": "8ba4febe9fae79c867392029d832c297dc95c4a79fe107d4d63ffa820e40aa47"
+      "expectedBytes": 1906,
+      "expectedSha256": "42e0da9514719446c8552ee957173c10e49cb84b9232b18dad3c9fc1fbfb0f1d"
     },
     {
       "path": "preparation/navigation.json",
@@ -159,14 +159,8 @@
     {
       "path": "reference/damit-model.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 12642,
-      "expectedSha256": "198ab888e567db072f9cf536702b705e8ea92f33c473d185d22c2d90d3f8e8ed"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "d70fe161d8ed5e5079301c51a7c5ad9b14c8b0f15930e2f44e3ee3c7139581c9"
+      "expectedBytes": 12755,
+      "expectedSha256": "6b9e2030cecb033da57ba879e04cc2d0071b10143509c178ec7df56e61952894"
     },
     {
       "path": "reference/hanus-2011.pdf",
@@ -187,12 +181,6 @@
       "expectedSha256": "44ed9a53f973699c9f45b10b998a9e380cad9bf243dc89c08bafc97ddd869e5d"
     },
     {
-      "path": "reference/jaxa-data-policy.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 15999,
-      "expectedSha256": "bd4096c907073e9d524ecac5b8d0882d5f9ecbf4de1a53c957f7145886c35bfd"
-    },
-    {
       "path": "reference/model-325.html",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 122438,
@@ -203,12 +191,6 @@
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 4945,
       "expectedSha256": "f80ebcb633766ff419f2bcb3c6e847654762a4d72e934240ee14ae0083db3bb9"
-    },
-    {
-      "path": "reference/reference-141.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 14032,
-      "expectedSha256": "adaf21c16d55dd5faede94ac8fe1624893df0d540ee642f7fadff2b320728467"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",

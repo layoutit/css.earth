@@ -99,8 +99,8 @@
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 2578,
-      "expectedSha256": "f87d8f04d8873e6c1befb1a85bc353c87dc7eb868473c51ce8c8e49a390b997d"
+      "expectedBytes": 1916,
+      "expectedSha256": "661bc86be11d1b1631179b20a3a0dfc36632e18ce6fcefa6f7bf3f291da9227d"
     },
     {
       "path": "preparation/navigation.json",
@@ -159,14 +159,8 @@
     {
       "path": "reference/damit-model.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 6693,
-      "expectedSha256": "ee29dc6cb3efc3ec803c70ef7048f68dbd0c9edd96f6e7f982e042068daf894a"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "d70fe161d8ed5e5079301c51a7c5ad9b14c8b0f15930e2f44e3ee3c7139581c9"
+      "expectedBytes": 6814,
+      "expectedSha256": "eb6d1c097af09db7e05b45694fd0b659153fc7fd5cd63ad3b76c2027e96e3a22"
     },
     {
       "path": "reference/horizons-elements.txt",
@@ -181,12 +175,6 @@
       "expectedSha256": "85aa3d35baac051d0621917da446890ff604710c80a831659ec5d38bd7416a92"
     },
     {
-      "path": "reference/jaxa-data-policy.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 15999,
-      "expectedSha256": "bd4096c907073e9d524ecac5b8d0882d5f9ecbf4de1a53c957f7145886c35bfd"
-    },
-    {
       "path": "reference/model-490.html",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 122644,
@@ -197,12 +185,6 @@
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 3568,
       "expectedSha256": "8e412d19bb4217316ef442f0c9a7c40d71cd5d4467f57d298e482e4bb33f537e"
-    },
-    {
-      "path": "reference/reference-148.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 94842,
-      "expectedSha256": "fcfee6e55efa67d647d46270a2a4624de2c98530b78282f5e47522435a32b162"
     },
     {
       "path": "reference/sbdb.json",

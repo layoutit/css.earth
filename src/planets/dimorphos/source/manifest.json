@@ -235,10 +235,15 @@
     },
     {
       "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
-      "purpose": "Exact reviewed B2 source candidate; only selected recipe fields become display layers.",
+      "purpose": "Native label identifying the slope FITS table, field units and model interpretation.",
       "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
       "expectedBytes": 7093,
-      "expectedSha256": "a8878f757d6fdced9a914db22b90ae7be18080e17113e42d6c6427e78c5de297"
+      "expectedSha256": "a8878f757d6fdced9a914db22b90ae7be18080e17113e42d6c6427e78c5de297",
+      "kind": "source-document",
+      "title": "Dimorphos global slope relative to gravity, model v004 — PDS4 label",
+      "credit": "NASA/Johns Hopkins APL/DART; ASI/LICIACube; DART shape-model team",
+      "acquisition": "Unmodified PDS4 product label; restored through source/preparation/acquisition.json.",
+      "productId": "urn:nasa:pds:dart_shapemodel:data_derived_dimorphos_model_v004:dimorphos_g_0972mm_spc_slp_0000n00000_v004::1.0"
     }
   ]
 }

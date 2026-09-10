@@ -99,8 +99,8 @@
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 2872,
-      "expectedSha256": "eed9cf3faef10e9bcf2e6d6c65ebbfbae496634b91ce4e873ecf474ab4ad0c5e"
+      "expectedBytes": 2430,
+      "expectedSha256": "073fa301e23d07d1a25890d8254c19a06bc494b31a4a535e377fb38717fddcc5"
     },
     {
       "path": "preparation/navigation.json",
@@ -159,14 +159,8 @@
     {
       "path": "reference/damit-model.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 16429,
-      "expectedSha256": "176cabb385a8d75d544baabe137566cf46202870e1f7676acc7c498b4988d620"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "d70fe161d8ed5e5079301c51a7c5ad9b14c8b0f15930e2f44e3ee3c7139581c9"
+      "expectedBytes": 16497,
+      "expectedSha256": "d8cb5f14f80665bbf59541d42c64a8f209e793535c0ba9e5dd0a68cb6f372efd"
     },
     {
       "path": "reference/horizons-elements.txt",
@@ -183,20 +177,14 @@
     {
       "path": "reference/isam-model.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 14076,
-      "expectedSha256": "72e0e87dee85e484c4801f10f3877c07401109cf2162f64fe1bc3eb363dd0af3"
+      "expectedBytes": 14144,
+      "expectedSha256": "6dc1cb7cc74af5e11adfb91ad473377441669b79e27ed88741be7dad959c5ae1"
     },
     {
       "path": "reference/isam-models.html",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 4672,
       "expectedSha256": "db889146d306a2b6012654d0b5e9368b55b1e10811d69f77c842691aec379150"
-    },
-    {
-      "path": "reference/jaxa-data-policy.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 15999,
-      "expectedSha256": "bd4096c907073e9d524ecac5b8d0882d5f9ecbf4de1a53c957f7145886c35bfd"
     },
     {
       "path": "reference/marciniak-2018-published.pdf",
@@ -215,12 +203,6 @@
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 5498,
       "expectedSha256": "1e32632469a613a283c6c69d6192fb3bb393aa3fc09f25c76c16b789167a03f9"
-    },
-    {
-      "path": "reference/reference-174.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 36636,
-      "expectedSha256": "def76b8e6c64b6fb2d32797a377dcf9dda53ecc2243b53f638c7ed8cdf69b6ee"
     },
     {
       "path": "shape/model-1869.txt",

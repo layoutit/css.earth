@@ -140,12 +140,6 @@
       "expectedSha256": "32f125229a98db50c8506c651255f7016b762dccbbfe47ca9622d20336295602"
     },
     {
-      "path": "reference/161.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 34300,
-      "expectedSha256": "876de4c57ed4ab106ddd802236bc4191b7eccb65c0e95f10c34cdb462ba63715"
-    },
-    {
       "path": "reference/calibration.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 1767,
@@ -156,12 +150,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 1108,
       "expectedSha256": "36de943880546bd88942dc216a7adb33de6404465013cbbfbf45a75ba8420a00"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "85a611ab240d42198406b1f6f1a78abfbdbc011a28ef34ac9d5046b3fe243936"
     },
     {
       "path": "reference/horizons-elements.txt",

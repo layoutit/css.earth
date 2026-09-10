@@ -159,14 +159,8 @@
     {
       "path": "reference/damit-model.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 5273,
-      "expectedSha256": "5ef72b651393b285b789c98969fd709ff746b637ce629e00d8aac8c67ab984ac"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "d70fe161d8ed5e5079301c51a7c5ad9b14c8b0f15930e2f44e3ee3c7139581c9"
+      "expectedBytes": 5361,
+      "expectedSha256": "25ce36c63be6f098b67f009cb8e6e38dcb36cb7b82a163f01b1c599a49779737"
     },
     {
       "path": "reference/horizons-elements.txt",
@@ -181,12 +175,6 @@
       "expectedSha256": "2bd688593ef86a7d6abbb5098ac383151a89d7e147c88c20ac60568479d2fe5d"
     },
     {
-      "path": "reference/jaxa-data-policy.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 15999,
-      "expectedSha256": "bd4096c907073e9d524ecac5b8d0882d5f9ecbf4de1a53c957f7145886c35bfd"
-    },
-    {
       "path": "reference/model-823.html",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 124613,
@@ -197,12 +185,6 @@
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 4561,
       "expectedSha256": "ee6f91430ced41358e9e243d51acba07307280dfad1d318071e80bcda61290b3"
-    },
-    {
-      "path": "reference/reference-161.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 34300,
-      "expectedSha256": "29874abbca484d8cc47276e7f9819db1f6f8c0e2a30a48f20fa42ea91d4b34bc"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",

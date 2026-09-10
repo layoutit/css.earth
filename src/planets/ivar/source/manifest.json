@@ -99,8 +99,8 @@
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 2062,
-      "expectedSha256": "5cf48c5185880bf5541e8177c796743b21e229f35a13de135c14d2afb4d29278"
+      "expectedBytes": 1399,
+      "expectedSha256": "f268467fb96c3289c96bc8350477ec9ed4e32f23011ff25b9db908ce87acf9fe"
     },
     {
       "path": "preparation/navigation.json",
@@ -147,14 +147,8 @@
     {
       "path": "reference/damit-model.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 7651,
-      "expectedSha256": "410f73338d912ac824e0fafef212216bede35ca97554d1d0f74b3b6c334e6709"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "d70fe161d8ed5e5079301c51a7c5ad9b14c8b0f15930e2f44e3ee3c7139581c9"
+      "expectedBytes": 7653,
+      "expectedSha256": "87f4568426a7ee0ecc271c9b07bb11f7d7f05f1cf35f88e60fbd755d7fb4c1f0"
     },
     {
       "path": "reference/hanus-2015.html",
@@ -185,18 +179,6 @@
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 3981,
       "expectedSha256": "11f5f974dc79a0f5f3137ece2b68e06bc4dceef38001440c3046b63dc90fb04e"
-    },
-    {
-      "path": "reference/reference-107.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 22123,
-      "expectedSha256": "22327f4402da7499f48c97675d6467875bbd9b7763ecc66e8bb20cd3152693ca"
-    },
-    {
-      "path": "reference/reference-163.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 13367,
-      "expectedSha256": "b9ab47803c760fb255cce7fb3e4ea6714c2c42ec017e1a4f61bd1c126db549cd"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
