@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "arrokoth",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9eb903a779248167283e4134c9faa4193fd4e1c4e014934cf4ea57ead4368039"
+    "sha256": "6c1231279fd42e122e113b760ff7e49bf99f9521d6cdf0d2d1d9e8e49ed59316"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7a05d1f3799ab6bcc918c5414baa7e49944767c2be3ce22d884c842ec0617220",
+      "sha256": "9d5a1b93583f30ac2384bde0c234e7beebf2a55a95a3fd2b8238e467801bc4e4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -95,8 +95,8 @@
           "radius": 230,
           "radiusKm": 9.948,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
+            "initialScenePitchDegrees": -20,
+            "defaultControlYawDegrees": 135,
             "framingScale": 0.5105107661972121
           },
           "mapUrl": "/scenes/arrokoth/arrokoth-model-surface@2x.webp",
@@ -124,7 +124,7 @@
           "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim."
         },
         "presentation": {
-          "defaultLens": "model",
+          "defaultLens": "albedo",
           "pointColor": [
             160,
             160,
@@ -137,14 +137,14 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e67c96c34f4bfd9f028373128ff05a3350e751c4bdb76932e35572e44207f6ef",
+      "sha256": "ab8dcf2f950402c597b09a937a84ace1057dce7ced99726e1035f473eac81fca",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "arrokoth",
         "displayName": "Arrokoth",
         "panel": {
-          "introduction": "New Horizons explored this cold-classical Kuiper-belt contact binary in 2019. The released shape preserves both lobes; the unseen northern surface is modeled.",
+          "introduction": "New Horizons photographed Arrokoth during its 2019 flyby. The opening view shows the spacecraft-derived albedo model on the imaged hemisphere. The unseen northern surface is modeled.",
           "facts": [
             {
               "id": "shape",
@@ -182,33 +182,18 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "model",
+          "defaultLens": "albedo",
           "labels": {
             "model": "Shape model",
             "albedo": "Modeled albedo"
           },
           "controls": [
             {
-              "id": "model",
-              "label": "Shape model",
-              "description": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim. The grid marks unmapped terrain.",
-              "title": "Published New Horizons shape",
-              "detail": "Source shape · unmapped surface grid",
-              "thumbnail": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
-              "surface": "arrokoth-model-surface@2x.webp",
-              "poles": "arrokoth-model-poles@2x.webp",
-              "source": {
-                "id": "published-shape",
-                "path": "../manifest.json",
-                "url": "https://doi.org/10.26007/97r3-1e19"
-              }
-            },
-            {
               "id": "albedo",
               "label": "Modeled albedo",
-              "description": "Published LORRI albedo fit in the released per-lobe OBJ UV mapping, shown with a grayscale stretch. The source retains a uniform baseline where imagery is unconstrained and supplies no observation-coverage mask; uniform areas must not be interpreted as measured albedo. This is a model map, not a global photograph.",
-              "title": "New Horizons fitted albedo with uniform unconstrained-source fill",
-              "detail": "Fitted scalar · includes source fill",
+              "description": "Fitted from 30 New Horizons approach observations on 31 December 2018 and 1 January 2019. Grayscale shows the released albedo values. Uniform areas are unconstrained model fill; the archive supplies no coverage mask. This is a fitted surface model, not a global photograph.",
+              "title": "New Horizons LORRI albedo model",
+              "detail": "LORRI · model",
               "thumbnail": "/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
               "surface": "arrokoth-albedo-surface@2x.webp",
               "poles": "arrokoth-albedo-poles@2x.webp",
@@ -225,13 +210,28 @@
                   "0.055",
                   "0.08"
                 ],
-                "meta": "Fitted albedo fraction · includes unconstrained source fill",
+                "meta": "Fitted fraction",
                 "sourceUrl": "https://doi.org/10.26007/97r3-1e19",
                 "title": "Modeled albedo",
                 "width": 256,
                 "height": 16
               },
               "falseColor": true
+            },
+            {
+              "id": "model",
+              "label": "Shape model",
+              "description": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim. The grid marks unmapped terrain.",
+              "title": "Published New Horizons shape",
+              "detail": "Source shape · unmapped surface grid",
+              "thumbnail": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
+              "surface": "arrokoth-model-surface@2x.webp",
+              "poles": "arrokoth-model-poles@2x.webp",
+              "source": {
+                "id": "published-shape",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.26007/97r3-1e19"
+              }
             }
           ]
         },
@@ -319,7 +319,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -344,7 +344,7 @@
       "sha256": "be05f22df9c985d4bcaa87d2b62a761c100aa02750433d3cf03dc0c5f529f3b5",
       "bytes": 3686921,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -378,7 +378,7 @@
       "sha256": "013c84b1ae333bff506527b4b1b60e3a8f1b619c6e287774b4939ccdb5a7cc39",
       "bytes": 2882880,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -403,7 +403,7 @@
       "sha256": "e752e5dd5eac25d65ccfe07b31cad02a4f47d158f80d4e14e12e17ef99e54af4",
       "bytes": 9529,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -425,10 +425,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e67c96c34f4bfd9f028373128ff05a3350e751c4bdb76932e35572e44207f6ef",
-      "bytes": 5582,
+      "sha256": "ab8dcf2f950402c597b09a937a84ace1057dce7ced99726e1035f473eac81fca",
+      "bytes": 5463,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -466,13 +466,13 @@
           "url": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-model-surface@2x.webp",
           "bytes": 119308,
           "sha256": "a0af64184a552756e7d6ad7253097dd4a28dd062eb1fd0d2e11970e9a8d0f89c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -485,7 +485,7 @@
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
       "limitations": [
-        "Published LORRI albedo fit in the released per-lobe OBJ UV mapping, shown with a grayscale stretch. The source retains a uniform baseline where imagery is unconstrained and supplies no observation-coverage mask; uniform areas must not be interpreted as measured albedo. This is a model map, not a global photograph."
+        "Fitted from 30 New Horizons approach observations on 31 December 2018 and 1 January 2019. Grayscale shows the released albedo values. Uniform areas are unconstrained model fill; the archive supplies no coverage mask. This is a fitted surface model, not a global photograph."
       ],
       "lensIds": [
         "albedo"
@@ -506,19 +506,19 @@
           "url": "/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
           "bytes": 610,
           "sha256": "2e76824260e49b39725dafcdac028554d3825c160a4ae09320e26c90fff2339c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-albedo-legend.webp",
           "bytes": 58,
           "sha256": "aebcd74e76dd366669037255627ca7184e2a3c179dfde7e02b2055b248fbc845",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-albedo-surface@2x.webp",
           "bytes": 589518,
           "sha256": "f340d47302960824a87b15095a0be5f1614c74d26517d666235731d230fe72b0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -541,8 +541,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5545,
-          "sha256": "d0f6e90258a9e97848ef52dbaf79d8b57accac15011a08e7aa211f27e7768d34",
+          "bytes": 5569,
+          "sha256": "4cb1e377f07bd87a0137195132cf4aaa445c927e649060cd9ed33948f022e00a",
           "verification": "bytes-verified"
         }
       ],
