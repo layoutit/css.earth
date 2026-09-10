@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { createPlanetPreparationPaths } from "./preparation-paths.mjs";
-import { runPreparationSteps } from "./preparation-runner.mjs";
+import { createPlanetPreparationPaths } from "./preparation-paths.mts";
+import { runPreparationSteps } from "./preparation-runner.mts";
 
 test("runs an object-owned preparation plan in exact sequence", async () => {
   const calls = [];

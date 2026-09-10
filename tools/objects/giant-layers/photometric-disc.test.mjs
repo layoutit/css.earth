@@ -3,7 +3,7 @@ import test from 'node:test';
 import{readFile,mkdtemp,readdir,rm}from'node:fs/promises';
 import{join}from'node:path';
 import{tmpdir}from'node:os';
-import{encodeAttenuatedSrgb,phaseLightDirection,rasterPhotometricDisc,parsePhotometricDiscRecipe,preparePhotometricDisc}from'./photometric-disc.mjs';
+import{encodeAttenuatedSrgb,phaseLightDirection,rasterPhotometricDisc,parsePhotometricDiscRecipe,preparePhotometricDisc}from'./photometric-disc.mts';
 
 test('linear-light attenuation retains exact endpoints and declared light azimuth',()=>{
  for(const channel of[0,16,160,255]){assert.equal(encodeAttenuatedSrgb(channel,1),channel);assert.equal(encodeAttenuatedSrgb(channel,0),0);}

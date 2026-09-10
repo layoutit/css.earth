@@ -1,10 +1,10 @@
-import {loadObjectTestDefinition} from '../../tools/object-test-data.mjs';
+import {loadObjectTestDefinition} from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
 
-import { requireObjectControls } from "../scene-contract.mjs";
-import { OBJECTS } from "../objects.mjs";
+import { requireObjectControls } from "../scene-contract.mts";
+import { OBJECTS } from "../objects.mts";
 
 test("asteroid, trans-Neptunian and comet Shadows default off in authored content and prepared runtime", async () => {
   for (const { id } of OBJECTS.filter(object => ["asteroid", "trans-neptunian", "comet", "interstellar"].includes(object.classification))) {
@@ -39,7 +39,11 @@ test("control content permits empty capabilities but rejects malformed or confli
   for (const content of [{}, { lenses: null }, { lenses: { controls: [{ id: "a" }, { id: "a" }] }, settings: null },
     { lenses: { default: "missing", controls: [{ id: "a" }] }, settings: null },
     { lenses: null, settings: { controls: [{ name: "motion", kind: "toggle", label: "Motion", checked: false }] } },
-    { lenses: null, settings: { controls: [{ name: "rings", kind: "invented", label: "Rings" }] } }]) {
+    { lenses: null, settings: { controls: [{ name: "rings", kind: "invented", label: "Rings" }] } },
+    { lenses: { controls: [null] }, settings: null },
+    { lenses: null, settings: { controls: [null] } },
+    { lenses: 1, settings: null },
+    { lenses: null, settings: { controls: [{ name: "rings", kind: "toggle", label: "Rings", checked: "false" }] } }]) {
     assert.throws(() => requireObjectControls(content, "future"));
   }
 });

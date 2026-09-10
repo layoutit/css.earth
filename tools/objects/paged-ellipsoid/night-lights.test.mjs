@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { accumulateRadianceRow, finishRadianceGrid, nightLightColor, validateNightLightGrid } from './night-lights.mjs';
+import { accumulateRadianceRow, finishRadianceGrid, nightLightColor, validateNightLightGrid } from './night-lights.mts';
 
 const missing = Math.fround(-999.9);
 function aggregate(rows, grid, target) {

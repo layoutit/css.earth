@@ -1,11 +1,11 @@
 ---
 import PlanetInformationPanel from "./PlanetInformationPanel.astro";
 import type { Props } from "../planet-shell-types";
-import { OBJECTS } from "../objects.mjs";
-import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mjs";
+import { OBJECTS } from "../objects.mts";
+import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
-import { requireObjectControls } from "../scene-contract.mjs";
-import { sceneSources } from "../scene-sources.mjs";
+import { requireObjectControls } from "../scene-contract.mts";
+import { sceneSources } from "../scene-sources.mts";
 import PlanetObjectResults from "./PlanetObjectResults.astro";
 import MaterialSymbol from "./MaterialSymbol.astro";
 import ExplorerRail from "./ExplorerRail.astro";
@@ -50,7 +50,7 @@ const speedValues: Readonly<Record<string, number>> = Object.freeze({
 const initialSpeedState = speedSetting?.state ?? "normal";
 const initialSpeedValue = speedValues[initialSpeedState] ?? 1;
 const activeObject = OBJECTS.find((object) => object.id === objectId);
-const systemStar = OBJECTS.find(object => object.classification === 'star' && object.distanceAu === 0);
+const systemStar = OBJECTS.find(object => object.classification === 'star' && object.distanceAu === 0)!;
 const unavailableSystems = planetarySystems.unavailable.map(system => ({
   ...system,
   markerStyle: `--planet-size:${PREPARED_NAVIGATION_MARKERS[systemStar.id].presentation.size * system.radiusSolar}px;--planet-color:rgb(${temperatureColor(system.temperatureK).join(' ')})`,

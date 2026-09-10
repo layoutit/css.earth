@@ -19,7 +19,7 @@ try {
     let throttleUntil = 0, throttledRequests = 0, screenshotSerial = 0, timeOrigin = 0;
     const delayedUrls = new Set(definitions.mercury.assets.entries.map(asset => new URL(asset.url, origin).href));
     page.on('pageerror', error => errors.push(error.message));
-    if (lateDetail) await page.route('**/site/prepared-world-navigation.mjs*', async route => {
+    if (lateDetail) await page.route('**/site/prepared-world-navigation.mts*', async route => {
       const response = await route.fetch(), source = await response.text();
       const checkpoint = '? detailHandoffTime(flight, from, source.frame, optics) : 0;';
       assert.equal(source.split(checkpoint).length, 2, 'Mutation must remove the real early handoff checkpoint');

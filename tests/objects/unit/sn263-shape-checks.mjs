@@ -2,11 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {parseObjShape,createIndexedShape} from '../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import {simplifyRadialShape,validateClosedMesh} from '../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
-import {preparePlanetarySystem} from '../../../src/platform/prepare-planetary-system.mjs';
-import {prepareEclipticPresentationFrame} from '../../../src/platform/solar-presentation-frame.mjs';
-import {createSourceManifest} from '../../../src/platform/source-manifest.mjs';
+import {parseObjShape,createIndexedShape} from '../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import {simplifyRadialShape,validateClosedMesh} from '../../../tools/objects/terrestrial-layers/radial-terrain.mts';
+import {preparePlanetarySystem} from '../../../src/platform/prepare-planetary-system.mts';
+import {prepareEclipticPresentationFrame} from '../../../src/platform/solar-presentation-frame.mts';
+import {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 
 // Independent coordinates in the native PDS tables, before metre conversion.
 const expected={

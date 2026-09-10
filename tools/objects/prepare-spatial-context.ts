@@ -29,7 +29,7 @@ export interface SpatialContextPreparationOptions {
 export async function prepareSpatialContext(options: SpatialContextPreparationOptions): Promise<void> {
   const input = JSON.parse(await readFile(options.sourcePath, 'utf8'));
   if (input.bodies === 'catalog') {
-    const { readCatalog } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-catalog.mjs')).href) as { readCatalog: (directory?: string) => Promise<readonly { id: string; name: string; color: string; context?: { order?: number; name?: string; color?: string } }[]> };
+    const { readCatalog } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-catalog.mts')).href) as { readCatalog: (directory?: string) => Promise<readonly { id: string; name: string; color: string; context?: { order?: number; name?: string; color?: string } }[]> };
     const objects = await readCatalog(options.objectsDirectory);
     input.bodies = objects.filter(body => body.context && body.id !== input.focus.id)
       .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'))
@@ -38,12 +38,12 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   const source = parseWorldContextSource(input);
   const geometry = await loadSolarGeometry(options.solarGeometryPath);
   // The application registry owns classification; preparation bakes its orbit presentation.
-  const { OBJECTS } = await import(pathToFileURL(resolve(process.cwd(), 'site/objects.mjs')).href) as {
+  const { OBJECTS } = await import(pathToFileURL(resolve(process.cwd(), 'site/objects.mts')).href) as {
     OBJECTS: readonly { id: string; classification: string }[];
   };
   const planetIds = new Set(OBJECTS.filter(body => body.classification === 'planet').map(body => body.id));
   const classifications = new Map(OBJECTS.map(body => [body.id, body.classification]));
-  const { SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_ANGLES } = await import(pathToFileURL(resolve(process.cwd(), 'site/runtime-policy.mjs')).href) as {
+  const { SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_ANGLES } = await import(pathToFileURL(resolve(process.cwd(), 'site/runtime-policy.mts')).href) as {
     SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE: number;
     SYSTEM_FRAMING_ANGLES: { readonly elevationsDegrees: readonly number[]; readonly azimuthStepDegrees: number };
   };
@@ -176,7 +176,7 @@ function eccentricity(value: unknown, id: string): number { const result = numbe
 const invoked = process.argv[1] && basename(fileURLToPath(import.meta.url)) === 'prepare-spatial-context.js' &&
   resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (invoked) {
-  const [sourcePath, outputPath, solarGeometryPath = resolve(process.cwd(), 'src/platform/solar-geometry.mjs')] = process.argv.slice(2);
-  if (!sourcePath || !outputPath || process.argv.length > 5) throw new TypeError('Usage: prepare-spatial-context <source.json> <world-context.json> [solar-geometry.mjs]');
+  const [sourcePath, outputPath, solarGeometryPath = resolve(process.cwd(), 'src/platform/solar-geometry.mts')] = process.argv.slice(2);
+  if (!sourcePath || !outputPath || process.argv.length > 5) throw new TypeError('Usage: prepare-spatial-context <source.json> <world-context.json> [solar-geometry.mts]');
   await prepareSpatialContext({ sourcePath: resolve(sourcePath), outputPath: resolve(outputPath), solarGeometryPath });
 }

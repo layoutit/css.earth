@@ -3,7 +3,7 @@ import test from 'node:test';
 import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { prepareGlbSurface } from './glb-surface.mjs';
+import { prepareGlbSurface } from './glb-surface.mts';
 
 const model = id => new URL(`../../../src/planets/${id}/source/nasa-${id}.glb`, import.meta.url);
 

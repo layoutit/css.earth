@@ -6,9 +6,19 @@ import { parseWorldContextSource, prepareWorldContext } from './spatial-context.
 import type { OrbitalState } from './spatial-context.js';
 
 const sourcePath = 'src/planets/sun/source/navigation/universe.json';
+// Unit cases supply their own body inventory; the application resolves catalogue membership.
+async function readSource() {
+  return { ...JSON.parse(await readFile(sourcePath, 'utf8')), bodies: [{id: 'test-body', name: 'Test body', color: '#aaaaaa'}] };
+}
+
+test('catalogue selection must be resolved before preparing a physical context', async () => {
+  const source = parseWorldContextSource(JSON.parse(await readFile(sourcePath, 'utf8')));
+  assert.equal(source.bodySelection, 'catalog');
+  assert.throws(() => prepareWorldContext(source, {}, {}), /Resolve catalogue membership/);
+});
 
 test('prepared volume opacity preserves authored grading and validates bounded levels and ordered distances', async () => {
-  const raw = JSON.parse(await readFile(sourcePath, 'utf8'));
+  const raw = await readSource();
   const source = parseWorldContextSource(raw), profile = source.volume.opacityProfile!;
   assert.deepEqual(profile, raw.volume.opacityProfile);
   assert.equal(profile.nearOpacity, 0); assert.equal(profile.fullOpacity, 1);
@@ -32,7 +42,7 @@ test('prepared volume opacity preserves authored grading and validates bounded l
 });
 
 test('stellar handoff survives preparation and rejects missing or out-of-order ranges', async () => {
-  const raw = JSON.parse(await readFile(sourcePath, 'utf8')) as Record<string, unknown>;
+  const raw = await readSource() as Record<string, unknown>;
   const expected = { objectId:'stellar-neighbourhood',fadeStartDistanceM:1.495978707e13,fullDistanceM:3.085677581491367e15 };
   const source = parseWorldContextSource(raw);
   const prepared = prepareWorldContext({...source,bodies:[]},{},{}) as unknown as Record<string,unknown>;
@@ -43,7 +53,7 @@ test('stellar handoff survives preparation and rejects missing or out-of-order r
 });
 
 test('Sun context source derives its physical scale from the prepared visible radius', async () => {
-  const raw = JSON.parse(await readFile(sourcePath, 'utf8')) as Record<string, unknown>;
+  const raw = await readSource() as Record<string, unknown>;
   const source = parseWorldContextSource(raw);
   assert.equal(source.frame.bodyRadiusM / source.frame.metersPerUnit, 310);
   assert.equal(source.system.fadeOutStartDistanceM, 1e14);
@@ -67,7 +77,7 @@ test('Sun context source derives its physical scale from the prepared visible ra
 });
 
 test('prepared ellipses start at their same-epoch ephemeris position', async () => {
-  const source = parseWorldContextSource(JSON.parse(await readFile(sourcePath, 'utf8')) as unknown);
+  const source = parseWorldContextSource(await readSource() as unknown);
   const body = source.bodies[0]!;
   const result = prepareWorldContext({ ...source, bodies: [body], orbit: { ...source.orbit, segments: 16 } },
     { [body.id]: { radiusM: 1 } }, {
@@ -80,7 +90,7 @@ test('prepared ellipses start at their same-epoch ephemeris position', async () 
 });
 
 test('a hyperbolic world trajectory retains its epoch marker on a finite open conic', async () => {
-  const source = parseWorldContextSource(JSON.parse(await readFile(sourcePath, 'utf8')));
+  const source = parseWorldContextSource(await readSource());
   const body = { id: 'interstellar-visitor', name: 'Interstellar visitor', color: '#aaaaaa' };
   const eccentricity = 1.5, trueAnomalyRadians = Math.PI / 3;
   const distance = M_PER_AU * (eccentricity ** 2 - 1) / (1 + eccentricity * Math.cos(trueAnomalyRadians));
@@ -115,7 +125,7 @@ test('a hyperbolic world trajectory retains its epoch marker on a finite open co
 });
 
 test('world context rejects inconsistent conic signs and parabolic or unreachable states', async () => {
-  const source = parseWorldContextSource(JSON.parse(await readFile(sourcePath, 'utf8')));
+  const source = parseWorldContextSource(await readSource());
   const body = source.bodies[0]!;
   const state: OrbitalState = { positionM: [M_PER_AU / 2, 0, 0], centerBodyId: source.focus.id, centerPositionM: source.frame.originM,
     normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: -M_PER_AU, eccentricity: 1.5, trueAnomalyRadians: 0 };
@@ -127,7 +137,7 @@ test('world context rejects inconsistent conic signs and parabolic or unreachabl
 });
 
 test('satellite ellipses are translated to their parent with exact prepared centres', async () => {
-  const source = parseWorldContextSource(JSON.parse(await readFile(sourcePath, 'utf8')) as unknown);
+  const source = parseWorldContextSource(await readSource() as unknown);
   const bodies = [{ id: 'parent', name: 'Parent', color: '#888888' }, { id: 'satellite', name: 'Satellite', color: '#999999' }];
   const states: Record<string, OrbitalState> = {
     parent: { positionM: [1000, 0, 0], centerBodyId: source.focus.id, centerPositionM: [0, 0, 0],
@@ -211,7 +221,7 @@ test('satellite ellipses are translated to their parent with exact prepared cent
 });
 
 test('extent traversal covers each active chord once for sparse trails and uneven bank sizes', async () => {
-  const source = parseWorldContextSource(JSON.parse(await readFile(sourcePath, 'utf8')));
+  const source = parseWorldContextSource(await readSource());
   const body = source.bodies[0]!;
   const state: OrbitalState = { positionM: [7, 0, 0], centerBodyId: source.focus.id, centerPositionM: source.frame.originM,
     normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 };
@@ -229,7 +239,7 @@ test('extent traversal covers each active chord once for sparse trails and uneve
 });
 
 test('prepared sky registration preserves the legacy default sky and rejects a missing baseline', async () => {
-  const raw = JSON.parse(await readFile(sourcePath, 'utf8')) as Record<string, unknown>;
+  const raw = await readSource() as Record<string, unknown>;
   const source = parseWorldContextSource(raw);
   const result = prepareWorldContext({ ...source, bodies: [] }, {}, {}) as unknown as Record<string, unknown>;
   const sky = result.sky as { sceneRegistration: string };

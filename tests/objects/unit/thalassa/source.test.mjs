@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {parsePdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import {readObservation} from '../../../../tools/objects/terrestrial-layers/solid-raster.mjs';
+import {parsePdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import {readObservation} from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';
 const root=new URL('../../../../src/planets/thalassa/',import.meta.url);
 test('Thalassa uses the measured flattened figure rather than the older PCK sphere',async()=>{
   const cfg=JSON.parse(await readFile(new URL('source/preparation/terrestrial.json',root)));

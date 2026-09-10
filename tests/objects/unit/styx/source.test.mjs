@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import { readObservation } from '../../../../tools/objects/terrestrial-layers/solid-raster.mjs';
+import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import { readObservation } from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';
 const root = new URL('../../../../src/planets/styx/source/', import.meta.url);
 
 test('Styx source radii preserve the 2025 ellipsoid semi-axes in metres', async () => {

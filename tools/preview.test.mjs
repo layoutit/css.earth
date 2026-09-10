@@ -4,9 +4,9 @@ import { mkdtemp, mkdir, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
-import { previewSite } from "./preview.mjs";
+import { previewSite } from "./preview.mts";
 import { createServer } from "node:http";
-import { wmtsLocalMirror } from "../tools/objects/geographic-pages/operations/wmts-local-server.mjs";
+import { wmtsLocalMirror } from "../tools/objects/geographic-pages/operations/wmts-local-server.mts";
 
 test("standard preview serves built routes and bounded prepared ranges outside dist", async () => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-preview-"));

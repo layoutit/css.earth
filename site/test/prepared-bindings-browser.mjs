@@ -3,7 +3,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { PNG } from 'pngjs';
 import pixelmatch from 'pixelmatch';
-import { OBJECTS } from '../objects.mjs';
+import { OBJECTS } from '../objects.mts';
 
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const ids = process.argv[3] ? process.argv[3].split(',') : undefined;

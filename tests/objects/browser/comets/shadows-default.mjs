@@ -3,7 +3,7 @@ import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {chromium} from 'playwright';
-import {OBJECTS} from '../../../../site/objects.mjs';
+import {OBJECTS} from '../../../../site/objects.mts';
 
 const origin=process.argv[2]??'http://127.0.0.1:53136',output=resolve('output/playwright/comet-shadows-default');
 await mkdir(output,{recursive:true});

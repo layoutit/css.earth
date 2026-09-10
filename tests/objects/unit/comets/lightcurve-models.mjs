@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { ellipsoidParameterMesh } from '../../../../tools/objects/terrestrial-layers/ellipsoid-parameters.mjs';
-import { readAuthoredRotation } from '../../../../tools/objects/authored-rotation.mjs';
+import { ellipsoidParameterMesh } from '../../../../tools/objects/terrestrial-layers/ellipsoid-parameters.mts';
+import { readAuthoredRotation } from '../../../../tools/objects/authored-rotation.mts';
 const json=async p=>JSON.parse(await readFile(p,'utf8'));
 const near=(a,b,t)=>assert.ok(Math.abs(a-b)<t,`${a} differs from ${b}`);
 export function testLightcurveModel(id,ab,bc,radius,longitude,latitude) {

@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { prepareAtmosphereFrame, compositePreparedAtmosphere } from "./prepared-atmosphere.mjs";
+import { prepareAtmosphereFrame, compositePreparedAtmosphere } from "./prepared-atmosphere.mts";
 import { readFile } from "node:fs/promises";
 import { MARS_ATMOSPHERE_PROFILE, prepareMarsAtmosphereFrame, prepareMarsMaterialFrame } from "../tests/objects/unit/mars/prepared-fixture.mjs";
-import { createAtmospherePreparation } from "./objects/paged-ellipsoid/atmosphere.mjs";
+import { createAtmospherePreparation } from "./objects/paged-ellipsoid/atmosphere.mts";
 import { resolve } from "node:path";
 
 const json = async path => JSON.parse(await readFile(path, 'utf8'));

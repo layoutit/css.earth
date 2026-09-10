@@ -1,45 +1,11 @@
-/**
- * Physical data for the bodies this package places.
- *
- * Values come from JPL Solar System Dynamics. Most are transcribed from
- * Horizons' `OBJ_DATA` block, fetched with
- * `format=text&COMMAND='<code>'&OBJ_DATA='YES'&MAKE_EPHEM='NO'`. The added
- * Saturn moons use JPL's current satellite physical-parameters table
- * (`https://ssd.jpl.nasa.gov/sats/phys_par/`), which publishes the selected
- * ephemeris GM and IAU WGCCRE mean radius together. They are transcribed rather
- * than parsed because the physical-data blocks are free text whose layout
- * differs per body — a parser for them would be a second thing to get wrong.
- *
- * `meanRadiusKm` is the volumetric mean radius where Horizons gives one, and
- * the geometric mean of the triaxial radii where it gives only those (Phobos,
- * Deimos, Miranda, Ariel). It is NOT the equatorial radius: it is used for the
- * frame-capture rule, where the right question is "how big is this body", not
- * "how wide is it at the equator". A renderer that needs the ellipsoid needs
- * three numbers and should not get them from here.
- */
-export interface BodyData {
-  readonly id: BodyId
-  readonly name: string
-  /** Null when no Horizons target exists; source-owned states retain their publication identity. */
-  readonly horizonsCode: string | null
-  readonly meanRadiusKm: number
-  /** GM, km^3/s^2. Zero only where Horizons publishes no GM. */
-  readonly gravitationalParameterKm3PerS2: number
-  /** Gravitational parent — the body this one orbits. `null` for the Sun. */
-  readonly parent: BodyId | null
-}
-import { BODY_IDS, BODIES, PLANET_IDS, DWARF_PLANET_IDS, ASTEROID_IDS, TRANS_NEPTUNIAN_IDS, INTERSTELLAR_IDS, COMET_IDS } from './data/generated/bodies.js'
-export { BODY_IDS, BODIES, PLANET_IDS, DWARF_PLANET_IDS, ASTEROID_IDS, TRANS_NEPTUNIAN_IDS, INTERSTELLAR_IDS, COMET_IDS }
-export type PlanetId = typeof PLANET_IDS[number]
-export type DwarfPlanetId = typeof DWARF_PLANET_IDS[number]
-export type AsteroidId = typeof ASTEROID_IDS[number]
-export type TransNeptunianId = typeof TRANS_NEPTUNIAN_IDS[number]
-export type InterstellarId = typeof INTERSTELLAR_IDS[number]
-export type CometId = typeof COMET_IDS[number]
-export type SmallBodyId = AsteroidId | TransNeptunianId | InterstellarId
-export type BodyId = typeof BODY_IDS[number]
-export const SMALL_BODY_IDS: readonly SmallBodyId[] = [...ASTEROID_IDS, ...TRANS_NEPTUNIAN_IDS, ...INTERSTELLAR_IDS]
-
+import { PLANET_IDS } from './body-types.js'
+import type { BodyId, BodyData, PlanetId } from './body-types.js'
+export { PLANET_IDS, DWARF_PLANET_IDS, ASTEROID_IDS, TRANS_NEPTUNIAN_IDS, SMALL_BODY_IDS, COMET_IDS, INTERSTELLAR_IDS } from './body-types.js'
+export type { BodyData, PlanetId, DwarfPlanetId, AsteroidId, TransNeptunianId, SmallBodyId, BodyId, CometId, InterstellarId } from './body-types.js'
+import { BODIES } from './body-data.js'
+export { BODIES } from './body-data.js'
+import { BODY_IDS } from './data/generated/bodies.js'
+export { BODY_IDS }
 
 export const bodyData = (id: BodyId): BodyData => {
   const data = BODIES[id]

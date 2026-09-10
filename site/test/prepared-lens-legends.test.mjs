@@ -2,12 +2,12 @@ import assert from "node:assert/strict";
 import { loadObjectContent } from "./load-object-content.mjs";
 import { prepareObjectContent } from "../../tools/objects/dist/content/prepare.js";
 import test from "node:test";
-import { OBJECTS } from "../objects.mjs";
+import { OBJECTS } from "../objects.mts";
 
 import {
   prepareLensCategoryLegend,
   prepareLensScaleLegend,
-} from "../prepared-lens-legends.mjs";
+} from "../prepared-lens-legends.mts";
 
 test("prepares a frozen, smoothly sampled scale legend", () => {
   const legend = prepareLensScaleLegend({

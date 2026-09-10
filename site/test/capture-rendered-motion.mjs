@@ -230,7 +230,7 @@ try {
   for (let i = 0; i < 6; i++) {
     await setView(zoom);
     const measured = await page.evaluate(async plan => {
-      const { measureRetainedPlanetTrackball } = await import('/src/platform/camera-layout.mjs');
+      const { measureRetainedPlanetTrackball } = await import('/src/platform/camera-layout.mts');
       return measureRetainedPlanetTrackball({ stage:document.querySelector('.planet-stage'),
         cameraElement:document.querySelector('.polycss-camera'),
         logicalBodyDiameter:plan.logicalBodyDiameter,sceneScale:plan.sceneScale });
@@ -261,8 +261,8 @@ try {
       nestedTexture: Boolean(leaf.querySelector(".polycss-projective-texture")) })),
   }));
   state.trackball = await page.evaluate(async plan => {
-    const { measureRetainedPlanetTrackball } = await import('/src/platform/camera-layout.mjs');
-    const { googleEarthInteractionTrackball } = await import('/src/platform/google-earth-drag-inertia.mjs');
+    const { measureRetainedPlanetTrackball } = await import('/src/platform/camera-layout.mts');
+    const { googleEarthInteractionTrackball } = await import('/src/platform/google-earth-drag-inertia.mts');
     return googleEarthInteractionTrackball(measureRetainedPlanetTrackball({stage:document.querySelector('.planet-stage'),
       cameraElement:document.querySelector('.polycss-camera'),
       logicalBodyDiameter:plan.logicalBodyDiameter,sceneScale:plan.sceneScale,

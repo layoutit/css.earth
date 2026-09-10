@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { fitObservationLevels, selectObservation, sampleTrianglePoints } from './observation-mosaic.mjs';
-import { validateGeoSurfaceRecipe, loadGeoObservationSurface } from './observed-geo-surface.mjs';
-import { createSourceManifest } from '../../../src/platform/source-manifest.mjs';
+import { fitObservationLevels, selectObservation, sampleTrianglePoints } from './observation-mosaic.mts';
+import { validateGeoSurfaceRecipe, loadGeoObservationSurface } from './observed-geo-surface.mts';
+import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
 const policy = { minimumPairs: 64, maximumLogMad: .25, maximumGain: 1.35 };

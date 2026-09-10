@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
 import { mkdir, writeFile } from 'node:fs/promises';
-import { OBJECTS } from '../objects.mjs';
+import { OBJECTS } from '../objects.mts';
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const targetId = process.argv[3] ?? 'makemake';
 assert.ok(OBJECTS.some(object => object.id === targetId), 'Flight target must come from OBJECTS');

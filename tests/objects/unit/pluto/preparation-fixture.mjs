@@ -1,10 +1,10 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { projectRoot } from '../../fixtures.mjs';
-import { createSourceManifest } from '../../../../src/platform/source-manifest.mjs';
-import { readPhysicalFacts, parsePhysicalFacts } from '../../../../tools/objects/static-surface/physical.mjs';
-import { decodeElevationGrid as decode, elevationColor as color, elevationRaster as raster } from '../../../../tools/objects/static-surface/elevation.mjs';
-import { prepareSurfaceRasterCell as cell, bakeSurfaceRaster as bake } from '../../../../tools/objects/static-surface/inverse-homography.mjs';
+import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
+import { readPhysicalFacts, parsePhysicalFacts } from '../../../../tools/objects/static-surface/physical.mts';
+import { decodeElevationGrid as decode, elevationColor as color, elevationRaster as raster } from '../../../../tools/objects/static-surface/elevation.mts';
+import { prepareSurfaceRasterCell as cell, bakeSurfaceRaster as bake } from '../../../../tools/objects/static-surface/inverse-homography.mts';
 const sourceDirectory=resolve(projectRoot,'src/planets/pluto/source');
 const read=async path=>JSON.parse(await readFile(resolve(sourceDirectory,path),'utf8'));
 const source=await createSourceManifest({planetId:'pluto',planetName:'Pluto',sourceRoot:sourceDirectory});

@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
-import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
-import {readObservation} from '../../../../tools/objects/terrestrial-layers/solid-raster.mjs';
+import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
+import {readObservation} from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';
 const root = new URL('../../../../src/planets/miranda/source/', import.meta.url).pathname;
 test('Miranda mosaic and kilometre DEM register despite their different longitude origins', async () => {
   const config=JSON.parse(await readFile(root+'preparation/terrestrial.json'));

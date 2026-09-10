@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { prepareMarkerBindings } from './prepare-marker-bindings.mjs';
+import { prepareMarkerBindings } from './prepare-marker-bindings.mts';
 
 test('body marker addresses stay fixed while preserving object-owned sprites', () => {
   const local = { url: '/scenes/moon/earth.webp', index: 0, count: 1, size: 9 };

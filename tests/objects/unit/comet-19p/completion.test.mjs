@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';
 import sharp from 'sharp';
-import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
+import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 
 const root = new URL('../../../../src/planets/comet-19p/', import.meta.url);
 const json = async path => JSON.parse(await readFile(new URL(path, root)));

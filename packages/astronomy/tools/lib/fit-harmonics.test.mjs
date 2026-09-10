@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { fitHarmonics } from './fit-harmonics.mjs'
+import { fitHarmonics } from './fit-harmonics.mts'
 
 describe('preparation harmonic fit', () => {
   it('recovers a known bounded signal without a secular term or cancelling near-duplicate frequencies', () => {

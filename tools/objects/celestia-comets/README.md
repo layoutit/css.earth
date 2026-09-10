@@ -40,15 +40,15 @@ Run commands from the repository root with the project's supported Node runtime:
 The native mesh exports are checked in. To reproduce them from Celestia's
 original C++ code, follow the [native exporter instructions](native/README.md).
 
-1. `node tools/objects/celestia-comets/acquire-orbits.mjs` obtains and pins the
+1. `node tools/objects/celestia-comets/acquire-orbits.mts` obtains and pins the
    JPL records, writing `output/celestia-comets/intake.json`. Responses beside the
    packages preserve the exact queries. Requests are sequential.
-2. `node tools/objects/celestia-comets/scaffold.mjs` authors the reviewed new
+2. `node tools/objects/celestia-comets/scaffold.mts` authors the reviewed new
    source packages. It refuses to overwrite an existing descriptor. This is an
    intake operation, not a command for rebuilding existing packages.
-3. `node tools/objects/celestia-comets/initialize.mjs` prepares title outlines,
+3. `node tools/objects/celestia-comets/initialize.mts` prepares title outlines,
    grid-backed context images and source hashes through shared preparers.
-4. `node tools/objects/celestia-comets/integrate.mjs` adds the entries to the
+4. `node tools/objects/celestia-comets/integrate.mts` adds the entries to the
    single application registry, astronomy records and Sun destination source.
 5. Follow the [body contributor guide](../../../src/planets/README.md) to prepare
    and assemble the packages, publish pinned runtime assets, and verify delivery.

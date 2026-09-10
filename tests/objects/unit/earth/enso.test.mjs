@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import sharp from 'sharp';
-import { murEnsoContent, parseMurCapabilities, parseMurColors, verifyMurTile, sha256 } from '../../../../tools/objects/paged-ellipsoid/mur-imagery.mjs';
+import { murEnsoContent, parseMurCapabilities, parseMurColors, verifyMurTile, sha256 } from '../../../../tools/objects/paged-ellipsoid/mur-imagery.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readCoraltempAnomaly, anomalyColor } from '../../../../tools/objects/paged-ellipsoid/sst-anomaly.mjs';
-import { newestCoraltemp, parseEnsoAdvisory } from '../../../../tools/objects/paged-ellipsoid/refresh-earth-enso.mjs';
+import { readCoraltempAnomaly, anomalyColor } from '../../../../tools/objects/paged-ellipsoid/sst-anomaly.mts';
+import { newestCoraltemp, parseEnsoAdvisory } from '../../../../tools/objects/paged-ellipsoid/refresh-earth-enso.mts';
 
 const source = resolve('src/planets/earth/source');
 const config = JSON.parse(await readFile(resolve(source, 'preparation/paged-ellipsoid.json')));

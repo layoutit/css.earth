@@ -1,9 +1,9 @@
 import { readFile } from 'node:fs/promises';
 import { expect, test } from 'vitest';
 import { parsePreparedObjectRuntime } from './index.js';
-import { prepareActivationGroups } from '../../../../tools/prepared-activation-groups.mjs';
+import { prepareActivationGroups } from '../../../../tools/prepared-activation-groups.mts';
 
-const source = JSON.parse(await readFile(new URL('../../../planets/deimos/prepared/runtime.json', import.meta.url), 'utf8'));
+const source = JSON.parse(await readFile(new URL('../../../planets/deimos/prepared/object.json', import.meta.url), 'utf8')).data;
 // The published Deimos package can retain native depth. Validate the optional
 // partition transport against explicit carriers, independent of that bake choice.
 const prepared = structuredClone(source), groups: { root: number; scene: number }[] = [];

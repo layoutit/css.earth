@@ -34,12 +34,13 @@
     }
   },
   "scripts": {
-    "build": "node tools/body-records.mjs && tsup",
-    "typecheck": "node tools/body-records.mjs && tsc --noEmit -p tsconfig.json",
-    "test": "node tools/body-records.mjs && vitest run",
-    "test:coverage": "node tools/body-records.mjs && vitest run --coverage",
+    "build": "node tools/body-records.mts && tsup",
+    "typecheck": "node tools/body-records.mts && tsc --noEmit -p tsconfig.json && tsc -p tools/tsconfig.json",
+    "typecheck:tools": "tsc -p tools/tsconfig.json",
+    "test": "node tools/body-records.mts && vitest run",
+    "test:coverage": "node tools/body-records.mts && vitest run --coverage",
     "prepublishOnly": "npm run build",
-    "prepare:data": "node tools/body-records.mjs"
+    "prepare:data": "node tools/body-records.mts"
   },
   "publishConfig": {
     "access": "public"

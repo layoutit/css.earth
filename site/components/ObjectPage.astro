@@ -2,8 +2,8 @@
 import PlanetLayout from '../layouts/PlanetLayout.astro';
 import PreparedObjectHead from './PreparedObjectHead.astro';
 import PreparedObjectPanel from './PreparedObjectPanel.astro';
-import { loadObjectPageData } from '../object-page-data.mjs';
-import { objectPageStyles } from '../object-page-contract.mjs';
+import { loadObjectPageData } from '../object-page-data.mts';
+import { objectPageStyles } from '../object-page-contract.mts';
 import shellCss from '../planet-shell.css?inline';
 
 interface Props { objectId: string; navigation?: boolean; }

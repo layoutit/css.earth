@@ -1,0 +1,340 @@
+#!/usr/bin/env node
+import { mean, fitLine, dot, cross, normalize, solveKepler, planeBasis, fitRotation } from './lib/satellite-fit.mts'
+// Regenerates src/data/satelliteElements.data.ts.
+//
+// WHERE THESE ELEMENTS COME FROM, and what they are not.
+//
+// There is no truncated analytic satellite theory in this package; the moons
+// are propagated as PRECESSING KEPLERIAN ELLIPSES. The element set for each
+// moon is derived here from JPL Horizons' own osculating elements, sampled
+// in the ICRF frame. Most use a 30-day cadence over 1900-01-01 .. 2100-01-01;
+// the fast and resonant added inner moons use a 5-day cadence over a
+// 2020-01-01 .. 2032-01-01 current-era window. That interval is deliberately
+// centred on the application's 2026 observing epoch: a single precessing
+// ellipse cannot carry their long-period resonant motion over the full source
+// coverage. Each generated record carries its exact fit window and cadence:
+//
+//   pole             the mean of the sampled orbit poles. A satellite's orbit
+//                    pole does not precess about the ICRF pole, it precesses on
+//                    a cone about its LOCAL LAPLACE POLE, so elements referred
+//                    to ICRF cannot express nodal precession at all: fitting
+//                    there silently returns node-dot = 0 and buries the whole
+//                    effect in the residual — 470 000 km for Iapetus, whose
+//                    orbit sits 7.6 degrees off its Laplace plane. Each moon
+//                    therefore gets its own frame, and it is DERIVED here rather
+//                    than taken from a published table, so no undocumented
+//                    longitude convention has to be guessed. Its x-axis is the
+//                    ascending node of that plane on the ICRF equator; the
+//                    runtime rebuilds the same basis from the stored pole.
+//   e, i             from the fitted amplitudes below, in that frame
+//   node, periapsis  fitted as UNIFORMLY ROTATING VECTORS, not as unwrapped
+//                    angles. Ganymede's eccentricity is 0.0014 and its
+//                    inclination in its own Laplace frame is small, so its
+//                    osculating periapsis and node are nearly undefined and
+//                    swing by 170 degrees between consecutive samples; no
+//                    unwrapping of those angles can be right. Instead the
+//                    generator fits
+//                      k + i h = e * exp(i * (varpi0 + varpi_dot * t))
+//                      q + i p = tan(i/2) * exp(i * (node0 + node_dot * t))
+//                    by maximising |sum z_j exp(-i w t_j)| over w — a
+//                    periodogram, coarse-scanned then golden-section refined.
+//                    That is singularity-free: a nearly circular or nearly
+//                    coplanar orbit simply gives a small amplitude, and the rate
+//                    is still recovered from the phase that survives.
+//   mean longitude   linear least squares on lambda = node + periapsis + M,
+//                    unwrapped against the prediction from the osculating mean
+//                    motion. A moon completes tens to thousands of revolutions
+//                    between samples, so lambda cannot be unwrapped by
+//                    consecutive differences; but lambda, unlike node and
+//                    periapsis, is never ill-conditioned.
+//   n                lambda-dot minus varpi-dot
+//   M at epoch       lambda(J2000) minus varpi(J2000)
+//
+// That is the textbook construction of mean elements, and it is exactly what
+// JPL's own published "Planetary Satellite Mean Elements" table is, except that
+// this one is not rounded to four significant figures. (The published table was
+// tried first and rejected: its angles are quoted to 0.1 degree, which is 700 km
+// for Io, and its longitude origin for the Saturnian and Uranian Laplace planes
+// could not be reproduced from any documented convention — Io, Callisto and
+// Phobos land within 1 degree with the ICRF-equator node convention, Rhea, Titan
+// and Titania are 157 degrees out, and Oberon is 100 degrees out. Guessing per
+// system was not an option.)
+//
+// CONSEQUENCE FOR THE BUDGET: the moon error reported by
+// `satellite.horizons.test.ts` is a FIT RESIDUAL, not an independent accuracy
+// claim. A precessing ellipse cannot represent a real satellite orbit; what the
+// test proves is that the propagator reproduces JPL data to within the residual
+// the fit leaves, at epochs the fit did not see.
+import { fitLibration } from './lib/fit-libration.mts'
+import { fitPositionCorrection } from './lib/fit-position-correction.mts'
+import { readRecordSections, writeRecordSections } from './lib/write-record-sections.mts'
+import { elementsUrl, horizons, parseElements } from './lib/horizons.mts'
+import { readBodyRecords, prepareBodyRecords } from './body-records.mts'
+import { HEADER, shortest } from './lib/sources.mts'
+
+const J2000 = 2451545.0
+const DEG = Math.PI / 180
+const FROM_JD = 2415020.5, TO_JD = 2488069.5, STEP_DAYS = 30
+const bodyRecords = await readBodyRecords()
+const satelliteRecords = bodyRecords.flatMap(record => record.acquisition?.satellite ? [{ id: record.id, ...record.acquisition.satellite }] : [])
+const SATELLITES = satelliteRecords.map(s =>
+  [s.id, s.target, s.center, s.parent, s.fromJd, s.toJd, s.stepDays, s.barycentreCompanion] as const)
+const RADIAL_FIT_IDS = new Set(satelliteRecords.filter(record => record.radial).map(record => record.id))
+const LIBRATION_FIT_IDS = new Set(satelliteRecords.filter(record => record.libration).map(record => record.id))
+const POSITION_CORRECTION_FIT_IDS = new Set(satelliteRecords.filter(record => record.positionCorrection).map(record => record.id))
+const POSITION_CORRECTION_OPTIONS = Object.fromEntries(satelliteRecords.map(record => [record.id, record.positionCorrectionOptions]))
+
+// --object=id[,id] recomputes selected records and preserves other checked data.
+const requested = process.argv.slice(2)
+if (requested.some(arg => !/^--object=[a-z][a-z0-9-]*(?:,[a-z][a-z0-9-]*)*$/.test(arg))) throw new Error('Use --object=id[,id]')
+const selected = new Set(requested.flatMap(arg => arg.slice('--object='.length).split(',')))
+for (const id of selected) if (!SATELLITES.some(row => row[0] === id)) throw new Error(`Unknown satellite ${id}`)
+type LongitudeHarmonics = ReturnType<typeof fitLibration>['harmonics']
+interface FitResult { id: string; parent: string; command: string; center: string; barycentreCompanion?: string; url: string; fitFromJdTdb: number; fitToJdTdb: number; fitStepDays: number; semiMajorAxisKm: number; eccentricity: number; inclinationRad: number; poleRightAscensionRad: number; poleDeclinationRad: number; ascendingNodeRad: number; ascendingNodeRateRadPerDay: number; argumentOfPeriapsisRad: number; argumentOfPeriapsisRateRadPerDay: number; meanAnomalyAtEpochRad: number; meanMotionRadPerDay: number; worstLambdaResidual: number; longitudeHarmonics?: LongitudeHarmonics; positionCorrection?: ReturnType<typeof fitPositionCorrection> }
+const results: FitResult[] = []
+for (const [id, command, center, parent, fitFromJdTdb = FROM_JD, fitToJdTdb = TO_JD, fitStepDays = STEP_DAYS, barycentreCompanion] of SATELLITES.filter(([id]) => !selected.size || selected.has(id))) {
+  const url = elementsUrl({ command, center, startJd: fitFromJdTdb, stopJd: fitToJdTdb, stepDays: fitStepDays })
+  const rows = parseElements(await horizons(url, `elements-${command}`), id)
+  const days = rows.map((r) => r.jd - J2000)
+
+  let semiMajorAxisKm = mean(rows.map((r) => r.semiMajorAxisKm))
+
+  // Orbit normal and periapsis direction in ICRF for every sample.
+  const normals: number[][] = []
+  const periapses: number[][] = []
+  for (const r of rows) {
+    const inclination = r.inclinationDeg * DEG
+    const node = r.nodeDeg * DEG
+    const periapsis = r.periapsisDeg * DEG
+    const sinI = Math.sin(inclination)
+    const cosI = Math.cos(inclination)
+    const sinN = Math.sin(node)
+    const cosN = Math.cos(node)
+    const sinW = Math.sin(periapsis)
+    const cosW = Math.cos(periapsis)
+    normals.push([sinI * sinN, -sinI * cosN, cosI])
+    periapses.push([
+      cosW * cosN - sinW * sinN * cosI,
+      cosW * sinN + sinW * cosN * cosI,
+      sinW * sinI,
+    ])
+  }
+  const pole = normalize([
+    mean(normals.map((n) => n[0])),
+    mean(normals.map((n) => n[1])),
+    mean(normals.map((n) => n[2])),
+  ])
+  const basis = planeBasis(pole)
+  const poleRightAscensionRad = Math.atan2(pole[1], pole[0])
+  const poleDeclinationRad = Math.asin(pole[2])
+
+  // Re-express every sample in that frame, then build the two rotating vectors.
+  const k = []
+  const h = []
+  const q = []
+  const p = []
+  const varpiRaw: number[] = []
+  const nodeRaw = []
+  for (let i = 0; i < rows.length; i++) {
+    const n = basis.map((axis) => dot(axis, normals[i]))
+    const e = basis.map((axis) => dot(axis, periapses[i]))
+    const inclination = Math.acos(Math.min(1, Math.max(-1, n[2])))
+    const node = Math.atan2(n[0], -n[1])
+    const cosNode = Math.cos(node)
+    const sinNode = Math.sin(node)
+    const nodeDirection = [cosNode, sinNode, 0]
+    // sin(omega) from the component of the periapsis direction along h x n.
+    const inPlane = cross(n, nodeDirection)
+    const argumentOfPeriapsis = Math.atan2(dot(e, inPlane) / Math.hypot(n[0], n[1], n[2]), dot(e, nodeDirection))
+    const varpi = node + argumentOfPeriapsis
+    const tanHalfInclination = Math.tan(inclination / 2)
+    k.push(rows[i].eccentricity * Math.cos(varpi))
+    h.push(rows[i].eccentricity * Math.sin(varpi))
+    q.push(tanHalfInclination * cosNode)
+    p.push(tanHalfInclination * sinNode)
+    varpiRaw.push(varpi)
+    nodeRaw.push(node)
+  }
+  const apsis = fitRotation(days, k, h)
+  const nodal = fitRotation(days, q, p)
+
+  const eccentricity = apsis.amplitude
+  const inclinationRad = 2 * Math.atan(nodal.amplitude)
+  const ascendingNodeRad = nodal.phaseAtEpoch
+  const ascendingNodeRateRadPerDay = nodal.rate
+  const argumentOfPeriapsisRad = apsis.phaseAtEpoch - nodal.phaseAtEpoch
+  const argumentOfPeriapsisRateRadPerDay = apsis.rate - nodal.rate
+
+  const lambdaRaw = rows.map((r, i) => varpiRaw[i] + r.meanAnomalyDeg * DEG)
+  const lambda = [lambdaRaw[0]]
+  for (let i = 1; i < rows.length; i++) {
+    const rate = ((rows[i - 1].meanMotionDegPerDay + rows[i].meanMotionDegPerDay) / 2) * DEG + apsis.rate
+    const predicted = lambda[i - 1] + rate * (days[i] - days[i - 1])
+    const placed = lambdaRaw[i] + 2 * Math.PI * Math.round((predicted - lambdaRaw[i]) / (2 * Math.PI))
+    // The unwrap is what is being checked here, NOT how well a Keplerian
+    // ellipse fits. The wrap is ambiguous only at pi; 1.5 rad leaves a factor
+    // of two of margin while still catching a sample placed a whole revolution
+    // out. Io's osculating mean motion swings enough to miss by 0.5 rad over 30
+    // days, and Mimas has a real 49-degree longitude libration — neither is an
+    // unwrapping failure, and both are reported as fit residual instead.
+    if (Math.abs(placed - predicted) > 1.5) {
+      throw new Error(`${id}: sample ${i} could not be unwrapped (off prediction by ${(placed - predicted).toFixed(3)} rad)`)
+    }
+    lambda.push(placed)
+  }
+  const line = fitLine(days, lambda)
+  const lambdaFit: { slope: number; intercept: number; harmonics?: LongitudeHarmonics } = LIBRATION_FIT_IDS.has(id) ? fitLibration(days, lambda, line) : line
+  const longitudeHarmonics = lambdaFit.harmonics
+  const correction = (day: number) => (longitudeHarmonics ?? []).reduce((sum, h) => {
+    const a = h.rateRadPerDay * (day + J2000 - h.epochJdTt)
+    return sum + h.cosineRad * Math.cos(a) + h.sineRad * Math.sin(a)
+  }, 0)
+  const meanAnomalyAtEpochRad = lambdaFit.intercept - apsis.phaseAtEpoch
+  const meanMotionRadPerDay = lambdaFit.slope - apsis.rate
+
+  if (RADIAL_FIT_IDS.has(id)) {
+    // Once mean longitude and the eccentricity vector have been reduced to a
+    // single precessing ellipse, mean(osculating a) is not generally the scale
+    // that best reproduces radius: phase residuals couple into `a(1-e cos E)`.
+    // Fit the final model's one remaining linear parameter directly to the
+    // authoritative osculating radii. The objective is relative radial error,
+    // so inner and outer phases carry equal weight.
+    let numerator = 0
+    let denominator = 0
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i]
+      const referenceEccentricAnomaly = solveKepler(row.meanAnomalyDeg * DEG, row.eccentricity)
+      const referenceRadiusKm = row.semiMajorAxisKm * (1 - row.eccentricity * Math.cos(referenceEccentricAnomaly))
+      const fittedMeanAnomaly = meanAnomalyAtEpochRad + meanMotionRadPerDay * days[i] + correction(days[i])
+      const fittedEccentricAnomaly = solveKepler(fittedMeanAnomaly, eccentricity)
+      const fittedRadiusPerKm = 1 - eccentricity * Math.cos(fittedEccentricAnomaly)
+      const coefficient = fittedRadiusPerKm / referenceRadiusKm
+      numerator += coefficient
+      denominator += coefficient * coefficient
+    }
+    semiMajorAxisKm = numerator / denominator
+  }
+  const worstLambdaResidual = Math.max(
+    ...lambda.map((value, i) => Math.abs(value - (lambdaFit.intercept + lambdaFit.slope * days[i] + correction(days[i])))),
+  )
+
+  const result: FitResult = {
+    id,
+    parent,
+    command,
+    center,
+    barycentreCompanion,
+    url,
+    fitFromJdTdb: rows[0].jd,
+    fitToJdTdb: rows[rows.length - 1].jd,
+    fitStepDays,
+    semiMajorAxisKm,
+    eccentricity,
+    inclinationRad,
+    poleRightAscensionRad,
+    poleDeclinationRad,
+    ascendingNodeRad,
+    ascendingNodeRateRadPerDay,
+    argumentOfPeriapsisRad,
+    argumentOfPeriapsisRateRadPerDay,
+    meanAnomalyAtEpochRad,
+    meanMotionRadPerDay,
+    worstLambdaResidual,
+    longitudeHarmonics,
+  }
+  if (POSITION_CORRECTION_FIT_IDS.has(id)) {
+    result.positionCorrection = fitPositionCorrection(rows, result, basis, POSITION_CORRECTION_OPTIONS[id])
+  }
+  results.push(result)
+}
+
+const entry = (r: (typeof results)[number]) => `  ${JSON.stringify(r.id)}: {
+    parent: '${r.parent}',
+    horizonsCode: '${r.command}',${r.barycentreCompanion ? `\n    barycentreCompanion: '${r.barycentreCompanion}',` : ''}
+${r.positionCorrection ? `    positionCorrection: ${JSON.stringify(r.positionCorrection)},\n` : ''}${r.longitudeHarmonics ? `    longitudeHarmonics: ${JSON.stringify(r.longitudeHarmonics)},\n` : ''}    fitFromJdTdb: ${r.fitFromJdTdb},
+    fitToJdTdb: ${r.fitToJdTdb},
+    fitStepDays: ${r.fitStepDays},
+    poleRightAscensionRad: ${shortest(r.poleRightAscensionRad, 1e-12)},
+    poleDeclinationRad: ${shortest(r.poleDeclinationRad, 1e-12)},
+    elements: {
+      epochJdTt: 2451545,
+      semiMajorAxisKm: ${shortest(r.semiMajorAxisKm, 1e-3)},
+      eccentricity: ${shortest(r.eccentricity, 1e-12)},
+      inclinationRad: ${shortest(r.inclinationRad, 1e-12)},
+      ascendingNodeRad: ${shortest(r.ascendingNodeRad, 1e-12)},
+      argumentOfPeriapsisRad: ${shortest(r.argumentOfPeriapsisRad, 1e-12)},
+      meanAnomalyAtEpochRad: ${shortest(r.meanAnomalyAtEpochRad, 1e-12)},
+      meanMotionRadPerDay: ${shortest(r.meanMotionRadPerDay, 1e-15)},
+      ascendingNodeRateRadPerDay: ${shortest(r.ascendingNodeRateRadPerDay, 1e-18)},
+      argumentOfPeriapsisRateRadPerDay: ${shortest(r.argumentOfPeriapsisRateRadPerDay, 1e-18)},
+    },
+  },`
+
+const destination = new URL('../src/data/satelliteElements.data.ts', import.meta.url)
+const records = selected.size ? readRecordSections(destination, 'SATELLITE_ELEMENTS') : new Map()
+for (const result of results) records.set(result.id, entry(result))
+const recordText = SATELLITES.map(([id]) => {
+  const record = records.get(id)
+  if (!record) throw new Error(`No checked record for ${id}; run the full generator first`)
+  return record
+}).join('\n')
+const out = `${HEADER(
+  `JPL Horizons osculating elements, ICRF frame, sampled at the body-specific fit ranges and cadences recorded below, reduced to mean elements in each moon's own Laplace plane`,
+  'generate-satellites.mts',
+)}
+import type { KeplerianElements } from '../kepler.js'
+import type { PeriodicVectorCorrection } from '../periodicCorrection.js'
+
+export interface SatelliteRecord {
+  /** Bounded prepared ICRF position residual about the fitted ellipse. */
+  readonly positionCorrection?: PeriodicVectorCorrection
+  /** Prepared slow libration in mean longitude; fitted inside the stated interval. */
+  readonly longitudeHarmonics?: readonly { readonly rateRadPerDay: number; readonly cosineRad: number; readonly sineRad: number; readonly epochJdTt: number }[]
+  /** Body id of the planet this moon orbits. */
+  readonly parent: string
+  /** Horizons target code, so a fixture can be re-fetched without guessing. */
+  readonly horizonsCode: string
+  /** Companion defining a binary barycentre; output remains parent-centred. */
+  readonly barycentreCompanion?: string
+  /** First and last JPL Horizons epochs sampled by the element fit. */
+  readonly fitFromJdTdb: number
+  readonly fitToJdTdb: number
+  readonly fitStepDays: number
+  /**
+   * Pole of this moon's own mean orbit plane (its local Laplace plane), in
+   * ICRF. \`elements\` are referred to the plane with this pole, x-axis along
+   * that plane's ascending node on the ICRF equator — the basis
+   * \`satelliteLaplaceBasis\` rebuilds.
+   */
+  readonly poleRightAscensionRad: number
+  readonly poleDeclinationRad: number
+  /** Referred to this moon's Laplace plane, epoch J2000 TT. */
+  readonly elements: KeplerianElements
+}
+
+/**
+ * Mean elements for the selected moons, derived from Horizons as described in
+ * \`tools/generate-satellites.mts\`. These are a FIT, not a satellite theory:
+ * see that file and README.md for the residual each one leaves.
+ */
+export const SATELLITE_ELEMENTS = {
+${recordText}
+} as const satisfies Record<string, SatelliteRecord>
+
+export type SatelliteId = keyof typeof SATELLITE_ELEMENTS
+`
+writeRecordSections(destination, out, 'satellites')
+
+process.stdout.write('satellite   a(km)        e      i_L(deg)   n(rad/d)     node-dot(deg/yr)  peri-dot(deg/yr)  lambda resid(rad)  pole RA/Dec(deg)\n')
+for (const r of results) {
+  process.stdout.write(
+    `${r.id.padEnd(11)} ${r.semiMajorAxisKm.toFixed(0).padStart(9)} ${r.eccentricity.toFixed(5)} ` +
+      `${(r.inclinationRad / DEG).toFixed(2).padStart(7)} ${r.meanMotionRadPerDay.toFixed(6).padStart(10)} ` +
+      `${((r.ascendingNodeRateRadPerDay / DEG) * 365.25).toFixed(3).padStart(17)} ` +
+      `${((r.argumentOfPeriapsisRateRadPerDay / DEG) * 365.25).toFixed(3).padStart(17)} ` +
+      `${r.worstLambdaResidual.toFixed(4).padStart(18)}  ` +
+      `${((r.poleRightAscensionRad / DEG + 360) % 360).toFixed(1).padStart(6)} ${(r.poleDeclinationRad / DEG).toFixed(1).padStart(6)}\n`,
+  )
+}
+
+await prepareBodyRecords()

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
-import {orthographicPoint} from './orthographic-observation.mjs';
-import {sampleColorBand} from './scientific-raster.mjs';
+import {orthographicPoint} from './orthographic-observation.mts';
+import {sampleColorBand} from './scientific-raster.mts';
 
 test('orthographic center and east/north orientation follow the source projection', () => {
   const p = {centerLongitude: 15, centerLatitude: 18, radius: 1352600};

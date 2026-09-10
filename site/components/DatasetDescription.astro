@@ -1,5 +1,7 @@
 ---
-import { datasetCaption } from "../dataset-caption.mjs";
+import type { Props as ShellProps } from '../planet-shell-types';
+interface Props { provenance?: ShellProps['provenance']; lens: NonNullable<ShellProps['lenses']>['controls'][number]; }
+import { datasetCaption } from "../dataset-caption.mts";
 import SelectedContent from "./SelectedContent.astro";
 const { provenance, lens } = Astro.props;
 const caption = datasetCaption(provenance, lens);

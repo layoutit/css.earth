@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { PREPARED_EARTH_SCENE as scene } from "../../unit/earth/prepared-fixture.mjs";
-import { prepareRegionPack,coverageLookup } from "../../../../tools/objects/geographic-pages/prepare-wmts-tree.mjs";
-import { prepareWmtsCoverage } from "../../../../tools/objects/geographic-pages/wmts-coverage.mjs";
-import { wmtsAddress } from "../../../../tools/objects/geographic-pages/wmts-page-geometry.mjs";
+import { prepareRegionPack,coverageLookup } from "../../../../tools/objects/geographic-pages/prepare-wmts-tree.mts";
+import { prepareWmtsCoverage } from "../../../../tools/objects/geographic-pages/wmts-coverage.mts";
+import { wmtsAddress } from "../../../../tools/objects/geographic-pages/wmts-page-geometry.mts";
 import { readPreparedWmtsBlock,preparedReferenceKey } from "../../../../src/renderers/css/dist/testing.js";
 import { createCityIndex } from "../../../../src/renderers/css/dist/testing.js";
 import { selectCityPages } from "../../../../src/renderers/css/dist/testing.js";

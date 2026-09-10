@@ -23,5 +23,11 @@
       "meanAnomalyAtEpochRad": 4.1943966577815,
       "meanMotionRadPerDay": 0.003740308668942
     }
+  },
+  "acquisition": {
+    "heliocentric": {
+      "target": "1;",
+      "model": "dwarfPlanet"
+    }
   }
 }

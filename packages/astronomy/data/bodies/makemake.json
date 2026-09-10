@@ -21,7 +21,13 @@
       "ascendingNodeRad": 0.8362027382853,
       "argumentOfPeriapsisRad": 5.838975433355,
       "meanAnomalyAtEpochRad": 2.9573145951844,
-      "meanMotionRadPerDay": 0.000056006097871
+      "meanMotionRadPerDay": 5.6006097871e-05
+    }
+  },
+  "acquisition": {
+    "heliocentric": {
+      "target": "136472;",
+      "model": "dwarfPlanet"
     }
   }
 }

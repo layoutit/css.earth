@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { VIEW_LAYERS, formatViewParameters, parseViewParameters, formatSharedView, parseSharedView } from "./view-url.mjs";
+import { VIEW_LAYERS, formatViewParameters, parseViewParameters, formatSharedView, parseSharedView } from "./view-url.mts";
 
 const token = "ED1EKjVv3t9gpEAk4O9YP9WQv-vR66IJEclAAYBqIc_PCEJ6B0WPzS42";
 // Captured by executing the source-of-truth viewUrl.ts parser itself.

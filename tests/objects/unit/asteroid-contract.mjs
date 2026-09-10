@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
-import {validateClosedMesh} from '../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
+import {validateClosedMesh} from '../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root=resolve(import.meta.dirname,'../../..');
 export async function assertAsteroidPackage(id, expectedLenses, radiusM) {
  const directory=resolve(root,'src/planets',id),read=async path=>JSON.parse(await readFile(resolve(directory,path)));

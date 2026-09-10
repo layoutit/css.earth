@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { inspectOpenSurface, orientObservedSurface, validateObservedReduction } from './open-surface.mjs';
+import { inspectOpenSurface, orientObservedSurface, validateObservedReduction } from './open-surface.mts';
 
 const positions = [[0,0,1],[-1,-1,0],[1,-1,0],[1,1,0],[-1,1,0]];
 const sides = [[0,1,2],[0,2,3],[0,3,4],[0,4,1]];

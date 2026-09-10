@@ -75,9 +75,12 @@ def summarize(label, entries):
         duplicates[v['oid']].append(p)
     selected = {p for p in entries if re.fullmatch(r'src/planets/[^/]+/(source/manifest|prepared/provenance)\.json', p)}
     selected.update(p for p,v in docs.items() if Path(p).suffix in ('.md','.json') and v['bytes'] < 6_000_000)
-    selected.add('site/objects.mjs')
+    registry = next((path for path in ('site/objects.mts', 'site/objects.mjs') if path in entries), None)
+    if registry is None:
+        raise RuntimeError('The selected revision has no object registry')
+    selected.add(registry)
     content = blobs(entries, selected)
-    registry_ids = sorted(set(re.findall(r'\.\./src/planets/([^/]+)/object\.json', content['site/objects.mjs'].decode())))
+    registry_ids = sorted(set(re.findall(r'\.\./src/planets/([^/]+)/object\.json', content[registry].decode())))
     # The inventory reports imports as static registry candidates, without executing JS.
     manifests = [p for p in content if p.endswith('/source/manifest.json')]
     required = ['README.md','NOTICE.md','source/manifest.json','object.json','prepared/provenance.json','runtime-assets.json']

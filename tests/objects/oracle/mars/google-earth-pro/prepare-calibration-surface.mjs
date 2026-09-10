@@ -9,10 +9,10 @@ import { dirname, resolve } from "node:path";
 import sharp from "sharp";
 
 import { packProjectiveSurfaceRaster } from
-  "../../../../../src/platform/projective-surface-raster.mjs";
+  "../../../../../src/platform/projective-surface-raster.mts";
 import shape from "../../../../../src/planets/mars/source/preparation/ellipsoid.json" with {type:'json'};
-import {createEllipsoidGeometry} from "../../../../../tools/objects/terrestrial-layers/ellipsoid-geometry.mjs";
-import {preparePolarAtlas} from "../../../../../tools/objects/terrestrial-layers/polar-stabilization.mjs";
+import {createEllipsoidGeometry} from "../../../../../tools/objects/terrestrial-layers/ellipsoid-geometry.mts";
+import {preparePolarAtlas} from "../../../../../tools/objects/terrestrial-layers/polar-stabilization.mts";
 const MARS_BODY_LATITUDE_BOUNDS_DEGREES=shape.latitudeBoundsDegrees;
 const marsBodyRasterBands=createEllipsoidGeometry(shape).rasterBands;
 const prepareMarsPolarAtlas=(source,size,options)=>preparePolarAtlas(source,size,{...shape.polar,...options});

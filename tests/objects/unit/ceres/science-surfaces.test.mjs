@@ -4,7 +4,7 @@ import { test } from "node:test";
 import sharp from "sharp";
 import profile from "../../../../src/planets/ceres/source/preparation/terrestrial.json" with {type:"json"};
 const SCIENCE_LENSES = profile.raster.scientific;
-import { colorForValue, loadScienceSurface, terrainBrightness as shadeTerrain } from "../../../../tools/objects/terrestrial-layers/scientific-raster.mjs";
+import { colorForValue, loadScienceSurface, terrainBrightness as shadeTerrain } from "../../../../tools/objects/terrestrial-layers/scientific-raster.mts";
 const terrainBrightness = (...args) => shadeTerrain(...args, SCIENCE_LENSES[0].relief);
 
 const root = resolve(import.meta.dirname, "../../../.."), sourceRoot = resolve(root, "src/planets/ceres/source");

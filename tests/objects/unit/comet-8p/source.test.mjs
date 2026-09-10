@@ -1,15 +1,15 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
-import { contactEllipsoidMesh, loadContactEllipsoids } from '../../../../tools/objects/terrestrial-layers/contact-ellipsoids.mjs';
-import { simplifyRadialShape } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
-import { parseVectors } from '../../../../packages/astronomy/tools/lib/horizons.mjs';
+import { contactEllipsoidMesh, loadContactEllipsoids } from '../../../../tools/objects/terrestrial-layers/contact-ellipsoids.mts';
+import { simplifyRadialShape } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
+import { parseVectors } from '../../../../packages/astronomy/tools/lib/horizons.mts';
 const root = new URL('../../../../src/planets/comet-8p/source/', import.meta.url);
 const json = async path => JSON.parse(await readFile(new URL(path, root), 'utf8'));
 const near = (actual, expected, tolerance) => assert.ok(Math.abs(actual - expected) < tolerance, `${actual} vs ${expected}`);
 
 test('each model product binds its own shape source without blending the alternative', async () => {
-  const {provenanceProducts} = await import('../../../../tools/objects/provenance-recipes.mjs');
+  const {provenanceProducts} = await import('../../../../tools/objects/provenance-recipes.mts');
   const document=provenanceProducts({id:'comet-8p',
     recipes:new Map([['terrestrial',{parameters:await json('preparation/terrestrial.json')}]]),
     manifest:await json('manifest.json'),lenses:(await json('content/object.json')).lenses,assets:{}});
@@ -38,8 +38,8 @@ test('Arecibo retains the published dimensions without Spitzer rescaling', async
 });
 
 test('both source meshes stay separate in one retained scene', async () => {
-  const { loadRadialModels, combineRadialModels } = await import('../../../../tools/objects/terrestrial-layers/radial-models.mjs');
-  const { createSourceManifest } = await import('../../../../src/platform/source-manifest.mjs');
+  const { loadRadialModels, combineRadialModels } = await import('../../../../tools/objects/terrestrial-layers/radial-models.mts');
+  const { createSourceManifest } = await import('../../../../src/platform/source-manifest.mts');
   const { fileURLToPath } = await import('node:url');
   const sourceDirectory = fileURLToPath(root), config = await json('preparation/terrestrial.json');
   const source = await createSourceManifest({ planetId:'comet-8p', planetName:'Tuttle', sourceRoot:sourceDirectory });
@@ -106,7 +106,7 @@ test('delivered mesh retains the analytic surface and the model pole stays at a 
       Math.abs(Math.hypot(p[0] - x, p[1], p[2]) - model.axesMeters[i][0])));
     assert.ok(distance < 1e-6, 'Delivered vertices remain on the published analytic spheres.');
   }
-  const { readAuthoredRotation } = await import('../../../../tools/objects/authored-rotation.mjs');
+  const { readAuthoredRotation } = await import('../../../../tools/objects/authored-rotation.mts');
   const descriptor = JSON.parse(await readFile(new URL('../object.json', root), 'utf8'));
   const reference = descriptor.properties.recipe.sources.find(s => s.id === 'rotation');
   const { fileURLToPath } = await import('node:url');

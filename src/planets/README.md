@@ -2,7 +2,7 @@
 
 Every detailed body is an authored data package under `src/planets/<id>/`.
 The directory name also covers the Sun, moons, dwarf planets, asteroids and
-comets. `OBJECTS` in `site/objects.mjs` remains the only rendered-body registry.
+comets. `OBJECTS` in `site/objects.mts` remains the only rendered-body registry.
 Navigation selects one active scene; it does not embed child scenes.
 
 Read [AGENTS.md](../../AGENTS.md), the
@@ -40,7 +40,7 @@ tests/objects/browser/<id>/     profiles for the shared browser harness
 site/pages/[id].astro           one shared route for all body ids
 ```
 
-Use the current authored branch of `tools/object-package-contract.mjs` for
+Use the current authored branch of `tools/object-package-contract.mts` for
 required files and `tests/objects/source-closure.test.mjs` for source ownership.
 The latter requires data-only body packages. Acquisition/preparation code lives
 in shared `tools/objects/` families; runtime and presentation behavior live in

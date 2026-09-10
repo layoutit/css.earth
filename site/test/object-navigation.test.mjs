@@ -3,11 +3,11 @@ import { mkdtemp, mkdir, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import test from "node:test";
-import { OBJECTS } from "../objects.mjs";
+import { OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mjs";
-import { objectNavigation, PLANET_SEARCH_OBJECTS, PLANET_NAVIGATION_OBJECTS } from "../planet-search-objects.mjs";
-import { loadMarkerDescriptors } from "../../tools/prepare-navigation.mjs";
-import { markerStyle, validateMarkerPresentation } from "../../src/navigation/marker-presentation.mjs";
+import { objectNavigation, PLANET_SEARCH_OBJECTS, PLANET_NAVIGATION_OBJECTS } from "../planet-search-objects.mts";
+import { loadMarkerDescriptors } from "../../tools/prepare-navigation.mts";
+import { markerStyle, validateMarkerPresentation } from "../../src/navigation/marker-presentation.mts";
 import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs";
 
 test("search contains every object, including the Sun; only planets enter the scale", () => {

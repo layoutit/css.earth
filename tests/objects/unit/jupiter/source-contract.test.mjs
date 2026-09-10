@@ -1,3 +1,3 @@
 import test from 'node:test';
-import{assertAuthoredGiantSourceContract}from'../../../../tools/objects/giant-layers/source-contract.mjs';
+import{assertAuthoredGiantSourceContract}from'../../../../tools/objects/giant-layers/source-contract.mts';
 test('Jupiter has a pinned, restorable source-only object package',()=>assertAuthoredGiantSourceContract('jupiter'));

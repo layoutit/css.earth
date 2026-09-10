@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { measureRetainedPlanetTrackball, measureRetainedPlanetFlyToDisc, retainedPlanetUniformScale } from "./camera-layout.mjs";
-import { createUnboundedMatrixDragControls } from "./camera-input.mjs";
+import { measureRetainedPlanetTrackball, measureRetainedPlanetFlyToDisc, retainedPlanetUniformScale } from "./camera-layout.mts";
+import { createUnboundedMatrixDragControls } from "./camera-input.mts";
 import {
   createGoogleEarthDragHistory,
   recordGoogleEarthDragSample,
@@ -10,9 +10,9 @@ import {
   advanceGoogleEarthDragThrow,
   projectGoogleEarthTrackballDelta,
   googleEarthInteractionTrackball,
-} from "./google-earth-drag-inertia.mjs";
+} from "./google-earth-drag-inertia.mts";
 import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity } from "./sphere-drag.mjs";
-import { mountRetainedCubicSky } from "./cubic-sky-runtime.mjs";
+import { mountRetainedCubicSky } from "./cubic-sky-runtime.mts";
 import PREPARED_MERCURY_STARFIELD from "../../src/planets/mercury/prepared/sky.json" with {type: "json"};
 
 function mountStarFixture(t, { width = 1440, height = 900 } = {}) {

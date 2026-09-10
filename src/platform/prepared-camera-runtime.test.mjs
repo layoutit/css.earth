@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createPreparedCameraPublisher } from "./prepared-camera-runtime.mjs";
-import { selectPreparedResponsiveZoom } from "./camera-layout.mjs";
+import { createPreparedCameraPublisher } from "./prepared-camera-runtime.mts";
+import { selectPreparedResponsiveZoom } from "./camera-layout.mts";
 
 test("zoom preserves the mounted perspective and prepared layer depths", () => {
   const writes = [];

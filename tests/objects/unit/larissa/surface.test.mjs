@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {loadPdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
+import {loadPdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 
 test('Larissa keeps the published west-positive radius samples in metres', async () => {
   const source = resolve(import.meta.dirname, '../../../../src/planets/larissa/source');

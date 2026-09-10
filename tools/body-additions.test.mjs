@@ -4,9 +4,10 @@ import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import test from 'node:test';
-import { readCatalog, prepareCatalog } from './prepare-catalog.mjs';
-import { prepareBodyRecords } from '../packages/astronomy/tools/body-records.mjs';
-import { prepareMarkerBindings } from './prepare-marker-bindings.mjs';
+import { readCatalog, prepareCatalog } from './prepare-catalog.mts';
+import { prepareBodyRecords } from '../packages/astronomy/tools/body-records.mts';
+import { literalRecords } from '../packages/astronomy/tools/lib/write-record-sections.mts';
+import { prepareMarkerBindings } from './prepare-marker-bindings.mts';
 
 const write = async (path, value) => {
   await mkdir(dirname(path), { recursive: true });
@@ -39,7 +40,7 @@ test('independent asteroid, moon and comet branches merge without changing exist
   git('config', 'user.email', 'test@example.invalid');
   git('config', 'commit.gpgsign', 'false');
   git('config', 'core.hooksPath', '/dev/null');
-  await write(resolve(root, '.gitignore'), '/site/prepared-object-catalog.mjs\n/packages/astronomy/src/data/generated/\n');
+  await write(resolve(root, '.gitignore'), '/site/prepared-object-catalog.mts\n/packages/astronomy/src/data/generated/\n');
   await mkdir(resolve(root, 'packages/astronomy/data/fixtures'), { recursive: true });
   await addBody(root, 'sun', 'star');
   await addBody(root, 'existing-body', 'asteroid');
@@ -81,4 +82,11 @@ test('an unfinished folder stays unpublished and a mismatched descriptor fails',
   const descriptor = JSON.parse(await readFile(resolve(root, 'src/planets/sun/object.json')));
   await write(path, descriptor);
   await assert.rejects(readCatalog(resolve(root, 'src/planets')), /identity differs/);
+});
+
+test('retained-record decoding accepts quoted body IDs and rejects executable source', () => {
+  assert.deepEqual(literalRecords('export const RECORDS = { "test-moon": { value: -1, samples: [2, null] } } as const', 'RECORDS'),
+    { 'test-moon': { value: -1, samples: [2, null] } });
+  assert.throws(() => literalRecords('export const RECORDS = { body: process.exit(0) }', 'RECORDS'), /Expected a numeric source record/);
+  assert.throws(() => literalRecords('export const RECORDS = { ...otherRecords }', 'RECORDS'), /literal record property/);
 });

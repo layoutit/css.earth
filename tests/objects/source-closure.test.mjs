@@ -2,16 +2,16 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,readdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {OBJECTS} from '../../site/objects.mjs';
+import {OBJECTS} from '../../site/objects.mts';
 import {projectRoot} from './fixtures.mjs';
 const selected=OBJECTS;
 assert.ok(selected.length>0,'The registry must exercise source closure.');
-const executable=/\.(?:mjs|cjs|[jt]sx?|astro|css)$/i;
+const executable=/\.(?:[cm]?[jt]sx?|astro|css)$/i;
 async function files(root){const result=[];for(const entry of await readdir(root,{withFileTypes:true})){const path=resolve(root,entry.name);if(entry.isDirectory())result.push(...await files(path));else {assert.ok(entry.isFile(),`Unexpected non-file ${path}`);result.push(path);}}return result;}
 for(const {id} of selected){
  test(`${id}: authored object directory contains data and pinned sources only`,async()=>{
   const root=resolve(projectRoot,'src/planets',id),entries=await readdir(root,{withFileTypes:true});
-  for(const entry of entries)assert.ok(entry.isDirectory()?entry.name==='source'||entry.name==='prepared':(entry.name==='.gitignore'||entry.name.endsWith('.json')||/^(?:README|NOTICE|LICENSE)(?:[._-].*)?$/.test(entry.name)),`Executable/presentation owner leaked into object data: ${id}/${entry.name}`);
+  for(const entry of entries)assert.ok(entry.isDirectory()?entry.name==='source'||entry.name==='prepared':(['.gitignore','.gitattributes'].includes(entry.name)||entry.name.endsWith('.json')||/^(?:README|NOTICE|LICENSE)(?:[._-].*)?$/.test(entry.name)),`Executable/presentation owner leaked into object data: ${id}/${entry.name}`);
   const prepared=await files(resolve(root,'prepared'));
   assert.ok(prepared.length>0,`Prepared data is missing: ${id}/prepared`);
   for(const path of await files(root))assert.equal(executable.test(path),false,`Object-specific executable remains: ${path}`);

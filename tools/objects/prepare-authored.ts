@@ -46,7 +46,7 @@ function validateCapabilityComposition(descriptor: AuthoredObjectDescriptor, ras
   sameIds(prepared, declared, 'Prepared lenses');
 }
 async function writePreparedObject(id: string, definition: Record<string, unknown>): Promise<void> {
-  const module = record(await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-object-json.mjs')).href), 'prepared object writer');
+  const module = record(await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-object-json.mts')).href), 'prepared object writer');
   const write = module.writeObjectJson;
   if (typeof write !== 'function') throw new TypeError('Prepared object writer is missing.');
   await (write as (objectId: string, runtime: Record<string, unknown>) => Promise<unknown>)(id, definition);
@@ -56,11 +56,11 @@ async function writePreparedObject(id: string, definition: Record<string, unknow
 export async function prepareAuthoredObject({ objectDirectory, publicDirectory, outputDirectory, write = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
   const result = await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write });
   if (write || !result.definition) return result;
-  const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-surface-minimaps.mjs')).href);
+  const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-surface-minimaps.mts')).href);
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory });
   const prepared = await prepareWorldNavigationDefinition({ objectDirectory, definition: result.definition as Record<string, unknown> });
   const scene = await writeWorldNavigationArtifacts(outputDirectory, prepared, result.scene as Record<string, unknown> | undefined);
-  const { prepareObjectProvenance } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/provenance.mjs')).href);
+  const { prepareObjectProvenance } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/provenance.mts')).href);
   await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'prepared' });
   return Object.freeze({ ...result, definition: prepared.definition, scene });
 }
@@ -74,7 +74,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const stage = await mkdtemp(resolve(stageRoot, `${id}-`));
     const stagedPublic = resolve(stage, 'public'), stagedData = resolve(stage, 'prepared');
     const result = await prepareAuthoredObject({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData });
-    const { publishPreparedAssets, readPreparedJsonOutputs } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/publication.mjs')).href) as typeof import('./publication.mjs');
+    const { publishPreparedAssets, readPreparedJsonOutputs } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/publication.mts')).href) as typeof import('./publication.mts');
     if (!result.definition) throw new TypeError('Preparation produced no runtime payload.');
     const outputs = await readPreparedJsonOutputs(stagedData);
     const manifest = JSON.parse(await readFile(resolve(stagedData, 'runtime-assets.json'), 'utf8'));
@@ -101,36 +101,36 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   const entries = await Promise.all(descriptor.recipe.sources.map(reference => verifiedSource(objectDirectory, reference)));
   const sources = new Map(entries.map(entry => [entry.reference.id, entry]));
   if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-static-surface-geometry@1') {
-    const { prepareStaticSurfaceObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/static-surface/index.mjs')).href) as typeof import('./static-surface/index.mjs');
+    const { prepareStaticSurfaceObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/static-surface/index.mts')).href) as typeof import('./static-surface/index.mts');
     return prepareStaticSurfaceObject({ objectDirectory, publicDirectory, outputDirectory, write });
   }
   await mkdir(outputDirectory, { recursive: true });
   const sourceDirectory = resolve(objectDirectory, 'source');
   if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-layered-oblate-preparation@1') {
-    const { prepareLayeredOblateObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/material-composition/index.mjs')).href) as typeof import('./material-composition/index.mjs');
+    const { prepareLayeredOblateObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/material-composition/index.mts')).href) as typeof import('./material-composition/index.mts');
     return prepareLayeredOblateObject({ objectDirectory, publicDirectory, outputDirectory, write, prepareContent: prepareObjectContentAssets });
   }
   if (source(sources, 'paged-ellipsoid')) {
-    const { preparePagedEllipsoidObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/paged-ellipsoid/index.mjs')).href) as typeof import('./paged-ellipsoid/index.mjs');
+    const { preparePagedEllipsoidObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/paged-ellipsoid/index.mts')).href) as typeof import('./paged-ellipsoid/index.mts');
     const prepared = await preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
       manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),
       allowPreparationArtifacts: true,
       values: [prepared.definition, prepared.content] });
     if (write) await writePreparedObject(descriptor.id, prepared.definition);
-    return Object.freeze({ descriptor, sources, ...prepared });
+    return Object.freeze({ ...prepared });
   }
   if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-banded-ellipsoid@1') {
-    const { prepareLayeredGiantObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/giant-layers/object.mjs')).href) as typeof import('./giant-layers/object.mjs');
+    const { prepareLayeredGiantObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/giant-layers/object.mts')).href) as typeof import('./giant-layers/object.mts');
     const prepared = await prepareLayeredGiantObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
       manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),
       values: [prepared.raster, prepared.celestial, prepared.scene, prepared.definition, prepared.content] });
     if (write) await writePreparedObject(descriptor.id, prepared.definition);
-    return Object.freeze({ descriptor, sources, ...prepared });
+    return Object.freeze({ ...prepared });
   }
   if (source(sources, 'shape-model')) {
-    const { prepareShapeModel } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/shape-model/index.mjs')).href);
+    const { prepareShapeModel } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/shape-model/index.mts')).href) as typeof import('./shape-model/index.mts');
     const prepared = await prepareShapeModel({ descriptor, sources, objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory, manifestPath: resolve(outputDirectory, 'runtime-assets.json'), allowPreparationArtifacts: true, values: [prepared.definition, prepared.content] });
     return Object.freeze({ descriptor, sources, ...prepared });
@@ -138,7 +138,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   if (source(sources, 'terrestrial')) {
     const terrestrial = record(required(sources, 'terrestrial').value, 'terrestrial');
     if (Boolean(terrestrial.rings) !== Boolean(descriptor.recipe.rings)) throw new TypeError('Prepared terrestrial rings must match the authored capability.');
-    const { prepareTerrestrialLayers } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/terrestrial-layers/index.mjs')).href) as typeof import('./terrestrial-layers/index.mjs');
+    const { prepareTerrestrialLayers } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/terrestrial-layers/index.mts')).href) as typeof import('./terrestrial-layers/index.mts');
     const prepared = await prepareTerrestrialLayers({ sourceDirectory, publicDirectory, outputDirectory,
       config: terrestrial, prepareContent: prepareObjectContentAssets });
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,

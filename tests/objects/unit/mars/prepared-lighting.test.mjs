@@ -9,7 +9,7 @@ import { PREPARED_MARS_CAMERA } from "../../unit/mars/prepared-fixture.mjs";
 import { PREPARED_MARS_LIGHTING } from "../../unit/mars/prepared-fixture.mjs";
 import { PREPARED_MARS_SKY_SUN } from "../../unit/mars/prepared-fixture.mjs";
 import { viewSunDirectionToPreparedLightDirection } from
-  "../../../../src/platform/directional-sun-coordinate.mjs";
+  "../../../../src/platform/directional-sun-coordinate.mts";
 import {
   MARS_MATERIAL_CONTENT_SCALE,
   MARS_MATERIAL_COVERAGE_SCALE,

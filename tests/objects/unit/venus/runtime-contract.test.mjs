@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { mountPreparedPresentation } from "../../../../src/platform/prepared-presentation.mjs";
+import { mountPreparedPresentation } from "../../../../src/platform/prepared-presentation.mts";
 import runtimeDefinition from "../../../../src/planets/venus/prepared/runtime.json" with {type: "json"};
 import { objectRuntimePackageTests, preparedSelectionFixture, retainedPresentationFixture } from "../../../../src/platform/test/object-runtime-package.mjs";
 

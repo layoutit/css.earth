@@ -1,13 +1,13 @@
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createPreparedMaterialPublisher, preparedMaterialState } from '../renderers/css/dist/testing.js';
 import { selectedPreparedVariant } from '../renderers/css/dist/testing.js';
 import { initialObjectSelection } from '../renderers/css/dist/testing.js';
-import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mjs";
+import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mts";
 import { retainedPresentationFixture } from "./test/object-runtime-package.mjs";
 const mars = await loadObjectTestDefinition('mars');
-import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coordinate.mjs";
+import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coordinate.mts";
 
 const track = mars.materials[0], phaseMaximum = Math.max(...track.frame.indices), bankLength = phaseMaximum + 1;
 const selected = shadows => selectedPreparedVariant(mars, { ...initialObjectSelection(mars.controls), shadows }).materials[0];
