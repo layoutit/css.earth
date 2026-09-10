@@ -10,8 +10,8 @@ export type NavigationContent = Awaited<ReturnType<ReturnType<typeof createNavig
 export interface ShellOptions { highContrastSky?: boolean; onSkyContrastChange?(enabled: boolean): void; objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; asteroidOrbitsEnabled?: boolean; onAsteroidOrbitsChange?(enabled: boolean): void; asteroidLabelsEnabled?: boolean; onAsteroidLabelsChange?(enabled: boolean): void; }
 interface SelectionPreview { id: string | null; frame?: PreparedWorldCameraFrame | null; commit?(): void; restore(): void; }
 type Panel = readonly [string, HTMLDetailsElement];
-const missionIds = (source: string | undefined): Set<string> => { const value: unknown = JSON.parse(source ?? 'null'); if (!Array.isArray(value) || !value.every(id => typeof id === 'string')) throw new TypeError('Mission agencies require prepared mission identifiers.'); return new Set(value); };
 import { objectCategory, matchesObjectCategory, objectCategoryCount } from "./object-categories.mts";
+import { createDatasetContextController } from './dataset-context-controller.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { createChartPixelAlignmentController } from "./chart-pixel-alignment.mts";
 import { createDestinationBrowser } from "./destination-browser.mts";
@@ -220,7 +220,7 @@ export function mountPlanetShell({
     const owner = contentLifetime = createSceneLifetime();
     const retain = <T extends { destroy(): void }>(controller: T): T => { owner.onDispose(() => controller.destroy()); return controller; };
     informationTabs = retain(createInformationTabsController(drawer, owner));
-    retain(createMissionAgencyController(drawer, owner));
+    retain(createDatasetContextController(drawer, documentTarget, windowTarget, owner));
     retain(createChartSwitcherController(drawer, windowTarget, owner));
     retain(createChartPixelAlignmentController(drawer, windowTarget));
     retain(createLensBrowserController(drawer, windowTarget, owner));
@@ -275,36 +275,6 @@ function createInformationTabsController(drawer: HTMLElement, lifetime: SceneLif
     const tab = tabs.find(tab => tab.dataset.informationTab === id);
     if (tab) select(tab);
   }, destroy() { events.abort(); } };
-}
-
-function createMissionAgencyController(drawer: HTMLElement, lifetime: SceneLifetime) {
-  const panel = drawer.querySelector<HTMLElement>('[data-information-panel="missions"]');
-  const choices = [...(panel?.querySelectorAll<HTMLElement>('[data-mission-agency]') ?? [])].map(button => ({
-    button,
-    missionIds: missionIds(button.dataset.agencyMissions),
-  }));
-  const figures = [...(panel?.querySelectorAll<HTMLElement>('[data-mission]') ?? [])];
-  const results = panel?.querySelector('[data-mission-results]');
-  const events = new AbortController();
-  lifetime.onDispose(() => events.abort());
-  const select = (choice: typeof choices[number], focus = false) => {
-    for (const item of choices) item.button.setAttribute('aria-pressed', String(item === choice));
-    for (const figure of figures) figure.hidden = !choice.missionIds.has(figure.dataset.mission ?? "");
-    results?.setAttribute('aria-label', `${choice.button.dataset.missionAgency} missions`);
-    if (focus) choice.button.focus();
-  };
-  choices.forEach((choice, index) => {
-    choice.button.addEventListener('click', () => select(choice), { signal: events.signal });
-    choice.button.addEventListener('keydown', event => {
-      const next = event.key === 'Home' ? 0 : event.key === 'End' ? choices.length - 1
-        : event.key === 'ArrowDown' ? (index + 1) % choices.length
-        : event.key === 'ArrowUp' ? (index - 1 + choices.length) % choices.length : null;
-      if (next === null) return;
-      event.preventDefault();
-      select(choices[next], true);
-    }, { signal: events.signal });
-  });
-  return { destroy() { events.abort(); } };
 }
 
 function createLensBrowserController(drawer: HTMLElement, windowTarget: BrowserWindow, lifetime: SceneLifetime) {

@@ -61,8 +61,9 @@ Source manifests use one of three explicit capture forms:
 A `mission` attribution supplies `missionId` and `evidence`. An `unresolved`
 attribution supplies `label`, `evidence` and `reason`. Vehicle-only attribution
 omits `missionId`; the compiler must not choose one from participation. Evidence
-may be prose and must not be manufactured into a URL. The Sources tab retains the
-source's original archive and acquisition links.
+may be prose and must not be manufactured into a URL. Source records retain the
+original archive and acquisition links; the Sources card uses the published
+citation URL.
 
 The [contribution compiler](../../src/platform/exploration-contributions.mts)
 walks the existing source/product lineage, including dependencies and parent
@@ -88,12 +89,19 @@ exposes `MISSIONS` and `SPACECRAFT`. A stale catalogue fails the build. Astro
 renders the current body's cards and relevant vehicle details; the browser does
 not receive the complete graph or walk source provenance.
 
-The shared inert sidebar previews omit mission details. Selecting a body still
+The shared inert sidebar previews omit dataset context. Selecting a body still
 shows its prepared preview immediately; the existing `/navigation/<id>/` content
-request supplies its mission panel before the destination controls become active.
-The content transport fills that deferred panel while retaining the preview's
+request supplies its mission and source cards before the destination controls become active.
+The content transport fills that deferred template while retaining the preview's
 overview and controls. It does not create a separate catalogue fetch or preload
 every body's mission markup.
+
+Each selected dataset shows one card per contributing mission and a Sources
+card on the right. Mission names sit over the artwork, with supplied date ranges
+on the next line. Unknown attribution stays as supplied prose. The context is
+hidden in overview, Factsheet and Moons views; on narrow screens it follows the
+body card. The detail and overview Moons tabs share the same prepared orbit-parent
+list and normal object navigation.
 
 ## Dataset navigation
 
@@ -126,6 +134,9 @@ The router owns both the fragment and history:
 
 ## Interface examples
 
+These captures document the previous Missions tab, not the current dataset
+context cards.
+
 The Moon illustrates the distinction between a mission contribution and vehicle
 participation. GRAIL links to the Crust dataset, while GRAIL-A and GRAIL-B are
 labelled as mission participants. These desktop and phone examples were captured
@@ -155,8 +166,8 @@ The [browser regression](../../site/test/dataset-navigation-browser.mts)
 uses the public shell and records its cases, browser version, requests and
 screenshots under `output/playwright/dataset-navigation/`. It checks direct,
 same-body and cross-body dataset navigation, manual selection and history,
-invalid links, keyboard details, individual contribution labels, namespace
-isolation and the phone layout.
+invalid links, keyboard selection, dataset-specific attribution, deferred
+content, Moons navigation and the phone layout.
 
 Check one mounted object and stable shared controls during those scenarios.
 A source association does not certify texture delivery or scientific accuracy.

@@ -9,11 +9,12 @@ const external = (url: unknown): url is string => {
 };
 
 /** Presentation only: dependency and source decisions belong to preparation. */
-export function objectSources(provenance: ProvenanceDocument | null | undefined) {
+export function objectSources(provenance: ProvenanceDocument | null | undefined, lensId?: string) {
   if (!provenance) return [];
   const document = validateObjectProvenance(provenance);
   const uses = new Map<string, Set<string>>();
   for (const product of document.products) {
+    if (lensId !== undefined && !product.lensIds?.includes(lensId)) continue;
     for (const id of productSourceIds(document, product.id)) {
       const labels = uses.get(id) ?? new Set();
       if (!product.parents.length) labels.add(product.label);

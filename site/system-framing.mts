@@ -76,7 +76,7 @@ export function systemFramingRect(optics: Optics, documentTarget?: Document) {
   if (stage && documentTarget) {
     const cx = stage.left + stage.width / 2, cy = stage.top + stage.height / 2;
     // Read once on selection, never in the animation loop.
-    for (const selector of ['.planet-sidebar', '.explorer-shell-header', '.planet-view-readout', '.planet-attribution-footer']) {
+    for (const selector of ['.planet-sidebar', '.explorer-shell-header', '.planet-footer']) {
       const box = documentTarget.querySelector(selector)?.getBoundingClientRect();
       if (!box || !box.width || !box.height) continue;
       if (box.right < cx) rect.left = Math.max(rect.left, box.right - cx);

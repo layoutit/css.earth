@@ -1,7 +1,7 @@
 import type { SceneState } from './shell-contract-types.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { ObjectSceneLifecycle } from '../src/renderers/css/runtime/deferred-object-mount.js';
-import type { BrowserWindow, SceneFactory } from './browser-types.mts';
+import type { BrowserWindow, MountOptions, SceneFactory } from './browser-types.mts';
 import { errorMessage, record } from './browser-types.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { NavigationOptions } from './navigation-history.mts';
@@ -9,12 +9,13 @@ import type { NavigationContent } from './planet-shell-client.mts';
 import type { WorldHandoff } from './prepared-world-navigation.mts';
 type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 type Shell = ReturnType<typeof mountPlanetShell>;
+type ApplicationWorldMount = Awaited<ReturnType<ReturnType<typeof applicationWorldContext.createApplicationWorldContext>['mount']>>;
 /** The router only owns the application world's publication boundary. */
 export interface WorldContextMount {
   readonly viewport?: MountOptions['viewport'];
   publish: NonNullable<import('../src/renderers/css/runtime/object-runtime-types.js').WorldContextLayer['publish']>;
   destroy(): void;
-  createFramePresenter?(): import('../src/renderers/css/navigation/world-frame-presenter.js').WorldFramePresenter;
+  createFramePresenter?: ApplicationWorldMount['createFramePresenter'];
   previewSelection?(id?: string | null): void;
   selectObject?(id: string, frame: NonNullable<ObjectSceneLifecycle['navigation']>['frame']): void;
   setHighContrastSky?(enabled: boolean): void;
@@ -40,6 +41,7 @@ import { createNavigationContent } from './navigation-content.mts';
 import { createNavigationHistory, bindNavigationLinks } from './navigation-history.mts';
 import { formatSharedView } from '../src/renderers/css/dist/navigation.js';
 import { createPreparedWorldNavigation } from './prepared-world-navigation.mts';
+import * as applicationWorldContext from './application-world-context.mts';
 import { solarSystemFocus, watchOverviewSelection } from './overview-selection.mts';
 import { overviewScopeFromUrl } from './navigation-scope.mts';
 import { createNavigationTiming } from './navigation-timing.mts';

@@ -1,8 +1,8 @@
 ---
+import { DIAGNOSTICS_ENABLED } from "../diagnostics-policy.mts";
 import PlanetInformationPanel from "./PlanetInformationPanel.astro";
 import type { Props } from "../planet-shell-types";
 import { OBJECTS } from "../objects.mts";
-import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { requireObjectControls } from "../scene-contract.mts";
 import { sceneSources } from "../scene-sources.mts";
@@ -57,6 +57,7 @@ const unavailableSystems = planetarySystems.unavailable.map(system => ({
 }));
 const sources = sceneSources(resources);
 const hasResources = sources.length > 0;
+const searchPlaceholder = `Search ${OBJECTS.length} planets, moons, comets, asteroids...`;
 ---
 
 <header class="explorer-shell-header">
@@ -76,12 +77,12 @@ const hasResources = sources.length > 0;
   </div>
   <div class="planet-search-toolbar">
     <ExplorerRail objectId={objectId} />
-    <div class="planet-sidebar-search-card" role="search" aria-label="Object search">
+    <div class="planet-sidebar-search-card" role="search" aria-label="Object search" data-search-prompt={searchPlaceholder}>
       <input
         class="planet-sidebar-search"
         type="search"
-        placeholder={`Search celestial bodies (${PLANET_SEARCH_OBJECTS.length})`}
-        aria-label={`Search celestial bodies (${PLANET_SEARCH_OBJECTS.length})`}
+        placeholder={searchPlaceholder}
+        aria-label={searchPlaceholder}
         autocomplete="off"
       />
       <button
@@ -98,6 +99,7 @@ const hasResources = sources.length > 0;
     </div>
   </div>
 </header>
+<div class="planet-dataset-context-dock"><aside class="planet-dataset-context-rail" aria-label="Selected dataset context" hidden></aside></div>
 <div class="planet-sidebar-frame">
 <aside id={`${objectId}-sidebar`} class="planet-sidebar" data-has-destinations={destinations ? "true" : undefined} aria-label="Planet information">
   <section class="explorer-about-panel" id={`${objectId}-about`} aria-labelledby={`${objectId}-about-title`} hidden>
@@ -263,8 +265,10 @@ const hasResources = sources.length > 0;
 </aside>
 </div>
 
-{hasResources && <footer
+<footer class="planet-footer" aria-label="Sources and view information">
+<nav
   class="planet-attribution-footer"
+  hidden={!hasResources}
   aria-label={`${title.label} and shared universe sources`}
 >
   {sources.map((resource, index) => (
@@ -273,13 +277,37 @@ const hasResources = sources.length > 0;
       <a
         class="planet-attribution-link"
         href={resource.href}
-        title={resource.description}
+        title={`${resource.role}: ${resource.description}`}
+        aria-label={`${resource.role}: ${resource.label}`}
         target="_blank"
         rel="noreferrer"
       >
-        <span class="planet-attribution-role">{resource.role}</span>
         <span class="planet-attribution-source">{resource.label}</span>
       </a>
     </>
   ))}
-</footer>}
+</nav>
+    <div class="planet-view-readout" aria-label="View information">
+      {DIAGNOSTICS_ENABLED && <button type="button" class="planet-diagnostic-record" data-diagnostic-record aria-label="Record diagnostic data" aria-pressed="false" hidden>Record</button>}
+      <span class="planet-view-date" title="Date of the scene's prepared orbital positions (Terrestrial Time)" hidden>
+        <span>Epoch: <span data-view-date></span></span>
+        <span class="planet-view-separator" aria-hidden="true">·</span>
+      </span>
+      <span class="planet-view-coordinates" title="Coordinates at the center of the view" hidden>
+        <span data-view-latitude></span>
+        <span class="planet-view-separator" aria-hidden="true">·</span>
+        <span data-view-longitude></span>
+        <span class="planet-view-separator" aria-hidden="true">·</span>
+      </span>
+      <span class="planet-view-altitude" title="Camera altitude above the selected object's reference surface">
+        <span data-view-distance-label>Altitude:</span> <span data-view-altitude>—</span>
+      </span>
+      <span class="planet-view-scale" hidden>
+        <span class="planet-view-separator" aria-hidden="true">·</span>
+        <span class="planet-view-ruler-slot" aria-hidden="true">
+          <span class="planet-view-ruler"><span class="planet-view-measure"></span></span>
+        </span>
+        <span data-view-scale-label></span>
+      </span>
+    </div>
+</footer>
