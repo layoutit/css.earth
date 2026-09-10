@@ -19,8 +19,10 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - name: Check documentation links
-        run: python3 tools/audits/check-documentation-links.py --all
+      - name: Check documentation links and organization
+        run: |
+          python3 tools/audits/test_documentation_links.py
+          python3 tools/audits/check-documentation-links.py --all
       - name: Check tracked files against ignore rules
         run: |
           git ls-files -z > "$RUNNER_TEMP/tracked-paths"
@@ -42,7 +44,9 @@ jobs:
           pnpm build:renderer
           pnpm build:preparation
       - name: Check source restoration and tracked inputs
-        run: node --test tools/restore-source-inputs.test.mjs
+        run: |
+          node --test tools/restore-source-inputs.test.mjs
+          node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mjs
       - name: Typecheck renderer and preparation
         run: |
           pnpm typecheck:renderer

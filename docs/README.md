@@ -25,8 +25,10 @@ same workflow and implementation.
 
 ## Where work belongs
 
-Keep maintained explanations and their illustrations here. Put processing code in
-`tools/`, test fixtures in `tests/`, and source identities beside the body.
+Keep maintained Markdown guides here and their illustrations in `images/`.
+Link each guide from this index or another guide, and each illustration from a
+guide. Put processing code in `tools/`, test fixtures in `tests/`, and source
+identities beside the body.
 Link historical evidence at its exact Git revision from the account that uses it.
 Plans, superseded proposals and raw run output do not need a permanent copy in
 the current tree.
@@ -35,5 +37,7 @@ Update the affected guide or body README in the same PR as the change. Use the
 [PR template](../.github/pull_request_template.md) for the result and checks;
 do not add a separate completion report to `docs/`.
 
-CI checks local links and heading anchors. Run the same check with
+CI checks local links, heading anchors, file placement and links from this index.
+It also rejects duplicate body `SOURCE.md`, `EVIDENCE.md` and `USAGE.md` accounts.
+Run the same check with
 `python3 tools/audits/check-documentation-links.py --all`.

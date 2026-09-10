@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""Check relative Markdown links in a diff or the current tree, including sparse trees.
+"""Check Markdown links and documentation placement, including sparse trees.
 
-This checks repository paths and Markdown heading anchors, not external URLs or
-scientific claims. It does not execute linked files or require body assets.
+This checks repository paths, Markdown heading anchors and the docs index, not
+external URLs, writing quality or scientific claims. It requires no body assets.
 """
 import argparse
 import json
 import posixpath
 import re
 import subprocess
+from html import unescape
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
@@ -66,26 +67,76 @@ def anchors(text):
         result.add(heading + (f'-{occurrence}' if occurrence else ''))
     return result
 
-errors, checked = [], 0
-markdown = sorted(path for path in (known if args.all else changed) if path.endswith('.md'))
-for file in markdown:
+def local_links(file, include_other_syntax=False):
     source = without_fences(contents(file))
-    for target in re.findall(r'!?\[[^\]]*\]\(([^)\n]+)\)', source):
+    targets = re.findall(r'!?\[[^\]]*\]\(([^)\n]+)\)', source)
+    if include_other_syntax:
+        # The docs index walk also accepts reference links and sized HTML images.
+        key = lambda label: ' '.join(label.split()).casefold()
+        references = {key(label): target for label, target in re.findall(
+            r'^ {0,3}\[([^\]\n]+)\]:\s*(<[^>\n]+>|\S+)', source, re.M)}
+        for label, reference in re.findall(r'!?\[([^\]\n]+)\](?:\[([^\]\n]*)\])?(?![(:])', source):
+            target = references.get(key(reference or label))
+            if target:
+                targets.append(target)
+        targets.extend(unescape(target) for target in re.findall(
+            r'<(?:a|img)\b[^>]*?\b(?:href|src)\s*=\s*["\x27]([^"\x27]+)["\x27]', source, re.I))
+    for target in targets:
         target = target.strip().strip('<>').split(' "')[0]
         if re.match(r'^[a-z][a-z0-9+.-]*:', target, re.I):
             continue
         parsed = urlsplit(target)
         path = unquote(parsed.path)
         path = posixpath.normpath(posixpath.join(posixpath.dirname(file), path)) if path else file
+        yield target, path, unquote(parsed.fragment)
+
+errors, checked = [], 0
+markdown = sorted(path for path in (known if args.all else changed) if path.endswith('.md'))
+for file in markdown:
+    for target, path, fragment in local_links(file):
         checked += 1
         directory = any(candidate.startswith(path.rstrip('/') + '/') for candidate in known)
         if path not in known and not directory:
             errors.append({'file': file, 'target': target, 'reason': 'missing repository path'})
-        elif parsed.fragment and path.endswith('.md') and path in known:
-            if unquote(parsed.fragment) not in anchors(contents(path)):
+        elif fragment and path.endswith('.md') and path in known:
+            if fragment not in anchors(contents(path)):
                 errors.append({'file': file, 'target': target, 'reason': 'missing Markdown anchor'})
+
+# Shared docs contain guides and their illustrations. Walk from the index so
+# adding a folder or linking two otherwise orphaned reports cannot hide them.
+docs = {path for path in known if path.startswith('docs/')}
+guides = {path for path in docs if path.endswith('.md')}
+image_extensions = {'.png', '.jpg', '.jpeg', '.webp', '.avif', '.gif', '.svg'}
+illustrations = {path for path in docs if path.startswith('docs/images/')
+                 and Path(path).suffix.lower() in image_extensions}
+for file in sorted(docs - guides - illustrations):
+    errors.append({'file': file, 'reason': 'docs/ accepts Markdown guides and illustrations under docs/images/; move code, fixtures and raw output to their owner'})
+index = 'docs/README.md'
+if index not in guides:
+    errors.append({'file': index, 'reason': 'missing documentation index'})
+pending = [index] if index in guides else []
+reachable, used_illustrations = set(), set()
+while pending:
+    file = pending.pop()
+    if file in reachable:
+        continue
+    reachable.add(file)
+    for _, target, _ in local_links(file, include_other_syntax=True):
+        if target in guides:
+            pending.append(target)
+        elif target in illustrations:
+            used_illustrations.add(target)
+for file in sorted(guides - reachable):
+    errors.append({'file': file, 'reason': 'guide is not reachable through links from docs/README.md'})
+for file in sorted(illustrations - used_illustrations):
+    errors.append({'file': file, 'reason': 'illustration is not linked from a guide reachable from docs/README.md'})
+for file in sorted(known):
+    if re.fullmatch(r'src/planets/[^/]+/(?:SOURCE|EVIDENCE|USAGE)\.md', file, re.I):
+        errors.append({'file': file, 'reason': 'use the body README for sources and evidence; shared guides cover usage'})
 
 print(json.dumps({'base': base, 'markdownFiles': len(markdown),
                   'localInlineLinksChecked': checked, 'errors': errors,
-                  'scope': 'Relative inline Markdown links and ATX heading/HTML anchors; excludes fenced examples, reference-style links and external URL availability.'}, indent=2))
+                  'documentation': {'guides': len(guides), 'reachableGuides': len(reachable),
+                                    'illustrations': len(illustrations), 'usedIllustrations': len(used_illustrations)},
+                  'scope': 'Checks inline link targets and heading anchors, docs placement and duplicate body accounts. The docs index walk also accepts reference links and HTML a/img links. Excludes fenced examples, external URL availability and content quality.'}, indent=2))
 raise SystemExit(bool(errors))
