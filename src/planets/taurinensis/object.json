@@ -1,0 +1,127 @@
+{
+  "id": "taurinensis",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Taurinensis",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 10.435
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "c3ff27ae14cd4c4ca06aab0cbdcde06061ca4e04eaeddd3b0d7935b8a481e19a"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "07715ffbf3e1cf5afd4aa4133736fd83885842c32ed9a26d833a24d251bef58d"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "6840157bd46d6f6b945e033eeb443be09226599abcc824aa5545495e1314e189"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "ba1bee12a3c4f7c11672219c402fc23a8cae84a88ba50f30b55a7ae051118753"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "61a83b89bbd4273aa67c5dff9322673a6fe67f6df3da0252eb340750b4326af5"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "f87d8f04d8873e6c1befb1a85bc353c87dc7eb868473c51ce8c8e49a390b997d"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/taurinensis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "59caf168e0b51e5ca6c3fd26ef7e34dd2d1f25c7a13764f73fafe0075b5180d0"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        51987724831.3298,
+        -262334742012.8895,
+        -108165355248.55943
+      ],
+      "presentationToReference": [
+        0.18023948926594022,
+        -5.551115123125783e-17,
+        0.9836227561972898,
+        -0.9024562346540616,
+        0.39777715593191376,
+        0.16536649827801098,
+        -0.3912626624700682,
+        -0.9174820620691817,
+        0.07169515142682639
+      ],
+      "orbitUpReference": [
+        5.551115123125783e-17,
+        -0.39777715593191376,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 45.369565217391305,
+      "bodyRadiusM": 10435
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "9bbbab67df3a0e31b351518927ddbbceee6027bbb94752db3fc816ce1abe4e89"
+  }
+}

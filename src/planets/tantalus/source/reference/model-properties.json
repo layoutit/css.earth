@@ -1,0 +1,83 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6205",
+  "modelId": 6205,
+  "modelVersion": "2022-07-13",
+  "diameterKm": 1.45,
+  "diameterInterpretation": "Radar and optical shape reconstruction. Radar-calibrated diameter: 1.45 ± 0.2 km. Grid marks unavailable mapped imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 1.45,
+    "uncertaintyKm": 0.2,
+    "uncertaintyKind": "Selected archive diameter uncertainty; absent value remains unknown. It is not local shape accuracy.",
+    "diameterSemantics": "Volume-equivalent diameter in the selected DAMIT record, calibrated with radar for Tantalus and thermophysical data for the other bodies.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6205",
+    "sourceLabel": "DAMIT model 6205",
+    "reference": "DAMIT model 6205, version 2022-07-13",
+    "scaleKmPerSourceUnit": 1.0000000100385358,
+    "metersPerSourceUnit": 1000.0000100385358,
+    "limitations": "The prograde radar/optical model6205 is selected because Rożek et al.2022 find it more consistent with WISE size determination than retrograde6204. The alternative pole remains unresolved. The convex-only model6203 is not substituted. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred.",
+    "visibleDescription": "Radar and optical shape reconstruction. Radar-calibrated diameter: 1.45 ± 0.2 km. Grid marks unavailable mapped imagery; rotational phase is illustrative."
+  },
+  "periodHours": 2.39006,
+  "poleEclipticJ2000Degrees": [
+    36,
+    30
+  ],
+  "modelLimitations": "The prograde radar/optical model6205 is selected because Rożek et al.2022 find it more consistent with WISE size determination than retrograde6204. The alternative pole remains unresolved. The convex-only model6203 is not substituted. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/66623/shape.txt",
+    "vertices": 1000,
+    "faces": 1996,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 1000.0000100385358,
+    "firstVertexKm": [
+      -0.0010550000105906553,
+      0.0010130000101690368,
+      0.6810910068371564
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      1.515452015212919,
+      1.5493220155529244,
+      1.3744990137979576
+    ],
+    "volumeCubicKm": 1.5962563172583635,
+    "volumeEquivalentRadiusKm": 0.725,
+    "radialRangeKm": [
+      0.6413370006813606,
+      0.7896981774586589
+    ]
+  },
+  "elevation": [
+    -0.09,
+    0.09
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 1996,
+    "sourceVertices": 1000,
+    "weldedVertices": 1000,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 14.5,
+    "estimatedErrorMeters": 14.483681678771973,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 1593405830.141469
+    }
+  }
+}

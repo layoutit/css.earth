@@ -1,0 +1,112 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4172",
+  "modelId": 4172,
+  "modelVersion": "2019-05-07",
+  "diameterKm": 60.711,
+  "diameterInterpretation": "Convex light-curve reconstruction with approximate thermal size: 60.711 km effective diameter (fit ±0.982 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; grid marks unavailable imagery.",
+  "calibration": {
+    "method": "radiometric-effective-diameter-transfer",
+    "diameterKm": 60.711,
+    "uncertaintyKm": 0.982,
+    "reportedUncertaintyKm": 0.982,
+    "uncertaintyKind": "Quoted NEOWISE thermal-fit error; additional shape, spin and thermal-model systematics are not included in this number.",
+    "diameterSemantics": "NEOWISE best-fit effective spherical diameter, transferred approximately to mesh volume diameter.",
+    "sourceUrl": "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html",
+    "reference": "Grav et al. (2012), ApJ 759, 49, NEOWISE v2 row Gr12b",
+    "sourceLabel": "NEOWISE v2 · Grav et al. (2012)",
+    "catalog": {
+      "asteroid_number": "5130",
+      "prov_desig": "",
+      "comet_desig": "",
+      "mpc_packed_name": "05130",
+      "absolute_mag": "9.6000",
+      "slope_param": "0.1500",
+      "mean_jd": "2455361.7542230",
+      "n_w1": "8",
+      "n_w2": "0",
+      "n_w3": "19",
+      "n_w4": "11",
+      "fit_code": "DVBI",
+      "diameter": "60.7110",
+      "diameter_err": "0.9820",
+      "v_albedo": "0.0690",
+      "v_albedo_err": "0.0130",
+      "ir_albedo": "0.1080",
+      "ir_albedo_err": "0.0140",
+      "beaming_param": "0.7740",
+      "beaming_param_err": "0.0250",
+      "stacked_flag": "",
+      "reference": "Gr12b",
+      "notes": "",
+      "reference2": "GRAVETAL2012B",
+      "type": "jupiter_trojans",
+      "cntr": "1241"
+    },
+    "scaleKmPerSourceUnit": 48.932823982547,
+    "metersPerSourceUnit": 48932.823982547,
+    "limitations": "Disk-integrated NEOWISE thermal flux constrains an effective spherical diameter, not this mesh volume or a surface map. Transferring that diameter uniformly to mesh volume is approximate. The quoted fit error is not a total uncertainty and does not measure local shape accuracy. Absolute rotational phase is illustrative.",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 60.711 km effective diameter (fit ±0.982 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; grid marks unavailable imagery."
+  },
+  "periodHours": 14.73572,
+  "poleEclipticJ2000Degrees": [
+    307,
+    -26
+  ],
+  "modelLimitations": "Disk-integrated NEOWISE thermal flux constrains an effective spherical diameter, not this mesh volume or a surface map. Transferring that diameter uniformly to mesh volume is approximate. The quoted fit error is not a total uncertainty and does not measure local shape accuracy. Absolute rotational phase is illustrative.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/13030/shape.txt",
+    "vertices": 574,
+    "faces": 1144,
+    "originalUnits": "dimensionless uncalibrated DAMIT coordinates",
+    "metersPerUnit": 48932.823982547,
+    "firstVertexKm": [
+      4.983318794382586,
+      10.420098068611436,
+      23.784484156252724
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      69.97232351185079,
+      66.79183675145718,
+      52.188226896457884
+    ],
+    "volumeCubicKm": 117165.77823380743,
+    "volumeEquivalentRadiusKm": 30.3555,
+    "radialRangeKm": [
+      24.67306618716436,
+      39.55464864992156
+    ]
+  },
+  "elevation": [
+    -10,
+    10
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 1144,
+    "sourceVertices": 574,
+    "weldedVertices": 574,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 607.11,
+    "estimatedErrorMeters": 134.8693084716797,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 117121218086476.02
+    }
+  }
+}

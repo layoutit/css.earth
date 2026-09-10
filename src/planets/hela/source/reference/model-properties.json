@@ -1,0 +1,90 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/454",
+  "modelId": 454,
+  "modelVersion": "2012-07-30",
+  "diameterKm": 13.39,
+  "diameterInterpretation": "Convex lightcurve reconstruction at approximate thermal scale: 13.39 km effective diameter (catalog ±0.45 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes.",
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 13.39,
+    "uncertaintyKm": 0.45,
+    "reportedUncertaintyKm": 0.45,
+    "catalog": {
+      "number": 699,
+      "name": "Hela",
+      "diameterKm": 13.39,
+      "uncertaintyKm": 0.45,
+      "detections": 4,
+      "originalRow": "699    Hela               1910 KD    11.72  0.15  4   13.39  0.45 0.203 0.015"
+    },
+    "diameterSemantics": "AKARI effective diameter transferred as an explicit approximate volume scale",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+    "sourceLabel": "AKARI AcuA, Usui et al. (2011)",
+    "scaleKmPerSourceUnit": 10.792286046814182,
+    "metersPerSourceUnit": 10792.286046814183,
+    "limitations": "AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred.",
+    "visibleDescription": "Convex lightcurve reconstruction at approximate thermal scale: 13.39 km effective diameter (catalog ±0.45 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes."
+  },
+  "periodHours": 3.396232,
+  "poleEclipticJ2000Degrees": [
+    45,
+    44
+  ],
+  "modelLimitations": "AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/1775/shape.txt",
+    "vertices": 1586,
+    "faces": 3168,
+    "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration",
+    "metersPerUnit": 10792.286046814183,
+    "firstVertexKm": [
+      0.0026764869396099173,
+      0.22835398046454128,
+      4.412976556828366
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      17.02646087404244,
+      15.554090873247674,
+      8.623673296281293
+    ],
+    "volumeCubicKm": 1257.0146908212555,
+    "volumeEquivalentRadiusKm": 6.695,
+    "radialRangeKm": [
+      4.418881622661222,
+      9.566634296529234
+    ]
+  },
+  "elevation": [
+    -3,
+    3
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 3168,
+    "sourceVertices": 1586,
+    "weldedVertices": 1586,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 133.9,
+    "estimatedErrorMeters": 68.3520278930664,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 1252330274446.1707
+    }
+  }
+}

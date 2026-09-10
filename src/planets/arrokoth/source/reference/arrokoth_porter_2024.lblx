@@ -1,0 +1,388 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1J00.sch"
+    schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Ancillary xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1J00.xsd">
+    <Identification_Area>
+        <logical_identifier>urn:nasa:pds:nh_derived:arrokoth_shapemodel_porter2024:arrokoth_porter_2024</logical_identifier>
+        <version_id>1.0</version_id>
+        <title>Shape model of (486958) Arrokoth: arrokoth_porter_2024_v01</title>
+        <information_model_version>1.19.0.0</information_model_version>
+        <product_class>Product_Ancillary</product_class>
+        <Citation_Information>
+            <author_list>Porter, S.</author_list>
+            <editor_list>Singer, K.; Enke, B.; Gobat, C.; Crombie, M. K.; Keeney, B.; Parker, J. Wm.</editor_list>
+            <publication_year>2024</publication_year>
+            <description>This is an updated shape model of Kuiper Belt Object (KBO) 2014 MU69
+                (486958 Arrokoth) with 40960 triangular faces and 20484 vertices. It uses all
+                resolved images of Arrokoth obtained by the New Horizons LOng Range Reconnaissance
+                Imager (LORRI) before, during, and after the Arrokoth fly-by on January 1, 2019.
+
+                See pre-print paper Porter, et al. (2024b) for detailed information about the
+                construction process and tool versions used. All distance units are kilometers.
+                The orbital period of Arrokoth is 0.6632553 days. Its pole orientation is
+                RA = 317.4880752°, DEC = -24.8876496° in the International Celestial Reference
+                Frame (ICRF). The prime meridian is 184.4589465° (at epoch = BODY2486958_PM).
+            </description>
+        </Citation_Information>
+        <Modification_History>
+            <Modification_Detail>
+                <modification_date>2024-10-02</modification_date>
+                <version_id>1.0</version_id>
+                <description>Initial release of the 2024 Arrokoth shape model as part of the K7 delivery.</description>
+            </Modification_Detail>
+        </Modification_History>
+    </Identification_Area>
+    <Context_Area>
+        <Primary_Result_Summary>
+            <purpose>Science</purpose>
+            <processing_level>Derived</processing_level>
+            <Science_Facets>
+                <discipline_name>Small Bodies</discipline_name>
+                <facet1>Physical Properties</facet1>
+            </Science_Facets>
+        </Primary_Result_Summary>
+        <Investigation_Area>
+            <name>New Horizons Kuiper Belt Extended Mission</name>
+            <type>Mission</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:investigation:mission.new_horizons_kem1</lid_reference>
+                <reference_type>ancillary_to_investigation</reference_type>
+            </Internal_Reference>
+        </Investigation_Area>
+        <Observing_System>
+            <Observing_System_Component>
+                <name>New Horizons</name>
+                <type>Host</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.nh</lid_reference>
+                    <reference_type>is_instrument_host</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+            <Observing_System_Component>
+                <name>LOng Range Reconnaissance Imager</name>
+                <type>Instrument</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument:nh.lorri</lid_reference>
+                    <reference_type>is_instrument</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+        </Observing_System>
+        <Target_Identification>
+            <name>(486958) Arrokoth</name>
+            <alternate_designation>2014 MU69</alternate_designation>
+            <type>Trans-Neptunian Object</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:target:trans-neptunian_object.486958_2014_mu69</lid_reference>
+                <reference_type>ancillary_to_target</reference_type>
+            </Internal_Reference>
+        </Target_Identification>
+    </Context_Area>
+    <Reference_List>
+        <Internal_Reference>
+            <lid_reference>urn:nasa:pds:nh_derived:arrokoth_shapemodel_porter2024:albedo_arrokoth4_fp36h2_masked1</lid_reference>
+            <reference_type>ancillary_to_data</reference_type>
+            <comment>The albedo map associated with this shape model.</comment>
+        </Internal_Reference>
+        <Internal_Reference>
+            <lid_reference>urn:nasa:pds:nh_derived:arrokoth_shapemodel_porter2024:porteretal2024b</lid_reference>
+            <reference_type>ancillary_to_document</reference_type>
+            <comment>Pre-print paper describing the methods and processes used to create this shape model.</comment>
+        </Internal_Reference>
+        <Source_Product_Internal>
+            <lidvid_reference>urn:nasa:pds:nh_lorri:kem1_cal::1.0</lidvid_reference>
+            <reference_type>data_to_calibrated_source_product</reference_type>
+            <comment>Only LORRI images from December 31, 2018 and January 1, 2019 were used.</comment>
+        </Source_Product_Internal>
+    </Reference_List>
+    <File_Area_Ancillary>
+        <File>
+            <file_name>arrokoth_porter_2024_v01.obj</file_name>
+            <creation_date_time>2024-06-19</creation_date_time>
+            <file_size unit="byte">3686921</file_size>
+            <md5_checksum>26ebfb9fe83b01b2b222534dd0bc5ff5</md5_checksum>
+            <comment>The shape model has the following internal format:
+
+                g Arrokoth
+                v          x1          y1          z1
+                v          x2          y2          z2
+                v          x3          y3          z3
+                (etc.)
+                vt          u1          v1
+                vt          u2          v2
+                vt          u3          v3
+                (etc.)
+                vn          x1          y1          z1
+                vn          x2          y2          z2
+                vn          x3          y3          z3
+                (etc.)
+                f      i1/it1      j1/jt1      k1/kt1
+                f      i2/it2      j2/jt2      k2/kt2
+                f      i3/it3      j3/jt3      k3/kt3
+                (etc.)
+
+                where the letter 'g' denotes an object name, 'v' denotes a
+                vertex, 'vt' denotes a texture, 'vn' denotes a vertex normal,
+                and 'f' denotes a triangular face. Texture coordinates refer
+                to the provided albedo map.
+
+                A comment line starting with # is provided at the beginning
+                of each section.
+
+                The high precision of the vertex, texture, and normal values
+                do not imply a similar precision of the shape model. Also,
+                the two lobes of the shape model slightly overlap where they
+                connect, which affects volume calculations. Please see Porter,
+                et al (2024b) for a discussion of uncertainties in the shape
+                model.
+            </comment>
+        </File>
+        <Header>
+            <offset unit="byte">0</offset>
+            <object_length unit="byte">42</object_length>
+            <parsing_standard_id>UTF-8 Text</parsing_standard_id>
+            <description>Header containing internal source information.</description>
+        </Header>
+        <Table_Character>
+            <local_identifier>object_name</local_identifier>
+            <offset unit="byte">42</offset>
+            <records>1</records>
+            <description>This section contains the internal group name of the shape model.</description>
+            <record_delimiter>Line-Feed</record_delimiter>
+            <Record_Character>
+                <fields>2</fields>
+                <groups>0</groups>
+                <record_length unit="byte">11</record_length>
+                <Field_Character>
+                    <name>Group_Flag</name>
+                    <field_number>1</field_number>
+                    <field_location unit="byte">1</field_location>
+                    <data_type>ASCII_String</data_type>
+                    <field_length unit="byte">1</field_length>
+                    <description>A 'g', indicating this record defines a group name.</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>Group_Name</name>
+                    <field_number>2</field_number>
+                    <field_location unit="byte">3</field_location>
+                    <data_type>ASCII_String</data_type>
+                    <field_length unit="byte">8</field_length>
+                    <description>The group name (Arrokoth).</description>
+                </Field_Character>
+            </Record_Character>
+        </Table_Character>
+        <Header>
+            <offset unit="byte">53</offset>
+            <object_length unit="byte">12</object_length>
+            <parsing_standard_id>UTF-8 Text</parsing_standard_id>
+            <description>Header for Vertices section.</description>
+        </Header>
+        <Table_Character>
+            <local_identifier>vertex_table</local_identifier>
+            <offset unit="byte">65</offset>
+            <records>20484</records>
+            <description>The VERTEX_TABLE is the second section. It describes the positions of the
+                model vertices. The floating point numbers x1 y1 z1 are the coordinates of vertex 1,
+                and so on (vertices are implicitly numbered beginning with 1). The origin is the
+                center of mass, and the axes are the principle axes of the shape model. The units
+                are kilometers.
+            </description>
+            <record_delimiter>Line-Feed</record_delimiter>
+            <Record_Character>
+                <fields>4</fields>
+                <groups>0</groups>
+                <record_length unit="byte">38</record_length>
+                <Field_Character>
+                    <name>Vertex_Flag</name>
+                    <field_number>1</field_number>
+                    <field_location unit="byte">1</field_location>
+                    <data_type>ASCII_String</data_type>
+                    <field_length unit="byte">1</field_length>
+                    <description>A 'v', indicating this record contains the coordinates of a vertex.</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>X_Coordinate</name>
+                    <field_number>2</field_number>
+                    <field_location unit="byte">4</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">10</field_length>
+                    <unit>km</unit>
+                    <description>X coordinate of the vertex</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>Y_Coordinate</name>
+                    <field_number>3</field_number>
+                    <field_location unit="byte">16</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">10</field_length>
+                    <unit>km</unit>
+                    <description>Y coordinate of the vertex</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>Z_Coordinate</name>
+                    <field_number>4</field_number>
+                    <field_location unit="byte">28</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">10</field_length>
+                    <unit>km</unit>
+                    <description>Z coordinate of the vertex</description>
+                </Field_Character>
+            </Record_Character>
+        </Table_Character>
+        <Header>
+            <offset unit="byte">778457</offset>
+            <object_length unit="byte">22</object_length>
+            <parsing_standard_id>UTF-8 Text</parsing_standard_id>
+            <description>Header for Texture Coordinate section.</description>
+        </Header>
+        <Table_Character>
+            <local_identifier>texture_coordinate_table</local_identifier>
+            <offset unit="byte">778479</offset>
+            <records>20484</records>
+            <description>The TEXTURE_COORDINATE_TABLE is the third section. It describes the
+                texture coordinates.
+            </description>
+            <record_delimiter>Line-Feed</record_delimiter>
+            <Record_Character>
+                <fields>3</fields>
+                <groups>0</groups>
+                <record_length unit="byte">27</record_length>
+                <Field_Character>
+                    <name>Texture_Coordinate_Flag</name>
+                    <field_number>1</field_number>
+                    <field_location unit="byte">1</field_location>
+                    <data_type>ASCII_String</data_type>
+                    <field_length unit="byte">2</field_length>
+                    <description>A 'vt', indicating this record contains texture coordinates.</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>U_Coordinate</name>
+                    <field_number>2</field_number>
+                    <field_location unit="byte">7</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">8</field_length>
+                    <description>U texture coordinate</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>V_Coordinate</name>
+                    <field_number>3</field_number>
+                    <field_location unit="byte">19</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">8</field_length>
+                    <description>V texture coordinate</description>
+                </Field_Character>
+            </Record_Character>
+        </Table_Character>
+        <Header>
+            <offset unit="byte">1331547</offset>
+            <object_length unit="byte">10</object_length>
+            <parsing_standard_id>UTF-8 Text</parsing_standard_id>
+            <description>Header for Normals section.</description>
+        </Header>
+        <Table_Character>
+            <local_identifier>normals_table</local_identifier>
+            <offset unit="byte">1331557</offset>
+            <records>20484</records>
+            <description>The NORMALS_TABLE is the fourth section. It describes the vertex normals.
+                The floating point numbers x1 y1 z1 are the coordinates of normal 1, and so on
+                (normals are implicitly numbered beginning with 1). Normals might not be
+                unit vectors.
+            </description>
+            <record_delimiter>Line-Feed</record_delimiter>
+            <Record_Character>
+                <fields>4</fields>
+                <groups>0</groups>
+                <record_length unit="byte">39</record_length>
+                <Field_Character>
+                    <name>Normals_Flag</name>
+                    <field_number>1</field_number>
+                    <field_location unit="byte">1</field_location>
+                    <data_type>ASCII_String</data_type>
+                    <field_length unit="byte">2</field_length>
+                    <description>A 'vn', indicating this record contains vertex normal values.</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>X_Coordinate</name>
+                    <field_number>2</field_number>
+                    <field_location unit="byte">5</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">10</field_length>
+                    <description>X normal coordinate</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>Y_Coordinate</name>
+                    <field_number>3</field_number>
+                    <field_location unit="byte">17</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">10</field_length>
+                    <description>Y normal coordinate</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>Z_Coordinate</name>
+                    <field_number>4</field_number>
+                    <field_location unit="byte">29</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">10</field_length>
+                    <description>Z normal coordinate</description>
+                </Field_Character>
+            </Record_Character>
+        </Table_Character>
+        <Header>
+            <offset unit="byte">2130433</offset>
+            <object_length unit="byte">8</object_length>
+            <parsing_standard_id>UTF-8 Text</parsing_standard_id>
+            <description>Header for Facet section.</description>
+        </Header>
+        <Table_Character>
+            <local_identifier>facet_table</local_identifier>
+            <offset unit="byte">2130441</offset>
+            <records>40960</records>
+            <description>The FACET_TABLE is the fifth section. It provides the linking of vertices
+                into triangular polygon faces. Each face is defined by three vertex (v1 v2 v3) and
+                vertex texture (vt1 vt2 vt3) index pairs, linked as follows:
+
+                v1/vt1 v2/vt2 v3/vt3
+            </description>
+            <record_delimiter>Line-Feed</record_delimiter>
+            <Record_Character>
+                <fields>4</fields>
+                <groups>0</groups>
+                <record_length unit="byte">38</record_length>
+                <Field_Character>
+                    <name>Facet_Flag</name>
+                    <field_number>1</field_number>
+                    <field_location unit="byte">1</field_location>
+                    <data_type>ASCII_String</data_type>
+                    <field_length unit="byte">1</field_length>
+                    <description>A 'f', indicating this record contains the indices of three
+                        vertex/texture pairs defining a single, triangular face.
+                    </description>
+                </Field_Character>
+                <Field_Character>
+                    <name>Facet_1</name>
+                    <field_number>2</field_number>
+                    <field_location unit="byte">3</field_location>
+                    <data_type>ASCII_String</data_type>
+                    <field_length unit="byte">11</field_length>
+                    <description>Indexes of the first vertex/texture pair.</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>Facet_2</name>
+                    <field_number>3</field_number>
+                    <field_location unit="byte">15</field_location>
+                    <data_type>ASCII_String</data_type>
+                    <field_length unit="byte">11</field_length>
+                    <description>Indexes of the second vertex/texture pair.</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>Facet_3</name>
+                    <field_number>4</field_number>
+                    <field_location unit="byte">27</field_location>
+                    <data_type>ASCII_String</data_type>
+                    <field_length unit="byte">11</field_length>
+                    <description>Indexes of the third vertex/texture pair.</description>
+                </Field_Character>
+            </Record_Character>
+        </Table_Character>
+    </File_Area_Ancillary>
+</Product_Ancillary>

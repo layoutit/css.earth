@@ -2,6 +2,7 @@ import { validateFacetScalarProfile } from './facet-scalars.mjs';
 import {validateVtkCategories} from './vtk-categories.mjs';
 import { validateImageDemScience } from './image-dem-science.mjs';
 import { validateScienceQualityMasks } from './scientific-raster.mjs';
+import { validateObjUvFits } from './obj-uv-fits.mjs';
 import { validateGeologyProfile } from './categorical-geology.mjs';
 import { validatePds4ObservationPolicy } from './observed-pds4.mjs';
 import { validateScalarMapProfile } from './pds-scalar-map.mjs';
@@ -97,7 +98,7 @@ export function parseTerrestrialProfile(value) {
         throw new TypeError('Invalid scientific source projection or extent.');
       }
     }
-    if (!['image-plane-dem', 'facet-scalars', 'pds-image', 'pds3-float-map', 'pds3-scalar-map', 'stl', 'geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
+    if (!['obj-uv-fits', 'image-plane-dem', 'facet-scalars', 'pds-image', 'pds3-float-map', 'pds3-scalar-map', 'stl', 'geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
         (!meshGrid && !tableGrid && !facetTable && (!Number.isSafeInteger(lens.grid.width) || !Number.isSafeInteger(lens.grid.height) || lens.grid.width <= 0 || lens.grid.height <= 0)) ||
         !(lens.minimum < lens.maximum) || !Array.isArray(lens.colors) || lens.colors.length < 2 ||
         lens.colors.some(color => !/^#[0-9a-f]{6}$/i.test(color)) ||
@@ -124,6 +125,7 @@ export function parseTerrestrialProfile(value) {
     }
     if (facetTable) validateFacetScalarProfile(lens, value.geometry.radialTerrain);
     else if (lens.format === 'pds3-scalar-map') validateScalarMapProfile(lens, value.geometry.radialTerrain);
+    else if (lens.format === 'obj-uv-fits') validateObjUvFits(lens, value.geometry.radialTerrain);
     else if (lens.surfaceSampling !== undefined && (!meshGrid || lens.surfaceSampling?.method !== 'closest-source-point' ||
         !Number.isFinite(lens.surfaceSampling.maximumDistanceMeters) || !(lens.surfaceSampling.maximumDistanceMeters > 0) ||
         lens.path !== value.geometry.radialTerrain?.path ||

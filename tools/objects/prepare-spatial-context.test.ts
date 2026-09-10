@@ -4,9 +4,9 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import test from 'node:test';
-import { ASTEROID_IDS, asteroidPositionKm, COMET_IDS, cometPositionKm, BODIES, DWARF_PLANET_IDS, dwarfPlanetPositionKm, moonPositionRelativeToPlanetKm,
+import { SMALL_BODY_IDS, asteroidPositionKm, COMET_IDS, cometPositionKm, BODIES, DWARF_PLANET_IDS, dwarfPlanetPositionKm, moonPositionRelativeToPlanetKm,
   systemBarycentreHeliocentricAu, M_PER_AU } from '@cssearth/astronomy';
-import type { AsteroidId, CometId, BodyId, DwarfPlanetId, Vsop87BodyKey } from '@cssearth/astronomy';
+import type { SmallBodyId, CometId, BodyId, DwarfPlanetId, Vsop87BodyKey } from '@cssearth/astronomy';
 import { prepareSpatialContext } from './prepare-spatial-context.js';
 
 const root = process.cwd();
@@ -96,7 +96,7 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
       if (parent === null) return [0, 0, 0];
       if (sourcePrimaries.has(id)) return sourcePrimaries.get(id)!.map(value => value * 1000);
       if (COMET_IDS.includes(id as CometId)) return cometPositionKm(id as CometId, source.frame.epochJdTt).map(value => value * 1000);
-      if (ASTEROID_IDS.includes(id as AsteroidId)) return asteroidPositionKm(id as AsteroidId, source.frame.epochJdTt).map(value => value * 1000);
+      if (SMALL_BODY_IDS.includes(id as SmallBodyId)) return asteroidPositionKm(id as SmallBodyId, source.frame.epochJdTt).map(value => value * 1000);
       if (DWARF_PLANET_IDS.includes(id as DwarfPlanetId)) return dwarfPlanetPositionKm(id as DwarfPlanetId, source.frame.epochJdTt).map(value => value * 1000);
       if (parent !== 'sun') {
         const parentPosition = modelPositionM(parent);

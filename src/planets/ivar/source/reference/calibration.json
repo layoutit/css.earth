@@ -1,0 +1,14 @@
+{
+  "method": "published-volume-equivalent-size-transfer",
+  "diameterKm": 7.4,
+  "uncertaintyKm": 0.2,
+  "uncertaintyKind": "Selected archive diameter uncertainty; absent value remains unknown. It is not local shape accuracy.",
+  "diameterSemantics": "Volume-equivalent diameter in the selected DAMIT record, calibrated with radar for Tantalus and thermophysical data for the other bodies.",
+  "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/271",
+  "sourceLabel": "DAMIT model 271",
+  "reference": "DAMIT model 271, version 2016-04-22",
+  "scaleKmPerSourceUnit": 1.0000000508665032,
+  "metersPerSourceUnit": 1000.0000508665032,
+  "limitations": "The calibrated 2016 convex solution is selected; the older nonconvex model272 is explicitly labelled plausible in the archive and is not a resolved terrain measurement. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanu\u0161 et al.2015 Table4 distinguishes this fixed revised shape fit from the varied-shape ensemble, which gives a wider size range (8.0 km, -0.9/+0.3 km). The archive7.4 km scale is used consistently with its mesh; the narrow archived error is not total physical uncertainty.",
+  "visibleDescription": "Convex lightcurve model at the archive fixed-shape scale of 7.4 km (archived \u00b10.2 km; additional shape-model uncertainty). Grid marks unavailable imagery."
+}

@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "stars/eso0932a.tif",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "shape/model-4215.txt",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/13159/shape.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/neowise-selected.csv",
+      "url": "https://irsa.ipac.caltech.edu/TAP/sync?QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number+in+%281404%2C1437%2C1873%2C3451%2C5130%2C5283%2C5436%2C9694%2C11429%2C1647%29&FORMAT=csv&LANG=ADQL&REQUEST=doQuery"
+    }
+  ]
+}
