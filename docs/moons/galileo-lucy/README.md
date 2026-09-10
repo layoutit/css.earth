@@ -14,9 +14,9 @@ The gray grid identifies missing qualified surface imagery. Dactyl’s craters, 
 
 ## Approximate orbits
 
-Dactyl and Selam have illustrative phases at the shared 3 September 2026 TT scene epoch. Their source records separate published dimensions, separation and period from assumed plane, periapsis and phase. Dashed paths, circular selected indicators and visible “(approx)” labels carry that distinction into the universe view. These marks do not describe an uncertainty region or confidence interval.
+Dactyl and Selam have illustrative phases at the shared 3 September 2026 TT scene epoch. Their source records separate published dimensions, separation and period from assumed plane, periapsis and phase. Dashed paths, standard 1 px circular selected indicators and visible “(approx)” labels carry that distinction into the universe view. These marks do not describe an uncertainty region or confidence interval.
 
-The dashed strokes alternate paint on existing retained orbit segments. Geometry, picking corridors, node counts and the shared camera remain unchanged. The browser check verifies the actual transparent gaps and circular indicators after projection.
+The dashed strokes alternate paint on existing retained orbit segments. Approximate orbits and selected circles inherit the ordinary 1 px universe stroke, without the 0.5 px selected-body thickening. Geometry, picking corridors, node counts and the shared camera remain unchanged. The browser check verifies the actual transparent gaps and circular indicators after projection.
 
 ![Dactyl’s approximate orbit around Ida](images/dactyl-approximate-orbit.png)
 
@@ -24,7 +24,7 @@ The dashed strokes alternate paint on existing retained orbit segments. Geometry
 
 ## Inspected views
 
-Chrome 152.0.7977.84, production-page captures at DPR 1 from commit `ddb4c6cca`, after merging main’s six new distant worlds (`16774548b`) and applying the requested “(approx)” wording (`97c30ed44`). Full browser conformance also covers mobile input and DPR 2. The final documentation commit changes review records and reproduction instructions only.
+Chrome 152.0.7977.84, production-page captures at DPR 1 of renderer commit `66448c17d`, using browser-review commit `437ecb0b2`, after merging main’s six new distant worlds (`16774548b`) and applying the requested “(approx)” wording (`97c30ed44`) and standard 1 px stroke (`66448c17d`). Full browser conformance also covers mobile input and DPR 2. The final documentation commit changes review records and reproduction instructions only.
 
 ![Dactyl’s Galileo shape estimate](images/dactyl-shadows-false.png)
 
@@ -37,7 +37,7 @@ Directional lighting was also inspected for [Dactyl](images/dactyl-shadows-true.
 ## Evidence
 
 - [Dactyl conformance](evidence/dactyl-conformance.json), [Dinkinesh conformance](evidence/dinkinesh-conformance.json), [Selam conformance](evidence/selam-conformance.json): desktop/mobile input, surface picking, wheel and pinch zoom, shadows, lifecycle, retained identity and DPR 1/2. All cases passed.
-- [Production visual and navigation receipt](evidence/production-review.json): both lighting states, dashed paths, circular selected indicators and successful Dactyl → Ida / Selam → Dinkinesh navigation with one mounted scene.
+- [Production visual and navigation receipt](evidence/production-review.json): both lighting states, dashed paths, standard 1 px circular selected indicators and successful Dactyl → Ida / Selam → Dinkinesh navigation with one mounted scene.
 - [Transport refresh](evidence/transports.json): all 473 registered packages use the combined marker atlas; all non-marker runtime fields remain unchanged. [Orbit preservation](evidence/merge-orbit-preservation.json) separately proves that all 327 existing asteroid element records and independent vector fixtures are unchanged.
 - [Navigation pixels](evidence/navigation.json): existing decoded visible marker pixels preserved exactly at both densities against the current-main atlas; only the three new recipes are rendered.
 - [Delivery receipt](evidence/delivery.json): 93 published assets, 21,219,882 bytes. A fresh download of every file passed byte-count and SHA-256 verification.
@@ -51,4 +51,4 @@ The [final checks](evidence/checks.json) passed after incorporating main: 684 as
 
 The [earlier checks](evidence/checks-before-main-update.json) also passed all 440 shared renderer tests and the remaining strict ownership/preparation/browser-owner checks. Full browser conformance and its six videos were captured at `514f6b497`: [Dactyl DPR 1](evidence/dactyl-dpr-1.webm) / [DPR 2](evidence/dactyl-dpr-2.webm), [Dinkinesh DPR 1](evidence/dinkinesh-dpr-1.webm) / [DPR 2](evidence/dinkinesh-dpr-2.webm), [Selam DPR 1](evidence/selam-dpr-1.webm) / [DPR 2](evidence/selam-dpr-2.webm). These checks remain applicable because the body geometry, three surface asset banks and core input/lifecycle code remain unchanged, while the production review above repeats the affected navigation, orbit cues and both lighting states against the merged catalog. The videos total about 13 MB and retain the input sequences underlying the conformance reports.
 
-The final wording change also passed all 88 world-context renderer tests. [Its build receipt](evidence/label-build.json) records a fresh renderer build, complete static-site build and the same five asset-assembly checks. The [browser review](../../../tests/objects/browser/galileo-lucy.mjs) uses actual wheel input and visible parent links, including production readiness and nonzero label opacity; it does not depend on developer diagnostic globals.
+The wording change also passed all 88 world-context renderer tests. [Its build receipt](evidence/label-build.json) records a fresh renderer build, complete static-site build and the same five asset-assembly checks. The final stroke reuses the existing base circle rule; the [production receipt](evidence/production-review.json) checks its computed stroke against an ordinary universe circle and verifies 1 px orbit segments. [The stroke build](evidence/stroke-build.json) repeats the renderer/static-site build and scoped asset assembly. The [browser review](../../../tests/objects/browser/galileo-lucy.mjs) uses actual wheel input and visible parent links, including production readiness and nonzero label opacity; it does not depend on developer diagnostic globals.
