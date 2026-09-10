@@ -1,0 +1,52 @@
+{
+  "id": "galatea",
+  "classification": "satellite",
+  "order": 257,
+  "physical": {
+    "name": "Galatea",
+    "horizonsCode": "806",
+    "meanRadiusKm": 88,
+    "gravitationalParameterKm3PerS2": 0.1899,
+    "parent": "neptune"
+  },
+  "physicalNotes": "Current Horizons GMs; Karkoschka ellipsoid dimensions belong to body sources.",
+  "satellite": {
+    "parent": "neptune",
+    "horizonsCode": "806",
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 1,
+    "poleRightAscensionRad": -1.055504804133,
+    "poleDeclinationRad": 0.749710907578,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 62005.186,
+      "eccentricity": 0.000189553555,
+      "inclinationRad": 0.000171739955,
+      "ascendingNodeRad": -0.176454305942,
+      "argumentOfPeriapsisRad": 0.97617809983,
+      "meanAnomalyAtEpochRad": -107039.68081186478,
+      "meanMotionRadPerDay": 14.642373224628809,
+      "ascendingNodeRateRadPerDay": -0.000953244990049096,
+      "argumentOfPeriapsisRateRadPerDay": 0.013434562795468992
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "806",
+      "center": "500@899",
+      "parent": "neptune",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 1,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "806",
+      "center": "500@899",
+      "range": "daily"
+    }
+  }
+}

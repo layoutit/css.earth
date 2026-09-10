@@ -1,0 +1,54 @@
+{
+  "id": "nix",
+  "classification": "satellite",
+  "order": 259,
+  "physical": {
+    "name": "Nix",
+    "horizonsCode": "902",
+    "meanRadiusKm": 18.265603887767426,
+    "gravitationalParameterKm3PerS2": 0.001496,
+    "parent": "pluto"
+  },
+  "physicalNotes": "PLU060 Horizons GMs (2024); radii match the sourced display shapes.\nNix/Hydra: Porter released meshes. Kerberos/Styx: Porter2025 fitted volumes.",
+  "satellite": {
+    "parent": "pluto",
+    "horizonsCode": "902",
+    "barycentreCompanion": "charon",
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 1,
+    "poleRightAscensionRad": 2.321404143486,
+    "poleDeclinationRad": -0.10895051464,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 48688.806,
+      "eccentricity": 0.002014133013,
+      "inclinationRad": 0.000374305723,
+      "ascendingNodeRad": 1.454595740177,
+      "argumentOfPeriapsisRad": 1.186290363356,
+      "meanAnomalyAtEpochRad": -1848.290224073163,
+      "meanMotionRadPerDay": 0.249496419326682,
+      "ascendingNodeRateRadPerDay": -0.003680506154367756,
+      "argumentOfPeriapsisRateRadPerDay": 0.006980581147887538
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "902",
+      "center": "500@9",
+      "parent": "pluto",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 1,
+      "barycentreCompanion": "charon",
+      "radial": true,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "902",
+      "center": "500@999",
+      "range": "daily"
+    }
+  }
+}

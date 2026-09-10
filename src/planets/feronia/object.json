@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "49a1c58e309e73258a3bbcf260f9f3661ed67b853f00993e7052a0774fbbcb5a"
+        "sha256": "5e22beb07da06f0953fcb46c109bc316108b53d25ed4099fc4937bbb6bce7e84"
+      }
+    },
+    "catalog": {
+      "name": "Feronia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.265860062248244,
+      "description": "Explore Feronia in 3D with its published shape model and radial elevation.",
+      "order": 236,
+      "context": {
+        "name": "Feronia",
+        "color": "#aaaaaa",
+        "order": 284
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "730d34bff4d5e9cec03db5ceab4dafe2d004c4cf18376d25bc9001bc9535b3a7"
+    "sha256": "f6dd1f39ae0a504e8ded671cebdfe3736c26584c02047c7470bbf538b0be537d"
   }
 }

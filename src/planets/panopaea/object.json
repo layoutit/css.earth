@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8a558d9796199365f2844bae1812e97dc1aa4f27bd8ee74ab6fefc2cfca09b25"
+        "sha256": "a79e3242059b9f86bbee5d42d040041798824a021afed540f5b3cd4446a36308"
+      }
+    },
+    "catalog": {
+      "name": "Panopaea",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.6141561893254357,
+      "description": "Explore Panopaea in 3D with its published shape model and radial elevation.",
+      "order": 193,
+      "context": {
+        "name": "Panopaea",
+        "color": "#aaaaaa",
+        "order": 142
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d3ba2610c0814f9417b61fe895aea7f42adb4b4862fe242a7596cfb828bc3f59"
+    "sha256": "6457ef774481e6cafe60e876b4f48f7f9801130e9796800cd9f74d0e9277c23e"
   }
 }

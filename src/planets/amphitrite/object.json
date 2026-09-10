@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "506bdf0364b6f51a2b4991cce59cc1760d82fcb3c23be7964e76916c4fe74538"
+        "sha256": "515491f47b42c7ced98a753d45a26853c210847b34af056f086bf562b829b668"
+      }
+    },
+    "catalog": {
+      "name": "Amphitrite",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.5547309956514517,
+      "description": "Explore Amphitrite in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "order": 145,
+      "context": {
+        "name": "Amphitrite",
+        "color": "#aaaaaa",
+        "order": 82
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f7eab974e4153e8b21caa03953ed59a586b954ca575449f6573764dcd8e1f8ac"
+    "sha256": "2963c70e2fa2ed6d12c6820969005d71f223c9c78381d683bee8eca3200cf18d"
   }
 }

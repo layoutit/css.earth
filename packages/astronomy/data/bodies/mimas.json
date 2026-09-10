@@ -1,0 +1,51 @@
+{
+  "id": "mimas",
+  "classification": "satellite",
+  "order": 219,
+  "physical": {
+    "name": "Mimas",
+    "horizonsCode": "601",
+    "meanRadiusKm": 198.8,
+    "gravitationalParameterKm3PerS2": 2.503489,
+    "parent": "saturn"
+  },
+  "physicalNotes": "No measured GM is supplied for these small moons; zero means omitted mass.\nRadii: Thomas2013/IAU2015 shapes, not an inferred density or invented mass.",
+  "satellite": {
+    "parent": "saturn",
+    "horizonsCode": "601",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": 0.70827158665,
+    "poleDeclinationRad": 1.4580246891,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 186019.799,
+      "eccentricity": 0.019593090918,
+      "inclinationRad": 0.027487123443,
+      "ascendingNodeRad": 3.019267387772,
+      "argumentOfPeriapsisRad": -0.477426045188,
+      "meanAnomalyAtEpochRad": 243511.41435920316,
+      "meanMotionRadPerDay": 6.649587405610068,
+      "ascendingNodeRateRadPerDay": -0.017444533765972922,
+      "argumentOfPeriapsisRateRadPerDay": 0.03491383466873664
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "601",
+      "center": "500@699",
+      "parent": "saturn",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "601",
+      "center": "500@699"
+    }
+  }
+}

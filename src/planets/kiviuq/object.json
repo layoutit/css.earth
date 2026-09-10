@@ -110,13 +110,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c3824e0ed8844f9b4bfb5acbc72cb3f6535b2efe2d9e4797997d138909ea02eb"
+        "sha256": "f98f52086ad43377105e299e47cf497c8e13736c362ba5d5c477ed204bc1d05c"
+      }
+    },
+    "catalog": {
+      "name": "Kiviuq",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Kiviuq, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "order": 44,
+      "context": {
+        "name": "Kiviuq",
+        "color": "#a0a0a0",
+        "order": 225
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c28681b8639e05a204e156391ddf178ee6cccc4674499361ed8b78c49a9bd806"
+    "sha256": "900fda6aa3bd6eaa2a7624dd63dd525c59c60a6658446ca40dbdf81e50ecdc99"
   }
 }

@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a4c4bef6a99d3ad132452124cde632a1357321682f12068298d4fe9acf5b321d"
+        "sha256": "50975106119c4d2ab19a2a7835235be6fc7e4b5607f90224778005b5030fdb53"
+      }
+    },
+    "catalog": {
+      "name": "Angelina",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.6802741704742274,
+      "description": "Explore Angelina in 3D with its published shape model and radial elevation.",
+      "order": 182,
+      "context": {
+        "name": "Angelina",
+        "color": "#aaaaaa",
+        "order": 119
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fa3339ec2ec87ec02e99dfee9958b575c9ba4e83721f9ced0f7bd6e31c6a6d05"
+    "sha256": "403d81353f14b2bfe87f13377e9016bde96d4af93071986277e3cdd7cbe6ab64"
   }
 }

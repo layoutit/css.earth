@@ -1,0 +1,52 @@
+{
+  "id": "desdemona",
+  "classification": "satellite",
+  "order": 69,
+  "physical": {
+    "name": "Desdemona",
+    "horizonsCode": "710",
+    "meanRadiusKm": 32.01203974041056,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "uranus"
+  },
+  "physicalNotes": "Buie et al. (2015) primary axes; JPL primary GM. Physical primary, not binary barycenter.",
+  "satellite": {
+    "parent": "uranus",
+    "horizonsCode": "710",
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 1,
+    "poleRightAscensionRad": 1.349208751192,
+    "poleDeclinationRad": 0.26642282961,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 62660.888,
+      "eccentricity": 0.006878785166,
+      "inclinationRad": 0.054500935253,
+      "ascendingNodeRad": 1.495833446367,
+      "argumentOfPeriapsisRad": -2.833543919126,
+      "meanAnomalyAtEpochRad": -96899.6667903063,
+      "meanMotionRadPerDay": 13.252162847061053,
+      "ascendingNodeRateRadPerDay": -0.01338275130641823,
+      "argumentOfPeriapsisRateRadPerDay": 0.0267196570600771
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "710",
+      "center": "500@799",
+      "parent": "uranus",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 1,
+      "radial": true,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "710",
+      "center": "500@799",
+      "range": "daily"
+    }
+  }
+}

@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4cb1abb26b57e142a17b8d1ab6f0e199704d75b2c731dd9da21cd6146906f3b6"
+        "sha256": "9de03bcea93766545003053a234f1f2b32c74c93956b0c58ca3053b96df7fe6c"
+      }
+    },
+    "catalog": {
+      "name": "Peitho",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.4376754729416765,
+      "description": "Explore Peitho in 3D with its published shape model and radial elevation.",
+      "order": 261,
+      "context": {
+        "name": "Peitho",
+        "color": "#aaaaaa",
+        "order": 312
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "452d7447933917fcad2fd276b8b63eaf2e14ecbc7f4d3be3c3d355ea5f96f8b0"
+    "sha256": "d296d25363a3bd241cb05d2efcceccb7b0034e90e274818c3a2aeb733249a9f0"
   }
 }

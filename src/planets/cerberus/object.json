@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "639d6a483efa37b08b0a66d89df33956bcd8d8ae44238148109d2e94be321a3a"
+        "sha256": "27572b828568f026526dedc3d1e77254fa509b71de7d0bb1047d3417cc1b2af5"
+      }
+    },
+    "catalog": {
+      "name": "Cerberus",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.0799439098043286,
+      "description": "Explore Cerberus, a near-Earth asteroid, through its published shape model.",
+      "order": 121,
+      "context": {
+        "name": "Cerberus",
+        "color": "#aaaaaa",
+        "order": 421
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "56089e3dc02cee634cae2c418ef3812da769133adfee45b8262c691e2aa6d890"
+    "sha256": "6e7487763a1bbbf40d83e2a3349ba4c84c34c289b9aa15d13c1d8765dbc80713"
   }
 }

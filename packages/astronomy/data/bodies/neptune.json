@@ -1,0 +1,14 @@
+{
+  "id": "neptune",
+  "classification": "planet",
+  "order": 205,
+  "classificationOrder": 7,
+  "physical": {
+    "name": "Neptune",
+    "horizonsCode": "899",
+    "meanRadiusKm": 24624,
+    "gravitationalParameterKm3PerS2": 6835099.97,
+    "parent": "sun"
+  },
+  "physicalNotes": "Published radar-model scales; use a documented primary mass where available."
+}

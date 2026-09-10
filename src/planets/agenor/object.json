@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0ee3519227c714951870c91e08b7ec1a9ce8705e84a9f654e76a1a7220e91bbf"
+        "sha256": "764d0691604b0f6ca392bf595d579c31edfa99633b858087b40c01b6c4aece2b"
+      }
+    },
+    "catalog": {
+      "name": "Agenor",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 5.217218141628041,
+      "description": "Explore Agenor in 3D with its published shape model and radial elevation.",
+      "order": 364,
+      "context": {
+        "name": "Agenor",
+        "color": "#aaaaaa",
+        "order": 415
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "25146e519778f7be8930b06c0760d1e9bdef52af6aa83e525475e439e87457eb"
+    "sha256": "5d19740166ea23606fe17d2d9cdb6935a02def56437f5fb579c67ccafcf7be36"
   }
 }

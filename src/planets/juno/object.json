@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "946df4d0dcf95ae7887dd4639d94d3b14258fc8802372d3728b5cda6fad6f6eb"
+        "sha256": "9e33c45c33be62faec27c0cd9b5d20ad92b6e3bdd28f25728c5f6d7e199b3612"
+      }
+    },
+    "catalog": {
+      "name": "Juno",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.6710204451309156,
+      "description": "Explore Juno in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "order": 135,
+      "context": {
+        "name": "Juno",
+        "color": "#aaaaaa",
+        "order": 72
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fec0717260291ddfed606892b6e48603b1608badca7dea363bad1bca60bb40e9"
+    "sha256": "c4c7bf43443b320a01f57ea5040e4224ac129da2ca03af619a963111663a3829"
   }
 }

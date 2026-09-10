@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7f60760deec52d4c3b48f3e2cfd5b8274bd3a9803fa91e031e00234a86116ae1"
+        "sha256": "10a635f8c490c746178934950035a78a7c73ddf468c4dda1c5b3b4d3ac4c59fd"
+      }
+    },
+    "catalog": {
+      "name": "Eunomia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.641952056990913,
+      "description": "Explore Eunomia in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "order": 140,
+      "context": {
+        "name": "Eunomia",
+        "color": "#aaaaaa",
+        "order": 77
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "17a7d7825196670d9b0ca36635141d4f4a32745ecf62adf29cd92fbaf9e4dcbe"
+    "sha256": "4e9c79d858bdf111b385e28f32d3662fedd9294e508db25f956b0dccae5618f6"
   }
 }

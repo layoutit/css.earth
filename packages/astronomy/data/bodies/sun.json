@@ -1,0 +1,13 @@
+{
+  "id": "sun",
+  "classification": "star",
+  "order": 71,
+  "physical": {
+    "name": "Sun",
+    "horizonsCode": "10",
+    "meanRadiusKm": 695700,
+    "gravitationalParameterKm3PerS2": 132712440041.93938,
+    "parent": null
+  },
+  "physicalNotes": "Buie et al. (2015) primary axes; JPL primary GM. Physical primary, not binary barycenter."
+}

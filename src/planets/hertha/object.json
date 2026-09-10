@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "be4858b1e7fe00b6d0204f89095dff47300f823d8b342b000a07435175cea7ec"
+        "sha256": "e197b92deeb9a0e7d1c8793c4c27ac062ca1bc80bc4ab654c682689dc2aa0e1f"
+      }
+    },
+    "catalog": {
+      "name": "Hertha",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.4274112698544013,
+      "description": "Explore Hertha in 3D with its published shape model and radial elevation.",
+      "order": 251,
+      "context": {
+        "name": "Hertha",
+        "color": "#aaaaaa",
+        "order": 324
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "721a615010688d70d7f059b0f901143c953402045bb5fdd1ddf7d8bde3c939ce"
+    "sha256": "5699b5ac50eb1a675275651b46fdca38b0a00b3233300e39dfc7f3548fcb809e"
   }
 }

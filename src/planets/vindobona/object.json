@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f7cda703bc29b19f59d55467db0474d90aaf3eabf7f1a2f6342a376ef7c20ff7"
+        "sha256": "083ea62d915e9d02aa588454061c0b845fa7e321c978203364f7f1fcd727dd1f"
+      }
+    },
+    "catalog": {
+      "name": "Vindobona",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.918785954300875,
+      "description": "Explore Vindobona in 3D with its published shape model and radial elevation.",
+      "order": 321,
+      "context": {
+        "name": "Vindobona",
+        "color": "#aaaaaa",
+        "order": 373
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e97e3ed3e5355bd20b5a25ac4e674154c91bb03c1f25d72d1daf8469edc8cd8e"
+    "sha256": "b026a6b85fbd41bfaa0d05ce5d01bdf688bebf7f98214afd4f67c83ff855e8a8"
   }
 }

@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d98034f6955caa52e36058d42ee0426b7bf1b7705430404fc58a0ff1b8fc6441"
+        "sha256": "a9239de82a2de2d729da5914bdeac228a65815895a866ce2d354e6f43c9e8038"
+      }
+    },
+    "catalog": {
+      "name": "Weringia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7118191273654264,
+      "description": "Explore Weringia in 3D with its published shape model and radial elevation.",
+      "order": 318,
+      "context": {
+        "name": "Weringia",
+        "color": "#aaaaaa",
+        "order": 370
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "11b312470519585859b8dba5eadf9d1cf27c069da115fe4ba7118bcc7fd9f3aa"
+    "sha256": "70dcabd81fc8c968994401753b51ac31e3cd16ebb7ba62aa61058cd4695acf49"
   }
 }

@@ -1,0 +1,77 @@
+{
+  "id": "comet-c2020-f3",
+  "classification": "comet",
+  "order": 90,
+  "classificationOrder": 30,
+  "physical": {
+    "name": "C/2020 F3 NEOWISE",
+    "horizonsCode": "DES=C/2020 F3;CAP;",
+    "meanRadiusKm": 1.8436301176634378,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "physicalNotes": "Equivalent-volume radius of the Hubble contact model scaled by Spitzer.\nBorrelly uses half its observed 8 km length as a navigation reference, not a mean or volume radius.",
+  "comet": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3DC%2F2020+F3%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 61089822414.757,
+      "eccentricity": 0.9992850366164265,
+      "inclinationRad": 2.384861386799554,
+      "ascendingNodeRad": 1.4312552845839293,
+      "argumentOfPeriapsisRad": 1.1813347246963648,
+      "meanAnomalyAtEpochRad": 0.004691374035149743,
+      "meanMotionRadPerDay": 0.0000020845689546801697
+    }
+  },
+  "cometFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3DC%2F2020+F3%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          -1813943198.490193,
+          -1399897189.605802,
+          -1512311580.843275
+        ],
+        "velocity": [
+          -584537.7572490867,
+          -333176.6880040321,
+          -502794.0913113476
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          -1831440169.200762,
+          -1409862908.525274,
+          -1527363158.979524
+        ],
+        "velocity": [
+          -581934.5275745484,
+          -331211.2946350761,
+          -500650.6763236517
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          -1848859746.912347,
+          -1419770270.725991,
+          -1542350987.60102
+        ],
+        "velocity": [
+          -579378.4134027376,
+          -329286.6205385894,
+          -498544.1408379737
+        ]
+      }
+    ]
+  },
+  "acquisition": {
+    "heliocentric": {
+      "target": "DES=C/2020 F3;CAP;",
+      "model": "comet"
+    }
+  }
+}

@@ -110,13 +110,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f1622f79412adb581632a9abe493e6518d9ac828ea816fe92b5fa83c2d124cdd"
+        "sha256": "fa5d0a210398ec430a3aa8c66e81819af60f12320cc6fca7fc774fefa635ede8"
+      }
+    },
+    "catalog": {
+      "name": "Albiorix",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Albiorix, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "order": 43,
+      "context": {
+        "name": "Albiorix",
+        "color": "#a0a0a0",
+        "order": 226
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fbe141316ff0526f19624981c51078a4a5b59bfe56be2302c16bc12dadd39cf4"
+    "sha256": "be53aae2e521e6411f3ca0d0994012c317703f9685278995dd3009d784a31481"
   }
 }

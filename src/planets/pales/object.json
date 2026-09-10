@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2b3142c27dc9c386135f3210f5da29837c43089bc83f81837b3a6d0e913088f2"
+        "sha256": "c106dfa678a806ac4122c84b2db68a77924b4fd466463356ef204c88c0fdc242"
+      }
+    },
+    "catalog": {
+      "name": "Pales",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.097178213859086,
+      "description": "Explore Pales in 3D with its published shape model and radial elevation.",
+      "order": 224,
+      "context": {
+        "name": "Pales",
+        "color": "#aaaaaa",
+        "order": 272
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b06ebbcecf4463953516fae06140e7e07a84a735f5a9067eb4c54b61f4fe0bf6"
+    "sha256": "b9b9630c7fd3a5c496d61944008f9fb5cecc17ed0d47192ed0f6ec6f4f998b53"
   }
 }

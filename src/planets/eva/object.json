@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a08cdebb23da7b0f5b3db14e84c27695641613f68283bf214668d93ca3ad0608"
+        "sha256": "94cd368c1483e849d637bc4a952ea4b5fdf1b9f87754e7db15b7a0c49e3f9b32"
+      }
+    },
+    "catalog": {
+      "name": "Eva",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.6327474235794797,
+      "description": "Explore Eva in 3D with its published shape model and radial elevation.",
+      "order": 290,
+      "context": {
+        "name": "Eva",
+        "color": "#aaaaaa",
+        "order": 342
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c0cbebcd3b7cd27d6d7421d672af5e41a373bdc313541082424086877ccd6c49"
+    "sha256": "06623b465ef080694622577cfe4b69f2f3b7ac1cb0e5ccd64907b0a7e5dbd4d6"
   }
 }

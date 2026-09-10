@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d6d1b0d11aac0b3427b5ad3ff41847df94cce76514541b439520bcc161ef1c6b"
+        "sha256": "05f7978d1d0ce53fd213c6e4c9c33552b71f6c416de5f85942096def1f2bde02"
+      }
+    },
+    "catalog": {
+      "name": "666 Desdemona",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.594914886847624,
+      "description": "Explore 666 Desdemona in 3D with its published shape model and radial elevation.",
+      "order": 194,
+      "context": {
+        "name": "666 Desdemona",
+        "color": "#aaaaaa",
+        "order": 143
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "2552c96706d9aa11eeed538e6dd2f543782429b7ddaa15d4bc08531e68f53dca"
+    "sha256": "a3d9864d98c43d2447811e79949192ac5325b1bc116f3f8cc168a2d28ab043cb"
   }
 }

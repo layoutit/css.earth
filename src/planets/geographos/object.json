@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6cce2f5dc65814bada26eb0c2afd6b7a121a2e2741a177dcd878a6d8d8b3e062"
+        "sha256": "393c40f13178fc602294217e8b93b998aefb3e2033bd149e6c25148347369bcf"
+      }
+    },
+    "catalog": {
+      "name": "Geographos",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.245645513766084,
+      "description": "Explore Geographos in 3D with its published radar shape model.",
+      "order": 198,
+      "context": {
+        "name": "Geographos",
+        "color": "#aaaaaa",
+        "order": 154
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9e83bf29f9593bbec5fbf584a5176030a680cde3a3da5340d5e233aa09210b51"
+    "sha256": "cd62345edd38acd66c598fa0162f65d2ffc1fac726b4562fd5196d54ddc36cfd"
   }
 }

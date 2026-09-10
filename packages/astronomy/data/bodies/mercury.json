@@ -1,0 +1,14 @@
+{
+  "id": "mercury",
+  "classification": "planet",
+  "order": 198,
+  "classificationOrder": 0,
+  "physical": {
+    "name": "Mercury",
+    "horizonsCode": "199",
+    "meanRadiusKm": 2439.4,
+    "gravitationalParameterKm3PerS2": 22031.86855,
+    "parent": "sun"
+  },
+  "physicalNotes": "Published radar-model scales; use a documented primary mass where available."
+}

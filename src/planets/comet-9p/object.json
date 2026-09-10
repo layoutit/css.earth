@@ -122,7 +122,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "213c5bcf1b047e9136e9142752ff31502c79fe7579e99ccb66d88d70dd8a38e7"
+        "sha256": "4d008abd7929464a6782b96248a074587e27322457e68d6db5c6e575a118609c"
+      }
+    },
+    "catalog": {
+      "name": "Tempel 1",
+      "systemName": "Solar System",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 3.305,
+      "description": "Explore Tempel 1's published nucleus model from Deep Impact and Stardust-NExT.",
+      "order": 75,
+      "context": {
+        "name": "Tempel 1",
+        "color": "#b8b6b2",
+        "order": 166
       }
     }
   },
@@ -130,7 +144,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a421d4a133d8125ea4f28310af72a7ac9bfb70438d08d590bcc846dd1fe3db20"
+    "sha256": "0370d7e2c6bdcff0e7e7c6e99f826223b3ab51caf6ede18f5371f6b337a49aa1"
   },
   "type": "layered-body",
   "id": "comet-9p"

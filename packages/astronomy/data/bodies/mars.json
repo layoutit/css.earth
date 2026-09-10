@@ -1,0 +1,14 @@
+{
+  "id": "mars",
+  "classification": "planet",
+  "order": 201,
+  "classificationOrder": 3,
+  "physical": {
+    "name": "Mars",
+    "horizonsCode": "499",
+    "meanRadiusKm": 3389.92,
+    "gravitationalParameterKm3PerS2": 42828.375662,
+    "parent": "sun"
+  },
+  "physicalNotes": "Published radar-model scales; use a documented primary mass where available."
+}

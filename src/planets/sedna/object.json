@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a7c62b1e483969a1b6be7d954b430996b8118c497ba4fda10b6177c15e6b1407"
+        "sha256": "eb77a92640c41faa1d9f073c018576c67d3dc4c5572913f8f17ad17065333ab5"
       }
     },
     "worldFrame": {
@@ -112,11 +112,25 @@
       ],
       "metersPerUnit": 2163.0434782608686,
       "bodyRadiusM": 497499.9999999998
+    },
+    "catalog": {
+      "name": "Sedna",
+      "systemName": "Solar System",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 82.85697523892613,
+      "description": "Sedna follows an exceptionally distant, elongated orbit beyond the planetary region. This grid-covered illustration conveys its thermal size estimate; its actual shape and surface terrain remain unresolved.",
+      "order": 7,
+      "context": {
+        "name": "Sedna",
+        "color": "#aaaaaa",
+        "order": 432
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f887d8ba590137cc0feea30e0574868d582e1532147e3d659fae65ffd831a814"
+    "sha256": "4d1668b2e44158b3e43ebbb8a77dd2fe866dbebd24efaef2c62c0b1b5eda8489"
   }
 }

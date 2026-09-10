@@ -26,7 +26,8 @@
 // 2461041.5 = 2026-Jan-01 00:00 TDB — chosen near "today" rather than J2000,
 // since these are single-epoch elements and "today" is the epoch this app's
 // default view actually renders.
-import { writeFileSync } from 'node:fs'
+import { readBodyRecords, writeBodyRecord, prepareBodyRecords } from './body-records.mjs'
+import { literalRecords } from './lib/write-record-sections.mjs'
 import { elementsUrl, horizons, parseElements } from './lib/horizons.mjs'
 import { HEADER, shortest } from './lib/sources.mjs'
 
@@ -36,13 +37,8 @@ const DEG = Math.PI / 180
 // id, Horizons small-body command (quoted verbatim in the query — the
 // trailing ';' forces the small-body branch instead of a numbered-major-body
 // lookup), centre
-const DWARF_PLANETS = [
-  ['pluto', '999', '500@10'],
-  ['ceres', '1;', '500@10'],
-  ['eris', '136199;', '500@10'],
-  ['haumea', '136108;', '500@10'],
-  ['makemake', '136472;', '500@10'],
-]
+const bodyRecords = await readBodyRecords()
+const DWARF_PLANETS = bodyRecords.filter(record => record.classification === 'dwarf-planet').map(record => [record.id, record.physical.horizonsCode])
 
 const results = []
 for (const [id, command, center] of DWARF_PLANETS) {
@@ -103,5 +99,8 @@ out += `} satisfies Record<string, DwarfPlanetRecord>
 export type DwarfPlanetId = keyof typeof DWARF_PLANET_ELEMENTS & string
 `
 
-writeFileSync(new URL('../src/data/dwarfPlanetElements.data.ts', import.meta.url), out)
+for (const [id, dwarfPlanet] of Object.entries(literalRecords(out, 'DWARF_PLANET_ELEMENTS'))) {
+  await writeBodyRecord({ ...bodyRecords.find(record => record.id === id), dwarfPlanet })
+}
+await prepareBodyRecords()
 process.stderr.write(`wrote src/data/dwarfPlanetElements.data.ts (${results.length} bodies)\n`)

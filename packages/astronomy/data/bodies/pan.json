@@ -1,0 +1,52 @@
+{
+  "id": "pan",
+  "classification": "satellite",
+  "order": 237,
+  "physical": {
+    "name": "Pan",
+    "horizonsCode": "618",
+    "meanRadiusKm": 14,
+    "gravitationalParameterKm3PerS2": 0.00028,
+    "parent": "saturn"
+  },
+  "physicalNotes": "Telesto is absent from JPL's consolidated physical-parameters table;\nHorizons' target 613 OBJ_DATA block gives GM 0.00048 km^3/s^2 and the\ntriaxial radii 16.3 x 11.8 x 9.8 km, whose geometric mean is 12.35 km.",
+  "satellite": {
+    "parent": "saturn",
+    "horizonsCode": "618",
+    "fitFromJdTdb": 2433282.5,
+    "fitToJdTdb": 2469807.5,
+    "fitStepDays": 5,
+    "poleRightAscensionRad": 0.708286543029,
+    "poleDeclinationRad": 1.45800621518,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 133584.476,
+      "eccentricity": 9.50035e-7,
+      "inclinationRad": 0.00002196655,
+      "ascendingNodeRad": 0.92750926663,
+      "argumentOfPeriapsisRad": 1.78661818821,
+      "meanAnomalyAtEpochRad": 199541.2433716224,
+      "meanMotionRadPerDay": 10.92625976305416,
+      "ascendingNodeRateRadPerDay": -0.00011393688204188,
+      "argumentOfPeriapsisRateRadPerDay": 0.000169177163702669
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "618",
+      "center": "500@699",
+      "parent": "saturn",
+      "fromJd": 2433282.5,
+      "toJd": 2469807.5,
+      "stepDays": 5,
+      "radial": true,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "618",
+      "center": "500@699",
+      "range": "source-limited"
+    }
+  }
+}

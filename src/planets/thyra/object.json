@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "78f42dc4e8fe44683f4e993141718cef6d1315aaebe31fcfc840fbfd37c8764d"
+        "sha256": "89c9b430f8e5b489b44b3ff48f9dfdbefe2cef16cf6fa6d3c2df03ab2533e31d"
+      }
+    },
+    "catalog": {
+      "name": "Thyra",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.379742056440902,
+      "description": "Explore Thyra in 3D with its published shape model and radial elevation.",
+      "order": 259,
+      "context": {
+        "name": "Thyra",
+        "color": "#aaaaaa",
+        "order": 310
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a7b9cd3807aa966f90a05fe26938492c04723d6e495e98f55e9bb02bad8493c6"
+    "sha256": "be050e4305e20582db9e7d255c9df18800a6981cdfd9b573e6d6ea01ace2028a"
   }
 }

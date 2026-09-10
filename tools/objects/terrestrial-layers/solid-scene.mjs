@@ -184,7 +184,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
   const sprite = bodyId => {
     if (bodyId === parentMarker?.id) return { url: parentMarker.url, index: 0, count: 1, size: parentMarker.size };
     const marker = PREPARED_NAVIGATION_MARKERS[bodyId];
-    return marker ? { index: marker.index, count: marker.count, size: marker.presentation.size }
+    return marker ? { url: marker.url, index: marker.index, count: marker.count, size: marker.presentation.size }
       : { url: pointUrl, index: 0, count: 1, size: 5 };
   };
   const { BODIES } = await loadAstronomyPackage();
@@ -205,7 +205,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
         bodies: Object.fromEntries(plan.heliocentricView.system.bodies.map(body => [body.id, sprite(body.id)])),
         phase: { url: lighting.url, columns: lighting.columns, rowCount: lighting.rowCount,
           frameCount: lighting.frameCount, minimumLightViewZ: -1, maximumLightViewZ: 1, baseLightAzimuthDegrees: 0 } },
-      labels: { policy: { ...DEFAULT_LABEL_POLICY }, names: Object.fromEntries(Object.entries(BODIES).map(([bodyId, body]) => [bodyId, body.name])),
+      labels: { policy: { ...DEFAULT_LABEL_POLICY }, names: Object.fromEntries([...new Set([id, 'sun', ...plan.heliocentricView.system.bodies.map(body => body.id)])].map(bodyId => [bodyId, BODIES[bodyId].name])),
         stars: { policy: { ...STAR_LABEL_POLICY }, exposure: { ...catalogue.exposure }, records: catalogue.stars.flatMap((star, i) =>
           star.name ? [{ id: `star:${i}`, hip: star.hip, name: star.name, direction: star.direction, magnitude: star.magnitude }] : []) } },
     },

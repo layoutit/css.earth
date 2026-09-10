@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cc8989a4b56b94a1f78cfca3ff304f88f9ed6648850aa32a33be01f9bb58a435"
+        "sha256": "3dfd93b7ebedffef8a815277e9dbbd97c7f65d2a62a82b4ca7d837e538d8630c"
+      }
+    },
+    "catalog": {
+      "name": "Petrina",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.0015196284082286,
+      "description": "Explore Petrina in 3D with its published shape model and documented physical size scale.",
+      "order": 381,
+      "context": {
+        "name": "Petrina",
+        "color": "#aaaaaa",
+        "order": 191
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3a26d7c2e21f1d8df21f315a49b6e909557e5a43c0814b6b603c245cb68dcd61"
+    "sha256": "daf03a9997aed9ac07c658488c955f190ff137c3e651631e6f8ccbe489b1d905"
   }
 }

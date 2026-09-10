@@ -1,0 +1,76 @@
+{
+  "id": "varda",
+  "classification": "trans-neptunian",
+  "order": 2,
+  "classificationOrder": 8,
+  "physical": {
+    "name": "Varda",
+    "horizonsCode": "174567;",
+    "meanRadiusKm": 324.1345526598759,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "asteroid": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27174567%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 6816605996.241337,
+      "eccentricity": 0.1420494840426018,
+      "inclinationRad": 0.043174726561543794,
+      "ascendingNodeRad": 5.6374169650743085,
+      "argumentOfPeriapsisRad": 0.7939459475711669,
+      "meanAnomalyAtEpochRad": 4.8461340932276835,
+      "meanMotionRadPerDay": 0.000055926452362881894
+    }
+  },
+  "asteroidFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27174567%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          -25745766.15678677,
+          -6822134035.868317,
+          -236049551.8399166
+        ],
+        "velocity": [
+          376884.2898909425,
+          52309.8189139076,
+          11615.28775163424
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          -14438926.47582839,
+          -6820555581.164846,
+          -235700944.9722662
+        ],
+        "velocity": [
+          376904.8208218642,
+          52920.47054990659,
+          11625.12058065033
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          -3131518.41730076,
+          -6818958815.901296,
+          -235352045.8235549
+        ],
+        "velocity": [
+          376921.7640302774,
+          53529.92259901563,
+          11634.57149419535
+        ]
+      }
+    ]
+  },
+  "acquisition": {
+    "heliocentric": {
+      "target": "174567;",
+      "model": "asteroid"
+    }
+  }
+}

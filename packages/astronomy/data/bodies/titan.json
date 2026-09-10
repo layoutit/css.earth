@@ -1,0 +1,51 @@
+{
+  "id": "titan",
+  "classification": "satellite",
+  "order": 224,
+  "physical": {
+    "name": "Titan",
+    "horizonsCode": "606",
+    "meanRadiusKm": 2575.5,
+    "gravitationalParameterKm3PerS2": 8978.14,
+    "parent": "saturn"
+  },
+  "physicalNotes": "No measured GM is supplied for these small moons; zero means omitted mass.\nRadii: Thomas2013/IAU2015 shapes, not an inferred density or invented mass.",
+  "satellite": {
+    "parent": "saturn",
+    "horizonsCode": "606",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": 0.653742550886,
+    "poleDeclinationRad": 1.461195228246,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 1221947.03,
+      "eccentricity": 0.028787457636,
+      "inclinationRad": 0.002335677743,
+      "ascendingNodeRad": 0.48687852123,
+      "argumentOfPeriapsisRad": -3.153050695108,
+      "meanAnomalyAtEpochRad": 14397.629993250019,
+      "meanMotionRadPerDay": 0.394017975702521,
+      "ascendingNodeRateRadPerDay": -0.000061925919953806,
+      "argumentOfPeriapsisRateRadPerDay": 0.000086520166164795
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "606",
+      "center": "500@699",
+      "parent": "saturn",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "606",
+      "center": "500@699"
+    }
+  }
+}

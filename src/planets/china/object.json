@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "29984264edf1c4dee712001c400a13bdc1c474926a4f9e6f71b4fbcdc758e5be"
+        "sha256": "68cea4d4ec9b4d9689dd4a2e56d909fed7c97c6ccd031ec4182970fbecc620d6"
+      }
+    },
+    "catalog": {
+      "name": "China",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.127373029094909,
+      "description": "Explore China in 3D with its published shape model and documented physical size scale.",
+      "order": 399,
+      "context": {
+        "name": "China",
+        "color": "#aaaaaa",
+        "order": 209
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "55780cf037ee70bfedcb8b2c0e094e5b52e1d72f1a19085abab59e9ee8760f66"
+    "sha256": "452fcdc20aae22d51c57936547a044957d7f8d04e03a25123e2332ef4f6ebfa5"
   }
 }

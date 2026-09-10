@@ -118,7 +118,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2e171d4c999fbd3a552a93bb6fe0eb6226abac025a9a55b14cda80df54000daa"
+        "sha256": "3872ba651a8a350437a01af6dd4d0a9ef0092ecdc5aeaf82e97b44cf7827191e"
+      }
+    },
+    "catalog": {
+      "name": "Didymos",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.6427722213006,
+      "description": "Explore the DART encounter shape of Didymos and its radial heights.",
+      "order": 129,
+      "context": {
+        "name": "Didymos",
+        "color": "#aaaaaa",
+        "order": 56
       }
     }
   },
@@ -127,6 +141,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1b845e13bd29870fcf816de59f3325657533ac3f5d18047df1c30c581d7809e0"
+    "sha256": "ed7b15ed65695e4af48dbeb752a654865c0944802df748e45a5a6dd165ad4791"
   }
 }

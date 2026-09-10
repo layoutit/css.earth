@@ -1,0 +1,51 @@
+{
+  "id": "umbriel",
+  "classification": "satellite",
+  "order": 248,
+  "physical": {
+    "name": "Umbriel",
+    "horizonsCode": "702",
+    "meanRadiusKm": 584.7,
+    "gravitationalParameterKm3PerS2": 85.4,
+    "parent": "uranus"
+  },
+  "physicalNotes": "Ring-dynamics mass estimates: French et al. 2024, Table 3 footnote b.\nhttps://arxiv.org/abs/2401.04634; same published prolate radii as above.",
+  "satellite": {
+    "parent": "uranus",
+    "horizonsCode": "702",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": 1.349575345339,
+    "poleDeclinationRad": 0.264032000337,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 265998.781,
+      "eccentricity": 0.003941724992,
+      "inclinationRad": 0.001422310432,
+      "ascendingNodeRad": -2.96034011418,
+      "argumentOfPeriapsisRad": 2.839439845093,
+      "meanAnomalyAtEpochRad": 55378.217965475764,
+      "meanMotionRadPerDay": 1.516012337922619,
+      "ascendingNodeRateRadPerDay": -0.000128058275534743,
+      "argumentOfPeriapsisRateRadPerDay": 0.000263588565914256
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "702",
+      "center": "500@799",
+      "parent": "uranus",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "702",
+      "center": "500@799"
+    }
+  }
+}

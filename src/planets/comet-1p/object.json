@@ -110,13 +110,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cdb622421de45ffea44677bcedd703a6afeddebd77125c8bc926d2683e1ef8f8"
+        "sha256": "113dcdf6b68e3b82dc3a98b3b8123b86922f4839f7492ee3351d76e5185569d7"
+      }
+    },
+    "catalog": {
+      "name": "Halley",
+      "systemName": "Solar System",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 17.859,
+      "description": "Explore Halley's historical Giotto/Vega shape model, with its uncertainty made explicit.",
+      "order": 72,
+      "context": {
+        "name": "Halley",
+        "color": "#b8b6b2",
+        "order": 168
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f86fd0cd245e117bfb54671715b473e0ef5aedb4a2dc285e2fc8d0e8a6a907e5"
+    "sha256": "49a7d0ad72dcf74d6ec0f77dfd025fb14c29080a1102573edca6b734e9f04bb2"
   }
 }

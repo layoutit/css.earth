@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fb8f6386eac2290227d8ba6da7e873c51e0a4b415b335ab016cbba25ecf7ff3e"
+        "sha256": "e8e700a0e5f6a72139ac6f281d98c22566a34cee0ec6e7ff164d4bcb271b591e"
+      }
+    },
+    "catalog": {
+      "name": "Ivar",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.8630871303717667,
+      "description": "Explore Ivar, a near-Earth asteroid, through its published shape model.",
+      "order": 119,
+      "context": {
+        "name": "Ivar",
+        "color": "#aaaaaa",
+        "order": 419
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d798fd437b53df9311c7a8249192d899128ffc72254d370dbed8da9f0743e8ee"
+    "sha256": "98aaa3435ef386c248a9689ce4cdf1029b5fd7446bb668e8c1ffbad7335a39b7"
   }
 }

@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "bb593a37eb9225f350a055a98a813b2e535d4aed5e484f8fdf5f8c9c2b9d3aa6"
+        "sha256": "9a456be4ead1a6d3dcdbc2dfbd456c39bf999b840daa7bf47a4a9325fc21e3d7"
+      }
+    },
+    "catalog": {
+      "name": "Ariadne",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.2042626853451814,
+      "description": "Explore Ariadne in 3D with its published shape model and radial elevation.",
+      "order": 221,
+      "context": {
+        "name": "Ariadne",
+        "color": "#aaaaaa",
+        "order": 269
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "be97f319c07bdf0c4f60f3554302ed3fafba9f7b3e1270afd098c31e8eebd475"
+    "sha256": "9eab018a588eca27d8d22d4f6ce8bc68d3f9b7cf5434e588a71c1f309bd258fc"
   }
 }

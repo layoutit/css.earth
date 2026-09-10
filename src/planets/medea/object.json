@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "76e23dd93f090b72e0740e810332fd5e5c1a98ab412f93bcc28251c76d9e3275"
+        "sha256": "44d596bdd5f1bfc5059ed85dc8cc423866c9b05fce03077b08004ba03741e1dc"
+      }
+    },
+    "catalog": {
+      "name": "Medea",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1164528663194453,
+      "description": "Explore Medea in 3D with its published shape model and radial elevation.",
+      "order": 310,
+      "context": {
+        "name": "Medea",
+        "color": "#aaaaaa",
+        "order": 362
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "871a8a98209805d79aed034b3f31d2a31d15227653e8bfffb20fcc8ac8f26c89"
+    "sha256": "0f53719b274b37bd7b125f540ce3cc53b07ea9a44cd0235d7a84b3a12846ccdd"
   }
 }

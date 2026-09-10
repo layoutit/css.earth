@@ -216,6 +216,20 @@
         "url": "prepared/page.json",
         "sha256": "09d1924aa2a7afd432b554b3fd1c0b40a4ec05a196cd215c8528d774cad69320"
       }
+    },
+    "catalog": {
+      "name": "Neptune",
+      "systemName": "Solar System",
+      "classification": "planet",
+      "color": "#5279bd",
+      "distanceAu": 30.05,
+      "description": "Explore Neptune in 3D with cssEarth. Discover the distant blue ice giant, its turbulent atmosphere, faint rings, and orbiting moons.",
+      "order": 446,
+      "context": {
+        "name": "Neptune",
+        "color": "#5279bd",
+        "order": 33
+      }
     }
   },
   "schema": "cssearth-object@1",

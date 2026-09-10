@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9c41c6597aaa86dca7e99cbd9978df1028a09192705945cc8058894811c6f3e0"
+        "sha256": "f15a42ba10b820daa3a5468874aacbd29e166798d8141cbbc61fe1bba28fb963"
+      }
+    },
+    "catalog": {
+      "name": "Arethusa",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.064764963618251,
+      "description": "Explore Arethusa in 3D with its published shape model and radial elevation.",
+      "order": 248,
+      "context": {
+        "name": "Arethusa",
+        "color": "#aaaaaa",
+        "order": 296
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "bebd03b0760ce4990d52238a649b5884667f1786805288a1f85485c16cdc45d8"
+    "sha256": "3bd5cca7b9633a4838a7f208681ea561d7e4609197045e78b8c3711c70cc2280"
   }
 }

@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0099377b5b74ff3bfdb853c79c2bad189ab49a49a7d38a8034778aefeed966a7"
+        "sha256": "1ae68d098a60cb0b85c90426c9e9f1d1f7bf5a9271358e288eb772d47df4d4a2"
+      }
+    },
+    "catalog": {
+      "name": "85 Io",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.6540732054067564,
+      "description": "Explore 85 Io in 3D with its published shape model and radial elevation.",
+      "order": 244,
+      "context": {
+        "name": "85 Io",
+        "color": "#aaaaaa",
+        "order": 292
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4e07d86fede8884031b1e6f9c3aa759e2a0793ddbd115f1e4a05829bb676eebe"
+    "sha256": "361a3d34782a8c835a7e01c792a14969c05561afc75a343ff10f6340c081c1b4"
   }
 }

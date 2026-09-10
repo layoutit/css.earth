@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a8d0d72ecf83cec140642012eae2a2f8d3565f5cd75a4e23155eb2f62b2cd253"
+        "sha256": "df4b0950896a78781dd55769c39e41a47cd9df94dc84afb28610bc7ba8ddc542"
+      }
+    },
+    "catalog": {
+      "name": "Ino",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.742339935291223,
+      "description": "Explore Ino in 3D with its published shape model and radial elevation.",
+      "order": 296,
+      "context": {
+        "name": "Ino",
+        "color": "#aaaaaa",
+        "order": 348
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "56bfc81018cbd3fa7c5e91184de3a49ae68c68b00bd98dff8fe523aaab9d5905"
+    "sha256": "7e5cb9ad08ebd5561eacb32f2eaa7aa2f9dd28ff20078d6e03ed91ef69766559"
   }
 }

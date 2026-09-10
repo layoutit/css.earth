@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "22df6c0b90f52df179384be61e0674c185cfa907d743e76f9d184fd423bf7634"
+        "sha256": "cb15d3ba7af308bb21bfec48615763a7b2f3b1f53c1f5a8a90f9cca3721ed58a"
+      }
+    },
+    "catalog": {
+      "name": "Euterpe",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.347052758675226,
+      "description": "Explore Euterpe in 3D with its published shape model and radial elevation.",
+      "order": 213,
+      "context": {
+        "name": "Euterpe",
+        "color": "#aaaaaa",
+        "order": 261
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b81e0f6aaa58a7e8ee7878bb2512d049b6cf51e872cd8b71a93b417a3224055c"
+    "sha256": "4b92cc979702745501fdaadc03399a440e988785fad4149214bd425a6c10155b"
   }
 }

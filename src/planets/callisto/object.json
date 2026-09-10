@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ee3de5f8b1b49af7298f68bd8b975ac61fe6030aeb896cfa72045e8f171bb3ee"
+    "sha256": "d743130a86ae4752a691c779b6160b74313c2972b7227c8b380dd05eb1cf7b98"
   },
   "id": "callisto",
   "properties": {
@@ -118,7 +118,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ca86afe6732d444ff0719f1708555aa29ae922f3bb11b1108a18dfad31a6b739"
+        "sha256": "5d47262c34ecabac2da88f139f4f971aec3f7d72fa2f2ea0f96e784cbb86fd17"
+      }
+    },
+    "catalog": {
+      "name": "Callisto",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#8b8177",
+      "distanceAu": 5.2,
+      "description": "Explore Callisto in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s heavily cratered moon and its ancient surface.",
+      "order": 423,
+      "context": {
+        "name": "Callisto",
+        "color": "#918a7c",
+        "order": 17
       }
     }
   },

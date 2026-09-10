@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "81af4532f1ff43826997f826018f257e9aaaa4c88a0039d7d61a20d670cf0750"
+        "sha256": "2681912e199e12b718969ba43270a21cd980934703871e198ed72f2898a59bf1"
+      }
+    },
+    "catalog": {
+      "name": "Meliboea",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1311603864437165,
+      "description": "Explore Meliboea in 3D with its published shape model and radial elevation.",
+      "order": 273,
+      "context": {
+        "name": "Meliboea",
+        "color": "#aaaaaa",
+        "order": 325
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "94867aa1e089171250cd0051031e0c263b52e6c237d656bf87a8e87178fda348"
+    "sha256": "5ee9ebf34638121b661f881775855f4a593881a9ce2e5ebd1b31bc59ef4b220e"
   }
 }

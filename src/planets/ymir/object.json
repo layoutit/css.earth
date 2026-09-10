@@ -110,13 +110,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "46528c5a8632015ad9f9fc0367aacb5de36dd16fc2fb03ff8c26c932740e3066"
+        "sha256": "c82c38e491a874014a511df5e1e6e7a54b633daae1cdc6cfbb0bae6b9484a04a"
+      }
+    },
+    "catalog": {
+      "name": "Ymir",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Ymir, a moon of Saturn, through its source-constrained shape approximation.",
+      "order": 77,
+      "context": {
+        "name": "Ymir",
+        "color": "#a0a0a0",
+        "order": 163
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a6ba280c569a359305695679e100b09315e3f0639259eb37d537210e24ca2fad"
+    "sha256": "851ae389fb64fca3d35681c20a97b44d340b17ec98287b8f5f615a7b3d43e845"
   }
 }

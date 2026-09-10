@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1db44e5a57ed2ebea148ddcc8f2bcec13ddb0d649ef9052f173f28cfe02ebc25"
+        "sha256": "e4bfaf09bd3f622ecb8dd8e543b00bd2ee5b5af9799fcb23684ad70969b01df7"
+      }
+    },
+    "catalog": {
+      "name": "Pyrrhus",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 5.198966960927357,
+      "description": "Explore Pyrrhus in 3D with its published shape model and radial elevation.",
+      "order": 359,
+      "context": {
+        "name": "Pyrrhus",
+        "color": "#aaaaaa",
+        "order": 410
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "914a81784afbba3996b930db5b38532a0d6cfcad8f93cd85091b8da7ae6b9968"
+    "sha256": "6b56b61fe2bfdf48e1bd337731c2dab56726fc2ba843d4bc03284d922f7a80a0"
   }
 }

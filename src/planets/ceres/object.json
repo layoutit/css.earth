@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6f45ec6a8bc367037d50206487d59ec3dc58e17a03c971d2cdc8f327c3608f36"
+    "sha256": "ba99c6a727706fe047d9a94dc36cf0e8c0ef1fcebd36c872b017aea770f117f3"
   },
   "id": "ceres",
   "properties": {
@@ -118,7 +118,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "de32e86764c5f38276883a780af45e0162844c0931b670fe9bc24e302850df62"
+        "sha256": "cb75761ab768d5da0f0dbe63f92663054e7f35351a8d8ddded9496e7f34525fc"
+      }
+    },
+    "catalog": {
+      "name": "Ceres",
+      "systemName": "Solar System",
+      "classification": "dwarf-planet",
+      "color": "#8e8b86",
+      "distanceAu": 2.77,
+      "description": "NASA Dawn, USGS, JPL, ESO, and HYG",
+      "order": 418,
+      "context": {
+        "name": "Ceres",
+        "color": "#9c9991",
+        "order": 12
       }
     }
   },

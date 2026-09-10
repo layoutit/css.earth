@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6866758d405019f93d551281b94555d90babe3b5667687810ef10950cf8aed8d"
+        "sha256": "7ba6dea263216742dc8ebab18c066ddb9498c7bdce168d96eaf27f3d0b2751d8"
       }
     },
     "worldFrame": {
@@ -112,11 +112,25 @@
       ],
       "metersPerUnit": 10.260202393953046,
       "bodyRadiusM": 2359.8465506092007
+    },
+    "catalog": {
+      "name": "Machholz 1",
+      "systemName": "Solar System",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 5.448413475057264,
+      "description": "96P: Machholz 1 repeatedly sweeps close to the Sun. SOHO and STEREO have watched its passages from different sides of Earth’s orbit. Illustrative nucleus at Celestia’s catalog scale.",
+      "order": 51,
+      "context": {
+        "name": "Machholz 1",
+        "color": "#b8b6b2",
+        "order": 446
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c1e231e100bcec66115b780cd7f61e1a45ec3fd5fcde1619e3a6ffe8106c4732"
+    "sha256": "ca6a3404a3b62a939acc14ff5b7e367d9864d07f0c03c51fbf2c142bb429aaf0"
   }
 }

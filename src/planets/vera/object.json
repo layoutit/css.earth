@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2822a6126a333ef9fbab31782514b8e12157ba1c9c67d3b5419d606bbdd4334e"
+        "sha256": "005e222a9f13898cc071218c3f06e0c370dbb950bbc8a4124dfd362077df276e"
+      }
+    },
+    "catalog": {
+      "name": "Vera",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.098448648035085,
+      "description": "Explore Vera in 3D with its published shape model and radial elevation.",
+      "order": 327,
+      "context": {
+        "name": "Vera",
+        "color": "#aaaaaa",
+        "order": 379
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f3ee9e84e729097498cfd71e8664d92d7b477fc44dbbd5604caede20093e1f70"
+    "sha256": "0b443e4ab8f52df6998c36a63c71c7bee2c58f1287ce0af7abd200c42c19d11b"
   }
 }

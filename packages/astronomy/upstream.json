@@ -26,27 +26,12 @@
     "code-project-url": "src/modelAccuracy.ts: PROJECT_SOURCE_URL string literal, the upstream ARCHITECTURE.md -> this package's AGENTS.md in the cssEarth repository (a documentation URL; no behaviour change)",
     "code-convention-label": "src/modelAccuracy.ts: the two 'Galaxio \u2026 convention/definition' sourceLabel string literals -> 'cssEarth \u2026' (labels only; no behaviour change)"
   },
-  "rewrittenFiles": {
-    "package.json": [
-      "package-name",
-      "package-urls"
-    ]
-  },
+  "rewrittenFiles": {},
   "excludedFiles": {},
   "importNote": "The TypeScript source imports relative modules as `./x.js` while the files are `./x.ts` (the TS/ESM convention). Vite and Astro resolve that natively, so browser-side consumption works verbatim. Node does not: importing src/index.ts directly fails on the first `.js` specifier. Decision: a package is consumed through its own build step, never a specifier rewrite or a resolver hook, so the source stays byte-identical to its origin. For the astronomy package `pnpm build:astronomy` runs its tsup config into the gitignored dist/, which the workspace link resolves as `@cssearth/astronomy` (`pnpm install` runs it as postinstall); Node-side consumers go through src/platform/astronomy-package.mjs (tools/prepare-solar-geometry.mjs first). A catalog consumer would be wired the same way.",
-  "fileCount": 29,
-  "byteCount": 362136,
+  "fileCount": 24,
+  "byteCount": 335171,
   "files": {
-    "package.json": {
-      "sha256": "a00c3ed14ee3f66a083a1f07a68bc2d02006f65c301dc467127a2b8cd1d5ea92",
-      "bytes": 1231,
-      "upstreamSha256": "6b9a40321c760ee9e1e0a96ae26f44a0a4059a1d9f9cf939dd81bda66b4347c9",
-      "upstreamBytes": 1227,
-      "identityRules": [
-        "package-name",
-        "package-urls"
-      ]
-    },
     "src/__fixtures__/compare.ts": {
       "sha256": "931eef57a5bb089623b82cebf29ae8f22723e9f364b3f0b275ab7249d5b45a7a",
       "bytes": 944
@@ -58,10 +43,6 @@
     "src/angles.ts": {
       "sha256": "6488f3df56bcf314b4cf7c920845c0d88335dd4b0af295270485e3581f98f16e",
       "bytes": 3523
-    },
-    "src/data/dwarfPlanetElements.data.ts": {
-      "sha256": "6b7cc046490c9ebc4de35e63f200b4920dfa5a94c718508d0a8f3b39a882ae4d",
-      "bytes": 4419
     },
     "src/data/elp2000.data.ts": {
       "sha256": "02b1aa03713b8cfbe112d169ccb6cefa13f6d0aee31ad0029b6567cb9b817bc3",
@@ -86,14 +67,6 @@
     "src/frames.ts": {
       "sha256": "cd868d2ecb83e1534faceccec55b59490edfdd762558749a08b43988ff1bd41c",
       "bytes": 19278
-    },
-    "src/kepler.test.ts": {
-      "sha256": "c6245c3a8060ba24e7e6e954e6fe2a509bfb60bcceea6357a77731425f9ac521",
-      "bytes": 9623
-    },
-    "src/kepler.ts": {
-      "sha256": "f1e29b9fc0a30a806d04e3e7be25b2d6838f24a2d8ee9cbaccad53c9cf8c277f",
-      "bytes": 7044
     },
     "src/rotation.test.ts": {
       "sha256": "19f275611fff9f11a7d2643ef2bf927dd76187e632449c7bb230006982ff83bd",
@@ -126,10 +99,6 @@
     "tools/.gitignore": {
       "sha256": "86ef3df9c349d8c7f0db7bbe0aefecd203ab0a6d9a532d3bcaea6eef19c94172",
       "bytes": 162
-    },
-    "tools/generate-dwarf-planets.mjs": {
-      "sha256": "791eaf7961ef6fa7251550cc42be8801699847bf23ba253f4936602faa58c2db",
-      "bytes": 4648
     },
     "tools/generate-series.mjs": {
       "sha256": "a3d6df3b44ab389e08195eb0c190143fc12723706db2c77151d33fa3a6cc715e",
@@ -165,13 +134,9 @@
     "AGENTS.md",
     "CLAUDE.md",
     "README.md",
-    "src/__fixtures__/horizons.asteroids-1.ts",
-    "src/__fixtures__/horizons.asteroids-2.ts",
+    "package.json",
     "src/__fixtures__/horizons.asteroids.ts",
     "src/__fixtures__/horizons.comets.ts",
-    "src/__fixtures__/horizons.moons-and-small-bodies-2.ts",
-    "src/__fixtures__/horizons.moons-and-small-bodies.ts",
-    "src/__fixtures__/horizons.planetary.ts",
     "src/__fixtures__/horizons.ts",
     "src/__fixtures__/rotation.ts",
     "src/asteroids.test.ts",
@@ -182,17 +147,15 @@
     "src/comets.ts",
     "src/data/asteroidElements.data.ts",
     "src/data/cometElements.data.ts",
-    "src/data/satelliteElements.data.jupiter.ts",
-    "src/data/satelliteElements.data.mars.ts",
-    "src/data/satelliteElements.data.neptune.ts",
-    "src/data/satelliteElements.data.pluto.ts",
-    "src/data/satelliteElements.data.saturn.ts",
+    "src/data/dwarfPlanetElements.data.ts",
     "src/data/satelliteElements.data.ts",
-    "src/data/satelliteElements.data.uranus.ts",
     "src/data/sceneSatelliteStates.data.ts",
     "src/dwarfPlanets.test.ts",
     "src/dwarfPlanets.ts",
     "src/index.ts",
+    "src/kepler-hyperbolic.test.ts",
+    "src/kepler.test.ts",
+    "src/kepler.ts",
     "src/modelAccuracy.test.ts",
     "src/modelAccuracy.ts",
     "src/rotation-neptune.ts",
@@ -204,13 +167,17 @@
     "src/solarSystem.test.ts",
     "src/solarSystem.ts",
     "tools/body-epoch-ephemeris.mjs",
+    "tools/body-records.mjs",
     "tools/fetch-fixtures.mjs",
     "tools/fetch-rotation-fixtures.mjs",
     "tools/generate-asteroids.mjs",
     "tools/generate-comets.mjs",
+    "tools/generate-dwarf-planets.mjs",
+    "tools/generate-heliocentric.mjs",
     "tools/generate-satellites.mjs",
     "tools/generate-scene-satellites.mjs",
-    "tools/lib/write-record-sections.mjs"
+    "tools/lib/write-record-sections.mjs",
+    "tools/verify-sn263-orbits.py"
   ],
   "originalLocalFileHashes": {
     "AGENTS.md": {
@@ -307,6 +274,34 @@
       "lastMirroredBytes": 13892,
       "lastMirroredSubtreeCommit": "ec8b1c28f25549655e5de95aa05aeda0356d1611",
       "reason": "The solar-system integration now composes local fixed-epoch companion states. This file is maintained locally; its current bytes are not attributed to the mirrored commit."
+    },
+    "package.json": {
+      "lastMirroredSha256": "a00c3ed14ee3f66a083a1f07a68bc2d02006f65c301dc467127a2b8cd1d5ea92",
+      "reason": "Preparation now assembles individual local body records.",
+      "previousIdentityRules": [
+        "package-name",
+        "package-urls"
+      ]
+    },
+    "tools/generate-dwarf-planets.mjs": {
+      "lastMirroredSha256": "791eaf7961ef6fa7251550cc42be8801699847bf23ba253f4936602faa58c2db",
+      "reason": "Preparation now assembles individual local body records."
+    },
+    "src/data/dwarfPlanetElements.data.ts": {
+      "lastMirroredSha256": "6b7cc046490c9ebc4de35e63f200b4920dfa5a94c718508d0a8f3b39a882ae4d",
+      "reason": "Preparation now assembles individual local body records."
+    },
+    "src/kepler.ts": {
+      "lastMirroredSha256": "f1e29b9fc0a30a806d04e3e7be25b2d6838f24a2d8ee9cbaccad53c9cf8c277f",
+      "reason": "Local open-conic support was added in PR #99; these bytes no longer match the mirrored source."
+    },
+    "src/kepler.test.ts": {
+      "lastMirroredSha256": "c6245c3a8060ba24e7e6e954e6fe2a509bfb60bcceea6357a77731425f9ac521",
+      "reason": "Local open-conic support was added in PR #99; these bytes no longer match the mirrored source."
     }
-  }
+  },
+  "locallyMaintainedDirectories": [
+    "data/",
+    "src/data/generated/"
+  ]
 }

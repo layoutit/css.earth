@@ -232,7 +232,7 @@ const IGNORED_DIRECTORIES = new Set(["node_modules", "dist", ".cache", "coverage
 // Local body models, their checks, guides and scientific records survive refreshes.
 export function locallyMaintainedFile(target, rel) {
   if (target.id !== "astronomy") return false;
-  return ["README.md", "AGENTS.md", "CLAUDE.md", "tools/fetch-fixtures.mjs",
+  return ["src/kepler.ts", "src/kepler.test.ts", "src/kepler-hyperbolic.test.ts", "tools/verify-sn263-orbits.py", "package.json", "tools/body-records.mjs", "tools/generate-heliocentric.mjs", "tools/generate-dwarf-planets.mjs", "src/data/dwarfPlanetElements.data.ts", "README.md", "AGENTS.md", "CLAUDE.md", "tools/fetch-fixtures.mjs",
     "src/index.ts", "src/asteroids.ts", "src/asteroids.test.ts", "src/data/asteroidElements.data.ts", "tools/generate-asteroids.mjs",
     "src/comets.ts", "src/comets.test.ts", "src/data/cometElements.data.ts", "tools/generate-comets.mjs",
     "tools/generate-satellites.mjs", "tools/lib/write-record-sections.mjs", "tools/lib/fit-libration.mjs",
@@ -248,6 +248,7 @@ export function locallyMaintainedFile(target, rel) {
     "tools/fetch-rotation-fixtures.mjs", "src/__fixtures__/rotation.ts",
     "src/bodies.ts", "src/bodies.test.ts", "src/dwarfPlanets.ts", "src/dwarfPlanets.test.ts",
     "src/modelAccuracy.ts", "src/modelAccuracy.test.ts", "src/satellites.ts", "src/rotation.ts", "src/rotation-neptune.ts", "src/satellites.test.ts", "src/solarSystem.test.ts"].includes(rel) ||
+    rel.startsWith("data/") || rel.startsWith("src/data/generated/") ||
     rel.startsWith("source/scene-epoch/") ||
     /^src\/(?:data\/satelliteElements\.data|__fixtures__\/horizons)(?:\.[a-z0-9-]+)?\.ts$/.test(rel);
 }
@@ -517,7 +518,8 @@ async function syncPackage(pkg, { root, upstream, license, allowDirty, log }) {
       IDENTITY_RULES.map((rule) => [rule.id, rule.description]),
     ),
     localMaintenance: "Body models, their checks, guides and scientific records are maintained locally and preserved by sync.",
-    locallyMaintainedFiles: (await listFiles(target.dest)).map(file => toPosix(relative(target.dest, file))).filter(rel => locallyMaintainedFile(target, rel)),
+    locallyMaintainedDirectories: ["data/", "src/data/generated/"],
+    locallyMaintainedFiles: (await listFiles(target.dest)).map(file => toPosix(relative(target.dest, file))).filter(rel => locallyMaintainedFile(target, rel) && !rel.startsWith("data/") && !rel.startsWith("src/data/generated/")),
     rewrittenFiles: rewritten,
     excludedFiles: excluded,
     importNote: IMPORT_NOTE,

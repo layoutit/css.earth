@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c23ff619155571b5793fc24f3ad3f94b31bff444300798b3c5542a6c4ee322aa"
+        "sha256": "89b87faff58cf921be651ce1e3dbece8139d57219d9f428ee0759ecc09b4351a"
+      }
+    },
+    "catalog": {
+      "name": "Iris",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.3855680410669247,
+      "description": "Explore Iris in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "order": 148,
+      "context": {
+        "name": "Iris",
+        "color": "#aaaaaa",
+        "order": 85
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "5661d683ce046f50d1c5c1379a3fca0a8a1c415f1b403e2e289124831ee35110"
+    "sha256": "8478a30c17bd19e24eed0a876c3c0d16f6d1d32537fe32453d827da9c1c04ace"
   }
 }

@@ -1,0 +1,52 @@
+{
+  "id": "nereid",
+  "classification": "satellite",
+  "order": 62,
+  "physical": {
+    "name": "Nereid",
+    "horizonsCode": "802",
+    "meanRadiusKm": 170,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "neptune"
+  },
+  "physicalNotes": "Buie et al. (2015) primary axes; JPL primary GM. Physical primary, not binary barycenter.",
+  "satellite": {
+    "parent": "neptune",
+    "horizonsCode": "802",
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 5,
+    "poleRightAscensionRad": -1.695375960896,
+    "poleDeclinationRad": 1.091654270502,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 5513627.134,
+      "eccentricity": 0.745919992331,
+      "inclinationRad": 0.000119773436,
+      "ascendingNodeRad": -1.049608347073,
+      "argumentOfPeriapsisRad": -0.641573551197,
+      "meanAnomalyAtEpochRad": -115.619068950216,
+      "meanMotionRadPerDay": 0.017449662191936,
+      "ascendingNodeRateRadPerDay": 0.000998283325439008,
+      "argumentOfPeriapsisRateRadPerDay": -0.000999310101091455
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "802",
+      "center": "500@899",
+      "parent": "neptune",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 5,
+      "radial": true,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "802",
+      "center": "500@899",
+      "range": "daily"
+    }
+  }
+}

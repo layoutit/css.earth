@@ -110,13 +110,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b4f4dbfe0b0311dec243c4e08207bc35f371441de1f69f73b2e9c6045dc6b69a"
+        "sha256": "83f57fbcaf91cf97627b0a3d503077af4297b1f7ed1cdb5e7d913571e42109c2"
+      }
+    },
+    "catalog": {
+      "name": "Kerberos",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 39.482,
+      "description": "Explore Kerberos through a clearly labeled approximate shape fit.",
+      "order": 452,
+      "context": {
+        "name": "Kerberos",
+        "color": "#a0a0a0",
+        "order": 124
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fb7a3f797a279ae782ef0ebc66c6910d99e20d9c3d9fcd560eae860fc8fcb80c"
+    "sha256": "e3c76c2ba378779713e14955a4d9486e37cebcdff9b19b803824dd743856008c"
   }
 }

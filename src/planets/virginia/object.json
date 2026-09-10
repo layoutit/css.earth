@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6d82186703bd841e745cbfef97ba6d52bffc5f2ab4a2f75c62ccf811a2be7b6b"
+        "sha256": "c2bcd359d31e90413763307b427172da00c9f1da64071e494102efb782f7bb3e"
+      }
+    },
+    "catalog": {
+      "name": "Virginia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.651502448166739,
+      "description": "Explore Virginia in 3D with its published shape model and documented physical size scale.",
+      "order": 371,
+      "context": {
+        "name": "Virginia",
+        "color": "#aaaaaa",
+        "order": 181
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0c07454880263f0e70e6ae973fc60fadb4cc0358494676c7a66f5a0b8e8fec46"
+    "sha256": "8aa983a912de81c79e6c6516448f8556053e92698850b8e39343a70aaed51cc9"
   }
 }

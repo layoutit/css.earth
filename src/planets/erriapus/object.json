@@ -110,13 +110,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d59596dea6f3d3bacf5075db5e2de397e1c6d6f2574b1cfd05e857386ba962e1"
+        "sha256": "a6a05c3743fc872f1ac9c57dfd0f914b6f6d6833dfc67cf135e4b6eda436392f"
+      }
+    },
+    "catalog": {
+      "name": "Erriapus",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Erriapus, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "order": 31,
+      "context": {
+        "name": "Erriapus",
+        "color": "#a0a0a0",
+        "order": 233
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0f780aa83bd845b4faa8dd0f8a2a9eebe1b8a0f840c91fb17524659bf0add6d6"
+    "sha256": "8b2259a1c25114cc617581e369dafa4a200cb20384f76ae3706759e88ff22224"
   }
 }

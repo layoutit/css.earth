@@ -110,13 +110,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "3c5e813d4cbdb0de3295ede4f4034cd0d46146b2baffee0163c7d73e023eacd2"
+        "sha256": "2b2b9cae2d981adbd1cc772d7fca60a7a9dca78331453522aa2e6f757db14096"
+      }
+    },
+    "catalog": {
+      "name": "Amalthea",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#b39a85",
+      "distanceAu": 5.2,
+      "description": "Explore Amalthea with Galileo imagery and its source-backed irregular shape.",
+      "order": 96,
+      "context": {
+        "name": "Amalthea",
+        "color": "#b39a85",
+        "order": 62
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "75cfd75ad21ea11bfbcb0b2b34f20e0c1341128a74f177c781d7a245ad5f86fd"
+    "sha256": "d0ae40c92defb3ea4bdf64fd091c623cbdac7359c99aff6b0b21987d878db411"
   }
 }

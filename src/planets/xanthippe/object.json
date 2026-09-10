@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9c84a3bdb47f7e198c17469746afdd17213d1026756d09a5d62526c394c827f4"
+        "sha256": "0de6cc065b9529734fc5b8acd2bf1e58f5f80848c092c6a6f814b9862fca608f"
+      }
+    },
+    "catalog": {
+      "name": "Xanthippe",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.732385125710907,
+      "description": "Explore Xanthippe in 3D with its published shape model and radial elevation.",
+      "order": 283,
+      "context": {
+        "name": "Xanthippe",
+        "color": "#aaaaaa",
+        "order": 335
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3fcb84ee1ef61c3a5a45ae0c77b269c3379d14e40f55df43e3b9a9c303511674"
+    "sha256": "aae6707f4ae74016bcc7b512744a0a16c40a90af7d74feecafec1cf456c8572f"
   }
 }

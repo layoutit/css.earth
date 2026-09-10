@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a53b7c8dc40ffe85976b4dce11e6633a212cd5299410249c8e4d811701b68007"
+        "sha256": "0ae7127c8f168b3e49aa8af39b56e0b3af5079020f3106ec8432603c65510f58"
+      }
+    },
+    "catalog": {
+      "name": "Iphigenia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.4333836727227824,
+      "description": "Explore Iphigenia in 3D with its published shape model and radial elevation.",
+      "order": 258,
+      "context": {
+        "name": "Iphigenia",
+        "color": "#aaaaaa",
+        "order": 309
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "02acba992d556ee00b47daa473b4f82d54584496ad289e61303fe67b7f6a4fd9"
+    "sha256": "9c240e19eb697e7f2d6a8cb38f16a9d1001e65a0b3982b37e6d53a08c7c5249e"
   }
 }

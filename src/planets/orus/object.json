@@ -110,13 +110,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8badc736a368d8b38d6c6493f3bf0de17abf7dda43fd49768a502d83960f97a4"
+        "sha256": "785537ab4f5564ed60f607d47436d20302590e3f54fd6018317f2af42ea7e6cc"
+      }
+    },
+    "catalog": {
+      "name": "Orus",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#a0a0a0",
+      "distanceAu": 5.1231730197676795,
+      "description": "Explore Orus, a Lucy target, through its observation-constrained approximate ellipsoid.",
+      "order": 14,
+      "context": {
+        "name": "Orus",
+        "color": "#a0a0a0",
+        "order": 255
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fa417d8a17e9e8681ec22cff2d6d3e9c29cba3441e5a23449164b979bcf8feff"
+    "sha256": "617def65de5e4ec894636e7e938bc11927b9e86b2b17d8f73fd4a5287e322950"
   }
 }

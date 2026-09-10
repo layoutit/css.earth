@@ -1,82 +1,57 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import ts from 'typescript';
 
-/** Read only the checked generated record sections, without evaluating code.
- * A selected-body regeneration reuses these bytes for all unchanged bodies. */
-export function readRecordSections(destination, symbol) {
-  const index = readFileSync(destination, 'utf8');
-  const imports = [...index.matchAll(/^import \{ [A-Z_0-9]+ \} from '\.\/([^']+\.js)'$/gm)];
-  if (!imports.length) throw new Error(`Missing generated ${symbol} sections`);
+/** Read generated numeric literals without executing source text. */
+export function literalRecords(source, symbol) {
+  const ast = ts.createSourceFile('records.ts', source, ts.ScriptTarget.Latest, true);
+  const declaration = ast.statements.flatMap(statement => ts.isVariableStatement(statement) ? [...statement.declarationList.declarations] : [])
+    .find(declaration => declaration.name.getText(ast) === symbol);
+  if (!declaration) throw new Error(`Missing generated ${symbol} declaration.`);
+  const literal = node => {
+    if (ts.isAsExpression(node) || ts.isSatisfiesExpression(node) || ts.isParenthesizedExpression(node)) return literal(node.expression);
+    if (ts.isObjectLiteralExpression(node)) return Object.fromEntries(node.properties.map(property => {
+      if (!ts.isPropertyAssignment(property) || !('text' in property.name)) throw new TypeError('Expected a literal record property.');
+      return [property.name.text, literal(property.initializer)];
+    }));
+    if (ts.isArrayLiteralExpression(node)) return node.elements.map(literal);
+    if (ts.isStringLiteral(node)) return node.text;
+    if (ts.isNumericLiteral(node)) return Number(node.text);
+    if (ts.isPrefixUnaryExpression(node) && node.operator === ts.SyntaxKind.MinusToken) return -literal(node.operand);
+    if (node.kind === ts.SyntaxKind.TrueKeyword) return true;
+    if (node.kind === ts.SyntaxKind.FalseKeyword) return false;
+    if (node.kind === ts.SyntaxKind.NullKeyword) return null;
+    throw new TypeError(`Expected a numeric source record, got ${node.getText(ast)}.`);
+  };
+  return literal(declaration.initializer);
+}
+
+const dataRoot = new URL('../../data/', import.meta.url);
+const bodyRoot = new URL('bodies/', dataRoot), fixtureRoot = new URL('fixtures/', dataRoot);
+const formatted = (id, value) => `  ${id}: ${JSON.stringify(value, null, 2).replaceAll('\n', '\n  ')},`;
+
+export function readRecordSections(_destination, symbol) {
+  const directory = symbol === 'SATELLITE_ELEMENTS' ? bodyRoot : fixtureRoot;
   const records = new Map();
-  for (const [, file] of imports) {
-    const source = readFileSync(new URL(file.replace(/\.js$/, '.ts'), destination), 'utf8');
-    if (!source.includes(`export const ${symbol}_`)) throw new Error(`Unexpected generated section ${file}`);
-    for (const record of source.matchAll(/^  ([\w]+): \{[\s\S]*?^  },?$/gm)) {
-      if (records.has(record[1])) throw new Error(`Duplicate generated record ${record[1]}`);
-      records.set(record[1], record[0]);
-    }
+  for (const file of readdirSync(directory).sort()) {
+    if (!file.endsWith('.json')) continue;
+    const record = JSON.parse(readFileSync(new URL(file, directory), 'utf8'));
+    const id = file.slice(0, -5), value = symbol === 'SATELLITE_ELEMENTS' ? record.satellite : record;
+    if (value) records.set(id, formatted(id, value));
   }
   return records;
 }
 
-// Keep generated records intact while separating independently maintained systems.
-// Both generators call this writer; formatting a checked-in payload uses exactly
-// the same path as a fresh scientific-data fetch.
-export function writeRecordSections(destination, source, kind) {
-  const symbol = kind === 'satellites' ? 'SATELLITE_ELEMENTS' : 'HORIZONS';
-  const declaration = new RegExp(`^export const ${symbol}[^\\n]*= \\{\\n`, 'm');
-  const match = declaration.exec(source);
-  if (!match) throw new Error(`Missing generated ${symbol} declaration`);
-  const start = match.index + match[0].length;
-  const end = source.indexOf('\n}', start);
-  if (end < 0) throw new Error(`Missing generated ${symbol} terminator`);
-  const body = source.slice(start, end);
-  const records = [...body.matchAll(/^  ([\w]+): \{[\s\S]*?^  },?$/gm)];
-  if (!records.length || records.map(record => record[0]).join('\n').trim() !== body.trim()) {
-    throw new Error(`Generated ${symbol} records do not partition exactly`);
+/** Acquisition updates individual retained records; builds assemble the exports. */
+export function writeRecordSections(_destination, source, kind) {
+  const records = literalRecords(source, kind === 'satellites' ? 'SATELLITE_ELEMENTS' : 'HORIZONS');
+  for (const [id, value] of Object.entries(records)) {
+    if (!/^[a-zA-Z][a-zA-Z0-9-]*$/.test(id)) throw new TypeError('Invalid source record identity.');
+    const file = new URL(`${id}.json`, kind === 'satellites' ? bodyRoot : fixtureRoot);
+    let previous;
+    try { previous = readFileSync(file, 'utf8'); }
+    catch (error) { if (kind === 'satellites' || error.code !== 'ENOENT') throw error; }
+    const record = kind === 'satellites' ? { ...JSON.parse(previous), satellite: value } : value;
+    const text = JSON.stringify(record, null, 2) + '\n';
+    if (text !== previous) writeFileSync(file, text);
   }
-  const sections = new Map();
-  for (const record of records) {
-    const group = kind === 'satellites' ? /parent: '([^']+)'/.exec(record[0])?.[1]
-      : /^(sun|mercury|venus|emb|marsBary|jupiterBary|saturnBary|uranusBary|neptuneBary|earthFrom|jupiterFrom|saturnFrom)/.test(record[1])
-        ? 'planetary' : 'moons-and-small-bodies';
-    if (!group) throw new Error(`Missing system for ${record[1]}`);
-    if (!sections.has(group)) sections.set(group, []);
-    sections.get(group).push(record[0]);
-  }
-  const base = destination.pathname.split('/').at(-1).replace(/\.ts$/, '');
-  const imports = [], spreads = [];
-  const type = kind === 'satellites' ? 'SatelliteRecord' : 'HorizonsFixture';
-  // Keep complete records together as the catalog grows past one source file.
-  // The conservative body budget leaves room for generated headers and imports.
-  const chunks = [];
-  for (const [group, records] of sections) {
-    let chunk = [], lines = 0, part = 1;
-    for (const record of records) {
-      const count = record.split('\n').length;
-      if (chunk.length && lines + count > 560) {
-        chunks.push([part === 1 ? group : `${group}-${part}`, chunk]);
-        chunk = []; lines = 0; part++;
-      }
-      chunk.push(record); lines += count;
-    }
-    chunks.push([part === 1 ? group : `${group}-${part}`, chunk]);
-  }
-  for (const [group, records] of chunks) {
-    const name = `${symbol}_${group.replaceAll('-', '_').toUpperCase()}`;
-    const file = `${base}.${group}.ts`;
-    const header = source.slice(0, source.indexOf('import type'));
-    // Keep literal IDs while widening numeric payloads to their public interface.
-    // Large residual arrays otherwise exceed TypeScript's declaration serialization limit.
-    const keys = records.map(record => `'${/^  (\w+):/.exec(record)[1]}'`).join(' | ');
-    const annotation = kind === 'satellites' ? `: Readonly<Record<${keys}, ${type}>>` : '';
-    const text = `${header}import type { ${type} } from './${base}.js'\n\n` +
-      `export const ${name}${annotation} = {\n${records.join('\n')}\n} as const satisfies Record<string, ${type}>\n`;
-    if (text.trimEnd().split('\n').length > 600) throw new Error(`Generated section ${file} exceeds 600 lines`);
-    writeFileSync(new URL(file, destination), text);
-    imports.push(`import { ${name} } from './${file.replace(/\.ts$/, '.js')}'`);
-    spreads.push(`  ...${name},`);
-  }
-  const output = `${imports.join('\n')}\n\n${source.slice(0, start)}${spreads.join('\n')}${source.slice(end)}`;
-  if (output.trimEnd().split('\n').length > 600) throw new Error(`Generated ${base} index exceeds 600 lines`);
-  writeFileSync(destination, output);
 }

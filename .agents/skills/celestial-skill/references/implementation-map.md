@@ -45,7 +45,8 @@ fallback requirements are not the current authored-package template.
 
 | Change | Source owners |
 | --- | --- |
-| Identity, route, lazy loading | `site/objects.mjs`, `site/object-schema.mjs`, `site/object-adapter.mjs`, `site/packaged-object-runtime.mjs` |
+| Identity, route, lazy loading | Body `object.json` → `tools/prepare-catalog.mjs` → `site/objects.mjs`; `site/object-adapter.mjs`, `site/packaged-object-runtime.mjs` |
+| Physical data, orbit records and acquisition choices | `packages/astronomy/data/bodies/<id>.json`, `packages/astronomy/tools/body-records.mjs` |
 | Authored and prepared object contracts | `packages/objects/src/descriptor.ts`, `packages/objects/src/authored.ts`, `src/renderers/css/validation/` |
 | Preparation dispatch and publication | `tools/objects/prepare-authored.ts`, `tools/objects/publication.mjs`, `tools/prepare-object-json.mjs` |
 | Source acquisition, verification and runtime inventory | `tools/objects/operations.ts`, `tools/objects/operations-acquisition.ts`, package source manifests and acquisition JSON |
@@ -76,8 +77,11 @@ the shared world camera.
 
 Navigation marker appearance comes from each authored package's
 `source/preparation/navigation.json`. `tools/prepare-navigation.mjs` generates
-`site/prepared-navigation-markers.mjs`; `PlanetNavigationMarker.astro` consumes
-it. Adding a body does not require a hand-maintained component presentation map.
+individual `public/navigation/body-<id>.webp` images and their 2x counterparts.
+Builds assemble the ignored `site/prepared-navigation-markers.mjs` from those
+images and recipes; `PlanetNavigationMarker.astro` consumes it. Follow the
+[registration steps](../../../../src/planets/README.md#register-a-body-without-editing-shared-lists)
+instead of editing a shared list or atlas position.
 
 ## Choose examples by source needs
 

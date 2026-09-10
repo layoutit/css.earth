@@ -103,6 +103,10 @@ examples of capabilities, not templates for a new controller or a whole planet.
 - Use the open-ended `OBJECTS` registry, generic adapter, shared shell and camera.
   Body selection navigates one active scene; standalone moons have their own
   routes, not embedded moon scenes in the parent's package.
+- Register additions in the body's descriptor and individual astronomy record,
+  following the [contributor guide](../../../src/planets/README.md#register-a-body-without-editing-shared-lists).
+  Keep combined catalogues and navigation outputs generated. Do not edit shared
+  body lists or force-add ignored build files to register a destination.
 - Put source interpretation, geometry, materials, scientific content and
   supported controls in authored package data and shared preparation recipes.
   Keep input, lifecycle, typography and navigation behavior shared.

@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c8aa8aa45390b2c3992bbbedca852a378c7a21ee935159c1e90725f56061ef80"
+        "sha256": "f8bb6fd288b2309367653119646e88990b8ad8516d0357ae0512b0ac110bf07c"
+      }
+    },
+    "catalog": {
+      "name": "Protogeneia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.13636157165271,
+      "description": "Explore Protogeneia in 3D with its published shape model and radial elevation.",
+      "order": 277,
+      "context": {
+        "name": "Protogeneia",
+        "color": "#aaaaaa",
+        "order": 329
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c0888bc5f78fa26e54ec62a0ac37005d2e12af6cb58fd0679c2d1458f05b1bd8"
+    "sha256": "624019ba1cc8f0265b6ef952006e4d3756404d8ebd3bfde3e791ef21641129e9"
   }
 }

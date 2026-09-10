@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6645abf9ada84c552908eced811ba24797aa0ef7206601e548d1517d896f7c6c"
+        "sha256": "e201e0b54ce0e2b9fb284220a850706af3e747a8092935c2beea1605bae2c6ab"
+      }
+    },
+    "catalog": {
+      "name": "Klio",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.3638584071567386,
+      "description": "Explore Klio in 3D with its published shape model and radial elevation.",
+      "order": 243,
+      "context": {
+        "name": "Klio",
+        "color": "#aaaaaa",
+        "order": 291
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fc2ebf158e5d1371879f3814f41a7d0cbefbc3146477ec73d48f147114f176e8"
+    "sha256": "b4c37d5755065eb91b6222713bcdd4f1f61cb191dfff2d8999449aa9d0bbaaca"
   }
 }

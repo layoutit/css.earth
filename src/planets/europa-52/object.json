@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e8870c5b585f851e6459790c9190aed38de5e30bd6d3081e4880f335b21f29bf"
+        "sha256": "84e21ddd699d5e0e5110de775f54f86460cd210e391c9a0c6eae6266b57be77b"
+      }
+    },
+    "catalog": {
+      "name": "52 Europa",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.0951664844463056,
+      "description": "Explore 52 Europa in 3D with its published shape model and radial elevation.",
+      "order": 162,
+      "context": {
+        "name": "52 Europa",
+        "color": "#aaaaaa",
+        "order": 99
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "11724e8b7b17c68ddfb6f6118f53a417a6f5716480e881f5a64cc6675d2d08e2"
+    "sha256": "1ea0e769f4ab74d49256af2c8684d7597e7af7aa0c62b49fc277113498a68deb"
   }
 }

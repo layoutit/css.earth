@@ -1,0 +1,77 @@
+{
+  "id": "comet-c1973-e1",
+  "classification": "comet",
+  "order": 84,
+  "classificationOrder": 24,
+  "physical": {
+    "name": "C/1973 E1 Kohoutek",
+    "horizonsCode": "DES=C/1973 E1;CAP;",
+    "meanRadiusKm": 1.548649298837288,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "physicalNotes": "Equivalent-volume radius of the Hubble contact model scaled by Spitzer.\nBorrelly uses half its observed 8 km length as a navigation reference, not a mean or volume radius.",
+  "comet": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3DC%2F1973+E1%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 295730315072.577,
+      "eccentricity": 0.9999194476207414,
+      "inclinationRad": 0.41987148282402625,
+      "ascendingNodeRad": 5.685403788646142,
+      "argumentOfPeriapsisRad": 5.7252208469699575,
+      "meanAnomalyAtEpochRad": 0.0037681383580450145,
+      "meanMotionRadPerDay": 1.9571575638669502e-7
+    }
+  },
+  "cometFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3DC%2F1973+E1%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          -4103688091.131332,
+          10613591408.50528,
+          2885403605.612044
+        ],
+        "velocity": [
+          -158861.2021982513,
+          362508.5438566322,
+          93859.90834139021
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          -4108452515.434814,
+          10624463324.5092,
+          2888218424.067241
+        ],
+        "velocity": [
+          -158767.1341853086,
+          362285.848738773,
+          93794.62753242128
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          -4113214151.569851,
+          10635328552.14987,
+          2891031283.346157
+        ],
+        "velocity": [
+          -158675.7416522171,
+          362062.0526568945,
+          93729.0948726597
+        ]
+      }
+    ]
+  },
+  "acquisition": {
+    "heliocentric": {
+      "target": "DES=C/1973 E1;CAP;",
+      "model": "comet"
+    }
+  }
+}

@@ -110,13 +110,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8a58d6593a595f30abc43143dcee3abda3d8641f8c75c54959855b80f28e5cb5"
+        "sha256": "bec9d7c7439ff12841960ef620cc01ecfe2f328cfee472eb2d3d3f859c557b5a"
+      }
+    },
+    "catalog": {
+      "name": "Desdemona",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 19.2,
+      "description": "Explore Desdemona, an inner moon of Uranus, through its measured shape.",
+      "order": 85,
+      "context": {
+        "name": "Desdemona",
+        "color": "#a0a0a0",
+        "order": 149
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9bde4b16dd745ce99ca193a72af884034d41b9bb292cd8e820c83da940b8138f"
+    "sha256": "fc527c03761583fd6bb1d5859def5e5f20490b31de8553625a9ad2a88a01346e"
   }
 }

@@ -120,13 +120,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4037c8a9bf8f2805a051e96238b554be7725111c7255ba8e3be958ea275a0205"
+        "sha256": "4a7c1b566c20f1b7a127c7bc9b84784d045392b16d84b7ac45e6a1372b260e99"
+      }
+    },
+    "catalog": {
+      "name": "Charon",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#aaa9a3",
+      "distanceAu": 39.48,
+      "description": "Explore Charon with New Horizons imagery, deep canyons and measured elevation.",
+      "order": 449,
+      "context": {
+        "name": "Charon",
+        "color": "#aaa9a3",
+        "order": 36
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "aa607559dc9337f390b6db915ea875b49fcfcaa9b8feba5a4bdfc2b1f1ba5101"
+    "sha256": "089935cee4bbdf3f451c17db39165d27a30bddbff0daad03decbd178af850d5f"
   }
 }

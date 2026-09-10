@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a23d129de186378b0e9f17a33b85488ce7f71c78d774de4c417caf866db35959"
+        "sha256": "67b428f53afe14dd173e2ca321f2408b17cfa8254396a5ccd66dc4a9b8d947b8"
+      }
+    },
+    "catalog": {
+      "name": "Bettina",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1419813494769286,
+      "description": "Explore Bettina in 3D with its published shape model and radial elevation.",
+      "order": 331,
+      "context": {
+        "name": "Bettina",
+        "color": "#aaaaaa",
+        "order": 383
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9c08fb8a46b4597c40f7dfb1e95a954ce6cbad68628bdcca7beaef363ed86a3b"
+    "sha256": "fc3190141d9696da5158dea6dc7936dec7d67956993d38a03c3117a93497b6aa"
   }
 }

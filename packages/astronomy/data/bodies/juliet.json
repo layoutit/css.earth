@@ -1,0 +1,52 @@
+{
+  "id": "juliet",
+  "classification": "satellite",
+  "order": 242,
+  "physical": {
+    "name": "Juliet",
+    "horizonsCode": "711",
+    "meanRadiusKm": 46.82612683898881,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "uranus"
+  },
+  "physicalNotes": "Volume-equivalent radii of Karkoschka's published prolate shape fits.",
+  "satellite": {
+    "parent": "uranus",
+    "horizonsCode": "711",
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 1,
+    "poleRightAscensionRad": 1.347458414463,
+    "poleDeclinationRad": 0.265592082485,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 64360.906,
+      "eccentricity": 0.00640364488,
+      "inclinationRad": 0.052729939167,
+      "ascendingNodeRad": 0.654070790353,
+      "argumentOfPeriapsisRad": -3.788743141943,
+      "meanAnomalyAtEpochRad": -93080.83086504196,
+      "meanMotionRadPerDay": 12.730919212564103,
+      "ascendingNodeRateRadPerDay": -0.012187541657090673,
+      "argumentOfPeriapsisRateRadPerDay": 0.024335058109952373
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "711",
+      "center": "500@799",
+      "parent": "uranus",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 1,
+      "radial": true,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "711",
+      "center": "500@799",
+      "range": "daily"
+    }
+  }
+}

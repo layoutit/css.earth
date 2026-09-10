@@ -1,0 +1,14 @@
+{
+  "id": "venus",
+  "classification": "planet",
+  "order": 199,
+  "classificationOrder": 1,
+  "physical": {
+    "name": "Venus",
+    "horizonsCode": "299",
+    "meanRadiusKm": 6051.84,
+    "gravitationalParameterKm3PerS2": 324858.592,
+    "parent": "sun"
+  },
+  "physicalNotes": "Published radar-model scales; use a documented primary mass where available."
+}

@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e13f0da228eea86b1e2107720a11482077d1c34808c72e167ab2d282ab21a1b7"
+        "sha256": "a230d36775323910fe9385e2a050e20b44b6ac02d8a42a91a470e228a4b72de8"
+      }
+    },
+    "catalog": {
+      "name": "Camilla",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.4965722547199647,
+      "description": "Explore Camilla in 3D with its published shape model and radial elevation.",
+      "order": 164,
+      "context": {
+        "name": "Camilla",
+        "color": "#aaaaaa",
+        "order": 101
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ca2e2ebbc76cb9c952874f6662aa3c902993aae0907a4f59519a229348aae5e4"
+    "sha256": "5f40cb8fa985e3608b7c5326aec3a92890e88690f909ca7900387acccc628ac7"
   }
 }

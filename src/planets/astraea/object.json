@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1555d1a00e29a806f5395447fe228f82535daba74bc19f5bee591b57f65d5f7b"
+        "sha256": "00cc707389f212c0eb698ba95a02d4d5624e7468955b46602759da38b00cebf0"
+      }
+    },
+    "catalog": {
+      "name": "Astraea",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.576775128493755,
+      "description": "Explore Astraea in 3D with its published shape model and radial elevation.",
+      "order": 171,
+      "context": {
+        "name": "Astraea",
+        "color": "#aaaaaa",
+        "order": 108
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c588d2f8041cb9ad7636f20a06c372d4be3a971d0052cbcbeb1b2fdcaf5b3bea"
+    "sha256": "c58756da1ee653901cae3f0accf78273def4a092b13f370df8ec686bec8556f5"
   }
 }

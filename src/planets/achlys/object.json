@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "55da73878e00dac3c08ed0cf897fb733422ff0257edccc6d627f14a8ea06e968"
+        "sha256": "2aefbb8a9fbf697b9ca9bf2d40bfaed2c746f58dbe4b67edd8a291d9403e5bfc"
       }
     },
     "worldFrame": {
@@ -112,11 +112,25 @@
       ],
       "metersPerUnit": 1536.124453545143,
       "bodyRadiusM": 353308.6243153829
+    },
+    "catalog": {
+      "name": "Achlys (2003 AZ84)",
+      "systemName": "Solar System",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 43.53477215772988,
+      "description": "Formerly 2003 AZ84, Achlys is a plutino in Neptune’s 3: 2 orbital resonance. Its changing occultation silhouette supports a flattened, elongated model, while a grazing event hints at a local depression.",
+      "order": 0,
+      "context": {
+        "name": "Achlys",
+        "color": "#aaaaaa",
+        "order": 439
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "bc1196325cd2cb27dd646a155907afd0b12f41768b2eb5050b939ef4878cba1b"
+    "sha256": "f562d27f57919323cdf4a270e1fa6f2ab38e2cfcf029021ba26049752b473bb5"
   }
 }

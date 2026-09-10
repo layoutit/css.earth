@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "768ed75e942649dd3771157082c772ec7b408a49330afa0c29d0b31585dfd1e5"
+        "sha256": "9389476a6bb277845926680a93ddc34e440c71641088825bf8573826b08e8e0a"
+      }
+    },
+    "catalog": {
+      "name": "Semele",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.102547858991143,
+      "description": "Explore Semele in 3D with its published shape model and radial elevation.",
+      "order": 245,
+      "context": {
+        "name": "Semele",
+        "color": "#aaaaaa",
+        "order": 293
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1ae2bbfb71d454f9014178b1cef9075f6e82434d9d1d78d4727263fea87a6663"
+    "sha256": "ce96b6039d279c5343142c49670e029262787022bbd61de175188806371f2b74"
   }
 }

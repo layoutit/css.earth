@@ -1,0 +1,86 @@
+{
+  "id": "hiiaka",
+  "classification": "satellite",
+  "order": 57,
+  "physical": {
+    "name": "Hiʻiaka",
+    "horizonsCode": "120136108",
+    "meanRadiusKm": 183.4875470120756,
+    "gravitationalParameterKm3PerS2": 1.151,
+    "parent": "haumea"
+  },
+  "physicalNotes": "Shapes: occultation ellipsoid, original radar mesh and explicitly assumed-depth models.",
+  "sceneSatellite": {
+    "epochJdTt": 2461286.5,
+    "positionKm": [
+      -33281.96333993582,
+      -22828.13175945297,
+      -33532.59403386706
+    ],
+    "velocityKmPerDay": [
+      -4057.630802926777,
+      -409.3179756773064,
+      4337.365604762798
+    ],
+    "centerBodyId": "haumea",
+    "gravitationalParametersKm3PerS2": {
+      "body": 1.151,
+      "parent": 264.413,
+      "combined": 265.564
+    },
+    "systemGmKm3PerS2": 265.564,
+    "parentHeliocentricState": {
+      "positionKm": [
+        -5487487239.17944,
+        -4698328457.056636,
+        1797316425.25533
+      ],
+      "velocityKmPerDay": [
+        210094.2578290008,
+        -230096.3537848578,
+        -123974.8700480089
+      ],
+      "provenance": {
+        "model": "Horizons geometric state at prepared epoch",
+        "epochJdTt": 2461286.5,
+        "referenceFrame": "ICRF",
+        "target": 920136108,
+        "center": 10,
+        "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920136108&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+        "sourcePath": "src/planets/hiiaka/source/orbit/haumea-epoch.txt",
+        "sha256": "3337cf80561af77c3a24e634c5f0a58a258197b55a8c9faad3f43f8113c6d08f",
+        "solution": "tnosat_v001b_20136108_jpl110_20221014",
+        "limitations": [
+          "Horizons solution uses 33 observations from 2005–2008 and reports a 900 km primary-relative position uncertainty at 2025-Jan-01; this is not a measured uncertainty at the 2026 scene epoch.",
+          "This is the retained JPL solution, not the newer Proudfoot et al. 2024 interacting solution; phase accuracy is limited.",
+          "The solution GM values define this orbit calculation and are separate from the occultation shape/size measurements."
+        ],
+        "timeQualification": "UTC request converted to the exact TT scene epoch using TT−UTC = 69.184 s; no extrapolation."
+      }
+    },
+    "provenance": {
+      "model": "Horizons geometric state at prepared epoch",
+      "epochJdTt": 2461286.5,
+      "referenceFrame": "ICRF",
+      "target": 120136108,
+      "center": 920136108,
+      "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120136108&CENTER=500%40920136108&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+      "sourcePath": "src/planets/hiiaka/source/orbit/hiiaka-epoch.txt",
+      "sha256": "5c2d93c8540488799fa2e147849419e234138732a845c479b24af0385b608288",
+      "solution": "tnosat_v001b_20136108_jpl110_20221014",
+      "limitations": [
+        "Horizons solution uses 33 observations from 2005–2008 and reports a 900 km primary-relative position uncertainty at 2025-Jan-01; this is not a measured uncertainty at the 2026 scene epoch.",
+        "This is the retained JPL solution, not the newer Proudfoot et al. 2024 interacting solution; phase accuracy is limited.",
+        "The solution GM values define this orbit calculation and are separate from the occultation shape/size measurements."
+      ],
+      "timeQualification": "UTC request converted to the exact TT scene epoch using TT−UTC = 69.184 s; no extrapolation."
+    }
+  },
+  "acquisition": {
+    "sceneSatellite": {
+      "parent": "haumea",
+      "target": 120136108,
+      "center": 920136108
+    }
+  }
+}

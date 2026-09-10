@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7b71e5c186a0e883f37096afb69715d63364f8959b23349fa6d2aeecb74c7a9d"
+        "sha256": "4ca0b78c016ac3bc87ab7ebf252cb59d96ccfb42af325b791f78277266eee7e2"
+      }
+    },
+    "catalog": {
+      "name": "Nausikaa",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.4032846232365372,
+      "description": "Explore Nausikaa in 3D with its published shape model and radial elevation.",
+      "order": 170,
+      "context": {
+        "name": "Nausikaa",
+        "color": "#aaaaaa",
+        "order": 107
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4e79ff46bf098f69b22d9c3fbffc843c5ba6f90fcad38c8de0ace8d3bd2ed089"
+    "sha256": "3f10f5bb3395fd4a67c8e37ddf3873510fb70115f077f6dba3e77ca234ea51f9"
   }
 }

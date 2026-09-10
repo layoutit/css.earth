@@ -120,13 +120,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9368b7104b2e94a1092edf958ed231f405250b672233b06a085d2bc2c76d649c"
+        "sha256": "95ae7aee6663300351aefb9cd98fd611707085a351d401f43e1e6c8bba8f4d8e"
+      }
+    },
+    "catalog": {
+      "name": "Phobos",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#99948e",
+      "distanceAu": 1.52,
+      "description": "Explore Phobos in 3D with cssEarth. Inspect mapped spacecraft imagery, elevation and the measured irregular shape of Mars’s moon.",
+      "order": 416,
+      "context": {
+        "name": "Phobos",
+        "color": "#9b9186",
+        "order": 5
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ca3c048f382c829621ab8b6fbbde86e06deb0ee714b6e59bf817881536254d19"
+    "sha256": "d9f0b56628f6e0edb27f733bdf7c58081ecaf53bc78ddcf07515749268f51975"
   }
 }

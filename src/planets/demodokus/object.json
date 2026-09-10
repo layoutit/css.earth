@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "3df2a197b21bb4ad58f2a0c2448e7cd2cd0f48bf3d54194d2e1947f01f46b255"
+        "sha256": "460f006f64726e656a49d193cca0b1e93ca21dd9ef248572aa2582ae846714f9"
+      }
+    },
+    "catalog": {
+      "name": "Demodokus",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 5.199474785432278,
+      "description": "Explore Demodokus in 3D with its published shape model and radial elevation.",
+      "order": 362,
+      "context": {
+        "name": "Demodokus",
+        "color": "#aaaaaa",
+        "order": 413
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "88caac38c357ca550d24f7035f6da781622ff429917239d2afdbe38f0af1d610"
+    "sha256": "ab8d4d87fedd07f911cdc2ba26c6df17119ef7c6892e8c663ced4db400da0e18"
   }
 }

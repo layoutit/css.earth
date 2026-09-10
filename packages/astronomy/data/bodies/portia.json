@@ -1,0 +1,52 @@
+{
+  "id": "portia",
+  "classification": "satellite",
+  "order": 241,
+  "physical": {
+    "name": "Portia",
+    "horizonsCode": "712",
+    "meanRadiusKm": 67.64856167757256,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "uranus"
+  },
+  "physicalNotes": "Volume-equivalent radii of Karkoschka's published prolate shape fits.",
+  "satellite": {
+    "parent": "uranus",
+    "horizonsCode": "712",
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 1,
+    "poleRightAscensionRad": 1.35074606782,
+    "poleDeclinationRad": 0.26491463331,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 66099.383,
+      "eccentricity": 0.003616595235,
+      "inclinationRad": 0.04666803551,
+      "ascendingNodeRad": -2.836863593125,
+      "argumentOfPeriapsisRad": 5.314374151413,
+      "meanAnomalyAtEpochRad": -89432.46139446653,
+      "meanMotionRadPerDay": 12.232280874404909,
+      "ascendingNodeRateRadPerDay": -0.011106283531644001,
+      "argumentOfPeriapsisRateRadPerDay": 0.022185415464345444
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "712",
+      "center": "500@799",
+      "parent": "uranus",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 1,
+      "radial": true,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "712",
+      "center": "500@799",
+      "range": "daily"
+    }
+  }
+}

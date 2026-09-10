@@ -110,13 +110,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c63a1f4ee92448348486413a2da67a5d6b351f416fa5cbe9f6af8ebcf772381f"
+        "sha256": "61a6993ff249490f5f5dd27a1d23fef6be60b1c386ed93fe2daf36b90bb9de5f"
+      }
+    },
+    "catalog": {
+      "name": "Mundilfari",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Mundilfari, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "order": 29,
+      "context": {
+        "name": "Mundilfari",
+        "color": "#a0a0a0",
+        "order": 231
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7b106176ed3302f82a17d7c42d0c870ef6cf08abdfd083edebc11e07df7338c6"
+    "sha256": "257a14d0b426adb5cdb064daf9524193657e712537b241125ca6d7934a82cae3"
   }
 }

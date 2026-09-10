@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9faf356ccb09e2ab777bee471fd4973d2c77ab2757031da1072820d98fb685bd"
+        "sha256": "43f2330ce25123e26922aeda49b69f499d0b9a6dfacffb0371b47ef5e2a66ce1"
+      }
+    },
+    "catalog": {
+      "name": "Byblis",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1628105645290394,
+      "description": "Explore Byblis in 3D with its published shape model and radial elevation.",
+      "order": 304,
+      "context": {
+        "name": "Byblis",
+        "color": "#aaaaaa",
+        "order": 356
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6e1426ca3ea3ae2baf2f118a9f16640e968f07a2f405ec791497a9faeb4f0d9a"
+    "sha256": "7d63c7c2a1903bbbce1107fc965db8519c3254b676958984075487a2ca1b101a"
   }
 }

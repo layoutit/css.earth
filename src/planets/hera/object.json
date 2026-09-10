@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4c39957490a54f3e91533fec0a656d58eb4993510f1501f2c7d603c75b1c2626"
+        "sha256": "92b85ac9a595482919ccd5547a4072ef897804da99c3ec8363ba2e48c9604b28"
+      }
+    },
+    "catalog": {
+      "name": "Hera",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.701015744250632,
+      "description": "Explore Hera in 3D with its published shape model and radial elevation.",
+      "order": 252,
+      "context": {
+        "name": "Hera",
+        "color": "#aaaaaa",
+        "order": 303
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7d36a40d8bf7733e3626e86ea6725793925ff96fbda39612668bab8290979274"
+    "sha256": "ddc35ad2070839ad04f0b6429ea1725f7b8d8b122158126187a0d8b21c059cf4"
   }
 }

@@ -110,13 +110,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "550b653a0829b981a1b1f1b5907f349a8c4bdf82092163e7262b89f975289cdb"
+        "sha256": "6a140223baae7a5d40adbad4be1abb0f434d4d027b65722d351aa1a5024f6954"
+      }
+    },
+    "catalog": {
+      "name": "Hiʻiaka",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 43.1,
+      "description": "Explore Hiʻiaka, a moon of Haumea, through its occultation-constrained ellipsoid.",
+      "order": 17,
+      "context": {
+        "name": "Hiʻiaka",
+        "color": "#a0a0a0",
+        "order": 249
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "64bfc5598f452d489cbf1881167601751df188034bb59fd5a983a85a6637da6d"
+    "sha256": "fc35d407a8acd8b7e570f6444380241a9c762368e3e6fb9b1909d76ca2b32892"
   }
 }

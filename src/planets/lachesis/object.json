@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e34d480586c7d2eabac88c71bba349727f70a59f0d9d09e9d54ba597451e036e"
+        "sha256": "64ee9f723c657d9d679f1e1f4dbc41fe65e393ba8e86197b70da8276166d53ea"
+      }
+    },
+    "catalog": {
+      "name": "Lachesis",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.119472040064257,
+      "description": "Explore Lachesis in 3D with its published shape model and radial elevation.",
+      "order": 263,
+      "context": {
+        "name": "Lachesis",
+        "color": "#aaaaaa",
+        "order": 314
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ba93ba682d0a2c6212351cf9079b64031b76a4b3b86e4670da23c20d85a6f891"
+    "sha256": "67bb14de17011219118f1922adb191bb2d696e383882eab42991a7d6a43c75d1"
   }
 }

@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "dca2bcebafffe6e58dad077c6b8aabc4ab31d8d8bd5bd0556f6fd8cb7f3037d8"
+        "sha256": "d297bc51dd33083c1061c9a20cf92692857fe9bdb1e267fa86f8ad745baa3c91"
+      }
+    },
+    "catalog": {
+      "name": "Eukrate",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7392482101612425,
+      "description": "Explore Eukrate in 3D with its published shape model and radial elevation.",
+      "order": 329,
+      "context": {
+        "name": "Eukrate",
+        "color": "#aaaaaa",
+        "order": 381
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a1b25b756322a6a74d42f2b56e15dfa243c4fcac58a4ebbec5ba2769a1c407c1"
+    "sha256": "bac446e12b918dbec8e05e0e10aaecef096e6993d55237fca1b9738a97a824bb"
   }
 }

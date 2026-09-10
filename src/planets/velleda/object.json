@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "477f13649f2e56b53cc64e39009e9a9d6bb70d76c9e22ddd382b34cc70d0c11c"
+        "sha256": "1086d53952b44b2706422bd3e3cfcf4744f0a873585bce54694250ee54ea6d11"
+      }
+    },
+    "catalog": {
+      "name": "Velleda",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.43905767386019,
+      "description": "Explore Velleda in 3D with its published shape model and radial elevation.",
+      "order": 268,
+      "context": {
+        "name": "Velleda",
+        "color": "#aaaaaa",
+        "order": 319
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "aed9bf0e7f89842e4a672c9e1eacec7087e25cc5f8930f60229d74ba0f5d57a0"
+    "sha256": "73ce835bc25bcea9af5eff723be9d9aaa3240b8dfdb90f3024b3ef6b1b9ddd6b"
   }
 }

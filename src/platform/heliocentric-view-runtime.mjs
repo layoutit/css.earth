@@ -185,7 +185,7 @@ export function mountRetainedHeliocentricView({
   if (system !== null) {
     sunMarker = document.createElement("s");
     sunMarker.className = `planet-heliocentric-sun-marker ${objectId}-sun-marker`;
-    applySprite(sunMarker, { ...systemMarkers.sun, url: systemMarkers.url });
+    applySprite(sunMarker, { url: systemMarkers.url, ...systemMarkers.sun });
     sunMarker.style.opacity = "0";
     sunMarker.style.visibility = "hidden";
     celestialRoot.appendChild(sunMarker);

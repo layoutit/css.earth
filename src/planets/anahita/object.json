@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "80b1e4c594befc8887b0f5b5cbba205d5695c06f25025c126e59fb2a3c393b76"
+        "sha256": "2223cffa0d01b89665db586f0ac99c69127b361d54e01696663e2731cf4f869f"
+      }
+    },
+    "catalog": {
+      "name": "Anahita",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.1978820172913154,
+      "description": "Explore Anahita in 3D with its published shape model and radial elevation.",
+      "order": 340,
+      "context": {
+        "name": "Anahita",
+        "color": "#aaaaaa",
+        "order": 392
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "af075a7a7f35d26efc82b9ba0b70585f7f8f4fc343d10a8b511992802edfd46f"
+    "sha256": "9f08ef1b229178e58b5e54c71f5751443cd9004648a5dc417d5d2d1105959c7b"
   }
 }

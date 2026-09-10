@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "af7844c46305510816fc885b8fcad7ed38d452c18ca6c0781c64168230a06b8b"
+        "sha256": "ab21053c17319b5a5f37fd2c7d858e2fce6b3f903bfb994e40e336720926fccd"
+      }
+    },
+    "catalog": {
+      "name": "Ausonia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.39418991368127,
+      "description": "Explore Ausonia in 3D with its published shape model and radial elevation.",
+      "order": 231,
+      "context": {
+        "name": "Ausonia",
+        "color": "#aaaaaa",
+        "order": 279
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "29fa2efbc841cedb0c69262f1bf69abeb05acb5010c814b72f1f9ddfe1e2d53a"
+    "sha256": "173366bb06262da4454616cf49339eab0039d48e0f5e685c01dfe17f9b5610f0"
   }
 }

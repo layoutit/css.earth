@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "3581872b67473b25a37f01abd514eb41e09661214e15c8e56e8034b44728f2eb"
+        "sha256": "4f7c7f25d1daaa74a5ab1e95d5f4e3eab573814bc9d34cc21560b4a5d90d0d22"
+      }
+    },
+    "catalog": {
+      "name": "Schaber",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1389418599378245,
+      "description": "Explore Schaber in 3D with its published shape model and documented physical size scale.",
+      "order": 408,
+      "context": {
+        "name": "Schaber",
+        "color": "#aaaaaa",
+        "order": 218
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4db6a092accf291f7d5470ffc5a2e8e6d9082f271355882514bb124b8f4d823d"
+    "sha256": "5430f603552cb129338afb5273a08f76f87aad3bf1eab3719441430ba6a89060"
   }
 }

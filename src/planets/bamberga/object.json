@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ebaf9f6f5c181929a156af66543d7413d432bc189c1c79c26c4284146ddf99dc"
+        "sha256": "6c802239c5a0f2f0bb9ea580db662ab00eac16beb0240d0249f36038f12dffd3"
+      }
+    },
+    "catalog": {
+      "name": "Bamberga",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.6826000516908586,
+      "description": "Explore Bamberga in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "order": 142,
+      "context": {
+        "name": "Bamberga",
+        "color": "#aaaaaa",
+        "order": 79
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d2ed855edaff8d446ec0f41fd77b5e4b68e85fb77c051f6eb726e95b21690c9c"
+    "sha256": "88f41ed9f6c256b3d57bc7e154902e20b6f4e06cdc36098a7eacd8896b61eafb"
   }
 }

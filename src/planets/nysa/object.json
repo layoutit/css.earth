@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "76500cd220e984f0485bb7d1e47f0ca83cee0e26323cdbfeb13fd10c3cac3025"
+        "sha256": "7ba882d6dc973fba80502b27ecfbb4332917617b177e70116bd09e1c10cf4119"
+      }
+    },
+    "catalog": {
+      "name": "Nysa",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.422203726127018,
+      "description": "Explore Nysa in 3D with its published shape model and radial elevation.",
+      "order": 173,
+      "context": {
+        "name": "Nysa",
+        "color": "#aaaaaa",
+        "order": 110
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fdae07c354bec92433a50583b6adcb1cbeed330f655cfaac9f7810d3ceebc42a"
+    "sha256": "bf59ab346cbc507be076ebf4f68e8327a1a40bdfbdd8853bf8f4ca2e20445446"
   }
 }

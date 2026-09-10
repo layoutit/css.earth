@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b6e9c0a60ada6e8a3807d3ab196e3edd64d47d84dc2807ebb9ad99ec63d34b20"
+        "sha256": "01914ce95e60d9ddef1acf17359193a2bfd6c5cd67974eebd7b05f4910b324dc"
+      }
+    },
+    "catalog": {
+      "name": "Circe",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.6871357085881864,
+      "description": "Explore Circe in 3D with its published shape model and radial elevation.",
+      "order": 216,
+      "context": {
+        "name": "Circe",
+        "color": "#aaaaaa",
+        "order": 264
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b43e1cce8929f4df74fbbb117f4f3b59c441acc85e0294c8d8d4124d285043d3"
+    "sha256": "a1add6d8310f4aa6d149c24d1461fd2b4158bb8ae5ca58e5353ff752f46a90b5"
   }
 }

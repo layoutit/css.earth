@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8b01436c91b51721ee3367404271cdd04cebdfe32d78bf55f2d408392d0e1b69"
+        "sha256": "747848a80c3606536f67b31573df656cbc01409431d396e95ea87a2de13975dd"
+      }
+    },
+    "catalog": {
+      "name": "Hedda",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.28374355631575,
+      "description": "Explore Hedda in 3D with its published shape model and radial elevation.",
+      "order": 307,
+      "context": {
+        "name": "Hedda",
+        "color": "#aaaaaa",
+        "order": 359
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1b2266e838dc2faf51a6bb06fe62e1b605ed290c9e78e47763fcb5143ed7de58"
+    "sha256": "580dfc6df0ab7b10899784da011dd1d0c37d8dbd683128fb238b4d83be8a183d"
   }
 }

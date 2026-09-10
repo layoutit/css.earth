@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "83c627002b2ccdc0542092e9cc633d33cb008d7a29b0ced113d81338d88994e0"
+        "sha256": "e878bbb3da5521a14aa42753f55d16fce57727c3a15126fac410ce41405cdc86"
+      }
+    },
+    "catalog": {
+      "name": "Harmonia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.267273879169896,
+      "description": "Explore Harmonia in 3D with its published shape model and radial elevation.",
+      "order": 192,
+      "context": {
+        "name": "Harmonia",
+        "color": "#aaaaaa",
+        "order": 141
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "5956af5f6ec36694fad5ebd317bf6e67ece0a198613c7f0ce03dc76f2ab893c7"
+    "sha256": "c0b1ef6c07045bdba8cca2f5c24e3fddaf8082bf1a7ea6f0af01efa883289cc6"
   }
 }

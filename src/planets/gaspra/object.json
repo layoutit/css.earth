@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c03cb0ea693f2efbd527669dfe4d824e45532d499412e356521fc202aa18a1d4"
+    "sha256": "2205f103ba0fadcd2fbed3d3ebd76d137c345c1fb952f2b1a77ecd0bcd50f84c"
   },
   "id": "gaspra",
   "properties": {
@@ -123,7 +123,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5c910f6c89c45f95b86e78c6accb6060d4a4e9b3d32dd2eba1e42c415246a6d4"
+        "sha256": "9bdfaccfe19cebae19402e23c6a03632fc23107ce9e7e958801e4fb85a4524d4"
+      }
+    },
+    "catalog": {
+      "name": "Gaspra",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#a49c8d",
+      "distanceAu": 2.21,
+      "description": "Explore Gaspra in 3D with cssEarth using archived spacecraft imagery and source-backed shape data.",
+      "order": 125,
+      "context": {
+        "name": "Gaspra",
+        "color": "#a49c8d",
+        "order": 48
       }
     }
   },

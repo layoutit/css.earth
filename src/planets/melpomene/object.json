@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2bdffcaeaa0d3e21056f4daccea0f49bdc487272dfec8e90e33fa313697b1b09"
+        "sha256": "6d0241c1805f518f01ca6faca94796102583a1efc8802b5a292e076af908f3fe"
+      }
+    },
+    "catalog": {
+      "name": "Melpomene",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.295895199776688,
+      "description": "Explore Melpomene in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "order": 157,
+      "context": {
+        "name": "Melpomene",
+        "color": "#aaaaaa",
+        "order": 94
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9c9e68a6139ef8692a480d4938edacc288d460249d4947782d25b5cd30c70a4d"
+    "sha256": "1dee18a79f2e1f9334607b07e10b5ecb78abd87e77cca07a00d5fecf76d75492"
   }
 }

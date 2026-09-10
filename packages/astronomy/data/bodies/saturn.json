@@ -1,0 +1,14 @@
+{
+  "id": "saturn",
+  "classification": "planet",
+  "order": 203,
+  "classificationOrder": 5,
+  "physical": {
+    "name": "Saturn",
+    "horizonsCode": "699",
+    "meanRadiusKm": 58232,
+    "gravitationalParameterKm3PerS2": 37931206.234,
+    "parent": "sun"
+  },
+  "physicalNotes": "Published radar-model scales; use a documented primary mass where available."
+}

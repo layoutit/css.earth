@@ -110,13 +110,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "67c8404c9c023699bb29f9f393a30e8be2b111530e5d8c5428c109492216ce70"
+        "sha256": "cb9862159244ae6c495aa33962da39fcf76322bd8e95fe11242e946ac59bc88a"
+      }
+    },
+    "catalog": {
+      "name": "Romulus",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 3.491,
+      "description": "Explore Romulus, a moon of Sylvia, through its explicitly approximate occultation shape.",
+      "order": 19,
+      "context": {
+        "name": "Romulus",
+        "color": "#a0a0a0",
+        "order": 251
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "cebaa96afedf603f4d63571935b2b149f25479e4c0ed531e73c640c2c0ace213"
+    "sha256": "4cf90cd13d83721b5bf7967b88b9e1ef3f297f993bffcb0f363fe5d142b0c999"
   }
 }

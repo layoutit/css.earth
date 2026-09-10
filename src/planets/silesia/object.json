@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4847367d59147e865288998c1bbf2b07432ce4a790e3ce08143e12f7d33ed1cc"
+        "sha256": "15e0e472d79845d60812d3faf68e8cf2839ba2f3f30f37d79024c2e657083522"
+      }
+    },
+    "catalog": {
+      "name": "Silesia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1183254802109865,
+      "description": "Explore Silesia in 3D with its published shape model and radial elevation.",
+      "order": 334,
+      "context": {
+        "name": "Silesia",
+        "color": "#aaaaaa",
+        "order": 386
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "235acfa51f5f92181515bad584a5637345500694773f5f0ba5f0c8d5a5555341"
+    "sha256": "627b025386697556eaac08f677b79e62b3d0332db4975c567cb8974be3f441d2"
   }
 }

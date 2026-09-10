@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "062a367b9b7d498de63b03e16d29be569ebffaa03071c3b016495a310c0d006a"
+        "sha256": "999ad5f30b9ce6d0faa8760471ab10280f93403e970254decac8c6ce05fba304"
+      }
+    },
+    "catalog": {
+      "name": "Urda",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.853052645325009,
+      "description": "Explore Urda in 3D with its published shape model and radial elevation.",
+      "order": 293,
+      "context": {
+        "name": "Urda",
+        "color": "#aaaaaa",
+        "order": 345
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "eea96900d807df4eaa3ca35eb2285f3f524e25627f3a040cb48539c3e7db7934"
+    "sha256": "d516267ee5b259b4071691e599e1e213e44462589a0b4f20b599da57c14ecfca"
   }
 }

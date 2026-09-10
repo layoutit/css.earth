@@ -4,6 +4,12 @@ Time scales, float64 vectors and the reference-frame tree behind [cssEarth](http
 
 Zero dependencies, zero browser globals. Everything here runs in Node, a worker, or the browser.
 
+Maintainers add physical values and retained orbit data in
+`data/bodies/<id>.json`. Acquisition choices and source URLs stay with each
+record; independent shared vector samples live in `data/fixtures/`.
+`pnpm build`, `pnpm test` and `pnpm typecheck` assemble their TypeScript exports
+locally. Building needs neither source downloads nor the cssEarth application.
+
 ```bash
 npm install @cssearth/astronomy
 ```

@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "719b6b3c07ac49217ee9f707162de74cd7126261316c8da0ad4164b45612ab4c"
+        "sha256": "d04afee04b4e2a8d8e1ed0a2d9d10e02472ddced06a6189a872fd36c6d1888b2"
+      }
+    },
+    "catalog": {
+      "name": "2001 QW16",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.177455279524888,
+      "description": "Explore 2001 QW16 in 3D with its published shape model and documented physical size scale.",
+      "order": 413,
+      "context": {
+        "name": "2001 QW16",
+        "color": "#aaaaaa",
+        "order": 223
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "930df1e9b2a97afa22c4994c6f3eb935cc62020d8bab85f0b19507ee0a79d45f"
+    "sha256": "5a413443c4128960f6653d356209075fa6f88e689c10759f41ff73845ce1956c"
   }
 }

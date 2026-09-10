@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "bbe4bc3c400d8c2cdfa4f590bce14800faa152c3f7a3f33cafeea244e9aea238"
+        "sha256": "4c82ca56634c0eff6e488fde6e89b70bc9c49df09bd981728fb4452adc839c04"
+      }
+    },
+    "catalog": {
+      "name": "Clarissa",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.405392127505063,
+      "description": "Explore Clarissa in 3D with its published shape model and radial elevation.",
+      "order": 349,
+      "context": {
+        "name": "Clarissa",
+        "color": "#aaaaaa",
+        "order": 401
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e8a5133deb77dd0f10676db9492667e47342beb30a8e6eeb73bec9ee625099e8"
+    "sha256": "c8019a1dd5d6153122c13a7dd3b1a6afef13cc3c12f090fc9aee78105a62c85b"
   }
 }

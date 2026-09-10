@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "609d909bb6e65e482a48fc7c6c89816a15d2172d938792426483772e978eb3a8"
+        "sha256": "22646443df0fcb5227abb3cf283221e5c2c8ea91de9fda90400c7cd9f08d20dc"
+      }
+    },
+    "catalog": {
+      "name": "Ianthe",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.687221327524466,
+      "description": "Explore Ianthe in 3D with its published shape model and radial elevation.",
+      "order": 250,
+      "context": {
+        "name": "Ianthe",
+        "color": "#aaaaaa",
+        "order": 298
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "218aa8d1763ab48d409de934874d7e4c6b47498e9be5dbeb614f5e8c8fad6038"
+    "sha256": "d962e96e328ca93327d8513cb7ee06480db7572f155275c78be2fc6b77453373"
   }
 }

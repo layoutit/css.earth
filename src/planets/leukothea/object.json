@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "454df7bf62f5767523ff2728842bc08cc4969a7a5982df966c60d557d019ce9e"
+        "sha256": "05dcf6e01c169c43e68d3de4e1085644b1b1c59e1751fe3d2910d4380f312cf9"
+      }
+    },
+    "catalog": {
+      "name": "Leukothea",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.0042313558099742,
+      "description": "Explore Leukothea in 3D with its published shape model and documented physical size scale.",
+      "order": 370,
+      "context": {
+        "name": "Leukothea",
+        "color": "#aaaaaa",
+        "order": 180
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8f405a79c54f74105d2626bb9952a4fe0b28c67829c275a8dfa29e830581d6ca"
+    "sha256": "1270df32fa48b1cb0ea29962da64a63e874ad5bf318decefc6eb97d456a797ef"
   }
 }

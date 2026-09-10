@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "21880c7659f4aa667ad9085fb7dd96b42947f256fefd20b1d743a2f3f44ff9ff"
+        "sha256": "e55938cbbbf68c5f200d9a25f84dff7e2290668378255a0e69bf0ffe5a57c3cd"
+      }
+    },
+    "catalog": {
+      "name": "Schorria",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.9102898161034227,
+      "description": "Explore Schorria in 3D with its published shape model and documented physical size scale.",
+      "order": 402,
+      "context": {
+        "name": "Schorria",
+        "color": "#aaaaaa",
+        "order": 212
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "067cd6d34b61df20ccb4640b860e9a0d94e54139e56915abd4b5684bedaa15fa"
+    "sha256": "f938af79d1dc6de97adf96cdc4b6f6844ead55e276ee01981329a5b6e8d2c0ac"
   }
 }

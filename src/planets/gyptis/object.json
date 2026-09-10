@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "85f840ade8c092f8628eaeabf5159413fceaa674fb8e0af5b16c7c7729529774"
+        "sha256": "f8ea11a9f879a3c10b6e163453f62b8362c556d8761ee859662451959baad73a"
+      }
+    },
+    "catalog": {
+      "name": "Gyptis",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7713762475315957,
+      "description": "Explore Gyptis in 3D with its published shape model and documented physical size scale.",
+      "order": 380,
+      "context": {
+        "name": "Gyptis",
+        "color": "#aaaaaa",
+        "order": 190
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b67ac67de2aa05dcd19a1ad94d42dc4f5ee60314fad05d1a1516876388e2629d"
+    "sha256": "7c3b3cfbcf18d66b135623aecb28e92edbe5d5efc1b00004534cd9a2f54f4a65"
   }
 }

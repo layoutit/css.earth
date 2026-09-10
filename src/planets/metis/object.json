@@ -105,13 +105,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ab62a73ed4651b59e726c1df509cc13851e0757764c7ec9ce16019a07f099178"
+        "sha256": "79012ebc087a219633d208aa9ef72a97525044ce4aedf89e703cf4b93dc28396"
+      }
+    },
+    "catalog": {
+      "name": "Metis",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#9a8f85",
+      "distanceAu": 5.2,
+      "description": "Explore Metis with Galileo imagery on a dimension-constrained shape.",
+      "order": 98,
+      "context": {
+        "name": "Metis",
+        "color": "#9a8f85",
+        "order": 64
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e5c6101d982311c494089d222b3abf0f0996be94dc5dbbdb45e06466ec4051ae"
+    "sha256": "092ce4603678daeff979b0c419b42a7ae4f7da039547b59b8e8765d4deebcaf5"
   }
 }

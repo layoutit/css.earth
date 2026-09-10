@@ -1,0 +1,77 @@
+{
+  "id": "comet-2p",
+  "classification": "comet",
+  "order": 92,
+  "classificationOrder": 10,
+  "physical": {
+    "name": "2P/Encke",
+    "horizonsCode": "DES=2P;CAP;",
+    "meanRadiusKm": 2.4222366966152173,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "physicalNotes": "Equivalent-volume radius of the Hubble contact model scaled by Spitzer.\nBorrelly uses half its observed 8 km length as a navigation reference, not a mean or volume radius.",
+  "comet": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D2P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 331768659.7433139,
+      "eccentricity": 0.8473122177960886,
+      "inclinationRad": 0.5931421676837539,
+      "ascendingNodeRad": 6.128359966747703,
+      "argumentOfPeriapsisRad": 2.95174829200966,
+      "meanAnomalyAtEpochRad": 5.448623463144994,
+      "meanMotionRadPerDay": 0.005208546215668962
+    }
+  },
+  "cometFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D2P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          394733717.4063793,
+          22220074.28510228,
+          55833803.43168824
+        ],
+        "velocity": [
+          -1261634.563428233,
+          568593.2281531704,
+          247561.0515813324
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          353947480.4418745,
+          39060634.17438956,
+          62810614.48205598
+        ],
+        "velocity": [
+          -1463793.194489485,
+          551762.7551068724,
+          215336.1991600925
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          306436444.4470094,
+          55135683.19390734,
+          68578505.68629111
+        ],
+        "velocity": [
+          -1713317.610000218,
+          515612.0464470301,
+          165320.0728400006
+        ]
+      }
+    ]
+  },
+  "acquisition": {
+    "heliocentric": {
+      "target": "DES=2P;CAP;",
+      "model": "comet"
+    }
+  }
+}

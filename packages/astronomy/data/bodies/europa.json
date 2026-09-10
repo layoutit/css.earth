@@ -1,0 +1,51 @@
+{
+  "id": "europa",
+  "classification": "satellite",
+  "order": 210,
+  "physical": {
+    "name": "Europa",
+    "horizonsCode": "502",
+    "meanRadiusKm": 1560.8,
+    "gravitationalParameterKm3PerS2": 3202.7121,
+    "parent": "jupiter"
+  },
+  "physicalNotes": "Horizons publishes Phobos and Deimos as masses, not GM; these are\nmass x G with G = 6.67430e-20 km^3 kg^-1 s^-2 (CODATA 2018).",
+  "satellite": {
+    "parent": "jupiter",
+    "horizonsCode": "502",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": -1.60461136609,
+    "poleDeclinationRad": 1.126259773868,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 671261.137,
+      "eccentricity": 0.00935808505,
+      "inclinationRad": 0.008106300732,
+      "ascendingNodeRad": -3.068935495327,
+      "argumentOfPeriapsisRad": 0.78369773702,
+      "meanAnomalyAtEpochRad": 64628.589872673125,
+      "meanMotionRadPerDay": 1.782229597364694,
+      "ascendingNodeRateRadPerDay": -0.000569769444393349,
+      "argumentOfPeriapsisRateRadPerDay": -0.012337110697745693
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "502",
+      "center": "500@599",
+      "parent": "jupiter",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "502",
+      "center": "500@599"
+    }
+  }
+}

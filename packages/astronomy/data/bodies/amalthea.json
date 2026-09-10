@@ -1,0 +1,51 @@
+{
+  "id": "amalthea",
+  "classification": "satellite",
+  "order": 213,
+  "physical": {
+    "name": "Amalthea",
+    "horizonsCode": "505",
+    "meanRadiusKm": 83.5,
+    "gravitationalParameterKm3PerS2": 0.1646,
+    "parent": "jupiter"
+  },
+  "physicalNotes": "JPL Horizons OBJ_DATA physical blocks, retrieved 2026-09-08.",
+  "satellite": {
+    "parent": "jupiter",
+    "horizonsCode": "505",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": -1.604691075265,
+    "poleDeclinationRad": 1.125660382594,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 181993.296,
+      "eccentricity": 0.00344991724,
+      "inclinationRad": 0.006566580767,
+      "ascendingNodeRad": -1.34615411069,
+      "argumentOfPeriapsisRad": 2.281553315287,
+      "meanAnomalyAtEpochRad": 460664.29678254307,
+      "meanMotionRadPerDay": 12.566369964303405,
+      "ascendingNodeRateRadPerDay": -0.04371804916542704,
+      "argumentOfPeriapsisRateRadPerDay": 0.08965091045487261
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "505",
+      "center": "500@599",
+      "parent": "jupiter",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "505",
+      "center": "500@599"
+    }
+  }
+}

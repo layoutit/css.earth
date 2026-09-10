@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d0a2b7099e56ff97881fdd329f93b7af3b66b577677fafa7f78ae5900e99caa5"
+        "sha256": "8ecf832790cec79cce9b4b076378b768933a410e7e9b4743e11d324dd377f554"
+      }
+    },
+    "catalog": {
+      "name": "IAU",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.535679875280375,
+      "description": "Explore IAU in 3D with its published shape model and documented physical size scale.",
+      "order": 409,
+      "context": {
+        "name": "IAU",
+        "color": "#aaaaaa",
+        "order": 219
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "efae65b8bda35af3e2ca4461589513316b2c44fe56def9279ed47c69ec6cdcf3"
+    "sha256": "9726ff825927f142951de8533ef7a6db270e0d9f7f73934ddbfef06279b7902d"
   }
 }

@@ -6,16 +6,26 @@
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "keywords": ["astronomy", "ephemeris", "reference-frame", "julian-date", "precision"],
+  "keywords": [
+    "astronomy",
+    "ephemeris",
+    "reference-frame",
+    "julian-date",
+    "precision"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/layoutit/cssEarth.git",
     "directory": "packages/astronomy"
   },
-  "bugs": { "url": "https://github.com/layoutit/cssEarth/issues" },
+  "bugs": {
+    "url": "https://github.com/layoutit/cssEarth/issues"
+  },
   "homepage": "https://github.com/layoutit/cssEarth#readme",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -24,13 +34,16 @@
     }
   },
   "scripts": {
-    "build": "tsup",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
-    "test": "vitest run",
-    "test:coverage": "vitest run --coverage",
-    "prepublishOnly": "npm run build"
+    "build": "node tools/body-records.mjs && tsup",
+    "typecheck": "node tools/body-records.mjs && tsc --noEmit -p tsconfig.json",
+    "test": "node tools/body-records.mjs && vitest run",
+    "test:coverage": "node tools/body-records.mjs && vitest run --coverage",
+    "prepublishOnly": "npm run build",
+    "prepare:data": "node tools/body-records.mjs"
   },
-  "publishConfig": { "access": "public" },
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",

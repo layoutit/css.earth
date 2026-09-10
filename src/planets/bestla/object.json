@@ -110,13 +110,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1ff4cf0040b57b80dfc55bd94d2809e60ace56242d137dcf8b2ffefce1c3093d"
+        "sha256": "713ed101885f07545e0cce5e9205124cafd3e60e067d4ad4203e2bbd088fcdb9"
+      }
+    },
+    "catalog": {
+      "name": "Bestla",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Bestla, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "order": 35,
+      "context": {
+        "name": "Bestla",
+        "color": "#a0a0a0",
+        "order": 237
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b46c57df11918b88ab940f2a759d99caf778c0412ca54d4035f919fa423d47c7"
+    "sha256": "28f07356e4e36a35c10dd982e8e22dcd85058239d17326d6ceb96f76ee6a91b6"
   }
 }

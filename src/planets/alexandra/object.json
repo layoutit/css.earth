@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "afba900a7dc057e7b6fe7b5877b4a26c48e9085f24f90ed008478fd0785b270f"
+        "sha256": "61c9cdce4296cac73f2ebbbac0122168aee738ae41d1b4025c24d5da36d29de8"
+      }
+    },
+    "catalog": {
+      "name": "Alexandra",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7095146915447392,
+      "description": "Explore Alexandra in 3D with its published shape model and radial elevation.",
+      "order": 226,
+      "context": {
+        "name": "Alexandra",
+        "color": "#aaaaaa",
+        "order": 274
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d5602d398909c9a99a02c38a0d0827d1eb5800f2e294e2cb771e9999034762de"
+    "sha256": "e1eb4e2da19d44015d4da06d70bf08e7ffd8c0fe5bb183b4ab361c7bffe74328"
   }
 }

@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1765e7a6321c0a0b002ba7d83231e134e50599840ce8d6ce39094662c89d4b61"
+        "sha256": "9461567cfe0a0bf3d455929b286a56ccd70e69a218e7561acef0a3824a6ed774"
+      }
+    },
+    "catalog": {
+      "name": "Apophis",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 0.9223337821550773,
+      "description": "Explore Apophis in 3D with its published shape model and radial elevation.",
+      "order": 196,
+      "context": {
+        "name": "Apophis",
+        "color": "#aaaaaa",
+        "order": 145
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "024f36c013ec9bf83c0401c03b91e95af390c68761259f1493e06a768596fa49"
+    "sha256": "76891e8ae6344e4b54d3218c367690fa2115d7662cb610f11140175fb49ac489"
   }
 }

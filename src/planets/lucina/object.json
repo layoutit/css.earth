@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "02d29de48ac16e1dae662761ed806636d39e36557bfa7f653553447f3cae1afc"
+        "sha256": "fed1f7565f3f9def057b0d6f5a96644052eda04eb919683f81cf9d1939839db0"
+      }
+    },
+    "catalog": {
+      "name": "Lucina",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7199394547827493,
+      "description": "Explore Lucina in 3D with its published shape model and radial elevation.",
+      "order": 276,
+      "context": {
+        "name": "Lucina",
+        "color": "#aaaaaa",
+        "order": 328
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "2a179bcbfb7123b3bdc7abd8f2eb5d6f92250647917258cbd9898667b568696b"
+    "sha256": "bdf9f29333d02d36ebd22f89d2ceac4990e804e1b72ef6229e497eaff5680183"
   }
 }

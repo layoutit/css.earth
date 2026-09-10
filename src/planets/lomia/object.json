@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7fbc539549ac502ce957b25b6bf4bc09db83ab78fc2c77022dc13f2e6f1472a0"
+        "sha256": "07623c1580a95dbbed8244c2d776ecab4f000cb319ef4a720f4f5d5bec187788"
+      }
+    },
+    "catalog": {
+      "name": "Lomia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.9917431003179766,
+      "description": "Explore Lomia in 3D with its published shape model and radial elevation.",
+      "order": 260,
+      "context": {
+        "name": "Lomia",
+        "color": "#aaaaaa",
+        "order": 311
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4b43ecce9e28b65189181098d470b74fc77c180488a2ddc7adb57a13ad0b3d50"
+    "sha256": "c9f8b2b4171ba4a9fff3324e9804bbaae8a8201e2b7294d16d3297360477e2e4"
   }
 }

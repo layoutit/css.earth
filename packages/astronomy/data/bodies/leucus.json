@@ -1,0 +1,77 @@
+{
+  "id": "leucus",
+  "classification": "asteroid",
+  "order": 431,
+  "classificationOrder": 141,
+  "physical": {
+    "name": "Leucus",
+    "horizonsCode": "11351;",
+    "meanRadiusKm": 20.215215801007133,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "physicalNotes": "Published shape models with documented physical size calibration.",
+  "asteroid": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2711351%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 794773581.1030773,
+      "eccentricity": 0.06485323673339742,
+      "inclinationRad": 0.39046438523598354,
+      "ascendingNodeRad": 5.762656136766476,
+      "argumentOfPeriapsisRad": 1.4142767581827398,
+      "meanAnomalyAtEpochRad": 2.5503321781818262,
+      "meanMotionRadPerDay": 0.0014047674188597259
+    }
+  },
+  "asteroidFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2711351%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          -767972885.0538903,
+          -232019725.7183844,
+          -240057585.0677864
+        ],
+        "velocity": [
+          335563.3307123565,
+          -964825.2505465973,
+          -275830.6606768186
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          -757325928.3835571,
+          -260781347.4568021,
+          -248148402.6696307
+        ],
+        "velocity": [
+          374118.1000064171,
+          -952382.4189437677,
+          -263497.3697410448
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          -745532984.4947349,
+          -289148787.5448613,
+          -255863929.7667288
+        ],
+        "velocity": [
+          411954.9316063399,
+          -938551.6515918991,
+          -250814.58953688
+        ]
+      }
+    ]
+  },
+  "acquisition": {
+    "heliocentric": {
+      "target": "11351;",
+      "model": "asteroid"
+    }
+  }
+}

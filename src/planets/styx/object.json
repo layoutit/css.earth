@@ -110,13 +110,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f6841421b6eeea8a1780d18e1626514e524e2f1772207528e7dd57300ef0defa"
+        "sha256": "1dd78f2738667efef48d9e44ba4816e922d43e20b8ab1fb3734af9ba7936172d"
+      }
+    },
+    "catalog": {
+      "name": "Styx",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 39.482,
+      "description": "Explore Styx through a clearly labeled approximate shape fit.",
+      "order": 450,
+      "context": {
+        "name": "Styx",
+        "color": "#a0a0a0",
+        "order": 122
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7301438a6b51dc575fddf641fdde06da4ea287c298025b9aa5860f473f457687"
+    "sha256": "0cd63cc3e8a489d281cfdff4de579947d757c732eaa2fed23e3d9e465d4471bf"
   }
 }

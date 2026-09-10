@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5911975370c84fa74deb95eb278c3ccde3c3df384415675dbbb9165491ff3c84"
+        "sha256": "65c2759e17d35b7c4819923353ea7522b3a73a8a08bccf7a93ee971debfa35d4"
+      }
+    },
+    "catalog": {
+      "name": "Proserpina",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.6551885129968467,
+      "description": "Explore Proserpina in 3D with its published shape model and documented physical size scale.",
+      "order": 368,
+      "context": {
+        "name": "Proserpina",
+        "color": "#aaaaaa",
+        "order": 178
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ad18fcc1bb9360d6aaf2455d1e0208d81e60057b775b038d468807284527c563"
+    "sha256": "05930dc0a3c63af83faae7634f0ffe5dcb749ddaff12dab9d01ab91353cff3fc"
   }
 }

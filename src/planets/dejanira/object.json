@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6e6b2ede5b8126b08f72b11e518efb8a699bb8a54d014d1ce6b4dc17103847dc"
+        "sha256": "b3fda751f5ca4607923c83f84d24f426548218dd09bc828147f7dd358621338f"
+      }
+    },
+    "catalog": {
+      "name": "Dejanira",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.579713770510923,
+      "description": "Explore Dejanira in 3D with its published shape model and radial elevation.",
+      "order": 284,
+      "context": {
+        "name": "Dejanira",
+        "color": "#aaaaaa",
+        "order": 336
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "991037ace58b03d28fc9d1b22cbfe158284c43a0480c4027c494226677a77a30"
+    "sha256": "c704cb47b250ace3e8109d9452d7551ac0d31b28f028b31e976fd6748def7c6c"
   }
 }

@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f275c95aab1733431b50b62aff96ccdd4212fd495af9d6a947883c6cc32add85"
+    "sha256": "8b35d2b6be0a0a5b01552e782cc7d2fa34f17f803a464fb79ca1f5bb05a91780"
   },
   "properties": {
     "preparation": {
@@ -115,7 +115,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6ad3eb2677e16b04415864cf4222895fe5c4c22d34f347b5279846a96573c3c3"
+        "sha256": "bf7576b001c595906c3933110d050432c4bb5421dbddd50aaa245e3e8acd2d82"
+      }
+    },
+    "catalog": {
+      "name": "Makemake",
+      "systemName": "Solar System",
+      "classification": "dwarf-planet",
+      "color": "#bfa48b",
+      "distanceAu": 45.8,
+      "description": "Explore Makemake with an illustrative NASA surface texture and its distant orbit around the Sun.",
+      "order": 455,
+      "context": {
+        "name": "Makemake",
+        "color": "#bfa48b",
+        "order": 38
       }
     }
   }

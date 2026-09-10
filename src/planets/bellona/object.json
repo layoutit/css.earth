@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fd279e429f5996709b42d342d5b432f1b0df7f5dfeff093eddbd197e931bcdc8"
+        "sha256": "33c238e29cfcfaa0fdf5fdfc1aa4c88622993f5c871bc837613d23062fc8694a"
+      }
+    },
+    "catalog": {
+      "name": "Bellona",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.77802553680874,
+      "description": "Explore Bellona in 3D with its published shape model and radial elevation.",
+      "order": 214,
+      "context": {
+        "name": "Bellona",
+        "color": "#aaaaaa",
+        "order": 262
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3cc7da0a6b94554c7d18ddf6e41a3104f61d9702830291aa041545130937f587"
+    "sha256": "62ba30f83ec0c96e8fc2de3ce2b17a751ed265946e83d10120790353096e767d"
   }
 }

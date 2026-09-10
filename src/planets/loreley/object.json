@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d8616aa459d87689bbf1224c5f8fc0fd2fb3a3b344050d935a150b9fc4ab2902"
+        "sha256": "79eb7f8fe946754cf1d51d511b01b10eb844e13ff4f1117e4b2dfe6856246118"
+      }
+    },
+    "catalog": {
+      "name": "Loreley",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.126208058670846,
+      "description": "Explore Loreley in 3D with its published shape model and radial elevation.",
+      "order": 291,
+      "context": {
+        "name": "Loreley",
+        "color": "#aaaaaa",
+        "order": 343
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b3a127f5fbd25e76c89a521251a6c3873f7760d81832a3411ec9326575f9411a"
+    "sha256": "fe7cd41b5d24b813f23b2b37ad7f3953103706eda888c02f0b32dc239d07fe70"
   }
 }

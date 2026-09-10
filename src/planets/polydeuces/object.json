@@ -110,13 +110,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ad20251a61cd6b7f81a71fb812f676759e3fa5bd74b0c3f170d073c0cfc9e0af"
+        "sha256": "73bd9a1869ac1b3311a45357001e380d8ea6b51b84a6c8ed65d68784f015f7c7"
+      }
+    },
+    "catalog": {
+      "name": "Polydeuces",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Polydeuces, a small moon of Saturn, through its measured shape.",
+      "order": 83,
+      "context": {
+        "name": "Polydeuces",
+        "color": "#a0a0a0",
+        "order": 151
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1a240126bb3adca1de10d8ea0ee41972036fcea5506df8aae356ab192a851783"
+    "sha256": "d5268d34f25ed3e839a30291ae76b3f4f2d0142ecb5865ac0efcb756bdf8f59d"
   }
 }

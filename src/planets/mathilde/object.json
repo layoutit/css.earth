@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c0be359ad3d8cd81a170495c87fce9b9aa85f367e49a4fd736ab36b34b70fa36"
+    "sha256": "5aa833c8c69cb8880b88262ab396c07caf56254070b3d0ae255bdfa482f7600c"
   },
   "id": "mathilde",
   "properties": {
@@ -118,7 +118,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "917ed0f45c7f7829837b3bd547e7d183e179b9897275099b585a882ce7822537"
+        "sha256": "ac8b37b79cd20f6a79b1a58c86fc1aee78b2cbcc8522ea9a7848b2f8328115a4"
+      }
+    },
+    "catalog": {
+      "name": "Mathilde",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#a49c8d",
+      "distanceAu": 2.647,
+      "description": "Explore Mathilde with NEAR imagery, measured partial elevation, and a published visualization shape.",
+      "order": 126,
+      "context": {
+        "name": "Mathilde",
+        "color": "#a49c8d",
+        "order": 49
       }
     }
   },

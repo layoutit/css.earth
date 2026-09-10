@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7efe7fe3af7106c6d049c9fd4546a0dd073127e3849211051e4dea6eab94a91e"
+        "sha256": "a520e6c09e2836d5349b134713b2ab1d10d01f5503a0e6b3d2a162a599d5697f"
+      }
+    },
+    "catalog": {
+      "name": "Penthesilea",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.0044325414876942,
+      "description": "Explore Penthesilea in 3D with its published shape model and radial elevation.",
+      "order": 341,
+      "context": {
+        "name": "Penthesilea",
+        "color": "#aaaaaa",
+        "order": 393
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "dce5575d70e9883058f5f9a4feb1c2159112521827935ed99435f31508bf6eec"
+    "sha256": "b1642e9474e854d576b83f3588f82a29ee7d5d9beb1453f831f256247687a752"
   }
 }

@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c66ed3cf53fa629ad890defb3d6c1d467e682c15c4440bc7638f69cf7e79dabb"
+        "sha256": "d541fc4c2367a89dc3b30fe20f3aba8ce1051681f6aa36558cc53dd6fbff2f51"
+      }
+    },
+    "catalog": {
+      "name": "Hermione",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.458050151729624,
+      "description": "Explore Hermione in 3D with its published shape model and radial elevation.",
+      "order": 167,
+      "context": {
+        "name": "Hermione",
+        "color": "#aaaaaa",
+        "order": 104
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8ff0b7728ae17008bb6bce0987d4c7b67d33eb18c248b4a20a0312679f0cfa8a"
+    "sha256": "2c412e3fc5e49181dfae93b20742428ee9db7f172fd211a9004b372c3fa08df7"
   }
 }

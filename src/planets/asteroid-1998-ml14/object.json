@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a9c0b8e7b18f19b52e7abbf12dc8a468e40774ad99aae37fe2f445cfcec6726e"
+        "sha256": "b493bd17a8ec6e58cdbaa122cea38de19e8c54854b043ee33de8f6f27509037f"
+      }
+    },
+    "catalog": {
+      "name": "1998 ML14",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.407527644248636,
+      "description": "Explore 1998 ML14 in 3D with its published radar shape model.",
+      "order": 208,
+      "context": {
+        "name": "1998 ML14",
+        "color": "#aaaaaa",
+        "order": 174
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "14604fda68adbf439038709f9ac0d750971ba7b141fed9334fa5a47fc0368aa9"
+    "sha256": "22a5843cafbfb5b57dd4d6524c47f27e488721f594998278ba24e89d0ffa368d"
   }
 }

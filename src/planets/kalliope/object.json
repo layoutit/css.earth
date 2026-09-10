@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2789150b9b07cf86f30b8ea1dd5d41749f15ec0cef8159814dfb2b0c3e1b022f"
+        "sha256": "af30ee1fa1d89103354c67235f235681c53e558b899bf64bf9a6aa5c0644ab42"
+      }
+    },
+    "catalog": {
+      "name": "Kalliope",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.909387673184708,
+      "description": "Explore Kalliope in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "order": 154,
+      "context": {
+        "name": "Kalliope",
+        "color": "#aaaaaa",
+        "order": 91
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0d585d7621259b98eb8a51b444d8cc21599dbb73269fe4959f19335f5623b2f0"
+    "sha256": "77a08333eae46f1e8a053b659e2231bff47623bcb8307d11acfbb1a4305b7e9c"
   }
 }

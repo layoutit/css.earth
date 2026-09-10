@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ebbbd402d345bfbff831deb7569beb751d5e4845da44aee5992294daf6691e62"
+        "sha256": "95c1d8c95cc3c1080f99e704ae06dec4795016ab58414fe08c72438763fc9d60"
+      }
+    },
+    "catalog": {
+      "name": "Brucia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.3823847582527136,
+      "description": "Explore Brucia in 3D with its published shape model and documented physical size scale.",
+      "order": 377,
+      "context": {
+        "name": "Brucia",
+        "color": "#aaaaaa",
+        "order": 187
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7a3fffb8ba2c1901b6cc698d9d2a2def0ff1582ef14eaf26a2fe081f2d47a860"
+    "sha256": "635d48a3ac58b9669fa1970e835d954ceb43428de0895df030a144175963a2ae"
   }
 }

@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7b7e8b6ff387670af21ceb94dca5375462a03477f957bc3d78d300549438c5c2"
+        "sha256": "e21585fdb2f9b4e38483d3b4f807a9b1017e5a77cb4d851a6baebdd9c64cd2a6"
       }
     },
     "worldFrame": {
@@ -112,11 +112,25 @@
       ],
       "metersPerUnit": 8.160067216440781,
       "bodyRadiusM": 1876.8154597813798
+    },
+    "catalog": {
+      "name": "Ikeya–Zhang",
+      "systemName": "Solar System",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 42.26044339943092,
+      "description": "153P: Ikeya–Zhang brightened the skies in 2002. Its journey around the Sun takes centuries, unlike the frequent returns of comets such as Encke. Illustrative nucleus at Celestia’s catalog scale.",
+      "order": 54,
+      "context": {
+        "name": "Ikeya–Zhang",
+        "color": "#b8b6b2",
+        "order": 449
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "75db42f3a72d922ac15d148041f9b91e95bf12f690073391e8a97bf0fcada713"
+    "sha256": "7a4c9e135099df3356a0fd98cfca248b61754ff71aa97a24bc94d6467d93da4e"
   }
 }

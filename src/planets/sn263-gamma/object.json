@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cd1b4bf319dfc4878c0f175662582887a8db0e686a060007e48d0272a29184a2"
+        "sha256": "a521947d0e882778a3132152df2e032425eed272772b1ad5c168beef6730a903"
       }
     },
     "worldFrame": {
@@ -112,11 +112,25 @@
       ],
       "metersPerUnit": 0.9747966792923491,
       "bodyRadiusM": 224.2032362372403
+    },
+    "catalog": {
+      "name": "2001 SN263 Gamma",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 1.9869,
+      "description": "Explore the smaller inner moon of 2001 SN263 through its archived radar shape.",
+      "order": 11,
+      "context": {
+        "name": "2001 SN263 Gamma",
+        "color": "#a0a0a0",
+        "order": 462
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "924fc6f93a01694c1bbbe26a6efa720057636c3e7b4cb5f96a4ffa49452ee6e0"
+    "sha256": "cf2017b74a84e8a779c4476ecb2f76c05cbd415f7741bf72664873614fe097c2"
   }
 }

@@ -62,14 +62,3 @@ for (const b of bodies) {
   for(const ref of descriptor.properties.recipe.sources)ref.sha256=hash(await readFile(resolve(pkg,ref.path)));
   await write(resolve(pkg,'object.json'),descriptor);
 }
-// The shared context source changed only by the nine new body entries.
-// Its descriptor source pin is independent of the prepared context transport.
-const universe=await readFile('src/planets/sun/source/navigation/universe.json');
-const sunManifest=JSON.parse(await readFile('src/planets/sun/source/manifest.json'));
-const contextInput=sunManifest.inputs.find(entry=>entry.path==='navigation/universe.json');
-if(!contextInput)throw new Error('Sun context source input is missing.');
-Object.assign(contextInput,{expectedBytes:universe.length,expectedSha256:hash(universe)});
-await write('src/planets/sun/source/manifest.json',sunManifest);
-const sun=JSON.parse(await readFile('src/planets/sun/object.json'));
-sun.properties.recipe.sources.find(entry=>entry.id==='world-context').sha256=hash(universe);
-await write('src/planets/sun/object.json',sun);

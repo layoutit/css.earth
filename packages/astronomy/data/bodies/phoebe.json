@@ -1,0 +1,51 @@
+{
+  "id": "phoebe",
+  "classification": "satellite",
+  "order": 227,
+  "physical": {
+    "name": "Phoebe",
+    "horizonsCode": "609",
+    "meanRadiusKm": 106.5,
+    "gravitationalParameterKm3PerS2": 0.55479,
+    "parent": "saturn"
+  },
+  "physicalNotes": "No measured GM is supplied for these small moons; zero means omitted mass.\nRadii: Thomas2013/IAU2015 shapes, not an inferred density or invented mass.",
+  "satellite": {
+    "parent": "saturn",
+    "horizonsCode": "609",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": 1.830066707663,
+    "poleDeclinationRad": -1.137647541963,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 12945138.876,
+      "eccentricity": 0.163835647294,
+      "inclinationRad": 0.033280371053,
+      "ascendingNodeRad": 2.226058596702,
+      "argumentOfPeriapsisRad": -3.457482293098,
+      "meanAnomalyAtEpochRad": 421.901075356807,
+      "meanMotionRadPerDay": 0.011404131834553,
+      "ascendingNodeRateRadPerDay": -0.000062175503779615,
+      "argumentOfPeriapsisRateRadPerDay": 0.000075774062891113
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "609",
+      "center": "500@699",
+      "parent": "saturn",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": true,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "609",
+      "center": "500@699"
+    }
+  }
+}

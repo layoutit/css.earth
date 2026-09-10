@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cbea34c1e932ba549a220dc19a6e8c0ed6197d83e0bab8988528953dcc5c296f"
+        "sha256": "0b94010f75994ad0f435af3984b7f07058b3070cc59e98e6ee1c6f9c7ba78aea"
+      }
+    },
+    "catalog": {
+      "name": "9 Metis",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.3865357120605415,
+      "description": "Explore 9 Metis in 3D with its published shape model and radial elevation.",
+      "order": 163,
+      "context": {
+        "name": "9 Metis",
+        "color": "#aaaaaa",
+        "order": 100
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9371f21fbf53b61d2c9be1f9e21fe8a675c8db953071cccb770c0de82bb2d47b"
+    "sha256": "704f2d440ad01d0a298ca1449691602ba03580dd273d0a9d6e7ccb8a255001e8"
   }
 }

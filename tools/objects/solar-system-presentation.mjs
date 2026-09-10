@@ -22,7 +22,7 @@ export function prepareSolarSystemPresentation({
   const atlasSprite = id => {
     if (typeof captionNames?.[id] !== "string" || !captionNames[id]) throw new TypeError(`No prepared caption for ${id}.`);
     const marker = navigationMarkers[id];
-    if (marker?.presentation?.size > 0) return { index: marker.index, count: marker.count, size: marker.presentation.size };
+    if (marker?.presentation?.size > 0) return { url: marker.url, index: marker.index, count: marker.count, size: marker.presentation.size };
     const tile = systemMarkerStrip?.tiles?.[id];
     if (!tile) throw new Error(`No prepared marker for ${id}.`);
     return { url: canonicalPreparedAsset(systemMarkerStrip.density1.url, systemMarkerStrip.density2.url),
@@ -33,14 +33,14 @@ export function prepareSolarSystemPresentation({
     hip: star.hip, name: star.name, direction: star.direction, magnitude: star.magnitude }] : []);
   return {
     plan,
-    bodyMarker: { url: markerAtlasUrl, index: navigationMarker.index,
+    bodyMarker: { url: navigationMarker.url, index: navigationMarker.index,
       count: navigationMarker.count, size: 2 * POINT_MIN_RADIUS_PX },
     systemMarkers: { url: markerAtlasUrl, sun: atlasSprite("sun"),
       bodies: Object.fromEntries(plan.system.bodies.map(body => [body.id, atlasSprite(body.id)])),
       phase: { url: phaseAtlas.url, columns: phaseAtlas.columns, rowCount: phaseAtlas.rowCount,
         frameCount: phaseAtlas.frameCount, minimumLightViewZ: phaseAtlas.minimumLightViewZ,
         maximumLightViewZ: phaseAtlas.maximumLightViewZ, baseLightAzimuthDegrees: phaseAtlas.baseLightAzimuthDegrees } },
-    labels: { policy: { ...DEFAULT_LABEL_POLICY }, names: captionNames,
+    labels: { policy: { ...DEFAULT_LABEL_POLICY }, names: Object.fromEntries([...new Set([bodyId, 'sun', ...plan.system.bodies.map(body => body.id)])].map(id => [id, captionNames[id]])),
       stars: { policy: { ...STAR_LABEL_POLICY }, exposure: { ...catalogue.exposure }, records: namedStars } },
   };
 }

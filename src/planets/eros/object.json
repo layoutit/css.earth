@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "99d6fcf12f02362b6ae6680eec1e065757e9568376dc38e5284aca6700bb4dfa"
+    "sha256": "b6d71276e5af83e688b3d1727e860276c92838d0f8e75578933e4ade1f2b4837"
   },
   "id": "eros",
   "properties": {
@@ -123,7 +123,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "06860a11f986a20def7c3a6357bd1dd06c3ed2cefcba007e5f6a88d54ab0399c"
+        "sha256": "0e813a8f0cb912b8ef3303881056c9ba2127868b7494d18a05055f72cb95454b"
+      }
+    },
+    "catalog": {
+      "name": "Eros",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#a49c8d",
+      "distanceAu": 1.458,
+      "description": "Explore Eros in 3D with cssEarth using mission-derived shape and surface data.",
+      "order": 123,
+      "context": {
+        "name": "Eros",
+        "color": "#a49c8d",
+        "order": 7
       }
     }
   },

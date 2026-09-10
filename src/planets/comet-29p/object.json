@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f50f3a60f0e9226ad65fffaec892edf90a3e94c99c533c815e804e8188cfc6d7"
+        "sha256": "d1659b77725566622fb52879a57177aeaf353a882738cb431ac2651ff6d0de5c"
       }
     },
     "worldFrame": {
@@ -112,11 +112,25 @@
       ],
       "metersPerUnit": 96.83066009293185,
       "bodyRadiusM": 22271.051821374327
+    },
+    "catalog": {
+      "name": "Schwassmann–Wachmann 1",
+      "systemName": "Solar System",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 6.3177563009608955,
+      "description": "29P: Schwassmann–Wachmann 1 releases gas and dust far from the Sun. Webb detected several jets with different mixtures of carbon monoxide and carbon dioxide. Illustrative nucleus at Celestia’s catalog scale.",
+      "order": 48,
+      "context": {
+        "name": "Schwassmann–Wachmann 1",
+        "color": "#b8b6b2",
+        "order": 443
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7c2fcc228c417289fe24f2587d7ee181c5b7ee28127b4e64855ebf944fa9722d"
+    "sha256": "ebb4c7ab03bb1cd3192b700ef4fa27a16d013cd2d52609ec56c2e10e201f7e9e"
   }
 }

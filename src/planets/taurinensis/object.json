@@ -86,7 +86,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "020fc434693a1705430f7ba43fd07b5cd0e7429987b94ada75fc6ed4cfa540f8"
+        "sha256": "d1655e775f2fdcaf0e70b6aab5fb9d98d75b35e709f9705c492fe97280cd6b61"
       }
     },
     "worldFrame": {
@@ -115,6 +115,20 @@
       ],
       "metersPerUnit": 45.369565217391305,
       "bodyRadiusM": 10435
+    },
+    "catalog": {
+      "name": "Taurinensis",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.1894142356630333,
+      "description": "Explore Taurinensis, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.",
+      "order": 463,
+      "context": {
+        "name": "Taurinensis",
+        "color": "#aaaaaa",
+        "order": 430
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8b52ff3850b276d3fa007eaf7b6bcd0431c71a846ffb48b76efa4ada202bd322"
+    "sha256": "5e90ac87700e5d5619f34bc44821d4cddfabe52b52e9e5d81f084cb6dce1ce3e"
   }
 }

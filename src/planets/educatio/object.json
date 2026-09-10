@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4aa337c55613dff6500def9f4a4d4436e2b6276dd13c0adab337c4b690b52544"
+        "sha256": "08b0b70022b26d1c855dc92e3b7837d5153b18081020eb7b65737dafb39cb3b7"
+      }
+    },
+    "catalog": {
+      "name": "Educatio",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.2152610738212455,
+      "description": "Explore Educatio in 3D with its published shape model and documented physical size scale.",
+      "order": 406,
+      "context": {
+        "name": "Educatio",
+        "color": "#aaaaaa",
+        "order": 216
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "562b61ed5880dcb503d00bbb1ed280e404c5ab0b7824fefac6b0edad24f5a24d"
+    "sha256": "c2a9837f9a64c17a5d2e8b55bcf9aea447523ba1b546a591957c63c34f41bb5c"
   }
 }

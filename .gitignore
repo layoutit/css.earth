@@ -86,27 +86,8 @@ src/planets/*/source/**/*.bpc
 !src/planets/*/source/shape/*ellipsoid.tab
 !src/planets/*/source/shape/model.tab
 
-# Native Celestia geometry, exported and physically scaled offline.
-!src/planets/comet-17p/source/shape/model.obj
-!src/planets/comet-21p/source/shape/model.obj
-!src/planets/comet-26p/source/shape/model.obj
-!src/planets/comet-29p/source/shape/model.obj
-!src/planets/comet-46p/source/shape/model.obj
-!src/planets/comet-55p/source/shape/model.obj
-!src/planets/comet-96p/source/shape/model.obj
-!src/planets/comet-109p/source/shape/model.obj
-!src/planets/comet-167p/source/shape/model.obj
-!src/planets/comet-153p/source/shape/model.obj
-!src/planets/comet-c1983-h1/source/shape/model.obj
-!src/planets/comet-c1956-r1/source/shape/model.obj
-!src/planets/comet-c1973-e1/source/shape/model.obj
-!src/planets/comet-c1995-o1/source/shape/model.obj
-!src/planets/comet-c1996-b2/source/shape/model.obj
-!src/planets/comet-c2006-p1/source/shape/model.obj
-!src/planets/comet-c2013-a1/source/shape/model.obj
-!src/planets/comet-c2014-un271/source/shape/model.obj
-!src/planets/comet-c2020-f3/source/shape/model.obj
-!src/planets/comet-c2023-a3/source/shape/model.obj
+# Retained, physically scaled meshes used as preparation inputs.
+!src/planets/*/source/shape/model.obj
 
 # Native metadata, extracted reference rows and inspected source evidence.
 !src/planets/*/source/reference/*.csv
@@ -171,3 +152,11 @@ src/planets/*/source/**/*.bpc
 !src/planets/moon/source/science/diviner-ghrm/ra_sam-compact.tif
 !src/planets/moon/source/science/diviner-ghrm/tbol_anom-compact.tif
 !src/planets/moon/source/science/diviner-ghrm/tbol_m-compact.tif
+
+# Combined catalogues and navigation are rebuilt from individual body records.
+/site/prepared-object-catalog.mjs
+/packages/astronomy/src/data/generated/
+/site/prepared-navigation-markers.mjs
+/src/platform/solar-geometry.mjs
+/src/planets/sun/prepared/world-context.json
+/site/minimap/prepared.json

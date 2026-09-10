@@ -27,7 +27,15 @@ export interface SpatialContextPreparationOptions {
 
 /** Prepares a renderer-neutral solar context from a pinned source document and epoch geometry adapter. */
 export async function prepareSpatialContext(options: SpatialContextPreparationOptions): Promise<void> {
-  const source = parseWorldContextSource(JSON.parse(await readFile(options.sourcePath, 'utf8')));
+  const input = JSON.parse(await readFile(options.sourcePath, 'utf8'));
+  if (input.bodies === 'catalog') {
+    const { readCatalog } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-catalog.mjs')).href) as { readCatalog: (directory?: string) => Promise<readonly { id: string; name: string; color: string; context?: { order?: number; name?: string; color?: string } }[]> };
+    const objects = await readCatalog(options.objectsDirectory);
+    input.bodies = objects.filter(body => body.context && body.id !== input.focus.id)
+      .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'))
+      .map(body => ({ id: body.id, name: body.context!.name ?? body.name, color: body.context!.color ?? body.color }));
+  }
+  const source = parseWorldContextSource(input);
   const geometry = await loadSolarGeometry(options.solarGeometryPath);
   // The application registry owns classification; preparation bakes its orbit presentation.
   const { OBJECTS } = await import(pathToFileURL(resolve(process.cwd(), 'site/objects.mjs')).href) as {

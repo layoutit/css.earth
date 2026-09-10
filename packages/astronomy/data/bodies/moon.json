@@ -1,0 +1,13 @@
+{
+  "id": "moon",
+  "classification": "satellite",
+  "order": 206,
+  "physical": {
+    "name": "Moon",
+    "horizonsCode": "301",
+    "meanRadiusKm": 1737.4,
+    "gravitationalParameterKm3PerS2": 4902.800066,
+    "parent": "earth"
+  },
+  "physicalNotes": "Published radar-model scales; use a documented primary mass where available."
+}

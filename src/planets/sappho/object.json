@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7656fd417d264a390c7d4d7bea741b04f7172525486b7ae7896294dce45b64b0"
+        "sha256": "2ae8e2b2189870d6949d25a00fb6cc44417c296b123d5f21a4aeaca7a572a99b"
+      }
+    },
+    "catalog": {
+      "name": "Sappho",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.2965637786549675,
+      "description": "Explore Sappho in 3D with its published shape model and radial elevation.",
+      "order": 174,
+      "context": {
+        "name": "Sappho",
+        "color": "#aaaaaa",
+        "order": 111
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ce6a426074a6f24706deec808b0049d54951cbe0862b5ae9b0799ce7bad9ef21"
+    "sha256": "02ae9e33ddb992265e293a6714932e6aeb10d8db99f84f563e693fda1c49b49a"
   }
 }

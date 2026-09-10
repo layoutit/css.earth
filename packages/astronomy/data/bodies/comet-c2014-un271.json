@@ -1,0 +1,77 @@
+{
+  "id": "comet-c2014-un271",
+  "classification": "comet",
+  "order": 89,
+  "classificationOrder": 29,
+  "physical": {
+    "name": "C/2014 UN271 Bernardinelli–Bernstein",
+    "horizonsCode": "DES=C/2014 UN271;CAP;",
+    "meanRadiusKm": 66.35274336710184,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "physicalNotes": "Equivalent-volume radius of the Hubble contact model scaled by Spitzer.\nBorrelly uses half its observed 8 km length as a navigation reference, not a mean or volume radius.",
+  "comet": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3DC%2F2014+UN271%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": -402401872368.7401,
+      "eccentricity": 1.004074318773858,
+      "inclinationRad": 1.2630775792870592,
+      "ascendingNodeRad": 3.3240615496878956,
+      "argumentOfPeriapsisRad": 5.61881950203183,
+      "meanAnomalyAtEpochRad": -0.00019687067057481267,
+      "meanMotionRadPerDay": 1.233046828042875e-7
+    }
+  },
+  "cometFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3DC%2F2014+UN271%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          -60370434.48089834,
+          621812641.4442304,
+          -1958519494.363008
+        ],
+        "velocity": [
+          -851044.3018636178,
+          -286300.7459433528,
+          400081.6101197219
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          -85897926.6050897,
+          613191234.527476,
+          -1946416183.361563
+        ],
+        "velocity": [
+          -850773.0230991642,
+          -288461.7085552202,
+          406820.5431477056
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          -111415898.8690064,
+          604504816.1318909,
+          -1934109376.042223
+        ],
+        "velocity": [
+          -850409.4789988119,
+          -290635.3223560057,
+          413647.7853263016
+        ]
+      }
+    ]
+  },
+  "acquisition": {
+    "heliocentric": {
+      "target": "DES=C/2014 UN271;CAP;",
+      "model": "comet"
+    }
+  }
+}

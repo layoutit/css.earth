@@ -1,20 +1,19 @@
-import { PREPARED_NAVIGATION_MARKERS } from '../site/prepared-navigation-markers.mjs';
-
-/** Atlas insertion changes both indices and strip width. Resolve semantic body
- * ids again when serializing a package; authored scenes may predate the atlas. */
-export function prepareMarkerBindings(definition, markers = PREPARED_NAVIGATION_MARKERS) {
+/** Shared marker addresses are body-owned; catalogue growth cannot move them. */
+export function prepareMarkerBindings(definition) {
   const view = definition.heliocentricView;
   if (!view) return definition;
+  const shared = url => /^\/navigation\/(?:planet-markers|body-[a-z][a-z0-9-]*|[a-z][a-z0-9-]*-marker)(?:@2x)?\.webp$/.test(url ?? '');
   const bind = (id, sprite, url) => {
-    if (!sprite || !/^\/navigation\/planet-markers(?:@2x)?\.webp$/.test(sprite.url ?? url ?? '')) return sprite;
-    const marker = markers[id];
-    if (!marker) throw new Error(`Shared navigation marker is missing: ${id}.`);
-    return { ...sprite, index: marker.index, count: marker.count };
+    const address = sprite?.url ?? url;
+    if (!sprite || !shared(address)) return sprite;
+    if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new TypeError('Invalid navigation marker identity.');
+    return { ...sprite, url: `/navigation/body-${id}${address.includes('@2x') ? '@2x' : ''}.webp`, index: 0, count: 1 };
   };
   const system = view.systemMarkers;
   return { ...definition, heliocentricView: { ...view,
     bodyMarker: bind(definition.id, view.bodyMarker),
     ...(system ? { systemMarkers: { ...system,
+      ...(shared(system.url) ? { url: '/navigation/body-sun.webp' } : {}),
       sun: bind('sun', system.sun, system.url),
       bodies: Object.fromEntries(Object.entries(system.bodies).map(([id, sprite]) => [id, bind(id, sprite, system.url)])),
     } } : {}),

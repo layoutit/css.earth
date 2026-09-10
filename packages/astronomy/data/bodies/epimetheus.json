@@ -1,0 +1,52 @@
+{
+  "id": "epimetheus",
+  "classification": "satellite",
+  "order": 229,
+  "physical": {
+    "name": "Epimetheus",
+    "horizonsCode": "611",
+    "meanRadiusKm": 58.2,
+    "gravitationalParameterKm3PerS2": 0.03514,
+    "parent": "saturn"
+  },
+  "physicalNotes": "No measured GM is supplied for these small moons; zero means omitted mass.\nRadii: Thomas2013/IAU2015 shapes, not an inferred density or invented mass.",
+  "satellite": {
+    "parent": "saturn",
+    "horizonsCode": "611",
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 5,
+    "poleRightAscensionRad": 0.70805121277,
+    "poleDeclinationRad": 1.45800320335,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 151437.117,
+      "eccentricity": 0.009515403918,
+      "inclinationRad": 0.00617368042,
+      "ascendingNodeRad": -2.92220819562,
+      "argumentOfPeriapsisRad": 1.499023862352,
+      "meanAnomalyAtEpochRad": -66070.37641299488,
+      "meanMotionRadPerDay": 9.010061157600179,
+      "ascendingNodeRateRadPerDay": -0.035701778754161584,
+      "argumentOfPeriapsisRateRadPerDay": 0.07154756989217934
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "611",
+      "center": "500@699",
+      "parent": "saturn",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 5,
+      "radial": true,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "611",
+      "center": "500@699",
+      "range": "limited"
+    }
+  }
+}

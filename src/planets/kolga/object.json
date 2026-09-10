@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d4aee2e26c9fff25e5aec3c8130b35a7528bf523dd4c310f5dc3a89863571f02"
+        "sha256": "cacfd5124a4fde2d7751ed05029ab858861bc421c51ac784b24a677832f155a2"
+      }
+    },
+    "catalog": {
+      "name": "Kolga",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.8959502139804503,
+      "description": "Explore Kolga in 3D with its published shape model and radial elevation.",
+      "order": 301,
+      "context": {
+        "name": "Kolga",
+        "color": "#aaaaaa",
+        "order": 353
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "2649fa0a045ae78453f67d7eafa45bbccd08f886b21e7e76cf198d00f758f1a4"
+    "sha256": "4898b30a52b6025d94638b5c30e601bca5707e0f353fa868101f83d14427cc40"
   }
 }

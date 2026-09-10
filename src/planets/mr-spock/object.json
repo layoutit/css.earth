@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2767b9f149947a94bd0db07eb3fbf49bbf3cb2b0d88e8939b8eae3ba8beba912"
+        "sha256": "e3816b9275e2f86294af822a8643b645f79cf34074a1b262174f1386b2728ee5"
+      }
+    },
+    "catalog": {
+      "name": "Mr. Spock",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.0107561956481725,
+      "description": "Explore Mr. Spock in 3D with its published shape model and documented physical size scale.",
+      "order": 405,
+      "context": {
+        "name": "Mr. Spock",
+        "color": "#aaaaaa",
+        "order": 215
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b88244b280b442b891a20efa78f747dab18c0c2428bf0f62f316518cd6d18e60"
+    "sha256": "d04bff62df1a7b3a57b1d0550431ab9299174f69cfd4b67b5b9e56e82060a2b1"
   }
 }

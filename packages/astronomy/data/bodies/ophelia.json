@@ -1,0 +1,52 @@
+{
+  "id": "ophelia",
+  "classification": "satellite",
+  "order": 245,
+  "physical": {
+    "name": "Ophelia",
+    "horizonsCode": "707",
+    "meanRadiusKm": 21.361102076705983,
+    "gravitationalParameterKm3PerS2": 0.00238,
+    "parent": "uranus"
+  },
+  "physicalNotes": "Ring-dynamics mass estimates: French et al. 2024, Table 3 footnote b.\nhttps://arxiv.org/abs/2401.04634; same published prolate radii as above.",
+  "satellite": {
+    "parent": "uranus",
+    "horizonsCode": "707",
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 1,
+    "poleRightAscensionRad": 1.349338784193,
+    "poleDeclinationRad": 0.264804348432,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 53764.69,
+      "eccentricity": 0.010552230658,
+      "inclinationRad": 0.003669979359,
+      "ascendingNodeRad": -1.684060848716,
+      "argumentOfPeriapsisRad": 2.432061407841,
+      "meanAnomalyAtEpochRad": -121940.59408890731,
+      "meanMotionRadPerDay": 16.670766323805932,
+      "ascendingNodeRateRadPerDay": -0.02292043012421241,
+      "argumentOfPeriapsisRateRadPerDay": 0.04587196015975773
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "707",
+      "center": "500@799",
+      "parent": "uranus",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 1,
+      "radial": true,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "707",
+      "center": "500@799",
+      "range": "daily"
+    }
+  }
+}

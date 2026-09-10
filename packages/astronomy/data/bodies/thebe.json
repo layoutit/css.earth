@@ -1,0 +1,51 @@
+{
+  "id": "thebe",
+  "classification": "satellite",
+  "order": 214,
+  "physical": {
+    "name": "Thebe",
+    "horizonsCode": "514",
+    "meanRadiusKm": 49.3,
+    "gravitationalParameterKm3PerS2": 0.0301,
+    "parent": "jupiter"
+  },
+  "physicalNotes": "JPL Horizons OBJ_DATA physical blocks, retrieved 2026-09-08.",
+  "satellite": {
+    "parent": "jupiter",
+    "horizonsCode": "514",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": -1.604686042623,
+    "poleDeclinationRad": 1.125654048999,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 222398.654,
+      "eccentricity": 0.01754893164,
+      "inclinationRad": 0.018640206032,
+      "ascendingNodeRad": -0.342328434025,
+      "argumentOfPeriapsisRad": 0.464601146887,
+      "meanAnomalyAtEpochRad": 340225.09586816136,
+      "meanMotionRadPerDay": 9.293210215232149,
+      "ascendingNodeRateRadPerDay": -0.021577793606842054,
+      "argumentOfPeriapsisRateRadPerDay": 0.04319455500778902
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "514",
+      "center": "500@599",
+      "parent": "jupiter",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "514",
+      "center": "500@599"
+    }
+  }
+}

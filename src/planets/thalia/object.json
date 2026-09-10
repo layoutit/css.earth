@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9f91cdc0101fa6e37389cc69b910a1c4e47b6d4054dd5675f41272a51023cc7a"
+        "sha256": "24242e4997d8823bc52404a471556d80a5c0ce801d780dc68aace677eb22689b"
+      }
+    },
+    "catalog": {
+      "name": "Thalia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.628581333515509,
+      "description": "Explore Thalia in 3D with its published shape model and radial elevation.",
+      "order": 211,
+      "context": {
+        "name": "Thalia",
+        "color": "#aaaaaa",
+        "order": 259
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fc559c2642a77c9aefc925f9325edc1a125215e97dce3d59ee117d4c68b40858"
+    "sha256": "c732f200812774945bbb8904c169b8fd6372321fb47d30217484f30651bc491e"
   }
 }

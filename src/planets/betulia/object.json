@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "664e1c9ac0bf3c6f3da981271b9042de687c9e9ac772b15fbd58f00107c42a63"
+        "sha256": "2b95ce2f27d07ce6cf4f660fb5e876464b2534f33f9ae8536af0acb6546544a8"
+      }
+    },
+    "catalog": {
+      "name": "Betulia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.1947263959034577,
+      "description": "Explore Betulia in 3D with its published shape model and radial elevation.",
+      "order": 175,
+      "context": {
+        "name": "Betulia",
+        "color": "#aaaaaa",
+        "order": 112
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "2d93d459f6dc8a03d9e08d1e1cb9c28128295cea151474afdf101bc626b5246d"
+    "sha256": "7b288efea4f4b0e51cbb56e55dfe287e7e7c7ce45782dbda2bd91609e5b04f2f"
   }
 }

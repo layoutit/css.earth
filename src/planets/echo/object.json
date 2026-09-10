@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5cbb3e493339ac525e375a9ef47e037290995485756adcccc9106bc61ea7ea3e"
+        "sha256": "166cffa906a752f0cd5618d93ebfe877d22b68da3942e82fcb458e0b31ae7a26"
+      }
+    },
+    "catalog": {
+      "name": "Echo",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.3930398793911873,
+      "description": "Explore Echo in 3D with its published shape model and documented physical size scale.",
+      "order": 372,
+      "context": {
+        "name": "Echo",
+        "color": "#aaaaaa",
+        "order": 182
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fbd51a21e8ca860ead7c339dc9c5b1e01176500762747d861e02c4ad58b325a0"
+    "sha256": "014db78bdef533ff807a9de57c95854f4ca4a15e567dd51d7a13a453295e3c53"
   }
 }

@@ -21,8 +21,8 @@
 // normalize(r x v), and its angle to the
 // ecliptic pole reproduces the tabulated inclinations (Earth's, which defines
 // the ecliptic, comes out at 0.003 degrees). Regenerating requires that
-// package's build (`pnpm prepare:solar-geometry` builds it first); building
-// cssEarth does not, because the computed vectors are checked in.
+// package's build (`pnpm prepare:solar-geometry` builds it first).
+// cssEarth builds this combined module locally; it is not committed.
 
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";

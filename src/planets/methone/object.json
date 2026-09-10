@@ -110,13 +110,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a08f0b4ae172df14d646a3955a66570832c4e6f328a1cb8f8c0ee6a52e4a90d5"
+        "sha256": "fc7908a4fb4d6821cea6bdaf00d9ee64e163f62378a064786696e78945cb6377"
+      }
+    },
+    "catalog": {
+      "name": "Methone",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Methone with Cassini imagery on its measured ellipsoid.",
+      "order": 94,
+      "context": {
+        "name": "Methone",
+        "color": "#a0a0a0",
+        "order": 127
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "00d4ea2225b531b9c30162f223f4734b946e44ca016069c04f1439c2fbffa81d"
+    "sha256": "5c661b87559897cc0660346319725c65961e554b5a964c810fb648390018c377"
   }
 }

@@ -115,13 +115,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9dd514435bfd0e724113a1ee71e3bf72c95641040b229fa9ec8d0d9038109eb4"
+        "sha256": "85ee3ddb18cb1df179617a4ca7aef68e91bcf3d98e272a9f073b6df43b578da8"
+      }
+    },
+    "catalog": {
+      "name": "Hyperion",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a6a29a",
+      "distanceAu": 9.58,
+      "description": "Explore Hyperion with Cassini imagery, mapped radial height and its measured irregular shape.",
+      "order": 431,
+      "context": {
+        "name": "Hyperion",
+        "color": "#a6a29a",
+        "order": 46
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "873b26a894ffe1f028489d3789cb3a1f38f1e9526a3f0e51dbab49c0e022c7a6"
+    "sha256": "6cfc9cf3a67179fe9744d6fe11810f296e33405ea9499d5e86e01d1ab7c27090"
   }
 }

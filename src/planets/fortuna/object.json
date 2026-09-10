@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cacb7abb3884363bae8b11cbdb79cbc874facd2dee8bd9d963540bf0dae81355"
+        "sha256": "85a45a3512b4bfb1f00389b99bdbe1eb3a13013e2a4357bb00baef301408a1f0"
+      }
+    },
+    "catalog": {
+      "name": "Fortuna",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.4414298428674326,
+      "description": "Explore Fortuna in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "order": 143,
+      "context": {
+        "name": "Fortuna",
+        "color": "#aaaaaa",
+        "order": 80
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6db0d88ac0fbae17bfb2aa3cc39c2b11de209d50fc6227c70bc39ab291557526"
+    "sha256": "39753bd8400d71609d0f39e960facf83db8acad02410309ac2df91d1451b3c76"
   }
 }

@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "83abf8379082993a3f7ebb1fe5751c6bbfeb6e67db321462fb62154275b235ef"
+        "sha256": "cdb88524128412c277d3b9e939edea93aaaa41fed128b575b6a7023323f0f5df"
+      }
+    },
+    "catalog": {
+      "name": "Niobe",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.754299168249887,
+      "description": "Explore Niobe in 3D with its published shape model and radial elevation.",
+      "order": 235,
+      "context": {
+        "name": "Niobe",
+        "color": "#aaaaaa",
+        "order": 283
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f7d1b24a61850e1fed26a7072cdac157bf38b5aaba4b8a84d6a5fc1f126e7f66"
+    "sha256": "07230e327879ebc27cd389d109e7bf3f0d75d4924d75f80f8a623580366251fb"
   }
 }

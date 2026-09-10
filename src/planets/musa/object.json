@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "23ac9c798f8fdfb44e7186f073ae28ddf5c6ceccf5d5fe62667ab95e5663f758"
+        "sha256": "c8e44c3fffe0055779decd40d7d3c0614c116d5a59c35fdabecb5bd6d48c7dd0"
+      }
+    },
+    "catalog": {
+      "name": "Musa",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.6610456785966816,
+      "description": "Explore Musa in 3D with its published shape model and documented physical size scale.",
+      "order": 386,
+      "context": {
+        "name": "Musa",
+        "color": "#aaaaaa",
+        "order": 196
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3b3956a0cbcd560adacde09cfa42d99edc200eb971d0c9702460932e1efa5200"
+    "sha256": "cbc1b5eb40585278f800906adb3e20e33c5c2f421587cd818018f44154f6a2d6"
   }
 }

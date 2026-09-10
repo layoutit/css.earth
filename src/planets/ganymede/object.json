@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a7f4dd1f43ec14b0310067598b162fd11943ab050ab35504b3b7c60c89d082d9"
+    "sha256": "6adb7af144ea890a94debedf1dd684c3b8537946226d7440d708387b8f3e3c99"
   },
   "id": "ganymede",
   "properties": {
@@ -123,7 +123,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8f86d68188ed719724fa64cd9dda794a5f89d5408e89a85de39a15b7167b84ab"
+        "sha256": "6d7458cdfdcc19e015ccc47c8767027bd266524fcea9bdae4c4d4434fd2fcbe4"
+      }
+    },
+    "catalog": {
+      "name": "Ganymede",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a49a83",
+      "distanceAu": 5.2,
+      "description": "Explore Ganymede in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s largest moon and its grooved icy surface.",
+      "order": 422,
+      "context": {
+        "name": "Ganymede",
+        "color": "#a79b89",
+        "order": 16
       }
     }
   },

@@ -1,0 +1,52 @@
+{
+  "id": "despina",
+  "classification": "satellite",
+  "order": 256,
+  "physical": {
+    "name": "Despina",
+    "horizonsCode": "805",
+    "meanRadiusKm": 74,
+    "gravitationalParameterKm3PerS2": 0.11673,
+    "parent": "neptune"
+  },
+  "physicalNotes": "Current Horizons GMs; Karkoschka ellipsoid dimensions belong to body sources.",
+  "satellite": {
+    "parent": "neptune",
+    "horizonsCode": "805",
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 1,
+    "poleRightAscensionRad": -1.055544921893,
+    "poleDeclinationRad": 0.749898394204,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 52588.105,
+      "eccentricity": 0.000335704713,
+      "inclinationRad": 0.000708539198,
+      "ascendingNodeRad": 1.26834630515,
+      "argumentOfPeriapsisRad": -1.603506987587,
+      "meanAnomalyAtEpochRad": -137140.61554651186,
+      "meanMotionRadPerDay": 18.7528184186128,
+      "ascendingNodeRateRadPerDay": -0.022225317259599746,
+      "argumentOfPeriapsisRateRadPerDay": 0.04449097319566255
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "805",
+      "center": "500@899",
+      "parent": "neptune",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 1,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "805",
+      "center": "500@899",
+      "range": "daily"
+    }
+  }
+}

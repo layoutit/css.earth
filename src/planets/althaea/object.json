@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5017709fb195c7536448ac568ba5c73cd7fd1135f8ad982ca30e01826f2c8f51"
+        "sha256": "85ee2d28c1966b8d87a275187dbb6daa20ce3bd2e6cc189aa12e07836546af72"
+      }
+    },
+    "catalog": {
+      "name": "Althaea",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.5814366871947056,
+      "description": "Explore Althaea in 3D with its published shape model and radial elevation.",
+      "order": 262,
+      "context": {
+        "name": "Althaea",
+        "color": "#aaaaaa",
+        "order": 313
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f32f52aa30ca1c7093cb0ce58b50a2604c539374135c8986212f0dd78b9ecb32"
+    "sha256": "ae2a80c4a26947889b848b2979e203ffb0add55517f14d9ec7860ff5f7dd8853"
   }
 }

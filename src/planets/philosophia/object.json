@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "100d9169690d42234aa1e8b58f680f9586e413716c26ad2a230aae3c1bf72849"
+        "sha256": "72f372a10e2300e72b06da79a8a850bb94321c8f642f6cc019adef85112d2f23"
+      }
+    },
+    "catalog": {
+      "name": "Philosophia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.152308355019594,
+      "description": "Explore Philosophia in 3D with its published shape model and radial elevation.",
+      "order": 319,
+      "context": {
+        "name": "Philosophia",
+        "color": "#aaaaaa",
+        "order": 371
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "30010e21d674ea879a9e69c97f5bc1aaa81ba86934339e83159c2b750f674b54"
+    "sha256": "25bce8ba7620e086161f3683b0fc0144d2add148db765992c0982253e4c5147d"
   }
 }

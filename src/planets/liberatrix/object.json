@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "861d5f9d3637834fd4fd0584efb1f83d590f42d14caf687d5323419ba63bbb46"
+        "sha256": "85c590b456145f1fee971d565e12c8e14138ddad6e435a5b72ac8152009a545c"
+      }
+    },
+    "catalog": {
+      "name": "Liberatrix",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.742985442216405,
+      "description": "Explore Liberatrix in 3D with its published shape model and radial elevation.",
+      "order": 267,
+      "context": {
+        "name": "Liberatrix",
+        "color": "#aaaaaa",
+        "order": 318
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c34388240ff0b7d870792528337df5fb3cb571b81bfac58e5841401444d35ce0"
+    "sha256": "1fc190ccc4a6a198cfceaec8a854cce3c91054da386eba571c0ce56523ff5001"
   }
 }

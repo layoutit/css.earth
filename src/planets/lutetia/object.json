@@ -118,7 +118,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f815355b617093c2fef3765f9efaddc4493a9d618b3576c031dcb841ed88a5e8"
+        "sha256": "5bd598f82b113580d44daa387867e0fda7a6eb073c545bc79424b6e0001d1e62"
+      }
+    },
+    "catalog": {
+      "name": "Lutetia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.435,
+      "description": "Explore Lutetia with its Rosetta shape model and source-derived elevation.",
+      "order": 127,
+      "context": {
+        "name": "Lutetia",
+        "color": "#aaaaaa",
+        "order": 50
       }
     }
   },
@@ -127,6 +141,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "27e7541f499501f29aa0caadd52adc37b5d926ace4b84c7affabf6eb043415ee"
+    "sha256": "6073cd539e4041fec8f71c4c1ece9187d2d1a746dcfebb23774ccb1a77f03766"
   }
 }

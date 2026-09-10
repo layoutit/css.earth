@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7ac83aeb75a8a48a304178bde77cf5cde2c596c6760ead33b0775b2b16d0fa89"
+        "sha256": "aed29ef3aa06082a396bcfd5429b104c7ff1d5afd3cfd1f07a577c87d2b34d98"
+      }
+    },
+    "catalog": {
+      "name": "55 Pandora",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.75816485113467,
+      "description": "Explore 55 Pandora in 3D with its published shape model and radial elevation.",
+      "order": 227,
+      "context": {
+        "name": "55 Pandora",
+        "color": "#aaaaaa",
+        "order": 275
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e0822e3ea60a625e0537d7fd7a411605d2d2593f7379e6226f22301e4dbf5223"
+    "sha256": "67a868c5e42bd46c5248a58a084b566966ccc7e718d678cb417a58ddb747ee68"
   }
 }

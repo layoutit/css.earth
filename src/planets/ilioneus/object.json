@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "242bd912c83464dc3d955f619dfd1ea4331fc851752050d7194a3e24b72fc0b3"
+        "sha256": "63caab683f0ab6585874b12485fdd2e8ed0a64ef0da1d7c942786791871d2bbf"
+      }
+    },
+    "catalog": {
+      "name": "Ilioneus",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 5.182702514637422,
+      "description": "Explore Ilioneus in 3D with its published shape model and radial elevation.",
+      "order": 358,
+      "context": {
+        "name": "Ilioneus",
+        "color": "#aaaaaa",
+        "order": 409
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e34d5b00b9e3c17725481223dfe14c08e663eafd21465bdc3a4276fc3adbf66a"
+    "sha256": "2dc1ed84665a343998698cb0abf74c2141271a3ec652fc66c85a22a1ff78fd02"
   }
 }

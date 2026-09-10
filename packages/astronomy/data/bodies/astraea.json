@@ -1,0 +1,77 @@
+{
+  "id": "astraea",
+  "classification": "asteroid",
+  "order": 159,
+  "classificationOrder": 51,
+  "physical": {
+    "name": "Astraea",
+    "horizonsCode": "5;",
+    "meanRadiusKm": 56,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "physicalNotes": "DAMIT calibrated model radii; GM from the pinned Horizons physical blocks.",
+  "asteroid": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%275%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 385480072.4953846,
+      "eccentricity": 0.18758231306619,
+      "inclinationRad": 0.34067928191067554,
+      "ascendingNodeRad": 0.17512550021967294,
+      "argumentOfPeriapsisRad": 2.29490353438034,
+      "meanAnomalyAtEpochRad": 3.5247693325727343,
+      "meanMotionRadPerDay": 0.004158786845236152
+    }
+  },
+  "asteroidFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%275%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          399346848.3752686,
+          -199149395.3736623,
+          -94184718.38608374
+        ],
+        "velocity": [
+          590065.5306317706,
+          1138386.115458973,
+          360941.949474257
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          415138307.7191731,
+          -164112883.2796054,
+          -82929557.34652711
+        ],
+        "velocity": [
+          461579.8737156399,
+          1195668.249364073,
+          388873.1777193443
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          426976431.8826369,
+          -127514878.4896252,
+          -70885153.96044178
+        ],
+        "velocity": [
+          326574.3688512265,
+          1242388.943613554,
+          413520.3541567788
+        ]
+      }
+    ]
+  },
+  "acquisition": {
+    "heliocentric": {
+      "target": "5;",
+      "model": "asteroid"
+    }
+  }
+}

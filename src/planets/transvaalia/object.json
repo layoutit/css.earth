@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5f5b821052e615744f9e83b4a343325c9e634b9ec03a24f5808e5ee8f4561230"
+        "sha256": "368cd081fefe9b9aa94149c918073fb27b5410a0a661b32b63527cf635e3228a"
+      }
+    },
+    "catalog": {
+      "name": "Transvaalia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.766754099697322,
+      "description": "Explore Transvaalia in 3D with its published shape model and documented physical size scale.",
+      "order": 388,
+      "context": {
+        "name": "Transvaalia",
+        "color": "#aaaaaa",
+        "order": 198
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3d5fc9c1b020e8eb501f46048034573aea687d801d1da67adf68a31ac3f9ef05"
+    "sha256": "bf783d85147d4ce51a12399f37b9f4787da2ddd314d91a1c0f328e776a13d6a6"
   }
 }

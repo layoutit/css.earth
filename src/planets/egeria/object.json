@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "10d5cd58dce94b6e185101abe1d131467159adb77c55119ba221714544d4a98e"
+        "sha256": "5b0e2f52c9a50db1ec6a2019d500f037992a7b6afe780a5bb873069b955b942f"
+      }
+    },
+    "catalog": {
+      "name": "Egeria",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.5764780745110407,
+      "description": "Explore Egeria in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "order": 146,
+      "context": {
+        "name": "Egeria",
+        "color": "#aaaaaa",
+        "order": 83
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "577ebed4d7fe798ae12feec15153d1d71fa319440590759ba4ba593d3bc7fbf5"
+    "sha256": "c962c458f89d878b054bb9dec10e2c0a42d70abaa0aab62f1fc0e484a7cde433"
   }
 }

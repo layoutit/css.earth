@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9828501a6baf19fe3e235d800662ff8f0636ef47b0744f42b35e2838ec93cc31"
+        "sha256": "4e90560ffb9db9c3b8c8eec876c5b18809c560a41021372a4f92e15930864b22"
+      }
+    },
+    "catalog": {
+      "name": "Massalia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.4079553806420346,
+      "description": "Explore Massalia in 3D with its published shape model and documented physical size scale.",
+      "order": 367,
+      "context": {
+        "name": "Massalia",
+        "color": "#aaaaaa",
+        "order": 177
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "03e2edbad8af976858f0ebc874835614870355e9d4b5796f11a3f8b8ff72c6ee"
+    "sha256": "37a76da148ee18190293d0a2051fc1e6eb0347027526161d0e2d6fb1ddde0bf4"
   }
 }

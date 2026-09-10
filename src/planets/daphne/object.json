@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a6e356c515b74a9da6ed81424bf6f8159b1dd52fe3371bd89221ea0b6987a554"
+        "sha256": "1cd637deef1f6ee589a1bacdfe476b067854430ba324fa22fa45757f21f67ba1"
+      }
+    },
+    "catalog": {
+      "name": "Daphne",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.766978586312942,
+      "description": "Explore Daphne in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "order": 151,
+      "context": {
+        "name": "Daphne",
+        "color": "#aaaaaa",
+        "order": 88
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "adf5063e529f98aac60e57c53819af52a5f21613b2b62b1229bca18f7eff4173"
+    "sha256": "c1f419b7eb0bee8a136996d4b3b0575783b0977d04b49adbb7c172d040dab1e2"
   }
 }

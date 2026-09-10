@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6b88eebb2e3050d1f65e5e5e28099ae582b9159264531a540957fe44fadde5fc"
+        "sha256": "88bf1dc5f470306145c9e096b0e69fcc0f098fbcccc667779d274ace92056ab0"
       }
     },
     "worldFrame": {
@@ -112,11 +112,25 @@
       ],
       "metersPerUnit": 6.733257821031686,
       "bodyRadiusM": 1548.649298837288
+    },
+    "catalog": {
+      "name": "Kohoutek",
+      "systemName": "Solar System",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 78.55468108744893,
+      "description": "C/1973 E1: Kohoutek passed close to the Sun in late 1973. It is now travelling outward into the distant Solar System. Illustrative nucleus at Celestia’s catalog scale.",
+      "order": 57,
+      "context": {
+        "name": "Kohoutek",
+        "color": "#b8b6b2",
+        "order": 452
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ea48b212d34ee08863caef93caa159dfacf4cdaa5b7c7fdf358164a4ea512a09"
+    "sha256": "06895802775fd6b72f1819b9fc9ac27c45157fbeb3a822e74a04a2fc6aff3eb4"
   }
 }

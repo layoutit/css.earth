@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1d236486d8321ff2eaad76ceb850f457e4dbbd326e103b82901238a8b7f04492"
+        "sha256": "9ccd799ff59c9b01bd51d1d31f511202f8126a9246cf75a60b282e83419cd71f"
+      }
+    },
+    "catalog": {
+      "name": "Ganymed",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.663715621121006,
+      "description": "Explore Ganymed in 3D with its published shape model and radial elevation.",
+      "order": 183,
+      "context": {
+        "name": "Ganymed",
+        "color": "#aaaaaa",
+        "order": 120
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6d583f3b0b60dea8eef84db2ed1f9d8099d02a217046ad34bf61dc738ea5f6c6"
+    "sha256": "ff419e83307f7ab47c9b1576acc3cfa6b2e950cc71e514b34ee8bf4665f3cd22"
   }
 }

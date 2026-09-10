@@ -1,0 +1,52 @@
+{
+  "id": "belinda",
+  "classification": "satellite",
+  "order": 243,
+  "physical": {
+    "name": "Belinda",
+    "horizonsCode": "714",
+    "meanRadiusKm": 40.317473596635935,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "uranus"
+  },
+  "physicalNotes": "Volume-equivalent radii of Karkoschka's published prolate shape fits.",
+  "satellite": {
+    "parent": "uranus",
+    "horizonsCode": "714",
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 1,
+    "poleRightAscensionRad": 1.349039881633,
+    "poleDeclinationRad": 0.264573304825,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 75258.083,
+      "eccentricity": 0.001556800822,
+      "inclinationRad": 0.024891688343,
+      "ascendingNodeRad": -2.9271883573,
+      "argumentOfPeriapsisRad": 3.997698322622,
+      "meanAnomalyAtEpochRad": -73601.10371415461,
+      "meanMotionRadPerDay": 10.069741506741362,
+      "ascendingNodeRateRadPerDay": -0.007064287403256778,
+      "argumentOfPeriapsisRateRadPerDay": 0.014124918482574165
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "714",
+      "center": "500@799",
+      "parent": "uranus",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 1,
+      "radial": true,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "714",
+      "center": "500@799",
+      "range": "daily"
+    }
+  }
+}

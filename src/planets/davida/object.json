@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c8ed2b7bf1aaad2aca1a14f49a8460da9af97366dbc7630b4b2cfa28acfb6bac"
+        "sha256": "eeb1af3d77af3322bfd38ca73f892d7a5d7c4f1b64bb0fb096c22e6c7f2c3abf"
+      }
+    },
+    "catalog": {
+      "name": "Davida",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.16136139912591,
+      "description": "Explore Davida in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "order": 138,
+      "context": {
+        "name": "Davida",
+        "color": "#aaaaaa",
+        "order": 75
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7fea3dca654e1702ceafedfbf42d0e5ab1cef11546eed1d7f62742bdf7b1b76f"
+    "sha256": "fa551d7b467ac15fbac484a84636eb953c4c8ad2cb59b84a88f0b9516e310abb"
   }
 }

@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "bc8904923cb8b221c798723c16ae1ae6d78fcad9b6a4c844ff3a5bc2eb8424c5"
+        "sha256": "8f1a7c589f14128cb8b3c76084eb424d7182de3de945bf86133371fbcb38721a"
+      }
+    },
+    "catalog": {
+      "name": "Phaethon",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.2714545674912625,
+      "description": "Explore Phaethon in 3D with its published shape model and radial elevation.",
+      "order": 191,
+      "context": {
+        "name": "Phaethon",
+        "color": "#aaaaaa",
+        "order": 140
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ef2e1edadf6c4f4e39e5b84c3481b3e96a1135c66e9a0f5fac64b097c5fee615"
+    "sha256": "3b38494fd1eeca6be9a41af7a73bfcdb345eeea72cfd893d570cbaed52a2fd86"
   }
 }

@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6f36c950016b1ea70e9c310792cebef77a51ee115bb5a57ac45339a324bcc221"
+        "sha256": "edef1f6e4dc71ca217f0ffdd1d6e8be89b780ffd36a8755dd16874e4e4a71b5c"
+      }
+    },
+    "catalog": {
+      "name": "Hersilia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.741003699475706,
+      "description": "Explore Hersilia in 3D with its published shape model and radial elevation.",
+      "order": 306,
+      "context": {
+        "name": "Hersilia",
+        "color": "#aaaaaa",
+        "order": 358
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9238f729b90c2bb9966f096c698bdcfbc39e4c94ddb1b1890d3e2c32a252a657"
+    "sha256": "9890f7cad3053666b582c001820f5a19c3c6f7e667929a99ea694931ba262703"
   }
 }

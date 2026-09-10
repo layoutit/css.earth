@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "269f4ac83950bf89ec45479db1101dfcfdebea3242d27285f0253200b0a0d468"
+        "sha256": "267fcac1c1481c439c8118aa66270d584b6c974f6701e443525d7f8df5b6d6c4"
+      }
+    },
+    "catalog": {
+      "name": "Thule",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 4.270063067184944,
+      "description": "Explore Thule in 3D with its published shape model and radial elevation.",
+      "order": 188,
+      "context": {
+        "name": "Thule",
+        "color": "#aaaaaa",
+        "order": 137
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9f9326b00221b563060252b9cc65396324d240e9fc5577136654e3f8290d546f"
+    "sha256": "fc1c91247033a51b796b7c63ff4bec38cb4871f0180e9130d02cf72f03558759"
   }
 }

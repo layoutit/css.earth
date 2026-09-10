@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a79aa79f23fa3e8c1cd0272e846979c98fb2e93b4841eee8f877099a08327d7b"
+        "sha256": "4b628dea7994cf7c459014598841b7be4f5bc3d53bd30e30cca104eb12abf58a"
+      }
+    },
+    "catalog": {
+      "name": "Menelaus",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 5.197053008241417,
+      "description": "Explore Menelaus in 3D with its published shape model and radial elevation.",
+      "order": 363,
+      "context": {
+        "name": "Menelaus",
+        "color": "#aaaaaa",
+        "order": 414
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "451847bec736226e92510c86ea87def1dd6513b2efa236ab7cce983ed6cb49d1"
+    "sha256": "fe3bb770b6754d045934b3e1326a063a7aded6f2d3e700d03e138d4d1981775a"
   }
 }

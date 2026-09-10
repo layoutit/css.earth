@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "00f6ce00f01e5ee61fc589c34bec1bcaa7e6ddc5c83bb2449383445e004dd0f8"
+        "sha256": "66d388cd4e7549574554faa98ca498b17db8ff257fbd50d9b66bf5b01ae5ca2d"
+      }
+    },
+    "catalog": {
+      "name": "Bacchus",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.0774720987446262,
+      "description": "Explore Bacchus in 3D with its published radar shape model.",
+      "order": 199,
+      "context": {
+        "name": "Bacchus",
+        "color": "#aaaaaa",
+        "order": 155
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "cae6e69963392bbd442f00c2f201a3a101ecf0e0ffd68b38705cc9b0accac3c2"
+    "sha256": "fb8a48a4c66478b98983581d8c518046461cf230691e33c2f8829f2d53c19398"
   }
 }

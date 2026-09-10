@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "01ca7456cc65f46491b8f20b625fb51e52bb9302aa4d1fdb7a3b1d86e423f3f7"
+        "sha256": "5a8992676e27ed41d8cb3176bbedc70c1b38091ffda77e4da377c23d7faa07b2"
+      }
+    },
+    "catalog": {
+      "name": "Reinmuthia",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.991273442215631,
+      "description": "Explore Reinmuthia in 3D with its published shape model and documented physical size scale.",
+      "order": 398,
+      "context": {
+        "name": "Reinmuthia",
+        "color": "#aaaaaa",
+        "order": 208
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e3d2d15157d152cdb2447208508fa54695fb67b5cea0a37e36b3c809fd08235a"
+    "sha256": "595d592facb7a4bea3b2f72121b0955501aaba11ba6af3a7eeb61877d3f3ceda"
   }
 }

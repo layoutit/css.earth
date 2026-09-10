@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c2033df43cdd1605fc82116ce35a27bbcad49c9366fa1189b12fac458d2fa8b4"
+        "sha256": "885e56a7dc99c7dff22c8200f28e2389c08a6d5bd718c12b56c12772149c05ef"
+      }
+    },
+    "catalog": {
+      "name": "Isis",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.4444877106591107,
+      "description": "Explore Isis in 3D with its published shape model and radial elevation.",
+      "order": 220,
+      "context": {
+        "name": "Isis",
+        "color": "#aaaaaa",
+        "order": 268
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1d59b3d74f505432d5502105a1b925f8b116240979814c68aceaccbe31820cdd"
+    "sha256": "14c7aa4fea606566ddb76ec9d78642f33a306abd4ce6791e0ccebbbf0ce605f1"
   }
 }

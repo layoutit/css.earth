@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b8904ec9870cfb4986330ba8960fef9d81130a503d98ef21afff25ac75f8a5ee"
+        "sha256": "7d2670e994b146ae6b9d09cfbe4b83a6fb9e7d8139c21d164c446ae621962689"
       }
     },
     "worldFrame": {
@@ -112,11 +112,25 @@
       ],
       "metersPerUnit": 2673.91304347826,
       "bodyRadiusM": 614999.9999999998
+    },
+    "catalog": {
+      "name": "Gonggong",
+      "systemName": "Solar System",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 89.84583026441713,
+      "description": "Gonggong is a large, distant trans-Neptunian world with the moon Xiangliu. Its smooth model follows a published thermal size interpretation; the viewing pole and surface detail are illustrative.",
+      "order": 6,
+      "context": {
+        "name": "Gonggong",
+        "color": "#aaaaaa",
+        "order": 433
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "256a71bc6850382238433898a936e8334733e039b2f932ebb6ba1defec5732c0"
+    "sha256": "53b1e7c6f5672489b81cab00a6d201044b7ba78bbaffdec305e5c4b1b3daf893"
   }
 }

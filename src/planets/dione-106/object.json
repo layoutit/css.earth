@@ -113,7 +113,21 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fe3472e7a410474df404f354a37957b4bd559ccfd6be98efc98493518677f359"
+        "sha256": "c1794bb764fcd05da260cd28d00428f7a435ee96c7c895d29b90221a58810ece"
+      }
+    },
+    "catalog": {
+      "name": "106 Dione",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1819345699171295,
+      "description": "Explore 106 Dione in 3D with its published shape model and radial elevation.",
+      "order": 255,
+      "context": {
+        "name": "106 Dione",
+        "color": "#aaaaaa",
+        "order": 306
       }
     }
   },
@@ -122,6 +136,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "78c046c9313e89b14b70373dcd4622ef6f18800eb11afd1cf061da73b47ac339"
+    "sha256": "af0a5784c9f0cc1b01a60b67467c5ba96f5b9d520762590df3f40237ef7314df"
   }
 }

@@ -1,0 +1,52 @@
+{
+  "id": "metis",
+  "classification": "satellite",
+  "order": 216,
+  "physical": {
+    "name": "Metis",
+    "horizonsCode": "516",
+    "meanRadiusKm": 21.5,
+    "gravitationalParameterKm3PerS2": 0.0025,
+    "parent": "jupiter"
+  },
+  "physicalNotes": "JPL Horizons OBJ_DATA physical blocks, retrieved 2026-09-08.",
+  "satellite": {
+    "parent": "jupiter",
+    "horizonsCode": "516",
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 1,
+    "poleRightAscensionRad": -1.60469441868,
+    "poleDeclinationRad": 1.125680659044,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 128879.47,
+      "eccentricity": 0.000002426153,
+      "inclinationRad": 0.000003188444,
+      "ascendingNodeRad": -2.086085317262,
+      "argumentOfPeriapsisRad": 5.066386307712,
+      "meanAnomalyAtEpochRad": -155697.41495407227,
+      "meanMotionRadPerDay": 21.264996216753,
+      "ascendingNodeRateRadPerDay": -0.001017821829111355,
+      "argumentOfPeriapsisRateRadPerDay": 0.05093693908344464
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "516",
+      "center": "500@599",
+      "parent": "jupiter",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 1,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "516",
+      "center": "500@599",
+      "range": "daily"
+    }
+  }
+}

@@ -110,13 +110,27 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "eb6465ad022e9374b7b7dad16447d3f27b3bfcb9c081f4471645fba5e9805c4c"
+        "sha256": "08578f2bd8b9029e7283fcfe57c830b77c306e6c9ae0fb7fe5e4ba8890d500dc"
+      }
+    },
+    "catalog": {
+      "name": "Suttungr",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Suttungr, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "order": 28,
+      "context": {
+        "name": "Suttungr",
+        "color": "#a0a0a0",
+        "order": 230
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "046b7dcf88d7ac437dce3d1807de4eaf8251e10cabbd1a6d049fa56810de2f3e"
+    "sha256": "5195cf3dac88c22473a34c04b53991fe0d96d822348644a4ccd64be087341d91"
   }
 }
