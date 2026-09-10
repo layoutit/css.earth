@@ -1,0 +1,122 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "comet-96p",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Machholz 1",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "7d54ae536c8f95c0cb1d232dcd3483a7ddca886158b16df3a26bea58fe73f791"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "4806516796422242b9607f4b4cd5501dcd20c3fefaec72b570770c102dd32f76"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "e01a59621a30017ac56806f7ac4e86b7ee38db670d9559259e1bf3e4a379a9b6"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "32fdd580ce039445d666ae45abf99479b82aafed70f2ca52cb1de31475923b54"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "77ed8ddd53e491dff19c9b93fb14ae424d6c53620f787fce787e1b891a2642a3"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 2.3598465506092006
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/styles/comet-96p-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "a18cb962896b96de79a356b1a03f61380507406ebd4c0e605f7c545306857e49"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        199459770950.074,
+        -601455853885.9766,
+        -512647519825.5087
+      ],
+      "presentationToReference": [
+        0.25518681066851956,
+        0,
+        0.9668917683281977,
+        -0.8871058534034725,
+        0.3977771559319137,
+        0.2341293212650112,
+        -0.38460745769956933,
+        -0.9174820620691818,
+        0.10150748377905944
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 10.260202393953046,
+      "bodyRadiusM": 2359.8465506092007
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "93ffefc4ef530e417f5d366b86c8af3019805d737ef775e92ef6b960f5915db9"
+  }
+}

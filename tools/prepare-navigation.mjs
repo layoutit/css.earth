@@ -180,7 +180,7 @@ export async function prepareContextMarkers({ projectRoot, outputRoot, descripto
   return markers;
 }
 
-async function renderNavigation({ projectRoot, outputRoot, descriptors }) {
+export async function renderNavigation({ projectRoot, outputRoot, descriptors }) {
   const navigationSourceRoot = resolve(projectRoot, "src/navigation/source");
   await prepareSunIndicator({ projectRoot, outputRoot });
 
