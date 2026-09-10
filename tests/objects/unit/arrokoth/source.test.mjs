@@ -24,7 +24,7 @@ test('released Arrokoth topology retains two closed source lobes at kilometre sc
 });
 test('Arrokoth UV orientation matches independently decoded released PNG scalar anchors',async()=>{
  const config=await json('preparation/terrestrial.json'),lens=config.raster.scientific[0];
- const receipt=JSON.parse(await readFile(new URL('../../../../docs/trans-neptunian/arrokoth-registration.json',import.meta.url)));
+ const receipt=JSON.parse(await readFile(new URL('../../fixtures/arrokoth/arrokoth-registration.json',import.meta.url)));
  const bytes=await readFile(new URL(lens.path,root)),fits=readFitsPrimary(bytes);
  assert.equal(createHash('sha256').update(bytes).digest('hex'),receipt.sourceFitsSha256);
  const png=await readFile(new URL('science/albedo_arrokoth4_fp36h2_masked1.png',root));

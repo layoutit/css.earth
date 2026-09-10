@@ -1,8 +1,0 @@
-(node:76266) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
-(Use `node --trace-warnings ...` to show where the warning was created)
-[conformance] START phobos/dpr-1
-phobos DPR 1: interactions passed
-[conformance] PASS phobos/dpr-1 (21244ms)
-[conformance] START phobos/dpr-2
-phobos DPR 2: interactions passed
-[conformance] PASS phobos/dpr-2 (21999ms)

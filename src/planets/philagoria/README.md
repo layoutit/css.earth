@@ -15,7 +15,7 @@ Convex light-curve reconstruction with approximate thermal size: 27.32 km effect
 
 ## Evidence
 
-The [philagoria results](../../../docs/evidence/main-belt-asteroids-expansion/summary.json) record a maximum sampled source-to-display distance of **56.37 m**. This is a sampled comparison, not an exhaustive error bound.
+The [philagoria results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/main-belt-asteroids-expansion/summary.json) record a maximum sampled source-to-display distance of **56.37 m**. This is a sampled comparison, not an exhaustive error bound.
 
 The 2 browser cases predate final integration. The report compares their recorded body assets with the integrated files; it does not identify a tested code revision for these cases.
 

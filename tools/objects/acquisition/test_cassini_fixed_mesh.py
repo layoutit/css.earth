@@ -120,7 +120,7 @@ class FixedMeshTests(unittest.TestCase):
         # Source-derived final fixed-frame fixtures at dispersed original rows,
         # with the independently qualified nominal image offsets and origin.
         # This test verifies intersection arithmetic, not those registration fits.
-        anchors_path = ROOT/'docs/moons/b9-cassini-ice-surfaces/source-review/phoebe/regional-mask.json'
+        anchors_path = ROOT/'tests/objects/fixtures/phoebe/regional-mask.json'
         evidence = json.loads(anchors_path.read_text())
         self.assertEqual(evidence['terrainSha256'], TERRAIN_SHA)
         anchors = [evidence['acceptedPixels'][i]['nominal'] for i in (0, 8, 16, 24, 32, 40)]

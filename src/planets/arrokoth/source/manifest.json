@@ -55,7 +55,7 @@
         "units": "km",
         "metersPerUnit": 1000
       },
-      "acquisition": "Reacquire archive inputs through the pinned acquisition recipe; authored numerical inputs are reproduced by docs/trans-neptunian/author.py.",
+      "acquisition": "Reacquire the archive input through source/preparation/acquisition.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
     },
     {
@@ -79,7 +79,7 @@
       },
       "expectedBytes": 2882880,
       "expectedSha256": "013c84b1ae333bff506527b4b1b60e3a8f1b619c6e287774b4939ccdb5a7cc39",
-      "acquisition": "Reacquire archive inputs through the pinned acquisition recipe; authored numerical inputs are reproduced by docs/trans-neptunian/author.py.",
+      "acquisition": "Reacquire the archive input through source/preparation/acquisition.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
     },
     {
@@ -104,7 +104,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 9948
       },
-      "acquisition": "Reacquire archive inputs through the pinned acquisition recipe; authored numerical inputs are reproduced by docs/trans-neptunian/author.py.",
+      "acquisition": "Authored neutral image retained in Git.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
     }
   ],

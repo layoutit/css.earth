@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "gkunhomdima",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6b374c6f4ba41a768555714c21e8a2ddbcf5d4507424608303568ed539a0a4a7"
+    "sha256": "cab433dc7e9a84f45488d55a362a453c37f99c804ac7c64bcf0a844fd302fa88"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -245,12 +245,12 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 316893.28905639314
       },
-      "acquisition": "Reacquire archive inputs through the pinned acquisition recipe; authored numerical inputs are reproduced by docs/trans-neptunian/author.py.",
+      "acquisition": "Authored neutral image retained in Git.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -270,12 +270,12 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 316893.28905639314
       },
-      "acquisition": "Reacquire archive inputs through the pinned acquisition recipe; authored numerical inputs are reproduced by docs/trans-neptunian/author.py.",
+      "acquisition": "Numerical ellipsoid table reproduced from measurements.json by tools/objects/source-authoring/trans-neptunian/author.py.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
       "sha256": "78d131d1e67026b4c5f9dbcbafbbce798db9cd2401f50bcae6643e44253bfa88",
       "bytes": 65105,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -292,7 +292,7 @@
       "sha256": "0587e85919d415a69ee81b9e4430729d9d5a666ec96030814b85b2a7729b246b",
       "bytes": 3663,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -330,13 +330,13 @@
           "url": "/scenes/gkunhomdima/gkunhomdima-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/gkunhomdima/gkunhomdima-model-surface@2x.webp",
           "bytes": 56174,
           "sha256": "42e8495a96632291d0cbe2d23dd157aa35ab9fe9ea98d5c0156196ec062cccdc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

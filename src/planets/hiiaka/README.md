@@ -45,6 +45,6 @@ The [validation records](source/validation) identify the parent-relative state a
 
 **Survey and sources**
 
-Other candidates and rejected sources are recorded in [the source review](../../../docs/moons/review-2026-09-08/outer_companions-review.json) and [preparation inputs](../../../docs/moons/b1-preparation/outer-inputs.json).
+Other candidates and rejected sources are recorded in [the source review](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/review-2026-09-08/outer_companions-review.json) and [preparation inputs](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b1-preparation/outer-inputs.json).
 
 </details>

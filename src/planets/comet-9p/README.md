@@ -8,9 +8,9 @@
 
 ## Evidence
 
-- The [constraint-grid qualification](../../../docs/comets/CONSTRAINT-GRIDS.md) records checks and captured views.
+- The [constraint-grid qualification](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/CONSTRAINT-GRIDS.md) records checks and captured views.
 
-- The [shared qualification record](../../../docs/comets/QUALIFICATION.md) records verification.
+- The [shared qualification record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/QUALIFICATION.md) records verification.
 
 ## Known problems
 
