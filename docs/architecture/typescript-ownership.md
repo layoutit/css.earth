@@ -1,14 +1,13 @@
 # TypeScript ownership
 
-Application, preparation and source-authoring implementations use strictly checked TypeScript. Native Node tools use erasable `.mts` source; browser and package code is bundled from `.ts` or `.mts`. Compiled package imports retain their `.js` extension, while source-only Node imports name the actual `.mts` file. Preparation declarations come from their implementations.
+Application, preparation, source-authoring, tests, executable fixture helpers and capture/oracle implementations use strictly checked TypeScript. Native Node tools use erasable `.mts` source; browser and package code is bundled from `.ts` or `.mts`. Compiled package imports retain their `.js` extension, while source-only Node imports name the actual `.mts` file. Preparation declarations come from their implementations.
 
-The [ownership inventory](../../tools/typescript-ownership.json) has no authored JavaScript backlog. Its guard inspects tracked and untracked nonignored code, rejects new implementation JavaScript, and rejects production imports from excluded test or evidence locations. It also inspects Astro frontmatter, client scripts and literal script sources. A file's name cannot hide an implementation inside a test directory.
+The [ownership inventory](../../tools/typescript-ownership.json) records the remaining authored JavaScript as exact backlog entries. Its guard inspects tracked and untracked nonignored code, rejects new implementation JavaScript, and rejects production imports from excluded test or evidence locations. It also inspects Astro frontmatter, client scripts and literal script sources. A file's name cannot hide an implementation inside a test directory.
 
 ## Where JavaScript belongs
 
-Existing tests, fixtures and browser/oracle harnesses remain executable JavaScript. Generated browser bundles and package distributions are ignored build products. The inventory names the other exceptions individually:
+Test directories and capture filenames do not exempt authored code. Data fixtures retain their native formats; executable fixture helpers and browser/oracle harnesses are TypeScript. Generated browser bundles and package distributions are ignored build products. The inventory names the remaining JavaScript exceptions individually:
 
-- Seven distant-world evidence helpers, each limited to its named audit or capture task.
 - Five generated data modules, each with its generator and source anchor.
 - Three preserved Cesium modules with their upstream provenance.
 - The Astro and ESLint configuration entry points.
@@ -18,7 +17,9 @@ Those compatibility paths are `src/platform/camera-math.mjs`, `sphere-drag.mjs`,
 
 ## Strict checking
 
-`pnpm typecheck` covers packages and their tooling, renderer, shared platform, preparation, root tools, shell, Astro, ownership enforcement and the typed browser-owner harness. External JSON starts as `unknown` and is checked where its geometry, observations, resources or optional capabilities are consumed. Offline adapters retain the actual types of their imported functions.
+The test and capture migration is in progress. Some renamed TypeScript files still have compiler errors; an `.mts` extension alone does not establish strict ownership. The full test gate must pass before this migration is complete.
+
+`pnpm typecheck` covers packages and their tooling, renderer, shared platform, preparation, root tools, shell, Astro, ownership enforcement and tests, including executable fixtures and browser/capture/oracle scripts. `pnpm typecheck:tests` checks every file discovered by the strict [test configuration](../../tests/tsconfig.json) in sequential compiler groups to bound memory use; native Node execution alone does not typecheck it. External JSON starts as `unknown` and is checked where its geometry, observations, resources or optional capabilities are consumed. Offline adapters retain the actual types of their imported functions.
 
 Node must satisfy `^22.18.0 || >=24.0.0`. Node strips types for native `.mts` execution; the TypeScript gates perform checking. Shell and native-tool configurations reject syntax requiring runtime transformation.
 
@@ -43,8 +44,8 @@ pnpm typecheck
 pnpm build
 pnpm test:packages
 pnpm test:renderer
-node --test --test-concurrency=1 src/platform/*.test.mjs src/navigation/*.test.mjs tools/*.test.mjs
-node --test --test-concurrency=1 site/test/*.test.mjs
+node --test --test-concurrency=1 src/platform/*.test.mts src/navigation/*.test.mts tools/*.test.mts
+node --test --test-concurrency=1 site/test/*.test.mts
 pnpm test:preparation
 ```
 

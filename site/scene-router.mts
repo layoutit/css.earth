@@ -9,11 +9,25 @@ import type { NavigationContent } from './planet-shell-client.mts';
 import type { WorldHandoff } from './prepared-world-navigation.mts';
 type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 type Shell = ReturnType<typeof mountPlanetShell>;
-type WorldContextOwner = ReturnType<typeof applicationWorldContext.createApplicationWorldContext>;
-type WorldContextMount = Awaited<ReturnType<WorldContextOwner['mount']>>;
+/** The router only owns the application world's publication boundary. */
+export interface WorldContextMount {
+  readonly viewport?: MountOptions['viewport'];
+  publish: NonNullable<import('../src/renderers/css/runtime/object-runtime-types.js').WorldContextLayer['publish']>;
+  destroy(): void;
+  createFramePresenter?(): import('../src/renderers/css/navigation/world-frame-presenter.js').WorldFramePresenter;
+  previewSelection?(id?: string | null): void;
+  selectObject?(id: string, frame: NonNullable<ObjectSceneLifecycle['navigation']>['frame']): void;
+  setHighContrastSky?(enabled: boolean): void;
+  setHeliosphereEnabled?(enabled: boolean): void;
+  setAsteroidOrbitsEnabled?(enabled: boolean): void;
+  setAsteroidLabelsEnabled?(enabled: boolean): void;
+  setNavigationInFlight?(enabled: boolean): void;
+  setOverview?(enabled: boolean): void;
+}
+export interface WorldContextOwner { mount(options: { stage: HTMLElement; signal?: AbortSignal }): Promise<WorldContextMount>; }
 interface Request { id: string; cancelledFlight: boolean; controller: AbortController; lifetime: SceneLifetime; url: string; options: NavigationOptions; timing: ReturnType<typeof createNavigationTiming>; }
 interface Session { framePresenter?: ReturnType<NonNullable<WorldContextMount['createFramePresenter']>>; generation: number; lifetime: SceneLifetime; mount: ObjectSceneLifecycle | null; shell: Shell | null; lastCommand: boolean | null; viewUrl: ReturnType<typeof bindViewUrl> | null; request?: Request; url?: string; }
-interface RouterOptions { stage: HTMLElement; objectId: string; loadObject?(id: string): Promise<SceneFactory>; documentTarget?: Document; windowTarget?: BrowserWindow; mountShell?: typeof mountPlanetShell; reportError?(error: unknown): void; navigation?: Navigation | null; objects?: readonly ObjectEntry[]; loadContent?: ReturnType<typeof createNavigationContent>['load'] | null; persistentWorldContext?: WorldContextOwner | null; }
+export interface RouterOptions { stage: HTMLElement; objectId: string; loadObject?(id: string): Promise<SceneFactory>; documentTarget?: Document; windowTarget?: BrowserWindow; mountShell?: typeof mountPlanetShell; reportError?(error: unknown): void; navigation?: Navigation | null; objects?: readonly ObjectEntry[]; loadContent?: ReturnType<typeof createNavigationContent>['load'] | null; persistentWorldContext?: WorldContextOwner | null; }
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { requireSceneLifecycle } from "./scene-contract.mts";
 import { objectAdapter } from "./object-adapter.mts";
@@ -26,7 +40,6 @@ import { createNavigationContent } from './navigation-content.mts';
 import { createNavigationHistory, bindNavigationLinks } from './navigation-history.mts';
 import { formatSharedView } from '../src/renderers/css/dist/navigation.js';
 import { createPreparedWorldNavigation } from './prepared-world-navigation.mts';
-import * as applicationWorldContext from './application-world-context.mts';
 import { solarSystemFocus, watchOverviewSelection } from './overview-selection.mts';
 import { overviewScopeFromUrl } from './navigation-scope.mts';
 import { createNavigationTiming } from './navigation-timing.mts';

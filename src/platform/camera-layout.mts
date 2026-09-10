@@ -1,5 +1,5 @@
 import type { CameraPlan, TrackballMetrics } from "../renderers/css/navigation/types.ts";
-export interface ResponsiveZoomOptions { stage: HTMLElement; cameraElement: HTMLElement; plan: CameraPlan; mobile: boolean; mobilePreviewElement?: HTMLElement | null; framingReferenceZoom?: number; viewport?: import("../renderers/css/navigation/camera-viewport.ts").CameraViewport; }
+export interface ResponsiveZoomOptions { stage: HTMLElement; cameraElement: HTMLElement; plan: Pick<CameraPlan, "logicalBodyDiameter" | "responsiveFit">; mobile: boolean; mobilePreviewElement?: HTMLElement | null; framingReferenceZoom?: number; viewport?: import("../renderers/css/navigation/camera-viewport.ts").CameraViewport; }
 export interface TrackballLayoutOptions { stage: HTMLElement; cameraElement: HTMLElement; logicalBodyDiameter: number; sceneScale?: number; }
 import { preparedCameraZoomScale } from "./prepared-camera-runtime.mts";
 import { BASE_TILE } from "@layoutit/polycss";

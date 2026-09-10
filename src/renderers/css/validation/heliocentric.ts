@@ -8,7 +8,7 @@ import { DEFAULT_LABEL_POLICY } from '@cssearth/engine';
 type Helio = NonNullable<ObjectRuntimeDefinition['heliocentricView']>;
 export function requireHeliocentric(value: unknown, camera: ObjectRuntimeDefinition['camera'], hasSun: boolean, objectId: string): asserts value is Helio {
   const helio = record(value, 'heliocentric view', ['plan', 'bodyMarker', 'systemMarkers', 'labels']);
-  requirePlan(helio.plan); validatePreparedHeliocentricView(helio.plan);
+  requireHeliocentricPlan(helio.plan); validatePreparedHeliocentricView(helio.plan);
   if (helio.plan.bodyId !== objectId || !hasSun || camera.projection?.model !== 'css-perspective-shared-with-sky') fail('heliocentric view needs matching observer, Sun and perspective camera');
   sprite(helio.bodyMarker, true);
   const system = helio.plan.system;
@@ -51,7 +51,7 @@ function labelPolicy(value: unknown, star: boolean): void {
   if (star) { if (pool !== 1) fail('ordinary star captions have one retained slot'); }
   else if (policy.model !== DEFAULT_LABEL_POLICY.model || integer(policy.candidateCapacity, 'caption capacity', 1) < pool) fail('caption policy is incompatible');
 }
-function requirePlan(value: unknown): asserts value is HeliocentricViewPlan {
+export function requireHeliocentricPlan(value: unknown): asserts value is HeliocentricViewPlan {
   const plan = record(value, 'heliocentric plan');
   if (plan.schema !== 'cssearth-prepared-heliocentric-view@1' || plan.runtimeGeometryDerivation !== false) fail('heliocentric plan is incompatible');
   text(plan.bodyId, 'observer id'); const units = record(plan.units, 'heliocentric units');

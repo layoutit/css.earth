@@ -1,0 +1,1 @@
+import{test}from'node:test';import{assertAsteroidPackage}from'../asteroid-contract.mts';test('1996 HW1 retains Shape, Elevation and native raster triangles',()=>assertAsteroidPackage('asteroid-1996-hw1',['shape','elevation'],1010));
