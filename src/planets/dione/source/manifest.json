@@ -33,12 +33,26 @@
       "expectedBytes": 265490551,
       "expectedSha256": "5c5d796c02e3c99fde5dd034e01dd1f25905699a4885843aed445ded955e08b5",
       "capture": {
-        "spacecraftIds": [
-          "cassini",
-          "voyager-1",
-          "voyager-2"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif"
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-1",
+            "missionId": "voyager-1",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif"
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "missionId": "voyager-2",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif"
+          }
+        ]
       }
     },
     {
@@ -71,10 +85,14 @@
       "expectedBytes": 10255303,
       "expectedSha256": "5e885d0e3bac1e1ee36934063d5c9cdf609dc10ad44677cba31bc9e703b674ff",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18434.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18434.jpg"
+          }
+        ]
       }
     },
     {
@@ -109,10 +127,14 @@
       "expectedBytes": 6044025,
       "expectedSha256": "08a2a6141d0095531da511468d4176577dd3ac8ce45c0d154ba5a655a9711617",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_eqradius_g.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_eqradius_g.tif"
+          }
+        ]
       }
     },
     {
@@ -145,10 +167,14 @@
       "expectedBytes": 790785,
       "expectedSha256": "f2a0bf4a4eba63ddfd566231fc02fc7f1f8aeaba0687e437d8669d8844f436ee",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_npradius_g.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_npradius_g.tif"
+          }
+        ]
       }
     },
     {
@@ -181,10 +207,14 @@
       "expectedBytes": 790785,
       "expectedSha256": "416107461ff452d07944f5391d3e9e5bdda8c6d7544379444778e6ec52c72970",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_spradius_g.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_spradius_g.tif"
+          }
+        ]
       }
     },
     {
@@ -544,7 +574,7 @@
           -90
         ],
         "longitudeDirection": "east-positive",
-        "referenceRadiusMeters": 561400.0
+        "referenceRadiusMeters": 561400
       },
       "coverage": "Guide-based one-degree global bins; original missing spectra retained. Absolute subpixel registration unresolved.",
       "lensId": "infrared",
@@ -581,7 +611,7 @@
           -90
         ],
         "longitudeDirection": "east-positive",
-        "referenceRadiusMeters": 561400.0
+        "referenceRadiusMeters": 561400
       },
       "coverage": "Guide-based one-degree global bins; original missing spectra retained. Absolute subpixel registration unresolved."
     }

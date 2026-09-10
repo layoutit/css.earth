@@ -26,10 +26,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532890500R.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532890500R.IMG"
+          }
+        ]
       }
     },
     {
@@ -50,10 +54,14 @@
         "galileo-clear-frames"
       ],
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532890500R.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532890500R.LBL"
+          }
+        ]
       }
     },
     {
@@ -81,10 +89,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420681401R.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420681401R.IMG"
+          }
+        ]
       }
     },
     {
@@ -105,10 +117,14 @@
         "galileo-clear-frames"
       ],
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420681401R.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420681401R.LBL"
+          }
+        ]
       }
     },
     {
@@ -136,10 +152,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420685801R.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420685801R.IMG"
+          }
+        ]
       }
     },
     {
@@ -160,10 +180,14 @@
         "galileo-clear-frames"
       ],
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420685801R.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420685801R.LBL"
+          }
+        ]
       }
     },
     {
@@ -191,10 +215,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/G8/SML_SATS/C0394682801R.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/G8/SML_SATS/C0394682801R.IMG"
+          }
+        ]
       }
     },
     {
@@ -215,10 +243,14 @@
         "galileo-clear-frames"
       ],
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/G8/SML_SATS/C0394682801R.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/G8/SML_SATS/C0394682801R.LBL"
+          }
+        ]
       }
     },
     {
@@ -246,10 +278,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401751800R.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401751800R.IMG"
+          }
+        ]
       }
     },
     {
@@ -270,10 +306,14 @@
         "galileo-clear-frames"
       ],
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401751800R.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401751800R.LBL"
+          }
+        ]
       }
     },
     {

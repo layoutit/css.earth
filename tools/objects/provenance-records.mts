@@ -1,4 +1,5 @@
 import {requireArray, requireRecord, requireString, requireFiniteNumber} from '../source-values.mts';
+import { parseCapture } from '../../src/platform/exploration-catalog.mts';
 
 export {requireRecord as record, requireString as text};
 export const records = (value: unknown) => requireArray(value).map(item => requireRecord(item));
@@ -15,7 +16,8 @@ export function identity(value: unknown) {
 }
 export function sourceEntry(value: unknown) {
   const input = requireRecord(value);
-  return Object.assign({}, input, {path: requireString(input.path), expectedBytes: requireFiniteNumber(input.expectedBytes), expectedSha256: requireString(input.expectedSha256)});
+  return Object.assign({}, input, {path: requireString(input.path), expectedBytes: requireFiniteNumber(input.expectedBytes), expectedSha256: requireString(input.expectedSha256)},
+    input.capture === undefined ? {} : { capture: parseCapture(input.capture) });
 }
 export function provenanceManifest(value: unknown) {
   const input = requireRecord(value);

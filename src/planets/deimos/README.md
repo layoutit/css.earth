@@ -67,3 +67,7 @@ The full source mesh now supplies a 1,600-face native triangle presentation. The
 The facet-science flat preview is explicitly 640 × 320, with nearest, lossless packing for its minimap and temporary projective textures. It makes 204,800 unique-ray queries per lens; ambiguous radial intersections remain missing. This is a display-preview resolution, not a new scientific grid. The complete 196,608-row source tables, native triangle atlas dimensions and original-row atlas indices are unchanged. Native material colors still query the full source surface directly and never sample this reduced flat preview.
 
 </details>
+
+## Catalogue attribution
+
+The Stooke mosaic retains separate capture statements for its collective Viking-orbiter credit and its Mars Reconnaissance Orbiter contribution. The Viking identities remain unresolved; MRO remains an explicit spacecraft/mission pair. Membership in a Viking mission does not attribute the image to a lander. See the [shared catalogue contract](../../../docs/architecture/exploration-catalog.md) and this body’s [source manifest](source/manifest.json). Dataset bytes and rendering are unchanged by this metadata migration.

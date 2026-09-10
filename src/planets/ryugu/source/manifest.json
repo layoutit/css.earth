@@ -42,10 +42,14 @@
       "expectedBytes": 3150352,
       "expectedSha256": "da62f1d56deab22343b301d7972a1a8a14867c1714c626411617698a78e32595",
       "capture": {
-        "spacecraftIds": [
-          "hayabusa2"
-        ],
-        "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hayabusa2",
+            "missionId": "hayabusa2",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds"
+          }
+        ]
       }
     },
     {
@@ -74,10 +78,14 @@
       "expectedBytes": 12965947,
       "expectedSha256": "b01f45512c7028865cc656712d8982f837a29bcbea07df6460f4d7acd0c1c969",
       "capture": {
-        "spacecraftIds": [
-          "hayabusa2"
-        ],
-        "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/hyb2_onc_20180710_BOX-A_l3em_v06.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hayabusa2",
+            "missionId": "hayabusa2",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/hyb2_onc_20180710_BOX-A_l3em_v06.tif"
+          }
+        ]
       }
     },
     {
@@ -106,10 +114,14 @@
       "expectedBytes": 9557231,
       "expectedSha256": "984780a02a343e13873e76030b56dd9f34fbb476baf983f52af6ac12b4741974",
       "capture": {
-        "spacecraftIds": [
-          "hayabusa2"
-        ],
-        "evidence": "https://doi.org/10.7910/DVN/WW3IH0"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hayabusa2",
+            "missionId": "hayabusa2",
+            "evidence": "https://doi.org/10.7910/DVN/WW3IH0"
+          }
+        ]
       }
     },
     {

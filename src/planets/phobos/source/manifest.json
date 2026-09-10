@@ -39,10 +39,14 @@
       "falseColor": false,
       "coverage": "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain.",
       "capture": {
-        "spacecraftIds": [
-          "viking"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/mosaic/Phobos_Viking_Mosaic_40ppd_DLRcontrol.tif"
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Viking orbiters",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Phobos_Viking_Mosaic_40ppd_DLRcontrol.tif",
+            "reason": "The preserved source credits Viking collectively and does not identify which individual orbiter supplied these observations."
+          }
+        ]
       }
     },
     {

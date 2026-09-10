@@ -1,11 +1,14 @@
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import { OBJECTS } from '../site/objects.mts';
 import { validateObjectProvenance } from '../src/platform/object-provenance.mts';
 import type { ProvenanceDocument } from '../src/platform/object-provenance.mts';
 import { hasErrorCode } from './source-values.mts';
 import { prepareObjectProvenance } from './objects/provenance.mts';
+import { migrateProvenanceV1 } from './objects/migrate-provenance-v1.mts';
+import { prepareSpacecraft } from './prepare-spacecraft.mts';
+import { writePreparedSet } from './write-prepared-set.mts';
 
 // A fresh run stays a fresh run when its pinned lineage still matches. A changed
 // source/recipe/output/binding requires a new record and loses that run claim.
@@ -22,16 +25,27 @@ export async function recoverObjectProvenance(ids: readonly string[] | null = nu
   const selected = OBJECTS.filter(object => !ids || ids.includes(object.id));
   if (ids && selected.length !== new Set(ids).size) throw new TypeError('Unknown object requested for provenance.');
   const results = [];
+  const outputs: { path: string; text: string }[] = [];
+  const documents = new Map<string, ProvenanceDocument>();
   for (const object of selected) {
     const document = validateObjectProvenance(await prepareObjectProvenance({ objectDirectory: resolve(root, 'src/planets', object.id),
       publicDirectory: resolve(root, 'public/scenes', object.id), basis: 'recovered', verify, write: false }));
     const path = resolve(root, 'src/planets', object.id, 'prepared/provenance.json');
-    const existing = await readFile(path, 'utf8').then(text => validateObjectProvenance(JSON.parse(text))).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
-    if (!existing || provenanceIdentity(existing) !== provenanceIdentity(document))
-      await writeFile(path, JSON.stringify(document, null, 2) + '\n');
+    const existing = await readFile(path, 'utf8').then(text => {
+      const raw: unknown = JSON.parse(text);
+      const migrated = migrateProvenanceV1(raw);
+      return { document: migrated, legacy: text.includes('"cssearth-object-provenance@1"') };
+    }).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
+    const retained = existing && !existing.legacy && provenanceIdentity(existing.document) === provenanceIdentity(document) ? existing.document : document;
+    documents.set(object.id, retained);
+    outputs.push({ path, text: JSON.stringify(retained, null, 2) + '\n' });
     results.push({ id: object.id, products: document.products.length, sources: document.sources.length,
       unresolved: document.coverage.unresolved });
   }
+  // Invalid identities, capture pairs, lens IDs or artwork leave the entire
+  // previous prepared set in place. Consumers also verify the closure pins.
+  const catalogue = await prepareSpacecraft({ root, publish: false, provenance: documents });
+  await writePreparedSet([...outputs, catalogue.output]);
   return results;
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

@@ -70,10 +70,14 @@
       "expectedBytes": 725269,
       "expectedSha256": "3362a9e73ddf7b4d11e9a4a2076e9c181d1c3e6e70a2ff71f742e27b6a96e9c9",
       "capture": {
-        "spacecraftIds": [
-          "rosetta"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/2867steins/steins_cylindrical_mosaic.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "rosetta",
+            "missionId": "rosetta",
+            "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/2867steins/steins_cylindrical_mosaic.jpg"
+          }
+        ]
       }
     },
     {
