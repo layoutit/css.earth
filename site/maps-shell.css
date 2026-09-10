@@ -394,6 +394,11 @@
   row-gap: 2px;
   padding: 0 var(--explorer-card-padding-inline-end) 0 var(--explorer-card-padding-inline-start);
 }
+.planet-object-tabs {
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
 :is(.planet-object-tabs, .planet-card-tabs) > [role="tab"] {
   display: inline-flex;
   justify-self: start;

@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-asteroid-source-comparison@1",
+  "id": "lyyli",
+  "comparison": "Left: original source; right: actual prepared terrain. Each is normalized to its own maximum radius by the established orthographic renderer; these are shape-inspection views, not pixel parity with the browser or a matched physical framing.",
+  "geometrySource": "Original pinned counted triangle mesh versus prepared/terrain.json; no simplification or geometry preparation is run by this helper",
+  "sourceIdentity": {
+    "path": "shape/model-2012.txt",
+    "sha256": "5e9053bcc76b8f3f71cffec390e72d1b48e0043d8f9208949cd84b623e5dbf48",
+    "bytes": 46257,
+    "vertices": 572,
+    "faces": 1140,
+    "metersPerUnit": 21858.612161651778
+  },
+  "preparedIdentity": {
+    "path": "src/planets/lyyli/prepared/terrain.json",
+    "sha256": "457ef52b56c5e377d6705607f08d4b4e32b994dcea39e84dc644ea7950239906",
+    "bytes": 371455,
+    "faces": 800,
+    "metersToLogicalUnits": 0.01696165191740413
+  },
+  "mapIdentity": {
+    "role": "Preparation intermediate pinned by prepared/surfaces.json; not a runtime request",
+    "path": "output/mars-crossing-population/context/lyyli/lyyli-shape-map.webp",
+    "sha256": "01b64e009e6b06778a9b841c95bf806bf8f0d983b54b89dde0f80a887a05532b",
+    "bytes": 23736
+  },
+  "configurationSha256": "6b020b1e9c40d4bf9c92650ea29ddac335fe8bc9bf3e51472acce4f7176eb64b",
+  "sourceFirstVertexMeters": [
+    4630.200521141888,
+    4059.297288703867,
+    12041.188105652629
+  ],
+  "sourceFirstTriangle": [
+    0,
+    1,
+    2
+  ],
+  "equatorialSamples": [
+    [
+      0,
+      15731.246704821415
+    ],
+    [
+      90,
+      12020.323958647361
+    ],
+    [
+      180,
+      16890.559031138073
+    ],
+    [
+      270,
+      13949.061492209667
+    ]
+  ],
+  "poleSamples": [
+    10908.71607127348,
+    11637.635016251947
+  ],
+  "images": [
+    {
+      "filename": "source-result-0-35.png",
+      "longitudeDegrees": 0,
+      "latitudeDegrees": 35,
+      "sha256": "57d83551cab456f17d42a77ba8c4e5366a846310f7707ff506dd9fca6982c5d4",
+      "bytes": 101992
+    },
+    {
+      "filename": "source-result-180-0.png",
+      "longitudeDegrees": 180,
+      "latitudeDegrees": 0,
+      "sha256": "230d16a5b6c0931ccff113a75d6d90b014ada5a2cc1e95db665a5589396539fe",
+      "bytes": 90887
+    },
+    {
+      "filename": "source-result-0-90.png",
+      "longitudeDegrees": 0,
+      "latitudeDegrees": 90,
+      "sha256": "e482d657e437839ea441eecbfd799e635c5e28203d03ff2d00d392cb9aa4f04b",
+      "bytes": 124253
+    },
+    {
+      "filename": "source-result-0--90.png",
+      "longitudeDegrees": 0,
+      "latitudeDegrees": -90,
+      "sha256": "e8a8f01fe6174afa614f6c519bb59d62e319f52a9b37d45ea238142b0eeb3ff2",
+      "bytes": 124850
+    }
+  ],
+  "elapsedSeconds": 2.0793148749999997
+}

@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-approximate-ellipsoid@1",
+  "id": "bienor",
+  "horizonsCommand": "54598;",
+  "source": {
+    "url": "https://doi.org/10.1051/0004-6361/202450833",
+    "papers": [
+      "https://arxiv.org/abs/2405.17235"
+    ],
+    "credit": "Rizos et al. (2024), Astronomy & Astrophysics 689, A82; pole solution from Fernández-Valenzuela et al. (2017), validated by the 2024 study.",
+    "retrieved": "2026-09-09"
+  },
+  "constraints": {
+    "kind": "approximate-ellipsoid",
+    "fullAxesKm": [
+      254,
+      110,
+      90
+    ],
+    "semiAxesKm": [
+      127,
+      55,
+      45
+    ],
+    "fullAxesUncertaintyKm": [
+      10,
+      8,
+      8
+    ],
+    "referenceRadiusKm": 67.99228574542066,
+    "axisConvention": "Full axes are halved exactly. +Z is the adopted pole; +X is the arbitrary display meridian.",
+    "qualification": "Smooth triaxial ellipsoid fitted to stellar-occultation chords and rotational light curves, with semiaxes 127 ± 5, 55 ± 4 and 45 ± 4 km (Rizos et al. 2024). This is the study's global reference shape, not resolved terrain. It cannot explain all observed light-curve asymmetry; the paper also explores albedo, irregular-shape and satellite alternatives without uniquely resolving them.",
+    "scale": "The reference radius is the geometric mean of the approximation semiaxes. It is a rendering scale, not an independent measured mean radius or convex-model volume."
+  },
+  "approximation": {
+    "semiAxesKm": [
+      127,
+      55,
+      45
+    ],
+    "assumptions": [
+      "Smooth triaxial ellipsoid fitted to stellar-occultation chords and rotational light curves, with semiaxes 127 ± 5, 55 ± 4 and 45 ± 4 km (Rizos et al. 2024). This is the study's global reference shape, not resolved terrain. It cannot explain all observed light-curve asymmetry; the paper also explores albedo, irregular-shape and satellite alternatives without uniquely resolving them.",
+      "The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3°. The 2024 study validates this pole over 22 years and uses its refined 9.1736 h period to compute rotational phase. Ecliptic J2000 coordinates are converted to ICRF using the established preparation recipe. The displayed longitude origin and absolute rotational phase are arbitrary."
+    ],
+    "qualification": "Observation-constrained ellipsoid; no invented local terrain or albedo."
+  },
+  "sampling": {
+    "stepDegrees": 5,
+    "longitudeDirection": "east-positive",
+    "radiusUnit": "km",
+    "formula": "r = 1 / sqrt((cos(lat)*cos(lon)/a)^2 + (cos(lat)*sin(lon)/b)^2 + (sin(lat)/c)^2)"
+  },
+  "spin": {
+    "periodHours": 9.1736,
+    "periodText": "9.1736 ± 0.0002 h",
+    "poleEclipticDegrees": [
+      35,
+      50
+    ],
+    "poleIcrfRaDecDegrees": [
+      3.645774612083301,
+      58.155984898781774
+    ],
+    "eclipticToIcrfObliquityDegrees": 23.439291111,
+    "meridianDegrees": 0,
+    "meaning": "The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3°. The 2024 study validates this pole over 22 years and uses its refined 9.1736 h period to compute rotational phase. Ecliptic J2000 coordinates are converted to ICRF using the established preparation recipe. The displayed longitude origin and absolute rotational phase are arbitrary."
+  },
+  "unresolved": [
+    "The smooth ellipsoid does not reproduce all observed light-curve asymmetry. The paper's irregular, contact-binary, albedo and satellite scenarios are alternatives rather than uniquely measured geometry.",
+    "No ring or satellite is included because the selected occultations do not establish their geometry."
+  ]
+}

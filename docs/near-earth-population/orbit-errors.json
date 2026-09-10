@@ -1,0 +1,62 @@
+[
+  {
+    "id": "ivar",
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271627%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "epochsJdTdb": [
+      2461256.5,
+      2461286.5,
+      2461316.5
+    ],
+    "errorsKm": [
+      241.95687731382975,
+      2.913358032109909e-7,
+      325.7621739257905
+    ],
+    "regressionGuardKm": 375
+  },
+  {
+    "id": "toro",
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271685%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "epochsJdTdb": [
+      2461256.5,
+      2461286.5,
+      2461316.5
+    ],
+    "errorsKm": [
+      168.12629958060614,
+      2.6162043014287107e-7,
+      111.79253286921993
+    ],
+    "regressionGuardKm": 194
+  },
+  {
+    "id": "cerberus",
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271865%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "epochsJdTdb": [
+      2461256.5,
+      2461286.5,
+      2461316.5
+    ],
+    "errorsKm": [
+      196.02452060228254,
+      2.6624751665004546e-7,
+      295.9288324103787
+    ],
+    "regressionGuardKm": 341
+  },
+  {
+    "id": "tantalus",
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%272102%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "epochsJdTdb": [
+      2461256.5,
+      2461286.5,
+      2461316.5
+    ],
+    "errorsKm": [
+      185.74781960136772,
+      1.1691715439018022e-7,
+      188.17017885971245
+    ],
+    "regressionGuardKm": 217
+  }
+]

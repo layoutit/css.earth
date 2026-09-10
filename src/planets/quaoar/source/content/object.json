@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "quaoar",
+  "displayName": "Quaoar",
+  "panel": {
+    "introduction": "This large Kuiper-belt object has two known rings. Its oblate shape is fitted to stellar occultations with the ring plane as a pole constraint; surface detail is unresolved.",
+    "facts": [
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Published occultation model"
+      },
+      {
+        "id": "dimensions",
+        "label": "Model extents",
+        "value": "1132.2 × 1132.2 × 1022.4 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation",
+        "value": "Unresolved; display orientation is illustrative"
+      },
+      {
+        "id": "class",
+        "label": "Population",
+        "value": "Trans-Neptunian object"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "uncertainty",
+        "label": "Shape interpretation",
+        "value": "Published 3D oblate fit: equatorial semiaxes 566.1 km and polar semiaxis 511.2 km. The fit assumes the body pole aligns with the rings. A competing triaxial interpretation is unresolved."
+      },
+      {
+        "id": "rings",
+        "label": "Ring interpretation",
+        "value": "Circular schematic at measured radius. Q1R uses the 76.4 km Gemini chord width; true width varies with azimuth and its dense arc is not reconstructed. Uniform gray and display alpha are illustrative, not measured reflectance or optical depth. Q2R radius 2520 km, typical width 10 km."
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Published 3D oblate fit: equatorial semiaxes 566.1 km and polar semiaxis 511.2 km. The fit assumes the body pole aligns with the rings. A competing triaxial interpretation is unresolved. Pole RA 259.7°, DEC 53.4° inherits the measured ring-plane prior; arbitrary meridian. The 8.8394 h and 17.6788 h period interpretations remain model-dependent and no sidereal spin is installed. The grid marks unmapped terrain.",
+        "title": "Published occultation shape model",
+        "detail": "Source shape · unmapped surface grid",
+        "thumbnail": "/scenes/quaoar/quaoar-model-thumbnail.webp",
+        "surface": "quaoar-model-surface@2x.webp",
+        "poles": "quaoar-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2607.06450"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "Margoti et al. (2026), accepted ApJ; 36 stellar-occultation campaigns",
+      "href": "https://arxiv.org/abs/2607.06450"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published data and interpretation",
+      "href": "https://zenodo.org/records/21185812"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published data and interpretation",
+      "href": "https://doi.org/10.1051/0004-6361/202346365"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2607.06450",
+      "credit": "Margoti et al. (2026), accepted ApJ; 36 stellar-occultation campaigns"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Margoti et al. (2026), accepted ApJ; 36 stellar-occultation campaigns"
+    }
+  }
+}

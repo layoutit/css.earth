@@ -20,11 +20,11 @@ const majorBodyLabelStyles = OBJECTS
   .map(({ id }) => `.prepared-world-context [data-context-label="${id}"] { text-transform: uppercase; }`)
   .join('\n');
 const minorBodyOrbitStyles = OBJECTS
-  .filter(({ classification }) => ['satellite', 'dwarf-planet', 'asteroid', 'comet'].includes(classification))
+  .filter(({ classification }) => ['satellite', 'dwarf-planet', 'asteroid', 'trans-neptunian', 'comet'].includes(classification))
   .map(({ id, classification }) => `:where(.prepared-world-context) [data-context-group="${id}"] { --context-base-line-opacity: ${classification === 'asteroid' ? .35 : .5}; }`)
   .join('\n');
 const minorBodyLabelStyles = OBJECTS
-  .filter(({ classification }) => classification === 'dwarf-planet' || classification === 'comet')
+  .filter(({ classification }) => classification === 'dwarf-planet' || classification === 'comet' || classification === 'trans-neptunian')
   .map(({ id }) => `:where(.prepared-world-context) [data-context-group="${id}"] { --context-base-label-opacity: .5; }`)
   .join('\n');
 ---

@@ -1,0 +1,10 @@
+{
+  "id": "kemi",
+  "passed": true,
+  "queryCount": 828,
+  "sourceSha256": "0be47f09f2798dd4aa3bc7288dac1168de6bfc905e516b02c081e7bb2b151490",
+  "maxPointDifferenceMeters": 6.11877093433693e-11,
+  "maxValueDifferenceKilometers": 1.2434497875801753e-14,
+  "maxDistanceDifferenceMeters": 2.2646463617149895e-11,
+  "qualification": "Product surface sampler compared to independently computed full-source planar/edge projection. Includes all retained face centroids, six source extrema and all decoded-atlas interior/bleed coordinate probes. Exact shared-edge normal identity is not asserted."
+}

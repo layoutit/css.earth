@@ -1,0 +1,127 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "arrokoth",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Arrokoth",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "7a05d1f3799ab6bcc918c5414baa7e49944767c2be3ce22d884c842ec0617220"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "e67c96c34f4bfd9f028373128ff05a3350e751c4bdb76932e35572e44207f6ef"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "e58b93ac7ee5768044b3fc78455aa5c0a393e688533aea3fa890e8a2e49c786a"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "e7dc0403db56018a9aefb0b02a9594a76c8b3b7d79f31fe04ac4241e9ca0b0dd"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "2b21df83f7c97380152f0f298693912336f38cc1bf67adfa31b2e4816f654285"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "7a8f48363057c21782ce822396c1c75f66e795b981dfb2ee8e55f25dd36489ea"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 9.948
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "albedo",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/arrokoth-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ddbcd7f51e1c91c669ac8289fd0aa6f3e2e20827779ecd3ebbfa9d163646e6c6"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2825689377771.6777,
+        -5381877859225.271,
+        -2128517993934.0159
+      ],
+      "presentationToReference": [
+        0.43892614272844166,
+        -2.7755575615628914e-17,
+        0.8985231445152271,
+        -0.8243788674467161,
+        0.3977771559319137,
+        0.4027068625265626,
+        -0.3574119809642669,
+        -0.9174820620691817,
+        0.17459479271868478
+      ],
+      "orbitUpReference": [
+        2.7755575615628914e-17,
+        -0.3977771559319137,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 43.25217391304348,
+      "bodyRadiusM": 9948
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "30c5a7b3770f0cf052ee8486b371b3d06b8e0297525fde50757a65118ad3e940"
+  }
+}

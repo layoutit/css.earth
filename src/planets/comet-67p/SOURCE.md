@@ -65,4 +65,8 @@ are retained under `source/geology/`, `source/manifest.json` and
 `source/preparation/`. See `docs/comets/67P-GEOLOGY.md` for the source survey,
 projection checks, symbol rules and qualification evidence.
 
-The OSIRIS mosaic now includes corrected September 13 and 20, 2014 orange-filter GEO products and their exact L4 quality companions. They supplement the four August photographs inside the same view. SHAP7 identity, all-pixel companion equality, disjoint camera holdouts, source-distance and visibility gates are unchanged. The added images supply about 1.76% of the displayed area under the existing lowest-emission selection; overall accepted coverage rises modestly from 56.04% to 56.25%. Different illumination and residual seams remain. See [the surface-imagery qualification](../../../docs/comets/SURFACE-IMAGERY.md).
+The earlier six-frame OSIRIS mosaic included corrected September 13 and 20, 2014 orange-filter GEO products and their exact L4 quality companions. They supplemented the four August photographs inside the same view. SHAP7 identity, all-pixel companion equality, disjoint camera holdouts, source-distance and visibility gates are unchanged. The added images supply about 1.76% of the displayed area under the existing lowest-emission selection; overall accepted coverage rises modestly from 56.04% to 56.25%. Different illumination and residual seams remain. See [the surface-imagery qualification](../../../docs/comets/SURFACE-IMAGERY.md).
+
+## Southern photographic coverage
+
+The current OSIRIS mosaic uses four August 2014 observations and four October–November 2015 observations. The [southern coverage record](../../../docs/comets/67P-SOUTHERN-OSIRIS.md) documents the selected archive pairs, solar-distance calibration, approximate phase normalization, stricter brightness-fit angles and unchanged geometry limits. It supersedes the earlier six-frame image selection while preserving one OSIRIS dataset.

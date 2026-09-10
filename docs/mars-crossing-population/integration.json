@@ -1,0 +1,57 @@
+{
+  "main": "bd265cf3a091c4ef17e9be76dfeb23410364884f",
+  "registryObjects": 413,
+  "preservedMarkers": 408,
+  "minimapTests": {
+    "passed": 5,
+    "failed": 0
+  },
+  "newBodiesAndBothIncomingCometsInSunContext": true,
+  "bodies": [
+    {
+      "id": "aethra",
+      "faces": 800,
+      "estimatedErrorMeters": 147.59481811523438,
+      "errorAllowanceMeters": 444.7,
+      "framingScale": 0.6349983720553535,
+      "objectSha256": "cc4c8d570f90172497b3a448aca410aa12226c08beb3c53b3a87fd040276f129",
+      "pageMetadataSha256": "25a80fd942d07c5d2077a375ee4a2350d9b4c4c287ba1bc4717496243200a3c1"
+    },
+    {
+      "id": "lyyli",
+      "faces": 800,
+      "estimatedErrorMeters": 35.6572151184082,
+      "errorAllowanceMeters": 271.2,
+      "framingScale": 0.6787133818114748,
+      "objectSha256": "61db08407a1bb722a262b883a718aa71bb1123c499f35b9300824132526584ce",
+      "pageMetadataSha256": "5e9e5702bcd6752c812d3c650ef8bcfb22d0e61c55cb11bb177c2750b18875a9"
+    },
+    {
+      "id": "hela",
+      "faces": 800,
+      "estimatedErrorMeters": 68.3520278930664,
+      "errorAllowanceMeters": 133.9,
+      "framingScale": 0.6998281519372953,
+      "objectSha256": "85042503d0accb435e93fc6b06a34f4e584d72ac80f91ecde185e8c786355036",
+      "pageMetadataSha256": "0e8975a2208015055bfed29cb97540e3964ae680dbe5edb90fc6598ffb85b8af"
+    },
+    {
+      "id": "kemi",
+      "faces": 800,
+      "estimatedErrorMeters": 70.44512176513672,
+      "errorAllowanceMeters": 179.8,
+      "framingScale": 0.7297053896332341,
+      "objectSha256": "b5f74b9e381f1f14fd946aae3f22478f2e40c88408c2196715cc51ac59efa23c",
+      "pageMetadataSha256": "c816d86e2fd9bde88bab20b8f90dad436161c6e895b41783729cd44efe48cce5"
+    },
+    {
+      "id": "taurinensis",
+      "faces": 800,
+      "estimatedErrorMeters": 57.11751937866211,
+      "errorAllowanceMeters": 208.70000000000002,
+      "framingScale": 0.6110117459714505,
+      "objectSha256": "960147e9b417477ac2696d79e7e77ab21ddd7c9318115dd21e3ba5b16a3991a4",
+      "pageMetadataSha256": "c282f21d969d0c1e0e965abdb3d22d4af5a76eb681508a51a857d62dadfb57c2"
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+# Arrokoth: credits
+
+Porter (2024), New Horizons Arrokoth shape model; NASA PDS: https://doi.org/10.26007/97r3-1e19. Numerical source constraints are attributed; papers are not relicensed. Prepared representation: cssEarth MIT. The grid is an authored missing-data indication. ESO/S. Brunier panorama CC BY4.0; Inter SIL OFL1.1; HYG source license in source/stars.

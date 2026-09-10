@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-asteroid-source-fit@1",
+  "id": "aethra",
+  "method": "8192 deterministic area-stratified surface samples in each direction, exact nearest point over target triangles with AABB pruning; sampled distances, not exhaustive Hausdorff bound",
+  "units": "meters",
+  "geometrySource": "Original pinned counted triangle mesh versus prepared/terrain.json; no simplification or geometry preparation is run by this helper",
+  "sourceIdentity": {
+    "path": "shape/model-161.txt",
+    "sha256": "c05291e6311058380b5fa35a033df4579bbfc67922699d57fba7c5898c8d5e41",
+    "bytes": 81898,
+    "vertices": 1012,
+    "faces": 2020,
+    "metersPerUnit": 35842.640797916
+  },
+  "preparedIdentity": {
+    "path": "src/planets/aethra/prepared/terrain.json",
+    "sha256": "c718d4a6d4bc1788d6ee25d65a899c120202da42ba5be0d08d503a71848e83c8",
+    "bytes": 372402,
+    "faces": 800,
+    "logicalUnitsToMeters": 96.67391304347827
+  },
+  "configurationSha256": "b221e75d6566e40d033b9a410a015aae90bca8289a7f0872805ce327654b2479",
+  "sourceToOutput": {
+    "count": 8192,
+    "mean": 8.338324392671586,
+    "p95": 48.645216537783895,
+    "p99": 75.67086600451663,
+    "maximum": 146.23988293680992
+  },
+  "outputToSource": {
+    "count": 8192,
+    "mean": 8.364144018294809,
+    "p95": 47.814598451370216,
+    "p99": 75.0311128182399,
+    "maximum": 175.32061108086256
+  },
+  "radialDiscontinuity": {
+    "multipleIntersectionDirections": 0,
+    "sampledDirections": 8192
+  },
+  "elapsedSeconds": 0.2219925
+}

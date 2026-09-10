@@ -56,3 +56,5 @@ same nucleus scene. These use the existing dataset selector and shared legend.
 [Lightcurve-based additions](LIGHTCURVE-SHAPES.md) records the three approximations, their source limitations and delivery checks.
 
 [Encke and LINEAR](ENCKE-LINEAR.md) records the two radar-constrained approximations, their dimension conventions and delivery evidence.
+
+[67P southern OSIRIS coverage](67P-SOUTHERN-OSIRIS.md) extends the existing photographic view from about 56% to 71% of the unchanged displayed mesh.

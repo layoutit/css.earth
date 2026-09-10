@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-annular-source-constraints@1",
+  "id": "chariklo",
+  "source": "https://arxiv.org/html/2510.06366v1#S0.T1",
+  "sourcePublication": "Santos-Sanz et al., arXiv:2510.06366v1 (2025), Table 1",
+  "observedOn": "2022-10-18",
+  "filter": "JWST NIRCam F150W2",
+  "sample": "First contact",
+  "poleIcrfDegrees": [151.03, 41.81],
+  "poleSource": "https://doi.org/10.1051/0004-6361/202141543",
+  "assumptions": [
+    "Concentric circular rings in the body equator; radius and width are held fixed at one measured contact instead of inventing unsampled azimuthal structure.",
+    "Use the normal opacity numerically as an explicitly schematic constant display alpha; it is occultation transmission evidence, not reflected-light brightness or a complete view-dependent optical model.",
+    "Neutral gray is display content; no spatially resolved ring-color texture is available.",
+    "The 2021 equivalent width of C2R (0.117 km) is opacity times radial width, and MUST NOT be used as a geometric ring width."
+  ],
+  "rings": [
+    {
+      "id": "c1r",
+      "radiusKm": 385.9,
+      "radiusUncertaintyKm": 0.1,
+      "radialWidthKm": 7.04,
+      "radialWidthUncertaintyKm": 0.07,
+      "innerRadiusKm": 382.38,
+      "outerRadiusKm": 389.42,
+      "normalOpacity": 0.425,
+      "normalOpacityUncertainty": 0.008,
+      "displayValue": 160,
+      "displayOpacity": 0.425
+    },
+    {
+      "id": "c2r",
+      "radiusKm": 400.3,
+      "radiusUncertaintyKm": 0.1,
+      "radialWidthKm": 1.009,
+      "radialWidthUncertaintyKm": {"minus": 0.386, "plus": 1.492},
+      "innerRadiusKm": 399.7955,
+      "outerRadiusKm": 400.8045,
+      "normalOpacity": 0.048,
+      "normalOpacityUncertainty": {"minus": 0.033, "plus": 0.117},
+      "displayValue": 160,
+      "displayOpacity": 0.048
+    }
+  ]
+}
