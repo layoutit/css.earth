@@ -1,0 +1,115 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "comet-c1995-o1",
+  "displayName": "Hale–Bopp",
+  "panel": {
+    "introduction": "Hale–Bopp remained visible to the naked eye for about 18 months in 1996 and 1997. Its unusually large nucleus helped make it one of the most memorable comets of the twentieth century.",
+    "facts": [
+      {
+        "id": "diameter",
+        "label": "Catalog diameter",
+        "value": "≈60 km"
+      },
+      {
+        "id": "perihelion",
+        "label": "Closest to Sun",
+        "value": "0.925 AU"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Illustrative nucleus"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Illustrative nucleus",
+        "detail": "Celestia",
+        "title": "C/1995 O1 Hale–Bopp",
+        "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+        "thumbnail": "/scenes/comet-c1995-o1/comet-c1995-o1-model-thumbnail.webp",
+        "surface": "comet-c1995-o1-model-surface@2x.webp",
+        "poles": "comet-c1995-o1-model-poles@2x.webp",
+        "source": {
+          "id": "celestia-mesh",
+          "path": "../manifest.json",
+          "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+        },
+        "facts": [
+          {
+            "id": "diameter",
+            "label": "Catalog diameter",
+            "value": "≈60 km"
+          },
+          {
+            "id": "perihelion",
+            "label": "Closest to Sun",
+            "value": "0.925 AU"
+          }
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Celestia",
+      "role": "surface",
+      "description": "Catalog entry and estimated scale",
+      "href": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+    },
+    {
+      "label": "JPL Horizons",
+      "role": "observations",
+      "description": "Position at 3 September 2026",
+      "href": "https://ssd.jpl.nasa.gov/horizons/"
+    },
+    {
+      "label": "About this comet",
+      "role": "observations",
+      "description": "Observations and history",
+      "href": "https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/",
+      "credit": "Sources listed in reference/source-record.json"
+    },
+    "physical": {
+      "path": "../shape/model.json",
+      "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara"
+    }
+  }
+}
