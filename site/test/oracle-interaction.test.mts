@@ -8,7 +8,10 @@ import { compareTrajectories, bindInputReceipts, verifyWheelReceipts, interrupti
   assertMotionOnlyReference, readBrowserRun } from
   "../../tests/objects/oracle/mars/google-earth-pro/interaction-suite-analysis.mts";
 
-const pose = (time, degrees) => {
+import type { MotionFrame } from '../../tests/objects/oracle/mars/google-earth-pro/interaction-suite-analysis.mts';
+import { object, array, finite, text } from '../../tests/objects/oracle/mars/google-earth-pro/oracle-values.mts';
+
+const pose = (time: number, degrees: number): MotionFrame => {
   const angle = degrees * Math.PI / 180;
   return { time, rotation: [[Math.cos(angle), -Math.sin(angle), 0],
     [Math.sin(angle), Math.cos(angle), 0], [0, 0, 1]] };
@@ -20,7 +23,7 @@ test("oracle comparison never borrows a future pose and retains the slower tail"
   assert.deepEqual(result.rows.map(r => r.time), [10, 15, 20, 30]);
   assert.equal(result.rows[2].candidateAngleDegrees, 0);
   assert.equal(result.rows[2].candidateAgeMilliseconds, 5);
-  assert.equal(result.rows.at(-1).referenceFinalHeld, true);
+  assert.equal(result.rows.at(-1)!.referenceFinalHeld, true);
   assert.ok(Math.abs(result.finalRotationErrorDegrees - 10) < 1e-10);
 });
 
@@ -28,7 +31,8 @@ test("a wheel comparison rejects a lost held button and validates the delivered 
   const event = { id: "wheel", kind: "wheel", qtWheelTarget: "RenderWidget", qtButtons: 1,
     qtX: 200, qtY: 300, qtDelta: 120 };
   const report = { gesture: [{ kind: "down" }, event],
-    inputs: [{ event: "native-input-accepted", id: "wheel", acceptedMonotonicSeconds: 10 }] };
+    inputs: [{ event: "native-input-accepted", id: "wheel", acceptedMonotonicSeconds: 10 },
+      { event: "native-input-posted", id: "wheel", postedMonotonicSeconds: 10.01 }] };
   const delivered = { event: "qt-wheel-delivered", id: "wheel", before: 10.001, accepted: true,
     target: "RenderWidget", buttons: 1, x: 200, y: 300, delta: 120 };
   assert.equal(verifyWheelReceipts(report, [delivered]).length, 1);
@@ -61,7 +65,7 @@ test("an interruption interval ends at each renderer's next actual input receipt
     { id: "press", kind: "down", time: 150 }], frames: [pose(101, 0), pose(149, 2)] };
   const browser = { inputs: [{ type: "wheel", time: 120 }, { type: "pointerdown", time: 180 }],
     frames: [pose(121, 0), pose(170, 5), pose(181, 30)] };
-  assert.ok(Math.abs(interruptionObservations(native, browser)[0].browserRotationAfterInputDegrees - 5) < 1e-9);
+  assert.ok(Math.abs(interruptionObservations(native, browser)[0].browserRotationAfterInputDegrees! - 5) < 1e-9);
 });
 
 test("oracle registration rejects an independent CSS translation of the scene", async () => {
@@ -91,7 +95,7 @@ test("natural motion reports retain the observed clock and reject hidden readbac
   t.after(() => rm(directory, { recursive: true, force: true }));
   const path = join(directory, "report.json");
   const scene = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
-  const sample = timestamp => ({ timestamp, pose: { scene }, zoom: 1,
+  const sample = (timestamp: number) => ({ timestamp, pose: { scene }, zoom: 1,
     interaction: { activeMode: "idle", activeMotionCount: 0, wheelZoom: { active: false } } });
   const report = { timingMode: "motion-only", readbackDuringGesture: false,
     stopObservation: { elapsedMilliseconds: 550 }, failures: [], finalNodes: 12,
@@ -99,7 +103,7 @@ test("natural motion reports retain the observed clock and reject hidden readbac
     epoch: 1000, zoom: 1, clock: { timeOrigin: 500 },
     inputs: [{ type: "pointerup", receivedAt: 525 }],
     motionSamples: [sample(1010), sample(1030)] };
-  const read = async patch => {
+  const read = async (patch: Record<string, unknown>) => {
     await writeFile(path, JSON.stringify({ ...report, ...patch }));
     return readBrowserRun(path);
   };
@@ -121,23 +125,39 @@ test("input pairing retains the final consumed release position even without a t
   const records = [3, 4].map(length => ({ t:100 + (length - 1) * .02 + .01,
     clock:1 + (length - 1) * .02 + .01, point:[length === 3 ? .06 : .1, 0],
     history:history.slice(0, length), average:[0, 0], window:0 }));
-  await writeFile(join(directory, "input-history.jsonl"), records.map(JSON.stringify).join("\n"));
+  await writeFile(join(directory, "input-history.jsonl"), records.map(row => JSON.stringify(row)).join("\n"));
   await writeFile(join(directory, "frame-timing.tsv"), "100\t0.016\t1\n100.05\t0.016\t1.05\n");
   await writeFile(join(directory, "report.json"), JSON.stringify({
-    gesture, captureConfiguration:{captureUntilRest:false},
-    frames:[{monotonicSeconds:99.9}],
+    gesture: gesture.map(event => ({ ...event, qtMouseTarget: 'RenderWidget', clickCount: 1 })),
+    calibrationSha256: 'retained-calibration-hash', captureConfiguration:{captureUntilRest:false, extraCapturePolicy:'retained'},
+    frames:[{monotonicSeconds:99.9, presentIndex:7, path:'captured-frame.png'}],
     viewport:{width:100, height:100, sceneLeft:0, contentWidth:100},
     inputs:[{event:"native-input-batch-accepted", acceptedMonotonicSeconds:100},
+      {event:"native-input-posted", id:"input-0", postedMonotonicSeconds:100, delivered:true},
       ...gesture.map((event, index) => ({event:"native-input-accepted", id:event.id,
         acceptedMonotonicSeconds:100 + index * .02}))],
   }));
   execFileSync(process.execPath, [new URL(
-    "../../tests/objects/oracle/mars/google-earth-pro/pair-rendered-motion-inputs.mjs",
+    "../../tests/objects/oracle/mars/google-earth-pro/pair-rendered-motion-inputs.mts",
     import.meta.url).pathname, directory]);
-  const result = JSON.parse(await readFile(join(directory, "paired-input-report.json")));
-  assert.equal(result.consumedInputEvidence.launch.history.length, 4);
-  assert.deepEqual(result.consumedGesture.map(event => event.kind), ["down", "drag", "drag", "drag", "up"]);
-  assert.equal(result.consumedGesture.at(-2).id, "input-3:position");
-  assert.ok(Math.abs(result.consumedGesture.at(-2).x - .55) < 1e-12);
-  assert.equal(result.consumedGesture.at(-1).x, result.consumedGesture.at(-2).x);
+  const result = object(JSON.parse(await readFile(join(directory, "paired-input-report.json"), 'utf8')));
+  const launch = object(object(result.consumedInputEvidence).launch);
+  const consumed = array(result.consumedGesture).map(entry => {
+    const event = object(entry); return { kind: text(event.kind), id: text(event.id), x: finite(event.x) };
+  });
+  assert.equal(result.calibrationSha256, 'retained-calibration-hash');
+  assert.equal(object(array(result.inputs).find(entry => object(entry).event === 'native-input-posted')).postedMonotonicSeconds, 100);
+  assert.equal(object(result.captureConfiguration).captureUntilRest, false);
+  assert.equal(object(result.captureConfiguration).extraCapturePolicy, 'retained');
+  assert.equal(object(array(result.frames)[0]).presentIndex, 7);
+  assert.equal(object(array(result.frames)[0]).path, 'captured-frame.png');
+  const finalInput = object(array(result.consumedGesture).at(-1));
+  assert.equal(finalInput.qtMouseTarget, 'RenderWidget');
+  assert.equal(finalInput.clickCount, 1);
+  assert.ok(finite(finalInput.atMilliseconds) < 100, 'Release clock must stay relative to the batch');
+  assert.equal(array(launch.history).length, 4);
+  assert.deepEqual(consumed.map(event => event.kind), ["down", "drag", "drag", "drag", "up"]);
+  assert.equal(consumed.at(-2)!.id, "input-3:position");
+  assert.ok(Math.abs(consumed.at(-2)!.x - .55) < 1e-12);
+  assert.equal(consumed.at(-1)!.x, consumed.at(-2)!.x);
 });

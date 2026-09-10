@@ -8,7 +8,7 @@ import { chromium } from "playwright";
 import sharp from "sharp";
 import { BASE_TILE } from "@layoutit/polycss";
 import { PREPARED_MARS_CAMERA, PREPARED_MARS_SCENE } from "../../tests/objects/unit/mars/prepared-fixture.mts";
-import { decodeNativeMotionTrace } from "../../tests/objects/oracle/mars/google-earth-pro/native-motion-trace-reader.mjs";
+import { decodeNativeMotionTrace } from "../../tests/objects/oracle/mars/google-earth-pro/native-motion-trace-reader.mts";
 import { renderedMotionSteps } from "./rendered-motion-steps.mts";
 import { assertMotionOnlyReference } from "../../tests/objects/oracle/mars/google-earth-pro/interaction-suite-analysis.mts";
 

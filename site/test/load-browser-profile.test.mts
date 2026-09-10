@@ -108,3 +108,8 @@ test("all objects retain browser evidence for the controls they support", async 
       new Set(current.objectControls.lenses?.controls.map(({ id }) => id) ?? []), object.id);
   }
 });
+
+
+test("unsupported objects fail before legacy implementation paths are considered", async () => {
+  await assert.rejects(loadPlanetBrowserProfile({ id: "missing-oracle-profile-fixture" }), /browser profile requires an authored object descriptor/u);
+});

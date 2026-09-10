@@ -2,22 +2,6 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createSceneLifetime } from "@cssearth/engine";
 import { waitForScenePaint, waitForSceneDocument } from "../renderers/css/dist/scene-native-waits.js";
-import * as engine from "@cssearth/engine";
-import {requireRecord} from '../../tools/source-values.mts';
-const legacyCameraPaths = ['./camera-math.mjs', './sphere-drag.mjs'];
-const [cameraMath, sphereDrag] = await Promise.all(legacyCameraPaths.map(async path => {
-  const module: unknown = await import(path); return requireRecord(module, 'legacy camera facade');
-}));
-import * as nativeWaits from "../renderers/css/dist/scene-native-waits.js";
-
-test("legacy lifetime and camera paths expose the canonical typed functions", () => {
-  assert.equal(createSceneLifetime, engine.createSceneLifetime);
-  assert.equal(waitForScenePaint, nativeWaits.waitForScenePaint);
-  assert.equal(waitForSceneDocument, nativeWaits.waitForSceneDocument);
-  for (const [name, implementation] of Object.entries({ ...cameraMath, ...sphereDrag })) {
-    assert.equal(implementation, requireRecord(engine)[name], name);
-  }
-});
 
 function frameQueue() {
   let nextId = 0;

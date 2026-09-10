@@ -26,7 +26,7 @@ window visibility, focus, and activation; selects Mars through Google's own
 `QAction` (`objectName=mars`); applies explicit atmosphere and Sun action states;
 and emits JSONL evidence for menu trees, window state, actions, and readiness.
 
-`launch-headless.mjs` runs in the current macOS session but fails closed unless
+`launch-headless.mts` runs in the current macOS session but fails closed unless
 the embedded hook loads, the OS window audit reports zero visible windows, and
 the oracle process does not own the foreground. A native capture is valid only
 after that preflight, an event-log `ready` record, a second zero-window and
@@ -40,8 +40,8 @@ triptych ordered native | browser | Pixelmatch.
 
 ## Render-contract extraction
 
-`build-render-contract-hook.mjs` builds an x86_64 late-injection probe that
-chains the existing layer oracle. `extract-render-contracts.mjs` then records
+`build-render-contract-hook.mts` builds an x86_64 late-injection probe that
+chains the existing layer oracle. `extract-render-contracts.mts` then records
 the live OpenGL camera, sky, catalogue-star, lighting, texture, buffer, blend,
 depth, and viewport state at all 56 registered Mars poses. The run remains
 invalid unless the native process has zero visible windows and never owns the
@@ -58,7 +58,7 @@ The catalogue points sample a separate 32×1 radial response and use exposure
 The visible Sun and the directional light are separate contracts. The default
 `SunModel` path binds the decompiled `sun` resource as an exact 128×128 RGBA
 texture, draws a four-vertex client-array quad, uses `SRC_ALPHA, ONE` blending,
-tests depth, and does not write depth. `capture-sun-presentation-contract.mjs`
+tests depth, and does not write depth. `capture-sun-presentation-contract.mts`
 records the exact quad vertices, UVs, MVP, and clip result at the same 56 poses.
 The improved `sun3` resource is statically referenced but is not bound while
 the default `improvedSun=false` path is active. `SunLight` direction and
@@ -69,7 +69,7 @@ process but produced no material view-state movement in the tested traces. It
 is therefore recorded as a negative API result, not used as a substitute for
 the native camera matrices.
 
-`capture-isolated-sun-components.mjs` applies a capture-only draw filter after
+`capture-isolated-sun-components.mts` applies a capture-only draw filter after
 contract extraction. It retains only the sky-map quad, the 5,000 catalogue
 stars, and the verified 128×128 Sun quad. This produces native reference images
 without planet, atmosphere, annotations, labels, timeline, attribution, or
@@ -78,10 +78,10 @@ other UI chrome.
 Run the complete extraction and publication sequence with:
 
 ```sh
-node tests/objects/oracle/mars/google-earth-pro/extract-render-contracts.mjs
-node tests/objects/oracle/mars/google-earth-pro/capture-sun-presentation-contract.mjs
-node tests/objects/oracle/mars/google-earth-pro/publish-render-contract-index.mjs
-node tests/objects/oracle/mars/google-earth-pro/capture-isolated-sun-components.mjs
+node tests/objects/oracle/mars/google-earth-pro/extract-render-contracts.mts
+node tests/objects/oracle/mars/google-earth-pro/capture-sun-presentation-contract.mts
+node tests/objects/oracle/mars/google-earth-pro/publish-render-contract-index.mts
+node tests/objects/oracle/mars/google-earth-pro/capture-isolated-sun-components.mts
 ```
 
 The authoritative local index is
@@ -97,7 +97,7 @@ path. Every sample binds requested and observed camera state to the exact sky
 ray basis, celestial matrix, catalogue MVP, Sun model-view and MVP, client quad,
 clip state, wall-clock time, and native frame.
 
-`publish-granular-render-contract.mjs` turns those samples into replay
+`publish-granular-render-contract.mts` turns those samples into replay
 equations. The camera orientation fit has a maximum angular residual below
 0.0000027°. The sky-map and 5,000-point catalogue are related by one recovered
 equatorial-to-sky-map matrix; rebuilding the native catalogue MVP has a maximum
@@ -121,9 +121,9 @@ rather than relying only on filenames in the application resources.
 Run and publish the granular contract with:
 
 ```sh
-node tests/objects/oracle/mars/google-earth-pro/build-render-contract-hook.mjs
-node tests/objects/oracle/mars/google-earth-pro/capture-granular-render-contract.mjs
-node tests/objects/oracle/mars/google-earth-pro/publish-granular-render-contract.mjs
+node tests/objects/oracle/mars/google-earth-pro/build-render-contract-hook.mts
+node tests/objects/oracle/mars/google-earth-pro/capture-granular-render-contract.mts
+node tests/objects/oracle/mars/google-earth-pro/publish-granular-render-contract.mts
 ```
 
 The implementation-ready contract is

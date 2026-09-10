@@ -10,26 +10,13 @@ interface BrowserProfileObject {
 }
 
 export async function loadPlanetBrowserProfile(planet: BrowserProfileObject): Promise<ObjectBrowserProfile> {
-  if (await authoredObject(planet.id)) {
-    const browserProfile = requireRecord(await import(new URL(`../../tests/objects/browser/${planet.id}/browser-profile.mts`, import.meta.url).href), `${planet.id} browser profile`).browserProfile;
-    assert.ok(isObjectBrowserProfile(browserProfile), `${planet.id}: profile must use the common browser-profile factory`);
-    const rawControls = requireRecord(await import(new URL(`../../src/planets/${planet.id}/prepared/controls.json`, import.meta.url).href, {with: {type: 'json'}}), `${planet.id} browser controls`).default;
-    const controls = requireBrowserProfileControls(rawControls, planet.id);
-    assert.deepEqual(browserProfile.objectControls, controls, `${planet.id}: browser profile must use prepared JSON controls`);
-    return validatePlanetBrowserProfile(planet, browserProfile, controls);
-  }
-  const rawControls = requireRecord(await import(new URL(
-    `../../src/planets/${planet.id}/site/control-content.mjs`, import.meta.url,
-  ).href), `${planet.id} object controls`).objectControls;
-  const objectControls = requireBrowserProfileControls(rawControls, planet.id);
-  const profileUrl = new URL(
-    `../../src/planets/${planet.id}/test/browser-profile.mjs`,
-    import.meta.url,
-  );
-  const browserProfile = requireRecord(await import(profileUrl.href), `${planet.id} browser profile`).browserProfile;
+  assert.ok(await authoredObject(planet.id), `${planet.id}: browser profile requires an authored object descriptor`);
+  const browserProfile = requireRecord(await import(new URL(`../../tests/objects/browser/${planet.id}/browser-profile.mts`, import.meta.url).href), `${planet.id} browser profile`).browserProfile;
   assert.ok(isObjectBrowserProfile(browserProfile), `${planet.id}: profile must use the common browser-profile factory`);
-  assert.equal(browserProfile.objectControls, objectControls, `${planet.id}: profile requires actual control content`);
-  return validatePlanetBrowserProfile(planet, browserProfile, objectControls);
+  const rawControls = requireRecord(await import(new URL(`../../src/planets/${planet.id}/prepared/controls.json`, import.meta.url).href, {with: {type: 'json'}}), `${planet.id} browser controls`).default;
+  const controls = requireBrowserProfileControls(rawControls, planet.id);
+  assert.deepEqual(browserProfile.objectControls, controls, `${planet.id}: browser profile must use prepared JSON controls`);
+  return validatePlanetBrowserProfile(planet, browserProfile, controls);
 }
 
 export function validatePlanetBrowserProfile(planet: BrowserProfileObject, browserProfile: ObjectBrowserProfile, objectControls: ObjectControls): ObjectBrowserProfile {
