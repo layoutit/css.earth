@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 12.065217391304348,
       "bodyRadiusM": 2775
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/schorria-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "31a343397cd4a8ae3e25fd3c95f2bc0552c72027bd2b1e5f82149d03993e9eeb"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "708e23dacd147c5a6a38fa0881855fc40d991de285dcef25e7df86a62e4b5b24"
+    "sha256": "c3bc90ab304db75ae93a1fa2b1609f80d0adf00cd5a0fb81c4c197e9f9ab2795"
   }
 }

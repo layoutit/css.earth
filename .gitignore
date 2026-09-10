@@ -78,3 +78,56 @@ src/planets/*/source/**/*.bpc
 /src/planets/*/source/reference/*.pdf
 # Pinned Borrelly orthophoto and coordinate cubes, restored from PDS.
 /src/planets/comet-19p/source/micas/*.cub
+
+# Authored models and reviewed source images required before preparation.
+!src/planets/*/source/presentation/context.png
+!src/planets/*/source/material/*.png
+!src/planets/*/source/shape/*ellipsoid.tab
+!src/planets/*/source/shape/model.tab
+
+# Native metadata, extracted reference rows and inspected source evidence.
+!src/planets/*/source/reference/*.csv
+!src/planets/*/source/reference/*-row.tab
+!src/planets/*/source/reference/reflect-index.tab
+!src/planets/*/source/reference/*.png
+!src/planets/*/source/reference/*.jpg
+!src/planets/*/source/nims/*_wavelengths.csv
+!src/planets/*/source/validation/*.png
+
+# Retained interpretation documents without a pinned restoration operation.
+!src/planets/*/source/reference/*sis.pdf
+!src/planets/*/source/reference/*coordinate_system_description*.pdf
+!src/planets/didymos/source/reference/Sunshine_LPSC.pdf
+!src/planets/comet-81p/source/reference/wild-stereo-paper.pdf
+!src/planets/lutetia/source/reference/lutetia_rotation.pdf
+!src/planets/ryugu/source/reference/paper.pdf
+
+# Compact source conversions and the evidence needed to inspect them.
+!src/planets/*/source/nims/*-composite.tif
+!src/planets/*/source/muse/*/*.tif
+!src/planets/*/source/vims/*-infrared.tif
+!src/planets/*/source/vims/*-water-ice.tif
+!src/planets/*/source/vims-chemistry/*.tif
+!src/planets/*/source/cassini-ice/*.tif
+!src/planets/*/source/geology/*-geologic-units.tif
+!src/planets/*/source/science/*-georeferenced.tif
+!src/planets/*/source/science/geology-*/categories.tif
+!src/planets/*/source/science/geology-*/nomenclature.zip
+!src/planets/*/source/observations/*-registered-rgba.tif
+
+# Original GIS releases and registration images kept with their derived maps.
+!src/planets/*/source/science/geology-*/*.gdb.zip
+!src/planets/*/source/science/geology-*/Screenshot *.png
+
+# Native Mathilde map retained as orientation evidence.
+!src/planets/mathilde/source/maps/253mathm.fit
+
+# Reviewed Mars navigation snapshot; the upstream image has changed.
+!src/planets/mars/source/presentation/navigation-marker.jpg
+
+# Retained mission kernel and dated catalog snapshot.
+!src/planets/*/source/geometry/vg2_nep_version1_type1_iss_sedr.bc
+!src/planets/earth/source/places/cities15000.zip
+
+# Quaoar source paper is restored from its pinned arXiv URL.
+/src/planets/quaoar/source/reference/quaoar-2026.html

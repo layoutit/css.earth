@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 53,
       "bodyRadiusM": 12190
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/reinmuthia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8f5d30e66a6a57b6a098ba127996647696e1a52f5a3b6b46d7e2aa2753529c6a"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1c59630e389116291f386fb645ce3b47ad30366c363afad5cad74e177137fe94"
+    "sha256": "a0872d9502dc5cda9583960c11fc6fdfdf2c4420068727d43463cf3dc757da3a"
   }
 }

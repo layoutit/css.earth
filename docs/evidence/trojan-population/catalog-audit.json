@@ -1,0 +1,106 @@
+{
+  "objects": 418,
+  "asteroids": 297,
+  "reports": [
+    {
+      "id": "diomedes",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -50,
+      "maximum": 50,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "ajax",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "ilioneus",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -10,
+      "maximum": 10,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "pyrrhus",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -10,
+      "maximum": 10,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "eumelos",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -9,
+      "maximum": 9,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "lycomedes",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -5,
+      "maximum": 5,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "demodokus",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -6,
+      "maximum": 6,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "menelaus",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "agenor",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "mentor",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -30,
+      "maximum": 30,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    }
+  ]
+}

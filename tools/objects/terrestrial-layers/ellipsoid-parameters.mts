@@ -5,14 +5,26 @@ import { parseObjShape } from './obj-shape.mts';
 /** Preparation-only tessellation. The authored parameters specify a smooth
  * approximation; they never stand in for a recovered convex mesh or terrain. */
 export function ellipsoidParameterMesh(value: unknown) {
-  const model=parseEllipsoidParameters(value);
-  if (model.schema !== 'cssearth-ellipsoid-parameters@1' ||
-      model.scaleConvention !== 'thermal-radius-as-volume-equivalent' ||
-      ![model.axisRatioAB, model.axisRatioBC, model.thermalRadiusKm].every(n => Number.isFinite(n) && n > 0) ||
-      model.axisRatioAB < 1 || model.axisRatioBC < 1) throw new TypeError('Invalid published ellipsoid parameters.');
-  const ratios = [model.axisRatioAB * model.axisRatioBC, model.axisRatioBC, 1];
-  const scale = model.thermalRadiusKm * 1000 / Math.cbrt(ratios.reduce((a,b) => a*b, 1));
-  const axesMeters = ratios.map(n => n * scale);
+  const model = parseEllipsoidParameters(value);
+  if (model.schema !== 'cssearth-ellipsoid-parameters@1') throw new TypeError('Invalid published ellipsoid parameters.');
+  let axesMeters;
+  if (model.scaleConvention === 'published-semiaxes') {
+    // Absolute dimensions must not pass through a thermal-radius convention.
+    const axes = model.semiaxesKm;
+    if (!Array.isArray(axes) || axes.length !== 3 || !axes.every(n => Number.isFinite(n) && n > 0) ||
+        axes[0] < axes[1] || axes[1] < axes[2] ||
+        ['thermalRadiusKm', 'axisRatioAB', 'axisRatioBC'].some(key => key in model)) {
+      throw new TypeError('Invalid published ellipsoid semiaxes.');
+    }
+    axesMeters = axes.map(n => n * 1000);
+  } else {
+    if (model.scaleConvention !== 'thermal-radius-as-volume-equivalent' || 'semiaxesKm' in model ||
+        ![model.axisRatioAB, model.axisRatioBC, model.thermalRadiusKm].every(n => Number.isFinite(n) && n > 0) ||
+        model.axisRatioAB < 1 || model.axisRatioBC < 1) throw new TypeError('Invalid published ellipsoid parameters.');
+    const ratios = [model.axisRatioAB * model.axisRatioBC, model.axisRatioBC, 1];
+    const scale = model.thermalRadiusKm * 1000 / Math.cbrt(ratios.reduce((a,b) => a*b, 1));
+    axesMeters = ratios.map(n => n * scale);
+  }
   const { unit, faces } = subdividedOctahedron(model.subdivisions);
   return { positions: unit.map(v => v.map((n,i) => n * axesMeters[i])), indices: faces, axesMeters };
 }

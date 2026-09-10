@@ -272,7 +272,21 @@ function registryLoaders(source: string, root: string) {
     const preparedValue = (value: Node): boolean => value.type === 'Literal' || value.type === 'Identifier' && params.some(param => nameOf(param.type === 'AssignmentPattern' ? param.left : param) === value.name) || value.type === 'TemplateLiteral' && value.expressions.every(preparedValue);
     const field = (name: string) => properties.find((property): property is Property => property.type === 'Property' && nameOf(property.key) === name)?.value;
     if (properties.some(property => property.type !== 'Property' || property.computed || property.kind !== 'init' || property.method || !preparedValue(property.value)) || nameOf(field('id')) !== nameOf(params[0]) || nameOf(field('loadScene')) !== nameOf(params[6]) || nameOf(field('worldFrame')) !== params[7].left.name) fail('entry helper cannot replace the object id, loader or world frame');
-    const id = first.value, loader = entry.arguments[6];
+    const id = first.value;
+    let loader = entry.arguments[6];
+    let boundDescriptor: {parameter: string; argument: Node} | null = null;
+    // A shared loader factory may bind one descriptor, but its body must still
+    // expose the exact import and returned binding checked below.
+    if (loader.type === 'CallExpression') {
+      const factory = helpers.get(nameOf(loader.callee));
+      const factoryReturn = astKind(factory?.body.body[0], 'ReturnStatement')?.argument;
+      if (!factory || factory.async || factory.generator || factory.params.length !== 1 ||
+          factory.params[0].type !== 'Identifier' || factory.body.body.length !== 1 || !factoryReturn ||
+          loader.arguments.length !== 1 || loader.arguments[0].type !== 'Identifier')
+        fail(`${id} loader factory must only bind one descriptor and return its loader`);
+      boundDescriptor = {parameter: factory.params[0].name, argument: loader.arguments[0]};
+      loader = factoryReturn;
+    }
     if ((loader.type !== 'ArrowFunctionExpression' && loader.type !== 'FunctionExpression') || !loader.async || loader.generator || loader.params.length || loader.body.type !== 'BlockStatement') fail(`${id} loader must import and return one client binding`);
     const statements = loader.body.body;
     if (statements.length !== 2 || statements[0].type !== 'VariableDeclaration' || statements[0].kind !== 'const' || statements[0].declarations.length !== 1 || statements[1].type !== 'ReturnStatement') fail(`${id} loader must import and return one client binding`);
@@ -282,12 +296,19 @@ function registryLoaders(source: string, root: string) {
     if (binding.type !== 'Property' || binding.computed || binding.key.type !== 'Identifier' || binding.value.type !== 'Identifier') fail(`${id} loader must return its actual imported export`);
     const returnedBinding = statements[1].argument, client = relative(root, resolve(root, dirname(registryPath), imported.source.value));
     if (entries.has(id)) fail(`duplicate loader for ${id}`);
-    if (returnedBinding?.type === 'CallExpression' && nameOf(returnedBinding.callee) === binding.value.name && returnedBinding.arguments.length === 1 && binding.key.name === 'loadPackagedObject' && descriptors.has(nameOf(returnedBinding.arguments[0]))) {
-      const descriptorImport = descriptors.get(nameOf(returnedBinding.arguments[0]))!;
+    const suppliedDescriptor = returnedBinding?.type === 'CallExpression' ? returnedBinding.arguments[0] : undefined;
+    const actualDescriptor = boundDescriptor
+      ? nameOf(suppliedDescriptor) === boundDescriptor.parameter ? boundDescriptor.argument : undefined
+      : suppliedDescriptor;
+    if (boundDescriptor && (!actualDescriptor || returnedBinding?.type !== 'CallExpression' ||
+        returnedBinding.arguments.length !== 1 || binding.key.name !== 'loadPackagedObject'))
+      fail(`${id} loader factory must forward its bound descriptor unchanged`);
+    if (returnedBinding?.type === 'CallExpression' && nameOf(returnedBinding.callee) === binding.value.name && returnedBinding.arguments.length === 1 && binding.key.name === 'loadPackagedObject' && descriptors.has(nameOf(actualDescriptor))) {
+      const descriptorImport = descriptors.get(nameOf(actualDescriptor))!;
       const descriptor = relative(root, resolve(root, dirname(registryPath), descriptorImport));
       if (descriptor !== `src/planets/${id}/object.json`) fail(`${id} loader must bind its own actual JSON descriptor`);
       const frame = entry.arguments[7];
-      if (frame?.type !== 'MemberExpression' || frame.computed || nameOf(frame.property) !== 'worldFrame' || frame.object.type !== 'MemberExpression' || frame.object.computed || nameOf(frame.object.property) !== 'properties' || nameOf(frame.object.object) !== nameOf(returnedBinding.arguments[0])) fail(`${id} world frame must come from its own actual JSON descriptor`);
+      if (frame?.type !== 'MemberExpression' || frame.computed || nameOf(frame.property) !== 'worldFrame' || frame.object.type !== 'MemberExpression' || frame.object.computed || nameOf(frame.object.property) !== 'properties' || nameOf(frame.object.object) !== nameOf(actualDescriptor)) fail(`${id} world frame must come from its own actual JSON descriptor`);
       entries.set(id, {kind: 'descriptor', client, descriptor, exported: binding.key.name}); descriptorImports.add(descriptorImport);
     } else {
       const frame = entry.arguments[7], frameObject = frame?.type === 'MemberExpression' && !frame.computed && nameOf(frame.property) === 'frame' && frame.object.type === 'Identifier' ? frame.object.name : null;

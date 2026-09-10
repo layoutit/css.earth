@@ -23,6 +23,13 @@ export async function prepareObservationLenses({ sourceDirectory, publicDirector
   await mkdir(publicDirectory, { recursive: true });
   sharp.concurrency(2);
   for (const plan of config.lenses) {
+    // More source detail can use denser material pixels on the same retained
+    // bands. Their CSS dimensions and pole layout remain the geometry owner's.
+    const rasterScale = plan.rasterScale ?? 1;
+    if (!Number.isSafeInteger(rasterScale) || rasterScale < 1 ||
+        rasterScale !== 1 && config.surfaceProjection !== 'oriented-bands') {
+      throw new TypeError('Lens raster scale requires a positive integer and oriented bands.');
+    }
     const nearest = plan.scientific?.displaySampling === 'nearest';
     if (plan.scientific?.displaySampling !== undefined && !nearest) throw new Error('Unsupported scientific display sampling.');
     // Numeric values and missing footprints may not enter an interpolating path.
@@ -55,7 +62,7 @@ export async function prepareObservationLenses({ sourceDirectory, publicDirector
     const sourceMissing = source && plan.coverage ? blackFillCoverage(source.data, source.info, { southConnected: plan.coverage.southConnected }) : null;
     let thumbnailRaster;
     for (const density of config.densities) {
-      const width = config.width * density, height = config.height * density;
+      const width = config.width * density * rasterScale, height = config.height * density * rasterScale;
       const { data, info } = await observationRaster({ input, plan, elevation, scientific, source, sourceMissing, width, height });
       if (density === 2) thumbnailRaster = { data, info };
       const atlas = config.surfaceProjection === 'inverse-homography'

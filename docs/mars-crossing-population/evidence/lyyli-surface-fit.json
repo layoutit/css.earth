@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-asteroid-source-fit@1",
+  "id": "lyyli",
+  "method": "8192 deterministic area-stratified surface samples in each direction, exact nearest point over target triangles with AABB pruning; sampled distances, not exhaustive Hausdorff bound",
+  "units": "meters",
+  "geometrySource": "Original pinned counted triangle mesh versus prepared/terrain.json; no simplification or geometry preparation is run by this helper",
+  "sourceIdentity": {
+    "path": "shape/model-2012.txt",
+    "sha256": "5e9053bcc76b8f3f71cffec390e72d1b48e0043d8f9208949cd84b623e5dbf48",
+    "bytes": 46257,
+    "vertices": 572,
+    "faces": 1140,
+    "metersPerUnit": 21858.612161651778
+  },
+  "preparedIdentity": {
+    "path": "src/planets/lyyli/prepared/terrain.json",
+    "sha256": "457ef52b56c5e377d6705607f08d4b4e32b994dcea39e84dc644ea7950239906",
+    "bytes": 371455,
+    "faces": 800,
+    "logicalUnitsToMeters": 58.95652173913044
+  },
+  "configurationSha256": "6b020b1e9c40d4bf9c92650ea29ddac335fe8bc9bf3e51472acce4f7176eb64b",
+  "sourceToOutput": {
+    "count": 8192,
+    "mean": 0.672810767846102,
+    "p95": 4.726274676977785,
+    "p99": 11.224020674711609,
+    "maximum": 27.981596285415694
+  },
+  "outputToSource": {
+    "count": 8192,
+    "mean": 0.6625773417706479,
+    "p95": 4.616036650799842,
+    "p99": 10.784872342694195,
+    "maximum": 32.324850008910566
+  },
+  "radialDiscontinuity": {
+    "multipleIntersectionDirections": 0,
+    "sampledDirections": 8192
+  },
+  "elapsedSeconds": 0.227584708
+}

@@ -1,0 +1,364 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "comet-209p",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "e5140969d38fe05fa965d8b9d0799efe4a8c32448b4c9d73b19eb249c0541c07"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "8f2642ff7be275e5f84319589ce02b13830e7be8f87953cfff831936ce429077",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "comet-209p",
+        "displayName": "LINEAR",
+        "publicBase": "/scenes/comet-209p/",
+        "distanceAu": 2.9567815032538625,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 100,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": [],
+          "shapeViews": [
+            {
+              "id": "model",
+              "consumer": "shape",
+              "label": "Shape approximation"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 1.5069675850601332,
+          "camera": {
+            "initialScenePitchDegrees": 20,
+            "defaultControlYawDegrees": 0,
+            "framingScale": 0.85
+          },
+          "mapUrl": "/scenes/comet-209p/comet-209p-model-surface@2x.webp",
+          "polesUrl": "/scenes/comet-209p/comet-209p-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model.json",
+            "format": "ellipsoid-parameters",
+            "grid": {
+              "metersPerUnit": 1,
+              "expectedVertices": 1026,
+              "expectedFaces": 2048
+            },
+            "faceBudget": 800,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 100
+            },
+            "primitive": "u",
+            "sourceLighting": {
+              "maximumDistanceMeters": 100,
+              "rayOffsetMeters": 0.25,
+              "ambient": 0.16,
+              "diffuse": 0.84,
+              "floodLights": [
+                {
+                  "direction": [
+                    0,
+                    0,
+                    1
+                  ],
+                  "weight": 0.36
+                },
+                {
+                  "direction": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "weight": 0.24
+                },
+                {
+                  "direction": [
+                    1,
+                    0,
+                    0
+                  ],
+                  "weight": 0.24
+                }
+              ],
+              "uniformFlood": true
+            },
+            "thumbnail": {
+              "size": 96,
+              "longitudeDegrees": 70,
+              "latitudeDegrees": 20,
+              "ambient": 1,
+              "diffuse": 0
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; body attitude is explicitly illustrative.",
+          "qualification": "A smooth approximation of LINEAR’s published radar dimensions. The measurements constrain its size, but do not supply a detailed surface model. The grid marks absent surface photographs; the orientation is illustrative."
+        },
+        "presentation": {
+          "defaultLens": "model",
+          "pointColor": [
+            184,
+            182,
+            178
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "82e4a00a1a42d17d6abbe095ee359067ed2c0437fa0ec9282fe6a37b5a6f0bf3",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "comet-209p",
+        "displayName": "LINEAR",
+        "panel": {
+          "introduction": "LINEAR releases very little gas for a comet of its size. Its close approach in 2014 let Arecibo measure the nucleus through the surrounding dust.",
+          "facts": [
+            {
+              "id": "dimensions",
+              "label": "Nucleus size",
+              "value": "≈3.9 × 2.7 × 2.6 km"
+            },
+            {
+              "id": "rotation",
+              "label": "Rotation period",
+              "value": "≈10.9 hours"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Shape approximation"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Shape approximation",
+              "detail": "Arecibo",
+              "title": "Radar dimensions",
+              "description": "A smooth approximation of LINEAR’s published radar dimensions. The measurements constrain its size, but do not supply a detailed surface model. The grid marks absent surface photographs; the orientation is illustrative.",
+              "thumbnail": "/scenes/comet-209p/comet-209p-model-thumbnail.webp",
+              "surface": "comet-209p-model-surface@2x.webp",
+              "poles": "comet-209p-model-poles@2x.webp",
+              "source": {
+                "id": "shape-parameters",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.3847/0004-6256/152/4/89"
+              },
+              "facts": [
+                {
+                  "id": "dimensions",
+                  "label": "Nucleus size",
+                  "value": "≈3.9 × 2.7 × 2.6 km"
+                },
+                {
+                  "id": "rotation",
+                  "label": "Rotation period",
+                  "value": "≈10.9 hours"
+                }
+              ]
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Radar and shape",
+            "role": "surface",
+            "description": "Howell et al. (2014), dimensions reported by Schleicher & Knight (2016)",
+            "href": "https://doi.org/10.3847/0004-6256/152/4/89"
+          },
+          {
+            "label": "JPL Horizons",
+            "role": "observations",
+            "description": "Orbit and fixed-epoch position",
+            "href": "https://ssd.jpl.nasa.gov/horizons/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://doi.org/10.3847/0004-6256/152/4/89",
+            "credit": "Howell et al. (2014), dimensions reported by Schleicher & Knight (2016)"
+          },
+          "physical": {
+            "path": "../shape/model.json",
+            "credit": "Howell et al. (2014), dimensions reported by Schleicher & Knight (2016)"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "shape-parameters",
+      "path": "shape/model.json",
+      "origin": "https://doi.org/10.3847/0004-6256/152/4/89",
+      "credit": "Howell et al. (2014), dimensions reported by Schleicher & Knight (2016); cssEarth approximation",
+      "license": "Published numeric scientific parameters; cssEarth implementation MIT",
+      "licenseEvidence": [
+        "https://doi.org/10.3847/0004-6256/152/4/89",
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in numeric constraints from the cited paper. Original paper bytes are pinned for review but are not redistributed.",
+      "redistribution": "Preserve the source credit and model assumptions.",
+      "sha256": "dc650cb624fe902e34a7c35d9cba7a754fd6766754a63bcb9a6192c9cbe81da6",
+      "bytes": 944,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Source evidence or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Source evidence or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "82e4a00a1a42d17d6abbe095ee359067ed2c0437fa0ec9282fe6a37b5a6f0bf3",
+      "bytes": 3137,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Shape approximation",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "A smooth approximation of LINEAR’s published radar dimensions. The measurements constrain its size, but do not supply a detailed surface model. The grid marks absent surface photographs; the orientation is illustrative."
+      ],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "shape-parameters"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-209p/comet-209p-model-thumbnail.webp",
+          "bytes": 1480,
+          "sha256": "0d11a324311fb5cd30589f0ef600688897bac19321333de46734ef5ec4bb460e",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-209p/comet-209p-model-surface@2x.webp",
+          "bytes": 116052,
+          "sha256": "36587e00f26f1b505b25769c96cc5c78eed9eaca4db4c570a630eedb726a632b",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 3077,
+          "sha256": "e98f171355ddc9e137e68faed28c96a7e2fffefaecb22ede3c414c8b88ab8073",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

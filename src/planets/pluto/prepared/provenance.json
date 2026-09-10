@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7574afaec8ca697534deff51b3d7bc41c47a09a21fbdd27c37c50b8392889841"
+    "sha256": "d78bed1c0b2659294d9c4fbf25f95b2c1e344a950066635937f0591c98d76022"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -101,7 +101,7 @@
     {
       "id": "content",
       "path": "source/content/static.json",
-      "sha256": "32c83c3f2a19c14838d54ea72afb9f15324664736971c8c5aa7efcb1b5d0dd91",
+      "sha256": "48f7b40b718034e143ed4e17308fcd55a7b20b0c5d2b49fa9f3ae46fcd685c84",
       "parameters": {
         "schema": "cssearth-static-surface-content@1",
         "id": "pluto",
@@ -390,7 +390,7 @@
           }
         ],
         "provenance": {
-          "sourceRecord": "../SOURCE.md",
+          "sourceRecord": "../README.md",
           "editorial": "source/editorial/nasa-pluto.json",
           "qualification": "Accepted source-backed facts, labels and observation interpretation; no scientific values changed during JSON migration."
         }
@@ -419,7 +419,7 @@
       "sha256": "1c13296bb0d2678224f3579033c4fe4cd302dc2a0afa02c94a0ff1baa56d53c9",
       "bytes": 952315,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -451,7 +451,7 @@
       "sha256": "259b3e962540285f9833b13b4ad28c6b38aadb68300a52d733990b4b8870a640",
       "bytes": 619512743,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -483,7 +483,7 @@
       "sha256": "592b7fb0f88cafa0bedf9f33bb71e983952a250ee8577edf2abfe814b473356b",
       "bytes": 309806463,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -504,10 +504,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "32c83c3f2a19c14838d54ea72afb9f15324664736971c8c5aa7efcb1b5d0dd91",
+      "sha256": "48f7b40b718034e143ed4e17308fcd55a7b20b0c5d2b49fa9f3ae46fcd685c84",
       "bytes": 10753,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -545,31 +545,31 @@
           "url": "/scenes/pluto/pluto-surface-thumbnail.webp",
           "bytes": 2000,
           "sha256": "83373cca290f2c62a7ba4f83520f94ed6a726f99c356519efe4084879e43b9f9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pluto/pluto-surface.webp",
           "bytes": 408950,
           "sha256": "bbfd4db3ec0cfbb9381ac42be010063e93f524e820d48aab89e9b466d9bb5cbc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pluto/pluto-surface@2x.webp",
           "bytes": 1228176,
           "sha256": "8741c34af81b47fa07c9685ab06fc7158aeea0375643c559af3a38d60bfc0777",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pluto/pluto-surface-poles.webp",
           "bytes": 5922,
           "sha256": "e54eb38e559b8c6e2dc48ff1cfbab81665c39ef6c6a30031dc84c23ee2685ffe",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pluto/pluto-surface-poles@2x.webp",
           "bytes": 16092,
           "sha256": "4577ff6421cd2e3144a0e70be2f11cb40eb5a4354b6554a65b95e97892898a64",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -632,37 +632,37 @@
           "url": "/scenes/pluto/pluto-topography-thumbnail.webp",
           "bytes": 1536,
           "sha256": "9fc22365d6380abfe6dea4c1882bd630790ce9a3faed435e954b0fa9e950277a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pluto/pluto-topography.webp",
           "bytes": 285754,
           "sha256": "85734161c5cd9cc4b9532a9621d75df3373250c1d2032e56f83412fa0ce90012",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pluto/pluto-topography@2x.webp",
           "bytes": 988232,
           "sha256": "75a985e67423ac50b0c581df6a381a527bf1a08d11a850909be5d39547e14154",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pluto/pluto-topography-poles.webp",
           "bytes": 7884,
           "sha256": "4cd7dabdaa4ef9d60b552b6ea9fc777b9c44b1c0ce4bd378c79ec6e324e3c0ff",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pluto/pluto-topography-poles@2x.webp",
           "bytes": 22706,
           "sha256": "28c3cba5c38d775f2da18b01dd845436c3072e6b71af7917b2001c516935f9f0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pluto/pluto-topography-legend.webp",
           "bytes": 164,
           "sha256": "0607cf3c07d4f572d5d97b6a54065f4b2d20d7a550e85805c358cc22eddc13c9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -699,31 +699,31 @@
           "url": "/scenes/pluto/pluto-monochrome-thumbnail.webp",
           "bytes": 1822,
           "sha256": "eca9f430e940dc005d95b084d7e8da68e694d5f38221b53ab78e3085d085bb95",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pluto/pluto-monochrome.webp",
           "bytes": 210320,
           "sha256": "4bab96f55fd00f8c138617fc2aa97222c23ae75a25d876a57a05ba1a183d5dea",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pluto/pluto-monochrome@2x.webp",
           "bytes": 694504,
           "sha256": "c2bfbeb4eb2d2ea5f69ef4e2bbdd693d2ce5bdd937eb1fd9865e490185c80191",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pluto/pluto-monochrome-poles.webp",
           "bytes": 5752,
           "sha256": "58de6e67b6a38fe2dc2313b53ebbaf2fef77e60b0f1c4142b46da50211d021f9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pluto/pluto-monochrome-poles@2x.webp",
           "bytes": 17652,
           "sha256": "7061300bfec1c417b45f3e23ec82186dc96bd247e1fa6911795067236f63ef55",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -747,7 +747,7 @@
         {
           "url": "object:prepared/content.json",
           "bytes": 5289,
-          "sha256": "80fa33368eb98fdc58c28fead6e95650f94c55664450d780c4b388f34a01e1ce",
+          "sha256": "4a8ed32b64df1c710888bd4b74c4c5986c4b35dd7a38512424f0b8a44161f042",
           "verification": "bytes-verified"
         }
       ],

@@ -113,11 +113,20 @@
       ],
       "metersPerUnit": 2634.782608695652,
       "bodyRadiusM": 606000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/charon-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2d61110ade76a9391875343f259d14969fa5a842cd8fc5dcccc90d038c8cee9a"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7d828575f56d8ef73cd2a4418732f35bf76a4f8accbd4dbed69a5e251e8ec2d3"
+    "sha256": "1a0f6e4cb7e903344a68accc51d092eedf141cd147b0eabde0d8f2bdf397c124"
   }
 }

@@ -108,11 +108,20 @@
       ],
       "metersPerUnit": 864.3478260869565,
       "bodyRadiusM": 198800
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/mimas-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "61bdf75b82cd46fa7d9cc214bdb34515a8897d997edd143cf1e87aaa64cb5c8f"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "bc3183612ea18ee5e1cfbff3b11cc1c2daa91b19803246c9c1355b94becbdbb3"
+    "sha256": "aeab2d8501491f4cec8a06fc8f20e2b7235b2fdd880926571a7f19d9eb8dc562"
   }
 }

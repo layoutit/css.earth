@@ -5,7 +5,7 @@ import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
 import {prepareSurfaceMinimaps} from './prepare-surface-minimaps.mts';
-import {observationRaster} from './objects/static-surface/raster.mts';
+import {observationRaster, prepareObservationLenses} from './objects/static-surface/raster.mts';
 
 const legacyEncoding={quality:90,alphaQuality:100,effort:4,smartSubsample:true};
 const colors=[[231,21,41],[13,211,31],[82,84,82]];
@@ -109,4 +109,22 @@ test('solid nearest, categorical and facet minimaps preserve framing and attribu
   }
   assert.deepEqual(await readFile(path),original);
   assert.deepEqual(await readFile(resolve(f.outputDirectory,'surfaces.json')),sourceBytes);
+});
+
+
+test('denser oriented scientific atlases unwarp into the same bounded minimap',async t=>{
+  const f=await directories(t),numeric={...await numericStaticFixture(f.source),output:'numeric',rasterScale:2};
+  const recipe={schema:'cssearth-static-surface-raster@1',kind:'observation-lenses',width:320,height:160,densities:[1,2],
+    latitudeSegments:4,polarTile:16,surfaceProjection:'oriented-bands',thumbnail:'prepared-centered',
+    material:{frameSize:8,limbFloor:.52,radiusScale:.505,output:'curvature'},lenses:[numeric]};
+  await writeFile(resolve(f.source,'preparation/raster.json'),JSON.stringify(recipe));
+  await prepareObservationLenses({sourceDirectory:f.source,publicDirectory:f.publicDirectory,config:recipe});
+  const rows=await prepareSurfaceMinimaps(f);
+  assert.deepEqual(rows.map(({width,height})=>[width,height]),[[640,320]]);
+  const interpreted=await observationRaster({input:resolve(f.source,numeric.input),plan:numeric,width:1280,height:640});
+  const expected=await sharp(interpreted.data,{raw:interpreted.info}).resize({width:640,kernel:'nearest'}).raw().toBuffer();
+  const actual=await sharp(resolve(f.outputDirectory,rows[0].path)).removeAlpha().raw().toBuffer();
+  assert.deepEqual(actual,expected);
+  await writeFile(resolve(f.source,'preparation/raster.json'),JSON.stringify({...recipe,lenses:[{...numeric,rasterScale:1}]}));
+  await assert.rejects(prepareSurfaceMinimaps(f),/preview dimensions drifted/);
 });

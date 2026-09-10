@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 111.08695652173913,
       "bodyRadiusM": 25550
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/liberatrix-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7d58b6f1f65b74727df6b72ad5f66727fb1ce6019778a19ea633222bbd2991bf"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "39cb372a016e47b54ddc65c178a83b13bf98211c25a218034abb8797c23e265b"
+    "sha256": "8f0d735bf49c476dcab6755bd9c0c4ff922c28c14caaa4005f1d35114fa55d04"
   }
 }

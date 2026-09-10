@@ -16,6 +16,7 @@ import {composeCorrectedColor} from './photometric-observations.mts';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mts';
 import { loadPdsRadialTable } from './pds-radial-table.mts';
 import { loadShapeScalarGrid } from './obj-shape.mts';
+import { loadObjUvFits } from './obj-uv-fits.mts';
 
 /** Interpolate the authored numeric scale; source units remain unchanged. */
 export function colorForValue(value: number, recipe: SciencePalette) {
@@ -99,6 +100,7 @@ export function validateScienceQualityMasks(value: unknown) {
 
 export async function loadScienceSurface(root: string, value: unknown, sourceMesh?: SourceMesh | null): Promise<SourceScalar & {report?:Record<string,unknown>;fieldReport?:Record<string,unknown>}> {
   const lens=parseScienceInput(value);
+  if (lens.format === 'obj-uv-fits') return loadObjUvFits(root, lens, sourceMesh);
   if (lens.format === 'image-plane-dem') return loadImageDemScience(root, lens, sourceMesh);
   if(lens.qualityMasks!==undefined){
     validateScienceQualityMasks(lens);

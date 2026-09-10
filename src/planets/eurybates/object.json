@@ -103,11 +103,20 @@
       ],
       "metersPerUnit": 151.9504780684647,
       "bodyRadiusM": 34948.60995574688
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/eurybates-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "880a073e7b515200466667dc55883d607ab11decf99e0c5641b00b1e1f5a59ba"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0ba7e58c6099303ff01ed202155d1313287cb7e4ecd25885f27c5d757275d656"
+    "sha256": "720e1625ecb108e937501d779a541fe396cefaa7640940cacc9d3c0ff8a65512"
   }
 }

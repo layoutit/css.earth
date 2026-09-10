@@ -1,0 +1,21 @@
+{
+  "method": "thermal-effective-diameter-as-volume-approximation",
+  "diameterKm": 20.87,
+  "uncertaintyKm": 0.36,
+  "reportedUncertaintyKm": 0.36,
+  "catalog": {
+    "number": 512,
+    "name": "Taurinensis",
+    "diameterKm": 20.87,
+    "uncertaintyKm": 0.36,
+    "detections": 7,
+    "originalRow": "512    Taurinensis        1903 LV    10.68  0.15  7   20.87  0.36 0.225 0.010"
+  },
+  "diameterSemantics": "AKARI effective diameter transferred as an explicit approximate volume scale",
+  "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+  "sourceLabel": "AKARI AcuA, Usui et al. (2011)",
+  "scaleKmPerSourceUnit": 16.821136990424865,
+  "metersPerSourceUnit": 16821.136990424864,
+  "limitations": "AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred.",
+  "visibleDescription": "Convex lightcurve reconstruction at approximate thermal scale: 20.87 km effective diameter (catalog ±0.36 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes."
+}

@@ -6,7 +6,7 @@ image owner, scheduling loop, controls, or renderer was introduced.
 
 ## Preparation and ownership
 
-`tools/prepared-atmosphere.mjs` integrates sunlight through an exponential shell,
+`tools/prepared-atmosphere.mts` integrates sunlight through an exponential shell,
 including solid-body solar occlusion and the gas outside the surface silhouette.
 Inputs are the output dimensions, projected disc, unit point-to-Sun direction,
 body radius, atmospheric height, density layers, and display-transfer parameters.

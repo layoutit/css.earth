@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 171.7391304347826,
       "bodyRadiusM": 39500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hertha-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b6911a48619a435436a8af0d6be605090d06e38aec2954ccaf35b13cfda30f14"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d9e7001b8c6fcbf4fa1d39d342136fa73192d8c9145b8dc3dc7eac96daa50f4e"
+    "sha256": "fe509dd0e8f789b7d168e2e4ce8f19911dbcfd5f58b78cb8306bf0e5b4777a68"
   }
 }

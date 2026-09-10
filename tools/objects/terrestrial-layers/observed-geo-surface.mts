@@ -7,7 +7,7 @@ import { validateEncounterRecipe, loadEncounterSurface } from './encounter-surfa
 import { validateOrthographicObservation, loadOrthographicObservation } from './image-dem-observation.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, fitCamera, project, sampleGeo, diskGain } from './osiris-geo.mts';
+import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, fitCamera, project, sampleGeo, observationGain, osirisRadianceFactorScale } from './osiris-geo.mts';
 import { sampleTrianglePoints, fitObservationLevels, selectObservation } from './observation-mosaic.mts';
 import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
 import { decodeAmicaGeo } from './amica-geo.mts';
@@ -30,11 +30,12 @@ export function validateGeoSurfaceRecipe(value: unknown, sourceGeometry: unknown
     const ownedPaths = Array.isArray(frames) ? frames.flatMap(frame => framePaths({ ...recipe, ...frame })
       .filter(path => recipe.format !== 'amica-gaskell' || path !== recipe.flatPath)) : [];
     if (!Array.isArray(frames) || frames.length < 2 || frames.length > 8 || recipe.path !== undefined ||
-        recipe.qualityPath !== undefined || recipe.labelPath !== undefined || recipe.originalPath !== undefined || recipe.startTime !== undefined || recipe.selection !== 'lowest-emission' ||
+        recipe.qualityPath !== undefined || recipe.labelPath !== undefined || recipe.originalPath !== undefined || recipe.cameraPath !== undefined || recipe.startTime !== undefined || recipe.selection !== 'lowest-emission' ||
         !levels || !Number.isInteger(levels.samplesPerTriangle) || levels.samplesPerTriangle === undefined || levels.samplesPerTriangle < 4 || levels.samplesPerTriangle > 64 ||
         !Number.isInteger(levels.minimumPairs) || levels.minimumPairs < 64 || levels.minimumPairs > 10000 ||
         !positive(levels.maximumLogMad) || levels.maximumLogMad > .3 || !positive(levels.maximumGain) || levels.maximumGain < 1 || levels.maximumGain > 1.5 ||
-        frames.some(frame => !frame || !/^[a-z][a-z0-9-]*$/.test(frame.id) || Object.keys(frame).some(key => !['id', 'path', 'qualityPath', 'labelPath', 'originalPath', 'startTime'].includes(key))) ||
+        (levels.maximumAngleDegrees !== undefined && (!positive(levels.maximumAngleDegrees) || levels.maximumAngleDegrees >= 90)) ||
+        frames.some(frame => !frame || !/^[a-z][a-z0-9-]*$/.test(frame.id) || Object.keys(frame).some(key => !['id', 'path', 'qualityPath', 'labelPath', 'originalPath', 'cameraPath', 'startTime'].includes(key))) ||
         new Set(frames.map(frame => frame.id)).size !== frames.length || new Set(ownedPaths).size !== ownedPaths.length) {
       throw new TypeError('Invalid source-bound georeferenced observation mosaic.');
     }
@@ -43,12 +44,19 @@ export function validateGeoSurfaceRecipe(value: unknown, sourceGeometry: unknown
   }
   if (recipe.selection !== undefined || recipe.levelMatching !== undefined) throw new TypeError('Invalid source-bound observation selection.');
   const policy = recipe.transfer, photometry = recipe.photometry;
+  const phase = photometry?.phaseCorrection;
+  if (recipe.radiometry !== undefined && (recipe.format !== 'osiris-geo' || recipe.radiometry !== 'radiance-factor')) throw new TypeError('Invalid observation radiometry.');
+  if (phase && (recipe.format !== 'osiris-geo' || recipe.radiometry !== 'radiance-factor' || phase.model !== 'hg-shadow-hiding' ||
+      !Number.isFinite(phase.asymmetry) || Math.abs(phase.asymmetry) >= 1 || !positive(phase.amplitude) || !positive(phase.width) ||
+      !positive(phase.minimumDegrees) || !(phase.maximumDegrees > phase.minimumDegrees) || phase.maximumDegrees >= 90 ||
+      !(phase.referenceDegrees >= phase.minimumDegrees && phase.referenceDegrees <= phase.maximumDegrees) ||
+      !positive(phase.maximumGain) || phase.maximumGain < 1 || phase.maximumGain > 1.5)) throw new TypeError('Invalid observation phase correction.');
   const paths = framePaths(recipe), amica = recipe.format === 'amica-gaskell', controlled = archivedCamera(recipe);
   const validPhotometry = photometry && (photometry.model === 'lommel-seeliger' ||
     (recipe.format === 'osiris-camera' && photometry.model === 'minnaert' &&
       Number.isFinite(photometry.coefficient) && photometry.coefficient !== undefined && photometry.coefficient >= .5 && photometry.coefficient <= 1 &&
       Number.isFinite(photometry.phaseCoefficientPerDegree) && photometry.phaseCoefficientPerDegree !== undefined && photometry.phaseCoefficientPerDegree >= 0 && photometry.phaseCoefficientPerDegree <= .01) ||
-    (recipe.format === 'llorri-camera' && photometry.model === 'retained-observation' && photometry.maximumGain === 1));
+    (controlled && photometry.model === 'retained-observation' && photometry.maximumGain === 1));
   if (!['osiris-geo', 'amica-gaskell', 'osiris-camera', 'llorri-camera'].includes(recipe.format) || !/^[a-z][a-z0-9-]*$/.test(recipe.id) || !/^[a-z][a-z0-9-]*$/.test(recipe.consumer) ||
       !paths.every(safePath) || new Set(paths).size !== paths.length ||
       (amica ? recipe.qualityPath !== undefined || recipe.allowLossy !== true || recipe.filter !== 'V'
@@ -116,6 +124,7 @@ async function loadSingleGeoObservationSurface({ sourceDirectory, source, recipe
     : decodeOsirisGeo(await read(recipe.path));
   if (frame.startTime !== recipe.startTime || frame.filter !== recipe.filter) throw new Error('GEO observation identity changed.');
   if (recipe.format === 'osiris-geo') frame.quality = { ...decodeOsirisQuality(await read(recipe.qualityPath), {...frame,label:requireString(requireRecord(frame).label)}), allowLossy: recipe.allowLossy };
+  if (recipe.radiometry === 'radiance-factor') frame.radianceFactor = osirisRadianceFactorScale(requireString(requireRecord(frame).history));
   return prepareGeoFrameSurface({ frame, recipe, radial, config, entries });
 }
 
@@ -126,9 +135,9 @@ export function prepareGeoFrameSurface({ frame, recipe:value, radial, config, en
   for (let i = 0; i < frame.width * frame.height; i++) if (frame.valid(i)) {
     sourceCoverage.geometryPixels++;
     if (frame.acceptPixel ? !frame.acceptPixel(i) : !frame.quality || !acceptOsirisQuality(frame.quality.flags[i], recipe.allowLossy)) { sourceCoverage.qualityRejectedPixels++; continue; }
-    const gain = diskGain(frame.planes.INCIDENCE_ANGLE_IMAGE[i], frame.planes.EMISSION_ANGLE_IMAGE[i], recipe.photometry, frame.planes.PHASE_ANGLE_IMAGE?.[i]);
+    const gain = observationGain(frame.planes.INCIDENCE_ANGLE_IMAGE[i], frame.planes.EMISSION_ANGLE_IMAGE[i], recipe.photometry, frame.planes.PHASE_ANGLE_IMAGE?.[i]);
     if (gain === null) { sourceCoverage.photometryRejectedPixels++; continue; }
-    corrected.push(frame.planes.IMAGE[i] * gain); sourceCoverage.acceptedPixels++;
+    corrected.push(frame.planes.IMAGE[i] * gain * (frame.radianceFactor?.factor ?? 1)); sourceCoverage.acceptedPixels++;
     if (frame.quality ? frame.quality.flags[i] & 8 : frame.isLossyPixel ? frame.isLossyPixel(i) : frame.qualityReport?.outputMode === 'LOSSY') sourceCoverage.acceptedLossyPixels++;
   }
   corrected.sort((a, b) => a - b);
@@ -136,7 +145,8 @@ export function prepareGeoFrameSurface({ frame, recipe:value, radial, config, en
   if (!(high > low)) throw new Error('GEO observation has no qualified display contrast.');
   const metersPerUnit = config.geometry.radiusKm * 1000 / config.geometry.radius;
   const eye = camera.positionKm.map(n => n * 1000), policy = { ...recipe.transfer, photometry: recipe.photometry };
-  const report = { camera, sourceCoverage, quality: frame.quality?.report ?? frame.qualityReport, photometry: { ...recipe.photometry,
+  const report = { camera, sourceCoverage, quality: frame.quality?.report ?? frame.qualityReport,
+    ...(frame.radianceFactor ? { radiometry: { ...frame.radianceFactor, formula: 'I/F = pi * solarDistanceAu^2 * radiance / solarFlux; OSIRIS calibration HISTORY.' } } : {}), photometry: { ...recipe.photometry,
     formula: recipe.photometry.model === 'retained-observation' ? 'Original acquisition illumination retained; no photometric disk correction.' : recipe.photometry.model === 'minnaert'
       ? 'D=cos(i)^k*cos(e)^(k-1); k=coefficient+phaseCoefficientPerDegree*phaseDegrees; linear reflectance divided by D before interpolation; D(0,0)=1.'
       : 'D=2*cos(i)/(cos(i)+cos(e)); linear radiance divided by D before interpolation; reference D(0,0)=1.',
@@ -144,12 +154,14 @@ export function prepareGeoFrameSurface({ frame, recipe:value, radial, config, en
       ? 'Uniform flood displays the acquisition illumination; Shadows applies the existing fixed-epoch Sun bank.'
       : recipe.format === 'osiris-camera' ? 'Uniform flood displays the prepared observation; Shadows applies the existing fixed-epoch Sun bank.'
       : 'Uniform flood displays normalized imagery; Shadows applies the existing fixed-epoch Sun bank.',
-    limitations: 'No phase correction, Hapke roughness correction or cast-shadow recovery. Relative display brightness, not measured albedo.' },
+    limitations: recipe.photometry.phaseCorrection
+      ? 'Approximate single-scattering phase normalization; no Hapke roughness, multiple-scattering correction or cast-shadow recovery. Relative display brightness, not measured albedo.'
+      : 'No phase correction, Hapke roughness correction or cast-shadow recovery. Relative display brightness, not measured albedo.' },
     display: { percentiles: recipe.displayPercentiles, low, high, units: recipe.format === 'amica-gaskell'
       ? 'relative flat-fielded detector brightness with approximate disk normalization; linear grayscale display'
       : recipe.format === 'llorri-camera' ? 'relative DN/s with original illumination; linear grayscale display'
       : recipe.format === 'osiris-camera' ? 'relative disk-normalized I/F; linear grayscale display'
-      : 'relative disk-normalized radiance; linear grayscale display' },
+      : frame.radianceFactor ? 'relative disk- and phase-normalized I/F; linear grayscale display' : 'relative disk-normalized radiance; linear grayscale display' },
     sourceIds: entries.map(e => ({ id: e.id, sha256: e.expectedSha256 })),
     previewPolicy: 'Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D.' };
   function samplePoint(displayPoint: readonly number[]): SurfaceColorSample {
@@ -168,7 +180,7 @@ export function prepareGeoFrameSurface({ frame, recipe:value, radial, config, en
     if (!ray || Math.abs(ray.radius - distance) > policy.visibilityToleranceMeters) return missing('occluded');
     const gray = Math.round(Math.max(0, Math.min(1, (sampled.radiance - low) / (high - low))) * 255);
     return { color: [gray, gray, gray], distanceMeters: hit.distanceMeters, separationMeters: sampled.separationMeters, gain: sampled.gain,
-      radiance: sampled.radiance, maximumEmissionDegrees: sampled.maximumEmissionDegrees };
+      radiance: sampled.radiance, maximumEmissionDegrees: sampled.maximumEmissionDegrees, maximumIncidenceDegrees: sampled.maximumIncidenceDegrees };
   }
   const preview = (width: number, height: number) => previewGeoSurface(samplePoint, radial, config, width, height);
   return { samplePoint, preview, report };

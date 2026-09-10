@@ -1,0 +1,20 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {parsePdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+const root=new URL('../../../../src/planets/quaoar/source/',import.meta.url);
+test('Quaoar uses published three-dimensional axes and separately qualified two-ring dimensions',async()=>{
+ const config=JSON.parse(await readFile(new URL('preparation/terrestrial.json',root)));
+ const mesh=parsePdsRadiusTable(await readFile(new URL('shape/ellipsoid.tab',root),'utf8'),config.geometry.radialTerrain.grid);
+ for(const [lon,lat,r]of [[0,0,566100],[90,0,566100],[0,90,511200]])assert.ok(Math.abs(mesh.sample(lon,lat)-r)<1e-5);
+ const rings=config.rings.bands;
+ assert.equal(config.geometry.camera.framingScale,config.geometry.radiusKm/Math.max(...rings.map(r=>r.outerRadiusKm)));
+ assert.deepEqual(rings.map(r=>(r.innerRadiusKm+r.outerRadiusKm)/2),[4057.2,2520]);
+ assert.ok(Math.abs(rings[0].outerRadiusKm-rings[0].innerRadiusKm-76.4)<1e-8);
+ assert.equal(rings[1].outerRadiusKm-rings[1].innerRadiusKm,10);
+ assert.match(rings[0].qualification,/true width varies with azimuth/);
+ const rotation=JSON.parse(await readFile(new URL('preparation/rotation.json',root)));
+ assert.match(rotation.qualification,/ring-plane prior/);assert.equal(rotation.periodHours,undefined);
+ const content=JSON.parse(await readFile(new URL('content/object.json',root)));
+ assert.ok(content.settings.controls.every(c=>c.checked===false));
+});

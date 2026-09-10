@@ -103,11 +103,20 @@
       ],
       "metersPerUnit": 108.69565217391305,
       "bodyRadiusM": 25000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/prospero-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "5b1f67209d4f653037cdd7db59ae89fb159d551642552ce0a48f60dc020163aa"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "713da930aa9269c539d7062aff80e475773d3a2fd5884b8fdda4366813e58476"
+    "sha256": "58733cf5eb42f51b0dd6798131f434c636a4ae72e0e0d4b0a1f30720963e5aff"
   }
 }

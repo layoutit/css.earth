@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 10.519565217391305,
       "bodyRadiusM": 2419.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/raup-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3afd0bacd67bd5192e8e2df4909b23624ca60d14a6e0d41d615c2f018b9a760e"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "43f5cc1bcbb168f166426a95a479456f6d0426005dab31eed6997cb04077f345"
+    "sha256": "bdc8e8bb8e35ee5bfe15447b14b92660292af9b06c7dd3b2099bf7cebda6b6b1"
   }
 }

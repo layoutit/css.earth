@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 175.7826086956522,
       "bodyRadiusM": 40430
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/niobe-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "6d55392cdf2b9e10ea0581f9af41cb5f6db51c6391e91a42e73a2cb37f25f884"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "516565b6a0087ddcb0d76d926708a7da765d6de0605304e45bba1d5ac7c8e94a"
+    "sha256": "381c53fc18dd695e10003d9c1fe2b7958c638347b3cdf7c3959cef53c69796a0"
   }
 }

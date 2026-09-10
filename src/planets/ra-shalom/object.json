@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 5,
       "bodyRadiusM": 1150
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ra-shalom-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8fb759534656d52648c1f52978ab0dea3a877588aa4e95cba9369b764f8c879f"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d98177f768841872f1ec8fdc0c9806c8389016fa08db07c2dfc31dbf0894a801"
+    "sha256": "ef557749d7be9bce86b17231b3ee3442636496ae9dd76b5d4e0cddeea2216d5a"
   }
 }

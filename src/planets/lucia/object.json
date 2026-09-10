@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 114.82608695652173,
       "bodyRadiusM": 26410
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/lucia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ed9d4bb026a1e026857cb633b5617efe13868a32feb8b10a09d950f23aef4466"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f2e1d9ec689a94f72989ddc8bd2e34d933cbb91336102b2d321c927dd9cbf45a"
+    "sha256": "ae2c3ffba5a93e6df6a06cd478d3fb3cd9a7c180515d90f4cb644860231a3f0f"
   }
 }

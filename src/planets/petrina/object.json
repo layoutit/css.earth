@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 96.08695652173913,
       "bodyRadiusM": 22100
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/petrina-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e5918c7074ff91d9f90b532841535d104881423dd095f521d9e20017260475b2"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1d50f46cdfcb7f3f1f86b5b522e87ec2496554833c79ae9097be9cdd03a9a441"
+    "sha256": "d1dfab4a3d68de7332b71c341aec40b9f5e28ed5f1692861bcfb03ca1720762e"
   }
 }

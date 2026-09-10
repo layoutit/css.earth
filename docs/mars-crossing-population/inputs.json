@@ -1,0 +1,830 @@
+[
+  {
+    "name": "Aethra",
+    "modelId": 161,
+    "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/161",
+    "fields": {
+      "ID": "161",
+      "Asteroid": "(132) Aethra",
+      "λ": "326",
+      "β": "67",
+      "P": "5.168274",
+      "YORP": "",
+      "t0": "2446962",
+      "φ0": "0",
+      "Light Scattering Model": "LSL",
+      "p1": "0.1",
+      "p2": "0.51",
+      "p3": "0.19",
+      "p4": "-0.59",
+      "p5": "",
+      "Calibrated Size": "0 (No)",
+      "D": "",
+      "σD": "",
+      "Γ": "",
+      "Γmin": "",
+      "Γmax": "",
+      "pV": "",
+      "σpV": "",
+      "γc": "",
+      "ϱc": "",
+      "Quality Flag": "",
+      "Nonconvex": "0 (No)",
+      "Version": "2011-04-19",
+      "Comment": "",
+      "Created": "",
+      "Modified": "2011-10-11 16:00:26",
+      "Julian Date": "n/a",
+      "Image size (side) (px)": "300",
+      "Image size (side) (km)": "n/a",
+      "Image size (side) (milliarcsecond)": "n/a",
+      "Pixel size (km)": "n/a",
+      "Pixel size (milliarcsececond)": "n/a",
+      "Volume-equivalent diameter (px)": "n/a",
+      "Surface-equivalent diameter (px)": "n/a",
+      "Subsolar-point longitude (°)": "n/a",
+      "Subsolar-point latitude (°)": "n/a",
+      "Subearth-point longitude (°)": "n/a",
+      "Subearth-point latitude (°)": "n/a",
+      "Phase-angle-bisector longitude (°)": "n/a",
+      "Phase-angle-bisector latitude (°)": "n/a",
+      "Solar phase angle (°)": "n/a"
+    },
+    "files": {
+      "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/414/3D.pdf",
+      "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/415/IAUspin.txt",
+      "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/416/shape.png",
+      "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/417/shape.txt"
+    },
+    "references": [
+      {
+        "label": "J. Ďurech et al. (2009)",
+        "url": "https://damit.cuni.cz/projects/damit/references/view/123",
+        "file": "reference-123.html"
+      },
+      {
+        "label": "Hanuš (2011)",
+        "url": "https://damit.cuni.cz/projects/damit/references/view/141",
+        "file": "reference-141.html"
+      }
+    ],
+    "number": 132,
+    "id": "aethra",
+    "displayName": "Aethra",
+    "lambda": 326,
+    "beta": 67,
+    "periodHours": 5.168274,
+    "version": "2011-04-19",
+    "nonconvex": false,
+    "calibrated": false,
+    "archiveCalibrated": false,
+    "diameterKm": 44.47,
+    "uncertaintyKm": 0.74,
+    "akari": {
+      "number": 132,
+      "name": "Aethra",
+      "diameterKm": 44.47,
+      "uncertaintyKm": 0.74,
+      "detections": 5,
+      "originalRow": "132    Aethra                         9.38  0.15  5   44.47  0.74 0.161 0.006"
+    },
+    "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/417/shape.txt",
+    "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/415/IAUspin.txt",
+    "shapeSha256": "c05291e6311058380b5fa35a033df4579bbfc67922699d57fba7c5898c8d5e41",
+    "shapeBytes": 81898,
+    "vertices": 1012,
+    "faces": 2020,
+    "signedVolume": 1.0000000250796424,
+    "independentSignedVolume": 1.0000000250796424,
+    "originalVolumeEquivalentDiameter": 1.2407009921709122,
+    "firstVertex": [
+      0.108006,
+      0.081931,
+      0.502092
+    ],
+    "firstFace": [
+      1,
+      2,
+      3
+    ],
+    "radialRangeSourceUnits": [
+      0.5002627328654414,
+      0.9769324196493839
+    ],
+    "extentsSourceUnits": [
+      [
+        -0.692209,
+        0.617037
+      ],
+      [
+        -0.821876,
+        0.939436
+      ],
+      [
+        -0.522005,
+        0.520048
+      ]
+    ],
+    "scaleKmPerSourceUnit": 35.842640797916,
+    "alternatives": [],
+    "shapeKind": "Convex light-curve reconstruction",
+    "calibration": {
+      "method": "thermal-effective-diameter-as-volume-approximation",
+      "diameterKm": 44.47,
+      "uncertaintyKm": 0.74,
+      "reportedUncertaintyKm": 0.74,
+      "catalog": {
+        "number": 132,
+        "name": "Aethra",
+        "diameterKm": 44.47,
+        "uncertaintyKm": 0.74,
+        "detections": 5,
+        "originalRow": "132    Aethra                         9.38  0.15  5   44.47  0.74 0.161 0.006"
+      },
+      "diameterSemantics": "AKARI effective diameter transferred as an explicit approximate volume scale",
+      "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+      "sourceLabel": "AKARI AcuA, Usui et al. (2011)",
+      "scaleKmPerSourceUnit": 35.842640797916,
+      "metersPerSourceUnit": 35842.640797916,
+      "limitations": "AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred.",
+      "visibleDescription": "Convex lightcurve reconstruction at approximate thermal scale: 44.47 km effective diameter (catalog ±0.74 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes."
+    },
+    "selectionNotes": "JPL SBDB class MCA confirms this body is a Mars-crosser. The original convex lightcurve inversion is not resolved terrain. Only the checked listed source model is used.",
+    "populationSource": {
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=132",
+      "checked": "2026-09-09",
+      "file": "sbdb-aethra.json",
+      "sha256": "7eaab0470132f84ff468a8d5074ac3c6b3d0ffc88e47b90e2a03d4aa256628d1",
+      "orbitClass": {
+        "code": "MCA",
+        "name": "Mars-crossing Asteroid"
+      }
+    },
+    "distanceAu": 2.611974207733697,
+    "orbitalPeriodYears": 4.221448821130227
+  },
+  {
+    "name": "Lyyli",
+    "modelId": 2012,
+    "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/2012",
+    "fields": {
+      "ID": "2012",
+      "Asteroid": "(2204) Lyyli",
+      "λ": "64",
+      "β": "-66",
+      "P": "11.06207",
+      "YORP": "",
+      "t0": "2449457",
+      "φ0": "0",
+      "Light Scattering Model": "LSL",
+      "p1": "0.1",
+      "p2": "0.78",
+      "p3": "0.12",
+      "p4": "-0.61",
+      "p5": "",
+      "Calibrated Size": "0 (No)",
+      "D": "",
+      "σD": "",
+      "Γ": "",
+      "Γmin": "",
+      "Γmax": "",
+      "pV": "",
+      "σpV": "",
+      "γc": "",
+      "ϱc": "",
+      "Quality Flag": "1.5",
+      "Nonconvex": "0 (No)",
+      "Version": "2018-07-18",
+      "Comment": "",
+      "Created": "2018-07-19 12:40:46",
+      "Modified": "2018-07-19 12:40:46",
+      "Julian Date": "n/a",
+      "Image size (side) (px)": "300",
+      "Image size (side) (km)": "n/a",
+      "Image size (side) (milliarcsecond)": "n/a",
+      "Pixel size (km)": "n/a",
+      "Pixel size (milliarcsececond)": "n/a",
+      "Volume-equivalent diameter (px)": "n/a",
+      "Surface-equivalent diameter (px)": "n/a",
+      "Subsolar-point longitude (°)": "n/a",
+      "Subsolar-point latitude (°)": "n/a",
+      "Subearth-point longitude (°)": "n/a",
+      "Subearth-point latitude (°)": "n/a",
+      "Phase-angle-bisector longitude (°)": "n/a",
+      "Phase-angle-bisector latitude (°)": "n/a",
+      "Solar phase angle (°)": "n/a"
+    },
+    "files": {
+      "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/6560/IAUspin.txt",
+      "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/6561/shape.png",
+      "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/6562/shape.txt"
+    },
+    "references": [
+      {
+        "label": "Ďurech et al. (2018)",
+        "url": "https://damit.cuni.cz/projects/damit/references/view/175",
+        "file": "reference-175.html"
+      }
+    ],
+    "number": 2204,
+    "id": "lyyli",
+    "displayName": "Lyyli",
+    "lambda": 64,
+    "beta": -66,
+    "periodHours": 11.06207,
+    "version": "2018-07-18",
+    "nonconvex": false,
+    "calibrated": false,
+    "archiveCalibrated": false,
+    "diameterKm": 27.12,
+    "uncertaintyKm": 1.31,
+    "akari": {
+      "number": 2204,
+      "name": "Lyyli",
+      "diameterKm": 27.12,
+      "uncertaintyKm": 1.31,
+      "detections": 3,
+      "originalRow": "2204   Lyyli              1943 EQ    12.70  0.15  3   27.12  1.31 0.020 0.002"
+    },
+    "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/6562/shape.txt",
+    "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/6560/IAUspin.txt",
+    "shapeSha256": "5e9053bcc76b8f3f71cffec390e72d1b48e0043d8f9208949cd84b623e5dbf48",
+    "shapeBytes": 46257,
+    "vertices": 572,
+    "faces": 1140,
+    "signedVolume": 0.9999998263583666,
+    "independentSignedVolume": 0.9999998263583666,
+    "originalVolumeEquivalentDiameter": 1.2407009099863475,
+    "firstVertex": [
+      0.211825,
+      0.185707,
+      0.550867
+    ],
+    "firstFace": [
+      1,
+      2,
+      3
+    ],
+    "radialRangeSourceUnits": [
+      0.5391552024148519,
+      0.9140094649931148
+    ],
+    "extentsSourceUnits": [
+      [
+        -0.773269,
+        0.805583
+      ],
+      [
+        -0.668887,
+        0.575008
+      ],
+      [
+        -0.551314,
+        0.551131
+      ]
+    ],
+    "scaleKmPerSourceUnit": 21.858612161651777,
+    "alternatives": [
+      {
+        "modelId": 2013,
+        "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/2013",
+        "pole": [
+          "252",
+          "-14"
+        ],
+        "version": "2018-07-18"
+      }
+    ],
+    "shapeKind": "Convex light-curve reconstruction",
+    "calibration": {
+      "method": "thermal-effective-diameter-as-volume-approximation",
+      "diameterKm": 27.12,
+      "uncertaintyKm": 1.31,
+      "reportedUncertaintyKm": 1.31,
+      "catalog": {
+        "number": 2204,
+        "name": "Lyyli",
+        "diameterKm": 27.12,
+        "uncertaintyKm": 1.31,
+        "detections": 3,
+        "originalRow": "2204   Lyyli              1943 EQ    12.70  0.15  3   27.12  1.31 0.020 0.002"
+      },
+      "diameterSemantics": "AKARI effective diameter transferred as an explicit approximate volume scale",
+      "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+      "sourceLabel": "AKARI AcuA, Usui et al. (2011)",
+      "scaleKmPerSourceUnit": 21.858612161651777,
+      "metersPerSourceUnit": 21858.612161651778,
+      "limitations": "AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred.",
+      "visibleDescription": "Convex lightcurve reconstruction at approximate thermal scale: 27.12 km effective diameter (catalog ±1.31 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes."
+    },
+    "selectionNotes": "JPL SBDB class MCA confirms this body is a Mars-crosser. The original convex lightcurve inversion is not resolved terrain. The selected pole is one of two published solutions; no preference is inferred from its lower archive ID. The competing pole remains unresolved.",
+    "populationSource": {
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=2204",
+      "checked": "2026-09-09",
+      "file": "sbdb-lyyli.json",
+      "sha256": "b277b42461b8ef30f7e40fd3b04c3e0efcce151a84c15d237b463978f98ce7a3",
+      "orbitClass": {
+        "code": "MCA",
+        "name": "Mars-crossing Asteroid"
+      }
+    },
+    "distanceAu": 2.5890833040625667,
+    "orbitalPeriodYears": 4.166076480888577
+  },
+  {
+    "name": "Hela",
+    "modelId": 454,
+    "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/454",
+    "fields": {
+      "ID": "454",
+      "Asteroid": "(699) Hela",
+      "λ": "45",
+      "β": "44",
+      "P": "3.396232",
+      "YORP": "",
+      "t0": "2445133",
+      "φ0": "0",
+      "Light Scattering Model": "LSL",
+      "p1": "0.1",
+      "p2": "",
+      "p3": "",
+      "p4": "",
+      "p5": "",
+      "Calibrated Size": "0 (No)",
+      "D": "",
+      "σD": "",
+      "Γ": "",
+      "Γmin": "",
+      "Γmax": "",
+      "pV": "",
+      "σpV": "",
+      "γc": "",
+      "ϱc": "",
+      "Quality Flag": "",
+      "Nonconvex": "0 (No)",
+      "Version": "2012-07-30",
+      "Comment": "",
+      "Created": "",
+      "Modified": "",
+      "Julian Date": "n/a",
+      "Image size (side) (px)": "300",
+      "Image size (side) (km)": "n/a",
+      "Image size (side) (milliarcsecond)": "n/a",
+      "Pixel size (km)": "n/a",
+      "Pixel size (milliarcsececond)": "n/a",
+      "Volume-equivalent diameter (px)": "n/a",
+      "Surface-equivalent diameter (px)": "n/a",
+      "Subsolar-point longitude (°)": "n/a",
+      "Subsolar-point latitude (°)": "n/a",
+      "Subearth-point longitude (°)": "n/a",
+      "Subearth-point latitude (°)": "n/a",
+      "Phase-angle-bisector longitude (°)": "n/a",
+      "Phase-angle-bisector latitude (°)": "n/a",
+      "Solar phase angle (°)": "n/a"
+    },
+    "files": {
+      "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/1772/3D.pdf",
+      "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1773/IAUspin.txt",
+      "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/1774/shape.png",
+      "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1775/shape.txt"
+    },
+    "references": [
+      {
+        "label": "Marciniak et al. (2012)",
+        "url": "https://damit.cuni.cz/projects/damit/references/view/143",
+        "file": "reference-143.html"
+      }
+    ],
+    "number": 699,
+    "id": "hela",
+    "displayName": "Hela",
+    "lambda": 45,
+    "beta": 44,
+    "periodHours": 3.396232,
+    "version": "2012-07-30",
+    "nonconvex": false,
+    "calibrated": false,
+    "archiveCalibrated": false,
+    "diameterKm": 13.39,
+    "uncertaintyKm": 0.45,
+    "akari": {
+      "number": 699,
+      "name": "Hela",
+      "diameterKm": 13.39,
+      "uncertaintyKm": 0.45,
+      "detections": 4,
+      "originalRow": "699    Hela               1910 KD    11.72  0.15  4   13.39  0.45 0.203 0.015"
+    },
+    "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1775/shape.txt",
+    "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1773/IAUspin.txt",
+    "shapeSha256": "722e4c9fad0c1b885eca9329149668e8397b4380ff0c96100c014c03fad8d77a",
+    "shapeBytes": 128392,
+    "vertices": 1586,
+    "faces": 3168,
+    "signedVolume": 1.0000000237186308,
+    "independentSignedVolume": 1.0000000237186308,
+    "originalVolumeEquivalentDiameter": 1.240700991608043,
+    "firstVertex": [
+      0.000248,
+      0.021159,
+      0.408901
+    ],
+    "firstFace": [
+      1,
+      2,
+      3
+    ],
+    "radialRangeSourceUnits": [
+      0.4094481561638787,
+      0.8864326107584265
+    ],
+    "extentsSourceUnits": [
+      [
+        -0.794386,
+        0.783265
+      ],
+      [
+        -0.705332,
+        0.735891
+      ],
+      [
+        -0.390158,
+        0.408901
+      ]
+    ],
+    "scaleKmPerSourceUnit": 10.792286046814182,
+    "alternatives": [
+      {
+        "modelId": 455,
+        "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/455",
+        "pole": [
+          "197",
+          "31"
+        ],
+        "version": "2012-07-30"
+      }
+    ],
+    "shapeKind": "Convex light-curve reconstruction",
+    "calibration": {
+      "method": "thermal-effective-diameter-as-volume-approximation",
+      "diameterKm": 13.39,
+      "uncertaintyKm": 0.45,
+      "reportedUncertaintyKm": 0.45,
+      "catalog": {
+        "number": 699,
+        "name": "Hela",
+        "diameterKm": 13.39,
+        "uncertaintyKm": 0.45,
+        "detections": 4,
+        "originalRow": "699    Hela               1910 KD    11.72  0.15  4   13.39  0.45 0.203 0.015"
+      },
+      "diameterSemantics": "AKARI effective diameter transferred as an explicit approximate volume scale",
+      "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+      "sourceLabel": "AKARI AcuA, Usui et al. (2011)",
+      "scaleKmPerSourceUnit": 10.792286046814182,
+      "metersPerSourceUnit": 10792.286046814183,
+      "limitations": "AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred.",
+      "visibleDescription": "Convex lightcurve reconstruction at approximate thermal scale: 13.39 km effective diameter (catalog ±0.45 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes."
+    },
+    "selectionNotes": "JPL SBDB class MCA confirms this body is a Mars-crosser. The original convex lightcurve inversion is not resolved terrain. The selected pole is one of two published solutions; no preference is inferred from its lower archive ID. The competing pole remains unresolved.",
+    "populationSource": {
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=699",
+      "checked": "2026-09-09",
+      "file": "sbdb-hela.json",
+      "sha256": "00e3e336d36f2b912c0791ef42f8a56c2fec3e117d63b60c4b59ae194c14c4a5",
+      "orbitClass": {
+        "code": "MCA",
+        "name": "Mars-crossing Asteroid"
+      }
+    },
+    "distanceAu": 2.615426166061675,
+    "orbitalPeriodYears": 4.229820120672677
+  },
+  {
+    "name": "Kemi",
+    "modelId": 1202,
+    "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1202",
+    "fields": {
+      "ID": "1202",
+      "Asteroid": "(1508) Kemi",
+      "λ": "166",
+      "β": "73",
+      "P": "9.19183",
+      "YORP": "",
+      "t0": "2449828",
+      "φ0": "0",
+      "Light Scattering Model": "LSL",
+      "p1": "0.1",
+      "p2": "1.26",
+      "p3": "0.4",
+      "p4": "-0.71",
+      "p5": "",
+      "Calibrated Size": "0 (No)",
+      "D": "",
+      "σD": "",
+      "Γ": "",
+      "Γmin": "",
+      "Γmax": "",
+      "pV": "",
+      "σpV": "",
+      "γc": "",
+      "ϱc": "",
+      "Quality Flag": "",
+      "Nonconvex": "0 (No)",
+      "Version": "2016-01-04",
+      "Comment": "",
+      "Created": "",
+      "Modified": "",
+      "Julian Date": "n/a",
+      "Image size (side) (px)": "300",
+      "Image size (side) (km)": "n/a",
+      "Image size (side) (milliarcsecond)": "n/a",
+      "Pixel size (km)": "n/a",
+      "Pixel size (milliarcsececond)": "n/a",
+      "Volume-equivalent diameter (px)": "n/a",
+      "Surface-equivalent diameter (px)": "n/a",
+      "Subsolar-point longitude (°)": "n/a",
+      "Subsolar-point latitude (°)": "n/a",
+      "Subearth-point longitude (°)": "n/a",
+      "Subearth-point latitude (°)": "n/a",
+      "Phase-angle-bisector longitude (°)": "n/a",
+      "Phase-angle-bisector latitude (°)": "n/a",
+      "Solar phase angle (°)": "n/a"
+    },
+    "files": {
+      "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/4355/IAUspin.txt",
+      "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/4356/shape.png",
+      "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/4357/shape.txt"
+    },
+    "references": [
+      {
+        "label": "Hanuš et al. (2016)",
+        "url": "https://damit.cuni.cz/projects/damit/references/view/161",
+        "file": "reference-161.html"
+      }
+    ],
+    "number": 1508,
+    "id": "kemi",
+    "displayName": "Kemi",
+    "lambda": 166,
+    "beta": 73,
+    "periodHours": 9.19183,
+    "version": "2016-01-04",
+    "nonconvex": false,
+    "calibrated": false,
+    "archiveCalibrated": false,
+    "diameterKm": 17.98,
+    "uncertaintyKm": 1.34,
+    "akari": {
+      "number": 1508,
+      "name": "Kemi",
+      "diameterKm": 17.98,
+      "uncertaintyKm": 1.34,
+      "detections": 1,
+      "originalRow": "1508   Kemi               1938 UP    12.03  0.15  1   17.98  1.34 0.084 0.013"
+    },
+    "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4357/shape.txt",
+    "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4355/IAUspin.txt",
+    "shapeSha256": "0be47f09f2798dd4aa3bc7288dac1168de6bfc905e516b02c081e7bb2b151490",
+    "shapeBytes": 82627,
+    "vertices": 1021,
+    "faces": 2038,
+    "signedVolume": 0.9999999876716573,
+    "independentSignedVolume": 0.9999999876716573,
+    "originalVolumeEquivalentDiameter": 1.2407009767002044,
+    "firstVertex": [
+      -0.063328,
+      0.084822,
+      0.53641
+    ],
+    "firstFace": [
+      1,
+      2,
+      3
+    ],
+    "radialRangeSourceUnits": [
+      0.43672887729001847,
+      0.850138284797244
+    ],
+    "extentsSourceUnits": [
+      [
+        -0.829992,
+        0.83676
+      ],
+      [
+        -0.601465,
+        0.547246
+      ],
+      [
+        -0.489058,
+        0.537065
+      ]
+    ],
+    "scaleKmPerSourceUnit": 14.491807726161387,
+    "alternatives": [
+      {
+        "modelId": 1203,
+        "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1203",
+        "pole": [
+          "352",
+          "72"
+        ],
+        "version": "2016-01-04"
+      }
+    ],
+    "shapeKind": "Convex light-curve reconstruction",
+    "calibration": {
+      "method": "thermal-effective-diameter-as-volume-approximation",
+      "diameterKm": 17.98,
+      "uncertaintyKm": 1.34,
+      "reportedUncertaintyKm": 1.34,
+      "catalog": {
+        "number": 1508,
+        "name": "Kemi",
+        "diameterKm": 17.98,
+        "uncertaintyKm": 1.34,
+        "detections": 1,
+        "originalRow": "1508   Kemi               1938 UP    12.03  0.15  1   17.98  1.34 0.084 0.013"
+      },
+      "diameterSemantics": "AKARI effective diameter transferred as an explicit approximate volume scale",
+      "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+      "sourceLabel": "AKARI AcuA, Usui et al. (2011)",
+      "scaleKmPerSourceUnit": 14.491807726161387,
+      "metersPerSourceUnit": 14491.807726161387,
+      "limitations": "AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred. Kemi has one catalog detection; this limited measurement support remains explicit.",
+      "visibleDescription": "Convex lightcurve reconstruction at approximate thermal scale: 17.98 km effective diameter (catalog ±1.34 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes."
+    },
+    "selectionNotes": "JPL SBDB class MCA confirms this body is a Mars-crosser. The original convex lightcurve inversion is not resolved terrain. The selected pole is one of two published solutions; no preference is inferred from its lower archive ID. The competing pole remains unresolved.",
+    "populationSource": {
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=1508",
+      "checked": "2026-09-09",
+      "file": "sbdb-kemi.json",
+      "sha256": "fa83a8b901b8553fd7d7eda93bdfae71107f336c6c4be2f8f93cd64cda9dee50",
+      "orbitClass": {
+        "code": "MCA",
+        "name": "Mars-crossing Asteroid"
+      }
+    },
+    "distanceAu": 2.766954866279291,
+    "orbitalPeriodYears": 4.60268565088907
+  },
+  {
+    "name": "Taurinensis",
+    "modelId": 490,
+    "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/490",
+    "fields": {
+      "ID": "490",
+      "Asteroid": "(512) Taurinensis",
+      "λ": "324",
+      "β": "45",
+      "P": "5.582028",
+      "YORP": "",
+      "t0": "2444841",
+      "φ0": "0",
+      "Light Scattering Model": "LSL",
+      "p1": "0.1",
+      "p2": "0.41",
+      "p3": "0.12",
+      "p4": "-0.61",
+      "p5": "",
+      "Calibrated Size": "0 (No)",
+      "D": "",
+      "σD": "",
+      "Γ": "",
+      "Γmin": "",
+      "Γmax": "",
+      "pV": "",
+      "σpV": "",
+      "γc": "",
+      "ϱc": "",
+      "Quality Flag": "",
+      "Nonconvex": "0 (No)",
+      "Version": "2013-02-11",
+      "Comment": "",
+      "Created": "",
+      "Modified": "",
+      "Julian Date": "n/a",
+      "Image size (side) (px)": "300",
+      "Image size (side) (km)": "n/a",
+      "Image size (side) (milliarcsecond)": "n/a",
+      "Pixel size (km)": "n/a",
+      "Pixel size (milliarcsececond)": "n/a",
+      "Volume-equivalent diameter (px)": "n/a",
+      "Surface-equivalent diameter (px)": "n/a",
+      "Subsolar-point longitude (°)": "n/a",
+      "Subsolar-point latitude (°)": "n/a",
+      "Subearth-point longitude (°)": "n/a",
+      "Subearth-point latitude (°)": "n/a",
+      "Phase-angle-bisector longitude (°)": "n/a",
+      "Phase-angle-bisector latitude (°)": "n/a",
+      "Solar phase angle (°)": "n/a"
+    },
+    "files": {
+      "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/1911/3D.pdf",
+      "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1912/IAUspin.txt",
+      "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/1913/shape.png",
+      "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1914/shape.txt"
+    },
+    "references": [
+      {
+        "label": "Hanuš et al. (2013)",
+        "url": "https://damit.cuni.cz/projects/damit/references/view/148",
+        "file": "reference-148.html"
+      }
+    ],
+    "number": 512,
+    "id": "taurinensis",
+    "displayName": "Taurinensis",
+    "lambda": 324,
+    "beta": 45,
+    "periodHours": 5.582028,
+    "version": "2013-02-11",
+    "nonconvex": false,
+    "calibrated": false,
+    "archiveCalibrated": false,
+    "diameterKm": 20.87,
+    "uncertaintyKm": 0.36,
+    "akari": {
+      "number": 512,
+      "name": "Taurinensis",
+      "diameterKm": 20.87,
+      "uncertaintyKm": 0.36,
+      "detections": 7,
+      "originalRow": "512    Taurinensis        1903 LV    10.68  0.15  7   20.87  0.36 0.225 0.010"
+    },
+    "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1914/shape.txt",
+    "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1912/IAUspin.txt",
+    "shapeSha256": "23d5892b451e70763b68e7edc06b731de621fd79a98820621f63c11de034580e",
+    "shapeBytes": 82222,
+    "vertices": 1016,
+    "faces": 2028,
+    "signedVolume": 0.9999998305234152,
+    "independentSignedVolume": 0.9999998305234152,
+    "originalVolumeEquivalentDiameter": 1.2407009117088743,
+    "firstVertex": [
+      0.024595,
+      0.105372,
+      0.518526
+    ],
+    "firstFace": [
+      1,
+      2,
+      3
+    ],
+    "radialRangeSourceUnits": [
+      0.3757983674285986,
+      1.0152840104049703
+    ],
+    "extentsSourceUnits": [
+      [
+        -0.799757,
+        0.753499
+      ],
+      [
+        -0.96458,
+        0.964476
+      ],
+      [
+        -0.360437,
+        0.51887
+      ]
+    ],
+    "scaleKmPerSourceUnit": 16.821136990424865,
+    "alternatives": [],
+    "shapeKind": "Convex light-curve reconstruction",
+    "calibration": {
+      "method": "thermal-effective-diameter-as-volume-approximation",
+      "diameterKm": 20.87,
+      "uncertaintyKm": 0.36,
+      "reportedUncertaintyKm": 0.36,
+      "catalog": {
+        "number": 512,
+        "name": "Taurinensis",
+        "diameterKm": 20.87,
+        "uncertaintyKm": 0.36,
+        "detections": 7,
+        "originalRow": "512    Taurinensis        1903 LV    10.68  0.15  7   20.87  0.36 0.225 0.010"
+      },
+      "diameterSemantics": "AKARI effective diameter transferred as an explicit approximate volume scale",
+      "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+      "sourceLabel": "AKARI AcuA, Usui et al. (2011)",
+      "scaleKmPerSourceUnit": 16.821136990424865,
+      "metersPerSourceUnit": 16821.136990424864,
+      "limitations": "AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred.",
+      "visibleDescription": "Convex lightcurve reconstruction at approximate thermal scale: 20.87 km effective diameter (catalog ±0.36 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes."
+    },
+    "selectionNotes": "JPL SBDB class MCA confirms this body is a Mars-crosser. The original convex lightcurve inversion is not resolved terrain. Only the checked listed source model is used.",
+    "populationSource": {
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=512",
+      "checked": "2026-09-09",
+      "file": "sbdb-taurinensis.json",
+      "sha256": "d24d528700d23f215bf0e4d5bd105e2ae386544e3b7925cae25875941617e39a",
+      "orbitClass": {
+        "code": "MCA",
+        "name": "Mars-crossing Asteroid"
+      }
+    },
+    "distanceAu": 2.1894142356630333,
+    "orbitalPeriodYears": 3.2396650344778974
+  }
+]

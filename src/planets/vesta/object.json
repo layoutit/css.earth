@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "91ccf29dcbbab232c3dd3ed49d3eb8a5693491b67aeb5141eaf79884da3317d8"
+    "sha256": "82859753ba429df526238704b23266461c1c2ce891c3c1381719539895297244"
   },
   "id": "vesta",
   "properties": {
@@ -116,6 +116,15 @@
       ],
       "metersPerUnit": 1136.4565217391305,
       "bodyRadiusM": 261385
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/vesta-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "5d498f153cd4c5d67d16f76c14e00df5b31d002b8fd485fee0c8703f1ea9fd86"
+      }
     }
   },
   "schema": "cssearth-object@1",

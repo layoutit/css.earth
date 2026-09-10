@@ -128,11 +128,20 @@
       ],
       "metersPerUnit": 3323.913043478261,
       "bodyRadiusM": 764500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/rhea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4628cead74d5f9eb002e4e0bb293305ac9b0c53872f4be3ca801978119b82bd1"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "34239cd10d4d3b50b77b812764944204e8ba0d03f83145eaeae385d492849f85"
+    "sha256": "4acde8a79daeda0723a12288cfb39b509d8223c349d3fb52c4fd62c2921dab10"
   }
 }

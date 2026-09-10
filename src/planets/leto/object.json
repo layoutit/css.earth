@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 321.7391304347826,
       "bodyRadiusM": 74000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/leto-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7a0bfa98f26821db5f0939c1cf604edbb70b3d3148362a2d2c36b2e0fdf95e89"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b64ada46428ca527cf925ce952287553f84bc93012c825011b4cb5a0db311d9e"
+    "sha256": "a6a4fbb11db3cc8efabce38962a594d2493dd1a106be83a45c9994d44534239c"
   }
 }

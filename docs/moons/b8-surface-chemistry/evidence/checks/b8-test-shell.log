@@ -1,0 +1,1224 @@
+✖ overview charts retain every supplied spectrum sample across the registry (32.063125ms)
+✔ overview measurements use the body reference radius and catalogue distance (0.620541ms)
+✔ compact spectra reject unordered or nonfinite samples (0.195834ms)
+✖ every object mounts one canonical high-density image bank (3457.420583ms)
+✔ the shared shell does not choose image assets by device DPR (1.622875ms)
+✔ hidden charts schedule no work; visible charts batch reads, retain corrections, and retire cleanly (1.030625ms)
+✔ the standard browser launch stays unchanged unless explicitly opted in (0.801209ms)
+✔ the Chrome wrapper retains logs and arguments while preserving both CDP pipes (396.330542ms)
+✔ Mercury titles link the main mosaic, not coverage-completion images or tile templates (5.149084ms)
+✔ direct source images take precedence over product pages, including WMS images (3.82375ms)
+✔ a source-defined single-input mosaic does not inherit the parent mosaic link (1.343ms)
+✔ a composite dataset links its declared primary input, which must belong to that product (1.217166ms)
+✔ a multi-image mosaic does not pass off an arbitrary exposure as its source image (0.881791ms)
+✔ missing, internal, and malformed source URLs leave a plain title (0.503791ms)
+✖ every registered dataset has a specific authored title, independent of category and source-link availability (3.385ms)
+✔ missing titles, category labels, paragraphs and repeated descriptions are rejected (0.769959ms)
+✔ capture platforms follow the selected dataset, including derived maps (6.876458ms)
+✔ multi-mission composites retain each spacecraft once; other lenses do not inherit them (1.728916ms)
+✔ body mission lists combine dataset contributions once and preserve source scope (3.521417ms)
+✔ illustrations and local models do not acquire capture provenance from an outer texture (2.898208ms)
+✔ agency choices preserve joint mission credits and deduplicate mission results (0.7575ms)
+✖ every declared capture has a catalog entry and stays tied to its pinned source (0.5235ms)
+✔ approved static images cover the mission catalog and retain their source identity (11.057875ms)
+✔ every spacecraft has a sourced PNG emblem with genuinely transparent exterior pixels (83.27425ms)
+✔ missing capture metadata is not inferred from source names, and invalid identities fail (1.014458ms)
+✔ records one correlated run, copies changing camera state, and is idle after stop (2.508458ms)
+✔ a failed diagnostic read is captured without interrupting the application (0.417375ms)
+✔ rail switches the retained About panel without storing or mounting a scene (1.540834ms)
+✔ Escape restores a visible keyboard focus target (0.268042ms)
+✔ settings shares the panel slot and mobile navigation returns to the top (0.185375ms)
+✔ settings stays selected on repeat clicks and closes through About, Solar System, or Escape (0.141875ms)
+✔ search stays visible in About and Settings and typing returns to the results (0.14525ms)
+✔ destroy resets retained markup and remount does not duplicate listeners (0.160208ms)
+✔ an incomplete rail fails clearly (0.2015ms)
+✔ orders comparable facts before stable planet-specific facts (0.708833ms)
+✔ keeps unknown facts in their authored order (0.071542ms)
+✔ prioritizes a satellite's own orbit over its parent's solar orbit (0.102875ms)
+✔ rejects facts without unique semantic ids (0.197625ms)
+✔ analytics ignores local visits and loads on css.earth (1.658458ms)
+✔ objects without lenses or extra settings retain mandatory browser proof (0.876542ms)
+✔ declared content requires exact lens and setting DOM before optional checks (1.254833ms)
+✔ optional controls never excuse a missing shared panel or Motion (0.250583ms)
+✔ declared lenses require matching race IDs, and complete retained coverage (0.208292ms)
+✔ a single supplied lens keeps interaction proof without inventing a race (0.073792ms)
+✖ all objects retain browser evidence for the controls they support (89.846916ms)
+✖ composes every orbiting-object marker descriptor in catalog order (3.675041ms)
+✖ reproduces the checked-in registry-derived atlases and utility markers (1.755916ms)
+✖ failed object source preserves accepted files or recoverable backups outside public (3.034834ms)
+✖ failed late utility source preserves accepted files or recoverable backups outside public (2.295459ms)
+✖ failed publication preserves accepted files or recoverable backups outside public (2.322875ms)
+✖ failed rollback preserves accepted files or recoverable backups outside public (2.493042ms)
+✔ cross-device moves copy and unlink safely for publication and rollback (2.86ms)
+✔ persistent world context is mounted once and follows the active physical navigation (4.909916ms)
+✔ flight state covers system framing and resets after success, failure, cancellation and preserved-view navigation (4.623375ms)
+✔ the destination card stays held until arrival, including the new camera mount (0.746333ms)
+✔ asteroid label and orbit settings default off and reach the retained context independently (0.581584ms)
+✔ entering overview on the current object changes selection without invoking focus or restoring the camera (0.351209ms)
+✔ flight retains the source and one shell; target readiness and handoff precede history commit (2.147291ms)
+✔ rapid Mercury → Venus → Mercury cancels the stale factory without replacing shell or source (0.673583ms)
+✔ history back restores the departed exact view after target handoff without another push (1.094416ms)
+✔ saved-view anchors preserve query and hash across objects and on the already selected object (0.773542ms)
+✔ reselecting the source cancels a running flight at its painted view without another restore or mount (0.714791ms)
+✔ late rejected handoff is observed after replacement and cannot publish stale readiness (0.603834ms)
+✔ navigation preserves requested playback and reduced-motion policy (0.439125ms)
+✔ real input interruption preserves the last painted source view and flushes it without restoring the old URL (0.286541ms)
+✔ a missing destination asset preserves the painted view and permits a fresh selection retry (0.381625ms)
+✔ input after the detailed handoff keeps the incoming scene and its painted pose, including saved-view links (0.392625ms)
+✔ navbar/search anchors and vault events share one route; modifier and unsupported links stay native (0.42775ms)
+✔ a failed persistent context mount can retry when the document restores (0.289417ms)
+✔ leaving the document releases its universe and a cached-page restore mounts one fresh owner (0.206334ms)
+✔ selecting the current object flies the retained camera without preparing or replacing detail (0.92325ms)
+✔ plain current-object anchors focus but saved-view links restore their specified view (0.39825ms)
+✔ a first selection frames the object system and changes its card, then the next click focuses (0.329292ms)
+✔ zooming out after first-click system framing restores the overview at the same camera pose (1.34725ms)
+✔ a first Sun click frames the Solar System card, and a repeat opens the Sun close-up (0.467875ms)
+✔ clicking the Sun from the Solar System overview opens its body instead of refitting the outer planets (0.244167ms)
+✔ clicking the Sun from a galactic overview still frames its Solar System first (0.243625ms)
+✔ a second scene click can zoom while centering the current object is still in progress (0.216375ms)
+✔ selection emphasis previews immediately before the next detailed owner is ready (0.221375ms)
+✔ empty-space clicks leave a close body selection, camera and card unchanged (0.99275ms)
+✔ wide-view empty-space deselection previews the overview and recenters the Sun through the normal router (0.486041ms)
+✔ overview breadcrumbs reframe, select the card, and retain separate history entries (0.739875ms)
+✔ overview links preserve native modifier clicks and exact saved views (0.376875ms)
+✔ a direct overview URL frames once, but a saved overview URL retains its camera (0.301916ms)
+✔ selecting another list body during a flight still uses its system framing (0.294916ms)
+✔ navigation timing records phases once and bounds retained entries without clearing unrelated timing (0.711875ms)
+✔ timing is optional in non-browser hosts (0.097125ms)
+✖ every actual profile reads its recorded coordinates from the shared camera endpoint (86.79ms)
+✔ coordinate field selection is immutable reporting data, with no private camera implementation (0.727542ms)
+✔ restoring a complete camera observation preserves yaw and the pitch alias (0.761875ms)
+✔ camera reporting rejects missing, repeated and unsupported coordinates (0.207542ms)
+✖ an already ready object does not depend on a redundant browser waiter (32.959958ms)
+✔ a missing or loading object still requires successful readiness before returning (2.638333ms)
+✔ the actual Saturn profile observes one exclusive lens and rejects the former dual selection (4.06875ms)
+✔ search contains every object, including the Sun; only planets enter the scale (0.953333ms)
+✖ prepared marker identity, atlas order, and presentation follow packages (4.533916ms)
+✖ an unknown object loads its own marker; missing packages fail without fallback (3.406584ms)
+✔ scale overrides must form a complete presentation after inheritance (0.551667ms)
+node:internal/fs/promises:697
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async loadObjectTestDefinition (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/object-test-data.mjs:5:21)
+    at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/platform/test/object-material-orbit-fixture.mjs:10:8
+    at async Promise.all (index 0)
+    at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/platform/test/object-material-orbit-fixture.mjs:9:29 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/object.json'
+}
+
+Node.js v24.19.0
+✖ /Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/object-orbit-failure.test.mjs (61.312ms)
+✔ accepts a complete non-NASA package and still rejects corrupt or undeclared bytes (14.069625ms)
+✔ derives the complete owned file contract from planet identity (0.306417ms)
+✖ requires every registered object package file (0.727041ms)
+✔ validates local editorial identity and provenance (1.258666ms)
+✔ validates runtime asset manifest entries (0.142666ms)
+✔ page data retains the pinned controls and preloads without retaining the scene tree (6.132708ms)
+✔ registered routes read page metadata without importing complete scene transports into the build graph (58.742ms)
+✔ defines one generic renderable-object contract (0.6485ms)
+✔ world-frame capability is validated and copied at the registry boundary (2.132291ms)
+✔ rejects invalid object definitions and renderer-specific fields (0.291958ms)
+✔ keeps one open-ended object registry with unique ids and routes (0.365917ms)
+✔ derives deterministic test discovery from an authored object id (7.897417ms)
+✔ derives shared preparation and external browser scripts from the descriptor (4.740625ms)
+✔ shared attribution keeps Mercury’s three distinct product links and credits them once (4.657875ms)
+✔ every registered body uses the same projection and keeps every consumed source identity (193.269708ms)
+✔ grouping preserves every link and underlying rights while showing the shared credit once (1.45675ms)
+✔ factsheet URLs and arbitrary URL-like strings cannot become source evidence (0.974625ms)
+✔ oracle comparison never borrows a future pose and retains the slower tail (0.989542ms)
+✔ a wheel comparison rejects a lost held button and validates the delivered Qt event (0.748167ms)
+✔ native repeat alignment preserves later event and pose timing (0.128375ms)
+✔ input qualification records delivery lag and rejects missing input (0.356042ms)
+✔ an interruption interval ends at each renderer's next actual input receipt (0.184208ms)
+✔ oracle registration rejects an independent CSS translation of the scene (0.1935ms)
+✔ motion-only timing rejects reference readback overlapping the gesture (0.698083ms)
+✔ natural motion reports retain the observed clock and reject hidden readback (5.684ms)
+✔ input pairing retains the final consumed release position even without a throw (33.139959ms)
+✔ body cards switch at the shared camera detail threshold, independent of camera aim (0.860208ms)
+✔ overview follows the prepared galaxy fade and restores correctly at maximum zoom (0.094625ms)
+✔ galactic distance is measured from the Sun, independent of selected body and surface radius (0.078583ms)
+✔ deselection uses physical orbital scale, not the selected body radius alone (0.965083ms)
+✔ only approaching the Sun opens a card, with separate entry and exit thresholds (0.402958ms)
+✔ camera sampling settles before changing selection and releases timers and subscriptions (1.031875ms)
+✔ continuous outward camera updates cannot postpone the Sun overview flip (0.732541ms)
+✔ keeps every implemented scene in one object registry (0.815667ms)
+✔ loads every object through the single adapter (31.937625ms)
+✔ rejects incomplete scene lifecycle wiring (0.215959ms)
+✔ shared router owns minimal adapter shell lifecycle (1.164916ms)
+✔ shared router publishes a minimal adapter error (0.249ms)
+✔ shared router contains synchronous shell bootstrap failure (0.103375ms)
+✔ shared router cancels a pending adapter before publication (0.140291ms)
+✖ keeps implemented routes backed by object-owned files (2.226667ms)
+✖ keeps source-backed chart data in canonical order with Reflectance first (2.55525ms)
+✔ keeps the shared shell planet-neutral (1.448958ms)
+✖ keeps lens descriptions source-bound in the object model (0.745625ms)
+✔ derives the accessible logarithmic scale from catalog distances (0.775625ms)
+✔ rejects unusable scale bounds and distances (0.555083ms)
+node:internal/fs/promises:697
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/source/content/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-factsheet-model.test.mjs:17:34 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/source/content/object.json'
+}
+
+Node.js v24.19.0
+✖ /Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-factsheet-model.test.mjs (34.598417ms)
+✔ prepares one source-bound 20px SVG family for sidebar sections (8.999667ms)
+✖ authored lens facts survive preparation and runtime publication without mutating the source (3.04925ms)
+✖ lens facts reject malformed rows and duplicate ids before publication (1.219667ms)
+✖ existing description-only lenses keep their original content contract (0.691667ms)
+✔ names arbitrary lens IDs without changing source data or assuming a fixed set of concepts (0.726375ms)
+✔ prepares a frozen, smoothly sampled scale legend (0.564083ms)
+✔ prepares source-backed category legends from hex and RGB colors (0.411167ms)
+✔ rejects invalid scale palettes (0.206ms)
+✔ named categories can omit a redundant description while supplied descriptions stay validated (0.132833ms)
+✖ every object forwards its object-owned legend through the shared shell (57.930416ms)
+✔ generates all shared title assets once from checked source vectors (10.630708ms)
+✖ keeps planet title rendering facts object-owned and source-bound (0.775916ms)
+✖ normalizes every implemented planet title to the complete Saturn standard (0.805542ms)
+✔ a terminal extreme-range pose finishes without a tail of identical publications (13.581ms)
+✔ the exact final camera demand finishes before the old scene is handed off (3.467416ms)
+✔ an overview starts moving before factory and assets are ready, then holds before target detail (4.668208ms)
+✔ overview preserves the latest drawn camera through slow preparation, without a flight or input interception (0.358459ms)
+✔ a cancelled preserved-view handoff releases its unmounted resources (0.163375ms)
+✔ overview handoff uses the requested distant camera instead of flying into the Sun (4.584666ms)
+✔ the same object can recenter at overview distance without resetting to its close-up (4.134667ms)
+✔ handoff precedes large destination approach and continues the same numeric flight from the exact drawn checkpoint (7.02825ms)
+✔ slow asset preparation holds only the distant checkpoint and resumes after readiness (5.968667ms)
+✔ new selection cancellation stops painting and releases destination preparation (1.145167ms)
+✔ cancellation between prepared handoff and mount releases resources and all interruption listeners (1.739833ms)
+✔ an already cancelled request cannot start a frame or retain input listeners (0.605583ms)
+✔ input during a delayed preparation interrupts at the last drawn checkpoint and releases late resources (3.154959ms)
+✔ input after the early handoff preserves the destination owner drawn pose (1.176125ms)
+✔ reduced motion waits for preparation, then mounts the exact arrival without enlarging a source proxy (0.209167ms)
+✔ saved camera endpoints survive the early owner handoff unchanged (7.091834ms)
+✔ refocusing the selected object paints one existing owner without reloading its prepared bank (2.285042ms)
+✔ the application keeps flying while destination groups activate, then transfers the live pose without a reset (5.241792ms)
+✔ cancellation during connected activation stops the application flight and releases its resources (1.522667ms)
+✔ real input interrupts a same-object focus at the last painted camera (0.2175ms)
+✔ replacement departure uses the retained world while its previous detail owner is retired (3.990667ms)
+✔ the current body accepts wide-view centering only while below its prepared detail threshold (0.282125ms)
+✔ centering changes the focus at the same range and orientation, then focus zooms in (3.857542ms)
+✔ production runtime removes development observations from the executable closure (493.079041ms)
+node:internal/fs/promises:697
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/scene.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/projective-surface-seam-contract.test.mjs:10:28 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/scene.json'
+}
+
+Node.js v24.19.0
+✖ /Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/projective-surface-seam-contract.test.mjs (42.133834ms)
+✔ keeps reversal and every camera-advancing present in its recorded step (1.047875ms)
+✔ advances uncaptured native frames instead of skipping their camera work (0.622625ms)
+✔ rejects missing frame clocks and an already moving start (0.673791ms)
+✔ does not replay a preceding gesture still retained before the new press (0.14525ms)
+✔ ignores a pointer point stored after a non-launching release (0.090333ms)
+✔ pairs a fresh press during coast, held jitter and a second release independently (0.255583ms)
+✔ binds click-only receipts without fabricating a drag launch (0.223041ms)
+✔ advances an uncaptured receipt-only present (0.118416ms)
+✔ binds click receipts before a later drag without treating clicks as launches (0.148458ms)
+✔ pairs a source-consumed drag and following stop click (0.161458ms)
+✔ derives every root planet lane from the validated catalog (276.513708ms)
+✖ loads object-owned browser and audit expectations for every implementation (59.934541ms)
+✔ loading remembers latest intent but cannot resume; media events never rewrite intent (2.97325ms)
+✔ playback reads cannot consume a pending media notification (0.386833ms)
+✔ repeated restoration has bounded subscriptions; old callbacks cannot affect the replacement (1.134208ms)
+✔ malformed mounts retain cleanup handles and failure cleanup survives a destructor error (0.250125ms)
+✔ malformed mounts still observe their rejected readiness promise (0.40375ms)
+✔ fatal pause failure cleans once and never publishes success (0.247ms)
+✔ fatal resume failure cleans once and never publishes success (0.1185ms)
+✔ fatal report failure cleans once and never publishes success (0.064333ms)
+✔ an object destination can pause shared motion, and a retired object cannot change intent (0.166083ms)
+✔ automatic playback has one complete readiness, intent and environment policy (0.731917ms)
+✔ keeps one shared orientation-aware responsive shell boundary (0.175417ms)
+✔ uses one canonical high-density image bank for every mount (0.054375ms)
+✔ skybox orbit dragging is enabled by the shared input policy (0.052625ms)
+✔ discrete wheels and precision scroll gestures have separate shared gains (0.067583ms)
+✔ scroll input classification preserves accelerated precision gestures and permits device changes (0.168792ms)
+✔ updates wheel and touch policy without replacing controls (0.331209ms)
+✔ initial responsive failure removes its subscription and preserves startup rejection (0.246792ms)
+✔ live responsive failure retires the subscription before reporting fatal (0.118125ms)
+✖ asteroid and comet Shadows default off in authored content and prepared runtime (1.534542ms)
+✖ publishes one off-by-default Shadows control for every planet (0.763542ms)
+✔ control content permits empty capabilities but rejects malformed or conflicting declarations (0.346792ms)
+✖ small shell attribution records match the checked scientific provenance (1.728791ms)
+✔ every shared route retains its object sources and the actual environment credits (50.805166ms)
+✔ omits only the superseded ESO panorama, preserving other ESO and object OpenSpace sources (0.659958ms)
+✔ merges duplicate source links without dropping full credits or changing the caller (0.141875ms)
+✔ app credits and prepared body provenance have separate consumers on direct and cached routes (0.572417ms)
+✔ publishes the canonical scientific chart order (0.617042ms)
+✔ orders any applicable subset without inventing missing charts (0.112833ms)
+✔ keeps unknown future chart types after known charts in source order (0.186792ms)
+✖ binds phase charts to explicit primary-source provenance (2.401333ms)
+✔ discovers objects through multiple pages and resolves relative links at their source (0.500041ms)
+✔ rejects the orphaned Sun even when its inspected page retains a self-link (0.407375ms)
+✔ rejects a disconnected cycle even when every object has a link from another page (0.124459ms)
+✔ external links with a matching pathname do not discover a local object (0.390792ms)
+✔ Asteroids Orbits starts off and retains its independent preference across body navigation (3.20575ms)
+✔ Asteroid Labels starts off and retains its independent preference across body navigation (0.977917ms)
+✔ shell with no optional controls keeps Motion/high contrast and accessible blocked intent (0.723459ms)
+✔ failed shell construction cleans earlier controllers and their scheduled work (0.42225ms)
+✔ object content replacement retains shell controls and input state without accumulating listeners (0.77275ms)
+✔ Motion cannot enable Speed before the shared runtime is ready or after it retires (0.32325ms)
+✔ camera zoom switches body cards without replacing content or changing the search and detail tab (0.473667ms)
+✔ destination card stays fixed across flight poses and camera handoff, then follows manual zoom (0.473125ms)
+✔ camera scale changes retained overview content without moving the camera and search selects the matching category tab (0.6875ms)
+✔ clearing search keeps the current object or overview card and permits another search (0.715834ms)
+✔ flight completion and overview handoff preserve a newer active search (0.524875ms)
+✔ category pills reuse search, retain the query through navigation, and dismiss with Escape (0.698625ms)
+✔ the overview preview changes immediately and survives a same-scene commit (0.371584ms)
+✔ an empty search survives dismissal, overview resets, and object commits (0.430167ms)
+✔ choosing the current body from search shows its card without editing the query (0.291791ms)
+✔ a Milky Way breadcrumb previews its own card and preserves the search query (0.196542ms)
+node:internal/modules/package_json_reader:301
+  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);
+        ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'urijs' imported from /Users/ekrof/fed/cssEarth-moons-cassini-atlas/node_modules/@cesium/engine/Source/Core/Resource.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:301:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:859:18)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+    at #resolve (node:internal/modules/esm/loader:683:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+Node.js v24.19.0
+✖ /Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/surface-minimap.test.mjs (80.987667ms)
+✔ system flights keep the viewing angle and approach the center from QMbBW5Yy (12.223459ms)
+✔ system flights keep the viewing angle and approach the center from QIZBtofG (5.389333ms)
+✔ fitting the current angle is independent of prepared box order and member names (0.745291ms)
+✔ each system fits its complete primary orbits at 1524x1237, offset 0,0 (19.956334ms)
+✔ each system fits its complete primary orbits at 1280x720, offset 0,0 (17.27975ms)
+✔ each system fits its complete primary orbits at 390x844, offset 0,0 (15.94375ms)
+✔ each system fits its complete primary orbits at 1024x700, offset 40,-20 (14.928ms)
+✔ selecting the system root pulls back from a planet to all major planets, with a normal close-up on repeat (0.360291ms)
+✔ system fit leaves clearance for the visible sidebar, header and footer (0.123792ms)
+✔ adding a small distant moon does not pull the initial camera away from the larger moons (0.290459ms)
+✔ a body without moons uses its normal close-up target on first selection (0.160542ms)
+✔ clicking the already selected body in close-up does not zoom back out to its moons (0.100916ms)
+✔ galactic breadcrumbs zoom straight out from the current view without panning or turning (0.542209ms)
+✔ a Solar System breadcrumb always restores the system framing from a Sun close-up (0.326ms)
+✔ scene date includes the calendar time and TT scale across calendar days (1.06925ms)
+✔ coordinates carry rounded seconds and preserve hemispheres (0.082833ms)
+✔ altitude and distance scale use physical units across camera ranges (0.511667ms)
+✔ surface ruler measures the front surface, not the center plane (0.494417ms)
+✔ looking away supplies no invented surface coordinates or behind-camera ruler (0.112834ms)
+✔ objects without prepared geographic axes still have altitude and scale (0.097084ms)
+✔ galaxy distances keep a finite ruler without a spurious surface hit (0.122417ms)
+✔ camera changes coalesce into replaceState while preserving the route, other queries, hash and history state (2.276708ms)
+✔ incoming links restore before motion resumes without rewriting their saved playback position (0.626584ms)
+✔ existing JSON links shrink on restore while preserving their exact saved time and route (0.432709ms)
+✔ old physical camera links migrate to one pose without resampling saved motion time (0.467667ms)
+✔ invalid links leave the current scene usable and are replaced only after a camera change (0.246333ms)
+✔ popstate restores the stored camera and disposal removes history listeners and scheduled work (0.229375ms)
+ℹ tests 274
+ℹ suites 0
+ℹ pass 240
+ℹ fail 34
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9712.474292
+
+✖ failing tests:
+
+test at site/test/body-overview.test.mjs:10:1
+✖ overview charts retain every supplied spectrum sample across the registry (32.063125ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(charts > 0)
+  
+      at TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/body-overview.test.mjs:29:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at site/test/canonical-image-density.test.mjs:10:1
+✖ every object mounts one canonical high-density image bank (3457.420583ms)
+  Error: src/planets/polymele/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  src/planets/leucus/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/leucus/prepared/object.json'
+  src/planets/orus/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/orus/prepared/object.json'
+  src/planets/eurybates/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/eurybates/prepared/object.json'
+  src/planets/patroclus/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/patroclus/prepared/object.json'
+  src/planets/hiiaka/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hiiaka/prepared/object.json'
+  src/planets/squannit/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/squannit/prepared/object.json'
+  src/planets/romulus/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/romulus/prepared/object.json'
+  src/planets/menoetius/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/menoetius/prepared/object.json'
+  src/planets/caliban/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/caliban/prepared/object.json'
+  src/planets/sycorax/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sycorax/prepared/object.json'
+  src/planets/prospero/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/prospero/prepared/object.json'
+  src/planets/setebos/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/setebos/prepared/object.json'
+  src/planets/paaliaq/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/paaliaq/prepared/object.json'
+  src/planets/tarvos/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/tarvos/prepared/object.json'
+  src/planets/ijiraq/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ijiraq/prepared/object.json'
+  src/planets/suttungr/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/suttungr/prepared/object.json'
+  src/planets/mundilfari/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mundilfari/prepared/object.json'
+  src/planets/skathi/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/skathi/prepared/object.json'
+  src/planets/erriapus/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/erriapus/prepared/object.json'
+  src/planets/thrymr/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/thrymr/prepared/object.json'
+  src/planets/bebhionn/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/bebhionn/prepared/object.json'
+  src/planets/bergelmir/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/bergelmir/prepared/object.json'
+  src/planets/bestla/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/bestla/prepared/object.json'
+  src/planets/fornjot/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/fornjot/prepared/object.json'
+  src/planets/hati/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hati/prepared/object.json'
+  src/planets/hyrrokkin/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hyrrokkin/prepared/object.json'
+  src/planets/loge/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/loge/prepared/object.json'
+  src/planets/skoll/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/skoll/prepared/object.json'
+  src/planets/greip/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/greip/prepared/object.json'
+  src/planets/tarqeq/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/tarqeq/prepared/object.json'
+  src/planets/albiorix/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/albiorix/prepared/object.json'
+  src/planets/kiviuq/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/kiviuq/prepared/object.json'
+  src/planets/comet-137p/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-137p/prepared/object.json'
+  src/planets/comet-143p/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-143p/prepared/object.json'
+  src/planets/comet-162p/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-162p/prepared/object.json'
+  src/planets/comet-19p/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-19p/prepared/object.json'
+  src/planets/comet-8p/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-8p/prepared/object.json'
+  src/planets/comet-1p/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-1p/prepared/object.json'
+  src/planets/comet-81p/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-81p/prepared/object.json'
+  src/planets/comet-103p/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-103p/prepared/object.json'
+  src/planets/comet-9p/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-9p/prepared/object.json'
+  src/planets/comet-67p/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-67p/prepared/object.json'
+  src/planets/ymir/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ymir/prepared/object.json'
+  src/planets/siarnaq/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/siarnaq/prepared/object.json'
+  src/planets/himalia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/himalia/prepared/object.json'
+  src/planets/nereid/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/nereid/prepared/object.json'
+  src/planets/aegaeon/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/aegaeon/prepared/object.json'
+  src/planets/anthe/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/anthe/prepared/object.json'
+  src/planets/polydeuces/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polydeuces/prepared/object.json'
+  src/planets/rosalind/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/rosalind/prepared/object.json'
+  src/planets/desdemona/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/desdemona/prepared/object.json'
+  src/planets/cressida/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/cressida/prepared/object.json'
+  src/planets/bianca/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/bianca/prepared/object.json'
+  src/planets/ophelia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ophelia/prepared/object.json'
+  src/planets/cordelia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/cordelia/prepared/object.json'
+  src/planets/belinda/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/belinda/prepared/object.json'
+  src/planets/juliet/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/juliet/prepared/object.json'
+  src/planets/portia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/portia/prepared/object.json'
+  src/planets/pallene/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/pallene/prepared/object.json'
+  src/planets/methone/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/methone/prepared/object.json'
+  src/planets/puck/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/puck/prepared/object.json'
+  src/planets/amalthea/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/amalthea/prepared/object.json'
+  src/planets/thebe/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/thebe/prepared/object.json'
+  src/planets/metis/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/metis/prepared/object.json'
+  src/planets/adrastea/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/adrastea/prepared/object.json'
+  src/planets/naiad/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/naiad/prepared/object.json'
+  src/planets/thalassa/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/thalassa/prepared/object.json'
+  src/planets/despina/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/despina/prepared/object.json'
+  src/planets/galatea/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/galatea/prepared/object.json'
+  src/planets/proteus/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/proteus/prepared/object.json'
+  src/planets/larissa/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/larissa/prepared/object.json'
+  src/planets/daphnis/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/daphnis/prepared/object.json'
+  src/planets/calypso/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/calypso/prepared/object.json'
+  src/planets/telesto/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/telesto/prepared/object.json'
+  src/planets/helene/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/helene/prepared/object.json'
+  src/planets/sun/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/prepared/object.json'
+  src/planets/mercury/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/object.json'
+  src/planets/venus/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+  src/planets/earth/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/earth/prepared/object.json'
+  src/planets/mars/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mars/prepared/object.json'
+  src/planets/ryugu/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ryugu/prepared/object.json'
+  src/planets/bennu/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/bennu/prepared/object.json'
+  src/planets/itokawa/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/itokawa/prepared/object.json'
+  src/planets/eros/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/eros/prepared/object.json'
+  src/planets/ida/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ida/prepared/object.json'
+  src/planets/gaspra/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/gaspra/prepared/object.json'
+  src/planets/mathilde/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mathilde/prepared/object.json'
+  src/planets/lutetia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/lutetia/prepared/object.json'
+  src/planets/steins/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/steins/prepared/object.json'
+  src/planets/didymos/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/didymos/prepared/object.json'
+  src/planets/dimorphos/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/dimorphos/prepared/object.json'
+  src/planets/kleopatra/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/kleopatra/prepared/object.json'
+  src/planets/toutatis/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/toutatis/prepared/object.json'
+  src/planets/pallas/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/pallas/prepared/object.json'
+  src/planets/hygiea/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hygiea/prepared/object.json'
+  src/planets/juno/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/juno/prepared/object.json'
+  src/planets/psyche/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/psyche/prepared/object.json'
+  src/planets/interamnia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/interamnia/prepared/object.json'
+  src/planets/davida/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/davida/prepared/object.json'
+  src/planets/sylvia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sylvia/prepared/object.json'
+  src/planets/eunomia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/eunomia/prepared/object.json'
+  src/planets/euphrosyne/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/euphrosyne/prepared/object.json'
+  src/planets/bamberga/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/bamberga/prepared/object.json'
+  src/planets/fortuna/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/fortuna/prepared/object.json'
+  src/planets/themis/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/themis/prepared/object.json'
+  src/planets/amphitrite/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/amphitrite/prepared/object.json'
+  src/planets/egeria/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/egeria/prepared/object.json'
+  src/planets/elektra/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/elektra/prepared/object.json'
+  src/planets/iris/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/iris/prepared/object.json'
+  src/planets/hebe/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hebe/prepared/object.json'
+  src/planets/eugenia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/eugenia/prepared/object.json'
+  src/planets/daphne/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/daphne/prepared/object.json'
+  src/planets/eleonora/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/eleonora/prepared/object.json'
+  src/planets/nemesis/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/nemesis/prepared/object.json'
+  src/planets/kalliope/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/kalliope/prepared/object.json'
+  src/planets/nemausa/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/nemausa/prepared/object.json'
+  src/planets/parthenope/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/parthenope/prepared/object.json'
+  src/planets/melpomene/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/melpomene/prepared/object.json'
+  src/planets/julia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/julia/prepared/object.json'
+  src/planets/victoria/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/victoria/prepared/object.json'
+  src/planets/urania/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/urania/prepared/object.json'
+  src/planets/flora/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/flora/prepared/object.json'
+  src/planets/europa-52/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/europa-52/prepared/object.json'
+  src/planets/metis-9/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/metis-9/prepared/object.json'
+  src/planets/camilla/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/camilla/prepared/object.json'
+  src/planets/thisbe/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/thisbe/prepared/object.json'
+  src/planets/doris/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/doris/prepared/object.json'
+  src/planets/hermione/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hermione/prepared/object.json'
+  src/planets/diotima/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/diotima/prepared/object.json'
+  src/planets/herculina/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/herculina/prepared/object.json'
+  src/planets/nausikaa/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/nausikaa/prepared/object.json'
+  src/planets/astraea/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/astraea/prepared/object.json'
+  src/planets/irene/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/irene/prepared/object.json'
+  src/planets/nysa/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/nysa/prepared/object.json'
+  src/planets/sappho/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sappho/prepared/object.json'
+  src/planets/betulia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/betulia/prepared/object.json'
+  src/planets/castalia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/castalia/prepared/object.json'
+  src/planets/asteroid-1998-wt24/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/asteroid-1998-wt24/prepared/object.json'
+  src/planets/asteroid-1994-cc/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/asteroid-1994-cc/prepared/object.json'
+  src/planets/fides/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/fides/prepared/object.json'
+  src/planets/penelope/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/penelope/prepared/object.json'
+  src/planets/alphonsina/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/alphonsina/prepared/object.json'
+  src/planets/angelina/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/angelina/prepared/object.json'
+  src/planets/ganymed/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ganymed/prepared/object.json'
+  src/planets/moshup/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/moshup/prepared/object.json'
+  src/planets/cybele/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/cybele/prepared/object.json'
+  src/planets/aurora/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/aurora/prepared/object.json'
+  src/planets/palma/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/palma/prepared/object.json'
+  src/planets/thule/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/thule/prepared/object.json'
+  src/planets/hektor/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hektor/prepared/object.json'
+  src/planets/hekate/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hekate/prepared/object.json'
+  src/planets/phaethon/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/phaethon/prepared/object.json'
+  src/planets/harmonia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/harmonia/prepared/object.json'
+  src/planets/panopaea/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/panopaea/prepared/object.json'
+  src/planets/desdemona-666/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/desdemona-666/prepared/object.json'
+  src/planets/asteroid-1950-da/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/asteroid-1950-da/prepared/object.json'
+  src/planets/apophis/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/apophis/prepared/object.json'
+  src/planets/donaldjohanson/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/donaldjohanson/prepared/object.json'
+  src/planets/geographos/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/geographos/prepared/object.json'
+  src/planets/bacchus/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/bacchus/prepared/object.json'
+  src/planets/mithra/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mithra/prepared/object.json'
+  src/planets/nereus/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/nereus/prepared/object.json'
+  src/planets/golevka/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/golevka/prepared/object.json'
+  src/planets/yorp/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/yorp/prepared/object.json'
+  src/planets/asteroid-1996-hw1/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/asteroid-1996-hw1/prepared/object.json'
+  src/planets/asteroid-2008-ev5/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/asteroid-2008-ev5/prepared/object.json'
+  src/planets/ra-shalom/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ra-shalom/prepared/object.json'
+  src/planets/asteroid-1992-sk/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/asteroid-1992-sk/prepared/object.json'
+  src/planets/asteroid-1998-ml14/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/asteroid-1998-ml14/prepared/object.json'
+  src/planets/asteroid-2002-ce26/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/asteroid-2002-ce26/prepared/object.json'
+  src/planets/thetis/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/thetis/prepared/object.json'
+  src/planets/thalia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/thalia/prepared/object.json'
+  src/planets/phocaea/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/phocaea/prepared/object.json'
+  src/planets/euterpe/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/euterpe/prepared/object.json'
+  src/planets/bellona/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/bellona/prepared/object.json'
+  src/planets/pomona/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/pomona/prepared/object.json'
+  src/planets/circe/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/circe/prepared/object.json'
+  src/planets/atalante/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/atalante/prepared/object.json'
+  src/planets/leda-38/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/leda-38/prepared/object.json'
+  src/planets/laetitia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/laetitia/prepared/object.json'
+  src/planets/isis/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/isis/prepared/object.json'
+  src/planets/ariadne/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ariadne/prepared/object.json'
+  src/planets/hestia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hestia/prepared/object.json'
+  src/planets/aglaja/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/aglaja/prepared/object.json'
+  src/planets/pales/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/pales/prepared/object.json'
+  src/planets/kalypso/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/kalypso/prepared/object.json'
+  src/planets/alexandra/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/alexandra/prepared/object.json'
+  src/planets/pandora-55/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/pandora-55/prepared/object.json'
+  src/planets/melete/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/melete/prepared/object.json'
+  src/planets/elpis/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/elpis/prepared/object.json'
+  src/planets/erato/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/erato/prepared/object.json'
+  src/planets/ausonia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ausonia/prepared/object.json'
+  src/planets/asia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/asia/prepared/object.json'
+  src/planets/leto/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/leto/prepared/object.json'
+  src/planets/hesperia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hesperia/prepared/object.json'
+  src/planets/niobe/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/niobe/prepared/object.json'
+  src/planets/feronia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/feronia/prepared/object.json'
+  src/planets/klytia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/klytia/prepared/object.json'
+  src/planets/galatea-74/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/galatea-74/prepared/object.json'
+  src/planets/freia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/freia/prepared/object.json'
+  src/planets/eurynome/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/eurynome/prepared/object.json'
+  src/planets/alkmene/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/alkmene/prepared/object.json'
+  src/planets/beatrix/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/beatrix/prepared/object.json'
+  src/planets/klio/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/klio/prepared/object.json'
+  src/planets/io-85/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/io-85/prepared/object.json'
+  src/planets/semele/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/semele/prepared/object.json'
+  src/planets/aegina/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/aegina/prepared/object.json'
+  src/planets/minerva/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/minerva/prepared/object.json'
+  src/planets/arethusa/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/arethusa/prepared/object.json'
+  src/planets/klotho/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/klotho/prepared/object.json'
+  src/planets/ianthe/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ianthe/prepared/object.json'
+  src/planets/hertha/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hertha/prepared/object.json'
+  src/planets/hera/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hera/prepared/object.json'
+  src/planets/klymene/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/klymene/prepared/object.json'
+  src/planets/artemis/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/artemis/prepared/object.json'
+  src/planets/dione-106/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/dione-106/prepared/object.json'
+  src/planets/felicitas/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/felicitas/prepared/object.json'
+  src/planets/lydia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/lydia/prepared/object.json'
+  src/planets/iphigenia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/iphigenia/prepared/object.json'
+  src/planets/thyra/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/thyra/prepared/object.json'
+  src/planets/lomia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/lomia/prepared/object.json'
+  src/planets/peitho/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/peitho/prepared/object.json'
+  src/planets/althaea/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/althaea/prepared/object.json'
+  src/planets/lachesis/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/lachesis/prepared/object.json'
+  src/planets/gerda/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/gerda/prepared/object.json'
+  src/planets/brunhild/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/brunhild/prepared/object.json'
+  src/planets/alkeste/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/alkeste/prepared/object.json'
+  src/planets/liberatrix/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/liberatrix/prepared/object.json'
+  src/planets/velleda/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/velleda/prepared/object.json'
+  src/planets/johanna/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/johanna/prepared/object.json'
+  src/planets/antigone/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/antigone/prepared/object.json'
+  src/planets/cyrene/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/cyrene/prepared/object.json'
+  src/planets/sophrosyne/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sophrosyne/prepared/object.json'
+  src/planets/meliboea/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/meliboea/prepared/object.json'
+  src/planets/siwa/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/siwa/prepared/object.json'
+  src/planets/vibilia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/vibilia/prepared/object.json'
+  src/planets/lucina/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/lucina/prepared/object.json'
+  src/planets/protogeneia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/protogeneia/prepared/object.json'
+  src/planets/gallia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/gallia/prepared/object.json'
+  src/planets/medusa/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/medusa/prepared/object.json'
+  src/planets/nuwa/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/nuwa/prepared/object.json'
+  src/planets/abundantia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/abundantia/prepared/object.json'
+  src/planets/scylla/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/scylla/prepared/object.json'
+  src/planets/xanthippe/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/xanthippe/prepared/object.json'
+  src/planets/dejanira/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/dejanira/prepared/object.json'
+  src/planets/aemilia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/aemilia/prepared/object.json'
+  src/planets/una/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/una/prepared/object.json'
+  src/planets/athor/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/athor/prepared/object.json'
+  src/planets/laurentia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/laurentia/prepared/object.json'
+  src/planets/erigone/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/erigone/prepared/object.json'
+  src/planets/eva/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/eva/prepared/object.json'
+  src/planets/loreley/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/loreley/prepared/object.json'
+  src/planets/rhodope/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/rhodope/prepared/object.json'
+  src/planets/urda/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/urda/prepared/object.json'
+  src/planets/sibylla/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sibylla/prepared/object.json'
+  src/planets/baucis/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/baucis/prepared/object.json'
+  src/planets/ino/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ino/prepared/object.json'
+  src/planets/phaedra/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/phaedra/prepared/object.json'
+  src/planets/dejopeja/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/dejopeja/prepared/object.json'
+  src/planets/lamberta/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/lamberta/prepared/object.json'
+  src/planets/menippe/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/menippe/prepared/object.json'
+  src/planets/kolga/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/kolga/prepared/object.json'
+  src/planets/ambrosia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ambrosia/prepared/object.json'
+  src/planets/eurykleia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/eurykleia/prepared/object.json'
+  src/planets/byblis/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/byblis/prepared/object.json'
+  src/planets/kallisto/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/kallisto/prepared/object.json'
+  src/planets/hersilia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hersilia/prepared/object.json'
+  src/planets/hedda/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hedda/prepared/object.json'
+  src/planets/dido/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/dido/prepared/object.json'
+  src/planets/isabella/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/isabella/prepared/object.json'
+  src/planets/medea/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/medea/prepared/object.json'
+  src/planets/lilaea/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/lilaea/prepared/object.json'
+  src/planets/aschera/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/aschera/prepared/object.json'
+  src/planets/oenone/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/oenone/prepared/object.json'
+  src/planets/eudora/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/eudora/prepared/object.json'
+  src/planets/stephania/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/stephania/prepared/object.json'
+  src/planets/eos/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/eos/prepared/object.json'
+  src/planets/henrietta/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/henrietta/prepared/object.json'
+  src/planets/weringia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/weringia/prepared/object.json'
+  src/planets/philosophia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/philosophia/prepared/object.json'
+  src/planets/athamantis/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/athamantis/prepared/object.json'
+  src/planets/vindobona/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/vindobona/prepared/object.json'
+  src/planets/asterope/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/asterope/prepared/object.json'
+  src/planets/coelestina/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/coelestina/prepared/object.json'
+  src/planets/hypatia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hypatia/prepared/object.json'
+  src/planets/vanadis/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/vanadis/prepared/object.json'
+  src/planets/kriemhild/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/kriemhild/prepared/object.json'
+  src/planets/vera/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/vera/prepared/object.json'
+  src/planets/asporina/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/asporina/prepared/object.json'
+  src/planets/eukrate/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/eukrate/prepared/object.json'
+  src/planets/ilse/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ilse/prepared/object.json'
+  src/planets/bettina/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/bettina/prepared/object.json'
+  src/planets/clementina/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/clementina/prepared/object.json'
+  src/planets/augusta/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/augusta/prepared/object.json'
+  src/planets/silesia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/silesia/prepared/object.json'
+  src/planets/tyche/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/tyche/prepared/object.json'
+  src/planets/huberta/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/huberta/prepared/object.json'
+  src/planets/dresda/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/dresda/prepared/object.json'
+  src/planets/libussa/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/libussa/prepared/object.json'
+  src/planets/anna/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/anna/prepared/object.json'
+  src/planets/anahita/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/anahita/prepared/object.json'
+  src/planets/penthesilea/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/penthesilea/prepared/object.json'
+  src/planets/antonia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/antonia/prepared/object.json'
+  src/planets/philagoria/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/philagoria/prepared/object.json'
+  src/planets/sapientia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sapientia/prepared/object.json'
+  src/planets/adelheid/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/adelheid/prepared/object.json'
+  src/planets/emma/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/emma/prepared/object.json'
+  src/planets/iclea/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/iclea/prepared/object.json'
+  src/planets/bavaria/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/bavaria/prepared/object.json'
+  src/planets/clarissa/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/clarissa/prepared/object.json'
+  src/planets/unitas/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/unitas/prepared/object.json'
+  src/planets/annefrank/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/annefrank/prepared/object.json'
+  src/planets/braille/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/braille/prepared/object.json'
+  src/planets/dike/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/dike/prepared/object.json'
+  src/planets/massalia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/massalia/prepared/object.json'
+  src/planets/proserpina/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/proserpina/prepared/object.json'
+  src/planets/polyhymnia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polyhymnia/prepared/object.json'
+  src/planets/leukothea/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/leukothea/prepared/object.json'
+  src/planets/virginia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/virginia/prepared/object.json'
+  src/planets/echo/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/echo/prepared/object.json'
+  src/planets/maja/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/maja/prepared/object.json'
+  src/planets/juewa/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/juewa/prepared/object.json'
+  src/planets/bertha/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/bertha/prepared/object.json'
+  src/planets/lucia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/lucia/prepared/object.json'
+  src/planets/brucia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/brucia/prepared/object.json'
+  src/planets/badenia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/badenia/prepared/object.json'
+  src/planets/ducrosa/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ducrosa/prepared/object.json'
+  src/planets/gyptis/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/gyptis/prepared/object.json'
+  src/planets/petrina/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/petrina/prepared/object.json'
+  src/planets/veritas/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/veritas/prepared/object.json'
+  src/planets/gryphia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/gryphia/prepared/object.json'
+  src/planets/selinur/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/selinur/prepared/object.json'
+  src/planets/achilles/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/achilles/prepared/object.json'
+  src/planets/musa/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/musa/prepared/object.json'
+  src/planets/auravictrix/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/auravictrix/prepared/object.json'
+  src/planets/transvaalia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/transvaalia/prepared/object.json'
+  src/planets/moskva/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/moskva/prepared/object.json'
+  src/planets/kressmannia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/kressmannia/prepared/object.json'
+  src/planets/parysatis/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/parysatis/prepared/object.json'
+  src/planets/rosalinde/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/rosalinde/prepared/object.json'
+  src/planets/susi/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/susi/prepared/object.json'
+  src/planets/hidalgo/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hidalgo/prepared/object.json'
+  src/planets/zachia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/zachia/prepared/object.json'
+  src/planets/piazzia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/piazzia/prepared/object.json'
+  src/planets/tulipa/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/tulipa/prepared/object.json'
+  src/planets/reinmuthia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/reinmuthia/prepared/object.json'
+  src/planets/china/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/china/prepared/object.json'
+  src/planets/crimea/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/crimea/prepared/object.json'
+  src/planets/rusthawelia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/rusthawelia/prepared/object.json'
+  src/planets/schorria/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/schorria/prepared/object.json'
+  src/planets/silvretta/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/silvretta/prepared/object.json'
+  src/planets/virtanen/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/virtanen/prepared/object.json'
+  src/planets/mr-spock/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mr-spock/prepared/object.json'
+  src/planets/educatio/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/educatio/prepared/object.json'
+  src/planets/hopi/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hopi/prepared/object.json'
+  src/planets/schaber/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/schaber/prepared/object.json'
+  src/planets/iau/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/iau/prepared/object.json'
+  src/planets/united-nations/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/united-nations/prepared/object.json'
+  src/planets/tartaglia/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/tartaglia/prepared/object.json'
+  src/planets/raup/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/raup/prepared/object.json'
+  src/planets/asteroid-2001-qw16/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/asteroid-2001-qw16/prepared/object.json'
+  src/planets/asteroid-1999-fr33/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/asteroid-1999-fr33/prepared/object.json'
+  src/planets/vesta/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/vesta/prepared/object.json'
+  src/planets/phobos/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/phobos/prepared/object.json'
+  src/planets/deimos/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/deimos/prepared/object.json'
+  src/planets/ceres/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ceres/prepared/object.json'
+  src/planets/jupiter/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/jupiter/prepared/object.json'
+  src/planets/europa/object.json:1: Prepared JSON transport SHA-256 does not match its descriptor.
+  src/planets/callisto/object.json:1: Prepared JSON transport SHA-256 does not match its descriptor.
+  src/planets/saturn/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/saturn/prepared/object.json'
+  src/planets/pan/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/pan/prepared/object.json'
+  src/planets/atlas/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/atlas/prepared/object.json'
+  src/planets/prometheus/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/prometheus/prepared/object.json'
+  src/planets/pandora/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/pandora/prepared/object.json'
+  src/planets/janus/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/janus/prepared/object.json'
+  src/planets/epimetheus/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/epimetheus/prepared/object.json'
+  src/planets/hyperion/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hyperion/prepared/object.json'
+  src/planets/mimas/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mimas/prepared/object.json'
+  src/planets/tethys/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/tethys/prepared/object.json'
+  src/planets/dione/object.json:1: Prepared JSON transport SHA-256 does not match its descriptor.
+  src/planets/rhea/object.json:1: Prepared JSON transport SHA-256 does not match its descriptor.
+  src/planets/titan/object.json:1: Prepared JSON transport SHA-256 does not match its descriptor.
+  src/planets/iapetus/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/iapetus/prepared/object.json'
+  src/planets/phoebe/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/phoebe/prepared/object.json'
+  src/planets/uranus/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/uranus/prepared/object.json'
+  src/planets/miranda/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/miranda/prepared/object.json'
+  src/planets/ariel/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ariel/prepared/object.json'
+  src/planets/umbriel/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/umbriel/prepared/object.json'
+  src/planets/titania/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/titania/prepared/object.json'
+  src/planets/oberon/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/oberon/prepared/object.json'
+  src/planets/neptune/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/neptune/prepared/object.json'
+  src/planets/triton/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/triton/prepared/object.json'
+  src/planets/pluto/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/pluto/prepared/object.json'
+  src/planets/charon/object.json:1: Prepared JSON transport SHA-256 does not match its descriptor.
+  src/planets/styx/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/styx/prepared/object.json'
+  src/planets/nix/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/nix/prepared/object.json'
+  src/planets/kerberos/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/kerberos/prepared/object.json'
+  src/planets/hydra/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/hydra/prepared/object.json'
+  src/planets/haumea/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/haumea/prepared/object.json'
+  src/planets/makemake/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/makemake/prepared/object.json'
+  src/planets/eris/object.json:1: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/eris/prepared/object.json'
+      at auditObjectRuntimeOwnership (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/check-object-runtime-ownership.mjs:749:11)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/canonical-image-density.test.mjs:12:21)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at site/test/dataset-content.test.mjs:10:1
+✖ every registered dataset has a specific authored title, independent of category and source-link availability (3.385ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/source/content/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async read (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/dataset-content.test.mjs:8:39)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/dataset-content.test.mjs:17:20)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/source/content/object.json'
+  }
+
+test at site/test/dataset-spacecraft.test.mjs:81:1
+✖ every declared capture has a catalog entry and stays tied to its pinned source (0.5235ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/source/manifest.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async json (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/dataset-spacecraft.test.mjs:10:39)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/dataset-spacecraft.test.mjs:85:22)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/source/manifest.json'
+  }
+
+test at site/test/load-browser-profile.test.mjs:96:1
+✖ all objects retain browser evidence for the controls they support (89.846916ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/earth/prepared/runtime.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async read (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tests/objects/unit/earth/prepared-fixture.mjs:12:35)
+      at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tests/objects/unit/earth/prepared-fixture.mjs:13:32 {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/earth/prepared/runtime.json'
+  }
+
+test at site/test/navigation-preparation.test.mjs:26:1
+✖ composes every orbiting-object marker descriptor in catalog order (3.675041ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/preparation/navigation.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async loadObjectDescriptor (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-navigation.mjs:513:23)
+      at async loadMarkerDescriptors (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-navigation.mjs:43:24)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/navigation-preparation.test.mjs:27:23)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/preparation/navigation.json'
+  }
+
+test at site/test/navigation-preparation.test.mjs:43:1
+✖ reproduces the checked-in registry-derived atlases and utility markers (1.755916ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/preparation/navigation.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async loadObjectDescriptor (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-navigation.mjs:513:23)
+      at async loadMarkerDescriptors (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-navigation.mjs:43:24)
+      at async prepareNavigation (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-navigation.mjs:68:23)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/navigation-preparation.test.mjs:47:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/preparation/navigation.json'
+  }
+
+test at site/test/navigation-preparation.test.mjs:67:3
+✖ failed object source preserves accepted files or recoverable backups outside public (3.034834ms)
+  Error: ENOENT: no such file or directory, copyfile '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/swatch.json' -> '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-NXxPsh/src/planets/sun/swatch.json'
+      at async copyFile (node:internal/fs/promises:679:10)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/navigation-preparation.test.mjs:73:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'copyfile',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/swatch.json',
+    dest: '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-NXxPsh/src/planets/sun/swatch.json'
+  }
+
+test at site/test/navigation-preparation.test.mjs:67:3
+✖ failed late utility source preserves accepted files or recoverable backups outside public (2.295459ms)
+  Error: ENOENT: no such file or directory, copyfile '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/swatch.json' -> '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-Z4EvN6/src/planets/sun/swatch.json'
+      at async copyFile (node:internal/fs/promises:679:10)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/navigation-preparation.test.mjs:73:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'copyfile',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/swatch.json',
+    dest: '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-Z4EvN6/src/planets/sun/swatch.json'
+  }
+
+test at site/test/navigation-preparation.test.mjs:67:3
+✖ failed publication preserves accepted files or recoverable backups outside public (2.322875ms)
+  Error: ENOENT: no such file or directory, copyfile '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/swatch.json' -> '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-hLy72X/src/planets/sun/swatch.json'
+      at async copyFile (node:internal/fs/promises:679:10)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/navigation-preparation.test.mjs:73:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'copyfile',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/swatch.json',
+    dest: '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-hLy72X/src/planets/sun/swatch.json'
+  }
+
+test at site/test/navigation-preparation.test.mjs:67:3
+✖ failed rollback preserves accepted files or recoverable backups outside public (2.493042ms)
+  Error: ENOENT: no such file or directory, copyfile '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/swatch.json' -> '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-rsnTqr/src/planets/sun/swatch.json'
+      at async copyFile (node:internal/fs/promises:679:10)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/navigation-preparation.test.mjs:73:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'copyfile',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/swatch.json',
+    dest: '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-rsnTqr/src/planets/sun/swatch.json'
+  }
+
+test at site/test/object-browser-profile.test.mjs:19:1
+✖ every actual profile reads its recorded coordinates from the shared camera endpoint (86.79ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/earth/prepared/runtime.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async read (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tests/objects/unit/earth/prepared-fixture.mjs:12:35)
+      at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tests/objects/unit/earth/prepared-fixture.mjs:13:32 {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/earth/prepared/runtime.json'
+  }
+
+test at site/test/object-browser-profile.test.mjs:52:1
+✖ an already ready object does not depend on a redundant browser waiter (32.959958ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/earth/prepared/runtime.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async read (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tests/objects/unit/earth/prepared-fixture.mjs:12:35)
+      at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tests/objects/unit/earth/prepared-fixture.mjs:13:32 {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/earth/prepared/runtime.json'
+  }
+
+test at site/test/object-navigation.test.mjs:26:1
+✖ prepared marker identity, atlas order, and presentation follow packages (4.533916ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/preparation/navigation.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async loadObjectDescriptor (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-navigation.mjs:513:23)
+      at async loadMarkerDescriptors (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-navigation.mjs:43:24)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/object-navigation.test.mjs:30:23)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/preparation/navigation.json'
+  }
+
+test at site/test/object-navigation.test.mjs:42:1
+✖ an unknown object loads its own marker; missing packages fail without fallback (3.406584ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/preparation/navigation.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async loadObjectDescriptor (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-navigation.mjs:513:23)
+      at async loadMarkerDescriptors (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-navigation.mjs:43:24)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/object-navigation.test.mjs:47:19)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/preparation/navigation.json'
+  }
+
+test at site/test/object-orbit-failure.test.mjs:1:1
+✖ /Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/object-orbit-failure.test.mjs (61.312ms)
+  'test failed'
+
+test at site/test/object-package-contract.test.mjs:68:1
+✖ requires every registered object package file (0.727041ms)
+  Error: Implemented object polymele is missing /Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/SOURCE.md.
+      at validateObjectPackageFiles (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/object-package-contract.mjs:54:13)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/object-package-contract.test.mjs:70:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    [cause]: Error: ENOENT: no such file or directory, access '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/SOURCE.md'
+        at async access (node:internal/fs/promises:664:10)
+        at async validateObjectPackageFiles (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/object-package-contract.mjs:52:7)
+        at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/object-package-contract.test.mjs:70:5)
+        at async Test.run (node:internal/test_runner/test:1389:7)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+      errno: -2,
+      code: 'ENOENT',
+      syscall: 'access',
+      path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/SOURCE.md'
+    }
+  }
+
+test at site/test/planet-shell.test.mjs:237:1
+✖ keeps implemented routes backed by object-owned files (2.226667ms)
+  Error: ENOENT: no such file or directory, access '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/SOURCE.md'
+      at async access (node:internal/fs/promises:664:10)
+      at async Promise.all (index 0)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/planet-shell.test.mjs:249:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'access',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/SOURCE.md'
+  }
+
+test at site/test/planet-shell.test.mjs:254:1
+✖ keeps source-backed chart data in canonical order with Reflectance first (2.55525ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async readJson (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:8:45)
+      at async loadObjectContent (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:19:13)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/planet-shell.test.mjs:283:35)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/object.json'
+  }
+
+test at site/test/planet-shell.test.mjs:313:1
+✖ keeps lens descriptions source-bound in the object model (0.745625ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/saturn/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async readJson (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:8:45)
+      at async loadObjectContent (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:19:13)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/planet-shell.test.mjs:314:18)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/saturn/prepared/object.json'
+  }
+
+test at site/test/prepared-factsheet-model.test.mjs:1:1
+✖ /Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-factsheet-model.test.mjs (34.598417ms)
+  'test failed'
+
+test at site/test/prepared-lens-facts.test.mjs:13:1
+✖ authored lens facts survive preparation and runtime publication without mutating the source (3.04925ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-67p/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async readJson (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:8:45)
+      at async loadObjectContent (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:19:13)
+      at async fixture (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-facts.test.mjs:7:18)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-facts.test.mjs:14:30)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-67p/prepared/object.json'
+  }
+
+test at site/test/prepared-lens-facts.test.mjs:26:1
+✖ lens facts reject malformed rows and duplicate ids before publication (1.219667ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-67p/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async readJson (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:8:45)
+      at async loadObjectContent (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:19:13)
+      at async fixture (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-facts.test.mjs:7:18)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-facts.test.mjs:27:22)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-67p/prepared/object.json'
+  }
+
+test at site/test/prepared-lens-facts.test.mjs:37:1
+✖ existing description-only lenses keep their original content contract (0.691667ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-67p/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async readJson (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:8:45)
+      at async loadObjectContent (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:19:13)
+      at async fixture (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-facts.test.mjs:7:18)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-facts.test.mjs:38:22)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-67p/prepared/object.json'
+  }
+
+test at site/test/prepared-lens-legends.test.mjs:67:1
+✖ every object forwards its object-owned legend through the shared shell (57.930416ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/eurybates/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async readJson (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:8:45)
+      at async loadObjectContent (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:19:13)
+      at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-legends.test.mjs:69:20
+      at async Promise.all (index 3)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-legends.test.mjs:68:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/eurybates/prepared/object.json'
+  }
+
+test at site/test/prepared-titles.test.mjs:51:1
+✖ keeps planet title rendering facts object-owned and source-bound (0.775916ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async readJson (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:8:45)
+      at async loadObjectContent (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:19:13)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-titles.test.mjs:53:20)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  }
+
+test at site/test/prepared-titles.test.mjs:64:1
+✖ normalizes every implemented planet title to the complete Saturn standard (0.805542ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async readJson (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:8:45)
+      at async loadObjectContent (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:19:13)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-titles.test.mjs:66:35)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  }
+
+test at site/test/projective-surface-seam-contract.test.mjs:1:1
+✖ /Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/projective-surface-seam-contract.test.mjs (42.133834ms)
+  'test failed'
+
+test at site/test/root-orchestration.test.mjs:36:1
+✖ loads object-owned browser and audit expectations for every implementation (59.934541ms)
+  Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mars/prepared/lighting.json' imported from /Users/ekrof/fed/cssEarth-moons-cassini-atlas/tests/objects/browser/mars/browser-profile.mjs
+      at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+      at moduleResolve (node:internal/modules/esm/resolve:865:10)
+      at defaultResolve (node:internal/modules/esm/resolve:992:11)
+      at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+      at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+      at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+      at #resolve (node:internal/modules/esm/loader:683:17)
+      at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+      at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33)
+      at ModuleJob.link (node:internal/modules/esm/module_job:253:17) {
+    code: 'ERR_MODULE_NOT_FOUND',
+    url: 'file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mars/prepared/lighting.json'
+  }
+
+test at site/test/scene-contract.test.mjs:9:1
+✖ asteroid and comet Shadows default off in authored content and prepared runtime (1.534542ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/source/content/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/scene-contract.test.mjs:11:31)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/source/content/object.json'
+  }
+
+test at site/test/scene-contract.test.mjs:21:1
+✖ publishes one off-by-default Shadows control for every planet (0.763542ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async loadObjectTestDefinition (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/object-test-data.mjs:5:21)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/scene-contract.test.mjs:27:29)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/object.json'
+  }
+
+test at site/test/scene-sources.test.mjs:7:1
+✖ small shell attribution records match the checked scientific provenance (1.728791ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/objects/milky-way/source/sky/provenance.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async read (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/scene-sources.test.mjs:8:41)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/scene-sources.test.mjs:9:15)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/objects/milky-way/source/sky/provenance.json'
+  }
+
+test at site/test/scientific-chart-sources.test.mjs:9:1
+✖ binds phase charts to explicit primary-source provenance (2.401333ms)
+  Error: ENOENT: no such file or directory, access '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/public/scenes/mercury/mercury-photometric-phase-curve.svg'
+      at async access (node:internal/fs/promises:664:10)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/scientific-chart-sources.test.mjs:24:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'access',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/public/scenes/mercury/mercury-photometric-phase-curve.svg'
+  }
+
+test at site/test/surface-minimap.test.mjs:1:1
+✖ /Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/surface-minimap.test.mjs (80.987667ms)
+  'test failed'

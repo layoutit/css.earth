@@ -1,0 +1,61 @@
+{
+  "command": [
+    "node",
+    "docs/moons/b9-cassini-ice-surfaces/finalize-one.mjs",
+    "tethys"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 1011073024,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 229376,
+      "freePercent": 56
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 232194048,
+      "freePercent": 56
+    },
+    {
+      "seconds": 0.6,
+      "rssBytes": 611549184,
+      "freePercent": 56
+    },
+    {
+      "seconds": 0.8,
+      "rssBytes": 640925696,
+      "freePercent": 56
+    },
+    {
+      "seconds": 1.1,
+      "rssBytes": 672890880,
+      "freePercent": 56
+    },
+    {
+      "seconds": 1.4,
+      "rssBytes": 703365120,
+      "freePercent": 56
+    },
+    {
+      "seconds": 1.6,
+      "rssBytes": 751206400,
+      "freePercent": 56
+    },
+    {
+      "seconds": 1.9,
+      "rssBytes": 1011073024,
+      "freePercent": 56
+    },
+    {
+      "seconds": 2.2,
+      "rssBytes": 655425536,
+      "freePercent": 56
+    }
+  ],
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 2.4
+}

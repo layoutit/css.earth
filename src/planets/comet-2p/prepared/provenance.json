@@ -1,0 +1,364 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "comet-2p",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "2d3db165fffed98753070de89a3fd1be7d367fd31aec622554b6ba8aac9f5972"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "304723a4f0869048bf15b1a1b16a4a115aa40982242de83ab300769cf28aee7a",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "comet-2p",
+        "displayName": "Encke",
+        "publicBase": "/scenes/comet-2p/",
+        "distanceAu": 2.217736510492418,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 100,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": [],
+          "shapeViews": [
+            {
+              "id": "model",
+              "consumer": "shape",
+              "label": "Shape approximation"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 2.4222366966152173,
+          "camera": {
+            "initialScenePitchDegrees": 20,
+            "defaultControlYawDegrees": 0,
+            "framingScale": 0.85
+          },
+          "mapUrl": "/scenes/comet-2p/comet-2p-model-surface@2x.webp",
+          "polesUrl": "/scenes/comet-2p/comet-2p-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model.json",
+            "format": "ellipsoid-parameters",
+            "grid": {
+              "metersPerUnit": 1,
+              "expectedVertices": 1026,
+              "expectedFaces": 2048
+            },
+            "faceBudget": 800,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 100
+            },
+            "primitive": "u",
+            "sourceLighting": {
+              "maximumDistanceMeters": 100,
+              "rayOffsetMeters": 0.25,
+              "ambient": 0.16,
+              "diffuse": 0.84,
+              "floodLights": [
+                {
+                  "direction": [
+                    0,
+                    0,
+                    1
+                  ],
+                  "weight": 0.36
+                },
+                {
+                  "direction": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "weight": 0.24
+                },
+                {
+                  "direction": [
+                    1,
+                    0,
+                    0
+                  ],
+                  "weight": 0.24
+                }
+              ],
+              "uniformFlood": true
+            },
+            "thumbnail": {
+              "size": 96,
+              "longitudeDegrees": 70,
+              "latitudeDegrees": 20,
+              "ambient": 1,
+              "diffuse": 0
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; body attitude is explicitly illustrative.",
+          "qualification": "This smooth model follows one published radar and infrared solution for Encke. Its shape depends on the assumed tumbling motion. The grid marks absent surface photographs; the orientation is illustrative."
+        },
+        "presentation": {
+          "defaultLens": "model",
+          "pointColor": [
+            184,
+            182,
+            178
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "9a4134de896f7711b620da9334799668bffe1cf1bdef709450c83b91aaf567d3",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "comet-2p",
+        "displayName": "Encke",
+        "panel": {
+          "introduction": "Encke returns to the Sun roughly every 3.3 years. Radar echoes and infrared measurements suggest a long, narrow nucleus, though its tumbling motion makes the exact shape uncertain.",
+          "facts": [
+            {
+              "id": "dimensions",
+              "label": "Model length",
+              "value": "≈9.2 km"
+            },
+            {
+              "id": "rotation",
+              "label": "Dominant period",
+              "value": "≈11.1 hours"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Shape approximation"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Shape approximation",
+              "detail": "Arecibo",
+              "title": "Radar and infrared model",
+              "description": "This smooth model follows one published radar and infrared solution for Encke. Its shape depends on the assumed tumbling motion. The grid marks absent surface photographs; the orientation is illustrative.",
+              "thumbnail": "/scenes/comet-2p/comet-2p-model-thumbnail.webp",
+              "surface": "comet-2p-model-surface@2x.webp",
+              "poles": "comet-2p-model-poles@2x.webp",
+              "source": {
+                "id": "shape-parameters",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.1016/j.icarus.2005.01.012"
+              },
+              "facts": [
+                {
+                  "id": "dimensions",
+                  "label": "Model length",
+                  "value": "≈9.2 km"
+                },
+                {
+                  "id": "rotation",
+                  "label": "Dominant period",
+                  "value": "≈11.1 hours"
+                }
+              ]
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Radar and shape",
+            "role": "surface",
+            "description": "Harmon & Nolan (2005)",
+            "href": "https://doi.org/10.1016/j.icarus.2005.01.012"
+          },
+          {
+            "label": "JPL Horizons",
+            "role": "observations",
+            "description": "Orbit and fixed-epoch position",
+            "href": "https://ssd.jpl.nasa.gov/horizons/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://doi.org/10.1016/j.icarus.2005.01.012",
+            "credit": "Harmon & Nolan (2005)"
+          },
+          "physical": {
+            "path": "../shape/model.json",
+            "credit": "Harmon & Nolan (2005)"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "shape-parameters",
+      "path": "shape/model.json",
+      "origin": "https://doi.org/10.1016/j.icarus.2005.01.012",
+      "credit": "Harmon & Nolan (2005); cssEarth approximation",
+      "license": "Published numeric scientific parameters; cssEarth implementation MIT",
+      "licenseEvidence": [
+        "https://doi.org/10.1016/j.icarus.2005.01.012",
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in numeric constraints from the cited paper. Original paper bytes are pinned for review but are not redistributed.",
+      "redistribution": "Preserve the source credit and model assumptions.",
+      "sha256": "b9b625659f98d6eafd05de9007a9f76db36bd5422fc6f3cd2f64ae472d60ca55",
+      "bytes": 1077,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Source evidence or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Source evidence or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "9a4134de896f7711b620da9334799668bffe1cf1bdef709450c83b91aaf567d3",
+      "bytes": 2961,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Shape approximation",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "This smooth model follows one published radar and infrared solution for Encke. Its shape depends on the assumed tumbling motion. The grid marks absent surface photographs; the orientation is illustrative."
+      ],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "shape-parameters"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-2p/comet-2p-model-thumbnail.webp",
+          "bytes": 1102,
+          "sha256": "4095a8b3a8221be2a84a513c69d4ec068eee3d3ce03dc903db0a63962461b3d5",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-2p/comet-2p-model-surface@2x.webp",
+          "bytes": 110952,
+          "sha256": "6ff963d7393a952ea3b43ab8c7a10be2ca029bff58219fcc8fb2b7df856a03a6",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 3707,
+          "sha256": "5339c8f91596cbc9f6425993db1d491cccebc4da9fe526926d2383563d3c4e7a",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

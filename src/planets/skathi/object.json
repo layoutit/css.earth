@@ -103,11 +103,20 @@
       ],
       "metersPerUnit": 16.52173913043478,
       "bodyRadiusM": 3800
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/skathi-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4d336c3130d6468ec58bf4e8a97225a17c06db902f15acb981ee7b5afd21a739"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8ccd40f3c179a7c456a9b4595d77e6e1e6a79e28cbb4e09f413d1b1fb83d1d69"
+    "sha256": "e9ce2dcc296186a0c79c9973d862c93643d1d9148ffca576d23b2e60efe53786"
   }
 }

@@ -103,11 +103,20 @@
       ],
       "metersPerUnit": 87.89224261307449,
       "bodyRadiusM": 20215.215801007133
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/leucus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "5efda503215f89f4381f71d6bc90f58499128ed7b0a0642d784f2457269d8111"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fe2697ab97094e8b17b34519c8a20021a268978b0e08f6198616cd810c4c8a18"
+    "sha256": "05be796a506d0cd2252cc4c545fea64b207b2b4bca404c4dce3d4e762935aad1"
   }
 }

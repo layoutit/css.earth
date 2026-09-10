@@ -113,7 +113,7 @@ try {
   });
   assert.ok(trace.every(sample => sample.roots <= 1), 'One detailed renderer throughout every frame.');
   assert.ok(trace.every(sample => sample.retained), 'Entire prepared universe survives every frame.');
-  report.trace = { frames: trace.length, maximumDetailedRoots: Math.max(...trace.map(sample => sample.roots)) };
+  report.trace = { frames: trace.length, maximumDetailedRoots: trace.reduce((maximum, sample) => Math.max(maximum, sample.roots), 0) };
   report.completedAt = new Date().toISOString();
   report.status = 'passed';
   console.log(`ALL_OBJECT_WORLD_BROWSER_PASSED: ${OBJECTS.length} native flights; Earth/Jupiter refocus; Earth/Saturn galaxy round trips; one retained universe.`);

@@ -8,8 +8,10 @@ import { preparePresentationBindings } from './prepared-presentation-bindings.mt
 
 async function fixture(run) {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-prepared-bindings-'));
-  const page = join(root, 'site/pages'); await mkdir(page, { recursive: true });
-  await writeFile(join(page, 'fixture.astro'), '---\nimport "./fixture.css";\n---');
+  const page = join(root, 'src/planets/fixture'); await mkdir(page, { recursive: true });
+  await mkdir(join(root, 'site'));
+  await writeFile(join(root, 'site/planet-shell.css'), '');
+  await writeFile(join(page, 'object.json'), JSON.stringify({id:'fixture', properties:{page:{stylesheets:['src/planets/fixture/fixture.css']}}}));
   const css = `.scene, .moving, .fixed, .leaf { position:absolute; top:0; left:0; transform-origin:0 0; }
     .scene, .moving, .fixed { transform-style:preserve-3d; }
     .leaf { width:10px; height:10px; backface-visibility:hidden; transform:translateZ(4px); }

@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
 import { asteroidElements, asteroidPositionKm } from './asteroids.js'
 import { ASTEROID_FIXTURES } from './__fixtures__/horizons.asteroids.js'
-import { ASTEROID_IDS } from './bodies.js'
+import { SMALL_BODY_IDS } from './bodies.js'
 
 describe('asteroid positions against JPL Horizons', () => {
   it('reproduces the fitted epoch in ICRF kilometers', () => {
-    for (const id of ASTEROID_IDS) {
+    for (const id of SMALL_BODY_IDS) {
       const epoch = asteroidElements(id).epochJdTt
       const row = ASTEROID_FIXTURES[id].rows.find(row => row.jd === epoch)!
       const actual = asteroidPositionKm(id, epoch)
@@ -48,8 +48,12 @@ describe('asteroid positions against JPL Horizons', () => {
       // Expansion: ceil(measured independent endpoint maximum * 1.15) km.
       'hera': 616, 'klymene': 2579, 'artemis': 481, 'dione-106': 279, 'felicitas': 357, 'lydia': 550, 'iphigenia': 338, 'thyra': 610, 'lomia': 287, 'peitho': 240, 'althaea': 251, 'lachesis': 371, 'gerda': 346, 'brunhild': 282, 'alkeste': 302, 'liberatrix': 235, 'velleda': 1156, 'johanna': 274, 'antigone': 370, 'cyrene': 2973, 'sophrosyne': 1667, 'hertha': 214, 'meliboea': 4307, 'siwa': 401, 'vibilia': 268, 'lucina': 1744, 'protogeneia': 332, 'gallia': 293, 'medusa': 288, 'nuwa': 4248, 'abundantia': 1433, 'scylla': 272, 'xanthippe': 383, 'dejanira': 262, 'aemilia': 309, 'una': 271, 'athor': 453, 'laurentia': 407, 'erigone': 268, 'eva': 223, 'loreley': 315, 'rhodope': 262, 'urda': 312, 'sibylla': 597, 'baucis': 625, 'ino': 276, 'phaedra': 237, 'dejopeja': 300, 'lamberta': 2033, 'menippe': 323, 'kolga': 289, 'ambrosia': 333, 'eurykleia': 278, 'byblis': 249, 'kallisto': 231, 'hersilia': 1567, 'hedda': 236, 'dido': 4336, 'isabella': 276, 'medea': 314, 'lilaea': 763, 'aschera': 497, 'oenone': 2639, 'eudora': 232, 'stephania': 541, 'eos': 327, 'henrietta': 256, 'weringia': 510, 'philosophia': 262, 'athamantis': 377, 'vindobona': 238, 'asterope': 263, 'coelestina': 247, 'hypatia': 325, 'vanadis': 291, 'kriemhild': 1514, 'vera': 3131, 'asporina': 1497, 'eukrate': 331, 'ilse': 1261, 'bettina': 1031, 'clementina': 561, 'augusta': 183, 'silesia': 324, 'tyche': 243, 'huberta': 300, 'dresda': 328, 'libussa': 245, 'anna': 711, 'anahita': 303, 'penthesilea': 292, 'antonia': 2286, 'philagoria': 283, 'sapientia': 600, 'adelheid': 300, 'emma': 2307, 'iclea': 298, 'bavaria': 2321, 'clarissa': 725, 'unitas': 150,
       // Expansion: ceil(measured independent endpoint maximum * 1.15) km.
-      'annefrank': 394, 'braille': 668 }
-    for (const id of ASTEROID_IDS) for (const row of [ASTEROID_FIXTURES[id].rows[0], ASTEROID_FIXTURES[id].rows[2]]) {
+      'annefrank': 394, 'braille': 668,
+      // TNO additions: ceil(measured independent endpoint maximum * 1.15) km; docs/trans-neptunian/orbit-errors.json.
+      arrokoth: 600, quaoar: 602, gkunhomdima: 631,
+      // Bounds retained from the merged Centaur and original population checks.
+      'chariklo': 538, 'bienor': 944, 'diomedes': 426, 'ajax': 973, 'ilioneus': 561, 'pyrrhus': 530, 'eumelos': 573, 'lycomedes': 958, 'demodokus': 1682, 'menelaus': 1054, 'agenor': 607, 'mentor': 1444, 'ivar': 375, 'toro': 194, 'cerberus': 341, 'tantalus': 217, 'aethra': 343, 'lyyli': 764, 'hela': 4172, 'kemi': 353, 'taurinensis': 189 }
+    for (const id of SMALL_BODY_IDS) for (const row of [ASTEROID_FIXTURES[id].rows[0], ASTEROID_FIXTURES[id].rows[2]]) {
       const actual = asteroidPositionKm(id, row.jd)
       expect(Math.hypot(...actual.map((v, i) => v - row.position[i]!))).toBeLessThan(maximumErrorKm[id])
     }

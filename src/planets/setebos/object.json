@@ -103,11 +103,20 @@
       ],
       "metersPerUnit": 102.17391304347827,
       "bodyRadiusM": 23500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/setebos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "60e65fce3ebc4b1762b18fd337a61a0e574cf034a425851e12c41436bd604ed1"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "cc0e858d435264423919cea89f22a6473599a544621cf0ff51040f4f34a88f4d"
+    "sha256": "ce58b13b324e397e61993904a207b668756ac9bf57e9a00ca9dcf5b3b3b17ce6"
   }
 }

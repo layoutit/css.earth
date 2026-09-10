@@ -1,4 +1,4 @@
-import type {GeoFrame,GeoSample,DiskPhotometry} from './contracts.mts';
+import type {GeoFrame,GeoSample,DiskPhotometry,PhasePhotometry} from './contracts.mts';
 // Preparation-only decoder and measured camera for the corrected OSIRIS GEO
 // product. No image coordinates, ray tracing or source geometry enter runtime.
 export const GEO_SHAPE_MODEL = 'cg-dlr_spg-shap7-v1.0_4Mfacets.ver';
@@ -67,7 +67,7 @@ export function decodeOsirisGeo(bytes: Buffer) {
   const valid = (i: number) => Number.isInteger(i) && i >= 0 && i < width * height &&
     planes.DISTANCE_IMAGE[i] > 0 && planes.FACET_INDEX_IMAGE[i] > 0 && xyz(i).every(Number.isFinite) &&
     Number.isFinite(planes.IMAGE[i]);
-  return { width, height, planes, xyz, valid, label, startTime: field(label, 'START_TIME'),
+  return { width, height, planes, xyz, valid, label, history, startTime: field(label, 'START_TIME'),
     filter: field(label, 'FILTER_NAME'), shapeModel: GEO_SHAPE_MODEL };
 }
 
@@ -133,6 +133,38 @@ export function diskGain(incidence: number, emission: number, policy: DiskPhotom
   if (!(k >= .5 && k <= 1)) return null;
   const gain = 1/(Math.cos(incidence)**k * Math.cos(emission)**(k-1));
   return gain > 0 && gain <= policy.maximumGain ? gain : null;
+}
+
+/** OSIRIS calibration pipeline section 3.13: I/F = pi * d^2 * radiance / SFX.
+ * Use the actual calibration HISTORY, after checking the unscaled L4 pixels. */
+export function osirisRadianceFactorScale(history: string) {
+  const quantity = (name: string, unit: string) => {
+    const value = field(history, name), match = value.match(/^([0-9.eE+-]+)\s*<([^>]+)>$/);
+    if (!match || match[2] !== unit || !(Number(match[1]) > 0) || !Number.isFinite(Number(match[1]))) throw new Error(`Invalid OSIRIS calibration quantity: ${name}`);
+    return Number(match[1]);
+  };
+  if (field(history, 'ROSETTA:REFLECTIVITY_NORMALIZATION_FLAG') !== 'FALSE') throw new Error('OSIRIS radiance is already normalized.');
+  const solarDistanceAu = quantity('SOLAR_DISTANCE', 'AU'), solarFlux = quantity('SOLAR_FLUX', 'W/m**2/nm');
+  return { solarDistanceAu, solarFlux, factor: Math.PI * solarDistanceAu ** 2 / solarFlux };
+}
+
+/** Phase terms of the authored single-scattering approximation. This does not
+ * apply Hapke roughness, multiple scattering, or recover cast shadows. */
+export function phaseGain(phase: number | undefined, policy?: PhasePhotometry) {
+  if (!policy) return 1;
+  if (phase === undefined || !Number.isFinite(phase) || phase < policy.minimumDegrees * Math.PI / 180 || phase > policy.maximumDegrees * Math.PI / 180) return null;
+  const scattering = (angle: number) => {
+    const g = policy.asymmetry;
+    return (1 + policy.amplitude / (1 + Math.tan(angle / 2) / policy.width)) *
+      (1 - g * g) / (1 + 2 * g * Math.cos(angle) + g * g) ** 1.5;
+  };
+  const gain = scattering(policy.referenceDegrees * Math.PI / 180) / scattering(phase);
+  return Number.isFinite(gain) && gain >= 1 / policy.maximumGain && gain <= policy.maximumGain ? gain : null;
+}
+
+export function observationGain(incidence: number, emission: number, policy: DiskPhotometry, phase?: number) {
+  const disk = diskGain(incidence, emission, policy, phase), correction = phaseGain(phase, policy.phaseCorrection);
+  return disk === null || correction === null ? null : disk * correction;
 }
 
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, n, i) => sum + n * b[i], 0);
@@ -208,8 +240,9 @@ export function sampleGeo(frame: GeoFrame, matrix: readonly number[][], pointKm:
   const separationMeters = Math.max(...ids.map(i => Math.hypot(...frame.xyz(i).map((n, j) => n - pointKm[j])) * 1000));
   if (separationMeters > maximumSeparationMeters) return { reason: 'geometry-mismatch', separationMeters };
   const weights = [(1 - tx) * (1 - ty), tx * (1 - ty), (1 - tx) * ty, tx * ty];
-  const gains = ids.map(i => photometry ? diskGain(planes.INCIDENCE_ANGLE_IMAGE[i], planes.EMISSION_ANGLE_IMAGE[i], photometry, planes.PHASE_ANGLE_IMAGE?.[i]) : 1);
+  const gains = ids.map(i => photometry ? observationGain(planes.INCIDENCE_ANGLE_IMAGE[i], planes.EMISSION_ANGLE_IMAGE[i], photometry, planes.PHASE_ANGLE_IMAGE?.[i]) : 1);
   if (!gains.every((gain): gain is number => gain !== null)) return { reason: 'photometry' };
-  return { radiance: ids.reduce((sum, id, i) => sum + planes.IMAGE[id] * weights[i] * gains[i], 0), separationMeters,
+  return { radiance: ids.reduce((sum, id, i) => sum + planes.IMAGE[id] * weights[i] * gains[i], 0) * (frame.radianceFactor?.factor ?? 1), separationMeters,
+    maximumIncidenceDegrees: Math.max(...ids.map(i => planes.INCIDENCE_ANGLE_IMAGE[i])) * 180 / Math.PI,
     gain: Math.max(...gains), maximumEmissionDegrees: Math.max(...ids.map(i => planes.EMISSION_ANGLE_IMAGE[i])) * 180 / Math.PI };
 }

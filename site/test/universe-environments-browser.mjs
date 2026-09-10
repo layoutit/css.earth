@@ -7,7 +7,7 @@ import shell from '../../src/objects/heliosphere/prepared/shell.json' with { typ
 import volume from '../../src/objects/milky-way/prepared/volume.json' with { type: 'json' };
 import worldContext from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 
-const output = resolve('.local/universe-shared-sky');
+const output = resolve(process.env.UNIVERSE_BROWSER_OUTPUT ?? '.local/universe-shared-sky');
 const reportedView = '/mercury/?v=QMZBVmWEdTha6EHA0HFrNnyfwfqFzIA0Li5BQsczQAAAAL-57UJuUPUpP6TYXnEpHWy_4dF-IEqKvAABAAAAAAAAAAA';
 const opacityProfile = worldContext.volume.opacityProfile;
 const brightnessProfile = worldContext.volume.brightnessProfile;
@@ -76,7 +76,10 @@ try {
     snapshots[name] = await read(page);
     assert.ok(Math.abs(snapshots[name].volumeOpacity - opacity) < 1e-6, `${name}: actual volume opacity follows prepared profile`);
     assert.equal(snapshots[name].skyVisibility, opacity < 1 ? 'visible' : 'hidden');
-    assert.equal(snapshots[name].skyOpacity, 1, 'crossfade must keep the background opaque');
+    assert.ok(Math.abs(snapshots[name].volumeCompositeOpacity - opacity * snapshots[name].volumeBrightness) < 1e-6);
+    assert.ok(Math.abs((1 - snapshots[name].volumeCompositeOpacity) * snapshots[name].skyOpacity - (1 - opacity)) < 1e-6,
+      'actual background composition preserves the prepared sky contribution');
+    assert.equal(snapshots[name].volumeImageOpacity, 1, 'exposure no longer nests inside the handoff');
     await page.screenshot({ path: resolve(output, `${name}.png`) });
   }
   await scrollTo(page, Math.max(opacityProfile.fullDistanceM * 2, brightnessProfile.fadeStartDistanceM) / 1000);
@@ -166,15 +169,18 @@ async function read(page) {
     volumeCopiesValid: [...document.querySelectorAll('.css-volume-mesh')].every(mesh => {
       const images = [...mesh.children];
       return images.length % 3 === 0 && images.every((node, index) => {
-        const original = images[index - index % 3];
+        const copy = index % 3, original = images[index - copy], alpha = Number(node.style.opacity);
         return node.style.transform === original.style.transform && node.style.backgroundImage === original.style.backgroundImage &&
-          node.style.opacity === (index % 3 ? `var(--volume-optical-copy-${index % 3}, 0)` : '');
+          (copy === 0 ? node.style.opacity === '' : node.style.opacity !== '' && alpha >= 0 && alpha <= 1 &&
+            node.style.opacity === images[copy].style.opacity);
       });
     }),
     volumeTransform: [...document.querySelectorAll('.css-volume-scene')].map(node => node.style.transform).join('|'),
     volumeMatrices: [...document.querySelectorAll('.css-volume-scene')].map(node => Array.from(new DOMMatrix(node.style.transform).toFloat64Array())),
-    volumeOpacity: Number(getComputedStyle(document.querySelector('.prepared-volume-context')).opacity),
-    volumeBrightness: Number(getComputedStyle(document.querySelector('.prepared-volume-image')).opacity),
+    volumeOpacity: Number(document.querySelector('.prepared-volume-context').dataset.volumeOpacity),
+    volumeCompositeOpacity: Number(getComputedStyle(document.querySelector('.prepared-volume-context')).opacity),
+    volumeBrightness: Number(document.querySelector('.prepared-volume-image').dataset.volumeBrightness),
+    volumeImageOpacity: Number(getComputedStyle(document.querySelector('.prepared-volume-image')).opacity),
     skyFaces: document.querySelectorAll('[data-sky-face]').length,
     skyOpacity: Number(getComputedStyle(document.querySelector('.prepared-celestial-sky')).opacity),
     skyVisibility: getComputedStyle(document.querySelector('.prepared-celestial-sky')).visibility,

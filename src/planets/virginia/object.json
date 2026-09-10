@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 183.41304347826087,
       "bodyRadiusM": 42185
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/virginia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "5d31b798ce761b9c348b475514ca5553649274e830a5e11961dfcc6a1a2c7efa"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "2bbdf0f7568db7802634016edd51c5f7480b80c92058c4d2c7f3557e465446d7"
+    "sha256": "b9455254ce2508dc48f6cfaea9e3b195b5eca4d4e849aa45a97ea22cbda898e8"
   }
 }

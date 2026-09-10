@@ -7,9 +7,9 @@
     "sha256": "17938bf0bfbd76fcfe28f0098ed3f313749f425334998ae2af873c345a0a4e89"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -575,7 +575,7 @@
       "sha256": "9bafb22e1b0be35212c078d77e9f1364e3ff6b6873d0e98c4073055f29ed91ae",
       "bytes": 2336639,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -632,7 +632,7 @@
       "sha256": "3d25b4baaf49050fe2ad37b669c34afa6de607692611d927ecbd9eba90dec25d",
       "bytes": 1807867,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -661,7 +661,7 @@
       "sha256": "fae52df10d453d09be1c98f7d000ff12ae56d0ffa3304190cb45f4fb838f038e",
       "bytes": 25962,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -678,7 +678,7 @@
       "sha256": "ef0c34fe4624419d59eca6d0d1d748c6755cf53d02b688125ceedd7575431f70",
       "bytes": 12640,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -735,19 +735,19 @@
           "url": "/scenes/titania/titania-normal-thumbnail.webp",
           "bytes": 2376,
           "sha256": "559168c5b6896b45a38cf97216e0f0c1ab347bc86efcf7d3b7cf778426357b74",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titania/titania-normal-surface@2x.webp",
           "bytes": 1169534,
           "sha256": "07e110844224ceca891ba1f43e7bf63abc9b900e56f1252669c81d007d244847",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titania/titania-normal-poles@2x.webp",
           "bytes": 46004,
           "sha256": "07bcdbb611b2c20a11b59ee0e1ddf4e2d71ebbfb5e96e09a3f7b9589f24a379e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -780,25 +780,25 @@
           "url": "/scenes/titania/titania-elevation-thumbnail.webp",
           "bytes": 4100,
           "sha256": "051bec112da850ce605c1ebcda492a30de73f44e634a2a03e37e3924df3d45c4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titania/titania-elevation-legend.webp",
           "bytes": 180,
           "sha256": "a61050d5ca54e9972808c8df55940f212c48dfa1bce97d6adb9ea43969a40362",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titania/titania-elevation-surface@2x.webp",
           "bytes": 1215966,
           "sha256": "d0f73e0dfe9f4e3fd7737d9e0d3525a7a1effd8b251ee77917050bd04a0e6d9c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titania/titania-elevation-poles@2x.webp",
           "bytes": 81140,
           "sha256": "1caa22c354d3dec55797ba078838ce6befb383eea52135727af6babfa1baca07",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -831,19 +831,19 @@
           "url": "/scenes/titania/titania-geology-thumbnail.webp",
           "bytes": 488,
           "sha256": "e1a4882282da1ebf63a240429b18bcda7ba02adf1ef481e4016f4872ae58ea30",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titania/titania-geology-surface@2x.webp",
           "bytes": 67924,
           "sha256": "e50a126ba67b82708f3788bfe35fbe1dd42f258bc7304135933d232c177eb1a0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titania/titania-geology-poles@2x.webp",
           "bytes": 25898,
           "sha256": "8ca1ffeb055a5e396fcff33d74e57fc2fbf33e8d7ba4a06ddad836efd71b3724",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

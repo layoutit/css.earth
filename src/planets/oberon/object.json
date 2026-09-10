@@ -98,11 +98,20 @@
       ],
       "metersPerUnit": 3310.4347826086955,
       "bodyRadiusM": 761400
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/oberon-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7c38a22e699495a9d90b8bf7be1666d4e6304daa3c0c1a4d046164b7ed9a1997"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fd3473feb07480aa235f181f48641ba4d66086f591d0dfbb2ed1a447d2c9dfbf"
+    "sha256": "5edf78501f648bc26e45fbcfd6e910b8d3d4a05aef515c671bc742b5688d6efb"
   }
 }

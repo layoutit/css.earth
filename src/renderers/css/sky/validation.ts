@@ -1,3 +1,4 @@
+import { validatePreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
 import type { PreparedCssVolume } from '../volume/types.js';
 import type { PreparedCssSky } from './types.js';
 
@@ -13,7 +14,8 @@ export function validatePreparedCssSky(input: unknown, resources: PreparedCssVol
   if ('parallax' in sky) validatePreparedSkyParallax(sky.parallax);
   const ids = new Set<string>();
   for (const inputFace of sky.faces) {
-    const face = record(inputFace, ['id', 'texturePath', 'widthPx', 'heightPx', 'forwardIcrf', 'rightIcrf', 'upIcrf', 'style'], 'sky face');
+    const face = record(inputFace, ['id', 'texturePath', 'widthPx', 'heightPx', 'forwardIcrf', 'rightIcrf', 'upIcrf', 'style'], 'sky face', ['boundsCssPixels']);
+    if (face.boundsCssPixels !== undefined) validatePreparedLeafBounds(face.boundsCssPixels);
     if (typeof face.id !== 'string' || !FACE_IDS.includes(face.id) || ids.has(face.id) || !imagePath(face.texturePath) ||
         !integer(face.widthPx) || !integer(face.heightPx) || !unit(face.forwardIcrf) || !unit(face.rightIcrf) || !unit(face.upIcrf)) {
       throw new TypeError('Prepared sky face metadata is invalid.');

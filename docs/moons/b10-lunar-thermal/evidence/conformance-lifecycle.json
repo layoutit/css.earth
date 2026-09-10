@@ -1,0 +1,92 @@
+{
+  "ok": true,
+  "browser": "152.0.7977.84",
+  "baseUrl": "http://127.0.0.1:4292",
+  "browserLaunch": {
+    "mode": "installed-chrome-with-retained-stdio",
+    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "wrapperPath": "output/playwright/b10-conformance/lifecycle/chrome-process-J8Fzt2/launch-chrome.sh",
+    "wrapperSha256": "398b5154a651512b6f41e3f4234c383f17ef59fd609c39dd3a7eb5880aed31c7",
+    "stdioLogPath": "output/playwright/b10-conformance/lifecycle/chrome-process-J8Fzt2/stdout-stderr.log",
+    "protocol": "Playwright CDP pipes on descriptors 3 and 4 are unchanged; only stdout and stderr are redirected."
+  },
+  "capturedAt": "2026-09-10T02:16:37.143Z",
+  "qualification": "Natural-clock browser interaction checks; no native parity claim.",
+  "reports": [
+    {
+      "id": "moon",
+      "case": "initial-shell",
+      "skipped": true
+    },
+    {
+      "id": "moon",
+      "case": "desktop",
+      "skipped": true
+    },
+    {
+      "id": "moon",
+      "case": "mobile",
+      "skipped": true
+    },
+    {
+      "id": "moon",
+      "case": "dataset-interactions",
+      "skipped": true
+    },
+    {
+      "id": "moon",
+      "case": "dataset-interactions-dpr-2",
+      "skipped": true
+    },
+    {
+      "id": "moon",
+      "case": "pre-ready-hidden-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "moon",
+      "case": "pre-ready-visible-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "moon",
+      "case": "pre-ready-hidden-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "moon",
+      "case": "pre-ready-visible-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "moon",
+      "case": "dpr-1",
+      "skipped": true
+    },
+    {
+      "id": "moon",
+      "case": "dpr-2",
+      "skipped": true
+    },
+    {
+      "id": "moon",
+      "viewport": "lens-race",
+      "lens": "crust",
+      "slowDecodeCount": 1
+    },
+    {
+      "id": "moon",
+      "viewport": "lens-reacquire",
+      "lens": "topography"
+    },
+    {
+      "id": "moon",
+      "viewport": "lens-rejection-retry",
+      "lens": "topography"
+    },
+    {
+      "id": "moon",
+      "viewport": "lens-destroy"
+    }
+  ]
+}

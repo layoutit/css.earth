@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 180.93478260869566,
       "bodyRadiusM": 41615
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hera-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4a855d28fee147934b067c3349dd4f1e6b0635fabdf8f8e1f3d154fb37bfcec7"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "bd5b2daf1d9bcca82633d0faa0b1d81e1bcaf9067b04e53bb522fd0d86aae3ec"
+    "sha256": "9e7d07be8cb0dff998b3075d8935d16a3dcb7b35d32ed9ce0e0d93bd573a97bf"
   }
 }

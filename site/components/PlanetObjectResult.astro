@@ -12,7 +12,7 @@ const thumbnailScale = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKER
 ));
 ---
 
-<li class="planet-object-item" hidden={hidden} data-object-name={object.name.toLocaleLowerCase("en")}
+<li class="planet-object-item" role="listitem" hidden={hidden} data-object-name={object.name.toLocaleLowerCase("en")}
   data-object-distance-au={object.distanceAu}
   data-object-system-name={object.systemName.toLocaleLowerCase("en")}
   data-object-classification={object.classification}

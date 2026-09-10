@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1d4c5d3626810c37867d81bed926c139ce22e64709ffc808d03bca28868f4964"
+    "sha256": "3c108e94860227c834c7660432368431f6f8f8b89179475225d25be8c382ae96"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "97a253269119c064bf6a8b950f5a7c18dc683aa4bb7348b9417cdbe540091e05",
+      "sha256": "35b99c0e28512e4aac06aef401ee1a5aabdab3a4849c9d61ea9ad51eb5e746ac",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -50,9 +50,89 @@
                 "noData": null,
                 "centerLongitude": 180
               }
+            },
+            {
+              "id": "infrared",
+              "textureScale": 0.125,
+              "validity": {
+                "kind": "geotiff-rgb-bands",
+                "samples": [
+                  0,
+                  1,
+                  2
+                ],
+                "alphaBand": 3,
+                "sampleBytes": 2,
+                "noData": 0,
+                "centerLongitude": 180,
+                "resolutionMeters": 4516.039439535328,
+                "origin": [
+                  -2312212.193042088,
+                  1156106.096521044
+                ],
+                "grid": {
+                  "pixelsPerDegree": 2.8444444444444446,
+                  "sampleOffset": 511.5,
+                  "lineOffset": 255.5
+                }
+              },
+              "focus": {
+                "longitudeDegrees": 123.92578,
+                "latitudeDegrees": -5.44922,
+                "zoom": 1.15
+              }
             }
           ],
-          "scientific": [],
+          "scientific": [
+            {
+              "id": "ice-absorption",
+              "label": "Ice absorption",
+              "format": "geotiff",
+              "path": "cassini-ice/iapetus-ice-absorption.tif",
+              "consumer": "ice-absorption",
+              "title": "Partial Cassini VIMS water-ice signature",
+              "description": "Near-2.02 µm water-ice absorption in selected Cassini observations; not ice abundance.",
+              "minimum": 0,
+              "maximum": 0.8,
+              "colors": [
+                "#312b66",
+                "#327caf",
+                "#7fcdbb",
+                "#edf8b1"
+              ],
+              "labels": [
+                "0",
+                "0.4",
+                "0.8"
+              ],
+              "units": "band-depth fraction",
+              "sourceUrl": "https://vims.univ-nantes.fr/cube/1568129671_1",
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "textureScale": 0.125,
+              "grid": {
+                "width": 1024,
+                "height": 512,
+                "centerLongitude": 0,
+                "referenceRadiusMeters": 736000,
+                "noData": -9999,
+                "origin": [
+                  -2312212.193042088,
+                  1156106.096521044
+                ],
+                "resolution": [
+                  4516.039439535328,
+                  -4516.039439535328
+                ],
+                "wrapLongitude": true
+              },
+              "focus": {
+                "longitudeDegrees": 123.92578,
+                "latitudeDegrees": -5.44922,
+                "zoom": 1.15
+              }
+            }
+          ],
           "observedColors": []
         },
         "lighting": {
@@ -93,7 +173,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "40c45d5876be92934c3e6e31286c21866ce3dd47d8aa619a94ea4c2a1ec8fe85",
+      "sha256": "9385ba5b2291ed240afa983c52dbbcfa72d0bcea81636562869077b56f3466a4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -181,7 +261,9 @@
           "defaultLens": "normal",
           "labels": {
             "normal": "Monochrome",
-            "enhanced": "Enhanced color"
+            "enhanced": "Enhanced color",
+            "infrared": "Infrared",
+            "ice-absorption": "Ice absorption"
           },
           "controls": [
             {
@@ -211,6 +293,54 @@
                 "path": "../manifest.json"
               },
               "summary": "Colors extend into infrared and ultraviolet. The dark leading hemisphere is real surface material, not missing imagery."
+            },
+            {
+              "id": "infrared",
+              "label": "Infrared",
+              "description": "Three Cassini VIMS observations from 10 September 2007. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.45 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps.",
+              "summary": "Cassini false color: red 2.02, green 1.59, blue 1.28 µm. Coverage is partial; gray grid marks gaps. Illumination and archive filtering remain in these uncorrected measurements.",
+              "title": "Cassini VIMS flyby spectra · 10 September 2007",
+              "thumbnail": "/scenes/iapetus/iapetus-infrared-thumbnail.webp",
+              "surface": "iapetus-infrared-surface@2x.webp",
+              "poles": "iapetus-infrared-poles@2x.webp",
+              "source": {
+                "id": "iapetus-cassini-infrared",
+                "path": "../manifest.json",
+                "url": "https://vims.univ-nantes.fr/cube/1568157352_4"
+              },
+              "detail": "Partial VIMS",
+              "falseColor": true
+            },
+            {
+              "id": "ice-absorption",
+              "label": "Ice absorption",
+              "description": "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using three Cassini VIMS observations from 10 September 2007. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0–0.8; original numerical values are retained. Gray grid marks unsupported areas and scan gaps.",
+              "summary": "Near-2.02 µm water-ice absorption in partial Cassini coverage. Gray grid marks gaps. Viewing angle, grain size, noise and archive filtering affect these uncorrected values; they do not measure ice abundance.",
+              "title": "Cassini VIMS flyby water-ice absorption · 10 September 2007",
+              "thumbnail": "/scenes/iapetus/iapetus-ice-absorption-thumbnail.webp",
+              "surface": "iapetus-ice-absorption-surface@2x.webp",
+              "poles": "iapetus-ice-absorption-poles@2x.webp",
+              "source": {
+                "id": "iapetus-cassini-ice-absorption",
+                "path": "../manifest.json",
+                "url": "https://vims.univ-nantes.fr/cube/1568157352_4"
+              },
+              "detail": "Partial VIMS",
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Ice absorption",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0",
+                  "0.4",
+                  "0.8"
+                ],
+                "meta": "band-depth fraction",
+                "sourceUrl": "https://vims.univ-nantes.fr/cube/1568157352_4",
+                "image": "/scenes/iapetus/iapetus-ice-absorption-legend.webp"
+              }
             }
           ]
         },
@@ -256,6 +386,12 @@
             "role": "stars",
             "description": "Milky Way panorama",
             "href": "https://www.eso.org/public/images/eso0932a/"
+          },
+          {
+            "label": "Cassini VIMS",
+            "role": "surface",
+            "description": "Nantes calibrated spectra and navigation; archive filtering retained, CC BY 4.0",
+            "href": "https://vims.univ-nantes.fr/cube/1568157352_4"
           }
         ],
         "provenance": {
@@ -312,7 +448,7 @@
       "sha256": "eb8acdbed3af495102b6ec6d3efce1f03dc6bc39bb43323c23231ce590494d6e",
       "bytes": 16612487,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -357,7 +493,7 @@
       "sha256": "6e0e1d17a50343d9176912d047392c4f7cd67c48bdb30789918a4ff24d9f683b",
       "bytes": 4989080,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -366,6 +502,86 @@
         "path": "observations/PIA18436.jpg",
         "url": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18436.jpg"
       },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "iapetus-cassini-infrared",
+      "path": "cassini-ice/iapetus-infrared-display.tif",
+      "origin": "https://vims.univ-nantes.fr/cube/1568129671_1",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Reproduce from pinned original C/N and raw QUB inputs with tools/objects/acquisition/cassini-ice-surfaces.py and cassini-ice/prepare.json.",
+      "redistribution": "Derived source map under CC BY 4.0 with full archive attribution; original observations and lossless values retained.",
+      "lensId": "infrared",
+      "label": "Infrared",
+      "falseColor": true,
+      "width": 1024,
+      "height": 512,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 180,
+        "referenceRadiusMeters": 736000,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "Supported detector apertures cover approximately 23.35% of the reference sphere by angular grid weighting, not measured physical mesh area. Native resolution varies; output grid spacing is not observation detail. Preserve unsupported gaps. No photometric correction; registration limits are in cassini-ice/evidence/registration.md.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://vims.univ-nantes.fr/cube/1568129671_1"
+      },
+      "sha256": "a3788744172cac6820eaaf39e53d1013ce65612799c107e96a17fbebbcea2e7f",
+      "bytes": 144017,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "iapetus-cassini-ice-absorption",
+      "path": "cassini-ice/iapetus-ice-absorption.tif",
+      "origin": "https://vims.univ-nantes.fr/cube/1568129671_1",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Reproduce from pinned original C/N and raw QUB inputs with tools/objects/acquisition/cassini-ice-surfaces.py and cassini-ice/prepare.json.",
+      "redistribution": "Derived source map under CC BY 4.0 with full archive attribution; original observations and lossless values retained.",
+      "lensId": "ice-absorption",
+      "label": "Ice absorption",
+      "falseColor": true,
+      "width": 1024,
+      "height": 512,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 0,
+        "referenceRadiusMeters": 736000,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "Supported detector apertures cover approximately 23.35% of the reference sphere by angular grid weighting, not measured physical mesh area. Native resolution varies; output grid spacing is not observation detail. Preserve unsupported gaps. No photometric correction; registration limits are in cassini-ice/evidence/registration.md.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://vims.univ-nantes.fr/cube/1568129671_1"
+      },
+      "sha256": "399a434937605b2d3215a3691fb630435b4957ff8b5eb23334b42bf42f440fdc",
+      "bytes": 109434,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -378,10 +594,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "40c45d5876be92934c3e6e31286c21866ce3dd47d8aa619a94ea4c2a1ec8fe85",
-      "bytes": 9747,
+      "sha256": "9385ba5b2291ed240afa983c52dbbcfa72d0bcea81636562869077b56f3466a4",
+      "bytes": 13167,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -421,19 +637,19 @@
           "url": "/scenes/iapetus/iapetus-normal-thumbnail.webp",
           "bytes": 3272,
           "sha256": "08a31039ae1c61ae8ec62e23af063c3b714401dd5e011fec73d50032094ff125",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iapetus/iapetus-normal-surface@2x.webp",
           "bytes": 5599434,
           "sha256": "cac49dcf9c062fc702a97a3d5dbcaae88da67c7d2be0fc799f02c6d7ea92c14b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iapetus/iapetus-normal-poles@2x.webp",
           "bytes": 66522,
           "sha256": "5fb1afe9c68fe35c7cc9b198e45df62d95782c6bcd98ec4490b3d28697e14df0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -469,19 +685,135 @@
           "url": "/scenes/iapetus/iapetus-enhanced-thumbnail.webp",
           "bytes": 5528,
           "sha256": "8ae7c9f2f827c49ba2ef2d9b6e019803a55d21dfd42d61ebfe031968ebc8c061",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iapetus/iapetus-enhanced-surface@2x.webp",
           "bytes": 5088356,
           "sha256": "5a16eeba8ee8148781d8fbf256e4071d182819010b1311bf5784b46de20cd163",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iapetus/iapetus-enhanced-poles@2x.webp",
           "bytes": 78254,
           "sha256": "23ab4d0e5828186d448bde797f6b00348be8a7e7e23a6a3a3db4f1a3b219f223",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "infrared",
+      "label": "Infrared",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/2",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Three Cassini VIMS observations from 10 September 2007. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.45 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps."
+      ],
+      "lensIds": [
+        "infrared"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "geotiff-rgb-bands",
+          "samples": [
+            0,
+            1,
+            2
+          ],
+          "alphaBand": 3,
+          "sampleBytes": 2,
+          "noData": 0,
+          "centerLongitude": 180,
+          "resolutionMeters": 4516.039439535328,
+          "origin": [
+            -2312212.193042088,
+            1156106.096521044
+          ],
+          "grid": {
+            "pixelsPerDegree": 2.8444444444444446,
+            "sampleOffset": 511.5,
+            "lineOffset": 255.5
+          }
+        }
+      },
+      "inputs": [
+        "iapetus-cassini-infrared"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/iapetus/iapetus-infrared-thumbnail.webp",
+          "bytes": 2804,
+          "sha256": "c80e178efdeb9b6c81531b06e88bf688e971647453da47c9dd0d2e881d1d6da9",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/iapetus/iapetus-infrared-surface@2x.webp",
+          "bytes": 38724,
+          "sha256": "8557d0c4cb21fc54106d369105c4ac2949c9b738507edf7307b49e065a06fd6e",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/iapetus/iapetus-infrared-poles@2x.webp",
+          "bytes": 2398,
+          "sha256": "f598c19f08a618951ca07bb0cf35974fdbd8fa41b79afa0192900abde9aefd49",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "ice-absorption",
+      "label": "Ice absorption",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using three Cassini VIMS observations from 10 September 2007. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0–0.8; original numerical values are retained. Gray grid marks unsupported areas and scan gaps."
+      ],
+      "lensIds": [
+        "ice-absorption"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Partial Cassini VIMS water-ice signature"
+      },
+      "inputs": [
+        "iapetus-cassini-ice-absorption"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/iapetus/iapetus-ice-absorption-thumbnail.webp",
+          "bytes": 1420,
+          "sha256": "fcebc06a9fd12623b7541e2929ecb2867a2b30d026555a3fb1487a74810f3317",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/iapetus/iapetus-ice-absorption-legend.webp",
+          "bytes": 146,
+          "sha256": "ed82e428e522e7e2d075c9f2d7989d8f3adb9c3ed7989f80445ad69750361b6e",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/iapetus/iapetus-ice-absorption-surface@2x.webp",
+          "bytes": 19840,
+          "sha256": "790583b5ed53a39c8d6d81ebf63b75251e5b7e89a9c4d4bedef81679926e52c2",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/iapetus/iapetus-ice-absorption-poles@2x.webp",
+          "bytes": 1728,
+          "sha256": "070a63e7aa4182c1403f153aa9aeca56c1a91e843f65f5d82f62f3850fa7c709",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -504,8 +836,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6433,
-          "sha256": "7c84ebcf933336224931953b90e10ca7a977b7ca1b752b5f1b8dce1f2ced82b2",
+          "bytes": 6626,
+          "sha256": "f0d92ce1bde3ec751af76eaf14323b7e52bda9beaf0661a245be53d0808543c7",
           "verification": "bytes-verified"
         }
       ],
@@ -555,6 +887,54 @@
           "url": "object:prepared/minimaps/enhanced.webp",
           "bytes": 56214,
           "sha256": "82a6e8b92532d14a8911fd584b37d6ebc6eafb88ca2d860f821dd615efddc0cf",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:infrared",
+      "label": "Infrared preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/2",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "infrared"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/infrared.webp",
+          "bytes": 11338,
+          "sha256": "50b462e9ab048f9dc09feb5b63ebf6618cce7d78fce317c3131d08332123ae10",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:ice-absorption",
+      "label": "Ice absorption preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "ice-absorption"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/ice-absorption.webp",
+          "bytes": 32470,
+          "sha256": "70540bae6b1be375ca23283a4c3060f86f5fd899974b5cd870468a4d0eed5b56",
           "verification": "bytes-verified"
         }
       ]

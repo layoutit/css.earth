@@ -30,7 +30,7 @@ const registrySource = (await readFile(new URL("../site/objects.mts", import.met
     const { mountMoonClient } = await import("../src/planets/moon/runtime/client.mjs");
     return mountMoonClient;
   }),
-]);`).replace(/^import \w+Descriptor from[^\n]+\n/gm, '');
+]);`).replace(/^import \w+Descriptor from[^\n]+\n/gm, '').replace(/\nfunction packaged\([\s\S]*$/u, '\n');
 const sunContext = await readFile(new URL("../src/planets/sun/prepared/world-context.json", import.meta.url), "utf8");
 const objectSchema = await readFile(new URL("../site/object-schema.mts", import.meta.url), "utf8");
 const isArray = await readFile(new URL("../src/platform/is-array.mts", import.meta.url), "utf8");
@@ -328,7 +328,9 @@ test('descriptor binding cannot bypass the shared factory or redirect the prepar
     await assert.rejects(descriptorOverlay({ [file]: changed }), /forward its prepared transport|Contextual binding/);
   }
   const registry = await readFile('site/objects.mts', 'utf8');
-  await assert.rejects(descriptorOverlay({ 'site/objects.mts': registry.replace('loadPackagedObject(mercuryDescriptor)', 'loadPackagedObject(venusDescriptor)') }), /own actual JSON descriptor/);
+  const wrongDescriptor = registry.replace('packaged(mercuryDescriptor)', 'packaged(venusDescriptor)');
+  assert.notEqual(wrongDescriptor, registry, 'Descriptor mutation must change the actual loader factory call');
+  await assert.rejects(descriptorOverlay({ 'site/objects.mts': wrongDescriptor }), /own actual JSON descriptor/);
   for (const source of [registry.replace('mercuryDescriptor.properties.worldFrame', 'venusDescriptor.properties.worldFrame'),
     registry.replace(', mercuryDescriptor.properties.worldFrame', ''),
     registry.replace('    worldFrame,', '    worldFrame: null,')]) {
@@ -399,6 +401,24 @@ test('the actual Sun-only shell and navigation share exactly one typed camera ow
   const shared = await audit({ [configFile]: changed });
   assert.equal(shared.cameraFactorySites.length, 1);
 
+});
+
+test('a shared registry loader factory must forward one unchanged descriptor without side effects', async () => {
+  const path = 'site/objects.mts', original = await readFile(path, 'utf8');
+  const options = overrides => ({ objects: [OBJECTS[0]], readText: async file =>
+    file === resolve(path) ? overrides : readFile(file, 'utf8') });
+  const accepted = await auditObjectRuntimeOwnership(options(original));
+  assert.equal(accepted.entries[0].factoryCalls, 1);
+  for (const [before, after, reason] of [
+    ['function packaged(descriptor: unknown) {', 'function packaged(descriptor: unknown) { console.log(descriptor);', /loader factory/],
+    ['return loadPackagedObject(descriptor);', 'return loadPackagedObject({ ...descriptor });', /bound descriptor unchanged/],
+    ['return loadPackagedObject(descriptor);', 'return loadPackagedObject(venusDescriptor);', /bound descriptor unchanged/],
+    ['packaged(polymeleDescriptor)', 'packaged(venusDescriptor)', /own actual JSON descriptor/],
+  ]) {
+    const changed = original.replace(before, after);
+    assert.notEqual(changed, original, 'The mutation must alter the actual shared loader');
+    await assert.rejects(auditObjectRuntimeOwnership(options(changed)), reason);
+  }
 });
 
 test('every independently selected registry object closes over exactly its own native camera assembly', async () => {

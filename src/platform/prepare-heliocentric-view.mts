@@ -169,6 +169,11 @@ export function prepareHeliocentricView({
     (extent, vertex) => Math.max(extent, magnitude(vertex)),
     0,
   );
+  // The system contains other bodies; an outer observer's own orbit can
+  // extend beyond every one of them. Their combined frame must enclose both.
+  if (system !== undefined && system.maximumExtentUnits < maximumExtentUnits) system = Object.freeze({ ...system,
+    maximumExtentUnits: Math.max(system.maximumExtentUnits, maximumExtentUnits),
+  });
   const sunRadiusUnits = NOMINAL_SOLAR_RADIUS_KILOMETERS / kilometersPerUnit;
   const plan = Object.freeze({
     schema: PREPARED_HELIOCENTRIC_VIEW_SCHEMA,

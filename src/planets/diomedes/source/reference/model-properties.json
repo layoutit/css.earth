@@ -1,0 +1,83 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4215",
+  "modelId": 4215,
+  "modelVersion": "2019-05-07",
+  "diameterKm": 118.8,
+  "diameterInterpretation": "Convex light-curve model fitted to a stellar occultation: 118.8 ± 0.6 km volume-equivalent diameter. Grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 118.8,
+    "uncertaintyKm": 0.6,
+    "uncertaintyKind": "Doubled published volume-equivalent radius fit uncertainty; it is not a bound on local surface accuracy.",
+    "diameterSemantics": "Twice the 59.4 ± 0.3 km volume-equivalent radius in Dutra et al. (2025), fitted to the same 574-vertex, 1144-facet DAMIT model.",
+    "sourceUrl": "https://doi.org/10.1098/rsta.2024.0187",
+    "reference": "Dutra et al. (2025), Philosophical Transactions A 383, 20240187",
+    "sourceLabel": "Dutra et al. (2025), occultation fit",
+    "scaleKmPerSourceUnit": 95.75232363210009,
+    "metersPerSourceUnit": 95752.32363210009,
+    "limitations": "The published occultation fit uses this same 574-vertex, 1144-facet dimensionless model, refining its uniform size, pole and period. Three observed chords constrain the silhouette; this remains an inverse model, without resolved local terrain. No albedo, craters or regolith are inferred.",
+    "visibleDescription": "Convex light-curve model fitted to a stellar occultation: 118.8 ± 0.6 km volume-equivalent diameter. Grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "periodHours": 24.4984,
+  "poleEclipticJ2000Degrees": [
+    153.73,
+    12.69
+  ],
+  "modelLimitations": "The published occultation fit uses this same 574-vertex, 1144-facet dimensionless model, refining its uniform size, pole and period. Three observed chords constrain the silhouette; this remains an inverse model, without resolved local terrain. No albedo, craters or regolith are inferred.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/13159/shape.txt",
+    "vertices": 574,
+    "faces": 1144,
+    "originalUnits": "dimensionless uncalibrated DAMIT coordinates",
+    "metersPerUnit": 95752.32363210009,
+    "firstVertexKm": [
+      50.091104566307784,
+      20.736697719709387,
+      55.48512021347488
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      170.69450751226498,
+      117.12175270637042,
+      101.39510381606337
+    ],
+    "volumeCubicKm": 877905.8525334303,
+    "volumeEquivalentRadiusKm": 59.4,
+    "radialRangeKm": [
+      47.23821873321096,
+      100.9120407378263
+    ]
+  },
+  "elevation": [
+    -50,
+    50
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 1144,
+    "sourceVertices": 574,
+    "weldedVertices": 574,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1188,
+    "estimatedErrorMeters": 144.1984405517578,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 877817245934082.2
+    }
+  }
+}

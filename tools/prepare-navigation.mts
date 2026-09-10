@@ -196,47 +196,35 @@ export async function prepareContextMarkers({ projectRoot, outputRoot, descripto
   return markers;
 }
 
+/** Rebuild every marker from its pinned recipe. Copy decoded rows directly so
+ * atlas assembly does not premultiply and round partially transparent RGB. */
+export async function prepareMarkerAtlases({ projectRoot, outputRoot, descriptors }: MarkerRenderOptions) {
+  if (!descriptors.length) throw new TypeError('A marker atlas requires at least one descriptor.');
+  await mkdir(outputRoot, { recursive: true });
+  for (const density of [1, 2]) {
+    const tileSize=markerTileSize*density, width=tileSize*descriptors.length;
+    const atlas=Buffer.alloc(width*tileSize*4);
+    for (const [index, descriptor] of descriptors.entries()) {
+      const sourcePath=descriptor.owner==='object'
+        ? resolve(projectRoot,'src/planets',descriptor.planetId,'source',descriptor.source.path)
+        : resolve(projectRoot,'src/navigation/source',descriptor.source.path);
+      const png=await renderMarker(descriptor,{sourcePath,tileSize});
+      const {data,info}=await sharp(png).ensureAlpha().raw().toBuffer({resolveWithObject:true});
+      if(info.width!==tileSize || info.height!==tileSize || info.channels!==4)
+        throw new Error(`Marker dimensions differ from their prepared tile: ${descriptor.planetId}`);
+      for(let y=0;y<tileSize;y++)data.copy(atlas,(y*width+index*tileSize)*4,y*tileSize*4,(y+1)*tileSize*4);
+    }
+    await sharp(atlas,{raw:{width,height:tileSize,channels:4}})
+      .webp({lossless:true,effort:6})
+      .toFile(resolve(outputRoot,`planet-markers${density===2?'@2x':''}.webp`));
+  }
+}
+
 async function renderNavigation({ projectRoot, outputRoot, descriptors }: MarkerRenderOptions) {
   const navigationSourceRoot = resolve(projectRoot, "src/navigation/source");
   await prepareSunIndicator({ projectRoot, outputRoot });
 
-  for (const density of [1, 2]) {
-    const tileSize = markerTileSize * density;
-    const tiles = [];
-    for (let index = 0; index < descriptors.length; index += 1) {
-      const descriptor = descriptors[index];
-      const sourcePath = descriptor.owner === "object"
-        ? resolve(
-            projectRoot,
-            "src/planets",
-            descriptor.planetId,
-            "source",
-            descriptor.source.path,
-          )
-        : resolve(navigationSourceRoot, descriptor.source.path);
-      tiles.push({
-        input: await renderMarker(descriptor, { sourcePath, tileSize }),
-        left: index * tileSize,
-        top: 0,
-      });
-    }
-    const outputPath = resolve(
-      outputRoot,
-      `planet-markers${density === 2 ? "@2x" : ""}.webp`,
-    );
-    await sharp({
-      create: {
-        width: tileSize * descriptors.length,
-        height: tileSize,
-        channels: 4,
-        background: { r: 0, g: 0, b: 0, alpha: 0 },
-      },
-    })
-      .composite(tiles)
-      .webp({ lossless: true, effort: 6 })
-      .toFile(outputPath);
-    await optimizePreparedQ75Webp(outputPath);
-  }
+  await prepareMarkerAtlases({ projectRoot, outputRoot, descriptors });
 
   const sunSourcePath = resolve(navigationSourceRoot, NAVIGATION_SUN_SOURCE.path);
   const sunSource = await validateMarkerSourceBytes(

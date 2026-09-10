@@ -108,11 +108,20 @@
       ],
       "metersPerUnit": 1024.7826086956522,
       "bodyRadiusM": 235700
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/miranda-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4c6591cd7cdfccf5c568d0b237faff2d763a8b262a3c7d55a019ba920960bc59"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "50be92622af9673798f56d10ac3efc38f33a2b7df8381793d76ace237f8c1405"
+    "sha256": "3523467da7378aa3ae2e7d499c8840511af2176e4d128d837009fe33378c9cd1"
   }
 }

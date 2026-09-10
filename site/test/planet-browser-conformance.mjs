@@ -545,6 +545,8 @@ async function proveDesktop(browser, planet, profile) {
       zoom: bounds.defaultZoom,
     });
     const dolly = await wheelDolly(page, planet.id);
+    // Exclude the preceding camera reset's queued publication from the wheel probe.
+    await waitFrames(page);
     await beginZoomPublicationProbe(page);
     await wheel(page, profile.inputSelector, -240);
     const zoomPublication = await finishZoomPublicationProbe(page);
@@ -589,8 +591,7 @@ async function proveDesktop(browser, planet, profile) {
       pitch: bounds.defaultPitch,
       zoom: bounds.defaultZoom,
     });
-    // Empty sky requests the shared overview flight. Cancel that documented
-    // event here to isolate surface targeting, then assert it was requested.
+    // Empty sky leaves the current selection and camera unchanged.
     await page.evaluate(() => {
       window.__conformanceDeselects = 0;
       window.__conformanceDeselectProbe = event => { window.__conformanceDeselects++; event.preventDefault(); };
@@ -606,11 +607,11 @@ async function proveDesktop(browser, planet, profile) {
     assert.deepEqual(
       await profile.camera(page),
       beforeEmptyDoubleClick,
-      `${planet.id}: empty sky must not trigger a surface flight when overview deselection is canceled`,
+      `${planet.id}: empty sky must not trigger a surface flight`,
     );
 
-    assert.ok(await page.evaluate(() => window.__conformanceDeselects > 0),
-      `${planet.id}: empty sky must request the shared deselection`);
+    assert.equal(await page.evaluate(() => window.__conformanceDeselects), 0,
+      `${planet.id}: empty sky must not request deselection`);
     await page.evaluate(() => window.removeEventListener('objectdeselect', window.__conformanceDeselectProbe, { capture: true }));
 
     // Probe both setter limits in one task, then restore the selected view.

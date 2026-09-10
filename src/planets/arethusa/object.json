@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 319.5652173913044,
       "bodyRadiusM": 73500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/arethusa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f2552bfe5e10bdcde997eb1e82b0f84c962c140dc73e251456a8b5657f3d1449"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "28c646df97aa0c0e990be11cda5c1b59e6b56ff82ab53727c17dd86071ca35d4"
+    "sha256": "d27903b58f967e58fcec9d750fc2362ab805a7b13f3cccfe7090fa46e722cf16"
   }
 }

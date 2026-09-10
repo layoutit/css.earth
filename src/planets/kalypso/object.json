@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 221.52173913043478,
       "bodyRadiusM": 50950
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/kalypso-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "62461858008926b77474ce258fb9bada1423fb678136902d88c091ebc56ad6de"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "804b69075412144abf4469a03a6fbd090c39fcdaadc49c897e74e1701d9a85c6"
+    "sha256": "371e483ff2b22c03468ed8106ff4b4521bc927daf35a865c0dcd769877689904"
   }
 }

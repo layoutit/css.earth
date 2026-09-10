@@ -31,13 +31,101 @@
       "category": "evidence",
       "reason": "Runs package and source checks for a bounded historical cohort."
     },
+    "docs/centaur-population/browser-check.mjs": {
+      "category": "evidence",
+      "reason": "Runs bounded browser assertions and saves captures for the named object cohort."
+    },
+    "docs/centaur-population/check-shape.mjs": {
+      "category": "evidence",
+      "reason": "Compares the prepared shape against published dimensions and saves qualification evidence."
+    },
+    "docs/centaur-population/fresh-install.mjs": {
+      "category": "evidence",
+      "reason": "Verifies source-pinned runtime installation in a fresh evidence destination."
+    },
+    "docs/centaur-population/measure-orbits.mjs": {
+      "category": "evidence",
+      "reason": "Compares astronomy positions with recorded independent source fixtures and writes an accuracy report."
+    },
+    "docs/centaur-population/verify-built-transports.mjs": {
+      "category": "evidence",
+      "reason": "Checks emitted transport bytes and their source and build closure."
+    },
+    "docs/centaur-population/verify.mjs": {
+      "category": "evidence",
+      "reason": "Runs source and package checks for the named historical object cohort."
+    },
     "docs/lucy-targets/drag-trace.mjs": {
       "category": "evidence",
       "reason": "Records a bounded browser drag workload and Chrome trace."
     },
+    "docs/mars-crossing-population/browser-check.mjs": {
+      "category": "evidence",
+      "reason": "Runs bounded browser assertions and saves captures for the named object cohort."
+    },
+    "docs/mars-crossing-population/compare-scalars.mjs": {
+      "category": "evidence",
+      "reason": "Compares displayed scalar values with independently computed source measurements."
+    },
+    "docs/mars-crossing-population/fresh-install.mjs": {
+      "category": "evidence",
+      "reason": "Verifies source-pinned runtime installation in a fresh evidence destination."
+    },
+    "docs/mars-crossing-population/measure-orbits.mjs": {
+      "category": "evidence",
+      "reason": "Compares astronomy positions with recorded independent source fixtures and writes an accuracy report."
+    },
+    "docs/mars-crossing-population/qualify.mjs": {
+      "category": "evidence",
+      "reason": "Orchestrates bounded independent source, scalar, and package verification and records its outcome."
+    },
+    "docs/mars-crossing-population/scalar-queries.mjs": {
+      "category": "evidence",
+      "reason": "Collects source-backed scalar reference queries in the cohort evidence directory."
+    },
+    "docs/mars-crossing-population/source-comparison.mjs": {
+      "category": "evidence",
+      "reason": "Measures prepared results against original source data for an independent comparison report."
+    },
+    "docs/mars-crossing-population/surface-fit.mjs": {
+      "category": "evidence",
+      "reason": "Measures the displayed surface fit against the pinned source shape without authoring runtime assets."
+    },
+    "docs/mars-crossing-population/verify-built-transports.mjs": {
+      "category": "evidence",
+      "reason": "Checks emitted transport bytes and their source and build closure."
+    },
+    "docs/mars-crossing-population/verify.mjs": {
+      "category": "evidence",
+      "reason": "Runs source and package checks for the named historical object cohort."
+    },
     "docs/moons/b1-preparation/runtime-publication-audit.mjs": {
       "category": "evidence",
       "reason": "Audits published runtime closure into a fresh evidence directory."
+    },
+    "docs/moons/b10-lunar-thermal/browser-one.mjs": {
+      "category": "evidence",
+      "reason": "Captures and checks one named object in the cohort browser qualification."
+    },
+    "docs/moons/b10-lunar-thermal/capture-integrated.mjs": {
+      "category": "evidence",
+      "reason": "Captures integrated application evidence for the named qualification cohort."
+    },
+    "docs/moons/b10-lunar-thermal/conformance-one.mjs": {
+      "category": "evidence",
+      "reason": "Runs shared browser conformance for one named cohort object."
+    },
+    "docs/moons/b10-lunar-thermal/restore-original.mjs": {
+      "category": "evidence",
+      "reason": "Restores pinned original inputs into a fresh evidence directory for independent verification."
+    },
+    "docs/moons/b10-lunar-thermal/test-acquisition.mjs": {
+      "category": "evidence",
+      "reason": "Checks source acquisition against the cohort frozen input hashes."
+    },
+    "docs/moons/b10-lunar-thermal/verify-packages.mjs": {
+      "category": "evidence",
+      "reason": "Checks object package contracts and browser profiles for the bounded cohort."
     },
     "docs/moons/b2-preparation/final/capture-b2-enhanced-supplement.mjs": {
       "category": "evidence",
@@ -127,9 +215,121 @@
       "category": "evidence",
       "reason": "Verifies bounded B7 packages and frozen shared-source invariants."
     },
+    "docs/moons/b8-surface-chemistry/browser-one.mjs": {
+      "category": "evidence",
+      "reason": "Captures and checks one named object in the cohort browser qualification."
+    },
+    "docs/moons/b8-surface-chemistry/capture-integrated.mjs": {
+      "category": "evidence",
+      "reason": "Captures integrated application evidence for the named qualification cohort."
+    },
+    "docs/moons/b8-surface-chemistry/restore-and-reproduce.mjs": {
+      "category": "evidence",
+      "reason": "Restores original inputs into a fresh evidence directory and compares independently reproduced source bytes."
+    },
+    "docs/moons/b8-surface-chemistry/shared-browser-one.mjs": {
+      "category": "evidence",
+      "reason": "Runs the shared browser assertions for one cohort object and records its results."
+    },
+    "docs/moons/b8-surface-chemistry/verify-packages.mjs": {
+      "category": "evidence",
+      "reason": "Checks object package contracts and browser profiles for the bounded cohort."
+    },
+    "docs/moons/b9-cassini-ice-surfaces/browser-one.mjs": {
+      "category": "evidence",
+      "reason": "Captures and checks one named object in the cohort browser qualification."
+    },
+    "docs/moons/b9-cassini-ice-surfaces/capture-integrated.mjs": {
+      "category": "evidence",
+      "reason": "Captures integrated application evidence for the named qualification cohort."
+    },
+    "docs/moons/b9-cassini-ice-surfaces/conformance-one.mjs": {
+      "category": "evidence",
+      "reason": "Runs shared browser conformance for one named cohort object."
+    },
+    "docs/moons/b9-cassini-ice-surfaces/verify-display-reader.mjs": {
+      "category": "evidence",
+      "reason": "Compares the display reader with independent scientific source values."
+    },
+    "docs/moons/b9-cassini-ice-surfaces/verify-packages.mjs": {
+      "category": "evidence",
+      "reason": "Checks object package contracts and browser profiles for the bounded cohort."
+    },
     "docs/moons/evidence/route-built-browser.mjs": {
       "category": "evidence",
       "reason": "Test-only Playwright route adapter serving built-site files to evidence harnesses."
+    },
+    "docs/near-earth-population/browser-check.mjs": {
+      "category": "evidence",
+      "reason": "Runs bounded browser assertions and saves captures for the named object cohort."
+    },
+    "docs/near-earth-population/compare-scalars.mjs": {
+      "category": "evidence",
+      "reason": "Compares displayed scalar values with independently computed source measurements."
+    },
+    "docs/near-earth-population/fresh-install.mjs": {
+      "category": "evidence",
+      "reason": "Verifies source-pinned runtime installation in a fresh evidence destination."
+    },
+    "docs/near-earth-population/measure-orbits.mjs": {
+      "category": "evidence",
+      "reason": "Compares astronomy positions with recorded independent source fixtures and writes an accuracy report."
+    },
+    "docs/near-earth-population/qualify.mjs": {
+      "category": "evidence",
+      "reason": "Orchestrates bounded independent source, scalar, and package verification and records its outcome."
+    },
+    "docs/near-earth-population/restore-originals.mjs": {
+      "category": "evidence",
+      "reason": "Restores original observations into an evidence destination for source comparison."
+    },
+    "docs/near-earth-population/scalar-queries.mjs": {
+      "category": "evidence",
+      "reason": "Collects source-backed scalar reference queries in the cohort evidence directory."
+    },
+    "docs/near-earth-population/source-comparison.mjs": {
+      "category": "evidence",
+      "reason": "Measures prepared results against original source data for an independent comparison report."
+    },
+    "docs/near-earth-population/surface-fit.mjs": {
+      "category": "evidence",
+      "reason": "Measures the displayed surface fit against the pinned source shape without authoring runtime assets."
+    },
+    "docs/near-earth-population/verify-built-transports.mjs": {
+      "category": "evidence",
+      "reason": "Checks emitted transport bytes and their source and build closure."
+    },
+    "docs/near-earth-population/verify-comet-integration.mjs": {
+      "category": "evidence",
+      "reason": "Checks integrated comet package and rendering contracts and records their qualification."
+    },
+    "docs/near-earth-population/verify.mjs": {
+      "category": "evidence",
+      "reason": "Runs source and package checks for the named historical object cohort."
+    },
+    "docs/trans-neptunian/albedo-view.mjs": {
+      "category": "evidence",
+      "reason": "Captures a bounded albedo browser view for source and visual review."
+    },
+    "docs/trans-neptunian/browser-check.mjs": {
+      "category": "evidence",
+      "reason": "Runs bounded browser assertions and saves captures for the named object cohort."
+    },
+    "docs/trans-neptunian/drag-trace.mjs": {
+      "category": "evidence",
+      "reason": "Records a bounded native browser drag workload and its performance trace."
+    },
+    "docs/trans-neptunian/fresh-install.mjs": {
+      "category": "evidence",
+      "reason": "Verifies source-pinned runtime installation in a fresh evidence destination."
+    },
+    "docs/trans-neptunian/qualify.mjs": {
+      "category": "evidence",
+      "reason": "Orchestrates bounded independent source, scalar, and package verification and records its outcome."
+    },
+    "docs/trans-neptunian/verify-orbits.mjs": {
+      "category": "evidence",
+      "reason": "Checks orbital positions against independent astronomy fixtures and saves the comparison."
     },
     "eslint.config.mjs": {
       "category": "configuration",

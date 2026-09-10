@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 326.0869565217391,
       "bodyRadiusM": 75000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/kalliope-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4f53cda61984d5bd5ad0bf61a2b9821099cce6f0c8cc85f0e6226347aafba0a2"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6b6ebcdd36044afcc363bd4cb89858af7a9e2d8b85cf73f9a160d1e259c7a77c"
+    "sha256": "a9deea67abaf9da480f06abf78d6d6506cf196e8c94d49d2ff62906f2db70565"
   }
 }

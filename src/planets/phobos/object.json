@@ -113,11 +113,20 @@
       ],
       "metersPerUnit": 48.17391304347826,
       "bodyRadiusM": 11080
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/phobos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3db908c06c60ea4a2975470af02e4c37f91d21d611e5b3dbb1f5115604d45091"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "cdc75fa3bc6c866db59ea45a5fcc254b5cf181458846710a63ee142df47c8361"
+    "sha256": "8cec03432bab4316d002aeee04ef9b522f970b25551a3eaadaa73a349b403a7f"
   }
 }

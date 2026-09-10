@@ -11,7 +11,7 @@ and Chrome globe views are produced by `tools/audit.mjs`. They are different
 projections: this is source-bound visual evidence, not a native-camera pixel
 match. Identified no-data areas receive a prepared gray grid, never invented
 terrain. Conservative JPEG coverage detection can leave a dark boundary fringe.
-`SOURCE.md` separates scientific facts from display choices and lists licenses.
+`README.md` separates scientific facts from display choices and lists licenses.
 
 Preparation produces 43 runtime images and seven checked manifest/scene/content
 modules. Runtime retains 452 surface leaves, one curvature overlay, six sky

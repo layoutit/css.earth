@@ -176,7 +176,7 @@ export function retainedPresentationFixture(definition, { failAtElement = null }
 
 // Actual package presentation + common controls, selection and native resource
 // receipts. Only DOM and image boundaries are controlled by the fixture.
-export async function preparedSelectionFixture(definition) {
+export async function preparedSelectionFixture(definition, { silhouetteDiameter } = {}) {
   const f = retainedPresentationFixture(definition), jobs = [], errors = [], materialErrors = [];
   const timers = new Map(); let nextTimer = 0;
   const advanceTimers = () => { const pending = [...timers.values()]; timers.clear(); for (const callback of pending) callback(); };
@@ -184,6 +184,7 @@ export async function preparedSelectionFixture(definition) {
     schedule(callback) { timers.set(++nextTimer, callback); return nextTimer; },
     unschedule(id) { timers.delete(id); }, createImage() {
     return { naturalWidth: 1, naturalHeight: 1, src: "", decode() {
+      this.naturalWidth = (definition.assets.entries.find(entry => entry.url === this.src)?.decodedBytes ?? 4) / 4;
       return new Promise((resolve, reject) => jobs.push({ image: this, url: this.src, resolve, reject, done: false }));
     }, removeAttribute(name) { if (name === "src") this.src = ""; } };
   } });
@@ -213,6 +214,7 @@ export async function preparedSelectionFixture(definition) {
     getState: selection.state, onAction: selection.dispatch, onError: error => materialErrors.push(error) });
   f.lifetime.onDispose(() => binding.destroy());
   const view = { controlPitch: definition.camera.defaultControlPitchDegrees ?? 0,
+    ...(silhouetteDiameter === undefined ? {} : { levelOfDetail: { stage: "geometry", silhouetteDiameter, billboardOpacity: 0, markerOpacity: 0 } }),
     controlYaw: definition.camera.defaultControlYawDegrees ?? 0, zoom: definition.camera.defaultZoom,
     revision: 1, sceneMatrix: "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)",
     counterRotation: "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)",

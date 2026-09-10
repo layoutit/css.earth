@@ -55,7 +55,8 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
       if (raster.surfaceProjection === 'oriented-bands') {
         ({ data, info } = await sharp(resolve(publicDirectory, `${requireString(plan.output)}${density === 2 ? '@2x' : ''}.webp`))
           .raw().toBuffer({ resolveWithObject: true }));
-        if (info.width !== raster.width * density || info.height !== raster.height * density) throw new Error('Observation preview dimensions drifted.');
+        const scale = plan.rasterScale ?? 1;
+        if (info.width !== raster.width * density * scale || info.height !== raster.height * density * scale) throw new Error('Observation preview dimensions drifted.');
         data = orientLatitudeBands(data, { ...info, bandCount: requireFiniteNumber(raster.latitudeSegments) });
       } else {
         ({ data, info } = await observationRaster({

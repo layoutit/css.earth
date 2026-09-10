@@ -65,7 +65,8 @@ export async function prepareFactsheet(objectDirectory:string, { check = false, 
     }
   };
   const introduction = editorial ? source.panel.introduction : content.introduction;
-  await publish('prepared/content.json', { ...content, introduction, facts, moreFacts });
+  await publish('prepared/content.json', { ...content, introduction, facts, moreFacts,
+    ...(source.provenance ? { provenance: source.provenance } : {}) });
   try {
     const panel = await read('prepared/panel.json');
     await publish('prepared/panel.json', { ...panel, ...(editorial ? { introduction } : {}), facts, moreFacts });

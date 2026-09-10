@@ -103,11 +103,20 @@
       ],
       "metersPerUnit": 203.5918558216905,
       "bodyRadiusM": 46826.126838988814
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/juliet-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "6f035255997e4c96d1f47600991be8a41a358947e22b1d00436af94c306d88d9"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3a72990da1bf9247d99a19e3cfb8d1ffc56a37c79f0c481a4e6d6feabb55edc3"
+    "sha256": "86bab423d6497a7db09d1046a7e053e8baa284ff897a607935c0c244f82b982f"
   }
 }

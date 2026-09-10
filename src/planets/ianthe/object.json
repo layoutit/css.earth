@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 226.6086956521739,
       "bodyRadiusM": 52120
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ianthe-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "cc542723bf419b87364a7734568d0594aea974344db95b8e32ba64715084ac26"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "79252c66fadab24a252635c1b8a9b32a0c6bc110ce3b8f5833e68939aa92cfb9"
+    "sha256": "77ac4e08db8e3f1c81561f6c4e1db894d87bb226518f7c18b88e5dd2ae8c3781"
   }
 }

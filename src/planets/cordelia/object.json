@@ -103,11 +103,20 @@
       ],
       "metersPerUnit": 87.31734131506559,
       "bodyRadiusM": 20082.988502465087
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/cordelia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3d9d1f203011f6f11d621e397f6f0663eb520c8a56ec2b808622fb9548ef5f28"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6ab9121055ba4307eb4f826075d08274cdcb0f85bd338ca53f9d4553a4d77c5a"
+    "sha256": "ac60f167aae8674fc22c04c08b9d27a9c08122a46240af41a665f865ee834b2b"
   }
 }

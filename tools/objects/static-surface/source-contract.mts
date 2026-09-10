@@ -24,7 +24,7 @@ const relief = object({referenceRadiusMeters: number, lightDirection: array(numb
 const scientific = union(
   object({categories: array(object({color: string})), minimum: optional(number), maximum: optional(number), colors: optional(array(string)), relief: optional(relief), outputLongitudeOrigin: optional(number), displaySampling: optional(string)}),
   object({categories: (value): value is undefined => value === undefined, minimum: number, maximum: number, colors: array(string), relief: optional(relief), outputLongitudeOrigin: optional(number), displaySampling: optional(string)}));
-const observationLensFields={id: string, input: string, scientific: optional(scientific),
+const observationLensFields={id: string, input: string, rasterScale: optional(number), scientific: optional(scientific),
     elevation: optional(object({noData: number, palette: array(array(number)), rangeMetres: number, relief: optional(relief)})),
     coverage: optional(object({kind: string, southConnected: boolean})),
     presentation: optional(object({saturation: number, linearGain: number, linearOffset: number, sharpenSigma: number}))};

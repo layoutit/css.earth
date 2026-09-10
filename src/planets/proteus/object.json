@@ -108,11 +108,20 @@
       ],
       "metersPerUnit": 904.3478260869565,
       "bodyRadiusM": 208000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/proteus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "87b513e6956b7c415d2357abdd155f75d26a44eac9e42dbcb93cbfaf9caa26e2"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ffba16e9d141fae8c84ccbfb106fa7e0349e978b267130e116d48516a810de89"
+    "sha256": "590d984b55277fbafd52e980136dca4b43c7ed21c58ae3a933cca67ac4d4b0d4"
   }
 }

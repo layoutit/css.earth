@@ -81,7 +81,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "53a1933246d476b9306c6775250fa0f62feca6b2657f704b4dd4b01b06ccdd3e"
+          "sha256": "1e3ceb80a20c1a3ab12ad7ebaadd56cf3dd66321b565136b6c98a74ec0401938"
         },
         {
           "id": "satellite-catalog",
@@ -170,6 +170,15 @@
       ],
       "metersPerUnit": 238213.4387351779,
       "bodyRadiusM": 60268000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/saturn-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3ec450216b0ec66b3cfadb93302545a199b9a402ab8121d14978e95aff86b238"
+      }
     }
   },
   "schema": "cssearth-object@1",

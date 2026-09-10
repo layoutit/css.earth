@@ -108,11 +108,20 @@
       ],
       "metersPerUnit": 16.52173913043478,
       "bodyRadiusM": 3800
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/daphnis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ce42721358add248b67e3a73fc174351f3065d137dad57086c21ead675e8b323"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "85e5d4e18095734727819a67358e595b443dd5de27cf48ac94fb07f062cd9f30"
+    "sha256": "776bc18f6e78da94a556933c5197343b17b45a025eb267c6b43e0c549fd41083"
   }
 }

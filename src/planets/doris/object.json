@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 456.5217391304348,
       "bodyRadiusM": 105000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/doris-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "bb6f92c883ddb6a3d750a4f789acf01fb930ea50c4b9a89bf942ba9e84bb9532"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e18274814727c476fd978dddde5a4a96a901ecde976d943df4b3c0d075d02da5"
+    "sha256": "352893d1d35e5ec54f97c235ecab1f5bdaf2c8befbc7ca41a48ff7fb9cb8cdf4"
   }
 }

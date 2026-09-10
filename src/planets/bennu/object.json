@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c12a770aeed38bb78470a0bd564a4af0bf01aa7bccd12aeb7eb67ebd5d351587"
+    "sha256": "67cfc2bba13ec67156b235a50e781401df7241dd7326e394f81917f2d75e81e7"
   },
   "id": "bennu",
   "properties": {
@@ -121,6 +121,15 @@
       ],
       "metersPerUnit": 1.0478260869565217,
       "bodyRadiusM": 241
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/bennu-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "eebbc6f9ec6393437fa06143bf32607522cda34ea5b6f4bc63715b9efa88e160"
+      }
     }
   },
   "schema": "cssearth-object@1",

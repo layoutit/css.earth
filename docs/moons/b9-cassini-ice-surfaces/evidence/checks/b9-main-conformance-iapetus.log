@@ -1,0 +1,173 @@
+22:10:57 [types] Generated 0ms
+ astro  v7.2.9 ready in 920 ms
+┃ Local    http://127.0.0.1:4292/
+22:10:57 watching for file changes...
+(node:5680) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[conformance] START iapetus/mobile
+22:11:03 [200] /iapetus/ 1797ms
+22:11:07 [200] /objects/iapetus/6f95b353f3466e7dc6fc4173bafe7117da08e7f0b7983e4eb08e1a2176ba5041.json 7ms
+[conformance] PASS iapetus/mobile (10200ms)
+[conformance] START iapetus/dataset-interactions
+22:11:08 [200] /iapetus/ 10ms
+22:11:11 [200] /objects/iapetus/6f95b353f3466e7dc6fc4173bafe7117da08e7f0b7983e4eb08e1a2176ba5041.json 8ms
+[conformance] PASS iapetus/dataset-interactions (11249ms)
+[conformance] START iapetus/dataset-interactions-dpr-2
+22:11:20 [200] /iapetus/ 9ms
+22:11:22 [200] /objects/iapetus/6f95b353f3466e7dc6fc4173bafe7117da08e7f0b7983e4eb08e1a2176ba5041.json 11ms
+[conformance] PASS iapetus/dataset-interactions-dpr-2 (12144ms)
+[conformance] START iapetus/lens-race
+22:11:32 [200] /iapetus/ 8ms
+22:11:34 [200] /objects/iapetus/6f95b353f3466e7dc6fc4173bafe7117da08e7f0b7983e4eb08e1a2176ba5041.json 7ms
+[conformance] PASS iapetus/lens-race (3923ms)
+[conformance] START iapetus/lens-reacquire
+22:11:36 [200] /iapetus/ 8ms
+22:11:38 [200] /objects/iapetus/6f95b353f3466e7dc6fc4173bafe7117da08e7f0b7983e4eb08e1a2176ba5041.json 7ms
+[conformance] PASS iapetus/lens-reacquire (3926ms)
+[conformance] START iapetus/lens-rejection
+22:11:40 [200] /iapetus/ 8ms
+22:11:42 [200] /objects/iapetus/6f95b353f3466e7dc6fc4173bafe7117da08e7f0b7983e4eb08e1a2176ba5041.json 5ms
+[conformance] PASS iapetus/lens-rejection (4134ms)
+[conformance] START iapetus/lens-destroy
+22:11:44 [200] /iapetus/ 8ms
+22:11:46 [200] /objects/iapetus/6f95b353f3466e7dc6fc4173bafe7117da08e7f0b7983e4eb08e1a2176ba5041.json 7ms
+[conformance] PASS iapetus/lens-destroy (3875ms)
+{
+  "ok": true,
+  "reports": [
+    {
+      "id": "iapetus",
+      "case": "initial-shell",
+      "skipped": true
+    },
+    {
+      "id": "iapetus",
+      "case": "desktop",
+      "skipped": true
+    },
+    {
+      "id": "iapetus",
+      "viewport": "mobile",
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 6,
+      "stageElements": 115703,
+      "stable": true
+    },
+    {
+      "id": "iapetus",
+      "case": "dataset-interactions",
+      "deviceScaleFactor": 1,
+      "datasets": [
+        {
+          "id": "normal",
+          "interior": false,
+          "geometryDisplacement": 122.0201396274273,
+          "shadowPixels": null
+        },
+        {
+          "id": "enhanced",
+          "interior": false,
+          "geometryDisplacement": 122.51908250233127,
+          "shadowPixels": null
+        },
+        {
+          "id": "infrared",
+          "interior": false,
+          "geometryDisplacement": 124.89323450272911,
+          "shadowPixels": null
+        },
+        {
+          "id": "ice-absorption",
+          "interior": false,
+          "geometryDisplacement": 125.16861436185874,
+          "shadowPixels": null
+        }
+      ]
+    },
+    {
+      "id": "iapetus",
+      "case": "dataset-interactions",
+      "deviceScaleFactor": 2,
+      "datasets": [
+        {
+          "id": "normal",
+          "interior": false,
+          "geometryDisplacement": 122.0201396274273,
+          "shadowPixels": null
+        },
+        {
+          "id": "enhanced",
+          "interior": false,
+          "geometryDisplacement": 122.51908250233127,
+          "shadowPixels": null
+        },
+        {
+          "id": "infrared",
+          "interior": false,
+          "geometryDisplacement": 132.5848015199672,
+          "shadowPixels": null
+        },
+        {
+          "id": "ice-absorption",
+          "interior": false,
+          "geometryDisplacement": 128.01513355270038,
+          "shadowPixels": null
+        }
+      ]
+    },
+    {
+      "id": "iapetus",
+      "case": "pre-ready-hidden-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "iapetus",
+      "case": "pre-ready-visible-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "iapetus",
+      "case": "pre-ready-hidden-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "iapetus",
+      "case": "pre-ready-visible-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "iapetus",
+      "case": "dpr-1",
+      "skipped": true
+    },
+    {
+      "id": "iapetus",
+      "case": "dpr-2",
+      "skipped": true
+    },
+    {
+      "id": "iapetus",
+      "viewport": "lens-race",
+      "lens": "normal",
+      "slowDecodeCount": 1
+    },
+    {
+      "id": "iapetus",
+      "viewport": "lens-reacquire",
+      "lens": "enhanced"
+    },
+    {
+      "id": "iapetus",
+      "viewport": "lens-rejection-retry",
+      "lens": "enhanced"
+    },
+    {
+      "id": "iapetus",
+      "viewport": "lens-destroy"
+    }
+  ]
+}

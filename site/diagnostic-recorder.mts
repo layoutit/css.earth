@@ -97,26 +97,35 @@ export function createDiagnosticRecorder({ windowTarget: w, button, capture, dow
 export function mountDiagnosticRecorder({ documentTarget: d, windowTarget: w, readCamera }: { documentTarget: Document; windowTarget: BrowserWindow; readCamera(): ShellCamera | null }) {
   const button = d.querySelector<HTMLElement>('[data-diagnostic-record]');
   if (!button) return { destroy() {} };
-  let owner: unknown = null, leaves: HTMLElement[] = [], retained = 0;
+  let owner: unknown = null;
+  let geometry: () => unknown = () => ({ retainedNodes: 0, retainedLeaves: 0, directlyHiddenLeaves: 0 });
   const capture = () => {
     const app: unknown = Reflect.get(w, '__cssEarth'), id = property(app, 'activeObjectId'), runtime: unknown = typeof id === 'string' ? Reflect.get(w, `__${id}`) : undefined;
     if (runtime !== owner) {
       owner = runtime;
-      // Cache the retained identity once per mount; no layout/style measurement.
-      const nodes = property(runtime, 'stableNodes');
-      leaves = Array.isArray(nodes) ? nodes.filter((node): node is HTMLElement => node instanceof w.HTMLElement && node.tagName === 'S') : [];
-      retained = Array.isArray(nodes) ? nodes.length : 0;
+      const renderer = property(runtime, 'runtime');
+      const counters = property(renderer, 'geometry');
+      if (typeof counters === 'function') geometry = () => counters.call(renderer);
+      else {
+        const nodes = property(runtime, 'stableNodes');
+        const leaves = Array.isArray(nodes) ? nodes.filter((node): node is HTMLElement => node instanceof w.HTMLElement && node.tagName === 'S') : [];
+        const retainedNodes = Array.isArray(nodes) ? nodes.length : 0;
+        geometry = () => ({ retainedNodes, retainedLeaves: leaves.length,
+          directlyHiddenLeaves: leaves.reduce((sum, leaf) => sum + Number(leaf.style.visibility === 'hidden'), 0) });
+      }
     }
     const camera = readCamera();
+    const view = call(property(runtime, 'runtime'), 'view');
+    const requestedCamera = camera?.navigation?.capture() ?? null;
     return {
       active: id ?? null, selected: property(app, 'selectedObjectId') ?? null, overview: property(app, 'overview') ?? null,
       mountedObjects: property(app, 'mountedObjectCount') ?? null, lifecycle: property(app, 'lifecycle') ?? null,
       playback: property(app, 'playback') ?? null, documentVisibility: d.visibilityState,
-      camera: camera?.navigation?.capture() ?? null, optics: camera?.navigation?.optics() ?? null,
-      view: call(property(runtime, 'runtime'), 'view') ?? null, selection: call(property(runtime, 'runtime'), 'selection') ?? null,
+      camera: property(view, 'worldCamera') ?? requestedCamera, requestedCamera, optics: camera?.navigation?.optics() ?? null,
+      framePublication: call(property(runtime, 'camera'), 'publication'), worldFrames: call(Reflect.get(w, '__cssEarthUniverse'), 'frames'),
+      view, selection: call(property(runtime, 'runtime'), 'selection') ?? null,
       resources: call(property(runtime, 'runtime'), 'resources') ?? null, materials: call(property(runtime, 'material'), 'state') ?? null,
-      geometry: { retainedNodes: retained, retainedLeaves: leaves.length,
-        directlyHiddenLeaves: leaves.reduce((sum, leaf) => sum + (leaf.style.visibility === 'hidden' ? 1 : 0), 0) },
+      geometry: geometry(),
     };
   };
   const api = createDiagnosticRecorder({ windowTarget: w, button, capture,

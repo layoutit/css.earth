@@ -1,0 +1,192 @@
+[
+  {
+    "id": "diomedes",
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271437%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "errorKm": 370.3737094386336
+      },
+      {
+        "jd": 2461286.5,
+        "errorKm": 7.275674114068569e-7
+      },
+      {
+        "jd": 2461316.5,
+        "errorKm": 339.13924613026586
+      }
+    ],
+    "regressionGuardKm": 426
+  },
+  {
+    "id": "ajax",
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271404%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "errorKm": 845.6884046709222
+      },
+      {
+        "jd": 2461286.5,
+        "errorKm": 3.601028315304092e-7
+      },
+      {
+        "jd": 2461316.5,
+        "errorKm": 805.0943141329499
+      }
+    ],
+    "regressionGuardKm": 973
+  },
+  {
+    "id": "ilioneus",
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%275130%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "errorKm": 473.95390667610354
+      },
+      {
+        "jd": 2461286.5,
+        "errorKm": 8.107108180961276e-7
+      },
+      {
+        "jd": 2461316.5,
+        "errorKm": 487.66408610664934
+      }
+    ],
+    "regressionGuardKm": 561
+  },
+  {
+    "id": "pyrrhus",
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%275283%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "errorKm": 460.0147016316126
+      },
+      {
+        "jd": 2461286.5,
+        "errorKm": 0.0000013301321032298446
+      },
+      {
+        "jd": 2461316.5,
+        "errorKm": 418.2495672731535
+      }
+    ],
+    "regressionGuardKm": 530
+  },
+  {
+    "id": "eumelos",
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%275436%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "errorKm": 497.83060845791005
+      },
+      {
+        "jd": 2461286.5,
+        "errorKm": 2.8272965492323447e-7
+      },
+      {
+        "jd": 2461316.5,
+        "errorKm": 449.4955958547285
+      }
+    ],
+    "regressionGuardKm": 573
+  },
+  {
+    "id": "lycomedes",
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%279694%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "errorKm": 832.5683095040462
+      },
+      {
+        "jd": 2461286.5,
+        "errorKm": 0.0000014409594908061675
+      },
+      {
+        "jd": 2461316.5,
+        "errorKm": 782.00113232289
+      }
+    ],
+    "regressionGuardKm": 958
+  },
+  {
+    "id": "demodokus",
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2711429%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "errorKm": 1462.5986298706155
+      },
+      {
+        "jd": 2461286.5,
+        "errorKm": 2.443972150513042e-7
+      },
+      {
+        "jd": 2461316.5,
+        "errorKm": 1414.5529141977347
+      }
+    ],
+    "regressionGuardKm": 1682
+  },
+  {
+    "id": "menelaus",
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271647%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "errorKm": 916.0535187480888
+      },
+      {
+        "jd": 2461286.5,
+        "errorKm": 4.178972143644142e-7
+      },
+      {
+        "jd": 2461316.5,
+        "errorKm": 862.8916268000216
+      }
+    ],
+    "regressionGuardKm": 1054
+  },
+  {
+    "id": "agenor",
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271873%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "errorKm": 516.1848609864766
+      },
+      {
+        "jd": 2461286.5,
+        "errorKm": 0.0000021948757934000453
+      },
+      {
+        "jd": 2461316.5,
+        "errorKm": 527.6137726923924
+      }
+    ],
+    "regressionGuardKm": 607
+  },
+  {
+    "id": "mentor",
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%273451%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "errorKm": 1219.4648035976686
+      },
+      {
+        "jd": 2461286.5,
+        "errorKm": 0.000001539460158469874
+      },
+      {
+        "jd": 2461316.5,
+        "errorKm": 1255.452509754856
+      }
+    ],
+    "regressionGuardKm": 1444
+  }
+]

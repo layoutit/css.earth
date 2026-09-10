@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e3b1262e4032c1c9c647fefbca57a22648b0c394a38e5d4b39d5f9e65bfb2f05"
+    "sha256": "94718f21dab4daf526362237db358efb959a2f3caabf34a40d3de423b64063a9"
   },
   "id": "ceres",
   "properties": {
@@ -111,6 +111,15 @@
           "sha256": "bbd89c12f8573468cdd8f6ccc3e010e88480841ab53f84189df01e59a20720d8"
         }
       ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ceres-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ee86a544d6e3bf5307c7bed71d2729fda1ece523845b3e0b28d1ee86435bdd3a"
+      }
     }
   },
   "schema": "cssearth-object@1",

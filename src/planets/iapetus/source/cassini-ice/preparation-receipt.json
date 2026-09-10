@@ -1,0 +1,1108 @@
+{
+  "schema": "cssearth-cassini-ice-surfaces@1",
+  "recipeSha256": "9071d13e1ab44cba23ecaa06e6ef28620e319b129f72d9e11468a105cbd9654d",
+  "preparerSha256": "b67682f3ea069c0e371bcedc8f440836dc591f95f9b202d39510ef89efabbf3a",
+  "transferSha256": "25d2a53eaf5d8373d14a85a373588ad662d1e65af427fb36fc64d4575ae27914",
+  "navigationPreparerSha256": "c4a8f2d534b1252cb847b90beff8c8d4a5daac009912fd40cf5e50f4027b1b04",
+  "detectorQualityPreparerSha256": "e02acd15b1af115d3482a6272ba78d79071db2757d45854fb0d0527681dc314e",
+  "observations": [
+    {
+      "id": "1568129671_1",
+      "dimensions": [
+        40,
+        40
+      ],
+      "time": [
+        "2007-253T14:59:30.820",
+        "2007-253T15:02:58.571"
+      ],
+      "nativeWavelengthsMicrometers": {
+        "25": 1.28142,
+        "44": 1.59305,
+        "58": 1.82362,
+        "70": 2.02129,
+        "81": 2.2031
+      },
+      "continuumRightWeight": 0.5208970169705913,
+      "geometryAcceptedNativeCenters": 1600,
+      "eligibleNativeCenters": 1600,
+      "depthAcceptedNativePixels": 1600,
+      "rgbAcceptedNativePixels": 1600,
+      "detectorQuality": {
+        "policy": "pds3-ir-adc-background-and-filter-dependencies@1",
+        "target": "IAPETUS",
+        "productId": "1_1568129671.13979",
+        "nativeStartTime": "1568129671.13979",
+        "dimensions": [
+          40,
+          40
+        ],
+        "originalLayout": {
+          "recordBytes": 512,
+          "declaredBytes": 1233408,
+          "actualBytes": 1232896,
+          "coreStartByteZeroBased": 23552,
+          "coreEndByteExclusive": 1232512,
+          "declaredMinusActualBytes": 512
+        },
+        "rawSha256": "56726dd22fd5f13764d53798ffa2dc57dc40bc006e8a1b3ac03b66c2720df648",
+        "calibratedSha256": "e7a4d85a4e30022e9a0af4de5ba06e799e0ee0f9ddb6e36c77068eb251a6b861",
+        "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
+        "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
+        "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
+        "filterDependencies": {
+          "radiusSamples": 3,
+          "radiusLines": 3,
+          "operations": [
+            "vims2isis",
+            "spiceinit",
+            "vimscal",
+            "noisefilter",
+            "lowpass"
+          ],
+          "derivation": "Minkowski sum: radius 2 for 5x5 noise classification plus radius 1 for 3x3 replacement",
+          "interpretation": "Possible source dependency; not a reconstruction of which pixels were replaced"
+        },
+        "bands": {
+          "25": {
+            "originalBand": 121,
+            "rawReasons": {},
+            "directInvalidCount": 0,
+            "validAfterDependencies": 1600,
+            "invalidAfterDependencies": 0,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [],
+            "backgroundRange": [
+              182,
+              190
+            ],
+            "reconstructedAdcRange": [
+              542,
+              2696
+            ],
+            "maskSha256": "504bc3fe5f1a16d3c33ae958f0542d01e4cf861071a97a6715cfd486ce7f7d6f",
+            "directInvalidIndices": []
+          },
+          "44": {
+            "originalBand": 140,
+            "rawReasons": {},
+            "directInvalidCount": 0,
+            "validAfterDependencies": 1600,
+            "invalidAfterDependencies": 0,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [],
+            "backgroundRange": [
+              219,
+              242
+            ],
+            "reconstructedAdcRange": [
+              429,
+              1065
+            ],
+            "maskSha256": "504bc3fe5f1a16d3c33ae958f0542d01e4cf861071a97a6715cfd486ce7f7d6f",
+            "directInvalidIndices": []
+          },
+          "58": {
+            "originalBand": 154,
+            "rawReasons": {},
+            "directInvalidCount": 0,
+            "validAfterDependencies": 1600,
+            "invalidAfterDependencies": 0,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [],
+            "backgroundRange": [
+              159,
+              174
+            ],
+            "reconstructedAdcRange": [
+              332,
+              1179
+            ],
+            "maskSha256": "504bc3fe5f1a16d3c33ae958f0542d01e4cf861071a97a6715cfd486ce7f7d6f",
+            "directInvalidIndices": []
+          },
+          "70": {
+            "originalBand": 166,
+            "rawReasons": {},
+            "directInvalidCount": 0,
+            "validAfterDependencies": 1600,
+            "invalidAfterDependencies": 0,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [],
+            "backgroundRange": [
+              163,
+              174
+            ],
+            "reconstructedAdcRange": [
+              327,
+              453
+            ],
+            "maskSha256": "504bc3fe5f1a16d3c33ae958f0542d01e4cf861071a97a6715cfd486ce7f7d6f",
+            "directInvalidIndices": []
+          },
+          "81": {
+            "originalBand": 177,
+            "rawReasons": {},
+            "directInvalidCount": 0,
+            "validAfterDependencies": 1600,
+            "invalidAfterDependencies": 0,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [],
+            "backgroundRange": [
+              154,
+              163
+            ],
+            "reconstructedAdcRange": [
+              319,
+              930
+            ],
+            "maskSha256": "504bc3fe5f1a16d3c33ae958f0542d01e4cf861071a97a6715cfd486ce7f7d6f",
+            "directInvalidIndices": []
+          }
+        },
+        "sources": {
+          "adc": "https://doi.org/10.1016/j.icarus.2004.07.001",
+          "background": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/vimscal/vimscal.html",
+          "pipeline": "https://vims.univ-nantes.fr/info/isis-calibration",
+          "noise": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/noisefilter/noisefilter.html",
+          "lowpass": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/lowpass/lowpass.html",
+          "fitDeltaSource": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/77c10385ee31526b54cc42b82ee30a1ac4ed8c58/isis/src/cassini/apps/vimscal/vimscal.cpp"
+        },
+        "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing."
+      },
+      "acceptedCenterReconstructionPixels": {
+        "count": 1600,
+        "minimum": 8.315145377380421e-08,
+        "maximum": 2.8677805975453576e-05,
+        "percentiles": {
+          "5": 2.1278764965558347e-06,
+          "50": 1.3526376495596735e-05,
+          "95": 2.5221108773362114e-05
+        }
+      },
+      "footprintRejections": {},
+      "cameraSourceEvidence": {
+        "calibratedLabelSha256": "547b0c5dc8537a6e233b16ff3658a22b1df23f77a22f21028a1473c583b5595b",
+        "navigationLabelSha256": "1a0550e54f236178246b37d6f0073a1439a455a7ff15cf30a289474e0e92b113",
+        "navigationPlanesSha256": "461ba9fa8cbf8d0ee81f343dea2c95c2ab7bbba1b1894628172055645114c5e2",
+        "tables": {
+          "InstrumentPointing": {
+            "sha256": "de5b47a06dfda1415133064552f6f05f6bc7dd5e2f6007fcd83bd28cf4d3457f",
+            "bytes": 3520
+          },
+          "InstrumentPosition": {
+            "sha256": "942d07043cdac41c0d21ee5b5fbf4676bdaec7cd10103b0050366ec6c2edcd4c",
+            "bytes": 168
+          },
+          "BodyRotation": {
+            "sha256": "ae1d799e200b00271fc59e9ce630aebe2c14f0f3bea3a6f8f4a3306a3b86ce17",
+            "bytes": 128
+          }
+        }
+      },
+      "resolutionMeters": {
+        "count": 1600,
+        "minimum": 2811.048095703125,
+        "maximum": 3024.633056640625,
+        "percentiles": {
+          "5": 2835.385986328125,
+          "50": 2903.4737548828125,
+          "95": 3011.1801269531247
+        }
+      },
+      "depth": {
+        "count": 1600,
+        "minimum": -0.04424460977315903,
+        "maximum": 0.7647057771682739,
+        "percentiles": {
+          "5": 0.04799068570137024,
+          "50": 0.26558299362659454,
+          "95": 0.7438852101564407
+        }
+      },
+      "rgb": [
+        {
+          "count": 1600,
+          "minimum": 0.08505493402481079,
+          "maximum": 0.12320812046527863,
+          "percentiles": {
+            "5": 0.09051856026053429,
+            "50": 0.1031060703098774,
+            "95": 0.11161247454583645
+          }
+        },
+        {
+          "count": 1600,
+          "minimum": 0.0787418782711029,
+          "maximum": 0.27021175622940063,
+          "percentiles": {
+            "5": 0.09490669444203377,
+            "50": 0.1195942610502243,
+            "95": 0.25037240982055664
+          }
+        },
+        {
+          "count": 1600,
+          "minimum": 0.06615804880857468,
+          "maximum": 0.41720637679100037,
+          "percentiles": {
+            "5": 0.08230685852468014,
+            "50": 0.12007015198469162,
+            "95": 0.38322592824697493
+          }
+        }
+      ]
+    },
+    {
+      "id": "1568133146_2",
+      "dimensions": [
+        26,
+        26
+      ],
+      "time": [
+        "2007-253T15:57:25.453",
+        "2007-253T15:59:26.048"
+      ],
+      "nativeWavelengthsMicrometers": {
+        "25": 1.28142,
+        "44": 1.59305,
+        "58": 1.82362,
+        "70": 2.02129,
+        "81": 2.2031
+      },
+      "continuumRightWeight": 0.5208970169705913,
+      "geometryAcceptedNativeCenters": 676,
+      "eligibleNativeCenters": 676,
+      "depthAcceptedNativePixels": 676,
+      "rgbAcceptedNativePixels": 676,
+      "detectorQuality": {
+        "policy": "pds3-ir-adc-background-and-filter-dependencies@1",
+        "target": "IAPETUS",
+        "productId": "1_1568133146.8471",
+        "nativeStartTime": "1568133146.08471",
+        "dimensions": [
+          26,
+          26
+        ],
+        "originalLayout": {
+          "recordBytes": 512,
+          "declaredBytes": 547840,
+          "actualBytes": 547328,
+          "coreStartByteZeroBased": 23552,
+          "coreEndByteExclusive": 547296,
+          "declaredMinusActualBytes": 512
+        },
+        "rawSha256": "fe7cd0d2e408988f0e11e2c9cfdc33b698fb8150697e3afce12db971c346a5af",
+        "calibratedSha256": "8c70f0c76666038d19a08efefbdc0a15f988a8b5bbd0bf69c6813b62248807a2",
+        "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
+        "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
+        "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
+        "filterDependencies": {
+          "radiusSamples": 3,
+          "radiusLines": 3,
+          "operations": [
+            "vims2isis",
+            "spiceinit",
+            "vimscal",
+            "noisefilter",
+            "lowpass"
+          ],
+          "derivation": "Minkowski sum: radius 2 for 5x5 noise classification plus radius 1 for 3x3 replacement",
+          "interpretation": "Possible source dependency; not a reconstruction of which pixels were replaced"
+        },
+        "bands": {
+          "25": {
+            "originalBand": 121,
+            "rawReasons": {},
+            "directInvalidCount": 0,
+            "validAfterDependencies": 676,
+            "invalidAfterDependencies": 0,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [],
+            "backgroundRange": [
+              223,
+              226
+            ],
+            "reconstructedAdcRange": [
+              757,
+              2925
+            ],
+            "maskSha256": "7a5e7aea7b91ac841a648844eac05d75e9117ed7d372f7bb6b912341334899f3",
+            "directInvalidIndices": []
+          },
+          "44": {
+            "originalBand": 140,
+            "rawReasons": {},
+            "directInvalidCount": 0,
+            "validAfterDependencies": 676,
+            "invalidAfterDependencies": 0,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [],
+            "backgroundRange": [
+              246,
+              247
+            ],
+            "reconstructedAdcRange": [
+              558,
+              1090
+            ],
+            "maskSha256": "7a5e7aea7b91ac841a648844eac05d75e9117ed7d372f7bb6b912341334899f3",
+            "directInvalidIndices": []
+          },
+          "58": {
+            "originalBand": 154,
+            "rawReasons": {},
+            "directInvalidCount": 0,
+            "validAfterDependencies": 676,
+            "invalidAfterDependencies": 0,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [],
+            "backgroundRange": [
+              166,
+              168
+            ],
+            "reconstructedAdcRange": [
+              423,
+              1229
+            ],
+            "maskSha256": "7a5e7aea7b91ac841a648844eac05d75e9117ed7d372f7bb6b912341334899f3",
+            "directInvalidIndices": []
+          },
+          "70": {
+            "originalBand": 166,
+            "rawReasons": {},
+            "directInvalidCount": 0,
+            "validAfterDependencies": 676,
+            "invalidAfterDependencies": 0,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [],
+            "backgroundRange": [
+              171,
+              174
+            ],
+            "reconstructedAdcRange": [
+              407,
+              504
+            ],
+            "maskSha256": "7a5e7aea7b91ac841a648844eac05d75e9117ed7d372f7bb6b912341334899f3",
+            "directInvalidIndices": []
+          },
+          "81": {
+            "originalBand": 177,
+            "rawReasons": {},
+            "directInvalidCount": 0,
+            "validAfterDependencies": 676,
+            "invalidAfterDependencies": 0,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [],
+            "backgroundRange": [
+              163,
+              165
+            ],
+            "reconstructedAdcRange": [
+              411,
+              1016
+            ],
+            "maskSha256": "7a5e7aea7b91ac841a648844eac05d75e9117ed7d372f7bb6b912341334899f3",
+            "directInvalidIndices": []
+          }
+        },
+        "sources": {
+          "adc": "https://doi.org/10.1016/j.icarus.2004.07.001",
+          "background": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/vimscal/vimscal.html",
+          "pipeline": "https://vims.univ-nantes.fr/info/isis-calibration",
+          "noise": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/noisefilter/noisefilter.html",
+          "lowpass": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/lowpass/lowpass.html",
+          "fitDeltaSource": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/77c10385ee31526b54cc42b82ee30a1ac4ed8c58/isis/src/cassini/apps/vimscal/vimscal.cpp"
+        },
+        "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing."
+      },
+      "acceptedCenterReconstructionPixels": {
+        "count": 676,
+        "minimum": 1.4387951381447128e-07,
+        "maximum": 1.1715140519069127e-05,
+        "percentiles": {
+          "5": 6.46119947700852e-07,
+          "50": 5.259583672780482e-06,
+          "95": 1.0347414359652209e-05
+        }
+      },
+      "footprintRejections": {},
+      "cameraSourceEvidence": {
+        "calibratedLabelSha256": "c501f5609162e89c7e674445cb92f24e9f4e05d72d059a8a1c250bda334c409d",
+        "navigationLabelSha256": "39509ccf740c69462f4ed66c4cb6ddc4444d8da0cae4745a4c623165c7b26736",
+        "navigationPlanesSha256": "d93a490f01c34b33103b1052cd17acd610b1b1062e22f0086c1a6e0ef4687888",
+        "tables": {
+          "InstrumentPointing": {
+            "sha256": "33b424c4a122ca91edf2216192ed361ce17e6ddf0fd171f82f815501fab3b9ab",
+            "bytes": 2112
+          },
+          "InstrumentPosition": {
+            "sha256": "095eeca33f699bb06b2e95e34c9dd9daea29c1f6e353d3d36c509d577ab3e850",
+            "bytes": 168
+          },
+          "BodyRotation": {
+            "sha256": "901e17f7807913d162410296a0a7b7779e0975a872c8e88bcd4ef7ad70d22d5d",
+            "bytes": 128
+          }
+        }
+      },
+      "resolutionMeters": {
+        "count": 676,
+        "minimum": 6599.5986328125,
+        "maximum": 6658.97900390625,
+        "percentiles": {
+          "5": 6602.1798095703125,
+          "50": 6622.890625,
+          "95": 6653.2860107421875
+        }
+      },
+      "depth": {
+        "count": 676,
+        "minimum": 0.029039833694696426,
+        "maximum": 0.7526999115943909,
+        "percentiles": {
+          "5": 0.05228838138282299,
+          "50": 0.14515282958745956,
+          "95": 0.5823296457529068
+        }
+      },
+      "rgb": [
+        {
+          "count": 676,
+          "minimum": 0.0860411673784256,
+          "maximum": 0.10725492238998413,
+          "percentiles": {
+            "5": 0.09348716400563717,
+            "50": 0.0993310734629631,
+            "95": 0.10300248675048351
+          }
+        },
+        {
+          "count": 676,
+          "minimum": 0.08494778722524643,
+          "maximum": 0.23859402537345886,
+          "percentiles": {
+            "5": 0.08932997845113277,
+            "50": 0.10173097625374794,
+            "95": 0.16264531016349792
+          }
+        },
+        {
+          "count": 676,
+          "minimum": 0.07236886024475098,
+          "maximum": 0.37889841198921204,
+          "percentiles": {
+            "5": 0.07688195072114468,
+            "50": 0.09266293421387672,
+            "95": 0.21650304645299911
+          }
+        }
+      ]
+    },
+    {
+      "id": "1568157352_4",
+      "dimensions": [
+        48,
+        48
+      ],
+      "time": [
+        "2007-253T22:40:51.642",
+        "2007-253T22:47:26.509"
+      ],
+      "nativeWavelengthsMicrometers": {
+        "25": 1.28142,
+        "44": 1.59305,
+        "58": 1.82362,
+        "70": 2.02129,
+        "81": 2.2031
+      },
+      "continuumRightWeight": 0.5208970169705913,
+      "geometryAcceptedNativeCenters": 934,
+      "eligibleNativeCenters": 934,
+      "depthAcceptedNativePixels": 934,
+      "rgbAcceptedNativePixels": 934,
+      "detectorQuality": {
+        "policy": "pds3-ir-adc-background-and-filter-dependencies@1",
+        "target": "IAPETUS",
+        "productId": "1_1568157352.13979",
+        "nativeStartTime": "1568157352.13979",
+        "dimensions": [
+          48,
+          48
+        ],
+        "originalLayout": {
+          "recordBytes": 512,
+          "declaredBytes": 1751552,
+          "actualBytes": 1751040,
+          "coreStartByteZeroBased": 23552,
+          "coreEndByteExclusive": 1750784,
+          "declaredMinusActualBytes": 512
+        },
+        "rawSha256": "990bbd6f476f0a3530d250285d5b153b415604cbd01aab0550f07eb6cf5dc676",
+        "calibratedSha256": "e8693e98d929f20d38d32659852d157c38a8d48ef13d5a38a6f4ea0fc00bc572",
+        "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
+        "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
+        "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
+        "filterDependencies": {
+          "radiusSamples": 3,
+          "radiusLines": 3,
+          "operations": [
+            "vims2isis",
+            "spiceinit",
+            "vimscal",
+            "noisefilter",
+            "lowpass"
+          ],
+          "derivation": "Minkowski sum: radius 2 for 5x5 noise classification plus radius 1 for 3x3 replacement",
+          "interpretation": "Possible source dependency; not a reconstruction of which pixels were replaced"
+        },
+        "bands": {
+          "25": {
+            "originalBand": 121,
+            "rawReasons": {
+              "raw-special-or-invalid": 48
+            },
+            "directInvalidCount": 48,
+            "validAfterDependencies": 1968,
+            "invalidAfterDependencies": 336,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [
+              41
+            ],
+            "backgroundRange": [
+              231,
+              57344
+            ],
+            "reconstructedAdcRange": [
+              231,
+              49152
+            ],
+            "maskSha256": "e50b93e209dc2f229badd4ed65dbe51ddde8c4d1ec40fb9893e135ec2d8a8fdc",
+            "directInvalidIndices": [
+              1968,
+              1969,
+              1970,
+              1971,
+              1972,
+              1973,
+              1974,
+              1975,
+              1976,
+              1977,
+              1978,
+              1979,
+              1980,
+              1981,
+              1982,
+              1983,
+              1984,
+              1985,
+              1986,
+              1987,
+              1988,
+              1989,
+              1990,
+              1991,
+              1992,
+              1993,
+              1994,
+              1995,
+              1996,
+              1997,
+              1998,
+              1999,
+              2000,
+              2001,
+              2002,
+              2003,
+              2004,
+              2005,
+              2006,
+              2007,
+              2008,
+              2009,
+              2010,
+              2011,
+              2012,
+              2013,
+              2014,
+              2015
+            ]
+          },
+          "44": {
+            "originalBand": 140,
+            "rawReasons": {
+              "raw-special-or-invalid": 48
+            },
+            "directInvalidCount": 48,
+            "validAfterDependencies": 1968,
+            "invalidAfterDependencies": 336,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [
+              41
+            ],
+            "backgroundRange": [
+              247,
+              57344
+            ],
+            "reconstructedAdcRange": [
+              245,
+              49152
+            ],
+            "maskSha256": "e50b93e209dc2f229badd4ed65dbe51ddde8c4d1ec40fb9893e135ec2d8a8fdc",
+            "directInvalidIndices": [
+              1968,
+              1969,
+              1970,
+              1971,
+              1972,
+              1973,
+              1974,
+              1975,
+              1976,
+              1977,
+              1978,
+              1979,
+              1980,
+              1981,
+              1982,
+              1983,
+              1984,
+              1985,
+              1986,
+              1987,
+              1988,
+              1989,
+              1990,
+              1991,
+              1992,
+              1993,
+              1994,
+              1995,
+              1996,
+              1997,
+              1998,
+              1999,
+              2000,
+              2001,
+              2002,
+              2003,
+              2004,
+              2005,
+              2006,
+              2007,
+              2008,
+              2009,
+              2010,
+              2011,
+              2012,
+              2013,
+              2014,
+              2015
+            ]
+          },
+          "58": {
+            "originalBand": 154,
+            "rawReasons": {
+              "raw-special-or-invalid": 48
+            },
+            "directInvalidCount": 48,
+            "validAfterDependencies": 1968,
+            "invalidAfterDependencies": 336,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [
+              41
+            ],
+            "backgroundRange": [
+              166,
+              57344
+            ],
+            "reconstructedAdcRange": [
+              165,
+              49152
+            ],
+            "maskSha256": "e50b93e209dc2f229badd4ed65dbe51ddde8c4d1ec40fb9893e135ec2d8a8fdc",
+            "directInvalidIndices": [
+              1968,
+              1969,
+              1970,
+              1971,
+              1972,
+              1973,
+              1974,
+              1975,
+              1976,
+              1977,
+              1978,
+              1979,
+              1980,
+              1981,
+              1982,
+              1983,
+              1984,
+              1985,
+              1986,
+              1987,
+              1988,
+              1989,
+              1990,
+              1991,
+              1992,
+              1993,
+              1994,
+              1995,
+              1996,
+              1997,
+              1998,
+              1999,
+              2000,
+              2001,
+              2002,
+              2003,
+              2004,
+              2005,
+              2006,
+              2007,
+              2008,
+              2009,
+              2010,
+              2011,
+              2012,
+              2013,
+              2014,
+              2015
+            ]
+          },
+          "70": {
+            "originalBand": 166,
+            "rawReasons": {
+              "raw-special-or-invalid": 48
+            },
+            "directInvalidCount": 48,
+            "validAfterDependencies": 1968,
+            "invalidAfterDependencies": 336,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [
+              41
+            ],
+            "backgroundRange": [
+              171,
+              57344
+            ],
+            "reconstructedAdcRange": [
+              170,
+              49152
+            ],
+            "maskSha256": "e50b93e209dc2f229badd4ed65dbe51ddde8c4d1ec40fb9893e135ec2d8a8fdc",
+            "directInvalidIndices": [
+              1968,
+              1969,
+              1970,
+              1971,
+              1972,
+              1973,
+              1974,
+              1975,
+              1976,
+              1977,
+              1978,
+              1979,
+              1980,
+              1981,
+              1982,
+              1983,
+              1984,
+              1985,
+              1986,
+              1987,
+              1988,
+              1989,
+              1990,
+              1991,
+              1992,
+              1993,
+              1994,
+              1995,
+              1996,
+              1997,
+              1998,
+              1999,
+              2000,
+              2001,
+              2002,
+              2003,
+              2004,
+              2005,
+              2006,
+              2007,
+              2008,
+              2009,
+              2010,
+              2011,
+              2012,
+              2013,
+              2014,
+              2015
+            ]
+          },
+          "81": {
+            "originalBand": 177,
+            "rawReasons": {
+              "raw-special-or-invalid": 48
+            },
+            "directInvalidCount": 48,
+            "validAfterDependencies": 1968,
+            "invalidAfterDependencies": 336,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [
+              41
+            ],
+            "backgroundRange": [
+              162,
+              57344
+            ],
+            "reconstructedAdcRange": [
+              162,
+              49152
+            ],
+            "maskSha256": "e50b93e209dc2f229badd4ed65dbe51ddde8c4d1ec40fb9893e135ec2d8a8fdc",
+            "directInvalidIndices": [
+              1968,
+              1969,
+              1970,
+              1971,
+              1972,
+              1973,
+              1974,
+              1975,
+              1976,
+              1977,
+              1978,
+              1979,
+              1980,
+              1981,
+              1982,
+              1983,
+              1984,
+              1985,
+              1986,
+              1987,
+              1988,
+              1989,
+              1990,
+              1991,
+              1992,
+              1993,
+              1994,
+              1995,
+              1996,
+              1997,
+              1998,
+              1999,
+              2000,
+              2001,
+              2002,
+              2003,
+              2004,
+              2005,
+              2006,
+              2007,
+              2008,
+              2009,
+              2010,
+              2011,
+              2012,
+              2013,
+              2014,
+              2015
+            ]
+          }
+        },
+        "sources": {
+          "adc": "https://doi.org/10.1016/j.icarus.2004.07.001",
+          "background": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/vimscal/vimscal.html",
+          "pipeline": "https://vims.univ-nantes.fr/info/isis-calibration",
+          "noise": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/noisefilter/noisefilter.html",
+          "lowpass": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/lowpass/lowpass.html",
+          "fitDeltaSource": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/77c10385ee31526b54cc42b82ee30a1ac4ed8c58/isis/src/cassini/apps/vimscal/vimscal.cpp"
+        },
+        "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing."
+      },
+      "acceptedCenterReconstructionPixels": {
+        "count": 934,
+        "minimum": 2.0205613765798105e-08,
+        "maximum": 2.506949912529326e-06,
+        "percentiles": {
+          "5": 1.4661436275817105e-07,
+          "50": 7.258680588676789e-07,
+          "95": 1.6983843336866508e-06
+        }
+      },
+      "footprintRejections": {},
+      "cameraSourceEvidence": {
+        "calibratedLabelSha256": "d06724b0dc8f9287355c4030b332a092d46031b98ae9de57d0f71b2e6cc832fb",
+        "navigationLabelSha256": "afbe3714073b1e2404c86d9a9e417c9e8669a2dcafd4697b88ff553803db06f2",
+        "navigationPlanesSha256": "1c96b8fd44e1101dfb4886c9bd75ee7499cd87ff4fc75cc3bee8e395e380681e",
+        "tables": {
+          "InstrumentPointing": {
+            "sha256": "5d0e4333b6b465283b7fc236e435497cb4017a9ee7c155397c27f9bb25a5c1ef",
+            "bytes": 6528
+          },
+          "InstrumentPosition": {
+            "sha256": "e1e4ddd576a126b6ff362f925cb1f37e43c5b90d7930e2c6cb701ce7cb857f11",
+            "bytes": 336
+          },
+          "BodyRotation": {
+            "sha256": "9b8a7cc29bfd280fe6180564246cc7c67a26a0a53443583547b9032d307abb34",
+            "bytes": 128
+          }
+        }
+      },
+      "resolutionMeters": {
+        "count": 934,
+        "minimum": 33229.51171875,
+        "maximum": 33490.42578125,
+        "percentiles": {
+          "5": 33236.88828125,
+          "50": 33317.875,
+          "95": 33450.0142578125
+        }
+      },
+      "depth": {
+        "count": 934,
+        "minimum": 0.01625967212021351,
+        "maximum": 0.7804791331291199,
+        "percentiles": {
+          "5": 0.17540096193552024,
+          "50": 0.7350927591323853,
+          "95": 0.7705715715885162
+        }
+      },
+      "rgb": [
+        {
+          "count": 934,
+          "minimum": 0.032836463302373886,
+          "maximum": 0.1173047423362732,
+          "percentiles": {
+            "5": 0.04488279763609171,
+            "50": 0.0756213627755642,
+            "95": 0.10105296596884727
+          }
+        },
+        {
+          "count": 934,
+          "minimum": 0.06530988961458206,
+          "maximum": 0.2440316379070282,
+          "percentiles": {
+            "5": 0.09534186273813249,
+            "50": 0.1647193431854248,
+            "95": 0.21719148308038708
+          }
+        },
+        {
+          "count": 934,
+          "minimum": 0.054376278072595596,
+          "maximum": 0.36693137884140015,
+          "percentiles": {
+            "5": 0.09350235164165498,
+            "50": 0.2620096504688263,
+            "95": 0.33370591402053834
+          }
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "kind": "depth",
+      "file": "iapetus-ice-absorption.tif",
+      "sha256": "399a434937605b2d3215a3691fb630435b4957ff8b5eb23334b42bf42f440fdc",
+      "bytes": 109434,
+      "areaFraction": 0.23354824337314692,
+      "contributingDetectorApertures": {
+        "1568129671_1": 466,
+        "1568133146_2": 651,
+        "1568157352_4": 925
+      },
+      "owners": {
+        "1568129671_1": 467,
+        "1568133146_2": 1928,
+        "1568157352_4": 90224
+      },
+      "audit": [
+        {
+          "file": "iapetus-ice-absorption-observation.tif",
+          "sha256": "0f3a78923380a4679f25c541e9ec64ef5b70783558e1b7a4f76220babaa01a9c"
+        },
+        {
+          "file": "iapetus-ice-absorption-source-pixel.tif",
+          "sha256": "3cf921d6f8440a8055c88512f5c5b0c00b23de4df3a2636f686234dda3fa29a8"
+        }
+      ]
+    },
+    {
+      "kind": "rgb",
+      "file": "iapetus-infrared-if.tif",
+      "sha256": "9439aeb2324a1eac7d4d10536f9114754836351077c025572b3d4f379e650c89",
+      "bytes": 254889,
+      "areaFraction": 0.23354824337314692,
+      "contributingDetectorApertures": {
+        "1568129671_1": 466,
+        "1568133146_2": 651,
+        "1568157352_4": 925
+      },
+      "owners": {
+        "1568129671_1": 467,
+        "1568133146_2": 1928,
+        "1568157352_4": 90224
+      },
+      "audit": [
+        {
+          "file": "iapetus-infrared-if-observation.tif",
+          "sha256": "0f3a78923380a4679f25c541e9ec64ef5b70783558e1b7a4f76220babaa01a9c"
+        },
+        {
+          "file": "iapetus-infrared-if-source-pixel.tif",
+          "sha256": "3cf921d6f8440a8055c88512f5c5b0c00b23de4df3a2636f686234dda3fa29a8"
+        }
+      ],
+      "display": {
+        "file": "iapetus-infrared-display.tif",
+        "sha256": "a3788744172cac6820eaaf39e53d1013ce65612799c107e96a17fbebbcea2e7f",
+        "bytes": 144017,
+        "centerLongitudeDegrees": 180,
+        "sourceColumnRoll": 512,
+        "stretch": {
+          "ranges": [
+            [
+              0,
+              0.45
+            ],
+            [
+              0,
+              0.45
+            ],
+            [
+              0,
+              0.45
+            ]
+          ],
+          "gamma": 2.2
+        }
+      }
+    }
+  ],
+  "absolutePointingAccuracy": "unresolved",
+  "photometricCorrection": "none",
+  "aperturePolicy": "rc19-nominal-aperture-unknown-step-order@1",
+  "apertureInsetRadians": [
+    1e-07,
+    1e-07
+  ],
+  "registrationEvidence": {
+    "file": "evidence/registration.md",
+    "qualification": "Native source-camera center reconstruction and independent dense aperture checks qualify physical detector support. A conservative angular inset guards tested between-pose boundary motion. Independent exact USGS image comparisons support gross longitude and latitude framing; precise absolute registration remains unqualified.",
+    "sha256": "6754186ab44f6f4a3c68ed1bf5eca50578c2921410dd47e0f9934131bda7f800"
+  }
+}

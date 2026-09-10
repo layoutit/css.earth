@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 217.7608695652174,
       "bodyRadiusM": 50085
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/aegina-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e19d26b8e0cf66a2e5a703df10b6df6889a389b5a0fa75bf57df60a5629a853c"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ae6ffbb36f8f7618013ac8910f60e3ab6b962627a87ed99b8b799f59a78b8e13"
+    "sha256": "85e3e2e1a50dab19d7f1ac3b52e8723e50074cdbc50993535908081cfa8a13ba"
   }
 }

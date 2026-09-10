@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "94c222df3f33d7bb1b13a9b1827d47c65c69c5e4983ad39571bc3f2d2869f902"
+          "sha256": "fda2b1082ff2c42801a1c5c544d32a06b5a284e5fbad5ef0fb6ab33a50a344cc"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "3626c396dcbee2c7ef9e71873af5573407066c3e8b47309c7a1613801d2edb41"
+          "sha256": "cec87f0cdf5f6c74979f26072032ac6dc79abfb59d5bb856cf6f8d0e4eed00a1"
         },
         {
           "id": "title",
@@ -43,7 +43,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "d39ae777df7504252f6120b1e0f17a2ae0588bc7affafb43a6f4faece2d90693"
+          "sha256": "b482c496cb233741ec09136ddb43d5b1031083ff301d7e0ca0c7cfb199998d6e"
         },
         {
           "id": "rotation",
@@ -138,11 +138,20 @@
       ],
       "metersPerUnit": 7.173913043478261,
       "bodyRadiusM": 1650
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/comet-67p-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "fb20f195d184a45a8e5523495ab8e1166dadbc99d477aa5d42d02cc05b62f1c5"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d2131b4114a59e9b0f993375587cb0b3dc8172af1dabb945b3ae97a6d550b960"
+    "sha256": "1229bb2e304a3b9930ff35cb9301c15d4ee691fa6535f392426ff392d2a7ca64"
   }
 }

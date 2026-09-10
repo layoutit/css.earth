@@ -1,0 +1,14 @@
+{
+  "method": "published-volume-equivalent-size-transfer",
+  "diameterKm": 1.45,
+  "uncertaintyKm": 0.2,
+  "uncertaintyKind": "Selected archive diameter uncertainty; absent value remains unknown. It is not local shape accuracy.",
+  "diameterSemantics": "Volume-equivalent diameter in the selected DAMIT record, calibrated with radar for Tantalus and thermophysical data for the other bodies.",
+  "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6205",
+  "sourceLabel": "DAMIT model 6205",
+  "reference": "DAMIT model 6205, version 2022-07-13",
+  "scaleKmPerSourceUnit": 1.0000000100385358,
+  "metersPerSourceUnit": 1000.0000100385358,
+  "limitations": "The prograde radar/optical model6205 is selected because Ro\u017cek et al.2022 find it more consistent with WISE size determination than retrograde6204. The alternative pole remains unresolved. The convex-only model6203 is not substituted. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred.",
+  "visibleDescription": "Radar and optical shape reconstruction. Radar-calibrated diameter: 1.45 \u00b1 0.2 km. Grid marks unavailable mapped imagery; rotational phase is illustrative."
+}

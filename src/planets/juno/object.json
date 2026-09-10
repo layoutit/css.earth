@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 552.1739130434783,
       "bodyRadiusM": 127000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/juno-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "0166d99a21026f20dc230172ea764fe640b3cf726c4bd17b1e9880450516535b"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8307fd8e97ee2534ed24a641fe8d1fe94dc35cd9c81b38df1ca811a5f38f43a2"
+    "sha256": "6989b49123dac2a51b7a8f987d735664b1d5ee5e1aad3053e3bc66da84817660"
   }
 }

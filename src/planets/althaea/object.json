@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 127.80434782608695,
       "bodyRadiusM": 29395
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/althaea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8a2c1ea51149564f9cbf5c8a6f7a4d29395ba1810a5ebce539729cb4eddb3826"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "168537eaa4f1df098389d05fa19819e49bd16258ad42894e63b88e3a72e6c0fc"
+    "sha256": "bf8e52868d09e1f22ccb380b85bdde13d75696d25cc15ec0af6247057f610890"
   }
 }

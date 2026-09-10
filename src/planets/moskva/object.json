@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 69.48260869565217,
       "bodyRadiusM": 15981
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/moskva-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8bc967a456c8f1a84f01ef4c619f692c79d87687d446756dd6ce96bd997bf860"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "5305394bd2207531a3318a7d0745465d56e7df708c3d35a2f3fdd715ee7fb005"
+    "sha256": "2eaf82715d610a637972331de0c28911aa351f69ca25efadac9d5fdbc180c2c8"
   }
 }

@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0ddbc5643a4c2e423d6e4b9025803e4a67316753680dfa139d261a01e22b0eeb"
+    "sha256": "15a5c9d8bc459dba049919b9413ed8f884bb185ce72a44018b7608868bbe8e26"
   },
   "id": "mathilde",
   "properties": {
@@ -111,6 +111,15 @@
       ],
       "metersPerUnit": 114.78260869565217,
       "bodyRadiusM": 26400
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/mathilde-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "99642c783a3374d661adf6ad77970d0903808a368a4b22c0234aaa01ffe460ee"
+      }
     }
   },
   "schema": "cssearth-object@1",

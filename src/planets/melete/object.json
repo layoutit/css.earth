@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 252.17391304347825,
       "bodyRadiusM": 58000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/melete-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "45ac46a91219771a45a6fb6c40d15c0abcb1c2b57a5c2ad8c7c2b8abd0884c2d"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "34bc873fe546f83ffe5cbf0cbc0d342b8ffebb45eddbe8c881dc49cce5ecb256"
+    "sha256": "352a7057d4356d5448d5203cb3cb24a31141bab901d98c5c396e35d6a27236ed"
   }
 }

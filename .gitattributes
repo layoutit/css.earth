@@ -51,6 +51,29 @@ src/planets/comet-67p/source/geology/** -text -whitespace
 
 # Exact archive labels used by the expanded comet photographic mosaics.
 src/planets/comet-67p/source/reference/n201409*-*.lbl -text -whitespace
+src/planets/comet-67p/source/reference/n2015*id[45]0f22.lbl -text -whitespace
 src/planets/comet-81p/source/photography/**/*.lbl -text -whitespace
 src/planets/comet-9p/source/photography/**/*.lbl -text -whitespace
 src/planets/comet-103p/source/photography/**/*.lbl -text -whitespace
+
+# Preserve the pinned Apophis spin-state row, including its CRLF ending.
+src/planets/apophis/source/reference/apophis_v233s7_spin_state.csv -text -whitespace
+
+# B9 preserves pinned binary cubes, archive text and captured CSS byte-for-byte.
+src/planets/*/source/cassini-ice/**/*.cub binary
+src/planets/*/source/cassini-ice/**/*.qub binary
+docs/moons/b9-cassini-ice-surfaces/source-review/**/*.qub binary
+docs/moons/b9-cassini-ice-surfaces/source-review/**/*.lbl -text -whitespace
+docs/moons/b9-cassini-ice-surfaces/source-review/**/*.html -text -whitespace
+docs/moons/b9-cassini-ice-surfaces/source-review/**/*.cpp -text -whitespace
+docs/moons/b9-cassini-ice-surfaces/source-review/**/*.c -text -whitespace
+docs/moons/b9-cassini-ice-surfaces/evidence/styles/*.css -text -whitespace
+docs/moons/b9-cassini-ice-surfaces/source-review/tethys-corrected/*.txt -text -whitespace
+src/planets/*/source/cassini-ice/evidence/*.html -text -whitespace
+docs/moons/b9-cassini-ice-surfaces/evidence/checks/*.log -text -whitespace
+
+# B10 archive labels, metadata and browser evidence retain their exact bytes.
+src/planets/moon/source/science/diviner-ghrm/*.xml -text -whitespace
+docs/moons/b10-lunar-thermal/source-review/*.txt -text -whitespace
+docs/moons/b10-lunar-thermal/evidence/styles/*.css -text -whitespace
+docs/moons/b10-lunar-thermal/evidence/checks/*.log -text -whitespace

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 410.8695652173913,
       "bodyRadiusM": 94500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/herculina-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "53de6d6d14397909a5a7922bbaea5c32ea59c08618bf629ec731f59817d29ae3"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "663b5f5eba89040a476c4d1b9da6fce16b314f735cd1ad6d2fdfedca22195c17"
+    "sha256": "3982558622fedf5188cd3643497738bef22b53f7e4f6e321df16dd5359bb3054"
   }
 }

@@ -103,11 +103,20 @@
       ],
       "metersPerUnit": 246.4037924082009,
       "bodyRadiusM": 56672.872253886206
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/patroclus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "08a3c7f990598f4b7a770e45dfc7fadf20d7e59431c5ba82597f6f79e133d3ae"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fabfcad93901b93aa25eb83263170e41d6988758ef43ed18bb5393283e66e8a1"
+    "sha256": "8ec10854fe8bd4a32ce13eaf71cb01a74577d6b305d07b903966b636f48eddbe"
   }
 }

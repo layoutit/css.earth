@@ -30,7 +30,7 @@ export interface PhysicalInput {id: string; path: string; format: string; identi
 export interface PhysicalFactsRecipe {schema: string; inputs: readonly PhysicalInput[]; constants: Readonly<Record<string, unknown>>; fields: Readonly<Record<string, {source: string; path: string}>>;}
 export interface TonalPresentation {saturation: number; linearGain: number; linearOffset: number; sharpenSigma: number;}
 export interface ObservationLens {
-  id: string; input: string; output: string;
+  id: string; input: string; output: string; rasterScale?: number;
   scientific?: import('../terrestrial-layers/contracts.mts').SciencePalette & {displaySampling?: string};
   elevation?: ElevationRecipe;
   coverage?: {kind: string; southConnected: boolean};

@@ -35,7 +35,7 @@ const assetConfiguration: Guard<PagedAssetConfiguration & PagedRasterConfigurati
     maps: array(object({path: string, name: string, thumbnail: string, scientific: optional(scientific), compositeClouds: optional(boolean), displayGamma: optional(number),
       thumbnailRegion: optional(object({longitude: optional(number), latitude: optional(number), spanDegrees: optional(number)})),
       webp: optional(object({quality: optional(number), effort: optional(number)}))}))})});
-const profile = object({schema: literal('cssearth-paged-ellipsoid@1'), displayName: string, cityPath: string,
+const profile = object({textureLevels: optional(object({widths:array(number),hysteresis:number,texelsPerCssPixel:number})),schema: literal('cssearth-paged-ellipsoid@1'), displayName: string, cityPath: string,
   destinations: object({searchLabel: string, descriptionSuffix: string, statuses: object({detail: string, overview: string})}),
   geographic: object({pages: record, noise: object({poolSize: number})})});
 export function parsePagedProfile(value: unknown) {

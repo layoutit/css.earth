@@ -32,21 +32,22 @@ export interface ColorBand extends ScalarGrid {data:ArrayLike<number>;origin:num
 export interface ObservedColorProfile {filters:string[];referenceRadiusMeters:number;centerLongitude:number;gamma:number}
 export interface PhotometryProfile {radiusKm:number;maximumIncidenceDegrees:number;maximumEmissionDegrees:number;referenceIncidenceDegrees:number;referenceEmissionDegrees:number;observationWeights:Record<string,number>}
 export interface ObservedColorContext {groups:ReadonlyMap<string,ColorBand[]>;profile:ObservedColorProfile;width:number;height:number;sourceIds?:string[]}
-export interface DiskPhotometry {model?:string;maximumIncidenceDegrees:number;maximumEmissionDegrees:number;maximumGain:number;coefficient?:number;phaseCoefficientPerDegree?:number}
-export interface GeoFrame {width:number;height:number;planes:Record<string,ArrayLike<number>>;xyz(index:number):number[];valid(index:number):boolean;
+export interface PhasePhotometry {model:string;asymmetry:number;amplitude:number;width:number;minimumDegrees:number;maximumDegrees:number;referenceDegrees:number;maximumGain:number}
+export interface DiskPhotometry {phaseCorrection?:PhasePhotometry;model?:string;maximumIncidenceDegrees:number;maximumEmissionDegrees:number;maximumGain:number;coefficient?:number;phaseCoefficientPerDegree?:number}
+export interface GeoFrame {radianceFactor?:{factor:number;solarDistanceAu:number;solarFlux:number};width:number;height:number;planes:Record<string,ArrayLike<number>>;xyz(index:number):number[];valid(index:number):boolean;
   acceptPixel?(index:number):boolean;projectPoint?(point:readonly number[]):number[];quality?:{flags:ArrayLike<number>;allowLossy:boolean}}
-export type GeoSample = {reason:string;separationMeters?:number;radiance?:never;gain?:never;maximumEmissionDegrees?:never} |
-  {reason?:undefined;separationMeters:number;radiance:number;gain:number;maximumEmissionDegrees:number};
+export type GeoSample = {reason:string;separationMeters?:number;radiance?:never;gain?:never;maximumEmissionDegrees?:never;maximumIncidenceDegrees?:never} |
+  {reason?:undefined;separationMeters:number;radiance:number;gain:number;maximumEmissionDegrees:number;maximumIncidenceDegrees?:number};
 export interface SipCamera {matrix:number[][];sip:{referencePixel:number[];a:number[][];b:number[][];offsetPixels:number[]}}
 
-export interface ObservationSample {reason?:string; radiance?:number; maximumEmissionDegrees?:number}
-export interface ObservationLevelPolicy {minimumPairs:number;maximumLogMad:number;maximumGain:number;samplesPerTriangle?:number}
+export interface ObservationSample {maximumIncidenceDegrees?:number;reason?:string; radiance?:number; maximumEmissionDegrees?:number}
+export interface ObservationLevelPolicy {maximumAngleDegrees?:number;minimumPairs:number;maximumLogMad:number;maximumGain:number;samplesPerTriangle?:number}
 export interface SourceAccess {manifest?:SourceManifest;validateGroup(consumer:string):Promise<readonly SourceInput[]>;validatePath(path:string):Promise<SourceEntry>}
 export interface SurfaceConfig {geometry:{radius:number;radiusKm:number;radialTerrain:{path:string;format?:string;sourceTopology?:string;simplification:{method:string;maximumErrorMeters:number}}};raster:{height:number}}
 export interface RadialSurface {grid:SourceMesh;faces:PreparedTriangle[]}
 export interface SurfaceOptions {sourceDirectory:string;source:SourceAccess;recipe:unknown;radial:RadialSurface;config:SurfaceConfig}
-export type SurfaceColorSample = {reason:string;color:number[];radiance?:never;maximumEmissionDegrees?:never} |
-  {reason?:undefined;color:number[];radiance:number;distanceMeters?:number;separationMeters?:number;gain?:number;maximumEmissionDegrees?:number;frameId?:string;frameIndex?:number};
+export type SurfaceColorSample = {reason:string;color:number[];radiance?:never;maximumEmissionDegrees?:never;maximumIncidenceDegrees?:never} |
+  {reason?:undefined;color:number[];radiance:number;maximumIncidenceDegrees?:number;distanceMeters?:number;separationMeters?:number;gain?:number;maximumEmissionDegrees?:number;frameId?:string;frameIndex?:number};
 
 export interface GeoObservationFrame extends GeoFrame {camera?:{matrix:number[][];positionKm:number[]};startTime?:string;filter?:string;
  quality?:{flags:ArrayLike<number>;allowLossy:boolean;report?:Record<string,unknown>};qualityReport?:Record<string,unknown>;isLossyPixel?(index:number):boolean}

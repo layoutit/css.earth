@@ -103,11 +103,20 @@
       ],
       "metersPerUnit": 797.7719435307636,
       "bodyRadiusM": 183487.5470120756
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hiiaka-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "1f7ef3608ecf71a6a91970169576ac181b74eed4514f6a6cf8247b8b30f77d5b"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8f852f900bd1cb51d46ed7420418c4d8568f19a9da40679778b4eb6ed494bc69"
+    "sha256": "2ccd8caddcec091dab1a252eb8eafbb8999cfcca6f5f33c0392c3b1f2a5779d1"
   }
 }

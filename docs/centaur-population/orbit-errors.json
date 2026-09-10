@@ -1,0 +1,32 @@
+[
+  {
+    "id": "chariklo",
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2710199%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "epochsJdTdb": [
+      2461256.5,
+      2461286.5,
+      2461316.5
+    ],
+    "errorsKm": [
+      467.11137528117854,
+      0.000001750236375334981,
+      462.0420520599805
+    ],
+    "regressionGuardKm": 538
+  },
+  {
+    "id": "bienor",
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2754598%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "epochsJdTdb": [
+      2461256.5,
+      2461286.5,
+      2461316.5
+    ],
+    "errorsKm": [
+      820.3892186204906,
+      0.0000020544156956212623,
+      813.8953727117729
+    ],
+    "regressionGuardKm": 944
+  }
+]

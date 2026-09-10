@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "df587602186b26e9e94b3d7a81623587a71c752b5e4ef860ff37dd34bf8a877a"
+    "sha256": "a3ec80f110dc149a0166386d23e1dc2d5b614cc877c6a198b956fd67ec786ffa"
   },
   "properties": {
     "preparation": {
@@ -113,6 +113,15 @@
       ],
       "metersPerUnit": 5047.826086956522,
       "bodyRadiusM": 1161000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/shape-model.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "a627aa49a80f8d9589646c238a66f6a8ec802c4f8c51d0c1b9ff7b5e68a613cb"
+      }
     }
   }
 }

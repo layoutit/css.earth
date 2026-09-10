@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "21d1ed948162b42e33a31459a63362514a3b6173ec2c8d4e1f1c053eb998d884"
+    "sha256": "072a785851bba7529b6479bc1214a4bbaf53e69dc4bcf12771c09025bfd2f8b7"
   },
   "id": "europa",
   "properties": {
@@ -121,6 +121,15 @@
           "sha256": "b0154c84662fa90ce2fcc10046dba1a5b6f09b1527682d7f81ee3344ccfcb3c0"
         }
       ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/europa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "64e71bc4b87f64d1e58a7c71a9808aeda7cac92fc7d6b2abf2c7df47c677fdf9"
+      }
     }
   },
   "schema": "cssearth-object@1",

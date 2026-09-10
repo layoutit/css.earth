@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 238.67391304347825,
       "bodyRadiusM": 54895
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/euterpe-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "fdec3243f5a238ef7cc4e192e8bb80a742d76d53e137a76a3b831aec75e06741"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6b201abb22c43400634d6865b994905ef1086c838b2c55ca064475d97c26346e"
+    "sha256": "059f8db0adbd7da32419332185b4890acc1ce223a8401ddcd890937685de0910"
   }
 }

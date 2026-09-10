@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "bfd9e1ab294b8184a6ee2c41481e4c97c7a4a5fbaf1b73a49e1fff5ef5f6fcd4"
+    "sha256": "7805850145edd63a17a5f1eb0fa66a28e35d6b6bfcda9bd48528d8320bd2facb"
   },
   "id": "eros",
   "properties": {
@@ -116,6 +116,15 @@
       ],
       "metersPerUnit": 36.608695652173914,
       "bodyRadiusM": 8420
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/eros-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "fbd0a262d842a492909c647d5c8e04f05e99838e3db83e2875f5d3c127c9d4bf"
+      }
     }
   },
   "schema": "cssearth-object@1",

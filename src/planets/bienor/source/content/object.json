@@ -1,0 +1,107 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "bienor",
+  "displayName": "Bienor",
+  "panel": {
+    "introduction": "Bienor is an elongated Centaur. Its smooth shape is constrained by stellar occultations and long-term photometry, while the grid marks its unmapped surface. The ellipsoid is a useful global approximation; unresolved shape, albedo or a companion may explain its asymmetric light curve.",
+    "facts": [
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Approximate ellipsoid"
+      },
+      {
+        "id": "dimensions",
+        "label": "Full approximation dimensions",
+        "value": "254 × 110 × 90 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation period",
+        "value": "9.1736 ± 0.0002 h"
+      },
+      {
+        "id": "class",
+        "label": "Population",
+        "value": "Centaur"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Smooth triaxial ellipsoid fitted to stellar-occultation chords and rotational light curves, with semiaxes 127 ± 5, 55 ± 4 and 45 ± 4 km (Rizos et al. 2024). This is the study's global reference shape, not resolved terrain. It cannot explain all observed light-curve asymmetry; the paper also explores albedo, irregular-shape and satellite alternatives without uniquely resolving them. Full approximation dimensions: 254 × 110 × 90 km. The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3°. The 2024 study validates this pole over 22 years and uses its refined 9.1736 h period to compute rotational phase. Ecliptic J2000 coordinates are converted to ICRF using the established preparation recipe. The displayed longitude origin and absolute rotational phase are arbitrary. The grid marks unmapped terrain.",
+        "title": "Occultation shape approximation",
+        "detail": "Approximate shape",
+        "thumbnail": "/scenes/bienor/bienor-model-thumbnail.webp",
+        "surface": "bienor-model-surface@2x.webp",
+        "poles": "bienor-model-poles@2x.webp",
+        "source": {
+          "id": "occultation-approximation",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1051/0004-6361/202450833"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape and dimensions",
+      "role": "surface",
+      "description": "Rizos et al. (2024), Astronomy & Astrophysics 689, A82; pole solution from Fernández-Valenzuela et al. (2017), validated by the 2024 study.",
+      "href": "https://doi.org/10.1051/0004-6361/202450833"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published model and interpretation",
+      "href": "https://arxiv.org/abs/2405.17235"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.1051/0004-6361/202450833",
+      "credit": "Rizos et al. (2024), Astronomy & Astrophysics 689, A82; pole solution from Fernández-Valenzuela et al. (2017), validated by the 2024 study."
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Rizos et al. (2024), Astronomy & Astrophysics 689, A82; pole solution from Fernández-Valenzuela et al. (2017), validated by the 2024 study."
+    }
+  }
+}

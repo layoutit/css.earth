@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-muse-spectral-maps@1",
+  "target": "ganymede",
+  "registration": {
+    "mode": "author-grid-two-degree-nodes",
+    "absoluteSubpixelRegistration": "unresolved",
+    "evidence": [
+      "source-qualification.json"
+    ],
+    "limitation": "Native 2 degree registration scale; residual subpixel offsets unresolved, not a formal astrometric error bound."
+  },
+  "overlapPolicy": "first-valid-night-1-2-3",
+  "edgeWithholdNodes": 1,
+  "referenceRadiusMeters": 2631200,
+  "pins": {
+    "577.3nm_band_ganymede_night_1.fits": "9354868840c81e85d65c6a0882ea71e3f01d7258860fdd679321e4e88aa956b8",
+    "577.3nm_band_ganymede_night_2.fits": "7b6e1a2c27bfc1418147e0a59a628c96d5b28d5fd1b71295f21d64c2d386ac8d",
+    "577.3nm_band_ganymede_night_3.fits": "30f997e41fb7f9f99f626c45121e4b6066e97c39bd1fe7bcd6f081e09dc60220",
+    "source-qualification.json": "7fdd00cb2530b888a832fb8e7c2af61a7983389e555e3f85bc7dbc6f071b4bde"
+  },
+  "entries": [
+    {
+      "input": "577.3nm_band_ganymede_night_1.fits",
+      "kind": "577.3nm_band",
+      "night": 1,
+      "output": "ganymede/577.3nm_band-night-1.tif"
+    },
+    {
+      "input": "577.3nm_band_ganymede_night_2.fits",
+      "kind": "577.3nm_band",
+      "night": 2,
+      "output": "ganymede/577.3nm_band-night-2.tif"
+    },
+    {
+      "input": "577.3nm_band_ganymede_night_3.fits",
+      "kind": "577.3nm_band",
+      "night": 3,
+      "output": "ganymede/577.3nm_band-night-3.tif"
+    }
+  ],
+  "receipt": "ganymede/conversion-receipt.json"
+}

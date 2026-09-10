@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 95.52173913043478,
       "bodyRadiusM": 21970
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/velleda-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4883b9b6371a035d3ac475f649c176a24b6f7ca4682dee858e9c844fa4cafe2f"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "02f325ed50b593bbcf3c233f5c428d3b16964ca4c39ee3781a244980bd066fa1"
+    "sha256": "c15cde5c4b1c959a47eb9e99b8ec34c6fca78db1d7166600cab270badd6f101b"
   }
 }

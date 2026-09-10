@@ -1,0 +1,118 @@
+{
+  "schema": "cssearth-trans-neptunian-qualification@1",
+  "scope": "Three own packages: complete source and runtime byte closures, scene/page binding, native triangle budgets, source topology and defaults. Browser evidence is reported separately.",
+  "bodies": [
+    {
+      "id": "arrokoth",
+      "assetCount": 35,
+      "sourceInputCount": 5,
+      "assetBytes": 8397846,
+      "faceCount": 1000,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 40960,
+        "sourceVertices": 20484,
+        "weldedVertices": 20484,
+        "targetFaces": 1000,
+        "outputFaces": 1000,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 250,
+        "estimatedErrorMeters": 111.85940551757812,
+        "topology": {
+          "vertices": 504,
+          "edges": 1500,
+          "faces": 1000,
+          "components": 2,
+          "eulerCharacteristic": 4,
+          "signedVolumeCubicMeters": 4057757607973.867
+        }
+      },
+      "pageMetadataSha256": "508eefcc04c18b4d7564a446a08a8a47dcce9fdf51af5cd48428bfc548c37e19",
+      "defaultLens": "model",
+      "shadows": false,
+      "orbit": false,
+      "albedoTransfer": {
+        "sampledTexels": 9216000,
+        "withheldTexels": 585,
+        "maximumDistanceMeters": 249.9971526321478,
+        "includesAtlasBleed": true,
+        "triangleInteriorTexels": 3954121,
+        "withheldTriangleInteriorTexels": 394,
+        "maximumAcceptedDistanceMeters": 250,
+        "method": "Released OBJ per-corner UVs; barycentric transfer from the selected closest full-source triangle, bounded in metres. No radial reprojection."
+      }
+    },
+    {
+      "id": "quaoar",
+      "assetCount": 32,
+      "sourceInputCount": 4,
+      "assetBytes": 7041064,
+      "faceCount": 480,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 5040,
+        "sourceVertices": 2522,
+        "weldedVertices": 2522,
+        "targetFaces": 480,
+        "outputFaces": 480,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 13679.358360227343,
+        "estimatedErrorMeters": 9595.9482421875,
+        "topology": {
+          "vertices": 242,
+          "edges": 720,
+          "faces": 480,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 665516596748280300
+        }
+      },
+      "pageMetadataSha256": "b48cc466e916bb10d752bfcc114d1cec12f6b01d8615ab652d50835bbd543bff",
+      "defaultLens": "model",
+      "shadows": false,
+      "orbit": false
+    },
+    {
+      "id": "gkunhomdima",
+      "assetCount": 31,
+      "sourceInputCount": 4,
+      "assetBytes": 7022722,
+      "faceCount": 480,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 5040,
+        "sourceVertices": 2522,
+        "weldedVertices": 2522,
+        "targetFaces": 480,
+        "outputFaces": 480,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 7922.332226409829,
+        "estimatedErrorMeters": 5449.03515625,
+        "topology": {
+          "vertices": 242,
+          "edges": 720,
+          "faces": 480,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 129282669918132700
+        }
+      },
+      "pageMetadataSha256": "ff9692f006ab6215b4dcce36dad6ce9306f41c67bea6eaa6575f06d408cf57bb",
+      "defaultLens": "model",
+      "shadows": false,
+      "orbit": false
+    }
+  ]
+}

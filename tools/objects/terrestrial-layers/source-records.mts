@@ -122,7 +122,11 @@ export const parseColorEntry = shape({...dimensions,path:text,id:text,observatio
 export const parseDemScience = shape({quantity:text,units:optional(text),relief:optional(requireRecord),comparison:optional(shape({path:text,grid:requireRecord,heightOffsetMeters:number})),
   surfaceSampling:optional(shape({maximumDistanceMeters:number})),valueTransform:optional(parseTransform)});
 export const parsePdsRgbPolicy = shape({member:optional(text),targetName:text,centerLongitude:number,grid:projectionGrid,noData:optional(number)});
-export const parseEllipsoidParameters = shape({schema:text,scaleConvention:text,axisRatioAB:number,axisRatioBC:number,thermalRadiusKm:number,subdivisions:number});
+export function parseEllipsoidParameters(value: unknown) {
+ const source = requireRecord(value);
+ if (source.scaleConvention === 'published-semiaxes') return shape({schema:text,scaleConvention:choice('published-semiaxes'),semiaxesKm:array(number),subdivisions:number})(value);
+ return shape({schema:text,scaleConvention:choice('thermal-radius-as-volume-equivalent'),axisRatioAB:number,axisRatioBC:number,thermalRadiusKm:number,subdivisions:number})(value);
+}
 export const parseContactModel = shape({schema:text,origin:text,lobes:array(shape({semiaxesKm:array(number)})),fluxScale:number,subdivisions:number});
 export function choice<const T extends readonly string[]>(...values: T): Decoder<T[number]> { return value => {const match=values.find(item=>item===value);if(match===undefined)throw new TypeError('Unsupported source choice');return match;}; }
 export const parseEncounterControl = shape({bodyToJ2000:array(array(number)),offsetPixels:array(number),maximumOffsetPixels:number});
@@ -154,7 +158,7 @@ export const parseCameraMosaic = shape({frames:array(parseCameraFrame),photometr
 export const parseCameraColor = shape({channels:array(shape({filter:text,channel:text,frames:array(parseCameraFrame)})),photometry:cameraPhotometry,
  frames:optional(array(parseCameraFrame)),metadata:shape({falseColor:boolean})});
 
-export const levelMatchingFields = {minimumPairs:number,maximumLogMad:number,maximumGain:number,samplesPerTriangle:optional(number)};
+export const levelMatchingFields = {maximumAngleDegrees:optional(number),minimumPairs:number,maximumLogMad:number,maximumGain:number,samplesPerTriangle:optional(number)};
 export const parseLevelMatching = shape(levelMatchingFields);
 export const surfaceTransfer = shape({maximumSourceDistanceMeters:number,maximumSeparationMeters:number,visibilityToleranceMeters:number,maximumEmissionDegrees:number});
 export const parseSurfaceGeometry = shape({format:optional(text),sourceTopology:optional(text),simplification:shape({method:optional(text),maximumErrorMeters:number})});
@@ -173,9 +177,10 @@ export const parseControlledMetadata = shape({IsisCube:shape({BandBin:shape({Fil
  CenterLongitude:number,CenterLatitude:number,MaximumLatitude:number,MinimumLatitude:number,MaximumLongitude:number,MinimumLongitude:number})}),Table_BodyRotation:shape({CkTableStartTime:number})});
 
 export const geoFramePathFields = {path:optional(text),qualityPath:optional(text),labelPath:optional(text),originalPath:optional(text),flatPath:optional(text),cameraPath:optional(text),startTime:optional(text)};
-export const parseGeoRecipe = shape({...surfaceIdentityFields,...geoFramePathFields,filter:text,allowLossy:boolean,
+export const parsePhasePhotometry = shape({model:text,asymmetry:number,amplitude:number,width:number,minimumDegrees:number,maximumDegrees:number,referenceDegrees:number,maximumGain:number});
+export const parseGeoRecipe = shape({...surfaceIdentityFields,...geoFramePathFields,filter:text,allowLossy:boolean,radiometry:optional(text),
  frames:optional(array(shape({id:text,...geoFramePathFields}))),selection:optional(text),levelMatching:optional(parseLevelMatching),
- transfer:surfaceTransfer,photometry:shape({model:text,coefficient:optional(number),phaseCoefficientPerDegree:optional(number),
+ transfer:surfaceTransfer,photometry:shape({model:text,phaseCorrection:optional(parsePhasePhotometry),coefficient:optional(number),phaseCoefficientPerDegree:optional(number),
  referenceIncidenceDegrees:number,referenceEmissionDegrees:number,maximumIncidenceDegrees:number,maximumEmissionDegrees:number,maximumGain:number}),displayPercentiles:array(number)});
 export const parseGeoCameraClosure = shape({...archivedCameraFields,meshSha256:text,provenance:array(shape({path:text,sha256:text}))});
 

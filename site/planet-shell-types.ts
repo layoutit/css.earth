@@ -96,6 +96,7 @@ export interface Resource {
 }
 
 export interface Props {
+  navigation?: boolean;
   objectId: string;
   destinations?: { searchLabel: string; description: string; };
   title: PlanetTitle;

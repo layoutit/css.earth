@@ -7,9 +7,9 @@
     "sha256": "67d4a2eefdea529a973168a2f3790fa3fdb1ee5b3845163b35881de8463393b6"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -190,7 +190,7 @@
       "sha256": "1b97f1b9eea244b047a72c2a3ac0db315715b7d421033d860d669ffd78681d54",
       "bytes": 4398964,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -214,7 +214,7 @@
       "sha256": "641eee8ead357712179e462aa1f6efe05b7ae5ff9ca2cf97b03459a64e630d0b",
       "bytes": 3810,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -249,19 +249,19 @@
           "url": "/scenes/eris/illustration-thumbnail.webp",
           "bytes": 2774,
           "sha256": "690d89c43950f653138d4836619252bd7ae0d39a18d68e1fb54427f94ecc92a0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eris/surface.webp",
           "bytes": 1980854,
           "sha256": "018b117099d3fa9442b7511413970afc4a1f3b289a6b5a1a964c80c6aafc21f8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eris/poles.webp",
           "bytes": 63748,
           "sha256": "42251e11cfc2cef403b60cfd41e95523d48a76c569746c9dfb2284e29168c53c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

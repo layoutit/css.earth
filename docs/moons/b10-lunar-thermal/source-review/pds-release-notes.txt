@@ -1,0 +1,98 @@
+LRO Diviner Derived Data Bundle 1 Release Notes
+
+Users are encouraged to provide comments to the PDS Geosciences Node
+if errors are found either in data or in documentation in this archive.
+Please send comments by e-mail:
+
+          Web:   http://pds-geosciences.wustl.edu
+          Email: geosci@wunder.wustl.edu
+
+This document, release_notes.txt, contains release notes and errata concerning
+LRO Diviner Derived Data Bundle 1. It is updated with each release of data.
+
+Section A of this document contains an entry for each release with
+general information about the contents of the release, in order from oldest
+to newest.  Updates to previously released files are reported in these
+entries, along with any known errata.
+
+Section B of this file contains general notes, if any, concerning the archive
+as a whole.
+
+
+******** SECTION A ********
+
+------------------------------------------------------------
+Release Number: 4
+Release Date: 2024-02-02
+Data Coverage: 2009-07-05 through 2022-08-01 
+
+New products have been added to these collections:
+    urn:nasa:pds:lro_diviner_derived1:data_derived_ghrm
+    urn:nasa:pds:lro_diviner_derived1:browse_ghrm    
+
+Products have been revised in these collections:
+    urn:nasa:pds:lro_diviner_derived1:document
+
+Comments: This release contains a new collection of Diviner Global High-
+Resolution Mosaics.
+
+------------------------------------------------------------
+Release Number: 3
+Release Date: 2023-08-31
+Data Coverage: 2009-07-05 through 2016-10-23
+
+New products have been added to these collections:
+    urn:nasa:pds:lro_diviner_derived1:data_derived_prp
+    urn:nasa:pds:lro_diviner_derived1:data_derived_gcp
+    urn:nasa:pds:lro_diviner_derived1:data_derived_gdr_level2
+    urn:nasa:pds:lro_diviner_derived1:data_derived_gdr_level3
+    urn:nasa:pds:lro_diviner_derived1:browse_gdr_l2
+    urn:nasa:pds:lro_diviner_derived1:browse_gdr_l3
+    urn:nasa:pds:lro_diviner_derived1:document
+    urn:nasa:pds:lro_diviner_derived1:document_catalog    
+    urn:nasa:pds:lro_diviner_derived1:miscellaneous    
+
+Products have been revised in these collections:
+    None.
+
+Comments: This release contains PDS4 labeled versions of Diviner derived
+products that were previously released with PDS3 only labels. There are no
+new data files.
+
+------------------------------------------------------------
+Release Number: 2
+Release Date: 2022-08-24
+Data Coverage: 2009-07-05 through 2020-03-15
+
+New products have been added to these collections:
+    urn:nasa:pds:lro_diviner_derived1:data_derived_pcp
+    urn:nasa:pds:lro_diviner_derived1:document
+
+Products have been revised in these collections:
+    None.
+
+Comments:
+    This is the first release of the seasonal Diviner Polar Cumulative 
+Products (PCP). These data use the PDS4 standard. In addition, the previously
+released diurnal PCPs have been migrated to the PDS4 standard and are now 
+included in this bundle.
+
+------------------------------------------------------------
+Release Number: 1
+Release Date: 2022-05-05
+Data Coverage: 2009-07-05 through 2021-03-01
+
+New products have been added to these collections:
+    urn:nasa:pds:lro_diviner_derived1:data_derived_rcp
+    urn:nasa:pds:lro_diviner_derived1:document
+
+Products have been revised in these collections:
+    None.
+
+Comments:
+    The first of several Diviner Regional Cumulative Products (RCP) has been 
+released. This is the first Diviner product to use the PDS4 standard. The 
+Diviner Team will begin releasing all new data products in PDS4 in 2023, and 
+eventually all Diviner PDS3 products will be migrated to PDS4.
+
+******** SECTION B ********

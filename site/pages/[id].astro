@@ -1,0 +1,8 @@
+---
+import ObjectPage from '../components/ObjectPage.astro';
+import { OBJECTS } from '../objects.mts';
+export function getStaticPaths() {
+  return OBJECTS.map(({ id }) => ({ params: { id } }));
+}
+---
+<ObjectPage objectId={Astro.params.id!} />

@@ -1,0 +1,440 @@
+{
+  "command": [
+    "output/b9-python/bin/python",
+    "docs/moons/b10-lunar-thermal/replay-numeric.py"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 660291584,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 180224,
+      "freePercent": 46
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 187678720,
+      "freePercent": 46
+    },
+    {
+      "seconds": 0.6,
+      "rssBytes": 251248640,
+      "freePercent": 46
+    },
+    {
+      "seconds": 0.8,
+      "rssBytes": 285376512,
+      "freePercent": 46
+    },
+    {
+      "seconds": 1.1,
+      "rssBytes": 291340288,
+      "freePercent": 46
+    },
+    {
+      "seconds": 1.4,
+      "rssBytes": 308051968,
+      "freePercent": 46
+    },
+    {
+      "seconds": 1.7,
+      "rssBytes": 304381952,
+      "freePercent": 46
+    },
+    {
+      "seconds": 1.9,
+      "rssBytes": 296271872,
+      "freePercent": 46
+    },
+    {
+      "seconds": 2.2,
+      "rssBytes": 243417088,
+      "freePercent": 46
+    },
+    {
+      "seconds": 2.5,
+      "rssBytes": 276234240,
+      "freePercent": 46
+    },
+    {
+      "seconds": 2.8,
+      "rssBytes": 289292288,
+      "freePercent": 46
+    },
+    {
+      "seconds": 3.0,
+      "rssBytes": 280428544,
+      "freePercent": 46
+    },
+    {
+      "seconds": 3.3,
+      "rssBytes": 265666560,
+      "freePercent": 46
+    },
+    {
+      "seconds": 3.6,
+      "rssBytes": 225673216,
+      "freePercent": 46
+    },
+    {
+      "seconds": 3.9,
+      "rssBytes": 295387136,
+      "freePercent": 46
+    },
+    {
+      "seconds": 4.1,
+      "rssBytes": 275152896,
+      "freePercent": 46
+    },
+    {
+      "seconds": 4.4,
+      "rssBytes": 247676928,
+      "freePercent": 46
+    },
+    {
+      "seconds": 4.7,
+      "rssBytes": 276496384,
+      "freePercent": 46
+    },
+    {
+      "seconds": 5.0,
+      "rssBytes": 293978112,
+      "freePercent": 46
+    },
+    {
+      "seconds": 5.2,
+      "rssBytes": 293912576,
+      "freePercent": 46
+    },
+    {
+      "seconds": 5.5,
+      "rssBytes": 260816896,
+      "freePercent": 46
+    },
+    {
+      "seconds": 5.8,
+      "rssBytes": 294240256,
+      "freePercent": 46
+    },
+    {
+      "seconds": 6.1,
+      "rssBytes": 323452928,
+      "freePercent": 46
+    },
+    {
+      "seconds": 6.3,
+      "rssBytes": 232062976,
+      "freePercent": 46
+    },
+    {
+      "seconds": 6.6,
+      "rssBytes": 195510272,
+      "freePercent": 46
+    },
+    {
+      "seconds": 6.9,
+      "rssBytes": 431816704,
+      "freePercent": 46
+    },
+    {
+      "seconds": 7.1,
+      "rssBytes": 510050304,
+      "freePercent": 46
+    },
+    {
+      "seconds": 7.4,
+      "rssBytes": 530759680,
+      "freePercent": 46
+    },
+    {
+      "seconds": 7.7,
+      "rssBytes": 530776064,
+      "freePercent": 46
+    },
+    {
+      "seconds": 8.0,
+      "rssBytes": 548585472,
+      "freePercent": 46
+    },
+    {
+      "seconds": 8.2,
+      "rssBytes": 554467328,
+      "freePercent": 46
+    },
+    {
+      "seconds": 8.5,
+      "rssBytes": 486686720,
+      "freePercent": 46
+    },
+    {
+      "seconds": 8.8,
+      "rssBytes": 479952896,
+      "freePercent": 46
+    },
+    {
+      "seconds": 9.0,
+      "rssBytes": 479969280,
+      "freePercent": 46
+    },
+    {
+      "seconds": 9.3,
+      "rssBytes": 462929920,
+      "freePercent": 46
+    },
+    {
+      "seconds": 9.6,
+      "rssBytes": 423985152,
+      "freePercent": 46
+    },
+    {
+      "seconds": 9.9,
+      "rssBytes": 430669824,
+      "freePercent": 46
+    },
+    {
+      "seconds": 10.1,
+      "rssBytes": 466059264,
+      "freePercent": 46
+    },
+    {
+      "seconds": 10.4,
+      "rssBytes": 466059264,
+      "freePercent": 46
+    },
+    {
+      "seconds": 10.7,
+      "rssBytes": 466059264,
+      "freePercent": 46
+    },
+    {
+      "seconds": 11.0,
+      "rssBytes": 467419136,
+      "freePercent": 46
+    },
+    {
+      "seconds": 11.2,
+      "rssBytes": 467435520,
+      "freePercent": 46
+    },
+    {
+      "seconds": 11.5,
+      "rssBytes": 467435520,
+      "freePercent": 46
+    },
+    {
+      "seconds": 11.8,
+      "rssBytes": 473350144,
+      "freePercent": 46
+    },
+    {
+      "seconds": 12.1,
+      "rssBytes": 473350144,
+      "freePercent": 46
+    },
+    {
+      "seconds": 12.3,
+      "rssBytes": 473366528,
+      "freePercent": 46
+    },
+    {
+      "seconds": 12.6,
+      "rssBytes": 473366528,
+      "freePercent": 46
+    },
+    {
+      "seconds": 12.9,
+      "rssBytes": 479281152,
+      "freePercent": 46
+    },
+    {
+      "seconds": 13.1,
+      "rssBytes": 514637824,
+      "freePercent": 47
+    },
+    {
+      "seconds": 13.4,
+      "rssBytes": 565936128,
+      "freePercent": 47
+    },
+    {
+      "seconds": 13.7,
+      "rssBytes": 620281856,
+      "freePercent": 47
+    },
+    {
+      "seconds": 14.0,
+      "rssBytes": 621084672,
+      "freePercent": 47
+    },
+    {
+      "seconds": 14.2,
+      "rssBytes": 17235968,
+      "freePercent": 47
+    },
+    {
+      "seconds": 14.5,
+      "rssBytes": 290242560,
+      "freePercent": 47
+    },
+    {
+      "seconds": 14.8,
+      "rssBytes": 479789056,
+      "freePercent": 47
+    },
+    {
+      "seconds": 15.1,
+      "rssBytes": 552157184,
+      "freePercent": 47
+    },
+    {
+      "seconds": 15.3,
+      "rssBytes": 559579136,
+      "freePercent": 47
+    },
+    {
+      "seconds": 15.6,
+      "rssBytes": 565493760,
+      "freePercent": 47
+    },
+    {
+      "seconds": 15.9,
+      "rssBytes": 565493760,
+      "freePercent": 47
+    },
+    {
+      "seconds": 16.1,
+      "rssBytes": 571408384,
+      "freePercent": 47
+    },
+    {
+      "seconds": 16.4,
+      "rssBytes": 571408384,
+      "freePercent": 47
+    },
+    {
+      "seconds": 16.7,
+      "rssBytes": 577372160,
+      "freePercent": 47
+    },
+    {
+      "seconds": 17.0,
+      "rssBytes": 577372160,
+      "freePercent": 47
+    },
+    {
+      "seconds": 17.2,
+      "rssBytes": 583286784,
+      "freePercent": 47
+    },
+    {
+      "seconds": 17.5,
+      "rssBytes": 589201408,
+      "freePercent": 47
+    },
+    {
+      "seconds": 17.8,
+      "rssBytes": 595165184,
+      "freePercent": 47
+    },
+    {
+      "seconds": 18.1,
+      "rssBytes": 595165184,
+      "freePercent": 47
+    },
+    {
+      "seconds": 18.3,
+      "rssBytes": 595165184,
+      "freePercent": 47
+    },
+    {
+      "seconds": 18.6,
+      "rssBytes": 604028928,
+      "freePercent": 47
+    },
+    {
+      "seconds": 18.9,
+      "rssBytes": 604028928,
+      "freePercent": 47
+    },
+    {
+      "seconds": 19.2,
+      "rssBytes": 607305728,
+      "freePercent": 47
+    },
+    {
+      "seconds": 19.5,
+      "rssBytes": 607371264,
+      "freePercent": 47
+    },
+    {
+      "seconds": 19.7,
+      "rssBytes": 607371264,
+      "freePercent": 46
+    },
+    {
+      "seconds": 20.0,
+      "rssBytes": 619216896,
+      "freePercent": 46
+    },
+    {
+      "seconds": 20.3,
+      "rssBytes": 622182400,
+      "freePercent": 46
+    },
+    {
+      "seconds": 20.6,
+      "rssBytes": 622182400,
+      "freePercent": 46
+    },
+    {
+      "seconds": 20.8,
+      "rssBytes": 622182400,
+      "freePercent": 46
+    },
+    {
+      "seconds": 21.1,
+      "rssBytes": 628375552,
+      "freePercent": 46
+    },
+    {
+      "seconds": 21.4,
+      "rssBytes": 633487360,
+      "freePercent": 46
+    },
+    {
+      "seconds": 21.7,
+      "rssBytes": 639385600,
+      "freePercent": 46
+    },
+    {
+      "seconds": 22.0,
+      "rssBytes": 639401984,
+      "freePercent": 46
+    },
+    {
+      "seconds": 22.2,
+      "rssBytes": 639401984,
+      "freePercent": 46
+    },
+    {
+      "seconds": 22.5,
+      "rssBytes": 659849216,
+      "freePercent": 46
+    },
+    {
+      "seconds": 22.8,
+      "rssBytes": 660160512,
+      "freePercent": 46
+    },
+    {
+      "seconds": 23.1,
+      "rssBytes": 660291584,
+      "freePercent": 46
+    }
+  ],
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 23.3
+}

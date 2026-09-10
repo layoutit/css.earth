@@ -1,0 +1,37 @@
+[
+  {
+    "name": "elsevier-object-eid",
+    "url": "https://api.elsevier.com/content/object/eid/1-s2.0-S0019103521004504",
+    "method": "GET",
+    "checkedAt": "2026-09-09T23:00:47.398585+00:00",
+    "status": 200,
+    "contentType": "text/xml;charset=UTF-8",
+    "contentLength": "609",
+    "bytes": 609,
+    "sha256": "86ff5ca4623559aff5c5061771eaf1ce013421529392acd02c95e676c94df12c"
+  },
+  {
+    "name": "publisher-mmc6-dat",
+    "url": "https://ars.els-cdn.com/content/image/1-s2.0-S0019103521004504-mmc6.dat",
+    "method": "HEAD",
+    "checkedAt": "2026-09-09T23:00:47.969784+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "name": "publisher-mmc6-csv",
+    "url": "https://ars.els-cdn.com/content/image/1-s2.0-S0019103521004504-mmc6.csv",
+    "method": "HEAD",
+    "checkedAt": "2026-09-09T23:00:48.244211+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "name": "publisher-mmc6-pdf",
+    "url": "https://ars.els-cdn.com/content/image/1-s2.0-S0019103521004504-mmc6.pdf",
+    "method": "HEAD",
+    "checkedAt": "2026-09-09T23:00:48.488698+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found"
+  }
+]

@@ -21,7 +21,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
 ---
 
 <PlanetCard class="planet-information-panel">
-      <PlanetBodyOverview {objectId} {title} {introduction} />
+  <PlanetBodyOverview {objectId} {title} {introduction} {facts} {moreFacts} />
       {destinations && <section class="planet-destination-intro">
         <button class="planet-find-destination" type="button">Find a city</button>
         <p>{destinations.description}</p>

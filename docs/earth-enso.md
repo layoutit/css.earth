@@ -27,7 +27,7 @@ Run `pnpm refresh:earth-enso` to discover the current GIBS default, download and
 To recreate the ignored 16K intermediate from the checked-in archive without network access, run:
 
 ```sh
-node tools/objects/paged-ellipsoid/mur-imagery.mjs restore src/planets/earth/source/science
+node tools/objects/paged-ellipsoid/mur-imagery.mts restore src/planets/earth/source/science
 ```
 
 Restoration checks the archive hash and every tile hash, reconstructs the mosaic, and requires a byte-identical PNG hash before installing it. Ordinary Earth preparation then consumes that pinned intermediate. A refreshed observation requires requalifying the independent source witnesses and browser evidence before publication.

@@ -1,0 +1,36 @@
+{
+  "body": "tethys",
+  "sourceSha256": "620881bff247aa48f0f98e05d06cbccad6a3e43133794f0621ffb0aa1cb4d7bc",
+  "dimensions": [
+    1024,
+    512
+  ],
+  "policy": {
+    "kind": "geotiff-rgb-bands",
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "alphaBand": 3,
+    "sampleBytes": 2,
+    "noData": 0,
+    "centerLongitude": 180,
+    "resolutionMeters": 3258.175193469102,
+    "origin": [
+      -1668185.6990561802,
+      834092.8495280901
+    ],
+    "grid": {
+      "pixelsPerDegree": 2.8444444444444446,
+      "sampleOffset": 511.5,
+      "lineOffset": 255.5
+    }
+  },
+  "originalValid": 56770,
+  "retained": 56770,
+  "withheld": 0,
+  "maximumByteError": 0,
+  "longitudeConvention": "0..360 east, source derivative rolled from the lossless -180..180 map",
+  "limits": "Grid-edge samples withheld by the existing reader remain gaps; this is source-map decoder evidence, not mounted browser proof."
+}

@@ -1,4 +1,4 @@
-import { earthPagingFixture as original } from '../../../../tests/objects/unit/earth/paging-fixture.mts';
+import { preparedPagingFixture as original } from '../paging/__fixtures__/prepared-page.mts';
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import { parsePreparedObjectRuntime } from './index.js';
@@ -10,7 +10,7 @@ const layers = (input: Record<string, unknown>) => array(input.pageLayers, 'test
 const layer = (input: Record<string, unknown>, index = 0) => record(layers(input)[index], 'test page layer');
 const plan = (input: Record<string, unknown>, index = 0) => record(layer(input, index).plan, 'test page plan');
 
-test('the external runtime boundary preserves both retained Earth paging fixtures and metadata stubs', () => {
+test('the external runtime boundary preserves both source-backed page plans and metadata stubs', () => {
   const parsed = parsePreparedObjectRuntime(original);
   assert.equal(parsed, original);
   assert.equal(parsed.pageLayers?.length, 2);

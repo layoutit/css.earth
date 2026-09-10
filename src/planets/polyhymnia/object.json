@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 117.34782608695652,
       "bodyRadiusM": 26990
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/polyhymnia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c037c089645de084c71b5efa7038a4337b7180c29835092fc7a122628f396561"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6c94eb391bbaf4736c002f55c0b81c0cd7035c24f91961aeb81c6acc19a97d28"
+    "sha256": "6376531ba72995394ef5c4aa0a5f879d9dc4aa983e28c80c634ec50f2c0be2e4"
   }
 }

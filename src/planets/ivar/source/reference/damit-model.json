@@ -1,0 +1,204 @@
+{
+  "name": "Ivar",
+  "number": 1627,
+  "modelId": 271,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/271",
+  "fields": {
+    "ID": "271",
+    "Asteroid": "(1627) Ivar",
+    "\u03bb": "334",
+    "\u03b2": "39",
+    "P": "4.795168",
+    "YORP": "",
+    "t0": "2446226",
+    "\u03c60": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.5",
+    "p3": "0.03",
+    "p4": "-0.81",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "7.4",
+    "\u03c3D": "0.2",
+    "\u0393": "100",
+    "\u0393min": "80",
+    "\u0393max": "130",
+    "pV": "0.26",
+    "\u03c3pV": "0.02",
+    "\u03b3c": "50",
+    "\u03f1c": "0.5",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2016-04-22",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2016-04-22 13:21:28",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (\u00b0)": "n/a",
+    "Subsolar-point latitude (\u00b0)": "n/a",
+    "Subearth-point longitude (\u00b0)": "n/a",
+    "Subearth-point latitude (\u00b0)": "n/a",
+    "Phase-angle-bisector longitude (\u00b0)": "n/a",
+    "Phase-angle-bisector latitude (\u00b0)": "n/a",
+    "Solar phase angle (\u00b0)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/911/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/912/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/913/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanu\u0161 et al. (2015)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/163",
+      "file": "reference-163.html"
+    },
+    {
+      "label": "Kaasalainen et al. (2004)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/107",
+      "file": "reference-107.html"
+    }
+  ],
+  "id": "ivar",
+  "displayName": "Ivar",
+  "lambda": 334.0,
+  "beta": 39.0,
+  "periodHours": 4.795168,
+  "version": "2016-04-22",
+  "nonconvex": false,
+  "calibrated": true,
+  "archiveCalibrated": true,
+  "diameterKm": 7.4,
+  "uncertaintyKm": 0.2,
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/913/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/911/IAUspin.txt",
+  "shapeSha256": "6838a5ad71d37ea2d341cb2b4aa37a66d698bf84202b49cbb7084c4dc4095c24",
+  "shapeBytes": 82546,
+  "vertices": 1020,
+  "faces": 2036,
+  "signedVolume": 212.1747578652795,
+  "independentSignedVolume": 212.1747578652795,
+  "originalVolumeEquivalentDiameter": 7.399999623587896,
+  "firstVertex": [
+    0.000763,
+    0.059685,
+    2.846967
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    2.6133432793573066,
+    6.829894877928723
+  ],
+  "extentsSourceUnits": [
+    [
+      -4.926588,
+      5.858026
+    ],
+    [
+      -4.923778,
+      5.656692
+    ],
+    [
+      -2.329361,
+      2.846967
+    ]
+  ],
+  "scaleKmPerSourceUnit": 1.0000000508665032,
+  "alternatives": [
+    {
+      "modelId": 272,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/272",
+      "pole": [
+        "336",
+        "39"
+      ],
+      "version": "2007-02-22"
+    }
+  ],
+  "shapeKind": "Convex light-curve reconstruction",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 7.4,
+    "uncertaintyKm": 0.2,
+    "uncertaintyKind": "Selected archive diameter uncertainty; absent value remains unknown. It is not local shape accuracy.",
+    "diameterSemantics": "Volume-equivalent diameter in the selected DAMIT record, calibrated with radar for Tantalus and thermophysical data for the other bodies.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/271",
+    "sourceLabel": "DAMIT model 271",
+    "reference": "DAMIT model 271, version 2016-04-22",
+    "scaleKmPerSourceUnit": 1.0000000508665032,
+    "metersPerSourceUnit": 1000.0000508665032,
+    "limitations": "The calibrated 2016 convex solution is selected; the older nonconvex model272 is explicitly labelled plausible in the archive and is not a resolved terrain measurement. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanu\u0161 et al.2015 Table4 distinguishes this fixed revised shape fit from the varied-shape ensemble, which gives a wider size range (8.0 km, -0.9/+0.3 km). The archive7.4 km scale is used consistently with its mesh; the narrow archived error is not total physical uncertainty.",
+    "visibleDescription": "Convex lightcurve model at the archive fixed-shape scale of 7.4 km (archived \u00b10.2 km; additional shape-model uncertainty). Grid marks unavailable imagery."
+  },
+  "selectionNotes": "The calibrated 2016 convex solution is selected; the older nonconvex model272 is explicitly labelled plausible in the archive and is not a resolved terrain measurement.",
+  "papers": [
+    {
+      "url": "https://arxiv.org/html/1504.04199",
+      "file": "hanus-2015.html",
+      "label": "Hanu\u0161 et al. (2015), thermophysical fits with shape and pole uncertainty"
+    }
+  ],
+  "distanceAu": 1.8630871303717667,
+  "orbitalPeriodYears": 2.5430678711330295,
+  "sourceFields": {
+    "ID": "271",
+    "Asteroid": "(1627) Ivar",
+    "\u03bb": "334",
+    "\u03b2": "39",
+    "P": "4.795168",
+    "YORP": "",
+    "t0": "2446226",
+    "\u03c60": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.5",
+    "p3": "0.03",
+    "p4": "-0.81",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "7.4",
+    "\u03c3D": "0.2",
+    "\u0393": "100",
+    "\u0393min": "80",
+    "\u0393max": "130",
+    "pV": "0.26",
+    "\u03c3pV": "0.02",
+    "\u03b3c": "50",
+    "\u03f1c": "0.5",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2016-04-22",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2016-04-22 13:21:28",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (\u00b0)": "n/a",
+    "Subsolar-point latitude (\u00b0)": "n/a",
+    "Subearth-point longitude (\u00b0)": "n/a",
+    "Subearth-point latitude (\u00b0)": "n/a",
+    "Phase-angle-bisector longitude (\u00b0)": "n/a",
+    "Phase-angle-bisector latitude (\u00b0)": "n/a",
+    "Solar phase angle (\u00b0)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+  "modelLimitations": "The calibrated 2016 convex solution is selected; the older nonconvex model272 is explicitly labelled plausible in the archive and is not a resolved terrain measurement. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanu\u0161 et al.2015 Table4 distinguishes this fixed revised shape fit from the varied-shape ensemble, which gives a wider size range (8.0 km, -0.9/+0.3 km). The archive7.4 km scale is used consistently with its mesh; the narrow archived error is not total physical uncertainty."
+}

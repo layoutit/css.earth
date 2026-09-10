@@ -1,0 +1,77 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "stars/eso0932a.tif",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "shape/model-1862.txt",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/6127/shape.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/model-1862.html",
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1862"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/documentation.html",
+      "url": "https://damit.cuni.cz/projects/damit/pages/documentation"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/1862-IAUspin.txt",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/6125/IAUspin.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/reference-172.html",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/172"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/durech-2018.html",
+      "url": "https://arxiv.org/html/1711.05987"
+    }
+  ]
+}

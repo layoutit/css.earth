@@ -8,7 +8,8 @@
 - Keep runtime DOM retained and stable. Prepare textures, atlases, scene state, lighting, weather, and other static work ahead of runtime.
 - Runtime may decode and transport prepared state. It must not derive source data, geometry, charts, atlases, or scene assets.
 - Select the canonical prepared dataset once for each mount, independent of device DPR. Earth city-level paging may change the bounded resident set of that dataset's prepared pages and resolution levels; it must not generate geometry or imagery at runtime. Other object asset banks remain fixed after mount.
-- Do not use runtime `clip-path`, CSS masks, filters, CSS gradients, blend modes, canvas, WebGL, or SVG scene rendering.
+- Do not use runtime `clip-path`, CSS masks, filters, CSS gradients, blend modes, canvas, or WebGL.
+- SVG is allowed sparingly where it makes sense. Keep detailed body rendering in PolyCSS. Different SVG edge antialiasing is acceptable; preserve geometry, colors, line thickness, content, and interactions when optimizing.
 - Preserve source/provenance files beside each planet and keep prepared outputs reproducible from the checked-in inputs.
 - Use source and runtime closure tests, object-package tests, router tests, and `OBJECTS`-derived browser conformance as proof. Do not duplicate those facts as declaration-only constants.
 
@@ -17,3 +18,9 @@
 - Write new application, preparation, and tooling implementations in strict TypeScript. Validate external values at runtime; do not replace runtime validation with type assertions or unchecked declaration files.
 - Keep generated outputs and preserved vendor code in their source-owned formats. Existing JavaScript compatibility modules must only re-export their typed owners.
 - `pnpm check:typescript-ownership` enforces the remaining authored-JavaScript backlog and justified exceptions. Remove migrated or retired entries; do not add new implementation debt to make the check pass. Run `pnpm typecheck` and behavior/source checks appropriate to each migration.
+
+## Provenance and documentation
+
+- Follow [the provenance and documentation contract](docs/provenance/CONTRACT.md) for source records, credits and test evidence. It combines PDS4 1.26.0 provenance guidance with ISO 24495-1:2023 plain-language principles in the existing repository formats. PROVENANCE DOCUMENTATION maintains the shared instructions; contributors update the records affected by their change.
+- For body work, use the checked-in [celestial skill](.agents/skills/celestial-skill/SKILL.md). Make the body README its source-and-evidence document: explain the datasets, processing, test results and known problems, with links to substantial method notes and original reports. Do not keep a duplicate SOURCE account. Keep installation and common usage in shared repo guides.
+- Keep each report tied to the version it tested. When reusing an old result, explain why it still applies to the new version.

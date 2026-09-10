@@ -103,11 +103,20 @@
       ],
       "metersPerUnit": 6.634667733942421,
       "bodyRadiusM": 1525.973578806757
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/polydeuces-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "30216586be44ebec7aa3c7414c233e7fbd2144541b065eb835fce2614b975215"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3450a7b6641c47f5a847a372c26162942f35024eaa45404bb4e3ac7c62ebf7fb"
+    "sha256": "1d34fbebb8fad0929862b472558aca92d8114749954e2464fa6f0a759eb5bf4f"
   }
 }

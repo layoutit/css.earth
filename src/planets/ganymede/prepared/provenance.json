@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a9a913907ffd24ccb7008d351b7a5cb24f517576228e69d52fc9e9057e1132a6"
+    "sha256": "4b1a55dc054828c9d764c093e35aad58d41bdebb166c0a7f49282e7defba0bb5"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e78ff1444c9db1f44f8e9bdf48018df201a70fabc5189f39032cfc4de07ed220",
+      "sha256": "b23900c986d151dd5656d7dbe781c189d9ad25c3fe4398462a72b6746fa821b9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -221,6 +221,95 @@
                   "color": "#d1c59f"
                 }
               ]
+            },
+            {
+              "id": "oxygen-signature",
+              "label": "Oxygen signature",
+              "minimum": 0.98,
+              "maximum": 1.02,
+              "colors": [
+                "#2166ac",
+                "#92c5de",
+                "#f7f7f7",
+                "#f4a582",
+                "#b2182b"
+              ],
+              "labels": [
+                "0.98",
+                "1.00",
+                "1.02"
+              ],
+              "units": "565 / 577.3 nm reflectance ratio",
+              "title": "Oxygen-sensitive visible reflectance ratio",
+              "description": "A visible spectral signature associated with oxygen in surface ice.",
+              "format": "geotiff",
+              "path": "muse/ganymede/577.3nm_band-night-1.tif",
+              "consumer": "oxygen-signature",
+              "sourceUrl": "https://doi.org/10.5281/zenodo.11402374",
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "textureScale": 0.125,
+              "grid": {
+                "width": 180,
+                "height": 90,
+                "centerLongitude": -1,
+                "referenceRadiusMeters": 2631200,
+                "origin": [
+                  -8266158.590125465,
+                  4087156.1917842575
+                ],
+                "resolution": [
+                  91846.2065569496,
+                  -91846.2065569496
+                ],
+                "wrapLongitude": true,
+                "noData": -9999
+              },
+              "additionalGrids": [
+                {
+                  "path": "muse/ganymede/577.3nm_band-night-2.tif",
+                  "grid": {
+                    "width": 180,
+                    "height": 90,
+                    "centerLongitude": -1,
+                    "referenceRadiusMeters": 2631200,
+                    "origin": [
+                      -8266158.590125465,
+                      4087156.1917842575
+                    ],
+                    "resolution": [
+                      91846.2065569496,
+                      -91846.2065569496
+                    ],
+                    "wrapLongitude": true,
+                    "noData": -9999
+                  }
+                },
+                {
+                  "path": "muse/ganymede/577.3nm_band-night-3.tif",
+                  "grid": {
+                    "width": 180,
+                    "height": 90,
+                    "centerLongitude": -1,
+                    "referenceRadiusMeters": 2631200,
+                    "origin": [
+                      -8266158.590125465,
+                      4087156.1917842575
+                    ],
+                    "resolution": [
+                      91846.2065569496,
+                      -91846.2065569496
+                    ],
+                    "wrapLongitude": true,
+                    "noData": -9999
+                  }
+                }
+              ],
+              "focus": {
+                "longitudeDegrees": 156,
+                "latitudeDegrees": 0,
+                "zoom": 1.1
+              }
             }
           ],
           "observedColors": [],
@@ -302,7 +391,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "588883495cb31685751f694f3fb36b1d8feceb1ed0d1af806029e0b98069f7de",
+      "sha256": "0a453be4ee04370d6d36f3a7dc6f0e0dc0b9a9564f79268fb9c0d285dc50764a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -579,8 +668,42 @@
                   }
                 ]
               }
+            },
+            {
+              "id": "oxygen-signature",
+              "label": "Oxygen signature",
+              "description": "Published reflectance ratio sensitive to the 577.3 nm molecular-oxygen feature in surface ice. This is neither oxygen concentration nor atmospheric density. Spectral slope, the adjacent instrument gap and residual night-to-night differences affect contrasts. Values below one are retained. Two-degree samples and seams remain visible; gray grid marks missing or withheld edges. Absolute subpixel registration is unresolved.",
+              "title": "Oxygen-sensitive visible reflectance ratio",
+              "summary": "A 565/577.3 nm surface-ice oxygen signature, not oxygen concentration. These 2° samples have approximate registration. Gray grid marks missing or withheld data; joins between nights remain.",
+              "thumbnail": "/scenes/ganymede/ganymede-oxygen-signature-thumbnail.webp",
+              "surface": "ganymede-oxygen-signature-surface@2x.webp",
+              "poles": "ganymede-oxygen-signature-poles@2x.webp",
+              "source": {
+                "id": "ganymede-muse-oxygen-signature-night-1",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.5281/zenodo.11402374"
+              },
+              "detail": "2019 MUSE",
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Oxygen signature",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0.98",
+                  "1.00",
+                  "1.02"
+                ],
+                "meta": "reflectance ratio",
+                "sourceUrl": "https://doi.org/10.5281/zenodo.11402374",
+                "image": "/scenes/ganymede/ganymede-oxygen-signature-legend.webp"
+              }
             }
-          ]
+          ],
+          "labels": {
+            "oxygen-signature": "Oxygen signature"
+          }
         },
         "settings": {
           "titleKey": "settings",
@@ -624,6 +747,18 @@
             "role": "surface",
             "description": "Interpreted geologic map and GIS · SIM3237",
             "href": "https://pubs.usgs.gov/sim/3237/"
+          },
+          {
+            "label": "VLT / MUSE",
+            "role": "surface",
+            "description": "King et al. (2025), visible spectral mapping and interpretation",
+            "href": "https://doi.org/10.1029/2024JE008511"
+          },
+          {
+            "label": "MUSE data",
+            "role": "surface",
+            "description": "July 2019 spectral observations; released 2024; CC BY 4.0",
+            "href": "https://doi.org/10.5281/zenodo.11402374"
           }
         ],
         "provenance": {
@@ -685,7 +820,7 @@
       "sha256": "c2c8d9506b8cf8f7a0a90d823d9052e91c8d9885cf7267fdce8de8216f4df888",
       "bytes": 136844537,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -738,7 +873,7 @@
       "sha256": "da47087e75bc530456d8206d5100ad3c687706353700b0cb44a8400957005a33",
       "bytes": 199204541,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -783,7 +918,7 @@
       "sha256": "67251406577abdb683e3f58616572cf4544aef9334406b48deade61a38ba7740",
       "bytes": 2282348,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -803,7 +938,7 @@
       "sha256": "253e766034de1e6d8b7fe179506e237cfea6454be6948fad0e1f4862a97580a1",
       "bytes": 387036,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -823,7 +958,127 @@
       "sha256": "627995c07e5d5c303e6ddb64e5e75c50938c4f5b6a39dc79e2e2128248c3bd83",
       "bytes": 167,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ganymede-muse-oxygen-signature-night-1",
+      "path": "muse/ganymede/577.3nm_band-night-1.tif",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/ganymede-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "lensId": "oxygen-signature",
+      "label": "Oxygen signature",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 2631200
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging.",
+      "sha256": "c70ba9a513711fe715f44e26ff174d171e8fd60b1ae081c86e9fcfc849d6924f",
+      "bytes": 10416,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ganymede-muse-oxygen-signature-night-2",
+      "path": "muse/ganymede/577.3nm_band-night-2.tif",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/ganymede-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "lensId": "oxygen-signature",
+      "label": "Oxygen signature",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 2631200
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging.",
+      "sha256": "b5e2ecac431126c5d531e7b37945dbfd9abf5b30b2c632befb5f02e764d81efa",
+      "bytes": 10400,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ganymede-muse-oxygen-signature-night-3",
+      "path": "muse/ganymede/577.3nm_band-night-3.tif",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/ganymede-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "lensId": "oxygen-signature",
+      "label": "Oxygen signature",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 2631200
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging.",
+      "sha256": "f9eb0690f659507fdcfe7e124f29702dfd22a08000c8283136c2c7f49e12351a",
+      "bytes": 10304,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -837,10 +1092,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "588883495cb31685751f694f3fb36b1d8feceb1ed0d1af806029e0b98069f7de",
-      "bytes": 16167,
+      "sha256": "0a453be4ee04370d6d36f3a7dc6f0e0dc0b9a9564f79268fb9c0d285dc50764a",
+      "bytes": 18331,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -880,19 +1135,19 @@
           "url": "/scenes/ganymede/ganymede-normal-thumbnail.webp",
           "bytes": 3172,
           "sha256": "639999164186b8fe56726b0a0c2d71494212f1f9a9ab0b018987c80e7170b53e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-normal-surface@2x.webp",
           "bytes": 6411262,
           "sha256": "eee2ba73dd90d85f32681f6da6d151a60bbfe6dfb7ff2edd373e93d5a2894005",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-normal-poles@2x.webp",
           "bytes": 176358,
           "sha256": "2318592ae6bb16349c87e22c8a0910403e9641d2118b8086783d41f9be28e820",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -937,19 +1192,19 @@
           "url": "/scenes/ganymede/ganymede-enhanced-thumbnail.webp",
           "bytes": 5628,
           "sha256": "bb1d5515bc0a443f9208479c9a0e4db9404eb1267edc77490138b8d06959bc4c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-enhanced-surface@2x.webp",
           "bytes": 7029694,
           "sha256": "90553d4fd9a4bd0140b4054c5bf002862fa102439617c76a413c9900cfa3dc8c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-enhanced-poles@2x.webp",
           "bytes": 208766,
           "sha256": "88bfbe684db157327e55611e9b3764e67714a13a9c391cd3088e3723a576997d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -984,19 +1239,72 @@
           "url": "/scenes/ganymede/ganymede-geology-thumbnail.webp",
           "bytes": 1662,
           "sha256": "beb8f0d50137dd11ad57ba5fab690c57467dd40fa711933616bb0c43a09b7c29",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-geology-surface@2x.webp",
           "bytes": 522684,
           "sha256": "4d8ca3b202ba6ba3ca28c3dc80d69bac45851895ae5bafa4dc2b6220552b8742",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-geology-poles@2x.webp",
           "bytes": 24730,
           "sha256": "e602a37e250e60775046ac77bb668649d1edf5c7b700929601faa1b1955af546",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "oxygen-signature",
+      "label": "Oxygen signature",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Published reflectance ratio sensitive to the 577.3 nm molecular-oxygen feature in surface ice. This is neither oxygen concentration nor atmospheric density. Spectral slope, the adjacent instrument gap and residual night-to-night differences affect contrasts. Values below one are retained. Two-degree samples and seams remain visible; gray grid marks missing or withheld edges. Absolute subpixel registration is unresolved."
+      ],
+      "lensIds": [
+        "oxygen-signature"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Oxygen-sensitive visible reflectance ratio"
+      },
+      "inputs": [
+        "ganymede-muse-oxygen-signature-night-1",
+        "ganymede-muse-oxygen-signature-night-2",
+        "ganymede-muse-oxygen-signature-night-3"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ganymede/ganymede-oxygen-signature-thumbnail.webp",
+          "bytes": 4908,
+          "sha256": "a03346786873c42aa08e03bb4598e1e12d6d08909b0cff103d000c62a4ed6bfd",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ganymede/ganymede-oxygen-signature-legend.webp",
+          "bytes": 246,
+          "sha256": "44c343edd4c6e8fa80bec50e998d4b0369ed7224017adc103a7d09a95ec02166",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ganymede/ganymede-oxygen-signature-surface@2x.webp",
+          "bytes": 46646,
+          "sha256": "d6ac93704969b11c0bea1a541275f2d6d1c2a7ca5d11002d26bfbc5c3d5bf7e2",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ganymede/ganymede-oxygen-signature-poles@2x.webp",
+          "bytes": 1728,
+          "sha256": "070a63e7aa4182c1403f153aa9aeca56c1a91e843f65f5d82f62f3850fa7c709",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1019,8 +1327,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8002,
-          "sha256": "b723af92d3981ec47e3926d605b7e370a4e0dee2e64fb4ff70eee5b195c888e2",
+          "bytes": 8330,
+          "sha256": "d55c1b3dd71436db56e785cbd135e26ad6a850e3e6b43945a7f628a95237c2ee",
           "verification": "bytes-verified"
         }
       ],
@@ -1094,6 +1402,30 @@
           "url": "object:prepared/minimaps/geology.webp",
           "bytes": 147512,
           "sha256": "48161d8d2391267da01e2527ac8ec40525163fb542bfc5dce1c732b81e3bd198",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:oxygen-signature",
+      "label": "Oxygen signature preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "oxygen-signature"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/oxygen-signature.webp",
+          "bytes": 55924,
+          "sha256": "05ad83cf7e2597cf8c60e09591d7f91812eb9d2c13d8b1641eec9fb7f87a5f86",
           "verification": "bytes-verified"
         }
       ]

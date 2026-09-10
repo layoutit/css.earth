@@ -11,4 +11,8 @@
 
 ## B6 sources
 
-Lucey et al. (2021), corrected Diviner Christiansen-feature map, DOI 10.5281/zenodo.4558194, is adapted under CC-BY-4.0. Sampling and display changes are described in SOURCE.md. USGS geology is public-domain scientific mapping.
+Lucey et al. (2021), corrected Diviner Christiansen-feature map, DOI 10.5281/zenodo.4558194, is adapted under CC-BY-4.0. Sampling and display changes are described in README.md. USGS geology is public-domain scientific mapping.
+
+## B10 sources
+
+Powell et al. (2023), LRO Diviner GHRM temperature, temperature-anomaly and rock-abundance products, NASA PDS Geosciences Node. The corresponding [author dataset](https://doi.org/10.25346/S6/LFAVXU) is CC0 1.0. Retain source attribution and exact product identities; processing and interpretation limits are described in README.md. The journal article itself is not redistributed or relicensed.

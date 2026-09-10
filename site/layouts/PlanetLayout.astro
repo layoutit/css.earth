@@ -18,9 +18,10 @@ import "../minimap/minimap.css";
 
 interface Props {
   objectId: string;
+  navigation?: boolean;
 }
 
-const { objectId } = Astro.props;
+const { objectId, navigation = false } = Astro.props;
 const objectRecord = requireObject(objectId);
 const seo = objectSeo(objectRecord);
 ---
@@ -49,7 +50,7 @@ const seo = objectSeo(objectRecord);
     <meta name="twitter:image:alt" content={seo.imageAlt} />
     <meta name="theme-color" content="#000000" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
-    <script is:inline set:html={googleAnalyticsBootstrap}></script>
+    {!navigation && <script is:inline set:html={googleAnalyticsBootstrap}></script>}
     <slot name="planet-head" />
     <title>{seo.title}</title>
     <ObjectSwatchStyles />
@@ -81,7 +82,7 @@ const seo = objectSeo(objectRecord);
     <div class="planet-ui-layer">
       <slot name="planet-ui" />
     </div>
-    <PlanetaryScale activeObjectId={objectRecord.id} />
+    {!navigation && <PlanetaryScale activeObjectId={objectRecord.id} />}
     <div class="planet-viewport">
       <main
         class="planet-stage example-stage"
@@ -92,9 +93,9 @@ const seo = objectSeo(objectRecord);
       <div class="planet-input-surface" tabindex="0" role="group" aria-label={`Explore ${objectRecord.name}`} />
       <div class="planet-scene-overlays"></div>
     </div>
-    <script>
+    {!navigation && <script>
       import "../scene-router.mts";
-    </script>
-    <PreparedSidebarCards />
+    </script>}
+    {!navigation && <PreparedSidebarCards />}
   </body>
 </html>

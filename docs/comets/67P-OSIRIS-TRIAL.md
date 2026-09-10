@@ -107,7 +107,7 @@ not run for this isolated intake experiment; no object-readiness claim follows.
 From the existing Comets checkout, with repository dependencies installed:
 
 ```sh
-node tools/objects/comet-67p/inspect-osiris-geo.mjs --download
+node tools/objects/comet-67p/inspect-osiris-geo.mts --download
 node --test tools/inspect-osiris-geo.test.mjs
 ```
 

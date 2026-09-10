@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 172.17391304347825,
       "bodyRadiusM": 39600
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/silesia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b3ce3e7f53e05a14856ef17a4fc2135a971357df374cf0baea47387450c39376"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3c8c9da9df8e60d5e8eb596e458f3c5f2e95042cfb23b2a16166d63303a66daf"
+    "sha256": "22230afb2e2f0153904d9013b70909a51e816000e9b150b503d85c682ee8dc07"
   }
 }

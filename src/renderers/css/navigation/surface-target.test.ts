@@ -34,7 +34,7 @@ test('surface correction is a finite proper rotation toward the real physical ey
   }
 });
 
-test('the actual prepared Buenos Aires destination reaches the physical content centre at city zoom', async () => {
+test('prepared destination correction preserves close-range framing when the globe radius changes', async () => {
   const read = async (path: string) => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
   const scene = await read('../../../planets/earth/prepared/scene.json');
   const config = await read('../../../planets/earth/source/preparation/paged-ellipsoid.json');
@@ -48,9 +48,9 @@ test('the actual prepared Buenos Aires destination reaches the physical content 
   local = rotate(local, 'x', preparedScenePitch(destination.controlPitch, config.camera));
   local = local.map(value => value * config.camera.sceneScale);
   expect(Math.hypot(local[0], local[1])).toBeLessThan(1e-10);
-  // Actual desktop city-zoom geometry captured at 1400×1000: the shell moves
-  // the root170px while the optical principal point remains viewport-centred.
-  const focal = 1212.44, offset = [-170, 0], depth = 253.001;
+  // Desktop shell framing at 1400×1000, with the eye just outside the
+  // current authored globe. Radius changes must not invalidate this oracle.
+  const focal = 1212.44, offset = [-170, 0], depth = Math.hypot(...local) * 1.000004;
   const centre = [-offset[0] * depth / focal, 0, -depth];
   const project = (rotation: readonly number[]) => {
     const q = apply(rotation, local).map((value, axis) => value + centre[axis]);

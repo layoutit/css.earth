@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 139.30434782608697,
       "bodyRadiusM": 32040
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/phaedra-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3cbe5c1eec53751e2d014025afe7ca69bc5354263cd38b8040c54ef4d3c356ff"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "dc949c8cb49cc6073997e7e272d3516def91e47e2eb2cbd990018ec9c87e1c52"
+    "sha256": "31d9f7d1f8c0366e1611c9837a5f4d60a364825f91e6864b265d42840c34b49f"
   }
 }

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 103.8695652173913,
       "bodyRadiusM": 23890
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/piazzia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "1c885343cfb2dc208b563ae2b80033e46f90f97fecc65700948d93037105aa3e"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8c4fbeb7634fde897e774731abfabb15d8a6e1043908b8c7ead7135e094b98c9"
+    "sha256": "9198b64317aa5bfed0d478eb62416d33359a16b6030f56919f1461509b718650"
   }
 }

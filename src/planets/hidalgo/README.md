@@ -1,0 +1,91 @@
+# (944) Hidalgo
+
+## Sources
+
+<a id="selected-shape"></a>
+
+| Input | Selected source |
+| --- | --- |
+| Shape and spin | [DAMIT 1057](https://damit.cuni.cz/projects/damit/asteroid_models/view/1057) |
+| Physical scale | [Calibration and uncertainty](source/reference/calibration.json) |
+
+[DAMIT model 1057](https://damit.cuni.cz/projects/damit/asteroid_models/view/1057), version 2016-01-04, from Hanuš et al. (2016), is a convex lightcurve inversion mesh. The original 1022 vertices and 2040 triangular faces are preserved as the source input. Convex lightcurve inversion model; large-scale shape is inferred from disk-integrated brightness.
+
+Concavities, craters, surface texture and exact current rotation phase are not resolved.
+
+Adopted diameter: **61.4 ± 12.7 km**, meaning **NEATM effective spherical diameter**, from [Licandro et al. (2016), A&A 585, A9, Table 3](https://doi.org/10.1051/0004-6361/201526866). The reference-sphere radius is 30.7 km. WISE W3 and W4: 5 measurements in each band, observed at heliocentric distance 9.067 au, observer distance 9.014 au and phase angle 6.262° (Table 2); beaming parameter 0.90 ± 0.24 was fitted.
+
+## Evidence
+
+<a id="provenance"></a>
+
+The [hidalgo validation record](../../../docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.
+
+Checked 2026-09-08. Original shape, IAUspin, model metadata, citations, sizing inputs and format documentation are pinned by exact bytes and SHA-256 in the [input manifest](source/manifest.json). Derived source notes retain the physical sizing assumption and pole alternatives.
+
+## Known problems
+
+Uniformly scale the independently inferred convex shape to the reported effective thermal diameter. This does not establish a measured volume or shape-matched thermophysical calibration; quoted catalog errors exclude shape/orientation and survey systematic uncertainty.
+
+The Shape view uses the shared normal grid because the source release provides no registered surface imagery. The grid is a coordinate guide, not regolith, measured albedo or an optical photograph. Elevation is radius on this scaled shape minus the reference-sphere radius, using the original surface for the established source-to-face transfer.
+
+It is model-derived radial relief, not an independent DEM, gravitational height or resolved cratering. Its physical units inherit the scale uncertainty. Directional lighting is illustrative for the chosen model attitude; Shadows is off by default.
+
+The displayed phase is not propagated from the historical source epoch and does not claim exact current attitude.
+
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+
+## Methods and source notes
+
+<details>
+<summary>Selected shape</summary>
+
+Model publication: [New and updated convex shape models of asteroids based on optical data from a large collaboration network](https://damit.cuni.cz/projects/damit/references/view/161).
+
+The refreshed DAMIT search on 2026-09-08 found no size-calibrated same-body mesh. A published physical size is therefore applied through the existing `metersPerUnit` source conversion, before the established 800-face meshoptimizer/PolyCSS raster preparation.
+
+</details>
+
+<a id="physical-scale-and-uncertainty"></a>
+
+<details>
+<summary>Physical scale and uncertainty</summary>
+
+The source's signed tetrahedral volume integral is 0.999999988737 source units cubed, giving volume-equivalent diameter 1.24070097714 source units. The preparation conversion is:
+
+`metersPerUnit = D_km × 1000 / (2 × cbrt(3 × V_source / (4 × pi)))`
+
+For this input, `metersPerUnit = 49488.1531740965`. The raw mesh coordinates and connectivity are unchanged. Computed source topology has positive volume, consistent winding, each edge used twice, and Euler characteristic 2. This validates interpretation and source integrity; it does not establish the physical accuracy of the inversion.
+
+The exact original size record (where tabulated), its complete field definitions, parent-file identity, source URL, byte offset and line number are retained in the intake evidence. Multiple infrared epochs remain separate; they are not averaged into a falsely precise physical volume.
+
+</details>
+
+<a id="orientation-and-time"></a>
+
+<details>
+<summary>Orientation and time</summary>
+
+DAMIT metadata report J2000 ecliptic pole λ=277°, β=16°, and rounded sidereal period 10.05822 h. The original IAUspin file uses equatorial pole α=277°, δ=-7°, dW/dt=858.998908°/day, W0=8.5° at JD 2451545.0. These are different frame conventions. The existing recipe uses the paired model-record ecliptic pole and period, with arbitrary display phase.
+
+IAUspin is retained as provenance and as an independent frame/rate consistency check; its period agrees within the printed precision of the model record. Model longitude zero is an inversion/display convention, not an observed landmark.
+
+</details>
+
+<a id="views-and-source-survey"></a>
+
+<details>
+<summary>Views and source survey</summary>
+
+| Source candidate | Disposition | Reason |
+| --- | --- | --- |
+| DAMIT model search | included | Original body-specific convex shape and spin. Current search found no size-calibrated model. |
+| [Licandro et al. 2016 original WISE thermal fit](https://doi.org/10.1051/0004-6361/201526866) | included-qualified | Measured W3/W4 thermal emission, effective diameter 61.4 ± 12.7 km. Applying to a separate convex inversion mesh remains an approximate volume scaling. |
+| Optical surface / resolved DEM / composition map | excluded | No registered surface map is supplied by the selected lightcurve inversion release. Shared grid and source-shape radial elevation are appropriate; no fabricated texture. |
+| [SBDB assumed-albedo diameter 38 km](https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=944&phys-par=1) | excluded | Its own source note says assumed dark albedo 0.06; an available thermal measurement is stronger evidence. |
+| [AKARI thermal size 52.45 ± 3.60 km (Usui et al. 2011)](https://doi.org/10.1093/pasj/63.5.1117) | alternative | Independent infrared-survey result overlaps the adopted WISE uncertainty. Not averaged with a different thermal model/observing geometry. |
+| [Ground-based/Spitzer spectrum (Campins et al.)](https://www-n.oca.eu/thermops/abstract/campins.pdf) | excluded-view | Disk-integrated spectrum, not a registered surface map. |
+
+The model page and publication describe disk-integrated inversion data; such photometry cannot be repackaged as registered surface texels. Any unresolved complementary release remains a future source candidate rather than a fabricated view.
+
+</details>

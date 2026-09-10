@@ -103,11 +103,20 @@
       ],
       "metersPerUnit": 15.217391304347826,
       "bodyRadiusM": 3500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/styx-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "608c6dc4e10e4adea15516c4f87b737af47d435b27e51cbb658c2f8db8d984f9"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ed78a84e58727d4416e7721322932885e1dd02c0c30f3848c9c884cacae46a95"
+    "sha256": "b95fbc366c74d2632208c050b7f083dbb9c9023edbcf811c810bde247d65506c"
   }
 }

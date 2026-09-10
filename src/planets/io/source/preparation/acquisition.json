@@ -40,6 +40,72 @@
       ],
       "path": "system/jupiter-hubble.png",
       "url": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "muse/485nm_slope_io_night_1.fits",
+      "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/f08e392882467dd84082340af068d07945b26a0a",
+      "headers": {
+        "Accept": "application/vnd.github.raw+json"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "muse/485nm_slope_io_night_2.fits",
+      "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/d5aa063e4c5c19fae8252a711ddbcb69df4a7e28",
+      "headers": {
+        "Accept": "application/vnd.github.raw+json"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "muse/485nm_slope_io_night_3.fits",
+      "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/bab631394382359f2f0cff86835d95f0cb69317a",
+      "headers": {
+        "Accept": "application/vnd.github.raw+json"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "muse/560nm_band_io_night_1.fits",
+      "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/602fb0d67dac8ba495a0331f57c45f126d6d7042",
+      "headers": {
+        "Accept": "application/vnd.github.raw+json"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "muse/560nm_band_io_night_2.fits",
+      "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/54aa6d283d18ad16f98e0212f1274f52e728efb1",
+      "headers": {
+        "Accept": "application/vnd.github.raw+json"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "muse/560nm_band_io_night_3.fits",
+      "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/3f445cfc37a93f0ec06e39abc0bc85c089a9417f",
+      "headers": {
+        "Accept": "application/vnd.github.raw+json"
+      }
     }
   ]
 }

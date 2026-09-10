@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 106.52173913043478,
       "bodyRadiusM": 24500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/unitas-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b51c839d499baf8b9d34c5c6e0fb36569c33983bbd97749ab5373809f274cf67"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "de803210f45cd4a947b266c76c58293983d366b29b0b9e1b620e590186334460"
+    "sha256": "6f4070873daa8d180270279c5b4959d614fa9e74e5a57417ca18b4ee676ce5be"
   }
 }

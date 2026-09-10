@@ -4,7 +4,7 @@ import type { Props } from "../planet-shell-types";
 import { OBJECTS } from "../objects.mts";
 import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
-import { requireObjectControls } from "../scene-contract.mjs";
+import { requireObjectControls } from "../scene-contract.mts";
 import { sceneSources } from "../scene-sources.mts";
 import PlanetObjectResults from "./PlanetObjectResults.astro";
 import MaterialSymbol from "./MaterialSymbol.astro";
@@ -31,6 +31,7 @@ const {
   lenses,
   settings,
   destinations,
+  navigation = false,
 } = Astro.props;
 requireObjectControls({ lenses, settings }, objectId);
 const speedSetting = settings?.controls.find((setting) =>
@@ -130,7 +131,7 @@ const hasResources = sources.length > 0;
       aria-label="Planets"
       hidden
     >
-      <PlanetCard class="planet-galactic-overview" data-galactic-overview hidden>
+      {!navigation && <><PlanetCard class="planet-galactic-overview" data-galactic-overview hidden>
         <PlanetCardHeader title={OVERVIEW_TITLES['milky-way']}
           introduction="Our galaxy: a barred spiral containing stars, planetary systems, gas and dust.">
           <PlanetBreadcrumbs scope="milky-way" />
@@ -159,7 +160,7 @@ const hasResources = sources.length > 0;
       </PlanetCard>
       <PlanetCard data-solar-system-results>
         <PlanetCardHeader title={OVERVIEW_TITLES['solar-system']}
-          introduction="The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids and comets.">
+          introduction="The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets.">
           <PlanetBreadcrumbs scope="solar-system" />
         </PlanetCardHeader>
         <PlanetObjectResults activeObjectId={objectId} />
@@ -174,7 +175,7 @@ const hasResources = sources.length > 0;
             </button>
           </li>)}
         </ul>
-      </section>}
+      </section>}</>}
     </nav>
     {destinations && <section class="planet-destination-panel" aria-label="Selected city" hidden>
       <button class="planet-destination-back" type="button">← Back to {activeObject?.name}</button>

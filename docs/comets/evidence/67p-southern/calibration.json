@@ -1,0 +1,525 @@
+{
+  "schema": "cssearth-observation-calibration-check@1",
+  "fitSamplesPerTriangle": 64,
+  "checkSamplesPerTriangle": 63,
+  "disjoint": true,
+  "disjointReason": "The square-root barycentric coordinate (i+0.5)/64 cannot equal (j+0.5)/63: equality would require an odd integer times 63 to equal an odd integer times 64.",
+  "maximumAngleDegrees": 65,
+  "minimumPairs": 128,
+  "maximumLogMad": 0.25,
+  "maximumGain": 1.35,
+  "fit": {
+    "gains": [
+      1,
+      0.9077700946100148,
+      0.9337843408458084,
+      0.9696035834404976,
+      1.1569169883221921,
+      1.0384813789493856,
+      1.0589859373425863,
+      1.036585847234201
+    ],
+    "pairs": [
+      {
+        "a": 0,
+        "b": 1,
+        "samples": 217,
+        "medianLogRatio": 0.03603789435146452,
+        "logMad": 0.11304663783383365,
+        "accepted": true,
+        "residualLogRatio": 0.13280202656148782
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "samples": 14,
+        "medianLogRatio": -0.008481502136985966,
+        "logMad": 0.15510690746421535,
+        "accepted": false
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "samples": 295,
+        "medianLogRatio": -0.09469410574784867,
+        "logMad": 0.09137675331481135,
+        "accepted": true,
+        "residualLogRatio": -0.06382613786652461
+      },
+      {
+        "a": 0,
+        "b": 4,
+        "samples": 421,
+        "medianLogRatio": 0.09155944028625994,
+        "logMad": 0.219562242578547,
+        "accepted": true,
+        "residualLogRatio": -0.05419925800662441
+      },
+      {
+        "a": 0,
+        "b": 5,
+        "samples": 5,
+        "medianLogRatio": -5.513516939326927,
+        "logMad": 0.4545033420492768,
+        "accepted": false
+      },
+      {
+        "a": 0,
+        "b": 6,
+        "samples": 252,
+        "medianLogRatio": 0.048796654297827285,
+        "logMad": 0.2464165242102879,
+        "accepted": true,
+        "residualLogRatio": -0.008515133047802013
+      },
+      {
+        "a": 0,
+        "b": 7,
+        "samples": 518,
+        "medianLogRatio": 0.09593709596918563,
+        "logMad": 0.2471960257321658,
+        "accepted": true,
+        "residualLogRatio": 0.06000462235258899
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "samples": 1254,
+        "medianLogRatio": 0.04949479777356386,
+        "logMad": 0.0970525831591604,
+        "accepted": true,
+        "residualLogRatio": 0.02124043143001192
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "samples": 32,
+        "medianLogRatio": 0.3433982868028973,
+        "logMad": 0.3205701931002546,
+        "accepted": false
+      },
+      {
+        "a": 1,
+        "b": 4,
+        "samples": 23,
+        "medianLogRatio": -0.3155770865207253,
+        "logMad": 1.4991765453266386,
+        "accepted": false
+      },
+      {
+        "a": 1,
+        "b": 5,
+        "samples": 0,
+        "medianLogRatio": null,
+        "logMad": null,
+        "accepted": false
+      },
+      {
+        "a": 1,
+        "b": 6,
+        "samples": 3,
+        "medianLogRatio": -5.22914198122531,
+        "logMad": 0.003158445113806252,
+        "accepted": false
+      },
+      {
+        "a": 1,
+        "b": 7,
+        "samples": 25,
+        "medianLogRatio": 0.4528521570507862,
+        "logMad": 0.7313030311020899,
+        "accepted": false
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "samples": 1549,
+        "medianLogRatio": 0.05836820802515393,
+        "logMad": 0.09587104805731357,
+        "accepted": true,
+        "residualLogRatio": 0.02072641004000663
+      },
+      {
+        "a": 2,
+        "b": 4,
+        "samples": 0,
+        "medianLogRatio": null,
+        "logMad": null,
+        "accepted": false
+      },
+      {
+        "a": 2,
+        "b": 5,
+        "samples": 2,
+        "medianLogRatio": 4.92612762750035,
+        "logMad": 0.324539583300532,
+        "accepted": false
+      },
+      {
+        "a": 2,
+        "b": 6,
+        "samples": 0,
+        "medianLogRatio": null,
+        "logMad": null,
+        "accepted": false
+      },
+      {
+        "a": 2,
+        "b": 7,
+        "samples": 0,
+        "medianLogRatio": null,
+        "logMad": null,
+        "accepted": false
+      },
+      {
+        "a": 3,
+        "b": 4,
+        "samples": 0,
+        "medianLogRatio": null,
+        "logMad": null,
+        "accepted": false
+      },
+      {
+        "a": 3,
+        "b": 5,
+        "samples": 3,
+        "medianLogRatio": -5.655138788411538,
+        "logMad": 2.210187869578488,
+        "accepted": false
+      },
+      {
+        "a": 3,
+        "b": 6,
+        "samples": 1,
+        "medianLogRatio": 0.13586462401016508,
+        "logMad": 0,
+        "accepted": false
+      },
+      {
+        "a": 3,
+        "b": 7,
+        "samples": 0,
+        "medianLogRatio": null,
+        "logMad": null,
+        "accepted": false
+      },
+      {
+        "a": 4,
+        "b": 5,
+        "samples": 411,
+        "medianLogRatio": -0.10969270607172531,
+        "logMad": 0.11794805431138423,
+        "accepted": true,
+        "residualLogRatio": -0.0016934412341413005
+      },
+      {
+        "a": 4,
+        "b": 6,
+        "samples": 965,
+        "medianLogRatio": -0.0856559496837483,
+        "logMad": 0.18504922321531464,
+        "accepted": true,
+        "residualLogRatio": 0.0027909612635067457
+      },
+      {
+        "a": 4,
+        "b": 7,
+        "samples": 566,
+        "medianLogRatio": -0.1300773503154422,
+        "logMad": 0.15111368365731778,
+        "accepted": true,
+        "residualLogRatio": -0.020251125639154502
+      },
+      {
+        "a": 5,
+        "b": 6,
+        "samples": 1302,
+        "medianLogRatio": 0.019002846525154823,
+        "logMad": 0.10480248099828782,
+        "accepted": true,
+        "residualLogRatio": -0.0005495073651741386
+      },
+      {
+        "a": 5,
+        "b": 7,
+        "samples": 39,
+        "medianLogRatio": -0.028629703897228465,
+        "logMad": 0.15101391516090962,
+        "accepted": false
+      },
+      {
+        "a": 6,
+        "b": 7,
+        "samples": 765,
+        "medianLogRatio": -0.021756018892793338,
+        "logMad": 0.20712413521401377,
+        "accepted": true,
+        "residualLogRatio": -0.00037670516376067664
+      }
+    ],
+    "referenceIndex": 0,
+    "interpretation": "Bounded relative display-level adjustment from robust overlaps; not a phase correction or recovered albedo."
+  },
+  "independentCheck": {
+    "gains": [
+      1,
+      0.9131864699042181,
+      0.9381099454282742,
+      0.9708079727540134,
+      1.1504277783540817,
+      1.030379622092807,
+      1.0555671064424599,
+      1.0395082752461633
+    ],
+    "pairs": [
+      {
+        "a": 0,
+        "b": 1,
+        "samples": 227,
+        "medianLogRatio": 0.03383528618030779,
+        "logMad": 0.11311783330323079,
+        "accepted": true,
+        "residualLogRatio": 0.12465046675298777
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "samples": 10,
+        "medianLogRatio": 0.03786220477575222,
+        "logMad": 0.20758162972510516,
+        "accepted": false
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "samples": 288,
+        "medianLogRatio": -0.09288015014790442,
+        "logMad": 0.09076322458566301,
+        "accepted": true,
+        "residualLogRatio": -0.06325355754527921
+      },
+      {
+        "a": 0,
+        "b": 4,
+        "samples": 426,
+        "medianLogRatio": 0.08088038903297463,
+        "logMad": 0.214239228502211,
+        "accepted": true,
+        "residualLogRatio": -0.0592534653518005
+      },
+      {
+        "a": 0,
+        "b": 5,
+        "samples": 2,
+        "medianLogRatio": 1.0141283715858294,
+        "logMad": 6.541522320035334,
+        "accepted": false
+      },
+      {
+        "a": 0,
+        "b": 6,
+        "samples": 248,
+        "medianLogRatio": 0.04478835775802508,
+        "logMad": 0.26110448415355475,
+        "accepted": false
+      },
+      {
+        "a": 0,
+        "b": 7,
+        "samples": 519,
+        "medianLogRatio": 0.0983581937314446,
+        "logMad": 0.2371821670996579,
+        "accepted": true,
+        "residualLogRatio": 0.05961040465243106
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "samples": 1255,
+        "medianLogRatio": 0.04765265015776222,
+        "logMad": 0.09681099552714487,
+        "accepted": true,
+        "residualLogRatio": 0.020725593819755465
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "samples": 28,
+        "medianLogRatio": 0.23006513128576755,
+        "logMad": 0.22668731786864693,
+        "accepted": false
+      },
+      {
+        "a": 1,
+        "b": 4,
+        "samples": 21,
+        "medianLogRatio": -0.3466680926240806,
+        "logMad": 2.545401071854559,
+        "accepted": false
+      },
+      {
+        "a": 1,
+        "b": 5,
+        "samples": 1,
+        "medianLogRatio": -1.0210677507717878,
+        "logMad": 0,
+        "accepted": false
+      },
+      {
+        "a": 1,
+        "b": 6,
+        "samples": 3,
+        "medianLogRatio": -5.014439788151187,
+        "logMad": 0.3513727742431705,
+        "accepted": false
+      },
+      {
+        "a": 1,
+        "b": 7,
+        "samples": 22,
+        "medianLogRatio": 0.3719473770111822,
+        "logMad": 0.6282853641318131,
+        "accepted": false
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "samples": 1511,
+        "medianLogRatio": 0.05505864660787691,
+        "logMad": 0.09697789234068044,
+        "accepted": true,
+        "residualLogRatio": 0.020797114975828892
+      },
+      {
+        "a": 2,
+        "b": 4,
+        "samples": 0,
+        "medianLogRatio": null,
+        "logMad": null,
+        "accepted": false
+      },
+      {
+        "a": 2,
+        "b": 5,
+        "samples": 1,
+        "medianLogRatio": 4.924123613670824,
+        "logMad": 0,
+        "accepted": false
+      },
+      {
+        "a": 2,
+        "b": 6,
+        "samples": 0,
+        "medianLogRatio": null,
+        "logMad": null,
+        "accepted": false
+      },
+      {
+        "a": 2,
+        "b": 7,
+        "samples": 0,
+        "medianLogRatio": null,
+        "logMad": null,
+        "accepted": false
+      },
+      {
+        "a": 3,
+        "b": 4,
+        "samples": 0,
+        "medianLogRatio": null,
+        "logMad": null,
+        "accepted": false
+      },
+      {
+        "a": 3,
+        "b": 5,
+        "samples": 1,
+        "medianLogRatio": 0.5773201680713766,
+        "logMad": 0,
+        "accepted": false
+      },
+      {
+        "a": 3,
+        "b": 6,
+        "samples": 1,
+        "medianLogRatio": 0.12836450154970383,
+        "logMad": 0,
+        "accepted": false
+      },
+      {
+        "a": 3,
+        "b": 7,
+        "samples": 0,
+        "medianLogRatio": null,
+        "logMad": null,
+        "accepted": false
+      },
+      {
+        "a": 4,
+        "b": 5,
+        "samples": 409,
+        "medianLogRatio": -0.10543090296425493,
+        "logMad": 0.12090106140947207,
+        "accepted": true,
+        "residualLogRatio": 0.004775651943774838
+      },
+      {
+        "a": 4,
+        "b": 6,
+        "samples": 968,
+        "medianLogRatio": -0.08827334566888223,
+        "logMad": 0.17787129071343613,
+        "accepted": true,
+        "residualLogRatio": -0.0022176554399975235
+      },
+      {
+        "a": 4,
+        "b": 7,
+        "samples": 550,
+        "medianLogRatio": -0.12563292941581622,
+        "logMad": 0.14716832244651032,
+        "accepted": true,
+        "residualLogRatio": -0.024246864110054625
+      },
+      {
+        "a": 5,
+        "b": 6,
+        "samples": 1294,
+        "medianLogRatio": 0.025760682364420816,
+        "logMad": 0.1097590837768727,
+        "accepted": true,
+        "residualLogRatio": 0.0016098176852757523
+      },
+      {
+        "a": 5,
+        "b": 7,
+        "samples": 40,
+        "medianLogRatio": -0.06457745380541034,
+        "logMad": 0.16370452062748053,
+        "accepted": false
+      },
+      {
+        "a": 6,
+        "b": 7,
+        "samples": 738,
+        "medianLogRatio": -0.01126727391025307,
+        "logMad": 0.21351208876873806,
+        "accepted": true,
+        "residualLogRatio": 0.004063101166623818
+      }
+    ],
+    "referenceIndex": 0,
+    "interpretation": "Bounded relative display-level adjustment from robust overlaps; not a phase correction or recovered albedo."
+  },
+  "relativeGainChanges": [
+    0.0,
+    0.005966681791307771,
+    0.0046323378892259015,
+    0.0012421461039182624,
+    -0.005609054092568289,
+    -0.007801542734232836,
+    -0.0032284006610188154,
+    0.002819282184644667
+  ],
+  "maximumRelativeGainChange": 0.007801542734232836
+}

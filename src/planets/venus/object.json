@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "daba6875a74f564a5925c6d936f595855d5a3597de8c1cdb67c738602de46b4b"
+    "sha256": "e972478c1f0b5882d0deb5d330957f3a12684f74a7acb27d44a30cdfcadb8409"
   },
   "id": "venus",
   "properties": {
@@ -99,7 +99,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "a3403106cdd08b0e4d2fb249d7ff2f8deba8513347b3caf957776e95022fe65e"
+          "sha256": "e7823986cd2e74825b769fc5e22147b61a4e7f2aa132ead6dce9c36043176c42"
         },
         {
           "id": "navigation",
@@ -145,6 +145,15 @@
       "atmosphere": {
         "source": "raster",
         "material": "lighting"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "bb2513b7bb2d5f180d9278095c874d92157463e78f0e9bc22bde334cc37b16db"
       }
     }
   },

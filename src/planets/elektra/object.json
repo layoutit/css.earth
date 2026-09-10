@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 432.60869565217394,
       "bodyRadiusM": 99500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/elektra-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f0521202323a1737253a69cd9262cbcf56dfc13e37d9621fa6972daa85552049"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3689c95271af538dafbe0ab65bf3cd1f67a313aaa2dd500bc540a179b1453839"
+    "sha256": "a02ac3a281b54315033fc2aa58efadd8e972e12d24867f52c7cd28e8a95aa597"
   }
 }

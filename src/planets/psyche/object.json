@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 484.7826086956522,
       "bodyRadiusM": 111500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/psyche-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "cb33717a00186c0dfa7ec9e80f3f3c84180fc6a31d31d6b3dc6c93857838fd9a"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c3537d0dd74333af8ba52b14368e88b010480eadcabba251583547946fe6faba"
+    "sha256": "6ae12ac578d52a6b2adafa21421cb9b386ff52a6c52a06c151d51a15a785c123"
   }
 }

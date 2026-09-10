@@ -11,7 +11,7 @@ The July source JPEG is unchanged. The adjustment is applied before cloud compos
 Validation on the integrated branch:
 
 - Packages, renderer, and preparation build successfully; renderer and preparation typechecks pass.
-- 68 of 69 focused Earth, caption, and router tests pass. The ownership audit fails on five Node built-in imports in `site/prepare-body-overview.mjs` and `tools/objects/content/spectrum-data.mjs`. The exact same five errors reproduce on an isolated, unchanged main at `83f1b66bb`. This PR does not change those owners.
+- 68 of 69 focused Earth, caption, and router tests pass. The ownership audit fails on five Node built-in imports in `site/prepare-body-overview.mts` and `tools/objects/content/spectrum-data.mts`. The exact same five errors reproduce on an isolated, unchanged main at `83f1b66bb`. This PR does not change those owners.
 - The new July JPEG restores through its authored acquisition operation into an empty directory and matches its 21,125,326-byte SHA256 pin.
 - All 179 published Earth runtime assets (43,612,473 bytes total install size) download into an initially empty directory and pass size and SHA256 checks. Connection resets required retries within that directory; reused files came only from earlier verified downloads in this attempt. This is total installed asset size, not initial page transfer.
 - The prepared object transport reproduces its descriptor hash. No automatic-switch or duplicate cloud-overlay implementation is included in the final diff.

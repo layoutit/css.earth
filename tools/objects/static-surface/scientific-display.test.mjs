@@ -114,3 +114,25 @@ test('categorical static-map legend contains discrete units without requiring a 
   for(const color of rgbSet(await sharp(join(publicDirectory,'numeric.webp')).raw().toBuffer(),3))
     assert.ok(allowed.has(color),`Unexpected interpolated category: ${color}`);
 });
+
+test('denser selected material keeps other lenses and pole atlas sizing unchanged',async()=>{
+  const f=await fixture(),before=join(f.root,'before-scale'),after=join(f.root,'after-scale');
+  await prepareObservationLenses({...f,publicDirectory:before});
+  const numeric={...f.numeric,rasterScale:2};
+  await prepareObservationLenses({...f,publicDirectory:after,config:{...f.config,lenses:[numeric,f.crust]}});
+  for(const name of (await readdir(before)).filter(name=>name.startsWith('crust')||name.startsWith('curvature')))
+    assert.deepEqual(await readFile(join(before,name)),await readFile(join(after,name)),name);
+  for(const density of [1,2]){
+    const suffix=density===2?'@2x':'';
+    const surface=await sharp(join(after,`numeric${suffix}.webp`)).raw().toBuffer({resolveWithObject:true});
+    const raster=await observationRaster({input:join(f.sourceDirectory,'grid.img'),plan:numeric,width:64*density,height:32*density});
+    assert.deepEqual([surface.info.width,surface.info.height],[64*density,32*density]);
+    for(let y=0;y<surface.info.height;y++){
+      const width=surface.info.width,bandHeight=surface.info.height/4,sy=Math.floor(y/bandHeight)*bandHeight+bandHeight-1-y%bandHeight;
+      assert.deepEqual(surface.data.subarray(y*width*3,(y+1)*width*3),raster.data.subarray(sy*width*3,(sy+1)*width*3));
+    }
+    const pole=await sharp(join(after,`numeric-poles${suffix}.webp`)).metadata();
+    assert.deepEqual([pole.width,pole.height],[64*density,16*density]);
+  }
+  for(const rasterScale of [0,-1,1.5])await assert.rejects(prepareObservationLenses({...f,publicDirectory:after,config:{...f.config,lenses:[{...numeric,rasterScale}]}}),/Lens raster scale/);
+});

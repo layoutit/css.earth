@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 306.5217391304348,
       "bodyRadiusM": 70500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/lamberta-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "d6fba2e876c93acaab902c76cf134ecfff279fc840a6fda1a1d9a87239b4c114"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1acde4024d1cff42cda9f67a51c719ae9bb6ea73a4d801d25540f1ff2e861dc6"
+    "sha256": "0707f84c98e60519d49dda9e4df48307a402c09b66f161e3d0db4e9a29fc0223"
   }
 }

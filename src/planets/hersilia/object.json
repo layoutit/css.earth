@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 204.19565217391303,
       "bodyRadiusM": 46965
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hersilia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b13e448b6ed1b4b3e3a22bad42947893649f58cbdbc673523ae6c0cb63a37093"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "16678fa4f82bf087c56272ab790ae66e111644034ba5f02fc5bc6cfc99e2c461"
+    "sha256": "a68fe00c580b8ff7d6540a634c506650ca637df6303b4fbed15d0a43a17f049c"
   }
 }

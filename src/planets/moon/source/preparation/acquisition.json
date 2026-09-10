@@ -97,6 +97,54 @@
       "groups": [
         "mapped-science"
       ]
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "diviner-ghrm"
+      ],
+      "path": "science/diviner-ghrm/dghrm_tbol_m_70s70n_img.img",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_m_70s70n_img.img"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "diviner-ghrm"
+      ],
+      "path": "science/diviner-ghrm/dghrm_tbol_m_70s70n_img.xml",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_m_70s70n_img.xml"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "diviner-ghrm"
+      ],
+      "path": "science/diviner-ghrm/dghrm_tbol_anom_70s70n_img.img",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.img"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "diviner-ghrm"
+      ],
+      "path": "science/diviner-ghrm/dghrm_tbol_anom_70s70n_img.xml",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.xml"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "diviner-ghrm"
+      ],
+      "path": "science/diviner-ghrm/dghrm_ra_sam_70s70n_img.img",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_ra_sam_70s70n_img.img"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "diviner-ghrm"
+      ],
+      "path": "science/diviner-ghrm/dghrm_ra_sam_70s70n_img.xml",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_ra_sam_70s70n_img.xml"
     }
   ]
 }

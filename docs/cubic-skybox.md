@@ -902,10 +902,10 @@ reading path:
 
 | File | Responsibility |
 | --- | --- |
-| `src/platform/cubic-sky-contract.mjs` | Schemas, constants, face order, direction projection, Sun direction, plan validation |
-| `src/platform/cubic-sky-preparation.mjs` | Standard presentation pixels and prepared Sun compositing |
-| `src/platform/prepare-cubic-sky-source.mjs` | Source validation, photographic reprojection, asset generation, hashes, prepared module output |
-| `src/platform/cubic-sky-runtime.mjs` | Retained mount, orientation matrices, zoom response, orbit publication, lifecycle |
+| `src/platform/cubic-sky-contract.mts` | Schemas, constants, face order, direction projection, Sun direction, plan validation |
+| `src/platform/cubic-sky-preparation.mts` | Standard presentation pixels and prepared Sun compositing |
+| `src/platform/prepare-cubic-sky-source.mts` | Source validation, photographic reprojection, asset generation, hashes, prepared module output |
+| `src/platform/cubic-sky-runtime.mts` | Retained mount, orientation matrices, zoom response, orbit publication, lifecycle |
 | `site/planet-shell.css` | Shared cube geometry, perspective, face transforms, contrast switch |
 | `site/runtime-policy.mjs` | Mount-time DPR choice and shared responsive input policy |
 | `src/planets/<id>/tools/prepare-starfield.mjs` | Object entry point into shared sky preparation |

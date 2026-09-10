@@ -7,9 +7,9 @@
     "sha256": "5f80577a41ba262184debc76d95a1953a14dfd76ed2b17b7cbf67c67df4e476c"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -327,7 +327,7 @@
       "sha256": "32071aa3e5dc9787edcf17b8f37bd65962df8357a75bcb76b2ea0cb2bbb74f7c",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "c9ab3237218bf662af60707cd721db6d83423485855a52c06a2ee8615e37251e",
       "bytes": 8487,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/hermione/hermione-elevation-thumbnail.webp",
           "bytes": 4860,
           "sha256": "3c05dfd2e4360c27dc8ac9d15eacfffd08ef6d8f1a1e78669bc32dc6fa7fb31e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hermione/hermione-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hermione/hermione-elevation-surface@2x.webp",
           "bytes": 265422,
           "sha256": "afa12b4dba9c9ed384ddd705ac4b26ccd14bb4fe59e8c4565f0903eb3ef33cc0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/hermione/hermione-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hermione/hermione-shape-surface@2x.webp",
           "bytes": 196418,
           "sha256": "4b31d6cdb3bae5c18774f4223ac8c985deed297c36a27ad566025725e310f34d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

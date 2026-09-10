@@ -103,11 +103,20 @@
       ],
       "metersPerUnit": 92.8743568552434,
       "bodyRadiusM": 21361.10207670598
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ophelia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "6020cf148ba097d35446455563cc377124eb8c5c42d5f177e8c13a4575ec0211"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "709c10080ce9375275ad0017ef3d91ebf84411f3117b174092ebed3b11457d42"
+    "sha256": "8b08e01649a725ba4661df9c40e2433db2dcbd14787aed082b702760460a1906"
   }
 }

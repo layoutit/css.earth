@@ -166,6 +166,182 @@
             "color": "#649c76"
           }
         ]
+      },
+      {
+        "id": "spectral-slope",
+        "label": "Spectral slope",
+        "minimum": 4.4,
+        "maximum": 6.6,
+        "colors": [
+          "#352b69",
+          "#855ba1",
+          "#d896b5",
+          "#fae1ac"
+        ],
+        "labels": [
+          "4.4",
+          "5.5",
+          "6.6"
+        ],
+        "units": "µm⁻¹ · normalized at 495 nm",
+        "title": "Sulfur-sensitive visible spectral slope",
+        "description": "A measured visible spectral slope sensitive to sulfur materials.",
+        "format": "geotiff",
+        "path": "muse/io/485nm_slope-night-1.tif",
+        "consumer": "spectral-slope",
+        "sourceUrl": "https://doi.org/10.5281/zenodo.11402374",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "textureScale": 0.125,
+        "grid": {
+          "width": 180,
+          "height": 90,
+          "centerLongitude": -1,
+          "referenceRadiusMeters": 1821490,
+          "origin": [
+            -5722379.602587272,
+            2829398.8035014844
+          ],
+          "resolution": [
+            63581.995584303026,
+            -63581.995584303026
+          ],
+          "wrapLongitude": true,
+          "noData": -9999
+        },
+        "additionalGrids": [
+          {
+            "path": "muse/io/485nm_slope-night-2.tif",
+            "grid": {
+              "width": 180,
+              "height": 90,
+              "centerLongitude": -1,
+              "referenceRadiusMeters": 1821490,
+              "origin": [
+                -5722379.602587272,
+                2829398.8035014844
+              ],
+              "resolution": [
+                63581.995584303026,
+                -63581.995584303026
+              ],
+              "wrapLongitude": true,
+              "noData": -9999
+            }
+          },
+          {
+            "path": "muse/io/485nm_slope-night-3.tif",
+            "grid": {
+              "width": 180,
+              "height": 90,
+              "centerLongitude": -1,
+              "referenceRadiusMeters": 1821490,
+              "origin": [
+                -5722379.602587272,
+                2829398.8035014844
+              ],
+              "resolution": [
+                63581.995584303026,
+                -63581.995584303026
+              ],
+              "wrapLongitude": true,
+              "noData": -9999
+            }
+          }
+        ],
+        "focus": {
+          "longitudeDegrees": 60,
+          "latitudeDegrees": 0,
+          "zoom": 1.1
+        }
+      },
+      {
+        "id": "visible-absorption",
+        "label": "Visible absorption",
+        "minimum": 0.015,
+        "maximum": 0.06,
+        "colors": [
+          "#30265f",
+          "#7e4b99",
+          "#d58f91",
+          "#f5dc9c"
+        ],
+        "labels": [
+          "0.015",
+          "0.0375",
+          "0.060"
+        ],
+        "units": "mean 520–660 nm band depth (fraction)",
+        "title": "Continuum-relative visible absorption",
+        "description": "A broad visible absorption feature, with uncertain chemical attribution.",
+        "format": "geotiff",
+        "path": "muse/io/560nm_band-night-1.tif",
+        "consumer": "visible-absorption",
+        "sourceUrl": "https://doi.org/10.5281/zenodo.11402374",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "textureScale": 0.125,
+        "grid": {
+          "width": 180,
+          "height": 90,
+          "centerLongitude": -1,
+          "referenceRadiusMeters": 1821490,
+          "origin": [
+            -5722379.602587272,
+            2829398.8035014844
+          ],
+          "resolution": [
+            63581.995584303026,
+            -63581.995584303026
+          ],
+          "wrapLongitude": true,
+          "noData": -9999
+        },
+        "additionalGrids": [
+          {
+            "path": "muse/io/560nm_band-night-2.tif",
+            "grid": {
+              "width": 180,
+              "height": 90,
+              "centerLongitude": -1,
+              "referenceRadiusMeters": 1821490,
+              "origin": [
+                -5722379.602587272,
+                2829398.8035014844
+              ],
+              "resolution": [
+                63581.995584303026,
+                -63581.995584303026
+              ],
+              "wrapLongitude": true,
+              "noData": -9999
+            }
+          },
+          {
+            "path": "muse/io/560nm_band-night-3.tif",
+            "grid": {
+              "width": 180,
+              "height": 90,
+              "centerLongitude": -1,
+              "referenceRadiusMeters": 1821490,
+              "origin": [
+                -5722379.602587272,
+                2829398.8035014844
+              ],
+              "resolution": [
+                63581.995584303026,
+                -63581.995584303026
+              ],
+              "wrapLongitude": true,
+              "noData": -9999
+            }
+          }
+        ],
+        "focus": {
+          "longitudeDegrees": 60,
+          "latitudeDegrees": 0,
+          "zoom": 1.1
+        }
       }
     ],
     "observedColors": [],

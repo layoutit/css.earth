@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 226.08695652173913,
       "bodyRadiusM": 52000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/adelheid-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "38ec4e7f8becb1ff74bf388063f0f366cfd80f31144230cb93992e450f6f0f83"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f8f94dee062d10af2d710de3016d9396d1b25b61bee01cefbe384bf6bfb813ac"
+    "sha256": "6b057818b3d46f8bb594b75cd543308d2be4396139c13a476275c9eef57a8031"
   }
 }

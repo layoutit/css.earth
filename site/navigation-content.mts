@@ -3,7 +3,7 @@ import { requiredElement } from './browser-types.mts';
 import type { ObjectEntry } from './object-schema.mts';
 type StyleNode = HTMLStyleElement | HTMLLinkElement;
 interface IncomingStyle { element: StyleNode; media?: string | null; }
-/** Reuse the route's Astro output; this transport does not render a second shell. */
+/** Load the static navigation fragment without a second resident card bank. */
 export function createNavigationContent({ documentTarget, windowTarget, fetchPage = windowTarget.fetch.bind(windowTarget) }: { documentTarget: Document; windowTarget: BrowserWindow; fetchPage?: typeof fetch }) {
   let styles = [...documentTarget.head.querySelectorAll<StyleNode>('style, link[rel="stylesheet"]')];
   const key = (element: StyleNode) => element instanceof windowTarget.HTMLLinkElement ? `link:${element.href}`
@@ -11,7 +11,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fetchPag
 
   return Object.freeze({
     async load(object: ObjectEntry, { signal }: { signal: AbortSignal }) {
-      const response = await fetchPage(object.route, { signal });
+      const response = await fetchPage(`/navigation/${object.id}/`, { signal });
       if (!response.ok) throw new Error(`Object content request failed: ${response.status}.`);
       const source = new windowTarget.DOMParser().parseFromString(await response.text(), 'text/html');
       if (signal.aborted) throw signal.reason;

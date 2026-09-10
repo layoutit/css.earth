@@ -1,0 +1,21 @@
+{
+  "base": "bd265cf3a091c4ef17e9be76dfeb23410364884f",
+  "added": [
+    "chariklo",
+    "bienor"
+  ],
+  "atlases": [
+    {
+      "filename": "planet-markers.webp",
+      "baseSha256": "a5e47c7225809f5441fa9099334a4844faa5f83edfa100f2b6b68fb0afe5d0c2",
+      "outputSha256": "0285b6e330b0349a6984f76da671f53e80e1555176b5a14a16bf759374a6a4ba",
+      "preservedMarkers": 408
+    },
+    {
+      "filename": "planet-markers@2x.webp",
+      "baseSha256": "2353f3567417cfae1444ed94a460b7f0bfa6ca55be0c5ea78544d21aa25e09cd",
+      "outputSha256": "b8a4026356683edc58deb447e63655943b9fb706ac3f3137e3ff58338af64da6",
+      "preservedMarkers": 408
+    }
+  ]
+}

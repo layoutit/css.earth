@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 432.60869565217394,
       "bodyRadiusM": 99500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/iris-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b09f7728156d6c9009a61a6b57e9df6fc4cd28b759fc23e98cbc3cb8fe280b0f"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4cb14e9acf6dfe4730723002e397be96af5400d9e1662a87c73b3f5b2fbb06e5"
+    "sha256": "729a6a888dded1981c0203a1541b43e12222a841ff795fb06de0901eb5680b3e"
   }
 }

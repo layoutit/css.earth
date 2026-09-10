@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 255.04347826086956,
       "bodyRadiusM": 58660
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/semele-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "6f9ce289d5bd94f3cfa56e907ba5ea1481e6e2bca4106c737b95366e18b7d89f"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3673e99e53b62a53be78f849b03b3fe3530b604339ab33141bdbfacd99c74bc0"
+    "sha256": "3985ef48b3afb72ef53e0e77b621fd6521daebc4295d99746616a1b17787194f"
   }
 }

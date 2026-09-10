@@ -43,6 +43,40 @@ function rowPlan(definition,trackId='lighting'){
  const selected=[frame.resource,...frame.prewarm];
  return{rows:bank.rows.map(row=>({url:assetUrl(definition,row.resource)})),transport:{maximumRetainedRowCount:pool.capacity,defaultRow:frame.row,initialWarmRows:selected.map(key=>bank.rows.find(row=>row.resource===key).row)}};
 }
+
+test('capacity caches reuse completed datasets but cancel abandoned decodes immediately', async () => {
+  const { manager, jobs, commit, complete } = harness(catalog(['/a.webp', '/b.webp', '/c.webp'],
+    { capacity: 3, concurrency: 1, eviction: 'capacity' }));
+  await commit(['0']);
+  const abandoned = manager.request({ required: ['1'] });
+  assert.equal(jobs.length, 2);
+  const next = manager.request({ required: ['2'] });
+  assert.equal(await abandoned.ready, null);
+  assert.equal(jobs.length, 3, 'Latest selection starts without waiting for abandoned native work');
+  assert.notEqual(jobs[1].image.src, '/b.webp');
+  await complete(); await next.ready; manager.commit(next);
+  const count = jobs.length;
+  await commit(['0']);
+  assert.equal(jobs.length, count, 'Completed dataset is reused without decoding');
+  manager.destroy();
+});
+test('decoded byte budget evicts completed pages before admitting an atomic replacement', async () => {
+  const assets = catalog(['/coarse.webp', '/fine.webp', '/other.webp'], { capacity: 8, eviction: 'capacity' });
+  assets.pools[0].maximumDecodedBytes = 8;
+  assets.entries.forEach(entry => { entry.decodedBytes = 4; });
+  const { manager, commit, jobs } = harness(assets);
+  await commit(['0']); await commit(['1']);
+  assert.equal(manager.stats().pools[0].decodedBytes, 8);
+  const count = jobs.length;
+  await commit(['0']);
+  assert.equal(jobs.length, count, 'A visited level stays cached');
+  await commit(['2']);
+  assert.equal(manager.resources.has('1'), false, 'Evict unused fine page, even with free count slots');
+  assert.equal(manager.resources.has('0'), true, 'Previous visible page survives replacement');
+  assert.equal(manager.stats().pools[0].decodedBytes, 8);
+  assert.throws(() => manager.request({ required: ['0', '1', '2'] }), /capacity/);
+  manager.destroy();
+});
 const rowPlans={mercury:rowPlan(definitions.mercury),mars:rowPlan(definitions.mars),jupiter:rowPlan(definitions.jupiter),earthLighting:rowPlan(definitions.earth),earthAtmosphere:rowPlan(definitions.earth,'atmosphere')};
 for (const [name, plan] of Object.entries(rowPlans)) test(`${name} prepared row policy preserves its bound and protected published row`, async () => {
   const { maximumRetainedRowCount: capacity, initialWarmRows } = plan.transport;

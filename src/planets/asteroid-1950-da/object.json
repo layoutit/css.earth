@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 2.8260869565217392,
       "bodyRadiusM": 650
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/asteroid-1950-da-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "eb9921c9f9ed2aecfcdc695030568f7f5b20a6eb49b9dc3a105303e046769473"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0d6b39166ebe6ded59e9c81d9f0e0e253f5560edf09f9ccf2fb625c64b2355d9"
+    "sha256": "5460f2a16bf2089e00f1b82b725139f27b675a7c78b092a78777ff1c2472d003"
   }
 }

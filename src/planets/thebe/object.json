@@ -103,11 +103,20 @@
       ],
       "metersPerUnit": 214.34782608695653,
       "bodyRadiusM": 49300
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/thebe-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e8c41d642eb24410ce580340c5500716a20fd16fdb68798d1baa83650d95e276"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e3a5ed6badc14930812aec1767e0a072ec640b1648e09824b1d3e0efaf4fd46f"
+    "sha256": "618e5d1460688b0f87b6525dd66472ce0210136cefbb296619bac0b8e231f7a2"
   }
 }

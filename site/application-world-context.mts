@@ -3,7 +3,7 @@ import type { PreparedAssets } from '../src/renderers/css/rendering/prepared-res
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { mountSpaceMinimap } from './minimap/minimap.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
-import { createPreparedUniverse, prepareObjectResources, loadPreparedCssVolume, loadPreparedCssPointField, loadPreparedCssSurfaceShell } from '../src/renderers/css/dist/universe.js';
+import { createPreparedUniverse, createWorldFrameQueue, prepareObjectResources, loadPreparedCssVolume, loadPreparedCssPointField, loadPreparedCssSurfaceShell } from '../src/renderers/css/dist/universe.js';
 import applicationContext from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 import { contextMarkerSprite } from '../src/navigation/marker-presentation.mts';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
@@ -12,7 +12,7 @@ import { OBJECTS } from './objects.mts';
 import { CONTEXT_ANNOTATION_PRIORITY } from './runtime-policy.mts';
 
 const asteroidIds = OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
-const cometIds = OBJECTS.filter(object => object.classification === 'comet').map(object => object.id);
+const hiddenOrbitIds = OBJECTS.filter(object => ['comet', 'trans-neptunian'].includes(object.classification)).map(object => object.id);
 const annotationPriorities = Object.fromEntries(OBJECTS.map(object =>
   [object.id, (CONTEXT_ANNOTATION_PRIORITY as Readonly<Partial<Record<typeof object.classification, number>>>)[object.classification] ?? 0]));
 
@@ -75,33 +75,68 @@ export function createApplicationWorldContext() {
       const prepared = await loadApplicationUniverse();
       if (signal?.aborted) throw signal.reason;
       const resources = prepareObjectResources(prepared.assets, { signal });
+      let pendingLayer: ReturnType<typeof prepared.mount> | null = null;
+      let pendingPlanner: ReturnType<typeof prepared.createFramePlanner> | null = null;
       try {
         await resources.ready;
         if (signal?.aborted) throw signal.reason;
-        const layer = prepared.mount(stage);
-        layer.setHiddenOrbits(cometIds);
+        let refreshWorld = () => false;
+        const layer = prepared.mount(stage, () => refreshWorld());
+        pendingLayer = layer;
+        layer.setHiddenOrbits(hiddenOrbitIds);
+        const framePlanner = prepared.createFramePlanner();
+        pendingPlanner = framePlanner;
         const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector<HTMLElement>('.planet-sidebar'));
         const minimap = mountSpaceMinimap(stage.ownerDocument);
-        const diagnostics = DIAGNOSTICS_ENABLED ? Object.freeze({ inspect: layer.inspect }) : null;
-        if (diagnostics) Reflect.set(target, '__cssEarthUniverse', diagnostics);
-        let heliosphereEnabled = false, destroyed = false; let publication: { world: WorldCameraPose; viewport: WorldCameraViewport } | null = null;
+        let heliosphereEnabled = false, destroyed = false;
+        let publication: { world: WorldCameraPose; viewport: WorldCameraViewport } | null = null;
+        let stagedFrame: {world: WorldCameraPose; viewport: WorldCameraViewport; frame: Awaited<ReturnType<typeof framePlanner.plan>>; snapshot: ReturnType<typeof layer.captureFrame>; consumed: boolean} | null = null;
         const publish = (world: WorldCameraPose, viewport: WorldCameraViewport) => {
           if (destroyed) return;
           publication = { world, viewport };
-          layer.publish(world, viewport, { heliosphere: heliosphereEnabled });
+          const staged = stagedFrame?.world === world && stagedFrame.viewport === viewport ? stagedFrame : null;
+          const frame = staged && !staged.consumed && staged.snapshot.current() ? staged.frame : undefined;
+          if (staged) staged.consumed = true;
+          layer.publish(world, viewport, { heliosphere: heliosphereEnabled }, frame);
           minimap.publish(world, viewport);
         };
+        const frameQueue = createWorldFrameQueue(async request => {
+          const snapshot = layer.captureFrame(request.world, request.viewport);
+          const frame = await framePlanner.plan(snapshot.view);
+          return { current: snapshot.current, commit(camera) {
+            const staged = { world: request.world, viewport: request.viewport, frame, snapshot, consumed: false };
+            stagedFrame = staged;
+            try {
+              camera();
+              // Connected cameras publish through the navigation hub. Initial
+              // owners can commit before that subscription has been attached.
+              if (request.current() && !staged.consumed) publish(request.world, request.viewport);
+            } finally { stagedFrame = null; }
+          } };
+        });
+        refreshWorld = () => frameQueue.refresh();
+        const diagnostics = DIAGNOSTICS_ENABLED ? Object.freeze({ inspect: layer.inspect, frames: frameQueue.stats }) : null;
+        if (diagnostics) Reflect.set(target, '__cssEarthUniverse', diagnostics);
         return { ...layer, viewport, publish,
+          createFramePresenter() {
+            let enabled = false, disposed = false;
+            return { enable() { enabled = true; }, destroy() { disposed = true; },
+              present(request: Parameters<typeof frameQueue.present>[0]) {
+                if (disposed || destroyed || !request.current()) return;
+                const owned = { ...request, current: () => !disposed && !destroyed && request.current() };
+                if (!enabled) { frameQueue.remember(owned); request.commit(); return; }
+                frameQueue.present(owned);
+              } };
+          },
           previewSelection(id?: string | null) {
             layer.previewSelection(id);
-            if (publication) publish(publication.world, publication.viewport);
           },
           selectObject(id: string, frame: PreparedWorldCameraFrame) {
             layer.selectObject(id, frame);
             minimap.selectObject(frame);
           },
           setAsteroidOrbitsEnabled(enabled: boolean) {
-            if (!destroyed) layer.setHiddenOrbits(enabled === true ? cometIds : [...cometIds, ...asteroidIds]);
+            if (!destroyed) layer.setHiddenOrbits(enabled === true ? hiddenOrbitIds : [...hiddenOrbitIds, ...asteroidIds]);
           },
           setAsteroidLabelsEnabled(enabled: boolean) {
             if (!destroyed) layer.setHiddenLabels(enabled === true ? [] : asteroidIds);
@@ -109,16 +144,17 @@ export function createApplicationWorldContext() {
           setHeliosphereEnabled(enabled: boolean) {
             if (destroyed || heliosphereEnabled === (enabled === true)) return;
             heliosphereEnabled = enabled === true;
-            if (publication) publish(publication.world, publication.viewport);
+            if (publication && !refreshWorld()) publish(publication.world, publication.viewport);
           },
           destroy() {
             destroyed = true; publication = null;
+            frameQueue.destroy(); framePlanner.destroy(); stagedFrame = null;
             if (diagnostics && Reflect.get(target, '__cssEarthUniverse') === diagnostics) Reflect.deleteProperty(target, '__cssEarthUniverse');
             minimap.destroy();
             viewport.destroy(); layer.destroy(); resources.destroy();
           },
         };
-      } catch (error) { resources.destroy(); throw error; }
+      } catch (error) { pendingPlanner?.destroy(); pendingLayer?.destroy(); resources.destroy(); throw error; }
     },
   };
 }

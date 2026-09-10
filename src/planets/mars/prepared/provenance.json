@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "79da3274e1121faec253e3c7dd37e6686f53de561aa5561a3717c60bcf0032a8"
+    "sha256": "5c8d96dfe69d773de8d51bea9e9562def1301bead241471c458a09d1299296aa"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -635,7 +635,7 @@
       "sha256": "fdfcd335559c3dc67052b7e8a9565d850e336ac0d1f3ea7f5eb7826ffb44ecb2",
       "bytes": 36708552,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -666,7 +666,7 @@
       "sha256": "25a0b3ade0d01fc28bb04e452ed8780f023d9ac76092d60d47be81b7f6af9e2d",
       "bytes": 18716720,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "tile-mosaic",
         "groups": [
@@ -699,7 +699,7 @@
       "sha256": "a21e86fe560a46396cea1568b44a757be8b258b9ef40277b5261ef11c380d768",
       "bytes": 622,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -716,7 +716,7 @@
       "sha256": "672ce4a68c97c9d005f3721aad971b8e0b2bdb24eca1d6d863e14ed08bf41acb",
       "bytes": 918,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -740,7 +740,7 @@
       "sha256": "e31b41a6e44547f882b86ca1c8c12efe80a1c4b320d06a7aee41304eb74387d1",
       "bytes": 7267744,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "tile-mosaic",
         "groups": [
@@ -773,7 +773,7 @@
       "sha256": "8b3b389c493308dd22d6f94001e85706903ca9d4e33bc3934b510ad0b7d42e76",
       "bytes": 13163,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -789,7 +789,7 @@
       "sha256": "da649c1b783a9390697db2f49a25667b518b5c923ddb7ac426037c97c08f8dde",
       "bytes": 11093,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "request-download",
         "groups": [
@@ -822,7 +822,7 @@
       "dependencies": [
         "nasa-psg-mars-configuration"
       ],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "request-download",
         "groups": [
@@ -865,31 +865,31 @@
           "url": "/scenes/mars/mars-lens-normal.webp",
           "bytes": 1468,
           "sha256": "570cefe5ff8b7a0970239c632112ca53043926be6b9e13b40b56dd39e9418b05",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-surface.webp",
           "bytes": 539510,
           "sha256": "86dccb0cb024a6336a9d34b0c34e30280137edfc95a0bb99441d108970bd8a6d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-surface@2x.webp",
           "bytes": 1946518,
           "sha256": "d405ce2aff269634726df4024ac0f3c43826c1350d2a18b71d8d03baf3331fcc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-poles.webp",
           "bytes": 15934,
           "sha256": "4fe45fe781cabdafa707a5f134a661563c7385be3c657e73b9ac2308619c97e1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-poles@2x.webp",
           "bytes": 23740,
           "sha256": "95b778864eaef15cd51c93c9a6929146f16cc4f318ad4224dd6b0e7f991d7f0d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -920,31 +920,31 @@
           "url": "/scenes/mars/mars-lens-elevation-thumbnail.webp",
           "bytes": 2810,
           "sha256": "80b76415381db53aadb5795558e911811f09607fccc4968861b1fe35a15fb4ab",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-lens-elevation.webp",
           "bytes": 1185898,
           "sha256": "6b24df16babf88bd8ac9e40707ad5d8ee9f41bec6dc61a9b54dc2436f06b6de4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-lens-elevation@2x.webp",
           "bytes": 5040992,
           "sha256": "5a217ac3f501cff189b2016a6a5dd0afe615d0171b5defdca880c1b9a1b098db",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-lens-elevation-poles.webp",
           "bytes": 14958,
           "sha256": "6d38f48a53f9b6867cc79662424ba6912711d0252349c064df635d6161eeebf8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-lens-elevation-poles@2x.webp",
           "bytes": 27420,
           "sha256": "3b0b553c409715f852d7df689b4263cdcf6fb895018c700b7a630308294ea9b6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -975,31 +975,31 @@
           "url": "/scenes/mars/mars-lens-thermal-thumbnail.webp",
           "bytes": 418,
           "sha256": "df00772596b8afe26c67e8e65dbf5a15535d9c27e9bb75104c1043eb8f5cee75",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-lens-thermal.webp",
           "bytes": 718016,
           "sha256": "88bc4f75a9f0a6f30624e9dedd24c5b5f9bb79b7cae15de9a064b3d1ddfd680c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-lens-thermal@2x.webp",
           "bytes": 3001650,
           "sha256": "ef8f980f1938c0b6279874c69b5ba1bb74409ab23fa948281a16d733b52d85dd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-lens-thermal-poles.webp",
           "bytes": 10426,
           "sha256": "98f4a1d8c7168db97782c9712f1c170a7a1604215dd844f1393d5a9a61b0e147",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-lens-thermal-poles@2x.webp",
           "bytes": 13724,
           "sha256": "444453a60fcf427fba0d0101cc09420e7c80d783daee41fcb72ce846791593b0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1052,7 +1052,7 @@
           "url": "/scenes/mars/mars-reflectance-spectrum.svg",
           "bytes": 5843,
           "sha256": "6140a667a2b109fbfbb8907bf7e058607e98c464688031d033d9d3187ed35811",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1080,7 +1080,7 @@
           "url": "/scenes/mars/mars-temperature-pressure-profile.svg",
           "bytes": 2423,
           "sha256": "3b4ae81fbfe5f6ffc2ab534b00a869387cad3376e1c3a3fa2a5e56c3204a875d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1107,7 +1107,7 @@
           "url": "/scenes/mars/mars-photometric-phase-curve.svg",
           "bytes": 4492,
           "sha256": "46b2aacc1daa5c632189cce9d04879611096e471c652410ed30a68c8c4538752",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "authored-recipe"

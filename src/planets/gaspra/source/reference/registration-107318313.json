@@ -1,0 +1,36 @@
+{
+  "dogSigmaPixels": [
+    1,
+    10
+  ],
+  "searchRadiusPixels": 24,
+  "minimumCorrelation": 0.7,
+  "maximumResidualPixels": 4,
+  "checkRectangles": [
+    [
+      752,
+      416,
+      768,
+      432
+    ],
+    [
+      720,
+      448,
+      736,
+      464
+    ],
+    [
+      752,
+      480,
+      768,
+      496
+    ],
+    [
+      704,
+      528,
+      720,
+      544
+    ]
+  ],
+  "notes": "Four separated 16-pixel surface patches check the published camera without fitting. The source pixel error limit and five-pixel boundary inset are unchanged; these smaller windows fit the useful detector footprint."
+}

@@ -1,5 +1,9 @@
 # Generic runtime contract proof
 
+Historical tests of the eleven-object version identified below. These results
+do not qualify later versions or the current registry. Current code ownership is
+listed in the [implementation map](../.agents/skills/celestial-skill/references/implementation-map.md).
+
 All eleven existing objects now bind the same prepared runtime. Their packages
 supply literal scene records, material addresses, selection variants and control
 content. One shared implementation builds scenes, publishes materials, resolves

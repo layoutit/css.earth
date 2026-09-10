@@ -103,11 +103,20 @@
       ],
       "metersPerUnit": 10.434782608695652,
       "bodyRadiusM": 2400
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/loge-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e96037ac8c2ecf86345d39f8606c724fa460db900f80497f0b51a67883787df9"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f47991a8336a99072c9acb8645eee4424f8886ebfd33a13831b7c69e5073fe6c"
+    "sha256": "a31be72f5f81556975a1950803b655583cb847bc91598132f5e4a6d467244e9d"
   }
 }

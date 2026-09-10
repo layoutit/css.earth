@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 35.697826086956525,
       "bodyRadiusM": 8210.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/auravictrix-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ba1dbe2f9a1b812d7fbbc8356eae605ef9f59811be2801c2d85811fa831a9dcb"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "510f93e1c0543e31f689676322c28b0108fef733779e19d3a6f09b5d85161b24"
+    "sha256": "9ec4b0662eb3d6d9d31f08c3711dcfe56ed7a3100f6fd3f1cbb90d2d6236d4ec"
   }
 }

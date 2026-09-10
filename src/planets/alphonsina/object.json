@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 126.08695652173913,
       "bodyRadiusM": 29000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/alphonsina-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f30e0a8abcde0be8b53a8002419688989a01fee1d000c590f58c92b09538342a"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "190ecbd4b9d6663a5e9e3d614ed285341f1f8af619bb43ea86b557861316b23b"
+    "sha256": "fd1fc3d5b21dc0b6e317a31243978cefe7fb8e62b001309e70c52d2a3e7ad42c"
   }
 }

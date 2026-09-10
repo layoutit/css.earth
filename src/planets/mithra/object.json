@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 3.6739130434782608,
       "bodyRadiusM": 845
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/mithra-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "265a16530cae5cb9120ff6646cc0d5a5661b9851ad56e922feba27e0e10e9335"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7e58dc572ea91bfa30f981fe95b5b568ba6599194946e1de4abe8e5a6644323b"
+    "sha256": "3ae573eaf9e4d55c0a68f0923442e8d5570425186c7c41d0250c9486ee4e2141"
   }
 }

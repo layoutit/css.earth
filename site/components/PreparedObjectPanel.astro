@@ -3,7 +3,7 @@ import PlanetShell from "./PlanetShell.astro";
 import PlanetInformationPanel from "./PlanetInformationPanel.astro";
 import { validateObjectProvenance } from "../../src/platform/object-provenance.mts";
 import { parsePreparedPanelContent, parsePanelControls } from '../prepared-panel-content.mts';
-interface Props { informationOnly?: boolean; preparedContent: unknown; preparedControls: unknown; }
+interface Props { informationOnly?: boolean; navigation?: boolean; preparedContent: unknown; preparedControls: unknown; }
 const { preparedContent, preparedControls, informationOnly = false } = Astro.props;
 const content = parsePreparedPanelContent(preparedContent);
 const controls = parsePanelControls(preparedControls);
@@ -35,6 +35,7 @@ const lenses = controls.lenses && {
 ---
 
 <Panel
+  navigation={Astro.props.navigation}
   objectId={content.objectId}
   title={content.title}
   introduction={content.introduction}

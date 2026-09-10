@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "749af77f318202cf306df325703f593719a48a997b3ef7fbb43e3ae3d299b78c"
+    "sha256": "6af49cd9f9bdd37b48a9d0610cb74f38cc60facd2dbd0e4c877da1a789ce22ce"
   },
   "id": "itokawa",
   "properties": {
@@ -111,6 +111,15 @@
       ],
       "metersPerUnit": 0.717391304347826,
       "bodyRadiusM": 165
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/itokawa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "a40e401054d08be53d92f8f35c5f3c77cf505af0fe3711877e5e95b703c7f3a8"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 376.0869565217391,
       "bodyRadiusM": 86500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/metis-9-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e206dbd86a467a819ad0529c6e4da3899e2ae623fb744c3a28c6bbee48e4b3f0"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1c123d7e9c258e3887f0b2f5452cd3a799adbba8b9ab1e4460c25d1417be5175"
+    "sha256": "b35b065cfd7128c374dcc8ad4484c35edf921ce4f688aa35ee3be211dead353f"
   }
 }

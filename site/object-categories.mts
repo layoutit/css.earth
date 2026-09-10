@@ -1,6 +1,6 @@
 export const OBJECT_CATEGORIES: readonly (readonly [string, string])[] = [
   ['all', 'All'], ['planet', 'Planets'],
-  ['satellite', 'Moons'], ['comet', 'Comets'], ['asteroid', 'Other'],
+  ['satellite', 'Moons'], ['comet', 'Comets'], ['asteroid', 'Other'], ['trans-neptunian', 'Trans-Neptunian'],
 ];
 
 export function objectCategory(classification: string): string;

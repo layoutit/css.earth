@@ -1,0 +1,216 @@
+{
+  "schema": "cssearth-muse-source-panel-review@1",
+  "scriptSha256": "c517f0fbe005b5195db0c40906efd28dfa820b98caef9d0402c0e8b1daa796f9",
+  "auditedBodies": {
+    "io": {
+      "manifestEntriesVerified": 12,
+      "conversionPinsVerified": 7,
+      "sourceManifestSha256": "8fcf2b685e212acdb95fd16368a8f51817b3f21da16de5aeaef329d8f2c625b6",
+      "contentSha256": "84b59a67cc9970f2728c781d8d7a4254d9ac39f96273a3b8598f46171689ade4",
+      "preparationSha256": "a2ca8a5abc1cbb507b93a10f8898661c5ce400ddacdb8687b083b47565c1152a",
+      "recipeSha256": "a0dce284117c01ed762a05ab1a2f25af626bd9e73733daaddb4f327749073d81",
+      "receiptSha256": "9640accaa31acef0af9cb9008cb914815d86f47db2f219163d2c0c32a7d1a231"
+    },
+    "ganymede": {
+      "manifestEntriesVerified": 6,
+      "conversionPinsVerified": 4,
+      "sourceManifestSha256": "4b1a55dc054828c9d764c093e35aad58d41bdebb166c0a7f49282e7defba0bb5",
+      "contentSha256": "0a453be4ee04370d6d36f3a7dc6f0e0dc0b9a9564f79268fb9c0d285dc50764a",
+      "preparationSha256": "b23900c986d151dd5656d7dbe781c189d9ad25c3fe4398462a72b6746fa821b9",
+      "recipeSha256": "c2dc147d0db95b7284949ce31b664374f652eadab4b9b4b3d48b5b12e5f15968",
+      "receiptSha256": "fa2dd36f754ea0d2c1b39011236daa09d5ca08cd00652c9f7c040dc2d0f9e84a"
+    }
+  },
+  "observables": [
+    {
+      "body": "io",
+      "id": "spectral-slope",
+      "quantity": "477.5\u2013495 nm slope; normalized at 495 nm; unit: \u00b5m^-1",
+      "paletteColors": [
+        "#352b69",
+        "#855ba1",
+        "#d896b5",
+        "#fae1ac"
+      ],
+      "minimum": 4.4,
+      "maximum": 6.6,
+      "focus": {
+        "longitudeDegrees": 60,
+        "latitudeDegrees": 0,
+        "zoom": 1.1
+      },
+      "originals": [
+        {
+          "path": "src/planets/io/source/muse/485nm_slope_io_night_1.fits",
+          "sha256": "fca35e89f83f222978ffbfd40154d91ef03ab85f09a86fb605ae0420de46479d",
+          "bytes": 132480
+        },
+        {
+          "path": "src/planets/io/source/muse/485nm_slope_io_night_2.fits",
+          "sha256": "58ae63f314d44d3f724b9cc7aeeea7475d9f64ea29005e01c4369f88d3893c31",
+          "bytes": 132480
+        },
+        {
+          "path": "src/planets/io/source/muse/485nm_slope_io_night_3.fits",
+          "sha256": "fbed77eb6281eb850ff0bc948da12bcec2861ae7a9b9ae453942ec3b668697ff",
+          "bytes": 132480
+        }
+      ],
+      "finiteOriginalNodes": [
+        3549,
+        3563,
+        3569
+      ],
+      "retainedNodes": [
+        3355,
+        3367,
+        3373
+      ],
+      "fallbackValidNodes": 7711,
+      "fallbackSourceNodes": [
+        3355,
+        1634,
+        2722
+      ],
+      "independentlyDecodedTiffValuesMatchSourceAfterFloat32AndMask": true,
+      "maximumFloat32Errors": [
+        2.3831169482235737e-07,
+        2.3834897966423796e-07,
+        2.383757218282767e-07
+      ],
+      "allFiniteValuesWithinConfiguredRange": true,
+      "panel": "io-spectral-slope-source-panel.png",
+      "panelSha256": "6753adcaad01935bf67146b6c72e664397721deb07d8378cd5831e9014db0ef8",
+      "panelBytes": 101949
+    },
+    {
+      "body": "io",
+      "id": "visible-absorption",
+      "quantity": "Mean continuum-removed 520-660 nm band depth (fraction); 578-605 nm omitted",
+      "paletteColors": [
+        "#30265f",
+        "#7e4b99",
+        "#d58f91",
+        "#f5dc9c"
+      ],
+      "minimum": 0.015,
+      "maximum": 0.06,
+      "focus": {
+        "longitudeDegrees": 60,
+        "latitudeDegrees": 0,
+        "zoom": 1.1
+      },
+      "originals": [
+        {
+          "path": "src/planets/io/source/muse/560nm_band_io_night_1.fits",
+          "sha256": "60126a3558ae1c414ac556d9029107aff209a53cd4bf6ddb8eb46bb76987bf3b",
+          "bytes": 132480
+        },
+        {
+          "path": "src/planets/io/source/muse/560nm_band_io_night_2.fits",
+          "sha256": "576242a7c73658b8767f77eca70b9833f196ad95fef455cdc3002f0cd77bcfcc",
+          "bytes": 132480
+        },
+        {
+          "path": "src/planets/io/source/muse/560nm_band_io_night_3.fits",
+          "sha256": "4e5747a2acb901f389ca962316f1b7250331c8ee7fcf92b040cedfc50e3cb6d5",
+          "bytes": 132480
+        }
+      ],
+      "finiteOriginalNodes": [
+        3549,
+        3563,
+        3569
+      ],
+      "retainedNodes": [
+        3355,
+        3367,
+        3373
+      ],
+      "fallbackValidNodes": 7711,
+      "fallbackSourceNodes": [
+        3355,
+        1634,
+        2722
+      ],
+      "independentlyDecodedTiffValuesMatchSourceAfterFloat32AndMask": true,
+      "maximumFloat32Errors": [
+        1.8617122288233645e-09,
+        1.8610779584093962e-09,
+        1.862100473815076e-09
+      ],
+      "allFiniteValuesWithinConfiguredRange": true,
+      "panel": "io-visible-absorption-source-panel.png",
+      "panelSha256": "a4a40f444f26ea69a463f1b3bf4619c84a6ef4411d2028db0bbd4f53c3bab700",
+      "panelBytes": 101829
+    },
+    {
+      "body": "ganymede",
+      "id": "oxygen-signature",
+      "quantity": "565 / 577.3 nm reflectance ratio; unitless; not oxygen concentration",
+      "paletteColors": [
+        "#2166ac",
+        "#92c5de",
+        "#f7f7f7",
+        "#f4a582",
+        "#b2182b"
+      ],
+      "minimum": 0.98,
+      "maximum": 1.02,
+      "focus": {
+        "longitudeDegrees": 156,
+        "latitudeDegrees": 0,
+        "zoom": 1.1
+      },
+      "originals": [
+        {
+          "path": "src/planets/ganymede/source/muse/577.3nm_band_ganymede_night_1.fits",
+          "sha256": "9354868840c81e85d65c6a0882ea71e3f01d7258860fdd679321e4e88aa956b8",
+          "bytes": 132480
+        },
+        {
+          "path": "src/planets/ganymede/source/muse/577.3nm_band_ganymede_night_2.fits",
+          "sha256": "7b6e1a2c27bfc1418147e0a59a628c96d5b28d5fd1b71295f21d64c2d386ac8d",
+          "bytes": 132480
+        },
+        {
+          "path": "src/planets/ganymede/source/muse/577.3nm_band_ganymede_night_3.fits",
+          "sha256": "30f997e41fb7f9f99f626c45121e4b6066e97c39bd1fe7bcd6f081e09dc60220",
+          "bytes": 132480
+        }
+      ],
+      "finiteOriginalNodes": [
+        3561,
+        3565,
+        3565
+      ],
+      "retainedNodes": [
+        3365,
+        3369,
+        3369
+      ],
+      "fallbackValidNodes": 9319,
+      "fallbackSourceNodes": [
+        3365,
+        2811,
+        3143
+      ],
+      "independentlyDecodedTiffValuesMatchSourceAfterFloat32AndMask": true,
+      "maximumFloat32Errors": [
+        5.959679660882955e-08,
+        5.960131987947648e-08,
+        5.960125282200579e-08
+      ],
+      "allFiniteValuesWithinConfiguredRange": true,
+      "panel": "ganymede-oxygen-signature-source-panel.png",
+      "panelSha256": "e32c8d8e79c41af996f4e3e99b1663885cb73960f9a57ad89ed5d45ffef64ba9",
+      "panelBytes": 115203
+    }
+  ],
+  "sourceBinding": "Raw original FITS doubles, not prepared scene imagery; original per-night panels retain full source masks. Fourth panel independently applies the configured mask and first-valid priority.",
+  "spatialInterpolation": false,
+  "nearestIntegerEnlargement": 3,
+  "paletteQuantization": "1024 configured scalar colors; continuous RGB interpolation only within the legend palette, never spatial interpolation of source values.",
+  "elapsedSeconds": 0.2793924170000537,
+  "processPeakResidentBytesMacOS": 93519872
+}

@@ -1,9 +1,16 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "types": ["node"],
-    "typeRoots": ["../../packages/engine/node_modules/@types"]
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "../../packages/engine/node_modules/@types"
+    ]
   },
-  "include": ["typescript-owners-browser.mts"],
+  "include": [
+    "typescript-owners-browser.mts",
+    "../../src/renderers/css/paging/__fixtures__/prepared-page.mts"
+  ],
   "exclude": []
 }

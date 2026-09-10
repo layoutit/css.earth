@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 1.3478260869565217,
       "bodyRadiusM": 310
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/asteroid-1994-cc-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "a7951f247041a7455b2a98a4cd18d302d9a7445ce4b6c55ab13fddcc151e0a98"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "14584422f1db4524b8f71637a11a567b0cd3c8ba22dffe497ed2e881a80d3876"
+    "sha256": "ba58ac4ce614b22f496106bc8ba2106a6064da2cad76f675ca33f8b875dab010"
   }
 }

@@ -103,11 +103,20 @@
       ],
       "metersPerUnit": 84.78260869565217,
       "bodyRadiusM": 19500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/siarnaq-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "433db1a2307e486ad4fc469b86acd7970b5310eef1432190f988f2f359680ec6"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c768dee8903363c678cf6ea7b1dbd2b3acf2c2d1f23a1f2fe292c06f64505b12"
+    "sha256": "667e16f40d6a66fd27ee1eedf8745a97182376274bb3184af6c30831d9b3f8f1"
   }
 }

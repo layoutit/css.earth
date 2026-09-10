@@ -32,17 +32,17 @@ These dispositions are acquisition limits, not assertions that the scientific mo
 From the repository root, with the pinned dependencies installed:
 
 ```sh
-node docs/lucy-targets/author.mjs --inputs=docs/asteroid-spacecraft-gaps/inputs.json
-node packages/astronomy/tools/generate-asteroids.mjs --object=annefrank --object=braille
+node docs/lucy-targets/author.mts --inputs=docs/asteroid-spacecraft-gaps/inputs.json
+node packages/astronomy/tools/generate-asteroids.mts --object=annefrank --object=braille
 pnpm --filter @cssearth/astronomy build
-node tools/prepare-solar-geometry.mjs
+node tools/prepare-solar-geometry.mts
 pnpm build:preparation
 node tools/objects/dist/operations.js acquire annefrank
 node tools/objects/dist/prepare-authored.js annefrank --write
 node tools/objects/dist/operations.js acquire braille
 node tools/objects/dist/prepare-authored.js braille --write
-node docs/lucy-targets/navigation.mjs --inputs=docs/asteroid-spacecraft-gaps/inputs.json --base=a5a34bdefa849801d092f10755cf81f6f3f23f5e --evidence=docs/asteroid-spacecraft-gaps/navigation-evidence.json
-node docs/asteroid-spacecraft-gaps/refresh-transports.mjs
+node docs/lucy-targets/navigation.mts --inputs=docs/asteroid-spacecraft-gaps/inputs.json --base=a5a34bdefa849801d092f10755cf81f6f3f23f5e --evidence=docs/asteroid-spacecraft-gaps/navigation-evidence.json
+node docs/asteroid-spacecraft-gaps/refresh-transports.mts
 ```
 
 Run the body preparations one at a time. The author and navigation scripts accept this batch's input file while using their existing shared geometry, grid, marker and title implementations. Source pins, numerical constraints and source surveys live beside each body.
@@ -55,4 +55,4 @@ The prepared image release is available through the standard installer:
 pnpm setup:assets --object=annefrank --object=braille
 ```
 
-[Validation](VALIDATION.md) records source, topology, orbital, production, browser and clean-install results. The source constraint file and each body's `SOURCE.md` distinguish approximate dimensions, arbitrary display attitude and missing imagery.
+[Validation](VALIDATION.md) records source, topology, orbital, production, browser and clean-install results. The source constraint file and each body's `README.md` distinguish approximate dimensions, arbitrary display attitude and missing imagery.

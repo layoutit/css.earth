@@ -8,7 +8,7 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { createHash } from 'node:crypto';
 import {gzipSync} from 'node:zlib';
-import { containedPath, publishPinnedSource } from './operations.js';
+import { containedPath, publishPinnedSource, publishPinnedSourceStream } from './operations.js';
 import type { SourceManifest } from './operations.js';
 import {prepareSatelliteCatalog,validateSatelliteCatalogRecipe} from './acquisition/satellite-catalog.mts';
 import {prepareProjectedCatalog} from './acquisition/projected-catalog.mts';
@@ -72,6 +72,11 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
  const publish=async(path:string,data:Uint8Array)=>{const entry=[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].find(entry=>entry.path===path);if(!entry)throw new Error(`Undeclared acquisition target: ${path}.`);return publishPinnedSource({sourceRoot,entry,bytes:data});};
  for(const step of selected){
   if(step.kind==='download'){
+   if(!step.encoding){
+    const entry=[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].find(entry=>entry.path===step.path);if(!entry)throw new Error(`Undeclared acquisition target: ${step.path}.`);
+    const response=await request(step.url,{headers:step.headers});if(!response.body)throw new Error(`Source download has no body: ${step.url}.`);
+    await publishPinnedSourceStream({sourceRoot,entry,stream:Readable.fromWeb(response.body as never)});continue;
+   }
    let data=new Uint8Array(await(await request(step.url,{headers:step.headers})).arrayBuffer());
    if(step.encoding==='gzip')data=gzipSync(data,{level:9});
    if(step.encoding==='pretty-json'){const value=JSON.parse(new TextDecoder().decode(data)) as unknown;for(const[key,expected]of Object.entries(step.expectedJsonFields??{})){let actual=value;for(const part of key.split('.'))actual=record(actual)[part];if(actual!==expected)throw new Error(`Source JSON identity ${key} drifted.`);}data=new TextEncoder().encode(JSON.stringify(value,null,2)+'\n');}

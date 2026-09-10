@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 189.1304347826087,
       "bodyRadiusM": 43500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hekate-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "fd2d959e5b2c091e92906c563fbc030eaaa3453ce38fa4a83ea9a204ff217bba"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "dcecb88ac76bf9189d70e4e6462d31849b7650a3f30626126769d40a624c24c2"
+    "sha256": "904dbaf660e636658eae072b5e76b2c6094aa0c2c8a27246f4f54ed0c59c2ea8"
   }
 }

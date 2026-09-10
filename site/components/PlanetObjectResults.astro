@@ -11,10 +11,14 @@ for (const object of PLANET_SEARCH_OBJECTS) if (!types.has(objectCategory(object
   types.set(object.classification, object.classification.replaceAll('-', ' ') + 's');
 }
 const classifications = PLANET_SEARCH_OBJECTS.map(object => object.classification);
+// Retain every source row. Small layout groups let the browser skip offscreen
+// descendants without removing them from search, accessibility or navigation.
 const defaultObjects = [
   ...PLANET_SEARCH_OBJECTS.filter(object => object.classification === 'planet'),
   ...PLANET_SEARCH_OBJECTS.filter(object => object.classification !== 'planet'),
 ];
+const rows = Array.from({ length: Math.ceil(PLANET_SEARCH_OBJECTS.length / 16) },
+  (_, index) => defaultObjects.slice(index * 16, (index + 1) * 16));
 const groups = [...types].map(([type, label]) => ({ type, label,
   count: objectCategoryCount(classifications, type),
 }));
@@ -32,8 +36,14 @@ const groups = [...types].map(([type, label]) => ({ type, label,
   aria-labelledby={`object-tab-${defaultCategory}`} tabindex="0"
   style={`--object-category-visible-rows: ${Math.min(8, Number(objectCategoryCount(classifications, 'planet')))}`}>
   <ul class="planet-object-list">
-    {defaultObjects.map(object => <PlanetObjectResult object={object} activeObjectId={activeObjectId}
-      hidden={!matchesObjectCategory(object.classification, defaultCategory)} />)}
+    {rows.map(group => <li class="planet-object-chunk" role="presentation"
+      hidden={!group.some(object => matchesObjectCategory(object.classification, defaultCategory))}
+      style={`contain-intrinsic-block-size:${Math.max(0, group.filter(object => matchesObjectCategory(object.classification, defaultCategory)).length * 28 - 8)}px`}>
+      <ul class="planet-object-chunk-list" role="presentation">
+        {group.map(object => <PlanetObjectResult object={object} activeObjectId={activeObjectId}
+          hidden={!matchesObjectCategory(object.classification, defaultCategory)} />)}
+      </ul>
+    </li>)}
   </ul>
   <p class="planet-object-empty" aria-live="polite" hidden>No matching objects</p>
 </div>

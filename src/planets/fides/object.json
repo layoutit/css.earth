@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 256.5217391304348,
       "bodyRadiusM": 59000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/fides-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "429f86719bd8bc03948c6bb381561eb2078197715bad9906ba8252671fac6360"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7c5d12fab4103fdc0a882ac3692e9400e72e05ea56ae87a7757433335ab3c525"
+    "sha256": "2f933d5a0cfa4336e16a12a1161a955098010c5d67263aa34bc742d633dfb1aa"
   }
 }

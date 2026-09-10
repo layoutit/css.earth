@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 4.391304347826087,
       "bodyRadiusM": 1010
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/asteroid-1996-hw1-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "10c48ffaf208da245ca0fafb6a1669b4d7a5920f85f930b7b92ddfa6c01110a7"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c41c6f49c0d851aec12d343cd56aa273fc0c0d4b79d92bf7292dc399276737a5"
+    "sha256": "be1e90bef01f8db9f1369ef7fc20ac1a059eb0a95e2409a165795ea0b7cb2866"
   }
 }

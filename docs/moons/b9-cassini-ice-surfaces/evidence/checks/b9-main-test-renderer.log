@@ -1,0 +1,542 @@
+
+ RUN  v3.2.7 /Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/renderers/css
+
+ ❯ universe/prepared-world-context.test.ts (83 tests | 1 failed) 7813ms
+   ✓ semantic changes invalidate worker snapshots without synchronously republishing geometry 8ms
+   ✓ inactive annotations retain emphasis until their reveal publication 2ms
+   ✓ a culled indicator with retained alpha is dormant, then gets current emphasis on reveal 1ms
+   ✓ a resolved background sprite does not pick through its transparent square corners 1ms
+   ✓ camera viewport snapshots drive clipping and resize without reading host layout 1ms
+   ✓ hidden orbit selection leaves other orbits intact and retains the same body nodes 1ms
+   ✓ hover-only trails reveal the full orbit and keep their circle and label before and after hover 1ms
+   ✓ hidden labels keep circles pickable and hover reveals only that label and orbit without camera movement 1ms
+   ✓ keyboard focus also reveals a hidden label and orbit, then retires them on blur 1ms
+   ✓ camera publication consumes interaction changes without polling retained DOM state 6ms
+   × accepts the generated Sun context and rejects detached or malformed prepared data 42ms
+     → ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/navigation/universe.json'
+   ✓ prepared planetary systems retain moon orbits with a small selected planet 112ms
+   ✓ earth moon orbits stay complete across selection, hover, flight and zoom  608ms
+   ✓ mars moon orbits stay complete across selection, hover, flight and zoom  642ms
+   ✓ jupiter moon orbits stay complete across selection, hover, flight and zoom  652ms
+   ✓ saturn moon orbits stay complete across selection, hover, flight and zoom  747ms
+   ✓ uranus moon orbits stay complete across selection, hover, flight and zoom  593ms
+   ✓ neptune moon orbits stay complete across selection, hover, flight and zoom  730ms
+   ✓ pluto moon orbits stay complete across selection, hover, flight and zoom  483ms
+   ✓ haumea moon orbits stay complete across selection, hover, flight and zoom  474ms
+   ✓ didymos moon orbits stay complete across selection, hover, flight and zoom  576ms
+   ✓ sylvia moon orbits stay complete across selection, hover, flight and zoom  719ms
+   ✓ moshup moon orbits stay complete across selection, hover, flight and zoom  586ms
+   ✓ patroclus moon orbits stay complete across selection, hover, flight and zoom  662ms
+   ✓ initial Jupiter system framing makes the four large moons and their labels readable 62ms
+   ✓ opacityProfile has a constant plateau, a logarithmic smooth ramp and legacy opacity one 1ms
+   ✓ brightnessProfile has a constant plateau, a logarithmic smooth ramp and legacy opacity one 1ms
+   ✓ prepared parent identities must form an acyclic hierarchy ending at the focus 0ms
+   ✓ satellite markers remain occluded by their parent when another detail object is selected 0ms
+   ✓ a prepared object outside the navigation menu renders and selects using its retained asset 0ms
+   ✓ an orbitless prepared object renders and navigates without manufacturing orbital geometry 1ms
+   ✓ an orbit may centre on an orbitless prepared parent while remaining acyclic 0ms
+   ✓ projects retained markers, culls focus-occluded bodies, and keeps physical scale invariant 1ms
+   ✓ camera updates retain fixed stroke styles and only publish changed orbit picking policy 1ms
+   ✓ orbit chords stop at the circular indicator on both sides of the centered body 1ms
+   ✓ body circles fade with apparent size, remain clickable, and reuse their nodes 1ms
+   ✓ orbit and circle keep a one-pixel stroke across zoom and physical system size 5ms
+   ✓ planet labels remain visible when their placement crosses an orbit 1ms
+   ✓ overlapping circles retain selection priority and reappear when separated 1ms
+   ✓ planet annotations outrank dwarf-planet through zoom, even after the lower class was visible first 11ms
+   ✓ planet annotations outrank comet through zoom, even after the lower class was visible first 10ms
+   ✓ planet annotations outrank asteroid through zoom, even after the lower class was visible first 9ms
+   ✓ dwarf-planet annotations outrank comet through zoom, even after the lower class was visible first 9ms
+   ✓ dwarf-planet annotations outrank asteroid through zoom, even after the lower class was visible first 9ms
+   ✓ comet annotations outrank asteroid through zoom, even after the lower class was visible first 9ms
+   ✓ the Sun circle and label remain visible after all planetary context fades at maximum range 0ms
+   ✓ retired bodies stop receiving zoom writes and resume with current picking after indicator toggles 1ms
+   ✓ retired depth groups defer rotation and selection writes until same-pose re-entry 1ms
+   ✓ dolly motion leaves depth styles untouched while selection and rotation still reorder retained groups 1ms
+   ✓ selection transfers the detail handoff to the destination while retaining every orbit and marker 0ms
+   ✓ crowded labels keep selection and hover priority, disable hidden targets, and reappear with clearance 0ms
+   ✓ a small moon circle reveals its label on pointer interaction 1ms
+   ✓ a small moon circle reveals its label on keyboard interaction 0ms
+   ✓ hover keeps a circle label inside the viewport when every normal placement is clipped 0ms
+   ✓ the Sun caption stays below its marker as orbit strokes cross during zoom 0ms
+   ✓ the Sun caption remains readable across orbit strokes when 'an orbit clears the visible stroke' 0ms
+   ✓ the Sun caption remains readable across orbit strokes when 'a visible orbit crosses the text' 0ms
+   ✓ the Sun caption remains readable across orbit strokes when 'the crossing orbit trail is faded away' 0ms
+   ✓ the Sun caption remains readable across orbit strokes when 'a small resolved orbit still crosses …' 0ms
+   ✓ the Sun caption remains readable across orbit strokes when 'the orbit is unresolved at this zoom' 0ms
+   ✓ switching to the Solar System card immediately reveals the Sun ring without another camera frame 0ms
+   ✓ circle crowding leaves physical bodies and orbits visible (closed=true) 0ms
+   ✓ circle crowding leaves physical bodies and orbits visible (closed=false) 0ms
+   ✓ rings and trails share their circle fade across zoom in both directions (closed=true) 1ms
+   ✓ rings and trails share their circle fade across zoom in both directions (closed=false) 1ms
+   ✓ a trail remains visible when its body is outside the viewport 0ms
+   ✓ a label cannot cover a neighbouring circle even when the two labels fit 0ms
+   ✓ one retained focus label and locator survive system retirement at their physical galaxy position 1ms
+   ✓ readable satellite orbits show labels even with an unresolved parent, then fade at system distance 1ms
+   ✓ resolved body labels remain visible when close-up framing hides orbit lines 0ms
+   ✓ a moon label tries the other side when its first position overlaps the selected parent label 1ms
+   ✓ a background star label inside the orbit footprint is excluded even outside every accepted body label 0ms
+   ✓ solar text fades through system retirement, reverses continuously, and disables fading targets immediately 0ms
+   ✓ flight annotations fade correctly even when a label fade is in progress 0ms
+   ✓ the Sun locator stays visible across galactic observer rotations while resolved occluders still hide it 11ms
+   ✓ billboards straddle the selected detail in camera-depth order without replacing nodes 1ms
+   ✓ orbit endpoints follow the rendered circle through growth and shrink without camera publication 1ms
+   ✓ flights keep orbit projection live, fade unrelated annotations and retain destination annotations 1ms
+   ✓ overview flights retain system annotations and orbit cutouts without enabling picking 1ms
+   ✓ selection emphasis previews immediately without changing the detailed occluder 0ms
+   ✓ the Solar System overview has no body selection until the Sun is explicitly selected 1ms
+   ✓ transports a non-rendered parent coordinate without creating a body or marker 1ms
+   ✓ rejects malformed, detached, duplicate or cyclic non-rendered orbit centres 1ms
+ ❯ loader.test.ts (12 tests | 12 failed) 6ms
+   × mercury loads its actual pinned prepared JSON through the shared decoder 3ms
+     → ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/object.json'
+   × venus loads its actual pinned prepared JSON through the shared decoder 0ms
+     → ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+   × stale bytes fail before a mount can be created, even when JSON meaning is unchanged 0ms
+     → ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+   × an authenticated mismatched envelope id fails before mount 0ms
+     → ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+   × an authenticated mismatched envelope type fails before mount 0ms
+     → ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+   × an authenticated mismatched envelope format fails before mount 0ms
+     → ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+   × an authenticated mismatched envelope schema fails before mount 0ms
+     → ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+   × the decoded CSS definition must match the descriptor as well as its envelope 0ms
+     → ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+   × missing preparation, unknown object type and unsupported format never request or bake data 0ms
+     → ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+   × transport failure stays a failed load with no runtime preparation fallback 0ms
+     → ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+   × cancellation reaches the transport and an already-cancelled load cannot read bytes 0ms
+     → ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+   × authenticated invalid UTF-8 JSON fails before the renderer can mount 0ms
+     → ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+ ✓ navigation/world-frame-queue.test.ts (7 tests) 3ms
+ ❯ navigation/surface-target.test.ts (2 tests | 1 failed) 5ms
+   ✓ surface correction is a finite proper rotation toward the real physical eye at every bearing 2ms
+   × prepared destination correction preserves close-range framing when the globe radius changes 2ms
+     → ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/earth/prepared/scene.json'
+ ❯ volume/loader.test.ts (2 tests | 2 failed) 3ms
+   × loads the checked-in density artifact with its complete fixed asset bank 3ms
+     → ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/objects/milky-way/source/volume.json'
+   × rejects stale bytes and authenticated frame drift before rendering 0ms
+     → ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/objects/milky-way/source/volume.json'
+ ❯ runtime/navigable-object-mount.test.ts (1 test | 1 failed) 3ms
+   × preflight and native mount share one authenticated definition and transfer its resource ownership once 3ms
+     → ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+ ✓ stars/validation.test.ts (2 tests) 1058ms
+   ✓ decodes the checked prepared point field and verifies its pinned transport once  345ms
+   ✓ rejects a malformed hierarchy partition, resource metadata, and pinned bytes  712ms
+stdout | stars/point-field-selection.integration.test.ts > selects the real 109389-star hierarchy at four observer distances
+{"elapsedMs":45.91,"views":[{"representatives":2048,"maxProjectedErrorPx":518.8894391008761,"budgetLimited":true},{"representatives":2048,"maxProjectedErrorPx":287.68944367690847,"budgetLimited":true},{"representatives":2048,"maxProjectedErrorPx":123.26065547435202,"budgetLimited":true},{"representatives":2048,"maxProjectedErrorPx":88.15350753182452,"budgetLimited":true}]}
+
+ ✓ stars/point-field-selection.integration.test.ts (2 tests) 593ms
+   ✓ matches brute-force visible-brightness top-K across six directions and four observer distances  444ms
+ ✓ sky/prepared-sky-runtime.test.ts (8 tests) 476ms
+ ✓ stars/prepared-point-field-runtime.test.ts (13 tests) 234ms
+ ✓ volume/prepared-volume-runtime.test.ts (8 tests) 238ms
+ ✓ runtime/deferred-object-mount.test.ts (9 tests) 212ms
+ ✓ runtime/prepared-resource-lease.test.ts (7 tests) 160ms
+stdout | shell/loader.test.ts > loads the pinned surface shell and its prepared material without reading source geometry
+Prepared shell image bank integrity: {"images":1,"bytes":1111055,"decodedRgbaBytes":8290304}
+
+ ✓ shell/loader.test.ts (2 tests) 81ms
+ ✓ solar-system/prepared-ring-projection.test.ts (9 tests) 86ms
+ ✓ navigation/view-url.test.ts (6 tests) 24ms
+ ✓ universe/world-context-point-source.test.ts (5 tests) 48ms
+ ✓ solar-system/prepared-ellipsoid-projection.test.ts (5 tests) 7ms
+ ✓ navigation/selection-target.test.ts (5 tests) 8ms
+ ✓ shell/prepared-shell-runtime.test.ts (55 tests) 9ms
+ ✓ validation/activation-groups.test.ts (1 test) 3ms
+ ✓ stars/point-field-projection.test.ts (2 tests) 7ms
+ ✓ universe/environment-labels.test.ts (2 tests) 5ms
+ ✓ solar-system/prepared-perspective-ellipsoid.test.ts (5 tests) 5ms
+ ✓ rendering/prepared-material.test.ts (4 tests) 6ms
+ ✓ rendering/prepared-ownership.test.ts (8 tests) 5ms
+ ✓ prepared-object-worker-client.test.ts (4 tests) 4ms
+ ✓ sky/parallax.test.ts (5 tests) 6ms
+ ✓ stars/point-field-labels.test.ts (9 tests) 5ms
+ ✓ rendering/prepared-tree.test.ts (3 tests) 5ms
+ ✓ rendering/prepared-projective-texture-leaf.test.ts (3 tests) 5ms
+ ✓ navigation/saved-world-camera.test.ts (2 tests) 3ms
+ ✓ stars/opacity-fader.test.ts (7 tests) 4ms
+ ✓ universe/world-frame-projection.test.ts (2 tests) 1232ms
+   ✓ shared occlusion preserves point visibility, clipped chords and saturated extents  1228ms
+ ✓ stars/point-field-selection-client.test.ts (4 tests) 4ms
+ ✓ rendering/prepared-playback.test.ts (6 tests) 2ms
+ ✓ volume/validation.test.ts (3 tests) 3ms
+ ✓ runtime/world-navigation-publication.test.ts (4 tests) 3ms
+ ✓ solar-system/heliocentric-geometry.test.ts (5 tests) 2ms
+ ✓ rendering/prepared-activation.test.ts (3 tests) 2ms
+ ✓ paging/city-page-projection.test.ts (5 tests) 3ms
+ ✓ navigation/prepared-wheel-zoom.test.mjs (2 tests) 2ms
+ ✓ validation/scientific-focus.test.ts (2 tests) 2ms
+ ✓ solar-system/heliocentric-navigation.test.ts (4 tests) 2ms
+ ✓ rendering/retained-leaf-pool.test.ts (3 tests) 7ms
+ ✓ universe/world-context-planner.test.ts (2 tests) 451ms
+   ✓ complete context frames cross a structured-clone boundary without mutating the input owner  445ms
+ ✓ rendering/prepared-selection-textures.test.ts (3 tests) 2ms
+ ✓ rendering/prepared-texture-levels.test.ts (3 tests) 2ms
+ ✓ rendering/prepared-depth-partitions.test.ts (2 tests) 2ms
+ ✓ rendering/prepared-facing.test.ts (3 tests) 2ms
+ ✓ rendering/prepared-leaf-frustum.test.ts (4 tests) 2ms
+ ✓ universe/context-label-layout.test.ts (2 tests) 2ms
+ ✓ navigation/prepared-surface-hit.test.ts (3 tests) 1ms
+ ✓ solar-system/heliocentric-sprites.test.ts (2 tests) 2ms
+ ✓ navigation/world-camera-hit.test.ts (1 test) 1ms
+ ✓ navigation/screen-picking.test.ts (2 tests) 1ms
+ ✓ labels/screen-label-layout.test.ts (1 test) 1ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 11 ⎯⎯⎯⎯⎯⎯
+
+ FAIL  paging/capabilities.test.ts [ paging/capabilities.test.ts ]
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/earth/prepared/runtime.json'
+ ❯ read paging/prepared-page-fixture.mjs:5:41
+      3| // Paging is an optional authored capability. Exercise the retained, s…
+      4| // page plans without requiring Earth's current product card to enable…
+      5| const read = async (name) => JSON.parse(await readFile(new URL(`../../…
+       |                                         ^
+      6| export const preparedPagingFixture = await read('runtime');
+      7| const nodes = preparedPagingFixture.tree.nodes;
+ ❯ paging/prepared-page-fixture.mjs:6:38
+ ❯ paging/capabilities.test.ts:3:1
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/28]⎯
+
+ FAIL  navigation/camera-layout.test.mjs [ navigation/camera-layout.test.mjs ]
+Error: Cannot find module '../../../../src/planets/mercury/prepared/runtime.json' imported from '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/renderers/css/navigation/camera-layout.test.mjs'
+ ❯ navigation/camera-layout.test.mjs:3:1
+      1| import assert from 'node:assert/strict';
+      2| import { test } from 'vitest';
+      3| import mercury from '../../../../src/planets/mercury/prepared/runtime.…
+       | ^
+      4| import venus from '../../../../src/planets/venus/prepared/runtime.json…
+      5| import { selectPreparedResponsiveZoom } from './camera-layout.ts';
+
+Caused by: Error: Failed to load url ../../../../src/planets/mercury/prepared/runtime.json (resolved id: ../../../../src/planets/mercury/prepared/runtime.json) in /Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/renderers/css/navigation/camera-layout.test.mjs. Does the file exist?
+ ❯ loadAndTransform ../../../../cssEarth-moons-mapped-science/node_modules/.pnpm/vite@7.3.1_@types+node@26.4.0_lightningcss@1.33.0/node_modules/vite/dist/node/chunks/config.js:22663:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/28]⎯
+
+ FAIL  navigation/camera-viewport.test.ts [ navigation/camera-viewport.test.ts ]
+Error: Cannot find module '../../../planets/mercury/prepared/scene.json' imported from '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/renderers/css/navigation/camera-viewport.test.ts'
+ ❯ navigation/camera-viewport.test.ts:4:1
+      2| import { createCameraViewport } from './camera-viewport.js';
+      3| import { createPerspectiveDolly } from './perspective-dolly.js';
+      4| import scene from '../../../planets/mercury/prepared/scene.json';
+       | ^
+      5| 
+      6| test('prepared FOVs retain independent measurements across switches an…
+
+Caused by: Error: Failed to load url ../../../planets/mercury/prepared/scene.json (resolved id: ../../../planets/mercury/prepared/scene.json) in /Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/renderers/css/navigation/camera-viewport.test.ts. Does the file exist?
+ ❯ loadAndTransform ../../../../cssEarth-moons-mapped-science/node_modules/.pnpm/vite@7.3.1_@types+node@26.4.0_lightningcss@1.33.0/node_modules/vite/dist/node/chunks/config.js:22663:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/28]⎯
+
+ FAIL  navigation/perspective-dolly.test.ts [ navigation/perspective-dolly.test.ts ]
+Error: Cannot find module '../../../planets/mercury/prepared/scene.json' imported from '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/renderers/css/navigation/perspective-dolly.test.ts'
+ ❯ navigation/perspective-dolly.test.ts:3:1
+      1| import { expect, it } from 'vitest';
+      2| import { createPerspectiveDolly, levelOfDetailFor } from './perspectiv…
+      3| import scene from '../../../planets/mercury/prepared/scene.json';
+       | ^
+      4| 
+      5|   it('crossfades geometry, billboard and marker without hiding the fin…
+
+Caused by: Error: Failed to load url ../../../planets/mercury/prepared/scene.json (resolved id: ../../../planets/mercury/prepared/scene.json) in /Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/renderers/css/navigation/camera-viewport.test.ts. Does the file exist?
+ ❯ loadAndTransform ../../../../cssEarth-moons-mapped-science/node_modules/.pnpm/vite@7.3.1_@types+node@26.4.0_lightningcss@1.33.0/node_modules/vite/dist/node/chunks/config.js:22663:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/28]⎯
+
+ FAIL  navigation/world-camera-picking.test.mjs [ navigation/world-camera-picking.test.mjs ]
+Error: Cannot find module '../../../../src/planets/mercury/prepared/runtime.json' imported from '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/renderers/css/navigation/world-camera-picking.test.mjs'
+ ❯ navigation/world-camera-picking.test.mjs:5:1
+      3| import { getEventListeners } from 'node:events';
+      4| import * as runtimePolicy from '../../../../site/runtime-policy.mjs';
+      5| import runtimeDefinition from '../../../../src/planets/mercury/prepare…
+       | ^
+      6| import { projectHeliocentricView } from '../solar-system/heliocentric-…
+      7| import { hitsProjectedBody } from './world-camera-hit.ts';
+
+Caused by: Error: Failed to load url ../../../../src/planets/mercury/prepared/runtime.json (resolved id: ../../../../src/planets/mercury/prepared/runtime.json) in /Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/renderers/css/navigation/camera-layout.test.mjs. Does the file exist?
+ ❯ loadAndTransform ../../../../cssEarth-moons-mapped-science/node_modules/.pnpm/vite@7.3.1_@types+node@26.4.0_lightningcss@1.33.0/node_modules/vite/dist/node/chunks/config.js:22663:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/28]⎯
+
+ FAIL  navigation/world-camera.test.ts [ navigation/world-camera.test.ts ]
+Error: Cannot find module '../../../../src/planets/mercury/prepared/runtime.json' imported from '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/renderers/css/navigation/world-camera.test.ts'
+ ❯ navigation/world-camera.test.ts:5:1
+      3| import { createSelectionFlight, sampleSelectionFlight } from '@csseart…
+      4| import type { PositionM } from '@cssearth/engine';
+      5| import mercuryDefinition from "../../../../src/planets/mercury/prepare…
+       | ^
+      6| import venusDefinition from "../../../../src/planets/venus/prepared/ru…
+      7| import { prepareEclipticPresentationFrame } from '../../../platform/so…
+
+Caused by: Error: Failed to load url ../../../../src/planets/mercury/prepared/runtime.json (resolved id: ../../../../src/planets/mercury/prepared/runtime.json) in /Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/renderers/css/navigation/camera-layout.test.mjs. Does the file exist?
+ ❯ loadAndTransform ../../../../cssEarth-moons-mapped-science/node_modules/.pnpm/vite@7.3.1_@types+node@26.4.0_lightningcss@1.33.0/node_modules/vite/dist/node/chunks/config.js:22663:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/28]⎯
+
+ FAIL  solar-system/cubic-sky-runtime.test.ts [ solar-system/cubic-sky-runtime.test.ts ]
+Error: Cannot find module '../../../planets/mercury/prepared/sky.json' imported from '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/renderers/css/solar-system/cubic-sky-runtime.test.ts'
+ ❯ solar-system/cubic-sky-runtime.test.ts:2:1
+      1| import { afterEach, expect, test, vi } from 'vitest';
+      2| import preparedSky from '../../../planets/mercury/prepared/sky.json';
+       | ^
+      3| import { mountRetainedCubicSky } from './cubic-sky-runtime.js';
+      4| import type { CubicSkyPlan } from './cubic-sky-runtime.js';
+
+Caused by: Error: Failed to load url ../../../planets/mercury/prepared/sky.json (resolved id: ../../../planets/mercury/prepared/sky.json) in /Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/renderers/css/solar-system/cubic-sky-runtime.test.ts. Does the file exist?
+ ❯ loadAndTransform ../../../../cssEarth-moons-mapped-science/node_modules/.pnpm/vite@7.3.1_@types+node@26.4.0_lightningcss@1.33.0/node_modules/vite/dist/node/chunks/config.js:22663:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/28]⎯
+
+ FAIL  solar-system/heliocentric-world-view.test.ts [ solar-system/heliocentric-world-view.test.ts ]
+Error: Cannot find module '../../../../src/planets/mercury/prepared/runtime.json' imported from '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/renderers/css/solar-system/heliocentric-world-view.test.ts'
+ ❯ solar-system/heliocentric-world-view.test.ts:3:1
+      1| import assert from 'node:assert/strict';
+      2| import { test } from 'vitest';
+      3| import runtimeDefinition from "../../../../src/planets/mercury/prepare…
+       | ^
+      4| import venusDefinition from "../../../../src/planets/venus/prepared/ru…
+      5| import { projectHeliocentricView } from './heliocentric-view.js';
+
+Caused by: Error: Failed to load url ../../../../src/planets/mercury/prepared/runtime.json (resolved id: ../../../../src/planets/mercury/prepared/runtime.json) in /Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/renderers/css/navigation/camera-layout.test.mjs. Does the file exist?
+ ❯ loadAndTransform ../../../../cssEarth-moons-mapped-science/node_modules/.pnpm/vite@7.3.1_@types+node@26.4.0_lightningcss@1.33.0/node_modules/vite/dist/node/chunks/config.js:22663:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/28]⎯
+
+ FAIL  validation/depth-partitions.test.ts [ validation/depth-partitions.test.ts ]
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/deimos/prepared/runtime.json'
+ ❯ validation/depth-partitions.test.ts:6:27
+      4| import { prepareActivationGroups } from '../../../../tools/prepared-ac…
+      5| 
+      6| const source = JSON.parse(await readFile(new URL('../../../planets/dei…
+       |                           ^
+      7| // The published Deimos package can retain native depth. Validate the …
+      8| // partition transport against explicit carriers, independent of that …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/28]⎯
+
+ FAIL  validation/paged-presentation.test.ts [ validation/paged-presentation.test.ts ]
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/earth/prepared/runtime.json'
+ ❯ read paging/prepared-page-fixture.mjs:5:41
+      3| // Paging is an optional authored capability. Exercise the retained, s…
+      4| // page plans without requiring Earth's current product card to enable…
+      5| const read = async (name) => JSON.parse(await readFile(new URL(`../../…
+       |                                         ^
+      6| export const preparedPagingFixture = await read('runtime');
+      7| const nodes = preparedPagingFixture.tree.nodes;
+ ❯ paging/prepared-page-fixture.mjs:6:38
+ ❯ validation/paged-presentation.test.ts:1:1
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/28]⎯
+
+ FAIL  validation/prepared-object.test.ts [ validation/prepared-object.test.ts ]
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/runtime.json'
+ ❯ validation/prepared-object.test.ts:10:18
+      8| const originals: unknown[] = [];
+      9| for (const id of ['mercury', 'venus']) {
+     10|   const source = await readFile(new URL(`../../../../src/planets/${id}…
+       |                  ^
+     11|   originals.push(JSON.parse(source));
+     12| }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/28]⎯
+
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 17 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  loader.test.ts > mercury loads its actual pinned prepared JSON through the shared decoder
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/object.json'
+ ❯ fixture loader.test.ts:9:32
+      7|   const descriptor = parseObjectDescriptor(await readFile(new URL(`../…
+      8|   if (!descriptor.prepared) throw new Error('Fixture requires its prep…
+      9|   const bytes = new Uint8Array(await readFile(new URL(`../../../src/pl…
+       |                                ^
+     10|   const payload: unknown = JSON.parse(new TextDecoder().decode(bytes));
+     11|   if (!isRecord(payload)) throw new Error('Fixture envelope must be a …
+ ❯ loader.test.ts:26:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/28]⎯
+
+ FAIL  loader.test.ts > venus loads its actual pinned prepared JSON through the shared decoder
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+ ❯ fixture loader.test.ts:9:32
+      7|   const descriptor = parseObjectDescriptor(await readFile(new URL(`../…
+      8|   if (!descriptor.prepared) throw new Error('Fixture requires its prep…
+      9|   const bytes = new Uint8Array(await readFile(new URL(`../../../src/pl…
+       |                                ^
+     10|   const payload: unknown = JSON.parse(new TextDecoder().decode(bytes));
+     11|   if (!isRecord(payload)) throw new Error('Fixture envelope must be a …
+ ❯ loader.test.ts:26:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/28]⎯
+
+ FAIL  loader.test.ts > stale bytes fail before a mount can be created, even when JSON meaning is unchanged
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+ ❯ fixture loader.test.ts:9:32
+      7|   const descriptor = parseObjectDescriptor(await readFile(new URL(`../…
+      8|   if (!descriptor.prepared) throw new Error('Fixture requires its prep…
+      9|   const bytes = new Uint8Array(await readFile(new URL(`../../../src/pl…
+       |                                ^
+     10|   const payload: unknown = JSON.parse(new TextDecoder().decode(bytes));
+     11|   if (!isRecord(payload)) throw new Error('Fixture envelope must be a …
+ ❯ loader.test.ts:36:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/28]⎯
+
+ FAIL  loader.test.ts > an authenticated mismatched envelope id fails before mount
+ FAIL  loader.test.ts > an authenticated mismatched envelope type fails before mount
+ FAIL  loader.test.ts > an authenticated mismatched envelope format fails before mount
+ FAIL  loader.test.ts > an authenticated mismatched envelope schema fails before mount
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+ ❯ fixture loader.test.ts:9:32
+      7|   const descriptor = parseObjectDescriptor(await readFile(new URL(`../…
+      8|   if (!descriptor.prepared) throw new Error('Fixture requires its prep…
+      9|   const bytes = new Uint8Array(await readFile(new URL(`../../../src/pl…
+       |                                ^
+     10|   const payload: unknown = JSON.parse(new TextDecoder().decode(bytes));
+     11|   if (!isRecord(payload)) throw new Error('Fixture envelope must be a …
+ ❯ loader.test.ts:43:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/28]⎯
+
+ FAIL  loader.test.ts > the decoded CSS definition must match the descriptor as well as its envelope
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+ ❯ fixture loader.test.ts:9:32
+      7|   const descriptor = parseObjectDescriptor(await readFile(new URL(`../…
+      8|   if (!descriptor.prepared) throw new Error('Fixture requires its prep…
+      9|   const bytes = new Uint8Array(await readFile(new URL(`../../../src/pl…
+       |                                ^
+     10|   const payload: unknown = JSON.parse(new TextDecoder().decode(bytes));
+     11|   if (!isRecord(payload)) throw new Error('Fixture envelope must be a …
+ ❯ loader.test.ts:49:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/28]⎯
+
+ FAIL  loader.test.ts > missing preparation, unknown object type and unsupported format never request or bake data
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+ ❯ fixture loader.test.ts:9:32
+      7|   const descriptor = parseObjectDescriptor(await readFile(new URL(`../…
+      8|   if (!descriptor.prepared) throw new Error('Fixture requires its prep…
+      9|   const bytes = new Uint8Array(await readFile(new URL(`../../../src/pl…
+       |                                ^
+     10|   const payload: unknown = JSON.parse(new TextDecoder().decode(bytes));
+     11|   if (!isRecord(payload)) throw new Error('Fixture envelope must be a …
+ ❯ loader.test.ts:57:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/28]⎯
+
+ FAIL  loader.test.ts > transport failure stays a failed load with no runtime preparation fallback
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+ ❯ fixture loader.test.ts:9:32
+      7|   const descriptor = parseObjectDescriptor(await readFile(new URL(`../…
+      8|   if (!descriptor.prepared) throw new Error('Fixture requires its prep…
+      9|   const bytes = new Uint8Array(await readFile(new URL(`../../../src/pl…
+       |                                ^
+     10|   const payload: unknown = JSON.parse(new TextDecoder().decode(bytes));
+     11|   if (!isRecord(payload)) throw new Error('Fixture envelope must be a …
+ ❯ loader.test.ts:67:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/28]⎯
+
+ FAIL  loader.test.ts > cancellation reaches the transport and an already-cancelled load cannot read bytes
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+ ❯ fixture loader.test.ts:9:32
+      7|   const descriptor = parseObjectDescriptor(await readFile(new URL(`../…
+      8|   if (!descriptor.prepared) throw new Error('Fixture requires its prep…
+      9|   const bytes = new Uint8Array(await readFile(new URL(`../../../src/pl…
+       |                                ^
+     10|   const payload: unknown = JSON.parse(new TextDecoder().decode(bytes));
+     11|   if (!isRecord(payload)) throw new Error('Fixture envelope must be a …
+ ❯ loader.test.ts:73:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/28]⎯
+
+ FAIL  loader.test.ts > authenticated invalid UTF-8 JSON fails before the renderer can mount
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+ ❯ fixture loader.test.ts:9:32
+      7|   const descriptor = parseObjectDescriptor(await readFile(new URL(`../…
+      8|   if (!descriptor.prepared) throw new Error('Fixture requires its prep…
+      9|   const bytes = new Uint8Array(await readFile(new URL(`../../../src/pl…
+       |                                ^
+     10|   const payload: unknown = JSON.parse(new TextDecoder().decode(bytes));
+     11|   if (!isRecord(payload)) throw new Error('Fixture envelope must be a …
+ ❯ loader.test.ts:88:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/28]⎯
+
+ FAIL  navigation/surface-target.test.ts > prepared destination correction preserves close-range framing when the globe radius changes
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/earth/prepared/scene.json'
+ ❯ read navigation/surface-target.test.ts:38:51
+     36| 
+     37| test('prepared destination correction preserves close-range framing wh…
+     38|   const read = async (path: string) => JSON.parse(await readFile(new U…
+       |                                                   ^
+     39|   const scene = await read('../../../planets/earth/prepared/scene.json…
+     40|   const config = await read('../../../planets/earth/source/preparation…
+ ❯ navigation/surface-target.test.ts:39:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[21/28]⎯
+
+ FAIL  runtime/navigable-object-mount.test.ts > preflight and native mount share one authenticated definition and transfer its resource ownership once
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/venus/prepared/object.json'
+ ❯ runtime/navigable-object-mount.test.ts:7:30
+      5| test('preflight and native mount share one authenticated definition an…
+      6|   const descriptor = JSON.parse(await readFile(new URL('../../../plane…
+      7|   const payload = JSON.parse(await readFile(new URL('../../../../src/p…
+       |                              ^
+      8|   // This test exercises transport/ownership; native image decoding ha…
+      9|   payload.data.assets.startup = [];
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22/28]⎯
+
+ FAIL  universe/prepared-world-context.test.ts > accepts the generated Sun context and rejects detached or malformed prepared data
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/navigation/universe.json'
+ ❯ universe/prepared-world-context.test.ts:367:31
+    365|   expect(parsePreparedWorldContext(source).bodies.map(body => body.id)…
+    366|     .toEqual(OBJECTS.filter(object => object.id !== 'sun' && object.wo…
+    367|   const authored = JSON.parse(await readFile(new URL('../../../planets…
+       |                               ^
+    368|   expect(parsePreparedWorldContext(source).bodies.map(body => body.id))
+    369|     .toEqual(authored.bodies.map(body => body.id));
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[23/28]⎯
+
+ FAIL  volume/loader.test.ts > loads the checked-in density artifact with its complete fixed asset bank
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/objects/milky-way/source/volume.json'
+ ❯ fixture volume/loader.test.ts:10:29
+      8|   const base = new URL('../../../objects/milky-way/', import.meta.url);
+      9|   const descriptor = JSON.parse(await readFile(new URL('object.json', …
+     10|   const recipe = JSON.parse(await readFile(new URL('source/volume.json…
+       |                             ^
+     11|   const baked = JSON.parse(await readFile(new URL('prepared/volume-sli…
+     12|   const bytes = new Uint8Array(await readFile(new URL(descriptor.prepa…
+ ❯ volume/loader.test.ts:17:54
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[24/28]⎯
+
+ FAIL  volume/loader.test.ts > rejects stale bytes and authenticated frame drift before rendering
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/objects/milky-way/source/volume.json'
+ ❯ fixture volume/loader.test.ts:10:29
+      8|   const base = new URL('../../../objects/milky-way/', import.meta.url);
+      9|   const descriptor = JSON.parse(await readFile(new URL('object.json', …
+     10|   const recipe = JSON.parse(await readFile(new URL('source/volume.json…
+       |                             ^
+     11|   const baked = JSON.parse(await readFile(new URL('prepared/volume-sli…
+     12|   const bytes = new Uint8Array(await readFile(new URL(descriptor.prepa…
+ ❯ volume/loader.test.ts:55:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[25/28]⎯
+
+
+ Test Files  16 failed | 52 passed (68)
+      Tests  17 failed | 352 passed (369)
+   Start at  22:06:44
+   Duration  23.37s (transform 1.54s, setup 0ms, collect 3.44s, tests 12.86s, environment 5ms, prepare 1.74s)
+
+undefined
+/Users/ekrof/fed/cssEarth-moons-cassini-atlas/packages/engine:
+ ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL  Command failed with exit code 1: vitest run --root ../../src/renderers/css --exclude **/preparation/** --maxWorkers=1 --no-file-parallelism

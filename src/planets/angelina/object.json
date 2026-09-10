@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 113.04347826086956,
       "bodyRadiusM": 26000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/angelina-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "91c88304dc6cc72247a4fc07fc0ce8607faa5bf9ce73a5b1ccc56338cab1f36d"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "5f63c5c44b361550583486a9e673229ced42989dcd6b32e259b75a21c00e724d"
+    "sha256": "7f79c44e669864f2be9bf4c31438b08d3e6d7674dd44d6cc68e0b193301b12bd"
   }
 }

@@ -108,11 +108,20 @@
       ],
       "metersPerUnit": 586.9565217391304,
       "bodyRadiusM": 135000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hyperion-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "6caaf4595fb5042a5009ebe5152175fa6657d32409a32212531598d5bac43abe"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "cdac3387761d32b751f2433a68848e62d59bef1cb22c67ede6a14089e0f9b1c2"
+    "sha256": "44282208538f30576b4a985e6eae022dfc9f29a1040f777b65c4871d520b13b5"
   }
 }

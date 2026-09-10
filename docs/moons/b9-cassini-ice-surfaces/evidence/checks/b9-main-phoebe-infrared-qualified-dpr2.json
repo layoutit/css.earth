@@ -1,0 +1,436 @@
+{
+  "command": [
+    "node",
+    "docs/moons/b9-cassini-ice-surfaces/browser-one.mjs",
+    "phoebe"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 6108790784,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 425984,
+      "freePercent": 53
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 154484736,
+      "freePercent": 53
+    },
+    {
+      "seconds": 0.6,
+      "rssBytes": 265322496,
+      "freePercent": 53
+    },
+    {
+      "seconds": 0.8,
+      "rssBytes": 308559872,
+      "freePercent": 53
+    },
+    {
+      "seconds": 1.1,
+      "rssBytes": 347111424,
+      "freePercent": 53
+    },
+    {
+      "seconds": 1.4,
+      "rssBytes": 570540032,
+      "freePercent": 53
+    },
+    {
+      "seconds": 1.6,
+      "rssBytes": 632864768,
+      "freePercent": 53
+    },
+    {
+      "seconds": 1.9,
+      "rssBytes": 1434304512,
+      "freePercent": 53
+    },
+    {
+      "seconds": 2.2,
+      "rssBytes": 1503772672,
+      "freePercent": 51
+    },
+    {
+      "seconds": 2.5,
+      "rssBytes": 1556234240,
+      "freePercent": 51
+    },
+    {
+      "seconds": 2.7,
+      "rssBytes": 1594458112,
+      "freePercent": 51
+    },
+    {
+      "seconds": 3.0,
+      "rssBytes": 1639022592,
+      "freePercent": 51
+    },
+    {
+      "seconds": 3.3,
+      "rssBytes": 1669693440,
+      "freePercent": 51
+    },
+    {
+      "seconds": 3.5,
+      "rssBytes": 1818509312,
+      "freePercent": 51
+    },
+    {
+      "seconds": 3.8,
+      "rssBytes": 1929822208,
+      "freePercent": 51
+    },
+    {
+      "seconds": 4.1,
+      "rssBytes": 2353676288,
+      "freePercent": 51
+    },
+    {
+      "seconds": 4.4,
+      "rssBytes": 2354446336,
+      "freePercent": 52
+    },
+    {
+      "seconds": 4.6,
+      "rssBytes": 2492432384,
+      "freePercent": 52
+    },
+    {
+      "seconds": 4.9,
+      "rssBytes": 2504851456,
+      "freePercent": 52
+    },
+    {
+      "seconds": 5.2,
+      "rssBytes": 2513649664,
+      "freePercent": 52
+    },
+    {
+      "seconds": 5.4,
+      "rssBytes": 2545680384,
+      "freePercent": 52
+    },
+    {
+      "seconds": 5.7,
+      "rssBytes": 2563964928,
+      "freePercent": 52
+    },
+    {
+      "seconds": 6.0,
+      "rssBytes": 2584887296,
+      "freePercent": 52
+    },
+    {
+      "seconds": 6.3,
+      "rssBytes": 2592931840,
+      "freePercent": 52
+    },
+    {
+      "seconds": 6.5,
+      "rssBytes": 2595143680,
+      "freePercent": 51
+    },
+    {
+      "seconds": 6.8,
+      "rssBytes": 2659418112,
+      "freePercent": 51
+    },
+    {
+      "seconds": 7.1,
+      "rssBytes": 2731524096,
+      "freePercent": 51
+    },
+    {
+      "seconds": 7.4,
+      "rssBytes": 2769305600,
+      "freePercent": 51
+    },
+    {
+      "seconds": 7.6,
+      "rssBytes": 2839642112,
+      "freePercent": 51
+    },
+    {
+      "seconds": 7.9,
+      "rssBytes": 3064578048,
+      "freePercent": 51
+    },
+    {
+      "seconds": 8.2,
+      "rssBytes": 3340271616,
+      "freePercent": 51
+    },
+    {
+      "seconds": 8.5,
+      "rssBytes": 3594289152,
+      "freePercent": 51
+    },
+    {
+      "seconds": 8.7,
+      "rssBytes": 3901128704,
+      "freePercent": 50
+    },
+    {
+      "seconds": 9.0,
+      "rssBytes": 3999481856,
+      "freePercent": 50
+    },
+    {
+      "seconds": 9.3,
+      "rssBytes": 4038639616,
+      "freePercent": 50
+    },
+    {
+      "seconds": 9.5,
+      "rssBytes": 4155719680,
+      "freePercent": 50
+    },
+    {
+      "seconds": 9.8,
+      "rssBytes": 4260020224,
+      "freePercent": 50
+    },
+    {
+      "seconds": 10.1,
+      "rssBytes": 4436131840,
+      "freePercent": 50
+    },
+    {
+      "seconds": 10.4,
+      "rssBytes": 4544675840,
+      "freePercent": 50
+    },
+    {
+      "seconds": 10.6,
+      "rssBytes": 4731322368,
+      "freePercent": 50
+    },
+    {
+      "seconds": 10.9,
+      "rssBytes": 4851204096,
+      "freePercent": 51
+    },
+    {
+      "seconds": 11.2,
+      "rssBytes": 5183832064,
+      "freePercent": 51
+    },
+    {
+      "seconds": 11.5,
+      "rssBytes": 5760450560,
+      "freePercent": 51
+    },
+    {
+      "seconds": 11.7,
+      "rssBytes": 5727780864,
+      "freePercent": 51
+    },
+    {
+      "seconds": 12.0,
+      "rssBytes": 5771083776,
+      "freePercent": 51
+    },
+    {
+      "seconds": 12.3,
+      "rssBytes": 5789745152,
+      "freePercent": 51
+    },
+    {
+      "seconds": 12.5,
+      "rssBytes": 5844942848,
+      "freePercent": 51
+    },
+    {
+      "seconds": 12.8,
+      "rssBytes": 5839470592,
+      "freePercent": 51
+    },
+    {
+      "seconds": 13.1,
+      "rssBytes": 5866864640,
+      "freePercent": 50
+    },
+    {
+      "seconds": 13.4,
+      "rssBytes": 5832884224,
+      "freePercent": 50
+    },
+    {
+      "seconds": 13.6,
+      "rssBytes": 5904662528,
+      "freePercent": 50
+    },
+    {
+      "seconds": 13.9,
+      "rssBytes": 5691916288,
+      "freePercent": 50
+    },
+    {
+      "seconds": 14.2,
+      "rssBytes": 5696405504,
+      "freePercent": 50
+    },
+    {
+      "seconds": 14.5,
+      "rssBytes": 5703827456,
+      "freePercent": 50
+    },
+    {
+      "seconds": 14.7,
+      "rssBytes": 5723078656,
+      "freePercent": 50
+    },
+    {
+      "seconds": 15.0,
+      "rssBytes": 5741068288,
+      "freePercent": 50
+    },
+    {
+      "seconds": 15.3,
+      "rssBytes": 5759959040,
+      "freePercent": 50
+    },
+    {
+      "seconds": 15.6,
+      "rssBytes": 5782011904,
+      "freePercent": 50
+    },
+    {
+      "seconds": 15.8,
+      "rssBytes": 5801000960,
+      "freePercent": 50
+    },
+    {
+      "seconds": 16.1,
+      "rssBytes": 5828476928,
+      "freePercent": 50
+    },
+    {
+      "seconds": 16.4,
+      "rssBytes": 5843402752,
+      "freePercent": 50
+    },
+    {
+      "seconds": 16.6,
+      "rssBytes": 5863292928,
+      "freePercent": 50
+    },
+    {
+      "seconds": 16.9,
+      "rssBytes": 5878857728,
+      "freePercent": 50
+    },
+    {
+      "seconds": 17.2,
+      "rssBytes": 5885984768,
+      "freePercent": 50
+    },
+    {
+      "seconds": 17.5,
+      "rssBytes": 5896732672,
+      "freePercent": 50
+    },
+    {
+      "seconds": 17.7,
+      "rssBytes": 5899714560,
+      "freePercent": 50
+    },
+    {
+      "seconds": 18.0,
+      "rssBytes": 5910233088,
+      "freePercent": 50
+    },
+    {
+      "seconds": 18.3,
+      "rssBytes": 5895651328,
+      "freePercent": 50
+    },
+    {
+      "seconds": 18.5,
+      "rssBytes": 5906481152,
+      "freePercent": 50
+    },
+    {
+      "seconds": 18.8,
+      "rssBytes": 5901910016,
+      "freePercent": 50
+    },
+    {
+      "seconds": 19.1,
+      "rssBytes": 5887836160,
+      "freePercent": 50
+    },
+    {
+      "seconds": 19.4,
+      "rssBytes": 5917753344,
+      "freePercent": 50
+    },
+    {
+      "seconds": 19.6,
+      "rssBytes": 5893865472,
+      "freePercent": 49
+    },
+    {
+      "seconds": 19.9,
+      "rssBytes": 5976227840,
+      "freePercent": 49
+    },
+    {
+      "seconds": 20.2,
+      "rssBytes": 6001360896,
+      "freePercent": 49
+    },
+    {
+      "seconds": 20.5,
+      "rssBytes": 5988597760,
+      "freePercent": 49
+    },
+    {
+      "seconds": 20.7,
+      "rssBytes": 6016139264,
+      "freePercent": 49
+    },
+    {
+      "seconds": 21.0,
+      "rssBytes": 5992742912,
+      "freePercent": 49
+    },
+    {
+      "seconds": 21.3,
+      "rssBytes": 6020136960,
+      "freePercent": 49
+    },
+    {
+      "seconds": 21.5,
+      "rssBytes": 6042550272,
+      "freePercent": 49
+    },
+    {
+      "seconds": 21.8,
+      "rssBytes": 6052282368,
+      "freePercent": 50
+    },
+    {
+      "seconds": 22.1,
+      "rssBytes": 6082379776,
+      "freePercent": 50
+    },
+    {
+      "seconds": 22.4,
+      "rssBytes": 6108790784,
+      "freePercent": 50
+    },
+    {
+      "seconds": 22.6,
+      "rssBytes": 0,
+      "freePercent": 50
+    }
+  ],
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 22.9
+}

@@ -12,10 +12,10 @@ type Shell = ReturnType<typeof mountPlanetShell>;
 type WorldContextOwner = ReturnType<typeof applicationWorldContext.createApplicationWorldContext>;
 type WorldContextMount = Awaited<ReturnType<WorldContextOwner['mount']>>;
 interface Request { id: string; cancelledFlight: boolean; controller: AbortController; lifetime: SceneLifetime; url: string; options: NavigationOptions; timing: ReturnType<typeof createNavigationTiming>; }
-interface Session { generation: number; lifetime: SceneLifetime; mount: ObjectSceneLifecycle | null; shell: Shell | null; lastCommand: boolean | null; viewUrl: ReturnType<typeof bindViewUrl> | null; request?: Request; url?: string; }
+interface Session { framePresenter?: ReturnType<NonNullable<WorldContextMount['createFramePresenter']>>; generation: number; lifetime: SceneLifetime; mount: ObjectSceneLifecycle | null; shell: Shell | null; lastCommand: boolean | null; viewUrl: ReturnType<typeof bindViewUrl> | null; request?: Request; url?: string; }
 interface RouterOptions { stage: HTMLElement; objectId: string; loadObject?(id: string): Promise<SceneFactory>; documentTarget?: Document; windowTarget?: BrowserWindow; mountShell?: typeof mountPlanetShell; reportError?(error: unknown): void; navigation?: Navigation | null; objects?: readonly ObjectEntry[]; loadContent?: ReturnType<typeof createNavigationContent>['load'] | null; persistentWorldContext?: WorldContextOwner | null; }
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
-import { requireSceneLifecycle } from "./scene-contract.mjs";
+import { requireSceneLifecycle } from "./scene-contract.mts";
 import { objectAdapter } from "./object-adapter.mts";
 import { mountPlanetShell } from "./planet-shell-client.mts";
 import { automaticPlaybackPolicy } from "./runtime-policy.mts";
@@ -49,6 +49,7 @@ export function createSceneRouter({
   let mountTask: Promise<boolean | undefined> | null = null;
   let motionEnabled = false;
   let heliosphereEnabled = false;
+  let highContrastSky = false;
   let asteroidOrbitsEnabled = false;
   let asteroidLabelsEnabled = false;
   let scenePaused = true;
@@ -74,7 +75,7 @@ export function createSceneRouter({
   if (navigation && windowTarget.location?.href) {
     historyOwner = createNavigationHistory({ windowTarget, objects, capture: captureUrl, navigate, onError: report });
     unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, objects,
-      supports: id => navigation.supports(objectId, id), navigate, deselect, onError: report });
+      supports: id => navigation.supports(objectId, id), navigate, onError: report });
   }
   mountTask = mountApplication();
 
@@ -82,7 +83,7 @@ export function createSceneRouter({
     get settled() { return mountTask; },
     state: readSceneState,
     playback: readPlayback,
-    navigate, deselect,
+    navigate,
     destroy() {
       if (destroyed) return;
       destroyed = true;
@@ -123,9 +124,13 @@ export function createSceneRouter({
       if (!shellOwner) {
         const owner: { shell: Shell | null } = { shell: null };
         shellOwner = owner;
-        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, heliosphereEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
+        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, highContrastSky, heliosphereEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
           onMotionChange(next) { if (shellOwner === owner && active) {
             motionEnabled = next === true; syncPlayback(); active?.viewUrl?.schedule();
+          } },
+          onSkyContrastChange(next) { if (shellOwner === owner && active) {
+            highContrastSky = next === true;
+            worldContextMount?.setHighContrastSky?.(highContrastSky);
           } },
           onHeliosphereChange(next) { if (shellOwner === owner && active) {
             heliosphereEnabled = next === true;
@@ -155,9 +160,14 @@ export function createSceneRouter({
       if (loaded.cancelled || active !== session) return;
       // Keep the raw handle even if validation fails.
       let mount: ObjectSceneLifecycle;
+      const framePresenter = worldContextMount?.createFramePresenter?.();
+      session.framePresenter = framePresenter;
+      if (framePresenter) session.lifetime.onDispose(() => framePresenter.destroy());
       mount = loaded.value(stage, {
         ...handoff?.mountOptions,
+        deferTextureRefinement: true,
         ...(worldContextMount ? { externalWorldContext: true, viewport: worldContextMount.viewport } : {}),
+        ...(framePresenter ? { framePresenter } : {}),
         onMotionRequest: requestMotion,
         onError(error) {
           if (active === session && session.mount === mount) fail(session, error);
@@ -216,6 +226,9 @@ export function createSceneRouter({
         if (!interrupted) await session.lifetime.wait(session.viewUrl.restore());
         if (active !== session || session.lifetime.disposed) return;
       }
+      // Restore the incoming camera before admitting optional texture detail.
+      // This also keeps refinements out of the flight's critical path.
+      mount.refineTextures?.();
       if (mount.destinations) shell.setDestinations?.({
         ...mount.destinations,
         async select(place) {
@@ -244,15 +257,6 @@ export function createSceneRouter({
     const saved = active?.mount?.sharedView?.capture(motionEnabled);
     if (saved) url.searchParams.set('v', new URLSearchParams(formatSharedView(saved)).get('v')!);
     return url.pathname + url.search + url.hash;
-  }
-
-  function deselect() {
-    const sun = solarSystemFocus(objects);
-    if (!sun || !hasPresented) return Promise.resolve(false);
-    // Empty sky resets only the wide view, using the same detail boundary as
-    // first-click centering. Read the camera again so zooming in restores protection.
-    if (!navigation?.centerTarget?.({ objectId, fromId: objectId, mount: active?.mount })) return Promise.resolve(false);
-    return navigate(sun.id, { overview: true, recenter: true });
   }
 
   function navigate(id: string, options: NavigationOptions = {}): Promise<boolean | undefined> {
@@ -542,6 +546,7 @@ export function createSceneRouter({
           throw new TypeError('Persistent world context mount must publish and destroy.');
         }
         worldContextMount = value;
+        value.setHighContrastSky?.(highContrastSky);
         value.setHeliosphereEnabled?.(heliosphereEnabled);
         value.setAsteroidOrbitsEnabled?.(asteroidOrbitsEnabled);
         value.setAsteroidLabelsEnabled?.(asteroidLabelsEnabled);
@@ -566,6 +571,7 @@ export function createSceneRouter({
       if (active === session && worldContextMount === owner) owner.publish(world, viewport);
     });
     session.lifetime.onDispose(unsubscribe);
+    session.framePresenter?.enable();
   }
   function setOverview(enabled: boolean) {
     overview = enabled;
@@ -585,13 +591,16 @@ export function createSceneRouter({
       isAvailable: () => active === session && sceneState === 'ready' && !pending,
       windowTarget,
       onChange(next) {
-        if (!next.overview) {
-          // The overview already uses the Sun's camera and prepared detail.
-          // Showing its card must not move the view or allocate another scene.
-          setOverview(false);
-          const url = new URL(windowTarget.location.href); url.searchParams.delete('overview');
+        if (!next.overview || next.objectId === objectId) {
+          // The mounted Sun and its overview share the same camera, detail and
+          // subscriptions. Change their selection in place in either direction.
+          setOverview(next.overview);
+          const url = new URL(windowTarget.location.href);
+          if (next.overview) url.searchParams.set('overview', 'solar-system');
+          else url.searchParams.delete('overview');
           session.url = url.href;
           historyOwner?.commit(url.href, { history: 'replace' });
+          session.viewUrl?.flush();
           return;
         }
         void navigate(sun.id, { overview: true, history: 'replace', preserveView: true });

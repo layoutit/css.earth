@@ -103,11 +103,20 @@
       ],
       "metersPerUnit": 36.52173913043478,
       "bodyRadiusM": 8400
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/kiviuq-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c8fbfff5c165b773fcb27a69c120c5b979c54530d5f77b4d651d546e2bc791fe"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a635fac5a46ba4d7c4f66c4f1a5fbe2265444ce8116ff9b2dc81dd8ea58ee0a5"
+    "sha256": "eab54801f96ae18d6a4649a96deff3143afbb710a67db6ebf404554afc0b8bfd"
   }
 }

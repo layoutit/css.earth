@@ -1,0 +1,10 @@
+{
+  "id": "hela",
+  "passed": true,
+  "queryCount": 830,
+  "sourceSha256": "722e4c9fad0c1b885eca9329149668e8397b4380ff0c96100c014c03fad8d77a",
+  "maxPointDifferenceMeters": 3.5902008154290693e-11,
+  "maxValueDifferenceKilometers": 1.2434497875801753e-14,
+  "maxDistanceDifferenceMeters": 9.009278417651763e-12,
+  "qualification": "Product surface sampler compared to independently computed full-source planar/edge projection. Includes all retained face centroids, six source extrema and all decoded-atlas interior/bleed coordinate probes. Exact shared-edge normal identity is not asserted."
+}

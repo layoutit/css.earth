@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 139.93478260869566,
       "bodyRadiusM": 32185.000000000004
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/tyche-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "60f2085b2d6269d433a51c1ca188185154c06f4e47d2d658d3d89097f79425fb"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ab4f07dba5461ece4cbb2dbb3b73d674cf93817ac5380ee19cf152951e97c22e"
+    "sha256": "da32acf10ca1839984b50c5e5defdd622ef87b24d86f2a16f07d425e9af0bfb6"
   }
 }

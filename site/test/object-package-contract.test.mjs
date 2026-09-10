@@ -25,8 +25,10 @@ test("accepts a complete non-NASA package and still rejects corrupt or undeclare
   for (const file of paths.requiredFiles) { await mkdir(dirname(file), { recursive: true }); await writeFile(file, "fixture\n"); }
   const bytes = Buffer.from("owned prepared bytes");
   const hash = createHash("sha256").update(bytes).digest("hex");
-  await writeFile(resolve(paths.root, "object.json"), JSON.stringify(authoredObjectFixture(object.id,
-    { path: "source/local-data.bin", sha256: hash })));
+  const fixture = authoredObjectFixture(object.id, { path: "source/local-data.bin", sha256: hash });
+  fixture.properties.page = { stylesheets: ["src/body.css"] };
+  await writeFile(resolve(paths.root, "object.json"), JSON.stringify(fixture));
+  for (const path of ["src/body.css", "site/planet-shell.css"]) { await mkdir(dirname(resolve(projectRoot,path)), {recursive:true}); await writeFile(resolve(projectRoot,path), ""); }
   await mkdir(paths.publicAssets, { recursive: true });
   await writeFile(resolve(paths.publicAssets, "surface.webp"), bytes);
   await writeFile(resolve(paths.sourceRoot, "local-data.bin"), bytes);
@@ -50,7 +52,7 @@ test("derives the complete owned file contract from planet identity", () => {
     `/project/src/planets/${planet.id}/prepared/runtime.json`,
   ));
   assert.ok(paths.requiredFiles.includes(
-    `/project/site/pages/${planet.id}.astro`,
+    `/project/site/pages/[id].astro`,
   ));
   assert.ok(paths.requiredFiles.includes(
     `/project/tests/objects/browser/${planet.id}/browser-profile.mjs`,

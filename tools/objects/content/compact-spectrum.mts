@@ -9,7 +9,7 @@ export function renderCompactSpectrum({ title, description, metadata, points, ma
         point.wavelength < .35 || point.wavelength > 1.01 ||
         index > 0 && point.wavelength <= points[index - 1].wavelength)) throw new TypeError('Invalid compact spectrum.');
   const x = (wavelength: number) => (wavelength - .35) / .65 * 300;
-  const y = (value: number) => 64 - value / maximum * 55;
+  const y = (value: number) => 64 - value / maximum * 46;
   const unit = 10 ** Math.floor(Math.log10(maximum / 2));
   const step = [10, 5, 2.5, 2, 1].find(value => value * unit <= maximum / 2)! * unit;
   const ticks = Array.from({ length: Math.floor(maximum / step + 1e-9) + 1 }, (_, index) => index * step);
@@ -21,10 +21,10 @@ export function renderCompactSpectrum({ title, description, metadata, points, ma
 <defs><linearGradient id="visible-spectrum" gradientUnits="userSpaceOnUse" x1="${x(.38)}" x2="${x(.75)}">${stops.map(([offset, color]) => `<stop offset="${offset}" stop-color="${color}"/>`).join('')}</linearGradient></defs>
 ${ticks.map(value => `<path d="M0,${y(value).toFixed(2)} H300" stroke="#222"/>`).join('\n')}
 <path d="${path}" fill="none" stroke="#b7d4d0" stroke-width="1.25" stroke-linejoin="round"/>
-${ticks.map(value => `<text x="296" y="${(y(value)-4).toFixed(2)}" fill="#888" text-anchor="end">${Number(value.toPrecision(3))}</text>`).join('\n')}
+${ticks.filter(value => value > 0).map(value => `<text x="296" y="${(y(value)-4).toFixed(2)}" fill="#666" text-anchor="end">${Number(value.toPrecision(3))}</text>`).join('\n')}
 <rect y="68" width="${x(.38)}" height="6" fill="#261735"/>
 <rect x="${x(.38)}" y="68" width="${x(.75)-x(.38)}" height="6" fill="url(#visible-spectrum)"/>
 <rect x="${x(.75)}" y="68" width="${300-x(.75)}" height="6" fill="#32191d"/>
-${([[.35,'350','start'],[.55,'550','middle'],[.75,'750','middle'],[1,'1000 nm','end']] as const).map(([wavelength,label,anchor]) => `<text x="${x(wavelength)}" y="89" fill="#888" text-anchor="${anchor}">${label}</text>`).join('\n')}
+${([[.35,'350','start'],[.55,'550','middle'],[.75,'750','middle'],[1,'1000 nm','end']] as const).map(([wavelength,label,anchor]) => `<text x="${x(wavelength)}" y="86" fill="#666" text-anchor="${anchor}">${label}</text>`).join('\n')}
 </svg>`;
 }

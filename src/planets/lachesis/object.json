@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 340.2826086956522,
       "bodyRadiusM": 78265
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/lachesis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "69ba2f5a10d538d18240c535cfd9dcca359ba71d9b213a5fe012544158ae7e43"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c337641876b483eddffa073d7c38af63505685f7e0a2a52616dc2fad4ed0940f"
+    "sha256": "a927486c7f79247cd66e826fdcb4e482913d314b825b13c1c3e7471638c4d6f2"
   }
 }

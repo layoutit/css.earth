@@ -50,7 +50,7 @@ function isIncluded<T extends string>(values: readonly T[], value: string): valu
 
 const {
   DWARF_PLANET_IDS, dwarfPlanetElements, keplerStateKm,
-  ASTEROID_IDS, asteroidElements,
+  SMALL_BODY_IDS, asteroidElements,
   COMET_IDS, cometElements,
   SATELLITE_IDS, satelliteStateKm, moonPositionRelativeToPlanetKm,
   SCENE_SATELLITE_IDS, sceneSatelliteStateKm,
@@ -63,7 +63,7 @@ const {
 } = await loadAstronomyPackage();
 
 const BODIES = OBJECTS.filter(body =>
-  ["planet", "dwarf-planet", "satellite", "asteroid", "comet"].includes(body.classification)).map(body => {
+  ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet"].includes(body.classification)).map(body => {
   if (!Object.hasOwn(ASTRONOMY_BODY_DATA, body.id)) throw new TypeError(`Unknown astronomy body: ${body.id}.`);
   return body.id as BodyId;
 });
@@ -164,7 +164,7 @@ const entries = BODIES.map((body) => {
       ? primaryStates.get(parent)!.positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
       : isIncluded(DWARF_PLANET_IDS, parent)
       ? keplerStateKm(dwarfPlanetElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
-      : isIncluded(ASTEROID_IDS, parent)
+      : isIncluded(SMALL_BODY_IDS, parent)
       ? keplerStateKm(asteroidElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
       : planetPosition(parent) : null;
   const mu = isSatellite
@@ -173,7 +173,7 @@ const entries = BODIES.map((body) => {
     : GM_SUN_AU3_PER_DAY2;
   const kepler = isIncluded(DWARF_PLANET_IDS, body)
     ? keplerStateKm(dwarfPlanetElements(body), EPOCH_JD_TT)
-    : isIncluded(ASTEROID_IDS, body) ? keplerStateKm(asteroidElements(body), EPOCH_JD_TT)
+    : isIncluded(SMALL_BODY_IDS, body) ? keplerStateKm(asteroidElements(body), EPOCH_JD_TT)
     : isIncluded(COMET_IDS, body) ? keplerStateKm(cometElements(body), EPOCH_JD_TT) : null;
   const heliocentricAu = isSatellite
     ? parentPosition!.map((value, index) => value + moonPosition![index] / ASTRONOMICAL_UNIT_KILOMETERS) : kepler

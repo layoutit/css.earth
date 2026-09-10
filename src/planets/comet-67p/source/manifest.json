@@ -649,11 +649,11 @@
       ]
     },
     {
-      "id": "n20140913-200612-path",
-      "path": "observations/n20140913t200612355id50f22.img",
-      "expectedBytes": 151028224,
-      "expectedSha256": "21c2b39b4ec5c62e7c04f224b049d96381dc5f4f40c9314fd265da638c7ddf72",
-      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m07-geo-v1.0/data/img/n20140913t200612355id50f22.img",
+      "id": "n20151026-125938-path",
+      "path": "observations/n20151026t125938783id50f22.img",
+      "expectedBytes": 151027712,
+      "expectedSha256": "86e92509e8413eb74ab39fd5d557dad8c9f4e8a5b5c982dc13c194a79a69749e",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/data/img/n20151026t125938783id50f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
       "licenseEvidence": [
@@ -666,15 +666,15 @@
       ],
       "width": 2048,
       "height": 2048,
-      "observationDate": "2014-08-05T19:44:22.918",
+      "observationDate": "2015-10-26T13:00:58.813",
       "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes."
     },
     {
-      "id": "n20140913-200612-qualityPath",
-      "path": "observations/n20140913t200612355id40f22.img",
+      "id": "n20151026-125938-qualityPath",
+      "path": "observations/n20151026t125938783id40f22.img",
       "expectedBytes": 37775872,
-      "expectedSha256": "daecb61e3df87336d16daf475548330c588d3d2e9be03f118d5ccab8cdba43d0",
-      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-prl-67pchuryumov-m07-v2.0/data/img/n20140913t200612355id40f22.img",
+      "expectedSha256": "81a4d0d4cb6240d7a065e0c1f55eb7233412c56c77951f9ea4186eb4f426fc3c",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/data/img/n20151026t125938783id40f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
       "licenseEvidence": [
@@ -687,15 +687,15 @@
       ],
       "width": 2048,
       "height": 2048,
-      "observationDate": "2014-08-05T19:44:22.918",
+      "observationDate": "2015-10-26T13:00:58.813",
       "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly."
     },
     {
-      "id": "n20140920-133916-path",
-      "path": "observations/n20140920t133916351id50f22.img",
+      "id": "n20151031-234514-path",
+      "path": "observations/n20151031t234514781id50f22.img",
       "expectedBytes": 151028224,
-      "expectedSha256": "a2c7f5ee9deca995c96561a449432b43de6830b4843c9b5b08b5a8a307e519e1",
-      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m07-geo-v1.0/data/img/n20140920t133916351id50f22.img",
+      "expectedSha256": "bd37d73e5f2b5f0ad5064a6975fe0bb8c7fb7b05b1b8cb8c0bd9528ba573a7ef",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/data/img/n20151031t234514781id50f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
       "licenseEvidence": [
@@ -708,15 +708,15 @@
       ],
       "width": 2048,
       "height": 2048,
-      "observationDate": "2014-08-05T19:44:22.918",
+      "observationDate": "2015-10-31T23:46:34.951",
       "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes."
     },
     {
-      "id": "n20140920-133916-qualityPath",
-      "path": "observations/n20140920t133916351id40f22.img",
+      "id": "n20151031-234514-qualityPath",
+      "path": "observations/n20151031t234514781id40f22.img",
       "expectedBytes": 37775872,
-      "expectedSha256": "2024e8c6b98662137b211c8e045e74b085fb09b25518e4f755dd9eedaaf63f55",
-      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-prl-67pchuryumov-m07-v2.0/data/img/n20140920t133916351id40f22.img",
+      "expectedSha256": "ea5e6339128039ecf5af0665e10ac03ac89a1724a173748ac5a0b186d2fde000",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/data/img/n20151031t234514781id40f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
       "licenseEvidence": [
@@ -729,7 +729,91 @@
       ],
       "width": 2048,
       "height": 2048,
-      "observationDate": "2014-08-05T19:44:22.918",
+      "observationDate": "2015-10-31T23:46:34.951",
+      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly."
+    },
+    {
+      "id": "n20151104-112633-path",
+      "path": "observations/n20151104t112633715id50f22.img",
+      "expectedBytes": 151027712,
+      "expectedSha256": "c52efdf3d8ac954f2eee09eef415fd216b715ef3fd6ef327ae965fcccf72b0ff",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/data/img/n20151104t112633715id50f22.img",
+      "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+      ],
+      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "width": 2048,
+      "height": 2048,
+      "observationDate": "2015-11-04T11:27:53.983",
+      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes."
+    },
+    {
+      "id": "n20151104-112633-qualityPath",
+      "path": "observations/n20151104t112633715id40f22.img",
+      "expectedBytes": 37775872,
+      "expectedSha256": "1dc00a7acb5efafb93e822670794c75a77738dd007f1936e87f0cc705e4855cb",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/data/img/n20151104t112633715id40f22.img",
+      "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+      ],
+      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "width": 2048,
+      "height": 2048,
+      "observationDate": "2015-11-04T11:27:53.983",
+      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly."
+    },
+    {
+      "id": "n20151115-050650-path",
+      "path": "observations/n20151115t050650703id50f22.img",
+      "expectedBytes": 151027712,
+      "expectedSha256": "a552e2d9e692b68398bb5c18cc18fab8ff7172ac03b52cdd79fd15e0e2ce95a8",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/data/img/n20151115t050650703id50f22.img",
+      "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+      ],
+      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "width": 2048,
+      "height": 2048,
+      "observationDate": "2015-11-15T05:08:11.274",
+      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes."
+    },
+    {
+      "id": "n20151115-050650-qualityPath",
+      "path": "observations/n20151115t050650703id40f22.img",
+      "expectedBytes": 37775872,
+      "expectedSha256": "187e591b1898727928166a180f62e1df7af26770d641221703123604cf628a7f",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/data/img/n20151115t050650703id40f22.img",
+      "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+      ],
+      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "width": 2048,
+      "height": 2048,
+      "observationDate": "2015-11-15T05:08:11.274",
       "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly."
     }
   ],
@@ -769,14 +853,14 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 18900,
-      "expectedSha256": "3626c396dcbee2c7ef9e71873af5573407066c3e8b47309c7a1613801d2edb41",
+      "expectedBytes": 19123,
+      "expectedSha256": "cec87f0cdf5f6c74979f26072032ac6dc79abfb59d5bb856cf6f8d0e4eed00a1",
       "purpose": "67P source evidence or authored preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 9504,
-      "expectedSha256": "d39ae777df7504252f6120b1e0f17a2ae0588bc7affafb43a6f4faece2d90693",
+      "expectedBytes": 10614,
+      "expectedSha256": "b482c496cb233741ec09136ddb43d5b1031083ff301d7e0ca0c7cfb199998d6e",
       "purpose": "67P source evidence or authored preparation input."
     },
     {
@@ -793,8 +877,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 20217,
-      "expectedSha256": "94c222df3f33d7bb1b13a9b1827d47c65c69c5e4983ad39571bc3f2d2869f902",
+      "expectedBytes": 20871,
+      "expectedSha256": "fda2b1082ff2c42801a1c5c544d32a06b5a284e5fbad5ef0fb6ab33a50a344cc",
       "purpose": "67P source evidence or authored preparation input."
     },
     {
@@ -842,8 +926,8 @@
     {
       "path": "reference/osiris-georeference.json",
       "purpose": "OSIRIS observation interpretation or original attached label, including calibration history.",
-      "expectedBytes": 4507,
-      "expectedSha256": "fa9e544eadd6dfddddab617a955f631c3b992c584e93f82605791c2b997f9b18"
+      "expectedBytes": 5755,
+      "expectedSha256": "adf0283d1ae3a7280b008f89a0fac76b36428f96023b9ff23cdb6a7ecaa68cec"
     },
     {
       "path": "reference/osiris-20140805-geo.lbl",
@@ -936,6 +1020,70 @@
       "expectedSha256": "517ce88eaf0cd01425d86e538a299f7319ed7907178cc37424749010a13bd52a",
       "id": "n20140920-133916-qualityPath-label",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-prl-67pchuryumov-m07-v2.0/data/img/n20140920t133916351id40f22.img"
+    },
+    {
+      "path": "reference/n20151026t125938783id40f22.lbl",
+      "purpose": "Original attached OSIRIS image label; calibration HISTORY remains in the pinned full image.",
+      "expectedBytes": 23552,
+      "expectedSha256": "9adfb183fb687bf10a4d52e4c1830f55e4274503dd8edd9dd93e64c4595a38e5",
+      "id": "n20151026t125938783id40f22-label",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/data/img/n20151026t125938783id40f22.img"
+    },
+    {
+      "path": "reference/n20151026t125938783id50f22.lbl",
+      "purpose": "Original attached OSIRIS image label; calibration HISTORY remains in the pinned full image.",
+      "expectedBytes": 29184,
+      "expectedSha256": "4bda41d769dc514e6b60e3c05434f796b23ca65961d8d8efcc34d639a97c3b88",
+      "id": "n20151026t125938783id50f22-label",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/data/img/n20151026t125938783id50f22.img"
+    },
+    {
+      "path": "reference/n20151031t234514781id40f22.lbl",
+      "purpose": "Original attached OSIRIS image label; calibration HISTORY remains in the pinned full image.",
+      "expectedBytes": 23552,
+      "expectedSha256": "77cd3096a4a0280df43bd0d5bf3318bebaeced6a9ef1495845dbb1384f8e677f",
+      "id": "n20151031t234514781id40f22-label",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/data/img/n20151031t234514781id40f22.img"
+    },
+    {
+      "path": "reference/n20151031t234514781id50f22.lbl",
+      "purpose": "Original attached OSIRIS image label; calibration HISTORY remains in the pinned full image.",
+      "expectedBytes": 29696,
+      "expectedSha256": "576cfcd39d652aacf36bec6ee4f55c644fed75b11043383ea7e1c13ebf3e131e",
+      "id": "n20151031t234514781id50f22-label",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/data/img/n20151031t234514781id50f22.img"
+    },
+    {
+      "path": "reference/n20151104t112633715id40f22.lbl",
+      "purpose": "Original attached OSIRIS image label; calibration HISTORY remains in the pinned full image.",
+      "expectedBytes": 23552,
+      "expectedSha256": "e19e03dfdd5101274779a89e8719abb317fd3bd0b71978285349b6fdf7b4580d",
+      "id": "n20151104t112633715id40f22-label",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/data/img/n20151104t112633715id40f22.img"
+    },
+    {
+      "path": "reference/n20151104t112633715id50f22.lbl",
+      "purpose": "Original attached OSIRIS image label; calibration HISTORY remains in the pinned full image.",
+      "expectedBytes": 29184,
+      "expectedSha256": "effe3b48ea51e9bb7df8f8b888d16be3d547458352d4484329041e2e659d364a",
+      "id": "n20151104t112633715id50f22-label",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/data/img/n20151104t112633715id50f22.img"
+    },
+    {
+      "path": "reference/n20151115t050650703id40f22.lbl",
+      "purpose": "Original attached OSIRIS image label; calibration HISTORY remains in the pinned full image.",
+      "expectedBytes": 23552,
+      "expectedSha256": "872da8d8f53591e6da78c134f3a964c1eec07164e9b4d111015cf65457ab15ac",
+      "id": "n20151115t050650703id40f22-label",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/data/img/n20151115t050650703id40f22.img"
+    },
+    {
+      "path": "reference/n20151115t050650703id50f22.lbl",
+      "purpose": "Original attached OSIRIS image label; calibration HISTORY remains in the pinned full image.",
+      "expectedBytes": 29184,
+      "expectedSha256": "28ed1096c24f89c3bd3e8506dc491345206097205ef78889c212c05d5c0a7e7c",
+      "id": "n20151115t050650703id50f22-label",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/data/img/n20151115t050650703id50f22.img"
     }
   ]
 }

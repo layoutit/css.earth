@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d85200be1ef51085e18632dff113bc83abfa293de0e60cc1681d41a7b6d76037"
+    "sha256": "3d7170b28a329ac9a7e37c17bd50340f1c2712671d62e462352c8bec03302b5e"
   },
   "id": "ryugu",
   "properties": {
@@ -116,6 +116,15 @@
       ],
       "metersPerUnit": 1.9478260869565218,
       "bodyRadiusM": 448
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ryugu-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c42c81bcbd330f9353dfe554c3372d7f1ddeb084ff35701a7e5f27a2bb0db027"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -40,6 +40,9 @@ const stellarPoints = [...selectedStars.values()].map(star => ({
   positionM: rotateWorldPosition(starRotation, [star.positionUnits[0], star.positionUnits[1], star.positionUnits[2]]).map((value, axis) => value * stars.frame.metersPerUnit + stars.frame.originM[axis]),
   color: `rgb(${stars.atlas.colors[star.colorIndex].join(' ')})`,
 }));
+const allPoints = [...stellarPoints, ...points];
+const pointOrderX = allPoints.map((_, index) => index)
+  .sort((a, b) => allPoints[a].positionM[0] - allPoints[b].positionM[0]);
 const markup = (point: { id: string; classification: string; color: string }) => `<i class="space-minimap-dot" data-body="${point.id}" data-classification="${point.classification}" style="background:${point.color}" hidden></i>`;
 const axes = ([[1, 0, 0], [0, -1, 0], [0, 0, -1]] as PositionM[]).map(eclipticJ2000ToIcrf);
 const galaxyRotation = worldRotationFromQuaternion([volume.data.frame.localToReferenceXyzw[0], volume.data.frame.localToReferenceXyzw[1], volume.data.frame.localToReferenceXyzw[2], volume.data.frame.localToReferenceXyzw[3]]);
@@ -48,8 +51,8 @@ await writeFile(new URL('./prepared.json', import.meta.url), JSON.stringify({
   referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
   diagramToReference: [0, 1, 2].flatMap(row => axes.map(axis => axis[row])),
   radius, ringRadiiM, defaultFocus: { positionM: context.focus.positionM, radiusM: context.focus.radiusM },
-  bodyIds: bodies.map(body => body.id), points: [...stellarPoints, ...points],
-  gridMarkup: [...rings, ...spokes, rim].join(''), pointMarkup: [...stellarPoints, ...points].map(markup).join(''),
+  bodyIds: bodies.map(body => body.id), points: allPoints, pointOrderX,
+  gridMarkup: [...rings, ...spokes, rim].join(''), pointMarkup: allPoints.map(markup).join(''),
   galaxy: {
     positionM: volume.data.frame.originM, widthM: 20 * volume.data.frame.metersPerUnit,
     planeToReference: [0, 1, 2].flatMap(row => galaxyAxes.map(axis => axis[row])),

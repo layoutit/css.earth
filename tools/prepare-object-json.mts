@@ -1,3 +1,4 @@
+import { preparePageMetadata } from './prepared-page-metadata.mts';
 import {parseObjectDescriptor} from '@cssearth/objects';
 import {requireObjectRuntimeDefinition} from './object-runtime-contract.mts';
 import {requireRecord,requireString,isRecord,hasErrorCode} from './source-values.mts';
@@ -52,10 +53,14 @@ export async function writeObjectJson(id:string, definitionValue:unknown, option
   await mkdir(resolve(root, 'src/planets', id, 'prepared'), { recursive: true });
   await writePreparedText(asset, payload);
   const prepared = { format, url: 'prepared/object.json', sha256: createHash('sha256').update(payload).digest('hex') };
+  const page = preparePageMetadata(id, prepared.sha256, definition);
+  await writePreparedText(resolve(objectDirectory, 'prepared/page.json'), page.text);
+  const originalProperties = requireRecord(originalDescriptor.properties);
   // Validation may normalize key order. Retain the authored document's order
   // so an unchanged prepared object does not rewrite its descriptor.
   await writePreparedText(descriptorPath, `${JSON.stringify({ ...originalDescriptor,
-    properties: { ...requireRecord(originalDescriptor.properties), worldFrame: preparedNavigation.frame }, prepared }, null, 2)}\n`);
+    properties: { ...originalProperties, worldFrame: preparedNavigation.frame,
+      page: { ...requireRecord(originalProperties.page), metadata: page.reference } }, prepared }, null, 2)}\n`);
   return { id, bytes: Buffer.byteLength(payload), ...prepared };
 }
 

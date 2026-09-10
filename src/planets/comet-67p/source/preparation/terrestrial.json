@@ -594,7 +594,17 @@
           "referenceEmissionDegrees": 0,
           "maximumIncidenceDegrees": 80,
           "maximumEmissionDegrees": 80,
-          "maximumGain": 3
+          "maximumGain": 3,
+          "phaseCorrection": {
+            "model": "hg-shadow-hiding",
+            "asymmetry": -0.37,
+            "amplitude": 2.5,
+            "width": 0.079,
+            "referenceDegrees": 50,
+            "minimumDegrees": 40,
+            "maximumDegrees": 70,
+            "maximumGain": 1.5
+          }
         },
         "displayPercentiles": [
           1,
@@ -603,7 +613,7 @@
         "metadata": {
           "label": "OSIRIS mosaic",
           "falseColor": false,
-          "coverage": "Four OSIRIS orange-filter observations, 5–6 August 2014. Grayscale with approximate illumination correction and bounded brightness matching; photographed shadows and some seams remain. Gray grid marks missing or rejected imagery. Shadows off shows the mosaic uniformly lit; Shadows on adds modeled lighting at the shared 3 September 2026 epoch. This is not an albedo map."
+          "coverage": "Eight OSIRIS orange-filter photographs from August 2014 and October–November 2015. Unsupported surface patches retain the grid."
         },
         "frames": [
           {
@@ -631,25 +641,39 @@
             "startTime": "2014-08-06T05:20:22.894"
           },
           {
-            "id": "n20140913-200612",
-            "path": "observations/n20140913t200612355id50f22.img",
-            "qualityPath": "observations/n20140913t200612355id40f22.img",
-            "startTime": "2014-09-13T20:07:21.805"
+            "id": "n20151026-125938",
+            "path": "observations/n20151026t125938783id50f22.img",
+            "qualityPath": "observations/n20151026t125938783id40f22.img",
+            "startTime": "2015-10-26T13:00:58.813"
           },
           {
-            "id": "n20140920-133916",
-            "path": "observations/n20140920t133916351id50f22.img",
-            "qualityPath": "observations/n20140920t133916351id40f22.img",
-            "startTime": "2014-09-20T13:40:25.993"
+            "id": "n20151031-234514",
+            "path": "observations/n20151031t234514781id50f22.img",
+            "qualityPath": "observations/n20151031t234514781id40f22.img",
+            "startTime": "2015-10-31T23:46:34.951"
+          },
+          {
+            "id": "n20151104-112633",
+            "path": "observations/n20151104t112633715id50f22.img",
+            "qualityPath": "observations/n20151104t112633715id40f22.img",
+            "startTime": "2015-11-04T11:27:53.983"
+          },
+          {
+            "id": "n20151115-050650",
+            "path": "observations/n20151115t050650703id50f22.img",
+            "qualityPath": "observations/n20151115t050650703id40f22.img",
+            "startTime": "2015-11-15T05:08:11.274"
           }
         ],
         "selection": "lowest-emission",
         "levelMatching": {
-          "samplesPerTriangle": 24,
+          "samplesPerTriangle": 64,
           "minimumPairs": 128,
           "maximumLogMad": 0.25,
-          "maximumGain": 1.35
-        }
+          "maximumGain": 1.35,
+          "maximumAngleDegrees": 65
+        },
+        "radiometry": "radiance-factor"
       }
     ]
   },

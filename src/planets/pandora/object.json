@@ -108,11 +108,20 @@
       ],
       "metersPerUnit": 176.52173913043478,
       "bodyRadiusM": 40600
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/pandora-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "9b6e661423820f764dbc38bfa0999ed601862f335e56fe091746b9c8ce7c038a"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "947181fc6ea4a25af4791ebe7197174f42159602b516dbd3d3391718d0113121"
+    "sha256": "e9c43ef316c4e9d2b2d47da4790f3aa338140c118f612d120543365a0d25aea1"
   }
 }

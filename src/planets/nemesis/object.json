@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 354.3478260869565,
       "bodyRadiusM": 81500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/nemesis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b2dab697a72a124170cf028f436d828958f868365b80c4ef2031074a62c14870"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0391ffab6d887279e96aad7c1af82776e1c54fb50af4f2b1c8ab74621036ca3a"
+    "sha256": "53cf7951b365051ee651c9da8fb782263eae8ade79684674c2cd0d2a7e3cdd5b"
   }
 }

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 185.52173913043478,
       "bodyRadiusM": 42670
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/laurentia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "563edad35b4a576bf22c0be8f42c07e6dde67244611b2817bce8559d3a3972fc"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3c170a5f64d54c3a543278f5bbe2722012877feabce314a96593da4a2cd5b15d"
+    "sha256": "2114ddaf2b8334890f1107bfb57fd970c5c9368a8df8738c792ec40e5997b999"
   }
 }

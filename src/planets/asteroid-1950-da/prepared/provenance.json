@@ -7,9 +7,9 @@
     "sha256": "f3aa35f1b00dc132839b0dda4b9f1a805fdf3c326fa039d50b9e11bad610eb0a"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -325,7 +325,7 @@
       "sha256": "2a9078d6ea00783ec32d4598517789f1f293d90807b024f5b03b1fda5de10657",
       "bytes": 29079,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -350,7 +350,7 @@
       "sha256": "167441bbc17f93dbfb13d9e48dfe75ec213ef70fae7a11784222d6fc903b3966",
       "bytes": 8206,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -383,19 +383,19 @@
           "url": "/scenes/asteroid-1950-da/asteroid-1950-da-elevation-thumbnail.webp",
           "bytes": 5780,
           "sha256": "769b22a8c2fb978bf76aef980a3c8cef180cbd0a6293745cfdb88654195d0e75",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1950-da/asteroid-1950-da-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1950-da/asteroid-1950-da-elevation-surface@2x.webp",
           "bytes": 329432,
           "sha256": "d11a7b270b4246f282be9cb8878e48a0e26b09e7dc6dfe3dcd1e0d7ed17886d3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -427,13 +427,13 @@
           "url": "/scenes/asteroid-1950-da/asteroid-1950-da-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/asteroid-1950-da/asteroid-1950-da-shape-surface@2x.webp",
           "bytes": 205014,
           "sha256": "8be2fc86a148582e03e15d77193a96d9b4d636d7b459c4b8edc3aade513e7bb6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

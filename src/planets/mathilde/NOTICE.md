@@ -8,4 +8,4 @@ Photomosaic: P. Stooke and J. Pfau, with positional control by P. Thomas; NEAR i
 
 Physical/orbital data: NASA/JPL Horizons. ESO/S. Brunier panorama is CC BY 4.0; HYG and ESO notices are retained in `source/stars`. Inter title outlines use the pinned Inter font under SIL Open Font License 1.1, retained in `source/presentation/LICENSE.INTER-OFL`.
 
-SOURCE.md records coordinate conventions, partial coverage, modeled geometry, illumination limits and surveyed alternatives. Research-paper PDFs are not redistributed as body-package sources.
+README.md records coordinate conventions, partial coverage, modeled geometry, illumination limits and surveyed alternatives. Research-paper PDFs are not redistributed as body-package sources.

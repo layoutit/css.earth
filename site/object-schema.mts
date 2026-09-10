@@ -5,7 +5,7 @@ import type { WorldRotation } from '../src/renderers/css/navigation/world-camera
 import type { SceneFactory } from './browser-types.mts';
 import { record } from './browser-types.mts';
 
-export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-planet' | 'asteroid' | 'comet';
+export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-planet' | 'asteroid' | 'comet' | 'trans-neptunian';
 export interface ObjectDefinitionInput {
   id: string; name: string; systemName: string; classification: ObjectClassification;
   color: string; distanceAu: number; route: string; description: string;
@@ -29,7 +29,7 @@ const OBJECT_INPUT_KEYS = new Set([
 // Classification vocabulary, not a registry of object identities. Extend this
 // list deliberately when a package introduces a new kind of body.
 export const OBJECT_CLASSIFICATIONS = Object.freeze([
-  "star", "planet", "satellite", "dwarf-planet", "asteroid", "comet",
+  "star", "planet", "satellite", "dwarf-planet", "asteroid", "trans-neptunian", "comet",
 ]);
 
 export function defineObject(input: ObjectDefinitionInput): ObjectEntry {

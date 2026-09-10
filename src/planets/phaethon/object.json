@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 11.08695652173913,
       "bodyRadiusM": 2550
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/phaethon-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "64fe96203bcd33a3a646652026e0a104d7002ec917e7cf21574fee82b386a029"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "72601181339e6be2852ad0dca195b66e0786c7a90206b0572591eb31df0c4b4a"
+    "sha256": "4cb596a3f96e307b22fe31c2e40bfec7f9a26bb7c5c735aa9a635ad8a03e1f00"
   }
 }

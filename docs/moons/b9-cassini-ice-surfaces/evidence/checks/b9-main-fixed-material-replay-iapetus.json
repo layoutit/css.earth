@@ -1,0 +1,51 @@
+{
+  "command": [
+    "node",
+    "docs/moons/b9-cassini-ice-surfaces/prepare-selected.mjs",
+    "iapetus"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 706265088,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 360448,
+      "freePercent": 56
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 217186304,
+      "freePercent": 56
+    },
+    {
+      "seconds": 0.6,
+      "rssBytes": 340017152,
+      "freePercent": 56
+    },
+    {
+      "seconds": 0.8,
+      "rssBytes": 431046656,
+      "freePercent": 56
+    },
+    {
+      "seconds": 1.1,
+      "rssBytes": 536903680,
+      "freePercent": 56
+    },
+    {
+      "seconds": 1.4,
+      "rssBytes": 637812736,
+      "freePercent": 56
+    },
+    {
+      "seconds": 1.6,
+      "rssBytes": 706265088,
+      "freePercent": 56
+    }
+  ],
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 1.9
+}

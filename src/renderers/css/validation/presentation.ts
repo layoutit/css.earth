@@ -7,6 +7,8 @@ import type { ObjectControls } from '../runtime/object-contract.js';
 import type { CameraPlan } from '../navigation/types.js';
 import { parsePreparedPagePlan } from '../paging/capabilities.js';
 
+export { requireTextureLevels } from '../../../platform/prepared-texture-levels.mts';
+
 export function requireVariants(value: unknown, tree: PreparedTree, resources: ReadonlySet<string>, tracks: readonly PreparedMaterialTrack[], controls: ObjectControls, camera: CameraPlan): asserts value is readonly PreparedVariant[] {
   const variants = array(value, 'selection variants'); if (!variants.length) fail('selection variants are empty');
   const lensIds = controls.lenses?.controls.map(lens => lens.id) ?? [], settings = new Map(controls.settings?.controls.map(setting => [setting.name, setting]) ?? []);

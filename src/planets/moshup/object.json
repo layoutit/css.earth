@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 2.8630434782608694,
       "bodyRadiusM": 658.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/moshup-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "356d0f5ef03828dfcab2ad564cd04b33ced0f846486d76f5ff8c788ceb7f1cc3"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "72f63431843a2887af8b7c355553673d8c880e27b84aa51a0572545cf6c069b9"
+    "sha256": "44117bb0663998f946c331251ec63d3d8fd54810326a1b554767d5ab746fd779"
   }
 }

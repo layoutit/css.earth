@@ -1,0 +1,71 @@
+
+ RUN  v3.2.7 /Users/ekrof/fed/cssEarth-moons-cassini-atlas/packages/astronomy
+
+ ✓ src/solarSystem.test.ts (24 tests) 4885ms
+   ✓ the solar-system frame tree > declares maxOffsetInParent that really bounds the origin, sampled over full orbits  2319ms
+   ✓ the bounds the builder declares > bounds each planet's offset from its barycentre by the moons' mass-weighted apoapses  773ms
+   ✓ the bounds the builder declares > bounds the Moon by MOON_MAX_GEOCENTRIC_KM with the margin it claims  1510ms
+ ✓ src/satellites.test.ts (365 tests) 1181ms
+ ✓ tools/lib/fit-harmonics.test.mjs (2 tests) 641ms
+   ✓ preparation harmonic fit > keeps a finite fit when a refinement crosses a forbidden frequency interval  601ms
+ ✓ src/elp2000.test.ts (6 tests) 35ms
+ ✓ src/dwarfPlanets.test.ts (22 tests) 27ms
+ ✓ src/bodies.test.ts (9 tests) 19ms
+ ✓ src/frames.test.ts (21 tests) 16ms
+ ✓ src/rotation.test.ts (50 tests) 13ms
+ ✓ src/modelAccuracy.test.ts (112 tests) 12ms
+ ✓ src/kepler.test.ts (9 tests) 10ms
+ ✓ src/asteroids.test.ts (2 tests) 8ms
+ ✓ src/vsop87.test.ts (22 tests) 7ms
+ ✓ src/sceneSatellites.test.ts (4 tests) 2ms
+ ✓ src/angles.test.ts (8 tests) 2ms
+ ✓ tools/lib/fit-cosine-series.test.mjs (2 tests) 2ms
+ ✓ src/comets.test.ts (2 tests) 2ms
+ ✓ src/periodicCorrection.test.ts (2 tests) 1ms
+ ✓ src/time.test.ts (6 tests) 1ms
+
+ Test Files  18 passed (18)
+      Tests  668 passed (668)
+   Start at  23:01:06
+   Duration  9.54s (transform 478ms, setup 0ms, collect 944ms, tests 6.87s, environment 1ms, prepare 443ms)
+
+
+ RUN  v3.2.7 /Users/ekrof/fed/cssEarth-moons-cassini-atlas/packages/catalog
+
+ ✓ src/catalog.test.ts (8 tests) 3ms
+
+ Test Files  1 passed (1)
+      Tests  8 passed (8)
+   Start at  23:01:15
+   Duration  138ms (transform 30ms, setup 0ms, collect 31ms, tests 3ms, environment 0ms, prepare 28ms)
+
+
+ RUN  v3.2.7 /Users/ekrof/fed/cssEarth-moons-cassini-atlas/packages/objects
+
+ ✓ src/objects.test.ts (26 tests) 5ms
+ ✓ src/baking/raster.test.ts (5 tests) 3ms
+ ✓ src/density-volume.test.ts (7 tests) 3ms
+
+ Test Files  3 passed (3)
+      Tests  38 passed (38)
+   Start at  23:01:16
+   Duration  396ms (transform 65ms, setup 0ms, collect 90ms, tests 11ms, environment 0ms, prepare 76ms)
+
+
+ RUN  v3.2.7 /Users/ekrof/fed/cssEarth-moons-cassini-atlas/packages/engine
+
+ ✓ src/runtime/scene-lifetime.test.ts (3 tests) 14ms
+ ✓ src/runtime/selection-flight-step.test.ts (4 tests) 8ms
+ ✓ src/runtime/selection-flight.test.ts (9 tests) 8ms
+ ✓ src/navigation/navigation-math.test.ts (5 tests) 3ms
+ ✓ src/runtime/prepared-point-field.test.ts (7 tests) 3ms
+ ✓ src/solar-system/label-field.test.ts (7 tests) 2ms
+ ✓ src/runtime/scaled-focus-frame.test.ts (5 tests) 2ms
+ ✓ src/solar-system/star-labels.test.ts (6 tests) 2ms
+ ✓ src/solar-system/planet-point-presentation.test.ts (2 tests) 1ms
+
+ Test Files  9 passed (9)
+      Tests  48 passed (48)
+   Start at  23:01:16
+   Duration  1.01s (transform 73ms, setup 0ms, collect 110ms, tests 43ms, environment 1ms, prepare 218ms)
+

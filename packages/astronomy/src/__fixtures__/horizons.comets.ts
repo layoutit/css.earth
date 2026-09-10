@@ -440,5 +440,93 @@ export const COMET_FIXTURES = {
         ]
       }
     ]
+  },
+  "comet-2p": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D2P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          394733717.4063793,
+          22220074.28510228,
+          55833803.43168824
+        ],
+        "velocity": [
+          -1261634.563428233,
+          568593.2281531704,
+          247561.0515813324
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          353947480.4418745,
+          39060634.17438956,
+          62810614.48205598
+        ],
+        "velocity": [
+          -1463793.194489485,
+          551762.7551068724,
+          215336.1991600925
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          306436444.4470094,
+          55135683.19390734,
+          68578505.68629111
+        ],
+        "velocity": [
+          -1713317.610000218,
+          515612.0464470301,
+          165320.0728400006
+        ]
+      }
+    ]
+  },
+  "comet-209p": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D209P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          622199801.5475527,
+          364365603.8322733,
+          -12921322.17552794
+        ],
+        "velocity": [
+          -74034.80216689623,
+          576295.1774946256,
+          412602.7303251446
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          619246758.3651284,
+          381218029.1715986,
+          -532953.7700774466
+        ],
+        "velocity": [
+          -122594.0105211518,
+          547101.2922838099,
+          413124.6000434192
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          614857772.4709042,
+          397185613.9169564,
+          11856552.21341
+        ],
+        "velocity": [
+          -169790.9106500333,
+          517299.9940106714,
+          412685.6110491949
+        ]
+      }
+    ]
   }
 } as const

@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "97a253269119c064bf6a8b950f5a7c18dc683aa4bb7348b9417cdbe540091e05"
+          "sha256": "35b99c0e28512e4aac06aef401ee1a5aabdab3a4849c9d61ea9ad51eb5e746ac"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "40c45d5876be92934c3e6e31286c21866ce3dd47d8aa619a94ea4c2a1ec8fe85"
+          "sha256": "9385ba5b2291ed240afa983c52dbbcfa72d0bcea81636562869077b56f3466a4"
         },
         {
           "id": "title",
@@ -43,7 +43,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "dd0fa3a2a52f5eaae0c9f61f2bf491ea9d64d09edde25e946104fa42edb10ab5"
+          "sha256": "b90888d93efd823a6626c7cd6da7651e6d3d42bdd773cae31ccb96bc927b6027"
         }
       ],
       "shape": {
@@ -63,6 +63,16 @@
             },
             {
               "id": "enhanced",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "infrared",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "ice-absorption",
               "source": "content",
               "material": "lighting"
             }
@@ -103,11 +113,20 @@
       ],
       "metersPerUnit": 3193.478260869565,
       "bodyRadiusM": 734500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/iapetus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "180d75bb6566b9a66d2f60ee35e3aaf32eba38f006671b8ec46fde99851fa4c4"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1035c2a7aeeb084ba0dd03e75606115a07638e1270a1884e480c0d50a0c59aa6"
+    "sha256": "6f95b353f3466e7dc6fc4173bafe7117da08e7f0b7983e4eb08e1a2176ba5041"
   }
 }

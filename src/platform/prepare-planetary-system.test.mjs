@@ -11,6 +11,8 @@ import {
   lambertPhaseFunction,
 } from "./prepare-planetary-system.mts";
 import { prepareEclipticPresentationFrame } from "./solar-presentation-frame.mts";
+import { prepareHeliocentricView } from "./prepare-heliocentric-view.mts";
+import { validatePreparedPlanetarySystem } from "./heliocentric-view.mts";
 import {
   ASTRONOMICAL_UNIT_KILOMETERS,
   BODY_FIXED_SUN_DIRECTIONS,
@@ -58,6 +60,22 @@ async function prepareMercurySystem(overrides = {}) {
     ...overrides,
   });
 }
+
+test("an outer observer's long orbit is enclosed together with the other planets", async () => {
+  const bodyId = 'gkunhomdima', astronomy = await loadAstronomyPackage();
+  const radiusKm = astronomy.BODIES[bodyId].meanRadiusKm;
+  const frame = prepareEclipticPresentationFrame(bodyId);
+  const system = await preparePlanetarySystem({ bodyId, presentationFrame: frame,
+    kilometersPerUnit: radiusKm / 230, astronomy });
+  const plan = prepareHeliocentricView({ bodyId, presentationFrame: frame,
+    bodyRadiusUnits: 230, bodyRadiusKilometers: radiusKm,
+    sunSprite: { imagePixels: 512, opaqueCoreDiameterShare: .2 }, system });
+  assert.ok(plan.orbit.maximumExtentUnits > system.maximumExtentUnits,
+    'This source-backed outer orbit must exercise the previously excluded extent.');
+  assert.doesNotThrow(() => validatePreparedPlanetarySystem(plan.system, plan));
+  assert.ok(plan.orbit.vertices.every(vertex => Math.hypot(...vertex) <= plan.system.maximumExtentUnits));
+  assert.deepEqual(plan.system.bodies, system.bodies, 'Other body positions and geometry stay unchanged.');
+});
 
 test("satellite parent frames contain both close and distant moon orbits without changing physical positions", async () => {
   const astronomy = await loadAstronomyPackage();

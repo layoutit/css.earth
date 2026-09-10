@@ -4,12 +4,12 @@ Six additional published shape models extend the registry from 84 to 90 asteroid
 
 | Number | Body and source record | Source triangles | Prepared triangles | Reference radius (km) |
 | --- | --- | ---: | ---: | ---: |
-| 8567 | [1996 HW1](../src/planets/asteroid-1996-hw1/SOURCE.md) | 2,780 | 800 | 1.01 |
-| 341843 | [2008 EV5](../src/planets/asteroid-2008-ev5/SOURCE.md) | 3,996 | 800 | 0.2 |
-| 2100 | [Ra-Shalom](../src/planets/ra-shalom/SOURCE.md) | 2,292 | 800 | 1.15 |
-| 10115 | [1992 SK](../src/planets/asteroid-1992-sk/SOURCE.md) | 1,016 | 800 | 0.5 |
-| 52760 | [1998 ML14](../src/planets/asteroid-1998-ml14/SOURCE.md) | 1,020 | 800 | 0.5 |
-| 276049 | [2002 CE26 Primary](../src/planets/asteroid-2002-ce26/SOURCE.md) | 2,292 | 800 | 1.73 |
+| 8567 | [1996 HW1](../src/planets/asteroid-1996-hw1/README.md) | 2,780 | 800 | 1.01 |
+| 341843 | [2008 EV5](../src/planets/asteroid-2008-ev5/README.md) | 3,996 | 800 | 0.2 |
+| 2100 | [Ra-Shalom](../src/planets/ra-shalom/README.md) | 2,292 | 800 | 1.15 |
+| 10115 | [1992 SK](../src/planets/asteroid-1992-sk/README.md) | 1,016 | 800 | 0.5 |
+| 52760 | [1998 ML14](../src/planets/asteroid-1998-ml14/README.md) | 1,020 | 800 | 0.5 |
+| 276049 | [2002 CE26 Primary](../src/planets/asteroid-2002-ce26/README.md) | 2,292 | 800 | 1.73 |
 
 Original vertices retain their published kilometer scale. Reference radii define display scale and the Elevation datum; they do not resize the source geometry. The existing source-meshoptimizer preparation preserves source connectivity and prepares 800 native PolyCSS u raster triangles per body with 128 px cells. The shared grid marks unavailable registered optical imagery. Shadows start off and remain optional.
 
@@ -27,7 +27,7 @@ The branch also includes main's five-comet merge (`1588a643`). The combined regi
 
 The [validation record](asteroids-radar-expansion-validation.json) binds implementation `e060613b` to source and prepared hashes, installation totals, browser observations and trace identities.
 
-- Source verification passes for all 176 objects. The six additions pass 24 source tests and six prepared-package tests. Independent source/scalar and decoded-atlas checks are recorded in each package's SOURCE.md.
+- Source verification passes for all 176 objects. The six additions pass 24 source tests and six prepared-package tests. Independent source/scalar and decoded-atlas checks are recorded in each package's source notes.
 - The required `pnpm test` run passed 634 package tests, 337 renderer tests and 1,403 platform cases before three failures. Two audit files exceeded Node's default 4 GiB heap; their focused rerun with an 8 GiB heap passes all 54 cases. The missing ML14 citation-check date is corrected, and both factsheet tests pass. The remaining shell stage passes all 234 tests. Passing stages were not repeated; the original aggregate invocation is recorded as nonzero, with all failures resolved separately.
 - Full prebuild completed. Final static generation produces 177 pages, and all 176 objects assemble successfully. Initial assembly exposed a pre-existing 44-byte Haumea ring file; its original bytes were preserved and the normal installer restored the pinned release before assembly was repeated.
 - A clean checkout completed normal `pnpm install --frozen-lockfile` including postinstall. The published inventory installed all 210 files with zero reuse: 47,809,188 bytes. All six mounted at DPR 1 and 2 while original geometry inputs were absent. Every prepared-object hash matches the primary checkout. The later citation-date and source-packaging updates preserve scene payloads, geometry and asset inventories.

@@ -1,3 +1,4 @@
+import { objectPageStyles } from '../site/object-page-contract.mts';
 import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import type { ObjectEntry } from "../site/object-schema.mts";
@@ -18,7 +19,7 @@ export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name"
   return Object.freeze({
     root,
     requiredFiles: Object.freeze([
-      resolve(root, "SOURCE.md"),
+      resolve(root, "README.md"),
       resolve(root, "NOTICE.md"),
       resolve(root, "source", "manifest.json"),
       resolve(root, "runtime-assets.json"),
@@ -35,7 +36,8 @@ export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name"
       resolve(root, "tools", "verify-source-manifest.mjs"),
       resolve(root, "tools", "compact-production-assets.mjs"),
       ]),
-      resolve(projectRoot, "site", "pages", `${objectRecord.id}.astro`),
+      resolve(root, 'prepared/page.json'),
+      resolve(projectRoot, 'site/pages/[id].astro'),
     ]),
     runtimeAssets: resolve(root, "runtime-assets.json"),
     sourceManifest: resolve(root, "source", "manifest.json"),
@@ -49,6 +51,8 @@ export async function validateObjectPackageFiles(
   { projectRoot = process.cwd(), accessFile = access }: {projectRoot?: string; accessFile?: typeof access} = {},
 ) {
   const paths = objectPackagePaths(objectRecord, projectRoot, Boolean(await authoredObject(objectRecord.id, projectRoot)));
+  const descriptor = JSON.parse(await readFile(resolve(paths.root, 'object.json'), 'utf8'));
+  for (const path of objectPageStyles(descriptor)) await accessFile(resolve(projectRoot, path));
   for (const file of paths.requiredFiles) {
     try {
       await accessFile(file);

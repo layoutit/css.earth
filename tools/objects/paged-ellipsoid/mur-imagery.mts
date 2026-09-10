@@ -165,7 +165,7 @@ export async function restoreMurMosaic(sourceDirectory: string) {
     const output = join(temp, 'mosaic.png');
     const mosaic = await prepareMurMosaic(temp, receipt, output, receipt.mosaic.width);
     demand(mosaic.sha256 === receipt.mosaic.sha256, 'restored mosaic differs');
-    await writeFile(join(sourceDirectory, 'mur-gibs.png'), await readFile(output));
+    await writeFile(join(sourceDirectory, 'mur-gibs.png'), await readFile(output), { flag: 'wx' });
     return mosaic;
   } finally { await rm(temp, { recursive: true, force: true }); }
 }

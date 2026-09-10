@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 380.4347826086956,
       "bodyRadiusM": 87500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hektor-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c14440dcfdc51bbebf8df3ab21b41c4be9133850b7be309c091c9ede491f1f0e"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1a2efa2c1f0352790659bec8e4cc8607b5dc12e61e01e8bb3900e357bad5dace"
+    "sha256": "620f67bcc8fd86506f1bff0e778e25cfbcb7d89083268e19d82bc89bf33413db"
   }
 }

@@ -23,6 +23,13 @@ export function fitObservationLevels(samples: ObservationSample[][], policy: Obs
     const ratios = [];
     for (let i = 0; i < samples[a].length; i++) {
       const x = samples[a][i], y = samples[b][i];
+      // Fit levels only on moderate-angle patches; retain other valid pixels
+      // for display. This gate never changes the observation coverage mask.
+      const maximumAngleDegrees=policy.maximumAngleDegrees;
+      if (maximumAngleDegrees !== undefined && [x, y].some(s =>
+        typeof s.maximumIncidenceDegrees !== 'number' || typeof s.maximumEmissionDegrees !== 'number' ||
+        !Number.isFinite(s.maximumIncidenceDegrees) || !Number.isFinite(s.maximumEmissionDegrees) ||
+        s.maximumIncidenceDegrees > maximumAngleDegrees || s.maximumEmissionDegrees > maximumAngleDegrees)) continue;
       // Positive values are necessary for a log ratio, not a coverage mask.
       // Valid zero/negative radiance remains eligible for the displayed mosaic.
       if (!x.reason && !y.reason && Number.isFinite(x.radiance) && Number.isFinite(y.radiance) && x.radiance !== undefined && y.radiance !== undefined && x.radiance > 0 && y.radiance > 0) ratios.push(Math.log(x.radiance / y.radiance));

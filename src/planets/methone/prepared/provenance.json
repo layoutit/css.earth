@@ -7,9 +7,9 @@
     "sha256": "ddc4f5196e36e66352fb2f61951699bfa6c3aa2c2815fb3019a8b9ddc666c05f"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -291,7 +291,7 @@
       "sha256": "cd7c3ead82f5629f515008dfad648f931cb52ed48b74b25482397c822f96f677",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -324,7 +324,7 @@
       "sha256": "6154216a44ef22b6f73f37ae2570cbc12e9b5cce3c4057f8fc31ac06eaab4e06",
       "bytes": 3856,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -356,7 +356,7 @@
       "sha256": "fc2c05607e8fc15ec90bc28dd200fc8d5e59fc853acf9a8135d24539ee396747",
       "bytes": 51600,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -373,7 +373,7 @@
       "sha256": "327c9bf6bad91a83fdf0f4990a277da0658416e0a3f43ab16f83e0a8e60ce756",
       "bytes": 3486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -408,13 +408,13 @@
           "url": "/scenes/methone/methone-normal-thumbnail.webp",
           "bytes": 1450,
           "sha256": "e49f8f9a22da85f2ba4cc9d34fecccba401f9c0ddd221766f491eef3d5a93def",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/methone/methone-normal-surface@2x.webp",
           "bytes": 61390,
           "sha256": "4490339387c23ce5381cce07e83e458ceea84612956144c8e81e78258eea3d58",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

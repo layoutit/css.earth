@@ -1,5 +1,9 @@
 # Shared object runtime implementation
 
+Historical implementation record for PR #2's eleven-object version. Use the
+[implementation map](../.agents/skills/celestial-skill/references/implementation-map.md)
+for current code ownership; the following results describe the recorded version.
+
 PR #2 now uses data-only prepared presentations for all eleven registered objects.
 The shared runtime builds each retained scene, resolves selection and material
 demand, publishes materials, and owns camera, resources, playback and cleanup.
@@ -14,13 +18,13 @@ ready to merge by these ownership results.
 
 ## Runtime and preparation changes
 
-[`object-runtime.mjs`](../src/platform/object-runtime.mjs) assembles one lifetime,
+[`object-runtime.mjs`](../src/platform/object-runtime.mts) assembles one lifetime,
 control binding, resource owner, playback owner, selection owner and orbit binding.
 The router supplies playback permission. Every client is an imports-only binding
 to this factory, and every definition binds `cssearth-object-runtime@2` to a
 validated `PREPARED_PRESENTATION` and its actual control export.
 
-[`prepared-presentation.mjs`](../src/platform/prepared-presentation.mjs) is the
+[`prepared-presentation.mjs`](../src/platform/prepared-presentation.mts) is the
 single scene builder and selection-write interpreter. Offline preparation emits
 final retained node records, source-derived styles, asset references and exhaustive
 lens/toggle variants. Runtime nodes reference a shared style-property dictionary.
@@ -28,10 +32,10 @@ Assignments remain ordered after the initial `cssText`; this preserves the nativ
 CSS parsing behavior of the prepared matrix strings while avoiding repeated
 property payloads.
 
-[`prepared-material.mjs`](../src/platform/prepared-material.mjs) publishes every
+[`prepared-material.mjs`](../src/platform/prepared-material.mts) publishes every
 dynamic material track. It selects a prepared frame and address, applies the
 configured fallback, and transports the view-dependent rotation. The companion
-[demand interpreter](../src/platform/prepared-material-demand.mjs) handles current,
+[demand interpreter](../src/platform/prepared-material-demand.mts) handles current,
 visible, directional and neighboring-row policies from records. Objects may have
 zero, one or multiple tracks without adding a publisher implementation.
 
@@ -96,7 +100,7 @@ settings. Delayed, failed and cancelled transitions preserve the committed lens;
 there is no separate interior flag or remembered exterior selection.
 
 Saturn's ellipsoid inputs are prepared offline. The shared
-[ellipsoid helper](../src/platform/prepared-ellipsoid-projection.mjs) receives radii,
+[ellipsoid helper](../src/platform/prepared-ellipsoid-projection.mts) receives radii,
 static matrices, centering, coverage, material dimensions and the current view.
 It returns the affine material transform without reading the DOM or deriving
 scene geometry. The same helper accepts sphere, oblate and prolate parameters.

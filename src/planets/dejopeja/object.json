@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 202.17391304347825,
       "bodyRadiusM": 46500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/dejopeja-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7916322026a167b727de2024e05c5b43520d5a3bf23aebab05f03f951febc476"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ea717bb4bb1fa4fc56a42b2444f6b7cbeda25cf94e78dc4c02f1498de6e015d8"
+    "sha256": "143868bd1d80c4634ac0c49985ea97e55d578f2abf1d11252e201fbdf76182a7"
   }
 }

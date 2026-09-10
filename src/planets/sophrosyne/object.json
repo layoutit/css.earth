@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 218.30434782608697,
       "bodyRadiusM": 50210
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/sophrosyne-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "be3a246aaf1dfa3956de16f9e44597c7f23e261346bf1a4fa894479260cb20ce"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "67b28daa970b10bff134a8c987bd854621f9d4d7942146a8cc74f25808edac19"
+    "sha256": "76b500ab1fd2cda21fae541185842e5e6fa341f1a6cb6b4fd96bf7ad85986e91"
   }
 }

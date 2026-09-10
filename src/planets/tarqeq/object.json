@@ -103,11 +103,20 @@
       ],
       "metersPerUnit": 13.043478260869565,
       "bodyRadiusM": 3000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/tarqeq-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "423ee25f228db25ba0bb7d0f2138bc7fd1a2cac889f76e0d5c4d64a232b0aeb0"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c2fc8bc7020b0828afc6b2c997793a3f4078dca16e5c240e7d6628b06a31a53d"
+    "sha256": "fde9f83b16ec46051f40482aa4032523481ab5e00adf07ecb6103f81fa25528e"
   }
 }

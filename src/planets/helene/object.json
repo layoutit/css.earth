@@ -108,11 +108,20 @@
       ],
       "metersPerUnit": 78.26086956521739,
       "bodyRadiusM": 18000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/helene-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "d0ec4804b056156a0376bdc7cbedeab4cd6f68867bbbc7a60342f31d85f603ac"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "712f9a80af1c36bfe17a392549a35227ac93750628ddefb5358dbb8124557e65"
+    "sha256": "a1802cb8231d416fa0166afc9107545a0aa66549ff3857d5224363d3c249421f"
   }
 }

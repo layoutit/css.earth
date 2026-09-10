@@ -41,7 +41,7 @@
         {
           "id": "content",
           "path": "source/content/static.json",
-          "sha256": "e3f9d69ee9d1ab6752ba3c6af7a2aa0a7d06cce1f130a8b9484b4b3056cc990e"
+          "sha256": "f5b6ecd76597ff594505f40a946840645add4d749887ff8e922aaf18dbbe8cf0"
         },
         {
           "id": "title",
@@ -66,7 +66,7 @@
         {
           "id": "world-context",
           "path": "source/navigation/universe.json",
-          "sha256": "c315ca0b52ced35cd557d3a0b0585cabfad9b6e38254e137edb15508358f206f"
+          "sha256": "2156f9ae94e6cde2ccff90cbc251414d823efddc263ddf186f5f5f51ca8e806c"
         }
       ],
       "shape": {
@@ -135,6 +135,15 @@
       ],
       "metersPerUnit": 2244193.5483870967,
       "bodyRadiusM": 695700000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/sun-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e1c77f71a60d9f6ecb8d78921eb3fa1976a3fa2b9f127365d43050b1ffbb2844"
+      }
     }
   },
   "schema": "cssearth-object@1",

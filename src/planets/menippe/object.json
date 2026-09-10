@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 76.73913043478261,
       "bodyRadiusM": 17650
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/menippe-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "383e91020250dc463ecbde5413d8aca32ea02af9312e64572a68c4ee8e08374a"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fee7898a13004e5807c75e30f130d69aa80ea00517ed14b58c4ab27c247528ea"
+    "sha256": "b36edc7c56e8fca1d92e44925c0daa14798e326b03b54a63045fb08b91e65b3a"
   }
 }

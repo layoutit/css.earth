@@ -1,0 +1,17 @@
+✔ scientific display preserves exact palette and missing texels through encoded bands, poles and thumbnails (40.202292ms)
+✔ adding a numeric nearest lens preserves every image-lens output byte (28.62325ms)
+✔ unsupported numeric display sampling and interpolating atlas routes fail closed (1.48375ms)
+✔ categorical static-map legend contains discrete units without requiring a numeric scale (12.728084ms)
+✔ denser selected material keeps other lenses and pole atlas sizing unchanged (42.831834ms)
+✔ static scientific minimaps retain nearest colors and missing cells while image bytes stay unchanged (359.403209ms)
+✔ solid nearest, categorical and facet minimaps preserve framing and attribution without changing images (16.289333ms)
+✔ denser oriented scientific atlases unwarp into the same bounded minimap (190.886292ms)
+✔ a model-only lens can omit a misleading flat map without opening its image (29.204208ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1182.043584

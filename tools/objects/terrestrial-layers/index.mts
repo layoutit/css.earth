@@ -1,3 +1,5 @@
+import { validateObjUvFits } from './obj-uv-fits.mts';
+import { validateTerrestrialRings } from './rings.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
 import {parseSolidPreparationSource} from './profile-source.mts';
 import {parseAffineProfile} from './affine-source.mts';
@@ -67,6 +69,7 @@ export function parseTerrestrialProfile(input:unknown) {
       value.lighting.logicalSize !== value.geometry.radius * 2 || ![...value.raster.observations, ...(value.raster.mosaics ?? []), ...(value.raster.scientific ?? []), ...(value.raster.observedColors ?? []), ...(value.raster.shapeViews ?? []), ...(value.raster.surfaceObservations ?? [])].some(lens => lens.id === value.presentation?.defaultLens)) {
     throw new TypeError('Invalid terrestrial surface preparation profile.');
   }
+  validateTerrestrialRings(value.rings, value.geometry.radiusKm);
   for (const recipe of value.raster.surfaceObservations ?? []) validateGeoSurfaceRecipe(recipe, value.geometry.radialTerrain);
   if (value.raster.surfaceQuality !== undefined &&
       (!Number.isInteger(value.raster.surfaceQuality) || value.raster.surfaceQuality < 1 || value.raster.surfaceQuality > 100)) {
@@ -109,7 +112,7 @@ export function parseTerrestrialProfile(input:unknown) {
         throw new TypeError('Invalid scientific source projection or extent.');
       }
     }
-    if (!['image-plane-dem', 'facet-scalars', 'pds-image', 'pds3-float-map', 'pds3-scalar-map', 'stl', 'geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
+    if (!['obj-uv-fits', 'image-plane-dem', 'facet-scalars', 'pds-image', 'pds3-float-map', 'pds3-scalar-map', 'stl', 'geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
         (!meshGrid && !tableGrid && !facetTable && (typeof lens.grid.width !== 'number' || !Number.isSafeInteger(lens.grid.width) || typeof lens.grid.height !== 'number' || !Number.isSafeInteger(lens.grid.height) || lens.grid.width <= 0 || lens.grid.height <= 0)) ||
         !(typeof lens.minimum === 'number' && typeof lens.maximum === 'number' && lens.minimum < lens.maximum) || !isArray(lens.colors) || lens.colors.length < 2 ||
         lens.colors.some(color => typeof color !== "string" || !/^#[0-9a-f]{6}$/i.test(color)) ||
@@ -136,6 +139,7 @@ export function parseTerrestrialProfile(input:unknown) {
     }
     if (facetTable) validateFacetScalarProfile(lens, value.geometry.radialTerrain);
     else if (lens.format === 'pds3-scalar-map') validateScalarMapProfile(lens, value.geometry.radialTerrain);
+    else if (lens.format === 'obj-uv-fits') validateObjUvFits(lens, value.geometry.radialTerrain);
     else if (lens.surfaceSampling !== undefined && (!meshGrid || lens.surfaceSampling?.method !== 'closest-source-point' ||
         !Number.isFinite(lens.surfaceSampling.maximumDistanceMeters) || !(lens.surfaceSampling.maximumDistanceMeters > 0) ||
         lens.path !== value.geometry.radialTerrain?.path ||

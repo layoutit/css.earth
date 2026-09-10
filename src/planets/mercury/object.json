@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e6f1b8c79c14bd696eb38e5c324926acfebf746319f3482a72afc28da7643bc9"
+    "sha256": "1cb37f56c30b89c60cfef338d55cc7908c3aaadaf46bb080e1b71a1378dae18e"
   },
   "id": "mercury",
   "properties": {
@@ -98,7 +98,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "6f609298d1203cc6a0d45691ac55003c8a21d13fab15dcef188988a4ca06d582"
+          "sha256": "1e9217f574286a21b1e4da04b284aeabd8d241b9407cafa935feaa60cdadbf56"
         },
         {
           "id": "navigation",
@@ -151,6 +151,15 @@
         "surface": "body",
         "lens": "interior",
         "material": "lighting"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3c956a9bb067920a4cdded1aaaefca7068ba1bb00748f06362bf18091e37da88"
       }
     }
   },

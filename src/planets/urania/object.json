@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 191.30434782608697,
       "bodyRadiusM": 44000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/urania-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f29208c700ce9fcec345de4712f3b8e78ad1aafa93250ae3df3f28d12a07bd0d"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fd3e57e244f4d1061b1d46021790e3adf5fa1d42b885cc859376bbccbb889ce6"
+    "sha256": "b71743966ba6b67ec9ac953cd14148a24d8cc29a16f1d123c4834016ad98494a"
   }
 }

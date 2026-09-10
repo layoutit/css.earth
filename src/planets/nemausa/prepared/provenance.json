@@ -7,9 +7,9 @@
     "sha256": "4d1ca47f62b6456c76501bcf203005993b8db299d27cc22b50b562999c7d1430"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -325,7 +325,7 @@
       "sha256": "262318530b2b0b5d332413b2dc45fe3e46b63462cba3c90dd3a317d6d99f1941",
       "bytes": 271099,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "b989941e934715ed95dd94121a0093269249deaf416d0f55214fb7807f06006a",
       "bytes": 9727,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/nemausa/nemausa-elevation-thumbnail.webp",
           "bytes": 5136,
           "sha256": "efa64bde093f824c38c73bc0aa7a4a3603f9aa611211718e7f6da71c2a2e8954",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nemausa/nemausa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nemausa/nemausa-elevation-surface@2x.webp",
           "bytes": 300200,
           "sha256": "31f3e4bf08ccef678abcd679a9fa6df6f01fecdaab580d6219bb078e51a73489",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/nemausa/nemausa-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/nemausa/nemausa-shape-surface@2x.webp",
           "bytes": 219928,
           "sha256": "42bb71fba9ea51287a76e3da7adeb57c7d9aad687ab7fe4f188c9fc5d5c719ca",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

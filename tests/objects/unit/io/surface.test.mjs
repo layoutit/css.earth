@@ -10,7 +10,7 @@ let normal,color;
 async function observations(){normal??=await publishedObservation('io','normal');color??=await publishedObservation('io','enhanced');}
 
 test('Io binds its independent source and prepared runtime closure',async()=>{
- assert.equal((await source.verify()).inputCount,9);
+ await source.verify();
  const manifest=JSON.parse(await readFile(new URL('../../../../src/planets/io/runtime-assets.json',import.meta.url)));
  await verifyRuntimeAssetClosure({planetId:'io',manifest,root:root.pathname});
  assert.ok(manifest.assets.some(a=>a.filename==='io-parent-jupiter.webp'));

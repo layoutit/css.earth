@@ -1,0 +1,26 @@
+✔ raw downloads install exact streamed bytes and verify source closure (15.619916ms)
+✔ raw short transfer preserves the destination and removes partial files (1.614625ms)
+✔ raw overlong transfer preserves the destination and removes partial files (1.509ms)
+✔ raw wrong hash transfer preserves the destination and removes partial files (1.10375ms)
+✔ abrupt source stream errors clean up without replacing the previous pin (1.276792ms)
+✔ an unbounded overlong response is cancelled after bounded chunk consumption (1.080041ms)
+✔ direct pinned acquisition also consumes raw response chunks (1.126292ms)
+✔ source verification hashes multi-chunk files and detects late byte drift (2.11425ms)
+✔ gzip and pretty-json downloads preserve their existing transformations and pins (2.75175ms)
+✔ ZIP restoration verifies both the streamed archive and its exact extracted member (17.911709ms)
+✔ source verification rejects byte drift, undeclared files and escaping paths (5.819792ms)
+✔ pin mismatch leaves existing source untouched and no partial file (1.259333ms)
+✔ runtime inventory comes from nested JSON and CSS image addresses with exact closure (4.176708ms)
+✔ acquisition runs declared groups and validates downloaded bytes before publication (12.260958ms)
+✔ source manifest validates provenance as well as hashes (0.234917ms)
+✔ default acquisition restores only missing declared pins (1.447333ms)
+✔ missing-source restoration verifies existing pins before starting any transfer (0.744042ms)
+✔ image inventory separates valid range-addressed geometry and rejects malformed references (0.27375ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 223.213167

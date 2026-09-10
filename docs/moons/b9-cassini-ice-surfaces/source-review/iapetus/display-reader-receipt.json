@@ -1,0 +1,36 @@
+{
+  "body": "iapetus",
+  "sourceSha256": "a3788744172cac6820eaaf39e53d1013ce65612799c107e96a17fbebbcea2e7f",
+  "dimensions": [
+    1024,
+    512
+  ],
+  "policy": {
+    "kind": "geotiff-rgb-bands",
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "alphaBand": 3,
+    "sampleBytes": 2,
+    "noData": 0,
+    "centerLongitude": 180,
+    "resolutionMeters": 4516.039439535328,
+    "origin": [
+      -2312212.193042088,
+      1156106.096521044
+    ],
+    "grid": {
+      "pixelsPerDegree": 2.8444444444444446,
+      "sampleOffset": 511.5,
+      "lineOffset": 255.5
+    }
+  },
+  "originalValid": 92619,
+  "retained": 92619,
+  "withheld": 0,
+  "maximumByteError": 0,
+  "longitudeConvention": "0..360 east, source derivative rolled from the lossless -180..180 map",
+  "limits": "Grid-edge samples withheld by the existing reader remain gaps; this is source-map decoder evidence, not mounted browser proof."
+}

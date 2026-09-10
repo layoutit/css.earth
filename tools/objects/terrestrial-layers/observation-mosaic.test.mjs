@@ -1,10 +1,24 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { fitObservationLevels, selectObservation, sampleTrianglePoints } from './observation-mosaic.mts';
-import { validateGeoSurfaceRecipe } from './observed-geo-surface.mts';
+import { validateGeoSurfaceRecipe, loadGeoObservationSurface } from './observed-geo-surface.mts';
+import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
+import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
 const policy = { minimumPairs: 64, maximumLogMad: .25, maximumGain: 1.35 };
 const sample = (radiance, maximumEmissionDegrees = 30) => ({ radiance, maximumEmissionDegrees });
+
+test('calibration withholds steep-angle pairs without changing displayed source eligibility', () => {
+  const a = Array.from({ length: 200 }, (_, i) => ({ ...sample(1), maximumIncidenceDegrees: i < 100 ? 30 : 75 }));
+  const b = a.map((s, i) => ({ ...s, radiance: i < 100 ? 1 / 1.1 : 100 }));
+  const before = structuredClone([a, b]);
+  const fit = fitObservationLevels([a, b], { ...policy, maximumAngleDegrees: 70 });
+  assert.equal(fit.pairs[0].samples, 100);
+  assert.ok(Math.abs(fit.gains[1] - 1.1) < 1e-12);
+  assert.deepEqual([a, b], before);
+  assert.equal(selectObservation([a[150], b[150]]), 0);
+  assert.throws(() => fitObservationLevels([a.map(s => ({ ...s, maximumIncidenceDegrees: NaN })), b], { ...policy, maximumAngleDegrees: 70 }), /connect/);
+});
 
 test('robust overlap fit recovers connected source scales despite missing pairs and outliers', () => {
   const gains = [1, 1.1, 1.2, .9];
@@ -13,6 +27,30 @@ test('robust overlap fit recovers connected source scales despite missing pairs 
   const result = fitObservationLevels(samples, policy);
   for (let i = 0; i < gains.length; i++) assert.ok(Math.abs(result.gains[i] - gains[i]) < 1e-12);
   assert.equal(result.pairs.find(p => p.a === 0 && p.b === 3).accepted, false);
+});
+
+test('archived-camera mosaics bind a separate camera to each image', async () => {
+  const config = JSON.parse(await readFile(new URL('../../../src/planets/steins/source/preparation/terrestrial.json', import.meta.url)));
+  const recipe = config.raster.surfaceObservations[0], shape = config.geometry.radialTerrain;
+  validateGeoSurfaceRecipe(recipe, shape);
+  for (const alter of [r => r.frames[1].cameraPath = r.frames[0].cameraPath,
+    r => delete r.frames[1].cameraPath, r => r.cameraPath = r.frames[0].cameraPath,
+    r => r.frames[0].cameraPath = '../unbound.json', r => r.photometry.maximumGain = 1.1]) {
+    const changed = structuredClone(recipe); alter(changed);
+    assert.throws(() => validateGeoSurfaceRecipe(changed, shape), /source-bound/);
+  }
+});
+
+test('each archived-camera mosaic frame verifies its original source closure before decoding', async () => {
+  const sourceDirectory = resolve('src/planets/steins/source');
+  const config = JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/terrestrial.json')));
+  const source = await createSourceManifest({ planetId: 'steins', planetName: 'Steins', sourceRoot: sourceDirectory });
+  const drift = new Error('Original camera kernel bytes changed');
+  let checked = false;
+  await assert.rejects(loadGeoObservationSurface({ sourceDirectory, config,
+    recipe: config.raster.surfaceObservations[0], radial: {},
+    source: { ...source, validatePath: async () => { checked = true; throw drift; } } }), error => error === drift);
+  assert.equal(checked, true);
 });
 
 test('level matching rejects disconnected overlaps and excessive brightness gains', () => {

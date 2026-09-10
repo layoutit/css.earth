@@ -6,7 +6,7 @@ import { scrollToDistance as scrollTo } from './wheel-zoom-distance.mjs';
 import volume from '../../src/objects/milky-way/prepared/volume.json' with { type: 'json' };
 import context from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 
-const output = '.local/galaxy-handoff';
+const output = process.env.GALAXY_HANDOFF_OUTPUT ?? '.local/galaxy-handoff';
 const parsecKm = 3.085677581491367e13;
 const reported = '/sun/?v=QMJCPggu1DfsP78xu57ddXumwnJb4eAJKY4_1druhMxGfj_U7dzCwKAIP-IyYcFa6EcAAQAAAAAAAAAA';
 const samples = [], errors = [];
@@ -39,6 +39,10 @@ try {
     // Native computed opacity is serialized to fewer digits than the prepared weights.
     assert.ok(Math.abs(snapshot.skyContribution + snapshot.volumeOpacity - 1) < 1e-6,
       'completed-image blend has complementary contributions, without a fade-to-black factor');
+    assert.ok(Math.abs(snapshot.volumeCompositeOpacity - snapshot.volumeOpacity * snapshot.volumeBrightness) < 1e-6);
+    assert.ok(Math.abs((1 - snapshot.volumeCompositeOpacity) * snapshot.skyOpacity - snapshot.skyContribution) < 1e-6,
+      'actual source-over coefficients preserve the prepared sky contribution');
+    assert.equal(snapshot.volumeWeight, 1);
     if (snapshot.skyContribution > 1e-8) assert.equal(snapshot.skyVisibility, 'visible');
     else assert.equal(snapshot.skyVisibility, 'hidden');
     assert.ok(await page.evaluate(() => window.__handoffNodes.every(node => node.isConnected)), 'travel retains every environment node');
@@ -79,7 +83,10 @@ async function read(page) {
       skyFaces: document.querySelectorAll('[data-sky-face]').length,
       skyMatrix: Array.from(new DOMMatrix(document.querySelector('.prepared-celestial-sky-scene').style.transform).toFloat64Array()),
       skyContribution: Number(sky.dataset.skyContribution), skyVisibility: getComputedStyle(sky).visibility,
-      volumeOpacity: Number(getComputedStyle(document.querySelector('.prepared-volume-context')).opacity),
+      volumeOpacity: Number(document.querySelector('.prepared-volume-context').dataset.volumeOpacity),
+      volumeCompositeOpacity: Number(getComputedStyle(document.querySelector('.prepared-volume-context')).opacity),
+      volumeBrightness: Number(document.querySelector('.prepared-volume-image').dataset.volumeBrightness),
+      skyOpacity: Number(getComputedStyle(sky).opacity),
       volumeWeight: Number(getComputedStyle(document.querySelector('.prepared-volume-image')).opacity),
       requests: performance.getEntriesByType('resource').filter(entry => /\/milky-way\/prepared\//.test(entry.name)).length,
     };

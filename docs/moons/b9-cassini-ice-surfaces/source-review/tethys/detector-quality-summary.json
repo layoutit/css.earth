@@ -1,0 +1,3417 @@
+[
+  {
+    "policy": "pds3-ir-adc-background-and-filter-dependencies@1",
+    "target": "PHOEBE",
+    "productId": "1_1465670650.13981",
+    "nativeStartTime": "1465670650.13981",
+    "dimensions": [
+      48,
+      24
+    ],
+    "originalLayout": {
+      "recordBytes": 512,
+      "declaredBytes": 888320,
+      "actualBytes": 887808,
+      "coreStartByteZeroBased": 24064,
+      "coreEndByteExclusive": 887680,
+      "declaredMinusActualBytes": 512
+    },
+    "rawSha256": "26f97b5fd5cff5b9993b919bbac5aa518939604c766db1955283d2d3fc55d558",
+    "calibratedSha256": "9b4645d37dcf102e4e4ec9a7b79c4d7b3c1953e88e9cc7cec7006c133ced67a4",
+    "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
+    "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
+    "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
+    "filterDependencies": {
+      "radiusSamples": 3,
+      "radiusLines": 3,
+      "operations": [
+        "vims2isis",
+        "spiceinit",
+        "vimscal",
+        "noisefilter",
+        "lowpass"
+      ],
+      "derivation": "Minkowski sum: radius 2 for 5x5 noise classification plus radius 1 for 3x3 replacement",
+      "interpretation": "Possible source dependency; not a reconstruction of which pixels were replaced"
+    },
+    "bands": {
+      "25": {
+        "originalBand": 121,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 1152,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          170,
+          173
+        ],
+        "reconstructedAdcRange": [
+          167,
+          295
+        ],
+        "maskSha256": "c54bce488fc7e2c04077a7b30542c07ae5905cefc27d1972f1adbcae77d71e19",
+        "directInvalidIndices": []
+      },
+      "44": {
+        "originalBand": 140,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 1152,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          189,
+          192
+        ],
+        "reconstructedAdcRange": [
+          189,
+          253
+        ],
+        "maskSha256": "c54bce488fc7e2c04077a7b30542c07ae5905cefc27d1972f1adbcae77d71e19",
+        "directInvalidIndices": []
+      },
+      "58": {
+        "originalBand": 154,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 1152,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          143,
+          145
+        ],
+        "reconstructedAdcRange": [
+          142,
+          197
+        ],
+        "maskSha256": "c54bce488fc7e2c04077a7b30542c07ae5905cefc27d1972f1adbcae77d71e19",
+        "directInvalidIndices": []
+      },
+      "70": {
+        "originalBand": 166,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 1152,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          149,
+          150
+        ],
+        "reconstructedAdcRange": [
+          147,
+          194
+        ],
+        "maskSha256": "c54bce488fc7e2c04077a7b30542c07ae5905cefc27d1972f1adbcae77d71e19",
+        "directInvalidIndices": []
+      },
+      "81": {
+        "originalBand": 177,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 1152,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          141,
+          143
+        ],
+        "reconstructedAdcRange": [
+          140,
+          197
+        ],
+        "maskSha256": "c54bce488fc7e2c04077a7b30542c07ae5905cefc27d1972f1adbcae77d71e19",
+        "directInvalidIndices": []
+      },
+      "57": {
+        "originalBand": 153,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 1152,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          128,
+          130
+        ],
+        "reconstructedAdcRange": [
+          126,
+          182
+        ],
+        "maskSha256": "c54bce488fc7e2c04077a7b30542c07ae5905cefc27d1972f1adbcae77d71e19",
+        "directInvalidIndices": []
+      },
+      "83": {
+        "originalBand": 179,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 1152,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          143,
+          145
+        ],
+        "reconstructedAdcRange": [
+          143,
+          200
+        ],
+        "maskSha256": "c54bce488fc7e2c04077a7b30542c07ae5905cefc27d1972f1adbcae77d71e19",
+        "directInvalidIndices": []
+      }
+    },
+    "sources": {
+      "adc": "https://doi.org/10.1016/j.icarus.2004.07.001",
+      "background": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/vimscal/vimscal.html",
+      "pipeline": "https://vims.univ-nantes.fr/info/isis-calibration",
+      "noise": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/noisefilter/noisefilter.html",
+      "lowpass": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/lowpass/lowpass.html",
+      "fitDeltaSource": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/77c10385ee31526b54cc42b82ee30a1ac4ed8c58/isis/src/cassini/apps/vimscal/vimscal.cpp"
+    },
+    "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing.",
+    "id": "1465670650_1"
+  },
+  {
+    "policy": "pds3-ir-adc-background-and-filter-dependencies@1",
+    "target": "PHOEBE",
+    "productId": "1_1465671822.13980",
+    "nativeStartTime": "1465671822.13980",
+    "dimensions": [
+      36,
+      24
+    ],
+    "originalLayout": {
+      "recordBytes": 512,
+      "declaredBytes": 680960,
+      "actualBytes": 680448,
+      "coreStartByteZeroBased": 24064,
+      "coreEndByteExclusive": 680320,
+      "declaredMinusActualBytes": 512
+    },
+    "rawSha256": "df43d42c42ab29cf00eee62c6f22796d85631b60f6c8b4da56ba590cb01f3030",
+    "calibratedSha256": "e3d284051d290a154a692a5fccc4388bcb33220fed68345991a9055b8d6228ee",
+    "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
+    "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
+    "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
+    "filterDependencies": {
+      "radiusSamples": 3,
+      "radiusLines": 3,
+      "operations": [
+        "vims2isis",
+        "spiceinit",
+        "vimscal",
+        "noisefilter",
+        "lowpass"
+      ],
+      "derivation": "Minkowski sum: radius 2 for 5x5 noise classification plus radius 1 for 3x3 replacement",
+      "interpretation": "Possible source dependency; not a reconstruction of which pixels were replaced"
+    },
+    "bands": {
+      "25": {
+        "originalBand": 121,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 864,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          219,
+          239
+        ],
+        "reconstructedAdcRange": [
+          218,
+          455
+        ],
+        "maskSha256": "821eb62fd7c75d025e6da260f7e66350edc66d630f627007e751f2e622472baf",
+        "directInvalidIndices": []
+      },
+      "44": {
+        "originalBand": 140,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 864,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          230,
+          234
+        ],
+        "reconstructedAdcRange": [
+          229,
+          364
+        ],
+        "maskSha256": "821eb62fd7c75d025e6da260f7e66350edc66d630f627007e751f2e622472baf",
+        "directInvalidIndices": []
+      },
+      "58": {
+        "originalBand": 154,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 864,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          157,
+          159
+        ],
+        "reconstructedAdcRange": [
+          157,
+          260
+        ],
+        "maskSha256": "821eb62fd7c75d025e6da260f7e66350edc66d630f627007e751f2e622472baf",
+        "directInvalidIndices": []
+      },
+      "70": {
+        "originalBand": 166,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 864,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          163,
+          165
+        ],
+        "reconstructedAdcRange": [
+          162,
+          247
+        ],
+        "maskSha256": "821eb62fd7c75d025e6da260f7e66350edc66d630f627007e751f2e622472baf",
+        "directInvalidIndices": []
+      },
+      "81": {
+        "originalBand": 177,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 864,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          154,
+          156
+        ],
+        "reconstructedAdcRange": [
+          154,
+          251
+        ],
+        "maskSha256": "821eb62fd7c75d025e6da260f7e66350edc66d630f627007e751f2e622472baf",
+        "directInvalidIndices": []
+      },
+      "57": {
+        "originalBand": 153,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 864,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          141,
+          144
+        ],
+        "reconstructedAdcRange": [
+          140,
+          244
+        ],
+        "maskSha256": "821eb62fd7c75d025e6da260f7e66350edc66d630f627007e751f2e622472baf",
+        "directInvalidIndices": []
+      },
+      "83": {
+        "originalBand": 179,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 864,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          157,
+          159
+        ],
+        "reconstructedAdcRange": [
+          156,
+          262
+        ],
+        "maskSha256": "821eb62fd7c75d025e6da260f7e66350edc66d630f627007e751f2e622472baf",
+        "directInvalidIndices": []
+      }
+    },
+    "sources": {
+      "adc": "https://doi.org/10.1016/j.icarus.2004.07.001",
+      "background": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/vimscal/vimscal.html",
+      "pipeline": "https://vims.univ-nantes.fr/info/isis-calibration",
+      "noise": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/noisefilter/noisefilter.html",
+      "lowpass": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/lowpass/lowpass.html",
+      "fitDeltaSource": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/77c10385ee31526b54cc42b82ee30a1ac4ed8c58/isis/src/cassini/apps/vimscal/vimscal.cpp"
+    },
+    "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing.",
+    "id": "1465671822_1"
+  },
+  {
+    "policy": "pds3-ir-adc-background-and-filter-dependencies@1",
+    "target": "TETHYS",
+    "productId": "1_1561668191.13980",
+    "nativeStartTime": "1561668191.13980",
+    "dimensions": [
+      28,
+      14
+    ],
+    "originalLayout": {
+      "recordBytes": 512,
+      "declaredBytes": 326656,
+      "actualBytes": 326144,
+      "coreStartByteZeroBased": 23552,
+      "coreEndByteExclusive": 325728,
+      "declaredMinusActualBytes": 512
+    },
+    "rawSha256": "373d8b8f871879f760a48ba4ca1b3fe405bd93776ac4a6c48383cca952a3599c",
+    "calibratedSha256": "918a27b9b76de708dcfb5fb7b8db990b825006b4d71317cbcf87f727da9e3ddb",
+    "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
+    "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
+    "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
+    "filterDependencies": {
+      "radiusSamples": 3,
+      "radiusLines": 3,
+      "operations": [
+        "vims2isis",
+        "spiceinit",
+        "vimscal",
+        "noisefilter",
+        "lowpass"
+      ],
+      "derivation": "Minkowski sum: radius 2 for 5x5 noise classification plus radius 1 for 3x3 replacement",
+      "interpretation": "Possible source dependency; not a reconstruction of which pixels were replaced"
+    },
+    "bands": {
+      "25": {
+        "originalBand": 121,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 392,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          224,
+          226
+        ],
+        "reconstructedAdcRange": [
+          555,
+          3370
+        ],
+        "maskSha256": "46116c60127706306abf1be40dae364e3e104a0e6c4be22018eaaac5107cbd3d",
+        "directInvalidIndices": []
+      },
+      "44": {
+        "originalBand": 140,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 392,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          236,
+          239
+        ],
+        "reconstructedAdcRange": [
+          353,
+          1216
+        ],
+        "maskSha256": "46116c60127706306abf1be40dae364e3e104a0e6c4be22018eaaac5107cbd3d",
+        "directInvalidIndices": []
+      },
+      "58": {
+        "originalBand": 154,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 392,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          152,
+          153
+        ],
+        "reconstructedAdcRange": [
+          283,
+          1311
+        ],
+        "maskSha256": "46116c60127706306abf1be40dae364e3e104a0e6c4be22018eaaac5107cbd3d",
+        "directInvalidIndices": []
+      },
+      "70": {
+        "originalBand": 166,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 392,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          158,
+          168
+        ],
+        "reconstructedAdcRange": [
+          202,
+          519
+        ],
+        "maskSha256": "46116c60127706306abf1be40dae364e3e104a0e6c4be22018eaaac5107cbd3d",
+        "directInvalidIndices": []
+      },
+      "81": {
+        "originalBand": 177,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 392,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          151,
+          153
+        ],
+        "reconstructedAdcRange": [
+          260,
+          1058
+        ],
+        "maskSha256": "46116c60127706306abf1be40dae364e3e104a0e6c4be22018eaaac5107cbd3d",
+        "directInvalidIndices": []
+      }
+    },
+    "sources": {
+      "adc": "https://doi.org/10.1016/j.icarus.2004.07.001",
+      "background": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/vimscal/vimscal.html",
+      "pipeline": "https://vims.univ-nantes.fr/info/isis-calibration",
+      "noise": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/noisefilter/noisefilter.html",
+      "lowpass": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/lowpass/lowpass.html",
+      "fitDeltaSource": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/77c10385ee31526b54cc42b82ee30a1ac4ed8c58/isis/src/cassini/apps/vimscal/vimscal.cpp"
+    },
+    "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing.",
+    "id": "1561668191_1"
+  },
+  {
+    "policy": "pds3-ir-adc-background-and-filter-dependencies@1",
+    "target": "IAPETUS",
+    "productId": "1_1568129671.13979",
+    "nativeStartTime": "1568129671.13979",
+    "dimensions": [
+      40,
+      40
+    ],
+    "originalLayout": {
+      "recordBytes": 512,
+      "declaredBytes": 1233408,
+      "actualBytes": 1232896,
+      "coreStartByteZeroBased": 23552,
+      "coreEndByteExclusive": 1232512,
+      "declaredMinusActualBytes": 512
+    },
+    "rawSha256": "56726dd22fd5f13764d53798ffa2dc57dc40bc006e8a1b3ac03b66c2720df648",
+    "calibratedSha256": "e7a4d85a4e30022e9a0af4de5ba06e799e0ee0f9ddb6e36c77068eb251a6b861",
+    "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
+    "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
+    "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
+    "filterDependencies": {
+      "radiusSamples": 3,
+      "radiusLines": 3,
+      "operations": [
+        "vims2isis",
+        "spiceinit",
+        "vimscal",
+        "noisefilter",
+        "lowpass"
+      ],
+      "derivation": "Minkowski sum: radius 2 for 5x5 noise classification plus radius 1 for 3x3 replacement",
+      "interpretation": "Possible source dependency; not a reconstruction of which pixels were replaced"
+    },
+    "bands": {
+      "25": {
+        "originalBand": 121,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 1600,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          182,
+          190
+        ],
+        "reconstructedAdcRange": [
+          542,
+          2696
+        ],
+        "maskSha256": "504bc3fe5f1a16d3c33ae958f0542d01e4cf861071a97a6715cfd486ce7f7d6f",
+        "directInvalidIndices": []
+      },
+      "44": {
+        "originalBand": 140,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 1600,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          219,
+          242
+        ],
+        "reconstructedAdcRange": [
+          429,
+          1065
+        ],
+        "maskSha256": "504bc3fe5f1a16d3c33ae958f0542d01e4cf861071a97a6715cfd486ce7f7d6f",
+        "directInvalidIndices": []
+      },
+      "58": {
+        "originalBand": 154,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 1600,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          159,
+          174
+        ],
+        "reconstructedAdcRange": [
+          332,
+          1179
+        ],
+        "maskSha256": "504bc3fe5f1a16d3c33ae958f0542d01e4cf861071a97a6715cfd486ce7f7d6f",
+        "directInvalidIndices": []
+      },
+      "70": {
+        "originalBand": 166,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 1600,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          163,
+          174
+        ],
+        "reconstructedAdcRange": [
+          327,
+          453
+        ],
+        "maskSha256": "504bc3fe5f1a16d3c33ae958f0542d01e4cf861071a97a6715cfd486ce7f7d6f",
+        "directInvalidIndices": []
+      },
+      "81": {
+        "originalBand": 177,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 1600,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          154,
+          163
+        ],
+        "reconstructedAdcRange": [
+          319,
+          930
+        ],
+        "maskSha256": "504bc3fe5f1a16d3c33ae958f0542d01e4cf861071a97a6715cfd486ce7f7d6f",
+        "directInvalidIndices": []
+      }
+    },
+    "sources": {
+      "adc": "https://doi.org/10.1016/j.icarus.2004.07.001",
+      "background": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/vimscal/vimscal.html",
+      "pipeline": "https://vims.univ-nantes.fr/info/isis-calibration",
+      "noise": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/noisefilter/noisefilter.html",
+      "lowpass": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/lowpass/lowpass.html",
+      "fitDeltaSource": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/77c10385ee31526b54cc42b82ee30a1ac4ed8c58/isis/src/cassini/apps/vimscal/vimscal.cpp"
+    },
+    "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing.",
+    "id": "1568129671_1"
+  },
+  {
+    "policy": "pds3-ir-adc-background-and-filter-dependencies@1",
+    "target": "IAPETUS",
+    "productId": "1_1568133146.8471",
+    "nativeStartTime": "1568133146.08471",
+    "dimensions": [
+      26,
+      26
+    ],
+    "originalLayout": {
+      "recordBytes": 512,
+      "declaredBytes": 547840,
+      "actualBytes": 547328,
+      "coreStartByteZeroBased": 23552,
+      "coreEndByteExclusive": 547296,
+      "declaredMinusActualBytes": 512
+    },
+    "rawSha256": "fe7cd0d2e408988f0e11e2c9cfdc33b698fb8150697e3afce12db971c346a5af",
+    "calibratedSha256": "8c70f0c76666038d19a08efefbdc0a15f988a8b5bbd0bf69c6813b62248807a2",
+    "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
+    "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
+    "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
+    "filterDependencies": {
+      "radiusSamples": 3,
+      "radiusLines": 3,
+      "operations": [
+        "vims2isis",
+        "spiceinit",
+        "vimscal",
+        "noisefilter",
+        "lowpass"
+      ],
+      "derivation": "Minkowski sum: radius 2 for 5x5 noise classification plus radius 1 for 3x3 replacement",
+      "interpretation": "Possible source dependency; not a reconstruction of which pixels were replaced"
+    },
+    "bands": {
+      "25": {
+        "originalBand": 121,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 676,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          223,
+          226
+        ],
+        "reconstructedAdcRange": [
+          757,
+          2925
+        ],
+        "maskSha256": "7a5e7aea7b91ac841a648844eac05d75e9117ed7d372f7bb6b912341334899f3",
+        "directInvalidIndices": []
+      },
+      "44": {
+        "originalBand": 140,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 676,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          246,
+          247
+        ],
+        "reconstructedAdcRange": [
+          558,
+          1090
+        ],
+        "maskSha256": "7a5e7aea7b91ac841a648844eac05d75e9117ed7d372f7bb6b912341334899f3",
+        "directInvalidIndices": []
+      },
+      "58": {
+        "originalBand": 154,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 676,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          166,
+          168
+        ],
+        "reconstructedAdcRange": [
+          423,
+          1229
+        ],
+        "maskSha256": "7a5e7aea7b91ac841a648844eac05d75e9117ed7d372f7bb6b912341334899f3",
+        "directInvalidIndices": []
+      },
+      "70": {
+        "originalBand": 166,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 676,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          171,
+          174
+        ],
+        "reconstructedAdcRange": [
+          407,
+          504
+        ],
+        "maskSha256": "7a5e7aea7b91ac841a648844eac05d75e9117ed7d372f7bb6b912341334899f3",
+        "directInvalidIndices": []
+      },
+      "81": {
+        "originalBand": 177,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 676,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          163,
+          165
+        ],
+        "reconstructedAdcRange": [
+          411,
+          1016
+        ],
+        "maskSha256": "7a5e7aea7b91ac841a648844eac05d75e9117ed7d372f7bb6b912341334899f3",
+        "directInvalidIndices": []
+      }
+    },
+    "sources": {
+      "adc": "https://doi.org/10.1016/j.icarus.2004.07.001",
+      "background": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/vimscal/vimscal.html",
+      "pipeline": "https://vims.univ-nantes.fr/info/isis-calibration",
+      "noise": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/noisefilter/noisefilter.html",
+      "lowpass": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/lowpass/lowpass.html",
+      "fitDeltaSource": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/77c10385ee31526b54cc42b82ee30a1ac4ed8c58/isis/src/cassini/apps/vimscal/vimscal.cpp"
+    },
+    "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing.",
+    "id": "1568133146_2"
+  },
+  {
+    "policy": "pds3-ir-adc-background-and-filter-dependencies@1",
+    "target": "IAPETUS",
+    "productId": "1_1568157352.13979",
+    "nativeStartTime": "1568157352.13979",
+    "dimensions": [
+      48,
+      48
+    ],
+    "originalLayout": {
+      "recordBytes": 512,
+      "declaredBytes": 1751552,
+      "actualBytes": 1751040,
+      "coreStartByteZeroBased": 23552,
+      "coreEndByteExclusive": 1750784,
+      "declaredMinusActualBytes": 512
+    },
+    "rawSha256": "990bbd6f476f0a3530d250285d5b153b415604cbd01aab0550f07eb6cf5dc676",
+    "calibratedSha256": "e8693e98d929f20d38d32659852d157c38a8d48ef13d5a38a6f4ea0fc00bc572",
+    "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
+    "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
+    "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
+    "filterDependencies": {
+      "radiusSamples": 3,
+      "radiusLines": 3,
+      "operations": [
+        "vims2isis",
+        "spiceinit",
+        "vimscal",
+        "noisefilter",
+        "lowpass"
+      ],
+      "derivation": "Minkowski sum: radius 2 for 5x5 noise classification plus radius 1 for 3x3 replacement",
+      "interpretation": "Possible source dependency; not a reconstruction of which pixels were replaced"
+    },
+    "bands": {
+      "25": {
+        "originalBand": 121,
+        "rawReasons": {
+          "raw-special-or-invalid": 48
+        },
+        "directInvalidCount": 48,
+        "validAfterDependencies": 1968,
+        "invalidAfterDependencies": 336,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [
+          41
+        ],
+        "backgroundRange": [
+          231,
+          57344
+        ],
+        "reconstructedAdcRange": [
+          231,
+          49152
+        ],
+        "maskSha256": "e50b93e209dc2f229badd4ed65dbe51ddde8c4d1ec40fb9893e135ec2d8a8fdc",
+        "directInvalidIndices": [
+          1968,
+          1969,
+          1970,
+          1971,
+          1972,
+          1973,
+          1974,
+          1975,
+          1976,
+          1977,
+          1978,
+          1979,
+          1980,
+          1981,
+          1982,
+          1983,
+          1984,
+          1985,
+          1986,
+          1987,
+          1988,
+          1989,
+          1990,
+          1991,
+          1992,
+          1993,
+          1994,
+          1995,
+          1996,
+          1997,
+          1998,
+          1999,
+          2000,
+          2001,
+          2002,
+          2003,
+          2004,
+          2005,
+          2006,
+          2007,
+          2008,
+          2009,
+          2010,
+          2011,
+          2012,
+          2013,
+          2014,
+          2015
+        ]
+      },
+      "44": {
+        "originalBand": 140,
+        "rawReasons": {
+          "raw-special-or-invalid": 48
+        },
+        "directInvalidCount": 48,
+        "validAfterDependencies": 1968,
+        "invalidAfterDependencies": 336,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [
+          41
+        ],
+        "backgroundRange": [
+          247,
+          57344
+        ],
+        "reconstructedAdcRange": [
+          245,
+          49152
+        ],
+        "maskSha256": "e50b93e209dc2f229badd4ed65dbe51ddde8c4d1ec40fb9893e135ec2d8a8fdc",
+        "directInvalidIndices": [
+          1968,
+          1969,
+          1970,
+          1971,
+          1972,
+          1973,
+          1974,
+          1975,
+          1976,
+          1977,
+          1978,
+          1979,
+          1980,
+          1981,
+          1982,
+          1983,
+          1984,
+          1985,
+          1986,
+          1987,
+          1988,
+          1989,
+          1990,
+          1991,
+          1992,
+          1993,
+          1994,
+          1995,
+          1996,
+          1997,
+          1998,
+          1999,
+          2000,
+          2001,
+          2002,
+          2003,
+          2004,
+          2005,
+          2006,
+          2007,
+          2008,
+          2009,
+          2010,
+          2011,
+          2012,
+          2013,
+          2014,
+          2015
+        ]
+      },
+      "58": {
+        "originalBand": 154,
+        "rawReasons": {
+          "raw-special-or-invalid": 48
+        },
+        "directInvalidCount": 48,
+        "validAfterDependencies": 1968,
+        "invalidAfterDependencies": 336,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [
+          41
+        ],
+        "backgroundRange": [
+          166,
+          57344
+        ],
+        "reconstructedAdcRange": [
+          165,
+          49152
+        ],
+        "maskSha256": "e50b93e209dc2f229badd4ed65dbe51ddde8c4d1ec40fb9893e135ec2d8a8fdc",
+        "directInvalidIndices": [
+          1968,
+          1969,
+          1970,
+          1971,
+          1972,
+          1973,
+          1974,
+          1975,
+          1976,
+          1977,
+          1978,
+          1979,
+          1980,
+          1981,
+          1982,
+          1983,
+          1984,
+          1985,
+          1986,
+          1987,
+          1988,
+          1989,
+          1990,
+          1991,
+          1992,
+          1993,
+          1994,
+          1995,
+          1996,
+          1997,
+          1998,
+          1999,
+          2000,
+          2001,
+          2002,
+          2003,
+          2004,
+          2005,
+          2006,
+          2007,
+          2008,
+          2009,
+          2010,
+          2011,
+          2012,
+          2013,
+          2014,
+          2015
+        ]
+      },
+      "70": {
+        "originalBand": 166,
+        "rawReasons": {
+          "raw-special-or-invalid": 48
+        },
+        "directInvalidCount": 48,
+        "validAfterDependencies": 1968,
+        "invalidAfterDependencies": 336,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [
+          41
+        ],
+        "backgroundRange": [
+          171,
+          57344
+        ],
+        "reconstructedAdcRange": [
+          170,
+          49152
+        ],
+        "maskSha256": "e50b93e209dc2f229badd4ed65dbe51ddde8c4d1ec40fb9893e135ec2d8a8fdc",
+        "directInvalidIndices": [
+          1968,
+          1969,
+          1970,
+          1971,
+          1972,
+          1973,
+          1974,
+          1975,
+          1976,
+          1977,
+          1978,
+          1979,
+          1980,
+          1981,
+          1982,
+          1983,
+          1984,
+          1985,
+          1986,
+          1987,
+          1988,
+          1989,
+          1990,
+          1991,
+          1992,
+          1993,
+          1994,
+          1995,
+          1996,
+          1997,
+          1998,
+          1999,
+          2000,
+          2001,
+          2002,
+          2003,
+          2004,
+          2005,
+          2006,
+          2007,
+          2008,
+          2009,
+          2010,
+          2011,
+          2012,
+          2013,
+          2014,
+          2015
+        ]
+      },
+      "81": {
+        "originalBand": 177,
+        "rawReasons": {
+          "raw-special-or-invalid": 48
+        },
+        "directInvalidCount": 48,
+        "validAfterDependencies": 1968,
+        "invalidAfterDependencies": 336,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [
+          41
+        ],
+        "backgroundRange": [
+          162,
+          57344
+        ],
+        "reconstructedAdcRange": [
+          162,
+          49152
+        ],
+        "maskSha256": "e50b93e209dc2f229badd4ed65dbe51ddde8c4d1ec40fb9893e135ec2d8a8fdc",
+        "directInvalidIndices": [
+          1968,
+          1969,
+          1970,
+          1971,
+          1972,
+          1973,
+          1974,
+          1975,
+          1976,
+          1977,
+          1978,
+          1979,
+          1980,
+          1981,
+          1982,
+          1983,
+          1984,
+          1985,
+          1986,
+          1987,
+          1988,
+          1989,
+          1990,
+          1991,
+          1992,
+          1993,
+          1994,
+          1995,
+          1996,
+          1997,
+          1998,
+          1999,
+          2000,
+          2001,
+          2002,
+          2003,
+          2004,
+          2005,
+          2006,
+          2007,
+          2008,
+          2009,
+          2010,
+          2011,
+          2012,
+          2013,
+          2014,
+          2015
+        ]
+      }
+    },
+    "sources": {
+      "adc": "https://doi.org/10.1016/j.icarus.2004.07.001",
+      "background": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/vimscal/vimscal.html",
+      "pipeline": "https://vims.univ-nantes.fr/info/isis-calibration",
+      "noise": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/noisefilter/noisefilter.html",
+      "lowpass": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/lowpass/lowpass.html",
+      "fitDeltaSource": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/77c10385ee31526b54cc42b82ee30a1ac4ed8c58/isis/src/cassini/apps/vimscal/vimscal.cpp"
+    },
+    "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing.",
+    "id": "1568157352_4"
+  },
+  {
+    "policy": "pds3-ir-adc-background-and-filter-dependencies@1",
+    "target": "TETHYS",
+    "productId": "1_1606213356.13981",
+    "nativeStartTime": "1606213356.13981",
+    "dimensions": [
+      24,
+      18
+    ],
+    "originalLayout": {
+      "recordBytes": 512,
+      "declaredBytes": 360960,
+      "actualBytes": 360448,
+      "coreStartByteZeroBased": 23552,
+      "coreEndByteExclusive": 360224,
+      "declaredMinusActualBytes": 512
+    },
+    "rawSha256": "3aceb080e213415421a130236188f80b02a8bd4e03c1eeea2cca8eb8037c91af",
+    "calibratedSha256": "76e99719ab53c5c500a5a607c8de6457a6a4d2f6018a5345422499a988227d91",
+    "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
+    "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
+    "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
+    "filterDependencies": {
+      "radiusSamples": 3,
+      "radiusLines": 3,
+      "operations": [
+        "vims2isis",
+        "spiceinit",
+        "vimscal",
+        "noisefilter",
+        "lowpass"
+      ],
+      "derivation": "Minkowski sum: radius 2 for 5x5 noise classification plus radius 1 for 3x3 replacement",
+      "interpretation": "Possible source dependency; not a reconstruction of which pixels were replaced"
+    },
+    "bands": {
+      "25": {
+        "originalBand": 121,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 432,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          282,
+          290
+        ],
+        "reconstructedAdcRange": [
+          281,
+          3296
+        ],
+        "maskSha256": "4d76a8e07293ab0f0f03fdfac009845631cde02c427e14dc7c4cfc9419a1b3cc",
+        "directInvalidIndices": []
+      },
+      "44": {
+        "originalBand": 140,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 432,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          287,
+          299
+        ],
+        "reconstructedAdcRange": [
+          287,
+          1238
+        ],
+        "maskSha256": "4d76a8e07293ab0f0f03fdfac009845631cde02c427e14dc7c4cfc9419a1b3cc",
+        "directInvalidIndices": []
+      },
+      "58": {
+        "originalBand": 154,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 432,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          173,
+          230
+        ],
+        "reconstructedAdcRange": [
+          173,
+          1306
+        ],
+        "maskSha256": "4d76a8e07293ab0f0f03fdfac009845631cde02c427e14dc7c4cfc9419a1b3cc",
+        "directInvalidIndices": []
+      },
+      "70": {
+        "originalBand": 166,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 432,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          178,
+          180
+        ],
+        "reconstructedAdcRange": [
+          177,
+          535
+        ],
+        "maskSha256": "4d76a8e07293ab0f0f03fdfac009845631cde02c427e14dc7c4cfc9419a1b3cc",
+        "directInvalidIndices": []
+      },
+      "81": {
+        "originalBand": 177,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 432,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          168,
+          170
+        ],
+        "reconstructedAdcRange": [
+          167,
+          1078
+        ],
+        "maskSha256": "4d76a8e07293ab0f0f03fdfac009845631cde02c427e14dc7c4cfc9419a1b3cc",
+        "directInvalidIndices": []
+      }
+    },
+    "sources": {
+      "adc": "https://doi.org/10.1016/j.icarus.2004.07.001",
+      "background": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/vimscal/vimscal.html",
+      "pipeline": "https://vims.univ-nantes.fr/info/isis-calibration",
+      "noise": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/noisefilter/noisefilter.html",
+      "lowpass": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/lowpass/lowpass.html",
+      "fitDeltaSource": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/77c10385ee31526b54cc42b82ee30a1ac4ed8c58/isis/src/cassini/apps/vimscal/vimscal.cpp"
+    },
+    "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing.",
+    "id": "1606213356_1"
+  },
+  {
+    "policy": "pds3-ir-adc-background-and-filter-dependencies@1",
+    "target": "TETHYS",
+    "productId": "1_1660463972.13980",
+    "nativeStartTime": "1660463972.13980",
+    "dimensions": [
+      24,
+      12
+    ],
+    "originalLayout": {
+      "recordBytes": 512,
+      "declaredBytes": 248832,
+      "actualBytes": 248320,
+      "coreStartByteZeroBased": 23552,
+      "coreEndByteExclusive": 248000,
+      "declaredMinusActualBytes": 512
+    },
+    "rawSha256": "8e82a329b1fd42fc243c3f89515466cda86a2f7bd188a61ae74305a207d645a9",
+    "calibratedSha256": "d85ed15fae82d390ad395d133615a188ecee84e2aaf9a382a71b99760145b6f9",
+    "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
+    "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
+    "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
+    "filterDependencies": {
+      "radiusSamples": 3,
+      "radiusLines": 3,
+      "operations": [
+        "vims2isis",
+        "spiceinit",
+        "vimscal",
+        "noisefilter",
+        "lowpass"
+      ],
+      "derivation": "Minkowski sum: radius 2 for 5x5 noise classification plus radius 1 for 3x3 replacement",
+      "interpretation": "Possible source dependency; not a reconstruction of which pixels were replaced"
+    },
+    "bands": {
+      "25": {
+        "originalBand": 121,
+        "rawReasons": {
+          "adc-high-clipped": 133
+        },
+        "directInvalidCount": 133,
+        "validAfterDependencies": 88,
+        "invalidAfterDependencies": 200,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          244,
+          250
+        ],
+        "reconstructedAdcRange": [
+          243,
+          4095
+        ],
+        "maskSha256": "99a3fc073b5c191bf1e639f56dda2b874bcea8c4fd109ec7995d2adecca0f17a",
+        "directInvalidIndices": [
+          0,
+          1,
+          2,
+          3,
+          24,
+          25,
+          26,
+          27,
+          28,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          96,
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179,
+          180,
+          181,
+          192,
+          193,
+          194,
+          195,
+          196,
+          197,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          216,
+          217,
+          218,
+          219,
+          220,
+          221,
+          222,
+          223,
+          224,
+          225,
+          226,
+          227,
+          228,
+          229,
+          230,
+          240,
+          241,
+          242,
+          243,
+          244,
+          245,
+          246,
+          247,
+          248,
+          249,
+          250,
+          251,
+          252,
+          253,
+          254,
+          264,
+          265,
+          266,
+          267,
+          268,
+          269,
+          270,
+          271,
+          272,
+          273,
+          274,
+          276,
+          277
+        ]
+      },
+      "44": {
+        "originalBand": 140,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 288,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          260,
+          265
+        ],
+        "reconstructedAdcRange": [
+          259,
+          2235
+        ],
+        "maskSha256": "c3be2af8b2e98345a8cea9cf6862d443bd323fe273f4103d667529c6842a1cb8",
+        "directInvalidIndices": []
+      },
+      "58": {
+        "originalBand": 154,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 288,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          173,
+          179
+        ],
+        "reconstructedAdcRange": [
+          173,
+          2396
+        ],
+        "maskSha256": "c3be2af8b2e98345a8cea9cf6862d443bd323fe273f4103d667529c6842a1cb8",
+        "directInvalidIndices": []
+      },
+      "70": {
+        "originalBand": 166,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 288,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          177,
+          183
+        ],
+        "reconstructedAdcRange": [
+          176,
+          911
+        ],
+        "maskSha256": "c3be2af8b2e98345a8cea9cf6862d443bd323fe273f4103d667529c6842a1cb8",
+        "directInvalidIndices": []
+      },
+      "81": {
+        "originalBand": 177,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 288,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          170,
+          177
+        ],
+        "reconstructedAdcRange": [
+          168,
+          1923
+        ],
+        "maskSha256": "c3be2af8b2e98345a8cea9cf6862d443bd323fe273f4103d667529c6842a1cb8",
+        "directInvalidIndices": []
+      }
+    },
+    "sources": {
+      "adc": "https://doi.org/10.1016/j.icarus.2004.07.001",
+      "background": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/vimscal/vimscal.html",
+      "pipeline": "https://vims.univ-nantes.fr/info/isis-calibration",
+      "noise": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/noisefilter/noisefilter.html",
+      "lowpass": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/lowpass/lowpass.html",
+      "fitDeltaSource": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/77c10385ee31526b54cc42b82ee30a1ac4ed8c58/isis/src/cassini/apps/vimscal/vimscal.cpp"
+    },
+    "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing.",
+    "id": "1660463972_1"
+  },
+  {
+    "policy": "pds3-ir-adc-background-and-filter-dependencies@1",
+    "target": "TETHYS",
+    "productId": "1_1719613772.13980",
+    "nativeStartTime": "1719613772.13980",
+    "dimensions": [
+      32,
+      17
+    ],
+    "originalLayout": {
+      "recordBytes": 512,
+      "declaredBytes": 440320,
+      "actualBytes": 439808,
+      "coreStartByteZeroBased": 23552,
+      "coreEndByteExclusive": 439440,
+      "declaredMinusActualBytes": 512
+    },
+    "rawSha256": "d599c14f6f0ecbcbe253726b04e9b4a0a03e913b69a554fe050f972fa848d032",
+    "calibratedSha256": "7afb633bcb10bfa6def52b2c4fde32d68b7d9c3714c9e70cd922146f922a0042",
+    "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
+    "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
+    "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
+    "filterDependencies": {
+      "radiusSamples": 3,
+      "radiusLines": 3,
+      "operations": [
+        "vims2isis",
+        "spiceinit",
+        "vimscal",
+        "noisefilter",
+        "lowpass"
+      ],
+      "derivation": "Minkowski sum: radius 2 for 5x5 noise classification plus radius 1 for 3x3 replacement",
+      "interpretation": "Possible source dependency; not a reconstruction of which pixels were replaced"
+    },
+    "bands": {
+      "25": {
+        "originalBand": 121,
+        "rawReasons": {
+          "adc-high-clipped": 446
+        },
+        "directInvalidCount": 446,
+        "validAfterDependencies": 24,
+        "invalidAfterDependencies": 520,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          441,
+          455
+        ],
+        "reconstructedAdcRange": [
+          452,
+          4095
+        ],
+        "maskSha256": "81ee3639da29c760d147b5182f1c2b82567905d8910eaf78218766b9c54584e7",
+        "directInvalidIndices": [
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179,
+          180,
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          197,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209,
+          210,
+          211,
+          212,
+          213,
+          214,
+          215,
+          216,
+          217,
+          218,
+          219,
+          220,
+          221,
+          222,
+          223,
+          228,
+          229,
+          230,
+          231,
+          232,
+          233,
+          234,
+          235,
+          236,
+          237,
+          238,
+          239,
+          240,
+          241,
+          242,
+          243,
+          244,
+          245,
+          246,
+          247,
+          248,
+          249,
+          250,
+          251,
+          252,
+          253,
+          254,
+          255,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267,
+          268,
+          269,
+          270,
+          271,
+          272,
+          273,
+          274,
+          275,
+          276,
+          277,
+          278,
+          279,
+          280,
+          281,
+          282,
+          283,
+          284,
+          285,
+          286,
+          287,
+          292,
+          293,
+          294,
+          295,
+          296,
+          297,
+          298,
+          299,
+          300,
+          301,
+          302,
+          303,
+          304,
+          305,
+          306,
+          307,
+          308,
+          309,
+          310,
+          311,
+          312,
+          313,
+          314,
+          315,
+          316,
+          317,
+          318,
+          319,
+          324,
+          325,
+          326,
+          327,
+          328,
+          329,
+          330,
+          331,
+          332,
+          333,
+          334,
+          335,
+          336,
+          337,
+          338,
+          339,
+          340,
+          341,
+          342,
+          343,
+          344,
+          345,
+          346,
+          347,
+          348,
+          349,
+          350,
+          351,
+          356,
+          357,
+          358,
+          359,
+          360,
+          361,
+          362,
+          363,
+          364,
+          365,
+          366,
+          367,
+          368,
+          369,
+          370,
+          371,
+          372,
+          373,
+          374,
+          375,
+          376,
+          377,
+          378,
+          379,
+          380,
+          381,
+          382,
+          383,
+          388,
+          389,
+          390,
+          391,
+          392,
+          393,
+          394,
+          395,
+          396,
+          397,
+          398,
+          399,
+          400,
+          401,
+          402,
+          403,
+          404,
+          405,
+          406,
+          407,
+          408,
+          409,
+          410,
+          411,
+          412,
+          413,
+          414,
+          415,
+          420,
+          421,
+          422,
+          423,
+          424,
+          425,
+          426,
+          427,
+          428,
+          429,
+          430,
+          431,
+          432,
+          433,
+          434,
+          435,
+          436,
+          437,
+          438,
+          439,
+          440,
+          441,
+          442,
+          443,
+          444,
+          445,
+          447,
+          452,
+          453,
+          454,
+          455,
+          456,
+          457,
+          458,
+          459,
+          460,
+          461,
+          462,
+          463,
+          464,
+          465,
+          466,
+          467,
+          468,
+          469,
+          470,
+          471,
+          472,
+          473,
+          474,
+          475,
+          476,
+          477,
+          478,
+          479,
+          485,
+          486,
+          487,
+          488,
+          489,
+          490,
+          491,
+          492,
+          493,
+          494,
+          495,
+          496,
+          497,
+          498,
+          499,
+          500,
+          501,
+          502,
+          503,
+          504,
+          505,
+          506,
+          507,
+          508,
+          509,
+          510,
+          511,
+          518,
+          519,
+          520,
+          521,
+          522,
+          523,
+          524,
+          525,
+          526,
+          527,
+          528,
+          529,
+          530,
+          531,
+          532,
+          533,
+          534,
+          535,
+          536,
+          537,
+          538,
+          539,
+          540,
+          542
+        ]
+      },
+      "44": {
+        "originalBand": 140,
+        "rawReasons": {
+          "adc-high-clipped": 103
+        },
+        "directInvalidCount": 103,
+        "validAfterDependencies": 244,
+        "invalidAfterDependencies": 300,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          427,
+          432
+        ],
+        "reconstructedAdcRange": [
+          433,
+          4095
+        ],
+        "maskSha256": "df408600cb1c239e36b6e61e70803a4b06483ce27f2f444b093bc97701e1a714",
+        "directInvalidIndices": [
+          13,
+          14,
+          15,
+          16,
+          43,
+          44,
+          45,
+          46,
+          47,
+          74,
+          75,
+          104,
+          105,
+          106,
+          107,
+          108,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142,
+          144,
+          145,
+          166,
+          167,
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179,
+          197,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          229,
+          230,
+          231,
+          232,
+          233,
+          234,
+          235,
+          236,
+          237,
+          238,
+          239,
+          240,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267,
+          268,
+          269,
+          270,
+          292,
+          293,
+          294,
+          295,
+          296,
+          297,
+          298,
+          299,
+          324,
+          325,
+          326,
+          327,
+          328,
+          329,
+          330,
+          331,
+          356,
+          357,
+          358,
+          359,
+          360,
+          388,
+          389,
+          390,
+          421,
+          424,
+          425,
+          455
+        ]
+      },
+      "58": {
+        "originalBand": 154,
+        "rawReasons": {
+          "adc-high-clipped": 196
+        },
+        "directInvalidCount": 196,
+        "validAfterDependencies": 164,
+        "invalidAfterDependencies": 380,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          239,
+          243
+        ],
+        "reconstructedAdcRange": [
+          245,
+          4095
+        ],
+        "maskSha256": "0f2b1f8d006989ac6d14f226b88bb8c374648e9f2df6c82885f55121da9e134d",
+        "directInvalidIndices": [
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          166,
+          167,
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179,
+          180,
+          181,
+          182,
+          197,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209,
+          210,
+          211,
+          212,
+          213,
+          214,
+          229,
+          230,
+          231,
+          232,
+          233,
+          234,
+          235,
+          236,
+          237,
+          238,
+          239,
+          240,
+          241,
+          242,
+          243,
+          244,
+          245,
+          246,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267,
+          268,
+          269,
+          270,
+          271,
+          272,
+          273,
+          274,
+          276,
+          277,
+          292,
+          293,
+          294,
+          295,
+          296,
+          297,
+          298,
+          299,
+          300,
+          301,
+          302,
+          303,
+          304,
+          305,
+          307,
+          324,
+          325,
+          326,
+          327,
+          328,
+          329,
+          330,
+          331,
+          332,
+          333,
+          334,
+          335,
+          336,
+          337,
+          338,
+          356,
+          357,
+          358,
+          359,
+          360,
+          361,
+          362,
+          363,
+          364,
+          365,
+          366,
+          367,
+          368,
+          369,
+          388,
+          389,
+          390,
+          391,
+          392,
+          393,
+          394,
+          395,
+          396,
+          397,
+          398,
+          421,
+          422,
+          423,
+          424,
+          425,
+          426,
+          427,
+          428,
+          453,
+          454,
+          455,
+          456,
+          457,
+          458,
+          487
+        ]
+      },
+      "70": {
+        "originalBand": 166,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 544,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          233,
+          244
+        ],
+        "reconstructedAdcRange": [
+          233,
+          1808
+        ],
+        "maskSha256": "23b05a15e8a51fc19ecedea57f24e21137dacca9d1b770a3c80c2b6c3724ae79",
+        "directInvalidIndices": []
+      },
+      "81": {
+        "originalBand": 177,
+        "rawReasons": {
+          "adc-high-clipped": 31
+        },
+        "directInvalidCount": 31,
+        "validAfterDependencies": 386,
+        "invalidAfterDependencies": 158,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          235,
+          238
+        ],
+        "reconstructedAdcRange": [
+          239,
+          4095
+        ],
+        "maskSha256": "03af148f98109af882564e5d7cd2f45bfb865553433cc76b9fe50f325e4daa4b",
+        "directInvalidIndices": [
+          135,
+          136,
+          137,
+          138,
+          139,
+          166,
+          167,
+          168,
+          169,
+          170,
+          171,
+          172,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          229,
+          230,
+          231,
+          232,
+          234,
+          261,
+          262,
+          263,
+          264,
+          292,
+          293,
+          294,
+          295
+        ]
+      }
+    },
+    "sources": {
+      "adc": "https://doi.org/10.1016/j.icarus.2004.07.001",
+      "background": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/vimscal/vimscal.html",
+      "pipeline": "https://vims.univ-nantes.fr/info/isis-calibration",
+      "noise": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/noisefilter/noisefilter.html",
+      "lowpass": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/lowpass/lowpass.html",
+      "fitDeltaSource": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/77c10385ee31526b54cc42b82ee30a1ac4ed8c58/isis/src/cassini/apps/vimscal/vimscal.cpp"
+    },
+    "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing.",
+    "id": "1719613772_1"
+  },
+  {
+    "policy": "pds3-ir-adc-background-and-filter-dependencies@1",
+    "target": "TETHYS",
+    "productId": "1_1719616836.10330",
+    "nativeStartTime": "1719616836.10330",
+    "dimensions": [
+      32,
+      17
+    ],
+    "originalLayout": {
+      "recordBytes": 512,
+      "declaredBytes": 440320,
+      "actualBytes": 439808,
+      "coreStartByteZeroBased": 23552,
+      "coreEndByteExclusive": 439440,
+      "declaredMinusActualBytes": 512
+    },
+    "rawSha256": "137bcba59f43f125cc03f8b5a692b8b531ca9915bf67817e4bb68a65ce9d3766",
+    "calibratedSha256": "f1ab5891ca92a4af956643ff3f05df404dfc5369e82eb1e77c1c2d980323be43",
+    "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
+    "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
+    "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
+    "filterDependencies": {
+      "radiusSamples": 3,
+      "radiusLines": 3,
+      "operations": [
+        "vims2isis",
+        "spiceinit",
+        "vimscal",
+        "noisefilter",
+        "lowpass"
+      ],
+      "derivation": "Minkowski sum: radius 2 for 5x5 noise classification plus radius 1 for 3x3 replacement",
+      "interpretation": "Possible source dependency; not a reconstruction of which pixels were replaced"
+    },
+    "bands": {
+      "25": {
+        "originalBand": 121,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 544,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          179,
+          183
+        ],
+        "reconstructedAdcRange": [
+          178,
+          3622
+        ],
+        "maskSha256": "23b05a15e8a51fc19ecedea57f24e21137dacca9d1b770a3c80c2b6c3724ae79",
+        "directInvalidIndices": []
+      },
+      "44": {
+        "originalBand": 140,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 544,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          202,
+          207
+        ],
+        "reconstructedAdcRange": [
+          202,
+          1307
+        ],
+        "maskSha256": "23b05a15e8a51fc19ecedea57f24e21137dacca9d1b770a3c80c2b6c3724ae79",
+        "directInvalidIndices": []
+      },
+      "58": {
+        "originalBand": 154,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 544,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          151,
+          167
+        ],
+        "reconstructedAdcRange": [
+          149,
+          1417
+        ],
+        "maskSha256": "23b05a15e8a51fc19ecedea57f24e21137dacca9d1b770a3c80c2b6c3724ae79",
+        "directInvalidIndices": []
+      },
+      "70": {
+        "originalBand": 166,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 544,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          153,
+          155
+        ],
+        "reconstructedAdcRange": [
+          153,
+          542
+        ],
+        "maskSha256": "23b05a15e8a51fc19ecedea57f24e21137dacca9d1b770a3c80c2b6c3724ae79",
+        "directInvalidIndices": []
+      },
+      "81": {
+        "originalBand": 177,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 544,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          148,
+          149
+        ],
+        "reconstructedAdcRange": [
+          148,
+          1153
+        ],
+        "maskSha256": "23b05a15e8a51fc19ecedea57f24e21137dacca9d1b770a3c80c2b6c3724ae79",
+        "directInvalidIndices": []
+      }
+    },
+    "sources": {
+      "adc": "https://doi.org/10.1016/j.icarus.2004.07.001",
+      "background": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/vimscal/vimscal.html",
+      "pipeline": "https://vims.univ-nantes.fr/info/isis-calibration",
+      "noise": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/noisefilter/noisefilter.html",
+      "lowpass": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/lowpass/lowpass.html",
+      "fitDeltaSource": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/77c10385ee31526b54cc42b82ee30a1ac4ed8c58/isis/src/cassini/apps/vimscal/vimscal.cpp"
+    },
+    "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing.",
+    "id": "1719616836_1"
+  },
+  {
+    "policy": "pds3-ir-adc-background-and-filter-dependencies@1",
+    "target": "TETHYS",
+    "productId": "1_1807456038.13332",
+    "nativeStartTime": "1807456038.13332",
+    "dimensions": [
+      3,
+      48
+    ],
+    "originalLayout": {
+      "recordBytes": 512,
+      "declaredBytes": 196096,
+      "actualBytes": 195584,
+      "coreStartByteZeroBased": 23552,
+      "coreEndByteExclusive": 195584,
+      "declaredMinusActualBytes": 512
+    },
+    "rawSha256": "dc8f4b201a002c900c11314e7c2ad65fdcfab344469f5e14d2f42d0a74d0b732",
+    "calibratedSha256": "4f7935c46b21af2bb0036382658b0e205be274b091f36e76084df6b4096733a6",
+    "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
+    "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
+    "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
+    "filterDependencies": {
+      "radiusSamples": 0,
+      "radiusLines": 0,
+      "operations": [
+        "vims2isis",
+        "spiceinit",
+        "vimscal"
+      ],
+      "derivation": "No spatial filters recorded after vimscal"
+    },
+    "bands": {
+      "25": {
+        "originalBand": 121,
+        "rawReasons": {
+          "adc-high-clipped": 46
+        },
+        "directInvalidCount": 46,
+        "validAfterDependencies": 98,
+        "invalidAfterDependencies": 46,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          296,
+          297
+        ],
+        "reconstructedAdcRange": [
+          297,
+          4095
+        ],
+        "maskSha256": "6e407b565b497f999534e670c3417c70e4ba53385b6f8098e5bf2d4071b61c71",
+        "directInvalidIndices": [
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100,
+          102,
+          103
+        ]
+      },
+      "44": {
+        "originalBand": 140,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 144,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          301,
+          304
+        ],
+        "reconstructedAdcRange": [
+          301,
+          2141
+        ],
+        "maskSha256": "761136e30319b547b806f3753bb0237dcf74194a44f77561bcc360ba1a5b7adb",
+        "directInvalidIndices": []
+      },
+      "58": {
+        "originalBand": 154,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 144,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          188,
+          192
+        ],
+        "reconstructedAdcRange": [
+          189,
+          2186
+        ],
+        "maskSha256": "761136e30319b547b806f3753bb0237dcf74194a44f77561bcc360ba1a5b7adb",
+        "directInvalidIndices": []
+      },
+      "70": {
+        "originalBand": 166,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 144,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          190,
+          191
+        ],
+        "reconstructedAdcRange": [
+          190,
+          862
+        ],
+        "maskSha256": "761136e30319b547b806f3753bb0237dcf74194a44f77561bcc360ba1a5b7adb",
+        "directInvalidIndices": []
+      },
+      "81": {
+        "originalBand": 177,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 144,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          183,
+          183
+        ],
+        "reconstructedAdcRange": [
+          182,
+          1769
+        ],
+        "maskSha256": "761136e30319b547b806f3753bb0237dcf74194a44f77561bcc360ba1a5b7adb",
+        "directInvalidIndices": []
+      }
+    },
+    "sources": {
+      "adc": "https://doi.org/10.1016/j.icarus.2004.07.001",
+      "background": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/vimscal/vimscal.html",
+      "pipeline": "https://vims.univ-nantes.fr/info/isis-calibration",
+      "noise": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/noisefilter/noisefilter.html",
+      "lowpass": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/lowpass/lowpass.html",
+      "fitDeltaSource": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/77c10385ee31526b54cc42b82ee30a1ac4ed8c58/isis/src/cassini/apps/vimscal/vimscal.cpp"
+    },
+    "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing.",
+    "id": "1807456038_1"
+  },
+  {
+    "policy": "pds3-ir-adc-background-and-filter-dependencies@1",
+    "target": "TETHYS",
+    "productId": "1_1807469104.7061",
+    "nativeStartTime": "1807469104.07061",
+    "dimensions": [
+      3,
+      64
+    ],
+    "originalLayout": {
+      "recordBytes": 512,
+      "declaredBytes": 253440,
+      "actualBytes": 252928,
+      "coreStartByteZeroBased": 23552,
+      "coreEndByteExclusive": 252928,
+      "declaredMinusActualBytes": 512
+    },
+    "rawSha256": "be1e54ea809e092370dd8a09f2ed96ee5aa350671241b0e46310c2adf3f4ebdc",
+    "calibratedSha256": "4b6bee3bfa4f19b51025c326cf7ac207bd4ea48bc35075f5ee83f86400c398ae",
+    "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
+    "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
+    "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
+    "filterDependencies": {
+      "radiusSamples": 0,
+      "radiusLines": 0,
+      "operations": [
+        "vims2isis",
+        "spiceinit",
+        "vimscal"
+      ],
+      "derivation": "No spatial filters recorded after vimscal"
+    },
+    "bands": {
+      "25": {
+        "originalBand": 121,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 192,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          258,
+          260
+        ],
+        "reconstructedAdcRange": [
+          257,
+          2574
+        ],
+        "maskSha256": "f612f8ec8c834489358aacb9f1771b9ee52f13679a98de0fed079fd6a5c94431",
+        "directInvalidIndices": []
+      },
+      "44": {
+        "originalBand": 140,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 192,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          289,
+          290
+        ],
+        "reconstructedAdcRange": [
+          288,
+          1078
+        ],
+        "maskSha256": "f612f8ec8c834489358aacb9f1771b9ee52f13679a98de0fed079fd6a5c94431",
+        "directInvalidIndices": []
+      },
+      "58": {
+        "originalBand": 154,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 192,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          190,
+          194
+        ],
+        "reconstructedAdcRange": [
+          191,
+          1037
+        ],
+        "maskSha256": "f612f8ec8c834489358aacb9f1771b9ee52f13679a98de0fed079fd6a5c94431",
+        "directInvalidIndices": []
+      },
+      "70": {
+        "originalBand": 166,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 192,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          190,
+          191
+        ],
+        "reconstructedAdcRange": [
+          188,
+          476
+        ],
+        "maskSha256": "f612f8ec8c834489358aacb9f1771b9ee52f13679a98de0fed079fd6a5c94431",
+        "directInvalidIndices": []
+      },
+      "81": {
+        "originalBand": 177,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 192,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          179,
+          181
+        ],
+        "reconstructedAdcRange": [
+          179,
+          841
+        ],
+        "maskSha256": "f612f8ec8c834489358aacb9f1771b9ee52f13679a98de0fed079fd6a5c94431",
+        "directInvalidIndices": []
+      }
+    },
+    "sources": {
+      "adc": "https://doi.org/10.1016/j.icarus.2004.07.001",
+      "background": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/vimscal/vimscal.html",
+      "pipeline": "https://vims.univ-nantes.fr/info/isis-calibration",
+      "noise": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/noisefilter/noisefilter.html",
+      "lowpass": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/lowpass/lowpass.html",
+      "fitDeltaSource": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/77c10385ee31526b54cc42b82ee30a1ac4ed8c58/isis/src/cassini/apps/vimscal/vimscal.cpp"
+    },
+    "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing.",
+    "id": "1807469104_1"
+  },
+  {
+    "policy": "pds3-ir-adc-background-and-filter-dependencies@1",
+    "target": "TETHYS",
+    "productId": "1_1807473499.13981",
+    "nativeStartTime": "1807473499.13981",
+    "dimensions": [
+      24,
+      12
+    ],
+    "originalLayout": {
+      "recordBytes": 512,
+      "declaredBytes": 248832,
+      "actualBytes": 248320,
+      "coreStartByteZeroBased": 23552,
+      "coreEndByteExclusive": 248000,
+      "declaredMinusActualBytes": 512
+    },
+    "rawSha256": "c0e1697c5cc5f72b6fede8ef71a20fb460fe80f083f4587acf2c1f5bd98f62ef",
+    "calibratedSha256": "accd3bed917401cd4ca82558bb2d1f8181e646c27f3272cc18a3f69a1c8c220f",
+    "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
+    "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
+    "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
+    "filterDependencies": {
+      "radiusSamples": 3,
+      "radiusLines": 3,
+      "operations": [
+        "vims2isis",
+        "spiceinit",
+        "vimscal",
+        "noisefilter",
+        "lowpass"
+      ],
+      "derivation": "Minkowski sum: radius 2 for 5x5 noise classification plus radius 1 for 3x3 replacement",
+      "interpretation": "Possible source dependency; not a reconstruction of which pixels were replaced"
+    },
+    "bands": {
+      "25": {
+        "originalBand": 121,
+        "rawReasons": {
+          "adc-high-clipped": 98
+        },
+        "directInvalidCount": 98,
+        "validAfterDependencies": 102,
+        "invalidAfterDependencies": 186,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          231,
+          232
+        ],
+        "reconstructedAdcRange": [
+          238,
+          4095
+        ],
+        "maskSha256": "e987565ad6ab736e372345429722ef447dddf286cc10f878e0558a6477633aad",
+        "directInvalidIndices": [
+          8,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          187,
+          188,
+          191,
+          238
+        ]
+      },
+      "44": {
+        "originalBand": 140,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 288,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          243,
+          245
+        ],
+        "reconstructedAdcRange": [
+          246,
+          1689
+        ],
+        "maskSha256": "c3be2af8b2e98345a8cea9cf6862d443bd323fe273f4103d667529c6842a1cb8",
+        "directInvalidIndices": []
+      },
+      "58": {
+        "originalBand": 154,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 288,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          164,
+          165
+        ],
+        "reconstructedAdcRange": [
+          167,
+          1685
+        ],
+        "maskSha256": "c3be2af8b2e98345a8cea9cf6862d443bd323fe273f4103d667529c6842a1cb8",
+        "directInvalidIndices": []
+      },
+      "70": {
+        "originalBand": 166,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 288,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          165,
+          167
+        ],
+        "reconstructedAdcRange": [
+          166,
+          717
+        ],
+        "maskSha256": "c3be2af8b2e98345a8cea9cf6862d443bd323fe273f4103d667529c6842a1cb8",
+        "directInvalidIndices": []
+      },
+      "81": {
+        "originalBand": 177,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 288,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          157,
+          158
+        ],
+        "reconstructedAdcRange": [
+          159,
+          1370
+        ],
+        "maskSha256": "c3be2af8b2e98345a8cea9cf6862d443bd323fe273f4103d667529c6842a1cb8",
+        "directInvalidIndices": []
+      }
+    },
+    "sources": {
+      "adc": "https://doi.org/10.1016/j.icarus.2004.07.001",
+      "background": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/vimscal/vimscal.html",
+      "pipeline": "https://vims.univ-nantes.fr/info/isis-calibration",
+      "noise": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/noisefilter/noisefilter.html",
+      "lowpass": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/lowpass/lowpass.html",
+      "fitDeltaSource": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/77c10385ee31526b54cc42b82ee30a1ac4ed8c58/isis/src/cassini/apps/vimscal/vimscal.cpp"
+    },
+    "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing.",
+    "id": "1807473499_1"
+  },
+  {
+    "policy": "pds3-ir-adc-background-and-filter-dependencies@1",
+    "target": "TETHYS",
+    "productId": "1_1818547570.1919",
+    "nativeStartTime": "1818547570.01919",
+    "dimensions": [
+      32,
+      16
+    ],
+    "originalLayout": {
+      "recordBytes": 512,
+      "declaredBytes": 415744,
+      "actualBytes": 415232,
+      "coreStartByteZeroBased": 23552,
+      "coreEndByteExclusive": 414976,
+      "declaredMinusActualBytes": 512
+    },
+    "rawSha256": "5077a518b0af23d1321cf2d196200793d6d826bade577afe575888d626c72957",
+    "calibratedSha256": "4eeddcbdf2405d627bb186a4bcb5fdd0beae2d5e754ea1081ea16c10fa320795",
+    "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
+    "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
+    "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
+    "filterDependencies": {
+      "radiusSamples": 3,
+      "radiusLines": 3,
+      "operations": [
+        "vims2isis",
+        "spiceinit",
+        "vimscal",
+        "noisefilter",
+        "lowpass"
+      ],
+      "derivation": "Minkowski sum: radius 2 for 5x5 noise classification plus radius 1 for 3x3 replacement",
+      "interpretation": "Possible source dependency; not a reconstruction of which pixels were replaced"
+    },
+    "bands": {
+      "25": {
+        "originalBand": 121,
+        "rawReasons": {
+          "adc-high-clipped": 1
+        },
+        "directInvalidCount": 1,
+        "validAfterDependencies": 488,
+        "invalidAfterDependencies": 24,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          308,
+          309
+        ],
+        "reconstructedAdcRange": [
+          307,
+          4095
+        ],
+        "maskSha256": "286d327dbf156f7c09ef3e9c50b9de5f377332e7cabccac1954d55ecbb79020d",
+        "directInvalidIndices": [
+          2
+        ]
+      },
+      "44": {
+        "originalBand": 140,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 512,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          317,
+          320
+        ],
+        "reconstructedAdcRange": [
+          316,
+          1502
+        ],
+        "maskSha256": "6caf38d537984e261527b8caef5f990fb91415a1db917198821a79ed28997973",
+        "directInvalidIndices": []
+      },
+      "58": {
+        "originalBand": 154,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 512,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          209,
+          211
+        ],
+        "reconstructedAdcRange": [
+          209,
+          1660
+        ],
+        "maskSha256": "6caf38d537984e261527b8caef5f990fb91415a1db917198821a79ed28997973",
+        "directInvalidIndices": []
+      },
+      "70": {
+        "originalBand": 166,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 512,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          208,
+          210
+        ],
+        "reconstructedAdcRange": [
+          207,
+          655
+        ],
+        "maskSha256": "6caf38d537984e261527b8caef5f990fb91415a1db917198821a79ed28997973",
+        "directInvalidIndices": []
+      },
+      "81": {
+        "originalBand": 177,
+        "rawReasons": {},
+        "directInvalidCount": 0,
+        "validAfterDependencies": 512,
+        "invalidAfterDependencies": 0,
+        "wholeBandBackgroundRejected": false,
+        "backgroundRowsSkippedByIsisFit": [],
+        "backgroundRange": [
+          198,
+          201
+        ],
+        "reconstructedAdcRange": [
+          199,
+          1443
+        ],
+        "maskSha256": "6caf38d537984e261527b8caef5f990fb91415a1db917198821a79ed28997973",
+        "directInvalidIndices": []
+      }
+    },
+    "sources": {
+      "adc": "https://doi.org/10.1016/j.icarus.2004.07.001",
+      "background": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/vimscal/vimscal.html",
+      "pipeline": "https://vims.univ-nantes.fr/info/isis-calibration",
+      "noise": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/noisefilter/noisefilter.html",
+      "lowpass": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/lowpass/lowpass.html",
+      "fitDeltaSource": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/77c10385ee31526b54cc42b82ee30a1ac4ed8c58/isis/src/cassini/apps/vimscal/vimscal.cpp"
+    },
+    "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing.",
+    "id": "1818547570_1"
+  }
+]

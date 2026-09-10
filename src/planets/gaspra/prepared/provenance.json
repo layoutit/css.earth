@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c80f84ce580627555b0880040a41992f28603c6cbd4ba84a694414a3c29c912f"
+    "sha256": "e144f1c5ad98d9e28192e0cf371d345b8a0aee5e563b5f41ac0a3988dddfff65"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "89c83775345cfa476912fc143949d5142b3a6d9373adba9d99e3521ce660dcc1",
+      "sha256": "29b08ae5e797e176eaad614198d514adc6e4a2bc658598a359d4cb2a7314d0ed",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -120,6 +120,31 @@
                     "filter": "CLEAR"
                   },
                   "coverageInsetPixels": 5
+                },
+                {
+                  "id": "107318313",
+                  "path": "observations/107318313rcal_clr.fit",
+                  "labelPath": "observations/107318313rcal_clr.xml",
+                  "encoding": "fits-ssi-iof",
+                  "cameraCatalog": {
+                    "path": "reference/951gaspimg.tab",
+                    "labelPath": "reference/951gaspimg.xml",
+                    "imageNumber": 107318313,
+                    "longitudeDirection": "west",
+                    "pixelOrigin": "one-based",
+                    "instrumentPath": "reference/gll36001.ti"
+                  },
+                  "quality": {
+                    "rawPath": "observations/e8313.fit",
+                    "rawLabelPath": "observations/e8313.lbl",
+                    "badDataPath": "observations/gaspbad.tab",
+                    "badDataLabelPath": "observations/gaspbad.lbl",
+                    "imageId": "e8313",
+                    "target": "GASPRA",
+                    "startTime": "1991-10-29T22:26:06.482Z",
+                    "filter": "CLEAR"
+                  },
+                  "coverageInsetPixels": 5
                 }
               ],
               "photometry": {
@@ -134,8 +159,8 @@
                 "maximumLevel": 1
               },
               "metadata": {
-                "label": "Calibrated image",
-                "coverage": "Galileo’s 1991 clear-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid."
+                "label": "SSI reflectance",
+                "coverage": "Two complementary Galileo clear-filter close-ups cover both ends of Gaspra. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels."
               }
             }
           ]
@@ -201,7 +226,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0acd7b3427ae7a18673bc9b8f97694380e838427738d27a2b81c368e68ec765e",
+      "sha256": "f5037d4c08c36da7e12cae23aecd3b8e8899fb1044332cc6840b61f7e3772dd8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -225,7 +250,7 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Gaspra is a small, angular asteroid photographed by Galileo in October 1991. Its ridges, shallow depressions and craters record a history of impacts. Only part of its surface was imaged in detail.",
+          "introduction": "Galileo photographed Gaspra in 1991, making it the first asteroid visited by a spacecraft.",
           "facts": [
             {
               "id": "radius",
@@ -279,14 +304,14 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Galileo SSI · 1991 flyby",
+              "detail": "Galileo SSI",
               "summary": "Photographed shadows and seams remain after mapping the images onto the shape. The gray grid marks poor or missing data."
             },
             {
               "id": "calibrated",
-              "label": "Calibrated image",
-              "description": "Galileo’s 1991 clear-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid.",
-              "title": "SSI clear-filter reflectance",
+              "label": "SSI reflectance",
+              "description": "These Galileo close-ups cover opposite ends of Gaspra. They were taken through a clear filter and show the sunlight and shadows from the flyby. The grid marks areas without usable photographs.",
+              "title": "Calibrated Galileo photographs",
               "thumbnail": "/scenes/gaspra/gaspra-calibrated-thumbnail.webp",
               "surface": "gaspra-calibrated-surface@2x.webp",
               "poles": "gaspra-calibrated-surface@2x.webp",
@@ -295,8 +320,20 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Galileo SSI · I/F",
-              "summary": "Calibrated reflectance retains the original lighting, not surface albedo. The grid marks bad pixels, uncertain edges and gaps."
+              "detail": "Galileo SSI",
+              "summary": "These Galileo close-ups cover opposite ends of Gaspra. They were taken through a clear filter and show the sunlight and shadows from the flyby. The grid marks areas without usable photographs.",
+              "facts": [
+                {
+                  "id": "images",
+                  "label": "Images",
+                  "value": "2"
+                },
+                {
+                  "id": "image-scale",
+                  "label": "Image scale",
+                  "value": "54 m/pixel"
+                }
+              ]
             },
             {
               "id": "elevation",
@@ -324,7 +361,7 @@
                 "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspra.tab",
                 "image": "/scenes/gaspra/gaspra-elevation-legend.webp"
               },
-              "detail": "Shape-derived height",
+              "detail": "PDS",
               "summary": "Height relative to a 6.1 km sphere, including Gaspra's broad shape. The unseen side is less certain."
             }
           ]
@@ -423,7 +460,7 @@
       "sha256": "7dc37fa0ab91303f1875b2e4293aa420727d67d9479d63fc1e9e680e26ec02e1",
       "bytes": 262080,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -465,7 +502,7 @@
       "sha256": "ec751b328485ad20e9625395d7634e7f75c7167c615357b03cb8c94d3d6590b0",
       "bytes": 527072,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -496,7 +533,7 @@
       "sha256": "5b6a64135b22c8431ec91f0b3cb8f2cb24e6509edcb2ad4df56bcabdfa07ccc6",
       "bytes": 2563200,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -523,7 +560,7 @@
       "sha256": "53ef20427179844ab1bfc6fcc66395ba78e949244cd2b614a482ddf6fe1a3301",
       "bytes": 9633,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -550,7 +587,7 @@
       "sha256": "0cb9e6bccee046cc5838760072410efc2d2a665b39cce142577db4699647bea6",
       "bytes": 1152,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -577,7 +614,7 @@
       "sha256": "d9783210e82979d6f6f4743f653c0c7b50cb5cceeb8927bc34bdf97e5a2fadee",
       "bytes": 8616,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -604,7 +641,7 @@
       "sha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652",
       "bytes": 9964,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -631,7 +668,7 @@
       "sha256": "ec66eee211c1b1f3de267375f976b01517365bacd7b22e4eb9842713c2e9541d",
       "bytes": 645120,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -658,7 +695,7 @@
       "sha256": "dd3e14be6e822c73bd3efbda58e5cb586b0654dfde8da58e9a19c0d306c2e792",
       "bytes": 10480,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -685,7 +722,7 @@
       "sha256": "d38c32fca409f5ceb2c51da96a9bc8fe58e3fcabe7168b52e23886fadcf71654",
       "bytes": 35828,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -712,7 +749,7 @@
       "sha256": "55be9710b892ce9a79464f42cf358bb2bc4e583231affa557e61a818b3ab6dc9",
       "bytes": 9120,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -728,6 +765,116 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "gaspra-107318313rcal_clr-fit",
+      "path": "observations/107318313rcal_clr.fit",
+      "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/data/fits/107318313rcal_clr.fit",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "width": 800,
+      "height": 800,
+      "sha256": "33c2768822732f79334f80fba161f86aacc27d3c70de3a4cce2315789b3d9f8e",
+      "bytes": 2563200,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/107318313rcal_clr.fit",
+        "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/data/fits/107318313rcal_clr.fit",
+        "headers": {
+          "User-Agent": "Mozilla/5.0"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "gaspra-107318313rcal_clr-xml",
+      "path": "observations/107318313rcal_clr.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/data/fits/107318313rcal_clr.xml",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "sha256": "cd2bf7b4bee1f6e2896082dfb78eabe574d62b6880d3fef2d8ec85dd3647c59b",
+      "bytes": 9633,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/107318313rcal_clr.xml",
+        "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/data/fits/107318313rcal_clr.xml",
+        "headers": {
+          "User-Agent": "Mozilla/5.0"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "gaspra-e8313-fit",
+      "path": "observations/e8313.fit",
+      "origin": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspra/e8313.fit",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "sha256": "89e3fe56ef9eddb0e7a2bd1af0a8be0d0ca6ebf92b661fbdf070283e1b6cab00",
+      "bytes": 645120,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/e8313.fit",
+        "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspra/e8313.fit",
+        "headers": {
+          "User-Agent": "Mozilla/5.0"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "gaspra-e8313-lbl",
+      "path": "observations/e8313.lbl",
+      "origin": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspra/e8313.lbl",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "sha256": "f411a08eb9d4a918e4f9feb6a5929366ffd51cee0654c5de3ccc61be184bf9f3",
+      "bytes": 10480,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/e8313.lbl",
+        "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspra/e8313.lbl",
+        "headers": {
+          "User-Agent": "Mozilla/5.0"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "purpose": "Pinned source evidence or authored package input.",
       "id": "authored-document:content/object.json",
@@ -737,10 +884,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0acd7b3427ae7a18673bc9b8f97694380e838427738d27a2b81c368e68ec765e",
-      "bytes": 11170,
+      "sha256": "f5037d4c08c36da7e12cae23aecd3b8e8899fb1044332cc6840b61f7e3772dd8",
+      "bytes": 11221,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -785,13 +932,13 @@
           "url": "/scenes/gaspra/gaspra-normal-thumbnail.webp",
           "bytes": 2838,
           "sha256": "9d16c2204a5422ea2e49e280d8cce1a30fe927497a2ecda5636d8fc32f47fe21",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gaspra/gaspra-normal-surface@2x.webp",
           "bytes": 451108,
           "sha256": "af3f5db4a9868d9598c62cd5ffce6b97e3bcd7e42bde76ea02df76afe9493723",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -823,32 +970,32 @@
           "url": "/scenes/gaspra/gaspra-elevation-thumbnail.webp",
           "bytes": 5142,
           "sha256": "9550dd773d53982d62217e1dc8ab4a917e79c9d97514c42d7778301cc499ceea",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gaspra/gaspra-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gaspra/gaspra-elevation-surface@2x.webp",
           "bytes": 271424,
           "sha256": "6f5395308515087e9da6cd09c692fb85f8383973e59ed6589393823ef51c5a5c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
     },
     {
       "id": "calibrated",
-      "label": "Calibrated image",
+      "label": "SSI reflectance",
       "recipe": "terrestrial",
       "selector": "/raster/mosaics/0",
       "parents": [],
       "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
       "limitations": [
-        "Galileo’s 1991 clear-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid."
+        "These Galileo close-ups cover opposite ends of Gaspra. They were taken through a clear filter and show the sunlight and shadows from the flyby. The grid marks areas without usable photographs."
       ],
       "lensIds": [
         "calibrated"
@@ -869,20 +1016,24 @@
         "gaspra-e8326-lbl",
         "gaspra-gaspbad-tab",
         "gaspra-gaspbad-lbl",
+        "gaspra-107318313rcal_clr-fit",
+        "gaspra-107318313rcal_clr-xml",
+        "gaspra-e8313-fit",
+        "gaspra-e8313-lbl",
         "gaspra-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/gaspra/gaspra-calibrated-thumbnail.webp",
-          "bytes": 1906,
-          "sha256": "c78e935fe62da80cd02f9eaacdf139848b3ba58b8ff99b5b51677a90df5fd77a",
-          "verification": "asset-manifest-pin"
+          "bytes": 1926,
+          "sha256": "0220d5c452f7e1f9819f1762e5081f56c02ac0c6c6b6e92ff59558d81ed2e11c",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gaspra/gaspra-calibrated-surface@2x.webp",
-          "bytes": 232952,
-          "sha256": "990891f426c778cdeb3e288fbd15cb9bff5e32d3515aebe06968145d796dc79c",
-          "verification": "asset-manifest-pin"
+          "bytes": 242376,
+          "sha256": "e935327a81bab8a8eed2cff9ca57657a6fe85819a7c93ce08110378b3fc07ff1",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -905,8 +1056,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6706,
-          "sha256": "7e622bdd2d55f2e081a6641c0ec17f9152840f5c3db8bee63d2ad35d597a9e62",
+          "bytes": 6600,
+          "sha256": "5b647552c081e9af7fac7772dc1e91ef0cc97b5eabd3564a5c7e40406c761c86",
           "verification": "bytes-verified"
         }
       ],
@@ -938,7 +1089,7 @@
     },
     {
       "id": "preview:calibrated",
-      "label": "Calibrated image preview",
+      "label": "SSI reflectance preview",
       "recipe": "terrestrial",
       "selector": "/raster/mosaics/0",
       "recipeDependencies": [
@@ -954,8 +1105,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/calibrated.webp",
-          "bytes": 6324,
-          "sha256": "9c46488584e98cdb9a85ddc8671541892fef2b8b44704108ef705b121c316b81",
+          "bytes": 6444,
+          "sha256": "116f7cd2e9ab4cc19dfa7be7dbf0dab418c33f7b6a48b3ba24237fc62f936be0",
           "verification": "bytes-verified"
         }
       ]

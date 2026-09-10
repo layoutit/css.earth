@@ -1,0 +1,1456 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>
+            USGS: ISIS noisefilter Application Documentation
+        </title>
+<link rel="stylesheet" href="../../../../assets/styles/IsisStyleCommon.css">
+<link rel="stylesheet" href="../styles/IsisApplicationDocStyle.css">
+<link rel="stylesheet" href="../../../../assets/styles/menu.css">
+<link rel="stylesheet" media="print" href="../../../../assets/styles/print.css">
+<meta name="keywords" content="Isis, image processing, noisefilter">
+<meta name="author" content="Eric Eliason">
+<meta name="description" content="Apply a noise removal filter to a cube">
+<meta name="publisher" content="USGS - GD - Astrogeology Research Program">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="country" content="USA">
+<meta name="state" content="AZ">
+<meta name="county" content="Coconino">
+<meta name="city" content="Flagstaff">
+<meta name="zip" content="86001">
+<script type="text/javascript" src="../../../../assets/scripts/utility.js">
+<!----></script><script type="text/javascript">
+
+          numExamples = 1 ;
+          appName = "noisefilter" ;
+
+          //<!--
+          ns4    = (document.layers) ? true:false ;
+          ns6    = (document.getElementById) ? true:false ;
+
+          function checkBrowser () {
+            if (ns4 == true) {
+              printerFriendlyURL = "../../PrinterFriendly/" + appName + "/" + appName + ".html"
+              location.replace(printerFriendlyURL) ;
+            }
+          }
+
+          // REPOSITION LAYER
+          // moves a layer to be visible in the window
+
+          function repositionLayer (moveMe) {
+            positionLayer = document.getElementById([moveMe]) ;
+
+            //define universal dsoc left point
+            leftpos = document.all ? document.body.scrollLeft : pageXOffset ;
+
+            //define universal dsoc top point
+            toppos = document.all ? document.body.scrollTop : pageYOffset ;
+
+            //define universal browser window width
+            window_width = document.all ? document.body.clientWidth : window.innerWidth ;
+
+            positionLayer.style.left = (window_width * .1) - 30 + leftpos + "px" ;
+            positionLayer.style.top = toppos + 60 + "px" ;
+          }
+
+          layerArray = new Array (2 + numExamples) ;
+          layerArray[0] = "Overview" ;
+          layerArray[1] = "Parameters" ;
+
+          for (i = 1, j = 2 ; i <= numExamples ; i++, j++) {
+            layerArray[j] = "Example" + i ;
+          }
+          layerArrLength = layerArray.length ;
+
+
+          // CONTENT TOGGLE VISIBILITY
+          // changes page view
+
+          function contentToggleVisibility(showMe) {
+            for (i = 0 ; i < layerArrLength ; i++) {
+              m_layer = document.getElementById([layerArray[i]]) ;
+              if (m_layer) {
+                m_layer.style.visibility = "hidden" ;
+              }
+            }
+            document.getElementById([showMe]).style.visibility = "visible" ;
+          }
+
+
+          // FUNCTION DESCRIPTION TOGGLE VISIBILITY
+          // changes page view
+
+          function functionDescriptionToggleVisibility(showMe) {
+            m_layer = document.getElementById([showMe]) ;
+            if (m_layer && (m_layer.style.visibility == "visible")) {
+              m_layer.style.visibility = "hidden" ;
+              return ;
+            }
+            document.getElementById([showMe]).style.visibility = "visible" ;
+            repositionLayer (showMe) ;
+          }
+
+
+
+
+          tabArray = new Array (2 + numExamples) ;
+          tabArray[0] = "OverviewTab" ;
+          tabArray[1] = "ParametersTab" ;
+
+          for (i = 1, j = 2 ; i <= numExamples ; i++, j++) {
+            tabArray[j] = "Example" + i + "Tab" ;
+          }
+          tabArrLength = tabArray.length ;
+          currentView = "OverviewTab" ;
+
+
+          // CONTENT TOGGLE TAB
+          // changes tab to highlight current view
+
+          function contentToggleTab(activeTab) {
+            currentView = activeTab ;
+            for (i = 0 ; i < tabArrLength ; i++) {
+              tab = document.getElementById([tabArray[i]]) ;
+              if (tab) {
+                tab.className = "tabOff" ;
+              }
+            }
+            document.getElementById([activeTab]).className = "tabOn" ;
+          }
+
+
+          // CONTENT HIGHLIGHT TAB
+          // changes tab to highlight on mouseover
+
+          function contentHighlightTab(highlightTab, changeStateTo) {
+            if (changeStateTo == 'on') {
+              if (highlightTab == currentView) {
+                return ;
+              }
+              document.getElementById([highlightTab]).className = "tabHighlight" ;
+            }
+            if (changeStateTo == 'off') {
+              if (highlightTab == currentView) {
+                document.getElementById([highlightTab]).className = "tabOn" ;
+              }
+              else {
+                document.getElementById([highlightTab]).className = "tabOff" ;
+              }
+            }
+          }
+
+          //--></script>
+<script type="text/javascript">
+          //<!--
+          (function() {
+            var usgsAnalytics = document.createElement('script');
+            usgsAnalytics.type = 'text/javascript';
+            usgsAnalytics.async = true;
+            usgsAnalytics.src = 'http://www.usgs.gov/scripts/analytics/usgs-analytics.js';
+            if('http:' == document.location.protocol) {
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(usgsAnalytics, s);
+            }
+          })(); 
+          -->
+</script>
+</head>
+<body onload="checkBrowser (); contentToggleVisibility('Overview');">
+<noscript>
+<div style="margin: 0px; padding: 10px; font-weight: bold; background-color: gold;">
+                JavaScript is not enabled. Please enable JavaScript for this site or
+                <a href="../../PrinterFriendly/noisefilter/noisefilter.html">
+                view <em>Printer Friendly</em> version of this document</a>.
+            </div>
+</noscript>
+<div class="isisMenu">
+<div>
+<a href="../../../../index.html" target="_top" id="homeLink">
+      Home</a>
+</div>
+<div>
+<a href="../../../../AboutIsis/index.html" target="_top">
+      About ISIS</a>
+</div>
+<div>
+<a href="http://isis.astrogeology.usgs.gov/fixit" target="_blank" title="Launch the ISIS Support Center in a new window">
+      Support</a>
+</div>
+<div>
+<a href="../../../../Installation/index.html" target="_top">
+      Download</a>
+</div>
+<hr>
+<h2>
+      ISIS 3
+    </h2>
+<div>
+<a href="../../../../UserDocs/index.html" target="_top">
+      Documentation</a>
+</div>
+<div>
+<a href="https://isis.astrogeology.usgs.gov/fixit/projects/isis/wiki/ISIS_Online_Workshops" target="_blank" title="Launch ISIS Workshop in a new window">
+      Tutorials</a>
+</div>
+<div>
+<a href="../../../../TechnicalInfo/index.html" target="_top">
+      Technical Documents</a>
+</div>
+<hr>
+<h2>
+      ISIS 2
+    </h2>
+<div>
+<a href="../../../../documents/Isis2UserDocs/index.html" target="_top">
+      Documentation</a>
+</div>
+<div>
+<a href="../../../../documents/Isis2Tutorials/index.html" target="_top">
+      Tutorials</a>
+</div>
+<div>
+<a href="../../../../documents/Isis2TechnicalDocs/index.html" target="_top">
+      Technical Documents</a>
+</div>
+<hr>
+<h2>Search</h2>
+<form name="seek1" method="get" action="http://search.usgs.gov/query.html" target="_top" style="padding-top:0px;margin-top:0px;">
+<table style="width:150px;" align="center">
+<tr valign="top">
+<td>
+<table class="AstroIsisSearch">
+<tr valign="top">
+<td><input type="hidden" name="col" value="usgs"><input type="hidden" name="qp" value=""><input type="hidden" name="qs" value=""><input type="hidden" name="qc" value=""><input type="hidden" name="pw" value="100%"><input type="hidden" name="ws" value="1"><input type="hidden" name="la" value=""><input type="hidden" name="qm" value="1"><input type="hidden" name="st" value="1"><input type="hidden" name="nh" value="10"><input type="hidden" name="lk" value="1"><input type="hidden" name="rf" value="0"><input type="hidden" name="oq" value="site:isis.astrogeology.usgs.gov"><input type="hidden" name="rq" value="1">
+<div align="center">
+<input type="text" alt="Search term" name="qt" size="12" maxlength="2033"><input alt="Search" type="submit" value="Go">
+<br>
+<a href="../../../../search.html" target="_top">Advanced</a> |
+                <a href="http://search.usgs.gov/searchhelp.html" target="_top">Help</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</form>
+</div>
+<div class="isisContent">
+<a href="http://www.usgs.gov"><img src="../../../../assets/icons/littleVIS.gif" width="80" height="22" border="0" alt="USGS"></a>
+<br>
+<p style="margin-top:10px; margin-bottom:0px;">
+        ISIS 3 Application Documentation</p>
+<hr>
+<table width="100%" cellpadding="0" border="0" cellspacing="0">
+<tr valign="top">
+<td align="left">
+<h1>noisefilter</h1>
+</td><td align="right" class="caption"><a href="../../PrinterFriendly/noisefilter/noisefilter.html">Printer Friendly View</a> |
+            <a href="../../../index.html">TOC</a> |
+            <a href="../../../../index.html">Home</a></td>
+</tr>
+</table>
+<p style="margin-top:0px; font-style:italic;">
+    Apply a noise removal filter to a cube
+  </p>
+<table cellspacing="0" border="0">
+<tr>
+<td class="tabOn" id="OverviewTab" onclick="contentToggleTab('OverviewTab'); contentToggleVisibility('Overview');" onmouseover="contentHighlightTab('OverviewTab', 'on');" onmouseout="contentHighlightTab('OverviewTab', 'off');">
+             Overview
+           </td><td class="tabOff" id="ParametersTab" onclick="contentToggleTab('ParametersTab'); contentToggleVisibility('Parameters');" onmouseover="contentHighlightTab('ParametersTab', 'on');" onmouseout="contentHighlightTab('ParametersTab', 'off');">
+              Parameters
+              </td><td class="tabOff" id="Example1Tab" onclick="contentToggleTab('Example1Tab'); contentToggleVisibility('Example1');" onmouseover="contentHighlightTab('Example1Tab', 'on');" onmouseout="contentHighlightTab('Example1Tab', 'off');">
+              Example 1</td>
+</tr>
+</table>
+<div id="Overview" style="position:absolute;width:97%;">
+<table cellpadding="10" class="pageView" width="100%">
+<tr>
+<td><a name="Description"></a>
+<hr>
+<h2>
+          Description
+        </h2>
+<div style="font-weight: normal;">
+     This program applies a noise filter to a cube.  Pixel values that
+     are considered to be noise will be replaced with either the average
+     of the boxcar or the Isis NULL value.  The criteria for determining
+     whether a pixel is noise or not is given by the TOLMIN and TOLMAX
+     parameters.  If the difference between the input pixel and the average
+     of the boxcar is greater than the tolerance given, the pixel is
+     considered to be noise and is replaced.  If the STDDEV option is
+     chosen, then TOLMIN and TOLMAX indicate the tolerance in number of
+     standard deviations between the input pixel and the boxcar average
+     that determines whether the pixel is noise.   The number of pixels
+     replaced and the corresponding percentage is output.
+  </div>
+<a name="Categories"></a>
+<hr>
+<h2>
+          Categories
+        </h2>
+<ul>
+<li>
+<a href="../../../index.html#Filters">Filters</a>
+</li>
+</ul>
+<hr>
+<h2>
+            Related Applications to Previous Versions of ISIS
+          </h2>
+
+          This program replaces the following
+          
+            application 
+            
+          existing in previous versions of ISIS:
+
+          <ul>
+<li>boxfilter</li>
+</ul>
+<hr>
+<h2>
+<a name="SeeAlso">
+                  Related Objects and Documents</a>
+</h2>
+<h3>Applications</h3>
+<ul>
+<li>
+<a href="../lowpass/lowpass.html">lowpass</a>
+</li>
+<li>
+<a href="../highpass/highpass.html">highpass</a>
+</li>
+<li>
+<a href="../trimfilter/trimfilter.html">trimfilter</a>
+</li>
+<li>
+<a href="../divfilter/divfilter.html">divfilter</a>
+</li>
+<li>
+<a href="../svfilter/svfilter.html">svfilter</a>
+</li>
+</ul>
+<a name="History"></a>
+<hr>
+<h2>
+              History
+          </h2>
+<table>
+<tr>
+<td class="tableCellHistory_name" nowrap>Eric Eliason</td><td class="tableCellHistory_date" nowrap>1988-05-20</td><td class="tableCellHistory_description">
+      Original version
+    </td>
+</tr>
+<tr>
+<td class="tableCellHistory_name" nowrap>Tracie Sucharski</td><td class="tableCellHistory_date" nowrap>2002-08-15</td><td class="tableCellHistory_description">
+      Ported to Isis 3.0
+    </td>
+</tr>
+<tr>
+<td class="tableCellHistory_name" nowrap>K Teal Thompson</td><td class="tableCellHistory_date" nowrap>2003-04-10</td><td class="tableCellHistory_description">
+      Add example.
+    </td>
+</tr>
+<tr>
+<td class="tableCellHistory_name" nowrap>Kim Sides</td><td class="tableCellHistory_date" nowrap>2003-05-13</td><td class="tableCellHistory_description">
+      Added application test
+    </td>
+</tr>
+<tr>
+<td class="tableCellHistory_name" nowrap>Stuart Sides</td><td class="tableCellHistory_date" nowrap>2003-05-16</td><td class="tableCellHistory_description">
+      Modified schema location from astogeology... to isis.astrogeology..."
+    </td>
+</tr>
+<tr>
+<td class="tableCellHistory_name" nowrap>Stuart Sides</td><td class="tableCellHistory_date" nowrap>2003-05-30</td><td class="tableCellHistory_description">
+      Fixed compiler error with uninitialized variable after adding -O1 flag
+    </td>
+</tr>
+<tr>
+<td class="tableCellHistory_name" nowrap>Stuart Sides</td><td class="tableCellHistory_date" nowrap>2003-07-29</td><td class="tableCellHistory_description">
+      Modified filename parameters to be cube parameters where necessary
+    </td>
+</tr>
+<tr>
+<td class="tableCellHistory_name" nowrap>Jeff Anderson</td><td class="tableCellHistory_date" nowrap>2003-08-25</td><td class="tableCellHistory_description">
+      Separated standard deviation and average noise filter options into two routines.  Fixed problem
+      filtering special pixels.  Modified explanations for TOLMIN and TOLMAX.
+    </td>
+</tr>
+<tr>
+<td class="tableCellHistory_name" nowrap>Stuart Sides</td><td class="tableCellHistory_date" nowrap>2003-11-07</td><td class="tableCellHistory_description">
+      Modified results pvl to not include the results group
+    </td>
+</tr>
+<tr>
+<td class="tableCellHistory_name" nowrap>Elizabeth Miller</td><td class="tableCellHistory_date" nowrap>2005-12-15</td><td class="tableCellHistory_description">
+      Added a flattol parameter - it replaces the tolmin parameter in isis2 boxfilter
+    </td>
+</tr>
+<tr>
+<td class="tableCellHistory_name" nowrap>Steven Lambright</td><td class="tableCellHistory_date" nowrap>2008-05-13</td><td class="tableCellHistory_description">
+      Removed references to CubeInfo 
+    </td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<script type="text/javascript" src="../../../../assets/scripts/footer.js">
+<!----></script>
+</div>
+<div id="Parameters" style="position:absolute;width:97%;">
+<table cellpadding="10" class="pageView" width="100%">
+<tr>
+<td><a name="Groups"></a>
+<hr>
+<h2>
+                Parameter Groups
+            </h2>
+<h3>Files</h3>
+<table>
+<tr>
+<th class="tableCellLevel1_th">
+                    Name
+                    </th><th class="tableCellLevel1_th">
+                    Description
+                    </th>
+</tr>
+<tr>
+<td class="tableCellLevel1_name"><a href="javascript:functionDescriptionToggleVisibility('FilesFROM');">FROM</a></td><td class="tableCellLevel1">
+          Input file
+        </td>
+</tr>
+<tr>
+<td class="tableCellLevel1_name"><a href="javascript:functionDescriptionToggleVisibility('FilesTO');">TO</a></td><td class="tableCellLevel1">
+          Output noisefilter cube
+        </td>
+</tr>
+</table>
+<h3>Noise Parameters</h3>
+<table>
+<tr>
+<th class="tableCellLevel1_th">
+                    Name
+                    </th><th class="tableCellLevel1_th">
+                    Description
+                    </th>
+</tr>
+<tr>
+<td class="tableCellLevel1_name"><a href="javascript:functionDescriptionToggleVisibility('Noise_ParametersTOLDEF');">TOLDEF</a></td><td class="tableCellLevel1">
+          Defines the meaning of TOLMIN and TOLMAX
+        </td>
+</tr>
+<tr>
+<td class="tableCellLevel1_name"><a href="javascript:functionDescriptionToggleVisibility('Noise_ParametersFLATTOL');">FLATTOL</a></td><td class="tableCellLevel1">
+           Scaled tolerance value
+        </td>
+</tr>
+<tr>
+<td class="tableCellLevel1_name"><a href="javascript:functionDescriptionToggleVisibility('Noise_ParametersTOLMIN');">TOLMIN</a></td><td class="tableCellLevel1">
+          Dark noise tolerance
+        </td>
+</tr>
+<tr>
+<td class="tableCellLevel1_name"><a href="javascript:functionDescriptionToggleVisibility('Noise_ParametersTOLMAX');">TOLMAX</a></td><td class="tableCellLevel1">
+          Bright noise tolerance
+        </td>
+</tr>
+<tr>
+<td class="tableCellLevel1_name"><a href="javascript:functionDescriptionToggleVisibility('Noise_ParametersREPLACE');">REPLACE</a></td><td class="tableCellLevel1">
+          Value to replace noise
+        </td>
+</tr>
+</table>
+<h3>Boxcar Size</h3>
+<table>
+<tr>
+<th class="tableCellLevel1_th">
+                    Name
+                    </th><th class="tableCellLevel1_th">
+                    Description
+                    </th>
+</tr>
+<tr>
+<td class="tableCellLevel1_name"><a href="javascript:functionDescriptionToggleVisibility('Boxcar_SizeSAMPLES');">SAMPLES</a></td><td class="tableCellLevel1">
+          Number of samples in boxcar
+        </td>
+</tr>
+<tr>
+<td class="tableCellLevel1_name"><a href="javascript:functionDescriptionToggleVisibility('Boxcar_SizeLINES');">LINES</a></td><td class="tableCellLevel1">
+          Number of lines in boxcar
+        </td>
+</tr>
+</table>
+<h3>Boxcar Restrictions</h3>
+<table>
+<tr>
+<th class="tableCellLevel1_th">
+                    Name
+                    </th><th class="tableCellLevel1_th">
+                    Description
+                    </th>
+</tr>
+<tr>
+<td class="tableCellLevel1_name"><a href="javascript:functionDescriptionToggleVisibility('Boxcar_RestrictionsLOW');">LOW</a></td><td class="tableCellLevel1">
+          Valid minimum pixel
+        </td>
+</tr>
+<tr>
+<td class="tableCellLevel1_name"><a href="javascript:functionDescriptionToggleVisibility('Boxcar_RestrictionsHIGH');">HIGH</a></td><td class="tableCellLevel1">
+          Valid maximum pixel
+        </td>
+</tr>
+<tr>
+<td class="tableCellLevel1_name"><a href="javascript:functionDescriptionToggleVisibility('Boxcar_RestrictionsMINIMUM');">MINIMUM</a></td><td class="tableCellLevel1">
+          Minimum boxcar pixel count
+        </td>
+</tr>
+</table>
+<h3>Special Pixels</h3>
+<table>
+<tr>
+<th class="tableCellLevel1_th">
+                    Name
+                    </th><th class="tableCellLevel1_th">
+                    Description
+                    </th>
+</tr>
+<tr>
+<td class="tableCellLevel1_name"><a href="javascript:functionDescriptionToggleVisibility('Special_PixelsNULLISNOISE');">NULLISNOISE</a></td><td class="tableCellLevel1">Null is noise</td>
+</tr>
+<tr>
+<td class="tableCellLevel1_name"><a href="javascript:functionDescriptionToggleVisibility('Special_PixelsHISISNOISE');">HISISNOISE</a></td><td class="tableCellLevel1">HIS is noise</td>
+</tr>
+<tr>
+<td class="tableCellLevel1_name"><a href="javascript:functionDescriptionToggleVisibility('Special_PixelsHRSISNOISE');">HRSISNOISE</a></td><td class="tableCellLevel1">HRS is noise</td>
+</tr>
+<tr>
+<td class="tableCellLevel1_name"><a href="javascript:functionDescriptionToggleVisibility('Special_PixelsLISISNOISE');">LISISNOISE</a></td><td class="tableCellLevel1">HIS is noise</td>
+</tr>
+<tr>
+<td class="tableCellLevel1_name"><a href="javascript:functionDescriptionToggleVisibility('Special_PixelsLRSISNOISE');">LRSISNOISE</a></td><td class="tableCellLevel1">HRS is noise</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<script type="text/javascript" src="../../../../assets/scripts/footer.js"></script>
+</div>
+<div id="FilesFROM" class="functionView">
+<div align="right">
+<span style="border:3px; border-style:solid; border-color:#336699; padding:3px; font-family:sans-serif; font-weight:bold;"><a title="Close this window" href="javascript:functionDescriptionToggleVisibility('FilesFROM');" style="text-decoration:none; color:#336699;">X</a></span>
+</div>
+<h3>
+<span style="font-style:italic; text-decoration:underline;">Files</span>:
+                        FROM</h3>
+<hr>
+<h4>
+                         Description
+                       </h4>
+<p>
+	        Input cube to filter
+        </p>
+<div>
+<table>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                             Type
+                           </th><td class="tableCellLevel1_description">cube</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                               File Mode
+                             </th><td class="tableCellLevel1_description">input</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                               Filter
+                             </th><td class="tableCellLevel1_description">
+          *.cub
+        </td>
+</tr>
+</table>
+</div>
+<div align="right">
+<a title="Close this window" href="javascript:functionDescriptionToggleVisibility('FilesFROM');" class="caption" style="text-decoration:none;">
+            Close Window</a>
+</div>
+</div>
+<div id="FilesTO" class="functionView">
+<div align="right">
+<span style="border:3px; border-style:solid; border-color:#336699; padding:3px; font-family:sans-serif; font-weight:bold;"><a title="Close this window" href="javascript:functionDescriptionToggleVisibility('FilesTO');" style="text-decoration:none; color:#336699;">X</a></span>
+</div>
+<h3>
+<span style="font-style:italic; text-decoration:underline;">Files</span>:
+                        TO</h3>
+<hr>
+<h4>
+                         Description
+                       </h4>
+<p>
+	        The resultant filtered cube
+        </p>
+<div>
+<table>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                             Type
+                           </th><td class="tableCellLevel1_description">cube</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                               File Mode
+                             </th><td class="tableCellLevel1_description">output</td>
+</tr>
+</table>
+</div>
+<div align="right">
+<a title="Close this window" href="javascript:functionDescriptionToggleVisibility('FilesTO');" class="caption" style="text-decoration:none;">
+            Close Window</a>
+</div>
+</div>
+<div id="Noise_ParametersTOLDEF" class="functionView">
+<div align="right">
+<span style="border:3px; border-style:solid; border-color:#336699; padding:3px; font-family:sans-serif; font-weight:bold;"><a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Noise_ParametersTOLDEF');" style="text-decoration:none; color:#336699;">X</a></span>
+</div>
+<h3>
+<span style="font-style:italic; text-decoration:underline;">Noise Parameters</span>:
+                        TOLDEF</h3>
+<hr>
+<h4>
+                         Description
+                       </h4>
+<p>
+          If DN is chosen TOLMIN and TOLMAX are in dn units.  If STDDEV is
+          chosen, TOLMIN and TOLMAX are number of standard deviations.
+        </p>
+<div>
+<table>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                             Type
+                           </th><td class="tableCellLevel1_description">string</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th">
+                               Default
+                             </th><td class="tableCellLevel1_description">DN</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th" align="right" valign="top">
+                               Option List:
+                             </th><td class="tableCellLevel1_description">
+<table>
+<tr>
+<th class="tableCellLevel2" valign="top">
+                                   Option</th><th class="tableCellLevel2" valign="top">
+                                   Brief</th><th class="tableCellLevel2" valign="top">
+                                   Description</th>
+</tr>
+<tr>
+<td class="tableCellLevel2_name" valign="top">DN</td><td class="tableCellLevel2_type" valign="top">
+              TOLMIN and TOLMAX are in units of DN.
+            </td><td class="tableCellLevel2_description" valign="top">
+             If the difference between the input pixel and the boxcar average
+             is greater then the tolerances given in TOLMIN or TOLMAX (values
+             of DN), the pixel is considered to be noise and will be replaced.
+             See TOLMIN and TOLMAX for more details.
+            <h4>Exclusions</h4>
+<ul>
+<li>FLATTOL</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td class="tableCellLevel2_name" valign="top">STDDEV</td><td class="tableCellLevel2_type" valign="top">
+              TOLMIN and TOLMAX are in units of standard deviation.
+            </td><td class="tableCellLevel2_description" valign="top">
+            If the difference between the input pixel and the boxcar average is
+            greater than the number of standard deviations indicated in TOLMIN
+            or TOLMAX, the pixel is considered to be noise and will be replaced.
+            See TOLMIN and TOLMAX for more details.
+            <h4>Inclusions</h4>
+<ul>
+<li>FLATTOL</li>
+</ul>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<div align="right">
+<a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Noise_ParametersTOLDEF');" class="caption" style="text-decoration:none;">
+            Close Window</a>
+</div>
+</div>
+<div id="Noise_ParametersFLATTOL" class="functionView">
+<div align="right">
+<span style="border:3px; border-style:solid; border-color:#336699; padding:3px; font-family:sans-serif; font-weight:bold;"><a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Noise_ParametersFLATTOL');" style="text-decoration:none; color:#336699;">X</a></span>
+</div>
+<h3>
+<span style="font-style:italic; text-decoration:underline;">Noise Parameters</span>:
+                        FLATTOL</h3>
+<hr>
+<h4>
+                         Description
+                       </h4>
+<p>
+          Minimum tolerance value used in the STDDEV filter.  If the difference 
+          between the original pixel, and the average value of the noise filter is 
+          less than the FLATTOL then the output pixel will remain unchanged 
+          from the input pixel.  Without this safeguard, very uniform inage areas 
+          (low standard deviation) will be excessively smoothed, creating areas
+          of constant DN.
+        </p>
+<div>
+<table>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                             Type
+                           </th><td class="tableCellLevel1_description">double</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th">
+                               Default
+                             </th><td class="tableCellLevel1_description">0.0</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                               Minimum
+                             </th><td class="tableCellLevel1_description">0.0
+                                   (inclusive)
+                                 </td>
+</tr>
+</table>
+</div>
+<div align="right">
+<a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Noise_ParametersFLATTOL');" class="caption" style="text-decoration:none;">
+            Close Window</a>
+</div>
+</div>
+<div id="Noise_ParametersTOLMIN" class="functionView">
+<div align="right">
+<span style="border:3px; border-style:solid; border-color:#336699; padding:3px; font-family:sans-serif; font-weight:bold;"><a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Noise_ParametersTOLMIN');" style="text-decoration:none; color:#336699;">X</a></span>
+</div>
+<h3>
+<span style="font-style:italic; text-decoration:underline;">Noise Parameters</span>:
+                        TOLMIN</h3>
+<hr>
+<h4>
+                         Description
+                       </h4>
+<p>
+          If you are attempting to remove black speckle or other dark noise then you should be modifying this
+          parameter.   When a pixel is being checked for noise, a difference between the pixel and boxcar
+          average is computed.  If this difference is negative then TOLMIN will be used to determine if we
+          have noise, hence dark noise will be removed by modifying TOLMIN.
+
+          For the DN option, if the absolute value of the difference (pixel - average) is less than TOLMIN, then
+          the input pixel is preserved.  Otherwise it is considered noisy and will be replaced.
+          For the STDDEV option, if the absolute value of the difference is less than TOLMIN * standard deviation
+          of the boxcar then the input pixel is preserved. Otherwise it is considered noisy and will be replaced.
+
+          In general, a high tolerance means fewer pixels will be replaced and lower tolerance will cause more
+          pixels to be replaced.  Too small of a tolerance can actually replace real/good data.  For the STDDEV option,
+          you might try TOLMIN=3 as a starting point.   For the DN option, try TOLMIN=2.
+        </p>
+<div>
+<table>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                             Type
+                           </th><td class="tableCellLevel1_description">double</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th">
+                               Default
+                             </th><td class="tableCellLevel1_description">20</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                               Minimum
+                             </th><td class="tableCellLevel1_description">0.0
+                                   (exclusive)
+                                 </td>
+</tr>
+</table>
+</div>
+<div align="right">
+<a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Noise_ParametersTOLMIN');" class="caption" style="text-decoration:none;">
+            Close Window</a>
+</div>
+</div>
+<div id="Noise_ParametersTOLMAX" class="functionView">
+<div align="right">
+<span style="border:3px; border-style:solid; border-color:#336699; padding:3px; font-family:sans-serif; font-weight:bold;"><a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Noise_ParametersTOLMAX');" style="text-decoration:none; color:#336699;">X</a></span>
+</div>
+<h3>
+<span style="font-style:italic; text-decoration:underline;">Noise Parameters</span>:
+                        TOLMAX</h3>
+<hr>
+<h4>
+                         Description
+                       </h4>
+<p>
+          If you are attempting to remove white speckle or other bright noise then you should be modifying this
+          parameter.   When a pixel is being checked for noise, a difference between the pixel and boxcar
+          average is computed.  If this difference is positive then TOLMAX will be used to determine if we
+          have noise, hence white noise will be removed by modifying TOLMAX.
+
+          For the DN option, if the difference (pixel - average) is less than TOLMAX, then the input pixel is
+          preserved.  Otherwise it is considered noisy and will be replaced.
+          For the STDDEV option, if the difference is less than TOLMAX * standard deviation of the boxcar then the
+          input pixel
+          is preserved. Otherwise it is considered noisy and will be replaced.
+
+          In general, a high tolerance means fewer pixels will be replaced and lower tolerance will cause more
+          pixels to be replaced.  Too small of a tolerance can actually replace real/good data.  For the STDDEV option,
+          you might try TOLMAX=3 as a starting point.   For the DN option, try TOLMAX=2.
+        </p>
+<div>
+<table>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                             Type
+                           </th><td class="tableCellLevel1_description">double</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th">
+                               Default
+                             </th><td class="tableCellLevel1_description">20</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                               Minimum
+                             </th><td class="tableCellLevel1_description">0.0
+                                   (exclusive)
+                                 </td>
+</tr>
+</table>
+</div>
+<div align="right">
+<a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Noise_ParametersTOLMAX');" class="caption" style="text-decoration:none;">
+            Close Window</a>
+</div>
+</div>
+<div id="Noise_ParametersREPLACE" class="functionView">
+<div align="right">
+<span style="border:3px; border-style:solid; border-color:#336699; padding:3px; font-family:sans-serif; font-weight:bold;"><a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Noise_ParametersREPLACE');" style="text-decoration:none; color:#336699;">X</a></span>
+</div>
+<h3>
+<span style="font-style:italic; text-decoration:underline;">Noise Parameters</span>:
+                        REPLACE</h3>
+<hr>
+<h4>
+                         Description
+                       </h4>
+<p>
+          This is the value that is used to replace pixels which are
+          considered to be noise.
+        </p>
+<div>
+<table>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                             Type
+                           </th><td class="tableCellLevel1_description">string</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th">
+                               Default
+                             </th><td class="tableCellLevel1_description">
+          AVERAGE
+        </td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th" align="right" valign="top">
+                               Option List:
+                             </th><td class="tableCellLevel1_description">
+<table>
+<tr>
+<th class="tableCellLevel2" valign="top">
+                                   Option</th><th class="tableCellLevel2" valign="top">
+                                   Brief</th><th class="tableCellLevel2" valign="top">
+                                   Description</th>
+</tr>
+<tr>
+<td class="tableCellLevel2_name" valign="top">AVERAGE</td><td class="tableCellLevel2_type" valign="top">  Replace noise with boxcar average </td><td class="tableCellLevel2_description" valign="top">
+              If the input pixel is considered as noise, it is replaced
+              with the average value of the boxcar.
+            </td>
+</tr>
+<tr>
+<td class="tableCellLevel2_name" valign="top">NULL</td><td class="tableCellLevel2_type" valign="top"> Replace noise with Isis Null value </td><td class="tableCellLevel2_description" valign="top">
+              If the input pixel is considered noise, it is replaced with
+              the Isis Null value.
+            </td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<div align="right">
+<a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Noise_ParametersREPLACE');" class="caption" style="text-decoration:none;">
+            Close Window</a>
+</div>
+</div>
+<div id="Boxcar_SizeSAMPLES" class="functionView">
+<div align="right">
+<span style="border:3px; border-style:solid; border-color:#336699; padding:3px; font-family:sans-serif; font-weight:bold;"><a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Boxcar_SizeSAMPLES');" style="text-decoration:none; color:#336699;">X</a></span>
+</div>
+<h3>
+<span style="font-style:italic; text-decoration:underline;">Boxcar Size</span>:
+                        SAMPLES</h3>
+<hr>
+<h4>
+                         Description
+                       </h4>
+<p>
+	        This is the total number of samples in the boxcar.
+          It must be odd and can not exceed twice the number of samples
+          in the cube.  In general, the size of the boxcar does not
+          cause the program to operate significantly slower.
+
+            The shape of the filter can be used to control types of noise to remove.  For example, a 3x3 or 5x5 boxcar
+            can be used to remove speckle or salt and pepper noise.   A 1 sample x 5 line boxcar with REPLACE=NULL
+            could be used to remove dropped or noisy lines of data.  Then use the lowpass program with a 3x3 boxcar
+            to fill in the NULLed data.
+        </p>
+<div>
+<table>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                             Type
+                           </th><td class="tableCellLevel1_description">integer</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                               Minimum
+                             </th><td class="tableCellLevel1_description">1
+                                   (inclusive)
+                                 </td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                               Odd
+                             </th><td class="tableCellLevel1_description">
+                               This value must be an odd number
+                             </td>
+</tr>
+</table>
+</div>
+<div align="right">
+<a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Boxcar_SizeSAMPLES');" class="caption" style="text-decoration:none;">
+            Close Window</a>
+</div>
+</div>
+<div id="Boxcar_SizeLINES" class="functionView">
+<div align="right">
+<span style="border:3px; border-style:solid; border-color:#336699; padding:3px; font-family:sans-serif; font-weight:bold;"><a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Boxcar_SizeLINES');" style="text-decoration:none; color:#336699;">X</a></span>
+</div>
+<h3>
+<span style="font-style:italic; text-decoration:underline;">Boxcar Size</span>:
+                        LINES</h3>
+<hr>
+<h4>
+                         Description
+                       </h4>
+<p>
+	        This is the total number of lines in the boxcar.
+          It must be odd and can not exceed twice the number of lines
+          in the cube.  In general, the size of the boxcar does not
+          cause the program to operate significantly
+          slower.
+
+            The shape of the filter can be used to control types of noise to remove.  For example, a 3x3 or 5x5 boxcar
+            can be used to remove speckle or salt and pepper noise.   A 1 sample x 5 line boxcar with REPLACE=NULL
+            could be used to remove dropped or noisy lines of data.  Then use the lowpass program with a 3x3 boxcar
+            to fill in the NULLed data.
+        </p>
+<div>
+<table>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                             Type
+                           </th><td class="tableCellLevel1_description">integer</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                               Minimum
+                             </th><td class="tableCellLevel1_description">1
+                                   (inclusive)
+                                 </td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                               Odd
+                             </th><td class="tableCellLevel1_description">
+                               This value must be an odd number
+                             </td>
+</tr>
+</table>
+</div>
+<div align="right">
+<a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Boxcar_SizeLINES');" class="caption" style="text-decoration:none;">
+            Close Window</a>
+</div>
+</div>
+<div id="Boxcar_RestrictionsLOW" class="functionView">
+<div align="right">
+<span style="border:3px; border-style:solid; border-color:#336699; padding:3px; font-family:sans-serif; font-weight:bold;"><a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Boxcar_RestrictionsLOW');" style="text-decoration:none; color:#336699;">X</a></span>
+</div>
+<h3>
+<span style="font-style:italic; text-decoration:underline;">Boxcar Restrictions</span>:
+                        LOW</h3>
+<hr>
+<h4>
+                         Description
+                       </h4>
+<p>
+          Valid minimum pixel value that will be used in boxcar computation.  If
+          a pixel value is less than LOW then it will not be used when
+          computing boxcar statistics.
+        </p>
+<div>
+<table>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                             Type
+                           </th><td class="tableCellLevel1_description">double</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                               Internal Default
+                             </th><td class="tableCellLevel1_description">
+          Use all pixels
+        </td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                               Less Than
+                             </th><td class="tableCellLevel1_description">HIGH<br>
+</td>
+</tr>
+</table>
+</div>
+<div align="right">
+<a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Boxcar_RestrictionsLOW');" class="caption" style="text-decoration:none;">
+            Close Window</a>
+</div>
+</div>
+<div id="Boxcar_RestrictionsHIGH" class="functionView">
+<div align="right">
+<span style="border:3px; border-style:solid; border-color:#336699; padding:3px; font-family:sans-serif; font-weight:bold;"><a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Boxcar_RestrictionsHIGH');" style="text-decoration:none; color:#336699;">X</a></span>
+</div>
+<h3>
+<span style="font-style:italic; text-decoration:underline;">Boxcar Restrictions</span>:
+                        HIGH</h3>
+<hr>
+<h4>
+                         Description
+                       </h4>
+<p>
+          Valid maximum pixel value that will be used in boxcar computation.  If
+          a pixel value is greater than HIGH then it will not be used when
+          computing boxcar statistics.
+        </p>
+<div>
+<table>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                             Type
+                           </th><td class="tableCellLevel1_description">double</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                               Internal Default
+                             </th><td class="tableCellLevel1_description">
+          Use all pixels
+        </td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                               Greater Than
+                             </th><td class="tableCellLevel1_description">LOW<br>
+</td>
+</tr>
+</table>
+</div>
+<div align="right">
+<a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Boxcar_RestrictionsHIGH');" class="caption" style="text-decoration:none;">
+            Close Window</a>
+</div>
+</div>
+<div id="Boxcar_RestrictionsMINIMUM" class="functionView">
+<div align="right">
+<span style="border:3px; border-style:solid; border-color:#336699; padding:3px; font-family:sans-serif; font-weight:bold;"><a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Boxcar_RestrictionsMINIMUM');" style="text-decoration:none; color:#336699;">X</a></span>
+</div>
+<h3>
+<span style="font-style:italic; text-decoration:underline;">Boxcar Restrictions</span>:
+                        MINIMUM</h3>
+<hr>
+<h4>
+                         Description
+                       </h4>
+<p>
+          This is the minimum number of valid pixels which must occur inside the
+          NxM boxcar for filtering to occur. For example, 3x5 boxcar has 15 pixels
+          inside.  If MINIMUM=10 then the filter will occur if there are 10 or
+          greater valid pixels.  A valid pixel is one that is not special (NULL, LIS,
+          etc) and is in the range defined by LOW to HIGH.
+        </p>
+<div>
+<table>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                             Type
+                           </th><td class="tableCellLevel1_description">integer</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th">
+                               Default
+                             </th><td class="tableCellLevel1_description">
+          1
+        </td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                               Minimum
+                             </th><td class="tableCellLevel1_description">1
+                                   (inclusive)
+                                 </td>
+</tr>
+</table>
+</div>
+<div align="right">
+<a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Boxcar_RestrictionsMINIMUM');" class="caption" style="text-decoration:none;">
+            Close Window</a>
+</div>
+</div>
+<div id="Special_PixelsNULLISNOISE" class="functionView">
+<div align="right">
+<span style="border:3px; border-style:solid; border-color:#336699; padding:3px; font-family:sans-serif; font-weight:bold;"><a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Special_PixelsNULLISNOISE');" style="text-decoration:none; color:#336699;">X</a></span>
+</div>
+<h3>
+<span style="font-style:italic; text-decoration:underline;">Special Pixels</span>:
+                        NULLISNOISE</h3>
+<hr>
+<h4>
+                         Description
+                       </h4>
+<p>
+          This option is used to define how NULL pixels are handled.  If this
+          parameter is set to TRUE, then NULL pixels will be considered to be
+          noise and will be replaced.  If FALSE, the NULL will be propagated
+          to the output.
+        </p>
+<div>
+<table>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                             Type
+                           </th><td class="tableCellLevel1_description">boolean</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th">
+                               Default
+                             </th><td class="tableCellLevel1_description">FALSE</td>
+</tr>
+</table>
+</div>
+<div align="right">
+<a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Special_PixelsNULLISNOISE');" class="caption" style="text-decoration:none;">
+            Close Window</a>
+</div>
+</div>
+<div id="Special_PixelsHISISNOISE" class="functionView">
+<div align="right">
+<span style="border:3px; border-style:solid; border-color:#336699; padding:3px; font-family:sans-serif; font-weight:bold;"><a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Special_PixelsHISISNOISE');" style="text-decoration:none; color:#336699;">X</a></span>
+</div>
+<h3>
+<span style="font-style:italic; text-decoration:underline;">Special Pixels</span>:
+                        HISISNOISE</h3>
+<hr>
+<h4>
+                         Description
+                       </h4>
+<p>
+          This option is used to define how HIS (High Instrument Saturation)
+          pixels are handled.  If this parameter is set to TRUE, then HIS
+          pixels will be considered to be noise and will be replaced.  If
+          FALSE, the HIS will be propagated to the output.
+        </p>
+<div>
+<table>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                             Type
+                           </th><td class="tableCellLevel1_description">boolean</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th">
+                               Default
+                             </th><td class="tableCellLevel1_description">FALSE</td>
+</tr>
+</table>
+</div>
+<div align="right">
+<a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Special_PixelsHISISNOISE');" class="caption" style="text-decoration:none;">
+            Close Window</a>
+</div>
+</div>
+<div id="Special_PixelsHRSISNOISE" class="functionView">
+<div align="right">
+<span style="border:3px; border-style:solid; border-color:#336699; padding:3px; font-family:sans-serif; font-weight:bold;"><a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Special_PixelsHRSISNOISE');" style="text-decoration:none; color:#336699;">X</a></span>
+</div>
+<h3>
+<span style="font-style:italic; text-decoration:underline;">Special Pixels</span>:
+                        HRSISNOISE</h3>
+<hr>
+<h4>
+                         Description
+                       </h4>
+<p>
+          This option is used to define how HRS (High Representation Saturation)
+          pixels are handled.  If this parameter is set to TRUE, then HRS
+          pixels will be considered to be noise and will be replaced.  If
+          FALSE, the HRS will be propagated to the output.
+        </p>
+<div>
+<table>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                             Type
+                           </th><td class="tableCellLevel1_description">boolean</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th">
+                               Default
+                             </th><td class="tableCellLevel1_description">FALSE</td>
+</tr>
+</table>
+</div>
+<div align="right">
+<a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Special_PixelsHRSISNOISE');" class="caption" style="text-decoration:none;">
+            Close Window</a>
+</div>
+</div>
+<div id="Special_PixelsLISISNOISE" class="functionView">
+<div align="right">
+<span style="border:3px; border-style:solid; border-color:#336699; padding:3px; font-family:sans-serif; font-weight:bold;"><a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Special_PixelsLISISNOISE');" style="text-decoration:none; color:#336699;">X</a></span>
+</div>
+<h3>
+<span style="font-style:italic; text-decoration:underline;">Special Pixels</span>:
+                        LISISNOISE</h3>
+<hr>
+<h4>
+                         Description
+                       </h4>
+<p>
+          This option is used to define how LIS (Low Instrument Saturation)
+          pixels are handled.  If this parameter is set to TRUE, then LIS
+          pixels will be considered to be noise and will be replaced.  If
+          FALSE, the LIS will be propagated to the output.
+        </p>
+<div>
+<table>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                             Type
+                           </th><td class="tableCellLevel1_description">boolean</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th">
+                               Default
+                             </th><td class="tableCellLevel1_description">FALSE</td>
+</tr>
+</table>
+</div>
+<div align="right">
+<a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Special_PixelsLISISNOISE');" class="caption" style="text-decoration:none;">
+            Close Window</a>
+</div>
+</div>
+<div id="Special_PixelsLRSISNOISE" class="functionView">
+<div align="right">
+<span style="border:3px; border-style:solid; border-color:#336699; padding:3px; font-family:sans-serif; font-weight:bold;"><a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Special_PixelsLRSISNOISE');" style="text-decoration:none; color:#336699;">X</a></span>
+</div>
+<h3>
+<span style="font-style:italic; text-decoration:underline;">Special Pixels</span>:
+                        LRSISNOISE</h3>
+<hr>
+<h4>
+                         Description
+                       </h4>
+<p>
+          This option is used to define how LRS (Low Representation Saturation)
+          pixels are handled.  If this parameter is set to TRUE, then LRS
+          pixels will be considered to be noise and will be replaced.  If
+          FALSE, the LRS will be propagated to the output.
+        </p>
+<div>
+<table>
+<tr>
+<th class="tableCellLevel1_th" align="right">
+                             Type
+                           </th><td class="tableCellLevel1_description">boolean</td>
+</tr>
+<tr>
+<th class="tableCellLevel1_th">
+                               Default
+                             </th><td class="tableCellLevel1_description">FALSE</td>
+</tr>
+</table>
+</div>
+<div align="right">
+<a title="Close this window" href="javascript:functionDescriptionToggleVisibility('Special_PixelsLRSISNOISE');" class="caption" style="text-decoration:none;">
+            Close Window</a>
+</div>
+</div>
+<div id="Example1" style="position:absolute;width:97%;">
+<table cellpadding="10" class="pageView" width="100%">
+<tr>
+<td>
+<hr>
+<h3>
+                Example 1</h3>
+<p style="margin-top:0px;"> Header default </p>
+<h4>
+                Description
+                </h4>
+<div style="margin-left:20px;"> Demonstrate the noisefilter application with header
+      </div>
+<h4>
+                  Command Line
+                  </h4>
+<div style="margin-left:20px;">
+<tt style="font-weight:bold;">noisefilter  f=f332s28.cub t=nzfltr tolmin=5 tolmax=50 samples=11 lines=11 </tt>
+<br>
+<div style="font-style:italic; font-size:X-SMALL;margin-left:20px; width:400px;"> Run a noise filter on a Viking image.  (Let toldef default to DN.)
+        </div>
+</div>
+<h4>
+                  GUI Screenshot
+                  </h4>
+<div style="margin-left:20px;">
+<table cellpadding="5" width="600">
+<tr valign="top">
+<td class="tableCellLevel1_th" width="200" align="center"><script type="text/javascript">
+<!--
+        
+        //<!- -
+document.write("<a title='Click to view larger image' href='javascript:popUpNewWindow (\"assets/image/nzfltrGui.jpg\","  + 
+512+ ", " + 468+ ")'>") ;
+
+document.write("<img src=\"assets/thumb/nzfltrGui.jpg\""
++ " width=" + 200
++ " height=" + 183
++ " alt=\"noisefilter GUI\" class='blackBorderedImage'><" + "/a><br>") ;
+        //- ->
+        
+    --></script>
+<noscript>
+<a title="Click to view larger image" href="assets/image/nzfltrGui.jpg" target="_new"><img src="assets/thumb/nzfltrGui.jpg" width="200" height="183" alt="noisefilter GUI" class="blackBorderedImage"></a>
+<br>
+</noscript>
+<div class="caption">noisefilter GUI</div>
+</td><td class="tableCellLevel1">
+<p style="font-weight:bold;">Example GUI</p>
+<p>Screenshot of GUI with parameters filled in to perform
+the noisefilter application</p>
+</td>
+</tr>
+</table>
+</div>
+<h4>
+                   Input Image
+                 </h4>
+<div style="margin-left:20px;">
+<table cellpadding="5" width="600">
+<tr valign="top">
+<td class="tableCellLevel1_th" width="200" align="center"><script type="text/javascript">
+<!--
+        
+        //<!- -
+document.write("<a title='Click to view larger image' href='javascript:popUpNewWindow (\"assets/image/f332s28.jpg\","  + 
+500+ ", " + 439+ ")'>") ;
+
+document.write("<img src=\"assets/thumb/f332s28.jpg\""
++ " width=" + 200
++ " height=" + 176
++ " alt=\"Input image\" class='blackBorderedImage'><" + "/a><br>") ;
+        //- ->
+        
+    --></script>
+<noscript>
+<a title="Click to view larger image" href="assets/image/f332s28.jpg" target="_new"><img src="assets/thumb/f332s28.jpg" width="200" height="176" alt="Input image" class="blackBorderedImage"></a>
+<br>
+</noscript>
+<div class="caption"> Input image</div>
+</td><td class="tableCellLevel1">
+<p style="font-weight:bold;"> Input image for noisefilter</p>
+<p>
+<span style="font-weight:bold;">
+                                Parameter Name:
+                                </span>FROM<br>
+</p>
+<p>This is the input image f332s28.cub.  It has noise in the form of small black rectangles.
+          </p>
+</td>
+</tr>
+</table>
+</div>
+<h4>
+                   Output Image
+                 </h4>
+<div style="margin-left:20px;">
+<table cellpadding="5" width="600">
+<tr valign="top">
+<td class="tableCellLevel1_th" width=" 200" align="center"><script type="text/javascript">
+<!--
+        
+        //<!- -
+document.write("<a title='Click to view larger image' href='javascript:popUpNewWindow (\"assets/image/nzfltr.jpg\","  + 
+500+ ", " + 439+ ")'>") ;
+
+document.write("<img src=\"assets/image/nzfltr.jpg\""
++ " width=" + 200
++ " height=" + 176
++ " alt=\"Output image showing results of a noise filter.\" class='blackBorderedImage'><" + "/a><br>") ;
+        //- ->
+        
+    --></script>
+<noscript>
+<a title="Click to view larger image" href="assets/image/nzfltr.jpg" target="_new"><img src="assets/image/nzfltr.jpg" width="200" height="176" alt="Output image showing results of a noise filter." class="blackBorderedImage"></a>
+<br>
+</noscript>
+<div class="caption">Output image showing results of a noise filter.</div>
+</td><td class="tableCellLevel1">
+<p style="font-weight:bold;"> Output image for the noisefilter example </p>
+<p>
+<span style="font-weight:bold;">
+                                Parameter Name:
+                                </span>TO<br>
+</p>
+<p> This is the output image for the noisefilter application.  The black rectangles are gone.
+          </p>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<script type="text/javascript" src="../../../../assets/scripts/footer.js">
+<!----></script>
+</div>
+</div>
+</body>
+</html>

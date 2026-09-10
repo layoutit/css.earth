@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 97.2804347826087,
       "bodyRadiusM": 22374.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/parysatis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "222baeef846dbe9a974caf8f6a4f067db7e7e026b6601ebc666a999f0295d0e0"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "5a6dbf1d9713e9591aa19d44374e6dece5a85892dd360cdd43dab6b468de55c7"
+    "sha256": "09f09cc310ae9edfd0a6e7d99873f8de69bdde1ca8400d093b563f524aa64979"
   }
 }

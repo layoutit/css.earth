@@ -61,7 +61,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "3b62f7e691484282c67b9ebf2578483452d3c8ad96a3c310a9a1d7dc5cb4513d"
+          "sha256": "0bcae0e1294215bef84987bf076bfeec53bcdfb1b205bdef592b3ccab0f028cc"
         },
         {
           "id": "material-delivery",
@@ -141,6 +141,15 @@
       ],
       "metersPerUnit": 13423.675889328062,
       "bodyRadiusM": 3396190
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/mars-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7098058e60e0b0a77dfb89489d667a28a7795553f92613122e12aa43b8558c40"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -13,7 +13,7 @@ test("Ganymede mounts through the shared prepared object contract", () => {
   requirePreparedPresentation(PREPARED_PRESENTATION, { controls: runtimeDefinition.controls });
   assert.equal(runtimeDefinition.id, "ganymede");
   assert.equal(runtimeDefinition.tree.nodes.filter(node => node.className?.includes("polycss-camera")).length, 1);
-  assert.deepEqual(runtimeDefinition.controls.lenses.controls.map(lens => lens.id), ["normal", "enhanced", "geology"]);
+  assert.deepEqual(runtimeDefinition.controls.lenses.controls.map(lens => lens.id), ["normal", "enhanced", "geology", "oxygen-signature"]);
   for (const variant of PREPARED_PRESENTATION.variants) {
     const lighting = variant.materials.find(material => material.track === "lighting");
     assert.equal(lighting.enabled, true, "Every lens retains the shared lighting control");

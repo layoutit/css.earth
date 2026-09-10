@@ -103,11 +103,20 @@
       ],
       "metersPerUnit": 31.73913043478261,
       "bodyRadiusM": 7300
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/tarvos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "47258c21cd204be19f590033047ced743f4cd29cc1ba57042fa0de878932b27d"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a86d50d49e89a362b26dad9b9f23825e373b66e5b3b4d025f0ac6da0ca5fb777"
+    "sha256": "e654aa831dedca65a2c147cfb5f86b5b41d5bb69b6bb349a9788f4761f1d8798"
   }
 }

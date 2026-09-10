@@ -1,0 +1,13 @@
+.example-stage:where([data-object-id="iapetus"]) > :is(.iapetus-sun-camera, .iapetus-camera, .iapetus-material-root) { position: absolute; inset: 0px; transform-origin: 50% 50%; pointer-events: none; }
+:where(.planet-stage[data-object-id="iapetus"]) .iapetus-sun-camera, :where(.planet-stage[data-object-id="iapetus"]) .iapetus-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="iapetus"]) .iapetus-scene { position: absolute; top: 50%; left: 50%; width: 0px; height: 0px; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="iapetus"]) .iapetus-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0px 0px 0px; }
+:where(.planet-stage[data-object-id="iapetus"]) .iapetus-body > s { position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px); margin: 0px; padding: 0px; transform-origin: 0px 0px; backface-visibility: hidden; background-image: var(--iapetus-surface-image); background-repeat: no-repeat; }
+:where(.planet-stage[data-object-id="iapetus"]) .iapetus-body > .iapetus-polar { background-image: var(--iapetus-poles-image); }
+:where(.planet-stage[data-object-id="iapetus"]) .iapetus-material-root { z-index: 3; --iapetus-billboard-opacity: 0; }
+:where(.planet-stage[data-object-id="iapetus"]) .iapetus-material, :where(.planet-stage[data-object-id="iapetus"]) .iapetus-billboard { position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px; margin: -230px 0px 0px -230px; pointer-events: none; }
+:where(.planet-stage[data-object-id="iapetus"]) .iapetus-material { background-repeat: no-repeat; transform: rotate(var(--iapetus-light-roll, 0deg)); }
+:where(.planet-stage[data-object-id="iapetus"]) .iapetus-billboard { border-radius: 50%; background-color: var(--iapetus-billboard-color); opacity: var(--iapetus-billboard-opacity); }
+.planet-stage:where([data-object-id="iapetus"])[data-lod="billboard"] .iapetus-scene, .planet-stage:where([data-object-id="iapetus"])[data-lod="marker"] .iapetus-scene { visibility: hidden; }
+.planet-stage:where([data-object-id="iapetus"])[data-lod="marker"] .iapetus-billboard { opacity: 0; }
+.planet-stage:where([data-object-id="iapetus"]).iapetus-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

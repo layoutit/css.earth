@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 54.59782608695652,
       "bodyRadiusM": 12557.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/musa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "237299684a43c4a8f481c4c9a66572737e724b41fd11ae4e72127c2d5a7e2960"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "77427e5bafac55cbed5c181f00218318e73f91cf5dbdce688104c5b3ce0601a4"
+    "sha256": "3c6aa03893f5058da17fc9f7b6a342c104e985f20d9e70bae7b54bfcea764584"
   }
 }

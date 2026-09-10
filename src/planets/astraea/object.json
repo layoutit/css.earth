@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 243.47826086956522,
       "bodyRadiusM": 56000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/astraea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ba0c9de4a2dee6d53f6953e61d25f969f0c2622707f58621d1347a02d067a822"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d48479b25861266d2b2789382e7b3f8b002f56ccc40517d0726061c405db0ebc"
+    "sha256": "bbe977dffdafc6df88087e822918f8892cf3b9c107770c95a7907e470146639a"
   }
 }

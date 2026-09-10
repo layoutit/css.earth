@@ -3,11 +3,11 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
 
-import { requireObjectControls } from "../scene-contract.mjs";
+import { requireObjectControls } from "../scene-contract.mts";
 import { OBJECTS } from "../objects.mts";
 
-test("asteroid and comet Shadows default off in authored content and prepared runtime", async () => {
-  for (const { id } of OBJECTS.filter(object => ["asteroid", "comet"].includes(object.classification))) {
+test("asteroid, trans-Neptunian and comet Shadows default off in authored content and prepared runtime", async () => {
+  for (const { id } of OBJECTS.filter(object => ["asteroid", "trans-neptunian", "comet"].includes(object.classification))) {
     const source = JSON.parse(await readFile(new URL(`../../src/planets/${id}/source/content/object.json`, import.meta.url), "utf8"));
     const prepared = (await loadObjectTestDefinition(id)).controls;
     for (const [stage, settings] of [["authored", source.settings], ["prepared", prepared.settings]]) {

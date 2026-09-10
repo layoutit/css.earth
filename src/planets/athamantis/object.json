@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 250,
       "bodyRadiusM": 57500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/athamantis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2ee53ac97755db432ff1d97167fe623be558a556ab06d2d98d252be3ca283474"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8be0e2100468a4a13a2d1fa56bdd3edd433a254f74b8d90ed03c37ea85351458"
+    "sha256": "4a8d616f5f4befa1b817ae759bb998b5caaec516e35f59dc85deb6502c1444e0"
   }
 }

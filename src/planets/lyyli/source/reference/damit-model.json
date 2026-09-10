@@ -1,0 +1,216 @@
+{
+  "name": "Lyyli",
+  "modelId": 2012,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/2012",
+  "fields": {
+    "ID": "2012",
+    "Asteroid": "(2204) Lyyli",
+    "λ": "64",
+    "β": "-66",
+    "P": "11.06207",
+    "YORP": "",
+    "t0": "2449457",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.78",
+    "p3": "0.12",
+    "p4": "-0.61",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1.5",
+    "Nonconvex": "0 (No)",
+    "Version": "2018-07-18",
+    "Comment": "",
+    "Created": "2018-07-19 12:40:46",
+    "Modified": "2018-07-19 12:40:46",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/6560/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/6561/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/6562/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Ďurech et al. (2018)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/175",
+      "file": "reference-175.html"
+    }
+  ],
+  "number": 2204,
+  "id": "lyyli",
+  "displayName": "Lyyli",
+  "lambda": 64,
+  "beta": -66,
+  "periodHours": 11.06207,
+  "version": "2018-07-18",
+  "nonconvex": false,
+  "calibrated": false,
+  "archiveCalibrated": false,
+  "diameterKm": 27.12,
+  "uncertaintyKm": 1.31,
+  "akari": {
+    "number": 2204,
+    "name": "Lyyli",
+    "diameterKm": 27.12,
+    "uncertaintyKm": 1.31,
+    "detections": 3,
+    "originalRow": "2204   Lyyli              1943 EQ    12.70  0.15  3   27.12  1.31 0.020 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/6562/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/6560/IAUspin.txt",
+  "shapeSha256": "5e9053bcc76b8f3f71cffec390e72d1b48e0043d8f9208949cd84b623e5dbf48",
+  "shapeBytes": 46257,
+  "vertices": 572,
+  "faces": 1140,
+  "signedVolume": 0.9999998263583666,
+  "independentSignedVolume": 0.9999998263583666,
+  "originalVolumeEquivalentDiameter": 1.2407009099863475,
+  "firstVertex": [
+    0.211825,
+    0.185707,
+    0.550867
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5391552024148519,
+    0.9140094649931148
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.773269,
+      0.805583
+    ],
+    [
+      -0.668887,
+      0.575008
+    ],
+    [
+      -0.551314,
+      0.551131
+    ]
+  ],
+  "scaleKmPerSourceUnit": 21.858612161651777,
+  "alternatives": [
+    {
+      "modelId": 2013,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/2013",
+      "pole": [
+        "252",
+        "-14"
+      ],
+      "version": "2018-07-18"
+    }
+  ],
+  "shapeKind": "Convex light-curve reconstruction",
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 27.12,
+    "uncertaintyKm": 1.31,
+    "reportedUncertaintyKm": 1.31,
+    "catalog": {
+      "number": 2204,
+      "name": "Lyyli",
+      "diameterKm": 27.12,
+      "uncertaintyKm": 1.31,
+      "detections": 3,
+      "originalRow": "2204   Lyyli              1943 EQ    12.70  0.15  3   27.12  1.31 0.020 0.002"
+    },
+    "diameterSemantics": "AKARI effective diameter transferred as an explicit approximate volume scale",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+    "sourceLabel": "AKARI AcuA, Usui et al. (2011)",
+    "scaleKmPerSourceUnit": 21.858612161651777,
+    "metersPerSourceUnit": 21858.612161651778,
+    "limitations": "AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred.",
+    "visibleDescription": "Convex lightcurve reconstruction at approximate thermal scale: 27.12 km effective diameter (catalog ±1.31 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes."
+  },
+  "selectionNotes": "JPL SBDB class MCA confirms this body is a Mars-crosser. The original convex lightcurve inversion is not resolved terrain. The selected pole is one of two published solutions; no preference is inferred from its lower archive ID. The competing pole remains unresolved.",
+  "populationSource": {
+    "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=2204",
+    "checked": "2026-09-09",
+    "file": "sbdb-lyyli.json",
+    "sha256": "b277b42461b8ef30f7e40fd3b04c3e0efcce151a84c15d237b463978f98ce7a3",
+    "orbitClass": {
+      "code": "MCA",
+      "name": "Mars-crossing Asteroid"
+    }
+  },
+  "distanceAu": 2.5890833040625667,
+  "orbitalPeriodYears": 4.166076480888577,
+  "sourceFields": {
+    "ID": "2012",
+    "Asteroid": "(2204) Lyyli",
+    "λ": "64",
+    "β": "-66",
+    "P": "11.06207",
+    "YORP": "",
+    "t0": "2449457",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.78",
+    "p3": "0.12",
+    "p4": "-0.61",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1.5",
+    "Nonconvex": "0 (No)",
+    "Version": "2018-07-18",
+    "Comment": "",
+    "Created": "2018-07-19 12:40:46",
+    "Modified": "2018-07-19 12:40:46",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 84.78260869565217,
       "bodyRadiusM": 19500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ganymed-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e2b3dc6ca2e397feacc169f85a47cabe534876e80a55b0b3d791b0c94da2efdc"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a994973f40e3202de06950971f9f5ee4dcf9745571d1e8b8c656cfa2397d33ca"
+    "sha256": "9284b12a1e1470fe9b372e1660abf82aff06d9b4dd1414e7fedd162c12f60cf8"
   }
 }

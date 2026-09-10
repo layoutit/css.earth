@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 170.91304347826087,
       "bodyRadiusM": 39310
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/erato-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "af1be06c1a33d0723d67f5984817a445301f69544179fbf734461f46390fed17"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9cb7e16153ff30e8372fdd9ed85530798b400412d08c9bcaa6525d7e7e20c7f1"
+    "sha256": "67b22372b14e86107e1de881fc9539d38cc067a4f6737f87cea05d6882bd5483"
   }
 }

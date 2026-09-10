@@ -61,7 +61,7 @@ export function createNavigationHistory({ windowTarget, objects, capture, naviga
   });
 }
 
-export function bindNavigationLinks({ documentTarget, windowTarget, objects, supports, navigate, deselect, onError = () => {} }: { documentTarget: Document; windowTarget: BrowserWindow; objects: readonly ObjectEntry[]; supports(id: string): boolean; navigate: Navigate; deselect?(): unknown; onError?(error: unknown): void }) {
+export function bindNavigationLinks({ documentTarget, windowTarget, objects, supports, navigate, onError = () => {} }: { documentTarget: Document; windowTarget: BrowserWindow; objects: readonly ObjectEntry[]; supports(id: string): boolean; navigate: Navigate; onError?(error: unknown): void }) {
   const available = (id: unknown): id is string => typeof id === 'string' && objects.some(object => object.id === id) && supports(id);
   const query = (event: Event) => { if (available(navigationId(event))) event.preventDefault(); };
   const select = (event: Event) => {
@@ -85,17 +85,10 @@ export function bindNavigationLinks({ documentTarget, windowTarget, objects, sup
       : url.search || url.hash ? { url: url.href } : { sceneSelection: true };
     Promise.resolve(navigate(object.id, options)).catch(onError);
   };
-  const clear = (event: Event) => {
-    if (!deselect || event.defaultPrevented) return;
-    event.preventDefault();
-    Promise.resolve(deselect()).catch(onError);
-  };
-  documentTarget.addEventListener('objectdeselect', clear);
   documentTarget.addEventListener('click', click);
   documentTarget.addEventListener('objectnavigate', select);
   documentTarget.addEventListener('objectnavigationquery', query);
   return () => {
-    documentTarget.removeEventListener('objectdeselect', clear);
     documentTarget.removeEventListener('click', click);
     documentTarget.removeEventListener('objectnavigate', select);
     documentTarget.removeEventListener('objectnavigationquery', query);

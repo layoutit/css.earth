@@ -1,0 +1,96 @@
+# Steins
+
+## Sources
+
+| View or property | Source and interpretation |
+| --- | --- |
+| OSIRIS reflectance | WAC OI-filter `W20080905T183606461ID4DF17` and `W20080905T183630497ID4DF17`, 5 September 2008 at 18:36:22.008 and 18:36:46.044 UTC; 129/113 m per pixel. Acquisition illumination retained, with 1.29646 relative display gain. |
+| Monochrome | [Stooke V3 map](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html), a processed photographic visualization with broader coverage; not natural color or albedo. |
+| Shape and Elevation | [Jorda et al. PDS 2013 shape](https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-steins-shape-v1.0/dataset.shtml). Elevation is radius minus 2.58 km, false color over −0.7 to +1.1 km; not gravitational height. |
+
+## Evidence
+
+[The 9 September 2026 mosaic report](../../../docs/asteroids/evidence/spacecraft-mosaics/README.md) records 107 focused tests, 60 browser conformance cases, DPR 1/2 production checks and fresh remote installation for the four-body change. [Validation](../../../docs/asteroids/evidence/spacecraft-mosaics/validation.json) identifies tested commit `8ded7a5` and base `1fb76e4`; these are historical results.
+
+The broader preparation suite was not green (1,666/1,957 passed); global platform and shell audits were stopped. A later overview/navigation change was outside the tested implementation.
+
+## Known problems
+
+Rosetta imaged about 60% of the body; unseen terrain is less certain. The published shape’s artificial jump between image-derived and lightcurve-derived terrain remains. The two selected photographs span only tens of original pixels and keep gaps as a grid.
+
+The 18:37:16 candidate needed a 1.56 gain, above the 1.35 limit; later frames had poorer footprint agreement and are excluded. Neither selected image has a surface-intercept anchor or fitted image-to-shape registration. The former near-opposition Minnaert correction is superseded; no global albedo is inferred.
+
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+
+<a id="steins-source-record"></a>
+<a id="selected-data-and-bounded-survey"></a>
+<a id="geometry-and-accuracy"></a>
+<a id="appearance-and-processing"></a>
+<a id="reproduction"></a>
+<a id="near-opposition-osiris-observation-2026-09-08-source-record"></a>
+<a id="reproduction-and-source-closure"></a>
+<a id="spacecraft-mosaic-update-2026-09-09"></a>
+
+<details>
+<summary>Methods and source notes</summary>
+
+**Selected data and bounded survey**
+
+| Candidate | Contribution and decision |
+| --- | --- |
+| [Jorda, Gaskell and Kaasalainen shape, PDS 2013](https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-steins-shape-v1.0/dataset.shtml), DOI 10.26007/55FK-CB77 | **Included**. `steins_cart.wrl` has 10,242 vertices and 20,480 triangles in km. The wrapped VRML is parsed directly; source axes, connectivity and physical scale are preserved before meshoptimizer simplification. |
+| [Stooke Small Bodies Maps V3](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html) | **Included** Monochrome. Unannotated 3600×1800 cylindrical map, controlled by Leyrat2010. Higher-resolution visualization compilation than the referenced original figure, but heavily processed and not calibrated reflectance. The gridded and named companions establish the projection and remain reference documents. |
+| [Rosetta NAC reflectance release](https://pdssbn.astro.umd.edu/holdings/ro-a-osinac-4-ast1-steins-reflect-v1.0/dataset.shtml) | The NAC collection remains outside this view; the follow-up below uses the specifically qualified near-opposition WAC image. The earlier survey recorded: The actual release, index, dataset catalog and a resolved flyby image label were examined. Radiometrically calibrated and distortion-corrected 2048×2048 camera images are available; they are not a cylindrical mosaic. The inspected label has camera/quaternion geometry and explicitly lists the SPICE kernels used. Its optional image point-of-interest intercept is `N/A`; the file remains a camera image rather than a geographic map. Reliable reprojection would require the mission camera and SPICE geometry chain plus a source-supported photometric model. None is invented here. |
+| [Rosetta NAC stray-light corrected reflectance](https://pds.nasa.gov/ds-view/pds/viewDataset.jsp?dsid=RO-A-OSINAC-4-AST1-STEINS-STR-REFL-V1.0) and WAC counterparts | **Deferred** with the camera-data route above. Their calibrated products address stray light/distortion, not the per-surface incidence/emission normalization required for a global albedo lens. Catalog availability is not evidence that a ready registered map exists. |
+| [Leyrat et al. 2010](https://doi.org/10.1016/j.pss.2010.04.003) and [Schröder et al. 2010](https://arxiv.org/abs/1702.00184) | **Excluded as texture inputs**. These studies provide photometric/variegation interpretations, and Leyrat controls the selected released map. The bounded archive/citation survey found the registered Stooke release and calibrated mission images; it did not locate an independently released, unannotated global corrected-albedo raster. This remains an unresolved dataset candidate, not a claim no such data exist. |
+| USGS/LPI cartography and IAU nomenclature | **Reference only**. Searches identified nomenclature and annotated image products, not a higher-resolution registered science raster for this package. |
+
+**Geometry and accuracy**
+
+The source catalog reports mean radius 2.70±0.2 km and volume-equivalent radius 2.63±0.2 km. The app's physical reference uses the pinned Horizons 2.58 km radius. This reference does not rescale the source vertices. Elevation is source radius minus **2.58 km**, not geoid/gravitational elevation. GM is unavailable in the pinned Horizons physical block; the astronomy package's unavailable-value convention is used rather than inferring a mass.
+
+Shared `source-meshoptimizer`, version 1.2.0, uses `ErrorAbsolute` and `RegularizeLight`, target 800 triangles, authored error allowance 100 m. The result is 800 faces, 402 used vertices, 1,200 edges, one closed component and Euler characteristic 2; no opposite face pairs were removed. The library estimate is 48.4695 m. A separate 3,200 equal-area ray comparison gives mean 11.6846 m, p95 27.9911 m, p99 39.6013 m and maximum 53.8148 m, with no misses. These samples are a simplification diagnostic, not an exhaustive Hausdorff bound or scientific source accuracy.
+
+**Appearance and processing**
+
+The 800 native `u` leaves use 128 px cells in 2048×6400 triangle atlases. Atlas RGBA pixel storage is about 50 MiB per atlas; that is not measured GPU residency. The context and navigation silhouette are prepared from the same final mesh and gap-aware Monochrome at 20°E,10°N.
+
+The pinned IAU PCK00011 pole is RA91°,DEC−62°, W321.76+1428.09917d at J2000. A superseded PCK rotation is deliberately not copied. Astro epoch, heliocentric position and shared solar context are owned by the astronomy preparation.
+
+**Near-opposition OSIRIS observation (2026-09-08 source record)**
+
+**Historical single-image record (2026-09-08):** The original single-image OSIRIS preparation used original WAC image `W20080905T183606461ID4DF17.IMG`, UTC 2008-09-05T18:36:22.008, Empty/OI filter (about 632 nm). This corrected reflectance product retains co-registered sigma and quality arrays. It is a small 256×256 CCD subframe beginning at source line 809 and sample 897; the asteroid occupies only tens of original pixels. Its enlarged atlas does not add resolved detail. The existing Monochrome map and Elevation remain available.
+
+ROS_V33, OSIRIS V15 and the released Steins V05 PCK give the source camera and body frame. The WAC sample direction differs from NAC; the source boresight document supplies the CCD convention. The archived scalar-first SC quaternion and released camera frame reproduce independent boresight RA/Dec within 0.000004 degrees. No surface-intercept anchor exists for this frame, so that is not claimed as a second check. Source/model footprint comparison is retained with the PR evidence.
+
+The original frame is the near-opposition OI observation identified in the pinned Schröder et al. study. The label gives 0.66689° phase; the study reports a representative near-opposition phase of 0.36°. Preparation uses the study’s k(0)=0.54 Minnaert approximation, not a 32° NAC photometric fit. D=cos(i)^0.54 cos(e)^−0.46, at reference D(0,0)=1, is applied to linear I/F before interpolation. Incidence and emission are limited to 70°, gain to 2.5. No absolute albedo, phase correction, fine regolith texture or natural color is inferred.
+
+The normal quality policy requires VALID bit 0, explicitly permits LOSSY bit 3, rejects all other flags, and requires finite nonnegative sigma. Original darkness remains eligible. Interpolation contributors must lie within 450 m of the same source surface point; this reflects the approximately 125 m source pixel scale and rejects neck/limb mixtures. Closest-point transfer keeps the existing 100 m display allowance; full-source camera visibility uses 0.5 m tolerance. These are acceptance bounds, not measurement precision. Unsupported areas retain the ordinary grid. Shadows defaults off; the existing 800-face raster geometry is unchanged.
+
+**Reproduction and source closure**
+
+`source/preparation/camera.json` selects the exact image, original kernels and control evidence. `source/observations/*-camera.json` is a checked-in preparation input bound by image, mesh and provenance hashes. Reproduce it with `python tools/objects/terrestrial-layers/prepare-archived-camera.py src/planets/steins/source` (NumPy, SciPy, Astropy and SpiceyPy), then run the existing authored preparation command. No camera fitting, source mesh queries, photometric correction or atlas construction runs in the application. All atlases, coverage, thumbnails and surface minimaps consume the same qualified sampler. The camera/source tests use original-file samples, rejected quality cases and independent geometric anchors; the PR records separate browser and source-restoration results.
+
+**Spacecraft mosaic update (2026-09-09)**
+
+Reproduce the added camera with `python tools/objects/terrestrial-layers/prepare-archived-camera.py src/planets/steins/source --profile preparation/w20080905t183630497id4df17-camera.json`, then run `node tools/objects/dist/prepare-authored.js steins --write`.
+
+Both original resampled reflectance files retain their sigma and quality arrays, and each now has its own pinned camera profile and camera JSON. The released camera frame, optical scale and body orientation reproduce the added image’s independent archived RA/Dec to 0.000004 degrees. Neither image supplies a surface-intercept anchor. No image-to-shape fit is claimed. The source/model footprint diagnostic gives a symmetric 95th-percentile limb distance of 2.83 and 3.0 source pixels; this thresholded diagnostic includes optical blur and shape differences and is not a detector quality mask or absolute registration accuracy.
+
+The existing OSIRIS view now combines WAC OI-filter images **W20080905T183606461ID4DF17** and **W20080905T183630497ID4DF17**, acquired at 18:36:22.008 and 18:36:46.044 UTC on 5 September 2008. Their nominal scales are 129 and 113 m/pixel. The asteroid still spans only tens of detector pixels; enlarging the prepared atlas does not add measured detail. The processed Stooke Monochrome map remains because it has broader coverage.
+
+This package presents asteroid 2867 Šteins with the published Rosetta OSIRIS shape, a photographic visualization mosaic, and shape-derived Elevation. All static data interpretation runs in the shared preparers. Runtime consumes retained PolyCSS native `u` triangles in raster mode.
+
+See [registration and coverage](source/reference/registration.md) for coordinate proofs, exact mask interpretation and limitations. Monochrome retains source-compiled observations and their shadows; it is not natural color or albedo. Enlarging to the prepared 4096×2048 map does not add camera detail. The shape-derived Elevation palette spans −0.7 to +1.1 km about the explicit reference sphere, with shared cartographic relief. Added Sun lighting is a separate approximate fixed-epoch shared capability.
+
+The previous near-opposition-only Minnaert treatment is superseded for this mosaic. The paper’s k(0)=0.54 estimate is not extrapolated to later phases. Both images retain acquisition illumination, with one relative display gain of 1.29646 fitted from qualified overlaps. The existing 1.35 gain limit and all geometric/quality limits remain. Lowest emission selects the source, with deterministic source-order ties. Per-atlas-texel observation indices are retained in preparation, including bleed, outside runtime delivery.
+
+The source combines illuminated OSIRIS stereophotoclinometry, stereo/limb constraints and lightcurve inversion for unseen terrain. Rosetta imaged about 60% of the body, at best approximately 80 m/pixel. PDS reports roughly 20 m mean control-point positional error over illuminated regions; that is not global accuracy. Unseen terrain is less certain.
+
+**The original shape contains a documented artificial elevation jump where SPC terrain meets lightcurve-derived terrain.** We retain the published surface and label this limitation rather than smoothing or synthesizing new terrain. The source center differs slightly from center of gravity, within its positional uncertainty. The X/Y axes are not its principal inertia axes.
+
+The source survey downloaded OI frames at 18:37:16, 18:37:56, 18:38:36 and 18:39:43. The 18:37:16 frame required a 1.56 gain relative to the opposition image, exceeding the existing limit; it is excluded. The later higher-phase views have progressively poorer source/model footprint agreement and are not included. There is no new dataset row or inferred global albedo map.
+
+The two-image mosaic keeps acquisition illumination. It supersedes the former Minnaert correction; no global albedo or natural-color interpretation is claimed.
+
+</details>
