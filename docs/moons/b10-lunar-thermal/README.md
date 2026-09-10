@@ -1,5 +1,7 @@
 # B10 — the Moon at night
 
+[Draft PR #97](https://github.com/layoutit/cssEarth/pull/97): implemented and published; aggregate readiness limits are recorded in the visual review.
+
 Three source-backed lunar surfaces: fitted midnight bolometric temperature,
 observed-minus-modeled temperature anomalies, and updated rock-area fraction.
 The accepted Moon scene, retained tree, camera, renderer, navigation and shared
