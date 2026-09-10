@@ -9,15 +9,19 @@ grid and optional grayscale albedo view use the released two-lobed shape.
 
 ## Evidence
 
-The [three-body qualification](../../../docs/trans-neptunian/qualification.json)
-and [production browser record](../../../docs/trans-neptunian/browser-validation.json)
-retain their [original build identities](../../../docs/non-belt-populations/README.md#evidence-identity). All three routes passed at DPR 1 and 2;
+2026-09-09: corrected acquisition instructions and recovered provenance from
+existing pins. Source and prepared output identities are unchanged; no new
+preparation or browser run. The [original prepared record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/arrokoth/prepared/provenance.json) remains available.
+
+The [three-body qualification](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trans-neptunian/qualification.json)
+and [production browser record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trans-neptunian/browser-validation.json)
+retain their [original build identities](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/non-belt-populations/README.md#evidence-identity). All three routes passed at DPR 1 and 2;
 those captures predate the combined population build.
 
-The [PNG/FITS registration check](../../../docs/trans-neptunian/arrokoth-registration.json)
-compares 24 decoded anchors. A [recorded albedo drag](../../../docs/evidence/trans-neptunian/drag-report.json)
+The [PNG/FITS registration check](../../../tests/objects/fixtures/arrokoth/arrokoth-registration.json)
+compares 24 decoded anchors. A [recorded albedo drag](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/trans-neptunian/drag-report.json)
 retained all 111,002 scene nodes and made no interaction requests. It covered one
-local headless workload, mostly facing uniform source fill; [inspected images](../../../docs/trans-neptunian/README.md#delivered-browser-evidence)
+local headless workload, mostly facing uniform source fill; [inspected images](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trans-neptunian/README.md#delivered-browser-evidence)
 show mapped southern detail separately.
 
 ## Known problems
@@ -67,7 +71,7 @@ source intersections; 3D transfer uses local surface points.
 The PDS PNG and raw FITS arrays have opposite row order. Twenty-four independent
 PNG anchors reproduce FITS values within 3e-6 albedo using the label's approximate
 integer conversion. Lower-left OBJ V indexes raw FITS rows directly. The
-[registration record](../../../docs/trans-neptunian/arrokoth-registration.json)
+[registration record](../../../tests/objects/fixtures/arrokoth/arrokoth-registration.json)
 binds those checks to exact source hashes.
 
 ## Source survey
@@ -81,6 +85,6 @@ period an orbital period. Buie et al. (2020) gives 15.9380 ±0.0005 h; the Porte
 archive labels 0.6632553 days as an orbital period. The panel reports only about
 15.9 hours. No precision spin rate is installed.
 
-[Family source and preparation account](../../../docs/trans-neptunian/README.md).
+[Family source and preparation account](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trans-neptunian/README.md).
 
 </details>

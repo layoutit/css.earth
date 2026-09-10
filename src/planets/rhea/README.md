@@ -19,14 +19,14 @@ Existing reports; no body tests were rerun for this documentation edit.
 - **Shape:** the mesh was closed and connected. The largest distance between the
   source shape and simplified display mesh in 8,000 sampled comparisons was
   5,700.82 m; sampling does not establish a full error bound.
-  [Shape and delivery results](../../../docs/moons/b2-preparation/final/DELIVERY.md).
+  [Shape and delivery results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b2-preparation/final/DELIVERY.md).
 - **VIMS:** reading and interpreting the original spectral files were checked independently.
   The mission team's earlier processing was not rerun.
-  [Source review](../../../docs/moons/b7-cassini-atlas/evidence/source/SOURCE-REVIEW.md).
+  [Source review](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b7-cassini-atlas/evidence/source/SOURCE-REVIEW.md).
 - **Browser and delivery:** selected views at device pixel ratios (DPR) 1 and 2, with saved images and
   installation results. Settings access and full-suite checks remained incomplete.
-  [Visual review](../../../docs/moons/b7-cassini-atlas/VISUAL-REVIEW.md) ·
-  [Run results](../../../docs/moons/b7-cassini-atlas/evidence/integration/qualification.json).
+  [Visual review](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b7-cassini-atlas/VISUAL-REVIEW.md) ·
+  [Run results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b7-cassini-atlas/evidence/integration/qualification.json).
 
 ## Known problems
 

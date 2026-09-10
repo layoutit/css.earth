@@ -15,7 +15,7 @@ The adopted diameter is **13.584 km** from [Masiero et al. (2011), ApJ 741, 68](
 
 ## Evidence
 
-The [tartaglia validation record](../../../docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.
+The [tartaglia validation record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.
 
 ## Known problems
 

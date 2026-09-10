@@ -15,7 +15,7 @@ The adopted diameter is **11 km** from [Masiero et al. (2011), ApJ 741, 68](http
 
 ## Evidence
 
-The [united-nations validation record](../../../docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.
+The [united-nations validation record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.
 
 ## Known problems
 
