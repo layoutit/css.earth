@@ -1,5 +1,7 @@
 # 1P/Halley
 
+The photographic dataset combines the accepted Giotto close-up with two Vega 2 views. About **28% of the same nucleus model** has accepted photographic coverage; uncertain and missing areas remain grid. The two menu choices are **Historical model** and **Giotto + Vega**, with Shadows off.
+
 ## Sources
 
 - The selected [PDS4 Stooke Halley product](https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.xml) contains 2,701 longitude/latitude/radius rows at 5° intervals, including repeated 0°/360° seam samples and poles.
@@ -15,6 +17,14 @@
 - [Samarasinha, Mueller, Belton & Jorda (2004), archived rotation compilation](https://pdssbn.astro.umd.edu/holdings/ear-c-compil-5-comet-nuc-rotation-v1.0/dataset.shtml), supplies the long-axis state and periods used for the approximate projection. [NASA SPDF Vega ephemerides](https://spdf.gsfc.nasa.gov/pub/data/vega/mag/) and original PDS FITS headers supply the spacecraft geometry. Exact inputs are pinned in the [registration](source/reference/giotto-registration.json).
 
 ## Evidence
+
+### Encounter mosaic
+
+The [encounter projection report](source/reference/encounter-projection-report.json) compares identical source triangles and seven barycentric samples per triangle: **4.314% before, 27.807% after**. All 4,842 previously accepted Giotto input-map pixels are preserved exactly. The [lossless attribution map](source/reference/encounter-attribution.bin) records every source and gap. This is an estimate of accepted model surface area, not the fraction of image pixels or a global photographic map.
+
+The shape remains the same 1,000 triangles. No shared renderer changes or extra dataset rows are involved. The numerical preparation and browser evidence are documented below.
+
+### Giotto baseline (PR109)
 
 - The [projection report](source/reference/giotto-projection-report.json) records 4,842 observed pixels in a 512 × 256 map and about **4.3% sampled source surface coverage**. The rest is grid. This is the accepted footprint of this projection, not a census of all Halley photography.
 - Camera orientation is derived before fitting image scale and centre. Of 64 manually transcribed catalogue outline points, 42 fit those three image-plane parameters and 22 are held out. Held-out distance to the projected full-mesh silhouette is **0.211 km RMS, 0.456 km maximum**, within the source's stated 0.5–1 km absolute shape uncertainty. This checks silhouette consistency; it does not independently establish individual feature coordinates.
@@ -35,7 +45,7 @@
 
 - This is a highly uncertain historical inverse shape model. The label estimates absolute uncertainty of about 500–1,000 m, relative point-to-point uncertainty around 100 m, and warns that facets and depressions may be exaggerated.
 
-- **Historical model** is a neutral shape view. **Giotto** projects a small illuminated region of the MPS composite onto that shape. Neither view is a measured albedo map; the Giotto image retains its original illumination and dust contamination.
+- **Historical model** is a neutral shape view. **Giotto + Vega** projects the accepted MPS composite region and two KFKI-processed Vega 2 photographs onto that shape. The photographs retain their original illumination and dust contamination. Mixing visible and near-infrared images does not create a measured albedo or true-colour map.
 
 - The original local frame is preserved while its attitude in space is explicitly illustrative: the long axis is placed along ICRF +Z (display RA 0°, Dec +90°, meridian 0°) and held fixed. Lighting shows that chosen orientation, not an encounter or current attitude.
 
@@ -72,7 +82,7 @@ The existing per-object camera `framingScale` is 0.7 so the elongated nucleus fi
 
 ## Material, orientation and placement
 
-The **Historical model** view uses the shared no-imagery grid over the source shape. The **Giotto** view uses photographic pixels only inside the accepted footprint and the existing gray grid elsewhere. Shadows defaults to **off** for both datasets. The existing uniform-flood option preserves image RGB values instead of applying an extra baked light direction. Navigation context is rendered from the same simplified geometry and material.
+The **Historical model** view uses the shared no-imagery grid over the source shape. The **Giotto + Vega** view uses photographic pixels only inside the accepted footprints and the existing gray grid elsewhere. Shadows defaults to **off** for both datasets. The existing uniform-flood option preserves image RGB values instead of applying an extra baked light direction. Navigation context is rendered from the same simplified geometry and material.
 
 These are presentation choices, not Halley's physical spin solution. No rotation-period fact or spin/tumble animation is supplied.
 
@@ -85,7 +95,7 @@ Heliocentric placement uses JPL Horizons `DES=1P;CAP;`, centre `500@10`, ICRF, a
 | PDS Stooke shape table and specific PDS4 label above | Included: complete radius grid and documented uncertainty/frame. |
 | [PDS bundle description](https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/document/bundle_description.txt) | Included: coordinate-convention migration, origin and shape caveats. |
 | [ESA calibrated Giotto HMC archive](https://esdcdoi.esac.esa.int/doi/html/data/planetary/GIOTTO/GIO-C-HMC-3-RDR-HALLEY.html), DOI 10.5270/esa-s11mti2 | Real calibrated encounter images; excluded from this model lens. Registration, coma contamination, missing coverage and photometry have not been qualified for a mapped surface. A calibrated frame is not a global texture. |
-| [PDS comet target index](https://pdssbn.astro.umd.edu/data_sb/target_comets.shtml), Vega 1/2 and IHW near-nucleus releases | Complementary encounter observations; unresolved as a registered texture product, with no additional lens promised. |
+| [PDS Vega 2 processed release](https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/dataset.shtml) | T11190 and T11194 add accepted coverage to the existing photographic dataset. Other Vega products remain outside the accepted footprint. |
 | [Belton et al. (1991)](https://doi.org/10.1016/0019-1035(91)90207-A), referenced by the source label | Historical rotation assumptions inform the shape source. No current attitude propagation is implemented. |
 
 This package contains the nucleus model only; no coma, tail or outgassing scene.
@@ -107,6 +117,36 @@ Coverage follows an authored polygon inside figure 67's illuminated region, inse
 Seven barycentric samples per source triangle estimate about 4.3% coverage. Reducing the inset to zero would raise this same polygon's estimate to about 8.2%, but would include the least certain boundary. This sensitivity is an opportunity for better control, not evidence that the larger area is already registered. Additional Giotto and Vega observations remain candidates; this dataset does not exhaust them.
 
 The old [calibrated-image intake](source/reference/giotto-hmc-intake.json) remains a separate historical survey. Its unqualified status and image reuse questions apply to those raw frames, not to the displayed MPS composite used here.
+
+## Vega 2 extension
+
+The [encounter preparer](../../../tools/objects/comet-1p/prepare-encounters.mts) reuses the accepted Giotto sampler and adds two original KFKI-processed archive frames:
+
+| Frame | UTC on 9 March 1986 | Filter / exposure | Native projected pixel size |
+| --- | --- | --- | --- |
+| T11190 | 07:19:58 | Near infrared / 0.32 s | 120 × 160 m |
+| T11194 | 07:21:38 | Visible / 0.08 s | 170 × 220 m |
+
+The original 8-bit image samples, native FITS checksums, rectangular pixels and processing documentation are retained. The rounded header time is used rather than implying sub-second timing accuracy. Camera directions follow the same published long-axis state and the SPDF trajectory as Giotto. The extrapolations extend 148 and 248 seconds beyond the final one-minute trajectory sample. Independently recorded range, phase and image-plane Sun angles agree within 1%, 0.5° and 1.5° respectively. These comparisons check the approximate reconstruction; they are not a new attitude solution.
+
+Authored outline controls fit only a uniform image scale and two centre coordinates, with scale constrained to 0.9–1.1 of the native value. Camera directions, pixel aspect and mesh vertices are fixed first. Every third control is withheld. The preparer rerasterizes the full source silhouette at 10 m and measures held-out RMS/max distances of **0.262/0.492 km** for T11190 and **0.366/0.683 km** for T11194. These are silhouette-consistency checks within the source model's 0.5–1 km absolute uncertainty; individual feature positions are not independently established.
+
+All four bilinear sample corners must lie at least **1 km inside** the authored Vega footprint in physical image-plane coordinates. Samples also pass the existing 75° emission, 80° incidence and full-source-mesh occlusion cuts. Darkness does not define coverage. Every accepted Giotto sample wins unchanged. Remaining pixels use the accepted Vega view with the finer foreshortening-adjusted resolution, with deterministic ties. The same grid fills all remaining areas.
+
+T11194 receives a relative display gain of **1.9591**, fitted against T11190. The overlap contains 164 distinct paired 2 × 2 detector blocks, split into 82 fitting and 82 held-out blocks. Held-out median log error is 0.0110 and the 95th-percentile absolute log error is 0.1557. This is only a display-level adjustment between different filters, not photometric correction. The Giotto/Vega overlap contains only six distinct blocks, so a cross-mission gain is rejected and Giotto keeps its original RGB. There are no clipped output pixels. The attribution file describes the source input map before the shared atlas resampling.
+
+MPS catalogue figures 55, 63 and 66 were also inspected. They provide additional presentations of the close-up region, but no independently qualified extension is claimed here. The separate IKF transformed products are variants of T11190 and add no viewing geometry; their copyrighted processed images are not used. Other Halley photographs remain possible future work.
+
+Reproduce in order, after restoring the pinned source inputs:
+
+```sh
+node tools/objects/comet-1p/prepare-giotto.mts --write
+node tools/objects/comet-1p/prepare-encounters.mts --write
+node tools/objects/dist/prepare-authored.js comet-1p --write
+node --test tools/objects/comet-1p/prepare-encounters.test.mjs
+```
+
+The encounter registration is an authored input containing the selected frame controls and source pins. Both preparers verify those original bytes before sampling; the encounter tests reproduce the PNG, attribution and report, and check corrupt native data, geometric masks, occlusion, dark samples, overlap sufficiency and deterministic resolution selection.
 
 See [NOTICE.md](NOTICE.md) for credits.
 

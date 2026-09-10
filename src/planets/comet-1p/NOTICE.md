@@ -29,3 +29,20 @@ NASA PDS; Vega ephemerides distributed by NASA SPDF. Rotation compilation:
 Samarasinha, Mueller, Belton and Jorda (2004), archived by NASA PDS (2006),
 DOI 10.26007/XDRA-4H55. Exact original tables and geometry-header pins accompany
 [the registration](source/reference/giotto-registration.json).
+
+Vega photography: Vega 2 TVS team; KFKI processing team; International Halley
+Watch; NASA Planetary Data System. Dataset
+`VEGA2-C-TVS-3-RDR-HALLEY-PROCESSED-V1.0` (1997), products T11190 and T11194.
+Original filtered image samples and their headers are hash-pinned beside the
+[encounter registration](source/reference/encounter-registration.json). These
+are publicly distributed scientific archive data. Retain the original team
+credits and dataset citation with derived photography, maps, atlases and
+screenshots; they are not relicensed as MIT application code. See the
+[PDS dataset](https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/dataset.shtml)
+and [PDS scientific-data reuse guidance](https://pds-ppi.igpp.ucla.edu/faq.jsp).
+The separate IKF transformed images, which carry their own copyright marks,
+are not used.
+
+The combined Giotto + Vega dataset retains the corresponding source terms for
+each photographic portion. Original lighting, dust and filter differences remain;
+the one relative Vega display gain is not a reflectance calibration.
