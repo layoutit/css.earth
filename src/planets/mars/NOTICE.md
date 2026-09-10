@@ -6,7 +6,7 @@ This adapter combines prepared material derived from the following sources:
   OpenSpace Team. The pinned license text is included as
   `LICENSE.OPENSPACE-MIT`.
 - USGS Astrogeology and NASA/PDS Mars surface, MOLA, and THEMIS products.
-  These United States government data products are credited in `SOURCE.md`
+  These United States government data products are credited in `README.md`
   and `source/manifest.json`.
 - JPL Solar System Dynamics physical and orbital tables.
 - NASA GSFC Planetary Spectrum Generator output and NASA Science editorial

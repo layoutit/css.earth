@@ -57,7 +57,7 @@ launch a private Astro instance or rewrite the renderer.
 ## How It Works
 
 cssEarth uses PolyCSS to turn planetary geometry into real HTML elements.
-Faces, rings, moons, shadows, and atmosphere layers are positioned with CSS
+Faces, rings, shadows, and atmosphere layers are positioned with CSS
 `matrix3d(...)` transforms and textured with prepared CSS backgrounds instead
 of being drawn to a `<canvas>`.
 
@@ -66,21 +66,21 @@ mounts one retained scene and one camera. Each object package owns its
 scientific sources, textures, geometry, lighting, optional control content, and
 material presentation. One shared runtime owns mounting, readiness, controls,
 selection transactions, image residency, playback, camera binding, and cleanup.
-Mercury and Venus consume validated JSON through the TypeScript CSS renderer;
-the other clients retain their existing runtime adapter. The shell owns
+Registered body packages consume prepared JSON through the shared TypeScript
+CSS renderer and generic object adapter. The shell owns
 navigation, information panels, playback permission, and responsive behavior.
 
-Mercury and Venus share a prepared heliocentric frame. Selecting either in the
-navigation bar or celestial vault flies the same physical camera to it using
-the Galaxio selection curve. The next fixed asset bank loads during flight;
+Registered bodies share the prepared world-navigation contract. Selecting a
+body flies the shared physical camera to its prepared target. The next fixed
+asset bank loads during flight;
 the current detailed scene is released before the destination mounts. The
 document and shell persist. Back restores the saved camera and playback state;
 camera input interrupts flight at the last drawn view. Existing object routes
 and compact `?v` links remain supported, including translated camera positions.
-The [architecture](docs/shared-runtime-architecture-proposal.md) explains the
-contract and the rendering differences that remain inside each package. The
-[proof](docs/generic-runtime-contract-proof.md) uses the actual registered objects
-in real Chrome at DPR 1 and 2.
+The [implementation map](.agents/skills/celestial-skill/references/implementation-map.md)
+locates the current preparation, renderer and shell code. Earlier
+[runtime ownership checks](docs/generic-runtime-contract-proof.md) cover an
+eleven-object version at the revisions recorded there.
 
 ## Build and Runtime
 
@@ -89,20 +89,20 @@ turn checked OpenSpace, NASA, JPL, USGS, and other planet-owned inputs into
 local images, generated scene modules, scientific charts, and prepared motion
 banks. At runtime, the browser only loads and displays these prepared assets.
 
-Mercury and Venus use the shared TypeScript preparation pipeline. Their authored
-capabilities and parameters are JSON; raster and geometry operations live in
-the renderer-independent objects package. CSS compilation and file/image I/O
-stay in application adapters. Earth and the other objects retain their existing
-preparation implementations.
+Body packages use authored JSON capabilities and parameters with shared
+preparation families. Reusable geometry and pixel operations live in the objects
+package; CSS compilation and file/image I/O stay in application adapters.
+The recipe selects each body's supported capabilities.
 
 ```text
-src/planets/{mercury,venus}/
+src/planets/<id>/
 ├── object.json                  Pinned capability recipe and transport digest
 ├── source/                      Authored JSON, scientific inputs and provenance
 ├── prepared/                    Baked JSON, committed for clean checkouts
 │   └── object.json              Rebuilt runtime payload (Git-ignored)
 ├── runtime-assets.json          Reproducible asset inventory
-└── SOURCE.md, NOTICE.md, LICENSE.*  Credits and licences
+├── README.md                    Sources, processing, evidence and known problems
+└── NOTICE.md, LICENSE.*             Credits and licences
 packages/objects/src/            Generic schema, geometry and pixel operations
 src/preparation/                 Node image/file adapters
 src/renderers/css/preparation/   CSS projection and retained presentation compiler
@@ -111,12 +111,12 @@ tests/objects/                   Object fixtures and browser/scientific regressi
 
 `pnpm install` builds packages and preparation tools, then assembles the small
 transport JSON beside each object from its committed preparation output. It does not rebake textures.
-To regenerate Mercury or Venus after changing their authored inputs, run
-`pnpm prepare:planets --object=mercury` or `--object=venus`. The same commands
-validate source pins, compile every layer, and replace their generated outputs.
+To regenerate one body after changing its authored inputs, run
+`pnpm prepare:planets -- --object=<id>`. The selected recipe validates source
+pins and regenerates its prepared outputs.
 
-Large source binaries and generated browser assets are intentionally not
-committed. Their URLs, sizes, hashes, provenance, preparation code, and runtime
+Large reacquirable source binaries and generated browser assets are generally
+kept outside Git; retained source exceptions remain pinned and documented. Their URLs, sizes, hashes, provenance, preparation code, and runtime
 inventories are committed. `pnpm setup:assets` downloads the prepared outputs from
 immutable URLs on the project asset CDN. After changing prepared outputs,
 maintainers publish their updated inventories with `pnpm publish:runtime-assets`
@@ -189,7 +189,16 @@ object-owned NASA and JPL sources, without adding another registry entry here.
 cssEarth source code is [MIT licensed](LICENSE). Scientific data, imagery, and
 prepared derivatives retain the terms and attribution of their respective
 sources. See the planet-owned
-[Mars](src/planets/mars/SOURCE.md) and
-[Saturn](src/planets/saturn/SOURCE.md) source records for exact provenance,
+[Mars](src/planets/mars/README.md) and
+[Saturn](src/planets/saturn/README.md) source records for exact provenance,
 presentation limits, and credits. NASA and other source credits do not imply
 endorsement.
+
+## Contributing scientific data and evidence
+
+Start with [adding a body](src/planets/README.md), the
+[provenance and documentation contract](docs/provenance/CONTRACT.md), and the
+[repository-owned celestial skill](.agents/skills/celestial-skill/SKILL.md).
+The [documentation index](docs/README.md) separates maintained guidance from
+historical qualification records. Source integrity, scientific interpretation,
+visual acceptance and clean installation are distinct claims.

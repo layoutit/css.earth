@@ -29,4 +29,4 @@ are also measurement and reference authorities for the prepared radii,
 rotation values, ring boundaries, and shadow phenomena. NASA does not endorse
 this presentation. The accelerated time scale, fixed camera, static light
 direction, prepared dust selection, visual scale, polar boundary match, and
-PolyCSS topology are presentation choices documented in `SOURCE.md`.
+PolyCSS topology are presentation choices documented in `README.md`.

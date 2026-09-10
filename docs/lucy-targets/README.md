@@ -12,7 +12,7 @@ The five Trojan primaries in this change use the existing observation-body recip
 | Eurybates | 77.5 × 71.3 × 61.8 | Authored ellipsoid matching the reconstruction's reported extents; neither its original irregular shape nor its convex volume is reproduced. |
 | Patroclus | 127 × 117 × 98 | Published primary-component approximation, consistent with the existing Menoetius package. |
 
-Each package retains its source survey, formulas, physical-unit interpretation and unqualified details in `SOURCE.md` and `source/measurements.json`. Ellipsoid dimensions do not imply resolved terrain or measured surface reflectance. The user can see the approximation status beside the active body. Display longitudes are arbitrary; Polymele does not adopt an uncertain catalog spin period. Patroclus uses the existing primary-specific JPL#82 heliocentric state at the common scene epoch.
+Each package retains its source survey, formulas, physical-unit interpretation and unqualified details in `README.md` and `source/measurements.json`. Ellipsoid dimensions do not imply resolved terrain or measured surface reflectance. The user can see the approximation status beside the active body. Display longitudes are arbitrary; Polymele does not adopt an uncertain catalog spin period. Patroclus uses the existing primary-specific JPL#82 heliocentric state at the common scene epoch.
 
 ## Source preparation
 

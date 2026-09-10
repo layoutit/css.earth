@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c780efe9cf831a058dde36dd6fe8a06e2a16e3929894774ac030e1cd73139e50"
+    "sha256": "3779d2f8e3cb84860cf007c154751df7d1c6c87dc2e3400e660b9946c932c23e"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -496,7 +496,7 @@
     {
       "id": "content",
       "path": "source/content/static.json",
-      "sha256": "8013c65f1a2d60fb0a28458e3e8175b5fa02372bb4d550cb0895c78c2e78c9a2",
+      "sha256": "5612eae00f6877ab3441a07353524a179afa537a6b246950938855624d09e7e0",
       "parameters": {
         "schema": "cssearth-static-surface-content@1",
         "id": "moon",
@@ -1172,7 +1172,7 @@
           }
         ],
         "provenance": {
-          "sourceRecord": "../SOURCE.md",
+          "sourceRecord": "../README.md",
           "editorial": "source/orbit/moon.json",
           "qualification": "LROC visible-color presentation, numeric LOLA elevation, modeled Diviner rock area and the retained GRAIL crust interpretation each preserve their own source epoch and limits.",
           "silicate-signature": "Lucey et al. (2021), corrected Diviner Christiansen-feature map; DOI 10.5281/zenodo.4558194; CC-BY-4.0"
@@ -1375,7 +1375,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8013c65f1a2d60fb0a28458e3e8175b5fa02372bb4d550cb0895c78c2e78c9a2",
+      "sha256": "5612eae00f6877ab3441a07353524a179afa537a6b246950938855624d09e7e0",
       "bytes": 26173,
       "dependencies": [],
       "verification": "manifest-pin",
@@ -1739,7 +1739,7 @@
         {
           "url": "object:prepared/content.json",
           "bytes": 5676,
-          "sha256": "f247532c6e02682b016382246744c49b3cd1dc0ac8f49e943446d0f8f1498389",
+          "sha256": "5c6e79bc40404c3a052428957ec15646df85562db2a14f8581ef86cf7fce7ccc",
           "verification": "bytes-verified"
         }
       ],

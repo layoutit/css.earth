@@ -22,7 +22,7 @@ Percentages estimate accepted **displayed surface area**, using the unchanged re
 
 **67P:** September 13 and 20 orange-filter GEO products retain the exact SHAP7 identity required by the archive erratum. Every L4 radiance pixel matches its L5 companion; their maximum disjoint camera residuals are 0.00190 and 0.00161 source pixels. The existing lowest-emission selection remains in force, and the new images supply about 1.76% of the displayed area. Gains remain 1.00–1.21 under the original 1.35 limit. A September 12 close-up and a July 29, 2015 southern view were tried but do not connect to the accepted overlap graph under the existing limits. They are excluded from this mosaic; this is not evidence that those archive products are unusable for other work.
 
-Exact products, raw labels, source hashes, measured controls and acquisition operations live beside each body. See [67P](../../src/planets/comet-67p/SOURCE.md), [Wild 2](../../src/planets/comet-81p/source/reference/encounter-photography.md), [Tempel 1](../../src/planets/comet-9p/source/reference/encounter-photography.md) and [Hartley 2](../../src/planets/comet-103p/source/reference/encounter-photography.md).
+Exact products, raw labels, source hashes, measured controls and acquisition operations live beside each body. See [67P](../../src/planets/comet-67p/README.md), [Wild 2](../../src/planets/comet-81p/source/reference/encounter-photography.md), [Tempel 1](../../src/planets/comet-9p/source/reference/encounter-photography.md) and [Hartley 2](../../src/planets/comet-103p/source/reference/encounter-photography.md).
 
 ## Preparation and qualification
 

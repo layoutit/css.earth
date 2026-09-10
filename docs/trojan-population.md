@@ -8,16 +8,16 @@ These are convex light-curve reconstructions. No new object has a resolved globa
 
 | Number | Body | Camp | DAMIT model | Diameter (km) | Size interpretation |
 | --- | --- | --- | --- | ---: | --- |
-| 1437 | [Diomedes](../src/planets/diomedes/SOURCE.md) | L4 | [ 4215 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/4215) | 118.8 ± 0.6 | Occultation fit to this mesh |
-| 1404 | [Ajax](../src/planets/ajax/SOURCE.md) | L4 | [ 3327 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/3327) | 83.99 ± 1.279 | Approximate thermal-size transfer |
-| 5130 | [Ilioneus](../src/planets/ilioneus/SOURCE.md) | L5 | [ 4172 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/4172) | 60.711 ± 0.982 | Approximate thermal-size transfer |
-| 5283 | [Pyrrhus](../src/planets/pyrrhus/SOURCE.md) | L4 | [ 4373 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/4373) | 48.356 ± 0.423 | Approximate thermal-size transfer |
-| 5436 | [Eumelos](../src/planets/eumelos/SOURCE.md) | L4 | [ 3920 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/3920) | 37.696 ± 0.329 | Approximate thermal-size transfer |
-| 9694 | [Lycomedes](../src/planets/lycomedes/SOURCE.md) | L4 | [ 4284 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/4284) | 31.736 ± 0.243 | Approximate thermal-size transfer |
-| 11429 | [Demodokus](../src/planets/demodokus/SOURCE.md) | L4 | [ 3896 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/3896) | 37.63 ± 1.307 | Approximate thermal-size transfer |
-| 1647 | [Menelaus](../src/planets/menelaus/SOURCE.md) | L4 | [ 8131 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/8131) | 42.716 ± 0.517 | Approximate thermal-size transfer |
-| 1873 | [Agenor](../src/planets/agenor/SOURCE.md) | L5 | [ 4273 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/4273) | 50.799 ± 1.181 | Approximate thermal-size transfer |
-| 3451 | [Mentor](../src/planets/mentor/SOURCE.md) | L5 | [ 4281 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/4281) | 126.288 ± 1.642 | Approximate thermal-size transfer |
+| 1437 | [Diomedes](../src/planets/diomedes/README.md) | L4 | [ 4215 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/4215) | 118.8 ± 0.6 | Occultation fit to this mesh |
+| 1404 | [Ajax](../src/planets/ajax/README.md) | L4 | [ 3327 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/3327) | 83.99 ± 1.279 | Approximate thermal-size transfer |
+| 5130 | [Ilioneus](../src/planets/ilioneus/README.md) | L5 | [ 4172 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/4172) | 60.711 ± 0.982 | Approximate thermal-size transfer |
+| 5283 | [Pyrrhus](../src/planets/pyrrhus/README.md) | L4 | [ 4373 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/4373) | 48.356 ± 0.423 | Approximate thermal-size transfer |
+| 5436 | [Eumelos](../src/planets/eumelos/README.md) | L4 | [ 3920 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/3920) | 37.696 ± 0.329 | Approximate thermal-size transfer |
+| 9694 | [Lycomedes](../src/planets/lycomedes/README.md) | L4 | [ 4284 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/4284) | 31.736 ± 0.243 | Approximate thermal-size transfer |
+| 11429 | [Demodokus](../src/planets/demodokus/README.md) | L4 | [ 3896 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/3896) | 37.63 ± 1.307 | Approximate thermal-size transfer |
+| 1647 | [Menelaus](../src/planets/menelaus/README.md) | L4 | [ 8131 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/8131) | 42.716 ± 0.517 | Approximate thermal-size transfer |
+| 1873 | [Agenor](../src/planets/agenor/README.md) | L5 | [ 4273 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/4273) | 50.799 ± 1.181 | Approximate thermal-size transfer |
+| 3451 | [Mentor](../src/planets/mentor/README.md) | L5 | [ 4281 ](https://damit.cuni.cz/projects/damit/asteroid_models/view/4281) | 126.288 ± 1.642 | Approximate thermal-size transfer |
 
 ## Scientific interpretation
 

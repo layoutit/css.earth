@@ -25,4 +25,4 @@ approximation and does not recover terrain hidden by photographed shadows.
 
 ## B6 sources
 
-The added views derive from credited public USGS/NASA scientific products. Preserve the source authors, PDS citation and processing qualifications recorded in SOURCE.md and the source manifest. No endorsement is implied.
+The added views derive from credited public USGS/NASA scientific products. Preserve the source authors, PDS citation and processing qualifications recorded in README.md and the source manifest. No endorsement is implied.

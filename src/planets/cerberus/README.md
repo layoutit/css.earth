@@ -1,0 +1,60 @@
+# (1865) Cerberus
+
+## Sources
+
+Checked 2026-09-09. Original [DAMIT model 456](https://damit.cuni.cz/projects/damit/asteroid_models/view/456), version 2016-04-22.
+
+Convex lightcurve model at the uncertain 1.2 km archive diameter.
+
+## Evidence
+
+Recorded four-body results retain their [original build identities](../../../docs/non-belt-populations/README.md#evidence-identity).
+
+- Original mesh, scalar and sampled distance checks are in the [qualification record](../../../docs/near-earth-population/qualification.json). These are sampled distances, not an exhaustive Hausdorff bound or source-model accuracy.
+- Production browser checks passed at DPR 1 and 2. Settings was hidden, so optional
+  Shadows was exercised through a bound control event.
+  [Browser record](../../../docs/near-earth-population/browser-validation.json) · [Source restoration](../../../docs/near-earth-population/source-restoration.json) · [Fresh asset installation](../../../docs/near-earth-population/fresh-install.json).
+
+## Known problems
+
+- The published thermophysical fit is poor and its diameter uncertainty is unconstrained; the missing error value does not mean zero uncertainty.
+- No registered reflectance texture is available. Grid marks missing imagery; Elevation is shape-derived radius relative to a sphere, not measured geology. Rotation phase is arbitrary.
+
+[Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+
+## Methods
+
+<details>
+<summary>Original shape, scale, orientation and preparation</summary>
+
+## Shape and physical scale
+
+The archived model gives D 1.2 km with no diameter uncertainty. Unknown uncertainty is retained as null; neither zero uncertainty nor a precise surface reconstruction is claimed.
+
+The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred.
+
+Hanuš et al. 2015 section 4.2 explicitly report a poor thermophysical fit for Cerberus and omit its uncertainties. The DAMIT calibrated flag is retained as archive metadata, not treated as strong physical-size validation.
+
+The unchanged original shape contains 1022 vertices and 2040 faces. Signed volume is 0.90477836020095082 source units³; an independent centroid/divergence sum gives 0.90477836020095082. Its source-volume equivalent diameter is 1.1999998567459849 source units. Uniform scale is 1.0000001193783601 km/source unit, preserving the selected archive's declared 1.2 km size. Neither a unit-volume assumption nor a borrowed ellipsoid is used.
+
+## Orientation
+
+Source pole: ecliptic J2000 (311°,-78°). Reference sidereal period: 6.80329 h. Equatorial conversion uses obliquity 23.439291111°. Original +Z axis and +X meridian are retained. Absolute rotational phase is arbitrary; reference-period display rotation is not a YORP propagation model. Heliocentric state is generated through the shared Horizons owner at 2026-09-03; its TDB-as-TT approximation is under 2 ms.
+
+## Source survey
+
+- [Original numerical mesh](https://damit.cuni.cz/projects/damit/stored_files/open/1783/shape.txt) — selected, pinned unchanged.
+- [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — pole, period, units and archive diameter definitions; CC BY 4.0.
+- [Ďurech et al. (2012)](https://damit.cuni.cz/projects/damit/references/view/144)
+- [Hanuš et al. (2015)](https://damit.cuni.cz/projects/damit/references/view/163)
+- [Hanuš et al. (2015), thermophysical fits with shape and pole uncertainty](https://arxiv.org/html/1504.04199)
+
+Alternative shapes/poles: None in the checked target listing.
+
+No registered global reflectance texture is supplied by the selected release. Lightcurves and disk-integrated thermal/radar measurements do not supply surface texels. The normal grid identifies unavailable imagery. The Elevation view reports source radius minus the stated reference sphere; it is shape-derived false color, not independent topography or gravitational height.
+
+## Preparation
+
+Existing source-meshoptimizer preparation retains source connectivity, reduces within an 800-native-u-face budget, and uses 128 px raster cells. The source-fit allowance is 12 m; source-model accuracy and simplification error remain separate. Shadows and Orbit start off.
+
+</details>

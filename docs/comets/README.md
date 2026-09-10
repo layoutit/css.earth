@@ -4,18 +4,18 @@ Twelve independently selectable nucleus packages use the generic object registry
 
 | Object | Geometry source | What the default view represents |
 | --- | --- | --- |
-| [1P/Halley](../../src/planets/comet-1p/SOURCE.md) | Stooke's historical Giotto/Vega radius grid, 2,701 rows | Highly uncertain historical shape with neutral material and an illustrative fixed attitude. |
-| [8P/Tuttle](../../src/planets/comet-8p/SOURCE.md) | Hubble/Spitzer contact spheres and an alternative Arecibo contact-ellipsoid model | Hubble/Spitzer is the default; Arecibo uses a separate inferred shape at the same physical scale. Both have illustrative attitudes. |
-| [19P/Borrelly](../../src/planets/comet-19p/SOURCE.md) | Reviewed USGS and DLR image-plane DEMs | Registered MICAS photograph on the USGS terrain; independent terrain, Height and Difference views share the scene. |
-| [67P/Churyumov–Gerasimenko](../../src/planets/comet-67p/SOURCE.md) | ESA/RMOC MTP019, 104,192 source triangles | Rosetta nucleus geometry with a neutral gray model material. The neck and non-convex topology are retained. |
-| [103P/Hartley 2](../../src/planets/comet-103p/SOURCE.md) | Farnham & Thomas (2013), EPOXI PDS model, 32,040 source triangles | The published complete model, colored by its source constraint flags. The cartographic long axis is not treated as a spin axis. |
-| [9P/Tempel 1](../../src/planets/comet-9p/SOURCE.md) | Farnham & Thomas (2013), combined Deep Impact/Stardust-NExT PDS model, 32,040 source triangles | The published complete model, colored by its source constraint flags. |
-| [81P/Wild 2](../../src/planets/comet-81p/SOURCE.md) | Full PDS v2.1 plate model, 17,518 source triangles | Observed terrain with the published estimated ellipsoid and joining faces marked by grid texels. |
-| [137P/Shoemaker–Levy 2](../../src/planets/comet-137p/SOURCE.md) | Donaldson (2025), Model 1 physical axis ratios | Smooth approximation; grid marks absent imagery. The alternative pole remains documented. |
-| [143P/Kowal–Mrkos](../../src/planets/comet-143p/SOURCE.md) | Donaldson (2025), accepted Model 1 physical axis ratios | Smooth approximation with an infrared size estimate; grid marks absent imagery. |
-| [162P/Siding Spring](../../src/planets/comet-162p/SOURCE.md) | Donaldson (2025), physical axis extents | Flattened approximation; grid marks absent imagery. Thickness and local shape remain uncertain. |
-| [2P/Encke](../../src/planets/comet-2p/SOURCE.md) | Harmon & Nolan (2005), radar/infrared SAM1 model | Smooth approximation of the selected elongated solution; grid marks absent imagery. |
-| [209P/LINEAR](../../src/planets/comet-209p/SOURCE.md) | Radar dimensions reported by Schleicher & Knight (2016) | Smooth approximation of the published three-axis dimensions; grid marks absent imagery. |
+| [1P/Halley](../../src/planets/comet-1p/README.md) | Stooke's historical Giotto/Vega radius grid, 2,701 rows | Highly uncertain historical shape with neutral material and an illustrative fixed attitude. |
+| [8P/Tuttle](../../src/planets/comet-8p/README.md) | Hubble/Spitzer contact spheres and an alternative Arecibo contact-ellipsoid model | Hubble/Spitzer is the default; Arecibo uses a separate inferred shape at the same physical scale. Both have illustrative attitudes. |
+| [19P/Borrelly](../../src/planets/comet-19p/README.md) | Reviewed USGS and DLR image-plane DEMs | Registered MICAS photograph on the USGS terrain; independent terrain, Height and Difference views share the scene. |
+| [67P/Churyumov–Gerasimenko](../../src/planets/comet-67p/README.md) | ESA/RMOC MTP019, 104,192 source triangles | Rosetta nucleus geometry with a neutral gray model material. The neck and non-convex topology are retained. |
+| [103P/Hartley 2](../../src/planets/comet-103p/README.md) | Farnham & Thomas (2013), EPOXI PDS model, 32,040 source triangles | The published complete model, colored by its source constraint flags. The cartographic long axis is not treated as a spin axis. |
+| [9P/Tempel 1](../../src/planets/comet-9p/README.md) | Farnham & Thomas (2013), combined Deep Impact/Stardust-NExT PDS model, 32,040 source triangles | The published complete model, colored by its source constraint flags. |
+| [81P/Wild 2](../../src/planets/comet-81p/README.md) | Full PDS v2.1 plate model, 17,518 source triangles | Observed terrain with the published estimated ellipsoid and joining faces marked by grid texels. |
+| [137P/Shoemaker–Levy 2](../../src/planets/comet-137p/README.md) | Donaldson (2025), Model 1 physical axis ratios | Smooth approximation; grid marks absent imagery. The alternative pole remains documented. |
+| [143P/Kowal–Mrkos](../../src/planets/comet-143p/README.md) | Donaldson (2025), accepted Model 1 physical axis ratios | Smooth approximation with an infrared size estimate; grid marks absent imagery. |
+| [162P/Siding Spring](../../src/planets/comet-162p/README.md) | Donaldson (2025), physical axis extents | Flattened approximation; grid marks absent imagery. Thickness and local shape remain uncertain. |
+| [2P/Encke](../../src/planets/comet-2p/README.md) | Harmon & Nolan (2005), radar/infrared SAM1 model | Smooth approximation of the selected elongated solution; grid marks absent imagery. |
+| [209P/LINEAR](../../src/planets/comet-209p/README.md) | Radar dimensions reported by Schleicher & Knight (2016) | Smooth approximation of the published three-axis dimensions; grid marks absent imagery. |
 
 For Hartley 2 and Tempel 1, gray marks stereo-controlled regions, blue marks limb-silhouette constraints, and grid texels mark poorly constrained source estimates in both views. Those estimates belong to the archived model. The Shape model lens uses gray for the stronger constraints. These are inspection materials, not albedo photographs. Halley has no regional confidence flags, so it uses a visible whole-model uncertainty label.
 
