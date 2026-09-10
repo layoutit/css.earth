@@ -1,0 +1,284 @@
+{
+  "codeRevision": "126235fd6f41611f2c9aa082e1062480df6d5820",
+  "baseRevision": "16774548b",
+  "capturedAt": "2026-09-10T13:35:16.641Z",
+  "server": "http://127.0.0.1:4278",
+  "build": "development",
+  "headless": true,
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "preparedObjectSha256": "693d64771a0e1da577a4d3a86572dd2717fb5bc3424f8c373295171835ca2498",
+  "runtimeImages": {
+    "count": 35,
+    "bytes": 8397846,
+    "hashesUnchangedFromBase": true
+  },
+  "checks": [
+    {
+      "dpr": 1,
+      "defaultLens": "albedo",
+      "shadowsDefault": false,
+      "orbitDefault": false,
+      "rasterLeaves": 1000,
+      "lensSwitch": "model and back",
+      "dragRetainedLeaves": true,
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.707106781187,-0.241844762648,-0.664463024389,0,0,0.939692620786,-0.342020143326,0,0.707106781187,-0.241844762648,-0.664463024389,0,0,0,0,1)",
+          "skybox": "matrix3d(0.324984155313,-0.323455084328,-0.888685540398,0,0.867680548856,0.475767370343,0.144137671666,0,0.376185474496,-0.817937682762,0.435272594761,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 116.38461538461539,
+        "controlPitch": 116.38461538461539,
+        "controlYaw": 135,
+        "zoom": 0.6328557811223875,
+        "distance": 2179.783694068175,
+        "distanceKilometers": 94.28038342865307,
+        "distanceRadii": 9.477320408992066,
+        "levelOfDetail": {
+          "stage": "geometry",
+          "silhouetteDiameter": 264.64878064435595,
+          "billboardOpacity": 0,
+          "markerOpacity": 0
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -450,
+          "bottom": 450
+        },
+        "offAxisDegrees": 0,
+        "silhouetteRadius": 132.32439032217798
+      },
+      "screenshot": "default-dpr1.png",
+      "loadedAssets": [
+        {
+          "path": "/scenes/arrokoth/arrokoth-directional-sun@2x.webp",
+          "status": 200,
+          "bytes": 12530,
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "path": "/scenes/arrokoth/arrokoth-albedo-legend.webp",
+          "status": 200,
+          "bytes": 58,
+          "sha256": "aebcd74e76dd366669037255627ca7184e2a3c179dfde7e02b2055b248fbc845"
+        },
+        {
+          "path": "/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
+          "status": 200,
+          "bytes": 610,
+          "sha256": "2e76824260e49b39725dafcdac028554d3825c160a4ae09320e26c90fff2339c"
+        },
+        {
+          "path": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
+          "status": 200,
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+        },
+        {
+          "path": "/scenes/arrokoth/arrokoth-system-point.webp",
+          "status": 200,
+          "bytes": 96,
+          "sha256": "d0ae999b83dcb1983f478efc04e5912bf1872146c4b98919111992eb90ed7caf"
+        },
+        {
+          "path": "/scenes/arrokoth/arrokoth-albedo-surface@2x.webp",
+          "status": 200,
+          "bytes": 589518,
+          "sha256": "f340d47302960824a87b15095a0be5f1614c74d26517d666235731d230fe72b0"
+        },
+        {
+          "path": "/scenes/arrokoth/arrokoth-lighting.webp",
+          "status": 200,
+          "bytes": 1050836,
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "path": "/objects/arrokoth/693d64771a0e1da577a4d3a86572dd2717fb5bc3424f8c373295171835ca2498.json",
+          "status": 200,
+          "bytes": 6820491,
+          "sha256": "693d64771a0e1da577a4d3a86572dd2717fb5bc3424f8c373295171835ca2498"
+        },
+        {
+          "path": "/scenes/arrokoth/arrokoth-model-surface@2x.webp",
+          "status": 200,
+          "bytes": 119308,
+          "sha256": "a0af64184a552756e7d6ad7253097dd4a28dd062eb1fd0d2e11970e9a8d0f89c"
+        },
+        {
+          "path": "/scenes/arrokoth/arrokoth-albedo-shadow@2x.webp",
+          "status": 200,
+          "bytes": 626266,
+          "sha256": "4a3e4f9ec1820f7d3041ee49a5227d73a91b1d6852c32facb46a847ed26e1c47"
+        }
+      ],
+      "errors": [],
+      "capture": "Recaptured after scenePresented=true and two animation frames; the earlier ready-only capture preceded visible scene presentation."
+    },
+    {
+      "dpr": 2,
+      "defaultLens": "albedo",
+      "shadowsDefault": false,
+      "orbitDefault": false,
+      "rasterLeaves": 1000,
+      "lensSwitch": "model and back",
+      "dragRetainedLeaves": true,
+      "camera": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.707106781187,-0.241844762648,-0.664463024389,0,0,0.939692620786,-0.342020143326,0,0.707106781187,-0.241844762648,-0.664463024389,0,0,0,0,1)",
+          "skybox": "matrix3d(0.324984155313,-0.323455084328,-0.888685540398,0,0.867680548856,0.475767370343,0.144137671666,0,0.376185474496,-0.817937682762,0.435272594761,0,0,0,0,1)",
+          "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+        },
+        "pitch": 116.38461538461539,
+        "controlPitch": 116.38461538461539,
+        "controlYaw": 135,
+        "zoom": 0.6328557811223875,
+        "distance": 2179.783694068175,
+        "distanceKilometers": 94.28038342865307,
+        "distanceRadii": 9.477320408992066,
+        "levelOfDetail": {
+          "stage": "geometry",
+          "silhouetteDiameter": 264.64878064435595,
+          "billboardOpacity": 0,
+          "markerOpacity": 0
+        },
+        "focal": 1247.08,
+        "principalOffset": [
+          0,
+          0
+        ],
+        "visibleRect": {
+          "left": -720,
+          "right": 720,
+          "top": -450,
+          "bottom": 450
+        },
+        "offAxisDegrees": 0,
+        "silhouetteRadius": 132.32439032217798
+      },
+      "screenshot": "default-dpr2.png",
+      "loadedAssets": [
+        {
+          "path": "/scenes/arrokoth/arrokoth-directional-sun@2x.webp",
+          "status": 200,
+          "bytes": 12530,
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "path": "/scenes/arrokoth/arrokoth-albedo-legend.webp",
+          "status": 200,
+          "bytes": 58,
+          "sha256": "aebcd74e76dd366669037255627ca7184e2a3c179dfde7e02b2055b248fbc845"
+        },
+        {
+          "path": "/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
+          "status": 200,
+          "bytes": 610,
+          "sha256": "2e76824260e49b39725dafcdac028554d3825c160a4ae09320e26c90fff2339c"
+        },
+        {
+          "path": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
+          "status": 200,
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+        },
+        {
+          "path": "/scenes/arrokoth/arrokoth-system-point.webp",
+          "status": 200,
+          "bytes": 96,
+          "sha256": "d0ae999b83dcb1983f478efc04e5912bf1872146c4b98919111992eb90ed7caf"
+        },
+        {
+          "path": "/scenes/arrokoth/arrokoth-lighting.webp",
+          "status": 200,
+          "bytes": 1050836,
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "path": "/scenes/arrokoth/arrokoth-albedo-surface@2x.webp",
+          "status": 200,
+          "bytes": 589518,
+          "sha256": "f340d47302960824a87b15095a0be5f1614c74d26517d666235731d230fe72b0"
+        },
+        {
+          "path": "/objects/arrokoth/693d64771a0e1da577a4d3a86572dd2717fb5bc3424f8c373295171835ca2498.json",
+          "status": 200,
+          "bytes": 6820491,
+          "sha256": "693d64771a0e1da577a4d3a86572dd2717fb5bc3424f8c373295171835ca2498"
+        },
+        {
+          "path": "/scenes/arrokoth/arrokoth-model-surface@2x.webp",
+          "status": 200,
+          "bytes": 119308,
+          "sha256": "a0af64184a552756e7d6ad7253097dd4a28dd062eb1fd0d2e11970e9a8d0f89c"
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "conformance": {
+    "passed": [
+      "initial-shell",
+      "dataset-interactions",
+      "dataset-interactions-dpr-2",
+      "lens-race"
+    ],
+    "failed": "dpr-1: empty sky must preserve the camera; double-click moved the camera after the sky drag",
+    "notReached": [
+      "dpr-2"
+    ],
+    "failureLog": "conformance-failure.txt"
+  },
+  "validation": {
+    "sourceAndMinimapTests": 4,
+    "toolingTypecheck": "pass",
+    "sourceRuntimeClosure": {
+      "assets": 35,
+      "inputs": 5
+    },
+    "fullSiteBuild": "not run",
+    "allBodySuite": "not run"
+  },
+  "interpretation": "Porter 2024 fitted albedo; no new surface dataset. Source fill is retained without an invented mask. Previous and new opening views use different default cameras; no pixel-parity claim.",
+  "browser": "152.0.7977.84",
+  "images": [
+    {
+      "file": "default-dpr1.png",
+      "bytes": 339276,
+      "sha256": "eb23da8888e3941b2cfc017648c628fc3fcb53860bdcecb32f1fec8f2d24c8e1"
+    },
+    {
+      "file": "default-dpr2.png",
+      "bytes": 842531,
+      "sha256": "553eff224201d8b23e45ac6c596bd183c7197b79754fa20cd9e1f2756b859717"
+    },
+    {
+      "file": "previous-default.png",
+      "bytes": 301651,
+      "sha256": "9e3151f176efd86b26f20a7ff2428907179a32309f75bdf8dfd5d98b408bb395"
+    },
+    {
+      "file": "shadows-on.png",
+      "bytes": 342330,
+      "sha256": "48b3059824659805ea818d3cbaf2ffec9ed49487c1fe0f4ce7856f07a6399374"
+    }
+  ],
+  "previousDefault": {
+    "codeRevision": "16774548b140b45e1f8cf50e21b9671055e0823f",
+    "preparedObjectSha256": "7f3259c793a1b375e4f609bc0530d90983018cc3eba93e5dddfa01e199c23dd7",
+    "lens": "model",
+    "initialScenePitchDegrees": 20,
+    "defaultControlYawDegrees": -45,
+    "screenshot": "previous-default.png"
+  }
+}

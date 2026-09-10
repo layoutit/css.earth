@@ -1,0 +1,182 @@
+(node:90235) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[conformance] START arrokoth/initial-shell
+[conformance] PASS arrokoth/initial-shell (1052ms)
+[conformance] START arrokoth/dataset-interactions
+[conformance] PASS arrokoth/dataset-interactions (7636ms)
+[conformance] START arrokoth/dataset-interactions-dpr-2
+[conformance] PASS arrokoth/dataset-interactions-dpr-2 (7375ms)
+[conformance] START arrokoth/dpr-1
+[conformance] FAIL arrokoth/dpr-1: arrokoth: empty sky must preserve the camera
++ actual - expected
+
+  {
++   bodyCenterKilometers: [
++     -44.663421837895804,
++     30.400690755177642,
++     -69.56522486044258
++   ],
+    controlPitch: 216.1346153846154,
+    controlYaw: -51.375,
++   distance: 2036.4632099489008,
++   distanceKilometers: 88.08146092422463,
++   distanceRadii: 8.854187869343047,
+-   distance: 2179.7767802689236,
+-   distanceKilometers: 94.28008439180545,
+-   distanceRadii: 9.47729034899532,
+    focal: 1039.23,
+    levelOfDetail: {
+      billboardOpacity: 0,
+      markerOpacity: 0,
++     silhouetteDiameter: 300.3114463493435,
+-     silhouetteDiameter: 220.54065026668442,
+      stage: 'geometry'
+    },
++   offAxisDegrees: 37.83477940468829,
+-   offAxisDegrees: 0,
+    pitch: 216.1346153846154,
+    pose: {
++     scene: 'matrix3d(-0.181185551782,-0.518444473329,0.835695592845,0,0.573471036016,0.634634515843,0.518044401719,0,-0.798938524967,0.573109378195,0.182326284304,0,0,0,0,1)',
+-     scene: 'matrix3d(-0.181185551782,-0.51844447333,0.835695592845,0,0.573471036016,0.634634515843,0.518044401719,0,-0.798938524967,0.573109378196,0.182326284304,0,0,0,0,1)',
+      schema: 'cssearth-camera-pose@1',
++     skybox: 'matrix3d(-0.797391787783,0.28739320439,0.530632985538,0,0.055741196609,0.910632753805,-0.4094394957,0,-0.600881912836,-0.296905660654,-0.742150760528,0,0,0,0,1)',
+-     skybox: 'matrix3d(-0.797391787783,0.28739320439,0.530632985539,0,0.055741196609,0.910632753805,-0.4094394957,0,-0.600881912836,-0.296905660654,-0.742150760528,0,0,0,0,1)',
+      sunView: 'matrix3d(-0.436817316437,0.771845130443,0.462001868688,0,0.775924375485,0.583140950491,-0.240599242285,0,-0.455117562382,0.253380596083,-0.853619515909,0,0,0,0,1)'
+    },
+    principalOffset: [
+      0,
+      0
+    ],
++   silhouetteRadius: 150.15572317467175,
+-   silhouetteRadius: 110.27032513334221,
+    visibleRect: {
+      bottom: 400,
+      left: -600,
+      right: 600,
+      top: -400
+    },
++   zoom: 0.564957089519261
+-   zoom: 0.5273798176019897
+  }
+
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: arrokoth: empty sky must preserve the camera
++ actual - expected
+
+  {
++   bodyCenterKilometers: [
++     -44.663421837895804,
++     30.400690755177642,
++     -69.56522486044258
++   ],
+    controlPitch: 216.1346153846154,
+    controlYaw: -51.375,
++   distance: 2036.4632099489008,
++   distanceKilometers: 88.08146092422463,
++   distanceRadii: 8.854187869343047,
+-   distance: 2179.7767802689236,
+-   distanceKilometers: 94.28008439180545,
+-   distanceRadii: 9.47729034899532,
+    focal: 1039.23,
+    levelOfDetail: {
+      billboardOpacity: 0,
+      markerOpacity: 0,
++     silhouetteDiameter: 300.3114463493435,
+-     silhouetteDiameter: 220.54065026668442,
+      stage: 'geometry'
+    },
++   offAxisDegrees: 37.83477940468829,
+-   offAxisDegrees: 0,
+    pitch: 216.1346153846154,
+    pose: {
++     scene: 'matrix3d(-0.181185551782,-0.518444473329,0.835695592845,0,0.573471036016,0.634634515843,0.518044401719,0,-0.798938524967,0.573109378195,0.182326284304,0,0,0,0,1)',
+-     scene: 'matrix3d(-0.181185551782,-0.51844447333,0.835695592845,0,0.573471036016,0.634634515843,0.518044401719,0,-0.798938524967,0.573109378196,0.182326284304,0,0,0,0,1)',
+      schema: 'cssearth-camera-pose@1',
++     skybox: 'matrix3d(-0.797391787783,0.28739320439,0.530632985538,0,0.055741196609,0.910632753805,-0.4094394957,0,-0.600881912836,-0.296905660654,-0.742150760528,0,0,0,0,1)',
+-     skybox: 'matrix3d(-0.797391787783,0.28739320439,0.530632985539,0,0.055741196609,0.910632753805,-0.4094394957,0,-0.600881912836,-0.296905660654,-0.742150760528,0,0,0,0,1)',
+      sunView: 'matrix3d(-0.436817316437,0.771845130443,0.462001868688,0,0.775924375485,0.583140950491,-0.240599242285,0,-0.455117562382,0.253380596083,-0.853619515909,0,0,0,0,1)'
+    },
+    principalOffset: [
+      0,
+      0
+    ],
++   silhouetteRadius: 150.15572317467175,
+-   silhouetteRadius: 110.27032513334221,
+    visibleRect: {
+      bottom: 400,
+      left: -600,
+      right: 600,
+      top: -400
+    },
++   zoom: 0.564957089519261
+-   zoom: 0.5273798176019897
+  }
+
+    at proveSkyboxPointerBoundary (file:///Users/ekrof/fed/cssEarth/site/test/skybox-pointer-boundary.mjs:74:16)
+    at async provePreparedDensity (file:///Users/ekrof/fed/cssEarth/site/test/planet-browser-conformance.mjs:1011:35)
+    at async within (file:///Users/ekrof/fed/cssEarth/site/test/planet-browser-conformance.mjs:104:12)
+    at async runCase (file:///Users/ekrof/fed/cssEarth/site/test/planet-browser-conformance.mjs:92:20)
+    at async file:///Users/ekrof/fed/cssEarth/site/test/planet-browser-conformance.mjs:73:18 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: {
+    pose: {
+      schema: 'cssearth-camera-pose@1',
+      scene: 'matrix3d(-0.181185551782,-0.518444473329,0.835695592845,0,0.573471036016,0.634634515843,0.518044401719,0,-0.798938524967,0.573109378195,0.182326284304,0,0,0,0,1)',
+      skybox: 'matrix3d(-0.797391787783,0.28739320439,0.530632985538,0,0.055741196609,0.910632753805,-0.4094394957,0,-0.600881912836,-0.296905660654,-0.742150760528,0,0,0,0,1)',
+      sunView: 'matrix3d(-0.436817316437,0.771845130443,0.462001868688,0,0.775924375485,0.583140950491,-0.240599242285,0,-0.455117562382,0.253380596083,-0.853619515909,0,0,0,0,1)'
+    },
+    pitch: 216.1346153846154,
+    controlPitch: 216.1346153846154,
+    controlYaw: -51.375,
+    zoom: 0.564957089519261,
+    distance: 2036.4632099489008,
+    distanceKilometers: 88.08146092422463,
+    distanceRadii: 8.854187869343047,
+    levelOfDetail: {
+      stage: 'geometry',
+      silhouetteDiameter: 300.3114463493435,
+      billboardOpacity: 0,
+      markerOpacity: 0
+    },
+    focal: 1039.23,
+    principalOffset: [ 0, 0 ],
+    visibleRect: { left: -600, right: 600, top: -400, bottom: 400 },
+    offAxisDegrees: 37.83477940468829,
+    silhouetteRadius: 150.15572317467175,
+    bodyCenterKilometers: [ -44.663421837895804, 30.400690755177642, -69.56522486044258 ]
+  },
+  expected: {
+    pose: {
+      schema: 'cssearth-camera-pose@1',
+      scene: 'matrix3d(-0.181185551782,-0.51844447333,0.835695592845,0,0.573471036016,0.634634515843,0.518044401719,0,-0.798938524967,0.573109378196,0.182326284304,0,0,0,0,1)',
+      skybox: 'matrix3d(-0.797391787783,0.28739320439,0.530632985539,0,0.055741196609,0.910632753805,-0.4094394957,0,-0.600881912836,-0.296905660654,-0.742150760528,0,0,0,0,1)',
+      sunView: 'matrix3d(-0.436817316437,0.771845130443,0.462001868688,0,0.775924375485,0.583140950491,-0.240599242285,0,-0.455117562382,0.253380596083,-0.853619515909,0,0,0,0,1)'
+    },
+    pitch: 216.1346153846154,
+    controlPitch: 216.1346153846154,
+    controlYaw: -51.375,
+    zoom: 0.5273798176019897,
+    distance: 2179.7767802689236,
+    distanceKilometers: 94.28008439180545,
+    distanceRadii: 9.47729034899532,
+    levelOfDetail: {
+      stage: 'geometry',
+      silhouetteDiameter: 220.54065026668442,
+      billboardOpacity: 0,
+      markerOpacity: 0
+    },
+    focal: 1039.23,
+    principalOffset: [ 0, 0 ],
+    visibleRect: { left: -600, right: 600, top: -400, bottom: 400 },
+    offAxisDegrees: 0,
+    silhouetteRadius: 110.27032513334221
+  },
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
