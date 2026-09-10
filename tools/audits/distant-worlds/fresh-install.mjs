@@ -1,10 +1,10 @@
-import { bodies, ids, reportDirectory, captureDirectory } from './selection.mjs';
+import { ids, reportDirectory, runtimeDirectory } from './selection.mjs';
 import assert from 'node:assert/strict';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {runtimeAssets} from '../../../tools/runtime-assets.mjs';
 import {installRuntimeAssets} from '../../../tools/setup.mjs';
-const root=resolve(reportDirectory,'fresh-runtime');
+const root=runtimeDirectory;
 await mkdir(root,{recursive:true});
 const assets=(await runtimeAssets(process.cwd(),ids)).map(asset=>({...asset,file:resolve(root,asset.id,asset.filename)}));
 for(const asset of assets) assert.equal(await readFile(asset.file).then(()=>true, e=>{if(e.code==='ENOENT')return false;throw e;}),false,'Fresh destination must start empty');

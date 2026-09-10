@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
-import {execFileSync} from 'node:child_process';
 import {chromium} from 'playwright';
 import {OBJECTS} from '../../../site/objects.mjs';
 import {conformanceBrowserLaunch} from '../../../site/test/conformance-browser-launch.mjs';
@@ -11,7 +10,6 @@ const origin='http://127.0.0.1:4278';
 const build=process.env.CSSEARTH_AUDIT_BUILD ?? 'production';
 assert.ok(['production','development'].includes(build));
 const output=captureDirectory;await mkdir(output,{recursive:true});
-const codeRevision=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
 const browser=await chromium.launch((await conformanceBrowserLaunch({evidenceDirectory:output,redirectStdio:true})).options);
 const navigationOnly=process.argv.includes('--navigation-only'),defaultsOnly=process.argv.includes('--defaults-only');
 const results=[];
@@ -109,6 +107,6 @@ try{
   }
   assert.deepEqual(errors,[]);await context.close();
  }
- await writeFile(defaultsOnly?`${reportDirectory}/default-views.json`:navigationOnly?`${reportDirectory}/navigation-final.json`:`${reportDirectory}/browser-validation.json`,JSON.stringify({capturedAt:new Date().toISOString(),codeRevision,browser:browser.version(),headless:true,build,origin,viewport:{width:1440,height:900},scope:`${build} server; ${defaultsOnly?'default views':navigationOnly?'category, search and handoff':'DPR 1/2 defaults, retained-node drag, native triangles, controls, category, search and navigation'} using verified scene assets.`,results},null,2)+'\n');
+ await writeFile(defaultsOnly?`${reportDirectory}/default-views.json`:navigationOnly?`${reportDirectory}/navigation-final.json`:`${reportDirectory}/browser-validation.json`,JSON.stringify({capturedAt:new Date().toISOString(),browser:browser.version(),headless:true,build,origin,viewport:{width:1440,height:900},scope:`${build} server; ${defaultsOnly?'default views':navigationOnly?'category, search and handoff':'DPR 1/2 defaults, retained-node drag, native triangles, controls, category, search and navigation'} using verified scene assets.`,results},null,2)+'\n');
  console.log(defaultsOnly?'DPR1 actual default views captured':navigationOnly?'Integrated shared navigation checks passed':'DPR 1/2 fresh asset, default settings, native triangles and shared navigation checks passed');
 }finally{await browser.close();}

@@ -9,4 +9,5 @@ if (!ids.length || new Set(ids).size !== ids.length || ids.some(id => !/^[a-z][a
 }
 export const reportDirectory = resolve(process.env.CSSEARTH_AUDIT_OUTPUT ?? 'output/distant-worlds');
 export const captureDirectory = resolve(process.env.CSSEARTH_AUDIT_CAPTURES ?? 'output/playwright/distant-worlds');
+export const runtimeDirectory = resolve(process.env.CSSEARTH_AUDIT_RUNTIME_ROOT ?? resolve(reportDirectory, 'fresh-runtime'));
 await mkdir(reportDirectory, { recursive: true });
