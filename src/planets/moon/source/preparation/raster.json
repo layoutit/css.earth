@@ -34,6 +34,145 @@
       }
     },
     {
+      "id": "midnight-temperature",
+      "label": "Midnight temperature",
+      "input": "science/diviner-ghrm/tbol_m-compact.tif",
+      "output": "moon-midnight-temperature",
+      "rasterScale": 2,
+      "qualification": "False-color bolometric temperature fitted to local midnight from Diviner observations in 2009–2022. Colors span 80–140 K, with endpoint colors beyond that range. Gray grid marks missing data and latitudes beyond ±70°. This combines many nights; it is not a current temperature map.",
+      "scientific": {
+        "format": "geotiff",
+        "path": "tbol_m-compact.tif",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "minimum": 80,
+        "maximum": 140,
+        "colors": [
+          "#24204f",
+          "#3a468b",
+          "#258da4",
+          "#81c9b0",
+          "#f4d17b",
+          "#ec803c",
+          "#9b283a"
+        ],
+        "units": "K",
+        "valueTransform": {
+          "scale": 0.01,
+          "offset": 100
+        },
+        "outputLongitudeOrigin": -180,
+        "grid": {
+          "width": 4096,
+          "height": 2048,
+          "noData": -32768,
+          "origin": [
+            -5458203.076346907,
+            2729101.5381734534
+          ],
+          "resolution": [
+            2665.138220872513,
+            -2665.138220872513
+          ],
+          "referenceRadiusMeters": 1737400,
+          "centerLongitude": 0,
+          "wrapLongitude": true
+        }
+      }
+    },
+    {
+      "id": "heat-anomalies",
+      "label": "Heat anomalies",
+      "input": "science/diviner-ghrm/tbol_anom-compact.tif",
+      "output": "moon-heat-anomalies",
+      "rasterScale": 2,
+      "qualification": "False-color difference between Diviner bolometric temperature at slope-adjusted midnight and a model of typical lunar soil. Blue is cooler and red warmer than the model; colors span −10 to +10 K. Observations cover 2009–2022 within ±70°; gray grid marks unavailable data. Residual terrain effects remain, and warm colors do not establish geothermal activity.",
+      "scientific": {
+        "format": "geotiff",
+        "path": "tbol_anom-compact.tif",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "minimum": -10,
+        "maximum": 10,
+        "colors": [
+          "#344e99",
+          "#409eb5",
+          "#9bced1",
+          "#e5e2d7",
+          "#e9be80",
+          "#d67743",
+          "#a22c35"
+        ],
+        "units": "K difference",
+        "valueTransform": {
+          "scale": 0.01,
+          "offset": 0
+        },
+        "outputLongitudeOrigin": -180,
+        "grid": {
+          "width": 4096,
+          "height": 2048,
+          "noData": -32768,
+          "origin": [
+            -5458203.076346907,
+            2729101.5381734534
+          ],
+          "resolution": [
+            2665.138220872513,
+            -2665.138220872513
+          ],
+          "referenceRadiusMeters": 1737400,
+          "centerLongitude": 0,
+          "wrapLongitude": true
+        }
+      }
+    },
+    {
+      "id": "rock-abundance",
+      "label": "Rock abundance",
+      "input": "science/diviner-ghrm/ra_sam-compact.tif",
+      "output": "moon-rock-abundance",
+      "rasterScale": 2,
+      "qualification": "Surface area covered by rocks, inferred with a rock-and-soil thermal model from Diviner observations in 2009–2022 at slope-adjusted midnight. Colors span 0–2%; larger fractions share the brightest color. Gray grid marks missing or physically invalid values and latitudes beyond ±70°. This estimates rock area, not individual boulder counts.",
+      "scientific": {
+        "format": "geotiff",
+        "path": "ra_sam-compact.tif",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "minimum": 0,
+        "maximum": 2,
+        "colors": [
+          "#292544",
+          "#456582",
+          "#5b9e95",
+          "#b7c85c",
+          "#fff0a0"
+        ],
+        "units": "% surface area",
+        "valueTransform": {
+          "scale": 0.002,
+          "offset": 50
+        },
+        "outputLongitudeOrigin": -180,
+        "grid": {
+          "width": 4096,
+          "height": 2048,
+          "noData": -32768,
+          "origin": [
+            -5458203.076346907,
+            2729101.5381734534
+          ],
+          "resolution": [
+            2665.138220872513,
+            -2665.138220872513
+          ],
+          "referenceRadiusMeters": 1737400,
+          "centerLongitude": 0,
+          "wrapLongitude": true
+        }
+      }
+    },
+    {
       "id": "topography",
       "label": "Topography",
       "input": "science/ldem_16.img",
@@ -93,64 +232,6 @@
       "input": "lenses/grail-crustal-thickness-print.jpg",
       "output": "moon-crustal-thickness",
       "qualification": "NASA GRAIL crustal-thickness map with shaded relief"
-    },
-    {
-      "id": "rock-abundance",
-      "label": "Rock abundance",
-      "input": "science/dgdr_ra_avg_cyl_032_img.img",
-      "output": "moon-rock-abundance",
-      "qualification": "LRO Diviner modeled surface rock-area fraction; source coverage within 60° north and south",
-      "scientific": {
-        "schema": "cssearth-pds-int16-cylindrical@1",
-        "format": "pds-image",
-        "path": "dgdr_ra_avg_cyl_032_img.img",
-        "labelPath": "dgdr_ra_avg_cyl_032_img.lbl",
-        "datasetId": "LRO-L-DLRE-5-GDR-V1.0",
-        "productId": "DGDR_RA_AVG_CYL_032_IMG.IMG",
-        "productVersion": "V4.0",
-        "lidvid": "urn:nasa:pds:lro_diviner_derived1:data_derived_gdr_level3:dgdr_ra_avg_cyl_032_img::1.0",
-        "target": "MOON",
-        "sourceUnit": "NONE",
-        "sampling": "nearest",
-        "grid": {
-          "width": 11520,
-          "height": 3840,
-          "pixelsPerDegree": 32,
-          "latitudeRange": [
-            -60,
-            60
-          ],
-          "longitudeRange": [
-            0,
-            360
-          ],
-          "referenceRadiusMeters": 1737400,
-          "frame": "MEAN EARTH/POLAR AXIS OF DE421",
-          "scalingFactor": 0.001,
-          "offset": 0,
-          "noData": -32768
-        },
-        "valueTransform": {
-          "scale": 0.1,
-          "offset": 0
-        },
-        "minimum": 0,
-        "maximum": 2,
-        "colors": [
-          "#292544",
-          "#456582",
-          "#5b9e95",
-          "#b7c85c",
-          "#fff0a0"
-        ],
-        "units": "percent surface area",
-        "validRange": [
-          0,
-          100
-        ],
-        "outputLongitudeOrigin": -180,
-        "displaySampling": "nearest"
-      }
     },
     {
       "id": "silicate-signature",

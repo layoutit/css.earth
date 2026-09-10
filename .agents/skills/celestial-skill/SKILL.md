@@ -19,6 +19,25 @@ comes from cssEarth's shared application. Follow this workflow for a new body;
 for a repair, enter at the affected stage and reuse valid work already done.
 Research and review requests do not imply implementation or publication.
 
+## Scope for existing moon upgrades
+
+For Moons-owner follow-up proposals and PRs, keep existing body geometry,
+retained scene topology, renderer, camera, navigation and shared shell fixed.
+This boundary persists until the user explicitly changes it. Requests to be
+ambitious, propose the next PR or proceed do not reopen that scope.
+
+Do not propose or implement terrain displacement, sphere-to-mesh conversion,
+mesh refinement or another geometry change under this scope. Using an existing
+mesh rendering path or generating the geometry offline does not make such a
+change acceptable. Apply the shape and mesh guidance below only when creating
+a new body or when geometry work is explicitly in scope.
+
+Make substantial advances through source-backed surface data: better imagery,
+measured coverage, registration, photometric corrections or useful scientific
+surface datasets. Prepare them through the existing object contract and retain
+the fixed geometry and shared behavior. If a candidate requires crossing that
+boundary, choose an in-scope outcome instead of repackaging the geometry change.
+
 ## 1. Inspect the sources and the working context
 
 Confirm the target body, selected checkout, current `AGENTS.md`, branch and dirty
