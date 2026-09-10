@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "comet-c1973-e1",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
+    "expectedBytes": 33502,
+    "expectedSha256": "394a23213ad228651ae400af1a819d31a8833253e04db9b2bc8e70f6bf11e4a9",
+    "origin": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
+    "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara",
+    "license": "GPL-2.0-or-later (Celestia catalog); independent cssEarth preparation code MIT",
+    "licenseEvidence": [
+      "reference/celestia.ssc",
+      "reference/GPL-2.0-or-later.txt"
+    ],
+    "acquisition": "Reproduced from the native Celestia mesh export with the shared missing-imagery grid.",
+    "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
+    "consumers": [
+      "navigation"
+    ],
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "celestia-mesh"
+      ],
+      "size": 512,
+      "longitudeDegrees": 70,
+      "latitudeDegrees": 20,
+      "ambient": 1,
+      "diffuse": 0,
+      "lensId": "model"
+    }
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

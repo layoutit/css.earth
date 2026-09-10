@@ -2,3 +2,6 @@
 source/orbit/*.txt -text -whitespace
 source/reference/* -text -whitespace
 source/shape/*.tab -text -whitespace
+
+# Preserve captured test output exactly.
+evidence/*.log -whitespace

@@ -7,7 +7,7 @@ import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { loadMarkerDescriptors } from '../../prepare-navigation.mjs';
 
-const refs = { main: '085a404c16626ee90a8150f018229609e2c3828e', companions: 'ea88f6feab538342257bda3b8bd7383126474017' };
+const refs = { main: 'a1471af189b25c1bed46683f06bc345025a7cf67', companions: 'ea88f6feab538342257bda3b8bd7383126474017' };
 const additions = new Set(['asteroid-2001-sn263', 'sn263-beta', 'sn263-gamma']);
 const original = (ref, path) => execFileSync('git', ['show', `${ref}:${path}`], { maxBuffer: 16 * 1024 * 1024 });
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');

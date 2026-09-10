@@ -2,553 +2,553 @@ TAP version 13
 # Subtest: persistent world context is mounted once and follows the active physical navigation
 ok 1 - persistent world context is mounted once and follows the active physical navigation
   ---
-  duration_ms: 4.393208
+  duration_ms: 4.985542
   type: 'test'
   ...
 # Subtest: contrast intent reaches a loading world once and survives detail navigation
 ok 2 - contrast intent reaches a loading world once and survives detail navigation
   ---
-  duration_ms: 0.533791
+  duration_ms: 0.560417
   type: 'test'
   ...
 # Subtest: flight state covers system framing and resets after success, failure, cancellation and preserved-view navigation
 ok 3 - flight state covers system framing and resets after success, failure, cancellation and preserved-view navigation
   ---
-  duration_ms: 3.981458
+  duration_ms: 3.665209
   type: 'test'
   ...
 # Subtest: the destination card stays held until arrival, including the new camera mount
 ok 4 - the destination card stays held until arrival, including the new camera mount
   ---
-  duration_ms: 0.674166
+  duration_ms: 0.5505
   type: 'test'
   ...
 # Subtest: asteroid label and orbit settings default off and reach the retained context independently
 ok 5 - asteroid label and orbit settings default off and reach the retained context independently
   ---
-  duration_ms: 0.484167
+  duration_ms: 0.429375
   type: 'test'
   ...
 # Subtest: entering overview on the current object changes selection without invoking focus or restoring the camera
 ok 6 - entering overview on the current object changes selection without invoking focus or restoring the camera
   ---
-  duration_ms: 0.296291
+  duration_ms: 0.236833
   type: 'test'
   ...
 # Subtest: flight retains the source and one shell; target readiness and handoff precede history commit
 ok 7 - flight retains the source and one shell; target readiness and handoff precede history commit
   ---
-  duration_ms: 0.868583
+  duration_ms: 0.71
   type: 'test'
   ...
 # Subtest: rapid Mercury → Venus → Mercury cancels the stale factory without replacing shell or source
 ok 8 - rapid Mercury → Venus → Mercury cancels the stale factory without replacing shell or source
   ---
-  duration_ms: 0.629917
+  duration_ms: 0.441833
   type: 'test'
   ...
 # Subtest: history back restores the departed exact view after target handoff without another push
 ok 9 - history back restores the departed exact view after target handoff without another push
   ---
-  duration_ms: 0.968709
+  duration_ms: 0.77275
   type: 'test'
   ...
 # Subtest: saved-view anchors preserve query and hash across objects and on the already selected object
 ok 10 - saved-view anchors preserve query and hash across objects and on the already selected object
   ---
-  duration_ms: 0.819625
+  duration_ms: 0.702542
   type: 'test'
   ...
 # Subtest: reselecting the source cancels a running flight at its painted view without another restore or mount
 ok 11 - reselecting the source cancels a running flight at its painted view without another restore or mount
   ---
-  duration_ms: 0.616708
+  duration_ms: 0.498667
   type: 'test'
   ...
 # Subtest: late rejected handoff is observed after replacement and cannot publish stale readiness
 ok 12 - late rejected handoff is observed after replacement and cannot publish stale readiness
   ---
-  duration_ms: 0.526625
+  duration_ms: 0.490083
   type: 'test'
   ...
 # Subtest: navigation preserves requested playback and reduced-motion policy
 ok 13 - navigation preserves requested playback and reduced-motion policy
   ---
-  duration_ms: 0.355083
+  duration_ms: 0.396542
   type: 'test'
   ...
 # Subtest: real input interruption preserves the last painted source view and flushes it without restoring the old URL
 ok 14 - real input interruption preserves the last painted source view and flushes it without restoring the old URL
   ---
-  duration_ms: 0.299708
+  duration_ms: 0.316625
   type: 'test'
   ...
 # Subtest: a missing destination asset preserves the painted view and permits a fresh selection retry
 ok 15 - a missing destination asset preserves the painted view and permits a fresh selection retry
   ---
-  duration_ms: 0.39125
+  duration_ms: 0.418125
   type: 'test'
   ...
 # Subtest: input after the detailed handoff keeps the incoming scene and its painted pose, including saved-view links
 ok 16 - input after the detailed handoff keeps the incoming scene and its painted pose, including saved-view links
   ---
-  duration_ms: 0.460375
+  duration_ms: 0.439917
   type: 'test'
   ...
 # Subtest: navbar/search anchors and vault events share one route; modifier and unsupported links stay native
 ok 17 - navbar/search anchors and vault events share one route; modifier and unsupported links stay native
   ---
-  duration_ms: 0.465958
+  duration_ms: 0.46525
   type: 'test'
   ...
 # Subtest: a failed persistent context mount can retry when the document restores
 ok 18 - a failed persistent context mount can retry when the document restores
   ---
-  duration_ms: 0.260166
+  duration_ms: 0.284209
   type: 'test'
   ...
 # Subtest: leaving the document releases its universe and a cached-page restore mounts one fresh owner
 ok 19 - leaving the document releases its universe and a cached-page restore mounts one fresh owner
   ---
-  duration_ms: 0.23125
+  duration_ms: 0.239292
   type: 'test'
   ...
 # Subtest: selecting the current object flies the retained camera without preparing or replacing detail
 ok 20 - selecting the current object flies the retained camera without preparing or replacing detail
   ---
-  duration_ms: 0.820125
+  duration_ms: 2.117083
   type: 'test'
   ...
 # Subtest: plain current-object anchors focus but saved-view links restore their specified view
 ok 21 - plain current-object anchors focus but saved-view links restore their specified view
   ---
-  duration_ms: 0.491042
+  duration_ms: 0.451958
   type: 'test'
   ...
 # Subtest: a first selection frames the object system and changes its card, then the next click focuses
 ok 22 - a first selection frames the object system and changes its card, then the next click focuses
   ---
-  duration_ms: 0.353917
+  duration_ms: 0.354542
   type: 'test'
   ...
 # Subtest: zooming out after first-click system framing restores the overview at the same camera pose
 ok 23 - zooming out after first-click system framing restores the overview at the same camera pose
   ---
-  duration_ms: 1.338958
+  duration_ms: 1.285417
   type: 'test'
   ...
 # Subtest: a first Sun click frames the Solar System card, and a repeat opens the Sun close-up
 ok 24 - a first Sun click frames the Solar System card, and a repeat opens the Sun close-up
   ---
-  duration_ms: 0.378
+  duration_ms: 0.363042
   type: 'test'
   ...
 # Subtest: clicking the Sun from the Solar System overview opens its body instead of refitting the outer planets
 ok 25 - clicking the Sun from the Solar System overview opens its body instead of refitting the outer planets
   ---
-  duration_ms: 0.258667
+  duration_ms: 0.246417
   type: 'test'
   ...
 # Subtest: clicking the Sun from a galactic overview still frames its Solar System first
 ok 26 - clicking the Sun from a galactic overview still frames its Solar System first
   ---
-  duration_ms: 0.251333
+  duration_ms: 0.223792
   type: 'test'
   ...
 # Subtest: a second scene click can zoom while centering the current object is still in progress
 ok 27 - a second scene click can zoom while centering the current object is still in progress
   ---
-  duration_ms: 0.210166
+  duration_ms: 0.209208
   type: 'test'
   ...
 # Subtest: selection emphasis previews immediately before the next detailed owner is ready
 ok 28 - selection emphasis previews immediately before the next detailed owner is ready
   ---
-  duration_ms: 0.208958
+  duration_ms: 0.2095
   type: 'test'
   ...
 # Subtest: empty-space clicks leave selection, camera and card unchanged (wide=false)
 ok 29 - empty-space clicks leave selection, camera and card unchanged (wide=false)
   ---
-  duration_ms: 2.246167
+  duration_ms: 0.759333
   type: 'test'
   ...
 # Subtest: empty-space clicks leave selection, camera and card unchanged (wide=true)
 ok 30 - empty-space clicks leave selection, camera and card unchanged (wide=true)
   ---
-  duration_ms: 0.284416
+  duration_ms: 0.260834
   type: 'test'
   ...
 # Subtest: overview breadcrumbs reframe, select the card, and retain separate history entries
 ok 31 - overview breadcrumbs reframe, select the card, and retain separate history entries
   ---
-  duration_ms: 0.603583
+  duration_ms: 0.67175
   type: 'test'
   ...
 # Subtest: overview links preserve native modifier clicks and exact saved views
 ok 32 - overview links preserve native modifier clicks and exact saved views
   ---
-  duration_ms: 0.233542
+  duration_ms: 0.246917
   type: 'test'
   ...
 # Subtest: a direct overview URL frames once, but a saved overview URL retains its camera
 ok 33 - a direct overview URL frames once, but a saved overview URL retains its camera
   ---
-  duration_ms: 0.252416
+  duration_ms: 0.258792
   type: 'test'
   ...
 # Subtest: selecting another list body during a flight still uses its system framing
 ok 34 - selecting another list body during a flight still uses its system framing
   ---
-  duration_ms: 0.261667
+  duration_ms: 0.262208
   type: 'test'
   ...
 # Subtest: search contains every object, including the Sun; only planets enter the scale
 ok 35 - search contains every object, including the Sun; only planets enter the scale
   ---
-  duration_ms: 0.773292
+  duration_ms: 0.765208
   type: 'test'
   ...
 # Subtest: prepared marker identity, atlas order, and presentation follow packages
 ok 36 - prepared marker identity, atlas order, and presentation follow packages
   ---
-  duration_ms: 72.305625
+  duration_ms: 124.942209
   type: 'test'
   ...
 # Subtest: an unknown object loads its own marker; missing packages fail without fallback
 ok 37 - an unknown object loads its own marker; missing packages fail without fallback
   ---
-  duration_ms: 63.767
+  duration_ms: 78.393125
   type: 'test'
   ...
 # Subtest: scale overrides must form a complete presentation after inheritance
 ok 38 - scale overrides must form a complete presentation after inheritance
   ---
-  duration_ms: 0.338167
+  duration_ms: 0.35225
   type: 'test'
   ...
 # Subtest: accepts a complete non-NASA package and still rejects corrupt or undeclared bytes
 ok 39 - accepts a complete non-NASA package and still rejects corrupt or undeclared bytes
   ---
-  duration_ms: 13.123667
+  duration_ms: 14.578041
   type: 'test'
   ...
 # Subtest: derives the complete owned file contract from planet identity
 ok 40 - derives the complete owned file contract from planet identity
   ---
-  duration_ms: 0.252458
+  duration_ms: 0.240917
   type: 'test'
   ...
 # Subtest: requires every registered object package file
 ok 41 - requires every registered object package file
   ---
-  duration_ms: 171.851875
+  duration_ms: 309.692333
   type: 'test'
   ...
 # Subtest: validates local editorial identity and provenance
 ok 42 - validates local editorial identity and provenance
   ---
-  duration_ms: 0.951875
+  duration_ms: 0.928833
   type: 'test'
   ...
 # Subtest: validates runtime asset manifest entries
 ok 43 - validates runtime asset manifest entries
   ---
-  duration_ms: 0.135541
+  duration_ms: 0.117416
   type: 'test'
   ...
 # Subtest: defines one generic renderable-object contract
 ok 44 - defines one generic renderable-object contract
   ---
-  duration_ms: 0.571041
+  duration_ms: 0.656875
   type: 'test'
   ...
 # Subtest: world-frame capability is validated and copied at the registry boundary
 ok 45 - world-frame capability is validated and copied at the registry boundary
   ---
-  duration_ms: 2.591959
+  duration_ms: 3.0605
   type: 'test'
   ...
 # Subtest: rejects invalid object definitions and renderer-specific fields
 ok 46 - rejects invalid object definitions and renderer-specific fields
   ---
-  duration_ms: 0.268208
+  duration_ms: 0.36325
   type: 'test'
   ...
 # Subtest: keeps one open-ended object registry with unique ids and routes
 ok 47 - keeps one open-ended object registry with unique ids and routes
   ---
-  duration_ms: 0.358458
+  duration_ms: 0.389792
   type: 'test'
   ...
 # Subtest: derives deterministic test discovery from an authored object id
 ok 48 - derives deterministic test discovery from an authored object id
   ---
-  duration_ms: 6.61425
+  duration_ms: 6.340083
   type: 'test'
   ...
 # Subtest: derives shared preparation and external browser scripts from the descriptor
 ok 49 - derives shared preparation and external browser scripts from the descriptor
   ---
-  duration_ms: 2.665041
+  duration_ms: 2.864
   type: 'test'
   ...
 # Subtest: loading remembers latest intent but cannot resume; media events never rewrite intent
 ok 50 - loading remembers latest intent but cannot resume; media events never rewrite intent
   ---
-  duration_ms: 2.516625
+  duration_ms: 2.994959
   type: 'test'
   ...
 # Subtest: playback reads cannot consume a pending media notification
 ok 51 - playback reads cannot consume a pending media notification
   ---
-  duration_ms: 0.354042
+  duration_ms: 0.371791
   type: 'test'
   ...
 # Subtest: repeated restoration has bounded subscriptions; old callbacks cannot affect the replacement
 ok 52 - repeated restoration has bounded subscriptions; old callbacks cannot affect the replacement
   ---
-  duration_ms: 0.855625
+  duration_ms: 1.923583
   type: 'test'
   ...
 # Subtest: malformed mounts retain cleanup handles and failure cleanup survives a destructor error
 ok 53 - malformed mounts retain cleanup handles and failure cleanup survives a destructor error
   ---
-  duration_ms: 0.225541
+  duration_ms: 0.284209
   type: 'test'
   ...
 # Subtest: malformed mounts still observe their rejected readiness promise
 ok 54 - malformed mounts still observe their rejected readiness promise
   ---
-  duration_ms: 0.782875
+  duration_ms: 0.309792
   type: 'test'
   ...
 # Subtest: fatal pause failure cleans once and never publishes success
 ok 55 - fatal pause failure cleans once and never publishes success
   ---
-  duration_ms: 0.139333
+  duration_ms: 0.150917
   type: 'test'
   ...
 # Subtest: fatal resume failure cleans once and never publishes success
 ok 56 - fatal resume failure cleans once and never publishes success
   ---
-  duration_ms: 0.099375
+  duration_ms: 0.112708
   type: 'test'
   ...
 # Subtest: fatal report failure cleans once and never publishes success
 ok 57 - fatal report failure cleans once and never publishes success
   ---
-  duration_ms: 0.064334
+  duration_ms: 0.077042
   type: 'test'
   ...
 # Subtest: an object destination can pause shared motion, and a retired object cannot change intent
 ok 58 - an object destination can pause shared motion, and a retired object cannot change intent
   ---
-  duration_ms: 0.151625
+  duration_ms: 0.16925
   type: 'test'
   ...
 # Subtest: normalizes only explicit safe local runtime URLs
 ok 59 - normalizes only explicit safe local runtime URLs
   ---
-  duration_ms: 6.694541
+  duration_ms: 6.635375
   type: 'test'
   ...
 # Subtest: prepares and verifies the exact declared byte closure
 ok 60 - prepares and verifies the exact declared byte closure
   ---
-  duration_ms: 4.802667
+  duration_ms: 5.036459
   type: 'test'
   ...
 # Subtest: rejects undeclared public files and removes only undeclared production files
 ok 61 - rejects undeclared public files and removes only undeclared production files
   ---
-  duration_ms: 2.713583
+  duration_ms: 2.601
   type: 'test'
   ...
 # Subtest: validates and verifies every authoritative source entry class
 ok 62 - validates and verifies every authoritative source entry class
   ---
-  duration_ms: 7.831958
+  duration_ms: 8.308292
   type: 'test'
   ...
 # Subtest: rejects a declared file missing from the source tree
 ok 63 - rejects a declared file missing from the source tree
   ---
-  duration_ms: 0.564167
+  duration_ms: 0.628709
   type: 'test'
   ...
 # Subtest: streamed verification detects late corruption and truncation across file chunks
 ok 64 - streamed verification detects late corruption and truncation across file chunks
   ---
-  duration_ms: 2.647834
+  duration_ms: 2.670917
   type: 'test'
   ...
 # Subtest: asteroid-2001-sn263: PDS component, units, input closure and shape agree
 ok 65 - asteroid-2001-sn263: PDS component, units, input closure and shape agree
   ---
-  duration_ms: 40.508625
+  duration_ms: 43.486333
   type: 'test'
   ...
 # Subtest: asteroid-2001-sn263: prepared mesh preserves closed shape and bounded source fit
 ok 66 - asteroid-2001-sn263: prepared mesh preserves closed shape and bounded source fit
   ---
-  duration_ms: 25.673625
+  duration_ms: 25.015083
   type: 'test'
   ...
 # Subtest: sn263-beta: PDS component, units, input closure and shape agree
 ok 67 - sn263-beta: PDS component, units, input closure and shape agree
   ---
-  duration_ms: 41.032084
+  duration_ms: 44.816834
   type: 'test'
   ...
 # Subtest: sn263-beta: prepared mesh preserves closed shape and bounded source fit
 ok 68 - sn263-beta: prepared mesh preserves closed shape and bounded source fit
   ---
-  duration_ms: 25.242417
+  duration_ms: 24.511041
   type: 'test'
   ...
 # Subtest: sn263-beta: the parent context has source-backed point photometry
 ok 69 - sn263-beta: the parent context has source-backed point photometry
   ---
-  duration_ms: 125.491333
+  duration_ms: 127.469541
   type: 'test'
   ...
 # Subtest: sn263-gamma: PDS component, units, input closure and shape agree
 ok 70 - sn263-gamma: PDS component, units, input closure and shape agree
   ---
-  duration_ms: 40.678958
+  duration_ms: 44.214459
   type: 'test'
   ...
 # Subtest: sn263-gamma: prepared mesh preserves closed shape and bounded source fit
 ok 71 - sn263-gamma: prepared mesh preserves closed shape and bounded source fit
   ---
-  duration_ms: 25.115792
+  duration_ms: 25.386416
   type: 'test'
   ...
 # Subtest: sn263-gamma: the parent context has source-backed point photometry
 ok 72 - sn263-gamma: the parent context has source-backed point photometry
   ---
-  duration_ms: 127.897917
+  duration_ms: 127.245458
   type: 'test'
   ...
 # Subtest: retained companion states preserve primary centers, solution gravity and independent composition
 ok 73 - retained companion states preserve primary centers, solution gravity and independent composition
   ---
-  duration_ms: 5.598708
+  duration_ms: 6.166416
   type: 'test'
   ...
 # Subtest: source closure rejects wrong scale, gravity, frames, altered bytes and false center composition
 ok 74 - source closure rejects wrong scale, gravity, frames, altered bytes and false center composition
   ---
-  duration_ms: 7.652292
+  duration_ms: 7.29525
   type: 'test'
   ...
 # Subtest: Squannit uses its published longitude, retrograde plane and quadratic drift with an analytic velocity
 ok 75 - Squannit uses its published longitude, retrograde plane and quadratic drift with an analytic velocity
   ---
-  duration_ms: 1.119959
+  duration_ms: 1.553167
   type: 'test'
   ...
 # Subtest: Romulus retains its actual source projection disagreements and numbered-parent vector
 ok 76 - Romulus retains its actual source projection disagreements and numbered-parent vector
   ---
-  duration_ms: 14.075209
+  duration_ms: 15.040166
   type: 'test'
   ...
 # Subtest: SN263 source snapshots retain the outer/inner identities and the independent epoch anchors
 ok 77 - SN263 source snapshots retain the outer/inner identities and the independent epoch anchors
   ---
-  duration_ms: 1.050167
+  duration_ms: 1.060792
   type: 'test'
   ...
 # Subtest: scene-state generator rejects partial selection before replacing any output
 ok 78 - scene-state generator rejects partial selection before replacing any output
   ---
-  duration_ms: 32.967583
+  duration_ms: 30.091959
   type: 'test'
   ...
 # Subtest: scene-state generator writes all six records only after every source validates
 ok 79 - scene-state generator writes all six records only after every source validates
   ---
-  duration_ms: 57.070792
+  duration_ms: 55.353334
   type: 'test'
   ...
 # Subtest: atlas insertions rebind semantic ids while preserving object-owned sprites
 ok 80 - atlas insertions rebind semantic ids while preserving object-owned sprites
   ---
-  duration_ms: 0.775042
+  duration_ms: 0.6975
   type: 'test'
   ...
 # Subtest: primary-specific companion sources define one global parent origin and conic at the scene epoch
 ok 81 - primary-specific companion sources define one global parent origin and conic at the scene epoch
   ---
-  duration_ms: 2.87575
+  duration_ms: 2.665166
   type: 'test'
   ...
 # Subtest: phobos: the published position and orbit plane reproduce retained Horizons, not the displaced compact fit
 ok 82 - phobos: the published position and orbit plane reproduce retained Horizons, not the displaced compact fit
   ---
-  duration_ms: 0.442833
+  duration_ms: 0.339166
   type: 'test'
   ...
 # Subtest: mimas: the published position and orbit plane reproduce retained Horizons, not the displaced compact fit
 ok 83 - mimas: the published position and orbit plane reproduce retained Horizons, not the displaced compact fit
   ---
-  duration_ms: 0.075083
+  duration_ms: 0.064959
   type: 'test'
   ...
 # Subtest: janus: the published position and orbit plane reproduce retained Horizons, not the displaced compact fit
 ok 84 - janus: the published position and orbit plane reproduce retained Horizons, not the displaced compact fit
   ---
-  duration_ms: 0.062208
+  duration_ms: 0.061042
   type: 'test'
   ...
 # Subtest: epimetheus: the published position and orbit plane reproduce retained Horizons, not the displaced compact fit
 ok 85 - epimetheus: the published position and orbit plane reproduce retained Horizons, not the displaced compact fit
   ---
-  duration_ms: 0.056209
+  duration_ms: 0.051458
   type: 'test'
   ...
 # Subtest: helene: the published position and orbit plane reproduce retained Horizons, not the displaced compact fit
 ok 86 - helene: the published position and orbit plane reproduce retained Horizons, not the displaced compact fit
   ---
-  duration_ms: 0.055333
+  duration_ms: 0.047833
   type: 'test'
   ...
 # Subtest: triton: the published position and orbit plane reproduce retained Horizons, not the displaced compact fit
 ok 87 - triton: the published position and orbit plane reproduce retained Horizons, not the displaced compact fit
   ---
-  duration_ms: 0.056708
+  duration_ms: 0.05625
   type: 'test'
   ...
 # Subtest: Earth is displaced from the EMB by the retained Earth-center vector and the Moon shares that same parent
 ok 88 - Earth is displaced from the EMB by the retained Earth-center vector and the Moon shares that same parent
   ---
-  duration_ms: 0.35025
+  duration_ms: 0.314291
   type: 'test'
   ...
 # Subtest: regeneration retains every current registry orbit, including moons and comets
 ok 89 - regeneration retains every current registry orbit, including moons and comets
   ---
-  duration_ms: 0.14025
+  duration_ms: 0.168708
   type: 'test'
   ...
 # Subtest: a frozen snapshot fails closed on stale epoch, corrupted bytes, wrong center and missing body
 ok 90 - a frozen snapshot fails closed on stale epoch, corrupted bytes, wrong center and missing body
   ---
-  duration_ms: 7.739292
+  duration_ms: 7.550666
   type: 'test'
   ...
 # Subtest: epoch refresh updates the rendered carrier while preserving source geometry, texture addresses and lens bindings
 ok 91 - epoch refresh updates the rendered carrier while preserving source geometry, texture addresses and lens bindings
   ---
-  duration_ms: 484.043959
+  duration_ms: 491.730709
   type: 'test'
   ...
 # Subtest: epoch refresh restores a compiled surface before updating its physical frame
 not ok 92 - epoch refresh restores a compiled surface before updating its physical frame
   ---
-  duration_ms: 37.594084
+  duration_ms: 42.148334
   type: 'test'
   location: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-solar-geometry.test.mjs:116:1'
   failureType: 'testCodeFailure'
@@ -571,4 +571,4 @@ not ok 92 - epoch refresh restores a compiled surface before updating its physic
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 2603.1975
+# duration_ms 2987.812167

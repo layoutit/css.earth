@@ -1,0 +1,60 @@
+{
+  "repository": "CelestiaProject/Celestia",
+  "commit": "e9997cc011a57fdcc507f4ef5352bfd03cb17a6b",
+  "files": [
+    {
+      "path": "celengine/spheremesh.cpp",
+      "sha256": "21c0a6d2ccec417e5e6e0bd88bf010eb82800da87b372aaf61594e84dc5f15d9",
+      "bytes": 8481,
+      "url": "https://raw.githubusercontent.com/CelestiaProject/Celestia/e9997cc011a57fdcc507f4ef5352bfd03cb17a6b/src/celengine/spheremesh.cpp"
+    },
+    {
+      "path": "celengine/spheremesh.h",
+      "sha256": "2ef0123fa386d931a66ee3822833d32837b3eda4e8d89bec6f6e9f7a6a1fad3d",
+      "bytes": 1488,
+      "url": "https://raw.githubusercontent.com/CelestiaProject/Celestia/e9997cc011a57fdcc507f4ef5352bfd03cb17a6b/src/celengine/spheremesh.h"
+    },
+    {
+      "path": "celmath/randutils.cpp",
+      "sha256": "cc30e211c3631c9ba40123a43709c4bd4dd50fe5beade1d6035a2f3bf9f81530",
+      "bytes": 7324,
+      "url": "https://raw.githubusercontent.com/CelestiaProject/Celestia/e9997cc011a57fdcc507f4ef5352bfd03cb17a6b/src/celmath/randutils.cpp"
+    },
+    {
+      "path": "celmath/randutils.h",
+      "sha256": "9521fcba76504c1f0abe820986d8f3545c62d8bd90cbb2817b17943b085d7157",
+      "bytes": 1844,
+      "url": "https://raw.githubusercontent.com/CelestiaProject/Celestia/e9997cc011a57fdcc507f4ef5352bfd03cb17a6b/src/celmath/randutils.h"
+    },
+    {
+      "path": "celmath/mathlib.h",
+      "sha256": "769ba4dadb3f3504ffff4075ed5f9e816a2b0bb05ffb148bbc3b7953dd38cd31",
+      "bytes": 7321,
+      "url": "https://raw.githubusercontent.com/CelestiaProject/Celestia/e9997cc011a57fdcc507f4ef5352bfd03cb17a6b/src/celmath/mathlib.h"
+    },
+    {
+      "path": "celcompat/numbers.h",
+      "sha256": "7a2a362a68f2ce1ef45c848a452d6f0dce526ae4f8db329d6731d26b0b17587c",
+      "bytes": 927,
+      "url": "https://raw.githubusercontent.com/CelestiaProject/Celestia/e9997cc011a57fdcc507f4ef5352bfd03cb17a6b/src/celcompat/numbers.h"
+    },
+    {
+      "path": "meshmanager.cpp",
+      "sha256": "2bb619c39b7df80eb4b9fa2a8917aa63e4fcba9d6ba1a6e873d86fdfbc94ba2b",
+      "bytes": 23698,
+      "purpose": "Reference for loader parameters and bounding-box normalization, not linked into exporter"
+    },
+    {
+      "path": "model.cpp",
+      "sha256": "7b6e4e9fcbe6031d10e2d574d528d5db0c7bc3cde0fe5f750f604d30abed6692",
+      "bytes": 8741,
+      "purpose": "Reference for loader parameters and bounding-box normalization, not linked into exporter"
+    }
+  ],
+  "eigen": {
+    "version": "3.4.0",
+    "url": "https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz",
+    "sha256": "8586084f71f9bde545ee7fa6d00288b264a2b7ac3607b974e54d13e7162c1c72"
+  },
+  "seed": 20260909
+}

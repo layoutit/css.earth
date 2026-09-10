@@ -1,0 +1,361 @@
+{
+  "ok": true,
+  "browser": "152.0.7977.84",
+  "baseUrl": "http://127.0.0.1:53135",
+  "capturedAt": "2026-09-10T10:32:54.490Z",
+  "qualification": "Natural-clock browser interaction checks; no native parity claim.",
+  "reports": [
+    {
+      "id": "comet-c2014-un271",
+      "case": "initial-shell",
+      "skipped": true
+    },
+    {
+      "id": "comet-c2014-un271",
+      "viewport": "desktop",
+      "motionActivation": "retained-input",
+      "surfaceFlyTo": {
+        "pitchDelta": -20.548701137359885,
+        "zoomRatio": 2.811031256212087
+      },
+      "zoomPublication": {
+        "skyCube": 0,
+        "skyOrientation": 0
+      },
+      "projectiveTextureReport": {
+        "texturedLeafCount": 800,
+        "nestedProjectiveTextureCount": 0,
+        "finiteTextureBounds": true
+      },
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 6,
+      "stageElements": 123486,
+      "stable": true,
+      "retainedProof": {
+        "initialNodeCount": 123486,
+        "currentNodeCount": 123486,
+        "maximumNodeCount": 123486,
+        "initialNodesIntact": true,
+        "shellTextNodesIntact": true,
+        "undeclaredAddedRoots": [],
+        "undeclaredRemovedRoots": [],
+        "allowedMounts": []
+      }
+    },
+    {
+      "id": "comet-c2014-un271",
+      "viewport": "mobile",
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 6,
+      "stageElements": 123486,
+      "stable": true
+    },
+    {
+      "id": "comet-c2014-un271",
+      "case": "dataset-interactions",
+      "skipped": true
+    },
+    {
+      "id": "comet-c2014-un271",
+      "case": "dataset-interactions-dpr-2",
+      "skipped": true
+    },
+    {
+      "id": "comet-c2014-un271",
+      "case": "pre-ready-hidden-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "comet-c2014-un271",
+      "case": "pre-ready-visible-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "comet-c2014-un271",
+      "case": "pre-ready-hidden-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "comet-c2014-un271",
+      "case": "pre-ready-visible-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "comet-c2014-un271",
+      "viewport": "dpr-1",
+      "selectedDensity": 2,
+      "requestedCanonicalAssets": [
+        "/scenes/comet-c2014-un271/comet-c2014-un271-lighting.webp",
+        "/scenes/comet-c2014-un271/comet-c2014-un271-model-surface@2x.webp"
+      ],
+      "skyboxPointerBoundary": [
+        {
+          "zoom": 0.8780869565217393,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        },
+        {
+          "zoom": 0.5707565217391306,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        }
+      ],
+      "interactionInterruptions": {
+        "wheelInterruptedInertia": true,
+        "wheelZoomRatio": 1.2908752418181817,
+        "wheelAnchorRotationApplied": true,
+        "pointerStoppedInertia": true,
+        "captureLossStoppedDrag": true,
+        "wheelCoexistedWithFlyTo": true,
+        "dragInterruptedFlyTo": true,
+        "repeatedDoubleClickRestartedFlyTo": true,
+        "flyToCompletedAndRested": true,
+        "activeMotionCount": 0
+      },
+      "wheelTakeover": {
+        "bodyPressStopsWheel": true,
+        "skyPressStopsWheel": true,
+        "resetStopsWheel": true,
+        "heldWheelCancelsGrab": true
+      },
+      "releasePosition": {
+        "nonLaunchingReleaseRetainsDragPose": true,
+        "pausedReleaseCannotRestartMotion": true
+      },
+      "video": "comet-c2014-un271-dpr-1.webm"
+    },
+    {
+      "id": "comet-c2014-un271",
+      "viewport": "dpr-2",
+      "selectedDensity": 2,
+      "requestedCanonicalAssets": [
+        "/scenes/comet-c2014-un271/comet-c2014-un271-lighting.webp",
+        "/scenes/comet-c2014-un271/comet-c2014-un271-model-surface@2x.webp"
+      ],
+      "skyboxPointerBoundary": [
+        {
+          "zoom": 0.8780869565217393,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        },
+        {
+          "zoom": 0.5707565217391306,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        }
+      ],
+      "interactionInterruptions": {
+        "wheelInterruptedInertia": true,
+        "wheelZoomRatio": 1.6839073054545455,
+        "wheelAnchorRotationApplied": true,
+        "pointerStoppedInertia": true,
+        "captureLossStoppedDrag": true,
+        "wheelCoexistedWithFlyTo": true,
+        "dragInterruptedFlyTo": true,
+        "repeatedDoubleClickRestartedFlyTo": true,
+        "flyToCompletedAndRested": true,
+        "activeMotionCount": 0
+      },
+      "wheelTakeover": {
+        "bodyPressStopsWheel": true,
+        "skyPressStopsWheel": true,
+        "resetStopsWheel": true,
+        "heldWheelCancelsGrab": true
+      },
+      "releasePosition": {
+        "nonLaunchingReleaseRetainsDragPose": true,
+        "pausedReleaseCannotRestartMotion": true
+      },
+      "video": "comet-c2014-un271-dpr-2.webm"
+    }
+  ],
+  "testedPreparedSha256": "a81180790bec9e2d94d061b39e1e53fe1de02f2c291b06426255485bfd6b7990",
+  "stylesheetSha256": "7bbf4dc83bdcf9d5a864c5e0d5965e609d30a952eb05ab1b512cf58b5df6ecff",
+  "solarSystemHandoffs": [
+    {
+      "id": "comet-c2014-un271",
+      "dpr": 1,
+      "scenes": 1,
+      "error": null,
+      "shadows": false,
+      "orbit": false,
+      "datasets": [
+        "Illustrative nucleusCelestia"
+      ]
+    },
+    {
+      "id": "comet-c2014-un271",
+      "dpr": 2,
+      "scenes": 1,
+      "error": null,
+      "shadows": false,
+      "orbit": false,
+      "datasets": [
+        "Illustrative nucleusCelestia"
+      ]
+    }
+  ],
+  "reuse": {
+    "base": "d8d266542",
+    "currentPreparedSha256": "a81180790bec9e2d94d061b39e1e53fe1de02f2c291b06426255485bfd6b7990",
+    "stylesheetBytesUnchanged": true,
+    "preparedRuntimeBytesUnchanged": true,
+    "reason": "Only stylesheet ownership/path and documentation placement changed after capture. Native sources, prepared geometry, materials, cameras, atlas bindings and controls are byte-identical.",
+    "emittedCssSha256": "df74204a94f03935287cfe3b2a7cb346cc2e63956c4b7ec1249d1158dec26f6c",
+    "emittedCssUnchanged": true
+  },
+  "afterStylesheetRelocation": {
+    "ok": true,
+    "browser": "152.0.7977.84",
+    "baseUrl": "http://127.0.0.1:53135",
+    "capturedAt": "2026-09-10T10:50:13.512Z",
+    "qualification": "Natural-clock browser interaction checks; no native parity claim.",
+    "reports": [
+      {
+        "id": "comet-c2014-un271",
+        "case": "initial-shell",
+        "skipped": true
+      },
+      {
+        "id": "comet-c2014-un271",
+        "viewport": "desktop",
+        "motionActivation": "retained-input",
+        "surfaceFlyTo": {
+          "pitchDelta": -20.54870119308876,
+          "zoomRatio": 2.8110312558133748
+        },
+        "zoomPublication": {
+          "skyCube": 0,
+          "skyOrientation": 0
+        },
+        "projectiveTextureReport": {
+          "texturedLeafCount": 800,
+          "nestedProjectiveTextureCount": 0,
+          "finiteTextureBounds": true
+        },
+        "mountedPlanets": 1,
+        "stageCount": 1,
+        "cameraCount": 1,
+        "canvasCount": 0,
+        "sceneSvgCount": 0,
+        "stageChildren": 6,
+        "stageElements": 123486,
+        "stable": true,
+        "retainedProof": {
+          "initialNodeCount": 123486,
+          "currentNodeCount": 123486,
+          "maximumNodeCount": 123486,
+          "initialNodesIntact": true,
+          "shellTextNodesIntact": true,
+          "undeclaredAddedRoots": [],
+          "undeclaredRemovedRoots": [],
+          "allowedMounts": []
+        }
+      },
+      {
+        "id": "comet-c2014-un271",
+        "viewport": "mobile",
+        "mountedPlanets": 1,
+        "stageCount": 1,
+        "cameraCount": 1,
+        "canvasCount": 0,
+        "sceneSvgCount": 0,
+        "stageChildren": 6,
+        "stageElements": 123486,
+        "stable": true
+      },
+      {
+        "id": "comet-c2014-un271",
+        "case": "dataset-interactions",
+        "skipped": true
+      },
+      {
+        "id": "comet-c2014-un271",
+        "case": "dataset-interactions-dpr-2",
+        "skipped": true
+      },
+      {
+        "id": "comet-c2014-un271",
+        "case": "pre-ready-hidden-motion-off",
+        "skipped": true
+      },
+      {
+        "id": "comet-c2014-un271",
+        "case": "pre-ready-visible-motion-off",
+        "skipped": true
+      },
+      {
+        "id": "comet-c2014-un271",
+        "case": "pre-ready-hidden-motion-on",
+        "skipped": true
+      },
+      {
+        "id": "comet-c2014-un271",
+        "case": "pre-ready-visible-motion-on",
+        "skipped": true
+      },
+      {
+        "id": "comet-c2014-un271",
+        "case": "dpr-1",
+        "skipped": true
+      },
+      {
+        "id": "comet-c2014-un271",
+        "case": "dpr-2",
+        "skipped": true
+      }
+    ]
+  }
+}
