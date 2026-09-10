@@ -11,6 +11,7 @@ export interface SurfaceMapRecipe extends SurfaceMapInput {path: string; name: s
 export interface SurfaceAssetsConfiguration {surface: {width: number; height: number; quality: number; maps: readonly SurfaceMapRecipe[];
   clouds: {path: string; maximumAlpha: number; threshold: number; scale: number; color: readonly number[]}};}
 export interface PagedAssetConfiguration extends PagedSceneProfile, SurfaceAssetsConfiguration, AtmosphereConfiguration {
-  material: AtmosphereConfiguration['material'] & {frameCount: number; worldLight: readonly number[]; solarTint: string};
+  material: AtmosphereConfiguration['material'] & {frameCount: number; worldLight: readonly number[]; solarTint: string;
+    shadowlessOverlay?: {color: readonly [number, number, number]; opacity: number}};
   interiorPath: string; interiorSchema: string;
 }
