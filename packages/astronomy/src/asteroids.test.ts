@@ -57,7 +57,10 @@ describe('asteroid positions against JPL Horizons', () => {
       // Bounds retained from the merged Centaur and original population checks.
       'chariklo': 538, 'bienor': 944, 'diomedes': 426, 'ajax': 973, 'ilioneus': 561, 'pyrrhus': 530, 'eumelos': 573, 'lycomedes': 958, 'demodokus': 1682, 'menelaus': 1054, 'agenor': 607, 'mentor': 1444, 'ivar': 375, 'toro': 194, 'cerberus': 341, 'tantalus': 217, 'aethra': 343, 'lyyli': 764, 'hela': 4172, 'kemi': 353, 'taurinensis': 189,
       // SN263: ceil(maximum independently measured 30-day endpoint error * 1.05).
-      'asteroid-2001-sn263': 250 }
+      'asteroid-2001-sn263': 250,
+      // Dinkinesh: ceil(991.491 km independent endpoint maximum * 1.05).
+      // Retained samples and measured errors: src/planets/dinkinesh/evidence/galileo-lucy/orbit-errors.json.
+      dinkinesh: 1042 }
     for (const id of SMALL_BODY_IDS) for (const row of [ASTEROID_FIXTURES[id].rows[0], ASTEROID_FIXTURES[id].rows[2]]) {
       const actual = asteroidPositionKm(id, row.jd)
       expect(Math.hypot(...actual.map((v, i) => v - row.position[i]!))).toBeLessThan(maximumErrorKm[id])

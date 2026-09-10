@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import { BODIES, M_PER_KM } from '@cssearth/astronomy';
+import { BODIES, M_PER_KM, isSceneSatellite, sceneSatelliteStateKm } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { parseWorldContextSource, prepareWorldContext } from '../../src/preparation/spatial-context.js';
 import type { OrbitalState, Vector3, WorldContextBodyFact, WorldContextOrbitCenter } from '../../src/preparation/spatial-context.js';
@@ -33,7 +33,9 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     const objects = await readCatalog(options.objectsDirectory);
     input.bodies = objects.filter(body => body.context && body.id !== input.focus.id)
       .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'))
-      .map(body => ({ id: body.id, name: body.context!.name ?? body.name, color: body.context!.color ?? body.color }));
+      .map(body => ({ id: body.id, name: body.context!.name ?? body.name, color: body.context!.color ?? body.color,
+        ...(isSceneSatellite(body.id) && sceneSatelliteStateKm(body.id, input.frame.epochJdTt).provenance.placement === 'approximate'
+          ? { placement: 'approximate' as const } : {}) }));
   }
   const source = parseWorldContextSource(input);
   const geometry = await loadSolarGeometry(options.solarGeometryPath);

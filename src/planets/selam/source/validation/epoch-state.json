@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-published-body-epoch-ephemeris@1",
+  "id": "selam",
+  "centerBodyId": "dinkinesh",
+  "epochJdTt": 2461286.5,
+  "referenceFrame": "ICRF",
+  "units": "KM-D",
+  "correction": "NONE",
+  "runtimeExtrapolation": false,
+  "positionKm": [
+    -3.0955256781045932,
+    -0.27497042433661745,
+    -0.11921426900852444
+  ],
+  "velocityKmPerDay": [
+    -0.856920033821891,
+    7.93824235458263,
+    3.9411062447384504
+  ],
+  "gravitationalParametersKm3PerS2": {
+    "combined": 3.3030052618709104e-8,
+    "body": 0,
+    "parent": 3.3030052618709104e-8
+  },
+  "source": {
+    "path": "source/orbit/published-parameters.json",
+    "bytes": 1555,
+    "sha256": "b0320fd5cf6ae56cffed5d03920b522e2c574c8630be0d2e61a53a163cc25324"
+  },
+  "limitations": [
+    "Approximate orbital placement. The 3.11 km separation and 52.67-hour period are measured; circular equatorial motion and synchronous orientation are approximations. The present orbital phase is illustrative.",
+    "Circular equatorial approximation using the primary pole: i=90−beta, ascending node=lambda+90. No node or phase fit is claimed.",
+    "Effective GM=a^3(2pi/P)^2 ensures the display conic agrees with its chosen period. The zero moon GM is a massless display approximation, not a mass measurement."
+  ],
+  "validation": {
+    "sourceEpochState": {
+      "positionKm": [
+        -3.0955256781045932,
+        -0.27497042433661745,
+        -0.11921426900852444
+      ],
+      "velocityKmPerDay": [
+        -0.856920033821891,
+        7.93824235458263,
+        3.9411062447384504
+      ]
+    },
+    "scope": "Arithmetic consistency of the declared illustrative conic only; no independent 2026 phase or astrometric residual is available."
+  }
+}

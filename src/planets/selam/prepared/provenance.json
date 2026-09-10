@@ -1,0 +1,343 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "selam",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "9b95b8d823e19e8a4bfefd0e6b4e76c9b90e490fb356fadf6665c6e1cd54b4e5"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "d29c4c1843ac014a1c90495873a6c2308d821f66c6c45f3d3926254f185e4c29",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "selam",
+        "displayName": "Selam",
+        "publicBase": "/scenes/selam/",
+        "distanceAu": 2.073581431805674,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [],
+          "observedColors": [],
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 0.14123064709924582,
+          "camera": {
+            "initialScenePitchDegrees": 20,
+            "defaultControlYawDegrees": -45,
+            "framingScale": 0.68
+          },
+          "mapUrl": "/scenes/selam/selam-shape-surface@2x.webp",
+          "polesUrl": "/scenes/selam/selam-shape-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model.json",
+            "format": "contact-ellipsoids",
+            "grid": {
+              "metersPerUnit": 1,
+              "expectedVertices": 516,
+              "expectedFaces": 1024
+            },
+            "faceBudget": 1024,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 1024,
+              "maximumErrorMeters": 3,
+              "regularize": false
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "Two touching ellipsoids reproduce the lobe dimensions inferred from Lucy images: 240 × 200 × 200 m and 280 × 220 × 210 m, each uncertain by about 10%. This is a smooth shape envelope; the neck, craters and surface imagery are unresolved in this representation. Approximate orbital placement. The 3.11 km separation and 52.67-hour period are measured; circular equatorial motion and synchronous orientation are approximations. The present orbital phase is illustrative."
+        },
+        "presentation": {
+          "defaultLens": "shape",
+          "pointColor": [
+            160,
+            160,
+            160
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "8ed02b573b2a405fa64a0db58dc7ccaae1a630caae4f847a29903837892c4354",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "selam",
+        "displayName": "Selam",
+        "panel": {
+          "introduction": "Selam is the first contact-binary moon discovered around an asteroid. Lucy revealed its two touching lobes while passing Dinkinesh in November 2023. Approximate orbital placement. The 3.11 km separation and 52.67-hour period are measured; circular equatorial motion and synchronous orientation are approximations. The present orbital phase is illustrative.",
+          "facts": [
+            {
+              "id": "parent",
+              "label": "Orbits",
+              "value": "Dinkinesh"
+            },
+            {
+              "id": "size",
+              "label": "Size",
+              "value": "About 520 m end to end"
+            },
+            {
+              "id": "shape",
+              "label": "Shape evidence",
+              "value": "Spacecraft images"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "labels": {
+            "shape": "Shape"
+          },
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "detail": "Lucy",
+              "title": "Measured two-lobe envelope",
+              "description": "Two touching ellipsoids reproduce the lobe dimensions inferred from Lucy images: 240 × 200 × 200 m and 280 × 220 × 210 m, each uncertain by about 10%. This is a smooth shape envelope; the neck, craters and surface imagery are unresolved in this representation.",
+              "thumbnail": "/scenes/selam/selam-shape-thumbnail.webp",
+              "surface": "selam-shape-surface@2x.webp",
+              "poles": "selam-shape-poles@2x.webp",
+              "source": {
+                "id": "shape-model",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.1038/s41586-024-07378-0"
+              }
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Levison et al. (2024)",
+            "description": "Lobe dimensions, separation and mutual period",
+            "href": "https://doi.org/10.1038/s41586-024-07378-0",
+            "role": "facts"
+          },
+          {
+            "label": "Bierhaus et al. (2025)",
+            "description": "Later geology and limits of the Selam shape evidence",
+            "href": "https://doi.org/10.3847/PSJ/ae1968",
+            "role": "facts"
+          },
+          {
+            "label": "Mission images",
+            "description": "Resolved encounter observations and context",
+            "role": "observations",
+            "href": "https://science.nasa.gov/mission/lucy/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://doi.org/10.1038/s41586-024-07378-0",
+            "credit": "Levison et al. (2024), Lucy science team"
+          },
+          "physical": {
+            "path": "../measurements.json",
+            "credit": "Levison et al. (2024), Lucy science team"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "shape-model",
+      "path": "shape/model.json",
+      "origin": "https://doi.org/10.1038/s41586-024-07378-0",
+      "credit": "Levison et al. (2024), Lucy science team",
+      "license": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
+      "acquisition": "The checked-in shape/model.json transcribes the cited numerical dimensions; the shared ellipsoid preparer tessellates these parameters.",
+      "redistribution": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
+      "coverage": "Two touching ellipsoids reproduce the lobe dimensions inferred from Lucy images: 240 × 200 × 200 m and 280 × 220 × 210 m, each uncertain by about 10%. This is a smooth shape envelope; the neck, craters and surface imagery are unresolved in this representation.",
+      "sha256": "7b5a16b99d453beddac8a2c98113f020732b1a9fbfd7299855a4a7ac4f920409",
+      "bytes": 316,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Source evidence or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Source evidence or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "8ed02b573b2a405fa64a0db58dc7ccaae1a630caae4f847a29903837892c4354",
+      "bytes": 3229,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Two touching ellipsoids reproduce the lobe dimensions inferred from Lucy images: 240 × 200 × 200 m and 280 × 220 × 210 m, each uncertain by about 10%. This is a smooth shape envelope; the neck, craters and surface imagery are unresolved in this representation."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "shape-model"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/selam/selam-shape-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/selam/selam-shape-surface@2x.webp",
+          "bytes": 85782,
+          "sha256": "7dc35b640776a076939f24a34a5233082c0bd4db9009482b9506fd9cc981bf11",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5362,
+          "sha256": "7c47cbc4877ad9ff590e2b7f58e03c6c3196dadf7cc2dbb3ac5bdd1dad9f5bd9",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 2958,
+          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

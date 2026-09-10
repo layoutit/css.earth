@@ -1,0 +1,114 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "dactyl",
+  "displayName": "Dactyl",
+  "panel": {
+    "introduction": "Dactyl, discovered beside Ida in Galileo images, was the first moon found orbiting an asteroid. Approximate orbital placement. The 1993 encounter did not determine a unique orbit; the present orbital phase is illustrative. A synchronous orientation is assumed, not measured.",
+    "facts": [
+      {
+        "id": "parent",
+        "label": "Orbits",
+        "value": "Ida"
+      },
+      {
+        "id": "size",
+        "label": "Size",
+        "value": "1.6 × 1.4 × 1.2 km"
+      },
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Spacecraft images"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "labels": {
+      "shape": "Shape"
+    },
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "detail": "Galileo",
+        "title": "Galileo shape estimate",
+        "description": "A smooth ellipsoid at the dimensions measured from Galileo images: 1.6 × 1.4 × 1.2 km. Craters and surface imagery are not represented; the grid marks missing imagery.",
+        "thumbnail": "/scenes/dactyl/dactyl-shape-thumbnail.webp",
+        "surface": "dactyl-shape-surface@2x.webp",
+        "poles": "dactyl-shape-poles@2x.webp",
+        "source": {
+          "id": "shape-model",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1006/icar.1996.0045"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Veverka et al. (1996)",
+      "description": "Galileo dimensions, shape and surface observations",
+      "href": "https://doi.org/10.1006/icar.1996.0045",
+      "role": "facts"
+    },
+    {
+      "label": "Belton et al. (1996)",
+      "description": "Discovery and encounter orbit constraints",
+      "href": "https://doi.org/10.1006/icar.1996.0044",
+      "role": "facts"
+    },
+    {
+      "label": "Petit et al. (1997)",
+      "description": "Long-term orbit stability and candidate solutions",
+      "href": "https://doi.org/10.1006/icar.1997.5788",
+      "role": "facts"
+    },
+    {
+      "label": "Mission images",
+      "description": "Resolved encounter observations and context",
+      "role": "observations",
+      "href": "https://science.nasa.gov/photojournal/high-resolution-view-of-dactyl/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.1006/icar.1996.0045",
+      "credit": "Veverka et al. (1996), Galileo imaging team"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Veverka et al. (1996), Galileo imaging team"
+    }
+  }
+}

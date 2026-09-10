@@ -1,0 +1,199 @@
+{
+  "revision": "4414a53073e9cceec11699e4908cd348bf40cb79",
+  "mainRevision": "16774548b140b45e1f8cf50e21b9671055e0823f",
+  "execution": "Sequential; one check at a time",
+  "checks": [
+    {
+      "name": "minimap",
+      "command": [
+        "node",
+        "site/minimap/prepare.mts"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "provenance",
+      "command": [
+        "node",
+        "tools/prepare-provenance.mts",
+        "dactyl",
+        "dinkinesh",
+        "selam",
+        "--verify"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "types-packages",
+      "command": [
+        "pnpm",
+        "--workspace-concurrency=1",
+        "-r",
+        "--filter",
+        "./packages/**",
+        "typecheck"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "typecheck:platform",
+      "command": [
+        "pnpm",
+        "typecheck:platform"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "typecheck:tools",
+      "command": [
+        "pnpm",
+        "typecheck:tools"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "typecheck:shell",
+      "command": [
+        "pnpm",
+        "typecheck:shell"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "typecheck:astro",
+      "command": [
+        "pnpm",
+        "typecheck:astro"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "test-bodies",
+      "command": [
+        "node",
+        "--test",
+        "--test-concurrency=1",
+        "tools/objects/source-authoring/galileo-lucy/orbits.test.mjs",
+        "tests/objects/unit/dactyl/source.test.mjs",
+        "tests/objects/unit/dinkinesh/source.test.mjs",
+        "tests/objects/unit/selam/source.test.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "test-closure",
+      "command": [
+        "node",
+        "--test",
+        "--test-concurrency=1",
+        "--test-name-pattern=^(dactyl|dinkinesh|selam):",
+        "tests/objects/source-closure.test.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "test-astronomy",
+      "command": [
+        "pnpm",
+        "--filter",
+        "@cssearth/astronomy",
+        "exec",
+        "vitest",
+        "run",
+        "--maxWorkers",
+        "1",
+        "--minWorkers",
+        "1"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "test-preparation",
+      "command": [
+        "node",
+        "tools/test-preparation.mts",
+        "--universe"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "test-shell",
+      "command": [
+        "node",
+        "--test",
+        "--test-concurrency=1",
+        "site/test/scene-sources.test.mjs",
+        "site/test/shell-lifetime.test.mjs",
+        "site/test/navigation-router.test.mjs",
+        "site/test/planet-shell.test.mjs",
+        "site/test/router-runtime.test.mjs",
+        "site/test/object-page-data.test.mjs",
+        "site/test/object-navigation.test.mjs",
+        "tools/prepare-marker-bindings.test.mjs",
+        "tools/prepared-activation-groups.test.mjs",
+        "tools/prepared-activation-registry.test.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "build-static",
+      "command": [
+        "pnpm",
+        "exec",
+        "astro",
+        "build"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "assemble-dactyl",
+      "command": [
+        "node",
+        "tools/objects/dist/operations.js",
+        "assemble",
+        "dactyl"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "assemble-dinkinesh",
+      "command": [
+        "node",
+        "tools/objects/dist/operations.js",
+        "assemble",
+        "dinkinesh"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "assemble-selam",
+      "command": [
+        "node",
+        "tools/objects/dist/operations.js",
+        "assemble",
+        "selam"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "assemble-ida",
+      "command": [
+        "node",
+        "tools/objects/dist/operations.js",
+        "assemble",
+        "ida"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "assemble-sun",
+      "command": [
+        "node",
+        "tools/objects/dist/operations.js",
+        "assemble",
+        "sun"
+      ],
+      "exitCode": 0
+    }
+  ]
+}
