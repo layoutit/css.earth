@@ -1,0 +1,168 @@
+{
+  "schema": "iapetus-independent-iss-framing@1",
+  "sourceIssSha256": "eb8acdbed3af495102b6ec6d3efce1f03dc6bc39bb43323c23231ce590494d6e",
+  "recipeSha256": "9a1587feddaad8b031a19b3b5a5665c41c92b3c2dcc0c1667965767de8c31618",
+  "scriptSha256": "6fbe8bf1ab08d86f8c1b46e03095d1c51270a6f5eba0aa64f22e44b767f522ed",
+  "sourceIssTransform": [
+    802.85145591739,
+    0.0,
+    -2312212.1930421,
+    0.0,
+    -802.85145591739,
+    1156106.096521,
+    0.0,
+    0.0,
+    1.0
+  ],
+  "sourceIssCrs": {
+    "proj": "eqc",
+    "lat_ts": 0,
+    "lat_0": 0,
+    "lon_0": 0,
+    "x_0": 0,
+    "y_0": 0,
+    "R": 736000,
+    "units": "m",
+    "no_defs": true
+  },
+  "sourceRadiusMeters": 736000,
+  "observations": [
+    {
+      "id": "1568129671_1",
+      "comparisons": [
+        {
+          "frame": "released-east-north",
+          "comparedNativeSamples": 1600,
+          "pearson": 0.517045974984788,
+          "spearman": 0.5354723121124262
+        },
+        {
+          "frame": "longitude-reversed",
+          "comparedNativeSamples": 1600,
+          "pearson": 0.3234580201672509,
+          "spearman": 0.32784746771586365
+        },
+        {
+          "frame": "longitude-shifted-180",
+          "comparedNativeSamples": 1600,
+          "pearson": 0.3282757608245126,
+          "spearman": 0.2785204399171951
+        },
+        {
+          "frame": "latitude-reversed",
+          "comparedNativeSamples": 1600,
+          "pearson": 0.44271114235751186,
+          "spearman": 0.42187243401187896
+        },
+        {
+          "frame": "longitude-and-latitude-reversed",
+          "comparedNativeSamples": 1600,
+          "pearson": 0.37144809423476266,
+          "spearman": 0.3447254605527071
+        },
+        {
+          "frame": "longitude-reversed-plus-180",
+          "comparedNativeSamples": 1600,
+          "pearson": 0.3789782103964788,
+          "spearman": 0.32773078975134257
+        }
+      ],
+      "quantity": "released IR band25 continuum I/F versus ISS grayscale; diagnostic only"
+    },
+    {
+      "id": "1568133146_2",
+      "comparisons": [
+        {
+          "frame": "released-east-north",
+          "comparedNativeSamples": 676,
+          "pearson": 0.4894979283771788,
+          "spearman": 0.3550713764950062
+        },
+        {
+          "frame": "longitude-reversed",
+          "comparedNativeSamples": 676,
+          "pearson": -0.03162215154007594,
+          "spearman": -0.0027810313074884485
+        },
+        {
+          "frame": "longitude-shifted-180",
+          "comparedNativeSamples": 676,
+          "pearson": 0.02372559379455955,
+          "spearman": 0.015829683150370203
+        },
+        {
+          "frame": "latitude-reversed",
+          "comparedNativeSamples": 676,
+          "pearson": 0.20298871210191713,
+          "spearman": 0.234937087552926
+        },
+        {
+          "frame": "longitude-and-latitude-reversed",
+          "comparedNativeSamples": 676,
+          "pearson": 0.024877009769804816,
+          "spearman": 0.021655956899022537
+        },
+        {
+          "frame": "longitude-reversed-plus-180",
+          "comparedNativeSamples": 676,
+          "pearson": 0.14189311206016264,
+          "spearman": -0.011360964321007517
+        }
+      ],
+      "quantity": "released IR band25 continuum I/F versus ISS grayscale; diagnostic only"
+    },
+    {
+      "id": "1568157352_4",
+      "comparisons": [
+        {
+          "frame": "released-east-north",
+          "comparedNativeSamples": 934,
+          "pearson": 0.4331594496026089,
+          "spearman": 0.43736703630435253
+        },
+        {
+          "frame": "longitude-reversed",
+          "comparedNativeSamples": 934,
+          "pearson": 0.22765053056711043,
+          "spearman": 0.21190786013837726
+        },
+        {
+          "frame": "longitude-shifted-180",
+          "comparedNativeSamples": 934,
+          "pearson": 0.10973984000364621,
+          "spearman": 0.07262851678486248
+        },
+        {
+          "frame": "latitude-reversed",
+          "comparedNativeSamples": 934,
+          "pearson": 0.23165403601347176,
+          "spearman": 0.23131536696683608
+        },
+        {
+          "frame": "longitude-and-latitude-reversed",
+          "comparedNativeSamples": 934,
+          "pearson": 0.214026726012369,
+          "spearman": 0.23941139300862257
+        },
+        {
+          "frame": "longitude-reversed-plus-180",
+          "comparedNativeSamples": 934,
+          "pearson": 0.21620994527732543,
+          "spearman": 0.2238192858289928
+        }
+      ],
+      "quantity": "released IR band25 continuum I/F versus ISS grayscale; diagnostic only"
+    }
+  ],
+  "panel": "iss-framing.png",
+  "panelSha256": "ae8431eb0e3b7b910fd21122c6e3bf3d1af4108b5aa2d11b1a911ec486a1917f",
+  "scope": "Independent gross-framing comparison. No control-point fit, subpixel registration or pointing-uncertainty bound.",
+  "limits": [
+    "Different wavelengths, photographed shading, VIMS filtering and resolution affect correlation.",
+    "Shared native samples are spatially correlated; correlation is not a calibrated significance test.",
+    "Alternative comparisons use pairwise common nonmissing samples; counts are recorded.",
+    "No zero-valued ISS missing pixel is used as dark surface evidence."
+  ],
+  "wallSeconds": 0.14953733400034253,
+  "peakRssBytesMacOS": 105791488
+}

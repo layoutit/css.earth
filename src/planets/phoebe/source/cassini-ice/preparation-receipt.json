@@ -1,0 +1,279 @@
+{
+  "schema": "cssearth-phoebe-registered-vims-surfaces@1",
+  "recipeSha256": "68162ebf0bc13325bf7d9ae295cf34903c1f100f3b13a7d35bd5d7db11689647",
+  "preparerSha256": "47588d2471bcd76c895847ce8c549736cfe459ca21f3511c364de816a316faf1",
+  "spectralHelperSha256": "b67682f3ea069c0e371bcedc8f440836dc591f95f9b202d39510ef89efabbf3a",
+  "fixedMeshHelperSha256": "aae28318139cd4a3cc46838e905c46ae11cfb003def06acccbfd454241cf0020",
+  "terrainSha256": "a6eb3c92075986288ddfc6e59d85391891ca0d96dc0f2c427ea7fbab2e576178",
+  "fixedMeshMapping": {
+    "fixedFaces": 3500,
+    "inwardRadialFaces": 1,
+    "ambiguousGeographicGridCellsWithheld": 4,
+    "gridCells": 1036800,
+    "interpretation": "Longitude/latitude directions intersecting an inward radial facet are withheld to avoid transferring one source sample onto multiple fixed terrain patches."
+  },
+  "observations": [
+    {
+      "id": "1465671822_1",
+      "dimensions": [
+        36,
+        24
+      ],
+      "nativeWavelengthsMicrometers": {
+        "25": 1.27803,
+        "44": 1.58965,
+        "58": 1.82022,
+        "70": 2.01788,
+        "81": 2.1997
+      },
+      "continuumRightWeight": 0.5208706651206912,
+      "registeredRegionPixels": 41,
+      "depthAcceptedNativePixels": 41,
+      "rgbAcceptedNativePixels": 41,
+      "sampledApertures": 41,
+      "apertureRejections": {},
+      "detectorQuality": {
+        "policy": "pds3-ir-adc-background-and-filter-dependencies@1",
+        "target": "PHOEBE",
+        "productId": "1_1465671822.13980",
+        "nativeStartTime": "1465671822.13980",
+        "dimensions": [
+          36,
+          24
+        ],
+        "originalLayout": {
+          "recordBytes": 512,
+          "declaredBytes": 680960,
+          "actualBytes": 680448,
+          "coreStartByteZeroBased": 24064,
+          "coreEndByteExclusive": 680320,
+          "declaredMinusActualBytes": 512
+        },
+        "rawSha256": "df43d42c42ab29cf00eee62c6f22796d85631b60f6c8b4da56ba590cb01f3030",
+        "calibratedSha256": "e3d284051d290a154a692a5fccc4388bcb33220fed68345991a9055b8d6228ee",
+        "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
+        "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
+        "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
+        "filterDependencies": {
+          "radiusSamples": 3,
+          "radiusLines": 3,
+          "operations": [
+            "vims2isis",
+            "spiceinit",
+            "vimscal",
+            "noisefilter",
+            "lowpass"
+          ],
+          "derivation": "Minkowski sum: radius 2 for 5x5 noise classification plus radius 1 for 3x3 replacement",
+          "interpretation": "Possible source dependency; not a reconstruction of which pixels were replaced"
+        },
+        "bands": {
+          "25": {
+            "originalBand": 121,
+            "rawReasons": {},
+            "directInvalidCount": 0,
+            "validAfterDependencies": 864,
+            "invalidAfterDependencies": 0,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [],
+            "backgroundRange": [
+              219,
+              239
+            ],
+            "reconstructedAdcRange": [
+              218,
+              455
+            ],
+            "maskSha256": "821eb62fd7c75d025e6da260f7e66350edc66d630f627007e751f2e622472baf",
+            "directInvalidIndices": []
+          },
+          "44": {
+            "originalBand": 140,
+            "rawReasons": {},
+            "directInvalidCount": 0,
+            "validAfterDependencies": 864,
+            "invalidAfterDependencies": 0,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [],
+            "backgroundRange": [
+              230,
+              234
+            ],
+            "reconstructedAdcRange": [
+              229,
+              364
+            ],
+            "maskSha256": "821eb62fd7c75d025e6da260f7e66350edc66d630f627007e751f2e622472baf",
+            "directInvalidIndices": []
+          },
+          "58": {
+            "originalBand": 154,
+            "rawReasons": {},
+            "directInvalidCount": 0,
+            "validAfterDependencies": 864,
+            "invalidAfterDependencies": 0,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [],
+            "backgroundRange": [
+              157,
+              159
+            ],
+            "reconstructedAdcRange": [
+              157,
+              260
+            ],
+            "maskSha256": "821eb62fd7c75d025e6da260f7e66350edc66d630f627007e751f2e622472baf",
+            "directInvalidIndices": []
+          },
+          "70": {
+            "originalBand": 166,
+            "rawReasons": {},
+            "directInvalidCount": 0,
+            "validAfterDependencies": 864,
+            "invalidAfterDependencies": 0,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [],
+            "backgroundRange": [
+              163,
+              165
+            ],
+            "reconstructedAdcRange": [
+              162,
+              247
+            ],
+            "maskSha256": "821eb62fd7c75d025e6da260f7e66350edc66d630f627007e751f2e622472baf",
+            "directInvalidIndices": []
+          },
+          "81": {
+            "originalBand": 177,
+            "rawReasons": {},
+            "directInvalidCount": 0,
+            "validAfterDependencies": 864,
+            "invalidAfterDependencies": 0,
+            "wholeBandBackgroundRejected": false,
+            "backgroundRowsSkippedByIsisFit": [],
+            "backgroundRange": [
+              154,
+              156
+            ],
+            "reconstructedAdcRange": [
+              154,
+              251
+            ],
+            "maskSha256": "821eb62fd7c75d025e6da260f7e66350edc66d630f627007e751f2e622472baf",
+            "directInvalidIndices": []
+          }
+        },
+        "sources": {
+          "adc": "https://doi.org/10.1016/j.icarus.2004.07.001",
+          "background": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/vimscal/vimscal.html",
+          "pipeline": "https://vims.univ-nantes.fr/info/isis-calibration",
+          "noise": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/noisefilter/noisefilter.html",
+          "lowpass": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/lowpass/lowpass.html",
+          "fitDeltaSource": "https://raw.githubusercontent.com/DOI-USGS/ISIS3/77c10385ee31526b54cc42b82ee30a1ac4ed8c58/isis/src/cassini/apps/vimscal/vimscal.cpp"
+        },
+        "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing."
+      },
+      "cameraSourceEvidence": {
+        "calibratedLabelSha256": "49d03b4b6ea98e07b828b648df5df5dcbd2cdc0698445bee637b53a9dc5cb95c",
+        "navigationLabelSha256": "1c70d3f515b7230f394884529f8323afc69a619a37f3de3228a5411b9da9e38a",
+        "navigationPlanesSha256": "2c2150317ca7bf0f4713477da2f91c219b031011074ff62f6d0cfce25579c814",
+        "tables": {
+          "InstrumentPointing": {
+            "sha256": "392e0ad3819bfb5db29686d8b91607e47cba98215f710b65d2aba22b9455128c",
+            "bytes": 4096
+          },
+          "InstrumentPosition": {
+            "sha256": "f5a8e37adc835440e119ae804988e58099f83faa560f3b25d4e466dd630db8e4",
+            "bytes": 168
+          },
+          "BodyRotation": {
+            "sha256": "ff33b12efbfe38e112e5bd1e6c80bfd7be3377c6804cd6d199c9bca00d416b78",
+            "bytes": 128
+          }
+        }
+      },
+      "regionSha256": "545127b529e97e3d0cd296cca6d826166ddc7fd0f025045f2550ed09a7d045fb",
+      "fitOffsetsRadians": [
+        0.000851639948572945,
+        0.00010016632943198674
+      ],
+      "placementLimit": "Coarse regional placement under the fitted nominal mapping. Source pixel owners identify original measurements, not exact absolute surface position. No source brightness or index value controls this mask."
+    }
+  ],
+  "outputs": [
+    {
+      "kind": "depth",
+      "file": "phoebe-ice-absorption.tif",
+      "sha256": "d4b6945058358ceb42460ef5966e1ece2a5e1eb6bf481847b25ab42ff835ca1b",
+      "bytes": 57492,
+      "areaFraction": 0.018385963801247792,
+      "contributingDetectorApertures": {
+        "1465671822_1": 41
+      },
+      "owners": {
+        "1465671822_1": 13325
+      },
+      "audit": [
+        {
+          "file": "phoebe-ice-absorption-observation.tif",
+          "sha256": "f2a90d476eaa584fb9897b4defe05c2b170bd48824ff6a600c2196ca9c778147"
+        },
+        {
+          "file": "phoebe-ice-absorption-source-pixel.tif",
+          "sha256": "e4afd786788e5f3a048e7404d3305db6b9d10a3aa630d97e67840027d88695a7"
+        }
+      ]
+    },
+    {
+      "kind": "rgb",
+      "file": "phoebe-infrared-if.tif",
+      "sha256": "83d7e9574e3a52eda73590dbf0359b587003623140e2b2570528c3ecad0a7500",
+      "bytes": 90215,
+      "areaFraction": 0.018385963801247792,
+      "contributingDetectorApertures": {
+        "1465671822_1": 41
+      },
+      "owners": {
+        "1465671822_1": 13325
+      },
+      "audit": [
+        {
+          "file": "phoebe-infrared-if-observation.tif",
+          "sha256": "f2a90d476eaa584fb9897b4defe05c2b170bd48824ff6a600c2196ca9c778147"
+        },
+        {
+          "file": "phoebe-infrared-if-source-pixel.tif",
+          "sha256": "e4afd786788e5f3a048e7404d3305db6b9d10a3aa630d97e67840027d88695a7"
+        }
+      ],
+      "display": {
+        "file": "phoebe-infrared-display.tif",
+        "sha256": "f22812b0e21b9f448bd83482bd2a664cafe67ea6f8dc23e8c0e205dd0c3e2e8b",
+        "bytes": 52468,
+        "centerLongitudeDegrees": 180,
+        "sourceColumnRoll": 720,
+        "stretch": {
+          "ranges": [
+            [
+              0,
+              0.03
+            ],
+            [
+              0,
+              0.03
+            ],
+            [
+              0,
+              0.03
+            ]
+          ],
+          "gamma": 2.2
+        }
+      }
+    }
+  ],
+  "areaDenominator": "Reference-sphere solid-angle grid estimate, not physical mesh area",
+  "placementLimit": "Nominal fitted regional mapping. Measured limb holdout residual is about one native fast-axis sample; no exact absolute position or integrated PSF is claimed.",
+  "apertureModel": "Intersection of nine sampled inset HI-RES nominal frusta, with fixed-mesh visibility, self-shadow and incidence/emission checks at each pose."
+}

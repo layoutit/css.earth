@@ -1,0 +1,1701 @@
+✖ overview charts retain every supplied spectrum sample across the registry (28.370167ms)
+✔ overview measurements use the body reference radius and catalogue distance (0.710625ms)
+✔ compact spectra reject unordered or nonfinite samples (0.216375ms)
+✖ every object mounts one canonical high-density image bank (1199.032375ms)
+✔ the shared shell does not choose image assets by device DPR (1.226083ms)
+✔ hidden charts schedule no work; visible charts batch reads, retain corrections, and retire cleanly (0.956125ms)
+✔ the standard browser launch stays unchanged unless explicitly opted in (0.754667ms)
+✔ the Chrome wrapper retains logs and arguments while preserving both CDP pipes (754.916042ms)
+✔ Mercury titles link the main mosaic, not coverage-completion images or tile templates (4.055542ms)
+✔ direct source images take precedence over product pages, including WMS images (2.235125ms)
+✔ a source-defined single-input mosaic does not inherit the parent mosaic link (0.767083ms)
+✔ a composite dataset links its declared primary input, which must belong to that product (0.937916ms)
+✔ a multi-image mosaic does not pass off an arbitrary exposure as its source image (0.750792ms)
+✔ missing, internal, and malformed source URLs leave a plain title (0.408041ms)
+✖ every registered dataset has a specific authored title, independent of category and source-link availability (42.615ms)
+✔ missing titles, category labels, paragraphs and repeated descriptions are rejected (0.720834ms)
+✔ capture platforms follow the selected dataset, including derived maps (6.00975ms)
+✔ multi-mission composites retain each spacecraft once; other lenses do not inherit them (1.332667ms)
+✔ body mission lists combine dataset contributions once and preserve source scope (2.946ms)
+✔ illustrations and local models do not acquire capture provenance from an outer texture (2.77525ms)
+✔ agency choices preserve joint mission credits and deduplicate mission results (0.807291ms)
+✖ every declared capture has a catalog entry and stays tied to its pinned source (0.524042ms)
+✔ approved static images cover the mission catalog and retain their source identity (10.25625ms)
+✔ every spacecraft has a sourced PNG emblem with genuinely transparent exterior pixels (66.411917ms)
+✔ missing capture metadata is not inferred from source names, and invalid identities fail (0.898875ms)
+✔ records one correlated run, copies changing camera state, and is idle after stop (2.194375ms)
+✔ a failed diagnostic read is captured without interrupting the application (0.4075ms)
+✔ rail switches the retained About panel without storing or mounting a scene (1.553292ms)
+✔ Escape restores a visible keyboard focus target (0.240042ms)
+✔ settings shares the panel slot and mobile navigation returns to the top (0.1745ms)
+✔ settings stays selected on repeat clicks and closes through About, Solar System, or Escape (0.146875ms)
+✔ search stays visible in About and Settings and typing returns to the results (0.163042ms)
+✔ destroy resets retained markup and remount does not duplicate listeners (0.154833ms)
+✔ an incomplete rail fails clearly (0.192ms)
+✔ orders comparable facts before stable planet-specific facts (0.702334ms)
+✔ keeps unknown facts in their authored order (0.075292ms)
+✔ prioritizes a satellite's own orbit over its parent's solar orbit (0.11275ms)
+✔ rejects facts without unique semantic ids (0.205875ms)
+✔ analytics ignores local visits and loads on css.earth (1.737541ms)
+✔ objects without lenses or extra settings retain mandatory browser proof (0.996208ms)
+✔ declared content requires exact lens and setting DOM before optional checks (2.09275ms)
+✔ optional controls never excuse a missing shared panel or Motion (0.297541ms)
+✔ declared lenses require matching race IDs, and complete retained coverage (0.215583ms)
+✔ a single supplied lens keeps interaction proof without inventing a race (0.080375ms)
+✖ all objects retain browser evidence for the controls they support (66.573584ms)
+✔ only a later fully opaque marker covers a complete earlier marker (0.361959ms)
+✔ edge contact, motion out of coverage and responsive raster guards keep drawing (0.086584ms)
+✔ prepared minimap index includes every source point once without changing DOM order (1.503125ms)
+✔ X range keeps inclusive duplicate boundaries and handles empty/disjoint ranges (0.160583ms)
+✔ indexed candidates preserve exact 3D visible points across physical scales and off-origin views (50.158958ms)
+✖ composes every orbiting-object marker descriptor in catalog order (4.05825ms)
+✖ reproduces the checked-in registry-derived atlases and utility markers (1.720042ms)
+✖ failed object source preserves accepted files or recoverable backups outside public (2.917458ms)
+✖ failed late utility source preserves accepted files or recoverable backups outside public (2.105958ms)
+✖ failed publication preserves accepted files or recoverable backups outside public (2.434083ms)
+✖ failed rollback preserves accepted files or recoverable backups outside public (2.133834ms)
+✔ cross-device moves copy and unlink safely for publication and rollback (2.414583ms)
+✔ persistent world context is mounted once and follows the active physical navigation (5.004584ms)
+✔ contrast intent reaches a loading world once and survives detail navigation (0.563667ms)
+✔ flight state covers system framing and resets after success, failure, cancellation and preserved-view navigation (3.629083ms)
+✔ the destination card stays held until arrival, including the new camera mount (0.605292ms)
+✔ asteroid label and orbit settings default off and reach the retained context independently (0.4305ms)
+✔ entering overview on the current object changes selection without invoking focus or restoring the camera (0.254334ms)
+✔ flight retains the source and one shell; target readiness and handoff precede history commit (0.735208ms)
+✔ rapid Mercury → Venus → Mercury cancels the stale factory without replacing shell or source (0.456959ms)
+✔ history back restores the departed exact view after target handoff without another push (0.771584ms)
+✔ saved-view anchors preserve query and hash across objects and on the already selected object (0.780791ms)
+✔ reselecting the source cancels a running flight at its painted view without another restore or mount (0.855333ms)
+✔ late rejected handoff is observed after replacement and cannot publish stale readiness (0.751ms)
+✔ navigation preserves requested playback and reduced-motion policy (0.362292ms)
+✔ real input interruption preserves the last painted source view and flushes it without restoring the old URL (0.314708ms)
+✔ a missing destination asset preserves the painted view and permits a fresh selection retry (0.386417ms)
+✔ input after the detailed handoff keeps the incoming scene and its painted pose, including saved-view links (0.423125ms)
+✔ navbar/search anchors and vault events share one route; modifier and unsupported links stay native (0.450542ms)
+✔ a failed persistent context mount can retry when the document restores (0.273917ms)
+✔ leaving the document releases its universe and a cached-page restore mounts one fresh owner (0.2265ms)
+✔ selecting the current object flies the retained camera without preparing or replacing detail (0.856167ms)
+✔ plain current-object anchors focus but saved-view links restore their specified view (0.349625ms)
+✔ a first selection frames the object system and changes its card, then the next click focuses (0.303208ms)
+✔ zooming out after first-click system framing restores the overview at the same camera pose (1.350417ms)
+✔ a first Sun click frames the Solar System card, and a repeat opens the Sun close-up (0.358875ms)
+✔ clicking the Sun from the Solar System overview opens its body instead of refitting the outer planets (0.234125ms)
+✔ clicking the Sun from a galactic overview still frames its Solar System first (0.251208ms)
+✔ a second scene click can zoom while centering the current object is still in progress (0.208417ms)
+✔ selection emphasis previews immediately before the next detailed owner is ready (0.204875ms)
+✔ empty-space clicks leave selection, camera and card unchanged (wide=false) (2.022625ms)
+✔ empty-space clicks leave selection, camera and card unchanged (wide=true) (0.309542ms)
+✔ overview breadcrumbs reframe, select the card, and retain separate history entries (0.619208ms)
+✔ overview links preserve native modifier clicks and exact saved views (0.239584ms)
+✔ a direct overview URL frames once, but a saved overview URL retains its camera (0.275792ms)
+✔ selecting another list body during a flight still uses its system framing (0.289542ms)
+✔ navigation timing records phases once and bounds retained entries without clearing unrelated timing (0.770333ms)
+✔ timing is optional in non-browser hosts (0.098333ms)
+✖ every actual profile reads its recorded coordinates from the shared camera endpoint (76.270292ms)
+✔ coordinate field selection is immutable reporting data, with no private camera implementation (0.767125ms)
+✔ restoring a complete camera observation preserves yaw and the pitch alias (0.727209ms)
+✔ camera reporting rejects missing, repeated and unsupported coordinates (0.198375ms)
+✖ an already ready object does not depend on a redundant browser waiter (35.149583ms)
+✔ a missing or loading object still requires successful readiness before returning (2.802708ms)
+✔ the actual Saturn profile observes one exclusive lens and rejects the former dual selection (4.050667ms)
+✔ search contains every object, including the Sun; only planets enter the scale (0.72ms)
+✖ prepared marker identity, atlas order, and presentation follow packages (3.344ms)
+✖ an unknown object loads its own marker; missing packages fail without fallback (4.311167ms)
+✔ scale overrides must form a complete presentation after inheritance (0.5635ms)
+node:internal/fs/promises:697
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async loadObjectTestDefinition (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/object-test-data.mjs:5:21)
+    at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/platform/test/object-material-orbit-fixture.mjs:10:8
+    at async Promise.all (index 0)
+    at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/platform/test/object-material-orbit-fixture.mjs:9:29 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/object.json'
+}
+
+Node.js v24.19.0
+✖ site/test/object-orbit-failure.test.mjs (60.801ms)
+✔ accepts a complete non-NASA package and still rejects corrupt or undeclared bytes (12.480083ms)
+✔ derives the complete owned file contract from planet identity (0.209209ms)
+✖ requires every registered object package file (0.763625ms)
+✔ validates local editorial identity and provenance (1.126916ms)
+✔ validates runtime asset manifest entries (0.118833ms)
+✔ page metadata stays hash-bound to its scene without needing scene bytes during page emission (7.214542ms)
+✖ all registry objects own ordered CSS and scene-bound page metadata (1.080083ms)
+✔ generic routes derive membership from OBJECTS and never import scene transports (1.142959ms)
+✔ defines one generic renderable-object contract (0.600667ms)
+✔ world-frame capability is validated and copied at the registry boundary (2.600916ms)
+✔ rejects invalid object definitions and renderer-specific fields (0.277875ms)
+✔ keeps one open-ended object registry with unique ids and routes (0.36475ms)
+✔ derives deterministic test discovery from an authored object id (6.213333ms)
+✔ derives shared preparation and external browser scripts from the descriptor (2.7535ms)
+✔ shared attribution keeps Mercury’s three distinct product links and credits them once (3.868958ms)
+✔ every registered body uses the same projection and keeps every consumed source identity (144.160208ms)
+✔ grouping preserves every link and underlying rights while showing the shared credit once (1.23325ms)
+✔ factsheet URLs and arbitrary URL-like strings cannot become source evidence (0.657917ms)
+✔ oracle comparison never borrows a future pose and retains the slower tail (0.948541ms)
+✔ a wheel comparison rejects a lost held button and validates the delivered Qt event (0.667542ms)
+✔ native repeat alignment preserves later event and pose timing (0.123541ms)
+✔ input qualification records delivery lag and rejects missing input (0.338417ms)
+✔ an interruption interval ends at each renderer's next actual input receipt (0.177417ms)
+✔ oracle registration rejects an independent CSS translation of the scene (0.180666ms)
+✔ motion-only timing rejects reference readback overlapping the gesture (0.186875ms)
+✔ natural motion reports retain the observed clock and reject hidden readback (4.861708ms)
+✔ input pairing retains the final consumed release position even without a throw (29.972666ms)
+✔ body cards switch at the shared camera detail threshold, independent of camera aim (0.893583ms)
+✔ overview follows the prepared galaxy fade and restores correctly at maximum zoom (0.094625ms)
+✔ galactic distance is measured from the Sun, independent of selected body and surface radius (0.0815ms)
+✔ deselection uses physical orbital scale, not the selected body radius alone (1.015625ms)
+✔ only approaching the Sun opens a card, with separate entry and exit thresholds (0.412125ms)
+✔ camera sampling settles before changing selection and releases timers and subscriptions (0.658833ms)
+✔ continuous outward camera updates cannot postpone the Sun overview flip (0.657958ms)
+✔ keeps every implemented scene in one object registry (0.750959ms)
+✔ loads every object through the single adapter (28.674833ms)
+✔ rejects incomplete scene lifecycle wiring (0.112833ms)
+✔ shared router owns minimal adapter shell lifecycle (0.997708ms)
+✔ shared router publishes a minimal adapter error (0.20675ms)
+✔ shared router contains synchronous shell bootstrap failure (0.103083ms)
+✔ shared router cancels a pending adapter before publication (0.119708ms)
+✖ keeps implemented routes backed by object-owned files (1.798209ms)
+✖ keeps source-backed chart data in canonical order with Reflectance first (2.043084ms)
+✔ keeps the shared shell planet-neutral (1.321833ms)
+✖ keeps lens descriptions source-bound in the object model (0.670709ms)
+✔ derives the accessible logarithmic scale from catalog distances (0.733459ms)
+✔ rejects unusable scale bounds and distances (0.216459ms)
+✔ keeps every planet factsheet comparable and concise (1.541584ms)
+✔ uses unique semantic ids without hidden title-only content (0.245375ms)
+✔ keeps Pluto concise and removes lens-presentation rows (0.117333ms)
+✔ keeps object-internal identifiers out of the Moon factsheet (0.068375ms)
+✔ prepares one source-bound 20px SVG family for sidebar sections (7.619834ms)
+✖ authored lens facts survive preparation and runtime publication without mutating the source (2.5165ms)
+✖ lens facts reject malformed rows and duplicate ids before publication (0.920584ms)
+✖ existing description-only lenses keep their original content contract (0.59125ms)
+✔ names arbitrary lens IDs without changing source data or assuming a fixed set of concepts (0.74775ms)
+✔ prepares a frozen, smoothly sampled scale legend (0.587959ms)
+✔ prepares source-backed category legends from hex and RGB colors (0.415375ms)
+✔ rejects invalid scale palettes (0.195167ms)
+✔ named categories can omit a redundant description while supplied descriptions stay validated (0.13175ms)
+✖ every object forwards its object-owned legend through the shared shell (61.348083ms)
+✔ generates all shared title assets once from checked source vectors (7.373917ms)
+✖ keeps planet title rendering facts object-owned and source-bound (0.605208ms)
+✖ normalizes every implemented planet title to the complete Saturn standard (0.7785ms)
+✔ a terminal extreme-range pose finishes without a tail of identical publications (10.269709ms)
+✔ the exact final camera demand finishes before the old scene is handed off (3.326208ms)
+✔ an overview starts moving before factory and assets are ready, then holds before target detail (5.349833ms)
+✔ overview preserves the latest drawn camera through slow preparation, without a flight or input interception (0.387792ms)
+✔ a cancelled preserved-view handoff releases its unmounted resources (0.145417ms)
+✔ overview handoff uses the requested distant camera instead of flying into the Sun (4.137375ms)
+✔ the same object can recenter at overview distance without resetting to its close-up (3.81525ms)
+✔ handoff precedes large destination approach and continues the same numeric flight from the exact drawn checkpoint (6.208584ms)
+✔ slow asset preparation holds only the distant checkpoint and resumes after readiness (5.089042ms)
+✔ new selection cancellation stops painting and releases destination preparation (0.942292ms)
+✔ cancellation between prepared handoff and mount releases resources and all interruption listeners (1.148166ms)
+✔ an already cancelled request cannot start a frame or retain input listeners (0.48875ms)
+✔ input during a delayed preparation interrupts at the last drawn checkpoint and releases late resources (3.403916ms)
+✔ input after the early handoff preserves the destination owner drawn pose (0.97725ms)
+✔ reduced motion waits for preparation, then mounts the exact arrival without enlarging a source proxy (0.149916ms)
+✔ saved camera endpoints survive the early owner handoff unchanged (6.719375ms)
+✔ refocusing the selected object paints one existing owner without reloading its prepared bank (1.781542ms)
+✔ the application keeps flying while destination groups activate, then transfers the live pose without a reset (4.623417ms)
+✔ cancellation during connected activation stops the application flight and releases its resources (1.164917ms)
+✔ real input interrupts a same-object focus at the last painted camera (0.192834ms)
+✔ replacement departure uses the retained world while its previous detail owner is retired (3.720459ms)
+✔ the current body accepts wide-view centering only while below its prepared detail threshold (0.265375ms)
+✔ centering changes the focus at the same range and orientation, then focus zooms in (3.980667ms)
+✔ production runtime removes development observations from the executable closure (446.29075ms)
+node:internal/fs/promises:697
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/scene.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/projective-surface-seam-contract.test.mjs:10:28 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/scene.json'
+}
+
+Node.js v24.19.0
+✖ site/test/projective-surface-seam-contract.test.mjs (41.045625ms)
+✔ keeps reversal and every camera-advancing present in its recorded step (1.068833ms)
+✔ advances uncaptured native frames instead of skipping their camera work (0.56575ms)
+✔ rejects missing frame clocks and an already moving start (0.547542ms)
+✔ does not replay a preceding gesture still retained before the new press (0.126292ms)
+✔ ignores a pointer point stored after a non-launching release (0.087625ms)
+✔ pairs a fresh press during coast, held jitter and a second release independently (0.262791ms)
+✔ binds click-only receipts without fabricating a drag launch (0.239292ms)
+✔ advances an uncaptured receipt-only present (0.113ms)
+✔ binds click receipts before a later drag without treating clicks as launches (0.154625ms)
+✔ pairs a source-consumed drag and following stop click (0.159667ms)
+✔ derives every root planet lane from the validated catalog (242.218708ms)
+✖ loads object-owned browser and audit expectations for every implementation (60.703333ms)
+✔ loading remembers latest intent but cannot resume; media events never rewrite intent (2.598333ms)
+✔ playback reads cannot consume a pending media notification (0.356833ms)
+✔ repeated restoration has bounded subscriptions; old callbacks cannot affect the replacement (1.272416ms)
+✔ malformed mounts retain cleanup handles and failure cleanup survives a destructor error (0.357417ms)
+✔ malformed mounts still observe their rejected readiness promise (1.3035ms)
+✔ fatal pause failure cleans once and never publishes success (0.238083ms)
+✔ fatal resume failure cleans once and never publishes success (0.139875ms)
+✔ fatal report failure cleans once and never publishes success (0.07425ms)
+✔ an object destination can pause shared motion, and a retired object cannot change intent (0.190875ms)
+✔ automatic playback has one complete readiness, intent and environment policy (0.821709ms)
+✔ keeps one shared orientation-aware responsive shell boundary (0.149ms)
+✔ uses one canonical high-density image bank for every mount (0.055167ms)
+✔ skybox orbit dragging is enabled by the shared input policy (0.048167ms)
+✔ discrete wheels and precision scroll gestures have separate shared gains (0.048791ms)
+✔ scroll input classification preserves accelerated precision gestures and permits device changes (0.12825ms)
+✔ updates wheel and touch policy without replacing controls (0.308042ms)
+✔ initial responsive failure removes its subscription and preserves startup rejection (0.207917ms)
+✔ live responsive failure retires the subscription before reporting fatal (0.111375ms)
+✖ asteroid, trans-Neptunian and comet Shadows default off in authored content and prepared runtime (2.272916ms)
+✖ publishes one off-by-default Shadows control for every planet (0.7155ms)
+✔ control content permits empty capabilities but rejects malformed or conflicting declarations (0.330333ms)
+✖ small shell attribution records match the checked scientific provenance (1.730583ms)
+✔ every shared route retains its object sources and the actual environment credits (49.683375ms)
+✔ omits only the superseded ESO panorama, preserving other ESO and object OpenSpace sources (0.54725ms)
+✔ merges duplicate source links without dropping full credits or changing the caller (0.149541ms)
+✔ app credits and prepared body provenance have separate consumers on direct and cached routes (0.563625ms)
+✔ publishes the canonical scientific chart order (0.610917ms)
+✔ orders any applicable subset without inventing missing charts (0.120125ms)
+✔ keeps unknown future chart types after known charts in source order (0.194458ms)
+✖ binds phase charts to explicit primary-source provenance (2.352291ms)
+✔ discovers objects through multiple pages and resolves relative links at their source (0.4985ms)
+✔ rejects the orphaned Sun even when its inspected page retains a self-link (0.393958ms)
+✔ rejects a disconnected cycle even when every object has a link from another page (0.126375ms)
+✔ external links with a matching pathname do not discover a local object (0.409125ms)
+✔ retained catalogue groups follow filters and release their visibility observer (3.139541ms)
+✔ Asteroids Orbits starts off and retains its independent preference across body navigation (0.977833ms)
+✔ Asteroid Labels starts off and retains its independent preference across body navigation (1.140917ms)
+✔ shell with no optional controls keeps Motion/high contrast and accessible blocked intent (0.811166ms)
+✔ failed shell construction cleans earlier controllers and their scheduled work (0.382417ms)
+✔ object content replacement retains shell controls and input state without accumulating listeners (0.541125ms)
+✔ Motion cannot enable Speed before the shared runtime is ready or after it retires (0.269958ms)
+✔ overview and detail tabs keep independent selections and keyboard focus across camera zoom (0.73625ms)
+✔ destination card stays fixed across flight poses and camera handoff, then follows manual zoom (0.674542ms)
+✔ camera scale changes retained overview content without moving the camera and search selects the matching category tab (0.672375ms)
+✔ clearing search keeps the current object or overview card and permits another search (0.465666ms)
+✔ flight completion and overview handoff preserve a newer active search (0.515291ms)
+✔ category pills reuse search, retain the query through navigation, and dismiss with Escape (0.645166ms)
+✔ the overview preview changes immediately and survives a same-scene commit (0.360458ms)
+✔ an empty search survives dismissal, overview resets, and object commits (0.446417ms)
+✔ choosing the current body from search shows its card without editing the query (0.283375ms)
+✔ a Milky Way breadcrumb previews its own card and preserves the search query (0.301584ms)
+node:internal/modules/package_json_reader:301
+  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);
+        ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'urijs' imported from /Users/ekrof/fed/cssEarth-moons-cassini-atlas/node_modules/@cesium/engine/Source/Core/Resource.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:301:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:859:18)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+    at #resolve (node:internal/modules/esm/loader:683:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+Node.js v24.19.0
+✖ site/test/surface-minimap.test.mjs (83.45575ms)
+✔ system flights keep the viewing angle and approach the center from QMbBW5Yy (12.42ms)
+✔ system flights keep the viewing angle and approach the center from QIZBtofG (5.429959ms)
+✔ fitting the current angle is independent of prepared box order and member names (0.747333ms)
+✔ each system fits its complete primary orbits at 1524x1237, offset 0,0 (20.061208ms)
+✔ each system fits its complete primary orbits at 1280x720, offset 0,0 (16.83125ms)
+✔ each system fits its complete primary orbits at 390x844, offset 0,0 (16.286833ms)
+✔ each system fits its complete primary orbits at 1024x700, offset 40,-20 (14.75775ms)
+✔ selecting the system root pulls back from a planet to all major planets, with a normal close-up on repeat (0.371958ms)
+✔ system fit leaves clearance for the visible sidebar, header and footer (0.140333ms)
+✔ adding a small distant moon does not pull the initial camera away from the larger moons (0.328625ms)
+✔ a body without moons uses its normal close-up target on first selection (0.1735ms)
+✔ clicking the already selected body in close-up does not zoom back out to its moons (0.098666ms)
+✔ galactic breadcrumbs zoom straight out from the current view without panning or turning (0.554083ms)
+✔ a Solar System breadcrumb always restores the system framing from a Sun close-up (0.336042ms)
+✔ scene date includes the calendar time and TT scale across calendar days (1.015959ms)
+✔ coordinates carry rounded seconds and preserve hemispheres (0.084625ms)
+✔ altitude and distance scale use physical units across camera ranges (0.514875ms)
+✔ surface ruler measures the front surface, not the center plane (0.481583ms)
+✔ looking away supplies no invented surface coordinates or behind-camera ruler (0.115166ms)
+✔ objects without prepared geographic axes still have altitude and scale (0.08425ms)
+✔ galaxy distances keep a finite ruler without a spurious surface hit (0.104792ms)
+✔ camera changes coalesce into replaceState while preserving the route, other queries, hash and history state (1.893666ms)
+✔ incoming links restore before motion resumes without rewriting their saved playback position (1.169ms)
+✔ existing JSON links shrink on restore while preserving their exact saved time and route (0.44925ms)
+✔ old physical camera links migrate to one pose without resampling saved motion time (0.466417ms)
+✔ invalid links leave the current scene usable and are replaced only after a camera change (0.261875ms)
+✔ popstate restores the stored camera and disposal removes history listeners and scheduled work (0.234292ms)
+ℹ tests 285
+ℹ suites 0
+ℹ pass 251
+ℹ fail 34
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7657.407792
+
+✖ failing tests:
+
+test at site/test/body-overview.test.mjs:10:1
+✖ overview charts retain every supplied spectrum sample across the registry (28.370167ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(charts > 0)
+  
+      at TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/body-overview.test.mjs:29:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at site/test/canonical-image-density.test.mjs:10:1
+✖ every object mounts one canonical high-density image bank (1199.032375ms)
+  Error: site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual registered runtime loader is missing or invalid
+  site/objects.mjs:1: Actual OBJECTS registry: polymele loader must import and return one client binding.
+  site/objects.mjs:1315: Dynamic runtime imports hide ownership from the static closure
+  site/objects.mjs:1321: Dynamic runtime imports hide ownership from the static closure
+  site/objects.mjs:1327: Dynamic runtime imports hide ownership from the static closure
+  site/objects.mjs:1333: Dynamic runtime imports hide ownership from the static closure
+  site/objects.mjs:1339: Dynamic runtime imports hide ownership from the static closure
+  site/objects.mjs:1643: Dynamic runtime imports hide ownership from the static closure
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+  site/objects.mjs:1: Shared runtime imports an object package
+      at auditObjectRuntimeOwnership (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/check-object-runtime-ownership.mjs:749:11)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/canonical-image-density.test.mjs:12:21)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at site/test/dataset-content.test.mjs:10:1
+✖ every registered dataset has a specific authored title, independent of category and source-link availability (42.615ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/content/static.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async read (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/dataset-content.test.mjs:8:39)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/dataset-content.test.mjs:17:20)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/content/static.json'
+  }
+
+test at site/test/dataset-spacecraft.test.mjs:81:1
+✖ every declared capture has a catalog entry and stays tied to its pinned source (0.524042ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/source/manifest.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async json (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/dataset-spacecraft.test.mjs:10:39)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/dataset-spacecraft.test.mjs:85:22)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/source/manifest.json'
+  }
+
+test at site/test/load-browser-profile.test.mjs:96:1
+✖ all objects retain browser evidence for the controls they support (66.573584ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/earth/prepared/runtime.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async read (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tests/objects/unit/earth/prepared-fixture.mjs:12:35)
+      at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tests/objects/unit/earth/prepared-fixture.mjs:13:32 {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/earth/prepared/runtime.json'
+  }
+
+test at site/test/navigation-preparation.test.mjs:26:1
+✖ composes every orbiting-object marker descriptor in catalog order (4.05825ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/preparation/navigation.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async loadObjectDescriptor (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-navigation.mjs:513:23)
+      at async loadMarkerDescriptors (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-navigation.mjs:43:24)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/navigation-preparation.test.mjs:27:23)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/preparation/navigation.json'
+  }
+
+test at site/test/navigation-preparation.test.mjs:43:1
+✖ reproduces the checked-in registry-derived atlases and utility markers (1.720042ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/preparation/navigation.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async loadObjectDescriptor (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-navigation.mjs:513:23)
+      at async loadMarkerDescriptors (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-navigation.mjs:43:24)
+      at async prepareNavigation (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-navigation.mjs:68:23)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/navigation-preparation.test.mjs:47:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/preparation/navigation.json'
+  }
+
+test at site/test/navigation-preparation.test.mjs:67:3
+✖ failed object source preserves accepted files or recoverable backups outside public (2.917458ms)
+  Error: ENOENT: no such file or directory, copyfile '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/swatch.json' -> '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-q7DVds/src/planets/sun/swatch.json'
+      at async copyFile (node:internal/fs/promises:679:10)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/navigation-preparation.test.mjs:73:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'copyfile',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/swatch.json',
+    dest: '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-q7DVds/src/planets/sun/swatch.json'
+  }
+
+test at site/test/navigation-preparation.test.mjs:67:3
+✖ failed late utility source preserves accepted files or recoverable backups outside public (2.105958ms)
+  Error: ENOENT: no such file or directory, copyfile '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/swatch.json' -> '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-yP9jyP/src/planets/sun/swatch.json'
+      at async copyFile (node:internal/fs/promises:679:10)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/navigation-preparation.test.mjs:73:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'copyfile',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/swatch.json',
+    dest: '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-yP9jyP/src/planets/sun/swatch.json'
+  }
+
+test at site/test/navigation-preparation.test.mjs:67:3
+✖ failed publication preserves accepted files or recoverable backups outside public (2.434083ms)
+  Error: ENOENT: no such file or directory, copyfile '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/swatch.json' -> '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-iqNlZI/src/planets/sun/swatch.json'
+      at async copyFile (node:internal/fs/promises:679:10)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/navigation-preparation.test.mjs:73:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'copyfile',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/swatch.json',
+    dest: '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-iqNlZI/src/planets/sun/swatch.json'
+  }
+
+test at site/test/navigation-preparation.test.mjs:67:3
+✖ failed rollback preserves accepted files or recoverable backups outside public (2.133834ms)
+  Error: ENOENT: no such file or directory, copyfile '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/swatch.json' -> '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-U94RGO/src/planets/sun/swatch.json'
+      at async copyFile (node:internal/fs/promises:679:10)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/navigation-preparation.test.mjs:73:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'copyfile',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/swatch.json',
+    dest: '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-U94RGO/src/planets/sun/swatch.json'
+  }
+
+test at site/test/object-browser-profile.test.mjs:19:1
+✖ every actual profile reads its recorded coordinates from the shared camera endpoint (76.270292ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/earth/prepared/runtime.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async read (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tests/objects/unit/earth/prepared-fixture.mjs:12:35)
+      at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tests/objects/unit/earth/prepared-fixture.mjs:13:32 {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/earth/prepared/runtime.json'
+  }
+
+test at site/test/object-browser-profile.test.mjs:52:1
+✖ an already ready object does not depend on a redundant browser waiter (35.149583ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/earth/prepared/runtime.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async read (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tests/objects/unit/earth/prepared-fixture.mjs:12:35)
+      at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tests/objects/unit/earth/prepared-fixture.mjs:13:32 {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/earth/prepared/runtime.json'
+  }
+
+test at site/test/object-navigation.test.mjs:26:1
+✖ prepared marker identity, atlas order, and presentation follow packages (3.344ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/preparation/navigation.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async loadObjectDescriptor (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-navigation.mjs:513:23)
+      at async loadMarkerDescriptors (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-navigation.mjs:43:24)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/object-navigation.test.mjs:30:23)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/preparation/navigation.json'
+  }
+
+test at site/test/object-navigation.test.mjs:42:1
+✖ an unknown object loads its own marker; missing packages fail without fallback (4.311167ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/preparation/navigation.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async loadObjectDescriptor (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-navigation.mjs:513:23)
+      at async loadMarkerDescriptors (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/prepare-navigation.mjs:43:24)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/object-navigation.test.mjs:47:19)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/sun/source/preparation/navigation.json'
+  }
+
+test at site/test/object-orbit-failure.test.mjs:1:1
+✖ site/test/object-orbit-failure.test.mjs (60.801ms)
+  'test failed'
+
+test at site/test/object-package-contract.test.mjs:70:1
+✖ requires every registered object package file (0.763625ms)
+  Error: Implemented object polymele is missing /Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/SOURCE.md.
+      at validateObjectPackageFiles (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/object-package-contract.mjs:58:13)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/object-package-contract.test.mjs:72:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    [cause]: Error: ENOENT: no such file or directory, access '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/SOURCE.md'
+        at async access (node:internal/fs/promises:664:10)
+        at async validateObjectPackageFiles (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/object-package-contract.mjs:56:7)
+        at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/object-package-contract.test.mjs:72:5)
+        at async Test.run (node:internal/test_runner/test:1389:7)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+      errno: -2,
+      code: 'ENOENT',
+      syscall: 'access',
+      path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/SOURCE.md'
+    }
+  }
+
+test at site/test/object-page-data.test.mjs:37:1
+✖ all registry objects own ordered CSS and scene-bound page metadata (1.080083ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async readPreparedObjectBytes (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/object-page-data.test.mjs:44:19)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  }
+
+test at site/test/planet-shell.test.mjs:237:1
+✖ keeps implemented routes backed by object-owned files (1.798209ms)
+  Error: ENOENT: no such file or directory, access '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/SOURCE.md'
+      at async access (node:internal/fs/promises:664:10)
+      at async Promise.all (index 0)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/planet-shell.test.mjs:250:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'access',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/SOURCE.md'
+  }
+
+test at site/test/planet-shell.test.mjs:255:1
+✖ keeps source-backed chart data in canonical order with Reflectance first (2.043084ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async readJson (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:8:45)
+      at async loadObjectContent (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:19:13)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/planet-shell.test.mjs:284:35)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/object.json'
+  }
+
+test at site/test/planet-shell.test.mjs:314:1
+✖ keeps lens descriptions source-bound in the object model (0.670709ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/saturn/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async readJson (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:8:45)
+      at async loadObjectContent (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:19:13)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/planet-shell.test.mjs:315:18)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/saturn/prepared/object.json'
+  }
+
+test at site/test/prepared-lens-facts.test.mjs:13:1
+✖ authored lens facts survive preparation and runtime publication without mutating the source (2.5165ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-67p/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async readJson (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:8:45)
+      at async loadObjectContent (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:19:13)
+      at async fixture (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-facts.test.mjs:7:18)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-facts.test.mjs:14:30)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-67p/prepared/object.json'
+  }
+
+test at site/test/prepared-lens-facts.test.mjs:26:1
+✖ lens facts reject malformed rows and duplicate ids before publication (0.920584ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-67p/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async readJson (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:8:45)
+      at async loadObjectContent (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:19:13)
+      at async fixture (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-facts.test.mjs:7:18)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-facts.test.mjs:27:22)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-67p/prepared/object.json'
+  }
+
+test at site/test/prepared-lens-facts.test.mjs:37:1
+✖ existing description-only lenses keep their original content contract (0.59125ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-67p/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async readJson (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:8:45)
+      at async loadObjectContent (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:19:13)
+      at async fixture (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-facts.test.mjs:7:18)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-facts.test.mjs:38:22)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-67p/prepared/object.json'
+  }
+
+test at site/test/prepared-lens-legends.test.mjs:67:1
+✖ every object forwards its object-owned legend through the shared shell (61.348083ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/orus/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async readJson (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:8:45)
+      at async loadObjectContent (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:19:13)
+      at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-legends.test.mjs:69:20
+      at async Promise.all (index 2)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-legends.test.mjs:68:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/orus/prepared/object.json'
+  }
+
+test at site/test/prepared-titles.test.mjs:51:1
+✖ keeps planet title rendering facts object-owned and source-bound (0.605208ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async readJson (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:8:45)
+      at async loadObjectContent (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:19:13)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-titles.test.mjs:53:20)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  }
+
+test at site/test/prepared-titles.test.mjs:64:1
+✖ normalizes every implemented planet title to the complete Saturn standard (0.7785ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async readJson (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:8:45)
+      at async loadObjectContent (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-object-content.mjs:19:13)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-titles.test.mjs:66:35)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  }
+
+test at site/test/projective-surface-seam-contract.test.mjs:1:1
+✖ site/test/projective-surface-seam-contract.test.mjs (41.045625ms)
+  'test failed'
+
+test at site/test/root-orchestration.test.mjs:36:1
+✖ loads object-owned browser and audit expectations for every implementation (60.703333ms)
+  Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mars/prepared/lighting.json' imported from /Users/ekrof/fed/cssEarth-moons-cassini-atlas/tests/objects/browser/mars/browser-profile.mjs
+      at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+      at moduleResolve (node:internal/modules/esm/resolve:865:10)
+      at defaultResolve (node:internal/modules/esm/resolve:992:11)
+      at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+      at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+      at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+      at #resolve (node:internal/modules/esm/loader:683:17)
+      at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+      at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33)
+      at ModuleJob.link (node:internal/modules/esm/module_job:253:17) {
+    code: 'ERR_MODULE_NOT_FOUND',
+    url: 'file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mars/prepared/lighting.json'
+  }
+
+test at site/test/scene-contract.test.mjs:9:1
+✖ asteroid, trans-Neptunian and comet Shadows default off in authored content and prepared runtime (2.272916ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async loadObjectTestDefinition (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/object-test-data.mjs:5:21)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/scene-contract.test.mjs:12:23)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  }
+
+test at site/test/scene-contract.test.mjs:21:1
+✖ publishes one off-by-default Shadows control for every planet (0.7155ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async loadObjectTestDefinition (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/object-test-data.mjs:5:21)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/scene-contract.test.mjs:27:29)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mercury/prepared/object.json'
+  }
+
+test at site/test/scene-sources.test.mjs:7:1
+✖ small shell attribution records match the checked scientific provenance (1.730583ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/objects/milky-way/source/sky/provenance.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async read (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/scene-sources.test.mjs:8:41)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/scene-sources.test.mjs:9:15)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/objects/milky-way/source/sky/provenance.json'
+  }
+
+test at site/test/scientific-chart-sources.test.mjs:9:1
+✖ binds phase charts to explicit primary-source provenance (2.352291ms)
+  Error: ENOENT: no such file or directory, access '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/public/scenes/mercury/mercury-photometric-phase-curve.svg'
+      at async access (node:internal/fs/promises:664:10)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/scientific-chart-sources.test.mjs:24:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'access',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/public/scenes/mercury/mercury-photometric-phase-curve.svg'
+  }
+
+test at site/test/surface-minimap.test.mjs:1:1
+✖ site/test/surface-minimap.test.mjs (83.45575ms)
+  'test failed'

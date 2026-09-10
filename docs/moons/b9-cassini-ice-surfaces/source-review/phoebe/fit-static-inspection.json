@@ -1,0 +1,378 @@
+{
+  "url": "https://raw.githubusercontent.com/fraserw/Cassini/bb3da0363ae1b65708d46f6e73bedda67d8dcbb8/shapeScripts/cv1465671822_1_ir.fit_pickle",
+  "bytes": 753676,
+  "sha256": "52d53bc36f3b858c5392414aaa8fbdada58b06b2bceed64eb749256e8c1129e4",
+  "gitBlobSha1": "691d2e8b01590b5cb1acd3f53f6d2436445227f2",
+  "inspection": "pickletools.genops only; no pickle.load, no code imports/execution, no numeric array decoding",
+  "opcodeCounts": {
+    "MARK": 11,
+    "LIST": 1,
+    "PUT": 22,
+    "GLOBAL": 3,
+    "INT": 17,
+    "TUPLE": 10,
+    "STRING": 5,
+    "REDUCE": 3,
+    "NONE": 3,
+    "BUILD": 3,
+    "APPEND": 2,
+    "GET": 4,
+    "STOP": 1
+  },
+  "ops": [
+    {
+      "pos": 0,
+      "opcode": "MARK",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 1,
+      "opcode": "LIST",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 5,
+      "opcode": "GLOBAL",
+      "argument": "numpy.core.multiarray _reconstruct",
+      "argumentLength": 34
+    },
+    {
+      "pos": 44,
+      "opcode": "MARK",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 45,
+      "opcode": "GLOBAL",
+      "argument": "numpy ndarray",
+      "argumentLength": 13
+    },
+    {
+      "pos": 63,
+      "opcode": "MARK",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 64,
+      "opcode": "INT",
+      "argument": "0",
+      "argumentLength": null
+    },
+    {
+      "pos": 67,
+      "opcode": "TUPLE",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 71,
+      "opcode": "STRING",
+      "argument": "b",
+      "argumentLength": 1
+    },
+    {
+      "pos": 79,
+      "opcode": "TUPLE",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 83,
+      "opcode": "REDUCE",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 87,
+      "opcode": "MARK",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 88,
+      "opcode": "INT",
+      "argument": "1",
+      "argumentLength": null
+    },
+    {
+      "pos": 91,
+      "opcode": "MARK",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 92,
+      "opcode": "INT",
+      "argument": "36",
+      "argumentLength": null
+    },
+    {
+      "pos": 96,
+      "opcode": "INT",
+      "argument": "100",
+      "argumentLength": null
+    },
+    {
+      "pos": 101,
+      "opcode": "INT",
+      "argument": "9",
+      "argumentLength": null
+    },
+    {
+      "pos": 104,
+      "opcode": "TUPLE",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 108,
+      "opcode": "GLOBAL",
+      "argument": "numpy dtype",
+      "argumentLength": 11
+    },
+    {
+      "pos": 124,
+      "opcode": "MARK",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 125,
+      "opcode": "STRING",
+      "argument": "f8",
+      "argumentLength": 2
+    },
+    {
+      "pos": 134,
+      "opcode": "INT",
+      "argument": "0",
+      "argumentLength": null
+    },
+    {
+      "pos": 137,
+      "opcode": "INT",
+      "argument": "1",
+      "argumentLength": null
+    },
+    {
+      "pos": 140,
+      "opcode": "TUPLE",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 145,
+      "opcode": "REDUCE",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 150,
+      "opcode": "MARK",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 151,
+      "opcode": "INT",
+      "argument": "3",
+      "argumentLength": null
+    },
+    {
+      "pos": 154,
+      "opcode": "STRING",
+      "argument": "<",
+      "argumentLength": 1
+    },
+    {
+      "pos": 163,
+      "opcode": "NONE",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 164,
+      "opcode": "NONE",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 165,
+      "opcode": "NONE",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 166,
+      "opcode": "INT",
+      "argument": "-1",
+      "argumentLength": null
+    },
+    {
+      "pos": 170,
+      "opcode": "INT",
+      "argument": "-1",
+      "argumentLength": null
+    },
+    {
+      "pos": 174,
+      "opcode": "INT",
+      "argument": "0",
+      "argumentLength": null
+    },
+    {
+      "pos": 177,
+      "opcode": "TUPLE",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 182,
+      "opcode": "BUILD",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 183,
+      "opcode": "INT",
+      "argument": "False",
+      "argumentLength": null
+    },
+    {
+      "pos": 187,
+      "opcode": "STRING",
+      "argument": "[binary payload omitted; not decoded]",
+      "argumentLength": 259200
+    },
+    {
+      "pos": 650649,
+      "opcode": "TUPLE",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 650654,
+      "opcode": "BUILD",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 650655,
+      "opcode": "APPEND",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 650659,
+      "opcode": "MARK",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 650663,
+      "opcode": "MARK",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 650664,
+      "opcode": "INT",
+      "argument": "0",
+      "argumentLength": null
+    },
+    {
+      "pos": 650667,
+      "opcode": "TUPLE",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 650675,
+      "opcode": "TUPLE",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 650680,
+      "opcode": "REDUCE",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 650685,
+      "opcode": "MARK",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 650686,
+      "opcode": "INT",
+      "argument": "1",
+      "argumentLength": null
+    },
+    {
+      "pos": 650689,
+      "opcode": "MARK",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 650690,
+      "opcode": "INT",
+      "argument": "36",
+      "argumentLength": null
+    },
+    {
+      "pos": 650694,
+      "opcode": "INT",
+      "argument": "100",
+      "argumentLength": null
+    },
+    {
+      "pos": 650699,
+      "opcode": "TUPLE",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 650708,
+      "opcode": "INT",
+      "argument": "False",
+      "argumentLength": null
+    },
+    {
+      "pos": 650712,
+      "opcode": "STRING",
+      "argument": "[binary payload omitted; not decoded]",
+      "argumentLength": 28800
+    },
+    {
+      "pos": 753668,
+      "opcode": "TUPLE",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 753673,
+      "opcode": "BUILD",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 753674,
+      "opcode": "APPEND",
+      "argument": null,
+      "argumentLength": null
+    },
+    {
+      "pos": 753675,
+      "opcode": "STOP",
+      "argument": null,
+      "argumentLength": null
+    }
+  ]
+}

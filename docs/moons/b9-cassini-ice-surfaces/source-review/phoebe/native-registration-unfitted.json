@@ -1,0 +1,380 @@
+{
+  "schema": "cssearth-phoebe-unfitted-native-registration@1",
+  "scope": "Unfitted forward diagnostic; no mapped-source registration acceptance, detector footprint, source classification threshold, photometric parity or source geometry changes.",
+  "sourcePins": [
+    {
+      "file": "C1465670650_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/C1465670650_1_ir.cub",
+      "resolvedUrl": "https://vims.univ-nantes.fr/cube/C1465670650_1_ir.cub",
+      "bytes": 1384521,
+      "sha256": "9b4645d37dcf102e4e4ec9a7b79c4d7b3c1953e88e9cc7cec7006c133ced67a4"
+    },
+    {
+      "file": "N1465670650_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/N1465670650_1_ir.cub",
+      "resolvedUrl": "https://vims.univ-nantes.fr/cube/N1465670650_1_ir.cub",
+      "bytes": 232454,
+      "sha256": "5151d4e4885c7b04bca28f18cdbf70432beb5a9de697ede2b4006210bb8f4ee8"
+    },
+    {
+      "file": "C1465670650_1_vis.cub",
+      "url": "https://vims.univ-nantes.fr/cube/C1465670650_1_vis.cub",
+      "resolvedUrl": "https://vims.univ-nantes.fr/cube/C1465670650_1_vis.cub",
+      "bytes": 632103,
+      "sha256": "64df4a766f2fe4daa4c571311606b318f4e44f6245e552671d98aa8ad085e06d"
+    },
+    {
+      "file": "N1465670650_1_vis.cub",
+      "url": "https://vims.univ-nantes.fr/cube/N1465670650_1_vis.cub",
+      "resolvedUrl": "https://vims.univ-nantes.fr/cube/N1465670650_1_vis.cub",
+      "bytes": 217314,
+      "sha256": "e1f3ccd76a1c3423fa074565d9af9aa6ca2a9dc9ce77b3ae3dd08820523c488d"
+    },
+    {
+      "file": "C1465671822_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/C1465671822_1_ir.cub",
+      "resolvedUrl": "https://vims.univ-nantes.fr/cube/C1465671822_1_ir.cub",
+      "bytes": 1090377,
+      "sha256": "e3d284051d290a154a692a5fccc4388bcb33220fed68345991a9055b8d6228ee"
+    },
+    {
+      "file": "N1465671822_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/N1465671822_1_ir.cub",
+      "resolvedUrl": "https://vims.univ-nantes.fr/cube/N1465671822_1_ir.cub",
+      "bytes": 226310,
+      "sha256": "97fee2316839da6b2f5849b35b4ed8bd04af9e26f6cc8842f3254309c915a5a3"
+    },
+    {
+      "file": "C1465671822_1_vis.cub",
+      "url": "https://vims.univ-nantes.fr/cube/C1465671822_1_vis.cub",
+      "resolvedUrl": "https://vims.univ-nantes.fr/cube/C1465671822_1_vis.cub",
+      "bytes": 522279,
+      "sha256": "5085dd9ff0f4dff48b04da8b2b56f26dd20eab913856fa649c05a03423110595"
+    },
+    {
+      "file": "N1465671822_1_vis.cub",
+      "url": "https://vims.univ-nantes.fr/cube/N1465671822_1_vis.cub",
+      "resolvedUrl": "https://vims.univ-nantes.fr/cube/N1465671822_1_vis.cub",
+      "bytes": 211170,
+      "sha256": "e04cebec3141ba13b9adc302f16155a6fa5438367bd1ed8e42ff8ecde488cdb6"
+    }
+  ],
+  "fixedPins": {
+    "src/planets/phoebe/prepared/terrain.json": "a6eb3c92075986288ddfc6e59d85391891ca0d96dc0f2c427ea7fbab2e576178",
+    "src/planets/phoebe/source/preparation/rotation.json": "5dba43a0956e9dd4b84819ea83d253431569afb4b5126661ef5a9c28c2a39713",
+    "output/b9-source-intake/phoebe/native/C1465670650_1_ir.cub": "9b4645d37dcf102e4e4ec9a7b79c4d7b3c1953e88e9cc7cec7006c133ced67a4",
+    "output/b9-source-intake/phoebe/native/N1465670650_1_ir.cub": "5151d4e4885c7b04bca28f18cdbf70432beb5a9de697ede2b4006210bb8f4ee8",
+    "output/b9-source-intake/phoebe/native/C1465670650_1_vis.cub": "64df4a766f2fe4daa4c571311606b318f4e44f6245e552671d98aa8ad085e06d",
+    "output/b9-source-intake/phoebe/native/N1465670650_1_vis.cub": "e1f3ccd76a1c3423fa074565d9af9aa6ca2a9dc9ce77b3ae3dd08820523c488d",
+    "output/b9-source-intake/phoebe/native/C1465671822_1_ir.cub": "e3d284051d290a154a692a5fccc4388bcb33220fed68345991a9055b8d6228ee",
+    "output/b9-source-intake/phoebe/native/N1465671822_1_ir.cub": "97fee2316839da6b2f5849b35b4ed8bd04af9e26f6cc8842f3254309c915a5a3",
+    "output/b9-source-intake/phoebe/native/C1465671822_1_vis.cub": "5085dd9ff0f4dff48b04da8b2b56f26dd20eab913856fa649c05a03423110595",
+    "output/b9-source-intake/phoebe/native/N1465671822_1_vis.cub": "e04cebec3141ba13b9adc302f16155a6fa5438367bd1ed8e42ff8ecde488cdb6"
+  },
+  "cameraModuleSha256": "c4a8f2d534b1252cb847b90beff8c8d4a5daac009912fd40cf5e50f4027b1b04",
+  "modelComparisonSha256": "d8ec9e389a1dd49bdeea35f739ed38312632d427f992f5dcd60b7c775469358d",
+  "method": {
+    "pckFormula": "[W]3 [90-Dec]1 [90+RA]3 (coordinate rotations)",
+    "pckSource": "https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/req/pck.html#Orientation%20Models%20used%20by%20PCK%20Software",
+    "poleSource": "src/planets/phoebe/source/shape/README.txt",
+    "nativePoleRaDecDegrees": [
+      355,
+      68.7
+    ],
+    "fixedPoleRaDecDegrees": [
+      356.9,
+      77.88
+    ],
+    "oldGaskellToNewEstimatedTranslationKm": [
+      0.1960378706536209,
+      -0.4891583620809242,
+      -0.7886686239183882
+    ],
+    "originLimit": "Initialization assumes native SPICE target origin corresponds to historical model origin; author exact displacement and absolute pointing remain unresolved.",
+    "terrainScaleToKm": 0.46304347826086956,
+    "terrainFaces": 3500,
+    "prediction": "Per-native-pixel midpoint camera ray, nominal PCK frame conversion and estimated origin, closest unchanged terrain triangle. Lambert cos(incidence) only, source Sun table, terrain self-shadow ray check; neither albedo nor instrument PSF fitted.",
+    "display": "Native linear min/max per band; Lambert linear0..1; nearest-neighbor8x; predicted center-cell boundary overlay is a diagnostic, not detector coverage."
+  },
+  "observations": [
+    {
+      "observationId": "1465670650_1",
+      "channel": "VIS",
+      "width": 48,
+      "height": 24,
+      "bandOneBased": 49,
+      "wavelengthMicrometers": 0.70288,
+      "cameraInputEvidence": {
+        "calibratedLabelSha256": "fa8f69ddfbc56dd1a9a8b0d45a0e898715165586cd69c9f5e7e98717c1676f49",
+        "navigationLabelSha256": "6acb291fc1c04b5be555ed15db69ed2e995cf941680779feba8b35026c61450d",
+        "navigationPlanesSha256": "1f1e98bc9467069a5cdc949dbc67ac903a2c0b0392d5f30911b030d03a114d96",
+        "tables": {
+          "InstrumentPointing": {
+            "sha256": "01051594ceddf3630f748ed761f25bf2fd6cf8e88f3d7652e5763fe2ffe6a7e4",
+            "bytes": 3328
+          },
+          "InstrumentPosition": {
+            "sha256": "71253d54fcfb756663593729db39bae16267027944c7650771cc7c98a1183fae",
+            "bytes": 168
+          },
+          "BodyRotation": {
+            "sha256": "341f886966d241cba55c2d0b873ec43b3ef973140fbe9f5f85dfd00ae8c7e8f9",
+            "bytes": 128
+          }
+        }
+      },
+      "sunTable": {
+        "bytes": 112,
+        "sha256": "79d29334816d9109cd37c4b8ff84cd7158fa1cb3e82c07d40694ea049e76a2b1"
+      },
+      "nativeCenterLookErrorPixels": {
+        "count": 185,
+        "min": 2.0619682691504557e-09,
+        "median": 1.6932369937964428e-07,
+        "p95": 1.324065248986754e-06,
+        "max": 2.1474162511569253e-06
+      },
+      "nativePckFormulaVsCachedRotationMaxAxisErrorDegrees": {
+        "count": 1152,
+        "min": 9.329388584979866e-12,
+        "median": 6.472271952078518e-11,
+        "p95": 1.506690573855127e-10,
+        "max": 1.510229289799801e-10
+      },
+      "predictedHitCount": 190,
+      "predictedLitCount": 99,
+      "nativeIfInsidePredictedLit": {
+        "count": 99,
+        "min": 0.0009380438132211566,
+        "median": 0.009146291762590408,
+        "p95": 0.015216094441711903,
+        "max": 0.016984635964035988
+      },
+      "nativeIfOutsidePredictedBody": {
+        "count": 962,
+        "min": -0.0004993594484403729,
+        "median": 8.841226372169331e-05,
+        "p95": 0.00046154408482834697,
+        "max": 0.01360252220183611
+      },
+      "nativeIfAll": {
+        "count": 1152,
+        "min": -0.0004993594484403729,
+        "median": 0.0001114618280553259,
+        "p95": 0.008544940501451492,
+        "max": 0.016984635964035988
+      },
+      "nativeIfMedianLitToOutsideDifference": 0.009057879447937012
+    },
+    {
+      "observationId": "1465670650_1",
+      "channel": "IR",
+      "width": 48,
+      "height": 24,
+      "bandOneBased": 57,
+      "wavelengthMicrometers": 1.80374,
+      "cameraInputEvidence": {
+        "calibratedLabelSha256": "01b97d0c86862cb157a418a6d1f99cca77a546ac70cf9094766a84212eb9b085",
+        "navigationLabelSha256": "5a169b197099c0d212255dab1e98a682e756a79b675cd53699d88911056c3abb",
+        "navigationPlanesSha256": "04ad2c2793148284fec804ec56c86815d7977b1ee953d23d5513709d191916ff",
+        "tables": {
+          "InstrumentPointing": {
+            "sha256": "01051594ceddf3630f748ed761f25bf2fd6cf8e88f3d7652e5763fe2ffe6a7e4",
+            "bytes": 3328
+          },
+          "InstrumentPosition": {
+            "sha256": "71253d54fcfb756663593729db39bae16267027944c7650771cc7c98a1183fae",
+            "bytes": 168
+          },
+          "BodyRotation": {
+            "sha256": "341f886966d241cba55c2d0b873ec43b3ef973140fbe9f5f85dfd00ae8c7e8f9",
+            "bytes": 128
+          }
+        }
+      },
+      "sunTable": {
+        "bytes": 112,
+        "sha256": "79d29334816d9109cd37c4b8ff84cd7158fa1cb3e82c07d40694ea049e76a2b1"
+      },
+      "nativeCenterLookErrorPixels": {
+        "count": 402,
+        "min": 2.468557437557633e-09,
+        "median": 3.3838391069036826e-07,
+        "p95": 2.87527602149387e-06,
+        "max": 3.7327908231158656e-06
+      },
+      "nativePckFormulaVsCachedRotationMaxAxisErrorDegrees": {
+        "count": 1152,
+        "min": 3.4264849379379045e-14,
+        "median": 7.500833411346076e-11,
+        "p95": 1.9270983889763355e-10,
+        "max": 2.735303619480866e-10
+      },
+      "predictedHitCount": 400,
+      "predictedLitCount": 216,
+      "nativeIfInsidePredictedLit": {
+        "count": 216,
+        "min": -0.0002544747549109161,
+        "median": 0.007198132574558258,
+        "p95": 0.01619703136384487,
+        "max": 0.019025687128305435
+      },
+      "nativeIfOutsidePredictedBody": {
+        "count": 752,
+        "min": -0.0006664402899332345,
+        "median": 6.780029070796445e-05,
+        "p95": 0.0011903222184628248,
+        "max": 0.01847345568239689
+      },
+      "nativeIfAll": {
+        "count": 1152,
+        "min": -0.0006664402899332345,
+        "median": 9.688280988484621e-05,
+        "p95": 0.011798917315900326,
+        "max": 0.019025687128305435
+      },
+      "nativeIfMedianLitToOutsideDifference": 0.007130332291126251
+    },
+    {
+      "observationId": "1465671822_1",
+      "channel": "VIS",
+      "width": 36,
+      "height": 24,
+      "bandOneBased": 49,
+      "wavelengthMicrometers": 0.70288,
+      "cameraInputEvidence": {
+        "calibratedLabelSha256": "6627e052055c6d8f36af0cfc60e0c83166fce5cf398cc5c58b4f057c2f7ec391",
+        "navigationLabelSha256": "308957b49167a95c45c9022cc1ed10a1ce5f434712f5220c47fd8633130dfbd2",
+        "navigationPlanesSha256": "6e7b73ececddee26edc79092c46d13f28398243ae26fab67b1f173e1c2f2a455",
+        "tables": {
+          "InstrumentPointing": {
+            "sha256": "392e0ad3819bfb5db29686d8b91607e47cba98215f710b65d2aba22b9455128c",
+            "bytes": 4096
+          },
+          "InstrumentPosition": {
+            "sha256": "f5a8e37adc835440e119ae804988e58099f83faa560f3b25d4e466dd630db8e4",
+            "bytes": 168
+          },
+          "BodyRotation": {
+            "sha256": "ff33b12efbfe38e112e5bd1e6c80bfd7be3377c6804cd6d199c9bca00d416b78",
+            "bytes": 128
+          }
+        }
+      },
+      "sunTable": {
+        "bytes": 112,
+        "sha256": "8782f309aa719c988df6c4441e96c02e88bca8ffdb2d82ea02c37407a298205b"
+      },
+      "nativeCenterLookErrorPixels": {
+        "count": 318,
+        "min": 3.085682087377344e-09,
+        "median": 2.6165562369555813e-07,
+        "p95": 1.9912855651630686e-06,
+        "max": 2.90160430033382e-06
+      },
+      "nativePckFormulaVsCachedRotationMaxAxisErrorDegrees": {
+        "count": 864,
+        "min": 5.790111569515823e-12,
+        "median": 1.0609475718160912e-10,
+        "p95": 2.4062843840890807e-10,
+        "max": 3.024614672638926e-10
+      },
+      "predictedHitCount": 320,
+      "predictedLitCount": 181,
+      "nativeIfInsidePredictedLit": {
+        "count": 181,
+        "min": -1.2217153198434971e-05,
+        "median": 0.010098248720169067,
+        "p95": 0.016994033008813858,
+        "max": 0.019043706357479095
+      },
+      "nativeIfOutsidePredictedBody": {
+        "count": 544,
+        "min": -0.00055461295414716,
+        "median": 9.392567881150171e-05,
+        "p95": 0.0013763776514679193,
+        "max": 0.01713293418288231
+      },
+      "nativeIfAll": {
+        "count": 864,
+        "min": -0.00055461295414716,
+        "median": 0.00016240925469901413,
+        "p95": 0.01373905036598444,
+        "max": 0.019043706357479095
+      },
+      "nativeIfMedianLitToOutsideDifference": 0.010004322975873947
+    },
+    {
+      "observationId": "1465671822_1",
+      "channel": "IR",
+      "width": 36,
+      "height": 24,
+      "bandOneBased": 57,
+      "wavelengthMicrometers": 1.80374,
+      "cameraInputEvidence": {
+        "calibratedLabelSha256": "49d03b4b6ea98e07b828b648df5df5dcbd2cdc0698445bee637b53a9dc5cb95c",
+        "navigationLabelSha256": "1c70d3f515b7230f394884529f8323afc69a619a37f3de3228a5411b9da9e38a",
+        "navigationPlanesSha256": "2c2150317ca7bf0f4713477da2f91c219b031011074ff62f6d0cfce25579c814",
+        "tables": {
+          "InstrumentPointing": {
+            "sha256": "392e0ad3819bfb5db29686d8b91607e47cba98215f710b65d2aba22b9455128c",
+            "bytes": 4096
+          },
+          "InstrumentPosition": {
+            "sha256": "f5a8e37adc835440e119ae804988e58099f83faa560f3b25d4e466dd630db8e4",
+            "bytes": 168
+          },
+          "BodyRotation": {
+            "sha256": "ff33b12efbfe38e112e5bd1e6c80bfd7be3377c6804cd6d199c9bca00d416b78",
+            "bytes": 128
+          }
+        }
+      },
+      "sunTable": {
+        "bytes": 112,
+        "sha256": "8782f309aa719c988df6c4441e96c02e88bca8ffdb2d82ea02c37407a298205b"
+      },
+      "nativeCenterLookErrorPixels": {
+        "count": 423,
+        "min": 6.308511810059815e-09,
+        "median": 2.989625241609686e-07,
+        "p95": 3.901511399436335e-06,
+        "max": 5.84502641873525e-06
+      },
+      "nativePckFormulaVsCachedRotationMaxAxisErrorDegrees": {
+        "count": 864,
+        "min": 4.995040622187675e-13,
+        "median": 9.318179978874819e-11,
+        "p95": 2.388261795616937e-10,
+        "max": 3.3255689044928386e-10
+      },
+      "predictedHitCount": 431,
+      "predictedLitCount": 348,
+      "nativeIfInsidePredictedLit": {
+        "count": 348,
+        "min": -0.00023850100114941597,
+        "median": 0.010547592304646969,
+        "p95": 0.018571900203824043,
+        "max": 0.02150096371769905
+      },
+      "nativeIfOutsidePredictedBody": {
+        "count": 433,
+        "min": -0.0003841134603135288,
+        "median": 6.155796290840954e-05,
+        "p95": 0.0171856377273798,
+        "max": 0.02028624154627323
+      },
+      "nativeIfAll": {
+        "count": 864,
+        "min": -0.0003841134603135288,
+        "median": 0.0002831436868291348,
+        "p95": 0.01758413016796112,
+        "max": 0.02150096371769905
+      },
+      "nativeIfMedianLitToOutsideDifference": 0.01048603467643261
+    }
+  ],
+  "wallSeconds": 1.0046041660025367,
+  "peakRssBytesMacOS": 71712768,
+  "allInputsUnchanged": true
+}

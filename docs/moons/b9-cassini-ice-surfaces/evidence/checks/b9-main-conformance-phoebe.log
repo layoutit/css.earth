@@ -1,0 +1,197 @@
+22:11:49 [types] Generated 0ms
+ astro  v7.2.9 ready in 770 ms
+┃ Local    http://127.0.0.1:4292/
+22:11:49 watching for file changes...
+(node:7110) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[conformance] START phoebe/mobile
+22:11:55 [200] /phoebe/ 1620ms
+22:11:59 [200] /objects/phoebe/d96f75d77fa361fe205d1d918c0ce57ebd419be19bd4de4e1bae58def23ed163.json 10ms
+[conformance] PASS phoebe/mobile (10179ms)
+[conformance] START phoebe/dataset-interactions
+22:12:01 [200] /phoebe/ 10ms
+22:12:03 [200] /objects/phoebe/d96f75d77fa361fe205d1d918c0ce57ebd419be19bd4de4e1bae58def23ed163.json 8ms
+[conformance] PASS phoebe/dataset-interactions (20751ms)
+[conformance] START phoebe/dataset-interactions-dpr-2
+22:12:21 [200] /phoebe/ 9ms
+22:12:24 [200] /objects/phoebe/d96f75d77fa361fe205d1d918c0ce57ebd419be19bd4de4e1bae58def23ed163.json 8ms
+[conformance] PASS phoebe/dataset-interactions-dpr-2 (21912ms)
+[conformance] START phoebe/lens-race
+22:12:43 [200] /phoebe/ 8ms
+22:12:46 [200] /objects/phoebe/d96f75d77fa361fe205d1d918c0ce57ebd419be19bd4de4e1bae58def23ed163.json 11ms
+[conformance] PASS phoebe/lens-race (4572ms)
+[conformance] START phoebe/lens-reacquire
+22:12:48 [200] /phoebe/ 8ms
+22:12:50 [200] /objects/phoebe/d96f75d77fa361fe205d1d918c0ce57ebd419be19bd4de4e1bae58def23ed163.json 14ms
+[conformance] PASS phoebe/lens-reacquire (4655ms)
+[conformance] START phoebe/lens-rejection
+22:12:52 [200] /phoebe/ 8ms
+22:12:55 [200] /objects/phoebe/d96f75d77fa361fe205d1d918c0ce57ebd419be19bd4de4e1bae58def23ed163.json 7ms
+[conformance] PASS phoebe/lens-rejection (4813ms)
+[conformance] START phoebe/lens-destroy
+22:12:57 [200] /phoebe/ 8ms
+22:13:00 [200] /objects/phoebe/d96f75d77fa361fe205d1d918c0ce57ebd419be19bd4de4e1bae58def23ed163.json 8ms
+[conformance] PASS phoebe/lens-destroy (4610ms)
+{
+  "ok": true,
+  "reports": [
+    {
+      "id": "phoebe",
+      "case": "initial-shell",
+      "skipped": true
+    },
+    {
+      "id": "phoebe",
+      "case": "desktop",
+      "skipped": true
+    },
+    {
+      "id": "phoebe",
+      "viewport": "mobile",
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 6,
+      "stageElements": 118775,
+      "stable": true
+    },
+    {
+      "id": "phoebe",
+      "case": "dataset-interactions",
+      "deviceScaleFactor": 1,
+      "datasets": [
+        {
+          "id": "normal",
+          "interior": false,
+          "geometryDisplacement": 131.1780068113282,
+          "shadowPixels": null
+        },
+        {
+          "id": "elevation",
+          "interior": false,
+          "geometryDisplacement": 131.28144109066722,
+          "shadowPixels": null
+        },
+        {
+          "id": "maplet-resolution",
+          "interior": false,
+          "geometryDisplacement": 130.3812626787088,
+          "shadowPixels": null
+        },
+        {
+          "id": "image-count",
+          "interior": false,
+          "geometryDisplacement": 134.7049702543134,
+          "shadowPixels": null
+        },
+        {
+          "id": "infrared",
+          "interior": false,
+          "geometryDisplacement": 155.90867213500636,
+          "shadowPixels": null
+        },
+        {
+          "id": "ice-absorption",
+          "interior": false,
+          "geometryDisplacement": 129.5271302083423,
+          "shadowPixels": null
+        }
+      ]
+    },
+    {
+      "id": "phoebe",
+      "case": "dataset-interactions",
+      "deviceScaleFactor": 2,
+      "datasets": [
+        {
+          "id": "normal",
+          "interior": false,
+          "geometryDisplacement": 131.1780068113282,
+          "shadowPixels": null
+        },
+        {
+          "id": "elevation",
+          "interior": false,
+          "geometryDisplacement": 131.28144109066722,
+          "shadowPixels": null
+        },
+        {
+          "id": "maplet-resolution",
+          "interior": false,
+          "geometryDisplacement": 130.3812626787088,
+          "shadowPixels": null
+        },
+        {
+          "id": "image-count",
+          "interior": false,
+          "geometryDisplacement": 134.7049702543134,
+          "shadowPixels": null
+        },
+        {
+          "id": "infrared",
+          "interior": false,
+          "geometryDisplacement": 159.58313163037366,
+          "shadowPixels": null
+        },
+        {
+          "id": "ice-absorption",
+          "interior": false,
+          "geometryDisplacement": 131.11057481302282,
+          "shadowPixels": null
+        }
+      ]
+    },
+    {
+      "id": "phoebe",
+      "case": "pre-ready-hidden-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "phoebe",
+      "case": "pre-ready-visible-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "phoebe",
+      "case": "pre-ready-hidden-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "phoebe",
+      "case": "pre-ready-visible-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "phoebe",
+      "case": "dpr-1",
+      "skipped": true
+    },
+    {
+      "id": "phoebe",
+      "case": "dpr-2",
+      "skipped": true
+    },
+    {
+      "id": "phoebe",
+      "viewport": "lens-race",
+      "lens": "normal",
+      "slowDecodeCount": 1
+    },
+    {
+      "id": "phoebe",
+      "viewport": "lens-reacquire",
+      "lens": "elevation"
+    },
+    {
+      "id": "phoebe",
+      "viewport": "lens-rejection-retry",
+      "lens": "elevation"
+    },
+    {
+      "id": "phoebe",
+      "viewport": "lens-destroy"
+    }
+  ]
+}

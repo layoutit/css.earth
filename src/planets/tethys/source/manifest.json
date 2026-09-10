@@ -314,6 +314,595 @@
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
       "expectedBytes": 790789,
       "expectedSha256": "f2d4bcf46ea64f2d389e530567a7518da40841d34f88bd68384fafb991ea4808"
+    },
+    {
+      "id": "tethys-cassini-original-c1807469104_1_ir-cub",
+      "path": "cassini-ice/native/C1807469104_1_ir.cub",
+      "expectedBytes": 572731,
+      "expectedSha256": "4b6bee3bfa4f19b51025c326cf7ac207bd4ea48bc35075f5ee83f86400c398ae",
+      "origin": "https://vims.univ-nantes.fr/cube/C1807469104_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-n1807469104_1_ir-cub",
+      "path": "cassini-ice/native/N1807469104_1_ir.cub",
+      "expectedBytes": 382352,
+      "expectedSha256": "55355c71d5b6c921ff7c5f4564e14ce28a0d787fb3d8963b28736a66cd6146f0",
+      "origin": "https://vims.univ-nantes.fr/cube/N1807469104_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-v1807469104_1-qub",
+      "path": "cassini-ice/raw/v1807469104_1.qub",
+      "expectedBytes": 252928,
+      "expectedSha256": "be1e54ea809e092370dd8a09f2ed96ee5aa350671241b0e46310c2adf3f4ebdc",
+      "origin": "https://vims.univ-nantes.fr/cube/1807469104_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-c1807456038_1_ir-cub",
+      "path": "cassini-ice/native/C1807456038_1_ir.cub",
+      "expectedBytes": 454887,
+      "expectedSha256": "4f7935c46b21af2bb0036382658b0e205be274b091f36e76084df6b4096733a6",
+      "origin": "https://vims.univ-nantes.fr/cube/C1807456038_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-n1807456038_1_ir-cub",
+      "path": "cassini-ice/native/N1807456038_1_ir.cub",
+      "expectedBytes": 312508,
+      "expectedSha256": "0dcf493ccef3b5e016d69d636053bb9934960262e3ded3512425895aea5b065c",
+      "origin": "https://vims.univ-nantes.fr/cube/N1807456038_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-v1807456038_1-qub",
+      "path": "cassini-ice/raw/v1807456038_1.qub",
+      "expectedBytes": 195584,
+      "expectedSha256": "dc8f4b201a002c900c11314e7c2ad65fdcfab344469f5e14d2f42d0a74d0b732",
+      "origin": "https://vims.univ-nantes.fr/cube/1807456038_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-c1807473499_1_ir-cub",
+      "path": "cassini-ice/native/C1807473499_1_ir.cub",
+      "expectedBytes": 446797,
+      "expectedSha256": "accd3bed917401cd4ca82558bb2d1f8181e646c27f3272cc18a3f69a1c8c220f",
+      "origin": "https://vims.univ-nantes.fr/cube/C1807473499_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-n1807473499_1_ir-cub",
+      "path": "cassini-ice/native/N1807473499_1_ir.cub",
+      "expectedBytes": 158730,
+      "expectedSha256": "4b2b82f80a99bf4488e301203d62bbf9b7c7c29aed549526bf2952927398d76b",
+      "origin": "https://vims.univ-nantes.fr/cube/N1807473499_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-v1807473499_1-qub",
+      "path": "cassini-ice/raw/v1807473499_1.qub",
+      "expectedBytes": 248320,
+      "expectedSha256": "c0e1697c5cc5f72b6fede8ef71a20fb460fe80f083f4587acf2c1f5bd98f62ef",
+      "origin": "https://vims.univ-nantes.fr/cube/1807473499_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-c1818547570_1_ir-cub",
+      "path": "cassini-ice/native/C1818547570_1_ir.cub",
+      "expectedBytes": 695517,
+      "expectedSha256": "4eeddcbdf2405d627bb186a4bcb5fdd0beae2d5e754ea1081ea16c10fa320795",
+      "origin": "https://vims.univ-nantes.fr/cube/C1818547570_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-n1818547570_1_ir-cub",
+      "path": "cassini-ice/native/N1818547570_1_ir.cub",
+      "expectedBytes": 183450,
+      "expectedSha256": "2b45033ab5cf0450c13bc05b019dcd0dba34ba7f2f39deb7c9aad012052c4aa6",
+      "origin": "https://vims.univ-nantes.fr/cube/N1818547570_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-v1818547570_1-qub",
+      "path": "cassini-ice/raw/v1818547570_1.qub",
+      "expectedBytes": 415232,
+      "expectedSha256": "5077a518b0af23d1321cf2d196200793d6d826bade577afe575888d626c72957",
+      "origin": "https://vims.univ-nantes.fr/cube/1818547570_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-c1561668191_1_ir-cub",
+      "path": "cassini-ice/native/C1561668191_1_ir.cub",
+      "expectedBytes": 562527,
+      "expectedSha256": "918a27b9b76de708dcfb5fb7b8db990b825006b4d71317cbcf87f727da9e3ddb",
+      "origin": "https://vims.univ-nantes.fr/cube/C1561668191_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-n1561668191_1_ir-cub",
+      "path": "cassini-ice/native/N1561668191_1_ir.cub",
+      "expectedBytes": 170460,
+      "expectedSha256": "be6f1d27fbd977f750fb79ed0d9a0758d279435aedbd57cd6020e4348b2e61e5",
+      "origin": "https://vims.univ-nantes.fr/cube/N1561668191_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-v1561668191_1-qub",
+      "path": "cassini-ice/raw/v1561668191_1.qub",
+      "expectedBytes": 326144,
+      "expectedSha256": "373d8b8f871879f760a48ba4ca1b3fe405bd93776ac4a6c48383cca952a3599c",
+      "origin": "https://vims.univ-nantes.fr/cube/1561668191_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-c1660463972_1_ir-cub",
+      "path": "cassini-ice/native/C1660463972_1_ir.cub",
+      "expectedBytes": 456069,
+      "expectedSha256": "d85ed15fae82d390ad395d133615a188ecee84e2aaf9a382a71b99760145b6f9",
+      "origin": "https://vims.univ-nantes.fr/cube/C1660463972_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-n1660463972_1_ir-cub",
+      "path": "cassini-ice/native/N1660463972_1_ir.cub",
+      "expectedBytes": 168002,
+      "expectedSha256": "2cbf9230387dd49ceb4cf142a72cabb50eb49d9e4cda26479c17335cb62df875",
+      "origin": "https://vims.univ-nantes.fr/cube/N1660463972_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-v1660463972_1-qub",
+      "path": "cassini-ice/raw/v1660463972_1.qub",
+      "expectedBytes": 248320,
+      "expectedSha256": "8e82a329b1fd42fc243c3f89515466cda86a2f7bd188a61ae74305a207d645a9",
+      "origin": "https://vims.univ-nantes.fr/cube/1660463972_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-c1719613772_1_ir-cub",
+      "path": "cassini-ice/native/C1719613772_1_ir.cub",
+      "expectedBytes": 735315,
+      "expectedSha256": "7afb633bcb10bfa6def52b2c4fde32d68b7d9c3714c9e70cd922146f922a0042",
+      "origin": "https://vims.univ-nantes.fr/cube/C1719613772_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-n1719613772_1_ir-cub",
+      "path": "cassini-ice/native/N1719613772_1_ir.cub",
+      "expectedBytes": 191248,
+      "expectedSha256": "0b780aa84669bb56b24ebfa9f79fc583e3f3b853c6bbe45c050e7787024411f6",
+      "origin": "https://vims.univ-nantes.fr/cube/N1719613772_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-v1719613772_1-qub",
+      "path": "cassini-ice/raw/v1719613772_1.qub",
+      "expectedBytes": 439808,
+      "expectedSha256": "d599c14f6f0ecbcbe253726b04e9b4a0a03e913b69a554fe050f972fa848d032",
+      "origin": "https://vims.univ-nantes.fr/cube/1719613772_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-c1719616836_1_ir-cub",
+      "path": "cassini-ice/native/C1719616836_1_ir.cub",
+      "expectedBytes": 730703,
+      "expectedSha256": "f1ab5891ca92a4af956643ff3f05df404dfc5369e82eb1e77c1c2d980323be43",
+      "origin": "https://vims.univ-nantes.fr/cube/C1719616836_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-n1719616836_1_ir-cub",
+      "path": "cassini-ice/native/N1719616836_1_ir.cub",
+      "expectedBytes": 186636,
+      "expectedSha256": "94cded98862d5d1ff665d627bae87ae5a97d8a9ff2993e23fd4831cefdf7b002",
+      "origin": "https://vims.univ-nantes.fr/cube/N1719616836_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-v1719616836_1-qub",
+      "path": "cassini-ice/raw/v1719616836_1.qub",
+      "expectedBytes": 439808,
+      "expectedSha256": "137bcba59f43f125cc03f8b5a692b8b531ca9915bf67817e4bb68a65ce9d3766",
+      "origin": "https://vims.univ-nantes.fr/cube/1719616836_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-c1606213356_1_ir-cub",
+      "path": "cassini-ice/native/C1606213356_1_ir.cub",
+      "expectedBytes": 621243,
+      "expectedSha256": "76e99719ab53c5c500a5a607c8de6457a6a4d2f6018a5345422499a988227d91",
+      "origin": "https://vims.univ-nantes.fr/cube/C1606213356_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-n1606213356_1_ir-cub",
+      "path": "cassini-ice/native/N1606213356_1_ir.cub",
+      "expectedBytes": 189176,
+      "expectedSha256": "8af91d04b7a71f66c1fb7053fbad38203255a8f09b0da12271210acaa97cf744",
+      "origin": "https://vims.univ-nantes.fr/cube/N1606213356_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-original-v1606213356_1-qub",
+      "path": "cassini-ice/raw/v1606213356_1.qub",
+      "expectedBytes": 360448,
+      "expectedSha256": "3aceb080e213415421a130236188f80b02a8bd4e03c1eeea2cca8eb8037c91af",
+      "origin": "https://vims.univ-nantes.fr/cube/1606213356_1.qub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Exact original archive bytes; restore with the shared acquisition plan.",
+      "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
+      "consumers": [
+        "cassini-ice-originals"
+      ]
+    },
+    {
+      "id": "tethys-cassini-ice-absorption",
+      "path": "cassini-ice/tethys-ice-absorption.tif",
+      "expectedBytes": 126710,
+      "expectedSha256": "d55c543360d7612d68271dea75721766cf484c560c4f4d4f34cae1d813864d6a",
+      "origin": "https://vims.univ-nantes.fr/cube/1807469104_1",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Reproduce from pinned original C/N and raw QUB inputs with tools/objects/acquisition/cassini-ice-surfaces.py and cassini-ice/prepare.json.",
+      "redistribution": "Derived source map under CC BY 4.0 with full archive attribution; original observations and lossless values retained.",
+      "consumers": [
+        "ice-absorption"
+      ],
+      "lensId": "ice-absorption",
+      "label": "Ice absorption",
+      "falseColor": true,
+      "width": 1024,
+      "height": 512,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 0,
+        "referenceRadiusMeters": 531000,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "Supported detector apertures cover approximately 22.59% of the reference sphere by angular grid weighting, not measured physical mesh area. Native resolution varies; output grid spacing is not observation detail. Preserve unsupported gaps. No photometric correction; registration limits are in cassini-ice/evidence/registration.md.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://vims.univ-nantes.fr/cube/1807469104_1"
+      }
+    },
+    {
+      "id": "tethys-cassini-infrared",
+      "path": "cassini-ice/tethys-infrared-display.tif",
+      "expectedBytes": 117380,
+      "expectedSha256": "620881bff247aa48f0f98e05d06cbccad6a3e43133794f0621ffb0aa1cb4d7bc",
+      "origin": "https://vims.univ-nantes.fr/cube/1807469104_1",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Reproduce from pinned original C/N and raw QUB inputs with tools/objects/acquisition/cassini-ice-surfaces.py and cassini-ice/prepare.json.",
+      "redistribution": "Derived source map under CC BY 4.0 with full archive attribution; original observations and lossless values retained.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "infrared",
+      "label": "Infrared",
+      "falseColor": true,
+      "width": 1024,
+      "height": 512,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 180,
+        "referenceRadiusMeters": 531000,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "Supported detector apertures cover approximately 14.76% of the reference sphere by angular grid weighting, not measured physical mesh area. Native resolution varies; output grid spacing is not observation detail. Preserve unsupported gaps. No photometric correction; registration limits are in cassini-ice/evidence/registration.md.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://vims.univ-nantes.fr/cube/1807469104_1"
+      }
     }
   ],
   "documents": [
@@ -367,8 +956,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 8981,
-      "expectedSha256": "2017e62d3c0886001a529d72cfd2f39775ef32dde2e66c134a0430be6370165e",
+      "expectedBytes": 11131,
+      "expectedSha256": "3360f3d907f96d0acfd84eec99f81a9d58846752ab5cb257c57496b081ea30ab",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
@@ -379,14 +968,14 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 8206,
-      "expectedSha256": "a9d39082cca78d14e95cbfcded3371d2eb7118053fb70616176d6020b9484f91",
+      "expectedBytes": 13786,
+      "expectedSha256": "fd5d49f206d34e500a332bb555189d41daec9c3c3524197e5e4d985d609f6951",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 12105,
-      "expectedSha256": "258ab92828040f5f83eeb93c6e82d3e1b2424661a15434f4e2007e31b614ad20",
+      "expectedBytes": 15503,
+      "expectedSha256": "938ecf6097f442c49fd704f02ffc3be7f2350bb1920e9eba0be1ce263967a390",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
@@ -498,6 +1087,66 @@
       "purpose": "Independent raw source numeric values and coordinate anchors; preparation/display qualification remains pending.",
       "expectedBytes": 3160,
       "expectedSha256": "539a080366a26bba704c14b305a889dcf4dbc90c853bbf9ba34fb6187e33aa02"
+    },
+    {
+      "path": "cassini-ice/evidence/download-receipts.json",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 8556,
+      "expectedSha256": "f2af477511b404a8c3448fe068979fffe5146cc51fee39d7eb3a2307469d7449"
+    },
+    {
+      "path": "cassini-ice/evidence/license-about.html",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 22564,
+      "expectedSha256": "02f560a51d6e075f91264a56b6aad8c23cfca448a4c17f0b3f0408568bf175a9"
+    },
+    {
+      "path": "cassini-ice/evidence/registration.md",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 971,
+      "expectedSha256": "942fdb6592821e810983962c922ee447ba3d9effcc1b4e2c7357c6efa837bd74"
+    },
+    {
+      "path": "cassini-ice/preparation-receipt.json",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 100999,
+      "expectedSha256": "215b540b5660bd30501659d4c6a9aca0978dc3e5f2643565a0d2b8410d30f48a"
+    },
+    {
+      "path": "cassini-ice/prepare.json",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 7768,
+      "expectedSha256": "946b2641db5a3dee9508d6c0273e6dadb910498a02ff48af10fe6ea3677e44e1"
+    },
+    {
+      "path": "cassini-ice/tethys-ice-absorption-observation.tif",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 17720,
+      "expectedSha256": "3d90aec662312d48ea563efbe9768d15736740606c82da2f5930b4a9fc7a40da"
+    },
+    {
+      "path": "cassini-ice/tethys-ice-absorption-source-pixel.tif",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 33870,
+      "expectedSha256": "b48993134b1d17199d344188747f769c2eb59f4cd947cdf78e4a5243339083ed"
+    },
+    {
+      "path": "cassini-ice/tethys-infrared-if-observation.tif",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 13081,
+      "expectedSha256": "1cc530c1f92226156ab280a24082385732291001fb166e94a2bfef7802f449b6"
+    },
+    {
+      "path": "cassini-ice/tethys-infrared-if-source-pixel.tif",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 22505,
+      "expectedSha256": "9efeb7b820abed78404ecc4cdbdcfe53448fb6203af3974b7355a3550493caf8"
+    },
+    {
+      "path": "cassini-ice/tethys-infrared-if.tif",
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
+      "expectedBytes": 216690,
+      "expectedSha256": "b18ecacb19d5c3d873f59bbfee385e609a94746fdddb93aeb5c601ea2df1cce6"
     }
   ],
   "generatedIntermediates": []

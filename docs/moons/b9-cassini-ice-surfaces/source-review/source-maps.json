@@ -1,0 +1,42 @@
+{
+  "inputs": [
+    {
+      "body": "tethys",
+      "kind": "rgbDisplay",
+      "file": "src/planets/tethys/source/cassini-ice/tethys-infrared-display.tif",
+      "sha256": "620881bff247aa48f0f98e05d06cbccad6a3e43133794f0621ffb0aa1cb4d7bc"
+    },
+    {
+      "body": "tethys",
+      "kind": "depth",
+      "file": "src/planets/tethys/source/cassini-ice/tethys-ice-absorption.tif",
+      "sha256": "d55c543360d7612d68271dea75721766cf484c560c4f4d4f34cae1d813864d6a"
+    },
+    {
+      "body": "iapetus",
+      "kind": "rgbDisplay",
+      "file": "src/planets/iapetus/source/cassini-ice/iapetus-infrared-display.tif",
+      "sha256": "a3788744172cac6820eaaf39e53d1013ce65612799c107e96a17fbebbcea2e7f"
+    },
+    {
+      "body": "iapetus",
+      "kind": "depth",
+      "file": "src/planets/iapetus/source/cassini-ice/iapetus-ice-absorption.tif",
+      "sha256": "399a434937605b2d3215a3691fb630435b4957ff8b5eb23334b42bf42f440fdc"
+    },
+    {
+      "body": "phoebe",
+      "kind": "rgbDisplay",
+      "file": "src/planets/phoebe/source/cassini-ice/phoebe-infrared-display.tif",
+      "sha256": "f22812b0e21b9f448bd83482bd2a664cafe67ea6f8dc23e8c0e205dd0c3e2e8b"
+    },
+    {
+      "body": "phoebe",
+      "kind": "depth",
+      "file": "src/planets/phoebe/source/cassini-ice/phoebe-ice-absorption.tif",
+      "sha256": "d4b6945058358ceb42460ef5966e1ece2a5e1eb6bf481847b25ab42ff835ca1b"
+    }
+  ],
+  "imageSha256": "4903958c44ddaddf4bb7d33c20a7b999c6dbe9654fac0c8a43120e7ab5be5e88",
+  "interpretation": "Source raster diagnostic, not a mounted browser capture. Longitude -180 to180 east; latitude90 to-90. Measured source resolution is coarser than the output grid."
+}
