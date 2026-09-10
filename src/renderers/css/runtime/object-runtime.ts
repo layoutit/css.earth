@@ -143,6 +143,15 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       setZoomOutCentering(enabled: boolean) { if (!lifetime.disposed) getOrbit().setZoomOutCentering(enabled); },
       capture() { return getOrbit().captureWorldCamera(worldFrame); },
       apply(pose: Parameters<ObjectWorldNavigation['apply']>[0]) { if (!lifetime.disposed) { setAllowed(false); getOrbit().applyWorldCamera(pose, worldFrame); } },
+      preparedFocus() { return getOrbit().preparedFocus(); },
+      setPreparedFocus(focus: Parameters<ObjectWorldNavigation['setPreparedFocus']>[0]) {
+        if (!lifetime.disposed) getOrbit().setPreparedFocus(focus, worldFrame);
+      },
+      flyToPreparedFocus(focus: Parameters<ObjectWorldNavigation['flyToPreparedFocus']>[0], options?: Parameters<ObjectWorldNavigation['flyToPreparedFocus']>[1]) {
+        if (lifetime.disposed) return Promise.resolve({ completed: false });
+        setAllowed(false);
+        return getOrbit().flyToPreparedFocus(focus, worldFrame, this.optics(), options);
+      },
       optics() {
         const state = getOrbit().state();
         if (state.focal === undefined || !state.principalOffset || !definition.camera.levelOfDetail) throw new TypeError('World navigation requires a physical camera.');

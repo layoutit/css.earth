@@ -1,0 +1,129 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "lmc",
+  "source": {
+    "path": "source.jpg",
+    "sha256": "68cce2d2ebd9d43839c66f513df4819365e920fa4e6added41cc054f78739d58",
+    "dimensions": [
+      3000,
+      2911
+    ],
+    "originalDimensions": [
+      6737,
+      6536
+    ],
+    "publisherUrl": "https://noirlab.edu/public/images/noirlab2030a/",
+    "downloadUrl": "https://www.astropix.org/archive/noirlab/noirlab2030a/noirlab_noirlab2030a_3000.jpg",
+    "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 78.7957840796,
+    "centerDecDeg": -71.566506171,
+    "fieldOfViewDeg": [
+      9.3,
+      9.1
+    ],
+    "northClockwiseDeg": 16.92
+  },
+  "target": {
+    "centerRaDeg": 78.76,
+    "centerDecDeg": -69.19,
+    "distancePc": 49590.67275049043
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 34.7,
+    "lineOfNodesPaDeg": 122.5,
+    "thicknessKpc": 5,
+    "supportRadiusKpc": 10,
+    "supportTaperFraction": 0.9,
+    "depthWeights": [
+      0.004505775865647428,
+      0.006220527722822393,
+      0.008405193171577847,
+      0.011115550900766309,
+      0.014387227404528809,
+      0.018225776828952187,
+      0.022597365584021843,
+      0.027421575220713538,
+      0.03256790405498035,
+      0.03785733555111008,
+      0.04306982455543612,
+      0.04795777043713778,
+      0.05226460710202956,
+      0.055746707084891246,
+      0.05819605849938327,
+      0.05946080001600135,
+      0.05946080001600135,
+      0.05819605849938328,
+      0.05574670708489124,
+      0.05226460710202956,
+      0.04795777043713778,
+      0.04306982455543613,
+      0.037857335551110066,
+      0.03256790405498035,
+      0.027421575220713538,
+      0.02259736558402185,
+      0.018225776828952187,
+      0.014387227404528809,
+      0.011115550900766309,
+      0.008405193171577851,
+      0.006220527722822393,
+      0.004505775865647428
+    ],
+    "depthScales": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "bake": {
+    "maxFacePixels": 2048,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.006,
+    "encoding": {
+      "format": "webp",
+      "quality": 76
+    },
+    "diffuseFacePixels": 320,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.08,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2
+  },
+  "provenance": {
+    "path": "provenance.json",
+    "sha256": "a59b8dfda8bcd82e65244cb32a7e3483ceedde33217013e6fbec039cb8ad56a8"
+  }
+}

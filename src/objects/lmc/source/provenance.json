@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Deepest, widest view of the Large Magellanic Cloud from SMASH",
+  "publisher": "NSF's NOIRLab via AstroPix",
+  "sourceId": "noirlab2030a",
+  "sourcePage": "https://noirlab.edu/public/images/noirlab2030a/",
+  "download": "https://www.astropix.org/archive/noirlab/noirlab2030a/noirlab_noirlab2030a_3000.jpg",
+  "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      6737,
+      6536
+    ],
+    "bands": [
+      "DECam g",
+      "DECam r",
+      "DECam i",
+      "DECam z"
+    ],
+    "fieldOfViewDeg": [
+      9.3,
+      9.1
+    ]
+  },
+  "checkedSource": {
+    "kind": "publisher-curated AstroPix JPEG derivative",
+    "dimensions": [
+      3000,
+      2911
+    ],
+    "sha256": "68cce2d2ebd9d43839c66f513df4819365e920fa4e6added41cc054f78739d58"
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 34.7,
+    "lineOfNodesPaDeg": 122.5,
+    "reference": "van der Marel & Cioni 2001, arXiv:astro-ph/0105339; population-dependent warp/thickness is not encoded"
+  },
+  "displayModel": "The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth.",
+  "coverage": "The SMASH image covers the main LMC and visible outer structure, not the full Magellanic Stream. Released foreground and background sources remain."
+}

@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-nebula-star-alignment@1",
+  "wcs": {
+    "projection": "TAN",
+    "coordinateFrame": "ICRS",
+    "referenceDimension": [
+      6737,
+      6536
+    ],
+    "referencePixel": [
+      3368.5,
+      3268
+    ],
+    "referenceValueDeg": [
+      78.7957840796,
+      -71.566506171
+    ],
+    "scaleDeg": [
+      -0.00138784675876,
+      0.00138784675876
+    ],
+    "rotationDeg": -16.920000000000027
+  },
+  "overlay": {
+    "widthPx": 4096,
+    "heightPx": 3974,
+    "style": {
+      "width": "4096px",
+      "height": "3974px",
+      "transform": "matrix3d(0.028744135026789873,-0.0943725172371345,0,4.886339059289238e-7,-0.09428671895799808,-0.02876816655884585,0,-0.0000015758506587817015,0,0,1,0,25.831519237460192,250.90636722330362,0,1)",
+      "backgroundSize": "4096px 3974px",
+      "backgroundPosition": "0px 0px"
+    },
+    "pivotCssPx": [
+      -102.8673609917598,
+      0.470106527901659,
+      0
+    ],
+    "initialPlacement": {
+      "x": -1.2,
+      "y": -1.7,
+      "z": 0,
+      "rotationX": 0,
+      "rotationY": 0,
+      "rotationZ": 39,
+      "scale": 3
+    }
+  },
+  "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
+  "sourceSha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
+  "note": "Coordinate-only calibration reference for the shared catalogue. This is not a selectable color image."
+}

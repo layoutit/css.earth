@@ -1,0 +1,15 @@
+{
+  "schema": "cssearth-structure-benchmark-catalogue@1",
+  "benchmarks": [
+    {
+      "id": "full1024",
+      "name": "Tarantula · full native 1024×1024",
+      "manifestPath": "labs/nebula/models/lmc/research/structure-benchmark/benchmark.json"
+    },
+    {
+      "id": "tarantula-core",
+      "name": "Tarantula core · native 512×512",
+      "manifestPath": "labs/nebula/models/lmc/research/tarantula-core-benchmark/benchmark.json"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "cssearth-star-separation@1",
+  "source": {
+    "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
+    "sha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
+    "nativeDimensions": [
+      6000,
+      6000
+    ]
+  },
+  "outputDirectory": ".local/nebula-lab/star-separation/wise-wide-infrared",
+  "parameters": {
+    "minimumSigma": 0.25
+  },
+  "preview": {
+    "maxDimension": 1200,
+    "exposure": 1,
+    "gamma": 1
+  }
+}

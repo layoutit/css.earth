@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { mountPlanetShell } from "../planet-shell-client.mts";
 import context from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
+import catalogue from '../../src/objects/local-group/prepared/catalogue.json' with { type: 'json' };
+import clusters from '../../src/objects/galaxy-clusters/prepared/catalogue.json' with { type: 'json' };
 
 class Element extends EventTarget {
   dataset = {}; children = []; value = ""; style = { removeProperty() {}, setProperty() {} };
@@ -59,12 +61,16 @@ function fixture(options = {}) {
   windowTarget.Event = Event;
   for (const name of ["HTMLElement", "HTMLButtonElement", "HTMLInputElement", "HTMLDetailsElement", "HTMLLIElement"])
     windowTarget[name] = Element;
-  const frames = new Map();
-  windowTarget.requestAnimationFrame = (callback) => { frames.set(1, callback); return 1; };
+  const frames = new Map(), timers = new Map();
+  windowTarget.performance = { now: () => 0 };
+  windowTarget.setTimeout = callback => { const id = ++nextFrame; timers.set(id, callback); return id; };
+  windowTarget.clearTimeout = id => timers.delete(id);
+  let nextFrame = 0;
+  windowTarget.requestAnimationFrame = (callback) => { const id = ++nextFrame; frames.set(id, callback); return id; };
   windowTarget.cancelAnimationFrame = (id) => frames.delete(id);
   windowTarget.localStorage = { getItem() { return null; } };
   const changes = [];
-  return { documentTarget, windowTarget, selectors, elements, frames, row, explanation, changes,
+  return { documentTarget, windowTarget, selectors, elements, frames, timers, row, explanation, changes,
     mount: () => mountPlanetShell({ objectId: "fixture", documentTarget, windowTarget, onMotionChange: (value) => changes.push(value), ...options }) };
 }
 
@@ -367,6 +373,143 @@ test('camera scale changes retained overview content without moving the camera a
   shell.destroy(); assert.equal(listeners.size, 0);
 });
 
+test('the planet lens controller ignores an earlier retained galaxy bank and binds its own lens controls', () => {
+  const f = fixture(), drawer = f.selectors.get('.planet-drawer-content');
+  const focusedBank = new Element(), planetBank = new Element(), option = new Element(), button = new Element(), detail = new Element();
+  const information = f.selectors.get('.planet-information-panel');
+  // A broad drawer query returns the earlier, initially hidden galaxy dataset section.
+  focusedBank.hidden = true;
+  drawer.selectors.set('.planet-lenses', focusedBank);
+  information.selectors.set('.planet-lenses', planetBank);
+  button.value = 'planet-observation'; button.ariaPressed = 'true';
+  detail.dataset.lensDetails = button.value; detail.hidden = true;
+  option.selectors.set('button[name="lens"]', button);
+  planetBank.selectors.set('[data-lens-option]', [option]);
+  information.selectors.set('[data-lens-details]', [detail]);
+  const observed = [];
+  f.windowTarget.MutationObserver = class {
+    observe(target) { observed.push(target); }
+    disconnect() {}
+  };
+  const shell = f.mount();
+  assert.deepEqual(observed, [button]);
+  assert.equal(detail.hidden, false);
+  assert.equal(focusedBank.hidden, true);
+  shell.destroy();
+  assert.equal(detail.hidden, true);
+});
+
+test('a prepared galaxy takes precedence over the retained Milky Way card and clears cleanly on planet return', () => {
+  const f = fixture(), browser = f.selectors.get('.planet-object-browser'), drawer = f.selectors.get('.planet-drawer-content');
+  const galaxy = new Element(), system = new Element(), card = new Element();
+  browser.selectors.set('[data-galactic-overview]', galaxy);
+  browser.selectors.set('[data-solar-system-results]', system);
+  browser.selectors.set('[data-prepared-focus-card]', card); drawer.selectors.set('[data-prepared-focus-card]', card);
+  const names = ['name','aliases','status','distance','uncertainty','membership','association','basis','reference'];
+  for (const name of names) card.selectors.set(`[data-focus-${name}]`, new Element());
+  const links = [new Element(), new Element(), new Element()];
+  card.selectors.set('[data-focus-source]', links);
+  const lensBank = new Element(), lensButton = new Element(), lensDetail = new Element();
+  lensButton.value = 'prepared-dataset'; lensDetail.dataset.focusLensDetails = lensButton.value;
+  lensBank.selectors.set('[data-focus-lens]', [lensButton]);
+  lensBank.selectors.set('[data-focus-lens-details]', [lensDetail]);
+  card.selectors.set('[data-focus-lens-bank]', [lensBank]);
+  const readout = new Element();
+  for (const selector of ['.planet-view-date', '[data-view-date]', '.planet-view-coordinates', '[data-view-latitude]', '[data-view-longitude]',
+    '[data-view-altitude]', '[data-view-distance-label]', '.planet-view-altitude', '.planet-view-scale', '[data-view-scale-label]', '.planet-view-ruler', '.planet-view-measure']) {
+    readout.selectors.set(selector, new Element());
+  }
+  f.selectors.set('.planet-view-readout', readout);
+  const bounds = { x: 0, y: 0, left: 0, top: 0, right: 1000, bottom: 800, width: 1000, height: 800 };
+  f.selectors.set('.polycss-scene', { ownerDocument: f.documentTarget });
+  f.selectors.set('.polycss-camera', { getBoundingClientRect: () => bounds });
+  f.selectors.set('.planet-stage', { getBoundingClientRect: () => bounds });
+  const renderReadout = () => { const frames = [...f.frames.values()]; f.frames.clear(); frames.forEach(callback => callback()); };
+  const retained = [...card.selectors.values()], source = catalogue.sources.find(value => value.id === 'lvdb-v1.1.1');
+  const record = catalogue.objects.find(value => value.detailedObjectId === 'm31');
+  const searchAction = f.selectors.get('.planet-sidebar-view-all');
+  searchAction.textContent = 'Search'; searchAction.ariaLabel = 'Search objects';
+  const listeners = new Set();
+  const shell = f.mount(), search = f.selectors.get('.planet-sidebar-search');
+  shell.setOverview(true);
+  shell.setCamera({ navigation: { capture: () => ({ epochJdTt: catalogue.frame.epochJdTt,
+    pose: { positionM: record.positionM.map((value, axis) => value + (axis === 2 ? 1e18 : 0)), orientationXyzw: [0,0,0,1] } }),
+    frame: { originM: [0,0,0], bodyRadiusM: 100 }, optics: () => ({ focalPixels: 1000, principalOffsetPixels: [0,0] }),
+    subscribe: callback => { listeners.add(callback); return () => listeners.delete(callback); } } });
+  assert.equal(search.value, '');
+  lensBank.dataset.focusLensBank = record.detailedObjectId;
+  const lensSelections = [];
+  shell.setPreparedFocus(record, [source], { objectId: record.detailedObjectId,
+    selectedLens: lensButton.value, lenses: [{ id: lensButton.value }], starsVisible: true,
+    selectLens: id => lensSelections.push(id) });
+  assert.equal(lensBank.hidden, false); assert.equal(lensDetail.hidden, false);
+  assert.equal(lensButton.getAttribute('aria-pressed'), 'true');
+  lensButton.dispatchEvent(new Event('click'));
+  assert.deepEqual(lensSelections, [lensButton.value]);
+  renderReadout();
+  assert.equal(search.value, '', 'Galaxy focus does not write to search');
+  assert.equal(card.hidden, false); assert.equal(galaxy.hidden, true); assert.equal(system.hidden, true);
+  assert.equal(card.querySelector('[data-focus-name]').textContent, record.name);
+  assert.match(card.querySelector('[data-focus-aliases]').textContent, /Andromeda/u);
+  assert.match(card.querySelector('[data-focus-status]').textContent, /Confirmed galaxy/u);
+  assert.equal(card.querySelector('[data-focus-basis]').textContent, record.membership.basis);
+  assert.equal(links[0].href, source.url);
+  assert.equal(readout.querySelector('[data-view-distance-label]').textContent, `Distance to ${record.name}:`);
+  assert.equal(readout.querySelector('[data-view-altitude]').textContent, '105.7 ly');
+  assert.equal(readout.querySelector('.planet-view-coordinates').hidden, true);
+  const candidate = catalogue.objects.find(value => value.status === 'candidate');
+  for (const notify of listeners) notify();
+  assert.equal(f.frames.size, 0, 'Camera changes retain the 100 ms readout throttle');
+  assert.equal(f.timers.size, 1);
+  shell.setPreparedFocus(candidate);
+  assert.equal(f.timers.size, 0, 'A focus change immediately refreshes the throttled readout');
+  assert.equal(f.frames.size, 1);
+  assert.equal(card.querySelector('[data-focus-status]').textContent, 'Candidate galaxy');
+  assert.equal(links[0].hidden, true);
+  const cluster = clusters.objects[0];
+  shell.setPreparedFocus(cluster, [clusters.sources[0]]);
+  assert.equal(card.hidden, false); assert.equal(search.value, '');
+  assert.equal(card.querySelector('[data-focus-status]').textContent, 'X-ray selected galaxy cluster');
+  assert.match(card.querySelector('[data-focus-distance]').textContent, /comoving, redshift-derived/u);
+  assert.match(card.querySelector('[data-focus-basis]').textContent, /R500.*not the cluster boundary.*peculiar velocities are not corrected/u);
+  assert.equal(links[0].href, clusters.sources[0].url);
+  assert.deepEqual([...card.selectors.values()], retained, 'Selection updates the same retained card nodes');
+  assert.equal(searchAction.textContent, 'Search', 'Focus updates preserve the explorer search action');
+  assert.equal(searchAction.ariaLabel, 'Search objects');
+  search.value = 'moon'; search.dispatchEvent(new Event('input'));
+  shell.setPreparedFocus(candidate);
+  assert.equal(search.value, 'moon', 'A focus handoff preserves a newer active search');
+  assert.equal(card.hidden, true);
+  search.value = '   '; search.dispatchEvent(new Event('input'));
+  assert.equal(search.value, '   ', 'Clearing search restores the current focus without refilling the input');
+  assert.equal(card.hidden, false); assert.equal(galaxy.hidden, true); assert.equal(system.hidden, true);
+  shell.setPreparedFocus(cluster, [clusters.sources[0]]);
+  assert.equal(search.value, '   ');
+  assert.equal(card.querySelector('[data-focus-name]').textContent, cluster.name);
+  search.dispatchEvent(Object.assign(new Event('keydown', { cancelable: true }), { key: 'Escape' }));
+  assert.equal(search.value, '   ', 'Dismissing search retains the user query');
+  const restoreOverview = shell.beginOverviewSelection('solar-system');
+  assert.equal(card.hidden, true); assert.equal(system.hidden, false);
+  restoreOverview();
+  assert.equal(card.hidden, false); assert.equal(galaxy.hidden, true);
+  assert.equal(f.documentTarget.documentElement.dataset.selection, 'prepared-focus');
+  const restoreObject = shell.beginObjectSelection({ id: 'fixture', name: 'Fixture' });
+  assert.equal(browser.hidden, true);
+  restoreObject();
+  assert.equal(browser.hidden, false); assert.equal(card.hidden, false);
+  assert.equal(search.value, '   ', 'Cancelled selection restores focus without changing search');
+  shell.setPreparedFocus(null);
+  renderReadout();
+  assert.equal(readout.querySelector('[data-view-distance-label]').textContent, 'Distance from Sun:');
+  assert.equal(card.hidden, true); assert.equal(search.value, '   ');
+  shell.setObject({ id: 'next', name: 'Next planet', apply() {} });
+  assert.equal(search.value, '   ');
+  assert.equal(f.selectors.get('.planet-information-panel').hidden, false);
+  shell.destroy();
+  assert.equal(lensButton.listeners.size, 0);
+  assert.equal(f.timers.size, 0);
+  assert.equal(listeners.size, 0);
+});
 test('clearing search keeps the current object or overview card and permits another search', () => {
   const f = fixture(), browser = f.selectors.get('.planet-object-browser');
   const information = f.selectors.get('.planet-information-panel');

@@ -46,6 +46,9 @@ jobs:
           pnpm build:renderer
           pnpm build:preparation
           pnpm prepare:world-context
+      - name: Restore environment images and prepare minimap
+        run: |
+          pnpm prepare:environment-images
           pnpm prepare:minimap
       - name: Test source records, provenance and scientific credits
         run: pnpm test:sources
@@ -56,6 +59,8 @@ jobs:
       - name: Check independent body additions
         run: node --test tools/body-additions.test.mts tools/prepare-marker-bindings.test.mts
       - name: Typecheck shared code and enforce TypeScript ownership
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
         run: |
           pnpm typecheck
           pnpm check:typescript-ownership

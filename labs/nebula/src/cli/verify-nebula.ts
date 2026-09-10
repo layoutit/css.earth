@@ -1,0 +1,6 @@
+import { verifyNebulaBake } from '../pipeline/verify.js';
+
+const args = process.argv.slice(2);
+if (args.length > 1 || (args[0] && !/^--recipe=.+$/.test(args[0])))
+  throw new Error('Usage: pnpm lab:nebula:verify [--recipe=<json>]');
+await verifyNebulaBake(process.cwd(), args[0]?.slice('--recipe='.length));

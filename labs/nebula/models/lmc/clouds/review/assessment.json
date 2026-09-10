@@ -1,0 +1,32 @@
+{
+  "schema": "cssearth-lab-visual-assessment@1",
+  "subjectId": "lmc-clouds",
+  "verdict": "rejected-for-production",
+  "modelGate": "Three reconstruction rounds completed; retain this candidate as an inspectable experiment.",
+  "observedDefects": [
+    "The illuminated photographic edge remains visible in the cloud silhouette.",
+    "Oblique views still resemble a thick photographic sheet, with residual sampling streaks."
+  ],
+  "established": [
+    "Publisher sky placement is retained.",
+    "Physical observer-ray color integrals are numerically converged.",
+    "Prepared CSS banks contain finite depth guided by the stellar prior."
+  ],
+  "notEstablished": [
+    "Physical nebular depth or gas morphology.",
+    "Production-quality reconstruction from arbitrary viewpoints."
+  ],
+  "nextEvidence": "Compare wider calibrated VISTA coverage and distinguish stellar light from emission regions before another geometry experiment.",
+  "captures": {
+    "viewport": [
+      1440,
+      1000
+    ],
+    "target": "viewer element",
+    "poses": [
+      "front",
+      "y-plus-60",
+      "edge-y"
+    ]
+  }
+}

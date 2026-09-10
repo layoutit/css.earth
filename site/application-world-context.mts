@@ -3,13 +3,19 @@ import type { PreparedAssets } from '../src/renderers/css/rendering/prepared-res
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { mountSpaceMinimap } from './minimap/minimap.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
-import { createPreparedUniverse, createWorldFrameQueue, prepareObjectResources, loadPreparedCssVolume, loadPreparedCssPointField, loadPreparedCssSurfaceShell } from '../src/renderers/css/dist/universe.js';
+import { createPreparedUniverse, createWorldFrameQueue, prepareObjectResources, loadPreparedCssVolume, loadPreparedCssPointField, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeLenses } from '../src/renderers/css/dist/universe.js';
 import applicationContext from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 import { contextMarkerSprite } from '../src/navigation/marker-presentation.mts';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
 import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
 import { OBJECTS } from './objects.mts';
 import { CONTEXT_ANNOTATION_PRIORITY } from './runtime-policy.mts';
+
+import galaxyCatalog from '../src/objects/local-group/prepared/catalogue.json' with { type: 'json' };
+import galaxyPresentation from '../src/objects/local-group/source/presentation.json' with { type: 'json' };
+import clusterCatalog from '../src/objects/galaxy-clusters/prepared/catalogue.json' with { type: 'json' };
+import clusterPresentation from '../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
+import { createPreparedContextNavigation } from './prepared-context-navigation.mts';
 
 const asteroidIds = OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
 const hiddenOrbitIds = OBJECTS.filter(object => ['comet', 'trans-neptunian', 'interstellar'].includes(object.classification)).map(object => object.id);
@@ -49,9 +55,24 @@ function loadApplicationUniverse(): Promise<ReturnType<typeof createPreparedUniv
         return { payload: await loadPreparedCssSurfaceShell(set.descriptor, set.transport),
           resolveResource: (path: string) => set.resolve(`prepared/${path}`) };
       }));
+    const imageLayers = await Promise.all(Object.values(descriptors).map(parseObjectDescriptor).filter(descriptor => descriptor.type === 'image-layer-bank')
+      .map(async descriptor => {
+        const set = resourceSet(descriptor.id);
+        return { payload: await loadPreparedCssImageLayers(set.descriptor, set.transport),
+          resolveResource: (path: string) => set.resolve(`prepared/${path}`) };
+      }));
     const sprites = Object.fromEntries(Object.entries(PREPARED_NAVIGATION_MARKERS)
       .map(([id, sprite]) => [id, contextMarkerSprite(sprite)]));
-    const universe = createPreparedUniverse({ context: applicationContext, volume, stars, sprites, shells, annotationPriorities,
+    const volumeLenses = await Promise.all(Object.values(descriptors).map(parseObjectDescriptor).filter(descriptor => descriptor.type === 'volume-lens-bank')
+      .map(async descriptor => {
+        const set = resourceSet(descriptor.id);
+        return { payload: await loadPreparedVolumeLenses(set.descriptor, set.transport),
+          resolveResource: (path: string) => set.resolve(`prepared/${path}`) };
+      }));
+    const universe = createPreparedUniverse({ context: applicationContext, volume, stars, sprites, shells, imageLayers, volumeLenses, annotationPriorities,
+      catalog: { payload: galaxyCatalog, fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM,
+        fullDistanceM: galaxyPresentation.fullDistanceM,
+        clusters: { payload: clusterCatalog, fadeStartDistanceM: clusterPresentation.fadeStartDistanceM, fullDistanceM: clusterPresentation.fullDistanceM } },
       resolveResource: path => volumeSet.resolve(`prepared/${path}`),
       resolveStarResource: path => starSet.resolve(`prepared/${path}`) });
     const markerPool = 'context-markers';
@@ -69,9 +90,9 @@ function loadApplicationUniverse(): Promise<ReturnType<typeof createPreparedUniv
 
 export function createApplicationWorldContext() {
   return {
-    async mount({ stage, signal }: { stage: HTMLElement; signal?: AbortSignal }) {
+    async mount({ stage, signal, windowTarget = stage.ownerDocument.defaultView }: { stage: HTMLElement; signal?: AbortSignal; windowTarget?: Window | null }) {
       const target = stage.ownerDocument.defaultView;
-      if (!target) throw new Error("World context requires a window.");
+      if (!target || !windowTarget) throw new Error("World context requires a window.");
       const prepared = await loadApplicationUniverse();
       if (signal?.aborted) throw signal.reason;
       const resources = prepareObjectResources(prepared.assets, { signal });
@@ -80,9 +101,12 @@ export function createApplicationWorldContext() {
       try {
         await resources.ready;
         if (signal?.aborted) throw signal.reason;
+        let contextNavigation: ReturnType<typeof createPreparedContextNavigation> | undefined;
         let refreshWorld = () => false;
-        const layer = prepared.mount(stage, () => refreshWorld());
+        const layer = prepared.mount(stage, { requestPublication: () => refreshWorld(), onSelectGalaxy: object => { void contextNavigation?.select(object); } });
         pendingLayer = layer;
+        contextNavigation = createPreparedContextNavigation({ layer, presentation: galaxyPresentation,
+          sources: [...galaxyCatalog.sources, ...clusterCatalog.sources], windowTarget });
         layer.setHiddenOrbits(hiddenOrbitIds);
         const framePlanner = prepared.createFramePlanner();
         pendingPlanner = framePlanner;
@@ -118,6 +142,8 @@ export function createApplicationWorldContext() {
         const diagnostics = DIAGNOSTICS_ENABLED ? Object.freeze({ inspect: layer.inspect, frames: frameQueue.stats }) : null;
         if (diagnostics) Reflect.set(target, '__cssEarthUniverse', diagnostics);
         return { ...layer, viewport, publish,
+          connectNavigation: contextNavigation.connect,
+          suspendFocus: contextNavigation.suspend, restoreFocus: contextNavigation.restore,
           createFramePresenter() {
             let enabled = false, disposed = false;
             return { enable() { enabled = true; }, destroy() { disposed = true; },
@@ -150,7 +176,7 @@ export function createApplicationWorldContext() {
             destroyed = true; publication = null;
             frameQueue.destroy(); framePlanner.destroy(); stagedFrame = null;
             if (diagnostics && Reflect.get(target, '__cssEarthUniverse') === diagnostics) Reflect.deleteProperty(target, '__cssEarthUniverse');
-            minimap.destroy();
+            contextNavigation?.destroy(); minimap.destroy();
             viewport.destroy(); layer.destroy(); resources.destroy();
           },
         };
