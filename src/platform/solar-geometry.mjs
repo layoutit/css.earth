@@ -2762,6 +2762,18 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
     0.891385719291275,
     0.00066723361469343,
   ]),
+  // subsolar latitude 51.757°, longitude -102.869°
+  chariklo: Object.freeze([
+    -0.13786507873495182,
+    -0.6034524344565543,
+    0.7853905903522549,
+  ]),
+  // subsolar latitude -12.096°, longitude -136.443°
+  bienor: Object.freeze([
+    -0.7085994892456525,
+    -0.6737744565690662,
+    -0.20955845369695772,
+  ]),
 });
 
 export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
@@ -5206,6 +5218,18 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
     -0.3977771559319137,
     -2.4356826039297786e-17,
     0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 62.092°, Sun ecliptic latitude -9.820°
+  chariklo: Object.freeze([
+    0.34800466596336965,
+    0.812295994365521,
+    0.4680469741441059,
+  ]),
+  // pole tilt to the ecliptic 40.000°, Sun ecliptic latitude -12.701°
+  bienor: Object.freeze([
+    -0.3969721526112679,
+    0.5055581284271935,
+    0.7660444431182631,
   ]),
 });
 
@@ -7653,6 +7677,18 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
     -0.801063566301262,
     -0.40764680100615613,
     0.4383163793131064,
+  ]),
+  // orbital inclination to the ecliptic 23.431°, obliquity to the orbit 57.816°
+  chariklo: Object.freeze([
+    0.6471829577806067,
+    0.5453818709946856,
+    0.5326470068898179,
+  ]),
+  // orbital inclination to the ecliptic 20.719°, obliquity to the orbit 58.306°
+  bienor: Object.freeze([
+    -0.6627529119641407,
+    0.5336030653261973,
+    0.525382095581433,
   ]),
 });
 
@@ -10102,6 +10138,18 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
     0.3572103089266757,
     0.8838998780732841,
   ]),
+  // flight-path angle 6.627°
+  chariklo: Object.freeze([
+    -0.7288459466357782,
+    0.6474773741242184,
+    0.22261319832795948,
+  ]),
+  // flight-path angle -1.882°
+  bienor: Object.freeze([
+    -0.265312942139667,
+    0.4887634140045628,
+    -0.8310952820608466,
+  ]),
 });
 
 // Body-fixed to ICRF rotation, row-major: the columns are the body's +X
@@ -12549,6 +12597,18 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
     6.123233995736766e-17, -1, 0,
     1, 6.123233995736766e-17, 0,
     0, 0, 1,
+  ]),
+  // pole RA 151.030°, Dec 41.810°, prime meridian W 0.000°
+  chariklo: Object.freeze([
+    -0.48435160400283594, 0.5832453714203997, -0.6520953614438306,
+    -0.8748734329603797, -0.32289908520686983, 0.36101614516900293,
+    0, 0.745359656467431, 0.6666625702038126,
+  ]),
+  // pole RA 3.646°, Dec 58.156°, prime meridian W 0.000°
+  bienor: Object.freeze([
+    -0.06358784061896021, -0.8477684759202858, 0.5265407845183634,
+    0.9979762454715131, -0.05401708404705382, 0.03354948741241525,
+    0, 0.5276085346796897, 0.8494876303591187,
   ]),
 });
 
@@ -18855,6 +18915,36 @@ export const BODY_ORBITS = Object.freeze({
     inclinationDegrees: 43.88007505692898,
     perihelionAu: 38.25960177395626,
     aphelionAu: 97.70832029894191,
+  }),
+  // a 15.733 AU, e 0.17098, perihelion 13.043 AU, aphelion 18.423 AU
+  chariklo: Object.freeze({
+    semiMajorAxisAu: 15.733429335634783,
+    eccentricity: 0.17097706804211063,
+    heliocentricDistanceAu: 17.73167181652957,
+    perihelionDirection: Object.freeze([
+      0.32704653556614716,
+      -0.8297716241117536,
+      0.45223844970670435,
+    ]),
+    trueAnomalyDegrees: 144.17644167898607,
+    inclinationDegrees: 23.431229900901442,
+    perihelionAu: 13.043373717580215,
+    aphelionAu: 18.42348495368935,
+  }),
+  // a 16.602 AU, e 0.20565, perihelion 13.188 AU, aphelion 20.016 AU
+  bienor: Object.freeze({
+    semiMajorAxisAu: 16.602244455508103,
+    eccentricity: 0.20564866654956923,
+    heliocentricDistanceAu: 13.230029047054094,
+    perihelionDirection: Object.freeze([
+      0.6488949190870317,
+      0.7594083273861342,
+      0.04726918953852083,
+    ]),
+    trueAnomalyDegrees: 348.9266780343138,
+    inclinationDegrees: 20.71882359043436,
+    perihelionAu: 13.188015021502881,
+    aphelionAu: 20.01647388951332,
   }),
 });
 
