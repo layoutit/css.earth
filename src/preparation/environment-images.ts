@@ -18,6 +18,36 @@ interface Descriptor {
 }
 const raster = /\.(?:webp|png|jpe?g|avif)$/i;
 
+
+const replayCoordinate = /^(?:banks\/\d+\/(?:normalUnits\/[0-2]|samplingStepUnits|leaves\/\d+\/(?:offsetKpc|centerUnits\/[0-2]|verticesUnits\/[0-3]\/[0-2]))|frame\/(?:originM\/[0-2]|localToReferenceXyzw\/[0-3]|boundsUnits\/(?:min|max)\/[0-2]))$/;
+
+/** Allow binary64 coordinate roundoff while preserving every other replay field. */
+export function assertImageLayerReplay(actual: unknown, expected: unknown): void {
+  const compare = (a: unknown, b: unknown, path: string): void => {
+    const message = `Image-layer replay changed accepted metadata at ${path || 'root'}.`;
+    if (typeof a === 'number' && typeof b === 'number' && replayCoordinate.test(path)) {
+      assert.ok(Number.isFinite(a) && Number.isFinite(b), message);
+      assert.ok(Math.abs(a - b) <= 64 * Number.EPSILON * Math.max(1, Math.abs(a), Math.abs(b)), message);
+      return;
+    }
+    if (Array.isArray(a) || Array.isArray(b)) {
+      assert.ok(Array.isArray(a) && Array.isArray(b), message);
+      assert.equal(a.length, b.length, message);
+      a.forEach((value, index) => compare(value, b[index], `${path}/${index}`));
+      return;
+    }
+    if (a !== null && typeof a === 'object' && b !== null && typeof b === 'object') {
+      const left = Object.entries(a), right = Object.entries(b);
+      assert.deepEqual(left.map(([key]) => key).sort(), right.map(([key]) => key).sort(), message);
+      const values = new Map(right);
+      for (const [key, value] of left) compare(value, values.get(key), path ? `${path}/${key}` : key);
+      return;
+    }
+    assert.deepEqual(a, b, message);
+  };
+  compare(actual, expected, '');
+}
+
 export async function restoreEnvironmentObject(objectDirectory: string, verifyReplay = false) {
   const descriptor: Descriptor = JSON.parse(await readFile(join(objectDirectory, 'object.json'), 'utf8'));
   // Multi-lens reconstructions have their own pinned, multi-stage nebula bake.
@@ -53,8 +83,7 @@ export async function restoreEnvironmentObject(objectDirectory: string, verifyRe
         const ref = descriptor.properties.preparation;
         const recipe = parseImageLayerRecipe(JSON.parse((await verifiedBytes(objectDirectory, { path: ref.source, sha256: ref.sha256 })).toString()));
         const baked = await prepareImageLayers({ sourceDirectory: dirname(containedPath(objectDirectory, ref.source)), outputDirectory: temporary, recipe });
-        assert.deepEqual(JSON.parse(JSON.stringify(baked.banks)), data.banks, 'Image-layer replay changed accepted geometry.');
-        assert.deepEqual(JSON.parse(JSON.stringify(baked.frame)), data.frame, 'Image-layer replay changed the physical frame.');
+        assertImageLayerReplay(JSON.parse(JSON.stringify(baked)), data);
         break;
       }
       case 'density-volume': await prepareDensityVolumeObject({ objectDirectory, outputDirectory: temporary }); break;
