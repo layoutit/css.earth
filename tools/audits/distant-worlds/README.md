@@ -115,3 +115,15 @@ orbital data or tolerances. The [focused package check](evidence/outer-worlds/so
 and [all-body independent position check](evidence/outer-worlds/spatial-context-focused.txt)
 pass. Unrelated ignored artifacts in the original local checkout prevent a
 clean all-directory local pass; fresh-checkout CI runs that complete gate.
+
+After integrating main’s TypeScript migration, revision `90baa56a3` passed the
+full TypeScript and ownership checks, all six package closures, and the
+[focused navigation/mobile browser check](evidence/outer-worlds/after-typescript/navigation.json).
+The six worlds remain searchable and mount alone with 480 raster triangles and
+Shadows off. [Merge context](evidence/outer-worlds/after-typescript/context.json)
+records the scope and missing local all-catalogue transport; CI supplies that
+separate complete-catalogue check. The 24 source, terrain, runtime-image and
+default-control records match the pre-merge bytes. [Marker receipts](evidence/outer-worlds/after-typescript/markers.json)
+prove main’s 464 marker tiles were retained while adding the six destinations.
+The earlier screenshots and drag traces remain evidence for their stated
+revision; the post-migration browser run covers navigation and mobile behavior.
