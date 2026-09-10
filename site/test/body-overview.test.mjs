@@ -2,10 +2,10 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile, access } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { OBJECTS } from '../objects.mjs';
-import { prepareBodyOverview, overviewMeasurements } from '../prepare-body-overview.mjs';
-import { readSpectrumData } from '../../tools/objects/content/spectrum-data.mjs';
-import { renderCompactSpectrum } from '../../tools/objects/content/compact-spectrum.mjs';
+import { OBJECTS } from '../objects.mts';
+import { prepareBodyOverview, overviewMeasurements } from '../prepare-body-overview.mts';
+import { readSpectrumData } from '../../tools/objects/content/spectrum-data.mts';
+import { renderCompactSpectrum } from '../../tools/objects/content/compact-spectrum.mts';
 
 test('overview charts retain every supplied spectrum sample across the registry', async () => {
   let charts = 0;

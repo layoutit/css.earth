@@ -1,5 +1,5 @@
-import { OBJECTS } from "../objects.mjs";
-import { objectSeo } from "../seo.mjs";
+import { OBJECTS } from "../objects.mts";
+import { objectSeo } from "../seo.mts";
 
 export function GET() {
   const urls = OBJECTS.map((object) =>

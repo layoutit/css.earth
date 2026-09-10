@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { prepareStandardCubicSkyPixels } from
-  "./cubic-sky-preparation.mjs";
+  "./cubic-sky-preparation.mts";
 
 test("prepares a quieter sky without changing high-contrast source pixels", () => {
   const highContrast = Buffer.from([

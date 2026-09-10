@@ -47,10 +47,11 @@ jobs:
         run: |
           node --test tools/restore-source-inputs.test.mjs
           node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mjs
-      - name: Typecheck renderer and preparation
+      - name: Typecheck shared code and enforce TypeScript ownership
         run: |
-          pnpm typecheck:renderer
-          pnpm typecheck:preparation
+          pnpm typecheck
+          pnpm check:typescript-ownership
+          pnpm test:typescript-ownership
       - name: Test prepared source, materials and world context
         run: |
           pnpm test:preparation --universe
@@ -60,7 +61,7 @@ jobs:
       - name: Restore pinned JSON transports for runtime and shell tests
         run: |
           node --test tools/restore-object-json.test.mjs
-          node tools/restore-object-json.mjs
+          node tools/restore-object-json.mts
       - name: Test selected dataset textures and bounded residency
         run: |
           node --test src/platform/object-selection-runtime.test.mjs src/platform/prepared-residency.test.mjs tests/objects/unit/earth/dataset-selection.test.mjs tests/objects/unit/earth/surface-image-banks.test.mjs

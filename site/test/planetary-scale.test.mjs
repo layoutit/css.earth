@@ -4,8 +4,8 @@ import test from "node:test";
 import {
   PLANETARY_SCALE_LABEL,
   positionPlanetsByDistance,
-} from "../planetary-scale.mjs";
-import { PLANET_NAVIGATION_OBJECTS } from "../planet-search-objects.mjs";
+} from "../planetary-scale.mts";
+import { PLANET_NAVIGATION_OBJECTS } from "../planet-search-objects.mts";
 
 test("derives the accessible logarithmic scale from catalog distances", () => {
   const orbitingPlanets = PLANET_NAVIGATION_OBJECTS;

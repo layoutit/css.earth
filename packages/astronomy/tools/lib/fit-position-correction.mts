@@ -1,0 +1,61 @@
+import { fitHarmonics } from './fit-harmonics.mts'
+import { fitCosineSeries } from './fit-cosine-series.mts'
+
+import type { KeplerianElements } from '../../src/kepler.ts'
+import type { ElementRow, Vector3 } from './horizons.mts'
+interface MeanElements extends Omit<KeplerianElements, 'epochJdTt'> { longitudeHarmonics?: readonly { rateRadPerDay: number; epochJdTt: number; cosineRad: number; sineRad: number }[] }
+const DEG = Math.PI / 180
+const J2000 = 2451545
+
+// Position from one osculating element sample, or the reduced mean ellipse.
+// The source values are geometric KM-D, ICRF, TDB and planet-centred. TT differs
+// from TDB by <2 ms here, far below the sampled orbit-fit error.
+function position(elements: MeanElements, days = 0, phase = 0) {
+  const { semiMajorAxisKm: a, eccentricity: e, inclinationRad: inc } = elements
+  const mean = elements.meanAnomalyAtEpochRad + days * elements.meanMotionRadPerDay + phase
+  const m = ((mean + Math.PI) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI) - Math.PI
+  if (!(a > 0 && e >= 0 && e < 1)) throw new Error('Residual fit requires elliptic source elements')
+  let E = m + e * Math.sin(m), converged = false
+  for (let i = 0; i < 20; i++) {
+    const step = (E - e * Math.sin(E) - m) / (1 - e * Math.cos(E))
+    E -= step
+    if (Math.abs(step) < 1e-14) { converged = true; break }
+  }
+  if (!converged) throw new Error('Residual-fit Kepler solve did not converge')
+  const node = elements.ascendingNodeRad + days * (elements.ascendingNodeRateRadPerDay ?? 0)
+  const peri = elements.argumentOfPeriapsisRad + days * (elements.argumentOfPeriapsisRateRadPerDay ?? 0)
+  const x = a * (Math.cos(E) - e), y = a * Math.sqrt(1 - e * e) * Math.sin(E)
+  const xp = x * Math.cos(peri) - y * Math.sin(peri), yp = x * Math.sin(peri) + y * Math.cos(peri)
+  return [xp * Math.cos(node) - yp * Math.cos(inc) * Math.sin(node),
+    xp * Math.sin(node) + yp * Math.cos(inc) * Math.cos(node), yp * Math.sin(inc)]
+}
+
+/** Bounded ICRF residual series; no interpolation table, drift term or runtime fit. */
+export function fitPositionCorrection(rows: readonly ElementRow[], meanElements: MeanElements, basis: readonly (readonly number[])[], { count = 10, method = 'harmonic' } = {}) {
+  if (!['harmonic', 'cosine'].includes(method)) throw new TypeError('Unknown residual fit method')
+  if (rows.length < 2) throw new TypeError("Position correction needs at least two source rows")
+  const days = rows.map(r => r.jd - J2000)
+  const residual = rows.map((r, i) => {
+    const source = position({ semiMajorAxisKm: r.semiMajorAxisKm, eccentricity: r.eccentricity,
+      inclinationRad: r.inclinationDeg * DEG, ascendingNodeRad: r.nodeDeg * DEG,
+      argumentOfPeriapsisRad: r.periapsisDeg * DEG, meanAnomalyAtEpochRad: r.meanAnomalyDeg * DEG,
+      meanMotionRadPerDay: r.meanMotionDegPerDay * DEG })
+    const phase = (meanElements.longitudeHarmonics ?? []).reduce((sum, h) => {
+      const angle = h.rateRadPerDay * (r.jd - h.epochJdTt)
+      return sum + h.cosineRad * Math.cos(angle) + h.sineRad * Math.sin(angle)
+    }, 0)
+    const local = position(meanElements, days[i], phase)
+    return source.map((v, axis) => v - basis.reduce((sum, vector, j) => sum + vector[axis] * local[j], 0))
+  })
+  const epochJdTt = (rows[0].jd + rows[rows.length - 1].jd) / 2
+  const separation = 2 * Math.PI / (days[days.length - 1] - days[0]) / 4
+  const axes = [0, 1, 2].map(axis => {
+    const values = residual.map(r => r[axis])
+    const fit = method === 'cosine' ? fitCosineSeries(days, values, count)
+      : fitHarmonics(days, values, { intercept: 0, slope: 0 }, count, { trend: false, separation })
+    return { constantKm: fit.intercept, harmonics: fit.harmonics.map(h => ({
+      rateRadPerDay: h.rateRadPerDay, cosineKm: h.cosine, sineKm: h.sine,
+    })) }
+  })
+  return { epochJdTt, axes }
+}

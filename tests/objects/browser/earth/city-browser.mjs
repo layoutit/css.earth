@@ -7,9 +7,9 @@ import { chromium } from "playwright";
 import { readCityFixture } from "../../unit/earth/city-fixture.mjs";
 import { PREPARED_EARTH_SCENE, preparePagingDiagnostic, routePagingDiagnostic } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_CITY_PAGES } from "../../unit/earth/prepared-fixture.mjs";
-import { prepareCityPageGeometry } from "../../../../tools/objects/geographic-pages/page-geometry.mjs";
+import { prepareCityPageGeometry } from "../../../../tools/objects/geographic-pages/page-geometry.mts";
 import { projectCityPage } from "../../../../src/renderers/css/dist/testing.js";
-import { readWorldCoverCatalog, sourceTilesForBounds } from "../../../../tools/objects/geographic-pages/worldcover-catalog.mjs";
+import { readWorldCoverCatalog, sourceTilesForBounds } from "../../../../tools/objects/geographic-pages/worldcover-catalog.mts";
 
 const fixture = await readCityFixture();
 

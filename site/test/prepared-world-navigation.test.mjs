@@ -4,7 +4,7 @@ import { getEventListeners } from 'node:events';
 import { setImmediate as nextTurn } from 'node:timers/promises';
 import { createSelectionFlight, sampleSelectionFlight, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
 import { createWorldSelectionTarget, presentWorldCamera, formatSharedView, savedWorldCamera } from '../../src/renderers/css/dist/navigation.js';
-import { createPreparedWorldNavigation } from '../prepared-world-navigation.mjs';
+import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 
 const identity = [1,0,0,0,1,0,0,0,1];
 function fixture() {
@@ -51,6 +51,20 @@ async function drainFrames(fixture, { task, stepMs = 1000 / 60 } = {}) {
   }
 }
 const range = (pose, origin) => Math.hypot(...pose.positionM.map((value, axis) => value - origin[axis]));
+
+test('a falsy camera publication failure rejects and releases native flight listeners', async () => {
+  for (const failure of [null, undefined, false, 0, '']) {
+    const f = fixture();
+    f.navigation.apply = () => { throw failure; };
+    const task = f.service.focus({ objectId: '0', mount: {navigation: f.navigation}, signal: f.controller.signal });
+    const rejected = assert.rejects(task, error => Object.is(error, failure));
+    f.tick(0);
+    await rejected;
+    assert.equal(f.pending, 0);
+    assert.equal(getEventListeners(f.controller.signal, 'abort').length, 0);
+    for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
+  }
+});
 
 test('a terminal extreme-range pose finishes without a tail of identical publications', async () => {
   const f = fixture();

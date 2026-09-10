@@ -5,7 +5,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { readPlutoFacts, parsePlutoFacts } from "./preparation-fixture.mjs";
 import { decodeElevationGrid, elevationColor, elevationRaster } from "./preparation-fixture.mjs";
-import { requireObject } from "../../../../site/objects.mjs";
+import { requireObject } from "../../../../site/objects.mts";
 
 
 test("binds Pluto facts and registry classification to owned source snapshots", async () => {

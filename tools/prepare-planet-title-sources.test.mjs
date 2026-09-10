@@ -5,12 +5,12 @@ import { pathToFileURL } from "node:url";
 import test from "node:test";
 import * as fontkit from "fontkit";
 
-import { OBJECTS } from "../site/objects.mjs";
+import { OBJECTS } from "../site/objects.mts";
 import { PLANET_TITLE_RECIPE } from
-  "../src/platform/planet-title-recipe.mjs";
-import { createPreparedTitleLayout, sha256 } from "../src/platform/prepared-title.mjs";
+  "../src/platform/planet-title-recipe.mts";
+import { createPreparedTitleLayout, sha256 } from "../src/platform/prepared-title.mts";
 import { createPlanetTitleSource, preparePlanetTitleSources } from
-  "./prepare-planet-title-sources.mjs";
+  "./prepare-planet-title-sources.mts";
 
 const projectRoot = resolve(import.meta.dirname, "..");
 
@@ -41,7 +41,9 @@ test("regenerates every planet title from one pinned Saturn recipe", async () =>
 
   for (const planet of OBJECTS) {
     const { source, moduleSource } = generated[planet.id];
-    assert.equal(source.label, planet.name);
+    const contentPath = resolve(projectRoot, `src/planets/${planet.id}/source/content/object.json`);
+    const label = await exists(contentPath) ? JSON.parse(await readFile(contentPath, 'utf8')).displayName : planet.name;
+    assert.equal(source.label, label);
     assert.equal(source.weight, PLANET_TITLE_RECIPE.weight);
     assert.equal(source.opticalSize, PLANET_TITLE_RECIPE.opticalSize);
     assert.equal(source.fontSize, PLANET_TITLE_RECIPE.fontSize);

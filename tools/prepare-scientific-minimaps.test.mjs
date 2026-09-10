@@ -4,8 +4,8 @@ import {mkdtemp, mkdir, readFile, writeFile, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
-import {prepareSurfaceMinimaps} from './prepare-surface-minimaps.mjs';
-import {observationRaster, prepareObservationLenses} from './objects/static-surface/raster.mjs';
+import {prepareSurfaceMinimaps} from './prepare-surface-minimaps.mts';
+import {observationRaster, prepareObservationLenses} from './objects/static-surface/raster.mts';
 
 const legacyEncoding={quality:90,alphaQuality:100,effort:4,smartSubsample:true};
 const colors=[[231,21,41],[13,211,31],[82,84,82]];

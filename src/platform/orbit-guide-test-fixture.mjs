@@ -1,4 +1,4 @@
-import { PREPARED_ORBIT_GUIDE_SCHEMA } from "./orbit-guide-contract.mjs";
+import { PREPARED_ORBIT_GUIDE_SCHEMA } from "./orbit-guide-contract.mts";
 
 export function preparedFixture() {
   return {

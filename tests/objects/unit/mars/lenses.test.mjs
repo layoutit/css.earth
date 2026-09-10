@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { resolvePreparedPresentation } from "../../../../src/renderers/css/dist/testing.js";
-import { initialObjectSelection } from "../../../../src/platform/object-runtime-contract.mjs";
+import { initialObjectSelection } from "../../../../src/platform/object-runtime-contract.mts";
 import { fileURLToPath } from "node:url";
 
 import sharp from "sharp";

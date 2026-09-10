@@ -4,8 +4,8 @@ import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { unpackSurfacePreview, assertSurfacePreviewCoverage, recipeSurfacePreviews } from './surface-preview-rasters.mjs';
-import { preparePagedSurfaceMap } from './objects/paged-ellipsoid/assets.mjs';
+import { unpackSurfacePreview, assertSurfacePreviewCoverage, recipeSurfacePreviews } from './surface-preview-rasters.mts';
+import { preparePagedSurfaceMap } from './objects/paged-ellipsoid/assets.mts';
 
 // Two reversed bands with conspicuous padding: the preview must recover
 // north-to-south rows and must never show a gutter or fill an absent polar row.

@@ -6,7 +6,7 @@ import {
   fitProjectiveTextureGeometryToStableLayout,
   packProjectiveSurfaceRaster,
   prepareProjectiveTextureLayer,
-} from "./projective-surface-raster.mjs";
+} from "./projective-surface-raster.mts";
 
 test("prepares an affine face and flattened homography that compose to the source projection", () => {
   const source = [

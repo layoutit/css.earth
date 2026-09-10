@@ -1,11 +1,11 @@
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { createSourceManifest } from '../../../../src/platform/source-manifest.mjs';
-import { createAtmospherePreparation } from '../../../../tools/objects/paged-ellipsoid/atmosphere.mjs';
-import { createPagedSurfaceRaster } from '../../../../tools/objects/paged-ellipsoid/surface-raster.mjs';
+import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
+import { createAtmospherePreparation } from '../../../../tools/objects/paged-ellipsoid/atmosphere.mts';
+import { createPagedSurfaceRaster } from '../../../../tools/objects/paged-ellipsoid/surface-raster.mts';
 import { createObjectRuntime, preparedObjectCapabilities } from '../../../../src/renderers/css/dist/index.js';
-import { surfaceBankInventory, requireSurfacePages } from '../../../../tools/objects/paged-ellipsoid/surface-banks.mjs';
+import { surfaceBankInventory, requireSurfacePages } from '../../../../tools/objects/paged-ellipsoid/surface-banks.mts';
 export const earthSurfaceBankInventory=(plan=PREPARED_EARTH_SCENE,lenses=PREPARED_EARTH_LENSES)=>surfaceBankInventory(plan,lenses,'/scenes/earth/');
 export const requireEarthSurfacePages=(urls,label)=>requireSurfacePages(urls,label,'/scenes/earth/');
 const sourceDirectory=fileURLToPath(new URL('../../../../src/planets/earth/source/',import.meta.url));

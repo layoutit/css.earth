@@ -5,8 +5,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
 import { BASE_TILE } from '@layoutit/polycss';
-import { parseObjShape, createShapeSurfaceSampler } from './obj-shape.mjs';
-import { prepareRadialMaterials } from './radial-terrain.mjs';
+import { parseObjShape, createShapeSurfaceSampler } from './obj-shape.mts';
+import { prepareRadialMaterials } from './radial-terrain.mts';
 
 const fixtures = JSON.parse(await readFile(new URL('./fixtures/source-surface-cases.json', import.meta.url)));
 const near = (actual, expected, tolerance = 1e-7) => assert.ok(Math.abs(actual - expected) < tolerance,

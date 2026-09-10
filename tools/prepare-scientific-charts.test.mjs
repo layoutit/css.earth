@@ -8,7 +8,7 @@ import {
   evaluatePhaseMagnitude,
   prepareScientificCharts,
   samplePhaseCurve,
-} from "./prepare-scientific-charts.mjs";
+} from "./prepare-scientific-charts.mts";
 
 const context = JSON.parse(await readFile(new URL(
   "../site/source/scientific-charts/planetary-context.json",

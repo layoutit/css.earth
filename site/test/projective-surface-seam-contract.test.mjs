@@ -3,7 +3,7 @@ import test from "node:test";
 
 import { readFile } from "node:fs/promises";
 import { loadObjectContent } from "./load-object-content.mjs";
-import { prepareBandedEllipsoid } from "../../tools/objects/giant-layers/geometry.mjs";
+import { prepareBandedEllipsoid } from "../../tools/objects/giant-layers/geometry.mts";
 
 const PLANET_SURFACE_SEAMS = {};
 for (const id of ["mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune"]) {

@@ -1,4 +1,4 @@
-import { requireObjectControls } from '../scene-contract.mjs';
+import { requireObjectControls } from '../scene-contract.mts';
 
 const profiles = new WeakSet();
 export const isObjectBrowserProfile = profile => profiles.has(profile);

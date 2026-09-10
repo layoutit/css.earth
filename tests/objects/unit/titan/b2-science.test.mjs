@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
+import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 const sourceRoot=new URL('../../../../src/planets/titan/source/',import.meta.url).pathname;
 test('Titan B2 scalar coordinates retain independent source values and exact missing cells',async()=>{
  const config=JSON.parse(await readFile(sourceRoot+'preparation/terrestrial.json'));

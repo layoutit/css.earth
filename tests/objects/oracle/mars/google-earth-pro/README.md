@@ -185,7 +185,7 @@ A measured case establishes coverage; it does not by itself establish parity.
 Qt delivery and synchronous native pixel readback do not prove physical input
 latency or presentation timing.
 
-The application uses one controller in `src/platform/cubic-sky-runtime.mjs` for
+The application uses one controller in `src/platform/cubic-sky-runtime.mts` for
 all registered objects. Native calibration uses Mars; the `OBJECTS`-derived
 Chrome conformance suite checks shared behavior at DPR 1 and DPR 2. The
 prepared rendering lens remains separate from the native interaction rays.

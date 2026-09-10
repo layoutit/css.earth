@@ -34,7 +34,7 @@ clang++ -std=c++20 -O2 -ffp-contract=off \
   tools/objects/celestia-comets/native/celmath/randutils.cpp \
   tools/objects/celestia-comets/native/export.cpp \
   -o output/celestia-comets/native/export
-node tools/objects/celestia-comets/export-meshes.mjs
+node tools/objects/celestia-comets/export-meshes.mts
 ```
 
 The `.native.json` outputs retain all 5,050 native vertices and the original

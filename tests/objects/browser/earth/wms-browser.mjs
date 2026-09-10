@@ -4,9 +4,9 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { chromium } from "playwright";
 import { PREPARED_EARTH_SCENE, runtimeDefinition, preparePagingDiagnostic, routePagingDiagnostic } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_CITY_PAGES } from "../../unit/earth/prepared-fixture.mjs";
-import { prepareWmsPage } from "../../../../tools/objects/geographic-pages/wms-page-geometry.mjs";
-import { prepareCityPageGeometry } from "../../../../tools/objects/geographic-pages/page-geometry.mjs";
-import { pageCoordinates, prepareLocationPoint, prepareLocationCamera } from "../../../../tools/objects/geographic-pages/prepare-location.mjs";
+import { prepareWmsPage } from "../../../../tools/objects/geographic-pages/wms-page-geometry.mts";
+import { prepareCityPageGeometry } from "../../../../tools/objects/geographic-pages/page-geometry.mts";
+import { pageCoordinates, prepareLocationPoint, prepareLocationCamera } from "../../../../tools/objects/geographic-pages/prepare-location.mts";
 
 const root=new URL("../../../../",import.meta.url);
 const base=(process.argv.slice(2).find(argument=>/^https?:\/\//u.test(argument))??"http://127.0.0.1:4210").replace(/\/$/u,"");

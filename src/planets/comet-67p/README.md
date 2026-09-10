@@ -70,7 +70,7 @@ The released pole RA 69.4°, Dec +64.1° and pre-perihelion rotation period 12.4
 retained. The display meridian is explicitly arbitrary. The shared scene epoch is JD 2461286.5
 (3 September 2026 TT); no extrapolation of Rosetta rotational phase is asserted.
 
-`packages/astronomy/tools/generate-comets.mjs` records the exact JPL Horizons elements and
+`packages/astronomy/tools/generate-comets.mts` records the exact JPL Horizons elements and
 independent vector query URLs. Its single-epoch conic supplies prepared placement and an
 osculating orbit; it is not a long-term perturbation or nongravitational outgassing model.
 

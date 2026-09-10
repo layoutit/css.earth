@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { PREPARED_EARTH_SCENE as scene } from "../../unit/earth/prepared-fixture.mjs";
-import { prepareLocationPoint } from "../../../../tools/objects/geographic-pages/prepare-location.mjs";
-import { polarGeographicUv } from "../../../../tools/objects/geographic-pages/wmts-polar-geometry.mjs";
-import { prepareCityPageGeometry, createCityGeographicSampler } from "../../../../tools/objects/geographic-pages/page-geometry.mjs";
-import { prepareGeographicTextureQuad } from "../../../../tools/objects/geographic-pages/wms-page-geometry.mjs";
-import { prepareWmtsTile, wmtsAddress, wmtsLatitude, wmtsRow, mercatorStripErrorBound, WMTS_PIXEL_ERROR } from "../../../../tools/objects/geographic-pages/wmts-page-geometry.mjs";
+import { prepareLocationPoint } from "../../../../tools/objects/geographic-pages/prepare-location.mts";
+import { polarGeographicUv } from "../../../../tools/objects/geographic-pages/wmts-polar-geometry.mts";
+import { prepareCityPageGeometry, createCityGeographicSampler } from "../../../../tools/objects/geographic-pages/page-geometry.mts";
+import { prepareGeographicTextureQuad } from "../../../../tools/objects/geographic-pages/wms-page-geometry.mts";
+import { prepareWmtsTile, wmtsAddress, wmtsLatitude, wmtsRow, mercatorStripErrorBound, WMTS_PIXEL_ERROR } from "../../../../tools/objects/geographic-pages/wmts-page-geometry.mts";
 import { isPreparedWmtsImage } from "../../../../src/renderers/css/dist/testing.js";
 import { createApiImageTransport } from "../../../../src/renderers/css/dist/testing.js";
 import { selectCityPages } from "../../../../src/renderers/css/dist/testing.js";

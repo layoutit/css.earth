@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { decodeIsis2Qube } from './isis2-qube.mjs';
+import { decodeIsis2Qube } from './isis2-qube.mts';
 
 function fixture() {
   const header = `CCSD3ZF0000100000001NJPL3IF0PDS200000001 = SFDU_LABEL

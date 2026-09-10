@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {parsePdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import {decodeCalibratedCamera,controlledShapeCamera} from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mjs';
+import {parsePdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import {decodeCalibratedCamera,controlledShapeCamera} from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
 
 const root=new URL('../../../../src/planets/puck/source/',import.meta.url);
 

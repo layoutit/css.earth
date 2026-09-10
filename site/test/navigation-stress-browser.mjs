@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdir, open, writeFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { chromium } from 'playwright';
-import { OBJECTS } from '../objects.mjs';
+import { OBJECTS } from '../objects.mts';
 
 const seed = Number(process.env.SEED ?? 9072026) >>> 0;
 let randomState = seed;

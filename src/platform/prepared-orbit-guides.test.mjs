@@ -8,8 +8,8 @@ import { pathToFileURL } from "node:url";
 import {
   PREPARED_ORBIT_GUIDE_SCHEMA,
   validatePreparedOrbitGuides,
-} from "./orbit-guide-contract.mjs";
-import { preparePlanetOrbitGuides } from "./prepared-orbit-guides.mjs";
+} from "./orbit-guide-contract.mts";
+import { preparePlanetOrbitGuides } from "./prepared-orbit-guides.mts";
 import { preparedFixture } from "./orbit-guide-test-fixture.mjs";
 
 test("prepares a planet-owned orbit-guide plan and vector assets", async (t) => {
@@ -96,9 +96,9 @@ test("rejects drifted prepared contracts", () => {
 
 test("keeps the shared production capability planet-neutral", async () => {
   const sources = await Promise.all([
-    "orbit-guide-contract.mjs",
-    "object-orbit.mjs",
-    "prepared-orbit-guides.mjs",
+    "orbit-guide-contract.mts",
+    "object-orbit.mts",
+    "prepared-orbit-guides.mts",
   ].map((file) => readFile(new URL(file, import.meta.url), "utf8")));
   for (const source of sources) assert.doesNotMatch(source, /saturn/iu);
 });

@@ -1,13 +1,5 @@
 ---
-interface PreparedAsset {
-  key: string;
-  url?: string;
-}
-
-interface PreparedAssets {
-  entries: PreparedAsset[];
-  startup: string[];
-}
+import type { PreparedAssets } from '../../src/renderers/css/rendering/prepared-residency.js';
 
 interface Props {
   preparedAssets: PreparedAssets;

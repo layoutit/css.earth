@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
-import { PREPARED_WHEEL_ZOOM } from "../../src/platform/prepared-wheel-zoom.mjs";
-import { WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER } from "../runtime-policy.mjs";
+import { PREPARED_WHEEL_ZOOM } from "../../src/platform/prepared-wheel-zoom.mts";
+import { WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER } from "../runtime-policy.mts";
 
 export async function proveWheelZoomDistance(page, planet, profile) {
   const original = await profile.camera(page), bounds = await profile.bounds(page);

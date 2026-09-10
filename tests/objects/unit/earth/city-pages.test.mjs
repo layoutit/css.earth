@@ -7,13 +7,13 @@ import { createHash } from "node:crypto";
 import sharp from "sharp";
 import { PREPARED_EARTH_SCENE } from "./prepared-fixture.mjs";
 import { pageBounds, childAddresses, prepareCityPageGeometry, createCityGeographicSampler,
-  createCityCoverageSampler, cityPageRasterDensity, cityGeographicFrame } from "../../../../tools/objects/geographic-pages/page-geometry.mjs";
-import { resamplePageRgba, resampleMappedPageRgba } from "../../../../tools/objects/geographic-pages/operations/resample-page.mjs";
+  createCityCoverageSampler, cityPageRasterDensity, cityGeographicFrame } from "../../../../tools/objects/geographic-pages/page-geometry.mts";
+import { resamplePageRgba, resampleMappedPageRgba } from "../../../../tools/objects/geographic-pages/operations/resample-page.mts";
 import { projectCityPage, selectCityPages, createCityIndex } from "../../../../src/renderers/css/dist/testing.js";
 import { isPreparedCityAssetUrl, normalizeCityAssetOrigin,
   preparedCityAssetUrl } from "../../../../src/renderers/css/dist/testing.js";
 import { readCityFixture } from "./city-fixture.mjs";
-import { assembleParentCore, copyCoreIntoGutter, prepareCityParentPages, writeCityCore } from "../../../../tools/objects/geographic-pages/operations/prepare-parent-pages.mjs";
+import { assembleParentCore, copyCoreIntoGutter, prepareCityParentPages, writeCityCore } from "../../../../tools/objects/geographic-pages/operations/prepare-parent-pages.mts";
 
 const fixture = await readCityFixture();
 const plan = fixture.plan;

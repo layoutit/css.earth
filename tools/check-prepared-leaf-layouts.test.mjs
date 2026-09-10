@@ -3,10 +3,10 @@ import test from "node:test";
 import { readFile } from "node:fs/promises";
 import { createHash } from 'node:crypto';
 import { resolve } from "node:path";
-import { OBJECTS } from "../site/objects.mjs";
-import { censusPreparedLeafLayouts, preparedStyleRecord } from "./check-prepared-leaf-layouts.mjs";
-import { readPreparedPresentationModule } from "./check-prepared-presentation.mjs";
-import { preparedObjectOverlay } from './test-prepared-object-overlay.mjs';
+import { OBJECTS } from "../site/objects.mts";
+import { censusPreparedLeafLayouts, preparedStyleRecord } from "./check-prepared-leaf-layouts.mts";
+import { readPreparedPresentationModule } from "./check-prepared-presentation.mts";
+import { preparedObjectOverlay } from './test-prepared-object-overlay.mts';
 
 async function changedObject(id, mutate) {
   const { changed, readText } = await preparedObjectOverlay(id, mutate);

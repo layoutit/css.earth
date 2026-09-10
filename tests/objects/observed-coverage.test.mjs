@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {polarZeroCoverage,resizeObservedRgb,prepareMeasuredPolarAtlas} from '../../tools/objects/observed-coverage.mjs';
-import {measureScalarCoverage,finitePercentiles} from '../../tools/objects/giant-observations/scalar-coverage.mjs';
+import {polarZeroCoverage,resizeObservedRgb,prepareMeasuredPolarAtlas} from '../../tools/objects/observed-coverage.mts';
+import {measureScalarCoverage,finitePercentiles} from '../../tools/objects/giant-observations/scalar-coverage.mts';
 
 test('polar fill is unavailable while black terrain, faint signal and negative finite measurements survive',()=>{
   const values=new Float64Array(8*8).fill(100);

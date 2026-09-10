@@ -43,7 +43,7 @@ try {
     releaseStartup();
     await page.waitForFunction(() => window.__cssEarth?.ready === true);
     await page.evaluate(async () => {
-      const { OBJECTS } = await import('/site/objects.mjs');
+      const { OBJECTS } = await import('/site/objects.mts');
       const { presentWorldCamera } = await import('/src/renderers/css/dist/navigation.js');
       const frames = Object.fromEntries(OBJECTS.filter(object => object.worldFrame).map(object => [object.id, object.worldFrame]));
       const stage = document.querySelector('.planet-stage');

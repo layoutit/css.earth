@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {parsePdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
+import {parsePdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 const root=new URL('../../../../src/planets/gkunhomdima/source/',import.meta.url);
 test('Gǃkúnǁʼhòmdímà preserves the published Maclaurin axes and orbit-alignment assumption',async()=>{
  const config=JSON.parse(await readFile(new URL('preparation/terrestrial.json',root)));

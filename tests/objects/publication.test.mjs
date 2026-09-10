@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, readFile, readdir, writeFile, rm, symlink } from 'node:
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
-import { publishPreparedAssets, readPreparedJsonOutputs } from '../../tools/objects/publication.mjs';
+import { publishPreparedAssets, readPreparedJsonOutputs } from '../../tools/objects/publication.mts';
 const manifest = (values) => ({ schema: 'cssfixture-runtime-assets@1', assets: Object.entries(values).map(([filename,text]) => ({filename,bytes:Buffer.byteLength(text),sha256:createHash('sha256').update(text).digest('hex')})) });
 test('private material masters stay staged while all consumer JSON is preflighted',async()=>{
  const root=await mkdtemp(join(tmpdir(),'cssearth-publication-json-'));

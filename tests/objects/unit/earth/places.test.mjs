@@ -2,11 +2,11 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { searchDestinations } from "../../../../site/destination-search.mjs";
+import { searchDestinations } from "../../../../site/destination-search.mts";
 import { PREPARED_EARTH_PLACES } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_SCENE } from "../../unit/earth/prepared-fixture.mjs";
-import { prepareCityPageGeometry, createCityGeographicSampler } from "../../../../tools/objects/geographic-pages/page-geometry.mjs";
-import { pageCoordinates, prepareLocationPoint } from "../../../../tools/objects/geographic-pages/prepare-location.mjs";
+import { prepareCityPageGeometry, createCityGeographicSampler } from "../../../../tools/objects/geographic-pages/page-geometry.mts";
+import { pageCoordinates, prepareLocationPoint } from "../../../../tools/objects/geographic-pages/prepare-location.mts";
 
 const bytes = await readFile(new URL("../../../../public/scenes/earth/earth-places.json", import.meta.url));
 const { places } = JSON.parse(bytes);

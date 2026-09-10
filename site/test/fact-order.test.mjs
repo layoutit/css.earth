@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { orderFacts } from "../fact-order.mjs";
+import { orderFacts } from "../fact-order.mts";
 
 test("orders comparable facts before stable planet-specific facts", () => {
   const facts = [

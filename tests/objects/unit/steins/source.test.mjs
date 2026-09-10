@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
-import {loadVrmlShape,parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import {prepareByteObservation} from '../../../../tools/objects/terrestrial-layers/observed-image.mjs';
+import {loadVrmlShape,parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import {prepareByteObservation} from '../../../../tools/objects/terrestrial-layers/observed-image.mts';
 const directory='src/planets/steins/source',read=async p=>JSON.parse(await readFile(`${directory}/${p}`,'utf8'));
 
 test('Steins source mesh preserves released kilometer coordinates and independent principal rays',async()=>{

@@ -9,7 +9,7 @@ import {
   icrsToGalacticMatrix,
   transformDirection,
   transposeMatrix,
-} from "./galactic-frame.mjs";
+} from "./galactic-frame.mts";
 
 // Hipparcos Catalogue vol. 1, equation 1.5.11: the published ICRS -> galactic
 // matrix. Reproducing it from the three angles proves the rotation order and

@@ -3,7 +3,7 @@ import {test} from 'node:test';
 import {mkdtemp,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {loadScienceSurface,validateScienceQualityMasks} from './scientific-raster.mjs';
+import {loadScienceSurface,validateScienceQualityMasks} from './scientific-raster.mts';
 const radius=1000,resolution=Math.PI*radius/2;
 const grid={width:4,height:2,targetName:'Test',centerLongitude:180,referenceRadiusMeters:radius,polarRadiusMeters:radius,origin:[-Math.PI*radius,Math.PI*radius/2],resolutionMeters:resolution,longitudeRange:[0,360],noData:-99999,projection:'equirectangular'};
 function cube(values){

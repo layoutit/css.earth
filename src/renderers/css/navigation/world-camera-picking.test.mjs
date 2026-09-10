@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { afterEach, test, vi } from 'vitest';
 import { getEventListeners } from 'node:events';
-import * as runtimePolicy from '../../../../site/runtime-policy.mjs';
+import * as runtimePolicy from '../../../../site/runtime-policy.mts';
 import runtimeDefinition from '../../../../src/planets/mercury/prepared/runtime.json' with { type: 'json' };
 import { projectHeliocentricView } from '../solar-system/heliocentric-view.ts';
 import { hitsProjectedBody } from './world-camera-hit.ts';

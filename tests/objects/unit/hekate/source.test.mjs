@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {createSourceManifest} from '../../../../src/platform/source-manifest.mjs';
-import {loadPdsPlateShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
+import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
+import {loadPdsPlateShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root=resolve(import.meta.dirname,'../../../../src/planets/hekate/source'),read=async p=>JSON.parse(await readFile(resolve(root,p),'utf8'));
 test('Hekate retains source identity and restoration closure',async()=>{
  const source=await createSourceManifest({planetId:'hekate',planetName:'Hekate',sourceRoot:root});await source.verify();

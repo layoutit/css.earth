@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createExplorerRailController } from "../explorer-rail.mjs";
-import { MOBILE_VIEWPORT_QUERY } from "../runtime-policy.mjs";
+import { createExplorerRailController } from "../explorer-rail.mts";
+import { MOBILE_VIEWPORT_QUERY } from "../runtime-policy.mts";
 
 function fixture({ mobile = false } = {}) {
   const documentTarget = new EventTarget();

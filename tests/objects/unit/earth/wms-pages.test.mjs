@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { PREPARED_EARTH_SCENE } from "../../unit/earth/prepared-fixture.mjs";
-import { prepareWmsPage } from "../../../../tools/objects/geographic-pages/wms-page-geometry.mjs";
-import { prepareCityPageGeometry, createCityGeographicSampler } from "../../../../tools/objects/geographic-pages/page-geometry.mjs";
+import { prepareWmsPage } from "../../../../tools/objects/geographic-pages/wms-page-geometry.mts";
+import { prepareCityPageGeometry, createCityGeographicSampler } from "../../../../tools/objects/geographic-pages/page-geometry.mts";
 import { isPreparedWmsImage, readWmsImage } from "../../../../src/renderers/css/dist/testing.js";
 
 function worldPoint(page,u,v) {

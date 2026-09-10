@@ -1,10 +1,10 @@
-import {loadObjectTestDefinition} from '../../tools/object-test-data.mjs';
+import {loadObjectTestDefinition} from '../../tools/object-test-data.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { OBJECTS } from '../../site/objects.mjs';
+import { OBJECTS } from '../../site/objects.mts';
 import { retainedPresentationFixture } from './test/object-runtime-package.mjs';
 import { mountPreparedPresentation } from '../renderers/css/dist/testing.js';
-import { requireObjectRuntimeDefinition } from '../../tools/object-runtime-contract.mjs';
+import { requireObjectRuntimeDefinition } from '../../tools/object-runtime-contract.mts';
 
 for (const object of OBJECTS) {
   const runtimeDefinition = await loadObjectTestDefinition(object.id);
