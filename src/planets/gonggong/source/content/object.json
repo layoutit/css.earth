@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "gonggong",
+  "displayName": "Gonggong",
+  "panel": {
+    "introduction": "Gonggong is a large, distant trans-Neptunian world with the moon Xiangliu. Its smooth model follows a published thermal size interpretation; the viewing pole and surface detail are illustrative.",
+    "facts": [
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Published size model; shape unresolved"
+      },
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "1230 × 1230 × 1230 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation",
+        "value": "22.4 or 44.8 hours; the single- versus double-peaked interpretation is unresolved."
+      },
+      {
+        "id": "class",
+        "label": "Population",
+        "value": "Scattered trans-Neptunian object"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "uncertainty",
+        "label": "Shape interpretation",
+        "value": "Published spherical thermophysical interpretation, diameter 1230 ±50 km. It assumes Xiangliu orbits near Gonggong’s equatorial plane; the unknown local surface is shown with the grid."
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Published spherical thermophysical interpretation, diameter 1230 ±50 km. It assumes Xiangliu orbits near Gonggong’s equatorial plane; the unknown local surface is shown with the grid. Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed. The grid marks unmapped terrain.",
+        "title": "Published size model; shape unresolved",
+        "detail": "Inferred shape · unmapped surface grid",
+        "thumbnail": "/scenes/gonggong/gonggong-model-thumbnail.webp",
+        "surface": "gonggong-model-surface@2x.webp",
+        "poles": "gonggong-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1016/j.icarus.2019.03.013"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "Kiss et al. (2019), thermophysical modeling with Hubble satellite-orbit constraints.",
+      "href": "https://doi.org/10.1016/j.icarus.2019.03.013"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://arxiv.org/abs/1903.05439"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://doi.org/10.1016/j.icarus.2024.116017"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.1016/j.icarus.2019.03.013",
+      "credit": "Kiss et al. (2019), thermophysical modeling with Hubble satellite-orbit constraints."
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Kiss et al. (2019), thermophysical modeling with Hubble satellite-orbit constraints."
+    }
+  }
+}

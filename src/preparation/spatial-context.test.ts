@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
+import { M_PER_AU } from '@cssearth/astronomy';
 import { parseWorldContextSource, prepareWorldContext } from './spatial-context.js';
 import type { OrbitalState } from './spatial-context.js';
 
@@ -76,6 +77,53 @@ test('prepared ellipses start at their same-epoch ephemeris position', async () 
   assert.equal(result.bodies[0]!.orbit.verticesM.length, 16);
   assert.equal(result.bodies[0]!.orbit.trail.length, 16);
   assert.deepEqual(result.focus.positionM, [0, 0, 0]);
+});
+
+test('a hyperbolic world trajectory retains its epoch marker on a finite open conic', async () => {
+  const source = parseWorldContextSource(JSON.parse(await readFile(sourcePath, 'utf8')));
+  const body = { id: 'interstellar-visitor', name: 'Interstellar visitor', color: '#aaaaaa' };
+  const eccentricity = 1.5, trueAnomalyRadians = Math.PI / 3;
+  const distance = M_PER_AU * (eccentricity ** 2 - 1) / (1 + eccentricity * Math.cos(trueAnomalyRadians));
+  const state: OrbitalState = { positionM: [distance * Math.cos(trueAnomalyRadians), distance * Math.sin(trueAnomalyRadians), 0],
+    centerBodyId: source.focus.id, centerPositionM: source.frame.originM, normal: [0, 0, 1], perihelionDirection: [1, 0, 0],
+    semiMajorAxisM: -M_PER_AU, eccentricity, trueAnomalyRadians };
+  const prepared = prepareWorldContext({ ...source, bodies: [body], orbit: { ...source.orbit, segments: 16 } },
+    { [body.id]: { radiusM: 100, orbitStyle: 'closed' } }, { [body.id]: state });
+  const orbit = prepared.bodies[0]!.orbit;
+  assert.equal(orbit.closed, false, 'a bound-orbit styling preference cannot close a hyperbola');
+  assert.equal(orbit.displayExtentAu, 600, 'the radius cap is a display window, not an apoapsis');
+  assert.equal(orbit.trailModel, 'finite-open-trajectory-constant-weight');
+  assert(orbit.bodyVertexIndex! > 0 && orbit.bodyVertexIndex! < orbit.verticesM.length - 1);
+  assert.deepEqual(orbit.verticesM[orbit.bodyVertexIndex!], state.positionM);
+  assert.equal(orbit.trail.length, orbit.verticesM.length - 1);
+  assert(orbit.trail.every(weight => weight === 1));
+  assert.deepEqual(orbit.activeChords, Array.from({ length: orbit.verticesM.length - 1 }, (_, index) => index));
+  assert.deepEqual([...orbit.extentChords].sort((a, b) => a - b), orbit.activeChords);
+  assert(orbit.verticesM[0]![1] < 0 && orbit.verticesM.at(-1)![1] > 0, 'both unbound branches remain in chronological order');
+  for (const vertex of orbit.verticesM) {
+    const radius = Math.hypot(...vertex);
+    // The independent polar equation r(1 + e cos(nu)) = a(1-e²).
+    assert(Math.abs(radius + eccentricity * vertex[0] - M_PER_AU * (eccentricity ** 2 - 1)) < M_PER_AU * 1e-10);
+    assert.equal(vertex[2], 0);
+    assert(radius <= 600 * M_PER_AU * (1 + 8 * Number.EPSILON));
+    assert(Math.hypot(...vertex.map((value, axis) => value - orbit.bounds.centerM[axis]!)) <= orbit.bounds.radiusM);
+  }
+  for (const endpoint of [orbit.verticesM[0]!, orbit.verticesM.at(-1)!]) {
+    assert(Math.abs(Math.hypot(...endpoint) / M_PER_AU - 600) < 1e-10);
+  }
+  assert(!('period' in orbit) && !('chordBehindTurns' in orbit), 'an unbound passage has no period or share-of-a-turn trail');
+});
+
+test('world context rejects inconsistent conic signs and parabolic or unreachable states', async () => {
+  const source = parseWorldContextSource(JSON.parse(await readFile(sourcePath, 'utf8')));
+  const body = source.bodies[0]!;
+  const state: OrbitalState = { positionM: [M_PER_AU / 2, 0, 0], centerBodyId: source.focus.id, centerPositionM: source.frame.originM,
+    normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: -M_PER_AU, eccentricity: 1.5, trueAnomalyRadians: 0 };
+  for (const invalid of [{ semiMajorAxisM: M_PER_AU }, { semiMajorAxisM: 0 }, { semiMajorAxisM: Infinity },
+    { eccentricity: .5 }, { eccentricity: 1 }, { eccentricity: NaN }, { eccentricity: Infinity }, { trueAnomalyRadians: Math.PI }]) {
+    assert.throws(() => prepareWorldContext({ ...source, bodies: [body] }, { [body.id]: { radiusM: 100 } },
+      { [body.id]: { ...state, ...invalid } }), /orbit|finite/);
+  }
 });
 
 test('satellite ellipses are translated to their parent with exact prepared centres', async () => {

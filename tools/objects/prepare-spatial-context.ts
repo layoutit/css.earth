@@ -147,7 +147,9 @@ function orbits(value: unknown): Readonly<Record<string, Orbit>> {
   const input = record(value, 'Solar geometry orbits'); return Object.freeze(Object.fromEntries(Object.entries(input).map(([id, value]) => {
     const orbit = record(value, `Solar geometry orbit ${id}`);
     if ((orbit.centerBodyId === undefined) !== (orbit.centerPositionAu === undefined)) throw new TypeError(`${id} orbit parent and centre must be declared together.`);
-    return [id, { semiMajorAxisAu: positive(orbit.semiMajorAxisAu, `${id} semi-major axis`), eccentricity: eccentricity(orbit.eccentricity, id), heliocentricDistanceAu: positive(orbit.heliocentricDistanceAu, `${id} distance`),
+    const semiMajorAxisAu = number(orbit.semiMajorAxisAu, `${id} semi-major axis`), orbitEccentricity = eccentricity(orbit.eccentricity, id);
+    if (!(orbitEccentricity < 1 ? semiMajorAxisAu > 0 : semiMajorAxisAu < 0)) throw new TypeError(`${id} semi-major axis and eccentricity are incompatible.`);
+    return [id, { semiMajorAxisAu, eccentricity: orbitEccentricity, heliocentricDistanceAu: positive(orbit.heliocentricDistanceAu, `${id} distance`),
       perihelionDirection: vector3(orbit.perihelionDirection, `${id} perihelion`), trueAnomalyDegrees: number(orbit.trueAnomalyDegrees, `${id} anomaly`),
       ...(orbit.centerBodyId === undefined ? {} : { centerBodyId: text(orbit.centerBodyId, `${id} orbit parent`), centerPositionAu: vector3(orbit.centerPositionAu, `${id} orbit centre`) }) }];
   })));
@@ -161,7 +163,7 @@ function record(value: unknown, name: string): Record<string, unknown> { if (!va
 function text(value: unknown, name: string): string { if (typeof value !== 'string' || value.length === 0) throw new TypeError(`${name} must be text.`); return value; }
 function number(value: unknown, name: string): number { if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${name} must be finite.`); return value; }
 function positive(value: unknown, name: string): number { const result = number(value, name); if (!(result > 0)) throw new TypeError(`${name} must be positive.`); return result; }
-function eccentricity(value: unknown, id: string): number { const result = number(value, `${id} eccentricity`); if (result < 0 || result >= 1) throw new TypeError(`${id} eccentricity is invalid.`); return result; }
+function eccentricity(value: unknown, id: string): number { const result = number(value, `${id} eccentricity`); if (result < 0 || result === 1) throw new TypeError(`${id} eccentricity is invalid.`); return result; }
 
 const invoked = process.argv[1] && basename(fileURLToPath(import.meta.url)) === 'prepare-spatial-context.js' &&
   resolve(process.argv[1]) === fileURLToPath(import.meta.url);

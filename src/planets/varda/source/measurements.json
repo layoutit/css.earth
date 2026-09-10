@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-09",
+  "periodHours": null,
+  "population": "Trans-Neptunian object",
+  "surfaceMeaning": "Standard grid on a source-informed shape model; no resolved global surface map.",
+  "id": "varda",
+  "name": "Varda",
+  "aliases": [
+    "174567 Varda",
+    "2003 MW12"
+  ],
+  "horizons": "174567;",
+  "fullAxesKm": [
+    778,
+    706,
+    496
+  ],
+  "radiusKm": 324.1345526598759,
+  "poleIcrfDegrees": [
+    272.6,
+    -10.8
+  ],
+  "source": "https://arxiv.org/abs/2605.28636",
+  "credit": "Proudfoot et al. (2026), occult3d reanalysis of Souami et al. (2020) occultation chords",
+  "shapeMeaning": "One published allowable triaxial model, with semiaxes 389, 353 and 248 km. The line-of-sight depth is unconstrained; these best-fit values illustrate a solution rather than a uniquely measured body shape.",
+  "orientationMeaning": "Assumes the spin pole aligns with Ilmarë’s orbit: J2000 RA 272.6° and declination −10.8°. This is a model prior; rotational phase and meridian are illustrative.",
+  "periodText": "Unresolved; photometric aliases and synchronous rotation remain alternatives",
+  "introduction": "Varda is a distant binary-system primary whose outline was measured as it eclipsed a star. Its companion’s orbit helps orient this model, but Varda’s depth remains uncertain.",
+  "papers": [
+    "https://doi.org/10.1051/0004-6361/202038526",
+    "https://arxiv.org/abs/2008.04818",
+    "https://github.com/benp175/occult3d"
+  ],
+  "numericEvidence": {
+    "section": "Proudfoot et al. (2026), Table 1, Table 3, Figure 4 and section 5.2",
+    "semiAxesKm": [
+      389,
+      353,
+      248
+    ],
+    "axisUncertaintyMeaning": "The paper intentionally reports only an example best fit for Varda: c/a is unconstrained. No axis confidence interval or precise physical volume is asserted.",
+    "radiusFormula": "cbrt(389 * 353 * 248); volume-equivalent radius of this displayed model only",
+    "poleRightAscensionErrorDegrees": [
+      -1.5,
+      1.4
+    ],
+    "poleDeclinationErrorDegrees": [
+      -1.9,
+      2.0
+    ],
+    "poleMeaning": "J2000 equatorial orbit-pole prior, not an independently observed surface pole",
+    "legacyApparentSemimajorKm": 383,
+    "legacyApparentSemimajorErrorKm": 3,
+    "legacyApparentOblateness": 0.066,
+    "legacyApparentOblatenessError": 0.047
+  },
+  "unresolved": [
+    "Depth and volume are not uniquely measured; many c/a values remain possible.",
+    "Spin-orbit alignment is assumed, and no absolute phase or sidereal period is installed.",
+    "Additional 2018 occultation chords mentioned in conference proceedings were not publicly released in the 2026 analysis."
+  ],
+  "sourceSurvey": [
+    {
+      "url": "https://arxiv.org/abs/2605.28636",
+      "provides": "Updated satellite orbit and a triaxial example model",
+      "disposition": "included",
+      "reason": "Most recent qualified numeric fit found; explicit depth degeneracy is retained."
+    },
+    {
+      "url": "https://doi.org/10.1051/0004-6361/202038526",
+      "provides": "Five measured occultation chords and several Maclaurin interpretations",
+      "disposition": "included-as-observations-only",
+      "reason": "The 2026 study rules out the older mirror-orbit interpretation supporting the spheroidal fit if spin and satellite orbit are aligned."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/643/A125",
+      "provides": "Astrometry and occultation light curves",
+      "disposition": "excluded",
+      "reason": "These are unresolved time-series measurements; no spatial surface mosaic or additional terrain is implied."
+    },
+    {
+      "url": "https://github.com/benp175/occult3d",
+      "provides": "Published analysis software and numerical-model provenance",
+      "disposition": "excluded-from-runtime",
+      "reason": "The existing ellipsoid preparer consumes the published numbers; no new fitting or rendering technique is introduced."
+    }
+  ],
+  "referenceFiles": [
+    "varda-proudfoot-2026.pdf",
+    "varda-souami-2020.pdf"
+  ],
+  "radiusMeaning": "Volume-equivalent radius of the selected displayed model; not an independently measured mean radius.",
+  "reuse": "Numeric measurements and authored interpretation with primary citations. Downloaded papers are local research references, not surface assets.",
+  "distanceAu": 45.619915704968584,
+  "classification": "trans-neptunian",
+  "shapeLabel": "Published triaxial example model",
+  "references": [
+    {
+      "file": "varda-proudfoot-2026.pdf",
+      "sourceUrl": "https://arxiv.org/pdf/2605.28636",
+      "resolvedUrl": "https://arxiv.org/pdf/2605.28636",
+      "bytes": 2538367,
+      "sha256": "b2a9a3162dabc548500abb0781491a80fb36ae24c27c5909505e9848da5a40d6",
+      "retrievedAt": "2026-09-10T02:43:13.433773+00:00",
+      "url": "https://arxiv.org/pdf/2605.28636"
+    },
+    {
+      "file": "varda-souami-2020.pdf",
+      "sourceUrl": "https://arxiv.org/pdf/2008.04818",
+      "resolvedUrl": "https://arxiv.org/pdf/2008.04818",
+      "bytes": 7602546,
+      "sha256": "f5f69964b4d8e9778fcbdf3b834fc9aacb296990bf3ae5659c505781c1f080dc",
+      "retrievedAt": "2026-09-10T02:42:32.668063+00:00",
+      "url": "https://arxiv.org/pdf/2008.04818"
+    }
+  ],
+  "survey": [
+    "Included: Updated satellite orbit and a triaxial example model Most recent qualified numeric fit found; explicit depth degeneracy is retained. https://arxiv.org/abs/2605.28636",
+    "Included-as-observations-only: Five measured occultation chords and several Maclaurin interpretations The 2026 study rules out the older mirror-orbit interpretation supporting the spheroidal fit if spin and satellite orbit are aligned. https://doi.org/10.1051/0004-6361/202038526",
+    "Excluded: Astrometry and occultation light curves These are unresolved time-series measurements; no spatial surface mosaic or additional terrain is implied. https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/643/A125",
+    "Excluded-from-runtime: Published analysis software and numerical-model provenance The existing ellipsoid preparer consumes the published numbers; no new fitting or rendering technique is introduced. https://github.com/benp175/occult3d"
+  ]
+}

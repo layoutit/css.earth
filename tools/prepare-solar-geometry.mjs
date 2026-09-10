@@ -40,7 +40,7 @@ const sourceKey = id => /^[a-z][a-z0-9]*$/.test(id) ? id : JSON.stringify(id);
 const VSOP87A_KEY = Object.freeze({ earth: "emb" });
 
 const BODIES = OBJECTS.filter(body =>
-  ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet"].includes(body.classification)).map(body => body.id);
+  ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet", "interstellar"].includes(body.classification)).map(body => body.id);
 
 const {
   DWARF_PLANET_IDS, dwarfPlanetElements, keplerStateKm,
@@ -284,7 +284,7 @@ const entries = BODIES.map((body) => {
     perihelionDirection,
     trueAnomalyDegrees,
     perihelionAu: semiMajorAxisAu * (1 - eccentricity),
-    aphelionAu: semiMajorAxisAu * (1 + eccentricity),
+    aphelionAu: eccentricity < 1 ? semiMajorAxisAu * (1 + eccentricity) : null,
   });
 });
 
@@ -412,7 +412,7 @@ ${
     },
   ) =>
     `  // a ${semiMajorAxisAu.toPrecision(5)} AU, e ${eccentricity.toPrecision(5)}, ` +
-    `perihelion ${perihelionAu.toPrecision(5)} AU, aphelion ${aphelionAu.toPrecision(5)} AU\n` +
+    `perihelion ${perihelionAu.toPrecision(5)} AU, aphelion ${aphelionAu === null ? 'none (unbound)' : aphelionAu.toPrecision(5) + ' AU'}\n` +
     `  ${sourceKey(body)}: Object.freeze({\n` +
     (parent === "sun" ? "" : `    centerBodyId: ${JSON.stringify(parent)},\n    centerPositionAu: Object.freeze(${JSON.stringify(centerPositionAu)}),\n${epochStates.get(body)?.parentHeliocentricState ? `    parentHeliocentricState: ${JSON.stringify(epochStates.get(body).parentHeliocentricState)},\n` : ""}`) +
     `    semiMajorAxisAu: ${semiMajorAxisAu},\n` +

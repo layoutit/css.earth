@@ -1,0 +1,90 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "oumuamua",
+  "displayName": "ʻOumuamua",
+  "publicBase": "/scenes/oumuamua/",
+  "distanceAu": 54.22423400905037,
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "model",
+        "consumer": "model-surface",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 160,
+          "centerLongitude": 180
+        },
+        "metadata": {
+          "label": "Shape model",
+          "modeled": true,
+          "coverage": "Selected DISC light-curve model: full axes 115 × 111 × 19 m, assuming geometric albedo 0.1. The same study permits a 324 × 42 × 42 m CIGAR solution. These are competing inferred shapes; no resolved silhouette or surface map exists. Size depends on the assumed albedo. Arbitrary display pole and meridian. The object tumbles; this static view does not reconstruct its 2017 attitude or claim a current spin phase. The grid marks unmapped terrain."
+        }
+      }
+    ],
+    "scientific": [],
+    "observedColors": [],
+    "mosaics": []
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 0.0311813426009723,
+    "camera": {
+      "initialScenePitchDegrees": 20,
+      "defaultControlYawDegrees": -45,
+      "framingScale": 0.5422842191473444
+    },
+    "mapUrl": "/scenes/oumuamua/oumuamua-model-surface@2x.webp",
+    "polesUrl": "/scenes/oumuamua/oumuamua-model-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/ellipsoid.tab",
+      "format": "pds-radius-table",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 2522,
+        "expectedFaces": 5040,
+        "stepDegrees": 5,
+        "longitudeDirection": "east-positive"
+      },
+      "faceBudget": 2000,
+      "tileSize": 64,
+      "atlasColumns": 16,
+      "simplification": {
+        "targetFaces": 480,
+        "maximumErrorMeters": 0.7795335650243075,
+        "method": "source-meshoptimizer"
+      },
+      "primitive": "u"
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Arbitrary display pole and meridian. The object tumbles; this static view does not reconstruct its 2017 attitude or claim a current spin phase."
+  },
+  "presentation": {
+    "defaultLens": "model",
+    "pointColor": [
+      160,
+      160,
+      160
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

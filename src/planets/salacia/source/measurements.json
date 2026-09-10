@@ -1,0 +1,162 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-09",
+  "periodHours": null,
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed color or terrain.",
+  "orientationMeaning": "Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed.",
+  "axesStatus": "Illustrative equal axes at the published effective diameter; these are not three independently measured axes.",
+  "radiusMeaning": "Volume-equivalent radius of the chosen illustrative equal-axis model, not a measured 3D-volume radius.",
+  "id": "salacia",
+  "name": "Salacia",
+  "jplId": "120347",
+  "horizons": "120347;",
+  "fullName": "120347 Salacia (2004 SB60)",
+  "fullAxesKm": [
+    838,
+    838,
+    838
+  ],
+  "radiusKm": 418.99999999999983,
+  "diameterKm": 838,
+  "diameterUncertaintyKm": {
+    "minus": 44,
+    "plus": 44
+  },
+  "population": "Hot classical trans-Neptunian object",
+  "periodText": "About 5.494 days (131.86 hours); 2025 photometry supports synchronous rotation with Actaea.",
+  "source": "https://doi.org/10.5194/epsc-dps2025-905",
+  "credit": "Kiss et al. (2025), EPSC-DPS conference thermal-model result; Collyer et al. (2025), synchronous rotation.",
+  "shapeMeaning": "Size-constrained spherical illustration at the primary-only 838 ±44 km ALMA/NEATM estimate. This value is from a 2025 conference abstract; no resolved three-axis shape is provided.",
+  "introduction": "Salacia is a large, dark Kuiper-belt world with the moon Actaea. Long-term photometry supports a synchronized binary. This grid-covered illustration uses a separately estimated primary size, not a resolved surface.",
+  "papers": [
+    "https://arxiv.org/abs/2509.02734",
+    "https://doi.org/10.3847/PSJ/ae0b6a",
+    "https://arxiv.org/abs/2508.17101"
+  ],
+  "referencePins": [
+    {
+      "path": "output/distant-worlds/references/salacia-kiss-2025.html",
+      "url": "https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-905.html",
+      "resolvedUrl": "https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-905.html",
+      "bytes": 162166,
+      "sha256": "c2a3f501ffb53a50a82ee7da61ea93d15f7750f3d2b61989fd54b73b37568ba4",
+      "contentType": "text/html; charset=utf-8",
+      "purpose": "Resolved primary and satellite thermal diameters; conference abstract"
+    },
+    {
+      "path": "output/distant-worlds/references/salacia-collyer-2025.html",
+      "url": "https://arxiv.org/html/2509.02734v1",
+      "resolvedUrl": "https://arxiv.org/html/2509.02734v1",
+      "bytes": 265567,
+      "sha256": "39a29b49b2b0dcb92dda03ee3af61c5f7af7d5e4f021b6df47daebd705121acf",
+      "contentType": "text/html; charset=utf-8",
+      "purpose": "Synchronous rotation and albedo versus shape interpretation"
+    },
+    {
+      "path": "output/distant-worlds/references/salacia-wong-2025.html",
+      "url": "https://arxiv.org/html/2508.17101v1",
+      "resolvedUrl": "https://arxiv.org/html/2508.17101v1",
+      "bytes": 182847,
+      "sha256": "cbbb424ed5fdd7862fbe2b26682f361e6c49dbbf85351a9ea9b045d48dca8318",
+      "contentType": "text/html; charset=utf-8",
+      "purpose": "JWST blended Salacia-Actaea spectrum; not mapped imagery"
+    }
+  ],
+  "numericAnchors": [
+    {
+      "quantity": "Salacia primary thermal diameter",
+      "value": 838,
+      "unit": "km",
+      "uncertainty": "±44 km",
+      "location": "Kiss et al. 2025 EPSC-DPS905 abstract paragraph beginning Using the same approach"
+    },
+    {
+      "quantity": "Actaea diameter, context only",
+      "value": 393,
+      "unit": "km",
+      "uncertainty": "±33 km",
+      "location": "Same paragraph; not merged into Salacia radius"
+    },
+    {
+      "quantity": "sidereal rotation estimate",
+      "value": 5.49403,
+      "unit": "days",
+      "uncertainty": "±0.00016 days",
+      "location": "Collyer et al. 2025 section5.2; descriptive only, display phase arbitrary"
+    }
+  ],
+  "sourceSurvey": [
+    {
+      "url": "https://doi.org/10.5194/epsc-dps2025-905",
+      "status": "included",
+      "adds": "New ALMA observations separate Salacia and Actaea, with distinct diameters and albedos. Conference abstract status retained."
+    },
+    {
+      "url": "https://arxiv.org/abs/2509.02734",
+      "status": "included-context",
+      "adds": "16 years of photometry favor albedo variation and a 5.494-day synchronous rotation, rather than a triaxial explanation of the lightcurve."
+    },
+    {
+      "url": "https://arxiv.org/abs/2508.17101",
+      "status": "excluded-from-surface",
+      "adds": "JWST Salacia-Actaea spectrum is spatially blended; its901 km discussion concerns the system and cannot set this primary’s axes."
+    },
+    {
+      "url": "https://doi.org/10.3847/1538-3881/aa6346",
+      "status": "superseded-size",
+      "adds": "Older 866 ±37 km estimate used equal-albedo binary partitioning; newer resolved-component result selected."
+    }
+  ],
+  "unresolved": [
+    "838 ±44 km remains a conference result; a full peer-reviewed resolved-ALMA analysis was not located in this bounded survey.",
+    "Spherical axes and pole are illustrative; the lightcurve paper favors surface-albedo variation and does not provide measured terrain.",
+    "The standard grid carries no observed albedo pattern or JWST spectral map."
+  ],
+  "distanceAu": 45.37159590675732,
+  "classification": "trans-neptunian",
+  "shapeLabel": "Published size model; shape unresolved",
+  "references": [
+    {
+      "path": "output/distant-worlds/references/salacia-kiss-2025.html",
+      "url": "https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-905.html",
+      "resolvedUrl": "https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-905.html",
+      "bytes": 162166,
+      "sha256": "c2a3f501ffb53a50a82ee7da61ea93d15f7750f3d2b61989fd54b73b37568ba4",
+      "contentType": "text/html; charset=utf-8",
+      "purpose": "Resolved primary and satellite thermal diameters; conference abstract",
+      "file": "salacia-kiss-2025.html",
+      "retainOriginal": true,
+      "acquisitionNote": "The CC BY 4.0 conference HTML contains changing page tokens. Retain the reviewed original bytes in Git; do not treat a fresh personalized response as the same source file."
+    },
+    {
+      "path": "output/distant-worlds/references/salacia-collyer-2025.html",
+      "url": "https://arxiv.org/html/2509.02734v1",
+      "resolvedUrl": "https://arxiv.org/html/2509.02734v1",
+      "bytes": 265567,
+      "sha256": "39a29b49b2b0dcb92dda03ee3af61c5f7af7d5e4f021b6df47daebd705121acf",
+      "contentType": "text/html; charset=utf-8",
+      "purpose": "Synchronous rotation and albedo versus shape interpretation",
+      "file": "salacia-collyer-2025.html"
+    },
+    {
+      "path": "output/distant-worlds/references/salacia-wong-2025.html",
+      "url": "https://arxiv.org/html/2508.17101v1",
+      "resolvedUrl": "https://arxiv.org/html/2508.17101v1",
+      "bytes": 182847,
+      "sha256": "cbbb424ed5fdd7862fbe2b26682f361e6c49dbbf85351a9ea9b045d48dca8318",
+      "contentType": "text/html; charset=utf-8",
+      "purpose": "JWST blended Salacia-Actaea spectrum; not mapped imagery",
+      "file": "salacia-wong-2025.html"
+    }
+  ],
+  "survey": [
+    "Included: New ALMA observations separate Salacia and Actaea, with distinct diameters and albedos. Conference abstract status retained.  https://doi.org/10.5194/epsc-dps2025-905",
+    "Included-context: 16 years of photometry favor albedo variation and a 5.494-day synchronous rotation, rather than a triaxial explanation of the lightcurve.  https://arxiv.org/abs/2509.02734",
+    "Excluded-from-surface: JWST Salacia-Actaea spectrum is spatially blended; its901 km discussion concerns the system and cannot set this primary’s axes.  https://arxiv.org/abs/2508.17101",
+    "Superseded-size: Older 866 ±37 km estimate used equal-albedo binary partitioning; newer resolved-component result selected.  https://doi.org/10.3847/1538-3881/aa6346"
+  ]
+}

@@ -133,3 +133,19 @@ src/planets/*/source/**/*.bpc
 
 # Quaoar source paper is restored from its pinned arXiv URL.
 /src/planets/quaoar/source/reference/quaoar-2026.html
+
+# Reacquirable distant-world paper originals; acquisition recipes pin exact bytes.
+/src/planets/oumuamua/source/reference/*.html
+/src/planets/sedna/source/reference/*.html
+/src/planets/gonggong/source/reference/*.html
+/src/planets/orcus/source/reference/*.html
+/src/planets/salacia/source/reference/*.html
+/src/planets/varuna/source/reference/*.html
+/src/planets/mani/source/reference/*.html
+/src/planets/achlys/source/reference/*.html
+!src/planets/salacia/source/reference/salacia-kiss-2025.html
+
+# Already tracked lunar science extracts retained by the merged Moon package.
+!src/planets/moon/source/science/diviner-ghrm/ra_sam-compact.tif
+!src/planets/moon/source/science/diviner-ghrm/tbol_anom-compact.tif
+!src/planets/moon/source/science/diviner-ghrm/tbol_m-compact.tif
