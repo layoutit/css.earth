@@ -7,9 +7,9 @@
     "sha256": "9de613c157054a83455cbc4082d09c9e00858ae17a422a4f0acfd2a7aff57834"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -325,7 +325,7 @@
       "sha256": "4b3f0fd7817054f32c8d8703149bf81501cdcb41257ce232b3a59d9436864392",
       "bytes": 468859,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "d1ce1d9f83980d304410b5ccb7d9c40c930c4dcd5bf19f1f3a3cab8f1c4001d0",
       "bytes": 8087,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/egeria/egeria-elevation-thumbnail.webp",
           "bytes": 5602,
           "sha256": "5391f248ca1b72b1ab0e59b491c886291c18aa5bc5b7e27d3c08e9a5f0fd1f91",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/egeria/egeria-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/egeria/egeria-elevation-surface@2x.webp",
           "bytes": 324912,
           "sha256": "e332a2c244cea7840d7808ffe7c35f8caa6cd23d33e7cbf34ffef350f15a065d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/egeria/egeria-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/egeria/egeria-shape-surface@2x.webp",
           "bytes": 221916,
           "sha256": "7005e3d2255f0c4395c16bbad24925399f7de242a1a2cebb7ec4ea1a4f65213e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

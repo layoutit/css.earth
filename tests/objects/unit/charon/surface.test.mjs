@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
-import {readObservation} from '../../../../tools/objects/terrestrial-layers/solid-raster.mjs';
-import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
+import {readObservation} from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';
+import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 
 const root = new URL('../../../../src/planets/charon/source/', import.meta.url).pathname;
 test('Charon maps source longitude correctly and preserves observation and elevation gaps', async () => {

@@ -9,10 +9,10 @@ import {
   MARKER_BRIGHTNESS,
   markerOpacityForMagnitudes,
   lambertPhaseFunction,
-} from "./prepare-planetary-system.mjs";
-import { prepareEclipticPresentationFrame } from "./solar-presentation-frame.mjs";
-import { prepareHeliocentricView } from "./prepare-heliocentric-view.mjs";
-import { projectHeliocentricView, validatePreparedHeliocentricView, validatePreparedPlanetarySystem } from "./heliocentric-view.mjs";
+} from "./prepare-planetary-system.mts";
+import { prepareEclipticPresentationFrame } from "./solar-presentation-frame.mts";
+import { prepareHeliocentricView } from "./prepare-heliocentric-view.mts";
+import { projectHeliocentricView, validatePreparedHeliocentricView, validatePreparedPlanetarySystem } from "./heliocentric-view.mts";
 import {
   ASTRONOMICAL_UNIT_KILOMETERS,
   BODY_FIXED_SUN_DIRECTIONS,
@@ -20,8 +20,8 @@ import {
   BODY_ORBITS,
   BODY_HELIOCENTRIC_STATES,
   SOLAR_GEOMETRY_EPOCH_JD_TT,
-} from "./solar-geometry.mjs";
-import { loadAstronomyPackage } from "./astronomy-package.mjs";
+} from "./solar-geometry.mts";
+import { loadAstronomyPackage } from "./astronomy-package.mts";
 
 const MERCURY_RADIUS_UNITS = 230;
 const MERCURY_RADIUS_KILOMETERS = 2439.7;

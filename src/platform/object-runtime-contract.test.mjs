@@ -1,11 +1,11 @@
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import { OBJECTS } from "../../site/objects.mjs";
+import { OBJECTS } from "../../site/objects.mts";
 const moonDefinition = await loadObjectTestDefinition('moon');
 const objectControls = moonDefinition.controls;
 import { initialObjectSelection, reduceObjectSelection, requireObjectAction } from '../renderers/css/dist/testing.js';
-import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mjs";
+import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mts";
 
 function definition(overrides = {}) {
   return { ...moonDefinition, assets: structuredClone(moonDefinition.assets), ...overrides };

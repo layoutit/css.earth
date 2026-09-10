@@ -69,7 +69,7 @@ This is a conservative geographic cut based on the published approximate coverag
 
 ## Prepared delivery
 
-The shared `tools/objects/terrestrial-layers/solid-raster.mjs` operation produces lossless 4096 × 2048 maps, projective strip atlases and thumbnails; its material operation produces registered pole tiles and the same bounded lighting model used by the accepted shared solid-body path. The output's equatorial spacing is approximately 2.8 km per texel. Source areas coarser than this remain coarse. Canonical assets are selected once per mount, independently of DPR. Runtime only decodes and transports prepared assets.
+The shared `tools/objects/terrestrial-layers/solid-raster.mts` operation produces lossless 4096 × 2048 maps, projective strip atlases and thumbnails; its material operation produces registered pole tiles and the same bounded lighting model used by the accepted shared solid-body path. The output's equatorial spacing is approximately 2.8 km per texel. Source areas coarser than this remain coarse. Canonical assets are selected once per mount, independently of DPR. Runtime only decodes and transports prepared assets.
 
 The shared source-driven parent-marker operation prepares an independent 1024-pixel Hubble Jupiter image from the source entry in this package, so Io can be installed without Jupiter's surface package. Shared sky inputs are ESO/S. Brunier's Milky Way panorama and the HYG catalogue; their attribution files accompany the source manifest. Inter provides prepared title outlines.
 

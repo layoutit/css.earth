@@ -6,7 +6,7 @@ import {
   PLANET_TITLE_STANDARD,
   serializePreparedTitleModule,
   sha256,
-} from "./prepared-title.mjs";
+} from "./prepared-title.mts";
 
 const source = Object.freeze({
   label: "Planet",

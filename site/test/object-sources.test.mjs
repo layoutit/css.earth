@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
-import { OBJECTS } from '../objects.mjs';
-import { objectSources } from '../object-sources.mjs';
-import { productSourceIds, validateObjectProvenance } from '../../src/platform/object-provenance.mjs';
+import { OBJECTS } from '../objects.mts';
+import { objectSources } from '../object-sources.mts';
+import { productSourceIds, validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 
 const read = async id => JSON.parse(await readFile(new URL(`../../src/planets/${id}/prepared/provenance.json`, import.meta.url), 'utf8'));
 

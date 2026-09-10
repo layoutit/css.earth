@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseObjShape } from './obj-shape.mjs';
-import { parseObjTextureCoordinates, createObjUvFitsSampler, validateObjUvFits } from './obj-uv-fits.mjs';
+import { parseObjShape } from './obj-shape.mts';
+import { parseObjTextureCoordinates, createObjUvFitsSampler, validateObjUvFits } from './obj-uv-fits.mts';
 
 // Independent two-layer geometry: a center ray can see multiple surfaces,
 // whereas a local surface point still identifies its own released UV island.

@@ -1,10 +1,11 @@
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from "node:url";
 import { build } from "vite";
 import { createObjectRuntime, preparedObjectCapabilities } from "../renderers/css/dist/index.js";
-import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mjs";
+import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mts";
 import { createPreparedResidency } from '../renderers/css/dist/testing.js';
 import { createPreparedPlayback } from '../renderers/css/dist/testing.js';
 import { createSceneLifetime } from "./scene-lifetime.mjs";
@@ -12,6 +13,7 @@ import { createObjectSelectionRuntime } from '../renderers/css/dist/testing.js';
 import { retainedPresentationFixture } from "./test/object-runtime-package.mjs";
 const moonDefinition = await loadObjectTestDefinition('moon');
 const earthDefinition = await loadObjectTestDefinition('earth');
+import { earthPagingFixture } from '../../tests/objects/unit/earth/paging-fixture.mts';
 const flush = async () => { for (let index = 0; index < 32; index++) await Promise.resolve(); };
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
 class CSSAnimation {
@@ -53,7 +55,12 @@ function harness({ definition = moonDefinition, failAtElement = null, stageId = 
       createResources(options) {
         resourceOptions = options;
         resources = createPreparedResidency({ ...options, createImage() { return { src: "", naturalWidth: 1, naturalHeight: 1,
-          decode() { return new Promise((resolve, reject) => jobs.push({ resolve, reject, image: this, done: false })); },
+          decode() {
+            // This controlled native-image stub accounts for the declared
+            // decoded bytes; actual image geometry is covered by preparation.
+            this.naturalWidth = (definition.assets.entries.find(entry => entry.url === this.src)?.decodedBytes ?? 4) / 4;
+            return new Promise((resolve, reject) => jobs.push({ resolve, reject, image: this, done: false }));
+          },
           removeAttribute(name) { if (name === "src") this.src = ""; } }; } });
         return resources;
       },
@@ -212,26 +219,26 @@ test("optional warm decode failure is recoverable while native cleanup failure i
   h.resourceOptions().onWarmError(new Error("late warm")); h.resourceOptions().onCleanupError(new Error("late cleanup"));
   assert.equal(warnings.length, 1); assert.equal(h.errors.length, 1);
 });
-test("Earth's actual prepared page layers join shared publication, playback and cleanup", async t => {
+test("Earth's retained paging fixture joins shared publication, playback and cleanup", async t => {
   const events = [], plans = [];
-  const h = harness({ definition: earthDefinition }, { mountPages({ own, plan }) {
+  const h = harness({ definition: earthPagingFixture }, { mountPages({ own, plan }) {
     plans.push(plan); own(() => events.push("destroy"));
     return { publish: () => events.push("frame"), setLens: lens => events.push(lens.id), setPlaying: value => events.push(value), stats: () => ({}) };
   } }); t.after(h.restore); await h.complete();
-  assert.deepEqual(plans, earthDefinition.pageLayers.map(layer => layer.plan));
+  assert.deepEqual(plans, earthPagingFixture.pageLayers.map(layer => layer.plan));
   assert.ok(events.includes("frame")); h.runtime.resume(); assert.equal(events.at(-1), true);
   h.runtime.pause(); assert.equal(events.at(-1), false); h.runtime.destroy(); assert.equal(events.at(-1), "destroy");
   h.runtime.resume(); assert.equal(events.at(-1), "destroy"); assert.deepEqual(h.errors, []);
 });
 test("partial prepared page construction retires the actual tree and all resources", async t => {
   let cleaned = false;
-  const h = harness({ definition: earthDefinition }, { mountPages({ own }) { own(() => { cleaned = true; }); throw new Error("page construction"); } });
+  const h = harness({ definition: earthPagingFixture }, { mountPages({ own }) { own(() => { cleaned = true; }); throw new Error("page construction"); } });
   t.after(h.restore); const failure = assert.rejects(h.runtime.ready, /page construction/); await h.resolveJobs(); await failure;
   assert.equal(cleaned, true); assert.equal(h.stage.children.length, 0); assert.equal(h.resources().stats().images.entries.length, 0);
 });
 
 test("prepared geographic destinations and lens targets use the physical surface flight while reset keeps authored framing", async t => {
-  const h = harness({ definition: earthDefinition }, { mountPages: () => ({
+  const h = harness({ definition: earthPagingFixture }, { mountPages: () => ({
     publish() {}, setLens() {}, setPlaying() {}, stats: () => ({}),
   }) });
   t.after(h.restore);
@@ -240,7 +247,7 @@ test("prepared geographic destinations and lens targets use the physical surface
   h.document.defaultView.DOMMatrix = class extends globalThis.DOMMatrix { inverse() { return this; } };
   h.document.defaultView.getComputedStyle = () => ({ transform: matrix });
   await h.complete();
-  const target = earthDefinition.variants.find(variant => variant.navigation?.camera);
+  const target = earthPagingFixture.variants.find(variant => variant.navigation?.camera);
   assert.ok(target, 'The actual prepared geographic lens has a camera target');
   const request = h.selection().dispatch({ kind: 'lens', id: target.when.lensId });
   await h.resolveJobs(); assert.equal(await request, true);
@@ -251,9 +258,9 @@ test("prepared geographic destinations and lens targets use the physical surface
   assert.deepEqual(h.flights.at(-1), [place.camera, { surfaceTarget: true }]);
   await h.runtime.destinations.reset();
   assert.deepEqual(h.flights.at(-1), [{
-    controlPitch: earthDefinition.camera.defaultControlPitchDegrees,
-    controlYaw: earthDefinition.camera.defaultControlYawDegrees,
-    zoom: earthDefinition.camera.defaultZoom,
+    controlPitch: earthPagingFixture.camera.defaultControlPitchDegrees,
+    controlYaw: earthPagingFixture.camera.defaultControlYawDegrees,
+    zoom: earthPagingFixture.camera.defaultZoom,
   }]);
   assert.deepEqual(h.errors, []);
 });

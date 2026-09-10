@@ -1,5 +1,5 @@
 import {readFile} from 'node:fs/promises';
-import {loadPdsRadialTable} from '../../../../tools/objects/terrestrial-layers/pds-radial-table.mjs';
+import {loadPdsRadialTable} from '../../../../tools/objects/terrestrial-layers/pds-radial-table.mts';
 export async function evaluateRegistration() {
 const grid=await loadPdsRadialTable('src/planets/gaspra/source/shape/951gaspra.tab',{latitudeStepDegrees:2,longitudeStepDegrees:2,longitudeDirection:'west',metersPerUnit:1000,expectedRecords:16471});
 const bytes=(await readFile('src/planets/gaspra/source/maps/951gaspram.fit')).subarray(2880,262080);

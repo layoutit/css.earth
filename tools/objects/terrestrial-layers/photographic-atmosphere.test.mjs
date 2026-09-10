@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
-import {preparePhotographicAtmosphere} from './photographic-atmosphere.mjs';
-import {createEllipsoidGeometry} from './ellipsoid-geometry.mjs';
+import {preparePhotographicAtmosphere} from './photographic-atmosphere.mts';
+import {createEllipsoidGeometry} from './ellipsoid-geometry.mts';
 import profile from '../../../src/planets/mars/source/preparation/atmosphere.json' with {type:'json'};
 import shape from '../../../src/planets/mars/source/preparation/ellipsoid.json' with {type:'json'};
 

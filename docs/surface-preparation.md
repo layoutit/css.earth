@@ -16,11 +16,11 @@ Original images, meshes and labels
 
 | Step | Implementation |
 | --- | --- |
-| Restore missing inputs; reject changed bytes | [Acquisition](../tools/objects/operations.ts) and [checkout restoration](../tools/restore-source-inputs.mjs) |
+| Restore missing inputs; reject changed bytes | [Acquisition](../tools/objects/operations.ts) and [checkout restoration](../tools/restore-source-inputs.mts) |
 | Reproduce authored ellipsoid tables from pinned measurements | [Source table tools](../tools/objects/source-authoring/README.md) |
 | Read the authored recipe and dispatch its capabilities | [prepareAuthoredObject](../tools/objects/prepare-authored.ts) |
-| Prepare solid-body imagery, scientific layers and meshes | [prepareTerrestrialLayers](../tools/objects/terrestrial-layers/index.mjs) |
-| Record input, recipe and output identities | [Provenance bindings](../tools/objects/provenance-recipes.mjs) and [record generation](../tools/objects/provenance.mjs) |
+| Prepare solid-body imagery, scientific layers and meshes | [prepareTerrestrialLayers](../tools/objects/terrestrial-layers/index.mts) |
+| Record input, recipe and output identities | [Provenance bindings](../tools/objects/provenance-recipes.mts) and [record generation](../tools/objects/provenance.mts) |
 
 The [implementation map](../.agents/skills/celestial-skill/references/implementation-map.md)
 locates other preparation families. Earth selects among offline atlas levels
@@ -32,15 +32,15 @@ current datasets and retained source history.
 
 ## Decode the source before choosing its display
 
-[readObservation](../tools/objects/terrestrial-layers/solid-raster.mjs) selects
+[readObservation](../tools/objects/terrestrial-layers/solid-raster.mts) selects
 the decoder named by the recipe. Ordinary images use Sharp; PDS, FITS, ISIS and
 GeoTIFF observations use format-specific readers that check the expected grid
 and encoding. [Acquisition tools](../tools/objects/acquisition/) handle
 instrument-specific calibration and geometry. The
-[observation preparer](../tools/objects/terrestrial-layers/observed-geo-surface.mjs)
+[observation preparer](../tools/objects/terrestrial-layers/observed-geo-surface.mts)
 also fits and validates cameras and applies photometric corrections.
 
-[loadScienceSurface](../tools/objects/terrestrial-layers/scientific-raster.mjs)
+[loadScienceSurface](../tools/objects/terrestrial-layers/scientific-raster.mts)
 keeps numeric values available for sampling. Unit conversion, palette and
 optional relief follow that sampling. The displayed RGB value is therefore a
 presentation of the source quantity; it cannot replace the original numeric input.
@@ -65,9 +65,9 @@ atlas coordinates locate the baked tile that the CSS surface will display.
 
 | Source representation | How sampling works |
 | --- | --- |
-| Geographic or projected map | [scienceMapPoint](../tools/objects/terrestrial-layers/scientific-raster.mjs) applies the declared projection; grid origin, spacing and pixel-center rules locate the sample. [Solid-body reprojection](../src/platform/prepare-solid-body-surface.mjs) handles the display surface and poles. |
-| Mesh with released UVs | [obj-uv-fits.mjs](../tools/objects/terrestrial-layers/obj-uv-fits.mjs) keeps each face corner's original texture index, including seams. It transfers a prepared point to the closest original triangle within the recipe's distance limit. |
-| Registered photograph | [observed-geo-surface.mjs](../tools/objects/terrestrial-layers/observed-geo-surface.mjs) uses source geometry, camera validation and visibility checks. [observation-mosaic.mjs](../tools/objects/terrestrial-layers/observation-mosaic.mjs) selects among qualified observations. |
+| Geographic or projected map | [scienceMapPoint](../tools/objects/terrestrial-layers/scientific-raster.mts) applies the declared projection; grid origin, spacing and pixel-center rules locate the sample. [Solid-body reprojection](../src/platform/prepare-solid-body-surface.mts) handles the display surface and poles. |
+| Mesh with released UVs | [obj-uv-fits.mjs](../tools/objects/terrestrial-layers/obj-uv-fits.mts) keeps each face corner's original texture index, including seams. It transfers a prepared point to the closest original triangle within the recipe's distance limit. |
+| Registered photograph | [observed-geo-surface.mjs](../tools/objects/terrestrial-layers/observed-geo-surface.mts) uses source geometry, camera validation and visibility checks. [observation-mosaic.mjs](../tools/objects/terrestrial-layers/observation-mosaic.mts) selects among qualified observations. |
 
 For released OBJ UVs, the matched triangle supplies three barycentric weights:
 fractions describing the point's position within that triangle. The sampler
@@ -102,7 +102,7 @@ stretches differ. Both use related observations, so this is a registration check
 
 ## Reduce geometry and bake the atlas
 
-[radial-terrain.mjs](../tools/objects/terrestrial-layers/radial-terrain.mjs)
+[radial-terrain.mjs](../tools/objects/terrestrial-layers/radial-terrain.mts)
 supports both a sampled radial surface and reduction of the original mesh.
 A radial surface supplies one radius per direction. `source-meshoptimizer`
 reduces source triangles instead; it can retain surfaces that a single radius
@@ -121,12 +121,12 @@ historical processing examples, not new browser checks.
 For mesh surfaces, preparation samples each retained triangle into its own
 raster tile and emits a native PolyCSS `u` triangle with prepared CSS addresses.
 Ordinary mapped imagery is sampled from the lossless surface map at this step.
-For banded surfaces, [projective-surface-raster.mjs](../src/platform/projective-surface-raster.mjs)
+For banded surfaces, [projective-surface-raster.mjs](../src/platform/projective-surface-raster.mts)
 packs latitude bands and gutters; poles have separate prepared tiles.
 Atlas dimensions, tile sizes and padding must agree with those addresses.
 Padding hides sampling seams; it does not add observed coverage.
 
-[solid-raster.mjs](../tools/objects/terrestrial-layers/solid-raster.mjs) writes
+[solid-raster.mjs](../tools/objects/terrestrial-layers/solid-raster.mts) writes
 WebP assets and records their dimensions, sizes and hashes. Normalized maps stay
 lossless; banded display output defaults to lossless unless the recipe selects
 a quality setting. Ordinary triangle atlases default to WebP quality 90.

@@ -15,8 +15,8 @@ import test from "node:test";
 import {
   PLANET_INFORMATION_SOURCES,
   validatePlanetInformationSnapshot,
-} from "./planet-information-sources.mjs";
-import { publishPlanetInformation } from "./prepare-planet-information.mjs";
+} from "./planet-information-sources.mts";
+import { publishPlanetInformation } from "./prepare-planet-information.mts";
 
 test("publishes the complete prepared batch atomically", async (context) => {
   const root = await mkdtemp(resolve(tmpdir(), "css-earth-editorial-"));

@@ -1,5 +1,6 @@
 import { fileURLToPath } from 'node:url';
 import { executeAcquisition, parseAcquisitionPlan, type AcquisitionPlan, type AcquisitionTransport } from './operations-acquisition.js';
+export { parseAcquisitionPlan };
 import { isPreparedBlockReference, PREPARED_BLOCK_ENCODING } from '../../src/renderers/css/paging/prepared-block-transport.js';
 import type { PreparedReference } from '../../src/renderers/css/paging/types.js';
 import { createHash, randomUUID } from 'node:crypto';

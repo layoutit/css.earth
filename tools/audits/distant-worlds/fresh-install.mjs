@@ -1,9 +1,9 @@
-import { ids, reportDirectory, runtimeDirectory } from './selection.mjs';
+import { ids, reportDirectory, runtimeDirectory } from './selection.mts';
 import assert from 'node:assert/strict';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {runtimeAssets} from '../../../tools/runtime-assets.mjs';
-import {installRuntimeAssets} from '../../../tools/setup.mjs';
+import {runtimeAssets} from '../../../tools/runtime-assets.mts';
+import {installRuntimeAssets} from '../../../tools/setup.mts';
 const root=runtimeDirectory;
 await mkdir(root,{recursive:true});
 const assets=(await runtimeAssets(process.cwd(),ids)).map(asset=>({...asset,file:resolve(root,asset.id,asset.filename)}));

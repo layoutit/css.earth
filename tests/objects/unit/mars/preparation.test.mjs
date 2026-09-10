@@ -8,7 +8,7 @@ import { PREPARED_MARS_CAMERA } from "../../unit/mars/prepared-fixture.mjs";
 import { PREPARED_MARS_LENSES } from "../../unit/mars/prepared-fixture.mjs";
 import { PREPARED_MARS_LIGHTING } from "../../unit/mars/prepared-fixture.mjs";
 import { PREPARED_MARS_SCENE } from "../../unit/mars/prepared-fixture.mjs";
-import { createSourceManifest } from "../../../../src/platform/source-manifest.mjs";
+import { createSourceManifest } from "../../../../src/platform/source-manifest.mts";
 import {fileURLToPath} from 'node:url';
 
 const objectRoot = new URL("../../../../src/planets/mars/", import.meta.url);
@@ -77,7 +77,7 @@ test("prepares the Mars shell title without a runtime font", () => {
     "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c");
   assert.equal(PREPARED_MARS_TITLE.weight, 500);
   assert.equal(PREPARED_MARS_TITLE.opticalSize, 28);
-  assert.equal(PREPARED_MARS_TITLE.sourceGenerator,'tools/prepare-planet-title-sources.mjs');
+  assert.equal(PREPARED_MARS_TITLE.sourceGenerator,'tools/prepare-planet-title-sources.mts');
   assert.match(PREPARED_MARS_TITLE.path, /^M0 29L0 8\.63/u);
   assert.doesNotMatch(PREPARED_MARS_TITLE.path, /<text|font-family/iu);
 });

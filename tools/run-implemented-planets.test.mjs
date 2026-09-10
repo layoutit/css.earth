@@ -1,4 +1,4 @@
-import {authoredObject} from './authored-object.mjs';
+import {authoredObject} from './authored-object.mts';
 import assert from "node:assert/strict";
 import { mkdtemp, readdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -6,14 +6,14 @@ import { resolve } from "node:path";
 import { setImmediate } from "node:timers/promises";
 import test from "node:test";
 
-import { OBJECTS } from "../site/objects.mjs";
+import { OBJECTS } from "../site/objects.mts";
 import {
   defaultPreparationConcurrency,
   discoverPlanetTests,
   resolvePlanetCommand,
   runObjectCommand,
   runPreparationObjects,
-} from "./run-implemented-planets.mjs";
+} from "./run-implemented-planets.mts";
 
 const root = resolve(import.meta.dirname, "..");
 const ids = OBJECTS.map(({ id }) => id);

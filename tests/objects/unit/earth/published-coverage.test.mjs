@@ -3,10 +3,10 @@ import test from "node:test";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { readCityFixture } from "./city-fixture.mjs";
-import { assembleCityCoveragePlan, readPublishedCoverage } from "../../../../tools/objects/geographic-pages/operations/published-coverage.mjs";
-import { readWorldCoverCatalog } from "../../../../tools/objects/geographic-pages/worldcover-catalog.mjs";
-import { cityCoverageRoots, planCityCoverage } from "../../../../tools/objects/geographic-pages/operations/plan-coverage.mjs";
-import { expectedGlobalCityFace, validateGlobalCityFaceReceipt } from "../../../../tools/objects/geographic-pages/operations/global-face-receipts.mjs";
+import { assembleCityCoveragePlan, readPublishedCoverage } from "../../../../tools/objects/geographic-pages/operations/published-coverage.mts";
+import { readWorldCoverCatalog } from "../../../../tools/objects/geographic-pages/worldcover-catalog.mts";
+import { cityCoverageRoots, planCityCoverage } from "../../../../tools/objects/geographic-pages/operations/plan-coverage.mts";
+import { expectedGlobalCityFace, validateGlobalCityFaceReceipt } from "../../../../tools/objects/geographic-pages/operations/global-face-receipts.mts";
 import { PREPARED_EARTH_SCENE } from "./prepared-fixture.mjs";
 
 const publishedCoveragePath=new URL("../../../../src/planets/earth/source/city/published-coverage.json.gz",import.meta.url);

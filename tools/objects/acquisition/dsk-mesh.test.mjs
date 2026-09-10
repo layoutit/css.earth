@@ -3,7 +3,7 @@ import {test} from 'node:test';
 import {mkdtemp, writeFile, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
-import {prepareDskMesh, validateDskMeshRecipe} from './dsk-mesh.mjs';
+import {prepareDskMesh, validateDskMeshRecipe} from './dsk-mesh.mts';
 const recipe={inputPath:'shape.bds',inputBytes:16,inputSha256:'0'.repeat(64),member:'shape.obj',targetId:602,frameId:10040,surfaceId:20122,sourceVertices:6,sourceFaces:4,weldedVertices:4,spiceypyVersion:'6.0.3',cspiceVersion:'CSPICE_N0067'};
 test('DSK conversion rejects source escapes, unpinned tools and impossible dimensions before invocation',()=>{
  assert.equal(validateDskMeshRecipe(recipe),recipe);

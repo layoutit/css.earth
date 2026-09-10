@@ -2,11 +2,11 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,readdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {OBJECTS} from '../../site/objects.mjs';
+import {OBJECTS} from '../../site/objects.mts';
 import {projectRoot} from './fixtures.mjs';
 const selected=OBJECTS;
 assert.ok(selected.length>0,'The registry must exercise source closure.');
-const executable=/\.(?:mjs|cjs|[jt]sx?|astro|css)$/i;
+const executable=/\.(?:[cm]?[jt]sx?|astro|css)$/i;
 async function files(root){const result=[];for(const entry of await readdir(root,{withFileTypes:true})){const path=resolve(root,entry.name);if(entry.isDirectory())result.push(...await files(path));else {assert.ok(entry.isFile(),`Unexpected non-file ${path}`);result.push(path);}}return result;}
 for(const {id} of selected){
  test(`${id}: authored object directory contains data and pinned sources only`,async()=>{

@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 import { scrollToDistance as scrollTo } from './wheel-zoom-distance.mjs';
 import preparedVolume from '../../src/objects/milky-way/prepared/volume.json' with { type: 'json' };
-import { OBJECTS } from '../objects.mjs';
+import { OBJECTS } from '../objects.mts';
 
 const base = process.argv[2] ?? 'http://127.0.0.1:4210';
 const output = resolve('.local/milky-way-integration');

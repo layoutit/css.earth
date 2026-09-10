@@ -3,9 +3,9 @@ import {readFile} from 'node:fs/promises';
 import test from 'node:test';
 import sharp from 'sharp';
 import {readPreparedFixture} from '../../fixtures.mjs';
-import {initialObjectSelection,reduceObjectSelection} from '../../../../src/platform/object-runtime-contract.mjs';
+import {initialObjectSelection,reduceObjectSelection} from '../../../../src/platform/object-runtime-contract.mts';
 import {resolvePreparedPresentation} from '../../../../src/renderers/css/dist/testing.js';
-import {viewSunDirectionToPreparedLightDirection} from '../../../../src/platform/directional-sun-coordinate.mjs';
+import {viewSunDirectionToPreparedLightDirection} from '../../../../src/platform/directional-sun-coordinate.mts';
 const [lenses,scene,definition]=await Promise.all(['material-lenses','scene','runtime'].map(name=>readPreparedFixture('saturn',name)));
 const publicPath=url=>new URL('../../../../public'+url,import.meta.url);
 test('ships five prepared retained-DOM Saturn lenses',async()=>{

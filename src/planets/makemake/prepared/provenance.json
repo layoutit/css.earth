@@ -7,9 +7,9 @@
     "sha256": "8802fcca943c9e9356bbb4c6c67f21fb80cb76d9db721c43bfb9902cb4171cd2"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -179,7 +179,7 @@
       "sha256": "e7d5fa27f50afae10f0e7290cdf7a14ca856c0b9e99b2db02f25b75441fbdbef",
       "bytes": 4441844,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -203,7 +203,7 @@
       "sha256": "2590c1da57f7796eee39b41c930242fd950242c4cdeea89e40748319d139ce51",
       "bytes": 3478,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -238,19 +238,19 @@
           "url": "/scenes/makemake/illustration-thumbnail.webp",
           "bytes": 3362,
           "sha256": "2dcf4fa4060b880a5a280a06c6faf747e67c2a2e903689be122c16a640e1a1b6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/makemake/surface.webp",
           "bytes": 2451194,
           "sha256": "d063a3a9e3c50e5c18496ea8281a55a58879a89314c74ddb87c02691176ddb5c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/makemake/poles.webp",
           "bytes": 103396,
           "sha256": "3743047c4034761442e293485e3f1369b29d6d7b4675c91a6cf5467a6761aac9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

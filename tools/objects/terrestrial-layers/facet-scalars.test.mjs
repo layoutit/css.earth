@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {parseObjShape} from './obj-shape.mjs';
-import {parseFacetCsv, parseFacetFits, createFacetScalarSampler, validateFacetScalarProfile} from './facet-scalars.mjs';
+import {parseObjShape} from './obj-shape.mts';
+import {parseFacetCsv, parseFacetFits, createFacetScalarSampler, validateFacetScalarProfile} from './facet-scalars.mts';
 
 const mesh = parseObjShape(['v 1 0 0','v 1 3 0','v 1 0 3','v 5 0 0','v 5 3 0','v 5 0 3','f 1 2 3','f 4 5 6'].join('\n'),
   {metersPerUnit:1, expectedVertices:6, expectedFaces:2});

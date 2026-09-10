@@ -4,12 +4,12 @@ import { readFile } from "node:fs/promises";
 import sharp from "sharp";
 import { fromFile } from "geotiff";
 import {publishedObservation,expectedMonochromeTexel,assertDisplayClose,countInteriorPixels} from "../observed-atlas-proof.mjs";
-import {missingCoverageColor} from "../../../../src/platform/prepare-missing-coverage.mjs";
-import {createSourceManifest} from "../../../../src/platform/source-manifest.mjs";
+import {missingCoverageColor} from "../../../../src/platform/prepare-missing-coverage.mts";
+import {createSourceManifest} from "../../../../src/platform/source-manifest.mts";
 const source = await createSourceManifest({planetId:"callisto",planetName:"Callisto",sourceRoot:new URL("../../../../src/planets/callisto/source/",import.meta.url).pathname});
 const verifyCallistoSourceManifest = () => source.verify();
 const callistoSourceInputsFor = consumer => source.inputsFor(consumer);
-import { verifyRuntimeAssetClosure } from "../../../../src/platform/runtime-asset-closure.mjs";
+import { verifyRuntimeAssetClosure } from "../../../../src/platform/runtime-asset-closure.mts";
 
 const sourcePath = new URL("../../../../src/planets/callisto/source/callisto-global-1km.tif", import.meta.url).pathname;
 const publicRoot = new URL("../../../../public/scenes/callisto/", import.meta.url).pathname;

@@ -1,23 +1,12 @@
 ---
 import PlanetShell from "./PlanetShell.astro";
 import PlanetInformationPanel from "./PlanetInformationPanel.astro";
-import { validateObjectProvenance } from "../../src/platform/object-provenance.mjs";
-import type {
-  PreparedObjectContent,
-  PreparedObjectContentDocument,
-} from "../../tools/objects/content/types";
-
-interface Props {
-  informationOnly?: boolean;
-  navigation?: boolean;
-  preparedContent: PreparedObjectContentDocument;
-  preparedControls: {
-    lenses: PreparedObjectContent["lenses"] | null;
-    settings: PreparedObjectContent["settings"];
-  };
-}
-
-const { preparedContent: content, preparedControls: controls, informationOnly = false } = Astro.props;
+import { validateObjectProvenance } from "../../src/platform/object-provenance.mts";
+import { parsePreparedPanelContent, parsePanelControls } from '../prepared-panel-content.mts';
+interface Props { informationOnly?: boolean; navigation?: boolean; preparedContent: unknown; preparedControls: unknown; }
+const { preparedContent, preparedControls, informationOnly = false } = Astro.props;
+const content = parsePreparedPanelContent(preparedContent);
+const controls = parsePanelControls(preparedControls);
 const Panel = informationOnly ? PlanetInformationPanel : PlanetShell;
 const previewFiles = import.meta.glob<{ images: Array<{ id: string; path: string; width: number; height: number; attribution?: { label: string; url?: string } }> }>(
   "../../src/planets/*/prepared/minimaps.json",
@@ -31,7 +20,7 @@ const minimapFiles = import.meta.glob("../../src/planets/*/source/presentation/s
 const provenanceFiles = import.meta.glob("../../src/planets/*/prepared/provenance.json", { import: "default" });
 const objectRoot = `../../src/planets/${content.objectId}`;
 const provenanceData = await provenanceFiles[`${objectRoot}/prepared/provenance.json`]?.();
-const provenance = provenanceData && validateObjectProvenance(provenanceData, content.objectId);
+const provenance = provenanceData === undefined ? undefined : validateObjectProvenance(provenanceData, content.objectId);
 const minimap = await minimapFiles[`${objectRoot}/source/presentation/surface-map.json`]?.();
 const previews = await previewFiles[`${objectRoot}/prepared/minimaps.json`]?.();
 const lenses = controls.lenses && {

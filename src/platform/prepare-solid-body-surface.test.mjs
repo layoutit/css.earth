@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { prepareSolidBodySurface, reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from "./prepare-solid-body-surface.mjs";
+import { prepareSolidBodySurface, reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from "./prepare-solid-body-surface.mts";
 
 // An independently readable coordinate image: red encodes longitude and green
 // encodes latitude. Check its prepared texels against actual CSS vertex mapping.
@@ -50,7 +50,7 @@ test("polar textures use the same projection as their flat caps", () => {
 });
 
 test("CSS UVs sample the actual atlas when HD padding is not a quarter-band", async () => {
-  const { packProjectiveSurfaceRaster } = await import('./projective-surface-raster.mjs');
+  const { packProjectiveSurfaceRaster } = await import('./projective-surface-raster.mts');
   // Like Charon and Triton, the packed gutter is independent of image density.
   const gutter = 6;
   const packed = packProjectiveSurfaceRaster(reprojectSolidBodySurfaceRaster(source, { width, height }),

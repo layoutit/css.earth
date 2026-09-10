@@ -3,7 +3,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
 import sharp from "sharp";
-import { OBJECTS } from "../objects.mjs";
+import { OBJECTS } from "../objects.mts";
 import { assertHomepageReachability } from "./seo-discovery.mjs";
 
 // Inspect the supplied server as a crawler without JavaScript. General browser

@@ -1,4 +1,4 @@
-import { bodies, ids, reportDirectory, captureDirectory } from './selection.mjs';
+import { bodies, ids, reportDirectory, captureDirectory } from './selection.mts';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import sharp from 'sharp';

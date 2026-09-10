@@ -4,10 +4,10 @@ import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { loadPdsScalarGrid } from '../../../../tools/objects/terrestrial-layers/pds-scalar-grid.mjs';
-import { colorForValue } from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
-import { preparePlanetarySystem } from '../../../../src/platform/prepare-planetary-system.mjs';
-import { prepareEclipticPresentationFrame } from '../../../../src/platform/solar-presentation-frame.mjs';
+import { loadPdsScalarGrid } from '../../../../tools/objects/terrestrial-layers/pds-scalar-grid.mts';
+import { colorForValue } from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
+import { preparePlanetarySystem } from '../../../../src/platform/prepare-planetary-system.mts';
+import { prepareEclipticPresentationFrame } from '../../../../src/platform/solar-presentation-frame.mts';
 const root = resolve(import.meta.dirname, '../../../..'), base = resolve(root, 'src/planets/vesta');
 const read = async path => JSON.parse(await readFile(resolve(base, path), 'utf8'));
 

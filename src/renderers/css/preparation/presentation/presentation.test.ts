@@ -22,13 +22,19 @@ describe('retained presentation compiler compatibility', () => {
     ]);
     const input = { ...profile, scene, assets, lenses, sun, markers, controls, solarSource } as PresentationInputs;
     const prepared = await prepareCssPresentation(input);
-    expect(prepared).toEqual(expected);
+    // Runtime finalization adds motion/facing and can update marker/warm-bank
+    // metadata. Compare compiler-owned structure, then every raw output byte
+    // against the independently executed pre-migration JavaScript helpers.
+    const accepted = expected as Record<string, unknown>;
+    for (const key of ['tree', 'variants', 'materials', 'camera', 'sky', 'sun', 'controls', 'viewBindings', 'animations'] as const) {
+      expect(prepared[key]).toEqual(accepted[key]);
+    }
     expect(prepared.tree.nodes.length).toBe(id === 'mercury' ? 909 : 456);
     expect(createHash('sha256').update(JSON.stringify(canonical(prepared))).digest('hex')).toBe(expectedDigests[id]);
   }, 30_000);
 });
-// Source-compiled direct leaves compose the prepared frame and texture transform.
+// Full raw output hashes from original JS helpers; see tools/evidence/presentation-typescript-parity.json.
 const expectedDigests: Record<string, string> = {
-  mercury: '56519a7b96af7ebdbe81ab5a1d69b0e00bc1d9f064d13a6705c43aa7c44498da',
-  venus: '7c5846a3e69c5b8e8bbdb22408034d0e17eda4e93cf741bdf3c1ae879d7a5e43',
+  mercury: '2f21b6943220eb050e5783c7809121ca37e6c13c1120468f6659a605c4cbfec5',
+  venus: 'e0df212c4a67bb80ec3abd5e11bd39cd84aa563e4c0044abff1d22c92c1bbdbe',
 };

@@ -1,9 +1,9 @@
-import { bodies, ids, reportDirectory, captureDirectory } from './selection.mjs';
+import { bodies, ids, reportDirectory, captureDirectory } from './selection.mts';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
-import {OBJECTS} from '../../../site/objects.mjs';
-import {validatePlanetData} from '../../../tools/object-package-contract.mjs';
+import {OBJECTS} from '../../../site/objects.mts';
+import {validatePlanetData} from '../../../tools/object-package-contract.mts';
 
 
 const read=async path=>JSON.parse(await readFile(path));

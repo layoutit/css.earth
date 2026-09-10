@@ -3,8 +3,8 @@ import { test } from "node:test";
 import runtimeDefinition from "../../../../src/planets/callisto/prepared/runtime.json" with {type:"json"};
 const {id: objectId, controls, ...presentation} = runtimeDefinition;
 const PREPARED_PRESENTATION = {...presentation, schema:PREPARED_PRESENTATION_SCHEMA};
-import { requirePreparedPresentation, PREPARED_PRESENTATION_SCHEMA } from "../../../../src/platform/prepared-presentation-contract.mjs";
-import { ASTRONOMICAL_UNIT_KILOMETERS } from "../../../../src/platform/solar-geometry.mjs";
+import { requirePreparedPresentation, PREPARED_PRESENTATION_SCHEMA } from "../../../../src/platform/prepared-presentation-contract.mts";
+import { ASTRONOMICAL_UNIT_KILOMETERS } from "../../../../src/platform/solar-geometry.mts";
 
 test("Callisto uses one shared scene, sourced lenses and shared shadows", () => {
   requirePreparedPresentation(PREPARED_PRESENTATION, {controls:runtimeDefinition.controls});

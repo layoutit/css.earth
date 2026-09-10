@@ -3,8 +3,8 @@ import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {basename} from 'node:path';
 import test from 'node:test';
-import {parsePdsImage} from '../../../../tools/objects/terrestrial-layers/pds-image.mjs';
-import {paintScienceSurface, colorForValue, loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
+import {parsePdsImage} from '../../../../tools/objects/terrestrial-layers/pds-image.mts';
+import {paintScienceSurface, colorForValue, loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 import {fileURLToPath} from 'node:url';
 import {fromFile} from 'geotiff';
 

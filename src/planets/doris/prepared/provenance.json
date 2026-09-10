@@ -7,9 +7,9 @@
     "sha256": "53c2d26bdf1893a142768c38841f1a60019cbfa5f7296a078788243db8b3d094"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -327,7 +327,7 @@
       "sha256": "f0adb78ace9a78951e51b9ab2a9b2618d4c09faca0b886d5ed798a00cdf6f671",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "ca3309df13c64c0cb36d2a6daf3016e76015f6b890029541d8b5153b263f6119",
       "bytes": 7002,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/doris/doris-elevation-thumbnail.webp",
           "bytes": 5694,
           "sha256": "b51fbb202d69b17a9452936e3515e152ec57b54a33defedd00a6e7c9d0923c36",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/doris/doris-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/doris/doris-elevation-surface@2x.webp",
           "bytes": 313680,
           "sha256": "ae3223fce187c8525fc2a5d28cdbd558432aba35c2a23dc0795fc33b4c852f04",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/doris/doris-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/doris/doris-shape-surface@2x.webp",
           "bytes": 203728,
           "sha256": "df72830003dadffdbb63216f7e984cab5b41cb3d60242cfaa8c311fbeb9e0e38",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

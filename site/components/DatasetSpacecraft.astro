@@ -1,10 +1,13 @@
 ---
+import type { Mission } from '../spacecraft-types.mts';
+import type { ProvenanceDocument } from '../../src/platform/object-provenance.mts';
+interface Props { provenance?: ProvenanceDocument; lensId?: string; missions?: readonly Mission[]; visibleMissionIds?: readonly string[]; }
 import catalog from '../prepared-spacecraft.json';
-import { datasetSpacecraft } from '../dataset-spacecraft.mjs';
+import { datasetSpacecraft } from '../dataset-spacecraft.mts';
 import SelectedContent from './SelectedContent.astro';
 const { provenance, lensId, missions, visibleMissionIds } = Astro.props;
-const spacecraft = missions ?? datasetSpacecraft(provenance, lensId, catalog);
-const dateRange = mission => {
+const spacecraft: readonly Mission[] = missions ?? datasetSpacecraft(provenance, lensId ?? "", catalog);
+const dateRange = (mission: Mission) => {
   const launched = mission.facts.find(fact => fact.label === 'Launched')?.value;
   const ended = mission.facts.find(fact => fact.label === 'Ended')?.value;
   const status = mission.facts.find(fact => fact.label === 'Status')?.value;

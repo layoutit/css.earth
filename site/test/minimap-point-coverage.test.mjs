@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { minimapPointCovered } from '../minimap/point-coverage.mjs';
+import { minimapPointCovered } from '../minimap/point-coverage.mts';
 
 const point = { index: 0, x: 0, y: 0, radius: .75 };
 const foreground = { index: 1, x: 0, y: 0, radius: 2.5, alpha: 1, opaque: true };

@@ -7,9 +7,9 @@
     "sha256": "31502123970fc81ab6c97fa09af160127de5ce8f0db468324bf7c56b01c15b69"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -325,7 +325,7 @@
       "sha256": "caaf2ab054168680b4962a16b480998ed1c2a5364c7e392ebb99fb211d6ba4bd",
       "bytes": 1060219,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "a151c671d65f1cb2baf046a145b41b09b1395efe8676d8f9a9476fe4fdf38d9a",
       "bytes": 8183,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/hygiea/hygiea-elevation-thumbnail.webp",
           "bytes": 5814,
           "sha256": "c6f27892beee4b3ebeddb030c3a63710e1649a7795eecb16a02f7fe6ccdfa8c5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hygiea/hygiea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hygiea/hygiea-elevation-surface@2x.webp",
           "bytes": 282434,
           "sha256": "098f17f46803025d64f81754d66f38ff8f0ed96acea1f19028e3f1256d0a370d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/hygiea/hygiea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hygiea/hygiea-shape-surface@2x.webp",
           "bytes": 226980,
           "sha256": "a3cbef8d9ab9f5f389f639578d42db5365c1fa0cc58c2034dd96ca0666500c27",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

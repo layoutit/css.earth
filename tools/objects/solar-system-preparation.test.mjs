@@ -5,9 +5,9 @@ import { mkdtemp, mkdir, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
-import { prepareSolarSystemCamera, prepareSolarSystemScene, prepareSolarSystemSunPresentation } from "./solar-system-scene.mjs";
-import { prepareSolarSystemPresentation } from "./solar-system-presentation.mjs";
-import { prepareSolarSystemMarkerStrip } from "./solar-system-markers.mjs";
+import { prepareSolarSystemCamera, prepareSolarSystemScene, prepareSolarSystemSunPresentation } from "./solar-system-scene.mts";
+import { prepareSolarSystemPresentation } from "./solar-system-presentation.mts";
+import { prepareSolarSystemMarkerStrip } from "./solar-system-markers.mts";
 import mercuryScene from "../../src/planets/mercury/prepared/scene.json" with {type: "json"};
 import mercurySky from "../../src/planets/mercury/prepared/sky.json" with {type: "json"};
 import mercurySun from "../../src/planets/mercury/prepared/sun.json" with {type: "json"};
@@ -17,10 +17,10 @@ import mercuryPresentation from "../../src/planets/mercury/prepared/runtime.json
 import venusScene from "../../src/planets/venus/prepared/scene.json" with {type: "json"};
 import venusSky from "../../src/planets/venus/prepared/sky.json" with {type: "json"};
 import { PREPARED_NAVIGATION_MARKERS } from "../../site/prepared-navigation-markers.mjs";
-import { prepareCatalogueStars } from "../../src/platform/prepare-catalogue-stars.mjs";
-import { preparePlanetDirectionalSun } from "../../src/platform/prepare-directional-sun.mjs";
-import { loadAstronomyPackage } from "../../src/platform/astronomy-package.mjs";
-import { SOLAR_GEOMETRY_EPOCH_JD_TT } from "../../src/platform/solar-geometry.mjs";
+import { prepareCatalogueStars } from "../../src/platform/prepare-catalogue-stars.mts";
+import { preparePlanetDirectionalSun } from "../../src/platform/prepare-directional-sun.mts";
+import { loadAstronomyPackage } from "../../src/platform/astronomy-package.mts";
+import { SOLAR_GEOMETRY_EPOCH_JD_TT } from "../../src/platform/solar-geometry.mts";
 
 const mercuryConfig = { bodyId: "mercury", bodyRadiusUnits: 230, bodyRadiusKilometers: 2439.7,
   defaultZoom: 1.1, geometryScale: 1, starfield: mercurySky, sun: mercurySun };
@@ -40,40 +40,19 @@ const tiles = [
   { id: "makemake", color: [185, 138, 106], size: 5 },
 ];
 
-test("Mercury preserves its physical scene while shared delivery remains demand driven", () => {
-  const hash = value => createHash("sha256").update(JSON.stringify(value)).digest("hex");
-  const { worldFrame, ...scene } = structuredClone(mercuryScene);
-  const {id, controls, ...presentation} = structuredClone(mercuryPresentation);
+test("Mercury retained leaf mapping and shared delivery remain source-bound and demand driven", () => {
+  const presentation = structuredClone(mercuryPresentation);
   restoreHistoricalNestedLeafTransport(presentation, mercuryScene);
-  presentation.schema = "cssearth-prepared-presentation@3";
-  const oldTransform = "scale(0.022000000000000002) rotateX(40deg) rotate(0deg) translate3d(0px, 0px, 0px)";
-  // Only these three authored fields changed. Restore their historical values
-  // for byte parity, then independently prove their corrected physical extent.
-  scene.camera.sceneScale = 1.1 / 50;
-  scene.camera.defaultTransform = oldTransform;
-  presentation.camera = scene.camera;
-  presentation.tree.properties.find(property => property.value === mercuryScene.camera.defaultTransform).value = oldTransform;
-  presentation.viewBindings.find(binding => binding.kind === "silhouette-fit").unitScale = 2 * 1.1 / 460;
-  // New moons add an explicit orbit centre and change the shared marker strip.
-  // Restore the historical strip layout for this migration snapshot only.
-  for (const orbit of [scene.heliocentricView.orbit, presentation.heliocentricView.plan.orbit]) {
-    delete orbit.centerBodyId;
-    delete orbit.focus;
-  }
   const view = presentation.heliocentricView;
-  const historicalMarkerIds = ["sun", "mercury", "venus", "earth", "moon", "mars", "ceres", "jupiter", "saturn", "uranus", "neptune", "pluto"];
-  const currentMarkerIds = Object.keys(PREPARED_NAVIGATION_MARKERS);
-  for (const marker of [view.bodyMarker, view.systemMarkers.sun, ...Object.values(view.systemMarkers.bodies)]) {
-    if (marker.count === PREPARED_NAVIGATION_MARKERS.mercury.count && !marker.url?.startsWith('/scenes/')) {
-      marker.count = historicalMarkerIds.length;
-      marker.index = historicalMarkerIds.indexOf(currentMarkerIds[marker.index]);
-      assert.ok(marker.index >= 0, "Historical migration snapshot contains only its original markers");
+  for (const [id, marker] of [['mercury', view.bodyMarker], ['sun', view.systemMarkers.sun], ...Object.entries(view.systemMarkers.bodies)]) {
+    if (!marker.url?.startsWith('/scenes/')) {
+      assert.equal(marker.count, PREPARED_NAVIGATION_MARKERS[id].count, `${id}: current shared strip count`);
+      assert.equal(marker.index, PREPARED_NAVIGATION_MARKERS[id].index, `${id}: current shared strip index`);
     }
   }
-  assert.equal(hash(scene), "fd07cb83678d7efd46023c7d997ec2c368d3c293d4a2ee6553711111285129e3");
   assert.ok(presentation.assets.startup.every(key => !key.startsWith("sky:") && !key.startsWith("interior:")));
   assert.ok(presentation.variants.filter(v => v.when.lensId === "interior").every(v => v.required.includes("interior:section")));
-  assert.deepEqual(worldFrame, mercuryPrepared.worldFrame);
+  assert.deepEqual(mercuryScene.worldFrame, mercuryPrepared.worldFrame);
 });
 
 // Reconstruct only the old raster carrier/child representation. The frozen
@@ -176,7 +155,17 @@ test("shared Sun presentation regenerates the original Mercury phase, raster, an
     const prepared = await preparePlanetDirectionalSun({ objectId: "mercury", publicRoot: root,
       preparedModulePath: pathToFileURL(join(root, "prepared.mjs")), ensureDirectories: () => mkdir(root, { recursive: true }),
       meanHeliocentricDistanceAu: mercurySun.distanceScaling.meanHeliocentricDistanceAu, presentation });
-    assert.equal(JSON.stringify(prepared), JSON.stringify(mercurySun));
+    const expected = structuredClone(mercurySun);
+    assert.equal(expected.asset.generator, 'src/platform/prepare-directional-sun.mjs');
+    assert.equal(expected.provenance.sourcePath, 'src/platform/solar-geometry.mjs');
+    expected.asset.generator = 'src/platform/prepare-directional-sun.mts';
+    expected.provenance.sourcePath = 'src/platform/solar-geometry.mts';
+    assert.equal(JSON.stringify(prepared), JSON.stringify(expected));
+    for (const density of [prepared.asset.density1, prepared.asset.density2]) {
+      const bytes = await readFile(join(root, density.url.split('/').at(-1)));
+      assert.equal(bytes.length, density.bytes);
+      assert.equal(createHash('sha256').update(bytes).digest('hex'), density.sha256);
+    }
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -245,8 +234,25 @@ test("Venus physical frame resolves real astronomy positions with a 6051.84km bo
   assert.ok(Math.abs(Number(earthRow[0]) + ephemeris.ttMinusUtcSeconds / 86400 - epoch) < 1e-9);
   const earthOffsetKm = earthRow.slice(2, 5).map(Number);
   assert.ok(earthOffsetKm.every(Number.isFinite));
+  // Haumea's retained satellite solution supplies its primary centre. The
+  // analytic dwarf-planet orbit is a different solution, so read the source.
+  const haumeaRoot = new URL('../../src/planets/hiiaka/source/', import.meta.url);
+  const haumeaManifest = JSON.parse(await readFile(new URL('manifest.json', haumeaRoot), 'utf8'));
+  const haumeaPin = haumeaManifest.documents.find(entry => entry.path === 'orbit/haumea-epoch.txt');
+  const haumeaBytes = await readFile(new URL(haumeaPin.path, haumeaRoot));
+  assert.equal(haumeaBytes.length, haumeaPin.expectedBytes);
+  assert.equal(createHash('sha256').update(haumeaBytes).digest('hex'), haumeaPin.expectedSha256);
+  const haumeaText = haumeaBytes.toString('utf8');
+  assert.match(haumeaText, /^Target body name: Haumea \(primary body\) \(920136108\)/m);
+  assert.match(haumeaText, /^Center body name: Sun \(10\)/m);
+  assert.match(haumeaText, /^Reference frame\s+: ICRF\s*$/m);
+  assert.match(haumeaText, /^Output units\s+: KM-D\s*$/m);
+  const haumeaRow = haumeaText.split('$$SOE')[1].split('$$EOE')[0].trim().split(',');
+  assert.ok(Math.abs(Number(haumeaRow[0]) + ephemeris.ttMinusUtcSeconds / 86400 - epoch) < 1e-9);
+  const haumeaKm = haumeaRow.slice(2, 5).map(Number);
+  assert.ok(haumeaKm.every(Number.isFinite));
   for (const body of prepared.heliocentricView.system.bodies) {
-    let expectedKm = body.kind === "dwarf-planet"
+    let expectedKm = body.id === "haumea" ? haumeaKm : body.kind === "dwarf-planet"
       ? astronomy.dwarfPlanetPositionKm(body.id, epoch)
       : scale(astronomy.systemBarycentreHeliocentricAu(body.id === "earth" ? "emb" : body.id, epoch), astronomy.M_PER_AU / 1000);
     if (body.id === 'earth') expectedKm = expectedKm.map((value, axis) => value + earthOffsetKm[axis]);

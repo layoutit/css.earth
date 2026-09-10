@@ -1,4 +1,4 @@
-import { bodies, ids, reportDirectory, captureDirectory } from './selection.mjs';
+import { bodies, ids, reportDirectory, captureDirectory } from './selection.mts';
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir,copyFile,stat} from 'node:fs/promises';
 import {resolve,dirname} from 'node:path';

@@ -2,7 +2,7 @@
 
 The shared layout emits each object's title, description, canonical URL, and
 Open Graph/Twitter metadata in static HTML. Object descriptions come from the
-`OBJECTS` registry. `site/seo.mjs` owns the production origin and the
+`OBJECTS` registry. `site/seo.mts` owns the production origin and the
 shared metadata format.
 
 Object routes such as `/earth/` and `/saturn/` are canonical. The homepage is

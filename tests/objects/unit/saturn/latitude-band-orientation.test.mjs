@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { orientLatitudeBands } from '../../../../tools/objects/static-surface/projection.mjs';
+import { orientLatitudeBands } from '../../../../tools/objects/static-surface/projection.mts';
 
 test("orients rows inside each latitude band without crossing bands", () => {
   const source = Buffer.from([1, 1, 2, 2, 3, 3, 4, 4]);

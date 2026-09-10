@@ -7,9 +7,9 @@
     "sha256": "911df0aebb8f8e48fb8a1f560037bc5474d29b0a4de1314e796204968e5fd431"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -295,7 +295,7 @@
       "sha256": "66363342333486a6967427925416bdae1aa385de8efcc78e4e820b0447646143",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -333,7 +333,7 @@
       "sha256": "a5f37bb03ca306fb81d8c18e7f9523127abd8c471af1dc3814c9765f51af5cf0",
       "bytes": 3830,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -368,7 +368,7 @@
       "sha256": "c9baed96538b317f873dd3eb153c6088e4ac319d1ac2c32cbbbaa26cac857448",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -385,7 +385,7 @@
       "sha256": "82b2c84a6d17e4fe3bfd2b2bc681c2da27a952f079a4305b63c78ce4e0688c75",
       "bytes": 3753,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -420,13 +420,13 @@
           "url": "/scenes/pallene/pallene-normal-thumbnail.webp",
           "bytes": 1310,
           "sha256": "0e8aedd9afa95e85a1c78428da735ce9cbade1198c0e3da93275bcf524882329",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pallene/pallene-normal-surface@2x.webp",
           "bytes": 61294,
           "sha256": "c0676be12b4d0877e326eca6a7f2ea0d623593e8ddfc64352ee0c2a894e43f0d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
-import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
-import {readObservation} from '../../../../tools/objects/terrestrial-layers/solid-raster.mjs';
+import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
+import {readObservation} from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';
 
 const root = new URL('../../../../src/planets/ariel/source/', import.meta.url).pathname;
 

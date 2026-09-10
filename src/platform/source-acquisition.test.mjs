@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 
-import { publishSourceBytes } from "./source-acquisition.mjs";
+import { publishSourceBytes } from "./source-acquisition.mts";
 
 test("publishes only validated source bytes and preserves known-good data", async (t) => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-acquisition-"));

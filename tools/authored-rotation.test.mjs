@@ -4,7 +4,7 @@ import { mkdtemp,writeFile,rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
-import { readAuthoredRotation } from './objects/authored-rotation.mjs';
+import { readAuthoredRotation } from './objects/authored-rotation.mts';
 
 test('source-bound linear rotation propagates signed rates and wraps phase at the authored epoch',async()=>{
   const directory=await mkdtemp(join(tmpdir(),'source-rotation-'));

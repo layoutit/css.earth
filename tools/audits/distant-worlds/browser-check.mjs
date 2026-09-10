@@ -1,11 +1,11 @@
-import { bodies, ids, reportDirectory, captureDirectory, runtimeDirectory } from './selection.mjs';
+import { bodies, ids, reportDirectory, captureDirectory, runtimeDirectory } from './selection.mts';
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {chromium} from 'playwright';
-import {OBJECTS} from '../../../site/objects.mjs';
+import {OBJECTS} from '../../../site/objects.mts';
 import {conformanceBrowserLaunch} from '../../../site/test/conformance-browser-launch.mjs';
 const origin='http://127.0.0.1:4278';
 const build=process.env.CSSEARTH_AUDIT_BUILD ?? 'production';

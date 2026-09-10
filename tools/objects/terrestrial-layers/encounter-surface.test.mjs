@@ -1,8 +1,8 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {sampleEncounterFootprint} from './encounter-surface.mjs';
-import {validateEncounterRegistration} from './encounter-registration.mjs';
-import {encounterCamera} from './encounter-camera.mjs';
+import {sampleEncounterFootprint} from './encounter-surface.mts';
+import {validateEncounterRegistration} from './encounter-registration.mts';
+import {encounterCamera} from './encounter-camera.mts';
 const sample=()=>({frame:{width:2,height:2,values:[0,-1,2,3]},camera:{project:()=>[.5,.5,10]},plane:{accepted:new Uint8Array([1,1,1,1]),xyz:new Float64Array([0,0,0,1,0,0,0,1,0,1,1,0]),gains:[1,1,1,1],emissions:[0,10,20,30],reasons:[]}});
 test('a bilinear footprint retains calibrated darkness and checks every contributor',()=>{
  const {frame,camera,plane}=sample(),point=[.5,.5,0],policy={maximumSeparationMeters:2};
@@ -32,7 +32,7 @@ test('EPOXI north and east map to the documented detector axes',()=>{
  assert.equal(c.report.nominalPixelScaleMeters,100);
 });
 test('observed shadowed terrain remains eligible when the source camera can see it',async()=>{
- const {buildEncounterBackplane}=await import('./encounter-surface.mjs');
+ const {buildEncounterBackplane}=await import('./encounter-surface.mts');
  const frame={width:2,height:2,reason:()=>null};
  const camera={positionMeters:[0,0,10],sunDirection:[0,0,-1],project:()=>[.5,.5,10],ray:()=>[0,0,-1]};
  const mesh={positions:[[-1,-1,0],[1,-1,0],[0,1,0]],indices:[[0,1,2]],intersect:()=>({faceId:0,radius:10})};

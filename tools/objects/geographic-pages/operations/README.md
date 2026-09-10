@@ -10,12 +10,12 @@ datasets; moving the tools does not establish broader imagery coverage.
 
 ## Published, pinned hierarchy
 
-`acquire-pinned-global-wmts.mjs --object=earth` restores missing or corrupt packs
+`acquire-pinned-global-wmts.mts --object=earth` restores missing or corrupt packs
 from the declared immutable delivery URLs. `--verify-only` makes no requests and
 writes nothing. Every pack is size/hash verified; an invalid replacement cannot
 overwrite an existing cache file. The operation drains in-flight work on failure.
 
-`prepare-pinned-global-wmts.mjs --object=earth` runs the shared pinned-hierarchy
+`prepare-pinned-global-wmts.mts --object=earth` runs the shared pinned-hierarchy
 preparer and writes `prepared/pages.json`. It verifies the complete release,
 catalog footprint, internal references and prepared face geometry. It does not
 regenerate the geometry, and it does not author the representative raster bank.
@@ -28,7 +28,7 @@ authoring, refinement, final hash verification and release integration. New
 compiler identities are project-relative and include the prepared scene JSON;
 accepted published releases retain their original immutable delivery identity.
 
-`prepare-city-pages.mjs --object=earth` retains the representative raster/source
+`prepare-city-pages.mts --object=earth` retains the representative raster/source
 window pipeline, including parent pages, gutters, nodata and published-coverage
 assembly. Its optional publishing inventory is JSON at
 `output/earth-city/<dataset>/assets.json`, beside `manifest.json`; it is not part
@@ -36,8 +36,8 @@ of the ordinary object runtime or pinned worldwide recipe. `--offline`,
 `--verify-only` and verification-only `--region=<id>` keep their existing meaning.
 The public preparation output remains prepared JSON, never a JavaScript module.
 
-`acquire-city-catalog.mjs`, `plan-city-coverage.mjs`, `plan-wmts-coverage.mjs` and
-`measure-wmts-blocks.mjs` retain their bounded WorldCover intake and planning
+`acquire-city-catalog.mts`, `plan-city-coverage.mts`, `plan-wmts-coverage.mts` and
+`measure-wmts-blocks.mts` retain their bounded WorldCover intake and planning
 workflows. Add the explicit object argument to all of these commands.
 
 ## Publication and integration
@@ -50,11 +50,11 @@ in force. A source delivery prefix must match the selected object. Publication
 is a separate explicit action; source or preparation validation does not imply
 that any bytes were uploaded. Focused tests use mocks or dry-run validation only.
 
-`integrate-city-coverage.mjs` verifies receipt/source identities before updating
-the coverage snapshot and prepared pages. `integrate-global-wmts.mjs` requires a
+`integrate-city-coverage.mts` verifies receipt/source identities before updating
+the coverage snapshot and prepared pages. `integrate-global-wmts.mts` requires a
 complete, hash-verified manifest before updating release data and prepared pages.
 
-`rebind-global-wmts.mjs --object=earth <release-directory> <prior-scene.json>`
+`rebind-global-wmts.mts --object=earth <release-directory> <prior-scene.json>`
 retains the strict all-face-bases comparison and two-input-change proof for
 new project-relative authoring caches. It deliberately rejects historical
 body-relative/executable-scene caches: their old compiler hashes cannot prove a

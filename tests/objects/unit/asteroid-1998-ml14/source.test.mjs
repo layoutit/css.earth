@@ -2,10 +2,10 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {readAuthoredRotation} from '../../../../tools/objects/authored-rotation.mjs';
-import {createSourceManifest} from '../../../../src/platform/source-manifest.mjs';
-import {loadObjShape,createShapeSurfaceSampler} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
+import {readAuthoredRotation} from '../../../../tools/objects/authored-rotation.mts';
+import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
+import {loadObjShape,createShapeSurfaceSampler} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root=resolve(import.meta.dirname,'../../../../src/planets/asteroid-1998-ml14/source');
 const read=async path=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 test('1998 ML14 retains original source pins and acquisition closure',async()=>{

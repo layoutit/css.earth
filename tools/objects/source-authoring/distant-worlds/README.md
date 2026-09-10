@@ -21,11 +21,11 @@ Node heap, `UV_THREADPOOL_SIZE=1` and `VIPS_CONCURRENCY=1`.
    `python3 tools/objects/source-authoring/distant-worlds/author.py`.
    It uses the retained inputs and original template revision, and **resets
    all nine descriptors and source recipes**. Follow it with
-   `node tools/objects/source-authoring/distant-worlds/finalize-sources.mjs`
+   `node tools/objects/source-authoring/distant-worlds/finalize-sources.mts`
    and preparation of each body. It leaves maintained READMEs and credits alone.
 4. If the registry or marker sources change, use the shared
    `pnpm prepare:navigation` owner, then
-   `node tools/objects/source-authoring/distant-worlds/refresh-transports.mjs`
+   `node tools/objects/source-authoring/distant-worlds/refresh-transports.mts`
    to bind the resulting atlas and refresh world contexts. This helper asserts
    that every non-marker runtime field remains unchanged and does not compile
    existing body presentations.
@@ -33,11 +33,11 @@ Node heap, `UV_THREADPOOL_SIZE=1` and `VIPS_CONCURRENCY=1`.
 
 `register.py` repeats the original additions through the shared registry,
 astronomy catalog and Sun navigation data. It is unnecessary for an existing
-registered body. `finalize-sources.mjs --refresh-pins` only refreshes source
+registered body. `finalize-sources.mts --refresh-pins` only refreshes source
 pins; omitting that flag also prepares title and context source images.
 
 `author.py` and `register.py` accept an input JSON path as their first argument;
-`finalize-sources.mjs` accepts `--inputs <path>`. This selects the exact bodies
+`finalize-sources.mts` accepts `--inputs <path>`. This selects the exact bodies
 to rewrite. The six later models use [outer-worlds/inputs.json](../outer-worlds/inputs.json).
 An input file may set `referenceDirectory` for its downloaded originals.
 After new astronomy records are built, run `node tools/prepare-solar-geometry.mjs`
@@ -66,7 +66,7 @@ reuse rests on unchanged source, prepared data and shared runtime dependencies.
 The initial marker-preservation experiment used the historical
 [navigation helper](https://github.com/layoutit/cssEarth/blob/5ccf1eafa396d7cbe91e62b28fe81db8c0626a35/docs/lucy-targets/navigation.mjs)
 against its recorded base. Its maintained version is
-[`navigation-additions.mjs`](../navigation-additions.mjs). For a batch that
+[`navigation-additions.mts`](../navigation-additions.mts). For a batch that
 only adds markers, pass `--base=<commit> --inputs=<json> --evidence=<json>`.
 It uses the shared marker renderer, verifies unchanged existing recipes and
 preserves their atlas pixels. Use the shared full navigation preparer when

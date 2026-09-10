@@ -7,9 +7,9 @@
     "sha256": "0eea2fdba5ebdabf04e538275c987c3df3b2846f5096569f0e032bec9bcfe55a"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -325,7 +325,7 @@
       "sha256": "643b9de344348458d1c2b32e41cb9cec01d3b98033a8a821f2c09757ac3f0d04",
       "bytes": 1676539,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "d45f736322e3a06122a7e7909e4cdb7eabb99f45f1bfc02bc9d41a6e7ce3f1e2",
       "bytes": 6011,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/iris/iris-elevation-thumbnail.webp",
           "bytes": 5674,
           "sha256": "f4395ea2887217f8a8f9660977968ed70a63499629a73911381195d5e6343d12",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iris/iris-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iris/iris-elevation-surface@2x.webp",
           "bytes": 428656,
           "sha256": "63eb3113c06660f18733ca11a3a7dd21f3590c83f5d5f798d4fb9738f9e2b17b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/iris/iris-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iris/iris-shape-surface@2x.webp",
           "bytes": 209846,
           "sha256": "51f53c83f1b70cce3cee81cc2c386c678290354f8f6ab7c179434ba90e80edc8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

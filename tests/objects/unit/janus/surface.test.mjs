@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {loadPdsPlateShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
+import {loadPdsPlateShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 
 const source = resolve(import.meta.dirname, '../../../../src/planets/janus/source');
 

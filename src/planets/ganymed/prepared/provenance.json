@@ -7,9 +7,9 @@
     "sha256": "d3137f8c26faedafe2b9ba74a6f1a627a6a11d83cdcbbdd8daad4027dac05991"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -327,7 +327,7 @@
       "sha256": "e5bed02f38bf6f35af801ace96871400ffab07f18036f1f3f51a3e6e4de3858a",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "c53ed1c3051e7c77ae169c1f06b96d4942da4ad058ac0029aa51274989179001",
       "bytes": 9319,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/ganymed/ganymed-elevation-thumbnail.webp",
           "bytes": 5016,
           "sha256": "04b110bd42dc4a92d9d749b0515d31b60208428495613dfb307c89ef91f82885",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymed/ganymed-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymed/ganymed-elevation-surface@2x.webp",
           "bytes": 257922,
           "sha256": "aab6eecfe8f72c41cff47c9179e2c8e5c9fec87d354e67bc4237f0334ff58924",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/ganymed/ganymed-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymed/ganymed-shape-surface@2x.webp",
           "bytes": 196764,
           "sha256": "c3c8e25f21ab5c753e1859b59d6ad490d402f44a57d98b9ab4b2c86c49f56247",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

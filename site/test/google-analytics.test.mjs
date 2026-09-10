@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
 
-import { googleAnalyticsBootstrap } from "../google-analytics.mjs";
+import { googleAnalyticsBootstrap } from "../google-analytics.mts";
 
 test("analytics ignores local visits and loads on css.earth", () => {
   for (const hostname of ["localhost", "127.0.0.1", "::1"]) {

@@ -10,7 +10,9 @@ const root = process.cwd();
 const oracle = JSON.parse(await readFile(resolve(root, 'tests/objects/compatibility/celestial.json'), 'utf8')) as Record<string,Record<string,string>>;
 const hash = (value:unknown) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 
-test('celestial preparation reproduces the Mercury and Venus prepared contracts', async () => {
+// Hashes were qualified against the original JS preparers at the recorded PR head.
+// See docs/architecture/typescript-celestial-validation.json for all source/asset pins.
+test('celestial preparation reproduces the source-anchored Mercury and Venus contracts', async () => {
   const scratch = await mkdtemp(join(tmpdir(), 'cssearth-celestial-'));
   try {
     for (const id of ['mercury', 'venus']) {

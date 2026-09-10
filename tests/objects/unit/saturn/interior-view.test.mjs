@@ -99,7 +99,7 @@ test("ships lossless DPR assets and keeps view switching declarative", async () 
   const [client, styles, preparer, manifestText] = await Promise.all([
     readFile(new URL("../../../../src/planets/saturn/prepared/runtime.json", import.meta.url), "utf8"),
     readFile(new URL("../../../../src/renderers/css/styles/saturn-surfaces.css", import.meta.url), "utf8"),
-    readFile(new URL("../../../../tools/objects/cutaway/materials.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../../../../tools/objects/cutaway/materials.mts", import.meta.url), "utf8"),
     readFile(new URL("../../../../src/planets/saturn/source/interior/manifest.json", import.meta.url), "utf8"),
   ]);
   const manifest = JSON.parse(manifestText);

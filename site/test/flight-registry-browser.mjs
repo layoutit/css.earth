@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
-import { OBJECTS } from '../objects.mjs';
+import { OBJECTS } from '../objects.mts';
 
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const output = 'output/playwright/flight-registry';

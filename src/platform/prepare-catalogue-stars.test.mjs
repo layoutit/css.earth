@@ -18,7 +18,7 @@ import {
   screenFactor,
   starColor,
   starPresentation,
-} from "./prepare-catalogue-stars.mjs";
+} from "./prepare-catalogue-stars.mts";
 
 const exposure = createExposure({ fovDegrees: 60 });
 

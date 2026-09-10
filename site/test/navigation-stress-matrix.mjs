@@ -1,6 +1,6 @@
 import { spawn, execFileSync } from 'node:child_process';
 import { mkdir, open, writeFile } from 'node:fs/promises';
-import { OBJECTS } from '../objects.mjs';
+import { OBJECTS } from '../objects.mts';
 
 const planets = OBJECTS.filter(object => object.classification === 'planet');
 const chains = [], seen = new Set(); let seed = Number(process.env.MATRIX_SEED ?? 424242) >>> 0;
