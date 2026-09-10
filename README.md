@@ -116,6 +116,12 @@ tests/objects/                   Object fixtures and browser/scientific regressi
 
 `pnpm install` builds packages and preparation tools, then assembles the small
 transport JSON beside each object from its committed preparation output. It does not rebake textures.
+
+Shared shell title, icon, overview-title and wordmark modules are Git-ignored.
+`pnpm prepare:shell` regenerates them from committed vectors and recipes, restoring
+the hash-pinned font if missing. Installation, development, builds, asset setup
+and the root test command run this step automatically.
+
 To regenerate one body after changing its authored inputs, run
 `pnpm prepare:planets -- --object=<id>`. The selected recipe validates source
 pins and regenerates its prepared outputs.

@@ -45,7 +45,7 @@ let browserUrl = config.browserUrl;
 try {
   if (!nativeOnly && !browserUrl) {
     const serverConfig = resolve(out, "astro.config.mts");
-    await writeFile(serverConfig, `import base from ${JSON.stringify(pathToFileURL(resolve(root, "astro.config.mjs")).href)};\nexport default {...base,server:{host:'127.0.0.1',port:${config.port ?? 4238}},vite:{...base.vite,cacheDir:${JSON.stringify(resolve(out, "vite-cache"))},server:{watch:null,hmr:false}}};\n`);
+    await writeFile(serverConfig, `import base from ${JSON.stringify(pathToFileURL(resolve(root, "astro.config.mts")).href)};\nexport default {...base,server:{host:'127.0.0.1',port:${config.port ?? 4238}},vite:{...base.vite,cacheDir:${JSON.stringify(resolve(out, "vite-cache"))},server:{watch:null,hmr:false}}};\n`);
     const { dev } = await import("astro");
     server = await dev({ configFile: relative(root, serverConfig) });
     browserUrl = `http://127.0.0.1:${server.address.port}/mars/`;
