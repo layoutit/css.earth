@@ -77,10 +77,10 @@ the current detailed scene is released before the destination mounts. The
 document and shell persist. Back restores the saved camera and playback state;
 camera input interrupts flight at the last drawn view. Existing object routes
 and compact `?v` links remain supported, including translated camera positions.
-The [architecture](docs/shared-runtime-architecture-proposal.md) explains the
-contract and the rendering differences that remain inside each package. The
-[proof](docs/generic-runtime-contract-proof.md) uses the actual registered objects
-in real Chrome at DPR 1 and 2.
+The [implementation map](.agents/skills/celestial-skill/references/implementation-map.md)
+locates the current preparation, renderer and shell code. Earlier
+[runtime ownership checks](docs/generic-runtime-contract-proof.md) cover an
+eleven-object version at the revisions recorded there.
 
 ## Build and Runtime
 

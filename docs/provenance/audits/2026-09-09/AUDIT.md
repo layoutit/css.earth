@@ -3,6 +3,11 @@
 Owner: **PROVENANCE DOCUMENTATION**. This audit examines files and contributor
 instructions. It does not rerun scientific, browser or installation tests.
 
+The initial findings below describe their recorded snapshots. The
+[final review](ADVERSARIAL-REVIEW.md#complete-migration-and-final-review) records
+the completed migration of all body documentation. The
+[committed-file cleanup](#committed-file-cleanup) records the subsequent repository audit.
+
 These findings led to the proposal. The [adversarial review](ADVERSARIAL-REVIEW.md)
 then removed the proposed extra report format and validator. The contract now
 uses existing reports and maps its rules to PDS4 Standards Reference 1.26.0 and
@@ -164,3 +169,41 @@ file, missing anchor and deleted-target fixtures while accepting a valid target.
 The immutable-main inventory reproduced all 22 snapshot fields exactly.
 `git diff --check` passed. The final PR records the final link-check count.
 These checks cover the documentation and helpers, not the scientific data or application.
+
+## Committed-file cleanup
+
+The follow-up inventory read commit `1f25d9e62b6fa5433f4b27a5610b0d9b22de16e1`
+on 10 September 2026 UTC, using the same inventory command. Logical file sizes:
+
+| Files | Count | Size |
+| --- | ---: | ---: |
+| All tracked files | 24,290 | 7,080,280,681 bytes |
+| `docs/` | 1,551 | 551,378,475 bytes (525.84 MiB) |
+| Six evidence archives within `docs/` | 6 | 249,850,798 bytes (238.28 MiB) |
+| PNG captures within `docs/` | 308 | 221,839,102 bytes (211.56 MiB) |
+| Body `prepared/` records | 7,341 | 5,698,241,152 bytes (5.31 GiB) |
+
+The largest storage cost is prepared body data, which clean checkouts consume.
+This audit does not establish that it can be removed or restored elsewhere.
+The tracked tree contains no files under `output/`, `.local/`, `node_modules/`
+or `dist/`. All 409 tracked files matching ignore rules are source files;
+matching an ignore rule does not make them disposable.
+
+Changes made:
+
+- Removed `docs/comets/evidence/103p-repeat-capture.png`: its 558,212 bytes exactly
+  match [103p.png](../../../comets/evidence/103p.png), which the qualification
+  report already links. No report or recipe references the repeat filename.
+  The historical inventory retains both original paths.
+- Removed the two forwarding-only evidence/provenance README pages and linked
+  their destinations directly from the [documentation map](../../../README.md).
+- Corrected the root README's architecture link and marked the three earlier
+  shared-runtime documents as records of the eleven-object version.
+  Their recorded results, hashes and limits remain unchanged.
+
+The other large duplicate reports are pinned snapshots inside saved review
+records. Their existing paths and bytes remain in place. All six evidence
+archives match their receipts' byte counts, SHA-256 pins and member counts;
+their saved mappings make original local paths retrievable from the archives.
+This cleanup does not reduce Git history or restore captures absent from those
+archives.
