@@ -22,7 +22,7 @@ The photographic dataset combines the accepted Giotto close-up with two Vega 2 v
 
 The [encounter projection report](source/reference/encounter-projection-report.json) compares identical source triangles and seven barycentric samples per triangle: **4.314% before, 27.807% after**. All 4,842 previously accepted Giotto input-map pixels are preserved exactly. The [lossless attribution map](source/reference/encounter-attribution.bin) records every source and gap. This is an estimate of accepted model surface area, not the fraction of image pixels or a global photographic map.
 
-The shape remains the same 1,000 triangles. No shared renderer changes or extra dataset rows are involved. The numerical preparation and browser evidence are documented below.
+The shape remains the same 1,000 triangles. No shared renderer changes or extra dataset rows are involved. The [current qualification and comparisons](evidence/encounters/README.md) include 38 focused tests, full TypeScript checks, source and runtime closure, fresh public delivery, nine selected Chrome conformance cases, and production captures at DPR 1 and 2.
 
 ### Giotto baseline (PR109)
 
@@ -41,7 +41,7 @@ The shape remains the same 1,000 triangles. No shared renderer changes or extra 
 
 ## Known problems
 
-- The full repository test suite was not repeated after main's registry refactor. Earlier aggregate failures concerned the Sun receipt and SN263 upstream manifest; [checks against the integrated main revision](evidence/main-baseline.log) confirm those particular issues are resolved. The focused, type, source and browser results above describe the coverage actually rerun.
+- The full repository test suite and unselected browser conformance cases were not repeated. [Current qualification](evidence/encounters/README.md) distinguishes the development diagnostic checks from production captures and delivery verification; older PR109 evidence remains under its baseline heading.
 
 - This is a highly uncertain historical inverse shape model. The label estimates absolute uncertainty of about 500–1,000 m, relative point-to-point uncertainty around 100 m, and warns that facets and depressions may be exaggerated.
 
