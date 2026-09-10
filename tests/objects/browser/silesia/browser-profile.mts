@@ -1,0 +1,28 @@
+import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
+import controls from '../../../../src/planets/silesia/prepared/controls.json' with {type:'json'};
+export const browserProfile=createObjectBrowserProfile({id:'silesia',controls,audit:{
+  "preparedAssetPairs": [
+    {
+      "one": "/scenes/silesia/silesia-directional-sun.webp",
+      "two": "/scenes/silesia/silesia-directional-sun@2x.webp"
+    }
+  ],
+  "canonicalPreparedAssets": [
+    "/scenes/silesia/silesia-shape-surface@2x.webp"
+  ],
+  "retained": {
+    "lensIds": [
+      "shape",
+      "elevation"
+    ],
+    "speedClicks": 5,
+    "allowedMountSelectors": []
+  },
+  "lensRace": {
+    "defaultId": "shape",
+    "slowId": "elevation",
+    "winnerId": "shape",
+    "slowAsset": "/scenes/silesia/silesia-elevation-surface@2x.webp",
+    "preReadyDisabled": true
+  }
+}});

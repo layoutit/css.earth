@@ -17,7 +17,11 @@ export interface PerspectiveWorldContext {
   readonly sceneRegistration?: string;
   readonly onWorldPublish?: (world: WorldCameraPose, viewport: WorldCameraViewport) => void;
 }
-export interface PerspectiveDollyOptions { cameraPlan: CameraPlan; heliocentric: ReturnType<typeof mountRetainedHeliocentricView> | null; worldContext?: PerspectiveWorldContext; cameraElement: HTMLElement; sceneElement: HTMLElement; skyElement: HTMLElement; stage: HTMLElement; viewport?: CameraViewport; }
+export type PerspectiveHeliocentric = Pick<ReturnType<typeof mountRetainedHeliocentricView>,
+  'plan' | 'setSystemOpacity' | 'setSunMarkerOpacity' | 'setOrbitOpacity' | 'setMarkerOpacity' | 'publish'> & {
+    sunRoot: Pick<HTMLElement, 'style'>;
+  };
+export interface PerspectiveDollyOptions { cameraPlan: CameraPlan; heliocentric: PerspectiveHeliocentric | null; worldContext?: PerspectiveWorldContext; cameraElement: HTMLElement; sceneElement: HTMLElement; skyElement: HTMLElement; stage: HTMLElement; viewport?: CameraViewport; }
 export type PerspectiveDolly = ReturnType<typeof createPerspectiveDolly>;
 import {
   distanceForSilhouetteRadius,
@@ -147,7 +151,7 @@ export function orbitLineOpacity(fade: OrbitLineFade, discHeightShare: number) {
 // The planetary system fades in with the camera's distance over the body's
 // own orbit extent: hidden while the body's orbit fills the view, opaque
 // once the camera stands well outside it.
-export function planetarySystemOpacity(fade: PlanetarySystemFade, distanceOverOrbitExtent: number) {
+export function planetarySystemOpacity(fade: Pick<PlanetarySystemFade, 'hiddenBelowDistanceOverOrbitExtent' | 'visibleAboveDistanceOverOrbitExtent'>, distanceOverOrbitExtent: number) {
   return clamp(
     (distanceOverOrbitExtent - fade.hiddenBelowDistanceOverOrbitExtent) /
       (fade.visibleAboveDistanceOverOrbitExtent -
@@ -159,7 +163,7 @@ export function planetarySystemOpacity(fade: PlanetarySystemFade, distanceOverOr
 
 // The Sun marker fades in as the Sun sprite's projected diameter falls
 // below the marker's size, the same crossfade as the body's own marker.
-export function sunMarkerOpacity(sunMarker: SunMarkerFade, spriteDiameter: number | undefined) {
+export function sunMarkerOpacity(sunMarker: Pick<SunMarkerFade, 'fadeStartSpritePixels' | 'fullSpritePixels'>, spriteDiameter: number | undefined) {
   if (typeof spriteDiameter !== "number" || !Number.isFinite(spriteDiameter)) return 0;
   return clamp(
     (sunMarker.fadeStartSpritePixels - spriteDiameter) /
@@ -346,7 +350,7 @@ export function createPerspectiveDolly({
     // line that projects to the root's centre, then the rotation. The scene
     // scale must be uniform in three dimensions: a 2D scale() leaves the
     // body's depth unscaled, which a real perspective camera notices.
-    publish(sceneMatrix: DOMMatrix, scenePresentation: string) {
+    publish(sceneMatrix: Parameters<typeof rotationFromMatrix3d>[0], scenePresentation: string) {
       const distance = cameraState.distance;
       // The system's visibility depends on the distance alone, so it is set
       // before the projection decides whether to work on the system.

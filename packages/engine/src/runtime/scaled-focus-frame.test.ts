@@ -4,7 +4,7 @@ import type { PhysicalCameraPose } from './selection-flight.js';
 import type { ScaledFocusFrame } from './scaled-focus-frame.js';
 
 const quarterTurn = [0, Math.SQRT1_2, 0, Math.SQRT1_2] as const;
-const frame: ScaledFocusFrame = {
+const frame: ScaledFocusFrame & { referenceFrame: string; epochJdTt: number } = {
   referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: [8.2e20, -1.1e20, 3.4e19],
   localToReferenceXyzw: quarterTurn, metersPerUnit: 8.269676e19,
   boundsUnits: { min: [-10, -10, -1.25], max: [10, 10, 1.25] },

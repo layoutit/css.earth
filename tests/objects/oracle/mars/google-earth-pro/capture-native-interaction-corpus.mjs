@@ -26,7 +26,7 @@ import {
   decodeNativeMotionTrace,
   matrixMaximumError,
   nativeScenarioTrace,
-} from "./native-motion-trace-reader.mjs";
+} from "./native-motion-trace-reader.mts";
 import { nativeInteractionScenarios } from "./native-interaction-driver.mjs";
 
 const execFileAsync = promisify(execFile);

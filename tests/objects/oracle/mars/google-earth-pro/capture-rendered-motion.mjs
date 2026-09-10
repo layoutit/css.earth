@@ -8,7 +8,7 @@ import { promisify } from "node:util";
 import { setTimeout as delay } from "node:timers/promises";
 import sharp from "sharp";
 import { getViewInfo, setViewInfo } from "./controller.mjs";
-import { decodeNativeMotionTrace } from "./native-motion-trace-reader.mjs";
+import { decodeNativeMotionTrace } from "./native-motion-trace-reader.mts";
 import { resolveScenarioEvents } from "./interaction-corpus.mjs";
 
 const exec = promisify(execFile);

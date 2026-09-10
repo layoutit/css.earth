@@ -23,7 +23,7 @@ export async function prepareScientificCharts({
   planetIds,
   outputRoot = resolve(projectRoot, "public/scenes"),
 }: {planetIds?:readonly string[];outputRoot?:string} = {}) {
-  const context = validateContext(JSON.parse(await readFile(contextPath, "utf8")));
+  const context = validateScientificChartsContext(JSON.parse(await readFile(contextPath, "utf8")));
   const availablePlanetIds = Object.keys(context.planets);
   const selectedPlanetIds = planetIds ?? availablePlanetIds;
   if (!isArray(selectedPlanetIds) || selectedPlanetIds.length === 0 ||
@@ -95,7 +95,7 @@ export function evaluatePhaseMagnitude(value:unknown, phaseAngle:number) {
   return requireFiniteNumber(segment.constant) - 2.5 * Math.log10(albedo);
 }
 
-function validateContext(value:unknown) {
+export function validateScientificChartsContext(value: unknown) {
   const context=decodeProfile(parseContext,value,"Planetary scientific context is incompatible.");
   const requiredPlanets = [
     "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune",

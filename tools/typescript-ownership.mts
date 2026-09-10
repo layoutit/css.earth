@@ -6,7 +6,8 @@ import { dirname, posix, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from '@typescript-eslint/parser';
 
-type Category = 'authored' | 'test' | 'evidence' | 'generated' | 'vendor' | 'configuration' | 'facade';
+type Category = 'authored' | 'generated' | 'vendor' | 'configuration' | 'facade';
+type BoundaryRole = 'test' | 'evidence';
 type Exception = {
   category: Exclude<Category, 'authored'>;
   reason: string;
@@ -29,7 +30,7 @@ type Inventory = {
 
 const javascript = /\.(?:c|m)?jsx?$/u;
 const code = /\.(?:[cm]?[jt]sx?|astro)$/u;
-const categories: Category[] = ['authored', 'test', 'evidence', 'generated', 'vendor', 'configuration', 'facade'];
+const categories: Category[] = ['authored', 'generated', 'vendor', 'configuration', 'facade'];
 const manifestPath = 'tools/typescript-ownership.json';
 const astroCompiler: unknown = createRequire(import.meta.resolve('astro/package.json'))('@astrojs/compiler-rs');
 
@@ -79,16 +80,18 @@ function loadManifest(root: string): Manifest {
   return value as Manifest;
 }
 
-// These roots contain the repository's unit/browser/oracle harnesses. A source
-// module importing them is rejected below; naming a file as a test cannot make
-// it a product implementation. There is deliberately no docs/ or vendor/ glob.
-function isTest(path: string): boolean {
-  return /\.(?:test|spec)\.[cm]?[jt]sx?$/u.test(path) || path.startsWith('site/test/')
-    || path.startsWith('tests/') || path.includes('/__fixtures__/');
+// A file's test/evidence role controls only which imports production owners may
+// take. It never changes JavaScript ownership: test fixtures and capture
+// scripts still need an exact legacyAuthored entry until they migrate.
+function boundaryRoleFor(path: string): BoundaryRole | undefined {
+  if (/\.(?:test|spec)\.[cm]?[jt]sx?$/u.test(path) || path.startsWith('site/test/')
+    || path.startsWith('tests/') || /(?:^|\/)(?:__fixtures__|fixtures)(?:\/|$)/u.test(path)) return 'test';
+  if (/(?:^|\/)(?:capture|captures|evidence)(?:[./_-]|$)/u.test(path)) return 'evidence';
+  return undefined;
 }
 
 function categoryFor(path: string, manifest: Manifest): Category {
-  return manifest.exceptions[path]?.category ?? (isTest(path) ? 'test' : 'authored');
+  return manifest.exceptions[path]?.category ?? 'authored';
 }
 
 function sourceFiles(root: string): string[] {
@@ -185,7 +188,7 @@ export function auditOwnership(root: string): Inventory {
   const fileSet = new Set(files);
   const jsFiles = files.filter(path => javascript.test(path));
   const classified: Record<Category, string[]> = {
-    authored: [], test: [], evidence: [], generated: [], vendor: [], configuration: [], facade: [],
+    authored: [], generated: [], vendor: [], configuration: [], facade: [],
   };
   const violations: string[] = [];
   for (const path of jsFiles) classified[categoryFor(path, manifest)].push(path);
@@ -209,9 +212,10 @@ export function auditOwnership(root: string): Inventory {
   }
   for (const path of files) {
     const category = categoryFor(path, manifest);
-    if (category === 'test' || category === 'evidence') continue;
-    // Parse every remaining JS/TS/Astro implementation, including prepared data,
-    // to catch imports into excluded test/evidence code. Parsing executes nothing.
+    const boundaryRole = boundaryRoleFor(path);
+    // Parse every JS/TS/Astro owner, including tests and prepared data. Test and
+    // evidence modules may consume their own harnesses, while runtime owners
+    // remain forbidden from importing either role. Parsing executes nothing.
     try {
       const source = readFileSync(resolve(root, path), 'utf8');
       const moduleAst = path.endsWith('.astro') ? undefined : parse(source, { sourceType: 'module', filePath: path, jsx: /x$/u.test(path) });
@@ -223,10 +227,12 @@ export function auditOwnership(root: string): Inventory {
           violations.push(`${path}: compatibility facade must only re-export its exact declared typed owners.`);
         }
       }
+      if (boundaryRole) continue;
       for (const specifier of literalImports(ast)) {
         for (const target of resolveLocalImports(root, path, specifier, fileSet)) {
-          if (['test', 'evidence'].includes(categoryFor(target, manifest))) {
-            violations.push(`${path}: source imports ${categoryFor(target, manifest)} module ${target}; move shared behavior into an authored owner.`);
+          const targetRole = boundaryRoleFor(target);
+          if (targetRole) {
+            violations.push(`${path}: source imports ${targetRole} module ${target}; move shared behavior into an authored owner.`);
           }
         }
       }

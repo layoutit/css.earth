@@ -1,0 +1,40 @@
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {readFile} from 'node:fs/promises';
+import test from 'node:test';
+import sharp from 'sharp';
+import {readPreparedFixture} from '../../fixtures.mts';
+import geometry from '../../../../src/planets/saturn/source/preparation/geometry.json' with {type:'json'};
+const scene=await readPreparedFixture('saturn','scene');
+test('prepares three upper-hemisphere storms on separate retained bands',async()=>{
+ const p=geometry.parameters,storms=p.weatherStorms;
+ assert.equal(storms.length,3);
+ assert.deepEqual(storms.map(storm=>-90+(storm.latitudeIndex+.5)*180/p.latitudeSegments),[39.375,16.875,5.625]);
+ assert.deepEqual(storms.map(storm=>storm.longitudeStartIndex),[9,20,30]);
+ assert.deepEqual(storms.map((storm,index)=> (storms[(index+1)%storms.length].longitudeStartIndex-storm.longitudeStartIndex+32)%32),[11,10,11]);
+ assert.deepEqual(storms.map(storm=>storm.sourceCenter),[[137,58],[110,68],[122,62]]);
+ assert.ok(storms.every(storm=>storm.longitudeCount===3));
+ assert.equal(p.weatherFrameCount,1);assert.equal(p.weatherFrameRate,0);
+ assert.equal(p.weatherFrameColumns,1);assert.equal(p.weatherFrameRows,1);assert.equal(p.weatherOpacity,.5);
+ for(const [key,expected]of Object.entries({sourceMotionGain:[1.75,1.45,1.38],armCount:[2,0,0],armProfileExponent:[3,3,3],brightArmAmplitude:[70,0,0],brightEyeWallAmplitude:[44,48,42],bodyLiftAmplitude:[10,11,9],darkEyeAmplitude:[26,20,17],rotationTurnsPerCycle:[1,1,1]}))assert.deepEqual(storms.map(storm=>storm[key]),expected);
+ const weatherLeaves=scene.bodyBands.flatMap(band=>band.leaves).filter(leaf=>leaf.style.includes('saturn-weather.webp'));
+ assert.equal(weatherLeaves.length,9);assert.equal(scene.counts.planetPolygonCount,453);
+ for(const leaf of weatherLeaves){assert.match(leaf.style,/background-image:url\(\/scenes\/saturn\/saturn-weather\.webp\),var\(--polycss-projective-texture-image\)/);assert.equal(leaf.style.match(/background-image:/g)?.length,1);}
+ const asset=await readFile(new URL('../../../../public/scenes/saturn/saturn-weather.webp',import.meta.url));
+ const source=await readFile(new URL('../../../../src/planets/saturn/source/saturn-weather-static.webp',import.meta.url));
+ const manifest=JSON.parse(await readFile(new URL('../../../../src/planets/saturn/runtime-assets.json',import.meta.url),'utf8'));
+ const pin=manifest.assets.find(asset=>asset.filename==='saturn-weather.webp');
+ assert.equal(asset.length,pin.bytes);assert.equal(createHash('sha256').update(asset).digest('hex'),pin.sha256);
+ const [preparedPixels,sourcePixels]=await Promise.all([sharp(asset).ensureAlpha().raw().toBuffer({resolveWithObject:true}),sharp(source).ensureAlpha().raw().toBuffer({resolveWithObject:true})]);
+ assert.equal(preparedPixels.info.width,290);assert.equal(preparedPixels.info.height,34);
+ assert.deepEqual(preparedPixels.info,sourcePixels.info);
+ for(let offset=3;offset<sourcePixels.data.length;offset+=4)assert.equal(preparedPixels.data[offset],sourcePixels.data[offset]);
+});
+test('awaits the prepared storm atlas before declaring the scene ready',async()=>{
+ const definition=await readPreparedFixture('saturn','runtime');
+ const weather=definition.assets.entries.find(entry=>entry.url==='/scenes/saturn/saturn-weather.webp');
+ assert.ok(weather&&definition.assets.startup.includes(weather.key));
+ const runtime=await readFile(new URL('../../../../src/renderers/css/runtime/object-runtime.ts',import.meta.url),'utf8');
+ assert.ok(runtime.indexOf('environment.waitPaint(')<runtime.indexOf('readyPublished = true'));
+ assert.doesNotMatch(JSON.stringify(definition),/weatherPlayer|weatherTargets|createElement/);
+});
