@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3bb14fc72a5cdb7b7f6a139f6c0414149c96b8a8f93793f98962f1b21cbf4dab"
+    "sha256": "0f58702f821049c834fba71a41f3eedfd72e0aab696d09c9ee79792b7d7d91be"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -940,10 +940,14 @@
       "credit": "NASA/JPL Solar System Dynamics — Horizons",
       "acquisition": "JPL Horizons request and JSON response saved together on 2026-09-06; the local JSON wrapper is not the original HTTP response bytes.",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "JPL Horizons Sun vectors relative to Europa",
-        "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/documents/5",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-horizons",
+            "role": "material",
+            "evidence": "Horizons vector response; the input URL records target, observer, epochs, ICRF frame, units and correction settings. The local response hash identifies the returned bytes."
+          }
+        ]
       },
       "id": "source-document:photometry/horizons-sun.json",
       "upstreamLineage": "not-recorded",
@@ -963,10 +967,14 @@
       "credit": "NASA/JPL Solar System Dynamics — Horizons",
       "acquisition": "JPL Horizons request and JSON response saved together on 2026-09-06; the local JSON wrapper is not the original HTTP response bytes.",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "JPL Horizons Galileo vectors relative to Europa",
-        "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/documents/6",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-horizons",
+            "role": "material",
+            "evidence": "Horizons vector response; the input URL records target, observer, epochs, ICRF frame, units and correction settings. The local response hash identifies the returned bytes."
+          }
+        ]
       },
       "id": "source-document:photometry/horizons-galileo.json",
       "upstreamLineage": "not-recorded",

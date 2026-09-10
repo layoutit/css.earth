@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "70787b1d02546f343b9e268ae61bf961ecffdc2ef62e99982d8ea40381bab182"
+    "sha256": "2843078cd3258990091eae4d7ef208e61af90e6ffa048228842c5a5b09e1578b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1077,7 +1077,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-ganymede-ganymede-muse-oxygen-signature-night-1",
+            "catalogueId": "doi-10-5281-zenodo-11402374",
             "role": "material",
             "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
           }
@@ -1127,7 +1127,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-ganymede-ganymede-muse-oxygen-signature-night-2",
+            "catalogueId": "doi-10-5281-zenodo-11402374",
             "role": "material",
             "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
           }
@@ -1177,7 +1177,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-ganymede-ganymede-muse-oxygen-signature-night-3",
+            "catalogueId": "doi-10-5281-zenodo-11402374",
             "role": "material",
             "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
           }

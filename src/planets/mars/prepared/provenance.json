@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0762c820338647996515a3046f444a937092b03538888ff3135b604f23692065"
+    "sha256": "118d73a0ee8015feed6e54654d48680ec2a533b97d4212051d97fffee0b56484"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -841,10 +841,14 @@
       "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) expands a pinned Mars ephemeris seed",
       "redistribution": "checked generated source snapshot",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-mars-configuration",
-        "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       },
       "sha256": "da649c1b783a9390697db2f49a25667b518b5c923ddb7ac426037c97c08f8dde",
       "bytes": 11093,
@@ -878,10 +882,14 @@
       "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) requests I/F at R 240 from the pinned configuration",
       "redistribution": "checked generated source snapshot",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-mars-reflectance",
-        "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       },
       "sha256": "1f6c5f4ccecbf41ab44a27e9eeab07d99170697cb21ffda2137cef393290e3d4",
       "bytes": 11908,

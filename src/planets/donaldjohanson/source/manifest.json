@@ -54,7 +54,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-donaldjohanson-donaldjohanson-shape",
+            "catalogueId": "lucy-donaldjohanson-k548-v10",
             "role": "material",
             "evidence": "src/planets/donaldjohanson/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
@@ -105,7 +105,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-donaldjohanson-donaldjohanson-original-dsk",
+            "catalogueId": "lucy-donaldjohanson-k548-v10",
             "role": "material",
             "evidence": "src/planets/donaldjohanson/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
@@ -204,7 +204,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-donaldjohanson-donaldjohanson-reference-naif0012-tls",
+            "catalogueId": "naif-leapseconds-0012",
             "role": "material",
             "evidence": "src/planets/donaldjohanson/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
           }
@@ -273,10 +273,8 @@
       "expectedBytes": 1041,
       "expectedSha256": "3d3955788f72b830eeefa708f02243f148cfd7d98e02ec0c54fe46255d603aa4",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "donaldjohanson-preparation-camera-json",
-        "evidence": "src/planets/donaldjohanson/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-authored camera solution for the source image; the file records the camera parameters and the image it registers."
       }
     },
     {

@@ -34,4 +34,4 @@ Reload the published PR and inspect every image; fix broken embeds before handof
 If required visual evidence is unavailable, keep the PR in draft and say what is missing.
 -->
 
-[PR rules: titles, PDS4 provenance and ISO plain language](https://github.com/layoutit/cssEarth/blob/main/docs/provenance/CONTRACT.md#pull-requests).
+[PR rules: titles, PDS4 provenance and ISO plain language](https://github.com/layoutit/css.earth/blob/main/docs/provenance/CONTRACT.md#pull-requests).

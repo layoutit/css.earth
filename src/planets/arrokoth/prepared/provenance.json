@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c40d509a4cfe9b0acf1c46287571ad5df3a69c4a6300b4f810c4434f1d416844"
+    "sha256": "7f958ef13f5b2aca342759061e1f6075df7187d155f516c298444cbadfe437b8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -424,10 +424,15 @@
       "acquisition": "Unmodified PDS4 product label; restored through source/preparation/acquisition.json.",
       "productId": "urn:nasa:pds:nh_derived:arrokoth_shapemodel_porter2024:albedo_arrokoth4_fp36h2_masked1::1.0",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "Arrokoth Albedo Map — PDS4 label",
-        "evidence": "src/planets/arrokoth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/documents/14",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-arrokoth-lorri-albedo-model",
+            "role": "reference",
+            "evidence": "Native PDS label identifies this product and its associated science file.",
+            "locator": "Identification_Area and File_Area_Observational/File"
+          }
+        ]
       },
       "id": "source-document:science/albedo_arrokoth4_fp36h2_masked1.lblx",
       "upstreamLineage": "not-recorded",

@@ -15,10 +15,14 @@
       ],
       "expectedBytes": 2062,
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "inter-sun-title-vector",
-        "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "artwork",
+            "evidence": "Title outlines extracted from Inter Variable 4.001 at revision 9221beed3."
+          }
+        ]
       }
     },
     {
@@ -1339,7 +1343,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-hyg-v41-sun-field",
+            "catalogueId": "hyg-v41",
             "role": "material",
             "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/34"
           }
@@ -1388,10 +1392,8 @@
         "acquisition"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "sun-authored-acquisition",
-        "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/36",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-authored source acquisition recipe; published inputs retain their own identities and hashes."
       }
     },
     {
@@ -1409,10 +1411,8 @@
       "expectedSha256": "d605d350dbdbf04da46a778309d1e16b0ccd8e748b0b844360b623f38ecef917",
       "sha256": "d605d350dbdbf04da46a778309d1e16b0ccd8e748b0b844360b623f38ecef917",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "sun-world-context-navigation",
-        "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/37",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-authored navigation context with physical records and a pinned epoch; its component sources remain cited in the navigation data."
       }
     }
   ],

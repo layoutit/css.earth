@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6019c4c117e619714475ee6f5b2b68413638fe3523f533b99a517754321d5d6c"
+    "sha256": "ddb4bebe04a688d4dc704673841c9c2be150579194c941c7e15004603d4231c2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -513,7 +513,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-callisto-galileo-pia03456-registered-color",
+            "catalogueId": "galileo-callisto-pia03456",
             "role": "material",
             "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
           }

@@ -13,6 +13,8 @@ For a body's sources, processing, evidence and known problems, read its
 | Decoding images, reducing meshes, mapping UVs and baking atlases | [Image and surface preparation](surface-preparation.md) |
 | Importing Celestia's native illustrative meshes | [Celestia mesh imports](celestia-meshes.md) |
 | Connecting prepared outputs to their inputs | [Prepared object provenance](object-provenance.md) |
+| Published source identities, input bindings and usage links | [Sources catalogue](sources-catalogue.md) |
+| Missions, spacecraft and dataset attribution | [Exploration catalogue](architecture/exploration-catalog.md) |
 | Deriving factsheet values | [Factsheets](factsheets.md) |
 | Scene navigation and prepared data | [Navigation ownership](prepared-navigation-ownership.md) |
 | Loading objects in the browser | [Page navigation transport](page-navigation-transport.md) |
@@ -25,18 +27,12 @@ For contribution steps, use the [body contributor guide](../src/planets/README.m
 [celestial skill](../.agents/skills/celestial-skill/SKILL.md) points agents to the
 same workflow and implementation.
 
-## Proposals under discussion
-
-- [SOURCES catalogue](architecture/sources-catalogue-proposal.md) — canonical source identity, local evidence, derived usage and migration.
-- [Missions, spacecraft and dataset attribution](architecture/exploration-catalog.md) — catalogue ownership, capture migration, preparation and dataset navigation.
-- [Spacecraft and individual mission catalogues](architecture/spacecraft-missions-proposal.md)
-
 ## Where work belongs
 
 Keep maintained Markdown guides here and their illustrations in `images/`.
 Link each guide from this index or another guide, and each illustration from a
-guide. Put processing code in `tools/`, test fixtures in `tests/`, and source
-identities beside the body.
+guide. Put processing code in `tools/`, test fixtures in `tests/`, and local source
+records beside the body. Shared published identities belong in the Sources catalogue.
 Link historical evidence at its exact Git revision from the account that uses it.
 Plans, superseded proposals and raw run output do not need a permanent copy in
 the current tree.
@@ -55,5 +51,3 @@ For a Git snapshot inventory of body records, retained HTML and duplicate bytes,
 run `python3 tools/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output /tmp/provenance-inventory.json`.
 This reads committed files; add `--index` to include the staged change. It does
 not acquire sources or qualify scientific claims.
-
-- [Sources catalogue](sources-catalogue.md): published identities, bindings, preparation and coverage.

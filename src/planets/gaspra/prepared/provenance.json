@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1d9d0540a8564ebcd4c93559b9b9378392510a5a822f9b38f2d56272736b3aca"
+    "sha256": "2b954e0ebee9d7690919126b9a0e78af35ce4fa33fda5325a5a91ac8e015245f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -710,7 +710,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-gaspra-gaspra-gll36001-ti",
+            "catalogueId": "galileo-ssi-gll36001",
             "role": "material",
             "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
           }

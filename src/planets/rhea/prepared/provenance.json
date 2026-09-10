@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "33e1054f6b4ec2309df46171fe2d4a7a3f77574c467400cd487fac1ba5e2c45d"
+    "sha256": "91abe4cd6f8a3f3ccf0871dfc75cc4b31c622611f5f3007d610b172d76bcfecd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -811,7 +811,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-rhea-rhea-vims-infrared",
+            "catalogueId": "doi-10-17189-ctqe-ta30",
             "role": "material",
             "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
           }
@@ -968,7 +968,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-rhea-rhea-vims-ice-absorption",
+            "catalogueId": "doi-10-17189-ctqe-ta30",
             "role": "material",
             "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
           }

@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "75cf2f51024e2aca7fd540f70b0b4e8ec57ed51c617cefa94b68e8d59038f4e7"
+    "sha256": "8585c500b3e74e0c6e5a0d7821c9566fefbaf59cb2e4ec91b13ecc383aaa2294"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -316,7 +316,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-comet-1p-encounter-projection",
+            "catalogueId": "giotto-halley-hmc-best",
             "role": "material",
             "evidence": "src/planets/comet-1p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
           }

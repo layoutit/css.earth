@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "023aff23fec822323a75707f50b76ab915742f81d94c03d50f45187c64108b36"
+    "sha256": "b684e941c4d347154511efd78076388809d2348d82d493d172def2a8870e7e6a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -317,7 +317,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-donaldjohanson-donaldjohanson-shape",
+            "catalogueId": "lucy-donaldjohanson-k548-v10",
             "role": "material",
             "evidence": "src/planets/donaldjohanson/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }

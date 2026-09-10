@@ -145,7 +145,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-europa-jupiter-hubble-parent",
+            "catalogueId": "hubble-jupiter-2024-01-05",
             "role": "material",
             "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
@@ -1885,10 +1885,14 @@
       "credit": "NASA/JPL Solar System Dynamics — Horizons",
       "acquisition": "JPL Horizons request and JSON response saved together on 2026-09-06; the local JSON wrapper is not the original HTTP response bytes.",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "JPL Horizons Sun vectors relative to Europa",
-        "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/documents/5",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-horizons",
+            "role": "material",
+            "evidence": "Horizons vector response; the input URL records target, observer, epochs, ICRF frame, units and correction settings. The local response hash identifies the returned bytes."
+          }
+        ]
       }
     },
     {
@@ -1902,10 +1906,14 @@
       "credit": "NASA/JPL Solar System Dynamics — Horizons",
       "acquisition": "JPL Horizons request and JSON response saved together on 2026-09-06; the local JSON wrapper is not the original HTTP response bytes.",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "JPL Horizons Galileo vectors relative to Europa",
-        "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/documents/6",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-horizons",
+            "role": "material",
+            "evidence": "Horizons vector response; the input URL records target, observer, epochs, ICRF frame, units and correction settings. The local response hash identifies the returned bytes."
+          }
+        ]
       }
     },
     {

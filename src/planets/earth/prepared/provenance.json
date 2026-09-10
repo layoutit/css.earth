@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ad2201544cae355c3f56cf235983a551ed0dbcaf13931320ea31bff453148c67"
+    "sha256": "c6cef622d58b21dab727c86ff462403cc01dbf664d6caabff755d54e9fd42aa5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -2256,10 +2256,14 @@
       "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
       "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-mur-gibs-mosaic",
-        "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/generatedIntermediates/1",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-09-07; mur-gibs-receipt.json records the layer, grid, returned tile dates and byte hashes. The mosaic is a local assembly of those tiles."
+          }
+        ]
       },
       "kind": "generated-intermediate",
       "title": "science/mur-gibs.png",
@@ -2354,10 +2358,14 @@
       "acquisition": "expanded Earth configuration with the leading non-configuration warning removed and declared R=120 generator block appended",
       "redistribution": "checked text configuration with NASA attribution",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-earth-configuration",
-        "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       },
       "sha256": "f658cc3471595caddbe04ae5fbfde6523f3ef160ec0bd5ba3074635f3561834e",
       "bytes": 27346,
@@ -2405,10 +2413,14 @@
       "acquisition": "checked response with only volatile synthesis-clock comments normalized",
       "redistribution": "checked numerical model response with NASA attribution",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-earth-spectrum",
-        "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       },
       "sha256": "0dab314d53880a46cf05f0a60dc535b386fa57ef5d980dceb20bbcc00a35f08a",
       "bytes": 6404,

@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e6b75b39a3e64ab10bcd44c23db97f63cf22bac817b033fdee6c75d19b079a3b"
+    "sha256": "a2c9f731ecd79982717ed4ca0ff52a96618b27c1f8ce31b4da2008ed568af8fc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -710,7 +710,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-ida-ida-gll36001-ti",
+            "catalogueId": "galileo-ssi-gll36001",
             "role": "material",
             "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
           }

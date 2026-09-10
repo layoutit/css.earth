@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f30778556dfe0f34402c2a4b66b92ecc31663e03376359469bce55dd8f90efc7"
+    "sha256": "526862ada3c48c63041f267bf122d00b8acd68074fd13c3e62b916caf72f3d4b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -446,7 +446,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-ryugu-ryugu-shape",
+            "catalogueId": "hayabusa2-ryugu-spc-200k-20200323",
             "role": "material",
             "evidence": "src/planets/ryugu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }

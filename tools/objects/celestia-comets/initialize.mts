@@ -1,3 +1,4 @@
+import {refreshSourceRecord} from '../../source-authoring-templates.mts';
 import {requireRecord,requireArray,requireString,requireFiniteNumber,hasErrorCode} from '../../source-values.mts';
 import {readIntake} from './intake.mts';
 const records=(value:unknown)=>requireArray(value).map(item=>requireRecord(item));
@@ -22,9 +23,9 @@ for(const c of await readIntake()){
  const recipe={...rawRecipe,size:requireFiniteNumber(rawRecipe.size),longitudeDegrees:requireFiniteNumber(rawRecipe.longitudeDegrees),latitudeDegrees:requireFiniteNumber(rawRecipe.latitudeDegrees),ambient:requireFiniteNumber(rawRecipe.ambient),diffuse:requireFiniteNumber(rawRecipe.diffuse)};
  const png=await renderRadialSnapshot({...recipe,faces:radial.faces,map:resolve(scratch,requireString(requireRecord(surfaces[0].map).url).split('/').at(-1)!)});
  await writeFile(resolve(s,'presentation/context.png'),png);Object.assign(navSource,pin(png));await write(resolve(s,'preparation/navigation.json'),nav);
- const manifest=await read(resolve(s,'manifest.json'));manifest.generatedIntermediates=[{...navSource,id:'prepared-radial-context'}];
+ const manifest=await read(resolve(s,'manifest.json'));manifest.generatedIntermediates=[refreshSourceRecord(records(manifest.generatedIntermediates),{...navSource,path:requireString(navSource.path),id:'prepared-radial-context'})];
  const exclude=new Set(['manifest.json',...records(manifest.inputs).map(x=>requireString(x.path)),...records(manifest.generatedIntermediates).map(x=>requireString(x.path))]),documents:{path:string;expectedBytes:number;expectedSha256:string;purpose:string}[]=[];
- async function walk(dir:string,pre=''):Promise<void>{for(const e of await readdir(dir,{withFileTypes:true})){const rel=pre+e.name;if(e.isDirectory())await walk(resolve(dir,e.name),rel+'/');else if(!exclude.has(rel))documents.push({path:rel,...pin(await readFile(resolve(dir,e.name))),purpose:'Source evidence or authored preparation input.'});}}
+ async function walk(dir:string,pre=''):Promise<void>{for(const e of await readdir(dir,{withFileTypes:true})){const rel=pre+e.name;if(e.isDirectory())await walk(resolve(dir,e.name),rel+'/');else if(!exclude.has(rel))documents.push(refreshSourceRecord(records(manifest.documents),{path:rel,...pin(await readFile(resolve(dir,e.name))),purpose:'Source evidence or authored preparation input.'}));}}
  await walk(s);manifest.documents=documents.sort((a,b)=>a.path.localeCompare(b.path));await write(resolve(s,'manifest.json'),manifest);
  const descriptor=await read(resolve(p,'object.json'));for(const ref of records(requireRecord(requireRecord(descriptor.properties).recipe).sources))ref.sha256=pin(await readFile(resolve(p,requireString(ref.path)))).expectedSha256;await write(resolve(p,'object.json'),descriptor);
  console.log(c.id,radial.faces.length,pin(png));
