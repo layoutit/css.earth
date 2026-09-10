@@ -390,7 +390,7 @@
   display: flex;
   flex-wrap: nowrap;
   column-gap: 12px;
-  justify-content: space-between;
+  justify-content: flex-start;
   row-gap: 2px;
   padding: 0 var(--explorer-card-padding-inline-end) 0 var(--explorer-card-padding-inline-start);
 }
@@ -573,6 +573,9 @@
 .planet-spacecraft[hidden] { display: none; }
 .planet-spacecraft:not([hidden]) ~ .planet-spacecraft:not([hidden]) { margin-top: 20px; }
 .planet-spacecraft-preview { position: relative; }
+.planet-spacecraft-preview > .planet-spacecraft-heading { position: absolute; inset: 0 0 auto; z-index: 1; pointer-events: none; }
+.planet-spacecraft-heading .planet-lens-details-title { margin-bottom: 0; }
+.planet-spacecraft-heading .planet-selected-content-meta { display: block; }
 .planet-spacecraft, .planet-capture-notes { font: 400 13px/18px var(--shell-ui-font); }
 .planet-spacecraft a, .planet-capture-notes a { color: inherit; text-underline-offset: 3px; }
 .planet-spacecraft a:hover, .planet-capture-notes a:hover { color: var(--shell-text); }
