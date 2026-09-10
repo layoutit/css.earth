@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-nebula-wide-survey-receipt@1",
+  "id": "allwise-color-lmc-24deg-6000",
+  "label": "AllWISE infrared \u00b7 24\u00b0 LMC field",
+  "survey": {
+    "id": "CDS/P/allWISE/color",
+    "doi": "10.26093/cds/aladin/35rf-zj",
+    "recordUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json",
+    "sourcePageUrl": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
+    "description": "NASA/IPAC WISE atlas data; CDS logarithmic RGB color composition W4/W2/W1. This is not natural visible color or a NASA-authored RGB image.",
+    "credit": "IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
+    "acknowledgement": "This Progressive Survey distribution makes use of data products from the Wide-field Infrared Survey Explorer, which is a joint project of the University of California, Los Angeles, and the Jet Propulsion Laboratory/California Institute of Technology, and NEOWISE, which is a project of the Jet Propulsion Laboratory/California Institute of Technology. WISE and NEOWISE are funded by the National Aeronautics and Space Administration.",
+    "hipsLicense": "ODbL-1.0",
+    "hipsPixelScaleDeg": 0.0004473,
+    "nativeSingleExposureResolutionArcsec": {
+      "W1": 6.1,
+      "W2": 6.4,
+      "W4": 12
+    },
+    "resolutionCaveat": "IRSA states atlas-image point source profiles are sqrt(2) broader than the native single-exposure values. The 6000px 24\u00b0 resampling further limits detail.",
+    "rgb": {
+      "red": "WISE W4 22\u00b5m",
+      "green": "WISE W2 4.6\u00b5m",
+      "blue": "WISE W1 3.4\u00b5m"
+    },
+    "hipsRgbStretch": {
+      "hips_rgb_red": "w4 [102.0 151.0 200.0 Log]",
+      "hips_rgb_green": "w2 [0.0 80.0 160.0 Log]",
+      "hips_rgb_blue": "w1 [0.0 200.0 400.0 Log]"
+    }
+  },
+  "request": {
+    "parameters": {
+      "hips": "CDS/P/allWISE/color",
+      "width": 6000,
+      "height": 6000,
+      "projection": "TAN",
+      "fov": 24,
+      "coordsys": "icrs",
+      "ra": 78.76,
+      "dec": -69.19
+    },
+    "serviceDocumentationUrl": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits",
+    "dimensionLimit": "8192\u00b2 request rejected: service maximum50000000pixels; acquired6000\u00b2 instead."
+  },
+  "artifacts": [
+    {
+      "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
+      "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg",
+      "bytes": 1942085,
+      "sha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a"
+    },
+    {
+      "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.fits",
+      "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=fits",
+      "bytes": 144002880,
+      "sha256": "33cd09d02bcf3c3d3b1b0aeaeec3244400136bc19280c67ef54ab3693e932a7f"
+    }
+  ],
+  "wcs": {
+    "projection": "TAN",
+    "coordinateFrame": "ICRS",
+    "referenceDimension": [
+      6000,
+      6000
+    ],
+    "referencePixel": [
+      3000.0,
+      3000.0
+    ],
+    "referenceValueDeg": [
+      78.76,
+      -69.19
+    ],
+    "scaleDeg": [
+      -0.0040595312971682,
+      0.0040595312971682
+    ],
+    "rotationDeg": 0,
+    "centralSamplingArcsec": 14.61431266980552,
+    "axisFieldOfViewDeg": 24,
+    "rasterOrientation": "JPEG top-left order matches FITS RGB after reversing FITS axis2(Y). Use FITS referencePixel with existing raster-to-FITS Y reversal.",
+    "fitsHeader": {
+      "SIMPLE": true,
+      "BITPIX": 8,
+      "NAXIS": 3,
+      "NAXIS1": 6000,
+      "NAXIS2": 6000,
+      "NAXIS3": 4,
+      "WCSAXES": 2,
+      "CRPIX1": 3000.0,
+      "CRPIX2": 3000.0,
+      "CDELT1": -0.0040595312971682,
+      "CDELT2": 0.0040595312971682,
+      "CUNIT1": "deg",
+      "CUNIT2": "deg",
+      "CTYPE1": "RA---TAN",
+      "CTYPE2": "DEC--TAN",
+      "CRVAL1": 78.76,
+      "CRVAL2": -69.19,
+      "LONPOLE": 180.0,
+      "LATPOLE": -69.19,
+      "MJDREF": 0.0,
+      "RADESYS": "ICRS",
+      "CPYRIGHT": "IPAC/NASA - http://wise2.ipac.caltech.edu/docs/release/allsky/"
+    }
+  },
+  "verification": {
+    "alphaMin": 254,
+    "alphaMax": 255,
+    "alphaNonzeroFraction": 1.0,
+    "fullyBlankRows": 0,
+    "fullyBlankColumns": 0,
+    "exactBlackRgbFraction": 0.0004616111111111111,
+    "orientation": {
+      "fitsAsStored": {
+        "correlation": [
+          0.24364866584482817,
+          0.09737511308364179,
+          0.09231766815879724
+        ],
+        "meanAbsoluteDifferenceDn": [
+          2.6344666666666665,
+          3.0396,
+          2.243622222222222
+        ]
+      },
+      "fitsYReversed": {
+        "correlation": [
+          0.8776688383758388,
+          0.9609876128795738,
+          0.9588512481701273
+        ],
+        "meanAbsoluteDifferenceDn": [
+          1.6436333333333333,
+          1.2503555555555557,
+          0.7683555555555556
+        ]
+      }
+    },
+    "visualAssessment": "Inspected1400px full-field preview: obvious rectangular atlas brightness and color seams cross the LMC stellar body. Bright stars have expected diffraction/spread artifacts. No empty coverage holes, but this is not a seamless or photometrically uniform cloud-color source."
+  },
+  "status": "Alignment comparison only. Source-color quality gate failed: visible atlas seams. Star-field registration is delegated separately; no cloud bake has been run."
+}

@@ -33,7 +33,9 @@ class Root {
     contains: (key: string): boolean => this.classes.has(key),
   };
 }
-type HarnessMutation = (parts: { lensInputs: Input[]; settingInputs: Input[]; stage: HTMLElement; lensRoot: Root }) => void;
+type InformationPanel = { querySelector(selector: string): Root | null };
+type HarnessDocument = { querySelector(selector: string): Root | InformationPanel | null };
+type HarnessMutation = (parts: { lensInputs: Input[]; settingInputs: Input[]; stage: HTMLElement; document: HarnessDocument; lensRoot: Root }) => void;
 function selectionState(initial: ObjectSelection): ObjectSelectionState {
   return { committed: null, desired: initial, plan: null, pending: true, loadingMaterial: false, ready: false, error: null, viewRevision: null };
 }
@@ -47,7 +49,8 @@ function harness(controls: ObjectControls = moonControls, mutate: HarnessMutatio
   const asteroidLabels = new Input({ name: "asteroidLabels" });
   settingInputs.push(motion, contrast, heliosphere, asteroidOrbits, asteroidLabels);
   const lensRoot = new Root(lensInputs), settingsRoot = new Root(settingInputs);
-  const document = { querySelector: (selector: string): Root => selector === ".planet-lenses" ? lensRoot : settingsRoot };
+  const information: InformationPanel = { querySelector: selector => selector === ".planet-lenses" ? lensRoot : null };
+  const document: HarnessDocument = { querySelector: selector => selector === ".planet-information-panel" ? information : selector === ".planet-lenses" ? lensRoot : settingsRoot };
   // The binding accepts an HTMLElement only to reach ownerDocument; this mock supplies that boundary.
   const stage = { ownerDocument: document as unknown as Document } as unknown as HTMLElement;
   const errors: unknown[] = [], actions: ObjectAction[] = []; let state = selectionState(initial);
@@ -56,7 +59,7 @@ function harness(controls: ObjectControls = moonControls, mutate: HarnessMutatio
     state = { ...state, committed: reduceObjectSelection(state.committed ?? initial, action), pending: false };
     state.desired = state.committed ?? initial; binding.publish(state); return true;
   };
-  mutate({ lensInputs, settingInputs, stage, lensRoot });
+  mutate({ lensInputs, settingInputs, stage, document, lensRoot });
   binding = createObjectControlBinding({ stage, controls, initialSelection: initial, getState: () => state,
     onAction(action) { actions.push(action); return actionImplementation(action); }, onError: error => errors.push(error) } satisfies ObjectControlBindingOptions);
   return { binding, lensInputs, settingInputs, lensRoot, settingsRoot, motion, contrast, heliosphere, asteroidOrbits, asteroidLabels, errors, actions, initial,
@@ -172,4 +175,21 @@ test("prepared lens legends follow committed selection through pending work", ()
   h.setState({ ...h.state(), committed: desired, desired, pending: false, plan: null });
   assert.deepEqual(legends.map(legend => legend.hidden), [true, false]);
   h.binding.destroy();
+});
+
+
+test("a preceding focused galaxy lens bank cannot replace the mounted body's controls", () => {
+  const focusInput = new Input({ name: "focusLens", value: "vista-infrared", tagName: "BUTTON", type: "button" });
+  const focusRoot = new Root([focusInput]);
+  const h = harness(moonControls, ({ document }) => {
+    const query = document.querySelector;
+    document.querySelector = selector => selector === ".planet-lenses" ? focusRoot : query(selector);
+  });
+  h.ready();
+  assert.ok(moonControls.lenses);
+  assert.deepEqual(h.binding.stats().lensIds, moonControls.lenses.controls.map(lens => lens.id));
+  assert.equal(focusInput.disabled, false);
+  focusInput.emit("click"); assert.equal(h.actions.length, 0);
+  h.lensInputs[0].emit("click"); assert.equal(h.actions.length, 1);
+  h.binding.destroy(); assert.equal(focusInput.disabled, false);
 });

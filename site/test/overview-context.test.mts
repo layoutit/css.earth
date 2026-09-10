@@ -48,3 +48,14 @@ test('galactic distance is measured from the Sun, independent of selected body a
   assert.equal(surface.label, 'Altitude:');
   assert.equal(surface.meters, 380);
 });
+
+test('prepared focus distance follows its catalogue position independently of the selected detail and overview scope', () => {
+  const focus = { name: 'Prepared galaxy', positionM: [1e20, 2e20, -3e20] };
+  const world = { pose: { positionM: [1e20, 2e20, -3e20 + 1e18] } };
+  const frame = { originM: [100,200,300], bodyRadiusM: 20 };
+  const value = viewDistance(world, frame, 'milky-way', undefined, focus);
+  assert.equal(value.label, 'Distance to Prepared galaxy:');
+  assert.ok(Math.abs(value.meters / 1e18 - 1) < 1e-12);
+  assert.equal(viewDistance(world, frame, 'solar-system', undefined, focus).meters, value.meters);
+  assert.equal(viewDistance(world, frame, 'milky-way').label, 'Distance from Sun:');
+});

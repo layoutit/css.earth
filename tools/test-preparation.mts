@@ -11,6 +11,9 @@ const output = resolve(root, '.local/preparation-tests');
 const universeOnly = process.argv.length === 3 && process.argv[2] === '--universe';
 if (process.argv.length > 2 && !universeOnly) throw new TypeError('Usage: test-preparation.mts [--universe]');
 const universeEntries = [
+  'src/preparation/galaxy-catalog/galaxy-catalog.test.ts',
+  'src/preparation/cluster-catalog/cluster-catalog.test.ts',
+  'src/preparation/image-layers/image-layers.test.ts',
   'src/preparation/volume/volume.test.ts',
   'src/preparation/sky/sky.test.ts',
   'src/renderers/css/preparation/volume.test.ts',

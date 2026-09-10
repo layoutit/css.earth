@@ -1,0 +1,51 @@
+[
+  {
+    "id": "lmc-clouds",
+    "name": "LMC",
+    "directory": "labs/nebula/models/lmc/full-density",
+    "stars": "labs/nebula/models/lmc/stars/prepared/stars.json",
+    "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
+    "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
+    "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
+    "framingRadiusUnits": 5,
+    "hasDetail": false,
+    "comparisonGroup": "lmc-clouds-observation",
+    "referenceDistanceUnits": 49.59067275049,
+    "referenceEastLeft": true,
+    "density": {
+      "directory": "labs/nebula/models/lmc/full-density",
+      "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
+      "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
+      "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
+      "overlays": "labs/nebula/models/lmc/candidates/overlays.json",
+      "candidateImageIds": [
+        "vista-infrared",
+        "horalek-widefield",
+        "wise-wide-infrared"
+      ],
+      "referenceFramingRadiusUnits": 5,
+      "starAlignmentReference": {
+        "path": "labs/nebula/models/lmc/stars/source/alignment.json",
+        "sha256": "d2213aeb75b7b0a9084a482a6baa361834360599320044c0b18e248043066d12"
+      }
+    },
+    "imagePath": "labs/nebula/models/lmc/candidates/prepared/vista-infrared.webp"
+  },
+  {
+    "id": "smc-particles",
+    "name": "SMC",
+    "directory": "labs/nebula/models/smc/full-density",
+    "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
+    "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
+    "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
+    "framingRadiusUnits": 7,
+    "hasDetail": false,
+    "sourceSubjectId": "smc",
+    "density": {
+      "directory": "labs/nebula/models/smc/full-density",
+      "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
+      "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
+      "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure."
+    }
+  }
+]

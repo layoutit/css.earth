@@ -17,7 +17,7 @@ function referencePositionToUnits(position: Vector3, frame: DensityVolumeFrame):
   const tx = 2 * (qy * z - qz * y), ty = 2 * (qz * x - qx * z), tz = 2 * (qx * y - qy * x);
   return [x + qw * tx + qy * tz - qz * ty, y + qw * ty + qz * tx - qx * tz, z + qw * tz + qx * ty - qy * tx];
 }
-export function compileCssVolume(options: { id: string; frame: DensityVolumeFrame; slices: VolumeSlices; recipe: VolumeRecipe }): PreparedCssVolume {
+export function compileCssVolume(options: { id: string; frame: DensityVolumeFrame; slices: VolumeSlices; recipe: Pick<VolumeRecipe, 'anchors'> }): PreparedCssVolume {
   const { id, frame, slices, recipe } = options;
   for (const bound of ['min', 'max'] as const) for (let axis = 0; axis < 3; axis++) {
     const actual = slices.boundsUnits[bound][axis], expected = frame.boundsUnits[bound][axis];

@@ -1,0 +1,88 @@
+{
+  "schema": "cssearth-cluster-catalog-source@1",
+  "frame": {
+    "referenceFrame": "sun-icrf",
+    "epochJdTt": 2461286.5
+  },
+  "cosmology": {
+    "model": "flat-lambda-cdm",
+    "hubbleKmPerSecPerMpc": 70,
+    "omegaMatter": 0.3
+  },
+  "sources": [
+    {
+      "id": "mcxc-ii",
+      "path": "mcxcii.dat.gz",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
+      "sha256": "c6d0b69f1b77ab4b069c319d86f98a75a45ec752baa96ef8542d1d1cfb76fe53",
+      "bytes": 312912,
+      "citation": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187"
+    },
+    {
+      "id": "mcxc-ii-readme",
+      "path": "ReadMe",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
+      "sha256": "cb4b36eaedcc6c4016e492e17e0f3a27cc42cdb77bc70a4c3e5e22e0ad2af083",
+      "bytes": 14861,
+      "citation": "CDS MCXC-II byte-column definitions, release 2024-11-29"
+    }
+  ],
+  "catalogueSourceId": "mcxc-ii",
+  "rowCount": 2221,
+  "selection": [
+    {
+      "id": "virgo-cluster",
+      "name": "Virgo Cluster",
+      "catalogueId": "MCXC J1230.7+1220",
+      "aliases": []
+    },
+    {
+      "id": "fornax-cluster",
+      "name": "Fornax Cluster",
+      "catalogueId": "MCXC J0338.4-3526",
+      "aliases": []
+    },
+    {
+      "id": "hydra-cluster",
+      "name": "Hydra Cluster",
+      "catalogueId": "MCXC J1036.6-2731",
+      "aliases": [
+        "Abell 1060"
+      ]
+    },
+    {
+      "id": "centaurus-cluster",
+      "name": "Centaurus Cluster",
+      "catalogueId": "MCXC J1248.7-4118",
+      "aliases": [
+        "Abell 3526"
+      ]
+    },
+    {
+      "id": "norma-cluster",
+      "name": "Norma Cluster",
+      "catalogueId": "MCXC J1614.3-6052",
+      "aliases": [
+        "Abell 3627"
+      ]
+    },
+    {
+      "id": "perseus-cluster",
+      "name": "Perseus Cluster",
+      "catalogueId": "MCXC J0319.7+4130",
+      "aliases": [
+        "Abell 426"
+      ]
+    },
+    {
+      "id": "coma-cluster",
+      "name": "Coma Cluster",
+      "catalogueId": "MCXC J1259.7+2756",
+      "aliases": [
+        "Abell 1656"
+      ]
+    }
+  ],
+  "description": "Seven nearby named galaxy clusters, independently selected from MCXC-II. Centres and R500 apertures only; no synthetic members or density model.",
+  "distanceCaveat": "Comoving positions derived from spectroscopic redshifts using the MCXC-II flat cosmology (H0=70 km/s/Mpc, Omega_m=0.3). No peculiar-velocity correction or redshift-independent local distance is claimed; this matters especially for nearby Virgo and Fornax."
+}

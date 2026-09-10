@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-nebula-reconstruction@1",
+  "resultId": "a44d4e247e4ceaf88826b2653b2eca175c5156cfeefeb87a18b41fd823b4a46e",
+  "imageId": "wise-wide-infrared",
+  "removalResultId": "f42ce90034e9f1156d1ff320883a31018e3b942899f3218c7fa44c37a43cf2de.ded01115a2e30fc0a638a98cd89d74c0c48e22047a91c21992b85c97d7e4b7d7",
+  "placement": {
+    "x": 1.5626367397788687,
+    "y": 2.1726510201541025,
+    "z": 0,
+    "rotationX": 0,
+    "rotationY": 0,
+    "rotationZ": 39,
+    "scale": 3
+  },
+  "subject": {
+    "id": "reconstruction-a44d4e247e4ceaf88826b2653b2eca175c5156cfeefeb87a18b41fd823b4a46e",
+    "name": "NASA WISE · 24° infrared candidate · reconstruction",
+    "directory": ".local/nebula-lab/reconstructions/a44d4e247e4ceaf88826b2653b2eca175c5156cfeefeb87a18b41fd823b4a46e",
+    "stars": ".local/nebula-lab/reconstructions/a44d4e247e4ceaf88826b2653b2eca175c5156cfeefeb87a18b41fd823b4a46e/prepared/stars.json",
+    "cloudParts": {
+      "descriptor": "inspection-object.json",
+      "catalogue": "source/cloud-parts.json"
+    },
+    "imagePath": ".local/nebula-lab/reconstructions/a44d4e247e4ceaf88826b2653b2eca175c5156cfeefeb87a18b41fd823b4a46e/source/target.png",
+    "sourcePageUrl": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
+    "credit": "IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
+    "modelNote": "Experimental extended-light reconstruction at the calibrated sky scale. Stellar-prior depth is modeled; the photo boundary and flat appearance in oblique views remain unresolved. Not accepted for production.",
+    "framingRadiusUnits": 5,
+    "hasDetail": false,
+    "comparisonGroup": "lmc-clouds-observation",
+    "referenceDistanceUnits": 49.59067275049,
+    "referenceEastLeft": true,
+    "comparisonImages": [],
+    "density": {
+      "directory": "labs/nebula/models/lmc/full-density",
+      "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
+      "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
+      "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
+      "overlays": "labs/nebula/models/lmc/candidates/overlays.json",
+      "candidateImageIds": [
+        "smash-original",
+        "vista-infrared",
+        "wise-wide-infrared",
+        "dss2-wide-optical",
+        "horalek-widefield",
+        "smash-dr2-wide-mosaic",
+        "ciel-austral-optical",
+        "naztronomy-optical"
+      ],
+      "reconstructionReferenceImageId": "smash-original",
+      "referenceFramingRadiusUnits": 5
+    },
+    "sourceSubjectId": "lmc-clouds",
+    "reconstructionOverlay": ".local/nebula-lab/reconstructions/a44d4e247e4ceaf88826b2653b2eca175c5156cfeefeb87a18b41fd823b4a46e/source/original-overlay.json",
+    "reconstructionImage": {
+      "group": "lmc-clouds",
+      "label": "NASA WISE · 24° infrared candidate",
+      "note": "Candidate colors on the unchanged Alignment density cloud; saved placement is preserved."
+    }
+  }
+}

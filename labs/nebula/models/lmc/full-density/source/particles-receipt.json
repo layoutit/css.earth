@@ -1,0 +1,68 @@
+{
+  "schema": "cssearth-particle-volume-lab@1",
+  "input": {
+    "path": ".local/nebula-lab/full-density/lmc-full-density.f32",
+    "sha256": "c57e34ed2b7ba22574f2d5a47668538cb09cfe59bf6d883d63f8661610825740",
+    "bytes": 25920000,
+    "layout": "float32-le-xyzmass-kpc"
+  },
+  "options": {
+    "dimensions": [
+      266,
+      259,
+      116
+    ],
+    "boundsKpc": {
+      "min": [
+        -34.2494860589516,
+        -39.659852117301206,
+        -14.063476651908141
+      ],
+      "max": [
+        28.24754056340629,
+        21.19251590973147,
+        13.190865784909581
+      ]
+    },
+    "smoothingSigmaVoxels": 0.8,
+    "normalizationQuantile": 0.999,
+    "encoding": "sqrt-density-unorm8",
+    "fallbackColor": [
+      0,
+      0,
+      0
+    ],
+    "zstdLevel": 9
+  },
+  "particles": {
+    "count": 1620000,
+    "accepted": 1620000,
+    "inputMass": 31370.560079813004,
+    "acceptedMass": 31370.560079813004,
+    "depositedMass": 31370.560079812738
+  },
+  "normalization": {
+    "quantile": 0.999,
+    "densityAtUnit": 5.30682521968122,
+    "encoding": "sqrt-density-unorm8"
+  },
+  "diagnostics": {
+    "occupiedVoxels": 597662,
+    "axisVariation": [
+      2.790617273341247,
+      2.3196167322897017,
+      2.2485762528812887
+    ]
+  },
+  "outputs": {
+    "gridPath": "density.ktx2",
+    "gridSha256": "874682f828f1143ada8d4013f1a80634019f83d6ff6e7d906e51b0a764929f60",
+    "decodedSha256": "532b70e38e034ad4a0b711c0fc54183fe78a73d14e714cf898125c8644599ce5",
+    "bytes": 315857
+  },
+  "interpretation": {
+    "density": "Mass-weighted CIC deposition of simulation stellar particles with authored offline Gaussian smoothing.",
+    "color": "Authored uniform fallback color.",
+    "dust": "No dust or extinction is encoded; alpha is stellar-density support."
+  }
+}

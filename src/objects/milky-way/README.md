@@ -14,9 +14,11 @@ milky-way/
 └── prepared/
     ├── volume.json             Prepared object envelope with PolyCSS leaves
     ├── volume-slices.json      Physical quad and texture intermediates
-    ├── slices/{x,y,z}/*.webp    Fixed 256 / 256 / 32 external texture bank
-    └── sky/{px,nx,py,ny,pz,nz}.webp  Six opaque celestial cube faces
+    ├── slices/{x,y,z}/*.webp    Generated, ignored 256 / 256 / 32 texture bank
+    └── sky/{px,nx,py,ny,pz,nz}.webp  Generated, ignored six celestial cube faces
 ```
+
+App startup restores missing images from the pinned sources via `pnpm prepare:environment-images`, preserving the accepted metadata. See the [shared bake commands](../../../labs/nebula/docs/baking.md).
 
 From the repository root, with Node 22.15+ and pnpm 10.33.0:
 

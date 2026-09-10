@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "VST snaps a very detailed view of the Triangulum Galaxy",
+  "publisher": "ESO",
+  "sourceId": "eso1424a",
+  "sourcePage": "https://www.eso.org/public/images/eso1424a/",
+  "download": "https://cdn.eso.org/images/publicationjpg/eso1424a.jpg",
+  "credit": "ESO",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      19058,
+      15983
+    ],
+    "bands": [
+      "OmegaCAM g",
+      "OmegaCAM r",
+      "OmegaCAM H-alpha"
+    ],
+    "fieldOfViewDeg": [
+      1.1335,
+      0.9506666666666667
+    ]
+  },
+  "checkedSource": {
+    "kind": "publisher publication JPEG",
+    "dimensions": [
+      4000,
+      3355
+    ],
+    "sha256": "24b3d51ec8f2d1ad998bb5bb6f83111f251df0b64b21bcaafd1c2213a5d00853"
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 54,
+    "lineOfNodesPaDeg": 22.5,
+    "reference": "Corbelli et al. 2014, arXiv:1409.2665"
+  },
+  "displayModel": "The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth.",
+  "coverage": "The 68 by 57 arcminute VST field contains the full bright optical disk. The larger warped neutral-hydrogen outskirts are not represented."
+}

@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-full-particle-density-receipt@1",
+  "id": "smc-full-density",
+  "source": {
+    "gridPath": "density.ktx2",
+    "gridSha256": "131ececa8054137dc613a6b0845d209da583dc8daf4c69c3aabf68b0df77f394",
+    "decodedSha256": "38372f453d967b1b76549327e4e62a586b502a9ab181d8779a63adc8bd0b9d07",
+    "bytes": 330169
+  },
+  "grid": {
+    "dimensions": [
+      219,
+      291,
+      125
+    ],
+    "boundsKpc": {
+      "min": [
+        -13.459315128949534,
+        -49.78084165635432,
+        -28.57700521531428
+      ],
+      "max": [
+        37.19077656170363,
+        17.521334973691673,
+        0.33286447113158957
+      ]
+    },
+    "cellWidthKpc": 0.23127895749156696,
+    "paddingCells": 5,
+    "paddingKpc": {
+      "min": [
+        1.1563947874578346,
+        1.1563947874578346,
+        1.1563947874578346
+      ],
+      "max": [
+        1.267772411313004,
+        1.3143723882424538,
+        1.1563947874844338
+      ]
+    }
+  },
+  "mass": {
+    "count": 225000,
+    "accepted": 225000,
+    "inputMass": 4575.945809483528,
+    "acceptedMass": 4575.945809483528,
+    "depositedMass": 4575.945809483502
+  },
+  "boundary": {
+    "nonzeroAlpha": 0,
+    "nonzeroRgb": 0
+  },
+  "prepared": {
+    "sha256": "a6a11de64202477b31b2fa2402c1a40b33e079ab95bd0946dabab41a0ad18f99",
+    "leaves": 144,
+    "bytes": 98370
+  }
+}

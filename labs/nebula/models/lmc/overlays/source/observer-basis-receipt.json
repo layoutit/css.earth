@@ -1,0 +1,425 @@
+{
+  "schema": "cssearth-observer-basis-audit@1",
+  "objects": [
+    {
+      "subject": "lmc",
+      "sourceFrame": "labs/nebula/models/lmc-full-density/object.json",
+      "localToReferenceMatrix": [
+        [
+          -0.9808193151494231,
+          0.18220333318700455,
+          0.06924894515703438
+        ],
+        [
+          0.19491913972162034,
+          0.9168342766628663,
+          0.34845579074864286
+        ],
+        [
+          0.0,
+          0.3552701148585734,
+          -0.9347636843012119
+        ]
+      ],
+      "referenceBasisEastNorthAwayRows": [
+        [
+          -0.9808193151494231,
+          0.19491913972162034,
+          0.0
+        ],
+        [
+          0.18220333318700455,
+          0.9168342766628663,
+          0.3552701148585734
+        ],
+        [
+          0.06924894515703439,
+          0.3484557907486429,
+          -0.934763684301212
+        ]
+      ],
+      "localAxesInEastNorthAway": [
+        [
+          0.9999999999999999,
+          2.7755575615628914e-17,
+          0.0
+        ],
+        [
+          2.7755575615628914e-17,
+          0.9999999999999998,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.9999999999999998
+        ]
+      ],
+      "referenceDistanceKpc": 49.59067275049043,
+      "referenceLocalCameraPositionKpc": [
+        0,
+        0,
+        -49.59067275049043
+      ],
+      "referenceWorldCameraPositionKpc": [
+        4.440892098500626e-16,
+        3.552713678800501e-15,
+        -7.105427357601002e-15
+      ],
+      "physicalRotationLocalToEye": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          -1,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "polyCssInputSwap": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "runtimeRotationOnStoredVertices": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "basisProbe": {
+        "focalPixels": 1000,
+        "localPointsKpc": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ],
+          [
+            1.0,
+            1.0,
+            1.0
+          ]
+        ],
+        "screenOffsetsBeforeReflectionPx": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            20.165082353921292,
+            0.0
+          ],
+          [
+            0.0,
+            -20.165082353921292
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            19.766489465991654,
+            -19.766489465991654
+          ]
+        ],
+        "screenOffsetsAfterReflectionPx": [
+          [
+            -0.0,
+            0.0
+          ],
+          [
+            -20.165082353921292,
+            0.0
+          ],
+          [
+            -0.0,
+            -20.165082353921292
+          ],
+          [
+            -0.0,
+            0.0
+          ],
+          [
+            -19.766489465991654,
+            -19.766489465991654
+          ]
+        ]
+      },
+      "conclusion": "Current reference: east right, north up. Host horizontal reflection: east left, north up. Observer/depth unchanged."
+    },
+    {
+      "subject": "smc",
+      "sourceFrame": "labs/nebula/models/smc-full-density/object.json",
+      "localToReferenceMatrix": [
+        [
+          -0.2798290140309919,
+          0.915211836447773,
+          0.2899707180601827
+        ],
+        [
+          0.9600498543859288,
+          0.2667599236150954,
+          0.08451875677283469
+        ],
+        [
+          2.7755575615628914e-17,
+          0.3020371460247291,
+          -0.9532961567221577
+        ]
+      ],
+      "referenceBasisEastNorthAwayRows": [
+        [
+          -0.2798290140309921,
+          0.9600498543859287,
+          0.0
+        ],
+        [
+          0.9152118364477729,
+          0.2667599236150955,
+          0.3020371460247291
+        ],
+        [
+          0.2899707180601827,
+          0.08451875677283473,
+          -0.9532961567221576
+        ]
+      ],
+      "localAxesInEastNorthAway": [
+        [
+          1.0000000000000002,
+          -1.1102230246251565e-16,
+          -5.551115123125783e-17
+        ],
+        [
+          1.749166685389916e-16,
+          1.0000000000000002,
+          5.551115123125783e-17
+        ],
+        [
+          2.905186766926755e-17,
+          1.1102230246251565e-16,
+          1.0000000000000002
+        ]
+      ],
+      "referenceDistanceKpc": 62.440000000000005,
+      "referenceLocalCameraPositionKpc": [
+        0,
+        0,
+        -62.440000000000005
+      ],
+      "referenceWorldCameraPositionKpc": [
+        0.0,
+        2.6645352591003757e-15,
+        7.105427357601002e-15
+      ],
+      "physicalRotationLocalToEye": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          -1,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "polyCssInputSwap": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "runtimeRotationOnStoredVertices": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "basisProbe": {
+        "focalPixels": 1000,
+        "localPointsKpc": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ],
+          [
+            1.0,
+            1.0,
+            1.0
+          ]
+        ],
+        "screenOffsetsBeforeReflectionPx": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            16.015374759769376,
+            0.0
+          ],
+          [
+            0.0,
+            -16.015374759769376
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            15.762925598991172,
+            -15.762925598991172
+          ]
+        ],
+        "screenOffsetsAfterReflectionPx": [
+          [
+            -0.0,
+            0.0
+          ],
+          [
+            -16.015374759769376,
+            0.0
+          ],
+          [
+            -0.0,
+            -16.015374759769376
+          ],
+          [
+            -0.0,
+            0.0
+          ],
+          [
+            -15.762925598991172,
+            -15.762925598991172
+          ]
+        ]
+      },
+      "conclusion": "Current reference: east right, north up. Host horizontal reflection: east left, north up. Observer/depth unchanged."
+    }
+  ],
+  "controlReflection": {
+    "matrix": [
+      [
+        -1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ],
+    "relation": "underlyingIncrement = S * displayedIncrement * S",
+    "quaternionXyzwMultiplier": [
+      1,
+      -1,
+      -1,
+      1
+    ],
+    "pitchXMultiplier": 1,
+    "yawYMultiplier": -1,
+    "rollZMultiplier": -1,
+    "dollyMultiplier": 1,
+    "verifiedRandomRotations": 100,
+    "maxConjugationComponentError": 0.0
+  },
+  "limitations": [
+    "This verifies physical/display conventions, not the unpublished author simulation rotation.",
+    "Sun-centric observer approximates Earth to ~20 microarcseconds at 50 kpc."
+  ]
+}

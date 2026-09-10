@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Wide-field view of the Andromeda Galaxy",
+  "publisher": "ESA/Hubble",
+  "sourceId": "heic1112f",
+  "sourcePage": "https://esahubble.org/images/heic1112f/",
+  "download": "https://cdn.esahubble.org/archives/images/publicationjpg/heic1112f.jpg",
+  "credit": "ESA/Hubble & Digitized Sky Survey 2. Acknowledgment: Davide De Martin (ESA/Hubble)",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      21299,
+      13775
+    ],
+    "bands": [
+      "DSS2 R",
+      "DSS2 B"
+    ],
+    "fieldOfViewDeg": [
+      6.032166666666667,
+      3.9013333333333335
+    ]
+  },
+  "checkedSource": {
+    "kind": "High-resolution crop/resample derived offline from the publisher Large JPEG",
+    "dimensions": [
+      4783,
+      5000
+    ],
+    "sha256": "f0a9a514317745945591c7677e2d76c358357cf4e4ef00b95928e6d350835137"
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 77.5,
+    "lineOfNodesPaDeg": 37.7,
+    "reference": "Chemin, Carignan & Foster 2009, arXiv:0909.3846"
+  },
+  "displayModel": "The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth.",
+  "coverage": "The wide DSS2 field contains the full visible galaxy and substantial surrounding sky, foreground stars and background objects. Those released sources are retained. Faint halo coverage is limited by the survey composite.",
+  "acquisition": {
+    "url": "https://cdn.esahubble.org/archives/images/large/heic1112f.jpg",
+    "sha256": "ea314835bd6f5cdfdac49c2b2b6ba204c1f99e9fe47b9bdeb4a647b5934cefa8",
+    "dimensions": [
+      21299,
+      13775
+    ],
+    "operation": "Decode publisher JPEG, extract parent pixels [6000,1000,11000,11500], resize to 4783x5000 with Lanczos3, encode JPEG quality 95 with 4:4:4 chroma (sharp 0.35.3).",
+    "parentPixelWindow": [
+      6000,
+      1000,
+      11000,
+      11500
+    ]
+  }
+}

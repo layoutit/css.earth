@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "smc",
+  "type": "image-layer-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        558685736318132900000,
+        162842042038617440000,
+        -1.83671292332706e+21
+      ],
+      "localToReferenceXyzw": [
+        0.5930234436925893,
+        0.7905512466577111,
+        0.12224251888534837,
+        0.09169889975068647
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -5.457290802111414,
+          -4.887482630926559,
+          -12.5
+        ],
+        "max": [
+          3.455090234690023,
+          3.667215957303848,
+          12.5
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/recipe.json",
+      "sha256": "fbe9ee025ef9935b0e037452281ff5acdc0a5e4316372aabb03c07dd41c6fbde"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-image-layer-bank@1",
+    "url": "prepared/image-layers.json",
+    "sha256": "fb5bfa77e7354c74caa43793e3b9a184f89af8cf9e462fb0168dbe9e8415634c"
+  }
+}

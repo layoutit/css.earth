@@ -1,0 +1,32 @@
+{
+  "schema": "cssearth-nebula-lab-sources@1",
+  "pathBase": "labs/nebula",
+  "subjects": [
+    {
+      "subjectId": "lmc-clouds",
+      "sources": [
+        {
+          "id": "vista-infrared",
+          "name": "ESO VISTA · infrared, star-aligned",
+          "path": "models/lmc/candidates/prepared/vista-infrared.webp",
+          "sourcePageUrl": "https://www.eso.org/public/images/eso1914a/",
+          "credit": "ESO/VMC Survey"
+        },
+        {
+          "id": "horalek-widefield",
+          "name": "Horálek · optical wide field",
+          "path": "models/lmc/candidates/prepared/horalek-widefield.webp",
+          "sourcePageUrl": "https://noirlab.edu/public/images/iotw2547a/",
+          "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)"
+        },
+        {
+          "id": "wise-wide-infrared",
+          "name": "NASA WISE · 24° infrared candidate",
+          "path": "models/lmc/candidates/prepared/wise-wide-infrared.webp",
+          "sourcePageUrl": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
+          "credit": "IPAC/NASA; color HiPS by CDS (CNRS/Unistra)"
+        }
+      ]
+    }
+  ]
+}

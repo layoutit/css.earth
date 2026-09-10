@@ -9,6 +9,7 @@ For a body's sources, processing, evidence and known problems, read its
 
 | Topic | Guide |
 | --- | --- |
+| Galaxies, LMC image lenses and extragalactic datasets | [Galaxies and the nearby universe](galaxies/README.md) |
 | Recording sources and evidence | [Provenance contract](provenance/CONTRACT.md) |
 | Decoding images, reducing meshes, mapping UVs and baking atlases | [Image and surface preparation](surface-preparation.md) |
 | Importing Celestia's native illustrative meshes | [Celestia mesh imports](celestia-meshes.md) |

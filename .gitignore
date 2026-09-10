@@ -80,6 +80,8 @@ src/planets/*/source/**/*.bpc
 # Pinned Borrelly orthophoto and coordinate cubes, restored from PDS.
 /src/planets/comet-19p/source/micas/*.cub
 
+# Nebula density textures are rebuilt from the checked-in scalar grids.
+/labs/nebula/models/*/full-density/prepared/slices/
 # Authored models and reviewed source images required before preparation.
 !src/planets/*/source/presentation/context.png
 !src/planets/*/source/material/*.png
@@ -107,6 +109,7 @@ src/planets/*/source/**/*.bpc
 !src/planets/ryugu/source/reference/paper.pdf
 
 # Compact source conversions and the evidence needed to inspect them.
+!src/planets/moon/source/science/diviner-ghrm/*-compact.tif
 !src/planets/*/source/nims/*-composite.tif
 !src/planets/*/source/muse/*/*.tif
 !src/planets/*/source/vims/*-infrared.tif
@@ -137,6 +140,18 @@ src/planets/*/source/**/*.bpc
 # Quaoar source paper is restored from its pinned arXiv URL.
 /src/planets/quaoar/source/reference/quaoar-2026.html
 
+# Replayed by the nebula bake recipe; keep source/settings and expected hashes.
+/labs/nebula/models/*/star-separation/prepared/
+/src/objects/lmc/prepared/*/slices/
+
+# Runtime environment rasters and lab inspection panels replay from pinned inputs.
+/src/objects/*/prepared/**/*.webp
+/src/objects/*/prepared/**/*.png
+/src/objects/*/prepared/**/*.jpg
+/src/objects/*/prepared/**/*.jpeg
+/src/objects/*/prepared/**/*.avif
+/labs/nebula/models/*/candidates/prepared/*.webp
+/labs/nebula/models/*/clouds-observation/source/target.png
 # Reacquirable distant-world paper originals; acquisition recipes pin exact bytes.
 /src/planets/oumuamua/source/reference/*.html
 /src/planets/sedna/source/reference/*.html

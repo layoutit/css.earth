@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-cluster-provenance@1",
+  "publication": {
+    "title": "MCXC-II: Second release of the Meta-Catalogue of X-ray detected Clusters of galaxies",
+    "authors": "Sadibekova, Arnaud, Pratt, Tarrio, Melin",
+    "year": 2024,
+    "bibcode": "2024A&A...688A.187S",
+    "url": "https://www.aanda.org/articles/aa/full_html/2024/08/aa49427-24/aa49427-24.html",
+    "preprint": "https://arxiv.org/abs/2402.01538"
+  },
+  "release": {
+    "catalogue": "J/A+A/688/A187/mcxcii",
+    "date": "2024-11-29",
+    "rows": 2221
+  },
+  "sources": [
+    {
+      "id": "mcxc-ii",
+      "path": "mcxcii.dat.gz",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
+      "sha256": "c6d0b69f1b77ab4b069c319d86f98a75a45ec752baa96ef8542d1d1cfb76fe53",
+      "bytes": 312912,
+      "citation": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187"
+    },
+    {
+      "id": "mcxc-ii-readme",
+      "path": "ReadMe",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe",
+      "sha256": "cb4b36eaedcc6c4016e492e17e0f3a27cc42cdb77bc70a4c3e5e22e0ad2af083",
+      "bytes": 14861,
+      "citation": "CDS MCXC-II byte-column definitions, release 2024-11-29"
+    }
+  ],
+  "derivation": {
+    "position": "CDS RAdeg/DEdeg J2000 coordinates; spectroscopic z integrated in the publication flat Lambda-CDM cosmology to comoving distance. ICRF transport at J2000 catalogue precision, no proper-motion evolution.",
+    "aperture": "Published R500 proper Mpc converted to comoving metres using (1+z). An X-ray-derived overdensity aperture, not a cluster edge. A projected outline is an annotation; no luminous gas or member distribution is supplied.",
+    "camera": "1.5 times comoving R500 is a navigation framing radius, not a measured size.",
+    "limitations": "Comoving positions derived from spectroscopic redshifts using the MCXC-II flat cosmology (H0=70 km/s/Mpc, Omega_m=0.3). No peculiar-velocity correction or redshift-independent local distance is claimed; this matters especially for nearby Virgo and Fornax."
+  },
+  "nameCrossReferences": [
+    {
+      "names": [
+        "Perseus / A426",
+        "Centaurus / A3526"
+      ],
+      "url": "https://academic.oup.com/mnras/article/515/3/3336/6649332"
+    },
+    {
+      "names": [
+        "Hydra / A1060"
+      ],
+      "url": "https://ntrs.nasa.gov/citations/19910004864"
+    },
+    {
+      "names": [
+        "Norma / A3627"
+      ],
+      "url": "https://academic.oup.com/mnras/article/445/4/4335/1754136"
+    }
+  ],
+  "oracle": "The sibling application was used only to discover the seven desired names and compare interaction. Its coordinates, distances, radii, and binary tables are not inputs."
+}

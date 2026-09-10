@@ -1,0 +1,24 @@
+{
+  "schema": "cssearth-nebula-image-placement@1",
+  "subjectId": "lmc-particles",
+  "overlayCatalogue": "labs/nebula/models/lmc-overlays/overlays.json",
+  "imageId": "horalek-widefield",
+  "positionKpc": {
+    "x": -1.35,
+    "y": 3.5,
+    "z": 0
+  },
+  "rotationDegrees": {
+    "x": 0,
+    "y": 0,
+    "z": -136.75
+  },
+  "scale": 2.165,
+  "opacity": 0.95,
+  "tone": {
+    "brightness": 1.1,
+    "gamma": 1,
+    "black": 0,
+    "white": 1
+  }
+}

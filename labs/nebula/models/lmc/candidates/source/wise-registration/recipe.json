@@ -1,0 +1,34 @@
+{
+  "targets": [
+    {
+      "images": [
+        {
+          "id": "wise-wide-infrared",
+          "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
+          "sha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
+          "wcs": {
+            "projection": "TAN",
+            "coordinateFrame": "ICRS",
+            "referenceDimension": [
+              6000,
+              6000
+            ],
+            "referencePixel": [
+              3000,
+              3000
+            ],
+            "referenceValueDeg": [
+              78.76,
+              -69.19
+            ],
+            "scaleDeg": [
+              -0.0040595312971682,
+              0.0040595312971682
+            ],
+            "rotationDeg": 0
+          }
+        }
+      ]
+    }
+  ]
+}

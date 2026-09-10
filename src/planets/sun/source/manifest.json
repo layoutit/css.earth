@@ -1407,9 +1407,9 @@
       "consumers": [
         "world-context"
       ],
-      "expectedBytes": 3313,
-      "expectedSha256": "d605d350dbdbf04da46a778309d1e16b0ccd8e748b0b844360b623f38ecef917",
-      "sha256": "d605d350dbdbf04da46a778309d1e16b0ccd8e748b0b844360b623f38ecef917",
+      "expectedBytes": 3321,
+      "expectedSha256": "8095f6b133b30988cc6908bc5287130a1567b5c6806ad1343ff9b1eb117e0f78",
+      "sha256": "8095f6b133b30988cc6908bc5287130a1567b5c6806ad1343ff9b1eb117e0f78",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored navigation context with physical records and a pinned epoch; its component sources remain cited in the navigation data."

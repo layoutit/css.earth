@@ -1,0 +1,84 @@
+{
+  "schema": "cssearth-volume-lens-promotion@1",
+  "id": "lmc",
+  "defaultLens": "vista-infrared",
+  "framingRadiusUnits": 5,
+  "settingsReceiptSha256": "14038af02a7638ae44d047d184b77a55fd98e1db7064b011993932673791342d",
+  "lenses": [
+    {
+      "imageId": "vista-infrared",
+      "resultId": "932a145d2050e9811bc95a0a8a02672f5fc53eccb408ebff9a6ad748b5db7823",
+      "label": "ESO VISTA",
+      "description": "Near-infrared colors from ESO’s VISTA survey, painted onto the shared simulated LMC density cloud.",
+      "enabledIds": [
+        "all-light"
+      ],
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "density": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 0.95
+      }
+    },
+    {
+      "imageId": "horalek-widefield",
+      "resultId": "e7a94397c65ac9a9aa2f2d644c0f5e47e8fa91d0b220ee24137b329ff55a47ca",
+      "label": "Horálek optical",
+      "description": "Visible-light colors from Petr Horálek’s NOIRLab wide-field image, painted onto the shared simulated LMC density cloud.",
+      "enabledIds": [
+        "all-light"
+      ],
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "density": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 0.95
+      }
+    },
+    {
+      "imageId": "wise-wide-infrared",
+      "resultId": "a44d4e247e4ceaf88826b2653b2eca175c5156cfeefeb87a18b41fd823b4a46e",
+      "label": "NASA WISE",
+      "description": "Infrared colors from NASA/IPAC WISE survey data, painted onto the shared simulated LMC density cloud.",
+      "enabledIds": [
+        "all-light"
+      ],
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "density": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 0.95
+      }
+    }
+  ]
+}

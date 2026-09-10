@@ -1,0 +1,191 @@
+{
+  "schema": "cssearth-tipsy-stars-lab@1",
+  "source": {
+    "path": ".local/nebula-lab/particles/run34681lsmcgabestModelA_HR.00440",
+    "sha256": "a56ff2dc994ed9c993b283351f2226886ce9c3d26967525d26addad3fcb37153",
+    "bytes": 196860032,
+    "header": {
+      "totalCount": 5005000,
+      "gasCount": 0,
+      "darkCount": 2920000,
+      "starCount": 2085000,
+      "endian": "big",
+      "timeRaw": 3.199999999999953,
+      "dimensions": 3,
+      "headerBytes": 32,
+      "layout": "float32",
+      "expectedBytes": 196860032,
+      "starByteOffset": 105120032
+    }
+  },
+  "selection": {
+    "family": "stars",
+    "start": 1860000,
+    "count": 225000,
+    "endExclusive": 2085000,
+    "firstSourceByte": 186960032,
+    "sourceRecordBytes": 44
+  },
+  "units": {
+    "position": "kpc",
+    "massUnitSolarMass": 232000,
+    "time": "uninterpreted-source-value"
+  },
+  "centering": {
+    "method": "median",
+    "offsetKpc": [
+      23.290157318115234,
+      28.379194259643555,
+      -28.512484550476074
+    ],
+    "operation": "output xyz = float32(source xyz - offsetKpc); source axes are not rotated or rescaled"
+  },
+  "sourceStatistics": {
+    "boundsKpc": {
+      "min": [
+        -22.0125789642334,
+        11.531018257141113,
+        -41.210235595703125
+      ],
+      "max": [
+        31.28958511352539,
+        39.39974594116211,
+        12.908916473388672
+      ]
+    },
+    "quantilesKpc": [
+      {
+        "probability": 0.01,
+        "position": [
+          15.56681923866272,
+          19.244597263336182,
+          -34.84388065338135
+        ]
+      },
+      {
+        "probability": 0.05,
+        "position": [
+          17.298271465301514,
+          21.718958568572997,
+          -32.33536834716797
+        ]
+      },
+      {
+        "probability": 0.5,
+        "position": [
+          23.290157318115234,
+          28.379194259643555,
+          -28.512484550476074
+        ]
+      },
+      {
+        "probability": 0.95,
+        "position": [
+          28.01415557861328,
+          32.44123096466064,
+          -21.561785793304445
+        ]
+      },
+      {
+        "probability": 0.99,
+        "position": [
+          28.900616073608397,
+          33.35196891784668,
+          -18.704591979980467
+        ]
+      }
+    ]
+  },
+  "outputStatistics": {
+    "boundsKpc": {
+      "min": [
+        -45.302734375,
+        -16.848175048828125,
+        -12.69775104522705
+      ],
+      "max": [
+        7.999427795410156,
+        11.020551681518555,
+        41.42140197753906
+      ]
+    },
+    "quantilesKpc": [
+      {
+        "probability": 0.01,
+        "position": [
+          -7.723338079452515,
+          -9.134596996307373,
+          -6.331396102905273
+        ]
+      },
+      {
+        "probability": 0.05,
+        "position": [
+          -5.991885852813721,
+          -6.6602356910705565,
+          -3.8228837966918947
+        ]
+      },
+      {
+        "probability": 0.5,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "probability": 0.95,
+        "position": [
+          4.723998260498046,
+          4.062036705017086,
+          6.95069875717163
+        ]
+      },
+      {
+        "probability": 0.99,
+        "position": [
+          5.610458755493164,
+          4.972774658203127,
+          9.807892570495607
+        ]
+      }
+    ]
+  },
+  "mass": {
+    "sumSourceUnits": 4575.945809483528,
+    "sumSolarMass": 1061619427.8001785,
+    "minSourceUnits": 0.020337536931037903,
+    "maxSourceUnits": 0.020337536931037903
+  },
+  "output": {
+    "path": ".local/nebula-lab/particles/smc-particles-centered.f32",
+    "sha256": "2a13f21bddc8d082ef6e8cb72556db76f5287c94808f860abced752b5c7acb24",
+    "bytes": 3600000,
+    "count": 225000,
+    "layout": "float32-le-xyz-mass",
+    "recordBytes": 16,
+    "maximumPositionRoundingErrorKpc": [
+      0.0000019073486328125,
+      9.5367431640625e-7,
+      0.0000019073486328125
+    ]
+  },
+  "interpretation": "Simulation star-family particles, not observed individual stars. Source masses are unchanged; no ages, populations, luminosities or dust are inferred.",
+  "displayRotation": [
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1
+  ],
+  "rotatedOutput": {
+    "path": ".local/nebula-lab/particles/smc-particles.f32",
+    "sha256": "2a13f21bddc8d082ef6e8cb72556db76f5287c94808f860abced752b5c7acb24",
+    "bytes": 3600000
+  }
+}
