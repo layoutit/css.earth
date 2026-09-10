@@ -1,3 +1,4 @@
+import {refreshSourceRecord} from '../../../source-authoring-templates.mts';
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
@@ -14,7 +15,7 @@ for (const { id } of bodies) {
     for (const entry of await readdir(dir, { withFileTypes: true })) {
       const path = prefix + entry.name;
       if (entry.isDirectory()) await walk(resolve(dir, entry.name), path + '/');
-      else if (!exclude.has(path)) documents.push({ ...manifest.documents.find(entry => entry.path === path), path, ...pin(await readFile(resolve(dir, entry.name))), purpose: 'Source evidence or authored preparation input.' });
+      else if (!exclude.has(path)) documents.push(refreshSourceRecord(manifest.documents,{path, ...pin(await readFile(resolve(dir, entry.name))), purpose: 'Source evidence or authored preparation input.'}));
     }
   }
   await walk(s); manifest.documents = documents.sort((a, b) => a.path.localeCompare(b.path)); await write(resolve(s, 'manifest.json'), manifest);

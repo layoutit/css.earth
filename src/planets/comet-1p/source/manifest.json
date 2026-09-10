@@ -102,7 +102,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-comet-1p-giotto-source-1",
+            "catalogueId": "giotto-halley-hmc-best",
             "role": "material",
             "evidence": "src/planets/comet-1p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
@@ -302,7 +302,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-comet-1p-giotto-projection",
+            "catalogueId": "giotto-halley-hmc-best",
             "role": "material",
             "evidence": "src/planets/comet-1p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
           }
@@ -591,7 +591,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-comet-1p-encounter-projection",
+            "catalogueId": "giotto-halley-hmc-best",
             "role": "material",
             "evidence": "src/planets/comet-1p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
           }

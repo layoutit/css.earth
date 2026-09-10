@@ -17,13 +17,12 @@ Node heap, `UV_THREADPOOL_SIZE=1` and `VIPS_CONCURRENCY=1`.
 2. For ordinary regeneration, run the existing preparer directly:
    `node tools/objects/dist/prepare-authored.js <id> --write`.
    The checked-in radius table and source recipes are sufficient.
-3. To repeat the initial numerical extraction instead, run
+3. To update the selected numerical models, run
    `python3 tools/objects/source-authoring/distant-worlds/author.py`.
-   It uses the retained inputs and original template revision, and **resets
-   the selected descriptors and source recipes**. Run `register.py` with the same
-   input file to restore their catalogue entries, then `pnpm prepare:catalog` and
-   `node tools/objects/source-authoring/distant-worlds/finalize-sources.mts`
-   and preparation of each body. It leaves maintained READMEs and credits alone.
+   It updates the existing packages from the input table, keeping current source
+   bindings and other package metadata. Run
+   `node tools/objects/source-authoring/distant-worlds/finalize-sources.mts`,
+   then prepare each changed body.
 4. Prepare changed marker sources with `pnpm prepare:navigation <id>`.
    Prepare the selected body to bind its stable marker URL.
 5. Install published runtime assets with `pnpm setup:assets --object=<id>`.
@@ -34,7 +33,9 @@ pins; omitting that flag also prepares title and context source images.
 
 `author.py` and `register.py` accept an input JSON path as their first argument;
 `finalize-sources.mts` accepts `--inputs=<path>`. This selects the exact bodies
-to rewrite. The six later models use [outer-worlds/inputs.json](../outer-worlds/inputs.json).
+to rewrite. Author the current source manifest and its canonical bindings before
+extracting a new body; the extractor does not infer source identities.
+The six later models use [outer-worlds/inputs.json](../outer-worlds/inputs.json).
 An input file may set `referenceDirectory` for its downloaded originals.
 After new astronomy records are built, run `node tools/prepare-solar-geometry.mts`
 before preparing their surfaces. The shared transport refresh helper is only
@@ -46,20 +47,9 @@ triangles to 480 native PolyCSS `u` raster triangles. The normal grid marks
 unmapped terrain. Source uncertainties and assumed dimensions belong to each
 body's source account, independently of this display simplification.
 
-## Qualification tools and prior evidence
+## Checks
 
 [Validation helpers](../../../audits/distant-worlds/README.md) check package
 closure, fresh source and runtime installation, radial surface deviation and
-actual browser behavior. New reports go into ignored `output/`.
-
-The original preparation, browser and source reports remain at
-[revision 5ccf1eafa](https://github.com/layoutit/cssEarth/tree/5ccf1eafa396d7cbe91e62b28fe81db8c0626a35/docs/distant-worlds).
-Their recorded paths, timestamps, bytes and failures are unchanged. The body
-READMEs link the individual reports and explain their applicability. Moving
-the helper files and consolidating documentation does not requalify rendering;
-reuse rests on unchanged source, prepared data and shared runtime dependencies.
-
-Use `pnpm prepare:navigation <id> [<id> ...]` for the selected bodies. Their
-images have stable filenames; adding them does not rewrite existing marker
-images or change sprite coordinates. The original atlas experiment remains in
-[its historical source](https://github.com/layoutit/cssEarth/blob/16774548b/tools/objects/source-authoring/navigation-additions.mts).
+browser behavior. New reports go into ignored `output/`; the body README links
+the evidence for its current sources and interpretation.

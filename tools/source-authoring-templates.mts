@@ -3,6 +3,13 @@ import {shape,text,number,array,optional,nullable,boolean} from './objects/terre
 import {parseSourceManifest} from './objects/dist/operations.js';
 import {parseSolidPreparationSource} from './objects/terrestrial-layers/profile-source.mts';
 
+/** Refresh bytes without discarding reviewed identity, credits or capture evidence. */
+export function refreshSourceRecord<T extends {path: string}>(records: readonly unknown[], update: T) {
+  const previous = records.map(record => requireRecord(record)).find(record => record.path === update.path);
+  return {...previous, ...update,
+    ...(typeof previous?.purpose === 'string' ? {purpose: previous.purpose} : {})};
+}
+
 export function parseAuthoringManifest(value:unknown) {
   const manifest=parseSourceManifest(value);
   return {...requireRecord(value),...manifest,inputs:manifest.inputs.map(entry=>Object.assign({},requireRecord(entry),entry)),

@@ -12,7 +12,7 @@
 
 - The two training quadrants and two disjoint held-out quadrants are recorded in [source/validation/galileo-color-registration.json](source/validation/galileo-color-registration.json). An independent review sampled the original 15,138 × 7,569 reference at its exact GeoTIFF coordinates, without adjusting the fit: upper-right and lower-left unblurred correlations were 0.713 and 0.573.
 
-- Focused checks are defined in the [unit tests](../../../tests/objects/unit/callisto) and [browser profile](../../../tests/objects/browser/callisto/browser-profile.mjs).
+- Focused checks are defined in the [unit tests](../../../tests/objects/unit/callisto) and [browser profile](../../../tests/objects/browser/callisto/browser-profile.mts).
 
 ## Known problems
 

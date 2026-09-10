@@ -1,3 +1,4 @@
+import {refreshSourceRecord} from '../../../source-authoring-templates.mts';
 import assert from 'node:assert/strict';
 import { parseAuthoringSolid, parseAuthoringManifest, parseAuthoringDescriptor } from '../../../source-authoring-templates.mts';
 import { shape, text, number, array } from '../../terrestrial-layers/source-records.mts';
@@ -23,10 +24,10 @@ for(const c of bodies){
  const nav=parseNavigation(await read(resolve(s,'preparation/navigation.json'))),recipe=nav.source.recipe;
  const png=await renderRadialSnapshot({...recipe,faces:radial.faces,map:resolve(scratch,surfaces[0].map.url.split('/').at(-1)!)});
  await writeFile(resolve(s,'presentation/context.png'),png);Object.assign(nav.source,pin(png));await write(resolve(s,'preparation/navigation.json'),nav);
- const manifest=parseAuthoringManifest(await read(resolve(s,'manifest.json')));manifest.generatedIntermediates=[{...nav.source,id:'prepared-radial-context'}];
+ const manifest=parseAuthoringManifest(await read(resolve(s,'manifest.json')));manifest.generatedIntermediates=[refreshSourceRecord(manifest.generatedIntermediates,{...nav.source,id:'prepared-radial-context'})];
  const exclude=new Set(['manifest.json',...manifest.inputs.map(x=>x.path),...manifest.generatedIntermediates.map(x=>x.path)]);
  const documents: {path:string;expectedBytes:number;expectedSha256:string;purpose:string}[]=[];
- async function walk(dir: string,pre=''){for(const e of await readdir(dir,{withFileTypes:true})){const rel=pre+e.name;if(e.isDirectory())await walk(resolve(dir,e.name),rel+'/');else if(!exclude.has(rel))documents.push({...manifest.documents.find(entry=>entry.path===rel),path:rel,...pin(await readFile(resolve(dir,e.name))),purpose:'Source evidence or authored preparation input.'});}}
+ async function walk(dir: string,pre=''){for(const e of await readdir(dir,{withFileTypes:true})){const rel=pre+e.name;if(e.isDirectory())await walk(resolve(dir,e.name),rel+'/');else if(!exclude.has(rel))documents.push(refreshSourceRecord(manifest.documents,{path:rel,...pin(await readFile(resolve(dir,e.name))),purpose:'Source evidence or authored preparation input.'}));}}
  await walk(s);manifest.documents=documents.sort((a,b)=>a.path.localeCompare(b.path));await write(resolve(s,'manifest.json'),manifest);
  const descriptor=parseAuthoringDescriptor(await read(resolve(p,'object.json')));for(const ref of descriptor.properties.recipe.sources)ref.sha256=pin(await readFile(resolve(p,ref.path))).expectedSha256;await write(resolve(p,'object.json'),descriptor);
  console.log(c.id,radial.faces.length,pin(png));

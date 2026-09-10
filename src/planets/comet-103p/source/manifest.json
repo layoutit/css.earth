@@ -21,7 +21,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-comet-103p-pds-shape",
+            "catalogueId": "pds-hartley2-shape-2012",
             "role": "material",
             "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
           }
@@ -119,7 +119,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-comet-103p-constraint-surface",
+            "catalogueId": "pds-hartley2-shape-2012",
             "role": "material",
             "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
           }

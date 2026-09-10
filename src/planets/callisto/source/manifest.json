@@ -146,7 +146,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-callisto-jupiter-hubble-parent",
+            "catalogueId": "hubble-jupiter-2024-01-05",
             "role": "material",
             "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
@@ -192,7 +192,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-callisto-galileo-pia03456-original",
+            "catalogueId": "galileo-callisto-pia03456",
             "role": "material",
             "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
           }
@@ -254,7 +254,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-callisto-galileo-pia03456-registered-color",
+            "catalogueId": "galileo-callisto-pia03456",
             "role": "material",
             "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
           }

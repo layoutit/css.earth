@@ -13,7 +13,7 @@
 
 The retained notes point to [unit checks](../../../tests/objects/unit/pluto) and [browser checks](../../../tests/objects/browser/pluto), and mentions separate capture/Saturn reports. They do not identify a dated report here; test definitions are not passing-run evidence.
 
-[Source test definitions](../../../tests/objects/unit/pluto/source.test.mjs).
+[Source test definitions](../../../tests/objects/unit/pluto/source.test.mts).
 
 ## Known problems
 

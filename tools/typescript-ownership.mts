@@ -85,8 +85,9 @@ function loadManifest(root: string): Manifest {
 // scripts still need an exact legacyAuthored entry until they migrate.
 function boundaryRoleFor(path: string): BoundaryRole | undefined {
   if (/\.(?:test|spec)\.[cm]?[jt]sx?$/u.test(path) || path.startsWith('site/test/')
+    || /^src\/(?:[^/]+\/)*test\//u.test(path)
     || path.startsWith('tests/') || /(?:^|\/)(?:__fixtures__|fixtures)(?:\/|$)/u.test(path)) return 'test';
-  if (/(?:^|\/)(?:capture|captures|evidence)(?:[./_-]|$)/u.test(path)) return 'evidence';
+  if (path.startsWith('tools/audits/') || /(?:^|\/)(?:capture|captures|evidence)(?:[./_-]|$)/u.test(path)) return 'evidence';
   return undefined;
 }
 

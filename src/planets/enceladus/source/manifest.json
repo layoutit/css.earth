@@ -191,7 +191,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-enceladus-jpl-spc-enceladus-v2-dsk",
+            "catalogueId": "cassini-enceladus-spc-v2",
             "role": "material",
             "evidence": "src/planets/enceladus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
           }
@@ -221,7 +221,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-enceladus-jpl-spc-enceladus-v2-q256",
+            "catalogueId": "cassini-enceladus-spc-v2",
             "role": "material",
             "evidence": "src/planets/enceladus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
           }

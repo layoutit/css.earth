@@ -23,7 +23,7 @@ export const explorationCompilerClosure = [
   'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'site/objects.mts', 'site/object-schema.mts',
   'site/object-catalog.mts', 'site/prepared-object-catalog.mts', 'tools/prepare-catalog.mts',
   'site/source/spacecraft/catalog.json', 'site/source/spacecraft/render-library.json', 'site/source/spacecraft/emblem-library.json',
-  'site/source/agency-logos.json', 'src/sources/catalog.json', 'tests/fixtures/sources/migration.json',
+  'site/source/agency-logos.json', 'src/sources/catalog.json',
   'src/platform/source-catalog.mts', 'src/platform/source-usage.mts', 'src/platform/source-manifest.mts',
   'src/platform/prepared-sources.mts', 'tools/source-catalogue-inputs.mts',
   'src/objects/milky-way/source/sky/provenance.json', 'src/objects/milky-way/source/provenance.json',
@@ -42,7 +42,6 @@ export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '.
   for (const path of explorationCompilerClosure) await input(path);
   const agencies = parseAgencies(await json('site/source/agency-logos.json'));
   const sourceCatalog = parseSourceCatalog(await json('src/sources/catalog.json')), sources = sourceResolver(sourceCatalog);
-  const migration = await json('tests/fixtures/sources/migration.json');
   const catalog = parseExplorationCatalog(await json('site/source/spacecraft/catalog.json'), agencies, sources);
   const metadata: SourceUse[] = metadataCitations(catalog, 'site/source/spacecraft/catalog.json', sources);
   const inventory: SourceInventoryEntry[] = [];
@@ -100,7 +99,7 @@ export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '.
     if (document) closure[path] = digest(JSON.stringify(document, null, 2) + '\n');
     else document = validateObjectProvenance(await json(path), object.id);
     if (document.manifest.sha256 !== closure[`${base}/source/manifest.json`]) throw new Error(`Stale provenance for ${object.id}; run pnpm prepare:provenance.`);
-    inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(document.sources.map(source => source.path)), migration));
+    inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(document.sources.map(source => source.path))));
     objects.push({ id: object.id, name: object.name, route: object.route, controls: lenses, provenance: document });
   }
   const sourcePayload = {schema:'cssearth-prepared-sources@1',catalog:sourceCatalog,catalogSha256:closure['src/sources/catalog.json'],

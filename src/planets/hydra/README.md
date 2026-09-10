@@ -10,7 +10,7 @@ The shared STL loader retains the released topology, then `source-meshoptimizer`
 
 Browser interaction, DPR checks and visual acceptance are separate qualification steps, recorded separately from these source checks.
 
-[Source test definitions](../../../tests/objects/unit/hydra/source.test.mjs).
+[Source test definitions](../../../tests/objects/unit/hydra/source.test.mts).
 
 ## Known problems
 
