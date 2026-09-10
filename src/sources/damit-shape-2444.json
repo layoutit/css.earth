@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-2444",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 2444 · Rhodope",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "2444"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/2444/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/rhodope/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "110cf9142290d271abe71c685d9685bdd6049f99588e64ccc756c9b0a7a9a602",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

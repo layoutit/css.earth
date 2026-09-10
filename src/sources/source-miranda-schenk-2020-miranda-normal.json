@@ -1,0 +1,24 @@
+{
+  "id": "source-miranda-schenk-2020-miranda-normal",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Monochrome",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://repository.hou.usra.edu/bitstreams/bc39b4c9-3f85-403b-a2d6-1f0d7206eaf6/download",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/miranda/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "12f669273db621b127057149a94da86e8ff6646346c50e565aed6cff5de03f3b",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

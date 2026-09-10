@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-314",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 314 · Sappho",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "314"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/314/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/sappho/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "e110323678c26b71a9d0982c451828f73a6f9118cf1d05e4a23b020e71c8f605",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "pds-resource-holdings-volumes-go-0xxx-go-0023-e26-sml-sats-c0532888400r",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PDS archive product · C0532888400R",
+  "identifiers": [
+    {
+      "type": "PDS archive resource path",
+      "value": "/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888400R"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888400R.LBL",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/thebe/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "67a2c82ac843e7ac56ac0536350c96c6eedee7b83423e8b6487cb4dd8a517d54",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

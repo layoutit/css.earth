@@ -1058,79 +1058,67 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5596,
-      "expectedSha256": "e3377cdf9c30552bbe7e3e8c4d5be113ed8c5a965f4c84799b7b3d771d60cecc",
-      "purpose": "Authored source interpretation or preparation metadata.",
+      "expectedBytes": 5934,
+      "expectedSha256": "d76809cad5c052c5c713760a2684134b1d9e7f8ca6efc79c50abd1073ab13f67",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 6846,
-      "expectedSha256": "4f77972d63f668250c5ebd36def77b6a8f161a86bb13fa85c6b2d2e50b654862",
-      "purpose": "Authored source interpretation or preparation metadata."
+      "expectedSha256": "4f77972d63f668250c5ebd36def77b6a8f161a86bb13fa85c6b2d2e50b654862"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1528,
-      "expectedSha256": "48f4a7e8b2c48d75ab44cf74189c27b68c854e5b4176841f0f3223edce12de0b",
-      "purpose": "Authored source interpretation or preparation metadata."
+      "expectedSha256": "48f4a7e8b2c48d75ab44cf74189c27b68c854e5b4176841f0f3223edce12de0b"
     },
     {
       "path": "preparation/rotation.json",
       "expectedBytes": 622,
-      "expectedSha256": "d5b25770a7642091ebaebc55aeefd9747b08048b1eb1256687143bdc072b3a9b",
-      "purpose": "Authored source interpretation or preparation metadata."
+      "expectedSha256": "d5b25770a7642091ebaebc55aeefd9747b08048b1eb1256687143bdc072b3a9b"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 9850,
-      "expectedSha256": "c3c3a8ed11ac593a3e760e5a26ad3bbc5de055ed13af7b10dcf1329554c14ea2",
-      "purpose": "Authored source interpretation or preparation metadata."
+      "expectedSha256": "c3c3a8ed11ac593a3e760e5a26ad3bbc5de055ed13af7b10dcf1329554c14ea2"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Authored source interpretation or preparation metadata."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 4858,
-      "expectedSha256": "d4f8212a24a5d58a632d7285d1cf4da2d4501631049c40786401e18bd987672c",
-      "purpose": "Authored source interpretation or preparation metadata."
+      "expectedSha256": "d4f8212a24a5d58a632d7285d1cf4da2d4501631049c40786401e18bd987672c"
     },
     {
       "path": "shape/pandora_30k_plt.xml",
       "expectedBytes": 12137,
-      "expectedSha256": "3e5ee483c232e6379580ab5dc887a9664ac4ad8392d829d49969b401175eac75",
-      "purpose": "Authored source interpretation or preparation metadata."
+      "expectedSha256": "3e5ee483c232e6379580ab5dc887a9664ac4ad8392d829d49969b401175eac75"
     },
     {
       "path": "shape/pandora_document.pdf",
       "expectedBytes": 71359,
-      "expectedSha256": "68555dc6825b8f94106a790da08752d112f51eb4175d42ae8500a16a0ff0fb45",
-      "purpose": "Authored source interpretation or preparation metadata."
+      "expectedSha256": "68555dc6825b8f94106a790da08752d112f51eb4175d42ae8500a16a0ff0fb45"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Authored source interpretation or preparation metadata."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Authored source interpretation or preparation metadata."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 850,
-      "expectedSha256": "40921fc18de88596360c2ee40c0e61f7da9ecb1b10d16ba92bb8f9843c44271d",
-      "purpose": "Authored source interpretation or preparation metadata."
+      "expectedSha256": "40921fc18de88596360c2ee40c0e61f7da9ecb1b10d16ba92bb8f9843c44271d"
     },
     {
       "path": "editorial/factsheet-review.json",

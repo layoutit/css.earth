@@ -1,0 +1,24 @@
+{
+  "id": "source-asteroid-1998-wt24-asteroid-1998-wt24-research-wt24",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Asteroid 1998 Wt24 · asteroid 1998 wt24 research wt24",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://echo.jpl.nasa.gov/asteroids/1998WT24/busch.etal.2008.1998wt24.pdf",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/asteroid-1998-wt24/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "f9d0c65233ef6d3936493218e148572677823f625d2cf5f17c95c5a19d28c0aa",
+      "locator": "/inputs/3"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

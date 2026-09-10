@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-6068",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 6068 · Tulipa",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "6068"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/6068/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/tulipa/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "d846fde9065cab3d03ba21b8a979aef8abe34681bb47c4e0d5f684d88f41aa7f",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

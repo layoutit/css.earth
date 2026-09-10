@@ -1,0 +1,24 @@
+{
+  "id": "source-venus-nasa-venus-navigation-disc",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Venus · nasa venus navigation disc",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://science.nasa.gov/wp-content/uploads/2023/05/688-venus-1200-jpg.webp",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/venus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "380fd3c49e698d4028d1dc6472507d98b037445472b1815c978f57ed7e225d91",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-91898",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 91898 · Hopi",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "91898"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/91898/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/hopi/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "d8446fd2a9d962151193d35a505e75104e5794011448ab63c5b84b839b8504ec",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

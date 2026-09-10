@@ -1,0 +1,31 @@
+{
+  "id": "openspace-neptune-kernels",
+  "title": "OpenSpace Neptune configuration: kernels095.asset",
+  "kind": "software",
+  "identityLevel": "release",
+  "identifiers": [
+    {
+      "type": "Git resource",
+      "value": "OpenSpace/OpenSpace@56e29b54b8592084ff1fef47c2e08de0b22ce516:data/assets/scene/solarsystem/planets/neptune/kernels095.asset"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/neptune/kernels095.asset",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/neptune/source/manifest.json",
+      "revision": "c601cd5a54414fe6e500aba9b3c95c48b8870a30",
+      "sha256": "19f555cf25c2bf6299d0e48e968706b59851b4fd1cbb4e96ae5b27733cfa4be8",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "OpenSpace Team",
+  "version": "56e29b54b8592084ff1fef47c2e08de0b22ce516"
+}

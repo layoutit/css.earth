@@ -1,0 +1,24 @@
+{
+  "id": "source-iapetus-iapetus-cassini-original-v1568133146-2-qub",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Iapetus · iapetus cassini original v1568133146_2 qub",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://vims.univ-nantes.fr/cube/1568133146_2.qub",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/iapetus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "a1d9372621940a56439908fd51f5a33db40d6ce2621e6dbdd95caa34e23b3da1",
+      "locator": "/inputs/9"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

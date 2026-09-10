@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-1222",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 1222 · Libussa",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "1222"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1222/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/libussa/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "ef9139ac2a8c2823b753d2aede539be0e6e9ef07ee2a84bf91ca2b3bce0ab142",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

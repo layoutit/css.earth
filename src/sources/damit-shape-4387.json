@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-4387",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 4387 · Vera",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "4387"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/4387/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/vera/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "27edfcae331d12640a9a7d4eaab3687811aa04605f246c39563edd68887dd997",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

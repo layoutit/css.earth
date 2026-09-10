@@ -37,7 +37,8 @@ export function parseSourceManifest(value:unknown,id?:string):SourceManifest {
     const inputId=String(entry.id);if(ids.has(inputId))throw new TypeError(`Duplicate source id ${inputId}.`);ids.add(inputId);
     if(!Array.isArray(entry.consumers)||!entry.consumers.length||entry.consumers.some(item=>!nonempty(item))||new Set(entry.consumers).size!==entry.consumers.length)throw new TypeError(`Source ${entry.path} has invalid consumers.`);
     if(entry.licenseEvidence!==undefined&&(!Array.isArray(entry.licenseEvidence)||!entry.licenseEvidence.length||entry.licenseEvidence.some(item=>!nonempty(item))||new Set(entry.licenseEvidence).size!==entry.licenseEvidence.length))throw new TypeError(`Source ${entry.path} has invalid license evidence.`);
-   }else if(!nonempty(entry[collection==='documents'?'purpose':'generator']))throw new TypeError(`Source ${entry.path} lacks its provenance purpose.`);
+   }else if(collection==='generatedIntermediates'&&!nonempty(entry.generator))throw new TypeError(`Source ${entry.path} lacks its generator.`);
+   else if(collection==='documents'&&entry.purpose!==undefined&&(typeof entry.purpose!=='string'||!entry.purpose.trim()))throw new TypeError(`Source ${entry.path} has an empty purpose.`);
   }
  }
  return manifest as unknown as SourceManifest;

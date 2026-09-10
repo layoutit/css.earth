@@ -1,0 +1,24 @@
+{
+  "id": "source-juno-juno-shape",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Juno · juno shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/3Dshape/3_Juno_mpcd.obj",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/juno/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "96563ec96ac51a4b61c7a4dac4bb3dea3eeb384bacaad3220a500cb1619b884d",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

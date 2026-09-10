@@ -1,0 +1,25 @@
+{
+  "id": "nasa-neptune-moons",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "NASA Science · Neptune’s moons",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://science.nasa.gov/neptune/moons/",
+      "label": "NASA Science · Neptune’s moons"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/neptune/source/content/object.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "307ae52c4a437cb9b0704ff349613c867439b4382bd431fc77c7c759621bc122",
+      "locator": "/panel/facts/5/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "NASA Science"
+}

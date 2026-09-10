@@ -1,0 +1,29 @@
+{
+  "id": "arxiv-2501-09739",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · arXiv 2501.09739",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2501.09739"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2501.09739",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/huya/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "dd853e46a84c93b54ec9b4ac2d8bf5274171156254f14f0181722bf83a1a0d74",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

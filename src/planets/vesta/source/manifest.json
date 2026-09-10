@@ -217,41 +217,35 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Authored preparation or presentation data.",
-      "expectedBytes": 9591,
-      "expectedSha256": "bf7a7271fd02c86f841b3dae2c2bb9d3c967c863633444a119d17112e2261bde",
+      "expectedBytes": 9706,
+      "expectedSha256": "5a9e4adc9a3b4fa03ae7b818534502103c6013b4df7dda36b01cb37c711b27df",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "preparation/acquisition.json",
-      "purpose": "Authored preparation or presentation data.",
       "expectedBytes": 1016,
       "expectedSha256": "2404f692eb9c5c31eb34186683fca69b26b0a23ccba6b144dc811b7816173f99"
     },
     {
       "path": "preparation/navigation.json",
-      "purpose": "Authored preparation or presentation data.",
       "expectedBytes": 1232,
       "expectedSha256": "258d1305e2ff0c1f5545f83bd00dde95abf6a22b32a5d760dd2a19cd0a1053ca"
     },
     {
       "path": "preparation/rotation.json",
-      "purpose": "Authored preparation or presentation data.",
       "expectedBytes": 526,
       "expectedSha256": "3edc864c37944c1464cf5435ed9a637f321ce9d5f240913c42d6c614a3aac804"
     },
     {
       "path": "preparation/terrestrial.json",
-      "purpose": "Authored preparation or presentation data.",
       "expectedBytes": 3818,
       "expectedSha256": "64d768d3e600631fe01c6b32e517ce1efc719fad24c9b283cbc582f70339dca9"
     },
     {
       "path": "presentation/title-mark.json",
-      "purpose": "Authored preparation or presentation data.",
       "expectedBytes": 3446,
       "expectedSha256": "582eabadf35481b58ea0de864f551358690c7f97b8801a30eacaf37eee2c89aa"
     },

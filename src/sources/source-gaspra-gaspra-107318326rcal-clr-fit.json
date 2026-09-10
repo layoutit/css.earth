@@ -1,0 +1,24 @@
+{
+  "id": "source-gaspra-gaspra-107318326rcal-clr-fit",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Calibrated image",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/data/fits/107318326rcal_clr.fit",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/gaspra/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "8e87d572c855abd6cb708fe6dda3a1a8d016b80b53ff3ac0ebea611fc78be5c8",
+      "locator": "/inputs/3"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

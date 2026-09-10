@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-63475",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 63475 · Ino",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "63475"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/63475/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/ino/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "9ef18ffe637096688d4c6ebf62e1908bf6fd9a2cb42e2bcfb549dd40f063727c",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

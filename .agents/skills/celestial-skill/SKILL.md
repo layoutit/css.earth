@@ -98,6 +98,10 @@ Follow [Sources authoring](../../../docs/sources-catalogue.md#add-or-update-a-so
 when adding or changing inputs: reuse the published identity, preserve each local
 file and bind its actual role. Refreshing sources must preserve existing bindings.
 Run `pnpm prepare:sources` after source or attribution changes.
+For factsheets, put citations on the individual facts using the existing
+[factsheet fields](../../../docs/factsheets.md#editing-and-reproduction).
+Preserve each fact's evidence when editing content. A general page credit does
+not supply a citation for every number on that page.
 
 Record the following for selected inputs in the existing source record and
 manifest:
@@ -209,7 +213,10 @@ not an automatic stop for approval.
 
 Use [qualification](references/qualification.md) for the relevant checks,
 source restoration, fresh runtime installation and measured delivery size.
-Reuse passing evidence until changes or unresolved failures invalidate it.
+Choose local checks from its change table and the contract's
+[PR check rules](../../../docs/provenance/CONTRACT.md#pull-requests). Do not launch
+all-body preparation or test suites by default for one body. Reuse passing evidence
+until relevant changes or unresolved failures invalidate it.
 Keep project-required checks; do not add a new dashboard, gate framework,
 Burnlist or exhaustive test matrix to implement an ordinary body.
 

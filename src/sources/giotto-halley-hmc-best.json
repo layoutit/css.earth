@@ -1,0 +1,41 @@
+{
+  "id": "giotto-halley-hmc-best",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Giotto Halley Multicolour Camera image: hmc_best.gif",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/comet-1p/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "3f832fd5452814d8b696a257fe24c5826132646e1afc8ffedd021d8efb35ab9e",
+      "locator": "/inputs/3"
+    },
+    {
+      "path": "src/planets/comet-1p/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "3f832fd5452814d8b696a257fe24c5826132646e1afc8ffedd021d8efb35ab9e",
+      "locator": "/inputs/10"
+    },
+    {
+      "path": "src/planets/comet-1p/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "3f832fd5452814d8b696a257fe24c5826132646e1afc8ffedd021d8efb35ab9e",
+      "locator": "/inputs/20"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

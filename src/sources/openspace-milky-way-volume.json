@@ -1,0 +1,24 @@
+{
+  "id": "openspace-milky-way-volume",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "OpenSpace Milky Way volume",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://docs.openspaceproject.com/latest/content/milky-way/galaxy/milky-way-volume/index.html",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/milky-way/source/provenance.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "29c9be057b5070f0011a66216300d6bdee210aef955c034e9022e1f038093a2a",
+      "locator": "/title"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

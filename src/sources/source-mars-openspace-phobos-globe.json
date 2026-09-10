@@ -1,0 +1,24 @@
+{
+  "id": "source-mars-openspace-phobos-globe",
+  "kind": "software",
+  "identityLevel": "work",
+  "title": "Mars · openspace phobos globe",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/moons/phobos/globe.asset",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/mars/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "c8ac2a146613a1322fa1e2205fc30c2b881b88e5ef5bed82903e8e1a0acb8745",
+      "locator": "/inputs/5"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

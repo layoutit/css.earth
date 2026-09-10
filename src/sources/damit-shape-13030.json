@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-13030",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 13030 · Ilioneus",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "13030"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/13030/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/ilioneus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "cefbbed0b286f4b0a27f6a523131a93dc87913709d79f86486061ab19133ebb8",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

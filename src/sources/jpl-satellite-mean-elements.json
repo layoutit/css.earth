@@ -1,0 +1,24 @@
+{
+  "id": "jpl-satellite-mean-elements",
+  "title": "Planetary Satellite Mean Elements",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "checkedOn": "2026-09-10",
+      "locator": "Satellite mean orbital elements"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "NASA/JPL Solar System Dynamics"
+}

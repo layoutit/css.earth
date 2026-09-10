@@ -1,0 +1,29 @@
+{
+  "id": "arxiv-2005-08881",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · arXiv 2005.08881",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2005.08881"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2005.08881",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/asteroid-2002-tc302/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "4fa6ef3f5c7056d751d5e0cc92da373e3a7005e6599276c1518ee5d817a50f4b",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

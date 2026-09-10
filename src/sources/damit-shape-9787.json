@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-9787",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 9787 · Hekate",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "9787"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/9787/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/hekate/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "af2aff67e49b487a4e9d63a4a118cc1eeab6a512be0fe538e5f26778f3dd196d",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

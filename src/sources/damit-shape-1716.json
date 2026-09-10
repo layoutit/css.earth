@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-1716",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 1716 · Euterpe",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "1716"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1716/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/euterpe/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "f00d898cb2c7c21d27ddb2d16c3d40736e773549d85746a0300a6f19cd0e7c93",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

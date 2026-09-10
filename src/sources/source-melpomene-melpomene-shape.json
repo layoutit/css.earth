@@ -1,0 +1,24 @@
+{
+  "id": "source-melpomene-melpomene-shape",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Melpomene · melpomene shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/3Dshape/18_Melpomene_mpcd.obj",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/melpomene/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "20e06a71028d0a3603f783cc7ca00e97d95fcb8d6f2f809cef4075686732118b",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

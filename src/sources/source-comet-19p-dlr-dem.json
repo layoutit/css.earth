@@ -1,0 +1,24 @@
+{
+  "id": "source-comet-19p-dlr-dem",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Comet 19P · dlr dem",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/data/dlrdem.tab",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/comet-19p/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "3d15f0e5a1a2925b0e6ead5fcc57f288f5bd5e483d26b18106a9d745e684e14d",
+      "locator": "/inputs/3"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

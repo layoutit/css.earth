@@ -1,0 +1,29 @@
+{
+  "id": "doi-10-1038-s41586-024-07378-0",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · DOI 10.1038/s41586-024-07378-0",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1038/s41586-024-07378-0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/s41586-024-07378-0",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/selam/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "9b95b8d823e19e8a4bfefd0e6b4e76c9b90e490fb356fadf6665c6e1cd54b4e5",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

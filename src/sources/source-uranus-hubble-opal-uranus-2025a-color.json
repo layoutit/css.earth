@@ -1,0 +1,24 @@
+{
+  "id": "source-uranus-hubble-opal-uranus-2025a-color",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Uranus · hubble opal uranus 2025a color",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/uranus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "75d2dc8312a10ac087b17086d8a728769ceeca4b46d7e860d3225b82b5bedf0e",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

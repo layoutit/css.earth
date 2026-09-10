@@ -31,7 +31,9 @@
           "url": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D5000",
           "label": "Masiero et al. (2011), ApJ 741, 68",
           "checked": "2026-09-08",
-          "path": "source/reference/calibration.json"
+          "path": "source/reference/calibration.json",
+          "catalogueId": "neowise-diameters-albedos-v2",
+          "locator": "/diameterKm; radius = diameterKm / 2"
         }
       },
       {
@@ -52,7 +54,9 @@
           "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/12740",
           "label": "DAMIT model 12740",
           "checked": "2026-09-08",
-          "path": "source/reference/damit-model.json"
+          "path": "source/reference/damit-model.json",
+          "catalogueId": "damit-models",
+          "locator": "Model 12740; /periodHours"
         }
       }
     ],

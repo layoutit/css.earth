@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-1801",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 1801 · Athor",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "1801"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1801/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/athor/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "3bb1c7b08c6eaf9d40e450ced7e329956dd58469ed4dab65d0154e99964082b5",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,24 @@
+{
+  "id": "source-miranda-geology-2026-source-1",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Miranda · geology 2026 source 1",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/api/records/20817533/files/Rh%20Linework.lyrx/content",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/miranda/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "12f669273db621b127057149a94da86e8ff6646346c50e565aed6cff5de03f3b",
+      "locator": "/inputs/4"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-113",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 113 · Thetis",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "113"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/113/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/thetis/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "d8fba3b07ab6e78bb19493c2473916ac8e8ec5f512c881f9329702b5a3c22cf5",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

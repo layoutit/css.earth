@@ -7,6 +7,7 @@ import { prepareLensLabels } from "../../../site/prepare-lens-labels.mts";
 import { SCIENTIFIC_CHART_TITLES } from "../../../site/scientific-chart-titles.mts";
 import { createPreparedTitleLayout } from "../../../src/platform/prepared-title.mts";
 import { prepareLenses } from "./lenses";
+import { parseFactsheet, verifyFactsheetSources } from '../../factsheet-sources.mts';
 import type {
   ContentPreparationContext,
   ObjectContentSource,
@@ -55,6 +56,7 @@ export function prepareObjectContent(
     ...source.title,
     ...createPreparedTitleLayout(source.title),
   } as PreparedObjectContent["title"];
+  const { facts, moreFacts } = parseFactsheet(source.panel);
   const lensControls = source.lenses.labels
     ? prepareLensLabels({ controls: source.lenses.controls }, source.lenses.labels).controls
     : source.lenses.controls;
@@ -62,8 +64,8 @@ export function prepareObjectContent(
     objectId: source.id,
     title,
     introduction: source.panel.introduction,
-    facts: source.panel.facts,
-    moreFacts: source.panel.moreFacts ?? [],
+    facts,
+    moreFacts,
     lenses: prepareLenses(source.id, {
       title: requiredShellTitle(source.lenses.titleKey),
       defaultLens: source.lenses.defaultLens,
@@ -98,6 +100,7 @@ export async function prepareObjectContentAssets({
   }
   const sourcePath = resolve(sourceDirectory, config.contentPath ?? "content/object.json");
   const source = JSON.parse(await readFile(sourcePath, "utf8")) as ObjectContentSource;
+  await verifyFactsheetSources(source.panel, { objectDirectory: resolve(sourceDirectory, '..') });
   const titleSourcePath = source.provenance.title?.path;
   let preparedSource = source;
   if (titleSourcePath?.endsWith(".json")) {

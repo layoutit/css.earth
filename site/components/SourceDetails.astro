@@ -5,7 +5,9 @@ interface Props { source: SourceRecord; objectId: string; }
 const { source, objectId } = Astro.props;
 const uses = sourceUses(source.id), datasets = sourceDatasets(source.id);
 const local = uses.filter(use => use.objectId === objectId);
-const metadata = [...new Map(uses.filter(use => use.consumerKind !== 'object-product').map(use => [`${use.consumerKind}/${use.consumerId}`,use])).values()];
+const facts = local.filter(use => use.consumerKind === 'object-fact');
+const products = local.filter(use => use.consumerKind === 'object-product');
+const metadata = [...new Map(uses.filter(use => use.consumerKind !== 'object-product' && use.consumerKind !== 'object-fact').map(use => [`${use.consumerKind}/${use.consumerId}`,use])).values()];
 const terms = [...new Set(local.flatMap(use => [use.credit,use.license,use.redistribution].filter((value): value is string => !!value)))];
 const limitations = [...new Set(local.flatMap(use => use.limitations))];
 ---
@@ -13,14 +15,14 @@ const limitations = [...new Set(local.flatMap(use => use.limitations))];
   <summary>{source.title} <small>{source.kind.replaceAll('-', ' ')}</small></summary>
   <p><a href={sourceHref(source.id)} target="_blank" rel="noreferrer">Open source</a>{source.version && <> · Version {source.version}</>}</p>
   {source.identifiers.length > 0 && <ul>{source.identifiers.map(id => <li>{id.type}: {id.value}</li>)}</ul>}
-  <h4>Used in cssEarth</h4>
+  {(datasets.length > 0 || metadata.length > 0) && <h4>Used in cssEarth</h4>}
   {datasets.length > 0 && <ul class="planet-source-datasets">{datasets.map(view => <li><a href={view.href} data-dataset-link data-dataset-object={view.objectId} data-dataset-id={view.lensId}>{view.objectName} · {view.label}</a></li>)}</ul>}
   {metadata.length > 0 && <ul>{metadata.map(use => <li>{use.consumerLabel} · {use.consumerKind === 'mission' || use.consumerKind === 'spacecraft' ? 'metadata citation' : use.kind.replaceAll('-', ' ')}{(use.credit || use.limitations.length > 0) && <p>{use.credit} {use.limitations.join(' ')}</p>}</li>)}</ul>}
-  {!datasets.length && <p>No prepared dataset destination is bound to this source.</p>}
-  {local.length > 0 && <>
+  {facts.length > 0 && <><h4>Factsheet</h4><ul class="planet-source-facts">{facts.map(use => <li><a href={use.citationUrl} target="_blank" rel="noreferrer">{use.consumerLabel}</a></li>)}</ul></>}
+  {products.length > 0 && <>
     {limitations.map(limit => <p>{limit}</p>)}
     <details class="planet-source-credits"><summary>Credits and preparation on {objectId.replaceAll('-', ' ')}</summary>
-      <ul>{[...new Map(local.map(use => [`${use.productId}/${use.kind}`,use])).values()].map(use => <li>{use.consumerLabel} · {use.kind.replaceAll('-', ' ')}</li>)}</ul>
+      <ul>{[...new Map(products.map(use => [`${use.productId}/${use.kind}`,use])).values()].map(use => <li>{use.consumerLabel} · {use.kind.replaceAll('-', ' ')}</li>)}</ul>
       {terms.map(term => <p>{term}</p>)}
     </details>
   </>}

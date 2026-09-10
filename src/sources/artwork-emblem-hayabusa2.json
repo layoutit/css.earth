@@ -1,0 +1,24 @@
+{
+  "id": "artwork-emblem-hayabusa2",
+  "kind": "artwork",
+  "identityLevel": "work",
+  "title": "Hayabusa2 mission emblem",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.hayabusa2.jaxa.jp/en/galleries/cg/logo/pages/logo3.html",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "site/source/spacecraft/emblem-library.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "8b60e40c2b8f14851ff5d0708f294b05f07a8867c69640229e69336233cf9820",
+      "locator": "/entries/22"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

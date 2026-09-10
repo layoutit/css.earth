@@ -1,0 +1,24 @@
+{
+  "id": "source-jupiter-openspace-jupiter-kernels",
+  "kind": "software",
+  "identityLevel": "work",
+  "title": "Jupiter · openspace jupiter kernels",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/jupiter/kernels.asset",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/jupiter/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "2ffa5896b236cbe154361b47f7344ab3a3c21d31cc3689973284597326e15341",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -236,7 +236,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored texture axes and CSS surface selector."
       }
     },
     {
@@ -617,36 +617,31 @@
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 9818,
-      "expectedSha256": "b23900c986d151dd5656d7dbe781c189d9ad25c3fe4398462a72b6746fa821b9",
-      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+      "expectedSha256": "b23900c986d151dd5656d7dbe781c189d9ad25c3fe4398462a72b6746fa821b9"
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 18331,
-      "expectedSha256": "0a453be4ee04370d6d36f3a7dc6f0e0dc0b9a9564f79268fb9c0d285dc50764a",
-      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure.",
+      "expectedBytes": 18669,
+      "expectedSha256": "f3ab4fb8d629419275f0a15edf9e1cc75eee1699f1fc54471f033ce906ce13cc",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 5805,
-      "expectedSha256": "ad14deb360ace57ed760248ef68c7976066eeab0942acfadb2b7ff7f94e1ef76",
-      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+      "expectedSha256": "ad14deb360ace57ed760248ef68c7976066eeab0942acfadb2b7ff7f94e1ef76"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1696,
-      "expectedSha256": "29dda529e3ab8bbcff799ac336af4cbcefeb21bb80eed0e0eed5d41b2dc30a3c",
-      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+      "expectedSha256": "29dda529e3ab8bbcff799ac336af4cbcefeb21bb80eed0e0eed5d41b2dc30a3c"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 2333,
-      "expectedSha256": "2ff31beb903ee65c63b4d741196b45b918b05380c51138478e1d817fa87a36ee",
-      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+      "expectedSha256": "2ff31beb903ee65c63b4d741196b45b918b05380c51138478e1d817fa87a36ee"
     },
     {
       "path": "editorial/factsheet-review.json",

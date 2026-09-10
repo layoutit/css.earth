@@ -1,0 +1,24 @@
+{
+  "id": "source-enceladus-cassini-schenk-2024-normal",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Monochrome",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/enceladus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "6d88e446812b26cd241cb335af4874f8f99390216e50a94602e111e3b823b3ca",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

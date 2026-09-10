@@ -1,0 +1,24 @@
+{
+  "id": "source-earth-glad-m35-vsv",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Earth · glad m35 vsv",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://data.earthscope.org/archive/seismology/products/emc/netcdf/GLAD-M35.r0.1-n4c.nc",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/earth/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "bd42c8943697a61ab922cb82f1da71744803ab78ed519fb2839a1f138bb61d16",
+      "locator": "/inputs/53"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

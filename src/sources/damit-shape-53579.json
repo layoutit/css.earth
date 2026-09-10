@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-53579",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 53579 · Baucis",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "53579"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/53579/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/baucis/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "25b46cced80d9a381bca2a47e67ba858172a8506d8c046176c3cedfd14b9d13d",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,8 +1,11 @@
-import { parseSourceCatalog, sourceResolver, parseSourceBinding } from '../src/platform/source-catalog.mts';
+import { sourceResolver, parseSourceBinding } from '../src/platform/source-catalog.mts';
 import { compileSourceUsage } from '../src/platform/source-usage.mts';
 import type { SourceUse } from '../src/platform/source-usage.mts';
-import { parsePreparedSources } from '../src/platform/prepared-sources.mts';
-import { sourceInventory, metadataCitations } from './source-catalogue-inputs.mts';
+import { parsePreparedSources, sourceCatalogDigest } from '../src/platform/prepared-sources.mts';
+import { readSourceCatalog } from './read-source-catalogue.mts';
+import { sourceInventory, metadataCitations, factsheetCitations } from './source-catalogue-inputs.mts';
+import { parseFactsheet, verifyFactsheetSources } from './factsheet-sources.mts';
+import { sourcePath, sourceDigest } from '../src/platform/source-catalog.mts';
 import type { SourceInventoryEntry } from './source-catalogue-inputs.mts';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
@@ -23,9 +26,10 @@ export const explorationCompilerClosure = [
   'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'site/objects.mts', 'site/object-schema.mts',
   'site/object-catalog.mts', 'site/prepared-object-catalog.mts', 'tools/prepare-catalog.mts',
   'site/source/spacecraft/catalog.json', 'site/source/spacecraft/render-library.json', 'site/source/spacecraft/emblem-library.json',
-  'site/source/agency-logos.json', 'src/sources/catalog.json',
+  'site/source/agency-logos.json', 'tools/read-source-catalogue.mts',
   'src/platform/source-catalog.mts', 'src/platform/source-usage.mts', 'src/platform/source-manifest.mts',
   'src/platform/prepared-sources.mts', 'tools/source-catalogue-inputs.mts',
+  'tools/factsheet-sources.mts', 'site/fact-order.mts',
   'src/objects/milky-way/source/sky/provenance.json', 'src/objects/milky-way/source/provenance.json',
   'src/objects/stellar-neighbourhood/source/provenance.json', 'src/objects/heliosphere/source/provenance.json',
   'tools/objects/provenance.mts', 'tools/objects/provenance-records.mts', 'tools/objects/provenance-recipes.mts', 'tools/prepare-provenance.mts',
@@ -41,7 +45,7 @@ export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '.
   const json = async (path: string): Promise<unknown> => JSON.parse((await input(path)).toString('utf8'));
   for (const path of explorationCompilerClosure) await input(path);
   const agencies = parseAgencies(await json('site/source/agency-logos.json'));
-  const sourceCatalog = parseSourceCatalog(await json('src/sources/catalog.json')), sources = sourceResolver(sourceCatalog);
+  const sourceCatalog = await readSourceCatalog(root, input), sources = sourceResolver(sourceCatalog);
   const catalog = parseExplorationCatalog(await json('site/source/spacecraft/catalog.json'), agencies, sources);
   const metadata: SourceUse[] = metadataCitations(catalog, 'site/source/spacecraft/catalog.json', sources);
   const inventory: SourceInventoryEntry[] = [];
@@ -83,10 +87,30 @@ export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '.
     if (digest(bytes) !== agency.sha256 || bytes.length !== agency.bytes) throw new Error(`Agency logo identity changed: ${agency.name}.`);
   }
   const objects: ContributionObject[] = [];
+  const factsheets = { facts: 0, cited: 0, uncited: [] as { objectId: string; factId: string }[] };
   for (const object of OBJECTS) {
     const base = `src/planets/${object.id}`;
     const descriptor = explorationRecord(await json(`${base}/object.json`));
     const manifest = explorationRecord(await json(`${base}/source/manifest.json`));
+    const recipe = explorationRecord(explorationRecord(descriptor.properties).recipe);
+    const contentReference = explorationArray(recipe.sources, explorationRecord).find(source => source.id === 'content');
+    if (!contentReference) throw new Error(`Missing content recipe for ${object.id}.`);
+    const contentPath = sourcePath(contentReference.path);
+    if (!contentPath.startsWith('source/')) throw new TypeError('Body content must be inside its source directory.');
+    const contentBytes = await input(`${base}/${contentPath}`);
+    const contentPin = ['inputs', 'documents', 'generatedIntermediates'].flatMap(section => explorationArray(manifest[section] ?? [], explorationRecord))
+      .filter(entry => `source/${entry.path}` === contentPath);
+    if (contentPin.length !== 1 || contentPin[0]!.expectedBytes !== contentBytes.length || contentPin[0]!.expectedSha256 !== digest(contentBytes) ||
+      sourceDigest(contentReference.sha256) !== digest(contentBytes)) throw new Error(`Changed content source for ${object.id}.`);
+    const content = explorationRecord(JSON.parse(contentBytes.toString('utf8')));
+    const panel = await verifyFactsheetSources(content.panel, { objectDirectory: resolve(root, base), manifest, sources, read: path => input(`${base}/${path}`) });
+    const published = explorationRecord(await json(`${base}/prepared/content.json`));
+    if (published.objectId !== object.id || JSON.stringify(parseFactsheet(published)) !== JSON.stringify(panel)) throw new Error(`Stale factsheet for ${object.id}; run pnpm prepare:factsheets -- ${object.id}.`);
+    metadata.push(...factsheetCitations(panel, `${base}/${contentPath}`, object));
+    for (const fact of [...panel.facts, ...panel.moreFacts]) {
+      factsheets.facts++;
+      if (fact.source) factsheets.cited++; else factsheets.uncited.push({ objectId: object.id, factId: fact.id });
+    }
     for (const source of explorationArray(manifest.inputs, explorationRecord)) if (source.capture !== undefined) validateCapture(parseCapture(source.capture), catalog);
     const page = explorationRecord(await json(`${base}/prepared/page.json`));
     if (page.schema !== 'cssearth-object-page@1' || page.id !== object.id || page.sceneSha256 !== explorationRecord(descriptor.prepared).sha256) throw new Error(`Stale prepared controls for ${object.id}.`);
@@ -102,7 +126,7 @@ export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '.
     inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(document.sources.map(source => source.path))));
     objects.push({ id: object.id, name: object.name, route: object.route, controls: lenses, provenance: document });
   }
-  const sourcePayload = {schema:'cssearth-prepared-sources@1',catalog:sourceCatalog,catalogSha256:closure['src/sources/catalog.json'],
+  const sourcePayload = {schema:'cssearth-prepared-sources@1',catalog:sourceCatalog,catalogSha256:sourceCatalogDigest(sourceCatalog),
     usage:compileSourceUsage(objects,sources,metadata),inventory,closure};
   const preparedSources = parsePreparedSources(sourcePayload);
   const payload = { schema: 'cssearth-prepared-exploration@2', catalog, agencies, images, emblems,
@@ -112,10 +136,11 @@ export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '.
   const sourcesOutput = {path:resolve(root,'site/prepared-sources.json'),text:JSON.stringify(sourcePayload,null,2)+'\n'};
   const outputs = [sourcesOutput,output];
   if (publish) await writePreparedSet(outputs);
-  return { prepared, preparedSources, output, outputs };
+  return { prepared, preparedSources, output, outputs, factsheets };
 
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const { prepared } = await prepareSpacecraft();
+  const { prepared, factsheets } = await prepareSpacecraft();
   console.log(`Prepared ${prepared.catalog.missions.length} missions, ${prepared.catalog.spacecraft.length} spacecraft and ${prepared.graph.datasets.length} dataset destinations.`);
+  console.log(`Factsheets: ${factsheets.cited}/${factsheets.facts} facts have individual citations; ${factsheets.uncited.length} do not.`);
 }

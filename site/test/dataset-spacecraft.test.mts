@@ -1,4 +1,4 @@
-import { parseSourceCatalog, sourceResolver } from '../../src/platform/source-catalog.mts';
+import { parsePreparedSources } from '../../src/platform/prepared-sources.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
@@ -16,7 +16,7 @@ import type { Capture } from '../../src/platform/exploration-catalog.mts';
 import type { ExplorationImage } from '../../src/platform/prepared-exploration.mts';
 
 const json = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
-const sources = sourceResolver(parseSourceCatalog(await json('../../src/sources/catalog.json')));
+const { sources } = parsePreparedSources(await json('../prepared-sources.json'));
 const prepared = parsePreparedExploration(await json('../prepared-spacecraft.json'), sources);
 const catalog = prepared.catalog;
 const provenance = async (id: string): Promise<ProvenanceDocument> => validateObjectProvenance(await json(`../../src/planets/${id}/prepared/provenance.json`), id);

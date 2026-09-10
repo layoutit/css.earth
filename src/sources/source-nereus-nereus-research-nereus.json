@@ -1,0 +1,24 @@
+{
+  "id": "source-nereus-nereus-research-nereus",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Nereus · nereus research nereus",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://echo.jpl.nasa.gov/asteroids/4660_Nereus/brozovic.etal.2009.nereus.pdf",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/nereus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "99a6683319fa97a4877b6ec19fab027c87229b50dbd9b6674f8fbc4d3fc69290",
+      "locator": "/inputs/3"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,24 @@
+{
+  "id": "nasa-juno-atmosphere-2021",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "NASA Juno results: three-dimensional structure of Jupiter’s atmosphere",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.nasa.gov/news-release/nasas-juno-science-results-offer-first-3d-view-of-jupiter-atmosphere/",
+      "label": "NASA Juno results: three-dimensional structure of Jupiter’s atmosphere"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/jupiter/source/content/object.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "167cd1b7d0031ca5b1199ad63da3722be04bf27cd65bdb65b907f1f8e602433e",
+      "locator": "/panel/moreFacts/1/source"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

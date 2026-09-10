@@ -689,48 +689,41 @@
     {
       "path": "preparation/raster.json",
       "expectedBytes": 16784,
-      "expectedSha256": "eb9a4f0565bb48499d42a7c22ff78cd43a0767191200c934fdb98cfea92238eb",
-      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+      "expectedSha256": "eb9a4f0565bb48499d42a7c22ff78cd43a0767191200c934fdb98cfea92238eb"
     },
     {
       "path": "preparation/geometry.json",
       "expectedBytes": 3171,
-      "expectedSha256": "d4d8b436629b9942f82d9330ca4782377afa8fafa0929894e47e1e80bc275238",
-      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+      "expectedSha256": "d4d8b436629b9942f82d9330ca4782377afa8fafa0929894e47e1e80bc275238"
     },
     {
       "path": "preparation/celestial.json",
       "expectedBytes": 201,
-      "expectedSha256": "d8aaee891662c0b1ca9da02b080f95cee4410a122c128e2ab584bb12dd167c3d",
-      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+      "expectedSha256": "d8aaee891662c0b1ca9da02b080f95cee4410a122c128e2ab584bb12dd167c3d"
     },
     {
       "path": "content/static.json",
-      "expectedBytes": 31326,
-      "expectedSha256": "6f893fad567f43ae9bfb9232762bec8c2a8f7417b34543f22cd6994d59909d05",
-      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility.",
+      "expectedBytes": 31642,
+      "expectedSha256": "9cbf4a5fdb11412dbacf29e2fba7f9bcc7f748be0867d1a6c93671a73e7bf587",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicit authored content document in the retained provenance record."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 664,
-      "expectedSha256": "b1254ab4d5825c07bfd6998b1eb0828dc86d4c8b080b318a555cc18fe9cfa8d7",
-      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+      "expectedSha256": "b1254ab4d5825c07bfd6998b1eb0828dc86d4c8b080b318a555cc18fe9cfa8d7"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 5151,
-      "expectedSha256": "6b5ca65f263838194f6c28b2f5096dabf34b2aa93ccbb39d637d3babf2094c45",
-      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+      "expectedSha256": "6b5ca65f263838194f6c28b2f5096dabf34b2aa93ccbb39d637d3babf2094c45"
     },
     {
       "path": "preparation/physical.json",
       "expectedBytes": 561,
-      "expectedSha256": "8b653becc8e1cdbda5b2c87b0e3e4b53b9af1095c263aeca982383e6f3e76966",
-      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+      "expectedSha256": "8b653becc8e1cdbda5b2c87b0e3e4b53b9af1095c263aeca982383e6f3e76966"
     },
     {
       "path": "editorial/factsheet-review.json",
@@ -776,32 +769,27 @@
     {
       "path": "geology/GeoUnits.prj",
       "expectedBytes": 393,
-      "expectedSha256": "4473b61e75ee5e9c120f4c342b4ab85276a0c69090a2c9d7771b4b88ba835fd4",
-      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+      "expectedSha256": "4473b61e75ee5e9c120f4c342b4ab85276a0c69090a2c9d7771b4b88ba835fd4"
     },
     {
       "path": "science/prepare-cf-map.json",
       "expectedBytes": 800,
-      "expectedSha256": "3201640d22eae25b296732b4da78754a3dac2024bb753e84860c00cc78bb1853",
-      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+      "expectedSha256": "3201640d22eae25b296732b4da78754a3dac2024bb753e84860c00cc78bb1853"
     },
     {
       "path": "science/diviner-cf-2021-georeferenced.json",
       "expectedBytes": 717,
-      "expectedSha256": "b0ba8825dfc6e38dfe911fda3eba9a885db011e756386c16a821a5829f922991",
-      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+      "expectedSha256": "b0ba8825dfc6e38dfe911fda3eba9a885db011e756386c16a821a5829f922991"
     },
     {
       "path": "geology/prepare-grid.json",
       "expectedBytes": 6867,
-      "expectedSha256": "3aa325574c1c7fbf5b3dfc0c490de426dc0c0bd5283c3e008215eb3447e72fb3",
-      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+      "expectedSha256": "3aa325574c1c7fbf5b3dfc0c490de426dc0c0bd5283c3e008215eb3447e72fb3"
     },
     {
       "path": "geology/moon-geologic-units.json",
       "expectedBytes": 6835,
-      "expectedSha256": "42aeb5dfb20075035c9a04d3d5bbd9cf94996fbf02c6da1180875f9db54cc45f",
-      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+      "expectedSha256": "42aeb5dfb20075035c9a04d3d5bbd9cf94996fbf02c6da1180875f9db54cc45f"
     },
     {
       "path": "geology/Unified_Geologic_Map_of_the_Moon_v2_March2020.txt",

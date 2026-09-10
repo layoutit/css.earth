@@ -31,7 +31,9 @@
           "url": "https://arxiv.org/pdf/2005.01479",
           "label": "Alí-Lagoa et al.(2020), A&A638,A84, Table2, doi:10.1051/0004-6361/202037718; SAGE model reference Podlewska-Gaca et al.(2020), A&A638,A11",
           "checked": "2026-09-08",
-          "path": "source/reference/calibration.json"
+          "path": "source/reference/calibration.json",
+          "catalogueId": "ali-lagoa-2020-herschel",
+          "locator": "/diameterKm; radius = diameterKm / 2"
         }
       },
       {
@@ -52,7 +54,9 @@
           "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16321",
           "label": "DAMIT model 16321",
           "checked": "2026-09-08",
-          "path": "source/reference/damit-model.json"
+          "path": "source/reference/damit-model.json",
+          "catalogueId": "damit-models",
+          "locator": "Model 16321; version 2026-04-30 15:07:16; /periodHours"
         }
       }
     ],

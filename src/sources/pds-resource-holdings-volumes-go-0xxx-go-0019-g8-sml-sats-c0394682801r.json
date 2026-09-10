@@ -1,0 +1,29 @@
+{
+  "id": "pds-resource-holdings-volumes-go-0xxx-go-0019-g8-sml-sats-c0394682801r",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PDS archive product · C0394682801R",
+  "identifiers": [
+    {
+      "type": "PDS archive resource path",
+      "value": "/holdings/volumes/GO_0xxx/GO_0019/G8/SML_SATS/C0394682801R"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/G8/SML_SATS/C0394682801R.LBL",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/metis/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "417c5ddd92869c2abb5da3ecbba47a13d3663ce49f19a78318336708fe1c186d",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

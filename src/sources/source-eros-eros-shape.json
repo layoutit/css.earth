@@ -1,0 +1,24 @@
+{
+  "id": "source-eros-eros-shape",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Eros · eros shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/eros/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "420569ab7d650d6e713e752fa33220c125e56e5e111356428128b00c9187d862",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

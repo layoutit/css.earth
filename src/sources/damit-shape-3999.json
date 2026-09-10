@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-3999",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 3999 · Ianthe",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "3999"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3999/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/ianthe/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "3832194e87b7cd8c8146efd68003bf9005edd3bf1e653b3f88973018b19ed9a3",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
