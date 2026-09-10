@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "556d240b647e2030abd3df761c8cd667a16477d7369c757a13e35f436afaee87"
+          "sha256": "b60fbf7331a5045a0a1ec54d99b43cd83e5d1fdd9d55e68d840ab54026155eb6"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "02da4652868e0da43bf05fa7f962e6439d05871501ce8b3fc641c65ded48484a"
+          "sha256": "d26b02d9f0e0a792f074078568b0cf251d5121a5da5ba8ee9958b4494608611d"
         },
         {
           "id": "title",
@@ -38,12 +38,12 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "4389852fcdfed3e07beb1979b0aed397a854e27f93977d8a4d28d299a25f93fe"
+          "sha256": "5a3880d937ea8462f398ab14892c3b1527e768e65fcfa70d1dd4e796c6582d33"
         },
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "02d3dab0ddb1c825547477af287fc0448afc7ba1a0bf64869dd24ba472f6432c"
+          "sha256": "6ab242f75421f9445a70f56e425b74c4389b946128f0eab640827830cdbd0c1a"
         },
         {
           "id": "rotation",
@@ -63,6 +63,11 @@
           "lenses": [
             {
               "id": "model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "giotto",
               "source": "content",
               "material": "lighting"
             }
@@ -110,7 +115,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "113dcdf6b68e3b82dc3a98b3b8123b86922f4839f7492ee3351d76e5185569d7"
+        "sha256": "02d8cb9938c9cbeb915141d3a6cc77cc284511c558b6c227ba9c0ebf67d12985"
       }
     },
     "catalog": {
@@ -118,7 +123,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 17.859,
-      "description": "Explore Halley's historical Giotto/Vega shape model, with its uncertainty made explicit.",
+      "description": "Explore Halley's historical Giotto/Vega nucleus model and a small, approximate patch of Giotto photography.",
       "systemName": "Solar System",
       "order": 78,
       "context": {
@@ -129,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "49a7d0ad72dcf74d6ec0f77dfd025fb14c29080a1102573edca6b734e9f04bb2"
+    "sha256": "0be8a58502d34fdbd471c981ccf443ffa5c36bfb2644449f455452b464b822df"
   }
 }

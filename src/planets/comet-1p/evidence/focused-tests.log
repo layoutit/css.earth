@@ -1,0 +1,27 @@
+✔ accepts a complete non-NASA package and still rejects corrupt or undeclared bytes (30.39075ms)
+✔ derives the complete owned file contract from planet identity (0.320208ms)
+✔ requires every registered object package file (324.979ms)
+✔ validates local editorial identity and provenance (0.91475ms)
+✔ validates runtime asset manifest entries (0.130083ms)
+✔ all prepared planet surfaces use the measured Chrome seam contract (0.380042ms)
+✔ asteroid, trans-Neptunian and comet Shadows default off in authored content and prepared runtime (9649.915917ms)
+✔ publishes one off-by-default Shadows control for every planet (56.3ms)
+✔ control content permits empty capabilities but rejects malformed or conflicting declarations (0.465584ms)
+✔ Halley keeps east-positive source anchors, asymmetric origin and closed retained geometry (144.76375ms)
+✔ Halley display attitude stays fixed without inventing a physical spin (2.657625ms)
+✔ Giotto preparation reproduces the reviewed image and lossless footprint (522.32325ms)
+✔ Source darkness does not remove an otherwise visible photographic sample (34.724208ms)
+✔ The coverage inset respects a concave notch and both sides of its boundary (0.179333ms)
+✔ every registered factsheet reproduces its pinned authored facts and evidence (811.63175ms)
+✔ fact-only preparation preserves other content and rejects source drift before writing (7.899042ms)
+✔ a model-only lens can omit a misleading flat map without opening its image (35.346125ms)
+✔ a prepared photo map uses its map URL when source is a provenance record (8.592333ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9913.163042
+{"inputCount":13,"generatedIntermediateCount":1,"documentCount":18,"verifiedCount":32}

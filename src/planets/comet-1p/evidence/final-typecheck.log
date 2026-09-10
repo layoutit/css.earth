@@ -1,0 +1,56 @@
+
+> cssearth@0.1.0 typecheck /Users/ekrof/fed/cssEarth-comets
+> pnpm typecheck:packages && pnpm typecheck:renderer && pnpm typecheck:platform && pnpm typecheck:preparation && pnpm typecheck:tools && pnpm typecheck:shell && pnpm typecheck:astro && pnpm typecheck:ownership && pnpm typecheck:browser-owners
+
+
+> cssearth@0.1.0 typecheck:packages /Users/ekrof/fed/cssEarth-comets
+> pnpm -r --filter "./packages/**" typecheck
+
+Scope: 4 of 5 workspace projects
+packages/astronomy typecheck$ node tools/body-records.mts && tsc --noEmit -p tsconfig.json && tsc -p tools/tsconfig.json
+packages/catalog typecheck$ tsc --noEmit -p tsconfig.json && tsc -p scripts/tsconfig.json
+packages/objects typecheck$ tsc --noEmit -p tsconfig.json
+packages/objects typecheck: Done
+packages/catalog typecheck: Done
+packages/astronomy typecheck: Done
+packages/engine typecheck$ tsc --noEmit -p tsconfig.json
+packages/engine typecheck: Done
+
+> cssearth@0.1.0 typecheck:renderer /Users/ekrof/fed/cssEarth-comets
+> pnpm --filter @cssearth/engine exec tsc -p ../../src/renderers/css/tsconfig.json
+
+
+> cssearth@0.1.0 typecheck:platform /Users/ekrof/fed/cssEarth-comets
+> tsc -p src/platform/tsconfig.json
+
+
+> cssearth@0.1.0 typecheck:preparation /Users/ekrof/fed/cssEarth-comets
+> pnpm --filter @cssearth/engine exec tsc -p ../../tools/objects/tsconfig.json
+
+
+> cssearth@0.1.0 typecheck:tools /Users/ekrof/fed/cssEarth-comets
+> tsc -p tools/tsconfig.json
+
+
+> cssearth@0.1.0 typecheck:shell /Users/ekrof/fed/cssEarth-comets
+> pnpm --filter @cssearth/engine exec tsc -p ../../site/tsconfig.json
+
+
+> cssearth@0.1.0 typecheck:astro /Users/ekrof/fed/cssEarth-comets
+> astro check --tsconfig site/astro.tsconfig.json
+
+11:16:12 [types] Generated 72ms
+11:16:12 [check] Getting diagnostics for Astro files in /Users/ekrof/fed/cssEarth-comets...
+Result (108 files): 
+- 0 errors
+- 0 warnings
+- 0 hints
+
+
+> cssearth@0.1.0 typecheck:ownership /Users/ekrof/fed/cssEarth-comets
+> pnpm --filter @cssearth/engine exec tsc -p ../../tools/typescript-ownership.tsconfig.json
+
+
+> cssearth@0.1.0 typecheck:browser-owners /Users/ekrof/fed/cssEarth-comets
+> pnpm --filter @cssearth/engine exec tsc -p ../../site/test/typescript-owners.tsconfig.json
+

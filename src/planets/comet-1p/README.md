@@ -6,7 +6,24 @@
 
 - Model author Philip Stooke used Giotto/Vega limb and terminator fits with pointing by Alain Abergel.
 
+- [Stooke & Abergel (1991), A&A 248, 656–668](https://articles.adsabs.harvard.edu/pdf/1991A%26A...248..656S) publishes a separate 10° radius table (Table 2) and encounter viewing geometry (Table 1). Its rotation-axis frame differs from the long-axis frame of the selected PDS product; these inputs must not be mixed.
+
+- Stooke's [Small Body Mapping Results — 1994 (LPSC 1995)](https://www.lpi.usra.edu/meetings/lpsc1995/pdf/1683.pdf) reports a revised Halley shape using Belton et al.'s slow long-axis rotation model. It describes agreement with the complete image set, conditional on uncertain limb identification. The two-page abstract does not provide numerical camera controls or a radius table. The Giotto view instead reconstructs approximate encounter geometry from the public rotation compilation and mission ephemerides below. The selected PDS product also cites Belton's rotation model, but that shared citation alone does not establish an exact model/version match.
+
+- The [MPS Halley Multicolour Camera page](https://www2.mps.mpg.de/de/projekte/giotto/hmc/) supplies a 68-image Giotto composite and a nucleus outline. It permits educational image use with MPS attribution; commercial reuse requires permission. This statement applies to those displayed images, not automatically to the entire calibrated archive.
+
+- [Samarasinha, Mueller, Belton & Jorda (2004), archived rotation compilation](https://pdssbn.astro.umd.edu/holdings/ear-c-compil-5-comet-nuc-rotation-v1.0/dataset.shtml), supplies the long-axis state and periods used for the approximate projection. [NASA SPDF Vega ephemerides](https://spdf.gsfc.nasa.gov/pub/data/vega/mag/) and original PDS FITS headers supply the spacecraft geometry. Exact inputs are pinned in the [registration](source/reference/giotto-registration.json).
+
 ## Evidence
+
+- The [projection report](source/reference/giotto-projection-report.json) records 4,842 observed pixels in a 512 × 256 map and about **4.3% sampled source surface coverage**. The rest is grid. This is the accepted footprint of this projection, not a census of all Halley photography.
+- Camera orientation is derived before fitting image scale and centre. Of 64 manually transcribed catalogue outline points, 42 fit those three image-plane parameters and 22 are held out. Held-out distance to the projected full-mesh silhouette is **0.211 km RMS, 0.456 km maximum**, within the source's stated 0.5–1 km absolute shape uncertainty. This checks silhouette consistency; it does not independently establish individual feature coordinates.
+- The source projection tests reproduce the checked-in PNG and validity bytes, preserve valid dark pixels, and check the concave footprint boundary. Object preparation retains the same 1,000-face shape.
+
+- At `d535aee0f`, after integrating main's independent body registry, [34 focused checks](evidence/final-focused-tests.log), [full strict TypeScript checks](evidence/final-typecheck.log), and [all 32 source-record checks](evidence/final-source-verification.log) passed. Halley's runtime ownership audit also passed. The [selected Chrome conformance run](evidence/conformance-independent.log) covers desktop/mobile, both datasets, DPR 1 and 2, and competing/reacquired dataset loads. Unselected cases are not claimed as passes. The earlier [retained DOM checks at both densities](evidence/dom-cleanliness.log) cover the same Halley geometry and materials; final production captures below also bind the integrated shared shell.
+- A separate checkout [installed all 34 published files with no reused assets](evidence/delivery-assets.log), totaling 7,342,374 bytes. All nine new raw photographic/geometry inputs were separately restored into an empty temporary source directory and matched their pinned hashes. Installation size is not a cold-page transfer estimate.
+- [Production captures and request records](evidence/production-browser.json) use those independently downloaded Halley assets with the built shared shell. [Giotto at DPR 1](evidence/giotto-dpr-1.webp), [DPR 2](evidence/giotto-dpr-2.webp), and the [historical grid view](evidence/model-dpr-1.webp) show actual browser output with Shadows off. [The source-outline comparison](evidence/source-outline.webp) shows the fixed model silhouette in blue and held-out outline controls in red on MPS figure 67. Its yellow historical axis annotation was not used. The source and browser views have different cameras; this is not a pixel-parity comparison.
+- Halley's [navigation images](evidence/navigation.json) are reproduced with `node tools/prepare-navigation.mts comet-1p`. They use the current per-body image contract; this change supplies no shared marker atlas or renderer implementation.
 
 - The [pinned candidate manifest](source/reference/giotto-hmc-intake.json) and [intake report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/HALLEY-GIOTTO.md) retain a reproducible seven-frame survey from the original PDS SBN release, including its separate FITS geometry headers.
 
@@ -14,13 +31,19 @@
 
 ## Known problems
 
+- The full repository test suite was not repeated after main's registry refactor. Earlier aggregate failures concerned the Sun receipt and SN263 upstream manifest; [checks against the integrated main revision](evidence/main-baseline.log) confirm those particular issues are resolved. The focused, type, source and browser results above describe the coverage actually rerun.
+
 - This is a highly uncertain historical inverse shape model. The label estimates absolute uncertainty of about 500–1,000 m, relative point-to-point uncertainty around 100 m, and warns that facets and depressions may be exaggerated.
 
-- It is neither a photograph nor an albedo map. The table has only longitude, latitude and radius: no source-supported regional confidence flags exist in this product, so no selective grid boundary is drawn.
+- **Historical model** is a neutral shape view. **Giotto** projects a small illuminated region of the MPS composite onto that shape. Neither view is a measured albedo map; the Giotto image retains its original illumination and dust contamination.
 
 - The original local frame is preserved while its attitude in space is explicitly illustrative: the long axis is placed along ICRF +Z (display RA 0°, Dec +90°, meridian 0°) and held fixed. Lighting shows that chosen orientation, not an encounter or current attitude.
 
-- Raster decoding and calibration are verified; a camera solution tied to this Stooke body frame and a surface-only coverage mask are not established. No photographic surface lens is qualified.
+- Giotto registration is approximate: published rotation parameters are rounded, the Vega observer position is extrapolated for 148 seconds, and a multi-exposure composite is represented by one incoming-frame camera. Unmapped, uncertain, grazing and occluded regions remain grid. Isolated bright patches and jets are excluded.
+
+- The 1991 paper's own §5 reports that its model does not reproduce the Giotto terminator or part of the dark limb. Fitting a photographic outline alone therefore cannot establish feature locations. The paper discusses changing the viewing geometry by about 40°, but explicitly does not supply that revised model. Its Table 1 camera cannot be reassigned to the later PDS mesh without a documented frame relationship.
+
+- The 1991 mismatch does not reject the revised model reported in 1995. The present projection uses the later long-axis state, with the limitations above. [Reitsema, Delamere & Keller (1989)](https://doi.org/10.1016/0273-1177(89)90244-5) supplies a separate catalog of 21 bright features and eight morphological regions that may support independent registration checks; its reference frame must first be matched to the chosen model.
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
@@ -37,7 +60,7 @@ It even considers the convex hull comparably plausible. cssEarth retains the pub
 
 ## Coordinates and geometry
 
-The specific PDS4 label gives east-positive longitude and kilometres, superseding the west-positive convention of the old PDS3 v1 release. The reference axis is the **long axis**, with north towards the larger end. It is not a simple spin pole. The source longitude phase refers to the first high-resolution Vega 2 image (02:00:30, sub-spacecraft longitude 270°). The original model origin is preserved; the bundle warns that origins need not coincide with centres of figure.
+The specific PDS4 label gives east-positive longitude and kilometres, superseding the west-positive convention of the old PDS3 v1 release. The reference axis is the **long axis**, with north towards the larger end. It is not a simple spin pole. The source longitude phase refers to the first high-resolution Vega 2 image (image identifier 2:00:30, sub-spacecraft longitude 270°; this is not 02:00:30 UTC). The original model origin is preserved; the bundle warns that origins need not coincide with centres of figure.
 
 Preparation converts rows to right-handed XYZ metres: x = r cos(lat) cos(lon), y = r cos(lat) sin(lon), z = r sin(lat). The regular grid defines connectivity, giving 2,522 unique vertices and 5,040 triangles after pole and seam welding. The longitude-zero sample is the canonical seam/pole sample. Repeated rows differ by at most 0.000001 km (1 mm) from those canonical values; the loader accepts that existing precision allowance plus binary roundoff and rejects larger disagreements. No radii are filled or recentered.
 
@@ -49,7 +72,7 @@ The existing per-object camera `framingScale` is 0.7 so the elongated nucleus fi
 
 ## Material, orientation and placement
 
-The single **Historical model** view uses uniform #b8b6b2 material with shared Shadows and flood-light controls. Navigation context is rendered from the same simplified geometry and material.
+The **Historical model** view uses the shared no-imagery grid over the source shape. The **Giotto** view uses photographic pixels only inside the accepted footprint and the existing gray grid elsewhere. Shadows defaults to **off** for both datasets. The existing uniform-flood option preserves image RGB values instead of applying an extra baked light direction. Navigation context is rendered from the same simplified geometry and material.
 
 These are presentation choices, not Halley's physical spin solution. No rotation-period fact or spin/tumble animation is supplied.
 
@@ -67,9 +90,23 @@ Heliocentric placement uses JPL Horizons `DES=1P;CAP;`, centre `500@10`, ICRF, a
 
 This package contains the nucleus model only; no coma, tail or outgassing scene.
 
-## Giotto encounter-image intake
+## Giotto projection
 
-Candidate retrieval pins are outside the preparation recipe; downloaded image data and diagnostic image derivatives remain local under `output/`.
+The [source-specific preparer](../../../tools/objects/comet-1p/prepare-giotto.mts) reads the pinned MPS display composite, not the separately surveyed calibrated PDS image pixels. Run it with `node tools/objects/comet-1p/prepare-giotto.mts --write`, then run the normal authored Halley preparation. The registration JSON is an authored input; its image-plane scale, centre and footprint are retained with their controls and provenance.
+
+The 2004 table gives angular momentum RA 7°, Dec −60°, a long-axis direction RA 314°, Dec −7° at JD 2446498.806, precession period 3.69 days and roll period 7.1 days. Stooke's Vega image anchor fixes longitude 270°. Table 1 in the 1991 paper places that image 1.5 seconds before closest approach. The TVS header places closest approach at 07:19:59.5 UTC, giving an anchor of 07:19:58 UTC on 9 March 1986.
+
+The last two one-minute SPDF Vega positions are linearly extrapolated for 148 seconds. The daily heliocentric trajectory fixes the Sun direction for the comet-solar-ecliptic frame. Obliquity 23.4411° transforms it to equatorial coordinates; the omitted date-to-J2000 precession is below 0.2° and belongs to the camera's approximation. At the anchor, +Z follows the long axis and −Y follows the observer projection perpendicular to it. Propagating this frame with the two published periods places Giotto at approximately **161.41° E, 18.53° N** in the shape frame at C3436 (13 March 1986, 23:58:07.117440 UTC).
+
+The original HMC header provides the comet, spacecraft and Sun position vectors in B1950. The pinned approximate B1950-to-J2000 rotation supplies the observer and Sun directions. The MPS caption fixes image-plane Sun orientation, giving a predicted long-axis image angle of 63.97°, compared with about 62.8° on the catalogue outline. The catalogue's yellow historical spin-axis marking is not used.
+
+An independent image-to-image similarity transform registers catalogue figure 67 to `hmc_best.gif`: scale 0.35763, rotation 0.7724°, translation (386.03, 484.00) pixels. Grayscale samples exclude colored annotations and white contours; held-out intensity correlation is 0.9909. Full-mesh silhouette validation then fits image scale and centre only. Neither the body camera nor mesh vertices are fitted to the outline.
+
+Coverage follows an authored polygon inside figure 67's illuminated region, inset by 25 catalogue pixels (about 0.5 km). Preparation rejects emission angles over 75°, incidence angles over 80° and full-source-mesh occlusion. Area-weighted source normals are interpolated for these angular cuts. The mask is geometric, never a brightness threshold. Bilinear RGB sampling retains the source display levels; exact RGB zero is reserved for gaps, so valid black becomes RGB (1,1,1). No contrast gain, albedo correction, mirrored imagery or synthetic detail is added.
+
+Seven barycentric samples per source triangle estimate about 4.3% coverage. Reducing the inset to zero would raise this same polygon's estimate to about 8.2%, but would include the least certain boundary. This sensitivity is an opportunity for better control, not evidence that the larger area is already registered. Additional Giotto and Vega observations remain candidates; this dataset does not exhaust them.
+
+The old [calibrated-image intake](source/reference/giotto-hmc-intake.json) remains a separate historical survey. Its unqualified status and image reuse questions apply to those raw frames, not to the displayed MPS composite used here.
 
 See [NOTICE.md](NOTICE.md) for credits.
 

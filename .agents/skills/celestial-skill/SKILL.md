@@ -19,6 +19,20 @@ comes from cssEarth's shared application. Follow this workflow for a new body;
 for a repair, enter at the affected stage and reuse valid work already done.
 Research and review requests do not imply implementation or publication.
 
+## Shapes belong to datasets
+
+Different datasets of the same body may use different source-backed shape
+models. Pair each dataset with the mesh and coordinate system that support its
+observations; sharing a body does not require sharing one mesh. Prefer the
+matching published model over forcing imagery onto an incompatible shape.
+Use existing prepared-model selection while keeping one active object scene,
+only the selected model visible, and the shared renderer, camera and shell.
+A restriction on renderer changes does not by itself freeze prepared geometry;
+respect any explicit geometry or topology restriction in the task's scope.
+Explain meaningful model differences beside the dataset and qualify registration,
+coverage and picking against the selected mesh. The [implementation map](references/implementation-map.md)
+locates the existing support for alternative models.
+
 ## Scope for existing moon upgrades
 
 For Moons-owner follow-up proposals and PRs, keep existing body geometry,
@@ -54,6 +68,16 @@ releases for better-resolution, registered or photometrically corrected imagery
 and useful complementary products, such as elevation, geology or composition.
 Follow promising citations to the actual release; a display-texture catalog or
 press-image search alone does not establish what datasets exist.
+
+Search the relevant papers explicitly as well as the data archives. Inspect
+full text, tables, appendices and supplementary files: a usable radius table,
+mesh, camera solution or registration controls may be published there without
+a separate dataset download. Follow authoritative open-access or author-repository
+copies when available. Match the paper's model version, coordinates, units and
+observation identifiers to the selected inputs before using its numbers.
+Record any transcription or digitization and check it against the published
+table or figure. A paper's availability does not establish image or data reuse
+rights; unresolved access remains unresolved evidence, not proof of absence.
 
 Explain the selected sources and useful alternatives once in the body's README
 or a linked detailed method: source link,
