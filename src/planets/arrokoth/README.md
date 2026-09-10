@@ -16,9 +16,11 @@ bind the tested code and assets to the [opening view](evidence/spacecraft-defaul
 All 35 runtime image hashes, the source UV attribution, and the 1,000-face
 prepared terrain match the previous revision. No imagery upload is required.
 The source and minimap tests pass, as does the tooling TypeScript check.
-The broader density conformance run failed its empty-sky double-click check;
-that failure is retained in the report. No full-site build or all-body suite
-was run for this presentation change.
+The DPR 1/2 interaction conformance cases pass. Their initial empty-sky failure
+was a stale DOM-only test probe that clicked Haumea; the probe now checks the
+actual retained hover target. The initial failure and corrected results are
+retained in the report. No full-site build or all-body suite was run locally
+for this presentation change.
 
 2026-09-09: corrected acquisition instructions and recovered provenance from
 existing pins. Source and prepared output identities are unchanged; no new

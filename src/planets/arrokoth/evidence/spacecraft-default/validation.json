@@ -231,13 +231,22 @@
       "initial-shell",
       "dataset-interactions",
       "dataset-interactions-dpr-2",
-      "lens-race"
-    ],
-    "failed": "dpr-1: empty sky must preserve the camera; double-click moved the camera after the sky drag",
-    "notReached": [
+      "lens-race",
+      "dpr-1",
       "dpr-2"
     ],
-    "failureLog": "conformance-failure.txt"
+    "notReached": [],
+    "failureLog": "conformance-failure.txt",
+    "initialFailure": "dpr-1: empty sky must preserve the camera; double-click moved the camera after the sky drag",
+    "resolvedFailure": {
+      "cause": "The DOM-only empty-sky probe missed Haumea in the retained screen-picking registry. Hover at (1168,96) identified Haumea before the failing double-click.",
+      "correction": "Probe the actual retained hover target before choosing an empty-sky point. No production camera change.",
+      "testedHeadBeforeTestPatch": "927b8bd8e",
+      "testPath": "site/test/skybox-pointer-boundary.mjs",
+      "testSha256": "8858cad1e20fcfef052eb68700c75ec89987063566530c2dbd79159800a7fb0a",
+      "passedReport": "conformance-dpr.json",
+      "passedLog": "conformance-dpr.log"
+    }
   },
   "validation": {
     "sourceAndMinimapTests": 4,
