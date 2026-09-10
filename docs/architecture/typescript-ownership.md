@@ -8,9 +8,18 @@ The [ownership inventory](../../tools/typescript-ownership.json) has no remainin
 
 Test directories and capture filenames do not exempt authored code. Data fixtures retain their native formats; executable fixture helpers and browser/oracle harnesses are TypeScript. Generated browser bundles and package distributions are ignored build products. The inventory names the remaining JavaScript exceptions individually:
 
-- Four tracked generated data modules, each with its generator and source anchor. The navigation-marker module is also generated, but ignored.
 - Three preserved Cesium modules with their upstream provenance.
-- The Astro and ESLint configuration entry points.
+
+The shell title, icon, overview-title and wordmark data modules are ignored build
+products, like the navigation-marker module. `pnpm prepare:shell` restores the
+hash-pinned Inter font when missing, prepares the object catalogue, then replays
+the four generators. The source vectors, font recipe and generators remain
+committed. Installation, development, builds, asset setup and the root test command
+run this preparation before consuming the modules.
+
+Astro and ESLint use `.mts` configuration entry points, checked by
+`pnpm typecheck:configs` and the main typecheck command. The pinned `jiti`
+development dependency lets ESLint load its TypeScript configuration normally.
 
 Application and test consumers import typed owners directly. The five obsolete
 JavaScript compatibility entry points have been removed. Historical source

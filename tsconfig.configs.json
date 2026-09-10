@@ -1,0 +1,4 @@
+{
+  "extends": "./tools/tsconfig.json",
+  "include": ["./astro.config.mts", "./eslint.config.mts"]
+}

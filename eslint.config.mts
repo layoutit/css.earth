@@ -1,3 +1,4 @@
+import type { Linter } from "eslint";
 import typescriptParser from '@typescript-eslint/parser';
 
 export const packageLineLimit = 600;
@@ -35,4 +36,4 @@ export default [
       }],
     },
   },
-];
+] satisfies Linter.Config[];

@@ -17,6 +17,7 @@
 
 - Write application, preparation, tooling, test, executable fixture-helper, and capture implementations in strict TypeScript. Validate external values at runtime; do not replace runtime validation with type assertions or unchecked declaration files.
 - Keep generated outputs and preserved vendor code in their source-owned formats. Existing JavaScript compatibility modules must only re-export their typed owners.
+- Do not commit generated shell modules. Keep their sources and generators; `pnpm prepare:shell` must restore missing inputs and reproduce the outputs before consumers run.
 - `pnpm check:typescript-ownership` enforces the remaining authored-JavaScript backlog and justified exceptions. Remove migrated or retired entries; do not add new implementation debt to make the check pass. Run `pnpm typecheck` and behavior/source checks appropriate to each migration.
 
 ## Provenance and documentation
