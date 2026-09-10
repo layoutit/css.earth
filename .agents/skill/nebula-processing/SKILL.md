@@ -69,7 +69,7 @@ Importing and aligning a candidate does not authorize processing. A user instruc
 ## 7. Preserve and promote deliberately
 
 - For an accepted source set, write a `cssearth-nebula-bake@1` recipe and use `pnpm lab:nebula:bake --recipe=<path>`. Follow `labs/nebula/docs/baking.md`. Save exact image placement, RGB treatment, star/removal inputs and presentation choices; a local result ID alone cannot rebuild an image.
-- Validate replay from pinned source inputs, not only restored processing caches. Keep generated density textures and native/3D caches out of Git. The current three accepted sources include an explicitly pinned pre-NOX baseline; omitting it changes their pixels.
+- Validate replay from a separate clean clone with no source/processing caches, not only restored results. Use the nebula-only installation sequence in the bake guide; run `pnpm lab:nebula:bake` followed by the read-only `pnpm lab:nebula:verify`. Record the tested commit, platform, cold-run duration and any limits. Keep generated density textures and native/3D caches out of Git. The current three accepted sources include an explicitly pinned pre-NOX baseline; omitting it changes their pixels.
 
 - Native NOX outputs: `.local/nebula-lab/star-removal-nox-applied/`.
 - Completed volumes: `.local/nebula-lab/reconstructions/`, including descriptor, masters/delivery, provenance and manifest.
