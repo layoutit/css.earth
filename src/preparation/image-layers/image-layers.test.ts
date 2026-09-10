@@ -7,6 +7,7 @@ import sharp from 'sharp';
 import { parseImageLayerRecipe, type ImageLayerRecipe } from './config.js';
 import { prepareImageLayers, sha256 } from './prepare.js';
 import { restoreEnvironmentObject } from '../environment-images.js';
+import { resizeRgbaLanczos3 } from './resize-rgba.js';
 
 test('production preparation preserves canonical flux and supplies nondegenerate edge banks',async()=>{
   const root=await mkdtemp(join(tmpdir(),'image-layers-')),source=join(root,'source'),output=join(root,'prepared');
@@ -37,8 +38,36 @@ test('production preparation preserves canonical flux and supplies nondegenerate
   await writeFile(changedPath,'changed');
   await assert.rejects(restoreEnvironmentObject(root), /digest mismatch/);
   assert.equal(await readFile(changedPath,'utf8'),'changed');
+  const downsampled=await prepareImageLayers({sourceDirectory:source,outputDirectory:join(root,'downsampled'),recipe:{...parsed,bake:{...parsed.bake,diffuseFacePixels:5}}});
+  const diffuseLeaf=downsampled.banks.find(bank=>bank.axis==='z')!.leaves[0];
+  const resizedImage=await sharp(join(root,'downsampled',diffuseLeaf.texturePath)).metadata();
+  assert.equal(resizedImage.width,5,'production preparation invokes the diffuse downsampler');
+  assert.equal(resizedImage.height,5);
   const rotated=await prepareImageLayers({sourceDirectory:source,outputDirectory:join(root,'rotated'),recipe:{...parsed,observation:{...parsed.observation,northClockwiseDeg:31,centerRaDeg:1.2}}});
   assert.notDeepEqual(rotated.banks[2].leaves[0].verticesUnits,bank.banks[2].leaves[0].verticesUnits,'astrometric registration must affect baked geometry');
 });
 
 test('recipe rejects an unnormalised depth model',()=>{const bad={schema:'cssearth-image-layer-recipe@1',id:'bad',source:{path:'a.png',sha256:'0'.repeat(64),dimensions:[2,2],originalDimensions:[2,2],publisherUrl:'https://example.test',downloadUrl:'https://example.test/a',credit:'Fixture',license:'CC-BY-4.0'},observation:{centerRaDeg:1,centerDecDeg:2,fieldOfViewDeg:[2,1],northClockwiseDeg:0},target:{centerRaDeg:1,centerDecDeg:2,distancePc:1000},geometry:{kind:'inclined-disk',inclinationDeg:20,lineOfNodesPaDeg:30,thicknessKpc:1,supportRadiusKpc:2,supportTaperFraction:.9,depthWeights:[1,1,1],depthScales:[1,1,1]},bake:{maxFacePixels:2,diffuseFacePixels:2,crossAxisSlices:3,crossAxisAlongPixels:2,crossAxisDepthPixels:9,backgroundFloor:0,edgeTaperFraction:.1,diffuseFraction:.6,diffuseSigmaPixels:1,encoding:{format:'webp',quality:90}},provenance:{path:'provenance.json',sha256:'0'.repeat(64)}};assert.throws(()=>parseImageLayerRecipe(bad),/sum to one/);});
+
+
+test('diffuse resize preserves canonical pixels at fractional horizontal phases across CPUs', () => {
+  const width = 2391, height = 64, input = Buffer.alloc(width * height * 4);
+  let state = 1;
+  for (let index = 0; index < input.length; index++) {
+    state = (Math.imul(state, 1664525) + 1013904223) | 0;
+    input[index] = state >>> 24;
+  }
+  // Independent baseline: Sharp 0.35.3 / libvips 8.18.3 on macOS arm64.
+  // Unfused coordinate arithmetic changes two bytes in this small fixture.
+  assert.equal(sha256(resizeRgbaLanczos3(input, width, height, 320, 8)),
+    'ba6855a162e3aff54dbea530227f1bb1389363282bf009faf0d168950609d804');
+});
+
+test('diffuse resize rejects malformed dimensions and unsupported enlargement', () => {
+  const pixel = Buffer.from([17, 29, 43, 127]);
+  assert.deepEqual(resizeRgbaLanczos3(pixel, 1, 1, 1, 1), pixel);
+  assert.throws(() => resizeRgbaLanczos3(pixel, 0, 1, 1, 1), /positive integers/);
+  assert.throws(() => resizeRgbaLanczos3(pixel, 1.5, 1, 1, 1), /positive integers/);
+  assert.throws(() => resizeRgbaLanczos3(pixel, 2, 1, 1, 1), /input bytes/);
+  assert.throws(() => resizeRgbaLanczos3(pixel, 1, 1, 2, 1), /downsampling only/);
+});
