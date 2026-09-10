@@ -16,12 +16,8 @@ const close = (a: readonly number[], b: readonly number[], message: string) =>
   a.forEach((value, i) => assert.ok(Math.abs(value - b[i]) < 1e-9, `${message} axis ${i}: ${value} != ${b[i]}`));
 
 async function prepared() {
-  // Historical fixture identities derive from the recorded catalogue name; only reads use relocated paths.
-  const recipe = JSON.parse(await readFile('labs/nebula/models/image-overlays.json', 'utf8'));
-  return Promise.all(recipe.targets.map(async (target: { directory: string; referenceObject: string }) => ({ target,
-    provenance: parseLabModelJson(await readFile(resolveLabModelPath(`${target.directory}/source/provenance.json`), 'utf8')),
-    frame: parseLabModelJson(await readFile(resolveLabModelPath(target.referenceObject), 'utf8')).properties.volume as OverlayFrame,
-  })));
+  return JSON.parse(await readFile('labs/nebula/src/alignment/fixtures/legacy-sky-geometry.json', 'utf8')) as
+    { target: { directory: string }; provenance: any; frame: OverlayFrame }[];
 }
 test('every prepared image maps its full raster edges to the calibrated provenance corners without bleed', async () => {
   let images = 0;
@@ -36,7 +32,7 @@ test('every prepared image maps its full raster edges to the calibrated provenan
   assert.ok(images >= 7, 'check the real prepared reference bank');
 });
 test('full-precision projective interior maps independently calculated Astropy ICRS rays', async () => {
-  const oracle = parseLabModelJson(await readFile('labs/nebula/models/overlay-wcs-oracle.json', 'utf8'));
+  const oracle = parseLabModelJson(await readFile('labs/nebula/src/alignment/fixtures/astropy-wcs.json', 'utf8'));
   const records = await prepared(); let checked = 0;
   for (const fixture of oracle.fixtures) {
     const record = records.find(item => fixture.id.startsWith(`${basename(item.target.directory)}-`));

@@ -14,6 +14,10 @@ Open [Alignment](http://127.0.0.1:4331/alignment) or [Reconstruction](http://127
 - **Current LMC variants:** ESO VISTA, NASA/IPAC WISE and Horálek optical. They use separate color treatments and an approximate stellar-density depth prior. SMC has prepared density/image models; extending this new reconstruction flow requires its own registered sources and recipe.
 - Large originals, native removal products and newly processed volumes stay in the ignored local cache. Processing does not publish or replace production assets.
 
+The image catalogue contains only **ESO VISTA, Horálek optical and NASA WISE**. Retired image candidates and experimental render banks are removed. Reconstruction starts with the unpainted density reference when no saved result is selected. SMC retains its density field for future work.
+
+Keep the shared density, star catalogue and calibration inputs: they reproduce the selected results. The small historical SMASH target and coordinate receipts are star-preparation evidence, not selectable color sources. Research notes remain under `docs/research`; superseded render assets are recoverable from Git history before this cleanup.
+
 ```text
 labs/nebula/
 ├── AGENTS.md             # Usage, ownership and development boundaries

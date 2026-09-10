@@ -53,14 +53,12 @@ export interface LabSubjectRecord {
   /** Fixed original-image plane prepared from this saved result's exact image registration. */
   reconstructionOverlay?: string;
   density?: { directory: string; modelNote: string; sourcePageUrl: string; credit: string; overlays?: string; candidateImageIds?: string[];
-    reconstructionReferenceImageId?: string; referenceFramingRadiusUnits?: number };
+    reconstructionReferenceImageId?: string; starAlignmentReference?: { path: string; sha256: string }; referenceFramingRadiusUnits?: number };
 }
 const subjectRecords: readonly LabSubjectRecord[] = records;
 export const localFile = (path: string) => `/@fs${__NEBULA_REPO_ROOT__.replace(/\/$/, '')}/${path}`;
 const recipes = import.meta.glob('../../../../src/objects/*/source/recipe.json', { eager: true, import: 'default' }) as
   Record<string, { source: { publisherUrl: string; credit: string }; geometry: { supportRadiusKpc: number } }>;
-const candidates = import.meta.glob('../../../../.local/nebula-lab/*-{cutout,diffuse,residual,mask}.png',
-  { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
 function prepareSubjectRecord(record: LabSubjectRecord) {
   const sharedDensity = record.density && subjectRecords.filter(item => item.density?.directory === record.density!.directory);
   const configuredRadii = sharedDensity?.flatMap(item => item.density?.referenceFramingRadiusUnits === undefined ? [] : [item.density.referenceFramingRadiusUnits]) ?? [];
@@ -94,8 +92,8 @@ function prepareSubjectRecord(record: LabSubjectRecord) {
     throw new TypeError(`Lab subject ${record.id} has an invalid original overlay path.`);
   const recipe = recipes[`../../../../${record.directory}/source/recipe.json`];
   const imagePath = record.imagePath ?? (record.image ? `${record.directory}/${record.image}` : null);
-  if (!imagePath) throw new TypeError(`Lab subject ${record.id} has no comparison image path.`);
-  const sourceUrl = localFile(imagePath);
+  if (!imagePath && !density) throw new TypeError(`Lab subject ${record.id} has no comparison image or density reference.`);
+  const sourceUrl = imagePath ? localFile(imagePath) : '';
   const sourcePageUrl = record.sourcePageUrl ?? recipe?.source.publisherUrl;
   const credit = record.credit ?? recipe?.source.credit;
   if (record.reconstructionImage && (!sourcePageUrl || !/^https?:\/\//i.test(sourcePageUrl) || !credit?.trim()))
@@ -103,16 +101,11 @@ function prepareSubjectRecord(record: LabSubjectRecord) {
   const declared = sourceCatalog.subjects.find(item => item.subjectId === (record.sourceSubjectId ?? record.id))?.sources;
   const sourceImages = declared?.map(source => ({ id: source.id, name: source.name,
     sourceUrl: localFile(`${sourceCatalog.pathBase}/${source.path}`), sourcePageUrl: source.sourcePageUrl, credit: source.credit }))
-    ?? [{ id: `${record.id}-source`, name: `${record.name} · source`, sourceUrl, sourcePageUrl, credit }];
+    ?? (imagePath ? [{ id: `${record.id}-source`, name: `${record.name} · source`, sourceUrl, sourcePageUrl, credit }] : []);
   for (const comparison of record.comparisonImages ?? []) {
     sourceImages.push({ id: comparison.id, name: comparison.name, sourceUrl: localFile(comparison.imagePath),
       sourcePageUrl: sourceImages[0]?.sourcePageUrl,
       credit: `Offline extraction used by this volume. ${sourceImages[0]?.credit ?? ''}` });
-  }
-  for (const kind of ['cutout', 'diffuse', 'residual', 'mask']) {
-    const url = candidates[`../../../../.local/nebula-lab/${record.id}-${kind}.png`];
-    if (url) sourceImages.push({ id: `${record.id}-${kind}`, name: `Extraction candidate · ${kind}`, sourceUrl: url,
-      sourcePageUrl, credit: `Local extraction experiment. Not a calibrated measurement. ${credit ?? ''}` });
   }
   return { ...record, density, sourceUrl, sourcePageUrl, credit, sourceImages, hasDetail: record.hasDetail ?? Boolean(recipe),
     framingRadiusUnits: record.framingRadiusUnits ?? recipe?.geometry.supportRadiusKpc };

@@ -92,7 +92,16 @@ test('tiny offline bake uses shared density support and writes pinned XYZ resour
     const prepared=JSON.parse(await readFile(resolve(work.outputDirectory,'prepared/inspection.json'),'utf8'));
     const leaves=prepared.data.stacks.flatMap((s:{leaves:{id:string}[]})=>s.leaves.map(l=>l.id));
     const catalogue=parseCloudCatalogue(JSON.parse(await readFile(resolve(work.outputDirectory,'source/cloud-parts.json'),'utf8')),work.id,leaves);
-    const inspection=createCloudInspection(catalogue);assert.equal(leaves.filter((id:string)=>inspection.includes(id)).length,144);
+    // Main now omits lossless-alpha empty slabs. Check the actual pixels instead
+    // of requiring invisible render nodes or mirroring the compiler's flag.
+    const nonempty:string[]=[];
+    for(const quad of slices.quads){
+      const alpha=await sharp(resolve(work.outputDirectory,'prepared',quad.texturePath)).ensureAlpha().extractChannel('alpha').raw().toBuffer();
+      if(alpha.some(value=>value>0))nonempty.push(quad.id);
+    }
+    const inspection=createCloudInspection(catalogue);
+    assert.ok(nonempty.length>0);
+    assert.deepEqual(leaves.filter((id:string)=>inspection.includes(id)).sort(),nonempty.sort());
     inspection.setSelection([]);assert.equal(leaves.filter((id:string)=>inspection.includes(id)).length,0);
     for(const resource of prepared.data.resources){const bytes=await readFile(resolve(work.outputDirectory,'prepared',resource.path));assert.equal(sha256(bytes),resource.sha256);}
     assert.equal(sha256(await readFile(resolve(directory,'source.png'))),sha256(photo));

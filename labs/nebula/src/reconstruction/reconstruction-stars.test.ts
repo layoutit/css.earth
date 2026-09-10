@@ -8,12 +8,12 @@ import { prepareDensityProjection } from './density-projection.js';
 
 const path = 'labs/nebula/models/lmc/stars/prepared/stars.json';
 const cloudPath = 'labs/nebula/models/lmc/full-density/object.json';
-const referencePath = 'labs/nebula/models/lmc/overlays/overlays.json';
+const referencePath = 'labs/nebula/models/lmc/stars/source/alignment.json';
 const close = (a: number, b: number, tolerance = 1e-8) => assert.ok(Math.abs(a - b) < tolerance, `${a} != ${b}`);
 const fixturePromise = (async () => {
   const bytes = await readFile(path), catalogue = JSON.parse(bytes.toString()) as PreparedLmcStars;
   const referenceBytes = await readFile(referencePath), reference = JSON.parse(referenceBytes.toString());
-  const overlay = reference.overlays.find((row: { id: string }) => row.id === 'smash-original');
+  const overlay = reference.overlay;
   const recipe = JSON.parse(await readFile('labs/nebula/models/lmc/full-density/source/volume.json', 'utf8'));
   const densitySource = await loadVolumeSource('labs/nebula/models/lmc/full-density/source', recipe);
   const projection = prepareDensityProjection(densitySource, Math.hypot(...catalogue.frame.originM) / catalogue.frame.metersPerUnit);

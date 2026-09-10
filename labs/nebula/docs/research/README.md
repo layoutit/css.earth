@@ -2,6 +2,8 @@
 
 These records preserve earlier results and limitations. Their former source/benchmark tabs and Orion models have been removed from the app. Some historical commands refer to those removed assets; they are experiment records, not the current setup sequence.
 
+The image cleanup also retires SMASH-colored cloud banks, broad/filled/high-resolution trials, Tarantula renders and unselected image previews. Their files remain in Git history at `23aaba5a0`; their research conclusions remain here. Coordinate regression fixtures and inputs required to reproduce the accepted star catalogue are retained without restoring these images to the picker.
+
 | Record | What it establishes |
 |---|---|
 | [Research plan](research-plan.md) | Connected structures, depth assumptions and fixed-camera acceptance gates |

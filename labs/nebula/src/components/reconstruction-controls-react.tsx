@@ -87,7 +87,7 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
         displayedAppearance = parseCloudAppearance(prepared?.appearance);
         appearance = readCloudAppearance(subjectId, selection.imageId, displayedAppearance);
         selection.displayedResultId = prepared?.resultId; saveSelection();
-        message(prepared ? 'Reconstruction loaded.' : 'Historical benchmark.');
+        message(prepared ? 'Reconstruction loaded.' : 'Unpainted density reference.');
       }
     } finally { if (current()) { mounting = false; render(); } }
   }
@@ -236,7 +236,7 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
     <label className="field-label" htmlFor="reconstruction-image">Source image</label>
     <select id="reconstruction-image" aria-describedby="reconstruction-image-status" value={view.imageId}
       disabled={view.selectDisabled} onChange={event => actions.current.choose?.(event.target.value)}>
-      <option value="benchmark">Historical benchmark</option>
+      <option value="benchmark">Unpainted density</option>
       {view.candidates.map(row => <option key={row.imageId} value={row.imageId}>{row.label}{row.prepared ? ' · saved' : ''}</option>)}
     </select>
     {view.imageId !== 'benchmark' && <CloudAppearanceControls value={view.appearance} disabled={view.processDisabled}

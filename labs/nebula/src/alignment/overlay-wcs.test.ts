@@ -6,7 +6,7 @@ import { overlayCorners, rayToOverlayPlane, wcsPixelRay, type ImageWcs, type Ove
 import { registeredOverlayCorners, type ImageRegistration } from './overlay-registration.js';
 
 test('TAN corner and interior rays match independent Astropy WCS fixtures', async () => {
-  const oracle = parseLabModelJson(await readFile('labs/nebula/models/overlay-wcs-oracle.json', 'utf8'));
+  const oracle = parseLabModelJson(await readFile('labs/nebula/src/alignment/fixtures/astropy-wcs.json', 'utf8'));
   for (const fixture of oracle.fixtures) for (let i = 0; i < fixture.pixels.length; i++) {
     const [x, y] = fixture.pixels[i];
     const actual = wcsPixelRay(fixture.wcs as ImageWcs, x, y);
@@ -16,12 +16,9 @@ test('TAN corner and interior rays match independent Astropy WCS fixtures', asyn
 });
 
 test('full image planes retain publisher angular footprints in each existing density frame', async () => {
-  const recipe = parseLabModelJson(await readFile('labs/nebula/models/image-overlays.json', 'utf8'));
-  for (const target of recipe.targets) {
-    const descriptor = parseLabModelJson(await readFile(target.referenceObject, 'utf8'));
-    const provenance = parseLabModelJson(await readFile(`${target.directory}/source/provenance.json`, 'utf8'));
-    const frame = descriptor.properties.volume as OverlayFrame;
-    const originRay = frame.originM.map(v => v / Math.hypot(...frame.originM)) as [number, number, number];
+  const records = JSON.parse(await readFile('labs/nebula/src/alignment/fixtures/legacy-sky-geometry.json', 'utf8'));
+  for (const { target, provenance, frame } of records) {
+    const originRay = frame.originM.map((v: number) => v / Math.hypot(...frame.originM)) as [number, number, number];
     const origin = rayToOverlayPlane(originRay, frame);
     assert.ok(Math.hypot(...origin) < 1e-12);
     for (const input of target.images) {

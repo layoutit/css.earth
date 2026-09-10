@@ -180,8 +180,12 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
       await pinned(root,densityRecipe.path,densityRecipe.sha256);
       const stars = subject.stars ? { path: subject.stars, sha256: hash(await pinned(root, subject.stars)) } : undefined;
       const referenceId=subject.density!.reconstructionReferenceImageId;
-      const referenceImage=target.images.find((item:{id:string})=>item.id===referenceId);
-      const referenceOverlay=overlays.overlays.find((item:{id:string})=>item.id===referenceId);
+      const referencePin=subject.density!.starAlignmentReference;
+      const coordinateReference=referencePin ? await json(root,referencePin.path,referencePin.sha256) : undefined;
+      if(coordinateReference && coordinateReference.schema!=='cssearth-nebula-star-alignment@1')
+        throw new TypeError('Invalid catalogue star alignment reference.');
+      const referenceImage=coordinateReference??target.images.find((item:{id:string})=>item.id===referenceId);
+      const referenceOverlay=coordinateReference?.overlay??overlays.overlays.find((item:{id:string})=>item.id===referenceId);
       if(stars&&(!referenceImage?.wcs||!referenceOverlay))throw new TypeError('The Alignment cloud requires a configured sky-to-density star reference.');
       const slicesPath=`${cloudDirectory}/prepared/volume-slices.json`;
       const cloud={descriptor:cloudDescriptor,slices:{path:slicesPath,sha256:hash(await pinned(root,slicesPath))},
@@ -189,7 +193,7 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
         ...(stars?{starAlignment:{wcs:referenceImage.wcs,
           alignment:{style:referenceOverlay.style,pivotCssPx:referenceOverlay.pivotCssPx,
             placement:referenceOverlay.initialPlacement??defaultOverlayPlacement()},
-          provenancePin:{path:subject.density!.overlays!,sha256:hash(await pinned(root,subject.density!.overlays!))}}}:{})};
+          provenancePin:referencePin??{path:subject.density!.overlays!,sha256:hash(await pinned(root,subject.density!.overlays!))}}}:{})};
       const pins = Object.fromEntries(await Promise.all(['reconstruction/reconstruction-worker.ts', 'reconstruction/reconstruction-geometry.ts', 'reconstruction/filled-components.ts',
         'reconstruction/cloud-material.ts', 'reconstruction/cloud-appearance.ts', 'reconstruction/cloud-detail.ts', 'reconstruction/density-projection.ts', 'reconstruction/registered-image.ts', 'reconstruction/reconstruction-stars.ts', 'reconstruction/filled-products.ts', 'density/observation-prior.ts', 'alignment/overlay-wcs.ts', 'cli/prepare-lmc-stars.ts', 'stars/star-photometry.ts'].map(async name =>
         [name, hash(await pinned(root, `labs/nebula/src/${name}`))])));
