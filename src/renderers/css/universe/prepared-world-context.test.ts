@@ -88,6 +88,22 @@ function mount(scale: number, requestPublication?: () => boolean) {
   return layer.root as unknown as FakeElement;
 }
 
+test('open world trajectories validate their epoch vertex and never accept a closing weight', () => {
+  const original = plan(1), body = original.bodies[0]!;
+  const verticesM = [[-100, -50, 0], [-50, -30, 0], [0, -10, 0], [100, 0, 0],
+    [150, 20, 0], [200, 50, 0], [250, 90, 0], [300, 140, 0]];
+  const orbit = { centerBodyId: 'sun', centerPositionM: [0, 0, 0], verticesM, closed: false,
+    bodyVertexIndex: 3, displayExtentAu: 600, trailModel: 'finite-open-trajectory-constant-weight',
+    trail: Array(7).fill(1), activeChords: [0, 1, 2, 3, 4, 5, 6], extentChords: [0, 3, 1, 5, 2, 4, 6] };
+  const input = { ...original, bodies: [{ ...body, orbit }, original.bodies[1]] };
+  expect(parsePreparedWorldContext(input).bodies[0]!.orbit).toEqual(orbit);
+  for (const invalid of [{ closed: true }, { bodyVertexIndex: undefined }, { bodyVertexIndex: 0 }, { bodyVertexIndex: 8 },
+    { trail: Array(8).fill(1) }, { trail: [0, 1, 1, 1, 1, 1, 1] }, { displayExtentAu: 0 },
+    { activeChords: [0, 1, 2, 3, 4, 5, 7] }]) {
+    expect(() => parsePreparedWorldContext({ ...input, bodies: [{ ...body, orbit: { ...orbit, ...invalid } }, original.bodies[1]] })).toThrow();
+  }
+});
+
 test('semantic changes invalidate worker snapshots without synchronously republishing geometry', () => {
   const request = vi.fn(() => true), root = mount(1, request), layer = mounted.get(root)!;
   const clock = root.ownerDocument.defaultView;

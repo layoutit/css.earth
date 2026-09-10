@@ -136,7 +136,7 @@ export function mountRetainedHeliocentricView({
   let systemPoolSize = 0;
   if (system !== null) {
     systemPoolSize = system.bodies.reduce(
-      (total, body) => total + body.orbit.vertexCount + systemPoolSpare,
+      (total, body) => total + (body.orbit === null ? 0 : body.orbit.vertexCount + systemPoolSpare),
       0,
     );
     for (let index = 0; index < systemPoolSize; index += 1) {
@@ -374,9 +374,9 @@ export function mountRetainedHeliocentricView({
         throw new TypeError("Orbit trail spans must be finite turns leaving part of the orbit undrawn.");
       }
       trailSpans = Object.freeze({ solidTurns: spans.solidTurns, fadeTurns: spans.fadeTurns });
-      const weights = { own: trailWeightsForSpans(plan.orbit.chordBehindTurns, trailSpans) };
+      const weights = { own: plan.orbit.closed === false ? plan.orbit.trail : trailWeightsForSpans(plan.orbit.chordBehindTurns, trailSpans) };
       for (const body of system?.bodies ?? []) {
-        weights[body.id] = trailWeightsForSpans(body.orbit.chordBehindTurns, trailSpans);
+        if (body.orbit !== null) weights[body.id] = trailWeightsForSpans(body.orbit.chordBehindTurns, trailSpans);
       }
       trailWeights = Object.freeze(weights);
       return trailSpans;
