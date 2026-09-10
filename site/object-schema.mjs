@@ -14,7 +14,7 @@ const OBJECT_INPUT_KEYS = new Set([
 // Classification vocabulary, not a registry of object identities. Extend this
 // list deliberately when a package introduces a new kind of body.
 export const OBJECT_CLASSIFICATIONS = Object.freeze([
-  "star", "planet", "satellite", "dwarf-planet", "asteroid", "comet",
+  "star", "planet", "satellite", "dwarf-planet", "asteroid", "trans-neptunian", "comet",
 ]);
 
 export function defineObject(input) {

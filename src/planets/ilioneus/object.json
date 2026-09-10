@@ -1,0 +1,127 @@
+{
+  "id": "ilioneus",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Ilioneus",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 30.3555
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "74869ac20b4acfd9a27334bbd71362751708afc5ab722a6a032510bd6a500586"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "3904359bb0f42fa022d896bd8f94021f614e8a76af5534e11a8359587d970bac"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "2dd8db713fc3f18305c82e20b7c35af74d60889a2871ffe55190cc2ac2a48696"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "ec622068a97ec04e92eca3328be76b81038399584beafe72bdee008bbfb43126"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "e6cf959eff77966fa3e5e45db9ea58b13d9e60fb9c43f2f0cbe81a5a9d96af5b"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "5d7b397279cd31330adbb6d024631305bdb8eea591aabcb5dbd7ccb75f52c14d"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        581780215379.8516,
+        424235499488.76904,
+        271969013105.17682
+      ],
+      "presentationToReference": [
+        0.7600676081003552,
+        -2.7755575615628914e-17,
+        -0.6498440052171021,
+        0.5962202179298829,
+        0.39777715593191376,
+        0.6973483963919046,
+        0.25849310019466254,
+        -0.9174820620691819,
+        0.30233753146613157
+      ],
+      "orbitUpReference": [
+        2.7755575615628914e-17,
+        -0.39777715593191376,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 131.98043478260868,
+      "bodyRadiusM": 30355.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ilioneus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c4a3033287c1b16512973f5a35cea038b6eb6afd61fdef26b7c4176384b0dd15"
+      }
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "6371e770c2498593134fba02eb98cd29ed0e21c3144b20bb42742509200e6aac"
+  }
+}

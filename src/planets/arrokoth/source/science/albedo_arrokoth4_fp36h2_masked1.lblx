@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1J00.sch"
+    schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1J00_1510.sch"
+    schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Ancillary
+    xmlns="http://pds.nasa.gov/pds4/pds/v1"
+    xmlns:disp="http://pds.nasa.gov/pds4/disp/v1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1J00.xsd
+                        http://pds.nasa.gov/pds4/disp/v1 https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1J00_1510.xsd">
+    <Identification_Area>
+        <logical_identifier>urn:nasa:pds:nh_derived:arrokoth_shapemodel_porter2024:albedo_arrokoth4_fp36h2_masked1</logical_identifier>
+        <version_id>1.0</version_id>
+        <title>Arrokoth Albedo Map</title>
+        <information_model_version>1.19.0.0</information_model_version>
+        <product_class>Product_Ancillary</product_class>
+        <Citation_Information>
+            <author_list>Porter, S.</author_list>
+            <editor_list>Gobat, C.; Enke, B.; Crombie, M. K.; Keeney, B.; Parker, J. Wm.</editor_list>
+            <publication_year>2024</publication_year>
+            <description>Albedo map associated with shape model.</description>
+        </Citation_Information>
+        <Modification_History>
+            <Modification_Detail>
+                <modification_date>2024-10-02</modification_date>
+                <version_id>1.0</version_id>
+                <description>Initial creation of product</description>
+            </Modification_Detail>
+        </Modification_History>
+    </Identification_Area>
+    <Context_Area>
+        <Primary_Result_Summary>
+            <purpose>Science</purpose>
+            <processing_level>Derived</processing_level>
+            <Science_Facets>
+                <wavelength_range>Visible</wavelength_range>
+                <domain>Surface</domain>
+                <discipline_name>Small Bodies</discipline_name>
+                <facet1>Physical Properties</facet1>
+                <!-- <subfacet1>Albedo</subfacet1> -->
+            </Science_Facets>
+        </Primary_Result_Summary>
+        <Investigation_Area>
+            <name>New Horizons Kuiper Belt Extended Mission</name>
+            <type>Mission</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:investigation:mission.new_horizons_kem1</lid_reference>
+                <reference_type>ancillary_to_investigation</reference_type>
+            </Internal_Reference>
+        </Investigation_Area>
+        <Observing_System>
+            <Observing_System_Component>
+                <name>LOng Range Reconnaissance Imager</name>
+                <type>Instrument</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument:nh.lorri</lid_reference>
+                    <reference_type>is_instrument</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+            <Observing_System_Component>
+                <name>New Horizons</name>
+                <type>Host</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.nh</lid_reference>
+                    <reference_type>is_instrument_host</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+        </Observing_System>
+        <Target_Identification>
+            <name>(486958) Arrokoth</name>
+            <alternate_designation>2014 MU69</alternate_designation>
+            <type>Trans-Neptunian Object</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:target:trans-neptunian_object.486958_2014_mu69</lid_reference>
+                <reference_type>ancillary_to_target</reference_type>
+            </Internal_Reference>
+        </Target_Identification>
+        <Discipline_Area>
+            <disp:Display_Settings>
+                <Local_Internal_Reference>
+                    <local_identifier_reference>fits_array</local_identifier_reference>
+                    <local_reference_type>display_settings_to_array</local_reference_type>
+                </Local_Internal_Reference>
+                <disp:Display_Direction>
+                    <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+                    <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+                    <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+                    <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+                </disp:Display_Direction>
+            </disp:Display_Settings>
+        </Discipline_Area>
+    </Context_Area>
+    <Reference_List>
+        <Internal_Reference>
+            <lid_reference>urn:nasa:pds:nh_derived:arrokoth_shapemodel_porter2024:arrokoth_porter_2024</lid_reference>
+            <reference_type>ancillary_to_data</reference_type>
+            <comment>The shape model with which this albedo map is associated.</comment>
+        </Internal_Reference>
+        <Internal_Reference>
+            <lid_reference>urn:nasa:pds:nh_derived:arrokoth_shapemodel_porter2024:porteretal2024b</lid_reference>
+            <reference_type>ancillary_to_document</reference_type>
+            <comment>Pre-print paper describing the methods and processes used to create this albedo map.</comment>
+        </Internal_Reference>
+        <Source_Product_Internal>
+            <lidvid_reference>urn:nasa:pds:nh_lorri:kem1_cal::1.0</lidvid_reference>
+            <reference_type>data_to_calibrated_source_product</reference_type>
+            <comment>Only resolved images of Arrokoth on December 31, 2018 and January 1, 2019 were used to produce this albedo map.</comment>
+        </Source_Product_Internal>
+    </Reference_List>
+    <File_Area_Ancillary>
+        <File>
+            <file_name>albedo_arrokoth4_fp36h2_masked1.fits</file_name>
+            <local_identifier>fits_file</local_identifier>
+            <creation_date_time>2024-09-30</creation_date_time>
+            <file_size unit="byte">2882880</file_size>
+            <md5_checksum>a9493604958eb310af790bc182a3b508</md5_checksum>
+        </File>
+        <Header>
+            <offset unit="byte">0</offset>
+            <object_length unit="byte">2880</object_length>
+            <parsing_standard_id>FITS 4.0</parsing_standard_id>
+            <description>
+                This albedo map consists of two south polar azimuthal equidistant projections,
+                one for each lobe. This projection was used to minimize distortion relative to
+                the New Horizons images. A separate projection was used for each lobe to avoid
+                any coordinate ambiguity. The UV texture mapping in the OBJ file uses this
+                projection. Refer to the pre-print paper Porter, et al (2024b) for more detail.
+
+                Hapke parameters are provided in the header keywords 'PHOTC', 'PHOTB', and 'PHOTH'.
+                These keywords correspond to Hapke parameters c, b, and h respectively with values
+                c=0.563970266, b=0.355509153, and h=-7.04773385E-06.
+            </description>
+        </Header>
+        <Array_2D>
+            <name>32-bit floating point albedo map</name>
+            <local_identifier>fits_array</local_identifier>
+            <offset unit="byte">2880</offset>
+            <axes>2</axes>
+            <axis_index_order>Last Index Fastest</axis_index_order>
+            <Element_Array>
+                <data_type>IEEE754MSBSingle</data_type>
+            </Element_Array>
+            <Axis_Array>
+                <axis_name>Line</axis_name>
+                <elements>1200</elements>
+                <sequence_number>1</sequence_number>
+            </Axis_Array>
+            <Axis_Array>
+                <axis_name>Sample</axis_name>
+                <elements>600</elements>
+                <sequence_number>2</sequence_number>
+            </Axis_Array>
+        </Array_2D>
+    </File_Area_Ancillary>
+    <File_Area_Ancillary>
+        <File>
+            <file_name>albedo_arrokoth4_fp36h2_masked1.png</file_name>
+            <local_identifier>png_file</local_identifier>
+            <creation_date_time>2024-09-30</creation_date_time>
+            <file_size unit="byte">200809</file_size>
+            <md5_checksum>a59a79eff366f830f2f3fa395ccb7a8d</md5_checksum>
+        </File>
+        <Encoded_Image>
+            <name>Integer-encoded PNG albedo map</name>
+            <local_identifier>png_image</local_identifier>
+            <offset unit="byte">0</offset>
+            <object_length unit="byte">200809</object_length>
+            <encoding_standard_id>PNG</encoding_standard_id>
+            <description>
+                The pixels in this image are encoded as signed 32-bit integers, but only positive
+                values are used, meaning the effective range of values is that of 16-bit unsigned
+                integers (i.e., 0 to 65535). The actual albedo values (e.g., as presented in the
+                data array described above) can be approximately recovered from these integer pixel
+                values using the following formula:
+
+                    albedo = (pixel / 1361975.975) + 0.03188
+            </description>
+        </Encoded_Image>
+    </File_Area_Ancillary>
+</Product_Ancillary>

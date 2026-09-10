@@ -1,0 +1,63 @@
+{
+  "capturedAt": "2026-09-10T00:13:24.298Z",
+  "browser": "152.0.7977.84",
+  "headless": true,
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "sourceCommit": "3a6f3a346",
+  "scope": "Unmodified screenshots of the ordinary production routes at their authored default framing. Scene images fulfilled from the independently downloaded byte-verified installation. The later test-only commit does not change the app.",
+  "images": [
+    {
+      "id": "aethra",
+      "image": "docs/mars-crossing-population/evidence/aethra-default.png",
+      "sourceCapture": "output/playwright/mars-crossing-population/aethra-dpr1.png",
+      "sha256": "c72e9cbf2cec18b79315b74ace0b0ee3257053c0eb24c06c6981ecb1005726a8",
+      "dpr": 1,
+      "shadows": false,
+      "orbit": false,
+      "defaultView": true
+    },
+    {
+      "id": "lyyli",
+      "image": "docs/mars-crossing-population/evidence/lyyli-default.png",
+      "sourceCapture": "output/playwright/mars-crossing-population/lyyli-dpr1.png",
+      "sha256": "231db4bc6254d78b01921dcb3d71e1702a895a1cb40428d1e328f85f5e8c1877",
+      "dpr": 1,
+      "shadows": false,
+      "orbit": false,
+      "defaultView": true
+    },
+    {
+      "id": "hela",
+      "image": "docs/mars-crossing-population/evidence/hela-default.png",
+      "sourceCapture": "output/playwright/mars-crossing-population/hela-dpr1.png",
+      "sha256": "260f829dbd542699da16ad3a5b9454c75e285c1ee514624e8f37196e4006e5b4",
+      "dpr": 1,
+      "shadows": false,
+      "orbit": false,
+      "defaultView": true
+    },
+    {
+      "id": "kemi",
+      "image": "docs/mars-crossing-population/evidence/kemi-default.png",
+      "sourceCapture": "output/playwright/mars-crossing-population/kemi-dpr1.png",
+      "sha256": "757e00a7472acfd03ea38990466b67205508e05def8347a7932d811dba797e22",
+      "dpr": 1,
+      "shadows": false,
+      "orbit": false,
+      "defaultView": true
+    },
+    {
+      "id": "taurinensis",
+      "image": "docs/mars-crossing-population/evidence/taurinensis-default.png",
+      "sourceCapture": "output/playwright/mars-crossing-population/taurinensis-dpr1.png",
+      "sha256": "e2f2403e4dfb1b928943baae672f688b40db880367680ceb96790d9f77379a99",
+      "dpr": 1,
+      "shadows": false,
+      "orbit": false,
+      "defaultView": true
+    }
+  ]
+}

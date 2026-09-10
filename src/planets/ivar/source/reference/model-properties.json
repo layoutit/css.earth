@@ -1,0 +1,83 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/271",
+  "modelId": 271,
+  "modelVersion": "2016-04-22",
+  "diameterKm": 7.4,
+  "diameterInterpretation": "Convex light-curve reconstruction. Thermophysical size-calibrated diameter: 7.4 ± 0.2 km. Grid marks unavailable mapped imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 7.4,
+    "uncertaintyKm": 0.2,
+    "uncertaintyKind": "Selected archive diameter uncertainty; absent value remains unknown. It is not local shape accuracy.",
+    "diameterSemantics": "Volume-equivalent diameter in the selected DAMIT record, calibrated with radar for Tantalus and thermophysical data for the other bodies.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/271",
+    "sourceLabel": "DAMIT model 271",
+    "reference": "DAMIT model 271, version 2016-04-22",
+    "scaleKmPerSourceUnit": 1.0000000508665032,
+    "metersPerSourceUnit": 1000.0000508665032,
+    "limitations": "The calibrated 2016 convex solution is selected; the older nonconvex model272 is explicitly labelled plausible in the archive and is not a resolved terrain measurement. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanuš et al.2015 Table4 distinguishes this fixed revised shape fit from the varied-shape ensemble, which gives a wider size range (8.0 km, -0.9/+0.3 km). The archive7.4 km scale is used consistently with its mesh; the narrow archived error is not total physical uncertainty.",
+    "visibleDescription": "Convex lightcurve model at the archive fixed-shape scale of 7.4 km (archived ±0.2 km; additional shape-model uncertainty). Grid marks unavailable imagery."
+  },
+  "periodHours": 4.795168,
+  "poleEclipticJ2000Degrees": [
+    334,
+    39
+  ],
+  "modelLimitations": "The calibrated 2016 convex solution is selected; the older nonconvex model272 is explicitly labelled plausible in the archive and is not a resolved terrain measurement. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanuš et al.2015 Table4 distinguishes this fixed revised shape fit from the varied-shape ensemble, which gives a wider size range (8.0 km, -0.9/+0.3 km). The archive7.4 km scale is used consistently with its mesh; the narrow archived error is not total physical uncertainty.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/913/shape.txt",
+    "vertices": 1020,
+    "faces": 2036,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 1000.0000508665032,
+    "firstVertexKm": [
+      0.000763000038811142,
+      0.05968500303596725,
+      2.846967144815256
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      10.784614548575602,
+      10.580470538191511,
+      5.176328263301705
+    ],
+    "volumeCubicKm": 212.17479024304518,
+    "volumeEquivalentRadiusKm": 3.7,
+    "radialRangeKm": [
+      2.6133434122889407,
+      6.829895225341593
+    ]
+  },
+  "elevation": [
+    -4,
+    4
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2036,
+    "sourceVertices": 1020,
+    "weldedVertices": 1020,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 74,
+    "estimatedErrorMeters": 24.992700576782227,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 211919164142.4099
+    }
+  }
+}

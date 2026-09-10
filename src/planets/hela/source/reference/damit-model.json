@@ -1,0 +1,217 @@
+{
+  "name": "Hela",
+  "modelId": 454,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/454",
+  "fields": {
+    "ID": "454",
+    "Asteroid": "(699) Hela",
+    "λ": "45",
+    "β": "44",
+    "P": "3.396232",
+    "YORP": "",
+    "t0": "2445133",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2012-07-30",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/1772/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1773/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/1774/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1775/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Marciniak et al. (2012)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/143",
+      "file": "reference-143.html"
+    }
+  ],
+  "number": 699,
+  "id": "hela",
+  "displayName": "Hela",
+  "lambda": 45,
+  "beta": 44,
+  "periodHours": 3.396232,
+  "version": "2012-07-30",
+  "nonconvex": false,
+  "calibrated": false,
+  "archiveCalibrated": false,
+  "diameterKm": 13.39,
+  "uncertaintyKm": 0.45,
+  "akari": {
+    "number": 699,
+    "name": "Hela",
+    "diameterKm": 13.39,
+    "uncertaintyKm": 0.45,
+    "detections": 4,
+    "originalRow": "699    Hela               1910 KD    11.72  0.15  4   13.39  0.45 0.203 0.015"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1775/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1773/IAUspin.txt",
+  "shapeSha256": "722e4c9fad0c1b885eca9329149668e8397b4380ff0c96100c014c03fad8d77a",
+  "shapeBytes": 128392,
+  "vertices": 1586,
+  "faces": 3168,
+  "signedVolume": 1.0000000237186308,
+  "independentSignedVolume": 1.0000000237186308,
+  "originalVolumeEquivalentDiameter": 1.240700991608043,
+  "firstVertex": [
+    0.000248,
+    0.021159,
+    0.408901
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.4094481561638787,
+    0.8864326107584265
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.794386,
+      0.783265
+    ],
+    [
+      -0.705332,
+      0.735891
+    ],
+    [
+      -0.390158,
+      0.408901
+    ]
+  ],
+  "scaleKmPerSourceUnit": 10.792286046814182,
+  "alternatives": [
+    {
+      "modelId": 455,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/455",
+      "pole": [
+        "197",
+        "31"
+      ],
+      "version": "2012-07-30"
+    }
+  ],
+  "shapeKind": "Convex light-curve reconstruction",
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 13.39,
+    "uncertaintyKm": 0.45,
+    "reportedUncertaintyKm": 0.45,
+    "catalog": {
+      "number": 699,
+      "name": "Hela",
+      "diameterKm": 13.39,
+      "uncertaintyKm": 0.45,
+      "detections": 4,
+      "originalRow": "699    Hela               1910 KD    11.72  0.15  4   13.39  0.45 0.203 0.015"
+    },
+    "diameterSemantics": "AKARI effective diameter transferred as an explicit approximate volume scale",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+    "sourceLabel": "AKARI AcuA, Usui et al. (2011)",
+    "scaleKmPerSourceUnit": 10.792286046814182,
+    "metersPerSourceUnit": 10792.286046814183,
+    "limitations": "AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred.",
+    "visibleDescription": "Convex lightcurve reconstruction at approximate thermal scale: 13.39 km effective diameter (catalog ±0.45 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes."
+  },
+  "selectionNotes": "JPL SBDB class MCA confirms this body is a Mars-crosser. The original convex lightcurve inversion is not resolved terrain. The selected pole is one of two published solutions; no preference is inferred from its lower archive ID. The competing pole remains unresolved.",
+  "populationSource": {
+    "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=699",
+    "checked": "2026-09-09",
+    "file": "sbdb-hela.json",
+    "sha256": "00e3e336d36f2b912c0791ef42f8a56c2fec3e117d63b60c4b59ae194c14c4a5",
+    "orbitClass": {
+      "code": "MCA",
+      "name": "Mars-crossing Asteroid"
+    }
+  },
+  "distanceAu": 2.615426166061675,
+  "orbitalPeriodYears": 4.229820120672677,
+  "sourceFields": {
+    "ID": "454",
+    "Asteroid": "(699) Hela",
+    "λ": "45",
+    "β": "44",
+    "P": "3.396232",
+    "YORP": "",
+    "t0": "2445133",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2012-07-30",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

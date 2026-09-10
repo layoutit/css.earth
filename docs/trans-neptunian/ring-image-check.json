@@ -1,0 +1,30 @@
+{
+  "sha256": "b47a52147504514abc555ae763800106da5f4947753af3462d5593cd5928c2d5",
+  "width": 2051,
+  "height": 2051,
+  "horizontalAlphaSpansInclusive": [
+    [
+      2,
+      20
+    ],
+    [
+      394,
+      396
+    ],
+    [
+      1654,
+      1656
+    ],
+    [
+      2030,
+      2049
+    ]
+  ],
+  "centerAlpha": 0,
+  "bandInteriorAlpha": 102,
+  "alphaExtrema": [
+    0,
+    133
+  ],
+  "scope": "Actual prepared WebP decoded to RGBA. Four horizontal crossings identify two separate annuli; the aperture and inter-ring gap are transparent. Band interiors retain authored alpha 102; edge antialiasing and incident prepared quads can vary alpha. Display opacity is illustrative, not measured optical depth."
+}

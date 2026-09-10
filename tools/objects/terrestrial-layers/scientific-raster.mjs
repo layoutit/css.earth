@@ -13,6 +13,7 @@ import {composeCorrectedColor} from './photometric-observations.mjs';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mjs';
 import { loadPdsRadialTable } from './pds-radial-table.mjs';
 import { loadShapeScalarGrid } from './obj-shape.mjs';
+import { loadObjUvFits } from './obj-uv-fits.mjs';
 
 /** Interpolate the authored numeric scale; source units remain unchanged. */
 export function colorForValue(value, recipe) {
@@ -93,6 +94,7 @@ export function validateScienceQualityMasks(lens) {
 }
 
 export async function loadScienceSurface(root, lens, sourceMesh) {
+  if (lens.format === 'obj-uv-fits') return loadObjUvFits(root, lens, sourceMesh);
   if (lens.format === 'image-plane-dem') return loadImageDemScience(root, lens, sourceMesh);
   if(lens.qualityMasks!==undefined){
     validateScienceQualityMasks(lens);

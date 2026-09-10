@@ -1,0 +1,223 @@
+{
+  "number": 3451,
+  "name": "Mentor",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/2449",
+  "modelId": 4281,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4281",
+  "fields": {
+    "ID": "4281",
+    "Asteroid": "(3451) Mentor",
+    "λ": "237",
+    "β": "57",
+    "P": "7.69659",
+    "YORP": "",
+    "t0": "2446145",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.21",
+    "p3": "0.06",
+    "p4": "-0.92",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-05-07",
+    "Comment": "",
+    "Created": "2019-09-26 09:49:38",
+    "Modified": "2019-09-26 09:49:38",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/13355/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/13356/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/13357/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Ďurech et al. (2019)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/182",
+      "file": "reference-182.html",
+      "links": [
+        {
+          "label": "2019a&a...631a...2d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2019a&a...631a...2d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2019A&A...631A...2D",
+          "url": "http://adsabs.harvard.edu/abs/2019A&A...631A...2D"
+        }
+      ]
+    }
+  ],
+  "id": "mentor",
+  "displayName": "Mentor",
+  "lambda": 237.0,
+  "beta": 57.0,
+  "periodHours": 7.69659,
+  "version": "2019-05-07",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 126.288,
+  "uncertaintyKm": 1.642,
+  "akari": {
+    "number": 3451,
+    "name": "Mentor",
+    "diameterKm": 117.91,
+    "uncertaintyKm": 3.19,
+    "detections": 3,
+    "originalRow": "3451   Mentor             1984 HA1    8.10  0.15  3  117.91  3.19 0.075 0.005"
+  },
+  "neowise": {
+    "asteroid_number": "3451",
+    "prov_desig": "",
+    "comet_desig": "",
+    "mpc_packed_name": "03451",
+    "absolute_mag": "8.5000",
+    "slope_param": "0.1500",
+    "mean_jd": "2455324.0991095",
+    "n_w1": "14",
+    "n_w2": "14",
+    "n_w3": "13",
+    "n_w4": "13",
+    "fit_code": "DVBI",
+    "diameter": "126.2880",
+    "diameter_err": "1.6420",
+    "v_albedo": "0.0440",
+    "v_albedo_err": "0.0080",
+    "ir_albedo": "0.0770",
+    "ir_albedo_err": "0.0060",
+    "beaming_param": "0.7390",
+    "beaming_param_err": "0.0140",
+    "stacked_flag": "",
+    "reference": "Gr12b",
+    "notes": "",
+    "reference2": "GRAVETAL2012B",
+    "type": "jupiter_trojans",
+    "cntr": "1189"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/13357/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/13355/IAUspin.txt",
+  "shapeSha256": "649f240ede7aa6604f30dd9a05ddf905cc9bf0ff53d1765c5265f89082b195ab",
+  "shapeBytes": 46257,
+  "vertices": 572,
+  "faces": 1140,
+  "signedVolume": 1.0000001243334133,
+  "independentSignedVolume": 1.0000001243334136,
+  "originalVolumeEquivalentDiameter": 1.2407010332189938,
+  "firstVertex": [
+    -0.053264,
+    0.270474,
+    0.574945
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.511587766385202,
+    0.8866156954413789
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.818391,
+      0.78685
+    ],
+    [
+      -0.65262,
+      0.632992
+    ],
+    [
+      -0.583878,
+      0.581433
+    ]
+  ],
+  "scaleKmPerSourceUnit": 101.78761572588223,
+  "alternatives": [
+    {
+      "modelId": 4282,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4282",
+      "pole": [
+        "82",
+        "7"
+      ],
+      "version": "2019-05-07"
+    }
+  ],
+  "calibrationKind": "neowise2012",
+  "camp": "L5",
+  "distanceAu": 5.197909787831412,
+  "orbitalPeriodYears": 11.85089933276579,
+  "sourceFields": {
+    "ID": "4281",
+    "Asteroid": "(3451) Mentor",
+    "λ": "237",
+    "β": "57",
+    "P": "7.69659",
+    "YORP": "",
+    "t0": "2446145",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.21",
+    "p3": "0.06",
+    "p4": "-0.92",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-05-07",
+    "Comment": "",
+    "Created": "2019-09-26 09:49:38",
+    "Modified": "2019-09-26 09:49:38",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates"
+}

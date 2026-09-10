@@ -1,0 +1,83 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/456",
+  "modelId": 456,
+  "modelVersion": "2016-04-22",
+  "diameterKm": 1.2,
+  "diameterInterpretation": "Convex light-curve reconstruction. Thermophysical size-calibrated diameter: 1.2 km (uncertainty not supplied by archive). Grid marks unavailable mapped imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "archive-size-estimate-with-poor-thermal-fit",
+    "diameterKm": 1.2,
+    "uncertaintyKm": null,
+    "uncertaintyKind": "Selected archive diameter uncertainty; absent value remains unknown. It is not local shape accuracy.",
+    "diameterSemantics": "Archived1.2 km scale from a poorly constrained thermophysical solution; no meaningful size interval is established.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/456",
+    "sourceLabel": "DAMIT model 456",
+    "reference": "DAMIT model 456, version 2016-04-22",
+    "scaleKmPerSourceUnit": 1.00000011937836,
+    "metersPerSourceUnit": 1000.0001193783601,
+    "limitations": "The archived model gives D1.2 km with no diameter uncertainty. Unknown uncertainty is retained as null; neither zero uncertainty nor a precise surface reconstruction is claimed. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanuš et al.2015 section4.2 explicitly report a poor thermophysical fit for Cerberus and omit its uncertainties. The DAMIT calibrated flag is retained as archive metadata, not treated as strong physical-size validation.",
+    "visibleDescription": "Convex lightcurve model at an uncertain 1.2 km archive scale. The published thermal fit is poor and its size uncertainty is unconstrained. Grid marks unavailable imagery."
+  },
+  "periodHours": 6.803286,
+  "poleEclipticJ2000Degrees": [
+    311,
+    -78
+  ],
+  "modelLimitations": "The archived model gives D1.2 km with no diameter uncertainty. Unknown uncertainty is retained as null; neither zero uncertainty nor a precise surface reconstruction is claimed. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanuš et al.2015 section4.2 explicitly report a poor thermophysical fit for Cerberus and omit its uncertainties. The DAMIT calibrated flag is retained as archive metadata, not treated as strong physical-size validation.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/1783/shape.txt",
+    "vertices": 1022,
+    "faces": 2040,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 1000.0001193783601,
+    "firstVertexKm": [
+      -0.17303502065663454,
+      0.35183204200112717,
+      0.370047044175604
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      2.284535272724042,
+      1.4218911697430159,
+      0.8430521006421652
+    ],
+    "volumeCubicKm": 0.9047786842338602,
+    "volumeEquivalentRadiusKm": 0.6,
+    "radialRangeKm": [
+      0.3887140017388025,
+      1.2305739586754492
+    ]
+  },
+  "elevation": [
+    -0.7000000000000001,
+    0.7000000000000001
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2040,
+    "sourceVertices": 1022,
+    "weldedVertices": 1022,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 12,
+    "estimatedErrorMeters": 3.6995465755462646,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 903923398.8425217
+    }
+  }
+}

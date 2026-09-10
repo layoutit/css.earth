@@ -15,6 +15,7 @@ export const CONTEXT_ANNOTATION_PRIORITY = Object.freeze({
   'dwarf-planet': 2,
   comet: 1,
   asteroid: 0,
+  'trans-neptunian': 1,
 });
 
 // Initial system framing follows the larger moons; small distant satellites
