@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "64adac6b285244a0f953b13a6b4cc91da575c5859040ecaf4d046e07f254e10b"
+        "sha256": "67bbc7d3806caa793e2b7a45d9d7eedc3b63a854c5627f87885b9f3d2320de92"
+      }
+    },
+    "catalog": {
+      "name": "Juewa",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7861445733475856,
+      "description": "Explore Juewa in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 380,
+      "context": {
+        "order": 184
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e8d008e3ca4d76268523de04a984eb19aa624e0c83ce901b2bbdf19d5430c2a7"
+    "sha256": "3d95a15a7c1e7648969153de1ee32649b5b1a4a404b3c3a17d4552921db27ff2"
   }
 }

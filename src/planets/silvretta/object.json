@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d671fd0e1fca912d51195f206d94065442c1622a04e722758627a7436f84279a"
+        "sha256": "343006827ba780a380c76544b025727b1cc80ba0edd882d17f4fddb6935d30bf"
+      }
+    },
+    "catalog": {
+      "name": "Silvretta",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.204231585995867,
+      "description": "Explore Silvretta in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 409,
+      "context": {
+        "order": 213
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c8a5f89b4569a57a8fc3dc8f21514c9fc11bfc6914c04d49e8e6ad0d8aa1d0bd"
+    "sha256": "85871ff073af664fc48216e6b27dc7c0d579f135e320003f9578314210ac392b"
   }
 }

@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5bab38c6502029c876c1a264c3b18e573ad92146a2fb53dd478e0c1941758ec8"
+        "sha256": "dda90cc73ff791e4c4114a27121bda23ac2745297fb11d097e7388484cff433f"
+      }
+    },
+    "catalog": {
+      "name": "Tartaglia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.708012033150063,
+      "description": "Explore Tartaglia in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 417,
+      "context": {
+        "order": 221
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b55f250ab32ae0d0423e351dd40a5e3b512f2748a4a197adcf545d995b602ddd"
+    "sha256": "909113f68f48cbc677c14fbcfb8ea1c7d4f301cb21f715b9971905abd51718e5"
   }
 }

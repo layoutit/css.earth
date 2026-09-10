@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e663bbb0ff1404aa67fc5b01bf0032763ecb1c81ff179f4b5b90cd4ea10d7413"
+        "sha256": "f6ef650ab84eb144a8ac68f278b5b45a4154c5ce1c2585e28b70cf327537cb3f"
+      }
+    },
+    "catalog": {
+      "name": "Mentor",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 5.197909787831412,
+      "description": "Explore Mentor in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 371,
+      "context": {
+        "order": 416
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "847c051600d2f4171736a705876f3ffddf9a5f055b9ad6e765b026f300060b4d"
+    "sha256": "2f58ec752b88b1b35105b7e92182bc64e452ab050504ef6708c5775f903bc80c"
   }
 }

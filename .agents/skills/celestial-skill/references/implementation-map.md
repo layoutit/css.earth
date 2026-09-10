@@ -45,12 +45,13 @@ fallback requirements are not the current authored-package template.
 
 | Change | Source owners |
 | --- | --- |
-| Identity, route, lazy loading | `site/objects.mts`, `site/object-schema.mts`, `site/object-adapter.mts`, `site/packaged-object-runtime.mts` |
+| Identity, route, lazy loading | Body `object.json` → `tools/prepare-catalog.mts` → `site/objects.mts`; `site/object-adapter.mts`, `site/packaged-object-runtime.mts` |
+| Physical data, orbit records and acquisition choices | `packages/astronomy/data/bodies/<id>.json`, `packages/astronomy/tools/body-records.mts` |
 | Authored and prepared object contracts | `packages/objects/src/descriptor.ts`, `packages/objects/src/authored.ts`, `src/renderers/css/validation/` |
 | Preparation dispatch and publication | `tools/objects/prepare-authored.ts`, `tools/objects/publication.mts`, `tools/prepare-object-json.mts` |
 | Source acquisition, verification and runtime inventory | `tools/objects/operations.ts`, `tools/objects/operations-acquisition.ts`, package source manifests and acquisition JSON |
-| Retained scene, selection, resources and lifecycle | `src/renderers/css/runtime/object-runtime.ts`, `src/renderers/css/rendering/`, `site/scene-contract.mjs`, `site/scene-router.mts` |
-| Shared input, world camera and physical registration | `site/runtime-policy.mjs`, `src/renderers/css/navigation/`, `src/renderers/css/rendering/prepared-camera-runtime.ts`, `tools/objects/world-navigation.ts` |
+| Retained scene, selection, resources and lifecycle | `src/renderers/css/runtime/object-runtime.ts`, `src/renderers/css/rendering/`, `site/scene-contract.mts`, `site/scene-router.mts` |
+| Shared input, world camera and physical registration | `site/runtime-policy.mts`, `src/renderers/css/navigation/`, `src/renderers/css/rendering/prepared-camera-runtime.ts`, `tools/objects/world-navigation.ts` |
 | Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/object-page-data.mts`, `site/object-page-contract.mts`, `site/layouts/PlanetLayout.astro` |
 | Content, lens labels, title and minimap preparation | `tools/objects/content/`, `site/prepare-lens-labels.mts`, `tools/prepare-planet-title-sources.mts`, `tools/prepare-surface-minimaps.mts` |
 | Search and marker presentation | `site/planet-search-objects.mts`, `tools/prepare-navigation.mts`, `src/navigation/marker-presentation.mts` |
@@ -81,8 +82,11 @@ the shared world camera.
 
 Navigation marker appearance comes from each authored package's
 `source/preparation/navigation.json`. `tools/prepare-navigation.mts` generates
-`site/prepared-navigation-markers.mjs`; `PlanetNavigationMarker.astro` consumes
-it. Adding a body does not require a hand-maintained component presentation map.
+individual `public/navigation/body-<id>.webp` images and their 2x counterparts.
+Builds assemble the ignored `site/prepared-navigation-markers.mjs` from those
+images and recipes; `PlanetNavigationMarker.astro` consumes it. Follow the
+[registration steps](../../../../src/planets/README.md#register-a-body-without-editing-shared-lists)
+instead of editing a shared list or atlas position.
 
 ## Choose examples by source needs
 

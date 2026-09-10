@@ -160,6 +160,19 @@
         "url": "prepared/page.json",
         "sha256": "21760c73cd2158d26d8d19e72a39f53fba797a16b63c78a82aafe37dd503062f"
       }
+    },
+    "catalog": {
+      "name": "Moon",
+      "classification": "satellite",
+      "color": "#aaa7a0",
+      "distanceAu": 1,
+      "description": "Explore the Moon in 3D with cssEarth. Discover impact craters, ancient lava plains, and the history of Earth’s natural satellite.",
+      "systemName": "Solar System",
+      "order": 120,
+      "context": {
+        "order": 3,
+        "color": "#a9a6a0"
+      }
     }
   },
   "schema": "cssearth-object@1",

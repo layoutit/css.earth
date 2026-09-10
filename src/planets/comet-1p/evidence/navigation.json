@@ -1,21 +1,22 @@
 {
-  "base": "6cf08ae06e28624ec548cdf54b2a33c0d5d5c27e",
-  "added": [],
-  "updated": [
-    "comet-1p"
-  ],
-  "atlases": [
+  "base": "f596d99c939d6f83270c4614415a0531a522163e",
+  "command": "node tools/prepare-navigation.mts comet-1p",
+  "sourceSha256": "a3c162d7b85a6f29372f59b5208608569e14eab7a33934bd5eba090ac3249914",
+  "outputs": [
     {
-      "filename": "planet-markers.webp",
-      "baseSha256": "92abaacaf09db689fb1525d026fa5e17864e4223a0118efb0fc90deb12ea94da",
-      "outputSha256": "3094f8d51da7308b4ab4154cc04e4022a2320e92c1a16b8b5393b2c366f79ca9",
-      "preservedMarkers": 469
+      "path": "public/navigation/body-comet-1p.webp",
+      "bytes": 374,
+      "sha256": "8135890f227bf87ec711bb92bbc5c168741ac017a8b9b180c56112d173a2b3fc"
     },
     {
-      "filename": "planet-markers@2x.webp",
-      "baseSha256": "931f398ffd30687fb434c8bbcc84deea0858b6de626057ebcc83ed17ad3d7e4b",
-      "outputSha256": "8295105f5d06a48ba4a98b5a7f564913c865bfa6be218502448d1817f7153b22",
-      "preservedMarkers": 469
+      "path": "public/navigation/body-comet-1p@2x.webp",
+      "bytes": 750,
+      "sha256": "0e105610e247548b62265829fc4119fa3d346b267a5b6f7140d910e069a5d460"
+    },
+    {
+      "path": "public/navigation/comet-1p-context.webp",
+      "bytes": 7556,
+      "sha256": "f36d6d06e42bd859c398cefd27b014f3d27391cf50a047112e451d6e36eec9d2"
     }
   ]
 }

@@ -1,0 +1,52 @@
+{
+  "id": "thalassa",
+  "classification": "satellite",
+  "order": 261,
+  "physical": {
+    "name": "Thalassa",
+    "horizonsCode": "804",
+    "meanRadiusKm": 40,
+    "gravitationalParameterKm3PerS2": 0.02359,
+    "parent": "neptune"
+  },
+  "physicalNotes": "Current Horizons GMs; Karkoschka ellipsoid dimensions belong to body sources.",
+  "satellite": {
+    "parent": "neptune",
+    "horizonsCode": "804",
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 1,
+    "poleRightAscensionRad": -1.055595062272,
+    "poleDeclinationRad": 0.749979073768,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 50139.656,
+      "eccentricity": 0.000206960368,
+      "inclinationRad": 0.002736504098,
+      "ascendingNodeRad": 2.230351403033,
+      "argumentOfPeriapsisRad": -2.69742415181,
+      "meanAnomalyAtEpochRad": -147341.39020575225,
+      "meanMotionRadPerDay": 20.145446571318555,
+      "ascendingNodeRateRadPerDay": -0.026317124309992092,
+      "argumentOfPeriapsisRateRadPerDay": 0.05266352561578482
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "804",
+      "center": "500@899",
+      "parent": "neptune",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 1,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "804",
+      "center": "500@899",
+      "range": "daily"
+    }
+  }
+}

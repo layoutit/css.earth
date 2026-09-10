@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1e367ef824f670f857edbed277b3beeda6ed7356412fad6c8ad036d1c66f3533"
+        "sha256": "78bf1ea9feb762071fb0d8361e96adc51c1b41ae749d579a8fdfd702da418185"
+      }
+    },
+    "catalog": {
+      "name": "Sycorax",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 19.2,
+      "description": "Explore Sycorax, a moon of Uranus, through its lightcurve-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 28,
+      "context": {
+        "order": 246
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "53a14a578b594e9f0e2011f19b05cf128f9c4f8cdfd12c2308421f1a163836a0"
+    "sha256": "37fecb80e62bf2ba023cf717f9f960d2c23a724ea86611efd65a4153c4e9f752"
   }
 }

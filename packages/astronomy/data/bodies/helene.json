@@ -1,0 +1,52 @@
+{
+  "id": "helene",
+  "classification": "satellite",
+  "order": 236,
+  "physical": {
+    "name": "Helene",
+    "horizonsCode": "612",
+    "meanRadiusKm": 18,
+    "gravitationalParameterKm3PerS2": 0.00048,
+    "parent": "saturn"
+  },
+  "physicalNotes": "No measured GM is supplied for these small moons; zero means omitted mass.\nRadii: Thomas2013/IAU2015 shapes, not an inferred density or invented mass.",
+  "satellite": {
+    "parent": "saturn",
+    "horizonsCode": "612",
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 5,
+    "poleRightAscensionRad": 0.70697446241,
+    "poleDeclinationRad": 1.458028953573,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 377425.76,
+      "eccentricity": 0.007627226233,
+      "inclinationRad": 0.003741740976,
+      "ascendingNodeRad": 2.734413885071,
+      "argumentOfPeriapsisRad": -5.36740282679,
+      "meanAnomalyAtEpochRad": -16769.1701270268,
+      "meanMotionRadPerDay": 2.294223090222925,
+      "ascendingNodeRateRadPerDay": -0.00145698579525122,
+      "argumentOfPeriapsisRateRadPerDay": 0.00293871945304374
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "612",
+      "center": "500@699",
+      "parent": "saturn",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 5,
+      "radial": true,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "612",
+      "center": "500@699",
+      "range": "limited"
+    }
+  }
+}

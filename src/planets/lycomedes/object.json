@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "34ca688cf8a29da656e38972490972e997ce2d30b16064a762aa0ded9312266d"
+        "sha256": "9602d7a4b6a6f22f5777273ae3e2a4042166069ef5a676c6caa40df6b297b688"
+      }
+    },
+    "catalog": {
+      "name": "Lycomedes",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 5.0677482891717345,
+      "description": "Explore Lycomedes in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 367,
+      "context": {
+        "order": 412
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3a68241f131e41511f211de9b262bb497b960ff0bea4318a793c3e85c938a29b"
+    "sha256": "8166ee91fecb6d475cb03b74c88d547a10eec065b30858fb53e66a7f58be081d"
   }
 }

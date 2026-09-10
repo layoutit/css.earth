@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fa54c3e38e29ca9370ce067ebbd6eea3af6d3cea37a1c87ca3a34a62dac3af97"
+        "sha256": "2a271459971e804a4be99e103453d18be30ac3611c36befe89dacac8392b6e4b"
+      }
+    },
+    "catalog": {
+      "name": "Diotima",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.0693983225273733,
+      "description": "Explore Diotima in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 174,
+      "context": {
+        "order": 105
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d5c961c3921b0a1168a460d7abd5369f460e4b1ad956dd9abc131db3a6abbb92"
+    "sha256": "df2a50e7d81b4ce834a64df449d9bb363ec3a97b4d1f3e0b8db557b907705b78"
   }
 }

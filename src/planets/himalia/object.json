@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d4e6442aa5c42db2f5c8c6a507b7de66c908a1b8e86c5e024ff7efb8d1f75fcc"
+        "sha256": "993cfb652ae8e1e61997ccc2d2a62deb8e3d11ac4becc74dad1b3ea51af1ee90"
+      }
+    },
+    "catalog": {
+      "name": "Himalia",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 5.2,
+      "description": "Explore Himalia, a moon of Jupiter, through its source-backed size model.",
+      "systemName": "Solar System",
+      "order": 85,
+      "context": {
+        "order": 161
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "266874fa6bc154c22cbc2a0f979a89eca6fabca08d6610b6adda22fd9feeef7c"
+    "sha256": "4c34fe9d3482d333477541e08cc12fdae962470fb5b8c313b256d764ab6e307f"
   }
 }

@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8a7650a822c66d096d9d1d8974b32a459053b713f260ecf67b91d24ae7df63c5"
+        "sha256": "39dcc5f918cca91e2b9ad60fcf4b05da14337e480818d2c274913405abf8caef"
+      }
+    },
+    "catalog": {
+      "name": "Sapientia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.771802925757048,
+      "description": "Explore Sapientia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 350,
+      "context": {
+        "order": 396
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "5ccb65ec39a08554f887f57d9198c2c1dbf6f19fe3193fba80ac698eb385006f"
+    "sha256": "3534cf29c99bec9fd9ffecea2f98c74f25c2c8119fdba8cbf1f73c25d8461bcf"
   }
 }

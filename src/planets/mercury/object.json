@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "59264a8847f993b9f250749974d2c3ca942d471c0b71e4c871256dd342f19fa2"
+    "sha256": "264bd9e0b7f44f7b021b9451ef05c21c70f881b8e35598b7281f8aa9c67a32ac"
   },
   "id": "mercury",
   "properties": {
@@ -159,7 +159,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f5df4b812eed27468e916ec737ef5c97d8e0783f96de24591bb6c4a5c06b679b"
+        "sha256": "1a85343b9a7dc014dc0755a0b08a981cac555529690d1f1c0265c338c7be1b3a"
+      }
+    },
+    "catalog": {
+      "name": "Mercury",
+      "classification": "planet",
+      "color": "#9d9388",
+      "distanceAu": 0.39,
+      "description": "Explore Mercury in 3D with cssEarth. Inspect the smallest planet, its cratered surface, and the extreme conditions closest to the Sun.",
+      "systemName": "Solar System",
+      "order": 117,
+      "context": {
+        "order": 0
       }
     }
   },

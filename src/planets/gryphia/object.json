@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fe4e5cf948625417ec3b16a7c0ff5b6f1ff6c623f311738bc184a93bcf95f80e"
+        "sha256": "245fbd2fc11e1d9387b8b01a728ec3e81d73a09486e078bb5b2604fb5cd6ccce"
+      }
+    },
+    "catalog": {
+      "name": "Gryphia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.1987067011231507,
+      "description": "Explore Gryphia in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 389,
+      "context": {
+        "order": 193
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4444bb8e339e3ff1ea055e2b42adb0c8821cd98af4c0b49adb890807d416ac2d"
+    "sha256": "be381b9618cb135502d7c70a41e761ac63f525847e73ca9118a59a7b40a3d274"
   }
 }

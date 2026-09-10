@@ -3,7 +3,7 @@ export interface MarkerPresentation {
   ringColorShare?: number; ringOutlineOpacity?: number; ringOutlineOffset?: number;
   scale?: Partial<Omit<MarkerPresentation, "scale">>;
 }
-export interface PreparedNavigationMarker { presentation: MarkerPresentation; index: number; count: number; context?: { url: string }; }
+export interface PreparedNavigationMarker { url: string; url2x: string; presentation: MarkerPresentation; index: number; count: number; context?: { url: string }; }
 // Shared shell presentation; values come only from each object's marker recipe.
 const fields = new Set(["size", "ringAngle", "ringExtra", "ringHeight", "ringOpacity", "ringColorShare", "ringOutlineOpacity", "ringOutlineOffset"]);
 export function validateMarkerPresentation(input: unknown, partial?: false): MarkerPresentation;
@@ -37,6 +37,7 @@ export function markerStyle(marker: PreparedNavigationMarker, { color, scale = 1
   return { ringed, style: [
     `--planet-color:${color}`,
     `--planet-size:${p.size * scale}px`,
+    `--planet-marker-url:url("${marker.url2x}")`,
     `--planet-marker-count:${marker.count}`,
     `--planet-marker-position:${(marker.index / Math.max(1, marker.count - 1) * 100).toFixed(4)}%`,
     ...(ringed ? [
@@ -55,7 +56,7 @@ export function markerStyle(marker: PreparedNavigationMarker, { color, scale = 1
 // the same physical proxy basis used by the world camera; DPR never selects it.
 export function contextMarkerSprite(marker: PreparedNavigationMarker) {
   return {
-    url: marker.context?.url ?? "/navigation/planet-markers@2x.webp",
+    url: marker.context?.url ?? marker.url2x,
     index: marker.context ? 0 : marker.index,
     count: marker.context ? 1 : marker.count,
     size: marker.presentation.size,

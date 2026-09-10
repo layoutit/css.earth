@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "33355566ebe8dbd9f786adb2a46b50ab2194310136c69b5729b8905ec945d0fa"
+        "sha256": "cd2b53d09ae8a11dba71954ff108fddea5243b15ba1239ebec59a2127d9b5f51"
+      }
+    },
+    "catalog": {
+      "name": "Aglaja",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.878732649484092,
+      "description": "Explore Aglaja in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 229,
+      "context": {
+        "order": 271
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "48d4849ef1cdf70da045b40334875c148de9b593cc006816134e52edd15d6038"
+    "sha256": "a4941e1d018c19e87ac7d384f3e2469fcfd51744d7514da995030c8f19c362d8"
   }
 }

@@ -135,13 +135,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "133ffb89ed329a4d077cadfa5a327204e0fd490773c7a8ee23ba31b26257248a"
+        "sha256": "bd663d105b83b4793e7923f643e84bf6a6a67ef7499f3a86135b163c7bac358e"
+      }
+    },
+    "catalog": {
+      "name": "Rhea",
+      "classification": "satellite",
+      "color": "#bebbb0",
+      "distanceAu": 9.58,
+      "description": "Explore Rhea in 3D with cssEarth. Inspect Cassini imagery and elevation maps of Saturn’s icy moon, its impact basins and bright fractures.",
+      "systemName": "Solar System",
+      "order": 442,
+      "context": {
+        "order": 23
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "73cede0f43af127f2ee576515dec51ad48b3d108aa3d1623d7de43b8035098a5"
+    "sha256": "b0dea5a288f6fce63e604264d13a488b654f8f21bc0135289d9315a5dffb4b5c"
   }
 }

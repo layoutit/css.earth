@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "553e523e48b8532cbb1971acafbbf6e51ebcd976ae5d70c3121f755ed812571a"
+        "sha256": "c4af8a21f16ff5afcba64b3a3edc0efc27243163880c4bdb072aaf4a6aba6a8d"
+      }
+    },
+    "catalog": {
+      "name": "Anthe",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Anthe, a small moon of Saturn, through its measured shape.",
+      "systemName": "Solar System",
+      "order": 88,
+      "context": {
+        "order": 152
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8b3fdc6eebccd3546a8055ad4eddaa4981065840b7e6f51b6a90db04ef24d4bd"
+    "sha256": "cce2673b1a339efa2ad53885677de29d2305946b62eccb1323cbde48ed44e173"
   }
 }

@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1d0480704e31be2c81ef1a7d17d597ecb503a5736ff9a2966a8ea3a79e2d2356"
+    "sha256": "85321758aa7a0ee00beda650c61c305ce71056dd11b1f9d7228e0b09523a820e"
   },
   "id": "ryugu",
   "properties": {
@@ -123,7 +123,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "426e99268e8c781cb0e92d40cc56178da7e99bf0614d8cb568ac461c2c0ddae3"
+        "sha256": "5c588985d6183d2ebad60954f557ed696becc66daa6d8626b8eac7a133305607"
+      }
+    },
+    "catalog": {
+      "name": "Ryugu",
+      "classification": "asteroid",
+      "color": "#a49c8d",
+      "distanceAu": 1.19,
+      "description": "Explore Ryugu in 3D with cssEarth using mission-derived shape and surface data.",
+      "systemName": "Solar System",
+      "order": 122,
+      "context": {
+        "order": 10
       }
     }
   },

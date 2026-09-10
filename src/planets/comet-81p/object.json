@@ -112,7 +112,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "37519170017fff332e6c87796e09f205a1e0064400f27819261acaf7811c16f6"
+        "sha256": "2a75df7792667ed2c2b8ac4cbaef81af2ed0d6c62451c146e118911c1fd9ab05"
+      }
+    },
+    "catalog": {
+      "name": "Wild 2",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 3.45,
+      "description": "Explore Wild 2's observed Stardust terrain, preserving its real coverage gaps.",
+      "systemName": "Solar System",
+      "order": 79,
+      "context": {
+        "order": 167
       }
     }
   },
@@ -120,7 +132,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "aab0386adf5c7dac88195038c98af91b62fff6e93f6624f5f3a5da975e8565fa"
+    "sha256": "16211f6f3c6276a655e98b8e00fae10c5b3cae4157eccb9ebd0aab5bfd6a6761"
   },
   "type": "layered-body",
   "id": "comet-81p"

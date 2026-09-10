@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2c6e79e8753f22fae2ef2c569e128d92b4ee675c3b68e94e85330b41f91cdb64"
+        "sha256": "93b1dceb8066dd267bdcace748d336488badb7fd6e40139f46c033b841c6e97d"
+      }
+    },
+    "catalog": {
+      "name": "Auravictrix",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.229298325153526,
+      "description": "Explore Auravictrix in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 393,
+      "context": {
+        "order": 197
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f5838b78a6aa8469e2f3bec2eabb42fa9ae30a91aa4015403d04ec736ae17442"
+    "sha256": "5156a5bc377d0534c3e0529e2d51a0b38d713783d663944b33ab3cdd11f41c69"
   }
 }

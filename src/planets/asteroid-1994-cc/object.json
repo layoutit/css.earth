@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a57450c19e7712672c18fdb59a57d942cc8be795889de9840e9d8dc4f5a9644e"
+        "sha256": "38619aeaa2e5d0b83cbb3038d1b14d2ca1b620445204a729cb7bf8999a24718b"
+      }
+    },
+    "catalog": {
+      "name": "1994 CC Alpha",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.637667637945242,
+      "description": "Explore 1994 CC Alpha in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 184,
+      "context": {
+        "order": 115
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6f5552de6b271e15a1c6afa2fe31d8b59c1881cbe3808eff8d732e99c0d18641"
+    "sha256": "ff65cba587e427a2e03fa69ec9a7f1e00be9bb3e41d2a63d23e0e5605d2f7eac"
   }
 }

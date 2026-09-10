@@ -1,0 +1,32 @@
+{
+  "description": "Sun (10) relative to Earth at the same two eclipse maxima",
+  "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2710%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%40399%27&TLIST=2451564.698358611%2C2452082.0033123144&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+  "rows": [
+    {
+      "jdTdb": 2451564.698358611,
+      "positionKm": [
+        74597306.92310461,
+        -116433556.8237213,
+        -50480048.71364556
+      ],
+      "velocityKmPerDay": [
+        2259712.897454755,
+        1204909.965147486,
+        522502.7596696317
+      ]
+    },
+    {
+      "jdTdb": 2452082.003312315,
+      "positionKm": [
+        -440946.8118417975,
+        139487367.0054336,
+        60474228.67707039
+      ],
+      "velocityKmPerDay": [
+        -2533069.842959917,
+        1876.358978397757,
+        926.5436436285019
+      ]
+    }
+  ]
+}

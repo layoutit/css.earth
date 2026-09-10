@@ -86,7 +86,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b9be7c29a633bb5af0ce9a9d986f9f1c418bea5aa37093716328c136e3d73507"
+        "sha256": "5759689b2b77baf5018c49355432d1760e20cb841e287e2c062d5d6ca33071a7"
       }
     },
     "worldFrame": {
@@ -115,6 +115,18 @@
       ],
       "metersPerUnit": 96.67391304347827,
       "bodyRadiusM": 22235
+    },
+    "catalog": {
+      "name": "Aethra",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.611974207733697,
+      "description": "Explore Aethra, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.",
+      "systemName": "Solar System",
+      "order": 465,
+      "context": {
+        "order": 426
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b94f34679b9ffbf50c734558b15912c0c3b7797d287033773cecb74918b8365b"
+    "sha256": "a949836a8471f29957f01d82133616ea61863ccded89454fd90ec9144f60e33e"
   }
 }

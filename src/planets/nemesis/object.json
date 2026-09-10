@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2dd3c333fed71e94ff80c173358fafdf09e9c361db327713b4335251f621a4d1"
+        "sha256": "4c06f33c80e2c3c5e80d7cbaba6a8e9ecdecb9b06b964368df18837e1b9a235e"
+      }
+    },
+    "catalog": {
+      "name": "Nemesis",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.750433032034634,
+      "description": "Explore Nemesis in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 159,
+      "context": {
+        "order": 90
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "eebae6b92db97efd30b195687bb950244a6e3ba719e2dd7599ea907146787c42"
+    "sha256": "303069c4ac0c75d6c1d8f202087ecdec0fd5b3e370bb287d3d07252974efd18d"
   }
 }

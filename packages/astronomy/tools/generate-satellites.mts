@@ -69,153 +69,20 @@ import { fitLibration } from './lib/fit-libration.mts'
 import { fitPositionCorrection } from './lib/fit-position-correction.mts'
 import { readRecordSections, writeRecordSections } from './lib/write-record-sections.mts'
 import { elementsUrl, horizons, parseElements } from './lib/horizons.mts'
+import { readBodyRecords, prepareBodyRecords } from './body-records.mts'
 import { HEADER, shortest } from './lib/sources.mts'
 
 const J2000 = 2451545.0
-const FROM_JD = 2415020.5
-const TO_JD = 2488069.5
-const CURRENT_INNER_FROM_JD = 2458849.5
-const CURRENT_INNER_TO_JD = 2463232.5
-const INNER_SATURN_FROM_JD = 2433282.5
-const INNER_SATURN_TO_JD = 2469807.5
-// Daphnis has no Horizons ephemeris beyond 2018-01-17. Its later position
-// extrapolates this Cassini-era fit and carries that limited validity interval.
-const DAPHNIS_FROM_JD = 2453371.5
-const DAPHNIS_TO_JD = 2458119.5
-const STEP_DAYS = 30
 const DEG = Math.PI / 180
-const RADIAL_FIT_IDS = new Set(['paaliaq', 'tarvos', 'ijiraq', 'suttungr', 'mundilfari', 'skathi', 'erriapus', 'thrymr', 'bebhionn', 'bergelmir', 'bestla', 'fornjot', 'hati', 'hyrrokkin', 'loge', 'skoll', 'greip', 'tarqeq', 'caliban', 'sycorax', 'prospero', 'setebos', 'kiviuq', 'albiorix', 'siarnaq', 'ymir', 'nereid', 'himalia', 'polydeuces', 'anthe', 'aegaeon', 'dimorphos', 'hyperion', 'phoebe', 'janus', 'epimetheus', 'telesto', 'helene', 'calypso', 'daphnis', 'atlas', 'prometheus', 'pandora', 'pan', 'nix', 'hydra', 'kerberos', 'styx', 'puck', 'methone', 'pallene', 'portia', 'juliet', 'belinda', 'cordelia', 'ophelia', 'bianca', 'cressida', 'desdemona', 'rosalind'])
-
-// Metis and Adrastea need daily samples: Jupiter's strong J2 makes their
-// osculating mean-motion prediction ambiguous across a five-day sample gap.
-// id, Horizons target code, Horizons centre, parent body id, optional fit window and cadence
-const LIBRATION_FIT_IDS = new Set(['albiorix', 'himalia', 'polydeuces', 'anthe', 'aegaeon'])
-const POSITION_CORRECTION_FIT_IDS = new Set(['paaliaq', 'tarvos', 'ijiraq', 'suttungr', 'mundilfari', 'skathi', 'erriapus', 'thrymr', 'bebhionn', 'bergelmir', 'bestla', 'fornjot', 'hati', 'hyrrokkin', 'loge', 'skoll', 'greip', 'tarqeq', 'caliban', 'sycorax', 'prospero', 'setebos', 'kiviuq', 'albiorix', 'himalia', 'siarnaq', 'ymir'])
-// A fixed cosine basis resolves this strongly perturbed orbit without a
-// nonlinear frequency search. Both methods publish the same bounded series.
-const POSITION_CORRECTION_OPTIONS: Record<string, { count: number; method: string }> = {
-  albiorix: { count: 512, method: 'cosine' },
-  paaliaq: { count: 128, method: 'cosine' },
-  tarvos: { count: 128, method: 'cosine' },
-  ijiraq: { count: 128, method: 'cosine' },
-  suttungr: { count: 128, method: 'cosine' },
-  mundilfari: { count: 128, method: 'cosine' },
-  skathi: { count: 128, method: 'cosine' },
-  erriapus: { count: 128, method: 'cosine' },
-  thrymr: { count: 128, method: 'cosine' },
-  bebhionn: { count: 128, method: 'cosine' },
-  bergelmir: { count: 128, method: 'cosine' },
-  bestla: { count: 128, method: 'cosine' },
-  fornjot: { count: 128, method: 'cosine' },
-  hati: { count: 128, method: 'cosine' },
-  hyrrokkin: { count: 128, method: 'cosine' },
-  loge: { count: 128, method: 'cosine' },
-  skoll: { count: 128, method: 'cosine' },
-  greip: { count: 128, method: 'cosine' },
-  tarqeq: { count: 128, method: 'cosine' },
-  caliban: { count: 128, method: 'cosine' },
-  sycorax: { count: 128, method: 'cosine' },
-  prospero: { count: 128, method: 'cosine' },
-  setebos: { count: 128, method: 'cosine' },
-}
-const SATELLITES: [string, string, string, string, number?, number?, number?, string?][] = [
-  ['paaliaq', '620', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['tarvos', '621', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['ijiraq', '622', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['suttungr', '623', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['mundilfari', '625', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['skathi', '627', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['erriapus', '628', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['thrymr', '630', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['bebhionn', '637', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['bergelmir', '638', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['bestla', '639', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['fornjot', '642', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['hati', '643', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['hyrrokkin', '644', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['loge', '646', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['skoll', '647', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['greip', '651', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['tarqeq', '652', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['caliban', '716', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['sycorax', '717', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['prospero', '718', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['setebos', '719', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-
-  ['siarnaq', '629', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['ymir', '619', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-
-  ['nereid', '802', '500@899', 'neptune', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['himalia', '506', '500@599', 'jupiter', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['polydeuces', '634', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  ['anthe', '649', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  ['aegaeon', '653', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-
-  ['phobos', '401', '500@499', 'mars'],
-  ['deimos', '402', '500@499', 'mars'],
-  ['io', '501', '500@599', 'jupiter'],
-  ['europa', '502', '500@599', 'jupiter'],
-  ['ganymede', '503', '500@599', 'jupiter'],
-  ['callisto', '504', '500@599', 'jupiter'],
-  ['amalthea', '505', '500@599', 'jupiter'],
-  ['thebe', '514', '500@599', 'jupiter'],
-  ['adrastea', '515', '500@599', 'jupiter', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  ['metis', '516', '500@599', 'jupiter', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  ['methone', '632', '500@699', 'saturn', DAPHNIS_FROM_JD, DAPHNIS_TO_JD, 1],
-  ['pallene', '633', '500@699', 'saturn', DAPHNIS_FROM_JD, DAPHNIS_TO_JD, 1],
-  ['mimas', '601', '500@699', 'saturn'],
-  ['enceladus', '602', '500@699', 'saturn'],
-  ['tethys', '603', '500@699', 'saturn'],
-  ['dione', '604', '500@699', 'saturn'],
-  ['rhea', '605', '500@699', 'saturn'],
-  ['titan', '606', '500@699', 'saturn'],
-  ['hyperion', '607', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['iapetus', '608', '500@699', 'saturn'],
-  ['phoebe', '609', '500@699', 'saturn'],
-  ['janus', '610', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['epimetheus', '611', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['helene', '612', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['calypso', '614', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['daphnis', '635', '500@699', 'saturn', DAPHNIS_FROM_JD, DAPHNIS_TO_JD, 5],
-  ['telesto', '613', '500@699', 'saturn'],
-  ['atlas', '615', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['prometheus', '616', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['pandora', '617', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['pan', '618', '500@699', 'saturn', INNER_SATURN_FROM_JD, INNER_SATURN_TO_JD, 5],
-  ['bianca', '708', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  ['cressida', '709', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  ['desdemona', '710', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  ['rosalind', '713', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  ['puck', '715', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  ['portia', '712', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  ['juliet', '711', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  ['belinda', '714', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  ['cordelia', '706', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  ['ophelia', '707', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  ['miranda', '705', '500@799', 'uranus'],
-  ['ariel', '701', '500@799', 'uranus'],
-  ['umbriel', '702', '500@799', 'uranus'],
-  ['titania', '703', '500@799', 'uranus'],
-  ['oberon', '704', '500@799', 'uranus'],
-  ['triton', '801', '500@899', 'neptune'],
-  ['proteus', '808', '500@899', 'neptune'],
-  ['larissa', '807', '500@899', 'neptune'],
-  ['naiad', '803', '500@899', 'neptune', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  ['thalassa', '804', '500@899', 'neptune', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  ['despina', '805', '500@899', 'neptune', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  ['galatea', '806', '500@899', 'neptune', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  ['charon', '901', '500@999', 'pluto'],
-  // Circumbinary moons: fit about the system barycentre, then translate the
-  // result through the measured Charon mass ratio into Pluto-centred space.
-  ['nix', '902', '500@9', 'pluto', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1, 'charon'],
-  ['hydra', '903', '500@9', 'pluto', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1, 'charon'],
-  ['kerberos', '904', '500@9', 'pluto', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1, 'charon'],
-  ['styx', '905', '500@9', 'pluto', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1, 'charon'],
-  ['kiviuq', '624', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['albiorix', '626', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
-  // DART post-impact s547, a short window around the prepared epoch.
-  ['dimorphos', '120065803', '500@920065803', 'didymos', 2461256.5, 2461316.5, 1],
-]
+const FROM_JD = 2415020.5, TO_JD = 2488069.5, STEP_DAYS = 30
+const bodyRecords = await readBodyRecords()
+const satelliteRecords = bodyRecords.flatMap(record => record.acquisition?.satellite ? [{ id: record.id, ...record.acquisition.satellite }] : [])
+const SATELLITES = satelliteRecords.map(s =>
+  [s.id, s.target, s.center, s.parent, s.fromJd, s.toJd, s.stepDays, s.barycentreCompanion] as const)
+const RADIAL_FIT_IDS = new Set(satelliteRecords.filter(record => record.radial).map(record => record.id))
+const LIBRATION_FIT_IDS = new Set(satelliteRecords.filter(record => record.libration).map(record => record.id))
+const POSITION_CORRECTION_FIT_IDS = new Set(satelliteRecords.filter(record => record.positionCorrection).map(record => record.id))
+const POSITION_CORRECTION_OPTIONS = Object.fromEntries(satelliteRecords.map(record => [record.id, record.positionCorrectionOptions]))
 
 // --object=id[,id] recomputes selected records and preserves other checked data.
 const requested = process.argv.slice(2)
@@ -381,7 +248,7 @@ for (const [id, command, center, parent, fitFromJdTdb = FROM_JD, fitToJdTdb = TO
   results.push(result)
 }
 
-const entry = (r: (typeof results)[number]) => `  ${r.id}: {
+const entry = (r: (typeof results)[number]) => `  ${JSON.stringify(r.id)}: {
     parent: '${r.parent}',
     horizonsCode: '${r.command}',${r.barycentreCompanion ? `\n    barycentreCompanion: '${r.barycentreCompanion}',` : ''}
 ${r.positionCorrection ? `    positionCorrection: ${JSON.stringify(r.positionCorrection)},\n` : ''}${r.longitudeHarmonics ? `    longitudeHarmonics: ${JSON.stringify(r.longitudeHarmonics)},\n` : ''}    fitFromJdTdb: ${r.fitFromJdTdb},
@@ -469,3 +336,5 @@ for (const r of results) {
       `${((r.poleRightAscensionRad / DEG + 360) % 360).toFixed(1).padStart(6)} ${(r.poleDeclinationRad / DEG).toFixed(1).padStart(6)}\n`,
   )
 }
+
+await prepareBodyRecords()

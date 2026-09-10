@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "02c9d675ed99159a4b30a80177ec73ca307b555e31702b09b4f2bdaa7f578969"
+        "sha256": "2d5532df8fea2d0194f12c8f2e8cca6d03132b3f10d76c115f7361474357f5a7"
+      }
+    },
+    "catalog": {
+      "name": "Eurykleia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.878679745406444,
+      "description": "Explore Eurykleia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 309,
+      "context": {
+        "order": 355
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0675a1b9e6a42ccfed08ba9998881b52822f9a0d03159899005aa6f3b6cd8d5e"
+    "sha256": "03af7f237639e400359c8c726b73d3692a6a69c5fac716f7c09dc533825d67e6"
   }
 }

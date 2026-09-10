@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6c540e0a52bc172009b15441f322495fb580ad060871452af2049f070966e403"
+        "sha256": "41281947188f3a5f54d3803b1f3843e19228311209e7c9365836332a93398839"
+      }
+    },
+    "catalog": {
+      "name": "Alphonsina",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.700987827703556,
+      "description": "Explore Alphonsina in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 187,
+      "context": {
+        "order": 118
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a419e4c009c8dd79e635ca88a3445b1c467d0c465638baf48d7e1ef2117aebaf"
+    "sha256": "e584e149a87edc16b51949eea1070f61ce5088cf7bfdc40ea73e671eac474884"
   }
 }

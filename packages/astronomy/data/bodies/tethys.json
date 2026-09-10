@@ -1,0 +1,51 @@
+{
+  "id": "tethys",
+  "classification": "satellite",
+  "order": 227,
+  "physical": {
+    "name": "Tethys",
+    "horizonsCode": "603",
+    "meanRadiusKm": 536.3,
+    "gravitationalParameterKm3PerS2": 41.21,
+    "parent": "saturn"
+  },
+  "physicalNotes": "No measured GM is supplied for these small moons; zero means omitted mass.\nRadii: Thomas2013/IAU2015 shapes, not an inferred density or invented mass.",
+  "satellite": {
+    "parent": "saturn",
+    "horizonsCode": "603",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": 0.707523881638,
+    "poleDeclinationRad": 1.4580236874,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 294975.28,
+      "eccentricity": 0.001023705603,
+      "inclinationRad": 0.019054989475,
+      "ascendingNodeRad": -1.747299427255,
+      "argumentOfPeriapsisRad": 0.42717236815,
+      "meanAnomalyAtEpochRad": 121565.3937977768,
+      "meanMotionRadPerDay": 3.351032163343162,
+      "ascendingNodeRateRadPerDay": -0.003453106737328364,
+      "argumentOfPeriapsisRateRadPerDay": -0.019272392264897083
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "603",
+      "center": "500@699",
+      "parent": "saturn",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "603",
+      "center": "500@699"
+    }
+  }
+}

@@ -4,7 +4,8 @@ export { PLANET_IDS, DWARF_PLANET_IDS, ASTEROID_IDS, TRANS_NEPTUNIAN_IDS, SMALL_
 export type { BodyData, PlanetId, DwarfPlanetId, AsteroidId, TransNeptunianId, SmallBodyId, BodyId, CometId, InterstellarId } from './body-types.js'
 import { BODIES } from './body-data.js'
 export { BODIES } from './body-data.js'
-export const BODY_IDS = Object.keys(BODIES) as readonly BodyId[]
+import { BODY_IDS } from './data/generated/bodies.js'
+export { BODY_IDS }
 
 export const bodyData = (id: BodyId): BodyData => {
   const data = BODIES[id]

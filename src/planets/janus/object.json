@@ -115,13 +115,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2a50a41c29692ed42906e10b3539792871d5a7b1ec68f53ef23116ddf143d748"
+        "sha256": "7a0cdc93416ab38642a1e2b8e28679e4fa93dcd63c5657022f3c35971acf5d33"
+      }
+    },
+    "catalog": {
+      "name": "Janus",
+      "classification": "satellite",
+      "color": "#a6a29a",
+      "distanceAu": 9.58,
+      "description": "Explore Janus with Cassini imagery, mapped radial height and its measured irregular shape.",
+      "systemName": "Solar System",
+      "order": 435,
+      "context": {
+        "order": 44
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "edd15f25d13e5b9c533f42ad4d994ee0893cba3f4e76799e902369e933c6ffe6"
+    "sha256": "465a9f0c3aaf8fc949ed42a2dd0091d8f91e670d170b12ad471490905ff3978a"
   }
 }

@@ -1,0 +1,51 @@
+{
+  "id": "proteus",
+  "classification": "satellite",
+  "order": 258,
+  "physical": {
+    "name": "Proteus",
+    "horizonsCode": "808",
+    "meanRadiusKm": 208,
+    "gravitationalParameterKm3PerS2": 2.58,
+    "parent": "neptune"
+  },
+  "physicalNotes": "Ring-dynamics mass estimates: French et al. 2024, Table 3 footnote b.\nhttps://arxiv.org/abs/2401.04634; same published prolate radii as above.",
+  "satellite": {
+    "parent": "neptune",
+    "horizonsCode": "808",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": -1.05820769451,
+    "poleDeclinationRad": 0.74254591001,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 117674.337,
+      "eccentricity": 0.000490080813,
+      "inclinationRad": 0.00708737725,
+      "ascendingNodeRad": -0.039871878732,
+      "argumentOfPeriapsisRad": 0.340644097451,
+      "meanAnomalyAtEpochRad": 204484.46592692108,
+      "meanMotionRadPerDay": 5.597071815959368,
+      "ascendingNodeRateRadPerDay": 6.2201467882188e-05,
+      "argumentOfPeriapsisRateRadPerDay": 0.001282429835467035
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "808",
+      "center": "500@899",
+      "parent": "neptune",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "808",
+      "center": "500@899"
+    }
+  }
+}

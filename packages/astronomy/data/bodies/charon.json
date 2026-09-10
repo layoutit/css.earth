@@ -1,0 +1,51 @@
+{
+  "id": "charon",
+  "classification": "satellite",
+  "order": 264,
+  "physical": {
+    "name": "Charon",
+    "horizonsCode": "901",
+    "meanRadiusKm": 606,
+    "gravitationalParameterKm3PerS2": 106.1,
+    "parent": "pluto"
+  },
+  "physicalNotes": "Current Horizons GMs; Karkoschka ellipsoid dimensions belong to body sources.",
+  "satellite": {
+    "parent": "pluto",
+    "horizonsCode": "901",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": 2.321416274488,
+    "poleDeclinationRad": -0.108991190224,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 19595.763,
+      "eccentricity": 0.000160874376,
+      "inclinationRad": 4.0087778e-05,
+      "ascendingNodeRad": -0.002466557778,
+      "argumentOfPeriapsisRad": 2.713762719916,
+      "meanAnomalyAtEpochRad": 35923.5670913476,
+      "meanMotionRadPerDay": 0.983711685883009,
+      "ascendingNodeRateRadPerDay": 5.8771469110018e-05,
+      "argumentOfPeriapsisRateRadPerDay": -5.8727414898345e-05
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "901",
+      "center": "500@999",
+      "parent": "pluto",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "901",
+      "center": "500@999"
+    }
+  }
+}

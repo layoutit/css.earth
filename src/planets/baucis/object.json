@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8f5a48775811f440322b4f8f7d2f08270461d8dd361a5c307ae8cd580f9ff0dd"
+        "sha256": "e1b41056e92a4fe3ed2446619cdc78f44ea00539ba6846b92e6bca08244bb615"
+      }
+    },
+    "catalog": {
+      "name": "Baucis",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.3794646807346385,
+      "description": "Explore Baucis in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 301,
+      "context": {
+        "order": 347
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "68db87eacc4ee976d84d725a43a1e41c5272f3e2850d5d81d156a7eee3d4ec6a"
+    "sha256": "957274aaae2d7256db75a253b4a7567195f94ec437ee80e79ab9a1780b0242ec"
   }
 }

@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fb4edbf41c2dc4fb68dfca387cf1e89aa68e8fee76ccb1754124b2a319266b5b"
+        "sha256": "307a7a098214c9fff186d2469606b9ec2aebee55e91c58ed49658132dc65997a"
+      }
+    },
+    "catalog": {
+      "name": "Cybele",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.407076943888485,
+      "description": "Explore Cybele in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 191,
+      "context": {
+        "order": 134
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a96da01d24b148b49362a1e15a7cec2875297e12ddb53acacc3c240dd01afef5"
+    "sha256": "f5d8b4472d975b80544065aecca640ad0f76bf99c153a705a0088a50d8c81e66"
   }
 }

@@ -46,7 +46,7 @@ for (const b of bodies) {
     const source=await createSourceManifest({planetId:b.id,planetName:b.name,sourceRoot:src});
     const radial=await loadRadialTerrain({config,sourceDirectory:src,source});
     if (!radial) throw new TypeError('The source snapshot requires a radial terrain.');
-    const recipe={generator:'tools/objects/terrestrial-layers/radial-snapshot.mjs',inputs:['published-shape','model-surface'],size:512,longitudeDegrees:55,latitudeDegrees:20,ambient:.45,diffuse:.55,lensId:'model'};
+    const recipe={generator:'tools/objects/terrestrial-layers/radial-snapshot.mts',inputs:['published-shape','model-surface'],size:512,longitudeDegrees:55,latitudeDegrees:20,ambient:.45,diffuse:.55,lensId:'model'};
     const context=await renderRadialSnapshot({...recipe,faces:radial.faces,map});
     await write(resolve(src,'presentation/context.png'),context);
     const navigation=await read('src/planets/annefrank/source/preparation/navigation.json');
@@ -71,16 +71,3 @@ for (const b of bodies) {
   for(const ref of records(requireRecord(requireRecord(descriptor.properties).recipe).sources))ref.sha256=hash(await readFile(resolve(pkg,requireString(ref.path))));
   await write(resolve(pkg,'object.json'),descriptor);
 }
-// The shared context source changed only by the nine new body entries.
-// Its descriptor source pin is independent of the prepared context transport.
-const universe=await readFile('src/planets/sun/source/navigation/universe.json');
-const sunManifest=await read('src/planets/sun/source/manifest.json');
-const contextInput=records(sunManifest.inputs).find(entry=>entry.path==='navigation/universe.json');
-if(!contextInput)throw new Error('Sun context source input is missing.');
-Object.assign(contextInput,{expectedBytes:universe.length,expectedSha256:hash(universe)});
-await write('src/planets/sun/source/manifest.json',sunManifest);
-const sun=await read('src/planets/sun/object.json');
-const contextSource=records(requireRecord(requireRecord(sun.properties).recipe).sources).find(entry=>entry.id==='world-context');
-if (!contextSource) throw new TypeError('Sun context descriptor must retain its source pin.');
-contextSource.sha256=hash(universe);
-await write('src/planets/sun/object.json',sun);

@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "eb335c08c43ade443e08b121bc008a26030038a5638927dbeda08d92cdc9e59c"
+        "sha256": "61f873736223f8db6b356bfebfde9f4edcdb5da13fb6fe7e30abed1f1a2bb3b2"
+      }
+    },
+    "catalog": {
+      "name": "Bertha",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1939101574420405,
+      "description": "Explore Bertha in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 381,
+      "context": {
+        "order": 185
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "34e86c04ee30a1d51c26317297b3a67147b4940c25df244d06c56a295d0d98de"
+    "sha256": "a18ed6e93a657632e3d5c9ceaa3b52ac979d73cd5e14dde99a7406d8c3253495"
   }
 }

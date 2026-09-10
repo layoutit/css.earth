@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4609adde58b6416f9a74ab2c79590c002a5d613f40266e849dee3967e248c760"
+        "sha256": "ff4e6e11819fa39dd32dd5736dcc2ed29f84fcd881e92283a7b8324ee4ab91a3"
+      }
+    },
+    "catalog": {
+      "name": "Ijiraq",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Ijiraq, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 33,
+      "context": {
+        "order": 229
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "abf256cc758f0e952dac1a0659e762a9fab1ba9eb576d5ffb3c6c9adb05d9368"
+    "sha256": "4c550036111fbf8df41a34cc389b6804a91324498669bbf51c177aa579bed08f"
   }
 }

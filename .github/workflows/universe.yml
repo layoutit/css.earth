@@ -43,10 +43,14 @@ jobs:
           pnpm build:packages
           pnpm build:renderer
           pnpm build:preparation
+          pnpm prepare:world-context
+          pnpm prepare:minimap
       - name: Check source restoration and tracked inputs
         run: |
           node --test tools/restore-source-inputs.test.mjs
           node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mjs
+      - name: Check independent body additions
+        run: node --test tools/body-additions.test.mjs tools/prepare-marker-bindings.test.mjs
       - name: Typecheck shared code and enforce TypeScript ownership
         run: |
           pnpm typecheck

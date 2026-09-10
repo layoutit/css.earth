@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6e9811000fdd735dea5dc648cbd6fb3d8e0a54a113272ce8d856cc8517e6a0e6"
+        "sha256": "3d6f03ef3c33ceb177a3c57b60e45c6cb08b92ae5449a1aa2bf6a66daadd0b03"
+      }
+    },
+    "catalog": {
+      "name": "Parysatis",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.707622170185717,
+      "description": "Explore Parysatis in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 397,
+      "context": {
+        "order": 201
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "79afd5a1eb67fe4f7e6ca2370a2946ce8f249bec023f3e382525a4958788d166"
+    "sha256": "7bc5ab5770be7e5b7fb398a5ecff8e33e1efd98ff598ce9b326ad4cdf5fd6974"
   }
 }

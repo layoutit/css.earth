@@ -1,0 +1,14 @@
+{
+  "id": "uranus",
+  "classification": "planet",
+  "order": 210,
+  "classificationOrder": 6,
+  "physical": {
+    "name": "Uranus",
+    "horizonsCode": "799",
+    "meanRadiusKm": 25362,
+    "gravitationalParameterKm3PerS2": 5793950.6103,
+    "parent": "sun"
+  },
+  "physicalNotes": "Published radar-model scales; use a documented primary mass where available."
+}

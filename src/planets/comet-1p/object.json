@@ -115,13 +115,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "93bdab4ce54dd6c1aab85101dafa967287c92840824589f0d60742f71f16e23f"
+        "sha256": "02d8cb9938c9cbeb915141d3a6cc77cc284511c558b6c227ba9c0ebf67d12985"
+      }
+    },
+    "catalog": {
+      "name": "Halley",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 17.859,
+      "description": "Explore Halley's historical Giotto/Vega nucleus model and a small, approximate patch of Giotto photography.",
+      "systemName": "Solar System",
+      "order": 78,
+      "context": {
+        "order": 168
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4fb31e8bd04cddab10b1b09f7c59f2f14e09d0a367f82bb8f324608bc17ec2c0"
+    "sha256": "0be8a58502d34fdbd471c981ccf443ffa5c36bfb2644449f455452b464b822df"
   }
 }

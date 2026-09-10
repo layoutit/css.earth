@@ -12,6 +12,7 @@ import { optimizePreparedQ75Webp } from "../../tools/prepared-webp.mts";
 import {
   loadMarkerDescriptors,
   moveNavigationFile,
+  prepareBodyMarkers,
   prepareNavigation,
 } from "../../tools/prepare-navigation.mts";
 
@@ -24,6 +25,40 @@ const transparentMarkerFiles = Object.freeze([
   "supernova-marker.png",
   "supernova-marker@2x.png",
 ]);
+
+test('adding and reordering bodies preserves existing marker bytes', async context => {
+  const root = await mkdtemp(resolve(tmpdir(), 'cssearth-marker-order-'));
+  context.after(() => rm(root, { recursive: true, force: true }));
+  const descriptors = (await loadMarkerDescriptors()).filter(({ planetId }) => ['sun', 'moon', 'comet-67p', 'vesta'].includes(planetId));
+  assert.equal(descriptors.length, 4);
+  const before = resolve(root, 'before'), after = resolve(root, 'after');
+  await prepareBodyMarkers({ projectRoot, outputRoot: before, descriptors: descriptors.slice(0, 3) });
+  await prepareBodyMarkers({ projectRoot, outputRoot: after, descriptors: [...descriptors].reverse() });
+  for (const file of await readdir(before)) {
+    assert.deepEqual(await readFile(resolve(after, file)), await readFile(resolve(before, file)), file);
+    const accepted = await sharp(resolve(projectRoot, 'public/navigation', file)).ensureAlpha().raw().toBuffer();
+    const reproduced = await sharp(resolve(after, file)).ensureAlpha().raw().toBuffer();
+    assert.equal(reproduced.length, accepted.length);
+    for (let i = 0; i < accepted.length; i += 4) {
+      assert.equal(reproduced[i + 3], accepted[i + 3], `${file}: alpha`);
+      if (accepted[i + 3]) assert.deepEqual(reproduced.subarray(i, i + 3), accepted.subarray(i, i + 3), `${file}: visible RGB`);
+    }
+  }
+});
+
+test('metadata-only preparation does not replace or remove images', async context => {
+  const root = await mkdtemp(resolve(tmpdir(), 'cssearth-marker-metadata-'));
+  context.after(() => rm(root, { recursive: true, force: true }));
+  const files = ['body-sun.webp', 'body-sun@2x.webp'];
+  for (const file of files) await copyFile(resolve(projectRoot, 'public/navigation', file), resolve(root, file));
+  await writeFile(resolve(root, 'sun-context.webp'), 'unrelated existing context');
+  const before = new Map(await Promise.all((await readdir(root)).map(async file => [file, await readFile(resolve(root, file))])));
+  const presentationPath = resolve(root, 'presentation.mjs');
+  await prepareNavigation({ projectRoot, outputRoot: root, planets: OBJECTS.filter(body => body.id === 'sun'), presentationPath, catalogOnly: true });
+  for (const [file, bytes] of before) assert.deepEqual(await readFile(resolve(root, file)), bytes, file);
+  assert.equal((await readdir(root)).length, before.size + 1);
+  assert.match(await readFile(presentationPath, 'utf8'), /body-sun@2x.webp/);
+});
 
 test("composes every orbiting-object marker descriptor in catalog order", async () => {
   const descriptors = await loadMarkerDescriptors({ projectRoot });
@@ -42,7 +77,7 @@ test("composes every orbiting-object marker descriptor in catalog order", async 
     source.origin && source.credit && source.license && source.expectedSha256));
 });
 
-test("reproduces the checked-in registry-derived atlases and utility markers", async (context) => {
+test("reproduces the checked-in body images and utility markers", async (context) => {
   const root = await mkdtemp(resolve(tmpdir(), "cssearth-navigation-"));
   context.after(() => rm(root, { recursive: true, force: true }));
   const presentationPath = resolve(root, "prepared-navigation-markers.mjs");
@@ -108,7 +143,7 @@ for (const failure of ["object source", "late utility source", "publication", "r
     for (const [path, bytes] of previous) await writeFile(path, bytes);
     const filenames = (await readdir(outputRoot)).sort();
     const options = { projectRoot: root, planets: [{ id: "new-body" }] };
-    // A missing presentation parent fails after all staged atlases are installed.
+    // A missing presentation parent fails after all staged images are installed.
     if (["publication", "rollback"].includes(failure)) options.presentationPath = resolve(root, "missing/presentation.mjs");
     if (failure === "rollback") {
       options.moveFile = async (source, target) => {

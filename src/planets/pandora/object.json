@@ -115,13 +115,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d391fa26486d42ea5e51f16be87b6a63ed446fa3578da7a023f6af83a8a7bac3"
+        "sha256": "7ce4e94d883c257e6e0a95b580a6bc52c87a6f179a3b010cbe02c7c0219086e6"
+      }
+    },
+    "catalog": {
+      "name": "Pandora",
+      "classification": "satellite",
+      "color": "#a6a29a",
+      "distanceAu": 9.58,
+      "description": "Explore Pandora with Cassini imagery, mapped radial height and its measured irregular shape.",
+      "systemName": "Solar System",
+      "order": 434,
+      "context": {
+        "order": 43
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ac309c017885c38a361b625b992fd283600d179ac0b9f088df0497f69dc1f2ce"
+    "sha256": "7fda7d2702f2731e2d98668a98f25a857a7d31ae2609f0f279df2b3c9b8cb1b4"
   }
 }

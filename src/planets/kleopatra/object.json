@@ -108,7 +108,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2dfaed28bbcee2bfdf6417d7b936fc2bc52764c380f96998ac8f9d20b882a5db"
+        "sha256": "a339f3a962500f2227bf984fc7f788f614b05e3f3dabe754ba70b2f496401ec0"
+      }
+    },
+    "catalog": {
+      "name": "Kleopatra",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.795397676845876,
+      "description": "Explore Kleopatra’s two lobes and narrow neck with its published shape model.",
+      "systemName": "Solar System",
+      "order": 137,
+      "context": {
+        "order": 58
       }
     }
   },
@@ -117,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f43e6155b89daba27457cc30e1dfff97bdad43e2de6b219f27cdcb36c1b51e75"
+    "sha256": "a391510a96e2e9514c1c3df08f3f076ac277a9568f19bd7edc1dd4f9ea06f8b7"
   }
 }

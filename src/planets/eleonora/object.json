@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c4365f1237429943868d605d66a09f05912f5d4af761f3cceb95b28563e83491"
+        "sha256": "64d6a76b95dcce3aaa79a1c38fbbd5f63fa2d6ff76af12df3db0b9d9c8e373a7"
+      }
+    },
+    "catalog": {
+      "name": "Eleonora",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.800786090344624,
+      "description": "Explore Eleonora in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 158,
+      "context": {
+        "order": 89
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "056f2b33b6f085f7deaae1c1d5725423583d8c49f686f79b374e6741367e254f"
+    "sha256": "d589be1ccb0be2b89314c02f882c23c9055d868e88c060418fa6e68821e6738d"
   }
 }

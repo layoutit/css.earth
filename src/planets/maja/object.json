@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6c7ca7d5427fda5ecfa2627e08ac9fabd9ce707a451df8a35c39bfddc838c23f"
+        "sha256": "fc7b4aac3006aaab10de2d48629a4a79e759f89a6c9706606dad892583042b12"
+      }
+    },
+    "catalog": {
+      "name": "Maja",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.6470494923987746,
+      "description": "Explore Maja in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 379,
+      "context": {
+        "order": 183
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c89972576249f003f58e3a8baa0cff88df9293a20c280fdf8c2cc1ce5c77d240"
+    "sha256": "d44db0745b6b2fe7ed58ad0ad0bb81bd1dcaafe1094ce28f5be522803a85ac0b"
   }
 }

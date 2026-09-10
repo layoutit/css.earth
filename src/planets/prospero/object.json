@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8435412f1de88f55fbb66b01d306a9afdf4b053d7b5648dbd0123e59c7da981b"
+        "sha256": "028614a1b2cad218fecac14d79b793c393d1a28f0996f0e3e32a46d415054543"
+      }
+    },
+    "catalog": {
+      "name": "Prospero",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 19.2,
+      "description": "Explore Prospero, a moon of Uranus, through its lightcurve-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 29,
+      "context": {
+        "order": 247
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "013a92be8baa0062c3540f2473c9958b60c87a5c513354c262c112c0ff7017a4"
+    "sha256": "2f77f61ebe5d20e8e6c74235407dce0fc3131cafe9b8fee8f29a45a4bc91b528"
   }
 }

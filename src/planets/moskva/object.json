@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "68462bd9d7205077f38c99a41bd9caee6aedd165dc183095062761d60756c72c"
+        "sha256": "6f90440dc55909f89c28b8b70e2c7d7a31a3ca05d4725a31df50e83d818985d0"
+      }
+    },
+    "catalog": {
+      "name": "Moskva",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.5406685045126993,
+      "description": "Explore Moskva in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 395,
+      "context": {
+        "order": 199
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "aecac64950bc0d448bf2fb62e3023926626e80e3cd234fd0ab68c0ba74d56a10"
+    "sha256": "74d84cd5bf1e4bf3bfdaff32f0375621a382143b307efdfe63c6d0bac4848a6f"
   }
 }

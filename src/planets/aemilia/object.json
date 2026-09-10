@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e6cb3945d74ed8e1901dfaf5926cf1fcdb2aa57c84271cc2a2d9ec55e30a5193"
+        "sha256": "11851a2e2763b924d4493cf5d262a979134d8e03890a46091e7da63ae54436d2"
+      }
+    },
+    "catalog": {
+      "name": "Aemilia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.10892633182096,
+      "description": "Explore Aemilia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 291,
+      "context": {
+        "order": 337
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "80c6ebc31125574f8501ba407cfd53429ec68dcb76f7a7b24b7651d672baac65"
+    "sha256": "8aabcfc1ace1368b8be3ade6a268e28d0b133fe81ee43685fedf0b3379d5d009"
   }
 }

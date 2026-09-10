@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "3f7325ac27f6001c5f1042fb09d83f7a331f3162eb0177182453ff858fbf7c31"
+        "sha256": "0c892f85d2a2f8c7852aa2e21624e5b28df0b04fc9835bae1a5960352bfad86a"
+      }
+    },
+    "catalog": {
+      "name": "Tantalus",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.2900615327857758,
+      "description": "Explore Tantalus, a near-Earth asteroid, through its published shape model.",
+      "systemName": "Solar System",
+      "order": 128,
+      "context": {
+        "order": 422
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8f83c4bc13c3a5a10806d42c8e80798ef2198008d7afd14e978b9741e09a763e"
+    "sha256": "b83139f17e549d94e28662e7a2b73a6a057b432097edbf08c7a7322967bcce8a"
   }
 }

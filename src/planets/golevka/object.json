@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d7d95e379af2dddda3153e58587c56fab6e0b4330f181e3d3625c78764b30471"
+        "sha256": "fed3190de0079881e1b36ece2ff2090dfbe6b419c97fd3f62ff1c6d7b89a0120"
+      }
+    },
+    "catalog": {
+      "name": "Golevka",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.4737870762656686,
+      "description": "Explore Golevka in 3D with its published radar shape model.",
+      "systemName": "Solar System",
+      "order": 208,
+      "context": {
+        "order": 158
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fc90f8661328016fbf202c3f2b9deb3e78e75e4f125939ae9bf174950eb894b9"
+    "sha256": "aff8327b41bb96199e6fd2a596ec100c822f5ea9d25f3be6ef472f27a4691147"
   }
 }
