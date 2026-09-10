@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "10aa4e9caab676960375b3eb94439fc01c285f9fd8a473902e4979167d775d7a"
+        "sha256": "f6bdc0bc6d417a5d5349b7f15207c92a7523a29a1f6733c5e397d727cd337f96"
+      }
+    },
+    "catalog": {
+      "name": "Lydia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.732268290476554,
+      "description": "Explore Lydia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 263,
+      "context": {
+        "order": 308
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "571725533956d61d5a6f6a0bf180b301104d0da53d2e39380bfe60093ffecfa0"
+    "sha256": "873d819e3be5621ef02ec80c0b68614b819c6234f02d2472f5bbf5d788987d64"
   }
 }

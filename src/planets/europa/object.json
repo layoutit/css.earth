@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4d50e2774c073876d6d2a278a49097be4310e66aecf338a29578e9924904acdf"
+    "sha256": "a163067d68ee5fac53bcf9de7763338be95853db242dfd2565f6ff0de7023f05"
   },
   "id": "europa",
   "properties": {
@@ -128,7 +128,20 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d4543e68322240ee64b14aa0bcd941655f2e8c5dba93102c32067ae0c6a2a0b6"
+        "sha256": "2089b5ad7a28dff32ffaf18a391ea8951d6a5c83ee1d70bb16e9787c7f76bb56"
+      }
+    },
+    "catalog": {
+      "name": "Europa",
+      "classification": "satellite",
+      "color": "#b5b3a9",
+      "distanceAu": 5.2,
+      "description": "Explore Europa in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s fractured icy moon and its orbit around Jupiter.",
+      "systemName": "Solar System",
+      "order": 427,
+      "context": {
+        "order": 15,
+        "color": "#c6b49c"
       }
     }
   },

@@ -1,0 +1,76 @@
+{
+  "id": "asteroid-2002-tc302",
+  "classification": "trans-neptunian",
+  "order": 2,
+  "classificationOrder": 14,
+  "physical": {
+    "name": "2002 TC302",
+    "horizonsCode": "84522;",
+    "meanRadiusKm": 256.86505029826975,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "asteroid": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2784522%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 8338647010.898899,
+      "eccentricity": 0.2988623680599504,
+      "inclinationRad": 0.9974944864074645,
+      "ascendingNodeRad": 0.28001297651560025,
+      "argumentOfPeriapsisRad": 1.6993597451740687,
+      "meanAnomalyAtEpochRad": 5.797780944146898,
+      "meanMotionRadPerDay": 4.13357835919822e-05
+    }
+  },
+  "asteroidFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2784522%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          3536501270.480937,
+          3630909302.721878,
+          3890912329.382429
+        ],
+        "velocity": [
+          -389732.4604780592,
+          20591.84579745827,
+          197441.8492966857
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          3524803528.426447,
+          3631520428.419128,
+          3896828736.008272
+        ],
+        "velocity": [
+          -390116.8909244501,
+          20149.69916794535,
+          196985.0131220602
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          3513094234.760689,
+          3632118267.774548,
+          3902731417.163389
+        ],
+        "velocity": [
+          -390502.9845889889,
+          19705.48980829328,
+          196526.6162440193
+        ]
+      }
+    ]
+  },
+  "acquisition": {
+    "heliocentric": {
+      "target": "84522;",
+      "model": "asteroid"
+    }
+  }
+}

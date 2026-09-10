@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ecff38099d7ec76057ed76c1cbfad09fd4457c277bd856b7c2bcb77747784182"
+        "sha256": "5704bc64bc478b973768400d82d1c0cdd9d7facdb6c960faf960d061a2d21899"
+      }
+    },
+    "catalog": {
+      "name": "Irene",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.58851145680903,
+      "description": "Explore Irene in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 178,
+      "context": {
+        "order": 109
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f7bbe19e212628297c669ba307fdc3915a738bb8a61969d11415e064f99a7bb2"
+    "sha256": "08e45f0a3dba32bbe0ca97be39209899378ad5fa301fa780f45a3793702857a5"
   }
 }

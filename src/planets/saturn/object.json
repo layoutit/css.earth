@@ -179,6 +179,18 @@
         "url": "prepared/page.json",
         "sha256": "3ec450216b0ec66b3cfadb93302545a199b9a402ab8121d14978e95aff86b238"
       }
+    },
+    "catalog": {
+      "name": "Saturn",
+      "classification": "planet",
+      "color": "#d2b68c",
+      "distanceAu": 9.58,
+      "description": "Explore Saturn in 3D with cssEarth. Orbit its spectacular rings, discover its moons, and browse scientific facts about this gas giant.",
+      "systemName": "Solar System",
+      "order": 430,
+      "context": {
+        "order": 18
+      }
     }
   },
   "schema": "cssearth-object@1",

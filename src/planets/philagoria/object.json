@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "15a2b8336f39e5052b3406685de8996832212ca7ad8f116de3783700e7474966"
+        "sha256": "f80e4568492f5167433794adbfe387daec6941a9f53d61832c450947e252293c"
+      }
+    },
+    "catalog": {
+      "name": "Philagoria",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.0476100267473623,
+      "description": "Explore Philagoria in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 349,
+      "context": {
+        "order": 395
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b872943a43e23ba17a214fc47815b2113e2af687d4cb08b6cc4d998e9a79a97c"
+    "sha256": "a5c15d1b974ba14398573e1cbdea49bde66dd98a1459262736998583e1dfa9e5"
   }
 }

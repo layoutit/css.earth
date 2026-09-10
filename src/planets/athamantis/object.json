@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cad16fcec1c4cf8dea76339a24a7102cffc86b80a09fc6e4c1aaea95179428b3"
+        "sha256": "38b1474ae05220d55fb3e852183dc7c4643feb59ab2a2f2d2985bc59ddc6ad33"
+      }
+    },
+    "catalog": {
+      "name": "Athamantis",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.3819120669248703,
+      "description": "Explore Athamantis in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 326,
+      "context": {
+        "order": 372
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e23f8212fff5a5c53bea9e0172547f7781881d75dd27fce4260ae7a17d60cb75"
+    "sha256": "b5dabfe8dd5b91f3b94d9d39e101dfe14a11f4f88eb4a06455d0631a69d49f9f"
   }
 }

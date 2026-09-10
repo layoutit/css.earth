@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "16e09b811341fc0b01d1d449f91faaaa4979d29f7abfe3c8f9b5c5f33f46bdbf"
+        "sha256": "2d895e989c52d88a0fe4185305d55f6da18cc8ec6e13292d3a5c3954f36082c4"
+      }
+    },
+    "catalog": {
+      "name": "Braille",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.339551786449215,
+      "description": "Explore Braille with a clearly labelled approximation of its published flyby dimensions.",
+      "systemName": "Solar System",
+      "order": 361,
+      "context": {
+        "order": 404
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3bec9bfe9ad17a32e2706eb544c54fe0cfe334a4020cf80fed2fe30a36ce77ad"
+    "sha256": "53837aa9b91aab4ab414885f6267d24b15648ab1d496a720f6925f639eb2b5b7"
   }
 }

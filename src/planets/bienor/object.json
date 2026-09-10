@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b7853c482397360216aae21027e9bf5586efb3e75f2ca396271355f02e6be206"
+        "sha256": "c9130ad790503e57665fa662110d1eec03d4305bed661d9460647e563b7cbbb1"
+      }
+    },
+    "catalog": {
+      "name": "Bienor",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 16.60224445563277,
+      "description": "Explore Bienor, a Centaur, with its observation-constrained shape.",
+      "systemName": "Solar System",
+      "order": 464,
+      "context": {
+        "order": 418
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "87d5afb29bbe02d872184209b7a3dbb1c1fb0d8cdacecb105d3daa93d8180d3a"
+    "sha256": "07feeebc5d3be53c6611847deabd2441b18f8685a716c162f92356546119d59b"
   }
 }

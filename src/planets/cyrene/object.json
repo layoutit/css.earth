@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "79bcabef6e756c26cf8ad336729d948908169d1b378ba136519eb1dd8156c954"
+        "sha256": "9079de59f93a66cf7600c20a8c6ad5fd0451be31e195abdbae4d70094eb994b8"
+      }
+    },
+    "catalog": {
+      "name": "Cyrene",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.07124717724166,
+      "description": "Explore Cyrene in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 277,
+      "context": {
+        "order": 322
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9ef0a4f7888d916566e8d4dfac8229b4a0330074c85430153a0a09877c4a5905"
+    "sha256": "541124e837922caa1b319bb7f24aa5864250947835a2df13e5bc49025c18f439"
   }
 }

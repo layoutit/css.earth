@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1af63f93a8598ee68a2bf15c9488b8485ba9498288e66c648643d2bc68e6b0e0"
+        "sha256": "db477b8482dfa1160e176f1f2ef2cee2e4bb2358ee3e05d30f42a9673a27799e"
+      }
+    },
+    "catalog": {
+      "name": "Leto",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7855571261884413,
+      "description": "Explore Leto in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 239,
+      "context": {
+        "order": 281
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "877bf0b58f3a3889d92eea384e21bb56ff80823c40d25cf6ce6fc209494f447f"
+    "sha256": "53d12b739d8bb7b534c50bc50f515c3249b3005da1d472f9dcdb1ff4bba827d0"
   }
 }

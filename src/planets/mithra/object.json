@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "004fd6fa3cdc6dd965f90680d92dae677c0886086884d72d1ee4396de61427c8"
+        "sha256": "5541dd62bf279f130cfd1c41118417e4477eaf862f02cf591fe5d73cc9595b58"
+      }
+    },
+    "catalog": {
+      "name": "Mithra",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.2052023543749892,
+      "description": "Explore Mithra in 3D with its published radar shape model.",
+      "systemName": "Solar System",
+      "order": 206,
+      "context": {
+        "order": 156
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "099e6143904931c64e97451563b282104432cf36411b91b920b7ae9295cd02b9"
+    "sha256": "a29729ccd73dd6a265861752de664290061d2138048e15e7db8df3be3e2155a0"
   }
 }

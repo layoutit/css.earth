@@ -130,13 +130,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "697fa455fb9f3e3d313f08159a1af8ed37fd7935a25453b68a6d3362bd97497a"
+        "sha256": "293233c2547cf233135da9b4ea2d7a20c3d82aea2a6c68088d20014001b58bfc"
+      }
+    },
+    "catalog": {
+      "name": "Borrelly",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 3.608969333559339,
+      "description": "Explore Borrelly's MICAS photograph and independent USGS and DLR terrain reconstructions.",
+      "systemName": "Solar System",
+      "order": 76,
+      "context": {
+        "order": 299
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "38b510262ccffcd1c15a409f9fde06ff53993842a8fdbe8bd225a229c4432b3e"
+    "sha256": "250f1220eeb18cc5102ce02df201964e3c78a6bfa9523c77485a51d0d3c813f4"
   }
 }

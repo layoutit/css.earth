@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "aa75608dc3bd2310b21502fbf64da7d614d28f97b9df25f2fc5b27ef8e2d5908"
+        "sha256": "163837d93842311c09c57d9c764e957e694a101dc5798a12a3cc4111ed415e8e"
+      }
+    },
+    "catalog": {
+      "name": "Scylla",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7604931019999346,
+      "description": "Explore Scylla in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 288,
+      "context": {
+        "order": 334
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a3d9fe21b9adf4decacd5b7efc3af5840664bb477a59ba2f5583f153bd068db8"
+    "sha256": "044732edd783927f4b26d24d982b7c3d2dc1dda9b7b9e5ebd398a9d58b6d21bb"
   }
 }

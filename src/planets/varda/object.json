@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c4bc29041acb5d8074ec021c211f5055766e7835bcec22ec2623d6ec54acef1e"
+        "sha256": "71e50eaaaab446b5a571300632f783ac3d1da660167621dc96048b23c8a07ea5"
       }
     },
     "worldFrame": {
@@ -112,11 +112,23 @@
       ],
       "metersPerUnit": 1409.2806637385909,
       "bodyRadiusM": 324134.5526598759
+    },
+    "catalog": {
+      "name": "Varda",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 45.619915704968584,
+      "description": "Varda is a distant binary-system primary whose outline was measured as it eclipsed a star. Its companion’s orbit helps orient this model, but Varda’s depth remains uncertain.",
+      "systemName": "Solar System",
+      "order": 8,
+      "context": {
+        "order": 437
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "edb0ddcbbc4920f19464d7ea58840e64737cf2ace9dcc257ee3d7e43b39bd0a5"
+    "sha256": "a1c4354c627abc626a48dac9c89397ac4da69d41acb29d69890f13d003566be7"
   }
 }

@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "caa2be004a53870297d42d33fa38831f48bbd81571ff82866ccb5a314159feb0"
+        "sha256": "8564c655f5c1f2681847cc0406415ea8c50b8b1f9a842c302fd1325a4341f9b2"
+      }
+    },
+    "catalog": {
+      "name": "Rosalinde",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.4725643786568288,
+      "description": "Explore Rosalinde in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 398,
+      "context": {
+        "order": 202
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d57a7032aa1bc6f11863de2fc375853aa7a2c9069313c9658550fb1c01392c56"
+    "sha256": "c149dbcf82f5441b4a1a23916fd761908715f3865c64846fc2af21c946ed61b5"
   }
 }

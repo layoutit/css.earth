@@ -16,7 +16,7 @@ type ObjectMarkerDescriptor = MarkerDescriptor & {presentation: MarkerPresentati
 interface NavigationChange { source?: string; target: string; }
 type MoveNavigationFile = (source: string, target: string) => Promise<void>;
 interface MarkerLoadOptions { planets?: readonly MarkerPlanet[]; projectRoot?: string; }
-interface NavigationOptions extends MarkerLoadOptions { outputRoot?: string; presentationPath?: string; moveFile?: MoveNavigationFile; }
+interface NavigationOptions extends MarkerLoadOptions { objectIds?: readonly string[]; catalogOnly?: boolean; outputRoot?: string; presentationPath?: string; moveFile?: MoveNavigationFile; }
 interface MarkerRenderOptions { projectRoot: string; outputRoot: string; descriptors: readonly MarkerDescriptor[]; }
 
 
@@ -79,8 +79,12 @@ export async function prepareNavigation({
   planets = PLANET_MARKER_PLANETS,
   presentationPath = resolve(projectRoot, "site/prepared-navigation-markers.mjs"),
   moveFile = moveNavigationFile,
+  objectIds,
+  catalogOnly = false,
 } : NavigationOptions = {}) {
   const descriptors = await loadMarkerDescriptors({ planets, projectRoot });
+  if (objectIds?.some(id => !descriptors.some(descriptor => descriptor.planetId === id))) throw new TypeError('Unknown navigation object.');
+  const selected = objectIds ? descriptors.filter(descriptor => objectIds.includes(descriptor.planetId)) : descriptors;
   // A crash or failed rollback must never leave recoverable source/backups in
   // public/, which Vite copies recursively (including dot directories).
   const cacheRoot = resolve(projectRoot, "node_modules/.cache");
@@ -90,19 +94,17 @@ export async function prepareNavigation({
   try {
     const stagedOutput = resolve(staging, "assets");
     await mkdir(stagedOutput);
-    const result = await renderNavigation({ projectRoot, outputRoot: stagedOutput, descriptors });
-    const contextMarkers = await prepareContextMarkers({ projectRoot, outputRoot: stagedOutput, descriptors, planets });
-    const presentations = Object.fromEntries(descriptors.map((descriptor, index) => [descriptor.planetId, { index, count: descriptors.length, presentation: descriptor.presentation,
-      ...(contextMarkers[descriptor.planetId] ? { context: contextMarkers[descriptor.planetId] } : {}),
-    }]));
+    const result = catalogOnly ? { planetCount: descriptors.length } : await renderNavigation({ projectRoot, outputRoot: stagedOutput, descriptors: selected });
+    if (!catalogOnly) await prepareContextMarkers({ projectRoot, outputRoot: stagedOutput, descriptors: selected, planets });
+    const presentations = await markerPresentations(descriptors, planets, [stagedOutput, outputRoot]);
     const stagedPresentation = resolve(staging, "presentation.mjs");
     await writeFile(stagedPresentation, "// Generated from object-owned marker recipes. Do not edit.\nexport const PREPARED_NAVIGATION_MARKERS = Object.freeze(" + JSON.stringify(presentations) + ");\n");
     const changes: NavigationChange[] = (await readdir(stagedOutput)).sort().map((filename) => ({
       source: resolve(stagedOutput, filename), target: resolve(outputRoot, filename),
     }));
     const generatedTargets = new Set(changes.map(({ target }) => target));
-    const obsolete = [...descriptors.flatMap(({ planetId }) => [`${planetId}.webp`, `${planetId}-context.webp`]),
-      "blackhole-marker.webp", "blackhole-marker@2x.webp", "supernova-marker.webp", "supernova-marker@2x.webp", "sun-indicator-hexagon.png"];
+    const obsolete = catalogOnly ? [] : [...selected.flatMap(({ planetId }) => [`${planetId}.webp`, `${planetId}-context.webp`]),
+      "planet-markers.webp", "planet-markers@2x.webp", "blackhole-marker.webp", "blackhole-marker@2x.webp", "supernova-marker.webp", "supernova-marker@2x.webp", "sun-indicator-hexagon.png"];
     changes.push(...[...new Set(obsolete)].map((filename) => ({ target: resolve(outputRoot, filename) })).filter(({ target }) => !generatedTargets.has(target)));
     changes.push({ source: stagedPresentation, target: presentationPath });
     await mkdir(outputRoot, { recursive: true });
@@ -116,6 +118,33 @@ export async function prepareNavigation({
   } finally {
     if (cleanup) await rm(staging, { recursive: true, force: true });
   }
+}
+
+async function markerPresentations(descriptors: readonly ObjectMarkerDescriptor[], planets: readonly MarkerPlanet[], directories: readonly string[]) {
+  const { BODIES } = await loadAstronomyPackage();
+  const bodies: Readonly<Partial<Record<string, (typeof BODIES)[keyof typeof BODIES]>>> = BODIES;
+  const parents = new Set<string | null | undefined>(planets.filter(body => body.classification === 'satellite').map(body => bodies[body.id]?.parent));
+  const metadata = async (filename: string) => {
+    for (const directory of directories) {
+      const path = resolve(directory, filename);
+      try { await lstat(path); }
+      catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
+      return sharp(path).metadata();
+    }
+    throw new Error(`Missing prepared navigation image: ${filename}. Run prepare:navigation for its body.`);
+  };
+  const entries = [];
+  for (const descriptor of descriptors) {
+    const id = descriptor.planetId;
+    for (const density of [1, 2]) {
+      const image = await metadata(`body-${id}${density === 2 ? '@2x' : ''}.webp`);
+      if (image.width !== markerTileSize * density || image.height !== markerTileSize * density) throw new TypeError(`Invalid marker dimensions: ${id}.`);
+    }
+    const context = parents.has(id) || descriptor.context ? await metadata(`${id}-context.webp`) : null;
+    entries.push([id, { url: `/navigation/body-${id}.webp`, url2x: `/navigation/body-${id}@2x.webp`, index: 0, count: 1,
+      presentation: descriptor.presentation, ...(context ? { context: { url: `/navigation/${id}-context.webp`, pixels: context.width } } : {}) }]);
+  }
+  return Object.fromEntries(entries);
 }
 
 // Preparation must finish before touching accepted files. Roll back a failed
@@ -196,27 +225,19 @@ export async function prepareContextMarkers({ projectRoot, outputRoot, descripto
   return markers;
 }
 
-/** Rebuild every marker from its pinned recipe. Copy decoded rows directly so
- * atlas assembly does not premultiply and round partially transparent RGB. */
-export async function prepareMarkerAtlases({ projectRoot, outputRoot, descriptors }: MarkerRenderOptions) {
-  if (!descriptors.length) throw new TypeError('A marker atlas requires at least one descriptor.');
+/** Each body owns its marker bytes; catalogue order never changes an image. */
+export async function prepareBodyMarkers({ projectRoot, outputRoot, descriptors }: MarkerRenderOptions) {
+  if (!descriptors.length) throw new TypeError('Markers require at least one descriptor.');
   await mkdir(outputRoot, { recursive: true });
   for (const density of [1, 2]) {
-    const tileSize=markerTileSize*density, width=tileSize*descriptors.length;
-    const atlas=Buffer.alloc(width*tileSize*4);
-    for (const [index, descriptor] of descriptors.entries()) {
-      const sourcePath=descriptor.owner==='object'
-        ? resolve(projectRoot,'src/planets',descriptor.planetId,'source',descriptor.source.path)
-        : resolve(projectRoot,'src/navigation/source',descriptor.source.path);
-      const png=await renderMarker(descriptor,{sourcePath,tileSize});
-      const {data,info}=await sharp(png).ensureAlpha().raw().toBuffer({resolveWithObject:true});
-      if(info.width!==tileSize || info.height!==tileSize || info.channels!==4)
-        throw new Error(`Marker dimensions differ from their prepared tile: ${descriptor.planetId}`);
-      for(let y=0;y<tileSize;y++)data.copy(atlas,(y*width+index*tileSize)*4,y*tileSize*4,(y+1)*tileSize*4);
+    const tileSize = markerTileSize * density;
+    for (const descriptor of descriptors) {
+      const sourcePath = descriptor.owner === 'object'
+        ? resolve(projectRoot, 'src/planets', descriptor.planetId, 'source', descriptor.source.path)
+        : resolve(projectRoot, 'src/navigation/source', descriptor.source.path);
+      const tile = await renderMarker(descriptor, { sourcePath, tileSize });
+      await sharp(tile).webp({ lossless: true, effort: 6 }).toFile(resolve(outputRoot, `body-${descriptor.planetId}${density === 2 ? '@2x' : ''}.webp`));
     }
-    await sharp(atlas,{raw:{width,height:tileSize,channels:4}})
-      .webp({lossless:true,effort:6})
-      .toFile(resolve(outputRoot,`planet-markers${density===2?'@2x':''}.webp`));
   }
 }
 
@@ -224,7 +245,7 @@ export async function renderNavigation({ projectRoot, outputRoot, descriptors }:
   const navigationSourceRoot = resolve(projectRoot, "src/navigation/source");
   await prepareSunIndicator({ projectRoot, outputRoot });
 
-  await prepareMarkerAtlases({ projectRoot, outputRoot, descriptors });
+  await prepareBodyMarkers({ projectRoot, outputRoot, descriptors });
 
   const sunSourcePath = resolve(navigationSourceRoot, NAVIGATION_SUN_SOURCE.path);
   const sunSource = await validateMarkerSourceBytes(
@@ -449,7 +470,7 @@ export async function renderNavigation({ projectRoot, outputRoot, descriptors }:
         .toBuffer();
       const outputPath = resolve(
         outputRoot,
-        `${id}-marker${density === 2 ? "@2x" : ""}.webp`,
+        `body-${id}${density === 2 ? "@2x" : ""}.webp`,
       );
       await sharp({
         create: {
@@ -529,10 +550,13 @@ async function loadObjectDescriptor(planetId: string, projectRoot: string): Prom
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const result = await prepareNavigation();
+  const args = process.argv.slice(2);
+  const catalogOnly = args.includes('--catalog-only');
+  const objectIds = args.filter(arg => arg !== '--catalog-only');
+  const result = await prepareNavigation({ catalogOnly, objectIds: objectIds.length ? objectIds : undefined });
   console.log(JSON.stringify({
     ...result,
-    planetMarkerAtlas:
+    bodyMarkers:
       `${result.planetCount} prepared 16px raster markers with 2x density`,
     sunMarker: "NASA HMI raster marker with 2x density",
     blackHoleMarker: "NASA/GSFC simulated accretion-disk marker with 2x density",

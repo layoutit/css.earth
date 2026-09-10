@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cd7d51d9ea8e769539a36c04176bb997b48a293ce9e51f8ac193ed8c41025fbb"
+        "sha256": "36826057b6de2c7b2a867fa1998b05e9818934f7ee38afb9c0b79a51f95e6d0d"
+      }
+    },
+    "catalog": {
+      "name": "Rosalind",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 19.2,
+      "description": "Explore Rosalind, an inner moon of Uranus, through its measured shape.",
+      "systemName": "Solar System",
+      "order": 90,
+      "context": {
+        "order": 150
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "da8f54ce83b01eff94c240f04f20c57659bd5f2506d042d6b9f32ef2ce8b9c4d"
+    "sha256": "cd037be3c5c345b67f040639ff0c62e57ccc9f4d5993534929b188ea0cad08f7"
   }
 }

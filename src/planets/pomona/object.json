@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1154f343a2829970eb9c5ec7c232655d387f1e9a2e6a4b91029ef15e15c974b2"
+        "sha256": "66dc2fb88ec724337750372311098d11d58676dac568c6d64ee9cb12729a1f05"
+      }
+    },
+    "catalog": {
+      "name": "Pomona",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.588787675965266,
+      "description": "Explore Pomona in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 221,
+      "context": {
+        "order": 263
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8e6f90a7617ba0dd191c24b401bf2bbffe1b25f626942522822f5c5ccd11af93"
+    "sha256": "81034b0509ba991e0ef282499e134efa6a2dd2dded1a7b00d0ada7b0c1d3c618"
   }
 }

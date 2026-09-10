@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0acdbcd1bf0db732cdb0cd33ed4ef62c33e06d65a18130f2df2c49c9557b80a7"
+        "sha256": "811229bc746820260a7e2245f6eb1d7abb98c85a5349ec2eda18f439cea3da4d"
       }
     },
     "worldFrame": {
@@ -112,11 +112,23 @@
       ],
       "metersPerUnit": 1536.2133449603787,
       "bodyRadiusM": 353329.0693408871
+    },
+    "catalog": {
+      "name": "Ixion",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 37.41243146579822,
+      "description": "Ixion is a large world beyond Neptune. Several stellar occultations constrain its flattened outline; the displayed depth is assumed and its surface is unmapped.",
+      "systemName": "Solar System",
+      "order": 5,
+      "context": {
+        "order": 463
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0588fedaa81baaca8e626d190421b8d6236d4904ab60e8a4819c1b6846810535"
+    "sha256": "c53917b195b4a6eb1ccdba23990dd2440e30e953eab4caf099b51278c344459f"
   }
 }

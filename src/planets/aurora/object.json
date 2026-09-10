@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "33fc4ccb7bdf4d612269db17bdc6e8bcdb8e276083d61fd41a2a5675a3a138d8"
+        "sha256": "ee35fbfa97bb64eb7c462ec63ea05a2c9757dc592814321561d903300244ebc2"
+      }
+    },
+    "catalog": {
+      "name": "Aurora",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1591870349744293,
+      "description": "Explore Aurora in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 192,
+      "context": {
+        "order": 135
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "186831f84750279f5e55c7df412068e67d4c35298e4e93d0639f193b52129e49"
+    "sha256": "d8c9ca8c95aa1f58c4bb5a00e7eb59836926275c9320f69eb4265a8326fdf027"
   }
 }

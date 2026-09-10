@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b1acd242730a9f206b5ff5acaaabf5f3c1a832d5d2e0cf9187b69867c4cbf55b"
+        "sha256": "5c0687c62c0714c977a845d111a3ffdce4970818253fd2ef22b64e6c903e5459"
+      }
+    },
+    "catalog": {
+      "name": "Shoemaker–Levy 2",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 4.525635799109316,
+      "description": "Explore 137P/Shoemaker–Levy 2 through a shape approximation based on published lightcurve models.",
+      "systemName": "Solar System",
+      "order": 73,
+      "context": {
+        "order": 300
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "2442dbd618216ecd19e3b3bacd25c6fb8a03fb19e5f69a6b950c667de8182e84"
+    "sha256": "22d2fd26f7c246d2ebd3eeee59a10afa739b714cec5d9b170510c8c95b91718f"
   }
 }

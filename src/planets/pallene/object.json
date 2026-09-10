@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fe3a4cd367e7288f2fcf875aa54910ef0a71e7cbfa894e0837e64b194a739582"
+        "sha256": "8680fa556dfb023fec4720e36b04aa7a72c3010c2d6749c3525e4fd916144e9c"
+      }
+    },
+    "catalog": {
+      "name": "Pallene",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Pallene with Cassini imagery and its measured shape.",
+      "systemName": "Solar System",
+      "order": 99,
+      "context": {
+        "order": 128
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3ecaaa8be3e1463cd8584476e6841c67c18f66d00ab4cea61276cf6dd4835213"
+    "sha256": "3fa6350b3b14e788f5e71331782516bd70d3ac721cc634b46604b07c511b9762"
   }
 }

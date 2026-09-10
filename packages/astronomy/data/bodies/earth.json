@@ -1,0 +1,14 @@
+{
+  "id": "earth",
+  "classification": "planet",
+  "order": 206,
+  "classificationOrder": 2,
+  "physical": {
+    "name": "Earth",
+    "horizonsCode": "399",
+    "meanRadiusKm": 6371.01,
+    "gravitationalParameterKm3PerS2": 398600.435436,
+    "parent": "sun"
+  },
+  "physicalNotes": "Published radar-model scales; use a documented primary mass where available."
+}

@@ -115,13 +115,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4d9962f714e297da6e9ef4e9a3ff3cf52f6619638e8453e52f474b6b3af73dbb"
+        "sha256": "7c3d853d198e48291ea96e29fd91884b39971d7b55a255ad5389e52310d6367e"
+      }
+    },
+    "catalog": {
+      "name": "Epimetheus",
+      "classification": "satellite",
+      "color": "#a6a29a",
+      "distanceAu": 9.58,
+      "description": "Explore Epimetheus with Cassini imagery, mapped radial height and its measured irregular shape.",
+      "systemName": "Solar System",
+      "order": 436,
+      "context": {
+        "order": 45
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "43a95187198e4ba76e967bcdc0a7eb993d5f3d1af7e19afb2d1e2134266652ba"
+    "sha256": "96dc61e2c8f9e3f51075bfaf513b8b0aa167d81fa461316b0d2fcdd48e1c1db3"
   }
 }

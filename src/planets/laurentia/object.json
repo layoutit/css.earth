@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "12015bf42e1479aa44823e16d0b366a583a6bd06ebd3356390717b2b64f4a23b"
+        "sha256": "79f1f294561a12cbc4e5afa62e02dd7ec4b576c3be4e753d07181a7daa88dfc7"
+      }
+    },
+    "catalog": {
+      "name": "Laurentia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.0135299301481933,
+      "description": "Explore Laurentia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 294,
+      "context": {
+        "order": 340
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a0973d56e4866ffe01e2e470bb44a6bc7ca8e43a4a51090fcf2fdd427b56fe05"
+    "sha256": "c4d2a4fc7057dd41c57571089b03724b8515eaf1c5ef1a77fa07efd90e9e1b55"
   }
 }

@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "55d584dce1141d43c0b21a521a40f2c3b57113e8f2dd5a48434d8e141f413218"
+        "sha256": "6990b6f86664ef6e79b92269a27fda5260f57344ba58e758bfcf9befbda63360"
+      }
+    },
+    "catalog": {
+      "name": "Puck",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 19.2,
+      "description": "Explore Puck with Voyager 2 imagery on its measured-size shape.",
+      "systemName": "Solar System",
+      "order": 101,
+      "context": {
+        "order": 126
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d701487b8465dc8a6d34f5f4976feb4007b194986ca5b134f2e222e0c1127689"
+    "sha256": "1db89d7c16c9f841cee754af9ab9438c2bd61550fa7739bc5ecda8fb9937f1cb"
   }
 }

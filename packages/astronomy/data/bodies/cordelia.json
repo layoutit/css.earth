@@ -1,0 +1,52 @@
+{
+  "id": "cordelia",
+  "classification": "satellite",
+  "order": 250,
+  "physical": {
+    "name": "Cordelia",
+    "horizonsCode": "706",
+    "meanRadiusKm": 20.082988502465085,
+    "gravitationalParameterKm3PerS2": 0.00406,
+    "parent": "uranus"
+  },
+  "physicalNotes": "Ring-dynamics mass estimates: French et al. 2024, Table 3 footnote b.\nhttps://arxiv.org/abs/2401.04634; same published prolate radii as above.",
+  "satellite": {
+    "parent": "uranus",
+    "horizonsCode": "706",
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 1,
+    "poleRightAscensionRad": 1.349342619212,
+    "poleDeclinationRad": 0.264803206224,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 49755.418,
+      "eccentricity": 0.000414061156,
+      "inclinationRad": 0.002652449669,
+      "ascendingNodeRad": -1.855490794456,
+      "argumentOfPeriapsisRad": 1.11543324794,
+      "meanAnomalyAtEpochRad": -136982.0808708425,
+      "meanMotionRadPerDay": 18.723627188814636,
+      "ascendingNodeRateRadPerDay": -0.030070112130891766,
+      "argumentOfPeriapsisRateRadPerDay": 0.06019407974222062
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "706",
+      "center": "500@799",
+      "parent": "uranus",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 1,
+      "radial": true,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "706",
+      "center": "500@799",
+      "range": "daily"
+    }
+  }
+}

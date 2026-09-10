@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1174bfc49bcd7c592afa00d5b4e84cb6019d4058f56d7ea54a28b40e4b81e495"
+        "sha256": "87e72b9cdf5214e107f6cfbe00e57f653fb63290a1de484d139e881bd006ed3e"
+      }
+    },
+    "catalog": {
+      "name": "Sibylla",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.3713315960899832,
+      "description": "Explore Sibylla in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 300,
+      "context": {
+        "order": 346
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "cc2bca2b49504b2673a6a715f27ed13e89310ccdd1d1c8ceae15074b0b752ded"
+    "sha256": "c7c1f88999cc4d7a702e29ede3b069e58da548786bf5d2adc69f709da7b35939"
   }
 }

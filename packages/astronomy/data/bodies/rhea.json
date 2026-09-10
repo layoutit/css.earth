@@ -1,0 +1,51 @@
+{
+  "id": "rhea",
+  "classification": "satellite",
+  "order": 229,
+  "physical": {
+    "name": "Rhea",
+    "horizonsCode": "605",
+    "meanRadiusKm": 764.5,
+    "gravitationalParameterKm3PerS2": 153.94,
+    "parent": "saturn"
+  },
+  "physicalNotes": "No measured GM is supplied for these small moons; zero means omitted mass.\nRadii: Thomas2013/IAU2015 shapes, not an inferred density or invented mass.",
+  "satellite": {
+    "parent": "saturn",
+    "horizonsCode": "605",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": 0.704602150997,
+    "poleDeclinationRad": 1.458612645523,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 527232.995,
+      "eccentricity": 0.000954863048,
+      "inclinationRad": 0.005777672244,
+      "ascendingNodeRad": -0.161735775517,
+      "argumentOfPeriapsisRad": -2.550015563557,
+      "meanAnomalyAtEpochRad": 50803.1792865389,
+      "meanMotionRadPerDay": 1.390828603451078,
+      "ascendingNodeRateRadPerDay": -0.00048001463014246,
+      "argumentOfPeriapsisRateRadPerDay": 0.00050509459078717
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "605",
+      "center": "500@699",
+      "parent": "saturn",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "605",
+      "center": "500@699"
+    }
+  }
+}

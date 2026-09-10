@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f4b9705635aa340605b2676e2ab7b0e3d9d92fd76286ad15778d826118b776ed"
+        "sha256": "e9b6ae72c54edb5f1d918cf7a305d5108108f8459c07a701dbdf487c1c8516ee"
+      }
+    },
+    "catalog": {
+      "name": "Eumelos",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 5.201650929201143,
+      "description": "Explore Eumelos in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 366,
+      "context": {
+        "order": 411
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "48d0554c8562f0df02b709ce5f94b4ddf20361dccefab4d3879557cd0ae8322b"
+    "sha256": "34156221934cfc46da55b09d22b576948677b39435ad4c468756ab9d2cf99eea"
   }
 }

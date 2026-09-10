@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fdd6f8a95f8e10dacfd3df59d241e6f126e3aa90355c1b924bbb6a4f23a8f401"
+        "sha256": "48c85c26eaf0087a28e8d0292f30f4a4d235a277adf008072d46e531d5457d95"
+      }
+    },
+    "catalog": {
+      "name": "Ducrosa",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1255060299245687,
+      "description": "Explore Ducrosa in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 385,
+      "context": {
+        "order": 189
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4a9e84b52eb840830faf8004f0e462d5f0cc69edcdac408e3009d14a41c80a69"
+    "sha256": "4abbe9219db0ad00a1112ba7df7597289aa121a05a1bdb359541c8f6829869b4"
   }
 }

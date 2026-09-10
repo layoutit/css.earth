@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f86972b27eaf43fa4313d18c7937d8a8a6823160dcccbca1e97fef089ed4a51a"
+        "sha256": "165d087ce5ac8d7f1a447d8e56c12b6147df5750b332d17f1fee22f7d2b28d21"
       }
     },
     "worldFrame": {
@@ -112,11 +112,23 @@
       ],
       "metersPerUnit": 0.1355710547868361,
       "bodyRadiusM": 31.1813426009723
+    },
+    "catalog": {
+      "name": "ʻOumuamua",
+      "classification": "interstellar",
+      "color": "#aaaaaa",
+      "distanceAu": 54.22423400905037,
+      "description": "The first confirmed interstellar visitor crossed the Solar System in 2017. Its changing brightness supports competing shape interpretations; this view shows one published disc-like fit, with size set by an assumed reflectivity.",
+      "systemName": "Solar System",
+      "order": 14,
+      "context": {
+        "order": 431
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9ebe0cd367ed8638a0bf67b4e68716600ebbd76a11be9aeaadd125a576ccba81"
+    "sha256": "3c4b05ec3f17bb1dad618071a88ba21bc46526573554d1577e223f4d5f51485c"
   }
 }

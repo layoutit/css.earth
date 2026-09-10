@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e5d18d55ad42edcfad94bc48c4680ff08d25142594467cdbab8b7c8850116df5"
+        "sha256": "35c5ad695fd95a59684b083a3fe275044cee6ca59f02ea364ab51e852043a49e"
+      }
+    },
+    "catalog": {
+      "name": "Susi",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.3684607015715247,
+      "description": "Explore Susi in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 399,
+      "context": {
+        "order": 203
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "be7a0b1771b3109b4e359f9bc85b6dd477ef1d5e94f4dd2ccad6c9df7e1528a8"
+    "sha256": "00411a2892cb7c2038c21cfca260962cf19e7ccc5554b7c263476b82b20b1562"
   }
 }

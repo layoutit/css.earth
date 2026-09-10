@@ -115,13 +115,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b26dd867909c141b82a0d46b0b2a791c78b6bbe12f3ab40bf725e95c6e5243e7"
+        "sha256": "606eee9b6d8b7c363a6154d384e999809350b24889f240e8018b28595ef3a4a2"
+      }
+    },
+    "catalog": {
+      "name": "Daphnis",
+      "classification": "satellite",
+      "color": "#c3bfb7",
+      "distanceAu": 9.58,
+      "description": "Explore Daphnis in 3D with Cassini imagery and its measured irregular shape.",
+      "systemName": "Solar System",
+      "order": 112,
+      "context": {
+        "order": 55
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "99eaae1e200fcdb0c37566222562ad6725f4ad95fc089fc36e4c5ae91856bf84"
+    "sha256": "aa3e861e7bfb8ff878658c0b18ecad3856ecf68f9ce355413009646c81fd2ef0"
   }
 }

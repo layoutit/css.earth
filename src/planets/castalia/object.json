@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ec1162abab12cf159d645aba6a1a097091542bd0f648c58c319a00ff9c52b5ce"
+        "sha256": "63e2b57903249ca96af24a117690dc65d35b56affdf54238350837491fedcd66"
+      }
+    },
+    "catalog": {
+      "name": "Castalia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.0631100842717316,
+      "description": "Explore Castalia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 182,
+      "context": {
+        "order": 113
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ab04a763e7c9115e181a06f02261d5598583ed9b12050938d64d6991141c8db5"
+    "sha256": "a05b99710e8678ec82ff4f581101ac16bbaa710cae99f647819c0481da626985"
   }
 }

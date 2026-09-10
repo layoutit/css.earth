@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b73945ee26a765f7781ad5d9f640b89d1f8ade95e6e32562a9a056a638391658"
+        "sha256": "67d7084d1b2663eb5c5696e1d46ca53c5e87e49120fb440487dd849cd83a7898"
       }
     },
     "worldFrame": {
@@ -112,11 +112,23 @@
       ],
       "metersPerUnit": 731.3846914689709,
       "bodyRadiusM": 168218.47903786332
+    },
+    "catalog": {
+      "name": "2002 TX300",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 43.528810315844204,
+      "description": "2002 TX300 is an icy member of the Haumea family. Reanalysis of a two-chord occultation supports a range of sizes and shapes; this view illustrates one published flattened solution.",
+      "systemName": "Solar System",
+      "order": 1,
+      "context": {
+        "order": 467
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "738c7c74283a5faa8894158165386a78dd95a15feb436db04f276bcdf35043b1"
+    "sha256": "6553c27bf83104d1dd21621b4ae53e5af441d82ded9a26e55038ce07c71da384"
   }
 }

@@ -11,12 +11,6 @@
       "category": "configuration",
       "reason": "Existing ESLint flat configuration boundary; this exact file is permitted without exempting other tooling code."
     },
-    "site/prepared-navigation-markers.mjs": {
-      "category": "generated",
-      "reason": "Prepared output emitted by the strictly checked TypeScript producer; retain reproducible data and asset identities.",
-      "source": "tools/prepare-navigation.mts",
-      "anchor": "// Generated from object-owned marker recipes. Do not edit."
-    },
     "site/prepared-overview-titles.mjs": {
       "category": "generated",
       "reason": "Prepared output emitted by the strictly checked TypeScript producer; retain reproducible data and asset identities.",

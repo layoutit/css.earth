@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "73ff7eb7c7eb1662cc712f523e78764b24378f2ff67a773387c5350028c99415"
+        "sha256": "a2d7d440ea6b5e7bb10e1e7c81a08e1e488298e7c813831ed12480796d8c591e"
+      }
+    },
+    "catalog": {
+      "name": "Ambrosia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.59809056583152,
+      "description": "Explore Ambrosia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 308,
+      "context": {
+        "order": 354
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9147265e56933523ec7559f7934779209d655dc86b06c84fb9341b03216d21a3"
+    "sha256": "4a1522dff2fe766baf8f1374d6171c3acb1763ae560b21962fe11b514a77a985"
   }
 }

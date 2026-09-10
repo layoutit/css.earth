@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { readBodyRecords, prepareBodyRecords } from './body-records.mts'
 // Regenerates src/__fixtures__/horizons.ts — the reference vectors every
 // ephemeris test in this package asserts against.
 //
@@ -6,7 +7,7 @@
 // the exact Horizons URL that produced it, so any row can be re-fetched with
 // curl and nothing else. `VEC_CORR='NONE'` matters: the Horizons default is
 // light-time corrected, and an ephemeris is a geometric statement.
-import { readRecordSections, writeRecordSections } from './lib/write-record-sections.mts'
+import { readRecordSections, writeRecordSections, literalRecords } from './lib/write-record-sections.mts'
 import { horizons, parseVectors, vectorsUrl } from './lib/horizons.mts'
 import { HEADER } from './lib/sources.mts'
 
@@ -44,100 +45,11 @@ const targets: [string, string, string, string, number[]][] = [
   ['saturnFromBarycentre', 'Saturn (699) relative to the Saturn system barycentre', '699', '500@6', EPOCHS],
 ]
 
-const SATELLITES = [
-  ['paaliaq', '620', '500@699', 'daily'],
-  ['tarvos', '621', '500@699', 'daily'],
-  ['ijiraq', '622', '500@699', 'daily'],
-  ['suttungr', '623', '500@699', 'daily'],
-  ['mundilfari', '625', '500@699', 'daily'],
-  ['skathi', '627', '500@699', 'daily'],
-  ['erriapus', '628', '500@699', 'daily'],
-  ['thrymr', '630', '500@699', 'daily'],
-  ['bebhionn', '637', '500@699', 'daily'],
-  ['bergelmir', '638', '500@699', 'daily'],
-  ['bestla', '639', '500@699', 'daily'],
-  ['fornjot', '642', '500@699', 'daily'],
-  ['hati', '643', '500@699', 'daily'],
-  ['hyrrokkin', '644', '500@699', 'daily'],
-  ['loge', '646', '500@699', 'daily'],
-  ['skoll', '647', '500@699', 'daily'],
-  ['greip', '651', '500@699', 'daily'],
-  ['tarqeq', '652', '500@699', 'daily'],
-  ['caliban', '716', '500@799', 'daily'],
-  ['sycorax', '717', '500@799', 'daily'],
-  ['prospero', '718', '500@799', 'daily'],
-  ['setebos', '719', '500@799', 'daily'],
-
-  ['siarnaq', '629', '500@699', 'daily'],
-  ['ymir', '619', '500@699', 'daily'],
-
-  ['nereid', '802', '500@899', 'daily'],
-  ['himalia', '506', '500@599', 'daily'],
-  ['phobos', '401', '500@499'],
-  ['deimos', '402', '500@499'],
-  ['io', '501', '500@599'],
-  ['europa', '502', '500@599'],
-  ['ganymede', '503', '500@599'],
-  ['callisto', '504', '500@599'],
-  ['amalthea', '505', '500@599'],
-  ['thebe', '514', '500@599'],
-  ['adrastea', '515', '500@599', 'daily'],
-  ['metis', '516', '500@599', 'daily'],
-  ['methone', '632', '500@699', 'cassini-era'],
-  ['polydeuces', '634', '500@699', 'daily'],
-  ['anthe', '649', '500@699', 'daily'],
-  ['aegaeon', '653', '500@699', 'daily'],
-  ['pallene', '633', '500@699', 'cassini-era'],
-  ['mimas', '601', '500@699'],
-  ['enceladus', '602', '500@699'],
-  ['tethys', '603', '500@699'],
-  ['dione', '604', '500@699'],
-  ['rhea', '605', '500@699'],
-  ['titan', '606', '500@699'],
-  ['hyperion', '607', '500@699', 'limited'],
-  ['iapetus', '608', '500@699'],
-  ['phoebe', '609', '500@699'],
-  ['janus', '610', '500@699', 'limited'],
-  ['epimetheus', '611', '500@699', 'limited'],
-  ['helene', '612', '500@699', 'limited'],
-  ['calypso', '614', '500@699', 'limited'],
-  ['daphnis', '635', '500@699', 'cassini-era'],
-  ['telesto', '613', '500@699'],
-  ['atlas', '615', '500@699', 'limited'],
-  ['prometheus', '616', '500@699', 'limited'],
-  ['pandora', '617', '500@699', 'limited'],
-  ['pan', '618', '500@699', 'source-limited'],
-  ['bianca', '708', '500@799', 'daily'],
-  ['cressida', '709', '500@799', 'daily'],
-  ['desdemona', '710', '500@799', 'daily'],
-  ['rosalind', '713', '500@799', 'daily'],
-  ['puck', '715', '500@799', 'daily'],
-  ['portia', '712', '500@799', 'daily'],
-  ['juliet', '711', '500@799', 'daily'],
-  ['belinda', '714', '500@799', 'daily'],
-  ['cordelia', '706', '500@799', 'daily'],
-  ['ophelia', '707', '500@799', 'daily'],
-  ['miranda', '705', '500@799'],
-  ['ariel', '701', '500@799'],
-  ['umbriel', '702', '500@799'],
-  ['titania', '703', '500@799'],
-  ['oberon', '704', '500@799'],
-  ['triton', '801', '500@899'],
-  ['proteus', '808', '500@899'],
-  ['larissa', '807', '500@899'],
-  ['naiad', '803', '500@899', 'daily'],
-  ['thalassa', '804', '500@899', 'daily'],
-  ['despina', '805', '500@899', 'daily'],
-  ['galatea', '806', '500@899', 'daily'],
-  ['charon', '901', '500@999'],
-  ['nix', '902', '500@999', 'daily'],
-  ['hydra', '903', '500@999', 'daily'],
-  ['kerberos', '904', '500@999', 'daily'],
-  ['styx', '905', '500@999', 'daily'],
-  ['kiviuq', '624', '500@699', 'daily'],
-  ['albiorix', '626', '500@699', 'daily'],
-  ['dimorphos', '120065803', '500@920065803', 'dart'],
-]
+const bodyRecords = await readBodyRecords()
+const SATELLITES = bodyRecords.flatMap(record => {
+  const f = record.acquisition?.fixture;
+  return f ? [[record.id, f.target, f.center, f.range] as const] : [];
+})
 
 // Deliberately NOT the epochs the mean elements were fitted on: the satellite
 // element fit sampled every 30 days from JD 2415020.5, so every one of those
@@ -152,13 +64,11 @@ const LIMITED_SATELLITE_EPOCHS = [2458862.25, 2460310.75, 2461041.5, 2461772.25,
 // accurate across that span, so it does not need the narrower current-era set.
 const SOURCE_LIMITED_SATELLITE_EPOCHS = [2433295.75, 2442413.25, 2451545.0, 2461041.5, 2465233.25, 2469794.75]
 
-const DWARF_PLANETS = [
-  ['pluto', '999'],
-  ['ceres', '1;'],
-  ['eris', '136199;'],
-  ['haumea', '136108;'],
-  ['makemake', '136472;'],
-]
+const DWARF_PLANETS = bodyRecords.filter(record => record.classification === 'dwarf-planet').map(record => {
+  const target = record.acquisition?.heliocentric?.target;
+  if (!target) throw new TypeError(`Missing dwarf planet target: ${record.id}.`);
+  return [record.id, target] as const;
+})
 
 // `dwarfPlanetElements.data.ts`'s epoch (2461041.5, 2026-Jan-01 TDB) is one of
 // these on purpose: it is the trivial near-zero-error point, and
@@ -174,7 +84,7 @@ async function collect(name: string, description: string, command: string, cente
   const url = vectorsUrl({ command, center, epochsJdTdb: epochs, outUnits: 'KM-D' })
   const rows = parseVectors(await horizons(url, `vectors-${name}`), name)
   if (rows.length !== epochs.length) throw new Error(`${name}: asked for ${epochs.length} epochs, got ${rows.length}`)
-  return `  ${name}: {
+  return `  ${JSON.stringify(name)}: {
     description: ${JSON.stringify(description)},
     query: ${JSON.stringify(url)},
     rows: [
@@ -217,7 +127,10 @@ for (const [id, command] of selected.size ? [] : DWARF_PLANETS) {
   blocks.push(await collect(`${id}Heliocentric`, `${id} (${command}) relative to the Sun`, command, '500@10', DWARF_EPOCHS))
 }
 
-for (const block of blocks) records.set(/^  (\w+):/.exec(block)![1], block)
+for (const block of blocks) {
+  const [id] = Object.keys(literalRecords(`export const HORIZONS = {${block}}`, 'HORIZONS'))
+  records.set(id, block)
+}
 const out = `${HEADER('JPL Horizons vector ephemerides; every entry carries the URL that produced it', 'fetch-fixtures.mts')}
 import type { Vec3 } from '../vec3.js'
 
@@ -269,3 +182,5 @@ export const PLAN_MARS_ECLIPTIC = {
 `
 writeRecordSections(destination, out, 'horizons')
 process.stdout.write(`wrote ${blocks.length} fixtures\n`)
+
+await prepareBodyRecords()

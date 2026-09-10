@@ -1,0 +1,77 @@
+{
+  "id": "comet-137p",
+  "classification": "comet",
+  "order": 100,
+  "classificationOrder": 7,
+  "physical": {
+    "name": "137P/Shoemaker-Levy 2",
+    "horizonsCode": "DES=137P;CAP;",
+    "meanRadiusKm": 4.04,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "physicalNotes": "Equivalent-volume radius of the Hubble contact model scaled by Spitzer.\nBorrelly uses half its observed 8 km length as a navigation reference, not a mean or volume radius.",
+  "comet": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D137P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 677025479.1104466,
+      "eccentricity": 0.5724958909377915,
+      "inclinationRad": 0.36397434112964083,
+      "ascendingNodeRad": 6.092248974478718,
+      "argumentOfPeriapsisRad": 0.4231099411219189,
+      "meanAnomalyAtEpochRad": 5.04008731200811,
+      "meanMotionRadPerDay": 0.0017867427961465654
+    }
+  },
+  "cometFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D137P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          -425297080.4002727,
+          -604957714.9661789,
+          -257015881.5860173
+        ],
+        "velocity": [
+          1030728.034076535,
+          -9248.294145711678,
+          71060.29499112723
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          -393980767.610754,
+          -604660462.9854324,
+          -254640638.0034741
+        ],
+        "velocity": [
+          1056989.706143465,
+          29502.29290971695,
+          87450.15848197704
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          -361880450.3321167,
+          -603160025.3091671,
+          -251758759.8799217
+        ],
+        "velocity": [
+          1082975.75880256,
+          71008.89376914705,
+          104851.3534903237
+        ]
+      }
+    ]
+  },
+  "acquisition": {
+    "heliocentric": {
+      "target": "DES=137P;CAP;",
+      "model": "comet"
+    }
+  }
+}

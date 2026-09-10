@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ee868f6e50de44022566fc826496231d902e95dcd9ecdbd0b785f87321e8acb0"
+        "sha256": "fec5bbaec998c9c23a6aa9111b9efecf9376c98441fe5f87166540969049977a"
+      }
+    },
+    "catalog": {
+      "name": "Klotho",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.6688807426668064,
+      "description": "Explore Klotho in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 255,
+      "context": {
+        "order": 297
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "2492c43910dad6f66253c90493d9a36f9070fa494cd0571c144c9494958e797c"
+    "sha256": "044b859ec74b9007e23ac0864e58b57234e277943f2f5c2c0065542e80597253"
   }
 }

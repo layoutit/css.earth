@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d39b687aff209b014ff43d5ba3f2875d3a7b3f0efb934e2751ad338f0ddce5bd"
+        "sha256": "80ae88e0392ad021451279dbc3e26ae0ab6efc12ce7d769abc0e8c453e171b4e"
+      }
+    },
+    "catalog": {
+      "name": "Kalypso",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.6180409355001784,
+      "description": "Explore Kalypso in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 231,
+      "context": {
+        "order": 273
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "20f1d098029f038c86a08a018df4311bc8ead3eea4d4b7e4bc6ee6d01adbd7ac"
+    "sha256": "91d0772fb6fe2e11df09508f2ee5b68a4e72beadb6268d223ef17d22f090e390"
   }
 }

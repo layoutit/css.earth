@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fb12a01aee91f96fada6f1abb8979e87aaace075889107d9d04f2753793a01b0"
+        "sha256": "06c7705bf03a95e2c8cbf3bbe505ce12be128bb2045d9a976efe178bd2ed6132"
+      }
+    },
+    "catalog": {
+      "name": "Iclea",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1954918103121694,
+      "description": "Explore Iclea in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 353,
+      "context": {
+        "order": 399
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b885c8c671df2a159e6717729c8eb261ec9b53bd566a84fbfa8dbf7b8bab3c5c"
+    "sha256": "0a83b2f0fde946b4c88f7f7e4823fdcc5c7e8584c87976a7c9924c585ca51f91"
   }
 }

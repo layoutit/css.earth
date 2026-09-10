@@ -1,0 +1,51 @@
+{
+  "id": "oberon",
+  "classification": "satellite",
+  "order": 256,
+  "physical": {
+    "name": "Oberon",
+    "horizonsCode": "704",
+    "meanRadiusKm": 761.4,
+    "gravitationalParameterKm3PerS2": 205.34,
+    "parent": "uranus"
+  },
+  "physicalNotes": "Ring-dynamics mass estimates: French et al. 2024, Table 3 footnote b.\nhttps://arxiv.org/abs/2401.04634; same published prolate radii as above.",
+  "satellite": {
+    "parent": "uranus",
+    "horizonsCode": "704",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": 1.350399141556,
+    "poleDeclinationRad": 0.262677687397,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 583517.062,
+      "eccentricity": 0.00133718838,
+      "inclinationRad": 0.001255324044,
+      "ascendingNodeRad": 1.151968042773,
+      "argumentOfPeriapsisRad": -3.742760467056,
+      "meanAnomalyAtEpochRad": 17048.742438985868,
+      "meanMotionRadPerDay": 0.466678594138228,
+      "ascendingNodeRateRadPerDay": -7.8190075658011e-05,
+      "argumentOfPeriapsisRateRadPerDay": 9.1602042967503e-05
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "704",
+      "center": "500@799",
+      "parent": "uranus",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "704",
+      "center": "500@799"
+    }
+  }
+}

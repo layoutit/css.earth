@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "54b796eb90f2bb7737206db9c2d143a95e24821494d752747a73343e32c53bf9"
+        "sha256": "0470fd38cae888ecf08c266fd4fe530585235c6c39de4f558d0b5ed1c28e8ad8"
+      }
+    },
+    "catalog": {
+      "name": "Kowal–Mrkos",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 4.744148140394379,
+      "description": "Explore 143P/Kowal–Mrkos through a shape approximation based on published lightcurve models.",
+      "systemName": "Solar System",
+      "order": 74,
+      "context": {
+        "order": 301
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a0d50ce6d3830575686693464f6b9f640459de1c45e153d120eecb4d8c745b34"
+    "sha256": "73324a909bb02b4bc6e3db3014640c680d05b86f686303bb0a767d1dd41607a4"
   }
 }

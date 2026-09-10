@@ -1,0 +1,51 @@
+{
+  "id": "larissa",
+  "classification": "satellite",
+  "order": 259,
+  "physical": {
+    "name": "Larissa",
+    "horizonsCode": "807",
+    "meanRadiusKm": 96,
+    "gravitationalParameterKm3PerS2": 0.25484,
+    "parent": "neptune"
+  },
+  "physicalNotes": "Ring-dynamics mass estimates: French et al. 2024, Table 3 footnote b.\nhttps://arxiv.org/abs/2401.04634; same published prolate radii as above.",
+  "satellite": {
+    "parent": "neptune",
+    "horizonsCode": "807",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": -1.057794334699,
+    "poleDeclinationRad": 0.750122799263,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 73592.512,
+      "eccentricity": 0.001210044392,
+      "inclinationRad": 0.00388722875,
+      "ascendingNodeRad": -0.882180742832,
+      "argumentOfPeriapsisRad": -1.98143263983,
+      "meanAnomalyAtEpochRad": 413756.9343589834,
+      "meanMotionRadPerDay": 11.321284524766257,
+      "ascendingNodeRateRadPerDay": -0.006842867653753758,
+      "argumentOfPeriapsisRateRadPerDay": 0.013689432828309488
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "807",
+      "center": "500@899",
+      "parent": "neptune",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "807",
+      "center": "500@899"
+    }
+  }
+}

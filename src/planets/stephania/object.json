@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6363e172120d1a6a2aa622585485005f6760ffc56449f8b60156571de34fda77"
+        "sha256": "6a47903b265ed7a48275e86ebb00937eefbf483345f027553561bf75ce37e772"
+      }
+    },
+    "catalog": {
+      "name": "Stephania",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.348271490890079,
+      "description": "Explore Stephania in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 321,
+      "context": {
+        "order": 367
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f99ba66974727688981c14af74768ff704b7bb713817ec8085646a410c7e5165"
+    "sha256": "6dd378afbd949beb52748912f49d4986f3f6a87ea85df94a3745b059219de225"
   }
 }

@@ -1,0 +1,72 @@
+{
+  "id": "polydeuces",
+  "classification": "satellite",
+  "order": 70,
+  "physical": {
+    "name": "Polydeuces",
+    "horizonsCode": "634",
+    "meanRadiusKm": 1.525973578806757,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "saturn"
+  },
+  "physicalNotes": "Buie et al. (2015) primary axes; JPL primary GM. Physical primary, not binary barycenter.",
+  "satellite": {
+    "parent": "saturn",
+    "horizonsCode": "634",
+    "longitudeHarmonics": [
+      {
+        "rateRadPerDay": 0.007935035537514167,
+        "cosineRad": -0.29264234794938276,
+        "sineRad": 0.34546426386490275,
+        "epochJdTt": 2461041
+      },
+      {
+        "rateRadPerDay": 0.015870206218209188,
+        "cosineRad": -0.0075178532606678325,
+        "sineRad": -0.04402198259183397,
+        "epochJdTt": 2461041
+      },
+      {
+        "rateRadPerDay": 0.023806578567990705,
+        "cosineRad": 0.006149492920069022,
+        "sineRad": 0.0035398627248041437,
+        "epochJdTt": 2461041
+      }
+    ],
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 1,
+    "poleRightAscensionRad": 0.70794690595,
+    "poleDeclinationRad": 1.458095614307,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 377431.563,
+      "eccentricity": 0.019220649067,
+      "inclinationRad": 0.003031844711,
+      "ascendingNodeRad": 1.116255619635,
+      "argumentOfPeriapsisRad": -0.78317370592,
+      "meanAnomalyAtEpochRad": -16761.970217491606,
+      "meanMotionRadPerDay": 2.294226912846057,
+      "ascendingNodeRateRadPerDay": -0.001463144486679532,
+      "argumentOfPeriapsisRateRadPerDay": 0.002954073209297744
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "634",
+      "center": "500@699",
+      "parent": "saturn",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 1,
+      "radial": true,
+      "libration": true,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "634",
+      "center": "500@699",
+      "range": "daily"
+    }
+  }
+}

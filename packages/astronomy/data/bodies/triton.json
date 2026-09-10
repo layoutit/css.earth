@@ -1,0 +1,51 @@
+{
+  "id": "triton",
+  "classification": "satellite",
+  "order": 257,
+  "physical": {
+    "name": "Triton",
+    "horizonsCode": "801",
+    "meanRadiusKm": 1352.6,
+    "gravitationalParameterKm3PerS2": 1428.495,
+    "parent": "neptune"
+  },
+  "physicalNotes": "Ring-dynamics mass estimates: French et al. 2024, Table 3 footnote b.\nhttps://arxiv.org/abs/2401.04634; same published prolate radii as above.",
+  "satellite": {
+    "parent": "neptune",
+    "horizonsCode": "801",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": 2.069115629886,
+    "poleDeclinationRad": -0.403836066472,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 354766.37,
+      "eccentricity": 0.00012649457,
+      "inclinationRad": 0.169055545896,
+      "ascendingNodeRad": -3.110982092429,
+      "argumentOfPeriapsisRad": 4.48647391263,
+      "meanAnomalyAtEpochRad": 39049.6732648243,
+      "meanMotionRadPerDay": 1.069121416414284,
+      "ascendingNodeRateRadPerDay": -6.1857841289449e-05,
+      "argumentOfPeriapsisRateRadPerDay": 8.2969215712834e-05
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "801",
+      "center": "500@899",
+      "parent": "neptune",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "801",
+      "center": "500@899"
+    }
+  }
+}

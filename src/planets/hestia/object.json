@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e9d32bdaad5de99565d467fc9f65cfa01657c77d7f5c0846fc18f76951d4047d"
+        "sha256": "57c32147b3811757f8a69599413491394663e4d59e459e2b401a160a89ec6013"
+      }
+    },
+    "catalog": {
+      "name": "Hestia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.5255592116593393,
+      "description": "Explore Hestia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 228,
+      "context": {
+        "order": 270
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "cc7fd0be141cab46df42f00cb27161990d403aebffe48d2c24e5a931bd146ee3"
+    "sha256": "fcb098f99601484701f1a99531eff9e5e13a01ac6bef92da6954e85656f9fd15"
   }
 }

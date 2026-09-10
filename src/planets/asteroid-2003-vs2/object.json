@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fb237cb325c86ef062afeae36f5ee8565a74bd383b5aedf83537fda755c33000"
+        "sha256": "e04e6097f606ea05a0c59f93bb98f85b411b95064206472805b7110cece2d77b"
       }
     },
     "worldFrame": {
@@ -112,11 +112,23 @@
       ],
       "metersPerUnit": 1139.5432960932965,
       "bodyRadiusM": 262094.95810145818
+    },
+    "catalog": {
+      "name": "2003 VS2",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 36.97977310285473,
+      "description": "2003 VS2 is an elongated world beyond Neptune. A multi-site occultation and rotational brightness measurements support this smooth triaxial shape.",
+      "systemName": "Solar System",
+      "order": 3,
+      "context": {
+        "order": 465
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "05bb4bb2d9dbbdb2fe6a28e509b9a3c006e0f4900603ad68dc319c9c9aff57fb"
+    "sha256": "0e5c301c56b0c33bf72d5c139444924f919c4e5722fe68836dc3a9c111dab737"
   }
 }
