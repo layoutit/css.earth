@@ -2,7 +2,7 @@ import { copyFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve, dirname, relative } from 'node:path';
 import { json, readNativeRun, readBrowserRun, compareTrajectories, summarizeMotion,
   bindInputReceipts, verifyProvenance, assertRegisteredProjection, compareFrameBoundMotion,
-} from './interaction-suite-analysis.mjs';
+} from './interaction-suite-analysis.mts';
 
 const root=resolve(import.meta.dirname,'../../../../..');
 const manifestPath=resolve(process.argv[2]), manifest=await json(manifestPath),out=dirname(manifestPath);

@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 
 import { browserInteractionScenarios } from
-  "../../../../../site/test/mars-calibration-interaction-driver.mjs";
+  "../../../../../site/test/mars-calibration-interaction-driver.mts";
 import { loadInteractionCorpus } from "./interaction-corpus.mjs";
 import { nativeInteractionScenarios } from "./native-interaction-driver.mjs";
 

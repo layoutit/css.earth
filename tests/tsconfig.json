@@ -1,0 +1,39 @@
+{
+  "extends": "../tools/tsconfig.json",
+  "include": [
+    "./**/*.ts",
+    "./**/*.mts",
+    "../site/test/**/*.ts",
+    "../site/test/**/*.mts",
+    "../src/**/*.test.ts",
+    "../src/**/*.test.mts",
+    "../src/**/*.spec.ts",
+    "../src/**/*.spec.mts",
+    "../src/**/test/**/*.ts",
+    "../src/**/test/**/*.mts",
+    "../src/**/*-test-fixture.mts",
+    "../src/**/*-browser.mts",
+    "../tools/**/*.test.ts",
+    "../tools/**/*.test.mts",
+    "../tools/**/*.spec.ts",
+    "../tools/**/*.spec.mts",
+    "../tools/audits/**/*.mts",
+    "../packages/**/*.test.ts",
+    "../packages/**/*.test.mts",
+    "../packages/**/*.spec.ts",
+    "../packages/**/*.spec.mts",
+    "../site/env.d.ts",
+    "../tools/external-modules.d.mts"
+  ],
+  "exclude": [
+    "**/dist/**",
+    "**/node_modules/**"
+  ],
+  "compilerOptions": {
+    "paths": {
+      "vitest": [
+        "../packages/engine/node_modules/vitest"
+      ]
+    }
+  }
+}

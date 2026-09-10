@@ -25,11 +25,11 @@ export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name"
       resolve(root, "runtime-assets.json"),
       ...(authored ? [resolve(root, 'object.json'), resolve(root, 'prepared/runtime.json'),
         resolve(root, 'prepared/content.json'),
-        resolve(projectRoot, 'tests/objects/browser', objectRecord.id, 'browser-profile.mjs')] : [
+        resolve(projectRoot, 'tests/objects/browser', objectRecord.id, 'browser-profile.mts')] : [
       resolve(root, "runtime", "client.mjs"),
       resolve(root, "site", `${objectRecord.name}Page.astro`),
       resolve(root, "site", "control-content.mjs"),
-      resolve(root, "test", "browser-profile.mjs"),
+      resolve(root, "test", "browser-profile.mts"),
       resolve(root, "tools", "acquire.mjs"),
       resolve(root, "tools", "prepare.mjs"),
       resolve(root, "tools", "navigation-marker.mjs"),

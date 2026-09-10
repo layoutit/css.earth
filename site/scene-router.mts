@@ -9,11 +9,11 @@ import type { NavigationContent } from './planet-shell-client.mts';
 import type { WorldHandoff } from './prepared-world-navigation.mts';
 type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 type Shell = ReturnType<typeof mountPlanetShell>;
-type WorldContextOwner = ReturnType<typeof applicationWorldContext.createApplicationWorldContext>;
-type WorldContextMount = Awaited<ReturnType<WorldContextOwner['mount']>>;
+export type WorldContextOwner = ReturnType<typeof applicationWorldContext.createApplicationWorldContext>;
+export type WorldContextMount = Awaited<ReturnType<WorldContextOwner['mount']>>;
 interface Request { id: string; cancelledFlight: boolean; controller: AbortController; lifetime: SceneLifetime; url: string; options: NavigationOptions; timing: ReturnType<typeof createNavigationTiming>; }
 interface Session { framePresenter?: ReturnType<NonNullable<WorldContextMount['createFramePresenter']>>; generation: number; lifetime: SceneLifetime; mount: ObjectSceneLifecycle | null; shell: Shell | null; lastCommand: boolean | null; viewUrl: ReturnType<typeof bindViewUrl> | null; request?: Request; url?: string; }
-interface RouterOptions { stage: HTMLElement; objectId: string; loadObject?(id: string): Promise<SceneFactory>; documentTarget?: Document; windowTarget?: BrowserWindow; mountShell?: typeof mountPlanetShell; reportError?(error: unknown): void; navigation?: Navigation | null; objects?: readonly ObjectEntry[]; loadContent?: ReturnType<typeof createNavigationContent>['load'] | null; persistentWorldContext?: WorldContextOwner | null; }
+export interface RouterOptions { stage: HTMLElement; objectId: string; loadObject?(id: string): Promise<SceneFactory>; documentTarget?: Document; windowTarget?: BrowserWindow; mountShell?: typeof mountPlanetShell; reportError?(error: unknown): void; navigation?: Navigation | null; objects?: readonly ObjectEntry[]; loadContent?: ReturnType<typeof createNavigationContent>['load'] | null; persistentWorldContext?: WorldContextOwner | null; }
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { requireSceneLifecycle } from "./scene-contract.mts";
 import { objectAdapter } from "./object-adapter.mts";

@@ -35,8 +35,8 @@ To build all routes for production, run `pnpm setup:assets`, `pnpm build`, then
 
 ## Checks
 
-`pnpm typecheck` checks the shared packages, renderer, preparation, and migrated
-shell and ownership-tool TypeScript. `pnpm check:typescript-ownership` rejects new
+`pnpm typecheck` checks the shared packages, renderer, preparation, shell, tooling,
+tests, executable fixtures and capture scripts. `pnpm check:typescript-ownership` rejects new
 authored JavaScript and stale migration entries. See the
 [TypeScript ownership policy](docs/architecture/typescript-ownership.md) for the
 remaining backlog and justified JavaScript exceptions.

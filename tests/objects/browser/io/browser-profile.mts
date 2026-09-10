@@ -1,0 +1,12 @@
+import { browserProfileLensIds, createObjectBrowserProfile } from "../../../../site/test/object-browser-profile.mts";
+import objectControls from "../../../../src/planets/io/prepared/controls.json" with {type:"json"};
+
+export const browserProfile = createObjectBrowserProfile({ id: "io", controls: objectControls,
+  audit: {
+    preparedAssetPairs: [{ one: "/scenes/io/io-directional-sun.webp", two: "/scenes/io/io-directional-sun@2x.webp" }],
+    canonicalPreparedAssets: ["/scenes/io/io-normal-surface@2x.webp", "/scenes/io/io-normal-poles@2x.webp", "/scenes/io/io-lighting.webp", "/scenes/io/io-parent-jupiter.webp"],
+    lensRace: { defaultId: "normal", slowId: "enhanced", winnerId: "normal",
+      slowAsset: "/scenes/io/io-enhanced-surface@2x.webp", preReadyDisabled: true },
+    retained: { lensIds: browserProfileLensIds(objectControls), allowedMountSelectors: [] },
+  },
+});

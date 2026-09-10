@@ -15,7 +15,7 @@
 
 ## TypeScript ownership
 
-- Write new application, preparation, and tooling implementations in strict TypeScript. Validate external values at runtime; do not replace runtime validation with type assertions or unchecked declaration files.
+- Write application, preparation, tooling, test, executable fixture-helper, and capture implementations in strict TypeScript. Validate external values at runtime; do not replace runtime validation with type assertions or unchecked declaration files.
 - Keep generated outputs and preserved vendor code in their source-owned formats. Existing JavaScript compatibility modules must only re-export their typed owners.
 - `pnpm check:typescript-ownership` enforces the remaining authored-JavaScript backlog and justified exceptions. Remove migrated or retired entries; do not add new implementation debt to make the check pass. Run `pnpm typecheck` and behavior/source checks appropriate to each migration.
 

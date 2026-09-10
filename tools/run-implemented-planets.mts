@@ -37,7 +37,7 @@ export async function discoverPlanetTests(
     throw new Error(`Implemented planet ${id} test directory is missing.`, { cause });
   }
   const tests = filenames
-    .filter((filename) => filename.endsWith(".test.mjs"))
+    .filter((filename) => /\.test\.m(?:j|t)s$/u.test(filename))
     .sort()
     .map((filename) => resolve(directory, filename));
   if (tests.length === 0) {
@@ -80,7 +80,7 @@ export async function resolvePlanetCommand(
   const resolvers: Readonly<Partial<Record<string, (id: string, root: string) => string>>> = Object.freeze({
     acquire: planetAcquireScript,
     prepare: planetPrepareScript,
-    browser: () => resolve(projectRoot, "site/test/dom-cleanliness-browser.mjs"),
+    browser: () => resolve(projectRoot, "site/test/dom-cleanliness-browser.mts"),
     assemble: planetAssembleScript,
   });
   const resolveScript = resolvers[mode];
@@ -234,7 +234,7 @@ async function main(mode = process.argv[2]) {
   }
 
   if (mode === "browser") {
-    await run(process.execPath, [resolve("site/test/dom-cleanliness-browser.mjs"), ...process.argv.slice(3)]);
+    await run(process.execPath, [resolve("site/test/dom-cleanliness-browser.mts"), ...process.argv.slice(3)]);
     return;
   }
 
