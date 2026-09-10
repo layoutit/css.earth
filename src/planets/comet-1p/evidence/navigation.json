@@ -1,0 +1,22 @@
+{
+  "base": "f596d99c939d6f83270c4614415a0531a522163e",
+  "command": "node tools/prepare-navigation.mts comet-1p",
+  "sourceSha256": "a3c162d7b85a6f29372f59b5208608569e14eab7a33934bd5eba090ac3249914",
+  "outputs": [
+    {
+      "path": "public/navigation/body-comet-1p.webp",
+      "bytes": 374,
+      "sha256": "8135890f227bf87ec711bb92bbc5c168741ac017a8b9b180c56112d173a2b3fc"
+    },
+    {
+      "path": "public/navigation/body-comet-1p@2x.webp",
+      "bytes": 750,
+      "sha256": "0e105610e247548b62265829fc4119fa3d346b267a5b6f7140d910e069a5d460"
+    },
+    {
+      "path": "public/navigation/comet-1p-context.webp",
+      "bytes": 7556,
+      "sha256": "f36d6d06e42bd859c398cefd27b014f3d27391cf50a047112e451d6e36eec9d2"
+    }
+  ]
+}

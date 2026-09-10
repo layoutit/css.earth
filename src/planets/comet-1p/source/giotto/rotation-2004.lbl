@@ -1,0 +1,322 @@
+PDS_VERSION_ID      = PDS3                                                    
+                                                                              
+RECORD_TYPE  = FIXED_LENGTH                                                   
+RECORD_BYTES = 110                                                            
+FILE_RECORDS = 25                                                             
+                                                                              
+^TABLE  = "ROTATION.TAB"                                                      
+                                                                              
+DATA_SET_ID           = "EAR-C-COMPIL-5-COMET-NUC-ROTATION-V1.0"              
+PRODUCT_ID            = "ROTATION.TAB"                                        
+PRODUCT_NAME          = "ROTATION OF COMETARY NUCLEI"                         
+PRODUCT_CREATION_TIME = 2006-01-13                                            
+                                                                              
+TARGET_NAME           = "COMET"                                               
+INSTRUMENT_HOST_NAME  = "PUBLISHED LITERATURE"                                
+INSTRUMENT_NAME       = "COMPILATION"                                         
+START_TIME            = "N/A"                                                 
+STOP_TIME             = "N/A"                                                 
+                                                                              
+DESCRIPTION           = "This file is Table 1 of 'Information on spin states  
+  of specific comets.' from Samarasinha, et al. (2004)."                      
+                                                                              
+OBJECT     = TABLE                                                            
+  NAME               = "COMET_ROTATION"                                       
+  INTERCHANGE_FORMAT = "ASCII"                                                
+  COLUMNS            = 21                                                     
+  ROW_BYTES          = 110                                                    
+  ROWS               = 25                                                     
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER    = 1                                                      
+    NAME             = "PERIODIC_NUMBER"                                      
+    START_BYTE       = 1                                                      
+    BYTES            = 3                                                      
+    DATA_TYPE        = "ASCII_INTEGER"                                        
+    FORMAT           = "I3"                                                   
+    MISSING_CONSTANT = " "                                                    
+    DESCRIPTION      = "Periodic comet number, if any"                        
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 2                                                         
+    NAME          = "COMET_TYPE"                                              
+    START_BYTE    = 4                                                         
+    BYTES         = 1                                                         
+    DATA_TYPE     = "CHARACTER"                                               
+    FORMAT        = "A1"                                                      
+    DESCRIPTION   = "Single letter indicating comet type. P = periodic,       
+      C = non-periodic"                                                       
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 3                                                         
+    NAME          = "COMET_NAME"                                              
+    START_BYTE    = 6                                                         
+    BYTES         = 22                                                        
+    DATA_TYPE     = "CHARACTER"                                               
+    FORMAT        = "A22"                                                     
+    DESCRIPTION   = "Comet Name"                                              
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER    = 4                                                      
+    NAME             = "DISCOVERY_ID"                                         
+    START_BYTE       = 29                                                     
+    BYTES            = 7                                                      
+    DATA_TYPE        = "CHARACTER"                                            
+    FORMAT           = "A7"                                                   
+    MISSING_CONSTANT = " "                                                    
+    DESCRIPTION      = "Discovery ID assigned by the MPC.  These have been    
+      provided for all comets (the paper in Samarisinha, et al. (2004) had    
+      discovery IDs only for non-periodic comets)."                           
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER    = 5                                                      
+    NAME             = "SPIN_STATE"                                           
+    START_BYTE       = 38                                                     
+    BYTES            = 3                                                      
+    DATA_TYPE        = "CHARACTER"                                            
+    FORMAT           = "A3"                                                   
+    DESCRIPTION      = "A three-character flag indicating the spin state:     
+                                                                              
+        ?EX      Possibly exicted (but not certain)                           
+        EXC      Excited                                                      
+        NON      Unexcited                                                    
+        UNK      Unknown                                                      
+      "                                                                       
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER    = 6                                                      
+    NAME             = "SPIN_MODE"                                            
+    START_BYTE       = 42                                                     
+    BYTES            = 3                                                      
+    DATA_TYPE        = "CHARACTER"                                            
+    FORMAT           = "A3"                                                   
+    NOT_APPLICABLE_CONSTANT = "---"                                           
+    DESCRIPTION      = "Excited spin mode of the comet:                       
+                                                                              
+        LAM    Long Axis Mode                                                 
+        SAM    Short Axis Mode                                                
+        UNK    Unknown mode                                                   
+        ---    Spin is not in an excited mode                                 
+                                                                              
+      Note that the present table contains no SAM values and only one         
+      LAM value."                                                             
+                                                                              
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER    = 7                                                      
+    NAME             = "P_PHI"                                                
+    START_BYTE       = 47                                                     
+    BYTES            = 6                                                      
+    DATA_TYPE        = "ASCII_REAL"                                           
+    FORMAT           = "F6.4"                                                 
+    UNIT             = "DAY"                                                  
+    MISSING_CONSTANT = -.9999                                                 
+    DESCRIPTION      = "Mean period of the long axis about the                
+      angular momentum vector"                                                
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NAME      = 8                                                      
+    NAME             = "P_PHI_TYPE"                                           
+    START_BYTE       = 54                                                     
+    BYTES            = 1                                                      
+    DATA_TYPE        = "CHARACTER"                                            
+    FORMAT           = "A1"                                                   
+    DESCRIPTION      = "An 'S' indicates the preceding period is sidereal;    
+      an 'N' indicates the period is synodic.  Which definition of 'synodic'  
+      applies in any given case is unknown."                                  
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER    = 9                                                      
+    NAME             = "P_PHI_QUAL"                                           
+    START_BYTE       = 56                                                     
+    BYTES            = 1                                                      
+    DATA_TYPE        = "CHARACTER"                                            
+    FORMAT           = "A1"                                                   
+    MISSING_CONSTANT = "-"                                                    
+    DESCRIPTION      = "A single character providing a rough indication       
+      of quality of the P_PHI period: '?' if it is uncertain; '-'             
+      otherwise"                                                              
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NAME      = 10                                                     
+    NAME             = "P_PSI"                                                
+    START_BYTE       = 58                                                     
+    BYTES            = 4                                                      
+    DATA_TYPE        = "ASCII_REAL"                                           
+    FORMAT           = "F4.2"                                                 
+    UNIT             = "DAY"                                                  
+    MISSING_CONSTANT = -.99                                                   
+    DESCRIPTION      = "The period of oscillation (for short-axis modes) or   
+      rotation (for long-axis modes) about the long axis"                     
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NAME      = 11                                                     
+    NAME             = "P_PSI_TYPE"                                           
+    START_BYTE       = 63                                                     
+    BYTES            = 1                                                      
+    DATA_TYPE        = "CHARACTER"                                            
+    FORMAT           = "A1"                                                   
+    DESCRIPTION      = "An 'S' indicates the preceding period is sidereal;    
+      an 'N' indicates it in synodic"                                         
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NAME      = 12                                                     
+    NAME             = "P_PSI_QUAL"                                           
+    START_BYTE       = 65                                                     
+    BYTES            = 1                                                      
+    DATA_TYPE        = "CHARACTER"                                            
+    FORMAT           = "A1"                                                   
+    MISSING_CONSTANT = "-"                                                    
+    DESCRIPTION      = "A quality flag for the P_PSI period: '?' indicates    
+      the period is uncertain; '!' corresponds to the double-dagger footnote  
+      in Table 1 of Samarasinha, et al. (2004):                               
+                                                                              
+         P[psi] approaches its unknown minimum value with A[psi] and          
+         A[theta] as the energy of the spin state approaches the              
+         minimum.                                                             
+                                                                              
+      Psi and theta refer to the Euler angles as defined (with respect to the 
+      long axis) in section 2 of the paper.                                   
+      "                                                                       
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NAME      = 13                                                     
+    NAME             = "THETA"                                                
+    START_BYTE       = 67                                                     
+    BYTES            = 2                                                      
+    DATA_TYPE        = "ASCII_INTEGER"                                        
+    FORMAT           = "I2"                                                   
+    UNIT             = "DEGREE"                                               
+    MISSING_CONSTANT = -9                                                     
+    DESCRIPTION      = "The average angle between the angular momentum        
+      vector and the long axis"                                               
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NAME      = 14                                                     
+    NAME             = "P_TOTAL"                                              
+    START_BYTE       = 71                                                     
+    BYTES            = 6                                                      
+    DATA_TYPE        = "ASCII_REAL"                                           
+    FORMAT           = "F6.4"                                                 
+    UNIT             = "DAY"                                                  
+    MISSING_CONSTANT = -.9999                                                 
+    DESCRIPTION      = "The total spin period that would be seen by an        
+      observer in an inertial reference frame.  It is defined using the       
+      time averaged value of the vector sum of the spin:                      
+                                                                              
+      P_TOTAL = [1/P_PSI^2 + 1/P_PHI^2 + 2*cos(THETA)/P_PHI/P_PSI]^(-0.5)     
+      "                                                                       
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NAME      = 15                                                     
+    NAME             = "P_TOTAL_FLAG"                                         
+    START_BYTE       = 78                                                     
+    BYTES            = 1                                                      
+    DATA_TYPE        = "CHARACTER"                                            
+    FORMAT           = "A1"                                                   
+    MISSING_CONSTANT = "-"                                                    
+    DESCRIPTION      = "An 'S' indicates the preceding period is sidereal     
+      rather than synodic."                                                   
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NAME      = 16                                                     
+    NAME             = "M_ALPHA"                                              
+    START_BYTE       = 80                                                     
+    BYTES            = 3                                                      
+    DATA_TYPE        = "ASCII_INTEGER"                                        
+    FORMAT           = "I3"                                                   
+    UNIT             = "DEGREE"                                               
+    MISSING_CONSTANT = -99                                                    
+    DESCRIPTION      = "Right ascension (J2000) of the direction of the       
+      angular momentum vector at the epoch noted in the EPOCH column,         
+      following.  This value is '-99' when the direction of the angular       
+      momentum vector is not known."                                          
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NAME      = 17                                                     
+    NAME             = "M_DELTA"                                              
+    START_BYTE       = 84                                                     
+    BYTES            = 3                                                      
+    DATA_TYPE        = "ASCII_INTEGER"                                        
+    FORMAT           = "I3"                                                   
+    UNIT             = "DEGREE"                                               
+    MISSING_CONSTANT = -99                                                    
+    DESCRIPTION      = "Declination (J2000) of the direction of the           
+      angular momentum vector at the epoch noted in the EPOCH column,         
+      following.  This value is '-99' when the direction of the angular       
+      momentum vector is not known."                                          
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NAME      = 18                                                     
+    NAME             = "M_SENSE_FLAG"                                         
+    START_BYTE       = 88                                                     
+    BYTES            = 1                                                      
+    DATA_TYPE        = "CHARACTER"                                            
+    FORMAT           = "A1"                                                   
+    DESCRIPTION      = "This field contains 'Y' if the sense of the           
+      angular momentum vector defined by M_ALPHA and M_DELTA is known,        
+      or an 'N' if it is not."                                                
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NAME      = 19                                                     
+    NAME             = "LONG_AXIS_ALPHA"                                      
+    START_BYTE       = 90                                                     
+    BYTES            = 3                                                      
+    DATA_TYPE        = "ASCII_INTEGER"                                        
+    FORMAT           = "I3"                                                   
+    UNIT             = "DEGREE"                                               
+    MISSING_CONSTANT = -99                                                    
+    DESCRIPTION      = "Right ascension (J2000) of the direction of the       
+      long axis at the epoch given in the EPOCH column.  Only the first       
+      two objects have real values for this column."                          
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NAME      = 20                                                     
+    NAME             = "LONG_AXIS_DELTA"                                      
+    START_BYTE       = 94                                                     
+    BYTES            = 3                                                      
+    DATA_TYPE        = "ASCII_INTEGER"                                        
+    FORMAT           = "I3"                                                   
+    UNIT             = "DEGREE"                                               
+    MISSING_CONSTANT = -99                                                    
+    DESCRIPTION      = "Declination (J2000) of the direction of the           
+      long axis at the epoch given in the EPOCH column.  Only the first       
+      two objects have real values for this column."                          
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NAME      = 21                                                     
+    NAME             = "EPOCH"                                                
+    START_BYTE       = 98                                                     
+    BYTES            = 11                                                     
+    DATA_TYPE        = "ASCII_REAL"                                           
+    FORMAT           = "F11.3"                                                
+    UNIT             = "JULIAN DATE"                                          
+    MISSING_CONSTANT = -999999.999                                            
+    DESCRIPTION      = "Epoch of the coordinate system used to define the     
+      direction of the angular momentum and long axis previously in this      
+      record.  Only the first two objects have real values in this column."   
+  END_OBJECT = COLUMN                                                         
+                                                                              
+END_OBJECT = TABLE                                                            
+                                                                              
+END                                                                           
