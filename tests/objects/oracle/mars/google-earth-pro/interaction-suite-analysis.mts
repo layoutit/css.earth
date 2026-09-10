@@ -2,32 +2,44 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
-import sharp from "sharp";
 import { decodeNativeMotionTrace } from "./native-motion-trace-reader.mts";
-import { sampleCalibrationTile } from "./calibration-tile-address.mts";
 import { multiply3, relativeOrientation3, orientationErrorDegrees } from
   "../../../../../site/test/interaction-orientation.mts";
 
-const identity = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
-const flip = [[1, 0, 0], [0, -1, 0], [0, 0, 1]];
-const matrix = value => value.slice(9, -1).split(",").map(Number);
-export const hash = bytes => createHash("sha256").update(bytes).digest("hex");
-export const json = async path => JSON.parse(await readFile(path, "utf8"));
+import type { Matrix3 } from '../../../../../site/test/interaction-orientation.mts';
+import { object, finite } from './oracle-values.mts';
+import { json, records, cameraMatrix as matrix, nativeReport, browserReport, frameBoundReport, gestureReport, deliveryRecords } from './interaction-analysis-records.mts';
+export { json } from './interaction-analysis-records.mts';
 
-export function assertMotionOnlyReference(report) {
-  const firstInput = Math.min(...report.inputs.filter(event =>
+export interface MotionFrame { time: number; rotation: Matrix3; activeMode?: string; }
+export interface TimedNativeInput { id?: string; kind: string; time: number; }
+export interface TimedBrowserInput { type: string; time: number; }
+type NativeInputs = { inputs: readonly TimedNativeInput[] };
+type BrowserInputs = { inputs: readonly TimedBrowserInput[] };
+type NativeRun = Awaited<ReturnType<typeof readNativeRun>>;
+
+const identity: Matrix3 = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+const flip: Matrix3 = [[1, 0, 0], [0, -1, 0], [0, 0, 1]];
+export const hash = (bytes: string | Uint8Array) => createHash("sha256").update(bytes).digest("hex");
+
+export function assertMotionOnlyReference(value: unknown) {
+  const report = object(value);
+  const inputs = records(report.inputs).filter(event => event.event === 'native-input-accepted').map(event => ({
+    event: 'native-input-accepted', acceptedMonotonicSeconds: finite(event.acceptedMonotonicSeconds) }));
+  const frames = records(report.frames).map(frame => ({ monotonicSeconds: finite(frame.monotonicSeconds) }));
+  const firstInput = Math.min(...inputs.filter(event =>
     event.event === "native-input-accepted").map(event => event.acceptedMonotonicSeconds));
   assert.ok(Number.isFinite(firstInput), "Reference contains no accepted input");
-  assert.equal(report.captureConfiguration?.captureUntilRest, false,
+  assert.equal(object(report.captureConfiguration).captureUntilRest, false,
     "Motion-only timing requires a native reference without gesture readback");
-  assert.ok(report.frames.length > 0 && report.frames.every(frame =>
+  assert.ok(frames.length > 0 && frames.every(frame =>
     frame.monotonicSeconds < firstInput),
   "Native pixel capture overlaps the measured input interval");
 }
 
-export async function readNativeRun(path, { frameSource = "pixels" } = {}) {
+export async function readNativeRun(path: string, { frameSource = "pixels" }: { frameSource?: "pixels" | "motion" } = {}) {
   assert.ok(["pixels", "motion"].includes(frameSource));
-  const report = await json(path);
+  const report = nativeReport(await json(path));
   if (frameSource === "motion") assertMotionOnlyReference(report);
   assert.equal(report.before.visibleWindowCount, 0);
   assert.equal(report.after.visibleWindowCount, 0);
@@ -35,10 +47,11 @@ export async function readNativeRun(path, { frameSource = "pixels" } = {}) {
   assert.notEqual(report.after.frontmostApplication?.pid, report.pid);
   assert.ok(report.frames.length > 1 && !report.dropped.length);
   assert.ok(report.stopObservation, "Native tail was not observed through rest");
-  const receipts = report.inputs.filter(e => e.event === "native-input-accepted");
+  const receipts = report.inputs.filter(e => e.event === "native-input-accepted").map(e => ({ ...e, acceptedMonotonicSeconds: finite(e.acceptedMonotonicSeconds, "accepted input clock") }));
   assert.deepEqual(receipts.map(e => e.id), report.gesture.map(e => e.id), "Native input receipts differ from the requested scenario");
-  const start = report.inputs.find(e => e.event === "native-input-batch-accepted" &&
-    e.revision === (report.revision ?? 100)).acceptedMonotonicSeconds;
+  const batch = report.inputs.find(e => e.event === "native-input-batch-accepted" && e.revision === (report.revision ?? 100));
+  assert.ok(batch, "Missing native input batch receipt");
+  const start = finite(batch.acceptedMonotonicSeconds, "batch input clock");
   const tracePath = report.nativeMotionTrace ?? resolve(dirname(path), "motion.bin");
   const traceBytes = await readFile(tracePath);
   const decoded = decodeNativeMotionTrace(traceBytes);
@@ -70,10 +83,10 @@ export async function readNativeRun(path, { frameSource = "pixels" } = {}) {
   assertIncreasing(frames.map(f => f.time));
   const inputs = report.consumedGesture
     ? report.consumedGesture.map(event => ({ ...event, time: event.atMilliseconds }))
-    : receipts.map(e => ({ ...report.gesture.find(g => g.id === e.id),
+    : receipts.map(e => ({ ...requiredGesture(report.gesture, e.id),
       time: (e.acceptedMonotonicSeconds - start) * 1000 }));
   const eventRecords = (await readFile(report.eventLog ?? resolve(dirname(path), "events.jsonl"), "utf8"))
-    .trim().split("\n").filter(Boolean).map(JSON.parse);
+    .trim().split("\n").filter(Boolean).map(line => object(JSON.parse(line)));
   const wheelReceipts = verifyWheelReceipts(report, eventRecords);
   const mouseReceipts = verifyMouseReceipts(report, eventRecords);
   return { report, frames, inputs, wheelReceipts, mouseReceipts, focalLength: first.projectionMatrix[5] * report.viewport.height / 2,
@@ -81,7 +94,8 @@ export async function readNativeRun(path, { frameSource = "pixels" } = {}) {
     startMatrix: first.modelViewMatrix, startProjection: first.projectionMatrix };
 }
 
-export function verifyWheelReceipts(report, records) {
+export function verifyWheelReceipts(value: unknown, values: unknown) {
+  const report = gestureReport(value), records = deliveryRecords(values);
   let buttons = 0;
   const result = [];
   for (const event of report.gesture) {
@@ -91,11 +105,13 @@ export function verifyWheelReceipts(report, records) {
     assert.equal(event.qtWheelTarget, "RenderWidget", "Native wheel must reach the renderer's Qt input path");
     assert.equal(event.qtButtons ?? 0, buttons, "Native wheel lost the held mouse button");
     const accepted = report.inputs.find(e => e.event === "native-input-accepted" && e.id === event.id);
+    assert.ok(accepted, "Missing native wheel acceptance receipt");
+    const acceptedClock = finite(accepted.acceptedMonotonicSeconds, "accepted wheel clock");
     const delivered = records.find(e => e.event === "qt-wheel-delivered" && e.id === event.id &&
-      e.before >= accepted.acceptedMonotonicSeconds && e.before < accepted.acceptedMonotonicSeconds + .5);
+      e.before >= acceptedClock && e.before < acceptedClock + .5);
     assert.ok(delivered?.accepted, "Native renderer did not accept the Qt wheel event");
     assert.equal(delivered.buttons ?? 0, buttons, "Delivered Qt wheel button state differs");
-    for (const [actual, expected] of [["target", "qtWheelTarget"], ["x", "qtX"], ["y", "qtY"], ["delta", "qtDelta"]]) {
+    for (const [actual, expected] of [["target", "qtWheelTarget"], ["x", "qtX"], ["y", "qtY"], ["delta", "qtDelta"]] as const) {
       assert.equal(delivered[actual], event[expected], `Delivered Qt wheel ${actual} differs`);
     }
     result.push(delivered);
@@ -103,11 +119,14 @@ export function verifyWheelReceipts(report, records) {
   return result;
 }
 
-export function verifyMouseReceipts(report, records) {
+export function verifyMouseReceipts(value: unknown, values: unknown) {
+  const report = gestureReport(value), records = deliveryRecords(values);
   return report.gesture.filter(e => e.qtMouseTarget).map(event => {
     const accepted = report.inputs.find(e => e.event === "native-input-accepted" && e.id === event.id);
+    assert.ok(accepted, "Missing native mouse acceptance receipt");
+    const acceptedClock = finite(accepted.acceptedMonotonicSeconds, "accepted mouse clock");
     const receipt = records.find(e => e.event === "qt-mouse-delivered" && e.id === event.id &&
-      e.before >= accepted.acceptedMonotonicSeconds && e.before < accepted.acceptedMonotonicSeconds + .5);
+      e.before >= acceptedClock && e.before < acceptedClock + .5);
     assert.ok(receipt?.accepted, "Native renderer did not accept the Qt mouse event");
     assert.equal(receipt.target, "RenderWidget");
     assert.equal(receipt.x, event.qtX); assert.equal(receipt.y, event.qtY);
@@ -118,8 +137,10 @@ export function verifyMouseReceipts(report, records) {
   });
 }
 
-export async function readBrowserRun(path) {
-  const report = await json(path);
+export async function readBrowserRun(path: string) {
+  const raw = await json(path);
+  assert.ok(["normal", "motion-only"].includes(String(raw.timingMode)), "Suite timing evidence requires the natural browser clock");
+  const report = browserReport(raw);
   assert.ok(["normal", "motion-only"].includes(report.timingMode),
     "Suite timing evidence requires the natural browser clock");
   if (report.timingMode === "motion-only") assert.equal(report.readbackDuringGesture, false);
@@ -139,18 +160,20 @@ export async function readBrowserRun(path) {
     inputs: report.inputs.map(e => ({ ...e, time: e.receivedAt + report.clock.timeOrigin - report.epoch })) };
 }
 
-export function assertRegisteredProjection(native, browser) {
+export function assertRegisteredProjection(native: { startMatrix: readonly number[]; focalLength: number; report: { viewport: { sceneLeft: number; width: number; height: number } } }, value: unknown) {
+  const trackball = object(object(object(value).state).trackball);
   const m = native.startMatrix, focal = native.focalLength, viewport = native.report.viewport;
   const x = viewport.sceneLeft + viewport.width/2 - m[12]/m[14]*focal;
   const y = viewport.height/2 + m[13]/m[14]*focal;
-  assert.ok(Math.abs(browser.state.trackball.centerX-x)<.05 &&
-    Math.abs(browser.state.trackball.centerY-y)<.05,
+  assert.ok(Math.abs(finite(trackball.centerX)-x)<.05 &&
+    Math.abs(finite(trackball.centerY)-y)<.05,
   "INVALID: browser body position differs from the recorded native viewport");
-  assert.ok(Math.abs(browser.state.trackball.focalLength-focal)<.01,
+  assert.ok(Math.abs(finite(trackball.focalLength)-focal)<.01,
     "INVALID: interaction projection differs from the native reference");
 }
 
-export function compareFrameBoundMotion(native, browser) {
+export function compareFrameBoundMotion(native: NativeRun, value: unknown) {
+  const browser = frameBoundReport(value);
   assertRegisteredProjection(native, browser);
   assert.equal(browser.timingMode, "frame-locked");
   assert.equal(browser.frameBinding, "native-present-step-and-verified-pixel-marker");
@@ -160,6 +183,7 @@ export function compareFrameBoundMotion(native, browser) {
   if (browser.finalNodesScope === "stage") assert.equal(browser.finalNodes, browser.state.nodes);
   const first = matrix(browser.state.pose.scene);
   const startDistance = -native.startMatrix[14];
+  assert.ok(browser.frames.length > 0, "Frame-bound evidence is empty");
   const startZoom = browser.frames[0].zoom;
   const rows = browser.frames.map((frame, i) => {
     assert.equal(frame.nativePresentIndex, native.frames[i].presentIndex);
@@ -179,14 +203,16 @@ export function compareFrameBoundMotion(native, browser) {
   });
   return { qualification:"Same observed native frame steps and consumed inputs; no camera pose replay; not real-time timing proof",
     maximumRotationErrorDegrees:Math.max(...rows.map(r=>r.rotationErrorDegrees)),
-    finalRotationErrorDegrees:rows.at(-1).rotationErrorDegrees,
+    finalRotationErrorDegrees:rows.at(-1)!.rotationErrorDegrees,
     maximumRelativeRadiusError:Math.max(...rows.map(r=>Math.abs(r.relativeRadiusError))),
-    finalRelativeRadiusError:rows.at(-1).relativeRadiusError,rows };
+    finalRelativeRadiusError:rows.at(-1)!.relativeRadiusError,rows };
 }
 
 // Latest observation only. A missing early sample is excluded, never replaced
 // by a future pose. Keep the full tail of the slower run.
-export function compareTrajectories(reference, candidate, { referenceOffset = 0, candidateOffset = 0 } = {}) {
+export function compareTrajectories(reference: readonly MotionFrame[], candidate: readonly MotionFrame[], { referenceOffset = 0, candidateOffset = 0 } = {}) {
+  assert.ok(reference.length && candidate.length, "Motion trajectories must not be empty");
+  assertIncreasing(reference.map(frame => frame.time)); assertIncreasing(candidate.map(frame => frame.time));
   const a = reference.map(f => ({ ...f, time: f.time - referenceOffset }));
   const b = candidate.map(f => ({ ...f, time: f.time - candidateOffset }));
   const start = Math.max(a[0].time, b[0].time);
@@ -199,26 +225,27 @@ export function compareTrajectories(reference, candidate, { referenceOffset = 0,
       referenceAngleDegrees: orientationErrorDegrees(a[ai].rotation, identity),
       candidateAngleDegrees: orientationErrorDegrees(b[bi].rotation, identity),
       referenceAgeMilliseconds: time - a[ai].time, candidateAgeMilliseconds: time - b[bi].time,
-      referenceFinalHeld: time > a.at(-1).time, candidateFinalHeld: time > b.at(-1).time };
+      referenceFinalHeld: time > a.at(-1)!.time, candidateFinalHeld: time > b.at(-1)!.time };
   });
   const worst = rows.reduce((a, b) => a.rotationErrorDegrees >= b.rotationErrorDegrees ? a : b);
   return { pairing: "union of observed clocks, latest past observation held; no time warp or future samples",
     maximumRotationErrorDegrees: worst.rotationErrorDegrees,
-    finalRotationErrorDegrees: rows.at(-1).rotationErrorDegrees, worst,
+    finalRotationErrorDegrees: rows.at(-1)!.rotationErrorDegrees, worst,
     firstAboveDegrees: Object.fromEntries([.1, 1, 5].map(threshold => [threshold,
       rows.find(r => r.rotationErrorDegrees > threshold)?.time ?? null])),
     thresholdScope: "descriptive crossing times only; these are not acceptance thresholds", rows };
 }
 
-export function summarizeMotion(run) {
+export function summarizeMotion(run: { frames: readonly MotionFrame[] }) {
+  assert.ok(run.frames.length, "Motion report has no frames");
   const frames = run.frames;
   return { maximumAngleDegrees: Math.max(...frames.map(f => orientationErrorDegrees(f.rotation, identity))),
-    finalAngleDegrees: orientationErrorDegrees(frames.at(-1).rotation, identity),
-    firstPresentedMilliseconds: frames[0].time, lastPresentedMilliseconds: frames.at(-1).time,
+    finalAngleDegrees: orientationErrorDegrees(frames.at(-1)!.rotation, identity),
+    firstPresentedMilliseconds: frames[0].time, lastPresentedMilliseconds: frames.at(-1)!.time,
     observations: frames.length };
 }
 
-export function interruptionObservations(native, browser) {
+export function interruptionObservations(native: NativeInputs & { frames: readonly MotionFrame[] }, browser: BrowserInputs & { frames: readonly MotionFrame[] }) {
   const events = native.inputs.filter(e => e.kind === "wheel" || e.id === "stop-down");
   const bindings = bindInputReceipts(native, browser);
   return events.map(event => {
@@ -227,9 +254,9 @@ export function interruptionObservations(native, browser) {
     const nf = native.frames.filter(f => f.time >= event.time && f.time < end);
     const binding = bindings.find(e => e.id === event.id);
     const browserStart = binding?.browserMilliseconds ?? event.time;
-    const browserEnd = next ? bindings.find(e => e.id === next.id).browserMilliseconds : Infinity;
+    const browserEnd = next ? bindings.find(e => e.id === next.id)!.browserMilliseconds : Infinity;
     const bf = browser.frames.filter(f => f.time >= browserStart && f.time < browserEnd);
-    const span = values => values.length < 2 ? null : Math.max(...values.map(f =>
+    const span = (values: readonly MotionFrame[]) => values.length < 2 ? null : Math.max(...values.map(f =>
       orientationErrorDegrees(f.rotation, values[0].rotation)));
     return { id: event.id, atMilliseconds: event.time,
       browserReceiptMilliseconds: browserStart,
@@ -240,8 +267,8 @@ export function interruptionObservations(native, browser) {
   });
 }
 
-export function bindInputReceipts(native, browser) {
-  const types = { move: "pointermove", drag: "pointermove", down: "pointerdown", up: "pointerup", wheel: "wheel" };
+export function bindInputReceipts(native: NativeInputs, browser: BrowserInputs) {
+  const types: Readonly<Record<string, string>> = { move: "pointermove", drag: "pointermove", down: "pointerdown", up: "pointerup", wheel: "wheel" };
   const received = browser.inputs.filter(e => e.type !== "dblclick");
   assert.deepEqual(received.map(e => e.type), native.inputs.map(e => types[e.kind]),
     "Browser input count or order differs from the native scenario");
@@ -250,61 +277,14 @@ export function bindInputReceipts(native, browser) {
     browserDeliveryDelayMilliseconds: received[i].time - event.time }));
 }
 
-export async function verifyProvenance(nativePath, browserPath, calibrationRoot) {
-  const n = await json(nativePath), b = browserPath ? await json(browserPath) : null;
-  const nativeDirectory = dirname(n.sourceReport ?? nativePath);
-  const source = (await json(resolve(calibrationRoot, "manifest.json"))).source;
-  const sourceBytes = await readFile(resolve(calibrationRoot, source.path));
-  assert.equal(hash(sourceBytes), source.encodedSha256);
-  const raster = await sharp(sourceBytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-  assert.equal(hash(raster.data), source.decodedRgbaSha256);
-  assert.equal(n.calibrationSha256, source.decodedRgbaSha256);
-  const mapping = await json(resolve(nativeDirectory, "mapping/texture-map.json"));
-  assert.ok(n.bindings.length > 0, "Native capture has no audited texture bindings");
-  const tiles = new Map();
-  for (const binding of n.bindings) {
-    assert.equal(binding.mapped, true);
-    const entry = mapping.mappings.find(m => m.googleCacheAddress.level === binding.level &&
-      m.googleCacheAddress.col === binding.x && m.googleCacheAddress.row === binding.y);
-    assert.ok(entry, "Native binding lacks its capture-specific tile mapping");
-    const tile = entry.calibrationTile;
-    assert.equal(tile.sourceDecodedRgbaSha256, source.decodedRgbaSha256);
-    assert.equal(tile.uploadRgbaSha256, binding.decodedRgbaSha256);
-    if (!tiles.has(tile.uploadPath)) {
-      const bytes = await readFile(tile.uploadPath);
-      assert.equal(hash(bytes), binding.decodedRgbaSha256);
-      const { topDown } = sampleCalibrationTile(raster, entry.googleCacheAddress);
-      const regenerated = await sharp(topDown, { raw: { width: 256, height: 256, channels: 4 } }).flip().raw().toBuffer();
-      assert.equal(hash(regenerated), binding.decodedRgbaSha256);
-      tiles.set(tile.uploadPath, binding.decodedRgbaSha256);
-    }
-  }
-  const process = await json(resolve(nativeDirectory, "process.json"));
-  assert.equal(hash(await readFile(process.executable)), process.executableSha256);
-  const nativeFrames = [];
-  for (const frame of n.frames) nativeFrames.push({ path: frame.path, sha256: hash(await readFile(frame.path)) });
-  const browserFrames = [];
-  if (b) {
-    assert.equal(b.calibrationSha256, source.decodedRgbaSha256);
-    for (const resource of b.resources) {
-      assert.equal(resource.sourceDecodedRgbaSha256, source.decodedRgbaSha256);
-      const bytes = await readFile(resolve(calibrationRoot, resource.path));
-      assert.equal(hash(bytes), resource.encodedSha256);
-      assert.equal(hash(await sharp(bytes).ensureAlpha().raw().toBuffer()), resource.decodedRgbaSha256);
-    }
-    assert.equal(new Set(b.frames.map(f => f.path)).size, b.frames.length);
-    for (const frame of b.frames) {
-      assert.equal(hash(await readFile(frame.path)), frame.sha256);
-      browserFrames.push({ path: frame.path, sha256: frame.sha256 });
-    }
-  }
-  return { verified: true, sourceSha256: source.decodedRgbaSha256, executable: process,
-    nativeBindings: n.bindings.length, regeneratedTiles: tiles.size, nativeFrames, browserFrames,
-    browserResources: b?.resources ?? [],
-    scope: "exact source, capture-specific uploaded native RGBA, browser preparation bytes, and frame hashes verified" };
-}
-
-function assertIncreasing(times) {
+function assertIncreasing(times: readonly number[]) {
   assert.ok(times.every((t, i) => Number.isFinite(t) && (i === 0 || t > times[i - 1])),
     "Native frame clocks must be strictly increasing");
 }
+
+function requiredGesture(gestures: ReturnType<typeof gestureReport>['gesture'], id: string | undefined) {
+  const event = gestures.find(gesture => gesture.id === id);
+  assert.ok(event, `Missing native gesture ${id}`); return event;
+}
+
+export { verifyProvenance } from "./interaction-provenance.mts";

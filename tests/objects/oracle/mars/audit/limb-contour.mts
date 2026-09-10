@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 import { chromium, type Page } from "playwright";
 import { PNG } from "pngjs";
 
-import { prepareMarsProjectedSilhouette } from "../../../unit/mars/prepared-fixture.mjs";
+import { prepareMarsProjectedSilhouette } from "../../../unit/mars/prepared-fixture.mts";
 import {
   MARS_LIMB_CONTOUR_THRESHOLDS,
   measureMarsLimbContour,

@@ -51,8 +51,10 @@ try {
   await page.goto(`${origin}/__typescript-owners-fixture`);
 
   report.waits = await page.evaluate(async () => {
-    const path = '/src/platform/scene-lifetime.mjs';
-    const { createSceneLifetime, waitForScenePaint, waitForSceneDocument } = await import(path) as LifetimeModule;
+    const lifetimePath = '/packages/engine/src/runtime/scene-lifetime.ts';
+    const waitsPath = '/src/renderers/css/runtime/scene-native-waits.ts';
+    const { createSceneLifetime } = await import(lifetimePath) as Pick<LifetimeModule, 'createSceneLifetime'>;
+    const { waitForScenePaint, waitForSceneDocument } = await import(waitsPath) as Omit<LifetimeModule, 'createSceneLifetime'>;
     const lifetime = createSceneLifetime();
     let completedFrames = 0;
     await waitForSceneDocument(lifetime);
@@ -150,7 +152,9 @@ try {
   assert.equal(after.stats.activeMotionCount, 0);
   assert.equal(after.stats.pendingPointer, false);
   assert.deepEqual(after.errors, []);
-  assert.ok(moduleRequests.has('/site/runtime-policy.mts'), 'Vite must load the typed shared policy through its compatibility entry.');
+  assert.ok(moduleRequests.has('/site/runtime-policy.mts'), 'Vite must load the typed shared policy directly.');
+  assert.ok(moduleRequests.has('/packages/engine/src/runtime/scene-lifetime.ts'), 'Vite must load the canonical typed lifetime owner.');
+  assert.ok(moduleRequests.has('/src/renderers/css/runtime/scene-native-waits.ts'), 'Vite must load the typed native waits owner.');
   assert.deepEqual(errors, []);
   report.retirement = { publications: after.publications, noFurtherPublications: true, pointerReleased: true, activeMode: after.stats.activeMode };
   report.modules = [...moduleRequests].filter(path => /(?:camera-input|camera-math|sphere-drag|scene-lifetime|scene-native-waits|runtime-policy)/.test(path));

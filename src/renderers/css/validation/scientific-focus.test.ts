@@ -5,11 +5,15 @@ import {requireVariants} from './presentation.js';
 import type {PreparedTree} from '../rendering/prepared-presentation.js';
 import type {ObjectControls} from '../runtime/object-contract.js';
 import {prepareScientificNavigation} from '../../../../tools/objects/terrestrial-layers/scientific-focus.mts';
-import {preparedScenePitch} from '../../../platform/camera-math.mjs';
+import {preparedScenePitch} from '@cssearth/engine';
+import {requireCamera} from './camera-controls.js';
+import {requireRecord,requireString} from '../../../../tools/source-values.mts';
 
 // This small prepared carrier is independent of the focus helper's frame math.
 // No body raster preparation, browser, or complete runtime document is needed.
-const scene = JSON.parse(await readFile(new URL('../../../planets/europa/prepared/scene.json', import.meta.url), 'utf8'));
+const raw = requireRecord(JSON.parse(await readFile(new URL('../../../planets/europa/prepared/scene.json', import.meta.url), 'utf8')), 'Europa scene');
+const camera = raw.camera; requireCamera(camera);
+const scene = {camera, systemTransform:requireString(raw.systemTransform, 'Europa transform')};
 const focus = {longitudeDegrees:142, latitudeDegrees:-43.7, zoom:4};
 const tree:PreparedTree = {nodes:[
   {parent:-1,tag:'div',className:'polycss-camera',style:'',properties:[],attributes:{}},

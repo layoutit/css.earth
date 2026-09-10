@@ -2,12 +2,13 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { PNG } from "pngjs";
+import { parseReferenceInput, parseCalibrationSampleIds } from "../../oracle/venus/input-validation.mts";
 
 import {
   analyzeScenePng,
   compareStarfieldFeatures,
   compareSunPresentations,
-} from "../../oracle/venus/image-analysis.mjs";
+} from "../../oracle/venus/image-analysis.mts";
 import {
   GOOGLE_MAPS_VENUS_URL,
   deriveBrowserCamera,
@@ -22,7 +23,7 @@ import {
   ORACLE_SCENE_CENTER,
   ORACLE_SCENE_CLIP,
   parseGoogleCameraUrl,
-} from "../../oracle/venus/profile.mjs";
+} from "../../oracle/venus/profile.mts";
 
 test("Venus oracle pins the canonical Google Maps URL and settled poses", () => {
   assert.equal(GOOGLE_MAPS_VENUS_URL,
@@ -55,9 +56,9 @@ test("Venus oracle pins the canonical Google Maps URL and settled poses", () => 
     assert.ok(pose.endpointContract);
   }
   assert.deepEqual(ORACLE_POSES.find(({ id }) => id === "orbit-right-6")
-    .googleActions, [{ id: "pan-right", count: 6 }]);
+    ?.googleActions, [{ id: "pan-right", count: 6 }]);
   assert.deepEqual(ORACLE_POSES.find(({ id }) => id === "orbit-right-3-up")
-    .googleActions, [
+    ?.googleActions, [
       { id: "pan-right", count: 3 },
       { id: "pan-up", count: 1 },
     ]);
@@ -171,6 +172,7 @@ test("scene analysis isolates starfield and Sun evidence", () => {
     sun: { x: 850, y: 100 },
   }));
   assert.equal(sunAnalysis.sun.state, "visible");
+  assert.ok(sunAnalysis.sun.visible);
   assert.ok(sunAnalysis.sun.pixelCount >= 100);
 
   const clippedSunAnalysis = analyzeScenePng(syntheticScene({
@@ -199,7 +201,7 @@ function syntheticScene({
   shadowRight,
   shadowLevel,
   sun = null,
-}) {
+}: { shadowRight: boolean | null; shadowLevel: number; sun?: { x: number; y: number } | null }) {
   const png = new PNG({
     width: ORACLE_SCENE_CLIP.width,
     height: ORACLE_SCENE_CLIP.height,
@@ -261,6 +263,50 @@ function syntheticScene({
   return PNG.sync.write(png);
 }
 
-function shortestTestAngleDelta(value, origin) {
+function shortestTestAngleDelta(value: number, origin: number) {
   return ((value - origin + 540) % 360) - 180;
 }
+
+function referencePacket() {
+  return {
+    schema: "cssvenus-google-maps-reference-input@3", canonicalUrl: GOOGLE_MAPS_VENUS_URL,
+    capturedAt: "2026-09-11T00:00:00Z", browser: { name: "Chrome" },
+    viewport: { width: 1280, height: 720, dpr: 1 },
+    poses: ORACLE_POSES.map((pose) => ({ id: pose.id, actions: pose.googleActions,
+      requestedUrl: GOOGLE_MAPS_VENUS_URL, finalUrl: GOOGLE_MAPS_VENUS_URL,
+      path: `/tmp/${pose.id}.png`, sha256: "a".repeat(64),
+      stability: { attempts: 3, comparisons: [0, 0], exactConsecutive: true },
+    })),
+  };
+}
+
+test("reference intake validates unknown capture metadata before reading image paths", () => {
+  const packet = referencePacket();
+  const decoded = parseReferenceInput(JSON.parse(JSON.stringify(packet)));
+  assert.deepEqual(decoded.poses.map(({ id }) => id), ORACLE_POSES.map(({ id }) => id));
+  assert.throws(() => parseReferenceInput(null), /must be an object/u);
+  assert.throws(() => parseReferenceInput({ ...packet, poses: null }), /must be an array/u);
+  assert.throws(() => parseReferenceInput({ ...packet, viewport: { ...packet.viewport, dpr: 2 } }), /not canonical/u);
+  const first = packet.poses[0];
+  assert.ok(first);
+  for (const [override, expected] of [
+    [{ sha256: "bad" }, /SHA-256/u],
+    [{ path: 42 }, /Capture path/u],
+    [{ finalUrl: "https://example.com/maps/space/venus/" }, /Not a Google Maps Venus URL/u],
+    [{ stability: { ...first.stability, comparisons: [NaN] } }, /must be finite/u],
+    [{ stability: { ...first.stability, exactConsecutive: "true" } }, /must be boolean/u],
+  ] as const) {
+    assert.throws(() => parseReferenceInput({ ...packet, poses: [{ ...first, ...override }, ...packet.poses.slice(1)] }), expected);
+  }
+  assert.throws(() => parseReferenceInput({ ...packet, poses: [...packet.poses, first] }), /Duplicate/u);
+  assert.throws(() => parseReferenceInput({ ...packet, poses: packet.poses.slice(1) }), /missing pose default/u);
+});
+
+test("calibration intake permits named frames and rejects path traversal or empty evidence", () => {
+  const report = (ids: readonly unknown[]) => ({ components: { starfield: { samples: ids.map((id) => ({ id })) } } });
+  assert.deepEqual(parseCalibrationSampleIds(report(["angular-r23003602-latm45-lon000"])), ["angular-r23003602-latm45-lon000"]);
+  assert.throws(() => parseCalibrationSampleIds(report(["../frame"])), /Unsafe/u);
+  assert.throws(() => parseCalibrationSampleIds(report([42])), /nonempty string/u);
+  assert.throws(() => parseCalibrationSampleIds(report([])), /nonempty and unique/u);
+  assert.throws(() => parseCalibrationSampleIds(report(["same", "same"])), /nonempty and unique/u);
+});

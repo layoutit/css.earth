@@ -47,7 +47,7 @@ export async function browserInteractionScenarios({ set, geometryFor }: {
   readonly geometryFor: (scenario: InteractionScenario) => InteractionGeometry;
 }): Promise<readonly { readonly scenario: InteractionScenario; readonly events: readonly BrowserInteractionEvent[] }[]> {
   const { loadInteractionCorpus, resolveScenarioEvents } = requireInteractionCorpus(
-    await import(new URL("../../tests/objects/oracle/mars/google-earth-pro/interaction-corpus.mjs", import.meta.url).href),
+    await import(new URL("../../tests/objects/oracle/mars/google-earth-pro/interaction-corpus.mts", import.meta.url).href),
   );
   const corpus = await loadInteractionCorpus({ set });
   return Object.freeze(corpus.scenarios.map((scenario) => Object.freeze({

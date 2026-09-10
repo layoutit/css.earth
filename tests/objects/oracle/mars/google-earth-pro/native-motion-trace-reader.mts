@@ -1,8 +1,12 @@
+import { finite, text, integer } from "./oracle-values.mts";
 export type NativeInputPhase = "idle" | "move" | "drag-held" | "post-release-unresolved" | "wheel" | "double-click-fly-to" | "unknown";
 export interface NativeMotionHeader { readonly magic: string; readonly version: number; readonly headerSize: number; readonly recordSize: number; readonly flags: number; readonly timebaseNumerator: number; readonly timebaseDenominator: number; readonly ringCapacity: number; }
 export interface NativeMotionFrame { readonly frameSequence: number; readonly inputSerial: number; readonly inputRevision: number; readonly inputIdentifierHash: string; readonly monotonicNanoseconds: number; readonly presentEndedNanoseconds: number; readonly instrumentationEndedNanoseconds: number; readonly presentDurationNanoseconds: number; readonly instrumentationNanoseconds: number; readonly threadId: number; readonly context: string; readonly viewport: readonly number[]; readonly modelViewMatrix: readonly number[]; readonly projectionMatrix: readonly number[]; readonly inputPhase: NativeInputPhase; readonly currentContext: boolean; readonly matricesCaptured: boolean; }
 export interface NativeMotionTrace { readonly header: NativeMotionHeader; readonly frames: readonly NativeMotionFrame[]; }
-export interface NativeInputEvent { readonly event: string; readonly revision: number; readonly kind: string; readonly clickCount: number; readonly acceptedMonotonicSeconds: number; readonly acceptedInputSerial: number; }
+export interface NativeInputEvent {
+  readonly event: string; readonly revision?: number; readonly kind?: string; readonly clickCount?: number;
+  readonly acceptedMonotonicSeconds?: number; readonly acceptedInputSerial?: number;
+}
 
 export function decodeNativeMotionTrace(bytes: Buffer): NativeMotionTrace {
   if (bytes.length < 40 || bytes.toString("ascii", 0, 7) !== "CSMOTN2") {
@@ -81,17 +85,19 @@ export function nativeScenarioTrace({
     event.event === "native-input-batch-accepted" &&
     event.revision === revisions[0]);
   const accepted = events.filter((event) =>
-    event.event === "native-input-accepted" &&
-    revisions.includes(event.revision));
+    event.event === "native-input-accepted" && event.revision !== undefined && revisions.includes(event.revision))
+    .map(event => ({ ...event, kind: text(event.kind, 'accepted input kind'),
+      acceptedMonotonicSeconds: finite(event.acceptedMonotonicSeconds, 'accepted input clock'),
+      acceptedInputSerial: integer(event.acceptedInputSerial, 'accepted input serial') }));
   const posted = events.filter((event) =>
     event.event === "native-input-posted" &&
-    revisions.includes(event.revision));
+    event.revision !== undefined && revisions.includes(event.revision));
   if (!batch || accepted.length === 0) {
     throw new Error(
       `Native scenario revisions ${revisions.join(",")} have no input trace.`,
     );
   }
-  const startNanoseconds = batch.acceptedMonotonicSeconds * 1e9;
+  const startNanoseconds = finite(batch.acceptedMonotonicSeconds, "batch input clock") * 1e9;
   const lastAcceptedNanoseconds = Math.max(...accepted.map((event) =>
     event.acceptedMonotonicSeconds * 1e9));
   const requestedEndNanoseconds = lastAcceptedNanoseconds + tailMs * 1e6;
@@ -123,7 +129,7 @@ export function nativeScenarioTrace({
     frames: Object.freeze(frames),
     sampleFrames: Object.freeze(sampleOffsetsMilliseconds.map((offset) =>
       closestNativeFrame(frames, lastAcceptedNanoseconds + offset * 1e6))
-      .filter(Boolean)),
+      .filter((frame) => frame !== null)),
     expectedCameraInputSerials: Object.freeze(cameraSerials),
     missingCameraInputSerials: Object.freeze(cameraSerials.filter((serial) =>
       !observedSerials.has(serial))),

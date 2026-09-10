@@ -180,3 +180,9 @@ src/planets/*/source/**/*.bpc
 
 # AKARI AcuA v1: restored and verified from each body source manifest.
 /src/planets/*/source/reference/AcuA_V1.txt.gz
+
+# Shared shell outputs, replayed by pnpm prepare:shell from pinned fonts and vectors.
+/site/prepared-overview-titles.mjs
+/site/prepared-shell-icons.mjs
+/site/prepared-shell-titles.mjs
+/site/source/branding/wordmark-rail-segments.mjs
