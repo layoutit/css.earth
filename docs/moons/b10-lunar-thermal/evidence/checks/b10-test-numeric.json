@@ -1,0 +1,20 @@
+{
+  "command": [
+    "output/b9-python/bin/python",
+    "tools/objects/acquisition/test_diviner_ghrm.py"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 180224,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 180224,
+      "freePercent": 57
+    }
+  ],
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 0.3
+}

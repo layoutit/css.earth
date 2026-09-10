@@ -71,3 +71,9 @@ docs/moons/b9-cassini-ice-surfaces/evidence/styles/*.css -text -whitespace
 docs/moons/b9-cassini-ice-surfaces/source-review/tethys-corrected/*.txt -text -whitespace
 src/planets/*/source/cassini-ice/evidence/*.html -text -whitespace
 docs/moons/b9-cassini-ice-surfaces/evidence/checks/*.log -text -whitespace
+
+# B10 archive labels, metadata and browser evidence retain their exact bytes.
+src/planets/moon/source/science/diviner-ghrm/*.xml -text -whitespace
+docs/moons/b10-lunar-thermal/source-review/*.txt -text -whitespace
+docs/moons/b10-lunar-thermal/evidence/styles/*.css -text -whitespace
+docs/moons/b10-lunar-thermal/evidence/checks/*.log -text -whitespace

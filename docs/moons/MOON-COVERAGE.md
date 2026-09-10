@@ -66,7 +66,8 @@ The user’s delivery direction is **substantial PRs with complete outcomes acro
 | [B6 — Mapped science](B6-MAPPED-SCIENCE.md) | Six surface views merged in PR #76. | 4 |
 | [B7 — Cassini surface atlas](B7-CASSINI-ATLAS.md) | Five surface views merged in PR #81; aggregate qualification limits remain documented. | 3 |
 | [B8 — Surface chemistry](B8-SURFACE-CHEMISTRY.md) | Five spectral views merged in [PR #87](https://github.com/layoutit/cssEarth/pull/87); the batch report retains its qualification limits. | 3 |
-| [B9 — Cassini infrared and ice maps](B9-CASSINI-ICE-SURFACES.md) | Six source-qualified surfaces prepared; selected-body qualification complete; draft review with aggregate gates documented. Geometry and shared renderer remain fixed. | 3 |
+| [B9 — Cassini infrared and ice maps](B9-CASSINI-ICE-SURFACES.md) | Six source-qualified surfaces prepared, visually accepted and delivered; [merged PR #96](https://github.com/layoutit/cssEarth/pull/96), with aggregate gates documented. Geometry and shared renderer remain fixed. | 3 |
+| [B10 — The Moon at night](b10-lunar-thermal/README.md) | [Draft PR #97](https://github.com/layoutit/cssEarth/pull/97): midnight temperature, thermal-model anomalies and updated rock abundance; 4K materials, short selector labels and published assets. Geometry and shared behavior remain fixed. | 1 |
 
 **B1 and B2 are merged; [B3 merged PR #67](https://github.com/layoutit/cssEarth/pull/67) covers the approved six-moon scope.** The user approved 13 B2 bodies and carried Titania and Miranda to B3. Real Chrome scientific captures and bounded manual reviews are documented, with superseded cases, mesh-edge limits and failed/pending aggregate gates kept explicit in the [B2 qualification checkpoint](b2-preparation/qualification-checkpoint.md). The four batches and the explicit B3 carry-forward queue cover every physical-model candidate and all 32 existing improvements. Each PR includes source closure, preparation, usable content/assets and full qualification for its cohort. Remaining source blockers and possible scope changes are explicit in the plan.
 
@@ -79,7 +80,7 @@ Every benchmark body appears once below. Follow **review** for its full geometry
 
 | Moon | Scene / current lenses | Review result | Supported next work | Effort | Owner / task / PR |
 | --- | --- | --- | --- | --- | --- |
-| Moon · [review](review-2026-09-08/BODY-REVIEWS.md#body-001) | Present · Surface / Topography / Crust | improve-existing | Numeric topography and a carefully labeled Diviner thermal, rock-abundance or composition-proxy lens on the existing standalone Moon; lunar-hour bins and coverage visible in content. | large | Moons · [B2 merged PR #62](https://github.com/layoutit/cssEarth/pull/62) |
+| Moon · [review](review-2026-09-08/BODY-REVIEWS.md#body-001) | Present · 8 views: visible color, midnight temperature, heat anomalies, rock abundance, elevation, crust, silicate signature and geology | improve-existing | B10 adds 2009–2022 Diviner GHRM thermal surfaces within ±70° and updates rock abundance. Source gaps, model meaning and display limits remain visible. | large | Moons · [B10 review](b10-lunar-thermal/VISUAL-REVIEW.md) |
 
 </details>
 

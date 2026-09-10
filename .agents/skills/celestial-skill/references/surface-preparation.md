@@ -163,3 +163,9 @@ its contribution, then restore it; a layer's name does not explain an artifact.
 Fix the owning preparation and regenerate affected surface, pole, thumbnail,
 minimap or legend assets. Keep a small regression for the demonstrated defect
 and reuse its browser views in the [final checks](qualification.md).
+
+### Dense scientific materials on fixed bands
+
+For an existing oriented-band scene, a scientific lens may set an integer `rasterScale` in its preparation recipe. This increases only its prepared surface atlas; polar dimensions, geometry and the runtime canonical-density policy remain fixed. Generate its bounded minimap through the same authored scale. Compare ordinary framing and close zoom before choosing the scale, and report compressed bytes separately from decoded pixels.
+
+Large raw numeric archives use the streaming pinned source downloader and verifier. Keep float validity and units explicit, scan the source before sampling, and reproduce the compact grid into an empty output directory. A hash identifies exact bytes, while the provider label identifies the product and version.

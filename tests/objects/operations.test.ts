@@ -59,6 +59,14 @@ test('default acquisition restores only missing declared pins',()=>temporary(asy
  assert.deepEqual(calls,['https://example.org/two']);assert.deepEqual(await readFile(join(root,'one.txt')),existing);
  await assert.rejects(restoreMissingSources({sourceRoot:root,manifest,plan,missing:['unknown.txt']}),/No authored acquisition restores/);
 }));
+test('missing-source restoration verifies existing pins before starting any transfer',()=>temporary(async root=>{
+ const existing=Buffer.from('existing'),missing=Buffer.from('missing');await writeFile(join(root,'one.txt'),Buffer.from('modified'));
+ const manifest:SourceManifest={schema:'cssearth-authoritative-sources@1',inputs:[entry('one.txt',existing),entry('two.txt',missing)],documents:[],generatedIntermediates:[]};
+ const plan=parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[{kind:'download',path:'two.txt',url:'https://example.org/two',groups:['refresh']}]});
+ let transfers=0;
+ await assert.rejects(restoreMissingSources({sourceRoot:root,manifest,plan,missing:['two.txt'],transport:{fetch:async()=>{transfers++;return new Response(missing);}}}),/hash drifted/);
+ assert.equal(transfers,0);assert.deepEqual(await readFile(join(root,'one.txt')),Buffer.from('modified'));assert.deepEqual(await readdir(root),['one.txt']);
+}));
 test('image inventory separates valid range-addressed geometry and rejects malformed references',()=>{
  const reference={encoding:'gzip-cssearth-prepared-columns@1',url:'/scenes/open-body/wmts-0123456789abcdef/5-7-1.pack',offset:0,bytes:128,decodedBytes:256,sha256:'a'.repeat(64),decodedSha256:'b'.repeat(64)};
  assert.deepEqual(collectRuntimeAssetUrls('open-body',{image:'/scenes/open-body/one.webp',directory:reference}),['/scenes/open-body/one.webp']);

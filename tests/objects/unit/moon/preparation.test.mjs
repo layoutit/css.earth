@@ -47,11 +47,12 @@ test("prepares sourced surface, numeric LOLA, preserved GRAIL, and Diviner lense
     "cssmoon-prepared-curvature-material@1");
   assert.equal(PREPARED_MOON_LENSES.material.runtimeRasterization, false);
   assert.deepEqual(PREPARED_MOON_LENSES.controls.map(({ id }) => id),
-    ["surface", "topography", "crust", "rock-abundance", "silicate-signature", "geology"]);
+    ["surface", "midnight-temperature", "heat-anomalies", "rock-abundance", "topography", "crust", "silicate-signature", "geology"]);
   for (const lens of PREPARED_MOON_LENSES.controls) {
+    const scale = ["midnight-temperature", "heat-anomalies", "rock-abundance"].includes(lens.id) ? 2 : 1;
     for (const [url, width, height] of [
-      [lens.surfaceUrl, 1024, 512],
-      [lens.surface2xUrl, 2048, 1024],
+      [lens.surfaceUrl, 1024 * scale, 512 * scale],
+      [lens.surface2xUrl, 2048 * scale, 1024 * scale],
       [lens.polesUrl, 512, 128],
       [lens.poles2xUrl, 1024, 256],
       [lens.thumbnailUrl, 96, 96],
@@ -63,7 +64,7 @@ test("prepares sourced surface, numeric LOLA, preserved GRAIL, and Diviner lense
     }
   }
   const controls = JSON.parse(await readFile(new URL("../../../../src/planets/moon/prepared/controls.json", import.meta.url), "utf8"));
-  for (const id of ["topography", "rock-abundance", "silicate-signature"]) {
+  for (const id of ["topography", "midnight-temperature", "heat-anomalies", "rock-abundance", "silicate-signature"]) {
     const legend = controls.lenses.controls.find(lens => lens.id === id).legend;
     const metadata = await sharp(fileURLToPath(new URL(`../../../../public${legend.src}`, import.meta.url))).metadata();
     assert.deepEqual([metadata.width, metadata.height], [256, 16]);
@@ -93,13 +94,13 @@ test("keeps the Moon cubic sky and directional Sun fully prepared", () => {
 
 test("binds the checked Moon sources and runtime asset closure", async () => {
   const source = await verifyMoonSourceManifest();
-  assert.equal(source.inputCount, 18);
+  assert.equal(source.inputCount, 24);
   const manifest = JSON.parse(await readFile(
     new URL("../../../../src/planets/moon/runtime-assets.json", import.meta.url),
     "utf8",
   ));
   assert.equal(manifest.schema, "cssmoon-runtime-assets@1");
-  assert.equal(manifest.assets.length, 61);
+  assert.equal(manifest.assets.length, 73);
   for (const asset of manifest.assets) {
     const bytes = await readFile(new URL(
       `../../../../public/scenes/moon/${asset.filename}`,

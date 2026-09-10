@@ -1,0 +1,48 @@
+{
+  "product": "dghrm_tbol_m_70s70n_img",
+  "input": "dghrm_tbol_m_70s70n_img.img",
+  "label": "dghrm_tbol_m_70s70n_img.xml",
+  "sha256": "c92932e837bdfca4b78605c52abe6b8e1f91f31508a315ce3321cb589ea1e12e",
+  "labelSha256": "1d221419b090c0deeb1541e9707b6427ae1401bcdb726c9598ac328421083fe7",
+  "width": 4096,
+  "height": 2048,
+  "quantity": "bolometric-temperature",
+  "encoding": {
+    "scale": 0.01,
+    "offset": 100,
+    "units": "K"
+  },
+  "histogram": {
+    "minimum": 0,
+    "step": 0.25
+  },
+  "output": "tbol_m-compact.tif",
+  "receipt": "tbol_m-receipt.json",
+  "anchors": [
+    {
+      "name": "Aristarchus",
+      "longitude": 312.5,
+      "latitude": 23.7
+    },
+    {
+      "name": "Tycho",
+      "longitude": 348.64,
+      "latitude": -43.31
+    },
+    {
+      "name": "Powell",
+      "longitude": 30.763,
+      "latitude": 20.16
+    },
+    {
+      "name": "Equatorial farside",
+      "longitude": 180,
+      "latitude": 0
+    },
+    {
+      "name": "North boundary",
+      "longitude": 0,
+      "latitude": 69.99
+    }
+  ]
+}
