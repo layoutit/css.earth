@@ -46,7 +46,9 @@ dependency binding and a behavioral test, not a body-specific UI condition.
 
 `pnpm prepare:provenance` recovers records for `OBJECTS` from checked recipes,
 source manifests and prepared asset receipts. Development/build preparation
-also runs this recovery. It does not download or rebuild body assets.
+also runs this recovery. Catalogue preparation restores missing cited factsheet
+documents from their pinned acquisition recipes before validating the citations.
+It does not download or rebuild body rendering assets.
 
 - `basis: recovered` means existing declared pins were bound. It does not prove
   that source bytes are present, that an acquisition happened in this run, or

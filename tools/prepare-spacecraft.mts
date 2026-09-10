@@ -21,6 +21,8 @@ import type { ExplorationImage } from '../src/platform/prepared-exploration.mts'
 import { validateObjectProvenance } from '../src/platform/object-provenance.mts';
 import type { ProvenanceDocument } from '../src/platform/object-provenance.mts';
 import { writePreparedSet } from './write-prepared-set.mts';
+import { restoreFactsheetEvidence } from './restore-factsheet-evidence.mts';
+import type { FactsheetSourceTransport } from './restore-factsheet-evidence.mts';
 export const explorationCompilerClosure = [
   'tools/prepare-spacecraft.mts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
   'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'site/objects.mts', 'site/object-schema.mts',
@@ -29,15 +31,16 @@ export const explorationCompilerClosure = [
   'site/source/agency-logos.json', 'tools/read-source-catalogue.mts',
   'src/platform/source-catalog.mts', 'src/platform/source-usage.mts', 'src/platform/source-manifest.mts',
   'src/platform/prepared-sources.mts', 'tools/source-catalogue-inputs.mts',
-  'tools/factsheet-sources.mts', 'site/fact-order.mts',
+  'tools/factsheet-sources.mts', 'site/fact-order.mts', 'tools/restore-factsheet-evidence.mts',
+  'tools/source-values.mts', 'tools/objects/operations.ts', 'tools/objects/operations-acquisition.ts',
   'src/objects/milky-way/source/sky/provenance.json', 'src/objects/milky-way/source/provenance.json',
   'src/objects/stellar-neighbourhood/source/provenance.json', 'src/objects/heliosphere/source/provenance.json',
   'tools/objects/provenance.mts', 'tools/objects/provenance-records.mts', 'tools/objects/provenance-recipes.mts', 'tools/prepare-provenance.mts',
 ] as const;
 const digest = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
-interface Options { root?: string; publish?: boolean; provenance?: ReadonlyMap<string, ProvenanceDocument>; }
-/** Compile evidenced catalogue links and reuse approved artwork; never acquire or render assets. */
-export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '..'), publish = true, provenance = new Map() }: Options = {}) {
+interface Options { root?: string; publish?: boolean; provenance?: ReadonlyMap<string, ProvenanceDocument>; sourceTransport?: FactsheetSourceTransport; }
+/** Compile evidenced links and reuse approved artwork, restoring only missing cited evidence. */
+export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '..'), publish = true, provenance = new Map(), sourceTransport }: Options = {}) {
   const closure: Record<string, string> = {};
   const input = async (path: string) => {
     const bytes = await readFile(resolve(root, path)); closure[path] = digest(bytes); return bytes;
@@ -103,7 +106,11 @@ export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '.
     if (contentPin.length !== 1 || contentPin[0]!.expectedBytes !== contentBytes.length || contentPin[0]!.expectedSha256 !== digest(contentBytes) ||
       sourceDigest(contentReference.sha256) !== digest(contentBytes)) throw new Error(`Changed content source for ${object.id}.`);
     const content = explorationRecord(JSON.parse(contentBytes.toString('utf8')));
-    const panel = await verifyFactsheetSources(content.panel, { objectDirectory: resolve(root, base), manifest, sources, read: path => input(`${base}/${path}`) });
+    const objectDirectory = resolve(root, base);
+    const panel = await verifyFactsheetSources(content.panel, { objectDirectory, manifest, sources,
+      read: path => input(`${base}/${path}`),
+      restoreMissing: path => restoreFactsheetEvidence({ objectDirectory, path, manifest, transport: sourceTransport }),
+    });
     const published = explorationRecord(await json(`${base}/prepared/content.json`));
     if (published.objectId !== object.id || JSON.stringify(parseFactsheet(published)) !== JSON.stringify(panel)) throw new Error(`Stale factsheet for ${object.id}; run pnpm prepare:factsheets -- ${object.id}.`);
     metadata.push(...factsheetCitations(panel, `${base}/${contentPath}`, object));
