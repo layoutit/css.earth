@@ -1,3 +1,3 @@
 import test from 'node:test';
-import { checkShape } from '../../../../docs/centaur-population/check-shape.mjs';
+import { checkShape } from '../centaur-shape-contract.mjs';
 test('Chariklo prepared triangles and rings preserve independent occultation constraints', () => checkShape('chariklo'));

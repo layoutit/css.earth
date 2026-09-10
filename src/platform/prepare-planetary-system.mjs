@@ -83,7 +83,7 @@ export const GEOMETRIC_ALBEDO = Object.freeze({
   // https://www.nature.com/articles/s41586-023-05810-5; approximate point photometry.
   didymos: 0.15,
   // Parent context only: common-system geometric albedos, not mapped surface colors.
-  // Scheirich et al.2021 Table4; JPL SBDB Grav2012/Mainzer2014, pinned in docs/moons/b1-preparation/parent-inputs.json.
+  // Scheirich et al.2021 Table4; JPL SBDB Grav2012/Mainzer2014, pinned in https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b1-preparation/parent-inputs.json.
   moshup: 0.162, sylvia: 0.046, patroclus: 0.047,
   // Assumed geometric albedo, not a measurement: Mashchenko (2019), section 4,
   // https://doi.org/10.1093/mnras/stz2378. Used only for approximate marker photometry.

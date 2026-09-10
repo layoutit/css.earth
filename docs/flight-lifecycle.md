@@ -52,12 +52,6 @@ publisher's targets on disposal. Input never asks `elementsFromPoint` to search
 the scene or flush pending style/layout. Indicator resize updates both the
 visible orbit cutout and its hit geometry.
 
-Preparation can merge ordered constant-colour coplanar faces into lossless image
-tiles. Source coverage, holes, alpha, and paint order are rasterized offline;
-runtime receives the final image and affine leaves. The shape-model adapter uses
-this for its uniform ring (128 source faces become 16 tiles). Curved surfaces and
-textured/noncoplanar faces retain their original representation.
-
 Search is owned by the user's current browsing interaction. A completed flight
 or overview transition updates the selected body without replacing a newer
 query; choosing a result or dismissing search relinquishes that ownership.
@@ -70,14 +64,13 @@ can inflate the development server's compiler heap and interrupt navigation:
 ```sh
 pnpm build:performance
 pnpm preview --port 4221
-HOPS=30 ORIGIN=http://127.0.0.1:4221 pnpm test:browser:navigation-stress:matrix
 ```
 
 This mode retains production bundling and static serving while explicitly
 enabling the existing diagnostic APIs and recorder. Ordinary production
 builds disable them. Keep the built assets unchanged throughout the matrix.
 
-Additional focused checks after the package/renderer build and preparation:
+Choose checks for the changed behavior after building and preparing its inputs:
 
 ```sh
 node --test tools/prepared-activation-registry.test.mjs
@@ -87,13 +80,13 @@ ORIGIN=http://127.0.0.1:4221 pnpm test:browser:interaction-chain
 DPR=2 ORIGIN=http://127.0.0.1:4221 pnpm test:browser:interaction-chain
 ORIGIN=http://127.0.0.1:4221 node site/test/replacement-flight-browser.mjs
 ORIGIN=http://127.0.0.1:4221 node site/test/natural-navigation-browser.mjs
-node site/test/flight-registry-browser.mjs http://127.0.0.1:4210
-node site/test/flight-activation-browser.mjs http://127.0.0.1:4210 mars
-DPR=2 node site/test/flight-activation-browser.mjs http://127.0.0.1:4210 saturn
-node site/test/shared-camera-viewport-browser.mjs http://127.0.0.1:4210
-node site/test/lazy-surface-preview-browser.mjs http://127.0.0.1:4210
-node site/test/shell-surface-browser.mjs http://127.0.0.1:4210
-DPR=2 node site/test/shell-surface-browser.mjs http://127.0.0.1:4210
+node site/test/flight-registry-browser.mjs http://127.0.0.1:4221
+node site/test/flight-activation-browser.mjs http://127.0.0.1:4221 mars
+DPR=2 node site/test/flight-activation-browser.mjs http://127.0.0.1:4221 saturn
+node site/test/shared-camera-viewport-browser.mjs http://127.0.0.1:4221
+node site/test/lazy-surface-preview-browser.mjs http://127.0.0.1:4221
+node site/test/shell-surface-browser.mjs http://127.0.0.1:4221
+DPR=2 node site/test/shell-surface-browser.mjs http://127.0.0.1:4221
 ```
 
 The registry browser suite covers every object at DPR 1 and 2. The interruption
@@ -129,4 +122,4 @@ check uses native sidebar clicks during activation, holds the destination's
 prepared bank, and verifies that retained-world transforms change before
 releasing those bytes, then checks arrival at DPR 1 and 2.
 
-Recorded results and remaining limits are in [flight qualification](flight-qualification.md).
+Recorded runs and their limits remain in the [7 September 2026 qualification](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/flight-qualification.md). They describe those tested revisions, not a new result for this checkout.

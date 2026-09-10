@@ -15,7 +15,7 @@ Convex light-curve reconstruction with approximate thermal size: 83.21 km effect
 
 ## Evidence
 
-The [phocaea results](../../../docs/evidence/main-belt-asteroids/summary.json) record a maximum sampled source-to-display distance of **347.42 m**. This is a sampled comparison, not an exhaustive error bound.
+The [phocaea results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/main-belt-asteroids/summary.json) record a maximum sampled source-to-display distance of **347.42 m**. This is a sampled comparison, not an exhaustive error bound.
 
 The report includes 2 browser cases tied to recorded body assets. It does not identify the tested code revision.
 

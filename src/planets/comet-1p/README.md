@@ -8,9 +8,9 @@
 
 ## Evidence
 
-- The [pinned candidate manifest](source/reference/giotto-hmc-intake.json) and [intake report](../../../docs/comets/HALLEY-GIOTTO.md) retain a reproducible seven-frame survey from the original PDS SBN release, including its separate FITS geometry headers.
+- The [pinned candidate manifest](source/reference/giotto-hmc-intake.json) and [intake report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/HALLEY-GIOTTO.md) retain a reproducible seven-frame survey from the original PDS SBN release, including its separate FITS geometry headers.
 
-- Qualification is recorded in [HALLEY.md](../../../docs/comets/HALLEY.md).
+- Qualification is recorded in [HALLEY.md](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/HALLEY.md).
 
 ## Known problems
 

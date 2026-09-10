@@ -9,7 +9,7 @@
 
 ## Evidence
 
-The [two-comet report](../../../docs/comets/ENCKE-LINEAR.md) links the recorded
+The [two-comet report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/ENCKE-LINEAR.md) links the recorded
 shape, source-restoration, delivery and browser checks, including the failed
 checks and limits of that run.
 

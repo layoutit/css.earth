@@ -15,7 +15,7 @@ Convex light-curve reconstruction with approximate thermal size: 109.79 km effec
 
 ## Evidence
 
-The [euterpe results](../../../docs/evidence/main-belt-asteroids/summary.json) record a maximum sampled source-to-display distance of **444.71 m**. This is a sampled comparison, not an exhaustive error bound.
+The [euterpe results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/main-belt-asteroids/summary.json) record a maximum sampled source-to-display distance of **444.71 m**. This is a sampled comparison, not an exhaustive error bound.
 
 The report includes 2 browser cases tied to recorded body assets. It does not identify the tested code revision.
 
