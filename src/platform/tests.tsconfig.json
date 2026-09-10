@@ -1,0 +1,22 @@
+{
+  "extends": "../../tools/tsconfig.json",
+  "include": [
+    "./**/*.mts",
+    "../navigation/**/*.mts",
+    "../renderers/css/**/*.test.mts",
+    "../renderers/css/**/*-browser.mts",
+    "../../site/env.d.ts",
+    "../../tools/external-modules.d.mts"
+  ],
+  "exclude": [
+    "**/dist/**",
+    "**/node_modules/**"
+  ],
+  "compilerOptions": {
+    "paths": {
+      "vitest": [
+        "../../packages/engine/node_modules/vitest"
+      ]
+    }
+  }
+}

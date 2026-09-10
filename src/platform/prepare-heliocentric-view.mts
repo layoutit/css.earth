@@ -68,7 +68,7 @@ export function chordBehindTurns(offsets: readonly number[]) {
   }));
 }
 
-export function orbitTrailWeights(offsets: readonly number[], spans = ORBIT_TRAIL_SPANS) {
+export function orbitTrailWeights(offsets: readonly number[], spans: Parameters<typeof trailWeightsForSpans>[1] = ORBIT_TRAIL_SPANS) {
   return trailWeightsForSpans(chordBehindTurns(offsets), spans);
 }
 

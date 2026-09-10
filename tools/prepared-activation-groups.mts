@@ -1,8 +1,13 @@
 import type { PreparedTree, PreparedVariant } from '../src/renderers/css/rendering/prepared-presentation.ts';
 
+export type ActivationDefinition = {
+  tree: Pick<PreparedTree, 'camera' | 'scene'> & { nodes: readonly Pick<PreparedTree['nodes'][number], 'parent'>[] };
+  variants: readonly Pick<PreparedVariant, 'writes'>[];
+};
+
 /** First-paint batches preserve authored sibling order and existing geometry.
  * Selection-owned display writes remain atomic under their existing owner. */
-export function prepareActivationGroups(definition: { tree: PreparedTree; variants: readonly PreparedVariant[] }) {
+export function prepareActivationGroups(definition: ActivationDefinition) {
   const nodes = definition.tree.nodes;
   const parents = new Set(nodes.map(node => node.parent));
   const controlled = new Set(definition.variants.flatMap(variant => variant.writes

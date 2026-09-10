@@ -49,10 +49,10 @@ jobs:
           pnpm prepare:minimap
       - name: Check source restoration and tracked inputs
         run: |
-          node --test tools/restore-source-inputs.test.mjs
-          node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mjs
+          node --test tools/restore-source-inputs.test.mts
+          node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mts
       - name: Check independent body additions
-        run: node --test tools/body-additions.test.mjs tools/prepare-marker-bindings.test.mjs
+        run: node --test tools/body-additions.test.mts tools/prepare-marker-bindings.test.mts
       - name: Typecheck shared code and enforce TypeScript ownership
         run: |
           pnpm typecheck
@@ -61,28 +61,28 @@ jobs:
       - name: Test prepared source, materials and world context
         run: |
           pnpm test:preparation --universe
-          node --test tools/objects/material-composition/coplanar-raster.test.mjs
+          node --test tools/objects/material-composition/coplanar-raster.test.mts
       - name: Test provenance and scientific source credits
         run: >-
-          node --test tools/object-provenance.test.mjs
-          site/test/object-sources.test.mjs site/test/dataset-spacecraft.test.mjs
-          site/test/scene-sources.test.mjs
+          node --test tools/object-provenance.test.mts
+          site/test/object-sources.test.mts site/test/dataset-spacecraft.test.mts
+          site/test/scene-sources.test.mts
       - name: Restore pinned JSON transports for runtime and shell tests
         run: |
-          node --test tools/restore-object-json.test.mjs
+          node --test tools/restore-object-json.test.mts
           node tools/restore-object-json.mts
       - name: Test selected dataset textures and bounded residency
         run: |
-          node --test src/platform/object-selection-runtime.test.mjs src/platform/prepared-residency.test.mjs tests/objects/unit/earth/dataset-selection.test.mjs tests/objects/unit/earth/surface-image-banks.test.mjs
+          node --test src/platform/object-selection-runtime.test.mts src/platform/prepared-residency.test.mts tests/objects/unit/earth/dataset-selection.test.mts tests/objects/unit/earth/surface-image-banks.test.mts
       - name: Test prepared minimap point ownership, range and coverage
-        run: node --test site/test/minimap-point-range.test.mjs site/test/minimap-point-coverage.test.mjs
+        run: node --test site/test/minimap-point-range.test.mts site/test/minimap-point-coverage.test.mts
       - name: Test shared shell and search ownership
         run: >-
-          node --test site/test/shell-lifetime.test.mjs
-          site/test/navigation-router.test.mjs site/test/planet-shell.test.mjs
-          site/test/router-runtime.test.mjs
-          site/test/object-page-data.test.mjs
+          node --test site/test/shell-lifetime.test.mts
+          site/test/navigation-router.test.mts site/test/planet-shell.test.mts
+          site/test/router-runtime.test.mts
+          site/test/object-page-data.test.mts
       - name: Enforce activation preparation for every registered object
-        run: node --test tools/prepared-activation-groups.test.mjs tools/prepared-activation-registry.test.mjs
+        run: node --test tools/prepared-activation-groups.test.mts tools/prepared-activation-registry.test.mts
       - name: Test complete shared renderer and camera
         run: pnpm test:renderer

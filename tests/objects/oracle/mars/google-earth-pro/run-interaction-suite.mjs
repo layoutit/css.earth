@@ -103,7 +103,7 @@ try {
           }
           const browserPath = !replay && reusableNative && run.browser ? run.browser : resolve(browserRoot, "browser/report.json");
           if (!(resume && await exists(browserPath))) {
-            await command(resolve(root, "site/test/capture-rendered-motion.mjs"), [nativePath, dirname(browserPath), "normal"], resolve(browserRoot, "browser.log"), { CSS_EARTH_CAPTURE_URL: browserUrl, CSS_EARTH_EVIDENCE_ROOT: evidenceRoot });
+            await command(resolve(root, "site/test/capture-rendered-motion.mts"), [nativePath, dirname(browserPath), "normal"], resolve(browserRoot, "browser.log"), { CSS_EARTH_CAPTURE_URL: browserUrl, CSS_EARTH_EVIDENCE_ROOT: evidenceRoot });
           }
           run.browser = browserPath;
           const comparisonPath = !replay && reusableNative && run.comparison ? run.comparison : resolve(browserRoot, "comparison/report.json");
@@ -115,10 +115,10 @@ try {
             ? dirname(dirname(run.frameBound.browser)) : resolve(browserRoot, "controlled");
           await mkdir(frameRoot, { recursive:true });
           const pairedPath = resolve(frameRoot, "paired-inputs.json");
-          if (!(resume && await exists(pairedPath))) await command("pair-rendered-motion-inputs.mjs",
+          if (!(resume && await exists(pairedPath))) await command("pair-rendered-motion-inputs.mts",
             [dirname(nativePath), pairedPath], resolve(frameRoot, "pair.log"));
           const frameBrowser = resolve(frameRoot, "browser/report.json");
-          if (!(resume && await exists(frameBrowser))) await command(resolve(root, "site/test/capture-rendered-motion.mjs"),
+          if (!(resume && await exists(frameBrowser))) await command(resolve(root, "site/test/capture-rendered-motion.mts"),
             [pairedPath, dirname(frameBrowser), "frame-locked"], resolve(frameRoot, "browser.log"),
             { CSS_EARTH_CAPTURE_URL:browserUrl, CSS_EARTH_EVIDENCE_ROOT:evidenceRoot });
           const frameComparison = resolve(frameRoot, "comparison/report.json");

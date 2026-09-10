@@ -189,7 +189,7 @@ describe('the solar-system frame tree', () => {
 })
 
 describe('the solar-system ephemeris, resolved through the tree', () => {
-  const heliocentricFixture: Record<PlanetId, string> = {
+  const heliocentricFixture: Record<PlanetId, keyof typeof HORIZONS> = {
     mercury: 'mercuryBarycentreHeliocentric',
     venus: 'venusBarycentreHeliocentric',
     earth: 'embHeliocentric',

@@ -1,1 +1,0 @@
-import{test}from'node:test';import{assertAsteroidPackage}from'../asteroid-contract.mjs';test('Geographos retains Shape, Elevation and native raster triangles',()=>assertAsteroidPackage('geographos',['shape','elevation'],1284.042));

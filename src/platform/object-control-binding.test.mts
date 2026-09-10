@@ -1,0 +1,175 @@
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
+import assert from "node:assert/strict";
+import test from "node:test";
+import { OBJECTS } from "../../site/objects.mts";
+import { createObjectControlBinding } from '../renderers/css/dist/testing.js';
+import { initialObjectSelection, reduceObjectSelection, objectCycleStates } from '../renderers/css/dist/testing.js';
+import { parsePreparedObjectRuntime } from '../renderers/css/dist/index.js';
+import type { ObjectAction, ObjectControls, ObjectSelection } from '../renderers/css/runtime/object-contract.ts';
+import type { ObjectSelectionState } from '../renderers/css/rendering/object-selection-runtime.ts';
+import type { ObjectControlBindingOptions } from '../renderers/css/rendering/object-control-binding.ts';
+
+const moonControls = parsePreparedObjectRuntime(await loadObjectTestDefinition('moon')).controls;
+const saturnControls = parsePreparedObjectRuntime(await loadObjectTestDefinition('saturn')).controls;
+const flush = async () => { for (let i = 0; i < 10; i++) await Promise.resolve(); };
+class Input extends EventTarget {
+  name = ""; value = ""; checked = false; disabled = false; readonly dataset: Record<string, string | undefined> = {};
+  readonly attributes: Record<string, string> = {}; tagName = "INPUT"; type = "checkbox"; min = "0"; max = "4"; step = "1";
+  constructor(fields: Partial<Input> = {}) { super(); Object.assign(this, fields); }
+  setAttribute(key: string, value: string): void { this.attributes[key] = value; }
+  emit(type: string): void { this.dispatchEvent(new Event(type)); }
+}
+class Root {
+  private readonly classes = new Set<string>();
+  readonly attributes: Record<string, string> = {};
+  readonly inputs: Input[];
+  constructor(inputs: Input[]) { this.inputs = inputs; }
+  // This is the narrow DOM boundary exercised by the renderer: it only reads these mock controls.
+  querySelectorAll<T extends Element>(): NodeListOf<T> { return this.inputs as unknown as NodeListOf<T>; }
+  setAttribute(key: string, value: string): void { this.attributes[key] = value; }
+  readonly classList = {
+    toggle: (key: string, on?: boolean): boolean => { if (on) this.classes.add(key); else this.classes.delete(key); return on === true; },
+    remove: (key: string): void => { this.classes.delete(key); },
+    contains: (key: string): boolean => this.classes.has(key),
+  };
+}
+type HarnessMutation = (parts: { lensInputs: Input[]; settingInputs: Input[]; stage: HTMLElement; lensRoot: Root }) => void;
+function selectionState(initial: ObjectSelection): ObjectSelectionState {
+  return { committed: null, desired: initial, plan: null, pending: true, loadingMaterial: false, ready: false, error: null, viewRevision: null };
+}
+function harness(controls: ObjectControls = moonControls, mutate: HarnessMutation = () => {}) {
+  const initial = initialObjectSelection(controls);
+  const lensInputs = (controls.lenses?.controls ?? []).map(lens => new Input({ name: "lens", value: lens.id, tagName: "BUTTON", type: "button" }));
+  const settingInputs = (controls.settings?.controls ?? []).map(control => new Input({ name: control.name,
+    type: control.kind === "toggle" ? "checkbox" : "range", checked: control.kind === "toggle" && control.checked, value: String(initial[control.name]) }));
+  const motion = new Input({ name: "motion" }), contrast = new Input({ name: "skyContrast" }), heliosphere = new Input({ name: "heliosphere" });
+  const asteroidOrbits = new Input({ name: "asteroidOrbits" });
+  const asteroidLabels = new Input({ name: "asteroidLabels" });
+  settingInputs.push(motion, contrast, heliosphere, asteroidOrbits, asteroidLabels);
+  const lensRoot = new Root(lensInputs), settingsRoot = new Root(settingInputs);
+  const document = { querySelector: (selector: string): Root => selector === ".planet-lenses" ? lensRoot : settingsRoot };
+  // The binding accepts an HTMLElement only to reach ownerDocument; this mock supplies that boundary.
+  const stage = { ownerDocument: document as unknown as Document } as unknown as HTMLElement;
+  const errors: unknown[] = [], actions: ObjectAction[] = []; let state = selectionState(initial);
+  let binding: ReturnType<typeof createObjectControlBinding>;
+  let actionImplementation: (action: ObjectAction) => unknown = action => {
+    state = { ...state, committed: reduceObjectSelection(state.committed ?? initial, action), pending: false };
+    state.desired = state.committed ?? initial; binding.publish(state); return true;
+  };
+  mutate({ lensInputs, settingInputs, stage, lensRoot });
+  binding = createObjectControlBinding({ stage, controls, initialSelection: initial, getState: () => state,
+    onAction(action) { actions.push(action); return actionImplementation(action); }, onError: error => errors.push(error) } satisfies ObjectControlBindingOptions);
+  return { binding, lensInputs, settingInputs, lensRoot, settingsRoot, motion, contrast, heliosphere, asteroidOrbits, asteroidLabels, errors, actions, initial,
+    setState(next: ObjectSelectionState) { state = next; binding.publish(state); }, state: () => state,
+    onAction(callback: (action: ObjectAction) => unknown) { actionImplementation = callback; },
+    ready() { state = { ...state, committed: initial, desired: initial, pending: false }; binding.setReady(); },
+  };
+}
+
+for (const object of OBJECTS) test(`${object.id}: one binder consumes every actual control and owns no shell preference listener`, async () => {
+  const {controls} = parsePreparedObjectRuntime(await loadObjectTestDefinition(object.id));
+  const h = harness(controls);
+  assert.ok([...h.lensInputs, ...h.settingInputs.filter(input => !["motion", "skyContrast", "heliosphere", "asteroidOrbits", "asteroidLabels"].includes(input.name))].every(input => input.disabled));
+  assert.equal(h.motion.disabled, false); assert.equal(h.contrast.disabled, false);
+  assert.equal(h.heliosphere.disabled, false); assert.equal(h.asteroidOrbits.disabled, false); assert.equal(h.asteroidLabels.disabled, false);
+  h.lensInputs[0]?.emit("click"); assert.equal(h.actions.length, 0);
+  h.ready();
+  for (const input of h.lensInputs) input.emit("click");
+  for (const control of controls.settings?.controls ?? []) {
+    const input = h.settingInputs.find(input => input.name === control.name); assert.ok(input);
+    if (control.kind === "toggle") { input.checked = !input.checked; input.emit("change"); }
+    else {
+      for (const state of objectCycleStates(control)) {
+        input.value = String(state.value); input.emit("input");
+        assert.equal(input.dataset.state, state.label);
+      }
+    }
+  }
+  const count = h.actions.length;
+  h.motion.emit("change"); h.contrast.emit("change"); h.heliosphere.emit("change"); h.asteroidOrbits.emit("change"); h.asteroidLabels.emit("change"); assert.equal(h.actions.length, count);
+  assert.deepEqual(h.errors, []);
+  assert.equal(h.binding.stats().listenerCount, (controls.lenses?.controls.length ?? 0) + (controls.settings?.controls.length ?? 0));
+  h.binding.destroy(); h.binding.destroy(); h.lensInputs[0]?.emit("click");
+  assert.equal(h.actions.length, count); assert.equal(h.binding.stats().listenerCount, 0);
+  assert.equal(h.lensRoot.classList.contains("is-loading"), false);
+  assert.equal(h.settingsRoot.classList.contains("is-loading"), false);
+  assert.equal(h.settingsRoot.attributes["aria-busy"], "false");
+});
+
+test("duplicate, missing, undeclared and incorrectly rendered controls are rejected before binding", () => {
+  assert.throws(() => harness(moonControls, ({ lensInputs }) => lensInputs.push(lensInputs[0])), /actual package/);
+  assert.throws(() => harness(moonControls, ({ lensInputs }) => lensInputs.pop()), /actual package/);
+  assert.throws(() => harness(moonControls, ({ settingInputs }) => settingInputs.push(new Input({ name: "invented" }))), /actual package/);
+  assert.throws(() => harness(moonControls, ({ settingInputs }) => { settingInputs[0].type = "text"; }), /wrong input/);
+  assert.throws(() => harness(moonControls, ({ settingInputs }) => { settingInputs[0].max = "5"; }), /declared states/);
+});
+test("pending controls project desired values while pressed lenses remain committed; failure restores current committed UI", async () => {
+  const h = harness(saturnControls); h.ready(); let reject: (error: Error) => void = () => { throw new Error("missing rejection"); };
+  h.onAction(action => {
+    const desired = reduceObjectSelection(h.state().desired, action);
+    h.setState({ ...h.state(), desired, pending: true });
+    return new Promise((_, fail) => { reject = fail; });
+  });
+  const rings = h.settingInputs.find(input => input.name === "rings"); assert.ok(rings); rings.checked = false; rings.emit("change");
+  const selectedLens = h.lensInputs.find(input => input.value === h.initial.lensId); assert.ok(selectedLens);
+  assert.equal(rings.checked, false); assert.equal(selectedLens.attributes["aria-pressed"], "true");
+  assert.equal(h.lensRoot.classList.contains("is-loading"), true);
+  assert.equal(h.settingsRoot.classList.contains("is-loading"), true);
+  assert.equal(h.settingsRoot.attributes["aria-busy"], "true"); assert.equal(rings.disabled, false);
+  h.setState({ ...h.state(), desired: h.initial, committed: h.initial, pending: false, error: "decode" });
+  reject(new Error("decode")); await flush();
+  assert.equal(rings.checked, true); assert.equal(h.lensRoot.classList.contains("is-loading"), false);
+  assert.equal(h.settingsRoot.classList.contains("is-loading"), false);
+  assert.equal(h.settingsRoot.attributes["aria-busy"], "false");
+  assert.equal(h.errors.length, 1); h.binding.destroy();
+});
+test("the same declared lens controls can project simultaneous material and interior pressed states", () => {
+  const h = harness(saturnControls); h.ready();
+  h.setState({ ...h.state(), plan: { required: [], prewarm: [], materials: {}, pressedLenses: ["methane", "cross-section"] } });
+  assert.deepEqual(h.lensInputs.filter(input => input.attributes["aria-pressed"] === "true").map(input => input.value), ["methane", "cross-section"]);
+  h.binding.destroy();
+});
+test("invalid range events restore the selected rate, and a late failure cannot update a disposed binding", async () => {
+  const h = harness(); h.ready(); const speed = h.settingInputs.find(input => input.name === "speed"); assert.ok(speed);
+  speed.value = "9"; speed.emit("input");
+  assert.equal(speed.value, "1"); assert.equal(h.actions.length, 0); assert.equal(h.errors.length, 1);
+  let reject: (error: Error) => void = () => { throw new Error("missing rejection"); }; h.onAction(() => new Promise<void>((_, fail) => { reject = fail; }));
+  h.lensInputs[1].emit("click"); h.binding.destroy(); reject(new Error("late")); await flush();
+  assert.equal(h.errors.length, 1); assert.equal(h.binding.stats().destroyed, true);
+});
+test("speed readiness never grants Motion permission and disposal blocks the shell's range", () => {
+  const h = harness(); const speed = h.settingInputs.find(input => input.name === "speed"); assert.ok(speed);
+  assert.equal(speed.dataset.runtimeReady, "false"); assert.equal(speed.disabled, true);
+  h.ready(); assert.equal(speed.dataset.runtimeReady, "true"); assert.equal(speed.disabled, true);
+  // The existing shell owner republishes after the router observes readiness.
+  speed.disabled = false; h.binding.publish(h.state()); assert.equal(speed.disabled, false);
+  h.binding.destroy(); assert.equal(speed.dataset.runtimeReady, "false"); assert.equal(speed.disabled, true);
+});
+
+test("one failed native listener removal does not stop the rest of control cleanup", () => {
+  const h = harness(); h.ready();
+  h.lensInputs[0].removeEventListener = () => { throw new Error("native listener cleanup"); };
+  assert.throws(() => h.binding.destroy(), AggregateError);
+  assert.equal(h.binding.stats().listenerCount, 0);
+  assert.ok(h.lensInputs.every(input => input.disabled));
+  assert.equal(h.lensRoot.attributes["aria-busy"], "false");
+  h.lensInputs[0].emit("click"); assert.equal(h.actions.length, 0);
+  h.binding.destroy();
+});
+
+
+test("prepared lens legends follow committed selection through pending work", () => {
+  const ids = moonControls.lenses?.controls.slice(0, 2).map(lens => lens.id) ?? []; assert.equal(ids.length, 2);
+  const legends = ids.map(id => ({ dataset: { lensLegend: id }, hidden: true }));
+  const h = harness(moonControls, ({ lensRoot, lensInputs }) => {
+    lensRoot.querySelectorAll = <T extends Element>(selector?: string): NodeListOf<T> =>
+      (selector === "[data-lens-legend]" ? legends : lensInputs) as unknown as NodeListOf<T>;
+  });
+  h.ready(); assert.deepEqual(legends.map(legend => legend.hidden), [false, true]);
+  const desired = { ...h.initial, lensId: ids[1] };
+  h.setState({ ...h.state(), committed: h.initial, desired, pending: true, plan: null });
+  assert.deepEqual(legends.map(legend => legend.hidden), [false, true]);
+  h.setState({ ...h.state(), committed: desired, desired, pending: false, plan: null });
+  assert.deepEqual(legends.map(legend => legend.hidden), [true, false]);
+  h.binding.destroy();
+});
