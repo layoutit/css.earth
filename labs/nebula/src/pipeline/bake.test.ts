@@ -13,6 +13,9 @@ test('bake arguments reject misspelled stages rather than unexpectedly running a
   assert.throws(() => parseBakeArgs(['--stage=asset']));
   assert.throws(() => parseBakeArgs(['--image']));
   assert.throws(() => parseBakeArgs(['--force']));
+  assert.equal(parseBakeArgs(['--if-missing']).ifMissing, true);
+  assert.throws(() => parseBakeArgs(['--if-missing', '--stage=assets']));
+  assert.throws(() => parseBakeArgs(['--if-missing', '--image=vista-infrared']));
 });
 
 test('acquisition rejects altered local sources without downloading or overwriting them', async () => {

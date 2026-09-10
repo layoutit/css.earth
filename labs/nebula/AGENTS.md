@@ -36,7 +36,7 @@ models/
 - Keep image/object choices in data. Shared algorithms must not gain per-image branches. Tests live beside the module; browser checks live in `browser/`.
 - Source originals and large native/intermediate outputs stay in the ignored local cache. Keep credits, source hashes, registration evidence and reproducible recipes with the model. No copies of large assets just to rearrange folders.
 - Keep only the selected VISTA, Horálek and WISE image candidates. Do not recommit retired cloud render banks or auto-discover old cache images. Preserve shared density/stars, coordinate-only calibration and research notes; new candidates require explicit scope.
-- Keep `models/lmc/bake.json` synchronized with deliberately accepted placements and material settings. Do not infer them from the newest cache or browser defaults. Native outputs and density slice textures are ignored; compact grids, star inputs, recipes and registration metadata remain tracked.
+- Keep `models/lmc/bake.json` synchronized with deliberately accepted placements and material settings. Do not infer them from the newest cache or browser defaults. Native outputs, separation previews and density/app slice textures are ignored; compact grids, star inputs, recipes and registration metadata remain tracked. The full bake restores the configured app textures against immutable delivery hashes; `prepare:nebulae` verifies or rebuilds them before app startup/build.
 - Historical receipts retain their original bytes and hashes. Resolve relocated historical paths at explicit loading boundaries; do not fabricate replacement provenance.
 
 ## Processing boundaries

@@ -3,10 +3,12 @@ import type { OverlayPlacement } from '../alignment/overlay-placement.js';
 import { parseCloudAppearance, type CloudAppearance } from '../reconstruction/cloud-appearance.js';
 import { parseReconstructionRequest } from '../reconstruction/reconstruction-preparation.js';
 import { json, pinned, type Pin } from './io.js';
+import type { BakeDelivery } from './delivery.js';
 
 export interface BakeRecipe {
   schema: 'cssearth-nebula-bake@1'; id: string; subjectId: string; densityObjects: string[];
   catalogue: Pin; separationPlan: Pin; stars: Pin; starAlignment: Pin; promotion: Pin;
+  delivery?: BakeDelivery;
   environment: { pythonVersions: string[]; packages: string[] };
   removal: { method: string; script: Pin; baselineScript: Pin; model: Pin & { url: string };
     tilePixels: number; stridePixels: number; paddingPixels: number; batchSize: number };
@@ -35,9 +37,11 @@ export async function readRecipe(root: string, path: string): Promise<BakeRecipe
 }
 export const stages = ['density', 'assets', 'removal', 'reconstruction', 'all'] as const;
 type BakeStage = typeof stages[number];
-export function parseBakeArgs(args: string[]): {recipe: string; stage: BakeStage; image?: string; python?: string} {
+export function parseBakeArgs(args: string[]): {recipe: string; stage: BakeStage; image?: string; python?: string; ifMissing: boolean} {
   let recipe = 'labs/nebula/models/lmc/bake.json', stage: BakeStage = 'all', image: string | undefined, python: string | undefined;
+  let ifMissing = false;
   for (const arg of args) {
+    if (arg === '--if-missing') { ifMissing = true; continue; }
     const [key, ...rest] = arg.split('='), value = rest.join('=');
     if (!value) throw new Error(`Expected --option=value: ${arg}`);
     if (key === '--recipe') recipe = value;
@@ -46,5 +50,6 @@ export function parseBakeArgs(args: string[]): {recipe: string; stage: BakeStage
     else if (key === '--stage' && stages.includes(value as BakeStage)) stage = value as BakeStage;
     else throw new Error(`Unknown bake option: ${arg}`);
   }
-  return { recipe, stage, image, python };
+  if (ifMissing && (stage !== 'all' || image)) throw new Error('--if-missing checks the complete application delivery; use it without --stage or --image.');
+  return { recipe, stage, image, python, ifMissing };
 }

@@ -126,5 +126,12 @@
       },
       "baselineSha256": "1044f3f7f8f6678ee9b75e28d5f4299fda068edc3c0af705be03b8655f2f4b56"
     }
-  ]
+  ],
+  "delivery": {
+    "directory": "src/objects/lmc",
+    "manifest": {
+      "path": "src/objects/lmc/source/lens-manifest.json",
+      "sha256": "a6748babbb14411e3a5784792c5a24836b754fd6447829b2dd67de78e5cd943e"
+    }
+  }
 }

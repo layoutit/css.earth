@@ -1,6 +1,6 @@
 import type { AppliedStarLayers } from '../star-removal/star-removal-types';
 import records from '../subjects.json';
-import { overlayVariantsPath, parseOverlayVariants, variantsForImage, type ImageLayer, type OverlayVariant } from './overlay-variants';
+import { parseOverlayVariants, variantsForImage, type ImageLayer, type OverlayVariant } from './overlay-variants';
 import sourceCatalog from '../../sources/index.json';
 import { defaultOverlayPlacement, updateOverlayPlacement, overlayPlacementTransform, type OverlayPlacement } from '../alignment/overlay-placement';
 import { readOverlaySessions, writeOverlaySessions, resolveSavedPlacement } from '../alignment/overlay-store';
@@ -363,7 +363,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       const manifestPath = subject.density!.overlays!, response = await fetch(localFile(manifestPath));
       if (!response.ok) throw new Error(`Density overlay catalogue is unavailable (HTTP ${response.status}).`);
       const parsed = parseOverlayCatalogue(await response.json());
-      const variantResponse = await fetch(localFile(overlayVariantsPath));
+      const variantResponse = await fetch('/__nebula/image-variants');
       if (!variantResponse.ok) throw new Error(`Image layer catalogue is unavailable (HTTP ${variantResponse.status}).`);
       const variants = parseOverlayVariants(await variantResponse.json());
       for (const item of parsed.overlays) item.variants = variantsForImage(variants, item);

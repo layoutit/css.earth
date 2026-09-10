@@ -6,6 +6,7 @@ import { mkdir, readFile, readdir, realpath, rename, rm, stat, utimes, writeFile
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import sharp from 'sharp';
 import { overlayVariantsPath, parseOverlayVariants, variantsForImage, type ImageLayer } from './overlay-variants.js';
+import { availableOverlayVariants } from './available-overlay-variants.js';
 import { resolveAppliedRemovalLayers } from '../star-removal/star-removal-preparation.js';
 import { resolveReconstructionSubject } from '../reconstruction/reconstruction-preparation.js';
 import type { Plugin } from 'vite';
@@ -217,6 +218,12 @@ export function createTonePreparer(repositoryRoot: string, options: { maximumCac
 export function tonePreparationPlugin(repositoryRoot: string): Plugin {
   const prepare = createTonePreparer(repositoryRoot);
   return { name: 'nebula-local-tone-preparation', configureServer(server) {
+    server.middlewares.use('/__nebula/image-variants', async (request, response) => {
+      response.setHeader('Content-Type', 'application/json'); response.setHeader('Cache-Control', 'no-store');
+      if (request.method !== 'GET') { response.statusCode = 405; response.end(JSON.stringify({error: 'Use GET.'})); return; }
+      try { response.end(JSON.stringify(await availableOverlayVariants(repositoryRoot))); }
+      catch (error) { response.statusCode = 500; response.end(JSON.stringify({error: error instanceof Error ? error.message : 'Image layer lookup failed.'})); }
+    });
     server.middlewares.use('/__nebula/prepare-tone', async (request, response) => {
       const reply = (status: number, value: unknown) => { response.statusCode = status; response.setHeader('Content-Type', 'application/json'); response.end(JSON.stringify(value)); };
       if (request.method !== 'POST') { reply(405, { error: 'Use POST for local tone preparation.' }); return; }

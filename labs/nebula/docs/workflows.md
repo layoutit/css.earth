@@ -67,4 +67,4 @@ Read [AGENTS.md](../AGENTS.md) for module ownership and development rules. Histo
 
 ## Replay without browser state
 
-Use the [bake command](baking.md) to rebuild the accepted three-source LMC bank. It owns acquisition, the saved baseline and NOX pass, fixed-density coloring, catalogue-star placement and saved display settings. Interactive jobs and the running server remain independent.
+Use the [bake command](baking.md) to rebuild the accepted three-source LMC bank. It owns acquisition, the saved baseline and NOX pass, fixed-density coloring, catalogue-star placement and saved display settings. It also restores ignored extraction previews and the configured app slice textures against their accepted hashes. Interactive jobs and the running server remain independent.

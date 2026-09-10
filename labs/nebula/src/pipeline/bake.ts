@@ -8,10 +8,18 @@ import { parseBakeArgs, readRecipe } from './config.js';
 import { bakeDensity, bakePreviews, bakeSeparationPreviews } from './assets.js';
 import { prepareBaseline, prepareEnvironment } from './removal.js';
 import { hash, json, localPath, pinned, writeAtomic } from './io.js';
+import { deliveryReady, restoreDelivery } from './delivery.js';
 
 export async function bakeNebula(root: string, args: string[]) {
   const options = parseBakeArgs(args), recipePath = localPath(root, options.recipe);
   const recipe = await readRecipe(root, recipePath);
+  if (options.ifMissing) {
+    assert.ok(recipe.delivery, 'This recipe has no application delivery.');
+    if (await deliveryReady(root, recipe.delivery)) {
+      console.log(`DELIVERY_CACHED ${recipe.delivery.directory}: every app asset verified`);
+      return;
+    }
+  }
   const selected = recipe.images.filter(image => !options.image || image.imageId === options.image);
   assert.ok(selected.length, `Unknown image: ${options.image}`);
   const catalogue = JSON.parse((await pinned(root, recipe.catalogue)).toString());
@@ -85,6 +93,7 @@ export async function bakeNebula(root: string, args: string[]) {
           for (const [path, pin] of Object.entries(manifest.outputs) as [string, {sha256: string}][]) await pinned(resolve(root, output), { path, sha256: pin.sha256 });
         }
       } finally { await rm(pending, { recursive: true, force: true }); }
+      if (recipe.delivery) await restoreDelivery(root, recipe.delivery, results);
     }
     controller.signal.throwIfAborted();
     const receipt = { schema: 'cssearth-nebula-bake-receipt@1', recipe: { path: options.recipe, sha256: hash(await readFile(recipePath)) },

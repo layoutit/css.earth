@@ -12,7 +12,7 @@ Open [Alignment](http://127.0.0.1:4331/alignment) or [Reconstruction](http://127
 - **Alignment:** inspect the full density field and registered image footprint. Adjust the saved fit, run automatic NOX removal, and compare Original / Without stars / Residual.
 - **Reconstruction:** choose a completed starless source, adjust brightness/gamma/color/detail, then press **Preview**. Settings persist per image. Progress and Cancel are explicit; refresh reconnects to the job. Switching completed sources loads their saved banks at the retained camera pose.
 - **Current LMC variants:** ESO VISTA, NASA/IPAC WISE and Horálek optical. They use separate color treatments and an approximate stellar-density depth prior. SMC has a neutral density model; extending this new reconstruction flow requires its own registered sources and recipe.
-- Large originals, native removal products and newly processed volumes stay in the ignored local cache. Density slice textures are also ignored and regenerated automatically at lab startup. Processing does not publish or replace production assets.
+- Large originals, native removal products and newly processed volumes stay in the ignored local cache. Neutral density slices regenerate at lab startup. Extraction previews and production LMC slice textures are also ignored; the full bake restores them against saved hashes. Interactive lab processing does not publish or replace production assets.
 
 The image catalogue contains only **ESO VISTA, Horálek optical and NASA WISE**. Retired image candidates and experimental render banks are removed. Reconstruction starts with the unpainted density reference when no saved result is selected. SMC retains its density field for future work.
 

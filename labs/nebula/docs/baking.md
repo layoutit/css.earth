@@ -10,7 +10,7 @@ pnpm lab:nebula
 
 The bake downloads missing native originals and the pinned NOX model, creates a local Python environment with pinned dependencies, and verifies hashes before processing. Large downloads and intermediate files stay in `.local/`. Allow several gigabytes of free space. The first full run takes minutes; later runs verify and reuse completed native removal/reconstruction results. Python package installation requires an available wheel for the machine's platform.
 
-The command does not need the browser's localStorage, a running server or previously completed image jobs. It does not restart the lab, change browser settings, install a production object or publish anything.
+The command does not need the browser's localStorage, a running server or previously completed image jobs. A full bake also restores the app's ignored LMC slice textures, matching the accepted delivery hashes. It does not restart the lab, change browser settings or publish anything.
 
 ## Stages and configuration
 
@@ -20,7 +20,7 @@ The command does not need the browser's localStorage, a running server or previo
 | Images | Three native originals, source hashes and accepted registration metadata | Full-footprint inspection previews; sky registration is preserved |
 | Removal | Saved baseline recipes, pinned NOX script/model and Python versions | Native starless image, residual and mask with exact subtraction checks |
 | Reconstruction | Shared density, catalogue/sky reference, saved placement and RGB controls | XYZ cloud banks plus the same 943 modeled catalogue stars for every image |
-| Lens bank | Saved cutoff, axis brightness, enabled cloud contributions, star exposure/size | A local three-lens object ready for a separate production handoff |
+| Lens bank | Saved cutoff, axis brightness, enabled cloud contributions, star exposure/size | A local three-lens bank and the app's 432 accepted slice textures |
 
 `models/lmc/bake.json` is the entry recipe. It records the accepted ESO VISTA, Horálek optical and NASA WISE placements and saturation, detail strength/scale, brightness and gamma. It references the existing source/alignment, baseline, catalogue and presentation recipes by hash. The historical result IDs in `app-lenses.json` are replaced with the newly produced IDs during replay; the recorded presentation settings remain unchanged.
 
@@ -30,7 +30,7 @@ The scalar grids and existing catalogue measurements are the pipeline's scientif
 
 ## Options
 
-All options are `--name=value`. Stages include their preceding dependencies and reuse verified completed results.
+Options with values use `--name=value`. Stages include their preceding dependencies and reuse verified completed results.
 
 | Option | Purpose |
 |---|---|
@@ -38,12 +38,15 @@ All options are `--name=value`. Stages include their preceding dependencies and 
 | `--stage=assets` | Neutral fields and original image previews; no Python or star removal |
 | `--stage=removal` | Stop after native baseline/NOX products and separation previews |
 | `--stage=reconstruction` | Stop after individual cloud variants |
-| `--stage=all` | Default; also assemble the local lens bank |
+| `--stage=all` | Default; also assemble the local lens bank and restore configured app textures |
+| `--if-missing` | Verify the complete app delivery; bake only if textures are absent. Cannot combine with an image filter or partial stage |
 | `--image=wise-wide-infrared` | Process just one configured image; also accepts `vista-infrared` or `horalek-widefield` |
 | `--recipe=<json>` | Select an explicitly configured source set |
 | `--python=<executable>` | Use an existing environment; verify package versions without modifying it |
 
 Only LMC has accepted color reconstructions. SMC currently supplies its neutral density field, not invented color lenses. New objects require their own approved source/registration/prior configuration and lab subject records before the same processors can be used.
+
+`pnpm prepare:nebulae` runs the `--if-missing` check automatically before app development, builds and shell tests. The first run on a clean checkout needs the same Python environment/downloads as a full bake. Later starts only verify the accepted files. A changed file is an error, not permission to silently replace it.
 
 ## Files and recovery
 
@@ -56,6 +59,13 @@ models/
     slices/                       ignored, regenerated textures
   lmc/candidates/                 tracked registration and three inspection previews
   lmc/stars/                      tracked catalogue input and sky-to-model reference
+  lmc/star-separation/
+    *.json, receipts/             tracked extraction configuration and reference hashes
+    prepared/                     ignored, regenerated starless/residual previews
+src/objects/lmc/
+  prepared/*/slices/              ignored, regenerated app textures
+  object.json, source/, prepared/*.json
+                                 tracked descriptor, settings and delivery manifest
 .local/
   open-star-removal/              downloaded model and Python environment
   nebula-lab/
@@ -67,9 +77,9 @@ models/
       lmc-<hash>/                 assembled local lens bank
 ```
 
-Small reference metadata and the three original/separation inspection previews remain versioned for the alignment tool. Runtime density textures and newly reconstructed banks are generated, not committed. The command can also recreate those previews from the originals.
+Reference metadata and the three original image inspection previews remain versioned for the alignment tool. The six starless/residual previews, neutral density textures and production LMC slice images are generated, not committed. Until extraction previews exist, Alignment offers the originals; completed removal jobs supply their own verified layers. The bake can recreate all these previews from the native originals.
 
-`BAKE_COMPLETE` is printed only after validating the output. The receipt identifies the recipe hash, source/result IDs and final output directory. Full lens-bank manifests pin every delivered file. A failed stage exits nonzero and leaves the previous completed results intact. Source mismatches are errors, never silent replacements.
+`BAKE_COMPLETE` is printed only after validating the output. The receipt identifies the recipe hash, source/result IDs and final output directory. Full lens-bank manifests pin every delivered file. App delivery preserves the checked-in metadata and restores texture bytes only after checking the whole selected set against its manifest. A failed stage exits nonzero and leaves the previous completed results intact. Source mismatches are errors, never silent replacements.
 
 One command can own a recipe at a time. An ordinary failure or Ctrl-C releases its lock. After a hard machine/process crash, inspect `.local/nebula-lab/bakes/lmc.lock/owner.json` and remove that lock only after confirming its PID is no longer running. Re-run the same command; verified completed removal/reconstruction stages are reused. An incomplete or altered saved result is reported rather than treated as a successful cache hit.
 
