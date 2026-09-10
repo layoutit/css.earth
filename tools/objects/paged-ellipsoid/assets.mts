@@ -43,6 +43,10 @@ if (mode === 'interior') {
   await prepareInteriorAssets({ exterior: false });
   return { assets: [...produced].sort() };
 }
+if (mode === 'shadowless') {
+  for (const density of [1, 2]) await prepareShadowlessMaterial(MATERIAL_TILE_SIZE * density, density === 2 ? '@2x' : '');
+  return { assets: [...produced].sort() };
+}
 if (mode !== 'materials') {
   const inputs = new Map<string, string | Buffer>();
   const bindings = parseMapFocusBindings(await readJsonSource(source('content/lens-bindings.json')));
@@ -276,18 +280,7 @@ async function prepareMaterialBanks() {
         `${config.namespace}-${role}-default${suffix}.webp`,
       ));
       if (role === "lighting") {
-        const shadowlessRgba = renderMaterialFrame({
-          size,
-          scenePitchDegrees: 40,
-          role,
-          atmosphereModel: ATMOSPHERE_MODEL,
-          shadowless: true,
-        });
-        await sharp(shadowlessRgba, {
-          raw: { width: size, height: size, channels: 4 },
-        }).webp({ lossless: true }).toFile(output(
-          `${config.namespace}-${role}-shadowless${suffix}.webp`,
-        ));
+        await prepareShadowlessMaterial(size, suffix);
       }
       for (let shardIndex = 0; shardIndex < shardCount; shardIndex += 1) {
         const shardWidth = stride * columns;
@@ -328,6 +321,13 @@ async function prepareMaterialBanks() {
   }
 }
 
+async function prepareShadowlessMaterial(size: number, suffix: string) {
+  const pixels = renderMaterialFrame({size, scenePitchDegrees: 40, role: 'lighting',
+    atmosphereModel: ATMOSPHERE_MODEL, shadowless: true});
+  await sharp(pixels, {raw: {width: size, height: size, channels: 4}})
+    .webp({lossless: true}).toFile(output(`${config.namespace}-lighting-shadowless${suffix}.webp`));
+}
+
 function renderMaterialFrame({
   size,
   scenePitchDegrees,
@@ -342,6 +342,7 @@ function renderMaterialFrame({
   const radius = size * config.material.discRadius;
   const center = (size - 1) / 2;
   const rgba = Buffer.alloc(size * size * 4);
+  const overlay = shadowless ? config.material.shadowlessOverlay : undefined;
   const radians = Math.PI / 180;
   const screenToObject = (vector: readonly number[]) => rotateZ(
     rotateX(
@@ -400,10 +401,16 @@ function renderMaterialFrame({
         const lightingFactor = Math.max(tint.r, tint.g, tint.b) /
           maximumLightingFactor;
         const desiredChannel = applyLinearTint(160, lightingFactor);
-        rgba[offset + 3] = Math.round(Math.max(
+        const shadowAlpha = Math.round(Math.max(
           0,
           Math.min(0.93, 1 - desiredChannel / 160),
         ) * 255);
+        if (overlay) {
+          rgba[offset] = overlay.color[0];
+          rgba[offset + 1] = overlay.color[1];
+          rgba[offset + 2] = overlay.color[2];
+        }
+        rgba[offset + 3] = overlay ? Math.round(shadowAlpha * overlay.opacity) : shadowAlpha;
         continue;
       }
 

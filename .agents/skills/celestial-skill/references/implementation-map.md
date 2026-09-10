@@ -90,6 +90,13 @@ instead of editing a shared list or atlas position.
 
 ## Choose examples by source needs
 
+- **Different meshes for different datasets:**
+  `geometry.radialTerrainAlternatives` binds each alternative profile to a
+  `lensId`. `tools/objects/terrestrial-layers/radial-models.mts` loads the models
+  at a common physical scale; `solid-scene.mts` prepares selection and picking
+  ranges in one retained scene. Borrelly (`comet-19p`) and Tuttle (`comet-8p`)
+  use this path. Verify only the selected model is visible and pickable, camera
+  behavior remains shared, and the combined prepared asset bank meets the budget.
 - **Observation mosaics:** Triton's `source/preparation/terrestrial.json` uses
   the shared `tools/objects/terrestrial-layers/` path for native image geometry,
   photometric correction, compositing and gaps. Reuse the capability with the

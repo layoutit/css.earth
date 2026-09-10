@@ -5,6 +5,13 @@ Keep original inputs intact and record transformations and limitations in the
 body's source record. Reuse helpers from the [implementation map](implementation-map.md);
 their algorithms are reusable, their body-specific parameters are not defaults.
 
+Paged ellipsoids can declare `material.shadowlessOverlay` with RGB byte values
+and an opacity from 0 to 1. This changes only the prepared Shadows-off overlay;
+an omitted setting retains the black shading. The asset preparer's `shadowless`
+mode rebuilds that overlay at both densities without rebuilding surface imagery
+or directional lighting. Treat a light-colored overlay as a display adjustment,
+not a physical illumination measurement.
+
 ## Photographic observations
 
 First separate source resolution, acquisition illumination, exposure steps and

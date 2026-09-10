@@ -7,6 +7,22 @@ requirement to fit a camera for an existing global mosaic. The
 locates the 67P example and reusable helpers. Keep all decoding, camera fitting,
 selection, level matching and atlas construction in preparation.
 
+## Match observations to their shape model
+
+Check the model version, coordinate origin, axes, longitude convention and
+rotation assumptions behind the observation geometry. The same body name or
+author does not establish compatibility between a paper, an archived mesh and
+an image's camera solution. A newer shape is not automatically a better host
+for imagery registered to an older one.
+
+When task scope allows it, a dataset may retain its matching source-backed mesh
+alongside other datasets' models. Use the existing prepared-model selection;
+do not add a renderer or force every dataset onto the body's default mesh.
+Transfer imagery between models only with a qualified correspondence. Keep
+camera controls, visibility checks, gap masks and coverage denominators tied
+to the actual selected model. Report coverage on different meshes separately;
+compare before/after percentages only on a common, justified surface basis.
+
 ## Bind observations and validate cameras
 
 Record each observation's pinned bytes, calibration level, units, filter,
