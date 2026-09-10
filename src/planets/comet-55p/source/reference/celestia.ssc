@@ -1,0 +1,89 @@
+# SPDX-FileCopyrightText: 2004, 2008 Grant Hutchison
+# SPDX-FileCopyrightText: 2007, 2009 Chris Laurel
+# SPDX-FileCopyrightText: 2025-2026 DaveBowman2001
+# SPDX-FileCopyrightText: 2025 AstroChara
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+# Catalog of Comets for Celestia
+# Version 1.7.0
+#
+# All EllipticalOrbit data for comets below were retrieved from
+# NASA/JPL's Small Body Database System (SBDB) unless noted
+# otherwise:
+#
+# https://ssd/jpl.nasa.gov/tools/sbdb_lookup.html#/
+#
+# The lists were divided into three groups, the Periodic Comets
+# (<200 years), Long-Period Comets (200-1000 years) and
+# Non-Periodic Comets (>1,000 years). Their geometric albedos
+# were assumed to be 0.04 unless noted otherwise
+#
+# Due to the established system of naming comets after their
+# discoverers, a large number of these objects are namesakes of
+# one another (e.g. ATLAS, Lovejoy, McNaught, NEOWISE etc.) For 
+# this SSC file, we only select the most significant comets that
+# share the same formal name.
+#
+# 
+# Density estimates for 1P, 17P, 19P, 21P, 29P, C/1983 H1, C/1995 O1, C/1996 B2
+# and C/2013 A1 are from Paradowski (2022), Acta Astronomica 72, 141-159
+#  "A New Indirect Method of Determining Density of Cometary Nuclei"
+#   https://doi.org/10.32023/0001-5237/72.2.4
+# 
+# Mass and density estimates for 2P, 19P, and 46P are from Sosa, et al. (2009)
+#  "Cometary masses derived from non-gravitational forces", MNRAS 393, 192-214
+#   https://doi.org/10.1111/j.1365-2966.2008.14183.x
+#
+# Radius for C/1956 R1 and C/2006 P1 are derived from Equation 1 of
+# Fernandez, et al. (2012), MNRAS 423, 1674-1690
+#  "Magnitude and size distribution of long-period comets in Earth-crossing or approaching orbits"
+#   https://doi.org/10.1111/j.1365-2966.2012.20989.x
+#
+# Bond and Geometric Albedos for 2P, 19P, 21P, 46P, 55P, 96P, and 153P
+# are from Rondon (2025), MNRAS 538, 2869-2904
+#  "Secular light curves of periodic comets observed by SWAN/SOHO"
+#   https://doi.org/10.1093/mnras/staf454
+#
+#
+# Last update: 9 July 2026
+
+
+"55P Tempel-Tuttle:Tempel-Tuttle:P 1366 E1:P 1699 U1:P 1865 Y1:P 1965 M2:P 1997 E1" "Sol"
+{
+	Class	"comet"
+	Mesh	"asteroid.cms"
+	Texture	"asteroid.jpg"
+	Color	[ 0.235 0.219 0.204 ]
+	BlendTexture	true
+	Radius	 1.8				# D = 3.6 km
+	Mass<kg>	1.2e13
+
+	# Mass estimates from Jewitt (2004)
+	# https://ui.adsabs.harvard.edu/abs/2004come.book..659J
+
+	EllipticalOrbit
+	{
+		Epoch			2451040.500000	# 1998-Aug-15, 00:00
+		Period		         33.24178275837982
+		SemiMajorAxis	     10.3383382297577
+		Eccentricity	      0.905552720972412
+		Inclination	        162.486575379434
+		AscendingNode	    235.270989149082
+		ArgOfPericenter	    172.5002736828059
+		MeanAnomaly	          4.97833968468816
+	}
+
+	# Rotation period from IAU Circular No. 6816 (1998)
+	# http://www.cbat.eps.harvard.edu/iauc/06800/06816.html
+
+	UniformRotation
+	{
+		Period			 15.31
+		Inclination		162
+		AscendingNode	235
+	}
+
+	GeomAlbedo		  0.78
+	BondAlbedo		  0.7
+	InfoURL	"https://en.wikipedia.org/wiki/55P/Tempel-Tuttle"
+}

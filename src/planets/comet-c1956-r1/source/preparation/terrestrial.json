@@ -1,0 +1,121 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "comet-c1956-r1",
+  "displayName": "Arend–Roland",
+  "publicBase": "/scenes/comet-c1956-r1/",
+  "distanceAu": 95.24827628303814,
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 100,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [],
+    "observedColors": [],
+    "mosaics": [],
+    "shapeViews": [
+      {
+        "id": "model",
+        "consumer": "shape",
+        "label": "Illustrative nucleus"
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 1.1651742343632927,
+    "camera": {
+      "initialScenePitchDegrees": 20,
+      "defaultControlYawDegrees": 0,
+      "framingScale": 0.85
+    },
+    "mapUrl": "/scenes/comet-c1956-r1/comet-c1956-r1-model-surface@2x.webp",
+    "polesUrl": "/scenes/comet-c1956-r1/comet-c1956-r1-model-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/model.obj",
+      "format": "wavefront-obj",
+      "grid": {
+        "metersPerUnit": 1,
+        "expectedVertices": 4802,
+        "expectedFaces": 9600
+      },
+      "faceBudget": 800,
+      "tileSize": 64,
+      "atlasColumns": 16,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 79
+      },
+      "primitive": "u",
+      "sourceLighting": {
+        "maximumDistanceMeters": 31.6,
+        "rayOffsetMeters": 0.25,
+        "ambient": 0.16,
+        "diffuse": 0.84,
+        "floodLights": [
+          {
+            "direction": [
+              0,
+              0,
+              1
+            ],
+            "weight": 0.36
+          },
+          {
+            "direction": [
+              0,
+              1,
+              0
+            ],
+            "weight": 0.24
+          },
+          {
+            "direction": [
+              1,
+              0,
+              0
+            ],
+            "weight": 0.24
+          }
+        ],
+        "uniformFlood": true
+      },
+      "thumbnail": {
+        "size": 96,
+        "longitudeDegrees": 70,
+        "latitudeDegrees": 20,
+        "ambient": 1,
+        "diffuse": 0
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; body attitude is explicitly illustrative.",
+    "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
+  },
+  "presentation": {
+    "defaultLens": "model",
+    "pointColor": [
+      184,
+      182,
+      178
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

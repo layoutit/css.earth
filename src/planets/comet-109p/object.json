@@ -1,0 +1,122 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "comet-109p",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Swift–Tuttle",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "bb1645223a79d0e1f043878d6b694c51f0fdc61826bf2a7829cb9dc2f9b8dd86"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "6230eb49208a2aca4e29ee7b8eca6f718127f7ab4782cfed8063965cc0045dd4"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "c6b3be727392db49927558164f5f461c0bd1cb10ef883e9a8c2261a66f06aa98"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "1f1f6341ad9ddcf555ce8e5a89f649d39fa4f49d05c76ab2fc73b7acaf45b6cc"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "77ed8ddd53e491dff19c9b93fb14ae424d6c53620f787fce787e1b891a2642a3"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 8.701934155371427
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/styles/comet-109p-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f28b412765efe0a8f48fe9f1933d9f8d2d3b74055cbd2890bf1c408d28b092f1"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4981790726479.676,
+        3495008482589.341,
+        -2073334654960.9004
+      ],
+      "presentationToReference": [
+        -0.9021844833720946,
+        0,
+        -0.4313503888518322,
+        0.39575624423812245,
+        0.3977771559319137,
+        -0.8277380801710488,
+        0.1715813308876068,
+        -0.9174820620691818,
+        -0.35886837792165466
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 37.834496327701856,
+      "bodyRadiusM": 8701.934155371428
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "fb4c63fafef3e3ba4982ddf8107315354b0d600b5454ac36076ec82286bb898b"
+  }
+}

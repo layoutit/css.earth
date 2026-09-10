@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "huya",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6f89a3016764b43a751cf8ef6a4776c9856a17effd0cf690e64956ec9725ea0e"
+    "sha256": "dd853e46a84c93b54ec9b4ac2d8bf5274171156254f14f0181722bf83a1a0d74"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -245,7 +245,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 207350.21245858006
       },
-      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with docs/distant-worlds/author.py.",
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/outer-worlds/inputs.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
@@ -270,7 +270,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 207350.21245858006
       },
-      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with docs/distant-worlds/author.py.",
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/outer-worlds/inputs.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
       "sha256": "ec446a226da81051a2d60296252027374ffba715e1d2e77004e401958cc21199",
       "bytes": 65105,

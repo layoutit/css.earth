@@ -435,6 +435,26 @@ import sunDescriptor from "../src/planets/sun/object.json" with { type: "json" }
 import mercuryDescriptor from "../src/planets/mercury/object.json" with { type: "json" };
 import venusDescriptor from "../src/planets/venus/object.json" with { type: "json" };
 import { defineObject, defineObjects } from "./object-schema.mjs";
+import comet17pDescriptor from "../src/planets/comet-17p/object.json" with { type: "json" };
+import comet21pDescriptor from "../src/planets/comet-21p/object.json" with { type: "json" };
+import comet26pDescriptor from "../src/planets/comet-26p/object.json" with { type: "json" };
+import comet29pDescriptor from "../src/planets/comet-29p/object.json" with { type: "json" };
+import comet46pDescriptor from "../src/planets/comet-46p/object.json" with { type: "json" };
+import comet55pDescriptor from "../src/planets/comet-55p/object.json" with { type: "json" };
+import comet96pDescriptor from "../src/planets/comet-96p/object.json" with { type: "json" };
+import comet109pDescriptor from "../src/planets/comet-109p/object.json" with { type: "json" };
+import comet167pDescriptor from "../src/planets/comet-167p/object.json" with { type: "json" };
+import comet153pDescriptor from "../src/planets/comet-153p/object.json" with { type: "json" };
+import cometc1983h1Descriptor from "../src/planets/comet-c1983-h1/object.json" with { type: "json" };
+import cometc1956r1Descriptor from "../src/planets/comet-c1956-r1/object.json" with { type: "json" };
+import cometc1973e1Descriptor from "../src/planets/comet-c1973-e1/object.json" with { type: "json" };
+import cometc1995o1Descriptor from "../src/planets/comet-c1995-o1/object.json" with { type: "json" };
+import cometc1996b2Descriptor from "../src/planets/comet-c1996-b2/object.json" with { type: "json" };
+import cometc2006p1Descriptor from "../src/planets/comet-c2006-p1/object.json" with { type: "json" };
+import cometc2013a1Descriptor from "../src/planets/comet-c2013-a1/object.json" with { type: "json" };
+import cometc2014un271Descriptor from "../src/planets/comet-c2014-un271/object.json" with { type: "json" };
+import cometc2020f3Descriptor from "../src/planets/comet-c2020-f3/object.json" with { type: "json" };
+import cometc2023a3Descriptor from "../src/planets/comet-c2023-a3/object.json" with { type: "json" };
 import comet67pDescriptor from "../src/planets/comet-67p/object.json" with { type: "json" };
 
 import comet103pDescriptor from "../src/planets/comet-103p/object.json" with { type: "json" };
@@ -549,6 +569,46 @@ export const OBJECTS = defineObjects([
     "Explore Albiorix, a moon of Saturn, through its lightcurve-constrained shape approximation.", packaged(albiorixDescriptor), albiorixDescriptor.properties.worldFrame),
   object("kiviuq", "Kiviuq", "satellite", "#a0a0a0", 9.58,
     "Explore Kiviuq, a moon of Saturn, through its lightcurve-constrained shape approximation.", packaged(kiviuqDescriptor), kiviuqDescriptor.properties.worldFrame),
+  object("comet-17p", "Holmes", "comet", "#b8b6b2", 3.840891878074923,
+    "17P: Holmes became about a million times brighter during its 2007 outburst. The expanding dust cloud was enormous compared with the small nucleus that released it. Illustrative nucleus at Celestia’s catalog scale.", packaged(comet17pDescriptor), comet17pDescriptor.properties.worldFrame),
+  object("comet-21p", "Giacobini–Zinner", "comet", "#b8b6b2", 4.58488201074323,
+    "21P: Giacobini–Zinner was the first comet visited by a spacecraft, when ICE passed through its tail in 1985. Its dust also feeds the Draconid meteor shower. Illustrative nucleus at Celestia’s catalog scale.", packaged(comet21pDescriptor), comet21pDescriptor.properties.worldFrame),
+  object("comet-26p", "Grigg–Skjellerup", "comet", "#b8b6b2", 4.942382761297321,
+    "26P: Grigg–Skjellerup was Giotto’s second comet encounter. The spacecraft passed about 200 km from its nucleus in July 1992, six years after visiting Halley. Illustrative nucleus at Celestia’s catalog scale.", packaged(comet26pDescriptor), comet26pDescriptor.properties.worldFrame),
+  object("comet-29p", "Schwassmann–Wachmann 1", "comet", "#b8b6b2", 6.3177563009608955,
+    "29P: Schwassmann–Wachmann 1 releases gas and dust far from the Sun. Webb detected several jets with different mixtures of carbon monoxide and carbon dioxide. Illustrative nucleus at Celestia’s catalog scale.", packaged(comet29pDescriptor), comet29pDescriptor.properties.worldFrame),
+  object("comet-46p", "Wirtanen", "comet", "#b8b6b2", 5.038736344622292,
+    "46P: Wirtanen was Rosetta’s planned destination before a launch delay changed the mission’s target to 67P. Its small nucleus returns to the inner Solar System roughly every five years. Illustrative nucleus at Celestia’s catalog scale.", packaged(comet46pDescriptor), comet46pDescriptor.properties.worldFrame),
+  object("comet-55p", "Tempel–Tuttle", "comet", "#b8b6b2", 12.265992818638155,
+    "55P: Tempel–Tuttle supplies the dust that makes the Leonid meteor shower. Earth encounters these particles as it crosses the comet’s trail each November. Illustrative nucleus at Celestia’s catalog scale.", packaged(comet55pDescriptor), comet55pDescriptor.properties.worldFrame),
+  object("comet-96p", "Machholz 1", "comet", "#b8b6b2", 5.448413475057264,
+    "96P: Machholz 1 repeatedly sweeps close to the Sun. SOHO and STEREO have watched its passages from different sides of Earth’s orbit. Illustrative nucleus at Celestia’s catalog scale.", packaged(comet96pDescriptor), comet96pDescriptor.properties.worldFrame),
+  object("comet-109p", "Swift–Tuttle", "comet", "#b8b6b2", 42.97520994740105,
+    "109P: Swift–Tuttle leaves the dust behind the Perseid meteor shower. Its long orbit carries it far beyond the planets before it returns to the inner Solar System. Illustrative nucleus at Celestia’s catalog scale.", packaged(comet109pDescriptor), comet109pDescriptor.properties.worldFrame),
+  object("comet-167p", "CINEOS", "comet", "#b8b6b2", 19.938682340272877,
+    "167P: CINEOS follows a distant orbit that stays beyond Saturn at its closest approach to the Sun. Its nucleus is represented here by a size illustration from Celestia’s catalog. Illustrative nucleus at Celestia’s catalog scale.", packaged(comet167pDescriptor), comet167pDescriptor.properties.worldFrame),
+  object("comet-153p", "Ikeya–Zhang", "comet", "#b8b6b2", 42.26044339943092,
+    "153P: Ikeya–Zhang brightened the skies in 2002. Its journey around the Sun takes centuries, unlike the frequent returns of comets such as Encke. Illustrative nucleus at Celestia’s catalog scale.", packaged(comet153pDescriptor), comet153pDescriptor.properties.worldFrame),
+  object("comet-c1983-h1", "IRAS–Araki–Alcock", "comet", "#b8b6b2", 62.962581525461886,
+    "C/1983 H1: IRAS–Araki–Alcock was discovered in 1983 by the IRAS satellite and two independent observers. Its name records all three discoveries. Illustrative nucleus at Celestia’s catalog scale.", packaged(cometc1983h1Descriptor), cometc1983h1Descriptor.properties.worldFrame),
+  object("comet-c1956-r1", "Arend–Roland", "comet", "#b8b6b2", 95.24827628303814,
+    "C/1956 R1: Arend–Roland is remembered as the Great Comet of 1957. Its bright appearance came during a close passage around the Sun. Illustrative nucleus at Celestia’s catalog scale.", packaged(cometc1956r1Descriptor), cometc1956r1Descriptor.properties.worldFrame),
+  object("comet-c1973-e1", "Kohoutek", "comet", "#b8b6b2", 78.55468108744893,
+    "C/1973 E1: Kohoutek passed close to the Sun in late 1973. It is now travelling outward into the distant Solar System. Illustrative nucleus at Celestia’s catalog scale.", packaged(cometc1973e1Descriptor), cometc1973e1Descriptor.properties.worldFrame),
+  object("comet-c1995-o1", "Hale–Bopp", "comet", "#b8b6b2", 51.070270471508714,
+    "C/1995 O1: Hale–Bopp remained visible to the naked eye for about 18 months in 1996 and 1997. Its unusually large nucleus helped make it one of the most memorable comets of the twentieth century. Illustrative nucleus at Celestia’s catalog scale.", packaged(cometc1995o1Descriptor), cometc1995o1Descriptor.properties.worldFrame),
+  object("comet-c1996-b2", "Hyakutake", "comet", "#b8b6b2", 54.30204219906463,
+    "C/1996 B2: Hyakutake passed just 0.10 AU from Earth in March 1996. Its close approach made it a striking sight despite its much smaller nucleus than Hale–Bopp’s. Illustrative nucleus at Celestia’s catalog scale.", packaged(cometc1996b2Descriptor), cometc1996b2Descriptor.properties.worldFrame),
+  object("comet-c2006-p1", "McNaught", "comet", "#b8b6b2", 40.6783719290027,
+    "C/2006 P1: McNaught became exceptionally bright during its January 2007 passage around the Sun. JPL lists it among history’s great comets. Illustrative nucleus at Celestia’s catalog scale.", packaged(cometc2006p1Descriptor), cometc2006p1Descriptor.properties.worldFrame),
+  object("comet-c2013-a1", "Siding Spring 2013", "comet", "#b8b6b2", 27.900222087262012,
+    "C/2013 A1: This Siding Spring comet passed close to Mars in October 2014. It is a different object from the short-period comet 162P/Siding Spring. Illustrative nucleus at Celestia’s catalog scale.", packaged(cometc2013a1Descriptor), cometc2013a1Descriptor.properties.worldFrame),
+  object("comet-c2014-un271", "Bernardinelli–Bernstein", "comet", "#b8b6b2", 13.653451901646743,
+    "C/2014 UN271: Bernardinelli–Bernstein has an exceptionally large nucleus. ALMA detected carbon monoxide escaping while the comet was still more than 16 AU from the Sun. Illustrative nucleus at Celestia’s catalog scale.", packaged(cometc2014un271Descriptor), cometc2014un271Descriptor.properties.worldFrame),
+  object("comet-c2020-f3", "NEOWISE", "comet", "#b8b6b2", 18.5185079289819,
+    "C/2020 F3: NEOWISE was discovered by NASA’s infrared survey telescope in March 2020. Within months it became a bright comet visible to observers on Earth. Illustrative nucleus at Celestia’s catalog scale.", packaged(cometc2020f3Descriptor), cometc2020f3Descriptor.properties.worldFrame),
+  object("comet-c2023-a3", "Tsuchinshan–ATLAS", "comet", "#b8b6b2", 8.346468275204865,
+    "C/2023 A3: Tsuchinshan–ATLAS became a bright evening comet in October 2024. Its tail stretched across SOHO’s field of view as it passed near the Sun. Illustrative nucleus at Celestia’s catalog scale.", packaged(cometc2023a3Descriptor), cometc2023a3Descriptor.properties.worldFrame),
   object("comet-2p", "Encke", "comet", "#b8b6b2", 2.217736510492418,
     "Explore 2P/Encke through a shape approximation constrained by radar observations.", packaged(comet2pDescriptor), comet2pDescriptor.properties.worldFrame),
   object("comet-209p", "LINEAR", "comet", "#b8b6b2", 2.9567815032538625,

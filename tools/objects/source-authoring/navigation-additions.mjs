@@ -11,8 +11,9 @@ import { loadMarkerDescriptors, prepareContextMarkers } from '../../../tools/pre
 import { renderMarker } from '../../../src/navigation/marker-recipe.mjs';
 
 const argument = name => process.argv.find(arg => arg.startsWith(`--${name}=`))?.slice(name.length + 3);
-const base = argument('base');
-if (!base || !argument('inputs') || !argument('evidence')) throw new Error('--base, --inputs and --evidence are required.');
+const baseRef = argument('base');
+if (!baseRef || !argument('inputs') || !argument('evidence')) throw new Error('--base, --inputs and --evidence are required.');
+const base = execFileSync('git', ['rev-parse', '--verify', `${baseRef}^{commit}`], { encoding: 'utf8' }).trim();
 const root = resolve(import.meta.dirname, '../../..');
 const git = path => execFileSync('git', ['show', `${base}:${path}`], { maxBuffer: 16 * 1024 * 1024 });
 const oldText = git('site/prepared-navigation-markers.mjs').toString();

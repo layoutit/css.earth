@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "asteroid-2003-vs2",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ef42048ac8585df325f3d858e9c3dd06c65e00b5433eda8e867820578f0f238d"
+    "sha256": "283cb40dd42b29f389800dad6976f866bf0d032b4c6895fe8f17e09717e183f6"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -245,7 +245,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 262094.95810145818
       },
-      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with docs/distant-worlds/author.py.",
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/outer-worlds/inputs.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
@@ -270,7 +270,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 262094.95810145818
       },
-      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with docs/distant-worlds/author.py.",
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/outer-worlds/inputs.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
       "sha256": "46ce5d051cc7192152bcb6c4628b14de72e9c1fe304d1cf805aad080983cf46c",
       "bytes": 65105,

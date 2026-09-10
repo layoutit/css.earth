@@ -1,0 +1,122 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "comet-c1956-r1",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Arend–Roland",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "3beb9c05d111f0361ea0b2eb03299fab4eb1f20f6d18556d72a5e286cda7f864"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "09763fcccc777cc0cc451e94347acc1f8cfdbb4ba2af745b06317e66a0e15040"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "e6117f92074b8ca8590d40b05d48d45f0e4ac7ae09e8857bb82cf8bba8d39883"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "d969df849f2eeabadef8316b0dae38afec41c1f58367db772e1e007944f4f779"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "77ed8ddd53e491dff19c9b93fb14ae424d6c53620f787fce787e1b891a2642a3"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 1.1651742343632927
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/styles/comet-c1956-r1-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "78f763d4bbc0033af9266778198d5d33a6e52879f4689e964edf1759d3133944"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2586104664652.224,
+        4396136549300.119,
+        13304823104512.623
+      ],
+      "presentationToReference": [
+        0.2672240345547802,
+        0,
+        -0.963634430350154,
+        0.8841173042385206,
+        0.3977771559319137,
+        0.24517325825776606,
+        0.3833117630627541,
+        -0.9174820620691818,
+        0.10629561646185191
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 5.065974932014316,
+      "bodyRadiusM": 1165.1742343632927
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "1f6cfbbf17d2b0b2a9411fda863eeda74e753fdb106533cb420260ef17229265"
+  }
+}
