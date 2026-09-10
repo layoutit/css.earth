@@ -1,0 +1,207 @@
+{
+  "schema": "cssasteroid-2003-vs2-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "published-shape",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 65105,
+      "expectedSha256": "46ce5d051cc7192152bcb6c4628b14de72e9c1fe304d1cf805aad080983cf46c",
+      "origin": "https://doi.org/10.1051/0004-6361/202141842",
+      "credit": "Vara-Lubiano et al. (2022), A&A, Table7 and §4.3 (2019 occultation).",
+      "license": "MIT numeric extraction of published scientific facts",
+      "licenseEvidence": [
+        "https://doi.org/10.1051/0004-6361/202141842"
+      ],
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Published triaxial interpretation with semiaxes 339 ±5, 235 ±6 and 226 ±8 km, using the observed light-curve amplitude and original occultation chords. It is not a homogeneous Jacobi-equilibrium figure. The smooth model does not reproduce local terrain. Uses the published model-derived ecliptic pole (longitude 228°, latitude 39°), converted using J2000 mean obliquity 23.439291111°; J2000 is assumed because the paper does not specify equinox. The 59°/121° aspect ambiguity and unquoted pole uncertainty remain; prime meridian and rotational phase are arbitrary. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 262094.95810145818
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/outer-worlds/inputs.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth missing-coverage grid",
+      "license": "MIT",
+      "consumers": [
+        "surfaces"
+      ],
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "coverage": "Authored neutral material; no observed imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 262094.95810145818
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/outer-worlds/inputs.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3923,
+      "expectedSha256": "7bd1c4f7324ecf7397b210eee6f1f3c7cc6f6f272cf01dc6834e9e0c47fd629c",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 3226,
+      "expectedSha256": "254197ebafe89ef280dac1d416f9b30ae5a003140a0afc38d691248d5bb226e3",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1003,
+      "expectedSha256": "88b2e16fd89eb2c864813d23095e0114696c4295ec8e3e53589bf17021b5021b",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1285,
+      "expectedSha256": "7bf4788219148b4f10e8e92599c82827eb9d0271b455a2535d3b61831a5112f3",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 604,
+      "expectedSha256": "749f0066bb87789ebac3a1f163b4d3b005c7dae3d8ea030a735dbe4c7c4dbf21",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3181,
+      "expectedSha256": "c92e72deb05a163144a3ea1df3afd21bffe77b5d11fdefe31ae5a6811d552720",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4805,
+      "expectedSha256": "5df4697e235e0e749459f5d0401fc86817520e0235e5d8c994963611fbbbeb4d",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "expectedBytes": 7355,
+      "expectedSha256": "4229f5f5e19a63f58c84ed80a4f7f33ded7417f2b54362b9fa85951c505f1a04",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "expectedBytes": 6645,
+      "expectedSha256": "816820675fd162dd1549ae510e1a4502dd26632ad5ae0d171814909a0ab6874d",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "reference/outer-worlds-gomez-limon-2026.pdf",
+      "expectedBytes": 6130177,
+      "expectedSha256": "7cfae421b8edec8742552721a4d559d4e9dc83209dc426f40a9c56830355f7d9",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "reference/vs2-vara-lubiano-2022-publisher.pdf",
+      "expectedBytes": 2151178,
+      "expectedSha256": "8cc2589921d078f7d88fd6c38b2fddedcd91e1e98e630070b84cc5c1a327b810",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 860,
+      "expectedSha256": "655888307edc7cb18ea54356ae93c1339fc57e63a0f0058791f12f74517879ac",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-source-context",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.1051/0004-6361/202141842",
+      "credit": "Vara-Lubiano et al. (2022), A&A, Table7 and §4.3 (2019 occultation).",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "published-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 68135,
+      "expectedSha256": "e85f6821365c6a126ebb751fed1469e012dbddad9b91d30f8ddbad73415580fc"
+    }
+  ]
+}

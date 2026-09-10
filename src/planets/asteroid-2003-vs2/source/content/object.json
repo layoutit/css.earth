@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "asteroid-2003-vs2",
+  "displayName": "2003 VS2",
+  "panel": {
+    "introduction": "2003 VS2 is an elongated world beyond Neptune. A multi-site occultation and rotational brightness measurements support this smooth triaxial shape.",
+    "facts": [
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Occultation and light-curve shape"
+      },
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "678 × 470 × 452 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation",
+        "value": "7.41753 ±0.00001 hours; arbitrary phase"
+      },
+      {
+        "id": "class",
+        "label": "Population",
+        "value": "Plutino (3:2 resonance with Neptune)"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "uncertainty",
+        "label": "Shape interpretation",
+        "value": "Published triaxial interpretation with semiaxes 339 ±5, 235 ±6 and 226 ±8 km, using the observed light-curve amplitude and original occultation chords. It is not a homogeneous Jacobi-equilibrium figure. The smooth model does not reproduce local terrain."
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Published triaxial interpretation with semiaxes 339 ±5, 235 ±6 and 226 ±8 km, using the observed light-curve amplitude and original occultation chords. It is not a homogeneous Jacobi-equilibrium figure. The smooth model does not reproduce local terrain. Uses the published model-derived ecliptic pole (longitude 228°, latitude 39°), converted using J2000 mean obliquity 23.439291111°; J2000 is assumed because the paper does not specify equinox. The 59°/121° aspect ambiguity and unquoted pole uncertainty remain; prime meridian and rotational phase are arbitrary. The grid marks unmapped terrain.",
+        "title": "Occultation and light-curve shape",
+        "detail": "Inferred shape · unmapped surface grid",
+        "thumbnail": "/scenes/asteroid-2003-vs2/asteroid-2003-vs2-model-thumbnail.webp",
+        "surface": "asteroid-2003-vs2-model-surface@2x.webp",
+        "poles": "asteroid-2003-vs2-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1051/0004-6361/202141842"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "Vara-Lubiano et al. (2022), A&A, Table 7 and §4.3 (2019 occultation).",
+      "href": "https://doi.org/10.1051/0004-6361/202141842"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://doi.org/10.1051/0004-6361/202141842"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.1051/0004-6361/202141842",
+      "credit": "Vara-Lubiano et al. (2022), A&A, Table 7 and §4.3 (2019 occultation)."
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Vara-Lubiano et al. (2022), A&A, Table 7 and §4.3 (2019 occultation)."
+    }
+  }
+}

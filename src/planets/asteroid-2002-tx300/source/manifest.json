@@ -1,0 +1,201 @@
+{
+  "schema": "cssasteroid-2002-tx300-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "published-shape",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 65105,
+      "expectedSha256": "75730ca4af8be9d8f37bb4d3a53b9346c4bfeedb1ceea91f94f23c3ac9d3763a",
+      "origin": "https://doi.org/10.1051/0004-6361/201732564",
+      "credit": "Vilenius et al. (2018), A&A 618, A136, §3.3 and Table 6.",
+      "license": "MIT numeric extraction of published scientific facts",
+      "licenseEvidence": [
+        "https://doi.org/10.1051/0004-6361/201732564"
+      ],
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "The adopted example projected ellipse is 363 ×289km from the published timing-error reanalysis, with effective diameter 323 (+95/−37)km. This axisymmetric illustration assumes363 km equatorial depth. The original two chords do not uniquely determine the shape; an old286km circular fit is not treated as definitive. Illustrative ICRF pole (RA 0°, Dec +90°), arbitrary prime meridian and rotational phase. A projected limb position angle is not an inertial pole measurement. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 168218.47903786332
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/outer-worlds/inputs.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth missing-coverage grid",
+      "license": "MIT",
+      "consumers": [
+        "surfaces"
+      ],
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "coverage": "Authored neutral material; no observed imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 168218.47903786332
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/outer-worlds/inputs.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3922,
+      "expectedSha256": "02799c9693a3b271c5c382ce7a16f361445653cff135470c571dd61d224931ce",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 2524,
+      "expectedSha256": "294c04681585323e1dd6f59c9029c305fe96527c787082be311954039be77ef4",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 728,
+      "expectedSha256": "82e6913ccc738b7e096d4ead292217b3d566364a22509b8279f1ceb5f25a2c4c",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1274,
+      "expectedSha256": "1615ba45a65bab559ab0d515d3890bc944fba34dc045c3c5c23fbaca09222e9c",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 417,
+      "expectedSha256": "a9ed5628b91af2c8cf29bfb50eb87e13afa00ec0dfeb3ccfe0f3ab438e65019c",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2952,
+      "expectedSha256": "d09a85d9ab11b7d4b11efcc8f0ac00b7207c14693c2e7c74bd3fc1637b8af2e1",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 5581,
+      "expectedSha256": "413d2ffa787b9f6c01d4fb9a181502685f5ef6aadfd84658d47d4bf6448658e9",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "expectedBytes": 7355,
+      "expectedSha256": "38d9c200824a3d2993ec9f17f30f19bdfc1a965bbb29e4c079c4b5ec257d3380",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "expectedBytes": 6645,
+      "expectedSha256": "e3d8301d26245046ed0a58f815d6c3073eafae4727078c06ce9b60df19bc5eb3",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "reference/tx300-vilenius-2018.pdf",
+      "expectedBytes": 535526,
+      "expectedSha256": "294601d107c3dcb9bbe8d8f193e63d2ae12eed4ae4349590a7c35099a8c3a130",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 862,
+      "expectedSha256": "b94934a1048b0efec4a8f6dfc3fa5ed1602de6c6d0e14e4f293533918f149064",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-source-context",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.1051/0004-6361/201732564",
+      "credit": "Vilenius et al. (2018), A&A 618, A136, §3.3 and Table 6.",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "published-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 78618,
+      "expectedSha256": "8dcb080bfa371bed58c544a4879a1e1fffd3cea9af51eb79915d6d0fbf4ed2e6"
+    }
+  ]
+}

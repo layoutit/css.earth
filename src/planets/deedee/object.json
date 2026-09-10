@@ -1,0 +1,122 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "deedee",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "DeeDee (2014 UZ224)",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "c4cf9d9c0ebb1f8c020876f744aa8aebf94ce2d11a5dffb857eb721f72592ea0"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "9d8e0d3c431fc481aa19d4700a1836aad2167d2c1dfd288fd5ba0ce17e832f0c"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "4221be3842714dc17cb1a34164a7206928e408258b46215c38b3939c9a69d50a"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "3723a150302d9adf1fc62e411d9ed98d5181aa6f8c79c5372fcc98c8f0887222"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "ef2c0418fd75490806b7e72c0c9e626dcbee1bd0d58d7096bfa54c505b8edd8f"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "26f4bc6c8e6d65b667368aac75cd3f10b49df7f484611d5f782d452b20789b96"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 317.5
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/deedee-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4197feb613d3e972a1b743a34451c6e679bf49c14bae778c15187edb2c7ee88f"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        8114199144355.885,
+        9980060193588.52,
+        -2052582430250.1794
+      ],
+      "presentationToReference": [
+        0.6973351045324893,
+        0,
+        -0.716745249015759,
+        0.6576009090452678,
+        0.3977771559319137,
+        0.6397924496596967,
+        0.2851048866811999,
+        -0.9174820620691818,
+        0.2773839746124173
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1380.4347826086957,
+      "bodyRadiusM": 317500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "e77cd47a9ea85de54d0e1f8486fa67dc077684322b3b58545bcc967f8bf03d79"
+  }
+}
