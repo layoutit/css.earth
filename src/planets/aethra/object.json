@@ -1,0 +1,127 @@
+{
+  "id": "aethra",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Aethra",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 22.235
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "b221e75d6566e40d033b9a410a015aae90bca8289a7f0872805ce327654b2479"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "7b5b4e2422c48475df1df061f76481296d59d799e2e0cb46ed6a27694bdad832"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "e9bbf384205ecf73d087841a59f57950122725ffc1147b5c825fa4c0caeb2c37"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "652f1a290344d591407065f5e92228b7a18fded17e49fa541d9aa72bc10c296c"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "c7fba7629507ec4f732150ca58fe7c4c91af748cbb6acdd1d6c9df89d745c19a"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "f9b04cd53d6250e5a2ad9beef9d59f01e10c9adc28e58af77f74df27522fd89d"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/aethra-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "9c1d046460f3fcb6b04399893f59f65459f2df143e0d9eff7c4d5a0ebf3194b1"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        437395815018.5311,
+        -300057499076.11414,
+        111502025102.2775
+      ],
+      "presentationToReference": [
+        0.8843041011374233,
+        0,
+        0.46691140135097753,
+        -0.4283828353151063,
+        0.3977771559319137,
+        0.8113331502077973,
+        -0.1857266893015761,
+        -0.9174820620691817,
+        0.35175597032937167
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 96.67391304347827,
+      "bodyRadiusM": 22235
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "1b415fc960fb6201bfee1f40bb703352abe811d8a6c8b3371803485a2bd752bf"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "recipe": {
+    "id": "albedo",
+    "label": "Modeled albedo",
+    "consumer": "albedo-model",
+    "path": "science/albedo_arrokoth4_fp36h2_masked1.fits",
+    "labelPath": "science/albedo_arrokoth4_fp36h2_masked1.lblx",
+    "meshPath": "shape/arrokoth_porter_2024_v01.obj",
+    "format": "obj-uv-fits",
+    "grid": {
+      "width": 600,
+      "height": 1200,
+      "bitpix": -32,
+      "flipV": false
+    },
+    "sampling": "bilinear",
+    "sourceUnits": "fraction",
+    "displayUnits": "Fraction",
+    "minimum": 0.03,
+    "maximum": 0.08,
+    "colors": [
+      "#242424",
+      "#e4e4e4"
+    ],
+    "surfaceSampling": {
+      "method": "closest-source-point",
+      "maximumDistanceMeters": 250
+    }
+  },
+  "content": {
+    "id": "albedo",
+    "label": "Modeled albedo",
+    "description": "Published LORRI albedo fit in the released per-lobe OBJ UV mapping, shown with a grayscale stretch. The source retains a uniform baseline where imagery is unconstrained and supplies no observation-coverage mask; uniform areas must not be interpreted as measured albedo. This is a model map, not a global photograph.",
+    "title": "New Horizons fitted albedo with uniform unconstrained-source fill",
+    "detail": "Fitted scalar · includes source fill",
+    "thumbnail": "/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
+    "surface": "arrokoth-albedo-surface@2x.webp",
+    "poles": "arrokoth-albedo-poles@2x.webp",
+    "source": {
+      "id": "lorri-albedo-model",
+      "path": "../manifest.json",
+      "url": "https://doi.org/10.26007/97r3-1e19"
+    },
+    "legend": {
+      "kind": "scale",
+      "image": "/scenes/arrokoth/arrokoth-albedo-legend.webp",
+      "labels": [
+        "0.03",
+        "0.055",
+        "0.08"
+      ],
+      "meta": "Fitted albedo fraction · includes unconstrained source fill",
+      "sourceUrl": "https://doi.org/10.26007/97r3-1e19",
+      "title": "Modeled albedo",
+      "width": 256,
+      "height": 16
+    },
+    "falseColor": true
+  },
+  "input": {
+    "path": "science/albedo_arrokoth4_fp36h2_masked1.fits",
+    "id": "lorri-albedo-model",
+    "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_shapemodel_porter2024-v1.0/albedo_arrokoth4_fp36h2_masked1.fits",
+    "credit": "Simon Porter / New Horizons science team; NASA PDS2024",
+    "license": "NASA PDS scientific data; retain attribution",
+    "licenseEvidence": [
+      "https://doi.org/10.26007/97r3-1e19"
+    ],
+    "consumers": [
+      "albedo-model"
+    ],
+    "coverage": "Published LORRI albedo fit in the released per-lobe OBJ UV mapping, shown with a grayscale stretch. The source retains a uniform baseline where imagery is unconstrained and supplies no observation-coverage mask; uniform areas must not be interpreted as measured albedo. This is a model map, not a global photograph.",
+    "width": 600,
+    "height": 1200,
+    "projection": {
+      "type": "source-obj-uv",
+      "description": "Two south polar azimuthal equidistant projections; source UVs identify each lobe."
+    }
+  }
+}

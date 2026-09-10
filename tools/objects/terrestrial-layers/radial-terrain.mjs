@@ -320,7 +320,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     const sourceSurface = radial.scientificSurfaces?.get(surface.id);
     const scientific = sourceSurface && config.raster.scientific.find(lens => lens.id === surface.id);
     const sampleScience = scientific && createRadialScienceColorSampler(sourceSurface, scientific, config);
-    const scalarSources = ['pds3-scalar-map', 'facet-scalars', 'vtk-cell-categories'].includes(scientific?.format) && Buffer.alloc(width * height * 4);
+    const scalarSources = ['pds3-scalar-map', 'facet-scalars', 'vtk-cell-categories', 'obj-uv-fits'].includes(scientific?.format) && Buffer.alloc(width * height * 4);
     const observation = radial.observationSurfaces?.get(surface.id);
     // Direct source samplers never consume the flat preview, including its
     // withheld radial directions. Keep that map only for previews/minimaps.

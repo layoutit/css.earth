@@ -1,0 +1,21 @@
+{
+  "method": "thermal-effective-diameter-as-volume-approximation",
+  "diameterKm": 27.12,
+  "uncertaintyKm": 1.31,
+  "reportedUncertaintyKm": 1.31,
+  "catalog": {
+    "number": 2204,
+    "name": "Lyyli",
+    "diameterKm": 27.12,
+    "uncertaintyKm": 1.31,
+    "detections": 3,
+    "originalRow": "2204   Lyyli              1943 EQ    12.70  0.15  3   27.12  1.31 0.020 0.002"
+  },
+  "diameterSemantics": "AKARI effective diameter transferred as an explicit approximate volume scale",
+  "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+  "sourceLabel": "AKARI AcuA, Usui et al. (2011)",
+  "scaleKmPerSourceUnit": 21.858612161651777,
+  "metersPerSourceUnit": 21858.612161651778,
+  "limitations": "AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred.",
+  "visibleDescription": "Convex lightcurve reconstruction at approximate thermal scale: 27.12 km effective diameter (catalog ±1.31 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes."
+}

@@ -1,0 +1,41 @@
+{
+  "base": "7ae81ba2d366ef20d1687a6eec51c2106be1e1b4",
+  "added": [
+    "diomedes",
+    "ajax",
+    "ilioneus",
+    "pyrrhus",
+    "eumelos",
+    "lycomedes",
+    "demodokus",
+    "menelaus",
+    "agenor",
+    "mentor",
+    "ivar",
+    "toro",
+    "cerberus",
+    "tantalus",
+    "arrokoth",
+    "quaoar",
+    "gkunhomdima",
+    "aethra",
+    "lyyli",
+    "hela",
+    "kemi",
+    "taurinensis"
+  ],
+  "atlases": [
+    {
+      "filename": "planet-markers.webp",
+      "baseSha256": "0285b6e330b0349a6984f76da671f53e80e1555176b5a14a16bf759374a6a4ba",
+      "outputSha256": "1848333a164ff5d30f641bba50ca17f791b76ea9feebba9156d2d0e26236b95f",
+      "preservedMarkers": 410
+    },
+    {
+      "filename": "planet-markers@2x.webp",
+      "baseSha256": "b8a4026356683edc58deb447e63655943b9fb706ac3f3137e3ff58338af64da6",
+      "outputSha256": "5a4c63ac6e4986c3ef19fb6f2a16be92197aa6b02e9e2327acce9fd0f065bb93",
+      "preservedMarkers": 410
+    }
+  ]
+}

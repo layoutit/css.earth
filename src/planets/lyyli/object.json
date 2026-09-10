@@ -1,0 +1,127 @@
+{
+  "id": "lyyli",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Lyyli",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 13.56
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "6b020b1e9c40d4bf9c92650ea29ddac335fe8bc9bf3e51472acce4f7176eb64b"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "40b722b8b425abb56c560a3c5b5db556b7eb0c498882e403d1442b12124d4a06"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "4fe90667dfc141afbe1ad01b19926c97ef28bd7bc7e0813ae6a59e0661408faa"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "05348c9e3c990befc2a26fde2065ef6332cfbba8be8ae9ba918e7eff90ab14a7"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "738834a85314d31671974794fe90105fab42e7a8d767bc9a7611b054558b5029"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "5a71df427f1c50d83d3e1e73190ab8d8df57472740527d36822a89d4fdb40617"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/lyyli-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b9c381ec3e3326b6b10a626dd89a1ff9f4c3f3ef89c30f2feb9ae2f2b201cd76"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -325074175736.34045,
+        13421553903.679033,
+        40676142566.37346
+      ],
+      "presentationToReference": [
+        -0.9961803780721628,
+        0,
+        -0.08731926673995265,
+        0.08011386090694066,
+        0.3977771559319139,
+        -0.9139776274665051,
+        0.03473360958187846,
+        -0.9174820620691819,
+        -0.3962577975847235
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319139,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 58.95652173913044,
+      "bodyRadiusM": 13560
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "474dd3e55cc557057857416d3fd155bea47ca2dc26af6cfb61ac01bc4b737105"
+  }
+}

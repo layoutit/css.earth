@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
 import { asteroidElements, asteroidPositionKm } from './asteroids.js'
 import { ASTEROID_FIXTURES } from './__fixtures__/horizons.asteroids.js'
-import { ASTEROID_IDS } from './bodies.js'
+import { SMALL_BODY_IDS } from './bodies.js'
 
 describe('asteroid positions against JPL Horizons', () => {
   it('reproduces the fitted epoch in ICRF kilometers', () => {
-    for (const id of ASTEROID_IDS) {
+    for (const id of SMALL_BODY_IDS) {
       const epoch = asteroidElements(id).epochJdTt
       const row = ASTEROID_FIXTURES[id].rows.find(row => row.jd === epoch)!
       const actual = asteroidPositionKm(id, epoch)
@@ -51,7 +51,14 @@ describe('asteroid positions against JPL Horizons', () => {
       'annefrank': 394, 'braille': 668,
       // Trojan additions: ceil(measured independent +/-30-day maximum * 1.15) km.
       diomedes: 426, ajax: 973, ilioneus: 561, pyrrhus: 530, eumelos: 573, lycomedes: 958, demodokus: 1682, menelaus: 1054, agenor: 607, mentor: 1444 , 'chariklo': 538, 'bienor': 944 }
+      // Near-Earth models: measured independent endpoint maximum plus 15%; docs/near-earth-population/orbit-errors.json.
+      ivar: 375, toro: 194, cerberus: 341, tantalus: 217 }
+      // Mars-crossers: measured independent endpoints plus 15 percent regression margin.
+      'aethra': 343, 'lyyli': 764, 'hela': 4172, 'kemi': 353, 'taurinensis': 189 }
     for (const id of ASTEROID_IDS) for (const row of [ASTEROID_FIXTURES[id].rows[0], ASTEROID_FIXTURES[id].rows[2]]) {
+      // TNO additions: ceil(measured independent endpoint maximum * 1.15) km; docs/trans-neptunian/orbit-errors.json.
+      arrokoth: 600, quaoar: 602, gkunhomdima: 631 }
+    for (const id of SMALL_BODY_IDS) for (const row of [ASTEROID_FIXTURES[id].rows[0], ASTEROID_FIXTURES[id].rows[2]]) {
       const actual = asteroidPositionKm(id, row.jd)
       expect(Math.hypot(...actual.map((v, i) => v - row.position[i]!))).toBeLessThan(maximumErrorKm[id])
     }

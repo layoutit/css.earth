@@ -1,0 +1,228 @@
+{
+  "schema": "cssearth-source-png-fits-registration@1",
+  "sourcePngSha256": "2b3a1a007c44c91572aba3d433267718340a7e5d322a05ed797ba0e8856eda0f",
+  "sourceFitsSha256": "013c84b1ae333bff506527b4b1b60e3a8f1b619c6e287774b4939ccdb5a7cc39",
+  "sourceEncoding": "PDS label: albedo = PNG integer / 1361975.975 + 0.03188",
+  "pngOrigin": "upper-left",
+  "objUvOrigin": "lower-left",
+  "rawFitsFirstRow": "bottom PNG row",
+  "objUvToRawFitsFlipV": false,
+  "samples": [
+    {
+      "pngPixel": [
+        286,
+        196
+      ],
+      "integer": 8847,
+      "fitsIndex": 602086,
+      "fitsAlbedo": 0.038377631455659866
+    },
+    {
+      "pngPixel": [
+        317,
+        233
+      ],
+      "integer": 16254,
+      "fitsIndex": 579917,
+      "fitsAlbedo": 0.043816376477479935
+    },
+    {
+      "pngPixel": [
+        193,
+        270
+      ],
+      "integer": 8556,
+      "fitsIndex": 557593,
+      "fitsAlbedo": 0.0381639264523983
+    },
+    {
+      "pngPixel": [
+        317,
+        270
+      ],
+      "integer": 21346,
+      "fitsIndex": 557717,
+      "fitsAlbedo": 0.04755543917417526
+    },
+    {
+      "pngPixel": [
+        193,
+        307
+      ],
+      "integer": 11303,
+      "fitsIndex": 535393,
+      "fitsAlbedo": 0.040180958807468414
+    },
+    {
+      "pngPixel": [
+        317,
+        307
+      ],
+      "integer": 18708,
+      "fitsIndex": 535517,
+      "fitsAlbedo": 0.04561814293265343
+    },
+    {
+      "pngPixel": [
+        441,
+        307
+      ],
+      "integer": 8386,
+      "fitsIndex": 535641,
+      "fitsAlbedo": 0.038039691746234894
+    },
+    {
+      "pngPixel": [
+        286,
+        344
+      ],
+      "integer": 18176,
+      "fitsIndex": 513286,
+      "fitsAlbedo": 0.04522749409079552
+    },
+    {
+      "pngPixel": [
+        410,
+        344
+      ],
+      "integer": 13398,
+      "fitsIndex": 513410,
+      "fitsAlbedo": 0.04171963408589363
+    },
+    {
+      "pngPixel": [
+        317,
+        381
+      ],
+      "integer": 25896,
+      "fitsIndex": 491117,
+      "fitsAlbedo": 0.05089587718248367
+    },
+    {
+      "pngPixel": [
+        441,
+        381
+      ],
+      "integer": 9178,
+      "fitsIndex": 491241,
+      "fitsAlbedo": 0.038620725274086
+    },
+    {
+      "pngPixel": [
+        317,
+        418
+      ],
+      "integer": 27720,
+      "fitsIndex": 468917,
+      "fitsAlbedo": 0.05223524570465088
+    },
+    {
+      "pngPixel": [
+        255,
+        455
+      ],
+      "integer": 18838,
+      "fitsIndex": 446655,
+      "fitsAlbedo": 0.04571381211280823
+    },
+    {
+      "pngPixel": [
+        379,
+        455
+      ],
+      "integer": 9246,
+      "fitsIndex": 446779,
+      "fitsAlbedo": 0.03867083415389061
+    },
+    {
+      "pngPixel": [
+        317,
+        825
+      ],
+      "integer": 32769,
+      "fitsIndex": 224717,
+      "fitsAlbedo": 0.055942416191101074
+    },
+    {
+      "pngPixel": [
+        286,
+        862
+      ],
+      "integer": 13138,
+      "fitsIndex": 202486,
+      "fitsAlbedo": 0.04152829572558403
+    },
+    {
+      "pngPixel": [
+        410,
+        862
+      ],
+      "integer": 8293,
+      "fitsIndex": 202610,
+      "fitsAlbedo": 0.03797132521867752
+    },
+    {
+      "pngPixel": [
+        286,
+        899
+      ],
+      "integer": 7980,
+      "fitsIndex": 180286,
+      "fitsAlbedo": 0.03774140030145645
+    },
+    {
+      "pngPixel": [
+        410,
+        899
+      ],
+      "integer": 22052,
+      "fitsIndex": 180410,
+      "fitsAlbedo": 0.04807364568114281
+    },
+    {
+      "pngPixel": [
+        255,
+        936
+      ],
+      "integer": 31868,
+      "fitsIndex": 158055,
+      "fitsAlbedo": 0.05528070405125618
+    },
+    {
+      "pngPixel": [
+        379,
+        936
+      ],
+      "integer": 20532,
+      "fitsIndex": 158179,
+      "fitsAlbedo": 0.046957507729530334
+    },
+    {
+      "pngPixel": [
+        224,
+        973
+      ],
+      "integer": 21075,
+      "fitsIndex": 135824,
+      "fitsAlbedo": 0.04735612869262695
+    },
+    {
+      "pngPixel": [
+        348,
+        973
+      ],
+      "integer": 22193,
+      "fitsIndex": 135948,
+      "fitsAlbedo": 0.048177286982536316
+    },
+    {
+      "pngPixel": [
+        255,
+        1010
+      ],
+      "integer": 12269,
+      "fitsIndex": 113655,
+      "fitsAlbedo": 0.04089049994945526
+    }
+  ]
+}

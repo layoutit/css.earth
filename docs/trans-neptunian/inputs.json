@@ -1,0 +1,132 @@
+{
+  "checkedOn": "2026-09-09",
+  "bodies": [
+    {
+      "periodHours": null,
+      "periodText": "About 15.9 hours; display phase is illustrative",
+      "population": "Trans-Neptunian object",
+      "surfaceMeaning": "No resolved global surface imagery; the standard grid marks unmapped terrain.",
+      "unresolved": [
+        "The released albedo FITS has no explicit observational coverage mask and contains a broad uniform baseline; that fill is not resolved imagery.",
+        "The bundled paper and PDS XML disagree on the pole and the XML calls a sub-day period an orbital period. Absolute phase is not claimed.",
+        "Published spin-period estimates differ: Buie et al. (2020) gives 15.9380 ± 0.0005 h, while the Porter archive labels 0.6632553 days as an orbital period. The panel reports only about 15.9 hours; no precision spin rate is installed."
+      ],
+      "id": "arrokoth",
+      "name": "Arrokoth",
+      "horizons": "486958;",
+      "distanceAu": 44.05655144131418,
+      "radiusKm": 9.948,
+      "fullAxesKm": [
+        34.545648,
+        19.838242,
+        13.822347
+      ],
+      "poleIcrfDegrees": [
+        319.37,
+        -25.588
+      ],
+      "source": "https://doi.org/10.26007/97r3-1e19",
+      "credit": "Porter (2024), New Horizons Arrokoth shape model; NASA PDS",
+      "shapeMeaning": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate.",
+      "orientationMeaning": "Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim.",
+      "introduction": "New Horizons explored this cold-classical Kuiper-belt contact binary in 2019. The released shape preserves both lobes; the unseen northern surface is modeled.",
+      "papers": [
+        "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_shapemodel_porter2024-v1.0/porteretal2024b.pdf",
+        "https://arxiv.org/abs/2001.00125"
+      ]
+    },
+    {
+      "periodHours": null,
+      "periodText": "Unresolved; display orientation is illustrative",
+      "population": "Trans-Neptunian object",
+      "surfaceMeaning": "No resolved global surface imagery; the standard grid marks unmapped terrain.",
+      "unresolved": [
+        "Oblate versus triaxial shape and 8.8394 h versus 17.6788 h spin interpretations remain model-dependent.",
+        "The 572.5 MB supplementary archive contains lightcurves/model profiles, not a resolved surface texture; downloading it is unnecessary for the published numeric fit."
+      ],
+      "id": "quaoar",
+      "name": "Quaoar",
+      "horizons": "50000;",
+      "distanceAu": 43.16573948799057,
+      "fullAxesKm": [
+        1132.2,
+        1132.2,
+        1022.4
+      ],
+      "axisUncertaintyKm": [
+        [
+          4.4,
+          5.0
+        ],
+        [
+          4.4,
+          5.0
+        ],
+        [
+          7.4,
+          7.2
+        ]
+      ],
+      "poleIcrfDegrees": [
+        259.7,
+        53.4
+      ],
+      "source": "https://arxiv.org/abs/2607.06450",
+      "credit": "Margoti et al. (2026), accepted ApJ; 36 stellar-occultation campaigns",
+      "shapeMeaning": "Published 3D oblate fit: equatorial semiaxes 566.1 km and polar semiaxis 511.2 km. The fit assumes the body pole aligns with the rings. A competing triaxial interpretation is unresolved.",
+      "orientationMeaning": "Pole RA 259.7°, DEC 53.4° inherits the measured ring-plane prior; arbitrary meridian. The 8.8394 h and 17.6788 h period interpretations remain model-dependent and no sidereal spin is installed.",
+      "introduction": "This large Kuiper-belt object has two known rings. Its oblate shape is fitted to stellar occultations with the ring plane as a pole constraint; surface detail is unresolved.",
+      "papers": [
+        "https://zenodo.org/records/21185812",
+        "https://doi.org/10.1051/0004-6361/202346365"
+      ],
+      "radiusKm": 547.1743344090937
+    },
+    {
+      "periodHours": null,
+      "periodText": "Unresolved; display orientation is illustrative",
+      "population": "Trans-Neptunian object",
+      "surfaceMeaning": "No resolved global surface imagery; the standard grid marks unmapped terrain.",
+      "unresolved": [
+        "The Maclaurin model assumes satellite-orbit alignment; a slightly triaxial fit is also compatible.",
+        "Rotation period aliases prevent an absolute surface attitude claim."
+      ],
+      "id": "gkunhomdima",
+      "name": "Gǃkúnǁʼhòmdímà",
+      "horizons": "229762;",
+      "distanceAu": 74.45925441086162,
+      "fullAxesKm": [
+        658,
+        658,
+        588
+      ],
+      "axisUncertaintyKm": [
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          20,
+          22
+        ]
+      ],
+      "poleIcrfDegrees": [
+        20.6,
+        46.25
+      ],
+      "source": "https://arxiv.org/abs/2605.28636",
+      "credit": "Proudfoot et al. (2026), accepted PSJ; occultation and satellite-orbit constraints",
+      "shapeMeaning": "Published Maclaurin model with semiaxes 329, 329, 294 km. The satellite orbit is assumed equatorial. The source also permits a slightly triaxial fit; this smooth shape is a constrained model.",
+      "orientationMeaning": "J2000 pole prior RA 20.6 ± 1.5°, DEC 46.25 ± 0.32° from satellite-orbit alignment. Arbitrary meridian; 11.05 h photometric period has aliases and is not installed as a qualified sidereal spin.",
+      "introduction": "A distant dwarf-planet candidate with a measured occultation silhouette. This published spheroidal model combines the occultation with its satellite’s orbit; local terrain is unresolved.",
+      "papers": [
+        "https://github.com/benp175/occult3d"
+      ],
+      "radiusKm": 316.89328905639314
+    }
+  ]
+}

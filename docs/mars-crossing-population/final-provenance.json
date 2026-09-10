@@ -1,0 +1,43 @@
+{
+  "scope": "New body source and output bytes verified; changed Sun context record recovered from existing manifest pins. Other baseline provenance is retained unchanged.",
+  "added": [
+    {
+      "id": "aethra",
+      "products": 5,
+      "sources": 2,
+      "unresolved": []
+    },
+    {
+      "id": "lyyli",
+      "products": 5,
+      "sources": 2,
+      "unresolved": []
+    },
+    {
+      "id": "hela",
+      "products": 5,
+      "sources": 2,
+      "unresolved": []
+    },
+    {
+      "id": "kemi",
+      "products": 5,
+      "sources": 2,
+      "unresolved": []
+    },
+    {
+      "id": "taurinensis",
+      "products": 5,
+      "sources": 2,
+      "unresolved": []
+    }
+  ],
+  "contexts": [
+    {
+      "id": "sun",
+      "products": 9,
+      "sources": 33,
+      "unresolved": []
+    }
+  ]
+}
