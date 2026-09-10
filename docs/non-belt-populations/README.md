@@ -11,6 +11,8 @@ The separate PRs modified the same generated marker atlas, scene bindings, world
 | Mars-crossing | Aethra, Lyyli, Hela, Kemi, Taurinensis | [Mars-crossing evidence](../mars-crossing-population/README.md) |
 | Trans-Neptunian | Arrokoth, Quaoar, Gǃkúnǁʼhòmdímà | [Trans-Neptunian evidence](../trans-neptunian/README.md) |
 
+Latest main `e54f2aa4f696ec226793510276a7716448057c37` (PR95, 67P southern imagery) is included. Its complete comet package is retained; that merge does not change the 410-body marker baseline. Only the incoming comet's marker/page bindings needed another refresh.
+
 ## Evidence identity
 
 The scientific inputs and previously qualified body presentations are retained from these exact heads:

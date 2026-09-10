@@ -7,7 +7,9 @@ import {serializeObjectJson,prepareObjectJson} from '../../tools/prepare-object-
 import {writePreparedText} from '../../tools/write-prepared-text.mjs';
 import {preparePageMetadata} from '../../tools/prepared-page-metadata.mjs';
 const results=[];
+const selected=new Set(process.argv.slice(2));
 for(const {id} of OBJECTS){
+ if(selected.size&&!selected.has(id))continue;
  const root=`src/planets/${id}`,descriptor=JSON.parse(await readFile(`${root}/object.json`));
  const runtime=JSON.parse(await readFile(`${root}/prepared/runtime.json`));
  const definition=prepareMarkerBindings(runtime);
@@ -25,5 +27,5 @@ for(const {id} of OBJECTS){
 // Empty selection skips presentation compilation and refreshes contexts from
 // the already finalized descriptor frames through the existing context owner.
 await prepareObjectJson([]);
-await writeFile('docs/non-belt-populations/transports.json',JSON.stringify(results,null,2)+'\n');
+await writeFile(`docs/non-belt-populations/transports${selected.size?'-'+[...selected].join('-'):''}.json`,JSON.stringify(results,null,2)+'\n');
 console.log('Marker bindings, transports and contexts refreshed:',results.length,'; zero presentation recompiles');
