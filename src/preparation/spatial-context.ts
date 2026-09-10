@@ -1,5 +1,7 @@
 import { prepareSystemView } from './system-view.js';
 import type { PreparedSystemView, SystemViewPolicy } from './system-view.js';
+import { M_PER_AU } from '@cssearth/astronomy';
+import { prepareHyperbolicPath } from '../platform/prepare-hyperbolic-path.mjs';
 
 export type Vector3 = readonly [number, number, number];
 
@@ -79,7 +81,10 @@ export interface PreparedWorldContext {
     readonly systemView?: PreparedSystemView;
     readonly orbit: { readonly centerBodyId: string; readonly centerPositionM: Vector3; readonly verticesM: readonly Vector3[]; readonly trail: readonly number[];
       readonly bounds: { readonly centerM: Vector3; readonly radiusM: number }; readonly activeChords: readonly number[];
-      readonly extentChords: readonly number[] } }[];
+      readonly extentChords: readonly number[];
+      /** Open trajectories carry N-1 chords, an explicit epoch vertex and a finite display window. */
+      readonly closed?: false; readonly bodyVertexIndex?: number; readonly displayExtentAu?: number;
+      readonly trailModel?: 'finite-open-trajectory-constant-weight' } }[];
   readonly camera: WorldContextSource['camera'];
   readonly system: WorldContextSource['system'];
   readonly volume: WorldContextSource['volume'];
@@ -127,7 +132,7 @@ function parseVolumeOpacityProfile(value: unknown): VolumeOpacityProfile {
   return freeze({ model: input.model, nearOpacity, fullOpacity, fadeStartDistanceM, fullDistanceM });
 }
 
-/** Builds static true-ellipse vertices in physical metres from a same-epoch ephemeris adapter. */
+/** Builds static conic vertices in physical metres from a same-epoch ephemeris adapter. */
 export function prepareWorldContext(source: WorldContextSource, facts: Readonly<Record<string, WorldContextBodyFact>>,
   states: Readonly<Record<string, OrbitalState>>,
   orbitCenters: Readonly<Record<string, WorldContextOrbitCenter>> = {},
@@ -162,14 +167,27 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
       if (ancestors.has(parentId) || !centerState(parentId)) throw new TypeError(`${body.id} orbit parent hierarchy is invalid.`);
       ancestors.add(parentId);
     }
-    const minor = state.semiMajorAxisM * Math.sqrt(1 - state.eccentricity ** 2), centre = add(state.centerPositionM, scale(state.perihelionDirection, -state.semiMajorAxisM * state.eccentricity));
     const motion = unit(cross(state.normal, state.perihelionDirection));
-    const eccentric = 2 * Math.atan2(Math.sqrt(1 - state.eccentricity) * Math.sin(state.trueAnomalyRadians / 2),
-      Math.sqrt(1 + state.eccentricity) * Math.cos(state.trueAnomalyRadians / 2));
-    const verticesM = freeze(Array.from({ length: source.orbit.segments }, (_, index) => index === 0 ? copy(state.positionM) : ellipse(centre, state.perihelionDirection, motion, state.semiMajorAxisM, minor,
-      eccentric + index * 2 * Math.PI / source.orbit.segments)));
-    const trail = fact.orbitStyle === 'closed' ? freeze(Array.from({ length: source.orbit.segments }, () => 1))
-      : trailWeights(source.orbit.segments, source.orbit.trail);
+    const path = state.eccentricity > 1 ? prepareHyperbolicPath({
+      semiMajorAxisUnits: state.semiMajorAxisM, eccentricity: state.eccentricity, trueAnomalyRad: state.trueAnomalyRadians,
+      unitsPerAu: M_PER_AU, heliocentricDistanceAu: Math.hypot(...state.positionM) / M_PER_AU,
+      focus: add(state.centerPositionM, scale(state.positionM, -1)), perihelionDirection: state.perihelionDirection,
+      perihelionMotion: motion, segments: source.orbit.segments,
+    }) : undefined;
+    let verticesM: readonly Vector3[], trail: readonly number[];
+    if (path) {
+      verticesM = freeze(path.vertices.map((vertex, index) => index === path.bodyVertexIndex
+        ? copy(state.positionM) : copy(add(state.positionM, vertex))));
+      trail = path.trail;
+    } else {
+      const minor = state.semiMajorAxisM * Math.sqrt(1 - state.eccentricity ** 2), centre = add(state.centerPositionM, scale(state.perihelionDirection, -state.semiMajorAxisM * state.eccentricity));
+      const eccentric = 2 * Math.atan2(Math.sqrt(1 - state.eccentricity) * Math.sin(state.trueAnomalyRadians / 2),
+        Math.sqrt(1 + state.eccentricity) * Math.cos(state.trueAnomalyRadians / 2));
+      verticesM = freeze(Array.from({ length: source.orbit.segments }, (_, index) => index === 0 ? copy(state.positionM) : ellipse(centre, state.perihelionDirection, motion, state.semiMajorAxisM, minor,
+        eccentric + index * 2 * Math.PI / source.orbit.segments)));
+      trail = fact.orbitStyle === 'closed' ? freeze(Array.from({ length: source.orbit.segments }, () => 1))
+        : trailWeights(source.orbit.segments, source.orbit.trail);
+    }
     const activeChords = freeze(trail.flatMap((weight, index) => weight > 0 ? [index] : []));
     const extentChords = prepareExtentChords(activeChords);
     // Enclose the actual authored trail, including the pinned ephemeris vertex.
@@ -179,7 +197,8 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     const bounds = freeze({ centerM: copy(centerM), radiusM: Math.max(...endpoints.map(vertex =>
       Math.hypot(...vertex.map((value, axis) => value - centerM[axis]!)))) * (1 + 8 * Number.EPSILON) });
     return freeze({ ...body, positionM: copy(state.positionM), radiusM: fact.radiusM,
-      orbit: freeze({ centerBodyId: state.centerBodyId, centerPositionM: copy(state.centerPositionM), verticesM, bounds, trail, activeChords, extentChords }) });
+      orbit: freeze({ centerBodyId: state.centerBodyId, centerPositionM: copy(state.centerPositionM), verticesM, bounds, trail, activeChords, extentChords,
+        ...(path ? { closed: path.closed, bodyVertexIndex: path.bodyVertexIndex, displayExtentAu: path.displayExtentAu, trailModel: path.trailModel } : {}) }) });
   });
   const focus = { ...source.focus, positionM: copy(source.frame.originM), radiusM: source.frame.bodyRadiusM };
   // The root system frames its major planets, including the smaller terrestrial planets.
@@ -286,7 +305,12 @@ function parsePresentation(value: unknown): WorldContextCameraPresentation {
 function validateState(state: OrbitalState, id: string): void {
   identifier(state.centerBodyId, `${id} orbit parent`);
   [state.positionM, state.centerPositionM, state.normal, state.perihelionDirection].forEach((value, index) => { if (!Array.isArray(value) || value.length !== 3 || !value.every(Number.isFinite)) throw new TypeError(`${id} vector ${index} is invalid.`); });
-  if (!positive(state.semiMajorAxisM, `${id} semi-major axis`) || !(state.eccentricity >= 0 && state.eccentricity < 1) || !Number.isFinite(state.trueAnomalyRadians) || Math.abs(dot(state.normal, state.perihelionDirection)) > 1e-8) throw new TypeError(`${id} orbit is invalid.`);
+  const axis = finite(state.semiMajorAxisM, `${id} semi-major axis`), eccentricity = state.eccentricity;
+  if (!(Number.isFinite(eccentricity) && eccentricity >= 0 && eccentricity !== 1 &&
+      (eccentricity < 1 ? axis > 0 : axis < 0)) || !Number.isFinite(state.trueAnomalyRadians) ||
+      1 + eccentricity * Math.cos(state.trueAnomalyRadians) <= 0 || Math.abs(dot(state.normal, state.perihelionDirection)) > 1e-8) {
+    throw new TypeError(`${id} orbit is invalid.`);
+  }
 }
 function ellipse(centre: Vector3, perihelion: Vector3, motion: Vector3, major: number, minor: number, anomaly: number): Vector3 { return add(centre, add(scale(perihelion, major * Math.cos(anomaly)), scale(motion, minor * Math.sin(anomaly)))); }
 function trailWeights(segments: number, trail: WorldContextSource['orbit']['trail']): readonly number[] { return freeze(Array.from({ length: segments }, (_, index) => { const behind = (segments - index - .5) / segments; return Number((behind <= trail.solidTurns ? 1 : Math.max(0, 1 - (behind - trail.solidTurns) / trail.fadeTurns)).toFixed(6)); })); }

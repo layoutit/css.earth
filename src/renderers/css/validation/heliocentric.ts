@@ -67,9 +67,14 @@ function requirePlan(value: unknown): asserts value is HeliocentricViewPlan {
     if (system.epochJdTt !== undefined) finite(system.epochJdTt, 'prepared epoch');
     for (const input of array(system.bodies, 'system bodies')) {
       const body = record(input, 'system body'); text(body.id, 'system body id'); numbers(body.position, 'body position', 3);
-      positive(body.radiusUnits, 'body radius'); positive(body.semiMajorAxisUnits, 'body semimajor axis');
-      orbit(body.orbit, false); const label = record(record(body.orbit, 'body orbit').labelPresentation, 'orbit labels');
-      for (const key of ['radiusUnits', 'angularFadeInRadians', 'angularFullRadians', 'nearDistanceUnits', 'farDistanceUnits', 'minimumEligibility']) positive(label[key], `orbit label ${key}`);
+      positive(body.radiusUnits, 'body radius');
+      if (body.orbit === null) {
+        if (finite(body.semiMajorAxisUnits, 'body semimajor axis') >= 0 || finite(body.eccentricity, 'body eccentricity') <= 1) fail('only unbound system markers may omit their orbit');
+      } else {
+        positive(body.semiMajorAxisUnits, 'body semimajor axis');
+        orbit(body.orbit, false); const label = record(record(body.orbit, 'body orbit').labelPresentation, 'orbit labels');
+        for (const key of ['radiusUnits', 'angularFadeInRadians', 'angularFullRadians', 'nearDistanceUnits', 'farDistanceUnits', 'minimumEligibility']) positive(label[key], `orbit label ${key}`);
+      }
       const illumination = record(body.illumination, 'illumination');
       for (const key of ['phaseAngleDegrees', 'illuminatedFraction', 'lightViewZ', 'markerOpacity']) finite(illumination[key], `illumination ${key}`);
       point(body.pointPresentation);
@@ -78,9 +83,21 @@ function requirePlan(value: unknown): asserts value is HeliocentricViewPlan {
 }
 function orbit(value: unknown, observer: boolean): void {
   const orbit = record(value, 'orbit'); direction(orbit.normal, 'orbit normal'); direction(orbit.perihelionDirection, 'perihelion direction');
-  if (observer) { positive(orbit.semiMajorAxisUnits, 'semimajor axis'); positive(orbit.maximumExtentUnits, 'orbit extent'); }
+  if (observer) {
+    if (orbit.closed === false) {
+      if (finite(orbit.semiMajorAxisUnits, 'semimajor axis') >= 0 || finite(orbit.eccentricity, 'eccentricity') <= 1) fail('open heliocentric path requires hyperbolic elements');
+      positive(orbit.displayExtentAu, 'display extent');
+    } else positive(orbit.semiMajorAxisUnits, 'semimajor axis');
+    positive(orbit.maximumExtentUnits, 'orbit extent');
+  }
   const vertices = array(orbit.vertices, 'orbit vertices'); vertices.forEach(value => numbers(value, 'orbit vertex', 3));
   if (vertices.length < 8 || integer(orbit.vertexCount, 'orbit vertex count') !== vertices.length) fail('orbit vertex count is incompatible');
+  if (orbit.closed === false) {
+    if (integer(orbit.bodyVertexIndex, 'body vertex') >= vertices.length) fail('body vertex is outside open path');
+    numbers(orbit.trail, 'orbit trail', vertices.length - 1); numbers(orbit.chordBehindTurns, 'orbit chord turns', 0);
+    if (orbit.trailSpans !== null) fail('open trajectories have no turn spans');
+    return;
+  }
   numbers(orbit.trail, 'orbit trail', vertices.length); numbers(orbit.chordBehindTurns, 'orbit chord turns', vertices.length);
   const spans = record(orbit.trailSpans, 'orbit spans');
   if (finite(spans.solidTurns, 'solid trail') < 0 || positive(spans.fadeTurns, 'fading trail') + finite(spans.solidTurns, 'solid trail') >= 1) fail('orbit spans must leave undrawn remainder');
