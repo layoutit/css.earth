@@ -145,4 +145,4 @@ The structured [batch membership](PR-BATCHES.json) was checked against the froze
 
 ## B11 — new asteroid companions
 
-In review: [2001 SN263 Alpha, Beta and Gamma](b11-companion-catalog/README.md). Two new moons and their primary use the shared renderer with archived radar meshes. No new mapped optical imagery. Dactyl, Selam, DP107 and QE2 remain deferred for the source gaps recorded in the batch report.
+[Draft PR #100](https://github.com/layoutit/cssEarth/pull/100): [2001 SN263 Alpha, Beta and Gamma](b11-companion-catalog/README.md). Two new moons and their primary use the shared renderer with archived radar meshes. No new mapped optical imagery. Dactyl, Selam, DP107 and QE2 remain deferred for the source gaps recorded in the batch report.

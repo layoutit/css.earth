@@ -29,7 +29,7 @@ See the [batch report](B1-EXPANSION.md) for source, numerical, visual and runtim
 
 ## B11 companion catalog in review
 
-[B11](b11-companion-catalog/README.md) adds two moons, **2001 SN263 Beta and Gamma**, with their parent **2001 SN263 Alpha**. This branch has **97 standalone moons / 435 registered objects**, compared with **95 / 432** at its `866646279` merge base. Both new moons have native PDS radar shapes and no mapped optical imagery. They are outside the fixed 461-moon benchmark, so benchmark coverage remains **90/461**. These are branch counts, not merged coverage.
+[B11 / draft PR #100](https://github.com/layoutit/cssEarth/pull/100) adds two moons, **2001 SN263 Beta and Gamma**, with their parent **2001 SN263 Alpha**. This branch has **97 standalone moons / 435 registered objects**, compared with **95 / 432** at its `866646279` merge base. Both new moons have native PDS radar shapes and no mapped optical imagery. They are outside the fixed 461-moon benchmark, so benchmark coverage remains **90/461**. These are branch counts, not merged coverage.
 
 Dactyl, Selam, 2000 DP107’s moon and 1998 QE2’s moon remain deferred with specific source and placement gaps in the B11 report. Their source-review status does not imply a prepared scene.
 
