@@ -1,149 +1,93 @@
 # Sources catalogue
 
-The Sources tab connects published inputs to the prepared datasets that use them.
-Each source has an external citation link and a complete **Used in cssEarth** list.
-Those links use the existing dataset navigation: they select a dataset on the
-current body or navigate to another body in the shared scene.
-
-[SOURCES](../src/sources/catalog.json) owns published identities. Body manifests
-still own local files, acquisition, byte hashes, credits and reuse terms.
-Mission and spacecraft fields cite SOURCES with their own checked dates and
-locators. Artwork and shared environments retain their existing provenance owners.
-A mission reference, illustration or shared sky source does not become an
-observation merely because it appears beside a body.
+The Sources tab links published works and data products to the datasets that use
+them. A shared source has one identity across bodies; each body keeps its own
+input bytes, processing, credits and limits.
 
 ## Find the record to change
 
-| Record | What it owns |
+| Record | Content |
 | --- | --- |
-| [Canonical catalogue](../src/sources/catalog.json) | Stable source IDs, published work or release, identifiers, citation links and evidenced relationships |
-| Body `source/manifest.json` | Original local input IDs, file identities and `sourceBinding` |
-| [Mission catalogue](../site/source/spacecraft/catalog.json) | Claim-specific citations, checked dates and exact locators |
-| [Render library](../site/source/spacecraft/render-library.json) and [emblem library](../site/source/spacecraft/emblem-library.json) | Artwork bindings, original credit, preparation and byte pins |
-| Shared environment `source/provenance.json` | Environment binding and its scientific meaning and qualifications |
-| [Prepared sources](../site/prepared-sources.json) | Generated usage edges, dataset destinations, inventory and dependency hashes |
-| [Migration fixture](../tests/fixtures/sources/migration.json) | Explicit inherited decisions and the frozen pre-migration identity of each affected manifest and metadata owner |
+| [Source catalogue](../src/sources/catalog.json) | Published title, identifiers, version, citation links and identity evidence |
+| Body `source/manifest.json` | Local input IDs, paths, hashes, acquisition, credits and `sourceBinding` |
+| Body `README.md` | Adopted values, source choices, processing, results and known problems |
+| [Mission and spacecraft catalogue](../site/source/spacecraft/catalog.json) | Citations for individual claims, with checked dates and locators |
+| [Render library](../site/source/spacecraft/render-library.json) and [emblem library](../site/source/spacecraft/emblem-library.json) | Artwork bindings, original credits and file pins |
+| Shared environment `source/provenance.json` | The source binding and meaning of that environment |
 
-Keep numerical evidence in the body README and its existing data or recipe, as
-required by the [provenance contract](provenance/CONTRACT.md). The catalogue does
-not duplicate scientific tables or retain explanatory webpages. Historical
-identity evidence points to its original record and Git revision; it does not
-claim a new check of a provider website.
+[Prepared sources](../site/prepared-sources.json) and
+[prepared missions](../site/prepared-spacecraft.json) are generated from these
+records and the existing product lineage. Do not edit either output by hand.
+The [provenance contract](provenance/CONTRACT.md) governs citations, retained data,
+evidence and plain language. Keep scientific tables in their existing records.
 
-## Bind an input
+## Add or update a source
 
-An input has exactly one binding:
+1. Look for the published work or release in the catalogue. Reuse its ID across
+   bodies and file conversions. Preserve distinct releases and distinct products
+   within a collection. A publisher, shared download endpoint or matching hash
+   alone does not establish equivalence.
+2. If it is absent, add its published title, provider identifiers and citation link.
+   Record authors, date and version when established by the source. Cite the
+   provider page with a checked date and locator, or an existing record at its
+   exact Git revision with its hash and field. Do not invent a release or archive
+   identifier. Use `relations` for evidenced versions, parts and derivations.
+3. Add a `sourceBinding` to the body's input. It names the canonical ID, the
+   source's role (`material`, `method`, `reference` or `artwork`) and the evidence
+   connecting it to this input. Keep the local ID and byte pins. Used documents
+   and intermediate files also need bindings.
+4. Update the body README when the source choice, values, processing or limits
+   change. Follow [preparation and checks](#prepare-and-check) below.
 
-- `catalogued`: one or more canonical IDs, each with a material, method,
-  reference or artwork role and evidence for the relationship.
-- `local`: an explicitly authored recipe, presentation specification or local
-  measurement, with a reason. It cannot erase an external dependency already
-  recorded in product lineage.
-- `unresolved`: the inherited label, evidence and reason the identity remains
-  uncertain. Preparation permits only the unchanged decisions in the migration
-  fixture. A new or changed external input needs a resolved identity.
+A local recipe, measurement or display specification uses `kind: local` with a
+specific reason. Its external inputs remain connected through product lineage.
+A converted image is still derived from its published source; conversion does
+not create a new published work.
 
-Every manifest input is classified, including retained inputs no longer used in
-the prepared view. An unused input creates no active usage edge. Used documents
-and intermediates also have bindings; placing a file in `documents` does not
-make it authored content.
-
-A hash identifies local bytes. It does not establish a provider version or make
-two local files the same published work. Preserve a release only when its version
-is evidenced. HYG v4.1 and v4.4, for example, are separate releases of one work.
-Mercury's monochrome, enhanced-colour and shaded-relief products stay separate,
-although their credits overlap. Paired PDS image and label resources can bind to
-one archive product; the local files and their original identities stay separate.
-
-Use explicit relations and redirects when curating identities. The validator
-rejects duplicate provider identities, dangling references, redirect chains and
-relation cycles. Do not merge records from a common publisher, endpoint, credit,
-file hash or approximate title. The initial migration preserves uncertain
-identities rather than assigning them a guessed release or published product.
+When consolidating duplicates, verify the published identity, update the current
+bindings and remove the redundant records. Each local input keeps its own pins.
+Preparation rejects missing, unknown or unresolved bindings. Establish the source
+identity from its evidence before publishing the prepared catalogue.
 
 ## Prepare and check
 
-Run `pnpm prepare:sources` after changing sources or their bindings. This is the
-same coordinated operation as `pnpm prepare:provenance` and
-`pnpm prepare:spacecraft`: it builds prospective object provenance and both
-catalogues, validates every reference and dataset control, then stages all outputs
-before replacement. Both catalogues share a dependency closure and canonical
-catalogue hash. Astro rejects stale or mixed prepared sets.
+Run `pnpm prepare:sources` after changing catalogue metadata, bindings or capture
+records. `pnpm prepare:provenance` and `pnpm prepare:spacecraft` are aliases for
+this coordinated operation. It validates all prospective object provenance and
+both catalogues before replacing outputs. Astro checks their dependency hashes
+and rejects stale or mixed sets. It does not acquire scientific data or rebake
+surface assets.
 
-The migration tool, `node tools/migrate-source-bindings.mts`, applies only the
-checked historical manifest mapping. It rejects changed input records and existing
-conflicting bindings. Normal preparation never runs this migration or guesses
-an identity from a URL.
+Source-refresh tools must preserve bindings, source metadata and capture evidence
+while updating byte pins. Newly discovered files need an authored classification;
+a refresh must not guess one from a filename or copied template.
 
-The source graph walks the existing product dependency graph. It includes
-schematics and models, which the mission observation graph deliberately excludes.
-Each edge preserves its local credit, terms, interpretation and limitations.
-Shared context is indexed once by feature; mission metadata and artwork are
-separate consumer kinds with no object or lens attribution.
+Run the focused checks:
 
-[Contract tests](../src/platform/source-catalog.test.mts) cover identity and citation
-validation. [Catalogue checks](../tools/source-catalogue.test.mts) conserve product dependencies, reject invalid
-prospective sets, and check deterministic preparation. The existing provenance,
-mission and publication tests continue to cover their respective contracts.
+```sh
+node --test src/platform/source-catalog.test.mts tools/source-catalogue.test.mts
+pnpm typecheck
+```
 
-`node tools/check-source-migration.mts` is the one-time comparison with the frozen
-PR #112 baseline. It checks all retained fields, old mission citations and the
-unchanged observation graph. It is separate from the normal suite so later,
-properly evidenced source updates do not need to rewrite a historical fixture.
+These cover identities, bindings, product dependencies and deterministic
+catalogue generation. Use the [exploration guide](architecture/exploration-catalog.md#preparing-and-checking-a-change)
+for changes to mission attribution or dataset navigation. Scientific changes still
+need their body and preparation checks.
 
-## Delivery and coverage limits
+## Coverage and delivery
 
-The complete catalogue and graph are build inputs. Only the current body's
-relevant disclosures become page HTML. Sources and Missions are omitted from the
-inert navigation preview bank and filled by the existing page transport. There is
-no source-specific request, route, hash grammar or global search, and no additional
-scene owner.
+The graph covers manifest inputs, used provenance documents/intermediates,
+mission and spacecraft citations, approved artwork and shared environments.
+Unused retained inputs create no usage edge. Factsheets, gallery descriptions,
+chart annotations and prose citations are not all indexed. A missing edge outside
+this scope does not establish that a source is unused throughout the repository.
 
-Coverage includes manifest inputs and used provenance documents/intermediates,
-mission and spacecraft metadata citations, the approved spacecraft artwork and
-four shared environment credits. Factsheet values, gallery descriptions, chart
-annotations and arbitrary prose citations are not all indexed. A missing usage
-edge outside that scope does not prove a source is unused throughout the project.
+Only relevant source cards become the current body's page HTML. The inert
+navigation previews omit Sources and Missions; the existing page transport fills
+those panels. The complete catalogue and graph remain build inputs.
 
-The migration starts from documentation cleanup PR #112, commit
-`8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf`. Its 473 bodies retain 2,595 manifest
-inputs, 8,253 documents and 444 generated intermediates. Scientific inputs,
-prepared textures, rendering and artwork bytes are unchanged by this feature.
-Historical source records remain historical evidence at that revision; current
-preparation and browser results must be assessed at the feature revision that ran
-them.
-
-## Browser evidence
-
-At `c4c1523dedf63d2a3e635c829261d34413fcc3a9`, the
-[production browser report](../tests/evidence/sources-catalogue/browser.json)
-passes 13 mission and source navigation scenarios in Chromium 152.0.7977.84,
-including keyboard disclosure, camera retention, same-body and cross-body links,
-reload, history and a 390 × 844 mobile viewport. It records the served HTML, CSS
-and JavaScript hashes; DPR is 1. The [payload measurements](../tests/evidence/sources-catalogue/payload.json)
-find no source cards in the 473 inert preview templates on each sampled page.
-These reports test the application revision above; the following commit adds only
-this explanation and its evidence.
-
-The broader [shell test output](../tests/evidence/sources-catalogue/shell.log)
-records 319 passes and seven failures: one audit finds 141 stale frame receipts,
-and six navigation preparation checks lack original solar imagery in this checkout.
-The [baseline comparison](../tests/evidence/sources-catalogue/inherited-frame-failures.json)
-identifies the affected objects and the unchanged documentation baseline. The
-complete platform suite was not run for this feature.
-
-Mercury's Sources disclosure identifies the enhanced-colour product and links to
-its dataset while the monochrome map remains selected. The screenshots show the
-desktop and mobile layouts from the browser run above.
+## Interface examples
 
 ![Mercury Sources disclosure on desktop](images/catalogue-sources-desktop.png)
 
 ![Mercury Sources disclosure on mobile](images/catalogue-sources-mobile.png)
-
-Integration with Tempel 1 photography PR #113 (`51315639ea9b3a104d2dc2fc4ee94282fb7ba3ed`)
-preserves every new source field and scientific artifact. Its three native PDS
-product labels identify three additional catalogue records; local registration
-controls remain local. Both catalogues were regenerated together, and the
-[11 integration checks](../tests/evidence/sources-catalogue/main-integration.log)
-passed. The browser screenshots above precede this integration and cover unchanged
-Mercury, Moon and shared navigation code; they do not qualify the new Tempel images.

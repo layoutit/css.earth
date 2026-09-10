@@ -81,6 +81,34 @@ test('test and evidence roles cannot be used as ownership exceptions or imported
   assert.throws(() => repo.audit(), /invalid exception category/u);
 });
 
+test('source-local tests and audit runners may import harnesses while production cannot import them', t => {
+  const repo = fixture(t);
+  repo.write('site/test/browser-helper.mts', 'export const browser = 1;');
+  repo.write('tools/capture-image.mts', 'export const capture = 1;');
+  repo.write('src/platform/test/illumination-browser.mts', 'import "../../../site/test/browser-helper.mts";');
+  repo.write('src/test/shared-helper.mts', 'import "../../tools/capture-image.mts";');
+  repo.write('tools/audits/worlds/browser-check.mts', 'import "../../../site/test/browser-helper.mts"; import "../../capture-image.mts";');
+  assert.deepEqual(repo.audit().violations, [], 'Actual test and audit owners may use browser/capture helpers.');
+  repo.write('src/platform/owner.mts', 'import "./test/illumination-browser.mts"; import "../../tools/audits/worlds/browser-check.mts";');
+  repo.write('src/testimonials/owner.mts', 'import "../../site/test/browser-helper.mts";');
+  repo.write('tools/audits-helper.mts', 'import "./capture-image.mts";');
+  assert.deepEqual(repo.audit().violations, [
+    'src/platform/owner.mts: source imports evidence module tools/audits/worlds/browser-check.mts; move shared behavior into an authored owner.',
+    'src/platform/owner.mts: source imports test module src/platform/test/illumination-browser.mts; move shared behavior into an authored owner.',
+    'src/testimonials/owner.mts: source imports test module site/test/browser-helper.mts; move shared behavior into an authored owner.',
+    'tools/audits-helper.mts: source imports evidence module tools/capture-image.mts; move shared behavior into an authored owner.',
+  ]);
+});
+
+test('source-local test and audit JavaScript remain authored and receive no ownership exemption', t => {
+  const repo = fixture(t);
+  const paths = ['src/platform/test/browser.mjs', 'src/test/helper.js', 'tools/audits/worlds/browser-check.mjs'];
+  for (const path of paths) repo.write(path, 'export const behavior = 1;');
+  const result = repo.audit();
+  assert.deepEqual(result.categories.authored, paths);
+  assert.deepEqual(result.violations, paths.map(path => `New authored JavaScript: ${path}. Use TypeScript or justify an exact exception.`));
+});
+
 test('a compatibility facade rejects added behavior and a different source owner', t => {
   const repo = fixture(t);
   repo.write('site/owner.mts', 'export const value: number = 1;');

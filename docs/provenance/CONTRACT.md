@@ -30,8 +30,7 @@ includes the principles and the start of the guidelines.
 
 This is a cssEarth adaptation using Markdown, existing manifests, SHA-256 pins,
 Git revisions, reproduction comparisons and browser evidence. It claims neither
-PDS4 archive compliance nor assessed ISO conformity, and requires no XML labels,
-archive submission or second provenance format.
+PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XML labels or archive submission.
 
 ## File ownership
 
@@ -39,10 +38,12 @@ archive submission or second provenance format.
 | --- | --- |
 | Body `README.md` | The single account of sources and evidence described below |
 | Body `NOTICE.md` and supplied license files | Required acknowledgments and reuse terms; link here instead of duplicating credits |
-| `source/manifest.json` | Input identities, locations, byte pins, acquisition records and per-input credits |
+| [Source catalogue](../../src/sources/catalog.json) | Shared published identities, versions, citation links and evidence |
+| `source/manifest.json` | Local input identities, canonical bindings, byte pins, acquisition and per-input credits |
 | `object.json` and `source/preparation/` | Executable choices and exact parameters; explain their meaning without copying parameter lists |
 | `prepared/provenance.json` | Generated connections between inputs, processing and outputs; never edit by hand |
 | `runtime-assets.json` at the body root | Generated delivery inventory used by installation and publication |
+| `site/prepared-sources.json` and `site/prepared-spacecraft.json` | Generated source usage and mission attribution; prepare together |
 | Shared guides and illustrations under `docs/` | Maintained explanations used across bodies |
 | Test fixtures under `tests/`; processing code under `tools/` | Inputs and implementation used by executable checks and preparation |
 | Root README and [body contributor guide](../../src/planets/README.md) | Shared installation, controls, commands and contribution workflow |
@@ -77,7 +78,9 @@ and [Rhea](../../src/planets/rhea/README.md).
 ## Identify and explain the sources
 
 For each new or changed input, record provider, product/release, URL, byte count,
-hash, credits and terms in the existing manifest and acquisition recipe. Preserve
+hash, credits and terms in the existing manifest and acquisition recipe. Follow
+[Sources authoring](../sources-catalogue.md#add-or-update-a-source) to reuse or
+establish its published identity and bind the input. Preserve
 native identifiers: PDS4 LIDVID, PDS3 dataset/product ID, DOI or other published
 release ID. Do not invent PDS identifiers. A hash identifies bytes, not the
 provider's version or our code revision.
@@ -137,110 +140,87 @@ license alone does not establish an input's terms.
 
 ## Save enough evidence to check the result
 
-Store new original evidence with the body or shared test/tool that owns the claim,
-and link it from the existing body README or shared guide. Keep an artifact in the
-current tree when a maintained explanation or test needs it. Link historical
-reports at their exact Git revision; preserve their original contents there.
-Keep scratch captures and repetitive logs out of `docs/`. No extra JSON format
-or fixed file set is required. Record:
+Keep evidence beside the body or shared test/tool that owns the claim, and link
+it from the maintained README or guide. Keep an artifact in the current tree
+while an explanation or executable check needs it. Link historical reports at
+their exact Git revision, preserving their contents. Scratch captures and
+repetitive logs belong in ignored `output/`.
 
-- **What was tested:** bodies and views, code revision, and relevant source,
-  prepared and runtime records. Link manifests. Save uncommitted changes, identify
-  ignored files and include relevant shared code and the files actually served
-  to the browser. A commit or port alone cannot identify those differences. Record
-  byte counts and hashes for files not fixed by the revision or a manifest.
-- **What happened:** command or method, cases, results, failures and omitted checks.
-  Distinguish metadata/file, decoding, scientific and application checks; a pass
-  in one does not establish the others. Include environment details that affect
-  the result. Browser reports need browser, viewport, DPR, camera, view and settings.
-- **Where to inspect it:** links to original reports and screenshots needed to assess the
-  result. Map working paths to retrievable copies. A Git path at the recorded
-  revision suffices; external files need a stable download location, byte count
-  and hash. An ignored local path alone is not retrievable evidence.
+Record:
+
+- **Tested inputs:** bodies/views, code revision and relevant manifests. Identify
+  uncommitted changes, ignored inputs and files actually served to the browser;
+  pin anything not fixed by Git or a manifest with byte counts and hashes.
+- **Method and result:** command, cases, outcomes, failures and omitted checks.
+  Include environment details that affect the result. Browser evidence needs
+  browser version, viewport, DPR, camera, dataset and settings.
+- **Inspectable evidence:** original reports and relevant images at retrievable
+  locations. External files need stable download links and byte pins. A local
+  port or ignored path alone cannot identify or preserve a result.
+
+Use existing report formats; there is no required extra JSON format or file set.
 
 ## Say what the checks prove
 
-**Reproduction needs a comparison.** State which inputs were downloaded, copied
-or verified. Choose the expected output inventory before the run and compare
-regenerated files against that fixed baseline, exactly by default. Declare any numerical/visual
-tolerance and its scope before comparing, then report differences. An inventory
-created only from new output cannot prove reproduction of an earlier result.
+**Reproduction needs a comparison.** Choose the expected output inventory before
+running preparation. State which inputs were downloaded, copied or verified and
+compare regenerated outputs against that baseline, exactly by default. Declare
+any tolerance and its scope before comparing; report the differences.
 
-**Scientific checks need an independent reference.** Compare changed scientific meaning with
-source values or an independent calculation. Matching hashes or calling the same
-sampler twice misses shared interpretation errors. `recovered` and `prepared`
-describe how provenance was made; neither proves scientific accuracy, fresh
-acquisition or passing browser checks.
+**Scientific checks need an independent reference.** Compare changed quantities
+with source values or an independent calculation. Hashes and repeated calls to
+the same sampler cannot detect a shared interpretation error. `recovered` and
+`prepared` describe how provenance was made, not scientific or visual acceptance.
 
-**Visual checks need inspected images.** Identify the reference as a source/native
-capture, earlier product image or reconstructed diagnostic. For matched comparisons,
-save reference, new image and diff with matching capture settings. Explain different
-sources or framing and withhold pixel-matching claims. Inspect images of affected
-views, boundaries and lighting. Use the existing browser checks.
+**Visual checks need inspected images.** Identify the reference as an original
+source/native capture, earlier output or reconstructed diagnostic. For matched
+comparisons, retain reference, result and diff with matching capture settings.
+Disclose different sources or framing and inspect affected views, boundaries and
+lighting before making comparison claims.
 
-**An old pass describes an old version.** Keep its original paths, hashes, revision
-and outcome. To reuse it, name the new version in the README's evidence section
-and show that relevant dependencies still match. Do not mark an old report permanently `CURRENT` or use
-unchanged textures to prove behavior after camera/shell changes.
+**An old pass describes an old version.** Preserve its original revision, paths,
+hashes and outcome. To reuse it, identify the new revision and show that relevant
+dependencies still match. Unchanged textures do not qualify a changed camera.
 
-A passing body test is not a full-suite pass. Runtime image installation does
-not prove source restoration, complete Earth paging or every remote file's
-availability. State what remains unknown.
+Separate metadata/file, decoding, scientific and application results. A body test
+is not a full-suite pass; installed images do not prove source restoration or
+complete remote coverage. State what remains unknown.
 
 ## Pull requests
 
 Use [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/)
-for PR titles: `<type>[optional scope][!]: <summary>`. For example,
+for titles: `<type>[optional scope][!]: <summary>`, for example
 `feat(universe): add prepared galaxy layers` or `docs: clarify source credits`.
-Use `feat` for features, `fix` for fixes and an appropriate type for other work.
-Scope is optional; name the affected area when useful. Mark breaking changes with `!`.
+Use `!` for a breaking change.
 
-Apply **ISO 24495-1:2023** to every PR title and description through the
-[plain-language rules](#plain-language). Lead with the problem and resulting
-behavior; give reviewers concrete changes, short explanations and visible limits.
-For claims about sources, processing or scientific views, apply the **PDS4 1.26.0**
-[content requirements adapted above](#standards-basis): identify changed products
-and versions, explain processing and interpretation changes, and link the records
-and evidence for the tested revision. Keep detailed provenance in its maintained
-account and link it from the PR.
+Lead with the problem and resulting behavior. Apply the [plain-language rules](#plain-language)
+throughout, and the [PDS4 content requirements](#standards-basis) to source,
+processing and scientific claims. Link the affected README or guide for the
+source products, interpretation, results and known problems. Update credits and
+instructions in the same change.
 
-Update affected records, NOTICE credits/terms and the body README's explanation,
-results and known problems. Extend existing sections when adding a dataset.
-Run relevant checks and summarize their results in the PR. GitHub already records
-CI revisions; identify the revision and relevant differences for local or reused
-evidence. Link the maintained account instead of adding a PR completion report to `docs/`.
+Use the [template](../../.github/pull_request_template.md) as a starting point;
+a small PR can be one paragraph and its relevant check. Remove unused prompts.
+Summarize checks and limitations. GitHub records CI revisions; local and reused
+evidence must identify the tested revision and relevant differences.
 
-Use the [template](../../.github/pull_request_template.md) as a starting point.
-Headings are optional: a small change can be one paragraph explaining the problem,
-result and relevant check. Omit unused prompts. Do not add standards declarations,
-N/A entries or screenshots just to fill the template.
+Each added artifact must support a named claim, explanation or test. Explain
+unusually large additions. Preserve relevant failures and replace needed links
+with exact Git revision links before removing historical reports. A PR does not
+need a separate completion report in `docs/`.
 
-Commit source records and the evidence needed to review the change, including
-relevant failures. Each added artifact needs a named claim, explanation or test
-that uses it. Explain unusually large additions in the PR. Before removing an
-old report from the current tree, replace citations that still need it with
-verified links to its exact Git revision. Never rewrite its failures or present
-old screenshots as new.
+**Inspect PR images on GitHub.** Use a [GitHub attachment](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files)
+or an image committed at a fixed revision, for example
+`https://github.com/layoutit/css.earth/blob/<commit>/<path>?raw=true`.
+After publishing or editing the PR, reload it with normal repository access and
+inspect every image for loading, legibility, view and revision. File existence
+or HTTP success alone is insufficient. Fix broken embeds; if required images
+are unavailable, keep the PR in draft and identify what is missing.
 
-**Check images on GitHub (cssEarth rule).** Use a
-[GitHub attachment](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files)
-or an image committed at a fixed revision:
-`https://github.com/layoutit/cssEarth/blob/<commit>/<path>?raw=true`.
-Use the original attachment URL, not a temporary signed download URL.
-Local paths and localhost URLs are not reviewable evidence.
-
-After creating or editing a PR, reload its GitHub page and inspect every embedded
-image with normal repository access. Confirm it loads, is readable and matches the
-cited view and revision. File existence and HTTP success alone are insufficient.
-Fix broken embeds before handoff; if required visual evidence is unavailable,
-keep the PR in draft and say what is missing.
-
-**PROVENANCE DOCUMENTATION** maintains shared guidance and resolves contradictions;
-contributors update instructions affected by their change without an extra approval
-step. Add shared rules only for demonstrated gaps, citing the standard/section or
-identifying a cssEarth requirement. Do not repeat the standards table per body or
-add PR compliance checklists. New preparation operations still need source/output
-records and tests in existing tools; add infrastructure only for a specific tool need.
+**PROVENANCE DOCUMENTATION** maintains shared guidance. Contributors update rules
+affected by their changes without an extra approval step. Add a shared rule only
+for a demonstrated gap, identifying its standard/section or its cssEarth purpose.
+Use existing source records, preparation tools and checks.
 
 ## Plain language
 

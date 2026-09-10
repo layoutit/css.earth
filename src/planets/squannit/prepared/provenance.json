@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bd78eb3db2997f0dab0407f5363c723e28061b11e8ce9ffd876bf6c8dcca4393"
+    "sha256": "109a55ee3f4a64e07bc76ad33bb23a6bf277b4850fc68d11e1f3a8c77ccd6060"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -264,7 +264,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-squannit-model-surface",
+            "catalogueId": "jpl-squannit-kw4b",
             "role": "material",
             "evidence": "src/planets/squannit/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
@@ -299,7 +299,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-squannit-radar-shape",
+            "catalogueId": "jpl-squannit-kw4b",
             "role": "material",
             "evidence": "src/planets/squannit/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
           }

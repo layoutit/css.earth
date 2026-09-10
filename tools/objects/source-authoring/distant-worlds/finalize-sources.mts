@@ -1,3 +1,4 @@
+import {refreshSourceRecord} from '../../../source-authoring-templates.mts';
 import {requireRecord,requireArray,requireString,requireFiniteNumber} from '../../../source-values.mts';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 import {requireTerrainMesh} from '../../terrestrial-layers/radial-terrain.mts';
@@ -54,17 +55,18 @@ for (const b of bodies) {
     navigation.planetId=b.id;
     Object.assign(navigationSource,{id:'prepared-source-context',origin:b.source,credit:b.credit,expectedBytes:context.length,expectedSha256:hash(context),recipe});
     await write(resolve(src,'preparation/navigation.json'),navigation);
-    manifest.generatedIntermediates=[{...navigationSource}];
+    manifest.generatedIntermediates=[refreshSourceRecord(records(manifest.generatedIntermediates),{...navigationSource,path:requireString(navigationSource.path)})];
     console.log(JSON.stringify({id:b.id,sourceFaces:requireTerrainMesh(radial.grid).indices.length,faces:radial.faces.length,contextBytes:context.length}));
   }
   const declared=new Set([...records(manifest.inputs),...records(manifest.generatedIntermediates)].map(e=>requireString(e.path)));
   const documents: Record<string,unknown>[]=[];
+  const previousDocuments=records(manifest.documents);
   manifest.documents=documents;
   for(const path of (await files(src)).sort()){
     const rel=relative(src,path);
     if(rel==='manifest.json'||declared.has(rel))continue;
     const bytes=await readFile(path);
-    documents.push({path:rel,expectedBytes:bytes.length,expectedSha256:hash(bytes),purpose:'Pinned source observation, interpretation or preparation input.'});
+    documents.push(refreshSourceRecord(previousDocuments,{path:rel,expectedBytes:bytes.length,expectedSha256:hash(bytes),purpose:'Pinned source observation, interpretation or preparation input.'}));
   }
   await write(resolve(src,'manifest.json'),manifest);
   const descriptor=await read(resolve(pkg,'object.json'));

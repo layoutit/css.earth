@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3b58b40c58ea1f4d9cbf3212392a45fdf84a575a14edf0726a3f39624ab64334"
+    "sha256": "31c025c7f036e2ef8e7ee24511f94265ff8f7e978e92fcb3778b8f7db62a6175"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -954,7 +954,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-mercury-dlr-messenger-mascs-global-area-weighted-mean",
+            "catalogueId": "doi-10-5281-zenodo-7433033",
             "role": "material",
             "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
           }

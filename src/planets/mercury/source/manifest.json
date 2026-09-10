@@ -477,10 +477,14 @@
         "charts"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-mercury-config",
-        "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       }
     },
     {
@@ -507,7 +511,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-mercury-dlr-messenger-mascs-global-area-weighted-mean",
+            "catalogueId": "doi-10-5281-zenodo-7433033",
             "role": "material",
             "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
           }
@@ -529,10 +533,14 @@
         "charts"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-mercury-r240-rif",
-        "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       }
     },
     {
@@ -639,7 +647,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-mercury-google-maps-cubic-sky-sun-oracle-asset",
+            "catalogueId": "google-maps-sun-symbol",
             "role": "material",
             "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
           }
@@ -663,10 +671,8 @@
         "materials"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "google-maps-cubic-sky-sun-oracle-measurements",
-        "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-recorded measurements of Google Maps Sun presentation. The measurement file records the observed route and date; the referenced Sun image is a separate input."
       }
     },
     {

@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "43b119000e913ff0410bf803807ed982280e86020c950cd0ccb5ce3398b1f91a"
+    "sha256": "0b759f20311de193c7ab8e390d1b029fba48bafd8b22198e985dba43cae85d21"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1403,7 +1403,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-moon-diviner-ghrm-tbol-m-compact",
+            "catalogueId": "lro-diviner-ghrm-tbol-m",
             "role": "material",
             "evidence": "src/planets/moon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
           }
@@ -1438,7 +1438,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-moon-diviner-ghrm-tbol-anom-compact",
+            "catalogueId": "lro-diviner-ghrm-tbol-anomaly",
             "role": "material",
             "evidence": "src/planets/moon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
           }
@@ -1473,7 +1473,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-moon-diviner-ghrm-ra-sam-compact",
+            "catalogueId": "lro-diviner-ghrm-roughness",
             "role": "material",
             "evidence": "src/planets/moon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
           }

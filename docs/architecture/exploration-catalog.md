@@ -7,7 +7,7 @@ list owns that relationship; reverse participation is derived.
 
 The catalogues live in
 [`site/source/spacecraft/catalog.json`](../../site/source/spacecraft/catalog.json)
-under `cssearth-spacecraft-catalog@2`. They do not add scene loaders, routes or
+under `cssearth-spacecraft-catalog@3`. They do not add scene loaders, routes or
 camera owners. Mission and spacecraft IDs are scoped to their domains: spacecraft
 Juno does not refer to the independently registered asteroid Juno.
 
@@ -15,9 +15,9 @@ Juno does not refer to the independently registered asteroid Juno.
 
 [`exploration-catalog.mts`](../../src/platform/exploration-catalog.mts) validates
 unknown input and returns immutable records. Names, descriptions, vehicle kinds,
-agencies, dates and status claims carry reference IDs. Reference records include a
-source URL, title and check date, with an optional locator. Participation requires
-its own references. Agency records use the existing
+agencies, dates and status claims carry citations to the
+[Sources catalogue](../sources-catalogue.md), with a checked date and a field or
+section locator. Participation requires its own citations. Agency records use the existing
 [agency owner](../../site/source/agency-logos.json); a logo is optional.
 
 Dates retain their supplied precision. A year is not expanded to an invented
@@ -29,9 +29,7 @@ date instead of describing it as live status.
 Separately operated science vehicles get separate records. Instruments,
 containers and return capsules are not automatically spacecraft records. Routine
 extensions, encounters and manoeuvres do not automatically create new missions;
-use the source's distinction. This initial catalogue covers the migrated missions
-and their science vehicles, including the OSIRIS-APEX successor. It is not a
-catalogue of every historical mission.
+use the source's distinction. Coverage is limited to the records in the catalogue.
 
 Artwork references use `imageId` and `emblemId`. The approved
 [render library](../../site/source/spacecraft/render-library.json) and
@@ -81,8 +79,8 @@ existing exclusions for schematic interiors, illustrative models, modeled noise
 and schematic morphology. Empty attribution stays empty; names, publishers,
 mission targets and aliases are not association rules.
 
-[`prepare-spacecraft.mts`](../../tools/prepare-spacecraft.mts) writes one prepared
-catalogue containing the validated records, artwork, graph and closure hashes.
+[`prepare-spacecraft.mts`](../../tools/prepare-spacecraft.mts) compiles the Sources
+and Missions catalogues with their validated records, graphs and dependency hashes.
 The hashes cover source records, every body manifest/provenance/page/descriptor,
 registry and compiler owners, and approved artwork bytes. The common
 [site entry point](../../site/exploration-catalog.mts) verifies these pins and
@@ -96,44 +94,6 @@ request supplies its mission panel before the destination controls become active
 The content transport fills that deferred panel while retaining the preview's
 overview and controls. It does not create a separate catalogue fetch or preload
 every body's mission markup.
-
-## Migration inventory
-
-The starting catalogue contained 24 mixed mission/vehicle/group entries. The
-migration creates 26 individual missions and 36 physical vehicles. It preserves
-all 374 authored capture evidence strings and the 371 captures consumed by the
-current provenance. Three authored captures remain unconsumed: Earth's
-`nasa-black-marble-2016` and `nasa-blue-marble-december`, and Phoebe's
-`cassini-mosaic`. Their presence does not create new visible dataset links.
-
-| Previous identity | New representation | Dataset result |
-| --- | --- | --- |
-| 22 individual vehicle entries | Stable spacecraft IDs and explicitly named same-ID missions in the migration inventory | Existing vehicle and mission associations remain attached to their original sources |
-| `viking` group | `viking-1` and `viking-2` missions; an orbiter and lander for each | Mars, Phobos and Deimos collective Viking credits remain unresolved; no invented per-vehicle or per-mission links |
-| `grail` group | One `grail` mission; `grail-a` (Ebb) and `grail-b` (Flow) spacecraft | The Moon's existing GRAIL credit becomes mission-level evidence; membership alone does not attribute its map to each vehicle |
-| `osiris-rex` with “Active as APEX” | One enduring vehicle with an OSIRIS-APEX alias; separate OSIRIS-REx and OSIRIS-APEX missions | Bennu datasets retain OSIRIS-REx attribution; APEX has participation and no invented Bennu contributions |
-| Deployed science vehicles absent from the old flat map | Huygens, Galileo's atmospheric probe, Philae, MINERVA, three MINERVA-II rovers and MASCOT | These are participants; they acquire no observation links without capture evidence |
-
-The source references are beside the fields in the catalogue. Existing dated
-status claims keep their original 8 September 2026 check date. New identity and
-participation references were checked on 10 September 2026. Vehicle launch dates
-remain separate from successor mission start dates. The year-only Viking ends
-now describe the individual full missions, including their landers; the old
-collective 1980 date described the orbiters.
-
-The explicit preparation-only [version 1 migration](../../tools/objects/migrate-provenance-v1.mts)
-is the sole compatibility boundary. Normal consumers validate
-`cssearth-object-provenance@2` and never infer old group identities in the browser.
-Preparation validates the full prospective output set before staging files and
-replacing them. A validation failure leaves the previous prepared files intact;
-closure checking rejects interrupted or stale mixed output.
-
-The schema migration recovers records from the existing source, recipe and output
-pins. It does not claim a new scientific preparation run or fresh source-byte
-verification. Records whose metadata changed therefore use `recovered` and
-manifest-based verification; their source and rendered-asset hashes remain the
-same. A subsequent verified preparation can establish new byte-verification
-evidence through the existing provenance workflow.
 
 ## Dataset navigation
 
@@ -179,10 +139,9 @@ records the cases, viewports, settings, build-file hashes and image hashes.
 
 ## Preparing and checking a change
 
-Run `pnpm prepare:provenance` after changing capture records. It stages provenance
-and catalogue output together. Run `pnpm prepare:spacecraft` for catalogue/artwork
-changes when provenance is already current. Neither command acquires artwork or
-regenerates surface geometry.
+Use the [Sources preparation workflow](../sources-catalogue.md#prepare-and-check)
+after changing capture records, catalogue metadata or artwork. It publishes object
+provenance, Sources and Missions together without acquiring or rendering images.
 
 Run `pnpm typecheck` and `pnpm check:typescript-ownership`, the package, renderer,
 platform and shell test suites, and the production build. Focused tests include
@@ -200,9 +159,5 @@ same-body and cross-body dataset navigation, manual selection and history,
 invalid links, keyboard details, individual contribution labels, namespace
 isolation and the phone layout.
 
-Browser qualification must use the real shared shell: direct dataset loads,
-same-body and cross-body links, manual selection, back/forward, failed links,
-agency keyboard behavior and vehicle details at desktop and mobile widths. Check
-one mounted object, retained shell controls and unchanged shared interaction
-behavior. A catalogue association establishes the source relationship; it does
-not certify missing texture files or remote delivery availability.
+Check one mounted object and stable shared controls during those scenarios.
+A source association does not certify texture delivery or scientific accuracy.

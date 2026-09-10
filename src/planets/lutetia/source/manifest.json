@@ -141,7 +141,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-lutetia-lutetia-reference-naif0012-tls",
+            "catalogueId": "naif-leapseconds-0012",
             "role": "material",
             "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
           }
@@ -165,7 +165,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-lutetia-lutetia-reference-ros-v33-tf",
+            "catalogueId": "rosetta-frames-v33",
             "role": "material",
             "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
           }
@@ -189,7 +189,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-lutetia-lutetia-reference-ros-osiris-v15-ti",
+            "catalogueId": "rosetta-osiris-v15",
             "role": "material",
             "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
           }
@@ -261,7 +261,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-lutetia-lutetia-reference-osiris-boresight-pdf",
+            "catalogueId": "rosetta-osiris-boresight-v01",
             "role": "method",
             "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
           }
@@ -306,10 +306,8 @@
       "expectedBytes": 1240,
       "expectedSha256": "1f769499fd728829262741e3686092566b21e065af70fba582ca9a3bf2d7ee70",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "lutetia-preparation-camera-json",
-        "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-authored camera solution for the source image; the file records the camera parameters and the image it registers."
       }
     },
     {
@@ -386,10 +384,8 @@
       "expectedBytes": 1260,
       "expectedSha256": "2cff0cedc5f8f5aa083d50925bc88645b2c24975f022485ed613a202faa84b1c",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "lutetia-n20100710t154135529id4df22-camera-json",
-        "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-authored camera solution for the source image; the file records the camera parameters and the image it registers."
       }
     }
   ],

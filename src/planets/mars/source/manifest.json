@@ -15,10 +15,14 @@
       ],
       "expectedBytes": 3264,
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "inter-mars-title-vector",
-        "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "artwork",
+            "evidence": "Title outlines extracted from Inter Variable 4.001 at revision 9221beed3."
+          }
+        ]
       }
     },
     {
@@ -358,10 +362,14 @@
       ],
       "expectedBytes": 11093,
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-mars-configuration",
-        "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       }
     },
     {
@@ -378,10 +386,14 @@
       ],
       "expectedBytes": 11908,
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-mars-reflectance",
-        "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       }
     },
     {
@@ -401,10 +413,14 @@
         "starfield"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "hyg-v41-cubic-sky-registration",
-        "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hyg-v41",
+            "role": "material",
+            "evidence": "HYG v4.1 at commit c7f7f883fe678cc7680169a50ccd7dcc49b060ce; the local record retains the extracted stars or licence."
+          }
+        ]
       }
     },
     {
@@ -453,10 +469,8 @@
         "sky-sun"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "google-earth-pro-mars-sky-behavior-contract",
-        "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-recorded observations of Google Earth Pro 7.3.7.1327 Mars sky behaviour on 2026-09-02; the file contains the measurement method and limits."
       }
     },
     {
@@ -476,7 +490,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-mars-google-maps-cubic-sky-sun-oracle-asset",
+            "catalogueId": "google-maps-sun-symbol",
             "role": "material",
             "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
           }
@@ -497,10 +511,8 @@
         "sun-oracle"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "google-maps-cubic-sky-sun-oracle-measurements",
-        "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-recorded measurements of Google Maps Sun presentation. The measurement file records the observed route and date; the referenced Sun image is a separate input."
       }
     }
   ],

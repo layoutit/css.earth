@@ -36,10 +36,14 @@
         "title"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "inter-venus-title-vector",
-        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "artwork",
+            "evidence": "Title outlines extracted from Inter Variable 4.001 at revision 9221beed3."
+          }
+        ]
       }
     },
     {
@@ -87,10 +91,8 @@
         "surface-gallery"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "venus-venera-surface-gallery-metadata",
-        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-authored gallery selection, captions and display metadata. The four Venera camera files are separate published inputs; the gallery records their archive URLs and credit."
       }
     },
     {
@@ -266,10 +268,14 @@
         ]
       },
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "usgs-nasa-magellan-synthetic-color-wms",
-        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "usgs-magellan-color",
+            "role": "material",
+            "evidence": "USGS MAGELLAN_color GetMap response; the acquisition recipe records bounds, projection, dimensions and format."
+          }
+        ]
       }
     },
     {
@@ -301,10 +307,14 @@
         ]
       },
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "usgs-nasa-magellan-colorized-topography-wms",
-        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "usgs-magellan-topography",
+            "role": "material",
+            "evidence": "USGS MAGELLAN_topography GetMap response; the acquisition recipe records bounds, projection, dimensions and format."
+          }
+        ]
       }
     },
     {
@@ -446,10 +456,14 @@
         "temperature-pressure-profile"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-venus-expanded-configuration",
-        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       }
     },
     {
@@ -466,10 +480,14 @@
         "spectrum"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-venus-r240-rif-response",
-        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       }
     },
     {
@@ -490,7 +508,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-venus-hyg-v41-venus-field",
+            "catalogueId": "hyg-v41",
             "role": "material",
             "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
           }
@@ -544,7 +562,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-venus-google-maps-venus-sun-oracle-asset",
+            "catalogueId": "google-maps-sun-symbol",
             "role": "material",
             "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
           }
@@ -568,10 +586,8 @@
         "sun-oracle"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "google-maps-venus-sun-oracle-measurements",
-        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-recorded measurements of Google Maps Sun presentation. The measurement file records the observed route and date; the referenced Sun image is a separate input."
       }
     },
     {

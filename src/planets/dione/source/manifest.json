@@ -477,7 +477,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-dione-dione-vims-source-information-file-pdf",
+            "catalogueId": "cassini-vims-dione-rhea-information-pdf",
             "role": "method",
             "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
           }
@@ -505,7 +505,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-dione-dione-vims-source-information-file-xml",
+            "catalogueId": "cassini-vims-dione-rhea-information-label",
             "role": "material",
             "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
           }
@@ -533,7 +533,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-dione-dione-vims-source-vims-wavelengths-ir-tab",
+            "catalogueId": "cassini-vims-dione-rhea-wavelengths",
             "role": "material",
             "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
           }
@@ -561,7 +561,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-dione-dione-vims-source-vims-wavelengths-ir-xml",
+            "catalogueId": "cassini-vims-dione-rhea-wavelength-label",
             "role": "material",
             "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
           }
@@ -804,7 +804,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-dione-dione-vims-infrared",
+            "catalogueId": "doi-10-17189-ctqe-ta30",
             "role": "material",
             "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22"
           }
@@ -848,7 +848,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-dione-dione-vims-ice-absorption",
+            "catalogueId": "doi-10-17189-ctqe-ta30",
             "role": "material",
             "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
           }

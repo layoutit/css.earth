@@ -1198,9 +1198,14 @@
     {
       "id": "source-arrokoth-lorri-albedo-model",
       "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Arrokoth · lorri albedo model",
-      "identifiers": [],
+      "identityLevel": "release",
+      "title": "Arrokoth Albedo Map",
+      "identifiers": [
+        {
+          "type": "PDS LIDVID",
+          "value": "urn:nasa:pds:nh_derived:arrokoth_shapemodel_porter2024:albedo_arrokoth4_fp36h2_masked1::1.0"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -1214,10 +1219,17 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "464e773765bc05c0f483f2bedfd2fb317f8ce04393a84143382f1d4464895c2c",
           "locator": "/inputs/3"
+        },
+        {
+          "path": "src/planets/arrokoth/source/science/albedo_arrokoth4_fp36h2_masked1.lblx",
+          "revision": "c601cd5a54414fe6e500aba9b3c95c48b8870a30",
+          "sha256": "e752e5dd5eac25d65ccfe07b31cad02a4f47d158f80d4e14e12e17ef99e54af4",
+          "locator": "/Product_Observational/Identification_Area"
         }
       ],
       "relations": [],
-      "statements": []
+      "statements": [],
+      "version": "1.0"
     },
     {
       "id": "damit-shape-65053",
@@ -3066,11 +3078,16 @@
       "statements": []
     },
     {
-      "id": "source-callisto-jupiter-hubble-parent",
+      "id": "hubble-jupiter-2024-01-05",
       "kind": "data-product",
       "identityLevel": "work",
-      "title": "Callisto · jupiter hubble parent",
-      "identifiers": [],
+      "title": "Jupiter observed by Hubble on 5 January 2024",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -3084,17 +3101,46 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "4ebe4dae350c76f1c482b5d7c422caf840d09eb73c4e446e3a76e6f98c3ba215",
           "locator": "/inputs/3"
+        },
+        {
+          "path": "src/planets/europa/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "0686fe673474b00624a9aa620b81b2b0dd1da8df0d76b306ecb0dbcb4408a90d",
+          "locator": "/inputs/3"
+        },
+        {
+          "path": "src/planets/ganymede/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "de978afebd399e1bf1403c1cfd18ec2ff398cddf6e1941130d634e2e6c02408e",
+          "locator": "/inputs/4"
+        },
+        {
+          "path": "src/planets/io/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "dce758afabfcc911072bab5ac04de6408ae909c0b79e19de9432181fba0dad4f",
+          "locator": "/inputs/4"
+        },
+        {
+          "path": "src/planets/jupiter/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "2ffa5896b236cbe154361b47f7344ab3a3c21d31cc3689973284597326e15341",
+          "locator": "/inputs/0"
         }
       ],
       "relations": [],
       "statements": []
     },
     {
-      "id": "source-callisto-galileo-pia03456-original",
+      "id": "galileo-callisto-pia03456",
       "kind": "data-product",
       "identityLevel": "work",
-      "title": "Callisto · galileo pia03456 original",
-      "identifiers": [],
+      "title": "Galileo SSI colour mosaic of Callisto (PIA03456)",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Callisto%20-%20Galileo%20SSI%20Color%20Mosaic.png"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -3108,25 +3154,7 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "4ebe4dae350c76f1c482b5d7c422caf840d09eb73c4e446e3a76e6f98c3ba215",
           "locator": "/inputs/5"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-callisto-galileo-pia03456-registered-color",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Galileo color",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Callisto%20-%20Galileo%20SSI%20Color%20Mosaic.png",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
+        },
         {
           "path": "src/planets/callisto/source/manifest.json",
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
@@ -3851,11 +3879,16 @@
       "statements": []
     },
     {
-      "id": "source-comet-103p-pds-shape",
+      "id": "pds-hartley2-shape-2012",
       "kind": "model",
       "identityLevel": "work",
-      "title": "Comet 103P · pds shape",
-      "identifiers": [],
+      "title": "Hartley 2 shape model: hartley2_2012_plan.tab",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/data/hartley2_2012_plan.tab"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -3869,25 +3902,7 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "aca0ba2de32e8c80e7847ad07121d54356a6f49d2dc4d024341c7884949a1e69",
           "locator": "/inputs/0"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-comet-103p-constraint-surface",
-      "kind": "model",
-      "identityLevel": "work",
-      "title": "Source constraints",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/data/hartley2_2012_plan.tab",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
+        },
         {
           "path": "src/planets/comet-103p/source/manifest.json",
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
@@ -4379,11 +4394,16 @@
       "statements": []
     },
     {
-      "id": "source-comet-1p-giotto-source-1",
+      "id": "giotto-halley-hmc-best",
       "kind": "data-product",
       "identityLevel": "work",
-      "title": "Comet 1P · giotto source 1",
-      "identifiers": [],
+      "title": "Giotto Halley Multicolour Camera image: hmc_best.gif",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -4397,6 +4417,18 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "3f832fd5452814d8b696a257fe24c5826132646e1afc8ffedd021d8efb35ab9e",
           "locator": "/inputs/3"
+        },
+        {
+          "path": "src/planets/comet-1p/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "3f832fd5452814d8b696a257fe24c5826132646e1afc8ffedd021d8efb35ab9e",
+          "locator": "/inputs/10"
+        },
+        {
+          "path": "src/planets/comet-1p/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "3f832fd5452814d8b696a257fe24c5826132646e1afc8ffedd021d8efb35ab9e",
+          "locator": "/inputs/20"
         }
       ],
       "relations": [],
@@ -4541,30 +4573,6 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "3f832fd5452814d8b696a257fe24c5826132646e1afc8ffedd021d8efb35ab9e",
           "locator": "/inputs/9"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-comet-1p-giotto-projection",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Giotto",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/comet-1p/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "3f832fd5452814d8b696a257fe24c5826132646e1afc8ffedd021d8efb35ab9e",
-          "locator": "/inputs/10"
         }
       ],
       "relations": [],
@@ -4781,30 +4789,6 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "3f832fd5452814d8b696a257fe24c5826132646e1afc8ffedd021d8efb35ab9e",
           "locator": "/inputs/19"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-comet-1p-encounter-projection",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Giotto + Vega",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/comet-1p/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "3f832fd5452814d8b696a257fe24c5826132646e1afc8ffedd021d8efb35ab9e",
-          "locator": "/inputs/20"
         }
       ],
       "relations": [],
@@ -6098,11 +6082,16 @@
       "statements": []
     },
     {
-      "id": "source-comet-9p-pds-shape",
+      "id": "pds-tempel1-shape-2012",
       "kind": "model",
       "identityLevel": "work",
-      "title": "Comet 9P · pds shape",
-      "identifiers": [],
+      "title": "Tempel 1 shape model: tempel1_2012_plan.tab",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -6116,25 +6105,7 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "4a6c8273b06c9de5da31b6ee84de26c00265e195aa6be75b85b5ea5b0399556d",
           "locator": "/inputs/0"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-comet-9p-constraint-surface",
-      "kind": "model",
-      "identityLevel": "work",
-      "title": "Source constraints",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
+        },
         {
           "path": "src/planets/comet-9p/source/manifest.json",
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
@@ -7351,9 +7322,14 @@
     {
       "id": "source-dimorphos-dimorphos-facet-science",
       "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Dimorphos · dimorphos facet science",
-      "identifiers": [],
+      "identityLevel": "release",
+      "title": "Table of global slope relative to gravity at each facet for SPC shape model of (65803) Didymos I (Dimorphos). dimorphos_g_0972mm_spc_slp_0000n00000_v004",
+      "identifiers": [
+        {
+          "type": "PDS LIDVID",
+          "value": "urn:nasa:pds:dart_shapemodel:data_derived_dimorphos_model_v004:dimorphos_g_0972mm_spc_slp_0000n00000_v004::1.0"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -7367,10 +7343,17 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "6eae21ce420d8fe6af683c7013a139b8c8326c1162125167eef93c3a891564d8",
           "locator": "/inputs/3"
+        },
+        {
+          "path": "src/planets/dimorphos/source/science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+          "revision": "c601cd5a54414fe6e500aba9b3c95c48b8870a30",
+          "sha256": "a8878f757d6fdced9a914db22b90ae7be18080e17113e42d6c6427e78c5de297",
+          "locator": "/Product_Observational/Identification_Area"
         }
       ],
       "relations": [],
-      "statements": []
+      "statements": [],
+      "version": "1.0"
     },
     {
       "id": "source-dimorphos-dimorphos-relative-albedo",
@@ -7690,11 +7673,16 @@
       "statements": []
     },
     {
-      "id": "source-dione-dione-vims-source-information-file-pdf",
+      "id": "cassini-vims-dione-rhea-information-pdf",
       "kind": "publication",
       "identityLevel": "work",
-      "title": "Dione · dione vims source information file pdf",
-      "identifiers": [],
+      "title": "Dione and Rhea Cassini VIMS mosaic documentation",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.pdf"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -7708,17 +7696,28 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "d09b444f79ad0bfac08879efc0376c8b7314d3cd23bd81e5b59ee5dad8555d06",
           "locator": "/inputs/11"
+        },
+        {
+          "path": "src/planets/rhea/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "ee9ee1e0bc76f9e344ed1f23e0041c748ebf64bd2d1b2dd9b8f522ad4016cb4c",
+          "locator": "/inputs/7"
         }
       ],
       "relations": [],
       "statements": []
     },
     {
-      "id": "source-dione-dione-vims-source-information-file-xml",
+      "id": "cassini-vims-dione-rhea-information-label",
       "kind": "data-product",
       "identityLevel": "work",
-      "title": "Dione · dione vims source information file xml",
-      "identifiers": [],
+      "title": "PDS label for the Dione and Rhea VIMS documentation",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.xml"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -7732,17 +7731,28 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "d09b444f79ad0bfac08879efc0376c8b7314d3cd23bd81e5b59ee5dad8555d06",
           "locator": "/inputs/12"
+        },
+        {
+          "path": "src/planets/rhea/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "ee9ee1e0bc76f9e344ed1f23e0041c748ebf64bd2d1b2dd9b8f522ad4016cb4c",
+          "locator": "/inputs/8"
         }
       ],
       "relations": [],
       "statements": []
     },
     {
-      "id": "source-dione-dione-vims-source-vims-wavelengths-ir-tab",
-      "kind": "model",
+      "id": "cassini-vims-dione-rhea-wavelengths",
+      "kind": "data-product",
       "identityLevel": "work",
-      "title": "Dione · dione vims source vims wavelengths ir tab",
-      "identifiers": [],
+      "title": "Cassini VIMS infrared wavelength table",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/vims_wavelengths_ir.tab"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -7756,17 +7766,28 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "d09b444f79ad0bfac08879efc0376c8b7314d3cd23bd81e5b59ee5dad8555d06",
           "locator": "/inputs/13"
+        },
+        {
+          "path": "src/planets/rhea/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "ee9ee1e0bc76f9e344ed1f23e0041c748ebf64bd2d1b2dd9b8f522ad4016cb4c",
+          "locator": "/inputs/9"
         }
       ],
       "relations": [],
       "statements": []
     },
     {
-      "id": "source-dione-dione-vims-source-vims-wavelengths-ir-xml",
+      "id": "cassini-vims-dione-rhea-wavelength-label",
       "kind": "data-product",
       "identityLevel": "work",
-      "title": "Dione · dione vims source vims wavelengths ir xml",
-      "identifiers": [],
+      "title": "PDS label for the Cassini VIMS wavelength table",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/vims_wavelengths_ir.xml"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -7780,6 +7801,12 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "d09b444f79ad0bfac08879efc0376c8b7314d3cd23bd81e5b59ee5dad8555d06",
           "locator": "/inputs/14"
+        },
+        {
+          "path": "src/planets/rhea/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "ee9ee1e0bc76f9e344ed1f23e0041c748ebf64bd2d1b2dd9b8f522ad4016cb4c",
+          "locator": "/inputs/10"
         }
       ],
       "relations": [],
@@ -7977,69 +8004,27 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "d09b444f79ad0bfac08879efc0376c8b7314d3cd23bd81e5b59ee5dad8555d06",
           "locator": "/inputs/22"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-dione-dione-vims-infrared",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Infrared",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://doi.org/10.17189/ctqe-ta30",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/dione/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "d09b444f79ad0bfac08879efc0376c8b7314d3cd23bd81e5b59ee5dad8555d06",
-          "locator": "/inputs/22"
-        }
-      ],
-      "relations": [
-        {
-          "kind": "part-of",
-          "catalogueId": "doi-10-17189-ctqe-ta30",
-          "evidence": "src/planets/dione/source/manifest.json#/inputs/22"
-        }
-      ],
-      "statements": []
-    },
-    {
-      "id": "source-dione-dione-vims-ice-absorption",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Dione · dione vims ice absorption",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://doi.org/10.17189/ctqe-ta30",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
+        },
         {
           "path": "src/planets/dione/source/manifest.json",
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "d09b444f79ad0bfac08879efc0376c8b7314d3cd23bd81e5b59ee5dad8555d06",
           "locator": "/inputs/23"
-        }
-      ],
-      "relations": [
+        },
         {
-          "kind": "part-of",
-          "catalogueId": "doi-10-17189-ctqe-ta30",
-          "evidence": "src/planets/dione/source/manifest.json#/inputs/23"
+          "path": "src/planets/rhea/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "ee9ee1e0bc76f9e344ed1f23e0041c748ebf64bd2d1b2dd9b8f522ad4016cb4c",
+          "locator": "/inputs/18"
+        },
+        {
+          "path": "src/planets/rhea/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "ee9ee1e0bc76f9e344ed1f23e0041c748ebf64bd2d1b2dd9b8f522ad4016cb4c",
+          "locator": "/inputs/19"
         }
       ],
+      "relations": [],
       "statements": []
     },
     {
@@ -8101,11 +8086,16 @@
       "statements": []
     },
     {
-      "id": "source-donaldjohanson-donaldjohanson-shape",
+      "id": "lucy-donaldjohanson-k548-v10",
       "kind": "model",
       "identityLevel": "work",
-      "title": "Donaldjohanson · donaldjohanson shape",
-      "identifiers": [],
+      "title": "Lucy Donaldjohanson shape kernel: lcy_donj_k548_iso20m_v10.bds",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/dsk/lcy_donj_k548_iso20m_v10.bds"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -8119,25 +8109,7 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "d21c753d2677fe37478aee56c2ca7e2231755e40dc1260904f78f859d7fdb19c",
           "locator": "/inputs/1"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-donaldjohanson-donaldjohanson-original-dsk",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Donaldjohanson · donaldjohanson original dsk",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/dsk/lcy_donj_k548_iso20m_v10.bds",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
+        },
         {
           "path": "src/planets/donaldjohanson/source/manifest.json",
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
@@ -8221,11 +8193,16 @@
       "statements": []
     },
     {
-      "id": "source-donaldjohanson-donaldjohanson-reference-naif0012-tls",
+      "id": "naif-leapseconds-0012",
       "kind": "data-product",
       "identityLevel": "work",
-      "title": "Donaldjohanson · donaldjohanson reference naif0012 tls",
-      "identifiers": [],
+      "title": "NAIF leap-second kernel: naif0012.tls",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -8239,6 +8216,18 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "d21c753d2677fe37478aee56c2ca7e2231755e40dc1260904f78f859d7fdb19c",
           "locator": "/inputs/7"
+        },
+        {
+          "path": "src/planets/lutetia/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "53e9317e68341468b8006cf1cd0b4caf9484ce18e37c2e853311d4227ef154bd",
+          "locator": "/inputs/4"
+        },
+        {
+          "path": "src/planets/steins/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "34b6cf3a3879e3c03f7f6ab673121427f8a9194df7dd0fac9d47e98009c5ca24",
+          "locator": "/inputs/4"
         }
       ],
       "relations": [],
@@ -8710,6 +8699,42 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "bd42c8943697a61ab922cb82f1da71744803ab78ed519fb2839a1f138bb61d16",
           "locator": "/inputs/16"
+        },
+        {
+          "path": "src/planets/moon/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "5bd482ea796fdcecd4cfdaf9be66f4d52fe30897fcdaf4ff42d892249854a31c",
+          "locator": "/inputs/6"
+        },
+        {
+          "path": "src/planets/neptune/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "fa485562067c99697c0286565297df4c9c55ca3ad9e6b6c9e86b601948f565e6",
+          "locator": "/inputs/11"
+        },
+        {
+          "path": "src/planets/pluto/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "caa313eb904a5e4b00dbd394d5e2594eae28b6e8d5da18bb0e4c7e334c16660b",
+          "locator": "/inputs/6"
+        },
+        {
+          "path": "src/planets/saturn/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "769d516be08271c9d2e91af225e515b1200803f25c389998dbfdaef9f40fc7b5",
+          "locator": "/inputs/8"
+        },
+        {
+          "path": "src/planets/sun/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "18978bdf36bb03e1c6ed36f0d7e2f8dc3c203c6c4a4e1e17b7f23dd70da11602",
+          "locator": "/inputs/34"
+        },
+        {
+          "path": "src/planets/venus/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "380fd3c49e698d4028d1dc6472507d98b037445472b1815c978f57ed7e225d91",
+          "locator": "/inputs/18"
         }
       ],
       "relations": [
@@ -8723,11 +8748,16 @@
       "version": "4.1"
     },
     {
-      "id": "source-earth-google-maps-earth-cubic-sky-sun-oracle-asset",
-      "kind": "data-product",
+      "id": "google-maps-sun-symbol",
+      "kind": "artwork",
       "identityLevel": "work",
-      "title": "Earth · google maps earth cubic sky sun oracle asset",
-      "identifiers": [],
+      "title": "Google Maps Sun symbol: sun.png",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://mw1.google.com/mw-weather/static/sun.png"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -8741,6 +8771,48 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "bd42c8943697a61ab922cb82f1da71744803ab78ed519fb2839a1f138bb61d16",
           "locator": "/inputs/19"
+        },
+        {
+          "path": "src/planets/jupiter/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "2ffa5896b236cbe154361b47f7344ab3a3c21d31cc3689973284597326e15341",
+          "locator": "/inputs/19"
+        },
+        {
+          "path": "src/planets/mars/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "c8ac2a146613a1322fa1e2205fc30c2b881b88e5ef5bed82903e8e1a0acb8745",
+          "locator": "/inputs/17"
+        },
+        {
+          "path": "src/planets/mercury/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "2c66d93686fe80a9cecb39cf8b6b6e486d2e4cebc900a62534185a26c5f565ec",
+          "locator": "/inputs/21"
+        },
+        {
+          "path": "src/planets/neptune/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "fa485562067c99697c0286565297df4c9c55ca3ad9e6b6c9e86b601948f565e6",
+          "locator": "/inputs/13"
+        },
+        {
+          "path": "src/planets/saturn/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "769d516be08271c9d2e91af225e515b1200803f25c389998dbfdaef9f40fc7b5",
+          "locator": "/inputs/23"
+        },
+        {
+          "path": "src/planets/uranus/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "75d2dc8312a10ac087b17086d8a728769ceeca4b46d7e860d3225b82b5bedf0e",
+          "locator": "/inputs/10"
+        },
+        {
+          "path": "src/planets/venus/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "380fd3c49e698d4028d1dc6472507d98b037445472b1815c978f57ed7e225d91",
+          "locator": "/inputs/20"
         }
       ],
       "relations": [],
@@ -8891,35 +8963,16 @@
       "statements": []
     },
     {
-      "id": "source-earth-nasa-mur-gibs-receipt",
+      "id": "gibs-mur-sst-anomalies",
       "kind": "data-product",
       "identityLevel": "work",
-      "title": "Earth · nasa mur gibs receipt",
-      "identifiers": [],
-      "links": [
+      "title": "MUR sea surface temperature anomalies: NASA GIBS imagery",
+      "identifiers": [
         {
-          "role": "landing",
-          "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
-          "label": "Source"
+          "type": "GIBS layer",
+          "value": "GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies"
         }
       ],
-      "evidence": [
-        {
-          "path": "src/planets/earth/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "bd42c8943697a61ab922cb82f1da71744803ab78ed519fb2839a1f138bb61d16",
-          "locator": "/inputs/28"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-earth-nasa-mur-gibs-layer",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Earth · nasa mur gibs layer",
-      "identifiers": [],
       "links": [
         {
           "role": "landing",
@@ -8933,10 +8986,17 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "bd42c8943697a61ab922cb82f1da71744803ab78ed519fb2839a1f138bb61d16",
           "locator": "/inputs/29"
+        },
+        {
+          "path": "src/planets/earth/source/science/mur-gibs-receipt.json",
+          "revision": "c601cd5a54414fe6e500aba9b3c95c48b8870a30",
+          "sha256": "c5cafbea0d3627a3e0cf3956de4b0450141877212021de809c390fe615fb5d2d",
+          "locator": "/layer"
         }
       ],
       "relations": [],
-      "statements": []
+      "statements": [],
+      "publisher": "NASA GIBS"
     },
     {
       "id": "source-earth-nasa-mur-gibs-colormap",
@@ -9775,11 +9835,16 @@
       "statements": []
     },
     {
-      "id": "source-enceladus-jpl-spc-enceladus-v2-dsk",
-      "kind": "data-product",
+      "id": "cassini-enceladus-spc-v2",
+      "kind": "model",
       "identityLevel": "work",
-      "title": "Enceladus · jpl spc enceladus v2 dsk",
-      "identifiers": [],
+      "title": "Cassini Enceladus SPC shape kernel: cas_enceladus_ssd_spc_0256icq_v2.bds",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/cas_enceladus_ssd_spc_0256icq_v2.bds"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -9793,25 +9858,7 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "6d88e446812b26cd241cb335af4874f8f99390216e50a94602e111e3b823b3ca",
           "locator": "/inputs/4"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-enceladus-jpl-spc-enceladus-v2-q256",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Enceladus · jpl spc enceladus v2 q256",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/cas_enceladus_ssd_spc_0256icq_v2.bds",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
+        },
         {
           "path": "src/planets/enceladus/source/manifest.json",
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
@@ -10717,30 +10764,6 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "0686fe673474b00624a9aa620b81b2b0dd1da8df0d76b306ecb0dbcb4408a90d",
           "locator": "/inputs/0"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-europa-jupiter-hubble-parent",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Europa · jupiter hubble parent",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/europa/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "0686fe673474b00624a9aa620b81b2b0dd1da8df0d76b306ecb0dbcb4408a90d",
-          "locator": "/inputs/3"
         }
       ],
       "relations": [],
@@ -11904,14 +11927,24 @@
       "statements": []
     },
     {
-      "id": "source-eurybates-occultation-approximation",
+      "id": "doi-10-3847-psj-acaf79",
       "kind": "publication",
       "identityLevel": "work",
-      "title": "Eurybates · occultation approximation",
-      "identifiers": [],
+      "title": "Shape Models of Lucy Targets (3548) Eurybates and (21900) Orus from Disk-integrated Photometry",
+      "identifiers": [
+        {
+          "type": "DOI",
+          "value": "10.3847/PSJ/acaf79"
+        }
+      ],
       "links": [
         {
           "role": "landing",
+          "url": "https://doi.org/10.3847/PSJ/acaf79",
+          "label": "Publication"
+        },
+        {
+          "role": "mirror",
           "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
           "label": "Source"
         }
@@ -11922,34 +11955,47 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "29b2dd3b78be9acfd62a6ed3af9df35abbc854957f37777875b78be86271cea3",
           "locator": "/inputs/2"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-eurybates-model-surface",
-      "kind": "publication",
-      "identityLevel": "work",
-      "title": "Shape model",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
+        },
         {
           "path": "src/planets/eurybates/source/manifest.json",
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "29b2dd3b78be9acfd62a6ed3af9df35abbc854957f37777875b78be86271cea3",
           "locator": "/inputs/3"
+        },
+        {
+          "path": "src/planets/orus/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "a4dec1a519169bbafa5c29c4f153d1badcdf2bee2dbdecb3f77aaa7732890362",
+          "locator": "/inputs/2"
+        },
+        {
+          "path": "src/planets/orus/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "a4dec1a519169bbafa5c29c4f153d1badcdf2bee2dbdecb3f77aaa7732890362",
+          "locator": "/inputs/3"
+        },
+        {
+          "url": "https://elib.dlr.de/194154/",
+          "checkedOn": "2026-09-10",
+          "locator": "Title, authors, publication date and DOI"
         }
       ],
       "relations": [],
-      "statements": []
+      "statements": [],
+      "creators": [
+        "Stefano Mottola",
+        "Stephan Hellmich",
+        "Marc W. Buie",
+        "Amanda M. Zangari",
+        "Robert D. Stephens",
+        "Mario Di Martino",
+        "Gerrit Proffe",
+        "Simone Marchi",
+        "Catherine B. Olkin",
+        "Harold F. Levison"
+      ],
+      "publicationDate": "2023",
+      "publisher": "IOP Publishing"
     },
     {
       "id": "damit-shape-9829",
@@ -12367,30 +12413,6 @@
       "statements": []
     },
     {
-      "id": "source-ganymede-jupiter-hubble-parent",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Ganymede · jupiter hubble parent",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/ganymede/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "de978afebd399e1bf1403c1cfd18ec2ff398cddf6e1941130d634e2e6c02408e",
-          "locator": "/inputs/4"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
       "id": "source-ganymede-usgs-sim3237-geologyunits-dbf",
       "kind": "data-product",
       "identityLevel": "work",
@@ -12558,99 +12580,57 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "de978afebd399e1bf1403c1cfd18ec2ff398cddf6e1941130d634e2e6c02408e",
           "locator": "/inputs/12"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-ganymede-ganymede-muse-oxygen-signature-night-1",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Oxygen signature",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://doi.org/10.5281/zenodo.11402374",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/ganymede/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "de978afebd399e1bf1403c1cfd18ec2ff398cddf6e1941130d634e2e6c02408e",
-          "locator": "/inputs/12"
-        }
-      ],
-      "relations": [
-        {
-          "kind": "part-of",
-          "catalogueId": "doi-10-5281-zenodo-11402374",
-          "evidence": "src/planets/ganymede/source/manifest.json#/inputs/12"
-        }
-      ],
-      "statements": []
-    },
-    {
-      "id": "source-ganymede-ganymede-muse-oxygen-signature-night-2",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Oxygen signature",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://doi.org/10.5281/zenodo.11402374",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
+        },
         {
           "path": "src/planets/ganymede/source/manifest.json",
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "de978afebd399e1bf1403c1cfd18ec2ff398cddf6e1941130d634e2e6c02408e",
           "locator": "/inputs/13"
-        }
-      ],
-      "relations": [
-        {
-          "kind": "part-of",
-          "catalogueId": "doi-10-5281-zenodo-11402374",
-          "evidence": "src/planets/ganymede/source/manifest.json#/inputs/13"
-        }
-      ],
-      "statements": []
-    },
-    {
-      "id": "source-ganymede-ganymede-muse-oxygen-signature-night-3",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Oxygen signature",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://doi.org/10.5281/zenodo.11402374",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
+        },
         {
           "path": "src/planets/ganymede/source/manifest.json",
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "de978afebd399e1bf1403c1cfd18ec2ff398cddf6e1941130d634e2e6c02408e",
           "locator": "/inputs/14"
-        }
-      ],
-      "relations": [
+        },
         {
-          "kind": "part-of",
-          "catalogueId": "doi-10-5281-zenodo-11402374",
-          "evidence": "src/planets/ganymede/source/manifest.json#/inputs/14"
+          "path": "src/planets/io/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "dce758afabfcc911072bab5ac04de6408ae909c0b79e19de9432181fba0dad4f",
+          "locator": "/inputs/15"
+        },
+        {
+          "path": "src/planets/io/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "dce758afabfcc911072bab5ac04de6408ae909c0b79e19de9432181fba0dad4f",
+          "locator": "/inputs/16"
+        },
+        {
+          "path": "src/planets/io/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "dce758afabfcc911072bab5ac04de6408ae909c0b79e19de9432181fba0dad4f",
+          "locator": "/inputs/17"
+        },
+        {
+          "path": "src/planets/io/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "dce758afabfcc911072bab5ac04de6408ae909c0b79e19de9432181fba0dad4f",
+          "locator": "/inputs/18"
+        },
+        {
+          "path": "src/planets/io/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "dce758afabfcc911072bab5ac04de6408ae909c0b79e19de9432181fba0dad4f",
+          "locator": "/inputs/19"
+        },
+        {
+          "path": "src/planets/io/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "dce758afabfcc911072bab5ac04de6408ae909c0b79e19de9432181fba0dad4f",
+          "locator": "/inputs/20"
         }
       ],
+      "relations": [],
       "statements": []
     },
     {
@@ -12846,11 +12826,16 @@
       "statements": []
     },
     {
-      "id": "source-gaspra-gaspra-gll36001-ti",
+      "id": "galileo-ssi-gll36001",
       "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Gaspra · gaspra gll36001 ti",
-      "identifiers": [],
+      "identityLevel": "release",
+      "title": "Galileo SSI instrument kernel: gll36001.ti",
+      "identifiers": [
+        {
+          "type": "NAIF instrument kernel",
+          "value": "gll36001.ti"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -12864,10 +12849,23 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "8e87d572c855abd6cb708fe6dda3a1a8d016b80b53ff3ac0ebea611fc78be5c8",
           "locator": "/inputs/9"
+        },
+        {
+          "path": "src/planets/ida/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "b1c8d2e0429523d1fc9024287e2061661955989eeada3e53c1f8fe60259ba692",
+          "locator": "/inputs/11"
+        },
+        {
+          "url": "https://naif.jpl.nasa.gov/pub/naif/GLL/kernels/ik/gll36001.ti",
+          "checkedOn": "2026-09-10",
+          "locator": "DATA_OBJECT_TYPE, SPACECRAFT_NAME, INSTRUMENT_ID and INS-77036_VERSION"
         }
       ],
       "relations": [],
-      "statements": []
+      "statements": [],
+      "version": "1.0",
+      "publisher": "NASA/JPL NAIF"
     },
     {
       "id": "source-gaspra-gaspra-camera-catalog-tab",
@@ -14182,36 +14180,6 @@
       "statements": []
     },
     {
-      "id": "source-hydra-model-surface",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Shape model",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://doi.org/10.6084/m9.figshare.12779975.v1",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/hydra/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "854784256392ef2218834da58fad39ea054c4796fe635168e118b70f8ed8ed60",
-          "locator": "/inputs/3"
-        }
-      ],
-      "relations": [
-        {
-          "kind": "part-of",
-          "catalogueId": "doi-10-6084-m9-figshare-12779975-v1",
-          "evidence": "src/planets/hydra/source/manifest.json#/inputs/3"
-        }
-      ],
-      "statements": []
-    },
-    {
       "id": "source-hygiea-hygiea-shape",
       "kind": "model",
       "identityLevel": "work",
@@ -15252,30 +15220,6 @@
       "statements": []
     },
     {
-      "id": "source-ida-ida-gll36001-ti",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Ida · ida gll36001 ti",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://naif.jpl.nasa.gov/pub/naif/GLL/kernels/ik/gll36001.ti",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/ida/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "b1c8d2e0429523d1fc9024287e2061661955989eeada3e53c1f8fe60259ba692",
-          "locator": "/inputs/11"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
       "id": "source-ida-ida-camera-catalog-tab",
       "kind": "model",
       "identityLevel": "work",
@@ -15579,30 +15523,6 @@
       "statements": []
     },
     {
-      "id": "source-io-jupiter-hubble-parent",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Io · jupiter hubble parent",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/io/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "dce758afabfcc911072bab5ac04de6408ae909c0b79e19de9432181fba0dad4f",
-          "locator": "/inputs/4"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
       "id": "source-io-usgs-sim3168-io-geounits-dbf",
       "kind": "data-product",
       "identityLevel": "work",
@@ -15816,186 +15736,6 @@
         }
       ],
       "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-io-io-muse-spectral-slope-night-1",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Spectral slope",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://doi.org/10.5281/zenodo.11402374",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/io/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "dce758afabfcc911072bab5ac04de6408ae909c0b79e19de9432181fba0dad4f",
-          "locator": "/inputs/15"
-        }
-      ],
-      "relations": [
-        {
-          "kind": "part-of",
-          "catalogueId": "doi-10-5281-zenodo-11402374",
-          "evidence": "src/planets/io/source/manifest.json#/inputs/15"
-        }
-      ],
-      "statements": []
-    },
-    {
-      "id": "source-io-io-muse-spectral-slope-night-2",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Spectral slope",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://doi.org/10.5281/zenodo.11402374",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/io/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "dce758afabfcc911072bab5ac04de6408ae909c0b79e19de9432181fba0dad4f",
-          "locator": "/inputs/16"
-        }
-      ],
-      "relations": [
-        {
-          "kind": "part-of",
-          "catalogueId": "doi-10-5281-zenodo-11402374",
-          "evidence": "src/planets/io/source/manifest.json#/inputs/16"
-        }
-      ],
-      "statements": []
-    },
-    {
-      "id": "source-io-io-muse-spectral-slope-night-3",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Spectral slope",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://doi.org/10.5281/zenodo.11402374",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/io/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "dce758afabfcc911072bab5ac04de6408ae909c0b79e19de9432181fba0dad4f",
-          "locator": "/inputs/17"
-        }
-      ],
-      "relations": [
-        {
-          "kind": "part-of",
-          "catalogueId": "doi-10-5281-zenodo-11402374",
-          "evidence": "src/planets/io/source/manifest.json#/inputs/17"
-        }
-      ],
-      "statements": []
-    },
-    {
-      "id": "source-io-io-muse-visible-absorption-night-1",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Visible absorption",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://doi.org/10.5281/zenodo.11402374",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/io/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "dce758afabfcc911072bab5ac04de6408ae909c0b79e19de9432181fba0dad4f",
-          "locator": "/inputs/18"
-        }
-      ],
-      "relations": [
-        {
-          "kind": "part-of",
-          "catalogueId": "doi-10-5281-zenodo-11402374",
-          "evidence": "src/planets/io/source/manifest.json#/inputs/18"
-        }
-      ],
-      "statements": []
-    },
-    {
-      "id": "source-io-io-muse-visible-absorption-night-2",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Visible absorption",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://doi.org/10.5281/zenodo.11402374",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/io/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "dce758afabfcc911072bab5ac04de6408ae909c0b79e19de9432181fba0dad4f",
-          "locator": "/inputs/19"
-        }
-      ],
-      "relations": [
-        {
-          "kind": "part-of",
-          "catalogueId": "doi-10-5281-zenodo-11402374",
-          "evidence": "src/planets/io/source/manifest.json#/inputs/19"
-        }
-      ],
-      "statements": []
-    },
-    {
-      "id": "source-io-io-muse-visible-absorption-night-3",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Visible absorption",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://doi.org/10.5281/zenodo.11402374",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/io/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "dce758afabfcc911072bab5ac04de6408ae909c0b79e19de9432181fba0dad4f",
-          "locator": "/inputs/20"
-        }
-      ],
-      "relations": [
-        {
-          "kind": "part-of",
-          "catalogueId": "doi-10-5281-zenodo-11402374",
-          "evidence": "src/planets/io/source/manifest.json#/inputs/20"
-        }
-      ],
       "statements": []
     },
     {
@@ -16900,30 +16640,6 @@
       "statements": []
     },
     {
-      "id": "source-jupiter-nasa-hubble-jupiter-navigation-marker",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Jupiter · nasa hubble jupiter navigation marker",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/jupiter/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "2ffa5896b236cbe154361b47f7344ab3a3c21d31cc3689973284597326e15341",
-          "locator": "/inputs/0"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
       "id": "source-jupiter-openspace-jupiter-globe",
       "kind": "software",
       "identityLevel": "work",
@@ -17182,30 +16898,6 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "2ffa5896b236cbe154361b47f7344ab3a3c21d31cc3689973284597326e15341",
           "locator": "/inputs/14"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-jupiter-google-maps-jupiter-cubic-sky-sun-oracle-asset",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Jupiter · google maps jupiter cubic sky sun oracle asset",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://mw1.google.com/mw-weather/static/sun.png",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/jupiter/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "2ffa5896b236cbe154361b47f7344ab3a3c21d31cc3689973284597326e15341",
-          "locator": "/inputs/19"
         }
       ],
       "relations": [],
@@ -17854,14 +17546,24 @@
       "statements": []
     },
     {
-      "id": "source-leucus-occultation-approximation",
+      "id": "doi-10-3847-psj-abb942",
       "kind": "publication",
       "identityLevel": "work",
-      "title": "Leucus · occultation approximation",
-      "identifiers": [],
+      "title": "Convex Shape and Rotation Model of Lucy Target (11351) Leucus from Lightcurves and Occultations",
+      "identifiers": [
+        {
+          "type": "DOI",
+          "value": "10.3847/PSJ/abb942"
+        }
+      ],
       "links": [
         {
           "role": "landing",
+          "url": "https://doi.org/10.3847/PSJ/abb942",
+          "label": "Publication"
+        },
+        {
+          "role": "mirror",
           "url": "https://elib.dlr.de/139387/1/Mottola_2020_Planet._Sci._J._1_73.pdf",
           "label": "Source"
         }
@@ -17872,34 +17574,32 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "759e7335d66426cd9cdf17d9020771f4767c5227ec710ca8578240abf0f810d0",
           "locator": "/inputs/2"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-leucus-model-surface",
-      "kind": "publication",
-      "identityLevel": "work",
-      "title": "Shape model",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://elib.dlr.de/139387/1/Mottola_2020_Planet._Sci._J._1_73.pdf",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
+        },
         {
           "path": "src/planets/leucus/source/manifest.json",
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "759e7335d66426cd9cdf17d9020771f4767c5227ec710ca8578240abf0f810d0",
           "locator": "/inputs/3"
+        },
+        {
+          "url": "https://elib.dlr.de/139387/",
+          "checkedOn": "2026-09-10",
+          "locator": "Title, authors, publication date and DOI"
         }
       ],
       "relations": [],
-      "statements": []
+      "statements": [],
+      "creators": [
+        "S. Mottola",
+        "S. Hellmich",
+        "M. W. Buie",
+        "A. M. Zangari",
+        "S. Marchi",
+        "Michael E. Brown",
+        "H. F. Levison"
+      ],
+      "publicationDate": "2020-12",
+      "publisher": "IOP Publishing"
     },
     {
       "id": "damit-shape-3320",
@@ -18182,35 +17882,16 @@
       "statements": []
     },
     {
-      "id": "source-lutetia-lutetia-reference-naif0012-tls",
+      "id": "rosetta-frames-v33",
       "kind": "data-product",
       "identityLevel": "work",
-      "title": "Lutetia · lutetia reference naif0012 tls",
-      "identifiers": [],
-      "links": [
+      "title": "Rosetta frame kernel: ROS_V33.TF",
+      "identifiers": [
         {
-          "role": "landing",
-          "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls",
-          "label": "Source"
+          "type": "Archive resource",
+          "value": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/fk/former_versions/ROS_V33.TF"
         }
       ],
-      "evidence": [
-        {
-          "path": "src/planets/lutetia/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "53e9317e68341468b8006cf1cd0b4caf9484ce18e37c2e853311d4227ef154bd",
-          "locator": "/inputs/4"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-lutetia-lutetia-reference-ros-v33-tf",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Lutetia · lutetia reference ROS_V33 TF",
-      "identifiers": [],
       "links": [
         {
           "role": "landing",
@@ -18224,17 +17905,28 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "53e9317e68341468b8006cf1cd0b4caf9484ce18e37c2e853311d4227ef154bd",
           "locator": "/inputs/5"
+        },
+        {
+          "path": "src/planets/steins/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "34b6cf3a3879e3c03f7f6ab673121427f8a9194df7dd0fac9d47e98009c5ca24",
+          "locator": "/inputs/5"
         }
       ],
       "relations": [],
       "statements": []
     },
     {
-      "id": "source-lutetia-lutetia-reference-ros-osiris-v15-ti",
+      "id": "rosetta-osiris-v15",
       "kind": "data-product",
       "identityLevel": "work",
-      "title": "Lutetia · lutetia reference ROS_OSIRIS_V15 TI",
-      "identifiers": [],
+      "title": "Rosetta OSIRIS instrument kernel: ROS_OSIRIS_V15.TI",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/ik/former_versions/ROS_OSIRIS_V15.TI"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -18247,6 +17939,12 @@
           "path": "src/planets/lutetia/source/manifest.json",
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "53e9317e68341468b8006cf1cd0b4caf9484ce18e37c2e853311d4227ef154bd",
+          "locator": "/inputs/6"
+        },
+        {
+          "path": "src/planets/steins/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "34b6cf3a3879e3c03f7f6ab673121427f8a9194df7dd0fac9d47e98009c5ca24",
           "locator": "/inputs/6"
         }
       ],
@@ -18302,11 +18000,16 @@
       "statements": []
     },
     {
-      "id": "source-lutetia-lutetia-reference-osiris-boresight-pdf",
+      "id": "rosetta-osiris-boresight-v01",
       "kind": "publication",
       "identityLevel": "work",
-      "title": "Lutetia · lutetia reference osiris boresight pdf",
-      "identifiers": [],
+      "title": "Rosetta OSIRIS boresight calibration: BORESIGHT_V01.PDF",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSIWAC/RO-C-OSIWAC-5-ESC2-67P-M15-GEO-V2.0/DOCUMENT/CALIB/BORESIGHT_V01.PDF"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -18320,6 +18023,12 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "53e9317e68341468b8006cf1cd0b4caf9484ce18e37c2e853311d4227ef154bd",
           "locator": "/inputs/9"
+        },
+        {
+          "path": "src/planets/steins/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "34b6cf3a3879e3c03f7f6ab673121427f8a9194df7dd0fac9d47e98009c5ca24",
+          "locator": "/inputs/8"
         }
       ],
       "relations": [],
@@ -18830,30 +18539,6 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "c8ac2a146613a1322fa1e2205fc30c2b881b88e5ef5bed82903e8e1a0acb8745",
           "locator": "/inputs/11"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-mars-google-maps-cubic-sky-sun-oracle-asset",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Mars · google maps cubic sky sun oracle asset",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://mw1.google.com/mw-weather/static/sun.png",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/mars/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "c8ac2a146613a1322fa1e2205fc30c2b881b88e5ef5bed82903e8e1a0acb8745",
-          "locator": "/inputs/17"
         }
       ],
       "relations": [],
@@ -19601,36 +19286,6 @@
       "statements": []
     },
     {
-      "id": "source-mercury-dlr-messenger-mascs-global-area-weighted-mean",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "MESSENGER MASCS spectral cube",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://doi.org/10.5281/zenodo.7433033",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/mercury/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "2c66d93686fe80a9cecb39cf8b6b6e486d2e4cebc900a62534185a26c5f565ec",
-          "locator": "/inputs/16"
-        }
-      ],
-      "relations": [
-        {
-          "kind": "part-of",
-          "catalogueId": "doi-10-5281-zenodo-7433033",
-          "evidence": "src/planets/mercury/source/manifest.json#/inputs/16"
-        }
-      ],
-      "statements": []
-    },
-    {
       "id": "nasa-mercury-facts",
       "kind": "reference-page",
       "identityLevel": "work",
@@ -19649,30 +19304,6 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "2c66d93686fe80a9cecb39cf8b6b6e486d2e4cebc900a62534185a26c5f565ec",
           "locator": "/inputs/18"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-mercury-google-maps-cubic-sky-sun-oracle-asset",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Mercury · google maps cubic sky sun oracle asset",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://mw1.google.com/mw-weather/static/sun.png",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/mercury/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "2c66d93686fe80a9cecb39cf8b6b6e486d2e4cebc900a62534185a26c5f565ec",
-          "locator": "/inputs/21"
         }
       ],
       "relations": [],
@@ -21279,30 +20910,6 @@
       "statements": []
     },
     {
-      "id": "source-moon-hyg-registration-field",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Moon · hyg registration field",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/moon/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "5bd482ea796fdcecd4cfdaf9be66f4d52fe30897fcdaf4ff42d892249854a31c",
-          "locator": "/inputs/6"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
       "id": "source-moon-lro-lola-ldem16-numeric",
       "kind": "data-product",
       "identityLevel": "work",
@@ -21519,11 +21126,16 @@
       "statements": []
     },
     {
-      "id": "source-moon-diviner-ghrm-tbol-m-original",
+      "id": "lro-diviner-ghrm-tbol-m",
       "kind": "data-product",
       "identityLevel": "work",
-      "title": "Moon · diviner ghrm tbol_m original",
-      "identifiers": [],
+      "title": "LRO Diviner GHRM mean bolometric temperature",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_m_70s70n_img.img"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -21537,25 +21149,7 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "5bd482ea796fdcecd4cfdaf9be66f4d52fe30897fcdaf4ff42d892249854a31c",
           "locator": "/inputs/16"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-moon-diviner-ghrm-tbol-m-compact",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Moon · diviner ghrm tbol_m compact",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_m_70s70n_img.img",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
+        },
         {
           "path": "src/planets/moon/source/manifest.json",
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
@@ -21567,11 +21161,16 @@
       "statements": []
     },
     {
-      "id": "source-moon-diviner-ghrm-tbol-anom-original",
+      "id": "lro-diviner-ghrm-tbol-anomaly",
       "kind": "data-product",
       "identityLevel": "work",
-      "title": "Moon · diviner ghrm tbol_anom original",
-      "identifiers": [],
+      "title": "LRO Diviner GHRM bolometric temperature anomaly",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.img"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -21585,25 +21184,7 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "5bd482ea796fdcecd4cfdaf9be66f4d52fe30897fcdaf4ff42d892249854a31c",
           "locator": "/inputs/18"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-moon-diviner-ghrm-tbol-anom-compact",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Moon · diviner ghrm tbol_anom compact",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.img",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
+        },
         {
           "path": "src/planets/moon/source/manifest.json",
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
@@ -21615,11 +21196,16 @@
       "statements": []
     },
     {
-      "id": "source-moon-diviner-ghrm-ra-sam-original",
+      "id": "lro-diviner-ghrm-roughness",
       "kind": "data-product",
       "identityLevel": "work",
-      "title": "Moon · diviner ghrm ra_sam original",
-      "identifiers": [],
+      "title": "LRO Diviner GHRM surface roughness",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_ra_sam_70s70n_img.img"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -21633,25 +21219,7 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "5bd482ea796fdcecd4cfdaf9be66f4d52fe30897fcdaf4ff42d892249854a31c",
           "locator": "/inputs/20"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-moon-diviner-ghrm-ra-sam-compact",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Moon · diviner ghrm ra_sam compact",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_ra_sam_70s70n_img.img",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
+        },
         {
           "path": "src/planets/moon/source/manifest.json",
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
@@ -22019,54 +21587,6 @@
       "statements": []
     },
     {
-      "id": "source-neptune-hyg-v41-neptune-field",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Neptune · hyg v41 neptune field",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://github.com/astronexus/HYG-Database/tree/c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/neptune/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "fa485562067c99697c0286565297df4c9c55ca3ad9e6b6c9e86b601948f565e6",
-          "locator": "/inputs/11"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-neptune-google-maps-neptune-cubic-sky-sun-oracle-asset",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Neptune · google maps neptune cubic sky sun oracle asset",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://mw1.google.com/mw-weather/static/sun.png",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/neptune/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "fa485562067c99697c0286565297df4c9c55ca3ad9e6b6c9e86b601948f565e6",
-          "locator": "/inputs/13"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
       "id": "doi-10-1093-mnras-stw081",
       "kind": "publication",
       "identityLevel": "work",
@@ -22226,36 +21746,6 @@
       "statements": []
     },
     {
-      "id": "source-nix-model-surface",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Shape model",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://doi.org/10.6084/m9.figshare.12779948.v1",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/nix/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "a08f720d7fd79b4413cbca0ab99104c7ec1028c56cb222daa7c8f429c9658798",
-          "locator": "/inputs/3"
-        }
-      ],
-      "relations": [
-        {
-          "kind": "part-of",
-          "catalogueId": "doi-10-6084-m9-figshare-12779948-v1",
-          "evidence": "src/planets/nix/source/manifest.json#/inputs/3"
-        }
-      ],
-      "statements": []
-    },
-    {
       "id": "damit-shape-4296",
       "kind": "model",
       "identityLevel": "work",
@@ -22390,54 +21880,6 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "37a4b8edac449493bb42e803c80a17a6dfda8bf93f48042760e0666cfa2ef143",
           "locator": "/inputs/2"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-orus-occultation-approximation",
-      "kind": "publication",
-      "identityLevel": "work",
-      "title": "Orus · occultation approximation",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/orus/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "a4dec1a519169bbafa5c29c4f153d1badcdf2bee2dbdecb3f77aaa7732890362",
-          "locator": "/inputs/2"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-orus-model-surface",
-      "kind": "publication",
-      "identityLevel": "work",
-      "title": "Shape model",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/orus/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "a4dec1a519169bbafa5c29c4f153d1badcdf2bee2dbdecb3f77aaa7732890362",
-          "locator": "/inputs/3"
         }
       ],
       "relations": [],
@@ -24001,30 +23443,6 @@
       "statements": []
     },
     {
-      "id": "source-pluto-stars-hyg-v41-field-json",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Pluto · stars hyg v41 field json",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/pluto/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "caa313eb904a5e4b00dbd394d5e2594eae28b6e8d5da18bb0e4c7e334c16660b",
-          "locator": "/inputs/6"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
       "id": "source-pluto-lenses-pluto-dem-lbl",
       "kind": "data-product",
       "identityLevel": "work",
@@ -25023,102 +24441,6 @@
       "statements": []
     },
     {
-      "id": "source-rhea-rhea-vims-source-information-file-pdf",
-      "kind": "publication",
-      "identityLevel": "work",
-      "title": "Rhea · rhea vims source information file pdf",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.pdf",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/rhea/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "ee9ee1e0bc76f9e344ed1f23e0041c748ebf64bd2d1b2dd9b8f522ad4016cb4c",
-          "locator": "/inputs/7"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-rhea-rhea-vims-source-information-file-xml",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Rhea · rhea vims source information file xml",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.xml",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/rhea/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "ee9ee1e0bc76f9e344ed1f23e0041c748ebf64bd2d1b2dd9b8f522ad4016cb4c",
-          "locator": "/inputs/8"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-rhea-rhea-vims-source-vims-wavelengths-ir-tab",
-      "kind": "model",
-      "identityLevel": "work",
-      "title": "Rhea · rhea vims source vims wavelengths ir tab",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/vims_wavelengths_ir.tab",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/rhea/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "ee9ee1e0bc76f9e344ed1f23e0041c748ebf64bd2d1b2dd9b8f522ad4016cb4c",
-          "locator": "/inputs/9"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-rhea-rhea-vims-source-vims-wavelengths-ir-xml",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Rhea · rhea vims source vims wavelengths ir xml",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/vims_wavelengths_ir.xml",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/rhea/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "ee9ee1e0bc76f9e344ed1f23e0041c748ebf64bd2d1b2dd9b8f522ad4016cb4c",
-          "locator": "/inputs/10"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
       "id": "source-rhea-rhea-vims-source-rhea-notnorm-pc-modified-2-xml",
       "kind": "data-product",
       "identityLevel": "work",
@@ -25287,66 +24609,6 @@
       "statements": []
     },
     {
-      "id": "source-rhea-rhea-vims-infrared",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Infrared",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://doi.org/10.17189/ctqe-ta30",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/rhea/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "ee9ee1e0bc76f9e344ed1f23e0041c748ebf64bd2d1b2dd9b8f522ad4016cb4c",
-          "locator": "/inputs/18"
-        }
-      ],
-      "relations": [
-        {
-          "kind": "part-of",
-          "catalogueId": "doi-10-17189-ctqe-ta30",
-          "evidence": "src/planets/rhea/source/manifest.json#/inputs/18"
-        }
-      ],
-      "statements": []
-    },
-    {
-      "id": "source-rhea-rhea-vims-ice-absorption",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Rhea · rhea vims ice absorption",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://doi.org/10.17189/ctqe-ta30",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/rhea/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "ee9ee1e0bc76f9e344ed1f23e0041c748ebf64bd2d1b2dd9b8f522ad4016cb4c",
-          "locator": "/inputs/19"
-        }
-      ],
-      "relations": [
-        {
-          "kind": "part-of",
-          "catalogueId": "doi-10-17189-ctqe-ta30",
-          "evidence": "src/planets/rhea/source/manifest.json#/inputs/19"
-        }
-      ],
-      "statements": []
-    },
-    {
       "id": "damit-shape-2444",
       "kind": "model",
       "identityLevel": "work",
@@ -25482,11 +24744,16 @@
       "statements": []
     },
     {
-      "id": "source-ryugu-ryugu-shape",
+      "id": "hayabusa2-ryugu-spc-200k-20200323",
       "kind": "model",
       "identityLevel": "work",
-      "title": "Ryugu · ryugu shape",
-      "identifiers": [],
+      "title": "Hayabusa2 Ryugu shape kernel: ryugu_shape_spc_200k_v20200323.bds",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -25500,6 +24767,12 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "84fff7de794cd26d8812d5f2d1e3afd1a08c5da7783b75bb22040b06aeb922d1",
           "locator": "/inputs/1"
+        },
+        {
+          "path": "src/planets/ryugu/source/manifest.json",
+          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "sha256": "84fff7de794cd26d8812d5f2d1e3afd1a08c5da7783b75bb22040b06aeb922d1",
+          "locator": "/inputs/6"
         }
       ],
       "relations": [],
@@ -25559,11 +24832,16 @@
       "statements": []
     },
     {
-      "id": "source-ryugu-ryugu-ryugu-global-color-enhanced-png",
+      "id": "harvard-datafile-13452500",
       "kind": "data-product",
       "identityLevel": "work",
-      "title": "Ryugu · ryugu ryugu_global_color_enhanced.png",
-      "identifiers": [],
+      "title": "Ryugu global map: Harvard Dataverse file 13452500",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://dataverse.harvard.edu/api/access/datafile/13452500"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -25577,54 +24855,12 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "84fff7de794cd26d8812d5f2d1e3afd1a08c5da7783b75bb22040b06aeb922d1",
           "locator": "/inputs/4"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-ryugu-ryugu-ryugu-global-tif",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Ryugu · ryugu ryugu_global.tif",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://dataverse.harvard.edu/api/access/datafile/13452500",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
+        },
         {
           "path": "src/planets/ryugu/source/manifest.json",
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "84fff7de794cd26d8812d5f2d1e3afd1a08c5da7783b75bb22040b06aeb922d1",
           "locator": "/inputs/5"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-ryugu-ryugu-ryugu-shape-spc-200k-v20200323-bds",
-      "kind": "model",
-      "identityLevel": "work",
-      "title": "Ryugu · ryugu ryugu_shape_spc_200k_v20200323.bds",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/ryugu/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "84fff7de794cd26d8812d5f2d1e3afd1a08c5da7783b75bb22040b06aeb922d1",
-          "locator": "/inputs/6"
         }
       ],
       "relations": [],
@@ -25832,30 +25068,6 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "769d516be08271c9d2e91af225e515b1200803f25c389998dbfdaef9f40fc7b5",
           "locator": "/inputs/3"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-saturn-hyg-v41-saturn-field",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Saturn · hyg v41 saturn field",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://github.com/astronexus/HYG-Database/tree/c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/saturn/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "769d516be08271c9d2e91af225e515b1200803f25c389998dbfdaef9f40fc7b5",
-          "locator": "/inputs/8"
         }
       ],
       "relations": [],
@@ -26120,30 +25332,6 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "769d516be08271c9d2e91af225e515b1200803f25c389998dbfdaef9f40fc7b5",
           "locator": "/inputs/21"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-saturn-google-maps-saturn-cubic-sky-sun-oracle-asset",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Saturn · google maps saturn cubic sky sun oracle asset",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://mw1.google.com/mw-weather/static/sun.png",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/saturn/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "769d516be08271c9d2e91af225e515b1200803f25c389998dbfdaef9f40fc7b5",
-          "locator": "/inputs/23"
         }
       ],
       "relations": [],
@@ -26594,11 +25782,16 @@
       "statements": []
     },
     {
-      "id": "source-squannit-radar-shape",
+      "id": "jpl-squannit-kw4b",
       "kind": "model",
       "identityLevel": "work",
-      "title": "Squannit · radar shape",
-      "identifiers": [],
+      "title": "JPL radar shape model of Squannit: kw4b.obj",
+      "identifiers": [
+        {
+          "type": "Archive resource",
+          "value": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj"
+        }
+      ],
       "links": [
         {
           "role": "landing",
@@ -26612,25 +25805,7 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "dcfd578f484938fae1201db07815843c5d61e634b75150853e88f076292005a0",
           "locator": "/inputs/2"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-squannit-model-surface",
-      "kind": "model",
-      "identityLevel": "work",
-      "title": "Shape model",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
+        },
         {
           "path": "src/planets/squannit/source/manifest.json",
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
@@ -26714,78 +25889,6 @@
       "statements": []
     },
     {
-      "id": "source-steins-steins-reference-naif0012-tls",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Steins · steins reference naif0012 tls",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/steins/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "34b6cf3a3879e3c03f7f6ab673121427f8a9194df7dd0fac9d47e98009c5ca24",
-          "locator": "/inputs/4"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-steins-steins-reference-ros-v33-tf",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Steins · steins reference ROS_V33 TF",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/fk/former_versions/ROS_V33.TF",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/steins/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "34b6cf3a3879e3c03f7f6ab673121427f8a9194df7dd0fac9d47e98009c5ca24",
-          "locator": "/inputs/5"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-steins-steins-reference-ros-osiris-v15-ti",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Steins · steins reference ROS_OSIRIS_V15 TI",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/ik/former_versions/ROS_OSIRIS_V15.TI",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/steins/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "34b6cf3a3879e3c03f7f6ab673121427f8a9194df7dd0fac9d47e98009c5ca24",
-          "locator": "/inputs/6"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
       "id": "source-steins-steins-reference-ros-steins-v05-tpc",
       "kind": "data-product",
       "identityLevel": "work",
@@ -26804,30 +25907,6 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "34b6cf3a3879e3c03f7f6ab673121427f8a9194df7dd0fac9d47e98009c5ca24",
           "locator": "/inputs/7"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-steins-steins-reference-osiris-boresight-pdf",
-      "kind": "publication",
-      "identityLevel": "work",
-      "title": "Steins · steins reference osiris boresight pdf",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSIWAC/RO-C-OSIWAC-5-ESC2-67P-M15-GEO-V2.0/DOCUMENT/CALIB/BORESIGHT_V01.PDF",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/steins/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "34b6cf3a3879e3c03f7f6ab673121427f8a9194df7dd0fac9d47e98009c5ca24",
-          "locator": "/inputs/8"
         }
       ],
       "relations": [],
@@ -27750,30 +26829,6 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "18978bdf36bb03e1c6ed36f0d7e2f8dc3c203c6c4a4e1e17b7f23dd70da11602",
           "locator": "/inputs/33"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-sun-hyg-v41-sun-field",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Sun · hyg v41 sun field",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://github.com/astronexus/HYG-Database/tree/c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/sun/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "18978bdf36bb03e1c6ed36f0d7e2f8dc3c203c6c4a4e1e17b7f23dd70da11602",
-          "locator": "/inputs/34"
         }
       ],
       "relations": [],
@@ -31371,30 +30426,6 @@
       "statements": []
     },
     {
-      "id": "source-uranus-google-maps-uranus-cubic-sky-sun-oracle-asset",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Uranus · google maps uranus cubic sky sun oracle asset",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://mw1.google.com/mw-weather/static/sun.png",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/uranus/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "75d2dc8312a10ac087b17086d8a728769ceeca4b46d7e860d3225b82b5bedf0e",
-          "locator": "/inputs/10"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
       "id": "damit-shape-467",
       "kind": "model",
       "identityLevel": "work",
@@ -31769,54 +30800,6 @@
           "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
           "sha256": "380fd3c49e698d4028d1dc6472507d98b037445472b1815c978f57ed7e225d91",
           "locator": "/inputs/15"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-venus-hyg-v41-venus-field",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Venus · hyg v41 venus field",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://github.com/astronexus/HYG-Database/tree/c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/venus/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "380fd3c49e698d4028d1dc6472507d98b037445472b1815c978f57ed7e225d91",
-          "locator": "/inputs/18"
-        }
-      ],
-      "relations": [],
-      "statements": []
-    },
-    {
-      "id": "source-venus-google-maps-venus-sun-oracle-asset",
-      "kind": "data-product",
-      "identityLevel": "work",
-      "title": "Venus · google maps venus sun oracle asset",
-      "identifiers": [],
-      "links": [
-        {
-          "role": "landing",
-          "url": "https://mw1.google.com/mw-weather/static/sun.png",
-          "label": "Source"
-        }
-      ],
-      "evidence": [
-        {
-          "path": "src/planets/venus/source/manifest.json",
-          "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-          "sha256": "380fd3c49e698d4028d1dc6472507d98b037445472b1815c978f57ed7e225d91",
-          "locator": "/inputs/20"
         }
       ],
       "relations": [],
@@ -34601,7 +33584,359 @@
       ],
       "relations": [],
       "statements": []
+    },
+    {
+      "id": "nasa-psg",
+      "title": "Planetary Spectrum Generator",
+      "kind": "software",
+      "identityLevel": "work",
+      "identifiers": [],
+      "links": [
+        {
+          "role": "landing",
+          "url": "https://psg.gsfc.nasa.gov/",
+          "label": "Source"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://psg.gsfc.nasa.gov/helpapi.php",
+          "checkedOn": "2026-09-10",
+          "locator": "Application Program Interface and Calling the API"
+        }
+      ],
+      "relations": [],
+      "statements": [],
+      "publisher": "NASA Goddard Space Flight Center"
+    },
+    {
+      "id": "usgs-magellan-color",
+      "title": "Magellan synthetic colour map",
+      "kind": "data-product",
+      "identityLevel": "work",
+      "identifiers": [
+        {
+          "type": "USGS WMS layer",
+          "value": "MAGELLAN_color"
+        }
+      ],
+      "links": [
+        {
+          "role": "landing",
+          "url": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=%2Fmaps%2Fvenus%2Fvenus_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=MAGELLAN_color&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=2048&HEIGHT=1024&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+          "label": "Source"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "src/planets/venus/source/preparation/acquisition.json",
+          "revision": "c601cd5a54414fe6e500aba9b3c95c48b8870a30",
+          "sha256": "e7823986cd2e74825b769fc5e22147b61a4e7f2aa132ead6dce9c36043176c42",
+          "locator": "/operations/11"
+        }
+      ],
+      "relations": [],
+      "statements": [],
+      "publisher": "USGS Astrogeology"
+    },
+    {
+      "id": "usgs-magellan-topography",
+      "title": "Magellan colourized topography",
+      "kind": "data-product",
+      "identityLevel": "work",
+      "identifiers": [
+        {
+          "type": "USGS WMS layer",
+          "value": "MAGELLAN_topography"
+        }
+      ],
+      "links": [
+        {
+          "role": "landing",
+          "url": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=%2Fmaps%2Fvenus%2Fvenus_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=MAGELLAN_topography&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=2048&HEIGHT=1024&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+          "label": "Source"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "src/planets/venus/source/preparation/acquisition.json",
+          "revision": "c601cd5a54414fe6e500aba9b3c95c48b8870a30",
+          "sha256": "e7823986cd2e74825b769fc5e22147b61a4e7f2aa132ead6dce9c36043176c42",
+          "locator": "/operations/12"
+        }
+      ],
+      "relations": [],
+      "statements": [],
+      "publisher": "USGS Astrogeology"
+    },
+    {
+      "id": "jpl-satellite-discovery",
+      "title": "Planetary Satellite Discovery Circumstances",
+      "kind": "reference-page",
+      "identityLevel": "work",
+      "identifiers": [],
+      "links": [
+        {
+          "role": "landing",
+          "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+          "label": "Source"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+          "checkedOn": "2026-09-10",
+          "locator": "Planetary satellite discovery table"
+        }
+      ],
+      "relations": [],
+      "statements": [],
+      "publisher": "NASA/JPL Solar System Dynamics"
+    },
+    {
+      "id": "jpl-satellite-mean-elements",
+      "title": "Planetary Satellite Mean Elements",
+      "kind": "reference-page",
+      "identityLevel": "work",
+      "identifiers": [],
+      "links": [
+        {
+          "role": "landing",
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "Source"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "checkedOn": "2026-09-10",
+          "locator": "Satellite mean orbital elements"
+        }
+      ],
+      "relations": [],
+      "statements": [],
+      "publisher": "NASA/JPL Solar System Dynamics"
+    },
+    {
+      "id": "mpc-mpec-2026-m19",
+      "title": "MPEC 2026-M19",
+      "kind": "publication",
+      "identityLevel": "work",
+      "identifiers": [],
+      "links": [
+        {
+          "role": "landing",
+          "url": "https://minorplanetcenter.net/mpec/K26/K26M19.html",
+          "label": "Source"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "src/planets/saturn/source/moons/saturn-moons.json",
+          "revision": "c601cd5a54414fe6e500aba9b3c95c48b8870a30",
+          "sha256": "5dcb5b297e06026d3b150de94484274cd5a34e4e10dfdcdb97e74664d3eb56c5",
+          "locator": "/sources/s2009s2"
+        }
+      ],
+      "relations": [],
+      "statements": [],
+      "publisher": "Minor Planet Center"
+    },
+    {
+      "id": "doi-10-1088-0004-637x-812-1-55",
+      "title": "First Results from the Hubble OPAL Program: Jupiter in 2015",
+      "kind": "publication",
+      "identityLevel": "work",
+      "identifiers": [
+        {
+          "type": "DOI",
+          "value": "10.1088/0004-637X/812/1/55"
+        }
+      ],
+      "links": [
+        {
+          "role": "landing",
+          "url": "https://doi.org/10.1088/0004-637X/812/1/55",
+          "label": "Source"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "src/planets/jupiter/source/atmosphere/hubble-opal-minnaert.json",
+          "revision": "c601cd5a54414fe6e500aba9b3c95c48b8870a30",
+          "sha256": "86bc3c4b7b60d77e5088c1804521619bb077cd53ea6e1538549b80f603356fbe",
+          "locator": "/source"
+        },
+        {
+          "url": "https://esahubble.org/static/archives/releases/science_papers/heic1522a.pdf",
+          "checkedOn": "2026-09-10",
+          "locator": "Page 1: title, authors, DOI and publication date"
+        }
+      ],
+      "relations": [],
+      "statements": [],
+      "creators": [
+        "Amy A. Simon",
+        "Michael H. Wong",
+        "Glenn S. Orton"
+      ],
+      "publicationDate": "2015-10-07"
+    },
+    {
+      "id": "jpl-horizons",
+      "title": "JPL Horizons System",
+      "kind": "software",
+      "identityLevel": "work",
+      "identifiers": [],
+      "links": [
+        {
+          "role": "landing",
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "label": "Source"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "checkedOn": "2026-09-10",
+          "locator": "Horizons ephemeris service"
+        }
+      ],
+      "relations": [],
+      "statements": [],
+      "publisher": "NASA/JPL Solar System Dynamics"
+    },
+    {
+      "id": "arxiv-1808-01973",
+      "title": "Computing Apparent Planetary Magnitudes for The Astronomical Almanac",
+      "kind": "publication",
+      "identityLevel": "work",
+      "identifiers": [
+        {
+          "type": "arXiv",
+          "value": "1808.01973"
+        }
+      ],
+      "links": [
+        {
+          "role": "landing",
+          "url": "https://arxiv.org/abs/1808.01973",
+          "label": "Source"
+        }
+      ],
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/1808.01973",
+          "checkedOn": "2026-09-10",
+          "locator": "Title, authors and submission date"
+        },
+        {
+          "path": "src/planets/jupiter/source/photometry/phase.json",
+          "revision": "c601cd5a54414fe6e500aba9b3c95c48b8870a30",
+          "sha256": "3df5f516dc2b6cdd61bdfc9193f06749d9426205cfa8c73d724e5ac8af732ede",
+          "locator": "/authority"
+        }
+      ],
+      "relations": [],
+      "statements": [],
+      "creators": [
+        "Anthony Mallama",
+        "James L. Hilton"
+      ],
+      "publicationDate": "2018-08-06"
+    },
+    {
+      "id": "openspace-neptune-globe",
+      "title": "OpenSpace Neptune configuration: globe.asset",
+      "kind": "software",
+      "identityLevel": "release",
+      "identifiers": [
+        {
+          "type": "Git resource",
+          "value": "OpenSpace/OpenSpace@56e29b54b8592084ff1fef47c2e08de0b22ce516:data/assets/scene/solarsystem/planets/neptune/globe.asset"
+        }
+      ],
+      "links": [
+        {
+          "role": "landing",
+          "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/neptune/globe.asset",
+          "label": "Source"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "src/planets/neptune/source/manifest.json",
+          "revision": "c601cd5a54414fe6e500aba9b3c95c48b8870a30",
+          "sha256": "19f555cf25c2bf6299d0e48e968706b59851b4fd1cbb4e96ae5b27733cfa4be8",
+          "locator": "/inputs/5"
+        }
+      ],
+      "relations": [],
+      "statements": [],
+      "publisher": "OpenSpace Team",
+      "version": "56e29b54b8592084ff1fef47c2e08de0b22ce516"
+    },
+    {
+      "id": "openspace-neptune-kernels",
+      "title": "OpenSpace Neptune configuration: kernels095.asset",
+      "kind": "software",
+      "identityLevel": "release",
+      "identifiers": [
+        {
+          "type": "Git resource",
+          "value": "OpenSpace/OpenSpace@56e29b54b8592084ff1fef47c2e08de0b22ce516:data/assets/scene/solarsystem/planets/neptune/kernels095.asset"
+        }
+      ],
+      "links": [
+        {
+          "role": "landing",
+          "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/neptune/kernels095.asset",
+          "label": "Source"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "src/planets/neptune/source/manifest.json",
+          "revision": "c601cd5a54414fe6e500aba9b3c95c48b8870a30",
+          "sha256": "19f555cf25c2bf6299d0e48e968706b59851b4fd1cbb4e96ae5b27733cfa4be8",
+          "locator": "/inputs/6"
+        }
+      ],
+      "relations": [],
+      "statements": [],
+      "publisher": "OpenSpace Team",
+      "version": "56e29b54b8592084ff1fef47c2e08de0b22ce516"
+    },
+    {
+      "id": "openspace-neptune-major-moons",
+      "title": "OpenSpace Neptune configuration: major_moons.asset",
+      "kind": "software",
+      "identityLevel": "release",
+      "identifiers": [
+        {
+          "type": "Git resource",
+          "value": "OpenSpace/OpenSpace@56e29b54b8592084ff1fef47c2e08de0b22ce516:data/assets/scene/solarsystem/planets/neptune/major_moons.asset"
+        }
+      ],
+      "links": [
+        {
+          "role": "landing",
+          "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/neptune/major_moons.asset",
+          "label": "Source"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "src/planets/neptune/source/manifest.json",
+          "revision": "c601cd5a54414fe6e500aba9b3c95c48b8870a30",
+          "sha256": "19f555cf25c2bf6299d0e48e968706b59851b4fd1cbb4e96ae5b27733cfa4be8",
+          "locator": "/inputs/7"
+        }
+      ],
+      "relations": [],
+      "statements": [],
+      "publisher": "OpenSpace Team",
+      "version": "56e29b54b8592084ff1fef47c2e08de0b22ce516"
     }
-  ],
-  "redirects": {}
+  ]
 }

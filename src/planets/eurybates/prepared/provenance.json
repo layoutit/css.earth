@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "829e2a5a239abb42d74aa9e7b8d631edd729ef8af29c062a7b36ab84cafd257e"
+    "sha256": "5b21fd1224b84635f3bc2818a4c6b523da56dfc7b2cfbe219b95dc27e55c9b2b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -254,7 +254,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-eurybates-model-surface",
+            "catalogueId": "doi-10-3847-psj-acaf79",
             "role": "method",
             "evidence": "src/planets/eurybates/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
@@ -289,7 +289,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-eurybates-occultation-approximation",
+            "catalogueId": "doi-10-3847-psj-acaf79",
             "role": "method",
             "evidence": "src/planets/eurybates/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
           }

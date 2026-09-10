@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e718d5a28e3fa9b43e8c6b27971c063c56d052c1d0e88a42341db05a36b7edce"
+    "sha256": "d7328683cf008448df056d98671f6e6cab8fc5d36a610c6e1191e46f6c3f3285"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1162,10 +1162,14 @@
       "acquisition": "checked ASCII response with only the request timestamp and elapsed-time comment lines removed",
       "redistribution": "checked model response with NASA attribution",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-uranus-r240-rif",
-        "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       },
       "sha256": "84ab228415b34a5871182dd64285ba653ee6de495767af2c190ff441ff7e2567",
       "bytes": 11944,
@@ -1202,10 +1206,14 @@
       "acquisition": "pinned expanded PSG configuration",
       "redistribution": "checked text configuration with NASA attribution",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-uranus-expanded-configuration",
-        "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       },
       "sha256": "8bca8db27545003285fdf45d84ed06cb82c2a0365e3c07dedfb87715df9c0d0c",
       "bytes": 8815,

@@ -12,7 +12,7 @@ The shared STL loader retains the released topology; `source-meshoptimizer` redu
 
 Browser interaction, DPR checks and visual acceptance are recorded separately from these source checks.
 
-[Source test definitions](../../../tests/objects/unit/nix/source.test.mjs).
+[Source test definitions](../../../tests/objects/unit/nix/source.test.mts).
 
 ## Known problems
 

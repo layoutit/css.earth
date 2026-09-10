@@ -1,28 +1,15 @@
-import { createHash } from 'node:crypto';
 import { sourceArray, sourceObject, sourceText, parseSourceBinding } from '../src/platform/source-catalog.mts';
 import type { SourceBinding, SourceResolver } from '../src/platform/source-catalog.mts';
 import type { SourceUse } from '../src/platform/source-usage.mts';
 
-/** Matches the frozen migration rows without making new identity decisions. */
-export function canonicalSourceJson(raw: unknown): string {
-  if (Array.isArray(raw)) return `[${raw.map(canonicalSourceJson).join(',')}]`;
-  if (raw !== null && typeof raw === 'object') return `{${Object.entries(sourceObject(raw)).sort(([a],[b]) => a < b ? -1 : a > b ? 1 : 0).map(([key,value]) => `${JSON.stringify(key)}:${canonicalSourceJson(value)}`).join(',')}}`;
-  const value = JSON.stringify(raw); if (value === undefined) throw new TypeError('Invalid source JSON.'); return value;
-}
-export const sourceSha256 = (bytes: string | Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 export interface SourceInventoryEntry { readonly ownerPath: string; readonly localId: string; readonly binding: SourceBinding; readonly used: boolean; }
-export function sourceInventory(manifest: unknown, ownerPath: string, sources: SourceResolver, usedPaths: ReadonlySet<string>, migration: unknown): SourceInventoryEntry[] {
+export function sourceInventory(manifest: unknown, ownerPath: string, sources: SourceResolver, usedPaths: ReadonlySet<string>): SourceInventoryEntry[] {
   const entries: SourceInventoryEntry[] = [];
-  const accepted = sourceArray(sourceObject(migration).entries, sourceObject);
   for (const section of ['inputs','documents','generatedIntermediates']) {
     for (const raw of sourceArray(sourceObject(manifest)[section] ?? [], sourceObject)) {
       if (section !== 'inputs' && !usedPaths.has(sourceText(raw.path))) continue;
       const binding = parseSourceBinding(raw.sourceBinding, sources), localId = sourceText(raw.id ?? raw.path);
-      if (binding.kind === 'unresolved') {
-        const previous = accepted.find(entry => entry.ownerPath === ownerPath && entry.localId === localId);
-        const {sourceBinding, ...original} = raw;
-        if (!previous || canonicalSourceJson(previous.binding) !== canonicalSourceJson(binding) || previous.beforeSha256 !== sourceSha256(canonicalSourceJson(original))) throw new TypeError(`Unreviewed unresolved source: ${ownerPath}#${localId}.`);
-      }
+      if (binding.kind === 'unresolved') throw new TypeError(`Unresolved source: ${ownerPath}#${localId}.`);
       entries.push({ownerPath,localId,binding,used:usedPaths.has(sourceText(raw.path))});
     }
   }

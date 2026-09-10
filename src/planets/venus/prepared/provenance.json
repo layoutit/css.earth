@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a199cbf5edbb9f77570cbf21cc75bfb11e46bfc67ae84bcc1baedb4b2daa57bc"
+    "sha256": "1d6dd12911ab358cde54db7c2af4834882953e0cba948438f408b8b1aa02921b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -744,10 +744,14 @@
         ]
       },
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "usgs-nasa-magellan-synthetic-color-wms",
-        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "usgs-magellan-color",
+            "role": "material",
+            "evidence": "USGS MAGELLAN_color GetMap response; the acquisition recipe records bounds, projection, dimensions and format."
+          }
+        ]
       },
       "sha256": "7c818deccd69e99f3e0ebc5030979bbeb50f8b19afbd8f31c97d968a9f591588",
       "bytes": 5399293,
@@ -787,10 +791,14 @@
         ]
       },
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "usgs-nasa-magellan-colorized-topography-wms",
-        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "usgs-magellan-topography",
+            "role": "material",
+            "evidence": "USGS MAGELLAN_topography GetMap response; the acquisition recipe records bounds, projection, dimensions and format."
+          }
+        ]
       },
       "sha256": "3b25ddd02af9214a64aed694ececd44754c2c3174900d78bbae3856042117974",
       "bytes": 5477203,
@@ -869,10 +877,14 @@
       "acquisition": "checked raw ASCII response acquired 2026-08-30; refresh compares all 253 numeric samples",
       "redistribution": "checked model response with NASA attribution",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-venus-r240-rif-response",
-        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       },
       "sha256": "6856c59ec48619829305d4896e06c60450e075c37981da2a98890fbcf1fe6a3c",
       "bytes": 12089,
@@ -908,10 +920,14 @@
       "acquisition": "checked expanded configuration from the declared seed and generator parameters",
       "redistribution": "checked text configuration with NASA attribution",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-venus-expanded-configuration",
-        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       },
       "sha256": "9860b648a57508cf16c14936ffe8926dc380d3bedc234abc80e6d0ffad582ec8",
       "bytes": 26685,
