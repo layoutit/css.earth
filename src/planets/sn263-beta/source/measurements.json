@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-source-shape-measurements@1",
+  "id": "sn263-beta",
+  "component": "beta",
+  "release": "urn:nasa:pds:gbo.ast-153591.radar.shape-model::1.0",
+  "source": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591beta.tab",
+  "sourceUnits": "km",
+  "radiusKm": 0.39455452137070834,
+  "volumeKm3": 0.2572821657253704,
+  "extentsKm": [
+    0.765735,
+    1.037912,
+    0.656261
+  ],
+  "vertices": 1148,
+  "faces": 2292,
+  "maxRadiusKm": 0.5592529408818517,
+  "publishedDiameter": "0.77 ± 0.12 km",
+  "referenceRadiusMeaning": "Equivalent-volume radius computed from the original closed triangular mesh; not an independent measurement.",
+  "shapeLimit": "Published radar shape of the larger, outer moon. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. The model assumes the primary’s spin pole for this moon. Rotational phase is illustrative.",
+  "orbitLimit": "Orbital placement is approximate context extrapolated from the 2008 mutual-orbit fit. Current phase and long-term three-body evolution are not measured.",
+  "physicalSource": "Becker et al. (2015), Table 4; physical API row order is not used."
+}

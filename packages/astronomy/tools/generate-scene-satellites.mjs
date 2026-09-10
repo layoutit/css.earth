@@ -10,9 +10,11 @@ const sources = [
   ['menoetius', 'patroclus', 120000617, 920000617],
   ['squannit', 'moshup', null, null],
   ['romulus', 'sylvia', null, null],
+  ['sn263-beta', 'asteroid-2001-sn263', null, null],
+  ['sn263-gamma', 'asteroid-2001-sn263', null, null],
 ];
 const args = process.argv.slice(2);
-if (args.length) throw new Error('No arguments: regenerate all four source-state satellites together.');
+if (args.length) throw new Error('No arguments: regenerate all source-state satellites together.');
 const records = {};
 for (const [bodyId, centerBodyId, target, center] of sources) {
   const bodyRoot = resolve(root, 'src/planets', bodyId);

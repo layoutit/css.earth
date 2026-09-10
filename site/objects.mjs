@@ -1,3 +1,6 @@
+import sn263AlphaDescriptor from "../src/planets/asteroid-2001-sn263/object.json" with { type: "json" };
+import sn263BetaDescriptor from "../src/planets/sn263-beta/object.json" with { type: "json" };
+import sn263GammaDescriptor from "../src/planets/sn263-gamma/object.json" with { type: "json" };
 import diomedesDescriptor from "../src/planets/diomedes/object.json" with { type: "json" };
 import ajaxDescriptor from "../src/planets/ajax/object.json" with { type: "json" };
 import ilioneusDescriptor from "../src/planets/ilioneus/object.json" with { type: "json" };
@@ -435,6 +438,12 @@ import comet19pDescriptor from "../src/planets/comet-19p/object.json" with { typ
 import comet1pDescriptor from "../src/planets/comet-1p/object.json" with { type: "json" };
 
 export const OBJECTS = defineObjects([
+  object("asteroid-2001-sn263", "2001 SN263 Alpha", "asteroid", "#a0a0a0", 1.9869,
+    "Explore the primary of 2001 SN263 through its archived radar shape.", packaged(sn263AlphaDescriptor), sn263AlphaDescriptor.properties.worldFrame),
+  object("sn263-beta", "2001 SN263 Beta", "satellite", "#a0a0a0", 1.9869,
+    "Explore the larger outer moon of 2001 SN263 through its archived radar shape.", packaged(sn263BetaDescriptor), sn263BetaDescriptor.properties.worldFrame),
+  object("sn263-gamma", "2001 SN263 Gamma", "satellite", "#a0a0a0", 1.9869,
+    "Explore the smaller inner moon of 2001 SN263 through its archived radar shape.", packaged(sn263GammaDescriptor), sn263GammaDescriptor.properties.worldFrame),
   object("polymele", "Polymele", "asteroid", "#a0a0a0", 5.191974805775306,
     "Explore Polymele, a Lucy target, through its observation-constrained approximate ellipsoid.", packaged(polymeleDescriptor), polymeleDescriptor.properties.worldFrame),
   object("leucus", "Leucus", "asteroid", "#a0a0a0", 5.312733245360807,

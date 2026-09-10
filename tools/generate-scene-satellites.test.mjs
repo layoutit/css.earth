@@ -35,21 +35,22 @@ export async function loadBodyEpochEphemeris({bodyId, centerBodyId, epochJdTt}) 
 
 test('scene-state generator rejects partial selection before replacing any output', async t => {
   const { script, output, sentinel } = await fixture(t);
-  await assert.rejects(exec(process.execPath, [script, '--object=hiiaka']), /regenerate all four/);
+  await assert.rejects(exec(process.execPath, [script, '--object=hiiaka']), /regenerate all source-state/);
   assert.equal(await readFile(output, 'utf8'), sentinel);
 });
 
-test('scene-state generator writes all four records only after every source validates', async t => {
+test('scene-state generator writes all six records only after every source validates', async t => {
   const { script, output, sentinel } = await fixture(t);
   await assert.rejects(exec(process.execPath, [script], {
-    env: { ...process.env, CSSEARTH_TEST_FAIL_BODY: 'romulus' },
+    env: { ...process.env, CSSEARTH_TEST_FAIL_BODY: 'sn263-gamma' },
   }), /Rejected source receipt/);
   assert.equal(await readFile(output, 'utf8'), sentinel);
   await exec(process.execPath, [script]);
   const text = await readFile(output, 'utf8');
   const records = JSON.parse(text.split('export const SCENE_SATELLITE_STATES = ')[1].split(' as const satisfies')[0]);
-  assert.deepEqual(Object.keys(records), ['hiiaka', 'menoetius', 'squannit', 'romulus']);
-  assert.deepEqual(Object.values(records).map(record => record.centerBodyId), ['haumea', 'patroclus', 'moshup', 'sylvia']);
+  assert.deepEqual(Object.keys(records), ['hiiaka', 'menoetius', 'squannit', 'romulus', 'sn263-beta', 'sn263-gamma']);
+  assert.deepEqual(Object.values(records).map(record => record.centerBodyId),
+    ['haumea', 'patroclus', 'moshup', 'sylvia', 'asteroid-2001-sn263', 'asteroid-2001-sn263']);
   assert.ok(Object.values(records).every(record => record.epochJdTt === 2461286.5));
   assert.ok(Object.values(records).every(record => !Object.hasOwn(record.provenance, 'validation')));
 });

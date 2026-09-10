@@ -142,3 +142,7 @@ Source acquisition/preparation must follow workstation disk and process guardrai
 ## Planning validation
 
 The structured [batch membership](PR-BATCHES.json) was checked against the frozen review: **60 unique assigned bodies**, **28 prospective new scenes**, **32 existing improvements**, every physical-model candidate assigned exactly once, and every existing improvement assigned exactly once. The remaining **424** reviewed rows plus these **60** account for the full **484**.
+
+## B11 — new asteroid companions
+
+In review: [2001 SN263 Alpha, Beta and Gamma](b11-companion-catalog/README.md). Two new moons and their primary use the shared renderer with archived radar meshes. No new mapped optical imagery. Dactyl, Selam, DP107 and QE2 remain deferred for the source gaps recorded in the batch report.

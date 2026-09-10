@@ -1,0 +1,49 @@
+{
+  "browser": "152.0.7977.84",
+  "chromeLaunch": {
+    "mode": "installed-chrome-with-retained-stdio",
+    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "wrapperPath": "output/dom-cleanliness/chrome-process-Kk244N/launch-chrome.sh",
+    "wrapperSha256": "32770a97891bfa1a433fc3d69231cfba22c94e2f5bce5e60842e4622fc91da5e",
+    "stdioLogPath": "output/dom-cleanliness/chrome-process-Kk244N/stdout-stderr.log",
+    "protocol": "Playwright CDP pipes on descriptors 3 and 4 are unchanged; only stdout and stderr are redirected."
+  },
+  "reports": [
+    {
+      "object": "asteroid-2001-sn263",
+      "density": 1,
+      "initial": {
+        "nodes": 116812,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 798,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "asteroid-2001-sn263",
+      "density": 2,
+      "initial": {
+        "nodes": 116812,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 798,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    }
+  ],
+  "navigation": [],
+  "problems": []
+}

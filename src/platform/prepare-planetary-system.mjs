@@ -19,6 +19,7 @@
 // tools only, through the package's build (astronomy-package.mjs); the
 // runtime only transports the result.
 
+import sn263Photometry from "../planets/asteroid-2001-sn263/source/preparation/photometry.json" with { type: "json" };
 import { loadAstronomyPackage } from "./astronomy-package.mjs";
 import { preparePlanetPoint } from "./prepare-planet-points.mjs";
 import {
@@ -82,6 +83,8 @@ export const GEOMETRIC_ALBEDO = Object.freeze({
   // Didymos system visible geometric albedo 0.15 ± 0.02: Daly et al. (2023),
   // https://www.nature.com/articles/s41586-023-05810-5; approximate point photometry.
   didymos: 0.15,
+  // Object-owned system-average estimate, used only for parent point photometry.
+  "asteroid-2001-sn263": sn263Photometry.geometricAlbedo,
   // Parent context only: common-system geometric albedos, not mapped surface colors.
   // Scheirich et al.2021 Table4; JPL SBDB Grav2012/Mainzer2014, pinned in docs/moons/b1-preparation/parent-inputs.json.
   moshup: 0.162, sylvia: 0.046, patroclus: 0.047,

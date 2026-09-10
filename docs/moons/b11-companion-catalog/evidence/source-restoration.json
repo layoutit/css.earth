@@ -1,0 +1,29 @@
+{
+  "destination": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/sn263-sources-H2gJOc",
+  "cases": [
+    {
+      "id": "asteroid-2001-sn263",
+      "restoredInputs": 3,
+      "inputCount": 3,
+      "generatedIntermediateCount": 1,
+      "documentCount": 23,
+      "verifiedCount": 27
+    },
+    {
+      "id": "sn263-beta",
+      "restoredInputs": 1,
+      "inputCount": 3,
+      "generatedIntermediateCount": 1,
+      "documentCount": 23,
+      "verifiedCount": 27
+    },
+    {
+      "id": "sn263-gamma",
+      "restoredInputs": 1,
+      "inputCount": 3,
+      "generatedIntermediateCount": 1,
+      "documentCount": 23,
+      "verifiedCount": 27
+    }
+  ]
+}

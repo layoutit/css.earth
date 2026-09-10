@@ -27,6 +27,12 @@ B1 adds 18 Saturn irregulars, four Uranus irregulars, Hiʻiaka, Squannit, Romulu
 See the [batch report](B1-EXPANSION.md) for source, numerical, visual and runtime evidence. GitHub's shared-universe check passed before merge. Final local checks against the identical merged file tree pass: 3,176 tests, production build and assembly, 506 browser cases and two navigation sequences. Aggregate source restoration retains the documented baseline gaps; all new B1 source pins verify. The frozen source review remains unchanged.
 
 
+## B11 companion catalog in review
+
+[B11](b11-companion-catalog/README.md) adds two moons, **2001 SN263 Beta and Gamma**, with their parent **2001 SN263 Alpha**. This branch has **97 standalone moons / 435 registered objects**, compared with **95 / 432** at its `866646279` merge base. Both new moons have native PDS radar shapes and no mapped optical imagery. They are outside the fixed 461-moon benchmark, so benchmark coverage remains **90/461**. These are branch counts, not merged coverage.
+
+Dactyl, Selam, 2000 DP107’s moon and 1998 QE2’s moon remain deferred with specific source and placement gaps in the B11 report. Their source-review status does not imply a prepared scene.
+
 ## Source review completed
 
 **484 / 484 document rows reviewed; 0 remain unreviewed.** This includes all 69 existing scenes, all 393 missing benchmark moons, and the 22 selected extra companions. Each row links to its dated evidence, supported representation and concrete limits. The frozen inventory records the merged baseline at review time; the coverage table above tracks subsequent merged delivery.
