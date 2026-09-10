@@ -24,7 +24,24 @@
         "metadata": {
           "label": "Historical model",
           "modeled": true,
-          "coverage": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5–1 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed."
+          "coverage": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5\u20131 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed."
+        }
+      },
+      {
+        "id": "giotto",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 0,
+          "centerLongitude": 180
+        },
+        "metadata": {
+          "label": "Giotto",
+          "coverage": "Giotto photographed Halley through its dusty coma. A small illuminated patch is projected onto the historical nucleus model; the grid marks missing imagery. Surface positions are approximate, with shape uncertainty of about 0.5\u20131 km."
+        },
+        "focus": {
+          "longitudeDegrees": 196,
+          "latitudeDegrees": -15,
+          "zoom": 1.1
         }
       }
     ],
@@ -108,7 +125,7 @@
   },
   "celestial": {
     "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; illustrative model orientation.",
-    "qualification": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5–1 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed."
+    "qualification": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5\u20131 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed."
   },
   "presentation": {
     "defaultLens": "model",

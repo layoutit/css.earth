@@ -15,3 +15,16 @@ Ephemeris: NASA/JPL Horizons; exact queries and raw responses accompany the
 source. Milky Way: ESO/S. Brunier, CC BY 4.0; see
 [ESO-IMAGE-LICENSE.md](source/stars/ESO-IMAGE-LICENSE.md). Inter font: Rasmus
 Andersson, SIL Open Font License 1.1. Star catalogue notice remains beside its input.
+
+Giotto photography: © Max Planck Institute for Solar System Research (MPS),
+1986, 1996; Giotto HMC team. The [MPS image page](https://www2.mps.mpg.de/de/projekte/giotto/hmc/)
+permits educational use with MPS attribution. Commercial use requires permission.
+This credit and these terms also apply to the cropped/projected photography,
+its thumbnails and prepared atlases; those image portions are not relicensed MIT.
+The original composite retains dust contamination and illumination.
+
+Encounter geometry: Giotto HMC and Vega TVS teams, International Halley Watch,
+NASA PDS; Vega ephemerides distributed by NASA SPDF. Rotation compilation:
+Samarasinha, Mueller, Belton and Jorda (2004), archived by NASA PDS (2006),
+DOI 10.26007/XDRA-4H55. Exact original tables and geometry-header pins accompany
+[the registration](source/reference/giotto-registration.json).

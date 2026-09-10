@@ -4,27 +4,22 @@
   "id": "comet-1p",
   "displayName": "Halley",
   "panel": {
-    "introduction": "Explore 1P/Halley through Stooke’s historical Giotto/Vega shape model. Its overall form is highly uncertain: absolute errors are estimated at 0.5–1 km, and depressions may be exaggerated. Orientation is illustrative.",
+    "introduction": "Halley’s dark nucleus was photographed during the Giotto and Vega flybys in 1986. Compare the historical shape with a small patch of Giotto photography. Dust and uncertain terrain limit the detail we can place on the surface.",
     "facts": [
       {
-        "id": "mission",
-        "label": "Shape observations",
-        "value": "Giotto · Vega 1 and 2 · 1986"
+        "id": "encounter",
+        "label": "Giotto flyby",
+        "value": "14 March 1986"
       },
       {
-        "id": "shape",
-        "label": "Nucleus model",
-        "value": "Philip Stooke · pointing by Alain Abergel"
+        "id": "approach",
+        "label": "Closest approach",
+        "value": "596 km"
       },
       {
         "id": "uncertainty",
-        "label": "Estimated absolute uncertainty",
+        "label": "Shape uncertainty",
         "value": "About 0.5–1 km"
-      },
-      {
-        "id": "sampling",
-        "label": "Source grid spacing",
-        "value": "5° longitude and latitude"
       }
     ],
     "moreFacts": [
@@ -39,7 +34,8 @@
     "titleKey": "lenses",
     "defaultLens": "model",
     "labels": {
-      "model": "Historical model"
+      "model": "Historical model",
+      "giotto": "Giotto"
     },
     "controls": [
       {
@@ -55,6 +51,21 @@
           "id": "stooke-halley",
           "path": "../manifest.json",
           "url": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.xml"
+        }
+      },
+      {
+        "id": "giotto",
+        "label": "Giotto",
+        "description": "Giotto photographed Halley through its dusty coma. A small illuminated patch is projected onto the historical nucleus model; the grid marks missing imagery. Surface positions are approximate, with shape uncertainty of about 0.5–1 km.",
+        "title": "Giotto illuminated nucleus composite",
+        "detail": "Approximate surface projection",
+        "thumbnail": "/scenes/comet-1p/comet-1p-giotto-thumbnail.webp",
+        "surface": "comet-1p-giotto-surface@2x.webp",
+        "poles": "comet-1p-giotto-poles@2x.webp",
+        "source": {
+          "id": "giotto-projection",
+          "path": "../manifest.json",
+          "url": "https://www2.mps.mpg.de/de/projekte/giotto/hmc/"
         }
       }
     ]
@@ -83,6 +94,12 @@
       "role": "surface",
       "description": "Historical Halley shape, coordinates and uncertainty",
       "href": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.xml"
+    },
+    {
+      "label": "MPS · Giotto HMC",
+      "role": "observations",
+      "description": "Nucleus composite and mission image catalogue",
+      "href": "https://www2.mps.mpg.de/de/projekte/giotto/hmc/"
     },
     {
       "label": "ESA · Giotto HMC",

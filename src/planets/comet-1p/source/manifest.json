@@ -79,6 +79,187 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "id": "giotto-source-1",
+      "path": "giotto/hmc_best.gif",
+      "expectedBytes": 203241,
+      "expectedSha256": "d1485de0bfb126c17fcca8b9d1b8936538694f86fd3bc867c6f07ab781dbff18",
+      "origin": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif",
+      "credit": "Max Planck Institute for Solar System Research; Giotto HMC team",
+      "license": "MPS educational image use with attribution; commercial reuse requires permission",
+      "licenseEvidence": [
+        "https://www2.mps.mpg.de/de/projekte/giotto/hmc/"
+      ],
+      "acquisition": "Exact archived source bytes; used to derive or inspect the approximate Giotto registration.",
+      "redistribution": "Retain source attribution and the stated reuse terms.",
+      "consumers": [
+        "giotto-registration"
+      ]
+    },
+    {
+      "id": "giotto-source-2",
+      "path": "giotto/fig67.tif",
+      "expectedBytes": 1312466,
+      "expectedSha256": "0567352ef7ef86de5effe92b9c1ed2f374e91b012f7258a286d210a609b99487",
+      "origin": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/catalog/fig67.tif",
+      "credit": "Max Planck Institute for Solar System Research; Giotto HMC team",
+      "license": "MPS educational image use with attribution; commercial reuse requires permission",
+      "licenseEvidence": [
+        "https://www2.mps.mpg.de/de/projekte/giotto/hmc/"
+      ],
+      "acquisition": "Exact archived source bytes; used to derive or inspect the approximate Giotto registration.",
+      "redistribution": "Retain source attribution and the stated reuse terms.",
+      "consumers": [
+        "giotto-registration"
+      ]
+    },
+    {
+      "id": "giotto-source-3",
+      "path": "giotto/rotation-2004.tab",
+      "expectedBytes": 2750,
+      "expectedSha256": "d7fb84ee47f3fd2440466ca22b460e55c04e45ade69ab6f8f432f6d84c2873c0",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ear-c-compil-5-comet-nuc-rotation-v1.0/data/rotation.tab",
+      "credit": "NASA PDS / NASA SPDF; original investigators credited in the source files",
+      "license": "Public scientific archive data; preserve original investigator credits",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/ear-c-compil-5-comet-nuc-rotation-v1.0/data/rotation.tab"
+      ],
+      "acquisition": "Exact archived source bytes; used to derive or inspect the approximate Giotto registration.",
+      "redistribution": "Retain source attribution and the stated reuse terms.",
+      "consumers": [
+        "giotto-registration"
+      ]
+    },
+    {
+      "id": "giotto-source-4",
+      "path": "giotto/rotation-2004.lbl",
+      "expectedBytes": 25760,
+      "expectedSha256": "2239825938bffe4b1ad4b4bcf464a5cb9904239c59d32faa2bd5390bdcca6b39",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ear-c-compil-5-comet-nuc-rotation-v1.0/data/rotation.lbl",
+      "credit": "NASA PDS / NASA SPDF; original investigators credited in the source files",
+      "license": "Public scientific archive data; preserve original investigator credits",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/ear-c-compil-5-comet-nuc-rotation-v1.0/data/rotation.lbl"
+      ],
+      "acquisition": "Exact archived source bytes; used to derive or inspect the approximate Giotto registration.",
+      "redistribution": "Retain source attribution and the stated reuse terms.",
+      "consumers": [
+        "giotto-registration"
+      ]
+    },
+    {
+      "id": "giotto-source-5",
+      "path": "giotto/vega2-flyby.txt",
+      "expectedBytes": 116646,
+      "expectedSha256": "622c541ef4b9a3c94dc06fe084a9c62c436a9093c5b7fcf07aeb0dcae7d10bdd",
+      "origin": "https://spdf.gsfc.nasa.gov/pub/data/vega/mag/flyby_1m.vg2",
+      "credit": "NASA PDS / NASA SPDF; original investigators credited in the source files",
+      "license": "Public scientific archive data; preserve original investigator credits",
+      "licenseEvidence": [
+        "https://spdf.gsfc.nasa.gov/pub/data/vega/mag/flyby_1m.vg2"
+      ],
+      "acquisition": "Exact archived source bytes; used to derive or inspect the approximate Giotto registration.",
+      "redistribution": "Retain source attribution and the stated reuse terms.",
+      "consumers": [
+        "giotto-registration"
+      ]
+    },
+    {
+      "id": "giotto-source-6",
+      "path": "giotto/vega2-trajectory.txt",
+      "expectedBytes": 48384,
+      "expectedSha256": "bb51d1e2d5a2115a82593086cbd9116abba356c19c1b9fa1ec636a044e10e491",
+      "origin": "https://spdf.gsfc.nasa.gov/pub/data/vega/mag/vega2.trj",
+      "credit": "NASA PDS / NASA SPDF; original investigators credited in the source files",
+      "license": "Public scientific archive data; preserve original investigator credits",
+      "licenseEvidence": [
+        "https://spdf.gsfc.nasa.gov/pub/data/vega/mag/vega2.trj"
+      ],
+      "acquisition": "Exact archived source bytes; used to derive or inspect the approximate Giotto registration.",
+      "redistribution": "Retain source attribution and the stated reuse terms.",
+      "consumers": [
+        "giotto-registration"
+      ]
+    },
+    {
+      "id": "giotto-source-7",
+      "path": "giotto/vega-readme.txt",
+      "expectedBytes": 7358,
+      "expectedSha256": "30ce73522c61f6c9822e85f987c2cf2b21c8caec16995c2adcd33d7cd4331d7f",
+      "origin": "https://spdf.gsfc.nasa.gov/pub/data/vega/mag/00readme.txt",
+      "credit": "NASA PDS / NASA SPDF; original investigators credited in the source files",
+      "license": "Public scientific archive data; preserve original investigator credits",
+      "licenseEvidence": [
+        "https://spdf.gsfc.nasa.gov/pub/data/vega/mag/00readme.txt"
+      ],
+      "acquisition": "Exact archived source bytes; used to derive or inspect the approximate Giotto registration.",
+      "redistribution": "Retain source attribution and the stated reuse terms.",
+      "consumers": [
+        "giotto-registration"
+      ]
+    },
+    {
+      "id": "giotto-projection",
+      "path": "material/giotto.png",
+      "expectedBytes": 5391,
+      "expectedSha256": "ea552e0b7b7973dca0b46eff9299fccf36f8e3acffe40a69c584000fc279f49a",
+      "origin": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif",
+      "credit": "\u00a9 MPS 1986, 1996; Giotto HMC team; shape by Philip Stooke with pointing by Alain Abergel",
+      "license": "MPS educational image use with attribution; commercial reuse requires permission",
+      "licenseEvidence": [
+        "https://www2.mps.mpg.de/de/projekte/giotto/hmc/"
+      ],
+      "acquisition": "Reproduce with node tools/objects/comet-1p/prepare-giotto.mjs --write using the pinned registration and original inputs.",
+      "redistribution": "The projected photograph retains the MPS source-image terms, separate from the MIT application code.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "giotto",
+      "width": 512,
+      "height": 256,
+      "label": "Giotto",
+      "falseColor": false,
+      "coverage": "Giotto photographed Halley through its dusty coma. A small illuminated patch is projected onto the historical nucleus model; the grid marks missing imagery. Surface positions are approximate, with shape uncertainty of about 0.5\u20131 km.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 4579.06433330178
+      }
+    },
+    {
+      "id": "giotto-vega2-t01174",
+      "path": "giotto/vega2-t01174.hdr",
+      "expectedBytes": 5760,
+      "expectedSha256": "c7061dfb00ec013854527b88539a574a658538d501faa6f459981ed07907bab9",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/t01174.hdr",
+      "credit": "Giotto HMC / Vega TVS teams; International Halley Watch; NASA PDS",
+      "license": "Public scientific archive geometry metadata; preserve mission credits",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/t01174.hdr"
+      ],
+      "acquisition": "Exact original FITS header; image pixels are not used.",
+      "redistribution": "Preserve archive identity and mission credits.",
+      "consumers": [
+        "giotto-registration"
+      ]
+    },
+    {
+      "id": "giotto-hmc01814",
+      "path": "giotto/hmc01814.hdr",
+      "expectedBytes": 5760,
+      "expectedSha256": "956e3752d620376369bde2ad1adc1f705e179cdb8ac2266aace7d2e59d14998d",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01814.hdr",
+      "credit": "Giotto HMC / Vega TVS teams; International Halley Watch; NASA PDS",
+      "license": "Public scientific archive geometry metadata; preserve mission credits",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01814.hdr"
+      ],
+      "acquisition": "Exact original FITS header; image pixels are not used.",
+      "redistribution": "Preserve archive identity and mission credits.",
+      "consumers": [
+        "giotto-registration"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -117,14 +298,14 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3950,
-      "expectedSha256": "02da4652868e0da43bf05fa7f962e6439d05871501ce8b3fc641c65ded48484a",
+      "expectedBytes": 4790,
+      "expectedSha256": "d1ee69a44d76fd8d156270af140cbd6b52fc2d3aa436483495488fc220e3a100",
       "purpose": "Halley source evidence or authored preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 726,
-      "expectedSha256": "02d3dab0ddb1c825547477af287fc0448afc7ba1a0bf64869dd24ba472f6432c",
+      "expectedBytes": 2660,
+      "expectedSha256": "6ab242f75421f9445a70f56e425b74c4389b946128f0eab640827830cdbd0c1a",
       "purpose": "Halley source evidence or authored preparation input."
     },
     {
@@ -141,8 +322,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3551,
-      "expectedSha256": "556d240b647e2030abd3df761c8cd667a16477d7369c757a13e35f436afaee87",
+      "expectedBytes": 4171,
+      "expectedSha256": "c12c95a74ba9e3d476e011986b3845296b1cdecabfcd46ab4c0a8d5dbd03a437",
       "purpose": "Halley source evidence or authored preparation input."
     },
     {
@@ -204,6 +385,24 @@
       "expectedBytes": 8776,
       "expectedSha256": "9aa7e995011774208c6b4ab492e91bdc535c1870915180f365893157c3a4c36d",
       "purpose": "Preserved Giotto intake and retrieval pins; this unqualified survey is not a runtime input."
+    },
+    {
+      "path": "reference/giotto-registration.json",
+      "expectedBytes": 12852,
+      "expectedSha256": "30ee84f7ead2cf627d26c1fc4b6ac88b2c7b5972c23cb9ad4d94e3fbe9a73fb6",
+      "purpose": "Giotto source registration, sampled coverage, or lossless observation/gap provenance."
+    },
+    {
+      "path": "reference/giotto-projection-report.json",
+      "expectedBytes": 4160,
+      "expectedSha256": "88009a6a8132e1df690b182a21379f72c440bc677514d677b2388cfbb0787ebd",
+      "purpose": "Giotto source registration, sampled coverage, or lossless observation/gap provenance."
+    },
+    {
+      "path": "reference/giotto-validity.bin",
+      "expectedBytes": 131072,
+      "expectedSha256": "816281ded6c5ad23a5daf851dc14b6dc12cfd58d2b5b4d70d856f4fe98292673",
+      "purpose": "Giotto source registration, sampled coverage, or lossless observation/gap provenance."
     }
   ]
 }

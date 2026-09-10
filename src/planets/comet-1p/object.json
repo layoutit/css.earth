@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "556d240b647e2030abd3df761c8cd667a16477d7369c757a13e35f436afaee87"
+          "sha256": "c12c95a74ba9e3d476e011986b3845296b1cdecabfcd46ab4c0a8d5dbd03a437"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "02da4652868e0da43bf05fa7f962e6439d05871501ce8b3fc641c65ded48484a"
+          "sha256": "d1ee69a44d76fd8d156270af140cbd6b52fc2d3aa436483495488fc220e3a100"
         },
         {
           "id": "title",
@@ -43,7 +43,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "02d3dab0ddb1c825547477af287fc0448afc7ba1a0bf64869dd24ba472f6432c"
+          "sha256": "6ab242f75421f9445a70f56e425b74c4389b946128f0eab640827830cdbd0c1a"
         },
         {
           "id": "rotation",
@@ -63,6 +63,11 @@
           "lenses": [
             {
               "id": "model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "giotto",
               "source": "content",
               "material": "lighting"
             }
@@ -110,13 +115,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "57b33b507dfe40fd831ba1ef17a2a9bc42d5c75330fc82609af203b039211140"
+        "sha256": "1b03ec7d5c649fcf742cd1bd5e29392f6a331aedc26834b50b83b2cbadbba3e5"
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9071b75e36bc9db60eb04146584b89ccb3c59e8e38fc6f70cb0e285a7d9909eb"
+    "sha256": "774291d32a7abe732f8d20e75474ebddc1f56b818b9204761b902eed7c78e63d"
   }
 }
