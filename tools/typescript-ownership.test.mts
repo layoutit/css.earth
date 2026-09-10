@@ -51,22 +51,34 @@ test('migrating a tracked implementation requires shrinking the exact backlog', 
   assert.equal(repo.audit().counts.authored, 0);
 });
 
-test('test and evidence paths cannot hide implementations imported by authored JS or TS', t => {
+test('test, fixture, and capture JavaScript require visible exact backlog entries', t => {
+  const repo = fixture(t);
+  const legacy = ['site/owner.test.mjs', 'tests/fixtures/orbit.js', 'tools/capture-orbit.mjs'];
+  for (const path of legacy) repo.write(path, 'export const value = 1;');
+  const unlisted = repo.audit();
+  assert.deepEqual(unlisted.categories.authored, legacy);
+  assert.deepEqual(unlisted.violations, legacy.map(path => `New authored JavaScript: ${path}. Use TypeScript or justify an exact exception.`));
+  repo.manifest(legacy);
+  assert.deepEqual(repo.audit().violations, []);
+  assert.deepEqual(repo.audit().categories.authored, legacy);
+});
+
+test('test and evidence roles cannot be used as ownership exceptions or imported by runtime JS or TS', t => {
   const repo = fixture(t);
   repo.write('tests/helpers.mjs', 'export const value = 1;');
   repo.write('docs/evidence.mjs', 'export const measure = 1;');
+  repo.write('tools/capture-orbit.mjs', 'export const capture = 1;');
   repo.write('site/legacy.mjs', '// import "../tests/helpers.mjs";\nexport const value = 1;');
-  repo.write('site/owner.mts', 'export { measure } from "../docs/evidence.mjs";\nconst load = () => import("../tests/helpers.mjs");');
-  repo.manifest(['site/legacy.mjs'], {
-    'docs/evidence.mjs': { category: 'evidence', reason: 'Historical measurement harness.' },
-  });
+  repo.write('site/owner.mts', 'export { measure } from "../docs/evidence.mjs";\nconst load = () => import("../tests/helpers.mjs");\nconst capture = () => import("../tools/capture-orbit.mjs");');
+  repo.manifest(['docs/evidence.mjs', 'site/legacy.mjs', 'tests/helpers.mjs', 'tools/capture-orbit.mjs']);
   const result = repo.audit();
-  assert.equal(result.counts.test, 1);
-  assert.equal(result.counts.evidence, 1);
-  assert.equal(result.violations.length, 2);
+  assert.equal(result.counts.authored, 4);
+  assert.equal(result.violations.length, 3);
   assert.ok(result.violations.every(message => message.startsWith('site/owner.mts: source imports')));
   repo.write('site/owner.mts', 'export const value: number = 1;');
   assert.deepEqual(repo.audit().violations, []);
+  repo.manifest([], { 'tests/helpers.mjs': { category: 'test', reason: 'A test name is not an exception.' } });
+  assert.throws(() => repo.audit(), /invalid exception category/u);
 });
 
 test('a compatibility facade rejects added behavior and a different source owner', t => {
@@ -86,6 +98,7 @@ test('a compatibility facade rejects added behavior and a different source owner
 test('Astro frontmatter, client imports and script sources cannot reach excluded harnesses', t => {
   const repo = fixture(t);
   for (const name of ['server', 'client', 'external']) repo.write(`site/test/${name}.mjs`, 'export const value = 1;');
+  repo.manifest(['site/test/client.mjs', 'site/test/external.mjs', 'site/test/server.mjs']);
   repo.write('site/Shell.astro', `---
 import { value } from './test/server.mjs';
 ---
@@ -93,7 +106,7 @@ import { value } from './test/server.mjs';
 <script src="./test/external.mjs"></script>
 `);
   const result = repo.audit();
-  assert.equal(result.counts.authored, 0, 'Astro import inspection does not inflate the JavaScript count.');
+  assert.equal(result.counts.authored, 3, 'Test-shaped JavaScript stays in the visible authored backlog.');
   assert.equal(result.violations.length, 3);
   assert.ok(result.violations.every(message => message.startsWith('site/Shell.astro: source imports test module')));
   repo.write('site/Shell.astro', '<main>A checked shell</main>');
@@ -104,6 +117,7 @@ test('root-relative Vite imports and public script URLs cannot reach excluded ha
   const repo = fixture(t);
   for (const name of ['client', 'external', 'filesystem']) repo.write(`site/test/${name}.mjs`, 'export const value = 1;');
   repo.write('public/browser-fixture.test.mjs', 'export const fixture = 1;');
+  repo.manifest(['public/browser-fixture.test.mjs', 'site/test/client.mjs', 'site/test/external.mjs', 'site/test/filesystem.mjs']);
   repo.write('site/Shell.astro', `<script>import '/site/test/client.mjs';</script>
 <script src="/site/test/external.mjs"></script>
 <script src="/browser-fixture.test.mjs"></script>

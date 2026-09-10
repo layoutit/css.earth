@@ -1,7 +1,54 @@
 {
   "schemaVersion": 1,
   "baselineCommit": "1fb76e44d6bf831e7ebcf0516b83c0b10e1716da",
-  "legacyAuthored": [],
+  "legacyAuthored": [
+    "tests/objects/oracle/mars/google-earth-pro/api-contract.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/build-headless-oracle.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/build-layer-oracles.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/build-patched-app.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/build-render-contract-hook.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/build-zoom-oracle-hook.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/capture-calibration-registration.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/capture-granular-render-contract.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/capture-isolated-sun-components.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/capture-layer-matrix.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/capture-native-input-smoke.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/capture-native-interaction-corpus.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/capture-native-motion-trace.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/capture-pixelmatch.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/capture-rendered-motion.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/capture-sun-presentation-contract.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/compare-interaction-video.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/compare-rendered-motion.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/controller.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/export-google-imagery-cache.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/extract-render-contracts.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/interaction-corpus.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/interaction-suite-cases.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/launch-headless.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/map-google-calibration-overlay-draws.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/native-interaction-driver.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/prepare-calibration-surface.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/prepare-capture.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/prepare-google-calibration-map.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/prepare-google-calibration-overlay.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/profile.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/publish-granular-render-contract.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/publish-interaction-suite.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/publish-render-contract-index.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/qualify-calibration-metric.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/record-interaction.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/run-interaction-suite.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/triptych.mjs",
+    "tests/objects/oracle/mars/google-earth-pro/validate-interaction-corpus.mjs",
+    "tests/objects/oracle/venus/calibrate-starfield-photo.mjs",
+    "tests/objects/oracle/venus/calibrate-starfield-separation.mjs",
+    "tests/objects/oracle/venus/capture.mjs",
+    "tests/objects/oracle/venus/compare.mjs",
+    "tests/objects/oracle/venus/image-analysis.mjs",
+    "tests/objects/oracle/venus/profile.mjs",
+    "tests/objects/oracle/venus/run.mjs"
+  ],
   "exceptions": {
     "astro.config.mjs": {
       "category": "configuration",
@@ -85,11 +132,6 @@
         ]
       }
     },
-    "src/platform/orbit-guide-test-fixture.mjs": {
-      "category": "test",
-      "reason": "Synthetic prepared orbit-guide data consumed by prepared-orbit-guides.test.mjs.",
-      "anchor": "source: \"prepared-test-satellite-orbits\","
-    },
     "src/platform/scene-lifetime.mjs": {
       "category": "facade",
       "reason": "Legacy import compatibility only; lifecycle uses the engine and browser waits use the typed renderer.",
@@ -113,64 +155,6 @@
           "rotationFromAngularVelocity"
         ]
       }
-    },
-    "src/platform/test/illumination-browser.mjs": {
-      "category": "test",
-      "reason": "Browser assertion helper exercising real controls, prepared illumination and retained DOM identity.",
-      "anchor": "// Exercise real package controls and the shared decode/publication boundary."
-    },
-    "src/platform/test/object-material-orbit-fixture.mjs": {
-      "category": "test",
-      "reason": "Test-only object mount with controlled DOM, image decoding, input transports and injected publication failures; consumed by object orbit failure tests.",
-      "anchor": "// Only native DOM, image decoding and input transports are controlled here."
-    },
-    "src/platform/test/object-runtime-package.mjs": {
-      "category": "test",
-      "reason": "Shared unit-test definitions and fake native DOM/decoding fixtures consumed by platform and object runtime contract tests.",
-      "anchor": "import test from \"node:test\";"
-    },
-    "src/platform/test/orbit-fixture.mjs": {
-      "category": "test",
-      "reason": "Fake input surface and injected orbit services used by platform and renderer camera/lifetime tests.",
-      "anchor": "export function orbitFixture(failure, cleanupFailure = false, dependencies = {})"
-    },
-    "src/renderers/css/navigation/world-camera-browser.mjs": {
-      "category": "test",
-      "reason": "Standalone Playwright camera/flight harness colocated with renderer code; never a runtime owner.",
-      "anchor": "import { chromium } from 'playwright';"
-    },
-    "src/renderers/css/solar-system/heliocentric-flight-browser.mjs": {
-      "category": "test",
-      "reason": "Standalone Playwright camera/flight harness colocated with renderer code; never a runtime owner.",
-      "anchor": "import { chromium } from 'playwright';"
-    },
-    "tools/audits/distant-worlds/browser-check.mjs": {
-      "category": "evidence",
-      "reason": "Production browser assertions for the nine distant-world packages, native drag and retained navigation."
-    },
-    "tools/audits/distant-worlds/contact-sheet.mjs": {
-      "category": "evidence",
-      "reason": "Evidence-only contact sheet assembled from actual browser captures."
-    },
-    "tools/audits/distant-worlds/drag-trace.mjs": {
-      "category": "evidence",
-      "reason": "Evidence-only native interaction trace and renderer cost analysis."
-    },
-    "tools/audits/distant-worlds/final-interactions.mjs": {
-      "category": "evidence",
-      "reason": "Browser assertions for world markers, search, lighting and responsive behavior."
-    },
-    "tools/audits/distant-worlds/fresh-install.mjs": {
-      "category": "evidence",
-      "reason": "Isolated runtime installation audit verifying original byte pins."
-    },
-    "tools/audits/distant-worlds/fresh-sources.mjs": {
-      "category": "evidence",
-      "reason": "Isolated source acquisition audit verifying original byte pins."
-    },
-    "tools/audits/distant-worlds/qualify.mjs": {
-      "category": "evidence",
-      "reason": "Package qualification harness asserting prepared budgets, controls and source contracts."
     }
   }
 }

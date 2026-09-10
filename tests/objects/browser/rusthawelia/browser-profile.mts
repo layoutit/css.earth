@@ -1,0 +1,28 @@
+import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
+import controls from '../../../../src/planets/rusthawelia/prepared/controls.json' with {type:'json'};
+export const browserProfile=createObjectBrowserProfile({id:'rusthawelia',controls,audit:{
+  "preparedAssetPairs": [
+    {
+      "one": "/scenes/rusthawelia/rusthawelia-directional-sun.webp",
+      "two": "/scenes/rusthawelia/rusthawelia-directional-sun@2x.webp"
+    }
+  ],
+  "canonicalPreparedAssets": [
+    "/scenes/rusthawelia/rusthawelia-shape-surface@2x.webp"
+  ],
+  "retained": {
+    "lensIds": [
+      "shape",
+      "elevation"
+    ],
+    "speedClicks": 5,
+    "allowedMountSelectors": []
+  },
+  "lensRace": {
+    "defaultId": "shape",
+    "slowId": "elevation",
+    "winnerId": "shape",
+    "slowAsset": "/scenes/rusthawelia/rusthawelia-elevation-surface@2x.webp",
+    "preReadyDisabled": true
+  }
+}});

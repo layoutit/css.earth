@@ -66,7 +66,7 @@ const REGRESSION_TOLERANCE_KM: Record<Vsop87BodyKey, number> = {
   neptune: 55924,
 }
 
-const FIXTURE_OF: Record<Vsop87BodyKey, string> = {
+const FIXTURE_OF: Record<Vsop87BodyKey, keyof typeof HORIZONS> = {
   mercury: 'mercuryBarycentreHeliocentric',
   venus: 'venusBarycentreHeliocentric',
   emb: 'embHeliocentric',

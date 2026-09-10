@@ -5,8 +5,12 @@ import { chromium } from "playwright";
 // The former runtime read CSSStyleDeclaration before scaling a texture address.
 // Its decimal serialization is observable. Resolve those reads once offline;
 // preserve original cssText and property-assignment order in the retained plan.
-export async function prepareCssomDeclarationReads(styles: readonly string[]) {
-  if (!isArray(styles) || styles.some(style => typeof style !== "string")) {
+function isPreparedStyleList(value: unknown): value is readonly string[] {
+  return isArray(value) && value.every(style => typeof style === "string");
+}
+
+export async function prepareCssomDeclarationReads(styles: unknown) {
+  if (!isPreparedStyleList(styles)) {
     throw new TypeError("CSS declaration inputs must be prepared strings.");
   }
   const inputs = [...new Set(styles)], browser = await chromium.launch({ headless: true });

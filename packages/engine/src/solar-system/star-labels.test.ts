@@ -17,21 +17,28 @@ const star = (hip: number, name: string, magnitude = 1, direction = [0, 0, -1]) 
 const select = (stars: readonly CatalogueStar[], overrides: Partial<StarLabelView> = {}) => selectStarLabel({ ...view, stars, ...overrides });
 const near = (actual: number, expected: number) => assert.ok(Math.abs(actual - expected) < 1e-11, `${actual} != ${expected}`);
 
+function requiredLabel(...args: Parameters<typeof select>) {
+  const label = select(...args); assert.ok(label, 'Expected a visible star label'); return label;
+}
+function visibleStar(...args: Parameters<typeof starPresentation>) {
+  const value = starPresentation(...args); assert.ok(value); return value;
+}
+
 test("the one ordinary caption names the brightest proper-named star regardless of input order", () => {
   const faint = star(1, "Faint", 3, [-0.6, 0, -1]);
   const bright = star(2, "Bright", -1, [0.6, 0, -1]);
   assert.equal(STAR_LABEL_POLICY.poolSize, 1);
   for (const stars of [[faint, bright], [bright, faint]]) {
-    const label = select(stars);
+    const label = requiredLabel(stars);
     assert.equal(label.id, "star:2");
     assert.equal(label.name, "Bright");
     assert.equal(label.priority, 1);
     assert.deepEqual(label.anchor, [60, 0]);
   }
   assert.equal(select([star(1, "", -4), star(2, "", -5)]), null);
-  assert.equal(select([star(1, "", -4), star(2, "", -5), faint]).name, "Faint");
-  assert.equal(select([{ ...bright, id: "star:catalogue-row-8" }]).id, "star:catalogue-row-8");
-  assert.equal(select([star(3, "First", 1), star(4, "Second", 1)]).name, "First");
+  assert.equal(requiredLabel([star(1, "", -4), star(2, "", -5), faint]).name, "Faint");
+  assert.equal(requiredLabel([{ ...bright, id: "star:catalogue-row-8" }]).id, "star:catalogue-row-8");
+  assert.equal(requiredLabel([star(3, "First", 1), star(4, "Second", 1)]).name, "First");
 });
 
 test("projection rejects stars behind the eye and outside every viewport edge", () => {
@@ -39,13 +46,13 @@ test("projection rejects stars behind the eye and outside every viewport edge", 
     assert.equal(select([star(1, "Outside", 1, direction)]), null, direction.join(","));
   }
   for (const direction of [[-1, 0, -1], [1, 0, -1], [0, -1, -1], [0, 1, -1]]) {
-    assert.equal(select([star(1, "Edge", 1, direction)]).name, "Edge");
+    assert.equal(requiredLabel([star(1, "Edge", 1, direction)]).name, "Edge");
   }
-  assert.equal(select([star(1, "Offscreen brighter", -3, [2, 0, -1]), star(2, "Visible", 2)]).name, "Visible");
+  assert.equal(requiredLabel([star(1, "Offscreen brighter", -3, [2, 0, -1]), star(2, "Visible", 2)]).name, "Visible");
 });
 
 test("row-major cube rotation, CSS y direction and principal offset all move the physical star anchor", () => {
-  const label = select([star(1, "Turned", 1, [1, 0.25, 0.5])], {
+  const label = requiredLabel([star(1, "Turned", 1, [1, 0.25, 0.5])], {
     rotation: [0, 0, 1, 0, 1, 0, -1, 0, 0],
     principalOffset: [13, -17],
   });
@@ -67,12 +74,12 @@ const oracleRows = [
 test("caption eligibility, presented radius and uncapped alpha match executed Galaxio oracle samples", () => {
   for (const sample of oracleRows) {
     const exposure = createExposure({ ...sample, screenFactor: screenFactor(sample.width, sample.height) });
-    const label = select([star(1, "Oracle", sample.magnitude)], { exposure });
+    const label = requiredLabel([star(1, "Oracle", sample.magnitude)], { exposure });
     near(label.radiusPx, sample.radius);
     near(label.alpha, sample.alpha);
     assert.notEqual(select([star(1, "Just eligible", sample.hints - 1e-5)], { exposure }), null);
     const tooFaint = star(1, "Drawn but unlabelled", sample.hints + 1e-5);
-    assert.ok(starPresentation(exposure, tooFaint.magnitude).luminance > 0);
+    assert.ok(visibleStar(exposure, tooFaint.magnitude).luminance > 0);
     assert.equal(select([tooFaint], { exposure }), null);
   }
 });
@@ -85,14 +92,14 @@ test("ordinary text has a fixed 12px cap and .55 alpha ceiling independent of th
   assert.equal(STAR_LABEL_POLICY.maxAlphaStep, 0.1);
   for (const intensityMax of [0.95, 0.1]) {
     const exposure = createExposure({ fovDegrees: 60, intensityMax });
-    const label = select([star(1, "Sirius", -1.44)], { exposure });
+    const label = requiredLabel([star(1, "Sirius", -1.44)], { exposure });
     assert.equal(label.alpha, 0.55);
     assert.equal(label.radiusPx, 1.25);
-    assert.ok(starPresentation(exposure, -1.44).luminance < label.alpha / 0.55);
+    assert.ok(visibleStar(exposure, -1.44).luminance < label.alpha / 0.55);
   }
 });
 
 test("the caption clears the actual retained point when the existing radius knob changes", () => {
   const exposure = createExposure({ fovDegrees: 60, maxRadiusPx: 2 });
-  assert.equal(select([star(1, "Sirius", -1.44)], { exposure }).radiusPx, 2);
+  assert.equal(requiredLabel([star(1, "Sirius", -1.44)], { exposure }).radiusPx, 2);
 });

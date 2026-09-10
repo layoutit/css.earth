@@ -44,7 +44,7 @@ describe('object descriptor boundary', () => {
     ['missing source', (value: ReturnType<typeof recipe>) => { value.surfaces[0]!.source = 'missing'; }],
     ['unsafe source path', (value: ReturnType<typeof recipe>) => { value.sources[0]!.path = '../raster.json'; }],
     ['invalid frame budget', (value: ReturnType<typeof recipe>) => { value.frameBanks[0]!.residentRows = 33; }],
-    ['unknown layer motion', (value: ReturnType<typeof recipe>) => { value.motion[1]!.target = 'atmosphere'; value.atmosphere = undefined; }],
+    ['unknown layer motion', (value: ReturnType<typeof recipe>) => { value.motion[1]!.target = 'atmosphere'; Reflect.set(value, 'atmosphere', undefined); }],
     ['zero page budget', (value: ReturnType<typeof recipe>) => { value.paging.maxResidentPages = 0; }],
   ])('rejects %s rather than passing malformed capabilities to a baker', (_name, mutate) => {
     const value = recipe();

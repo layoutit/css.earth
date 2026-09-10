@@ -7,8 +7,8 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import sharp from "sharp";
 import pixelmatch from "pixelmatch";
-import { decodeNativeMotionTrace } from "./native-motion-trace-reader.mjs";
-import { relativeOrientation3, multiply3, orientationErrorDegrees } from "../../../../../site/test/interaction-orientation.mjs";
+import { decodeNativeMotionTrace } from "./native-motion-trace-reader.mts";
+import { relativeOrientation3, multiply3, orientationErrorDegrees } from "../../../../../site/test/interaction-orientation.mts";
 
 const exec = promisify(execFile);
 const [nativeArgument, browserArgument, outputArgument, visualization = "absolute", thresholdArgument = "0.1"] = process.argv.slice(2);

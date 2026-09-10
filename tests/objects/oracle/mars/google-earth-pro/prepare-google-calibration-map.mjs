@@ -3,7 +3,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 import sharp from "sharp";
-import { flatTileBounds, sampleCalibrationTile } from "./calibration-tile-address.mjs";
+import { flatTileBounds, sampleCalibrationTile } from "./calibration-tile-address.mts";
 
 const options = parseArguments(process.argv.slice(2));
 const calibrationRoot = resolve(
@@ -467,4 +467,3 @@ function parseArguments(arguments_) {
   }
   return Object.freeze(parsed);
 }
-

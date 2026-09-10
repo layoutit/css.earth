@@ -1,7 +1,7 @@
 import type { ObjectInteractionOptions as RendererObjectInteractionOptions } from "../renderers/css/navigation/object-interaction-controls.ts";
 import type { RuntimePolicy } from "../renderers/css/navigation/runtime-policy.ts";
 import type { NavigationCamera, TrackballMetrics, CameraDelta, ControlsUpdate, DestinationMotion, CameraPlan, CameraUpdate, CameraAngles, CameraPose, Vector3 } from "../renderers/css/navigation/types.ts";
-import type { CameraSkyPlan } from "../renderers/css/navigation/camera-orientation.ts";
+import type { CameraSkyPlan, CameraOrientationOptions, CubicSkyCameraOrientation } from "../renderers/css/navigation/camera-orientation.ts";
 import type { PerspectiveDolly, PerspectiveWorldContext } from "./perspective-dolly.mts";
 import type { LegacySharedCamera, PhysicalSharedCamera } from "../renderers/css/navigation/view-url.ts";
 import type { RetainedCubicSky } from "../renderers/css/solar-system/cubic-sky-runtime.ts";
@@ -14,10 +14,15 @@ import type { PhysicalProjection } from "../renderers/css/rendering/physical-pro
 export interface OrbitStateUpdate { pitch?: number; controlPitch?: number; controlYaw?: number; zoom?: number; distance?: number; distanceKilometers?: number; bodyCenterKilometers?: PositionM; pose?: CameraPose; }
 export type OrbitState = { pitch: number; controlPitch: number; controlYaw: number; zoom: number; pose: CameraPose } & Partial<ReturnType<PerspectiveDolly['state']>>;
 export interface OrbitPublication extends CameraAngles { sceneMatrix: string; skyboxMatrix: string; sunViewDirection: Vector3 | null; skySunViewDirection: Vector3 | null; sunPresentation: SunProjection | ReturnType<RetainedDirectionalSun['state']> | null; counterRotation: string; counterRotationFor(localMatrix: string | DOMMatrix | null): string; zoom: number; projection?: PhysicalProjection; distance?: number; focal?: number; viewportWidth?: number; viewportHeight?: number; stageViewport?: WorldCameraViewport; principalOffset?: readonly number[]; body?: ReturnType<PerspectiveDolly['publish']>['body']; levelOfDetail?: ReturnType<PerspectiveDolly['levelOfDetail']>; }
-export interface RetainedOrbitOptions { preparedSurfaceHitTest?: (clientX: number, clientY: number) => boolean; stage: HTMLElement; inputSurface: HTMLElement; cameraElement: HTMLElement; sceneElement: HTMLElement; cubicSky: RetainedCubicSky; skyPlan: CameraSkyPlan; directionalSun?: RetainedDirectionalSun | null; directionalSunPlan?: DirectionalSunPlan | null; heliocentric?: ReturnType<typeof mountRetainedHeliocentricView> | null; worldContext?: PerspectiveWorldContext; cameraPlan: CameraPlan; viewport?: import("../renderers/css/navigation/camera-viewport.ts").CameraViewport; objectId: string; mobilePreviewElement?: HTMLElement | null; onPublish?: (publication: OrbitPublication) => void; onInteractionStart?: () => void; onInteractionEnd?: () => void; onError(error: unknown): void; requireSun?: boolean; }
-export interface InteractionServices { createUnboundedMatrixDragControls?: typeof createUnboundedMatrixDragControls; createPreparedWheelZoomControls?: typeof createPreparedWheelZoomControls; }
+export type OrbitCubicSky = { root: HTMLElement; setOrientation(options: { matrix: string; zoom: number; defaultZoom: number }): void; starExposure?: RetainedCubicSky['starExposure']; };
+export interface RetainedOrbitOptions { preparedSurfaceHitTest?: (clientX: number, clientY: number) => boolean; stage: HTMLElement; inputSurface: HTMLElement; cameraElement: HTMLElement; sceneElement: HTMLElement; cubicSky: OrbitCubicSky; skyPlan: CameraSkyPlan; directionalSun?: RetainedDirectionalSun | null; directionalSunPlan?: DirectionalSunPlan | null; heliocentric?: ReturnType<typeof mountRetainedHeliocentricView> | null; worldContext?: PerspectiveWorldContext; cameraPlan: CameraPlan; viewport?: import("../renderers/css/navigation/camera-viewport.ts").CameraViewport; objectId: string; mobilePreviewElement?: HTMLElement | null; onPublish?: (publication: OrbitPublication) => void; onInteractionStart?: () => void; onInteractionEnd?: () => void; onError(error: unknown): void; requireSun?: boolean; }
 export type ObjectInteractionOptions = Omit<RendererObjectInteractionOptions, "runtimePolicy" | "surfaceFlyToHitTest">;
-export interface OrbitServices extends InteractionServices { createPolyCamera?: typeof createPolyCamera; createCubicSkyCameraOrientation?: typeof createCubicSkyCameraOrientation; bindResponsiveOrbitPolicy?: RuntimePolicy['bindResponsiveOrbitPolicy']; selectPreparedResponsiveZoom?: typeof selectPreparedResponsiveZoom; createPerspectiveDolly?: typeof createPerspectiveDolly; HTMLElement?: typeof HTMLElement; matchMedia?: (query: string) => MediaQueryList; MutationObserver?: typeof MutationObserver; }
+export type OrbitOrientation = Pick<CubicSkyCameraOrientation, 'scene' | 'sceneMatrix' | 'skybox' | 'counterRotation' | 'reset' | 'rebaseScene' | 'prepareFlight' | 'restore' | 'rotate' | 'snapshot'>;
+export type OrbitDragController = { update(options: ControlsUpdate): void; stop(): void; flyTo(options: DestinationMotion): Promise<{ completed: boolean }>; stats(): Readonly<Record<string, unknown>>; destroy(): void; invalidateTrackball(): void; };
+export type OrbitWheelController = { update(options?: ControlsUpdate): void; stop(): void; stats(): Readonly<{ events?: number }>; destroy(): void; };
+export type OrbitResponsivePolicy = { readonly mobile: boolean; destroy(): void };
+export type OrbitMediaQuery = MediaQueryList;
+export interface OrbitServices { createPolyCamera?: (state: { target: Vector3; rotX: number; rotY: number; zoom: number; distance: number }) => NavigationCamera; createCubicSkyCameraOrientation?: (options: CameraOrientationOptions) => OrbitOrientation; createUnboundedMatrixDragControls?: (options: Parameters<typeof createUnboundedMatrixDragControls>[0]) => OrbitDragController; createPreparedWheelZoomControls?: (options: Parameters<typeof createPreparedWheelZoomControls>[0]) => OrbitWheelController; bindResponsiveOrbitPolicy?: RuntimePolicy['bindResponsiveOrbitPolicy']; selectPreparedResponsiveZoom?: (options: Parameters<typeof selectPreparedResponsiveZoom>[0]) => { zoom: number; model: string; widthShare: number }; createPerspectiveDolly?: typeof createPerspectiveDolly; HTMLElement?: { [Symbol.hasInstance](value: unknown): boolean }; matchMedia?: (query: string) => OrbitMediaQuery; MutationObserver?: typeof MutationObserver; }
 export type RetainedCubicSkyOrbit = ReturnType<typeof createRetainedCubicSkyOrbit>;
 import { createPreparedCameraPublisher } from "./prepared-camera-runtime.mts";
 import { createPolyCamera } from "@layoutit/polycss";
@@ -47,7 +52,7 @@ export function createObjectInteractionControls({
   onStart,
   onEnd,
   onError = null,
-}: ObjectInteractionOptions, services: InteractionServices = {}) {
+}: ObjectInteractionOptions, services: Pick<OrbitServices, 'createUnboundedMatrixDragControls' | 'createPreparedWheelZoomControls'> = {}) {
   const { createUnboundedMatrixDragControls: createUnboundedMatrixDragControls = nativeServices.createUnboundedMatrixDragControls, createPreparedWheelZoomControls: createPreparedWheelZoomControls = nativeServices.createPreparedWheelZoomControls } = services;
   if (typeof sceneMatrix !== "function") {
     throw new TypeError("Object interaction controls require the current scene matrix.");
