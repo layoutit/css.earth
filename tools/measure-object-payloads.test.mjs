@@ -4,8 +4,8 @@ import { createHash } from "node:crypto";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
-import { OBJECTS } from "../site/objects.mjs";
-import { decodedBodyMetrics, localBaseUrl, measureRoute, payloadCases, runPayloadComparison } from "./measure-object-payloads.mjs";
+import { OBJECTS } from "../site/objects.mts";
+import { decodedBodyMetrics, localBaseUrl, measureRoute, payloadCases, runPayloadComparison } from "./measure-object-payloads.mts";
 
 const sha = value => createHash("sha256").update(value).digest("hex");
 const baseUrl = "http://127.0.0.1:4321/";

@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {gzipSync} from 'node:zlib';
-import {decodeIsis3Raster} from './isis3-raster.mjs';
-import {scienceMapPoint} from './scientific-raster.mjs';
+import {decodeIsis3Raster} from './isis3-raster.mts';
+import {scienceMapPoint} from './scientific-raster.mts';
 const grid={width:3,height:3,targetName:'Example',centerLongitude:180,referenceRadiusMeters:1000,polarRadiusMeters:900,origin:[-100,100],resolutionMeters:10,longitudeRange:[0,360]};
 function fixture(format='Tile') {
  const label=`Object = IsisCube\n Object = Core\n StartByte = 4097\n Format = ${format}\n TileSamples = 2\n TileLines = 2\n Group = Dimensions\n Samples = 3\n Lines = 3\n Bands = 1\n End_Group\n Group = Pixels\n Type = Real\n ByteOrder = Lsb\n Base = 0\n Multiplier = 1\n End_Group\n Group = Mapping\n ProjectionName = SimpleCylindrical\n TargetName = Example\n LatitudeType = Planetocentric\n LongitudeDirection = PositiveEast\n LongitudeDomain = 360\n MinimumLongitude = 0\n MaximumLongitude = 360\n CenterLongitude = 180\n EquatorialRadius = 1000\n PolarRadius = 900\n UpperLeftCornerX = -100\n UpperLeftCornerY = 100\n PixelResolution = 10\n End_Group\n End_Object\nEnd_Object\nEnd\n`;

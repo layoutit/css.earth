@@ -2,11 +2,11 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
 import { parseWorldCoverInventory, readWorldCoverCatalog, sourceTilesForBounds,
-  worldCoverTileBounds, worldCoverSourceEntry } from "../../../../tools/objects/geographic-pages/worldcover-catalog.mjs";
-import { cityCoverageRoots, planCityCoverage } from '../../../../tools/objects/geographic-pages/operations/plan-coverage.mjs';
-import { citySourceWindow, CITY_SOURCE_WINDOW_MAX_PIXELS, validateWorldCoverRegionSources } from '../../../../tools/objects/geographic-pages/operations/worldcover-source.mjs';
+  worldCoverTileBounds, worldCoverSourceEntry } from "../../../../tools/objects/geographic-pages/worldcover-catalog.mts";
+import { cityCoverageRoots, planCityCoverage } from '../../../../tools/objects/geographic-pages/operations/plan-coverage.mts';
+import { citySourceWindow, CITY_SOURCE_WINDOW_MAX_PIXELS, validateWorldCoverRegionSources } from '../../../../tools/objects/geographic-pages/operations/worldcover-source.mts';
 import { PREPARED_EARTH_SCENE } from './prepared-fixture.mjs';
-import { expectedGlobalCityFace, validateGlobalCityFaceReceipt } from '../../../../tools/objects/geographic-pages/operations/global-face-receipts.mjs';
+import { expectedGlobalCityFace, validateGlobalCityFaceReceipt } from '../../../../tools/objects/geographic-pages/operations/global-face-receipts.mts';
 
 const inventoryPage=`<?xml version="1.0" encoding="UTF-8"?>
 <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Name>esa-worldcover-s2</Name><Prefix>rgbnir/2021/</Prefix><KeyCount>1</KeyCount><MaxKeys>1000</MaxKeys><IsTruncated>false</IsTruncated><Contents><Key>rgbnir/2021/N00/ESA_WorldCover_10m_2021_v200_N00E044_S2RGBNIR.tif</Key><LastModified>2022-12-10T13:22:13.000Z</LastModified><ETag>&quot;7eb1875cba23a838f73197efdb25b85f&quot;</ETag><Size>1992255</Size><StorageClass>STANDARD</StorageClass></Contents></ListBucketResult>`;

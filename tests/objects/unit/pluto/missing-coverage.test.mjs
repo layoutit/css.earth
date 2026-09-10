@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from "../../../../src/platform/prepare-missing-coverage.mjs";
+import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from "../../../../src/platform/prepare-missing-coverage.mts";
 import { elevationRaster } from "./preparation-fixture.mjs";
 
 test("JPEG coverage keeps enclosed black terrain and nonzero dark pixels", () => {

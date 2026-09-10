@@ -6,8 +6,8 @@ import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {executeAcquisition,parseAcquisitionPlan} from '../../tools/objects/operations-acquisition.js';
-import {prepareSatelliteCatalog} from '../../tools/objects/acquisition/satellite-catalog.mjs';
-import {prepareProjectedCatalog} from '../../tools/objects/acquisition/projected-catalog.mjs';
+import {prepareSatelliteCatalog} from '../../tools/objects/acquisition/satellite-catalog.mts';
+import {prepareProjectedCatalog} from '../../tools/objects/acquisition/projected-catalog.mts';
 import type {SourceManifest,SourceEntry} from '../../tools/objects/operations.js';
 const digest=(bytes:Uint8Array|string)=>createHash('sha256').update(bytes).digest('hex');
 const entry=(path:string,bytes:Uint8Array):SourceEntry=>({path,expectedBytes:bytes.length,expectedSha256:digest(bytes)});
@@ -96,8 +96,10 @@ test('Earth refresh preserves normalized PSG, gzip, editorial and pinned derived
   }
   if(url.includes('medicion_de_ruido_diurno.geojson'))return new Response(gunzipSync(noise));
   if(url.includes('/topic/48583'))return new Response(JSON.stringify(JSON.parse(editorial)));
+  const compressed = plan.operations.find(step => step.kind === 'download' && step.encoding === 'gzip' && step.url === url);
+  if (compressed && 'path' in compressed) return new Response(gunzipSync(await readFile(sourceRoot + '/' + compressed.path)));
   throw new Error('Unexpected mock request '+url);
  }}});
- assert.equal(calls.length,4);
+ assert.equal(calls.length, plan.operations.filter(step => step.kind !== 'json-document').length);
  for(const operation of plan.operations){assert.ok('path'in operation);const path=(operation as {path:string}).path;assert.deepEqual(await readFile(join(root,path)),await readFile(sourceRoot+'/'+path),path);}
 }));

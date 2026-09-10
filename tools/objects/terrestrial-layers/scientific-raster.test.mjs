@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
-import { colorForValue, terrainBrightness, scienceMapPoint, sampleScienceGrid, sampleColorBand, composeObservedColor, sourceSurfaceBrightness } from './scientific-raster.mjs';
-import { lambertAttenuationAtlas } from './solid-raster.mjs';
-import { parseTerrestrialProfile } from './index.mjs';
+import { colorForValue, terrainBrightness, scienceMapPoint, sampleScienceGrid, sampleColorBand, composeObservedColor, sourceSurfaceBrightness } from './scientific-raster.mts';
+import { lambertAttenuationAtlas } from './solid-raster.mts';
+import { parseTerrestrialProfile } from './index.mts';
 
 const relief = { referenceRadiusMeters: 470000, lightDirection: [-0.5, 0.5, Math.SQRT1_2], ambient: 0.25 };
 test('source-surface relief uses the actual local facet normal without radial finite differences', () => {
@@ -145,7 +145,7 @@ test('a measured elevation lens can be the only surface capability', async () =>
 });
 
 test('a declared output meridian shifts presentation without changing source coordinates', async () => {
-  const {paintScienceSurface} = await import('./scientific-raster.mjs');
+  const {paintScienceSurface} = await import('./scientific-raster.mts');
   const seen = [], source = {sample(lon,lat) {seen.push([lon,lat]);return lon;}};
   const lens = {minimum:-180,maximum:360,colors:['#000000','#ffffff']};
   paintScienceSurface(source,lens,4,2);

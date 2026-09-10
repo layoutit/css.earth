@@ -7,9 +7,9 @@
     "sha256": "3f5579fe9a15ccf9a859df57637eb7d733c563116236423548357955526cf285"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -329,7 +329,7 @@
       "sha256": "294881d2e3988029b35a9cef93e38e6b53cb02574b2c59df938759cf286af79d",
       "bytes": 123654,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -354,7 +354,7 @@
       "sha256": "640c0356e11f86da7a5f7695fd74aa14164683479b2869d7705b2e899d9f7a21",
       "bytes": 8984,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -387,19 +387,19 @@
           "url": "/scenes/golevka/golevka-elevation-thumbnail.webp",
           "bytes": 7048,
           "sha256": "265c96dbfba1fb178487c2358684b7b74e682941697b0d126ad6f5938d25fc56",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/golevka/golevka-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/golevka/golevka-elevation-surface@2x.webp",
           "bytes": 441626,
           "sha256": "9567bd03765a15f29328386a53f85c202da5701414d64c6c98c9a49333bc0a01",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -431,13 +431,13 @@
           "url": "/scenes/golevka/golevka-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/golevka/golevka-shape-surface@2x.webp",
           "bytes": 232630,
           "sha256": "5ca924645c7bc657105e19f429b96a8e5ff8ec94755b14158bf663636b1e7ff5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

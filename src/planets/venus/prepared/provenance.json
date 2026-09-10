@@ -7,9 +7,9 @@
     "sha256": "979286f9797dba4d70517e4511b4cfb2830aafbb8e83fed493a3125a5cc7f03d"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -699,7 +699,7 @@
       "sha256": "da7f68195e552020a888db1758bb7a87506718971c6c9a455189d7b17ceda321",
       "bytes": 66303,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -732,7 +732,7 @@
       "sha256": "7c818deccd69e99f3e0ebc5030979bbeb50f8b19afbd8f31c97d968a9f591588",
       "bytes": 5399293,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -765,7 +765,7 @@
       "sha256": "3b25ddd02af9214a64aed694ececd44754c2c3174900d78bbae3856042117974",
       "bytes": 5477203,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -788,7 +788,7 @@
       "sha256": "85d202bbf1d029256ec388da9ea25be45420ba3e5294f401ff1e22268f598b20",
       "bytes": 2142,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -811,7 +811,7 @@
       "sha256": "4c01d5f9dce6f3e557f18d69b7933a403f464902625107f519170addc9dbbdab",
       "bytes": 16667,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -827,7 +827,7 @@
       "sha256": "6856c59ec48619829305d4896e06c60450e075c37981da2a98890fbcf1fe6a3c",
       "bytes": 12089,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": [
         {
@@ -860,7 +860,7 @@
       "sha256": "9860b648a57508cf16c14936ffe8926dc380d3bedc234abc80e6d0ffad582ec8",
       "bytes": 26685,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": [
         {
@@ -911,31 +911,31 @@
           "url": "/scenes/venus/venus-clouds.webp",
           "bytes": 12928,
           "sha256": "7b8a6cb754caed6b8f60232b098087620bcaa3a65e2a753e8844635220d20945",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/venus/venus-clouds@2x.webp",
           "bytes": 38640,
           "sha256": "c1dd0f9b1e9f7dc12bc4074ebcb66845bd6ab97c1fa21edb59c6468a6ba38a6b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/venus/venus-lens-clouds.webp",
           "bytes": 226,
           "sha256": "ecea3de3aab9b651c81367ea6555df4c8a3219c3c0aca3951aeb28c835225b9d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/venus/venus-poles-clouds.webp",
           "bytes": 30402,
           "sha256": "b0b637150e9061b087b5b45cdeff01b37485c6a5668eb112d097752f9a8d9160",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/venus/venus-poles-clouds@2x.webp",
           "bytes": 79626,
           "sha256": "9559417d1c4b42c9456657bcc1a588294c7f91d15246d8eed51831ae996cc9e6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -968,31 +968,31 @@
           "url": "/scenes/venus/venus-radar.webp",
           "bytes": 319602,
           "sha256": "2f425091df878e19ea940b2933591cd89041a6974b27010b9f97d4cefbc44f9c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/venus/venus-radar@2x.webp",
           "bytes": 1342124,
           "sha256": "d8a8ab642684a2934b252f69d4a4e84727388a43c2748b0d0945348b302e4783",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/venus/venus-lens-radar.webp",
           "bytes": 1844,
           "sha256": "27afea38c42d0c98f0b75acb78e98d95474a86b0e66e3fc3997b7fdabbec2b63",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/venus/venus-poles-radar.webp",
           "bytes": 120320,
           "sha256": "093b573e7de2bbc5aa711b3d242cb9277424274ce4966a0abe7ca867ca5751bf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/venus/venus-poles-radar@2x.webp",
           "bytes": 445994,
           "sha256": "ca4c7703ed677382743e628b10a63bd75391a63981c3771aeb319542dd4c123e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1025,31 +1025,31 @@
           "url": "/scenes/venus/venus-elevation.webp",
           "bytes": 342682,
           "sha256": "b55f3ee65a69ef17b0a5b346d2d3fab8369c0aa19b998050ea07b2dc2cb3df78",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/venus/venus-elevation@2x.webp",
           "bytes": 1606002,
           "sha256": "1d1982d1c830adce2434bea697fd2fb961cd87fa50e402178e299c4f851871e2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/venus/venus-lens-elevation.webp",
           "bytes": 2140,
           "sha256": "8057baad5c5ac313504433035423b839b4937687ba0adae19245adf9405c7224",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/venus/venus-poles-elevation.webp",
           "bytes": 132918,
           "sha256": "7e15aad4730e9cb1a94b0106d8ed70dfd59546f50d22f003a5dd1e4eddad96a6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/venus/venus-poles-elevation@2x.webp",
           "bytes": 483058,
           "sha256": "ee34a96c428f8ecd3f028e6d2e08297ebe591c975c42a9545ce7563152a13b7f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1074,37 +1074,37 @@
           "url": "/scenes/venus/venus-material.webp",
           "bytes": 470778,
           "sha256": "283259a1c7265f9d41dda42f7bff17ad3452f091d12844ac50dad690a414d136",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/venus/venus-observation-material.webp",
           "bytes": 184874,
           "sha256": "41a225f88f14b2df869f7be255d3dd06d2715bf1758bbe96157627940319a6a1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/venus/venus-lighting.webp",
           "bytes": 71390,
           "sha256": "f6839f8f0c2fa6b02ba296a74c1154accc9f584d7d3d136b69b9b8c8959642ca",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/venus/venus-material@2x.webp",
           "bytes": 1316794,
           "sha256": "d79bd68b9e8377b99c58da4d37b563cf5d1a4c74313dce1a8e98c1f848ff73b2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/venus/venus-observation-material@2x.webp",
           "bytes": 512540,
           "sha256": "ebe10fb45e26da4eff7848f5b67144b2e22140a915dff38283d2f681f57f23ce",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/venus/venus-lighting@2x.webp",
           "bytes": 211590,
           "sha256": "84011d6e6ec85d2e4699ca3b11f70c8577095fa6e3b41f5af0b546752a4be291",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1157,7 +1157,7 @@
           "url": "/scenes/venus/venus-atmosphere-spectrum.svg",
           "bytes": 5691,
           "sha256": "3cb52a3d6aaaf0872cfc8bd13374fbcae7337596a89214d385b73c04a06400ae",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1185,7 +1185,7 @@
           "url": "/scenes/venus/venus-temperature-pressure-profile.svg",
           "bytes": 2927,
           "sha256": "99761b984a7e4af2752a28a318c3235cb656be498d6f5ae244844be5545fbb09",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1212,7 +1212,7 @@
           "url": "/scenes/venus/venus-photometric-phase-curve.svg",
           "bytes": 4365,
           "sha256": "365045846150ad6b201bb6c1ced415463e6b1e2dd4828231e0afebb15852e7bc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "authored-recipe"

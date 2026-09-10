@@ -4,9 +4,9 @@ import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { PREPARED_EARTH_CITY_PAGES as plan } from "./prepared-fixture.mjs";
 import { PREPARED_EARTH_SCENE as scene } from "./prepared-fixture.mjs";
-import { readWorldCoverCatalog } from "../../../../tools/objects/geographic-pages/worldcover-catalog.mjs";
-import { prepareWmtsCoverage } from "../../../../tools/objects/geographic-pages/wmts-coverage.mjs";
-import { prepareWmtsTile,wmtsAddress } from "../../../../tools/objects/geographic-pages/wmts-page-geometry.mjs";
+import { readWorldCoverCatalog } from "../../../../tools/objects/geographic-pages/worldcover-catalog.mts";
+import { prepareWmtsCoverage } from "../../../../tools/objects/geographic-pages/wmts-coverage.mts";
+import { prepareWmtsTile,wmtsAddress } from "../../../../tools/objects/geographic-pages/wmts-page-geometry.mts";
 import { readPreparedWmtsBlock,isPreparedBlockReference } from "../../../../src/renderers/css/dist/testing.js";
 
 const pinBytes=await readFile(new URL("../../../../src/planets/earth/source/city/wmts-release.json",import.meta.url));

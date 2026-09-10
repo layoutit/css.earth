@@ -3,7 +3,7 @@ import test from 'node:test';
 import { mkdtemp, mkdir, writeFile, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { prepareSurfaceMinimaps } from './prepare-surface-minimaps.mjs';
+import { prepareSurfaceMinimaps } from './prepare-surface-minimaps.mts';
 
 test('a model-only lens can omit a misleading flat map without opening its image', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'comet-minimap-test-'));

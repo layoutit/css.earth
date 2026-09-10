@@ -36,8 +36,8 @@ The [documentation contract](../../../../docs/provenance/CONTRACT.md) explains
 where body docs and evidence go. Every file under `source/` needs a manifest
 entry. Keep test logs and browser screenshots outside it.
 
-Use `tools/object-package-contract.mjs` for actual required files. Its authored
-branch is selected through `tools/authored-object.mjs`; the legacy branch still
+Use `tools/object-package-contract.mts` for actual required files. Its authored
+branch is selected through `tools/authored-object.mts`; the legacy branch still
 mentions `runtime/client.mjs`, package Astro pages, and per-body tools. Those
 fallback requirements are not the current authored-package template.
 
@@ -45,16 +45,16 @@ fallback requirements are not the current authored-package template.
 
 | Change | Source owners |
 | --- | --- |
-| Identity, route, lazy loading | `site/objects.mjs`, `site/object-schema.mjs`, `site/object-adapter.mjs`, `site/packaged-object-runtime.mjs` |
+| Identity, route, lazy loading | `site/objects.mts`, `site/object-schema.mts`, `site/object-adapter.mts`, `site/packaged-object-runtime.mts` |
 | Authored and prepared object contracts | `packages/objects/src/descriptor.ts`, `packages/objects/src/authored.ts`, `src/renderers/css/validation/` |
-| Preparation dispatch and publication | `tools/objects/prepare-authored.ts`, `tools/objects/publication.mjs`, `tools/prepare-object-json.mjs` |
+| Preparation dispatch and publication | `tools/objects/prepare-authored.ts`, `tools/objects/publication.mts`, `tools/prepare-object-json.mts` |
 | Source acquisition, verification and runtime inventory | `tools/objects/operations.ts`, `tools/objects/operations-acquisition.ts`, package source manifests and acquisition JSON |
-| Retained scene, selection, resources and lifecycle | `src/renderers/css/runtime/object-runtime.ts`, `src/renderers/css/rendering/`, `site/scene-contract.mjs`, `site/scene-router.mjs` |
+| Retained scene, selection, resources and lifecycle | `src/renderers/css/runtime/object-runtime.ts`, `src/renderers/css/rendering/`, `site/scene-contract.mjs`, `site/scene-router.mts` |
 | Shared input, world camera and physical registration | `site/runtime-policy.mjs`, `src/renderers/css/navigation/`, `src/renderers/css/rendering/prepared-camera-runtime.ts`, `tools/objects/world-navigation.ts` |
-| Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/object-page-data.mjs`, `site/object-page-contract.mjs`, `site/layouts/PlanetLayout.astro` |
-| Content, lens labels, title and minimap preparation | `tools/objects/content/`, `site/prepare-lens-labels.mjs`, `tools/prepare-planet-title-sources.mjs`, `tools/prepare-surface-minimaps.mjs` |
-| Search and marker presentation | `site/planet-search-objects.mjs`, `tools/prepare-navigation.mjs`, `src/navigation/marker-presentation.mjs` |
-| Open hyperbolic trajectories | `packages/astronomy/src/kepler.ts`, `src/platform/prepare-hyperbolic-path.mjs`, shared world-context preparation and orbit validation/projector |
+| Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/object-page-data.mts`, `site/object-page-contract.mts`, `site/layouts/PlanetLayout.astro` |
+| Content, lens labels, title and minimap preparation | `tools/objects/content/`, `site/prepare-lens-labels.mts`, `tools/prepare-planet-title-sources.mts`, `tools/prepare-surface-minimaps.mts` |
+| Search and marker presentation | `site/planet-search-objects.mts`, `tools/prepare-navigation.mts`, `src/navigation/marker-presentation.mts` |
+| Open hyperbolic trajectories | `packages/astronomy/src/kepler.ts`, `src/platform/prepare-hyperbolic-path.mts`, shared world-context preparation and orbit validation/projector |
 
 For an unbound body, use the shared prepared hyperbolic path with explicit open
 endpoints and an epoch vertex. Do not wrap its anomaly, close its last edge or
@@ -70,12 +70,12 @@ requires behavior the existing capability cannot express.
 `site/pages/[id].astro` derives routes from `OBJECTS` and passes the selected id
 to `ObjectPage.astro`. That component loads the body's prepared page and content,
 applies its declared stylesheets, and uses the shared head/panel and `PlanetLayout`.
-`site/objects.mjs` loads descriptors through `loadPackagedObject`. Preserve one
+`site/objects.mts` loads descriptors through `loadPackagedObject`. Preserve one
 registry, generic adapter, shared shell and active object scene; navigation uses
 the shared world camera.
 
 Navigation marker appearance comes from each authored package's
-`source/preparation/navigation.json`. `tools/prepare-navigation.mjs` generates
+`source/preparation/navigation.json`. `tools/prepare-navigation.mts` generates
 `site/prepared-navigation-markers.mjs`; `PlanetNavigationMarker.astro` consumes
 it. Adding a body does not require a hand-maintained component presentation map.
 
@@ -87,7 +87,7 @@ it. Adding a body does not require a hand-maintained component presentation map.
   target body's inputs and conventions.
 - **Elevation relief:** Ceres's `source/preparation/terrestrial.json` supplies
   its height datum, validity limits and cartographic lighting to
-  `tools/objects/terrestrial-layers/scientific-raster.mjs`. These values and gap
+  `tools/objects/terrestrial-layers/scientific-raster.mts`. These values and gap
   rules belong to its dataset.
 - **A sourced shape model:** Haumea's `source/preparation/shape-model.json` uses
   `tools/objects/shape-model/`. Inspect both the authored schema and that
@@ -102,9 +102,9 @@ it. Adding a body does not require a hand-maintained component presentation map.
 
 | Irregular-mesh capability | Owner relative to the repository |
 | --- | --- |
-| Source sampling, native triangle planning and per-texel lighting bake | `tools/objects/terrestrial-layers/radial-terrain.mjs` |
-| Position welding, compaction, meshoptimizer simplification and topology checks | `tools/objects/terrestrial-layers/radial-meshoptimizer.mjs` |
-| PDS radius values / OBJ radial intersections | `tools/objects/terrestrial-layers/pds-scalar-grid.mjs`, `tools/objects/terrestrial-layers/obj-shape.mjs` |
+| Source sampling, native triangle planning and per-texel lighting bake | `tools/objects/terrestrial-layers/radial-terrain.mts` |
+| Position welding, compaction, meshoptimizer simplification and topology checks | `tools/objects/terrestrial-layers/radial-meshoptimizer.mts` |
+| PDS radius values / OBJ radial intersections | `tools/objects/terrestrial-layers/pds-scalar-grid.mts`, `tools/objects/terrestrial-layers/obj-shape.mts` |
 | Geometry regressions and independent body anchors | `tools/objects/terrestrial-layers/radial-meshoptimizer.test.mjs`, `tools/objects/terrestrial-layers/radial-terrain.test.mjs`, `tests/objects/unit/vesta/source.test.mjs` |
 
 The OBJ sampler supplies radius by ray intersection; this route resamples the
@@ -126,10 +126,10 @@ for availability; this reference does not establish merge or deployment status.
 | Capability | Owner relative to the repository |
 | --- | --- |
 | Observation pins, quality policy, photometry and transfer limits | `src/planets/comet-67p/source/preparation/terrestrial.json` and `acquisition.json` in the same directory |
-| OSIRIS decoding, companion identity, projective fit and footprint sampling | `tools/objects/terrestrial-layers/osiris-geo.mjs` |
-| Disjoint camera validation, source-mesh correspondence and visibility | `tools/objects/terrestrial-layers/observed-geo-surface.mjs` |
-| Deterministic surface samples, bounded overlap gains and observation selection | `tools/objects/terrestrial-layers/observation-mosaic.mjs` |
-| Atlas baking and lossless observation-index output | `tools/objects/terrestrial-layers/radial-terrain.mjs` |
+| OSIRIS decoding, companion identity, projective fit and footprint sampling | `tools/objects/terrestrial-layers/osiris-geo.mts` |
+| Disjoint camera validation, source-mesh correspondence and visibility | `tools/objects/terrestrial-layers/observed-geo-surface.mts` |
+| Deterministic surface samples, bounded overlap gains and observation selection | `tools/objects/terrestrial-layers/observation-mosaic.mts` |
+| Atlas baking and lossless observation-index output | `tools/objects/terrestrial-layers/radial-terrain.mts` |
 | Selection/level regressions and prepared provenance checks | `tools/objects/terrestrial-layers/observation-mosaic.test.mjs`, `tests/objects/unit/comet-67p/mosaic.test.mjs` |
 | Worked method, limitations and measured evidence | [67P source and evidence account](../../../../src/planets/comet-67p/README.md) |
 
@@ -155,11 +155,11 @@ purposes; run those needed for the task, not every preparation step by default.
 | Build the site and assemble declared runtime files | `pnpm build` |
 
 Default acquisition restores missing pins from `source/preparation/acquisition.json`
-and fails on changed existing bytes. `tools/restore-source-inputs.mjs` delegates
+and fails on changed existing bytes. `tools/restore-source-inputs.mts` delegates
 selected objects to shared acquisition; it also restores Earth's pinned WMTS
 inputs. `setup:assets` installs prepared files independently of source preparation.
 
-`tools/run-implemented-planets.mjs` discovers registered objects and selects the
+`tools/run-implemented-planets.mts` discovers registered objects and selects the
 authored commands. It routes `test:planets` to `tests/objects/unit/<id>/`.
 `pnpm test` currently runs packages, renderer, platform and shell checks;
 `test:planets` and `test:preparation` are separate commands.

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {candidates,readCatalog,preserved,sourceRoot,upstream} from './catalog.mjs';
+import {candidates,readCatalog,preserved,sourceRoot,upstream} from './catalog.mts';
 
 
 test('pinned upstream files and inventory retain their identities and license',()=>{

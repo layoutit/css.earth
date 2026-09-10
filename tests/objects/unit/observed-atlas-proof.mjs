@@ -3,7 +3,7 @@ import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {resolve,basename} from 'node:path';
 import sharp from 'sharp';
-import {invertPreparedAffineMatrix4} from '../../../src/platform/prepared-ellipsoid-projection.mjs';
+import {invertPreparedAffineMatrix4} from '../../../src/platform/prepared-ellipsoid-projection.mts';
 
 const root=resolve(import.meta.dirname,'../../..'),contexts=new Map();
 const json=async path=>JSON.parse(await readFile(path,'utf8'));

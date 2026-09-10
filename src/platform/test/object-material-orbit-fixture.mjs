@@ -1,8 +1,8 @@
-import {loadObjectTestDefinition} from '../../../tools/object-test-data.mjs';
-import { createObjectRuntime } from '../object-runtime.mjs';
+import {loadObjectTestDefinition} from '../../../tools/object-test-data.mts';
+import { createObjectRuntime } from '../object-runtime.mts';
 import { createSceneLifetime } from '../scene-lifetime.mjs';
-import { createPreparedResidency } from '../prepared-residency.mjs';
-import { createObjectSelectionRuntime } from '../object-selection-runtime.mjs';
+import { createPreparedResidency } from '../prepared-residency.mts';
+import { createObjectSelectionRuntime } from '../object-selection-runtime.mts';
 import { retainedPresentationFixture } from './object-runtime-package.mjs';
 import { Surface, orbitFixture } from './orbit-fixture.mjs';
 

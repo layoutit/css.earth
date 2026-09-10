@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {readFile} from 'node:fs/promises';
-import {prepareObservedPolarSurfaces} from '../../../../tools/objects/giant-observations/index.mjs';
+import {prepareObservedPolarSurfaces} from '../../../../tools/objects/giant-observations/index.mts';
 
 test('reproduces every observed/polar asset from pinned sources without prepared inputs',{timeout:120000},async()=>{
   const objectRoot=new URL('../../../../src/planets/jupiter/',import.meta.url).pathname;

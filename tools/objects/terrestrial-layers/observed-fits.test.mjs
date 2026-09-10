@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { readFitsPrimary } from '../static-surface/fits-map.mjs';
-import { mapFitsObservation } from './observed-fits.mjs';
+import { readFitsPrimary } from '../static-surface/fits-map.mts';
+import { mapFitsObservation } from './observed-fits.mts';
 
 function fitsBytes(bitpix, values, extra = []) {
   const bytes = Buffer.alloc(5760, 32), cards = ['SIMPLE  = T', `BITPIX  = ${bitpix}`, 'NAXIS   = 2',

@@ -6,8 +6,8 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { BASE_TILE } from '@layoutit/polycss';
-import { prepareRingLeaves } from '../shape-model/rings.mjs';
-import { prepareTerrestrialRings, validateTerrestrialRings } from './rings.mjs';
+import { prepareRingLeaves } from '../shape-model/rings.mts';
+import { prepareTerrestrialRings, validateTerrestrialRings } from './rings.mts';
 
 const band = (id, innerRadiusKm, outerRadiusKm, displayOpacity) => ({
   id, innerRadiusKm, outerRadiusKm, displayOpacity, displayValue: 160, segments: 64,

@@ -3,12 +3,12 @@ import { test } from "node:test";
 import { readFile } from "node:fs/promises";
 import {publishedObservation,canonicalPoint,expectedMonochromeTexel,assertDisplayClose} from "../observed-atlas-proof.mjs";
 import { fromFile } from "geotiff";
-import {createSourceManifest} from "../../../../src/platform/source-manifest.mjs";
+import {createSourceManifest} from "../../../../src/platform/source-manifest.mts";
 const source = await createSourceManifest({planetId:"europa",planetName:"Europa",sourceRoot:new URL("../../../../src/planets/europa/source/",import.meta.url).pathname});
 const verifyEuropaSourceManifest = () => source.verify();
 const europaSourceInputsFor = consumer => source.inputsFor(consumer);
 import config from "../../../../src/planets/europa/source/preparation/terrestrial.json" with {type:"json"};
-import {colorPhotometricGain as gain,loadControlledObservationGeometry,matchObservedColorLevels} from "../../../../tools/objects/terrestrial-layers/photometric-observations.mjs";
+import {colorPhotometricGain as gain,loadControlledObservationGeometry,matchObservedColorLevels} from "../../../../tools/objects/terrestrial-layers/photometric-observations.mts";
 const recipe=config.raster.observedColors[0].photometry;
 const COLOR_PHOTOMETRY=recipe.profile;
 const colorPhotometricGain=(normal,geometry,weight)=>gain(normal,geometry,weight,COLOR_PHOTOMETRY);
@@ -100,7 +100,7 @@ test("capture vectors match the source geometry in the controlled east-positive 
 });
 
 test("color sampling withholds incomplete footprints without erasing observed dark terrain", async () => {
-  const { sampleColorBand } = await import("../../../../tools/objects/terrestrial-layers/scientific-raster.mjs");
+  const { sampleColorBand } = await import("../../../../tools/objects/terrestrial-layers/scientific-raster.mts");
   const band = { noData:0,specialValueMagnitude:1e30,width:2,height:2,origin:[0,2],resolution:[1,-1],data:new Float32Array([.001,.001,.001,.001]) };
   assert.ok(sampleColorBand(band,1,1) > 0);
   band.data[3] = 0;

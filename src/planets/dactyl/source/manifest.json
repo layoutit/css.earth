@@ -41,7 +41,7 @@
       "origin": "https://doi.org/10.1006/icar.1996.0045",
       "credit": "Veverka et al. (1996), Galileo imaging team",
       "license": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
-      "acquisition": "Reproduce from the published numerical dimensions through scaffold.mjs and the shared ellipsoid preparer.",
+      "acquisition": "The checked-in shape/model.json transcribes the cited numerical dimensions; the shared ellipsoid preparer tessellates these parameters.",
       "redistribution": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
       "consumers": [
         "terrain",

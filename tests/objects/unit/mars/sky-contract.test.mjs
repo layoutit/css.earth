@@ -9,7 +9,7 @@ import { PREPARED_MARS_CAMERA } from "../../unit/mars/prepared-fixture.mjs";
 import { PREPARED_MARS_SKY_SUN } from "../../unit/mars/prepared-fixture.mjs";
 import { PREPARED_MARS_STARFIELD } from "../../unit/mars/prepared-fixture.mjs";
 import { viewSunDirectionToPreparedLightDirection } from
-  "../../../../src/platform/directional-sun-coordinate.mjs";
+  "../../../../src/platform/directional-sun-coordinate.mts";
 
 test("transports the measured Google Earth camera through the licensed cube", () => {
   assert.equal(PREPARED_MARS_STARFIELD.faces.length, 6);
@@ -115,7 +115,7 @@ test("prepares a separate clean-room Sun without Google image bytes", async () =
 test("keeps Sun projection on retained transform and visibility updates", async () => {
   const [runtime, client, css] = await Promise.all([
     readFile(new URL(
-      "../../../../src/platform/directional-sun-runtime.mjs",
+      "../../../../src/renderers/css/solar-system/directional-sun-runtime.ts",
       import.meta.url,
     ), "utf8"),
     readFile(new URL("../../../../src/renderers/css/runtime/object-runtime.ts", import.meta.url), "utf8"),

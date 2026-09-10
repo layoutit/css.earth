@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createPreparedEllipsoidProjection, readPreparedMatrix4, readPreparedCounterMatrix } from "./prepared-ellipsoid-projection.mjs";
+import { createPreparedEllipsoidProjection, readPreparedMatrix4, readPreparedCounterMatrix } from "./prepared-ellipsoid-projection.mts";
 
 const identity = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
 const translate = (x, y) => [...identity.slice(0, 12), x, y, 0, 1];

@@ -2,12 +2,12 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {intersectViewRayWithEllipsoid,rotateSequence,convexHull2d,prepareProjectedEllipsoidSilhouetteCoverage} from '../../tools/objects/material-composition/ellipsoid.mjs';
-import {fitTextureGeometry,polarQuad} from '../../tools/objects/material-composition/texture-geometry.mjs';
-import {writeMaterialAtlasTile,sampleRgbaBilinear,sampleAlphaBilinear} from '../../tools/objects/material-composition/raster.mjs';
-import {validateMaterialRecipe,validateRelativePath} from '../../tools/objects/material-composition/recipe.mjs';
-import {prepareLayeredLeafLayouts} from '../../tools/objects/material-composition/leaf-layouts.mjs';
-import {prepareLayeredOblateObject,isLayeredOblateRecipe} from '../../tools/objects/material-composition/index.mjs';
+import {intersectViewRayWithEllipsoid,rotateSequence,convexHull2d,prepareProjectedEllipsoidSilhouetteCoverage} from '../../tools/objects/material-composition/ellipsoid.mts';
+import {fitTextureGeometry,polarQuad} from '../../tools/objects/material-composition/texture-geometry.mts';
+import {writeMaterialAtlasTile,sampleRgbaBilinear,sampleAlphaBilinear} from '../../tools/objects/material-composition/raster.mts';
+import {validateMaterialRecipe,validateRelativePath} from '../../tools/objects/material-composition/recipe.mts';
+import {prepareLayeredLeafLayouts} from '../../tools/objects/material-composition/leaf-layouts.mts';
+import {prepareLayeredOblateObject,isLayeredOblateRecipe} from '../../tools/objects/material-composition/index.mts';
 const objectDirectory=new URL('../../src/planets/saturn/',import.meta.url).pathname;
 
 test('oblate ray arithmetic preserves facing and positive-root conventions without body dispatch',()=>{

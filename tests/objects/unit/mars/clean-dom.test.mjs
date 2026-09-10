@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { mountPreparedPresentation } from "../../../../src/renderers/css/dist/testing.js";
-import { initialObjectSelection } from "../../../../src/platform/object-runtime-contract.mjs";
+import { initialObjectSelection } from "../../../../src/platform/object-runtime-contract.mts";
 import { PREPARED_MARS_SCENE } from "../../unit/mars/prepared-fixture.mjs";
 
 test("keeps the Mars scene as one fixed retained PolyCSS tree", async () => {

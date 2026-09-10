@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
-import {prepareScientificFocus} from './scientific-focus.mjs';
-import {prepareEclipticPresentationFrame} from '../../../src/platform/solar-presentation-frame.mjs';
+import {prepareScientificFocus} from './scientific-focus.mts';
+import {prepareEclipticPresentationFrame} from '../../../src/platform/solar-presentation-frame.mts';
 import {preparedScenePitch} from '../../../src/platform/camera-math.mjs';
 test('Agenor focus transforms actual solid leaf coordinates to the camera centre',async()=>{
   const camera=JSON.parse(await readFile(new URL('../../../src/planets/europa/prepared/scene.json',import.meta.url))).camera;

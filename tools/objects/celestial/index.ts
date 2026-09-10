@@ -1,3 +1,4 @@
+import {parse,array,object,string,number,dictionary,optional} from '../material-composition/data-schema.mts';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -24,7 +25,7 @@ async function verifySources(sourceDirectory: string, paths: readonly string[]):
   const known = new Map(manifest.inputs.map(item => { const input = record(item, 'source manifest input'); return [input.path, input.expectedSha256]; }));
   for (const path of paths) { const expected = known.get(path); if (typeof expected !== 'string' || !sourceDigest.test(expected)) throw new TypeError(`Celestial source ${path} is not pinned in the source manifest.`); const bytes = await readFile(resolve(sourceDirectory, path)); if (createHash('sha256').update(bytes).digest('hex') !== expected) throw new TypeError(`Celestial source ${path} changed from its pinned digest.`); }
 }
-function solarSource(value: unknown): SolarSource { const source = record(value, 'solar-system source'); if (typeof source.bodyId !== 'string' || typeof source.displayName !== 'string' || source.markerStrip === undefined) throw new TypeError('Solar-system source is invalid.'); return Object.freeze({ bodyId: source.bodyId, displayName: source.displayName, markerStrip: source.markerStrip }); }
+function solarSource(value: unknown): SolarSource { const source = record(value, 'solar-system source'); if (typeof source.bodyId !== 'string' || typeof source.displayName !== 'string' || source.markerStrip === undefined) throw new TypeError('Solar-system source is invalid.'); return Object.freeze({ bodyId: source.bodyId, displayName: source.displayName, markerStrip: parse(source.markerStrip, object({tiles:array(object({id:string,size:number,color:array(number)})),schema:string,provenance:string,urls:dictionary(string),tilePixels:optional(number)}), 'solar-system marker strip') }); }
 
 /** Prepare starfield, directional Sun, and marker-strip data into renderer-neutral JSON. */
 export async function prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, config }: CelestialContext): Promise<CelestialAssets> {

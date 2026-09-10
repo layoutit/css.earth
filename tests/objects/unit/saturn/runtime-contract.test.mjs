@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readPreparedFixture } from "../../fixtures.mjs";
 import { objectRuntimePackageTests } from "../../../../src/platform/test/object-runtime-package.mjs";
-import { OBJECTS } from "../../../../site/objects.mjs";
-import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mjs";
+import { OBJECTS } from "../../../../site/objects.mts";
+import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 const runtimeDefinition = await readPreparedFixture('saturn', 'runtime');
 objectRuntimePackageTests(runtimeDefinition);
 test("Saturn's actual import closure has only shared runtime owners", async () => {

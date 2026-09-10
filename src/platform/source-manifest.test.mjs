@@ -8,7 +8,7 @@ import test from "node:test";
 import {
   validateSourceManifest,
   verifySourceManifest,
-} from "./source-manifest.mjs";
+} from "./source-manifest.mts";
 
 test("validates and verifies every authoritative source entry class", async (t) => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-source-manifest-"));

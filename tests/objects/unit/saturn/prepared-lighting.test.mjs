@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import sharp from 'sharp';
 import { readPreparedFixture } from '../../fixtures.mjs';
-import { OBJECTS } from '../../../../site/objects.mjs';
+import { OBJECTS } from '../../../../site/objects.mts';
 const [scene, runtime] = await Promise.all(['scene', 'runtime'].map(name => readPreparedFixture('saturn', name)));
 const root = new URL('../../../../', import.meta.url);
 const readJson = async path => JSON.parse(await readFile(new URL(path, root), 'utf8'));

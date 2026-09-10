@@ -7,9 +7,9 @@
     "sha256": "66f5deb6ff9ab2d3ad2c9227cc126d5038bb045474fcd63de29e92dc2a43224f"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -325,7 +325,7 @@
       "sha256": "0b9db737f62916855519b472444c4ba6e96afe472d5ae4256dc9eb4d9aa1d935",
       "bytes": 440059,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "3754b6fb6dc83b9bd0ebf3d5542860a99d2de2b6d0fe68fb819c2b36bfe75490",
       "bytes": 9148,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/europa-52/europa-52-elevation-thumbnail.webp",
           "bytes": 4732,
           "sha256": "d2d86747c299c00bc0c40d1db8f86b0fd42a7cb8189baab037a32ac670a2dbfc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa-52/europa-52-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa-52/europa-52-elevation-surface@2x.webp",
           "bytes": 280818,
           "sha256": "6cec4adfd9f851f84080ed4f6f12e931834e71ec1b2e04eabe6917ddf9ee5b3d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/europa-52/europa-52-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa-52/europa-52-shape-surface@2x.webp",
           "bytes": 215994,
           "sha256": "b581f341f2815ae284c1e936cda5fd95625c2953ede168fe0cd0158d17417682",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

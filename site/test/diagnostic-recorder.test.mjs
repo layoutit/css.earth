@@ -2,8 +2,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { performance, PerformanceObserver } from 'node:perf_hooks';
 import { webcrypto } from 'node:crypto';
-import { createDiagnosticRecorder } from '../diagnostic-recorder.mjs';
-import { createNavigationTiming } from '../navigation-timing.mjs';
+import { createDiagnosticRecorder } from '../diagnostic-recorder.mts';
+import { createNavigationTiming } from '../navigation-timing.mts';
 
 function host() {
   const w = new EventTarget(), button = new EventTarget(), timers = new Map(), frames = new Map();

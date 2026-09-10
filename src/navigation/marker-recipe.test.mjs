@@ -6,15 +6,15 @@ import { resolve } from "node:path";
 import test from "node:test";
 import sharp from "sharp";
 import { PREPARED_NAVIGATION_MARKERS } from "../../site/prepared-navigation-markers.mjs";
-import { contextMarkerSprite } from "./marker-presentation.mjs";
+import { contextMarkerSprite } from "./marker-presentation.mts";
 
 import marsMarker from "../planets/mars/source/preparation/navigation.json" with { type: "json" };
-import { loadMarkerDescriptors } from "../../tools/prepare-navigation.mjs";
+import { loadMarkerDescriptors } from "../../tools/prepare-navigation.mts";
 import {
   validateMarkerDescriptor,
   validateMarkerSourceBytes,
   renderMarker,
-} from "./marker-recipe.mjs";
+} from "./marker-recipe.mts";
 
 test("accepts every object-owned marker recipe", async () => {
   for (const descriptor of await loadMarkerDescriptors()) {

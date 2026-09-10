@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "eb71a909ea8aeb1049e99a5d98d987c4eb54ff8eecd3a9346e7c5086807d1290"
+    "sha256": "a2b93b0156ec7161c723612306371d3b384bcbf0ba7e22dbf54896689d2e518b"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -1894,7 +1894,7 @@
       "sha256": "501c88e880a65a009fea9d86b66fe4b824abc0a07a56c0f382abe593cc08f314",
       "bytes": 6482880,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1923,7 +1923,7 @@
       "sha256": "0a1e41e4f4de7bb0a026d29b303dfbcf55f902382c2e621dfd522d95881c75d3",
       "bytes": 6482880,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1950,7 +1950,7 @@
       "sha256": "5976d520c16f7c91a7415bdaeb1a050373a706c07adae29b38b8b5110d88acc0",
       "bytes": 1036492,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1984,7 +1984,7 @@
       "sha256": "2e9765b2ffada33d74bfbe0443ea0bbf59bb15f27a128b7ba99160fdeb78f177",
       "bytes": 105281,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2000,7 +2000,7 @@
       "sha256": "e25f97df1892978a1140e9c6a27a4b9976c047f8b92162d0a8d898ba13a85007",
       "bytes": 154240,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2016,7 +2016,7 @@
       "sha256": "04a8df6aa490a2d769b6f579a29d16f78e3c58427438daa6114b3a6ebfbe30b3",
       "bytes": 1692,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2032,7 +2032,7 @@
       "sha256": "ec70beed73758cc796becbc3a1338ef3618609e4d2b9788e838ae0e9a1165874",
       "bytes": 5097,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2051,7 +2051,7 @@
       "sha256": "952b8de4343127e2188a6fb293d499e3e8b7c19147f5a2d727c525f8e9bcebda",
       "bytes": 2059,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2077,7 +2077,7 @@
       "sha256": "37a40a8217961cda634a3fe48775072f5097b40d8945cfaf82bdfb58b98caf2a",
       "bytes": 2303,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2106,7 +2106,7 @@
       "sha256": "2913da896d5e33c292d8c7a95a699cee606067b743b0bb2cab06ce51be90af53",
       "bytes": 6482880,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2135,7 +2135,7 @@
       "sha256": "709166ace6d89028ef8ab884323f0d886281054dac2378584f82ce2c5f90e459",
       "bytes": 6482880,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2158,7 +2158,7 @@
       "sha256": "35d71bad2dba37f7c4fb26a62f0c197103a2dcc22f748ee2a487e2a477c77d52",
       "bytes": 18171,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2174,7 +2174,7 @@
       "sha256": "7908cd301b19cbeba2e08a29457f621296860b29ea5f021dea4dea2041fbf1b6",
       "bytes": 11913,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": [
         {
@@ -2210,7 +2210,7 @@
       "sha256": "93165938d49f7682b5b9bf9b23537a1ed3a0c3f91fc6cec4f4af9e2274d9682e",
       "bytes": 8260,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": [
         {
@@ -2275,19 +2275,19 @@
           "url": "/scenes/saturn/saturn-lens-ultraviolet.webp",
           "bytes": 816,
           "sha256": "6af67955d3e451c4a3e839c9a76530c23284889f7bf07a7cff46aad8b572e332",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/saturn/saturn-surface-ultraviolet@2x.webp",
           "bytes": 9808658,
           "sha256": "8ddfddbe3f68876851bd0eaf419a37d7e55f9bf942c5539a9e89d827f90b9f09",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/saturn/saturn-poles-ultraviolet.webp",
           "bytes": 591320,
           "sha256": "528ceb5e06be726079d0343e13123907f08f0783dae0c148ab455f43791f2ebc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2331,19 +2331,19 @@
           "url": "/scenes/saturn/saturn-lens-methane.webp",
           "bytes": 1070,
           "sha256": "3088b5572edf61be0bd59300e064968bbbac2c20e90001a9240cb9258254767b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/saturn/saturn-surface-methane@2x.webp",
           "bytes": 6912838,
           "sha256": "56d872c86d0886c21ea854592ebb81c656d08ca2348c8a294c51f0aed6c5acba",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/saturn/saturn-poles-methane.webp",
           "bytes": 516132,
           "sha256": "28cb2b7bc6bad2be74101a97cff0ffbfa89beadb2ba5b68f5034973322b40a2a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2385,19 +2385,19 @@
           "url": "/scenes/saturn/saturn-lens-thermal.webp",
           "bytes": 402,
           "sha256": "8c99f5aba5661acdaf82783fd98648402ccec530019bbe550fdea414a5865151",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/saturn/saturn-surface-thermal@2x.webp",
           "bytes": 6837498,
           "sha256": "3c2f867b02194e828c530703f9b6c33c557456eaa1cddd208c39dd1c5d3aefdf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/saturn/saturn-poles-thermal.webp",
           "bytes": 571378,
           "sha256": "a127407b6b3b53d62b26d3efdc4777c4a64fcab16b7d6b0a505f2d2e3ed61efe",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2434,25 +2434,25 @@
           "url": "/scenes/saturn/saturn-lens-normal.webp",
           "bytes": 450,
           "sha256": "e8f15c69600de09c7f2d2c8802fc0e8d1c8dbede7492ba3700ff25818f6df0e4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/saturn/saturn-surface-body.jpg",
           "bytes": 787131,
           "sha256": "437f97177e32643b18c4838d43cf2c707880744f95ca73018d40b05cbca94937",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/saturn/saturn-poles.webp",
           "bytes": 34906,
           "sha256": "9a7b647c4b31c8a8f9d25f20f33a1fdf70f2c02c8448c5bf0769cd7e9739a21c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/saturn/saturn-orbit-material.webp",
           "bytes": 10437576,
           "sha256": "f59bf4b1a3d3f5ef9769cc67f0c11868eb73cb5450210bcb2048dbd1bfe0a417",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2492,7 +2492,7 @@
           "url": "/scenes/saturn/saturn-view-interior.webp",
           "bytes": 234,
           "sha256": "1fdac1dc6258f31610b70d800888ed3cf5d001f7db16cdf28169ad5fd712f831",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2545,7 +2545,7 @@
           "url": "/scenes/saturn/saturn-atmosphere-spectrum.svg",
           "bytes": 5773,
           "sha256": "7673ce7a675422aa27da64c5d657c849136aea777ffa5c52b71c3672c15784de",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2573,7 +2573,7 @@
           "url": "/scenes/saturn/saturn-temperature-pressure-profile.svg",
           "bytes": 2335,
           "sha256": "84070c6049c0829f615b204452bf73594483eb3e064ddbea07352b906a4502bd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2600,7 +2600,7 @@
           "url": "/scenes/saturn/saturn-photometric-phase-curve.svg",
           "bytes": 4490,
           "sha256": "48632513ef40998d4ccac49b84356d93b3fa4cb717c10cf64a85f19575e064e9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "authored-recipe"

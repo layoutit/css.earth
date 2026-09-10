@@ -3,8 +3,8 @@ import test from "node:test";
 import { mountPreparedPresentation } from "../../../../src/renderers/css/dist/testing.js";
 import { runtimeDefinition } from "./prepared-fixture.mjs";
 import { objectRuntimePackageTests, preparedSelectionFixture, retainedPresentationFixture } from "../../../../src/platform/test/object-runtime-package.mjs";
-import { OBJECTS } from "../../../../site/objects.mjs";
-import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mjs";
+import { OBJECTS } from "../../../../site/objects.mts";
+import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 
 objectRuntimePackageTests(runtimeDefinition);
 test("Jupiter's actual import closure has no private runtime owner", async () => {

@@ -11,14 +11,14 @@ test('prepares Saturn from a complete checked source closure',async()=>{
  assert.deepEqual(await verifySources({sourceRoot,manifest}),{inputCount:39,generatedIntermediateCount:1,documentCount:2,verifiedCount:42});
 });
 test('composition consumes the verified phase and never reruns its numerical generator',async()=>{
- const source=await readFile(new URL('../../../../tools/objects/material-composition/layered-oblate.mjs',import.meta.url),'utf8');
+ const source=await readFile(new URL('../../../../tools/objects/material-composition/layered-oblate.mts',import.meta.url),'utf8');
  const start=source.indexOf('async function composePlanetTextures('),end=source.indexOf('\nfunction prepareSurfaceChannelFactors(',start);
  assert.ok(start>0&&end>start);
  const composition=source.slice(start,end);
  assert.doesNotMatch(composition,/prepareNormalMaterialMasters\(/);
  assert.match(source,/prepareBaseMaterialSurfaces: prepareNormalMaterialMasters/);
  assert.match(source,/composeMaterialSurfaces: composePlanetTextures/);
- const dispatcher=await readFile(new URL('../../../../tools/objects/material-composition/index.mjs',import.meta.url),'utf8');
+ const dispatcher=await readFile(new URL('../../../../tools/objects/material-composition/index.mts',import.meta.url),'utf8');
  assert.ok(dispatcher.indexOf('prepareBaseMaterialSurfaces()')<dispatcher.indexOf('composeMaterialSurfaces(metadata)'));
 });
 test('executes every pinned Saturn acquisition verifier',async()=>{
@@ -35,6 +35,6 @@ test('prepares the Saturn shell title from its owned source',async()=>{
  assert.equal(title.sourceSha256,'746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c');
  const descriptor=JSON.parse(await readFile(new URL('../../../../src/planets/saturn/object.json',import.meta.url),'utf8'));
  assert.match(descriptor.properties.recipe.sources.find(source=>source.id==='title').sha256,/^[0-9a-f]{64}$/);
- assert.equal(title.sourceGenerator,'tools/prepare-planet-title-sources.mjs');
+ assert.equal(title.sourceGenerator,'tools/prepare-planet-title-sources.mts');
  assert.doesNotMatch(title.path,/<text|font-family/i);
 });

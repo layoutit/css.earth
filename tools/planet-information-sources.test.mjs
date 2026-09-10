@@ -6,7 +6,7 @@ import {
   PLANET_INFORMATION_SOURCES,
   planetInformationSource,
   validatePlanetInformationSnapshot,
-} from "./planet-information-sources.mjs";
+} from "./planet-information-sources.mts";
 
 test("validates every checked snapshot owned by the NASA editorial importer", async () => {
   for (const source of PLANET_INFORMATION_SOURCES) {

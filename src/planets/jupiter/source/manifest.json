@@ -78,7 +78,7 @@
       "path": "surface/juno-pia24239-north-pole-detail.tif",
       "expectedSha256": "4a58389a26e0619fff294955c5dc07cd1dbf37d9593a714929b41fb57abd72be",
       "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia24/pia24239/PIA24239.tif",
-      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Emma Wälimäki",
+      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Emma W\u00e4lim\u00e4ki",
       "license": "CC BY",
       "licenseEvidence": [
         "https://science.nasa.gov/photojournal/jupiter-north-pole-detail/"
@@ -102,7 +102,7 @@
       "path": "surface/juno-pia23808-north-polar-projection.jpg",
       "expectedSha256": "85f84960270f7619c8ecd7cf933da860cff690d078709cbd6e342d0f83b45ac8",
       "origin": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23808/PIA23808.jpg",
-      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Gerald Eichstädt",
+      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Gerald Eichst\u00e4dt",
       "license": "NASA/JPL Media Usage Guidelines with contributor credit",
       "licenseEvidence": [
         "https://www.jpl.nasa.gov/images/pia23808-cyclones-of-color-at-jupiters-north-pole/"
@@ -664,6 +664,12 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1553,
       "expectedSha256": "4ec463a524a4803db1601a02d908d886fb486f498514cca5302ccbf5c72982d4"
+    },
+    {
+      "path": "presentation/overview.json",
+      "expectedBytes": 39,
+      "expectedSha256": "0abc410dea696938b08a69e03dc325d7fb484e190148ced3e6b65e8c94ad945a",
+      "purpose": "Repository-authored classification label consumed by the shared body overview during site preparation."
     }
   ]
 }

@@ -1,15 +1,15 @@
 ---
+import type { Props as ShellProps } from '../planet-shell-types';
+interface Props { objectId: string; lens: NonNullable<ShellProps['lenses']>['controls'][number]; }
 const { objectId, lens } = Astro.props;
 // Only render the dataset's declared meaning and scale.
-const legend = Array.isArray(lens.legend)
-  ? { kind: 'categories', title: lens.label, items: lens.legend }
-  : lens.legend;
+const legend = lens.legend;
 const categories = legend?.kind === 'categories' ? legend.items : undefined;
 const colors = categories?.map(item => item.color) ?? legend?.colors;
 const scaleLabel = `${legend?.title ?? ''}${legend?.meta ? ` (${legend.meta})` : ''}`;
 const labels = categories?.map(item => ({ text: item.label, detail: item.description }))
   ?? legend?.labels?.map((text, index) => ({
-    text: `${text}${index === legend.labels.length - 1 && legend.meta ? ` ${legend.meta}` : ''}`,
+    text: `${text}${index === (legend.labels?.length ?? 0) - 1 && legend.meta ? ` ${legend.meta}` : ''}`,
   })) ?? [];
 ---
 {legend && <section id={`${objectId}-${lens.id}-legend`} class="planet-lens-legend-panel"

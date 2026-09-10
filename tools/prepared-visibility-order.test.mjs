@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { visibilityComponents } from './prepared-visibility-order.mjs';
-import { partitionSurface } from './prepared-depth-partitions.mjs';
-import { verifyRayOrder } from './prepared-visibility-oracle.mjs';
+import { visibilityComponents } from './prepared-visibility-order.mts';
+import { partitionSurface } from './prepared-depth-partitions.mts';
+import { verifyRayOrder } from './prepared-visibility-oracle.mts';
 
 const face = z => [[-2, -2, z], [2, -2, z], [0, 2, z]];
 test('front-facing occluders paint after the faces behind them, independently of source order', () => {

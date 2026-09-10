@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {createSourceManifest} from '../../../../src/platform/source-manifest.mjs';
-import {readObservation} from '../../../../tools/objects/terrestrial-layers/solid-raster.mjs';
-import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
+import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
+import {readObservation} from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';
+import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 const root=resolve(import.meta.dirname,'../../../../src/planets/ida/source');
 const read=async path=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 

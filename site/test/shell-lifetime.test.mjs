@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { mountPlanetShell } from "../planet-shell-client.mjs";
+import { mountPlanetShell } from "../planet-shell-client.mts";
 import context from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 
 class Element extends EventTarget {

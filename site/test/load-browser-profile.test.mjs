@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { OBJECTS } from "../objects.mjs";
+import { OBJECTS } from "../objects.mts";
 import { assertRenderedObjectControls, loadPlanetBrowserProfile, validatePlanetBrowserProfile } from "./load-browser-profile.mjs";
 
 const object = Object.freeze({ id: "fixture" });

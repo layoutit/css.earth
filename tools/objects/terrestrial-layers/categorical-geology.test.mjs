@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {loadGeologySurface, createGeologySampler, categoryColorForValue, validateGeologyProfile,
-  decodeGeologyAttributes, decodeGeologyPolygons} from './categorical-geology.mjs';
+  decodeGeologyAttributes, decodeGeologyPolygons} from './categorical-geology.mts';
 
 const root = fileURLToPath(new URL('../../../src/planets/', import.meta.url));
 const rectangle = (west, south, east, north) => [[west, south], [east, south], [east, north], [west, north], [west, south]];

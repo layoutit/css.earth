@@ -4,7 +4,7 @@ import {test} from 'vitest';
 import {requireVariants} from './presentation.js';
 import type {PreparedTree} from '../rendering/prepared-presentation.js';
 import type {ObjectControls} from '../runtime/object-contract.js';
-import {prepareScientificNavigation} from '../../../../tools/objects/terrestrial-layers/scientific-focus.mjs';
+import {prepareScientificNavigation} from '../../../../tools/objects/terrestrial-layers/scientific-focus.mts';
 import {preparedScenePitch} from '../../../platform/camera-math.mjs';
 
 // This small prepared carrier is independent of the focus helper's frame math.

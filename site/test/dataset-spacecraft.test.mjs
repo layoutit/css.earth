@@ -3,9 +3,9 @@ import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
-import { OBJECTS } from '../objects.mjs';
-import { datasetSpacecraft, objectSpacecraft, spacecraftAgencies } from '../dataset-spacecraft.mjs';
-import { validateObjectProvenance } from '../../src/platform/object-provenance.mjs';
+import { OBJECTS } from '../objects.mts';
+import { datasetSpacecraft, objectSpacecraft, spacecraftAgencies } from '../dataset-spacecraft.mts';
+import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 
 const json = async path => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
 const catalog = await json('../prepared-spacecraft.json');

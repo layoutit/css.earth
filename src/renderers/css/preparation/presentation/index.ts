@@ -3,7 +3,7 @@ import { loadPresentationAdapters } from './adapters.js';
 import { prepareRowBankCutaway } from './row-bank-cutaway.js';
 import { prepareComposite } from './composite.js';
 import type { PresentationInputs } from './types.js';
-import { prepareActivationGroups } from '../../../../../tools/prepared-activation-groups.mjs';
+import { prepareActivationGroups } from '../../../../../tools/prepared-activation-groups.mts';
 export type { PresentationInputs } from './types.js';
 
 export interface PresentationProfile {

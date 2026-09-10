@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import sharp from 'sharp';
-import { parsePdsPlanetocentricShape } from './obj-shape.mjs';
-import { preparePdsConstraintMap } from './pds-constraint-map.mjs';
-import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mjs';
+import { parsePdsPlanetocentricShape } from './obj-shape.mts';
+import { preparePdsConstraintMap } from './pds-constraint-map.mts';
+import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
 
 const table = `6 8
 -90 0 1 3
@@ -71,4 +71,27 @@ test('a source-selected constraint grid preserves stereo and limb categories eve
   for (const [x, y] of [[0, 31], [32, 15]]) assert.deepEqual(at(data, x, y), at(grid, x, y));
   await assert.rejects(preparePdsConstraintMap(mesh, { ...recipe, gridFlags: [4] }), /Invalid PDS constraint map/);
   await assert.rejects(preparePdsConstraintMap(mesh, { ...recipe, gridFlags: [3, 3] }), /Invalid PDS constraint map/);
+});
+
+test('terrain preparation verifies categorical output pins named by either historical or typed generators', async t => {
+  const {mkdtemp,writeFile,rm}=await import('node:fs/promises');
+  const {tmpdir}=await import('node:os');
+  const {join}=await import('node:path');
+  const {loadRadialTerrain}=await import('./radial-terrain.mts');
+  const directory=await mkdtemp(join(tmpdir(),'constraint-source-'));
+  t.after(()=>rm(directory,{recursive:true,force:true}));
+  await writeFile(join(directory,'source.tab'),table);
+  const recipe={width:16,height:8,stepDegrees:90,colors:{1:'#ff0000',2:'#00ff00',3:'#0000ff'}};
+  const expected=await preparePdsConstraintMap(parsePdsPlanetocentricShape(table,profile),recipe);
+  const config={namespace:'fixture',geometry:{radius:1,radiusKm:1,radialTerrain:{format:'pds-planetocentric-plate',path:'source.tab',grid:profile,
+    faceBudget:8,tileSize:4,atlasColumns:4,simplification:{method:'source-meshoptimizer',targetFaces:8,maximumErrorMeters:.1}}}};
+  for(const extension of ['mjs','mts']) {
+    let verified=0;
+    const entry={generator:`tools/objects/terrestrial-layers/pds-constraint-map.${extension}`,recipe};
+    const source={manifest:{inputs:[entry]},validatePath:async path=>assert.equal(path,'source.tab'),
+      assertBytes(pin,bytes){assert.equal(pin,entry);assert.deepEqual(bytes,expected);verified++;}};
+    await loadRadialTerrain({sourceDirectory:directory,config,source});
+    assert.equal(verified,1,`${extension} must not silently skip its producer pin`);
+    await assert.rejects(loadRadialTerrain({sourceDirectory:directory,config,source:{...source,assertBytes(){throw new Error('Changed categorical source bytes');}}}),/Changed categorical source bytes/);
+  }
 });

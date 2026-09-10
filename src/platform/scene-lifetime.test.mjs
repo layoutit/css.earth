@@ -1,6 +1,77 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createSceneLifetime, waitForScenePaint, waitForSceneDocument } from "./scene-lifetime.mjs";
+import * as engine from "@cssearth/engine";
+import * as cameraMath from "./camera-math.mjs";
+import * as sphereDrag from "./sphere-drag.mjs";
+import * as nativeWaits from "../renderers/css/dist/scene-native-waits.js";
+
+test("legacy lifetime and camera paths expose the canonical typed functions", () => {
+  assert.equal(createSceneLifetime, engine.createSceneLifetime);
+  assert.equal(waitForScenePaint, nativeWaits.waitForScenePaint);
+  assert.equal(waitForSceneDocument, nativeWaits.waitForSceneDocument);
+  for (const [name, implementation] of Object.entries({ ...cameraMath, ...sphereDrag })) {
+    assert.equal(implementation, engine[name], name);
+  }
+});
+
+function frameQueue() {
+  let nextId = 0;
+  const frames = new Map(), cancelled = [];
+  return {
+    frames, cancelled,
+    requestAnimationFrame(callback) { frames.set(++nextId, callback); return nextId; },
+    cancelAnimationFrame(id) { cancelled.push(id); frames.delete(id); },
+    advance() {
+      const [id, callback] = frames.entries().next().value;
+      frames.delete(id);
+      callback();
+    },
+  };
+}
+
+test("startup paint waits for both frames and document wait removes its listener", async () => {
+  const lifetime = createSceneLifetime(), windowTarget = frameQueue();
+  let painted = false, loaded = false;
+  const listeners = new Set();
+  const frame = waitForScenePaint(lifetime, windowTarget).then(() => { painted = true; });
+  class LoadingDocument extends EventTarget {
+    readyState = "loading";
+    addEventListener(type, listener, options) { listeners.add(listener); super.addEventListener(type, listener, options); }
+    removeEventListener(type, listener, options) { listeners.delete(listener); super.removeEventListener(type, listener, options); }
+  }
+  const documentTarget = new LoadingDocument();
+  const document = waitForSceneDocument(lifetime, documentTarget).then(() => { loaded = true; });
+  assert.equal(listeners.size, 1);
+  windowTarget.advance();
+  await Promise.resolve();
+  assert.equal(painted, false);
+  assert.equal(loaded, false);
+  assert.equal(windowTarget.frames.size, 1);
+  windowTarget.advance();
+  documentTarget.dispatchEvent(new Event("DOMContentLoaded"));
+  await Promise.all([frame, document]);
+  assert.equal(painted, true);
+  assert.equal(loaded, true);
+  assert.equal(listeners.size, 0);
+  assert.equal(windowTarget.frames.size, 0);
+  lifetime.destroy();
+  assert.equal(listeners.size, 0);
+  assert.deepEqual(windowTarget.cancelled, []);
+});
+
+test("destruction after the first paint frame cancels the remaining frame", async () => {
+  const lifetime = createSceneLifetime(), windowTarget = frameQueue();
+  const paint = waitForScenePaint(lifetime, windowTarget);
+  windowTarget.advance();
+  assert.equal(windowTarget.frames.size, 1);
+  const pendingId = windowTarget.frames.keys().next().value;
+  lifetime.destroy();
+  await paint;
+  assert.deepEqual(windowTarget.cancelled, [pendingId]);
+  assert.equal(windowTarget.frames.size, 0);
+  assert.deepEqual(lifetime.stats(), { disposed: true, ownerCount: 0, waiterCount: 0 });
+});
 
 test("startup frame and document waits settle on destruction without native callbacks", async () => {
   const lifetime = createSceneLifetime();

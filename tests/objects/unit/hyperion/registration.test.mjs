@@ -3,7 +3,7 @@ import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {resolve} from 'node:path';
-import {loadCameraShape,controlledShapeCamera,decodeCalibratedCamera} from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mjs';
+import {loadCameraShape,controlledShapeCamera,decodeCalibratedCamera} from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
 const source=resolve(import.meta.dirname,'../../../../src/planets/hyperion/source');
 const json=async path=>JSON.parse(await readFile(resolve(source,path),'utf8'));
 

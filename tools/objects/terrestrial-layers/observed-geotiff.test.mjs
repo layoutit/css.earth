@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';import{test}from'node:test';
-import{observationPixelMissing,prepareFloatObservation,prepareRgbBandObservation}from'./observed-geotiff.mjs';
+import{observationPixelMissing,prepareFloatObservation,prepareRgbBandObservation}from'./observed-geotiff.mts';
 import { writeArrayBuffer } from 'geotiff';
 import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { join } from 'node:path';

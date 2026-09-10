@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
-import {loadPdsRadialTable} from '../../../../tools/objects/terrestrial-layers/pds-radial-table.mjs';
-import {prepareFitsObservation} from '../../../../tools/objects/terrestrial-layers/observed-fits.mjs';
-import {parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
+import {loadPdsRadialTable} from '../../../../tools/objects/terrestrial-layers/pds-radial-table.mts';
+import {prepareFitsObservation} from '../../../../tools/objects/terrestrial-layers/observed-fits.mts';
+import {parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {evaluateRegistration} from './registration.mjs';
 const directory='src/planets/gaspra/source',read=async path=>JSON.parse(await readFile(`${directory}/${path}`,'utf8'));
 

@@ -3,8 +3,8 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import test from 'node:test';
-import { objectPreparationFiles, runCachedPreparationObjects } from './prepare-planets.mjs';
-import { fingerprintPreparationFiles } from './preparation-cache.mjs';
+import { objectPreparationFiles, runCachedPreparationObjects } from './prepare-planets.mts';
+import { fingerprintPreparationFiles } from './preparation-cache.mts';
 
 const repository = resolve(import.meta.dirname, '..'), descriptorPath = 'src/planets/mercury/object.json';
 const payloadPath = 'src/planets/mercury/prepared/object.json';

@@ -4,10 +4,10 @@ import { cp, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { loadSceneEpochEphemeris, SCENE_EPHEMERIS_DIRECTORY } from '../packages/astronomy/tools/scene-ephemeris.mjs';
-import { loadAstronomyPackage } from '../src/platform/astronomy-package.mjs';
-import { OBJECTS } from '../site/objects.mjs';
-import * as geometry from '../src/platform/solar-geometry.mjs';
+import { loadSceneEpochEphemeris, SCENE_EPHEMERIS_DIRECTORY } from '../packages/astronomy/tools/scene-ephemeris.mts';
+import { loadAstronomyPackage } from '../src/platform/astronomy-package.mts';
+import { OBJECTS } from '../site/objects.mts';
+import * as geometry from '../src/platform/solar-geometry.mts';
 
 const epoch = geometry.SOLAR_GEOMETRY_EPOCH_JD_TT;
 const snapshots = await loadSceneEpochEphemeris(epoch);
@@ -65,7 +65,7 @@ test('Earth is displaced from the EMB by the retained Earth-center vector and th
 
 test('regeneration retains every current registry orbit, including moons and comets', () => {
   assert.deepEqual(Object.keys(geometry.BODY_ORBITS), OBJECTS.filter(body =>
-    ['planet', 'dwarf-planet', 'satellite', 'asteroid', 'trans-neptunian', 'comet', 'interstellar'].includes(body.classification)).map(body => body.id));
+    ['planet', 'dwarf-planet', 'satellite', 'asteroid', 'trans-neptunian', 'interstellar', 'comet'].includes(body.classification)).map(body => body.id));
   assert.equal(geometry.BODY_POSITION_PROVENANCE.daphnis, undefined, 'unavailable contemporary ephemeris is not relabeled as observed');
 });
 
@@ -91,9 +91,9 @@ test('a frozen snapshot fails closed on stale epoch, corrupted bytes, wrong cent
 });
 
 test('epoch refresh updates the rendered carrier while preserving source geometry, texture addresses and lens bindings', async () => {
-  const { refreshSolidSceneEpoch } = await import('./objects/terrestrial-layers/solid-scene.mjs');
-  const { restoreDepthSource } = await import('./prepared-depth-partitions.mjs');
-  const { prepareEclipticPresentationFrame } = await import('../src/platform/solar-presentation-frame.mjs');
+  const { refreshSolidSceneEpoch } = await import('./objects/terrestrial-layers/solid-scene.mts');
+  const { restoreDepthSource } = await import('./prepared-depth-partitions.mts');
+  const { prepareEclipticPresentationFrame } = await import('../src/platform/solar-presentation-frame.mts');
   const read = async name => JSON.parse(await readFile(new URL(`../src/planets/mimas/${name}`, import.meta.url), 'utf8'));
   const config = await read('source/preparation/terrestrial.json');
   const scene = await read('prepared/scene.json'), definition = restoreDepthSource(await read('prepared/runtime.json'));
@@ -114,9 +114,9 @@ test('epoch refresh updates the rendered carrier while preserving source geometr
 });
 
 test('epoch refresh restores a compiled surface before updating its physical frame', async () => {
-  const { refreshSolidSceneEpoch } = await import('./objects/terrestrial-layers/solid-scene.mjs');
-  const { restoreDepthSource } = await import('./prepared-depth-partitions.mjs');
-  const read = async name => JSON.parse(await readFile(new URL(`../src/planets/phobos/${name}`, import.meta.url), 'utf8'));
+  const { refreshSolidSceneEpoch } = await import('./objects/terrestrial-layers/solid-scene.mts');
+  const { restoreDepthSource } = await import('./prepared-depth-partitions.mts');
+  const read = async name => JSON.parse(await readFile(new URL(`../src/planets/mimas/${name}`, import.meta.url), 'utf8'));
   const config = await read('source/preparation/terrestrial.json'), scene = await read('prepared/scene.json');
   const definition = await read('prepared/runtime.json');
   assert.ok(definition.depthPartitions?.groups.length > 1, 'exercise actual compiled source carriers');

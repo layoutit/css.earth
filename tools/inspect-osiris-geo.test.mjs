@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, lommelSeeligerGain, fitCamera, project, sampleGeo, PLANE_NAMES, GEO_SHAPE_MODEL, osirisRadianceFactorScale, phaseGain, observationGain } from './objects/terrestrial-layers/osiris-geo.mjs';
+import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, lommelSeeligerGain, fitCamera, project, sampleGeo, PLANE_NAMES, GEO_SHAPE_MODEL, osirisRadianceFactorScale, phaseGain, observationGain } from './objects/terrestrial-layers/osiris-geo.mts';
 
 test('radiance factor uses calibrated solar flux and squared distance without normalizing twice', () => {
   const history = 'SOLAR_DISTANCE = 2 <AU>\nSOLAR_FLUX = 4 <W/m**2/nm>\nROSETTA:REFLECTIVITY_NORMALIZATION_FLAG = FALSE\n';

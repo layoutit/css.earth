@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import{readFile}from'node:fs/promises';
 import{isDeepStrictEqual}from'node:util';
-import{prepareBandedEllipsoid}from'../../../../tools/objects/giant-layers/geometry.mjs';
-import{prepareNormalizedDiscPresentation}from'../../../../tools/objects/giant-layers/normalized-disc-presentation.mjs';
+import{prepareBandedEllipsoid}from'../../../../tools/objects/giant-layers/geometry.mts';
+import{prepareNormalizedDiscPresentation}from'../../../../tools/objects/giant-layers/normalized-disc-presentation.mts';
 import{prepareWorldNavigationDefinition}from'../../../../tools/objects/dist/prepare-world-navigation.js';
 import{fileURLToPath}from'node:url';
 test('authored normalized-disc composition reproduces the complete accepted runtime',async()=>{

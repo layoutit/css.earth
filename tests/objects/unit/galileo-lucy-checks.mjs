@@ -2,12 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createSourceManifest } from '../../../src/platform/source-manifest.mjs';
-import { loadRadialTerrain } from '../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
-import { contactEllipsoidMesh } from '../../../tools/objects/terrestrial-layers/contact-ellipsoids.mjs';
-import { ellipsoidParameterMesh } from '../../../tools/objects/terrestrial-layers/ellipsoid-parameters.mjs';
-import { preparePlanetarySystem } from '../../../src/platform/prepare-planetary-system.mjs';
-import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-presentation-frame.mjs';
+import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
+import { loadRadialTerrain } from '../../../tools/objects/terrestrial-layers/radial-terrain.mts';
+import { contactEllipsoidMesh } from '../../../tools/objects/terrestrial-layers/contact-ellipsoids.mts';
+import { ellipsoidParameterMesh } from '../../../tools/objects/terrestrial-layers/ellipsoid-parameters.mts';
+import { preparePlanetarySystem } from '../../../src/platform/prepare-planetary-system.mts';
+import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-presentation-frame.mts';
 
 export function checkGalileoLucy(id) {
   const sourceDirectory = resolve('src/planets', id, 'source');

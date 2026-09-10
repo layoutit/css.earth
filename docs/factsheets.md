@@ -45,7 +45,7 @@ The facts-only preparer preserves the other content and scene data. It rejects
 changed source pins, missing evidence pins, duplicate IDs and an introduction
 mismatch. For introduction and lens prose/label changes, use
 `pnpm prepare:factsheets -- --editorial <object-id>`; add `--check` for verification.
-After writing editorial changes, run `node tools/prepare-object-json.mjs <object-id>`
+After writing editorial changes, run `node tools/prepare-object-json.mts <object-id>`
 with the preparation tools built to publish the scene transport and page controls.
 Refresh source provenance with `pnpm prepare:provenance <object-id>`.
 Imagery, legends, charts, settings, numeric scene data and lens inventory changes

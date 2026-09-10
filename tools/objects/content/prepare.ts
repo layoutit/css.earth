@@ -3,11 +3,11 @@
 import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, dirname, resolve } from "node:path";
 import { PREPARED_SHELL_TITLES } from "../../../site/prepared-shell-titles.mjs";
-import { prepareLensLabels } from "../../../site/prepare-lens-labels.mjs";
-import { SCIENTIFIC_CHART_TITLES } from "../../../site/scientific-chart-titles.mjs";
-import { createPreparedTitleLayout } from "../../../src/platform/prepared-title.mjs";
+import { prepareLensLabels } from "../../../site/prepare-lens-labels.mts";
+import { SCIENTIFIC_CHART_TITLES } from "../../../site/scientific-chart-titles.mts";
+import { createPreparedTitleLayout } from "../../../src/platform/prepared-title.mts";
 import { prepareLenses } from "./lenses";
-import {
+import type {
   ContentPreparationContext,
   ObjectContentSource,
   PreparedObjectContent,

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { partitionSurface, prepareDepthPartitions, restoreDepthSource } from './prepared-depth-partitions.mjs';
-import { prepareActivationGroups } from './prepared-activation-groups.mjs';
+import { partitionSurface, prepareDepthPartitions, restoreDepthSource } from './prepared-depth-partitions.mts';
+import { prepareActivationGroups } from './prepared-activation-groups.mts';
 
 const octants = [];
 for (const x of [-1, 1]) for (const y of [-1, 1]) for (const z of [-1, 1]) octants.push([[x, 0, 0], [0, y, 0], [0, 0, z]]);

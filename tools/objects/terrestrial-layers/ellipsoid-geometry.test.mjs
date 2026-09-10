@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import profile from '../../../src/planets/mars/source/preparation/ellipsoid.json' with {type:'json'};
-import {createEllipsoidGeometry} from './ellipsoid-geometry.mjs';
-import {preparePolarAtlas} from './polar-stabilization.mjs';
-import {prepareEllipsoidMaterialPlaneTransform} from './material-plane.mjs';
+import {createEllipsoidGeometry} from './ellipsoid-geometry.mts';
+import {preparePolarAtlas} from './polar-stabilization.mts';
+import {prepareEllipsoidMaterialPlaneTransform} from './material-plane.mts';
 
 test('ellipsoid axes and latitude bands agree with independently calculated coordinates', () => {
   const geometry=createEllipsoidGeometry(profile);

@@ -1,0 +1,33 @@
+import {requireRecord} from '../../source-values.mts';
+import {shape,number,text,optional,boolean,array,dictionary,parseSciencePalette} from './source-records.mts';
+
+const texture = {textureScale:optional(number),monochromeBase:optional(text),
+  previewGrid:optional(shape({width:number,height:number})),displaySampling:optional(text)};
+const identity = {id:text,consumer:text,metadata:optional(requireRecord)};
+const sourcePath = shape({path:text});
+export const parseSolidObservation = shape({id:text,...texture,validity:shape({kind:text,labelPath:optional(text),resampling:optional(text)}),
+  projection:optional(requireRecord),metadata:optional(requireRecord),reportComposition:optional(boolean)});
+export function parseSolidScience(value: unknown) {
+  return Object.assign({}, requireRecord(value), parseSciencePalette(value), shape({...identity,...texture,path:text,format:text,label:text,
+    grid:optional(requireRecord),labelPath:optional(text),meshPath:optional(text),
+    facetField:optional(shape({path:text,labelPath:text})),table:optional(shape({labelPath:optional(text)})),
+    surfaceSampling:optional(shape({maximumDistanceMeters:number,renderedMeshPath:optional(text),ambiguityReference:optional(sourcePath)})),
+    symbols:optional(shape({paths:text,locations:text})),comparison:optional(sourcePath),
+    qualityMasks:optional(array(sourcePath)),additionalGrids:optional(array(sourcePath))})(value));
+}
+export const parseColorPhotometry = shape({consumer:text,profile:shape({radiusKm:number,maximumIncidenceDegrees:number,
+  maximumEmissionDegrees:number,referenceIncidenceDegrees:number,referenceEmissionDegrees:number,observationWeights:dictionary(number)}),
+  vectors:shape({sun:text,observer:text}),levels:shape({boundaryPixels:number,luminance:array(number)})});
+export const parseSolidRasterConfig = shape({namespace:text,publicBase:text,
+  geometry:optional(shape({radius:number,radiusKm:number,radialTerrain:optional(shape({path:text}))})),
+  raster:shape({width:number,height:number,bandCount:number,gutter:number,poleSize:number,surfaceQuality:optional(number),reportMissingPixels:optional(boolean),
+    observations:array(parseSolidObservation),scientific:optional(array(parseSolidScience)),
+    shapeViews:optional(array(shape({...identity,label:text}))),
+    mosaics:optional(array(shape({...identity,format:text,photometry:optional(shape({consumer:optional(text)}))}))),
+    surfaceObservations:optional(array(shape(identity))),
+    observedColors:optional(array(shape({...identity,profile:requireRecord,monochromeBase:text,photometry:optional(parseColorPhotometry)})))})});
+
+/** The manifest verifies bytes; the observation consumer owns these extra fields. */
+const surfaceSource = shape({id:text,lensId:text,path:text,width:number,height:number,
+  label:optional(text),falseColor:optional(boolean),projection:optional(requireRecord)});
+export const parseSurfaceSource = (value: unknown) => Object.assign({}, requireRecord(value), surfaceSource(value));

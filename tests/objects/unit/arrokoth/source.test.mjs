@@ -2,9 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import {readFitsPrimary} from '../../../../tools/objects/static-surface/fits-map.mjs';
-import {parseObjTextureCoordinates,createObjUvFitsSampler} from '../../../../tools/objects/terrestrial-layers/obj-uv-fits.mjs';
+import {parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import {readFitsPrimary} from '../../../../tools/objects/static-surface/fits-map.mts';
+import {parseObjTextureCoordinates,createObjUvFitsSampler} from '../../../../tools/objects/terrestrial-layers/obj-uv-fits.mts';
 const root=new URL('../../../../src/planets/arrokoth/source/',import.meta.url);
 const json=async path=>JSON.parse(await readFile(new URL(path,root)));
 test('released Arrokoth topology retains two closed source lobes at kilometre scale',async()=>{

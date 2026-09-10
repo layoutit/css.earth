@@ -1,10 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
-import { preparedObjectOverlay } from './test-prepared-object-overlay.mjs';
+import { preparedObjectOverlay } from './test-prepared-object-overlay.mts';
 import { readPreparedPresentationModule, readPreparedJsonExports, requirePreparedDefinitionSource,
-  requirePreparedControlSource, auditPreparedPresentations } from "./check-prepared-presentation.mjs";
-const definition = `import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "../../../platform/prepared-schema.mjs";
+  requirePreparedControlSource, auditPreparedPresentations } from "./check-prepared-presentation.mts";
+const definition = `import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "../../../platform/prepared-schema.mts";
 import { objectControls } from "../site/control-content.mjs";
 import { PREPARED_PRESENTATION } from "./preparedPresentation.mjs";
 export const runtimeDefinition = Object.freeze({ ...PREPARED_PRESENTATION, schema: PREPARED_OBJECT_RUNTIME_SCHEMA, id: "moon", controls: objectControls });`;

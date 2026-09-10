@@ -8,7 +8,7 @@ import sharp from "sharp";
 import {
   ESO_PANORAMA,
   ESO_PANORAMA_ANCHORS,
-} from "../../../../src/platform/eso-panorama-registration.mjs";
+} from "../../../../src/platform/eso-panorama-registration.mts";
 
 // Re-measures the anchor pixel positions recorded in the panorama
 // registration against the acquired ESO image, so the registration can never

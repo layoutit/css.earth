@@ -74,3 +74,7 @@ src/planets/*/source/cassini-ice/evidence/*.html -text -whitespace
 
 # Preserve original Diviner GHRM product labels byte-for-byte.
 src/planets/moon/source/science/diviner-ghrm/*.xml -text -whitespace
+
+# Retain Galileo/Lucy catalog and Horizons responses exactly as retrieved.
+src/planets/dactyl/source/reference/asteroids.ssc -text -whitespace
+src/planets/dinkinesh/source/reference/horizons-*.txt -text -whitespace

@@ -2,10 +2,10 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createSourceManifest } from '../../../../src/platform/source-manifest.mjs';
-import { loadImageDem } from '../../../../tools/objects/terrestrial-layers/image-dem.mjs';
-import { loadOrthographicObservation } from '../../../../tools/objects/terrestrial-layers/image-dem-observation.mjs';
-import { loadImageDemScience } from '../../../../tools/objects/terrestrial-layers/image-dem-science.mjs';
+import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
+import { loadImageDem } from '../../../../tools/objects/terrestrial-layers/image-dem.mts';
+import { loadOrthographicObservation } from '../../../../tools/objects/terrestrial-layers/image-dem-observation.mts';
+import { loadImageDemScience } from '../../../../tools/objects/terrestrial-layers/image-dem-science.mts';
 
 const root = resolve(import.meta.dirname, '../../../../src/planets/comet-19p/source');
 const config = JSON.parse(await readFile(resolve(root, 'preparation/terrestrial.json'), 'utf8'));

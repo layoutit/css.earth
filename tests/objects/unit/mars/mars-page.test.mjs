@@ -5,7 +5,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import mars from "../../../../data/planets/mars.json" with { type: "json" };
-import { PLANET_SPEED_STATES } from "../../../../src/platform/planet-feature-controls.mjs";
+import { PLANET_SPEED_STATES } from "../../../../src/platform/planet-feature-controls.mts";
 import { PREPARED_MARS_LENSES } from "../../unit/mars/prepared-fixture.mjs";
 import { PREPARED_MARS_PANEL } from "../../unit/mars/prepared-fixture.mjs";
 

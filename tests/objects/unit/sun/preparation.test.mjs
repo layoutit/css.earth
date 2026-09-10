@@ -9,7 +9,7 @@ import test from "node:test";
 
 import sharp from "sharp";
 
-import { validateRuntimeAssetManifest } from "../../../../src/platform/runtime-asset-closure.mjs";
+import { validateRuntimeAssetManifest } from "../../../../src/platform/runtime-asset-closure.mts";
 
 
 
@@ -143,8 +143,8 @@ test("keeps the runtime free of forbidden render paths", async () => {
   ]);
   assert.equal(/createElement\(["']canvas/u.test(client), false);
   assert.doesNotMatch(styles, /clip-path|mask(?:-image)?\s*:|filter\s*:|gradient\(|mix-blend-mode|image-set\(/u);
-  const { auditObjectRuntimeOwnership } = await import("../../../../tools/check-object-runtime-ownership.mjs");
-  const { OBJECTS } = await import("../../../../site/objects.mjs");
+  const { auditObjectRuntimeOwnership } = await import("../../../../tools/check-object-runtime-ownership.mts");
+  const { OBJECTS } = await import("../../../../site/objects.mts");
   const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "sun") });
   assert.equal(audit.complete, true);
   assert.ok(audit.sharedClosure.includes("src/renderers/css/universe/world-context-runtime.ts"));

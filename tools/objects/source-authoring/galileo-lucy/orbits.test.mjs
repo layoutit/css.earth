@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { loadBodyEpochEphemeris, evaluatePublishedOrbit } from '../../../../packages/astronomy/tools/body-epoch-ephemeris.mjs';
+import { loadBodyEpochEphemeris, evaluatePublishedOrbit } from '../../../../packages/astronomy/tools/body-epoch-ephemeris.mts';
 
 for (const [id, parent, a, periodHours, eccentricity] of [['dactyl', 'ida', 82.3, .96534 * 24, .15], ['selam', 'dinkinesh', 3.11, 52.67, 0]]) {
   test(`${id}: declared approximate state preserves period, separation, orbital pole and phase qualification`, async () => {

@@ -7,9 +7,9 @@
     "sha256": "f0bd27e001874c48dcccea72f1a15d529996452fa8b6bcbfb65a44cdbfd23b4c"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -327,7 +327,7 @@
       "sha256": "8f75037450dbd96f5c26ac404105441505d0401da143c108f7f8ef90f87117e9",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "9473a039446562e8936c5e190cd923351f94c9b99d4f189fc40d428d9827f9b8",
       "bytes": 10725,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/panopaea/panopaea-elevation-thumbnail.webp",
           "bytes": 6274,
           "sha256": "77e78ca617e5134ff16af32562cf544e616b0aca78fcd6661f778e28f0cba631",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/panopaea/panopaea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/panopaea/panopaea-elevation-surface@2x.webp",
           "bytes": 333320,
           "sha256": "fc640ac9bc715d7d6df80fc983886d2d552c64ec4c7f6d6bd0acd49cdbf91aaa",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/panopaea/panopaea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/panopaea/panopaea-shape-surface@2x.webp",
           "bytes": 222190,
           "sha256": "d703f532fe989c065d2bb2a4b6edfcaa1383325248e303613b25679567b0f229",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

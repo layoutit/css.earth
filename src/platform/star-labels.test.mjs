@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createExposure, screenFactor, starPresentation } from "./star-photometry.mjs";
-import { STAR_LABEL_POLICY, selectStarLabel } from "./star-labels.mjs";
+import { createExposure, screenFactor, starPresentation } from "./star-photometry.mts";
+import { STAR_LABEL_POLICY, selectStarLabel } from "./star-labels.mts";
 
 const identity = [1, 0, 0, 0, 1, 0, 0, 0, 1];
 const view = {

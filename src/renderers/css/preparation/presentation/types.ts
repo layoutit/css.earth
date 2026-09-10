@@ -7,6 +7,8 @@ import type { ObjectRuntimeDefinition } from '../../runtime/object-runtime-types
 import type { PreparedAssets } from '../../rendering/prepared-residency.js';
 import type { PreparedTree, PreparedVariant, PreparedViewBinding } from '../../rendering/prepared-presentation.js';
 import type { PreparedMaterialTrack, PreparedMaterialAddress, PreparedMaterialRotation } from '../../rendering/prepared-material.js';
+import type { HeliocentricViewPlan } from '../../../../platform/heliocentric-view.mts';
+type PreparedMarkers = Awaited<ReturnType<typeof import('../../../../../tools/objects/solar-system-markers.mts').prepareSolarSystemMarkerStrip>>['plan'];
 
 export interface Lens {
   id: string; view?: string; billboardColor: string;
@@ -34,7 +36,7 @@ export interface Scene {
   bodyLeaves: PreparedLeaf[]; body: {leaves: PreparedLeaf[]};
   interior: {bodyTransform: string; outerBodyLeaves: PreparedLeaf[]; coreLeaves: PreparedLeaf[]; sectionLeaves: PreparedLeaf[];
     presentationOrbit: {durationMilliseconds: number; millisecondsPerControlDegree: number; keyframes: Keyframe[]}};
-  material: CompositeMaterial; heliocentricView: unknown;
+  material: CompositeMaterial; heliocentricView: HeliocentricViewPlan;
 }
 export interface SolarSource { bodyId: string; markerAtlasUrl: string; captionNames: Record<string, string>; }
 export interface SourceMaterialTrack extends Omit<PreparedMaterialTrack, 'frame' | 'defaultFrame' | 'rotation' | 'banks'> {
@@ -53,5 +55,5 @@ export interface PresentationDraft {
 export interface PresentationInputs {
   namespace: string; mode: 'row-bank-cutaway' | 'composite';
   scene: Scene; assets: RasterAssets; lenses: Lenses; sun: DirectionalSunPlan;
-  markers: unknown; solarSource: SolarSource; controls: ObjectControls;
+  markers?: PreparedMarkers; solarSource: SolarSource; controls: ObjectControls;
 }

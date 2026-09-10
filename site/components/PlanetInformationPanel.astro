@@ -2,14 +2,14 @@
 import type { Props } from "../planet-shell-types";
 import PlanetBreadcrumbs from "./PlanetBreadcrumbs.astro";
 import PlanetBodyOverview from "./PlanetBodyOverview.astro";
-import { orderScientificCharts } from "../scientific-chart-order.mjs";
+import { orderScientificCharts } from "../scientific-chart-order.mts";
 import PlanetCard from "./PlanetCard.astro";
 import PlanetCardHeader from "./PlanetCardHeader.astro";
 import PlanetFactsheet from "./PlanetFactsheet.astro";
-import { objectSources } from "../object-sources.mjs";
+import { objectSources } from "../object-sources.mts";
 import PlanetMissions from "./PlanetMissions.astro";
 import spacecraftCatalog from "../prepared-spacecraft.json";
-import { objectSpacecraft } from "../dataset-spacecraft.mjs";
+import { objectSpacecraft } from "../dataset-spacecraft.mts";
 import DatasetLegend from "./DatasetLegend.astro";
 import DatasetDescription from "./DatasetDescription.astro";
 const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], provenance, lenses, destinations } = Astro.props;
@@ -166,7 +166,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
                 </div>}
                 <DatasetLegend {objectId} {lens} />
               </DatasetDescription>
-              {lens.facts?.length > 0 && <ul class="planet-facts" aria-label={`${lens.label} facts`}>
+              {lens.facts && lens.facts.length > 0 && <ul class="planet-facts" aria-label={`${lens.label} facts`}>
                 {lens.facts.map((fact) => <li>
                   <span class="planet-fact-label">{fact.label}</span>{" "}
                   <span class="planet-fact-value">{fact.value}</span>
