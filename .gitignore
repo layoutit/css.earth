@@ -105,6 +105,7 @@ src/planets/*/source/**/*.bpc
 !src/planets/ryugu/source/reference/paper.pdf
 
 # Compact source conversions and the evidence needed to inspect them.
+!src/planets/moon/source/science/diviner-ghrm/*-compact.tif
 !src/planets/*/source/nims/*-composite.tif
 !src/planets/*/source/muse/*/*.tif
 !src/planets/*/source/vims/*-infrared.tif
@@ -137,3 +138,12 @@ src/planets/*/source/**/*.bpc
 # Replayed by the nebula bake recipe; keep source/settings and expected hashes.
 /labs/nebula/models/*/star-separation/prepared/
 /src/objects/lmc/prepared/*/slices/
+
+# Runtime environment rasters and lab inspection panels replay from pinned inputs.
+/src/objects/*/prepared/**/*.webp
+/src/objects/*/prepared/**/*.png
+/src/objects/*/prepared/**/*.jpg
+/src/objects/*/prepared/**/*.jpeg
+/src/objects/*/prepared/**/*.avif
+/labs/nebula/models/*/candidates/prepared/*.webp
+/labs/nebula/models/*/clouds-observation/source/target.png

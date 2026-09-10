@@ -1,11 +1,12 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, readFile } from 'node:fs/promises';
+import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
 import sharp from 'sharp';
 import { parseImageLayerRecipe, type ImageLayerRecipe } from './config.js';
 import { prepareImageLayers, sha256 } from './prepare.js';
+import { restoreEnvironmentObject } from '../../../tools/objects/restore-environment-images.js';
 
 test('production preparation preserves canonical flux and supplies nondegenerate edge banks',async()=>{
   const root=await mkdtemp(join(tmpdir(),'image-layers-')),source=join(root,'source'),output=join(root,'prepared');
@@ -21,6 +22,21 @@ test('production preparation preserves canonical flux and supplies nondegenerate
   const pixels=layers[0].info.width*layers[0].info.height,alphas=Array.from({length:pixels},(_,p)=>layers.reduce((a,l)=>1-(1-a)*(1-l.data[4*p+3]/255),0));assert(Math.abs(Math.max(...alphas)-240/255)<.02,'optical split recomposes the strongest nonuniform source alpha');
   const detail=layers.at(-1)!;assert(detail.data[4*Math.floor(pixels/2)+3]>detail.data[4*(Math.floor(pixels/2)-1)+3],'compact residual retains the isolated high-frequency peak');
   assert.equal(JSON.parse(await readFile(join(output,'image-layers.json'),'utf8')).schema,'cssearth-image-layer-bank@1');
+  const recipeBytes = Buffer.from(JSON.stringify(recipe));
+  await writeFile(join(source, 'recipe.json'), recipeBytes);
+  const preparedBytes = await readFile(join(output, 'image-layers.json'));
+  const descriptor = JSON.stringify({id:'fixture',type:'image-layer-bank',properties:{preparation:{source:'source/recipe.json',sha256:sha256(recipeBytes)}},prepared:{url:'prepared/image-layers.json',sha256:sha256(preparedBytes)}});
+  await writeFile(join(root, 'object.json'), descriptor);
+  // Exercise a clean-checkout cache miss, not only an already-populated output bank.
+  await rm(join(output, 'layers'), {recursive:true});
+  await restoreEnvironmentObject(root);
+  for (const resource of bank.resources) assert.equal(sha256(await readFile(join(output,resource.path))),resource.sha256);
+  assert.equal(await readFile(join(root,'object.json'),'utf8'),descriptor);
+  assert.deepEqual(await readFile(join(output,'image-layers.json')),preparedBytes);
+  const changedPath=join(output,bank.resources[0].path);
+  await writeFile(changedPath,'changed');
+  await assert.rejects(restoreEnvironmentObject(root), /digest mismatch/);
+  assert.equal(await readFile(changedPath,'utf8'),'changed');
   const rotated=await prepareImageLayers({sourceDirectory:source,outputDirectory:join(root,'rotated'),recipe:{...parsed,observation:{...parsed.observation,northClockwiseDeg:31,centerRaDeg:1.2}}});
   assert.notDeepEqual(rotated.banks[2].leaves[0].verticesUnits,bank.banks[2].leaves[0].verticesUnits,'astrometric registration must affect baked geometry');
 });
