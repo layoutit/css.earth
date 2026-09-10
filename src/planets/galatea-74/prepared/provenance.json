@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "galatea-74",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c44f3bf5a69fed77d33dfa1f704228b0c76b55061540090c2388e9e75ecbed4f"
+    "sha256": "27fcef801c357fc987785baae3d33aba448be3522ad7a74bd04758e1d3b80c05"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 56545
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 113.09 km effective diameter (catalog ±2.15 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Absolute rotational phase is illustrative.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-66400",
+            "role": "material",
+            "evidence": "src/planets/galatea-74/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "6ddcee1db0ceec15c3dfae6c178336914650b00826fba507d8cd6dd3dab41087",
       "bytes": 82708,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

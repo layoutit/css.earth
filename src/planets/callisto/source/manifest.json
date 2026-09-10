@@ -1,5 +1,5 @@
 {
-  "schema": "csscallisto-authoritative-sources@1",
+  "schema": "csscallisto-authoritative-sources@2",
   "inputs": [
     {
       "id": "usgs-voyager-galileo-global-1km",
@@ -59,6 +59,16 @@
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-callisto-usgs-voyager-galileo-global-1km",
+            "role": "material",
+            "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
       }
     },
     {
@@ -76,7 +86,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -93,7 +113,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "path": "system/jupiter-hubble.png",
@@ -111,7 +141,17 @@
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
       "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
-      "redistribution": "Credited prepared observational image; source binary excluded from Git."
+      "redistribution": "Credited prepared observational image; source binary excluded from Git.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-callisto-jupiter-hubble-parent",
+            "role": "material",
+            "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "callisto-surface-minimap-frame",
@@ -126,7 +166,11 @@
       "consumers": [
         "lenses",
         "presentation"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "origin": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Callisto%20-%20Galileo%20SSI%20Color%20Mosaic.png",
@@ -143,7 +187,17 @@
       "consumers": [
         "registration-source"
       ],
-      "acquisition": "The acquisition plan restores the exact USGS Original PNG; the release receipt records its source and limits."
+      "acquisition": "The acquisition plan restores the exact USGS Original PNG; the release receipt records its source and limits.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-callisto-galileo-pia03456-original",
+            "role": "material",
+            "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     },
     {
       "origin": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Callisto%20-%20Galileo%20SSI%20Color%20Mosaic.png",
@@ -195,6 +249,16 @@
             "evidence": "https://science.nasa.gov/photojournal/global-callisto-in-color/"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-callisto-galileo-pia03456-registered-color",
+            "role": "material",
+            "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
       }
     },
     {
@@ -243,6 +307,16 @@
             "evidence": "https://doi.org/10.17189/4sq6-x165"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-17189-4sq6-x165",
+            "role": "method",
+            "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
       }
     },
     {
@@ -260,7 +334,17 @@
       "redistribution": "Public scientific input; preserve source attribution and the documented processing.",
       "consumers": [
         "mapped-science-inputs"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-callisto-mapped-science-nims-g8cnadlind01a-minn-mv03-ciof-72-gcp-adjust-export-from-gdal-tif",
+            "role": "material",
+            "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     },
     {
       "path": "nims/G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
@@ -277,7 +361,17 @@
       "redistribution": "Public scientific input; preserve source attribution and the documented processing.",
       "consumers": [
         "mapped-science-inputs"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-callisto-mapped-science-nims-g8cnglobal02a-minn-mv03-ciof-67-gcp-adjust-export-from-gdal-tif",
+            "role": "material",
+            "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -310,7 +404,11 @@
       "path": "content/object.json",
       "expectedBytes": 11802,
       "expectedSha256": "c58df6c6f62d029f053d5f876fdd8deb481b061f958b58c51d86ee8a861914cb",
-      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "presentation/title-mark.json",

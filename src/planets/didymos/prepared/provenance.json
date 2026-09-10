@@ -1,14 +1,14 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "didymos",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fda7705b2f17cd31e4488ec4a636bf1631319a1be91ffbd331bdc1d011238fef"
+    "sha256": "03be520e8ca1aa2a38658e70366d533022379654153064e7eeb1286f5b0eb2dd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -394,6 +394,16 @@
         "referenceRadiusMeters": 365
       },
       "coverage": "Released global SPC model; smooth regions have no resolved image coverage. Approximately 14 m uncertainty in x/y/z and 3.3 percent volume uncertainty; see pinned SIS and collection metadata.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-shape",
+            "role": "material",
+            "evidence": "src/planets/didymos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "b5349374186d254ca21b7b00ddd9f6dea7e2762ca6bbff13f43151ee448e3f20",
       "bytes": 3616200,
       "dependencies": [],
@@ -425,6 +435,16 @@
         "facetNumberBase": 0
       },
       "coverage": "Sigma-positive source facets only, covering 58.2072% of the original mesh area. Sigma-zero rows mean one or no contributing images and are withheld.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-relative-albedo",
+            "role": "material",
+            "evidence": "src/planets/didymos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
       "sha256": "eeaaefa6031372e2ade0be010ff77bd85f0402a845ce1c8125f1b135ca7b7b69",
       "bytes": 1189440,
       "dependencies": [],
@@ -449,6 +469,16 @@
       "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
       "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
       "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-relative-albedo-label",
+            "role": "material",
+            "evidence": "src/planets/didymos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      },
       "sha256": "6fd1eede1d4c1bb8c5edd83c95b4c5de24dfdea2ca41e1263583fdb389b7a9e5",
       "bytes": 6724,
       "dependencies": [],
@@ -467,6 +497,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

@@ -1,5 +1,7 @@
 // Exercises the public shell and production dataset capability, without diagnostics.
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
@@ -12,12 +14,21 @@ const browser = await chromium.launch({ headless: true, ...(process.env.CHROME_E
   ? { executablePath: process.env.CHROME_EXECUTABLE } : { channel: 'chrome' }) });
 const cases: Record<string, unknown>[] = [], errors: string[] = [], failedResponses: string[] = [];
 const requests = new Set<string>();
-const report = { origin, browser: browser.version(), cases, errors, failedResponses };
+const servedResponses: {path:string;bytes:number;sha256:string}[] = [];
+const responsePaths = new Set<string>();
+const report = { testedRevision:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(), origin,
+  browser: browser.version(), deviceScaleFactor:1, servedResponseMethod:'Separate HTTP fetch of successful HTML/CSS/JS URLs observed during the browser run, against the same static server.', servedResponses, cases, errors, failedResponses };
 const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1 });
 page.setDefaultTimeout(30_000);
 page.on('pageerror', error => errors.push(error.message));
 page.on('response', response => { if (response.status() >= 400) failedResponses.push(`${response.status()} ${response.url()}`); });
 page.on('request', request => requests.add(new URL(request.url()).pathname));
+page.on('response', response => {
+  const path = new URL(response.url()).pathname;
+  if (response.status() === 200 && (/^\/(?:[a-z0-9-]+\/)?$/.test(path) || path.startsWith('/_astro/'))) {
+    responsePaths.add(path);
+  }
+});
 
 async function ready(body: string, lens?: string) {
   await page.waitForFunction(({ body, lens }) => document.documentElement.dataset.ready === 'true'
@@ -164,10 +175,61 @@ try {
   await noOverflow(page);
   cases.push({ name: 'mobile mission and dataset flow', viewport: { width: 390, height: 844 }, state: await state() });
 
-  assert.equal([...requests].some(path => /prepared-spacecraft\.json|source\/spacecraft\/catalog\.json|prepared\/provenance\.json|prepare-spacecraft/.test(path)), false,
+  await page.setViewportSize({width:1440,height:1000});
+  await visit('/mercury/','mercury','normal');
+  await page.getByRole('tab',{name:'Sources',exact:true}).click();
+  const source = page.locator('[data-source="source-mercury-usgs-messenger-enhanced-global-z3"]');
+  await source.locator('summary').first().focus();
+  await page.keyboard.press('Enter');
+  assert.equal(await source.getAttribute('open'),'');
+  assert.match(await source.innerText(),/not observed enhanced-color coverage/);
+  assert.equal(await source.locator('[data-dataset-link]').count(),1);
+  assert.equal(await page.locator('template[data-object-card]').evaluateAll(templates => templates.every(template =>
+    template instanceof HTMLTemplateElement && !template.content.querySelector('[data-source], [data-mission], [data-spacecraft]'))),true);
+  const sourceCamera=await page.locator('.planet-stage .polycss-camera').elementHandle(), sourceBefore=await state();
+  await page.screenshot({path:resolve(output,'mercury-sources-desktop.png')});
+  await source.getByRole('link',{name:'Mercury · Enhanced color',exact:true}).click();
+  await ready('mercury','enhanced');
+  assert.deepEqual((await state()).transform,sourceBefore.transform);
+  assert.equal(await sourceCamera?.evaluate(node=>node.isConnected),true);
+  await page.reload();await ready('mercury','enhanced');
+  await page.goBack();await ready('mercury','normal');
+  await page.goForward();await ready('mercury','enhanced');
+  cases.push({name:'Sources keyboard disclosure, same-body dataset, retained camera, reload and history',state:await state()});
+
+  await visit('/adrastea/','adrastea');
+  await page.getByRole('tab',{name:'Sources',exact:true}).click();
+  const kernel=page.locator('[data-source="naif-pck00011"]');
+  await kernel.locator('summary').first().click();
+  const destination=kernel.locator('[data-dataset-link][data-dataset-object="anthe"]').first();
+  const lens=await destination.getAttribute('data-dataset-id');assert.ok(lens);
+  await destination.click();await ready('anthe',lens);
+  await page.getByRole('tab',{name:'Sources',exact:true}).click();
+  assert.equal(await page.locator('[data-source="naif-pck00011"]').count(),1,'Preview transport fills current Sources once');
+  await page.goBack();await ready('adrastea');
+  await page.goForward();await ready('anthe',lens);
+  cases.push({name:'Shared source cross-body dataset, preview content, Back and Forward',state:await state()});
+
+  await page.setViewportSize({width:390,height:844});
+  await visit('/mercury/','mercury','normal');
+  await page.getByRole('tab',{name:'Sources',exact:true}).click();
+  const mobileSource=page.locator('[data-source="source-mercury-usgs-messenger-enhanced-global-z3"]');
+  if (await mobileSource.getAttribute('open') === null) await mobileSource.locator('summary').first().click();
+  await mobileSource.scrollIntoViewIfNeeded();await noOverflow(page);
+  await page.screenshot({path:resolve(output,'mercury-sources-mobile.png')});
+  await mobileSource.getByRole('link',{name:'Mercury · Enhanced color',exact:true}).click();await ready('mercury','enhanced');
+  await noOverflow(page);
+  cases.push({name:'Mobile Sources disclosure and dataset navigation',viewport:{width:390,height:844},state:await state()});
+
+  assert.equal([...requests].some(path => /prepared-(?:spacecraft|sources)\.json|src\/sources|source\/spacecraft\/catalog\.json|prepared\/provenance\.json|prepare-(?:spacecraft|sources)/.test(path)), false,
     'The production browser must not fetch the catalogue, compiler or provenance graph');
   assert.deepEqual(errors, [], 'No browser application errors');
   assert.deepEqual(failedResponses, [], 'All requested production assets are installed');
+  for (const path of [...responsePaths].sort()) {
+    const response=await fetch(new URL(path,origin));assert.equal(response.status,200);
+    const bytes=Buffer.from(await response.arrayBuffer());
+    servedResponses.push({path,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')});
+  }
 } catch (error) {
   await page.screenshot({ path: resolve(output, 'failure.png') }).catch(() => {});
   errors.push(error instanceof Error ? error.message : String(error));

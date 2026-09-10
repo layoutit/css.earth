@@ -1,5 +1,5 @@
 {
-  "schema": "cssixion-authoritative-sources@1",
+  "schema": "cssixion-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/ixion/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -33,7 +43,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/ixion/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "published-shape",
@@ -56,7 +76,17 @@
         "referenceRadiusMeters": 353329.0693408871
       },
       "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/outer-worlds/inputs.json.",
-      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-2601-09639",
+            "role": "method",
+            "evidence": "src/planets/ixion/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "model-surface",
@@ -81,7 +111,11 @@
         "referenceRadiusMeters": 353329.0693408871
       },
       "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/outer-worlds/inputs.json.",
-      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     }
   ],
   "documents": [
@@ -89,7 +123,11 @@
       "path": "content/object.json",
       "expectedBytes": 3832,
       "expectedSha256": "08a5dac2852a7476e852b513199f2ccabfb46ba86f5867acad92093ac5d03ae8",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "purpose": "Pinned source observation, interpretation or preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "measurements.json",

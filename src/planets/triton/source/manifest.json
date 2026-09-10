@@ -1,5 +1,5 @@
 {
-  "schema": "csstriton-authoritative-sources@1",
+  "schema": "csstriton-authoritative-sources@2",
   "inputs": [
     {
       "credit": "NASA/JPL; USGS Astrogeology",
@@ -28,6 +28,16 @@
             "spacecraftId": "voyager-2",
             "missionId": "voyager-2",
             "evidence": "https://www.sciencebase.gov/catalog/file/get/6515fe80d34e469cabfce1bb?f=__disk__9c%2F3f%2F3a%2F9c3f3acb71a18cd818ce74c4703f23ca940b4594"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-usgs-2023-triton-clear-frames",
+            "role": "material",
+            "evidence": "src/planets/triton/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
           }
         ]
       }
@@ -78,6 +88,16 @@
             "evidence": "https://www.lpi.usra.edu/icy_moons/images/tnmap-cyl-KH.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-triton-enhanced-color",
+            "role": "material",
+            "evidence": "src/planets/triton/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
       }
     },
     {
@@ -95,7 +115,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/triton/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -112,7 +142,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/triton/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "voyager-triton-sun-vectors",
@@ -129,7 +169,17 @@
       "redistribution": "Retain NASA/JPL credit",
       "consumers": [
         "photometry"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-triton-sun-vectors",
+            "role": "material",
+            "evidence": "src/planets/triton/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "voyager-triton-observer-vectors",
@@ -146,7 +196,17 @@
       "redistribution": "Retain NASA/JPL credit",
       "consumers": [
         "photometry"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-triton-observer-vectors",
+            "role": "material",
+            "evidence": "src/planets/triton/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     }
   ],
   "documents": [
@@ -154,7 +214,11 @@
       "path": "content/object.json",
       "expectedBytes": 7586,
       "expectedSha256": "fb3b4056001a0384a0c9077ac8b64e05d86f85a6ba65a9c43da83a91f60c2a2c",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "purpose": "Source metadata, license evidence, or authored preparation and content.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "observations/usgs-metadata.xml",

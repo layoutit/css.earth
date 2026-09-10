@@ -82,14 +82,14 @@ test('checkout restores a missing compressed observation without refreshing exis
   const origin = `http://127.0.0.1:${address.port}`;
   const inputs: readonly (readonly [string, Uint8Array])[] = [['existing.png', existing], ['observation.IMG.gz', radar]];
   const records = inputs.map(([path, bytes]) => ({
-    ...pin(path, bytes), id: path, origin: `${origin}/${path}`, consumers: ['surface'],
+    ...pin(path, bytes), id: path, origin: `${origin}/${path}`, sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, consumers: ['surface'],
     credit: 'Fixture', license: 'CC0', acquisition: 'Pinned download', redistribution: 'Allowed',
   }));
   const plan = Buffer.from(JSON.stringify({ schema: 'cssearth-acquisition-plan@1', operations:
     records.map(entry => ({ kind: 'download', groups: ['refresh'], path: entry.path, url: entry.origin })) }));
   await writeFile(resolve(source, 'existing.png'), existing);
   await writeFile(resolve(source, 'preparation/acquisition.json'), plan);
-  await json(resolve(source, 'manifest.json'), { schema: 'csstitan-authoritative-sources@1', inputs: records,
+  await json(resolve(source, 'manifest.json'), { schema: 'csstitan-authoritative-sources@2', inputs: records,
     documents: [{ ...pin('preparation/acquisition.json', plan), purpose: 'Acquisition plan' }], generatedIntermediates: [] });
   await run(root, ['tools/restore-source-inputs.mts', '--object=titan']);
   assert.deepEqual(requests, ['/observation.IMG.gz']);
@@ -122,8 +122,8 @@ test('Earth restores a missing MUR mosaic before verification and preserves exis
   `);
   await writeFile(resolve(root, 'tools/objects/geographic-pages/operations/acquire-pinned-global-wmts.mts'), '');
   await writeFile(resolve(source, 'science/mur-gibs-tiles.tar.gz'), archive);
-  await json(resolve(source, 'manifest.json'), { schema: 'cssearth-authoritative-sources@1', inputs: [{
-    ...pin('science/mur-gibs-tiles.tar.gz', archive), id: 'tiles', origin: 'Fixture archive', consumers: ['enso'],
+  await json(resolve(source, 'manifest.json'), { schema: 'cssearth-authoritative-sources@2', inputs: [{
+    ...pin('science/mur-gibs-tiles.tar.gz', archive), id: 'tiles', origin: 'Fixture archive', sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, consumers: ['enso'],
     credit: 'Fixture', license: 'CC0', acquisition: 'Pinned archive', redistribution: 'Allowed',
   }], generatedIntermediates: [{ ...pin('science/mur-gibs.png', mosaic), generator: 'MUR archive restore' }], documents: [] });
   const args = ['tools/restore-source-inputs.mts', '--object=earth'];

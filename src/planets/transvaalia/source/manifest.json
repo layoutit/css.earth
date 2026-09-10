@@ -1,5 +1,5 @@
 {
-  "schema": "csstransvaalia-authoritative-sources@1",
+  "schema": "csstransvaalia-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/transvaalia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "transvaalia-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Published convex light-curve model 3722. Approximate scale from a thermal diameter of 25.458 ± 0.591 km. Quoted fit error excludes about 20% survey systematic uncertainty and shape/aspect effects. The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
       "expectedBytes": 46419,
-      "expectedSha256": "e9273c2a279f53c89a3d5df3735e5c836f2e4edb88bef6cee4dce35b2874fd1e"
+      "expectedSha256": "e9273c2a279f53c89a3d5df3735e5c836f2e4edb88bef6cee4dce35b2874fd1e",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-11680",
+            "role": "material",
+            "evidence": "src/planets/transvaalia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/transvaalia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -95,7 +125,11 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 11751,
       "expectedSha256": "226343e8d47f3a21baf46c1fa9e5355fa5abb3974af3ca320dda6733ce06adc7",
-      "sha256": "50dee649b0feb3a0d5bb294e18fc612f32fe842af890339be14a5174cd1fb660"
+      "sha256": "50dee649b0feb3a0d5bb294e18fc612f32fe842af890339be14a5174cd1fb660",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

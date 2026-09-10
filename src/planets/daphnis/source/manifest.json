@@ -1,5 +1,5 @@
 {
-  "schema": "cssdaphnis-authoritative-sources@1",
+  "schema": "cssdaphnis-authoritative-sources@2",
   "inputs": [
     {
       "id": "n1656997950_1",
@@ -34,6 +34,16 @@
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656997950_1_CALIB.IMG"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2064-data-1656971575-1657039444-n1656997950-1-calib",
+            "role": "material",
+            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
       }
     },
     {
@@ -60,6 +70,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656997950_1_CALIB.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2064-data-1656971575-1657039444-n1656997950-1-calib",
+            "role": "material",
+            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
       }
@@ -97,6 +117,16 @@
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656998640_1_CALIB.IMG"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2064-data-1656971575-1657039444-n1656998640-1-calib",
+            "role": "material",
+            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
       }
     },
     {
@@ -123,6 +153,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656998640_1_CALIB.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2064-data-1656971575-1657039444-n1656998640-1-calib",
+            "role": "material",
+            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
         ]
       }
@@ -160,6 +200,16 @@
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2110/data/1863231911_1863269539/N1863267232_1_CALIB.IMG"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2110-data-1863231911-1863269539-n1863267232-1-calib",
+            "role": "material",
+            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
       }
     },
     {
@@ -186,6 +236,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2110/data/1863231911_1863269539/N1863267232_1_CALIB.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2110-data-1863231911-1863269539-n1863267232-1-calib",
+            "role": "material",
+            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
           }
         ]
       }
@@ -226,6 +286,16 @@
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/daphnis_30k_plt.tab"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-daphnis-thomas-2018-shape",
+            "role": "material",
+            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
       }
     },
     {
@@ -243,7 +313,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -260,7 +340,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -298,7 +388,11 @@
       "path": "content/object.json",
       "expectedBytes": 5248,
       "expectedSha256": "7ea6f4f0add823d00e4a7d04fc203713733a67ed2ae5c4bcd8fab1753157201a",
-      "purpose": "Authored source interpretation or preparation metadata."
+      "purpose": "Authored source interpretation or preparation metadata.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

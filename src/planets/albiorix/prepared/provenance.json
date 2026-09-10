@@ -1,14 +1,14 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "albiorix",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "be80a957e1e20b5c8c060495c3ea93d8f13e734a8a46f874eaff1e5c62c94c45"
+    "sha256": "e75e00ee5994d86bf0ac5175f46d9c4d04ab42c13382d5ad3c6ef87110b7e6c7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -256,6 +256,16 @@
       "lensId": "model",
       "label": "Shape model",
       "falseColor": false,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "denk-2018-irregular-moons",
+            "role": "method",
+            "evidence": "src/planets/albiorix/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
@@ -282,6 +292,16 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 14300
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "denk-2018-irregular-moons",
+            "role": "method",
+            "evidence": "src/planets/albiorix/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "6bb49d5f0ce395a7a8c5cce0fa2c983324e1edf12cbe1affbc9142eac4bd8be5",
       "bytes": 62404,
       "dependencies": [],
@@ -292,6 +312,10 @@
     {
       "path": "content/object.json",
       "purpose": "Scientific source interpretation and authored preparation evidence.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

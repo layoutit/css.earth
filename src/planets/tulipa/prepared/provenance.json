@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "tulipa",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d846fde9065cab3d03ba21b8a979aef8abe34681bb47c4e0d5f684d88f41aa7f"
+    "sha256": "b61aed5cdf99d50dab8a2452e17319fbe75c4332939ec4cf0d4048135e956bfd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -339,6 +339,16 @@
         "referenceRadiusMeters": 13937.5
       },
       "coverage": "Published convex light-curve model 1779. Approximate scale from a thermal diameter of 27.875 ± 0.362 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects. The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-6068",
+            "role": "material",
+            "evidence": "src/planets/tulipa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "e9ca02b70409de00bfcf17b56680e573a8f3840e5e4a0a1446ae83c842206c55",
       "bytes": 82708,
       "dependencies": [],
@@ -358,6 +368,10 @@
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "sha256": "fc95e2a62b3c311028d5890e6b388c9f51478f0f08f3db592c47a2a6d7280b32",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

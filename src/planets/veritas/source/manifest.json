@@ -1,5 +1,5 @@
 {
-  "schema": "cssveritas-authoritative-sources@1",
+  "schema": "cssveritas-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/veritas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "veritas-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Published convex light-curve model 833. Approximate scale from a thermal diameter of 118.8 ± 1.83 km. Quoted fit error excludes about 20% survey systematic uncertainty and shape/aspect effects. The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
       "expectedBytes": 82465,
-      "expectedSha256": "4b038d538898e8c11f692d3f034461d6cd06c41ece0c30f1d0b72d7ee4bca39a"
+      "expectedSha256": "4b038d538898e8c11f692d3f034461d6cd06c41ece0c30f1d0b72d7ee4bca39a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-3214",
+            "role": "material",
+            "evidence": "src/planets/veritas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/veritas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -95,7 +125,11 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 8878,
       "expectedSha256": "bdcfd1d32f2993633cb6ef9f81c11595ed780838b60d3af23e385692bb285907",
-      "sha256": "b0e0b594cb22da8c10e4f90784dcea1a81ae141a492600a91bd3d2e62884aa2d"
+      "sha256": "b0e0b594cb22da8c10e4f90784dcea1a81ae141a492600a91bd3d2e62884aa2d",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

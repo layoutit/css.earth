@@ -1,14 +1,14 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "nix",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a08f720d7fd79b4413cbca0ab99104c7ec1028c56cb222daa7c8f429c9658798"
+    "sha256": "0e4d828226f8fc3e1b4ae49c2f8a70dbb0754338c93a8f9130b01f5ea03e7ac1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -265,6 +265,16 @@
       "lensId": "model",
       "label": "Shape model",
       "falseColor": false,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-nix-model-surface",
+            "role": "material",
+            "evidence": "src/planets/nix/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
@@ -303,6 +313,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-nix-porter-nix-shape",
+            "role": "material",
+            "evidence": "src/planets/nix/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "331a11972b5d1f55fd901d0cfd358aee49e77070d7bf606729a51ba95be20428",
       "bytes": 4586869,
       "dependencies": [],
@@ -320,6 +340,10 @@
     {
       "path": "content/object.json",
       "purpose": "Nix source identity, survey evidence or authored preparation and content.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

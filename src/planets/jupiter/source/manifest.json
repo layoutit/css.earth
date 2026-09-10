@@ -1,5 +1,5 @@
 {
-  "schema": "cssjupiter-authoritative-sources@1",
+  "schema": "cssjupiter-authoritative-sources@2",
   "inputs": [
     {
       "id": "nasa-hubble-jupiter-navigation-marker",
@@ -16,7 +16,17 @@
         "lighting"
       ],
       "expectedBytes": 1166501,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-jupiter-nasa-hubble-jupiter-navigation-marker",
+            "role": "material",
+            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-jupiter-globe",
@@ -33,7 +43,17 @@
         "lighting"
       ],
       "expectedBytes": 1443,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-jupiter-openspace-jupiter-globe",
+            "role": "method",
+            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-jupiter-kernels",
@@ -49,7 +69,17 @@
         "moons"
       ],
       "expectedBytes": 1037,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-jupiter-openspace-jupiter-kernels",
+            "role": "method",
+            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "nasa-hubble-jupiter-global-map-2019",
@@ -73,6 +103,16 @@
             "spacecraftId": "hubble",
             "missionId": "hubble",
             "evidence": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2019/08/STScI-01EVSV9A3VN7VYXN5H6Z1GDG93.tif/jcr:content/renditions/Full%20Res.png"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-jupiter-nasa-hubble-jupiter-global-map-2019",
+            "role": "material",
+            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
         ]
       }
@@ -103,6 +143,16 @@
             "evidence": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia24/pia24239/PIA24239.tif"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-jupiter-nasa-juno-jupiter-north-pole-detail-pia24239",
+            "role": "material",
+            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
       }
     },
     {
@@ -129,6 +179,16 @@
             "spacecraftId": "juno",
             "missionId": "juno",
             "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23808/PIA23808.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-jupiter-nasa-juno-jupiter-north-polar-projection-pia23808",
+            "role": "material",
+            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
           }
         ]
       }
@@ -159,6 +219,16 @@
             "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23556/PIA23556.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-jupiter-nasa-juno-jupiter-south-polar-cyclones-pia23556",
+            "role": "material",
+            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
       }
     },
     {
@@ -187,6 +257,16 @@
             "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia21/pia21382/PIA21382.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-jupiter-nasa-juno-jupiter-south-pole-visible-pia21382",
+            "role": "material",
+            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
       }
     },
     {
@@ -204,7 +284,13 @@
       "consumers": [
         "starfield"
       ],
-      "expectedBytes": 144994
+      "expectedBytes": 144994,
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "hyg-v41-jupiter-representative-field",
+        "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "hyg-v41-license",
@@ -218,7 +304,13 @@
       "consumers": [
         "starfield"
       ],
-      "expectedBytes": 596
+      "expectedBytes": 596,
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "hyg-v41-license",
+        "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "hubble-opal-jupiter-f275w",
@@ -241,6 +333,16 @@
             "spacecraftId": "hubble",
             "missionId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-jupiter-hubble-opal-jupiter-f275w",
+            "role": "material",
+            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
           }
         ]
       }
@@ -268,6 +370,16 @@
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-jupiter-hubble-opal-jupiter-fq889n",
+            "role": "material",
+            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
       }
     },
     {
@@ -287,7 +399,13 @@
         "moons"
       ],
       "expectedBytes": 87703,
-      "historicalAcquisition": "node src/planets/jupiter/tools/acquire-moon-catalog.mjs validates the pinned snapshot; explicit refresh must pass all authority hashes"
+      "historicalAcquisition": "node src/planets/jupiter/tools/acquire-moon-catalog.mjs validates the pinned snapshot; explicit refresh must pass all authority hashes",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "jupiter-moon-catalog",
+        "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "nasa-galileo-galilean-satellites",
@@ -302,7 +420,17 @@
         "moons"
       ],
       "expectedBytes": 161334,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-jupiter-nasa-galileo-galilean-satellites",
+            "role": "material",
+            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
     },
     {
       "id": "nasa-galileo-jupiter-main-ring-halo",
@@ -317,7 +445,17 @@
         "rings"
       ],
       "expectedBytes": 10021,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-jupiter-nasa-galileo-jupiter-main-ring-halo",
+            "role": "material",
+            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
     },
     {
       "id": "hubble-opal-jupiter-minnaert",
@@ -335,7 +473,13 @@
         "atmosphere",
         "lighting"
       ],
-      "expectedBytes": 1228
+      "expectedBytes": 1228,
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "hubble-opal-jupiter-minnaert",
+        "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "nasa-psg-jupiter-configuration",
@@ -352,7 +496,13 @@
         "spectrum"
       ],
       "expectedBytes": 8813,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh expands a pinned Jupiter ephemeris seed"
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh expands a pinned Jupiter ephemeris seed",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-jupiter-configuration",
+        "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "nasa-psg-jupiter-reflectance",
@@ -367,7 +517,13 @@
         "spectrum"
       ],
       "expectedBytes": 11912,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh requests I/F at R 240 from the pinned configuration"
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh requests I/F at R 240 from the pinned configuration",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-jupiter-reflectance",
+        "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "eso-jupiter-milky-way-panorama",
@@ -385,7 +541,17 @@
       "consumers": [
         "starfield",
         "scene"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
+      }
     },
     {
       "id": "google-maps-jupiter-cubic-sky-sun-oracle-asset",
@@ -401,7 +567,17 @@
         "starfield",
         "sun-oracle",
         "scene"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-jupiter-google-maps-jupiter-cubic-sky-sun-oracle-asset",
+            "role": "material",
+            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+          }
+        ]
+      }
     },
     {
       "id": "google-maps-jupiter-cubic-sky-sun-oracle-measurements",
@@ -418,7 +594,13 @@
         "sun-oracle",
         "scene",
         "lighting"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "google-maps-jupiter-cubic-sky-sun-oracle-measurements",
+        "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "jupiter-authored-preparation-rings",
@@ -432,7 +614,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "radial-layers"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "jupiter-authored-preparation-navigation",
@@ -446,7 +632,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "navigation"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "jupiter-authored-content-object",
@@ -460,7 +650,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "content"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "jupiter-authored-presentation-title-mark",
@@ -474,7 +668,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "jupiter-authored-editorial-object",
@@ -488,7 +686,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "content"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "jupiter-authored-materials",
@@ -502,7 +704,13 @@
       "redistribution": "checked authored source with referenced observation provenance",
       "consumers": [
         "material-composition"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "jupiter-authored-materials",
+        "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/26",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "jupiter-authored-geometry",
@@ -516,7 +724,13 @@
       "redistribution": "checked authored source",
       "consumers": [
         "geometry"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "jupiter-authored-geometry",
+        "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/27",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "jupiter-authored-presentation",
@@ -530,7 +744,13 @@
       "redistribution": "checked authored source",
       "consumers": [
         "presentation"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "jupiter-authored-presentation",
+        "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/28",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "jupiter-authored-observations",
@@ -544,7 +764,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "observations"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "jupiter-authored-charts",
@@ -558,7 +782,13 @@
       "redistribution": "checked authored source with institutional provenance",
       "consumers": [
         "charts"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "jupiter-authored-charts",
+        "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/30",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "jupiter-authored-photometry",
@@ -572,7 +802,13 @@
       "redistribution": "checked authored source with institutional provenance",
       "consumers": [
         "photometry"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "jupiter-authored-photometry",
+        "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/31",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "jupiter-authored-celestial",
@@ -586,7 +822,13 @@
       "redistribution": "checked authored source with institutional provenance",
       "consumers": [
         "celestial"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "jupiter-authored-celestial",
+        "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/32",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "jupiter-authored-acquisition",
@@ -600,7 +842,13 @@
       "redistribution": "checked authored source",
       "consumers": [
         "acquisition"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "jupiter-authored-acquisition",
+        "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/33",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     }
   ],
   "generatedIntermediates": [],

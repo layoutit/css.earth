@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "philosophia",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dfb7278245c5e0a75f62306a2976c373ead247b2bef6e9e32b44ca7e813ec8c2"
+    "sha256": "34adff686352bd31bf91bc7de4f498367364c54c80dd031770d7a841acea143f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 50500
       },
       "coverage": "Convex light-curve reconstruction; 101 km volume-equivalent diameter (±5 km). The grid marks unavailable imagery; rotational phase is illustrative. Marciniak2018 section5.2 and Table7 select the convex pole(95,+19) as the best thermal fit (chi-square1.2). Table7 reports101±5 km equivalent-volume diameter, with errors spanning the full3-sigma range. This primary publication scale supersedes DAMIT’s107±5 km field. The paper also presents SAGE nonconvex alternatives, but the selected convex solution gives the best thermal fit; no multichord occultation supports those concavities. Shape and thermal fit are explicitly the least constrained of the five studied targets; neither is a resolved terrain map.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-6154",
+            "role": "material",
+            "evidence": "src/planets/philosophia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "e21f6191a0e78785b81cf603e3e0f86281aca58b705fc1cadfebb5a043afef6f",
       "bytes": 82708,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

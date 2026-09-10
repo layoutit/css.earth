@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "nereus",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "99a6683319fa97a4877b6ec19fab027c87229b50dbd9b6674f8fbc4d3fc69290"
+    "sha256": "726f5c1fd419ca76b87ed1a4eefe8675657ec62f8eaf8cd16631e514a19f0c5a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -326,6 +326,16 @@
         "referenceRadiusMeters": 165
       },
       "coverage": "The archived filename contains alt1, but its measured 0.510 × 0.330 × 0.241 km extents identify the paper’s preferred smaller-volume model. Its polar dimension is weakly constrained; a thicker alternative fits comparably. The selected pole is within a 10° uncertainty radius and the period is 15.16 ± 0.04 h. No resolved optical surface map is supplied.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-nereus-nereus-shape",
+            "role": "material",
+            "evidence": "src/planets/nereus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "894989269e8cf2db397933247cfe4650408eecde3e59d5966161532b84c88b19",
       "bytes": 67291,
       "dependencies": [],
@@ -344,6 +354,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

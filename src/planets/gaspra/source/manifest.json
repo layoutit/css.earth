@@ -1,5 +1,5 @@
 {
-  "schema": "cssgaspra-authoritative-sources@1",
+  "schema": "cssgaspra-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "credit": "NASA/JPL/Galileo SSI; P. C. Thomas and colleagues",
@@ -48,6 +58,16 @@
             "spacecraftId": "galileo",
             "missionId": "galileo",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspra.tab"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-shape",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
       }
@@ -89,6 +109,16 @@
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspram.fit"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-normal",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
       }
     },
     {
@@ -107,7 +137,17 @@
       "width": 800,
       "height": 800,
       "lensId": "calibrated",
-      "label": "Calibrated image"
+      "label": "Calibrated image",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-107318326rcal-clr-fit",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "gaspra-107318326rcal_clr-xml",
@@ -121,7 +161,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 9633,
-      "expectedSha256": "53ef20427179844ab1bfc6fcc66395ba78e949244cd2b614a482ddf6fe1a3301"
+      "expectedSha256": "53ef20427179844ab1bfc6fcc66395ba78e949244cd2b614a482ddf6fe1a3301",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-107318326rcal-clr-xml",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "gaspra-e8326-fit",
@@ -135,7 +185,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 645120,
-      "expectedSha256": "ec66eee211c1b1f3de267375f976b01517365bacd7b22e4eb9842713c2e9541d"
+      "expectedSha256": "ec66eee211c1b1f3de267375f976b01517365bacd7b22e4eb9842713c2e9541d",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-e8326-fit",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     },
     {
       "id": "gaspra-e8326-lbl",
@@ -149,7 +209,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 10480,
-      "expectedSha256": "dd3e14be6e822c73bd3efbda58e5cb586b0654dfde8da58e9a19c0d306c2e792"
+      "expectedSha256": "dd3e14be6e822c73bd3efbda58e5cb586b0654dfde8da58e9a19c0d306c2e792",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-e8326-lbl",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
     },
     {
       "id": "gaspra-gaspbad-tab",
@@ -163,7 +233,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 35828,
-      "expectedSha256": "d38c32fca409f5ceb2c51da96a9bc8fe58e3fcabe7168b52e23886fadcf71654"
+      "expectedSha256": "d38c32fca409f5ceb2c51da96a9bc8fe58e3fcabe7168b52e23886fadcf71654",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-gaspbad-tab",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
     },
     {
       "id": "gaspra-gaspbad-lbl",
@@ -177,7 +257,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 9120,
-      "expectedSha256": "55be9710b892ce9a79464f42cf358bb2bc4e583231affa557e61a818b3ab6dc9"
+      "expectedSha256": "55be9710b892ce9a79464f42cf358bb2bc4e583231affa557e61a818b3ab6dc9",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-gaspbad-lbl",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     },
     {
       "id": "gaspra-gll36001-ti",
@@ -191,7 +281,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 9964,
-      "expectedSha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652"
+      "expectedSha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-gll36001-ti",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
     },
     {
       "id": "gaspra-camera-catalog-tab",
@@ -205,7 +305,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 1152,
-      "expectedSha256": "0cb9e6bccee046cc5838760072410efc2d2a665b39cce142577db4699647bea6"
+      "expectedSha256": "0cb9e6bccee046cc5838760072410efc2d2a665b39cce142577db4699647bea6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-camera-catalog-tab",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
     },
     {
       "id": "gaspra-camera-catalog-xml",
@@ -219,7 +329,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 8616,
-      "expectedSha256": "d9783210e82979d6f6f4743f653c0c7b50cb5cceeb8927bc34bdf97e5a2fadee"
+      "expectedSha256": "d9783210e82979d6f6f4743f653c0c7b50cb5cceeb8927bc34bdf97e5a2fadee",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-camera-catalog-xml",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "gaspra-107318313rcal_clr-fit",
@@ -235,7 +355,17 @@
       "expectedBytes": 2563200,
       "expectedSha256": "33c2768822732f79334f80fba161f86aacc27d3c70de3a4cce2315789b3d9f8e",
       "width": 800,
-      "height": 800
+      "height": 800,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-107318313rcal-clr-fit",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
     },
     {
       "id": "gaspra-107318313rcal_clr-xml",
@@ -249,7 +379,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 9633,
-      "expectedSha256": "cd2bf7b4bee1f6e2896082dfb78eabe574d62b6880d3fef2d8ec85dd3647c59b"
+      "expectedSha256": "cd2bf7b4bee1f6e2896082dfb78eabe574d62b6880d3fef2d8ec85dd3647c59b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-107318313rcal-clr-xml",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
     },
     {
       "id": "gaspra-e8313-fit",
@@ -263,7 +403,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 645120,
-      "expectedSha256": "89e3fe56ef9eddb0e7a2bd1af0a8be0d0ca6ebf92b661fbdf070283e1b6cab00"
+      "expectedSha256": "89e3fe56ef9eddb0e7a2bd1af0a8be0d0ca6ebf92b661fbdf070283e1b6cab00",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-e8313-fit",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
     },
     {
       "id": "gaspra-e8313-lbl",
@@ -277,7 +427,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 10480,
-      "expectedSha256": "f411a08eb9d4a918e4f9feb6a5929366ffd51cee0654c5de3ccc61be184bf9f3"
+      "expectedSha256": "f411a08eb9d4a918e4f9feb6a5929366ffd51cee0654c5de3ccc61be184bf9f3",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gaspra-gaspra-e8313-lbl",
+            "role": "material",
+            "evidence": "src/planets/gaspra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -313,7 +473,11 @@
       "path": "content/object.json",
       "purpose": "Pinned source evidence or authored package input.",
       "expectedBytes": 11221,
-      "expectedSha256": "f5037d4c08c36da7e12cae23aecd3b8e8899fb1044332cc6840b61f7e3772dd8"
+      "expectedSha256": "f5037d4c08c36da7e12cae23aecd3b8e8899fb1044332cc6840b61f7e3772dd8",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

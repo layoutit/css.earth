@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-2008-ev5",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d81ca68eb074ddde49b659b918b9db794674d88273087f839b6de1f35b947fa6"
+    "sha256": "cb64cdc402fb0b50deb4412cb21d5f7c149976210908ccc28f38bfd36fd49f7b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -324,6 +324,16 @@
         "referenceRadiusMeters": 200
       },
       "coverage": "The north pole was not covered by the radar images, so its topography and flattening depend on modeling constraints. The pole is uncertain by 10 degrees and equivalent diameter is 400 ± 50 m. The unmodified archive mesh is retained; no resolved optical surface map is supplied.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-asteroid-2008-ev5-asteroid-2008-ev5-shape",
+            "role": "material",
+            "evidence": "src/planets/asteroid-2008-ev5/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "c8cf2f1466cef4ef8cedd033e83a00ef625a64313068255954003d64ae2b6dd9",
       "bytes": 120483,
       "dependencies": [],
@@ -342,6 +352,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

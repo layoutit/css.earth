@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "uranus",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "75d2dc8312a10ac087b17086d8a728769ceeca4b46d7e860d3225b82b5bedf0e"
+    "sha256": "e718d5a28e3fa9b43e8c6b27971c063c56d052c1d0e88a42341db05a36b7edce"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1022,6 +1022,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-uranus-hubble-opal-uranus-2025a-color",
+            "role": "material",
+            "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "854ba9d0b744c2d6e6b646d315847a3528b94b4f0b8970cc4285d71228e69c7b",
       "bytes": 787756,
       "dependencies": [],
@@ -1052,6 +1062,16 @@
             "spacecraftId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits",
             "missionId": "hubble"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-uranus-hubble-opal-uranus-2025a-fq727n",
+            "role": "material",
+            "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
       },
@@ -1088,6 +1108,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-uranus-hubble-opal-uranus-2025a-f845m",
+            "role": "material",
+            "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "96afebec48e8da3b5b72a80909a0041ddd50255ce5101f51cab3ffda1e151ac8",
       "bytes": 1045440,
       "dependencies": [],
@@ -1111,6 +1141,10 @@
       "license": "Project-authored specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "bc585a6133fb7151c1d5e32a7c06323ed86e9bf0934651f917273be49ab668b7",
       "bytes": 14483,
       "dependencies": [],
@@ -1127,6 +1161,12 @@
       "license": "United States government scientific model response",
       "acquisition": "checked ASCII response with only the request timestamp and elapsed-time comment lines removed",
       "redistribution": "checked model response with NASA attribution",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-uranus-r240-rif",
+        "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      },
       "sha256": "84ab228415b34a5871182dd64285ba653ee6de495767af2c190ff441ff7e2567",
       "bytes": 11944,
       "dependencies": [],
@@ -1161,6 +1201,12 @@
       "license": "United States government scientific model response",
       "acquisition": "pinned expanded PSG configuration",
       "redistribution": "checked text configuration with NASA attribution",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-uranus-expanded-configuration",
+        "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      },
       "sha256": "8bca8db27545003285fdf45d84ed06cb82c2a0365e3c07dedfb87715df9c0d0c",
       "bytes": 8815,
       "dependencies": [],

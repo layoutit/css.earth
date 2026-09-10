@@ -1,5 +1,5 @@
 {
-  "schema": "csstitan-authoritative-sources@1",
+  "schema": "csstitan-authoritative-sources@2",
   "inputs": [
     {
       "id": "usgs-cassini-iss-2026-938nm",
@@ -54,6 +54,16 @@
             "evidence": "https://www.sciencebase.gov/catalog/file/get/68a5107ad4be02198e361c35?f=__disk__40%2Ffc%2F6b%2F40fc6b3d12f9356149245c46522fc4aca6cb9d5f"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-usgs-cassini-iss-2026-938nm",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
       }
     },
     {
@@ -71,7 +81,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -88,7 +108,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "cassini-radar-midr-090",
@@ -123,6 +153,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-cassini-radar-midr-090",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
         ]
       }
@@ -162,6 +202,16 @@
             "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-cassini-radar-midr-270",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
       }
     },
     {
@@ -193,7 +243,17 @@
         "referenceRadiusMeters": 2575000
       },
       "expectedBytes": 7422253,
-      "expectedSha256": "90efa690c9a7841449e9cae5b100343b6272c8b4dba3731c184efee3f3a02546"
+      "expectedSha256": "90efa690c9a7841449e9cae5b100343b6272c8b4dba3731c184efee3f3a02546",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-cassini-gtdr-2019-gtied00n090-t126-v01",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     },
     {
       "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
@@ -224,7 +284,17 @@
         "referenceRadiusMeters": 2575000
       },
       "expectedBytes": 7393466,
-      "expectedSha256": "380daf4e4ca7b8856bc69ea4eb228bce5b1c34bee69aac01b315f2b8fc582034"
+      "expectedSha256": "380daf4e4ca7b8856bc69ea4eb228bce5b1c34bee69aac01b315f2b8fc582034",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-cassini-gtdr-2019-gtied00n270-t126-v01",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
     },
     {
       "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
@@ -255,7 +325,17 @@
         "referenceRadiusMeters": 2575000
       },
       "expectedBytes": 6386495,
-      "expectedSha256": "10b62eed2a4fbe9c6b7746e1124780e43b260276930c0af86fdc7274e10f1c34"
+      "expectedSha256": "10b62eed2a4fbe9c6b7746e1124780e43b260276930c0af86fdc7274e10f1c34",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-cassini-gtdr-2019-gtded00n090-t126-v01",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
     },
     {
       "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
@@ -286,7 +366,17 @@
         "referenceRadiusMeters": 2575000
       },
       "expectedBytes": 6529382,
-      "expectedSha256": "da614365c1a04d766dc8ea13f8c673128e632904b02ad210df7266e4e5f06b8b"
+      "expectedSha256": "da614365c1a04d766dc8ea13f8c673128e632904b02ad210df7266e4e5f06b8b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-cassini-gtdr-2019-gtded00n270-t126-v01",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     },
     {
       "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
@@ -317,7 +407,17 @@
         "referenceRadiusMeters": 2575000
       },
       "expectedBytes": 550734,
-      "expectedSha256": "5b44136c10b8541fb59b4b9c26a24c96f91ec3ca0669c263f40acd6e899909ad"
+      "expectedSha256": "5b44136c10b8541fb59b4b9c26a24c96f91ec3ca0669c263f40acd6e899909ad",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-cassini-gtdr-2019-gtfed00n090-t126-v01",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
     },
     {
       "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
@@ -348,7 +448,17 @@
         "referenceRadiusMeters": 2575000
       },
       "expectedBytes": 532494,
-      "expectedSha256": "7abb589cfa572cb6a837d2f814ae7d1b8ccaa8f25edbaf56bd20b2728b6a50af"
+      "expectedSha256": "7abb589cfa572cb6a837d2f814ae7d1b8ccaa8f25edbaf56bd20b2728b6a50af",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-cassini-gtdr-2019-gtfed00n270-t126-v01",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-basins-cpg",
@@ -366,7 +476,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-basins-cpg",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-basins-dbf",
@@ -384,7 +504,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-basins-dbf",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-basins-lyr",
@@ -402,7 +532,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-basins-lyr",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-basins-prj",
@@ -420,7 +560,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-basins-prj",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-basins-shp",
@@ -438,7 +588,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-basins-shp",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-basins-shp-xml",
@@ -456,7 +616,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-basins-shp-xml",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-basins-shx",
@@ -474,7 +644,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-basins-shx",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-craters-cpg",
@@ -492,7 +672,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-craters-cpg",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-craters-dbf",
@@ -510,7 +700,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-craters-dbf",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-craters-lyr",
@@ -528,7 +728,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-craters-lyr",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-craters-prj",
@@ -546,7 +756,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-craters-prj",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-craters-shp",
@@ -564,7 +784,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-craters-shp",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-craters-shp-xml",
@@ -582,7 +812,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-craters-shp-xml",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-craters-shx",
@@ -600,7 +840,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-craters-shx",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/24"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-dunes-cpg",
@@ -618,7 +868,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-dunes-cpg",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/25"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-dunes-dbf",
@@ -636,7 +896,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-dunes-dbf",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/26"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-dunes-lyr",
@@ -654,7 +924,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-dunes-lyr",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/27"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-dunes-prj",
@@ -672,7 +952,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-dunes-prj",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/28"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-dunes-shp",
@@ -690,7 +980,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-dunes-shp",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/29"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-dunes-shp-xml",
@@ -708,7 +1008,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-dunes-shp-xml",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/30"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-dunes-shx",
@@ -726,7 +1036,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-dunes-shx",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/31"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-labyrinth-cpg",
@@ -744,7 +1064,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-labyrinth-cpg",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/32"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-labyrinth-dbf",
@@ -762,7 +1092,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-labyrinth-dbf",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/33"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-labyrinth-lyr",
@@ -780,7 +1120,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-labyrinth-lyr",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/34"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-labyrinth-prj",
@@ -798,7 +1148,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-labyrinth-prj",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/35"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-labyrinth-shp",
@@ -816,7 +1176,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-labyrinth-shp",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/36"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-labyrinth-shp-xml",
@@ -834,7 +1204,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-labyrinth-shp-xml",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/37"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-labyrinth-shx",
@@ -852,7 +1232,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-labyrinth-shx",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/38"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-mountains-cpg",
@@ -870,7 +1260,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-mountains-cpg",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/39"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-mountains-dbf",
@@ -888,7 +1288,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-mountains-dbf",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/40"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-mountains-lyr",
@@ -906,7 +1316,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-mountains-lyr",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/41"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-mountains-prj",
@@ -924,7 +1344,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-mountains-prj",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/42"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-mountains-shp",
@@ -942,7 +1372,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-mountains-shp",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/43"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-mountains-shp-xml",
@@ -960,7 +1400,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-mountains-shp-xml",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/44"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-mountains-shx",
@@ -978,7 +1428,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-mountains-shx",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/45"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-plains-3-cpg",
@@ -996,7 +1456,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-plains-3-cpg",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/46"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-plains-3-dbf",
@@ -1014,7 +1484,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-plains-3-dbf",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/47"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-plains-3-lyr",
@@ -1032,7 +1512,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-plains-3-lyr",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/48"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-plains-3-prj",
@@ -1050,7 +1540,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-plains-3-prj",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/49"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-plains-3-shp",
@@ -1068,7 +1568,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-plains-3-shp",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/50"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-plains-3-shp-xml",
@@ -1086,7 +1596,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-plains-3-shp-xml",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/51"
+          }
+        ]
+      }
     },
     {
       "id": "titan-geology-source-plains-3-shx",
@@ -1104,7 +1624,17 @@
       "redistribution": "Original source; prepared raster is derived from these unit polygons.",
       "consumers": [
         "geology-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-titan-geology-source-plains-3-shx",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/52"
+          }
+        ]
+      }
     },
     {
       "id": "titan-global-geomorphology-grid",
@@ -1138,7 +1668,17 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 2575000
       },
-      "coverage": "Interpreted global geology; holes and unit conflicts withheld. This is not a direct-observation coverage map."
+      "coverage": "Interpreted global geology; holes and unit conflicts withheld. This is not a direct-observation coverage map.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-17632-f6jrtyfp66-2",
+            "role": "method",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/53"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -1201,7 +1741,11 @@
       "path": "content/object.json",
       "expectedBytes": 14398,
       "expectedSha256": "f37f24e3d98d94c6fd18496b7bbd168a13a4ae5ca8344a607180c24b3dfad287",
-      "purpose": "Authored preparation, shared source licensing or editorial content."
+      "purpose": "Authored preparation, shared source licensing or editorial content.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "radar/MIBEF00N090_T126S00_V01.LBL",

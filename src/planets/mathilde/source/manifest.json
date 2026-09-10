@@ -1,5 +1,5 @@
 {
-  "schema": "cssmathilde-authoritative-sources@1",
+  "schema": "cssmathilde-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/mathilde/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "mathilde-visualization-shape",
@@ -48,6 +58,16 @@
             "spacecraftId": "near-shoemaker",
             "missionId": "near-shoemaker",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/253mathilde.tab"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mathilde-mathilde-visualization-shape",
+            "role": "material",
+            "evidence": "src/planets/mathilde/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
       }
@@ -83,6 +103,16 @@
             "spacecraftId": "near-shoemaker",
             "missionId": "near-shoemaker",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathilde.tab"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mathilde-mathilde-observed-shape",
+            "role": "material",
+            "evidence": "src/planets/mathilde/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
           }
         ]
       }
@@ -125,6 +155,16 @@
             "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/253mathilde/matcyl1.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mathilde-mathilde-normal",
+            "role": "material",
+            "evidence": "src/planets/mathilde/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
       }
     },
     {
@@ -142,7 +182,17 @@
         "presentation/LICENSE.INTER-OFL"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/mathilde/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -178,7 +228,11 @@
       "path": "content/object.json",
       "purpose": "Pinned source label, survey evidence or authored package input.",
       "expectedBytes": 10219,
-      "expectedSha256": "ba9e7d83d9c64f66293d66b313d91da0184c346a1b1876c9b0538fb997ad4642"
+      "expectedSha256": "ba9e7d83d9c64f66293d66b313d91da0184c346a1b1876c9b0538fb997ad4642",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "maps/253mathm.fit",

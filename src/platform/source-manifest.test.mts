@@ -115,7 +115,7 @@ function sourceManifest(files: Record<string, Buffer>, overrides: Partial<Record
   const generatedBytes = files["generated/output.txt"] ?? Buffer.from("generated");
   const documentBytes = files["docs/NOTICE.md"] ?? Buffer.from("notice");
   return {
-    schema: "cssfixture-authoritative-sources@1",
+    schema: "cssfixture-authoritative-sources@2",
     inputs: [{
       id: "source",
       path: "input/source.txt",
@@ -126,7 +126,7 @@ function sourceManifest(files: Record<string, Buffer>, overrides: Partial<Record
       license: "Fixture license",
       acquisition: "Fixture acquisition",
       redistribution: "Fixture redistribution",
-      consumers: ["fixture"],
+      sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, consumers: ["fixture"],
       ...overrides.input,
     }],
     generatedIntermediates: [{

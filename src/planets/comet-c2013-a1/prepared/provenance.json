@@ -1,14 +1,14 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "comet-c2013-a1",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7d0a40362e5d98fb3158180acac5c5a0ba06610e215f5da7744688151f1f6d8e"
+    "sha256": "a210105f10a5ab088d6cdf7ba4a724a05b968306094265e83a89a790022071b0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -273,6 +273,16 @@
       ],
       "acquisition": "Exported by the pinned original Celestia SphereMesh and noise code; see tools/objects/celestia-comets/native/.",
       "redistribution": "Preserve GPL license, source code, native export recipe, and illustrative status.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "celestia-comet-catalog-1993a082",
+            "role": "method",
+            "evidence": "src/planets/comet-c2013-a1/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "494baae429b711b258eedcda3c13d1fb98b8880d45861db62f811953e1315e6a",
       "bytes": 439176,
       "dependencies": [],
@@ -283,6 +293,10 @@
     {
       "path": "content/object.json",
       "purpose": "Source evidence or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

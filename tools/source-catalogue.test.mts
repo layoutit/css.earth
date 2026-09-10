@@ -1,0 +1,66 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { readFile } from 'node:fs/promises';
+import { OBJECTS } from '../site/objects.mts';
+import { canonicalSourceJson, sourceSha256, sourceInventory } from './source-catalogue-inputs.mts';
+import { sourceObject, sourceArray, sourceText, parseSourceCatalog, sourceResolver } from '../src/platform/source-catalog.mts';
+import { parsePreparedSources } from '../src/platform/prepared-sources.mts';
+import { parsePreparedExploration } from '../src/platform/prepared-exploration.mts';
+import { compileSourceUsage, parseSourceUsage, sourceDatasetViews } from '../src/platform/source-usage.mts';
+import { validateObjectProvenance } from '../src/platform/object-provenance.mts';
+import { prepareSpacecraft } from './prepare-spacecraft.mts';
+const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(path,'utf8'));
+const fixture = sourceObject(await read('tests/fixtures/sources/migration.json'));
+const prepared = parsePreparedSources(await read('site/prepared-sources.json'));
+const exploration = parsePreparedExploration(await read('site/prepared-spacecraft.json'),prepared.sources);
+const objectInput = async (id: string) => {
+  const object = OBJECTS.find(object => object.id === id)!;
+  const page = sourceObject(await read(`src/planets/${id}/prepared/page.json`)), controls = sourceObject(page.controls);
+  const lenses = controls.lenses === null ? [] : sourceArray(sourceObject(controls.lenses).controls, raw => {
+    const lens=sourceObject(raw);return {id:sourceText(lens.id),label:sourceText(lens.label)};
+  });
+  return {id,name:object.name,route:object.route,controls:lenses,provenance:validateObjectProvenance(await read(`src/planets/${id}/prepared/provenance.json`))};
+};
+test('source uses conserve all product dependencies, include models, and never convert metadata into observations', async () => {
+  const objects = await Promise.all(OBJECTS.map(object=>objectInput(object.id)));
+  const metadata=prepared.usage.edges.filter(edge=>edge.consumerKind!=='object-product');
+  assert.deepEqual(compileSourceUsage(objects,prepared.sources,metadata),prepared.usage);
+  assert.equal(metadata.filter(edge=>edge.kind==='shared-context').length,4);
+  const artworkCount = (await Promise.all(['render','emblem'].map(async kind => sourceArray(sourceObject(await read(`site/source/spacecraft/${kind}-library.json`)).entries,sourceObject).length))).reduce((a,b)=>a+b,0);
+  assert.equal(metadata.filter(edge=>edge.kind==='artwork').length,artworkCount);
+  assert.ok(metadata.every(edge=>!edge.objectId && !edge.lensIds.length));
+  assert.equal(prepared.usage.bySource['eso-eso0932a'],undefined,'unused retained panorama creates no active use');
+  assert.equal(prepared.usage.bySource['hyg-v41'],undefined,'retired HYG release is not current sky');
+  assert.ok(prepared.usage.bySource['hyg-v44'].length===1);
+  assert.ok(prepared.usage.edges.some(edge=>edge.objectId==='adrastea' && edge.kind==='method' && edge.lensIds.length));
+  assert.ok(prepared.usage.edges.some(edge=>edge.objectId==='mercury' && edge.lensIds.includes('interior')));
+  const sourceIds=['bdr','enhanced','topography'].map(term => prepared.inventory.find(row=>row.ownerPath==='src/planets/mercury/source/manifest.json' && row.localId.includes(term) && row.binding.kind==='catalogued')!.binding);
+  assert.equal(new Set(sourceIds.map(binding=>canonicalSourceJson(binding))).size,3);
+  for (const source of prepared.catalog.records) assert.equal(new Set(sourceDatasetViews(prepared.usage,source.id).map(view=>view.href)).size,sourceDatasetViews(prepared.usage,source.id).length);
+});
+test('new unresolved inputs, unknown bindings, stale lenses and inconsistent usage indexes fail', async () => {
+  const path='src/planets/earth/source/manifest.json', manifest=sourceObject(await read(path));
+  const input=sourceArray(manifest.inputs,sourceObject).find(row=>sourceObject(row.sourceBinding).kind==='unresolved')!;
+  input.expectedSha256='a'.repeat(64);
+  assert.throws(()=>sourceInventory(manifest,path,prepared.sources,new Set(),fixture),/Unreviewed unresolved/);
+  const mercury=await objectInput('mercury');
+  assert.throws(()=>compileSourceUsage([{...mercury,controls:[]}],prepared.sources),/Unknown source dataset/);
+  assert.throws(()=>compileSourceUsage([mercury],{}),/Unknown canonical source/);
+  const graph=structuredClone(prepared.usage); Object.assign(graph.bySource,{invented:[0]});
+  assert.throws(()=>parseSourceUsage(graph,prepared.sources),/Inconsistent/);
+  const invalid=structuredClone(prepared.usage);Object.assign(invalid.edges.find(edge=>edge.kind==='shared-context')!,{objectId:'earth'});
+  assert.throws(()=>parseSourceUsage(invalid,prepared.sources),/Metadata citation/);
+});
+test('both catalogues prepare deterministically from the same input closure before publication', async () => {
+  const result=await prepareSpacecraft({publish:false});
+  for (const output of result.outputs) assert.equal(output.text,await readFile(output.path,'utf8'),output.path);
+  assert.equal(result.prepared.sourceCatalogSha256,result.preparedSources.catalogSha256);
+  assert.deepEqual(result.prepared.closure,result.preparedSources.closure);
+  const bad=structuredClone(await read('site/prepared-sources.json'));sourceObject(bad).catalogSha256='0'.repeat(64);
+  assert.throws(()=>parsePreparedSources(bad),/closure mismatch/);
+  const mercury=await objectInput('mercury');
+  const corrupted=structuredClone(mercury.provenance);Object.assign(corrupted.sources.find(source=>source.sourceBinding?.kind==='catalogued')!.sourceBinding,{references:[{catalogueId:'missing',role:'material',evidence:'Bad binding'}]});
+  const before=await Promise.all(result.outputs.map(output=>readFile(output.path,'utf8')));
+  await assert.rejects(prepareSpacecraft({provenance:new Map([['mercury',corrupted]])}),/Unknown canonical source/);
+  assert.deepEqual(await Promise.all(result.outputs.map(output=>readFile(output.path,'utf8'))),before);
+});

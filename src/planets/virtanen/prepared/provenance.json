@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "virtanen",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cc107cd03df3a357b937495721ea594c884681693c5316bef79cb94db762e3ec"
+    "sha256": "68f3c676109729c8cb4ab2bf4e0fadf5fb24f8a71d2a808fb856f3a142c480fc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -339,6 +339,16 @@
         "referenceRadiusMeters": 4631.5
       },
       "coverage": "Published convex light-curve model 1175. Approximate scale from a thermal diameter of 9.263 ± 0.098 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects. The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-4266",
+            "role": "material",
+            "evidence": "src/planets/virtanen/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "1f1b9833f39a6e6c348f2023554a2defac86b47531a8c3a0ac64b4b0bf562983",
       "bytes": 81898,
       "dependencies": [],
@@ -358,6 +368,10 @@
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "sha256": "4f0f3b6ddf5422bf275ffb447dce343399bdb31b47ef4940cf9b242d7a7f0020",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

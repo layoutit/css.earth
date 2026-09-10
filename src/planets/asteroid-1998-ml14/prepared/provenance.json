@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "asteroid-1998-ml14",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "da6d73e2e0174e06618b94c0f22e90116002efb7377e67f94b18e800be7156c9"
+    "sha256": "01a3ec49c1c40937d337f23d7d9893dc6acdf5c78a8ab8af115d925d9b15e505"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -331,6 +331,16 @@
         "referenceRadiusMeters": 500
       },
       "coverage": "The shared grid marks unavailable imagery over the historical 1998 radar reconstruction published in 2001. Its modeling period was later superseded, and no pole solution is attached to this archived mesh. Fixed arbitrary display axes and optional Shadows are illustrative, not a current rotational attitude.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-asteroid-1998-ml14-asteroid-1998-ml14-shape",
+            "role": "material",
+            "evidence": "src/planets/asteroid-1998-ml14/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "8166bb5a7f6d8baa5cc82cec22304c011202f1254a403be1ff19eba0abfe6abe",
       "bytes": 29003,
       "dependencies": [],
@@ -349,6 +359,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

@@ -1,5 +1,5 @@
 {
-  "schema": "cssrhea-authoritative-sources@1",
+  "schema": "cssrhea-authoritative-sources@2",
   "inputs": [
     {
       "credit": "NASA/JPL/Space Science Institute",
@@ -53,6 +53,16 @@
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rhea-cassini-voyager-2012-rhea",
+            "role": "material",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
       }
     },
     {
@@ -91,6 +101,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18438.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rhea-cassini-iss-2014-rhea-color",
+            "role": "material",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
       }
@@ -135,6 +155,16 @@
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_radius_g.tif"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rhea-cassini-spc-2025-rhea",
+            "role": "material",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
       }
     },
     {
@@ -152,7 +182,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -169,7 +209,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
@@ -189,7 +239,17 @@
       "units": "Native Cartesian coordinates in kilometres, +X at 0° longitude and +Z north; no height exaggeration.",
       "coverage": "Global Q128 SPC shape, 98,306 vertices and 196,608 faces; source mesh is simplified under a measured preparation error budget. Native image support and accuracy vary.",
       "expectedBytes": 17694840,
-      "expectedSha256": "e4b25f158adf4b430a145946996f4dbde85f50ca0d3c236084c956733e42beb2"
+      "expectedSha256": "e4b25f158adf4b430a145946996f4dbde85f50ca0d3c236084c956733e42beb2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rhea-cassini-spc-2025-rhea-q128-shape",
+            "role": "material",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
@@ -214,7 +274,17 @@
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
       "expectedBytes": 9881887,
-      "expectedSha256": "f28f37b666d7605a179ee82d8d138cc829bb57a46add484ed423c8fc9cded123"
+      "expectedSha256": "f28f37b666d7605a179ee82d8d138cc829bb57a46add484ed423c8fc9cded123",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rhea-cassini-spc-2025-rhea-rhea-albedo-g",
+            "role": "material",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
     },
     {
       "id": "rhea-vims-source-information-file-pdf",
@@ -232,7 +302,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rhea-rhea-vims-source-information-file-pdf",
+            "role": "method",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
     },
     {
       "id": "rhea-vims-source-information-file-xml",
@@ -250,7 +330,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rhea-rhea-vims-source-information-file-xml",
+            "role": "material",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     },
     {
       "id": "rhea-vims-source-vims-wavelengths-ir-tab",
@@ -268,7 +358,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rhea-rhea-vims-source-vims-wavelengths-ir-tab",
+            "role": "material",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
     },
     {
       "id": "rhea-vims-source-vims-wavelengths-ir-xml",
@@ -286,7 +386,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rhea-rhea-vims-source-vims-wavelengths-ir-xml",
+            "role": "material",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
     },
     {
       "id": "rhea-vims-source-rhea-notnorm-pc-modified-2-xml",
@@ -304,7 +414,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rhea-rhea-vims-source-rhea-notnorm-pc-modified-2-xml",
+            "role": "material",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "rhea-vims-source-rhea-notnorm-pc-modified-2-hdr",
@@ -322,7 +442,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rhea-rhea-vims-source-rhea-notnorm-pc-modified-2-hdr",
+            "role": "material",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
     },
     {
       "id": "rhea-vims-source-rhea-notnorm-pc-modified-2-img",
@@ -340,7 +470,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rhea-rhea-vims-source-rhea-notnorm-pc-modified-2-img",
+            "role": "material",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
     },
     {
       "id": "rhea-vims-source-rhea-phase-function-parameters-tab",
@@ -358,7 +498,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rhea-rhea-vims-source-rhea-phase-function-parameters-tab",
+            "role": "material",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
     },
     {
       "id": "rhea-vims-source-rhea-phase-function-parameters-xml",
@@ -376,7 +526,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rhea-rhea-vims-source-rhea-phase-function-parameters-xml",
+            "role": "material",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      }
     },
     {
       "id": "rhea-vims-source-rhea-vims-cubes-list-tab",
@@ -394,7 +554,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rhea-rhea-vims-source-rhea-vims-cubes-list-tab",
+            "role": "material",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+          }
+        ]
+      }
     },
     {
       "id": "rhea-vims-source-rhea-vims-cubes-list-xml",
@@ -412,7 +582,17 @@
       "redistribution": "Preserve PDS labels, authors and calibration description.",
       "consumers": [
         "vims-source"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rhea-rhea-vims-source-rhea-vims-cubes-list-xml",
+            "role": "material",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+          }
+        ]
+      }
     },
     {
       "id": "rhea-vims-infrared",
@@ -449,7 +629,17 @@
       "coverage": "Guide-based one-degree global bins; original missing spectra retained. Absolute subpixel registration unresolved.",
       "lensId": "infrared",
       "label": "Infrared",
-      "falseColor": true
+      "falseColor": true,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rhea-rhea-vims-infrared",
+            "role": "material",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
+      }
     },
     {
       "id": "rhea-vims-ice-absorption",
@@ -483,7 +673,17 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 764000
       },
-      "coverage": "Guide-based one-degree global bins; original missing spectra retained. Absolute subpixel registration unresolved."
+      "coverage": "Guide-based one-degree global bins; original missing spectra retained. Absolute subpixel registration unresolved.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rhea-rhea-vims-ice-absorption",
+            "role": "material",
+            "evidence": "src/planets/rhea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+          }
+        ]
+      }
     }
   ],
   "documents": [
@@ -551,7 +751,11 @@
       "path": "content/object.json",
       "expectedBytes": 14797,
       "expectedSha256": "6c12a4d0db5673c3e19296f78675617625d26d0cf1808e60b37a6d1927916c80",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "purpose": "Source metadata, license evidence, or authored preparation and content.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "presentation/title-mark.json",

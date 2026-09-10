@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "ino",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9ef18ffe637096688d4c6ebf62e1908bf6fd9a2cb42e2bcfb549dd40f063727c"
+    "sha256": "b4b62b9e4296d9cba03b9653ab243372a95075f11293ea966838d3fa9a39f36a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 72000
       },
       "coverage": "ADAM nonconvex reconstruction constrained by VLT/SPHERE images. Selected archive volume-equivalent diameter: 144 ±3 km. The grid marks unavailable imagery; rotational phase is illustrative. The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select Vernazza et al. (2021) ADAM model 5913 constrained by VLT/SPHERE images. DAMIT D144 ±3 km differs from the publication summary145 ±3 km because the summary can average ADAM/MPCD outputs when coverage exceeds80%; the exact selected mesh has raw volume diameter144.329. Keep the archive ADAM model separate from MPCD refinement. No albedo map is inferred from deconvolved disk images.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-63475",
+            "role": "material",
+            "evidence": "src/planets/ino/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "b6b64c30f487bfb7f146122cf99b49143693e622f2f182bcf5d80b44adc73564",
       "bytes": 142972,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

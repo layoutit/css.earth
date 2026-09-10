@@ -1,5 +1,5 @@
 {
-  "schema": "cssvelleda-authoritative-sources@1",
+  "schema": "cssvelleda-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/velleda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "velleda-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 43.94 km effective diameter (catalog ±0.49 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš2021 TableA.2 reports249 ASAS-SN observations and both poles(120,46)/(300,32). The selected first archive solution is a reproducible representative; no source preference or unique attitude is claimed.",
       "expectedBytes": 82627,
-      "expectedSha256": "78ec4654953bce428c657665cc21c70e933184fdeb4952e7243df70d97be698e"
+      "expectedSha256": "78ec4654953bce428c657665cc21c70e933184fdeb4952e7243df70d97be698e",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-65159",
+            "role": "material",
+            "evidence": "src/planets/velleda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/velleda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -94,7 +124,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 9850,
-      "expectedSha256": "87ff365448e6a8c40a97203d9603b49ae4555a33e84f1931330783eb26b1b90d"
+      "expectedSha256": "87ff365448e6a8c40a97203d9603b49ae4555a33e84f1931330783eb26b1b90d",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

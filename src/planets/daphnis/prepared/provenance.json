@@ -1,14 +1,14 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "daphnis",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bcebada831341209e2068bf0b0ff3d4a35944f8238f7052cdadc05d33f0cfee9"
+    "sha256": "7940c53f9a0f3a73844941a4ad9e57d14600aa4b681d0eaed7a439b75b0c378e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -402,6 +402,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-daphnis-thomas-2018-shape",
+            "role": "material",
+            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      },
       "sha256": "8fc85246848ad05de7c68b0686f9fde7d3c23529d02db9c1e7287864b74c34be",
       "bytes": 2019600,
       "dependencies": [],
@@ -446,6 +456,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2064-data-1656971575-1657039444-n1656997950-1-calib",
+            "role": "material",
+            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "d13c92192552c1c7a7cc4146b6767da7b7cc3dd1b753e80438670b08c1b16320",
       "bytes": 4202496,
       "dependencies": [],
@@ -480,6 +500,16 @@
             "spacecraftId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656997950_1_CALIB.LBL",
             "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2064-data-1656971575-1657039444-n1656997950-1-calib",
+            "role": "material",
+            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
       },
@@ -527,6 +557,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2064-data-1656971575-1657039444-n1656998640-1-calib",
+            "role": "material",
+            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "c8c1b35ac229a1b69b6767088298b1c412e7e6f9c28b762f1ccaf30a73a39eb0",
       "bytes": 4202496,
       "dependencies": [],
@@ -561,6 +601,16 @@
             "spacecraftId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656998640_1_CALIB.LBL",
             "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2064-data-1656971575-1657039444-n1656998640-1-calib",
+            "role": "material",
+            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
         ]
       },
@@ -608,6 +658,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2110-data-1863231911-1863269539-n1863267232-1-calib",
+            "role": "material",
+            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      },
       "sha256": "b026a3faac020e7829dd36c6b7e69f7e5cb17995961117bd3c9dbdc86c93d3ac",
       "bytes": 4202496,
       "dependencies": [],
@@ -645,6 +705,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2110-data-1863231911-1863269539-n1863267232-1-calib",
+            "role": "material",
+            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      },
       "sha256": "25e85a27af3d62e800738d7819cd5022dc21140bc6b215c74b3e27b54dae93cc",
       "bytes": 3865,
       "dependencies": [],
@@ -662,6 +732,10 @@
     {
       "path": "content/object.json",
       "purpose": "Authored source interpretation or preparation metadata.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

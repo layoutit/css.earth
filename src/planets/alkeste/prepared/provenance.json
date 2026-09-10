@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "alkeste",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8d5dcf942d24af29a6ecbede42bda67ee76a87b55fdec8ddf338973e5701cbbf"
+    "sha256": "dfa777dbb8e5f6bcb667c32503b64aa4f75dbf06cb71928ae9c520a7ee115d91"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 40695
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 81.39 km effective diameter (catalog ±0.93 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Ďurech2020 TableA.2 reports203 cyan plus122 orange ATLAS observations and two poles. The table marks period recovery E (ellipsoid search); that is not evidence of high shape accuracy. The archived convex mesh is retained only as a coarse inverse model.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-52179",
+            "role": "material",
+            "evidence": "src/planets/alkeste/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "6b1581ba2bde44e3dbd3c799e1e2bea6562f10dcfd5b83ee8d07481ae37f1ed6",
       "bytes": 45447,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

@@ -1,5 +1,5 @@
 {
-  "schema": "cssida-authoritative-sources@1",
+  "schema": "cssida-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "ida-shape",
@@ -50,6 +60,16 @@
             "spacecraftId": "galileo",
             "missionId": "galileo",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243ida.tab"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ida-ida-shape",
+            "role": "material",
+            "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
       }
@@ -89,6 +109,16 @@
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243idam.fit"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ida-ida-normal",
+            "role": "material",
+            "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
       }
     },
     {
@@ -106,7 +136,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "ida-stooke-registration",
@@ -123,7 +163,17 @@
         "registration-reference"
       ],
       "expectedBytes": 4375716,
-      "expectedSha256": "aedbdecc09a1f3cea1d7fa04baeceae646f69af48467502486c42176c91dc0ce"
+      "expectedSha256": "aedbdecc09a1f3cea1d7fa04baeceae646f69af48467502486c42176c91dc0ce",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ida-ida-stooke-registration",
+            "role": "material",
+            "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "ida-0202561278rcal_gre-fit",
@@ -141,7 +191,17 @@
       "width": 800,
       "height": 800,
       "lensId": "calibrated",
-      "label": "Calibrated image"
+      "label": "Calibrated image",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ida-ida-0202561278rcal-gre-fit",
+            "role": "material",
+            "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     },
     {
       "id": "ida-0202561278rcal_gre-xml",
@@ -155,7 +215,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 12912,
-      "expectedSha256": "16cf058e26018e77098c2c3aca9ee92a25a8eeb029eba04c942051773a25bfed"
+      "expectedSha256": "16cf058e26018e77098c2c3aca9ee92a25a8eeb029eba04c942051773a25bfed",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ida-ida-0202561278rcal-gre-xml",
+            "role": "material",
+            "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
     },
     {
       "id": "ida-i1278-fit",
@@ -169,7 +239,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 645120,
-      "expectedSha256": "f80c9991b7ed9f81ebefddf71a0a37f53ee499b1658ba1bd909895f8d393bb16"
+      "expectedSha256": "f80c9991b7ed9f81ebefddf71a0a37f53ee499b1658ba1bd909895f8d393bb16",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ida-ida-i1278-fit",
+            "role": "material",
+            "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
     },
     {
       "id": "ida-i1278-lbl",
@@ -183,7 +263,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 10480,
-      "expectedSha256": "35ea4cf95507fdf3d9c5de4f245c9494c69e6753bbb5168933993d6df3a51750"
+      "expectedSha256": "35ea4cf95507fdf3d9c5de4f245c9494c69e6753bbb5168933993d6df3a51750",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ida-ida-i1278-lbl",
+            "role": "material",
+            "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     },
     {
       "id": "ida-idabad-tab",
@@ -197,7 +287,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 23270,
-      "expectedSha256": "bb373b59c8fd72325d61167cf7af67f1e69d3dea7c8b8919ee9ba1b07cb7cb47"
+      "expectedSha256": "bb373b59c8fd72325d61167cf7af67f1e69d3dea7c8b8919ee9ba1b07cb7cb47",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ida-ida-idabad-tab",
+            "role": "material",
+            "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
     },
     {
       "id": "ida-idabad-lbl",
@@ -211,7 +311,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 9760,
-      "expectedSha256": "f2ff4a49703b6e1d9b8be59f866f149d5b5f9a926e239ee3a546215eb208f441"
+      "expectedSha256": "f2ff4a49703b6e1d9b8be59f866f149d5b5f9a926e239ee3a546215eb208f441",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ida-ida-idabad-lbl",
+            "role": "material",
+            "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
     },
     {
       "id": "ida-gll36001-ti",
@@ -225,7 +335,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 9964,
-      "expectedSha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652"
+      "expectedSha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ida-ida-gll36001-ti",
+            "role": "material",
+            "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "ida-camera-catalog-tab",
@@ -239,7 +359,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 4320,
-      "expectedSha256": "af8478f44f435e9e38c2cf82de05a910082aef34f730c503a9eb2236b4dc413a"
+      "expectedSha256": "af8478f44f435e9e38c2cf82de05a910082aef34f730c503a9eb2236b4dc413a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ida-ida-camera-catalog-tab",
+            "role": "material",
+            "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
     },
     {
       "id": "ida-camera-catalog-xml",
@@ -253,7 +383,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 8830,
-      "expectedSha256": "7b95b9bb6272cce8d831ef8ac35f94d5dc2cd0413bba07de0bfda9d28587ba13"
+      "expectedSha256": "7b95b9bb6272cce8d831ef8ac35f94d5dc2cd0413bba07de0bfda9d28587ba13",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ida-ida-camera-catalog-xml",
+            "role": "material",
+            "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
     },
     {
       "id": "ida-0202560500rcal_gre-fit",
@@ -269,7 +409,17 @@
       "expectedBytes": 2563200,
       "expectedSha256": "1ff454dd43d90c53bb0523dd258f7870e0d1f9cf2d5de41b6002fa6f2bd59886",
       "width": 800,
-      "height": 800
+      "height": 800,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ida-ida-0202560500rcal-gre-fit",
+            "role": "material",
+            "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
     },
     {
       "id": "ida-0202560500rcal_gre-xml",
@@ -283,7 +433,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 12909,
-      "expectedSha256": "9f768a86363250f11a288cf587e2813df7b8df7273d32b6bbc60196caaa461df"
+      "expectedSha256": "9f768a86363250f11a288cf587e2813df7b8df7273d32b6bbc60196caaa461df",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ida-ida-0202560500rcal-gre-xml",
+            "role": "material",
+            "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      }
     },
     {
       "id": "ida-i0500-fit",
@@ -297,7 +457,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 645120,
-      "expectedSha256": "b8c6440f6e2b96ab139e9093ed2a88b6a7e41d1ff3b531405b5f2880e942d4a1"
+      "expectedSha256": "b8c6440f6e2b96ab139e9093ed2a88b6a7e41d1ff3b531405b5f2880e942d4a1",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ida-ida-i0500-fit",
+            "role": "material",
+            "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+          }
+        ]
+      }
     },
     {
       "id": "ida-i0500-lbl",
@@ -311,7 +481,17 @@
         "galileo-calibrated"
       ],
       "expectedBytes": 10480,
-      "expectedSha256": "2899b9d445d1947dc0ab1b852cf80a32d0198e6c59531ea8c885e17a4799a82c"
+      "expectedSha256": "2899b9d445d1947dc0ab1b852cf80a32d0198e6c59531ea8c885e17a4799a82c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ida-ida-i0500-lbl",
+            "role": "material",
+            "evidence": "src/planets/ida/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -347,7 +527,11 @@
       "path": "content/object.json",
       "purpose": "Pinned source label, source documentation or authored package input.",
       "expectedBytes": 8544,
-      "expectedSha256": "ed181ef75b5ae936b52a0142964ca7c7647f6d150f4a419ca6fad0c6c5859e7a"
+      "expectedSha256": "ed181ef75b5ae936b52a0142964ca7c7647f6d150f4a419ca6fad0c6c5859e7a",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

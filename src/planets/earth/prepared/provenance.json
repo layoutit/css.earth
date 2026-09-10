@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "earth",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bd42c8943697a61ab922cb82f1da71744803ab78ed519fb2839a1f138bb61d16"
+    "sha256": "ad2201544cae355c3f56cf235983a551ed0dbcaf13931320ea31bff453148c67"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1208,6 +1208,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-nasa-blue-marble-july",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      },
       "sha256": "dea8b4dc8a4f93f5f8bce0c8c85a508a178e7901e9ed8e6bf86e6ce7ef6d61e2",
       "bytes": 21125326,
       "dependencies": [],
@@ -1238,6 +1248,16 @@
       ],
       "acquisition": "checked Blue Marble Clouds global TIFF",
       "redistribution": "NASA image with credit and no endorsement claim",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-nasa-blue-marble-clouds",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      },
       "sha256": "d137775d8966ab8d443fd5126dc6e7ad72072bc1ed50555c5818d221735daf0f",
       "bytes": 35870468,
       "dependencies": [],
@@ -1268,6 +1288,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-elevation",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/32"
+          }
+        ]
+      },
       "sha256": "ce96440870f7e94a0506dac9c0e7decf160e133831432caee60f0cbefc5028d2",
       "bytes": 2045075,
       "dependencies": [],
@@ -1296,6 +1326,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-metadata",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/52"
+          }
+        ]
+      },
       "sha256": "5aa6408d05f1c5847058b91a2f71ac6f654d12bca07bbefb3c513ef69a3ac174",
       "bytes": 4880,
       "dependencies": [],
@@ -1323,6 +1363,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-01",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/33"
+          }
+        ]
+      },
       "sha256": "af6343bfe558feade9782bf84d93c8e7ed8bc911ef2fe28a7ea2d9cc6dc1433c",
       "bytes": 3291078,
       "dependencies": [],
@@ -1351,6 +1401,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-02",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/34"
+          }
+        ]
+      },
       "sha256": "b340d57f622fa36f59c88178e75b1dc62762d5c6c91073775afdbd6ad1bd3735",
       "bytes": 3635991,
       "dependencies": [],
@@ -1379,6 +1439,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-03",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/35"
+          }
+        ]
+      },
       "sha256": "7ec4e202995fa4f7517c92cfaa1d4f1fd24a202d812c46138b07a0b77c240f71",
       "bytes": 3761066,
       "dependencies": [],
@@ -1407,6 +1477,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-04",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/36"
+          }
+        ]
+      },
       "sha256": "7439d8d3702937040f8975d9df00815de66bb916f2f02e696bedea401ae10633",
       "bytes": 3875732,
       "dependencies": [],
@@ -1435,6 +1515,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-05",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/37"
+          }
+        ]
+      },
       "sha256": "22f159007cfcf694b88a7069b0ba52d0f8993a6076b6d4b2358aa1539868db30",
       "bytes": 3959519,
       "dependencies": [],
@@ -1463,6 +1553,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-06",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/38"
+          }
+        ]
+      },
       "sha256": "adf191d03ff1979207e8be77c994ba2df7c5e4f2b5278143ca0c625fc2c0adb1",
       "bytes": 4098728,
       "dependencies": [],
@@ -1491,6 +1591,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-07",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/39"
+          }
+        ]
+      },
       "sha256": "38a9ab5b65a6d7f0b1a2228cb6a6a3ba1d573049009b20240f84cb118ab15ae9",
       "bytes": 4118826,
       "dependencies": [],
@@ -1519,6 +1629,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-08",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/40"
+          }
+        ]
+      },
       "sha256": "a83f8a67b524c5fc5302ed7fb4a7d008b410c7dc9fc8d0c86438faefd8abdaef",
       "bytes": 4021765,
       "dependencies": [],
@@ -1547,6 +1667,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-09",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/41"
+          }
+        ]
+      },
       "sha256": "3f62c2aaeab8ee15b66f2014f44ccbfdc67a5adb06b71dee91e936c5376f9c40",
       "bytes": 3983376,
       "dependencies": [],
@@ -1575,6 +1705,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-10",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/42"
+          }
+        ]
+      },
       "sha256": "426544acdd9797e1b51c2cc0764a75b8b162908befb93c6da77cadf15b648015",
       "bytes": 4037856,
       "dependencies": [],
@@ -1603,6 +1743,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-11",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/43"
+          }
+        ]
+      },
       "sha256": "f422cce8de12d254175b3a6ce8433a0d21a0a85591b06f0460a397b7e9508441",
       "bytes": 4050768,
       "dependencies": [],
@@ -1631,6 +1781,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-12",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/44"
+          }
+        ]
+      },
       "sha256": "0da9842f6463cd0f5cf7e7bc82cff279c155e46190302ed9b906f768968eb81f",
       "bytes": 4237876,
       "dependencies": [],
@@ -1659,6 +1819,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-13",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/45"
+          }
+        ]
+      },
       "sha256": "74bce9b863f2fa88b06f25adcca51bf192d89b940f2973349e8f73294f958948",
       "bytes": 4033216,
       "dependencies": [],
@@ -1687,6 +1857,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-14",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/46"
+          }
+        ]
+      },
       "sha256": "389e187690513bfa6286c222e392f4c7d053ef9fc4ea7d6fb68cce63a5c976e0",
       "bytes": 1932517,
       "dependencies": [],
@@ -1715,6 +1895,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-15",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/47"
+          }
+        ]
+      },
       "sha256": "75ee477526af4ee4073fa687924756d3158dc119e09b0ea7ae8ec0abe6edae8b",
       "bytes": 1805120,
       "dependencies": [],
@@ -1743,6 +1933,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-16",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/48"
+          }
+        ]
+      },
       "sha256": "e7feed36ae4b67e8ef797df29d473690c9ce69fb426097cd2e6f4795e9023e4f",
       "bytes": 3543843,
       "dependencies": [],
@@ -1771,6 +1971,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-17",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/49"
+          }
+        ]
+      },
       "sha256": "ef93bb9cc2287914f05516da163ea7a505124628d2358cee50fed4a73501bdc9",
       "bytes": 3281192,
       "dependencies": [],
@@ -1799,6 +2009,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-18",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/50"
+          }
+        ]
+      },
       "sha256": "d63d360e180427ce132e8df74f3373ec45f20a9ac9e89da1c1e6f23af8ae18b7",
       "bytes": 1710509,
       "dependencies": [],
@@ -1827,6 +2047,16 @@
       ],
       "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-19",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/51"
+          }
+        ]
+      },
       "sha256": "7138d3b113a94a2eb77ba0c9f53eb9bc3eddf9b7669e389e38304ce4f80f16e4",
       "bytes": 1312150,
       "dependencies": [],
@@ -1856,6 +2086,16 @@
       ],
       "acquisition": "2025 VJ146A4.002 AllAngle_Composite_Snow_Free, public Float32 EPSG:4326 mosaic. Archive checked 2026-09-09; HTTP Last-Modified 2026-03-29. Native 15 arc-second cells, 75 N to 65 S. QA/count bands are not included by the mirror; -999.9 is missing and zero is valid thresholded background.",
       "redistribution": "NASA factual radiance with NASA Black Marble and Jurij Stare / lightpollutionmap.info attribution; no map screenshots or sky-brightness model reused.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-nasa-black-marble-2025-public-radiance",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/54"
+          }
+        ]
+      },
       "sha256": "c5a2778bb9438f92d06f61b02e387c11b425f68b3eba1e28fbb9860b8ec8d480",
       "bytes": 973526576,
       "dependencies": [],
@@ -1874,6 +2114,10 @@
       "path": "science/night-lights-2025/provenance.json",
       "purpose": "Actual 2025 public Black Marble archive identity, GeoTIFF metadata, native numerical anchors, display transfer and coverage/QA limitations.",
       "kind": "authored-document",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:science/night-lights-2025/provenance.json",
       "origin": "object:source/science/night-lights-2025/provenance.json",
       "title": "Actual 2025 public Black Marble archive identity, GeoTIFF metadata, native numerical anchors, display transfer and coverage/QA limitations.",
@@ -2011,6 +2255,12 @@
       "generator": "tools/objects/paged-ellipsoid/mur-imagery.mjs restore src/planets/earth/source/science",
       "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
       "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-mur-gibs-mosaic",
+        "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/generatedIntermediates/1",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      },
       "kind": "generated-intermediate",
       "title": "science/mur-gibs.png",
       "acquisition": "tools/objects/paged-ellipsoid/mur-imagery.mjs restore src/planets/earth/source/science",
@@ -2026,6 +2276,10 @@
       "path": "interior/earth-interior.json",
       "purpose": "Source-qualified schematic Earth interior presentation specification",
       "kind": "authored-document",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:interior/earth-interior.json",
       "origin": "object:source/interior/earth-interior.json",
       "title": "Source-qualified schematic Earth interior presentation specification",
@@ -2052,6 +2306,16 @@
       ],
       "acquisition": "Checked-in numeric subset of the SHA-256 pinned NetCDF. Recreate with tools/objects/paged-ellipsoid/extract-tomography.py; the upstream model pin and complete extraction recipe are in interior/tomography.json.",
       "redistribution": "Numeric scientific-model subset with author, paper and repository attribution; no source illustration is copied.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-glad-m35-vsv",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/53"
+          }
+        ]
+      },
       "sha256": "a38404997298e3dbee95035e7125d7cc09586fe32dbce0550012653f97042fcb",
       "bytes": 520307,
       "dependencies": [],
@@ -2062,6 +2326,10 @@
     {
       "path": "content/object.json",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -2085,6 +2353,12 @@
       "license": "United States government scientific model response",
       "acquisition": "expanded Earth configuration with the leading non-configuration warning removed and declared R=120 generator block appended",
       "redistribution": "checked text configuration with NASA attribution",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-earth-configuration",
+        "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      },
       "sha256": "f658cc3471595caddbe04ae5fbfde6523f3ef160ec0bd5ba3074635f3561834e",
       "bytes": 27346,
       "dependencies": [],
@@ -2130,6 +2404,12 @@
       "license": "United States government scientific model response",
       "acquisition": "checked response with only volatile synthesis-clock comments normalized",
       "redistribution": "checked numerical model response with NASA attribution",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-earth-spectrum",
+        "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      },
       "sha256": "0dab314d53880a46cf05f0a60dc535b386fa57ef5d980dceb20bbcc00a35f08a",
       "bytes": 6404,
       "dependencies": [

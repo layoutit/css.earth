@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "astraea",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2943a744f3d64cbf60842a203423c52f06200566da72153ebc570e78ccaa95cc"
+    "sha256": "2dc3b31ce7fd8a7f15bed802c0db5ee49b8631eecb69a033d26e49b6fa4a6b04"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -324,6 +324,16 @@
         "referenceRadiusMeters": 56000
       },
       "coverage": "Calibrated nonconvex ground-based reconstruction. The grid is an explicit no-imagery treatment; no small-scale surface detail is inferred.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-36",
+            "role": "material",
+            "evidence": "src/planets/astraea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "beece0aa943a3f6c77739c331a6beb4e52e2b23cac45a88327a9fc775dff72a0",
       "bytes": 32486,
       "dependencies": [],
@@ -342,6 +352,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

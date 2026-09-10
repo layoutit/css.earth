@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "ambrosia",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b8779d830eb087d674f1e39550d57ea91a0547c1faf533a08343062f40e6a182"
+    "sha256": "74fdcd5a764b13d28e5e8801a218a561d2022ee0d4f8d9bafd5123b8bcba919c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 18945
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 37.89 km effective diameter (catalog ±0.65 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative. Hanuš2013 table reports 18 dense lightcurves from four apparitions plus 256 sparse measurements. Both mirror poles remain; model 548 is the representative first archived solution. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-2160",
+            "role": "material",
+            "evidence": "src/planets/ambrosia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "f448756b26da376283009caf5049d40dc1054ed2370c003ee80fe2cf831ecf49",
       "bytes": 81088,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

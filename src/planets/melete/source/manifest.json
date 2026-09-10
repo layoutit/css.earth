@@ -1,5 +1,5 @@
 {
-  "schema": "cssmelete-authoritative-sources@1",
+  "schema": "cssmelete-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/melete/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "melete-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Nonconvex model constrained by resolved imaging, 116 ± 5 km volume-equivalent diameter in the selected archive record. An alternative pole solution remains in the archive. Grid marks unavailable imagery; rotational phase is illustrative. The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred.",
       "expectedBytes": 32486,
-      "expectedSha256": "45131587f308d1c0ec3565e7bd74c6bb7b0875bca028d847bc2a57c8a338648e"
+      "expectedSha256": "45131587f308d1c0ec3565e7bd74c6bb7b0875bca028d847bc2a57c8a338648e",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-4061",
+            "role": "material",
+            "evidence": "src/planets/melete/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/melete/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -94,7 +124,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 9395,
-      "expectedSha256": "82b0b4d02d201c534eec29cd4ab0309aa4a398a92df57645b346d6ad99704616"
+      "expectedSha256": "82b0b4d02d201c534eec29cd4ab0309aa4a398a92df57645b346d6ad99704616",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

@@ -1,5 +1,5 @@
 {
-  "schema": "csspolydeuces-authoritative-sources@1",
+  "schema": "csspolydeuces-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/polydeuces/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -33,7 +43,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/polydeuces/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "measured-ellipsoid",
@@ -56,6 +76,16 @@
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 1525.973578806757
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1912-09192",
+            "role": "method",
+            "evidence": "src/planets/polydeuces/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
       }
     },
     {
@@ -94,6 +124,16 @@
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.IMG"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2023-data-1526963400-1527153972-n1527002576-1-calib",
+            "role": "material",
+            "evidence": "src/planets/polydeuces/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
       }
     },
     {
@@ -127,6 +167,16 @@
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.LBL"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2023-data-1526963400-1527153972-n1527002576-1-calib",
+            "role": "material",
+            "evidence": "src/planets/polydeuces/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
       }
     }
   ],
@@ -135,7 +185,11 @@
       "path": "content/object.json",
       "expectedBytes": 3659,
       "expectedSha256": "f1d7ece683cb3cfccf8b51cf05521e4bf4cf955049f09fb395f60161b83534bb",
-      "purpose": "Scientific source and authored preparation evidence."
+      "purpose": "Scientific source and authored preparation evidence.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "material/neutral.png",

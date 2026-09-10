@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "mars",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c8ac2a146613a1322fa1e2205fc30c2b881b88e5ef5bed82903e8e1a0acb8745"
+    "sha256": "0762c820338647996515a3046f444a937092b03538888ff3135b604f23692065"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -636,6 +636,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-usgs-viking-mdim21-color",
+            "role": "material",
+            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      },
       "sha256": "fdfcd335559c3dc67052b7e8a9565d850e336ac0d1f3ea7f5eb7826ffb44ecb2",
       "bytes": 36708552,
       "dependencies": [],
@@ -671,6 +681,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-usgs-mola-pseudocolor",
+            "role": "material",
+            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      },
       "sha256": "25a0b3ade0d01fc28bb04e452ed8780f023d9ac76092d60d47be81b7f6af9e2d",
       "bytes": 18716720,
       "dependencies": [],
@@ -698,6 +718,10 @@
       "path": "preparation/ellipsoid.json",
       "purpose": "Authored source-informed capability preparation recipe.",
       "kind": "authored-document",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:preparation/ellipsoid.json",
       "origin": "object:source/preparation/ellipsoid.json",
       "title": "Authored source-informed capability preparation recipe.",
@@ -715,6 +739,10 @@
       "path": "preparation/atmosphere.json",
       "purpose": "Authored source-informed capability preparation recipe.",
       "kind": "authored-document",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:preparation/atmosphere.json",
       "origin": "object:source/preparation/atmosphere.json",
       "title": "Authored source-informed capability preparation recipe.",
@@ -749,6 +777,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-usgs-themis-ir-day",
+            "role": "material",
+            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      },
       "sha256": "e31b41a6e44547f882b86ca1c8c12efe80a1c4b320d06a7aee41304eb74387d1",
       "bytes": 7267744,
       "dependencies": [],
@@ -775,6 +813,10 @@
     {
       "path": "content/object.json",
       "purpose": "Authored source-informed capability preparation recipe.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -798,6 +840,12 @@
       "license": "United States government generated data",
       "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) expands a pinned Mars ephemeris seed",
       "redistribution": "checked generated source snapshot",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-mars-configuration",
+        "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      },
       "sha256": "da649c1b783a9390697db2f49a25667b518b5c923ddb7ac426037c97c08f8dde",
       "bytes": 11093,
       "dependencies": [],
@@ -829,6 +877,12 @@
       "license": "United States government generated data",
       "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) requests I/F at R 240 from the pinned configuration",
       "redistribution": "checked generated source snapshot",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-mars-reflectance",
+        "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      },
       "sha256": "1f6c5f4ccecbf41ab44a27e9eeab07d99170697cb21ffda2137cef393290e3d4",
       "bytes": 11908,
       "dependencies": [

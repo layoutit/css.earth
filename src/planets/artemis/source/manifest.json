@@ -1,5 +1,5 @@
 {
-  "schema": "cssartemis-authoritative-sources@1",
+  "schema": "cssartemis-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/artemis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "artemis-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 123.53 km effective diameter (catalog ±1.5 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš2021 TableA.2 reports 405 ASAS-SN V-band detections and this single archived pole. It is a coarse photometric inversion, not resolved imagery.",
       "expectedBytes": 82627,
-      "expectedSha256": "94fc92d360a1f3a2717868f1d57a9198a413398e84683329b60707f2f5a10b9b"
+      "expectedSha256": "94fc92d360a1f3a2717868f1d57a9198a413398e84683329b60707f2f5a10b9b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-65053",
+            "role": "material",
+            "evidence": "src/planets/artemis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/artemis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -94,7 +124,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 9579,
-      "expectedSha256": "3184974f6143bf29af87dee1d60152976d4328025c53c9be934a78a15920cb44"
+      "expectedSha256": "3184974f6143bf29af87dee1d60152976d4328025c53c9be934a78a15920cb44",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

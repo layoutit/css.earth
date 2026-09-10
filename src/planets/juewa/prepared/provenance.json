@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "juewa",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d3d303607dcb832bc552a684aaa77c87c93f4aa3a0e7b6bfbd75983a2b4b523d"
+    "sha256": "cc65491e4badf53b4db40d8f7ae0264ad3bcb3eb02925bc0773f24f3cb72671b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -339,6 +339,16 @@
         "referenceRadiusMeters": 83345
       },
       "coverage": "Published convex light-curve model 5985. Convex light-curve reconstruction with approximate thermal size: 166.69 km effective diameter (catalog ±2.77 km; additional shape and thermal-model uncertainty). The thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative. The convex inversion resolves the broad shape; craters and concavities are unresolved. Other published pole solutions remain possible.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-65308",
+            "role": "material",
+            "evidence": "src/planets/juewa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "299db30077ce9e5c022971c38780e16113ad0716ce7de0ce6ffd9288a55acb0c",
       "bytes": 82708,
       "dependencies": [],
@@ -358,6 +368,10 @@
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "sha256": "d7b9f36495805b4cf756e0701a9354a2914a13566583d4a26e0eb4ffd0d918a8",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

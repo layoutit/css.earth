@@ -1,5 +1,5 @@
 {
-  "schema": "cssdimorphos-authoritative-sources@1",
+  "schema": "cssdimorphos-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "dimorphos-shape",
@@ -43,7 +53,17 @@
       },
       "coverage": "Closed DART encounter model v004 derived from DRACO and LICIACube; source uncertainty varies with imaging coverage. Not a reconstructed post-impact surface.",
       "expectedBytes": 14454228,
-      "expectedSha256": "9633847a16c34faad7590f43ba6b07fed53926fb363da0a72f977f6cf2c61f3e"
+      "expectedSha256": "9633847a16c34faad7590f43ba6b07fed53926fb363da0a72f977f6cf2c61f3e",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dimorphos-shape",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -60,7 +80,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/dimorphos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "credit": "NASA/Johns Hopkins APL/DART; ASI/LICIACube; DART shape-model team",
@@ -76,7 +106,17 @@
       ],
       "expectedBytes": 4726080,
       "expectedSha256": "6bd56d7f107552ef6220b4e629848954f0630f9017f5914eb2c5e140493e66be",
-      "coverage": "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change."
+      "coverage": "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dimorphos-facet-science",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "dimorphos-relative-albedo",
@@ -97,7 +137,17 @@
         "units": "relative albedo",
         "facetNumberBase": 0
       },
-      "coverage": "Positive-sigma source facets cover 31.2138% of the source mesh area. Original table rows are uniquely matched to OBJ triangle centroids before sampling."
+      "coverage": "Positive-sigma source facets cover 31.2138% of the source mesh area. Original table rows are uniquely matched to OBJ triangle centroids before sampling.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dimorphos-relative-albedo",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "dimorphos-relative-albedo-label",
@@ -112,7 +162,17 @@
       ],
       "expectedBytes": 6781,
       "expectedSha256": "9d0b0ef96385478ae0a1401107b760112de64b3b74af08dfb5c1140a75c1a59e",
-      "coverage": "Positive-sigma source facets cover 31.2138% of the source mesh area. Original table rows are uniquely matched to OBJ triangle centroids before sampling."
+      "coverage": "Positive-sigma source facets cover 31.2138% of the source mesh area. Original table rows are uniquely matched to OBJ triangle centroids before sampling.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dimorphos-relative-albedo-label",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -147,7 +207,11 @@
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 13422,
-      "expectedSha256": "3bc06226f6b0f40911fd374884cb90e83240655234998dbda0c847740bb3fdf0"
+      "expectedSha256": "3bc06226f6b0f40911fd374884cb90e83240655234998dbda0c847740bb3fdf0",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",
@@ -243,7 +307,13 @@
       "title": "Dimorphos global slope relative to gravity, model v004 — PDS4 label",
       "credit": "NASA/Johns Hopkins APL/DART; ASI/LICIACube; DART shape-model team",
       "acquisition": "Unmodified PDS4 product label; restored through source/preparation/acquisition.json.",
-      "productId": "urn:nasa:pds:dart_shapemodel:data_derived_dimorphos_model_v004:dimorphos_g_0972mm_spc_slp_0000n00000_v004::1.0"
+      "productId": "urn:nasa:pds:dart_shapemodel:data_derived_dimorphos_model_v004:dimorphos_g_0972mm_spc_slp_0000n00000_v004::1.0",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "Dimorphos global slope relative to gravity, model v004 — PDS4 label",
+        "evidence": "src/planets/dimorphos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/documents/15",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     }
   ]
 }

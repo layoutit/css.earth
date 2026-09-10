@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "cyrene",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "99a33a930caee6d1bce6409473341dadead6019eef7b66c6f94e33135f45f84d"
+    "sha256": "20c6b4d46999cc12976ee8ef033d9641683f03b20e5df376e1261d523cb64ee7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 35460
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 70.92 km effective diameter (catalog ±0.9 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš2021 TableA.2 reports303 ASAS-SN observations and both poles(155,-59)/(348,-52). Convex and ellipsoidal searches recover the period; this is not resolved imaging. The selected archive second pole remains one of two solutions.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-65236",
+            "role": "material",
+            "evidence": "src/planets/cyrene/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "dc5fd920f10ed35377a2bbca5487dd096bd62756b3d78b4fa9007b127dc80d87",
       "bytes": 82708,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

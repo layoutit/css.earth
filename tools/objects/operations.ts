@@ -1,3 +1,5 @@
+import { parseSourceBinding } from '../../src/platform/source-catalog.mts';
+import type { SourceBinding } from '../../src/platform/source-catalog.mts';
 import { fileURLToPath } from 'node:url';
 import { executeAcquisition, parseAcquisitionPlan, type AcquisitionPlan, type AcquisitionTransport } from './operations-acquisition.js';
 export { parseAcquisitionPlan };
@@ -9,7 +11,7 @@ import { createReadStream, createWriteStream } from 'node:fs';
 import { Readable, Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { dirname, posix, resolve, relative, win32, basename } from 'node:path';
-export interface SourceEntry { path:string;expectedBytes:number;expectedSha256:string;id?:string;origin?:string;consumers?:string[]; }
+export interface SourceEntry { path:string;expectedBytes:number;expectedSha256:string;id?:string;origin?:string;consumers?:string[];sourceBinding?:SourceBinding; }
 export interface SourceManifest { schema:string;inputs:SourceEntry[];generatedIntermediates:SourceEntry[];documents:SourceEntry[]; }
 export interface RuntimeAsset { filename:string;bytes:number;sha256:string; }
 export interface RuntimeManifest { schema:string;assets:RuntimeAsset[]; }
@@ -22,13 +24,14 @@ export function containedPath(root:string,path:string):string {
 }
 export function parseSourceManifest(value:unknown,id?:string):SourceManifest {
  const manifest=object(value);
- if(typeof manifest.schema!=='string'||(id!==undefined&&manifest.schema!==`css${id}-authoritative-sources@1`&&manifest.schema!=='cssearth-authoritative-sources@1'))throw new TypeError('Unsupported source manifest schema.');
+ if(typeof manifest.schema!=='string'||!/^css[a-z][a-z0-9-]*-authoritative-sources@2$/.test(manifest.schema)||(id!==undefined&&manifest.schema!==`css${id}-authoritative-sources@2`&&manifest.schema!=='cssearth-authoritative-sources@2'))throw new TypeError('Unsupported source manifest schema.');
  const paths=new Set<string>(),ids=new Set<string>();
  for(const collection of ['inputs','generatedIntermediates','documents'] as const){
   const entries=manifest[collection];if(!Array.isArray(entries)||(collection==='inputs'&&!entries.length))throw new TypeError(`Source manifest ${collection} is missing or empty.`);
   for(const value of entries){const entry=object(value);if(typeof entry.path!=='string')throw new TypeError('Source path is missing.');containedPath('.',entry.path);
    if(paths.has(entry.path))throw new TypeError(`Duplicate source path ${entry.path}.`);paths.add(entry.path);
    if(typeof entry.expectedBytes!=='number'||!Number.isSafeInteger(entry.expectedBytes)||entry.expectedBytes<=0||typeof entry.expectedSha256!=='string'||!/^[0-9a-f]{64}$/.test(entry.expectedSha256))throw new TypeError(`Invalid source integrity record: ${entry.path}.`);
+   if(collection==='inputs'||entry.sourceBinding!==undefined)parseSourceBinding(entry.sourceBinding);
    if(collection==='inputs'){
     for(const field of ['id','origin','credit','license','acquisition','redistribution'])if(!nonempty(entry[field]))throw new TypeError(`Source ${entry.path} lacks ${field}.`);
     const inputId=String(entry.id);if(ids.has(inputId))throw new TypeError(`Duplicate source id ${inputId}.`);ids.add(inputId);

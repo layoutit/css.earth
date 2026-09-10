@@ -11,7 +11,7 @@ import { requireArray, requireRecord, requireString } from './source-values.mts'
 
 type PreparationContext = Parameters<typeof prepareObjectProvenance>[0];
 type FixtureContext = PreparationContext & { source: string; outputDirectory: string; publicDirectory: string };
-type FixturePin = { id: string; path: string; expectedSha256: string; expectedBytes: number; origin: string; credit: string; license: string; acquisition: string; consumers: string[] };
+type FixturePin = { id: string; path: string; expectedSha256: string; expectedBytes: number; origin: string; sourceBinding: {kind: 'local'; reason: string}; credit: string; license: string; acquisition: string; consumers: string[] };
 
 const hash = (bytes: string | Uint8Array): string => createHash('sha256').update(bytes).digest('hex');
 const read = async (path: string): Promise<Record<string, unknown>> => requireRecord(JSON.parse(await readFile(path, 'utf8')), path);
@@ -38,12 +38,12 @@ async function fixture(t: TestContext): Promise<FixtureContext> {
   const recipe = JSON.stringify({ schema: 'cssearth-static-surface-raster@1', kind: 'observation-lenses',
     lenses: [{ id: 'surface', input: 'observation.dat', qualification: 'Fixture observation' }] });
   const pin = (id: string, path: string, bytes: Uint8Array): FixturePin => ({ id, path, expectedSha256: hash(bytes), expectedBytes: bytes.length,
-    origin: `https://example.org/${path}`, credit: 'Fixture archive', license: 'CC0', acquisition: 'Exact fixture input', consumers: ['surfaces'] });
+    origin: `https://example.org/${path}`, sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, credit: 'Fixture archive', license: 'CC0', acquisition: 'Exact fixture input', consumers: ['surfaces'] });
   await Promise.all([
     writeFile(resolve(source, 'observation.dat'), input), writeFile(resolve(source, 'unused.dat'), 'unused'),
     writeFile(resolve(publicDirectory, 'surface.webp'), output),
     writeFile(resolve(source, 'preparation/raster.json'), recipe),
-    writeFile(resolve(source, 'manifest.json'), JSON.stringify({ inputs: [pin('observation', 'observation.dat', input), pin('unused', 'unused.dat', Buffer.from('unused'))], documents: [], generatedIntermediates: [] })),
+    writeFile(resolve(source, 'manifest.json'), JSON.stringify({ schema:'cssfixture-authoritative-sources@2', inputs: [pin('observation', 'observation.dat', input), pin('unused', 'unused.dat', Buffer.from('unused'))], documents: [], generatedIntermediates: [] })),
     writeFile(resolve(root, 'object.json'), JSON.stringify({ id: 'fixture', properties: { recipe: { sources: [
       { id: 'raster', path: 'source/preparation/raster.json', sha256: hash(recipe) },
     ] } } })),

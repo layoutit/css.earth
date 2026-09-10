@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "auravictrix",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a66d10dd82054906761707d522e19e64b3c3d276f66c619269f2ae8575b4d6dd"
+    "sha256": "1a2a194adeeb13a70a5747390e07f7397fe40a69c1e7968060cbbde153548568"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -339,6 +339,16 @@
         "referenceRadiusMeters": 8210.5
       },
       "coverage": "Published convex light-curve model 1654. Approximate scale from a thermal diameter of 16.421 ± 0.362 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects. The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-5716",
+            "role": "material",
+            "evidence": "src/planets/auravictrix/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "477d88385d0212d76042c2ce706f5ea0b0adafc70b55e44bb0c73291e1a2256f",
       "bytes": 82708,
       "dependencies": [],
@@ -358,6 +368,10 @@
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "sha256": "8f6e40b15a415a6ca474c0f602fb540793753cea8219fa869588f5abea99958f",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

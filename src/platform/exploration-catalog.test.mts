@@ -1,12 +1,18 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { explorationDate, parseAgencies, parseCapture, parseExplorationCatalog, validateCapture } from './exploration-catalog.mts';
+import { explorationDate, parseAgencies, parseCapture, parseExplorationCatalog as parse, validateCapture } from './exploration-catalog.mts';
 const agencies = parseAgencies({ NASA: { name: 'NASA', sourceUrl: 'https://www.nasa.gov/' } });
-const cited = <T,>(value: T) => ({ value, referenceIds: ['source'] });
+import { parseSourceCatalog, sourceResolver } from './source-catalog.mts';
+const sources = sourceResolver(parseSourceCatalog({schema:'cssearth-source-catalog@1',redirects:{},records:[{
+  id:'source',title:'Mission source',kind:'reference-page',identityLevel:'work',identifiers:[],relations:[],statements:[],
+  links:[{role:'landing',url:'https://www.nasa.gov/',label:'NASA'}],evidence:[{path:'tests/source.json',revision:'a'.repeat(40),sha256:'b'.repeat(64),locator:'/source'}],
+}]}));
+const parseExplorationCatalog = (raw: unknown, agencies: Parameters<typeof parse>[1]) => parse(raw,agencies,sources);
+const cited = <T,>(value: T) => ({ value, citations: [{catalogueId:'source',checkedOn:'2026-09-10'}] });
 function fixture() {
-  return { schema: 'cssearth-spacecraft-catalog@2', references: [{ id: 'source', title: 'Mission source', url: 'https://www.nasa.gov/', checkedOn: '2026-09-10' }],
+  return { schema: 'cssearth-spacecraft-catalog@3',
     spacecraft: [{ id: 'juno', name: cited('Juno spacecraft'), description: cited('A spacecraft.'), aliases: [], kind: cited('orbiter'), launch: cited('2011') }],
-    missions: [{ id: 'juno', name: cited('Juno mission'), description: cited('An individual mission.'), agencyIds: cited(['NASA']), started: cited('2011'), participants: [{ spacecraftId: 'juno', role: 'orbiter', referenceIds: ['source'] }] }],
+    missions: [{ id: 'juno', name: cited('Juno mission'), description: cited('An individual mission.'), agencyIds: cited(['NASA']), started: cited('2011'), participants: [{ spacecraftId: 'juno', role: 'orbiter', citations: cited('').citations }] }],
   };
 }
 
@@ -14,7 +20,7 @@ test('catalogue records are immutable and separate entity domains may use the sa
   const catalog = parseExplorationCatalog(fixture(), agencies);
   assert.equal(catalog.spacecraft[0].id, catalog.missions[0].id);
   assert.ok(Object.isFrozen(catalog.missions[0].participants[0]));
-  assert.ok(Object.isFrozen(catalog.spacecraft[0].name.referenceIds));
+  assert.ok(Object.isFrozen(catalog.spacecraft[0].name.citations));
   assert.equal(catalog.spacecraft[0].launch?.value, '2011');
   assert.equal(catalog.missions[0].status, undefined);
   assert.equal(agencies.NASA.src, undefined, 'an agency identity does not require a logo');
@@ -23,7 +29,7 @@ test('catalogue records are immutable and separate entity domains may use the sa
 test('duplicates, unknown references, invalid agencies and ambiguous participation are rejected', () => {
   const f = fixture();
   assert.throws(() => parseExplorationCatalog({ ...f, spacecraft: [...f.spacecraft, f.spacecraft[0]] }, agencies), /Duplicate spacecraft ID/);
-  assert.throws(() => parseExplorationCatalog({ ...f, references: [] }, agencies), /Missing catalogue reference/);
+  assert.throws(() => parse(f, agencies, {}), /Unknown citation source/);
   assert.throws(() => parseExplorationCatalog({ ...f, schema: 'cssearth-spacecraft-catalog@1' }, agencies), /schema/);
   assert.throws(() => parseExplorationCatalog({ ...f, extra: true }, agencies), /Unexpected/);
   const mission = f.missions[0];
@@ -43,7 +49,7 @@ test('dates preserve source precision and reject only provable interval contradi
   for (const date of ['2023-02-29', '2024-00', '2024-13', '2024-04-31', '2024-1-1', '0000', 'yesterday']) assert.throws(() => explorationDate(date));
   const f = fixture();
   assert.doesNotThrow(() => parseExplorationCatalog({ ...f, missions: [{ ...f.missions[0], started: cited('2011-12'), ended: cited('2011') }] }, agencies));
-  assert.throws(() => parseExplorationCatalog({ ...f, references: [{ ...f.references[0], url: 'javascript:alert(1)' }] }, agencies));
+  assert.throws(() => parseExplorationCatalog({ ...f, spacecraft: [{...f.spacecraft[0],name:{value:'Juno',citations:[{catalogueId:'source',checkedOn:'2023-02-29'}]}}] }, agencies));
 });
 
 test('capture validation separates membership from observation and rejects legacy browser inference', () => {

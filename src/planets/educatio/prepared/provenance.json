@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "educatio",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "742a8f65d52d697d70ce9be4f4bd7c6594767da5c03402af6bb4c377197ddc79"
+    "sha256": "5fd116c4ba8e10acebfff9dd263af84be02e28e2a7d9ed2287bea5fd5808fb2c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -339,6 +339,16 @@
         "referenceRadiusMeters": 3293
       },
       "coverage": "Published convex light-curve model 9541. Approximate scale from a thermal diameter of 6.586 ± 0.128 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects. The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-87916",
+            "role": "material",
+            "evidence": "src/planets/educatio/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "1aa7bf28a3514adb552d13c7061f7734b81e281b2d8e5a2f97958256ea2700f0",
       "bytes": 45933,
       "dependencies": [],
@@ -358,6 +368,10 @@
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "sha256": "a03dc3e0225aef0a113b01b536452351f2a45f116349a451dba11fb3c88ad444",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

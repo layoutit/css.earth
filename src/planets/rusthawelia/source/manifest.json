@@ -1,5 +1,5 @@
 {
-  "schema": "cssrusthawelia-authoritative-sources@1",
+  "schema": "cssrusthawelia-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/rusthawelia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "rusthawelia-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Published convex light-curve model 3188. Approximate scale from a thermal diameter of 67.986 ± 1.091 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects. Another thermal fit gives 82.2 km. The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
       "expectedBytes": 46419,
-      "expectedSha256": "890c5ddc5bf62360d5e4369a8f35b30f4868233baf3da1eb4b8622c9ccb8af6a"
+      "expectedSha256": "890c5ddc5bf62360d5e4369a8f35b30f4868233baf3da1eb4b8622c9ccb8af6a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-10084",
+            "role": "material",
+            "evidence": "src/planets/rusthawelia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/rusthawelia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -95,7 +125,11 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 11484,
       "expectedSha256": "e04b05ef75bc8796084f0dbd322666df052bd094e4f8e403b22c1a444c839a57",
-      "sha256": "0521854babea86954a3dfa5f548649793d28d889c66a92fe88a8694933b6c1a4"
+      "sha256": "0521854babea86954a3dfa5f548649793d28d889c66a92fe88a8694933b6c1a4",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

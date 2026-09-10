@@ -1,5 +1,5 @@
 {
-  "schema": "csspomona-authoritative-sources@1",
+  "schema": "csspomona-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/pomona/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "pomona-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Convex light-curve reconstruction, 89 ± 7 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative. The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred. The 2024 archive update includes four occultation comparisons but has no linked publication; it is attributed to the archive, not an invented paper.",
       "expectedBytes": 82708,
-      "expectedSha256": "348c1281cc6d9a359f9dfa7efa783ca0500239edfa49473380627394b9fcfb4e"
+      "expectedSha256": "348c1281cc6d9a359f9dfa7efa783ca0500239edfa49473380627394b9fcfb4e",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-129497",
+            "role": "material",
+            "evidence": "src/planets/pomona/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/pomona/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -94,7 +124,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 9834,
-      "expectedSha256": "52b5cb871c1c85ffa7d45414fc8e0b2b859dae6c630db6133139ea398de30392"
+      "expectedSha256": "52b5cb871c1c85ffa7d45414fc8e0b2b859dae6c630db6133139ea398de30392",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

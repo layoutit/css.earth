@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "enceladus",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6d88e446812b26cd241cb335af4874f8f99390216e50a94602e111e3b823b3ca"
+    "sha256": "756bb3aa247da29d3c9254f4bbc21290c3b6e6305c14288db7f3493f007a0e36"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -591,6 +591,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-enceladus-cassini-schenk-2024-normal",
+            "role": "material",
+            "evidence": "src/planets/enceladus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "1738c5cf8e856c7ae262d858261af0fbb32503a68a524884d36194afb23afcc5",
       "bytes": 518340175,
       "dependencies": [],
@@ -620,6 +630,16 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/cas_enceladus_ssd_spc_0256icq_v2.bds",
       "units": "Exact source Cartesian kilometres with exact duplicate vertices welded; original plate winding and complete mapping retained.",
       "coverage": "Global corrected v2 Q256 shape. Exact source coordinate conversion and welding; 393,218 output vertices and 786,432 triangles. The simplified displayed mesh is a separately qualified approximation.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-enceladus-jpl-spc-enceladus-v2-q256",
+            "role": "material",
+            "evidence": "src/planets/enceladus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      },
       "sha256": "0f7971cbf4bb493c17b9bbb640b3affa5f390f7c55c8db06d8e39faa3ad59b5c",
       "bytes": 10207923,
       "dependencies": [],
@@ -688,6 +708,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-enceladus-cassini-schenk-2024-elevation",
+            "role": "material",
+            "evidence": "src/planets/enceladus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "7c08c46238cde6528c9143f0c667d42cd3bc6ac60c572595a7e6cad2d6775f91",
       "bytes": 129613723,
       "dependencies": [],
@@ -736,6 +766,16 @@
         "referenceRadiusMeters": 252100
       },
       "coverage": "Only supported interior source-center cells. Approximate union covers 23.8% of the reference sphere; output grid density is not native resolution. Absolute pointing remains unqualified.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-enceladus-enceladus-vims-ice-absorption",
+            "role": "material",
+            "evidence": "src/planets/enceladus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
+      },
       "sha256": "2e3d5caa47220371e2b8e4ad12192f4613b3f6f1de4f933881b1a277ae4a9d4d",
       "bytes": 101934,
       "dependencies": [],
@@ -777,6 +817,16 @@
         "referenceRadiusMeters": 252100
       },
       "coverage": "Only supported interior source-center cells. Approximate union covers 23.8% of the reference sphere; output grid density is not native resolution. Absolute pointing remains unqualified.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-enceladus-enceladus-vims-infrared-ratio",
+            "role": "material",
+            "evidence": "src/planets/enceladus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+          }
+        ]
+      },
       "sha256": "1857dd4eadd3af1e7808941bfb0e4dfa57f61a04b6dc48d3157b292c9ef601ec",
       "bytes": 109752,
       "dependencies": [],
@@ -787,6 +837,10 @@
     {
       "path": "content/object.json",
       "purpose": "Original source metadata, licensing, or authored preparation and content.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

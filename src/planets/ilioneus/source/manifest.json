@@ -1,5 +1,5 @@
 {
-  "schema": "cssilioneus-authoritative-sources@1",
+  "schema": "cssilioneus-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/ilioneus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "ilioneus-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 60.711 km effective diameter (fit ±0.982 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; grid marks unavailable imagery. Disk-integrated NEOWISE thermal flux constrains an effective spherical diameter, not this mesh volume or a surface map. Transferring that diameter uniformly to mesh volume is approximate. The quoted fit error is not a total uncertainty and does not measure local shape accuracy. Absolute rotational phase is illustrative.",
       "expectedBytes": 46419,
-      "expectedSha256": "b54d7b440a854975313c728a91ae70b2e400b891081f1a510224ed50504c91a6"
+      "expectedSha256": "b54d7b440a854975313c728a91ae70b2e400b891081f1a510224ed50504c91a6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-13030",
+            "role": "material",
+            "evidence": "src/planets/ilioneus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/ilioneus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -94,7 +124,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 9485,
-      "expectedSha256": "2dd8db713fc3f18305c82e20b7c35af74d60889a2871ffe55190cc2ac2a48696"
+      "expectedSha256": "2dd8db713fc3f18305c82e20b7c35af74d60889a2871ffe55190cc2ac2a48696",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

@@ -1,5 +1,5 @@
 {
-  "schema": "cssmassalia-authoritative-sources@1",
+  "schema": "cssmassalia-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/massalia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "massalia-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Published convex light-curve model 16321. Updated convex DAMIT shape at an approximate147km scale transferred from a published thermophysical model (±2km for that source fit; additional uncertainty for this model). The old preliminary spin solution is not used. Grid marks unavailable imagery; rotational phase is illustrative. Uses the updated 2026 DAMIT spin solution; older preliminary models had an incorrect spin. Published size is transferred from a separate shape reconstruction.",
       "expectedBytes": 293943,
-      "expectedSha256": "524c84346cc770f9974d2493b0b2d9a2c06ca58f0a1701e2e159ec20d01e1045"
+      "expectedSha256": "524c84346cc770f9974d2493b0b2d9a2c06ca58f0a1701e2e159ec20d01e1045",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-130623",
+            "role": "material",
+            "evidence": "src/planets/massalia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/massalia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -95,7 +125,11 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 11176,
       "expectedSha256": "65a656bbe9df25651907bcc08e62a5b31b00095cb407962d09b9593a7f815f02",
-      "sha256": "37b52cdbe11615741f4551f391f5de94c30b33942bd6ce753f80aeaa6f97c622"
+      "sha256": "37b52cdbe11615741f4551f391f5de94c30b33942bd6ce753f80aeaa6f97c622",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

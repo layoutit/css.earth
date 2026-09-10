@@ -1,14 +1,14 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "eurybates",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "29b2dd3b78be9acfd62a6ed3af9df35abbc854957f37777875b78be86271cea3"
+    "sha256": "829e2a5a239abb42d74aa9e7b8d631edd729ef8af29c062a7b36ab84cafd257e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -250,6 +250,16 @@
       "lensId": "model",
       "label": "Shape model",
       "falseColor": false,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eurybates-model-surface",
+            "role": "method",
+            "evidence": "src/planets/eurybates/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
@@ -275,6 +285,16 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 34948.60995574688
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eurybates-occultation-approximation",
+            "role": "method",
+            "evidence": "src/planets/eurybates/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "2edc96d2951372989e6e8ae6f959f4d7a916b1247cd0728fb024e3aeff77f0f4",
       "bytes": 62404,
       "dependencies": [],
@@ -285,6 +305,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned body-specific source interpretation or preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

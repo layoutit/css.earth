@@ -6,13 +6,25 @@
 
 - 9P/Tempel 1 was visited by Deep Impact in 2005 and Stardust-NExT in 2011.
 
+## Photographic views
+
+**Deep Impact** combines eight archived ITS photographs from the 2005 approach. Three cropped close-ups add finer ridges and depressions within the existing view; source sampling reaches 3.1 m/pixel in a small patch. They improve detail over about 6.6 km² of the displayed surface. Total photographic coverage remains around 31%.
+
+**Stardust-NExT** retains its separate six-image 2011 view. These are photographs with their original illumination, not albedo or change maps. The grid marks unsupported image/shape correspondence. Shadows defaults to Off.
+
+Both use the original [NASA PDS imagery](https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml) and fixed 2012 source shape. The display stays at 1000 triangles. The [photography method note](source/reference/encounter-photography.md) explains camera registration, image quality, alternative sources, uncertainty and reproducible preparation.
+
 ## Evidence
+
+- The [close-up comparison and browser record](evidence/closeups/README.md) show the eight-image result at the same camera and at DPR 1 and 2.
 
 - The [constraint-grid qualification](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/CONSTRAINT-GRIDS.md) records checks and captured views.
 
 - The [shared qualification record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/QUALIFICATION.md) records verification.
 
 ## Known problems
+
+- Close-up registration measures alignment with an earlier photograph. Absolute placement still inherits the limb anchor and coarse shape model’s uncertainty; this is not a precise survey of the impact site.
 
 - The default Source constraints lens uses solid gray for stereo control, blue for limb silhouettes, and the shared gray grid for poorly constrained regions. The grid means poorly constrained by those methods, not necessarily wholly unobserved. Neither view claims observed albedo.
 

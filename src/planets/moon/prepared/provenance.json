@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "moon",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5bd482ea796fdcecd4cfdaf9be66f4d52fe30897fcdaf4ff42d892249854a31c"
+    "sha256": "43b119000e913ff0410bf803807ed982280e86020c950cd0ccb5ce3398b1f91a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1357,6 +1357,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-nasa-lro-moon-color",
+            "role": "material",
+            "evidence": "src/planets/moon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "f7130a1822681fa7512d7dcfd40db8c10b9ba4f06777910348698260ed7a2170",
       "bytes": 457942,
       "dependencies": [],
@@ -1389,6 +1399,16 @@
         "science/diviner-ghrm/dghrm_tbol_m_70s70n_img.xml",
         "science/diviner-ghrm/prepare-tbol_m.json"
       ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-diviner-ghrm-tbol-m-compact",
+            "role": "material",
+            "evidence": "src/planets/moon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+          }
+        ]
+      },
       "sha256": "63bd05458e3b24d02bebe14dce7345b3b88f07db6233601eccc0f7afecfd6e57",
       "bytes": 9832777,
       "dependencies": [],
@@ -1414,6 +1434,16 @@
         "science/diviner-ghrm/dghrm_tbol_anom_70s70n_img.xml",
         "science/diviner-ghrm/prepare-tbol_anom.json"
       ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-diviner-ghrm-tbol-anom-compact",
+            "role": "material",
+            "evidence": "src/planets/moon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+          }
+        ]
+      },
       "sha256": "009a700af3d4b25d3ee7454ea6d97b96eb2e7f513f00081f96f4001b7a50c1c6",
       "bytes": 9522044,
       "dependencies": [],
@@ -1439,6 +1469,16 @@
         "science/diviner-ghrm/dghrm_ra_sam_70s70n_img.xml",
         "science/diviner-ghrm/prepare-ra_sam.json"
       ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-diviner-ghrm-ra-sam-compact",
+            "role": "material",
+            "evidence": "src/planets/moon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
+          }
+        ]
+      },
       "sha256": "2d87312b2b5cf7caa6a949f2d63e7fe1b0db8d5a7cb57822ba1af89281757ca3",
       "bytes": 9311218,
       "dependencies": [],
@@ -1466,6 +1506,16 @@
             "spacecraftId": "lro",
             "evidence": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml",
             "missionId": "lro"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-lola-ldem16-numeric",
+            "role": "material",
+            "evidence": "src/planets/moon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
           }
         ]
       },
@@ -1505,6 +1555,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-nasa-grail-crustal-thickness",
+            "role": "material",
+            "evidence": "src/planets/moon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "d791cb16b0e6ee74bda94ca5bc1577fc9589a9e7d70cdade255ad199f83a5e95",
       "bytes": 300978,
       "dependencies": [],
@@ -1534,6 +1594,16 @@
       "redistribution": "Adapted under CC-BY-4.0; coordinate sampling and authored palette identified.",
       "width": 2048,
       "height": 1024,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-christiansen-feature",
+            "role": "material",
+            "evidence": "src/planets/moon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      },
       "sha256": "adc63e4654a70093f5c060069f6394311aec52d6bdffd3eec1165173734f6632",
       "bytes": 3801047,
       "dependencies": [],
@@ -1570,6 +1640,16 @@
         "referenceRadiusMeters": 1737400
       },
       "coverage": "Pixel-center categorical grid; unmapped, unknown and conflicting units withheld.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-usgs-moon-geologic-units-grid",
+            "role": "material",
+            "evidence": "src/planets/moon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      },
       "sha256": "16be1f099526cb91493e6004fa330b850b26f8ed72cd3a40dadcc5c427480bc5",
       "bytes": 430857,
       "dependencies": [],
@@ -1580,6 +1660,10 @@
     {
       "path": "content/static.json",
       "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicit authored content document in the retained provenance record."
+      },
       "id": "authored-document:content/static.json",
       "kind": "authored-content",
       "origin": "object:source/content/static.json",

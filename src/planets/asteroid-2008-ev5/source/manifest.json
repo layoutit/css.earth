@@ -1,5 +1,5 @@
 {
-  "schema": "cssasteroid-2008-ev5-authoritative-sources@1",
+  "schema": "cssasteroid-2008-ev5-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/asteroid-2008-ev5/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "asteroid-2008-ev5-shape",
@@ -41,7 +51,17 @@
       },
       "coverage": "The north pole was not covered by the radar images, so its topography and flattening depend on modeling constraints. The pole is uncertain by 10 degrees and equivalent diameter is 400 ± 50 m. The unmodified archive mesh is retained; no resolved optical surface map is supplied.",
       "expectedBytes": 120483,
-      "expectedSha256": "c8cf2f1466cef4ef8cedd033e83a00ef625a64313068255954003d64ae2b6dd9"
+      "expectedSha256": "c8cf2f1466cef4ef8cedd033e83a00ef625a64313068255954003d64ae2b6dd9",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-asteroid-2008-ev5-asteroid-2008-ev5-shape",
+            "role": "material",
+            "evidence": "src/planets/asteroid-2008-ev5/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -58,7 +78,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/asteroid-2008-ev5/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "asteroid-2008-ev5-research-2008ev5",
@@ -73,7 +103,17 @@
         "rotation"
       ],
       "expectedBytes": 1610259,
-      "expectedSha256": "da32aca932a661196050a3078126c930778a5673b625ad389b0c3fa49d5c7fcc"
+      "expectedSha256": "da32aca932a661196050a3078126c930778a5673b625ad389b0c3fa49d5c7fcc",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-asteroid-2008-ev5-asteroid-2008-ev5-research-2008ev5",
+            "role": "method",
+            "evidence": "src/planets/asteroid-2008-ev5/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -108,7 +148,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 9688,
-      "expectedSha256": "6e178f020ca1c177fb61d2d464c8ea5acd58e460b576f8bc2efc70878b1f1ec3"
+      "expectedSha256": "6e178f020ca1c177fb61d2d464c8ea5acd58e460b576f8bc2efc70878b1f1ec3",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

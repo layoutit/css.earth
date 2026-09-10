@@ -1,5 +1,5 @@
 {
-  "schema": "cssloreley-authoritative-sources@1",
+  "schema": "cssloreley-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/loreley/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "loreley-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "ADAM nonconvex reconstruction constrained by Keck adaptive-optics images. Selected archive volume-equivalent diameter: 177 ±5 km. The grid marks unavailable imagery; rotational phase is illustrative. The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select the 2017 ADAM nonconvex model 1809 over convex 295. Hanuš et al. (2017) reports 30 light curves, four AO images, and one occultation; the earlier pole ambiguity was removed by occultations and confirmed by AO. The publication ensemble gives 173 ±5 km and (178±3,31±3); the selected archive release gives 177 ±5 km and (180,31), with raw volume diameter 176.965. Keep the exact archived solution distinct from the ensemble estimate. No mass or density inference is adopted.",
       "expectedBytes": 32486,
-      "expectedSha256": "0da05739bf0a1b246d7930dbcc5e8d8a7198a16b02fb97ea8ff9d3f38703c9d6"
+      "expectedSha256": "0da05739bf0a1b246d7930dbcc5e8d8a7198a16b02fb97ea8ff9d3f38703c9d6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-1020",
+            "role": "material",
+            "evidence": "src/planets/loreley/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/loreley/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -94,7 +124,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 9070,
-      "expectedSha256": "298ebec6215c0a9ecb25dda6f94f4ef34e0c7049e2f478e61430793f6980c1fb"
+      "expectedSha256": "298ebec6215c0a9ecb25dda6f94f4ef34e0c7049e2f478e61430793f6980c1fb",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

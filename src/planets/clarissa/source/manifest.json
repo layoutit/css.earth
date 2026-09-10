@@ -1,5 +1,5 @@
 {
-  "schema": "cssclarissa-authoritative-sources@1",
+  "schema": "cssclarissa-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/clarissa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "clarissa-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Convex light-curve reconstruction, 43 ± 4 km volume-equivalent diameter. This pole gives the preferred occultation fit; the rival pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative. Ďurech2011 describes this as a very elongated convex model. Both poles fit the2004 occultation; selected pole(28,−72) fits particularly well and is preferred in DAMIT, but its rival is not rejected. Three video chords have reported timing errors of tenths of a second. Table3 gives volume-equivalent43±4 km for this pole; local surface relief is unresolved.",
       "expectedBytes": 82708,
-      "expectedSha256": "5953c0a8528106a185d0da899f40a1ef7bfe63457888c10ffa3062affe29eaa7"
+      "expectedSha256": "5953c0a8528106a185d0da899f40a1ef7bfe63457888c10ffa3062affe29eaa7",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-1032",
+            "role": "material",
+            "evidence": "src/planets/clarissa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/clarissa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -94,7 +124,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 10995,
-      "expectedSha256": "aaf995395f2426427d12be6f0d763e24bd91f3625e55a54f4c696229886d2ca8"
+      "expectedSha256": "aaf995395f2426427d12be6f0d763e24bd91f3625e55a54f4c696229886d2ca8",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

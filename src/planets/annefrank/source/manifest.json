@@ -1,5 +1,5 @@
 {
-  "schema": "cssannefrank-authoritative-sources@1",
+  "schema": "cssannefrank-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/annefrank/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -33,7 +43,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/annefrank/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "occultation-approximation",
@@ -56,6 +76,16 @@
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 2411.576019578334
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1029-2003je002108",
+            "role": "method",
+            "evidence": "src/planets/annefrank/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
       }
     },
     {
@@ -84,7 +114,17 @@
       "height": 32,
       "lensId": "model",
       "label": "Shape model",
-      "falseColor": false
+      "falseColor": false,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1029-2003je002108",
+            "role": "method",
+            "evidence": "src/planets/annefrank/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     }
   ],
   "documents": [
@@ -92,7 +132,11 @@
       "path": "content/object.json",
       "expectedBytes": 3350,
       "expectedSha256": "9874c035e76e05a2f2f38ce1449868f081cdfc97e395ab625006e3e431dd14f1",
-      "purpose": "Pinned body-specific source interpretation or preparation input."
+      "purpose": "Pinned body-specific source interpretation or preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "measurements.json",
