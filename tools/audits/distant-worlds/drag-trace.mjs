@@ -1,4 +1,5 @@
-#!/usr/bin/env node
+import { mkdir as ensureReportDirectory } from 'node:fs/promises';
+await ensureReportDirectory('output/distant-worlds', {recursive:true});
 // Uses the same Chrome CDP categories and 60-step vertical drag path as the
 // Saturn audit. This narrower workload excludes its wheel and moon controls.
 import assert from 'node:assert/strict';
@@ -8,9 +9,9 @@ import { gzipSync } from 'node:zlib';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { chromium } from 'playwright';
-import { OBJECTS } from '../../site/objects.mjs';
-import { traceDurationEvents } from '../../tests/objects/browser/comets/trace-events.mjs';
-import {conformanceBrowserLaunch} from '../../site/test/conformance-browser-launch.mjs';
+import { OBJECTS } from '../../../site/objects.mjs';
+import { traceDurationEvents } from '../../../tests/objects/browser/comets/trace-events.mjs';
+import {conformanceBrowserLaunch} from '../../../site/test/conformance-browser-launch.mjs';
 const origin = process.argv[2] ?? 'http://127.0.0.1:4278';
 const dpr = Number(process.argv[3] ?? 1);
 assert.ok([1, 2].includes(dpr));

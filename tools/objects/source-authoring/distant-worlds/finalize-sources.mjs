@@ -1,18 +1,19 @@
-#!/usr/bin/env node
+import { mkdir as ensureReportDirectory } from 'node:fs/promises';
+await ensureReportDirectory('output/distant-worlds', {recursive:true});
 // Use the common title and source-mesh snapshot owners; no scene technique lives here.
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import * as fontkit from 'fontkit';
-import { createPlanetTitleSource } from '../../tools/prepare-planet-title-sources.mjs';
-import { PLANET_TITLE_RECIPE } from '../../src/platform/planet-title-recipe.mjs';
-import { loadRadialTerrain } from '../../tools/objects/terrestrial-layers/radial-terrain.mjs';
-import { renderRadialSnapshot } from '../../tools/objects/terrestrial-layers/radial-snapshot.mjs';
-import { paintMissingCoverage } from '../../src/platform/prepare-missing-coverage.mjs';
-const root = resolve(import.meta.dirname, '../..');
+import { createPlanetTitleSource } from '../../../../tools/prepare-planet-title-sources.mjs';
+import { PLANET_TITLE_RECIPE } from '../../../../src/platform/planet-title-recipe.mjs';
+import { loadRadialTerrain } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
+import { renderRadialSnapshot } from '../../../../tools/objects/terrestrial-layers/radial-snapshot.mjs';
+import { paintMissingCoverage } from '../../../../src/platform/prepare-missing-coverage.mjs';
+const root = resolve(import.meta.dirname, '../../../..');
 if (process.cwd() !== root) throw new Error('Run from the repository root.');
-const { bodies } = JSON.parse(await readFile('docs/distant-worlds/inputs.json'));
+const { bodies } = JSON.parse(await readFile('tools/objects/source-authoring/distant-worlds/inputs.json'));
 const hash = data => createHash('sha256').update(data).digest('hex');
 const write = (path, value) => writeFile(path, Buffer.isBuffer(value) ? value : JSON.stringify(value, null, 2) + '\n');
 const files = async path => (await Promise.all((await readdir(path, {withFileTypes:true})).map(e => e.isDirectory() ? files(resolve(path,e.name)) : [resolve(path,e.name)]))).flat();

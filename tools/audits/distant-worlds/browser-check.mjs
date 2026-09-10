@@ -1,10 +1,12 @@
+import { mkdir as ensureReportDirectory } from 'node:fs/promises';
+await ensureReportDirectory('output/distant-worlds', {recursive:true});
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {chromium} from 'playwright';
-import {OBJECTS} from '../../site/objects.mjs';
-import {conformanceBrowserLaunch} from '../../site/test/conformance-browser-launch.mjs';
+import {OBJECTS} from '../../../site/objects.mjs';
+import {conformanceBrowserLaunch} from '../../../site/test/conformance-browser-launch.mjs';
 const ids=['oumuamua','sedna','gonggong','orcus','salacia','varuna','varda','mani','achlys'],origin='http://127.0.0.1:4278';
 const output=resolve('output/playwright/distant-worlds');await mkdir(output,{recursive:true});
 const browser=await chromium.launch((await conformanceBrowserLaunch({evidenceDirectory:output,redirectStdio:true})).options);
@@ -71,6 +73,6 @@ try{
   }
   assert.deepEqual(errors,[]);await context.close();
  }
- await writeFile(defaultsOnly?'docs/distant-worlds/default-views.json':navigationOnly?'docs/distant-worlds/navigation-final.json':'docs/distant-worlds/browser-validation.json',JSON.stringify({capturedAt:new Date().toISOString(),browser:browser.version(),headless:true,origin,viewport:{width:1440,height:900},scope:defaultsOnly?'Actual production default views using fresh-installed scene images.':navigationOnly?'Final integrated production category, search and handoff using the fresh scene image installation.':'Production routes; new scene images served from the independently downloaded installation. True default views and retained-node drag; retained native triangles; shared category, search and in-page navigation.',results},null,2)+'\n');
+ await writeFile(defaultsOnly?'output/distant-worlds/default-views.json':navigationOnly?'output/distant-worlds/navigation-final.json':'output/distant-worlds/browser-validation.json',JSON.stringify({capturedAt:new Date().toISOString(),browser:browser.version(),headless:true,origin,viewport:{width:1440,height:900},scope:defaultsOnly?'Actual production default views using fresh-installed scene images.':navigationOnly?'Final integrated production category, search and handoff using the fresh scene image installation.':'Production routes; new scene images served from the independently downloaded installation. True default views and retained-node drag; retained native triangles; shared category, search and in-page navigation.',results},null,2)+'\n');
  console.log(defaultsOnly?'DPR1 actual default views captured':navigationOnly?'Integrated shared navigation checks passed':'DPR 1/2 fresh asset, default settings, native triangles and shared navigation checks passed');
 }finally{await browser.close();}

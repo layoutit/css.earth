@@ -2,8 +2,8 @@
 from pathlib import Path
 import json, re
 
-ROOT=Path(__file__).resolve().parents[2]
-bodies=json.loads((ROOT/'docs/distant-worlds/inputs.json').read_text())['bodies']
+ROOT=Path(__file__).resolve().parents[4]
+bodies=json.loads((ROOT/'tools/objects/source-authoring/distant-worlds/inputs.json').read_text())['bodies']
 def update(path, transform):
     p=ROOT/path; old=p.read_text(); new=transform(old)
     if old!=new:p.write_text(new)

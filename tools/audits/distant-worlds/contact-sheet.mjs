@@ -1,9 +1,11 @@
+import { mkdir as ensureReportDirectory } from 'node:fs/promises';
+await ensureReportDirectory('output/distant-worlds', {recursive:true});
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import sharp from 'sharp';
 sharp.concurrency(1);
-const {bodies}=JSON.parse(await readFile('docs/distant-worlds/inputs.json'));
-const output='docs/distant-worlds/images';await mkdir(output,{recursive:true});
+const {bodies}=JSON.parse(await readFile('tools/objects/source-authoring/distant-worlds/inputs.json'));
+const output='output/distant-worlds/images';await mkdir(output,{recursive:true});
 const layers=[],receipts=[];
 const escape=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;');
 for(let i=0;i<bodies.length;i++){
@@ -16,4 +18,4 @@ for(let i=0;i<bodies.length;i++){
  receipts.push({id:b.id,source,sourceSha256:createHash('sha256').update(bytes).digest('hex'),image:`${output}/${b.id}.webp`,imageSha256:createHash('sha256').update(full).digest('hex')});
 }
 await sharp({create:{width:1284,height:1374,channels:3,background:'#090b0d'}}).composite(layers).webp({quality:88}).toFile(`${output}/nine-worlds.webp`);
-await writeFile('docs/distant-worlds/image-provenance.json',JSON.stringify({scope:'Actual default DPR1 browser captures. Contact sheet crops the same scene rectangle and resizes it; models are individually framed, not compared at a common physical scale. Full browser views retained alongside.',receipts},null,2)+'\n');
+await writeFile('output/distant-worlds/image-provenance.json',JSON.stringify({scope:'Actual default DPR1 browser captures. Contact sheet crops the same scene rectangle and resizes it; models are individually framed, not compared at a common physical scale. Full browser views retained alongside.',receipts},null,2)+'\n');

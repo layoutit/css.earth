@@ -1,8 +1,10 @@
+import { mkdir as ensureReportDirectory } from 'node:fs/promises';
+await ensureReportDirectory('output/distant-worlds', {recursive:true});
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
-import {OBJECTS} from '../../site/objects.mjs';
-import {validatePlanetData} from '../../tools/object-package-contract.mjs';
+import {OBJECTS} from '../../../site/objects.mjs';
+import {validatePlanetData} from '../../../tools/object-package-contract.mjs';
 
 const ids=['oumuamua','sedna','gonggong','orcus','salacia','varuna','varda','mani','achlys'];
 const read=async path=>JSON.parse(await readFile(path));
@@ -27,6 +29,6 @@ for(const id of ids){
   simplification:terrain.simplification,pageMetadataSha256:descriptor.properties.page.metadata.sha256,defaultLens:'model',shadows:false,orbit:false};
  bodies.push(result);
 }
-await writeFile('docs/distant-worlds/qualification.json',JSON.stringify({schema:'cssearth-distant-worlds-qualification@1',
+await writeFile('output/distant-worlds/qualification.json',JSON.stringify({schema:'cssearth-distant-worlds-qualification@1',
  scope:'Nine own packages: complete source and runtime byte closures, scene/page binding, native triangle budgets, source topology and defaults. Browser evidence is reported separately.',bodies},null,2)+'\n');
 console.log('Nine distant-world package closures and prepared contracts passed.');

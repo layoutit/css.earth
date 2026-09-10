@@ -1,11 +1,13 @@
+import { mkdir as ensureReportDirectory } from 'node:fs/promises';
+await ensureReportDirectory('output/distant-worlds', {recursive:true});
 import assert from 'node:assert/strict';
 import {readFile,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {OBJECTS} from '../../site/objects.mjs';
-import {prepareMarkerBindings} from '../../tools/prepare-marker-bindings.mjs';
-import {serializeObjectJson,prepareObjectJson} from '../../tools/prepare-object-json.mjs';
-import {writePreparedText} from '../../tools/write-prepared-text.mjs';
-import {preparePageMetadata} from '../../tools/prepared-page-metadata.mjs';
+import {OBJECTS} from '../../../../site/objects.mjs';
+import {prepareMarkerBindings} from '../../../../tools/prepare-marker-bindings.mjs';
+import {serializeObjectJson,prepareObjectJson} from '../../../../tools/prepare-object-json.mjs';
+import {writePreparedText} from '../../../../tools/write-prepared-text.mjs';
+import {preparePageMetadata} from '../../../../tools/prepared-page-metadata.mjs';
 const results=[];
 for(const {id} of OBJECTS){
  const root=`src/planets/${id}`,descriptor=JSON.parse(await readFile(`${root}/object.json`));
@@ -25,5 +27,5 @@ for(const {id} of OBJECTS){
 // Empty selection skips presentation compilation and refreshes contexts from
 // the already finalized descriptor frames through the existing context owner.
 await prepareObjectJson([]);
-await writeFile('docs/distant-worlds/transports.json',JSON.stringify(results,null,2)+'\n');
+await writeFile('output/distant-worlds/transports.json',JSON.stringify(results,null,2)+'\n');
 console.log('Marker bindings, transports and contexts refreshed:',results.length,'; zero presentation recompiles');

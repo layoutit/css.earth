@@ -1,8 +1,10 @@
+import { mkdir as ensureReportDirectory } from 'node:fs/promises';
+await ensureReportDirectory('output/distant-worlds', {recursive:true});
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {chromium} from 'playwright';
-import {conformanceBrowserLaunch} from '../../site/test/conformance-browser-launch.mjs';
+import {conformanceBrowserLaunch} from '../../../site/test/conformance-browser-launch.mjs';
 const out='output/playwright/distant-worlds/final';await mkdir(out,{recursive:true});
 const b=await chromium.launch((await conformanceBrowserLaunch({evidenceDirectory:out,redirectStdio:true})).options);
 const errors=[],report={};
@@ -38,6 +40,6 @@ try {
   await p.screenshot({path:`${out}/${id}-mobile.png`});report.mobile.push({id,...layout});
  }
  assert.deepEqual(errors,[]);report.errors=errors;
- await writeFile('docs/distant-worlds/final-interactions.json',JSON.stringify({capturedAt:new Date().toISOString(),browser:b.version(),headless:true,build:'production',...report},null,2)+'\n');
+ await writeFile('output/distant-worlds/final-interactions.json',JSON.stringify({capturedAt:new Date().toISOString(),browser:b.version(),headless:true,build:'production',...report},null,2)+'\n');
  console.log('Production marker click, official-name/designation search, opt-in paint and new/existing mobile layouts passed.');
 } finally {await b.close();}

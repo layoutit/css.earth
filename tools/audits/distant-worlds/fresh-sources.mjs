@@ -1,8 +1,10 @@
+import { mkdir as ensureReportDirectory } from 'node:fs/promises';
+await ensureReportDirectory('output/distant-worlds', {recursive:true});
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir,copyFile,stat} from 'node:fs/promises';
 import {resolve,dirname} from 'node:path';
-import {parseSourceManifest,restoreMissingSources,verifySources,assertSourceFile} from '../../tools/objects/dist/operations.js';
-const {bodies}=JSON.parse(await readFile('docs/distant-worlds/inputs.json'));
+import {parseSourceManifest,restoreMissingSources,verifySources,assertSourceFile} from '../../../tools/objects/dist/operations.js';
+const {bodies}=JSON.parse(await readFile('tools/objects/source-authoring/distant-worlds/inputs.json'));
 const root=resolve('output/distant-worlds/fresh-sources');
 assert.equal(await stat(root).then(()=>true,e=>{if(e.code==='ENOENT')return false;throw e;}),false,'Fresh source root must start absent');
 const downloaded=new Map(),results=[];
@@ -28,4 +30,4 @@ for(const {id} of bodies){
  results.push({id,...closure,downloaded:missing,reusedFreshPinnedDownloads:reused});
  console.log('Fresh sources verified',id);
 }
-await writeFile('docs/distant-worlds/fresh-sources.json',JSON.stringify({checkedAt:new Date().toISOString(),scope:'Empty source roots. Checked-in inputs and the reviewed CC BY 4.0 Salacia conference HTML copied; other upstream originals reacquired with the normal pinned acquisition implementation. Identical common originals reuse the first newly downloaded and SHA-256 verified copy.',uniqueDownloadedOriginals:downloaded.size,results},null,2)+'\n');
+await writeFile('output/distant-worlds/fresh-sources.json',JSON.stringify({checkedAt:new Date().toISOString(),scope:'Empty source roots. Checked-in inputs and the reviewed CC BY 4.0 Salacia conference HTML copied; other upstream originals reacquired with the normal pinned acquisition implementation. Identical common originals reuse the first newly downloaded and SHA-256 verified copy.',uniqueDownloadedOriginals:downloaded.size,results},null,2)+'\n');

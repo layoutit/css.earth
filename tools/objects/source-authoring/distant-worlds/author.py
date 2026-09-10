@@ -1,14 +1,14 @@
 """Extract the selected published numeric models; shared preparers own rendering.
 
 Run from the repository root after restoring pinned source inputs. This is the
-same radial ellipsoid extraction used by docs/trans-neptunian/author.py.
+same radial ellipsoid extraction used by tools/objects/source-authoring/trans-neptunian/author.py.
 """
 from pathlib import Path
 import hashlib, json, math, shutil, subprocess
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[4]
 BASE = '8666462797772dc50bbebecd8618014f5e7bd16c'
-INPUTS = json.loads((ROOT / 'docs/distant-worlds/inputs.json').read_text())
+INPUTS = json.loads((ROOT / 'tools/objects/source-authoring/distant-worlds/inputs.json').read_text())
 
 def write(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -99,6 +99,8 @@ for body in INPUTS['bodies']:
             shutil.copyfile(available,target)
     manifest['inputs'].append(dict(id='model-surface',path='material/neutral.png',**pin(source/'material/neutral.png'),origin='https://github.com/layoutit/cssEarth',credit='cssEarth missing-coverage grid',license='MIT',consumers=['surfaces'],width=64,height=32,lensId='model',label='Shape model',falseColor=False,coverage='Authored neutral material; no observed imagery.',projection=dict(type='equirectangular',longitudeDirection='east-positive',referenceRadiusMeters=radius*1000)))
     for entry in manifest['inputs']:
+        # Preserve the historical recipe text when reproducing its pinned bytes.
+        # The maintained helper location is documented in this directory's README.
         entry.setdefault('acquisition','Restore pinned originals through acquisition; reproduce authored numbers with docs/distant-worlds/author.py.')
         entry.setdefault('redistribution','Retain source attribution and model qualifications; upstream papers are not relicensed.')
     write(source/'manifest.json',manifest)
@@ -110,8 +112,4 @@ for body in INPUTS['bodies']:
     write(package/'object.json',descriptor)
     for file in ['src/renderers/css/styles/gkunhomdima-surfaces.css','tests/objects/browser/gkunhomdima/browser-profile.mjs']:
         write(ROOT/file.replace('gkunhomdima',ident), original(file).replace('gkunhomdima',ident).replace('Gǃkúnǁʼhòmdímà',name))
-    survey='\n'.join('- '+item for item in body.get('survey',body.get('unresolved',[])))
-    write(package/'SOURCE.md',f'# {name}\n\n{body["introduction"]}\n\n{description}\n\nSource: [{body["credit"]}]({body["source"]}). Checked {INPUTS["checkedOn"]}. Numerical extraction and its assumptions are pinned in source/measurements.json. Scene epoch is fixed at 2026-09-03. Shadows and Orbit default off.\n\n## Source survey\n\n{survey}\n\nReproduce numeric inputs with `python3 docs/distant-worlds/author.py`. The existing terrestrial preparer and meshoptimizer produce retained PolyCSS native u raster triangles.\n')
-    write(package/'NOTICE.md',f'# {name}: credits\n\n{body["credit"]}: {body["source"]}. Numerical facts are attributed; papers are not relicensed. Prepared illustration and grid: cssEarth MIT. ESO/S. Brunier panorama CC BY4.0; Inter SIL OFL1.1; HYG license in source/stars.\n')
-    write(package/'README.md',f'# {name}\n\n{body["introduction"]}\n\n[Source interpretation](SOURCE.md) and [credits](NOTICE.md). The Shape model view uses the shared unmapped-surface grid. Shadows and Orbit default off.\n\nRestore: `node tools/objects/dist/operations.js acquire {ident}`. Prepare: `node tools/objects/dist/prepare-authored.js {ident} --write`. Install published assets: `pnpm setup:assets --object={ident}`. Batch recipe and evidence: [distant worlds](../../../docs/distant-worlds/README.md).\n')
     print(ident,'source-authored')
