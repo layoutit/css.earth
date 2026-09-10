@@ -13,6 +13,8 @@ Selected [DAMIT model 5955](https://damit.cuni.cz/projects/damit/asteroid_models
 
 The adopted diameter is **5.55 km** from [Alí-Lagoa & Delbo (2017), A&A603,A55](https://doi.org/10.1051/0004-6361/201629917); [original measurement data](https://cdsarc.cds.unistra.fr/ftp/J/A+A/603/A55/table1.dat). Its quantity is **NEATM effective spherical diameter from W2 data with assumed beaming 1.20**.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 The [schorria validation record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.

@@ -44,6 +44,46 @@ test('migrated world-frame radii override astronomy only at the same position an
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 
+test('frame comparison allows distant roundoff but rejects shifted positions, epochs and references', async () => {
+  const directory = await mkdtemp(resolve(tmpdir(), 'cssearth-frame-roundoff-'));
+  try {
+    for (const id of ['pluto', 'mercury']) {
+      const source = JSON.parse(await readFile(sourcePath, 'utf8'));
+      source.bodies = [{ id, name: id, color: '#aaaaaa' }];
+      const authored = resolve(directory, 'source.json');
+      await writeFile(authored, JSON.stringify(source));
+      const descriptor = JSON.parse(await readFile(resolve(root, `src/planets/${id}/object.json`), 'utf8'));
+      const frame = descriptor.properties.worldFrame;
+      const objectDirectory = resolve(directory, id);
+      await mkdir(objectDirectory);
+      const shifted = (metres: number) => frame.originM.map((value: number, axis: number) => value + (axis === 0 ? metres : 0));
+      const writeFrame = async (value: unknown) => writeFile(resolve(objectDirectory, 'object.json'), JSON.stringify({
+        ...descriptor, properties: { ...descriptor.properties, worldFrame: value },
+      }));
+      const outputPath = resolve(directory, `${id}.json`);
+      const prepare = () => prepareSpatialContext({ sourcePath: authored, solarGeometryPath, outputPath, objectsDirectory: directory });
+
+      // Two millimetres exceed the inner-planet floor, but are a few binary64
+      // coordinate steps at Pluto. This offset is independent of the allowance.
+      await writeFrame({ ...frame, originM: shifted(.001953125), bodyRadiusM: 1234567 });
+      if (id === 'pluto') {
+        await prepare();
+        const output = JSON.parse(await readFile(outputPath, 'utf8'));
+        assert.equal(output.bodies[0].radiusM, 1234567);
+      } else await assert.rejects(prepare, /incompatible/);
+
+      for (const invalid of [
+        { ...frame, originM: shifted(.02) },
+        { ...frame, epochJdTt: frame.epochJdTt + 1 },
+        { ...frame, referenceFrame: 'sun-ecliptic' },
+      ]) {
+        await writeFrame(invalid);
+        await assert.rejects(prepare, /frame.*incompatible|worldFrame/);
+      }
+    }
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
 test('authored context inventory extends beyond package and navigation registries', async () => {
   const directory = await mkdtemp(resolve(tmpdir(), 'cssearth-extra-context-'));
   try {

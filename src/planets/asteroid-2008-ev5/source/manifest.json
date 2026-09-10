@@ -165,22 +165,10 @@
       "expectedSha256": "301c5b2144cac129b0f39e0307053a1aa7e508ee4aff1ee30f047c9f4fb0fb2b"
     },
     {
-      "path": "reference/jpl-shape-index.html",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
-      "expectedBytes": 2608,
-      "expectedSha256": "e362c1ae825bc8adac5245f9d9964b2858687004f63752ef9cb39fab67372fb3"
-    },
-    {
       "path": "reference/model-properties.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 1989,
       "expectedSha256": "68dd3ac59416dfa8cdaf6288b293871202e983157ec7420f7db30279f52cbca3"
-    },
-    {
-      "path": "reference/study.html",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
-      "expectedBytes": 4528,
-      "expectedSha256": "7ab43e6a96841d92760d3cff742509ef9407471cc4aa0cb0aca00e5074928e10"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",

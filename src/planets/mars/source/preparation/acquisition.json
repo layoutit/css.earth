@@ -66,22 +66,6 @@
       "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/mars/deimos/model/1/Deimos_1_1000.glb"
     },
     {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "moons/jpl-physical-parameters.html",
-      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "moons/jpl-mean-elements.html",
-      "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html"
-    },
-    {
       "kind": "tile-mosaic",
       "groups": [
         "refresh"

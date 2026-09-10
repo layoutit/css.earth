@@ -85,24 +85,6 @@
       }
     },
     {
-      "id": "orbit-jpl-physical-html",
-      "path": "orbit/jpl-physical.html",
-      "expectedBytes": 58244,
-      "expectedSha256": "e49a487947295c389ba6e5833dd8fb04b63e826d39f70c123881882096e5e68b",
-      "origin": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
-      "credit": "NASA JPL Solar System Dynamics",
-      "license": "NASA/USGS public scientific data with attribution",
-      "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
-      ],
-      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified SHA-256, never silently refreshed",
-      "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
-      "consumers": [
-        "scene",
-        "panel"
-      ]
-    },
-    {
       "id": "editorial-nasa-pluto-json",
       "path": "editorial/nasa-pluto.json",
       "expectedBytes": 49300,
@@ -187,28 +169,28 @@
       "consumers": [
         "lenses"
       ]
+    },
+    {
+      "id": "orbit-jpl-physical-values",
+      "path": "orbit/jpl-physical.json",
+      "expectedBytes": 671,
+      "expectedSha256": "2d7b31340114fda45b9a11842c81a49434e04b0e06928e44e81041d8f26c6762",
+      "origin": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+      "credit": "NASA JPL Solar System Dynamics",
+      "license": "NASA/USGS public scientific data with attribution",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Four values and reported uncertainties transcribed from the Pluto row; see the source and extraction fields in this record.",
+      "redistribution": "Cited numerical extract with NASA/JPL attribution.",
+      "consumers": [
+        "scene",
+        "panel"
+      ]
     }
   ],
   "generatedIntermediates": [],
   "documents": [
-    {
-      "path": "lenses/usgs-dem-metadata.html",
-      "expectedBytes": 25207,
-      "expectedSha256": "caafd0096791c639294a6cd0d29adb10c1727eb938139615d1a16f2cddc73bcb",
-      "purpose": "Checked provider metadata or license notice; acquisition date 2026-09-04"
-    },
-    {
-      "path": "lenses/usgs-mosaic-metadata.html",
-      "expectedBytes": 25135,
-      "expectedSha256": "362ce087006af038bcad43df5df57deb2216a67e305097794348081025c7210d",
-      "purpose": "Checked provider metadata or license notice; acquisition date 2026-09-04"
-    },
-    {
-      "path": "surface/nasa-color-metadata.html",
-      "expectedBytes": 250769,
-      "expectedSha256": "c0d2f605bb3b08a5c7b6728739b4ca2f411b68685e1b5c8426e05538f167f275",
-      "purpose": "Checked provider metadata or license notice; acquisition date 2026-09-04"
-    },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 656,
@@ -259,8 +241,8 @@
     },
     {
       "path": "preparation/physical.json",
-      "expectedBytes": 1392,
-      "expectedSha256": "82216d23362dd2f957cb656f030fee3c5e78439df30c3bccba40b2dca8bd7476",
+      "expectedBytes": 1482,
+      "expectedSha256": "a31a4d007e2447f6ab924af3a5dbafc854260f675b52a937755f9901c2e7442c",
       "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
     },
     {

@@ -6,12 +6,12 @@
   "fields": {
     "ID": "456",
     "Asteroid": "(1865) Cerberus",
-    "\u03bb": "311",
-    "\u03b2": "-78",
+    "λ": "311",
+    "β": "-78",
     "P": "6.803286",
     "YORP": "",
     "t0": "2444547",
-    "\u03c60": "180",
+    "φ0": "180",
     "Light Scattering Model": "LSL",
     "p1": "0.1",
     "p2": "1",
@@ -20,14 +20,14 @@
     "p5": "",
     "Calibrated Size": "1 (Yes)",
     "D": "1.2",
-    "\u03c3D": "",
-    "\u0393": "400",
-    "\u0393min": "",
-    "\u0393max": "",
+    "σD": "",
+    "Γ": "400",
+    "Γmin": "",
+    "Γmax": "",
     "pV": "0.22",
-    "\u03c3pV": "",
-    "\u03b3c": "90",
-    "\u03f1c": "0.9",
+    "σpV": "",
+    "γc": "90",
+    "ϱc": "0.9",
     "Quality Flag": "",
     "Nonconvex": "0 (No)",
     "Version": "2016-04-22",
@@ -42,13 +42,13 @@
     "Pixel size (milliarcsececond)": "n/a",
     "Volume-equivalent diameter (px)": "n/a",
     "Surface-equivalent diameter (px)": "n/a",
-    "Subsolar-point longitude (\u00b0)": "n/a",
-    "Subsolar-point latitude (\u00b0)": "n/a",
-    "Subearth-point longitude (\u00b0)": "n/a",
-    "Subearth-point latitude (\u00b0)": "n/a",
-    "Phase-angle-bisector longitude (\u00b0)": "n/a",
-    "Phase-angle-bisector latitude (\u00b0)": "n/a",
-    "Solar phase angle (\u00b0)": "n/a"
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
   },
   "files": {
     "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/1780/3D.pdf",
@@ -58,14 +58,14 @@
   },
   "references": [
     {
-      "label": "\u010eurech et al. (2012)",
+      "label": "Ďurech et al. (2012)",
       "url": "https://damit.cuni.cz/projects/damit/references/view/144",
-      "file": "reference-144.html"
+      "title": "Analysis of the rotation period of asteroids (1865) Cerberus, (2100) Ra-Shalom, and (3103) Eger - search for the YORP effect"
     },
     {
-      "label": "Hanu\u0161 et al. (2015)",
+      "label": "Hanuš et al. (2015)",
       "url": "https://damit.cuni.cz/projects/damit/references/view/163",
-      "file": "reference-163.html"
+      "title": "Thermophysical modeling of asteroids from WISE thermal infrared data - Significance of the shape model and the pole orientation uncertainties"
     }
   ],
   "id": "cerberus",
@@ -130,7 +130,7 @@
     "reference": "DAMIT model 456, version 2016-04-22",
     "scaleKmPerSourceUnit": 1.00000011937836,
     "metersPerSourceUnit": 1000.0001193783601,
-    "limitations": "The archived model gives D1.2 km with no diameter uncertainty. Unknown uncertainty is retained as null; neither zero uncertainty nor a precise surface reconstruction is claimed. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanu\u0161 et al.2015 section4.2 explicitly report a poor thermophysical fit for Cerberus and omit its uncertainties. The DAMIT calibrated flag is retained as archive metadata, not treated as strong physical-size validation.",
+    "limitations": "The archived model gives D1.2 km with no diameter uncertainty. Unknown uncertainty is retained as null; neither zero uncertainty nor a precise surface reconstruction is claimed. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanuš et al.2015 section4.2 explicitly report a poor thermophysical fit for Cerberus and omit its uncertainties. The DAMIT calibrated flag is retained as archive metadata, not treated as strong physical-size validation.",
     "visibleDescription": "Convex lightcurve model at an uncertain 1.2 km archive scale. The published thermal fit is poor and its size uncertainty is unconstrained. Grid marks unavailable imagery."
   },
   "selectionNotes": "The archived model gives D1.2 km with no diameter uncertainty. Unknown uncertainty is retained as null; neither zero uncertainty nor a precise surface reconstruction is claimed. The source paper rejects a well-constrained thermal fit; the model is retained as an explicitly uncertain shape-scale illustration.",
@@ -138,7 +138,7 @@
     {
       "url": "https://arxiv.org/html/1504.04199",
       "file": "hanus-2015.html",
-      "label": "Hanu\u0161 et al. (2015), thermophysical fits with shape and pole uncertainty"
+      "label": "Hanuš et al. (2015), thermophysical fits with shape and pole uncertainty"
     }
   ],
   "distanceAu": 1.0799439098043286,
@@ -146,12 +146,12 @@
   "sourceFields": {
     "ID": "456",
     "Asteroid": "(1865) Cerberus",
-    "\u03bb": "311",
-    "\u03b2": "-78",
+    "λ": "311",
+    "β": "-78",
     "P": "6.803286",
     "YORP": "",
     "t0": "2444547",
-    "\u03c60": "180",
+    "φ0": "180",
     "Light Scattering Model": "LSL",
     "p1": "0.1",
     "p2": "1",
@@ -160,14 +160,14 @@
     "p5": "",
     "Calibrated Size": "1 (Yes)",
     "D": "1.2",
-    "\u03c3D": "",
-    "\u0393": "400",
-    "\u0393min": "",
-    "\u0393max": "",
+    "σD": "",
+    "Γ": "400",
+    "Γmin": "",
+    "Γmax": "",
     "pV": "0.22",
-    "\u03c3pV": "",
-    "\u03b3c": "90",
-    "\u03f1c": "0.9",
+    "σpV": "",
+    "γc": "90",
+    "ϱc": "0.9",
     "Quality Flag": "",
     "Nonconvex": "0 (No)",
     "Version": "2016-04-22",
@@ -182,14 +182,14 @@
     "Pixel size (milliarcsececond)": "n/a",
     "Volume-equivalent diameter (px)": "n/a",
     "Surface-equivalent diameter (px)": "n/a",
-    "Subsolar-point longitude (\u00b0)": "n/a",
-    "Subsolar-point latitude (\u00b0)": "n/a",
-    "Subearth-point longitude (\u00b0)": "n/a",
-    "Subearth-point latitude (\u00b0)": "n/a",
-    "Phase-angle-bisector longitude (\u00b0)": "n/a",
-    "Phase-angle-bisector latitude (\u00b0)": "n/a",
-    "Solar phase angle (\u00b0)": "n/a"
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
   },
   "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
-  "modelLimitations": "The archived model gives D1.2 km with no diameter uncertainty. Unknown uncertainty is retained as null; neither zero uncertainty nor a precise surface reconstruction is claimed. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanu\u0161 et al.2015 section4.2 explicitly report a poor thermophysical fit for Cerberus and omit its uncertainties. The DAMIT calibrated flag is retained as archive metadata, not treated as strong physical-size validation."
+  "modelLimitations": "The archived model gives D1.2 km with no diameter uncertainty. Unknown uncertainty is retained as null; neither zero uncertainty nor a precise surface reconstruction is claimed. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanuš et al.2015 section4.2 explicitly report a poor thermophysical fit for Cerberus and omit its uncertainties. The DAMIT calibrated flag is retained as archive metadata, not treated as strong physical-size validation."
 }

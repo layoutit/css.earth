@@ -6,6 +6,8 @@ Checked 2026-09-09. Selected DAMIT model [490](https://damit.cuni.cz/projects/da
 
 Convex lightcurve shape, uniformly scaled to the AKARI effective diameter of 20.87 ±0.36 km.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 Recorded five-body results retain their [original build identities](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/non-belt-populations/README.md#evidence-identity).
@@ -41,7 +43,7 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
 - [AKARI AcuA catalog](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) and [Usui et al. (2011)](https://arxiv.org/abs/1106.1948) — retained original catalog and field definitions. Row number 512, 7 detections. The quoted error is the catalog thermal-model error, not total shape-scale uncertainty.
 - [JPL SBDB](https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=512) — retained independent MCA population classification, checked 2026-09-09.
-- [Hanuš et al. (2013)](https://damit.cuni.cz/projects/damit/references/view/148) — original model publication record.
+- [Hanuš et al. (2013), Asteroids' physical models from combined dense and sparse photometry and scaling of the YORP effect by the observed obliquity distribution](https://ui.adsabs.harvard.edu/abs/2013A%26A...551A..67H) — original model publication record.
 
 
 JPL SBDB class MCA confirms this body is a Mars-crosser. The original convex lightcurve inversion is not resolved terrain. Only the checked listed source model is used.

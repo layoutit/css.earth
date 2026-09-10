@@ -157,18 +157,6 @@
       "expectedSha256": "b9ade700fe514eb9cb245c5255dd79dc4e4d0f12af2df944b9684df8899808d0"
     },
     {
-      "path": "reference/damit-survey.html",
-      "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 9072,
-      "expectedSha256": "bdb21200a0f855c7b2801416f9b16de0d4644f5bd6386cccb726b53603937504"
-    },
-    {
-      "path": "reference/lam-release.html",
-      "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 3147,
-      "expectedSha256": "8793409dced0c8f65163f17d007c1304fd0de6e1d66d5c34265e8ccf7d356a09"
-    },
-    {
       "path": "reference/sphere-example-header.txt",
       "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 66339,

@@ -93,14 +93,14 @@
     },
     {
       "path": "measurements.json",
-      "expectedBytes": 6570,
-      "expectedSha256": "f9b12742c6f71be0aa873d5f16ecee78c8daec2202a10fe99100117a98cabbd6",
+      "expectedBytes": 5179,
+      "expectedSha256": "bb54a6f55fa49584b8a558b60bf00c47268a5c0d0edc824de15a1596a3e1ad23",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1188,
-      "expectedSha256": "19d565f7ed2d58599ad6a4a3a91b53bc63252e59149368ee7fd8a606f4077b25",
+      "expectedBytes": 778,
+      "expectedSha256": "8dd6f2502e4a09a7d34c84d97c04de6311f01071a6102a91c0d044f4efbf086d",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {
@@ -140,12 +140,6 @@
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {
-      "path": "reference/gonggong-pal-2016.html",
-      "expectedBytes": 45567,
-      "expectedSha256": "a20e1b3623e07a0198a08e9206a2fb2a7d28d0db87744a93e391af5045cbe0e8",
-      "purpose": "Pinned source observation, interpretation or preparation input."
-    },
-    {
       "path": "reference/horizons-elements.txt",
       "expectedBytes": 7356,
       "expectedSha256": "54e1478d248b5f4212ffee3b7d9e3a43697d7c70e9b663c99a405927973a05e4",
@@ -155,12 +149,6 @@
       "path": "reference/horizons-vectors.txt",
       "expectedBytes": 6646,
       "expectedSha256": "40b4c095e4d6bdd88dc54b752c9a33a621b1bc3795436ff3c5bff5f87925c385",
-      "purpose": "Pinned source observation, interpretation or preparation input."
-    },
-    {
-      "path": "reference/sedna-gonggong-emery-2024.html",
-      "expectedBytes": 45900,
-      "expectedSha256": "2fab5cb01d246ac9bf94782e573d096cd261198c9eeb6f97ea788ad1fe3d3919",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {

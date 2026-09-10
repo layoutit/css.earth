@@ -4,7 +4,7 @@ Ra-Shalom is an irregular near-Earth asteroid reconstructed from Arecibo radar o
 
 ## Sources
 
-The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original rashalom.obj](https://echo.jpl.nasa.gov/asteroids/shapes/rashalom.obj). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/2100_RaShalom/shepard.etal.2008.rashalom.pdf): Shepard et al. (2008), Icarus 193, 20–38; Arecibo and NASA/JPL radar astronomy. The paper, original OBJ and public index are pinned beside the recipe.
+The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original rashalom.obj](https://echo.jpl.nasa.gov/asteroids/shapes/rashalom.obj). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/2100_RaShalom/shepard.etal.2008.rashalom.pdf): Shepard et al. (2008), Icarus 193, 20–38; Arecibo and NASA/JPL radar astronomy. The paper and original geometry are pinned beside the recipe.
 
 Shape uses the shared missing-imagery grid. Elevation shows original model radius minus the 1.15 km sphere, from -0.33 to 0.37 km. The scalar is evaluated at the closest source triangle point, not the first center-ray intersection. This is another view of the same radar reconstruction, not independent topography or height above a gravitational equipotential. Cartographic relief and lighting are display treatments.
 

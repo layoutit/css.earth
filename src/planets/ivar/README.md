@@ -6,6 +6,8 @@ Checked 2026-09-09. Original [DAMIT model 271](https://damit.cuni.cz/projects/da
 
 Convex lightcurve model at the archive fixed-shape diameter of 7.4 ±0.2 km.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 Recorded four-body results retain their [original build identities](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/non-belt-populations/README.md#evidence-identity).
@@ -45,8 +47,8 @@ Source pole: ecliptic J2000 (334°,39°). Reference sidereal period: 4.79517 h. 
 
 - [Original numerical mesh](https://damit.cuni.cz/projects/damit/stored_files/open/913/shape.txt) — selected, pinned unchanged.
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — pole, period, units and archive diameter definitions; CC BY 4.0.
-- [Hanuš et al. (2015)](https://damit.cuni.cz/projects/damit/references/view/163)
-- [Kaasalainen et al. (2004)](https://damit.cuni.cz/projects/damit/references/view/107)
+- [Hanuš et al. (2015), Thermophysical modeling of asteroids from WISE thermal infrared data - Significance of the shape model and the pole orientation uncertainties](https://ui.adsabs.harvard.edu/abs/2015Icar..256..101H)
+- [Kaasalainen et al. (2004), Photometry and models of eight near-Earth asteroids](https://ui.adsabs.harvard.edu/abs/2004Icar..167..178K)
 - [Hanuš et al. (2015), thermophysical fits with shape and pole uncertainty](https://arxiv.org/html/1504.04199)
 
 Alternative shapes/poles: [model 272](https://damit.cuni.cz/projects/damit/asteroid_models/view/272), pole ['336', '39']

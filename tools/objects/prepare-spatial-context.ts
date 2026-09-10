@@ -81,8 +81,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     // Matrix products at Neptune's distance have millimetre-scale roundoff.
     // Keep the check within a few floating-point ULPs before using the exact
     // prepared parent position below, rather than a fixed sub-ULP tolerance.
-    const tolerance = parentPosition ? Math.max(.001, 8 * Number.EPSILON *
-      Math.max(...parentPosition.map(Math.abs), ...state.centerPositionM.map(Math.abs))) : 0;
+    const tolerance = parentPosition ? positionToleranceM(parentPosition, state.centerPositionM) : 0;
     if (!parentPosition || Math.hypot(...parentPosition.map((value, axis) => value - state.centerPositionM[axis]!)) > tolerance) {
       throw new TypeError(`Prepared orbit centre is incompatible with its parent for ${body.id}.`);
     }
@@ -117,10 +116,17 @@ async function preparedRadius(id: string, originM: Vector3, referenceFrame: stri
   const frameEpoch = number(frame.epochJdTt, `${id} prepared world frame epoch`);
   const frameOrigin = vector3(frame.originM, `${id} prepared world frame origin`);
   const radiusM = positive(frame.bodyRadiusM, `${id} prepared world frame radius`);
-  if (frameReference !== referenceFrame || frameEpoch !== epochJdTt || Math.hypot(...frameOrigin.map((value, axis) => value - originM[axis]!)) > .001) {
+  // Saved frames and reconstructed positions can differ by millimetres after
+  // matrix roundoff at outer-planet distances. Use the orbit-centre allowance.
+  if (frameReference !== referenceFrame || frameEpoch !== epochJdTt ||
+      Math.hypot(...frameOrigin.map((value, axis) => value - originM[axis]!)) > positionToleranceM(frameOrigin, originM)) {
     throw new TypeError(`Prepared world frame is incompatible with solar context for ${id}.`);
   }
   return radiusM;
+}
+
+function positionToleranceM(a: Vector3, b: Vector3): number {
+  return Math.max(.001, 8 * Number.EPSILON * Math.max(...a.map(Math.abs), ...b.map(Math.abs)));
 }
 
 function isMissingFile(error: unknown): boolean {

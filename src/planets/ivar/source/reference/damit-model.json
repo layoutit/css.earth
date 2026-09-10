@@ -6,12 +6,12 @@
   "fields": {
     "ID": "271",
     "Asteroid": "(1627) Ivar",
-    "\u03bb": "334",
-    "\u03b2": "39",
+    "λ": "334",
+    "β": "39",
     "P": "4.795168",
     "YORP": "",
     "t0": "2446226",
-    "\u03c60": "0",
+    "φ0": "0",
     "Light Scattering Model": "LSL",
     "p1": "0.1",
     "p2": "0.5",
@@ -20,14 +20,14 @@
     "p5": "",
     "Calibrated Size": "1 (Yes)",
     "D": "7.4",
-    "\u03c3D": "0.2",
-    "\u0393": "100",
-    "\u0393min": "80",
-    "\u0393max": "130",
+    "σD": "0.2",
+    "Γ": "100",
+    "Γmin": "80",
+    "Γmax": "130",
     "pV": "0.26",
-    "\u03c3pV": "0.02",
-    "\u03b3c": "50",
-    "\u03f1c": "0.5",
+    "σpV": "0.02",
+    "γc": "50",
+    "ϱc": "0.5",
     "Quality Flag": "",
     "Nonconvex": "0 (No)",
     "Version": "2016-04-22",
@@ -42,13 +42,13 @@
     "Pixel size (milliarcsececond)": "n/a",
     "Volume-equivalent diameter (px)": "n/a",
     "Surface-equivalent diameter (px)": "n/a",
-    "Subsolar-point longitude (\u00b0)": "n/a",
-    "Subsolar-point latitude (\u00b0)": "n/a",
-    "Subearth-point longitude (\u00b0)": "n/a",
-    "Subearth-point latitude (\u00b0)": "n/a",
-    "Phase-angle-bisector longitude (\u00b0)": "n/a",
-    "Phase-angle-bisector latitude (\u00b0)": "n/a",
-    "Solar phase angle (\u00b0)": "n/a"
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
   },
   "files": {
     "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/911/IAUspin.txt",
@@ -57,14 +57,14 @@
   },
   "references": [
     {
-      "label": "Hanu\u0161 et al. (2015)",
+      "label": "Hanuš et al. (2015)",
       "url": "https://damit.cuni.cz/projects/damit/references/view/163",
-      "file": "reference-163.html"
+      "title": "Thermophysical modeling of asteroids from WISE thermal infrared data - Significance of the shape model and the pole orientation uncertainties"
     },
     {
       "label": "Kaasalainen et al. (2004)",
       "url": "https://damit.cuni.cz/projects/damit/references/view/107",
-      "file": "reference-107.html"
+      "title": "Photometry and models of eight near-Earth asteroids"
     }
   ],
   "id": "ivar",
@@ -139,15 +139,15 @@
     "reference": "DAMIT model 271, version 2016-04-22",
     "scaleKmPerSourceUnit": 1.0000000508665032,
     "metersPerSourceUnit": 1000.0000508665032,
-    "limitations": "The calibrated 2016 convex solution is selected; the older nonconvex model272 is explicitly labelled plausible in the archive and is not a resolved terrain measurement. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanu\u0161 et al.2015 Table4 distinguishes this fixed revised shape fit from the varied-shape ensemble, which gives a wider size range (8.0 km, -0.9/+0.3 km). The archive7.4 km scale is used consistently with its mesh; the narrow archived error is not total physical uncertainty.",
-    "visibleDescription": "Convex lightcurve model at the archive fixed-shape scale of 7.4 km (archived \u00b10.2 km; additional shape-model uncertainty). Grid marks unavailable imagery."
+    "limitations": "The calibrated 2016 convex solution is selected; the older nonconvex model272 is explicitly labelled plausible in the archive and is not a resolved terrain measurement. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanuš et al.2015 Table4 distinguishes this fixed revised shape fit from the varied-shape ensemble, which gives a wider size range (8.0 km, -0.9/+0.3 km). The archive7.4 km scale is used consistently with its mesh; the narrow archived error is not total physical uncertainty.",
+    "visibleDescription": "Convex lightcurve model at the archive fixed-shape scale of 7.4 km (archived ±0.2 km; additional shape-model uncertainty). Grid marks unavailable imagery."
   },
   "selectionNotes": "The calibrated 2016 convex solution is selected; the older nonconvex model272 is explicitly labelled plausible in the archive and is not a resolved terrain measurement.",
   "papers": [
     {
       "url": "https://arxiv.org/html/1504.04199",
       "file": "hanus-2015.html",
-      "label": "Hanu\u0161 et al. (2015), thermophysical fits with shape and pole uncertainty"
+      "label": "Hanuš et al. (2015), thermophysical fits with shape and pole uncertainty"
     }
   ],
   "distanceAu": 1.8630871303717667,
@@ -155,12 +155,12 @@
   "sourceFields": {
     "ID": "271",
     "Asteroid": "(1627) Ivar",
-    "\u03bb": "334",
-    "\u03b2": "39",
+    "λ": "334",
+    "β": "39",
     "P": "4.795168",
     "YORP": "",
     "t0": "2446226",
-    "\u03c60": "0",
+    "φ0": "0",
     "Light Scattering Model": "LSL",
     "p1": "0.1",
     "p2": "0.5",
@@ -169,14 +169,14 @@
     "p5": "",
     "Calibrated Size": "1 (Yes)",
     "D": "7.4",
-    "\u03c3D": "0.2",
-    "\u0393": "100",
-    "\u0393min": "80",
-    "\u0393max": "130",
+    "σD": "0.2",
+    "Γ": "100",
+    "Γmin": "80",
+    "Γmax": "130",
     "pV": "0.26",
-    "\u03c3pV": "0.02",
-    "\u03b3c": "50",
-    "\u03f1c": "0.5",
+    "σpV": "0.02",
+    "γc": "50",
+    "ϱc": "0.5",
     "Quality Flag": "",
     "Nonconvex": "0 (No)",
     "Version": "2016-04-22",
@@ -191,14 +191,14 @@
     "Pixel size (milliarcsececond)": "n/a",
     "Volume-equivalent diameter (px)": "n/a",
     "Surface-equivalent diameter (px)": "n/a",
-    "Subsolar-point longitude (\u00b0)": "n/a",
-    "Subsolar-point latitude (\u00b0)": "n/a",
-    "Subearth-point longitude (\u00b0)": "n/a",
-    "Subearth-point latitude (\u00b0)": "n/a",
-    "Phase-angle-bisector longitude (\u00b0)": "n/a",
-    "Phase-angle-bisector latitude (\u00b0)": "n/a",
-    "Solar phase angle (\u00b0)": "n/a"
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
   },
   "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
-  "modelLimitations": "The calibrated 2016 convex solution is selected; the older nonconvex model272 is explicitly labelled plausible in the archive and is not a resolved terrain measurement. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanu\u0161 et al.2015 Table4 distinguishes this fixed revised shape fit from the varied-shape ensemble, which gives a wider size range (8.0 km, -0.9/+0.3 km). The archive7.4 km scale is used consistently with its mesh; the narrow archived error is not total physical uncertainty."
+  "modelLimitations": "The calibrated 2016 convex solution is selected; the older nonconvex model272 is explicitly labelled plausible in the archive and is not a resolved terrain measurement. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. Hanuš et al.2015 Table4 distinguishes this fixed revised shape fit from the varied-shape ensemble, which gives a wider size range (8.0 km, -0.9/+0.3 km). The archive7.4 km scale is used consistently with its mesh; the narrow archived error is not total physical uncertainty."
 }

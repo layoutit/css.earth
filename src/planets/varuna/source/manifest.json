@@ -93,14 +93,14 @@
     },
     {
       "path": "measurements.json",
-      "expectedBytes": 5120,
-      "expectedSha256": "9b25d7a5922cdc526683a9e5210f9c32305f78f3f7683c65df6bc9bf5635db75",
+      "expectedBytes": 4969,
+      "expectedSha256": "c5993c1bdb27846fe421d85b5e689d4b4b35abb6ac31e4d528e52fda1bac29c9",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 732,
-      "expectedSha256": "3be8dc59834a6c25ec646c6014190c23c316500d988d68b6a6f572bb5fd68361",
+      "expectedBytes": 526,
+      "expectedSha256": "179dcbdf58198c6218d0fbf511a76a3661e0db2ce9558eedb4022e632384b554",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {
@@ -143,12 +143,6 @@
       "path": "reference/horizons-vectors.txt",
       "expectedBytes": 6645,
       "expectedSha256": "ee9feda03504ecb4ac1510041d9207344872032061fd38673d2607b373c6c07d",
-      "purpose": "Pinned source observation, interpretation or preparation input."
-    },
-    {
-      "path": "reference/varuna-fernandez-2019.html",
-      "expectedBytes": 734024,
-      "expectedSha256": "2a0a3e92488daf6dbd57f149cb9606f725d19331221a2d5d73672ff663850b62",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {

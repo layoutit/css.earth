@@ -21,33 +21,6 @@
       "license": "MIT"
     },
     {
-      "id": "pds-jupiter-ring-statistics",
-      "path": "rings/pds-jupiter-rings-table.html",
-      "expectedBytes": 20293,
-      "expectedSha256": "61c744fe0610a60306c45cc7d2a587fb7582a0f4738db47a7421daaec7603597",
-      "origin": "https://pds-rings.seti.org/jupiter/jupiter_rings_table.html",
-      "credit": "NASA Planetary Data System Ring-Moon Systems Node",
-      "license": "United States government scientific data"
-    },
-    {
-      "id": "pds-jupiter-main-ring-halo-caption",
-      "path": "rings/pds-pia00701.html",
-      "expectedBytes": 16498,
-      "expectedSha256": "938d301980cc9bd764b3e1ef84880d0d8cdd542e60271ed8569cb59272447fec",
-      "origin": "https://pds-rings.seti.org/jupiter/galileo/PIA00701.html",
-      "credit": "NASA/JPL Galileo and NASA Planetary Data System Ring-Moon Systems Node",
-      "license": "United States government scientific data"
-    },
-    {
-      "id": "pds-jupiter-gossamer-caption",
-      "path": "rings/pds-pia01623.html",
-      "expectedBytes": 17061,
-      "expectedSha256": "5cdad6f5b3544111beee0a97e78acc1f0ebf17d24fc6288221c461562cd56a65",
-      "origin": "https://pds-rings.seti.org/jupiter/galileo/PIA01623.html",
-      "credit": "NASA/JPL Galileo and NASA Planetary Data System Ring-Moon Systems Node",
-      "license": "United States government scientific data"
-    },
-    {
       "id": "nasa-galileo-jupiter-main-ring-halo",
       "path": "rings/pia00701.jpg",
       "expectedBytes": 10021,
@@ -149,7 +122,7 @@
             "innerRadiusKm": 100000,
             "outerRadiusKm": 122400,
             "opticalDepthText": "~10^-6",
-            "opticalDepth": 0.000001,
+            "opticalDepth": 1e-06,
             "verticalThicknessKm": 10000,
             "associatedMoons": []
           }
@@ -177,7 +150,7 @@
             "innerRadiusKm": 122400,
             "outerRadiusKm": 129100,
             "opticalDepthText": "< 8 x 10^-6",
-            "opticalDepth": 0.000008,
+            "opticalDepth": 8e-06,
             "verticalThicknessKm": 100,
             "associatedMoons": [
               "Metis",
@@ -208,7 +181,7 @@
             "innerRadiusKm": 122400,
             "outerRadiusKm": 181350,
             "opticalDepthText": "~5 x 10^-7",
-            "opticalDepth": 5e-7,
+            "opticalDepth": 5e-07,
             "verticalThicknessKm": 2600,
             "associatedMoons": [
               "Amalthea"
@@ -238,7 +211,7 @@
             "innerRadiusKm": 122400,
             "outerRadiusKm": 221900,
             "opticalDepthText": "~10^-7",
-            "opticalDepth": 1e-7,
+            "opticalDepth": 1e-07,
             "verticalThicknessKm": 8800,
             "associatedMoons": [
               "Thebe"
@@ -268,7 +241,7 @@
             "innerRadiusKm": 221900,
             "outerRadiusKm": 270000,
             "opticalDepthText": "~10^-9",
-            "opticalDepth": 1e-9,
+            "opticalDepth": 1e-09,
             "verticalThicknessKm": 8800,
             "associatedMoons": [
               "Thebe"

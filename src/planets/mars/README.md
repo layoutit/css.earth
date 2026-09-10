@@ -156,10 +156,9 @@ request or scientific calculation.
 
 The checked OpenSpace GLB models preserve the irregular source shapes of
 Phobos and Deimos. Their scene axes are cross-checked against OpenSpace's
-planet-owned globe assets. Physical mean radii and mean orbital elements come
-from checked JPL Solar System Dynamics MAR099 snapshots. The separate
-OpenSpace scene snapshot pins the MAR097 SPICE kernel used by that source
-scene; it is not the authority for the prepared mean-element table.
+planet-owned globe assets. The [JPL satellite tables](https://ssd.jpl.nasa.gov/sats/phys_par/sep.html)
+identify Phobos and Deimos. Mars’s information panel records two moons. The
+OpenSpace scene record pins the MAR097 SPICE kernel used by that source scene.
 
 These are physical/source records, not rendered satellites in the Mars scene.
 The earlier `mars-moon-billboards.webp` and `mars-moon-billboards@2x.webp`

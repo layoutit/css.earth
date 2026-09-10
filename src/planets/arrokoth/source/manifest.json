@@ -197,7 +197,13 @@
       "path": "science/albedo_arrokoth4_fp36h2_masked1.lblx",
       "expectedBytes": 9529,
       "expectedSha256": "e752e5dd5eac25d65ccfe07b31cad02a4f47d158f80d4e14e12e17ef99e54af4",
-      "purpose": "Pinned source observation, interpretation or preparation input."
+      "purpose": "Native label identifying the albedo map, its FITS array and released UV projection.",
+      "kind": "source-document",
+      "title": "Arrokoth Albedo Map — PDS4 label",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_shapemodel_porter2024-v1.0/albedo_arrokoth4_fp36h2_masked1.lblx",
+      "credit": "Porter, S. (2024); NASA PDS / New Horizons",
+      "acquisition": "Unmodified PDS4 product label; restored through source/preparation/acquisition.json.",
+      "productId": "urn:nasa:pds:nh_derived:arrokoth_shapemodel_porter2024:albedo_arrokoth4_fp36h2_masked1::1.0"
     },
     {
       "path": "science/albedo_arrokoth4_fp36h2_masked1.png",

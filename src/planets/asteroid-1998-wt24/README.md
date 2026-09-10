@@ -4,7 +4,7 @@
 
 ## Sources
 
-The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original wt24.obj](https://echo.jpl.nasa.gov/asteroids/shapes/wt24.obj). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/1998WT24/busch.etal.2008.1998wt24.pdf): Busch et al. (2008), Icarus 195, 614–621; Arecibo, Goldstone and NASA/JPL. The paper, original OBJ and public index are pinned beside the recipe.
+The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original wt24.obj](https://echo.jpl.nasa.gov/asteroids/shapes/wt24.obj). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/1998WT24/busch.etal.2008.1998wt24.pdf): Busch et al. (2008), Icarus 195, 614–621; Arecibo, Goldstone and NASA/JPL. The paper and original geometry are pinned beside the recipe.
 
 Shape uses the shared missing-imagery grid. Elevation shows original model radius minus the 0.2075 km sphere, from -0.08 to 0.06 km. This is another view of the same radar reconstruction, not independent topography or height above a gravitational equipotential. Cartographic relief and lighting are display treatments.
 

@@ -17,6 +17,8 @@ Adopted diameter: **47.78 ± 2 km**, meaning **mean radiometric diameter from IR
 
 It does not encompass shape/thermal-model/H systematic uncertainty.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 <a id="provenance"></a>

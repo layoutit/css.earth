@@ -364,12 +364,6 @@
       "expectedSha256": "6d1f4f0e728b1a3bef00ef038d9e4b22102fcd6c636fe6cd35157bebe10cd7d4"
     },
     {
-      "path": "reference/bundle-index.html",
-      "purpose": "Pinned source evidence or authored package input.",
-      "expectedBytes": 1413,
-      "expectedSha256": "922e36209c4a271fb1c4134157489b6e5ab2006de1384037137a76e2a8a3cef8"
-    },
-    {
       "path": "reference/bundle_description.txt",
       "purpose": "Pinned source evidence or authored package input.",
       "expectedBytes": 8495,
@@ -386,18 +380,6 @@
       "purpose": "Pinned source evidence or authored package input.",
       "expectedBytes": 6207,
       "expectedSha256": "7ae7cdbd5a765556bd2e3b296276f694e546394eedf01dfa8482c02d867d3c7c"
-    },
-    {
-      "path": "reference/color-geometry-index.html",
-      "purpose": "Pinned source evidence or authored package input.",
-      "expectedBytes": 1457,
-      "expectedSha256": "16cf2fe5d3f85916868e13844f034c9d28b305441c7b3aff6ed3fd9a5899b1e5"
-    },
-    {
-      "path": "reference/gaspra-color-geometry.html",
-      "purpose": "Pinned source evidence or authored package input.",
-      "expectedBytes": 11295,
-      "expectedSha256": "c06f9a6ebfb34e1ed5e77ca5846a2f60e1d5415776f99cee6c3937e9c1a26f2d"
     },
     {
       "path": "reference/horizons-elements.txt",
@@ -446,12 +428,6 @@
       "purpose": "Pinned source evidence or authored package input.",
       "expectedBytes": 226540,
       "expectedSha256": "52322646ebcc8c0a65dc34f3698a5dcaa59e0951a2421810aa323d74ea4c6893"
-    },
-    {
-      "path": "reference/stooke-map-guide.html",
-      "purpose": "Pinned source evidence or authored package input.",
-      "expectedBytes": 55559,
-      "expectedSha256": "721a2e655e7a39d9e800204b33914150c8df04b068ad9cc3e4cd782393aeeace"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",

@@ -78,6 +78,34 @@ class DocumentationChecks(unittest.TestCase):
             'docs/ accepts Markdown guides and illustrations under docs/images/; move code, fixtures and raw output to their owner',
         })
 
+    def test_reference_and_html_targets_are_validated_in_both_modes(self):
+        examples = [
+            ('[Missing][ref]\n\n[ref]: missing.md', 'missing repository path'),
+            ('![ref][]\n\n[ref]: missing.png', 'missing repository path'),
+            ('[ref]\n\n[ref]: README.md#absent', 'missing Markdown anchor'),
+            ('<img src="missing.png" width="120">', 'missing repository path'),
+            ('<img src=missing.png width=120>', 'missing repository path'),
+            ("<a href='README.md#absent'>Missing</a>", 'missing Markdown anchor'),
+        ]
+        for content, reason in examples:
+            self.write('docs/guide.md', '# Guide\n\n![Comparison](images/comparison.svg)\n\n' + content)
+            for mode in (['--all'], ['--base', 'HEAD']):
+                with self.subTest(content=content, mode=mode):
+                    status, result = self.check(*mode)
+                    self.assertEqual(status, 1)
+                    self.assertEqual([error['reason'] for error in result['errors']], [reason])
+
+    def test_examples_unused_references_and_external_links_are_not_local_targets(self):
+        self.write('docs/guide.md', '# Guide\n\n![Comparison](images/comparison.svg)\n\n'
+                   '[unused]: missing.md\n\n````md\n[Example][ref]\n[ref]: missing.md\n'
+                   '<img src="missing.png">\n````\n\n'
+                   '[External](https://example.org/)\n<img src="//example.org/image.png">\n'
+                   '<a data-href="missing.md" href="README.md#documentation">Index</a>\n'
+                   '<!-- <img src="missing.png"> -->\n'
+                   '[Guide][  Mixed CASE ]\n\n[mixed case]: <README.md#documentation> "Title"\n')
+        status, result = self.check()
+        self.assertEqual(status, 0, result['errors'])
+
 
 if __name__ == '__main__':
     unittest.main()
