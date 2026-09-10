@@ -86,7 +86,7 @@ export const GEOMETRIC_ALBEDO = Object.freeze({
   // Object-owned system-average estimate, used only for parent point photometry.
   "asteroid-2001-sn263": sn263Photometry.geometricAlbedo,
   // Parent context only: common-system geometric albedos, not mapped surface colors.
-  // Scheirich et al.2021 Table4; JPL SBDB Grav2012/Mainzer2014, pinned in docs/moons/b1-preparation/parent-inputs.json.
+  // Scheirich et al.2021 Table4; JPL SBDB Grav2012/Mainzer2014, pinned in https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b1-preparation/parent-inputs.json.
   moshup: 0.162, sylvia: 0.046, patroclus: 0.047,
   pluto: 0.52, ceres: 0.09, eris: 0.96, haumea: 0.80, makemake: 0.81, vesta: 0.4228,
 });

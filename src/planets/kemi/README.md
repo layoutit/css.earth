@@ -8,12 +8,12 @@ Convex lightcurve shape, uniformly scaled to the AKARI effective diameter of 17.
 
 ## Evidence
 
-Recorded five-body results retain their [original build identities](../../../docs/non-belt-populations/README.md#evidence-identity).
+Recorded five-body results retain their [original build identities](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/non-belt-populations/README.md#evidence-identity).
 
-- Source, scalar and sampled surface-fit checks passed. [Validation report](../../../docs/mars-crossing-population/VALIDATION.md) · [Source fit](../../../docs/mars-crossing-population/evidence/kemi-surface-fit.json) · [Source/result view](../../../docs/mars-crossing-population/evidence/kemi-source-result.png).
+- Source, scalar and sampled surface-fit checks passed. [Validation report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/mars-crossing-population/VALIDATION.md) · [Source fit](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/mars-crossing-population/evidence/kemi-surface-fit.json) · [Source/result view](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/mars-crossing-population/evidence/kemi-source-result.png).
 - Production browser checks passed at DPR 1 and 2. The optional Shadows test used
   a bound control event because Settings was hidden; it did not test opening Settings.
-  [Browser record](../../../docs/mars-crossing-population/browser-validation.json).
+  [Browser record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/mars-crossing-population/browser-validation.json).
 
 ## Known problems
 

@@ -55,7 +55,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 316893.28905639314
       },
-      "acquisition": "Reacquire archive inputs through the pinned acquisition recipe; authored numerical inputs are reproduced by docs/trans-neptunian/author.py.",
+      "acquisition": "Numerical ellipsoid table reproduced from measurements.json by tools/objects/source-authoring/trans-neptunian/author.py.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
     },
     {
@@ -80,7 +80,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 316893.28905639314
       },
-      "acquisition": "Reacquire archive inputs through the pinned acquisition recipe; authored numerical inputs are reproduced by docs/trans-neptunian/author.py.",
+      "acquisition": "Authored neutral image retained in Git.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
     }
   ],

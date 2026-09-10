@@ -14,7 +14,11 @@ The source mesh has 1,148 vertices and 2,292 faces, in kilometres. Its computed 
 
 ## Evidence
 
-Source inputs and generated records are pinned in [the manifest](source/manifest.json). Source/runtime closure, fresh runtime installation, all 11 shared browser conformance cases and DPR 1/2 DOM cleanliness passed for this body. See the [batch qualification](../../../docs/moons/b11-companion-catalog/README.md#qualification) and [visual review](../../../docs/moons/b11-companion-catalog/VISUAL-REVIEW.md). Whole-repository qualification remains open; the PR is draft.
+Source inputs and generated records are pinned in [the manifest](source/manifest.json). At revision `ea88f6feab53`, source/runtime closure, fresh runtime installation, all 11 shared browser conformance cases and DPR 1/2 DOM cleanliness passed for this body. The original [qualification](https://github.com/layoutit/cssEarth/blob/ea88f6feab538342257bda3b8bd7383126474017/docs/moons/b11-companion-catalog/README.md#qualification), [visual review](https://github.com/layoutit/cssEarth/blob/ea88f6feab538342257bda3b8bd7383126474017/docs/moons/b11-companion-catalog/VISUAL-REVIEW.md), [browser receipt](https://github.com/layoutit/cssEarth/blob/ea88f6feab538342257bda3b8bd7383126474017/docs/moons/b11-companion-catalog/evidence/browser.json) and [source restoration receipt](https://github.com/layoutit/cssEarth/blob/ea88f6feab538342257bda3b8bd7383126474017/docs/moons/b11-companion-catalog/evidence/source-restoration.json) remain at that revision.
+
+Integration with main at `4b2078042` preserves this body's source, prepared and runtime records, the renderer, shared camera and browser navigation code byte for byte. The shared preparation change only replaces a historical evidence path in a comment. Those unchanged dependencies support reuse of the recorded body checks; the screenshots are from the original run. Historical batch reports and one-off capture/authoring scripts are linked at their original revision, following the current documentation contract.
+
+Whole-repository qualification remains open. The original [final checks](https://github.com/layoutit/cssEarth/blob/ea88f6feab538342257bda3b8bd7383126474017/docs/moons/b11-companion-catalog/evidence/final-checks.json) record a missing local Polymele prepared package and the unchanged Phobos partition-fixture failure. Full build, assembly and all-object browser qualification are not established by these body checks.
 
 ## Known problems
 
@@ -27,5 +31,5 @@ The original PDS file is retained byte for byte. The existing source-mesh simpli
 
 The PDS catalog landing page says 2003 observations, while the native product labels and paper identify January–March 2008; the latter control this package. The archive's rotation uncertainty columns also differ from the paper, so no uncertainty is silently taken from those columns. JPL's unnamed satellite API rows pair physical values with inconsistent inner/outer orbits; component identity follows the native mesh labels and papers.
 
-Resolved optical imagery, mapped composition and a present spin-phase solution were not located. The published shape is the selected useful dataset.
+Resolved optical imagery, mapped composition and a present spin-phase solution were not located. The published shape is the selected useful dataset. The [original orbit interpretation and limits](https://github.com/layoutit/cssEarth/blob/ea88f6feab538342257bda3b8bd7383126474017/docs/moons/b11-companion-catalog/README.md#orbit-interpretation-and-limits) retain the source epoch, frame assumptions and long-extrapolation limits.
 </details>

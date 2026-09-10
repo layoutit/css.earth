@@ -1,7 +1,0 @@
-
-> cssearth@0.1.0 setup:assets /Users/ekrof/fed/cssEarth-moons-cassini-atlas/output/companion-catalog/fresh-install-JE4lmM
-> node tools/setup.mjs --object=asteroid-2001-sn263 --object=sn263-beta --object=sn263-gamma
-
-Setting up asteroid-2001-sn263, sn263-beta, sn263-gamma: 93 prepared files. No source preparation or geometry mirror required.
-Setup complete: 93 downloaded, 0 reused. Run pnpm dev.
-{"destination":"/Users/ekrof/fed/cssEarth-moons-cassini-atlas/output/companion-catalog/fresh-install-JE4lmM","installed":93,"bytes":21168282}
