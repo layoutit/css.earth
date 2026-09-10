@@ -14,7 +14,7 @@ import { readSourceCatalog, checkSourceCatalog } from './read-source-catalogue.m
 import { parsePreparedExploration } from '../src/platform/prepared-exploration.mts';
 import { compileSourceUsage, parseSourceUsage, sourceDatasetViews } from '../src/platform/source-usage.mts';
 import { validateObjectProvenance } from '../src/platform/object-provenance.mts';
-import { prepareSpacecraft } from './prepare-spacecraft.mts';
+import { prepareSpacecraft, explorationCompilerClosure } from './prepare-spacecraft.mts';
 import { refreshSourceRecord } from './source-authoring-templates.mts';
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(path,'utf8'));
 const prepared = parsePreparedSources(await read('site/prepared-sources.json'));
@@ -170,7 +170,10 @@ test('both catalogues prepare deterministically from the same input closure befo
   const bad=structuredClone(await read('site/prepared-sources.json'));sourceObject(bad).catalogSha256='0'.repeat(64);
   assert.throws(()=>parsePreparedSources(bad),/closure mismatch/);
   const mercury=await objectInput('mercury');
-  const corrupted=structuredClone(mercury.provenance);Object.assign(corrupted.sources.find(source=>source.sourceBinding?.kind==='catalogued')!.sourceBinding,{references:[{catalogueId:'missing',role:'material',evidence:'Bad binding'}]});
+  const corrupted=structuredClone(mercury.provenance);
+  const corruptedBinding=corrupted.sources.find(source=>source.sourceBinding?.kind==='catalogued')?.sourceBinding;
+  assert.ok(corruptedBinding?.kind==='catalogued');
+  Object.assign(corruptedBinding,{references:[{catalogueId:'missing',role:'material',evidence:'Bad binding'}]});
   const before=await Promise.all(result.outputs.map(output=>readFile(output.path,'utf8')));
   await assert.rejects(prepareSpacecraft({provenance:new Map([['mercury',corrupted]])}),/Unknown canonical source/);
   assert.deepEqual(await Promise.all(result.outputs.map(output=>readFile(output.path,'utf8'))),before);
@@ -199,6 +202,43 @@ test('changed fact evidence and stale displayed facts leave both published catal
   await writeFile(contentPath, JSON.stringify(content));
   await assert.rejects(prepareSpacecraft({ root }), /Stale factsheet for abundantia/);
   assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
+});
+
+test('missing cited evidence restores without body assets and leaves catalogues atomic on a bad download', async t => {
+  const root = await mkdtemp(join(tmpdir(), 'cssearth-citation-restoration-'));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const outputs = ['site/prepared-sources.json', 'site/prepared-spacecraft.json'];
+  const source = 'src/planets/asteroid-1998-ml14/source';
+  const paper = `${source}/reference/warner-2014.pdf`;
+  const bytes = await readFile(paper);
+  const paths = new Set([...Object.keys(prepared.closure), ...explorationCompilerClosure,
+    ...outputs, `${source}/preparation/acquisition.json`]);
+  paths.delete(paper);
+  for (const path of paths) {
+    const target = join(root, path);
+    await mkdir(join(target, '..'), { recursive: true });
+    await copyFile(path, target);
+  }
+  const before = await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8')));
+  const requests: string[] = [];
+  const fetchPaper = async (url: string) => {
+    requests.push(url);
+    assert.equal(url, 'https://mpbulletin.org/issues/MPB_41-2.pdf');
+    return new Response(bytes);
+  };
+  await assert.rejects(prepareSpacecraft({ root,
+    sourceTransport: { fetch: async () => new Response(Buffer.alloc(bytes.length, 0)) },
+  }), /Source hash drifted/);
+  await assert.rejects(readFile(join(root, paper)), { code: 'ENOENT' });
+  assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
+  const result = await prepareSpacecraft({ root, sourceTransport: { fetch: fetchPaper } });
+  assert.deepEqual(requests, ['https://mpbulletin.org/issues/MPB_41-2.pdf']);
+  assert.deepEqual(await readFile(join(root, paper)), bytes);
+  assert.equal(result.prepared.closure[paper], createHash('sha256').update(bytes).digest('hex'));
+  assert.deepEqual(result.prepared.closure, result.preparedSources.closure);
+  await assert.rejects(readFile(join(root, source, 'stars/eso0932a.tif')), { code: 'ENOENT' });
+  const offline = await prepareSpacecraft({ root, sourceTransport: { fetch: async () => { throw new Error('Unexpected citation refresh'); } } });
+  assert.deepEqual(offline.outputs, result.outputs, 'warm and cold preparation have identical closures');
 });
 
 test('numerical extraction uses current package records and preserves reviewed source bindings', async () => {

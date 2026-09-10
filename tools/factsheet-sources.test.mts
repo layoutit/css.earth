@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import test, { type TestContext } from 'node:test';
+import { createServer } from 'node:http';
+import { restoreFactsheetEvidence } from './restore-factsheet-evidence.mts';
 import { createHash } from 'node:crypto';
-import { mkdtemp, mkdir, readFile, rm, symlink, writeFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, readdir, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { parseFactsheet, verifyFactsheetSources } from './factsheet-sources.mts';
@@ -72,4 +74,78 @@ test('cited local evidence must match one manifest pin and stay inside the packa
   await writeFile(resolve(objectDirectory, 'outside.json'), bytes);
   await symlink('../outside.json', file);
   await assert.rejects(verifyFactsheetSources(panel, { objectDirectory, manifest }), /escapes/);
+});
+
+
+const pin = (path: string, bytes: Uint8Array) => ({ path, expectedBytes: bytes.length,
+  expectedSha256: createHash('sha256').update(bytes).digest('hex') });
+async function restorationFixture(t: TestContext, url: string, path = 'review.json') {
+  const objectDirectory = await mkdtemp(resolve(tmpdir(), 'cssearth-fact-restoration-'));
+  t.after(() => rm(objectDirectory, { recursive: true, force: true }));
+  const source = resolve(objectDirectory, 'source');
+  await mkdir(resolve(source, 'preparation'), { recursive: true });
+  const bytes = Buffer.from('pinned scientific paper');
+  const plan = { schema: 'cssearth-acquisition-plan@1', operations: [
+    { kind: 'download', groups: ['restore', 'refresh'], path, url },
+    { kind: 'download', groups: ['restore', 'refresh'], path: 'uncited-large-image.tif', url: `${url}/uncited` },
+  ] };
+  const planBytes = Buffer.from(JSON.stringify(plan)), planPath = 'preparation/acquisition.json';
+  await writeFile(resolve(source, planPath), planBytes);
+  const input = (path: string, bytes: Uint8Array) => ({ ...pin(path, bytes), id: path.replaceAll(/[^a-z]/gu, '-'),
+    origin: url, credit: 'Fixture paper', license: 'CC0', acquisition: 'Pinned download', redistribution: 'Allowed',
+    consumers: ['physical'], sourceBinding: { kind: 'local', reason: 'Authored fixture' } });
+  const manifest = { schema: 'cssearth-authoritative-sources@2', inputs: [input(path, bytes), input('uncited-large-image.tif', Buffer.from('unused'))],
+    documents: [pin(planPath, planBytes)], generatedIntermediates: [] };
+  const facts = { facts: panel.facts.map(fact => ({ ...fact, source: { ...citation, path: `source/${path}` } })),
+    moreFacts: [{ ...panel.facts[0], id: 'rotation-period', source: { ...citation, path: `source/${path}` } }] };
+  return { objectDirectory, source, bytes, manifest, facts, path: `source/${path}` };
+}
+
+test('source preparation restores only cited missing pins from a clean checkout, then works offline', async t => {
+  const requests: (string | undefined)[] = [];
+  const bytes = Buffer.from('pinned scientific paper');
+  const server = createServer((req, res) => { requests.push(req.url); res.end(bytes); });
+  await new Promise<void>(accept => server.listen(0, '127.0.0.1', accept));
+  t.after(() => new Promise<void>(accept => server.close(() => accept())));
+  const address = server.address(); assert.ok(address && typeof address !== 'string');
+  const fixture = await restorationFixture(t, `http://127.0.0.1:${address.port}/paper.pdf`);
+  const { objectDirectory, manifest, facts, path } = fixture;
+  await assert.rejects(verifyFactsheetSources(facts, { objectDirectory, manifest }), /ENOENT/);
+  const restoreMissing = (path: string) => restoreFactsheetEvidence({ objectDirectory, manifest, path });
+  assert.deepEqual(await verifyFactsheetSources(facts, { objectDirectory, manifest, restoreMissing }), facts);
+  assert.deepEqual(await readFile(resolve(objectDirectory, path)), bytes);
+  assert.deepEqual(requests, ['/paper.pdf'], 'shared citation restored once; uncited image is not requested');
+  await assert.rejects(readFile(resolve(fixture.source, 'uncited-large-image.tif')), { code: 'ENOENT' });
+  const offline = () => { throw new Error('Existing evidence must not be downloaded'); };
+  await verifyFactsheetSources(facts, { objectDirectory, manifest, restoreMissing: offline });
+  await writeFile(resolve(objectDirectory, path), Buffer.alloc(bytes.length, 0));
+  await assert.rejects(verifyFactsheetSources(facts, { objectDirectory, manifest, restoreMissing: offline }), /pin differs/);
+});
+
+test('failed citation downloads and drifted acquisition recipes publish no evidence', async t => {
+  const fixture = await restorationFixture(t, 'https://example.invalid/paper.pdf');
+  const { objectDirectory, manifest, path } = fixture;
+  for (const bytes of [Buffer.from('short'), Buffer.alloc(fixture.bytes.length, 0)]) {
+    await assert.rejects(restoreFactsheetEvidence({ objectDirectory, manifest, path,
+      transport: { fetch: async () => new Response(bytes) } }), /Source (size|hash) drifted/);
+    await assert.rejects(readFile(resolve(objectDirectory, path)), { code: 'ENOENT' });
+    assert.deepEqual(await readdir(fixture.source), ['preparation'], 'failed streams leave no partial evidence');
+  }
+  await writeFile(resolve(fixture.source, 'preparation/acquisition.json'), '{}');
+  await assert.rejects(restoreFactsheetEvidence({ objectDirectory, manifest, path,
+    transport: { fetch: async () => { throw new Error('Unverified recipe must not be fetched'); } } }), /Source size drifted/);
+});
+
+test('citation restoration rejects escaping and dangling symlinks before fetching', async t => {
+  const fixture = await restorationFixture(t, 'https://example.invalid/paper.pdf', 'linked/review.json');
+  const outside = resolve(fixture.objectDirectory, 'outside'); await mkdir(outside);
+  const linked = resolve(fixture.source, 'linked'); await symlink(outside, linked, 'dir');
+  let fetches = 0;
+  const transport = { fetch: async () => { fetches++; return new Response(fixture.bytes); } };
+  await assert.rejects(restoreFactsheetEvidence({ ...fixture, transport }), /escapes/);
+  await rm(linked); await symlink(resolve(fixture.objectDirectory, 'absent'), linked, 'dir');
+  await assert.rejects(restoreFactsheetEvidence({ ...fixture, transport }), /dangling/);
+  await rm(linked); await mkdir(linked); await symlink(resolve(outside, 'absent.pdf'), resolve(linked, 'review.json'));
+  await assert.rejects(restoreFactsheetEvidence({ ...fixture, transport }), /not a regular file/);
+  assert.equal(fetches, 0);
 });
