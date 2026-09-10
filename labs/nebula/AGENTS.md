@@ -4,7 +4,7 @@ Local development tooling, separate from the production website. Current objects
 
 ## Usage
 
-From the repository root: `pnpm install --frozen-lockfile`, then `pnpm lab:nebula`. Startup recreates missing neutral density textures and inspection/reference images from pinned sources, downloading missing originals without running extraction or reconstruction. `pnpm lab:nebula:bake` rebuilds the three accepted LMC lenses from their saved recipe; see [docs/baking.md](docs/baking.md). The default server is `http://127.0.0.1:4331`.
+From the repository root: `pnpm install --frozen-lockfile --ignore-scripts`, `pnpm build:packages`, then `pnpm lab:nebula`. Startup recreates missing neutral density textures and inspection/reference images from pinned sources, downloading missing originals without running extraction or reconstruction. `pnpm lab:nebula:bake` rebuilds the three accepted LMC lenses from their saved recipe; `pnpm lab:nebula:verify` validates the completed native, reconstruction and delivery artifacts without processing; see [docs/baking.md](docs/baking.md). The default server is `http://127.0.0.1:4331`.
 
 - `/alignment`: inspect the complete density field, choose an image, adjust placement/tone, compare Original / Without stars / Residual, and run optional Quick preview or full Remove stars.
 - `/reconstruction`: choose the saved starless source and press Preview. Completed variants load without processing when selected. Show progress and Cancel; refresh reconnects to the same job.

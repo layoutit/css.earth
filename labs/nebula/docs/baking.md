@@ -1,15 +1,24 @@
 # Rebuild the accepted nebulae
 
-From a clean checkout with Node 22, pnpm and Python 3.9–3.12 installed:
+Requires **Node 22, pnpm 10.33.0 and Python 3.9–3.12** with `venv`/`pip`, plus internet access and free disk space for the native images, Python environment and results. The pinned TensorFlow release needs a wheel for your OS/CPU. The [clean-install verification](clean-install-verification.md) records the platform actually tested; it is not a claim that every platform produces identical bytes.
+
+From a new temporary clone, run this complete sequence. It targets the PR branch while the change awaits merge:
 
 ```sh
-pnpm install --frozen-lockfile
-pnpm prepare:environment-images
+nebula_dir="$(mktemp -d "${TMPDIR:-/tmp}/cssearth-nebula.XXXXXX")"
+git clone --depth 1 --single-branch --branch feat/local-group https://github.com/layoutit/cssEarth.git "$nebula_dir"
+cd "$nebula_dir"
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm build:packages
 pnpm lab:nebula:bake
-pnpm lab:nebula
+pnpm lab:nebula:verify
 ```
 
-The bake downloads missing native originals and the pinned NOX model, creates a local Python environment with pinned dependencies, and verifies hashes before processing. Large downloads and intermediate files stay in `.local/`. Allow several gigabytes of free space. The first full run takes minutes; later runs verify and reuse completed native removal/reconstruction results. Python package installation requires an available wheel for the machine's platform.
+`--ignore-scripts` avoids the repository-wide postinstall preparation. Building the shared packages supplies the libraries needed by the lab. Only shared packages and nebula assets are built; the bake runs without a browser or GPU server. After this branch merges, use the merged branch in the clone command.
+
+Success is **`BAKE_COMPLETE lmc` followed by `NEBULA_VERIFIED`**. The verifier checks the complete native-removal artifacts, saved placement/material settings, shared cloud geometry and catalogue stars, assembled lens-bank manifest, and accepted application textures. It only reads files: a missing or altered output fails without repairing it. The current recipe produces three LMC variants (VISTA, Horálek and WISE), 288 neutral LMC/SMC slices, 432 colored LMC slices, three image previews, six extraction previews and 943 shared stars. SMC gets its neutral density field; it has no accepted color reconstruction yet.
+
+The bake downloads missing native originals and the pinned NOX model, creates a local Python environment with pinned dependencies, and verifies hashes before processing. Large downloads and intermediate files stay in `.local/`. Allow at least 8 GiB beyond the clone for dependencies, originals and generated products. The measured clean run took **15 minutes** on macOS arm64, including downloads and Python setup; a cached full replay took **4.2 seconds**. Hardware and network speed affect these times. The saved pre-NOX baseline examines about 1.7 million VISTA candidates and dominates the first run. Later runs verify and reuse completed native removal/reconstruction results. Python package installation requires an available wheel for the machine's platform.
 
 The command does not need the browser's localStorage, a running server or previously completed image jobs. A full bake also restores the app's ignored LMC slice textures, matching the accepted delivery hashes. It does not restart the lab, change browser settings or publish anything.
 
@@ -18,12 +27,12 @@ The command does not need the browser's localStorage, a running server or previo
 | Stage | Source of truth | Result |
 |---|---|---|
 | Density | LMC/SMC scalar grids, physical frames and volume recipes | The same 144 neutral slices per object; geometry and pixel hashes verified |
-| Images | Three native originals, source hashes and accepted registration metadata | Full-footprint inspection previews; sky registration is preserved |
+| Images | Three native originals, historical SMASH calibration, source hashes and accepted registration metadata | Full-footprint inspection previews; sky registration is preserved |
 | Removal | Saved baseline recipes, pinned NOX script/model and Python versions | Native starless image, residual and mask with exact subtraction checks |
 | Reconstruction | Shared density, catalogue/sky reference, saved placement and RGB controls | XYZ cloud banks plus the same 943 modeled catalogue stars for every image |
 | Lens bank | Saved cutoff, axis brightness, enabled cloud contributions, star exposure/size | A local three-lens bank and the app's 432 accepted slice textures |
 
-`models/lmc/bake.json` is the entry recipe. It records the accepted ESO VISTA, Horálek optical and NASA WISE placements and saturation, detail strength/scale, brightness and gamma. It references the existing source/alignment, baseline, catalogue and presentation recipes by hash. The historical result IDs in `app-lenses.json` are replaced with the newly produced IDs during replay; the recorded presentation settings remain unchanged.
+`models/lmc/bake.json` is the entry recipe. It records the accepted ESO VISTA, Horálek optical and NASA WISE placements and saturation, detail strength/scale, brightness and gamma. It references the existing source/alignment, baseline, catalogue and presentation recipes by hash. The historical result IDs in `app-lenses.json` are replaced with the newly produced IDs during replay; the recorded presentation settings remain unchanged. Re-running the full bake verifies and reuses completed stages, then refreshes its receipt. Re-running `pnpm lab:nebula:verify` checks the results without processing.
 
 The accepted NOX images include an earlier compact-source baseline through a positive-residual union. This command **requires and reproduces that baseline**; omitting it would change the accepted pixels. The older interactive calibration UI is not restored. Reconstruction never runs star removal again.
 
@@ -35,8 +44,8 @@ Options with values use `--name=value`. Stages include their preceding dependenc
 
 | Option | Purpose |
 |---|---|
-| `--stage=density` | Offline neutral fields only; used automatically by lab startup and lab tests |
-| `--stage=assets` | Neutral fields and original image previews; no Python or star removal |
+| `--stage=density` | Offline neutral fields only |
+| `--stage=assets` | Neutral fields and inspection/reference images; used by lab startup/tests, without Python or star removal |
 | `--stage=removal` | Stop after native baseline/NOX products and separation previews |
 | `--stage=reconstruction` | Stop after individual cloud variants |
 | `--stage=all` | Default; also assemble the local lens bank and restore configured app textures |
@@ -47,7 +56,7 @@ Options with values use `--name=value`. Stages include their preceding dependenc
 
 Only LMC has accepted color reconstructions. SMC currently supplies its neutral density field, not invented color lenses. New objects require their own approved source/registration/prior configuration and lab subject records before the same processors can be used.
 
-`pnpm prepare:environment-images` restores the M31/M33/SMC layers, Milky Way slices and sky faces, heliosphere atlas and stellar point atlas from their pinned sources. It only bakes missing banks and verifies every restored byte against the accepted resource manifests. Pass `--verify-replay` to independently rebake even a complete bank. These operations preserve the descriptors and saved rendering settings. App startup/build and universe CI restore these images automatically.
+For the separate production environment assets (outside this nebula-only workflow), `pnpm prepare:environment-images` restores the M31/M33/SMC layers, Milky Way slices and sky faces, heliosphere atlas and stellar point atlas from their pinned sources. It only bakes missing banks and verifies every restored byte against the accepted resource manifests. Pass `--verify-replay` to independently rebake even a complete bank. These operations preserve the descriptors and saved rendering settings. App startup/build and universe CI restore these images automatically.
 
 `pnpm prepare:nebulae` runs the `--if-missing` check automatically before app development, builds and shell tests. The first run on a clean checkout needs the same Python environment/downloads as a full bake. Later starts only verify the accepted files. A changed file is an error, not permission to silently replace it.
 

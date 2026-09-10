@@ -3,7 +3,8 @@
 Local React tooling for aligning photographs, removing stars and comparing baked 3D clouds. The retained PolyCSS renderer stays in plain TypeScript. The lab is separate from the production website; current objects are **LMC and SMC**.
 
 ```sh
-pnpm install --frozen-lockfile
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm build:packages
 pnpm lab:nebula
 ```
 
@@ -41,6 +42,6 @@ labs/nebula/
 └── sources/              # Acquisition metadata and credits
 ```
 
-Rebuild the selected sources with **`pnpm lab:nebula:bake`**. See [baking](docs/baking.md) for prerequisites, stages, saved settings and outputs.
+Rebuild the selected sources with **`pnpm lab:nebula:bake`**, then check them with **`pnpm lab:nebula:verify`**. See [baking](docs/baking.md) for prerequisites, stages, saved settings and outputs.
 
 Start with [next steps](NEXTSTEPS.md), [research and papers](RESEARCH.md), [the workflow](docs/workflows.md), [processing method](METHOD.md), or [documentation index](docs/README.md). Source/registration evidence and prior failed experiments remain accessible without adding more UI tabs.
