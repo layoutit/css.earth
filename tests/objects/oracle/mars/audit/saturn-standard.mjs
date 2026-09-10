@@ -58,7 +58,7 @@ const report = Object.freeze({
   mars,
   contactSheet,
   sourceFingerprints: await fingerprints({
-    marsSource: "src/planets/mars/SOURCE.md",
+    marsSource: "src/planets/mars/README.md",
     marsScene: "src/planets/mars/prepared/body.json",
     marsCamera: "src/planets/mars/prepared/camera.json",
     marsLighting: "src/planets/mars/prepared/lighting.json",
@@ -67,7 +67,7 @@ const report = Object.freeze({
     marsClient: "src/renderers/css/runtime/object-runtime.ts",
     marsRowCache: "src/renderers/css/rendering/prepared-residency.ts",
     marsStyles: "src/renderers/css/styles/mars-surfaces.css",
-    saturnSource: "src/planets/saturn/SOURCE.md",
+    saturnSource: "src/planets/saturn/README.md",
     saturnScene: "src/planets/saturn/prepared/scene.json",
     saturnAssets: "src/planets/saturn/runtime-assets.json",
   }),

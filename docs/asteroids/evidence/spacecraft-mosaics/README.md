@@ -23,7 +23,7 @@ Original quality arrays, interpolation separation, viewing-angle limits, source 
 
 ## Source selection and evidence
 
-The survey also considered earlier Galileo images and later OSIRIS encounter images. Earlier Ida/Gaspra candidates failed the required spatial registration checks. The next Šteins OI frame needed a 1.56 relative gain, above the 1.35 limit; later views had worse footprint agreement. Later Lutetia frames failed either holdout registration or the independent archived-intercept check. They contribute no runtime pixels. Each body's `SOURCE.md` records the original identifiers and decisions.
+The survey also considered earlier Galileo images and later OSIRIS encounter images. Earlier Ida/Gaspra candidates failed the required spatial registration checks. The next Šteins OI frame needed a 1.56 relative gain, above the 1.35 limit; later views had worse footprint agreement. Later Lutetia frames failed either holdout registration or the independent archived-intercept check. They contribute no runtime pixels. Each body's `README.md` records the original identifiers and decisions.
 
 - `source-restore.json`: ten new original files and companions fetched through the official acquisition plans, followed by complete manifest verification. Previously pinned inputs were copied from their verified closure.
 - `contributors/ida/` and `contributors/gaspra/`: lossless per-source blend-weight planes before and after, decoded/compressed hashes, area samples and source image identities. Weights sum to one at supported grid cells and zero in gaps.

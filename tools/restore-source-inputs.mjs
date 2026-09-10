@@ -2,11 +2,23 @@
 
 import { resolve } from "node:path";
 import { spawn } from "node:child_process";
+import { lstat } from "node:fs/promises";
 import { setupObjectIds } from "./runtime-assets.mjs";
 
 const projectRoot = resolve(import.meta.dirname, "..");
 const ids = setupObjectIds(process.argv.slice(2));
 for (const id of ids) {
+  if (id === "earth") {
+    const scienceDirectory = resolve(projectRoot, "src/planets/earth/source/science");
+    try {
+      await lstat(resolve(scienceDirectory, "mur-gibs.png"));
+    } catch (error) {
+      if (error.code !== "ENOENT") throw error;
+      await run(process.execPath, [
+        resolve(projectRoot, "tools/objects/paged-ellipsoid/mur-imagery.mjs"), "restore", scienceDirectory,
+      ]);
+    }
+  }
   // The acquisition plan owns formats and URLs. Default acquisition restores
   // only missing pins and verifies existing inputs without refreshing them.
   await run(process.execPath, [

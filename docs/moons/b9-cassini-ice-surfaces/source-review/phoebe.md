@@ -35,7 +35,7 @@ The body currently retains [Weirich et al. 2023, DOI 10.26033/3k3c-5713](https:/
 
 The release describes reused images/kernels, some height changes, and an origin shift of **1.03 km to the center of figure**. Its inspected description gives the magnitude, not an XYZ translation vector. The retained Gaskell orientation is RA **356.90°**, Dec **77.88°**, W **178.58° + 931.639°/day** from J2000. The older monochrome mosaic is already excluded from the mounted views because its registration to this revised shape is unproven. The same standard applies to VIMS.
 
-Local authority: `src/planets/phoebe/SOURCE.md`, `source/science/2023/productdescription.txt`, `source/science/2023/phoebekernellist.txt`, `source/shape/README.txt`, and `source/preparation/rotation.json`. The original source products, rotation and all surface geometry remain unchanged; `SOURCE.md` now also documents B9.
+Local authority: `src/planets/phoebe/README.md`, `source/science/2023/productdescription.txt`, `source/science/2023/phoebekernellist.txt`, `source/shape/README.txt`, and `source/preparation/rotation.json`. The original source products, rotation and all surface geometry remain unchanged; `README.md` now also documents B9.
 
 ## Historical numerical-source intake and candidate cohort
 

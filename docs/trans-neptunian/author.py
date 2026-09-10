@@ -148,6 +148,6 @@ for body in INPUTS['bodies']:
     write(package / 'object.json', descriptor)
     for file in ['src/renderers/css/styles/annefrank-surfaces.css','tests/objects/browser/annefrank/browser-profile.mjs']:
         write(ROOT / file.replace('annefrank',ident), original(file).replace('annefrank',ident).replace('Annefrank',name))
-    write(package / 'SOURCE.md', f'# {name}\n\n{body["introduction"]}\n\n{description}\n\nSource: [{body["credit"]}]({body["source"]}). Checked {INPUTS["checkedOn"]}. The source recipe pins units, model assumptions and numerical axes. Shadows and Orbit default off. Rendering uses the generic retained PolyCSS native u raster path. No runtime geometry is generated.\n\n## Source survey\n\n'+'\n'.join('- Unresolved: '+item for item in body['unresolved'])+'\n\nSurface spectra and unresolved observations are not reconstructed surface textures. Reproduce source extraction with `python3 docs/trans-neptunian/author.py`; the existing preparation owners produce scene assets.\n')
+    # Keep the reviewed body README when regenerating source data.
     write(package / 'NOTICE.md', f'# {name}: credits\n\n{body["credit"]}: {body["source"]}. Numerical source constraints are attributed; papers are not relicensed. Prepared representation: cssEarth MIT. The grid is an authored missing-data indication. ESO/S. Brunier panorama CC BY4.0; Inter SIL OFL1.1; HYG source license in source/stars.\n')
     print(ident, 'source-authored')

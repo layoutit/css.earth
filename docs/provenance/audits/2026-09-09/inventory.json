@@ -1,0 +1,1362 @@
+{
+  "schema": "cssearth-provenance-documentation-inventory@1",
+  "startedAt": "2026-09-09T20:31:12.646300+00:00",
+  "finishedAt": "2026-09-09T20:31:23.297198+00:00",
+  "headAtStart": "3bd9c5934b6e0411988753b37c84b83e14a04771",
+  "headAtEnd": "3bd9c5934b6e0411988753b37c84b83e14a04771",
+  "indexUnchangedDuringRead": true,
+  "method": "Git blob logical bytes; no history/pack size, LFS payload, source acquisition, license verification, or browser qualification. Registry counts are static descriptor imports. Missing source bytes in Git are expected for restorable inputs. Local-path matches are triage, not broken-link verdicts. Identical Git blobs are stored once in the object database.",
+  "snapshots": [
+    {
+      "label": "c2b0bbb9d48058a5b248ee5fc1c5f4ca5b024e0a",
+      "gitBlobTotals": {
+        "files": 23555,
+        "bytes": 6911424076
+      },
+      "docs": {
+        "files": 1044,
+        "bytes": 424449367
+      },
+      "docsByGroup": {
+        "(root files)": {
+          "files": 51,
+          "bytes": 254605517
+        },
+        "architecture": {
+          "files": 3,
+          "bytes": 81004
+        },
+        "asteroid-spacecraft-gaps": {
+          "files": 18,
+          "bytes": 253423
+        },
+        "comets": {
+          "files": 254,
+          "bytes": 38431894
+        },
+        "earth": {
+          "files": 5,
+          "bytes": 1624616
+        },
+        "evidence": {
+          "files": 184,
+          "bytes": 51740429
+        },
+        "images": {
+          "files": 5,
+          "bytes": 4584060
+        },
+        "lucy-targets": {
+          "files": 15,
+          "bytes": 2489008
+        },
+        "moons": {
+          "files": 508,
+          "bytes": 70636192
+        },
+        "objects": {
+          "files": 1,
+          "bytes": 3224
+        }
+      },
+      "docsByExtension": {
+        ".css": {
+          "files": 18,
+          "bytes": 163251
+        },
+        ".html": {
+          "files": 1,
+          "bytes": 64032
+        },
+        ".json": {
+          "files": 522,
+          "bytes": 50884274
+        },
+        ".lbl": {
+          "files": 2,
+          "bytes": 2013
+        },
+        ".log": {
+          "files": 69,
+          "bytes": 800924
+        },
+        ".md": {
+          "files": 129,
+          "bytes": 3431386
+        },
+        ".mjs": {
+          "files": 35,
+          "bytes": 332515
+        },
+        ".mp4": {
+          "files": 1,
+          "bytes": 3231466
+        },
+        ".patch": {
+          "files": 1,
+          "bytes": 7805
+        },
+        ".png": {
+          "files": 172,
+          "bytes": 107813009
+        },
+        ".py": {
+          "files": 11,
+          "bytes": 55317
+        },
+        ".sh": {
+          "files": 1,
+          "bytes": 362
+        },
+        ".tar.gz": {
+          "files": 6,
+          "bytes": 249850798
+        },
+        ".txt": {
+          "files": 21,
+          "bytes": 524356
+        },
+        ".webp": {
+          "files": 52,
+          "bytes": 7266472
+        },
+        ".xml": {
+          "files": 3,
+          "bytes": 21387
+        }
+      },
+      "largestDocs": [
+        {
+          "path": "docs/asteroids-size-calibration-browser-evidence.tar.gz",
+          "oid": "a93194c0d4d41692d4620895452b51c43609d7dd",
+          "bytes": 58666735,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/main-belt-asteroids-evidence.tar.gz",
+          "oid": "278c0d8dcad32a9f90b713849719cf2601ae3a77",
+          "bytes": 44442442,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/asteroids-size-calibration-scientific-evidence.tar.gz",
+          "oid": "dffed548636fbcbfb1cba242c67e834858d66268",
+          "bytes": 40649247,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/main-belt-asteroids-expansion-evidence-bodies-1.tar.gz",
+          "oid": "d50e13f2f2812e5e038f01572a59a5aaa021713a",
+          "bytes": 36328691,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/main-belt-asteroids-expansion-evidence-bodies-2.tar.gz",
+          "oid": "42d6f5ede0e1602fbbb4b320f1c41dafe5eaa807",
+          "bytes": 36078072,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/main-belt-asteroids-expansion-evidence-shared.tar.gz",
+          "oid": "b8bd2ee73aa25095358845b23b01276a42e8a544",
+          "bytes": 33685611,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/moons/b2-preparation/final/integrated-2026-09-09T03-59-04.219Z.json",
+          "oid": "5906b231bcb123092c49d85868fc692daf5767ff",
+          "bytes": 4451366,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/moons/b2-preparation/final/reviews/four-body/capture-report-snapshot.json",
+          "oid": "5906b231bcb123092c49d85868fc692daf5767ff",
+          "bytes": 4451366,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/evidence/main-belt-asteroids-expansion/summary.json",
+          "oid": "da96b2b251a875ed1d106d35a0198258bd61b5f5",
+          "bytes": 3706708,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/evidence/planet-cross-sections/polish/earth-cutaways.mp4",
+          "oid": "eeedd218c31a1745eb7f1edc0418152ed8d3a09f",
+          "bytes": 3231466,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/asteroids-size-calibration-validation.json",
+          "oid": "25b6c0910f46afe050de3796cac007c5b78f124c",
+          "bytes": 2821993,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/moons/b6-mapped-science/evidence/screenshots/moon-dpr2-silicate-signature-shadows-unsupported-scene.png",
+          "oid": "91c140f37aed3224454c9eaeba1a2f5d009ff22e",
+          "bytes": 2724817,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/evidence/planet-cross-sections/all-planets.png",
+          "oid": "f15e70231771f04a7d4e2b58d1e8310f7c8b072a",
+          "bytes": 2722433,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/evidence/earth-elevation/production-dpr-2.png",
+          "oid": "84440d88d07cadc302ffa6f7a5639c4b9b3366d0",
+          "bytes": 2606489,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/images/global-earth-buenos-aires-noise.png",
+          "oid": "e24c5b124ae2403cc30024140abe980452945fc2",
+          "bytes": 2402988,
+          "mode": "100644"
+        }
+      ],
+      "duplicateDocBlobGroups": 11,
+      "duplicateDocWorkingBytes": 5834000,
+      "largestDuplicateDocGroups": [
+        {
+          "oid": "5906b231bcb123092c49d85868fc692daf5767ff",
+          "bytesEach": 4451366,
+          "paths": [
+            "docs/moons/b2-preparation/final/integrated-2026-09-09T03-59-04.219Z.json",
+            "docs/moons/b2-preparation/final/reviews/four-body/capture-report-snapshot.json"
+          ]
+        },
+        {
+          "oid": "7dc51e748338457d8ccebff2e770ea8e71e09fbc",
+          "bytesEach": 780487,
+          "paths": [
+            "docs/moons/b2-preparation/final/legend-correction-2026-09-09T04-19-50.904Z.json",
+            "docs/moons/b2-preparation/final/reviews/four-body/legend-correction/capture-report-snapshot.json"
+          ]
+        },
+        {
+          "oid": "0da004fc9f059a2c45cd72785dcb013f9a1438d5",
+          "bytesEach": 558212,
+          "paths": [
+            "docs/comets/evidence/103p-repeat-capture.png",
+            "docs/comets/evidence/103p.png"
+          ]
+        },
+        {
+          "oid": "6bb28918299c74266615dc927f3292a610d2fd85",
+          "bytesEach": 27735,
+          "paths": [
+            "docs/moons/b1-preparation/gate-logs/browser.txt",
+            "docs/moons/b1-preparation/release-gate-logs/browser.txt"
+          ]
+        },
+        {
+          "oid": "34e2006e8c8d842ceb73b9f343b864bc5869818d",
+          "bytesEach": 4776,
+          "paths": [
+            "docs/comets/evidence/81p-full-navigation.json",
+            "docs/comets/evidence/81p-grid-navigation.json",
+            "docs/comets/evidence/constraint-grid-navigation.json"
+          ]
+        },
+        {
+          "oid": "c0e215228988fad38fb973904ef293bbb626f54c",
+          "bytesEach": 3649,
+          "paths": [
+            "docs/moons/b1-preparation/baseline-source-gate.txt",
+            "docs/moons/b1-preparation/integrated-source-gate-pre-pr54.txt"
+          ]
+        },
+        {
+          "oid": "1814f25c43861bd9434dec16de141b75512c9958",
+          "bytesEach": 1532,
+          "paths": [
+            "docs/moons/b2-preparation/final/pre-integration-gates/acquire.log",
+            "docs/moons/b2-preparation/final/release-gates/acquire.log"
+          ]
+        },
+        {
+          "oid": "c8aa1f890332d21dea1860a2f6d64f96f2628abe",
+          "bytesEach": 838,
+          "paths": [
+            "docs/comets/evidence/81p-full-dom-cleanliness.json",
+            "docs/comets/evidence/81p-grid-dom-cleanliness.json"
+          ]
+        }
+      ],
+      "registryDescriptorImports": 406,
+      "sourceManifests": 406,
+      "missingRequiredFilesByRegistryImport": {
+        "SOURCE.md": [],
+        "NOTICE.md": [],
+        "source/manifest.json": [],
+        "object.json": [],
+        "prepared/provenance.json": [],
+        "runtime-assets.json": []
+      },
+      "sourceEntries": {
+        "inputs": 2186,
+        "inputs_outside_git": 1410,
+        "inputs_in_git": 776,
+        "documents": 7994,
+        "documents_in_git": 7778,
+        "documents_outside_git": 216,
+        "generatedIntermediates": 377,
+        "generatedIntermediates_in_git": 312,
+        "generatedIntermediates_outside_git": 65
+      },
+      "sourceLicenseEvidenceField": {
+        "with_license_evidence": 1582,
+        "without_license_evidence": 604
+      },
+      "preparedProvenanceBasis": {
+        "recovered": 400,
+        "prepared": 6
+      },
+      "docJsonTopLevelKeys": {
+        "schema": 188,
+        "status": 121,
+        "viewport": 106,
+        "browser": 105,
+        "scope": 81,
+        "reports": 70,
+        "errors": 67,
+        "qualification": 66,
+        "root": 61,
+        "head": 61,
+        "startedAt": 59,
+        "finishedAt": 55,
+        "capturedAt": 53,
+        "prepared": 53,
+        "baseUrl": 53,
+        "cases": 53,
+        "browserVersion": 51,
+        "dpr": 49,
+        "chromeLaunch": 49,
+        "dprs": 48,
+        "codeRevision": 47,
+        "script": 47,
+        "frozenFiles": 47,
+        "captureFinishedAt": 47,
+        "headless": 46,
+        "selectedIds": 46,
+        "fullCohort": 46,
+        "plannedViews": 46,
+        "outputBudgetBytes": 46,
+        "sharedFiles": 46
+      },
+      "docsWithLocalReferences": 245,
+      "localReferenceExamples": [
+        {
+          "path": "docs/architecture/repository-shape.md",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/asteroid-calibrated-surfaces.md",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/asteroid-spacecraft-gaps/browser-validation.json",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/asteroid-spectral-surfaces.md",
+          "matchingLines": 2
+        },
+        {
+          "path": "docs/asteroids-radar-expansion-validation.json",
+          "matchingLines": 18
+        },
+        {
+          "path": "docs/asteroids-size-calibration-validation.json",
+          "matchingLines": 1215
+        },
+        {
+          "path": "docs/comets/67P-OSIRIS-TRIAL.md",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/comets/67P-VIRTIS-VALIDATION.json",
+          "matchingLines": 21
+        },
+        {
+          "path": "docs/comets/HALLEY.md",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/comets/PERFORMANCE.md",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/comets/QUALIFICATION.md",
+          "matchingLines": 2
+        },
+        {
+          "path": "docs/comets/WILD2-COMPLETION.md",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/comets/evidence/103p-dpr-1.json",
+          "matchingLines": 10
+        },
+        {
+          "path": "docs/comets/evidence/103p-dpr-2.json",
+          "matchingLines": 10
+        },
+        {
+          "path": "docs/comets/evidence/67p-conformance.json",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/comets/evidence/67p-dpr-1.json",
+          "matchingLines": 10
+        },
+        {
+          "path": "docs/comets/evidence/67p-dpr-2.json",
+          "matchingLines": 10
+        },
+        {
+          "path": "docs/comets/evidence/67p-geology/browser.json",
+          "matchingLines": 18
+        },
+        {
+          "path": "docs/comets/evidence/67p-geology/shadows-default.json",
+          "matchingLines": 34
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-1292-dpr-1.json",
+          "matchingLines": 51
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-1292-dpr-2.json",
+          "matchingLines": 51
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-1494-dpr-1.json",
+          "matchingLines": 51
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-1494-dpr-2.json",
+          "matchingLines": 51
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-996-dpr-1.json",
+          "matchingLines": 51
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-996-dpr-2.json",
+          "matchingLines": 51
+        }
+      ],
+      "invalidDocJson": [],
+      "bodyEntryPoints": {
+        "README.md": 76,
+        "EVIDENCE.md": 0
+      },
+      "treeOid": "c634bef16004a8103d37787eb5c448e80bc67637",
+      "provenanceCoverageMeasurement": "Not measured in this snapshot; no all-body coverage-gap claim."
+    },
+    {
+      "label": "2f6f8614add9a5a22ef03b86a47edef631950ade",
+      "gitBlobTotals": {
+        "files": 23784,
+        "bytes": 6936765365
+      },
+      "docs": {
+        "files": 1264,
+        "bytes": 474536291
+      },
+      "docsByGroup": {
+        "(root files)": {
+          "files": 51,
+          "bytes": 254604576
+        },
+        "architecture": {
+          "files": 3,
+          "bytes": 81004
+        },
+        "comets": {
+          "files": 270,
+          "bytes": 43135503
+        },
+        "earth": {
+          "files": 5,
+          "bytes": 1624616
+        },
+        "evidence": {
+          "files": 184,
+          "bytes": 51740429
+        },
+        "images": {
+          "files": 5,
+          "bytes": 4584060
+        },
+        "lucy-targets": {
+          "files": 15,
+          "bytes": 2488324
+        },
+        "moons": {
+          "files": 730,
+          "bytes": 116274555
+        },
+        "objects": {
+          "files": 1,
+          "bytes": 3224
+        }
+      },
+      "docsByExtension": {
+        ".css": {
+          "files": 54,
+          "bytes": 520968
+        },
+        ".html": {
+          "files": 1,
+          "bytes": 64032
+        },
+        ".json": {
+          "files": 606,
+          "bytes": 55448453
+        },
+        ".lbl": {
+          "files": 2,
+          "bytes": 2013
+        },
+        ".log": {
+          "files": 107,
+          "bytes": 1836874
+        },
+        ".md": {
+          "files": 133,
+          "bytes": 3467791
+        },
+        ".mjs": {
+          "files": 35,
+          "bytes": 374947
+        },
+        ".mp4": {
+          "files": 1,
+          "bytes": 3231466
+        },
+        ".patch": {
+          "files": 1,
+          "bytes": 7805
+        },
+        ".png": {
+          "files": 225,
+          "bytes": 151848893
+        },
+        ".py": {
+          "files": 16,
+          "bytes": 69674
+        },
+        ".sh": {
+          "files": 1,
+          "bytes": 362
+        },
+        ".tar.gz": {
+          "files": 6,
+          "bytes": 249850798
+        },
+        ".txt": {
+          "files": 21,
+          "bytes": 524356
+        },
+        ".webp": {
+          "files": 52,
+          "bytes": 7266472
+        },
+        ".xml": {
+          "files": 3,
+          "bytes": 21387
+        }
+      },
+      "largestDocs": [
+        {
+          "path": "docs/asteroids-size-calibration-browser-evidence.tar.gz",
+          "oid": "a93194c0d4d41692d4620895452b51c43609d7dd",
+          "bytes": 58666735,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/main-belt-asteroids-evidence.tar.gz",
+          "oid": "278c0d8dcad32a9f90b713849719cf2601ae3a77",
+          "bytes": 44442442,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/asteroids-size-calibration-scientific-evidence.tar.gz",
+          "oid": "dffed548636fbcbfb1cba242c67e834858d66268",
+          "bytes": 40649247,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/main-belt-asteroids-expansion-evidence-bodies-1.tar.gz",
+          "oid": "d50e13f2f2812e5e038f01572a59a5aaa021713a",
+          "bytes": 36328691,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/main-belt-asteroids-expansion-evidence-bodies-2.tar.gz",
+          "oid": "42d6f5ede0e1602fbbb4b320f1c41dafe5eaa807",
+          "bytes": 36078072,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/main-belt-asteroids-expansion-evidence-shared.tar.gz",
+          "oid": "b8bd2ee73aa25095358845b23b01276a42e8a544",
+          "bytes": 33685611,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/moons/b2-preparation/final/integrated-2026-09-09T03-59-04.219Z.json",
+          "oid": "5906b231bcb123092c49d85868fc692daf5767ff",
+          "bytes": 4451366,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/moons/b2-preparation/final/reviews/four-body/capture-report-snapshot.json",
+          "oid": "5906b231bcb123092c49d85868fc692daf5767ff",
+          "bytes": 4451366,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/evidence/main-belt-asteroids-expansion/summary.json",
+          "oid": "da96b2b251a875ed1d106d35a0198258bd61b5f5",
+          "bytes": 3706708,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/evidence/planet-cross-sections/polish/earth-cutaways.mp4",
+          "oid": "eeedd218c31a1745eb7f1edc0418152ed8d3a09f",
+          "bytes": 3231466,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/asteroids-size-calibration-validation.json",
+          "oid": "25b6c0910f46afe050de3796cac007c5b78f124c",
+          "bytes": 2821993,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/moons/b6-mapped-science/evidence/screenshots/moon-dpr2-silicate-signature-shadows-unsupported-scene.png",
+          "oid": "91c140f37aed3224454c9eaeba1a2f5d009ff22e",
+          "bytes": 2724817,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/evidence/planet-cross-sections/all-planets.png",
+          "oid": "f15e70231771f04a7d4e2b58d1e8310f7c8b072a",
+          "bytes": 2722433,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/evidence/earth-elevation/production-dpr-2.png",
+          "oid": "84440d88d07cadc302ffa6f7a5639c4b9b3366d0",
+          "bytes": 2606489,
+          "mode": "100644"
+        },
+        {
+          "path": "docs/images/global-earth-buenos-aires-noise.png",
+          "oid": "e24c5b124ae2403cc30024140abe980452945fc2",
+          "bytes": 2402988,
+          "mode": "100644"
+        }
+      ],
+      "duplicateDocBlobGroups": 28,
+      "duplicateDocWorkingBytes": 5968185,
+      "largestDuplicateDocGroups": [
+        {
+          "oid": "5906b231bcb123092c49d85868fc692daf5767ff",
+          "bytesEach": 4451366,
+          "paths": [
+            "docs/moons/b2-preparation/final/integrated-2026-09-09T03-59-04.219Z.json",
+            "docs/moons/b2-preparation/final/reviews/four-body/capture-report-snapshot.json"
+          ]
+        },
+        {
+          "oid": "7dc51e748338457d8ccebff2e770ea8e71e09fbc",
+          "bytesEach": 780487,
+          "paths": [
+            "docs/moons/b2-preparation/final/legend-correction-2026-09-09T04-19-50.904Z.json",
+            "docs/moons/b2-preparation/final/reviews/four-body/legend-correction/capture-report-snapshot.json"
+          ]
+        },
+        {
+          "oid": "0da004fc9f059a2c45cd72785dcb013f9a1438d5",
+          "bytesEach": 558212,
+          "paths": [
+            "docs/comets/evidence/103p-repeat-capture.png",
+            "docs/comets/evidence/103p.png"
+          ]
+        },
+        {
+          "oid": "555c441e1210f33e4503f79dc1b2f4055e4d6d3e",
+          "bytesEach": 36342,
+          "paths": [
+            "docs/moons/b7-cassini-atlas/evidence/integration/styles/095b2a7955963cc8e1265f77fffc2753e094cb7501d5e4f75b08355ac8cf7247.css",
+            "docs/moons/b7-cassini-atlas/evidence/styles/095b2a7955963cc8e1265f77fffc2753e094cb7501d5e4f75b08355ac8cf7247.css"
+          ]
+        },
+        {
+          "oid": "6bb28918299c74266615dc927f3292a610d2fd85",
+          "bytesEach": 27735,
+          "paths": [
+            "docs/moons/b1-preparation/gate-logs/browser.txt",
+            "docs/moons/b1-preparation/release-gate-logs/browser.txt"
+          ]
+        },
+        {
+          "oid": "8f25fb4515c5809d76fcb867029d93d4a86e9a06",
+          "bytesEach": 12450,
+          "paths": [
+            "docs/moons/b6-mapped-science/evidence/styles/e125434431ba6fa438a70265ed66687d4553f0789f5da3812e907808fa9a0db0.css",
+            "docs/moons/b7-cassini-atlas/evidence/integration/styles/e125434431ba6fa438a70265ed66687d4553f0789f5da3812e907808fa9a0db0.css",
+            "docs/moons/b7-cassini-atlas/evidence/styles/e125434431ba6fa438a70265ed66687d4553f0789f5da3812e907808fa9a0db0.css"
+          ]
+        },
+        {
+          "oid": "a000230bb593fbbe9214d04f0f0998e5ccacc22b",
+          "bytesEach": 20125,
+          "paths": [
+            "docs/moons/b7-cassini-atlas/evidence/integration/styles/711fa18a7481b7172009632dd6183cc67774f72f5ddfc6bbeca7b6fd76041e9f.css",
+            "docs/moons/b7-cassini-atlas/evidence/styles/711fa18a7481b7172009632dd6183cc67774f72f5ddfc6bbeca7b6fd76041e9f.css"
+          ]
+        },
+        {
+          "oid": "5d77a00960fe52727de767ce1e1978983a6916f3",
+          "bytesEach": 6098,
+          "paths": [
+            "docs/moons/b6-mapped-science/evidence/styles/df7e008042a19ad9966a15d7a0738230198c9c9e1ef3042ce94c28602da4db15.css",
+            "docs/moons/b7-cassini-atlas/evidence/integration/styles/df7e008042a19ad9966a15d7a0738230198c9c9e1ef3042ce94c28602da4db15.css",
+            "docs/moons/b7-cassini-atlas/evidence/styles/df7e008042a19ad9966a15d7a0738230198c9c9e1ef3042ce94c28602da4db15.css"
+          ]
+        }
+      ],
+      "registryDescriptorImports": 404,
+      "sourceManifests": 404,
+      "missingRequiredFilesByRegistryImport": {
+        "SOURCE.md": [],
+        "NOTICE.md": [],
+        "source/manifest.json": [],
+        "object.json": [],
+        "prepared/provenance.json": [],
+        "runtime-assets.json": []
+      },
+      "sourceEntries": {
+        "inputs": 2269,
+        "inputs_outside_git": 1432,
+        "inputs_in_git": 837,
+        "documents": 7986,
+        "documents_in_git": 7770,
+        "documents_outside_git": 216,
+        "generatedIntermediates": 375,
+        "generatedIntermediates_in_git": 312,
+        "generatedIntermediates_outside_git": 63
+      },
+      "sourceLicenseEvidenceField": {
+        "with_license_evidence": 1665,
+        "without_license_evidence": 604
+      },
+      "preparedProvenanceBasis": {
+        "recovered": 395,
+        "prepared": 9
+      },
+      "docJsonTopLevelKeys": {
+        "schema": 206,
+        "status": 199,
+        "viewport": 121,
+        "browser": 106,
+        "scope": 82,
+        "qualification": 82,
+        "command": 80,
+        "samples": 78,
+        "root": 77,
+        "head": 77,
+        "exitCode": 76,
+        "startedAt": 75,
+        "cases": 72,
+        "finishedAt": 71,
+        "limitRSSBytes": 71,
+        "minimumFreePercent": 71,
+        "timeoutSeconds": 71,
+        "peakRSSBytes": 71,
+        "seconds": 71,
+        "reports": 70,
+        "baseUrl": 69,
+        "errors": 67,
+        "browserVersion": 67,
+        "chromeLaunch": 65,
+        "dprs": 64,
+        "script": 63,
+        "frozenFiles": 63,
+        "captureFinishedAt": 63,
+        "selectedIds": 62,
+        "fullCohort": 62
+      },
+      "docsWithLocalReferences": 268,
+      "localReferenceExamples": [
+        {
+          "path": "docs/architecture/repository-shape.md",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/asteroid-calibrated-surfaces.md",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/asteroid-spectral-surfaces.md",
+          "matchingLines": 2
+        },
+        {
+          "path": "docs/asteroids-radar-expansion-validation.json",
+          "matchingLines": 18
+        },
+        {
+          "path": "docs/asteroids-size-calibration-validation.json",
+          "matchingLines": 1215
+        },
+        {
+          "path": "docs/comets/67P-OSIRIS-TRIAL.md",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/comets/67P-VIRTIS-VALIDATION.json",
+          "matchingLines": 21
+        },
+        {
+          "path": "docs/comets/HALLEY.md",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/comets/PERFORMANCE.md",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/comets/QUALIFICATION.md",
+          "matchingLines": 2
+        },
+        {
+          "path": "docs/comets/WILD2-COMPLETION.md",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/comets/evidence/103p-dpr-1.json",
+          "matchingLines": 10
+        },
+        {
+          "path": "docs/comets/evidence/103p-dpr-2.json",
+          "matchingLines": 10
+        },
+        {
+          "path": "docs/comets/evidence/67p-conformance.json",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/comets/evidence/67p-dpr-1.json",
+          "matchingLines": 10
+        },
+        {
+          "path": "docs/comets/evidence/67p-dpr-2.json",
+          "matchingLines": 10
+        },
+        {
+          "path": "docs/comets/evidence/67p-geology/browser.json",
+          "matchingLines": 18
+        },
+        {
+          "path": "docs/comets/evidence/67p-geology/shadows-default.json",
+          "matchingLines": 34
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-1292-dpr-1.json",
+          "matchingLines": 51
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-1292-dpr-2.json",
+          "matchingLines": 51
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-1494-dpr-1.json",
+          "matchingLines": 51
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-1494-dpr-2.json",
+          "matchingLines": 51
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-996-dpr-1.json",
+          "matchingLines": 51
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-996-dpr-2.json",
+          "matchingLines": 51
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-control-67p.json",
+          "matchingLines": 51
+        }
+      ],
+      "invalidDocJson": [],
+      "bodyEntryPoints": {
+        "README.md": 76,
+        "EVIDENCE.md": 0
+      },
+      "treeOid": "a8e76717189c03d99b9e7ed36c1b0991da4cae51",
+      "provenanceCoverageMeasurement": "Not measured in this snapshot; no all-body coverage-gap claim."
+    },
+    {
+      "label": "index",
+      "gitBlobTotals": {
+        "files": 23882,
+        "bytes": 6964385273
+      },
+      "docs": {
+        "files": 1282,
+        "bytes": 474791619
+      },
+      "docsByGroup": {
+        "(root files)": {
+          "files": 51,
+          "bytes": 254605517
+        },
+        "architecture": {
+          "files": 3,
+          "bytes": 81004
+        },
+        "asteroid-spacecraft-gaps": {
+          "files": 18,
+          "bytes": 253703
+        },
+        "comets": {
+          "files": 270,
+          "bytes": 43135503
+        },
+        "earth": {
+          "files": 5,
+          "bytes": 1624616
+        },
+        "evidence": {
+          "files": 184,
+          "bytes": 51740429
+        },
+        "images": {
+          "files": 5,
+          "bytes": 4584060
+        },
+        "lucy-targets": {
+          "files": 15,
+          "bytes": 2489008
+        },
+        "moons": {
+          "files": 730,
+          "bytes": 116274555
+        },
+        "objects": {
+          "files": 1,
+          "bytes": 3224
+        }
+      },
+      "docsByExtension": {
+        ".css": {
+          "files": 54,
+          "bytes": 520968
+        },
+        ".html": {
+          "files": 1,
+          "bytes": 64032
+        },
+        ".json": {
+          "files": 615,
+          "bytes": 55681745
+        },
+        ".lbl": {
+          "files": 2,
+          "bytes": 2013
+        },
+        ".log": {
+          "files": 107,
+          "bytes": 1836874
+        },
+        ".md": {
+          "files": 134,
+          "bytes": 3472918
+        },
+        ".mjs": {
+          "files": 43,
+          "bytes": 391856
+        },
+        ".mp4": {
+          "files": 1,
+          "bytes": 3231466
+        },
+        ".patch": {
+          "files": 1,
+          "bytes": 7805
+        },
+        ".png": {
+          "files": 225,
+          "bytes": 151848893
+        },
+        ".py": {
+          "files": 16,
+          "bytes": 69674
+        },
+        ".sh": {
+          "files": 1,
+          "bytes": 362
+        },
+        ".tar.gz": {
+          "files": 6,
+          "bytes": 249850798
+        },
+        ".txt": {
+          "files": 21,
+          "bytes": 524356
+        },
+        ".webp": {
+          "files": 52,
+          "bytes": 7266472
+        },
+        ".xml": {
+          "files": 3,
+          "bytes": 21387
+        }
+      },
+      "largestDocs": [
+        {
+          "path": "docs/asteroids-size-calibration-browser-evidence.tar.gz",
+          "oid": "a93194c0d4d41692d4620895452b51c43609d7dd",
+          "mode": "100644",
+          "bytes": 58666735
+        },
+        {
+          "path": "docs/main-belt-asteroids-evidence.tar.gz",
+          "oid": "278c0d8dcad32a9f90b713849719cf2601ae3a77",
+          "mode": "100644",
+          "bytes": 44442442
+        },
+        {
+          "path": "docs/asteroids-size-calibration-scientific-evidence.tar.gz",
+          "oid": "dffed548636fbcbfb1cba242c67e834858d66268",
+          "mode": "100644",
+          "bytes": 40649247
+        },
+        {
+          "path": "docs/main-belt-asteroids-expansion-evidence-bodies-1.tar.gz",
+          "oid": "d50e13f2f2812e5e038f01572a59a5aaa021713a",
+          "mode": "100644",
+          "bytes": 36328691
+        },
+        {
+          "path": "docs/main-belt-asteroids-expansion-evidence-bodies-2.tar.gz",
+          "oid": "42d6f5ede0e1602fbbb4b320f1c41dafe5eaa807",
+          "mode": "100644",
+          "bytes": 36078072
+        },
+        {
+          "path": "docs/main-belt-asteroids-expansion-evidence-shared.tar.gz",
+          "oid": "b8bd2ee73aa25095358845b23b01276a42e8a544",
+          "mode": "100644",
+          "bytes": 33685611
+        },
+        {
+          "path": "docs/moons/b2-preparation/final/integrated-2026-09-09T03-59-04.219Z.json",
+          "oid": "5906b231bcb123092c49d85868fc692daf5767ff",
+          "mode": "100644",
+          "bytes": 4451366
+        },
+        {
+          "path": "docs/moons/b2-preparation/final/reviews/four-body/capture-report-snapshot.json",
+          "oid": "5906b231bcb123092c49d85868fc692daf5767ff",
+          "mode": "100644",
+          "bytes": 4451366
+        },
+        {
+          "path": "docs/evidence/main-belt-asteroids-expansion/summary.json",
+          "oid": "da96b2b251a875ed1d106d35a0198258bd61b5f5",
+          "mode": "100644",
+          "bytes": 3706708
+        },
+        {
+          "path": "docs/evidence/planet-cross-sections/polish/earth-cutaways.mp4",
+          "oid": "eeedd218c31a1745eb7f1edc0418152ed8d3a09f",
+          "mode": "100644",
+          "bytes": 3231466
+        },
+        {
+          "path": "docs/asteroids-size-calibration-validation.json",
+          "oid": "25b6c0910f46afe050de3796cac007c5b78f124c",
+          "mode": "100644",
+          "bytes": 2821993
+        },
+        {
+          "path": "docs/moons/b6-mapped-science/evidence/screenshots/moon-dpr2-silicate-signature-shadows-unsupported-scene.png",
+          "oid": "91c140f37aed3224454c9eaeba1a2f5d009ff22e",
+          "mode": "100644",
+          "bytes": 2724817
+        },
+        {
+          "path": "docs/evidence/planet-cross-sections/all-planets.png",
+          "oid": "f15e70231771f04a7d4e2b58d1e8310f7c8b072a",
+          "mode": "100644",
+          "bytes": 2722433
+        },
+        {
+          "path": "docs/evidence/earth-elevation/production-dpr-2.png",
+          "oid": "84440d88d07cadc302ffa6f7a5639c4b9b3366d0",
+          "mode": "100644",
+          "bytes": 2606489
+        },
+        {
+          "path": "docs/images/global-earth-buenos-aires-noise.png",
+          "oid": "e24c5b124ae2403cc30024140abe980452945fc2",
+          "mode": "100644",
+          "bytes": 2402988
+        }
+      ],
+      "duplicateDocBlobGroups": 28,
+      "duplicateDocWorkingBytes": 5968185,
+      "largestDuplicateDocGroups": [
+        {
+          "oid": "5906b231bcb123092c49d85868fc692daf5767ff",
+          "bytesEach": 4451366,
+          "paths": [
+            "docs/moons/b2-preparation/final/integrated-2026-09-09T03-59-04.219Z.json",
+            "docs/moons/b2-preparation/final/reviews/four-body/capture-report-snapshot.json"
+          ]
+        },
+        {
+          "oid": "7dc51e748338457d8ccebff2e770ea8e71e09fbc",
+          "bytesEach": 780487,
+          "paths": [
+            "docs/moons/b2-preparation/final/legend-correction-2026-09-09T04-19-50.904Z.json",
+            "docs/moons/b2-preparation/final/reviews/four-body/legend-correction/capture-report-snapshot.json"
+          ]
+        },
+        {
+          "oid": "0da004fc9f059a2c45cd72785dcb013f9a1438d5",
+          "bytesEach": 558212,
+          "paths": [
+            "docs/comets/evidence/103p-repeat-capture.png",
+            "docs/comets/evidence/103p.png"
+          ]
+        },
+        {
+          "oid": "555c441e1210f33e4503f79dc1b2f4055e4d6d3e",
+          "bytesEach": 36342,
+          "paths": [
+            "docs/moons/b7-cassini-atlas/evidence/integration/styles/095b2a7955963cc8e1265f77fffc2753e094cb7501d5e4f75b08355ac8cf7247.css",
+            "docs/moons/b7-cassini-atlas/evidence/styles/095b2a7955963cc8e1265f77fffc2753e094cb7501d5e4f75b08355ac8cf7247.css"
+          ]
+        },
+        {
+          "oid": "6bb28918299c74266615dc927f3292a610d2fd85",
+          "bytesEach": 27735,
+          "paths": [
+            "docs/moons/b1-preparation/gate-logs/browser.txt",
+            "docs/moons/b1-preparation/release-gate-logs/browser.txt"
+          ]
+        },
+        {
+          "oid": "8f25fb4515c5809d76fcb867029d93d4a86e9a06",
+          "bytesEach": 12450,
+          "paths": [
+            "docs/moons/b6-mapped-science/evidence/styles/e125434431ba6fa438a70265ed66687d4553f0789f5da3812e907808fa9a0db0.css",
+            "docs/moons/b7-cassini-atlas/evidence/integration/styles/e125434431ba6fa438a70265ed66687d4553f0789f5da3812e907808fa9a0db0.css",
+            "docs/moons/b7-cassini-atlas/evidence/styles/e125434431ba6fa438a70265ed66687d4553f0789f5da3812e907808fa9a0db0.css"
+          ]
+        },
+        {
+          "oid": "a000230bb593fbbe9214d04f0f0998e5ccacc22b",
+          "bytesEach": 20125,
+          "paths": [
+            "docs/moons/b7-cassini-atlas/evidence/integration/styles/711fa18a7481b7172009632dd6183cc67774f72f5ddfc6bbeca7b6fd76041e9f.css",
+            "docs/moons/b7-cassini-atlas/evidence/styles/711fa18a7481b7172009632dd6183cc67774f72f5ddfc6bbeca7b6fd76041e9f.css"
+          ]
+        },
+        {
+          "oid": "5d77a00960fe52727de767ce1e1978983a6916f3",
+          "bytesEach": 6098,
+          "paths": [
+            "docs/moons/b6-mapped-science/evidence/styles/df7e008042a19ad9966a15d7a0738230198c9c9e1ef3042ce94c28602da4db15.css",
+            "docs/moons/b7-cassini-atlas/evidence/integration/styles/df7e008042a19ad9966a15d7a0738230198c9c9e1ef3042ce94c28602da4db15.css",
+            "docs/moons/b7-cassini-atlas/evidence/styles/df7e008042a19ad9966a15d7a0738230198c9c9e1ef3042ce94c28602da4db15.css"
+          ]
+        }
+      ],
+      "registryDescriptorImports": 406,
+      "sourceManifests": 406,
+      "missingRequiredFilesByRegistryImport": {
+        "SOURCE.md": [],
+        "NOTICE.md": [],
+        "source/manifest.json": [],
+        "object.json": [],
+        "prepared/provenance.json": [],
+        "runtime-assets.json": []
+      },
+      "sourceEntries": {
+        "inputs": 2277,
+        "inputs_outside_git": 1436,
+        "inputs_in_git": 841,
+        "documents": 8008,
+        "documents_in_git": 7792,
+        "documents_outside_git": 216,
+        "generatedIntermediates": 377,
+        "generatedIntermediates_in_git": 314,
+        "generatedIntermediates_outside_git": 63
+      },
+      "sourceLicenseEvidenceField": {
+        "with_license_evidence": 1673,
+        "without_license_evidence": 604
+      },
+      "preparedProvenanceBasis": {
+        "recovered": 395,
+        "prepared": 11
+      },
+      "docJsonTopLevelKeys": {
+        "schema": 206,
+        "status": 199,
+        "viewport": 122,
+        "browser": 107,
+        "scope": 85,
+        "qualification": 82,
+        "command": 80,
+        "samples": 78,
+        "root": 77,
+        "head": 77,
+        "exitCode": 76,
+        "startedAt": 75,
+        "cases": 72,
+        "finishedAt": 71,
+        "limitRSSBytes": 71,
+        "minimumFreePercent": 71,
+        "timeoutSeconds": 71,
+        "peakRSSBytes": 71,
+        "seconds": 71,
+        "reports": 70,
+        "baseUrl": 69,
+        "errors": 67,
+        "browserVersion": 67,
+        "chromeLaunch": 65,
+        "dprs": 64,
+        "script": 63,
+        "frozenFiles": 63,
+        "captureFinishedAt": 63,
+        "selectedIds": 62,
+        "fullCohort": 62
+      },
+      "docsWithLocalReferences": 269,
+      "localReferenceExamples": [
+        {
+          "path": "docs/architecture/repository-shape.md",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/asteroid-calibrated-surfaces.md",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/asteroid-spacecraft-gaps/browser-validation.json",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/asteroid-spectral-surfaces.md",
+          "matchingLines": 2
+        },
+        {
+          "path": "docs/asteroids-radar-expansion-validation.json",
+          "matchingLines": 18
+        },
+        {
+          "path": "docs/asteroids-size-calibration-validation.json",
+          "matchingLines": 1215
+        },
+        {
+          "path": "docs/comets/67P-OSIRIS-TRIAL.md",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/comets/67P-VIRTIS-VALIDATION.json",
+          "matchingLines": 21
+        },
+        {
+          "path": "docs/comets/HALLEY.md",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/comets/PERFORMANCE.md",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/comets/QUALIFICATION.md",
+          "matchingLines": 2
+        },
+        {
+          "path": "docs/comets/WILD2-COMPLETION.md",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/comets/evidence/103p-dpr-1.json",
+          "matchingLines": 10
+        },
+        {
+          "path": "docs/comets/evidence/103p-dpr-2.json",
+          "matchingLines": 10
+        },
+        {
+          "path": "docs/comets/evidence/67p-conformance.json",
+          "matchingLines": 1
+        },
+        {
+          "path": "docs/comets/evidence/67p-dpr-1.json",
+          "matchingLines": 10
+        },
+        {
+          "path": "docs/comets/evidence/67p-dpr-2.json",
+          "matchingLines": 10
+        },
+        {
+          "path": "docs/comets/evidence/67p-geology/browser.json",
+          "matchingLines": 18
+        },
+        {
+          "path": "docs/comets/evidence/67p-geology/shadows-default.json",
+          "matchingLines": 34
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-1292-dpr-1.json",
+          "matchingLines": 51
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-1292-dpr-2.json",
+          "matchingLines": 51
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-1494-dpr-1.json",
+          "matchingLines": 51
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-1494-dpr-2.json",
+          "matchingLines": 51
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-996-dpr-1.json",
+          "matchingLines": 51
+        },
+        {
+          "path": "docs/comets/evidence/81p-budget-996-dpr-2.json",
+          "matchingLines": 51
+        }
+      ],
+      "invalidDocJson": [],
+      "bodyEntryPoints": {
+        "README.md": 76,
+        "EVIDENCE.md": 0
+      },
+      "lsFilesStageSha256": "7f2952e2883336bb0af0a06aa63c162dfe342c22a809e6339982121f555e0a02",
+      "provenanceCoverageMeasurement": "Not measured in this snapshot; no all-body coverage-gap claim."
+    }
+  ]
+}

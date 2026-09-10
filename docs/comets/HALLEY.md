@@ -20,7 +20,7 @@ The [specific PDS4 product](https://sbnarchive.psi.edu/pds4/non_mission/small_bo
 archives Philip Stooke's Giotto/Vega reconstruction, with pointing by Alain
 Abergel. Its 2,701 longitude/latitude/radius rows use kilometres and east-positive
 longitude. The exact table, label, bundle description and source pins are retained
-beside the package. [SOURCE.md](../../src/planets/comet-1p/SOURCE.md) records the
+beside the package. The [body README](../../src/planets/comet-1p/README.md) records the
 coordinate conversion, attribution, rejected texture candidates and limitations.
 
 The archive estimates absolute errors of **0.5–1 km**, relative point-to-point

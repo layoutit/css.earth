@@ -24,8 +24,8 @@ lightcurve series or claims resolved terrain. The shared missing-data grid cover
 the entire surface; the introductory text and lens description disclose the
 assumptions beside the scene.
 
-The [Kiviuq source survey](../../src/planets/kiviuq/SOURCE.md) and
-[Albiorix source survey](../../src/planets/albiorix/SOURCE.md) preserve the
+The [Kiviuq source survey](../../src/planets/kiviuq/README.md) and
+[Albiorix source survey](../../src/planets/albiorix/README.md) preserve the
 primary references, formula, selected inputs and unresolved candidates. The 2026
 review reports calculated inversion models with papers in preparation; no
 downloadable model for these bodies was qualified. Albiorix's unresolved JWST

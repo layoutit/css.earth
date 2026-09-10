@@ -93,39 +93,8 @@ for b in bodies:
  test=Path('tests/objects/unit')/id/'source.test.mjs';expected={k:b[k] for k in ['modelId','shapeSha256','vertices','faces','firstVertex','firstFace','signedVolume','diameterKm','uncertaintyKm','lambda','beta','periodHours']};expected.update(name=name,modelVersion=b['version'])
  test.parent.mkdir(parents=True,exist_ok=True);test.write_text("import {test} from 'node:test';\nimport {assertCalibratedAsteroidSource} from '../asteroid-calibration-contract.mjs';\n\n// Original publisher-coordinate anchors and independent signed-volume intake.\nconst independentExpected = "+json.dumps(expected,indent=2)+f';\n\ntest("{name} preserves its source model and calibrated raster triangles", () => assertCalibratedAsteroidSource("{id}", independentExpected));\n')
  profile=Path('tests/objects/browser')/id/'browser-profile.mjs';profile.parent.mkdir(parents=True,exist_ok=True);profile.write_text(Path('tests/objects/browser/dike/browser-profile.mjs').read_text().replace('dike',id))
- refs='\n'.join(f'- [{r["label"]}]({r["url"]}) — original model publication record.' for r in b['references'])
- alternatives='; '.join(f'model {a["modelId"]}, pole {a["pole"]}, {a["url"]}' for a in b['alternatives']) or 'None listed for this target.'
- paper_notes='\n'.join(f'- [{paper["label"]}]({paper["url"]}) — retained primary publication; see the body-specific selection and calibration above.' for paper in b.get('papers',[]))
- notes=f'''# ({num}) {b['name']}: source and interpretation
-
-Checked 2026-09-09. Selected DAMIT model **{mid}**, version **{b['version']}**. {credit}
-
-## Shape, scale and orientation
-
-{desc}
-
-{limits}
-
-The unmodified source has {b['vertices']} vertices and {b['faces']} triangles. Its signed tetrahedral volume is {b['signedVolume']:.17g} source units³; an independent triangle-centroid divergence sum gives {b['independentSignedVolume']:.17g}. The existing recipe applies one uniform scale of {scale:.17g} km per source unit so its volume-equivalent diameter is {diameter:g} km. No unit-volume assumption is made. Radius above a {radius:g} km sphere is a shape-derived scalar, not gravitational height or measured geology.
-
-The original +Z spin axis and +X reference meridian are retained. The source pole is ecliptic J2000 ({b['lambda']:g}°, {b['beta']:g}°), with sidereal period {b['periodHours']:g} h. Conversion to equatorial J2000 uses obliquity 23.439291111°. Absolute phase is arbitrary; accelerated display spin is illustrative. Position uses JPL Horizons heliocentric ICRF elements at 2026-09-03 TT (TDB approximated as TT, under 2 ms).
-
-## Source survey
-
-- [Selected model]({url}) and [original counted mesh]({b['shapeUrl']}) — included unchanged. {kind}; fine relief is unresolved.
-- [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
-{refs}
-{paper_notes}
-
-{b['selectionNotes']}
-
-No registered global image texture is supplied by the selected release. Shape diagrams, disk-integrated thermal estimates and AO comparison images cannot provide a regolith or albedo map; the shared gray grid is used. Alternative archive solutions: {alternatives}
-
-## Preparation and qualification
-
-The established source-meshoptimizer path retains source connectivity, reduces to at most 800 faces, and emits native PolyCSS `u` triangles with 128 px raster cells. The error allowance is {diameter*10:g} m; sampled source-fit error is qualified separately from source accuracy. Elevation uses closest-source-surface sampling with the same physical scale. Shadows are off by default. Shared runtime, camera, navigation and shell remain generic. Delivery and browser evidence are recorded in the PR’s validation report.
-'''
- (root/'SOURCE.md').write_text(notes);(root/'NOTICE.md').write_text(f'# {name}: notices\n\n{credit}\n\nShape and derived geometry: DAMIT CC BY 4.0, https://creativecommons.org/licenses/by/4.0/. Original source and selected record: {url}.\n\nBackground: ESO/S. Brunier, CC BY 4.0. Star data: HYG, see source/stars/LICENSE.md. Title: Inter Project Authors / Rasmus Andersson, SIL Open Font License 1.1.\n')
+ # Keep the reviewed body README when regenerating source data.
+ (root/'NOTICE.md').write_text(f'# {name}: notices\n\n{credit}\n\nShape and derived geometry: DAMIT CC BY 4.0, https://creativecommons.org/licenses/by/4.0/. Original source and selected record: {url}.\n\nBackground: ESO/S. Brunier, CC BY 4.0. Star data: HYG, see source/stars/LICENSE.md. Title: Inter Project Authors / Rasmus Andersson, SIL Open Font License 1.1.\n')
  # Pin authored source files now; the title/context finalizer will reseal its own changes.
  special={entry['path'] for entry in manifest['inputs']+manifest['generatedIntermediates']}
  manifest['documents']=[dict(path=str(file.relative_to(s)),purpose='Pinned original source record or authored scientific preparation input.',**pin(file)) for file in sorted(s.rglob('*')) if file.is_file() and file.name!='manifest.json' and str(file.relative_to(s)) not in special]

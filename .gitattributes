@@ -56,6 +56,9 @@ src/planets/comet-81p/source/photography/**/*.lbl -text -whitespace
 src/planets/comet-9p/source/photography/**/*.lbl -text -whitespace
 src/planets/comet-103p/source/photography/**/*.lbl -text -whitespace
 
+# Preserve the pinned Apophis spin-state row, including its CRLF ending.
+src/planets/apophis/source/reference/apophis_v233s7_spin_state.csv -text -whitespace
+
 # B9 preserves pinned binary cubes, archive text and captured CSS byte-for-byte.
 src/planets/*/source/cassini-ice/**/*.cub binary
 src/planets/*/source/cassini-ice/**/*.qub binary

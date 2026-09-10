@@ -67,7 +67,7 @@ Paths inside the astronomy tools row are relative to `packages/astronomy/` where
 
 ### Constraint models: Kiviuq and Albiorix
 
-Read `SOURCE.md`, `object.json`, `source/measurements.json`, `source/preparation/{terrestrial,rotation,navigation,acquisition}.json`, `source/manifest.json` and `tests/objects/unit/<id>/source.test.mjs` for both examples.
+Read `README.md`, `object.json`, `source/measurements.json`, `source/preparation/{terrestrial,rotation,navigation,acquisition}.json`, `source/manifest.json` and `tests/objects/unit/<id>/source.test.mjs` for both examples.
 
 Their geometry is a **checked-in authored radius table**. The metadata records `b=c=R/cbrt(q)`, `a=q*b`, the angular sampling and the uniform-reflectivity lower-bound interpretation. The current shared `ellipsoid-geometry.mjs` is an affine **axisymmetric** latitude-band helper; it is not a three-axis sampler or a ready lower-bound-model generator. B1 can retain small checked tables as reproducible source inputs. If authoring 25 tables warrants automation, add one parameter-driven preparation utility with source-pinned measurements and analytic-axis/volume tests; do not add per-body scripts or claim that generic helper already exists.
 

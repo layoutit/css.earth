@@ -29,7 +29,7 @@ No runtime rendering feature or shared shell change was added for this polish.
 
 The checked-in 520 KB numeric subset, upstream metadata, original NetCDF hash,
 deterministic extractor, coordinates and interpretation are documented in
-[Earth's source record](../src/planets/earth/SOURCE.md#mantle-tomography-source-and-interpretation).
+[Earth's source record](../src/planets/earth/README.md#mantle-tomography-source-and-interpretation).
 The signed, unshaded mantle palette shows vertically polarized shear-wave speed
 relative to the area-weighted global mean at the same depth. Red is slower and
 blue faster; it is not temperature. Crust and core are schematic. Gray marks

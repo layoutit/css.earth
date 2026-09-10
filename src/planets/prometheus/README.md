@@ -1,5 +1,64 @@
 # Prometheus
 
-Authored package using the shared object adapter, Cassini observations and the measured PDS shape. See SOURCE.md for interpretation and source restoration.
+## Sources
 
-`pnpm setup:assets --object=prometheus` installs the published runtime assets.
+- **Monochrome** uses 7 original Cassini ISS NAC clear-filter images, calibrated by the PDS Ring-Moon Systems Node with CISSCAL 4.0beta into linear I/F.
+
+- **Elevation** comes from the same [Thomas, Joseph and Ansty (2018) PDS shape release](https://doi.org/10.26033/ewy3-jy61), shown as radial height above an explicitly chosen 43.1 km reference sphere.
+
+## Evidence
+
+- Their observation IDs and camera geometry are authored in [source/preparation/terrestrial.json](source/preparation/terrestrial.json); each geometry row comes from Table 1 of the [PDS Prometheus model documentation](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/prometheus_document.pdf).
+
+- Across 4,096 approximately uniform radial rays, the simplified model differs from the original by 202 m on average, 517 m at the 95th percentile and 1572 m at the largest sampled point. These are sampled radial differences, not an exhaustive geometric bound or the source measurement uncertainty.
+
+## Known problems
+
+- **Monochrome:** It is an approximate reflectance presentation, not recovered albedo: the authored weight is 0.5, gain is at most 2.5, and samples beyond 80° incidence or 78° emission are withheld. Missing areas and cast-shadow exclusions retain the shared gray coverage grid; no terrain is copied into them.
+
+- **Elevation:** This includes the moon’s elongated shape; it is not height above an equipotential/geoid. The documented model uncertainty is 0.2–0.4 km; parts of the leading side are least constrained. Small crater morphology is not reliably encoded.
+
+- **Orientation:** Small optical librations and dynamical phase errors are not represented.
+
+[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+
+## Methods and source notes
+
+<details>
+<summary>Detailed source survey, assumptions and preparation</summary>
+
+<a id="prometheus-source-and-presentation"></a>
+
+## Selected data
+
+The original floating-point IMG products and their detached PDS labels are pinned in `source/manifest.json`. The images cover different sides and have varying resolution and illumination. The source pixel scale is approximately 196–474 m near the body center; more grazing areas are coarser. Preparation raster size is 2048 × 1024 and does not imply uniformly resolved imagery.
+
+The shared camera projection intersects the original PDS shape and applies each observation’s range, center sample/line, projected north and observer/Sun directions. The camera focal length and pixel pitch come from the [Cassini ISS instrument kernel](https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ik/cas_iss_v10.ti): 2003.44 mm and 12 µm. The PDF longitudes are positive west; the rendered mesh and map use positive east. The source frame has +X toward Saturn, +Y opposite orbital motion and +Z north. VICAR `LBLSIZE + NLB × RECSIZE` owns the pixel-data offset; the detached labels omit the binary header record.
+
+A bounded Lunar-Lambert display normalization reduces photographed disk shading. Per-frame level matching is limited to 0.7–1.4. An edge-connected threshold of 0.003 I/F rejects faint sky noise; isolated dark pixels within the body are retained. This conservative display mask does not classify every low signal as missing. Fine photographed relief and residual exposure differences may remain. The app’s directional Shadows setting remains independent of this source correction.
+
+Fixed relief illumination makes model slopes readable. Palette bounds and the unshaded numeric legend are in the authored recipe.
+
+## Shape, orientation and delivery
+
+The released zero-indexed plate connectivity is retained before meshoptimizer simplification. The display uses 720 native PolyCSS triangle leaves, under the 2,000-leaf ceiling, with 128px raster cells. The simplified surface is closed, has consistent shared-edge winding and Euler characteristic two. None of these sampled source rays had an additional outward surface intersection. The model’s documented Archinal et al. (2011) pole and linear prime-meridian rotation are used at the shared fixed display epoch.
+
+Both lenses use the same prepared geometry and coverage interpretation. A dedicated 512px context image and small map previews are generated from that geometry and map; they do not fetch the source image archive. WebP quality 94 is the final atlas encoding, after lossless map preparation. No runtime source processing is performed.
+
+## Source survey
+
+- **Included:** [Cassini ISS calibrated archive](https://pds-rings.seti.org/cassini/iss/) for the observation lens and [PDS shape release](https://sbn.psi.edu/pds/resource/saturnsatshapes.html) for geometry and radial-height visualization.
+
+- **Excluded frame:** `N1828136577_1` has a PDS table center sample of 790.20, inconsistent with the body in the image near sample 490. The earlier `N1828134597_1` covers this region at finer resolution; no camera-center correction is invented.
+
+- **Excluded from this release:** the Voyager-era Stooke shaded-relief/Celestia maps. They represent a different, older cartographic interpretation and cannot be described as Cassini observed pixels; the original Western University distribution URL currently returns 404. They add no qualified improvement over the chosen Cassini frames.
+
+- **Not located in the surveyed catalog:** a registered global Cassini color, thermal, composition or geology map. Clear-filter images provide one observation lens. Individual multispectral frames exist in the PDS shape image lists but have not been qualified into a registered independent color mosaic; no synthetic color lens is substituted.
+
+- **Excluded as a download path for this body:** [SBIB’s Cassini catalog](https://sbn.psi.edu/pds/sbib/saturn.html), whose listed targets currently omit Prometheus. This is a limitation of that catalog, not a claim that other Prometheus datasets do not exist.
+
+[NASA’s Prometheus overview](https://science.nasa.gov/saturn/moons/prometheus/) supplies editorial context. JPL values in the vendored astronomy package supply the physical radius and orbit used by the shared application. Restore source bytes with the authored acquisition recipe, then run the shared object preparer; prepared runtime files are distributed through `runtime-assets.json`.
+
+The initial camera uses the prepared ecliptic presentation basis and the radial mesh’s CSS X/Y transport to face the source portrait direction; geographic longitude/latitude are not copied into scene yaw/pitch.
+
+</details>

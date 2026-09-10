@@ -13,7 +13,7 @@ contamination in the northern band is retained and disclosed.
 Source identities, geographic numerical samples, units and the processing
 record are in
 [the pinned source receipt](../src/planets/earth/source/science/night-lights-2025/provenance.json).
-[Earth's source record](../src/planets/earth/SOURCE.md) describes the numeric
+[Earth's source record](../src/planets/earth/README.md) describes the numeric
 area averaging, logarithmic display and coverage handling; the
 [notice](../src/planets/earth/NOTICE.md) retains NASA and mirror attribution.
 
