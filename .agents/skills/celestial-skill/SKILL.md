@@ -209,7 +209,10 @@ not an automatic stop for approval.
 
 Use [qualification](references/qualification.md) for the relevant checks,
 source restoration, fresh runtime installation and measured delivery size.
-Reuse passing evidence until changes or unresolved failures invalidate it.
+Choose local checks from its change table and the contract's
+[PR check rules](../../../docs/provenance/CONTRACT.md#pull-requests). Do not launch
+all-body preparation or test suites by default for one body. Reuse passing evidence
+until relevant changes or unresolved failures invalidate it.
 Keep project-required checks; do not add a new dashboard, gate framework,
 Burnlist or exhaustive test matrix to implement an ordinary body.
 

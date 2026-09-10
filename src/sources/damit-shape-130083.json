@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-130083",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 130083 · Thule",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "130083"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/130083/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/thule/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "fb1b7b2687d5ebc070a53497bcc457a1d01099ed616b3ee0f33cd4ad2492be20",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

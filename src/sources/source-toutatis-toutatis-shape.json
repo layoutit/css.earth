@@ -1,0 +1,24 @@
+{
+  "id": "source-toutatis-toutatis-shape",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Toutatis · toutatis shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/4179toutatis2.tab",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/toutatis/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "f38fd6bff978d4d28b6b7d255c8d4be312bb7883bfd8af1fdc3c37eb1894f5ef",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

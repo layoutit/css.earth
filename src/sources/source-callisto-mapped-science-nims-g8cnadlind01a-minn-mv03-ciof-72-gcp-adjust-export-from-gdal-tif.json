@@ -1,0 +1,24 @@
+{
+  "id": "source-callisto-mapped-science-nims-g8cnadlind01a-minn-mv03-ciof-72-gcp-adjust-export-from-gdal-tif",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Callisto · mapped science nims g8cnadlind01a minn mv03 ciof 72 gcp adjust export from gdal tif",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/callisto_go_nims_reprojected_malaska_2023/data/primary_registered_files/G8CNADLIND01A_MINN_MV03_CIOF_72_GCP_adjust_EXPORT_from_gdal.tif",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/callisto/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "4ebe4dae350c76f1c482b5d7c422caf840d09eb73c4e446e3a76e6f98c3ba215",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

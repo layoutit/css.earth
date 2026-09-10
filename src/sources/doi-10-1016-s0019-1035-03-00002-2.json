@@ -1,0 +1,29 @@
+{
+  "id": "doi-10-1016-s0019-1035-03-00002-2",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · DOI 10.1016/S0019-1035(03)00002-2",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1016/S0019-1035(03)00002-2"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/despina/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "24a784af001e7225087cf7100852ee56b465ba58f82782cd6a50c304237b0fb5",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

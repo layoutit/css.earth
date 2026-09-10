@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-10171",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 10171 · Hersilia",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "10171"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/10171/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/hersilia/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "c85e313c25ea7b92b475b5ccd7eb3bd0e69379530ca411b34688aeca19a36835",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

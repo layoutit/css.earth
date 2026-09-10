@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-106228",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 106228 · Iau",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "106228"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/106228/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/iau/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "182c97bc7b4d59677db891d902eb00f1ad91a113bcf99eb1e1d37f12cc123d9f",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

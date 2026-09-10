@@ -1,0 +1,24 @@
+{
+  "id": "source-comet-67p-shap7-region-cells",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Comet 67P · shap7 region cells",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://data.mendeley.com/public-files/datasets/2845znt54k/files/d6036dad-ade7-4645-afc1-6f8e86c36a4e/file_downloaded",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/comet-67p/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "0e233e5a52d4557bbc92303bcf4812a3da3bbfaae422d2dda011bafeb4d77e17",
+      "locator": "/inputs/26"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

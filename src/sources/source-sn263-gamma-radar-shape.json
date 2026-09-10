@@ -1,0 +1,24 @@
+{
+  "id": "source-sn263-gamma-radar-shape",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Sn263 Gamma · radar shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591gamma.tab",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/sn263-gamma/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "d42f63f999820d5af344d2e7b2128275e1acda095fcaaf6882fac7949aacf75f",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

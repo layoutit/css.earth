@@ -1,0 +1,29 @@
+{
+  "id": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2112-data-1870675158-1870722394-n1870697721-1-calib",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PDS archive product · N1870697721_1_CALIB",
+  "identifiers": [
+    {
+      "type": "PDS archive resource path",
+      "value": "/holdings/calibrated/COISS_2xxx/COISS_2112/data/1870675158_1870722394/N1870697721_1_CALIB"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2112/data/1870675158_1870722394/N1870697721_1_CALIB.LBL",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/atlas/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "43d113113ec6fbc7798376168996c95ad29dc35ca9479334518b1cd7e47196b9",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

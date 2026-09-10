@@ -1,0 +1,24 @@
+{
+  "id": "source-mars-usgs-mola-pseudocolor",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "MOLA global color shaded relief",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_global_color_shaded_relief_463m",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/mars/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "c8ac2a146613a1322fa1e2205fc30c2b881b88e5ef5bed82903e8e1a0acb8745",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

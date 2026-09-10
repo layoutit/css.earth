@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-66260",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 66260 · Elpis",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "66260"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/66260/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/elpis/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "4f26596aea88fe6458c823a61adb0b6207016105ea89ee334f1a4468dc067a8f",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

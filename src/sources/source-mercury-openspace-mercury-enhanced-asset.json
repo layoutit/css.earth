@@ -1,0 +1,24 @@
+{
+  "id": "source-mercury-openspace-mercury-enhanced-asset",
+  "kind": "software",
+  "identityLevel": "work",
+  "title": "Mercury · openspace mercury enhanced asset",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_mosaic2_newyork.asset",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/mercury/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "2c66d93686fe80a9cecb39cf8b6b6e486d2e4cebc900a62534185a26c5f565ec",
+      "locator": "/inputs/9"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-1982",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 1982 · Musa",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "1982"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1982/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/musa/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "55cf36a172849d99269a31da674f964f5f4f487c711fc5cca9354ae280381a5a",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

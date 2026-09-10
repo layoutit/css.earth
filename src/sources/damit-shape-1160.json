@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-1160",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 1160 · Erato",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "1160"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1160/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/erato/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "e35fbe405b11ba4758d87003cdb5149375670cc3aeebbfa29e80282d1f6136a5",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

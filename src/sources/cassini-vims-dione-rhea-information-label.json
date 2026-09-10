@@ -1,0 +1,35 @@
+{
+  "id": "cassini-vims-dione-rhea-information-label",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PDS label for the Dione and Rhea VIMS documentation",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.xml"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.xml",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/dione/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "d09b444f79ad0bfac08879efc0376c8b7314d3cd23bd81e5b59ee5dad8555d06",
+      "locator": "/inputs/12"
+    },
+    {
+      "path": "src/planets/rhea/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "ee9ee1e0bc76f9e344ed1f23e0041c748ebf64bd2d1b2dd9b8f522ad4016cb4c",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

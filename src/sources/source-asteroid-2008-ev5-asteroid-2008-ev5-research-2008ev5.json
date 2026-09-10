@@ -1,0 +1,24 @@
+{
+  "id": "source-asteroid-2008-ev5-asteroid-2008-ev5-research-2008ev5",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Asteroid 2008 Ev5 · asteroid 2008 ev5 research 2008ev5",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://echo.jpl.nasa.gov/asteroids/2008EV5/busch.etal.2011.2008ev5.pdf",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/asteroid-2008-ev5/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "d81ca68eb074ddde49b659b918b9db794674d88273087f839b6de1f35b947fa6",
+      "locator": "/inputs/3"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

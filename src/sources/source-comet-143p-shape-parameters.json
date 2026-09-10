@@ -1,0 +1,24 @@
+{
+  "id": "source-comet-143p-shape-parameters",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Comet 143P · shape parameters",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/comet-143p/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "1a1a250710ae19f8691ab6efd2132c065f09a39f91649b0cfad5d2aaa27e933c",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

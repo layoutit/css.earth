@@ -1,0 +1,24 @@
+{
+  "id": "source-comet-9p-n30045te02-rr-path",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Comet 9P · n30045te02 rr path",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30045te02_rr.fit",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/comet-9p/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "4a6c8273b06c9de5da31b6ee84de26c00265e195aa6be75b85b5ea5b0399556d",
+      "locator": "/inputs/32"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

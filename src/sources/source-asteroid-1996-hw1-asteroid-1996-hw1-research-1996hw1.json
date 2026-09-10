@@ -1,0 +1,24 @@
+{
+  "id": "source-asteroid-1996-hw1-asteroid-1996-hw1-research-1996hw1",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Asteroid 1996 Hw1 · asteroid 1996 hw1 research 1996hw1",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/asteroid-1996-hw1/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "01d2f37331ecf72d92f68c1d2a1148c71d2c9bfee1f387e06a8ef6975942e0b4",
+      "locator": "/inputs/3"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

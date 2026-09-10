@@ -1,0 +1,24 @@
+{
+  "id": "source-titan-titan-geology-source-dunes-dbf",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Titan · titan geology source dunes dbf",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/855c6529-02d8-4bf3-add6-2f6ac0c6ddfe/file_downloaded",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/titan/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "0769f339817ad3841ca5401de4d4b04b430356edb0074324e6eb42017a93f35e",
+      "locator": "/inputs/26"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

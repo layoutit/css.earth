@@ -1,0 +1,24 @@
+{
+  "id": "source-comet-137p-shape-parameters",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Comet 137P · shape parameters",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/comet-137p/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "3a9265a84a344e428f3c5fe08c4c0e15886628f042e1325275d5a687fafe88d7",
+      "locator": "/inputs/2"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

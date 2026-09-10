@@ -14,6 +14,8 @@ establishes; a valid manifest does not prove that its dates or units match the d
 
 | Change | Relevant evidence |
 | --- | --- |
+| Documentation only | Links and affected instructions; no surface bake or browser suite unless the documented behavior also changed. |
+| Source metadata or bindings | `pnpm test:sources`; add body/scientific checks when the interpretation changes. |
 | New/changed source or preparation | Body/preparer tests, source validity and coordinate interpretation, prepared asset closure, source-to-result visual inspection. |
 | New acquisition path or missing restoration evidence | Restore its required ignored inputs into an empty temporary destination using the documented acquisition path. Preserve working inputs; cached verification does not prove restoration. |
 | Body registration/content | Package contract, reachable route/search/parent context, supported controls and correct attribution. |
@@ -28,22 +30,13 @@ wording. A renderer-wide change warrants broader regression work than a source
 thumbnail change. Add performance traces when observed cost or changed runtime
 behavior justifies them; missing features do not need invented test scenarios.
 
-For readiness, follow the user's and current `AGENTS.md` requirements. The
-established aggregate commands are:
-
-```sh
-pnpm acquire:planets -- --verify-only
-pnpm test
-pnpm build
-pnpm test:browser
-```
-
-Inspect `package.json` and runner arguments before selecting focused commands.
-`pnpm test` does not currently include `test:planets` or `test:preparation`;
-`test:browser` runs DOM cleanliness, while `test:browser:conformance` is separate.
-Run the relevant body/preparation checks too. Reuse completed runs that still
-cover the result; distinguish focused passes from unresolved aggregate failures.
-Do not repair unrelated systems just to make this body's report green.
+Use the [body commands](../../../../src/planets/README.md) for the selected package.
+Follow the contract's [PR check rules](../../../../docs/provenance/CONTRACT.md#pull-requests)
+for reuse, broader checks and unrelated failures. Inspect runner arguments before
+launching a suite: `pnpm test:planets` runs every body, and `pnpm test:preparation`
+only offers an `--universe` subset. Neither has a body filter. Use direct test
+files when checking one preparer. Run expensive source restoration, preparation
+and browser work in sequence so they do not compete for memory.
 
 ## Inspect actual browser output
 

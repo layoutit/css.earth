@@ -1,0 +1,29 @@
+{
+  "id": "doi-10-17189-4sq6-x165",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · DOI 10.17189/4sq6-x165",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.17189/4sq6-x165"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.17189/4sq6-x165",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/callisto/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "4ebe4dae350c76f1c482b5d7c422caf840d09eb73c4e446e3a76e6f98c3ba215",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

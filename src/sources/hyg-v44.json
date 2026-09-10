@@ -1,0 +1,31 @@
+{
+  "id": "hyg-v44",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "HYG Stellar Database · v4.4",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://github.com/astronexus/HYG-Database",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/stellar-neighbourhood/source/provenance.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "cbd87b268133305c051395b7a8b5a22da68f1100269923983cb989c465b13e28",
+      "locator": "/sources/0"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "version-of",
+      "catalogueId": "hyg",
+      "evidence": "src/objects/stellar-neighbourhood/source/provenance.json#/sources/0"
+    }
+  ],
+  "statements": [],
+  "version": "4.4"
+}

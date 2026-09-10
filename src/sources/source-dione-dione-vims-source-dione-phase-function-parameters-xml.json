@@ -1,0 +1,24 @@
+{
+  "id": "source-dione-dione-vims-source-dione-phase-function-parameters-xml",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Dione · dione vims source dione phase function parameters xml",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_phase_function_parameters.xml",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/dione/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "d09b444f79ad0bfac08879efc0376c8b7314d3cd23bd81e5b59ee5dad8555d06",
+      "locator": "/inputs/19"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

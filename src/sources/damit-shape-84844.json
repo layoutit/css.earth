@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-84844",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 84844 · Lilaea",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "84844"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/84844/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/lilaea/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "5f2222e4fd5f0788fdda96c0f7ead94500dca2e2e36cc7b01a9ef5c9bf48daa9",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

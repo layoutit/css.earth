@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-2713",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 2713 · Anna",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "2713"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/2713/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/anna/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "fd9b748b4275a3d7ceb20c5c1e9dee219c758e2a97d2f6b9aeece593c0a47678",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

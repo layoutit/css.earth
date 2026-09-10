@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-987",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 987 · Io 85",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "987"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/987/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/io-85/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "ad8d6825aa9128abbb1cb6d3b04b77901ed827d1cc54425e22597b490fb89ae2",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

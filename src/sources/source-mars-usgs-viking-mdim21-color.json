@@ -1,0 +1,24 @@
+{
+  "id": "source-mars-usgs-viking-mdim21-color",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Mars · usgs viking mdim21 color",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/mars/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "c8ac2a146613a1322fa1e2205fc30c2b881b88e5ef5bed82903e8e1a0acb8745",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,24 @@
+{
+  "id": "source-earth-nasa-blue-marble-december",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Earth · nasa blue marble december",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.jpg",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/earth/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "bd42c8943697a61ab922cb82f1da71744803ab78ed519fb2839a1f138bb61d16",
+      "locator": "/inputs/5"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,24 @@
+{
+  "id": "source-miranda-schenk-2020-miranda-elevation",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Elevation",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://repository.hou.usra.edu/bitstreams/9181435b-9c9c-4645-ba6d-673d4a959e72/download",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/miranda/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "12f669273db621b127057149a94da86e8ff6646346c50e565aed6cff5de03f3b",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

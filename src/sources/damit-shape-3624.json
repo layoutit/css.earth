@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-3624",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 3624 · Gerda",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "3624"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3624/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/gerda/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "dea91cb41ef66c77972df529513759c5712342bd451acd6f14f2022254d388e2",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

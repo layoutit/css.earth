@@ -1,0 +1,24 @@
+{
+  "id": "source-egeria-egeria-shape",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Egeria · egeria shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/3Dshape/13_Egeria_mpcd.obj",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/egeria/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "9de613c157054a83455cbc4082d09c9e00858ae17a422a4f0acfd2a7aff57834",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

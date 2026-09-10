@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-3525",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 3525 · Doris",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "3525"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3525/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/doris/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "3454c4254e5830eee5f1de2cf34ada6d97a4aa6f42a49db19a34448938647325",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

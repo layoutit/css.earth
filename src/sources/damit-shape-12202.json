@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-12202",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 12202 · Demodokus",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "12202"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/12202/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/demodokus/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "d1eae53ea513eb4ac0f703f6d31baab25ea90e3bf5ea5bea7faffe142000cdcc",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,24 @@
+{
+  "id": "source-comet-67p-virtis-albedo-label",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Comet 67P · virtis albedo label",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/al01_glb_m006_m006_v01.lbl",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/comet-67p/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "0e233e5a52d4557bbc92303bcf4812a3da3bbfaae422d2dda011bafeb4d77e17",
+      "locator": "/inputs/19"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

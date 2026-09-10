@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-4197",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 4197 · Petrina",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "4197"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/4197/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/petrina/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "e774ca43e20653b92bc7703a83273ae2de5fd7e582b987723ea5a195de64ad4d",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

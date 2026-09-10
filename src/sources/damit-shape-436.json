@@ -1,0 +1,29 @@
+{
+  "id": "damit-shape-436",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 436 · Lucina",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "436"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/436/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/lucina/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "5cff5aca8bce02d93824e697351ebbe38e84e33a70ee03e189f1cc237d2c53da",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,24 @@
+{
+  "id": "source-steins-steins-observations-w20080905t183606461id4df17-img",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Steins · steins observations w20080905t183606461id4df17 img",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osiwac-4-ast1-steins-str-refl-v1.0/data/img/w20080905t183606461id4df17.img",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/steins/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "34b6cf3a3879e3c03f7f6ab673121427f8a9194df7dd0fac9d47e98009c5ca24",
+      "locator": "/inputs/3"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

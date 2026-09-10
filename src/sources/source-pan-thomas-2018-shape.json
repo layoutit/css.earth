@@ -1,0 +1,24 @@
+{
+  "id": "source-pan-thomas-2018-shape",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Elevation",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/pan_30k_plt.tab",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/pan/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "7322dbca86c9f557ddad260a29e7ba8b4b9e849530f492a3b3355c65c7ef3648",
+      "locator": "/inputs/5"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

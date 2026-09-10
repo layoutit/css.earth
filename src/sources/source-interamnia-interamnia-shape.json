@@ -1,0 +1,24 @@
+{
+  "id": "source-interamnia-interamnia-shape",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Interamnia · interamnia shape",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/3Dshape/704_Interamnia_mpcd.obj",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/interamnia/source/manifest.json",
+      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+      "sha256": "d83b8a3770af74bebe52c1fdca85726626758c534f8c9aefcfa951c7d9ef39bf",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
