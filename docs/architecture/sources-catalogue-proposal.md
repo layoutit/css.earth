@@ -10,7 +10,10 @@ mission/spacecraft catalogue merge and the Halley photography update.
 **Documentation compatibility reviewed:** PR #112 at
 `b5b07438c94bd7244e076eb34c2f179861cfed1e`; see the coordination section below.
 
-**Intended PR:** `feat(sources): catalogue source identities and their prepared uses`.
+**Proposal branch base:** `8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf`, the merged
+documentation cleanup.
+
+**Intended implementation PR:** `feat(sources): catalogue source identities and their prepared uses`.
 
 ## Decision proposed
 
@@ -114,9 +117,9 @@ prepared products remain the same in these two metadata inventories. They are
 revision-specific observations, not permanent test constants or evidence that
 the two source trees are identical.
 
-This proposal PR can merge before or after #112. The future source schema and
-binding migration should start from main **after the documentation cleanup has
-landed**, refresh the inventory and preserve that retained set. It must not
+The documentation cleanup has landed, and this proposal is based on its merge.
+The future source schema and binding migration must start from main containing
+those changes, refresh the inventory and preserve that retained set. It must not
 restore removed archives or reverse corrected credits to satisfy the earlier
 counts. Review the proposal's retained-input examples against that new baseline;
 Pluto's cited four-field numerical extract is a required compatibility fixture.
