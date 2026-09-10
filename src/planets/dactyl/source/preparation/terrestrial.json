@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "dactyl",
+  "displayName": "Dactyl",
+  "publicBase": "/scenes/dactyl/",
+  "distanceAu": 2.861,
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [],
+    "observedColors": [],
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 0.6952053289772899,
+    "camera": {
+      "initialScenePitchDegrees": 20,
+      "defaultControlYawDegrees": -45,
+      "framingScale": 0.75
+    },
+    "mapUrl": "/scenes/dactyl/dactyl-shape-surface@2x.webp",
+    "polesUrl": "/scenes/dactyl/dactyl-shape-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/model.json",
+      "format": "ellipsoid-parameters",
+      "grid": {
+        "metersPerUnit": 1,
+        "expectedVertices": 258,
+        "expectedFaces": 512
+      },
+      "faceBudget": 512,
+      "tileSize": 64,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 512,
+        "maximumErrorMeters": 15,
+        "regularize": false
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "A smooth ellipsoid at the dimensions measured from Galileo images: 1.6 × 1.4 × 1.2 km. Craters and surface imagery are not represented; the grid marks missing imagery. Approximate orbital placement. The 1993 encounter did not determine a unique orbit; the present orbital phase is illustrative. A synchronous orientation is assumed, not measured."
+  },
+  "presentation": {
+    "defaultLens": "shape",
+    "pointColor": [
+      160,
+      160,
+      160
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

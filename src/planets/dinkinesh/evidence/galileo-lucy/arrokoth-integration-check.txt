@@ -1,0 +1,42 @@
+✖ released Arrokoth topology retains two closed source lobes at kilometre scale (1.715ms)
+✖ Arrokoth UV orientation matches independently decoded released PNG scalar anchors (1.197833ms)
+✔ prepared surface provenance does not replace its map image path (31.795542ms)
+✔ a model-only lens can omit a misleading flat map without opening its image (3.481458ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 2
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 325.157209
+
+✖ failing tests:
+
+test at tests/objects/unit/arrokoth/source.test.mjs:10:1
+✖ released Arrokoth topology retains two closed source lobes at kilometre scale (1.715ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/arrokoth/source/shape/arrokoth_porter_2024_v01.obj'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tests/objects/unit/arrokoth/source.test.mjs:11:63)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/arrokoth/source/shape/arrokoth_porter_2024_v01.obj'
+  }
+
+test at tests/objects/unit/arrokoth/source.test.mjs:25:1
+✖ Arrokoth UV orientation matches independently decoded released PNG scalar anchors (1.197833ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/arrokoth/source/science/albedo_arrokoth4_fp36h2_masked1.fits'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tests/objects/unit/arrokoth/source.test.mjs:28:14)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/arrokoth/source/science/albedo_arrokoth4_fp36h2_masked1.fits'
+  }

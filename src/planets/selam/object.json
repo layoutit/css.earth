@@ -1,0 +1,131 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "selam",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Selam",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "d29c4c1843ac014a1c90495873a6c2308d821f66c6c45f3d3926254f185e4c29"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "8ed02b573b2a405fa64a0db58dc7ccaae1a630caae4f847a29903837892c4354"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "7e53af889fbe6ce70045348dc111e8693447fd08da2ef896bf28f623b430eaa5"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "6fe929e237bb3122e122cb1da842f0f7a8389f2c284f185ab0aeceb509a91fc7"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "179dcbdf58198c6218d0fbf511a76a3661e0db2ce9558eedb4022e632384b554"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "cc6985c61057edd58f6137ed722b15f52f5d20a2824035e44666b666010420fc"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 0.14123064709924582
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/selam-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "1af5585b4ef0eea281fc7c655cc9c3a80192954d3b7b9a5a6783560aabf65247"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -282231301625.3863,
+        114639206078.6923,
+        58561722413.43452
+      ],
+      "presentationToReference": [
+        -0.9101391987077604,
+        -8.673617379884035e-19,
+        -0.41430259349368775,
+        0.38011519779919856,
+        0.3977771559319137,
+        -0.8350363888003888,
+        0.1648001073351349,
+        -0.9174820620691818,
+        -0.3620325819641238
+      ],
+      "orbitUpReference": [
+        8.673617379884035e-19,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 0.6140462917358515,
+      "bodyRadiusM": 141.23064709924583
+    },
+    "catalog": {
+      "name": "Selam",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 2.073581431805674,
+      "description": "Selam is the first contact-binary moon discovered around an asteroid. Lucy revealed its two touching lobes while passing Dinkinesh in November 2023.",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "6c1da22a02f96609cc1007738e7181c480019a221cf0d376e1ffe50aa26b04e1"
+  }
+}

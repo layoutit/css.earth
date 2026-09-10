@@ -454,6 +454,18 @@
       "purpose": "Measured, unfitted registration checks for the added Galileo observation.",
       "expectedBytes": 3879,
       "expectedSha256": "bbabb5e40ea58c5c74cb85ed1d8138b4d2b381425756cb9a312b5289ab581b6c"
+    },
+    {
+      "path": "preparation/photometry.json",
+      "expectedBytes": 521,
+      "expectedSha256": "2fd6c1c3ecb63954fbcba458ef260e0c1d5fbe7b8f029f4c85474dc810188666",
+      "purpose": "Ida parent point photometry and the original JPL SBDB response."
+    },
+    {
+      "path": "preparation/sbdb-photometry.json",
+      "expectedBytes": 5362,
+      "expectedSha256": "1639b5b74d5b4f66ffcf5d8b0ce8c3bb249bc1bd6f27b69cc747f662f38a69ed",
+      "purpose": "Ida parent point photometry and the original JPL SBDB response."
     }
   ]
 }

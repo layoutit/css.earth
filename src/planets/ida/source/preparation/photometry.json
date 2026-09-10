@@ -1,0 +1,8 @@
+{
+  "geometricAlbedo": 0.262,
+  "uncertainty": 0.032,
+  "quantity": "visible geometric albedo",
+  "scope": "JPL SBDB/NEOWISE disk-integrated estimate, used only for Ida's parent context-point brightness when viewing Dactyl. Not spatial albedo or a new surface measurement.",
+  "source": "JPL SBDB physical parameter albedo; NEOWISE diameters/albedos v2.0 main-belt sample, Masiero et al. (2012). Original response retained in sbdb-photometry.json.",
+  "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=243&phys-par=1"
+}

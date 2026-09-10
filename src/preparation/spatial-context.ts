@@ -48,7 +48,7 @@ export interface WorldContextSource {
   readonly sky: SkyBaseline;
   readonly frame: PreparedWorldCameraFrame;
   readonly focus: WorldContextFocus;
-  readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string }[];
+  readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly placement?: 'approximate' }[];
   /** Preparation resolves catalogue membership before computing the context. */
   readonly bodySelection?: "catalog";
   readonly orbit: { readonly segments: number; readonly trail: { readonly solidTurns: number; readonly fadeTurns: number } };
@@ -81,6 +81,7 @@ export interface PreparedWorldContext {
   readonly focus: WorldContextFocus & { readonly positionM: Vector3; readonly radiusM: number; readonly systemView?: PreparedSystemView };
   readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly positionM: Vector3; readonly radiusM: number;
     readonly systemView?: PreparedSystemView;
+    readonly placement?: 'approximate';
     readonly orbit: { readonly centerBodyId: string; readonly centerPositionM: Vector3; readonly verticesM: readonly Vector3[]; readonly trail: readonly number[];
       readonly bounds: { readonly centerM: Vector3; readonly radiusM: number }; readonly activeChords: readonly number[];
       readonly extentChords: readonly number[];
@@ -104,8 +105,9 @@ export function parseWorldContextSource(value: unknown): WorldContextSource {
   const fromCatalog = input.bodies === 'catalog';
   if (!fromCatalog && (!Array.isArray(input.bodies) || input.bodies.length === 0)) throw new TypeError('World context bodies must be nonempty.');
   const bodies = (fromCatalog ? [] : input.bodies as unknown[]).map((value, index) => {
-    const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color'], `world context body ${index}`);
-    return freeze({ id: identifier(body.id, `world context body ${index} id`), name: text(body.name, `world context body ${index} name`), color: color(body.color) });
+    const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color', 'placement'], `world context body ${index}`);
+    if (body.placement !== undefined && body.placement !== 'approximate') throw new TypeError('Unsupported orbital placement qualification.');
+    return freeze({ ...(body.placement === 'approximate' ? { placement: 'approximate' as const } : {}), id: identifier(body.id, `world context body ${index} id`), name: text(body.name, `world context body ${index} name`), color: color(body.color) });
   });
   if (new Set(bodies.map(body => body.id)).size !== bodies.length || bodies.some(body => body.id === focus.id)) throw new TypeError('World context body ids must be unique and exclude the focus.');
   const orbit = record(input.orbit, 'world context orbit'); keys(orbit, ['segments', 'trail'], 'world context orbit');
