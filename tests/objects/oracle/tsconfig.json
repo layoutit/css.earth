@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": [
+    "mars/google-earth-pro/**/*.mts",
+    "venus/**/*.mts",
+    "../unit/mars/google-earth-pro-oracle-profile.test.mts",
+    "../unit/venus/oracle.test.mts",
+    "../../../site/test/oracle-interaction.test.mts"
+  ],
+  "exclude": []
+}
