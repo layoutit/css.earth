@@ -17,6 +17,8 @@ Adopted diameter: **131 ± 8 km**, meaning **occultation-constrained volume-equi
 
 The paper scales its silhouette to occultation chords; 131 ± 8 km is the reported volume-equivalent size.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 <a id="provenance"></a>

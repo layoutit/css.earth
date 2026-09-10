@@ -44,7 +44,13 @@ Update the affected guide or body README in the same PR as the change. Use the
 [PR template](../.github/pull_request_template.md) for the result and checks;
 do not add a separate completion report to `docs/`.
 
-CI checks local links, heading anchors, file placement and links from this index.
+CI checks local Markdown, reference and HTML links, heading anchors, file placement
+and links from this index.
 It also rejects duplicate body `SOURCE.md`, `EVIDENCE.md` and `USAGE.md` accounts.
 Run the same check with
 `python3 tools/audits/check-documentation-links.py --all`.
+
+For a Git snapshot inventory of body records, retained HTML and duplicate bytes,
+run `python3 tools/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output /tmp/provenance-inventory.json`.
+This reads committed files; add `--index` to include the staged change. It does
+not acquire sources or qualify scientific claims.

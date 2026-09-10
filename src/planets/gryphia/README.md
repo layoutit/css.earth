@@ -15,6 +15,8 @@ Gryphia is a confirmed tumbler; its full changing orientation is not modeled. Th
 
 Adopted diameter: **14.403 ± 0.394 km**, meaning **effective body diameter**, from [Masiero et al. (2012), PDS NEOWISE Diameters and Albedos V2.0, reference codeMas12](https://doi.org/10.1088/2041-8205/759/1/L8). The reference-sphere radius is 7.2015 km. The quoted statistical error excludes the approximately 20% survey systematic floor (about 2.8806 km), shape/orientation effects and rotational sampling limitations.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 <a id="provenance"></a>

@@ -44,10 +44,7 @@
       ],
       "references": [
         {
-          "file": "oumuamua-mashchenko-2019.html",
-          "url": "https://oup.silverchair-cdn.com/article-minimal/5556541",
-          "bytes": 328389,
-          "sha256": "dd96985ca9758c75f9e4d51b1d6f63c15367ed8a92e89a4251df5aa66908ce01"
+          "url": "https://oup.silverchair-cdn.com/article-minimal/5556541"
         }
       ],
       "distanceAu": 54.22423400905037
@@ -107,15 +104,6 @@
           "sha256": "7ec1bc5110ad945d48fa8c86f929ec6aad066e84ac884a21c811659f009523bd",
           "contentType": "application/pdf",
           "purpose": "Sedna photometric rotation, Gaudi et al. 2005"
-        },
-        {
-          "path": "output/distant-worlds/references/sedna-gonggong-emery-2024.html",
-          "url": "https://arxiv.org/abs/2309.15230",
-          "resolvedUrl": "https://arxiv.org/abs/2309.15230",
-          "bytes": 45900,
-          "sha256": "2fab5cb01d246ac9bf94782e573d096cd261198c9eeb6f97ea788ad1fe3d3919",
-          "contentType": "text/html; charset=utf-8",
-          "purpose": "JWST integrated spectroscopy; no mapped surface"
         }
       ],
       "numericAnchors": [
@@ -179,14 +167,9 @@
           "file": "sedna-gaudi-2005.pdf"
         },
         {
-          "path": "output/distant-worlds/references/sedna-gonggong-emery-2024.html",
           "url": "https://arxiv.org/abs/2309.15230",
           "resolvedUrl": "https://arxiv.org/abs/2309.15230",
-          "bytes": 45900,
-          "sha256": "2fab5cb01d246ac9bf94782e573d096cd261198c9eeb6f97ea788ad1fe3d3919",
-          "contentType": "text/html; charset=utf-8",
-          "purpose": "JWST integrated spectroscopy; no mapped surface",
-          "file": "sedna-gonggong-emery-2024.html"
+          "purpose": "JWST integrated spectroscopy; no mapped surface"
         }
       ],
       "survey": [
@@ -240,24 +223,6 @@
           "sha256": "a9dde2eb150a8e275b2c347dbce7c3766353a728263322ff4cec420fdc63ba01",
           "contentType": "application/pdf",
           "purpose": "Gonggong spherical thermophysical fit, Kiss et al. 2019"
-        },
-        {
-          "path": "output/distant-worlds/references/sedna-gonggong-emery-2024.html",
-          "url": "https://arxiv.org/abs/2309.15230",
-          "resolvedUrl": "https://arxiv.org/abs/2309.15230",
-          "bytes": 45900,
-          "sha256": "2fab5cb01d246ac9bf94782e573d096cd261198c9eeb6f97ea788ad1fe3d3919",
-          "contentType": "text/html; charset=utf-8",
-          "purpose": "JWST integrated spectroscopy; no mapped surface"
-        },
-        {
-          "path": "output/distant-worlds/references/gonggong-pal-2016.html",
-          "url": "https://arxiv.org/abs/1603.03090",
-          "resolvedUrl": "https://arxiv.org/abs/1603.03090",
-          "bytes": 45567,
-          "sha256": "a20e1b3623e07a0198a08e9206a2fb2a7d28d0db87744a93e391af5045cbe0e8",
-          "contentType": "text/html; charset=utf-8",
-          "purpose": "Gonggong rotation alternatives and superseded size"
         }
       ],
       "numericAnchors": [
@@ -305,24 +270,14 @@
           "file": "gonggong-kiss-2019.pdf"
         },
         {
-          "path": "output/distant-worlds/references/sedna-gonggong-emery-2024.html",
           "url": "https://arxiv.org/abs/2309.15230",
           "resolvedUrl": "https://arxiv.org/abs/2309.15230",
-          "bytes": 45900,
-          "sha256": "2fab5cb01d246ac9bf94782e573d096cd261198c9eeb6f97ea788ad1fe3d3919",
-          "contentType": "text/html; charset=utf-8",
-          "purpose": "JWST integrated spectroscopy; no mapped surface",
-          "file": "sedna-gonggong-emery-2024.html"
+          "purpose": "JWST integrated spectroscopy; no mapped surface"
         },
         {
-          "path": "output/distant-worlds/references/gonggong-pal-2016.html",
           "url": "https://arxiv.org/abs/1603.03090",
           "resolvedUrl": "https://arxiv.org/abs/1603.03090",
-          "bytes": 45567,
-          "sha256": "a20e1b3623e07a0198a08e9206a2fb2a7d28d0db87744a93e391af5045cbe0e8",
-          "contentType": "text/html; charset=utf-8",
-          "purpose": "Gonggong rotation alternatives and superseded size",
-          "file": "gonggong-pal-2016.html"
+          "purpose": "Gonggong rotation alternatives and superseded size"
         }
       ],
       "survey": [
@@ -377,15 +332,6 @@
           "sha256": "a939fef5976cf9986bf1d1b4fba067b26f24caa0b9984155211073213d67764d",
           "contentType": "application/pdf",
           "purpose": "Spatially separated Orcus and Vanth thermal diameters"
-        },
-        {
-          "path": "output/distant-worlds/references/orcus-brown-butler-2023.html",
-          "url": "https://arxiv.org/abs/2307.04848",
-          "resolvedUrl": "https://arxiv.org/abs/2307.04848",
-          "bytes": 41968,
-          "sha256": "379184924496c714fec5aad30e176cac81b2209eb04a0822de14d84be0ec1eb9",
-          "contentType": "text/html; charset=utf-8",
-          "purpose": "Orcus-Vanth synchronized evolution context"
         }
       ],
       "numericAnchors": [
@@ -445,14 +391,9 @@
           "file": "orcus-brown-butler-2018.pdf"
         },
         {
-          "path": "output/distant-worlds/references/orcus-brown-butler-2023.html",
           "url": "https://arxiv.org/abs/2307.04848",
           "resolvedUrl": "https://arxiv.org/abs/2307.04848",
-          "bytes": 41968,
-          "sha256": "379184924496c714fec5aad30e176cac81b2209eb04a0822de14d84be0ec1eb9",
-          "contentType": "text/html; charset=utf-8",
-          "purpose": "Orcus-Vanth synchronized evolution context",
-          "file": "orcus-brown-butler-2023.html"
+          "purpose": "Orcus-Vanth synchronized evolution context"
         }
       ],
       "survey": [
@@ -499,35 +440,7 @@
         "https://doi.org/10.3847/PSJ/ae0b6a",
         "https://arxiv.org/abs/2508.17101"
       ],
-      "referencePins": [
-        {
-          "path": "output/distant-worlds/references/salacia-kiss-2025.html",
-          "url": "https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-905.html",
-          "resolvedUrl": "https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-905.html",
-          "bytes": 162166,
-          "sha256": "c2a3f501ffb53a50a82ee7da61ea93d15f7750f3d2b61989fd54b73b37568ba4",
-          "contentType": "text/html; charset=utf-8",
-          "purpose": "Resolved primary and satellite thermal diameters; conference abstract"
-        },
-        {
-          "path": "output/distant-worlds/references/salacia-collyer-2025.html",
-          "url": "https://arxiv.org/html/2509.02734v1",
-          "resolvedUrl": "https://arxiv.org/html/2509.02734v1",
-          "bytes": 265567,
-          "sha256": "39a29b49b2b0dcb92dda03ee3af61c5f7af7d5e4f021b6df47daebd705121acf",
-          "contentType": "text/html; charset=utf-8",
-          "purpose": "Synchronous rotation and albedo versus shape interpretation"
-        },
-        {
-          "path": "output/distant-worlds/references/salacia-wong-2025.html",
-          "url": "https://arxiv.org/html/2508.17101v1",
-          "resolvedUrl": "https://arxiv.org/html/2508.17101v1",
-          "bytes": 182847,
-          "sha256": "cbbb424ed5fdd7862fbe2b26682f361e6c49dbbf85351a9ea9b045d48dca8318",
-          "contentType": "text/html; charset=utf-8",
-          "purpose": "JWST blended Salacia-Actaea spectrum; not mapped imagery"
-        }
-      ],
+      "referencePins": [],
       "numericAnchors": [
         {
           "quantity": "Salacia primary thermal diameter",
@@ -583,36 +496,19 @@
       "shapeLabel": "Published size model; shape unresolved",
       "references": [
         {
-          "path": "output/distant-worlds/references/salacia-kiss-2025.html",
           "url": "https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-905.html",
           "resolvedUrl": "https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-905.html",
-          "bytes": 162166,
-          "sha256": "c2a3f501ffb53a50a82ee7da61ea93d15f7750f3d2b61989fd54b73b37568ba4",
-          "contentType": "text/html; charset=utf-8",
-          "purpose": "Resolved primary and satellite thermal diameters; conference abstract",
-          "file": "salacia-kiss-2025.html",
-          "retainOriginal": true,
-          "acquisitionNote": "The CC BY 4.0 conference HTML contains changing page tokens. Retain the reviewed original bytes in Git; do not treat a fresh personalized response as the same source file."
+          "purpose": "Resolved primary and satellite thermal diameters; conference abstract"
         },
         {
-          "path": "output/distant-worlds/references/salacia-collyer-2025.html",
           "url": "https://arxiv.org/html/2509.02734v1",
           "resolvedUrl": "https://arxiv.org/html/2509.02734v1",
-          "bytes": 265567,
-          "sha256": "39a29b49b2b0dcb92dda03ee3af61c5f7af7d5e4f021b6df47daebd705121acf",
-          "contentType": "text/html; charset=utf-8",
-          "purpose": "Synchronous rotation and albedo versus shape interpretation",
-          "file": "salacia-collyer-2025.html"
+          "purpose": "Synchronous rotation and albedo versus shape interpretation"
         },
         {
-          "path": "output/distant-worlds/references/salacia-wong-2025.html",
           "url": "https://arxiv.org/html/2508.17101v1",
           "resolvedUrl": "https://arxiv.org/html/2508.17101v1",
-          "bytes": 182847,
-          "sha256": "cbbb424ed5fdd7862fbe2b26682f361e6c49dbbf85351a9ea9b045d48dca8318",
-          "contentType": "text/html; charset=utf-8",
-          "purpose": "JWST blended Salacia-Actaea spectrum; not mapped imagery",
-          "file": "salacia-wong-2025.html"
+          "purpose": "JWST blended Salacia-Actaea spectrum; not mapped imagery"
         }
       ],
       "survey": [
@@ -707,11 +603,8 @@
       "shapeLabel": "Published light-curve ellipsoid",
       "references": [
         {
-          "file": "varuna-fernandez-2019.html",
           "sourceUrl": "https://arxiv.org/html/1909.04698",
           "resolvedUrl": "https://arxiv.org/html/1909.04698",
-          "bytes": 734024,
-          "sha256": "2a0a3e92488daf6dbd57f149cb9606f725d19331221a2d5d73672ff663850b62",
           "retrievedAt": "2026-09-10T02:41:16.434916+00:00",
           "url": "https://arxiv.org/html/1909.04698"
         }
@@ -929,11 +822,8 @@
       "shapeLabel": "Occultation-constrained approximation",
       "references": [
         {
-          "file": "ms4-rommel-2023.html",
           "sourceUrl": "https://arxiv.org/html/2308.08062",
           "resolvedUrl": "https://arxiv.org/html/2308.08062",
-          "bytes": 969934,
-          "sha256": "f1c92164835263dc9f155209225922e83dca2a9efa2f20a16fee36ac646fcdb0",
           "retrievedAt": "2026-09-10T02:41:17.000941+00:00",
           "url": "https://arxiv.org/html/2308.08062"
         },
@@ -1058,11 +948,8 @@
       "shapeLabel": "Published Jacobi ellipsoid",
       "references": [
         {
-          "file": "az84-dias-oliveira-2017.html",
           "sourceUrl": "https://arxiv.org/html/1705.10895",
           "resolvedUrl": "https://arxiv.org/html/1705.10895",
-          "bytes": 284202,
-          "sha256": "5c0a962c39ff7ef7d3ce81654afbef4d5e7760cf32e2ce843f519b197739beab",
           "retrievedAt": "2026-09-10T02:41:16.691469+00:00",
           "url": "https://arxiv.org/html/1705.10895"
         },

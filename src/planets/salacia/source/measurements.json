@@ -37,35 +37,7 @@
     "https://doi.org/10.3847/PSJ/ae0b6a",
     "https://arxiv.org/abs/2508.17101"
   ],
-  "referencePins": [
-    {
-      "path": "output/distant-worlds/references/salacia-kiss-2025.html",
-      "url": "https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-905.html",
-      "resolvedUrl": "https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-905.html",
-      "bytes": 162166,
-      "sha256": "c2a3f501ffb53a50a82ee7da61ea93d15f7750f3d2b61989fd54b73b37568ba4",
-      "contentType": "text/html; charset=utf-8",
-      "purpose": "Resolved primary and satellite thermal diameters; conference abstract"
-    },
-    {
-      "path": "output/distant-worlds/references/salacia-collyer-2025.html",
-      "url": "https://arxiv.org/html/2509.02734v1",
-      "resolvedUrl": "https://arxiv.org/html/2509.02734v1",
-      "bytes": 265567,
-      "sha256": "39a29b49b2b0dcb92dda03ee3af61c5f7af7d5e4f021b6df47daebd705121acf",
-      "contentType": "text/html; charset=utf-8",
-      "purpose": "Synchronous rotation and albedo versus shape interpretation"
-    },
-    {
-      "path": "output/distant-worlds/references/salacia-wong-2025.html",
-      "url": "https://arxiv.org/html/2508.17101v1",
-      "resolvedUrl": "https://arxiv.org/html/2508.17101v1",
-      "bytes": 182847,
-      "sha256": "cbbb424ed5fdd7862fbe2b26682f361e6c49dbbf85351a9ea9b045d48dca8318",
-      "contentType": "text/html; charset=utf-8",
-      "purpose": "JWST blended Salacia-Actaea spectrum; not mapped imagery"
-    }
-  ],
+  "referencePins": [],
   "numericAnchors": [
     {
       "quantity": "Salacia primary thermal diameter",
@@ -121,36 +93,19 @@
   "shapeLabel": "Published size model; shape unresolved",
   "references": [
     {
-      "path": "output/distant-worlds/references/salacia-kiss-2025.html",
       "url": "https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-905.html",
       "resolvedUrl": "https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-905.html",
-      "bytes": 162166,
-      "sha256": "c2a3f501ffb53a50a82ee7da61ea93d15f7750f3d2b61989fd54b73b37568ba4",
-      "contentType": "text/html; charset=utf-8",
-      "purpose": "Resolved primary and satellite thermal diameters; conference abstract",
-      "file": "salacia-kiss-2025.html",
-      "retainOriginal": true,
-      "acquisitionNote": "The CC BY 4.0 conference HTML contains changing page tokens. Retain the reviewed original bytes in Git; do not treat a fresh personalized response as the same source file."
+      "purpose": "Resolved primary and satellite thermal diameters; conference abstract"
     },
     {
-      "path": "output/distant-worlds/references/salacia-collyer-2025.html",
       "url": "https://arxiv.org/html/2509.02734v1",
       "resolvedUrl": "https://arxiv.org/html/2509.02734v1",
-      "bytes": 265567,
-      "sha256": "39a29b49b2b0dcb92dda03ee3af61c5f7af7d5e4f021b6df47daebd705121acf",
-      "contentType": "text/html; charset=utf-8",
-      "purpose": "Synchronous rotation and albedo versus shape interpretation",
-      "file": "salacia-collyer-2025.html"
+      "purpose": "Synchronous rotation and albedo versus shape interpretation"
     },
     {
-      "path": "output/distant-worlds/references/salacia-wong-2025.html",
       "url": "https://arxiv.org/html/2508.17101v1",
       "resolvedUrl": "https://arxiv.org/html/2508.17101v1",
-      "bytes": 182847,
-      "sha256": "cbbb424ed5fdd7862fbe2b26682f361e6c49dbbf85351a9ea9b045d48dca8318",
-      "contentType": "text/html; charset=utf-8",
-      "purpose": "JWST blended Salacia-Actaea spectrum; not mapped imagery",
-      "file": "salacia-wong-2025.html"
+      "purpose": "JWST blended Salacia-Actaea spectrum; not mapped imagery"
     }
   ],
   "survey": [

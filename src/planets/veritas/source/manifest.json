@@ -134,12 +134,6 @@
       "expectedSha256": "2864ac2c9a66b7a2d03676acf8c146b8ab3c54c00d59f94d7596c62ee06ad4fa"
     },
     {
-      "path": "reference/161.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 34300,
-      "expectedSha256": "876de4c57ed4ab106ddd802236bc4191b7eccb65c0e95f10c34cdb462ba63715"
-    },
-    {
       "path": "reference/833-IAUspin.txt",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 34,
@@ -159,15 +153,12 @@
     },
     {
       "path": "reference/damit-model.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
       "expectedBytes": 1300,
-      "expectedSha256": "9701ecafddbbb84e649028a4b91cb276f0faeae56025ef6f7cccd0286bb8e580"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "85a611ab240d42198406b1f6f1a78abfbdbc011a28ef34ac9d5046b3fe243936"
+      "expectedSha256": "9701ecafddbbb84e649028a4b91cb276f0faeae56025ef6f7cccd0286bb8e580",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/833",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
       "path": "reference/horizons-elements.txt",
@@ -194,12 +185,6 @@
       "expectedSha256": "291c9dcd3aafc1bf4f8e83c5557eb97b05b23238ec0137edb0d138a5567e9192"
     },
     {
-      "path": "reference/model-833.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 122397,
-      "expectedSha256": "28961ad9512d1a7112b9464e52f688c89d3e6bb42b6346fbff38fd38cedda1da"
-    },
-    {
       "path": "reference/model-properties.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 4067,
@@ -222,12 +207,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 4196,
       "expectedSha256": "464abba660d9b91d3581daa650bbc1f028a63e7db82fa30f21f7acfada6bfa3a"
-    },
-    {
-      "path": "reference/search.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 10501,
-      "expectedSha256": "0b559d14d71595fe8579b0ef1925ef1cf88fa877ff636fa68034466dd45c3cb6"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",

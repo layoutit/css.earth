@@ -4,7 +4,7 @@ Betulia is a near-Earth asteroid reconstructed from Arecibo radar and optical li
 
 ## Sources
 
-The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original betulia.obj](https://echo.jpl.nasa.gov/asteroids/shapes/betulia.obj). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/1580_Betulia/magri.etal.2007.betulia.pdf): Magri et al. (2007), Icarus 186, 152–177; Arecibo and NASA/JPL radar astronomy. The paper, original OBJ and public index are pinned beside the recipe.
+The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original betulia.obj](https://echo.jpl.nasa.gov/asteroids/shapes/betulia.obj). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/1580_Betulia/magri.etal.2007.betulia.pdf): Magri et al. (2007), Icarus 186, 152–177; Arecibo and NASA/JPL radar astronomy. The paper and original geometry are pinned beside the recipe.
 
 Shape uses the shared missing-imagery grid. Elevation shows original model radius minus the 2.695 km sphere, from -0.67 to 0.89 km. This is another view of the same radar reconstruction, not independent topography or height above a gravitational equipotential. Cartographic relief and lighting are display treatments.
 

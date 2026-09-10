@@ -13,6 +13,8 @@ Selected [DAMIT model 678](https://damit.cuni.cz/projects/damit/asteroid_models/
 
 The adopted diameter is **24.38 km** from [Usui et al. (2011), PASJ63,1117-1138, AcuA V1](https://doi.org/10.1093/pasj/63.5.1117); [original measurement data](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz). Its quantity is **Standard Thermal Model mean effective spherical diameter**.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 The [reinmuthia validation record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.

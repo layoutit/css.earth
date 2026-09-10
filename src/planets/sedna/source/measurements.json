@@ -55,15 +55,6 @@
       "sha256": "7ec1bc5110ad945d48fa8c86f929ec6aad066e84ac884a21c811659f009523bd",
       "contentType": "application/pdf",
       "purpose": "Sedna photometric rotation, Gaudi et al. 2005"
-    },
-    {
-      "path": "output/distant-worlds/references/sedna-gonggong-emery-2024.html",
-      "url": "https://arxiv.org/abs/2309.15230",
-      "resolvedUrl": "https://arxiv.org/abs/2309.15230",
-      "bytes": 45900,
-      "sha256": "2fab5cb01d246ac9bf94782e573d096cd261198c9eeb6f97ea788ad1fe3d3919",
-      "contentType": "text/html; charset=utf-8",
-      "purpose": "JWST integrated spectroscopy; no mapped surface"
     }
   ],
   "numericAnchors": [
@@ -127,14 +118,9 @@
       "file": "sedna-gaudi-2005.pdf"
     },
     {
-      "path": "output/distant-worlds/references/sedna-gonggong-emery-2024.html",
       "url": "https://arxiv.org/abs/2309.15230",
       "resolvedUrl": "https://arxiv.org/abs/2309.15230",
-      "bytes": 45900,
-      "sha256": "2fab5cb01d246ac9bf94782e573d096cd261198c9eeb6f97ea788ad1fe3d3919",
-      "contentType": "text/html; charset=utf-8",
-      "purpose": "JWST integrated spectroscopy; no mapped surface",
-      "file": "sedna-gonggong-emery-2024.html"
+      "purpose": "JWST integrated spectroscopy; no mapped surface"
     }
   ],
   "survey": [

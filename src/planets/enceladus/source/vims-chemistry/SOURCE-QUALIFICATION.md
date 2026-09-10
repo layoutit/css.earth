@@ -20,8 +20,8 @@ and [Le Mouélic et al. 2019](https://doi.org/10.1016/j.icarus.2018.09.017).
 cssEarth derived the scalar indices and conservative masked projections.
 No institutional endorsement is implied; no institutional logos are included.
 
-The exact policy snapshot is `evidence/license-about.html`, SHA-256
-`02f560a51d6e075f91264a56b6aad8c23cfca448a4c17f0b3f0408568bf175a9`.
+The portal identifies its data as CC BY 4.0 on its
+[terms page](https://vims.univ-nantes.fr/about).
 Every numeric file, exact download URL, byte count and SHA-256 is recorded in
 `source-receipt.json`; the preparation recipe verifies every pin before use.
 Original observation pages and archived PDS labels accompany the cubes.

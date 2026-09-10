@@ -34,24 +34,6 @@
         "restore",
         "refresh"
       ],
-      "path": "reference/model-2012.html",
-      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/2012"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/documentation.html",
-      "url": "https://damit.cuni.cz/projects/damit/pages/documentation"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
       "path": "reference/AcuA_V1.txt.gz",
       "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz"
     },
@@ -70,15 +52,6 @@
         "restore",
         "refresh"
       ],
-      "path": "reference/jaxa-data-policy.html",
-      "url": "https://www.isas.jaxa.jp/en/researchers/data-policy/"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
       "path": "reference/sbdb.json",
       "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=2204"
     },
@@ -90,15 +63,6 @@
       ],
       "path": "reference/2012-IAUspin.txt",
       "url": "https://damit.cuni.cz/projects/damit/stored_files/open/6560/IAUspin.txt"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/reference-175.html",
-      "url": "https://damit.cuni.cz/projects/damit/references/view/175"
     }
   ]
 }

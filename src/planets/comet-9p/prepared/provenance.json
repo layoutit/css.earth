@@ -1,14 +1,14 @@
 {
   "schema": "cssearth-object-provenance@2",
   "objectId": "comet-9p",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "949d30f0d9549ce59ed78cd6ec76afb57842830dc85b885f488cce78d652d95f"
+    "sha256": "bfaecca87d999ac0b9495e40ab21a31023f98e1821a0c6c381973512e4af5319"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [

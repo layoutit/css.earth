@@ -4,7 +4,7 @@ Golevka is a near-Earth asteroid whose radar reconstruction has angular faces, s
 
 ## Sources
 
-Geometry is the unchanged [golevka.obj](https://echo.jpl.nasa.gov/asteroids/shapes/golevka.obj) from the [NASA/JPL radar model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html). Interpretation comes from [the original research](https://echo.jpl.nasa.gov/asteroids/6489_Golevka/hudson.etal.2000.golevka.pdf): Hudson et al. (2000), Icarus 148, 37–51; Goldstone radar, optical light curves and NASA/JPL. The index, original OBJ, paper, Horizons responses and authored recipe are pinned under source/.
+Geometry is the unchanged [golevka.obj](https://echo.jpl.nasa.gov/asteroids/shapes/golevka.obj) from the [NASA/JPL radar model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html). Interpretation comes from [the original research](https://echo.jpl.nasa.gov/asteroids/6489_Golevka/hudson.etal.2000.golevka.pdf): Hudson et al. (2000), Icarus 148, 37–51; Goldstone radar, optical light curves and NASA/JPL. The original OBJ, paper, Horizons responses and authored recipe are pinned under source/.
 
 - Included: the original JPL shape and its scientific paper provide source geometry, scale, spin and limits. Shape displays the shared missing-imagery grid under prepared lighting.
 - Included: Elevation derives source radius minus the 0.265 km reference sphere, with a -0.11 to 0.14 km palette. This is a second visualization of the radar inverse model; it is not independent topography, optical albedo or gravitational elevation.

@@ -23,7 +23,19 @@ for (const { directory, descriptor } of objects) it(`${descriptor.id}: source-pi
   const first = await prepareWorldNavigationDefinition({ objectDirectory: directory, definition, projectRoot: root });
   const second = await prepareWorldNavigationDefinition({ objectDirectory: directory, definition: first.definition, projectRoot: root });
   assert.deepEqual(second, first);
-  assert.deepEqual(first.frame, descriptor.properties.worldFrame);
+  const expectedFrame = descriptor.properties.worldFrame;
+  // A saved frame may come from another platform's math library. The repeated
+  // run above must still match exactly; this comparison permits only roundoff.
+  for (const key of ['originM', 'presentationToReference', 'orbitUpReference'] as const) {
+    if (!first.frame[key] || !expectedFrame[key]) { assert.deepEqual(first.frame[key], expectedFrame[key]); continue; }
+    const scale = Math.max(1, ...first.frame[key].map(Math.abs), ...expectedFrame[key].map(Math.abs));
+    const tolerance = Math.max(key === 'originM' ? 0.001 : 0, 8 * Number.EPSILON * scale);
+    first.frame[key].forEach((value, axis) => assert.ok(Math.abs(value - expectedFrame[key][axis]) <= tolerance,
+      `${descriptor.id} ${key}[${axis}] differs beyond coordinate roundoff.`));
+  }
+  const metadata = (frame: object) => Object.fromEntries(Object.entries(frame)
+    .filter(([key]) => !['originM', 'presentationToReference', 'orbitUpReference'].includes(key)));
+  assert.deepEqual(metadata(first.frame), metadata(expectedFrame));
   assert.doesNotThrow(() => rotation(first.frame.presentationToReference));
   assert.equal(first.definition.tree, definition.tree);
   assert.equal(first.definition.assets, definition.assets);

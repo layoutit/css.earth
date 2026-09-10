@@ -218,18 +218,6 @@
       "expectedSha256": "137ae97a3af618ca259445fd4ed54cfcfda4bcf2f27c4e228fb3f6e9d993ef0e"
     },
     {
-      "path": "reference/dlr-dtm.html",
-      "purpose": "Pinned source metadata and coordinate interpretation.",
-      "expectedBytes": 8313,
-      "expectedSha256": "719af65f64607ad76969b486cf10c80334375f4e6dcc96fc9b34be2cd449b6ab"
-    },
-    {
-      "path": "reference/dlr-mosaics.html",
-      "purpose": "Pinned source metadata and coordinate interpretation.",
-      "expectedBytes": 49198,
-      "expectedSha256": "c61db640b28ec1100def21230bd385ae49c7c654bc6d75257b9e582cff52e9d5"
-    },
-    {
       "path": "reference/horizons-physical.txt",
       "purpose": "Pinned source metadata and coordinate interpretation.",
       "expectedBytes": 1322,

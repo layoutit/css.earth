@@ -93,14 +93,14 @@
     },
     {
       "path": "measurements.json",
-      "expectedBytes": 6487,
-      "expectedSha256": "a2d0b3afda9c97721074c011f349ecb8bf887a3ba875b6bcc8b602e47b087f34",
+      "expectedBytes": 5781,
+      "expectedSha256": "549d0ecd5f11b1728f4ffb339a5c76617b5b61d9516e4923957bd962457b51d1",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1152,
-      "expectedSha256": "6782540c04baa7c51cc56998d6aed769c0e23fed59efa980ae1a9300da49b90b",
+      "expectedBytes": 943,
+      "expectedSha256": "cf36c5c98928a8cc2de4f591015dcb6b4d9af125fea104b017032464484f066d",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {
@@ -149,12 +149,6 @@
       "path": "reference/sedna-gaudi-2005.pdf",
       "expectedBytes": 95262,
       "expectedSha256": "7ec1bc5110ad945d48fa8c86f929ec6aad066e84ac884a21c811659f009523bd",
-      "purpose": "Pinned source observation, interpretation or preparation input."
-    },
-    {
-      "path": "reference/sedna-gonggong-emery-2024.html",
-      "expectedBytes": 45900,
-      "expectedSha256": "2fab5cb01d246ac9bf94782e573d096cd261198c9eeb6f97ea788ad1fe3d3919",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {

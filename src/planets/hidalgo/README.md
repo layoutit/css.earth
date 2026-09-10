@@ -15,6 +15,8 @@ Concavities, craters, surface texture and exact current rotation phase are not r
 
 Adopted diameter: **61.4 ± 12.7 km**, meaning **NEATM effective spherical diameter**, from [Licandro et al. (2016), A&A 585, A9, Table 3](https://doi.org/10.1051/0004-6361/201526866). The reference-sphere radius is 30.7 km. WISE W3 and W4: 5 measurements in each band, observed at heliocentric distance 9.067 au, observer distance 9.014 au and phase angle 6.262° (Table 2); beaming parameter 0.90 ± 0.24 was fitted.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 <a id="provenance"></a>

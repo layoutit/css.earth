@@ -17,6 +17,8 @@ Adopted diameter: **21.82 ± 1.4 km**, meaning **mean radiometric diameter from 
 
 It does not encompass shape/thermal-model/H systematic uncertainty.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 <a id="provenance"></a>

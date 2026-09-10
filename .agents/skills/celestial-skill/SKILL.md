@@ -89,6 +89,11 @@ that the dataset does not exist. Respect explicit user exclusions and scope.
 Stop once the promising candidates have a disposition; do not build an exhaustive
 catalog or repeat this survey for an unrelated repair.
 
+Use the contract's [reference retention rules](../../../docs/provenance/CONTRACT.md#references-and-retained-files)
+to distinguish citations from scientific inputs. Record cited values and their
+meaning in the body README; keep preparation data in the existing source records.
+Do not commit downloaded webpages as evidence.
+
 Record the following for selected inputs in the existing source record and
 manifest:
 

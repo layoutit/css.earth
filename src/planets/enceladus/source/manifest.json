@@ -603,25 +603,11 @@
       "expectedSha256": "22e1908f955ba3c29f64d0ff388bb858285a56dbc201c84fcde29877db598771"
     },
     {
-      "path": "vims-chemistry/native/1487299582_1.html",
-      "expectedBytes": 18997,
-      "expectedSha256": "7b350b283fc23c8884537d65e94cd8707b2d3705cfb956356aa35f561a2f1914",
-      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
-      "origin": "https://vims.univ-nantes.fr/cube/1487299582_1"
-    },
-    {
       "path": "vims-chemistry/native/1487299582_1.lbl",
       "expectedBytes": 6206,
       "expectedSha256": "cdbddab943c834a0fcf55ff2783e1286ebb5bd8c977eabb2b50323296ec4c7c6",
       "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
       "origin": "https://vims.univ-nantes.fr/cube/1487299582_1.lbl"
-    },
-    {
-      "path": "vims-chemistry/native/1489049741_1.html",
-      "expectedBytes": 18994,
-      "expectedSha256": "b391767129697c4a916a0c7bba5ada158405ef5598c40fde5bbda14ce061d602",
-      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
-      "origin": "https://vims.univ-nantes.fr/cube/1489049741_1"
     },
     {
       "path": "vims-chemistry/native/1489049741_1.lbl",
@@ -631,25 +617,11 @@
       "origin": "https://vims.univ-nantes.fr/cube/1489049741_1.lbl"
     },
     {
-      "path": "vims-chemistry/native/1702362997_1.html",
-      "expectedBytes": 18772,
-      "expectedSha256": "8229ed3f0a62b32942949e333d103ac6e906c43429f651b8baa019d61cbbf876",
-      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
-      "origin": "https://vims.univ-nantes.fr/cube/1702362997_1"
-    },
-    {
       "path": "vims-chemistry/native/1702362997_1.lbl",
       "expectedBytes": 6220,
       "expectedSha256": "7a54549a49e9c8f2e45a3f357b88cf18cc4db3ae57be72fe80493fdfa303f3f7",
       "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
       "origin": "https://vims.univ-nantes.fr/cube/1702362997_1.lbl"
-    },
-    {
-      "path": "vims-chemistry/native/1702361128_1.html",
-      "expectedBytes": 18769,
-      "expectedSha256": "13f0f3b1393a26b6f16731b29b87b40b3ad951ab0cd75932fbfb480ca6295656",
-      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
-      "origin": "https://vims.univ-nantes.fr/cube/1702361128_1"
     },
     {
       "path": "vims-chemistry/native/1702361128_1.lbl",
@@ -659,25 +631,11 @@
       "origin": "https://vims.univ-nantes.fr/cube/1702361128_1.lbl"
     },
     {
-      "path": "vims-chemistry/native/1500061929_1.html",
-      "expectedBytes": 19017,
-      "expectedSha256": "33b4fdc01b6013da059ef642c42bca1669d1f55a8f4812ed4419bf7f5467861d",
-      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
-      "origin": "https://vims.univ-nantes.fr/cube/1500061929_1"
-    },
-    {
       "path": "vims-chemistry/native/1500061929_1.lbl",
       "expectedBytes": 6199,
       "expectedSha256": "3fd20260e07750bce93b6bac0e3726c0a1b076a8b0358dd6f0fbf40fb31819d0",
       "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
       "origin": "https://vims.univ-nantes.fr/cube/1500061929_1.lbl"
-    },
-    {
-      "path": "vims-chemistry/native/1500061170_1.html",
-      "expectedBytes": 18998,
-      "expectedSha256": "ef5ddae8b1d3aaaa4e90cfe5e74bab701138ff0c25cf1a3f73c87c52924e6e19",
-      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
-      "origin": "https://vims.univ-nantes.fr/cube/1500061170_1"
     },
     {
       "path": "vims-chemistry/native/1500061170_1.lbl",
@@ -719,41 +677,20 @@
     {
       "path": "vims-chemistry/prepare.json",
       "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 4286,
-      "expectedSha256": "38e6a95373ed32b5d5acacc1fdc2691d735bddc6b5b3c0139eb3cc039999d9e1"
+      "expectedBytes": 3385,
+      "expectedSha256": "e3d67ce6c52bb2eef3707e09f323a420d53cbc847b78b30fccae10ee30fb9e2d"
     },
     {
       "path": "vims-chemistry/source-receipt.json",
       "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 9690,
-      "expectedSha256": "eec4322c8528377a4292cba015e3b6305b03fe41d56f3f97da0cadd847c546dd"
+      "expectedBytes": 6752,
+      "expectedSha256": "eda162f4763ca56c2dfa53fd36daa8c3e628cfaa13957e89a6147dafbee69231"
     },
     {
       "path": "vims-chemistry/preparation-receipt.json",
       "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
       "expectedBytes": 22675,
       "expectedSha256": "e4279cf9c5200b62967404735e85e7990f8a57fc20e828b74bce3793e3bfb072"
-    },
-    {
-      "path": "vims-chemistry/evidence/calibration.html",
-      "expectedBytes": 25098,
-      "expectedSha256": "8153795a6107d8f15a462c3dbdf9ff8b3fb2327d0e825b09e8ce8b2957cd8b8f",
-      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
-      "origin": "https://vims.univ-nantes.fr/info/isis-calibration"
-    },
-    {
-      "path": "vims-chemistry/evidence/phocube.html",
-      "expectedBytes": 87956,
-      "expectedSha256": "6cbe5d29c102cad8ddb90030e0efeec6412d321b57f238c0b95ef5304ab6df6c",
-      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
-      "origin": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/phocube/phocube.html"
-    },
-    {
-      "path": "vims-chemistry/evidence/license-about.html",
-      "expectedBytes": 22564,
-      "expectedSha256": "02f560a51d6e075f91264a56b6aad8c23cfca448a4c17f0b3f0408568bf175a9",
-      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
-      "origin": "https://vims.univ-nantes.fr/about"
     },
     {
       "path": "vims-chemistry/evidence/corrigendum.json",
@@ -765,8 +702,8 @@
     {
       "path": "vims-chemistry/SOURCE-QUALIFICATION.md",
       "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 11868,
-      "expectedSha256": "dc8e15bad67574d1fa82e32ceb3e7cde005ed04f645d4e3b9914cbf10dcde286"
+      "expectedBytes": 11832,
+      "expectedSha256": "865ef845b703b4735fb8b96dce96c2156d8e99f84ad3410b808c3515a051f7c3"
     },
     {
       "path": "vims-chemistry/qualification-receipt.json",

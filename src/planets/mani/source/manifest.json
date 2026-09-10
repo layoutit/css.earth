@@ -93,14 +93,14 @@
     },
     {
       "path": "measurements.json",
-      "expectedBytes": 5578,
-      "expectedSha256": "06c82e85921f996d6190fd09506fadbb7363e8160ee6b12e03facebbee8dca1e",
+      "expectedBytes": 5433,
+      "expectedSha256": "7bd0dcb6e3c18492ff81cb5531099425f5c37645de79fdb0a8e276cab3220d25",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 965,
-      "expectedSha256": "469e78dd2aa19ab5c3e20d60f05f7826b7d0a5eb013668bf9eccf09e38b619ce",
+      "expectedBytes": 765,
+      "expectedSha256": "ffb8ecce1e775928cace50b4c91e2fd8fd71444dc800ea3c4aaa466b9c5d5337",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {
@@ -149,12 +149,6 @@
       "path": "reference/mani-wgsbn-2025-011.pdf",
       "expectedBytes": 477754,
       "expectedSha256": "f824fe6e69e4edf29d040b26b017eed46d00be58ef20fb4e9453a599f394b7ce",
-      "purpose": "Pinned source observation, interpretation or preparation input."
-    },
-    {
-      "path": "reference/ms4-rommel-2023.html",
-      "expectedBytes": 969934,
-      "expectedSha256": "f1c92164835263dc9f155209225922e83dca2a9efa2f20a16fee36ac646fcdb0",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {

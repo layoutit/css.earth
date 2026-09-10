@@ -27,38 +27,6 @@
     },
     {
       "kind": "download",
-      "path": "rings/uranus-rings-table.html",
-      "url": "https://pds-rings.seti.org/uranus/uranus_rings_table.html",
-      "groups": [
-        "refresh"
-      ]
-    },
-    {
-      "kind": "download",
-      "path": "moons/jpl-discovery.html",
-      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-      "groups": [
-        "refresh"
-      ]
-    },
-    {
-      "kind": "download",
-      "path": "moons/jpl-elements.html",
-      "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
-      "groups": [
-        "refresh"
-      ]
-    },
-    {
-      "kind": "download",
-      "path": "physical/jpl-physical.html",
-      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-      "groups": [
-        "refresh"
-      ]
-    },
-    {
-      "kind": "download",
       "path": "moons/pia01361-major-moons.jpg",
       "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia01/pia01361/PIA01361.tif?fit=clip&h=800&w=2537",
       "groups": [

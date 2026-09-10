@@ -46,15 +46,6 @@
       "sha256": "a939fef5976cf9986bf1d1b4fba067b26f24caa0b9984155211073213d67764d",
       "contentType": "application/pdf",
       "purpose": "Spatially separated Orcus and Vanth thermal diameters"
-    },
-    {
-      "path": "output/distant-worlds/references/orcus-brown-butler-2023.html",
-      "url": "https://arxiv.org/abs/2307.04848",
-      "resolvedUrl": "https://arxiv.org/abs/2307.04848",
-      "bytes": 41968,
-      "sha256": "379184924496c714fec5aad30e176cac81b2209eb04a0822de14d84be0ec1eb9",
-      "contentType": "text/html; charset=utf-8",
-      "purpose": "Orcus-Vanth synchronized evolution context"
     }
   ],
   "numericAnchors": [
@@ -114,14 +105,9 @@
       "file": "orcus-brown-butler-2018.pdf"
     },
     {
-      "path": "output/distant-worlds/references/orcus-brown-butler-2023.html",
       "url": "https://arxiv.org/abs/2307.04848",
       "resolvedUrl": "https://arxiv.org/abs/2307.04848",
-      "bytes": 41968,
-      "sha256": "379184924496c714fec5aad30e176cac81b2209eb04a0822de14d84be0ec1eb9",
-      "contentType": "text/html; charset=utf-8",
-      "purpose": "Orcus-Vanth synchronized evolution context",
-      "file": "orcus-brown-butler-2023.html"
+      "purpose": "Orcus-Vanth synchronized evolution context"
     }
   ],
   "survey": [
