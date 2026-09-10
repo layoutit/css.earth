@@ -1,0 +1,28 @@
+import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mjs';
+import controls from '../../../../src/planets/mentor/prepared/controls.json' with {type:'json'};
+export const browserProfile=createObjectBrowserProfile({id:'mentor',controls,audit:{
+  "preparedAssetPairs": [
+    {
+      "one": "/scenes/mentor/mentor-directional-sun.webp",
+      "two": "/scenes/mentor/mentor-directional-sun@2x.webp"
+    }
+  ],
+  "canonicalPreparedAssets": [
+    "/scenes/mentor/mentor-shape-surface@2x.webp"
+  ],
+  "retained": {
+    "lensIds": [
+      "shape",
+      "elevation"
+    ],
+    "speedClicks": 5,
+    "allowedMountSelectors": []
+  },
+  "lensRace": {
+    "defaultId": "shape",
+    "slowId": "elevation",
+    "winnerId": "shape",
+    "slowAsset": "/scenes/mentor/mentor-elevation-surface@2x.webp",
+    "preReadyDisabled": true
+  }
+}});

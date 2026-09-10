@@ -1,0 +1,21 @@
+New Horizons Arrokoth Shape Model Collection Overview
+=====================================================
+
+Content
+-------
+This collection contains a shape model of (486958) Arrokoth derived from LORRI data collected
+around the time of the New Horizons flyby on January 1, 2019. The shape model consists of a
+3D model in .obj format. This collection also includes an associated albedo map in both FITS
+and PNG format, as well as a PDF document that describes the shape modeling process and the
+data used in the creation of the model.
+
+Product creation
+----------------
+The creation of the shape model and albedo map were led by Simon Porter of the New Horizons Science
+Team. The New Horizons SOC labeled and packaged these data in PDS4 format for delivery to the Small
+Bodies Node of the Planetary Data System as part of the K7 data delivery.
+
+Revision
+--------
+2024-10-02: Version 1.0 | M. K. Crombie & C. Gobat
+2024-10-05: Version 1.1 | B. L. Enke

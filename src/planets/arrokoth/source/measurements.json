@@ -1,0 +1,36 @@
+{
+  "schema": "cssearth-trans-neptunian-source@1",
+  "periodHours": null,
+  "periodText": "About 15.9 hours; display phase is illustrative",
+  "population": "Trans-Neptunian object",
+  "surfaceMeaning": "No resolved global surface imagery; the standard grid marks unmapped terrain.",
+  "unresolved": [
+    "The released albedo FITS has no explicit observational coverage mask and contains a broad uniform baseline; that fill is not resolved imagery.",
+    "The bundled paper and PDS XML disagree on the pole and the XML calls a sub-day period an orbital period. Absolute phase is not claimed.",
+    "Published spin-period estimates differ: Buie et al. (2020) gives 15.9380 ± 0.0005 h, while the Porter archive labels 0.6632553 days as an orbital period. The panel reports only about 15.9 hours; no precision spin rate is installed."
+  ],
+  "id": "arrokoth",
+  "name": "Arrokoth",
+  "horizons": "486958;",
+  "distanceAu": 44.05655144131418,
+  "radiusKm": 9.948,
+  "fullAxesKm": [
+    34.545648,
+    19.838242,
+    13.822347
+  ],
+  "poleIcrfDegrees": [
+    319.37,
+    -25.588
+  ],
+  "source": "https://doi.org/10.26007/97r3-1e19",
+  "credit": "Porter (2024), New Horizons Arrokoth shape model; NASA PDS",
+  "shapeMeaning": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate.",
+  "orientationMeaning": "Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim.",
+  "introduction": "New Horizons explored this cold-classical Kuiper-belt contact binary in 2019. The released shape preserves both lobes; the unseen northern surface is modeled.",
+  "papers": [
+    "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_shapemodel_porter2024-v1.0/porteretal2024b.pdf",
+    "https://arxiv.org/abs/2001.00125"
+  ],
+  "checkedOn": "2026-09-09"
+}

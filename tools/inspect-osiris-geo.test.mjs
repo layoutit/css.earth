@@ -1,6 +1,27 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, lommelSeeligerGain, fitCamera, project, sampleGeo, PLANE_NAMES, GEO_SHAPE_MODEL } from './objects/terrestrial-layers/osiris-geo.mjs';
+import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, lommelSeeligerGain, fitCamera, project, sampleGeo, PLANE_NAMES, GEO_SHAPE_MODEL, osirisRadianceFactorScale, phaseGain, observationGain } from './objects/terrestrial-layers/osiris-geo.mjs';
+
+test('radiance factor uses calibrated solar flux and squared distance without normalizing twice', () => {
+  const history = 'SOLAR_DISTANCE = 2 <AU>\nSOLAR_FLUX = 4 <W/m**2/nm>\nROSETTA:REFLECTIVITY_NORMALIZATION_FLAG = FALSE\n';
+  assert.equal(osirisRadianceFactorScale(history).factor, Math.PI);
+  assert.equal(osirisRadianceFactorScale(history.replace('2 <AU>', '4 <AU>')).factor, 4 * Math.PI);
+  for (const altered of [history.replace('FALSE', 'TRUE'), history.replace('<AU>', '<KM>'), history.replace('4 <', '0 <'), history + 'SOLAR_FLUX = 4 <W/m**2/nm>\n']) {
+    assert.throws(() => osirisRadianceFactorScale(altered));
+  }
+});
+
+test('source phase terms have analytic anchors and leave disk limits independent', () => {
+  const phase = { asymmetry: 0, amplitude: 1, width: 1, minimumDegrees: 0, maximumDegrees: 90, referenceDegrees: 0, maximumGain: 2 };
+  assert.equal(phaseGain(0, phase), 1);
+  // Isotropic HG is one: the shadow term falls from 2 at 0 degrees to 1.5 at 90.
+  assert.ok(Math.abs(phaseGain(Math.PI / 2, phase) - 4 / 3) < 1e-12);
+  assert.equal(phaseGain(NaN, phase), null);
+  assert.equal(phaseGain(Math.PI, phase), null);
+  assert.equal(phaseGain(Math.PI / 2, { ...phase, maximumGain: 1.1 }), null);
+  const disk = { maximumIncidenceDegrees: 80, maximumEmissionDegrees: 80, maximumGain: 3, phaseCorrection: phase };
+  assert.equal(observationGain(80 * Math.PI / 180, 0, disk, 0), null);
+});
 
 function fixture({ replace = text => text } = {}) {
   let label = `PDS_VERSION_ID = PDS3\nRECORD_TYPE = FIXED_LENGTH\nRECORD_BYTES = 512\nFILE_RECORDS = 18\nLABEL_RECORDS = 8\nINSTRUMENT_ID = "OSINAC"\nIMAGE_ID = "12000700"\nSOFTWARE_VERSION_ID = "2.9.0"\nSTART_TIME = 2014-08-05T19:44:22.918\nFILTER_NAME = "FFP-Vis_Orange"\n`;

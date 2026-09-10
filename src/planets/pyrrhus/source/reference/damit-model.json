@@ -1,0 +1,223 @@
+{
+  "number": 5283,
+  "name": "Pyrrhus",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/2504",
+  "modelId": 4373,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4373",
+  "fields": {
+    "ID": "4373",
+    "Asteroid": "(5283) Pyrrhus",
+    "λ": "332",
+    "β": "-12",
+    "P": "7.31916",
+    "YORP": "",
+    "t0": "2451105",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.44",
+    "p3": "0.02",
+    "p4": "-1.59",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-05-07",
+    "Comment": "",
+    "Created": "2019-09-26 09:49:38",
+    "Modified": "2019-09-26 09:49:38",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/13631/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/13632/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/13633/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Ďurech et al. (2019)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/182",
+      "file": "reference-182.html",
+      "links": [
+        {
+          "label": "2019a&a...631a...2d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2019a&a...631a...2d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2019A&A...631A...2D",
+          "url": "http://adsabs.harvard.edu/abs/2019A&A...631A...2D"
+        }
+      ]
+    }
+  ],
+  "id": "pyrrhus",
+  "displayName": "Pyrrhus",
+  "lambda": 332.0,
+  "beta": -12.0,
+  "periodHours": 7.31916,
+  "version": "2019-05-07",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 48.356,
+  "uncertaintyKm": 0.423,
+  "akari": {
+    "number": 5283,
+    "name": "Pyrrhus",
+    "diameterKm": 69.93,
+    "uncertaintyKm": 3.3,
+    "detections": 3,
+    "originalRow": "5283   Pyrrhus            1989 BW     9.30  0.15  3   69.93  3.30 0.072 0.007"
+  },
+  "neowise": {
+    "asteroid_number": "5283",
+    "prov_desig": "",
+    "comet_desig": "",
+    "mpc_packed_name": "05283",
+    "absolute_mag": "9.7000",
+    "slope_param": "0.1500",
+    "mean_jd": "2455439.8629085",
+    "n_w1": "14",
+    "n_w2": "12",
+    "n_w3": "16",
+    "n_w4": "0",
+    "fit_code": "DV-I",
+    "diameter": "48.3560",
+    "diameter_err": "0.4230",
+    "v_albedo": "0.1000",
+    "v_albedo_err": "0.0130",
+    "ir_albedo": "0.1580",
+    "ir_albedo_err": "0.0120",
+    "beaming_param": "0.7700",
+    "beaming_param_err": "0.0500",
+    "stacked_flag": "",
+    "reference": "Gr12b",
+    "notes": "",
+    "reference2": "GRAVETAL2012B",
+    "type": "jupiter_trojans",
+    "cntr": "1250"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/13633/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/13631/IAUspin.txt",
+  "shapeSha256": "f48628b4019c5f747601fc0b9b289dd0ff7f53eaa8251cd5b762d2763069d0f0",
+  "shapeBytes": 46419,
+  "vertices": 574,
+  "faces": 1144,
+  "signedVolume": 1.0000001562434626,
+  "independentSignedVolume": 1.0000001562434626,
+  "originalVolumeEquivalentDiameter": 1.2407010464159358,
+  "firstVertex": [
+    -0.024159,
+    -0.210889,
+    0.644061
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5296352007429265,
+    0.8634302022439335
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.745548,
+      0.699138
+    ],
+    [
+      -0.757737,
+      0.728791
+    ],
+    [
+      -0.638146,
+      0.649018
+    ]
+  ],
+  "scaleKmPerSourceUnit": 38.9747394343609,
+  "alternatives": [
+    {
+      "modelId": 4374,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4374",
+      "pole": [
+        "152",
+        "22"
+      ],
+      "version": "2019-05-07"
+    }
+  ],
+  "calibrationKind": "neowise2012",
+  "camp": "L4",
+  "distanceAu": 5.198966960927357,
+  "orbitalPeriodYears": 11.854514946382524,
+  "sourceFields": {
+    "ID": "4373",
+    "Asteroid": "(5283) Pyrrhus",
+    "λ": "332",
+    "β": "-12",
+    "P": "7.31916",
+    "YORP": "",
+    "t0": "2451105",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.44",
+    "p3": "0.02",
+    "p4": "-1.59",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-05-07",
+    "Comment": "",
+    "Created": "2019-09-26 09:49:38",
+    "Modified": "2019-09-26 09:49:38",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates"
+}

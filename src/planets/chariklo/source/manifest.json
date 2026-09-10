@@ -1,0 +1,192 @@
+{
+  "schema": "csschariklo-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "occultation-approximation",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 64667,
+      "expectedSha256": "401f0eb94890a9eaa56fa7b04e1cd7c749b294e2ae14bf589c006948b74ef2ee",
+      "origin": "https://doi.org/10.1051/0004-6361/202141543",
+      "credit": "Morgado et al. (2021), Astronomy & Astrophysics 652, A141; Santos-Sanz et al. (2025), arXiv:2510.06366v1 for the 2022 JWST ring measurements.",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://doi.org/10.1051/0004-6361/202141543"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Triaxial ellipsoid fitted jointly to eleven stellar occultations in 2013–2020, with semiaxes 143.8, 135.2 and 99.1 km (Morgado et al. 2021, Table 6). The smooth approximation does not resolve topography. The axes are model estimates, rather than three independently measured diameters. Full approximation dimensions: 287.6 × 270.4 × 198.2 km. The ICRS ring-plane normal is RA 151.03° ± 0.14°, Dec +41.81° ± 0.07°. The body spin axis is assumed to share that normal, as in the published shape fit. The direction of angular momentum is unknown; the positive-declination pole is the paper's arbitrary choice. The photometric period is an approximate spin rate, not a precise sidereal rotational ephemeris. The displayed longitude origin and rotational phase are arbitrary. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 124433.24035987012
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://doi.org/10.1051/0004-6361/202141543",
+      "credit": "Morgado et al. (2021), Astronomy & Astrophysics 652, A141; Santos-Sanz et al. (2025), arXiv:2510.06366v1 for the 2022 JWST ring measurements.",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://doi.org/10.1051/0004-6361/202141543"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "Triaxial ellipsoid fitted jointly to eleven stellar occultations in 2013–2020, with semiaxes 143.8, 135.2 and 99.1 km (Morgado et al. 2021, Table 6). The smooth approximation does not resolve topography. The axes are model estimates, rather than three independently measured diameters. Full approximation dimensions: 287.6 × 270.4 × 198.2 km. The ICRS ring-plane normal is RA 151.03° ± 0.14°, Dec +41.81° ± 0.07°. The body spin axis is assumed to share that normal, as in the published shape fit. The direction of angular momentum is unknown; the positive-declination pole is the paper's arbitrary choice. The photometric period is an approximate spin rate, not a precise sidereal rotational ephemeris. The displayed longitude origin and rotational phase are arbitrary. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 124433.24035987012
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 4939,
+      "expectedSha256": "d430d01e1e20fb934c8930f805d62ec6726aec1a1f049ef29718c763a58dda07",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 3835,
+      "expectedSha256": "185cfa1df35704c5bb4b2aaba701da2d4f8b53ec737cb951963e0814a34a99a7",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1360,
+      "expectedSha256": "0ae6d3b4cbe268bb0946f4ef94af6467935caf21fe77f6c0001e708f813ff0bd",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 821,
+      "expectedSha256": "be7c381006ffd092f59d858b6cea2085125d9aaed793f16b940072901bebb7b2",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 4367,
+      "expectedSha256": "d8c62ed0f5d34661c9621e71609d304c1a6e09a49b2e898e25fce48f9dce1b3f",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3938,
+      "expectedSha256": "bbb80c83a11977b6695f134f3db4f52264fd102135b714de5568b14e41fcba26",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "rings/occultation-2022.json",
+      "expectedBytes": 1862,
+      "expectedSha256": "4ea83e2dcb08fdefb3f2b13625b711e21fdc1cb7fb40f9f8926b9252d2254d3f",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 851,
+      "expectedSha256": "17d21d3fdb71786d3ff357844af952bf6ab2815da91597615a015fdd354c3798",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-ellipsoid-context",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.1051/0004-6361/202141543",
+      "credit": "Morgado et al. (2021), Astronomy & Astrophysics 652, A141; Santos-Sanz et al. (2025), arXiv:2510.06366v1 for the 2022 JWST ring measurements.",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "occultation-approximation",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 71194,
+      "expectedSha256": "4ff32db8171e71e146d15007850cb082efb6bfcf6380ee9f03372376bd690c1d"
+    }
+  ]
+}
