@@ -1,0 +1,106 @@
+{
+  "schema": "cssearth-phoebe-registered-vims-surfaces@1",
+  "target": "PHOEBE",
+  "status": "Qualified regional source mapping under the recorded registration and detector limits; mounted-view qualification is separate.",
+  "observations": [
+    {
+      "id": "1465671822_1",
+      "calibrated": "native/C1465671822_1_ir.cub",
+      "navigation": "native/N1465671822_1_ir.cub",
+      "rawOriginal": "raw/v1465671822_1.qub",
+      "region": "evidence/regional-mask.json",
+      "fitReceipt": "evidence/native-registration-fit.json",
+      "wavelengthsMicrometers": {
+        "25": 1.27803,
+        "44": 1.58965,
+        "58": 1.82022,
+        "70": 2.01788,
+        "81": 2.1997
+      }
+    }
+  ],
+  "channels": {
+    "rgb": [
+      70,
+      44,
+      25
+    ],
+    "depth": [
+      58,
+      70,
+      81
+    ]
+  },
+  "width": 1440,
+  "height": 720,
+  "radiusMeters": 106500,
+  "terrain": "../../prepared/terrain.json",
+  "rotationPath": "../preparation/rotation.json",
+  "rotation": {
+    "schema": "cssearth-linear-rotation@1",
+    "rightAscensionDegrees": 356.9,
+    "declinationDegrees": 77.88,
+    "referenceEpochJdTt": 2451545,
+    "primeMeridianDegrees": 178.58,
+    "spinRateDegreesPerDay": 931.639,
+    "source": "https://doi.org/10.26033/3k3c-5713",
+    "qualification": "The 2023 paired release documents the same input images/SPICE kernels and a 1.03 km shift to center of figure, not a new pole solution. Retains the Gaskell source-model RA356.90°, Dec77.88°, W178.58°+931.639°/day orientation. Absolute present-day phase is not independently qualified; the old monochrome map has no demonstrated registration to the shifted model."
+  },
+  "originComparison": "evidence/source-model-comparison.json",
+  "originTranslationKilometers": [
+    0.1960378706536209,
+    -0.4891583620809242,
+    -0.7886686239183882
+  ],
+  "photometricCorrection": "none",
+  "apertureInsetRadians": [
+    1e-06,
+    1e-06
+  ],
+  "exposureFractions": [
+    0.0,
+    0.125,
+    0.25,
+    0.375,
+    0.5,
+    0.625,
+    0.75,
+    0.875,
+    1.0
+  ],
+  "maximumIncidenceEmissionDegrees": 60,
+  "detectorQualityPreparerSha256": "e02acd15b1af115d3482a6272ba78d79071db2757d45854fb0d0527681dc314e",
+  "outputs": {
+    "depth": "phoebe-ice-absorption.tif",
+    "rgb": "phoebe-infrared-if.tif",
+    "rgbDisplay": "phoebe-infrared-display.tif"
+  },
+  "rgbDisplay": {
+    "ranges": [
+      [
+        0,
+        0.03
+      ],
+      [
+        0,
+        0.03
+      ],
+      [
+        0,
+        0.03
+      ]
+    ],
+    "gamma": 2.2
+  },
+  "receipt": "preparation-receipt.json",
+  "pins": {
+    "native/C1465671822_1_ir.cub": "e3d284051d290a154a692a5fccc4388bcb33220fed68345991a9055b8d6228ee",
+    "native/N1465671822_1_ir.cub": "97fee2316839da6b2f5849b35b4ed8bd04af9e26f6cc8842f3254309c915a5a3",
+    "raw/v1465671822_1.qub": "df43d42c42ab29cf00eee62c6f22796d85631b60f6c8b4da56ba590cb01f3030",
+    "evidence/regional-mask.json": "545127b529e97e3d0cd296cca6d826166ddc7fd0f025045f2550ed09a7d045fb",
+    "evidence/native-registration-fit.json": "e7e8d9b030135adc5e802c28daa9092bc77e37246bb2d50b59d36bdbb8d9b26a",
+    "../../prepared/terrain.json": "a6eb3c92075986288ddfc6e59d85391891ca0d96dc0f2c427ea7fbab2e576178",
+    "../preparation/rotation.json": "5dba43a0956e9dd4b84819ea83d253431569afb4b5126661ef5a9c28c2a39713",
+    "evidence/source-model-comparison.json": "d8ec9e389a1dd49bdeea35f739ed38312632d427f992f5dcd60b7c775469358d"
+  }
+}

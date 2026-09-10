@@ -13,7 +13,39 @@
     "poleSize": 512,
     "surfaceQuality": 95,
     "reportMissingPixels": true,
-    "observations": [],
+    "observations": [
+      {
+        "id": "infrared",
+        "textureScale": 0.5,
+        "validity": {
+          "kind": "geotiff-rgb-bands",
+          "samples": [
+            0,
+            1,
+            2
+          ],
+          "alphaBand": 3,
+          "sampleBytes": 2,
+          "noData": 0,
+          "centerLongitude": 180,
+          "resolutionMeters": 464.69391334349024,
+          "origin": [
+            -334579.617607313,
+            167289.8088036565
+          ],
+          "grid": {
+            "pixelsPerDegree": 4,
+            "sampleOffset": 719.5,
+            "lineOffset": 359.5
+          }
+        },
+        "focus": {
+          "longitudeDegrees": 30.625,
+          "latitudeDegrees": -17.875,
+          "zoom": 2
+        }
+      }
+    ],
     "scientific": [
       {
         "id": "normal",
@@ -279,6 +311,54 @@
           "#3cbbb0",
           "#e9ec8f"
         ]
+      },
+      {
+        "id": "ice-absorption",
+        "label": "Ice absorption",
+        "format": "geotiff",
+        "path": "cassini-ice/phoebe-ice-absorption.tif",
+        "consumer": "ice-absorption",
+        "title": "Partial Cassini VIMS water-ice signature",
+        "description": "Near-2.02 µm water-ice absorption in selected Cassini observations; not ice abundance.",
+        "minimum": 0.1,
+        "maximum": 0.3,
+        "colors": [
+          "#312b66",
+          "#327caf",
+          "#7fcdbb",
+          "#edf8b1"
+        ],
+        "labels": [
+          "0.1",
+          "0.2",
+          "0.3"
+        ],
+        "units": "band-depth fraction",
+        "sourceUrl": "https://vims.univ-nantes.fr/cube/1465671822_1",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "textureScale": 0.5,
+        "grid": {
+          "width": 1440,
+          "height": 720,
+          "centerLongitude": 0,
+          "referenceRadiusMeters": 106500,
+          "noData": -9999,
+          "origin": [
+            -334579.617607313,
+            167289.8088036565
+          ],
+          "resolution": [
+            464.69391334349024,
+            -464.69391334349024
+          ],
+          "wrapLongitude": true
+        },
+        "focus": {
+          "longitudeDegrees": 30.625,
+          "latitudeDegrees": -17.875,
+          "zoom": 2
+        }
       }
     ],
     "observedColors": []

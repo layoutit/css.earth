@@ -1,0 +1,5 @@
+# Cassini VIMS registration and interpretation
+
+Coarse regional mapping on the unchanged 3500-face Phoebe mesh. Source pole and origin transfer are explicit. A two-angle fit has seven untouched limb checks with maximum residual 0.704 fast sample. The sampled pointing-sensitivity mask retains 41 native pixels; the second IR1465670650_1 observation is withheld for systematic holdout bias. Nine exposure poses, incidence/emission, closest-hit visibility, self-shadow and radial ambiguity checks constrain output support. Registration uncertainty remains; the source-model translation is fitted, not an author-supplied vector.
+
+The source review and reproducible independent checks are in docs/moons/b9-cassini-ice-surfaces/source-review. The output samples measured detector support only; grid density does not increase native resolution. Original detector saturation, special values and source filtering dependencies are excluded per band. No photometric correction or cross-observation level matching is applied. Color and absorption retain source illumination, filtering and viewing-angle effects. Absorption is a continuum-relative spectral measure, not ice abundance.

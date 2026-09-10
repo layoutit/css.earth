@@ -70,7 +70,9 @@
       "normal": "Relative albedo",
       "elevation": "Radial height",
       "maplet-resolution": "Maplet resolution",
-      "image-count": "Image count"
+      "image-count": "Image count",
+      "infrared": "Infrared",
+      "ice-absorption": "Ice absorption"
     },
     "controls": [
       {
@@ -190,6 +192,54 @@
           "image": "/scenes/phoebe/phoebe-image-count-legend.webp"
         },
         "summary": "Contributing image count in each 1° source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy."
+      },
+      {
+        "id": "infrared",
+        "label": "Infrared",
+        "description": "A small region from Cassini’s 11 June 2004 flyby, supported by 41 original VIMS pixels. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.03 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps. Placement is coarse on the existing shape, with several-kilometer spatial uncertainty. Fine surface positions are not established.",
+        "summary": "False-color 2.02/1.59/1.28 µm infrared from a small 2004 flyby region. Gray grid marks gaps. Values retain illumination and archive filtering; placement has several-kilometer uncertainty.",
+        "title": "Cassini VIMS regional spectra · 11 June 2004",
+        "thumbnail": "/scenes/phoebe/phoebe-infrared-thumbnail.webp",
+        "surface": "phoebe-infrared-surface@2x.webp",
+        "poles": "phoebe-infrared-poles@2x.webp",
+        "source": {
+          "id": "phoebe-cassini-infrared",
+          "path": "../manifest.json",
+          "url": "https://vims.univ-nantes.fr/cube/1465671822_1"
+        },
+        "detail": "Regional VIMS",
+        "falseColor": true
+      },
+      {
+        "id": "ice-absorption",
+        "label": "Ice absorption",
+        "description": "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using 41 original VIMS pixels from one small region in Cassini’s 11 June 2004 flyby. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0.1–0.3; original numerical values are retained. Gray grid marks unsupported areas and scan gaps. The region is placed coarsely on the existing shape, with several-kilometer spatial uncertainty.",
+        "summary": "Near-2.02 µm ice absorption in a small, coarsely placed region. Gray grid marks gaps. Uncorrected values depend on viewing angle, grain size, noise and archive filtering; they do not measure ice abundance.",
+        "title": "Cassini VIMS regional water-ice absorption · 11 June 2004",
+        "thumbnail": "/scenes/phoebe/phoebe-ice-absorption-thumbnail.webp",
+        "surface": "phoebe-ice-absorption-surface@2x.webp",
+        "poles": "phoebe-ice-absorption-poles@2x.webp",
+        "source": {
+          "id": "phoebe-cassini-ice-absorption",
+          "path": "../manifest.json",
+          "url": "https://vims.univ-nantes.fr/cube/1465671822_1"
+        },
+        "detail": "Regional VIMS",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Ice absorption",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0.1",
+            "0.2",
+            "0.3"
+          ],
+          "meta": "band-depth fraction",
+          "sourceUrl": "https://vims.univ-nantes.fr/cube/1465671822_1",
+          "image": "/scenes/phoebe/phoebe-ice-absorption-legend.webp"
+        }
       }
     ]
   },
@@ -235,6 +285,12 @@
       "role": "reference",
       "description": "Earlier monochrome map: retained reference; its registration to the shifted 2023 model is unqualified",
       "href": "https://science.nasa.gov/resource/map-of-phoebe-december-2005/"
+    },
+    {
+      "label": "Cassini VIMS",
+      "role": "surface",
+      "description": "Nantes calibrated spectra and navigation; archive filtering retained, CC BY 4.0",
+      "href": "https://vims.univ-nantes.fr/cube/1465671822_1"
     }
   ],
   "provenance": {
