@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { prepareGiottoProjection, createGiottoSampler, polygonInteriorDistance } from './prepare-giotto.mjs';
-import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mjs';
+import { prepareGiottoProjection, createGiottoSampler, polygonInteriorDistance } from './prepare-giotto.mts';
+import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 
 const source = resolve('src/planets/comet-1p/source');
 

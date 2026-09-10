@@ -22,13 +22,7 @@
         "value": "About 0.5–1 km"
       }
     ],
-    "moreFacts": [
-      {
-        "id": "rendering",
-        "label": "Presentation",
-        "value": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5–1 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed."
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",
@@ -41,7 +35,7 @@
       {
         "id": "model",
         "label": "Historical model",
-        "description": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5–1 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed.",
+        "description": "A historical shape reconstructed from Giotto and Vega images. The grid follows the model; depressions and fine details are uncertain.",
         "title": "Stooke nucleus shape reconstruction",
         "detail": "Highly uncertain",
         "thumbnail": "/scenes/comet-1p/comet-1p-model-thumbnail.webp",
@@ -56,7 +50,7 @@
       {
         "id": "giotto",
         "label": "Giotto",
-        "description": "Giotto photographed Halley through its dusty coma. A small illuminated patch is projected onto the historical nucleus model; the grid marks missing imagery. Surface positions are approximate, with shape uncertainty of about 0.5–1 km.",
+        "description": "Giotto photographed Halley through its dusty coma. This view places a small illuminated patch on the historical nucleus model; the grid marks unmapped terrain. Placement is approximate; the shape alone is uncertain by about 0.5–1 km.",
         "title": "Giotto illuminated nucleus composite",
         "detail": "Approximate surface projection",
         "thumbnail": "/scenes/comet-1p/comet-1p-giotto-thumbnail.webp",

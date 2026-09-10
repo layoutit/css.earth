@@ -8,8 +8,8 @@
   "source": {
     "id": "prepared-radial-context",
     "path": "presentation/context.png",
-    "expectedBytes": 65726,
-    "expectedSha256": "88e4da495091cecc72e66dbc6a9676ea2ab40ca48bceaa367f1d97a95faa90da",
+    "expectedBytes": 58410,
+    "expectedSha256": "a3c162d7b85a6f29372f59b5208608569e14eab7a33934bd5eba090ac3249914",
     "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.tab",
     "credit": "Philip Stooke; Alain Abergel (pointing); Giotto and Vega missions; NASA PDS",
     "license": "PDS public scientific archive; credit Stooke and Abergel",
@@ -21,12 +21,11 @@
     "consumers": [
       "navigation"
     ],
-    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
     "recipe": {
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
       "inputs": [
-        "stooke-halley",
-        "model-surface"
+        "stooke-halley"
       ],
       "size": 512,
       "longitudeDegrees": 0,

@@ -15,19 +15,6 @@
     "reportMissingPixels": true,
     "observations": [
       {
-        "id": "model",
-        "validity": {
-          "kind": "image-rgb-no-data",
-          "noData": null,
-          "centerLongitude": 180
-        },
-        "metadata": {
-          "label": "Historical model",
-          "modeled": true,
-          "coverage": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5\u20131 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed."
-        }
-      },
-      {
         "id": "giotto",
         "validity": {
           "kind": "image-rgb-no-data",
@@ -36,7 +23,7 @@
         },
         "metadata": {
           "label": "Giotto",
-          "coverage": "Giotto photographed Halley through its dusty coma. A small illuminated patch is projected onto the historical nucleus model; the grid marks missing imagery. Surface positions are approximate, with shape uncertainty of about 0.5\u20131 km."
+          "coverage": "Giotto photographed Halley through its dusty coma. This view places a small illuminated patch on the historical nucleus model; the grid marks unmapped terrain. Placement is approximate; the shape alone is uncertain by about 0.5\u20131 km."
         },
         "focus": {
           "longitudeDegrees": 196,
@@ -47,7 +34,14 @@
     ],
     "scientific": [],
     "observedColors": [],
-    "mosaics": []
+    "mosaics": [],
+    "shapeViews": [
+      {
+        "id": "model",
+        "consumer": "shape",
+        "label": "Historical model"
+      }
+    ]
   },
   "lighting": {
     "frameSize": 512,
@@ -119,7 +113,8 @@
             ],
             "weight": 0.24
           }
-        ]
+        ],
+        "uniformFlood": true
       }
     }
   },

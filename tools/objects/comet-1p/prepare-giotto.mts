@@ -4,17 +4,32 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mjs';
+import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
+
+import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
+import { array, number, shape, text } from '../terrestrial-layers/source-records.mts';
+
+const pair = (value: unknown) => { const result = array(number)(value); assert.equal(result.length, 2); return result; };
+const parseRegistration = shape({
+  schema:text,
+  sourcePins:array(shape({path:text,url:text,bytes:number,sha256:text})),
+  camera:shape({observerEastLongitudeDegrees:number,observerLatitudeDegrees:number,bodyRollDegrees:number,scalePxPerKm:number,center:pair}),
+  photoToPhoto:shape({rotationDegrees:number,scale:number,translation:pair}),
+  bodyFrame:shape({predictedGiottoSun:shape({eastLongitude:number,latitude:number})}),
+  mask:shape({polygon:array(pair),cataloguePixelInset:number,maximumEmissionDegrees:number,maximumIncidenceDegrees:number,sourceShapeSha256:text}),
+});
+type Registration = ReturnType<typeof parseRegistration>;
+interface RgbImage {data:Uint8Array; width:number; height:number}
 
 const radians = Math.PI / 180;
-const dot = (a, b) => a.reduce((sum, n, i) => sum + n * b[i], 0);
-const sub = (a, b) => a.map((n, i) => n - b[i]);
-const cross = (a, b) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
-const unit = a => a.map(n => n / Math.hypot(...a));
-const vector = (longitude, latitude) => [Math.cos(latitude*radians)*Math.cos(longitude*radians), Math.cos(latitude*radians)*Math.sin(longitude*radians), Math.sin(latitude*radians)];
-const digest = bytes => createHash('sha256').update(bytes).digest('hex');
+const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, n, i) => sum + n * b[i], 0);
+const sub = (a: readonly number[], b: readonly number[]) => a.map((n, i) => n - b[i]);
+const cross = (a: readonly number[], b: readonly number[]) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
+const unit = (a: readonly number[]) => a.map(n => n / Math.hypot(...a));
+const vector = (longitude: number, latitude: number) => [Math.cos(latitude*radians)*Math.cos(longitude*radians), Math.cos(latitude*radians)*Math.sin(longitude*radians), Math.sin(latitude*radians)];
+const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
-export function polygonInteriorDistance(point, polygon) {
+export function polygonInteriorDistance(point: readonly number[], polygon: readonly (readonly number[])[]) {
   const [x, y] = point;
   let inside = false, distance = Infinity;
   for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
@@ -26,14 +41,14 @@ export function polygonInteriorDistance(point, polygon) {
   return inside ? distance : -distance;
 }
 
-function interpolatedNormals(mesh) {
+function interpolatedNormals(mesh: SourceMesh) {
   const sums = mesh.positions.map(() => [0, 0, 0]);
   for (const f of mesh.indices) {
     const n = cross(sub(mesh.positions[f[1]], mesh.positions[f[0]]), sub(mesh.positions[f[2]], mesh.positions[f[0]]));
     for (const index of f) for (let k = 0; k < 3; k++) sums[index][k] += n[k];
   }
   const normals = sums.map(unit);
-  return (point, faceId) => {
+  return (point: readonly number[], faceId: number) => {
     const f = mesh.indices[faceId], [a,b,c] = f.map(i => mesh.positions[i]);
     const v0 = sub(b,a), v1 = sub(c,a), v2 = sub(point,a);
     const d00 = dot(v0,v0), d01 = dot(v0,v1), d11 = dot(v1,v1), d20 = dot(v2,v0), d21 = dot(v2,v1);
@@ -46,7 +61,7 @@ function interpolatedNormals(mesh) {
  * The camera comes from the rounded published spin state and Vega longitude
  * anchor. Only image scale/translation were fitted to the catalogue outline.
  * These are approximate geographic positions, not calibrated reflectance. */
-export function createGiottoSampler(mesh, registration, image) {
+export function createGiottoSampler(mesh: SourceMesh, registration: Registration, image: RgbImage) {
   const { camera, photoToPhoto, bodyFrame, mask } = registration;
   const eye = vector(camera.observerEastLongitudeDegrees, camera.observerLatitudeDegrees);
   const sun = vector(bodyFrame.predictedGiottoSun.eastLongitude, bodyFrame.predictedGiottoSun.latitude);
@@ -55,7 +70,7 @@ export function createGiottoSampler(mesh, registration, image) {
   const c = Math.cos(camera.bodyRollDegrees*radians), s = Math.sin(camera.bodyRollDegrees*radians);
   const pc = Math.cos(photoToPhoto.rotationDegrees*radians), ps = Math.sin(photoToPhoto.rotationDegrees*radians);
   const normalAt = interpolatedNormals(mesh);
-  return (point, faceId) => {
+  return (point: readonly number[], faceId: number) => {
     const x = camera.center[0]+camera.scalePxPerKm*(dot(point,right)*c+dot(point,up)*s)/1000;
     const y = camera.center[1]+camera.scalePxPerKm*(dot(point,right)*s-dot(point,up)*c)/1000;
     // The inset is 0.5 km at the catalogue scale; brightness never grants coverage.
@@ -71,7 +86,7 @@ export function createGiottoSampler(mesh, registration, image) {
     const ix = Math.floor(sx), iy = Math.floor(sy), u = sx-ix, v = sy-iy;
     if (ix < 0 || iy < 0 || ix+1 >= image.width || iy+1 >= image.height) return null;
     const color = [0,1,2].map(k => {
-      const at = (xx,yy) => image.data[(yy*image.width+xx)*3+k];
+      const at = (xx:number,yy:number) => image.data[(yy*image.width+xx)*3+k];
       const value = (1-v)*((1-u)*at(ix,iy)+u*at(ix+1,iy))+v*((1-u)*at(ix,iy+1)+u*at(ix+1,iy+1));
       // Reserve exact RGB zero for missing data; valid photographic black survives.
       return Math.max(1, Math.round(value));
@@ -80,9 +95,9 @@ export function createGiottoSampler(mesh, registration, image) {
   };
 }
 
-export async function prepareGiottoProjection(sourceDirectory) {
+export async function prepareGiottoProjection(sourceDirectory: string) {
   const registrationBytes = await readFile(resolve(sourceDirectory, 'reference/giotto-registration.json'));
-  const registration = JSON.parse(registrationBytes);
+  const registration = parseRegistration(JSON.parse(registrationBytes.toString('utf8')));
   assert.equal(registration.schema, 'cssearth-halley-giotto-registration@1');
   for (const pin of registration.sourcePins) {
     const bytes = await readFile(resolve(sourceDirectory, pin.path));
@@ -99,7 +114,9 @@ export async function prepareGiottoProjection(sourceDirectory) {
   let accepted = 0;
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
     const longitude = (x+.5)*360/width, latitude = 90-(y+.5)*180/height;
-    const hit = mesh.hit(longitude, latitude), point = vector(longitude, latitude).map(n => n*hit.radius);
+    const hit = mesh.hit(longitude, latitude);
+    assert.ok(hit, 'The published complete radius grid must intersect each map direction.');
+    const point = vector(longitude, latitude).map(n => n*hit.radius);
     const value = sample(point, hit.faceId);
     if (!value) continue;
     const index = y*width+x;
@@ -131,7 +148,7 @@ export async function prepareGiottoProjection(sourceDirectory) {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  assert.deepEqual(process.argv.slice(2), ['--write'], 'Usage: node tools/objects/comet-1p/prepare-giotto.mjs --write');
+  assert.deepEqual(process.argv.slice(2), ['--write'], 'Usage: node tools/objects/comet-1p/prepare-giotto.mts --write');
   const source = resolve('src/planets/comet-1p/source'), result = await prepareGiottoProjection(source);
   await mkdir(resolve(source, 'material'), { recursive:true });
   await writeFile(resolve(source, 'material/giotto.png'), result.png);

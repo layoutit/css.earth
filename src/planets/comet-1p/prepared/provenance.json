@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7c7a858de972fbe066dbb5e522e8a23e2f501cb593c4d016bcbd4360db8fa510"
+    "sha256": "023cf434e61f0867bee4c1b29faad9be1d48b7b3ed4bff0cb60578220b918108"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ce2fd0aba5e7203931fbcdb151cedf7ebce6ad9ff882e8abd3e333d279ef0057",
+      "sha256": "b60fbf7331a5045a0a1ec54d99b43cd83e5d1fdd9d55e68d840ab54026155eb6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -33,19 +33,6 @@
           "reportMissingPixels": true,
           "observations": [
             {
-              "id": "model",
-              "validity": {
-                "kind": "image-rgb-no-data",
-                "noData": null,
-                "centerLongitude": 180
-              },
-              "metadata": {
-                "label": "Historical model",
-                "modeled": true,
-                "coverage": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5–1 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed."
-              }
-            },
-            {
               "id": "giotto",
               "validity": {
                 "kind": "image-rgb-no-data",
@@ -54,13 +41,25 @@
               },
               "metadata": {
                 "label": "Giotto",
-                "coverage": "Giotto photographed Halley through its dusty coma. A small illuminated patch is projected onto the historical nucleus model; the grid marks missing imagery. Surface positions are approximate, with shape uncertainty of about 0.5–1 km."
+                "coverage": "Giotto photographed Halley through its dusty coma. This view places a small illuminated patch on the historical nucleus model; the grid marks unmapped terrain. Placement is approximate; the shape alone is uncertain by about 0.5–1 km."
+              },
+              "focus": {
+                "longitudeDegrees": 196,
+                "latitudeDegrees": -15,
+                "zoom": 1.1
               }
             }
           ],
           "scientific": [],
           "observedColors": [],
-          "mosaics": []
+          "mosaics": [],
+          "shapeViews": [
+            {
+              "id": "model",
+              "consumer": "shape",
+              "label": "Historical model"
+            }
+          ]
         },
         "lighting": {
           "frameSize": 512,
@@ -132,7 +131,8 @@
                   ],
                   "weight": 0.24
                 }
-              ]
+              ],
+              "uniformFlood": true
             }
           }
         },
@@ -154,7 +154,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d1ee69a44d76fd8d156270af140cbd6b52fc2d3aa436483495488fc220e3a100",
+      "sha256": "d26b02d9f0e0a792f074078568b0cf251d5121a5da5ba8ee9958b4494608611d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -179,13 +179,7 @@
               "value": "About 0.5–1 km"
             }
           ],
-          "moreFacts": [
-            {
-              "id": "rendering",
-              "label": "Presentation",
-              "value": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5–1 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed."
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -198,7 +192,7 @@
             {
               "id": "model",
               "label": "Historical model",
-              "description": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5–1 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed.",
+              "description": "A historical shape reconstructed from Giotto and Vega images. The grid follows the model; depressions and fine details are uncertain.",
               "title": "Stooke nucleus shape reconstruction",
               "detail": "Highly uncertain",
               "thumbnail": "/scenes/comet-1p/comet-1p-model-thumbnail.webp",
@@ -213,7 +207,7 @@
             {
               "id": "giotto",
               "label": "Giotto",
-              "description": "Giotto photographed Halley through its dusty coma. A small illuminated patch is projected onto the historical nucleus model; the grid marks missing imagery. Surface positions are approximate, with shape uncertainty of about 0.5–1 km.",
+              "description": "Giotto photographed Halley through its dusty coma. This view places a small illuminated patch on the historical nucleus model; the grid marks unmapped terrain. Placement is approximate; the shape alone is uncertain by about 0.5–1 km.",
               "title": "Giotto illuminated nucleus composite",
               "detail": "Approximate surface projection",
               "thumbnail": "/scenes/comet-1p/comet-1p-giotto-thumbnail.webp",
@@ -290,29 +284,29 @@
   "sources": [
     {
       "kind": "source-input",
-      "id": "model-surface",
-      "path": "material/neutral.png",
-      "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "cssEarth neutral model material",
-      "license": "MIT",
+      "id": "giotto-projection",
+      "path": "material/giotto.png",
+      "origin": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif",
+      "credit": "© MPS 1986, 1996; Giotto HMC team; shape by Philip Stooke with pointing by Alain Abergel",
+      "license": "MPS educational image use with attribution; commercial reuse requires permission",
       "licenseEvidence": [
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://www2.mps.mpg.de/de/projekte/giotto/hmc/"
       ],
-      "acquisition": "Checked-in 64 by 32 RGB PNG, every pixel #b8b6b2.",
-      "redistribution": "Authored neutral material under the repository MIT license.",
-      "coverage": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5–1 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed.",
+      "acquisition": "Reproduce with node tools/objects/comet-1p/prepare-giotto.mjs --write using the pinned registration and original inputs.",
+      "redistribution": "The projected photograph retains the MPS source-image terms, separate from the MIT application code.",
+      "lensId": "giotto",
+      "width": 512,
+      "height": 256,
+      "label": "Giotto",
+      "falseColor": false,
+      "coverage": "Giotto photographed Halley through its dusty coma. This view places a small illuminated patch on the historical nucleus model; the grid marks unmapped terrain. Placement is approximate; the shape alone is uncertain by about 0.5–1 km.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 4579.06433330178
       },
-      "width": 64,
-      "height": 32,
-      "lensId": "model",
-      "label": "Historical model",
-      "falseColor": false,
-      "sha256": "df95f3ee3fbe5bac0c94424822fd8c202719a087d300e134ff8412eab4519d8b",
-      "bytes": 174,
+      "sha256": "ea552e0b7b7973dca0b46eff9299fccf36f8e3acffe40a69c584000fc279f49a",
+      "bytes": 5391,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -345,36 +339,6 @@
       "verificationOperations": []
     },
     {
-      "kind": "source-input",
-      "id": "giotto-projection",
-      "path": "material/giotto.png",
-      "origin": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif",
-      "credit": "© MPS 1986, 1996; Giotto HMC team; shape by Philip Stooke with pointing by Alain Abergel",
-      "license": "MPS educational image use with attribution; commercial reuse requires permission",
-      "licenseEvidence": [
-        "https://www2.mps.mpg.de/de/projekte/giotto/hmc/"
-      ],
-      "acquisition": "Reproduce with node tools/objects/comet-1p/prepare-giotto.mjs --write using the pinned registration and original inputs.",
-      "redistribution": "The projected photograph retains the MPS source-image terms, separate from the MIT application code.",
-      "lensId": "giotto",
-      "width": 512,
-      "height": 256,
-      "label": "Giotto",
-      "falseColor": false,
-      "coverage": "Giotto photographed Halley through its dusty coma. A small illuminated patch is projected onto the historical nucleus model; the grid marks missing imagery. Surface positions are approximate, with shape uncertainty of about 0.5–1 km.",
-      "projection": {
-        "type": "equirectangular",
-        "longitudeDirection": "east-positive",
-        "referenceRadiusMeters": 4579.06433330178
-      },
-      "sha256": "ea552e0b7b7973dca0b46eff9299fccf36f8e3acffe40a69c584000fc279f49a",
-      "bytes": 5391,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
       "path": "content/object.json",
       "purpose": "Halley source evidence or authored preparation input.",
       "id": "authored-document:content/object.json",
@@ -384,8 +348,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d1ee69a44d76fd8d156270af140cbd6b52fc2d3aa436483495488fc220e3a100",
-      "bytes": 4790,
+      "sha256": "d26b02d9f0e0a792f074078568b0cf251d5121a5da5ba8ee9958b4494608611d",
+      "bytes": 4110,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -394,57 +358,14 @@
   ],
   "products": [
     {
-      "id": "model",
-      "label": "Historical model",
+      "id": "giotto",
+      "label": "Giotto",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
       "limitations": [
-        "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5–1 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed."
-      ],
-      "lensIds": [
-        "model"
-      ],
-      "recipeDependencies": [
-        "terrestrial"
-      ],
-      "interpretation": {
-        "validity": {
-          "kind": "image-rgb-no-data",
-          "noData": null,
-          "centerLongitude": 180
-        }
-      },
-      "inputs": [
-        "model-surface",
-        "stooke-halley"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/comet-1p/comet-1p-model-thumbnail.webp",
-          "bytes": 44,
-          "sha256": "72f6226f692921f3f9dd3a49250631234f64ef64995d7688732ee6b797b0e192",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/comet-1p/comet-1p-model-surface@2x.webp",
-          "bytes": 82802,
-          "sha256": "8d950b8eb503d9a46884f5862d2cc7265b677d9f8f81b62205b8046d3bf9b3a0",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "giotto",
-      "label": "Giotto",
-      "recipe": "terrestrial",
-      "selector": "/raster/observations/1",
-      "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Giotto photographed Halley through its dusty coma. A small illuminated patch is projected onto the historical nucleus model; the grid marks missing imagery. Surface positions are approximate, with shape uncertainty of about 0.5–1 km."
+        "Giotto photographed Halley through its dusty coma. This view places a small illuminated patch on the historical nucleus model; the grid marks unmapped terrain. Placement is approximate; the shape alone is uncertain by about 0.5–1 km."
       ],
       "lensIds": [
         "giotto"
@@ -472,8 +393,46 @@
         },
         {
           "url": "/scenes/comet-1p/comet-1p-giotto-surface@2x.webp",
-          "bytes": 80950,
-          "sha256": "4cf1d128756d5bb3de2a0a89784bdbf2792d1783a3af55e58a0bc8a5f00b5d83",
+          "bytes": 103826,
+          "sha256": "46acef4a7cd5fcb5318d7b5c0cdac64c7b547485cd5d4b639aeca972a8638763",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "model",
+      "label": "Historical model",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "A historical shape reconstructed from Giotto and Vega images. The grid follows the model; depressions and fine details are uncertain."
+      ],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "stooke-halley"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-1p/comet-1p-model-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-1p/comet-1p-model-surface@2x.webp",
+          "bytes": 92752,
+          "sha256": "9277d8d953863a8117f32ac0624eb3f8cea2567540605b9ab4791192b8479250",
           "verification": "bytes-verified"
         }
       ],
@@ -497,8 +456,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4969,
-          "sha256": "c21cfa32896d0726a6e009c12b5538aa8641c694b7b997bd73594e9473325ef8",
+          "bytes": 4561,
+          "sha256": "58dec4e7825000cb030e4de3854621b7deac34e1b6589851520eca30bdb0f761",
           "verification": "bytes-verified"
         }
       ],
@@ -508,7 +467,7 @@
       "id": "preview:giotto",
       "label": "Giotto preview",
       "recipe": "terrestrial",
-      "selector": "/raster/observations/1",
+      "selector": "/raster/observations/0",
       "recipeDependencies": [
         "terrestrial"
       ],

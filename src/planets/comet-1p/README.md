@@ -65,7 +65,7 @@ The existing per-object camera `framingScale` is 0.7 so the elongated nucleus fi
 
 ## Material, orientation and placement
 
-The **Historical model** view uses uniform #b8b6b2 material. The **Giotto** view uses photographic pixels only inside the accepted footprint and the existing gray grid elsewhere. Shadows defaults to **off** for both datasets. Navigation context is rendered from the same simplified geometry and material.
+The **Historical model** view uses the shared no-imagery grid over the source shape. The **Giotto** view uses photographic pixels only inside the accepted footprint and the existing gray grid elsewhere. Shadows defaults to **off** for both datasets. The existing uniform-flood option preserves image RGB values instead of applying an extra baked light direction. Navigation context is rendered from the same simplified geometry and material.
 
 These are presentation choices, not Halley's physical spin solution. No rotation-period fact or spin/tumble animation is supplied.
 
@@ -85,7 +85,7 @@ This package contains the nucleus model only; no coma, tail or outgassing scene.
 
 ## Giotto projection
 
-The [source-specific preparer](../../../tools/objects/comet-1p/prepare-giotto.mjs) reads the pinned MPS display composite, not the separately surveyed calibrated PDS image pixels. Run it with `node tools/objects/comet-1p/prepare-giotto.mjs --write`, then run the normal authored Halley preparation. The registration JSON is an authored input; its image-plane scale, centre and footprint are retained with their controls and provenance.
+The [source-specific preparer](../../../tools/objects/comet-1p/prepare-giotto.mts) reads the pinned MPS display composite, not the separately surveyed calibrated PDS image pixels. Run it with `node tools/objects/comet-1p/prepare-giotto.mts --write`, then run the normal authored Halley preparation. The registration JSON is an authored input; its image-plane scale, centre and footprint are retained with their controls and provenance.
 
 The 2004 table gives angular momentum RA 7°, Dec −60°, a long-axis direction RA 314°, Dec −7° at JD 2446498.806, precession period 3.69 days and roll period 7.1 days. Stooke's Vega image anchor fixes longitude 270°. Table 1 in the 1991 paper places that image 1.5 seconds before closest approach. The TVS header places closest approach at 07:19:59.5 UTC, giving an anchor of 07:19:58 UTC on 9 March 1986.
 
