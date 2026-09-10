@@ -182,9 +182,14 @@ account and link it from the PR.
 
 Update affected records, NOTICE credits/terms and the body README's explanation,
 results and known problems. Extend existing sections when adding a dataset.
-Run relevant checks and summarize their results in the PR using the
-[template](../../.github/pull_request_template.md). Link the maintained account
-instead of adding a PR completion report to `docs/`.
+Run relevant checks and summarize their results in the PR. GitHub already records
+CI revisions; identify the revision and relevant differences for local or reused
+evidence. Link the maintained account instead of adding a PR completion report to `docs/`.
+
+Use the [template](../../.github/pull_request_template.md) as a starting point.
+Headings are optional: a small change can be one paragraph explaining the problem,
+result and relevant check. Omit unused prompts. Do not add standards declarations,
+N/A entries or screenshots just to fill the template.
 
 Commit source records and the evidence needed to review the change, including
 relevant failures. Each added artifact needs a named claim, explanation or test
