@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f9dc505e8b1d6181df88ed8ec08db0b7e6dcf1cf2ed7a568c906917ff388f9ee"
+        "sha256": "7fff157b9638019ba23ac0959c8bc322cb4e9a76b3e5653ae83644dcf3755f9f"
+      }
+    },
+    "catalog": {
+      "name": "Kallisto",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.66979749127311,
+      "description": "Explore Kallisto in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 311,
+      "context": {
+        "order": 357
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "54854e6cb99420ca3a4c92a741ef94c723cce552089e28238a6f85a4983e0f78"
+    "sha256": "4455f8ace9f2bf5ae4ca1d855b9872691d8e9adadd593bd9dc2f439e4ca93d44"
   }
 }

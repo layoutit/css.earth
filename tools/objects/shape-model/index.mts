@@ -9,7 +9,6 @@ import {validatePreparedCubicSky} from '../../../src/platform/cubic-sky-contract
 interface ShapeContext {descriptor:AuthoredObjectDescriptor;sources:ReadonlyMap<string,{value:unknown}>;objectDirectory:string;publicDirectory:string;outputDirectory:string;prepareContent:typeof prepareObjectContentAssets;}
 import sharp from 'sharp';
 import { lambertAttenuationAtlas } from '../terrestrial-layers/solid-raster.mts';
-import { PREPARED_NAVIGATION_MARKERS } from '../../../site/prepared-navigation-markers.mjs';
 import { DEFAULT_LABEL_POLICY } from '../../../src/platform/label-field.mts';
 import { loadAstronomyPackage } from '../../../src/platform/astronomy-package.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -120,7 +119,8 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   const phase = lambertAttenuationAtlas({ frameSize: 32, columns: 4, frameCount: 32, terminatorWidth: .1, directionalAmbient: .05, fullPhaseAmbient: .35, fullPhaseDiffuse: .65, maximumOpacity: .95 });
   await sharp(phase.pixels, { raw: { width: phase.width, height: phase.height, channels: 4 } }).webp({ lossless: true }).toFile(resolve(publicDirectory, 'marker-phase.webp'));
   const { BODIES } = await loadAstronomyPackage();
-  const marker = (name:string) => PREPARED_NAVIGATION_MARKERS[name] ? { index: PREPARED_NAVIGATION_MARKERS[name].index, count: PREPARED_NAVIGATION_MARKERS[name].count, size: 5 } : { url: publicBase + 'marker.webp', index: 0, count: 1, size: 5 };
+  const names: Record<string, string> = Object.fromEntries(Object.entries(BODIES).map(([key, body]) => [key, body.name]));
+  const marker = (name: string) => ({ url: `/navigation/body-${name}.webp`, index: 0, count: 1, size: 5 });
   const entries = [{ key: 'marker-phase', url: publicBase + 'marker-phase.webp', pool: 'mounted' }, ...preparedSunResources(sun, 'mounted'), ...Object.entries(textures).map(([key, url]) => ({ key, url, pool: 'mounted' })),
     ...(ringTexture ? [{ key: 'ring', url: ringTexture.url, pool: 'mounted' }] : []), { key: 'marker', url: publicBase + 'marker.webp', pool: 'mounted' }];
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([...bodyLeaves, ...ringLeaves].map(leaf => leaf.style)) });
@@ -161,9 +161,9 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
       [{ kind: 'silhouette-fit', target: index(requiredMaterialRoot()), minimumRadius: 1.5, unitScale: 2 / scene.camera.logicalBodyDiameter }],
     heliocentricView: { plan: scene.heliocentricView,
       bodyMarker: { url: publicBase + 'marker.webp', index: 0, count: 1, size: 3 },
-      systemMarkers: { url: '/navigation/planet-markers.webp', sun: marker('sun'), bodies: Object.fromEntries(scene.heliocentricView.system.bodies.map(body => [body.id, marker(body.id)])),
+      systemMarkers: { url: '/navigation/body-sun.webp', sun: marker('sun'), bodies: Object.fromEntries(scene.heliocentricView.system.bodies.map(body => [body.id, marker(body.id)])),
         phase: { url: publicBase + 'marker-phase.webp', columns: 4, rowCount: 8, frameCount: 32, minimumLightViewZ: -1, maximumLightViewZ: 1, baseLightAzimuthDegrees: 0 } },
-      labels: { policy: { ...DEFAULT_LABEL_POLICY }, names: Object.fromEntries(Object.entries(BODIES).map(([key, value]) => [key, value.name])) } },
+      labels: { policy: { ...DEFAULT_LABEL_POLICY }, names: Object.fromEntries([...new Set([id, 'sun', ...scene.heliocentricView.system.bodies.map(body => body.id)])].map(key => [key, names[key]])) } },
   })));
   const { id: _id, controls: _controls, ...presentation } = definition;
   requirePreparedPresentation({ ...presentation, schema: 'cssearth-prepared-presentation@3' }, { controls: preparedContent.controls });

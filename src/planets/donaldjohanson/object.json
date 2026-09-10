@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4d6aa2fb948b394fb19bf926bce66aec134c83126e6b12b245cc7141cf2357aa"
+        "sha256": "21771f1072f0f623c81cd1e079972e56e75baca9fcb0ab04be1beb57450be581"
+      }
+    },
+    "catalog": {
+      "name": "Donaldjohanson",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.3839407716914627,
+      "description": "Explore Donaldjohanson in 3D with its published Lucy shape model.",
+      "systemName": "Solar System",
+      "order": 203,
+      "context": {
+        "order": 146
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "867ea2338fd32f28e9149a94c1b56fe2498536ac048108d50b824efea6adb82b"
+    "sha256": "c77a2125197dbe523a711ccd39a909b3f4bcbcdf10a9c6d6fc137c9e720ed869"
   }
 }

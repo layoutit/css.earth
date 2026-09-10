@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6ad0c01df66d95b912d21bf5a6dbd6647a1f8ea0c802c199ec37c2302f41f693"
+        "sha256": "cd450c79310c6e8fca80c93be4039f1623976c23a27cf0451c60f6476487abaf"
+      }
+    },
+    "catalog": {
+      "name": "Libussa",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7991273130765797,
+      "description": "Explore Libussa in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 344,
+      "context": {
+        "order": 390
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1ad3153314da997b3014fb775d6baa36a6d97aa0e1b3d205a4e85d697648cc6a"
+    "sha256": "f3dfc1d2c2fd264665b6393373a6f386e803de46f381ebcb949766a572f2b7f4"
   }
 }

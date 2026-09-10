@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7905dff38a8725faaa14a5ecdbcdffb994a7a6d8285574a5310ea7d529eedf15"
+        "sha256": "12daa135c2856c3e2f0cd980e1c18023be80e63cf530533bce46443c918dd20e"
+      }
+    },
+    "catalog": {
+      "name": "Ilse",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.377447027685721,
+      "description": "Explore Ilse in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 336,
+      "context": {
+        "order": 382
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "43752ae0debdb04ac79d539d8f5ecfb766846b4131ead04e680233408dff8b45"
+    "sha256": "8e05695c339c0c92c0d32df1d2855c16f996930cd7dbae02b951dc75e42aa86e"
   }
 }

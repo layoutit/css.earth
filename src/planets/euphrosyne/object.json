@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1efa2790d78095e1479c94e2380573b737d3da6745c483ae3aa12d38a9b70da3"
+        "sha256": "2eb21a56c45142856e9ae8df6f2da42168553ace5cccb6670414bf4303387e3f"
+      }
+    },
+    "catalog": {
+      "name": "Euphrosyne",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.162046843719569,
+      "description": "Explore Euphrosyne in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 147,
+      "context": {
+        "order": 78
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "bf9c48af82ce43475a984630f4ab0ad4e98a0170e91486ed4f3fb82364cff0fa"
+    "sha256": "1d646353449d69761c08bfa9e0c644d69a5b98eb8344192e3477fd6890490653"
   }
 }

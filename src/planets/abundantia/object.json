@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b8f23fa7ae15c279fe979698a2e8221efca851cd6ab606b6a6538b8c6c58898e"
+        "sha256": "5f92066f8a20a48e77a2b9b63264e1621ef2e58a0cb2624f03cac3174b2b8a33"
+      }
+    },
+    "catalog": {
+      "name": "Abundantia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.5919374543282623,
+      "description": "Explore Abundantia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 287,
+      "context": {
+        "order": 333
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "648d2b2b86b7f03e446d3ceef3851ca4a8a47ce989dd402f9130d10f03e1f1ef"
+    "sha256": "7a2b27c7ce7251a972c538dd6d7af041b7cf0272982cf99ab27dbbb745c279c3"
   }
 }

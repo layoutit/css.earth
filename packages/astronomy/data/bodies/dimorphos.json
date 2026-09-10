@@ -1,0 +1,52 @@
+{
+  "id": "dimorphos",
+  "classification": "satellite",
+  "order": 124,
+  "physical": {
+    "name": "Dimorphos",
+    "horizonsCode": "120065803",
+    "meanRadiusKm": 0.075,
+    "gravitationalParameterKm3PerS2": 3.0268e-10,
+    "parent": "didymos"
+  },
+  "physicalNotes": "DART s547 GM and released encounter-mesh reference radii; body source records.",
+  "satellite": {
+    "parent": "didymos",
+    "horizonsCode": "120065803",
+    "fitFromJdTdb": 2461256.5,
+    "fitToJdTdb": 2461316.5,
+    "fitStepDays": 1,
+    "poleRightAscensionRad": 1.216499624325,
+    "poleDeclinationRad": -1.268771869881,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 1.153,
+      "eccentricity": 0.006173817844,
+      "inclinationRad": 0,
+      "ascendingNodeRad": 0,
+      "argumentOfPeriapsisRad": -1.435881882365,
+      "meanAnomalyAtEpochRad": -128823.59287751079,
+      "meanMotionRadPerDay": 13.299921505540581,
+      "ascendingNodeRateRadPerDay": -0.02382006122008506,
+      "argumentOfPeriapsisRateRadPerDay": -0.010627794970585431
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "120065803",
+      "center": "500@920065803",
+      "parent": "didymos",
+      "fromJd": 2461256.5,
+      "toJd": 2461316.5,
+      "stepDays": 1,
+      "radial": true,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "120065803",
+      "center": "500@920065803",
+      "range": "dart"
+    }
+  }
+}

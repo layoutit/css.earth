@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "bd98bde5557fd9516e7b7654b62d3897040159ba494ff79a7d3612698d0d591f"
+        "sha256": "b12c1965397b99a1a20919171e02b534b7ff7ac7f93e52551dc7216bdd04dda9"
+      }
+    },
+    "catalog": {
+      "name": "Bebhionn",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Bebhionn, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 39,
+      "context": {
+        "order": 235
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "df3e124aff7fbf82351f8d18500cd7f9ebbad2bfcf72721017335e4dd2609b1f"
+    "sha256": "c60c4c18a2f6789f71a31935284e97b0593b160fbf77699616a634bb287bd219"
   }
 }

@@ -1,0 +1,56 @@
+{
+  "id": "squannit",
+  "classification": "satellite",
+  "order": 61,
+  "physical": {
+    "name": "Squannit",
+    "horizonsCode": null,
+    "meanRadiusKm": 0.22550434622701193,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "moshup"
+  },
+  "physicalNotes": "Shapes: occultation ellipsoid, original radar mesh and explicitly assumed-depth models.",
+  "sceneSatellite": {
+    "epochJdTt": 2461286.5,
+    "positionKm": [
+      -2.000074054122205,
+      -1.1687593303004233,
+      -1.0611359035782697
+    ],
+    "velocityKmPerDay": [
+      -10.394350942443587,
+      19.32329253062684,
+      -1.6914014518029203
+    ],
+    "centerBodyId": "moshup",
+    "gravitationalParametersKm3PerS2": {
+      "body": 8.971515858775238e-09,
+      "parent": 1.5637019863480103e-07,
+      "combined": 1.6534171449357626e-07
+    },
+    "systemGmKm3PerS2": 1.6534171449357626e-07,
+    "provenance": {
+      "model": "Published mutual-orbit model evaluated once at prepared epoch",
+      "epochJdTt": 2461286.5,
+      "referenceFrame": "ICRF",
+      "source": "https://arxiv.org/abs/1912.06456v2",
+      "sourcePath": "src/planets/squannit/source/orbit/published-parameters.json",
+      "sha256": "0061b2a8a915b03b9cd65cb4216fb757249ae868face4c8014e95cdbb86bb2bf",
+      "timeQualification": "The paper defines JD 2455305.0 as asterocentric (light-time-corrected), without naming UTC/TT/TDB. This preparation treats that numerical epoch as TT; a clock-scale ambiguity up to 70 seconds contributes less than 0.41 degree of phase, separate from the much larger source-parameter/extrapolation uncertainty. No light-time correction is applied to the resulting geometric vector.",
+      "limitations": [
+        "The 2026 position extrapolates the 2000–2019 photometric drift fit. It is context, not an observed or precisely predicted current position.",
+        "The sum of the individual phase-sensitivity ranges is about 55 degrees at this scene epoch; future drift changes and missing covariance can increase actual uncertainty.",
+        "J2000 equatorial axes are treated as ICRF at this coarse precision; the small frame bias is negligible relative to source pole errors.",
+        "No present-epoch attitude or libration prediction is inferred from this mutual orbit.",
+        "The original 2006 Beta mesh scale is retained independently of the 2021 photometric preference for a secondary about 130% as large."
+      ]
+    }
+  },
+  "acquisition": {
+    "sceneSatellite": {
+      "parent": "moshup",
+      "target": null,
+      "center": null
+    }
+  }
+}

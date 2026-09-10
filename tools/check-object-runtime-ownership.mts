@@ -244,7 +244,7 @@ export function inspectObjectRuntimeModule(source: string, file: string, { share
 }
 
 type RegistryEntry = {kind: 'descriptor'; client: string; descriptor: string; exported: string} | {kind: 'contextual' | 'legacy'; client: string; exported: string; context: string | null};
-function registryLoaders(source: string, root: string) {
+async function registryLoaders(source: string, root: string, readSource: (path: string) => Promise<string>) {
   const ast = parseRuntimeSource(source, registryPath), imports = new Map<string, string>(), entries = new Map<string, RegistryEntry>(), importOffsets = new Set<number>(), descriptors = new Map<string, string>(), descriptorImports = new Set<string>();
   const preparedJsonImports = new Map<string, string>();
   function fail(message: string): never { throw new TypeError(`Actual OBJECTS registry: ${message}.`); }
@@ -257,6 +257,9 @@ function registryLoaders(source: string, root: string) {
   }
   const definitions = ast.body.flatMap(node => node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'VariableDeclaration' ? node.declaration.declarations : []).filter(node => nameOf(node.id) === 'OBJECTS');
   const call = definitions[0]?.init, array = call?.type === 'CallExpression' ? call.arguments[0] : undefined;
+  if (definitions.length === 1 && call?.type === 'CallExpression' && imports.get(nameOf(call.callee)) === 'defineObjects' && call.arguments.length === 1 && array?.type === 'CallExpression') {
+    return catalogRegistryLoaders(ast, array, root, readSource);
+  }
   if (definitions.length !== 1 || call?.type !== 'CallExpression' || imports.get(nameOf(call.callee)) !== 'defineObjects' || call.arguments.length !== 1 || array?.type !== 'ArrayExpression' || !array.elements.length) fail('requires one concrete registry array');
   const helpers = new Map(ast.body.filter(node => node.type === 'FunctionDeclaration').map(node => [nameOf(node.id), node]));
   for (const entry of array.elements) {
@@ -323,7 +326,108 @@ function registryLoaders(source: string, root: string) {
     }
     importOffsets.add(sourceStart(imported));
   }
-  return {entries, importOffsets, descriptorImports};
+  return {entries, importOffsets, descriptorImports, descriptorFile: registryPath};
+}
+
+/** Follow the generated JSON inventory without executing it or its loaders. */
+async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, root: string, readSource: (path: string) => Promise<string>) {
+  function fail(message: string): never { throw new TypeError(`Actual OBJECTS registry: ${message}.`); }
+  function kind<K extends Node['type']>(node: Node | null | undefined, type: K): Extract<Node, {type: K}> {
+    const value = astKind(node, type);
+    if (!value) fail('catalogue loader must forward its bound descriptor unchanged');
+    return value;
+  }
+  const namedImport = (program: Program, owner: string, exported: string) => program.body.flatMap(node =>
+    node.type === 'ImportDeclaration' && node.source.value === owner ? node.specifiers.flatMap(specifier =>
+      specifier.type === 'ImportSpecifier' && nameOf(specifier.imported) === exported ? [specifier.local.name] : []) : []);
+  const descriptorFile = 'site/prepared-object-catalog.mts';
+  const inventoryNames = namedImport(ast, './prepared-object-catalog.mts', 'OBJECT_DESCRIPTORS');
+  const entryNames = namedImport(ast, './object-catalog.mts', 'catalogEntry');
+  const map = kind(mapping.callee, 'MemberExpression');
+  if (inventoryNames.length !== 1 || entryNames.length !== 1 || map.computed || map.optional || mapping.type !== 'CallExpression' || mapping.optional ||
+      nameOf(map.object) !== inventoryNames[0] || nameOf(map.property) !== 'map' || mapping.arguments.length !== 1) fail('requires the prepared descriptor inventory');
+  const mapper = kind(mapping.arguments[0], 'ArrowFunctionExpression');
+  const statements = kind(mapper.body, 'BlockStatement').body;
+  if (mapper.async || mapper.params.length !== 1 || statements.length !== 2) fail('catalogue loader factory must only bind one descriptor');
+  const parameter = kind(mapper.params[0], 'Identifier').name;
+  const variable = kind(statements[0], 'VariableDeclaration');
+  if (variable.kind !== 'const' || variable.declarations.length !== 1) fail('catalogue loader factory must only bind one descriptor');
+  const declaration = variable.declarations[0], pattern = kind(declaration.id, 'ObjectPattern');
+  const binding = kind(declaration.init, 'CallExpression');
+  if (pattern.properties.length !== 3 || !['order', 'context'].every((name, index) => {
+    const field = pattern.properties[index];
+    return field.type === 'Property' && !field.computed && field.kind === 'init' && nameOf(field.key) === name && field.value.type === 'Identifier';
+  }) || binding.optional || nameOf(binding.callee) !== entryNames[0] || binding.arguments.length !== 2 || nameOf(binding.arguments[0]) !== parameter) fail('catalogue loader must forward its bound descriptor unchanged');
+  const rest = kind(pattern.properties[2], 'RestElement');
+  if (nameOf(kind(statements[1], 'ReturnStatement').argument) !== kind(rest.argument, 'Identifier').name) fail('catalogue mapper must return the declared object');
+  const loader = kind(binding.arguments[1], 'ArrowFunctionExpression');
+  const loaderStatements = kind(loader.body, 'BlockStatement').body;
+  if (!loader.async || loader.params.length || loaderStatements.length !== 2) fail('catalogue loader factory must import and return one binding');
+  const importedVariable = kind(loaderStatements[0], 'VariableDeclaration');
+  if (importedVariable.kind !== 'const' || importedVariable.declarations.length !== 1) fail('catalogue loader must import one binding');
+  const importedDeclaration = importedVariable.declarations[0], importedPattern = kind(importedDeclaration.id, 'ObjectPattern');
+  const imported = kind(kind(importedDeclaration.init, 'AwaitExpression').argument, 'ImportExpression');
+  if (importedPattern.properties.length !== 1 || imported.source.type !== 'Literal' || imported.source.value !== './packaged-object-runtime.mts' || imported.options) fail('catalogue loader must use the shared package transport');
+  const field = kind(importedPattern.properties[0], 'Property');
+  const returned = kind(kind(loaderStatements[1], 'ReturnStatement').argument, 'CallExpression');
+  if (field.computed || field.kind !== 'init' || nameOf(field.key) !== 'loadPackagedObject' || returned.optional ||
+      nameOf(returned.callee) !== kind(field.value, 'Identifier').name || returned.arguments.length !== 1 || nameOf(returned.arguments[0]) !== parameter) fail('catalogue loader must forward its bound descriptor unchanged');
+
+  const entryAst = parseRuntimeSource(await readSource(resolve(root, 'site/object-catalog.mts')), 'site/object-catalog.mts');
+  const entry = entryAst.body.flatMap(node => node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'FunctionDeclaration' && nameOf(node.declaration.id) === 'catalogEntry' ? [node.declaration] : []);
+  const definitions = namedImport(entryAst, './object-schema.mts', 'defineObject');
+  if (entry.length !== 1 || definitions.length !== 1 || entry[0].params.length !== 2) fail('catalogue helper must bind its own actual JSON descriptor');
+  const input = kind(entry[0].params[0], 'Identifier').name, loadScene = kind(entry[0].params[1], 'Identifier').name;
+  const objectCalls: CallExpression[] = [];
+  walkRuntimeAst(entry[0], node => {
+    if (node.type === 'AssignmentExpression' || node.type === 'UpdateExpression') {
+      const target = node.type === 'AssignmentExpression' ? node.left : node.argument;
+      if ([input, loadScene].includes(nameOf(target)) || memberPath(target)?.[0] === input) fail('catalogue helper cannot replace the object id, loader or world frame');
+    }
+    if (node.type === 'CallExpression' && nameOf(node.callee) === definitions[0]) objectCalls.push(node);
+  });
+  if (objectCalls.length !== 1 || objectCalls[0].arguments.length !== 1) fail('catalogue helper must declare one object');
+  const fields = kind(objectCalls[0].arguments[0], 'ObjectExpression');
+  const properties = staticObjectProperties(fields);
+  if (new Set(properties.map(field => propertyKey(field.key))).size !== properties.length ||
+      memberPath(property(fields, 'id')?.value)?.join('.') !== `${input}.id` ||
+      memberPath(property(fields, 'worldFrame')?.value)?.join('.') !== `${input}.properties.worldFrame` ||
+      nameOf(property(fields, 'loadScene')?.value) !== loadScene) fail('catalogue helper cannot replace the object id, loader or world frame');
+  const result = kind(kind(entry[0].body.body.at(-1), 'ReturnStatement').argument, 'ObjectExpression');
+  if (result.properties.length !== 3 || result.properties[0].type !== 'SpreadElement' || result.properties[0].argument !== objectCalls[0] ||
+      result.properties[1].type !== 'Property' || result.properties[1].computed || propertyKey(result.properties[1].key) !== 'order' ||
+      result.properties[2].type !== 'SpreadElement' || result.properties[2].argument.type !== 'ConditionalExpression') fail('catalogue helper must return the declared object unchanged');
+  const conditional = result.properties[2].argument;
+  if (nameOf(conditional.test) !== 'context' || conditional.consequent.type !== 'ObjectExpression' || conditional.consequent.properties.length !== 1 ||
+      nameOf(property(conditional.consequent, 'context')?.value) !== 'context' || conditional.alternate.type !== 'ObjectExpression' || conditional.alternate.properties.length) fail('catalogue helper cannot overwrite its declared object');
+
+  const inventory = parseRuntimeSource(await readSource(resolve(root, descriptorFile)), descriptorFile);
+  const imports = new Map<string, string>(), descriptorImports = new Set<string>();
+  const declarations: VariableDeclarator[] = [];
+  for (const statement of inventory.body) {
+    if (statement.type === 'ImportDeclaration') {
+      const specifier = statement.specifiers[0];
+      if (statement.specifiers.length !== 1 || specifier?.type !== 'ImportDefaultSpecifier' || typeof statement.source.value !== 'string' ||
+          !/^\.\.\/src\/planets\/[a-z][a-z0-9-]*\/object\.json$/u.test(statement.source.value) ||
+          statement.attributes?.length !== 1 || propertyKey(statement.attributes[0].key) !== 'type' || statement.attributes[0].value.value !== 'json' ||
+          imports.has(specifier.local.name) || descriptorImports.has(statement.source.value)) fail('prepared catalogue must contain unique JSON descriptor imports');
+      imports.set(specifier.local.name, statement.source.value); descriptorImports.add(statement.source.value);
+    } else if (statement.type === 'ExportNamedDeclaration' && statement.declaration?.type === 'VariableDeclaration' && statement.declaration.kind === 'const') declarations.push(...statement.declaration.declarations);
+    else fail('prepared catalogue must contain only JSON imports and its descriptor array');
+  }
+  if (declarations.length !== 1 || nameOf(declarations[0].id) !== 'OBJECT_DESCRIPTORS') fail('prepared catalogue must export one descriptor array');
+  const array = kind(declarations[0].init, 'ArrayExpression');
+  if (!array.elements.length || array.elements.length !== imports.size || new Set(array.elements.map(nameOf)).size !== imports.size) fail('prepared catalogue must include each descriptor once');
+  const entries = new Map<string, RegistryEntry>();
+  for (const element of array.elements) {
+    const path = imports.get(nameOf(element));
+    if (!path) fail('prepared catalogue entries must name their JSON imports');
+    const descriptor = relative(root, resolve(root, dirname(descriptorFile), path));
+    const value: unknown = JSON.parse(await readSource(resolve(root, descriptor)));
+    if (!isRecord(value) || typeof value.id !== 'string' || descriptor !== `src/planets/${value.id}/object.json` || entries.has(value.id)) fail('descriptor identity must match its own actual JSON descriptor');
+    entries.set(value.id, {kind: 'descriptor', client: 'site/packaged-object-runtime.mts', descriptor, exported: 'loadPackagedObject'});
+  }
+  return {entries, importOffsets: new Set([sourceStart(imported)]), descriptorImports, descriptorFile};
 }
 
 function contextualClient(source: string, file: string, root: string, expectedExport: string) {
@@ -580,7 +684,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
   readText = path => readFile(path, "utf8"), verifyDefinition, strict = true,
   listRuntimeFiles = async directory => (await readdir(directory, { recursive: true })).filter(file => /\.(?:m?[jt]s|c[jt]s|[jt]sx)$/.test(file)) }: AuditOptions = {}) {
   const entries = [], sharedClosure = new Set<string>(), sharedViolations: Violation[] = [], cameraFactorySites: FactorySite[] = [];
-  let registry: ReturnType<typeof registryLoaders> = { entries: new Map(), importOffsets: new Set(), descriptorImports: new Set() };
+  let registry: Awaited<ReturnType<typeof registryLoaders>> = { entries: new Map(), importOffsets: new Set(), descriptorImports: new Set(), descriptorFile: registryPath };
   const sharedEdges = new Map<string, Set<string>>(), sharedFactoryCalls = new Map<string, number>(), sharedVisits = new Map<string, boolean>();
   const cache = new Map<string, Inspection>();
   const verify = verifyDefinition ?? (async (object: AuditObject, input: unknown) => {
@@ -611,7 +715,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     if (!cache.has(key)) {
       cache.set(key, inspectObjectRuntimeModule(await source(path), relative(root, path), { shared, shellContent, serverOnly, objectIds: OBJECTS.map(o => o.id),
         registryImportOffsets: path === resolve(root, registryPath) ? registry.importOffsets : new Set(),
-        registryDescriptors: path === resolve(root, registryPath) ? registry.descriptorImports : new Set() }));
+        registryDescriptors: path === resolve(root, registry.descriptorFile) ? registry.descriptorImports : new Set() }));
     }
     return cache.get(key)!;
   }
@@ -661,7 +765,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     for (const target of sharedEdges.get(path) ?? []) reachable(target, reached);
     return reached;
   }
-  try { registry = registryLoaders(await source(resolve(root, registryPath)), root); }
+  try { registry = await registryLoaders(await source(resolve(root, registryPath)), root, source); }
   catch (error) { sharedViolations.push({ file: registryPath, line: 1, reason: errorMessage(error) }); }
   await sharedVisit(resolve(root, registryPath));
   const assemblyRoots = new Set<string>();

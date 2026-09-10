@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e142a6a8bc3c51d669b2dbee570d789f52225653cc97356888ad28da436d4a86"
+        "sha256": "bb5568b94a1db7673fce1ca9cd4b56ccd8e81d4ea39497bbaa7fbec7fa69e4e9"
+      }
+    },
+    "catalog": {
+      "name": "Augusta",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.194929996448645,
+      "description": "Explore Augusta in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 339,
+      "context": {
+        "order": 385
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4a278e461aba0cfa017b85d285ccf854808a8bb270bf47b870a5a13130d3f18a"
+    "sha256": "60633cfc14af275d2bfd2251bcbe69ef967bc2fd4519be9f34c0495987d63fff"
   }
 }

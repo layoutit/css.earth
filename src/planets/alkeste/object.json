@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d9eb07ac69e0f109ec3176e3ba7ef89db6d9dd06ac3fe40f7e39ec29f938c717"
+        "sha256": "a0659455aefcdcb25cb499fc2454d3b062e38d7127f5d7ded63c56dcdc3fab77"
+      }
+    },
+    "catalog": {
+      "name": "Alkeste",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.629388047968044,
+      "description": "Explore Alkeste in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 272,
+      "context": {
+        "order": 317
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ae550e0d4c3a7c42b692b7b5423b795140d941e72750ee807c9ff5b4837a8d1f"
+    "sha256": "31bb61eec4fb94231faa40ba1fb761942e1e9c2df882da69b02f950d87afbb35"
   }
 }

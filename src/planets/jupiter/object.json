@@ -212,6 +212,18 @@
         "url": "prepared/page.json",
         "sha256": "a789bb9decfa530729a07f4d11ee939676f9f406bbbd3187047e8d27f51eacd9"
       }
+    },
+    "catalog": {
+      "name": "Jupiter",
+      "classification": "planet",
+      "color": "#b48b67",
+      "distanceAu": 5.2,
+      "description": "Explore Jupiter in 3D with cssEarth. Discover the solar system’s largest planet, its colorful cloud bands, giant storms, and orbiting moons.",
+      "systemName": "Solar System",
+      "order": 425,
+      "context": {
+        "order": 13
+      }
     }
   },
   "schema": "cssearth-object@1",

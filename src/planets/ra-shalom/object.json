@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "65e875593760bcd50b112f0079fb536a9d678aee3768e70e9fd8f4cb57972bb7"
+        "sha256": "d71d6c765205ca89390d8bc9481ea323899fef57d7241163d55d95ae8ef8124d"
+      }
+    },
+    "catalog": {
+      "name": "Ra-Shalom",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 0.8320332524916527,
+      "description": "Explore Ra-Shalom in 3D with its published radar shape model.",
+      "systemName": "Solar System",
+      "order": 212,
+      "context": {
+        "order": 172
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e521e7aafef4b34b92cc0eb724b9d83b9050d2cc0852511151e2bdec0a7c8473"
+    "sha256": "a741343bec34e330aafdda6157a79e0c7b0e1d8ab793de92175d02925ebe6e62"
   }
 }

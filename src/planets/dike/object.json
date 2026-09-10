@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c8161404c41baa0778de209f39b27b60a0d2c89792e089f97bd2339a0f038daa"
+        "sha256": "1ed948ef2ca6eaf7d3121b0b347b4bcf12222811ce40643549c2ad1c0fdeb07f"
+      }
+    },
+    "catalog": {
+      "name": "Dike",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.662672838262387,
+      "description": "Explore Dike in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 372,
+      "context": {
+        "order": 176
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "915253a4a418b078755b3d2d1701bbebcc9a58c386f7cca7da6a5b6c8b171588"
+    "sha256": "40952a4104b832fb0f66ee7c2e2e15daa526f27a0022c392df4fe3554045a8e8"
   }
 }

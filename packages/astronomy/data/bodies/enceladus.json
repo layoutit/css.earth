@@ -1,0 +1,51 @@
+{
+  "id": "enceladus",
+  "classification": "satellite",
+  "order": 226,
+  "physical": {
+    "name": "Enceladus",
+    "horizonsCode": "602",
+    "meanRadiusKm": 252.3,
+    "gravitationalParameterKm3PerS2": 7.210367,
+    "parent": "saturn"
+  },
+  "physicalNotes": "No measured GM is supplied for these small moons; zero means omitted mass.\nRadii: Thomas2013/IAU2015 shapes, not an inferred density or invented mass.",
+  "satellite": {
+    "parent": "saturn",
+    "horizonsCode": "602",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": 0.708249386714,
+    "poleDeclinationRad": 1.458004105707,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 238411.308,
+      "eccentricity": 0.004731227912,
+      "inclinationRad": 0.00014384842,
+      "ascendingNodeRad": -0.298701082302,
+      "argumentOfPeriapsisRad": 3.293171587183,
+      "meanAnomalyAtEpochRad": 167484.77442381973,
+      "meanMotionRadPerDay": 4.579638125589566,
+      "ascendingNodeRateRadPerDay": -0.007276284581585938,
+      "argumentOfPeriapsisRateRadPerDay": 0.013174823997286506
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "602",
+      "center": "500@699",
+      "parent": "saturn",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "602",
+      "center": "500@699"
+    }
+  }
+}

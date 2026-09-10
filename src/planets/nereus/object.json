@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "403d3db81272a50bb395d07f0b628620ccd44fba9a455522cca30cbb315c5ab9"
+        "sha256": "66e5c8db73bce230e256ee51493fdcc89401e0a6db991f6353eaa41219a37e4b"
+      }
+    },
+    "catalog": {
+      "name": "Nereus",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.485139038607293,
+      "description": "Explore Nereus in 3D with its published radar shape model.",
+      "systemName": "Solar System",
+      "order": 207,
+      "context": {
+        "order": 157
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f891cec21eb8751c61c842c6932af71a4ea91440a8bea087033917dd39907473"
+    "sha256": "a5f2a72959607a353218110cf44d744a25a9e386203f10530c28cc3ea08ccf07"
   }
 }

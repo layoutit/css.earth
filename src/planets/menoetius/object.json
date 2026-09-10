@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "86da076b10cd9992df5b8b8ad54e8497b79229496d7bf5c2809897a3cec5d3e8"
+        "sha256": "dfb7aedaff1aa71625e83b9a8af1114ea6a81117fcf2f5a73a41889a29e6a32b"
+      }
+    },
+    "catalog": {
+      "name": "Menoetius",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 5.226,
+      "description": "Explore Menoetius, the companion of Patroclus, through its occultation-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 26,
+      "context": {
+        "order": 252
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "50ab2300cb60a020c4882d7412fe101f8bb11dcf97a9e3795b4d64111d19e150"
+    "sha256": "e25644d92f96b6d6bb1a39903af5755858322f1e0e80f741f91d155934b2c6d6"
   }
 }

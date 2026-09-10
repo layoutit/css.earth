@@ -130,13 +130,26 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d8d7ce0654d375a55d11a5e7dda6c826c7bd1a3a6175859e3935611ddf312f33"
+        "sha256": "18ddb948993f00898683c608550b577bd5a0dc061d0ae425e7e64154ede2dd60"
+      }
+    },
+    "catalog": {
+      "name": "Titan",
+      "classification": "satellite",
+      "color": "#bca06b",
+      "distanceAu": 9.58,
+      "description": "Explore Titan in 3D with cssEarth. See through Saturn’s largest moon’s haze with Cassini near-infrared imagery.",
+      "systemName": "Solar System",
+      "order": 443,
+      "context": {
+        "order": 24,
+        "color": "#bea065"
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9d03ab085db8e838714f3450bf4c50b688e084c6f3288f41abcf5fecdf3b27f8"
+    "sha256": "85a0f1d06516cfa5bf258e4f48c2287d08a5fed3f8e11814240e39585a5ab2b3"
   }
 }

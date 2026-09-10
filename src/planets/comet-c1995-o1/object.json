@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9d3103cb1cede53333a4e7b20c2c5bebe5361398fe5b97d89ca7b092b207c110"
+        "sha256": "be01695734b9a1288764cd145c8fa5241e1bf0c7ad0f44f55dcc8650bf2be845"
       }
     },
     "worldFrame": {
@@ -112,11 +112,23 @@
       ],
       "metersPerUnit": 96.1893974433098,
       "bodyRadiusM": 22123.561411961255
+    },
+    "catalog": {
+      "name": "Hale–Bopp",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 51.070270471508714,
+      "description": "C/1995 O1: Hale–Bopp remained visible to the naked eye for about 18 months in 1996 and 1997. Its unusually large nucleus helped make it one of the most memorable comets of the twentieth century. Illustrative nucleus at Celestia’s catalog scale.",
+      "systemName": "Solar System",
+      "order": 64,
+      "context": {
+        "order": 453
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "bf33f6480ce460ed50a3eb05307fe0db22ae524fa5276a888c731a6479d97f71"
+    "sha256": "ab3804e4ccf83aac78e2c79ad6175616f34e04cb7b8e1858f9bc9ccb22c4add9"
   }
 }

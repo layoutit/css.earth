@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ba481e3b3ee2afce0b5ccdd49fbc2c623532e1ad8fe86613e6ce7a633bd87032"
+        "sha256": "2367b3835739704a907874aaeda26adaeea84b75a7c666f6b229225bcfb135ec"
       }
     },
     "worldFrame": {
@@ -112,11 +112,23 @@
       ],
       "metersPerUnit": 1.7154544407422103,
       "bodyRadiusM": 394.55452137070836
+    },
+    "catalog": {
+      "name": "2001 SN263 Beta",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 1.9869,
+      "description": "Explore the larger outer moon of 2001 SN263 through its archived radar shape.",
+      "systemName": "Solar System",
+      "order": 16,
+      "context": {
+        "order": 461
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d809c90a8e648be6fbbf9682a6756c680b6e3eecc5b9df7e3430bb67b9b0c7d2"
+    "sha256": "c753af4e3b8cf49a04f58e5fbed38fa6c30ebde7b655a15c09bfeb3fda8afe56"
   }
 }

@@ -1,0 +1,242 @@
+{
+  "id": "himalia",
+  "classification": "satellite",
+  "order": 69,
+  "physical": {
+    "name": "Himalia",
+    "horizonsCode": "506",
+    "meanRadiusKm": 85,
+    "gravitationalParameterKm3PerS2": 0.15155,
+    "parent": "jupiter"
+  },
+  "physicalNotes": "Buie et al. (2015) primary axes; JPL primary GM. Physical primary, not binary barycenter.",
+  "satellite": {
+    "parent": "jupiter",
+    "horizonsCode": "506",
+    "positionCorrection": {
+      "epochJdTt": 2461039.5,
+      "axes": [
+        {
+          "constantKm": 30009.94325429379,
+          "harmonics": [
+            {
+              "rateRadPerDay": 0.0029646808259455332,
+              "cosineKm": 100274.23243848313,
+              "sineKm": 167052.4452119647
+            },
+            {
+              "rateRadPerDay": 0.04741881674460549,
+              "cosineKm": 63574.28372015496,
+              "sineKm": 5506.681852830033
+            },
+            {
+              "rateRadPerDay": 0.07234573702281216,
+              "cosineKm": 64875.42224192787,
+              "sineKm": 21297.072441090153
+            },
+            {
+              "rateRadPerDay": 0.022652707921765457,
+              "cosineKm": 13752.772268981043,
+              "sineKm": -48689.91786073769
+            },
+            {
+              "rateRadPerDay": 0.024585647906217305,
+              "cosineKm": -31133.085318344438,
+              "sineKm": -42574.931983293325
+            },
+            {
+              "rateRadPerDay": 0.004273040702856954,
+              "cosineKm": 32763.53360262958,
+              "sineKm": -22905.986214497563
+            },
+            {
+              "rateRadPerDay": 0.05096601030650169,
+              "cosineKm": 18133.959069489392,
+              "sineKm": 28705.706934358346
+            },
+            {
+              "rateRadPerDay": 0.0022310024404158125,
+              "cosineKm": 101365.37302915915,
+              "sineKm": 52191.43951709752
+            },
+            {
+              "rateRadPerDay": 0.049691040972029796,
+              "cosineKm": -3479.532458179606,
+              "sineKm": -25338.60184712764
+            },
+            {
+              "rateRadPerDay": 0.028848858219731405,
+              "cosineKm": 18141.335041807262,
+              "sineKm": -491.5466360867289
+            }
+          ]
+        },
+        {
+          "constantKm": -33704.01594007873,
+          "harmonics": [
+            {
+              "rateRadPerDay": 0.002696242935474784,
+              "cosineKm": -146672.48829735263,
+              "sineKm": 191452.39277887423
+            },
+            {
+              "rateRadPerDay": 0.024292474836789913,
+              "cosineKm": 81846.57216398772,
+              "sineKm": 156692.9999161045
+            },
+            {
+              "rateRadPerDay": 0.0014345172576732943,
+              "cosineKm": -12807.589703151174,
+              "sineKm": -88124.18358055875
+            },
+            {
+              "rateRadPerDay": 0.026919903595794683,
+              "cosineKm": 13994.677876343643,
+              "sineKm": 62282.8107760244
+            },
+            {
+              "rateRadPerDay": 0.047381489402408876,
+              "cosineKm": 13236.282616360255,
+              "sineKm": 51977.29545966038
+            },
+            {
+              "rateRadPerDay": 0.022301443236601954,
+              "cosineKm": 28533.72057853031,
+              "sineKm": -44625.7600557165
+            },
+            {
+              "rateRadPerDay": 0.07233756331692293,
+              "cosineKm": -518.639754059563,
+              "sineKm": 50442.60648327065
+            },
+            {
+              "rateRadPerDay": 0.05122962876017515,
+              "cosineKm": -13394.34963591985,
+              "sineKm": 20875.88208636331
+            },
+            {
+              "rateRadPerDay": 0.004834506469642046,
+              "cosineKm": 12490.68393489215,
+              "sineKm": 18520.92599177111
+            },
+            {
+              "rateRadPerDay": 0.049398143393009165,
+              "cosineKm": 13803.08552760652,
+              "sineKm": 9031.086845453607
+            }
+          ]
+        },
+        {
+          "constantKm": 203650.91880255687,
+          "harmonics": [
+            {
+              "rateRadPerDay": 0.0037887780131041085,
+              "cosineKm": 9776.745707779573,
+              "sineKm": 56344.486295356764
+            },
+            {
+              "rateRadPerDay": 0.024249856810924408,
+              "cosineKm": -84895.21835501927,
+              "sineKm": -129282.86082588047
+            },
+            {
+              "rateRadPerDay": 0.021912890812038167,
+              "cosineKm": -129953.54976824863,
+              "sineKm": -73427.34905752802
+            },
+            {
+              "rateRadPerDay": 0.0014345171934199968,
+              "cosineKm": -1788956.3816406236,
+              "sineKm": -557695.1373261032
+            },
+            {
+              "rateRadPerDay": 0.02688452082645129,
+              "cosineKm": -31399.964101276066,
+              "sineKm": -54836.52580270608
+            },
+            {
+              "rateRadPerDay": 0.04739412730642389,
+              "cosineKm": -25908.934712523744,
+              "sineKm": 49372.84533269984
+            },
+            {
+              "rateRadPerDay": 0.0723571092814653,
+              "cosineKm": -29904.27647497727,
+              "sineKm": 46548.54223253526
+            },
+            {
+              "rateRadPerDay": 0.0017931465560282762,
+              "cosineKm": 3023500.6985137044,
+              "sineKm": 662350.4465146102
+            },
+            {
+              "rateRadPerDay": 0.0021517758883002726,
+              "cosineKm": -1629106.8029938417,
+              "sineKm": -164821.57651656866
+            },
+            {
+              "rateRadPerDay": 0.051231411575201356,
+              "cosineKm": -25403.300739045713,
+              "sineKm": 7279.026233405159
+            }
+          ]
+        }
+      ]
+    },
+    "longitudeHarmonics": [
+      {
+        "rateRadPerDay": 0.0025118460436452713,
+        "cosineRad": -0.011222365652612825,
+        "sineRad": 0.0032712158808157286,
+        "epochJdTt": 2461039.5
+      },
+      {
+        "rateRadPerDay": 0.022223734526850135,
+        "cosineRad": -0.007404710967593478,
+        "sineRad": 0.0034346352775274165,
+        "epochJdTt": 2461039.5
+      },
+      {
+        "rateRadPerDay": 0.04723892555096029,
+        "cosineRad": 0.007653414959790313,
+        "sineRad": -0.0018838723196811947,
+        "epochJdTt": 2461039.5
+      }
+    ],
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 5,
+    "poleRightAscensionRad": -1.185698022572,
+    "poleDeclinationRad": 0.701000623167,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 11451414.65,
+      "eccentricity": 0.15374142601,
+      "inclinationRad": 0.026595174262,
+      "ascendingNodeRad": -3.076149632449,
+      "argumentOfPeriapsisRad": 3.560308400444,
+      "meanAnomalyAtEpochRad": -181.279000325133,
+      "meanMotionRadPerDay": 0.025022373660937,
+      "ascendingNodeRateRadPerDay": -0.00097811795245349,
+      "argumentOfPeriapsisRateRadPerDay": 0.001039096103296593
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "506",
+      "center": "500@599",
+      "parent": "jupiter",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 5,
+      "radial": true,
+      "libration": true,
+      "positionCorrection": true
+    },
+    "fixture": {
+      "target": "506",
+      "center": "500@599",
+      "range": "daily"
+    }
+  }
+}

@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8039eea7df1b7adc31ee11786c8936244d7825cc51336295c22e11b6b7969431"
+        "sha256": "63981b2cc7ad55c4dbc520d4265e859bfb4995c7fcdcccdd8b4a0ce7506fbe08"
+      }
+    },
+    "catalog": {
+      "name": "Tyche",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.61507505241983,
+      "description": "Explore Tyche in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 341,
+      "context": {
+        "order": 387
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8b478bb95619613af4d2ce503aea4ac2ef4909218cb9d504a85959bb9b354290"
+    "sha256": "801cb2ee43515729916f23f7ea87c2ae0941208e80cd0ee1ff04dc7d247eaa22"
   }
 }

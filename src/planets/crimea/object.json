@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5120e4285257a9e1eb81b2ca2eaa3459b1f53a83c74bb6b869497427f14ab86c"
+        "sha256": "bd832069e0833646c5767f528b28a8552b85775ee7ff16925b1af7c255587f6f"
+      }
+    },
+    "catalog": {
+      "name": "Crimea",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7724619385411438,
+      "description": "Explore Crimea in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 406,
+      "context": {
+        "order": 210
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4c355a0b3f6b6b7db5cf5a36df442b7a9a41294b8410763ae695d48aef17d0ec"
+    "sha256": "f0dc53fa95b65b85a1de5a211d24e58c23160f137a940089e886f6142b774d02"
   }
 }

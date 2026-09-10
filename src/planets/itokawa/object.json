@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "79bea56d45e4d89f7286513f5099fd9f2702bdc767fa037b482b3b854ba709f3"
+    "sha256": "f8b36b6e068923f48eafd73b2a4c32ba19cde167e3ae0dbaee30e97ee5a7d08d"
   },
   "id": "itokawa",
   "properties": {
@@ -118,7 +118,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e3faba7df4e5ba79be9e4c4bebf77d81d66cccbfc05dd6ca14c77fb1d55036fd"
+        "sha256": "19b80c464dfe580ccbebd9075462a675a3bc2c2ee2b21b040a07b688b0670281"
+      }
+    },
+    "catalog": {
+      "name": "Itokawa",
+      "classification": "asteroid",
+      "color": "#a49c8d",
+      "distanceAu": 1.323,
+      "description": "Explore Itokawa in 3D with cssEarth using mission-derived shape and surface data.",
+      "systemName": "Solar System",
+      "order": 124,
+      "context": {
+        "order": 8
       }
     }
   },

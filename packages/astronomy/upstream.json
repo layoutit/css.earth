@@ -29,8 +29,8 @@
   "rewrittenFiles": {},
   "excludedFiles": {},
   "importNote": "The TypeScript source imports relative modules as `./x.js` while the files are `./x.ts` (the TS/ESM convention). Vite and Astro resolve that natively, so browser-side consumption works verbatim. Node does not: importing src/index.ts directly fails on the first `.js` specifier. Decision: a package is consumed through its own build step, never a specifier rewrite or a resolver hook, so the source stays byte-identical to its origin. For the astronomy package `pnpm build:astronomy` runs its tsup config into the gitignored dist/, which the workspace link resolves as `@cssearth/astronomy` (`pnpm install` runs it as postinstall); Node-side consumers go through src/platform/astronomy-package.mts (tools/prepare-solar-geometry.mts first). A catalog consumer would be wired the same way.",
-  "fileCount": 20,
-  "byteCount": 311507,
+  "fileCount": 19,
+  "byteCount": 307088,
   "files": {
     "src/__fixtures__/compare.ts": {
       "sha256": "931eef57a5bb089623b82cebf29ae8f22723e9f364b3f0b275ab7249d5b45a7a",
@@ -43,10 +43,6 @@
     "src/angles.ts": {
       "sha256": "6488f3df56bcf314b4cf7c920845c0d88335dd4b0af295270485e3581f98f16e",
       "bytes": 3523
-    },
-    "src/data/dwarfPlanetElements.data.ts": {
-      "sha256": "6b7cc046490c9ebc4de35e63f200b4920dfa5a94c718508d0a8f3b39a882ae4d",
-      "bytes": 4419
     },
     "src/data/elp2000.data.ts": {
       "sha256": "02b1aa03713b8cfbe112d169ccb6cefa13f6d0aee31ad0029b6567cb9b817bc3",
@@ -128,16 +124,8 @@
     "source/scene-epoch/mimas.txt",
     "source/scene-epoch/phobos.txt",
     "source/scene-epoch/triton.txt",
-    "src/__fixtures__/horizons.asteroids-1.ts",
-    "src/__fixtures__/horizons.asteroids-2.ts",
-    "src/__fixtures__/horizons.asteroids-3.ts",
-    "src/__fixtures__/horizons.asteroids-4.ts",
     "src/__fixtures__/horizons.asteroids.ts",
     "src/__fixtures__/horizons.comets.ts",
-    "src/__fixtures__/horizons.moons-and-small-bodies-2.ts",
-    "src/__fixtures__/horizons.moons-and-small-bodies-3.ts",
-    "src/__fixtures__/horizons.moons-and-small-bodies.ts",
-    "src/__fixtures__/horizons.planetary.ts",
     "src/__fixtures__/horizons.ts",
     "src/__fixtures__/rotation.ts",
     "src/asteroids.test.ts",
@@ -148,21 +136,10 @@
     "src/body-types.ts",
     "src/comets.test.ts",
     "src/comets.ts",
-    "src/data/asteroidElements-1.data.ts",
-    "src/data/asteroidElements-2.data.ts",
-    "src/data/asteroidElements-3.data.ts",
-    "src/data/asteroidElements-4.data.ts",
     "src/data/asteroidElements.data.ts",
     "src/data/cometElements.data.ts",
-    "src/data/satelliteElements.data.didymos.ts",
-    "src/data/satelliteElements.data.jupiter.ts",
-    "src/data/satelliteElements.data.mars.ts",
-    "src/data/satelliteElements.data.neptune.ts",
-    "src/data/satelliteElements.data.pluto.ts",
-    "src/data/satelliteElements.data.saturn-2.ts",
-    "src/data/satelliteElements.data.saturn.ts",
+    "src/data/dwarfPlanetElements.data.ts",
     "src/data/satelliteElements.data.ts",
-    "src/data/satelliteElements.data.uranus.ts",
     "src/data/sceneSatelliteStates.data.ts",
     "src/dwarfPlanets.test.ts",
     "src/dwarfPlanets.ts",
@@ -184,11 +161,13 @@
     "src/solarSystem.ts",
     "tools/acquire-scene-ephemeris.mts",
     "tools/body-epoch-ephemeris.mts",
+    "tools/body-records.mts",
     "tools/fetch-fixtures.mts",
     "tools/fetch-rotation-fixtures.mts",
     "tools/generate-asteroids.mts",
     "tools/generate-comets.mts",
     "tools/generate-dwarf-planets.mts",
+    "tools/generate-heliocentric.mts",
     "tools/generate-satellites.mts",
     "tools/generate-scene-satellites.mts",
     "tools/generate-series.mts",
@@ -209,7 +188,8 @@
     "tools/lib/vsop87.mts",
     "tools/lib/write-record-sections.mts",
     "tools/scene-ephemeris.mts",
-    "tools/tsconfig.json"
+    "tools/tsconfig.json",
+    "tools/verify-sn263-orbits.py"
   ],
   "originalLocalFileHashes": {
     "AGENTS.md": {
@@ -367,6 +347,14 @@
       "lastMirroredBytes": 9623,
       "lastMirroredSubtreeCommit": "ec8b1c28f25549655e5de95aa05aeda0356d1611",
       "reason": "The distant-world integration added source-backed hyperbolic Kepler support. Current bytes are maintained locally and are not attributed to the last mirrored commit."
+    },
+    "src/data/dwarfPlanetElements.data.ts": {
+      "lastMirroredSha256": "6b7cc046490c9ebc4de35e63f200b4920dfa5a94c718508d0a8f3b39a882ae4d",
+      "reason": "Preparation now assembles individual local body records."
     }
-  }
+  },
+  "locallyMaintainedDirectories": [
+    "data/",
+    "src/data/generated/"
+  ]
 }

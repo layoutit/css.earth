@@ -1,0 +1,14 @@
+{
+  "id": "jupiter",
+  "classification": "planet",
+  "order": 208,
+  "classificationOrder": 4,
+  "physical": {
+    "name": "Jupiter",
+    "horizonsCode": "599",
+    "meanRadiusKm": 69911,
+    "gravitationalParameterKm3PerS2": 126686531.9,
+    "parent": "sun"
+  },
+  "physicalNotes": "Published radar-model scales; use a documented primary mass where available."
+}

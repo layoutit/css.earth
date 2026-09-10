@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b0774aba519511b22b59302070e77d16998d360ca6e7531e85fe6229751c955e"
+        "sha256": "8af18837551dacbaa035a62c75e723c6253547fba059e0eee22394c167072853"
+      }
+    },
+    "catalog": {
+      "name": "Diomedes",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 5.229240298100407,
+      "description": "Explore Diomedes in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 362,
+      "context": {
+        "order": 407
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b584e59e411b332b3937e36b6de878474bef481caba4dacf7f83b29575deb113"
+    "sha256": "81069c96d91576aa273e9742c69d543f269d8033dd8f12a1b1b25defdeeeae5c"
   }
 }

@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e0f20ce63101c65a5910e29a7acb018a1f4465a888974db77ded22c73ea2d433"
+        "sha256": "5034a131aac102062d552b82101c36082b60d622a0ad66ac1ce2b42bdecd3273"
+      }
+    },
+    "catalog": {
+      "name": "Tarvos",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Tarvos, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 32,
+      "context": {
+        "order": 228
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "21672fe7bbbc17939968383878e7bad8c617f5f7a5b9a91a7d4446c50621928f"
+    "sha256": "4c3db28f6c54444d04cb34cad0b68c85c48d25bdfbdffb053da974607c0b1943"
   }
 }

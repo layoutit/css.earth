@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "35a783bde28c00fce9ab1ce8fc85d8abc66015fa58b621ee52d84f65f7c33376"
+        "sha256": "5f244d2be023a694d9132a4587af08287a1f9424f9c0fe853b2e84b3a073c901"
+      }
+    },
+    "catalog": {
+      "name": "Erigone",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.367053015804557,
+      "description": "Explore Erigone in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 295,
+      "context": {
+        "order": 341
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d0988d666ab972e9e6803b1f00b81eccb01b86817b3cb66ae245a37c99883539"
+    "sha256": "9debc80077860a7c8377539f65142ce5d1e6d158c8b8ee8c980e6ded581fdfec"
   }
 }

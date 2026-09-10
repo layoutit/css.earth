@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a2996410a82c88a1b7bf55db877fbef16fde62ceca87d4e6e0feb724eca89824"
+        "sha256": "2fd90505354d3bb695499b525bf13a50ca586e9fafddafa0e61395111594886d"
+      }
+    },
+    "catalog": {
+      "name": "Bianca",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 19.2,
+      "description": "Explore Bianca, an inner moon of Uranus, through its measured shape.",
+      "systemName": "Solar System",
+      "order": 93,
+      "context": {
+        "order": 147
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3cc644b59805a32b1989d27c70fd0d11e94e2c864f337518fbf62facc1bfe10d"
+    "sha256": "aaeb3c2a6ce027e60aa79c6c4047f823a60a78340982f7d5441c7e0916abd760"
   }
 }

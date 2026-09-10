@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f7c6c12202eb4cb689abca4efdc97c454e231ed1bfeea8a44b8b01bbf7433627"
+        "sha256": "11454a4ff16da8ae56b6c40172f1a41672846307ba7a84c3794a6b1ab92f3710"
+      }
+    },
+    "catalog": {
+      "name": "Larissa",
+      "classification": "satellite",
+      "color": "#a39e96",
+      "distanceAu": 30.07,
+      "description": "Explore Larissa with Voyager 2 imagery and its source-backed irregular shape.",
+      "systemName": "Solar System",
+      "order": 111,
+      "context": {
+        "order": 61
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "755ac28eaf572e444e839858aa511310540539653ecb679acf8af59450715a49"
+    "sha256": "51501f94206ed172e048c99b27604ed1c83ef263fbedc5c829e3bceec65d7b5d"
   }
 }

@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "501a5b306f04190d9e4b75b63afe6026dd1d15b4cf1bf7faf5159e56be7c8bc6"
+        "sha256": "ca46f86221225447f0158dbeef9b43c44df5f8d3fcc1536a2ded650305c088d2"
+      }
+    },
+    "catalog": {
+      "name": "Annefrank",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.2123334934520815,
+      "description": "Explore Annefrank with a clearly labelled approximation of its published flyby dimensions.",
+      "systemName": "Solar System",
+      "order": 360,
+      "context": {
+        "order": 403
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c1292f40d5e430878f71bc72f4cb3bd98b799f37f3acc107fa339f48dfb93f07"
+    "sha256": "d3684b8945bc2d11cb49e8c0af36d8d6bdbe729b992d675a7ef719d586272d75"
   }
 }

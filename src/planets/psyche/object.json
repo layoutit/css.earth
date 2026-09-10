@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c00cea2689667a6bb883422821e393caaf4594fbb2be7df67597313f82130111"
+        "sha256": "5272544a06ca5c6a3d38c242c9eaf5c2ba3da0c5cd5ae1c93728bd0a72ab8787"
+      }
+    },
+    "catalog": {
+      "name": "Psyche",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.9261360015644122,
+      "description": "Explore Psyche in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 142,
+      "context": {
+        "order": 73
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f7618a5e7cc561bf6cb93ce6ab6045f26cdd584e88d34cd8de3192b278779cf7"
+    "sha256": "bebe074662483d7cd46cc608453361555417af34ac1a72cd674014b839a84db6"
   }
 }

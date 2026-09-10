@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4bfeed0eb3b6b045c96b6c79e2585165895c918ee8af232f5025762a61b8195b"
+        "sha256": "e8346d09a37597cdbf9c64959a83fd1df7a5c1dab72d4690661695a122895189"
+      }
+    },
+    "catalog": {
+      "name": "Cressida",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 19.2,
+      "description": "Explore Cressida, an inner moon of Uranus, through its measured shape.",
+      "systemName": "Solar System",
+      "order": 92,
+      "context": {
+        "order": 148
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7182dfb4596b17b7ffdc7c128d0354800875287c87a10e14856e53c56b38b90d"
+    "sha256": "829413db61a41d7e0e920e551363123aae9854b3a1ff1acd774f06f21dce5689"
   }
 }

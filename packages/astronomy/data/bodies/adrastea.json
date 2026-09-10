@@ -1,0 +1,52 @@
+{
+  "id": "adrastea",
+  "classification": "satellite",
+  "order": 221,
+  "physical": {
+    "name": "Adrastea",
+    "horizonsCode": "515",
+    "meanRadiusKm": 8.2,
+    "gravitationalParameterKm3PerS2": 0.0001,
+    "parent": "jupiter"
+  },
+  "physicalNotes": "JPL Horizons OBJ_DATA physical blocks, retrieved 2026-09-08.",
+  "satellite": {
+    "parent": "jupiter",
+    "horizonsCode": "515",
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 1,
+    "poleRightAscensionRad": -1.604695890977,
+    "poleDeclinationRad": 1.125680439147,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 129873.195,
+      "eccentricity": 2.924842e-06,
+      "inclinationRad": 3.426788e-06,
+      "ascendingNodeRad": -1.440610197482,
+      "argumentOfPeriapsisRad": 1.960323480132,
+      "meanAnomalyAtEpochRad": -153871.98491631215,
+      "meanMotionRadPerDay": 21.016050796789184,
+      "ascendingNodeRateRadPerDay": -0.001072070444045061,
+      "argumentOfPeriapsisRateRadPerDay": 0.05112579765041704
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "515",
+      "center": "500@599",
+      "parent": "jupiter",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 1,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "515",
+      "center": "500@599",
+      "range": "daily"
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "id": "comet-103p",
+  "classification": "comet",
+  "order": 107,
+  "classificationOrder": 1,
+  "physical": {
+    "name": "103P/Hartley 2",
+    "horizonsCode": "DES=103P;CAP;",
+    "meanRadiusKm": 0.58,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "physicalNotes": "Farnham & Thomas (2013) PDS shape catalogue equivalent-volume radii.\nNo measured GM is supplied by these source records; zero follows this registry's unknown-GM convention.",
+  "comet": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D103P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 520091230.1888589,
+      "eccentricity": 0.6930749113280099,
+      "inclinationRad": 0.27044094852158845,
+      "ascendingNodeRad": 5.685242088603389,
+      "argumentOfPeriapsisRad": 1.2841931240460038,
+      "meanAnomalyAtEpochRad": 2.8048181852335885,
+      "meanMotionRadPerDay": 0.0026536904617999787
+    }
+  },
+  "cometFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D103P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          -710643762.4963741,
+          -452912361.9688184,
+          -214684360.8473913
+        ],
+        "velocity": [
+          216762.1459988934,
+          -563496.8826080211,
+          -95280.33217590419
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          -703662494.3584697,
+          -469508002.2185178,
+          -217397325.2744258
+        ],
+        "velocity": [
+          248534.3346111468,
+          -542799.9830680682,
+          -85584.77871267649
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          -695738718.0410869,
+          -485475537.39926,
+          -219819429.6276576
+        ],
+        "velocity": [
+          279605.3494228403,
+          -521620.9799722568,
+          -75887.69068474448
+        ]
+      }
+    ]
+  },
+  "acquisition": {
+    "heliocentric": {
+      "target": "DES=103P;CAP;",
+      "model": "comet"
+    }
+  }
+}

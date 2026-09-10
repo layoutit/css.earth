@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "774501c11670c26badabb8d66ec047f7fa3e63acf0b41081a4064548cb7d9832"
+        "sha256": "60e88740c5488d433f4611f010d077e61ed8add0f320d582bacfcf7bf5c1b3ac"
+      }
+    },
+    "catalog": {
+      "name": "Gallia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7707071057503048,
+      "description": "Explore Gallia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 284,
+      "context": {
+        "order": 330
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "deb71eaf930722b4c3d6b8f173bca385882efed40e0938e50066092b26249290"
+    "sha256": "e25ad91868d8a86a1be4f25583550edce0190e400d04778f5589d5d4b01c35ba"
   }
 }
