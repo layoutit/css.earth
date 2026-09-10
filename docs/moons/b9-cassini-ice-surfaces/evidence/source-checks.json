@@ -1,0 +1,460 @@
+{
+  "schema": "cssearth-b9-collected-source-check@1",
+  "captureHead": "80e19c51349f713c9a9a64b8ef1cbb78917f0fc7",
+  "capturePins": 245,
+  "currentCapturePinMismatches": [],
+  "bodies": [
+    {
+      "body": "tethys",
+      "manifest": {
+        "path": "src/planets/tethys/source/manifest.json",
+        "bytes": 56241,
+        "sha256": "66bc2781f6fdec5f5eddfc2f2c4aeccb813c7b3c70bd3f558e18010a45e72fc5"
+      },
+      "verifiedEntries": [
+        {
+          "path": "src/planets/tethys/source/cassini-ice/evidence/download-receipts.json",
+          "bytes": 8556,
+          "sha256": "f2af477511b404a8c3448fe068979fffe5146cc51fee39d7eb3a2307469d7449"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/evidence/license-about.html",
+          "bytes": 22564,
+          "sha256": "02f560a51d6e075f91264a56b6aad8c23cfca448a4c17f0b3f0408568bf175a9"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/evidence/registration.md",
+          "bytes": 971,
+          "sha256": "942fdb6592821e810983962c922ee447ba3d9effcc1b4e2c7357c6efa837bd74"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/native/C1561668191_1_ir.cub",
+          "bytes": 562527,
+          "sha256": "918a27b9b76de708dcfb5fb7b8db990b825006b4d71317cbcf87f727da9e3ddb"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/native/C1606213356_1_ir.cub",
+          "bytes": 621243,
+          "sha256": "76e99719ab53c5c500a5a607c8de6457a6a4d2f6018a5345422499a988227d91"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/native/C1660463972_1_ir.cub",
+          "bytes": 456069,
+          "sha256": "d85ed15fae82d390ad395d133615a188ecee84e2aaf9a382a71b99760145b6f9"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/native/C1719613772_1_ir.cub",
+          "bytes": 735315,
+          "sha256": "7afb633bcb10bfa6def52b2c4fde32d68b7d9c3714c9e70cd922146f922a0042"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/native/C1719616836_1_ir.cub",
+          "bytes": 730703,
+          "sha256": "f1ab5891ca92a4af956643ff3f05df404dfc5369e82eb1e77c1c2d980323be43"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/native/C1807456038_1_ir.cub",
+          "bytes": 454887,
+          "sha256": "4f7935c46b21af2bb0036382658b0e205be274b091f36e76084df6b4096733a6"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/native/C1807469104_1_ir.cub",
+          "bytes": 572731,
+          "sha256": "4b6bee3bfa4f19b51025c326cf7ac207bd4ea48bc35075f5ee83f86400c398ae"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/native/C1807473499_1_ir.cub",
+          "bytes": 446797,
+          "sha256": "accd3bed917401cd4ca82558bb2d1f8181e646c27f3272cc18a3f69a1c8c220f"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/native/C1818547570_1_ir.cub",
+          "bytes": 695517,
+          "sha256": "4eeddcbdf2405d627bb186a4bcb5fdd0beae2d5e754ea1081ea16c10fa320795"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/native/N1561668191_1_ir.cub",
+          "bytes": 170460,
+          "sha256": "be6f1d27fbd977f750fb79ed0d9a0758d279435aedbd57cd6020e4348b2e61e5"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/native/N1606213356_1_ir.cub",
+          "bytes": 189176,
+          "sha256": "8af91d04b7a71f66c1fb7053fbad38203255a8f09b0da12271210acaa97cf744"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/native/N1660463972_1_ir.cub",
+          "bytes": 168002,
+          "sha256": "2cbf9230387dd49ceb4cf142a72cabb50eb49d9e4cda26479c17335cb62df875"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/native/N1719613772_1_ir.cub",
+          "bytes": 191248,
+          "sha256": "0b780aa84669bb56b24ebfa9f79fc583e3f3b853c6bbe45c050e7787024411f6"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/native/N1719616836_1_ir.cub",
+          "bytes": 186636,
+          "sha256": "94cded98862d5d1ff665d627bae87ae5a97d8a9ff2993e23fd4831cefdf7b002"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/native/N1807456038_1_ir.cub",
+          "bytes": 312508,
+          "sha256": "0dcf493ccef3b5e016d69d636053bb9934960262e3ded3512425895aea5b065c"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/native/N1807469104_1_ir.cub",
+          "bytes": 382352,
+          "sha256": "55355c71d5b6c921ff7c5f4564e14ce28a0d787fb3d8963b28736a66cd6146f0"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/native/N1807473499_1_ir.cub",
+          "bytes": 158730,
+          "sha256": "4b2b82f80a99bf4488e301203d62bbf9b7c7c29aed549526bf2952927398d76b"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/native/N1818547570_1_ir.cub",
+          "bytes": 183450,
+          "sha256": "2b45033ab5cf0450c13bc05b019dcd0dba34ba7f2f39deb7c9aad012052c4aa6"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/preparation-receipt.json",
+          "bytes": 100999,
+          "sha256": "215b540b5660bd30501659d4c6a9aca0978dc3e5f2643565a0d2b8410d30f48a"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/prepare.json",
+          "bytes": 7768,
+          "sha256": "946b2641db5a3dee9508d6c0273e6dadb910498a02ff48af10fe6ea3677e44e1"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/raw/v1561668191_1.qub",
+          "bytes": 326144,
+          "sha256": "373d8b8f871879f760a48ba4ca1b3fe405bd93776ac4a6c48383cca952a3599c"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/raw/v1606213356_1.qub",
+          "bytes": 360448,
+          "sha256": "3aceb080e213415421a130236188f80b02a8bd4e03c1eeea2cca8eb8037c91af"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/raw/v1660463972_1.qub",
+          "bytes": 248320,
+          "sha256": "8e82a329b1fd42fc243c3f89515466cda86a2f7bd188a61ae74305a207d645a9"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/raw/v1719613772_1.qub",
+          "bytes": 439808,
+          "sha256": "d599c14f6f0ecbcbe253726b04e9b4a0a03e913b69a554fe050f972fa848d032"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/raw/v1719616836_1.qub",
+          "bytes": 439808,
+          "sha256": "137bcba59f43f125cc03f8b5a692b8b531ca9915bf67817e4bb68a65ce9d3766"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/raw/v1807456038_1.qub",
+          "bytes": 195584,
+          "sha256": "dc8f4b201a002c900c11314e7c2ad65fdcfab344469f5e14d2f42d0a74d0b732"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/raw/v1807469104_1.qub",
+          "bytes": 252928,
+          "sha256": "be1e54ea809e092370dd8a09f2ed96ee5aa350671241b0e46310c2adf3f4ebdc"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/raw/v1807473499_1.qub",
+          "bytes": 248320,
+          "sha256": "c0e1697c5cc5f72b6fede8ef71a20fb460fe80f083f4587acf2c1f5bd98f62ef"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/raw/v1818547570_1.qub",
+          "bytes": 415232,
+          "sha256": "5077a518b0af23d1321cf2d196200793d6d826bade577afe575888d626c72957"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/tethys-ice-absorption-observation.tif",
+          "bytes": 17720,
+          "sha256": "3d90aec662312d48ea563efbe9768d15736740606c82da2f5930b4a9fc7a40da"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/tethys-ice-absorption-source-pixel.tif",
+          "bytes": 33870,
+          "sha256": "b48993134b1d17199d344188747f769c2eb59f4cd947cdf78e4a5243339083ed"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/tethys-ice-absorption.tif",
+          "bytes": 126710,
+          "sha256": "d55c543360d7612d68271dea75721766cf484c560c4f4d4f34cae1d813864d6a"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/tethys-infrared-display.tif",
+          "bytes": 117380,
+          "sha256": "620881bff247aa48f0f98e05d06cbccad6a3e43133794f0621ffb0aa1cb4d7bc"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/tethys-infrared-if-observation.tif",
+          "bytes": 13081,
+          "sha256": "1cc530c1f92226156ab280a24082385732291001fb166e94a2bfef7802f449b6"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/tethys-infrared-if-source-pixel.tif",
+          "bytes": 22505,
+          "sha256": "9efeb7b820abed78404ecc4cdbdcfe53448fb6203af3974b7355a3550493caf8"
+        },
+        {
+          "path": "src/planets/tethys/source/cassini-ice/tethys-infrared-if.tif",
+          "bytes": 216690,
+          "sha256": "b18ecacb19d5c3d873f59bbfee385e609a94746fdddb93aeb5c601ea2df1cce6"
+        }
+      ],
+      "tiffCount": 7,
+      "verifiedBytes": 10833757
+    },
+    {
+      "body": "iapetus",
+      "manifest": {
+        "path": "src/planets/iapetus/source/manifest.json",
+        "bytes": 22865,
+        "sha256": "3c108e94860227c834c7660432368431f6f8f8b89179475225d25be8c382ae96"
+      },
+      "verifiedEntries": [
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/evidence/download-receipts.json",
+          "bytes": 2833,
+          "sha256": "db4b3366691ddc46df557bdea79a31f86a384652db8809b2216e9029c17ad266"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/evidence/license-about.html",
+          "bytes": 22564,
+          "sha256": "02f560a51d6e075f91264a56b6aad8c23cfca448a4c17f0b3f0408568bf175a9"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/evidence/registration.md",
+          "bytes": 922,
+          "sha256": "6754186ab44f6f4a3c68ed1bf5eca50578c2921410dd47e0f9934131bda7f800"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/iapetus-ice-absorption-observation.tif",
+          "bytes": 12145,
+          "sha256": "0f3a78923380a4679f25c541e9ec64ef5b70783558e1b7a4f76220babaa01a9c"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/iapetus-ice-absorption-source-pixel.tif",
+          "bytes": 28195,
+          "sha256": "3cf921d6f8440a8055c88512f5c5b0c00b23de4df3a2636f686234dda3fa29a8"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/iapetus-ice-absorption.tif",
+          "bytes": 109434,
+          "sha256": "399a434937605b2d3215a3691fb630435b4957ff8b5eb23334b42bf42f440fdc"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/iapetus-infrared-display.tif",
+          "bytes": 144017,
+          "sha256": "a3788744172cac6820eaaf39e53d1013ce65612799c107e96a17fbebbcea2e7f"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/iapetus-infrared-if-observation.tif",
+          "bytes": 12145,
+          "sha256": "0f3a78923380a4679f25c541e9ec64ef5b70783558e1b7a4f76220babaa01a9c"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/iapetus-infrared-if-source-pixel.tif",
+          "bytes": 28195,
+          "sha256": "3cf921d6f8440a8055c88512f5c5b0c00b23de4df3a2636f686234dda3fa29a8"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/iapetus-infrared-if.tif",
+          "bytes": 254889,
+          "sha256": "9439aeb2324a1eac7d4d10536f9114754836351077c025572b3d4f379e650c89"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/native/C1568129671_1_ir.cub",
+          "bytes": 1911053,
+          "sha256": "e7a4d85a4e30022e9a0af4de5ba06e799e0ee0f9ddb6e36c77068eb251a6b861"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/native/C1568133146_2_ir.cub",
+          "bytes": 904329,
+          "sha256": "8c70f0c76666038d19a08efefbdc0a15f988a8b5bbd0bf69c6813b62248807a2"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/native/C1568157352_4_ir.cub",
+          "bytes": 2669085,
+          "sha256": "e8693e98d929f20d38d32659852d157c38a8d48ef13d5a38a6f4ea0fc00bc572"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/native/N1568129671_1_ir.cub",
+          "bytes": 310986,
+          "sha256": "64a4d7636de33d6458ed95640d8f6cbb3ed8c943e8ddb23fa94e16097ac229fd"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/native/N1568133146_2_ir.cub",
+          "bytes": 228262,
+          "sha256": "a7da80d17d7f17ae10bbc0e8340dcd779f71c760692a689b18edbfb9c43b904f"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/native/N1568157352_4_ir.cub",
+          "bytes": 365018,
+          "sha256": "9fc00478957d7afa5668e724977e784b2cfa9ba6e1b2e7abb9018e3a40c293e7"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/preparation-receipt.json",
+          "bytes": 34991,
+          "sha256": "caae9516fbbc05d0ea7af45b5b8f96ab2577e8af3686367d9aca612863faec86"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/prepare.json",
+          "bytes": 3838,
+          "sha256": "9071d13e1ab44cba23ecaa06e6ef28620e319b129f72d9e11468a105cbd9654d"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/raw/v1568129671_1.qub",
+          "bytes": 1232896,
+          "sha256": "56726dd22fd5f13764d53798ffa2dc57dc40bc006e8a1b3ac03b66c2720df648"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/raw/v1568133146_2.qub",
+          "bytes": 547328,
+          "sha256": "fe7cd0d2e408988f0e11e2c9cfdc33b698fb8150697e3afce12db971c346a5af"
+        },
+        {
+          "path": "src/planets/iapetus/source/cassini-ice/raw/v1568157352_4.qub",
+          "bytes": 1751040,
+          "sha256": "990bbd6f476f0a3530d250285d5b153b415604cbd01aab0550f07eb6cf5dc676"
+        }
+      ],
+      "tiffCount": 7,
+      "verifiedBytes": 10574165
+    },
+    {
+      "body": "phoebe",
+      "manifest": {
+        "path": "src/planets/phoebe/source/manifest.json",
+        "bytes": 34669,
+        "sha256": "0a3ccf7dceccd0f714fb71e164b4712b7e4908dfe2c137b43761dee44a3d6998"
+      },
+      "verifiedEntries": [
+        {
+          "path": "src/planets/phoebe/source/cassini-ice/evidence/download-receipts.json",
+          "bytes": 946,
+          "sha256": "41944b166965998dff08963811ebc9bd83f637215ab3a8e1f8411e81f6cacce0"
+        },
+        {
+          "path": "src/planets/phoebe/source/cassini-ice/evidence/license-about.html",
+          "bytes": 22564,
+          "sha256": "02f560a51d6e075f91264a56b6aad8c23cfca448a4c17f0b3f0408568bf175a9"
+        },
+        {
+          "path": "src/planets/phoebe/source/cassini-ice/evidence/native-registration-fit.json",
+          "bytes": 19553,
+          "sha256": "e7e8d9b030135adc5e802c28daa9092bc77e37246bb2d50b59d36bdbb8d9b26a"
+        },
+        {
+          "path": "src/planets/phoebe/source/cassini-ice/evidence/regional-mask.json",
+          "bytes": 77024,
+          "sha256": "545127b529e97e3d0cd296cca6d826166ddc7fd0f025045f2550ed09a7d045fb"
+        },
+        {
+          "path": "src/planets/phoebe/source/cassini-ice/evidence/registration.md",
+          "bytes": 1173,
+          "sha256": "9e4897df64a6eb8cfc335083fd8c4d253fdac67e6ad7a6968544d0f9f89c028c"
+        },
+        {
+          "path": "src/planets/phoebe/source/cassini-ice/evidence/source-model-comparison.json",
+          "bytes": 59202,
+          "sha256": "d8ec9e389a1dd49bdeea35f739ed38312632d427f992f5dcd60b7c775469358d"
+        },
+        {
+          "path": "src/planets/phoebe/source/cassini-ice/native/C1465671822_1_ir.cub",
+          "bytes": 1090377,
+          "sha256": "e3d284051d290a154a692a5fccc4388bcb33220fed68345991a9055b8d6228ee"
+        },
+        {
+          "path": "src/planets/phoebe/source/cassini-ice/native/N1465671822_1_ir.cub",
+          "bytes": 226310,
+          "sha256": "97fee2316839da6b2f5849b35b4ed8bd04af9e26f6cc8842f3254309c915a5a3"
+        },
+        {
+          "path": "src/planets/phoebe/source/cassini-ice/phoebe-ice-absorption-observation.tif",
+          "bytes": 16591,
+          "sha256": "f2a90d476eaa584fb9897b4defe05c2b170bd48824ff6a600c2196ca9c778147"
+        },
+        {
+          "path": "src/planets/phoebe/source/cassini-ice/phoebe-ice-absorption-source-pixel.tif",
+          "bytes": 18611,
+          "sha256": "e4afd786788e5f3a048e7404d3305db6b9d10a3aa630d97e67840027d88695a7"
+        },
+        {
+          "path": "src/planets/phoebe/source/cassini-ice/phoebe-ice-absorption.tif",
+          "bytes": 57492,
+          "sha256": "d4b6945058358ceb42460ef5966e1ece2a5e1eb6bf481847b25ab42ff835ca1b"
+        },
+        {
+          "path": "src/planets/phoebe/source/cassini-ice/phoebe-infrared-display.tif",
+          "bytes": 52468,
+          "sha256": "f22812b0e21b9f448bd83482bd2a664cafe67ea6f8dc23e8c0e205dd0c3e2e8b"
+        },
+        {
+          "path": "src/planets/phoebe/source/cassini-ice/phoebe-infrared-if-observation.tif",
+          "bytes": 16591,
+          "sha256": "f2a90d476eaa584fb9897b4defe05c2b170bd48824ff6a600c2196ca9c778147"
+        },
+        {
+          "path": "src/planets/phoebe/source/cassini-ice/phoebe-infrared-if-source-pixel.tif",
+          "bytes": 18611,
+          "sha256": "e4afd786788e5f3a048e7404d3305db6b9d10a3aa630d97e67840027d88695a7"
+        },
+        {
+          "path": "src/planets/phoebe/source/cassini-ice/phoebe-infrared-if.tif",
+          "bytes": 90215,
+          "sha256": "83d7e9574e3a52eda73590dbf0359b587003623140e2b2570528c3ecad0a7500"
+        },
+        {
+          "path": "src/planets/phoebe/source/cassini-ice/preparation-receipt.json",
+          "bytes": 10611,
+          "sha256": "82b121ab41e63420200fdcceb08311c155c62e743833fb60000f55fd155be4b6"
+        },
+        {
+          "path": "src/planets/phoebe/source/cassini-ice/prepare.json",
+          "bytes": 3417,
+          "sha256": "68162ebf0bc13325bf7d9ae295cf34903c1f100f3b13a7d35bd5d7db11689647"
+        },
+        {
+          "path": "src/planets/phoebe/source/cassini-ice/raw/v1465671822_1.qub",
+          "bytes": 680448,
+          "sha256": "df43d42c42ab29cf00eee62c6f22796d85631b60f6c8b4da56ba590cb01f3030"
+        }
+      ],
+      "tiffCount": 7,
+      "verifiedBytes": 2462204
+    }
+  ],
+  "qualification": "CURRENT_CAPTURE_PINS_MATCH",
+  "packageBaseMatchesCapture": true,
+  "retainedGeometry": [
+    {
+      "id": "tethys",
+      "assetCount": 52,
+      "sourceInputCount": 40,
+      "retainedTreeUnchanged": true,
+      "sceneSha256": "b7046e9658cc47abe79a4a20cf13796c0de8876bd31a319dd367d590a48c590d"
+    },
+    {
+      "id": "iapetus",
+      "assetCount": 41,
+      "sourceInputCount": 15,
+      "retainedTreeUnchanged": true,
+      "sceneSha256": "52c9c11c82d8446288fcacf67fc64de0cfa2b90f938a1a1937323abea1f90660"
+    },
+    {
+      "id": "phoebe",
+      "assetCount": 51,
+      "sourceInputCount": 14,
+      "retainedTreeUnchanged": true,
+      "sceneSha256": "a55ce0b586a61465888b0054934945bd53a2393e31ea9b3b0a5b9023d1eff5a9"
+    }
+  ],
+  "sharedOwnershipAuditStatus": "SELECTED_PACKAGES_PASS_SHARED_AUDIT_BLOCKED_ON_BASELINE"
+}

@@ -314,3 +314,37 @@ All 436 body accounts use README. Package presence checks for all 432 registered
 bodies and 3,699 local links in 506 changed Markdown files passed. The 22 added
 READMEs passed layout checks at 1,200 and 390 pixels: source, evidence and known
 problems appear first, methods start collapsed and no page overflows.
+
+
+## Cassini surface integration
+
+Main then advanced to `eccb0e1b20b6d4da42b504e48ecec751f7d64786`, adding Cassini
+infrared and ice-absorption surfaces for Iapetus, Phoebe and Tethys. Their README
+accounts incorporate the updated sources, coverage limits and original reports.
+The integration's 21 derived TIFF maps remain tracked through the same source-role
+ignore policy; they contain required spectral values and sample-ownership maps.
+
+The independent index check covers all 432 manifests and **11,491 required
+entries**: 9,801 tracked, 1,689 with acquisition operations and one using Earth's
+offline restore. No required source lacks both paths. All 87 changed source blobs
+match their recorded size and hash, and the three descriptor, manifest and
+provenance chains agree. All 109 ignore files were checked against index bytes;
+after the derived-map exception, zero tracked files match ignore rules.
+
+
+## Shared processing guide
+
+The [image and surface guide](../../../surface-preparation.md) explains the shared
+tools from source decoding through coordinate/UV sampling, mesh reduction and
+atlas output. It links to the implementations and uses Arrokoth's released UVs
+as a worked path. The contributor guide and celestial skill link to it. Body
+READMEs retain their selected parameters and limits; the provenance contract
+has no added requirements. The three existing UV sampler tests pass.
+
+
+Final integration checks: all four checkout tests pass across 432 registered
+packages; all 436 body accounts use README. All 3,794 local links in 508 changed
+Markdown files pass. The three updated Cassini pages and shared guide pass layout
+checks at 1,200 and 390 pixels. The guide's technical review corrected camera
+ownership, modeled quantities, build prerequisites and format-specific encoding
+behavior before publication.

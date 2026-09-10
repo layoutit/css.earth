@@ -1,0 +1,36 @@
+{
+  "body": "phoebe",
+  "sourceSha256": "f22812b0e21b9f448bd83482bd2a664cafe67ea6f8dc23e8c0e205dd0c3e2e8b",
+  "dimensions": [
+    1440,
+    720
+  ],
+  "policy": {
+    "kind": "geotiff-rgb-bands",
+    "samples": [
+      0,
+      1,
+      2
+    ],
+    "alphaBand": 3,
+    "sampleBytes": 2,
+    "noData": 0,
+    "centerLongitude": 180,
+    "resolutionMeters": 464.69391334349024,
+    "origin": [
+      -334579.617607313,
+      167289.8088036565
+    ],
+    "grid": {
+      "pixelsPerDegree": 4,
+      "sampleOffset": 719.5,
+      "lineOffset": 359.5
+    }
+  },
+  "originalValid": 13325,
+  "retained": 13325,
+  "withheld": 0,
+  "maximumByteError": 0,
+  "longitudeConvention": "0..360 east, source derivative rolled from the lossless -180..180 map",
+  "limits": "Grid-edge samples withheld by the existing reader remain gaps; this is source-map decoder evidence, not mounted browser proof."
+}

@@ -108,6 +108,7 @@ src/planets/*/source/**/*.bpc
 !src/planets/*/source/vims/*-infrared.tif
 !src/planets/*/source/vims/*-water-ice.tif
 !src/planets/*/source/vims-chemistry/*.tif
+!src/planets/*/source/cassini-ice/*.tif
 !src/planets/*/source/geology/*-geologic-units.tif
 !src/planets/*/source/science/*-georeferenced.tif
 !src/planets/*/source/science/geology-*/categories.tif

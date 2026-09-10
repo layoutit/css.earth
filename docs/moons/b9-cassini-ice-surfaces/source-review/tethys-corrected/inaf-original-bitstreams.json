@@ -1,0 +1,166 @@
+{
+  "_links" : {
+    "self" : {
+      "href" : "https://openaccess.inaf.it/server/api/core/bundles/7c1a6165-9012-49ec-83fa-9d3663492bff/bitstreams"
+    }
+  },
+  "_embedded" : {
+    "bitstreams" : [ {
+      "id" : "627f74b9-6d2c-41fc-b0d3-401150456664",
+      "uuid" : "627f74b9-6d2c-41fc-b0d3-401150456664",
+      "name" : "Filacchione_Icarus_5_arxiv_compressed.pdf",
+      "handle" : null,
+      "metadata" : {
+        "bitstream.loginmiur" : [ {
+          "value" : "false",
+          "language" : "*",
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ],
+        "bitstream.type" : [ {
+          "value" : "preprint",
+          "language" : "*",
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ],
+        "datacite.rights" : [ {
+          "value" : "open.access",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ],
+        "dc.description" : [ {
+          "value" : "preprint",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ],
+        "dc.source" : [ {
+          "value" : "/var/dspace-install/upload/Filacchione_Icarus_5_arxiv_compressed.pdf",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ],
+        "dc.title" : [ {
+          "value" : "Filacchione_Icarus_5_arxiv_compressed.pdf",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ]
+      },
+      "bundleName" : "ORIGINAL",
+      "sizeBytes" : 3819373,
+      "checkSum" : {
+        "checkSumAlgorithm" : "MD5",
+        "value" : "3ece2a93d4c1f7d92a6b9a9d67f9eefe"
+      },
+      "sequenceId" : 1,
+      "type" : "bitstream",
+      "uniqueType" : "core.bitstream",
+      "_links" : {
+        "content" : {
+          "href" : "https://openaccess.inaf.it/server/api/core/bitstreams/627f74b9-6d2c-41fc-b0d3-401150456664/content"
+        },
+        "bundle" : {
+          "href" : "https://openaccess.inaf.it/server/api/core/bitstreams/627f74b9-6d2c-41fc-b0d3-401150456664/bundle"
+        },
+        "format" : {
+          "href" : "https://openaccess.inaf.it/server/api/core/bitstreams/627f74b9-6d2c-41fc-b0d3-401150456664/format"
+        },
+        "thumbnail" : {
+          "href" : "https://openaccess.inaf.it/server/api/core/bitstreams/627f74b9-6d2c-41fc-b0d3-401150456664/thumbnail"
+        },
+        "self" : {
+          "href" : "https://openaccess.inaf.it/server/api/core/bitstreams/627f74b9-6d2c-41fc-b0d3-401150456664"
+        }
+      }
+    }, {
+      "id" : "abf27e75-06ae-4427-a868-9cd8998cd165",
+      "uuid" : "abf27e75-06ae-4427-a868-9cd8998cd165",
+      "name" : "1-s2.0-S0019103521004504-compr..pdf",
+      "handle" : null,
+      "metadata" : {
+        "bitstream.loginmiur" : [ {
+          "value" : "true",
+          "language" : "*",
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ],
+        "bitstream.type" : [ {
+          "value" : "pdf editoriale",
+          "language" : "*",
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ],
+        "datacite.rights" : [ {
+          "value" : "restricted",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ],
+        "dc.description" : [ {
+          "value" : "[Administrators only]",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ],
+        "dc.source" : [ {
+          "value" : "/var/dspace-install/upload/1-s2.0-S0019103521004504-compr..pdf",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ],
+        "dc.title" : [ {
+          "value" : "1-s2.0-S0019103521004504-compr..pdf",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ]
+      },
+      "bundleName" : "ORIGINAL",
+      "sizeBytes" : 2110696,
+      "checkSum" : {
+        "checkSumAlgorithm" : "MD5",
+        "value" : "ce294cfa11a2ad8fbc1a4e54dfe9e529"
+      },
+      "sequenceId" : 3,
+      "type" : "bitstream",
+      "uniqueType" : "core.bitstream",
+      "_links" : {
+        "content" : {
+          "href" : "https://openaccess.inaf.it/server/api/core/bitstreams/abf27e75-06ae-4427-a868-9cd8998cd165/content"
+        },
+        "bundle" : {
+          "href" : "https://openaccess.inaf.it/server/api/core/bitstreams/abf27e75-06ae-4427-a868-9cd8998cd165/bundle"
+        },
+        "format" : {
+          "href" : "https://openaccess.inaf.it/server/api/core/bitstreams/abf27e75-06ae-4427-a868-9cd8998cd165/format"
+        },
+        "thumbnail" : {
+          "href" : "https://openaccess.inaf.it/server/api/core/bitstreams/abf27e75-06ae-4427-a868-9cd8998cd165/thumbnail"
+        },
+        "self" : {
+          "href" : "https://openaccess.inaf.it/server/api/core/bitstreams/abf27e75-06ae-4427-a868-9cd8998cd165"
+        }
+      }
+    } ]
+  },
+  "page" : {
+    "number" : 0,
+    "size" : 20,
+    "totalPages" : 1,
+    "totalElements" : 2
+  }
+}

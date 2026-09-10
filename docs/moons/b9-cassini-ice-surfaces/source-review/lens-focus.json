@@ -1,0 +1,62 @@
+[
+  {
+    "body": "tethys",
+    "lens": "infrared",
+    "focus": {
+      "longitudeDegrees": 281.77734,
+      "latitudeDegrees": -7.55859,
+      "zoom": 1.15
+    },
+    "method": "Nearest supported map center to the area-weighted directional centroid; existing shared lens navigation."
+  },
+  {
+    "body": "tethys",
+    "lens": "ice-absorption",
+    "focus": {
+      "longitudeDegrees": 247.67578,
+      "latitudeDegrees": 5.44922,
+      "zoom": 1.15
+    },
+    "method": "Nearest supported map center to the area-weighted directional centroid; existing shared lens navigation."
+  },
+  {
+    "body": "iapetus",
+    "lens": "infrared",
+    "focus": {
+      "longitudeDegrees": 123.92578,
+      "latitudeDegrees": -5.44922,
+      "zoom": 1.15
+    },
+    "method": "Nearest supported map center to the area-weighted directional centroid; existing shared lens navigation."
+  },
+  {
+    "body": "iapetus",
+    "lens": "ice-absorption",
+    "focus": {
+      "longitudeDegrees": 123.92578,
+      "latitudeDegrees": -5.44922,
+      "zoom": 1.15
+    },
+    "method": "Nearest supported map center to the area-weighted directional centroid; existing shared lens navigation."
+  },
+  {
+    "body": "phoebe",
+    "lens": "infrared",
+    "focus": {
+      "longitudeDegrees": 30.625,
+      "latitudeDegrees": -17.875,
+      "zoom": 2
+    },
+    "method": "Nearest supported map center to the area-weighted directional centroid; existing shared lens navigation."
+  },
+  {
+    "body": "phoebe",
+    "lens": "ice-absorption",
+    "focus": {
+      "longitudeDegrees": 30.625,
+      "latitudeDegrees": -17.875,
+      "zoom": 2
+    },
+    "method": "Nearest supported map center to the area-weighted directional centroid; existing shared lens navigation."
+  }
+]

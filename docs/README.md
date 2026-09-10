@@ -9,6 +9,7 @@ Start with [AGENTS.md](../AGENTS.md), the
 | --- | --- |
 | Sources, processing, test results and known problems | The body’s `README.md`, with links to substantial methods and original reports |
 | Credits and reuse terms | Body `NOTICE.md`, license files and source manifest |
+| Image decoding, UV mapping, mesh reduction and texture atlases | [Image and surface preparation](surface-preparation.md) |
 | How outputs trace back to inputs, including the Sources UI | [Prepared object provenance](object-provenance.md) |
 | Saving original reports and screenshots | [Evidence rules](provenance/CONTRACT.md#save-enough-evidence-to-check-the-result) |
 | Code to prepare a new kind of data | [Celestial implementation map](../.agents/skills/celestial-skill/references/implementation-map.md) |

@@ -76,7 +76,9 @@ mesh alone justifies neither a default sphere nor removing the body. Follow the
 ## 2. Choose the existing preparation recipe
 
 Read the [implementation map](references/implementation-map.md) to locate the
-current descriptor, preparation and integration owners. Existing packages are
+current descriptor, preparation and integration owners, and the
+[image and surface guide](../../../docs/surface-preparation.md) for decoding,
+UV mapping and atlas generation. Existing packages are
 examples of capabilities, not templates for a new controller or a whole planet.
 
 - Use the open-ended `OBJECTS` registry, generic adapter, shared shell and camera.

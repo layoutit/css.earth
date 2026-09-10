@@ -1,0 +1,134 @@
+{
+  "scope": "Source-navigation consistency only. No absolute pointing, fixed-mesh registration, detector-footprint or spectral validity claim.",
+  "sourceVersion": "ISIS 3.5.0 VimsGroundMap timing; confirm unchanged 3.5.2 before implementation.",
+  "timing": {
+    "cachedIntegerET": 140250069.93978247,
+    "nativeStartET": 140250070.81583986,
+    "irExposureSeconds": 0.16276,
+    "interlineSeconds": 0.42215874999999997,
+    "firstPixelET": 140250070.89721987,
+    "lastPixelET": 140250267.9436311
+  },
+  "anchors": [
+    {
+      "lineZeroBased": 11,
+      "sampleZeroBased": 12,
+      "ET": 140250163.43136612,
+      "sourceAnglesDegrees": {
+        "phase": 83.07279205322266,
+        "emission": 23.290016174316406,
+        "incidence": 65.39111328125
+      },
+      "calculatedAnglesDegrees": {
+        "phase": 83.07279089060613,
+        "emission": 23.290016703436322,
+        "incidence": 65.39111505715357
+      },
+      "absoluteErrorsDegrees": {
+        "phase": 1.1626165274947198e-06,
+        "emission": 5.291199158818927e-07,
+        "incidence": 1.7759035699782544e-06
+      },
+      "oldEllipsoidHitKm": [
+        86.46617141001484,
+        34.74004021753058,
+        -60.76729150713766
+      ],
+      "observerJ2000Km": [
+        -25093.66525897025,
+        -11213.197619944141,
+        -1207.5551384415928
+      ],
+      "observerOldFrameKm": [
+        25588.072253249364,
+        2258.4556433048333,
+        -9850.683370978002
+      ],
+      "nativeLookRayOldFrame": [
+        -0.9304929305895786,
+        -0.08113809152545876,
+        0.3572107448361875
+      ]
+    },
+    {
+      "lineZeroBased": 17,
+      "sampleZeroBased": 12,
+      "ET": 140250212.83919862,
+      "sourceAnglesDegrees": {
+        "phase": 83.00689697265625,
+        "emission": 37.34388732910156,
+        "incidence": 71.59089660644531
+      },
+      "calculatedAnglesDegrees": {
+        "phase": 83.00689521897685,
+        "emission": 37.34388911042124,
+        "incidence": 71.59089460058327
+      },
+      "absoluteErrorsDegrees": {
+        "phase": 1.7536793990302613e-06,
+        "emission": 1.7813196748761584e-06,
+        "incidence": 2.00586204357478e-06
+      },
+      "oldEllipsoidHitKm": [
+        104.24932655201277,
+        42.17736644155575,
+        18.5496477174179
+      ],
+      "observerJ2000Km": [
+        -24798.231730740383,
+        -11108.410395632938,
+        -1192.9459889008067
+      ],
+      "observerOldFrameKm": [
+        25316.87017958712,
+        2021.786841463489,
+        -9733.481437767074
+      ],
+      "nativeLookRayOldFrame": [
+        -0.9301731440017109,
+        -0.07303404037248519,
+        0.359783200170384
+      ]
+    },
+    {
+      "lineZeroBased": 15,
+      "sampleZeroBased": 14,
+      "ET": 140250196.69544113,
+      "sourceAnglesDegrees": {
+        "phase": 82.9937744140625,
+        "emission": 18.294212341308594,
+        "incidence": 77.68574523925781
+      },
+      "calculatedAnglesDegrees": {
+        "phase": 82.99377674926983,
+        "emission": 18.294211989701527,
+        "incidence": 77.68574716799542
+      },
+      "absoluteErrorsDegrees": {
+        "phase": 2.3352073270643814e-06,
+        "emission": 3.5160706701731215e-07,
+        "incidence": 1.9287376034071713e-06
+      },
+      "oldEllipsoidHitKm": [
+        111.70876088788914,
+        24.666782455209173,
+        -8.224074356161383
+      ],
+      "observerJ2000Km": [
+        -24894.763130394236,
+        -11142.649086935724,
+        -1197.7194539921281
+      ],
+      "observerOldFrameKm": [
+        25405.725657883548,
+        2098.541947530675,
+        -9771.776572062465
+      ],
+      "nativeLookRayOldFrame": [
+        -0.9301941747543276,
+        -0.07626730880969725,
+        0.35905723061935646
+      ]
+    }
+  ]
+}

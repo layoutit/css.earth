@@ -1,0 +1,69 @@
+[
+  {
+    "url": "https://ars.els-cdn.com/content/image/1-s2.0-S0019103521004504-mmc3.txt",
+    "method": "HEAD",
+    "checkedAt": "2026-09-09T22:59:16.680657+00:00",
+    "status": 200,
+    "contentType": "text/plain",
+    "contentLength": "6886",
+    "headers": {
+      "Date": "Wed, 09 Sep 2026 22:59:17 GMT",
+      "Content-Type": "text/plain",
+      "Content-Length": "6886",
+      "Connection": "close",
+      "vary": "Origin",
+      "tdm-policy": "https://www.elsevier.com/tdm/tdmrep-policy.json",
+      "allow": "GET",
+      "x-els-size": "6886",
+      "Accept-Ranges": "bytes",
+      "last-modified": "Wed, 16 Feb 2022 00:53:30 GMT",
+      "x-els-authentication": "NONAUTHATTACH",
+      "x-els-resourceversion": "V1",
+      "x-els-reqid": "399fbd49-488c-41e5-b9bc-35e8fc2087e5",
+      "x-els-serverid": "ip-10-93-241-85.prod_CloudAttachmentRetrieval_prod",
+      "x-els-status": "OK",
+      "tdm-reservation": "1",
+      "cf-cache-status": "MISS",
+      "set-cookie": "__cf_bm=l3MYlNSW.5WGAMX4MhrySKyCgah1f3JdPF9wp69XSLY-1788994757.1054952-1.0.1.1-CHXbNup.35IdiaSviaUFBoXV4c.tRleZde5Wwp_pG8fwRT5Xb.ny.pUXb6gMFwikRgTF8zdOwodkXhvxXaIfnbFc8M9BjPpszSyThcVTq.IK2knBrXeCDhaoHJfE41Sm; HttpOnly; SameSite=None; Secure; Path=/; Domain=els-cdn.com; Expires=Wed, 09 Sep 2026 23:29:17 GMT",
+      "Server": "cloudflare",
+      "CF-RAY": "a389cd6fe8ffb64d-EZE"
+    },
+    "downloadBytes": 6886,
+    "sha256": "17196f487b89a3cd11225a71c6c04c7ebf90074fa298c2c9ef981b62f6425a2f"
+  },
+  {
+    "url": "https://ars.els-cdn.com/content/image/1-s2.0-S0019103521004504-mmc6.txt",
+    "method": "HEAD",
+    "checkedAt": "2026-09-09T22:59:17.066100+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "url": "https://ars.els-cdn.com/content/image/1-s2.0-S0019103521004504-mmc7.txt",
+    "method": "HEAD",
+    "checkedAt": "2026-09-09T22:59:17.358063+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "url": "https://ars.els-cdn.com/content/image/1-s2.0-S0019103521004504-mmc8.txt",
+    "method": "HEAD",
+    "checkedAt": "2026-09-09T22:59:17.615913+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "url": "https://ars.els-cdn.com/content/image/1-s2.0-S0019103521004504-mmc9.txt",
+    "method": "HEAD",
+    "checkedAt": "2026-09-09T22:59:17.869836+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "url": "https://ars.els-cdn.com/content/image/1-s2.0-S0019103521004504-mmc10.txt",
+    "method": "HEAD",
+    "checkedAt": "2026-09-09T22:59:18.112593+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found"
+  }
+]

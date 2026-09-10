@@ -8,7 +8,9 @@ Navigation selects one active scene; it does not embed child scenes.
 Read [AGENTS.md](../../AGENTS.md), the
 [provenance and documentation contract](../../docs/provenance/CONTRACT.md) and
 [celestial skill](../../.agents/skills/celestial-skill/SKILL.md) before body work.
-The skill explains source selection and preparation. The contract explains
+The skill explains source selection and preparation. The shared
+[image and surface guide](../../docs/surface-preparation.md) explains the tools,
+UV mapping and texture atlases. The contract explains
 source notes, credits, test reports and where to save them. Its
 [standards mapping](../../docs/provenance/CONTRACT.md#standards-basis) combines
 PDS4 1.26.0 provenance guidance with ISO 24495-1:2023 plain-language principles,
