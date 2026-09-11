@@ -13,7 +13,26 @@ import {
   WHEEL_ZOOM_USE_SCROLL_DISTANCE,
   WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER,
   wheelZoomInputKind,
+  mobileSheetKeyboardInset,
+  MOBILE_SHEET_POLICY,
 } from "../runtime-policy.mts";
+
+test("only a keyboard-sized covering takes room from the sheet", () => {
+  // A phone with nothing over the layout viewport.
+  assert.equal(mobileSheetKeyboardInset({ layoutHeight: 844, visualHeight: 844 }), 0);
+  // An open keyboard: the layout viewport keeps its height, the visual one loses it.
+  assert.equal(mobileSheetKeyboardInset({ layoutHeight: 844, visualHeight: 508 }), 336);
+  // A browser toolbar sliding away is not a keyboard.
+  assert.equal(mobileSheetKeyboardInset({ layoutHeight: 844, visualHeight: 784 }), 0);
+  assert.equal(mobileSheetKeyboardInset({
+    layoutHeight: 844, visualHeight: 844 - MOBILE_SHEET_POLICY.keyboardMinimumPixels,
+  }), MOBILE_SHEET_POLICY.keyboardMinimumPixels, "the threshold itself counts");
+  // A pinch-zoomed page scrolls its visual viewport without a keyboard.
+  assert.equal(mobileSheetKeyboardInset({ layoutHeight: 844, visualHeight: 508, offsetTop: 336 }), 0);
+  // Partial metrics leave the sheet alone.
+  assert.equal(mobileSheetKeyboardInset({ layoutHeight: Number.NaN, visualHeight: 508 }), 0);
+  assert.equal(mobileSheetKeyboardInset({ layoutHeight: 844, visualHeight: Number.POSITIVE_INFINITY }), 0);
+});
 
 test("automatic playback has one complete readiness, intent and environment policy", () => {
   for (const sceneState of ["loading", "ready", "error", "destroyed"] as const) {

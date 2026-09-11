@@ -25,7 +25,7 @@ import { createViewReadout } from "./view-readout.mts";
 import { createSurfaceMapReader } from "./surface-map-context.mts";
 import { mountDiagnosticRecorder } from './diagnostic-recorder.mts';
 import { bodyCardViewAtCamera, overviewScopeAtCamera } from './overview-context.mts';
-import { MOBILE_SHEET_POLICY, MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
+import { MOBILE_SHEET_POLICY, MOBILE_VIEWPORT_QUERY, mobileSheetKeyboardInset } from './runtime-policy.mts';
 
 export function mountPlanetShell({
   objectId,
@@ -1059,6 +1059,21 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
     sheet.classList.remove("is-dragging");
     sheet.style.removeProperty("transform");
   }, { signal });
+  // Typing in search opens a keyboard over the sheet it just opened. The layout
+  // viewport keeps its height, so the visual viewport reports the lost room.
+  const visual = windowTarget.visualViewport ?? null;
+  const followKeyboard = () => {
+    const inset = visual === null || !mobile.matches ? 0 : mobileSheetKeyboardInset({
+      layoutHeight: windowTarget.innerHeight,
+      visualHeight: visual.height,
+      offsetTop: visual.offsetTop,
+    });
+    if (inset > 0) body.style.setProperty("--sheet-keyboard", `${inset}px`);
+    else body.style.removeProperty("--sheet-keyboard");
+  };
+  visual?.addEventListener("resize", followKeyboard, { signal });
+  visual?.addEventListener("scroll", followKeyboard, { signal });
+  lifetime.onDispose(() => body.style.removeProperty("--sheet-keyboard"));
 
   body.dataset.sheet = state;
   handle.ariaExpanded = "false";
