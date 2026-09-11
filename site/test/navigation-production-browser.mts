@@ -1,11 +1,16 @@
+import { createTestPage } from './browser-observations.mts';
+import type { Page } from 'playwright';
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
 
 const origin = process.env.CSSEARTH_TEST_ORIGIN ?? 'http://127.0.0.1:4212';
 const browser = await chromium.launch({ headless: true, channel: 'chrome' });
-const errors = [];
+type ProductionSample = {count:number;transform:string|undefined;opacity:number;universes:number};
+declare global { interface Window { __productionDocument:Document; __productionShell:Element|null;
+  __productionSamples:ProductionSample[]; __productionFrame:number; } }
+const errors:string[] = [];
 try {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  const page = await createTestPage(browser, { viewport: { width: 1440, height: 1000 } });
   page.on('pageerror', error => errors.push(error.message));
   await page.goto(`${origin}/mercury/`, { waitUntil: 'networkidle' });
   await ready(page, 'mercury');
@@ -17,10 +22,10 @@ try {
     await page.evaluate(() => {
       window.__productionSamples = [];
       const sample = () => {
-        const stage = document.querySelector('.planet-stage');
-        const scene = document.querySelector('.planet-stage [class$="-scene"]');
+        const stage = window.__cssearthTest.element('.planet-stage');
+        const scene = document.querySelector<HTMLElement>('.planet-stage [class$="-scene"]');
         window.__productionSamples.push({ count: document.querySelectorAll('.polycss-camera').length,
-          transform: scene?.style.transform, opacity: Number(getComputedStyle(stage).opacity),
+          transform: scene?.style.transform, opacity: Number(getComputedStyle(window.__cssearthTest.required(stage, 'computed style element')).opacity),
           universes: stage.querySelectorAll('.prepared-universe').length });
         window.__productionFrame = requestAnimationFrame(sample);
       };
@@ -32,9 +37,9 @@ try {
       cancelAnimationFrame(window.__productionFrame);
       return { document: window.__productionDocument === document,
         shell: window.__productionShell === document.querySelector('.planet-sidebar'),
-        current: document.querySelector('.planet-stage').dataset.objectId,
+        current: window.__cssearthTest.html('.planet-stage').dataset.objectId,
         roots: document.querySelectorAll('.polycss-camera').length,
-        assets: [...document.querySelectorAll('link[rel="stylesheet"]')].map(node => node.href),
+        assets: [...document.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]')].map(node => node.href),
         diagnostics: window.__cssEarth !== undefined,
         samples: window.__productionSamples,
       };
@@ -52,7 +57,7 @@ try {
   assert.deepEqual(errors, []);
 } finally { await browser.close(); }
 
-async function ready(page, id) {
+async function ready(page: Page, id:string) {
   await page.waitForFunction(id => document.documentElement.dataset.ready === 'true' &&
-    document.querySelector('.planet-stage').dataset.objectId === id && location.pathname === `/${id}/`, id, { timeout: 30000 });
+    window.__cssearthTest.html('.planet-stage').dataset.objectId === id && location.pathname === `/${id}/`, id, { timeout: 30000 });
 }

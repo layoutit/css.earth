@@ -5,10 +5,10 @@ import {parseAffineProfile} from './affine-source.mts';
 import {parseEllipsoidProfile} from './ellipsoid-geometry.mts';
 import {parsePhotographicAtmosphere} from './photographic-atmosphere-source.mts';
 import {parseReferenceCelestialSource} from './reference-celestial-source.mts';
-const read=async path=>JSON.parse(await readFile(new URL(`../../../src/planets/mars/source/${path}`,import.meta.url),'utf8'));
+const read=async (path: string)=>JSON.parse(await readFile(new URL(`../../../src/planets/mars/source/${path}`,import.meta.url),'utf8'));
 test('Mars preparation boundaries preserve measured parameters and provenance records',async()=>{
  for(const [path,parse] of [['preparation/terrestrial.json',parseAffineProfile],['preparation/ellipsoid.json',parseEllipsoidProfile],
-  ['preparation/atmosphere.json',parsePhotographicAtmosphere],['sky/google-earth-pro-contract.json',parseReferenceCelestialSource]]) {
+  ['preparation/atmosphere.json',parsePhotographicAtmosphere],['sky/google-earth-pro-contract.json',parseReferenceCelestialSource]] as const) {
   const value=await read(path),before=JSON.stringify(value);assert.equal(parse(value),value,path);assert.equal(JSON.stringify(value),before,path);
  }
 });

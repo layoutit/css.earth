@@ -1,10 +1,15 @@
+import {parsePreparedWorldContext} from "../../src/renderers/css/dist/index.js";
+declare global {interface Window {__contrastNodes:Element[];}}
+import { createTestPage } from './browser-observations.mts';
+import type { Page } from 'playwright';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 import { scrollToDistance as scrollTo } from './wheel-zoom-distance.mts';
-import worldContext from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
+import contextInput from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 
+const worldContext=parsePreparedWorldContext(contextInput);
 const baseUrl = process.argv[2] ?? 'http://127.0.0.1:4210';
 const objects = process.env.SKY_CONTRAST_OBJECT ? [process.env.SKY_CONTRAST_OBJECT] : ['mercury', 'venus', 'ceres', 'europa'];
 const dprs = process.env.SKY_CONTRAST_DPR ? [Number(process.env.SKY_CONTRAST_DPR)] : [1, 2];
@@ -12,11 +17,11 @@ assert.ok(objects.every(id => /^[a-z][a-z0-9-]*$/u.test(id)) && dprs.every(dpr =
 const output = resolve(process.env.SKY_CONTRAST_OUTPUT ?? 'output/playwright/sky-contrast');
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const results = [];
+const results:unknown[] = [];
 try {
   for (const dpr of dprs) {
     const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: dpr });
-    const page = await context.newPage(), errors = [];
+    const page = await createTestPage(context), errors:string[] = [];
     page.on('pageerror', error => errors.push(error.message));
     for (const id of objects) {
       await page.goto(new URL(`/${id}/`, baseUrl).href, { waitUntil: 'networkidle' });
@@ -25,9 +30,9 @@ try {
       if (await motion.isChecked()) await motion.uncheck({ force: true });
       await checkContrast(page, id, dpr, 'near', 0);
       await page.mouse.move(1010, 460);
-      await scrollTo(page, Math.sqrt(worldContext.volume.opacityProfile.fadeStartDistanceM * worldContext.volume.opacityProfile.fullDistanceM) / 1000);
+      await scrollTo(page, Math.sqrt(worldContext.volume.fadeStartDistanceM * worldContext.volume.fullDistanceM) / 1000);
       await checkContrast(page, id, dpr, 'transition', .5);
-      await scrollTo(page, worldContext.volume.opacityProfile.fullDistanceM * 1.01 / 1000);
+      await scrollTo(page, worldContext.volume.fullDistanceM * 1.01 / 1000);
       await checkContrast(page, id, dpr, 'galaxy', 1);
     }
     assert.deepEqual(errors, []);
@@ -37,7 +42,7 @@ try {
   console.log(JSON.stringify({ ok: true, results }));
 } finally { await browser.close(); }
 
-async function checkContrast(page, id, dpr, view, expectedVolumeOpacity) {
+async function checkContrast(page: Page, id:string, dpr:number, view:"near"|"transition"|"galaxy", expectedVolumeOpacity:number) {
   // Wait for the existing label admission fade before comparing emphasis.
   await page.waitForTimeout(1000);
   assert.equal(await page.locator('.planet-sky-contrast-setting').isChecked(), false);
@@ -51,7 +56,7 @@ async function checkContrast(page, id, dpr, view, expectedVolumeOpacity) {
   assert.equal(before.roots, 1);
   if (view === 'near') assert.ok(before.stars.length > 0, 'The visible shared star field must be checked');
   assert.equal(before.sky.visibility, view === 'galaxy' ? 'hidden' : 'visible');
-  await page.evaluate(() => { window.__contrastNodes = [...document.querySelector('.planet-stage').querySelectorAll('*')]; });
+  await page.evaluate(() => { window.__contrastNodes = [...window.__cssearthTest.element('.planet-stage').querySelectorAll('*')]; });
   await page.screenshot({ path: resolve(output, `${id}-${view}-standard-dpr${dpr}.png`) });
   await page.getByRole('button', { name: 'Settings', exact: true }).click();
   await page.locator('.planet-sky-contrast-setting-control').click();
@@ -73,7 +78,7 @@ async function checkContrast(page, id, dpr, view, expectedVolumeOpacity) {
   await page.screenshot({ path: resolve(output, `${id}-${view}-high-dpr${dpr}.png`) });
   await page.locator('.planet-sky-contrast-setting-control').click();
   assert.deepEqual(await read(page), before);
-  assert.equal(await page.evaluate(() => [...document.querySelector('.planet-stage').querySelectorAll('*')]
+  assert.equal(await page.evaluate(() => [...window.__cssearthTest.element('.planet-stage').querySelectorAll('*')]
     .every((node, index) => node === window.__contrastNodes[index])), true);
   await page.getByRole('button', { name: 'Settings', exact: true }).click();
   results.push({ id, dpr, view, stars: before.stars.length, standardEmphasis: before.emphasis, highEmphasis: high.emphasis,
@@ -81,22 +86,22 @@ async function checkContrast(page, id, dpr, view, expectedVolumeOpacity) {
 }
 
 
-function read(page) {
+function read(page: Page) {
   return page.evaluate(() => {
     const layer = document.querySelector('.prepared-point-field-stars');
     return {
       mode: document.body.dataset.skyContrast,
       scene: document.querySelector('.polycss-scene')?.getAttribute('style'),
       roots: document.querySelectorAll('.polycss-camera').length,
-      emphasis: Number(getComputedStyle(layer).opacity),
-      volumeOpacity: Number(document.querySelector('.prepared-volume-context').dataset.volumeOpacity),
-      volumeCompositeOpacity: Number(getComputedStyle(document.querySelector('.prepared-volume-context')).opacity),
-      imageOpacity: Number(getComputedStyle(document.querySelector('.prepared-volume-image')).opacity),
-      preparedGlow: Number(document.querySelector('.prepared-volume-image').dataset.volumeBrightness),
-      sky: { opacity: getComputedStyle(document.querySelector('.prepared-celestial-sky')).opacity,
-        visibility: getComputedStyle(document.querySelector('.prepared-celestial-sky')).visibility,
-        transform: document.querySelector('.prepared-celestial-sky-scene').style.transform },
-      stars: window.__cssEarthUniverse.inspect().stars.points.filter(({ element }) => getComputedStyle(element).visibility === 'visible')
+      emphasis: Number(getComputedStyle(window.__cssearthTest.required(layer, 'computed style element')).opacity),
+      volumeOpacity: Number(window.__cssearthTest.html('.prepared-volume-context').dataset.volumeOpacity),
+      volumeCompositeOpacity: Number(getComputedStyle(window.__cssearthTest.required(document.querySelector('.prepared-volume-context'), 'computed style element')).opacity),
+      imageOpacity: Number(getComputedStyle(window.__cssearthTest.required(document.querySelector('.prepared-volume-image'), 'computed style element')).opacity),
+      preparedGlow: Number(window.__cssearthTest.html('.prepared-volume-image').dataset.volumeBrightness),
+      sky: { opacity: getComputedStyle(window.__cssearthTest.required(document.querySelector('.prepared-celestial-sky'), 'computed style element')).opacity,
+        visibility: getComputedStyle(window.__cssearthTest.required(document.querySelector('.prepared-celestial-sky'), 'computed style element')).visibility,
+        transform: window.__cssearthTest.html('.prepared-celestial-sky-scene').style.transform },
+      stars: window.__cssearthTest.universe().inspect().stars.points.filter(({ element }) => getComputedStyle(element).visibility === 'visible')
         .map(({ element, reference }) => ({ style: element.getAttribute('style'), reference })),
       labels: [...document.querySelectorAll('.prepared-star-label')].map(element => element.getAttribute('style')),
       bodies: [...document.querySelectorAll('[data-context-label], [data-object-navigate]')]

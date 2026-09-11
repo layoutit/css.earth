@@ -4,12 +4,12 @@
 // camera plan's declared bounds: the pose is read off `.mercury-scene`'s
 // painted matrix and the control angles off the runtime's own state.
 //
-// Usage: node tests/objects/browser/mercury/rotation-limits-browser.mjs [baseUrl]
+// Usage: node tests/objects/browser/mercury/rotation-limits-browser.mts [baseUrl]
 //   [--measure-only]
 // The last stdout line is a JSON report; the exit status is non-zero when a
 // direction saturates (unless --measure-only).
 
-import { chromium } from "playwright";
+import { chromium, type Page } from "playwright";
 
 import * as oracle from "./lighting-geometry-oracle.mts";
 
@@ -22,11 +22,13 @@ const STROKES = 24;
 
 const browser = await chromium.launch({ headless: true, channel: process.env.PLAYWRIGHT_CHANNEL ?? "chrome" });
 const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
-const checks = [];
-const report = { baseUrl, directions: {} };
+const checks: { id: string; ok: boolean }[] = [];
+type Sample = Awaited<ReturnType<typeof readSample>>;
+type Direction = { samples: Sample[]; steps: number[]; lastMovingStroke: number; saturated: boolean; extremes: Record<string, number>; meanStepDegrees: number };
+const report: { baseUrl: string; directions: Record<string, Direction>; declared?: Record<string, number | boolean>; tumble?: Record<string, Record<string, ReturnType<typeof rotationBetween>>> } = { baseUrl, directions: {} };
 try {
   const page = await context.newPage();
-  const problems = [];
+  const problems: string[] = [];
   page.on("pageerror", (error) => problems.push(`pageerror: ${error.message}`));
   page.on("console", (message) => { if (message.type() === "error") problems.push(`error: ${message.text()}`); });
   const response = await page.goto(new URL("/mercury/", baseUrl).href, { waitUntil: "networkidle" });
@@ -34,22 +36,31 @@ try {
   await page.waitForFunction(() => window.__cssEarth?.ready === true && window.__mercury?.ready === true &&
     document.documentElement.dataset.ready === "true");
   await page.evaluate(() => {
-    const motion = document.querySelector('input[name="motion"]');
+    function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+    function requiredInput(value: Element | null): HTMLInputElement { if (!(value instanceof HTMLInputElement)) throw new Error("Expected required HTMLInputElement"); return value; }
+
+    const motion = requiredInput(document.querySelector('input[name="motion"]'));
     if (motion.checked) motion.click();
   });
-  const stats = await page.evaluate(() => window.__mercury.camera.stats());
+  const stats = await page.evaluate(() => {
+    function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+return requiredDiagnostics(window.__mercury).camera.stats(); });
+  if (!stats.dolly) throw new Error("Mercury dolly diagnostics missing");
   report.declared = {
     pitchBounded: stats.pitchBounded, yawBounded: stats.yawBounded,
     minimumPitchDegrees: stats.minimumPitchDegrees, maximumPitchDegrees: stats.maximumPitchDegrees,
   };
   const geometry = await page.locator(".mercury-camera").boundingBox();
+  if (!geometry) throw new Error("Mercury camera bounds missing");
   const centre = [geometry.x + geometry.width / 2, geometry.y + geometry.height / 2];
 
   for (const [name, delta] of [["up", [0, -STROKE_PIXELS]], ["down", [0, STROKE_PIXELS]],
-    ["left", [-STROKE_PIXELS, 0]], ["right", [STROKE_PIXELS, 0]]]) {
+    ["left", [-STROKE_PIXELS, 0]], ["right", [STROKE_PIXELS, 0]]] as const) {
     await page.evaluate(() => {
-      const current = window.__mercury.camera.stats();
-      window.__mercury.camera.setState({ controlPitch: current.defaultControlPitchDegrees,
+      function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+
+      const current = requiredDiagnostics(window.__mercury).camera.stats();
+      requiredDiagnostics(window.__mercury).camera.setState({ controlPitch: current.defaultControlPitchDegrees,
         controlYaw: current.defaultControlYawDegrees, zoom: 1.1 });
     });
     await nextPaint(page);
@@ -91,17 +102,19 @@ try {
   // painted matrices is decomposed into an axis and an angle; the axis's
   // view-axis component is the roll share.
   report.tumble = {};
-  for (const [view, state] of [["default", { zoom: 1.1 }], ["far", { distanceKilometers: stats.dolly.maximumDistanceKilometers }]]) {
+  for (const [view, state] of [["default", { zoom: 1.1 }], ["far", { distanceKilometers: stats.dolly.maximumDistanceKilometers }]] as const) {
     report.tumble[view] = {};
     for (const [name, start, delta] of [
       ["centre-right", centre, [STROKE_PIXELS, 0]],
       ["offcentre-right", [centre[0] + 420, centre[1] + 300], [STROKE_PIXELS, 0]],
       ["offcentre-up", [centre[0] + 420, centre[1] + 300], [0, -STROKE_PIXELS]],
       ["corner-right", [centre[0] - 500, centre[1] - 380], [STROKE_PIXELS, 0]],
-    ]) {
+    ] as const) {
       await page.evaluate((next) => {
-        const current = window.__mercury.camera.stats();
-        window.__mercury.camera.setState({ controlPitch: current.defaultControlPitchDegrees,
+        function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+
+        const current = requiredDiagnostics(window.__mercury).camera.stats();
+        requiredDiagnostics(window.__mercury).camera.setState({ controlPitch: current.defaultControlPitchDegrees,
           controlYaw: current.defaultControlYawDegrees, ...next });
       }, state);
       await nextPaint(page);
@@ -124,22 +137,22 @@ try {
 
 const failed = checks.filter((entry) => !entry.ok).map((entry) => entry.id);
 // Flushed before exiting: pipe writes are asynchronous on macOS.
-await new Promise((resolve) => process.stdout.write(
-  `${JSON.stringify({ suite: "mercury-rotation-limits", ok: failed.length === 0, failed, checks, ...report })}\n`, resolve));
+await new Promise<void>((resolve, reject) => process.stdout.write(
+  `${JSON.stringify({ suite: "mercury-rotation-limits", ok: failed.length === 0, failed, checks, ...report })}\n`, error => error ? reject(error) : resolve()));
 process.exit(measureOnly || failed.length === 0 ? 0 : 1);
 
-function check(id, ok, detail) {
+function check(id: string, ok: boolean, detail: Record<string, unknown>) {
   checks.push({ ...detail, id, ok: Boolean(ok) });
   if (!ok) console.error(`FAIL ${id}: ${JSON.stringify(detail).slice(0, 600)}`);
 }
 
-async function readMatrix(page) {
+async function readMatrix(page: Page) {
   return oracle.parseSceneRotation(await page.locator(".mercury-scene").evaluate((element) => element.style.transform));
 }
 
 // The rotation taking pose `a` to pose `b` as an angle and the view-axis
 // share of its axis.
-function rotationBetween(a, b) {
+function rotationBetween(a: readonly number[], b: readonly number[]) {
   const transpose = [a[0], a[3], a[6], a[1], a[4], a[7], a[2], a[5], a[8]];
   const r = oracle.multiplyMatrices(b, transpose);
   const angle = Math.acos(Math.max(-1, Math.min(1, (r[0] + r[4] + r[8] - 1) / 2))) * 180 / Math.PI;
@@ -148,8 +161,10 @@ function rotationBetween(a, b) {
   return { angle, rollShare: length > 1e-9 ? Math.abs(raw[2] / length) : null };
 }
 
-async function readSample(page) {
-  const state = await page.evaluate(() => window.__mercury.camera.state());
+async function readSample(page: Page) {
+  const state = await page.evaluate(() => {
+    function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+return requiredDiagnostics(window.__mercury).camera.state(); });
   const transform = await page.locator(".mercury-scene").evaluate((element) => element.style.transform);
   const { pitchDegrees, yawDegrees } = oracle.scenePitchYawDegrees(oracle.parseSceneRotation(transform));
   return { controlPitch: state.controlPitch, controlYaw: state.controlYaw, scenePitch: pitchDegrees, sceneYaw: yawDegrees };
@@ -157,7 +172,7 @@ async function readSample(page) {
 
 // A stroke from the body's centre, ending at rest so no inertial throw
 // follows, then the runtime's settle time.
-async function drag(page, [x, y], [dx, dy]) {
+async function drag(page: Page, [x, y]: readonly number[], [dx, dy]: readonly number[]) {
   await page.mouse.move(x, y);
   await page.mouse.down();
   const steps = 12;
@@ -171,6 +186,6 @@ async function drag(page, [x, y], [dx, dy]) {
   await nextPaint(page);
 }
 
-async function nextPaint(page) {
+async function nextPaint(page: Page) {
   await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
 }

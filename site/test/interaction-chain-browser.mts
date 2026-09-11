@@ -1,3 +1,8 @@
+interface ObservedResponse {url:string;status:number;sha256?:string;error?:string;}
+interface ChainReport {head:string;diffSha256:string;browser:string;origin:string;dpr:number;viewport:{width:number;height:number};phases:Record<string,unknown>[];inputs:Record<string,unknown>[];resources:ObservedResponse[];errors:string[];failure?:string;final?:unknown;}
+
+import {required} from '../../tools/test-values.mts';
+import { createTestPage } from './browser-observations.mts';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile, open } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
@@ -11,16 +16,16 @@ const dpr = Number(process.env.DPR ?? 1);
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ headless: true, executablePath: process.env.CHROME_EXECUTABLE ??
   '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary' });
-const page = await browser.newPage({ viewport: { width: 1995, height: 1236 }, deviceScaleFactor: dpr });
+const page = await createTestPage(browser, { viewport: { width: 1995, height: 1236 }, deviceScaleFactor: dpr });
 const cdp = await page.context().newCDPSession(page);
-const report = { head: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+const report:ChainReport = { head: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
   diffSha256: createHash('sha256').update(execFileSync('git', ['diff'])).digest('hex'),
   browser: browser.version(), origin, dpr, viewport: { width: 1995, height: 1236 }, phases: [], inputs: [], resources: [], errors: [] };
-const responses = [];
+const responses:Promise<void>[] = [];
 page.on('pageerror', error => report.errors.push(error.message));
 page.on('response', response => {
   if (!response.url().startsWith(origin) || response.request().resourceType() === 'image') return;
-  const entry = { url: response.url(), status: response.status() }; report.resources.push(entry);
+  const entry:ObservedResponse = { url: response.url(), status: response.status() }; report.resources.push(entry);
   responses.push(response.body().then(bytes => { entry.sha256 = createHash('sha256').update(bytes).digest('hex'); })
     .catch(error => { entry.error = error.message; }));
 });
@@ -28,18 +33,18 @@ const state = () => page.evaluate(() => {
   const app = window.__cssEarth;
   if (!app) return { initialized: false };
   return { active: app.activeObjectId, selected: app.selectedObjectId, ready: app.ready, error: app.error,
-    overview: app.overview, camera: window[`__${app.activeObjectId}`]?.camera?.state(),
+    overview: app.overview, camera: window.__cssEarth?.object(app.activeObjectId)?.camera?.state(),
     scenes: document.querySelectorAll('.planet-stage > .polycss-camera').length };
 });
-async function mark(name) {
+async function mark(name:string) {
   await page.evaluate(name => performance.mark(`cssEarth:scenario:${name}`), name);
   report.phases.push({ name, ...await state() }); console.log(name);
 }
-async function waitReady(id) {
-  await page.waitForFunction(id => window.__cssEarth?.error || (window.__cssEarth?.ready && (!id || window.__cssEarth.activeObjectId === id)), id, { timeout: 40000 });
+async function waitReady(id?:string) {
+  await page.waitForFunction(id => window.__cssEarth?.error || (window.__cssEarth?.ready && (!id || window.__cssearthTest.scene().activeObjectId === id)), id, { timeout: 40000 });
   const current = await state(); assert.equal(current.error, null); assert.equal(current.scenes, 1);
 }
-async function select(id, interrupt = false) {
+async function select(id:string, interrupt = false) {
   const targets = await page.locator(`[data-object-navigate="${id}"]:not(a):not(.context-orbit)`).evaluateAll(nodes => nodes.map(node => {
     const rect = node.getBoundingClientRect(), css = getComputedStyle(node);
     return { x: rect.x, y: rect.y, width: rect.width, height: rect.height, visible: css.visibility === 'visible' && Number(css.opacity) > .1 };
@@ -53,7 +58,7 @@ async function select(id, interrupt = false) {
     await link.waitFor(); report.inputs.push({ type: 'search-pick', id }); await link.click();
   }
   if (interrupt) {
-    await page.waitForFunction(id => window.__cssEarth.selectedObjectId === id && !window.__cssEarth.ready, id);
+    await page.waitForFunction(id => window.__cssearthTest.scene().selectedObjectId === id && !window.__cssearthTest.scene().ready, id);
     await mark(`interrupt-${id}:start`);
     await page.mouse.move(1400, 500); await page.mouse.wheel(0, 100);
     await waitReady(); await mark(`interrupt-${id}:end`);
@@ -67,7 +72,7 @@ async function select(id, interrupt = false) {
   await waitReady(id); await mark(`fly-${id}:end`);
   await page.waitForTimeout(250);
 }
-async function drag(id) {
+async function drag(id:string) {
   await mark(`drag-${id}:start`);
   await page.mouse.move(1050, 640); await page.mouse.down();
   const start = performance.now(), times = [];
@@ -95,7 +100,7 @@ let tracing = false;
 try {
   await page.goto(`${origin}/sun/?overview=solar-system&v=QIZBjIKjn6btvsGPQB0_XT06whyprPsKq7NBQsczQAAAAD_AsoUg3b86v-PhIQDrvVo_2ATC2iqo7QABAAAAAAAAAAA`);
   await waitReady('sun'); await page.waitForTimeout(1500);
-  await page.evaluate(() => window.__cssEarthRecorder.start());
+  await page.evaluate(() => window.__cssearthTest.required(window.__cssEarthRecorder,"diagnostic recorder").start());
   await page.evaluate(() => {
     // This probe fails if input ever falls back to browser scene hit testing.
     document.elementsFromPoint = () => { throw new Error('Scene input forced DOM hit testing'); };
@@ -109,11 +114,11 @@ try {
   await select('uranus'); await drag('uranus');
   await select('saturn');
   await mark('sequence:end'); assert.deepEqual(report.errors, []);
-} catch (error) { report.failure = error.stack; }
+} catch (error) { report.failure = error instanceof Error ? error.stack ?? error.message : String(error); }
 finally {
   if (tracing) {
-    const done = new Promise(resolve => cdp.once('Tracing.tracingComplete', resolve)); await cdp.send('Tracing.end');
-    const { stream } = await done, file = await open(`${output}/trace.json`, 'w');
+    const done = new Promise<string>((resolve,reject)=>cdp.once('Tracing.tracingComplete',event=>{if(typeof event.stream==='string')resolve(event.stream);else reject(new Error('Trace stream unavailable'));})); await cdp.send('Tracing.end');
+    const stream = await done, file = await open(`${output}/trace.json`, 'w');
     try {
       for (;;) { const part = await cdp.send('IO.read', { handle: stream }); await file.write(part.data); if (part.eof) break; }
     } finally { await file.close(); await cdp.send('IO.close', { handle: stream }); }

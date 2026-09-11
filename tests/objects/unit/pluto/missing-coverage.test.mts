@@ -26,11 +26,11 @@ test("coverage is sampled independently and only changes missing pixels", () => 
   const input = Buffer.from(Array.from({ length: 24 }, (_, i) => i));
   const painted = paintMissingCoverage(input, info, missing);
   for (let i = 0; i < missing.length; i++) if (!missing[i]) assert.deepEqual(painted.subarray(i * 3, i * 3 + 3), input.subarray(i * 3, i * 3 + 3));
-  assert.throws(() => paintMissingCoverage(input, info, []), /dimensions/);
+  assert.throws(() => Reflect.apply(paintMissingCoverage,undefined,[input, info, []]), /dimensions/);
 });
 
 test("elevation uses its own signed no-data value, not the imagery footprint", () => {
-  const raster = elevationRaster({ width: 3, height: 1, sample: (x) => [-32768, 0, -1000][x] }, 3, 1);
+  const raster = elevationRaster({ width: 3, height: 1, sample: (x: number) => [-32768, 0, -1000][x] }, 3, 1);
   assert.deepEqual([...raster.missing], [1, 0, 0]);
   const painted = paintMissingCoverage(raster.data, raster.info, raster.missing);
   assert.deepEqual(painted.subarray(3), raster.data.subarray(3));

@@ -1,3 +1,4 @@
+import {array,number,shape,text} from '../../../../tools/objects/terrestrial-layers/source-records.mts';
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile, readdir } from "node:fs/promises";
@@ -39,15 +40,15 @@ test("declares the exact runtime closure and excludes historical delivery", asyn
       44,
     ),
   );
-  const declared = manifest.assets.map(({ filename }) => filename);
+  const declared = array(shape({filename:text}))(manifest.assets).map(({filename})=>filename);
   assert.equal(new Set(declared).size, declared.length);
   assert.deepEqual(declared, [...declared].sort((left, right) =>
     left.localeCompare(right)));
   const actual = (await readdir(publicRoot))
     .sort((left, right) => left.localeCompare(right));
-  const retired=JSON.parse(await readFile(new URL('source/preparation/retired-delivery.json',objectRoot)));
+  const retired=JSON.parse((await readFile(new URL('source/preparation/retired-delivery.json',objectRoot))).toString('utf8'));
   assert.equal(retired.schema,'cssearth-retired-delivery@1');
-  assert.deepEqual(retired.assets.map(e=>e.filename).sort(),['mars-moon-billboards.webp','mars-moon-billboards@2x.webp']);
+  assert.deepEqual(array(shape({filename:text}))(retired.assets).map(e=>e.filename).sort(),['mars-moon-billboards.webp','mars-moon-billboards@2x.webp']);
   assert.deepEqual(actual,declared);
   for(const asset of retired.assets) assert.equal(actual.includes(asset.filename),false);
 });

@@ -1,3 +1,5 @@
+import { fixtureRecord } from '../../test-values.mts';
+import { required } from '../../test-values.mts';
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { fitObservationLevels, selectObservation, sampleTrianglePoints } from './observation-mosaic.mts';
@@ -6,7 +8,7 @@ import { createSourceManifest } from '../../../src/platform/source-manifest.mts'
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
 const policy = { minimumPairs: 64, maximumLogMad: .25, maximumGain: 1.35 };
-const sample = (radiance, maximumEmissionDegrees = 30) => ({ radiance, maximumEmissionDegrees });
+const sample = (radiance: number, maximumEmissionDegrees = 30) => ({ radiance, maximumEmissionDegrees });
 
 test('calibration withholds steep-angle pairs without changing displayed source eligibility', () => {
   const a = Array.from({ length: 200 }, (_, i) => ({ ...sample(1), maximumIncidenceDegrees: i < 100 ? 30 : 75 }));
@@ -26,16 +28,16 @@ test('robust overlap fit recovers connected source scales despite missing pairs 
     (frame === 0 && i > 299) || (frame === 3 && i < 300) ? { reason: 'no-geometry' } : sample((1 + i / 600) / gain * (i % 20 === 0 ? (frame + 1) : 1))));
   const result = fitObservationLevels(samples, policy);
   for (let i = 0; i < gains.length; i++) assert.ok(Math.abs(result.gains[i] - gains[i]) < 1e-12);
-  assert.equal(result.pairs.find(p => p.a === 0 && p.b === 3).accepted, false);
+  assert.equal(required(result.pairs.find((p: unknown) => fixtureRecord(p)["a"] === 0 && fixtureRecord(p)["b"] === 3)).accepted, false);
 });
 
 test('archived-camera mosaics bind a separate camera to each image', async () => {
-  const config = JSON.parse(await readFile(new URL('../../../src/planets/steins/source/preparation/terrestrial.json', import.meta.url)));
+  const config = JSON.parse(await readFile(new URL('../../../src/planets/steins/source/preparation/terrestrial.json', import.meta.url), 'utf8'));
   const recipe = config.raster.surfaceObservations[0], shape = config.geometry.radialTerrain;
   validateGeoSurfaceRecipe(recipe, shape);
-  for (const alter of [r => r.frames[1].cameraPath = r.frames[0].cameraPath,
-    r => delete r.frames[1].cameraPath, r => r.cameraPath = r.frames[0].cameraPath,
-    r => r.frames[0].cameraPath = '../unbound.json', r => r.photometry.maximumGain = 1.1]) {
+  for (const alter of [(r: unknown) => fixtureRecord(r,"frames",1)["cameraPath"] = fixtureRecord(r,"frames",0)["cameraPath"],
+    (r: unknown) => delete fixtureRecord(r,"frames",1)["cameraPath"], (r: unknown) => fixtureRecord(r)["cameraPath"] = fixtureRecord(r,"frames",0)["cameraPath"],
+(r: unknown) => fixtureRecord(r,"frames",0)["cameraPath"] = '../unbound.json', (r: unknown) => fixtureRecord(r,"photometry")["maximumGain"] = 1.1]) {
     const changed = structuredClone(recipe); alter(changed);
     assert.throws(() => validateGeoSurfaceRecipe(changed, shape), /source-bound/);
   }
@@ -43,13 +45,20 @@ test('archived-camera mosaics bind a separate camera to each image', async () =>
 
 test('each archived-camera mosaic frame verifies its original source closure before decoding', async () => {
   const sourceDirectory = resolve('src/planets/steins/source');
-  const config = JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/terrestrial.json')));
+  const config = JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/terrestrial.json'), 'utf8'));
   const source = await createSourceManifest({ planetId: 'steins', planetName: 'Steins', sourceRoot: sourceDirectory });
   const drift = new Error('Original camera kernel bytes changed');
   let checked = false;
   await assert.rejects(loadGeoObservationSurface({ sourceDirectory, config,
-    recipe: config.raster.surfaceObservations[0], radial: {},
-    source: { ...source, validatePath: async () => { checked = true; throw drift; } } }), error => error === drift);
+    recipe: config.raster.surfaceObservations[0], radial: {
+      get grid(): never { throw new Error('Geometry must not be read before source verification'); },
+      get faces(): never { throw new Error('Faces must not be read before source verification'); },
+    },
+    // Isolate per-camera provenance verification from the separately tested group-byte validator.
+    source: { ...source, validateGroup: async consumer => {
+      assert.equal(consumer, 'osiris-observation');
+      const entries = source.inputsFor(consumer); assert.ok(entries.length > 0); return entries;
+    }, validatePath: async () => { checked = true; throw drift; } } }), error => error === drift);
   assert.equal(checked, true);
 });
 
@@ -72,12 +81,12 @@ test('overlap points stay inside their own triangle and include both shape lobes
 });
 
 test('the authored mosaic binds distinct images and rejects ambiguous frame policies', async () => {
-  const config = JSON.parse(await readFile(new URL('../../../src/planets/comet-67p/source/preparation/terrestrial.json', import.meta.url)));
+  const config = JSON.parse(await readFile(new URL('../../../src/planets/comet-67p/source/preparation/terrestrial.json', import.meta.url), 'utf8'));
   const recipe = config.raster.surfaceObservations[0], shape = config.geometry.radialTerrain;
   validateGeoSurfaceRecipe(recipe, shape);
-  for (const alter of [r => r.frames[1].id = r.frames[0].id, r => r.frames[1].qualityPath = r.frames[0].qualityPath,
-    r => r.frames[0].filter = 'unbound', r => r.frames[0].path = '../outside.IMG', r => r.selection = 'brightest',
-    r => r.levelMatching.maximumGain = 3, r => r.frames = [], r => r.path = r.frames[0].path]) {
+  for (const alter of [(r: unknown) => fixtureRecord(r,"frames",1)["id"] = fixtureRecord(r,"frames",0)["id"], (r: unknown) => fixtureRecord(r,"frames",1)["qualityPath"] = fixtureRecord(r,"frames",0)["qualityPath"],
+(r: unknown) => fixtureRecord(r,"frames",0)["filter"] = 'unbound', (r: unknown) => fixtureRecord(r,"frames",0)["path"] = '../outside.IMG', (r: unknown) => fixtureRecord(r)["selection"] = 'brightest',
+(r: unknown) => fixtureRecord(r,"levelMatching")["maximumGain"] = 3, (r: unknown) => fixtureRecord(r)["frames"] = [], (r: unknown) => fixtureRecord(r)["path"] = fixtureRecord(r,"frames",0)["path"]]) {
     const changed = structuredClone(recipe); alter(changed); assert.throws(() => validateGeoSurfaceRecipe(changed, shape), /source-bound/);
   }
 });

@@ -21,7 +21,7 @@ const documents={
 const catalogConfig={schema:'cssearth-satellite-catalog-acquisition@1',outputSchema:'synthetic-catalog@1',retrievedAt:'2000-01-01',sources:{discovery:'https://example.test/discovery',elements:'https://example.test/elements',approximate:'https://example.test/approximate'},expectedDiscoveryCount:2,expectedElementCount:1,gravitationalParameterKm3PerS2:1000,authority:{source:'synthetic test'},discoverySection:{start:'BEGIN',end:'END'},elementPrimary:'Demo',ringFrame:'test plane',discoveryOnly:[{identity:'S/20 X 1',document:'approximate',radiusPattern:'distance of approximately\\s+(\\d+)\\s+km',sourceRecord:'test reference',parameterQualification:'approximate test'}]};
 
 test('satellite catalog joins authorities and derives only declared approximate orbits',()=>{
- const output=prepareSatelliteCatalog({config:catalogConfig,documents}) as {sources:Record<string,{sha256:string}>;counts:unknown;moons:Record<string,unknown>[]};
+ const output=prepareSatelliteCatalog({config:catalogConfig,documents});
  assert.deepEqual(output.counts,{confirmed:2,withJplMeanElements:1,discoveryOnly:1});
  assert.deepEqual(output.moons.map(moon=>moon.name),['Demo One','S/20 X 1']);
  assert.equal(output.moons[0].discoverers,'A & B');assert.equal(output.moons[1].semiMajorAxisKm,120);
@@ -38,9 +38,9 @@ test('satellite acquisition and derived JSON publication use only mocked request
  await writeFile(join(root,'recipe.json'),JSON.stringify(catalogConfig));
  const plan=parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[{kind:'satellite-catalog',groups:['refresh'],path:'catalog.json',recipePath:'recipe.json'},{kind:'json-document',groups:['refresh'],path:'derived.json',value:jsonValue}]});
  const requests:string[]=[];
- await executeAcquisition({sourceRoot:root,manifest,plan,transport:{fetch:async url=>{requests.push(url);const name=url.split('/').at(-1) as keyof typeof documents;return new Response(documents[name]);}}});
+ await executeAcquisition({sourceRoot:root,manifest,plan,transport:{fetch:async url=>{requests.push(url);return new Response(documentFor(url));}}});
  assert.equal(requests.length,3);assert.deepEqual(await readFile(join(root,'catalog.json')),expected);assert.deepEqual(await readFile(join(root,'derived.json')),jsonBytes);
- await assert.rejects(executeAcquisition({sourceRoot:root,manifest,plan,transport:{fetch:async url=>new Response(documents[url.split('/').at(-1) as keyof typeof documents]+' ')} }),/hash drifted/);
+ await assert.rejects(executeAcquisition({sourceRoot:root,manifest,plan,transport:{fetch:async url=>new Response(documentFor(url)+' ')} }),/hash drifted/);
  assert.deepEqual(await readFile(join(root,'catalog.json')),expected);assert.ok((await readdir(root)).every(name=>!name.includes('.partial')));
 }));
 
@@ -69,7 +69,7 @@ test('all pinned satellite records survive source-table normalization without ch
  const discoveries=[...normal,...approximate].map(moon=>row([moon.romanNumeral??'',moon.provisionalDesignation===moon.name?'':moon.name,moon.provisionalDesignation??'',String(moon.discoveryYear),moon.discoverers,moon.discoveryReference]));
  const elements=normal.map((moon:Record<string,unknown>)=>row([String(moon.sourceRecord).replace('JPL element ',''),config.elementPrimary,String(moon.name),String(moon.code),String(moon.ephemeris),String(moon.frame),String(moon.epoch),...['semiMajorAxisKm','eccentricity','argumentOfPeriapsisDeg','meanAnomalyDeg','inclinationDeg','ascendingNodeDeg','periodDays'].map(key=>String(moon[key])),'','','','','',String(moon.elementReference)]));
  const documents={discovery:config.discoverySection.start+discoveries.join('')+config.discoverySection.end,elements:'<table id="sat_elem"><tbody>'+elements.join('')+'</tbody></table>',s2009s2:'distance of approximately '+approximate[1].semiMajorAxisKm+' km'};
- const result=prepareSatelliteCatalog({config,documents}) as {moons:unknown[]};assert.deepEqual(result.moons,pinned.moons);
+ const result=prepareSatelliteCatalog({config,documents});assert.deepEqual(result.moons,pinned.moons);
 });
 
 test('Sun HYG refresh regenerates every pinned projected star from the local full catalogue',()=>temporary(async root=>{
@@ -103,3 +103,5 @@ test('Earth refresh preserves normalized PSG, gzip, editorial and pinned derived
  assert.equal(calls.length, plan.operations.filter(step => step.kind !== 'json-document').length);
  for(const operation of plan.operations){assert.ok('path'in operation);const path=(operation as {path:string}).path;assert.deepEqual(await readFile(join(root,path)),await readFile(sourceRoot+'/'+path),path);}
 }));
+
+function documentFor(url:string):string {const key=url.split('/').at(-1);if(key==='discovery'||key==='elements'||key==='approximate')return documents[key];throw new Error(`Unexpected test URL: ${url}`);}

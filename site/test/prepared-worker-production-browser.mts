@@ -1,16 +1,19 @@
+import {required} from "../../tools/test-values.mts";
+declare global {interface Window {__workerTestDocument:Document;}}
+import type { Page,Worker } from 'playwright';
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
 import { previewSite } from '../../tools/preview.mts';
 
 const server = await previewSite({ port: 0 });
 let browser;
-const errors = [];
+const errors:string[] = [];
 try {
   browser = await chromium.launch({ channel: 'chrome', headless: true });
-  const origin = server.resolvedUrls.local[0];
+  const origin = required(server.resolvedUrls).local[0];
   for (const dpr of [1, 2]) {
     const page = await browser.newPage({ viewport: { width: 1280, height: 900 }, deviceScaleFactor: dpr });
-    const workers = [];
+    const workers:Worker[] = [];
     page.on('worker', worker => workers.push(worker));
     page.on('pageerror', error => errors.push(error.message));
     page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
@@ -38,7 +41,7 @@ try {
   await server.close();
 }
 
-async function ready(page, id) {
+async function ready(page: Page, id:string) {
   await page.waitForFunction(id => document.documentElement.dataset.ready === 'true' &&
-    document.querySelector('.planet-stage')?.dataset.objectId === id, id, { timeout: 30000 });
+    document.querySelector<HTMLElement>('.planet-stage')?.dataset.objectId === id, id, { timeout: 30000 });
 }

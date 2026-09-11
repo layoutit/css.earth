@@ -10,7 +10,8 @@ class PresentationElement {
   classList = { contains: (_name: string) => false, add: (..._names: string[]) => {}, toggle: (_name: string, _force?: boolean) => {} };
   dataset: Record<string, string> = {};
   style = { cssText: '', transform: '', visibility: '', scale: '', transformOrigin: '', setProperty: (_name: string, _value: string) => {}, getPropertyValue: (_name: string) => '' };
-  constructor(readonly ownerDocument: PresentationDocument) {}
+  readonly ownerDocument: PresentationDocument;
+  constructor(ownerDocument: PresentationDocument) { this.ownerDocument = ownerDocument;}
   appendChild(child: PresentationElement) { child.parentNode?.removeChild(child); child.parentNode = this; this.children.push(child); return child; }
   removeChild(child: PresentationElement) { const index = this.children.indexOf(child); if (index >= 0) this.children.splice(index, 1); child.parentNode = null; return child; }
   remove() { this.parentNode?.removeChild(this); }

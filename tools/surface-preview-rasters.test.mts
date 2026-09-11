@@ -10,9 +10,9 @@ import { preparePagedSurfaceMap } from './objects/paged-ellipsoid/assets.mts';
 // Two reversed bands with conspicuous padding: the preview must recover
 // north-to-south rows and must never show a gutter or fill an absent polar row.
 test('preview restores reversed, out-of-order bands and preserves missing caps', () => {
-  const info = { width: 4, height: 7, channels: 4 };
+  const info = { width: 4, height: 7, channels: 4 as const };
   const data = Buffer.alloc(info.width * info.height * 4, 222);
-  const row = (y, red) => { for (let x = 1; x <= 2; x++) data.set([red, x, 0, 255], (y * 4 + x) * 4); };
+  const row = (y: number, red: number) => { for (let x = 1; x <= 2; x++) data.set([red, x, 0, 255], (y * 4 + x) * 4); };
   row(1, 30); row(4, 20); row(5, 10);
   const result = unpackSurfacePreview({ data, info }, { width: 2, height: 5, bands: [{ y: 3, height: 1 }, { y: 1, height: 2 }], gutter: 1 });
   assert.deepEqual(result.info, { width: 2, height: 5, channels: 4 });
@@ -47,7 +47,7 @@ test('paged previews keep the shared cloud composition and raw scientific maps d
   try {
     await sharp(Buffer.from([20,40,60]),{raw:{width:1,height:1,channels:3}}).png().toFile(join(directory,'base.png'));
     await sharp(Buffer.from([255,255,255]),{raw:{width:1,height:1,channels:3}}).png().toFile(join(directory,'cloud.png'));
-    const config = {surface:{width:1,height:1,clouds:{path:'cloud.png',maximumAlpha:.5,threshold:0,scale:1,color:[100,120,140]}}};
+    const config = {surface:{width:1,height:1,quality:90,maps:[],clouds:{path:'cloud.png',maximumAlpha:.5,threshold:0,scale:1,color:[100,120,140]}}};
     const plain = await preparePagedSurfaceMap({config,sourceDirectory:directory,map:{path:'base.png'}});
     const cloudy = await preparePagedSurfaceMap({config,sourceDirectory:directory,map:{path:'base.png',compositeClouds:true}});
     assert.deepEqual([...plain.data],[20,40,60]);

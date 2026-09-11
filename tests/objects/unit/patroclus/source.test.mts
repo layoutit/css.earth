@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -5,9 +6,9 @@ import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layer
 import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root = new URL('../../../../src/planets/patroclus/source/', import.meta.url);
 test('Patroclus preserves the published approximation extents, not the full axis lengths as radii', async () => {
-  const config = JSON.parse(await readFile(new URL('preparation/terrestrial.json', root)));
+  const config = JSON.parse((await readFile(new URL('preparation/terrestrial.json', root))).toString('utf8'));
   const shape = parsePdsRadiusTable(await readFile(new URL('shape/ellipsoid.tab', root), 'utf8'), config.geometry.radialTerrain.grid);
-  for (const [lon, lat, metres] of [[0, 0, 63500], [90, 0, 58500], [0, 90, 49000], [0, -90, 49000]]) assert.ok(Math.abs(shape.sample(lon, lat) - metres) < .001);
+  for (const [lon, lat, metres] of [[0, 0, 63500], [90, 0, 58500], [0, 90, 49000], [0, -90, 49000]] as const) assert.ok(Math.abs(required(shape.sample(lon, lat)) - metres) < .001);
   const topology = validateClosedMesh(Uint32Array.from(shape.indices.flat()), shape.positions);
   assert.equal(topology.eulerCharacteristic, 2);
   assert.equal(topology.components, 1);

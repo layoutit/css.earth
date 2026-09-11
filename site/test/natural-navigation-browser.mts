@@ -1,3 +1,8 @@
+interface NaturalReport {head:string;browser:string;dpr:number;origin:string;actions:Record<string,unknown>[];errors:string[];failure?:string;final?:unknown;}
+declare global {interface Window {__naturalIdentity:readonly[Element|null,Element|null,number];}}
+
+import {required} from '../../tools/test-values.mts';
+import { createTestPage } from './browser-observations.mts';
 // A short user journey: wide system → Mars → Venus → wide system → Makemake.
 // All navigation is native input. Diagnostic APIs only observe state.
 import assert from 'node:assert/strict';
@@ -10,25 +15,25 @@ const output = process.env.OUTPUT ?? 'output/playwright/natural-navigation';
 const dpr = Number(process.env.DPR ?? 1);
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ headless: true, executablePath: process.env.CHROME_EXECUTABLE ?? '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary' });
-const page = await browser.newPage({ viewport: { width: 1995, height: 1236 }, deviceScaleFactor: dpr });
+const page = await createTestPage(browser, { viewport: { width: 1995, height: 1236 }, deviceScaleFactor: dpr });
 const cdp = await page.context().newCDPSession(page);
-const report = { head: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), browser: browser.version(), dpr, origin, actions: [], errors: [] };
+const report:NaturalReport = { head: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), browser: browser.version(), dpr, origin, actions: [], errors: [] };
 page.on('pageerror', error => report.errors.push(error.message));
 page.on('response', response => { if (response.status() >= 400) report.errors.push(`${response.status()} ${response.url()}`); });
-const state = () => page.evaluate(() => ({ active: window.__cssEarth.activeObjectId, selected: window.__cssEarth.selectedObjectId,
-  ready: window.__cssEarth.ready, error: window.__cssEarth.error, overview: window.__cssEarth.overview,
-  camera: window[`__${window.__cssEarth.activeObjectId}`]?.camera.state(),
+const state = () => page.evaluate(() => ({ active: window.__cssearthTest.scene().activeObjectId, selected: window.__cssearthTest.scene().selectedObjectId,
+  ready: window.__cssearthTest.scene().ready, error: window.__cssearthTest.scene().error, overview: window.__cssearthTest.scene().overview,
+  camera: window.__cssEarth?.object()?.camera.state(),
   scenes: document.querySelectorAll('.planet-stage > .polycss-camera').length, url: location.href }));
-async function mark(kind, data = {}) {
+async function mark(kind:string, data:Record<string,unknown> = {}) {
   report.actions.push({ kind, ...data, state: await state() });
   await page.evaluate(({ kind, index }) => performance.mark(`cssEarth:stress:${index}:${kind}`), { kind, index: report.actions.length - 1 });
   console.log(kind, JSON.stringify(data));
 }
-async function ready(id) {
-  await page.waitForFunction(id => window.__cssEarth?.error || (window.__cssEarth?.ready && (!id || window.__cssEarth.activeObjectId === id)), id, { timeout: 40000 });
+async function ready(id?:string) {
+  await page.waitForFunction(id => window.__cssEarth?.error || (window.__cssEarth?.ready && (!id || window.__cssearthTest.scene().activeObjectId === id)), id, { timeout: 40000 });
   const current = await state(); assert.equal(current.error, null); assert.equal(current.scenes, 1);
 }
-async function visible(id) {
+async function visible(id:string) {
   return page.locator(`[data-object-navigate="${id}"][data-context-label], [data-object-navigate="${id}"][data-context-indicator], [data-object-navigate="${id}"][data-context-body]`).evaluateAll(nodes => {
     for (const node of nodes) {
       if (node.ariaDisabled === 'true' || !node.checkVisibility({ opacityProperty: true, visibilityProperty: true })) continue;
@@ -40,7 +45,7 @@ async function visible(id) {
     return null;
   });
 }
-async function drag(dx, dy, duration = 1600) {
+async function drag(dx:number, dy:number, duration = 1600) {
   await mark('drag-start', { dx, dy, duration });
   await page.mouse.move(1200, 590); await page.mouse.down();
   const start = performance.now(), count = Math.ceil(duration / (1000 / 60));
@@ -52,14 +57,14 @@ async function drag(dx, dy, duration = 1600) {
   }
   await page.mouse.up(); await mark('drag-end'); await page.waitForTimeout(450);
 }
-async function scroll(sign, strength = 1) {
+async function scroll(sign:number, strength = 1) {
   const deltas = [2, 6, 12, 20, 28, 32, 28, 20, 12, 6, 2].map(value => sign * value * strength);
   await mark('precision-wheel-start', { deltas });
   await page.mouse.move(1250, 580);
   for (const delta of deltas) { await page.mouse.wheel(0, delta); await page.waitForTimeout(20); }
   await page.waitForTimeout(350); await mark('precision-wheel-end');
 }
-async function clickScene(id, allowSearch = false) {
+async function clickScene(id:string, allowSearch = false) {
   const point = await visible(id);
   if (!point && allowSearch) {
     await mark('pick', { id, target: { kind: 'sidebar' } });
@@ -84,7 +89,7 @@ try {
   await ready('sun'); await page.waitForTimeout(700);
   await page.evaluate(() => {
     window.__naturalIdentity = [document.querySelector('.prepared-universe'), document.querySelector('.planet-input-surface'), performance.timeOrigin];
-    window.__cssEarthRecorder.start();
+    window.__cssearthTest.required(window.__cssEarthRecorder,"diagnostic recorder").start();
   });
   await cdp.send('Tracing.start', { categories: 'devtools.timeline,blink.user_timing,disabled-by-default-devtools.timeline.frame,toplevel,viz', transferMode: 'ReturnAsStream' }); tracing = true;
   await mark('start');
@@ -107,11 +112,11 @@ try {
   const retained = await page.evaluate(() => window.__naturalIdentity[0] === document.querySelector('.prepared-universe') &&
     window.__naturalIdentity[1] === document.querySelector('.planet-input-surface') && window.__naturalIdentity[2] === performance.timeOrigin);
   assert.equal(retained, true); assert.deepEqual(report.errors, []);
-} catch (error) { report.failure = error.stack; }
+} catch (error) { report.failure = error instanceof Error ? error.stack ?? error.message : String(error); }
 finally {
   if (tracing) {
-    const done = new Promise(resolve => cdp.once('Tracing.tracingComplete', resolve)); await cdp.send('Tracing.end');
-    const { stream } = await done, file = await open(`${output}/trace.json`, 'w');
+    const done = new Promise<string>((resolve,reject)=>cdp.once('Tracing.tracingComplete',event=>{if(typeof event.stream==='string')resolve(event.stream);else reject(new Error('Trace stream unavailable'));})); await cdp.send('Tracing.end');
+    const stream = await done, file = await open(`${output}/trace.json`, 'w');
     try { for (;;) { const part = await cdp.send('IO.read', { handle: stream }); await file.write(part.data); if (part.eof) break; } }
     finally { await file.close(); await cdp.send('IO.close', { handle: stream }); }
   }

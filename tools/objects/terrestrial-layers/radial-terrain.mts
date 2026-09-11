@@ -1,6 +1,6 @@
 import { isArray } from '../../../src/platform/is-array.mts';
 import {matchesPreparationGenerator} from '../../preparation-generator.mts';
-import type {SolidSurface,RadialState,RadialMaterialConfig} from './solid-contract.mts';
+import type {SolidSurface,RadialState,RadialMaterialConfig,RadialMaterialSurface} from './solid-contract.mts';
 import {parseRadialSnapshot} from './radial-source.mts';
 import {requireArray,requireString} from '../../source-values.mts';
 interface ObservationTransfer {
@@ -346,7 +346,7 @@ export function createRadialScienceColorSampler<T extends SourceSurfaceSample>(s
  */
 export async function prepareRadialMaterials({ radial, surfaces, config, source, publicDirectory, outputDirectory, sunDirection,
   artifactId = null, snapshotEntries = source.manifest.generatedIntermediates }: {
-    radial: Pick<RadialState,'width'|'height'|'tileSize'|'faces'|'scientificSurfaces'|'observationSurfaces'|'completion'|'coverage'|'simplification'> & {grid?:RadialState['grid'];plans:readonly {face:PreparedTriangle;rect:{x:number;y:number};matrix:readonly number[];geometry:{leafWidth:number;leafHeight:number}}[]}; surfaces: SolidSurface[]; config: RadialMaterialConfig;
+    radial: Pick<RadialState,'width'|'height'|'tileSize'|'faces'|'observationSurfaces'|'completion'|'coverage'|'simplification'> & {scientificSurfaces?:ReadonlyMap<string,{samplePoint?:(point:readonly number[])=>SourceSurfaceSample|null;report?:unknown}>;grid?:RadialState['grid'];plans:readonly {face:PreparedTriangle;rect:{x:number;y:number};matrix:readonly number[];geometry:{leafWidth:number;leafHeight:number}}[]}; surfaces: RadialMaterialSurface[]; config: RadialMaterialConfig;
     source: Pick<Awaited<ReturnType<typeof createSourceManifest>>, 'manifest' | 'assertBytes'>;
     publicDirectory: string; outputDirectory: string; sunDirection: readonly number[]; artifactId?: string | null;
     snapshotEntries?: Awaited<ReturnType<typeof createSourceManifest>>['manifest']['generatedIntermediates'];

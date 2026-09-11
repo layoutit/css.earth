@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
@@ -9,7 +10,7 @@ const PREPARED_SATURN_RUNTIME_SCENE = await readPreparedFixture('saturn', 'scene
 
 test("generic ellipsoid projection exactly preserves the independently captured native Saturn poses", async () => {
   const referenceBytes = await readFile(new URL("./fixtures/ellipsoid-projection-reference.json", import.meta.url));
-  const reference = JSON.parse(referenceBytes);
+  const reference = JSON.parse((referenceBytes).toString('utf8'));
   assert.equal(reference.referenceCommit, "3cc7bbe1a4b4cc88b9b974704c03afd3dd49b164");
   assert.equal(reference.samples.length, 96);
   // The retired executable wrapper is no longer a runtime input. Pin the
@@ -21,7 +22,8 @@ test("generic ellipsoid projection exactly preserves the independently captured 
     assert.equal(module.headers["x-cssearth-audit-source"], reference.sourceIdentity);
     assert.equal(module.headers["x-cssearth-audit-session"], reference.serverIdentity.session);
   }
-  const rotation = PREPARED_PRESENTATION.materials.find(track => track.id === "exterior").rotation;
+  const rotation = required(PREPARED_PRESENTATION.materials.find((track: { id: string; }) => track.id === "exterior")).rotation;
+  assert.ok(rotation && rotation.kind === "ellipsoid");
   const publish = createPreparedEllipsoidProjection(rotation);
   for (const [index, sample] of reference.samples.entries()) {
     assert.equal(publish(sample), sample.transform, `independent native projection ${index}`);
@@ -30,7 +32,7 @@ test("generic ellipsoid projection exactly preserves the independently captured 
 });
 
 test("the cutaway's lower-density frame bank is expanded during preparation without a private runtime mapper", () => {
-  const track = PREPARED_PRESENTATION.materials.find(track => track.id === "interior");
+  const track = required(PREPARED_PRESENTATION.materials.find((track: { id: string; }) => track.id === "interior"));
   const source = PREPARED_SATURN_RUNTIME_SCENE.interior.atmosphere;
   assert.equal(track.frame.count, 256); assert.equal(source.frameCount, 128);
   assert.deepEqual(track.banks.map(bank => bank.id), ["normal", "normal-no-shadows", "normal-ringless", "normal-ringless-no-shadows"]);

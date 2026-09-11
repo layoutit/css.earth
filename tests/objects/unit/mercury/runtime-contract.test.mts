@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import runtimeDefinition from "../../../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
@@ -20,12 +21,12 @@ test("Mercury uses one shared exclusive lens and the prepared playback owner for
     const pose = f.animations[0], records = f.stage.querySelectorAll("*");
     for (const id of ["interior", "interior", "enhanced", "interior", "normal"]) {
       const request = f.selection.dispatch({ kind: "lens", id }); await f.settle(); assert.equal(await request, true);
-      assert.equal(f.selection.state().committed.lensId, id);
-      assert.deepEqual(f.selection.state().plan.pressedLenses, [id]);
+      assert.equal(required(f.selection.state().committed).lensId, id);
+      assert.deepEqual(required(f.selection.state().plan).pressedLenses, [id]);
       assert.deepEqual(f.stage.querySelectorAll("*"), records);
       assert.equal(f.stage.dataset.view, id === "interior" ? "interior" : undefined);
     }
-    for (const [pitch, expectedTime] of [[-1, 0], [34.5, 34500], [89, 89000], [110, 89000]]) {
+    for (const [pitch, expectedTime] of [[-1, 0], [34.5, 34500], [89, 89000], [110, 89000]] as const) {
       f.selection.setView({ ...f.view, controlPitch: pitch }); await f.settle();
       assert.equal(pose.currentTime, expectedTime);
     }
@@ -37,7 +38,7 @@ test("Mercury uses one shared exclusive lens and the prepared playback owner for
 test("Mercury frame metadata changes with a decoded material and preserves the last valid address on a row miss", async () => {
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
-    const leaf = f.stage.querySelectorAll("*").find(node => node.className === "mercury-material");
+    const leaf = required(f.stage.querySelectorAll("*").find(node => node.className === "mercury-material"));
     const off = f.selection.dispatch({ kind: "toggle", name: "shadows", value: false }); await f.settle(); await off;
     assert.equal(leaf.dataset.materialMode, "full-phase-curvature"); assert.equal(leaf.dataset.materialFrame, undefined);
     const on = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); await on;

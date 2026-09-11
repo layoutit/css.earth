@@ -10,9 +10,9 @@ test('reduced science textures preserve every normalized band and gutter address
       const grid=lensTextureGrid({textureScale:scale},raster), small=createProjectiveSurfaceRasterLayout({...grid,bandCount:raster.bandCount});
       assert.equal(small.packedWidth/full.packedWidth,scale);assert.equal(small.packedHeight/full.packedHeight,scale);
       assert.equal(grid.poleSize/raster.poleSize,scale);
-      for(let i=0;i<full.bands.length;i++) for(const key of ['y','height','packedY']) assert.equal(small.bands[i][key]/small.packedHeight,full.bands[i][key]/full.packedHeight);
+      for(let i=0;i<full.bands.length;i++) for(const key of ['y','height','packedY'] as const) assert.equal(small.bands[i][key]/small.packedHeight,full.bands[i][key]/full.packedHeight);
     }
-    assert.deepEqual(lensTextureGrid({},raster),Object.fromEntries(['width','height','gutter','poleSize'].map(k=>[k,raster[k]])));
+    assert.deepEqual(lensTextureGrid({},raster),Object.fromEntries((['width','height','gutter','poleSize'] as const).map(k=>[k,raster[k]])));
     for(const lens of [{textureScale:.3},{textureScale:2},{textureScale:.5,monochromeBase:'normal'},{textureScale:.5,previewGrid:{width:32,height:16}}])assert.throws(()=>lensTextureGrid(lens,raster));
   }
 });

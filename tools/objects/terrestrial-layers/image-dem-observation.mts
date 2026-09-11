@@ -24,7 +24,7 @@ export function validateOrthographicObservation(value: unknown, sourceGeometry: 
   }
 }
 
-export async function loadOrthographicObservation({ sourceDirectory, source, recipe: value, radial, config }: SurfaceOptions) {
+export async function loadOrthographicObservation({ sourceDirectory, source, recipe: value, radial, config }: Omit<SurfaceOptions,'radial'> & {radial:Pick<SurfaceOptions['radial'],'grid'>}) {
   const recipe=parseOrthographicRecipe(value);
   validateOrthographicObservation(recipe, config.geometry.radialTerrain);
   const paths = [recipe.path, ...recipe.coordinatePaths], entries = await source.validateGroup(recipe.consumer);

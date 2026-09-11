@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, rm, writeFile, type FileHandle } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import test from 'node:test';
@@ -8,13 +8,14 @@ import { readCatalog, prepareCatalog } from './prepare-catalog.mts';
 import { prepareBodyRecords } from '../packages/astronomy/tools/body-records.mts';
 import { literalRecords } from '../packages/astronomy/tools/lib/write-record-sections.mts';
 import { prepareMarkerBindings } from './prepare-marker-bindings.mts';
+import type { PathLike } from 'node:fs';
 
-const write = async (path, value) => {
+const write = async (path: string, value: unknown) => {
   await mkdir(dirname(path), { recursive: true });
   await writeFile(path, typeof value === 'string' ? value : JSON.stringify(value, null, 2) + '\n');
 };
 
-async function addBody(root, id, classification, parent = 'sun') {
+async function addBody(root: string, id: string, classification: string, parent = 'sun') {
   await write(resolve(root, `src/planets/${id}/object.json`), {
     schema: 'cssearth-object@1', id, type: 'test', properties: {
       catalog: { name: id, classification, systemName: 'Solar System', color: '#aaaaaa',
@@ -34,7 +35,7 @@ async function addBody(root, id, classification, parent = 'sun') {
 test('independent asteroid, moon and comet branches merge without changing existing packages', async t => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-body-branches-'));
   t.after(() => rm(root, { recursive: true, force: true }));
-  const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+  const git = (...args: string[]) => execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
   git('init', '-b', 'main');
   git('config', 'user.name', 'Body addition test');
   git('config', 'user.email', 'test@example.invalid');
@@ -52,7 +53,7 @@ test('independent asteroid, moon and comet branches merge without changing exist
   git('add', '.'); git('commit', '-m', 'Base bodies');
   const base = git('rev-parse', 'HEAD');
   const existingFiles = git('ls-files').split('\n');
-  const before = new Map(await Promise.all(existingFiles.map(async file => [file, await readFile(resolve(root, file))])));
+  const before = new Map(await Promise.all(existingFiles.map(async file => [file, await readFile(resolve(root, file))] as const)));
   for (const [id, classification] of [['new-asteroid', 'asteroid'], ['new-moon', 'satellite'], ['new-comet', 'comet']]) {
     git('checkout', '-b', id, base);
     await addBody(root, id, classification, classification === 'satellite' ? 'existing-body' : 'sun');
@@ -79,7 +80,7 @@ test('an unfinished folder stays unpublished and a mismatched descriptor fails',
   const path = resolve(root, 'src/planets/planned/object.json');
   await write(path, { schema: 'cssearth-object@1', id: 'planned', properties: {} });
   assert.deepEqual((await readCatalog(resolve(root, 'src/planets'))).map(body => body.id), ['sun']);
-  const descriptor = JSON.parse(await readFile(resolve(root, 'src/planets/sun/object.json')));
+  const descriptor = JSON.parse(await readFile(resolve(root, 'src/planets/sun/object.json'), 'utf8'));
   await write(path, descriptor);
   await assert.rejects(readCatalog(resolve(root, 'src/planets')), /identity differs/);
 });

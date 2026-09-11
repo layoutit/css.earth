@@ -42,8 +42,7 @@ test('active renderer paints one retained leaf with the exact immutable prepared
     const point = [x, y, 0, 1], expected = normalize(transform(frame, transform(texture, point)));
     normalize(transform(actual, point)).forEach((value, axis) => expect(value).toBeCloseTo(expected[axis], 10));
   }
-  expect(normalize(transform(frame, [128, 80, 0, 1]))).not.toEqual(normalize(transform(actual, [128, 80, 0, 1])),
-    'removing the prepared projective factor must break the transport guarantee');
+  expect(normalize(transform(frame, [128, 80, 0, 1])), 'removing the prepared projective factor must break the transport guarantee').not.toEqual(normalize(transform(actual, [128, 80, 0, 1])));
   expect(source.style).toContain('width:32px'); expect(source.projectiveTextureLayer.textureMatrix).toBe(texture);
 });
 

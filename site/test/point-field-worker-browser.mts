@@ -1,3 +1,11 @@
+import {createTestPage} from './browser-observations.mts';
+import type {PreparedCssPointField,PointFieldVector} from '../../src/renderers/css/dist/index.js';
+type PointApi=typeof import('../../src/renderers/css/dist/testing.js');
+type FieldRotation=Parameters<PointApi['projectPreparedPoint']>[2];
+interface FieldProbe {layer:ReturnType<PointApi['mountPreparedCssPointField']>;payload:PreparedCssPointField;api:PointApi;initialSlots:HTMLElement[];viewport:{widthPixels:number;heightPixels:number;focalPixels:number;principalOffsetPixels:readonly[number,number]};counters:()=>{created:number;retired:number;posted:number};publish(x:number,angle:number):void;aligned():{count:number;error:number};exactStyles():void;expected:string[];current?:{eye:PointFieldVector;rotation:FieldRotation};}
+declare global {interface Window {__fieldTest:FieldProbe;}}
+
+import {required} from '../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
@@ -7,10 +15,10 @@ const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const output = 'output/playwright/point-field-worker';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const results = [], errors = [];
+const results = [], errors:string[] = [];
 try {
   for (const dpr of [1, 2]) {
-    const page = await browser.newPage({ viewport: { width: 1000, height: 800 }, deviceScaleFactor: dpr });
+    const page = await createTestPage(browser,{ viewport: { width: 1000, height: 800 }, deviceScaleFactor: dpr });
     page.on('pageerror', error => errors.push(error.message));
     // Load the same runtime modules in a minimal document, without a second application scene.
     await page.route('**/__point-field-test', route => route.fulfill({ contentType: 'text/html', body: '<!doctype html><style>body{margin:0;background:black}#field{position:absolute;inset:0}.prepared-point-field-block>s{position:absolute;left:50%;top:50%;width:var(--point-tile-size);height:var(--point-tile-size);transform-origin:0 0;background-image:var(--point-atlas);text-decoration:none}</style><div id="field"><span id="end"></span></div>' }));
@@ -18,27 +26,29 @@ try {
     await page.evaluate(async () => {
       const api = await import('/src/renderers/css/dist/testing.js');
       const { worldRotationFromQuaternion } = await import('/src/renderers/css/dist/navigation.js');
-      const payload = (await (await fetch('/src/objects/stellar-neighbourhood/prepared/stars.json')).json()).data;
+      const {parsePreparedCssPointField}=await import('/src/renderers/css/dist/index.js');
+      const source:unknown=await (await fetch('/src/objects/stellar-neighbourhood/prepared/stars.json')).json();
+      const payload=parsePreparedCssPointField(window.__cssearthTest.record(source,'prepared stars').data);
       const NativeWorker = window.Worker;
       let created = 0, retired = 0, posted = 0;
       window.Worker = class extends NativeWorker {
-        constructor(...args) { super(...args); created++; }
-        postMessage(data, ...args) { if (data.view) posted++; return super.postMessage(data, ...args); }
+        constructor(scriptURL:string|URL,options?:WorkerOptions) { super(scriptURL,options); created++; }
+        postMessage(data:unknown,options:Transferable[]|StructuredSerializeOptions=[]) { if (data && typeof data === "object" && "view" in data && data.view) posted++; return Array.isArray(options) ? super.postMessage(data,options) : super.postMessage(data,options); }
         terminate() { retired++; super.terminate(); }
       };
-      const layer = api.mountPreparedCssPointField({ host: document.querySelector('#field'), before: document.querySelector('#end'),
+      const layer = api.mountPreparedCssPointField({ host: window.__cssearthTest.html('#field'), before: window.__cssearthTest.element('#end'),
         payload, showLabels: false, resolveResource: path => `/src/objects/stellar-neighbourhood/prepared/${path}` });
       const initialSlots = layer.inspect().points.map(point => point.element);
       const selector = api.createPointFieldSelection(payload);
-      const viewport = { widthPixels: 1000, heightPixels: 800, focalPixels: 700, principalOffsetPixels: [29, -17] };
-      const transpose = m => [m[0], m[3], m[6], m[1], m[4], m[7], m[2], m[5], m[8]];
-      window.__fieldTest = { layer, payload, api, initialSlots, viewport,
+      const viewport = { widthPixels: 1000, heightPixels: 800, focalPixels: 700, principalOffsetPixels: [29, -17] as const };
+      const transpose = (m:readonly number[]):FieldRotation => [m[0], m[3], m[6], m[1], m[4], m[7], m[2], m[5], m[8]];
+      window.__fieldTest = { layer, payload, api, initialSlots, viewport,expected:[],
         counters: () => ({ created, retired, posted }),
         publish(x, angle) {
           const rotation = transpose(worldRotationFromQuaternion([0, Math.sin(angle / 2), 0, Math.cos(angle / 2)]));
-          const eye = [x, 0, 0];
-          const world = { referenceFrame: payload.frame.referenceFrame, epochJdTt: payload.frame.epochJdTt,
-            pose: { positionM: eye.map((value, axis) => value * payload.frame.metersPerUnit + payload.frame.originM[axis]),
+          const eye = [x, 0, 0] as const;
+          const world:import("../../src/renderers/css/dist/navigation.js").WorldCameraPose = { referenceFrame: payload.frame.referenceFrame, epochJdTt: payload.frame.epochJdTt,
+            pose: { positionM: [eye[0] * payload.frame.metersPerUnit + payload.frame.originM[0],payload.frame.originM[1],payload.frame.originM[2]],
               orientationXyzw: [0, Math.sin(angle / 2), 0, Math.cos(angle / 2)] } };
           this.current = { eye, rotation };
           layer.publish(world, viewport, 1);
@@ -50,8 +60,8 @@ try {
           for (const { element, reference } of layer.inspect().points) {
             if (!reference || element.style.visibility === 'hidden') continue;
             const [kind, index] = reference.split(':');
-            const point = (kind === 'star' ? payload.stars : payload.nodes)[index];
-            const p = api.projectPreparedPoint(point.positionUnits, this.current.eye, this.current.rotation, 700, 29, -17);
+            const point = window.__cssearthTest.required((kind === 'star' ? payload.stars : payload.nodes)[Number(index)],'prepared point');
+            const p = api.projectPreparedPoint(point.positionUnits, window.__cssearthTest.required(this.current,"published point view").eye, window.__cssearthTest.required(this.current,"published point view").rotation, 700, 29, -17);
             const transform = new DOMMatrix(element.style.transform);
             error = Math.max(error, Math.hypot(transform.m41 + transform.m11 * payload.atlas.tileSize / 2 - p.x,
               transform.m42 + transform.m22 * payload.atlas.tileSize / 2 - p.y)); count++;
@@ -61,9 +71,9 @@ try {
         exactStyles() {
           for (const { element, reference } of layer.inspect().points) {
             if (!reference || element.style.visibility === 'hidden') continue;
-            const [kind, index] = reference.split(':'), point = (kind === 'star' ? payload.stars : payload.nodes)[index];
-            const p = api.projectPreparedPoint(point.positionUnits, this.current.eye, this.current.rotation, 700, 29, -17);
-            const light = api.pointPhotometry(payload, point.absoluteMagnitude, p.distanceUnits, kind === 'star' && point.coverageAnchor);
+            const [kind, index] = reference.split(':'), point = window.__cssearthTest.required((kind === 'star' ? payload.stars : payload.nodes)[Number(index)],'prepared point');
+            const p = api.projectPreparedPoint(point.positionUnits, window.__cssearthTest.required(this.current,"published point view").eye, window.__cssearthTest.required(this.current,"published point view").rotation, 700, 29, -17);
+            const light = api.pointPhotometry(payload, point.absoluteMagnitude, p.distanceUnits, kind === 'star' && 'coverageAnchor' in point && point.coverageAnchor);
             const size = light.radiusPx * 2 * payload.atlas.haloRadii;
             element.style.transform = `translate(${p.x - size / 2}px,${p.y - size / 2}px) scale(${size / payload.atlas.tileSize})`;
             element.style.opacity = String(light.luminance);

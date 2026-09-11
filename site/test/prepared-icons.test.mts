@@ -3,6 +3,7 @@ import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import test from "node:test";
+import { SourceEvidence } from "./source-evidence-values.mts";
 
 import { sha256 } from "../../src/platform/prepared-title.mts";
 import { prepareShellIcons } from "../../tools/prepare-shell-icons.mts";
@@ -44,13 +45,13 @@ test("prepares one source-bound 20px SVG family for sidebar sections", async (co
       resolve(publicRoot, descriptor.outputFile),
       "utf8",
     );
-    const icon = PREPARED_SHELL_ICONS[descriptor.key];
+    const icon = SourceEvidence.parse(PREPARED_SHELL_ICONS[descriptor.key]);
     assert.equal(sha256(source), descriptor.sourceSha256);
-    assert.equal(icon.sourceSha256, descriptor.sourceSha256);
-    assert.equal(icon.width, 20);
-    assert.equal(icon.height, 20);
-    assert.equal(icon.family, "Wikimedia Commons Unicode symbols");
-    assert.equal(icon.glyph, descriptor.glyph);
-    assert.equal(icon.preparedSha256, sha256(Buffer.from(preparedSvg)));
+    assert.equal(icon.text("sourceSha256"), descriptor.sourceSha256);
+    assert.equal(icon.field("width"), 20);
+    assert.equal(icon.field("height"), 20);
+    assert.equal(icon.text("family"), "Wikimedia Commons Unicode symbols");
+    assert.equal(icon.text("glyph"), descriptor.glyph);
+    assert.equal(icon.text("preparedSha256"), sha256(Buffer.from(preparedSvg)));
   }
 });

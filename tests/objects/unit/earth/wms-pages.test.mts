@@ -4,8 +4,9 @@ import { PREPARED_EARTH_SCENE } from "../../unit/earth/prepared-fixture.mts";
 import { prepareWmsPage } from "../../../../tools/objects/geographic-pages/wms-page-geometry.mts";
 import { prepareCityPageGeometry, createCityGeographicSampler } from "../../../../tools/objects/geographic-pages/page-geometry.mts";
 import { isPreparedWmsImage, readWmsImage } from "../../../../src/renderers/css/dist/testing.js";
+import type { PageGeometry } from "../../../../tools/objects/geographic-pages/contracts.mts";
 
-function worldPoint(page,u,v) {
+function worldPoint(page: Pick<PageGeometry,'textureMatrix'|'frameMatrix'>,u: number,v: number) {
   let p=[u*1024,v*1024,0,1];
   for(const serialized of [page.textureMatrix,page.frameMatrix]) {
     const m=serialized.split(",").map(Number);

@@ -6,7 +6,7 @@ import { mountEarthClient } from "../../unit/earth/prepared-fixture.mts";
 import { retainedPresentationFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 
 test("Earth rejects a missing fatal owner before native allocation", () => {
-  assert.throws(() => mountEarthClient({ nodeType: 1, style: {}, dataset: { objectId: "earth" }, ownerDocument: {} }), /error owner/);
+  assert.throws(() => Reflect.apply(mountEarthClient,undefined,[{ nodeType: 1, style: {}, dataset: { objectId: "earth" }, ownerDocument: {} }]), /error owner/);
 });
 for (const failAtElement of [1, 2, 3]) test(`Earth partial native construction preserves an earlier owner (${failAtElement})`, () => {
   const f = retainedPresentationFixture(runtimeDefinition, { failAtElement });

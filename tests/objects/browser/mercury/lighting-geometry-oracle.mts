@@ -1,3 +1,5 @@
+import { requireRecord, requireArray, requireFiniteNumber } from '../../../../tools/source-values.mts';
+export interface MercuryEphemeris { readonly source: string; readonly heliocentricIcrfAu: readonly number[]; readonly pole: { readonly rightAscensionDegrees: number; readonly declinationDegrees: number }; }
 // Independent oracle for the Mercury lighting and sky geometry browser suite.
 //
 // Everything here is derived from raw astronomy and its own vector maths. It
@@ -58,30 +60,33 @@ export const FALLBACK_EPHEMERIS = Object.freeze({
 export async function loadMercuryEphemeris({
   astronomyUrl = process.env.CSSEARTH_ASTRONOMY_URL ?? DEFAULT_ASTRONOMY_URL,
 } = {}) {
-  let astronomy = null;
+  let moduleValue: unknown = null;
   try {
-    astronomy = await import(astronomyUrl);
+    moduleValue = await import(astronomyUrl);
   } catch {
-    astronomy = null;
+    moduleValue = null;
   }
-  if (astronomy === null) {
+  if (moduleValue === null) {
     return Object.freeze({
       ...FALLBACK_EPHEMERIS,
       fallback: true,
     });
   }
-  const heliocentricIcrfAu = astronomy.systemBarycentreHeliocentricAu(
-    "mercury",
-    EPOCH_JD_TT,
-  );
-  const elements = astronomy.bodyRotationAt("mercury", EPOCH_JD_TT);
+  const astronomy = requireRecord(moduleValue, 'Astronomy module');
+  const position = astronomy.systemBarycentreHeliocentricAu, rotation = astronomy.bodyRotationAt;
+  if (typeof position !== 'function' || typeof rotation !== 'function') throw new TypeError('Astronomy module must expose position and rotation functions');
+  const rawPosition: unknown = Reflect.apply(position, undefined, ['mercury', EPOCH_JD_TT]);
+  const heliocentricIcrfAu = requireArray(rawPosition).map(value => requireFiniteNumber(value));
+  if (heliocentricIcrfAu.length !== 3) throw new TypeError('Astronomy position must contain three components');
+  const rawElements: unknown = Reflect.apply(rotation, undefined, ['mercury', EPOCH_JD_TT]);
+  const elements = requireRecord(rawElements);
   const ephemeris = Object.freeze({
     source: `astronomy package (VSOP87A + IAU/WGCCRE) at ${astronomyUrl}`,
     fallback: false,
     heliocentricIcrfAu: Object.freeze([...heliocentricIcrfAu]),
     pole: Object.freeze({
-      rightAscensionDegrees: elements.poleRightAscensionRad * 180 / Math.PI,
-      declinationDegrees: elements.poleDeclinationRad * 180 / Math.PI,
+      rightAscensionDegrees: requireFiniteNumber(elements.poleRightAscensionRad) * 180 / Math.PI,
+      declinationDegrees: requireFiniteNumber(elements.poleDeclinationRad) * 180 / Math.PI,
     }),
   });
   // The live build must agree with the independently sourced table; a
@@ -117,7 +122,7 @@ export const SKY_ANCHORS = Object.freeze([
   Object.freeze({ name: "M45", l: 166.57, b: -23.52, extentDegrees: 1.5 }),
 ]);
 
-export function buildOracle(ephemeris) {
+export function buildOracle(ephemeris: MercuryEphemeris) {
   const sunIcrf = normalize(scale(ephemeris.heliocentricIcrfAu, -1));
   const obliquity = OBLIQUITY_J2000_DEGREES * Math.PI / 180;
   // ICRF +z tilted about +x by the obliquity is the ecliptic north pole.
@@ -132,7 +137,7 @@ export function buildOracle(ephemeris) {
   const xAxis = scale(sunInPlane, -1);
   const yAxis = scale(eclipticNorthIcrf, -1);
   const zAxis = cross(xAxis, yAxis);
-  const icrfToPresentation = (direction) => [
+  const icrfToPresentation = (direction: readonly number[]) => [
     dot(xAxis, direction),
     dot(yAxis, direction),
     dot(zAxis, direction),
@@ -146,7 +151,7 @@ export function buildOracle(ephemeris) {
   );
   const polePresentation = icrfToPresentation(poleIcrf);
   const galactic = galacticBasis();
-  const galacticToIcrf = ([l, b]) => {
+  const galacticToIcrf = ([l, b]: readonly number[]) => {
     const [gx, gy, gz] = directionFromDegrees(l, b);
     return normalize([
       galactic.x[0] * gx + galactic.y[0] * gy + galactic.z[0] * gz,
@@ -172,29 +177,29 @@ export function buildOracle(ephemeris) {
       Math.acos(Math.abs(dot(galactic.z, eclipticNorthIcrf))) * 180 / Math.PI,
     icrfToPresentation,
     galacticToIcrf,
-    galacticToPresentation: (lb) => icrfToPresentation(galacticToIcrf(lb)),
+    galacticToPresentation: (lb: readonly number[]) => icrfToPresentation(galacticToIcrf(lb)),
     northGalacticPolePresentation,
     // A camera pose is the painted scene rotation, row-major 3x3 in CSS
     // coordinates; a presentation direction becomes a CSS view direction.
-    view(pose, presentationDirection) {
+    view(pose: readonly number[], presentationDirection: readonly number[]) {
       return normalize(applyMatrix(pose, presentationDirection));
     },
   });
 }
 
 // Screen readings of a CSS view direction (x right, y down, z toward viewer).
-export function litDirectionDegrees([x, y]) {
+export function litDirectionDegrees([x, y]: readonly number[]) {
   return Math.atan2(-y, x) * 180 / Math.PI;
 }
 
-export function illuminatedFraction([, , z]) {
+export function illuminatedFraction([, , z]: readonly number[]) {
   return (1 + z) / 2;
 }
 
 // Perspective projection of a far direction onto the screen, in CSS pixels
 // from the view centre (y down), for a focal length in pixels. Null when the
 // direction is not in front of the camera.
-export function projectDirection(direction, focalPixels) {
+export function projectDirection(direction: readonly number[], focalPixels: number) {
   const [x, y, z] = direction;
   if (!(z < 0)) return null;
   return [focalPixels * x / -z, focalPixels * y / -z];
@@ -202,7 +207,7 @@ export function projectDirection(direction, focalPixels) {
 
 // Principal axis of weighted screen samples, degrees from horizontal with y
 // up, in [0, 180).
-export function principalAxisDegrees(samples) {
+export function principalAxisDegrees(samples: readonly (readonly number[])[]) {
   let weight = 0;
   let meanX = 0;
   let meanY = 0;
@@ -229,7 +234,7 @@ export function principalAxisDegrees(samples) {
 // The painted CSS transform of the scene, as a row-major 3x3 rotation. The
 // scene transform is `scale(s) matrix3d(...)`; matrix3d lists columns first,
 // so element (row i, column j) is value[j * 4 + i].
-export function parseSceneRotation(cssTransform) {
+export function parseSceneRotation(cssTransform: string) {
   const match = /matrix3d\(([^)]+)\)/u.exec(cssTransform);
   if (!match) throw new Error(`No matrix3d in transform: ${cssTransform}`);
   const values = match[1].split(",").map(Number);
@@ -261,7 +266,7 @@ export function parseSceneRotation(cssTransform) {
 
 // Decomposes a pose into the Rx(pitch) * Ry(yaw) angles it was built from
 // (for reporting; the oracle itself only ever uses the matrix).
-export function scenePitchYawDegrees(matrix) {
+export function scenePitchYawDegrees(matrix: readonly number[]) {
   // Rx(p) Ry(y): row 2 = [ -sin? ...]. Compute from the image of +z and +x.
   const zImage = applyMatrix(matrix, [0, 0, 1]);
   const xImage = applyMatrix(matrix, [1, 0, 0]);
@@ -272,22 +277,22 @@ export function scenePitchYawDegrees(matrix) {
   return { pitchDegrees: pitch, yawDegrees: yaw };
 }
 
-export function rotationX(degrees) {
+export function rotationX(degrees: number) {
   const angle = degrees * Math.PI / 180;
   const cos = Math.cos(angle);
   const sin = Math.sin(angle);
   return [1, 0, 0, 0, cos, -sin, 0, sin, cos];
 }
 
-export function rotationY(degrees) {
+export function rotationY(degrees: number) {
   const angle = degrees * Math.PI / 180;
   const cos = Math.cos(angle);
   const sin = Math.sin(angle);
   return [cos, 0, sin, 0, 1, 0, -sin, 0, cos];
 }
 
-export function multiplyMatrices(a, b) {
-  const result = new Array(9);
+export function multiplyMatrices(a: readonly number[], b: readonly number[]) {
+  const result = new Array<number>(9);
   for (let row = 0; row < 3; row += 1) {
     for (let column = 0; column < 3; column += 1) {
       result[row * 3 + column] = a[row * 3] * b[column] +
@@ -297,7 +302,7 @@ export function multiplyMatrices(a, b) {
   return result;
 }
 
-export function applyMatrix(matrix, [x, y, z]) {
+export function applyMatrix(matrix: readonly number[], [x, y, z]: readonly number[]) {
   return [
     matrix[0] * x + matrix[1] * y + matrix[2] * z,
     matrix[3] * x + matrix[4] * y + matrix[5] * z,
@@ -305,11 +310,11 @@ export function applyMatrix(matrix, [x, y, z]) {
   ];
 }
 
-export function directionFromRaDec(raDegrees, decDegrees) {
+export function directionFromRaDec(raDegrees: number, decDegrees: number) {
   return directionFromDegrees(raDegrees, decDegrees);
 }
 
-export function directionFromDegrees(longitudeDegrees, latitudeDegrees) {
+export function directionFromDegrees(longitudeDegrees: number, latitudeDegrees: number) {
   const longitude = longitudeDegrees * Math.PI / 180;
   const latitude = latitudeDegrees * Math.PI / 180;
   return [
@@ -319,20 +324,20 @@ export function directionFromDegrees(longitudeDegrees, latitudeDegrees) {
   ];
 }
 
-export function angleBetweenDegrees(a, b) {
+export function angleBetweenDegrees(a: readonly number[], b: readonly number[]) {
   const cosine = dot(a, b) / (Math.hypot(...a) * Math.hypot(...b));
   return Math.acos(Math.max(-1, Math.min(1, cosine))) * 180 / Math.PI;
 }
 
-export function wrapDegrees(degrees) {
+export function wrapDegrees(degrees: number) {
   return ((degrees % 360) + 540) % 360 - 180;
 }
 
-export function dot(a, b) {
+export function dot(a: readonly number[], b: readonly number[]) {
   return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 }
 
-export function cross(a, b) {
+export function cross(a: readonly number[], b: readonly number[]) {
   return [
     a[1] * b[2] - a[2] * b[1],
     a[2] * b[0] - a[0] * b[2],
@@ -340,15 +345,15 @@ export function cross(a, b) {
   ];
 }
 
-export function subtract(a, b) {
+export function subtract(a: readonly number[], b: readonly number[]) {
   return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
 }
 
-export function scale(vector, factor) {
+export function scale(vector: readonly number[], factor: number) {
   return vector.map((component) => component * factor);
 }
 
-export function normalize(vector) {
+export function normalize(vector: readonly number[]) {
   const magnitude = Math.hypot(...vector);
   if (!(magnitude > 0)) throw new RangeError("Direction has no magnitude.");
   return vector.map((component) => component / magnitude);

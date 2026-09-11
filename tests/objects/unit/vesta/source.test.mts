@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
@@ -9,16 +10,16 @@ import { colorForValue } from '../../../../tools/objects/terrestrial-layers/scie
 import { preparePlanetarySystem } from '../../../../src/platform/prepare-planetary-system.mts';
 import { prepareEclipticPresentationFrame } from '../../../../src/platform/solar-presentation-frame.mts';
 const root = resolve(import.meta.dirname, '../../../..'), base = resolve(root, 'src/planets/vesta');
-const read = async path => JSON.parse(await readFile(resolve(base, path), 'utf8'));
+const read = async (path: string) => JSON.parse(await readFile(resolve(base, path), 'utf8'));
 
 test('Dawn radius anchors preserve meters, poles and east longitude; elevation has a numeric datum', async () => {
   const config = await read('source/preparation/terrestrial.json'), profile = config.geometry.radialTerrain;
   const grid = await loadPdsScalarGrid(resolve(base, 'source', profile.path), profile.grid, { width: 361, height: 181 });
   // Independent values read directly from the native PDS rows, not fitted axes.
-  for (const [longitude, latitude, expected] of [[0, 0, 281444], [90, 0, 274738], [180, 0, 278152], [270, 0, 284430], [0, 90, 231352], [0, -90, 225276]]) {
-    assert.ok(Math.abs(grid.sample(longitude, latitude) - expected) < 1, `${longitude}E ${latitude}N must remain a radius in meters`);
+  for (const [longitude, latitude, expected] of [[0, 0, 281444], [90, 0, 274738], [180, 0, 278152], [270, 0, 284430], [0, 90, 231352], [0, -90, 225276]] as const) {
+    assert.ok(Math.abs(required(grid.sample(longitude, latitude)) - expected) < 1, `${longitude}E ${latitude}N must remain a radius in meters`);
   }
-  const lens = config.raster.scientific.find(lens => lens.id === 'elevation');
+  const lens = config.raster.scientific.find((lens: { id: string; }) => lens.id === 'elevation');
   assert.deepEqual(lens.valueTransform, { scale: .001, offset: -255 });
   const { data, info } = await sharp(resolve(root, 'public/scenes/vesta/vesta-elevation-legend.webp')).removeAlpha().raw().toBuffer({ resolveWithObject: true });
   for (const x of [0, 64, 128, 255]) for (const y of [0, 15]) {
@@ -32,7 +33,7 @@ test('Dawn radius anchors preserve meters, poles and east longitude; elevation h
 test('Vesta uses one shared scene and its measured mesh for drawing and hits', async () => {
   const [runtime, terrain, descriptor, manifest, scene] = await Promise.all(['prepared/runtime.json', 'prepared/terrain.json', 'object.json', 'runtime-assets.json', 'prepared/scene.json'].map(read));
   assert.equal(descriptor.properties.recipe.shape.kind, 'radial-terrain');
-  assert.equal(runtime.tree.nodes.filter(n => n.className?.includes('polycss-camera')).length, 1);
+  assert.equal(runtime.tree.nodes.filter((n: { className: string|string[]; }) => n.className?.includes('polycss-camera')).length, 1);
   assert.equal(runtime.surfaceHit.triangles.length, terrain.faces.length);
   assert.ok(terrain.faces.length <= 850, 'Vesta stays near the requested 800-face budget');
   assert.equal(scene.bodyLeaves.length, terrain.faces.length);
@@ -48,8 +49,8 @@ test('Vesta uses one shared scene and its measured mesh for drawing and hits', a
     const size = terrain.source.tileSize;
     const corners = [[size / 2, 0], [0, size], [size, size]].map(([x, y]) =>
       [0, 1, 2].map(axis => matrix[axis] * x + matrix[axis + 4] * y + matrix[axis + 12]));
-    const sub = (a, b) => a.map((value, axis) => value - b[axis]);
-    const dot = (a, b) => a.reduce((sum, value, axis) => sum + value * b[axis], 0);
+    const sub = (a:readonly number[], b:readonly number[]) => a.map((value: number, axis: number) => value - b[axis]);
+    const dot = (a:readonly number[], b:readonly number[]) => a.reduce((sum: number, value: number, axis: number) => sum + value * b[axis], 0);
     const ab = sub(corners[1], corners[0]), ac = sub(corners[2], corners[0]);
     const aa = dot(ab, ab), bb = dot(ac, ac), abac = dot(ab, ac), determinant = aa * bb - abac * abac;
     for (const [y, x, z] of terrain.faces[index].vertices) {
@@ -57,7 +58,7 @@ test('Vesta uses one shared scene and its measured mesh for drawing and hits', a
       const u = (dot(p, ab) * bb - dot(p, ac) * abac) / determinant;
       const v = (dot(p, ac) * aa - dot(p, ab) * abac) / determinant;
       assert.ok(u >= 0 && v >= 0 && u + v <= 1, `native triangle ${index} covers its source vertices`);
-      assert.ok(Math.hypot(...p.map((value, axis) => value - u * ab[axis] - v * ac[axis])) < 1e-5,
+      assert.ok(Math.hypot(...p.map((value: number, axis: number) => value - u * ab[axis] - v * ac[axis])) < 1e-5,
         `native triangle ${index} stays in its measured plane`);
     }
   }

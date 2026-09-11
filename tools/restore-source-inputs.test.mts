@@ -10,6 +10,7 @@ import type { AddressInfo } from 'node:net';
 import { setupObjectIds } from './runtime-assets.mts';
 import { validateObjectPackageFiles } from './object-package-contract.mts';
 import { requireArray, requireRecord, requireString } from './source-values.mts';
+import { parseAcquisitionPlan } from './objects/dist/operations.js';
 
 const project = resolve(import.meta.dirname, '..');
 const pin = (path: string, bytes: Uint8Array) => ({ path, expectedBytes: bytes.length,
@@ -56,8 +57,9 @@ test('every registered body has its package files and tracked or restorable sour
     const source = `src/planets/${id}/source`;
     const inputs: unknown[] = await Promise.all(['manifest.json', 'preparation/acquisition.json']
       .map(async path => JSON.parse(await readFile(resolve(project, source, path), 'utf8'))));
-    const manifest = requireRecord(inputs[0]), plan = requireRecord(inputs[1]);
-    const restored = new Set(requireArray(plan.operations).map(operation => requireString(requireRecord(operation).path)));
+    const manifest = requireRecord(inputs[0]), plan = parseAcquisitionPlan(inputs[1]);
+    // Verification-only operations compare existing evidence; they create no file.
+    const restored = new Set(plan.operations.flatMap(operation => 'path' in operation ? [operation.path] : []));
     for (const value of [...requireArray(manifest.inputs), ...requireArray(manifest.documents), ...requireArray(manifest.generatedIntermediates)]) {
       const entry = requireRecord(value);
       const entryPath = requireString(entry.path);

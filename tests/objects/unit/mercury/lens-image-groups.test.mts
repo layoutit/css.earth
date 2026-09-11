@@ -1,9 +1,12 @@
-import { mountPreparedPresentation } from "../../../../src/platform/prepared-presentation.mts";
+import {parsePreparedObjectRuntime} from '../../../../src/renderers/css/dist/index.js';
+const runtimeDefinition=parsePreparedObjectRuntime(runtimeSource);
+import {required} from '../../../../tools/test-values.mts';
+import { mountPreparedPresentation } from "../../../../src/renderers/css/dist/testing.js";
 import assert from "node:assert/strict";
 import test from "node:test";
-import runtimeDefinition from "../../../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
+import runtimeSource from "../../../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
 import { preparedSelectionFixture, retainedPresentationFixture } from "../../../../src/platform/test/object-runtime-package.mts";
-const pool = f => f.residency.stats().pools.find(pool => pool.id === "lenses");
+const pool = (f:Awaited<ReturnType<typeof preparedSelectionFixture>>) => required(f.residency.stats().pools.find((pool: { id: string; }) => pool.id === "lenses"));
 
 test("Mercury Shadows swaps both cutaway exterior textures while retaining the interior", async () => {
   const f = await preparedSelectionFixture(runtimeDefinition);
@@ -11,10 +14,10 @@ test("Mercury Shadows swaps both cutaway exterior textures while retaining the i
     const request = f.selection.dispatch({ kind: "lens", id: "interior" });
     await f.settle(); await request;
     const nodes = f.stage.querySelectorAll("*");
-    const body = nodes.find(node => node.classList.contains("mercury-cutaway-body"));
+    const body = required(nodes.find(node => node.classList.contains("mercury-cutaway-body")));
     const read = () => ["--mercury-interior-outer-image", "--mercury-interior-outer-poles-image"]
       .map(name => body.style.getPropertyValue(name));
-    const states = [];
+    const states: string[][] = [];
     for (const value of [false, true, false]) {
       const change = f.selection.dispatch({ kind: "toggle", name: "shadows", value });
       await f.settle(); await change;
@@ -59,18 +62,18 @@ test("Mercury retains one prepared interior and its shared pose animation across
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     const nodes = f.stage.querySelectorAll("*");
-    assert.equal(f.animations.length, 1);
+    assert.equal(f.animations.length, 2);
     f.playback.setAllowed(true);
     for (const id of ["interior", "enhanced", "interior", "normal", "interior"]) {
       const request = f.selection.dispatch({ kind: "lens", id }); await f.settle(); assert.equal(await request, true);
-      assert.deepEqual(f.stage.querySelectorAll("*"), nodes); assert.equal(f.animations.length, 1);
+      assert.deepEqual(f.stage.querySelectorAll("*"), nodes); assert.equal(f.animations.length, 2);
     }
     const change = f.selection.dispatch({ kind: "cycle", name: "speed", value: 2 }); await f.settle(); await change;
     f.selection.setView({ ...f.view, controlPitch: 89, revision: 2 }); await f.settle();
-    const pose = f.playback.stats().animations[0];
+    const pose = required(f.playback.stats().animations.find(animation=>animation.mode === "pose"));
     assert.equal(pose.mode, "pose"); assert.equal(pose.running, false); assert.equal(pose.rate, 1);
     assert.equal(pose.currentTime, 89000);
-    f.lifetime.destroy(); assert.equal(f.animations[0].playState, "idle");
+    f.lifetime.destroy(); assert.ok(f.animations.every(animation=>animation.playState === "idle"));
   } finally { f.restore(); }
 });
 

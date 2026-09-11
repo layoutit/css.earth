@@ -13,7 +13,7 @@ import sharp from 'sharp';
 function demand(ok: unknown, why: string): asserts ok { if (!ok) throw new Error(`Night lights: ${why}`); };
 const prepared = new Map<string, Promise<Float32Array>>();
 
-export function validateNightLightGrid(image: GeoTIFFImage, recipe: Pick<NightLightRecipe, "grid">) {
+export function validateNightLightGrid(image: Pick<GeoTIFFImage,'getWidth'|'getHeight'|'getBoundingBox'|'getSamplesPerPixel'|'getGDALNoData'|'getGeoKeys'>, recipe: Pick<NightLightRecipe, "grid">) {
   const grid = recipe.grid, bounds = image.getBoundingBox(), keys = image.getGeoKeys();
   demand(grid.width === 86400 && grid.height === 33600 && grid.cellDegrees === 1 / 240 &&
     JSON.stringify(grid.bounds) === JSON.stringify([-180, -65, 180, 75]), 'unsupported source grid');

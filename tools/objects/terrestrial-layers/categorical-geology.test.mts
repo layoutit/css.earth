@@ -1,3 +1,6 @@
+import { required, fixtureRecord } from '../../test-values.mts';
+import { requireArray, requireString } from '../../source-values.mts';
+import { parseGeologyLens } from './source-records.mts';
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
@@ -7,12 +10,12 @@ import {loadGeologySurface, createGeologySampler, categoryColorForValue, validat
   decodeGeologyAttributes, decodeGeologyPolygons} from './categorical-geology.mts';
 
 const root = fileURLToPath(new URL('../../../src/planets/', import.meta.url));
-const rectangle = (west, south, east, north) => [[west, south], [east, south], [east, north], [west, north], [west, south]];
-const polygon = (category, rings) => ({category, rings, south: Math.min(...rings.flat().map(point => point[1])), north: Math.max(...rings.flat().map(point => point[1]))});
-const body = async id => {
+const rectangle = (west: number, south: number, east: number, north: number) => [[west, south], [east, south], [east, north], [west, north], [west, south]];
+const polygon = (category: number|null, rings: number[][][]) => ({category, rings, south: Math.min(...rings.flat().map(point => point[1])), north: Math.max(...rings.flat().map(point => point[1]))});
+const body = async (id: string) => {
   const source = `${root}${id}/source`;
   const recipe = JSON.parse(await readFile(`${source}/preparation/terrestrial.json`, 'utf8'));
-  const lens = recipe.raster.scientific.find(lens => lens.id === 'geology');
+  const lens = parseGeologyLens(required(requireArray(recipe.raster.scientific).find(value => fixtureRecord(value).id === 'geology')));
   return {source, lens, surface: await loadGeologySurface(source, lens)};
 };
 
@@ -71,21 +74,21 @@ test('Io label-point longitude is west while the same archived SHP coordinate is
   let offset = 100;
   for (const row of rows) {
     const x = points.readDoubleLE(offset + 12), y = points.readDoubleLE(offset + 20);
-    if (row.Long_W) {
-      const east = ((-Number(row.Long_W) + 180) % 360 + 360) % 360 - 180;
+    if (required(row).Long_W) {
+      const east = ((-Number(required(row).Long_W) + 180) % 360 + 360) % 360 - 180;
       assert.ok(Math.abs(east - x) < 1e-8);
-      assert.ok(Math.abs(Number(row.Lat) - y) < 1e-8);
+      assert.ok(Math.abs(Number(required(row).Lat) - y) < 1e-8);
     }
     offset += 8 + points.readInt32BE(offset + 4) * 2;
   }
-  assert.equal(lens.categories[surface.sample(-97.14483174681664, -88.55184526182711)].value, 'Mu');
-  assert.equal(lens.categories[surface.sample(27.976930180564523, -83.46270116232336)].value, 'Fb');
+  assert.equal(lens.categories[required(surface.sample(-97.14483174681664, -88.55184526182711))].value, 'Mu');
+  assert.equal(lens.categories[required(surface.sample(27.976930180564523, -83.46270116232336))].value, 'Fb');
 });
 
 test('Ganymede excludes only the declared zero-area ring, retaining its valid multipart polygon', async () => {
   const {source, lens} = await body('ganymede'), bytes = await readFile(`${source}/${lens.path}`);
   const polygons = decodeGeologyPolygons(bytes, lens.grid);
-  assert.equal(polygons[3022].rings.length, 90);
+  assert.equal(required(polygons[3022]).rings.length, 90);
   assert.throws(() => decodeGeologyPolygons(bytes, {...lens.grid, withheldDegenerateRings: []}), /Unclosed/);
   assert.throws(() => decodeGeologyPolygons(bytes, {...lens.grid, expectedRecords: 3045}), /population/);
   assert.throws(() => decodeGeologyPolygons(bytes.subarray(0, bytes.length - 1), lens.grid), /header/);

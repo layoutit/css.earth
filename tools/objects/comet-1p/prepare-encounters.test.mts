@@ -1,3 +1,4 @@
+import { required } from '../../test-values.mts';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -15,12 +16,12 @@ test('Vega cameras recover the published longitude anchor and independent header
   assert.ok(Math.abs(first.eastLongitudeDegrees-270)<1e-9);
   assert.ok(first.latitudeDegrees<0 && second.latitudeDegrees>0,'The two frames view different latitudes.');
   // Independent values transcribed from the original TVS headers, not the fit JSON.
-  for(const [camera,range,phase,sun] of [[first,8032,28.7,113.3],[second,11040,23.5,234.7]]) {
+  for(const [camera,range,phase,sun] of [[first,8032,28.7,113.3],[second,11040,23.5,234.7]] as const) {
     assert.ok(Math.abs(camera.rangeKm/range-1)<.01);
     assert.ok(Math.abs(camera.phaseDegrees-phase)<.5);
     assert.ok(Math.abs(camera.sunCounterclockwiseFromUpDegrees-sun)<1.5);
     assert.ok(Math.abs(Math.hypot(...camera.bodyEye)-1)<1e-12);
-    assert.ok(Math.abs(camera.bodyRight.reduce((s,n,i)=>s+n*camera.bodyUp[i],0))<1e-12);
+    assert.ok(Math.abs(camera.bodyRight.reduce((s: number,n: number,i: number)=>s+n*camera.bodyUp[i],0))<1e-12);
   }
   await assert.rejects(deriveVegaCamera(source,'1986-03-09T09:00:00Z'),/qualified close encounter/);
 });
@@ -41,13 +42,13 @@ test('KFKI detector decoding rejects changed samples, headers and truncated padd
 test('Source visibility and all interpolation corners guard coverage without using brightness',()=>{
   const positions=[[-20000,-20000,0],[20000,-20000,0],[0,20000,0],[-20000,-20000,1000],[20000,-20000,1000],[0,20000,1000]];
   const mesh=createIndexedShape(positions,[[0,1,2],[3,4,5]],{metersPerUnit:1,expectedVertices:6,expectedFaces:2});
-  const observation={bodyRight:[1,0,0],bodyUp:[0,1,0],bodyEye:[0,0,1],bodySun:[0,0,1],kmPerPixel:[1,2],scaleMultiplier:1,center:[10,10],footprintPolygon:[[4,4],[16,4],[16,16],[4,16]]};
+  const observation={id:'synthetic',utc:'1986-03-09T07:19:58Z',bodyRight:[1,0,0],bodyUp:[0,1,0],bodyEye:[0,0,1],bodySun:[0,0,1],kmPerPixel:[1,2],scaleMultiplier:1,center:[10,10],footprintPolygon:[[4,4],[16,4],[16,16],[4,16]]};
   const mask={physicalInsetKm:1.1,maximumEmissionDegrees:75,maximumIncidenceDegrees:80};
   const image={data:Buffer.alloc(20*20),width:20,height:20};
   const black=createVegaSampler(mesh,observation,mask,image),white=createVegaSampler(mesh,observation,mask,{...image,data:Buffer.alloc(400,255)});
-  assert.equal(black([0,0,1000],1).dn,0);
-  assert.equal(white([0,0,1000],1).dn,255);
-  assert.deepEqual(black([0,0,1000],1).pixel,white([0,0,1000],1).pixel);
+  assert.equal(required(black([0,0,1000],1)).dn,0);
+  assert.equal(required(white([0,0,1000],1)).dn,255);
+  assert.deepEqual(required(black([0,0,1000],1)).pixel,required(white([0,0,1000],1)).pixel);
   assert.equal(black([0,0,0],0),null,'A front-facing sample hidden by another source triangle must be rejected.');
   assert.equal(black([-4500,0,1000],1),null,'The sample centre alone cannot qualify a border interpolation.');
   assert.ok(black([-4000,0,1000],1));
@@ -67,8 +68,8 @@ test('Display matching withholds sparse, excessive and inconsistent fits',()=>{
 test('Observation selection favors resolution and keeps deterministic ties independent of brightness',()=>{
   const coarse={dn:250,pixel:[2,2],emission:.5,resolutionKm:.5};
   const fine={dn:0,pixel:[2,2],emission:1,resolutionKm:.2};
-  assert.equal(selectVegaCandidate([coarse,fine]).index,1);
-  assert.equal(selectVegaCandidate([fine,{...fine,dn:255}]).index,0);
+  assert.equal(required(selectVegaCandidate([coarse,fine])).index,1);
+  assert.equal(required(selectVegaCandidate([fine,{...fine,dn:255}])).index,0);
   assert.equal(selectVegaCandidate([null,null]),null);
 });
 
@@ -95,6 +96,7 @@ test('The reproducible mosaic adds measured area while preserving every Giotto m
   assert.ok(result.report.coverage.afterPercent>27 && result.report.coverage.afterPercent<29);
   assert.equal(result.report.clippedPixels,0);
   for(const observation of result.report.observations.slice(1)) {
+    assert.ok('outline' in observation);
     assert.ok(observation.outline.rmsKm<.5 && observation.outline.maximumKm<1);
     assert.ok(observation.outline.heldOutCount>=9);
   }

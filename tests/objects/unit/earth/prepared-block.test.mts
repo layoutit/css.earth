@@ -1,3 +1,6 @@
+import {required} from "../../../../tools/test-values.mts";
+import {pagePlanFixture} from "./page-plan-fixture.mts";
+import {shape,array,number} from "../../../../tools/objects/geographic-pages/source-records.mts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { gzipSync, gunzipSync } from "node:zlib";
@@ -37,9 +40,10 @@ test("truncation, oversized descriptors, bad templates and trailing bytes fail b
   const encoded = encodePreparedBlock([{ n: 1 }, { n: 2 }]);
   assert.throws(() => decodePreparedBlock(encoded.slice(0, -1)), /length/);
   assert.throws(() => decodePreparedBlock(new Uint8Array(encoded.length + 1)), /header/);
-  const withHeader = update => {
+  const headerShape=shape({rows:number,columns:array(shape({bytes:number})),template:(value:unknown)=>value});
+  const withHeader = (update:(header:ReturnType<typeof headerShape>)=>unknown) => {
     const view = new DataView(encoded.buffer), size = view.getUint32(8, true);
-    const header = JSON.parse(new TextDecoder().decode(encoded.slice(16, 16 + size)));
+    const header = headerShape(JSON.parse(new TextDecoder().decode(encoded.slice(16, 16 + size))));
     update(header);
     const bytes = new TextEncoder().encode(JSON.stringify(header));
     const result = new Uint8Array(16 + bytes.length + encoded.length - 16 - size);
@@ -47,7 +51,7 @@ test("truncation, oversized descriptors, bad templates and trailing bytes fail b
     new DataView(result.buffer).setUint32(8, bytes.length, true);
     return result;
   };
-  for (const update of [h => h.rows = 1e9, h => h.columns[0].bytes = 1e9, h => h.template = ["field", 999]]) assert.throws(() => decodePreparedBlock(withHeader(update)), /Invalid/);
+  for (const update of [(h: { rows: number; }) => h.rows = 1e9, (h: { columns: { bytes: number; }[]; }) => h.columns[0].bytes = 1e9, (h: { template: unknown; }) => h.template = ["field", 999]]) assert.throws(() => decodePreparedBlock(withHeader(update)), /Invalid/);
   assert.throws(() => encodePreparedBlock([{ n: NaN }]), /types/);
   assert.throws(() => encodePreparedBlock([{ n: 1 }, { other: 2 }]), /shapes/);
 });
@@ -81,11 +85,11 @@ test("content-addressed spatial blocks verify both compressed and expanded bytes
 test("the shared index loads compressed blocks and budgets expanded metadata before fetching", async () => {
   const pages = prepareWmtsTile(wmtsAddress(-58.38, -34.6, 12), scene);
   const { roots, files } = prepareWmtsBlocks(pages, "test-dataset", {assetPath:"/scenes/earth/"});
-  let changed; const ready = new Promise(resolve => { changed = resolve; });
-  const plan = { assetPath: "/scenes/earth/", dataset: "test-dataset", roots, index: { maximumDirectories: 8, maximumBytes: 3 * 1024 * 1024, maximumDirectoryBytes: 131072, maximumConcurrentLoads: 3 } };
-  const index = createCityIndex(plan, changed, async url => new Response(files.find(file=>file.ref.url===url).bytes));
+  let changed:()=>void=()=>{throw new Error("Index gate not initialized");};const ready=new Promise<void>(resolve=>{changed=resolve;});
+  const plan = pagePlanFixture({ assetPath: "/scenes/earth/", dataset: "test-dataset", roots, index: { maximumDirectories: 8, maximumBytes: 3 * 1024 * 1024, maximumDirectoryBytes: 131072, maximumConcurrentLoads: 3 } });
+  const index = createCityIndex(plan, changed, async url => new Response(required(files.find(file=>file.ref.url===url)).bytes));
   index.update(files.map(file=>file.ref)); await ready;
-  assert.equal(index.nodes().get(pages[0].key).frameMatrix, pages[0].frameMatrix);
+  assert.equal(required(index.nodes().get(pages[0].key)).frameMatrix, pages[0].frameMatrix);
   assert.ok(index.stats().reservedDecodedBytes > index.stats().reservedEncodedBytes);
   index.update([]); assert.equal(index.nodes().size, roots.length); index.destroy();
   const blocked = createCityIndex({ ...plan, index: { ...plan.index, maximumBytes: files[0].ref.decodedBytes - 1 } }, ()=>{}, ()=>assert.fail("Expanded metadata exceeds budget"));

@@ -15,7 +15,7 @@ test("Ceres supplies the existing shared runtime contract", () => {
   assert.equal(runtimeDefinition.tree.nodes.filter(n => n.className?.includes("polycss-camera")).length, 1);
 });
 
-for (const [id, radius] of [["ceres", 469.7], ["pluto", 1188.3]]) {
+for (const [id, radius] of [["ceres", 469.7], ["pluto", 1188.3]] as const) {
   test(`${id} can be an observer without duplicating itself in the system`, async () => {
     const frame = prepareEclipticPresentationFrame(id);
     const system = await preparePlanetarySystem({ bodyId: id, presentationFrame: frame, kilometersPerUnit: radius / 230 });

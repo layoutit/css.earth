@@ -1,3 +1,6 @@
+import {parseEarthScene} from "../../tests/objects/unit/earth/prepared-schema.mts";
+import {shape,array,text,number} from "../../tools/objects/geographic-pages/source-records.mts";
+import { createTestPage } from './browser-observations.mts';
 // Exercise the real destination shell/provider bridge with the physical camera.
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -6,16 +9,16 @@ import { prepareLocationPoint } from '../../tools/objects/geographic-pages/prepa
 
 const origin = process.env.CSSEARTH_TEST_ORIGIN ?? 'http://localhost:4210';
 const output = '.local/surface-destination-browser';
-const scene = JSON.parse(await readFile(new URL('../../src/planets/earth/prepared/scene.json', import.meta.url)));
-const catalog = JSON.parse(await readFile(new URL('../../public/scenes/earth/earth-places.json', import.meta.url)));
+const scene = parseEarthScene(JSON.parse(await readFile(new URL('../../src/planets/earth/prepared/scene.json', import.meta.url),'utf8')));
+const catalog = shape({places:array(shape({id:text,name:text,context:text,longitude:number,latitude:number,camera:shape({zoom:number})}))})(JSON.parse(await readFile(new URL('../../public/scenes/earth/earth-places.json', import.meta.url),'utf8')));
 const place = catalog.places.find(place => place.id === '3435910');
 assert.ok(place, 'The real prepared catalogue includes Buenos Aires');
 const point = prepareLocationPoint(scene, place.longitude, place.latitude);
-const report = { origin, place: place.id, errors: [], catalogRequests: [], samples: [] };
+const report: {origin:string;place:string;errors:string[];catalogRequests:string[];samples:unknown[]} = { origin, place: place.id, errors: [], catalogRequests: [], samples: [] };
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: process.env.PLAYWRIGHT_CHANNEL ?? 'chrome', headless: true });
 try {
-  const page = await browser.newPage({ viewport: { width: 1400, height: 1000 }, deviceScaleFactor: 1 });
+  const page = await createTestPage(browser, { viewport: { width: 1400, height: 1000 }, deviceScaleFactor: 1 });
   page.on('pageerror', error => report.errors.push(error.message));
   page.on('request', request => {
     if (request.url().endsWith('/earth-places.json')) report.catalogRequests.push(request.url());
@@ -32,19 +35,19 @@ try {
   await page.getByRole('button', { name: `${place.name}, ${place.context}`, exact: true }).click();
   await page.locator('.planet-destination-panel').waitFor();
   await page.waitForFunction(() => window.__cssEarth?.error || (window.__cssEarth?.ready && window.__earth?.ready &&
-    document.querySelector('.planet-destination-panel').ariaBusy === 'false' &&
-    !window.__earth.camera.stats().dragInertia.destinationFlyTo.active));
-  assert.equal(await page.evaluate(() => window.__cssEarth.error), null, 'The actual scene owner records no flight failure');
+    document.querySelector('.planet-destination-panel')?.ariaBusy === 'false' &&
+    !window.__cssearthTest.object('earth').camera.stats().dragInertia.destinationFlyTo.active));
+  assert.equal(await page.evaluate(() => window.__cssearthTest.scene().error), null, 'The actual scene owner records no flight failure');
   assert.deepEqual(report.errors, [], 'The real flight preserves the world-camera rotation invariant');
 
   const actual = await page.evaluate(point => {
-    const style = selector => getComputedStyle(document.querySelector(selector));
+    const style = (selector:string) => getComputedStyle(window.__cssearthTest.element(selector));
     const matrix = new DOMMatrix(style('.polycss-scene').transform)
       .multiply(new DOMMatrix(style('.earth-system').transform))
       .multiply(new DOMMatrix(style('.earth-body:not(.earth-body-polar)').transform));
     const target = matrix.transformPoint(new DOMPoint(...point));
-    const root = document.querySelector('.polycss-camera').getBoundingClientRect();
-    const state = window.__earth.camera.state();
+    const root = window.__cssearthTest.element('.polycss-camera').getBoundingClientRect();
+    const state = window.__cssearthTest.physicalCamera('earth');
     const [offsetX, offsetY] = state.principalOffset, focal = state.focal;
     const expected = [root.x + root.width / 2, root.y + root.height / 2];
     const depth = focal - target.z;

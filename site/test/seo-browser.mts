@@ -1,3 +1,6 @@
+import { required } from "../../tools/test-values.mts";
+import type { ObjectEntry } from "../object-schema.mts";
+import type { Page } from 'playwright';
 import assert from "node:assert/strict";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -12,14 +15,14 @@ const origin = "https://css.earth";
 const base = (process.argv.slice(2).find(argument => /^https?:\/\//u.test(argument)) ?? "http://127.0.0.1:4210").replace(/\/$/u, "");
 const canonicalUrls = OBJECTS.map(({ route }) => origin + route);
 const report = [];
-const socialImages = new Set();
+const socialImages = new Set<string>();
 let browser;
 try {
   browser = await chromium.launch({ channel: "chrome", headless: true });
   const page = await browser.newPage({ javaScriptEnabled: false });
   const sitemap = await fetch(`${base}/sitemap.xml`);
   assert.equal(sitemap.status, 200);
-  assert.match(sitemap.headers.get("content-type"), /xml/);
+  assert.match(required(sitemap.headers.get("content-type")), /xml/);
   const xml = await sitemap.text();
   const listed = await page.evaluate((xml) => {
     const doc = new DOMParser().parseFromString(xml, "application/xml");
@@ -33,17 +36,17 @@ try {
   assert.equal(new Set(listed).size, OBJECTS.length);
   const robots = await fetch(`${base}/robots.txt`);
   assert.equal(robots.status, 200);
-  assert.match(robots.headers.get("content-type"), /text\/plain/);
+  assert.match(required(robots.headers.get("content-type")), /text\/plain/);
   assert.equal(await robots.text(), `User-agent: *\nAllow: /\n\nSitemap: ${origin}/sitemap.xml\n`);
 
   const aliases = [
-    { route: "/", object: OBJECTS.find(({ id }) => id === "earth") },
-    { route: "/earth/?utm_source=seo-check#view", object: OBJECTS.find(({ id }) => id === "earth") },
+    { route: "/", object: required(OBJECTS.find(({ id }) => id === "earth")) },
+    { route: "/earth/?utm_source=seo-check#view", object: required(OBJECTS.find(({ id }) => id === "earth")) },
   ];
   const discoveryPages = [];
   const descriptions = new Set();
   for (const { route, object } of [...OBJECTS.map((object) => ({ route: object.route, object })), ...aliases]) {
-    const response = await page.goto(base + route, { waitUntil: "domcontentloaded" });
+    const response = required(await page.goto(base + route, { waitUntil: "domcontentloaded" }));
     assert.equal(response.status(), 200, route);
     assert.doesNotMatch(response.headers()["x-robots-tag"] ?? "", /noindex/i);
     const seo = await readMetadata(page);
@@ -66,7 +69,7 @@ try {
   for (const imageUrl of socialImages) {
     const response = await fetch(base + new URL(imageUrl).pathname);
     assert.equal(response.status, 200, imageUrl);
-    assert.match(response.headers.get("content-type"), /image\/jpeg/);
+    assert.match(required(response.headers.get("content-type")), /image\/jpeg/);
     const bytes = Buffer.from(await response.arrayBuffer());
     const image = await sharp(bytes).metadata();
     assert.deepEqual([image.format, image.width, image.height], ["jpeg", 1200, 630]);
@@ -82,27 +85,39 @@ try {
   await browser?.close();
 }
 
-function readMetadata(page) {
+function readMetadata(page: Page) {
   return page.evaluate(() => {
-    const meta = (name) => document.querySelector(`meta[name="${name}"], meta[property="${name}"]`)?.content;
+    const meta = (name: string) => {
+      const element = document.querySelector(`meta[name="${name}"], meta[property="${name}"]`);
+      if (!(element instanceof HTMLMetaElement)) throw new Error(`Missing metadata: ${name}`);
+      return element.content;
+    };
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (!(canonical instanceof HTMLLinkElement)) throw new Error('Missing canonical link.');
+    const social = (prefix: string) => ({title: meta(`${prefix}:title`), description: meta(`${prefix}:description`),
+      image: meta(`${prefix}:image`), 'image:alt': meta(`${prefix}:image:alt`)});
     return {
       title: document.title,
       titleCount: document.querySelectorAll("title").length,
       description: meta("description"),
-      canonical: document.querySelector('link[rel="canonical"]')?.href,
+      canonical: canonical.href,
       canonicalCount: document.querySelectorAll('link[rel="canonical"]').length,
-      og: Object.fromEntries(["type", "site_name", "title", "description", "url", "image", "image:alt", "image:width", "image:height"].map((key) => [key, meta(`og:${key}`)])),
-      twitter: Object.fromEntries(["card", "title", "description", "image", "image:alt"].map((key) => [key, meta(`twitter:${key}`)])),
+      og: {...social("og"), type: meta("og:type"), site_name: meta("og:site_name"), url: meta("og:url"), "image:width": meta("og:image:width"), "image:height": meta("og:image:height")},
+      twitter: {...social("twitter"), card: meta("twitter:card")},
       lang: document.documentElement.lang,
       h1: document.querySelector("h1")?.textContent.trim(),
       introduction: document.querySelector(".planet-introduction")?.textContent ?? "",
-      robots: meta("robots") ?? "",
-      links: [...document.querySelectorAll("a[href]")].map((link) => link.getAttribute("href")),
+      robots: document.querySelector('meta[name="robots"]')?.getAttribute("content") ?? "",
+      links: [...document.querySelectorAll("a[href]")].map((link) => {
+        const href = link.getAttribute("href");
+        if (href === null) throw new Error("Observed link has no href.");
+        return href;
+      }),
     };
   });
 }
 
-function verifyMetadata(seo, object) {
+function verifyMetadata(seo: Awaited<ReturnType<typeof readMetadata>>, object: ObjectEntry) {
   assert.equal(seo.titleCount, 1);
   assert.equal(seo.canonicalCount, 1);
   assert.equal(seo.title, `${object.name} | cssEarth`);

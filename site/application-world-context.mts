@@ -139,7 +139,7 @@ export function createApplicationWorldContext() {
           } };
         });
         refreshWorld = () => frameQueue.refresh();
-        const diagnostics = DIAGNOSTICS_ENABLED ? Object.freeze({ inspect: layer.inspect, frames: frameQueue.stats }) : null;
+        const diagnostics = DIAGNOSTICS_ENABLED ? createWorldContextDiagnostics(layer, frameQueue) : null;
         if (diagnostics) Reflect.set(target, '__cssEarthUniverse', diagnostics);
         return { ...layer, viewport, publish,
           connectNavigation: contextNavigation.connect,
@@ -184,3 +184,9 @@ export function createApplicationWorldContext() {
     },
   };
 }
+
+function createWorldContextDiagnostics(layer: ReturnType<ReturnType<typeof createPreparedUniverse>['mount']>,
+  frameQueue: ReturnType<typeof createWorldFrameQueue>) {
+  return Object.freeze({ inspect: layer.inspect, frames: frameQueue.stats });
+}
+export type WorldContextDiagnostics = ReturnType<typeof createWorldContextDiagnostics>;

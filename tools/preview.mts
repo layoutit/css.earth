@@ -6,7 +6,7 @@ import { wmtsLocalMirror } from "../tools/objects/geographic-pages/operations/wm
 // Astro static preview discards user Vite plugins. Use Vite's static preview
 // directly so the same prepared-pack middleware works in dev and preview.
 export function previewSite({ root = new URL("../", import.meta.url).pathname,
-  outDir = "dist", host = "127.0.0.1", port = 4210, geometryDirectory }: {root?: string; outDir?: string; host?: string; port?: number; geometryDirectory?: string} = {}) {
+  outDir = "dist", host = "127.0.0.1", port = 4210, geometryDirectory }: {root?: string; outDir?: string; host?: string; port?: number; geometryDirectory?: string | URL} = {}) {
   return preview({ root, configFile: false, appType: "mpa", publicDir: false,
     build: { outDir }, plugins: [wmtsLocalMirror({objectId:"earth", directory: geometryDirectory })],
     preview: { host, port, strictPort: true } });

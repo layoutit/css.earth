@@ -51,7 +51,7 @@ test("prioritizes a satellite's own orbit over its parent's solar orbit", () => 
 
 test("rejects facts without unique semantic ids", () => {
   assert.throws(
-    () => orderFacts([{ label: "Distance", value: "58 million km" }]),
+    () => Reflect.apply(orderFacts, undefined, [[{ label: "Distance", value: "58 million km" }]]),
     /needs a semantic id/u,
   );
   assert.throws(

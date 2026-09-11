@@ -7,9 +7,9 @@ import sharp from 'sharp';
 import {decodeVtkCategories} from '../../../../tools/objects/terrestrial-layers/vtk-categories.mts';
 import {decodeSbmtPaths, decodeSbmtLocations} from '../../../../tools/objects/terrestrial-layers/sbmt-symbols.mts';
 const root = new URL('../../../../', import.meta.url), body = new URL('src/planets/comet-67p/',root);
-const read = path => readFile(new URL(path,body),'utf8'), json = async path => JSON.parse(await read(path));
+const read = (path: string|URL) => readFile(new URL(path,body),'utf8'), json = async (path: string) => JSON.parse(await read(path));
 const config = await json('source/preparation/terrestrial.json');
-const regions = config.raster.scientific.find(l=>l.id==='regions'), geology = config.raster.scientific.find(l=>l.id==='geology');
+const regions = config.raster.scientific.find((l: { id: string; })=>l.id==='regions'), geology = config.raster.scientific.find((l: { id: string; })=>l.id==='geology');
 const vtk = decodeVtkCategories(await read('source/'+regions.path),regions.grid);
 
 test('SHAP7 region cell identities agree with independent original-file anchors and published areas', () => {
@@ -17,10 +17,10 @@ test('SHAP7 region cell identities agree with independent original-file anchors 
   const anchors = [[0,0,[-1832.5,-1483.6333333333,-190.88]],[5000,3,[-2167.6333333333,-236.13,-123.59]],
     [24000,11,[-2128.7666666667,-212.4566666667,722.4333333333]],
     [74000,21,[1860.9333333333,-1301.1,-85.6243333333]],
-    [114000,14,[759.3266666667,1273.7333333333,229.9866666667]]];
+    [114000,14,[759.3266666667,1273.7333333333,229.9866666667]]] as const;
   for (const [id,region,point] of anchors) {
     assert.equal(vtk.values[id],region);
-    const center=[0,1,2].map(axis=>vtk.indices[id].reduce((sum,i)=>sum+vtk.positions[i][axis],0)/3);
+    const center=[0,1,2].map(axis=>vtk.indices[id].reduce((sum:number,i:number)=>sum+vtk.positions[i][axis],0)/3);
     assert.ok(Math.hypot(...center.map((n,i)=>n-point[i]))<1e-6);
   }
   const area = Array(26).fill(0);
@@ -30,8 +30,8 @@ test('SHAP7 region cell identities agree with independent original-file anchors 
   });
   // Thomas et al. (2018), Table 1. The released 125k mesh is coarser than
   // the publication's area model; agreement within 1% validates the ID join.
-  for(const [name,published] of [['Atum',1.9497],['Khonsu',2.16872],['Apis',.39798],['Imhotep',4.90446],['Anubis',.92241],['Seth',4.66022],['Ash',6.25734],['Aten',1.12758],['Babi',1.45666],['Geb',1.02767],['Khepry',1.63087],['Anhur',1.87013]]){
-    const i=regions.categories.findIndex(c=>c.label===name);assert.ok(i>=0);assert.ok(Math.abs(area[i]/published-1)<.01,name+' area and source ID');
+  for(const [name,published] of [['Atum',1.9497],['Khonsu',2.16872],['Apis',.39798],['Imhotep',4.90446],['Anubis',.92241],['Seth',4.66022],['Ash',6.25734],['Aten',1.12758],['Babi',1.45666],['Geb',1.02767],['Khepry',1.63087],['Anhur',1.87013]] as const){
+    const i=regions.categories.findIndex((c: { label: string|number; })=>c.label===name);assert.ok(i>=0);assert.ok(Math.abs(area[i]/published-1)<.01,name+' area and source ID');
   }
 });
 
@@ -42,13 +42,13 @@ test('every prepared category texel decodes to its original region or SBMT symbo
   const featureCategories=[0,...[...paths,...locations].map(f=>geology.symbols.colorCategories[f.color])];
   const runtime=await read('prepared/object.json');
   for (const lens of [regions,geology]) {
-    const surface=surfaces.find(s=>s.id===lens.id), ref=surface.scalarMap.sampleSources;
+    const surface=surfaces.find((s:{id:string})=>s.id===lens.id), ref=surface.scalarMap.sampleSources;
     const bytes=await readFile(new URL('prepared/'+ref.file,body));
     assert.equal(bytes.length,ref.bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),ref.sha256);
-    const index=JSON.parse(bytes), codes=gunzipSync(Buffer.from(index.data,'base64'));
+    const index=JSON.parse((bytes).toString('utf8')), codes=gunzipSync(Buffer.from(index.data,'base64'));
     const rgba=await sharp(new URL('public'+surface.surface.url,root).pathname).ensureAlpha().raw().toBuffer();
     assert.equal(rgba.length,codes.length);
-    const palette=lens.categories.map(c=>[1,3,5].map(i=>parseInt(c.color.slice(i,i+2),16)));
+    const palette=lens.categories.map((c: { color: string; })=>[1,3,5].map(i=>parseInt(c.color.slice(i,i+2),16)));
     let accepted=0,invalid=0,checked=0;const seen=new Set();
     for(let offset=0;offset<codes.length;offset+=4){
       const code=codes.readUInt32LE(offset);if(!code){invalid++;continue;}

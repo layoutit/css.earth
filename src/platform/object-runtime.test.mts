@@ -1,3 +1,4 @@
+import type { PageLayerStats } from '../renderers/css/runtime/object-runtime-types.js';
 import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
@@ -16,6 +17,15 @@ const moonDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition
 const earthDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition("earth"));
 import { earthPagingFixture } from '../../tests/objects/unit/earth/paging-fixture.mts';
 const earthPagingDefinition = parsePreparedObjectRuntime(earthPagingFixture);
+// This mount harness records lifecycle calls; no page requests are made here.
+function idlePageStats(): PageLayerStats {
+  return { dataset: 'fixture', qualification: undefined, poolSize: 0, desired: [], activeLoads: 0,
+    pendingSelection: false, retained: [], decodedPageByteBound: 0, reservedDecodedBytes: 0,
+    requests: 0, aborts: 0, evictions: 0, publications: 0, selectionRuns: 0, selectionDiagnostics: null, errors: [],
+    index: { activeLoads: 0, requests: 0, aborts: 0, budgetBlocked: 0, residentDirectories: 0,
+      residentNodes: 0, reservedEncodedBytes: 0, reservedDecodedBytes: 0, maximumBytes: 0, maximumDirectories: 0, errors: [] },
+    apiImages: { requests: 0, retries: 0, sharedAcquisitions: 0, activeRequests: 0, receivedBytes: 0, residentImages: 0, residentEncodedBytes: 0 } };
+}
 const flush = async () => { for (let index = 0; index < 32; index++) await Promise.resolve(); };
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
 function publicationForTest(): OrbitPublication {
@@ -109,7 +119,7 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
       createOrbit(orbitConfiguration) {
         orbitArguments = orbitConfiguration; orbitConfiguration.onPublish?.(publication);
         const state = () => ({ ...publication, pitch: publication.controlPitch, pose: { schema: "cssearth-camera-pose@1" as const, scene: matrix, skybox: matrix, sunView: matrix } });
-        return { publicationState: () => ({ requestedRevision: 0, presentedRevision: 0, presentedWorld: null }), mobilePageFlow: () => false, initialResponsiveZoom: () => definition.camera.defaultZoom, currentResponsiveZoom: () => definition.camera.defaultZoom, setZoomOutCentering() {}, captureWorldCamera() { throw new Error("unused"); }, applyWorldCamera() {}, rebaseScene() {}, flyToState: async (...args: Parameters<Orbit["flyToState"]>) => { flights.push(args); return { completed: true }; }, invalidate: () => orbitConfiguration.onPublish?.(publication), refresh: () => orbitConfiguration.onPublish?.(publication), setState: (value: Parameters<Orbit["setState"]>[0]) => { Object.assign(publication, value); return state(); }, state, sharedState: () => ({ controlPitch: publication.controlPitch, controlYaw: publication.controlYaw, zoom: publication.zoom, pose: state().pose }), skyState: () => ({ sunViewDirection: null, sunVisible: false, sunClassification: "absent" }), stats: (): never => { throw new Error("Orbit stats are outside this mount harness."); }, destroy() { events.push("remove:orbit"); } } satisfies Orbit;
+        return { publicationState: () => ({ requestedRevision: 0, presentedRevision: 0, presentedWorld: null }), mobilePageFlow: () => false, initialResponsiveZoom: () => definition.camera.defaultZoom, currentResponsiveZoom: () => definition.camera.defaultZoom, setZoomOutCentering() {}, preparedFocus: () => null, setPreparedFocus() { throw new Error("Focus changes are outside this mount fixture."); }, async flyToPreparedFocus() { throw new Error("Focus flights are outside this mount fixture."); }, captureWorldCamera() { throw new Error("unused"); }, applyWorldCamera() {}, rebaseScene() {}, flyToState: async (...args: Parameters<Orbit["flyToState"]>) => { flights.push(args); return { completed: true }; }, invalidate: () => orbitConfiguration.onPublish?.(publication), refresh: () => orbitConfiguration.onPublish?.(publication), setState: (value: Parameters<Orbit["setState"]>[0]) => { Object.assign(publication, value); return state(); }, state, sharedState: () => ({ controlPitch: publication.controlPitch, controlYaw: publication.controlYaw, zoom: publication.zoom, pose: state().pose }), skyState: () => ({ sunViewDirection: null, sunVisible: false, sunClassification: "absent" }), stats: (): never => { throw new Error("Orbit stats are outside this mount harness."); }, destroy() { events.push("remove:orbit"); } } satisfies Orbit;
       },
       waitDocument: () => Promise.resolve(), waitPaint: () => Promise.resolve(), ...overrides,
     });
@@ -243,7 +253,7 @@ test("Earth's retained paging fixture joins shared publication, playback and cle
   const events: Array<string | boolean | null> = [], plans: unknown[] = [];
   const h = harness({ definition: earthPagingDefinition }, { mountPages({ own, plan }: PageOptions): PageRuntime {
     plans.push(plan); own(() => events.push("destroy"));
-    return { publish: () => events.push("frame"), setLens: lens => events.push(lens.id), setPlaying: value => events.push(value), stats: () => ({}) };
+    return { publish: () => events.push("frame"), setLens: lens => events.push(lens.id), setPlaying: value => events.push(value), stats: idlePageStats };
   } }); t.after(h.restore); await h.complete();
   assert.deepEqual(plans, earthPagingFixture.pageLayers.map(layer => layer.plan));
   assert.ok(events.includes("frame")); h.runtime.resume(); assert.equal(events.at(-1), true);
@@ -259,7 +269,7 @@ test("partial prepared page construction retires the actual tree and all resourc
 
 test("prepared geographic destinations and lens targets use the physical surface flight while reset keeps authored framing", async t => {
   const h = harness({ definition: earthPagingDefinition }, { mountPages: () => ({
-    publish() {}, setLens() {}, setPlaying() {}, stats: () => ({}),
+    publish() {}, setLens() {}, setPlaying() {}, stats: idlePageStats,
   }) });
   t.after(h.restore);
   // This boundary test records camera requests; native conformance measures

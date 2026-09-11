@@ -3,14 +3,10 @@ import { resolve } from "node:path";
 
 import { chromium } from "playwright";
 import { PNG } from "pngjs";
-
-interface MarsAuditRuntime { readonly ready: boolean; setView(view: { readonly pitch: number; readonly zoom: number }): void; selectLens(id: string): void; view(): { readonly pitch: number }; readonly dom: { readonly retainedLeafCount: number }; assertStableDomIdentity(): boolean; readonly renderStats: { readonly selectedPreparedDensity: number; materialCache(): { readonly pendingRowCount: number; readonly appliedFrame: number; readonly desiredFrame: number; readonly appliedRow: number; readonly desiredRow: number; readonly maximumRetainedRowCount: number; readonly retainedRowCount: number } }; }
 interface Rect { readonly x: number; readonly y: number; readonly width: number; readonly height: number; }
 interface MoonGeometry { readonly moon: string; readonly moonIndex: number; readonly progress: number; readonly shapeRect: Rect; readonly materialRect: Rect; readonly centerDistance: number; readonly insideDisc: boolean; }
 interface CameraMoonGeometry extends MoonGeometry { readonly cameraPitch: number; }
 interface TransitCapture { readonly visibleMoonPixelCount: number; readonly visibleMoonCorePixelCount: number; readonly materialDifferenceOverMoonCorePixels: number | null; readonly materialChangedMoonCorePixelPercent: number | null; }
-
-declare global { interface Window { __mars?: MarsAuditRuntime; } }
 
 const baseUrl = new URL(process.argv[2] ?? "http://127.0.0.1:4210/mars/");
 const outputRoot = resolve(
@@ -56,7 +52,7 @@ try {
     if (!(motion instanceof HTMLInputElement)) throw new Error("Mars motion control is unavailable.");
     if (!window.__mars) throw new Error("Mars runtime is unavailable.");
     if (motion.checked) motion.click();
-    window.__mars.setView({ pitch: 65, zoom: 0.8 });
+    window.__mars.setView({ controlPitch: 65, zoom: 0.8 });
     for (const animation of document.getAnimations()) animation.pause();
   });
   await settle();
@@ -76,7 +72,7 @@ try {
     for (const cameraPitch of [65, 60, 55, 50, 45, 40, 35, 30, 25, 18]) {
       await page.evaluate((pitch) => {
         if (!window.__mars) throw new Error("Mars runtime is unavailable.");
-        window.__mars.setView({ pitch, zoom: 0.8 });
+        window.__mars.setView({ controlPitch: pitch, zoom: 0.8 });
       }, cameraPitch);
       await settle();
       for (let step = 0; step < 128; step += 1) {
@@ -94,7 +90,7 @@ try {
     for (const candidate of candidates.slice(0, 40)) {
       await page.evaluate((pitch) => {
         if (!window.__mars) throw new Error("Mars runtime is unavailable.");
-        window.__mars.setView({ pitch, zoom: 0.8 });
+        window.__mars.setView({ controlPitch: pitch, zoom: 0.8 });
       }, candidate.cameraPitch);
       await settle();
       await setMoonProgress(moonIndex, candidate.progress);

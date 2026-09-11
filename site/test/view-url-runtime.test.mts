@@ -3,14 +3,27 @@ import test from "node:test";
 import { bindViewUrl } from "../view-url-runtime.mts";
 import { formatSharedView, parseSharedView } from "../../src/platform/view-url.mts";
 
+import type { ObjectSharedView } from '../../src/renderers/css/runtime/deferred-object-mount.ts';
+import type { SharedView } from '../../src/renderers/css/navigation/view-url.ts';
+import { required } from './navigation-test-values.mts';
+interface FakeHistoryWindow extends EventTarget {
+  location: URL;
+  history: { state: { existing: boolean }; replaceState(state: unknown, title: string, next: string | URL): void };
+  setTimeout(callback: () => void, delay?: number): number;
+  clearTimeout(id: number): void;
+}
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
 const saved = () => ({ camera: { controlPitch: 37, controlYaw: 92, zoom: 0.8, distanceKilometers: 12345,
-  pose: { schema: "cssearth-camera-pose@1", scene: matrix, skybox: matrix, sunView: matrix } },
+  pose: { schema: "cssearth-camera-pose@1" as const, scene: matrix, skybox: matrix, sunView: matrix } },
   preparedEpochJdTt: 2461286.5, playback: { times: [1234.5], speed: 1, motionRequested: false } });
 
-function fixture(href = "http://localhost:4210/mercury?keep=value#details", captured = saved) {
-  const windowTarget = new EventTarget(), timers = new Map(), writes = [], errors = [], restored = [];
-  let sequence = 0, motion = false, listener = null;
+function fixture(href = "http://localhost:4210/mercury?keep=value#details", captured: () => SharedView = saved) {
+  // The URL owner only observes these event/history/timer seams.
+  const windowTarget = new EventTarget() as FakeHistoryWindow;
+  const timers = new Map<number, { callback(): void; delay?: number }>(), writes: (string | URL)[] = [],
+    errors: string[] = [], restored: SharedView[] = [];
+  let sequence = 0, motion = false;
+  let listener: (() => void) | null = null;
   windowTarget.location = new URL(href);
   const historyState = { existing: true };
   windowTarget.history = { state: historyState, replaceState(state, title, next) {
@@ -18,14 +31,14 @@ function fixture(href = "http://localhost:4210/mercury?keep=value#details", capt
   } };
   windowTarget.setTimeout = (callback, delay) => { const id = ++sequence; timers.set(id, { callback, delay }); return id; };
   windowTarget.clearTimeout = id => timers.delete(id);
-  const view = { capture: requested => ({ ...captured(), playback: { ...captured().playback, motionRequested: requested } }),
+  const view: ObjectSharedView = { capture: requested => ({ ...captured(), playback: { ...captured().playback, motionRequested: requested ?? false } }),
     async restore(value) { restored.push(value); listener?.(); return true; },
     subscribe(next) { listener = next; return () => { listener = null; }; } };
-  const owner = bindViewUrl({ windowTarget, view, getMotion: () => motion, setMotion: value => { motion = value; },
-    onError: error => errors.push(error.message) });
+  const owner = bindViewUrl({ windowTarget: windowTarget as unknown as Window, view, getMotion: () => motion, setMotion: value => { motion = value; },
+    onError: error => errors.push(error instanceof Error ? error.message : String(error)) });
   return { owner, windowTarget, timers, writes, errors, restored,
     changed: () => listener?.(), motion: () => motion,
-    tick() { const [id, entry] = timers.entries().next().value; timers.delete(id); entry.callback(); } };
+    tick() { const [id, entry] = required(timers.entries().next().value); timers.delete(id); entry.callback(); } };
 }
 
 test("camera changes coalesce into replaceState while preserving the route, other queries, hash and history state", async () => {
@@ -60,7 +73,7 @@ test("existing JSON links shrink on restore while preserving their exact saved t
   assert.equal(h.writes.length, 1);
   const url = h.windowTarget.location;
   assert.equal(url.pathname, "/mercury"); assert.equal(url.searchParams.get("keep"), "value"); assert.equal(url.hash, "#details");
-  assert.ok(url.searchParams.get("v").length < legacy.length);
+  assert.ok(required(url.searchParams.get("v")).length < legacy.length);
   assert.deepEqual(parseSharedView(`v=${url.searchParams.get("v")}`), value);
   h.owner.destroy();
 });
@@ -68,14 +81,14 @@ test("existing JSON links shrink on restore while preserving their exact saved t
 test("old physical camera links migrate to one pose without resampling saved motion time", async () => {
   const value = saved(); value.playback.motionRequested = true;
   const camera = { distanceKilometers: value.camera.distanceKilometers,
-    pose: { schema: "cssearth-camera-pose@2", scene: value.camera.pose.scene } };
+    pose: { schema: "cssearth-camera-pose@2" as const, scene: value.camera.pose.scene } };
   const h = fixture(`http://localhost:4210/mercury?${formatSharedView(value)}`, () => ({
     ...value, camera, playback: { ...value.playback, times: [9876] },
   }));
   await h.owner.restore();
   assert.equal(h.errors.length, 0);
   assert.equal(h.writes.length, 1);
-  assert.equal(h.windowTarget.location.searchParams.get("v").length, 70);
+  assert.equal(required(h.windowTarget.location.searchParams.get("v")).length, 70);
   assert.deepEqual(parseSharedView(h.windowTarget.location.search), { ...value, camera });
   assert.equal(h.motion(), true);
   h.owner.destroy();

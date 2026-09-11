@@ -6,6 +6,11 @@ import { objectAdapter } from "../object-adapter.mts";
 import { loadObjectContent } from "./load-object-content.mts";
 import { OBJECTS } from "../objects.mts";
 import { requireSceneLifecycle } from "../scene-contract.mts";
+import type { RouterOptions } from '../scene-router.mts';
+import type { ShellOptions } from '../planet-shell-client.mts';
+import type { BrowserWindow } from '../browser-types.mts';
+import { required } from './navigation-test-values.mts';
+import { requireArray, requireRecord, requireString } from '../../tools/source-values.mts';
 import { createSceneRouter } from "../scene-router.mts";
 import { validateObjectPackageFiles } from "../../tools/object-package-contract.mts";
 
@@ -25,10 +30,7 @@ test("loads every object through the single adapter", async () => {
     /Unknown cssEarth object: future/,
   );
   await assert.rejects(
-    objectAdapter.load("future", [{
-      id: "future",
-      loadScene: async () => null,
-    }]),
+    Reflect.apply(objectAdapter.load, objectAdapter, ["future", [{ id: "future", loadScene: async () => null }]]),
     /must return a mount function/,
   );
 });
@@ -51,10 +53,10 @@ test("shared router owns minimal adapter shell lifecycle", async () => {
   const documentTarget = createFakeDocument();
   const windowTarget = new EventTarget();
   const stage = { ariaBusy: "true" };
-  const mounts = [];
-  const shellMounts = [];
-  let setMotion;
-  const router = createSceneRouter({
+  const mounts: { destroy: number; pause: number; resume: number }[] = [];
+  const shellMounts: { destroy: number }[] = [];
+  let setMotion: ShellOptions["onMotionChange"];
+  const router = createMinimalRouter({
     stage,
     objectId: "future",
     documentTarget,
@@ -98,7 +100,7 @@ test("shared router owns minimal adapter shell lifecycle", async () => {
   assert.equal(shellMounts.length, 1);
   assert.equal(mounts[0].pause, 1);
 
-  setMotion(true);
+  required(setMotion)(true);
   assert.equal(router.state().lifecycle, "mounted");
   assert.equal(documentTarget.body.classList.contains("paused"), false);
   assert.equal(mounts[0].resume, 1);
@@ -138,7 +140,7 @@ test("shared router publishes a minimal adapter error", async () => {
   const originalConsoleError = console.error;
   console.error = () => {};
   try {
-    const router = createSceneRouter({
+    const router = createMinimalRouter({
       stage,
       objectId: "future",
       documentTarget,
@@ -170,7 +172,7 @@ test("shared router contains synchronous shell bootstrap failure", async () => {
   const originalConsoleError = console.error;
   console.error = () => {};
   try {
-    const router = createSceneRouter({
+    const router = createMinimalRouter({
       stage,
       objectId: "future",
       documentTarget,
@@ -204,9 +206,9 @@ test("shared router cancels a pending adapter before publication", async () => {
   const windowTarget = new EventTarget();
   const stage = { ariaBusy: "true" };
   const calls = { shellDestroy: 0, mount: 0 };
-  let releaseAdapter;
-  const adapterPending = new Promise((resolve) => { releaseAdapter = resolve; });
-  const router = createSceneRouter({
+  let releaseAdapter: (() => void) | undefined;
+  const adapterPending = new Promise<void>((resolve) => { releaseAdapter = resolve; });
+  const router = createMinimalRouter({
     stage,
     objectId: "future",
     documentTarget,
@@ -227,7 +229,7 @@ test("shared router cancels a pending adapter before publication", async () => {
   });
 
   windowTarget.dispatchEvent(new Event("pagehide"));
-  releaseAdapter();
+  required(releaseAdapter)();
   await router.settled;
   assert.equal(calls.shellDestroy, 1);
   assert.equal(calls.mount, 0);
@@ -268,18 +270,18 @@ test("keeps source-backed chart data in canonical order with Reflectance first",
     ["neptune", "Neptune", [
       "reflectance", "photometric-phase", "temperature-pressure",
     ]],
-  ];
+  ] as const;
 
   for (const [id, name, expectedChartIds] of panels) {
     const { prepared: content } = await loadObjectContent(id);
-    assert.deepEqual(content.charts.map(({ id: chartId }) => chartId),
+    assert.deepEqual(requireArray(content.charts, 'prepared charts').map(chart => requireString(requireRecord(chart, 'chart').id, 'chart id')),
       expectedChartIds, name + " chart order");
   }
 
-  const mercury = JSON.parse(await readFile(
+  const mercury = requireRecord(JSON.parse(await readFile(
     new URL("../../src/planets/mercury/prepared/content.json", import.meta.url),
     "utf8",
-  ));
+  )), "Mercury content");
   assert.doesNotMatch(JSON.stringify(mercury.charts), /temperature-pressure|mercury-no-atmosphere-profile/u);
 });
 
@@ -303,31 +305,50 @@ test("keeps the shared shell planet-neutral", async () => {
 
 test("keeps lens descriptions source-bound in the object model", async () => {
   const saturn = await loadObjectContent("saturn");
-  const saturnPanel = saturn.object.data.controls;
+  const saturnPanel = requireRecord(saturn.object.data, 'Saturn prepared body').controls;
   const saturnSource = await saturn.source("content");
-  const descriptions = Object.fromEntries(saturnPanel.lenses.controls.map(({ id, description }) => [id, description]));
-  assert.deepEqual(descriptions, Object.fromEntries(saturnSource.lenses.controls.map(({ id, description }) => [id, description])));
+  const descriptions = lensDescriptions(saturnPanel);
+  assert.deepEqual(descriptions, lensDescriptions(saturnSource));
 });
 
 function createFakeDocument() {
-  const target = new EventTarget();
-  target.hidden = false;
-  target.documentElement = { dataset: {} };
-  target.body = { classList: createFakeClassList() };
-  return target;
+  const dataset: Record<string, string> = {};
+  return Object.assign(new EventTarget(), { hidden: false, documentElement: { dataset },
+    body: { classList: createFakeClassList() } });
 }
 
 function createFakeClassList() {
-  const values = new Set();
+  const values = new Set<string>();
   return {
-    add(...tokens) {
+    add(...tokens: string[]) {
       for (const token of tokens) values.add(token);
     },
-    contains(token) {
+    contains(token: string) {
       return values.has(token);
     },
-    remove(...tokens) {
+    remove(...tokens: string[]) {
       for (const token of tokens) values.delete(token);
     },
   };
+}
+
+function lensDescriptions(value: unknown) {
+  const lenses = requireRecord(requireRecord(value, 'content').lenses, 'lenses');
+  return Object.fromEntries(requireArray(lenses.controls, 'lens controls').map(value => {
+    const lens = requireRecord(value, 'lens');
+    return [requireString(lens.id, 'lens id'), requireString(lens.description, 'lens description')];
+  }));
+}
+type MinimalRouterOptions = Omit<RouterOptions, 'stage' | 'documentTarget' | 'windowTarget' | 'mountShell' | 'loadObject'> & {
+  stage: { ariaBusy: string }; documentTarget: ReturnType<typeof createFakeDocument>; windowTarget: EventTarget;
+  mountShell(options: ShellOptions): { destroy(): void }; loadObject(): Promise<() => unknown>;
+};
+function createMinimalRouter(options: MinimalRouterOptions) {
+  // These tests deliberately exercise the router's minimal lifecycle boundary,
+  // including malformed loaders. Native EventTarget dispatch and publication
+  // properties are real; unused shell/navigation capabilities stay absent.
+  return createSceneRouter({ ...options, stage: options.stage as HTMLElement,
+    documentTarget: options.documentTarget as unknown as Document, windowTarget: options.windowTarget as BrowserWindow,
+    mountShell: options.mountShell as NonNullable<RouterOptions['mountShell']>,
+    loadObject: options.loadObject as NonNullable<RouterOptions['loadObject']> });
 }

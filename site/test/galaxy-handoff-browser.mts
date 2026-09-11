@@ -1,3 +1,7 @@
+import { required } from '../../tools/test-values.mts';
+import type { OBJECTS } from '../objects.mts';
+import { createTestPage } from './browser-observations.mts';
+import type { Page } from 'playwright';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
@@ -9,11 +13,13 @@ import context from '../../src/planets/sun/prepared/world-context.json' with { t
 const output = process.env.GALAXY_HANDOFF_OUTPUT ?? '.local/galaxy-handoff';
 const parsecKm = 3.085677581491367e13;
 const reported = '/sun/?v=QMJCPggu1DfsP78xu57ddXumwnJb4eAJKY4_1druhMxGfj_U7dzCwKAIP-IyYcFa6EcAAQAAAAAAAAAA';
-const samples = [], errors = [];
+declare global { interface Window { __handoffFrame:NonNullable<typeof OBJECTS[number]['worldFrame']>; __handoffNodes:Element[]; } }
+type HandoffSample = Awaited<ReturnType<typeof read>> & {background:Awaited<ReturnType<typeof backgroundSignal>>};
+const samples:HandoffSample[] = [], errors:string[] = [];
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 try {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  const page = await createTestPage(browser, { viewport: { width: 1440, height: 900 } });
   page.on('pageerror', error => errors.push(error.message));
   await page.addInitScript(() => performance.setResourceTimingBufferSize(10000));
   await page.goto(new URL(reported, process.argv[2] ?? 'http://localhost:4210').href, { waitUntil: 'domcontentloaded' });
@@ -22,17 +28,17 @@ try {
   if (await motion.isChecked()) await motion.uncheck({ force: true });
   await page.evaluate(async () => {
     const { OBJECTS } = await import('/site/objects.mts');
-    window.__handoffFrame = OBJECTS.find(object => object.id === 'sun').worldFrame;
-    window.__handoffNodes = [...document.querySelector('.prepared-universe').querySelectorAll('*')];
+    window.__handoffFrame = window.__cssearthTest.required(window.__cssearthTest.required(OBJECTS.find(object => object.id === 'sun'), 'Sun object').worldFrame, 'Sun frame');
+    window.__handoffNodes = [...window.__cssearthTest.element('.prepared-universe').querySelectorAll('*')];
   });
   await page.waitForTimeout(600);
-  const initialKm = await page.evaluate(() => window.__sun.camera.state().distanceKilometers);
+  const initialKm = await page.evaluate(() => window.__cssearthTest.physicalCamera('sun').distanceKilometers);
   for (const distance of [initialKm / parsecKm, 1, 10, 97.8159, 200, 500, 1000, 2255.4, 3500, 5000, 10000]) {
     await scrollTo(page, distance * parsecKm);
     await page.waitForTimeout(250);
-    const snapshot = await read(page);
+    const observation = await read(page);
     const png = await page.screenshot({ path: `${output}/journey-${samples.length}.png` });
-    snapshot.background = await backgroundSignal(png);
+    const snapshot = {...observation, background:await backgroundSignal(png)};
     samples.push(snapshot);
     assert.equal(snapshot.roots, 1);
     assert.equal(snapshot.skyFaces, 6);
@@ -61,7 +67,7 @@ try {
   assert.ok(actual > 1, 'the near-to-cloud journey moves the panorama, rather than leaving it screen-fixed');
   assert.ok(context.volume.opacityProfile.fullDistanceM <= volume.data.sky.parallax.metersPerCssPixel * 50 / 4,
     'the panorama retires before the camera can approach a cube face');
-  assert.equal(samples.at(-1).requests, initial.requests, 'the entire prepared image bank is ready before travel');
+  assert.equal(required(samples.at(-1)).requests, initial.requests, 'the entire prepared image bank is ready before travel');
   await scrollTo(page, initialKm); await page.waitForTimeout(600);
   const returned = await read(page);
   assert.equal(returned.skyContribution, 1); assert.equal(returned.skyVisibility, 'visible');
@@ -73,27 +79,27 @@ try {
   await browser.close();
 }
 
-async function read(page) {
+async function read(page: Page) {
   return page.evaluate(() => {
     const sky = document.querySelector('.prepared-celestial-sky');
     return {
-      distancePc: window.__sun.camera.state().distanceKilometers / 3.085677581491367e13,
-      world: window.__sun.camera.captureWorldCamera(window.__handoffFrame),
+      distancePc: window.__cssearthTest.physicalCamera('sun').distanceKilometers / 3.085677581491367e13,
+      world: window.__cssearthTest.required(window.__cssearthTest.object('sun').camera.captureWorldCamera(window.__handoffFrame), 'shared world pose'),
       roots: document.querySelectorAll('.polycss-camera').length,
       skyFaces: document.querySelectorAll('[data-sky-face]').length,
-      skyMatrix: Array.from(new DOMMatrix(document.querySelector('.prepared-celestial-sky-scene').style.transform).toFloat64Array()),
-      skyContribution: Number(sky.dataset.skyContribution), skyVisibility: getComputedStyle(sky).visibility,
-      volumeOpacity: Number(document.querySelector('.prepared-volume-context').dataset.volumeOpacity),
-      volumeCompositeOpacity: Number(getComputedStyle(document.querySelector('.prepared-volume-context')).opacity),
-      volumeBrightness: Number(document.querySelector('.prepared-volume-image').dataset.volumeBrightness),
-      skyOpacity: Number(getComputedStyle(sky).opacity),
-      volumeWeight: Number(getComputedStyle(document.querySelector('.prepared-volume-image')).opacity),
+      skyMatrix: Array.from(new DOMMatrix(window.__cssearthTest.html('.prepared-celestial-sky-scene').style.transform).toFloat64Array()),
+      skyContribution: Number(window.__cssearthTest.htmlElement(sky).dataset.skyContribution), skyVisibility: getComputedStyle(window.__cssearthTest.required(sky, 'computed style element')).visibility,
+      volumeOpacity: Number(window.__cssearthTest.html('.prepared-volume-context').dataset.volumeOpacity),
+      volumeCompositeOpacity: Number(getComputedStyle(window.__cssearthTest.required(document.querySelector('.prepared-volume-context'), 'computed style element')).opacity),
+      volumeBrightness: Number(window.__cssearthTest.html('.prepared-volume-image').dataset.volumeBrightness),
+      skyOpacity: Number(getComputedStyle(window.__cssearthTest.required(sky, 'computed style element')).opacity),
+      volumeWeight: Number(getComputedStyle(window.__cssearthTest.required(document.querySelector('.prepared-volume-image'), 'computed style element')).opacity),
       requests: performance.getEntriesByType('resource').filter(entry => /\/milky-way\/prepared\//.test(entry.name)).length,
     };
   });
 }
 
-async function backgroundSignal(png) {
+async function backgroundSignal(png:Buffer) {
   const { data, info } = await sharp(png).extract({ left: 380, top: 60, width: 1040, height: 780 })
     .removeAlpha().resize(104, 78).blur(2).raw().toBuffer({ resolveWithObject: true });
   const values = [];

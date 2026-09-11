@@ -6,7 +6,8 @@ class Element {
   parentNode: Element | null = null;
   style: Record<string, string> = {};
   className = '';
-  constructor(readonly tagName = 'DIV') {}
+  readonly tagName: string;
+  constructor(tagName = 'DIV') { this.tagName = tagName;}
   ownerDocument = { createElement: (tag: string) => new Element(tag.toUpperCase()) };
   appendChild(child: Element) { child.parentNode = this; this.children.push(child); }
 }

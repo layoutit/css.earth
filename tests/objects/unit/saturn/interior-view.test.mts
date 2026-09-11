@@ -1,3 +1,5 @@
+import {array,number,shape,text} from '../../../../tools/objects/terrestrial-layers/source-records.mts';
+import {required} from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -62,8 +64,9 @@ test("publishes a prepared retained Saturn interior view", () => {
   assert.equal(PREPARED_SATURN_SCENE.interior.atmosphere.model,
     "prepared-cutaway-full-exterior-material-oblate-texels");
   assert.equal(PREPARED_SATURN_SCENE.interior.atmosphere.frameCount, 128);
-  const interior = PREPARED_PRESENTATION.materials.find(track => track.id === "interior");
-  const exterior = PREPARED_PRESENTATION.materials.find(track => track.id === "exterior");
+  const interior = required(PREPARED_PRESENTATION.materials.find((track: { id: string; }) => track.id === "interior"));
+  const exterior = required(PREPARED_PRESENTATION.materials.find((track: { id: string; }) => track.id === "exterior"));
+  assert.ok(interior.rotation?.kind === "ellipsoid" && exterior.rotation?.kind === "ellipsoid");
   assert.deepEqual(interior.rotation.projection, exterior.rotation.projection);
   // Verify the four banks actually consumed by the exclusive cross-section
   // lens, rather than retired intermediate spectral-atmosphere metadata.
@@ -71,8 +74,8 @@ test("publishes a prepared retained Saturn interior view", () => {
     ["normal", "normal-no-shadows", "normal-ringless", "normal-ringless-no-shadows"]);
   const hashes = interior.banks.map(bank => {
     assert.equal(bank.frames.length, 256);
-    const resource = PREPARED_PRESENTATION.assets.entries.find(entry => entry.key === bank.default.resource);
-    const asset = runtimeAssets.assets.find(asset => resource.url === `/scenes/saturn/${asset.filename}`);
+    const resource = required(PREPARED_PRESENTATION.assets.entries.find(entry => entry.key === required(bank.default).resource));
+    const asset = array(shape({filename:text,sha256:text}))(runtimeAssets.assets).find(asset => resource.url === `/scenes/saturn/${asset.filename}`);
     assert.ok(asset, "The prepared interior bank belongs to the active asset closure");
     assert.match(asset.sha256, /^[a-f0-9]{64}$/u);
     return asset.sha256;
@@ -80,8 +83,8 @@ test("publishes a prepared retained Saturn interior view", () => {
   assert.equal(new Set(hashes).size, 4);
   assert.deepEqual(
     PREPARED_SATURN_SCENE.interior.sectionLeaves.map(leaf => {
-      assert.equal(leaf.projectiveTextureLayer.rasterScale, 2);
-      const style = Object.fromEntries(leaf.style.split(";").map(value => value.split(/:(.*)/su).slice(0, 2)));
+      assert.equal(required(leaf.projectiveTextureLayer).rasterScale, 2);
+      const style = Object.fromEntries(leaf.style.split(";").map((value: string) => value.split(/:(.*)/su).slice(0, 2)));
       const [x, y] = style["background-position"].split(" ").map(Number.parseFloat);
       const scale = PREPARED_SATURN_VIEWS.assets.section.width / Number.parseFloat(style["background-size"]);
       return { x: Math.abs(x) * scale, y: Math.abs(y) * scale,
@@ -111,7 +114,7 @@ test("ships lossless DPR assets and keeps view switching declarative", async () 
     "core",
     "metallicPoles",
     "corePoles",
-  ]) {
+  ] as const) {
     const asset = PREPARED_SATURN_VIEWS.assets[key];
     assert.equal(asset.asset2x.width, asset.asset.width * 2);
     assert.equal(asset.asset2x.height, asset.asset.height * 2);
@@ -122,8 +125,10 @@ test("ships lossless DPR assets and keeps view switching declarative", async () 
   const variants = PREPARED_PRESENTATION.variants;
   for (const variant of variants) {
     const interior = variant.when.lensId === "cross-section";
-    assert.equal(variant.writes.find(write => write.name === "data-view").value, interior ? "interior" : null);
-    const material = variant.materials.find(track => track.track === "interior");
+    const write=required(variant.writes.find(write => write.name === "data-view"));
+    assert.ok("value" in write);
+    assert.equal(write.value, interior ? "interior" : null);
+    const material = required(variant.materials.find((track: { track: string; }) => track.track === "interior"));
     assert.equal(material.enabled, interior);
     assert.equal(material.clearWhenHidden, true);
     if (interior) assert.match(material.bank, /^normal(?:-|$)/);

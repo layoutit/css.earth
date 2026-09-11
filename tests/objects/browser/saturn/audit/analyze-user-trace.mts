@@ -1,12 +1,14 @@
+import { required } from '../../../../../tools/test-values.mts';
+import { parseChromeTrace, hasDuration, hasFrameReporter, type ChromeDurationEvent, type ChromePipelineEvent, type ChromeFrameReporter } from '../../comets/chrome-trace-values.mts';
 import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { gunzipSync } from "node:zlib";
 
-const tracePath = resolve(process.argv[2]);
-const outputPath = resolve(process.argv[3]);
+const tracePath = resolve(required(process.argv[2], "Trace path required"));
+const outputPath = resolve(required(process.argv[3], "Output path required"));
 const compressed = await readFile(tracePath);
-const trace = JSON.parse(gunzipSync(compressed));
+const trace = parseChromeTrace(JSON.parse(gunzipSync(compressed).toString('utf8')));
 const events = trace.traceEvents ?? [];
 
 const saturnCommit = events.find((event) =>
@@ -21,17 +23,17 @@ const mainThread = events.find((event) =>
   (event.args?.name ?? event.args?.data?.name) === "CrRendererMain");
 if (!mainThread) throw new Error("Saturn renderer main thread was not found.");
 
-const main = events.filter((event) =>
+const main = events.filter(hasDuration).filter((event) =>
   event.pid === rendererPid && event.tid === mainThread.tid &&
   event.ph === "X" && Number.isFinite(event.ts) && Number.isFinite(event.dur));
 const navigationStart = events.find((event) =>
   event.pid === rendererPid && event.name === "navigationStart" &&
   event.args?.data?.documentLoaderURL?.includes("/saturn/"))?.ts;
 const inputs = events.filter((event) => event.ph === "b" &&
-  event.name.startsWith("InputLatency::") && Number.isFinite(event.ts));
+  (event.name ?? "").startsWith("InputLatency::") && Number.isFinite(event.ts));
 const actionInputs = inputs.filter((event) =>
   /InputLatency::(?:MouseDown|MouseWheel|TouchStart|GestureScrollBegin|GestureScrollUpdate)/u
-    .test(event.name));
+    .test(event.name ?? ""));
 const firstInput = actionInputs.length
   ? Math.min(...actionInputs.map(({ ts }) => ts))
   : null;
@@ -43,20 +45,20 @@ const traceEnd = Math.max(...main.map(({ ts, dur }) => ts + dur));
 
 const windows = {
   all: summarizeWindow(traceStart, traceEnd),
-  startup: Number.isFinite(navigationStart) && Number.isFinite(firstInput)
+  startup: navigationStart !== undefined && firstInput !== null
     ? summarizeWindow(navigationStart, firstInput)
     : null,
-  interaction: Number.isFinite(firstInput) && Number.isFinite(lastInput)
+  interaction: firstInput !== null && lastInput !== null
     ? summarizeWindow(firstInput, lastInput + 1)
     : null,
-  settle: Number.isFinite(lastInput) && lastInput < traceEnd
+  settle: lastInput !== null && lastInput < traceEnd
     ? summarizeWindow(lastInput + 1, traceEnd)
     : null,
 };
 
 const domStats = events.filter((event) => event.name === "DOMStats")
   .map((event) => event.args?.data ?? event.args)
-  .filter(Boolean);
+  .filter(value => value !== undefined);
 const report = {
   schema: "cssearth-saturn-real-device-trace@1",
   sourcePath: tracePath,
@@ -64,7 +66,7 @@ const report = {
   compressedBytes: compressed.byteLength,
   metadata: trace.metadata ?? null,
   saturn: {
-    url: saturnCommit.args.data.url,
+    url: required(saturnCommit?.args?.data?.url),
     rendererPid,
     rendererMainTid: mainThread.tid,
   },
@@ -79,11 +81,11 @@ const report = {
 await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`);
 console.log(JSON.stringify(report, null, 2));
 
-function summarizeWindow(start, end) {
+function summarizeWindow(start: number, end: number) {
   const selectedMain = main.filter(({ ts }) => ts >= start && ts < end);
   const tasks = selectedMain.filter(({ name }) =>
-    name === "RunTask" || name.endsWith("::RunTask"));
-  const pipeline = events.filter((event) =>
+    name === "RunTask" || (name ?? "").endsWith("::RunTask"));
+  const pipeline = events.filter(hasFrameReporter).filter((event) =>
     event.pid === rendererPid && event.name === "PipelineReporter" &&
     event.ph === "b" && event.ts >= start && event.ts < end &&
     event.args?.frame_reporter);
@@ -108,24 +110,24 @@ function summarizeWindow(start, end) {
   };
 }
 
-function named(eventsToMeasure, pattern) {
-  return durations(eventsToMeasure.filter(({ name }) => pattern.test(name)));
+function named(eventsToMeasure: readonly ChromeDurationEvent[], pattern: RegExp) {
+  return durations(eventsToMeasure.filter(({ name }) => pattern.test(name ?? "")));
 }
 
-function durations(eventsToMeasure) {
+function durations(eventsToMeasure: readonly ChromeDurationEvent[]) {
   const values = eventsToMeasure.map(({ dur }) => dur / 1_000)
     .filter(Number.isFinite).sort((left, right) => left - right);
   return {
     count: values.length,
     totalMilliseconds: round(values.reduce((sum, value) => sum + value, 0)),
     p95Milliseconds: percentile(values, 0.95),
-    maximumMilliseconds: values.length ? round(values.at(-1)) : 0,
+    maximumMilliseconds: values.length ? round(required(values.at(-1))) : 0,
   };
 }
 
-function summarizePipeline(pipeline) {
-  const states = Object.create(null);
-  const sequences = new Map();
+function summarizePipeline(pipeline: readonly ChromePipelineEvent[]) {
+  const states: Record<string, number> = {};
+  const sequences = new Map<string, ChromeFrameReporter[]>();
   for (const event of pipeline) {
     const reporter = event.args.frame_reporter;
     states[reporter.state ?? "UNKNOWN"] =
@@ -136,7 +138,7 @@ function summarizePipeline(pipeline) {
     sequences.set(key, sequence);
   }
   const values = [...sequences.values()];
-  const has = (sequence, state) =>
+  const has = (sequence: readonly ChromeFrameReporter[], state: string) =>
     sequence.some((reporter) => reporter.state === state);
   return {
     states,
@@ -159,17 +161,17 @@ function summarizePipeline(pipeline) {
   };
 }
 
-function percentile(values, fraction) {
+function percentile(values: readonly number[], fraction: number) {
   if (!values.length) return 0;
   return round(values[Math.min(values.length - 1,
     Math.floor(values.length * fraction))]);
 }
 
-function maximum(values, key) {
+function maximum(values: readonly Record<string, unknown>[], key: string) {
   return values.reduce((result, value) =>
     Math.max(result, Number(value[key]) || 0), 0);
 }
 
-function round(value) {
+function round(value: number) {
   return Number(value.toFixed(3));
 }

@@ -1,3 +1,31 @@
+import { required } from '../../tools/test-values.mts';
+import { parsePreparedObjectRuntime } from '../../src/renderers/css/dist/index.js';
+import { shape, array, text, number } from '../../tools/objects/terrestrial-layers/source-records.mts';
+import type { PreparedSurfaceHit } from '../../src/renderers/css/navigation/prepared-surface-hit.js';
+type SceneState = Awaited<ReturnType<typeof sceneState>>;
+type LensRace = NonNullable<BrowserProfileAudit['lensRace']>;
+interface DecodeGate {pathname:string;holding:boolean;started:boolean;pending:(()=>void)[];}
+interface RetainedProbe {
+ stage:Element;initialNodes:Element[];initialParents:(ParentNode|null)[];shellTextNodes:ChildNode[];
+ shellTextParents:(ParentNode|null)[];addedRoots:Element[];removedRoots:Element[];observer:MutationObserver;maximumNodeCount():number;
+}
+interface ZoomProbe {observer:MutationObserver;consume(records:MutationRecord[]):void;counts:Record<string,number>;}
+declare global {
+ interface Window {
+  __datasetGeometryProbe:Element[];
+  __preparedImageDecodes:Record<string,number>;
+  __preparedDecodeGate:DecodeGate;
+  __conformanceDeselects:number;
+  __conformanceDeselectProbe:EventListener;
+  __retainedConformance?:RetainedProbe;
+  __zoomPublicationProbe?:ZoomProbe;
+ }
+ interface HTMLElement {__testPointerId?:number;}
+}
+import { createTestPage } from './browser-observations.mts';
+import type { Page, Browser, Response } from 'playwright';
+import type { ObjectBrowserProfile, CameraBounds, BrowserProfileAudit } from './browser-profile-types.mts';
+import type { ObjectEntry } from '../object-schema.mts';
 import assert from "node:assert/strict";
 import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -44,13 +72,15 @@ const selected = requestedId
   : implemented;
 assert.ok(selected.length > 0, `No implemented planet selected: ${requestedId}.`);
 
+const channel = process.env.PLAYWRIGHT_CHANNEL ?? "chrome";
+assert.ok(channel === "chrome" || channel === "chromium" || channel === "msedge", "Unsupported browser channel");
 const browserLaunch = await conformanceBrowserLaunch({
-  channel: process.env.PLAYWRIGHT_CHANNEL ?? "chrome",
-  evidenceDirectory,
+  channel,
+  evidenceDirectory: evidenceDirectory ?? undefined,
 });
 const browser = await chromium.launch(browserLaunch.options);
 const reports = [];
-const surfaceHitPlans = new Map();
+const surfaceHitPlans = new Map<string, PreparedSurfaceHit | null>();
 try {
   for (const planet of selected) {
     const profile = await loadPlanetBrowserProfile(planet);
@@ -83,7 +113,7 @@ try {
   await browser.close();
 }
 
-async function runCase(planet, name, prove) {
+async function runCase<T>(planet: ObjectEntry, name: string, prove: ()=>Promise<T>) {
   if (requestedCases.size && !requestedCases.has(name)) return { id: planet.id, case: name, skipped: true };
   const label = `${planet.id}/${name}`;
   const startedAt = performance.now();
@@ -93,30 +123,30 @@ async function runCase(planet, name, prove) {
     console.error(`[conformance] PASS ${label} (${Math.round(performance.now() - startedAt)}ms)`);
     return report;
   } catch (error) {
-    console.error(`[conformance] FAIL ${label}: ${error.message}`);
+    console.error(`[conformance] FAIL ${label}: ${error instanceof Error ? error.message : String(error)}`);
     throw error;
   }
 }
 
-async function within(promise, milliseconds, message) {
-  let timer;
+async function within<T>(promise:Promise<T>, milliseconds:number, message:string):Promise<T> {
+  let timer:ReturnType<typeof setTimeout>|undefined;
   try {
-    return await Promise.race([promise, new Promise((_, reject) => {
+    return await Promise.race([promise, new Promise<never>((_, reject) => {
       timer = setTimeout(() => reject(new Error(message)), milliseconds);
     })]);
   } finally { clearTimeout(timer); }
 }
 
-function observed(promise) {
+function observed<T>(promise:Promise<T>) {
   // A parallel gated selection can reject before its eventual joined await,
   // especially when a timeout closes the page. Keep that outcome observed.
   promise.catch(() => {});
   return promise;
 }
 
-async function proveInitialShell(browser, planet, profile) {
+async function proveInitialShell(browser: Browser, planet: ObjectEntry, profile: ObjectBrowserProfile) {
   // With scripting disabled, no object binder can mask an enabled SSR control.
-  const page = await browser.newPage({ javaScriptEnabled: false });
+  const page = await createTestPage(browser, { javaScriptEnabled: false });
   try {
     const response = await page.goto(new URL(planet.route, baseUrl).href, {
       waitUntil: "domcontentloaded",
@@ -136,22 +166,22 @@ async function proveInitialShell(browser, planet, profile) {
   } finally { await page.close(); }
 }
 
-async function proveDatasetInteractions(browser, planet, profile, deviceScaleFactor = 1) {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor });
+async function proveDatasetInteractions(browser: Browser, planet: ObjectEntry, profile: ObjectBrowserProfile, deviceScaleFactor = 1) {
+  const page = await createTestPage(browser, { viewport: { width: 1440, height: 1000 }, deviceScaleFactor });
   const evidence = observePage(page, baseUrl), datasets = [];
   try {
     await loadPlanet(page, planet, profile);
     await profile.pause(page);
     const baseline = await sceneState(page, profile);
-    const geometry = ({id,interior}) => {
-      const root=document.querySelector(interior?`.${id}-cutaway`:'.planet-stage .polycss-camera');
+    const geometry = ({id,interior}:{id:string;interior:boolean}) => {
+      const root=window.__cssearthTest.element(interior?`.${id}-cutaway`:'.planet-stage .polycss-camera');
       const nodes=[...root.querySelectorAll('s,u')].filter(node=>getComputedStyle(node).visibility==='visible'&&node.getBoundingClientRect().width>0);
       window.__datasetGeometryProbe=nodes;
       return nodes.map(node=>{const r=node.getBoundingClientRect();return [r.x,r.y,r.width,r.height];});
     };
     for (const lens of profile.objectControls.lenses?.controls ?? []) {
       await page.locator(`button[name="lens"][value="${lens.id}"]`).click();
-      await page.waitForFunction(({id,lens}) => window[`__${id}`].runtime.selection().committed.lensId === lens,
+      await page.waitForFunction(({id,lens}) => window.__cssearthTest.required(window.__cssearthTest.required(window.__cssearthTest.object(id).runtime.selection(),'object selection').committed,'committed selection').lensId === lens,
         {id:planet.id,lens:lens.id});
       // Let the authored entry flight finish before measuring a user's drag.
       await page.waitForTimeout(750);
@@ -174,8 +204,8 @@ async function proveDatasetInteractions(browser, planet, profile, deviceScaleFac
       if (isInterior) {
         const images=[];
         for (const shadows of [false,true]) {
-          await page.evaluate(value=>{const input=document.querySelector('input[name="shadows"]');if(input.checked!==value)input.click();},shadows);
-          await page.waitForFunction(({id,value})=>window[`__${id}`].runtime.selection().committed.shadows===value,{id:planet.id,value:shadows});
+          await page.evaluate(value=>{const input=window.__cssearthTest.input('input[name="shadows"]');if(input.checked!==value)window.__cssearthTest.htmlElement(input).click();},shadows);
+          await page.waitForFunction(({id,value})=>window.__cssearthTest.required(window.__cssearthTest.required(window.__cssearthTest.object(id).runtime.selection(),'object selection').committed,'committed selection').shadows===value,{id:planet.id,value:shadows});
           await page.waitForTimeout(250);
           const bytes=await page.screenshot({clip:{x:470,y:250,width:500,height:500}});
           images.push(await sharp(bytes).ensureAlpha().raw().toBuffer());
@@ -194,13 +224,13 @@ async function proveDatasetInteractions(browser, planet, profile, deviceScaleFac
   } finally {await page.close();}
 }
 
-async function provePreReadyTarget(browser, planet, profile, finalHidden, motionRequested) {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, reducedMotion: "no-preference" });
+async function provePreReadyTarget(browser: Browser, planet: ObjectEntry, profile: ObjectBrowserProfile, finalHidden:boolean, motionRequested:boolean) {
+  const page = await createTestPage(browser, { viewport: { width: 1440, height: 900 }, reducedMotion: "no-preference" });
   const evidence = observePage(page, baseUrl);
-  let releaseAssets;
-  let markStarted;
-  const gate = new Promise((resolve) => { releaseAssets = resolve; });
-  const started = new Promise((resolve) => { markStarted = resolve; });
+  let releaseAssets:()=>void=()=>{throw new Error("Gate is uninitialized");};
+  let markStarted:()=>void=()=>{throw new Error("Start gate is uninitialized");};
+  const gate=new Promise<void>(resolve=>{releaseAssets=resolve;});
+  const started=new Promise<void>(resolve=>{markStarted=resolve;});
   let intercepted = false;
   await page.route(new RegExp(`/scenes/${planet.id}/`), async (route) => {
     if (!intercepted) {
@@ -219,16 +249,16 @@ async function provePreReadyTarget(browser, planet, profile, finalHidden, motion
     await assertRenderedObjectControls(page, profile);
     assert.equal(await page.evaluate(() => window.__cssEarth?.lifecycle), "loading",
       `${planet.id}: gated preparation must remain loading`);
-    if (profile.objectControls.lenses?.controls.length && profile.audit.lensRace?.preReadyDisabled) {
+    if (profile.objectControls.lenses?.controls.length && profile.audit?.lensRace?.preReadyDisabled) {
       await page.waitForFunction(() =>
         [...document.querySelectorAll('button[name="lens"]')].every(
-          (button) => button.disabled,
+          (button) => {if(!(button instanceof HTMLButtonElement))throw new Error("Expected button");return button.disabled;},
         ));
     } else if (profile.objectControls.lenses?.controls.length) {
-      const testId = profile.audit.lensRace?.slowId ?? profile.objectControls.lenses.defaultLens;
+      const testId = profile.audit?.lensRace?.slowId ?? profile.objectControls.lenses.defaultLens;
       await page.locator(
         `button[name="lens"][value="${testId}"]`,
-      ).evaluate((button) => button.click());
+      ).evaluate((button) => window.__cssearthTest.htmlElement(button).click());
       assert.equal(await page.locator(
         'button[name="lens"][aria-pressed="true"]',
       ).getAttribute("value"), profile.objectControls.lenses.defaultLens,
@@ -239,6 +269,7 @@ async function provePreReadyTarget(browser, planet, profile, finalHidden, motion
         `${planet.id}: speed must be disabled until runtime binding`);
     }
     await page.locator('input[name="motion"]').evaluate((input, requested) => {
+      if (!(input instanceof HTMLInputElement)) throw new Error("Expected motion input");
       if (input.checked !== requested) input.click();
     }, motionRequested);
     await setDocumentVisibility(page, true);
@@ -250,7 +281,7 @@ async function provePreReadyTarget(browser, planet, profile, finalHidden, motion
     await page.waitForFunction(() => window.__cssEarth?.ready === true);
     await profile.waitForRuntime(page);
     const expectedPlaying = motionRequested && !finalHidden;
-    const lifecycle = await page.evaluate(() => window.__cssEarth.lifecycle);
+    const lifecycle = await page.evaluate(() => window.__cssearthTest.scene().lifecycle);
     assert.equal(lifecycle, expectedPlaying ? "mounted" : "paused",
       `${planet.id}: readiness must apply the latest shared Motion and visibility`);
     assert.equal(await page.locator('input[name="motion"]').isChecked(), motionRequested,
@@ -258,7 +289,7 @@ async function provePreReadyTarget(browser, planet, profile, finalHidden, motion
     // Motion permission owns the prepared object; context hover/fade transitions
     // can run independently and are not planetary playback.
     const animationStates = await page.locator(".planet-stage").evaluate((stage) =>
-      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect?.target?.closest(".planet-render-root")).map(({ playState }) => playState));
+      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect instanceof KeyframeEffect && effect.target instanceof Element && effect.target.closest(".planet-render-root")).map(({ playState }) => playState));
     assert.ok(expectedPlaying
       ? animationStates.length === 0 || animationStates.includes("running")
       : animationStates.every((state) => state === "paused"),
@@ -277,52 +308,52 @@ async function provePreReadyTarget(browser, planet, profile, finalHidden, motion
   }
 }
 
-async function installDecodeGate(page, assetPath) {
+async function installDecodeGate(page: Page, assetPath:string) {
   await page.addInitScript((pathname) => {
     const decode = Image.prototype.decode;
-    globalThis.__preparedImageDecodes = Object.create(null);
-    const probe = globalThis.__preparedDecodeGate = {
+    window.__preparedImageDecodes = Object.create(null);
+    const probe:DecodeGate = window.__preparedDecodeGate = {
       pathname, holding: true, started: false, pending: [],
     };
-    Image.prototype.decode = function preparedDecode(...arguments_) {
+    Image.prototype.decode = function preparedDecode(this:HTMLImageElement, ...arguments_:Parameters<HTMLImageElement["decode"]>) {
       const path = new URL(this.currentSrc || this.src, location.href).pathname;
-      globalThis.__preparedImageDecodes[path] =
-        (globalThis.__preparedImageDecodes[path] ?? 0) + 1;
+      window.__preparedImageDecodes[path] =
+        (window.__preparedImageDecodes[path] ?? 0) + 1;
       // Decode the actual prepared bytes first. Holding HTTP itself while an
       // owner clears src can leave Chrome's canceled decode unsettled forever.
       // This gate controls completion and can always release retired work.
-      return decode.apply(this, arguments_).then((value) => {
+      return decode.apply(this, arguments_).then((value:void) => {
         if (path !== probe.pathname || !probe.holding) return value;
         probe.started = true;
-        return new Promise((resolve) => probe.pending.push(() => resolve(value)));
+        return new Promise<void>((resolve) => probe.pending.push(() => resolve(value)));
       });
     };
   }, new URL(assetPath, baseUrl).pathname);
 }
 
-async function waitForDecodeGate(page, planet, race) {
+async function waitForDecodeGate(page: Page, planet: ObjectEntry, race:LensRace) {
   try {
-    await page.waitForFunction(() => globalThis.__preparedDecodeGate?.started,
+    await page.waitForFunction(() => window.__preparedDecodeGate?.started,
       undefined, { timeout: REQUEST_START_TIMEOUT_MS });
   } catch (cause) {
     throw new Error(`${planet.id}: ${race.slowId} did not reach prepared decode gate ${race.slowAsset}`, { cause });
   }
 }
 
-async function releaseDecodeGate(page) {
+async function releaseDecodeGate(page: Page) {
   if (page.isClosed()) return;
   await page.evaluate(() => {
-    const probe = globalThis.__preparedDecodeGate;
+    const probe = window.__preparedDecodeGate;
     if (!probe) return;
     probe.holding = false;
     for (const release of probe.pending.splice(0)) release();
   });
 }
 
-async function proveLensRace(browser, planet, profile) {
-  const page = await browser.newPage({ viewport: { width: 1200, height: 800 } });
+async function proveLensRace(browser: Browser, planet: ObjectEntry, profile: ObjectBrowserProfile) {
+  const page = await createTestPage(browser, { viewport: { width: 1200, height: 800 } });
   const evidence = observePage(page, baseUrl);
-  const race = profile.audit.lensRace;
+  const race = required(profile.audit?.lensRace, `${planet.id}: lens race profile must exist`);
   await installDecodeGate(page, race.slowAsset);
   try {
     await loadPlanet(page, planet, profile);
@@ -339,7 +370,7 @@ async function proveLensRace(browser, planet, profile) {
     await assertLensConsistency(page, planet, profile, race.winnerId);
     const slowPath = new URL(race.slowAsset, baseUrl).pathname;
     const slowDecodeCount = await page.evaluate((pathname) =>
-      globalThis.__preparedImageDecodes[pathname] ?? 0, slowPath);
+      window.__preparedImageDecodes[pathname] ?? 0, slowPath);
     assert.equal(slowDecodeCount, 1,
       `${planet.id}: repeated pending selection must share one image decode`);
     assert.equal(await profile.stable(page), true,
@@ -357,10 +388,10 @@ async function proveLensRace(browser, planet, profile) {
   }
 }
 
-async function proveLensReacquire(browser, planet, profile) {
-  const page = await browser.newPage({ viewport: { width: 1200, height: 800 } });
+async function proveLensReacquire(browser: Browser, planet: ObjectEntry, profile: ObjectBrowserProfile) {
+  const page = await createTestPage(browser, { viewport: { width: 1200, height: 800 } });
   const evidence = observePage(page, baseUrl);
-  const race = profile.audit.lensRace;
+  const race = required(profile.audit?.lensRace, `${planet.id}: lens race profile must exist`);
   await installDecodeGate(page, race.slowAsset);
   try {
     await loadPlanet(page, planet, profile);
@@ -383,10 +414,10 @@ async function proveLensReacquire(browser, planet, profile) {
   } finally { await releaseDecodeGate(page); await page.close(); }
 }
 
-async function proveLensRejection(browser, planet, profile) {
-  const page = await browser.newPage({ viewport: { width: 1200, height: 800 } });
+async function proveLensRejection(browser: Browser, planet: ObjectEntry, profile: ObjectBrowserProfile) {
+  const page = await createTestPage(browser, { viewport: { width: 1200, height: 800 } });
   const evidence = observePage(page, baseUrl);
-  const race = profile.audit.lensRace;
+  const race = required(profile.audit?.lensRace, `${planet.id}: lens race profile must exist`);
   await page.route(`**${race.slowAsset}`, (route) => route.fulfill({
     status: 200,
     contentType: "image/webp",
@@ -409,10 +440,10 @@ async function proveLensRejection(browser, planet, profile) {
   }
 }
 
-async function proveLensDestroy(browser, planet, profile) {
-  const page = await browser.newPage({ viewport: { width: 1200, height: 800 } });
+async function proveLensDestroy(browser: Browser, planet: ObjectEntry, profile: ObjectBrowserProfile) {
+  const page = await createTestPage(browser, { viewport: { width: 1200, height: 800 } });
   const evidence = observePage(page, baseUrl);
-  const race = profile.audit.lensRace;
+  const race = required(profile.audit?.lensRace, `${planet.id}: lens race profile must exist`);
   await installDecodeGate(page, race.slowAsset);
   try {
     await loadPlanet(page, planet, profile);
@@ -434,7 +465,7 @@ async function proveLensDestroy(browser, planet, profile) {
       root.classList.contains("is-loading")), false,
     `${planet.id}: destroy must clear lens loading state`);
     assert.equal(await page.locator('button[name="lens"]').evaluateAll((buttons) =>
-      buttons.every((button) => button.disabled)), true,
+      buttons.every((button) => {if(!(button instanceof HTMLButtonElement))throw new Error("Expected button");return button.disabled;})), true,
     `${planet.id}: destroy must disable lens controls`);
     assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
       stage.style.length), 0,
@@ -450,7 +481,7 @@ async function proveLensDestroy(browser, planet, profile) {
   }
 }
 
-async function assertLensConsistency(page, planet, profile, expectedId) {
+async function assertLensConsistency(page: Page, planet: ObjectEntry, profile: ObjectBrowserProfile, expectedId:string) {
   const state = await profile.lens(page);
   assert.equal(state.id, expectedId,
     `${planet.id}: runtime lens state must match the winning request`);
@@ -472,8 +503,8 @@ if (evidenceDirectory) {
   }, null, 2));
 }
 
-async function proveDesktop(browser, planet, profile) {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+async function proveDesktop(browser: Browser, planet: ObjectEntry, profile: ObjectBrowserProfile) {
+  const page = await createTestPage(browser, { viewport: { width: 1440, height: 900 } });
   const evidence = observePage(page, baseUrl);
   try {
     await loadPlanet(page, planet, profile);
@@ -618,7 +649,7 @@ async function proveDesktop(browser, planet, profile) {
     // Holding the maximum dolly distance intentionally enters overview; that
     // handoff must not race the following retained-comet/planet assertions.
     const { maximum, minimum } = await page.evaluate(({ id, bounds }) => {
-      const camera = window[`__${id}`].camera, before = camera.state();
+      const camera = window.__cssearthTest.object(id).camera, before = camera.state();
       const sample = () => { const state = camera.state(); return { pitch: state.pitch, zoom: state.zoom }; };
       try {
         camera.setState({ controlPitch: bounds.maximumPitch + 100, zoom: bounds.maximumZoom + 100 });
@@ -656,20 +687,20 @@ async function proveDesktop(browser, planet, profile) {
     await exerciseRetainedInteractions(page, planet, profile);
 
     const runningBeforePause = await page.locator(".planet-stage").evaluate((stage) =>
-      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect?.target?.closest(".planet-render-root")).filter(({ playState }) => playState === "running").length);
+      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect instanceof KeyframeEffect && effect.target instanceof Element && effect.target.closest(".planet-render-root")).filter(({ playState }) => playState === "running").length);
     await setDocumentVisibility(page, true);
     assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
-      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect?.target?.closest(".planet-render-root")).every(
+      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect instanceof KeyframeEffect && effect.target instanceof Element && effect.target.closest(".planet-render-root")).every(
         ({ playState }) => playState === "paused",
       )), true, `${planet.id}: pause must stop every scene animation`);
     await setDocumentVisibility(page, false);
     assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
-      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect?.target?.closest(".planet-render-root")).filter(({ playState }) => playState === "running").length),
+      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect instanceof KeyframeEffect && effect.target instanceof Element && effect.target.closest(".planet-render-root")).filter(({ playState }) => playState === "running").length),
       runningBeforePause, `${planet.id}: resume must restore the previously running animations`);
 
     const retainedProof = await finishRetainedProbe(
       page,
-      profile.audit.retained.allowedMountSelectors,
+      required(profile.audit).retained.allowedMountSelectors,
     );
     assert.equal(retainedProof.initialNodesIntact, true,
       `${planet.id}: independent observation must retain every initial node`);
@@ -711,13 +742,13 @@ async function proveDesktop(browser, planet, profile) {
   }
 }
 
-async function surfaceFlyCoordinates(page) {
+async function surfaceFlyCoordinates(page: Page) {
   const bounds = await page.locator(".polycss-camera").boundingBox();
   assert.ok(bounds, "retained camera bounds must be measurable");
   const size = Math.min(bounds.width, bounds.height);
   const centerX = bounds.x + bounds.width / 2;
   const centerY = bounds.y + bounds.height / 2;
-  const viewport = page.viewportSize();
+  const viewport = required(page.viewportSize());
   const outsideOffset = size * 0.4;
   const direction = viewport.width - centerX > outsideOffset + 2 ? 1 : -1;
   const coordinates = {
@@ -730,9 +761,9 @@ async function surfaceFlyCoordinates(page) {
       y: centerY,
     }),
   };
-  const id = await page.locator('.planet-stage').getAttribute('data-object-id');
+  const id = required(await page.locator('.planet-stage').getAttribute('data-object-id'));
   if (!surfaceHitPlans.has(id)) {
-    const prepared = JSON.parse(await readFile(resolve(`src/planets/${id}/prepared/runtime.json`), 'utf8'));
+    const prepared = parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(`src/planets/${id}/prepared/runtime.json`), 'utf8')));
     surfaceHitPlans.set(id, prepared.surfaceHit ?? null);
   }
   const surfaceHit = surfaceHitPlans.get(id);
@@ -741,7 +772,7 @@ async function surfaceFlyCoordinates(page) {
     // space. Use the same prepared-triangle picker as native input.
     coordinates.surface = await page.evaluate(async ({ id, hit, preferred, moduleUrl }) => {
       const { bindPreparedSurfaceHit } = await import(moduleUrl);
-      const camera = document.querySelector('.planet-stage > .polycss-camera');
+      const camera = window.__cssearthTest.html('.planet-stage > .polycss-camera');
       const scene = camera?.querySelector('.polycss-scene');
       // Prepared depth groups repeat transform wrappers beneath one camera.
       // Surface picking uses the first, retained reference body transform.
@@ -749,7 +780,7 @@ async function surfaceFlyCoordinates(page) {
         throw new Error('Surface qualification requires one retained camera and reference body');
       }
       const pick = bindPreparedSurfaceHit(hit, scene.querySelector(`.${id}-body`), scene, camera,
-        () => document.querySelector('.planet-stage').dataset.lens);
+        () => window.__cssearthTest.html('.planet-stage').dataset.lens);
       const box = camera.getBoundingClientRect(), size = Math.min(box.width, box.height);
       const candidates = [preferred];
       for (const y of [.06, -.06, .12, -.12, .2, -.2, 0]) for (const x of [.06, -.06, .12, -.12, .2, -.2, 0]) {
@@ -765,17 +796,17 @@ async function surfaceFlyCoordinates(page) {
   return Object.freeze(coordinates);
 }
 
-async function beginRetainedProbe(page) {
+async function beginRetainedProbe(page: Page) {
   await page.evaluate(() => {
-    const stage = document.querySelector(".planet-stage");
+    const stage = window.__cssearthTest.element(".planet-stage");
     const initialNodes = [...stage.querySelectorAll("*")];
     const initialParents = initialNodes.map((node) => node.parentNode);
-    const addedRoots = [];
-    const removedRoots = [];
+    const addedRoots:Element[] = [];
+    const removedRoots:Element[] = [];
     const shellTextNodes = [
       document.querySelector(".planet-camera-coordinates")?.firstChild,
       document.querySelector(".planet-camera-copy")?.firstChild,
-    ].filter(Boolean);
+    ].filter((node):node is ChildNode=>node!==null&&node!==undefined);
     const shellTextParents = shellTextNodes.map((node) => node.parentNode);
     let maximumNodeCount = initialNodes.length;
     const observer = new MutationObserver((records) => {
@@ -793,7 +824,7 @@ async function beginRetainedProbe(page) {
       );
     });
     observer.observe(stage, { childList: true, subtree: true });
-    globalThis.__retainedConformance = {
+    window.__retainedConformance = {
       stage,
       initialNodes,
       initialParents,
@@ -807,12 +838,12 @@ async function beginRetainedProbe(page) {
   });
 }
 
-async function exerciseRetainedInteractions(page, planet, profile) {
-  const retained = profile.audit.retained;
+async function exerciseRetainedInteractions(page: Page, planet: ObjectEntry, profile: ObjectBrowserProfile) {
+  const retained = required(profile.audit).retained;
   await assertRenderedObjectControls(page, profile);
-  const lensIds = profile.objectControls.lenses?.controls.length ? retained.lensIds : [];
+  const lensIds = profile.objectControls.lenses?.controls.length ? required(retained.lensIds) : [];
   for (const id of lensIds) {
-    await page.locator(`button[name="lens"][value="${id}"]`).evaluate((button) => button.click());
+    await page.locator(`button[name="lens"][value="${id}"]`).evaluate((button) => window.__cssearthTest.htmlElement(button).click());
     await page.waitForFunction(() => {
       const root = document.querySelector(".planet-lenses");
       return root?.getAttribute("aria-busy") !== "true" && !root?.classList.contains("is-loading");
@@ -844,6 +875,7 @@ async function exerciseRetainedInteractions(page, planet, profile) {
     `${planet.id}: speed control must begin at normal`);
   for (const state of speedStates) {
     await speed.evaluate((input, value) => {
+      if (!(input instanceof HTMLInputElement)) throw new Error("Expected speed input");
       input.value = String(value);
       input.dispatchEvent(new Event("input", { bubbles: true }));
     }, state.rate);
@@ -851,7 +883,7 @@ async function exerciseRetainedInteractions(page, planet, profile) {
     assert.equal(await speed.getAttribute("data-state"), state.label,
       `${planet.id}: speed control must publish ${state.label}`);
     const animations = await page.locator(".planet-stage").evaluate((stage) =>
-      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect?.target?.closest(".planet-render-root")).map((animation) => ({
+      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect instanceof KeyframeEffect && effect.target instanceof Element && effect.target.closest(".planet-render-root")).map((animation) => ({
         currentTime: animation.currentTime,
         playbackRate: animation.playbackRate,
         playState: animation.playState,
@@ -866,7 +898,7 @@ async function exerciseRetainedInteractions(page, planet, profile) {
       await setDocumentVisibility(page, false);
       await waitFrames(page);
       const afterResume = await page.locator(".planet-stage").evaluate((stage) =>
-        stage.getAnimations({ subtree: true }).filter(({ effect }) => effect?.target?.closest(".planet-render-root")).map((animation) => ({
+        stage.getAnimations({ subtree: true }).filter(({ effect }) => effect instanceof KeyframeEffect && effect.target instanceof Element && effect.target.closest(".planet-render-root")).map((animation) => ({
           currentTime: animation.currentTime,
           playbackRate: animation.playbackRate,
           playState: animation.playState,
@@ -895,17 +927,17 @@ async function exerciseRetainedInteractions(page, planet, profile) {
   await waitFrames(page);
 }
 
-async function finishRetainedProbe(page, allowedSelectors) {
+async function finishRetainedProbe(page: Page, allowedSelectors:readonly string[]) {
   return page.evaluate((selectors) => {
-    const probe = globalThis.__retainedConformance;
+    const probe = window.__cssearthTest.required(window.__retainedConformance,"retained probe");
     probe.observer.takeRecords();
     probe.observer.disconnect();
-    const rootFor = (node, selector) => node.matches(selector)
+    const rootFor = (node:Element, selector:string) => node.matches(selector)
       ? node
       : node.closest(selector);
-    const allowedRoot = (node) => selectors.some((selector) =>
+    const allowedRoot = (node:Element) => selectors.some((selector) =>
       Boolean(rootFor(node, selector)));
-    const describe = (node) => node.className || node.localName;
+    const describe = (node:Element) => node.className || node.localName;
     const allowedMounts = selectors.map((selector) => {
       const roots = [
         ...probe.addedRoots,
@@ -934,12 +966,12 @@ async function finishRetainedProbe(page, allowedSelectors) {
         !allowedRoot(node)).map(describe),
       allowedMounts,
     };
-    delete globalThis.__retainedConformance;
+    delete window.__retainedConformance;
     return result;
   }, allowedSelectors);
 }
 
-async function provePreparedDensity(browser, planet, profile, density) {
+async function provePreparedDensity(browser: Browser, planet: ObjectEntry, profile: ObjectBrowserProfile, density:number) {
   const context = await browser.newContext({
     viewport: { width: 1200, height: 800 },
     deviceScaleFactor: density,
@@ -947,10 +979,10 @@ async function provePreparedDensity(browser, planet, profile, density) {
       dir: evidenceDirectory, size: { width: 1200, height: 800 },
     } } : {}),
   });
-  const page = await context.newPage();
+  const page = await createTestPage(context);
   const evidence = observePage(page, baseUrl);
-  const requestedPaths = new Set();
-  const responses = new Map();
+  const requestedPaths = new Set<string>();
+  const responses = new Map<string,Response>();
   page.on("response", response => responses.set(new URL(response.url()).pathname, response));
   page.on("request", (request) => {
     requestedPaths.add(new URL(request.url()).pathname);
@@ -981,22 +1013,22 @@ async function provePreparedDensity(browser, planet, profile, density) {
     // The application now owns the shared universe. Its pinned sky replaces
     // private object cubemaps and suns. Their retained bank may still warm its
     // declared startup resources, but no private sky may render beside it.
-    const definition = JSON.parse(await readFile(resolve(`src/planets/${planet.id}/prepared/runtime.json`), 'utf8'));
+    const definition = parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(`src/planets/${planet.id}/prepared/runtime.json`), 'utf8')));
     const privateCelestialAssets = new Set([
       ...definition.sky.faces.flatMap(face => [face.url, face.url2x, face.highContrastUrl, face.highContrastUrl2x]),
       definition.sun?.asset.url, definition.sun?.asset.url2x,
-    ].filter(Boolean));
+    ].filter((url):url is string=>typeof url==='string'));
     const sharedSky = await proveSharedPreparedSky(page, requestedPaths, responses);
     assert.equal(await page.locator('.planet-cubic-sky-cube s, .planet-cubic-sky-stars s').count(), 0,
       `${planet.id}: the application owns all rendered sky content`);
-    const canonicalAssets = profile.audit.canonicalPreparedAssets ?? [];
+    const canonicalAssets = required(profile.audit).canonicalPreparedAssets ?? [];
     assert.ok(Array.isArray(canonicalAssets));
     for (const url of canonicalAssets) {
       if (privateCelestialAssets.has(url)) continue;
       assert.ok(requestedPaths.has(url),
         `${planet.id}: DPR ${density} must request canonical ${url}`);
     }
-    for (const pair of profile.audit.preparedAssetPairs) {
+    for (const pair of required(profile.audit).preparedAssetPairs) {
       if (privateCelestialAssets.has(pair.one) && privateCelestialAssets.has(pair.two)) {
         assert.equal(requestedPaths.has(pair.one), false, `${planet.id}: private bank must not request low-density ${pair.one}`);
         continue;
@@ -1057,28 +1089,28 @@ async function provePreparedDensity(browser, planet, profile, density) {
   }
 }
 
-async function proveSharedPreparedSky(page, requestedPaths, responses) {
+async function proveSharedPreparedSky(page: Page, requestedPaths:ReadonlySet<string>, responses:ReadonlyMap<string,Response>) {
   const context = JSON.parse(await readFile(resolve('src/planets/sun/prepared/world-context.json'), 'utf8'));
   const root = resolve('src/objects', context.volume.objectId);
   const descriptor = JSON.parse(await readFile(resolve(root, 'object.json'), 'utf8'));
   const bytes = await readFile(resolve(root, descriptor.prepared.url));
   assert.equal(createHash('sha256').update(bytes).digest('hex'), descriptor.prepared.sha256);
-  const payload = JSON.parse(bytes).data;
+  const payload = shape({sky:shape({faces:array(shape({id:text,texturePath:text}))}),resources:array(shape({path:text,bytes:number,sha256:text}))})(JSON.parse(bytes.toString('utf8')).data);
   assert.equal(await page.locator('.prepared-universe').count(), 1);
   assert.equal(await page.locator('.prepared-celestial-sky').count(), 1);
   const rendered = await page.locator('.prepared-celestial-sky [data-sky-face]').evaluateAll(nodes => nodes.map(node => ({
-    id: node.dataset.skyFace, url: new URL(node.style.backgroundImage.match(/^url\(["']?(.*?)["']?\)$/)[1], location.href).href,
+    id: window.__cssearthTest.htmlElement(node).dataset.skyFace, url: new URL(window.__cssearthTest.required(window.__cssearthTest.htmlElement(node).style.backgroundImage.match(/^url\(["']?(.*?)["']?\)$/),'sky image URL')[1], location.href).href,
   })));
   assert.deepEqual(rendered.map(face => face.id), payload.sky.faces.map(face => face.id));
   const receipt = [];
   for (const face of payload.sky.faces) {
     const resource = payload.resources.find(resource => resource.path === face.texturePath);
     assert.ok(resource, `Prepared sky face ${face.id} requires a pinned resource`);
-    const path = new URL(rendered.find(value => value.id === face.id).url).pathname;
+    const path = new URL(required(rendered.find(value => value.id === face.id)).url).pathname;
     assert.ok(requestedPaths.has(path), `Shared sky must request ${face.id}`);
     const response = responses.get(path);
     assert.ok(response?.ok(), `Shared sky must load ${face.id}`);
-    const image = await response.body();
+    const image = await required(response).body();
     const sha256 = createHash('sha256').update(image).digest('hex');
     assert.equal(image.length, resource.bytes, `${face.id}: shared sky byte count`);
     assert.equal(sha256, resource.sha256, `${face.id}: exact prepared sky bytes`);
@@ -1087,7 +1119,7 @@ async function proveSharedPreparedSky(page, requestedPaths, responses) {
   return receipt;
 }
 
-async function proveReleasePosition(page, planet, profile) {
+async function proveReleasePosition(page: Page, planet: ObjectEntry, profile: ObjectBrowserProfile) {
   await showInteractionPhase(page, "Release without an extra drag step");
   const bounds = await profile.bounds(page);
   await profile.setCamera(page, { pitch: bounds.defaultPitch, zoom: bounds.defaultZoom });
@@ -1121,7 +1153,7 @@ async function proveReleasePosition(page, planet, profile) {
   return { nonLaunchingReleaseRetainsDragPose: true, pausedReleaseCannotRestartMotion: true };
 }
 
-async function proveWheelTakeover(page, planet, profile) {
+async function proveWheelTakeover(page: Page, planet: ObjectEntry, profile: ObjectBrowserProfile) {
   const bounds = await profile.bounds(page);
   const reset = () => profile.setCamera(page, {
     pitch: bounds.defaultPitch, zoom: bounds.defaultZoom,
@@ -1151,7 +1183,7 @@ async function proveWheelTakeover(page, planet, profile) {
   await startWheel();
   // Use the viewport corner: zoom can expand a large body's limb over the
   // point that was just outside its disc before the wheel gesture began.
-  await page.mouse.move(page.viewportSize().width - 32, 96);
+  await page.mouse.move(required(page.viewportSize()).width - 32, 96);
   await page.mouse.down();
   assert.equal((await interactionStats(page, planet.id)).pendingPointer, true,
     `${planet.id}: the sky press must reserve an orbit drag`);
@@ -1174,6 +1206,7 @@ async function proveWheelTakeover(page, planet, profile) {
   await showInteractionPhase(page, "Held-button wheel cancels the grab");
   await reset();
   const cameraBounds = await page.locator(".planet-stage .polycss-camera").boundingBox();
+  assert.ok(cameraBounds,"Camera bounds must exist");
   const x = cameraBounds.x + cameraBounds.width / 2;
   const y = cameraBounds.y + cameraBounds.height / 2;
   await page.mouse.move(x, y);
@@ -1191,7 +1224,7 @@ async function proveWheelTakeover(page, planet, profile) {
     `${planet.id}: movement after held-wheel cancellation must wait for a new press`);
   await page.waitForTimeout(GOOGLE_EARTH_DRAG_INERTIA.releaseFreshnessMilliseconds + 20);
   await page.mouse.up();
-  await page.evaluate(({ id, state }) => window[`__${id}`].camera.setState(state),
+  await page.evaluate(({ id, state }) => window.__cssearthTest.object(id).camera.setState(state),
     { id:planet.id, state:zoomedWhileHeld });
   await page.mouse.move(x, y);
   await page.mouse.down();
@@ -1205,7 +1238,7 @@ async function proveWheelTakeover(page, planet, profile) {
     resetStopsWheel: true, heldWheelCancelsGrab: true };
 }
 
-async function proveInteractionInterruptions(page, planet, profile) {
+async function proveInteractionInterruptions(page: Page, planet: ObjectEntry, profile: ObjectBrowserProfile) {
   await showInteractionPhase(page, "Drag, coast, then wheel interruption");
   const bounds = await profile.bounds(page);
   await profile.setCamera(page, {
@@ -1254,8 +1287,8 @@ async function proveInteractionInterruptions(page, planet, profile) {
   if (dolly) {
     // A perspective dolly: the prepared step per wheel delta moves the eye
     // along its axis, and there is no surface anchor to hold.
-    const distanceRatio = (await cameraDistance(page, planet.id)) / distanceBefore;
-    const kind = await page.evaluate(id => window[`__${id}`].camera.stats().dragInertia.wheelZoom.inputKind, planet.id);
+    const distanceRatio = required(await cameraDistance(page, planet.id)) / required(distanceBefore);
+    const kind = await page.evaluate(id => window.__cssearthTest.object(id).camera.stats().dragInertia.wheelZoom.inputKind, planet.id);
     const gain = kind === "wheel" ? WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER : WHEEL_ZOOM_SPEED_MULTIPLIER;
     assert.ok(Math.abs(distanceRatio - Math.exp(anchorScrollPixels * dolly.wheelStepPerDelta * gain)) < 1e-6,
       `${planet.id}: prepared wheel dolly step drifted (ratio ${distanceRatio})`);
@@ -1263,7 +1296,7 @@ async function proveInteractionInterruptions(page, planet, profile) {
       `${planet.id}: a wheel dolly must not turn the scene`);
   } else {
     const anchorInputKind = await page.evaluate(id =>
-      window[`__${id}`].camera.stats().dragInertia.wheelZoom.inputKind, planet.id);
+      window.__cssearthTest.object(id).camera.stats().dragInertia.wheelZoom.inputKind, planet.id);
     const anchorSpeed = WHEEL_ZOOM_USE_SCROLL_DISTANCE && anchorInputKind === "wheel"
       ? WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER : WHEEL_ZOOM_SPEED_MULTIPLIER;
     // Camera publication rounds zoom to four decimal places on each frame.
@@ -1340,7 +1373,8 @@ async function proveInteractionInterruptions(page, planet, profile) {
   const input = page.locator(profile.inputSelector);
   await showInteractionPhase(page, "Release pointer capture outside the planet");
   await input.evaluate((node) => node.addEventListener("pointerdown", (event) => {
-    node.__testPointerId = event.pointerId;
+    if (!(event instanceof PointerEvent)) throw new Error("Expected pointer event");
+    window.__cssearthTest.htmlElement(node).__testPointerId = event.pointerId;
   }, { once: true }));
   await page.mouse.down();
   await page.mouse.move(stopCoordinates.surface.x + 60,
@@ -1349,10 +1383,12 @@ async function proveInteractionInterruptions(page, planet, profile) {
     `${planet.id}: capture-loss scenario must begin during a drag`);
   const poseAtCaptureLoss = await cameraPose(page, planet.id);
   await input.evaluate((node) => {
-    node.releasePointerCapture(node.__testPointerId);
-    delete node.__testPointerId;
+    const html=window.__cssearthTest.htmlElement(node);
+    html.releasePointerCapture(window.__cssearthTest.required(html.__testPointerId,"captured pointer"));
+    delete html.__testPointerId;
   });
   const sidebar = await page.locator(".planet-sidebar").boundingBox();
+  assert.ok(sidebar,"Sidebar bounds must exist");
   await page.mouse.move(sidebar.x + 40, sidebar.y + 120);
   await page.mouse.up();
   await page.mouse.move(stopCoordinates.surface.x, stopCoordinates.surface.y);
@@ -1489,7 +1525,7 @@ async function proveInteractionInterruptions(page, planet, profile) {
   assert.equal(repeatedFly.activeMotionCount, 1,
     `${planet.id}: repeated double click must keep one fly-to only`);
   await page.waitForFunction(id =>
-    !window[`__${id}`].camera.stats().dragInertia.surfaceFlyTo.active,
+    !window.__cssearthTest.object(id).camera.stats().dragInertia.surfaceFlyTo.active,
   planet.id, { timeout: GOOGLE_EARTH_SURFACE_FLY_TO.durationMilliseconds + 2000 });
   const completedFly = await interactionStats(page, planet.id);
   assert.equal(completedFly.surfaceFlyTo.completions,
@@ -1523,37 +1559,37 @@ async function proveInteractionInterruptions(page, planet, profile) {
   };
 }
 
-function showInteractionPhase(page, label) {
+function showInteractionPhase(page: Page, label:string) {
   if (!evidenceDirectory) return;
   return page.evaluate(text => {
-    document.querySelector("#camera-conformance-label").textContent = text;
+    window.__cssearthTest.element("#camera-conformance-label").textContent = text;
   }, label);
 }
 
-function interactionStats(page, objectId) {
+function interactionStats(page: Page, objectId:string) {
   return page.evaluate((id) =>
-    globalThis[`__${id}`].camera.stats().dragInertia, objectId);
+    window.__cssearthTest.object(id).camera.stats().dragInertia, objectId);
 }
 
 // The object's prepared wheel dolly when its camera is the shared
 // perspective projection; null for the scale camera.
-function wheelDolly(page, objectId) {
+function wheelDolly(page: Page, objectId:string) {
   return page.evaluate((id) => {
-    const stats = globalThis[`__${id}`].camera.stats();
+    const stats = window.__cssearthTest.object(id).camera.stats();
     return stats.projection?.model === "css-perspective-shared-with-sky"
       ? stats.dolly
       : null;
   }, objectId);
 }
 
-function cameraDistance(page, objectId) {
+function cameraDistance(page: Page, objectId:string) {
   return page.evaluate((id) =>
-    globalThis[`__${id}`].camera.state().distance, objectId);
+    window.__cssearthTest.object(id).camera.state().distance, objectId);
 }
 
-function cameraPose(page, objectId) {
+function cameraPose(page: Page, objectId:string) {
   return page.evaluate((id) => {
-    const camera = globalThis[`__${id}`].camera.state();
+    const camera = window.__cssearthTest.object(id).camera.state();
     return {
       controlPitch: camera.controlPitch,
       controlYaw: camera.controlYaw,
@@ -1565,7 +1601,7 @@ function cameraPose(page, objectId) {
   }, objectId);
 }
 
-async function proveBreakpointCrossings(page, planet, profile, bounds, baseline) {
+async function proveBreakpointCrossings(page: Page, planet: ObjectEntry, profile: ObjectBrowserProfile, bounds:CameraBounds, baseline:SceneState) {
   const camera = await page.locator(".polycss-camera").elementHandle();
   assert.ok(camera, `${planet.id}: retained camera must exist`);
   const requestedState = {
@@ -1626,8 +1662,8 @@ async function proveBreakpointCrossings(page, planet, profile, bounds, baseline)
     `${planet.id}: breakpoint changes must preserve retained identity`);
 }
 
-async function proveMobile(browser, planet, profile) {
-  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+async function proveMobile(browser: Browser, planet: ObjectEntry, profile: ObjectBrowserProfile) {
+  const page = await createTestPage(browser, { viewport: { width: 390, height: 844 } });
   const evidence = observePage(page, baseUrl);
   try {
     await loadPlanet(page, planet, profile);
@@ -1658,7 +1694,7 @@ async function proveMobile(browser, planet, profile) {
   }
 }
 
-async function loadPlanet(page, planet, profile) {
+async function loadPlanet(page: Page, planet: ObjectEntry, profile: ObjectBrowserProfile) {
   const response = await page.goto(new URL(planet.route, baseUrl).href, {
     waitUntil: "networkidle",
   });
@@ -1669,9 +1705,9 @@ async function loadPlanet(page, planet, profile) {
   await assertStandaloneMoonContract(page, planet);
 }
 
-async function assertStandaloneMoonContract(page, planet) {
+async function assertStandaloneMoonContract(page: Page, planet: ObjectEntry) {
   const evidence = await page.evaluate(({ id }) => {
-    const stage = document.querySelector(".planet-stage");
+    const stage = window.__cssearthTest.element(".planet-stage");
     return {
       moonControlCount: document.querySelectorAll('input[name="moons"]').length,
       embeddedMoonNodeCount: id === "moon" ? 0 : stage?.querySelectorAll(
@@ -1692,19 +1728,19 @@ async function assertStandaloneMoonContract(page, planet) {
     `${planet.id}: parent scenes must not request moon presentation assets`);
 }
 
-async function enableMotion(page, id) {
+async function enableMotion(page: Page, id:string) {
   const panel = page.locator(".planet-settings-panel");
   const action = page.locator(".planet-settings-action");
   const motion = page.locator(".planet-motion-setting");
   assert.equal(await motion.isChecked(), false,
     `${id}: desktop motion must be off by default`);
-  const settingsHidden = await action.evaluate(button => button.hidden);
+  const settingsHidden = await action.evaluate(button => window.__cssearthTest.htmlElement(button).hidden);
   if (settingsHidden) {
     assert.equal(await panel.isVisible(), false,
       `${id}: hidden Settings must leave its panel closed`);
     // Settings is intentionally hidden. Exercise its retained input handler,
     // as the pre-ready cases do, without changing the shell's visibility.
-    await motion.evaluate(input => input.click());
+    await motion.evaluate(input => window.__cssearthTest.htmlElement(input).click());
   } else {
     await action.click();
     assert.equal(await panel.isVisible(), true,
@@ -1721,9 +1757,9 @@ async function enableMotion(page, id) {
   return settingsHidden ? "retained-input" : "visible-settings";
 }
 
-async function sceneState(page, profile) {
+async function sceneState(page: Page, profile: ObjectBrowserProfile) {
   const state = await page.evaluate(() => {
-    const stage = document.querySelector(".planet-stage");
+    const stage = window.__cssearthTest.element(".planet-stage");
     return {
       mountedPlanets: window.__cssEarth?.mountedObjectCount,
       stageCount: document.querySelectorAll(".planet-stage").length,
@@ -1737,7 +1773,7 @@ async function sceneState(page, profile) {
   return { ...state, stable: await profile.stable(page) };
 }
 
-function assertSceneStructure(state, id) {
+function assertSceneStructure(state:SceneState, id:string) {
   assert.equal(state.mountedPlanets, 1, `${id}: exactly one planet must mount`);
   assert.equal(state.stageCount, 1, `${id}: exactly one stage must exist`);
   assert.equal(state.cameraCount, 1, `${id}: exactly one camera must exist`);
@@ -1746,7 +1782,7 @@ function assertSceneStructure(state, id) {
   assert.equal(state.stable, true, `${id}: retained nodes must be stable`);
 }
 
-async function drag(page, selector, deltaX, deltaY) {
+async function drag(page: Page, selector:string, deltaX:number, deltaY:number) {
   assert.ok(await page.locator(selector).isVisible(),
     `Input surface is not visible: ${selector}.`);
   const box = await page.locator(".planet-stage .polycss-camera").boundingBox();
@@ -1761,7 +1797,7 @@ async function drag(page, selector, deltaX, deltaY) {
   await page.mouse.up();
 }
 
-async function wheel(page, selector, deltaY) {
+async function wheel(page: Page, selector:string, deltaY:number) {
   const box = await page.locator(selector).boundingBox();
   assert.ok(box, `Input surface is not visible: ${selector}.`);
   // A viewport fraction can land in empty sky for a small object. Exercise
@@ -1772,7 +1808,7 @@ async function wheel(page, selector, deltaY) {
   await waitFrames(page);
 }
 
-async function beginZoomPublicationProbe(page) {
+async function beginZoomPublicationProbe(page: Page) {
   await page.evaluate(() => {
     const targets = Object.freeze(Object.fromEntries(Object.entries({
       directionalSun: document.querySelector(".planet-directional-sun"),
@@ -1784,7 +1820,7 @@ async function beginZoomPublicationProbe(page) {
     const counts = Object.fromEntries(
       Object.keys(targets).map((key) => [key, 0]),
     );
-    const consume = (records) => {
+    const consume = (records:MutationRecord[]) => {
       for (const record of records) {
         const key = Object.entries(targets).find(
           ([, target]) => target === record.target,
@@ -1793,7 +1829,7 @@ async function beginZoomPublicationProbe(page) {
       }
     };
     const observer = new MutationObserver(consume);
-    observer.observe(document.querySelector(".planet-stage"), {
+    observer.observe(window.__cssearthTest.element(".planet-stage"), {
       subtree: true,
       attributes: true,
       attributeFilter: ["hidden", "style"],
@@ -1802,9 +1838,9 @@ async function beginZoomPublicationProbe(page) {
   });
 }
 
-async function finishZoomPublicationProbe(page) {
+async function finishZoomPublicationProbe(page: Page) {
   return page.evaluate(() => {
-    const probe = window.__zoomPublicationProbe;
+    const probe = window.__cssearthTest.required(window.__zoomPublicationProbe,"zoom probe");
     probe.consume(probe.observer.takeRecords());
     probe.observer.disconnect();
     delete window.__zoomPublicationProbe;
@@ -1812,20 +1848,20 @@ async function finishZoomPublicationProbe(page) {
   });
 }
 
-function waitFrames(page) {
-  return page.evaluate(() => new Promise((resolve) =>
+function waitFrames(page: Page) {
+  return page.evaluate(() => new Promise<number>((resolve) =>
     requestAnimationFrame(() => requestAnimationFrame(resolve))));
 }
 
-function observePage(page, localBaseUrl) {
-  const problems = [];
-  const externalRequests = [];
+function observePage(page: Page, localBaseUrl:string) {
+  const problems:string[] = [];
+  const externalRequests:string[] = [];
   page.on("console", (message) => {
     if (["error", "warning"].includes(message.type())) {
       problems.push(`${message.type()}: ${message.text()}`);
     }
   });
-  page.on("pageerror", (error) => problems.push(`pageerror: ${error.message}`));
+  page.on("pageerror", (error) => problems.push(`pageerror: ${error instanceof Error ? error.message : String(error)}`));
   page.on("request", (request) => {
     const requestUrl = new URL(request.url());
     const localUrl = new URL(localBaseUrl);
@@ -1834,12 +1870,12 @@ function observePage(page, localBaseUrl) {
   return { problems, externalRequests };
 }
 
-function assertEvidence({ problems, externalRequests }, id) {
+function assertEvidence({ problems, externalRequests }:ReturnType<typeof observePage>, id:string) {
   assert.deepEqual(problems, [], `${id}: browser must report no problems`);
   assert.deepEqual(externalRequests, [], `${id}: browser must make no external requests`);
 }
 
-function setDocumentVisibility(page, hidden) {
+function setDocumentVisibility(page: Page, hidden:boolean) {
   return page.evaluate((nextHidden) => {
     Object.defineProperty(document, "hidden", {
       configurable: true,

@@ -1,3 +1,4 @@
+import { requireArray } from '../../tools/source-values.mts';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
@@ -85,7 +86,7 @@ test('Sun context source derives its physical scale from the prepared visible ra
   assert.throws(() => parseWorldContextSource({ ...raw, focus: { ...(raw.focus as Record<string, unknown>), pointSource: { absoluteMagnitude: 4.83, color: 'yellow' } } }), /color/i);
   assert.throws(() => parseWorldContextSource({ ...raw, focus: { ...(raw.focus as Record<string, unknown>), pointSource: { ...(raw.focus as { pointSource: Record<string, unknown> }).pointSource,
     proximityEnhancement: { fullDistanceM: 1e14, fadeOutDistanceM: 1e12, radiusMultiplier: .9, brightnessMultiplier: 1.5 } } } }), /proximity/i);
-  assert.throws(() => parseWorldContextSource({ ...raw, focus: raw.bodies![0] }), /exclude the focus/);
+  assert.throws(() => parseWorldContextSource({ ...raw, focus: requireArray(raw.bodies)[0] }), /exclude the focus/);
   const camera = raw.camera as Record<string, unknown>;
   const presentation = camera.presentation as Record<string, unknown>;
   assert.throws(() => parseWorldContextSource({ ...raw, camera: { ...camera, presentation: { ...presentation, dolly: { ...(presentation.dolly as Record<string, unknown>), wheelStepPerDelta: 0 } } } }), /wheel step/);

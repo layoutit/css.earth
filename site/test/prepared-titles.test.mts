@@ -17,6 +17,7 @@ import { prepareShellTitles } from "../../tools/prepare-shell-titles.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { SHELL_TITLE_SOURCES } from "../source/titles/manifest.mts";
 
+import { requireRecord, requireString, requireFiniteNumber } from '../../tools/source-values.mts';
 const projectRoot = resolve(import.meta.dirname, "../..");
 
 test("generates all shared title assets once from checked source vectors", async (context) => {
@@ -41,10 +42,11 @@ test("generates all shared title assets once from checked source vectors", async
       descriptor.file,
     ));
     assert.deepEqual(await readFile(resolve(publicRoot, descriptor.file)), source);
-    assert.equal(PREPARED_SHELL_TITLES[descriptor.key].inputSha256, sha256(source));
-    assert.equal(PREPARED_SHELL_TITLES[descriptor.key].sourceSha256,
+    const prepared = requireRecord(Reflect.get(PREPARED_SHELL_TITLES, descriptor.key), 'prepared shell title');
+    assert.equal(prepared.inputSha256, sha256(source));
+    assert.equal(prepared.sourceSha256,
       SHELL_TITLE_SOURCES.font.sourceSha256);
-    assert.equal(PREPARED_SHELL_TITLES[descriptor.key].fontSize, 17);
+    assert.equal(prepared.fontSize, 17);
   }
 });
 
@@ -52,9 +54,9 @@ test("keeps planet title rendering facts object-owned and source-bound", async (
   for (const { id } of OBJECTS) {
     const loaded = await loadObjectContent(id);
     const { schema, ...source } = await loaded.source("title");
-    const expected = { ...source, ...createPreparedTitleLayout(source) };
+    const expected = { ...source, ...requireRecord(Reflect.apply(createPreparedTitleLayout, undefined, [source]), 'validated title layout') };
     for (const [field, value] of Object.entries(expected)) {
-      assert.deepEqual(loaded.prepared.title[field], value, id + ": source-bound title " + field);
+      assert.deepEqual(requireRecord(loaded.prepared.title, 'prepared title')[field], value, id + ": source-bound title " + field);
     }
   }
   const panel = await readFile(new URL("../components/PreparedObjectPanel.astro", import.meta.url), "utf8");
@@ -64,7 +66,7 @@ test("keeps planet title rendering facts object-owned and source-bound", async (
 test("normalizes every implemented planet title to the complete Saturn standard", async () => {
   for (const { id } of OBJECTS) {
     const { prepared: content } = await loadObjectContent(id);
-    const prepared = content.title;
+    const prepared = requireRecord(content.title, 'prepared title');
     assert.ok(prepared, `${id}: prepared title is missing`);
     for (const field of [
       "weight",
@@ -75,13 +77,13 @@ test("normalizes every implemented planet title to the complete Saturn standard"
       "xOrigin",
       "sourceSha256",
       "sourceGenerator",
-    ]) {
+    ] as const) {
       assert.equal(prepared[field], PLANET_TITLE_RECIPE[field],
         `${id}: ${field} must match the Saturn recipe`);
     }
     assert.equal(prepared.height, PLANET_TITLE_RECIPE.viewBoxHeight,
       `${id}: line-box height must match the Saturn recipe`);
-    const [, , viewBoxWidth, viewBoxHeight] = prepared.renderViewBox
+    const [, , viewBoxWidth, viewBoxHeight] = requireString(prepared.renderViewBox, 'render view box')
       .split(" ")
       .map(Number);
     const scale =
@@ -91,7 +93,7 @@ test("normalizes every implemented planet title to the complete Saturn standard"
       `${id}: width must use the Saturn scale`);
     assert.equal(prepared.renderHeight, Number((viewBoxHeight * scale).toFixed(4)),
       `${id}: height must use the Saturn scale`);
-    assert.equal(prepared.baseline + prepared.renderPathOffsetY,
+    assert.equal(requireFiniteNumber(prepared.baseline, 'title baseline') + requireFiniteNumber(prepared.renderPathOffsetY, 'title path offset'),
       PLANET_TITLE_STANDARD.baseline,
       `${id}: baseline must match Saturn`);
   }

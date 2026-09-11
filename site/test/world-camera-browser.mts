@@ -4,40 +4,40 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 import type { Page } from 'playwright';
-import type { PreparedWorldCameraFrame, WorldCameraPose } from './world-camera.ts';
-import PREPARED_MERCURY_SCENE from '../../../../src/planets/mercury/prepared/scene.json' with { type: 'json' };
+import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.ts';
+import { parsePreparedWorldCameraFrame } from '../../src/renderers/css/dist/navigation.js';
+import { createTestPage } from './browser-observations.mts';
+import { required } from '../../tools/test-values.mts';
+import PREPARED_MERCURY_SCENE from '../../src/planets/mercury/prepared/scene.json' with { type: 'json' };
 
 const base = process.argv[2] ?? 'http://127.0.0.1:4211';
 const directory = resolve('.local/world-camera-owner');
 await mkdir(directory, { recursive: true });
-const preparedFrame = PREPARED_MERCURY_SCENE.worldFrame;
-if (!isPreparedWorldFrame(preparedFrame)) throw new TypeError('The checked-in Mercury preparation must supply a valid physical frame.');
-const frame = preparedFrame;
+const frame = required(parsePreparedWorldCameraFrame(PREPARED_MERCURY_SCENE.worldFrame),
+  'The checked-in Mercury preparation must supply a valid physical frame.');
 const errors: string[] = [], report: Record<string, unknown> = {};
 const browser = await chromium.launch({ headless: true, channel: process.env.PLAYWRIGHT_CHANNEL ?? 'chrome' });
 const near = (a: readonly number[], b: readonly number[], tolerance = .0002): void => {
   assert.equal(a.length, b.length);
-  for (let i = 0; i < a.length; i++) assert.ok(Math.abs(a[i] - b[i]) <= tolerance, `${a[i]} != ${b[i]}`);
+  for (let i = 0; i < a.length; i++) assert.ok(Math.abs(required(a[i]) - required(b[i])) <= tolerance, `${a[i]} != ${b[i]}`);
 };
 type Vector3 = readonly [number, number, number];
 type Quaternion = readonly [number, number, number, number];
 interface BrowserCameraState { silhouetteRadius: number; distance: number; principalOffset: readonly [number, number]; focal: number; bodyCenterKilometers: Vector3; zoom: number; pose: { scene: string }; }
 interface BrowserSnapshot { camera: BrowserCameraState; world: WorldCameraPose; }
-interface BrowserMercury { ready: boolean; assertStableDomIdentity(): boolean; camera: { state(): BrowserCameraState; captureWorldCamera(frame: PreparedWorldCameraFrame): WorldCameraPose; applyWorldCamera(world: WorldCameraPose, frame: PreparedWorldCameraFrame): void; setState(value: Record<string, unknown>): void; stats(): { dragInertia: { active: boolean }; wheelZoom: { active: boolean } }; }; }
-
-declare global { interface Window { __cssEarth?: { ready: boolean }; __mercury?: BrowserMercury; __ownerSelections?: unknown[]; } }
+declare global { interface Window { __ownerSelections?: unknown[]; } }
 
 function rotated([x, y, z, w]: Quaternion, vector: Vector3): Vector3 {
   const [a, b, c] = vector, tx = 2 * (y * c - z * b), ty = 2 * (z * a - x * c), tz = 2 * (x * b - y * a);
   return [a + w * tx + y * tz - z * ty, b + w * ty + z * tx - x * tz, c + w * tz + x * ty - y * tx];
 }
 function withCentre(world: WorldCameraPose, oldCentre: Vector3, newCentre: Vector3): WorldCameraPose {
-  const shift = rotated(quaternion(world.pose.orientationXyzw), vector3(newCentre.map((component, i) => (oldCentre[i]! - component) * frame.metersPerUnit)));
-  const position = vector3(world.pose.positionM.map((component, i) => component + shift[i]!));
+  const shift = rotated(quaternion(world.pose.orientationXyzw), vector3(newCentre.map((component, i) => (required(oldCentre[i]) - component) * frame.metersPerUnit)));
+  const position = vector3(world.pose.positionM.map((component, i) => component + required(shift[i])));
   return { ...world, pose: { ...world.pose, positionM: position } };
 }
 try {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  const page = await createTestPage(browser, { viewport: { width: 1440, height: 1000 } });
   page.on('pageerror', error => errors.push(error.message));
   await page.goto(new URL('/mercury/?owner-proof=1#physical', base).href, { waitUntil: 'networkidle' });
   await ready(page);
@@ -117,18 +117,18 @@ try {
   const behindCentre: Vector3 = [0, 0, 1500];
   const behind = withCentre(restored.world, currentCentre, behindCentre);
   await apply(page, behind);
-  const hidden = await page.evaluate(() => ({ scene: requiredHtml('.mercury-scene').hidden,
-    marker: requiredHtml('.mercury-body-marker').hidden }));
+  const hidden = await page.evaluate(() => ({ scene: window.__cssearthTest.html('.mercury-scene').hidden,
+    marker: window.__cssearthTest.html('.mercury-body-marker').hidden }));
   assert.deepEqual(hidden, { scene: true, marker: true });
   await apply(page, restored.world);
   await assertMarkerCentre(page);
-  assert.equal(await page.evaluate(() => requireMercury().assertStableDomIdentity()), true);
+  assert.equal(await page.evaluate(() => window.__cssearthTest.object('mercury').assertStableDomIdentity()), true);
   assert.deepEqual(errors, []);
   await page.screenshot({ path: resolve(directory, 'translated-camera.png') });
   // Probe the actual hit targets at the event boundary. The router's flight
   // response has its own integration gate; capture prevents leaving this owner.
   await page.evaluate(() => {
-    const mercury = requireMercury();
+    const mercury = window.__cssearthTest.object('mercury');
     window.__ownerSelections = [];
     document.addEventListener('objectnavigate', event => {
       if (!(event instanceof CustomEvent)) throw new TypeError('Object navigation event must be custom.');
@@ -146,12 +146,12 @@ try {
     await page.mouse.click(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
   }
   assert.deepEqual(await page.evaluate(() => window.__ownerSelections), [{ objectId: 'venus' }, { objectId: 'venus' }]);
-  await page.evaluate(() => requireMercury().camera.setState({ distance: 1250 }));
-  assert.equal(await target.evaluate(element => element.style.pointerEvents), 'none');
+  await page.evaluate(() => window.__cssearthTest.object('mercury').camera.setState({ distance: 1250 }));
+  assert.equal(await target.evaluate(element => window.__cssearthTest.htmlElement(element).style.pointerEvents), 'none');
   await target.dispatchEvent('click');
   assert.equal(await page.evaluate(() => window.__ownerSelections?.length), 2);
   assert.equal(await page.locator('.mercury-caption[data-object-navigate="venus"]').count(), 0);
-  assert.equal(await page.evaluate(() => requireMercury().assertStableDomIdentity()), true);
+  assert.equal(await page.evaluate(() => window.__cssearthTest.object('mercury').assertStableDomIdentity()), true);
   report.bodySelection = 'visible marker/caption emit; hidden target and stale caption are inert';
   report.ok = true;
   console.log('WORLD CAMERA OWNER PASS: pose, resize, input, URL, near surface, retained DOM and body selection');
@@ -161,30 +161,39 @@ try {
 }
 
 async function ready(page: Page): Promise<void> {
-  await page.waitForFunction(() => window.__cssEarth?.ready === true && requireMercury().ready === true,
+  await page.waitForFunction(() => window.__cssEarth?.ready === true && window.__cssEarth.object('mercury')?.ready === true,
     null, { timeout: 30000 });
 }
 async function apply(page: Page, world: WorldCameraPose): Promise<void> {
-  await page.evaluate(({ world, frame }) => requireMercury().camera.applyWorldCamera(world, frame), { world, frame });
+  await page.evaluate(({ world, frame }) => window.__cssearthTest.object('mercury').camera.applyWorldCamera(world, frame), { world, frame });
   await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
 }
 async function read(page: Page): Promise<BrowserSnapshot> {
-  return browserSnapshot(await page.evaluate(frame => { const mercury = requireMercury(), camera = mercury.camera.state(); return {
-    camera: { ...camera, pose: camera.pose }, world: mercury.camera.captureWorldCamera(frame),
-  }; }, frame));
+  return page.evaluate(frame => {
+    const observations = window.__cssearthTest, mercury = observations.object('mercury');
+    const state = observations.physicalCamera('mercury');
+    if (state.principalOffset.length !== 2) throw new Error('Camera principal offset must have two components.');
+    const principalOffset: readonly [number, number] = [observations.number(state.principalOffset[0], 'principal x'),
+      observations.number(state.principalOffset[1], 'principal y')];
+    return { camera: { silhouetteRadius: observations.number(state.silhouetteRadius, 'silhouette radius'),
+      distance: observations.number(state.distance, 'camera distance'), focal: state.focal,
+      principalOffset, zoom: observations.number(state.zoom, 'camera zoom'),
+      bodyCenterKilometers: observations.required(state.bodyCenterKilometers, 'body centre'), pose: state.pose },
+      world: observations.required(mercury.camera.captureWorldCamera(frame), 'world camera') };
+  }, frame);
 }
 async function settled(page: Page): Promise<void> {
   await page.waitForTimeout(700);
   await page.waitForFunction(() => {
-    const state = requireMercury().camera.stats();
-    return !state.dragInertia.active && !state.wheelZoom.active;
+    const state = window.__cssearthTest.object('mercury').camera.stats();
+    return !state.dragInertia.active && !window.__cssearthTest.required(state.dragInertia.wheelZoom, 'wheel zoom diagnostics').active;
   }, null, { timeout: 10000 });
 }
 async function assertMarkerCentre(page: Page): Promise<void> {
   const measured = await page.evaluate(() => {
-    const state = requireMercury().camera.state(), root = requiredHtml('.mercury-camera').getBoundingClientRect();
-    const marker = requiredHtml('.mercury-body-marker').getBoundingClientRect();
-    const centre = state.bodyCenterKilometers, depth = -centre[2];
+    const state = window.__cssearthTest.physicalCamera('mercury'), root = window.__cssearthTest.html('.mercury-camera').getBoundingClientRect();
+    const marker = window.__cssearthTest.html('.mercury-body-marker').getBoundingClientRect();
+    const centre = window.__cssearthTest.required(state.bodyCenterKilometers, 'body centre'), depth = -centre[2];
     return { actual: [marker.x + marker.width / 2, marker.y + marker.height / 2], expected: [
       root.x + root.width / 2 + state.principalOffset[0] + state.focal * centre[0] / depth,
       root.y + root.height / 2 + state.principalOffset[1] + state.focal * centre[1] / depth] };
@@ -192,19 +201,17 @@ async function assertMarkerCentre(page: Page): Promise<void> {
   near(measured.actual, measured.expected, .03);
 }
 
-function requiredHtml(selector: string): HTMLElement {
-  const element = document.querySelector(selector);
-  if (!(element instanceof HTMLElement)) throw new TypeError(`Expected HTML element: ${selector}`);
-  return element;
+function vector3(value: readonly number[]): Vector3 {
+  const [x, y, z] = value;
+  if (value.length !== 3 || x === undefined || y === undefined || z === undefined || !value.every(Number.isFinite)) {
+    throw new TypeError('Expected a finite three-vector.');
+  }
+  return [x, y, z];
 }
-function requireMercury(): BrowserMercury {
-  const mercury = window.__mercury;
-  if (!mercury || typeof mercury.ready !== 'boolean' || typeof mercury.assertStableDomIdentity !== 'function' || typeof mercury.camera?.state !== 'function' || typeof mercury.camera.captureWorldCamera !== 'function' || typeof mercury.camera.applyWorldCamera !== 'function' || typeof mercury.camera.setState !== 'function' || typeof mercury.camera.stats !== 'function') throw new TypeError('Mercury browser owner is unavailable.');
-  return mercury;
+function quaternion(value: readonly number[]): Quaternion {
+  const [x, y, z, w] = value;
+  if (value.length !== 4 || x === undefined || y === undefined || z === undefined || w === undefined || !value.every(Number.isFinite)) {
+    throw new TypeError('Expected a finite quaternion.');
+  }
+  return [x, y, z, w];
 }
-function vector3(value: readonly number[]): Vector3 { if (value.length !== 3 || !value.every(Number.isFinite)) throw new TypeError('Expected a finite three-vector.'); return [value[0]!, value[1]!, value[2]!]; }
-function quaternion(value: readonly number[]): Quaternion { if (value.length !== 4 || !value.every(Number.isFinite)) throw new TypeError('Expected a finite quaternion.'); return [value[0]!, value[1]!, value[2]!, value[3]!]; }
-function isPreparedWorldFrame(value: unknown): value is PreparedWorldCameraFrame { if (!value || typeof value !== 'object') return false; const candidate = value as Record<string, unknown>; return typeof candidate.referenceFrame === 'string' && candidate.referenceFrame.length > 0 && typeof candidate.epochJdTt === 'number' && Number.isFinite(candidate.epochJdTt) && typeof candidate.metersPerUnit === 'number' && candidate.metersPerUnit > 0 && typeof candidate.bodyRadiusM === 'number' && candidate.bodyRadiusM > 0 && Array.isArray(candidate.originM) && candidate.originM.length === 3 && candidate.originM.every(Number.isFinite) && Array.isArray(candidate.presentationToReference) && candidate.presentationToReference.length === 9 && candidate.presentationToReference.every(Number.isFinite); }
-function pair(value: unknown): readonly [number, number] { if (!Array.isArray(value) || value.length !== 2 || !value.every(Number.isFinite)) throw new TypeError('Expected a finite pair.'); return [value[0]!, value[1]!]; }
-function isWorldCameraPose(value: unknown): value is WorldCameraPose { if (!value || typeof value !== 'object') return false; const world = value as Record<string, unknown>, pose = world.pose; if (!pose || typeof pose !== 'object') return false; const physical = pose as Record<string, unknown>, position = physical.positionM, orientation = physical.orientationXyzw; return typeof world.referenceFrame === 'string' && typeof world.epochJdTt === 'number' && Number.isFinite(world.epochJdTt) && typeof physical.schema === 'string' && Array.isArray(position) && position.length === 3 && position.every(Number.isFinite) && Array.isArray(orientation) && orientation.length === 4 && orientation.every(Number.isFinite); }
-function browserSnapshot(value: unknown): BrowserSnapshot { if (!value || typeof value !== 'object') throw new TypeError('Browser camera snapshot is unavailable.'); const snapshot = value as { camera?: unknown; world?: unknown }; if (!snapshot.camera || typeof snapshot.camera !== 'object' || !isWorldCameraPose(snapshot.world)) throw new TypeError('Browser camera snapshot is incomplete.'); const camera = snapshot.camera as Record<string, unknown>; const pose = camera.pose; if (typeof camera.silhouetteRadius !== 'number' || typeof camera.distance !== 'number' || typeof camera.focal !== 'number' || typeof camera.zoom !== 'number' || !pose || typeof pose !== 'object' || typeof (pose as Record<string, unknown>).scene !== 'string') throw new TypeError('Browser camera state is invalid.'); return { camera: { silhouetteRadius: camera.silhouetteRadius, distance: camera.distance, focal: camera.focal, zoom: camera.zoom, principalOffset: pair(camera.principalOffset), bodyCenterKilometers: vector3(camera.bodyCenterKilometers as readonly number[]), pose: { scene: (pose as { scene: string }).scene } }, world: snapshot.world }; }

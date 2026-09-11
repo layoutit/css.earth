@@ -1,3 +1,5 @@
+declare global { interface Window { __neptuneLongTasks: number[]; } }
+type MotionSample = { interval: number; materialRow: number | null; retainedImages: number };
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
 
@@ -12,8 +14,8 @@ try {
     deviceScaleFactor,
   });
   const page = await context.newPage();
-  const browserProblems = [];
-  const externalRequests = [];
+  const browserProblems: string[] = [];
+  const externalRequests: string[] = [];
   page.on("console", (message) => {
     if (["error", "warning"].includes(message.type())) {
       browserProblems.push(`${message.type()}: ${message.text()}`);
@@ -26,7 +28,7 @@ try {
     }
   });
   const cdp = await context.newCDPSession(page);
-  let layers = [];
+  let layers: { width: number; height: number; backendNodeId?: number }[] = [];
   await cdp.send("LayerTree.enable");
   await cdp.send("Performance.enable");
   cdp.on("LayerTree.layerTreeDidChange", (event) => {
@@ -47,43 +49,54 @@ try {
   assert.equal(response?.status(), 200);
   await page.waitForFunction(() => window.__neptune?.ready === true);
   await page.waitForTimeout(500);
-  const startup = await page.evaluate(() => ({
+  const startup = await page.evaluate(() => {
+    function requiredDiagnostics<T>(value: T): NonNullable<T> { if (value === undefined || value === null) throw new Error("Expected mounted development diagnostics"); return value; }
+return ({
     longTasks: [...window.__neptuneLongTasks],
-    retainedImages: window.__neptune.renderStats.textureStats
+    retainedImages: requiredDiagnostics(window.__neptune).renderStats.textureStats
       .retainedInteractiveImageCount,
-    resources: performance.getEntriesByType("resource")
+    resources: performance.getEntriesByType("resource").filter((entry): entry is PerformanceResourceTiming => entry instanceof PerformanceResourceTiming)
       .filter(({ name }) => name.includes("/scenes/neptune/"))
       .map(({ name, transferSize, decodedBodySize }) => ({
         name,
         transferSize,
         decodedBodySize,
       })),
-  }));
+  }); });
   await page.evaluate(() => {
-    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
+    function requiredDiagnostics<T>(value: T): NonNullable<T> { if (value === undefined || value === null) throw new Error("Expected mounted development diagnostics"); return value; }
+
+    function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+    function requiredInput(value: Element | null): HTMLInputElement { if (!(value instanceof HTMLInputElement)) throw new Error("Expected required HTMLInputElement"); return value; }
+
+    (requiredInput(document.querySelector('input[name="motion"]')).checked && requiredInput(document.querySelector('input[name="motion"]')).click());
     window.__neptuneLongTasks = [];
-    window.__neptune.camera.setState({ controlPitch: 0, zoom: 0.8 });
+    requiredDiagnostics(window.__neptune).camera.setState({ controlPitch: 0, zoom: 0.8 });
   });
   await page.waitForTimeout(250);
-  const motion = await page.evaluate(() => new Promise((resolveMotion) => {
-    const samples = [];
+  const motion = await page.evaluate(() => {
+    function requiredDiagnostics<T>(value: T): NonNullable<T> { if (value === undefined || value === null) throw new Error("Expected mounted development diagnostics"); return value; }
+
+    function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+return new Promise<MotionSample[]>((resolveMotion) => {
+    const samples: MotionSample[] = [];
     let previous = performance.now();
-    const tick = (now) => {
+    const tick = (now: number) => {
       const motionFrame = samples.length;
       const progress = motionFrame / 119;
       const pitch = progress <= 0.75
         ? progress / 0.75 * 89
         : (1 - progress) / 0.25 * 89;
       const zoom = 0.8 + Math.sin(progress * Math.PI) * 0.3;
-      window.__neptune.camera.setState({ controlPitch: pitch, zoom });
-      const materialImage = getComputedStyle(document.querySelector(
+      requiredDiagnostics(window.__neptune).camera.setState({ controlPitch: pitch, zoom });
+      const materialImage = getComputedStyle(requiredElement(document.querySelector(
         ".neptune-exterior-material",
-      )).backgroundImage;
+      ))).backgroundImage;
       const materialRowMatch = /row-(\d+)\.webp/u.exec(materialImage);
       samples.push({
         interval: now - previous,
         materialRow: materialRowMatch ? Number(materialRowMatch[1]) : null,
-        retainedImages: window.__neptune.renderStats.textureStats
+        retainedImages: requiredDiagnostics(window.__neptune).renderStats.textureStats
           .retainedInteractiveImageCount,
       });
       previous = now;
@@ -91,21 +104,25 @@ try {
       else requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
-  }));
+  }); });
   await page.waitForTimeout(1_000);
-  const runtime = await page.evaluate(() => ({
+  const runtime = await page.evaluate(() => {
+    function requiredDiagnostics<T>(value: T): NonNullable<T> { if (value === undefined || value === null) throw new Error("Expected mounted development diagnostics"); return value; }
+
+    function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+return ({
     longTasks: [...window.__neptuneLongTasks],
-    camera: window.__neptune.camera.stats(),
-    retainedImages: window.__neptune.renderStats.textureStats
+    camera: requiredDiagnostics(window.__neptune).camera.stats(),
+    retainedImages: requiredDiagnostics(window.__neptune).renderStats.textureStats
       .retainedInteractiveImageCount,
-    stableDomIdentity: window.__neptune.assertStableDomIdentity(),
-    retainedLeafCount: window.__neptune.dom.retainedLeafCount,
-    stageElementCount: document.querySelector(".planet-stage")
-      .querySelectorAll("*").length,
-    runningAnimationCount: document.querySelector(".planet-stage")
+    stableDomIdentity: requiredDiagnostics(window.__neptune).assertStableDomIdentity(),
+    retainedLeafCount: requiredDiagnostics(window.__neptune).dom.retainedLeafCount,
+    stageElementCount: requiredElement(document.querySelector(".planet-stage"))
+      .querySelectorAll<HTMLElement>("*").length,
+    runningAnimationCount: requiredElement(document.querySelector(".planet-stage"))
       .getAnimations({ subtree: true })
       .filter(({ playState }) => playState === "running").length,
-  }));
+  }); });
   const metrics = Object.fromEntries(
     (await cdp.send("Performance.getMetrics")).metrics.map(
       ({ name, value }) => [name, value],
@@ -113,7 +130,7 @@ try {
   );
   const intervals = motion.map(({ interval }) => interval)
     .sort((left, right) => left - right);
-  const maximumCompositorLayer = layers.reduce((maximum, layer) => {
+  const maximumCompositorLayer = layers.reduce<{ area: number; width: number; height: number }>((maximum, layer) => {
     const area = (layer.width ?? 0) * (layer.height ?? 0);
     return area > maximum.area ? {
       width: layer.width ?? 0,
@@ -172,7 +189,7 @@ try {
   await browser.close();
 }
 
-function percentile(sorted, fraction) {
+function percentile(sorted: readonly number[], fraction: number) {
   return sorted[Math.min(
     sorted.length - 1,
     Math.floor(sorted.length * fraction),

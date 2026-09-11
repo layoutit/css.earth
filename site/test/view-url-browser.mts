@@ -1,3 +1,5 @@
+import { createTestPage } from './browser-observations.mts';
+import type { Page } from 'playwright';
 // Exercise the real pointer, wheel, settings, address bar and reload path.
 // Diagnostics only measure the camera and the retained native animations.
 import assert from "node:assert/strict";
@@ -11,18 +13,21 @@ import { wheelWithReceipt } from "./wheel-zoom-distance.mts";
 const baseUrl = process.argv.find(argument => /^https?:/u.test(argument)) ?? "http://127.0.0.1:4210";
 const output = resolve(process.env.VIEW_URL_DUMP ?? ".local/view-url-browser");
 await mkdir(output, { recursive: true });
-const checks = [], errors = [], warnings = [], snapshots = {};
+type Snapshot = Awaited<ReturnType<typeof read>>;
+type EncodedCamera = { distanceKilometers: number; pose: { scene: string } };
+const checks: { id: string; ok: boolean; [key: string]: unknown }[] = [], errors: string[] = [], warnings: string[] = [],
+  snapshots: Partial<Record<string, Snapshot>> = {};
 // Shared views restore the physical vault. The shell's open information or
 // settings panel is separate UI state; leave its rail and navigation out.
 const vaultClip = { x: 360, y: 80, width: 1080, height: 790 };
-const check = (id, ok, detail = {}) => {
+const check = (id: string, ok: unknown, detail: Record<string, unknown> = {}) => {
   checks.push({ id, ok: Boolean(ok), ...detail });
   if (!ok) console.error(`FAIL ${id}: ${JSON.stringify(detail)}`);
 };
-const close = (a, b) => Math.abs(a - b) <= Math.max(1e-9, Math.abs(b) * 1e-12);
+const close = (a: number, b: number) => Math.abs(a - b) <= Math.max(1e-9, Math.abs(b) * 1e-12);
 const browser = await chromium.launch({ headless: true, channel: process.env.PLAYWRIGHT_CHANNEL ?? "chrome", timeout: 20000 });
 try {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, reducedMotion: "no-preference" });
+  const page = await createTestPage(browser, { viewport: { width: 1440, height: 900 }, reducedMotion: "no-preference" });
   page.on("pageerror", error => errors.push(error.message));
   page.on("console", message => {
     if (message.type() === "error") errors.push(message.text());
@@ -50,7 +55,7 @@ try {
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   const motion = page.locator(".planet-motion-setting-control");
   await motion.click();
-  await page.waitForFunction(() => window.__mercury.runtime.playback().animations.some(animation => animation.mode === "motion" && animation.running && animation.currentTime > 150));
+  await page.waitForFunction(() => window.__cssearthTest.object('mercury').runtime.playback().animations.some(animation => animation.mode === "motion" && animation.running && typeof animation.currentTime === "number" && animation.currentTime > 150));
   await motion.click();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   await settled(page);
@@ -59,7 +64,8 @@ try {
   const savedUrlA = page.url(), savedA = decode(savedUrlA);
   const urlA = new URL(savedUrlA);
   check("url-preserves-object-route-hash-and-other-parameters", urlA.pathname === initialUrl.pathname && urlA.hash === "#camera" && urlA.searchParams.get("campaign") === "shared-view");
-  const token = urlA.searchParams.get("v"), bytes = Buffer.from(token, "base64url");
+  const token = urlA.searchParams.get("v"); assert.ok(token);
+  const bytes = Buffer.from(token, "base64url");
   check("url-has-one-tiny-versioned-payload", urlA.searchParams.getAll("v").length === 1 && bytes.readUInt16BE(0) >>> 12 === 3 && token.length <= 80,
     { tokenCharacters: token.length, bytes: bytes.length, actualUrlCharacters: savedUrlA.length });
   check("url-stores-one-physical-pose-and-distance", Object.keys(savedA.camera).sort().join() === "distanceKilometers,pose" &&
@@ -120,8 +126,8 @@ try {
   compareEncodedCamera("real-input-replaces-malformed-token-with-current-camera", repaired.camera, snapshots.repaired.camera);
   check("no-browser-errors", errors.length === 0, { errors });
 } catch (error) {
-  errors.push(error.stack ?? error.message);
-  check("browser-run-completed", false, { error: error.message });
+  errors.push(error instanceof Error ? error.stack ?? error.message : String(error));
+  check("browser-run-completed", false, { error: error instanceof Error ? error.message : String(error) });
 } finally {
   await browser.close();
   const report = { passed: checks.filter(item => item.ok).length, total: checks.length, checks, errors, warnings, snapshots };
@@ -130,21 +136,24 @@ try {
 assert.ok(checks.length >= 25 && checks.every(item => item.ok) && errors.length === 0, `Shared view browser proof failed; see ${resolve(output, "report.json")}`);
 console.log(`Shared view browser proof passed: ${checks.length}/${checks.length}; real drag, wheel, reload, history and malformed URL.`);
 
-async function ready(page) {
+async function ready(page: Page) {
   await page.waitForFunction(() => window.__cssEarth?.ready === true && window.__mercury?.ready === true && document.documentElement.dataset.ready === "true", null, { timeout: 20000 });
 }
-async function settled(page) {
+async function settled(page: Page) {
   await page.waitForFunction(() => {
-    const state = window.__mercury.camera.stats().dragInertia;
+    const state = window.__cssearthTest.object('mercury').camera.stats().dragInertia;
     return !state.active && !state.wheelZoom.active;
   }, null, { timeout: 10000 });
   await page.waitForFunction(() => {
-    const stars = window.__mercury.sky.state().captions.stars, slot = stars.slots[0];
-    return slot.alpha === slot.target && (stars.accepted ? slot.occupant === `3:${stars.candidate.id}` : slot.occupant === null);
+    const stars = window.__cssearthTest.object('mercury').sky.state().captions?.stars;
+    if (!stars) return false;
+    const slot = stars.slots[0];
+    if (!slot) return false;
+    return slot.alpha === slot.target && (stars.accepted ? slot.occupant === `3:${stars.candidate?.id}` : slot.occupant === null);
   }, null, { timeout: 3000 });
   await page.waitForTimeout(220);
 }
-async function drag(page, from, to) {
+async function drag(page: Page, from: readonly [number, number], to: readonly [number, number]) {
   await page.mouse.move(...from);
   await page.mouse.down();
   await page.mouse.move(...to, { steps: 10 });
@@ -153,60 +162,66 @@ async function drag(page, from, to) {
   await page.mouse.up();
   await settled(page);
 }
-async function savedUrl(page, previous = null) {
+async function savedUrl(page: Page, previous: string | null = null) {
   await page.waitForFunction(before => new URLSearchParams(location.search).has("v") && (!before || location.href !== before), previous);
 }
-function decode(url) { return parseSharedView(`v=${new URL(url).searchParams.get("v")}`); }
-async function restored(page, distanceKilometers) {
-  await page.waitForFunction(expected => Math.abs(window.__mercury?.camera.state().distanceKilometers - expected) <= Math.max(1e-9, Math.abs(expected) * 1e-12), distanceKilometers);
+function decode(url: string) {
+  const view = parseSharedView(`v=${new URL(url).searchParams.get("v")}`);
+  assert.ok(view); assert.equal(view.camera.pose.schema, 'cssearth-camera-pose@2');
+  assert.ok(typeof view.camera.distanceKilometers === 'number');
+  return { ...view, camera: { distanceKilometers: view.camera.distanceKilometers, pose: view.camera.pose } };
+}
+async function restored(page: Page, distanceKilometers: number) {
+  await page.waitForFunction(expected => Math.abs((window.__mercury?.camera.state().distanceKilometers ?? Infinity) - expected) <= Math.max(1e-9, Math.abs(expected) * 1e-12), distanceKilometers);
   await settled(page);
 }
-async function read(page) {
+async function read(page: Page) {
   return page.evaluate(() => {
-    const api = window.__mercury, camera = api.camera.state(), playback = api.runtime.playback();
-    const sky = api.sky.state(), lighting = api.material.state().lighting;
-    const matrix = selector => Array.from(new DOMMatrix(document.querySelector(selector).style.transform).toFloat64Array());
-    const sun = document.querySelector(".mercury-sun"), material = document.querySelector(".mercury-material");
+    const api = window.__cssearthTest.object("mercury"), camera = window.__cssearthTest.physicalCamera("mercury"), playback = api.runtime.playback();
+    const sky = api.sky.state(), lighting = window.__cssearthTest.record(api.material.state().lighting, "lighting material");
+    const matrix = (selector: string) => Array.from(new DOMMatrix(window.__cssearthTest.html(selector).style.transform).toFloat64Array());
+    const sun = window.__cssearthTest.html(".mercury-sun"), material = window.__cssearthTest.html(".mercury-material");
     return { camera: { controlPitch: camera.controlPitch, controlYaw: camera.controlYaw, zoom: camera.zoom,
       distanceKilometers: camera.distanceKilometers, pose: camera.pose },
+    derivedSky: window.__cssearthTest.required(api.runtime.view(), "published view").skyboxMatrix,
     rendered: { scene: matrix(".mercury-scene"), sky: matrix(".mercury-skybox-orientation"),
-      sun: { direction: sky.sunViewDirection, visible: sky.sunVisible, classification: sky.sunClassification,
+      sun: { direction: window.__cssearthTest.required(sky.sunViewDirection, "sun direction"), visible: sky.sunVisible, classification: sky.sunClassification,
         centerNdc: sky.sunCenterNdc, spriteDiameter: sky.sunSpriteDiameter, hidden: sun.hidden, transform: sun.style.transform },
       lighting: { bank: lighting.bank, frame: lighting.frame, image: material.style.backgroundImage, transform: material.style.transform } },
-    playback: { times: playback.animations.filter(animation => animation.mode === "motion").map(animation => animation.currentTime),
-      speed: playback.speed, motionRequested: window.__cssEarth.playback.motionRequested,
+    playback: { times: playback.animations.filter(animation => animation.mode === "motion").map(animation => window.__cssearthTest.number(animation.currentTime, "motion animation time")),
+      speed: playback.speed, motionRequested: window.__cssearthTest.scene().playback.motionRequested,
       running: playback.animations.some(animation => animation.mode === "motion" && animation.running) },
-    nodeCount: document.querySelector(".planet-stage").querySelectorAll("*").length,
-    stable: api.assertStableDomIdentity(), mountedObjectCount: window.__cssEarth.mountedObjectCount };
+    nodeCount: window.__cssearthTest.element(".planet-stage").querySelectorAll("*").length,
+    stable: api.assertStableDomIdentity(), mountedObjectCount: window.__cssearthTest.scene().mountedObjectCount };
   });
 }
-function compareEncodedCamera(id, actual, expected) {
+function compareEncodedCamera(id: string, actual: EncodedCamera, expected: EncodedCamera) {
   check(`${id}-distanceKilometers`, close(actual.distanceKilometers, expected.distanceKilometers), { actual: actual.distanceKilometers, expected: expected.distanceKilometers });
-  const values = value => value.slice(9, -1).split(",").map(Number);
+  const values = (value: string) => value.slice(9, -1).split(",").map(Number);
   compareNumbers(`${id}-scene`, values(actual.pose.scene), values(expected.pose.scene));
 }
-function compareNumbers(id, actual, expected, tolerance = 1e-10) {
+function compareNumbers(id: string, actual: readonly number[], expected: readonly number[], tolerance = 1e-10) {
   const maximumError = Math.max(...actual.map((value, index) => Math.abs(value - expected[index])));
   check(id, actual.length === expected.length && maximumError <= tolerance, { maximumError });
 }
-function compareRenderedView(id, actual, expected) {
+function compareRenderedView(id: string, actual: Snapshot, expected: Snapshot) {
   compareEncodedCamera(id, actual.camera, expected.camera);
   check(`${id}-zoom-derived-from-distance`, close(actual.camera.zoom, expected.camera.zoom), { actual: actual.camera.zoom, expected: expected.camera.zoom });
   // The scene pose owns the sky registration and Sun. Input-control angles
   // and the unused independent Sun matrix are not the rendered camera.
-  compareNumbers(`${id}-derived-sky`, actual.camera.pose.skybox.slice(9, -1).split(",").map(Number), expected.camera.pose.skybox.slice(9, -1).split(",").map(Number));
+  compareNumbers(`${id}-derived-sky`, actual.derivedSky.slice(9, -1).split(",").map(Number), expected.derivedSky.slice(9, -1).split(",").map(Number));
   compareNumbers(`${id}-rendered-scene`, actual.rendered.scene, expected.rendered.scene);
   compareNumbers(`${id}-rendered-sky`, actual.rendered.sky, expected.rendered.sky);
   compareNumbers(`${id}-actual-sun-direction`, actual.rendered.sun.direction, expected.rendered.sun.direction);
   check(`${id}-actual-sun-projection`, samePresentation(actual.rendered.sun, expected.rendered.sun), { actual: actual.rendered.sun, expected: expected.rendered.sun });
   check(`${id}-actual-lighting`, samePresentation(actual.rendered.lighting, expected.rendered.lighting), { actual: actual.rendered.lighting, expected: expected.rendered.lighting });
 }
-function samePresentation(actual, expected) {
+function samePresentation(actual: unknown, expected: unknown): boolean {
   if (typeof actual === "number" && typeof expected === "number") return close(actual, expected);
   if (actual === null || expected === null || typeof actual !== "object" || typeof expected !== "object") return actual === expected;
-  return Object.keys(actual).length === Object.keys(expected).length && Object.keys(actual).every(key => samePresentation(actual[key], expected[key]));
+  return Object.keys(actual).length === Object.keys(expected).length && Object.keys(actual).every(key => samePresentation(Reflect.get(actual, key), Reflect.get(expected, key)));
 }
-async function comparePixels(id, actualPng, expectedPng) {
+async function comparePixels(id: string, actualPng: Buffer, expectedPng: Buffer) {
   const [actual, expected] = await Promise.all([actualPng, expectedPng].map(png => sharp(png).removeAlpha().raw().toBuffer({ resolveWithObject: true })));
   let absoluteError = 0, changedPixels = 0;
   for (let index = 0; index < actual.data.length; index += 3) {
@@ -222,7 +237,7 @@ async function comparePixels(id, actualPng, expectedPng) {
   check(id, actual.info.width === expected.info.width && actual.info.height === expected.info.height && meanChannelError <= 0.1 && changedFraction <= 0.001,
     { meanChannelError, changedFraction, changedPixels });
 }
-function verifyPlayback(id, actual, expected) {
+function verifyPlayback(id: string, actual: Snapshot, expected: ReturnType<typeof decode>["playback"]) {
   check(id, !actual.playback.running && actual.playback.motionRequested === expected.motionRequested && actual.playback.speed === expected.speed &&
     actual.playback.times.length === expected.times.length && actual.playback.times.every((time, index) => close(time, expected.times[index])),
   { actual: actual.playback, expected });

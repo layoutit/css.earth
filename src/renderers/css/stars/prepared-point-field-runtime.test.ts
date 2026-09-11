@@ -17,7 +17,8 @@ class FakeElement {
     this.writes++; target[key] = value; return true;
   } });
   parentNode: FakeElement|null = null; className=''; ariaHidden=''; textContent=''; clientWidth=800; clientHeight=600;
-  constructor(readonly ownerDocument: FakeDocument) {}
+  readonly ownerDocument: FakeDocument;
+  constructor(ownerDocument: FakeDocument) { this.ownerDocument = ownerDocument;}
   get offsetWidth(){return this.textContent.length*8;}
   get offsetHeight(){return 17;}
   getBoundingClientRect() {return {x:0,y:0,left:0,top:0,right:this.clientWidth,bottom:this.clientHeight,width:this.clientWidth,height:this.clientHeight};}
@@ -108,7 +109,7 @@ test('an unchanged camera and surviving identities do not rewrite retained star 
   slots.forEach(slot => { slot.writes = 0; });
   layer.publish(world(), viewport, 1);
   expect(slots.reduce((sum, slot) => sum + slot.writes, 0)).toBe(0);
-  expect(layer.inspect().projectedPoints).toBe(projected, 'Equivalent views do not re-project the retained point pools');
+  expect(layer.inspect().projectedPoints, 'Equivalent views do not re-project the retained point pools').toBe(projected);
   layer.publish(world(1), viewport, 1);
   expect(center(find(layer, 'star:2'))[0]).toBeCloseTo(66, 12);
   expect(leaves(root)).toEqual(slots);

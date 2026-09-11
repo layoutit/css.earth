@@ -1,9 +1,13 @@
-import { preparedPagingFixture as original } from '../paging/__fixtures__/prepared-page.mts';
+import { preparedPagingFixture as source } from '../paging/__fixtures__/prepared-page.mts';
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import { parsePreparedObjectRuntime } from './index.js';
 import { parsePreparedPagePlan } from '../paging/capabilities.js';
 import { record, array } from './guards.js';
+import { prepareActivationGroups } from '../../../../tools/prepared-activation-groups.mts';
+
+// Optional page bindings use the same final activation preparation as production.
+const original = { ...source, tree: { ...source.tree, activationGroups: prepareActivationGroups(source) } };
 
 const copy = () => record(structuredClone(original), 'test document');
 const layers = (input: Record<string, unknown>) => array(input.pageLayers, 'test page layers');
@@ -14,6 +18,7 @@ test('the external runtime boundary preserves both source-backed page plans and 
   const parsed = parsePreparedObjectRuntime(original);
   assert.equal(parsed, original);
   assert.equal(parsed.pageLayers?.length, 2);
+  assert.ok(parsed.tree.activationGroups?.length);
   for (const page of parsed.pageLayers ?? []) {
     assert.equal(parsePreparedPagePlan(page.plan, { lensIds: page.lensIds }), page.plan);
   }
@@ -24,22 +29,22 @@ test('the external runtime boundary preserves both source-backed page plans and 
 });
 
 test('malformed page budgets, roots and matrices fail at the external runtime boundary', () => {
-  const mutations: Array<(page: Record<string, unknown>) => void> = [
-    page => { page.poolSize = 0; },
-    page => { page.poolSize = 513; },
-    page => { page.maximumDecodedBytes = 1; },
-    page => { page.maximumConcurrentLoads = 0; },
-    page => { page.rasterScale = 0; },
-    page => { page.rasterScale = Infinity; },
-    page => { record(page.index, 'index').maximumDirectories = 0; },
-    page => { record(array(page.roots, 'roots')[0], 'root').corners = []; },
+  const mutations: Array<{ mutate(page: Record<string, unknown>): void; error: RegExp }> = [
+    { mutate: page => { page.poolSize = 0; }, error: /page plan/ },
+    { mutate: page => { page.poolSize = 513; }, error: /page plan/ },
+    { mutate: page => { page.maximumDecodedBytes = 1; }, error: /page plan/ },
+    { mutate: page => { page.maximumConcurrentLoads = 0; }, error: /page plan/ },
+    { mutate: page => { page.rasterScale = 0; }, error: /page plan/ },
+    { mutate: page => { page.rasterScale = Infinity; }, error: /pageLayers\.0\.plan\.rasterScale must be finite/ },
+    { mutate: page => { record(page.index, 'index').maximumDirectories = 0; }, error: /page index maximumDirectories/ },
+    { mutate: page => { record(array(page.roots, 'roots')[0], 'root').corners = []; }, error: /page root/ },
     ...['frameMatrix', 'textureMatrix'].flatMap(field => ['', '1,2,3', Array(16).fill('NaN').join(','),
       Array(16).fill('1e999').join(','), Array(16).fill('0x10').join(','), Array(16).fill(' ').join(',')]
-      .map(value => (page: Record<string, unknown>) => { record(page.initialLayer, 'initial layer')[field] = value; })),
+      .map(value => ({ mutate: (page: Record<string, unknown>) => { record(page.initialLayer, 'initial layer')[field] = value; }, error: /page matrices/ }))),
   ];
-  for (const mutate of mutations) {
+  for (const { mutate, error } of mutations) {
     const input = copy(); mutate(plan(input));
-    assert.throws(() => parsePreparedObjectRuntime(input), TypeError);
+    assert.throws(() => parsePreparedObjectRuntime(input), error);
   }
 });
 

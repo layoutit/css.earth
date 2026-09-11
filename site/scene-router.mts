@@ -14,6 +14,7 @@ export type WorldContextMount = Awaited<ReturnType<WorldContextOwner['mount']>>;
 interface Request { id: string; cancelledFlight: boolean; controller: AbortController; lifetime: SceneLifetime; url: string; options: NavigationOptions; timing: ReturnType<typeof createNavigationTiming>; }
 interface Session { framePresenter?: ReturnType<NonNullable<WorldContextMount['createFramePresenter']>>; generation: number; lifetime: SceneLifetime; mount: ObjectSceneLifecycle | null; shell: Shell | null; lastCommand: boolean | null; viewUrl: ReturnType<typeof bindViewUrl> | null; request?: Request; url?: string; }
 export interface RouterOptions { stage: HTMLElement; objectId: string; loadObject?(id: string): Promise<SceneFactory>; documentTarget?: Document; windowTarget?: BrowserWindow; mountShell?: typeof mountPlanetShell; reportError?(error: unknown): void; navigation?: Navigation | null; objects?: readonly ObjectEntry[]; loadContent?: ReturnType<typeof createNavigationContent>['load'] | null; persistentWorldContext?: WorldContextOwner | null; }
+import { readObjectDiagnostics } from '../src/renderers/css/dist/index.js';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { requireSceneLifecycle } from "./scene-contract.mts";
 import { objectAdapter } from "./object-adapter.mts";
@@ -559,16 +560,7 @@ export function createSceneRouter({
     } else delete root.dataset.playing;
     shellOwner?.shell?.setPlaybackState?.(readPlayback());
     if (DIAGNOSTICS_ENABLED) {
-      Reflect.set(windowTarget, '__cssEarth', Object.freeze({
-        activeObjectId: objectId,
-        get selectedObjectId() { return readSceneState().selectedObjectId; },
-        get overview() { return readSceneState().overview; },
-        get mountedObjectCount() { return readSceneState().mountedObjectCount; },
-        get ready() { return readSceneState().ready; },
-        get error() { return readSceneState().error; },
-        get lifecycle() { return readSceneState().lifecycle; },
-        get playback() { return readPlayback(); },
-      }));
+      Reflect.set(windowTarget, '__cssEarth', createSceneDiagnostics(windowTarget, objectId, readSceneState, readPlayback));
     }
     return state;
   }
@@ -732,3 +724,20 @@ if (typeof document !== "undefined") {
   const persistentWorldContext = createWorldContextOwner({ objects: OBJECTS, objectId, navigation, stage });
   createSceneRouter({ stage, objectId, navigation, persistentWorldContext });
 }
+
+function createSceneDiagnostics(windowTarget: Window, objectId: string,
+  readSceneState: ReturnType<typeof createSceneRouter>['state'],
+  readPlayback: ReturnType<typeof createSceneRouter>['playback']) {
+  return Object.freeze({
+        object: (id: string = objectId) => readObjectDiagnostics(windowTarget, id),
+        activeObjectId: objectId,
+        get selectedObjectId() { return readSceneState().selectedObjectId; },
+        get overview() { return readSceneState().overview; },
+        get mountedObjectCount() { return readSceneState().mountedObjectCount; },
+        get ready() { return readSceneState().ready; },
+        get error() { return readSceneState().error; },
+        get lifecycle() { return readSceneState().lifecycle; },
+        get playback() { return readPlayback(); },
+      });
+}
+export type SceneDiagnostics = ReturnType<typeof createSceneDiagnostics>;

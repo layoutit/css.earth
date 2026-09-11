@@ -1,3 +1,7 @@
+import {choice} from "../../../../tools/objects/terrestrial-layers/source-records.mts";
+import {required} from "../../../../tools/test-values.mts";
+import {hasErrorCode} from "../../../../tools/source-values.mts";
+import {shape,array,number,boolean,text} from "../../../../tools/objects/geographic-pages/source-records.mts";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
@@ -8,7 +12,12 @@ import {
   bakeEarthSurfaceRaster,
   createEarthSurfaceRasterPlan,
 } from "../../unit/earth/prepared-fixture.mts";
+import type { PagedSurfaceRasterCell } from "../../../../tools/objects/paged-ellipsoid/surface-raster.mts";
 
+type EarthLeaf=(typeof PREPARED_EARTH_SCENE.body.bands)[number]["leaves"][number];
+const parseRasterCell=shape({index:number,size:number,density:number,reversed:boolean,perspectiveY:number,page:number,x:number,y:number,
+  source:shape({x:number,southY:number,width:number,height:number}),layer:shape({schema:choice("polycss-prepared-projective-texture-layer@1"),rasterScale:number,frameMatrix:text,textureMatrix:text})});
+const parseStaging=shape({atlas:shape({pageSize:number,density:number,gutter:number,sourceWidth:number}),pages:array(shape({width:number,height:number})),cells:array(parseRasterCell)});
 const IDENTITY = "1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1";
 
 function geometry(perspectiveY = 0) {
@@ -29,7 +38,7 @@ function presentation() {
 
 // A direct homogeneous point multiply, independent of the production frame
 // factorization and its northern-coordinate normalization.
-function project(matrix, x, y) {
+function project(matrix: number[], x: number, y: number) {
   const homogeneous = [x, y, 0, 1];
   const values = Array.from({ length: 4 }, (_, row) =>
     homogeneous.reduce((sum, value, column) => sum + matrix[column * 4 + row] * value, 0));
@@ -40,7 +49,7 @@ for (const perspectiveY of [0, -0.012, 0.012, -0.027, 0.06]) {
   test(`Earth baked affine frame preserves its original projective cell (${perspectiveY})`, () => {
     const input = geometry(perspectiveY);
     const before = input.matrix.split(",").map(Number);
-    const cell = createEarthSurfaceRasterPlan().prepare(input, presentation(), 0);
+    const cell = Reflect.apply(createEarthSurfaceRasterPlan().prepare,undefined,[input,presentation(),0]);
     assert.equal(input.matrix, before.join(","), "planning must not mutate source geometry");
     assert.equal(cell.reversed, perspectiveY > 0);
     assert.ok(cell.perspectiveY <= 0);
@@ -67,8 +76,8 @@ for (const perspectiveY of [0, -0.012, 0.012, -0.027, 0.06]) {
   });
 }
 
-function assertSourceStepBound(cell) {
-  const sourcePoint = (x, y) => {
+function assertSourceStepBound(cell: PagedSurfaceRasterCell) {
+  const sourcePoint = (x: number, y: number) => {
     const w = 1 - cell.perspectiveY * y;
     return [x / w * cell.source.width / 32 * 4,
       y / w * cell.source.height / 32 * 4];
@@ -77,12 +86,12 @@ function assertSourceStepBound(cell) {
   for (const [u, v] of [[0, 0], [32, 0], [32, 32], [0, 32], [16, 16]]) {
     const w = 1 + cell.perspectiveY * v;
     const point = [u / w, v / w];
-    const before = sourcePoint(...point);
+    const before = sourcePoint(point[0],point[1]);
     for (let angle = 0; angle < 64; angle++) {
       const direction = [Math.cos(angle * Math.PI / 32), Math.sin(angle * Math.PI / 32)];
       const epsilon = 0.001;
-      const after = sourcePoint(...point.map((value, index) =>
-        value + direction[index] * epsilon / cell.density));
+      const shifted=point.map((value,index)=>value+direction[index]*epsilon/cell.density);
+      const after = sourcePoint(shifted[0],shifted[1]);
       const sourcePixelsPerAtlasPixel = Math.hypot(after[0] - before[0], after[1] - before[1]) / epsilon;
       assert.ok(sourcePixelsPerAtlasPixel <= 1 + 1e-5,
         `cell ${cell.index} density ${cell.density} undersamples direction ${angle} at ${u},${v}`);
@@ -92,15 +101,15 @@ function assertSourceStepBound(cell) {
   assert.equal(smallerDensityWouldUndersample, true, "the next lower integer density must fail the source-step bound");
 }
 
-function sourceCellIndex(leaf) {
-  const { x, y, width, height } = leaf.sourceRect;
+function sourceCellIndex(leaf:EarthLeaf) {
+  const { x, y, width, height } = required(leaf.sourceRect);
   assert.deepEqual([width, height], [90, 90]);
   assert.ok(Number.isInteger(x / 90) && Number.isInteger(y / 90));
   return (14 - y / 90) * 32 + x / 90;
 }
 
-function preparedCell(leaf) {
-  const properties = Object.fromEntries(leaf.style.split(";").map((property) => {
+function preparedCell(leaf:EarthLeaf) {
+  const properties = Object.fromEntries(leaf.style.split(";").map((property: string) => {
     const separator = property.indexOf(":");
     return [property.slice(0, separator), property.slice(separator + 1)];
   }));
@@ -117,7 +126,7 @@ function preparedCell(leaf) {
 }
 
 test("Earth's production atlas packs 448 unique exterior cells and reuses exactly 308 cutaway cells", async () => {
-  const surface = (bands) => bands.flatMap(({ leaves }) => leaves)
+  const surface = (bands:typeof PREPARED_EARTH_SCENE.body.bands) => bands.flatMap(({ leaves }) => leaves)
     .filter(({ className }) => className === "earth-surface-leaf");
   const body = surface(PREPARED_EARTH_SCENE.body.bands);
   const cutaway = surface(PREPARED_EARTH_SCENE.interior.outerBodyBands);
@@ -137,7 +146,7 @@ test("Earth's production atlas packs 448 unique exterior cells and reuses exactl
     assert.equal(dimensions.width, EARTH_SURFACE_ATLAS.pageSize);
     assert.ok(Number.isInteger(dimensions.height) && dimensions.height > 0 &&
       dimensions.height <= EARTH_SURFACE_ATLAS.pageSize && dimensions.height % 4 === 0);
-    const occupiedBottom = Math.max(...cells.filter((cell) => cell.page === page)
+    const occupiedBottom = Math.max(...cells.filter((cell: { page: number; }) => cell.page === page)
       .map((cell) => cell.y + cell.size + gutter));
     assert.ok(dimensions.height >= occupiedBottom && dimensions.height - occupiedBottom < 4,
       `page ${page} must be trimmed to occupied rows, preserving four-pixel alignment`);
@@ -147,10 +156,10 @@ test("Earth's production atlas packs 448 unique exterior cells and reuses exactl
     assert.ok(cell.x >= gutter && cell.y >= gutter);
     assert.ok(cell.x + cell.size + gutter <= width);
     assert.ok(cell.y + cell.size + gutter <= height);
-    const leaf = byIndex.get(cell.index);
-    assert.equal(leaf.projectiveTextureLayer.textureMatrix, IDENTITY);
-    assert.equal(leaf.projectiveTextureLayer.rasterScale, 1);
-    const matrix = leaf.projectiveTextureLayer.frameMatrix.split(",").map(Number);
+    const leaf = required(byIndex.get(cell.index));
+    assert.equal(required(leaf.projectiveTextureLayer).textureMatrix, IDENTITY);
+    assert.equal(required(leaf.projectiveTextureLayer).rasterScale, 1);
+    const matrix = required(leaf.projectiveTextureLayer).frameMatrix.split(",").map(Number);
     assert.deepEqual([matrix[3], matrix[7], matrix[11], matrix[15]], [0, 0, 0, 1]);
   }
   for (let i = 0; i < cells.length; i++) for (let j = i + 1; j < cells.length; j++) {
@@ -169,26 +178,26 @@ test("Earth's production atlas packs 448 unique exterior cells and reuses exactl
   // Preparation staging is intentionally local, not a runtime dependency. When
   // available, also cross-check the baker's exact input against the checked-in
   // leaf-derived proof above; that proof always runs in a clean checkout.
-  let staging;
+  let staging:ReturnType<typeof parseStaging>|undefined;
   try {
-    staging = JSON.parse(await readFile(new URL("../../../../src/planets/earth/prepared/surface-raster-plan.json", import.meta.url), "utf8"));
-  } catch (error) { if (error.code !== "ENOENT") throw error; }
+    staging = parseStaging(JSON.parse(await readFile(new URL("../../../../src/planets/earth/prepared/surface-raster-plan.json", import.meta.url), "utf8")));
+  } catch (error) { if (!hasErrorCode(error,"ENOENT")) throw error; }
   if (staging) {
     assert.deepEqual(staging.atlas, EARTH_SURFACE_ATLAS);
     assert.deepEqual(staging.pages, pages);
     assert.equal(staging.cells.length, 448);
     for (const cell of staging.cells) {
-      const leaf = byIndex.get(cell.index);
+      const leaf = required(byIndex.get(cell.index));
       assert.deepEqual(preparedCell(leaf),
         { index: cell.index, page: cell.page, x: cell.x, y: cell.y, size: cell.size });
       assert.deepEqual(leaf.projectiveTextureLayer, cell.layer);
       const expectedSource = {
-        x: leaf.sourceRect.x * 2048 / 2880 - 0.512,
-        southY: (leaf.sourceRect.y + leaf.sourceRect.height) * 1024 / 1440 + 0.512,
-        width: leaf.sourceRect.width * 2048 / 2880 + 1.024,
-        height: leaf.sourceRect.height * 1024 / 1440 + 1.024,
+        x: required(leaf.sourceRect).x * 2048 / 2880 - 0.512,
+        southY: (required(leaf.sourceRect).y + required(leaf.sourceRect).height) * 1024 / 1440 + 0.512,
+        width: required(leaf.sourceRect).width * 2048 / 2880 + 1.024,
+        height: required(leaf.sourceRect).height * 1024 / 1440 + 1.024,
       };
-      for (const key of Object.keys(expectedSource)) assert.ok(
+      for (const key of ["x","southY","width","height"] as const) assert.ok(
         Math.abs(cell.source[key] - expectedSource[key]) < 1e-9,
         `cell ${cell.index} must preserve original continuous ${key}`);
       if (cell.index % 32 === 0) assertSourceStepBound(cell);
@@ -209,7 +218,7 @@ test("Earth raster planning rejects malformed geometry, addresses, and inconsist
     invalidGeometry.push({ ...geometry(), matrix: matrix.join(",") });
   }
   for (const input of invalidGeometry) assert.throws(() =>
-    createEarthSurfaceRasterPlan().prepare(input, presentation(), 0));
+    Reflect.apply(createEarthSurfaceRasterPlan().prepare,undefined,[input,presentation(),0]));
   for (const index of [-1, 0.5, 1, 448, NaN]) assert.throws(() =>
     createEarthSurfaceRasterPlan().prepare(geometry(), presentation(), index));
   const invalidPresentations = [
@@ -268,14 +277,14 @@ test("Earth raster planner starts each page with independent shelves and leaves 
 
 // Test source pixels have separately observable longitude, latitude, and mixed
 // signals; expected samples are evaluated directly, not read back from the bake.
-function sourcePixel(x, y, channel, width, height) {
+function sourcePixel(x: number, y: number, channel: number, width: number, height: number) {
   x = ((x % width) + width) % width;
   y = Math.max(0, Math.min(height - 1, y));
   return channel === 0 ? (x % 127) * 2
     : channel === 1 ? (y % 97) * 2 : (x * 17 + y * 31) % 251;
 }
 
-function bilinearSource(x, y, channel, width, height) {
+function bilinearSource(x: number, y: number, channel: number, width: number, height: number) {
   const left = Math.floor(x), top = Math.floor(y);
   const fractionX = x - left, fractionY = y - top;
   return [[left, top, (1 - fractionX) * (1 - fractionY)],
@@ -285,10 +294,10 @@ function bilinearSource(x, y, channel, width, height) {
     (sum, [sx, sy, weight]) => sum + sourcePixel(sx, sy, channel, width, height) * weight, 0);
 }
 
-function expectedPixel(cell, x, y, density, width, height) {
+function expectedPixel(cell:PagedSurfaceRasterCell, x: number, y: number, density: number, width: number, height: number) {
   const ratio = density / EARTH_SURFACE_ATLAS.density;
   const cellDensity = cell.density * ratio;
-  const samples = [];
+  const samples: number[][] = [];
   for (const [dx, dy] of [[0.25, 0.25], [0.75, 0.25], [0.25, 0.75], [0.75, 0.75]]) {
     const point = [(x + dx - cell.x * ratio) / cellDensity,
       (y + dy - cell.y * ratio) / cellDensity];
@@ -367,8 +376,8 @@ test("Earth bake preserves continuous original coordinates, northern reversal, w
   }
   for (const [name, count] of Object.entries(coverage)) assert.ok(count > 0, `${name} must be exercised`);
   assert.equal(createHash("sha256").update(data).digest("hex"), sourceHash, "baking leaves the source bytes untouched");
-  const unrelatedPage = { page: 3, get source() { throw new Error("unselected page was accessed"); },
-    get size() { throw new Error("unselected page affected allocation"); } };
+  const unrelatedPage = { ...cells[0], page: 3, get source():PagedSurfaceRasterCell["source"] { throw new Error("unselected page was accessed"); },
+    get size():number { throw new Error("unselected page affected allocation"); } };
   const repeated = bakeEarthSurfaceRaster(data, { width, height, channels }, [...cells, unrelatedPage], density, 0);
   assert.equal(createHash("sha256").update(repeated.data).digest("hex"), pageHashes[0]);
   assert.notEqual(pageHashes[0], pageHashes[1], "distinct pages preserve their own source cells");
@@ -384,11 +393,11 @@ test("Earth raster bake rejects malformed source dimensions, channels, and densi
     [Buffer.alloc(0), { width: 2048, height: 1024, channels: 4 }, 2],
     [Buffer.alloc(0), { width: 1024, height: 512, channels: 3 }, 1],
     [Buffer.alloc(0), { width: 8192, height: 4096, channels: 3 }, NaN],
-  ]) assert.throws(() => bakeEarthSurfaceRaster(data, info, [], density), /dimensions/);
+  ]) assert.throws(() => Reflect.apply(bakeEarthSurfaceRaster,undefined,[data,info,[],density]), /dimensions/);
 });
 
 test("Earth raster bake rejects malformed selected cells before allocating their page", () => {
-  const info = { width: 2048, height: 1024, channels: 3 };
+  const info = { width: 2048, height: 1024, channels: 3 as const };
   const data = Buffer.alloc(info.width * info.height * info.channels);
   const cell = createEarthSurfaceRasterPlan().prepare(geometry(), presentation(), 0);
   for (const changes of [
@@ -401,7 +410,7 @@ test("Earth raster bake rejects malformed selected cells before allocating their
     { source: { ...cell.source, southY: NaN } },
     { source: { ...cell.source, width: 0 } },
     { source: { ...cell.source, height: -1 } },
-  ]) assert.throws(() => bakeEarthSurfaceRaster(data, info, [{ ...cell, ...changes }], 2), /cells are invalid/);
+  ]) assert.throws(() => Reflect.apply(bakeEarthSurfaceRaster,undefined,[data,info,[{...cell,...changes}],2]), /cells are invalid/);
   for (const cells of [null, {}, "cells"]) assert.throws(() =>
-    bakeEarthSurfaceRaster(data, info, cells, 2), /cells are invalid/);
+    Reflect.apply(bakeEarthSurfaceRaster,undefined,[data,info,cells,2]), /cells are invalid/);
 });

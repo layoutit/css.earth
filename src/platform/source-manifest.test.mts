@@ -139,7 +139,7 @@ function sourceManifest(files: Record<string, Buffer>, overrides: Partial<Record
       license: "Fixture license",
       acquisition: "Fixture acquisition",
       redistribution: "Fixture redistribution",
-      sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, consumers: ["fixture"],
+      sourceBinding: {kind: 'local' as const, reason: 'Authored test fixture'}, consumers: ["fixture"],
       ...overrides.input,
     }],
     generatedIntermediates: [{

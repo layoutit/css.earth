@@ -14,7 +14,7 @@ test("binds Pluto facts and registry classification to owned source records", as
   assert.equal(requireObject("pluto").distanceAu, facts.meanHeliocentricDistanceAu);
   assert.equal(PREPARED_PLUTO_SCENE.body.meanRadiusKm, facts.meanRadiusKm);
   assert.equal(PREPARED_PLUTO_SCENE.body.orbitalPeriodYears, facts.orbitalPeriodYears);
-  const nasa = JSON.parse(await readFile(new URL("../../../../src/planets/pluto/source/editorial/nasa-pluto.json", import.meta.url)));
+  const nasa = JSON.parse((await readFile(new URL("../../../../src/planets/pluto/source/editorial/nasa-pluto.json", import.meta.url))).toString('utf8'));
   const jpl = await readFile(new URL("../../../../src/planets/pluto/source/orbit/jpl-physical.json", import.meta.url), "utf8");
   assert.throws(() => parsePlutoFacts(jpl.replaceAll("1188.3", "1000.0"), nasa));
   assert.throws(() => parsePlutoFacts(jpl, { ...nasa, id: 1 }));

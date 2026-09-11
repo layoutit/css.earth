@@ -9,6 +9,11 @@ export interface SolidSurface extends Record<string, unknown> {
   id: string; textureScale?: number; displaySampling?: string; map: RasterAsset; surface: RasterAsset; thumbnail: RasterAsset;
   shadowSurface?: RasterAsset; polesUrl?: string; layout: unknown;
 }
+/** Input map exists before radial preparation fills its output atlas fields. */
+export interface RadialMaterialSurface extends Record<string, unknown> {
+  id:string;map:{url:string};textureScale?:number;displaySampling?:string;
+  surface?:RasterAsset;shadowSurface?:RasterAsset;thumbnail?:RasterAsset;polesUrl?:string;layout?:unknown;
+}
 export type ScientificLens = SciencePalette & {id: string; format: string; displaySampling?: string; symbols?: unknown;
   surfaceSampling?: {maximumDistanceMeters: number}};
 export type RadialState = NonNullable<Awaited<ReturnType<typeof loadRadialTerrain>>> & {

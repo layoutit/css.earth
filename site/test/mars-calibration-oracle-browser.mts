@@ -1,3 +1,7 @@
+import { required } from '../../tools/test-values.mts';
+import { parseAtlasManifest, parseCalibrationManifest, parseBrowserRegistration, parseNativeRegistration, parseNativeTraining, type NativeCamera, type Crop, type BrowserRegistration, type RegistrationCapture, atlas } from './mars-calibration-values.mts';
+import { createTestPage } from './browser-observations.mts';
+import type { Page, Browser, CDPSession } from 'playwright';
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
@@ -24,6 +28,7 @@ const NATIVE_REPORT_PATH = resolve(
   "output/playwright/google-earth-pro-mars-interaction-video-v1/" +
     "native-registration/registration.json",
 );
+declare global { interface Window { __marsCalibrationRetained: {nodes:Element[];parents:(ParentNode|null)[]}; } }
 const options = parseArguments(process.argv.slice(2));
 const outputRoot = resolve(ROOT, options.output);
 const reportPath = resolve(outputRoot, "registration.json");
@@ -43,9 +48,9 @@ if (!outputRoot.startsWith(resolve(ROOT, "output/playwright") + "/")) {
 
 const [nativeReport, calibrationManifest, browserAtlasManifest] =
   await Promise.all([
-    readJson(NATIVE_REPORT_PATH),
-    readJson(resolve(CALIBRATION_ROOT, "manifest.json")),
-    readJson(resolve(CALIBRATION_ROOT, "css-earth/manifest.json")),
+    readJson(NATIVE_REPORT_PATH).then(parseNativeRegistration),
+    readJson(resolve(CALIBRATION_ROOT, "manifest.json")).then(parseCalibrationManifest),
+    readJson(resolve(CALIBRATION_ROOT, "css-earth/manifest.json")).then(parseAtlasManifest),
   ]);
 assert.equal(
   nativeReport.qualification,
@@ -58,8 +63,8 @@ assert.equal(
 );
 const sourceDecodedRgbaSha256 =
   calibrationManifest.source.decodedRgbaSha256;
-const surfaceAtlas = atlas("projective-surface-2x");
-const polesAtlas = atlas("polar-atlas-2x");
+const surfaceAtlas = findAtlas("projective-surface-2x");
+const polesAtlas = findAtlas("polar-atlas-2x");
 const [surfaceBytes, polesBytes] = await Promise.all([
   readFile(resolve(CALIBRATION_ROOT, surfaceAtlas.path)),
   readFile(resolve(CALIBRATION_ROOT, polesAtlas.path)),
@@ -179,17 +184,17 @@ process.stdout.write(`${JSON.stringify({
   gates,
 }, null, 2)}\n`);
 
-async function captureDensity(browserInstance, density) {
+async function captureDensity(browserInstance:Browser, density:number) {
   const context = await browserInstance.newContext({
     viewport,
     deviceScaleFactor: density,
     colorScheme: "dark",
   });
-  const page = await context.newPage();
+  const page = await createTestPage(context);
   const cdp = await context.newCDPSession(page);
-  const browserProblems = [];
-  const externalRequests = [];
-  const requestedUrls = [];
+  const browserProblems:string[] = [];
+  const externalRequests:string[] = [];
+  const requestedUrls:string[] = [];
   page.on("console", (message) => {
     if (["error", "warning"].includes(message.type())) {
       browserProblems.push(`${message.type()}: ${message.text()}`);
@@ -210,7 +215,7 @@ async function captureDensity(browserInstance, density) {
       waitUntil: "networkidle",
     });
     assert.equal(response?.status(), 200);
-    const routeBytesBefore = await response.body();
+    const routeBytesBefore = await required(response).body();
     await waitForMars(page);
     const baseline = await retainBaseline(page);
     const requestBoundary = requestedUrls.length;
@@ -226,14 +231,14 @@ async function captureDensity(browserInstance, density) {
     }));
     await installOracleStyleSheet(cdp);
     await page.evaluate(async ({ surfaceUrl, polesUrl }) => {
-      const decode = (source) => {
+      const decode = (source:string) => {
         const image = new Image();
         image.decoding = "sync";
         image.src = source;
         return image.decode();
       };
       await Promise.all([decode(surfaceUrl), decode(polesUrl)]);
-      { const motion = document.querySelector(".planet-motion-setting"); if (motion.checked) motion.click(); }
+      { const motion = window.__cssearthTest.input(".planet-motion-setting"); if (motion.checked) window.__cssearthTest.htmlElement(motion).click(); }
       for (const animation of document.getAnimations()) {
         animation.currentTime = 0;
         animation.pause();
@@ -280,24 +285,24 @@ async function captureDensity(browserInstance, density) {
       await writeFile(capturePath, finalBytes);
       const state = await page.evaluate(() => {
         const retained = window.__marsCalibrationRetained;
-        const stage = document.querySelector(".planet-stage");
+        const stage = window.__cssearthTest.element(".planet-stage");
         return {
-          camera: window.__mars.view(),
+          camera: window.__cssearthTest.object('mars').view(),
           stageElementCount: stage.querySelectorAll("*").length,
           retainedIdentityStable: retained.nodes.every((node, index) =>
             node.isConnected && node.parentNode === retained.parents[index]),
           activeAnimations: document.getAnimations().filter(
             ({ playState }) => playState === "running",
           ).length,
-          surfaceImage: getComputedStyle(stage.querySelector(
+          surfaceImage: getComputedStyle(window.__cssearthTest.required(stage.querySelector(
             ".mars-body > s:not(.mars-pole)",
-          )).backgroundImage,
-          polesImage: getComputedStyle(stage.querySelector(
+          ), 'computed style element')).backgroundImage,
+          polesImage: getComputedStyle(window.__cssearthTest.required(stage.querySelector(
             ".mars-body > .mars-pole",
-          )).backgroundImage,
-          materialDisplay: getComputedStyle(stage.querySelector(
+          ), 'computed style element')).backgroundImage,
+          materialDisplay: getComputedStyle(window.__cssearthTest.required(stage.querySelector(
             ".mars-material-counter",
-          )).display,
+          ), 'computed style element')).display,
           centerLeaves: (() => {
             const leaves = [...stage.querySelectorAll(".mars-body > s")];
             return document.elementsFromPoint(innerWidth / 2, innerHeight / 2)
@@ -349,15 +354,15 @@ async function captureDensity(browserInstance, density) {
       }));
     }
 
-    const verificationPage = await context.newPage();
-    const verificationRequests = [];
+    const verificationPage = await createTestPage(context);
+    const verificationRequests:string[] = [];
     verificationPage.on("request", (request) =>
       verificationRequests.push(request.url()));
     const verificationResponse = await verificationPage.goto(options.baseUrl, {
       waitUntil: "networkidle",
     });
     assert.equal(verificationResponse?.status(), 200);
-    const routeBytesAfter = await verificationResponse.body();
+    const routeBytesAfter = await required(verificationResponse).body();
     await waitForMars(verificationPage);
     const verification = await routeSignature(verificationPage);
     await verificationPage.close();
@@ -387,7 +392,7 @@ async function captureDensity(browserInstance, density) {
   }
 }
 
-async function installOracleStyleSheet(cdp) {
+async function installOracleStyleSheet(cdp:CDPSession) {
   await Promise.all([
     cdp.send("DOM.enable"),
     cdp.send("CSS.enable"),
@@ -427,23 +432,23 @@ async function installOracleStyleSheet(cdp) {
   });
 }
 
-async function solveBrowserEndpoint(page, camera) {
+async function solveBrowserEndpoint(page: Page, camera:NativeCamera) {
   return page.evaluate(({ latitude, longitude }) => {
     const body = new DOMMatrix(getComputedStyle(
-      document.querySelector(".mars-body"),
+      window.__cssearthTest.required(document.querySelector(".mars-body"), 'computed style element'),
     ).transform);
     const system = new DOMMatrix(getComputedStyle(
-      document.querySelector(".mars-body").parentElement,
+      window.__cssearthTest.required(window.__cssearthTest.element(".mars-body").parentElement, 'computed style element'),
     ).transform);
     const defaultPitch = 34.230769230769226;
     const maximumPitch = 89;
     const initialScenePitch = 40;
     const anchor = Object.freeze({ pitch: 170, yaw: -67.5 });
-    const normalize = (vector) => {
+    const normalize = (vector:readonly number[]) => {
       const length = Math.hypot(...vector);
       return vector.map((value) => value / length);
     };
-    const localPoint = (lat, lon) => {
+    const localPoint = (lat:number, lon:number) => {
       const latRad = lat * Math.PI / 180;
       const lonRad = lon * Math.PI / 180;
       return normalize([
@@ -452,7 +457,7 @@ async function solveBrowserEndpoint(page, camera) {
         228.646218 * Math.sin(latRad),
       ]);
     };
-    const transformed = (pitch, yaw, point) => {
+    const transformed = (pitch:number, yaw:number, point:readonly number[]) => {
       const progress = (pitch - defaultPitch) /
         (maximumPitch - defaultPitch);
       const scenePitch = initialScenePitch * (1 - progress);
@@ -467,7 +472,7 @@ async function solveBrowserEndpoint(page, camera) {
     // PolyCSS's prepared leaf basis swaps the source x/y axes. This function
     // therefore receives geographic longitude directly.
     const target = localPoint(latitude, longitude);
-    const error = (pitch, yaw) => {
+    const error = (pitch:number, yaw:number) => {
       const direction = transformed(pitch, yaw, target);
       const lengthSquared = direction.reduce(
         (sum, value) => sum + value * value,
@@ -477,7 +482,7 @@ async function solveBrowserEndpoint(page, camera) {
         lengthSquared;
       return screenOffset + (direction[2] <= 0 ? 2 : 0);
     };
-    let best = { pitch: anchor.pitch, yaw: anchor.yaw, error: Infinity };
+    let best:{pitch:number;yaw:number;error:number} = { pitch: anchor.pitch, yaw: anchor.yaw, error: Infinity };
     for (let pitch = anchor.pitch - 250; pitch <= anchor.pitch + 250;
       pitch += 10) {
       for (let yaw = anchor.yaw - 180; yaw <= anchor.yaw + 180; yaw += 10) {
@@ -516,13 +521,13 @@ async function solveBrowserEndpoint(page, camera) {
   }, camera);
 }
 
-async function setCaptureView(page, endpoint, zoom, nativeCamera) {
+async function setCaptureView(page: Page, endpoint:Awaited<ReturnType<typeof solveBrowserEndpoint>>, zoom:number, nativeCamera:NativeCamera) {
   const screenRollDegrees = await page.evaluate(({
     endpoint,
     zoom,
     nativeCamera,
   }) => {
-    window.__mars.setView({
+    window.__cssearthTest.object('mars').setView({
       controlPitch: endpoint.controlPitch,
       controlYaw: endpoint.controlYaw,
       zoom,
@@ -536,13 +541,13 @@ async function setCaptureView(page, endpoint, zoom, nativeCamera) {
       0,
     );
     const scene = new DOMMatrix(getComputedStyle(
-      document.querySelector(".polycss-scene"),
+      window.__cssearthTest.required(document.querySelector(".polycss-scene"), 'computed style element'),
     ).transform);
-    const bodyElement = document.querySelector(".mars-body");
+    const bodyElement = window.__cssearthTest.element(".mars-body");
     const system = new DOMMatrix(getComputedStyle(
-      bodyElement.parentElement,
+      window.__cssearthTest.required(bodyElement.parentElement, 'computed style element'),
     ).transform);
-    const body = new DOMMatrix(getComputedStyle(bodyElement).transform);
+    const body = new DOMMatrix(getComputedStyle(window.__cssearthTest.required(bodyElement, 'computed style element')).transform);
     const projectedNorth = northTangent.matrixTransform(
       scene.multiply(system).multiply(body),
     );
@@ -551,8 +556,8 @@ async function setCaptureView(page, endpoint, zoom, nativeCamera) {
       projectedNorth.x,
     ) * 180 / Math.PI;
     const roll = ((-90 - currentAngleDegrees + 540) % 360) - 180;
-    document.querySelector(".polycss-camera").style.rotate = `${roll}deg`;
-    document.querySelector(".planet-cubic-sky-orientation").style.rotate =
+    window.__cssearthTest.html(".polycss-camera").style.rotate = `${roll}deg`;
+    window.__cssearthTest.html(".planet-cubic-sky-orientation").style.rotate =
       `${roll}deg`;
     for (const animation of document.getAnimations()) {
       animation.currentTime = 0;
@@ -564,9 +569,9 @@ async function setCaptureView(page, endpoint, zoom, nativeCamera) {
   return screenRollDegrees;
 }
 
-async function retainBaseline(page) {
+async function retainBaseline(page: Page) {
   return page.evaluate(() => {
-    const stage = document.querySelector(".planet-stage");
+    const stage = window.__cssearthTest.element(".planet-stage");
     const nodes = [...stage.querySelectorAll("*")];
     window.__marsCalibrationRetained = Object.freeze({
       nodes,
@@ -580,20 +585,20 @@ async function retainBaseline(page) {
         retainedLeafCount: stage.querySelectorAll("b, s, u").length,
         canvasCount: stage.querySelectorAll("canvas").length,
         svgCount: stage.querySelectorAll("svg").length,
-        surfaceImage: getComputedStyle(stage.querySelector(
+        surfaceImage: getComputedStyle(window.__cssearthTest.required(stage.querySelector(
           ".mars-body > s:not(.mars-pole)",
-        )).backgroundImage,
-        polesImage: getComputedStyle(stage.querySelector(
+        ), 'computed style element')).backgroundImage,
+        polesImage: getComputedStyle(window.__cssearthTest.required(stage.querySelector(
           ".mars-body > .mars-pole",
-        )).backgroundImage,
+        ), 'computed style element')).backgroundImage,
       },
     };
   });
 }
 
-async function routeSignature(page) {
+async function routeSignature(page: Page) {
   return page.evaluate(() => {
-    const stage = document.querySelector(".planet-stage");
+    const stage = window.__cssearthTest.element(".planet-stage");
     const nodes = [...stage.querySelectorAll("*")];
     return {
       stageElementCount: nodes.length,
@@ -601,17 +606,17 @@ async function routeSignature(page) {
       retainedLeafCount: stage.querySelectorAll("b, s, u").length,
       canvasCount: stage.querySelectorAll("canvas").length,
       svgCount: stage.querySelectorAll("svg").length,
-      surfaceImage: getComputedStyle(stage.querySelector(
+      surfaceImage: getComputedStyle(window.__cssearthTest.required(stage.querySelector(
         ".mars-body > s:not(.mars-pole)",
-      )).backgroundImage,
-      polesImage: getComputedStyle(stage.querySelector(
+      ), 'computed style element')).backgroundImage,
+      polesImage: getComputedStyle(window.__cssearthTest.required(stage.querySelector(
         ".mars-body > .mars-pole",
-      )).backgroundImage,
+      ), 'computed style element')).backgroundImage,
     };
   });
 }
 
-async function measureCalibrationDisc(bytes, density) {
+async function measureCalibrationDisc(bytes:Buffer, density:number) {
   const { data, info } = await sharp(bytes).removeAlpha().raw()
     .toBuffer({ resolveWithObject: true });
   const rows = new Uint32Array(info.height);
@@ -640,19 +645,19 @@ async function measureCalibrationDisc(bytes, density) {
   }
   return Object.freeze({
     minX: xs[0],
-    maxX: xs.at(-1),
+    maxX: required(xs.at(-1)),
     minY: ys[0],
-    maxY: ys.at(-1),
-    width: xs.at(-1) - xs[0] + 1,
-    height: ys.at(-1) - ys[0] + 1,
-    centerX: (xs[0] + xs.at(-1)) / 2,
-    centerY: (ys[0] + ys.at(-1)) / 2,
+    maxY: required(ys.at(-1)),
+    width: required(xs.at(-1)) - xs[0] + 1,
+    height: required(ys.at(-1)) - ys[0] + 1,
+    centerX: (xs[0] + required(xs.at(-1))) / 2,
+    centerY: (ys[0] + required(ys.at(-1))) / 2,
     classifier:
       "dense saturated calibration pixels; max channel >35 and range >18",
   });
 }
 
-async function cropForDensity(bytes, crop, density) {
+async function cropForDensity(bytes:Buffer, crop:Crop, density:number) {
   return sharp(bytes).extract({
     left: crop.left * density,
     top: crop.top * density,
@@ -661,7 +666,7 @@ async function cropForDensity(bytes, crop, density) {
   }).png().toBuffer();
 }
 
-async function createContactSheet(captures, path) {
+async function createContactSheet(captures:readonly {id:string;path:string}[], path:string) {
   const columns = 3;
   const rows = 4;
   const tileWidth = 469;
@@ -705,7 +710,7 @@ async function createContactSheet(captures, path) {
   }).composite(composites).png().toFile(path);
 }
 
-async function waitForMars(page) {
+async function waitForMars(page: Page) {
   await page.waitForFunction(() =>
     window.__mars?.ready === true &&
     document.documentElement.dataset.ready === "true" &&
@@ -714,18 +719,18 @@ async function waitForMars(page) {
   );
 }
 
-async function twoFrames(page) {
-  await page.evaluate(() => new Promise((resolveFrame) =>
+async function twoFrames(page: Page) {
+  await page.evaluate(() => new Promise<number>((resolveFrame) =>
     requestAnimationFrame(() => requestAnimationFrame(resolveFrame))));
 }
 
-function initialZoom(distance) {
+function initialZoom(distance:number) {
   if (distance < 10_000_000) return 1.7;
   if (distance > 13_000_000) return 1;
   return 1.45;
 }
 
-function centerMatches(camera, leaves) {
+function centerMatches(camera:NativeCamera, leaves:readonly {className:string;latitudeIndex:number|null;longitudeIndex:number|null}[]) {
   if (Math.abs(camera.latitude) >= 87) {
     const pole = camera.latitude > 0 ? "north" : "south";
     return leaves.some(({ className }) =>
@@ -749,14 +754,14 @@ function centerMatches(camera, leaves) {
   });
 }
 
-function atlas(id) {
+function findAtlas(id:string) {
   const entry = browserAtlasManifest.atlases.find((candidate) =>
     candidate.id === id);
   if (!entry) throw new Error(`Missing browser calibration atlas ${id}.`);
   return entry;
 }
 
-function descriptor(entry) {
+function descriptor(entry:ReturnType<typeof atlas>) {
   return Object.freeze({
     id: entry.id,
     path: resolve(CALIBRATION_ROOT, entry.path),
@@ -768,7 +773,7 @@ function descriptor(entry) {
   });
 }
 
-function parseArguments(args) {
+function parseArguments(args:readonly string[]) {
   const parsed = {
     registrationOnly: false,
     densities: [1, 2],
@@ -789,19 +794,19 @@ function parseArguments(args) {
   return Object.freeze(parsed);
 }
 
-function pad(value) {
+function pad(value:number) {
   return String(value).padStart(2, "0");
 }
 
-function sha256(bytes) {
+function sha256(bytes:Uint8Array) {
   return createHash("sha256").update(bytes).digest("hex");
 }
 
-async function readJson(path) {
+async function readJson(path:string):Promise<unknown> {
   return JSON.parse(await readFile(path, "utf8"));
 }
 
-function escapeXml(value) {
+function escapeXml(value:string) {
   return String(value)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")

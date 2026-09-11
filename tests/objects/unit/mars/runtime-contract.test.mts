@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import {viewSunDirectionToPreparedLightDirection} from "../../../../src/platform/directional-sun-coordinate.mts";
 import assert from "node:assert/strict";
 import test from "node:test";
@@ -20,10 +21,10 @@ test("Mars's actual import closure has no private runtime owner", async () => {
 test("Mars retains a visible fallback through a row miss, recoverable decode failure and retry", async () => {
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
-    assert.equal(f.residency.stats().pools.find(pool => pool.id === "lighting").nativeSlots, 3);
+    assert.equal(required(f.residency.stats().pools.find(pool => pool.id === "lighting")).nativeSlots, 3);
     // The world-bound reference Sun is independent of the historical standalone
     // default frame; select its phase from the actual prepared bank's domain.
-    const referencePhase = Math.round((f.view.sunViewDirection[2] - PREPARED_MARS_LIGHTING.minimumLightViewZ) /
+    const referencePhase = Math.round((required(f.view.sunViewDirection)[2] - PREPARED_MARS_LIGHTING.minimumLightViewZ) /
       (PREPARED_MARS_LIGHTING.maximumLightViewZ - PREPARED_MARS_LIGHTING.minimumLightViewZ) *
       (PREPARED_MARS_LIGHTING.frameCount - 1));
     assert.equal(f.presentation.observe().materials.lighting.appliedFrame,
@@ -41,7 +42,7 @@ test("Mars retains a visible fallback through a row miss, recoverable decode fai
     assert.equal(f.presentation.observe().materials.lighting.appliedFrame, previous);
     f.selection.setView({ ...view, revision: 3 }); await f.settle();
     assert.equal(f.presentation.observe().materials.lighting.appliedFrame, 0);
-    const pool = f.residency.stats().pools.find(pool => pool.id === "lighting");
+    const pool = required(f.residency.stats().pools.find(pool => pool.id === "lighting"));
     assert.ok(pool.resident <= 3); assert.equal(pool.nativeSlots, 3);
     assert.deepEqual(f.errors, []);
   } finally { f.restore(); }
@@ -53,9 +54,9 @@ test("Mars's new lens groups use shared warm receipts without retaining native i
     const nodes = f.stage.querySelectorAll("*");
     for (const id of ["elevation", "thermal", "normal", "thermal"]) {
       const request = f.selection.dispatch({ kind: "lens", id }); await f.settle(); assert.equal(await request, true);
-      assert.equal(f.selection.state().committed.lensId, id);
+      assert.equal(required(f.selection.state().committed).lensId, id);
       assert.deepEqual(f.stage.querySelectorAll("*"), nodes);
-      assert.equal(f.residency.stats().pools.find(pool => pool.id === "warm").resident, 0);
+      assert.equal(required(f.residency.stats().pools.find(pool => pool.id === "warm")).resident, 0);
     }
     const surfaceJobs = f.jobs.filter(job => /mars-(?:elevation|thermal|surface|poles)/.test(job.url));
     assert.equal(new Set(surfaceJobs.map(job => job.url)).size, surfaceJobs.length);
@@ -96,14 +97,14 @@ test("Mars atmosphere follows every Sun phase in both ground-shadow modes throug
         assert.equal(observed.materials.lighting.calculatedFrame, phase);
         assert.equal(observed.materials.lighting.appliedFrame, phase + (shadows ? 0 : 256));
         assert.equal(observed.materials.lighting.appliedRow, observed.materials.lighting.appliedFrame);
-        assert.equal(f.selection.state().committed.shadows, shadows);
+        assert.equal(required(f.selection.state().committed).shadows, shadows);
         assert.equal(observed.materials.lighting.mode, shadows
           ? "directional-terminator-and-atmosphere" : "directional-atmosphere-without-ground-shadow");
         if (direction[0] === 1) assert.ok(Math.abs(observed.materials.lighting.lightRollDegrees +
           PREPARED_MARS_LIGHTING.baseLightAzimuthDegrees) < 1e-9,
         "disabling ground shadows preserves the directional atmosphere rotation");
         assert.deepEqual(f.stage.querySelectorAll("*"), retained);
-        assert.equal(f.residency.stats().pools.find(pool => pool.id === "lighting").nativeSlots, 3);
+        assert.equal(required(f.residency.stats().pools.find(pool => pool.id === "lighting")).nativeSlots, 3);
       }
     }
     assert.equal(runtimeDefinition.materials.length, 1);
@@ -116,17 +117,17 @@ test("Mars ground-mode changes keep the published image and rotation until the r
   try {
     f.selection.setView({ ...f.view, sunViewDirection: viewSunDirectionToPreparedLightDirection([1, 0, 0]), revision: 2 });
     await f.settle();
-    const leaf = f.stage.querySelectorAll("*").find(node => node.tagName === "S" &&
-      node.parentNode?.className === "polycss-mesh mars-material-plane");
+    const leaf = required(f.stage.querySelectorAll("*").find(node => node.tagName === "S" &&
+      node.parentNode?.className === "polycss-mesh mars-material-plane"));
     const original = { image: leaf.style.backgroundImage, rotate: leaf.style.rotate };
     assert.equal(f.presentation.observe().materials.lighting.appliedFrame, 384);
     const request = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true });
     await f.flush();
-    assert.equal(f.selection.state().committed.shadows, false);
+    assert.equal(required(f.selection.state().committed).shadows, false);
     assert.deepEqual({ image: leaf.style.backgroundImage, rotate: leaf.style.rotate }, original);
     assert.ok(f.jobs.some(job => !job.done), "the opposite ground-mode row must be awaiting decode");
     await f.settle(); assert.equal(await request, true);
-    assert.equal(f.selection.state().committed.shadows, true);
+    assert.equal(required(f.selection.state().committed).shadows, true);
     assert.equal(f.presentation.observe().materials.lighting.appliedFrame, 128);
     assert.notEqual(leaf.style.backgroundImage, original.image);
     assert.equal(leaf.style.rotate, original.rotate);

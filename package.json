@@ -65,6 +65,7 @@
     "build:packages": "pnpm prepare:catalog && pnpm -r --filter \"./packages/**\" build && node tools/prepare-solar-geometry.mts && node tools/prepare-navigation.mts --catalog-only",
     "test:packages": "pnpm -r --filter \"./packages/**\" test",
     "typecheck:packages": "pnpm -r --filter \"./packages/**\" typecheck",
+    "check:ci": "node tools/check-ci.mts",
     "typecheck": "pnpm typecheck:configs && pnpm typecheck:packages && pnpm typecheck:renderer && pnpm typecheck:platform && pnpm typecheck:preparation && pnpm typecheck:tools && pnpm typecheck:shell && pnpm typecheck:astro && pnpm typecheck:ownership && pnpm typecheck:browser-owners && pnpm typecheck:tests",
     "typecheck:shell": "pnpm --filter @cssearth/engine exec tsc -p ../../site/tsconfig.json",
     "typecheck:ownership": "pnpm --filter @cssearth/engine exec tsc -p ../../tools/typescript-ownership.tsconfig.json",

@@ -1,12 +1,14 @@
 import assert from "node:assert/strict";
 
-export function assertHomepageReachability(pages, requiredRoutes, homepage) {
+export interface DiscoveryPage { url: string; links: readonly string[]; }
+
+export function assertHomepageReachability(pages: readonly DiscoveryPage[], requiredRoutes: readonly string[], homepage: string) {
   const home = new URL(homepage);
-  const linksByPage = new Map();
+  const linksByPage = new Map<string, Set<string>>();
   for (const { url, links } of pages) {
     const source = new URL(url);
     if (source.origin !== home.origin) continue;
-    const targets = new Set();
+    const targets = new Set<string>();
     for (const link of links) {
       const target = new URL(link, source);
       if (target.origin === home.origin && target.pathname !== source.pathname) {

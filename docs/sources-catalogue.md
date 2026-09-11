@@ -75,8 +75,10 @@ Run `pnpm prepare:sources` after changing catalogue metadata, bindings or captur
 records. `pnpm prepare:provenance` and `pnpm prepare:spacecraft` are aliases for
 this coordinated operation. It validates all prospective object provenance and
 both catalogues before replacing outputs. Astro checks their dependency hashes
-and the source file list, rejecting stale or mixed sets. It does not acquire
-scientific data or rebake surface assets.
+and the source file list, rejecting stale or mixed sets. Missing cited factsheet
+documents are restored through their hash-verified acquisition recipes and checked
+against their byte count and digest. Existing evidence must already match its pin.
+Uncited source files and surface assets are not acquired or rebaked.
 
 Source-refresh tools must preserve bindings, source metadata and capture evidence
 while updating byte pins. Newly discovered files need an authored classification;
@@ -85,12 +87,14 @@ a refresh must not guess one from a filename or copied template.
 For source identities, bindings or catalogue code, run:
 
 ```sh
+pnpm install
 pnpm test:sources
 ```
 
 This prepares the catalogues and checks identities, bindings, product dependencies,
 independent additions and deterministic output. CI runs the same command.
-It needs installed dependencies, without scientific downloads or a surface bake.
+The first run may download missing cited documents; subsequent runs reuse their
+verified bytes. No surface bake is needed.
 Use the [exploration guide](architecture/exploration-catalog.md#preparing-and-checking-a-change)
 for changes to mission attribution or dataset navigation. Scientific changes still
 need their body and preparation checks.

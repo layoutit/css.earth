@@ -1,14 +1,17 @@
+declare global { interface Window { __osirisProof: { root: HTMLElement; leaves: HTMLElement[]; mutations: MutationRecord[]; geometryProperties: string[]; geometry: Map<HTMLElement, string[]>; observer: MutationObserver }; } }
+import type { Page } from 'playwright';
 // Playwright CLI run-code input. Open the built 67P route in a named session,
 // optionally with a shared camera view, then pass this file with --filename.
-async page => {
+export default async (page: Page) => {
   const browser = page.context().browser();
+  if (!browser) throw new Error("Capture requires a connected browser");
   const origin = await page.evaluate(() => ({ hostname: location.hostname, pathname: location.pathname, href: location.href }));
   if (origin.hostname !== '127.0.0.1' || origin.pathname !== '/comet-67p/') throw new Error('Open the local built 67P viewer first.');
   const results = [];
   for (const dpr of [1, 2]) {
     const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: dpr });
     try {
-      const p = await context.newPage(), errors = [], requests = [];
+      const p = await context.newPage(), errors: string[] = [], requests: string[] = [];
       p.on('pageerror', e => errors.push(String(e)));
       p.on('console', e => { if (e.type() === 'error') errors.push(e.text()); });
       p.on('response', r => { if (r.status() >= 400) errors.push(`${r.status()} ${r.url()}`); });
@@ -16,23 +19,27 @@ async page => {
       await p.goto(origin.href, { waitUntil: 'networkidle' });
       await p.waitForFunction(() => document.documentElement.dataset.ready === 'true');
       await p.evaluate(() => {
-        const root = document.querySelector('.comet-67p-body');
-        window.__osirisProof = { root, leaves: [...root.querySelectorAll(':scope > u')], mutations: [] };
-        const probe = window.__osirisProof;
-        probe.geometryProperties = ['transform', 'width', 'height', 'background-position', 'background-size',
-          '--polycss-atlas-width', '--polycss-atlas-height'];
-        probe.geometry = new Map(probe.leaves.map(n => [n, probe.geometryProperties.map(k => n.style.getPropertyValue(k))]));
-        probe.observer = new MutationObserver(records => probe.mutations.push(...records));
-        probe.observer.observe(root, { subtree: true, childList: true, attributes: true, attributeOldValue: true });
+        function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
+        const root = requiredElement(document.querySelector('.comet-67p-body'));
+        const leaves = [...root.querySelectorAll<HTMLElement>(':scope > u')], mutations: MutationRecord[] = [];
+        const geometryProperties = ['transform', 'width', 'height', 'background-position', 'background-size', '--polycss-atlas-width', '--polycss-atlas-height'];
+        const geometry = new Map(leaves.map(n => [n, geometryProperties.map(k => n.style.getPropertyValue(k))]));
+        const observer = new MutationObserver(records => mutations.push(...records));
+        observer.observe(root, { subtree: true, childList: true, attributes: true, attributeOldValue: true });
+        window.__osirisProof = { root, leaves, mutations, geometryProperties, geometry, observer };
       });
       const prefix = `output/playwright/67p-osiris-product-dpr${dpr}`;
-      const select = async id => {
+      const select = async (id: string) => {
         await p.locator(`button[name="lens"][value="${id}"]`).click();
-        await p.waitForFunction(id => document.querySelector(`button[name="lens"][value="${id}"]`).getAttribute('aria-pressed') === 'true', id);
+        await p.waitForFunction(id => {
+          function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+          function requiredInput(value: Element | null): HTMLButtonElement { if (!(value instanceof HTMLButtonElement)) throw new Error("Expected required HTMLButtonElement"); return value; }
+return requiredInput(document.querySelector(`button[name="lens"][value="${id}"]`)).getAttribute('aria-pressed') === 'true'; }, id);
         await p.waitForLoadState('networkidle');
       };
       const digestAtlases = () => p.evaluate(async () => {
-        const urls = [...new Set([...document.querySelectorAll('.comet-67p-body > u')].map(n =>
+        const urls = [...new Set([...document.querySelectorAll<HTMLElement>('.comet-67p-body > u')].map(n =>
           getComputedStyle(n).backgroundImage.match(/^url\("?([^"\)]+)"?\)$/)?.[1]))];
         return Promise.all(urls.map(async url => {
           if (!url) throw new Error('Missing retained atlas URL.');
@@ -63,13 +70,15 @@ async page => {
       await p.screenshot({ path: `${prefix}-turned.png` });
       const after = await p.locator('.polycss-scene').evaluate(n => getComputedStyle(n).transform);
       const readback = await p.evaluate(() => {
+        function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
         const probe = window.__osirisProof;
         probe.mutations.push(...probe.observer.takeRecords()); probe.observer.disconnect();
-        const root = document.querySelector('.comet-67p-body'), leaves = [...root.querySelectorAll(':scope > u')];
-        const geometryMatches = (node, style) => probe.geometryProperties.every((key, i) => style.getPropertyValue(key) === probe.geometry.get(node)[i]);
-        const changedStyleProperties = new Set();
+        const root = requiredElement(document.querySelector('.comet-67p-body')), leaves = [...root.querySelectorAll<HTMLElement>(':scope > u')];
+        const geometryMatches = (node: HTMLElement, style: CSSStyleDeclaration) => { const saved = probe.geometry.get(node); if (!saved) throw new Error("Unretained geometry node"); return probe.geometryProperties.every((key, i) => style.getPropertyValue(key) === saved[i]); };
+        const changedStyleProperties = new Set<string>();
         const geometryMutations = probe.mutations.filter(r => {
-          if (r.target.tagName !== 'U' || r.attributeName !== 'style') return false;
+          if (!(r.target instanceof HTMLElement) || r.target.tagName !== 'U' || r.attributeName !== 'style') return false;
           const old = document.createElement('u').style; old.cssText = r.oldValue ?? '';
           for (const key of new Set([...old, ...r.target.style])) if (old.getPropertyValue(key) !== r.target.style.getPropertyValue(key)) changedStyleProperties.add(key);
           return !geometryMatches(r.target, old);
@@ -78,14 +87,14 @@ async page => {
           s.maskImage !== 'none' || s.mixBlendMode !== 'normal' || /gradient\(/.test(s.backgroundImage); });
         return { devicePixelRatio, leaves: leaves.length, retained: root === probe.root &&
           leaves.length === probe.leaves.length && leaves.every((n, i) => n === probe.leaves[i]),
-          leafMutations: probe.mutations.filter(r => r.target.tagName === 'U').length,
+          leafMutations: probe.mutations.filter(r => r.target instanceof HTMLElement && r.target.tagName === 'U').length,
           geometryMutations, geometryRetained: leaves.every(n => geometryMatches(n, n.style)),
           changedStyleProperties: [...changedStyleProperties].sort(),
           treeMutations: probe.mutations.filter(r => r.type === 'childList').length,
-          forbiddenElements: document.querySelectorAll('.comet-67p-body canvas,.comet-67p-body svg').length,
+          forbiddenElements: document.querySelectorAll<HTMLElement>('.comet-67p-body canvas,.comet-67p-body svg').length,
           forbiddenStyles, nativeBevel: CSS.supports('corner-top-left-shape', 'bevel'),
-          production: !window['__comet-67p'], scenes: document.querySelectorAll('.polycss-scene').length,
-          legend: document.querySelector('.planet-stage').dataset.lens ?? null };
+          production: !Reflect.get(window, '__comet-67p'), scenes: document.querySelectorAll<HTMLElement>('.polycss-scene').length,
+          legend: requiredElement(document.querySelector('.planet-stage')).dataset.lens ?? null };
       });
       const result = { browser: browser.version(), dpr, route: origin.href, finalUrl: p.url(), shadows, flood,
         beforeDrag: before, afterDrag: after, dragRequests, errors, ...readback };

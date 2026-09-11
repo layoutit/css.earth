@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
@@ -6,11 +7,11 @@ import { loadObjShape, createShapeSurfaceSampler } from '../../../../tools/objec
 import { decodeFitsFacetField } from '../../../../tools/objects/terrestrial-layers/fits-facet-field.mts';
 
 const root = resolve(import.meta.dirname, '../../../../src/planets/dimorphos/source');
-const config = JSON.parse(await readFile(resolve(root, 'preparation/terrestrial.json')));
-const lens = config.raster.scientific.find(lens => lens.id === 'albedo');
+const config = JSON.parse((await readFile(resolve(root, 'preparation/terrestrial.json'))).toString('utf8'));
+const lens = config.raster.scientific.find((lens: { id: string; }) => lens.id === 'albedo');
 const mesh = await loadObjShape(resolve(root, lens.path), lens.grid);
 const bytes = await readFile(resolve(root, lens.facetField.path));
-const decode = (input, shape = mesh, recipe = lens.facetField) => decodeFitsFacetField(input, shape, recipe, lens.path);
+const decode = (input: Buffer<ArrayBufferLike>, shape = mesh, recipe = lens.facetField) => decodeFitsFacetField(input, shape, recipe, lens.path);
 
 test('Dimorphos albedo matches independent source centroids despite the archived triangle permutation', () => {
   const field = decode(bytes);
@@ -26,7 +27,7 @@ test('Dimorphos albedo matches independent source centroids despite the archived
   assert.equal(field.values[196420], 1.0000020265579224); // FITS row 196422
   assert.ok(Number.isNaN(field.values[0]));
   const sampler = createShapeSurfaceSampler(mesh, lens, undefined, field.values);
-  assert.equal(sampler.samplePoint([-8.179999887943268, -50.2233331402143, -45.42666673660276]).value, field.values[177162]);
+  assert.equal(required(sampler.samplePoint([-8.179999887943268, -50.2233331402143, -45.42666673660276])).value, field.values[177162]);
   assert.equal(sampler.samplePoint([-46.1466672519843, 45.66666732231781, 37.716666857401535]), null);
   assert.throws(() => decode(bytes, mesh, { ...lens.facetField, facetOrder: 'index' }), /source centroid/);
 });

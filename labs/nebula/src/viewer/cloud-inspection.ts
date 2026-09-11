@@ -1,5 +1,5 @@
 /** Retained prepared contribution selection and whole-composite display attenuation. */
-import type { CloudBrightness, CloudPart } from '../components/cloud-controls';
+import type { CloudBrightness, CloudPart } from './cloud-types';
 
 export interface CloudCatalogue {
   schema: 'cssearth-cloud-parts@1';

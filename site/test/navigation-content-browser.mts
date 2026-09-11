@@ -1,16 +1,19 @@
+import { createTestPage } from './browser-observations.mts';
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
 
 const origin = process.env.CSSEARTH_TEST_ORIGIN ?? 'http://127.0.0.1:4210';
 const browser = await chromium.launch({ headless: true, channel: 'chrome' });
 try {
-  const page = await browser.newPage({ viewport: { width: 1100, height: 800 } });
+  const page = await createTestPage(browser, { viewport: { width: 1100, height: 800 } });
   await page.goto(`${origin}/mercury/`);
   await page.waitForFunction(() => window.__cssEarth?.ready === true);
   const proof = await page.evaluate(async () => {
     const { createNavigationContent } = await import('/site/navigation-content.mts');
     const { mountPlanetShell } = await import('/site/planet-shell-client.mts');
-    const headMetadata = doc => ({
+    const { OBJECTS } = await import('/site/objects.mts');
+    const object = (id: string) => window.__cssearthTest.required(OBJECTS.find(value => value.id === id), `registry object ${id}`);
+    const headMetadata = (doc: Document) => ({
       title: doc.title,
       tags: [...doc.head.querySelectorAll('link[rel="canonical"], meta[name="description"], meta[property^="og:"], meta[name^="twitter:"]')]
         .map(node => node.outerHTML).sort(),
@@ -22,26 +25,26 @@ try {
     const selectors = ['.planet-sidebar', '.planet-sidebar-search', '.planet-drawer-content', '.planet-input-surface'];
     const retained = selectors.map(selector => document.querySelector(selector));
     const sharedStyles = [...document.head.querySelectorAll('style[data-vite-dev-id]')]
-      .filter(style => !style.dataset.viteDevId.includes('/src/planets/'));
+      .filter(style => !window.__cssearthTest.required(window.__cssearthTest.htmlElement(style).dataset.viteDevId, 'Vite stylesheet id').includes('/src/planets/'));
     const surfaceStyles = [...document.querySelectorAll('style[data-object-style="src/renderers/css/styles/planet-surfaces.css"]')];
     const camera = document.querySelector('.polycss-camera');
-    const leaf = document.querySelector('.mercury-body > s:not(.mercury-polar)');
-    const surfaceBefore = getComputedStyle(leaf).backgroundImage;
-    const before = getComputedStyle(camera).cssText + getComputedStyle(camera).perspective + getComputedStyle(camera).width;
+    const leaf = window.__cssearthTest.element('.mercury-body > s:not(.mercury-polar)');
+    const surfaceBefore = getComputedStyle(window.__cssearthTest.required(leaf, 'computed style element')).backgroundImage;
+    const before = getComputedStyle(window.__cssearthTest.required(camera, 'computed style element')).cssText + getComputedStyle(window.__cssearthTest.required(camera, 'computed style element')).perspective + getComputedStyle(window.__cssearthTest.required(camera, 'computed style element')).width;
     const controller = new AbortController();
     const transport = createNavigationContent({ documentTarget: document, windowTarget: window });
-    const content = await transport.load({ id: 'venus', name: 'Venus', route: '/venus/' }, { signal: controller.signal });
-    const afterPreparation = getComputedStyle(camera).cssText + getComputedStyle(camera).perspective + getComputedStyle(camera).width;
-    const surfaceAfterPreparation = getComputedStyle(leaf).backgroundImage;
+    const content = await transport.load(object('venus'), { signal: controller.signal });
+    const afterPreparation = getComputedStyle(window.__cssearthTest.required(camera, 'computed style element')).cssText + getComputedStyle(window.__cssearthTest.required(camera, 'computed style element')).perspective + getComputedStyle(window.__cssearthTest.required(camera, 'computed style element')).width;
+    const surfaceAfterPreparation = getComputedStyle(window.__cssearthTest.required(leaf, 'computed style element')).backgroundImage;
     window.dispatchEvent(new Event('pagehide'));
     // pagehide unmounts the renderer. Keep its measured leaf as a CSS probe;
     // this content-only test does not mount the destination renderer.
     const surfaceProbe = document.createElement('div');
     surfaceProbe.className = 'polycss-scene';
     surfaceProbe.setAttribute('aria-hidden', 'true');
-    leaf.style.backgroundImage = surfaceBefore;
+    window.__cssearthTest.htmlElement(leaf).style.backgroundImage = surfaceBefore;
     surfaceProbe.append(leaf);
-    document.querySelector('.planet-stage').append(surfaceProbe);
+    window.__cssearthTest.element('.planet-stage').append(surfaceProbe);
     const shell = mountPlanetShell({ objectId: 'mercury', documentTarget: document, windowTarget: window });
     const breadcrumbs = () => [...document.querySelectorAll('.planet-information-panel .planet-breadcrumbs a')].map(a => a.getAttribute('href'));
     shell.setObject(content);
@@ -54,22 +57,22 @@ try {
       sharedStylesRetained: sharedStyles.every(style => style.isConnected),
       surfaceStyleCount: surfaceStyles.length,
       surfaceStylesRetained: surfaceStyles.every(style => style.isConnected),
-      selectedSurface: getComputedStyle(leaf).backgroundImage,
-      selectedSearch: document.querySelector('.planet-sidebar-search').value,
-      activeNavbar: document.querySelector('.scale-planet.active').dataset.planetId,
-      activeBrowser: document.querySelector('.planet-object-link.is-active').dataset.objectId,
-      selectedTitle: document.querySelector('.planet-information-panel .planet-title').getAttribute('aria-label'),
-      aboutLabelBound: Boolean(document.getElementById(document.querySelector('.explorer-about-panel').getAttribute('aria-labelledby'))),
+      selectedSurface: getComputedStyle(window.__cssearthTest.required(leaf, 'computed style element')).backgroundImage,
+      selectedSearch: window.__cssearthTest.input('.planet-sidebar-search').value,
+      activeNavbar: window.__cssearthTest.html('.scale-planet.active').dataset.planetId,
+      activeBrowser: window.__cssearthTest.html('.planet-object-link.is-active').dataset.objectId,
+      selectedTitle: window.__cssearthTest.element('.planet-information-panel .planet-title').getAttribute('aria-label'),
+      aboutLabelBound: Boolean(document.getElementById(window.__cssearthTest.required(window.__cssearthTest.element('.explorer-about-panel').getAttribute('aria-labelledby'), 'about label reference'))),
       breadcrumbs: breadcrumbs(),
     };
-    const reverse = await transport.load({ id: 'mercury', name: 'Mercury', route: '/mercury/' }, { signal: new AbortController().signal });
+    const reverse = await transport.load(object('mercury'), { signal: new AbortController().signal });
     shell.setObject(reverse);
     const second = {
       metadata: headMetadata(document),
       identities: selectors.map((selector, index) => document.querySelector(selector) === retained[index]),
-      selectedSearch: document.querySelector('.planet-sidebar-search').value,
+      selectedSearch: window.__cssearthTest.input('.planet-sidebar-search').value,
       surfaceStylesRetained: surfaceStyles.every(style => style.isConnected),
-      selectedSurface: getComputedStyle(leaf).backgroundImage,
+      selectedSurface: getComputedStyle(window.__cssearthTest.required(leaf, 'computed style element')).backgroundImage,
       breadcrumbs: breadcrumbs(),
     };
     surfaceProbe.remove();

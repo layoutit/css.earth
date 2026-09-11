@@ -7,7 +7,7 @@ import {execFileSync} from 'node:child_process';
 import {chromium} from 'playwright';
 import {OBJECTS} from '../../../site/objects.mts';
 import {conformanceBrowserLaunch} from '../../../site/test/conformance-browser-launch.mts';
-declare global { interface Window { __distantRetained?: Element[]; __cssEarth?: unknown; } }
+declare global { interface Window { __distantRetained?: Element[];  } }
 interface AssetLoad { id: string; filename: string; bytes: number; sha256: string; }
 interface BrowserResult { [key: string]: unknown; id?: string; dpr?: number; leaves?: number; shadowsDefault?: boolean; orbitDefault?: boolean; loadedFreshAssets?: AssetLoad[]; optInControls?: {shadows: boolean; bodyPixelsChanged: boolean; orbit: boolean}; }
 function requiredObject(id: string): (typeof OBJECTS)[number] { const object=OBJECTS.find(candidate=>candidate.id===id); if(!object) throw new Error(`Unknown object ${id}.`); return object; }

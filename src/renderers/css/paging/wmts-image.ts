@@ -1,5 +1,5 @@
 import type { PreparedPage } from "./types.js";
-export function isPreparedWmtsImage(page: PreparedPage) {
+export function isPreparedWmtsImage(page: Pick<PreparedPage,"rasterSource"|"url"|"width"|"height">) {
   if(page.rasterSource!=="terrascope-wmts@1"||page.width!==256||page.height!==256)return false;
   let url;try{url=new URL(page.url);}catch{return false;}
   if(url.origin!=="https://mapproxy.terrascope.be"||url.username||url.password||url.search||url.hash)return false;

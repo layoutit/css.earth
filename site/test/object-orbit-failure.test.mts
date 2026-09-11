@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { required } from './navigation-test-values.mts';
 import { materialOrbitFixture } from '../../src/platform/test/object-material-orbit-fixture.mts';
 
 for (const id of ['mercury', 'venus', 'mars']) {
@@ -7,16 +8,17 @@ for (const id of ['mercury', 'venus', 'mars']) {
     test(`${id} material failure through shared ${event} retires once and disables retained callbacks`, async () => {
       const f = materialOrbitFixture(id);
       try {
-        const orbit = await f.create();
-        const callback = f.event(event, orbit);
+        const orbit = required(await f.create());
+        const callback = required(f.event(event, orbit));
         f.fail = true;
         assert.doesNotThrow(callback);
         assert.equal(f.errors.length, 1);
+        assert.ok(f.errors[0] instanceof Error);
         assert.match(f.errors[0].message, /material publication failed/);
-        assert.equal(f.lifetime.disposed, true);
+        assert.equal(required(f.lifetime).disposed, true);
         assert.equal(f.owners.size, 0);
         assert.equal(f.stage.listenerCount(), 0);
-        assert.equal(f.resources.stats().images.entries.length, 0);
+        assert.equal(required(f.resources).stats().images.entries.length, 0);
         const writes = f.writes;
         f.fail = false;
         callback(); orbit.refresh(); orbit.setState({ zoom: 3 });

@@ -1,3 +1,6 @@
+import { fixtureRecord, required } from "./test-values.mts";
+import { requireArray, requireFiniteNumber } from "./source-values.mts";
+import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
@@ -53,14 +56,16 @@ export const objectControls = Object.freeze({ lenses: PREPARED_LENSES.controls.m
 
 const root = process.cwd(), moonPath = `${root}/src/planets/moon/prepared/runtime.json`;
 const moonSource = await readFile(moonPath, "utf8");
-const moonPlan = JSON.parse(moonSource);
-for (const [name, mutate, expected] of [
-  ["second camera", plan => plan.tree.nodes.push({ ...plan.tree.nodes[plan.tree.camera], parent: -1 }), /exactly one camera/],
-  ["undeclared texture resource", plan => plan.variants[0].writes.push({ kind: "texture", target: 2, name: "backgroundImage", resource: "unprepared", quoted: true }), /undeclared resource/],
-  ["undeclared native node", plan => plan.viewBindings[0].target = plan.tree.nodes.length, /undeclared node/],
-  ["selection camera write", plan => plan.variants[0].writes.push({ kind: "style", target: plan.tree.camera, name: "opacity", value: "0" }), /camera\/scene/],
-  ["unknown execution slot", plan => plan.publish = { executor: "private" }, /unsupported plan/],
-]) test(`source audit rejects ${name} in the actual Moon record`, async () => {
+const moonPlan = requireObjectRuntimeDefinition(JSON.parse(moonSource));
+const writes=(plan: unknown)=>requireArray(fixtureRecord(plan,"variants",0).writes);
+const mutations: [string,(plan:Record<string,unknown>)=>unknown,RegExp][] = [
+  ["second camera", plan => { const tree=fixtureRecord(plan,"tree"),nodes=requireArray(tree.nodes);nodes.push({...fixtureRecord(nodes[requireFiniteNumber(tree.camera)]),parent:-1}); }, /exactly one camera/],
+  ["undeclared texture resource", plan => writes(plan).push({kind:"texture",target:2,name:"backgroundImage",resource:"unprepared",quoted:true}), /undeclared resource/],
+  ["undeclared native node", plan => fixtureRecord(plan,"viewBindings",0).target=requireArray(fixtureRecord(plan,"tree").nodes).length, /undeclared node/],
+  ["selection camera write", plan => writes(plan).push({kind:"style",target:fixtureRecord(plan,"tree").camera,name:"opacity",value:"0"}), /camera\/scene/],
+  ["unknown execution slot", plan => plan.publish={executor:"private"}, /unsupported plan/],
+];
+for (const [name, mutate, expected] of mutations) test(`source audit rejects ${name} in the actual Moon record`, async () => {
   const { readText } = await preparedObjectOverlay('moon', mutate);
   await assert.rejects(auditPreparedPresentations({ root, objects: [{ id: "moon" }], readText }), expected);
 });
@@ -68,9 +73,9 @@ test("adapter differences report actual data counts and source hashes without fa
   const report = await auditPreparedPresentations({ root, objects: [{ id: "moon" }] });
   const entry = report.entries[0];
   assert.equal(entry.nodes, moonPlan.tree.nodes.length);
-  assert.equal(entry.cameraNodes, moonPlan.tree.nodes.filter(node => /(?:^|\s)polycss-camera(?:\s|$)/.test(node.className)).length);
+  assert.equal(entry.cameraNodes, moonPlan.tree.nodes.filter((node) => /(?:^|\s)polycss-camera(?:\s|$)/.test(node.className ?? "")).length);
   assert.equal(entry.observedOwners, null); assert.equal(entry.evidence, "validated-authored-json");
-  assert.match(entry.source.runtimeSha256, /^[a-f0-9]{64}$/);
+  assert.match(required(entry.source.runtimeSha256), /^[a-f0-9]{64}$/);
 });
 
 test('authored JSON transport cannot escape its descriptor package', async () => {

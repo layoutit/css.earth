@@ -1,19 +1,20 @@
+import {required} from '../../../../tools/test-values.mts';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root = new URL('../../../../src/planets/nereid/source/', import.meta.url);
-const read = async path => JSON.parse(await readFile(new URL(path, root)));
+const read = async (path: string|URL) => JSON.parse((await readFile(new URL(path, root))).toString('utf8'));
 
 test('Nereid preserves the published ellipsoid family and nominal scale as a closed surface', async () => {
   const recipe = await read('preparation/terrestrial.json');
   const shape = parsePdsRadiusTable(await readFile(new URL('shape/ellipsoid.tab', root), 'utf8'), recipe.geometry.radialTerrain.grid);
-  for (const [lon, lat, radius] of [[0,0,193759.272628], [90,0,171014.362426], [180,0,193759.272628], [270,0,171014.362426], [0,90,148269.452223], [0,-90,148269.452223]]) {
-    assert.ok(Math.abs(shape.sample(lon,lat)-radius)<.001, `${lon},${lat}`);
+  for (const [lon, lat, radius] of [[0,0,193759.272628], [90,0,171014.362426], [180,0,193759.272628], [270,0,171014.362426], [0,90,148269.452223], [0,-90,148269.452223]] as const) {
+    assert.ok(Math.abs(required(shape.sample(lon,lat))-radius)<.001, `${lon},${lat}`);
   }
   // Kiss et al. (2016), Eq. 4: a/b=1.133 and c/b=0.867.
-  const a = shape.sample(0,0), b = shape.sample(90,0), c = shape.sample(0,90);
+  const a = required(shape.sample(0,0)), b = required(shape.sample(90,0)), c = required(shape.sample(0,90));
   assert.ok(Math.abs(a/b-1.133)<1e-10);
   assert.ok(Math.abs(c/b-.867)<1e-10);
   assert.ok(Math.abs(Math.cbrt(a*b*c)-170000)<.001);
