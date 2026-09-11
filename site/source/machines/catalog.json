@@ -31,6 +31,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-messenger",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "2004",
         "citations": [
@@ -65,6 +74,15 @@
       },
       "kind": {
         "value": "orbiter",
+        "citations": [
+          {
+            "catalogueId": "reference-cassini",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-cassini",
@@ -113,6 +131,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-dawn",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "2007",
         "citations": [
@@ -147,6 +174,15 @@
       },
       "kind": {
         "value": "orbiter",
+        "citations": [
+          {
+            "catalogueId": "reference-galileo",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-galileo",
@@ -195,6 +231,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-hubble",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "1990",
         "citations": [
@@ -229,6 +274,15 @@
       },
       "kind": {
         "value": "orbiter",
+        "citations": [
+          {
+            "catalogueId": "reference-juno",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-juno",
@@ -277,6 +331,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-new-horizons",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "2006",
         "citations": [
@@ -311,6 +374,15 @@
       },
       "kind": {
         "value": "observatory",
+        "citations": [
+          {
+            "catalogueId": "reference-sdo",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-sdo",
@@ -359,6 +431,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-voyager-1",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "1977",
         "citations": [
@@ -393,6 +474,15 @@
       },
       "kind": {
         "value": "flyby",
+        "citations": [
+          {
+            "catalogueId": "reference-voyager-2",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-voyager-2",
@@ -441,6 +531,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-lro",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "2009",
         "citations": [
@@ -475,6 +574,15 @@
       },
       "kind": {
         "value": "orbiter",
+        "citations": [
+          {
+            "catalogueId": "reference-mro",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-mro",
@@ -523,6 +631,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-odyssey",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "2001",
         "citations": [
@@ -557,6 +674,15 @@
       },
       "kind": {
         "value": "orbiter",
+        "citations": [
+          {
+            "catalogueId": "reference-near-shoemaker",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-near-shoemaker",
@@ -615,6 +741,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-osiris-rex",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "2016",
         "citations": [
@@ -649,6 +784,15 @@
       },
       "kind": {
         "value": "sample-return",
+        "citations": [
+          {
+            "catalogueId": "reference-hayabusa2",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-hayabusa2",
@@ -697,6 +841,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-hayabusa",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "2003",
         "citations": [
@@ -731,6 +884,15 @@
       },
       "kind": {
         "value": "orbiter",
+        "citations": [
+          {
+            "catalogueId": "reference-rosetta",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-rosetta",
@@ -779,6 +941,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-terra",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "1999",
         "citations": [
@@ -813,6 +984,15 @@
       },
       "kind": {
         "value": "observatory",
+        "citations": [
+          {
+            "catalogueId": "reference-suomi-npp",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-suomi-npp",
@@ -861,6 +1041,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-magellan",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "1989",
         "citations": [
@@ -895,6 +1084,15 @@
       },
       "kind": {
         "value": "orbiter",
+        "citations": [
+          {
+            "catalogueId": "reference-mars-global-surveyor",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-mars-global-surveyor",
@@ -943,6 +1141,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-viking-1",
+            "checkedOn": "2026-09-10"
+          }
+        ]
+      },
       "launch": {
         "value": "1975",
         "citations": [
@@ -976,6 +1183,15 @@
       },
       "kind": {
         "value": "lander",
+        "citations": [
+          {
+            "catalogueId": "reference-viking-1",
+            "checkedOn": "2026-09-10"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-viking-1",
@@ -1023,6 +1239,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-viking-2",
+            "checkedOn": "2026-09-10"
+          }
+        ]
+      },
       "launch": {
         "value": "1975",
         "citations": [
@@ -1056,6 +1281,15 @@
       },
       "kind": {
         "value": "lander",
+        "citations": [
+          {
+            "catalogueId": "reference-viking-2",
+            "checkedOn": "2026-09-10"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-viking-2",
@@ -1113,6 +1347,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-grail",
+            "checkedOn": "2026-09-10"
+          }
+        ]
+      },
       "launch": {
         "value": "2011",
         "citations": [
@@ -1163,6 +1406,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-grail",
+            "checkedOn": "2026-09-10"
+          }
+        ]
+      },
       "launch": {
         "value": "2011",
         "citations": [
@@ -1196,6 +1448,15 @@
       },
       "kind": {
         "value": "probe",
+        "citations": [
+          {
+            "catalogueId": "reference-huygens",
+            "checkedOn": "2026-09-10"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-huygens",
@@ -1243,6 +1504,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-galileo",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "1989",
         "citations": [
@@ -1276,6 +1546,15 @@
       },
       "kind": {
         "value": "lander",
+        "citations": [
+          {
+            "catalogueId": "reference-rosetta",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-rosetta",
@@ -1322,6 +1601,15 @@
             "checkedOn": "2026-09-10"
           }
         ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-minerva",
+            "checkedOn": "2026-09-10"
+          }
+        ]
       }
     },
     {
@@ -1347,6 +1635,15 @@
       },
       "kind": {
         "value": "rover",
+        "citations": [
+          {
+            "catalogueId": "reference-minerva-ii1",
+            "checkedOn": "2026-09-10"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-minerva-ii1",
@@ -1384,6 +1681,15 @@
             "checkedOn": "2026-09-10"
           }
         ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-minerva-ii1",
+            "checkedOn": "2026-09-10"
+          }
+        ]
       }
     },
     {
@@ -1415,6 +1721,15 @@
             "checkedOn": "2026-09-10"
           }
         ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-minerva-ii2",
+            "checkedOn": "2026-09-10"
+          }
+        ]
       }
     },
     {
@@ -1440,6 +1755,15 @@
       },
       "kind": {
         "value": "lander",
+        "citations": [
+          {
+            "catalogueId": "reference-mascot",
+            "checkedOn": "2026-09-10"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-mascot",

@@ -2,10 +2,16 @@ import { parseSourceCitation } from './source-catalog.mts';
 import type { SourceCitation, SourceResolver } from './source-catalog.mts';
 /** Shared runtime validation for the authored and prepared exploration catalogues. */
 export interface Cited<T> { readonly value: T; readonly citations: readonly SourceCitation[]; }
-export type MachineKind = 'orbiter' | 'lander' | 'rover' | 'probe' | 'observatory' | 'flyby' | 'sample-return';
+export type MachineKind = 'orbiter' | 'lander' | 'rover' | 'probe' | 'observatory' | 'flyby' | 'sample-return'
+  | 'radar-telescope' | 'radio-telescope' | 'optical-telescope';
+/** Where the machine observes from. Ground machines are sited and never launched. */
+export type MachineSetting = 'space' | 'ground';
+export interface MachineSite { readonly latitude: number; readonly longitude: number; readonly altitude?: number; }
 export interface MachineRecord {
   readonly id: string; readonly name: Cited<string>; readonly aliases: readonly Cited<string>[];
-  readonly description: Cited<string>; readonly kind: Cited<MachineKind>; readonly launch?: Cited<string>; readonly imageId?: string;
+  readonly description: Cited<string>; readonly kind: Cited<MachineKind>; readonly setting: Cited<MachineSetting>;
+  readonly launch?: Cited<string>; readonly commissioned?: Cited<string>; readonly retired?: Cited<string>;
+  readonly site?: Cited<MachineSite>; readonly imageId?: string;
 }
 export interface Participant { readonly machineId: string; readonly role: MachineKind; readonly citations: readonly SourceCitation[]; }
 export interface MissionRecord {
@@ -58,7 +64,19 @@ function enumeration<T extends string>(input: unknown, values: readonly T[]): T 
   if (!found) throw new TypeError(`Unsupported exploration value: ${value}.`);
   return found;
 }
-const machineKind = (input: unknown) => enumeration(input, ['orbiter', 'lander', 'rover', 'probe', 'observatory', 'flyby', 'sample-return'] as const);
+const machineKind = (input: unknown) => enumeration(input, ['orbiter', 'lander', 'rover', 'probe', 'observatory', 'flyby', 'sample-return', 'radar-telescope', 'radio-telescope', 'optical-telescope'] as const);
+const machineSetting = (input: unknown) => enumeration(input, ['space', 'ground'] as const);
+/** Geodetic siting for a ground machine, in the degrees/metres its context product publishes. */
+function machineSite(input: unknown): MachineSite {
+  const record = explorationRecord(input, ['latitude', 'longitude', 'altitude']);
+  const degrees = (raw: unknown, limit: number) => {
+    if (typeof raw !== 'number' || !Number.isFinite(raw) || Math.abs(raw) > limit) throw new TypeError('Invalid machine site coordinate.');
+    return raw;
+  };
+  if (record.altitude !== undefined && (typeof record.altitude !== 'number' || !Number.isFinite(record.altitude))) throw new TypeError('Invalid machine site altitude.');
+  return Object.freeze({ latitude: degrees(record.latitude, 90), longitude: degrees(record.longitude, 360),
+    ...(record.altitude === undefined ? {} : { altitude: record.altitude as number }) });
+}
 /** Validate calendar dates without expanding a source's year/month precision. */
 export function explorationDate(input: unknown, full = false): string {
   const value = explorationText(input);
@@ -100,12 +118,23 @@ export function parseExplorationCatalog(input: unknown, agencies: Readonly<Recor
     return Object.freeze({ value: parse(record.value), citations: refs(record.citations) });
   };
   const machines = explorationArray(value.machines, raw => {
-    const record = explorationRecord(raw, ['id', 'name', 'aliases', 'description', 'kind', 'launch', 'imageId']);
+    const record = explorationRecord(raw, ['id', 'name', 'aliases', 'description', 'kind', 'setting', 'launch', 'commissioned', 'retired', 'site', 'imageId']);
     const aliases = explorationArray(record.aliases, alias => cited(alias, explorationText));
     unique(aliases.map(alias => alias.value), 'machine alias');
+    const setting = cited(record.setting, machineSetting);
+    // A machine observes from orbit or from the ground, never both. Keeping the
+    // launched and sited fields apart stops a ground record inheriting a launch.
+    const grounded = ['commissioned', 'retired', 'site'].filter(key => record[key] !== undefined);
+    if (setting.value === 'space' && grounded.length) throw new TypeError('A space machine cannot be sited or commissioned on the ground.');
+    if (setting.value === 'ground' && record.launch !== undefined) throw new TypeError('A ground machine cannot be launched.');
+    const commissioned = record.commissioned === undefined ? undefined : cited(record.commissioned, explorationDate);
+    const retired = record.retired === undefined ? undefined : cited(record.retired, explorationDate);
+    if (commissioned && retired && dateBounds(commissioned.value)[0] > dateBounds(retired.value)[1]) throw new TypeError('Machine retired before it was commissioned.');
     return Object.freeze({ id: explorationId(record.id), name: cited(record.name, explorationText), aliases,
-      description: cited(record.description, explorationText), kind: cited(record.kind, machineKind),
+      description: cited(record.description, explorationText), kind: cited(record.kind, machineKind), setting,
       ...(record.launch === undefined ? {} : { launch: cited(record.launch, explorationDate) }),
+      ...(commissioned ? { commissioned } : {}), ...(retired ? { retired } : {}),
+      ...(record.site === undefined ? {} : { site: cited(record.site, machineSite) }),
       ...(record.imageId === undefined ? {} : { imageId: explorationId(record.imageId) }) });
   });
   unique(machines.map(record => record.id), 'machine ID');
