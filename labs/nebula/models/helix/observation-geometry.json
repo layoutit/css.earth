@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-observation-geometry-recipe@1",
+  "structureCatalogue": ".local/nebula-lab/observations/helix/structures/catalogue.json",
+  "settings": {
+    "iterations": 24000,
+    "seed": 7293,
+    "minRadiusFraction": 0.07,
+    "maxCandidates": 12
+  }
+}
