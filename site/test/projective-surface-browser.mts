@@ -1,5 +1,7 @@
+import { createTestPage } from './browser-observations.mts';
 // Native camera proof: a prepared surface may only paint inside its projected leaves.
 import assert from 'node:assert/strict';
+import { required } from '../../tools/test-values.mts';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { PNG } from 'pngjs';
@@ -8,15 +10,16 @@ import { wheelWithReceipt } from './wheel-zoom-distance.mts';
 const origin = process.env.CSSEARTH_TEST_ORIGIN ?? 'http://localhost:4210';
 const output = '.local/projective-surface-browser';
 const ids = process.argv.slice(2).length ? process.argv.slice(2) : ['jupiter', 'saturn'];
-const report = { samples: [], errors: [] };
+interface SurfaceSample { id: string; pose: string; bounds: { left: number; top: number; right: number; bottom: number; leaves: number }; escapedPixels: number; surfacePixels: number; url: string; }
+const report: {samples: SurfaceSample[]; errors: string[]} = { samples: [], errors: [] };
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: process.env.PLAYWRIGHT_CHANNEL ?? 'chrome', headless: true });
 try {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
+  const page = await createTestPage(browser, { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
   page.on('pageerror', error => report.errors.push(error.message));
   for (const id of ids) {
     await page.goto(`${origin}/${id}/`, { waitUntil: 'domcontentloaded' });
-    await page.waitForFunction(id => window.__cssEarth?.ready && window[`__${id}`]?.ready, id);
+    await page.waitForFunction(id => window.__cssEarth?.ready && window.__cssEarth?.object(id)?.ready, id);
     const motion = page.locator('input[name="motion"]');
     if (await motion.isChecked()) await motion.uncheck({ force: true });
     const bodies = page.locator(`.${id}-body`);
@@ -24,9 +27,9 @@ try {
     for (const pose of ['close', 'rotated']) {
       if (pose === 'rotated') {
         await page.mouse.move(1050, 470);
-        const delta = await page.evaluate(id => Math.log(8) / window[`__${id}`].camera.stats().dolly.wheelStepPerDelta, id);
+        const delta = await page.evaluate(id => Math.log(8) / window.__cssearthTest.required(window.__cssearthTest.object(id).camera.stats().dolly, 'dolly diagnostics').wheelStepPerDelta, id);
         await wheelWithReceipt(page, delta);
-        await page.waitForFunction(id => !window[`__${id}`].camera.stats().dragInertia.wheelZoom.active, id);
+        await page.waitForFunction(id => !window.__cssearthTest.required(window.__cssearthTest.object(id).camera.stats().dragInertia.wheelZoom, 'wheel zoom diagnostics').active, id);
         await page.mouse.move(1100, 410); await page.mouse.down();
         await page.mouse.move(960, 465, { steps: 12 }); await page.mouse.up();
         await page.waitForTimeout(600);
@@ -38,7 +41,7 @@ try {
         for (let sample = 0; sample < 30; sample++) {
           await new Promise(resolve => setTimeout(resolve, 50));
           const current = [...document.querySelectorAll('.prepared-star-label')]
-            .map(label => `${label.textContent}:${label.style.opacity}:${label.style.transform}`).join('|');
+            .map(label => `${label.textContent}:${window.__cssearthTest.htmlElement(label).style.opacity}:${window.__cssearthTest.htmlElement(label).style.transform}`).join('|');
           stable = current === previous ? stable + 1 : 0;
           if (stable >= 3) return;
           previous = current;
@@ -57,12 +60,12 @@ try {
       const visible = await page.screenshot({ path: `${output}/${id}-${pose}.png` });
       await bodies.evaluateAll(nodes => nodes.forEach(node => { node.dataset.proofVisibility = node.style.visibility; node.style.visibility = 'hidden'; }));
       const hidden = await page.screenshot({ path: `${output}/${id}-${pose}-hidden.png` });
-      await bodies.evaluateAll(nodes => nodes.forEach(node => { node.style.visibility = node.dataset.proofVisibility; delete node.dataset.proofVisibility; }));
+      await bodies.evaluateAll(nodes => nodes.forEach(node => { node.style.visibility = window.__cssearthTest.required(node.dataset.proofVisibility, 'saved visibility'); delete node.dataset.proofVisibility; }));
       const before = PNG.sync.read(visible), after = PNG.sync.read(hidden);
       let escapedPixels = 0, surfacePixels = 0;
       for (let y = 0; y < before.height; y++) for (let x = 0; x < before.width; x++) {
         const offset = (y * before.width + x) * 4;
-        const changed = [0, 1, 2].some(channel => Math.abs(before.data[offset + channel] - after.data[offset + channel]) > 8);
+        const changed = [0, 1, 2].some(channel => Math.abs(required(before.data[offset + channel]) - required(after.data[offset + channel])) > 8);
         if (!changed) continue;
         if (x >= bounds.left && x <= bounds.right && y >= bounds.top && y <= bounds.bottom) surfacePixels++;
         else escapedPixels++;

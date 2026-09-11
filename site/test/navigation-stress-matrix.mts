@@ -3,7 +3,8 @@ import { mkdir, open, writeFile } from 'node:fs/promises';
 import { OBJECTS } from '../objects.mts';
 
 const planets = OBJECTS.filter(object => object.classification === 'planet');
-const chains = [], seen = new Set(); let seed = Number(process.env.MATRIX_SEED ?? 424242) >>> 0;
+interface Chain { seed: number; start: string; dpr: number; hops: number; exit?: number | null; }
+const chains: Chain[] = [], seen = new Set<string>(); let seed = Number(process.env.MATRIX_SEED ?? 424242) >>> 0;
 while (chains.length < Math.min(6, planets.length)) {
   seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
   let x = seed; x ^= x << 13; x ^= x >>> 17; x ^= x << 5;
@@ -18,7 +19,7 @@ for (const chain of chains) {
   if (process.env.SEEDS && !process.env.SEEDS.split(',').includes(String(chain.seed))) continue;
   console.log('START', JSON.stringify(chain));
   const log = await open(`${output}/${chain.seed}.log`, 'w');
-  chain.exit = await new Promise((resolve, reject) => {
+  chain.exit = await new Promise<number | null>((resolve, reject) => {
     const child = spawn(process.execPath, ['site/test/navigation-stress-browser.mts'], { env: { ...process.env,
       SEED: String(chain.seed), DPR: String(chain.dpr), HOPS: String(chain.hops), OUTPUT: `${output}/${chain.seed}` }, stdio: ['ignore', log.fd, log.fd] });
     child.once('error', reject); child.once('exit', resolve);
