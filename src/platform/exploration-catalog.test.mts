@@ -11,7 +11,7 @@ const parseExplorationCatalog = (raw: unknown, agencies: Parameters<typeof parse
 const cited = <T,>(value: T) => ({ value, citations: [{catalogueId:'source',checkedOn:'2026-09-10'}] });
 function fixture() {
   return { schema: 'cssearth-machine-catalog@4',
-    machines: [{ id: 'juno', name: cited('Juno spacecraft'), description: cited('A spacecraft.'), aliases: [], kind: cited('orbiter'), launch: cited('2011') }],
+    machines: [{ id: 'juno', name: cited('Juno spacecraft'), description: cited('A spacecraft.'), aliases: [], kind: cited('orbiter'), setting: cited('space'), launch: cited('2011') }],
     missions: [{ id: 'juno', name: cited('Juno mission'), description: cited('An individual mission.'), agencyIds: cited(['NASA']), started: cited('2011'), participants: [{ machineId: 'juno', role: 'orbiter', citations: cited('').citations }] }],
   };
 }
@@ -80,4 +80,21 @@ test('capture validation separates membership from observation and rejects legac
     { attributions: [...machine.attributions, ...machine.attributions] },
   ]) assert.throws(() => parseCapture(input));
   assert.throws(() => validateCapture(parseCapture({ attributions: [{ kind: 'mission', missionId: 'missing', evidence: 'Credit' }] }), catalog), /Unknown capture mission/);
+});
+
+test('a ground machine is sited and retired instead of launched', () => {
+  const f = fixture();
+  const arecibo = { id: 'arecibo-305m', name: cited('Arecibo 305-m antenna'), description: cited('A fixed spherical reflector.'),
+    aliases: [], kind: cited('radar-telescope'), setting: cited('ground'), commissioned: cited('1963'), retired: cited('2020'),
+    site: cited({ latitude: 18.344219, longitude: 293.247306, altitude: 453.34 }) };
+  const catalog = parseExplorationCatalog({ ...f, machines: [...f.machines, arecibo] }, agencies);
+  const record = catalog.machines[1];
+  assert.equal(record.setting.value, 'ground');
+  assert.equal(record.launch, undefined);
+  assert.equal(record.site?.value.altitude, 453.34);
+  assert.ok(Object.isFrozen(record.site?.value));
+  assert.throws(() => parseExplorationCatalog({ ...f, machines: [{ ...arecibo, launch: cited('1963') }] }, agencies), /cannot be launched/);
+  assert.throws(() => parseExplorationCatalog({ ...f, machines: [{ ...f.machines[0], site: cited({ latitude: 0, longitude: 0 }) }] }, agencies), /cannot be sited/);
+  assert.throws(() => parseExplorationCatalog({ ...f, machines: [{ ...arecibo, retired: cited('1962') }] }, agencies), /retired before/);
+  assert.throws(() => parseExplorationCatalog({ ...f, machines: [{ ...arecibo, site: cited({ latitude: 91, longitude: 0 }) }] }, agencies), /site coordinate/);
 });
