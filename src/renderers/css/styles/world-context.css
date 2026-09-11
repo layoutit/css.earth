@@ -124,6 +124,21 @@
   --context-line-opacity: 1;
   --context-label-opacity: 1;
 }
+
+/* A highlighted classification brightens its circles and labels while the
+   others recede. Orbits keep their normal strength; hovering still reveals. */
+.prepared-world-context[data-context-highlighting] [data-context-group]:not([data-context-highlight], [data-object-hovered="true"]) {
+  --context-label-opacity: calc(var(--context-base-label-opacity, .65) * .3);
+}
+.prepared-world-context[data-context-highlighting] [data-context-group]:not([data-context-highlight], [data-object-hovered="true"]) > [data-context-indicator] {
+  --context-line-opacity: calc(var(--context-base-line-opacity, .65) * .3);
+}
+[data-context-group][data-context-highlight] {
+  --context-label-opacity: 1;
+}
+[data-context-group][data-context-highlight] > [data-context-indicator] {
+  --context-line-opacity: 1;
+}
 [data-context-body] { transition: opacity 120ms ease; }
 
 /* Alternate the paint on retained chords. Fractional unit-bar widths can
