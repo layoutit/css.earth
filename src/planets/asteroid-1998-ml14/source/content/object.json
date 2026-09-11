@@ -45,10 +45,10 @@
         "source": {
           "url": "https://mpbulletin.org/issues/MPB_41-2.pdf",
           "label": "Warner (2014), 2013 photometry",
-          "path": "source/reference/warner-2014.pdf",
+          "path": "source/reference/model-properties.json",
           "checked": "2026-09-08",
           "catalogueId": "source-asteroid-1998-ml14-asteroid-1998-ml14-warner-2014",
-          "locator": "Warner (2014), 2013 photometry"
+          "locator": "/photometricPeriodHours and /photometricPeriodUncertaintyHours; Warner (2014), 2013 photometry"
         }
       }
     ],
