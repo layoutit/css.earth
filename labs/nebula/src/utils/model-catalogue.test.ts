@@ -11,7 +11,12 @@ const digest = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex
 test('the curated lab retains exactly the three selected images and closes both density banks', async () => {
   const ids = ['vista-infrared', 'horalek-widefield', 'wise-wide-infrared'];
   const subjects = await read('labs/nebula/src/subjects.json');
-  assert.deepEqual(subjects.map((subject: {id: string}) => subject.id), ['lmc-clouds', 'smc-particles']);
+  assert.deepEqual(subjects.map((subject: {id: string}) => subject.id), ['lmc-clouds', 'smc-particles', 'm2-9-inferred']);
+  const experiment = subjects.find((subject: {id: string}) => subject.id === 'm2-9-inferred');
+  assert.equal(experiment.density, undefined, 'An inferred-emission experiment must not masquerade as an independent density prior.');
+  assert.equal(experiment.directory, experiment.emissionExperiment.directory);
+  const experimentRecipe = await read('labs/nebula/models/m2-9/experiment.json');
+  assert.equal(experimentRecipe.id, experiment.id);
   const lmc = subjects[0];
   assert.deepEqual(lmc.density.candidateImageIds, ids);
   const recipe = await read('labs/nebula/models/image-candidates.json');
@@ -30,7 +35,7 @@ test('the curated lab retains exactly the three selected images and closes both 
   assert.deepEqual(reference.wcs, stars.provenance.footprint.wcs);
   assert.equal(reference.overlay.texturePath, undefined);
   assert.equal(stars.stars.length, 943);
-  for (const subject of subjects) {
+  for (const subject of subjects.filter((item: { density?: unknown }) => item.density)) {
     assert.equal(subject.directory, subject.density.directory);
     assert.equal(subject.cloudParts, undefined);
     const descriptor = await read(subject.directory + '/object.json');

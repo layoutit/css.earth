@@ -1,6 +1,8 @@
 # Continue from here
 
-Updated 2026-09-10. Research sources and unimplemented methods are in [RESEARCH.md](RESEARCH.md). The current reproducible pipeline is in [METHOD.md](METHOD.md).
+Updated 2026-09-11. Research sources and method status are in [RESEARCH.md](RESEARCH.md). The current reproducible pipeline is in [METHOD.md](METHOD.md).
+
+**Active next decision:** inspect the [M2–9 image-to-volume baseline](models/m2-9/README.md) in the lab. The 2013 group-sparsity solver now produces a rotatable PolyCSS volume in about seven seconds at the small baseline resolution. Front/oblique/side views have been inspected: connected lobes remain, but ring artifacts, residual background and color/brightness differences remain. Do not promote it yet. Improve source separation and inference discretization only after judging this direction; see [planetary-nebulae.md](docs/planetary-nebulae.md).
 
 ## Completed handoff: LMC into the extragalactic app
 
@@ -13,7 +15,7 @@ Updated 2026-09-10. Research sources and unimplemented methods are in [RESEARCH.
 
 ## Next experiment: reconstruct a cloud without a simulation
 
-This is proposed research, not an implemented feature or an instruction to launch a large job now.
+The checklist below records the research path. A small M2–9 baseline now covers the 2013 method, explicit assumptions and a first XYZ bake; it is not a production feature or authorization for large jobs.
 
 1. Read the Wenger 2012 method and 2013 follow-up in full. Check available code and licensing before reuse. Record exact algorithmic assumptions; do not infer them from an abstract.
 2. Choose **one** roughly symmetric planetary nebula with a high-quality, sufficiently wide observation and published morphology/distance. A shell or bipolar example is a better first test than Orion/Tarantula.

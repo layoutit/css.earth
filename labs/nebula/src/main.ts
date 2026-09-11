@@ -16,6 +16,7 @@ import { createStarRemovalControls } from './components/star-removal-controls';
 export const labObjects = [
   { id: 'lmc-clouds', name: 'LMC' },
   { id: 'smc-particles', name: 'SMC' },
+  { id: 'm2-9-inferred', name: 'M2–9 · experiment' },
 ] as const;
 export interface AlignmentState {
   images: { id: string; label: string }[]; imageId: string; layer: ImageLayer; layers: ImageLayer[];

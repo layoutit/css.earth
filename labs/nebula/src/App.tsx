@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { labObjects, mountNebulaLab, type LabShellState } from './main';
 import { labView } from './viewer/lab-routing';
+import { subjects } from './viewer/viewer';
+import { EmissionComparison } from './components/emission-comparison';
 
 type Controller = Awaited<ReturnType<typeof mountNebulaLab>>;
 export function App() {
@@ -22,6 +24,7 @@ export function App() {
     void controller.current?.selectView(next === 0 ? 'alignment' : 'reconstruction'); button.focus();
   }
   const alignment = shell.alignment;
+  const emission = subjects.find(item => item.id === shell.objectId)?.emissionExperiment;
   const updateAlignment = (partial: Partial<NonNullable<LabShellState['alignment']>>) => setShell(value => value.alignment ? { ...value, alignment: { ...value.alignment, ...partial } } : value);
   return <>
     <header className="lab-header">
@@ -38,6 +41,7 @@ export function App() {
           <div id="render-panel" role="tabpanel" aria-labelledby={shell.view === "alignment" ? "density-tab" : "render-tab"}>
             <div id="viewer" aria-label="Interactive prepared object" tabIndex={0}></div>
           </div>
+          {emission && shell.view === 'reconstruction' && <EmissionComparison directory={emission.directory} />}
           <aside id="inspection-panel" className="floating-panel density-adjustment-panel" aria-label="Camera and density adjustments">
             <fieldset id="render-controls" disabled>
               <legend>Camera</legend>

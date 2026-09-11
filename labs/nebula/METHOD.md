@@ -2,6 +2,8 @@
 
 This is the repeatable workflow for bringing observed images into the lab, separating compact light, and coloring a spatial model. Source-specific settings belong in recipes, never in algorithm branches. The accepted LMC workflow is executable with `pnpm lab:nebula:bake`; [baking.md](docs/baking.md) defines the clean-start command, stage inputs and reproducibility boundary.
 
+**Without an existing density model:** the separate [planetary-nebula experiment](docs/planetary-nebulae.md) fits a plausible emission field from an image plus symmetry assumptions before baking. Its M2–9 recipe is not a replacement for the fixed LMC density workflow described below.
+
 **Current stage:** VISTA, Horálek and WISE have completed native NOX removal and separate 3D comparison bakes. Alignment imports/inspects sources; Reconstruction selects a completed native starless image and runs an explicit **Preview** job. Other catalogue images remain available for comparison/removal without being automatically selected for reconstruction. The comparison repaints the Alignment density cloud; it does not recover measured gas depth.
 
 ## Order of operations

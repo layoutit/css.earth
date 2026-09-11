@@ -1,6 +1,6 @@
 # Nebula research and current method
 
-Updated 2026-09-10. Start with [NEXTSTEPS.md](NEXTSTEPS.md) to continue the work and [METHOD.md](METHOD.md) to reproduce the implemented pipeline.
+Updated 2026-09-11. Start with [NEXTSTEPS.md](NEXTSTEPS.md) to continue the work and [METHOD.md](METHOD.md) to reproduce the implemented pipeline.
 
 ## What exists today
 
@@ -11,7 +11,7 @@ Updated 2026-09-10. Start with [NEXTSTEPS.md](NEXTSTEPS.md) to continue the work
 - The 943 Bonanos catalogue stars retain measured sky coordinates and photometry. One common model supplies their unmeasured depths. Candidate images cannot reposition/select stars.
 - XYZ slice banks are prepared offline and rendered as retained PolyCSS/CSS elements. Runtime consumes prepared assets.
 
-**We have not implemented Wenger's image-to-volume reconstruction algorithm.** Earlier starlet/getsf and photo-conditioned depth experiments are recorded in [research history](docs/research/README.md); they are not evidence that we recovered correct 3D structure.
+**A small independent implementation of Wenger's 2013 image-to-volume method now runs on M2–9 in the lab.** It infers relative emission using axial symmetry; it does not change the LMC/SMC pipeline or recover measured gas density. See [the method and limitations](docs/planetary-nebulae.md) and [the reproducible experiment](models/m2-9/README.md). Earlier starlet/getsf and photo-conditioned depth experiments remain in [research history](docs/research/README.md).
 
 ## Name and novelty
 
@@ -22,14 +22,14 @@ A descriptive name is **image-based volumetric visualization guided by a density
 | Reference | Why it matters | Status in our code |
 |---|---|---|
 | Wenger et al. (2012), *Visualization of Astronomical Nebulae via Distributed Multi-GPU Compressed Sensing Tomography*. [Author page](https://www.graphics.rwth-aachen.de/publication/03269/) · [DOI](https://doi.org/10.1109/TVCG.2012.281) · [Author PDF](https://graphics.tu-bs.de/upload/publications/wenger2012visualization.pdf) | Infers plausible volumes using approximate spherical/axial symmetry, regularization and image constraints. Useful when no simulation is available. | Not implemented. |
-| Wenger et al. (2013), *Fast Image-Based Modeling of Astronomical Nebulae*. [DOI](https://doi.org/10.1111/cgf.12216) · [Author PDF](https://graphics.tu-bs.de/upload/publications/wenger2013fast.pdf) | Related faster image-based modeling; read alongside the 2012 method before choosing a small implementation. | Not implemented; full algorithm still needs study. |
+| Wenger et al. (2013), *Fast Image-Based Modeling of Astronomical Nebulae*. [DOI](https://doi.org/10.1111/cgf.12216) · [Author PDF](https://graphics.tu-bs.de/upload/publications/wenger2013fast.pdf) | Nonnegative FISTA reconstruction with axial group sparsity. | Small independent TypeScript M2–9 baseline implemented; visual acceptance pending. |
 | Wenger et al. (2012), *Interactive Visualization and Simulation of Astronomical Nebulae*. [Open full text](https://arxiv.org/html/1204.6132v3) · [PDF](https://arxiv.org/pdf/1204.6132) · [DOI](https://doi.org/10.1109/MCSE.2012.52) | Explains why a single image needs geometry and light-transport assumptions; distinguishes emission nebulae from absorption/scattering cases and discusses spectra/kinematics. | Background reference, not our implementation. |
 | Steffen et al., *SHAPE: A 3D Modeling Tool for Astrophysics*. [Paper](https://arxiv.org/abs/1003.2012) | Combines object-specific structure and observational constraints; relevant when spectra and expansion information exist. | Candidate source of models/workflow, not integrated. |
 | *Differentiable Direct Volume Rendering*. [Research page](https://www.cs.cit.tum.de/en/cg/research/publications/2021/differentiable-direct-volume-rendering/) | A possible render-and-fit framework. It cannot supply missing depth information by itself. | Future option; not the current painter. |
 | Edenhofer et al. (2023), 3D Galactic dust mapping. [Paper](https://arxiv.org/abs/2308.01295) | Distance/extinction-constrained nearby Milky Way dust; investigate coverage for an Orion experiment rather than using it for internal LMC geometry. | Not integrated. |
 | Ikits et al., *Volume Rendering Techniques*, GPU Gems. [Chapter](https://developer.nvidia.com/gpugems/gpugems/part-vi-beyond-triangles/chapter-39-volume-rendering-techniques) | Established slice-based rendering, sampling and compositing; useful for diagnosing our XYZ handoffs. | Related rendering family, adapted to CSS. |
 
-The 2012 author abstract and open review were read for the discussion. The 2013 publisher page returned HTTP 403 and its author PDF timed out during that session; the links are retained, but its full method has not been audited. These are references, not claims that our source code implements their algorithms.
+The earlier PDF access failure is resolved: both author PDFs downloaded successfully on 2026-09-11. The 2013 algorithm/results/limitations and the 2012 imaging/optimization sections were checked directly. The new baseline implements the 2013 equations independently; it does not use the authors' restricted downloadable volumes. Exact sources and hashes are in [the planetary-nebula notes](docs/planetary-nebulae.md).
 
 ## Objects without an existing density model
 

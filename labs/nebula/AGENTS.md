@@ -1,6 +1,6 @@
 # Nebula Lab
 
-Local development tooling, separate from the production website. Current objects: LMC and SMC. Keep cleanup and UI work within this lab unless a task explicitly requires a shared dependency or another location.
+Local development tooling, separate from the production website. Current objects: LMC and SMC, plus the explicitly scoped M2–9 planetary-nebula experiment. Keep cleanup and UI work within this lab unless a task explicitly requires a shared dependency or another location.
 
 ## Usage
 
@@ -40,6 +40,8 @@ models/
 - Historical receipts retain their original bytes and hashes. Resolve relocated historical paths at explicit loading boundaries; do not fabricate replacement provenance.
 
 ## Processing boundaries
+
+- M2–9 is a separate image-to-emission experiment: [method and limits](docs/planetary-nebulae.md), [recipe and command](models/m2-9/README.md). Its authored symmetry prior infers relative display emission; it never changes the LMC/SMC fixed-density rules below. Keep its inferred dimensions distinct from measured gas density or physical size. Do not import the paper authors' restricted model volumes into app assets. Processing remains an explicit offline command until visual direction is accepted.
 
 - Browsing/importing/alignment does not authorize expensive processing. A user's instruction for named candidates, or their explicit Quick preview / Remove stars / Preview click, authorizes that operation. Do not ask again for work already authorized.
 - Source registration and the user's image-to-density fit are different. Preserve both. The visual fit is not measured distance, size, or correspondence between simulated and observed stars.

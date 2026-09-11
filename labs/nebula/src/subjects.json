@@ -47,5 +47,17 @@
       "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
       "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure."
     }
+  },
+  {
+    "id": "m2-9-inferred",
+    "emissionExperiment": { "directory": ".local/nebula-lab/planetary/m2-9-inferred" },
+    "name": "M2–9 · inferred emission",
+    "directory": ".local/nebula-lab/planetary/m2-9-inferred",
+    "imagePath": ".local/nebula-lab/planetary/m2-9-inferred/input.png",
+    "sourcePageUrl": "https://apod.nasa.gov/apod/ap040201.html",
+    "credit": "Hubble: Balick, Icke, Mellema & NASA. Independent implementation of Wenger, Lorenz & Magnor (2013).",
+    "modelNote": "Experimental emission inferred from one image and approximate axial symmetry. Unmeasured depth and scale; four point sources masked. Not gas mass density.",
+    "framingRadiusUnits": 5,
+    "hasDetail": false
   }
 ]

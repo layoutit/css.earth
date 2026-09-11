@@ -1,6 +1,6 @@
 # Nebula Lab
 
-Local React tooling for aligning photographs, removing stars and comparing baked 3D clouds. The retained PolyCSS renderer stays in plain TypeScript. The lab is separate from the production website; current objects are **LMC and SMC**.
+Local React tooling for aligning photographs, removing stars and comparing baked 3D clouds. The retained PolyCSS renderer stays in plain TypeScript. The lab is separate from the production website; current objects are **LMC and SMC**, plus the [M2–9 image-to-volume experiment](models/m2-9/README.md). The experiment has its own explicit preparation command and inferred-depth assumptions.
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
@@ -15,7 +15,7 @@ Open [Alignment](http://127.0.0.1:4331/alignment) or [Reconstruction](http://127
 - **Current LMC variants:** ESO VISTA, NASA/IPAC WISE and Horálek optical. They use separate color treatments and an approximate stellar-density depth prior. SMC has a neutral density model; extending this new reconstruction flow requires its own registered sources and recipe.
 - Large originals, native removal products and newly processed volumes stay in the ignored local cache. Neutral density slices and inspection/reference images regenerate at lab startup (missing native originals are downloaded). Extraction previews and production LMC slice textures are also ignored; the full bake restores them against saved hashes. Interactive lab processing does not publish or replace production assets.
 
-The image catalogue contains only **ESO VISTA, Horálek optical and NASA WISE**. Retired image candidates and experimental render banks are removed. Reconstruction starts with the unpainted density reference when no saved result is selected. SMC retains its density field for future work.
+The LMC image catalogue contains only **ESO VISTA, Horálek optical and NASA WISE**. Retired image candidates and experimental render banks are removed. Reconstruction starts with the unpainted density reference when no saved result is selected. SMC retains its density field for future work.
 
 Keep the shared density, star catalogue and calibration inputs: they reproduce the selected results. The historical SMASH target is regenerated from its pinned native observation; its recipe and coordinate receipts are star-preparation evidence, not selectable color sources. Research notes remain under `docs/research`; superseded render assets are recoverable from Git history before this cleanup.
 
