@@ -18,6 +18,8 @@
 
 - Three source pixels at the edge are withheld for this pointing/shape uncertainty. This is a refined pointing fit, not an independently controlled cartographic solution.
 
+- **Faithfulness status:** The Monochrome lens remains a coarse observation with an ellipsoid limb/terminator fit only. It is not promoted as feature-registered photography until independent surface control is available.
+
 - Phase-function and detailed material scattering are not recovered, so the result is an approximate reflectance presentation, not absolute calibrated albedo at zero phase.
 
 - Display orientation therefore retains the measured 2012 pose, explicitly frozen; it does not extrapolate a rotation phase to 2026.
