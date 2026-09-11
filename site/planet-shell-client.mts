@@ -1033,16 +1033,27 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
     searchReturn = state;
     settle("full");
   };
-  const closeSearch = (event: KeyboardEvent) => {
-    if (event.key !== "Escape" || searchReturn === null) return;
+  const leaveSearch = () => {
+    if (searchReturn === null) return;
     const previous = searchReturn;
     searchReturn = null;
     settle(previous);
+  };
+  const closeSearch = (event: KeyboardEvent) => {
+    if (event.key === "Escape") leaveSearch();
   };
   search.addEventListener("focus", openSearch, { signal });
   search.addEventListener("input", openSearch, { signal });
   search.addEventListener("keydown", closeSearch, { signal });
   sheet.addEventListener("keydown", closeSearch, { signal });
+  // Clearing the query leaves the results behind, exactly as Escape does.
+  documentTarget.querySelector(".planet-sidebar-search-clear")
+    ?.addEventListener("click", leaveSearch, { signal });
+  // The spacecraft card sits inside the sheet, so opening it has to show it.
+  const spacecraft = documentTarget.querySelector(".planet-spacecraft-toggle");
+  spacecraft?.addEventListener("click", () => {
+    if (mobile.matches && state === "peek" && spacecraft.getAttribute("aria-pressed") === "true") settle("half");
+  }, { signal });
   mobile.addEventListener("change", () => {
     gesture = null;
     sheet.classList.remove("is-dragging");
