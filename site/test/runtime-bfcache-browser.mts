@@ -1,3 +1,5 @@
+declare global {interface Window {__cacheEvidence:{token:string;shows:boolean[]};}}
+import { createTestPage } from './browser-observations.mts';
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
 import { OBJECTS } from "../objects.mts";
@@ -7,13 +9,13 @@ const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 // decision; do not present synthetic pageshow events as cache admission.
 const browser = await chromium.launch({ channel: "chrome", headless: true,
   ignoreDefaultArgs: ["--disable-back-forward-cache"] });
-const report = { browser: browser.version(), capturedAt: new Date().toISOString(), cases: [] };
+const report:{browser:string;capturedAt:string;cases:unknown[]} = { browser: browser.version(), capturedAt: new Date().toISOString(), cases: [] };
 try {
   for (const object of OBJECTS) {
     const context = await browser.newContext({ viewport: { width: 1200, height: 800 } });
     try {
-      const page = await context.newPage();
-      const errors = [];
+      const page = await createTestPage(context);
+      const errors:string[] = [];
       page.on("pageerror", (error) => errors.push(error.message));
       await page.addInitScript(() => {
         window.__cacheEvidence = { token: Math.random().toString(36), shows: [] };
@@ -21,7 +23,7 @@ try {
       });
       await page.goto(new URL(object.route, baseUrl).href);
       await page.waitForFunction(() => window.__cssEarth?.ready);
-      await page.locator('input[name="motion"]').evaluate((input) => { if (!input.checked) input.click(); });
+      await page.locator('input[name="motion"]').evaluate((input) => { if(!(input instanceof HTMLInputElement))throw new Error("Motion input is missing");if (!input.checked) input.click(); });
       const token = await page.evaluate(() => window.__cacheEvidence.token);
       // A same-origin document with no runtime is sufficient to test leaving
       // and returning. It is intercepted locally, not a fake catalog object.
@@ -31,11 +33,11 @@ try {
       await page.waitForFunction(() => window.__cssEarth?.ready);
       const state = await page.evaluate(() => ({
         ...window.__cacheEvidence,
-        lifecycle: window.__cssEarth.lifecycle,
-        motion: document.querySelector('input[name="motion"]').checked,
+        lifecycle: window.__cssearthTest.scene().lifecycle,
+        motion: window.__cssearthTest.input('input[name="motion"]').checked,
         sceneCount: document.querySelectorAll(".planet-stage").length,
         cameraCount: document.querySelectorAll(".polycss-camera").length,
-        notRestoredReasons: performance.getEntriesByType("navigation")[0]?.notRestoredReasons?.toJSON?.() ?? null,
+        notRestoredReasons: (()=>{const navigation=performance.getEntriesByType("navigation")[0];const reasons=navigation&&Reflect.get(navigation,"notRestoredReasons");if(!reasons||typeof reasons!=="object")return null;const toJSON=Reflect.get(reasons,"toJSON");return typeof toJSON==="function"?Reflect.apply(toJSON,reasons,[]):null;})(),
       }));
       const admitted = state.shows.at(-1) === true;
       assert.equal(state.sceneCount, 1);
