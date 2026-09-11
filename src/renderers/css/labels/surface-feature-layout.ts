@@ -47,6 +47,19 @@ export function passesZoomGate(zoom: number | undefined, minimumZoom: number, ma
 /** Project the prepared outline as screen chords. Only chords whose both ends face the eye
  * are kept, so the outline stops at the limb instead of wrapping behind the body. */
 export function projectSurfaceOutline(outline: SurfaceFeatureOutline, m: ArrayLike<number>, focalPixels: number, principal: readonly number[], pieces: number): (readonly [number, number, number, number])[] {
+  if (outline.kind === 'trace') {
+    const chords: (readonly [number, number, number, number])[] = [];
+    for (const path of outline.paths) {
+      let previous: readonly [number, number] | null = null;
+      for (const vertex of path) {
+        const projected = projectSurfaceFeature({ anchorUnits: vertex, normal: vertex, radiusUnits: 0 }, m, focalPixels, principal);
+        const point = projected && projected.facing > 0 ? [projected.x, projected.y] as const : null;
+        if (previous && point && chords.length < pieces) chords.push([previous[0], previous[1], point[0], point[1]]);
+        previous = point;
+      }
+    }
+    return chords;
+  }
   const vertices: (readonly [number, number, number])[] = [];
   if (outline.kind === 'circle') {
     for (let index = 0; index < pieces; index++) {
@@ -87,20 +100,20 @@ export interface AdmittedSurfaceLabel { readonly index: number; readonly rect: L
 /** Admit labels in prepared priority order, keeping last frame's labels ahead of newcomers
  * so a spinning body does not flicker at overlap boundaries. */
 export function admitSurfaceFeatureLabels(candidates: readonly SurfaceLabelCandidate[], policy: SurfaceFeaturePolicy,
-  viewport: { readonly width: number; readonly height: number }, previous: ReadonlySet<number>, blockers: readonly LabelScreenRect[] = []): { readonly accepted: readonly AdmittedSurfaceLabel[]; readonly eligible: number } {
+  viewport: { readonly width: number; readonly height: number }, previous: ReadonlySet<number>, blockers: readonly LabelScreenRect[] = [], pinned: number | null = null): { readonly accepted: readonly AdmittedSurfaceLabel[]; readonly eligible: number } {
   const halfWidth = viewport.width / 2, halfHeight = viewport.height / 2;
   const eligible: (SurfaceLabelCandidate & { rect: LabelScreenRect; rank: number })[] = [];
   candidates.forEach((candidate, rank) => {
     const { projected } = candidate;
     if (!(projected.facing > policy.limbCosine)) return;
-    if (!(projected.diameterPx >= policy.minimumDiameterPixels) && rank >= policy.alwaysVisibleCount) return;
+    if (!(projected.diameterPx >= policy.minimumDiameterPixels) && rank >= policy.alwaysVisibleCount && candidate.index !== pinned) return;
     if (!(candidate.width > 0) || !(candidate.height > 0)) return;
     const rect = surfaceLabelRect(candidate.kind, projected, candidate.width, candidate.height);
     if (rect.left < -halfWidth + VIEWPORT_MARGIN_PX || rect.right > halfWidth - VIEWPORT_MARGIN_PX ||
         rect.top < -halfHeight + VIEWPORT_MARGIN_PX || rect.bottom > halfHeight - VIEWPORT_MARGIN_PX) return;
     eligible.push({ ...candidate, rect, rank });
   });
-  const ordered = [...eligible.filter(item => previous.has(item.index)), ...eligible.filter(item => !previous.has(item.index))];
+  const ordered = [...eligible.filter(item => item.index === pinned), ...eligible.filter(item => item.index !== pinned && previous.has(item.index)), ...eligible.filter(item => item.index !== pinned && !previous.has(item.index))];
   const accepted: AdmittedSurfaceLabel[] = [], occupied: LabelScreenRect[] = [...blockers];
   for (const item of ordered) {
     if (accepted.length >= policy.maximumVisible) break;

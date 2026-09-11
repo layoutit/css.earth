@@ -5,16 +5,15 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { chromium, type Page } from "playwright";
 import runtimeDefinition from "../../../../src/planets/mercury/prepared/runtime.json" with { type: "json" };
 
-// Registration evidence for the Mercury nomenclature labels: the prepared
-// Caloris Planitia anchor must sit on the basin's bright plains in the
-// MESSENGER enhanced-colour lens, and the hovered caption and outline must
-// show the prepared IAU facts. Screenshots land under the ignored output directory.
+// Registration evidence for the Mercury nomenclature labels: selecting a feature
+// from the search rows must fly the camera over it, pin its label and caption, and
+// trace its outline (rim circle, extent box or mapped tectonic traces). Screenshots land under the ignored output directory.
 const base = (process.argv.slice(2).find(argument => /^https?:\/\//u.test(argument)) ?? "http://127.0.0.1:4210").replace(/\/$/u, "");
 const output = new URL(`../../../../output/playwright/mercury-features-${Date.now()}/`, import.meta.url);
 await mkdir(output, { recursive: true });
 const plan = required(runtimeDefinition.features);
-const catalog = JSON.parse(await readFile(new URL("../../../../public/scenes/mercury/mercury-features.json", import.meta.url), "utf8")) as { features: { id: string; name: string; longitudeDeg: number; latitudeDeg: number }[] };
-const landmarks = ["Caloris Planitia", "Rembrandt", "Beethoven", "Tolstoj", "Rachmaninoff"].map(name => required(catalog.features.find(feature => feature.name === name)));
+const catalog = JSON.parse(await readFile(new URL("../../../../public/scenes/mercury/mercury-features.json", import.meta.url), "utf8")) as { features: { id: string; name: string; longitudeDeg: number; latitudeDeg: number; outline: { kind: string } }[] };
+const landmarks = ["Caloris Planitia", "Rembrandt", "Enterprise Rupes", "Beethoven", "Rachmaninoff"].map(name => required(catalog.features.find(feature => feature.name === name)));
 const browser = await chromium.launch({ channel: process.env.PLAYWRIGHT_CHANNEL ?? "chrome", headless: true });
 const errors: string[] = [];
 const report: Record<string, unknown> = { base, plan: plan.catalog, landmarks: [] as unknown[] };
@@ -42,32 +41,27 @@ try {
   await page.screenshot({ path: new URL("last-zoom.png", output).pathname });
   assert.equal(await page.evaluate(() => window.__mercury?.selectLens("enhanced")), true);
   await page.waitForFunction(() => window.__mercury?.lens().id === "enhanced" && window.__mercury.lens().ready, null, { timeout: 30000 });
-  // Steer the camera over each landmark through the shell minimap (the same navigation a
-  // visitor uses), then return to the closest zoom where labels are admitted.
-  const minimap = page.locator(".planet-surface-minimap:visible").first();
+  // Reach each landmark the way a visitor does: type its name, pick the feature row, let the
+  // selection fly the camera over it. The pinned feature stays labelled with its outline.
+  await page.evaluate(zoom => window.__mercury?.camera.setState({ zoom }), runtimeDefinition.camera.defaultZoom);
   for (const landmark of landmarks) {
-    let box: Awaited<ReturnType<typeof labelBox>> = null;
-    for (const nudge of [0, -0.01, 0.01, -0.02, 0.02]) {
-      const map = required(await minimap.boundingBox());
-      const u = (((landmark.longitudeDeg - 180) % 360) + 360) % 360 / 360, v = (90 - landmark.latitudeDeg) / 180;
-      await page.mouse.click(map.x + u * map.width, map.y + Math.max(0.01, Math.min(0.99, v + nudge)) * map.height);
-      await page.waitForTimeout(300);
-      await page.evaluate(zoom => window.__mercury?.camera.setState({ zoom }), runtimeDefinition.camera.maximumZoom);
-      await page.waitForTimeout(500);
-      box = await labelBox(page, landmark.id);
-      if (box?.visible && Math.abs(box.x) < 400 && Math.abs(box.y) < 400) break;
-    }
-    assert.ok(box?.visible, `${landmark.name} label is admitted near the view centre`);
-    await page.mouse.move((box.left + box.right) / 2, (box.top + box.bottom) / 2);
-    await page.waitForFunction(id => { const tooltip = document.querySelector("[data-feature-tooltip]"); return tooltip instanceof HTMLElement && !tooltip.hidden && tooltip.dataset.featureTooltipFor === id; }, landmark.id, { timeout: 5000 });
+    const search = page.locator(".planet-sidebar-search");
+    await search.fill(landmark.name);
+    const row = page.locator(".planet-feature-results li:not([hidden]) button").first();
+    await row.waitFor({ timeout: 10000 });
+    assert.match(await row.innerText(), new RegExp(landmark.name.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&"), "u"));
+    await row.click();
+    await page.waitForFunction(id => { const state = window.__mercury?.runtime.surfaceFeatures(); return state?.pinned === id && state.flying === false; }, landmark.id, { timeout: 15000 });
+    await page.waitForTimeout(400);
+    const box = required(await labelBox(page, landmark.id));
+    assert.ok(box.visible && Math.abs(box.x) < 200 && Math.abs(box.y) < 200, `${landmark.name} label is pinned near the view centre after the flight`);
     const file = `${landmark.name.toLowerCase().replace(/[^a-z]+/gu, "-")}.png`;
     await page.screenshot({ path: new URL(file, output).pathname });
     const caption = await page.evaluate(() => ({ name: window.__cssearthTest.element("[data-feature-tooltip-name]").textContent, detail: window.__cssearthTest.element("[data-feature-tooltip-detail]").textContent }));
     const outline = await page.evaluate(() => [...document.querySelectorAll("[data-feature-outline-piece]")].filter(piece => getComputedStyle(piece).visibility !== "hidden").length);
     assert.equal(caption.name, landmark.name);
     assert.ok(outline > 0, `${landmark.name} outline is traced`);
-    (report.landmarks as unknown[]).push({ ...landmark, screenshot: file, screen: { x: box.x, y: box.y }, caption, outlinePieces: outline });
-    await page.mouse.move(4, 4);
+    (report.landmarks as unknown[]).push({ ...landmark, screenshot: file, screen: { x: box.x, y: box.y }, caption, outlinePieces: outline, outlineKind: landmark.outline.kind });
   }
   report.stats = await page.evaluate(() => window.__mercury?.runtime.surfaceFeatures());
   assert.deepEqual(errors, []);

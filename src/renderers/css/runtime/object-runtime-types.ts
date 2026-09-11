@@ -12,7 +12,8 @@ import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } f
 import type { PreparedResourceLease } from './prepared-resource-lease.js';
 import type { PerspectiveWorldContext } from '../navigation/perspective-dolly.js';
 import type { PreparedSurfaceHit } from '../navigation/prepared-surface-hit.js';
-import type { PreparedSurfaceFeaturePlan, SurfaceFeatureLayerRuntime } from '../labels/surface-feature-types.js';
+import type { PreparedSurfaceFeaturePlan, SurfaceFeatureLayerRuntime, SurfaceFeatureNavigationRuntime } from '../labels/surface-feature-types.js';
+export type { SurfaceFeatureNavigationRuntime };
 import type { SurfaceFeatureMountOptions } from '../labels/surface-feature-labels.js';
 
 export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition {

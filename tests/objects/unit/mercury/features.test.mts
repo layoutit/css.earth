@@ -30,7 +30,7 @@ test("the plan anchors labels to the spinning body mesh for the surface lenses o
   assert.deepEqual(plan.lensIds, ["normal", "enhanced", "topography"]);
   // The mesh is authored at 230 units and the camera's scene scale (0.02) renders it at the logical body diameter.
   assert.equal(plan.meshRadiusUnits, runtimeDefinition.camera.logicalBodyDiameter / 2 / runtimeDefinition.camera.sceneScale);
-  assert.deepEqual(plan.outline, { pieces: 64 });
+  assert.deepEqual(plan.outline, { pieces: 256 });
   assert.equal(plan.policy.minimumZoomShare, 1, "labels belong to the last zoom only");
 });
 
@@ -48,8 +48,10 @@ test("every feature is an IAU-adopted centre point on the body sphere with prepa
       const theta = Math.min(Math.PI / 2, feature.radiusUnits / plan.meshRadiusUnits);
       assert.ok(Math.abs(Math.hypot(...feature.outline.center) - plan.meshRadiusUnits * Math.cos(theta)) < 0.01 && Math.abs(Math.hypot(...feature.outline.east) - plan.meshRadiusUnits * Math.sin(theta)) < 0.01, feature.name);
       assert.equal(feature.kind, "point", feature.name);
-    } else {
+    } else if (feature.outline.kind === "box") {
       assert.ok(feature.outline.points.length === plan.outline.pieces && feature.outline.points.every(point => Math.abs(Math.hypot(...point) - plan.meshRadiusUnits) < 0.01), feature.name);
+    } else {
+      assert.ok(feature.outline.paths.reduce((sum, path) => sum + path.length, 0) <= plan.outline.pieces && feature.outline.paths.every(path => path.every(point => Math.abs(Math.hypot(...point) - plan.meshRadiusUnits) < 0.01)), feature.name);
     }
     assert.ok(feature.diameterKm <= previous, "prepared priority is diameter order");
     previous = feature.diameterKm;
@@ -69,6 +71,8 @@ test("landmark features keep their Gazetteer coordinates and label kinds", () =>
   assert.equal(rembrandt.outline.kind, "circle", "craters trace their rim diameter");
   assert.ok(Math.abs(rembrandt.longitudeDeg - 87.8657) < 1e-4 && Math.abs(rembrandt.latitudeDeg + 32.8916) < 1e-4);
   assert.equal(byName("Enterprise Rupes").kind, "linear");
+  assert.equal(byName("Enterprise Rupes").outline.kind, "trace", "rupes trace their mapped scarp segments");
+  assert.deepEqual({ traces: descriptor.traces.traces, matched: descriptor.traces.matched, unmatched: descriptor.traces.unmatched.length }, { traces: 18451, matched: 66, unmatched: 9 });
   assert.equal(byName("Hokusai").type, "Crater");
   assert.equal(catalog.features[0].name, "Borealis Planitia");
   assert.equal(catalog.source, "IAU/USGS Gazetteer of Planetary Nomenclature, Mercury centre points");

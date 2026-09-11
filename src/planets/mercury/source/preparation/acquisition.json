@@ -207,6 +207,14 @@
       ],
       "path": "features/MERCURY_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MERCURY_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/tectonic/global-tectonic-map.zip",
+      "url": "https://data.mendeley.com/public-files/datasets/p43b9wttpj/files/cb3689ee-0937-4010-973c-6a79b053341f/file_downloaded"
     }
   ]
 }
