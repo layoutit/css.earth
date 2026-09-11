@@ -7,7 +7,7 @@ import { OBJECTS } from "../objects.mts";
 import { objectClassificationLabel } from "../planet-search-objects.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { requireObjectControls } from "../scene-contract.mts";
-import { sceneSources } from "../scene-sources.mts";
+import { sceneSources, sceneSourceGroups } from "../scene-sources.mts";
 import PlanetObjectResults from "./PlanetObjectResults.astro";
 import MaterialSymbol from "./MaterialSymbol.astro";
 import GitHubIcon from "./GitHubIcon.astro";
@@ -59,6 +59,8 @@ const unavailableSystems = planetarySystems.unavailable.map(system => ({
   markerStyle: `--planet-size:${PREPARED_NAVIGATION_MARKERS[systemStar.id].presentation.size * system.radiusSolar}px;--planet-color:rgb(${temperatureColor(system.temperatureK).join(' ')})`,
 }));
 const sources = sceneSources(resources);
+// One footer entry per provider name, so a shared name is printed once.
+const sourceGroups = sceneSourceGroups(sources);
 const hasResources = sources.length > 0;
 const searchPlaceholder = `Search ${OBJECTS.length} celestial bodies...`;
 // Each pill types the plural classification query the search already understands.
@@ -96,6 +98,9 @@ const searchCategories = ([
           <MaterialSymbol name="search" />
         </span>
       </button>
+      <button class="planet-sidebar-search-clear" type="button" aria-label="Clear search" title="Clear search">
+        <MaterialSymbol name="close" />
+      </button>
     </div>
   </div>
   <div class="planet-search-categories" role="group" aria-label="Browse by type">
@@ -110,7 +115,6 @@ const searchCategories = ([
   <div class="planet-header-actions" role="group" aria-label="App actions">
     <a class="planet-header-link" href="https://github.com/layoutit/cssEarth" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
       <GitHubIcon />
-      <span>GitHub</span>
     </a>
     <button class="planet-header-action planet-settings-action" type="button"
       aria-label="Settings" title="Settings" aria-controls={`${objectId}-settings`} aria-pressed="false">
@@ -317,19 +321,27 @@ const searchCategories = ([
   hidden={!hasResources}
   aria-label={`${title.label} and shared universe sources`}
 >
-  {sources.map((resource, index) => (
+  {sourceGroups.map((group, index) => (
     <>
-      {index > 0 && <span class="planet-attribution-separator" aria-hidden="true">·</span>}
-      <a
-        class="planet-attribution-link"
-        href={resource.href}
-        title={`${resource.role}: ${resource.description}`}
-        aria-label={`${resource.role}: ${resource.label}`}
-        target="_blank"
-        rel="noreferrer"
-      >
-        <span class="planet-attribution-source">{resource.label}</span>
-      </a>
+      {index > 0 && <span class="planet-attribution-separator" aria-hidden="true">,</span>}
+      <span class="planet-attribution-group">
+        {group.provider && <span class="planet-attribution-provider">{group.provider}</span>}
+        {group.members.map((resource, member) => (
+          <>
+            {member > 0 && <span class="planet-attribution-group-separator" aria-hidden="true">,</span>}
+            <a
+              class="planet-attribution-link"
+              href={resource.href}
+              title={`${resource.role}: ${resource.description}`}
+              aria-label={`${resource.role}: ${resource.label}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="planet-attribution-source">{resource.part}</span>
+            </a>
+          </>
+        ))}
+      </span>
     </>
   ))}
 </nav>
