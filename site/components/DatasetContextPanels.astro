@@ -5,6 +5,7 @@ import { EXPLORATION, referenceUrl } from '../exploration-catalog.mts';
 import { SOURCE_CATALOGUE, SOURCES } from '../sources-catalog.mts';
 import PlanetCard from './PlanetCard.astro';
 import SelectedContent from './SelectedContent.astro';
+import PlanetBreadcrumbs from './PlanetBreadcrumbs.astro';
 const { objectId, lenses, provenance, deferMissionContent } = Astro.props;
 const contexts = deferMissionContent ? [] : (lenses?.controls ?? []).map(lens => ({ lens,
   ...datasetContext(objectId, lens.id, provenance, EXPLORATION.graph, EXPLORATION.catalog, SOURCE_CATALOGUE.usage, SOURCES),
@@ -16,13 +17,16 @@ const contexts = deferMissionContent ? [] : (lenses?.controls ?? []).map(lens =>
       const image = mission.imageId ? EXPLORATION.images[mission.imageId] : undefined;
       const emblem = mission.emblemId ? EXPLORATION.emblems[mission.emblemId] : undefined;
       const dates = mission.started ? `${mission.started.value}${mission.ended ? `–${mission.ended.value}` : ''}` : null;
-      return <PlanetCard class="planet-dataset-context-card" role="region" aria-label={mission.name.value}>
+      // Cards title missions by their short name; the full name leads the description.
+      const title = mission.shortName?.value ?? mission.name.value;
+      return <PlanetCard class="planet-dataset-context-card" role="region" aria-label={title}>
         <div class="planet-card-tabpanel">
           <article class="planet-spacecraft" data-mission={mission.id}>
-            <SelectedContent title={mission.name.value} description={mission.description.value} href={referenceUrl(mission.description)}>
+            <SelectedContent {title} lead={mission.shortName && mission.name.value} description={mission.description.value} href={referenceUrl(mission.description)}>
               <div slot="header" class:list={{ 'planet-spacecraft-preview': Boolean(image || emblem) }}>
                 <div class="planet-spacecraft-heading">
-                  <h3 class="planet-lens-details-title">{mission.name.value}</h3>
+                  <PlanetBreadcrumbs {objectId} includeObject />
+                  <h3 class="planet-lens-details-title">{title}</h3>
                   {dates && <span class="planet-selected-content-meta">{dates}</span>}
                 </div>
                 {image && <a class="planet-spacecraft-image-link" href={image.sourceUrl} target="_blank" rel="noreferrer" aria-label={`${mission.name.value} mission artwork — ${image.credit}`}>

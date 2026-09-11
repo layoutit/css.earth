@@ -7,9 +7,9 @@
   --shell-text-secondary: #b0b0b0;
   --shell-text-muted: #858585;
   --shell-background: #000;
-  --shell-surface: #0d0d0d;
-  --shell-surface-hover: #1a1a1a;
-  --shell-surface-selected: #151515;
+  --shell-surface: #141414;
+  --shell-surface-hover: #212121;
+  --shell-surface-selected: #1c1c1c;
   --shell-border: rgb(255 255 255 / 20%);
   --shell-border-hover: rgb(255 255 255 / 22%);
   --shell-divider: #151515;
