@@ -5,13 +5,25 @@ export const MOBILE_VIEWPORT_MAX = 820;
 export const DESKTOP_VIEWPORT_MIN = MOBILE_VIEWPORT_MAX + 1;
 export const MOBILE_VIEWPORT_QUERY =
   `(max-width: ${MOBILE_VIEWPORT_MAX}px), (orientation: portrait)`;
-export const MOBILE_TOUCH_ACTION = "pan-y";
+// Phones show the scene full screen, so one finger orbits and two fingers pinch.
+export const MOBILE_TOUCH_ACTION = "none";
 export { CANONICAL_PREPARED_IMAGE_DENSITY } from "../src/renderers/css/rendering/prepared-object-assets.ts";
 export const SKYBOX_DRAG_ENABLED = true;
 export const CENTER_SELECTION_DURATION_SECONDS = 0.35;
 export const WHEEL_ZOOM_SPEED_MULTIPLIER = 4;
 export const WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER = 1;
 export const WHEEL_ZOOM_USE_SCROLL_DISTANCE = true;
+
+// Phones present information in a bottom sheet over the scene. Snap heights
+// live in shell-layout.css; these values shape the drag between them.
+export const MOBILE_SHEET_POLICY = Object.freeze({
+  states: Object.freeze(["peek", "half", "full"] as const),
+  dragSlopPixels: 6,
+  flingPixelsPerMillisecond: 0.35,
+  flingFreshnessMilliseconds: 80,
+  overdragPixels: 24,
+  overdragResistance: 0.18,
+});
 
 export const CONTEXT_ANNOTATION_PRIORITY = Object.freeze({
   planet: 3,
@@ -89,7 +101,8 @@ export const bindResponsiveOrbitPolicy: RuntimePolicy["bindResponsiveOrbitPolicy
   let destroyed = false;
   const sync = () => {
     if (destroyed) return;
-    controls.update({ wheel: !mediaQuery.matches });
+    // No layout scrolls the page over the scene any more, so wheels always zoom.
+    controls.update({ wheel: true });
     if (mediaQuery.matches) {
       inputSurface.style.touchAction = MOBILE_TOUCH_ACTION;
     } else {
