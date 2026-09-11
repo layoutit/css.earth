@@ -18,7 +18,7 @@ function delay(ms: number,signal: AbortSignal){
 export function createApiImageTransport({fetchImage=fetch,wait=delay}: { fetchImage?: typeof fetch; wait?: typeof delay }={}) {
   const entries=new Map<string, ImageEntry>();
   let requests=0,retries=0,sharedAcquisitions=0,activeRequests=0,receivedBytes=0,destroyed=false;
-  async function load(entry: ImageEntry,page: PreparedPage): Promise<string>{
+  async function load(entry: ImageEntry,page: Pick<PreparedPage,"rasterSource"|"url"|"width"|"height">): Promise<string>{
     for(let attempt=0;;attempt++){
       let response,retry=false,retryMs=attempt===0?500:1500;
       try{
@@ -57,7 +57,7 @@ export function createApiImageTransport({fetchImage=fetch,wait=delay}: { fetchIm
     if(entries.get(key)===entry)entries.delete(key);
   }
   return {
-    acquire(page: PreparedPage){
+    acquire(page: Pick<PreparedPage,"rasterSource"|"url"|"width"|"height">){
       if(destroyed||!(isPreparedWmsImage(page)||isPreparedWmtsImage(page)))throw new Error("Invalid prepared imagery API request.");
       const key=page.url;
       let entry=entries.get(key);

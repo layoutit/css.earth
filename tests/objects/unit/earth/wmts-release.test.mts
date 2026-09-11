@@ -1,3 +1,4 @@
+import {parseReleaseFile} from '../../../../tools/objects/geographic-pages/source-records.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createHash } from "node:crypto";
@@ -8,12 +9,12 @@ import { releaseFiles, verifyLocalPack, publishedPackMatches, WMTS_CACHE_CONTROL
 import { verifyWmtsListing } from "../../../../tools/objects/geographic-pages/operations/wmts-s3-publish.mts";
 
 const bytes = Buffer.from("verified prepared pack");
-const file = { filename: "8-86-154.pack", bytes: bytes.length,
-  sha256: createHash("sha256").update(bytes).digest("hex") };
+const file = parseReleaseFile({ filename: "8-86-154.pack", bytes: bytes.length,
+  sha256: createHash("sha256").update(bytes).digest("hex") });
 const release = { schema: "cssearth-global-wmts-release@1", version: "1111111111111111", bytes: bytes.length, files: [file] };
 
 test("S3 listing accepts rclone hash names and rejects incomplete or conflicting releases", () => {
-  const asset = { ...file, md5: createHash("md5").update(bytes).digest("hex") };
+  const asset = { ...file, path:join(tmpdir(),file.filename), md5: createHash("md5").update(bytes).digest("hex") };
   const entry = { Path: asset.filename, Size: asset.bytes, Hashes: { md5: asset.md5 } };
   verifyWmtsListing([asset], [entry]);
   verifyWmtsListing([asset], [{ ...entry, Hashes: { MD5: asset.md5 } }]);
@@ -37,9 +38,9 @@ test("publication verifies exact local bytes and refuses conflicting immutable o
   try {
     await writeFile(join(dir, file.filename), bytes);
     const asset = await verifyLocalPack(dir, file);
-    const headers = { "content-length": file.bytes, etag: `"${asset.md5}"`,
+    const headers = { "content-length": String(file.bytes), etag: `"${asset.md5}"`,
       "content-type": "application/octet-stream", "cache-control": WMTS_CACHE_CONTROL };
-    const matches = (status, changes = {}) => publishedPackMatches("https://example.com/pack", asset,
+    const matches = (status: number, changes = {}) => publishedPackMatches("https://example.com/pack", asset,
       { fetcher: async () => new Response(null, { status, headers: { ...headers, ...changes } }) });
     assert.equal(await matches(404), false);
     assert.equal(await matches(200), true);

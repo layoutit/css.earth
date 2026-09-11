@@ -1,3 +1,6 @@
+import {shape,dictionary,text} from "../../../../tools/objects/geographic-pages/source-records.mts";
+import {validateSourceManifest, type SourceEntry} from '../../../../src/platform/source-manifest.mts';
+import {required} from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test, { after, before } from "node:test";
 import { mkdtemp, mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";
@@ -10,12 +13,15 @@ import { prepareWmtsCoverage } from "../../../../tools/objects/geographic-pages/
 import { cityGeographicFrame } from "../../../../tools/objects/geographic-pages/page-geometry.mts";
 import { readWorldCoverCatalog, WORLDCOVER_BUCKET, WORLDCOVER_PREFIX } from "../../../../tools/objects/geographic-pages/worldcover-catalog.mts";
 import { coverageLookup, hashBytes, prepareRegionPack, prepareTreeSection, tileKey } from "../../../../tools/objects/geographic-pages/prepare-wmts-tree.mts";
+import type { WmtsCoverage } from "../../../../tools/objects/geographic-pages/contracts.mts";
 
 const version = "1111111111111111", dataset = "esa-worldcover-rgbnir-2021-v200";
 const sourcePath = "src/planets/earth/source/", outputPath = "src/planets/earth/prepared/pages.json";
-const records = new Map(), temporary = [];
-let release, sourceManifest;
-const list = level => {
+const records = new Map<string,Uint8Array>(), temporary: string[] = [];
+type ReleaseFile={filename:string;bytes:number;sha256:string;tiles:number;leaves:number};
+let release:{schema:string;version:string;dataset:string;regions:number;tiles:number;leaves:number;bytes:number;files:ReleaseFile[];qualification:string;sourceSha256?:string};
+let sourceManifest:ReturnType<typeof validateSourceManifest>;
+const list = (level: WmtsCoverage) => {
   const result = [];
   for (const band of level.bands) for (let y = band.y0; y < band.y1; y++)
     for (const [a, b] of band.ranges) for (let x = a; x < b; x++) result.push({ zoom: level.zoom, x, y });
@@ -23,10 +29,10 @@ const list = level => {
 };
 
 before(async () => {
-  const catalog = await readWorldCoverCatalog({directory:new URL("../../../../src/planets/earth/source/city/",import.meta.url)}), entry = catalog.entries.get("S35W059");
+  const catalog = await readWorldCoverCatalog({directory:new URL("../../../../src/planets/earth/source/city/",import.meta.url)}), entry = required(catalog.entries.get("S35W059"));
   const levels = Array.from({ length: 10 }, (_, i) => prepareWmtsCoverage([entry], i + 5, { includePolar: true }));
-  const hasTile = coverageLookup(levels), regions = new Map(), files = [];
-  const add = (address, prepared) => {
+  const hasTile = coverageLookup(levels), regions = new Map<string,ReturnType<typeof prepareRegionPack>["root"]>(), files: ReleaseFile[] = [];
+  const add = (address: {zoom:number;x:number;y:number}, prepared: {bytes:Uint8Array;tiles:number;leaves:number}) => {
     const filename = `${address.zoom}-${address.x}-${address.y}.pack`;
     records.set(`.local/wmts-global/${version}/${filename}`, prepared.bytes);
     files.push({ filename, bytes: prepared.bytes.length, sha256: hashBytes(prepared.bytes), tiles: prepared.tiles, leaves: prepared.leaves });
@@ -36,7 +42,7 @@ before(async () => {
     regions.set(tileKey(address), pack.root); add(address, pack);
   }
   for (const address of list(levels[0])) add(address,
-    prepareTreeSection(address, 7, scene, hasTile, child => regions.get(tileKey(child)), dataset));
+    prepareTreeSection(address, 7, scene, hasTile, child => required(regions.get(tileKey(child))), dataset));
   release = { schema: "cssearth-global-wmts-release@1", version, dataset,
     regions: regions.size, tiles: files.reduce((sum, file) => sum + file.tiles, 0),
     leaves: files.reduce((sum, file) => sum + file.leaves, 0), bytes: files.reduce((sum, file) => sum + file.bytes, 0), files,
@@ -51,9 +57,9 @@ before(async () => {
   records.set(sourcePath + "city/worldcover-rgbnir-2021.json.gz", encoded);
   records.set(sourcePath + "city/manifest.json", await readFile(new URL("../../../../src/planets/earth/source/city/manifest.json", import.meta.url)));
   records.set(sourcePath + "preparation/paged-ellipsoid.json", await readFile(new URL("../../../../src/planets/earth/source/preparation/paged-ellipsoid.json", import.meta.url)));
-  const actual = JSON.parse(await readFile(new URL("../../../../src/planets/earth/source/manifest.json", import.meta.url)));
-  const pinned = values => values.filter(value => records.has(sourcePath + value.path)).map(value => ({ ...value,
-    expectedBytes: records.get(sourcePath + value.path).length, expectedSha256: hashBytes(records.get(sourcePath + value.path)) }));
+  const actual = validateSourceManifest('earth',JSON.parse((await readFile(new URL("../../../../src/planets/earth/source/manifest.json", import.meta.url))).toString('utf8')));
+  const pinned = <T extends SourceEntry,>(values: readonly T[]) => values.filter(value => records.has(sourcePath + value.path)).map(value => ({ ...value,
+    expectedBytes: required(records.get(sourcePath + value.path)).length, expectedSha256: hashBytes(required(records.get(sourcePath + value.path))) }));
   sourceManifest = { ...actual, inputs: pinned(actual.inputs), generatedIntermediates: [], documents: pinned(actual.documents) };
   records.set(sourcePath + "manifest.json", Buffer.from(JSON.stringify(sourceManifest)));
   records.set(outputPath, Buffer.from("previous runtime binding\n"));
@@ -66,9 +72,9 @@ async function fixture() {
   }
   return root;
 }
-async function repin(root, value) {
+async function repin(root: string, value: unknown) {
   const bytes = Buffer.from(JSON.stringify(value)), manifest = structuredClone(sourceManifest);
-  Object.assign(manifest.inputs.find(entry => entry.path === "city/wmts-release.json"),
+  Object.assign(required(manifest.inputs.find(entry => entry.path === "city/wmts-release.json")),
     { expectedBytes: bytes.length, expectedSha256: hashBytes(bytes) });
   await writeFile(resolve(root, sourcePath, "city/wmts-release.json"), bytes);
   await writeFile(resolve(root, sourcePath, "manifest.json"), JSON.stringify(manifest));
@@ -78,11 +84,12 @@ test("ordinary preparation verifies every pinned pack and reproduces runtime bin
   const projectRoot = await fixture(), first = await preparePinnedGlobalWmts({objectId:"earth",scene, projectRoot });
   assert.equal(first.report.packs, release.files.length); assert.equal(first.report.bytes, release.bytes);
   assert.equal(first.report.geometry, "verified-pinned-input-not-regenerated");
-  assert.equal(first.plan.geometryVersion, version); assert.equal(first.plan.roots.length, release.files.filter(f => f.filename.startsWith("5-")).length);
+  assert.ok(first.plan);assert.ok("jsonSource" in first);
+  assert.equal(first.plan.geometryVersion, version); assert.equal(first.plan.roots.length, release.files.filter((f: { filename: string; }) => f.filename.startsWith("5-")).length);
   assert.equal(await readFile(resolve(projectRoot, outputPath), "utf8"), first.jsonSource);
   await rm(resolve(projectRoot, outputPath));
   const second = await preparePinnedGlobalWmts({objectId:"earth",scene, projectRoot });
-  assert.equal(second.jsonSource, first.jsonSource); assert.deepEqual(second.report, first.report);
+  assert.ok("jsonSource" in second);assert.equal(second.jsonSource, first.jsonSource); assert.deepEqual(second.report, first.report);
   assert.deepEqual(await readFile(resolve(projectRoot, sourcePath, "city/wmts-release.json")), records.get(sourcePath + "city/wmts-release.json"));
   const verified = await preparePinnedGlobalWmts({objectId:"earth",scene, projectRoot, verifyOnly: true });
   assert.equal(verified.plan, null); assert.equal(verified.report.runtimeBinding, "not-written");
@@ -132,7 +139,7 @@ test("changed prepared face geometry cannot acquire the identity of the pinned r
   for (const band of changed.body.bands) for (const leaf of band.leaves) {
     const matrix = cityGeographicFrame(leaf).split(",").map(Number); matrix[12] += 10; leaf.geographicFrameMatrix = matrix.join(",");
   }
-  await assert.rejects(preparePinnedGlobalWmts({objectId:"earth",scene, projectRoot, scene: changed }), /faces do not match/);
+  await assert.rejects(preparePinnedGlobalWmts({objectId:"earth", projectRoot, scene: changed }), /faces do not match/);
   assert.deepEqual(await readFile(resolve(projectRoot, outputPath)), records.get(outputPath));
 });
 
@@ -145,6 +152,6 @@ test("ordinary preparation binds the acquired release while explicit authoring r
   const context=createOperationContext({objectId:"earth"}),inputs=geographicPreparationInputs(context);
   for (const path of inputs) await readFile(context.projectUrl(path));
   assert.ok(inputs.includes("src/platform/prepared-map/prepared-block.mts"));
-  const pkg = JSON.parse(await readFile(new URL("../../../../package.json", import.meta.url)));
+  const pkg = shape({scripts:dictionary(text)})(JSON.parse((await readFile(new URL("../../../../package.json", import.meta.url))).toString('utf8')));
   assert.equal(pkg.scripts["prepare:earth-global"], "node tools/objects/geographic-pages/operations/prepare-global-wmts.mts --object=earth && node tools/objects/geographic-pages/operations/integrate-global-wmts.mts --object=earth --latest");
 });

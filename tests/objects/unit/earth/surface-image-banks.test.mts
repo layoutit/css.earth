@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { runtimeDefinition } from "../../unit/earth/prepared-fixture.mts";
@@ -5,30 +6,30 @@ import { earthSurfaceBankInventory } from "../../unit/earth/prepared-fixture.mts
 const banks = earthSurfaceBankInventory();
 import { requireEarthSurfacePages } from "../../unit/earth/prepared-fixture.mts";
 import { preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
-const pages = f => f.residency.stats().pools.find(pool => pool.id === "pages");
+const pages = (f: Awaited<ReturnType<typeof preparedSelectionFixture>>) => required(f.residency.stats().pools.find(pool => pool.id === "pages"));
 const pageUrls = new Set(runtimeDefinition.assets.entries.filter(entry => entry.pool === "pages").map(entry => entry.url));
-const pendingPages = f => f.jobs.filter(job => !job.done && pageUrls.has(job.url) && job.image.src);
-const withinBudget = f => {
+const pendingPages = (f: Awaited<ReturnType<typeof preparedSelectionFixture>>) => f.jobs.filter(job => !job.done && pageUrls.has(job.url) && job.image.src);
+const withinBudget = (f: Awaited<ReturnType<typeof preparedSelectionFixture>>) => {
   const stats = pages(f);
   assert.ok(stats.resident <= stats.capacity);
-  assert.ok(stats.decodedBytes <= stats.maximumDecodedBytes);
+  assert.ok(required(stats.decodedBytes) <= required(stats.maximumDecodedBytes));
   assert.ok(stats.nativeSlots <= stats.capacity);
-  assert.ok(f.residency.stats().images.pools.find(pool => pool.id === "pages").active <= 2);
+  assert.ok(required(f.residency.stats().images.pools.find(pool => pool.id === "pages")).active <= 2);
 };
-const selectedPalette = f => {
-  const plan = f.selection.state().plan;
-  return banks.find(bank => bank.id === f.selection.state().committed.lensId).urls.map(url => {
-    const source = runtimeDefinition.assets.entries.find(entry => entry.url === url);
-    return `url("${f.residency.resources.url(plan.textureResources[source.key])}")`;
+const selectedPalette = (f: Awaited<ReturnType<typeof preparedSelectionFixture>>) => {
+  const plan = required(f.selection.state().plan);
+  return required(banks.find(bank => bank.id === required(f.selection.state().committed).lensId)).urls.map(url => {
+    const source = required(runtimeDefinition.assets.entries.find(entry => entry.url === url));
+    return `url("${f.residency.resources.url(required(plan.textureResources)[source.key])}")`;
   });
 };
-const surface = f => f.stage.querySelectorAll("*").find(node => node.classList.contains("earth-body") && !node.classList.contains("earth-body-polar"));
-const cutaway = f => f.stage.querySelectorAll("*").find(node => node.classList.contains("earth-cutaway-body") && !node.classList.contains("earth-cutaway-body-polar"));
-const palette = node => Array.from({ length: 7 }, (_, i) => node.style.getPropertyValue(`--earth-surface-page-${i}`));
+const surface = (f: Awaited<ReturnType<typeof preparedSelectionFixture>>) => required(f.stage.querySelectorAll("*").find(node => node.classList.contains("earth-body") && !node.classList.contains("earth-body-polar")));
+const cutaway = (f: Awaited<ReturnType<typeof preparedSelectionFixture>>) => required(f.stage.querySelectorAll("*").find(node => node.classList.contains("earth-cutaway-body") && !node.classList.contains("earth-cutaway-body-polar")));
+const palette = (node:ReturnType<typeof surface>) => Array.from({ length: 7 }, (_, i) => node.style.getPropertyValue(`--earth-surface-page-${i}`));
 
 test("Earth's prepared lenses have complete banks and share only complete source banks", () => {
   for (const value of [undefined, [], "/scenes/earth/a.webp", ["/scenes/earth/a.webp", "/scenes/earth/a.webp"]]) {
-    assert.throws(() => requireEarthSurfacePages(value), /prepared page URLs/);
+    assert.throws(() => Reflect.apply(requireEarthSurfacePages,undefined,[value]), /prepared page URLs/);
   }
   assert.ok(banks.every(bank => bank.urls.length === 7));
   for (const bank of banks) {
@@ -79,7 +80,7 @@ test("Earth cancelled never-ending pages free both slots before a replacement de
     assert.equal(pendingPages(f).length, 2); await f.settle(); assert.equal(await next, true);
     retired[0].resolve(); retired[1].reject(new Error("late retired page")); await f.flush();
     withinBudget(f); assert.equal(pages(f).pending, 0);
-    assert.equal(f.selection.state().committed.lensId, "night-lights"); assert.deepEqual(f.errors, []);
+    assert.equal(required(f.selection.state().committed).lensId, "night-lights"); assert.deepEqual(f.errors, []);
   } finally { f.restore(); }
 });
 
@@ -90,7 +91,7 @@ test("Earth A/B/A supersession cannot release or publish over the latest page le
     const b = f.selection.dispatch({ kind: "lens", id: "night-lights" }); await f.flush();
     const winner = f.selection.dispatch({ kind: "lens", id: "topography" }); await f.flush();
     await f.settle(); assert.deepEqual(await Promise.all([a, b, winner]), [false, false, true]);
-    assert.equal(f.selection.state().committed.lensId, "topography"); withinBudget(f);
+    assert.equal(required(f.selection.state().committed).lensId, "topography"); withinBudget(f);
     assert.deepEqual(f.buttons.filter(button => button["aria-pressed"] === "true").map(button => button.value), ["topography"]);
   } finally { f.restore(); }
 });

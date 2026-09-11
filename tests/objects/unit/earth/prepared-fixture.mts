@@ -1,3 +1,5 @@
+import {parseEarthScene,parseEarthLenses,parseEarthPlaces,parseEarthTitle,parseEarthPanel,parseEarthPageMetadata} from './prepared-schema.mts';
+import {validatePreparedCubicSky} from '../../../../src/platform/cubic-sky-contract.mts';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
@@ -102,18 +104,19 @@ function checkedControls(value: unknown) {
   return value;
 }
 export const objectControls = checkedControls(await read('prepared/controls.json'));
-export const PREPARED_EARTH_SCENE = await read('prepared/scene.json');
-export const PREPARED_EARTH_LENSES = await read('prepared/lenses.json');
+export const PREPARED_EARTH_SCENE = parseEarthScene(await read('prepared/scene.json'));
+export const PREPARED_EARTH_LENSES = parseEarthLenses(await read('prepared/lenses.json'));
 export const PREPARED_EARTH_SKY_SUN = validateDirectionalSunPlan(await read('prepared/sun.json'));
-export const PREPARED_EARTH_STARFIELD = await read('prepared/sky.json');
-export const PREPARED_EARTH_NOISE = await read('prepared/noise.json');
-export const PREPARED_EARTH_CITY_PAGES = await read('prepared/pages.json');
-export const PREPARED_EARTH_PLACES = await read('prepared/places.json');
+export const PREPARED_EARTH_STARFIELD = validatePreparedCubicSky(await read('prepared/sky.json'),{requireSun:false});
+export const PREPARED_EARTH_NOISE = parseEarthPageMetadata(await read('prepared/noise.json'));
+export const PREPARED_EARTH_CITY_PAGES = parseEarthPageMetadata(await read('prepared/pages.json'));
+export const PREPARED_EARTH_PLACES = parseEarthPlaces(await read('prepared/places.json'));
 const preparedContent = await read('prepared/content.json');
 const sourceContent = await read('source/content/object.json');
-export const PREPARED_EARTH_TITLE = requireRecord(preparedContent.title, 'Earth prepared title');
-export const PREPARED_EARTH_PANEL = requireRecord(sourceContent.panel, 'Earth source panel');
-const config = parsePagedProfile(await read('source/preparation/paged-ellipsoid.json'));
+export const PREPARED_EARTH_TITLE = parseEarthTitle(preparedContent.title);
+export const PREPARED_EARTH_PANEL = parseEarthPanel(sourceContent.panel);
+export const earthPreparationConfig = parsePagedProfile(await read('source/preparation/paged-ellipsoid.json'));
+const config=earthPreparationConfig;
 const source = await createSourceManifest({ planetId: 'earth', planetName: 'Earth', sourceRoot: sourceDirectory });
 export const earthSourceManifest = () => source.manifest;
 export const verifyEarthSourceManifest = source.verify;
