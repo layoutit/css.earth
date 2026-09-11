@@ -35,6 +35,11 @@ To build all routes for production, run `pnpm setup:assets`, `pnpm build`, then
 
 ## Checks
 
+`pnpm check:ci` runs the command steps from the GitHub workflow locally using
+Node 22 and the pinned pnpm version. It installs dependencies, prepares required
+inputs, and stops at the first failed check. `pnpm check:ci --list` shows the
+exact commands. It uses your current checkout; GitHub still verifies Ubuntu.
+
 `pnpm typecheck` checks the shared packages, renderer, preparation, shell, tooling,
 tests, executable fixtures and capture scripts. `pnpm check:typescript-ownership` rejects new
 authored JavaScript and stale migration entries. See the
