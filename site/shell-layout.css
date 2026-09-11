@@ -597,85 +597,187 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   body[data-sidebar-collapsed="true"] .planet-viewport { left: 0; }
 }
 
-/* Preserve the scene-above-information flow on phones and portrait tablets. */
+/* Phones and portrait tablets use the map-app pattern: the scene fills the
+   screen, search and filters float at the top, and information rises from a
+   bottom sheet that snaps between peek, half and full. Registered lengths let
+   the sheet controller read the resolved snap heights. */
+@property --sheet-peek { syntax: "<length>"; inherits: true; initial-value: 0px; }
+@property --sheet-half { syntax: "<length>"; inherits: true; initial-value: 0px; }
+
 @media (max-width: 820px), (orientation: portrait) {
+  body[data-object-shell] {
+    --explorer-category-height: 36px;
+    --explorer-safe-top: env(safe-area-inset-top, 0px);
+    --explorer-safe-bottom: env(safe-area-inset-bottom, 0px);
+    --explorer-header-top: calc(8px + var(--explorer-safe-top));
+    --explorer-header-row-gap: 8px;
+    --explorer-header-height: calc(var(--explorer-search-height) + var(--explorer-header-row-gap) + var(--explorer-category-height));
+    --explorer-float-shadow: 0 1px 4px rgb(0 0 0 / 55%);
+    /* The open sheet stops below the filters, so they stay in reach while searching. */
+    --sheet-height: calc(100dvh - var(--explorer-controls-top));
+    --sheet-peek: calc(152px + var(--explorer-safe-bottom));
+    --sheet-half: 50dvh;
+    --sheet-radius: 16px;
+    --sheet-shadow: 0 -1px 0 rgb(255 255 255 / 8%), 0 -8px 24px rgb(0 0 0 / 55%);
+    /* Map chrome rides just above the peeking sheet. */
+    --sheet-chrome-bottom: calc(var(--sheet-peek) + 8px);
+  }
+
   .explorer-shell-header {
-    position: absolute;
-    inset: var(--explorer-header-top) auto auto 0;
+    position: fixed;
+    inset: var(--explorer-header-top) 0 auto;
     display: grid;
-    grid-template-columns: max-content minmax(0, 1fr) max-content;
-    grid-template-rows: var(--explorer-search-height) var(--explorer-search-height) var(--explorer-category-height);
+    grid-template-columns: minmax(0, 1fr) var(--explorer-search-height);
+    grid-template-rows: var(--explorer-search-height) var(--explorer-category-height) var(--explorer-search-height);
+    gap: var(--explorer-header-row-gap);
     box-sizing: border-box;
     width: 100vw;
-    padding: 0 8px 8px var(--explorer-panel-left);
-    gap: var(--explorer-header-row-gap) 8px;
-    height: var(--explorer-header-height);
+    height: auto;
+    padding: 0 var(--explorer-panel-left);
   }
 
-  .explorer-brand-row { grid-row: 1; grid-column: 1; }
-  .planet-header-actions { grid-row: 1; grid-column: 3; }
-  .planet-search-toolbar {
+  .planet-search-toolbar { grid-row: 1; grid-column: 1 / -1; }
+  .explorer-shell-header .planet-sidebar-search-card {
+    padding-inline-end: var(--explorer-search-height);
+    box-shadow: var(--explorer-float-shadow);
+  }
+
+  /* Settings takes the avatar slot at the end of the search pill; the version
+     link below already leads to GitHub. */
+  .planet-header-actions { display: contents; }
+  .planet-header-link { display: none; }
+  .planet-settings-action {
+    /* Paint over the positioned search field that shares its row. */
+    position: relative;
+    z-index: 1;
+    grid-row: 1;
+    grid-column: 2;
+    justify-self: end;
+    width: 40px;
+    height: 40px;
+    margin-inline-end: 4px;
+    background: transparent;
+  }
+
+  /* Filters scroll edge to edge; the padding keeps their shadows unclipped. */
+  .planet-search-categories {
     grid-row: 2;
     grid-column: 1 / -1;
+    margin: -4px calc(-1 * var(--explorer-panel-left));
+    padding: 4px var(--explorer-panel-left);
   }
-  .planet-search-categories {
+  .planet-search-category { padding-inline: 10px 14px; box-shadow: var(--explorer-float-shadow); }
+
+  /* Spacecraft opens like a map's layers button. */
+  .planet-spacecraft-toggle {
     grid-row: 3;
-    grid-column: 1 / -1;
+    grid-column: 2;
+    width: var(--explorer-search-height);
+    height: var(--explorer-search-height);
+    box-shadow: var(--explorer-float-shadow);
   }
-  html:root,
-  body[data-object-shell] {
+  .planet-spacecraft-toggle:disabled { visibility: hidden; }
+
+  /* The wordmark sits over the scene like a map watermark. */
+  .explorer-brand-row {
+    --explorer-wordmark-size: 22px;
+    position: fixed;
+    left: var(--explorer-panel-left);
+    bottom: calc(var(--sheet-chrome-bottom) + var(--explorer-status-height) + 4px);
     height: auto;
-    min-height: 100%;
-    overflow: hidden auto;
+    padding: 0;
   }
 
-  body[data-object-shell] {
-    --explorer-header-height: calc(2 * var(--explorer-search-height) + var(--explorer-category-height) + 2 * var(--explorer-header-row-gap) + 8px);
-    --explorer-footer-height: calc(2 * var(--explorer-status-height));
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 0;
-  }
-
-  /* Body packages may emit site.css later; keep this responsive override stronger. */
-  body[data-object-shell] .planet-viewport {
-    position: relative;
-    inset: auto;
-    order: 0;
-    /* The header overlays the top of the scene. */
-    flex: 0 0 calc(35svh + var(--explorer-controls-top));
-    width: 100%;
-    height: calc(35svh + var(--explorer-controls-top));
-    margin-top: 0;
+  .explorer-brand-row,
+  .planet-spacecraft-toggle { transition: opacity 160ms ease, visibility 0s; }
+  body:is([data-sheet="half"], [data-sheet="full"]) .explorer-brand-row,
+  body[data-sheet="full"] .planet-spacecraft-toggle {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 160ms ease, visibility 0s 160ms;
   }
 
   .planet-sidebar {
-    position: relative;
-    z-index: 100;
-    inset: auto;
-    order: 1;
-    width: calc(100% - var(--explorer-panel-left) - 8px);
-    height: auto;
+    position: fixed;
+    z-index: 200;
+    inset: auto 0 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: var(--sheet-height);
     max-height: none;
-    margin: 0 8px 0 var(--explorer-panel-left);
-    padding: 0;
+    margin: 0;
+    padding: 0 0 var(--explorer-safe-bottom);
     overflow: hidden;
     border: 0;
-    border-radius: var(--explorer-card-radius);
-    background: var(--shell-surface);
+    border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
+    background: var(--explorer-panel-background);
+    box-shadow: var(--sheet-shadow);
+    transform: translate3d(0, calc(var(--sheet-height) - var(--sheet-peek)), 0);
+    transition: transform var(--sheet-snap-duration, 280ms) cubic-bezier(.2, .9, .3, 1);
+    /* Vertical drags move the sheet; sideways swipes stay with carousels. */
+    touch-action: pan-x;
+    will-change: transform;
+  }
+  body[data-sheet="half"] .planet-sidebar {
+    transform: translate3d(0, calc(var(--sheet-height) - var(--sheet-half)), 0);
+  }
+  body[data-sheet="full"] .planet-sidebar {
+    transform: none;
+    overflow-y: auto;
+    touch-action: pan-y;
+  }
+  .planet-sidebar.is-dragging { transition: none; }
+  .planet-sidebar .planet-card { border-radius: 0; }
+
+  /* Scale and altitude sit above the sheet, like a map's scale bar. */
+  body[data-object-shell] .planet-footer {
+    z-index: 150;
+    inset: auto var(--explorer-panel-left) var(--sheet-chrome-bottom);
+    height: var(--explorer-status-height);
+    background: transparent;
+    pointer-events: none;
+  }
+  body[data-object-shell] .planet-attribution-footer { display: none; }
+
+  /* A phone on its side has little height: the filters join the search row and
+     the sheet peeks less, so the scene keeps a usable band. */
+  @media (max-height: 480px) {
+    body[data-object-shell] {
+      --explorer-header-height: var(--explorer-search-height);
+      --sheet-peek: calc(104px + var(--explorer-safe-bottom));
+      --sheet-half: 62dvh;
+    }
+
+    .explorer-shell-header {
+      grid-template-columns: minmax(160px, 1fr) var(--explorer-search-height) minmax(0, 1.1fr);
+      grid-template-rows: var(--explorer-search-height) var(--explorer-search-height);
+    }
+
+    .planet-search-toolbar { grid-column: 1; }
+    .planet-search-categories {
+      grid-row: 1;
+      grid-column: 3;
+      margin-inline: 0 calc(-1 * var(--explorer-panel-left));
+      padding-inline: 0 var(--explorer-panel-left);
+    }
+    .planet-spacecraft-toggle { grid-row: 2; }
   }
 
+  /* Settings opens as a secondary sheet over the information. The spacecraft
+     card needs no rule here: phones move it into the sheet's own flow. */
   .planet-dataset-context-dock > .planet-settings-panel {
-    order: 1;
-    width: calc(100% - var(--explorer-panel-left) - 8px);
-    margin: 0 8px 8px var(--explorer-panel-left);
-  }
-}
-
-@media (max-width: 820px), (orientation: portrait) {
-  body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
-  body[data-sidebar-collapsed="true"] .planet-viewport {
-    flex-basis: 100svh;
-    height: 100svh;
+    position: fixed;
+    z-index: 230;
+    inset: auto 0 0;
+    box-sizing: border-box;
+    width: 100%;
+    max-height: min(70dvh, var(--sheet-height));
+    margin: 0;
+    padding-bottom: var(--explorer-safe-bottom);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
+    background: var(--explorer-panel-background);
+    box-shadow: var(--sheet-shadow);
   }
 }
