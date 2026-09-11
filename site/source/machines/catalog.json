@@ -1771,6 +1771,394 @@
           }
         ]
       }
+    },
+    {
+      "id": "arecibo-305m",
+      "name": {
+        "value": "Arecibo 305-m antenna",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "305-m fixed spherical reflecting antenna",
+          "citations": [
+            {
+              "catalogueId": "pds-telescope-arecibo-305m",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "Arecibo Observatory’s primary telescope from 1963 until cable failures destroyed it in 2020. Its fixed spherical reflector used line feeds in suspended carriage houses, and it worked as both a radio telescope and a solar system radar.",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "kind": {
+        "value": "radar-telescope",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "commissioned": {
+        "value": "1963",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "retired": {
+        "value": "2020",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "site": {
+        "value": {
+          "latitude": 18.344219,
+          "longitude": 293.247306,
+          "altitude": 453.34
+        },
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "goldstone-dss14",
+      "name": {
+        "value": "Goldstone DSS-14",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Mars Station",
+          "citations": [
+            {
+              "catalogueId": "pds-telescope-goldstone-dss14",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        },
+        {
+          "value": "DSS-14 70-m Radio Telescope",
+          "citations": [
+            {
+              "catalogueId": "pds-telescope-goldstone-dss14",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "A fully steerable parabolic radio and radar antenna in the NASA Deep Space Network. It opened in 1964 at 64 m and was extended to 70 m in 1988; it transmits for solar system radar as well as receiving.",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "kind": {
+        "value": "radar-telescope",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "commissioned": {
+        "value": "1964",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "site": {
+        "value": {
+          "latitude": 35.425901,
+          "longitude": 243.110462,
+          "altitude": 1001.39
+        },
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vlt-ut3",
+      "name": {
+        "value": "VLT Unit Telescope 3",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-vlt-ut3",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Melipal",
+          "citations": [
+            {
+              "catalogueId": "pds-telescope-vlt-ut3",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "Melipal, one of the four 8.2-m Ritchey-Chrétien unit telescopes of ESO’s Very Large Telescope at Paranal in Chile. Its alt-azimuth mount lets it point over the whole sky.",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-vlt-ut3",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-vlt-ut3",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-vlt-ut3",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "alma",
+      "name": {
+        "value": "ALMA",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-alma",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Atacama Large Millimeter/submillimeter Array",
+          "citations": [
+            {
+              "catalogueId": "pds-telescope-alma",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "An array of 66 antennas on the Chajnantor plateau in Chile, observing between 0.32 and 3.6 mm. Fifty 12-metre dishes act together as one interferometer, with a compact array alongside them.",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-alma",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "kind": {
+        "value": "radio-telescope",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-alma",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-alma",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "site": {
+        "value": {
+          "latitude": -23.01917,
+          "longitude": 292.24667,
+          "altitude": 5059
+        },
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-alma",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "irtf",
+      "name": {
+        "value": "NASA IRTF",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-irtf",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Infrared Telescope Facility",
+          "citations": [
+            {
+              "catalogueId": "pds-telescope-irtf",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "A 3.2-m Cassegrain telescope on Mauna Kea built to support the Voyager missions and now the United States national facility for infrared astronomy. At least half its observing time goes to planetary science.",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-irtf",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-irtf",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-irtf",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "site": {
+        "value": {
+          "latitude": 19.8262,
+          "longitude": 204.5281,
+          "altitude": 4168.07
+        },
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-irtf",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "spitzer",
+      "name": {
+        "value": "Spitzer",
+        "citations": [
+          {
+            "catalogueId": "pds-instrument-host-spitzer",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Spitzer Space Telescope",
+          "citations": [
+            {
+              "catalogueId": "pds-instrument-host-spitzer",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "A pointing and scanning infrared observatory in an Earth-trailing solar orbit, with an 85-cm aperture and three cryogenically cooled instruments covering the near- to far-infrared.",
+        "citations": [
+          {
+            "catalogueId": "pds-instrument-host-spitzer",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "kind": {
+        "value": "observatory",
+        "citations": [
+          {
+            "catalogueId": "pds-instrument-host-spitzer",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "pds-instrument-host-spitzer",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      }
     }
   ],
   "missions": [
