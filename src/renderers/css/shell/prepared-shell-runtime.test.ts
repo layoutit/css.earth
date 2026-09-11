@@ -37,7 +37,9 @@ class FakeElement {
   } });
   parentNode: FakeElement | null = null;
   className = ''; ariaHidden = '';
-  constructor(readonly ownerDocument: FakeDocument, readonly tagName: string) {}
+  readonly ownerDocument: FakeDocument;
+  readonly tagName: string;
+  constructor(ownerDocument: FakeDocument, tagName: string) { this.ownerDocument = ownerDocument; this.tagName = tagName;}
   appendChild(child: FakeElement): FakeElement { this.insertBefore(child, null); return child; }
   insertBefore(child: FakeElement, before: FakeElement | null): void {
     child.remove(); child.parentNode = this;

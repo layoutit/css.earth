@@ -97,7 +97,10 @@ export function createObjectBrowserProfile({
       (window as unknown as Record<string, BrowserObjectRuntime>)[runtimeKey].runtime.playback().animations.some((animation) => animation.running), key),
     camera: (page) => page.evaluate(({ runtimeKey, fields }: { readonly runtimeKey: string; readonly fields: readonly CameraField[] }) => {
       const state = (window as unknown as Record<string, BrowserObjectRuntime>)[runtimeKey].camera.state();
-      return Object.fromEntries(fields.map((field) => [field, state[field]]));
+      if (!Number.isFinite(state.pitch) || !Number.isFinite(state.zoom)) {
+        throw new Error('Shared camera must publish finite pitch and zoom.');
+      }
+      return { ...Object.fromEntries(fields.map((field) => [field, state[field]] as const)), pitch: state.pitch, zoom: state.zoom };
     }, { runtimeKey: key, fields: observedFields }),
     setCamera: (page, { pitch, controlPitch = pitch, controlYaw, zoom }) => page.evaluate(({ runtimeKey, nextPitch, nextYaw, nextZoom }) =>
       (window as unknown as Record<string, BrowserObjectRuntime>)[runtimeKey].camera.setState({ controlPitch: nextPitch, ...(nextYaw === undefined ? {} : { controlYaw: nextYaw }), zoom: nextZoom }),

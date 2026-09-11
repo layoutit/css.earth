@@ -4,6 +4,7 @@ import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
+import { Readable } from "node:stream";
 import { conformanceBrowserLaunch } from "./conformance-browser-launch.mts";
 
 test("the standard browser launch stays unchanged unless explicitly opted in", async () => {
@@ -24,12 +25,18 @@ test("the Chrome wrapper retains logs and arguments while preserving both CDP pi
       chromeExecutable: executable,
     });
     const argument = "spaces ' quotes $() ` unchanged";
+    assert.ok(options.executablePath);
+    assert.ok(diagnostics);
     const child = spawn(options.executablePath, [argument], {
       stdio: ["ignore", "pipe", "pipe", "pipe", "pipe"],
     });
     const output = ["", "", "", ""];
-    for (let index = 1; index <= 4; index++) child.stdio[index].on("data", bytes => output[index - 1] += bytes);
-    const code = await new Promise((resolve, reject) => {
+    for (let index = 1; index <= 4; index++) {
+      const stream = child.stdio[index];
+      assert.ok(stream instanceof Readable);
+      stream.on("data", (bytes: Buffer) => output[index - 1] += bytes.toString());
+    }
+    const code = await new Promise<number | null>((resolve, reject) => {
       child.once("error", reject); child.once("close", resolve);
     });
     assert.equal(code, 0);

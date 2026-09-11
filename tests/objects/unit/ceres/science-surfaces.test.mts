@@ -5,10 +5,11 @@ import sharp from "sharp";
 import profile from "../../../../src/planets/ceres/source/preparation/terrestrial.json" with {type:"json"};
 const SCIENCE_LENSES = profile.raster.scientific;
 import { colorForValue, loadScienceSurface, terrainBrightness as shadeTerrain } from "../../../../tools/objects/terrestrial-layers/scientific-raster.mts";
-const terrainBrightness = (...args) => shadeTerrain(...args, SCIENCE_LENSES[0].relief);
+import type { SourceScalar } from "../../../../tools/objects/terrestrial-layers/contracts.mts";
+const terrainBrightness = (source:SourceScalar,longitude:number,latitude:number,step:number) => shadeTerrain(source,longitude,latitude,step, SCIENCE_LENSES[0].relief);
 
 const root = resolve(import.meta.dirname, "../../../.."), sourceRoot = resolve(root, "src/planets/ceres/source");
-const anchors = {
+const anchors:Record<string,readonly (readonly [number,number,number|null])[]> = {
   elevation: [[90, 30, 1552], [180, 0, 16202], [270, -30, 3813], [10, 80, null], [350, -80, null]],
 
 };
@@ -16,15 +17,15 @@ const anchors = {
 test("terrain shading respects slope direction, latitude spacing, the longitude seam, and missing neighbors", () => {
   const metersPerDegree = 470000 * Math.PI / 180;
   assert.equal(terrainBrightness({ sample: () => 123 }, 180, 0, 0.1), 1);
-  const slope = sign => ({ sample: (lon, lat) => sign * metersPerDegree * lon * Math.cos(lat * Math.PI / 180) });
+  const slope = (sign: number) => ({ sample: (lon: number, lat: number) => sign * metersPerDegree * lon * Math.cos(lat * Math.PI / 180) });
   assert.ok(terrainBrightness(slope(1), 180, 0, 0.1) > 1, "west-facing slope catches northwest light");
   assert.ok(terrainBrightness(slope(-1), 180, 0, 0.1) < 1, "east-facing slope faces away");
-  const planeAt = lat => ({ sample: lon => metersPerDegree * lon * Math.cos(lat * Math.PI / 180) });
+  const planeAt = (lat: number) => ({ sample: (lon: number) => metersPerDegree * lon * Math.cos(lat * Math.PI / 180) });
   assert.ok(Math.abs(terrainBrightness(planeAt(0), 180, 0, 0.1)
     - terrainBrightness(planeAt(50), 180, 50, 0.1)) < 1e-10, "equal physical slopes have equal shade at different latitudes");
-  const globe = { sample: lon => 1000 * Math.sin(lon * Math.PI / 180) };
+  const globe = { sample: (lon: number) => 1000 * Math.sin(lon * Math.PI / 180) };
   assert.ok(Math.abs(terrainBrightness(globe, 0, 0, 0.1) - terrainBrightness(globe, 360, 0, 0.1)) < 1e-10);
-  assert.equal(terrainBrightness({ sample: lon => lon < 180 ? null : 123 }, 180, 0, 0.1), 1);
+  assert.equal(terrainBrightness({ sample: (lon: number) => lon < 180 ? null : 123 }, 180, 0, 0.1), 1);
 });
 
 for (const lens of SCIENCE_LENSES) test(`${lens.id}: source coordinates, gaps, shaded colors, and numeric legend agree`, async () => {

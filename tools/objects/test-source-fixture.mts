@@ -1,0 +1,21 @@
+import { createHash } from 'node:crypto';
+import { readFile, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { createSourceManifest } from '../../src/platform/source-manifest.mts';
+
+/** Bind synthetic files already written in a temporary test directory to the real source validator. */
+export async function fixtureSource(sourceRoot: string, entries: readonly {
+  path: string; id?: string; consumers: readonly string[]; [key: string]: unknown;
+}[]) {
+  const inputs = await Promise.all(entries.map(async (entry, index) => {
+    const bytes = await readFile(resolve(sourceRoot, entry.path));
+    return { id: `fixture-${index}`, origin: 'Generated unit-test input', credit: 'Authored fixture',
+      license: 'CC0', acquisition: 'Generated in a temporary test directory', redistribution: 'Allowed',
+      sourceBinding: { kind: 'local', reason: 'Synthetic unit-test input' }, ...entry,
+      expectedBytes: bytes.length, expectedSha256: createHash('sha256').update(bytes).digest('hex') };
+  }));
+  await writeFile(resolve(sourceRoot, 'manifest.json'), JSON.stringify({
+    schema: 'cssfixture-authoritative-sources@2', inputs, documents: [], generatedIntermediates: [],
+  }));
+  return createSourceManifest({ planetId: 'fixture', planetName: 'Fixture', sourceRoot });
+}

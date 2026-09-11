@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import runtimeDefinition from "../../../../src/planets/io/prepared/runtime.json" with {type:"json"};
@@ -15,7 +16,7 @@ test("Io mounts through the shared prepared object contract", () => {
   assert.equal(runtimeDefinition.tree.nodes.filter(node => node.className?.includes("polycss-camera")).length, 1);
   assert.deepEqual(runtimeDefinition.controls.lenses.controls.map(lens => lens.id), ["normal", "enhanced", "geology", "spectral-slope", "visible-absorption"]);
   for (const variant of PREPARED_PRESENTATION.variants) {
-    const lighting = variant.materials.find(material => material.track === "lighting");
+    const lighting = required(variant.materials.find(material => material.track === "lighting"));
     assert.equal(lighting.enabled, true, "Every lens retains the shared lighting control");
     assert.equal(lighting.mode, variant.when.shadows ? "frames" : "fixed");
   }
@@ -24,14 +25,14 @@ test("Io mounts through the shared prepared object contract", () => {
 // Independent, deliberately broad NASA distance bounds exercise the parent-relative orbit.
 for (const [id, parent, radius, distanceKm] of [
   ["io", "jupiter", 1821.49, 422000],
-]) {
+] as const) {
   test(`${id}'s orbit surrounds ${parent}, while the Sun keeps its separate position`, async () => {
     const frame = prepareEclipticPresentationFrame(id), kmPerUnit = radius / 230;
     const system = await preparePlanetarySystem({ bodyId: id, presentationFrame: frame, kilometersPerUnit: kmPerUnit });
     const view = prepareHeliocentricView({ bodyId: id, presentationFrame: frame,
       bodyRadiusUnits: 230, bodyRadiusKilometers: radius,
       sunSprite: { imagePixels: 512, opaqueCoreDiameterShare: 0.5 }, system });
-    const position = system.bodies.find(body => body.id === parent).position;
+    const position = required(system.bodies.find(body => body.id === parent)).position;
     assert.equal(view.orbit.centerBodyId, parent);
     // System marker positions are rounded to whole scene units.
     assert.ok(Math.hypot(...view.orbit.focus.map((value, i) => value - position[i])) <= Math.sqrt(3) / 2);
@@ -44,6 +45,6 @@ for (const [id, parent, radius, distanceKm] of [
     }
     assert.ok(view.sun.distanceAu > (id === "io" ? 4.8 : 0.95));
     assert.ok(system.bodies.length >= 13);
-    assert.ok(system.bodies.every(body => body.id !== id));
+    assert.ok(system.bodies.map(body=>String(body.id)).every(bodyId => bodyId !== id));
   });
 }

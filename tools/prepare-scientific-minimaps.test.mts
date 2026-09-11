@@ -3,16 +3,16 @@ import test from 'node:test';
 import {mkdtemp, mkdir, readFile, writeFile, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
-import sharp from 'sharp';
+import sharp, { type OutputInfo } from 'sharp';
 import {prepareSurfaceMinimaps} from './prepare-surface-minimaps.mts';
 import {observationRaster, prepareObservationLenses} from './objects/static-surface/raster.mts';
 
 const legacyEncoding={quality:90,alphaQuality:100,effort:4,smartSubsample:true};
 const colors=[[231,21,41],[13,211,31],[82,84,82]];
-const pixelSet=data=>{
-  const set=new Set();for(let i=0;i<data.length;i+=3)set.add(data.subarray(i,i+3).join(','));return set;
+const pixelSet=(data: Uint8Array)=>{
+  const set=new Set<string>();for(let i=0;i<data.length;i+=3)set.add(data.subarray(i,i+3).join(','));return set;
 };
-async function directories(t) {
+async function directories(t: test.TestContext) {
   const root=await mkdtemp(resolve(tmpdir(),'scientific-minimap-'));
   t.after(()=>rm(root,{recursive:true,force:true}));
   const source=resolve(root,'source'),publicDirectory=resolve(root,'public'),outputDirectory=resolve(root,'prepared');
@@ -20,12 +20,12 @@ async function directories(t) {
   await mkdir(publicDirectory);await mkdir(outputDirectory);
   return {root,source,objectDirectory:root,publicDirectory,outputDirectory};
 }
-async function stripedImage(path,width=1280,height=8) {
+async function stripedImage(path: string,width=1280,height=8) {
   const data=Buffer.alloc(width*height*3);
   for(let i=0;i<width*height;i++)data.set(colors[(i%width)%3],i*3);
   await sharp(data,{raw:{width,height,channels:3}}).png().toFile(path);
 }
-function shiftHalf(data,info) {
+function shiftHalf(data: Buffer<ArrayBuffer>,info: OutputInfo) {
   const out=Buffer.alloc(data.length),half=info.width/2,rowBytes=info.width*info.channels;
   for(let y=0;y<info.height;y++){
     const row=y*rowBytes,split=half*info.channels;
@@ -34,7 +34,7 @@ function shiftHalf(data,info) {
   return out;
 }
 
-async function numericStaticFixture(source) {
+async function numericStaticFixture(source: string) {
   const scientific={schema:'cssearth-pds-int16-cylindrical@1',format:'pds-image',sampling:'nearest',displaySampling:'nearest',
     path:'grid.img',labelPath:'grid.lbl',datasetId:'MOON-FIXTURE',productId:'GRID.IMG',productVersion:'V1.0',target:'MOON',sourceUnit:'NONE',
     grid:{width:16,height:8,pixelsPerDegree:16/360,latitudeRange:[-90,90],longitudeRange:[0,360],referenceRadiusMeters:1737400,
@@ -114,7 +114,7 @@ test('solid nearest, categorical and facet minimaps preserve framing and attribu
 
 test('denser oriented scientific atlases unwarp into the same bounded minimap',async t=>{
   const f=await directories(t),numeric={...await numericStaticFixture(f.source),output:'numeric',rasterScale:2};
-  const recipe={schema:'cssearth-static-surface-raster@1',kind:'observation-lenses',width:320,height:160,densities:[1,2],
+  const recipe: Parameters<typeof prepareObservationLenses>[0]['config']={schema:'cssearth-static-surface-raster@1',kind:'observation-lenses',width:320,height:160,densities:[1,2],
     latitudeSegments:4,polarTile:16,surfaceProjection:'oriented-bands',thumbnail:'prepared-centered',
     material:{frameSize:8,limbFloor:.52,radiusScale:.505,output:'curvature'},lenses:[numeric]};
   await writeFile(resolve(f.source,'preparation/raster.json'),JSON.stringify(recipe));

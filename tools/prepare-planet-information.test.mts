@@ -17,6 +17,7 @@ import {
   validatePlanetInformationSnapshot,
 } from "./planet-information-sources.mts";
 import { publishPlanetInformation } from "./prepare-planet-information.mts";
+import type { PathLike } from "node:fs";
 
 test("publishes the complete prepared batch atomically", async (context) => {
   const root = await mkdtemp(resolve(tmpdir(), "css-earth-editorial-"));
@@ -47,10 +48,9 @@ test("restores the previous complete batch when publication fails", async (conte
     readFile,
     rm,
     writeFile,
-    async rename(from, to) {
-      if (from.includes(".planets-staging-")) {
-        const error = new Error("injected publication failure");
-        error.code = "EIO";
+    async rename(from: PathLike, to: PathLike) {
+      if (String(from).includes(".planets-staging-")) {
+        const error = Object.assign(new Error("injected publication failure"), {code:"EIO"});
         throw error;
       }
       await rename(from, to);
@@ -80,9 +80,9 @@ test("preserves both publication and restoration failures", async (context) => {
     readFile,
     rm,
     writeFile,
-    async rename(from, to) {
-      if (from.includes(".planets-staging-")) throw publicationFailure;
-      if (from.includes(".planets-backup-")) throw restorationFailure;
+    async rename(from: PathLike, to: PathLike) {
+      if (String(from).includes(".planets-staging-")) throw publicationFailure;
+      if (String(from).includes(".planets-backup-")) throw restorationFailure;
       await rename(from, to);
     },
   };
@@ -93,6 +93,7 @@ test("preserves both publication and restoration failures", async (context) => {
       fileOperations: operations,
     }),
     (error) => {
+      assert.ok(error instanceof Error);
       assert.match(error.message, /previous batch could not be restored/u);
       assert.match(error.message, /.planets-backup-/u);
       assert.ok(error.cause instanceof AggregateError);

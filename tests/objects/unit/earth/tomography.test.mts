@@ -1,3 +1,7 @@
+import {parseEarthScene} from './prepared-schema.mts';
+import {parsePagedProfile} from '../../../../tools/objects/paged-ellipsoid/profile-source.mts';
+import {parseInteriorSource} from '../../../../tools/objects/paged-ellipsoid/source-contract.mts';
+import {required} from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
@@ -7,10 +11,10 @@ import { readMantleTomography, tomographyColor, tomographyLegend } from '../../.
 import { prepareLocationPoint } from '../../../../tools/objects/geographic-pages/prepare-location.mts';
 
 const source = fileURLToPath(new URL('../../../../src/planets/earth/source/', import.meta.url));
-const json = async path => JSON.parse(await readFile(new URL(path, import.meta.url)));
-const interior = await json('../../../../src/planets/earth/source/interior/earth-interior.json');
-const config = await json('../../../../src/planets/earth/source/preparation/paged-ellipsoid.json');
-const tomography = await readMantleTomography(source, interior, config);
+const json = async (path: string|URL):Promise<unknown> => JSON.parse((await readFile(new URL(path, import.meta.url))).toString('utf8'));
+const interior = parseInteriorSource(await json('../../../../src/planets/earth/source/interior/earth-interior.json'));
+const config = parsePagedProfile(await json('../../../../src/planets/earth/source/preparation/paged-ellipsoid.json'));
+const tomography = required(await readMantleTomography(source, interior, config));
 
 // Independently read from the upstream NetCDF with h5py. References use NumPy
 // trapezoidal longitude integration and exact spherical latitude-cell areas.
@@ -24,7 +28,7 @@ const anchors = [
 ];
 test('both cut meridians preserve independently decoded source velocity, reference and sign', () => {
   for (const [face, depth, latitude, velocity, reference, percent] of anchors) {
-    const actual = tomography.sample(face, depth, latitude);
+    const actual = required(tomography.sample(face, depth, latitude));
     assert.ok(Math.abs(actual.velocity - velocity) < 5e-7);
     assert.ok(Math.abs(actual.reference - reference) < 5e-7);
     assert.ok(Math.abs(actual.percent - percent) < 2e-5);
@@ -32,7 +36,7 @@ test('both cut meridians preserve independently decoded source velocity, referen
 });
 
 test('tomography meridians occupy the same longitude frame as the photographed exterior', async () => {
-  const scene = await json('../../../../src/planets/earth/prepared/scene.json');
+  const scene = parseEarthScene(await json('../../../../src/planets/earth/prepared/scene.json'));
   for (const longitude of tomography.recipe.sectionLongitudesDegrees) {
     const p = prepareLocationPoint(scene, longitude, 0);
     // PolyCSS's prepared CSS frame swaps the source X/Y axes.
@@ -76,11 +80,11 @@ test('decoded cut-plane texels preserve independent volume samples within the q9
   const pixels = [
     [720, 400, [171, 206, 226]], [600, 650, [245, 221, 212]], [500, 270, [214, 229, 238]],
     [1744, 400, [245, 218, 207]], [1624, 650, [246, 238, 235]], [1524, 270, [246, 233, 228]],
-  ];
+  ] as const;
   assert.equal(info.width, 2048);
   assert.equal(info.height, 1024);
   for (const [x, y, expected] of pixels) {
-    const index = (y * info.width + x) * 4;
+    const index: number = (y * info.width + x) * 4;
     assert.equal(data[index + 3], 255);
     for (let channel = 0; channel < 3; channel++) assert.ok(Math.abs(data[index + channel] - expected[channel]) <= 8);
   }

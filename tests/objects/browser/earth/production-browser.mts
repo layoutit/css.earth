@@ -1,5 +1,6 @@
+declare global { interface Window { __earthProductionRetained: { nodes: Element[]; parents: (ParentNode | null)[] }; __earthProductionLongTasks: number[]; } }
 import assert from "node:assert/strict";
-import { chromium } from "playwright";
+import { chromium, type Page } from "playwright";
 import { CANONICAL_PREPARED_IMAGE_DENSITY } from
   "../../../../site/runtime-policy.mts";
 import { PREPARED_EARTH_SCENE } from "../../unit/earth/prepared-fixture.mts";
@@ -18,9 +19,9 @@ try {
     });
     const page = await context.newPage();
     const session = await context.newCDPSession(page);
-    const problems = [];
-    const externalRequests = [];
-    let layers = [];
+    const problems: string[] = [];
+    const externalRequests: string[] = [];
+    let layers: { width: number; height: number }[] = [];
     await session.send("LayerTree.enable");
     session.on("LayerTree.layerTreeDidChange", (event) => {
       layers = event.layers ?? layers;
@@ -51,36 +52,38 @@ try {
       assert.equal(response?.status(), 200);
       await page.waitForFunction(() =>
         document.documentElement.dataset.ready === "true" &&
-        document.querySelector(".planet-stage")?.getAttribute("aria-busy") === "false",
+        document.querySelector<HTMLElement>(".planet-stage")?.getAttribute("aria-busy") === "false",
       );
       const initial = await page.evaluate(() => {
-        const stage = document.querySelector(".planet-stage");
-        const nodes = [stage, ...stage.querySelectorAll("*")];
+        function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
+        const stage = requiredElement(document.querySelector(".planet-stage"));
+        const nodes = [stage, ...stage.querySelectorAll<HTMLElement>("*")];
         window.__earthProductionRetained = {
           nodes,
           parents: nodes.map((node) => node.parentNode),
         };
         return {
           title: document.title,
-          stageElements: stage.querySelectorAll("*").length,
-          retainedLeaves: stage.querySelectorAll("b, s, u").length,
-          canvasCount: stage.querySelectorAll("canvas").length,
-          svgCount: stage.querySelectorAll("svg").length,
+          stageElements: stage.querySelectorAll<HTMLElement>("*").length,
+          retainedLeaves: stage.querySelectorAll<HTMLElement>("b, s, u").length,
+          canvasCount: stage.querySelectorAll<HTMLElement>("canvas").length,
+          svgCount: stage.querySelectorAll<HTMLElement>("svg").length,
           sceneTransform: getComputedStyle(
-            stage.querySelector(".polycss-scene"),
+            requiredElement(stage.querySelector(".polycss-scene")),
           ).transform,
           normalSurfaceImage: getComputedStyle(
-            stage.querySelector(".earth-body:not(.earth-body-polar) > s"),
+            requiredElement(stage.querySelector(".earth-body:not(.earth-body-polar) > s")),
           ).backgroundImage,
           normalPolesImage: getComputedStyle(
-            stage.querySelector(".earth-body-polar > s"),
+            requiredElement(stage.querySelector(".earth-body-polar > s")),
           ).backgroundImage,
           embeddedMoonElementCount:
-            stage.querySelectorAll('[class*="earth-moon"]').length,
+            stage.querySelectorAll<HTMLElement>('[class*="earth-moon"]').length,
           atmosphereImage: getComputedStyle(
-            stage.querySelector(".earth-atmosphere-material"),
+            requiredElement(stage.querySelector(".earth-atmosphere-material")),
           ).backgroundImage,
-          renderRootCount: stage.querySelectorAll(":scope > .planet-render-root")
+          renderRootCount: stage.querySelectorAll<HTMLElement>(":scope > .planet-render-root")
             .length,
         };
       });
@@ -102,34 +105,44 @@ try {
       await page.mouse.move(900, 600, { steps: 10 });
       await page.mouse.up();
       await page.mouse.wheel(0, -180);
-      await page.locator("#earth-lenses").evaluate((panel) => { panel.open = true; });
+      await page.locator("#earth-lenses").evaluate((panel) => {
+if (!(panel instanceof HTMLDetailsElement)) throw new Error("Expected HTMLDetailsElement observation");
+ panel.open = true; });
       await page.locator('button[name="lens"][value="topography"]').click();
       await page.waitForFunction(() =>
-        document.querySelector('button[name="lens"][value="topography"]')
+        document.querySelector<HTMLButtonElement>('button[name="lens"][value="topography"]')
           ?.getAttribute("aria-pressed") === "true",
       );
       await page.locator('button[name="lens"][value="normal"]').click();
-      await page.locator("#earth-settings").evaluate((panel) => { panel.open = true; });
+      await page.locator("#earth-settings").evaluate((panel) => {
+if (!(panel instanceof HTMLDetailsElement)) throw new Error("Expected HTMLDetailsElement observation");
+ panel.open = true; });
       for (const name of ["atmosphere"]) {
         const control = page.locator(`input[name="${name}"]`);
-        await control.evaluate((input) => input.click());
-        await control.evaluate((input) => input.click());
+        await control.evaluate((input) => {
+if (!(input instanceof HTMLElement)) throw new Error("Expected HTMLElement observation");
+return input.click(); });
+        await control.evaluate((input) => {
+if (!(input instanceof HTMLElement)) throw new Error("Expected HTMLElement observation");
+return input.click(); });
       }
       await page.waitForTimeout(1200);
       const after = await page.evaluate(() => {
-        const stage = document.querySelector(".planet-stage");
+        function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
+        const stage = requiredElement(document.querySelector(".planet-stage"));
         const retained = window.__earthProductionRetained;
         return {
           sceneTransform: getComputedStyle(
-            stage.querySelector(".polycss-scene"),
+            requiredElement(stage.querySelector(".polycss-scene")),
           ).transform,
-          stageElements: stage.querySelectorAll("*").length,
+          stageElements: stage.querySelectorAll<HTMLElement>("*").length,
           stable: retained.nodes.every((node, index) =>
             node.isConnected && node.parentNode === retained.parents[index]),
           animationCount: stage.getAnimations({ subtree: true })
             .filter(({ playState }) => playState === "running").length,
           longTasks: window.__earthProductionLongTasks,
-          resources: performance.getEntriesByType("resource")
+          resources: performance.getEntriesByType("resource").filter((entry): entry is PerformanceResourceTiming => entry instanceof PerformanceResourceTiming)
             .filter(({ name }) => name.includes("/scenes/earth/"))
             .map(({ name, transferSize }) => ({ name, transferSize })),
         };
@@ -156,21 +169,23 @@ try {
         name.includes("earth-interior-")), true);
       await page.locator('button[name="lens"][value="cross-section"]').click();
       await page.waitForFunction(() =>
-        document.querySelectorAll(".earth-cutaway").length === 1,
+        document.querySelectorAll<HTMLElement>(".earth-cutaway").length === 1,
       );
       await page.locator('button[name="lens"][value="normal"]').click();
       await page.locator('button[name="lens"][value="cross-section"]').click();
-      assert.deepEqual(await page.evaluate(() => ({
-        rootCount: document.querySelectorAll(".earth-cutaway").length,
-        leafCount: document.querySelectorAll(".earth-cutaway s").length,
-        stageElements: document.querySelector(".planet-stage")
-          .querySelectorAll("*").length,
-      })), {
+      assert.deepEqual(await page.evaluate(() => {
+        function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+return ({
+        rootCount: document.querySelectorAll<HTMLElement>(".earth-cutaway").length,
+        leafCount: document.querySelectorAll<HTMLElement>(".earth-cutaway s").length,
+        stageElements: requiredElement(document.querySelector(".planet-stage"))
+          .querySelectorAll<HTMLElement>("*").length,
+      }); }), {
         rootCount: 1,
         leafCount: PREPARED_EARTH_SCENE.interior.leafCount,
         stageElements: initial.stageElements,
       });
-      const maximumLayer = layers.reduce((maximum, layer) => {
+      const maximumLayer = layers.reduce<{ area: number; width: number; height: number }>((maximum, layer) => {
         const area = (layer.width ?? 0) * (layer.height ?? 0);
         return area > maximum.area
           ? { area, width: layer.width ?? 0, height: layer.height ?? 0 }

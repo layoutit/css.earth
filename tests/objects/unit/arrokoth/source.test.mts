@@ -6,7 +6,7 @@ import {parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-sh
 import {readFitsPrimary} from '../../../../tools/objects/static-surface/fits-map.mts';
 import {parseObjTextureCoordinates,createObjUvFitsSampler} from '../../../../tools/objects/terrestrial-layers/obj-uv-fits.mts';
 const root=new URL('../../../../src/planets/arrokoth/source/',import.meta.url);
-const json=async path=>JSON.parse(await readFile(new URL(path,root)));
+const json=async (path: string|URL)=>JSON.parse((await readFile(new URL(path,root))).toString('utf8'));
 test('released Arrokoth topology retains two closed source lobes at kilometre scale',async()=>{
  const config=await json('preparation/terrestrial.json'),text=await readFile(new URL(config.geometry.radialTerrain.path,root),'utf8');
  const mesh=parseObjShape(text,config.geometry.radialTerrain.grid);
@@ -14,7 +14,7 @@ test('released Arrokoth topology retains two closed source lobes at kilometre sc
  const maximumRadius=Math.max(...mesh.positions.map(v=>Math.hypot(...v)));
  assert.ok(Math.abs(config.geometry.camera.framingScale-config.geometry.radiusKm*1000/maximumRadius)<1e-12);
  for(const [axis,extent]of [34545.648,19838.242,13822.347].entries())assert.ok(Math.abs(mesh.bounds[1][axis]-mesh.bounds[0][axis]-extent)<1e-6);
- const edges=new Map(),parents=mesh.positions.map((_,i)=>i),find=i=>parents[i]===i?i:(parents[i]=find(parents[i]));
+ const edges=new Map(),parents=mesh.positions.map((_,i)=>i),find=(i: number):number=>parents[i]===i?i:(parents[i]=find(parents[i]));
  for(const face of mesh.indices)for(let i=0;i<3;i++){
   const a=face[i],b=face[(i+1)%3],key=[Math.min(a,b),Math.max(a,b)].join(':');edges.set(key,(edges.get(key)??0)+1);parents[find(b)]=find(a);
  }
@@ -24,7 +24,7 @@ test('released Arrokoth topology retains two closed source lobes at kilometre sc
 });
 test('Arrokoth UV orientation matches independently decoded released PNG scalar anchors',async()=>{
  const config=await json('preparation/terrestrial.json'),lens=config.raster.scientific[0];
- const receipt=JSON.parse(await readFile(new URL('../../fixtures/arrokoth/arrokoth-registration.json',import.meta.url)));
+ const receipt=JSON.parse((await readFile(new URL('../../fixtures/arrokoth/arrokoth-registration.json',import.meta.url))).toString('utf8'));
  const bytes=await readFile(new URL(lens.path,root)),fits=readFitsPrimary(bytes);
  assert.equal(createHash('sha256').update(bytes).digest('hex'),receipt.sourceFitsSha256);
  const png=await readFile(new URL('science/albedo_arrokoth4_fp36h2_masked1.png',root));
@@ -47,6 +47,6 @@ test('Arrokoth UV orientation matches independently decoded released PNG scalar 
  }
  assert.equal(lens.grid.noData,undefined,'the uniform source baseline is not an inferred observation mask');
  const content=await json('content/object.json');assert.equal(content.lenses.defaultLens,'albedo');
- assert.match(content.lenses.controls.find(l=>l.id==='albedo').description,/unconstrained model fill/);
- assert.ok(content.settings.controls.filter(c=>['shadows','orbit'].includes(c.name)).every(c=>c.checked===false));
+ assert.match(content.lenses.controls.find((l: { id: string; })=>l.id==='albedo').description,/unconstrained model fill/);
+ assert.ok(content.settings.controls.filter((c: { name: string; })=>['shadows','orbit'].includes(c.name)).every((c: { checked: boolean; })=>c.checked===false));
 });

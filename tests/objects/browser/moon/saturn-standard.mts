@@ -4,12 +4,15 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 
-import { chromium } from "playwright";
+import { chromium, type Page } from "playwright";
 import sharp from "sharp";
 
 import { readPreparedFixture } from '../../fixtures.mts';
-const PREPARED_MOON_LENSES = await readPreparedFixture('moon', 'lenses');
-const PREPARED_MOON_SCENE = await readPreparedFixture('moon', 'scene');
+import { shape, text, number, array, boolean, optional } from '../../../../tools/objects/geographic-pages/source-records.mts';
+import { parseMercuryBaseline } from '../saturn/audit/baseline-values.mts';
+import { required } from '../../../../tools/test-values.mts';
+const PREPARED_MOON_LENSES = shape({controls:array(shape({id:text})),material:shape({presentationSize:number})})(await readPreparedFixture('moon', 'lenses'));
+const PREPARED_MOON_SCENE = shape({counts:shape({retainedLeafCount:number,materialLeafCount:optional(number),retainedSkyboxFaceCount:number,runtimeGeometryPreparation:boolean,runtimeRasterization:boolean}),camera:shape({cameraModel:text})})(await readPreparedFixture('moon', 'scene'));
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const deviceScaleFactor = Number(process.argv[3] ?? 2);
@@ -133,7 +136,7 @@ console.log(JSON.stringify({
 }, null, 2));
 if (strict && qualityGaps.length > 0) process.exitCode = 1;
 
-async function auditReference(planet) {
+async function auditReference(planet: string) {
   const session = await openPlanet(planet);
   try {
     const camera = await cameraState(session.page, planet);
@@ -157,15 +160,13 @@ async function auditReference(planet) {
 }
 
 async function loadMercuryBaseline() {
-  const baseline = JSON.parse(await readFile(
-    mercuryBaselineReportPath,
-    "utf8",
-  )).mercury;
+  const path=required(mercuryBaselineReportPath);
+  const baseline = parseMercuryBaseline(JSON.parse(await readFile(path,"utf8"))).mercury;
   return Object.freeze({
     ...baseline,
     views: Object.freeze(baseline.views.map((view) => Object.freeze({
       ...view,
-      file: resolve(dirname(mercuryBaselineReportPath), view.file),
+      file: resolve(dirname(path), view.file),
     }))),
   });
 }
@@ -176,12 +177,14 @@ async function auditMoon() {
     const camera = await cameraState(session.page, "moon");
     const views = [];
     for (const { id } of PREPARED_MOON_LENSES.controls) {
-      await session.page.evaluate((lens) => window.__moon.lenses.select(lens), id);
+      await session.page.evaluate((lens) => {
+        function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+return requiredDiagnostics(window.__moon).lenses.select(lens); }, id);
       for (const [name, pitch] of [
         ["minimum", 0],
         ["default", camera.controlPitch],
         ["maximum", 89],
-      ]) {
+      ] as const) {
         views.push(await captureView(
           session.page,
           "moon",
@@ -204,7 +207,7 @@ async function auditMoon() {
   }
 }
 
-async function openPlanet(planet) {
+async function openPlanet(planet: string) {
   const context = await browser.newContext({
     viewport,
     deviceScaleFactor,
@@ -212,7 +215,7 @@ async function openPlanet(planet) {
   });
   const page = await context.newPage();
   const cdp = await context.newCDPSession(page);
-  let layers = [];
+  let layers: {width:number;height:number}[] = [];
   await cdp.send("LayerTree.enable");
   cdp.on("LayerTree.layerTreeDidChange", (event) => {
     layers = event.layers ?? layers;
@@ -227,11 +230,14 @@ async function openPlanet(planet) {
   }
   await page.waitForFunction((id) =>
     window.__cssEarth?.ready === true &&
-    window[`__${id}`]?.ready === true &&
+    window.__cssEarth?.object(id)?.ready === true &&
     document.documentElement.dataset.ready === "true", planet, {
     timeout: 120_000,
   });
-  await page.evaluate((id) => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()), planet);
+  await page.evaluate((id) => {
+    function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+    function requiredInput(value: Element | null): HTMLInputElement { if (!(value instanceof HTMLInputElement)) throw new Error("Expected required HTMLInputElement"); return value; }
+return (requiredInput(document.querySelector('input[name="motion"]')).checked && requiredInput(document.querySelector('input[name="motion"]')).click()); }, planet);
   await settle(page);
   return Object.freeze({
     page,
@@ -244,9 +250,9 @@ async function openPlanet(planet) {
   });
 }
 
-async function captureView(page, planet, name, controlPitch, zoom, lens = null) {
+async function captureView(page: Page, planet: string, name: string, controlPitch: number, zoom: number, lens: string | null = null) {
   await page.evaluate(({ id, pitch, nextZoom }) =>
-    window[`__${id}`].camera.setState({
+    (()=>{const runtime=window.__cssEarth?.object(id);if(!runtime)throw new Error("Mounted object diagnostics are missing");return runtime;})().camera.setState({
       controlPitch: pitch,
       zoom: nextZoom,
     }), { id: planet, pitch: controlPitch, nextZoom: zoom });
@@ -266,7 +272,7 @@ async function captureView(page, planet, name, controlPitch, zoom, lens = null) 
   });
 }
 
-async function measureDisc(page, path, planet) {
+async function measureDisc(page: Page, path: string, planet: string) {
   const geometry = await page.evaluate(({ id, logicalDiameter }) => {
     const stage = document.querySelector(".planet-stage");
     const camera = document.querySelector(`.${id}-camera`);
@@ -330,17 +336,17 @@ async function measureDisc(page, path, planet) {
   });
 }
 
-async function commonRuntime(page, planet) {
+async function commonRuntime(page: Page, planet: string) {
   return page.evaluate((id) => {
-    const runtime = window[`__${id}`];
+    const runtime = (()=>{const runtime=window.__cssEarth?.object(id);if(!runtime)throw new Error("Mounted object diagnostics are missing");return runtime;})();
     return {
-      cameraCount: document.querySelectorAll(`.${id}-camera`).length,
-      bodyLeafCount: document.querySelectorAll(`.${id}-body > s`).length,
-      materialLeafCount: document.querySelectorAll(`.${id}-material`).length,
-      skyboxFaceCount: document.querySelectorAll(`.${id}-skybox-face`).length,
-      canvasCount: document.querySelectorAll("canvas").length,
-      sceneSvgCount: document.querySelectorAll(".planet-stage svg").length,
-      stageElementCount: document.querySelectorAll(".planet-stage *").length,
+      cameraCount: document.querySelectorAll<HTMLElement>(`.${id}-camera`).length,
+      bodyLeafCount: document.querySelectorAll<HTMLElement>(`.${id}-body > s`).length,
+      materialLeafCount: document.querySelectorAll<HTMLElement>(`.${id}-material`).length,
+      skyboxFaceCount: document.querySelectorAll<HTMLElement>(`.${id}-skybox-face`).length,
+      canvasCount: document.querySelectorAll<HTMLElement>("canvas").length,
+      sceneSvgCount: document.querySelectorAll<HTMLElement>(".planet-stage svg").length,
+      stageElementCount: document.querySelectorAll<HTMLElement>(".planet-stage *").length,
       selectedPreparedDensity:
         runtime.renderStats?.textureStats?.selectedPreparedDensity ?? null,
       stableDomIdentity: runtime.assertStableDomIdentity(),
@@ -351,7 +357,7 @@ async function commonRuntime(page, planet) {
   }, planet);
 }
 
-function auditQualityGaps({ mercury: mercuryReport, moon: moonReport }) {
+function auditQualityGaps({ mercury: mercuryReport, moon: moonReport }: {saturn: Awaited<ReturnType<typeof auditReference>>;mercury: Awaited<ReturnType<typeof auditReference>> | Awaited<ReturnType<typeof loadMercuryBaseline>>;moon: Awaited<ReturnType<typeof auditMoon>>}) {
   const gaps = [];
   const mercuryDisc = mercuryReport.views[0].disc;
   const moonSurface = moonReport.views.find(({ name }) =>
@@ -377,9 +383,9 @@ function auditQualityGaps({ mercury: mercuryReport, moon: moonReport }) {
   return gaps;
 }
 
-function observe(page) {
-  const browserProblems = [];
-  const externalRequests = [];
+function observe(page: Page) {
+  const browserProblems: string[] = [];
+  const externalRequests: string[] = [];
   page.on("console", (message) => {
     if (["error", "warning"].includes(message.type())) {
       browserProblems.push(`${message.type()}: ${message.text()}`);
@@ -394,7 +400,7 @@ function observe(page) {
   return { browserProblems, externalRequests };
 }
 
-async function prepareContactSheet(views) {
+async function prepareContactSheet(views: readonly Awaited<ReturnType<typeof captureView>>[]) {
   const width = 360;
   const height = 225;
   const columns = 3;
@@ -428,7 +434,7 @@ async function prepareContactSheet(views) {
   });
 }
 
-function maximumLayer(layers) {
+function maximumLayer(layers: readonly {width:number;height:number}[]) {
   const normalized = layers.map(({ width = 0, height = 0 }) => ({
     width,
     height,
@@ -441,21 +447,21 @@ function maximumLayer(layers) {
   };
 }
 
-async function cameraState(page, planet) {
-  return page.evaluate((id) => window[`__${id}`].camera.state(), planet);
+async function cameraState(page: Page, planet: string) {
+  return page.evaluate((id) => (()=>{const runtime=window.__cssEarth?.object(id);if(!runtime)throw new Error("Mounted object diagnostics are missing");return runtime;})().camera.state(), planet);
 }
 
-async function fingerprints(paths) {
+async function fingerprints(paths: Record<string,string>) {
   return Object.fromEntries(await Promise.all(Object.entries(paths).map(
     async ([name, path]) => [name, await sha256(resolve(path))],
   )));
 }
 
-async function sha256(path) {
+async function sha256(path: string) {
   return createHash("sha256").update(await readFile(path)).digest("hex");
 }
 
-function percentile(values, fraction) {
+function percentile(values: readonly number[], fraction: number) {
   if (values.length === 0) return 0;
   return values[Math.min(
     values.length - 1,
@@ -463,16 +469,16 @@ function percentile(values, fraction) {
   )];
 }
 
-function average(values) {
+function average(values: readonly number[]) {
   if (values.length === 0) return 0;
   return values.reduce((sum, value) => sum + value, 0) / values.length;
 }
 
-function fixed(value) {
+function fixed(value: number) {
   return Number(value.toFixed(3));
 }
 
-function settle(page) {
+function settle(page: Page) {
   return page.evaluate(() => new Promise((resolvePromise) =>
     requestAnimationFrame(() => requestAnimationFrame(resolvePromise))));
 }

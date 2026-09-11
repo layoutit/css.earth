@@ -9,7 +9,8 @@ class Element extends EventTarget {
   readonly children: Element[] = []; readonly style: Record<string, string> = {}; readonly dataset: Record<string, string> = {};
   parentNode: Element | null = null; clientWidth = 800; clientHeight = 600;
   tabIndex = -1; readonly attributes = new Map<string, string>();
-  constructor(readonly ownerDocument: Document) { super(); }
+  readonly ownerDocument: Document;
+  constructor(ownerDocument: Document) { super(); this.ownerDocument = ownerDocument; }
   appendChild(child: Element) { this.insertBefore(child, null); return child; }
   insertBefore(child: Element, before: Element | null) { child.remove(); child.parentNode = this; const index = before === null ? this.children.length : this.children.indexOf(before); this.children.splice(index < 0 ? this.children.length : index, 0, child); }
   remove() { if (this.parentNode) { const index = this.parentNode.children.indexOf(this); if (index >= 0) this.parentNode.children.splice(index, 1); this.parentNode = null; } }
@@ -80,7 +81,7 @@ test('mount retains one PSF node, activates the actual point hit target, and rem
   const document=new Document(),host=document.createElement(),before=document.createElement();host.appendChild(before);
   let selected = '';
   host.addEventListener('objectnavigate', event => { selected = (event as CustomEvent<{objectId:string}>).detail.objectId; });
-  const layer=mountWorldContextPointSource({host:host as unknown as HTMLElement,before:before as unknown as Element,plan,field,resolveResource:path=>`/prepared/${path}`});
+  const layer=mountWorldContextPointSource({host:host as unknown as HTMLElement,before:before as unknown as globalThis.Element,plan,field,resolveResource:path=>`/prepared/${path}`});
   expect(layer).not.toBeNull(); layer!.publish(world(10*parsec),viewport);
   const element=layer!.element as unknown as Element;
   expect(element.style.backgroundImage).toContain('points.png'); expect(element.style.visibility).toBe(''); expect(element.style.transform).toContain('scale(');
@@ -94,7 +95,7 @@ test('mount retains one PSF node, activates the actual point hit target, and rem
 
 test('the Sun landmark stays faintly visible beyond the physical photometry limit at maximum zoom', () => {
   const document = new Document(), host = document.createElement(), before = document.createElement(); host.appendChild(before);
-  const layer = mountWorldContextPointSource({host: host as unknown as HTMLElement, before: before as unknown as Element,
+  const layer = mountWorldContextPointSource({host: host as unknown as HTMLElement, before: before as unknown as globalThis.Element,
     plan, field, resolveResource: path => path})!;
   layer.publish(world(plan.camera.maximumDistanceM), viewport, {opacity: .55, selectedDetail: true});
   expect(layer.element.style.visibility).toBe('');

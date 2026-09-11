@@ -1,61 +1,70 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createSceneRouter } from "../scene-router.mts";
+import { createSceneRouter, type RouterOptions } from "../scene-router.mts";
 
+import type { ShellOptions } from '../planet-shell-client.mts';
+import type { MountOptions, BrowserWindow } from '../browser-types.mts';
+import type { ObjectSceneLifecycle } from '../../src/renderers/css/runtime/deferred-object-mount.ts';
+import { required, unusedSharedView } from './navigation-test-values.mts';
+type Playback = ReturnType<ReturnType<typeof createSceneRouter>['playback']>;
+type MockShell = ShellOptions & { onMotionChange(value: boolean): void; destroyed: number; playback?: Playback; destroy(): void; setPlaybackState(value: Playback): void };
+type MockMount = { ready: Promise<void> | null; calls: string[]; sharedView: ObjectSceneLifecycle['sharedView'];
+  pause(): void; resume: (() => void) | null; destroy(): void; report(error: unknown): void; requestMotion?: (value: boolean) => void };
 function deferred() {
-  let resolve, reject;
-  const promise = new Promise((yes, no) => { resolve = yes; reject = no; });
-  return { promise, resolve, reject };
+  let complete: (() => void) | undefined, fail: ((reason?: unknown) => void) | undefined;
+  const promise = new Promise<void>((yes, no) => { complete = yes; fail = no; });
+  return { promise, resolve() { required(complete)(); }, reject(error: unknown) { required(fail)(error); } };
 }
-const flush = () => new Promise(setImmediate);
+const flush = () => new Promise<void>(resolve => setImmediate(resolve));
 class CountedEvents extends EventTarget {
-  listeners = new Map();
-  addEventListener(type, fn, options) {
+  listeners = new Map<string, Set<EventListenerOrEventListenerObject | null>>();
+  override addEventListener(...[type, fn, options]: Parameters<EventTarget["addEventListener"]>) {
     super.addEventListener(type, fn, options);
     if (!this.listeners.has(type)) this.listeners.set(type, new Set());
-    this.listeners.get(type).add(fn);
+    required(this.listeners.get(type)).add(fn);
   }
-  removeEventListener(type, fn, options) {
+  override removeEventListener(...[type, fn, options]: Parameters<EventTarget["removeEventListener"]>) {
     super.removeEventListener(type, fn, options);
     this.listeners.get(type)?.delete(fn);
   }
-  count(type) { return this.listeners.get(type)?.size ?? 0; }
+  count(type: string) { return this.listeners.get(type)?.size ?? 0; }
 }
-function harness(makeMount = () => ({})) {
-  const documentTarget = new CountedEvents();
+function harness(makeMount: (context: MountOptions, index: number) => Partial<MockMount> = () => ({})) {
+  const documentTarget = Object.assign(new CountedEvents(), { hidden: false, documentElement: { dataset: {} as Record<string, string> }, body: { classList: { add(..._items: string[]) {}, remove(..._items: string[]) {} } } });
   documentTarget.hidden = false;
   documentTarget.documentElement = { dataset: {} };
-  const classes = new Set();
+  const classes = new Set<string>();
   documentTarget.body = { classList: {
-    add: (...items) => items.forEach((item) => classes.add(item)),
-    remove: (...items) => items.forEach((item) => classes.delete(item)),
+    add: (...items: string[]) => items.forEach((item) => classes.add(item)),
+    remove: (...items: string[]) => items.forEach((item) => classes.delete(item)),
   } };
-  const media = new CountedEvents();
+  const media = Object.assign(new CountedEvents(), { matches: false });
   media.matches = false;
-  const windowTarget = new CountedEvents();
+  const windowTarget = Object.assign(new CountedEvents(), { matchMedia: () => media });
   windowTarget.matchMedia = () => media;
-  const shells = [], mounts = [], errors = [];
+  const shells: MockShell[] = [], mounts: MockMount[] = [], errors: unknown[] = [];
   const router = createSceneRouter({
-    stage: {}, objectId: "test", documentTarget, windowTarget,
+    stage: {} as HTMLElement, objectId: "test", documentTarget: documentTarget as unknown as Document, windowTarget: windowTarget as unknown as BrowserWindow,
     reportError: (error) => errors.push(error),
-    mountShell(options) {
-      const shell = { ...options, destroyed: 0,
+    mountShell: ((options: ShellOptions) => {
+      const shell: MockShell = { ...options, onMotionChange: required(options.onMotionChange), destroyed: 0,
         destroy() { this.destroyed += 1; }, setPlaybackState(value) { this.playback = value; } };
       shells.push(shell);
       return shell;
-    },
+    }) as unknown as NonNullable<RouterOptions["mountShell"]>,
     loadObject: async () => (stage, context) => {
-      const mount = { ready: Promise.resolve(), calls: [],
+      const mount: MockMount = { ready: Promise.resolve(), sharedView: unusedSharedView, calls: [],
         pause() { this.calls.push("pause"); }, resume() { this.calls.push("resume"); },
         destroy() { this.calls.push("destroy"); }, ...makeMount(context, mounts.length),
         report: context.onError };
       mounts.push(mount);
-      return mount;
+      // The malformed-lifecycle cases intentionally cross the same runtime validation boundary.
+      return mount as unknown as ObjectSceneLifecycle;
     },
   });
   return { router, documentTarget, windowTarget, media, shells, mounts, errors };
 }
-function show(h) {
+function show(h: ReturnType<typeof harness>) {
   const event = new Event("pageshow");
   Object.defineProperty(event, "persisted", { value: true });
   h.windowTarget.dispatchEvent(event);
@@ -156,7 +165,7 @@ test("malformed mounts retain cleanup handles and failure cleanup survives a des
   assert.equal(disposed, 1);
   assert.equal(h.shells[0].destroyed, 1);
   assert.equal(h.router.state().lifecycle, "error");
-  assert.match(h.router.state().error, /must provide/);
+  assert.match(required(h.router.state().error), /must provide/);
   assert.equal(h.errors.length, 2);
   assert.equal(h.media.count("change"), 0);
   assert.equal(h.documentTarget.documentElement.dataset.playing, undefined);
@@ -193,14 +202,14 @@ test("an object destination can pause shared motion, and a retired object cannot
   const h = harness(context => ({ requestMotion: context.onMotionRequest }));
   await h.router.settled;
   h.shells[0].onMotionChange(true);
-  h.mounts[0].requestMotion(false);
+  required(h.mounts[0].requestMotion)(false);
   assert.equal(h.router.playback().motionRequested, false);
-  assert.equal(h.shells[0].playback.motionRequested, false);
+  assert.equal(required(h.shells[0].playback).motionRequested, false);
   assert.deepEqual(h.mounts[0].calls, ["pause", "resume", "pause"]);
   const retired = h.mounts[0];
   h.windowTarget.dispatchEvent(new Event("pagehide"));
   show(h); await h.router.settled;
-  retired.requestMotion(true);
+  required(retired.requestMotion)(true);
   assert.equal(h.router.playback().motionRequested, false);
   assert.deepEqual(h.mounts[1].calls, ["pause"]);
   h.router.destroy();

@@ -1,13 +1,14 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
-import {readFile} from 'node:fs/promises';
+import {createSourceFixtureReader,requireClosedTerrain} from '../../fixtures/source-fixture.mts';
 import {resolve} from 'node:path';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root=resolve(import.meta.dirname,'../../../../src/planets/didymos/source');
-const read=async path=>JSON.parse(await readFile(resolve(root,path),'utf8'));
+const read=createSourceFixtureReader(root);
 
 test('Didymos source closure pins every input and declares restoration for required acquisition data',async()=>{
  const source=await createSourceManifest({planetId:'didymos',planetName:'Didymos',sourceRoot:root});await source.verify();
@@ -24,13 +25,13 @@ test('Didymos direct source frame retains the released axes, kilometer scale and
  assert.deepEqual([topology.vertices,topology.edges,topology.faces,topology.components,topology.eulerCharacteristic],[24578,73728,49152,1,2]);
  assert.ok(Math.abs(topology.signedVolumeCubicMeters/1e9-.2033564365122846)<1e-10);
  const scalar=await loadScienceSurface(root,config.raster.scientific[0]);
- for(const [lon,lat]of [[0,90],[0,-90],[0,0],[90,0],[180,0],[270,0]])assert.ok(Math.abs(scalar.sample(lon,lat)-(mesh.sample(lon,lat)-365))<1e-8);
+ for(const [lon,lat]of [[0,90],[0,-90],[0,0],[90,0],[180,0],[270,0]] as const)assert.ok(Math.abs(required(scalar.sample(lon,lat))-(required(mesh.sample(lon,lat))-365))<1e-8);
  assert.equal(scalar.sample(0,91),null);
 });
 
 test('Didymos native raster surface preserves closed source connectivity within its simplification budget',async()=>{
  const config=await read('preparation/terrestrial.json'),source=await createSourceManifest({planetId:'didymos',planetName:'Didymos',sourceRoot:root});
- const radial=await loadRadialTerrain({config,sourceDirectory:root,source});
+ const radial=requireClosedTerrain(await loadRadialTerrain({config,sourceDirectory:root,source}));
  assert.equal(radial.faces.length,800);assert.equal(radial.simplification.method,'source-meshoptimizer');
  assert.equal(radial.simplification.sourceFaces,49152);assert.equal(radial.simplification.removedOppositeFaces,0);
  assert.ok(radial.simplification.estimatedErrorMeters<=8);assert.equal(radial.simplification.topology.eulerCharacteristic,2);

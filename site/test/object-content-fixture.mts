@@ -6,7 +6,7 @@ const title = object({ label: string, viewBox: string, path: string, source: str
   weight: number, opticalSize: number, fontSize: number, letterSpacing: number, baseline: number });
 const source = object({ id: string, path: optional(string), url: optional(string) });
 const fact = object({ id: string, label: string, value: string, source: optional(object({
-  url: string, label: string, checked: string, path: optional(string),
+  catalogueId: string, url: string, label: string, checked: string, path: optional(string), locator: optional(string),
 })) });
 const legend = object({
   kind: literal('scale', 'categories', 'ranges'), title: string, meta: optional(string),

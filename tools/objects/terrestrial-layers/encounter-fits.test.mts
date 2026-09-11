@@ -1,9 +1,10 @@
+import { required } from '../../test-values.mts';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readEncounterHdus, decodeEncounterFits } from './encounter-fits.mts';
 import { encounterCamera, validateBodyFrame } from './encounter-camera.mts';
-const card = (key, value) => `${key.padEnd(8)}= ${typeof value === 'string' ? `'${value.replaceAll("'", "''")}'` : typeof value === 'boolean' ? value ? 'T' : 'F' : value}`.padEnd(80);
-function hdu(name, bitpix, data, extra = {}, width = 2, height = 2) {
+const card = (key: string, value: string | number | boolean) => `${key.padEnd(8)}= ${typeof value === 'string' ? `'${value.replaceAll("'", "''")}'` : typeof value === 'boolean' ? value ? 'T' : 'F' : value}`.padEnd(80);
+function hdu(name: string, bitpix: number, data: readonly number[], extra: Record<string, string | number | boolean> = {}, width = 2, height = 2) {
   const header = Buffer.from([name === 'PRIMARY' ? card('SIMPLE', true) : card('XTENSION', 'IMAGE'), card('BITPIX', bitpix),
     card('NAXIS', 2), card('NAXIS1', width), card('NAXIS2', height), ...(name === 'PRIMARY' ? [] : [card('PCOUNT', 0),card('GCOUNT', 1),card('EXTNAME',name)]),
     ...Object.entries(extra).map(([k,v])=>card(k,v)), 'END'.padEnd(80)].join('').padEnd(2880));
@@ -33,7 +34,7 @@ test('HRI quality uses the positive mask; residuals remain convergence diagnosti
     hdu('RESIDUAL',-32,[0,0,5,-2]),hdu('MASK',8,[1,0,1,1])]);
   const f=decodeEncounterFits(b,{instrument:'epoxi-hri-deconvolved',width:2,height:2,startTime:'t',filter:'CLEAR1',target:'Hartley 2',residualPolicy:'record-only'});
   assert.equal(f.reason(0),null); assert.equal(f.reason(1),'detector-quality');
-  assert.equal(f.reason(2),null); assert.equal(f.report.residualStatistics.maximumAbsolute,5); assert.equal(f.reason(3),null);
+  assert.equal(f.reason(2),null); assert.equal(required(f.report.residualStatistics).maximumAbsolute,5); assert.equal(f.reason(3),null);
 });
 test('source TAN projection preserves sky handedness and the zero-based detector center',()=>{
   const degreesPerPixel=180/Math.PI/100;
@@ -41,7 +42,7 @@ test('source TAN projection preserves sky handedness and the zero-based detector
     SCTARGRX:10,SCTARGRY:0,SCTARGRZ:0,SCSUNRX:110,SCSUNRY:0,SCSUNRZ:0,
     CRVAL1:0,CRVAL2:0,CDELT1:-1,CDELT2:1,PC1_1:degreesPerPixel,PC1_2:0,PC2_1:0,PC2_2:degreesPerPixel,CRPIX1:3.5,CRPIX2:3.5};
   const c=encounterCamera(h,{bodyToJ2000:[[1,0,0],[0,1,0],[0,0,1]],offsetPixels:[2,-3],maximumOffsetPixels:4});
-  const near=(actual,expected)=>actual.forEach((n,i)=>assert.ok(Math.abs(n-expected[i])<1e-9));
+  const near=(actual: readonly number[] | null,expected: readonly number[])=>required(actual).forEach((n,i)=>assert.ok(Math.abs(n-expected[i])<1e-9));
   near(c.positionMeters,[-10000,0,0]);near(c.project([0,0,0]),[4.5,-.5,10000]);
   near(c.project([0,1000,1000]),[-5.5,9.5,10000]);near(c.ray(4.5,-.5),[1,0,0]);
   assert.equal(c.project([-11000,0,0]),null);

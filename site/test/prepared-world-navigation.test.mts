@@ -6,40 +6,64 @@ import { createSelectionFlight, sampleSelectionFlight, createSelectionFlightSamp
 import { createWorldSelectionTarget, presentWorldCamera, formatSharedView, savedWorldCamera } from '../../src/renderers/css/dist/navigation.js';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 
-const identity = [1,0,0,0,1,0,0,0,1];
-function fixture() {
-  const frames = [0, 1].map(index => ({ referenceFrame: 'world', epochJdTt: 1,
+import { required, position, navigationFixture, unusedSharedView } from './navigation-test-values.mts';
+import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraPresentation } from '../../src/renderers/css/navigation/world-camera.ts';
+import type { ObjectWorldNavigation } from '../../src/renderers/css/runtime/world-navigation-types.ts';
+import type { PreparedNavigationFocus } from '../../src/renderers/css/navigation/prepared-focus.ts';
+import type { ObjectSceneLifecycle } from '../../src/renderers/css/runtime/deferred-object-mount.ts';
+import type { ObjectPreparationView } from '../../src/renderers/css/runtime/prepared-object-navigation.ts';
+import type { SceneFactory } from '../browser-types.mts';
+import type { WorldHandoff } from '../prepared-world-navigation.mts';
+type Mutable<T> = { -readonly [K in keyof T]: T[K] };
+type Resources = { destroyed: number; destroy(): void };
+type MockLease = { resources: Resources; destroy(): void; projection(): undefined; prepareView(getView: () => ObjectPreparationView): Promise<void> };
+type MockPreparation = { frame: Mutable<PreparedWorldCameraFrame>; prepare(options: { getView(): ObjectPreparationView }): Promise<MockLease> };
+type MockFactory = { navigation: MockPreparation };
+type PrepareOptions = Omit<Partial<Parameters<ReturnType<typeof createPreparedWorldNavigation>['prepare']>[0]>, 'toFactory'> & { toFactory?: MockFactory | Promise<MockFactory> };
+type MockNavigation = Omit<ObjectWorldNavigation, 'frame'> & { frame: Mutable<PreparedWorldCameraFrame>; activePreparedFocus: PreparedNavigationFocus | null };
+const lifecycle = { ready: Promise.resolve(), sharedView: unusedSharedView, pause() {}, resume() {}, destroy() {} } satisfies Omit<ObjectSceneLifecycle, 'navigation'>;
+const identity = [1,0,0,0,1,0,0,0,1] as const;
+function fixtureFactory() {
+  const frames: Mutable<PreparedWorldCameraFrame>[] = [0, 1].map(index => ({ referenceFrame: 'world', epochJdTt: 1,
     originM: [index * 1e8, 0, 0], presentationToReference: identity, metersPerUnit: 1, bodyRadiusM: 1000,
     orbitUpReference: [0,1,0] }));
   const objects = frames.map((worldFrame, index) => ({ id: String(index), worldFrame }));
-  const callbacks = new Map(), documentTarget = new EventTarget();
-  let next = 0, time = 0, current = { referenceFrame: 'world', epochJdTt: 1,
+  const callbacks = new Map<number, FrameRequestCallback>(), documentTarget = new EventTarget();
+  let next = 0, time = 0;
+  let current: WorldCameraPose = { referenceFrame: 'world', epochJdTt: 1,
     pose: { positionM: [0,0,10000], orientationXyzw: [0,0,0,1] } };
-  const paints = [], resources = { destroyed: 0, destroy() { this.destroyed++; } };
-  const windowTarget = { requestAnimationFrame(fn) { callbacks.set(++next, fn); return next; },
-    cancelAnimationFrame(id) { callbacks.delete(id); } };
-  const navigation = { frame: frames[0], capture: () => current,
+  const paints: WorldCameraPose[] = [], resources = { destroyed: 0, destroy() { this.destroyed++; } };
+  const windowTarget = { requestAnimationFrame(fn: FrameRequestCallback) { callbacks.set(++next, fn); return next; },
+    cancelAnimationFrame(id: number) { callbacks.delete(id); } };
+  const navigation: MockNavigation = { ...navigationFixture(frames[0], () => current, () => { throw new Error("optics overridden"); }), frame: frames[0], capture: () => current,
     activePreparedFocus: null,
     preparedFocus() { return this.activePreparedFocus; },
     setPreparedFocus(focus) { this.activePreparedFocus = focus; },
     optics: () => ({ focalPixels: 1000, principalOffsetPixels: [0,0], widthPixels: 2000, heightPixels: 2000,
-      framingRadiusPixels: 200, detailHandoffDiameterPixels: 14 }),
+      framingRadiusPixels: 200, detailHandoffDiameterPixels: 14, visibleRect: null }),
     apply(value) { current = value; paints.push(value); } };
-  const factory = { navigation: { frame: frames[1], prepare: async () => ({ resources, destroy: () => resources.destroy(), projection: () => undefined, prepareView: async () => {} }) } };
-  const service = createPreparedWorldNavigation({ objects, windowTarget, documentTarget });
+  const factory: MockFactory = { navigation: { frame: frames[1], prepare: async () => ({ resources, destroy: () => resources.destroy(), projection: () => undefined, prepareView: async () => {} }) } };
+  const service = createPreparedWorldNavigation({ objects, windowTarget: windowTarget as unknown as Window, documentTarget: documentTarget as unknown as Document });
   const controller = new AbortController();
   return { service, controller, resources, navigation, factory, paints, documentTarget,
-    start(options = {}) { return service.prepare({ fromId: '0', toId: '1', fromMount: { navigation },
-      toFactory: factory, signal: controller.signal, reducedMotion: false, ...options }); },
-    mounted() { return { navigation: { ...navigation, frame: frames[1] } }; },
-    tick(value) { time = value; const entries = [...callbacks.values()]; callbacks.clear(); for (const fn of entries) fn(time); },
+    start({ toFactory = factory, ...options }: PrepareOptions = {}) { return service.prepare({ fromId: '0', toId: '1', fromMount: { sharedView: unusedSharedView, navigation },
+      toFactory: toFactory as unknown as SceneFactory | Promise<SceneFactory>, signal: controller.signal, reducedMotion: false, ...options }); },
+    mounted(): ObjectSceneLifecycle & { navigation: MockNavigation } { return { ...lifecycle, navigation: { ...navigation, frame: frames[1] } }; },
+    tick(value: number) { time = value; const entries = [...callbacks.values()]; callbacks.clear(); for (const fn of entries) fn(time); },
     step(milliseconds = 1000 / 60) { this.tick(time + milliseconds); },
     input() { const event = new Event('wheel'); Object.defineProperty(event, 'target', { value: { closest: () => true } }); documentTarget.dispatchEvent(event); },
     get pending() { return callbacks.size; } };
 }
-function deferred() { let resolve; const promise = new Promise(done => { resolve = done; }); return { promise, resolve }; }
-async function drainFrames(fixture, { task, stepMs = 1000 / 60 } = {}) {
-  let settled = false, value, failure;
+function deferred<T = void>() {
+  let complete: ((value: T) => void) | undefined;
+  const promise = new Promise<T>(done => { complete = done; });
+  return { promise, resolve(value: T) { required(complete)(value); } };
+
+}
+function drainFrames<T>(fixture: ReturnType<typeof fixtureFactory>, options: { task: Promise<T>; stepMs?: number }): Promise<T>;
+function drainFrames(fixture: ReturnType<typeof fixtureFactory>, options?: { stepMs?: number }): Promise<void>;
+async function drainFrames<T>(fixture: ReturnType<typeof fixtureFactory>, { task, stepMs = 1000 / 60 }: { task?: Promise<T>; stepMs?: number } = {}): Promise<T | undefined> {
+  let settled = false, value: T | undefined, failure: unknown;
   task?.then(result => { settled = true; value = result; }, error => { settled = true; failure = error; });
   for (let frame = 0; frame <= 1000; frame++) {
     // Let preparation and owner-handoff promises settle between actual paints.
@@ -53,13 +77,13 @@ async function drainFrames(fixture, { task, stepMs = 1000 / 60 } = {}) {
     fixture.step(stepMs);
   }
 }
-const range = (pose, origin) => Math.hypot(...pose.positionM.map((value, axis) => value - origin[axis]));
+const range = (pose: WorldCameraPose["pose"], origin: readonly number[]) => Math.hypot(...pose.positionM.map((value, axis) => value - origin[axis]));
 
 test('a falsy camera publication failure rejects and releases native flight listeners', async () => {
   for (const failure of [null, undefined, false, 0, '']) {
-    const f = fixture();
+    const f = fixtureFactory();
     f.navigation.apply = () => { throw failure; };
-    const task = f.service.focus({ objectId: '0', mount: {navigation: f.navigation}, signal: f.controller.signal });
+    const task = f.service.focus({ objectId: '0', mount: { sharedView: unusedSharedView, navigation: f.navigation }, signal: f.controller.signal });
     const rejected = assert.rejects(task, error => Object.is(error, failure));
     f.tick(0);
     await rejected;
@@ -70,22 +94,23 @@ test('a falsy camera publication failure rejects and releases native flight list
 });
 
 test('a terminal extreme-range pose finishes without a tail of identical publications', async () => {
-  const f = fixture();
+  const f = fixtureFactory();
   f.navigation.frame.bodyRadiusM = 695700000;
   f.navigation.apply({ referenceFrame: 'world', epochJdTt: 1,
     pose: { positionM: [0, 0, 2.4809028e21], orientationXyzw: [0, 0, 0, 1] } });
   const from = f.navigation.capture();
   const target = createWorldSelectionTarget(from, f.navigation.frame, f.navigation.optics());
-  await drainFrames(f, { task: f.service.focus({ objectId: '0', mount: { navigation: f.navigation }, signal: f.controller.signal }) });
-  assert.deepEqual(f.paints.at(-1).pose, target.pose);
+  await drainFrames(f, { task: f.service.focus({ objectId: '0', mount: { sharedView: unusedSharedView, navigation: f.navigation }, signal: f.controller.signal }) });
+  assert.deepEqual(required(f.paints.at(-1)).pose, target.pose);
   const terminal = f.paints.filter(world => JSON.stringify(world.pose) === JSON.stringify(target.pose));
   assert.equal(terminal.length, 1, 'one terminal publication, with no dead flight tail');
   assert.equal(f.pending, 0);
 });
 
 test('the exact final camera demand finishes before the old scene is handed off', async () => {
-  const f = fixture(), viewReady = deferred();
-  let readView, finalView, resolved = false;
+  const f = fixtureFactory(), viewReady = deferred();
+  let readView: (() => ObjectPreparationView) | undefined, finalView: ObjectPreparationView | undefined;
+  let resolved = false;
   f.factory.navigation.prepare = async ({ getView }) => {
     readView = getView;
     return { resources: f.resources, destroy: () => f.resources.destroy(), projection: () => undefined, prepareView(getView) { finalView = getView(); return viewReady.promise; } };
@@ -94,8 +119,8 @@ test('the exact final camera demand finishes before the old scene is handed off'
   await drainFrames(f);
   assert.ok(finalView);
   assert.equal(resolved, false);
-  assert.equal(readView().world, f.navigation.capture(), 'Preparation reads the moving source camera');
-  assert.equal(finalView.world, f.paints.at(-1), 'Decode demand uses the exact painted checkpoint');
+  assert.equal(required(readView)().world, f.navigation.capture(), 'Preparation reads the moving source camera');
+  assert.equal(finalView.world, required(f.paints.at(-1)), 'Decode demand uses the exact painted checkpoint');
   viewReady.resolve();
   const handoff = await work;
   assert.equal(handoff.mountOptions.initialWorldCamera, finalView.world);
@@ -103,8 +128,8 @@ test('the exact final camera demand finishes before the old scene is handed off'
 });
 
 test('an overview starts moving before factory and assets are ready, then holds before target detail', async () => {
-  const f = fixture(), factory = deferred(), bank = deferred(), phases = [];
-  const initial = { ...f.navigation.capture(), pose: { positionM: [0, 0, 2e8], orientationXyzw: [0,0,0,1] } };
+  const f = fixtureFactory(), factory = deferred<MockFactory>(), bank = deferred<MockLease>(), phases: string[] = [];
+  const initial: WorldCameraPose = { ...f.navigation.capture(), pose: { positionM: [0, 0, 2e8], orientationXyzw: [0,0,0,1] } };
   f.navigation.apply(initial); f.paints.length = 0;
   f.factory.navigation.prepare = () => bank.promise;
   let resolved = false;
@@ -118,7 +143,7 @@ test('an overview starts moving before factory and assets are ready, then holds 
   assert.equal(resolved, false, 'Detailed mount still waits for the authenticated bank');
   const checkpoint = f.navigation.capture();
   const target = presentWorldCamera(checkpoint, f.factory.navigation.frame, f.navigation.optics());
-  assert.ok(!proxyVisible(target) || target.silhouette.tangentialSemiAxis * 2 <= 14 + 1e-6);
+  assert.ok(!proxyVisible(target) || required(target.silhouette).tangentialSemiAxis * 2 <= 14 + 1e-6);
   bank.resolve({ resources: f.resources, destroy: () => f.resources.destroy(), projection: () => undefined, prepareView: async () => {} });
   const handoff = await task;
   assert.deepEqual(handoff.mountOptions.initialWorldCamera, checkpoint);
@@ -128,14 +153,14 @@ test('an overview starts moving before factory and assets are ready, then holds 
 });
 
 test('overview preserves the latest drawn camera through slow preparation, without a flight or input interception', async () => {
-  const f = fixture(), bank = deferred();
+  const f = fixtureFactory(), bank = deferred<MockLease>();
   f.factory.navigation.prepare = () => bank.promise;
   const task = f.start({ preserveView: true });
   await nextTurn();
   assert.equal(f.pending, 0, 'No flight frame is scheduled');
   for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
   f.input();
-  const latest = { ...f.navigation.capture(), pose: { positionM: [7e8, 2e8, 3e8], orientationXyzw: [0, 0, 0, 1] } };
+  const latest: WorldCameraPose = { ...f.navigation.capture(), pose: { positionM: [7e8, 2e8, 3e8], orientationXyzw: [0, 0, 0, 1] } };
   f.navigation.apply(latest);
   bank.resolve({ resources: f.resources, destroy: () => f.resources.destroy(), projection: () => undefined, prepareView: async () => {} });
   const handoff = await task;
@@ -148,15 +173,15 @@ test('overview preserves the latest drawn camera through slow preparation, witho
 });
 
 test('a cancelled preserved-view handoff releases its unmounted resources', async () => {
-  const f = fixture();
+  const f = fixtureFactory();
   await f.start({ preserveView: true });
   f.controller.abort();
   assert.equal(f.resources.destroyed, 1);
 });
 
 test('overview handoff uses the requested distant camera instead of flying into the Sun', async () => {
-  const f = fixture();
-  const targetWorldCamera = { ...f.navigation.capture(), pose: {
+  const f = fixtureFactory();
+  const targetWorldCamera: WorldCameraPose = { ...f.navigation.capture(), pose: {
     positionM: [1e8, 0, 2e8], orientationXyzw: [0, 0, 0, 1],
   } };
   const task = f.start({ targetWorldCamera });
@@ -167,40 +192,40 @@ test('overview handoff uses the requested distant camera instead of flying into 
 });
 
 test('the same object can recenter at overview distance without resetting to its close-up', async () => {
-  const f = fixture();
-  const targetWorldCamera = { ...f.navigation.capture(), pose: {
+  const f = fixtureFactory();
+  const targetWorldCamera: WorldCameraPose = { ...f.navigation.capture(), pose: {
     positionM: [0, 0, 2e8], orientationXyzw: [0, 0, 0, 1],
   } };
-  await drainFrames(f, { task: f.service.focus({ objectId: '0', mount: { navigation: f.navigation },
+  await drainFrames(f, { task: f.service.focus({ objectId: '0', mount: { sharedView: unusedSharedView, navigation: f.navigation },
     signal: f.controller.signal, targetWorldCamera }) });
   closePose(f.navigation.capture().pose, targetWorldCamera.pose);
 });
 
 test('ordinary planet selection clears a prepared catalogue pivot for both same-owner focus and detail handoff', async () => {
   for (const sameOwner of [true, false]) {
-    const f = fixture();
-    f.navigation.setPreparedFocus({ id: 'catalogue:7' });
+    const f = fixtureFactory();
+    f.navigation.setPreparedFocus({ id: 'catalogue:7', positionM: [0,0,0], framingRadiusM: 1, limits: { minimumDistanceM: 1, maximumDistanceM: 1e20 } });
     const before = f.navigation.capture();
     const task = sameOwner
-      ? f.service.focus({ objectId: '0', mount: { navigation: f.navigation }, signal: f.controller.signal, reducedMotion: true })
+      ? f.service.focus({ objectId: '0', mount: { sharedView: unusedSharedView, navigation: f.navigation }, signal: f.controller.signal, reducedMotion: true })
       : f.start({ preserveView: true });
     assert.equal(f.navigation.preparedFocus(), null);
     assert.equal(f.navigation.capture(), before, 'Clearing the input pivot cannot move the existing observer');
-    const result = await drainFrames(f, { task });
-    if (!sameOwner) await result.afterMount(f.mounted());
+    const result = await drainFrames<void | WorldHandoff>(f, { task });
+    if (!sameOwner) { assert.ok(result); await result.afterMount(f.mounted(), { signal: f.controller.signal }); }
     f.controller.abort();
   }
 });
 // The synthetic optics use a 2000px square viewport. A sphere beside the
 // eye plane can have a huge projected ellipse entirely outside that viewport.
-const proxyVisible = view => view.silhouette !== null && view.centerPixels !== null &&
+const proxyVisible = (view: WorldCameraPresentation) => view.silhouette !== null && view.centerPixels !== null &&
   view.centerPixels.every(value => Math.abs(value) <= 1000);
-function closePose(actual, expected) {
+function closePose(actual: WorldCameraPose["pose"], expected: WorldCameraPose["pose"]) {
   actual.positionM.forEach((value, axis) => assert.ok(Math.abs(value - expected.positionM[axis]) < 1e-5));
   actual.orientationXyzw.forEach((value, axis) => assert.ok(Math.abs(value - expected.orientationXyzw[axis]) < 1e-10));
 }
-function assertContinuousPaints(paints, frames) {
-  const clearance = pose => Math.min(...frames.map(frame =>
+function assertContinuousPaints(paints: readonly WorldCameraPose[], frames: readonly PreparedWorldCameraFrame[]) {
+  const clearance = (pose: WorldCameraPose["pose"]) => Math.min(...frames.map(frame =>
     Math.max(frame.bodyRadiusM, range(pose, frame.originM) - frame.bodyRadiusM)));
   for (let index = 1; index < paints.length; index++) {
     const before = paints[index - 1].pose, after = paints[index].pose;
@@ -212,24 +237,24 @@ function assertContinuousPaints(paints, frames) {
 }
 
 test('handoff precedes large destination approach and continues the same numeric flight from the exact drawn checkpoint', async () => {
-  const f = fixture(), initial = f.navigation.capture(), optics = f.navigation.optics();
+  const f = fixtureFactory(), initial = f.navigation.capture(), optics = f.navigation.optics();
   const target = createWorldSelectionTarget(initial, f.factory.navigation.frame, optics);
   const flight = createSelectionFlight({ from: initial.pose, to: target.pose, focusPositionM: f.factory.navigation.frame.originM });
   const task = f.start();
   f.tick(100); assert.deepEqual(f.paints[0], initial);
   // Even delayed RAFs must visibly recede before reaching the coarse boundary.
   f.tick(5100);
-  const firstDeparture = presentWorldCamera(f.paints.at(-1), f.navigation.frame, optics);
-  assert.ok(firstDeparture.silhouette.tangentialSemiAxis * 2 > 14);
+  const firstDeparture = presentWorldCamera(required(f.paints.at(-1)), f.navigation.frame, optics);
+  assert.ok(required(firstDeparture.silhouette).tangentialSemiAxis * 2 > 14);
   const handoff = await drainFrames(f, { task, stepMs: 5000 });
-  const checkpoint = f.paints.at(-1);
+  const checkpoint = required(f.paints.at(-1));
   assert.notDeepEqual(checkpoint, target);
   assert.deepEqual(handoff.mountOptions.initialWorldCamera, checkpoint);
   assert.equal(handoff.mountOptions.preparedResources, f.resources);
   const sourceView = presentWorldCamera(checkpoint, f.navigation.frame, optics);
   const targetView = presentWorldCamera(checkpoint, f.factory.navigation.frame, optics);
   assert.ok(sourceView.silhouette === null || sourceView.silhouette.tangentialSemiAxis * 2 <= 14 + 1e-8);
-  assert.ok(!proxyVisible(targetView) || targetView.silhouette.tangentialSemiAxis * 2 < 20);
+  assert.ok(!proxyVisible(targetView) || required(targetView.silhouette).tangentialSemiAxis * 2 < 20);
   // Invert the independently retained curve by physical target range.
   const checkpointRange = range(checkpoint.pose, flight.focusPositionM);
   let low = 0, high = flight.durationS;
@@ -239,43 +264,43 @@ test('handoff precedes large destination approach and continues the same numeric
   }
   closePose(checkpoint.pose, sampleSelectionFlight(flight, high));
   const continuation = handoff.afterMount(f.mounted(), { signal: f.controller.signal });
-  assert.deepEqual(f.paints.at(-1), checkpoint);
-  f.step(); assert.deepEqual(f.paints.at(-1), checkpoint);
+  assert.deepEqual(required(f.paints.at(-1)), checkpoint);
+  f.step(); assert.deepEqual(required(f.paints.at(-1)), checkpoint);
   f.step(400);
   const expected = createSelectionFlightSample();
   const frames = [f.navigation.frame, f.factory.navigation.frame];
   const anchors = frames.map(frame => ({ positionM: frame.originM, radiusM: frame.bodyRadiusM }));
   const elapsed = advanceSelectionFlightInto(flight, anchors, high, high + .4, expected);
   assert.ok(elapsed > high);
-  closePose(f.paints.at(-1).pose, expected);
+  closePose(required(f.paints.at(-1)).pose, expected);
   await drainFrames(f, { task: continuation });
-  closePose(f.paints.at(-1).pose, target.pose);
+  closePose(required(f.paints.at(-1)).pose, target.pose);
   assertContinuousPaints(f.paints, frames);
   assert.equal(f.pending, 0);
   for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
 });
 
 test('slow asset preparation holds only the distant checkpoint and resumes after readiness', async () => {
-  const f = fixture(), bank = deferred();
+  const f = fixtureFactory(), bank = deferred<MockLease>();
   f.factory.navigation.prepare = () => bank.promise;
   let resolved = false;
   const task = f.start().then(value => { resolved = true; return value; });
   f.tick(0); f.tick(5000); await drainFrames(f);
-  const checkpoint = f.paints.at(-1), count = f.paints.length;
+  const checkpoint = required(f.paints.at(-1)), count = f.paints.length;
   await Promise.resolve(); assert.equal(resolved, false);
   f.step(10000); assert.equal(f.paints.length, count);
   const target = presentWorldCamera(checkpoint, f.factory.navigation.frame, f.navigation.optics());
-  assert.ok(!proxyVisible(target) || target.silhouette.tangentialSemiAxis * 2 < 20);
+  assert.ok(!proxyVisible(target) || required(target.silhouette).tangentialSemiAxis * 2 < 20);
   bank.resolve({ resources: f.resources, destroy: () => f.resources.destroy(), projection: () => undefined, prepareView: async () => {} });
   const handoff = await task;
   assert.deepEqual(handoff.mountOptions.initialWorldCamera, checkpoint);
   const continuation = handoff.afterMount(f.mounted(), { signal: f.controller.signal });
-  f.step(5000); assert.deepEqual(f.paints.at(-1), checkpoint);
+  f.step(5000); assert.deepEqual(required(f.paints.at(-1)), checkpoint);
   await drainFrames(f, { task: continuation });
 });
 
 test('new selection cancellation stops painting and releases destination preparation', async () => {
-  const f = fixture(), task = f.start();
+  const f = fixtureFactory(), task = f.start();
   f.tick(0); f.tick(400); const count = f.paints.length;
   f.controller.abort();
   await assert.rejects(task, { name: 'AbortError' });
@@ -284,7 +309,7 @@ test('new selection cancellation stops painting and releases destination prepara
 });
 
 test('cancellation between prepared handoff and mount releases resources and all interruption listeners', async () => {
-  const f = fixture(), task = f.start();
+  const f = fixtureFactory(), task = f.start();
   f.tick(0); f.tick(5000); await drainFrames(f, { task });
   f.controller.abort();
   for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
@@ -293,7 +318,7 @@ test('cancellation between prepared handoff and mount releases resources and all
 });
 
 test('an already cancelled request cannot start a frame or retain input listeners', async () => {
-  const f = fixture();
+  const f = fixtureFactory();
   f.controller.abort();
   await assert.rejects(f.start(), { name: 'AbortError' });
   f.tick(0);
@@ -304,13 +329,13 @@ test('an already cancelled request cannot start a frame or retain input listener
 });
 
 test('input during a delayed preparation interrupts at the last drawn checkpoint and releases late resources', async () => {
-  const f = fixture(), bank = deferred();
+  const f = fixtureFactory(), bank = deferred<MockLease>();
   f.factory.navigation.prepare = () => bank.promise;
   const task = f.start();
   f.tick(0); f.tick(5000); await drainFrames(f);
   const checkpoint = f.navigation.capture();
   f.input();
-  await assert.rejects(task, error => error.name === 'AbortError' && error.preserveView === true);
+  await assert.rejects(task, error => error instanceof Error && error.name === 'AbortError' && 'preserveView' in error && error.preserveView === true);
   bank.resolve({ resources: f.resources, destroy: () => f.resources.destroy(), projection: () => undefined, prepareView: async () => {} });
   await Promise.resolve(); await Promise.resolve();
   assert.equal(f.resources.destroyed, 1);
@@ -319,20 +344,20 @@ test('input during a delayed preparation interrupts at the last drawn checkpoint
 });
 
 test('input after the early handoff preserves the destination owner drawn pose', async () => {
-  const f = fixture(), task = f.start();
+  const f = fixtureFactory(), task = f.start();
   f.tick(0); f.tick(5000); const handoff = await drainFrames(f, { task });
   const continuation = handoff.afterMount(f.mounted(), { signal: f.controller.signal });
   f.step(); f.step(400);
   const drawn = f.navigation.capture();
   f.input();
-  await assert.rejects(continuation, error => error.name === 'AbortError' && error.preserveView === true);
+  await assert.rejects(continuation, error => error instanceof Error && error.name === 'AbortError' && 'preserveView' in error && error.preserveView === true);
   f.tick(12000);
   assert.deepEqual(f.navigation.capture(), drawn);
   assert.equal(f.pending, 0);
 });
 
 test('reduced motion waits for preparation, then mounts the exact arrival without enlarging a source proxy', async () => {
-  const f = fixture(), bank = deferred();
+  const f = fixtureFactory(), bank = deferred<MockLease>();
   f.factory.navigation.prepare = () => bank.promise;
   const initial = f.navigation.capture(), target = createWorldSelectionTarget(initial, f.factory.navigation.frame, f.navigation.optics());
   const task = f.start({ reducedMotion: true });
@@ -348,8 +373,8 @@ test('reduced motion waits for preparation, then mounts the exact arrival withou
 });
 
 test('saved camera endpoints survive the early owner handoff unchanged', async () => {
-  const f = fixture();
-  const saved = { camera: { distanceKilometers: 12, pose: { schema: 'cssearth-camera-pose@2',
+  const f = fixtureFactory();
+  const saved = { camera: { distanceKilometers: 12, pose: { schema: 'cssearth-camera-pose@2' as const,
     scene: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)' } }, preparedEpochJdTt: 1,
     playback: { times: [123], speed: 1, motionRequested: false } };
   const target = savedWorldCamera(saved, f.factory.navigation.frame, f.navigation.optics());
@@ -363,10 +388,10 @@ test('saved camera endpoints survive the early owner handoff unchanged', async (
 
 
 test('refocusing the selected object paints one existing owner without reloading its prepared bank', async () => {
-  const f = fixture();
+  const f = fixtureFactory();
   const initial = f.navigation.capture();
   const target = createWorldSelectionTarget(initial, f.navigation.frame, f.navigation.optics());
-  const task = f.service.focus({ objectId: '0', mount: { navigation: f.navigation }, signal: f.controller.signal });
+  const task = f.service.focus({ objectId: '0', mount: { sharedView: unusedSharedView, navigation: f.navigation }, signal: f.controller.signal });
   await drainFrames(f, { task });
   assert.ok(f.paints.length > 2);
   closePose(f.navigation.capture().pose, target.pose);
@@ -376,7 +401,7 @@ test('refocusing the selected object paints one existing owner without reloading
 });
 
 test('the application keeps flying while destination groups activate, then transfers the live pose without a reset', async () => {
-  const f = fixture(), context = [];
+  const f = fixtureFactory(), context: WorldCameraPose[] = [];
   const task = f.start({ presentWorld: world => context.push(world) });
   const handoff = await drainFrames(f, { task });
   const checkpoint = handoff.mountOptions.initialWorldCamera;
@@ -384,7 +409,7 @@ test('the application keeps flying while destination groups activate, then trans
   assert.ok(context.length > 5, 'The universe still presents frames while no detail owner is ready');
   assert.notDeepEqual(context.at(-1), checkpoint, 'Mounting must not freeze the camera at handoff');
   const mount = f.mounted();
-  handoff.mountOptions.onNavigationReady(mount.navigation);
+  required(handoff.mountOptions.onNavigationReady)(mount.navigation);
   assert.deepEqual(mount.navigation.capture(), context.at(-1));
   for (let i=0; i<12; i++) f.step();
   assert.deepEqual(mount.navigation.capture(), context.at(-1), 'The incoming camera tracks the live world before full readiness');
@@ -397,7 +422,7 @@ test('the application keeps flying while destination groups activate, then trans
 });
 
 test('cancellation during connected activation stops the application flight and releases its resources', async () => {
-  const f = fixture(), context=[];
+  const f = fixtureFactory(), context=[];
   const handoff = await drainFrames(f,{task:f.start({presentWorld:world=>context.push(world)})});
   f.step(); const count=context.length;
   f.controller.abort(); f.step();
@@ -408,27 +433,27 @@ test('cancellation during connected activation stops the application flight and 
 });
 
 test('real input interrupts a same-object focus at the last painted camera', async () => {
-  const f = fixture();
-  const task = f.service.focus({ objectId: '0', mount: { navigation: f.navigation }, signal: f.controller.signal });
+  const f = fixtureFactory();
+  const task = f.service.focus({ objectId: '0', mount: { sharedView: unusedSharedView, navigation: f.navigation }, signal: f.controller.signal });
   f.tick(0); f.tick(100);
   const drawn = f.navigation.capture();
   f.input();
-  await assert.rejects(task, error => error.name === 'AbortError' && error.preserveView === true);
+  await assert.rejects(task, error => error instanceof Error && error.name === 'AbortError' && 'preserveView' in error && error.preserveView === true);
   f.tick(10000);
   assert.deepEqual(f.navigation.capture(), drawn);
   assert.equal(f.pending, 0);
 });
 
 test('replacement departure uses the retained world while its previous detail owner is retired', async () => {
-  const f = fixture(), context = [];
+  const f = fixtureFactory(), context: WorldCameraPose[] = [];
   f.navigation.apply({ ...f.navigation.capture(), pose: { positionM: [0, 0, 2e8], orientationXyzw: [0, 0, 0, 1] } });
   const handoff = await drainFrames(f, { task: f.start({ presentWorld: world => context.push(world) }) });
-  handoff.mountOptions.onNavigationReady(f.mounted().navigation);
+  required(handoff.mountOptions.onNavigationReady)(f.mounted().navigation);
   for (let frame = 0; frame < 12; frame++) f.step();
-  const drawn = context.at(-1);
+  const drawn = required(context.at(-1));
   f.controller.abort();
   const retiredPaintCount = f.paints.length, beforeReplacement = context.length;
-  const replacement = new AbortController(), factory = deferred(), phases = [];
+  const replacement = new AbortController(), factory = deferred<MockFactory>(), phases: string[] = [];
   const task = f.start({ fromId: '1', toId: '0', fromMount: null, toFactory: factory.promise,
     signal: replacement.signal, presentWorld: world => context.push(world), timing: { mark: phase => phases.push(phase) } });
   f.step(); f.step();
@@ -439,8 +464,8 @@ test('replacement departure uses the retained world while its previous detail ow
   factory.resolve(f.factory);
   const nextHandoff = await drainFrames(f, { task });
   const target = createWorldSelectionTarget(drawn, f.navigation.frame, f.navigation.optics());
-  const mount = { navigation: f.navigation };
-  nextHandoff.mountOptions.onNavigationReady(mount.navigation);
+  const mount = { ...lifecycle, navigation: f.navigation };
+  required(nextHandoff.mountOptions.onNavigationReady)(mount.navigation);
   await drainFrames(f, { task: nextHandoff.afterMount(mount, { signal: replacement.signal }) });
   closePose(f.navigation.capture().pose, target.pose);
   assert.equal(f.pending, 0);
@@ -449,20 +474,20 @@ test('replacement departure uses the retained world while its previous detail ow
 
 
 test('the current body accepts wide-view centering only while below its prepared detail threshold', () => {
-  const f = fixture(), mount = { navigation: f.navigation };
+  const f = fixtureFactory(), mount = { sharedView: unusedSharedView, navigation: f.navigation };
   const close = f.navigation.capture();
-  assert.equal(f.service.centerTarget({ objectId: '0', mount }), null);
+  assert.equal(f.service.centerTarget({ fromId: '0', objectId: '0', mount }), null);
   f.navigation.apply({ ...close, pose: { ...close.pose, positionM: [0, 0, 2e8] } });
-  assert.ok(f.service.centerTarget({ objectId: '0', mount }));
+  assert.ok(f.service.centerTarget({ fromId: '0', objectId: '0', mount }));
   f.navigation.apply(close);
-  assert.equal(f.service.centerTarget({ objectId: '0', mount }), null);
+  assert.equal(f.service.centerTarget({ fromId: '0', objectId: '0', mount }), null);
 });
 
 test('centering changes the focus at the same range and orientation, then focus zooms in', async () => {
-  const f = fixture();
-  assert.equal(f.service.centerTarget({ objectId: '0', mount: { navigation: f.navigation } }), null);
+  const f = fixtureFactory();
+  assert.equal(f.service.centerTarget({ fromId: '0', objectId: '0', mount: { sharedView: unusedSharedView, navigation: f.navigation } }), null);
   f.navigation.apply({ ...f.navigation.capture(), pose: { positionM: [0, 0, 2e8], orientationXyzw: [0, 0, 0, 1] } });
-  const target = f.service.centerTarget({ objectId: '1', mount: { navigation: f.navigation } });
+  const target = required(f.service.centerTarget({ fromId: '0', objectId: '1', mount: { sharedView: unusedSharedView, navigation: f.navigation } }));
   assert.deepEqual(target.pose.positionM, [1e8, 0, 2e8]);
   assert.deepEqual(target.pose.orientationXyzw, [0, 0, 0, 1]);
   const handoff = await drainFrames(f, { task: f.start({ targetWorldCamera: target, centerSelection: true }) });
@@ -470,7 +495,7 @@ test('centering changes the focus at the same range and orientation, then focus 
   handoff.mountOptions.onNavigationReady?.(mount.navigation);
   await drainFrames(f, { task: handoff.afterMount(mount, { signal: f.controller.signal }) });
   const projection = presentWorldCamera(mount.navigation.capture(), mount.navigation.frame, mount.navigation.optics());
-  projection.centerPixels.forEach(value => assert.ok(Math.abs(value) < 1e-6));
+  required(projection.centerPixels).forEach(value => assert.ok(Math.abs(value) < 1e-6));
   assert.ok(Math.abs(projection.distanceM / 2e8 - 1) < 1e-12);
   await drainFrames(f, { task: f.service.focus({ objectId: '1', mount, signal: f.controller.signal }) });
   assert.ok(range(mount.navigation.capture().pose, mount.navigation.frame.originM) < 2e6);

@@ -1,3 +1,10 @@
+interface DomNavigationProbe {selectors:string[];nodes:(Element|null)[];document:Document;universeNodes:Element[];maxScenes:number;observer:MutationObserver;}
+interface NavigationCensus {object:string|undefined;nodes:number;scenes:number;width:number;height:number;perspective:number;styleCount:number;loadedSheets:boolean;retained:boolean;universeRetained:boolean;}
+declare global {interface Window {__domCleanlinessResult:()=>{retained:boolean;topologyChanges:number};__domNavigation:DomNavigationProbe;}}
+
+import {required} from '../../tools/test-values.mts';
+import { createTestPage } from './browser-observations.mts';
+import type { Page } from 'playwright';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -13,10 +20,10 @@ const output = resolve('output/dom-cleanliness');
 await mkdir(output, { recursive: true });
 const launch = await conformanceBrowserLaunch({ channel: 'chrome', evidenceDirectory: output });
 const browser = await chromium.launch(launch.options);
-const reports = [], navigation = [], problems = [];
+const reports = [], navigation = [], problems:string[] = [];
 try {
   for (const density of [1, 2]) {
-    const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: density });
+    const page = await createTestPage(browser, { viewport: { width: 1440, height: 900 }, deviceScaleFactor: density });
     page.setDefaultTimeout(15000);
     page.on('pageerror', error => problems.push(error.message));
     page.on('console', message => { if (message.type() === 'error') problems.push(message.text()); });
@@ -27,9 +34,9 @@ try {
       const initial = await page.evaluate(census);
       assertClean(initial, `${object.id} DPR ${density}`);
       await page.evaluate(() => {
-        const root = document.querySelector('.planet-stage');
+        const root = window.__cssearthTest.html('.planet-stage');
         const nodes = [...root.querySelectorAll('*')];
-        const records = [];
+        const records:MutationRecord[] = [];
         const observer = new MutationObserver(batch => records.push(...batch));
         observer.observe(root, { subtree: true, childList: true });
         window.__domCleanlinessResult = () => {
@@ -43,7 +50,7 @@ try {
       const beforeDrag = await page.locator('.polycss-scene').evaluate(node => getComputedStyle(node).transform);
       await page.mouse.move(950, 460); await page.mouse.down();
       await page.mouse.move(1120, 515, { steps: 16 });
-      await page.waitForFunction(before => getComputedStyle(document.querySelector('.polycss-scene')).transform !== before, beforeDrag);
+      await page.waitForFunction(before => getComputedStyle(window.__cssearthTest.required(document.querySelector('.polycss-scene'), 'computed style element')).transform !== before, beforeDrag);
       await page.mouse.up();
       await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
       const interaction = await page.evaluate(() => window.__domCleanlinessResult());
@@ -60,33 +67,33 @@ try {
     await ready(page, 'earth');
     await page.evaluate(() => {
       const selectors = ['.planet-stage', '.planet-sidebar', '.planet-input-surface', '.prepared-universe'];
-      window.__domNavigation = { selectors, nodes: selectors.map(selector => document.querySelector(selector)),
-        document, universeNodes: [...document.querySelector('.prepared-universe').querySelectorAll('*')], maxScenes: 1 };
-      const probe = window.__domNavigation;
-      probe.observer = new MutationObserver(() => {
-        probe.maxScenes = Math.max(probe.maxScenes, document.querySelectorAll('.polycss-scene').length);
+      const observer=new MutationObserver(() => {
+        const probe=window.__domNavigation;probe.maxScenes = Math.max(probe.maxScenes, document.querySelectorAll(".polycss-scene").length);
       });
-      probe.observer.observe(document.querySelector('.planet-stage'), { childList: true, subtree: true });
+      window.__domNavigation = { observer,selectors, nodes: selectors.map(selector => document.querySelector(selector)),
+        document, universeNodes: [...window.__cssearthTest.element('.prepared-universe').querySelectorAll('*')], maxScenes: 1 };
+      const probe = window.__domNavigation;
+      probe.observer.observe(window.__cssearthTest.html('.planet-stage'), { childList: true, subtree: true });
     });
-    const visits = [];
+    const visits:NavigationCensus[] = [];
     for (const id of ['saturn', 'mercury', 'earth', 'saturn', 'mercury', 'earth']) {
       await page.locator('.planet-sidebar-search').fill(id);
       await page.locator(`a.planet-object-link[data-object-id="${id}"]`).click();
       await ready(page, id);
       const result = await page.evaluate(() => {
         const probe = window.__domNavigation;
-        const current = [...document.querySelector('.prepared-universe').querySelectorAll('*')];
+        const current = [...window.__cssearthTest.element('.prepared-universe').querySelectorAll('*')];
         return { ...censusForNavigation(), retained: probe.document === document &&
           probe.selectors.every((selector, i) => document.querySelector(selector) === probe.nodes[i]),
           universeRetained: current.length === probe.universeNodes.length && current.every((node, i) => node === probe.universeNodes[i]) };
         function censusForNavigation() {
-          const camera = document.querySelector('.polycss-camera'), rect = camera.getBoundingClientRect();
-          return { object: document.querySelector('.planet-stage').dataset.objectId,
-            nodes: document.querySelector('.planet-stage').querySelectorAll('*').length + 1,
+          const camera = window.__cssearthTest.html('.polycss-camera'), rect = camera.getBoundingClientRect();
+          return { object: window.__cssearthTest.html('.planet-stage').dataset.objectId,
+            nodes: window.__cssearthTest.element('.planet-stage').querySelectorAll('*').length + 1,
             scenes: document.querySelectorAll('.polycss-scene').length,
-            width: rect.width, height: rect.height, perspective: parseFloat(getComputedStyle(camera).perspective),
+            width: rect.width, height: rect.height, perspective: parseFloat(getComputedStyle(window.__cssearthTest.required(camera, 'computed style element')).perspective),
             styleCount: document.head.querySelectorAll('style,link[rel="stylesheet"]').length,
-            loadedSheets: [...document.head.querySelectorAll('link[rel="stylesheet"]')].every(link => link.sheet !== null) };
+            loadedSheets: [...document.head.querySelectorAll('link[rel="stylesheet"]')].every(link => {if(!(link instanceof HTMLLinkElement))throw new Error("Expected stylesheet link");return link.sheet !== null;}) };
         }
       });
       assert.ok(result.retained && result.universeRetained && result.loadedSheets);
@@ -112,15 +119,15 @@ try {
   await browser.close();
 }
 
-async function ready(page, id) {
+async function ready(page: Page, id:string) {
   await page.waitForFunction(id => document.documentElement.dataset.ready === 'error' ||
-    (document.documentElement.dataset.ready === 'true' && document.querySelector('.planet-stage').dataset.objectId === id &&
+    (document.documentElement.dataset.ready === 'true' && window.__cssearthTest.html('.planet-stage').dataset.objectId === id &&
       location.pathname === `/${id}/`), id, { timeout: 60000 });
   assert.equal(await page.locator('html').getAttribute('data-ready'), 'true', `${id}: renderer failed`);
 }
 function census() {
-  const stage = document.querySelector('.planet-stage');
-  const camera = stage.querySelector('.polycss-camera');
+  const stage = window.__cssearthTest.html('.planet-stage');
+  const camera = window.__cssearthTest.html('.polycss-camera',stage);
   const rect = camera.getBoundingClientRect();
   return { nodes: stage.querySelectorAll('*').length + 1,
     sceneCount: stage.querySelectorAll('.polycss-scene').length,
@@ -130,7 +137,7 @@ function census() {
     duplicateIds: [...document.querySelectorAll('[id]')].map(node => node.id)
       .filter((id, i, ids) => ids.indexOf(id) !== i) };
 }
-function assertClean(result, message) {
+function assertClean(result:ReturnType<typeof census>, message:string) {
   assert.ok(result.nodes > 1, message);
   assert.ok(result.texturedLeaves > 0, `${message}: surface textures must be present`);
   assert.ok(result.cameraWidth > 0 && result.cameraHeight > 0, message);

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import test from 'node:test';
 import {readPreparedFixture} from '../../fixtures.mts';
-const [presentation,scene]=await Promise.all(['runtime','scene'].map(name=>readPreparedFixture('saturn',name)));
+const [presentation,scene]=await Promise.all([readPreparedFixture('saturn','runtime'),readPreparedFixture('saturn','scene')]);
 test('mounts prepared PolyCSS texture leaves under retained planet groups',async()=>{
  const [css,preparer]=await Promise.all([
   readFile(new URL('../../../../src/renderers/css/styles/saturn-surfaces.css',import.meta.url),'utf8'),
@@ -15,7 +15,7 @@ test('mounts prepared PolyCSS texture leaves under retained planet groups',async
  const nodes=presentation.tree.nodes;
  assert.equal(nodes.filter(node=>node.className?.split(/\s+/).includes('polycss-camera')).length,1);
  assert.equal(nodes.filter(node=>node.className?.split(/\s+/).includes('saturn-cutaway')).length,1);
- assert.ok(nodes.some(node=>node.attributes['data-prepared-projection']==='single-leaf'));
+ assert.ok(nodes.some((node: { attributes: { [x: string]: string; }; })=>node.attributes['data-prepared-projection']==='single-leaf'));
  assert.equal(nodes.some(node=>node.className==='polycss-projective-texture'),false);
  const data=JSON.stringify(presentation);
  assert.doesNotMatch(data,/bodyVisibility|createPreparedBodyVisibility|PREPARED_SATURN_MOON|saturn-moon|devicePixelRatio/);

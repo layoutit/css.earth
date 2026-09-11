@@ -1,13 +1,16 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readPreparedFixture } from "../../fixtures.mts";
 import { mountPreparedPresentation, selectedPreparedVariant } from "../../../../src/renderers/css/dist/testing.js";
 import { preparedSelectionFixture, retainedPresentationFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 const runtimeDefinition = await readPreparedFixture('saturn', 'runtime');
-const pool = (f, id) => f.residency.stats().pools.find(pool => pool.id === id);
-const lens = id => ({ kind: "lens", id });
-const toggle = (name, value) => ({ kind: "toggle", name, value });
-async function select(f, action) { const result = f.selection.dispatch(action); await f.settle(); assert.equal(await result, true); }
+type Fixture = Awaited<ReturnType<typeof preparedSelectionFixture>>;
+type Action = Parameters<Fixture["selection"]["dispatch"]>[0];
+const pool = (f: Fixture, id: string) => required(f.residency.stats().pools.find(pool => pool.id === id));
+const lens = (id: string): Action => ({ kind: "lens", id });
+const toggle = (name: string, value: boolean): Action => ({ kind: "toggle", name, value });
+async function select(f: Fixture, action: Action) { const result = f.selection.dispatch(action); await f.settle(); assert.equal(await result, true); }
 
 for (const failAtElement of [1, 2, 3]) test(`Saturn partial construction preserves the prior root (${failAtElement})`, () => {
   const f = retainedPresentationFixture(runtimeDefinition, { failAtElement });
@@ -37,16 +40,16 @@ test("Saturn commits one coherent latest exclusive lens with ring and shadow set
     }
     assert.equal(f.stage.dataset.lens, undefined); assert.equal(f.stage.dataset.view, undefined);
     await f.settle(); assert.deepEqual(await Promise.all(requests), [false, false, false, true]);
-    const selection = f.selection.state().committed;
-    assert.equal(selection.lensId, "cross-section"); assert.equal(Object.hasOwn(selection, "interior"), false);
-    assert.equal(selection.rings, false); assert.equal(selection.shadows, true);
+    const selection = required(f.selection.state().committed);
+    assert.equal(required(selection.lensId), "cross-section"); assert.equal(Object.hasOwn(selection, "interior"), false);
+    assert.equal(required(selection.rings), false); assert.equal(required(selection.shadows), true);
     assert.equal(f.stage.dataset.lens, undefined); assert.equal(f.stage.dataset.view, "interior");
     assert.ok(f.stage.classList.contains("saturn-hide-rings")); assert.ok(!f.stage.classList.contains("saturn-hide-shadows"));
     assert.deepEqual(f.buttons.filter(button => button["aria-pressed"] === "true").map(button => button.value), ["cross-section"]);
     const variant = selectedPreparedVariant(runtimeDefinition, selection);
-    assert.equal(variant.materials.find(track => track.track === "exterior").bank, "normal-ringless");
-    assert.ok(f.residency.resources.has("exterior:normal-ringless"));
-    assert.ok(f.residency.resources.has("interior-material:normal-ringless"));
+    assert.equal(required(variant.materials.find(track => track.track === "exterior")).bank, "normal-ringless");
+    assert.ok(required(f.selection.state().plan).required.some(key=>/^exterior:normal-ringless:row:\d+$/.test(key)));
+    assert.ok(required(f.selection.state().plan).required.some(key=>/^interior-material:normal-ringless:row:\d+$/.test(key)));
     assert.deepEqual(root.querySelectorAll("*"), nodes); assert.deepEqual(f.errors, []);
   } finally { f.restore(); }
 });
@@ -57,8 +60,8 @@ test("Saturn repeated cross-section selection stays selected while replacing a p
     const a = f.selection.dispatch(lens("cross-section")); await f.flush();
     const b = f.selection.dispatch(lens("cross-section")); await f.settle();
     assert.deepEqual(await Promise.all([a, b]), [false, true]);
-    assert.equal(f.selection.state().committed.lensId, "cross-section"); assert.equal(Object.hasOwn(f.selection.state().committed, "interior"), false);
-    assert.ok(pool(f, "interior").resident > 0); assert.equal(pool(f, "interior-material").resident, 1);
+    assert.equal(required(f.selection.state().committed).lensId, "cross-section"); assert.equal(Object.hasOwn(required(f.selection.state().committed), "interior"), false);
+    assert.ok(pool(f, "interior").resident > 0); assert.equal(pool(f, "interior-material").resident, 2, "Both prepared neighboring atmosphere rows remain resident");
     assert.deepEqual(f.buttons.filter(button => button["aria-pressed"] === "true").map(button => button.value), ["cross-section"]); assert.deepEqual(f.errors, []);
   } finally { f.restore(); }
 });
@@ -69,9 +72,9 @@ test("Saturn cross-section uses the common single-lens reducer with no remembere
     const nodes = f.stage.querySelectorAll("*");
     for (const id of ["cross-section", "thermal", "cross-section", "cross-section", "ultraviolet", "methane", "normal"]) {
       await select(f, lens(id));
-      const committed = f.selection.state().committed;
+      const committed = required(f.selection.state().committed);
       assert.deepEqual(Object.keys(committed).sort(), ["lensId", "rings", "shadows", "speed"]);
-      assert.equal(committed.lensId, id);
+      assert.equal(required(committed.lensId), id);
       assert.equal(f.stage.dataset.view, id === "cross-section" ? "interior" : undefined);
       assert.equal(f.stage.dataset.lens, ["normal", "cross-section"].includes(id) ? undefined : id);
       assert.deepEqual(f.buttons.filter(button => button["aria-pressed"] === "true").map(button => button.value), [id]);
@@ -87,7 +90,7 @@ test("Saturn failed cross-section preparation retains the previous exterior lens
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     await select(f, lens("thermal"));
-    const before = f.selection.state().committed;
+    const before = required(f.selection.state().committed);
     const pending = f.selection.dispatch(lens("cross-section"));
     const rejected = assert.rejects(pending, /did not decode/);
     await f.flush();
@@ -99,7 +102,7 @@ test("Saturn failed cross-section preparation retains the previous exterior lens
     assert.equal(f.stage.dataset.lens, "thermal"); assert.equal(f.stage.dataset.view, undefined);
     assert.deepEqual(f.buttons.filter(button => button["aria-pressed"] === "true").map(button => button.value), ["thermal"]);
     await select(f, lens("cross-section"));
-    assert.equal(f.selection.state().committed.lensId, "cross-section");
+    assert.equal(required(f.selection.state().committed).lensId, "cross-section");
     assert.deepEqual(f.errors, []);
   } finally { f.restore(); }
 });
@@ -122,12 +125,12 @@ test("Saturn lens A/B/A retires obsolete groups and late decode rejection cannot
 test("Saturn partial group failure retains committed presentation, resets desire and allows retry", async () => {
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
-    const before = f.selection.state().committed;
+    const before = required(f.selection.state().committed);
     const pending = f.selection.dispatch(lens("methane")); const failed = assert.rejects(pending, /decode/); await f.flush();
     const jobs = f.jobs.filter(job => !job.done); assert.ok(jobs.length > 1);
     jobs[0].done = true; jobs[0].resolve(); jobs[1].done = true; jobs[1].reject(new Error("partial decode failed")); await failed;
     assert.deepEqual(f.selection.state().committed, before); assert.deepEqual(f.selection.state().desired, before);
-    await select(f, toggle("rings", false)); assert.equal(f.selection.state().committed.lensId, "normal");
+    await select(f, toggle("rings", false)); assert.equal(required(f.selection.state().committed).lensId, "normal");
     await select(f, lens("methane")); assert.equal(f.stage.dataset.lens, "methane"); assert.deepEqual(f.errors, []);
   } finally { f.restore(); }
 });
@@ -160,8 +163,8 @@ test("Saturn disposal settles never-ending groups and prevents late publication"
 test("Saturn native material publication failure cannot promote partially applied selection", async () => {
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
-    const before = f.selection.state().committed;
-    const leaf = f.stage.querySelectorAll("*").find(node => node.classList.contains("saturn-interior-material"));
+    const before = required(f.selection.state().committed);
+    const leaf = required(f.stage.querySelectorAll("*").find(node => node.classList.contains("saturn-interior-material")));
     Object.defineProperty(leaf.style, "backgroundImage", { configurable: true, set() { throw new Error("native publication failed"); } });
     const pending = f.selection.dispatch(lens("cross-section")).catch(error => error); await f.settle(); await pending;
     assert.equal(f.lifetime.disposed, true); assert.equal(f.errors.length, 1);
@@ -173,8 +176,8 @@ test("Saturn native cleanup failure cannot retain sibling resource or control ow
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     await select(f, lens("methane"));
-    const entry = runtimeDefinition.assets.entries.find(entry => entry.key === pool(f, "lenses").keys[0]);
-    f.jobs.find(job => job.url === entry.url && job.image.src).image.removeAttribute = () => { throw new Error("native release failed"); };
+    const entry = required(runtimeDefinition.assets.entries.find(entry => entry.key === pool(f, "lenses").keys[0]));
+    required(f.jobs.find(job => job.url === entry.url && job.image.src)).image.removeAttribute = () => { throw new Error("native release failed"); };
     assert.equal(f.lifetime.destroy().length, 1); assert.equal(f.residency.stats().images.entries.length, 0); assert.equal(f.listenerCount(), 0);
   } finally { f.restore(); }
 });

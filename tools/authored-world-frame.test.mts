@@ -1,14 +1,17 @@
+import { fixtureRecord } from './test-values.mts';
+import { requireArray, requireFiniteNumber } from './source-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { readFile } from 'node:fs/promises';
+import { readFile, type FileHandle } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { OBJECTS } from '../site/objects.mts';
 import { requireAuthoredWorldFrame } from './authored-world-frame.mts';
+import type { PathLike } from 'node:fs';
 
-const readText = path => readFile(path, 'utf8');
-async function inputs(id) {
+const readText = (path: string) => readFile(path, 'utf8');
+async function inputs(id: string) {
   const directory = resolve('src/planets', id);
-  const read = async name => JSON.parse(await readText(resolve(directory, name)));
+  const read = async (name: string) => JSON.parse(await readText(resolve(directory, name)));
   return { directory, descriptor: await read('object.json'), scene: await read('prepared/scene.json'),
     runtime: await read('prepared/runtime.json'), readText };
 }
@@ -19,7 +22,7 @@ test('final numerical stage rejects mutated frame, source pins, scene scale and 
   let input;
   for (const object of OBJECTS) {
     const descriptor = JSON.parse(await readText(resolve('src/planets', object.id, 'object.json')));
-    if (!descriptor.properties.recipe.sources.some(source => source.id === 'world-context')) {
+    if (!requireArray(fixtureRecord(descriptor, 'properties', 'recipe').sources).some(source => fixtureRecord(source).id === 'world-context')) {
       input = await inputs(object.id);
       break;
     }
@@ -28,10 +31,10 @@ test('final numerical stage rejects mutated frame, source pins, scene scale and 
   const path = resolve(input.directory, 'prepared/world-navigation.json');
   const receipt = JSON.parse(await readText(path));
   for (const mutate of [
-    value => { value.frame.bodyRadiusM += 1; },
-    value => { value.sources[0].sha256 = '0'.repeat(64); },
-    value => { value.sceneScale *= 2; },
-    value => { delete value.frame; },
+(value: unknown) => { const frame = fixtureRecord(value, 'frame'); frame.bodyRadiusM = requireFiniteNumber(frame.bodyRadiusM) + 1; },
+(value: unknown) => { fixtureRecord(value, 'sources', 0).sha256 = '0'.repeat(64); },
+(value: unknown) => { const record = fixtureRecord(value); record.sceneScale = requireFiniteNumber(record.sceneScale) * 2; },
+    (value: unknown) => { delete fixtureRecord(value).frame; },
   ]) {
     const changed = structuredClone(receipt); mutate(changed);
     await assert.rejects(requireAuthoredWorldFrame({ ...input,

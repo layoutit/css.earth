@@ -1,3 +1,4 @@
+import { required, fixtureRecord } from '../../test-values.mts';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { parseObjShape, parseVrmlShape, closestTrianglePoint, createShapeSurfaceSampler } from './obj-shape.mts';
@@ -9,9 +10,9 @@ test('flagged PDS plates preserve observed, ellipsoid and joining provenance', (
   const mesh = parsePdsPlateShape(table, p);
   assert.deepEqual(mesh.positions[0], [1000, 0, 0]);
   assert.deepEqual(mesh.faceProvenance, [0, 2, 2, 2]);
-  assert.equal(mesh.coverage.observedVertices, 3);
+  assert.ok('coverage' in mesh); assert.equal(fixtureRecord(mesh,'coverage').observedVertices, 3);
   const ellipsoid = table.replace('1 0 0 0', '1 0 0 1').replace('0 1 0 0', '0 1 0 1').replace('0 0 1 0', '0 0 1 1').replace(/(\d \d \d) [02]$/gm, '$1 1');
-  assert.equal(parsePdsPlateShape(ellipsoid, p).coverage.ellipsoidFaces, 4);
+  assert.equal(fixtureRecord(parsePdsPlateShape(ellipsoid, p),'coverage').ellipsoidFaces, 4);
   assert.throws(() => parsePdsPlateShape(table.replace('0 1 2 0', '0 1 2 1'), p), /provenance/);
   assert.throws(() => parsePdsPlateShape(table.replace('-1 -1 -1 1', '-1 -1 -1 9'), p), /provenance/);
   assert.throws(() => parsePdsPlateShape(table, { ...p, provenanceFlags: undefined }), /rows changed/);
@@ -28,12 +29,12 @@ test('closest source point preserves barycentric geometry, edges and physical di
   const onFace=[1000,750,1000], n=[12,8,6].map(x=>x/Math.sqrt(244));
   const point=onFace.map((x,i)=>x+20*n[i]);
   const hit=mesh.closestPoint(point,21);
-  hit.point.forEach((x,i)=>assert.ok(Math.abs(x-onFace[i])<1e-9));
-  assert.ok(Math.abs(hit.distanceMeters-20)<1e-9);
+  required(hit).point.forEach((x,i)=>assert.ok(Math.abs(x-onFace[i])<1e-9));
+  assert.ok(Math.abs(required(hit).distanceMeters-20)<1e-9);
   assert.deepEqual(closestTrianglePoint([2200,-100,0],a,ab,ac),{point:a,barycentric:[1,0,0]});
   assert.equal(mesh.closestPoint(point,19),null,'No projection beyond the declared physical allowance');
   const result=createShapeSurfaceSampler(mesh,{surfaceSampling:{method:'closest-source-point',maximumDistanceMeters:21},valueTransform:{scale:.001,offset:-1}}).samplePoint(point);
-  assert.ok(Math.abs(result.value-(Math.hypot(...onFace)/1000-1))<1e-12);
+  assert.ok(Math.abs(required(result).value-(Math.hypot(...onFace)/1000-1))<1e-12);
 });
 
 test('two surfaces on a ray keep different source heights, while a flat preview withholds ambiguity', () => {
@@ -51,10 +52,10 @@ test('two surfaces on a ray keep different source heights, while a flat preview 
   assert.equal(mesh.sample(0,0),1);
   assert.equal(mesh.hit(0,0,true),null);
   const sampler=createShapeSurfaceSampler(mesh,{surfaceSampling:{method:'closest-source-point',maximumDistanceMeters:.2},valueTransform:{scale:1,offset:-1}});
-  assert.equal(sampler.samplePoint([1.1,0,0]).value,0);
-  assert.equal(sampler.samplePoint([4.9,0,0]).value,4);
+  assert.equal(required(sampler.samplePoint([1.1,0,0])).value,0);
+  assert.equal(required(sampler.samplePoint([4.9,0,0])).value,4);
   assert.equal(mesh.closestPoint([2,0,0],1.1),null,'Equidistant distinct source surfaces do not establish correspondence');
-  assert.equal(mesh.closestPoint([2,0,0],1.1,false).distanceMeters,1,'Distance-only audits can measure an ambiguous nearest surface');
+  assert.equal(required(mesh.closestPoint([2,0,0],1.1,false)).distanceMeters,1,'Distance-only audits can measure an ambiguous nearest surface');
   assert.ok(mesh.hit(180,0,true),'Coincident triangles at a source edge are one surface, not an ambiguity');
 });
 const vrmlOctahedron = `#VRML V2.0 utf8
@@ -71,7 +72,7 @@ test('Rosetta VRML triangle coordinates retain the analytic body frame and units
   for (const [lon,lat] of [[0,0],[90,0],[180,0],[270,0],[0,90],[0,-90],[45,30],[359.9,-67]]) {
     const l=lon*Math.PI/180,p=lat*Math.PI/180;
     const expected=1000/(Math.abs(Math.cos(p)*Math.cos(l))/2+Math.abs(Math.cos(p)*Math.sin(l))/3+Math.abs(Math.sin(p))/4);
-    assert.ok(Math.abs(mesh.sample(lon,lat)-expected)<1e-8);
+    assert.ok(Math.abs(required(mesh.sample(lon,lat))-expected)<1e-8);
   }
 });
 test('VRML rejects transformed geometry, non-triangles, invalid indices and truncated source', () => {
@@ -88,7 +89,7 @@ test('sourced radial intersections preserve units, seam and polar shape',()=>{
   for(const [lon,lat] of [[0,0],[90,0],[180,0],[270,0],[0,90],[0,-90],[45,30],[359.9,-67],[-.1,-67]]){
     const l=lon*Math.PI/180,p=lat*Math.PI/180;
     const expected=1000/(Math.abs(Math.cos(p)*Math.cos(l))/2+Math.abs(Math.cos(p)*Math.sin(l))/3+Math.abs(Math.sin(p))/4);
-    assert.ok(Math.abs(mesh.sample(lon,lat)-expected)<1e-8);
+    assert.ok(Math.abs(required(mesh.sample(lon,lat))-expected)<1e-8);
   }
   assert.equal(mesh.sample(0,91),null);
 });
@@ -109,7 +110,7 @@ test('PDS vertex-facet rows reproduce analytic octahedron intersections', async 
   for (const [lon,lat] of [[0,0],[90,0],[180,0],[270,0],[0,90],[0,-90],[45,30]]) {
     const l=lon*Math.PI/180,p=lat*Math.PI/180;
     const expected=1000/(Math.abs(Math.cos(p)*Math.cos(l))/2+Math.abs(Math.cos(p)*Math.sin(l))/3+Math.abs(Math.sin(p))/4);
-    assert.ok(Math.abs(mesh.sample(lon,lat)-expected)<1e-8);
+    assert.ok(Math.abs(required(mesh.sample(lon,lat))-expected)<1e-8);
     assert.equal(combinedMesh.sample(lon,lat), mesh.sample(lon,lat));
   }
   assert.throws(()=>parsePdsVertexFacetShape(text.replace('1 2 0 0','2 2 0 0'),profile),/row/);
@@ -119,11 +120,11 @@ test('PDS vertex-facet rows reproduce analytic octahedron intersections', async 
 
 test('radius tables retain west longitude, asymmetric radii and closed poles', async () => {
   const {parsePdsRadiusTable}=await import('./obj-shape.mts');
-  const rows=[];
+  const rows: string[]=[];
   for(let lon=0;lon<=360;lon+=90)for(const lat of [-90,0,90])rows.push([lon,lat,lat===0?({0:2,90:3,180:4,270:5,360:2}[lon]):6].join(' '));
   const p={metersPerUnit:1000,stepDegrees:90,longitudeDirection:'west-positive',expectedVertices:6,expectedFaces:8};
   const mesh=parsePdsRadiusTable(rows.join('\n'),p);
-  for(const [lon,lat,expected] of [[0,0,2000],[90,0,5000],[180,0,4000],[270,0,3000],[0,90,6000],[0,-90,6000]])assert.ok(Math.abs(mesh.sample(lon,lat)-expected)<1e-8);
+  for(const [lon,lat,expected] of [[0,0,2000],[90,0,5000],[180,0,4000],[270,0,3000],[0,90,6000],[0,-90,6000]])assert.ok(Math.abs(required(mesh.sample(lon,lat))-expected)<1e-8);
   const edges=new Map();
   for(const f of mesh.indices)for(let i=0;i<3;i++) {const a=f[i],b=f[(i+1)%3],k=[a,b].sort((a,b)=>a-b).join(',');edges.set(k,[...(edges.get(k)??[]),a<b?1:-1]);}
   assert.ok([...edges.values()].every(e=>e.length===2&&e[0]+e[1]===0));
@@ -158,7 +159,7 @@ test('ASCII and binary STL preserve the same physical mesh and reject malformed 
     for (const [lon, lat] of [[0,0],[90,0],[180,0],[270,0],[0,90],[0,-90],[45,30]]) {
       const l = lon * Math.PI / 180, p = lat * Math.PI / 180;
       const expected = 1000 / (Math.abs(Math.cos(p)*Math.cos(l))/2 + Math.abs(Math.cos(p)*Math.sin(l))/3 + Math.abs(Math.sin(p))/4);
-      assert.ok(Math.abs(mesh.sample(lon, lat) - expected) < 1e-8);
+      assert.ok(Math.abs(required(mesh.sample(lon, lat)) - expected) < 1e-8);
     }
   }
   assert.throws(() => parseStlShape(binary.subarray(0, binary.length - 1), profile), /STL|dimensions/);

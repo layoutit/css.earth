@@ -1,5 +1,6 @@
+declare global { interface Window { __marsProductionRetained: { nodes: Element[]; parents: (ParentNode | null)[] }; __marsProductionLongTasks: number[]; } }
 import assert from "node:assert/strict";
-import { chromium } from "playwright";
+import { chromium, type Page } from "playwright";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4332";
 const densities = process.argv[3] ? [Number(process.argv[3])] : [1, 2];
@@ -15,9 +16,9 @@ try {
     });
     const page = await context.newPage();
     const cdp = await context.newCDPSession(page);
-    const browserProblems = [];
-    const externalRequests = [];
-    let layers = [];
+    const browserProblems: string[] = [];
+    const externalRequests: string[] = [];
+    let layers: { width: number; height: number }[] = [];
     await cdp.send("LayerTree.enable");
     cdp.on("LayerTree.layerTreeDidChange", (event) => {
       layers = event.layers ?? layers;
@@ -50,12 +51,14 @@ try {
       assert.equal(response?.status(), 200);
       await page.waitForFunction(() =>
         document.documentElement.dataset.ready === "true" &&
-        document.querySelector(".planet-stage")?.getAttribute("aria-busy") ===
+        document.querySelector<HTMLElement>(".planet-stage")?.getAttribute("aria-busy") ===
           "false",
       );
       const initial = await page.evaluate(() => {
-        const stage = document.querySelector(".planet-stage");
-        const nodes = [stage, ...stage.querySelectorAll("*")];
+        function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
+        const stage = requiredElement(document.querySelector(".planet-stage"));
+        const nodes = [stage, ...stage.querySelectorAll<HTMLElement>("*")];
         window.__marsProductionRetained = {
           nodes,
           parents: nodes.map((node) => node.parentNode),
@@ -63,34 +66,34 @@ try {
         return {
           title: document.title,
           diagnostics: typeof window.__mars,
-          stageElements: stage.querySelectorAll("*").length,
-          retainedLeaves: stage.querySelectorAll("b, s, u").length,
-          canvasCount: stage.querySelectorAll("canvas").length,
-          svgCount: stage.querySelectorAll("svg").length,
-          sceneTransform: getComputedStyle(stage.querySelector(
+          stageElements: stage.querySelectorAll<HTMLElement>("*").length,
+          retainedLeaves: stage.querySelectorAll<HTMLElement>("b, s, u").length,
+          canvasCount: stage.querySelectorAll<HTMLElement>("canvas").length,
+          svgCount: stage.querySelectorAll<HTMLElement>("svg").length,
+          sceneTransform: getComputedStyle(requiredElement(stage.querySelector(
             ".polycss-scene",
-          )).transform,
-          normalSurfaceImage: getComputedStyle(stage.querySelector(
+          ))).transform,
+          normalSurfaceImage: getComputedStyle(requiredElement(stage.querySelector(
             ".mars-body > s:not(.mars-pole)",
-          )).backgroundImage,
-          normalPolesImage: getComputedStyle(stage.querySelector(
+          ))).backgroundImage,
+          normalPolesImage: getComputedStyle(requiredElement(stage.querySelector(
             ".mars-body > .mars-pole",
-          )).backgroundImage,
-          materialImage: getComputedStyle(stage.querySelector(
+          ))).backgroundImage,
+          materialImage: getComputedStyle(requiredElement(stage.querySelector(
             ".mars-material-plane > s",
-          )).backgroundImage,
-          moonImage: getComputedStyle(stage.querySelector(
+          ))).backgroundImage,
+          moonImage: getComputedStyle(requiredElement(stage.querySelector(
             ".mars-moon-shape > s",
-          )).backgroundImage,
-          loadedPreparedAssetUrls: performance.getEntriesByType("resource")
+          ))).backgroundImage,
+          loadedPreparedAssetUrls: performance.getEntriesByType("resource").filter((entry): entry is PerformanceResourceTiming => entry instanceof PerformanceResourceTiming)
             .map(({ name }) => name)
             .filter((url) => url.includes("/scenes/mars/")),
-          renderRootCount: stage.querySelectorAll(
+          renderRootCount: stage.querySelectorAll<HTMLElement>(
             ":scope > .planet-render-root",
           ).length,
           materialSharesMoonScene:
-            stage.querySelector(".mars-material")?.closest(".polycss-scene") ===
-            stage.querySelector(".mars-moon-shape")?.closest(".polycss-scene"),
+            stage.querySelector<HTMLElement>(".mars-material")?.closest(".polycss-scene") ===
+            stage.querySelector<HTMLElement>(".mars-moon-shape")?.closest(".polycss-scene"),
         };
       });
       assert.equal(initial.title, "Mars | cssEarth");
@@ -120,40 +123,50 @@ try {
       await page.mouse.up();
       await page.mouse.wheel(0, -180);
       await page.locator("#mars-lenses").evaluate((panel) => {
+if (!(panel instanceof HTMLDetailsElement)) throw new Error("Expected HTMLDetailsElement observation");
+
         panel.open = true;
       });
       for (const lens of ["elevation", "thermal", "normal"]) {
         await page.locator(`button[name="lens"][value="${lens}"]`).click();
         await page.waitForFunction((id) =>
-          document.querySelector(`button[name="lens"][value="${id}"]`)
+          document.querySelector<HTMLButtonElement>(`button[name="lens"][value="${id}"]`)
             ?.getAttribute("aria-pressed") === "true", lens);
       }
       await page.locator("#mars-settings").evaluate((panel) => {
+if (!(panel instanceof HTMLDetailsElement)) throw new Error("Expected HTMLDetailsElement observation");
+
         panel.open = true;
       });
       for (const name of ["shadows", "moons"]) {
         const input = page.locator(`input[name="${name}"]`);
-        await input.evaluate((control) => control.click());
-        await input.evaluate((control) => control.click());
+        await input.evaluate((control) => {
+if (!(control instanceof HTMLElement)) throw new Error("Expected HTMLElement observation");
+return control.click(); });
+        await input.evaluate((control) => {
+if (!(control instanceof HTMLElement)) throw new Error("Expected HTMLElement observation");
+return control.click(); });
       }
       await page.waitForTimeout(800);
       const after = await page.evaluate(() => {
-        const stage = document.querySelector(".planet-stage");
+        function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
+        const stage = requiredElement(document.querySelector(".planet-stage"));
         const retained = window.__marsProductionRetained;
         return {
-          sceneTransform: getComputedStyle(stage.querySelector(
+          sceneTransform: getComputedStyle(requiredElement(stage.querySelector(
             ".polycss-scene",
-          )).transform,
-          stageElements: stage.querySelectorAll("*").length,
+          ))).transform,
+          stageElements: stage.querySelectorAll<HTMLElement>("*").length,
           stable: retained.nodes.every((node, index) =>
             node.isConnected && node.parentNode === retained.parents[index]),
           runningAnimationCount: stage.getAnimations({ subtree: true })
             .filter(({ playState }) => playState === "running").length,
           longTasks: window.__marsProductionLongTasks,
-          materialImage: getComputedStyle(stage.querySelector(
+          materialImage: getComputedStyle(requiredElement(stage.querySelector(
             ".mars-material-plane > s",
-          )).backgroundImage,
-          resources: performance.getEntriesByType("resource")
+          ))).backgroundImage,
+          resources: performance.getEntriesByType("resource").filter((entry): entry is PerformanceResourceTiming => entry instanceof PerformanceResourceTiming)
             .filter(({ name }) => name.includes("/scenes/mars/"))
             .map(({ name, transferSize }) => ({ name, transferSize })),
         };
@@ -178,7 +191,7 @@ try {
         transferBytes,
         transferBudget,
       }));
-      const maximumLayer = layers.reduce((maximum, layer) => {
+      const maximumLayer = layers.reduce<{ area: number; width: number; height: number }>((maximum, layer) => {
         const area = (layer.width ?? 0) * (layer.height ?? 0);
         return area > maximum.area ? {
           width: layer.width ?? 0,

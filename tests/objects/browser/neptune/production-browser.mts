@@ -1,5 +1,6 @@
+declare global { interface Window { __neptuneProductionRetained: { nodes: Element[]; parents: (ParentNode | null)[] }; __neptuneProductionLongTasks: number[]; } }
 import assert from "node:assert/strict";
-import { chromium } from "playwright";
+import { chromium, type Page } from "playwright";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4310";
 const browser = await chromium.launch({
@@ -16,10 +17,10 @@ try {
     });
     const page = await context.newPage();
     const session = await context.newCDPSession(page);
-    const externalRequests = [];
-    const problems = [];
-    const requestedPaths = new Set();
-    let layers = [];
+    const externalRequests: string[] = [];
+    const problems: string[] = [];
+    const requestedPaths = new Set<string>();
+    let layers: { width: number; height: number }[] = [];
     await session.send("LayerTree.enable");
     await session.send("Performance.enable");
     session.on("LayerTree.layerTreeDidChange", (event) => {
@@ -56,12 +57,14 @@ try {
       assert.equal(response?.status(), 200);
       await page.waitForFunction(() =>
         document.documentElement.dataset.ready === "true" &&
-        document.querySelector(".planet-stage")?.getAttribute("aria-busy") ===
+        document.querySelector<HTMLElement>(".planet-stage")?.getAttribute("aria-busy") ===
           "false");
 
       const initial = await page.evaluate(() => {
-        const stage = document.querySelector(".planet-stage");
-        const nodes = [stage, ...stage.querySelectorAll("*")];
+        function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
+        const stage = requiredElement(document.querySelector(".planet-stage"));
+        const nodes = [stage, ...stage.querySelectorAll<HTMLElement>("*")];
         window.__neptuneProductionRetained = {
           nodes,
           parents: nodes.map((node) => node.parentNode),
@@ -69,18 +72,18 @@ try {
         return {
           title: document.title,
           stageChildren: stage.childElementCount,
-          stageElements: stage.querySelectorAll("*").length,
-          bodyLeafCount: stage.querySelectorAll(".neptune-body > s").length,
-          materialLeafCount: stage.querySelectorAll(
+          stageElements: stage.querySelectorAll<HTMLElement>("*").length,
+          bodyLeafCount: stage.querySelectorAll<HTMLElement>(".neptune-body > s").length,
+          materialLeafCount: stage.querySelectorAll<HTMLElement>(
             "s.neptune-exterior-material",
           ).length,
-          orbitGuideLeafCount: stage.querySelectorAll(
+          orbitGuideLeafCount: stage.querySelectorAll<HTMLElement>(
             "s.neptune-moon-orbit-guide",
           ).length,
-          imageCount: stage.querySelectorAll("img").length,
-          canvasCount: stage.querySelectorAll("canvas").length,
-          svgCount: stage.querySelectorAll("svg").length,
-          sceneTransform: stage.querySelector(".polycss-scene").style.transform,
+          imageCount: stage.querySelectorAll<HTMLElement>("img").length,
+          canvasCount: stage.querySelectorAll<HTMLElement>("canvas").length,
+          svgCount: stage.querySelectorAll<HTMLElement>("svg").length,
+          sceneTransform: requiredElement(stage.querySelector(".polycss-scene")).style.transform,
         };
       });
       assert.deepEqual(initial, {
@@ -101,12 +104,14 @@ try {
       assert.equal(await page.evaluate(() => window.__neptune), undefined);
 
       await page.locator("#neptune-lenses").evaluate((panel) => {
+if (!(panel instanceof HTMLDetailsElement)) throw new Error("Expected HTMLDetailsElement observation");
+
         panel.open = true;
       });
       for (const lens of ["methane", "near-infrared", "normal"]) {
         await page.locator(`button[name="lens"][value="${lens}"]`).click();
         await page.waitForFunction((id) =>
-          document.querySelector(".planet-stage")?.dataset.lens === id,
+          document.querySelector<HTMLElement>(".planet-stage")?.dataset.lens === id,
         lens);
         assert.equal(await page.locator(
           `button[name="lens"][value="${lens}"]`,
@@ -116,32 +121,42 @@ try {
       await drag(page, ".planet-input-surface", 0, 150);
       await wheel(page, ".planet-input-surface", -240);
       await page.locator("#neptune-settings").evaluate((panel) => {
+if (!(panel instanceof HTMLDetailsElement)) throw new Error("Expected HTMLDetailsElement observation");
+
         panel.open = true;
       });
       await page.locator('input[name="speed"][type="range"]').evaluate((input) => {
+if (!(input instanceof HTMLInputElement)) throw new Error("Expected HTMLInputElement observation");
+
         input.value = "2";
         input.dispatchEvent(new Event("input", { bubbles: true }));
       });
       const rings = page.locator('input[name="rings"]');
-      await rings.evaluate((input) => input.click());
+      await rings.evaluate((input) => {
+if (!(input instanceof HTMLElement)) throw new Error("Expected HTMLElement observation");
+return input.click(); });
       assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
         stage.classList.contains("neptune-hide-rings")), true);
-      await rings.evaluate((input) => input.click());
+      await rings.evaluate((input) => {
+if (!(input instanceof HTMLElement)) throw new Error("Expected HTMLElement observation");
+return input.click(); });
       await page.waitForTimeout(500);
 
       const after = await page.evaluate(() => {
-        const stage = document.querySelector(".planet-stage");
+        function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
+        const stage = requiredElement(document.querySelector(".planet-stage"));
         const retained = window.__neptuneProductionRetained;
         return {
-          stageElements: stage.querySelectorAll("*").length,
+          stageElements: stage.querySelectorAll<HTMLElement>("*").length,
           stable: retained.nodes.every((node, index) =>
             node.isConnected && node.parentNode === retained.parents[index]),
-          sceneTransform: stage.querySelector(".polycss-scene").style.transform,
+          sceneTransform: requiredElement(stage.querySelector(".polycss-scene")).style.transform,
           materialAsset: getComputedStyle(
-            stage.querySelector(".neptune-exterior-material"),
+            requiredElement(stage.querySelector(".neptune-exterior-material")),
           ).backgroundImage,
           longTasks: window.__neptuneProductionLongTasks,
-          resources: performance.getEntriesByType("resource")
+          resources: performance.getEntriesByType("resource").filter((entry): entry is PerformanceResourceTiming => entry instanceof PerformanceResourceTiming)
             .filter(({ name }) => name.includes("/scenes/neptune/"))
             .map(({ name, transferSize }) => ({ name, transferSize })),
         };
@@ -169,7 +184,7 @@ try {
       const metrics = Object.fromEntries((await session.send(
         "Performance.getMetrics",
       )).metrics.map(({ name, value }) => [name, value]));
-      const maximumLayer = layers.reduce((maximum, layer) => {
+      const maximumLayer = layers.reduce<{ area: number; width: number; height: number }>((maximum, layer) => {
         const area = (layer.width ?? 0) * (layer.height ?? 0);
         return area > maximum.area
           ? { area, width: layer.width ?? 0, height: layer.height ?? 0 }
@@ -209,7 +224,7 @@ console.log(JSON.stringify({
   reports,
 }, null, 2));
 
-async function drag(page, selector, deltaX, deltaY) {
+async function drag(page: Page, selector: string, deltaX: number, deltaY: number) {
   const box = await page.locator(selector).boundingBox();
   assert.ok(box);
   const x = box.x + box.width * 0.72;
@@ -221,7 +236,7 @@ async function drag(page, selector, deltaX, deltaY) {
   await nextPaint(page);
 }
 
-async function wheel(page, selector, deltaY) {
+async function wheel(page: Page, selector: string, deltaY: number) {
   const box = await page.locator(selector).boundingBox();
   assert.ok(box);
   await page.mouse.move(box.x + box.width * 0.72, box.y + box.height * 0.5);
@@ -229,7 +244,7 @@ async function wheel(page, selector, deltaY) {
   await nextPaint(page);
 }
 
-function nextPaint(page) {
+function nextPaint(page: Page) {
   return page.evaluate(() => new Promise((resolve) =>
     requestAnimationFrame(() => requestAnimationFrame(resolve))));
 }

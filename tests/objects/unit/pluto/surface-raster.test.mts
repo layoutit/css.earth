@@ -4,8 +4,8 @@ import { readFile } from "node:fs/promises";
 import { prepareBandSurfaceScene } from "../../../../tools/objects/static-surface/band-scene.mts";
 import { bakeSurfaceRaster, prepareSurfaceRasterCell, PLUTO_SURFACE_ATLAS } from "./preparation-fixture.mts";
 
-const geometry = {
-  matrix: "1,0,0,0,0,1,0,-0.01,0,0,1,0,0,0,0,1",
+const geometry:Parameters<typeof prepareSurfaceRasterCell>[0] = {
+  projection:'projective', matrix: "1,0,0,0,0,1,0,-0.01,0,0,1,0,0,0,0,1",
   leafWidth: 16, leafHeight: 16,
   backgroundPosition: [0, 0], backgroundSize: [16, 16],
 };
@@ -21,7 +21,7 @@ test("prepares affine frames with already-corrected texture pixels", () => {
   assert.equal(cell.source.padding, PLUTO_SURFACE_ATLAS.gutter);
   assert.equal(m[12], -PLUTO_SURFACE_ATLAS.gutter);
   assert.equal(m[13], -PLUTO_SURFACE_ATLAS.gutter);
-  assert.throws(() => prepareSurfaceRasterCell({ ...geometry, matrix: "1,0,0,0,0,1,0,-1,0,0,1,0,0,0,0,1" }, 0), /infinity/);
+  assert.throws(() => prepareSurfaceRasterCell({ ...geometry, projection:'projective', matrix: "1,0,0,0,0,1,0,-1,0,0,1,0,0,0,0,1" }, 0), /infinity/);
 });
 
 test("inverse sampling preserves imagery and leaves outside-quad wedges transparent", () => {
@@ -29,7 +29,7 @@ test("inverse sampling preserves imagery and leaves outside-quad wedges transpar
   const source = Buffer.alloc(16 * 16 * 3);
   for (let y = 0; y < 16; y++) for (let x = 0; x < 16; x++) source.set([x * 8, 77, 99], (y * 16 + x) * 3);
   const raster = bakeSurfaceRaster(source, { width: 16, height: 16, channels: 3 }, [cell], 2);
-  const pixel = (x, y) => [...raster.data.subarray(((cell.y * 2 + y) * raster.width + cell.x * 2 + x) * 4, ((cell.y * 2 + y) * raster.width + cell.x * 2 + x) * 4 + 4)];
+  const pixel = (x: number, y: number) => [...raster.data.subarray(((cell.y * 2 + y) * raster.width + cell.x * 2 + x) * 4, ((cell.y * 2 + y) * raster.width + cell.x * 2 + x) * 4 + 4)];
   // The bounding rectangle contains a trapezoid, not stretched edge texels.
   assert.deepEqual(pixel(39, 2), [0, 0, 0, 0]);
   assert.deepEqual(pixel(20, 12).slice(1), [77, 99, 255]);
@@ -40,12 +40,12 @@ test("inverse sampling preserves imagery and leaves outside-quad wedges transpar
 });
 
 test("overlapping globe faces retain the corresponding source coordinates", async () => {
-  const profile = JSON.parse(await readFile(new URL("../../../../src/planets/pluto/source/preparation/geometry.json", import.meta.url)));
+  const profile = JSON.parse((await readFile(new URL("../../../../src/planets/pluto/source/preparation/geometry.json", import.meta.url))).toString('utf8'));
   const { surfaceRasterCells } = prepareBandSurfaceScene(profile);
   const { longitudeSegments, latitudeSegments, surfaceOverlap } = profile.parameters;
   for (const [index, { source }] of surfaceRasterCells.entries()) {
     const longitude = index % longitudeSegments, latitude = Math.floor(index / longitudeSegments) + 1;
-    const close = (a, b) => assert.ok(Math.abs(a - b) < 1e-10, `${a} differs from ${b}`);
+    const close = (a: number, b: number) => assert.ok(Math.abs(a - b) < 1e-10, `${a} differs from ${b}`);
     close(-source.backgroundPosition[0] / source.backgroundSize[0], (longitude - surfaceOverlap) / longitudeSegments);
     close((source.width - source.backgroundPosition[0]) / source.backgroundSize[0], (longitude + 1 + surfaceOverlap) / longitudeSegments);
     close(-source.backgroundPosition[1] / source.backgroundSize[1], (latitudeSegments - 1 - latitude - surfaceOverlap) / latitudeSegments);
@@ -80,15 +80,15 @@ for (const density of [1, 2]) for (const perspectiveY of [0, -0.007, 0.0061]) {
       data.set([Math.round(y / (height - 1) * 255), y % 2 * 255, x % 2 * 255], (y * width + x) * 3);
     }
     const cells = Array.from({ length: bandCount }, (_, band) => prepareSurfaceRasterCell({
-      matrix: `1,0,0,0,0,1,0,${perspectiveY},0,0,1,0,0,0,0,1`,
+      projection:'projective', matrix: `1,0,0,0,0,1,0,${perspectiveY},0,0,1,0,0,0,0,1`,
       leafWidth: 32, leafHeight: 32,
       backgroundPosition: [0, -band * 32], backgroundSize: [32, 512],
     }, band));
     const raster = bakeSurfaceRaster(data, { width, height, channels: 3 }, cells, density);
     // Independent source-space oracle: latitude runs north-to-south, whereas
     // each retained face runs south-to-north. Interpolate original global rows.
-    const sourcePixel = (x, y, channel) => data[(Math.max(0, Math.min(height - 1, y)) * width + (x + width) % width) * 3 + channel];
-    const sample = (x, y, channel) => {
+    const sourcePixel = (x: number, y: number, channel: number) => data[(Math.max(0, Math.min(height - 1, y)) * width + (x + width) % width) * 3 + channel];
+    const sample = (x: number, y: number, channel: number) => {
       let value = 0;
       for (const row of [Math.floor(y), Math.floor(y) + 1]) for (const column of [Math.floor(x), Math.floor(x) + 1]) {
         value += sourcePixel(column, row, channel) * (1 - Math.abs(row - y)) * (1 - Math.abs(column - x));
@@ -98,7 +98,7 @@ for (const density of [1, 2]) for (const perspectiveY of [0, -0.007, 0.0061]) {
     for (const [band, cell] of cells.entries()) {
       let compared = 0;
       for (let y = 0; y < Math.ceil(cell.height * density); y++) for (let x = 0; x < Math.ceil(cell.width * density); x++) {
-        const samples = [];
+        const samples: number[][] = [];
         for (const dy of [0.25, 0.75]) for (const dx of [0.25, 0.75]) {
           // Solve y' = v / (1 + perspectiveY * v) in leaf units.
           const projectedY = (y + dy) / density - cell.source.padding;

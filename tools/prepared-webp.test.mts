@@ -12,6 +12,8 @@ import {
   optimizePreparedLosslessWebp,
 } from "./prepared-webp.mts";
 
+assert.equal(typeof cwebpPath, 'string');
+const encoder = String(cwebpPath);
 const run = promisify(execFile);
 
 test("lossless optimization preserves transparent RGB consumed by later edge interpolation", async t => {
@@ -24,14 +26,14 @@ test("lossless optimization preserves transparent RGB consumed by later edge int
   }
   const source = resolve(directory, "source.png"), input = resolve(directory, "input.webp");
   await sharp(raw, { raw: { width, height, channels: 4 } }).png().toFile(source);
-  await run(cwebpPath, ["-quiet", "-lossless", "-m", "0", "-exact", source, "-o", input]);
+  await run(encoder, ["-quiet", "-lossless", "-m", "0", "-exact", source, "-o", input]);
   const decode = () => sharp(input).ensureAlpha().raw().toBuffer();
   const original = await decode();
   assert.deepEqual(original, raw, "the fixture must retain its fully transparent RGB");
   // This is the existing preparation contract: interpolate unassociated RGBA
   // across the edge, then composite the sample. Clearing hidden RGB changes the
   // visible result even though each source texel looks unchanged in isolation.
-  const visibleEdge = data => {
+  const visibleEdge = (data: Uint8Array) => {
     const left = (32 * width + 31) * 4, right = left + 4;
     const alpha = (data[left + 3] + data[right + 3]) / (2 * 255);
     return [0, 1, 2].map(channel => (data[left + channel] + data[right + channel]) / 2 * alpha);
@@ -57,10 +59,10 @@ test("terminal display policy retains the established encoded bytes and visible 
   const source = resolve(directory, "source.png"), input = resolve(directory, "input.webp");
   const established = resolve(directory, "established.webp");
   await sharp(raw, { raw: { width, height, channels: 4 } }).png().toFile(source);
-  await run(cwebpPath, ["-quiet", "-lossless", "-m", "0", "-exact", source, "-o", input]);
+  await run(encoder, ["-quiet", "-lossless", "-m", "0", "-exact", source, "-o", input]);
   const before = await readFile(input);
   // This is the pre-existing terminal display command, independent of the API.
-  await run(cwebpPath, ["-quiet", "-lossless", "-z", "9", input, "-o", established]);
+  await run(encoder, ["-quiet", "-lossless", "-z", "9", input, "-o", established]);
   const candidate = await readFile(established);
   assert.ok(candidate.length < before.length, "the fixture must exercise publication of the display encoding");
   const expected = candidate.length < before.length ? candidate : before;

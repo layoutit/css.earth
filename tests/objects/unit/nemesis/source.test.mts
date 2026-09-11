@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
-import {readFile} from 'node:fs/promises';
+import {createSourceFixtureReader,requireClosedTerrain} from '../../fixtures/source-fixture.mts';
 import {resolve} from 'node:path';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root=resolve(import.meta.dirname,'../../../../src/planets/nemesis/source');
-const read=async path=>JSON.parse(await readFile(resolve(root,path),'utf8'));
+const read=createSourceFixtureReader(root);
 test('Nemesis retains original source pins and acquisition closure',async()=>{
  const source=await createSourceManifest({planetId:'nemesis',planetName:'Nemesis',sourceRoot:root});await source.verify();
  const plan=await read('preparation/acquisition.json');
@@ -29,7 +29,7 @@ test('Nemesis preserves the original kilometer mesh and published spin interpret
 });
 test('Nemesis keeps a closed source-connected mesh within the retained raster budget',async()=>{
  const config=await read('preparation/terrestrial.json'),source=await createSourceManifest({planetId:'nemesis',planetName:'Nemesis',sourceRoot:root});
- const radial=await loadRadialTerrain({config,sourceDirectory:root,source});
+ const radial=requireClosedTerrain(await loadRadialTerrain({config,sourceDirectory:root,source}));
  assert.equal(radial.faces.length,800);assert.equal(radial.simplification.sourceFaces,5472);assert.equal(radial.simplification.removedOppositeFaces,0);
  assert.equal(radial.simplification.topology.eulerCharacteristic,2);assert.ok(radial.simplification.estimatedErrorMeters<=1500);
  assert.ok(radial.leaves.every(l=>l.tag==='u'&&l.attributes['data-polycss-texture-leaf-sizing']==='raster'));

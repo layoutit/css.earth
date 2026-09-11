@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import {observation} from '../observation.mts';
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
@@ -9,16 +10,16 @@ import {loadObjShape, parseObjShape} from '../../../../tools/objects/terrestrial
 import {simplifyRadialShape} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root = new URL('../../../../', import.meta.url);
 test('Mimas source simplification stays closed, preserves source positions and agrees with the independent radius product', async () => {
-  const config = JSON.parse(await readFile(new URL('src/planets/mimas/source/preparation/terrestrial.json', root)));
+  const config = JSON.parse((await readFile(new URL('src/planets/mimas/source/preparation/terrestrial.json', root))).toString('utf8'));
   const sourceRoot = new URL('src/planets/mimas/source/', root).pathname;
   const profile = config.geometry.radialTerrain;
   const source = await loadObjShape(`${sourceRoot}/${profile.path}`, profile.grid);
   const elevation = await loadScienceSurface(sourceRoot, config.raster.scientific[0]);
-  for (const [lon, lat] of [[0,0],[90,0],[180,0],[270,0],[0,90],[45,45],[135,-45],[248.24,-1.38]]) {
-    assert.ok(Math.abs(source.sample(lon,lat) / 1000 - (elevation.sample(lon,lat) + 198.2)) < 1.5,
+  for (const [lon, lat] of [[0,0],[90,0],[180,0],[270,0],[0,90],[45,45],[135,-45],[248.24,-1.38]] as const) {
+    assert.ok(Math.abs(required(source.sample(lon,lat)) / 1000 - (required(elevation.sample(lon,lat)) + 198.2)) < 1.5,
       `Independent OBJ and GeoTIFF geography/units differ at ${lon},${lat}`);
   }
-  assert.ok(source.sample(0,-90) > 190000, 'The released mesh closes the pole even where the raster has no coverage');
+  assert.ok(required(source.sample(0,-90)) > 190000, 'The released mesh closes the pole even where the raster has no coverage');
   const faces = await simplifyRadialShape(source, profile, 1);
   assert.ok(faces.length <= 720 && faces.length > 0);
   const originals = new Set(source.positions.map(v => v.join(','))), edges = new Map();
@@ -32,9 +33,9 @@ test('Mimas source simplification stays closed, preserves source positions and a
   const coarse=parseObjShape(obj,{metersPerUnit:1,expectedVertices:faces.length*3,expectedFaces:faces.length});
   const errors=[];
   for(let lat=-87;lat<90;lat+=6)for(let lon=3;lon<360;lon+=6) {
-    const radius=coarse.sample(lon,lat);
+    const radius=required(coarse.sample(lon,lat));
     assert.ok(radius > 0, 'Simplified body must have no radial holes');
-    errors.push(Math.abs(radius-source.sample(lon,lat)));
+    errors.push(Math.abs(radius-required(source.sample(lon,lat))));
   }
   errors.sort((a,b)=>a-b);
   assert.ok(errors[Math.floor(errors.length*.95)] < 3000, 'Simplification must retain the broad relief across the body');
@@ -42,22 +43,22 @@ test('Mimas source simplification stays closed, preserves source positions and a
 });
 
 test('Mimas elevation uses PDS radius units, east-positive geography and exact raster bounds', async () => {
-  const config = JSON.parse(await readFile(new URL('src/planets/mimas/source/preparation/terrestrial.json', root)));
+  const config = JSON.parse((await readFile(new URL('src/planets/mimas/source/preparation/terrestrial.json', root))).toString('utf8'));
   const sourceRoot = new URL('src/planets/mimas/source/', root).pathname;
   const elevation = await loadScienceSurface(sourceRoot, config.raster.scientific[0]);
   const file = await fromFile(`${sourceRoot}/observations/mimas_radius_g.tif`);
   try {
     const image = await file.getImage();
     // Original PDS XML: 2222 x 1111, 559.13276289079 m cells on a 198200 m sphere.
-    for (const [x, y] of [[300,200],[1532,564],[2100,900]]) {
+    for (const [x, y] of [[300,200],[1532,564],[2100,900]] as const) {
       const longitude = 180 + (-622663.6639415 + (x + 0.5) * 559.13276289079) / 198200 * 180 / Math.PI;
       const latitude = (311331.83197075 - (y + 0.5) * 559.13276289079) / 198200 * 180 / Math.PI;
       const [values] = await image.readRasters({window:[x,y,x+1,y+1]});
-      assert.ok(Math.abs(elevation.sample(longitude, latitude) - (values[0] - 198200) / 1000) < 1e-8);
+      assert.ok(Math.abs(required(elevation.sample(longitude, latitude)) - (values[0] - 198200) / 1000) < 1e-8);
     }
     assert.equal(elevation.sample(359.8,0), null, 'Do not stretch the eastern edge to fill the seam');
     assert.equal(elevation.sample(180,-89.9), null, 'Do not extrapolate the southern edge');
-    assert.ok(elevation.sample(248.24,-1.38) < elevation.sample(230,-1.38) - 4, 'Herschel floor lies below its western rim');
+    assert.ok(required(elevation.sample(248.24,-1.38)) < required(elevation.sample(230,-1.38)) - 4, 'Herschel floor lies below its western rim');
   } finally {await file.close();}
 });
 
@@ -68,7 +69,7 @@ test('Mimas maps preserve source geography through the shared atlas resampling',
   const prepared = await observation('mimas', 'normal', width, height);
   assert.deepEqual([prepared.info.width,prepared.info.height],[width,height]);
   // NASA's labeled map starts at 180 E. Herschel is near 248 E, not 68 E.
-  for(const [lat,lon] of [[-1.38,248.24],[30,30],[-65,300],[85,180],[0,.1],[0,359.9]]) {
+  for(const [lat,lon] of [[-1.38,248.24],[30,30],[-65,300],[85,180],[0,.1],[0,359.9]] as const) {
     const x=Math.floor(lon/360*width),y=Math.floor((90-lat)/180*height);
     const sx=(x+width/2)%width;
     assert.deepEqual(prepared.data.subarray((y*width+x)*3,(y*width+x)*3+3),

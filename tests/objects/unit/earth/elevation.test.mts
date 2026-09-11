@@ -1,3 +1,6 @@
+import {shape,array,text,number} from '../../../../tools/objects/geographic-pages/source-records.mts';
+import {earthPreparationConfig as config} from './prepared-fixture.mts';
+import {required} from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
@@ -8,14 +11,15 @@ import sharp from 'sharp';
 import { decodeElevationDods, readElevationGrid, elevationColor, prepareElevationMap } from '../../../../tools/objects/paged-ellipsoid/elevation.mts';
 
 const sourceDirectory = resolve('src/planets/earth/source');
-const config = JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/paged-ellipsoid.json')));
-const map = config.surface.maps.find(map => map.name === 'earth-topography');
+const selectedMap=required(config.surface.maps.find(map=>map.name==='earth-topography'));
+assert.ok(selectedMap.scientific?.kind==='gebco-elevation');
+const map={...selectedMap,scientific:selectedMap.scientific};
 
 function fixture(rows = 2, rowOffset = 0) {
   const grid = { width: 4, height: 2, firstIndex: 10799, stride: 21600, nativeCellDegrees: 1 / 240 };
   const header = Buffer.from(`Dataset { Grid { ARRAY: Int16 elevation[lat = ${rows}][lon = 4]; MAPS: Float64 lat[lat = ${rows}]; Float64 lon[lon = 4]; } elevation; } bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc;\nData:\n`);
   const data = Buffer.alloc(24 + rows * 4 * 4 + (rows + 4) * 8); let offset = 0;
-  const array = (values, size) => {
+  const array = (values: readonly number[], size: number) => {
     data.writeUInt32BE(values.length, offset); data.writeUInt32BE(values.length, offset + 4); offset += 8;
     for (const value of values) { size === 4 ? data.writeInt32BE(value, offset) : data.writeDoubleBE(value, offset); offset += size; }
   };
@@ -30,8 +34,8 @@ test('signed DAP2 heights preserve axes, interpolate scalars and wrap the dateli
   const d = 1 / 480;
   assert.equal(decoded.sample(-135 - d, -45 - d), -3000);
   assert.equal(decoded.sample(135 - d, 45 - d), 4000);
-  assert.ok(Math.abs(decoded.sample(-90 - d, -d) + 500) < 1e-8);
-  assert.ok(Math.abs(decoded.sample(-180, 0) - decoded.sample(180, 0)) < 1e-8);
+  assert.ok(Math.abs(required(decoded.sample(-90 - d, -d)) + 500) < 1e-8);
+  assert.ok(Math.abs(required(decoded.sample(-180, 0)) - required(decoded.sample(180, 0))) < 1e-8);
   assert.equal(decoded.sample(0, 91), null);
   assert.equal(decoded.sample(NaN, 0), null);
 });
@@ -61,7 +65,7 @@ test('latitude blocks assemble exactly once and partial or overlapping globes fa
   try {
     await writeFile(resolve(directory, 'metadata.das'), await readFile(resolve(sourceDirectory, map.scientific.metadata)));
     for (let row = 0; row < 2; row++) await writeFile(resolve(directory, `${row}.gz`), gzipSync(fixture(1, row).bytes));
-    const sampleMap = { path: '0.gz', scientific: { metadata: 'metadata.das', grid: fixture().grid,
+    const sampleMap = { path: '0.gz', scientific: { ...map.scientific, metadata: 'metadata.das', grid: fixture().grid,
       blocks: [{ path: '0.gz', rowOffset: 0, rows: 1 }, { path: '1.gz', rowOffset: 1, rows: 1 }] } };
     const decoded = await readElevationGrid(directory, sampleMap);
     assert.deepEqual([...decoded.values], [-3000, -2000, -1000, 0, 1000, 2000, 3000, 4000]);
@@ -74,11 +78,11 @@ test('latitude blocks assemble exactly once and partial or overlapping globes fa
 
 test('pinned GEBCO numerical anchors agree with independently requested source cells', async () => {
   const grid = await readElevationGrid(sourceDirectory, map);
-  const witnesses = JSON.parse(await readFile('tests/objects/fixtures/earth-elevation/source-witnesses.json'));
+  const witnesses = shape({records:array(shape({sampleIndex:array(number),meters:number,name:text,longitude:number,latitude:number,expectedRange:array(number)}))})(JSON.parse((await readFile('tests/objects/fixtures/earth-elevation/source-witnesses.json')).toString('utf8')));
   for (const witness of witnesses.records) {
     const [row, col] = witness.sampleIndex;
     assert.equal(grid.values[row * map.scientific.grid.width + col], witness.meters, witness.name);
-    assert.ok(Math.abs(grid.sample(witness.longitude, witness.latitude) - witness.meters) < 1e-5, witness.name);
+    assert.ok(Math.abs(required(grid.sample(witness.longitude, witness.latitude)) - witness.meters) < 1e-5, witness.name);
     assert.ok(witness.meters >= witness.expectedRange[0] && witness.meters <= witness.expectedRange[1], witness.name);
   }
 });

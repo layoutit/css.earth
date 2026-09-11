@@ -43,7 +43,7 @@ export function validateEncounterRecipe(value: unknown, sourceGeometry: unknown)
 
 /** All four pixel centers must describe the same physical surface patch. Dark
  * calibrated pixels remain eligible; no brightness threshold defines coverage. */
-export function sampleEncounterFootprint(frame: EncounterFrame, camera: Camera, plane: EncounterBackplane, point: readonly number[], policy: {maximumSeparationMeters:number}): GeoSample {
+export function sampleEncounterFootprint(frame: Pick<EncounterFrame,'width'|'height'> & {values:ArrayLike<number>}, camera: Pick<Camera,'project'>, plane: Pick<EncounterBackplane,'accepted'|'xyz'|'reasons'> & {gains:ArrayLike<number>;emissions:ArrayLike<number>}, point: readonly number[], policy: {maximumSeparationMeters:number}): GeoSample {
   const p=camera.project(point);
   if (!p) return {reason:'behind-camera'};
   const x=Math.floor(p[0]),y=Math.floor(p[1]);
@@ -63,7 +63,7 @@ export function sampleEncounterFootprint(frame: EncounterFrame, camera: Camera, 
   return {radiance,gain,separationMeters,maximumEmissionDegrees};
 }
 
-function qualifiedFace(mesh: SourceMesh,id: number) {
+function qualifiedFace(mesh: Pick<SourceMesh,'indices'|'faceProvenance'|'constraintFlags'>,id: number) {
   if (mesh.faceProvenance && mesh.faceProvenance[id]!==0) return false;
   if (mesh.constraintFlags && mesh.indices[id].some(v=>mesh.constraintFlags?.[v]===3)) return false;
   return true;
@@ -71,7 +71,7 @@ function qualifiedFace(mesh: SourceMesh,id: number) {
 
 /** Reconstructed pixel backplanes use the original source mesh and camera,
  * never the simplified display mesh. They are preparation-only working data. */
-export function buildEncounterBackplane(frame: EncounterFrame,camera: Camera,mesh: SourceMesh,recipe: Pick<EncounterRecipe,"transfer">) {
+export function buildEncounterBackplane(frame: Pick<EncounterFrame,'width'|'height'|'reason'>,camera: Pick<Camera,'project'|'positionMeters'|'ray'>,mesh: Pick<SourceMesh,'positions'|'indices'|'faceProvenance'|'constraintFlags'> & {intersect: (...args:Parameters<SourceMesh['intersect']>)=>{faceId:number;radius:number}|null},recipe: {transfer:Pick<EncounterRecipe['transfer'],'maximumEmissionDegrees'>}) {
   const count=frame.width*frame.height;
   const plane={accepted:new Uint8Array(count),xyz:new Float64Array(count*3),gains:new Float32Array(count),emissions:new Float32Array(count),reasons:new Array<string>()};
   const tally:Record<string,number>={};const reject=(i:number,reason:string)=>{plane.reasons[i]=reason;tally[reason]=(tally[reason]??0)+1;};
@@ -105,7 +105,7 @@ interface BoundEncounter {
 
 /** A close-up must inherit an already-qualified, byte-pinned photograph in this
  * mosaic. Recheck its actual reference pixels against the original mesh. */
-export function validateEncounterImageReference(control:ReturnType<typeof parseEncounterSourceControl>,reference:Pick<BoundEncounter,'id'|'imageSha256'|'controlSha256'|'camera'|'sampleSource'>|undefined,mesh:SourceMesh) {
+export function validateEncounterImageReference(control:{registration:{method:string;reference?:{id:string;imageSha256:string;controlSha256:string};controls:readonly {referencePixel?:readonly number[];sourcePointMeters:readonly number[]}[]}},reference:(Pick<BoundEncounter,'id'|'imageSha256'|'controlSha256'|'sampleSource'> & {camera:Pick<Camera,'project'|'positionMeters'>})|undefined,mesh:{intersect:(...args:Parameters<SourceMesh['intersect']>)=>{radius:number}|null}) {
   const r=control.registration;if(r.method!=='registered-image-feature-translation')return;
   if(!r.reference||!reference||reference.id!==r.reference.id||reference.imageSha256!==r.reference.imageSha256||reference.controlSha256!==r.reference.controlSha256)throw new Error('Close-up reference must be an earlier qualified image with matching source hashes.');
   for(const p of r.controls){

@@ -6,11 +6,16 @@ import { readFile } from "node:fs/promises";
 import { requireObjectControls } from "../scene-contract.mts";
 import { OBJECTS } from "../objects.mts";
 
+import { parse, object, array, string, optional, boolean } from '../../tools/objects/material-composition/data-schema.mts';
+const preparedControls = (value: unknown) => parse(value, object({ controls: object({ settings: object({
+  controls: array(object({ name: string, kind: string, label: string, checked: optional(boolean), state: optional(string) })),
+}) }) }), 'prepared settings').controls;
+
 test("asteroid, trans-Neptunian and comet Shadows default off in authored content and prepared runtime", async () => {
   for (const { id } of OBJECTS.filter(object => ["asteroid", "trans-neptunian", "comet", "interstellar"].includes(object.classification))) {
-    const source = JSON.parse(await readFile(new URL(`../../src/planets/${id}/source/content/object.json`, import.meta.url), "utf8"));
-    const prepared = (await loadObjectTestDefinition(id)).controls;
-    for (const [stage, settings] of [["authored", source.settings], ["prepared", prepared.settings]]) {
+    const source = preparedControls({ controls: JSON.parse(await readFile(new URL(`../../src/planets/${id}/source/content/object.json`, import.meta.url), "utf8")) });
+    const prepared = preparedControls(await loadObjectTestDefinition(id));
+    for (const [stage, settings] of [["authored", source.settings], ["prepared", prepared.settings]] as const) {
       assert.deepEqual(settings.controls.filter(control => control.name === "shadows"),
         [{ kind: "toggle", name: "shadows", label: "Shadows", checked: false }],
         `${id}: ${stage} Shadows must be opt-in`);
@@ -24,7 +29,7 @@ test("publishes one off-by-default Shadows control for every planet", async () =
     "jupiter", "saturn", "uranus", "neptune",
   ];
   for (const id of planets) {
-    const objectControls = (await loadObjectTestDefinition(id)).controls;
+    const objectControls = preparedControls(await loadObjectTestDefinition(id));
     const controls = objectControls.settings.controls.filter(({ name }) => name === "shadows");
     assert.deepEqual(controls, [{ kind: "toggle", name: "shadows", label: "Shadows", checked: false }],
       `${id} shadow control drifted`);

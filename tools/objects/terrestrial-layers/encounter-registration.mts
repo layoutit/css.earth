@@ -5,7 +5,7 @@ const dot=(a: readonly number[],b: readonly number[])=>a.reduce((s,n,i)=>s+n*b[i
 const vector=(v: unknown,n: number): v is number[] =>isArray(v)&&v.length===n&&v.every(Number.isFinite);
 /** Recompute the residuals from source coordinates. Reported RMS values alone
  * cannot authorize a camera: every fit and holdout coordinate is checked. */
-export function validateEncounterRegistration(camera: Pick<ReturnType<typeof encounterCamera>,"project"|"report">, registration: unknown, shapeSha256: string) {
+export function validateEncounterRegistration(camera: Pick<ReturnType<typeof encounterCamera>,"project"> & {report:Pick<ReturnType<typeof encounterCamera>["report"],"nominalPixelScaleMeters">}, registration: unknown, shapeSha256: string) {
   const r=parseEncounterRegistration(registration);
   if (!r || r.sourceShapeSha256!==shapeSha256 || !['disjoint-limb-normal-translation','source-topography-feature-translation','registered-image-feature-translation'].includes(r.method) ||
       !isArray(r.controls) || !Number.isFinite(r.maximumRmsMeters) || r.maximumRmsMeters<=0 || r.maximumRmsMeters>100 ||

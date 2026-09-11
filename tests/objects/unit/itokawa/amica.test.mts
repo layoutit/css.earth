@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeAmicaGeo } from '../../../../tools/objects/terrestrial-layers/amica-geo.mts';
 import { calibrateGeoCamera } from '../../../../tools/objects/terrestrial-layers/observed-geo-surface.mts';
-const root = resolve('src/planets/itokawa/source'), read = name => readFile(resolve(root, name));
+const root = resolve('src/planets/itokawa/source'), read = (name: string) => readFile(resolve(root, name));
 const [cube,label,original,flat] = await Promise.all([
   read('observations/st_2417589964_v_ddr.img.gz'), read('observations/st_2417589964_v_ddr.lbl'),
   read('observations/st_2417589964_v.fit'), read('observations/flat_v.fit')]);

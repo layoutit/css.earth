@@ -6,6 +6,7 @@ import { sourceArray, sourceDate, sourceDigest, sourceId, sourceObject, sourcePa
 import type { SourceResolver } from '../src/platform/source-catalog.mts';
 import type { Fact } from './objects/content/types.js';
 import { orderFacts } from '../site/fact-order.mts';
+import { hasErrorCode } from './source-values.mts';
 
 /** The same citation checks apply to full preparation, facts-only edits and Sources. */
 export function parseFactsheet(panel: unknown) {
@@ -32,11 +33,12 @@ export function parseFactsheet(panel: unknown) {
 }
 
 export async function verifyFactsheetSources(panel: unknown, {
-  objectDirectory, manifest, sources,
+  objectDirectory, manifest, sources, restoreMissing,
   read = (path: string) => readFile(resolve(objectDirectory, path)),
 }: {
   objectDirectory: string; manifest?: unknown; sources?: SourceResolver;
   read?: (path: string) => Promise<Buffer>;
+  restoreMissing?: (path: string) => Promise<void>;
 }) {
   const parsed = parseFactsheet(panel), cited = [...parsed.facts, ...parsed.moreFacts].filter(fact => fact.source);
   if (!cited.length) return parsed;
@@ -51,7 +53,12 @@ export async function verifyFactsheetSources(panel: unknown, {
     const matches = entries.filter(entry => `source/${entry.path}` === citation.path);
     assert.equal(matches.length, 1, `${fact.id}: fact evidence needs one manifest entry: ${citation.path}`);
     const entry = matches[0]!;
-    const path = await realpath(resolve(objectDirectory, citation.path)), offset = relative(root, path);
+    const evidencePath = resolve(objectDirectory, citation.path);
+    const path = await realpath(evidencePath).catch(async (error: unknown) => {
+      if (!restoreMissing || !hasErrorCode(error, 'ENOENT')) throw error;
+      await restoreMissing(citation.path!);
+      return realpath(evidencePath);
+    }), offset = relative(root, path);
     assert.ok(offset && offset !== '..' && !offset.startsWith('../'), 'Fact evidence escapes the body source directory.');
     const bytes = await read(citation.path);
     assert.equal(bytes.length, entry.expectedBytes, `${fact.id}: fact evidence byte count differs`);

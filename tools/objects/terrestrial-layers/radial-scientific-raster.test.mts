@@ -1,3 +1,6 @@
+import { required } from '../../test-values.mts';
+import { fixtureSource } from '../test-source-fixture.mts';
+import type { RadialMaterialSurface } from './solid-contract.mts';
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {mkdtemp,readFile,rm} from 'node:fs/promises';
@@ -22,22 +25,22 @@ test('native radial fallback preserves numeric/missing cells through actual loss
  try{
   const rgb=Buffer.from([valid,valid,unknown,unknown,valid,valid,unknown,unknown].flat());
   await sharp(rgb,{raw:{width:4,height:2,channels:3}}).webp({lossless:true}).toFile(join(root,'source.webp'));
-  const outputs={};
+  const outputs: Record<'numeric'|'photographic',Buffer[]>={numeric:[],photographic:[]};
   for(const nearest of [true,false]){
    const id=nearest?'numeric':'photographic';
-   const surface={id,map:{url:'/scenes/fixture/source.webp'},...(nearest?{displaySampling:'nearest'}:{})};
-   const config={namespace:'fixture',publicBase:'/scenes/fixture/',geometry:{radius:1,radiusKm:.001,radialTerrain:{path:'fixture.obj'}},raster:{scientific:[],surfaceQuality:90}};
-   await prepareRadialMaterials({radial:radialFixture(),surfaces:[surface],config,source:{manifest:{generatedIntermediates:[]}},publicDirectory:root,outputDirectory:root,sunDirection:[1,0,0]});
+   const surface: RadialMaterialSurface={id,map:{url:'/scenes/fixture/source.webp'},...(nearest?{displaySampling:'nearest'}:{})};
+   const config={namespace:'fixture',publicBase:'/scenes/fixture/',geometry:{radius:1,radiusKm:.001,radialTerrain:{}},raster:{width:4,scientific:[],surfaceQuality:90}};
+   await prepareRadialMaterials({radial:radialFixture(),surfaces:[surface],config,source:await fixtureSource(root,[{path:'source.webp',consumers:['texture']}]),publicDirectory:root,outputDirectory:root,sunDirection:[1,0,0]});
    outputs[id]=[];
    for(const asset of [surface.surface,surface.shadowSurface]){
-    const path=join(root,asset.url.split('/').at(-1));
+    const path=join(root,required(required(asset).url.split('/').at(-1)));
     const decoded=await sharp(await readFile(path)).removeAlpha().raw().toBuffer();
     outputs[id].push(decoded);
     if(nearest){
      // The real transported samples have longitudes±2.86..8.53degrees.
      // Nearest cell0 is valid; wrapped cell3 is unknown, with no blend.
      for(let y=0;y<2;y++)for(let x=0;x<4;x++)
-      assert.deepEqual([...decoded.subarray((y*4+x)*3,(y*4+x+1)*3)],x<2?valid:unknown,asset.url+' must preserve the exact selected source cell');
+      assert.deepEqual([...decoded.subarray((y*4+x)*3,(y*4+x+1)*3)],x<2?valid:unknown,required(asset).url+' must preserve the exact selected source cell');
     }
    }
   }
@@ -54,15 +57,15 @@ test('a smaller baked atlas preserves original face plans and normalized CSS add
   await sharp(Buffer.from([valid,valid,unknown,unknown,valid,valid,unknown,unknown].flat()),
     {raw:{width:4,height:2,channels:3}}).webp({lossless:true}).toFile(join(root,'source.webp'));
   const radial=radialFixture(),before=structuredClone(radial);
-  const surface={id:'scaled',textureScale:.5,displaySampling:'nearest',map:{url:'/scenes/fixture/source.webp'}};
-  const config={namespace:'fixture',publicBase:'/scenes/fixture/',geometry:{radius:1,radiusKm:.001,radialTerrain:{path:'fixture.obj'}},raster:{scientific:[]}};
-  await prepareRadialMaterials({radial,surfaces:[surface],config,source:{manifest:{generatedIntermediates:[]}},publicDirectory:root,outputDirectory:root,sunDirection:[1,0,0]});
+  const surface: RadialMaterialSurface={id:'scaled',textureScale:.5,displaySampling:'nearest',map:{url:'/scenes/fixture/source.webp'}};
+  const config={namespace:'fixture',publicBase:'/scenes/fixture/',geometry:{radius:1,radiusKm:.001,radialTerrain:{}},raster:{width:4,scientific:[]}};
+  await prepareRadialMaterials({radial,surfaces:[surface],config,source:await fixtureSource(root,[{path:'source.webp',consumers:['texture']}]),publicDirectory:root,outputDirectory:root,sunDirection:[1,0,0]});
   assert.deepEqual(radial,before,'Existing geometry and CSS atlas addresses must not change');
   for(const asset of [surface.surface,surface.shadowSurface]){
-    assert.equal(asset.width,2);assert.equal(asset.height,1);
-    const pixels=await sharp(join(root,asset.url.split('/').at(-1))).removeAlpha().raw().toBuffer();
+    assert.equal(required(asset).width,2);assert.equal(required(asset).height,1);
+    const pixels=await sharp(join(root,required(required(asset).url.split('/').at(-1)))).removeAlpha().raw().toBuffer();
     assert.deepEqual([...pixels],[...valid,...unknown],'Both original face owners survive scaling');
   }
-  for(const {rect} of radial.plans)assert.equal(rect.x/radial.width,(rect.x*.5)/surface.surface.width);
+  for(const {rect} of radial.plans)assert.equal(rect.x/radial.width,(rect.x*.5)/required(surface.surface).width);
  }finally{await rm(root,{recursive:true,force:true});}
 });

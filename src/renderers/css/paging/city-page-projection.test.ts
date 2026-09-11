@@ -1,3 +1,4 @@
+import { preparedPagingFixture } from './__fixtures__/prepared-page.mts';
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import { projectCityPage, selectCityPages } from './city-page-selection.js';
@@ -57,8 +58,8 @@ test('ordinary loaded WMTS tiles retain invisible-image proof while their conser
   const image:PreparedPage={...base,key:'image',pages:undefined,directory:undefined,
     corners:square.corners.map(([x,y,z])=>[x+200,y,z] as const),url:'/scenes/earth/image.webp'};
   const root={...base,key:'root',level:10,children:['tile'],pages:[],directory:undefined,maximumCssSpan:1};
-  const plan={topology:'wmts-quadtree@1',roots:[root],poolSize:8,
-    maximumDecodedBytes:8*256*256*4} as PreparedPagePlan;
+  const plan: PreparedPagePlan={...preparedPagingFixture.pageLayers[0].plan,topology:'wmts-quadtree@1',roots:[root],poolSize:8,
+    maximumDecodedBytes:8*256*256*4};
   const pages=new Map([root,base,image].map(page=>[page.key,page]));
   assert.equal(base.coverageParts,undefined,'Exercise ordinary tile metadata, not the old polar-only guard');
   assert.equal(projectCityPage(root,translate(0,0,-100),1,viewport).visible,true);

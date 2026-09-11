@@ -13,7 +13,7 @@ test('Bergelmir preserves the selected lower-limit elongation and explicit volum
   const config = irregularSatelliteConfig(await read('preparation/terrestrial.json'));
   const shape = parsePdsRadiusTable(await readFile(new URL('shape/ellipsoid.tab', root), 'utf8'), config.geometry.radialTerrain.grid);
   // Independent principal-axis anchors for the authored approximation (metres).
-  for (const [lon, lat, expected] of [[0,0,2712.2245184493067], [180,0,2712.2245184493067], [90,0,2400.198688893192], [270,0,2400.198688893192], [0,90,2400.198688893192], [0,-90,2400.198688893192]]) {
+  for (const [lon, lat, expected] of [[0,0,2712.2245184493067], [180,0,2712.2245184493067], [90,0,2400.198688893192], [270,0,2400.198688893192], [0,90,2400.198688893192], [0,-90,2400.198688893192]] as const) {
     assert.ok(Math.abs(requireFiniteNumber(shape.sample(lon, lat)) - expected) < .001, `${lon},${lat}`);
   }
   const major = requireFiniteNumber(shape.sample(0,0)), minor = requireFiniteNumber(shape.sample(90,0)), polar = requireFiniteNumber(shape.sample(0,90));

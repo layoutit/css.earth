@@ -5,11 +5,11 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { prepareGlbSurface } from './glb-surface.mts';
 
-const model = id => new URL(`../../../src/planets/${id}/source/nasa-${id}.glb`, import.meta.url);
+const model = (id: string) => new URL(`../../../src/planets/${id}/source/nasa-${id}.glb`, import.meta.url);
 
 // Small actual-source reprojections cover the high-density Eris triangles,
 // Haumea's polar UV islands, and Makemake's slightly irregular cube-mapped mesh.
-for (const [id, triangles] of [['haumea', 960], ['eris', 20508], ['makemake', 3072]]) {
+for (const [id, triangles] of [['haumea', 960], ['eris', 20508], ['makemake', 3072]] as const) {
   test(`${id}: the original model covers all sampled directions`, async () => {
     const result = await prepareGlbSurface(model(id), 256, 128);
     assert.equal(result.sourceTriangles, triangles);

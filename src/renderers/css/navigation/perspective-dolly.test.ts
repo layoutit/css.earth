@@ -34,11 +34,11 @@ it('publishes physical scene coordinates without CSS perspective-origin or focal
   dolly.setBodyCenter([500, 300, -8000]);
   const committed = captured.commit();
   expect(committed.distance).toBe(Math.hypot(...bodyCenter));
-  expect(dolly.bodyCenter()).toEqual([500, 300, -8000], 'Committing an older frame must preserve newer requested input');
+  expect(dolly.bodyCenter(), 'Committing an older frame must preserve newer requested input').toEqual([500, 300, -8000]);
   dolly.setBodyCenter(bodyCenter);
   const published = dolly.publish(rotation, 'rotateZ(90deg)');
   expect(committed).toEqual(published);
-  expect(layoutReads).toBe(measured, 'Camera publication must not force layout after its transform writes');
+  expect(layoutReads, 'Camera publication must not force layout after its transform writes').toBe(measured);
   expect(published.stageViewport).toEqual({ focalPixels: focal, widthPixels: width, heightPixels: height,
     principalOffsetPixels: [0, 0] });
   expect(published.projection.focalPixels).toBe(focal);
@@ -76,7 +76,7 @@ it('publishes physical scene coordinates without CSS perspective-origin or focal
   expect(dolly.publish(rotation, 'rotateZ(90deg)').stageViewport).toEqual({
     focalPixels: focal, widthPixels: width, heightPixels: height, principalOffsetPixels: [0, 0],
   });
-  expect(layoutReads).toBe(resizedReads, 'The next frame uses the refreshed layout cache');
+  expect(layoutReads, 'The next frame uses the refreshed layout cache').toBe(resizedReads);
 });
 
 it('overview centering preserves the current view and only converges while dollying out', () => {
@@ -95,7 +95,7 @@ it('overview centering preserves the current view and only converges while dolly
   const screen = () => { const [x, y, z] = dolly.bodyCenter()!; return [-170 + focal * x / -z, focal * y / -z]; };
   const initialOffset = Math.hypot(...screen());
   dolly.setZoomOutCentering(true);
-  expect(dolly.bodyCenter()).toEqual(initial, 'Enabling centering does not move the eye');
+  expect(dolly.bodyCenter(), 'Enabling centering does not move the eye').toEqual(initial);
   let previousOffset = initialOffset;
   for (let step = 1; step <= 100; step++) {
     const distance = initialDistance * (1 + step * .09);
@@ -116,7 +116,7 @@ it('overview centering preserves the current view and only converges while dolly
   dolly.setBodyCenter([100, 0, 1000]);
   dolly.setZoomOutCentering(true);
   dolly.camera.update({ distance: dolly.camera.state.distance * 2 });
-  expect(dolly.bodyCenter()).toEqual([200, 0, 2000], 'A body behind the eye cannot jump across the camera');
+  expect(dolly.bodyCenter(), 'A body behind the eye cannot jump across the camera').toEqual([200, 0, 2000]);
 });
 
 
@@ -138,7 +138,7 @@ it('retires only unresolved detail after its enclosing context ends, and restore
   const identity = { m11: 1, m21: 0, m31: 0, m12: 0, m22: 1, m32: 0, m13: 0, m23: 0, m33: 1 } as DOMMatrix;
   dolly.setBodyCenter([0, 0, -1e6]);
   expect(dolly.publish(identity, 'rotateZ(0deg)').levelOfDetail!.stage).toBe('marker');
-  expect(hidden).toBe(false, 'Marker LOD is not proof of a complete proxy');
+  expect(hidden, 'Marker LOD is not proof of a complete proxy').toBe(false);
   dolly.setBodyCenter([0, 0, -1e7]);
   const far = dolly.publish(identity, 'rotateZ(0deg)');
   expect(hidden).toBe(true);
@@ -149,7 +149,7 @@ it('retires only unresolved detail after its enclosing context ends, and restore
   expect(element.style.transform).not.toBe(firstTransform);
   expect(further.projection.eyeFromScene[14]).toBe(-2e7);
   expect(far.projection.eyeFromScene[14]).toBe(-1e7);
-  expect(visibilityWrites).toBe(1, 'Hidden camera publication does not churn visibility');
+  expect(visibilityWrites, 'Hidden camera publication does not churn visibility').toBe(1);
   dolly.setBodyCenter([0, 0, -1e6]);
   dolly.publish(identity, 'rotateZ(0deg)');
   expect(hidden).toBe(false);

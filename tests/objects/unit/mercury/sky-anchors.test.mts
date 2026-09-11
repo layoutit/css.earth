@@ -70,7 +70,7 @@ test("the registered anchor blobs sit where the ESO panorama has them", async (c
   }
 });
 
-function boxBlur(source, width, height, radius) {
+function boxBlur(source: number[]|Float32Array<ArrayBuffer>, width: number, height: number, radius: number) {
   const rows = new Float32Array(width * height);
   const size = radius * 2 + 1;
   for (let y = 0; y < height; y += 1) {
@@ -101,7 +101,7 @@ function boxBlur(source, width, height, radius) {
   return output;
 }
 
-function subtract(a, b) {
+function subtract(a:Float32Array, b:Float32Array) {
   const output = new Float32Array(a.length);
   for (let index = 0; index < a.length; index += 1) {
     output[index] = a[index] - b[index];

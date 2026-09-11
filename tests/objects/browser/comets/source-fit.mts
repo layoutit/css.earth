@@ -1,3 +1,6 @@
+import { shape, array, optional, boolean, text, number } from '../../../../tools/objects/terrestrial-layers/source-records.mts';
+import { requireRecord } from '../../../../tools/source-values.mts';
+import type { SourceMesh } from '../../../../tools/objects/terrestrial-layers/contracts.mts';
 // Preparation-only comparison of the published source mesh and retained faces.
 // Range differences along matched rays are not a Hausdorff distance or an
 // exhaustive source-accuracy bound, especially at silhouette/occlusion edges.
@@ -16,23 +19,28 @@ const selected = OBJECTS.filter(object => object.classification === 'comet' && (
 assert.ok(selected.length, 'Select a registered comet for source comparison.');
 await mkdir(output, { recursive: true });
 const reports = [];
-const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 for (const { id } of selected) {
   const root = resolve('src/planets', id);
-  const config = JSON.parse(await readFile(resolve(root, 'source/preparation/terrestrial.json')));
+  const profileFields = { path: text, format: text, grid: requireRecord };
+  const config = shape({ presentation: shape({ defaultLens: text }), geometry: shape({ radiusKm: number, radius: number,
+    radialTerrain: shape(profileFields), radialTerrainAlternatives: optional(array(shape({ ...profileFields, lensId: text }))) }) })(JSON.parse(await readFile(resolve(root, 'source/preparation/terrestrial.json'), 'utf8')));
   const lensId = process.argv[4];
   const alternative = lensId && lensId !== config.presentation.defaultLens
     ? config.geometry.radialTerrainAlternatives?.find(model => model.lensId === lensId) : null;
   if (lensId && lensId !== config.presentation.defaultLens) assert.ok(alternative, 'Select a declared surface model.');
   const profile = alternative ?? config.geometry.radialTerrain;
   const sourcePath = resolve(root, 'source', profile.path);
-  const loader = { 'image-plane-dem': loadImageDem, 'contact-ellipsoids': loadContactEllipsoids, 'wavefront-obj': loadObjShape, 'pds-planetocentric-plate': loadPdsPlanetocentricShape,
-    'pds-plate-model': loadPdsPlateShape, 'pds-radius-table': loadPdsRadiusTable }[profile.format];
+  const loaders = new Map<string, (path: string, grid: unknown) => Promise<SourceMesh>>([
+    ['image-plane-dem', loadImageDem], ['contact-ellipsoids', loadContactEllipsoids], ['wavefront-obj', loadObjShape],
+    ['pds-planetocentric-plate', loadPdsPlanetocentricShape], ['pds-plate-model', loadPdsPlateShape], ['pds-radius-table', loadPdsRadiusTable],
+  ]);
+  const loader = loaders.get(profile.format);
   assert.ok(loader, 'Source comparison requires a supported source mesh.');
   const source = await loader(sourcePath, profile.grid);
   const preparedPath = `prepared/terrain${alternative ? `-${lensId}` : ''}.json`;
   const preparedBytes = await readFile(resolve(root, preparedPath));
-  const terrain = JSON.parse(preparedBytes);
+  const terrain = shape({faces:array(shape({vertices:array(array(number)),estimated:optional(boolean)}))})(JSON.parse(preparedBytes.toString('utf8')));
   const estimatedFaces = terrain.faces.filter(face => face.estimated).length;
   terrain.faces = terrain.faces.filter(face => !face.estimated);
   const meters = config.geometry.radiusKm * 1000 / config.geometry.radius;
@@ -42,7 +50,7 @@ for (const { id } of selected) {
   const reduced = parseObjShape(obj, { metersPerUnit: 1, expectedVertices: points.length, expectedFaces: terrain.faces.length });
   const sourceDistance = surfaceDistanceIndex(source.positions, source.indices);
   const reducedDistance = surfaceDistanceIndex(reduced.positions, reduced.indices);
-  const centerOf = points => [0, 1, 2].map(i => points.reduce((sum, point) => sum + point[i], 0) / points.length);
+  const centerOf = (points: readonly (readonly number[])[]) => [0, 1, 2].map(i => points.reduce((sum, point) => sum + point[i], 0) / points.length);
   const originalSamples = [...source.positions, ...source.indices.map(face => centerOf(face.map(i => source.positions[i])))];
   const preparedSamples = reduced.indices.flatMap(face => {
     const points = face.map(i => reduced.positions[i]);
@@ -99,7 +107,7 @@ for (const { id } of selected) {
 }
 await writeFile(resolve(output, 'report.json'), JSON.stringify(reports, null, 2) + '\n');
 
-function stats(values) {
+function stats(values: readonly number[]) {
   const sorted = [...values].sort((a, b) => a - b);
   return { samples: sorted.length, mean: values.reduce((a, b) => a + b, 0) / values.length,
     median: sorted[Math.floor(sorted.length * .5)], p95: sorted[Math.floor(sorted.length * .95)], max: sorted.at(-1) };

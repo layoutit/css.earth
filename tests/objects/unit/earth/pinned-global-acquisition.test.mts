@@ -1,3 +1,6 @@
+import {parseCitySource,parseCatalogPin} from '../../../../tools/objects/geographic-pages/source-records.mts';
+import {validateSourceManifest, type SourceEntry} from '../../../../src/platform/source-manifest.mts';
+import {required} from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { createServer } from "node:http";
@@ -10,24 +13,24 @@ import { acquirePinnedGlobalWmts } from "../../../../tools/objects/geographic-pa
 
 const version = "1111111111111111", sourcePath = "src/planets/earth/source/";
 const fixtureOrigin = "https://wmts-fixture.invalid";
-const hash = bytes => createHash("sha256").update(bytes).digest("hex");
-const actualManifest = JSON.parse(await readFile(new URL("../../../../src/planets/earth/source/manifest.json", import.meta.url)));
+const hash = (bytes: Uint8Array) => createHash("sha256").update(bytes).digest("hex");
+const actualManifest = validateSourceManifest('earth',JSON.parse((await readFile(new URL("../../../../src/planets/earth/source/manifest.json", import.meta.url))).toString('utf8')));
 const catalogPin = await readFile(new URL("../../../../src/planets/earth/source/city/catalog-pin.json", import.meta.url));
 const catalogBytes = await readFile(new URL("../../../../src/planets/earth/source/city/worldcover-rgbnir-2021.json.gz", import.meta.url));
-const actualContent = JSON.parse(await readFile(new URL("../../../../src/planets/earth/source/city/manifest.json", import.meta.url)));
+const actualContent = parseCitySource(JSON.parse((await readFile(new URL("../../../../src/planets/earth/source/city/manifest.json", import.meta.url))).toString('utf8')));
 
-async function fixture(t) {
+async function fixture(t: test.TestContext) {
   const projectRoot = await mkdtemp(resolve(tmpdir(), "cssearth-acquire-pinned-"));
   const packs = new Map(["5-0-0.pack", "8-0-0.pack", "8-0-1.pack", "8-1-0.pack"]
     .map((filename, i) => [filename, Buffer.from(`pinned pack ${i}: ${"x".repeat(20 + i)}`)]));
-  const plans = new Map(), requests = [];
-  let active = 0, maximumActive = 0, requested;
-  const firstRequest = new Promise(done => { requested = done; });
+  const plans = new Map<string,{status?:number;body?:Buffer;chunked?:boolean;length?:number;location?:string;delay?:number}>(), requests: { url: string|undefined; method: string|undefined; encoding: string|undefined; }[] = [];
+  let active = 0, maximumActive = 0, requested:()=>void=()=>{throw new Error('Request gate was not initialized');};
+  const firstRequest = new Promise<void>(done => { requested = done; });
   const server = createServer(async (request, response) => {
     active++; maximumActive = Math.max(active, maximumActive);
     response.once("close", () => active--);
     requests.push({ url: request.url, method: request.method, encoding: request.headers["accept-encoding"] });
-    const filename = request.url.split("/").at(-1), plan = plans.get(filename) ?? {};
+    const filename = required(required(request.url).split("/").at(-1)), plan = plans.get(filename) ?? {};
     response.statusCode = plan.status ?? 200;
     const body = plan.body ?? packs.get(filename) ?? Buffer.from("not found");
     if (!plan.chunked) response.setHeader("Content-Length", plan.length ?? body.length);
@@ -37,16 +40,17 @@ async function fixture(t) {
     await delay(plan.delay ?? 25);
     response.end(plan.chunked ? body.subarray(2) : body);
   });
-  await new Promise(done => server.listen(0, "127.0.0.1", done));
-  const localOrigin = `http://127.0.0.1:${server.address().port}`;
+  await new Promise<void>(done => server.listen(0, "127.0.0.1", done));
+  const address=server.address();assert.ok(address&&typeof address==="object");
+  const localOrigin = `http://127.0.0.1:${address.port}`;
   t.after(async () => {
     server.closeAllConnections();
-    await new Promise(done => server.close(done));
+    await new Promise<void>((done,reject) => server.close(error=>error?reject(error):done()));
     await rm(projectRoot, { recursive: true, force: true });
   });
   const files = [...packs].map(([filename, bytes]) => ({ filename, bytes: bytes.length, sha256: hash(bytes) }));
   const release = { schema: "cssearth-global-wmts-release@1", version, dataset: actualContent.dataset,
-    sourceSha256: JSON.parse(catalogPin).expectedSha256, bytes: files.reduce((n, file) => n + file.bytes, 0), files };
+    sourceSha256: parseCatalogPin(JSON.parse(catalogPin.toString('utf8'))).expectedSha256, bytes: files.reduce((n, file) => n + file.bytes, 0), files };
   const content = { ...actualContent, delivery: { ...actualContent.delivery, assetOrigin: fixtureOrigin } };
   const records = new Map([
     ["city/wmts-release.json", Buffer.from(JSON.stringify(release))],
@@ -54,8 +58,8 @@ async function fixture(t) {
     ["city/catalog-pin.json", catalogPin], ["city/worldcover-rgbnir-2021.json.gz", catalogBytes],
   ]);
   const rewriteSources = async () => {
-    const pinned = entries => entries.filter(entry => records.has(entry.path)).map(entry => ({ ...entry,
-      expectedBytes: records.get(entry.path).length, expectedSha256: hash(records.get(entry.path)) }));
+    const pinned = <T extends SourceEntry,>(entries: readonly T[]) => entries.filter(entry => records.has(entry.path)).map(entry => ({ ...entry,
+      expectedBytes: required(records.get(entry.path)).length, expectedSha256: hash(required(records.get(entry.path))) }));
     const manifest = { ...actualManifest, inputs: pinned(actualManifest.inputs),
       generatedIntermediates: pinned(actualManifest.generatedIntermediates), documents: pinned(actualManifest.documents) };
     await mkdir(resolve(projectRoot, sourcePath, "city"), { recursive: true });
@@ -63,16 +67,16 @@ async function fixture(t) {
     await writeFile(resolve(projectRoot, sourcePath, "manifest.json"), JSON.stringify(manifest));
   };
   await rewriteSources();
-  const path = filename => resolve(projectRoot, ".local/wmts-global", version, filename);
+  const path = (filename: string) => resolve(projectRoot, ".local/wmts-global", version, filename);
   const seed = async (selected = packs, targetVersion = version) => {
     const directory = resolve(projectRoot, ".local/wmts-global", targetVersion);
     await mkdir(directory, { recursive: true });
     for (const [filename, bytes] of selected) await writeFile(resolve(directory, filename), bytes);
   };
-  const fetcher = (url, options) => {
-    const requestedUrl = new URL(url);
+  const fetcher: typeof fetch = (url, options) => {
+    const requestedUrl = new URL(url instanceof Request?url.url:url);
     assert.equal(requestedUrl.origin, fixtureOrigin);
-    assert.equal(options.redirect, "error");
+    assert.equal(required(options).redirect, "error");
     return fetch(localOrigin + requestedUrl.pathname, options);
   };
   return { projectRoot, packs, plans, requests, files, release, content, records, rewriteSources, fetcher, path, seed,

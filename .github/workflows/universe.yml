@@ -16,7 +16,7 @@ jobs:
   universe:
     name: Prepared universe and shared renderer
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Check documentation links and organization
@@ -45,7 +45,7 @@ jobs:
           pnpm build:packages
           pnpm build:renderer
           pnpm build:preparation
-          pnpm prepare:world-context
+          pnpm prepare:object-json
       - name: Restore environment images and prepare minimap
         run: |
           pnpm prepare:environment-images
@@ -69,10 +69,8 @@ jobs:
         run: |
           pnpm test:preparation --universe
           node --test tools/objects/material-composition/coplanar-raster.test.mts
-      - name: Restore pinned JSON transports for runtime and shell tests
-        run: |
-          node --test tools/restore-object-json.test.mts
-          node tools/restore-object-json.mts
+      - name: Test pinned JSON transport restoration
+        run: node --test tools/restore-object-json.test.mts
       - name: Test selected dataset textures and bounded residency
         run: |
           node --test src/platform/object-selection-runtime.test.mts src/platform/prepared-residency.test.mts tests/objects/unit/earth/dataset-selection.test.mts tests/objects/unit/earth/surface-image-banks.test.mts

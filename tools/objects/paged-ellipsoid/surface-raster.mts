@@ -30,7 +30,7 @@ function createSurfaceRasterPlan() {
   return {
     cells,
     pages,
-    prepare(geometry: ProjectiveGeometry, presentation: PagedSurfacePresentation, index: number) {
+    prepare(geometry: Pick<ProjectiveGeometry,"matrix"|"leafWidth"|"leafHeight">, presentation: PagedSurfacePresentation, index: number) {
       const matrix = String(geometry?.matrix).split(",").map(Number);
       if (matrix.length !== 16 || matrix.some(value => !Number.isFinite(value)) ||
           matrix[3] !== 0 || matrix[15] !== 1 || geometry.leafWidth !== 32 ||

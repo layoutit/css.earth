@@ -1,3 +1,5 @@
+import { createTestPage } from './browser-observations.mts';
+import type { Page } from 'playwright';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
@@ -11,13 +13,17 @@ const views = {
 };
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const errors = [], snapshots = {};
+type Snapshot = Awaited<ReturnType<typeof read>>;
+type RotationSample = { opacity: number; visible: boolean };
+declare global { interface Window { __labelJourneyNodes: Element[]; __sunRotationSamples: RotationSample[]; __trackSunRotation: boolean; } }
+const errors: string[] = [];
+const snapshots: { system?: Snapshot; shell?: Snapshot; galaxy?: Snapshot; sunRotation?: RotationSample[] } = {};
 try {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  const page = await createTestPage(browser, { viewport: { width: 1440, height: 900 } });
   page.on('pageerror', error => errors.push(error.message));
-  async function open(path) {
+  async function open(path: string) {
     await page.goto(new URL(path, base).href, { waitUntil: 'domcontentloaded' });
-    await page.waitForFunction(() => window.__cssEarth?.ready && window[`__${window.__cssEarth.activeObjectId}`]?.ready, null, { timeout: 30000 });
+    await page.waitForFunction(() => window.__cssEarth?.ready && window.__cssEarth?.object()?.ready, null, { timeout: 30000 });
     const motion = page.locator('input[name="motion"]');
     if (await motion.isChecked()) await motion.uncheck({ force: true });
     await page.waitForTimeout(800);
@@ -41,7 +47,7 @@ try {
   assert.ok(snapshots.shell.labels.some(label => label.text === 'Heliosphere'), 'the visible shell has its caption');
   assertNoOverlaps(snapshots.shell.labels);
   await page.screenshot({ path: `${output}/heliosphere.png` });
-  await page.evaluate(() => { window.__labelJourneyNodes = [...document.querySelector('.prepared-universe').querySelectorAll('*')]; });
+  await page.evaluate(() => { window.__labelJourneyNodes = [...window.__cssearthTest.element('.prepared-universe').querySelectorAll('*')]; });
   await scrollTo(page, 2.4e18);
   await page.waitForTimeout(800);
   snapshots.galaxy = await read(page);
@@ -51,15 +57,15 @@ try {
   assertNoOverlaps(snapshots.galaxy.labels);
   assert.ok(await page.evaluate(() => window.__labelJourneyNodes.every(node => node.isConnected)), 'zoom retains environment and label DOM');
   await page.screenshot({ path: `${output}/galaxy.png` });
-  snapshots.sunRotation = await rotateAndReadSun(page);
-  assert.ok(snapshots.sunRotation.length > 10 && snapshots.sunRotation.every(sample => sample.opacity > 0 && sample.visible &&
-      Math.abs(sample.opacity - snapshots.sunRotation[0].opacity) < 1e-6),
+  const sunRotation = snapshots.sunRotation = await rotateAndReadSun(page);
+  assert.ok(sunRotation.length > 10 && sunRotation.every(sample => sample.opacity > 0 && sample.visible &&
+      Math.abs(sample.opacity - sunRotation[0].opacity) < 1e-6),
     'Sun locator caption stays painted throughout native galaxy rotation');
   const sunBox = await page.locator('[data-context-label="sun"]').boundingBox();
   assert.ok(sunBox, 'Sun text has a native hit target');
   // The retained transparent input surface picks the scene text underneath it.
   await page.mouse.click(sunBox.x + sunBox.width / 2, sunBox.y + sunBox.height / 2);
-  await page.waitForFunction(() => window.__cssEarth.activeObjectId === 'sun' && window.__sun?.ready, null, { timeout: 30000 });
+  await page.waitForFunction(() => window.__cssearthTest.scene().activeObjectId === 'sun' && window.__sun?.ready, null, { timeout: 30000 });
   assert.equal(await page.locator('.polycss-camera').count(), 1);
   assert.ok(await page.evaluate(() => window.__labelJourneyNodes.every(node => node.isConnected)), 'Sun label navigation retains the shared environment');
   assert.deepEqual(errors, []);
@@ -68,17 +74,17 @@ try {
   await writeFile(`${output}/report.json`, JSON.stringify({ snapshots, errors }, null, 2));
   await browser.close();
 }
-function assertNoOverlaps(labels) {
+function assertNoOverlaps(labels: Snapshot["labels"]) {
   for (let i = 0; i < labels.length; i++) for (let j = i + 1; j < labels.length; j++) {
     const a = labels[i], b = labels[j];
     assert.ok(a.right <= b.left || b.right <= a.left || a.bottom <= b.top || b.bottom <= a.top, `${a.text} overlaps ${b.text}`);
   }
 }
-async function rotateAndReadSun(page) {
+async function rotateAndReadSun(page: Page) {
   await page.evaluate(() => {
     window.__sunRotationSamples = []; window.__trackSunRotation = true;
     const sample = () => {
-      const label = document.querySelector('[data-context-label="sun"]'), style = getComputedStyle(label);
+      const label = document.querySelector('[data-context-label="sun"]'), style = getComputedStyle(window.__cssearthTest.required(label, 'computed style element'));
       window.__sunRotationSamples.push({ opacity: Number(style.opacity), visible: style.visibility !== 'hidden' });
       if (window.__trackSunRotation) requestAnimationFrame(sample);
     };
@@ -86,15 +92,15 @@ async function rotateAndReadSun(page) {
   });
   await page.mouse.move(1050, 550); await page.mouse.down();
   await page.mouse.move(1200, 450, { steps: 18 }); await page.mouse.up();
-  await page.waitForFunction(() => !window[`__${window.__cssEarth.activeObjectId}`].camera.stats().dragInertia.active, null, { timeout: 6000 });
+  await page.waitForFunction(() => !window.__cssearthTest.object().camera.stats().dragInertia.active, null, { timeout: 6000 });
   await page.waitForTimeout(250);
   return page.evaluate(() => { window.__trackSunRotation = false; return window.__sunRotationSamples; });
 }
 
-async function read(page) {
+async function read(page: Page) {
   return page.evaluate(() => {
-    const visible = element => {
-      for (let node = element; node instanceof HTMLElement; node = node.parentElement) {
+    const visible = (element: Element) => {
+      for (let node: Element | null = element; node instanceof HTMLElement; node = node.parentElement) {
         const s = getComputedStyle(node);
         if (node.hidden || s.display === 'none' || s.visibility === 'hidden' || Number(s.opacity) < .001) return false;
       }
@@ -104,7 +110,7 @@ async function read(page) {
     return { roots: document.querySelectorAll('.polycss-camera').length,
       labels: nodes.filter(visible).map(element => {
         const rect = element.getBoundingClientRect();
-        return { id: element.dataset.contextLabel ?? '', text: element.textContent, left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom };
+        return { id: window.__cssearthTest.htmlElement(element).dataset.contextLabel ?? '', text: window.__cssearthTest.required(element.textContent, 'label text'), left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom };
       }),
       locator: document.querySelector('[data-context-indicator="sun"]')?.getAttribute('style'),
     };

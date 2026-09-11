@@ -1,3 +1,5 @@
+import {array,number,shape,text} from '../../../../tools/objects/terrestrial-layers/source-records.mts';
+import {required} from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
@@ -5,14 +7,14 @@ import test from 'node:test';
 import sharp from 'sharp';
 import { readPreparedFixture } from '../../fixtures.mts';
 import { OBJECTS } from '../../../../site/objects.mts';
-const [scene, runtime] = await Promise.all(['scene', 'runtime'].map(name => readPreparedFixture('saturn', name)));
+const [scene, runtime] = await Promise.all([readPreparedFixture('saturn','scene'),readPreparedFixture('saturn','runtime')]);
 const root = new URL('../../../../', import.meta.url);
-const readJson = async path => JSON.parse(await readFile(new URL(path, root), 'utf8'));
+const readJson = async (path: string|URL) => JSON.parse(await readFile(new URL(path, root), 'utf8'));
 const manifest = await readJson('src/planets/saturn/runtime-assets.json');
 const geometry = await readJson('src/planets/saturn/source/preparation/geometry.json');
-const exterior = runtime.materials.find(track => track.id === 'exterior');
-async function verifiedAsset(url) {
-  const pin = manifest.assets.find(asset => url === `/scenes/saturn/${asset.filename}`);
+const exterior = required(runtime.materials.find((track: { id: string; }) => track.id === 'exterior'));
+async function verifiedAsset(url: string) {
+  const pin = array(shape({filename:text,bytes:number,sha256:text}))(manifest.assets).find(asset => url === `/scenes/saturn/${asset.filename}`);
   assert.ok(pin, `${url} must belong to the active runtime closure`);
   const bytes = await readFile(new URL(`public${url}`, root));
   assert.equal(bytes.length, pin.bytes);
@@ -25,13 +27,13 @@ test('ships every active material bank with exact pinned bytes and prepared addr
   assert.equal(lighting.mode, 'prepared-view-bank-single-material-plane-orbit-projection');
   assert.equal(exterior.frame.count, 256);
   assert.equal(exterior.banks.length, 16);
-  assert.equal(exterior.rotation.kind, 'ellipsoid');
-  assert.equal(exterior.rotation.projection.coverageScale, 1.002);
+  assert.ok(exterior.rotation && exterior.rotation.kind === 'ellipsoid');
+  assert.equal(required(exterior.rotation).projection.coverageScale, 1.002);
   const variants = lighting.orbitAtlas.runtimeShards.variants;
   assert.deepEqual(exterior.banks.map(bank => bank.id), Object.keys(variants));
   const distinctHashes = new Set();
   for (const bank of exterior.banks) {
-    const resource = runtime.assets.entries.find(entry => entry.key === bank.default.resource);
+    const resource = required(runtime.assets.entries.find(entry => entry.key === required(bank.default).resource));
     assert.ok(resource);
     assert.equal(resource.url, variants[bank.id].runtimeAtlas.assetUrl);
     const bytes = await verifiedAsset(resource.url);
@@ -43,16 +45,16 @@ test('ships every active material bank with exact pinned bytes and prepared addr
     assert.equal(bank.frames.length, 256);
     for (const [index, frame] of bank.frames.entries()) {
       const prepared = variants[bank.id].presentations[index];
-      assert.equal(frame.resource, bank.default.resource);
+      assert.equal(frame.resource, required(bank.default).resource);
       assert.equal(frame.backgroundPosition, prepared.backgroundPosition);
       assert.equal(frame.backgroundSize, prepared.backgroundSize);
     }
   }
   assert.equal(distinctHashes.size, 16);
-  assert.equal(exterior.banks[0].default.backgroundPosition, '-4162px -2px');
-  assert.equal(exterior.banks[0].default.backgroundSize, '5188px 4160px');
+  assert.equal(required(exterior.banks[0].default).backgroundPosition, '-4162px -2px');
+  assert.equal(required(exterior.banks[0].default).backgroundSize, '5188px 4160px');
   assert.equal(lighting.orbitAtlas.runtimeShards.maximumRetainedAtlasCount, 1);
-  assert.equal(runtime.assets.pools.find(pool => pool.id === 'exterior-material').capacity, 2);
+  assert.equal(required(runtime.assets.pools.find((pool: { id: string; }) => pool.id === 'exterior-material')).capacity, 2);
 });
 
 test('preserves source-owned solar, atmosphere, and ring-shadow preparation', () => {
@@ -81,7 +83,7 @@ test('retains the cropped ring-shadow bitmap on its original logical plane', asy
 
 test('warms active material and shared sky assets before declaring ready', () => {
   for (const key of ['exterior:normal', 'ring-shadow', 'directional-sun']) assert.ok(runtime.assets.startup.includes(key));
-  const sky = runtime.assets.entries.filter(entry => entry.key.startsWith('sky:'));
+  const sky = runtime.assets.entries.filter((entry: { key: string; }) => entry.key.startsWith('sky:'));
   assert.equal(sky.length, 12);
   for (const entry of sky) {
     assert.match(entry.url, /@2x.webp$/);

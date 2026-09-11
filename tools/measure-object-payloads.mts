@@ -1,4 +1,4 @@
-import type { Browser, Page, CDPSession, Response } from 'playwright';
+import type { Browser, Page, BrowserContextOptions, CDPSession, Response, Request } from 'playwright';
 import { requireArray, requireRecord } from './source-values.mts';
 interface PayloadObject {id: string; route: string;}
 interface PayloadCase extends PayloadObject {dpr: number;}
@@ -11,6 +11,26 @@ interface RouteMeasurement extends PayloadCase, SideMeasurement {
   bodyBytes: number; gzipEstimateBytes: number; brotliEstimateBytes: number; responseCount: number;
   bytesByType: Record<string, number>; resources: Resource[]; dom: DomMetrics | null;
   layers: {available: boolean; reason?: string; count?: number; drawsContent?: number; evidence?: string};
+}
+type PayloadResponse = Pick<Response,'url'|'status'|'body'> & {
+  request(): Pick<Request,'url'|'resourceType'> & {redirectedFrom(): Pick<Request,'url'> | null};
+};
+export interface PayloadPage {
+  on(event:'response', callback:(response:PayloadResponse)=>void): unknown;
+  on(event:'requestfailed', callback:(request:Pick<Request,'url'|'failure'>)=>void): unknown;
+  on(event:'pageerror', callback:(error:Error)=>void): unknown;
+  off(event:'response', callback:(response:PayloadResponse)=>void): unknown;
+  goto(url:string, options:{waitUntil:'networkidle';timeout:number}): Promise<PayloadResponse|null>;
+  waitForFunction(predicate:(expected:string)=>boolean, expected:string, options:{timeout:number}): Promise<unknown>;
+  waitForTimeout(milliseconds:number): Promise<void>;
+  evaluate(probe:()=>DomMetrics): Promise<DomMetrics>;
+}
+export interface PayloadBrowser<P extends PayloadPage = PayloadPage> {
+  newContext(options?:BrowserContextOptions): Promise<{
+    newPage():Promise<P>;
+    newCDPSession(page:P):Promise<CDPSession>;
+    close():Promise<void>;
+  }>;
 }
 const metricKeys = ['bodyBytes', 'gzipEstimateBytes', 'brotliEstimateBytes'] as const;
 const comparisonKeys = ['bodyBytes', 'responseCount', 'gzipEstimateBytes', 'brotliEstimateBytes'] as const;
@@ -56,14 +76,14 @@ function requireLocalResponse(resource: Resource, baseUrl: string) {
     !/[?&](?:t|import|astro)(?:=|&|$)/.test(url.search), `Development response cannot measure a production build: ${resource.url}`);
   return url;
 }
-export async function measureRoute(browser: Browser, baseUrl: string, { id, route, dpr }: PayloadCase) {
+export async function measureRoute<P extends PayloadPage>(browser: PayloadBrowser<P>, baseUrl: string, { id, route, dpr }: PayloadCase) {
   const result: RouteMeasurement = { id, route, dpr, complete: false, bodyBytes: 0, gzipEstimateBytes: 0, brotliEstimateBytes: 0,
     responseCount: 0, bytesByType: {}, resources: [], errors: [], dom: null, layers: { available: false } };
   const context = await browser.newContext({ viewport: VIEWPORT, deviceScaleFactor: dpr, reducedMotion: "no-preference", serviceWorkers: "block" });
   const pending: Promise<void>[] = [];
-  let page: Page | undefined, cdp: CDPSession | undefined;
+  let page: P | undefined, cdp: CDPSession | undefined;
   const layerState: {lastLayers: {drawsContent: boolean}[] | null} = {lastLayers: null};
-  const responseListener = (response: Response) => {
+  const responseListener = (response: PayloadResponse) => {
     const request = response.request();
     const resource: Resource = { url: response.url(), requestUrl: request.url(), redirectedFrom: request.redirectedFrom()?.url() ?? null,
       status: response.status(), type: request.resourceType() };
@@ -131,11 +151,11 @@ function comparison(baseline: number | undefined, candidate: number | undefined)
   const difference = candidate - baseline;
   return { baseline, candidate, difference, percent: baseline === 0 ? null : Number(((difference / baseline) * 100).toFixed(4)) };
 }
-export async function runPayloadComparison({ browser, baselineUrl, candidateUrl, outputRoot,
+export async function runPayloadComparison<P extends PayloadPage>({ browser, baselineUrl, candidateUrl, outputRoot,
   objects = OBJECTS, measure = measureRoute }: {
-    browser: Browser; baselineUrl: string; candidateUrl: string; outputRoot?: string;
+    browser: PayloadBrowser<P>; baselineUrl: string; candidateUrl: string; outputRoot?: string;
     objects?: readonly PayloadObject[];
-    measure?: (browser: Browser, url: string, entry: PayloadCase) => Promise<SideMeasurement>;
+    measure?: (browser: PayloadBrowser<P>, url: string, entry: PayloadCase) => Promise<SideMeasurement>;
   }) {
   const report = { schema: "cssearth-object-payload@2", capturedAt: new Date().toISOString(),
     baselineUrl, candidateUrl, viewport: VIEWPORT, dprs: [1, 2], objects: objects.map(object => object.id),
@@ -186,7 +206,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     browser = await chromium.launch({ headless: true, executablePath: CHROME_EXECUTABLE,
       args: ["--use-angle=metal", "--enable-gpu", "--disable-software-rasterizer"] });
     runStarted = true;
-    const report = await runPayloadComparison({ ...options, browser });
+    const report = await runPayloadComparison<Page>({ ...options, browser });
     console.log(JSON.stringify({ outputRoot: options.outputRoot, complete: report.complete,
       cases: report.cases.map(({ id, dpr, bodyBytes, responseCount }) => ({ id, dpr, bodyBytes, responseCount })), errors: report.errors }, null, 2));
     if (!report.complete) process.exitCode = 1;

@@ -1,3 +1,6 @@
+import {requireRecord} from '../../../../tools/source-values.mts';
+import {array,number,shape,text} from '../../../../tools/objects/terrestrial-layers/source-records.mts';
+import {required} from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
@@ -6,8 +9,8 @@ import {resolve} from 'node:path';
 import {decodeCalibratedCamera, prepareShapeCameraColor} from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
 
 const source = resolve(import.meta.dirname, '../../../../src/planets/proteus/source');
-const readJson = async path => JSON.parse(await readFile(resolve(source, path), 'utf8'));
-const anchors = {
+const readJson = async (path: string) => JSON.parse(await readFile(resolve(source, path), 'utf8'));
+const anchors:Record<string,readonly (readonly[number,number,number])[]> = {
   c1137328: [[474, 500, 295], [464, 505, 266], [414, 440, -48], [0, 0, 0]],
   c1137339: [[467, 591, 322], [457, 596, 371], [410, 531, -17], [0, 0, 0]],
   c1137350: [[393, 376, 270], [383, 381, 343], [333, 316, -47], [0, 0, 0]],
@@ -15,7 +18,7 @@ const anchors = {
 
 test('Proteus color preserves the six exact public inputs and signed FICOR I/F anchors', async () => {
   const manifest = await readJson('manifest.json');
-  const entries = manifest.inputs.filter(input => input.consumers.includes('voyager-color-frames'));
+  const entries = manifest.inputs.filter((input: { consumers: string|string[]; }) => input.consumers.includes('voyager-color-frames'));
   assert.equal(entries.length, 6);
   for (const entry of entries) {
     const bytes = await readFile(resolve(source, entry.path));
@@ -34,8 +37,8 @@ test('Proteus color preserves the six exact public inputs and signed FICOR I/F a
 test('Proteus filter color samples all three actual cameras and withholds a missing channel', async () => {
   const manifest = await readJson('manifest.json');
   const terrestrial = await readJson('preparation/terrestrial.json');
-  const recipe = terrestrial.raster.mosaics.find(map => map.id === 'filter-color');
-  const entries = manifest.inputs.filter(input => input.consumers.includes(recipe.consumer));
+  const recipe = terrestrial.raster.mosaics.find((map: { id: string; }) => map.id === 'filter-color');
+  const entries = manifest.inputs.filter((input:unknown) => array(text)(requireRecord(input).consumers).includes(recipe.consumer));
   const shape = terrestrial.geometry.radialTerrain;
   const map = await prepareShapeCameraColor(source, entries, recipe, 96, 48, shape);
   const valid = Array.from(map.missing, (missing, index) => missing ? -1 : index).filter(index => index >= 0);
@@ -45,8 +48,8 @@ test('Proteus filter color samples all three actual cameras and withholds a miss
   for (const channel of map.grid.channels) {
     assert.ok(channel.coveragePixels >= valid.length);
     assert.equal(channel.frames[0].level, 1);
-    assert.ok(Number.isFinite(channel.beforeDisplay.mean));
-    assert.ok(channel.frames[0].maskedSourceSamples.count > 0);
+    assert.ok(Number.isFinite(required(channel.beforeDisplay).mean));
+    assert.ok(required(channel.frames[0].maskedSourceSamples).count > 0);
   }
   const outside = structuredClone(recipe);
   outside.channels[2].frames[0].center = [2000, 2000];

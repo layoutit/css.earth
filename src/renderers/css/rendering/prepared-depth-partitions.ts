@@ -10,11 +10,13 @@ export interface PreparedDepthPartitions {
   readonly order: PreparedDepthOrder;
 }
 
+export interface DepthPartitionNode { hidden: boolean; style: Pick<CSSStyleDeclaration, 'transform' | 'zIndex'>; }
+
 /** Retained paint contexts share the camera's already-published transform.
  * Only prepared priorities and plane signs determine their painter order. No face sorting,
  * style discovery, mesh construction or node replacement enters a frame. */
 export function createPreparedDepthPartitions(plan: PreparedDepthPartitions | undefined,
-  nodes: readonly HTMLElement[], scene: HTMLElement) {
+  nodes: readonly DepthPartitionNode[], scene: DepthPartitionNode) {
   if (!plan) return (_projection: PhysicalProjection | undefined) => {};
   const groups = plan.groups.map(group => ({ root: nodes[group.root], scene: nodes[group.scene], rank: -1 }));
   const dependsOnEye = (order: PreparedDepthOrder): boolean => 'plane' in order ||

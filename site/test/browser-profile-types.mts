@@ -60,7 +60,7 @@ export interface ObjectBrowserProfile {
   waitForRuntime(page: BrowserPage): Promise<void>;
   pause(page: BrowserPage): Promise<unknown>;
   playbackRunning(page: BrowserPage): Promise<boolean>;
-  camera(page: BrowserPage): Promise<Partial<CameraState>>;
+  camera(page: BrowserPage): Promise<Partial<CameraState> & Pick<CameraState, "pitch" | "zoom">>;
   setCamera(page: BrowserPage, state: Partial<CameraState> & Pick<CameraState, "zoom">): Promise<unknown>;
   bounds(page: BrowserPage): Promise<CameraBounds>;
   stable(page: BrowserPage): Promise<boolean>;

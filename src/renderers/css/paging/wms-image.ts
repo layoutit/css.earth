@@ -5,7 +5,7 @@ const REQUIRED = { SERVICE:"WMS", VERSION:"1.3.0", REQUEST:"GetMap", LAYERS:LAYE
 
 // Validate prepared request metadata; never derive a bbox or image in runtime.
 import type { PreparedPage } from "./types.js";
-export function isPreparedWmsImage(page: PreparedPage) {
+export function isPreparedWmsImage(page: Pick<PreparedPage, "rasterSource" | "url" | "width" | "height">) {
   if (page.rasterSource !== "terrascope-wms@1") return false;
   let url;
   try { url = new URL(page.url); } catch { return false; }
@@ -18,7 +18,7 @@ export function isPreparedWmsImage(page: PreparedPage) {
     bbox[1]>=-85.0511287798066 && bbox[3]<=85.0511287798066 && bbox[0]<bbox[2] && bbox[1]<bbox[3];
 }
 
-export async function readWmsImage(response: Response, page: PreparedPage) {
+export async function readWmsImage(response: Response, page: Pick<PreparedPage, "width" | "height">) {
   if (response.headers.get("content-type")?.split(";")[0].trim() !== "image/png") {
     throw new Error("WMS response is not a PNG image.");
   }

@@ -1,3 +1,4 @@
+import {required} from '../../test-values.mts';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {parseObjShape} from './obj-shape.mts';
@@ -21,13 +22,13 @@ test('source support and nearest 3D facet are retained through a concave radial 
   const table = parseFacetCsv(csv, {...profile,validityField:'Albedo'}, mesh);
   const sampler = createFacetScalarSampler(mesh,table,{surfaceSampling:{maximumDistanceMeters:.2}});
   assert.equal(sampler.samplePoint([1,1,1]),null,'Unsupported front facet must remain missing');
-  assert.equal(sampler.samplePoint([5.1,1,1]).value,30,'Rear facet must not receive front ray scalar');
-  assert.equal(sampler.samplePoint([5.1,1,1]).sourceCell,1);
+  assert.equal(required(sampler.samplePoint([5.1,1,1])).value,30,'Rear facet must not receive front ray scalar');
+  assert.equal(required(sampler.samplePoint([5.1,1,1])).sourceCell,1);
   assert.equal(sampler.samplePoint([5.5,1,1]),null,'Transfer distance is enforced');
   assert.equal(sampler.sample(0,0),null,'Multiple radial source sheets are withheld');
 });
 
-const header = values => {
+const header = (values: Record<string, string | number | undefined>) => {
   const cards = Object.entries(values).map(([key,value]) => (key.padEnd(8) + '= ' +
     (typeof value === 'string' ? "'" + value + "'" : String(value))).padEnd(80));
   cards.push('END'.padEnd(80));
@@ -39,7 +40,7 @@ function fitsFixture(reverseSource=false) {
   const names=['FACET_NUM','LATITUDE','LONGITUDE','RADIUS','SLOPE','SIGMA'];
   const units=[undefined,'DEGREES','DEGREES','KILOMETERS','DEGREES','DEGREES'];
   const primary=header({SIMPLE:'T',BITPIX:8,NAXIS:0,TARGET:'FIXTURE',OBJ_FILE:'fixture.obj',PRODNAME:'fixture.fits'});
-  const columns={XTENSION:'BINTABLE',BITPIX:8,NAXIS:2,NAXIS1:24,NAXIS2:2,PCOUNT:0,GCOUNT:1,TFIELDS:6};
+  const columns: Record<string, string | number | undefined>={XTENSION:'BINTABLE',BITPIX:8,NAXIS:2,NAXIS1:24,NAXIS2:2,PCOUNT:0,GCOUNT:1,TFIELDS:6};
   names.forEach((name,i) => {columns['TTYPE'+(i+1)]=name;columns['TFORM'+(i+1)]=i?'1E':'1J';if(units[i])columns['TUNIT'+(i+1)]=units[i];});
   const data=Buffer.alloc(2880);data.writeInt32BE(0);
   [Math.asin(1/Math.sqrt(3))*180/Math.PI,45,Math.sqrt(3),0,0].forEach((n,i) => data.writeFloatBE(n,(i+1)*4));
@@ -81,7 +82,7 @@ test('explicit centroid bijection reconciles exporter order and retains the orig
   assert.deepEqual([...table.sourceRows],[1,0]);
   assert.equal(table.report.remappedRows,2);
   const sampler=createFacetScalarSampler(f.source,table,{surfaceSampling:{maximumDistanceMeters:1}});
-  assert.equal(sampler.samplePoint([5000,1000,1000]).sourceCell,1);
+  assert.equal(required(sampler.samplePoint([5000,1000,1000])).sourceCell,1);
   const duplicate=Buffer.from(f.bytes);duplicate.copy(duplicate,5760+24+4,5760+4,5760+24);
   assert.throws(()=>parseFacetFits(duplicate,f.xml,{...f.profile,registration:'centroid-bijection'},f.source),/bijection/);
 });

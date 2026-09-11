@@ -7,7 +7,8 @@ class FakeElement {
   readonly children: FakeElement[] = []; readonly style: Record<string, string> = {}; readonly dataset: Record<string, string> = {};
   parentNode: FakeElement | null = null; className = ''; textContent = ''; ariaHidden: string | null = null;
   clientWidth = 800; clientHeight = 600; measurements = 0;
-  constructor(readonly ownerDocument: FakeDocument) {}
+  readonly ownerDocument: FakeDocument;
+  constructor(ownerDocument: FakeDocument) { this.ownerDocument = ownerDocument;}
   get offsetWidth() { this.measurements++; return this.textContent.length * 7; }
   get offsetHeight() { this.measurements++; return 14; }
   appendChild(child: FakeElement) { child.remove(); child.parentNode = this; this.children.push(child); return child; }

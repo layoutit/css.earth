@@ -1,3 +1,6 @@
+import {shape,number} from "../../../../tools/objects/geographic-pages/source-records.mts";
+import {required} from "../../../../tools/test-values.mts";
+import {parseInteriorSource} from "../../../../tools/objects/paged-ellipsoid/source-contract.mts";
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
@@ -33,7 +36,7 @@ test("verifies Earth acquisition without a network request", async () => {
     new URL("../../../../tools/objects/dist/operations.js", import.meta.url).pathname,
     "acquire", "earth", "--verify-only",
   ]);
-  assert.equal(JSON.parse(stdout).inputCount, earthSourceManifest().inputs.length);
+  assert.equal(shape({inputCount:number})(JSON.parse(stdout)).inputCount, earthSourceManifest().inputs.length);
 });
 
 test("prepares the shared photographed cubic sky and independent Sun", () => {
@@ -45,7 +48,7 @@ test("prepares the shared photographed cubic sky and independent Sun", () => {
     "cssearth-prepared-directional-sun@3");
   assert.equal(PREPARED_EARTH_SKY_SUN.bakedIntoStarfield, false);
   assert.equal(PREPARED_EARTH_SKY_SUN.billboard, true);
-  assert.equal(PREPARED_EARTH_SKY_SUN.asset.googlePixelsRedistributed, false);
+  assert.equal(Reflect.get(PREPARED_EARTH_SKY_SUN.asset,"googlePixelsRedistributed"), false);
 });
 
 test("prepares flat opaque texel thumbnails for Earth surface lenses", async () => {
@@ -54,7 +57,7 @@ test("prepares flat opaque texel thumbnails for Earth surface lenses", async () 
   )) {
     const { data, info } = await sharp(resolve(
       publicRoot,
-      lens.thumbnailUrl.split("/").at(-1),
+      required(lens.thumbnailUrl.split("/").at(-1)),
     )).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
     assert.equal(info.width, 96);
     assert.equal(info.height, 96);
@@ -79,12 +82,12 @@ test("prepares OpenSpace Earth colour with Google directional exposure response"
   assert.equal(source.rayleigh.scaleHeightKm, 8);
   assert.equal(source.mie.scaleHeightKm, 1.2);
   assert.equal(source.mie.anisotropy, 0.85);
-  assert.equal(source.presentationResponse.qualification,
+  assert.equal(Reflect.get(source.presentationResponse,"qualification"),
     "NATIVE_HEADLESS_LAYER_ISOLATION_AND_LINKED_SHADER_BOUND");
   assert.equal(source.presentationResponse.observedResponse.exposure, 0.2);
-  assert.equal(source.presentationResponse.observedResponse.toneMap,
+  assert.equal(Reflect.get(source.presentationResponse.observedResponse,"toneMap"),
     "one-minus-exp-negative-radiance-times-exposure");
-  assert.deepEqual(source.presentationResponse.transferPolicy.bodySpecific, [
+  assert.deepEqual(Reflect.get(source.presentationResponse.transferPolicy,"bodySpecific"), [
     "effective-solar-irradiance",
     "apparent-exposure",
     "atmosphere-height",
@@ -138,7 +141,7 @@ test("prepares OpenSpace Earth colour with Google directional exposure response"
       }
     }
     const color = weighted.map((value) => value / alpha);
-    assert.ok(maximumAlpha >= 96 && maximumAlpha <= 120, maximumAlpha);
+    assert.ok(maximumAlpha >= 96 && maximumAlpha <= 120, String(maximumAlpha));
     assert.ok(color[2] - color[1] >= 12, JSON.stringify(color));
     assert.ok(color[1] - color[0] >= 16, JSON.stringify(color));
   }
@@ -148,7 +151,7 @@ test("prepares OpenSpace Earth colour with Google directional exposure response"
     const frame = atmosphere.frames[frameIndex];
     const { data, info } = await sharp(resolve(
       publicRoot,
-      frame.assets.two.split('/').at(-1),
+      required(frame.assets.two.split('/').at(-1)),
     )).extract({
       left: (frame.columnIndex * atmosphere.stride + atmosphere.gutter)*2,
       top: (frame.tileRowIndex * atmosphere.stride + atmosphere.gutter)*2,
@@ -211,7 +214,7 @@ test("publishes the prepared Earth title and retained scene", async () => {
   assert.ok(surfaceLeaves.every(({ projection }) => projection === "projective"));
   assert.equal(PREPARED_EARTH_SCENE.material.lighting.frameCount, 128);
   assert.equal(PREPARED_EARTH_SCENE.material.atmosphere.frameCount, 128);
-  for (const role of ["lighting", "atmosphere"]) {
+  for (const role of ["lighting", "atmosphere"] as const) {
     const material = PREPARED_EARTH_SCENE.material[role];
     const shardSide = Math.sqrt(EARTH_MATERIAL_FRAMES_PER_SHARD);
     assert.equal(material.columns, shardSide);
@@ -240,7 +243,7 @@ test("publishes the prepared Earth title and retained scene", async () => {
         rowIndex += 1) {
         const row = await sharp(resolve(
           publicRoot,
-          material.preparedRows[rowIndex].assets.two.split('/').at(-1),
+          required(material.preparedRows[rowIndex].assets.two.split('/').at(-1)),
         )).metadata();
         assert.equal(row.width, 508 * density * shardSide);
         assert.equal(row.height, 508 * density * shardSide);
@@ -258,7 +261,7 @@ test("publishes the prepared Earth title and retained scene", async () => {
   }
   assert.notEqual(
     PREPARED_EARTH_SCENE.material.lighting.frames[0].transform,
-    PREPARED_EARTH_SCENE.material.lighting.frames.at(-1).transform,
+    required(PREPARED_EARTH_SCENE.material.lighting.frames.at(-1)).transform,
   );
   assert.equal("interior" in PREPARED_EARTH_SCENE.material, false);
   assert.equal(PREPARED_EARTH_SCENE.camera.maximumZoom, 4);
@@ -285,20 +288,20 @@ test("publishes the prepared Earth title and retained scene", async () => {
   assert.equal(pages.length, 7);
   assert.ok(pages.every(({ width, height }) => width <= 4096 && height <= 4096));
   for (const lens of PREPARED_EARTH_LENSES.controls.filter(lens => lens.surfaceUrls)) {
-    assert.equal(lens.surfaceUrls.length, pages.length);
-    for (const [index, url] of lens.surfaceUrls.entries()) {
-      const image = await sharp(resolve(publicRoot, url.split("/").at(-1))).metadata();
+    assert.equal(required(lens.surfaceUrls).length, pages.length);
+    for (const [index, url] of required(lens.surfaceUrls).entries()) {
+      const image = await sharp(resolve(publicRoot, required(url.split("/").at(-1)))).metadata();
       assert.deepEqual({ width: image.width, height: image.height }, pages[index]);
       assert.equal(image.hasAlpha, true, "prebaked outside-quad pixels need alpha");
     }
   }
   // Runtime selects the canonical 2x bank on every DPR; retired 1x delivery
   // files are not part of the consumer-derived public closure.
-  for (const [key, scale] of [["twoUrls", 0.5]]) {
+  for (const [key, scale] of [["twoUrls", 0.5]] as const) {
     const urls = PREPARED_EARTH_SCENE.interior.outerAssets.surface[key];
     assert.equal(urls.length, pages.length);
     for (const [index, url] of urls.entries()) {
-      const image = await sharp(resolve(publicRoot, url.split("/").at(-1))).metadata();
+      const image = await sharp(resolve(publicRoot, required(url.split("/").at(-1)))).metadata();
       assert.deepEqual({ width: image.width, height: image.height }, {
         width: pages[index].width * scale, height: pages[index].height * scale,
       });
@@ -310,11 +313,11 @@ test("publishes the prepared Earth title and retained scene", async () => {
   assert.equal(polarLeaves.some(({ className }) =>
     className.includes("earth-polar-inner")), false);
   assert.equal(new Set(polarLeaves.map(({ sourceRect }) =>
-    `${sourceRect.x}:${sourceRect.y}`)).size, 2);
-  const interiorSource = JSON.parse(await readFile(
+    `${required(sourceRect).x}:${required(sourceRect).y}`)).size, 2);
+  const interiorSource = parseInteriorSource(JSON.parse(await readFile(
     new URL("../../../../src/planets/earth/source/interior/earth-interior.json", import.meta.url),
     "utf8",
-  ));
+  )));
   assert.deepEqual(PREPARED_EARTH_SCENE.interior.source.layers,
     interiorSource.layers);
   assert.equal(PREPARED_EARTH_SCENE.interior.runtimeGeometry, false);

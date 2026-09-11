@@ -17,9 +17,9 @@ test("prepares the full NASA PSG Mars reflectance spectrum", async () => {
       "utf8"),
     readFile(spectrumPath, "utf8"),
   ]);
-  assert.equal(JSON.parse(preparer).charts.find(c=>c.kind==='spectrum').pointCount,253);
+  assert.equal(JSON.parse(preparer).charts.find((c: { kind: string; })=>c.kind==='spectrum').pointCount,253);
   assert.match(preparer, /I\/F \[apparent albedo\]/u);
-  assert.equal(JSON.parse(preparer).charts.find(c=>c.kind==='spectrum').format,'numeric-lines');
+  assert.equal(JSON.parse(preparer).charts.find((c: { kind: string; })=>c.kind==='spectrum').format,'numeric-lines');
   assert.doesNotMatch(preparer, /<svg/u);
   assert.match(svg,
     /<title id="mars-reflectance-title">Mars modeled disk reflectance<\/title>/u);
@@ -39,9 +39,9 @@ test("prepares the 49-layer NASA PSG Mars temperature-pressure profile",
         "utf8"),
       readFile(profilePath, "utf8"),
     ]);
-    assert.equal(JSON.parse(preparer).charts.find(c=>c.kind==='pressure').layerCount,49);
+    assert.equal(JSON.parse(preparer).charts.find((c: { kind: string; })=>c.kind==='pressure').layerCount,49);
     assert.match(preparer, /Mars MCD5\.3/u);
-    assert.equal(JSON.parse(preparer).charts.find(c=>c.kind==='pressure').source,'atmosphere/psg-mars-20260829.cfg');
+    assert.equal(JSON.parse(preparer).charts.find((c: { kind: string; })=>c.kind==='pressure').source,'atmosphere/psg-mars-20260829.cfg');
     assert.doesNotMatch(preparer, /<svg/u);
     assert.match(svg,
       /<title id="mars-temperature-pressure-title">Mars temperature and pressure profile<\/title>/u);

@@ -38,7 +38,7 @@ test("keeps unknown future chart types after known charts in source order", () =
     ["photometric-phase", "future-b", "future-a"],
   );
   assert.throws(
-    () => orderScientificCharts(null),
+    () => Reflect.apply(orderScientificCharts, undefined, [null]),
     /Scientific charts must be an array/u,
   );
 });

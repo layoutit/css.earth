@@ -29,7 +29,7 @@ try {
         reducedMotion: "reduce",
       });
       const page = await context.newPage();
-      const problems = [];
+      const problems: string[] = [];
       page.on("console", (message) => {
         if (["error", "warning"].includes(message.type())) {
           problems.push(`${message.type()}: ${message.text()}`);
@@ -43,7 +43,10 @@ try {
         document.documentElement.dataset.ready === "true" &&
         window.__saturn?.ready === true, null, { timeout: 120_000 });
       await page.evaluate(() => {
-        (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
+        function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+        function requiredInput(value: Element | null): HTMLInputElement { if (!(value instanceof HTMLInputElement)) throw new Error("Expected required HTMLInputElement"); return value; }
+
+        (requiredInput(document.querySelector('input[name="motion"]')).checked && requiredInput(document.querySelector('input[name="motion"]')).click());
         for (const animation of document.getAnimations()) {
           animation.pause();
           animation.currentTime = 0;
@@ -102,11 +105,11 @@ console.log(JSON.stringify(report, null, 2));
 assert.equal(report.totalChangedPixels, 0);
 
 async function comparePng(
-  baselinePath,
-  candidatePath,
-  diffPath,
-  width,
-  density,
+  baselinePath: string,
+  candidatePath: string,
+  diffPath: string,
+  width: number,
+  density: number,
 ) {
   const baseline = PNG.sync.read(await readFile(baselinePath));
   const candidate = PNG.sync.read(await readFile(candidatePath));

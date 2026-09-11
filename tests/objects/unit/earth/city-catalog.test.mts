@@ -1,3 +1,5 @@
+import {parseCitySource,shape,array,number} from '../../../../tools/objects/geographic-pages/source-records.mts';
+import {required} from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
@@ -28,10 +30,10 @@ test("the pinned global object inventory binds every published proof source",asy
   const {pin,entries}=await readWorldCoverCatalog({directory:new URL("../../../../src/planets/earth/source/city/",import.meta.url)});
   assert.equal(entries.size,pin.tileCount);
   const bounds=[...entries.values()].map(entry=>worldCoverTileBounds(entry.tile));
-  assert.deepEqual([Math.min(...bounds.map(b=>b.south)),Math.max(...bounds.map(b=>b.north))],pin.latitudeExtent);
-  const source=JSON.parse(await readFile(new URL('../../../../src/planets/earth/source/city/manifest.json',import.meta.url),'utf8'));
+  assert.deepEqual([Math.min(...bounds.map(b=>b.south)),Math.max(...bounds.map(b=>b.north))],shape({latitudeExtent:array(number)})(pin).latitudeExtent);
+  const source=parseCitySource(JSON.parse(await readFile(new URL('../../../../src/planets/earth/source/city/manifest.json',import.meta.url),'utf8')));
   for(const region of source.regions)for(const entry of region.sources??[region]) {
-    const listed=worldCoverSourceEntry(entries.get(entry.tile));
+    const listed=worldCoverSourceEntry(required(entries.get(required(entry.tile))));
     assert.equal(listed.etag,entry.etag);assert.equal(listed.sourceBytes,entry.sourceBytes);assert.equal(listed.url,entry.url);
   }
 });
@@ -51,7 +53,7 @@ test("source lookup wraps the antimeridian and distinguishes absent tiles from i
 
 test('global source-window planning uses the accepted faces and reproduces all pinned regions',async()=>{
   const {entries}=await readWorldCoverCatalog({directory:new URL("../../../../src/planets/earth/source/city/",import.meta.url)});
-  const source=JSON.parse(await readFile(new URL('../../../../src/planets/earth/source/city/manifest.json',import.meta.url),'utf8'));
+  const source=parseCitySource(JSON.parse(await readFile(new URL('../../../../src/planets/earth/source/city/manifest.json',import.meta.url),'utf8')));
   assert.equal(cityCoverageRoots().length,PREPARED_EARTH_SCENE.body.bands.reduce((sum,band)=>sum+band.leaves.length,0));
   for(const region of source.regions) {
     const jobs=[...planCityCoverage(PREPARED_EARTH_SCENE,entries,[region.root])];
@@ -87,7 +89,7 @@ test('absent source tiles require exact publisher evidence and cannot hide missi
 });
 
 test('global face receipts bind resumable R2 publication to the pinned catalog',()=>{
-  const source={dataset:'example-dataset',delivery:{bucket:'cssearth-assets',
+  const source={dataset:'example-dataset',delivery:{accountId:'fixture-account',bucket:'cssearth-assets',
     assetOrigin:'https://earth-assets.lowpoly.cc',keyPrefix:'scenes/earth'}};
   const expected=expectedGlobalCityFace({level:0,x:3,y:4},[{root:{level:5,x:96,y:128},
     lastLevel:7,window:{pixels:100},sources:[{tile:'N00E000'}]}]);

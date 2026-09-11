@@ -1,3 +1,4 @@
+import { required } from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import runtimeDefinition from "../../../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
@@ -12,11 +13,11 @@ test('other-body physical size uses the same tangent cone as focused geometry, b
   const projected = projectHeliocentricView(plan, { ...input, distance: 2e7, system: true, systemOrbits: false });
   const prepared = plan.system.bodies.find(body => body.id === 'venus');
   const marker = projected.system!.bodies.find(body => body.id === 'venus')!.marker;
-  const depth = -prepared.position[2] - projected.body.translate[2] + input.focal;
-  const expected = 2 * input.focal * prepared.radiusUnits / Math.sqrt(depth * depth - prepared.radiusUnits ** 2);
+  const depth = -required(prepared).position[2] - projected.body.translate[2] + input.focal;
+  const expected = 2 * input.focal * required(prepared).radiusUnits / Math.sqrt(depth * depth - required(prepared).radiusUnits ** 2);
   assert.ok(Math.abs(marker.physicalDiameterPx - expected) < 1e-14);
   assert.ok(Math.abs(expected - .12180621293661688) < 1e-14);
-  assert.equal(marker.diameterPx, Math.max(expected, 2 * prepared.pointPresentation.policy.minimumRadiusPx));
+  assert.equal(marker.diameterPx, Math.max(expected, 2 * required(prepared).pointPresentation.policy.minimumRadiusPx));
 });
 
 test('the full translated observer projects the selected body, Sun and system in one eye space', () => {
@@ -49,9 +50,9 @@ test('approaching another prepared body keeps its marker visible inside the dist
     const target = source.system.bodies.find(body => body.id === destination);
     let previousDiameter = 0;
     for (const radiusMultiple of [100, 30, 10, 5]) {
-      const depth = target.radiusUnits * radiusMultiple;
+      const depth = required(target).radiusUnits * radiusMultiple;
       const eye = [-input.principalOffset[0] * depth / input.focal, 0, -depth];
-      const bodyCenter = eye.map((value, axis) => value - target.position[axis]);
+      const bodyCenter = eye.map((value, axis) => value - required(target).position[axis]);
       const projected = projectHeliocentricView(source, { ...input, bodyCenter,
         distance: Math.hypot(...bodyCenter), system: true, systemOrbits: false });
       const marker = projected.system!.bodies.find(body => body.id === destination)!.marker;
@@ -68,10 +69,10 @@ test('approaching another prepared body keeps its marker visible inside the dist
 
 test('celestial visibility still rejects bodies behind or intersecting the camera plane', () => {
   const target = plan.system.bodies.find(body => body.id === 'venus');
-  for (const [depth, classification] of [[-target.radiusUnits, 'behind-camera'],
-    [target.radiusUnits / 2, 'intersects-camera-plane']] as const) {
+  for (const [depth, classification] of [[-required(target).radiusUnits, 'behind-camera'],
+    [required(target).radiusUnits / 2, 'intersects-camera-plane']] as const) {
     const eye = [-input.principalOffset[0] * depth / input.focal, 0, -depth];
-    const bodyCenter = eye.map((value, axis) => value - target.position[axis]);
+    const bodyCenter = eye.map((value, axis) => value - required(target).position[axis]);
     const projected = projectHeliocentricView(plan, { ...input, bodyCenter,
       distance: Math.hypot(...bodyCenter), system: true, systemOrbits: false });
     const marker = projected.system!.bodies.find(body => body.id === 'venus')!.marker;

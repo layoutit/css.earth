@@ -1,3 +1,5 @@
+import {requireRecord} from '../../../../tools/source-values.mts';
+import {required} from '../../../../tools/test-values.mts';
 import { readPreparedFixture } from '../../fixtures.mts';
 const PREPARED_PLUTO_LENSES = await readPreparedFixture('pluto', 'lenses');
 const PREPARED_PLUTO_SCENE = await readPreparedFixture('pluto', 'scene');
@@ -49,7 +51,7 @@ test("bakes Pluto homographies into textures while keeping scene frames affine",
       assert.deepEqual([frame[3], frame[7], frame[11], frame[15]], [0, 0, 0, 1]);
     }
     // The compiled layer frame is published; legacy leaf.style is not its transform.
-    const matrix = (layer?.frameMatrix ?? leaf.style.match(/matrix3d\(([^)]+)\)/u)?.[1]).split(",").map(Number);
+    const matrix = required(layer?.frameMatrix ?? leaf.style.match(/matrix3d\(([^)]+)\)/u)?.[1]).split(",").map(Number);
     assert.equal(matrix?.length, 16);
     assert.ok(matrix.every(Number.isFinite));
     // Pole leaves do not expose projective leafWidth/leafHeight. An affine
@@ -77,7 +79,7 @@ test("prepares sourced MVIC color, USGS elevation, and LORRI/MVIC lenses", async
       [lens.polesUrl, 512, 128],
       [lens.poles2xUrl, 1024, 256],
       [lens.thumbnailUrl, 96, 96],
-    ]) {
+    ] as const) {
       const path = fileURLToPath(new URL(`../../../../public${url}`,
         import.meta.url));
       const metadata = await sharp(path).metadata();
@@ -87,7 +89,7 @@ test("prepares sourced MVIC color, USGS elevation, and LORRI/MVIC lenses", async
   for (const [url, width] of [
     [PREPARED_PLUTO_LENSES.material.one, 512],
     [PREPARED_PLUTO_LENSES.material.two, 1024],
-  ]) {
+  ] as const) {
     const path = fileURLToPath(new URL(`../../../../public${url}`,
       import.meta.url));
     const metadata = await sharp(path).metadata();
@@ -115,7 +117,7 @@ test("binds the checked Pluto sources and runtime asset closure", async () => {
     "utf8",
   ));
   assert.equal(manifest.schema, "csspluto-runtime-assets@1");
-  assert.ok(manifest.assets.some(asset => asset.filename === "pluto-topography-legend.webp"));
+  assert.ok(manifest.assets.some((asset: { filename: string; }) => asset.filename === "pluto-topography-legend.webp"));
   for (const asset of manifest.assets) {
     const bytes = await readFile(new URL(
       `../../../../public/scenes/pluto/${asset.filename}`,
@@ -147,8 +149,8 @@ test("keeps runtime scene work retained and CSS-only", async () => {
 
 test("Pluto prepares small geographic previews for every observation, including elevation", async () => {
   const root = new URL('../../../../src/planets/pluto/prepared/', import.meta.url);
-  const { images } = JSON.parse(await readFile(new URL('minimaps.json', root)));
-  assert.deepEqual(images.map(image => image.id), PREPARED_PLUTO_LENSES.controls.map(lens => lens.id));
+  const { images } = JSON.parse((await readFile(new URL('minimaps.json', root))).toString('utf8'));
+  assert.deepEqual(images.map((image:unknown) => requireRecord(image).id), PREPARED_PLUTO_LENSES.controls.map(lens => lens.id));
   for (const image of images) {
     const path = new URL(image.path, root);
     const bytes = await readFile(path), metadata = await sharp(bytes).metadata();

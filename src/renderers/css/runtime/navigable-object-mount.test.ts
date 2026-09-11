@@ -1,23 +1,42 @@
 import { readFile } from 'node:fs/promises';
 import { expect, test, vi } from 'vitest';
 import { createNavigableObjectMount } from './navigable-object-mount.js';
+import { prepareActivationGroups } from '../../../../tools/prepared-activation-groups.mts';
+import { requireObjectRuntimeDefinition } from '../../../../tools/object-runtime-contract.mts';
+import { requirePreparedCssDescriptor } from '../prepared-object-decoder.js';
+import { parsePreparedWorldCameraFrame } from '../validation/world-frame.js';
+import { record } from '../validation/guards.js';
+import type { ObjectMountOptions, ObjectRuntimeDefinition } from './object-runtime-types.js';
+
+async function preparedFixture() {
+  const descriptor = requirePreparedCssDescriptor(JSON.parse(await readFile(new URL('../../../planets/venus/object.json', import.meta.url), 'utf8')));
+  const envelope = record(JSON.parse(await readFile(new URL('../../../planets/venus/prepared/object.json', import.meta.url), 'utf8')), 'prepared Venus fixture');
+  const source = requireObjectRuntimeDefinition(envelope.data);
+  // Retain the real tree and selections while keeping image decoding in its browser gate.
+  const data = { ...source, assets: { ...source.assets, startup: [] }, materials: [],
+    variants: source.variants.map(variant => ({ ...variant, required: [], materials: [],
+      writes: variant.writes.map(write => write.kind === 'texture' ? { ...write, resource: null } : write) })) };
+  const payload = { ...envelope, data: { ...data,
+    tree: { ...data.tree, activationGroups: prepareActivationGroups(data) } } };
+  return { descriptor, payload };
+}
+
+async function authenticateFixture({ descriptor, payload }: Awaited<ReturnType<typeof preparedFixture>>) {
+  const bytes = new TextEncoder().encode(JSON.stringify(payload)).buffer;
+  const sha256 = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(v => v.toString(16).padStart(2, '0')).join('');
+  return { descriptor: { ...descriptor, prepared: { ...descriptor.prepared!, sha256 } }, bytes };
+}
+
 
 test('preflight and native mount share one authenticated definition and transfer its resource ownership once', async () => {
-  const descriptor = JSON.parse(await readFile(new URL('../../../planets/venus/object.json', import.meta.url), 'utf8'));
-  const payload = JSON.parse(await readFile(new URL('../../../../src/planets/venus/prepared/object.json', import.meta.url), 'utf8'));
-  // This test exercises transport/ownership; native image decoding has its own real-browser gate.
-  payload.data.assets.startup = [];
-  payload.data.materials = [];
-  for (const variant of payload.data.variants) {
-    variant.required = []; variant.materials = [];
-    for (const write of variant.writes) if (write.kind === 'texture') write.resource = null;
-  }
-  const bytes = new TextEncoder().encode(JSON.stringify(payload)).buffer;
-  descriptor.prepared.sha256 = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(v => v.toString(16).padStart(2, '0')).join('');
+  const { descriptor, bytes } = await authenticateFixture(await preparedFixture());
+  const frame = parsePreparedWorldCameraFrame(descriptor.properties.worldFrame);
+  if (!frame) throw new Error('Venus fixture needs its prepared world frame.');
   const read = vi.fn(async () => bytes), destroyed = vi.fn();
-  const bind = vi.fn(definition => (_stage, options) => {
+  const bind = vi.fn((definition: ObjectRuntimeDefinition) => (_stage: HTMLElement, options: ObjectMountOptions) => {
+    if (!options.preparedResources) throw new Error('Mount must receive preflight resources.');
     const resources = options.preparedResources.claim(definition.assets, {});
-    expect(options.worldFrame.referenceFrame).toBe('sun-icrf');
+    expect(options.worldFrame?.referenceFrame).toBe('sun-icrf');
     return { ready: Promise.resolve(), pause() {}, resume() {}, destroy() { resources.destroy(); destroyed(); },
       sharedView: { capture: () => null, restore: async () => false, subscribe: () => () => {} } };
   });
@@ -25,11 +44,12 @@ test('preflight and native mount share one authenticated definition and transfer
   expect(read).not.toHaveBeenCalled();
   const signal = new AbortController();
   const prepared = await factory.navigation!.prepare({ signal: signal.signal, getView: () => ({
-    world: { referenceFrame: 'sun-icrf', epochJdTt: descriptor.properties.worldFrame.epochJdTt,
+    world: { referenceFrame: 'sun-icrf', epochJdTt: frame.epochJdTt,
       pose: { positionM: [0, 0, 1e12], orientationXyzw: [0, 0, 0, 1] } },
     viewport: { focalPixels: 1000, principalOffsetPixels: [0, 0] },
   }) });
   expect(bind).not.toHaveBeenCalled();
+  expect(prepared.definition.tree.activationGroups?.length).toBeGreaterThan(0);
   const mount = factory({} as HTMLElement, { preparedResources: prepared.resources, onError() {},
     inputSurface: {} as HTMLElement, runtimePolicy: {} as never });
   await mount.ready;
@@ -39,4 +59,16 @@ test('preflight and native mount share one authenticated definition and transfer
   expect(destroyed).not.toHaveBeenCalled();
   mount.destroy(); mount.destroy();
   expect(destroyed).toHaveBeenCalledOnce();
+});
+
+test('authenticated transport without prepared activation groups fails before native binding', async () => {
+  const fixture = await preparedFixture();
+  const tree: { activationGroups?: readonly (readonly number[])[] } = fixture.payload.data.tree;
+  delete tree.activationGroups;
+  const { descriptor, bytes } = await authenticateFixture(fixture);
+  const bind = vi.fn();
+  const factory = createNavigableObjectMount(descriptor, { read: async () => bytes }, bind);
+  await expect(factory.navigation!.prepare({ signal: new AbortController().signal,
+    getView: () => { throw new Error('Invalid transport must fail before view demand.'); } })).rejects.toThrow(/activation groups must be prepared/);
+  expect(bind).not.toHaveBeenCalled();
 });

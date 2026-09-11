@@ -4,29 +4,40 @@ import context from '../../src/planets/sun/prepared/world-context.json' with { t
 import { bodyCardViewAtCamera, overviewScopeAtCamera, viewDistance } from '../overview-context.mts';
 import { presentWorldCamera } from '../../src/renderers/css/dist/navigation.js';
 
-const camera = (distance, plan = context) => ({ pose: {
-  positionM: plan.focus.positionM.map((value, axis) => value + (axis === 2 ? distance : 0)),
-} });
+import type { WorldCameraPose, PreparedWorldCameraFrame } from '../../src/renderers/css/navigation/world-camera.ts';
+import type { ObjectWorldNavigation } from '../../src/renderers/css/runtime/world-navigation-types.ts';
+
+const camera = (distance: number, plan: Pick<typeof context, 'focus'> = context): WorldCameraPose => ({
+  referenceFrame: 'world', epochJdTt: 1, pose: {
+    positionM: [plan.focus.positionM[0], plan.focus.positionM[1], plan.focus.positionM[2] + distance],
+    orientationXyzw: [0, 0, 0, 1],
+  },
+});
+const frameAt = (originM: PreparedWorldCameraFrame['originM'], bodyRadiusM: number): PreparedWorldCameraFrame => ({
+  originM, bodyRadiusM, referenceFrame: 'world', epochJdTt: 1,
+  presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1,
+});
 
 test('body cards switch at the shared camera detail threshold, independent of camera aim', () => {
-  const frame = { referenceFrame: 'world', epochJdTt: 1, originM: [100, 200, 300],
-    presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1, bodyRadiusM: 1000 };
-  const optics = { focalPixels: 1000, principalOffsetPixels: [0,0], widthPixels: 2000,
+  const frame = frameAt([100, 200, 300], 1000);
+  const optics: ReturnType<ObjectWorldNavigation["optics"]> = { framingRadiusPixels: 1, visibleRect: null, focalPixels: 1000, principalOffsetPixels: [0,0], widthPixels: 2000,
     heightPixels: 2000, detailHandoffDiameterPixels: 14 };
   const thresholdDistance = frame.bodyRadiusM * Math.sqrt(1 + (2 * optics.focalPixels / optics.detailHandoffDiameterPixels) ** 2);
-  for (const [scale, expected] of [[0.99, 'detail'], [1.01, 'overview'], [1000, 'overview']]) {
-    const world = { referenceFrame: 'world', epochJdTt: 1, pose: {
-      positionM: frame.originM.map((value, axis) => value + (axis === 2 ? thresholdDistance * scale : 0)),
+  for (const [scale, expected] of [[0.99, 'detail'], [1.01, 'overview'], [1000, 'overview']] as const) {
+    const world: WorldCameraPose = { referenceFrame: 'world', epochJdTt: 1, pose: {
+      positionM: [frame.originM[0], frame.originM[1], frame.originM[2] + thresholdDistance * scale],
       orientationXyzw: [0,0,0,1],
     } };
-    const diameter = 2 * presentWorldCamera(world, frame, optics).silhouette.tangentialSemiAxis;
+    const silhouette = presentWorldCamera(world, frame, optics).silhouette;
+    assert.ok(silhouette);
+    const diameter = 2 * silhouette.tangentialSemiAxis;
     assert.equal(diameter <= optics.detailHandoffDiameterPixels ? 'overview' : 'detail', expected);
-    assert.equal(bodyCardViewAtCamera(world, frame, optics), expected);
-    world.pose.orientationXyzw = [0,1,0,0];
-    assert.equal(bodyCardViewAtCamera(world, frame, optics), expected, 'Looking away does not change zoom mode');
+    assert.equal(bodyCardViewAtCamera(world, frame, optics, "fixture"), expected);
+    const turned: WorldCameraPose = { ...world, pose: { ...world.pose, orientationXyzw: [0,1,0,0] } };
+    assert.equal(bodyCardViewAtCamera(turned, frame, optics, "fixture"), expected, 'Looking away does not change zoom mode');
   }
-  assert.equal(bodyCardViewAtCamera({ pose: { positionM: frame.originM } }, frame, optics), 'detail');
-  assert.equal(bodyCardViewAtCamera(null, frame, optics), 'detail');
+  assert.equal(bodyCardViewAtCamera(camera(0, { ...context, focus: { ...context.focus, positionM: [...frame.originM] } }), frame, optics, "fixture"), 'detail');
+  assert.equal(bodyCardViewAtCamera(null, frame, optics, "fixture"), 'detail');
 });
 
 test('overview follows the prepared galaxy fade and restores correctly at maximum zoom', () => {
@@ -39,8 +50,8 @@ test('overview follows the prepared galaxy fade and restores correctly at maximu
 });
 
 test('galactic distance is measured from the Sun, independent of selected body and surface radius', () => {
-  const plan = { focus: { positionM: [100, 200, 300] } };
-  const world = camera(500, plan), frame = { originM: [100, 200, 400], bodyRadiusM: 20 };
+  const plan = { ...context, focus: { ...context.focus, positionM: [100, 200, 300] } };
+  const world = camera(500, plan), frame = frameAt([100, 200, 400], 20);
   const galactic = viewDistance(world, frame, 'milky-way', plan);
   assert.equal(galactic.label, 'Distance from Sun:');
   assert.equal(galactic.meters, 500);
@@ -50,9 +61,9 @@ test('galactic distance is measured from the Sun, independent of selected body a
 });
 
 test('prepared focus distance follows its catalogue position independently of the selected detail and overview scope', () => {
-  const focus = { name: 'Prepared galaxy', positionM: [1e20, 2e20, -3e20] };
-  const world = { pose: { positionM: [1e20, 2e20, -3e20 + 1e18] } };
-  const frame = { originM: [100,200,300], bodyRadiusM: 20 };
+  const focus = { name: 'Prepared galaxy', positionM: [1e20, 2e20, -3e20] as const };
+  const world = camera(1e18, { ...context, focus: { ...context.focus, positionM: [1e20, 2e20, -3e20] } });
+  const frame = frameAt([100,200,300], 20);
   const value = viewDistance(world, frame, 'milky-way', undefined, focus);
   assert.equal(value.label, 'Distance to Prepared galaxy:');
   assert.ok(Math.abs(value.meters / 1e18 - 1) < 1e-12);

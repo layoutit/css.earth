@@ -11,3 +11,5 @@ export type { PreparedVolumeLenses, PreparedVolumeLensBank, PreparedVolumeLens, 
 export { mountPreparedCataloguePoints, validatePreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
 export type { PreparedCataloguePoints, PreparedCataloguePoint } from '../stars/prepared-catalogue-points.js';
 export { prepareObjectResources } from '../runtime/prepared-resource-lease.js';
+
+export type { WorldContextView } from './world-context-planner.js';

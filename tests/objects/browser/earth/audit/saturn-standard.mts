@@ -3,10 +3,14 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
-import { chromium } from "playwright";
+import { chromium, type Page } from "playwright";
 import sharp from "sharp";
 import { PREPARED_EARTH_SCENE } from "../../../unit/earth/prepared-fixture.mts";
 
+import assert from "node:assert/strict";
+import { required } from "../../../../../tools/test-values.mts";
+import { parseSaturnBaseline } from "../../saturn/audit/baseline-values.mts";
+type Capture = Awaited<ReturnType<typeof auditPlanet>>;
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const deviceScaleFactor = Number(process.argv[3] ?? 2);
 if (![1, 2].includes(deviceScaleFactor)) {
@@ -35,8 +39,8 @@ try {
 }
 
 const contactSheet = await prepareContactSheet(reports);
-const saturn = reports.find(({ planet }) => planet === "saturn");
-const earth = reports.find(({ planet }) => planet === "earth");
+const saturn = required(reports.find(({ planet }) => planet === "saturn"));
+const earth = required(reports.find(({ planet }) => planet === "earth"));
 const earthViewContactSheet = await prepareEarthViewContactSheet(earth);
 const saturnRegression = saturnBaselineReportPath
   ? await compareSaturnBaseline(saturn, saturnBaselineReportPath)
@@ -142,6 +146,7 @@ if (Math.abs(
 ) > 1e-12 || earthPreparedAtmosphereRatio() > 1.012) {
   throw new Error("Earth atmosphere exceeds its checked 70 km shell.");
 }
+assert.ok(earth.runtime.atmosphereBackgroundImage && earth.runtime.normalSurfaceBackgroundImage && earth.runtime.normalPolesBackgroundImage, "Earth material images must be observed");
 if (!earth.runtime.atmosphereBackgroundImage.includes("@2x.webp")) {
   throw new Error("Earth atmosphere did not select the canonical density.");
 }
@@ -149,6 +154,7 @@ if (earth.runtime.normalSurfaceBackgroundImage.includes("@2x.webp") ||
     earth.runtime.normalPolesBackgroundImage.includes("@2x.webp")) {
   throw new Error("Earth normal lens did not use its canonical URLs.");
 }
+assert.ok(earth.earthViews, "Earth lens observations must be captured");
 const crossSectionDefault = earth.earthViews.find(({ lens, name }) =>
   lens === "cross-section" && name === "default");
 const crossSectionMaximum = earth.earthViews.find(({ lens, name }) =>
@@ -164,6 +170,7 @@ if (earth.earthViews.length !== 12 ||
     JSON.stringify({ crossSectionDefault, crossSectionMaximum }),
   );
 }
+assert.ok(earth.runtime.cameraStats, "Earth camera must be observed");
 if (earth.runtime.cameraStats.owner !== "shared-retained-cubic-sky-orbit" ||
     earth.runtime.cameraStats.cameraModel !== "accumulated-matrix3d" ||
     earth.runtime.cameraStats.runtimeGeometryPreparation !== false) {
@@ -172,10 +179,9 @@ if (earth.runtime.cameraStats.owner !== "shared-retained-cubic-sky-orbit" ||
     JSON.stringify(earth.runtime.cameraStats),
   );
 }
+assert.ok(earth.runtime.materialCaches, "Earth material residency must be observed");
 for (const cache of Object.values(earth.runtime.materialCaches)) {
-  if (cache.model !== "row-shard-cache" ||
-      cache.retainedRowCount > cache.maximumRetainedRowCount ||
-      cache.maximumRetainedRowCount !== 3) {
+  if (!cache || cache.resident > cache.capacity || cache.nativeSlots > cache.capacity || cache.capacity !== 3) {
     throw new Error(`Earth material row cache is unbounded: ${JSON.stringify(cache)}`);
   }
 }
@@ -206,7 +212,7 @@ console.log(JSON.stringify({
   report: resolve(outputRoot, "report.json"),
 }, null, 2));
 
-async function auditPlanet(planet) {
+async function auditPlanet(planet: string) {
   const context = await browser.newContext({
     viewport,
     deviceScaleFactor,
@@ -214,9 +220,9 @@ async function auditPlanet(planet) {
   });
   const page = await context.newPage();
   const cdp = await context.newCDPSession(page);
-  const browserProblems = [];
-  const externalRequests = [];
-  let layers = [];
+  const browserProblems: string[] = [];
+  const externalRequests: string[] = [];
+  let layers: {width:number;height:number}[] = [];
   await cdp.send("LayerTree.enable");
   await cdp.send("Performance.enable");
   cdp.on("LayerTree.layerTreeDidChange", (event) => {
@@ -244,12 +250,15 @@ async function auditPlanet(planet) {
     }
     await page.waitForFunction((planetId) =>
       window.__cssEarth?.ready === true &&
-      window[`__${planetId}`]?.ready === true &&
+      window.__cssEarth?.object(planetId)?.ready === true &&
       document.documentElement.dataset.ready === "true", planet, {
       timeout: 120_000,
     });
     await page.evaluate((planetId) => {
-      (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
+      function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+      function requiredInput(value: Element | null): HTMLInputElement { if (!(value instanceof HTMLInputElement)) throw new Error("Expected required HTMLInputElement"); return value; }
+
+      (requiredInput(document.querySelector('input[name="motion"]')).checked && requiredInput(document.querySelector('input[name="motion"]')).click());
       for (const animation of document.getAnimations()) {
         animation.pause();
         animation.currentTime = 0;
@@ -257,7 +266,7 @@ async function auditPlanet(planet) {
     }, planet);
     await settle(page);
     const defaultCamera = await page.evaluate((planetId) => {
-      const { controlPitch, zoom } = window[`__${planetId}`].camera.state();
+      const { controlPitch, zoom } = (()=>{const runtime=window.__cssEarth?.object(planetId);if(!runtime)throw new Error("Mounted object diagnostics are missing");return runtime;})().camera.state();
       return { controlPitch, zoom };
     }, planet);
     const shellFile = `${planet}-shell.png`;
@@ -271,11 +280,11 @@ async function auditPlanet(planet) {
       ["default", defaultCamera.controlPitch],
       ["minimum-pitch", 0],
       ["maximum-pitch", 89],
-    ];
+    ] as const;
     const scenes = [];
     for (const [name, controlPitch] of states) {
       await page.evaluate(({ planetId, controlPitch, zoom }) => {
-        window[`__${planetId}`].camera.setState({ controlPitch, zoom });
+        (()=>{const runtime=window.__cssEarth?.object(planetId);if(!runtime)throw new Error("Mounted object diagnostics are missing");return runtime;})().camera.setState({ controlPitch, zoom });
       }, { planetId: planet, controlPitch, zoom: defaultCamera.zoom });
       await settle(page);
       const file = `${planet}-${name}.png`;
@@ -288,7 +297,7 @@ async function auditPlanet(planet) {
       });
     }
     await page.evaluate(({ planetId, camera }) => {
-      window[`__${planetId}`].camera.setState(camera);
+      (()=>{const runtime=window.__cssEarth?.object(planetId);if(!runtime)throw new Error("Mounted object diagnostics are missing");return runtime;})().camera.setState(camera);
     }, { planetId: planet, camera: defaultCamera });
     await settle(page);
     let earthViews = null;
@@ -303,11 +312,15 @@ async function auditPlanet(planet) {
         "cross-section",
       ]) {
         const selected = await page.evaluate((id) =>
-          window.__earth.lenses.select(id), lens);
+          {
+          function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+return requiredDiagnostics(window.__earth).lenses.select(id); }, lens);
         if (!selected) throw new Error(`Earth lens did not select: ${lens}.`);
         for (const [name, controlPitch] of states) {
           await page.evaluate(({ controlPitch, zoom }) => {
-            window.__earth.camera.setState({ controlPitch, zoom });
+            function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+
+            requiredDiagnostics(window.__earth).camera.setState({ controlPitch, zoom });
           }, { controlPitch, zoom: defaultCamera.zoom });
           await settleEarthMaterials(page);
           const file = `earth-${lens}-${name}.png`;
@@ -321,35 +334,41 @@ async function auditPlanet(planet) {
             interiorCoverage: lens === "cross-section"
               ? await analyzeInteriorCapture(file)
               : null,
-            state: await page.evaluate(() => ({
-              lens: document.querySelector(".planet-stage")?.dataset.lens ?? null,
-              view: document.querySelector(".planet-stage")?.dataset.view ?? null,
-              retainedSceneLeaves: document.querySelector(".planet-stage")
-                ?.querySelectorAll("b, s, u").length ?? 0,
-              cutawayLeaves: document.querySelectorAll(".earth-cutaway s").length,
-              cutawayRootCount: document.querySelectorAll(".earth-cutaway").length,
+            state: await page.evaluate(() => {
+              function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+return ({
+              lens: document.querySelector<HTMLElement>(".planet-stage")?.dataset.lens ?? null,
+              view: document.querySelector<HTMLElement>(".planet-stage")?.dataset.view ?? null,
+              retainedSceneLeaves: document.querySelector<HTMLElement>(".planet-stage")
+                ?.querySelectorAll<HTMLElement>("b, s, u").length ?? 0,
+              cutawayLeaves: document.querySelectorAll<HTMLElement>(".earth-cutaway s").length,
+              cutawayRootCount: document.querySelectorAll<HTMLElement>(".earth-cutaway").length,
               cutawayPresentationTransform: (() => {
-                const element = document.querySelector(
+                const element = requiredElement(document.querySelector(
                   ".earth-cutaway-presentation",
-                );
+                ));
                 return element ? getComputedStyle(element).transform : null;
               })(),
-            })),
+            }); }),
           });
         }
       }
       await page.evaluate(({ camera }) => {
-        window.__earth.lenses.select("normal");
-        window.__earth.camera.setState(camera);
+        function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+
+        requiredDiagnostics(window.__earth).lenses.select("normal");
+        requiredDiagnostics(window.__earth).camera.setState(camera);
       }, { camera: defaultCamera });
       await settle(page);
       const atmosphereOnFile = "earth-atmosphere-on.png";
       const atmosphereOffFile = "earth-atmosphere-off.png";
-      await page.evaluate(() => document.querySelector(".planet-stage")
+      await page.evaluate(() => document.querySelector<HTMLElement>(".planet-stage")
         ?.classList.remove("earth-hide-atmosphere"));
       await settle(page);
       const atmosphereBounds = await page.evaluate(() => {
-        const element = document.querySelector(".earth-atmosphere-material");
+        function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
+        const element = requiredElement(document.querySelector(".earth-atmosphere-material"));
         if (!(element instanceof HTMLElement)) {
           throw new Error("Earth atmosphere material is missing.");
         }
@@ -361,11 +380,11 @@ async function auditPlanet(planet) {
         };
       });
       await page.screenshot({ path: resolve(outputRoot, atmosphereOnFile) });
-      await page.evaluate(() => document.querySelector(".planet-stage")
+      await page.evaluate(() => document.querySelector<HTMLElement>(".planet-stage")
         ?.classList.add("earth-hide-atmosphere"));
       await settle(page);
       await page.screenshot({ path: resolve(outputRoot, atmosphereOffFile) });
-      await page.evaluate(() => document.querySelector(".planet-stage")
+      await page.evaluate(() => document.querySelector<HTMLElement>(".planet-stage")
         ?.classList.remove("earth-hide-atmosphere"));
       await settle(page);
       atmosphere = await compareAtmosphereCaptures({
@@ -376,16 +395,20 @@ async function auditPlanet(planet) {
     }
     if (planet === "saturn") {
       const selected = await page.evaluate(() =>
-        window.__saturn.lenses.select("cross-section"));
+        {
+        function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+return requiredDiagnostics(window.__saturn).lenses.select("cross-section"); });
       if (!selected) throw new Error("Saturn cross-section did not select.");
       referenceViews = [];
       for (const [name, controlPitch] of [
         ["minimum", 0],
         ["default", defaultCamera.controlPitch],
         ["maximum", 89],
-      ]) {
+      ] as const) {
         await page.evaluate(({ controlPitch, zoom }) => {
-          window.__saturn.camera.setState({ controlPitch, zoom });
+          function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+
+          requiredDiagnostics(window.__saturn).camera.setState({ controlPitch, zoom });
         }, { controlPitch, zoom: defaultCamera.zoom });
         await settle(page);
         const file = `saturn-cross-section-${name}.png`;
@@ -398,26 +421,32 @@ async function auditPlanet(planet) {
         });
       }
       await page.evaluate(({ camera }) => {
-        window.__saturn.camera.setState(camera);
+        function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+
+        requiredDiagnostics(window.__saturn).camera.setState(camera);
       }, { camera: defaultCamera });
       await settle(page);
     }
-    await isolation.evaluate((element) => element.remove());
+    await isolation.evaluate((element) => { if (!(element instanceof Element)) throw new Error("Isolation style must be an element"); element.remove(); });
     const runtime = await page.evaluate((planetId) => {
-      const api = window[`__${planetId}`];
+      function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+
+      function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
+      const api = (()=>{const runtime=window.__cssEarth?.object(planetId);if(!runtime)throw new Error("Mounted object diagnostics are missing");return runtime;})();
       const resources = performance.getEntriesByType("resource")
-        .filter(({ name }) => name.includes(`/scenes/${planetId}/`));
+        .filter((entry): entry is PerformanceResourceTiming => entry instanceof PerformanceResourceTiming && entry.name.includes(`/scenes/${planetId}/`));
       return {
-        activeObjectId: window.__cssEarth.activeObjectId,
-        mountedObjectCount: window.__cssEarth.mountedObjectCount,
+        activeObjectId: requiredDiagnostics(window.__cssEarth).activeObjectId,
+        mountedObjectCount: requiredDiagnostics(window.__cssEarth).mountedObjectCount,
         retainedLeafCount: api.dom.retainedLeafCount,
-        mountedLeafCount: document.querySelector(".planet-stage")
-          .querySelectorAll("b, s, u").length,
+        mountedLeafCount: requiredElement(document.querySelector(".planet-stage"))
+          .querySelectorAll<HTMLElement>("b, s, u").length,
         stableDomIdentity: api.assertStableDomIdentity(),
-        stageElementCount: document.querySelector(".planet-stage")
-          .querySelectorAll("*").length,
-        canvasCount: document.querySelectorAll(".planet-stage canvas").length,
-        sceneSvgCount: document.querySelectorAll(".planet-stage svg").length,
+        stageElementCount: requiredElement(document.querySelector(".planet-stage"))
+          .querySelectorAll<HTMLElement>("*").length,
+        canvasCount: document.querySelectorAll<HTMLElement>(".planet-stage canvas").length,
+        sceneSvgCount: document.querySelectorAll<HTMLElement>(".planet-stage svg").length,
         selectedPreparedDensity:
           api.renderStats.textureStats.selectedPreparedDensity,
         retainedInteractiveImageCount:
@@ -431,29 +460,29 @@ async function auditPlanet(planet) {
           0,
         ),
         embeddedMoonElementCount: planetId === "earth"
-          ? document.querySelectorAll('[class*="earth-moon"]').length
+          ? document.querySelectorAll<HTMLElement>('[class*="earth-moon"]').length
           : null,
         atmosphereBackgroundImage: planetId === "earth"
-          ? getComputedStyle(document.querySelector(
+          ? getComputedStyle(requiredElement(document.querySelector(
             ".earth-atmosphere-material",
-          )).backgroundImage
+          ))).backgroundImage
           : null,
         normalSurfaceBackgroundImage: planetId === "earth"
-          ? getComputedStyle(document.querySelector(
+          ? getComputedStyle(requiredElement(document.querySelector(
             ".earth-body:not(.earth-body-polar) > s",
-          ), "::before").backgroundImage
+          )), "::before").backgroundImage
           : null,
         normalPolesBackgroundImage: planetId === "earth"
-          ? getComputedStyle(document.querySelector(
+          ? getComputedStyle(requiredElement(document.querySelector(
             ".earth-body-polar > s",
-          )).backgroundImage
+          ))).backgroundImage
           : null,
         cameraStats: planetId === "earth" ? api.camera.stats() : null,
         materialCaches: planetId === "earth" ? {
-          lighting: api.renderStats.textureStats.materialCaches.lighting(),
-          atmosphere: api.renderStats.textureStats.materialCaches.atmosphere(),
+          lighting: api.runtime.resources().pools.find(pool=>pool.id==='lighting'),
+          atmosphere: api.runtime.resources().pools.find(pool=>pool.id==='atmosphere'),
         } : null,
-        renderRootCount: document.querySelectorAll(
+        renderRootCount: document.querySelectorAll<HTMLElement>(
           ".planet-stage > .planet-render-root",
         ).length,
       };
@@ -463,7 +492,7 @@ async function auditPlanet(planet) {
         ({ name, value }) => [name, value],
       ),
     );
-    const maximumCompositorLayer = layers.reduce((maximum, layer) => {
+    const maximumCompositorLayer = layers.reduce<{area:number;width:number;height:number}>((maximum, layer) => {
       const area = (layer.width ?? 0) * (layer.height ?? 0);
       return area > maximum.area
         ? { area, width: layer.width ?? 0, height: layer.height ?? 0 }
@@ -499,7 +528,7 @@ async function compareAtmosphereCaptures({
   onFile,
   offFile,
   atmosphereBounds,
-}) {
+}: {onFile:string;offFile:string;atmosphereBounds:{width:number;height:number;devicePixelRatio:number}}) {
   const on = await sharp(resolve(outputRoot, onFile))
     .removeAlpha().raw().toBuffer({ resolveWithObject: true });
   const off = await sharp(resolve(outputRoot, offFile))
@@ -556,7 +585,7 @@ async function compareAtmosphereCaptures({
   };
 }
 
-async function analyzeInteriorCapture(file) {
+async function analyzeInteriorCapture(file: string) {
   const image = await sharp(resolve(outputRoot, file))
     .removeAlpha().raw().toBuffer({ resolveWithObject: true });
   let warmPixelCount = 0;
@@ -581,8 +610,8 @@ function earthPreparedAtmosphereRatio() {
   return atmosphere.physicalRadius / atmosphere.planetRadius;
 }
 
-async function compareSaturnBaseline(current, reportPath) {
-  const baseline = JSON.parse(await readFile(reportPath, "utf8"));
+async function compareSaturnBaseline(current: Capture, reportPath: string) {
+  const baseline = parseSaturnBaseline(JSON.parse(await readFile(reportPath, "utf8")));
   if (baseline.viewport?.width !== viewport.width ||
       baseline.viewport?.height !== viewport.height ||
       baseline.deviceScaleFactor !== deviceScaleFactor) {
@@ -591,10 +620,8 @@ async function compareSaturnBaseline(current, reportPath) {
   const reference = (baseline.captures ?? baseline.reports)
     ?.find(({ planet }) => planet === "saturn");
   if (!reference) throw new Error("Saturn baseline capture is missing.");
-  const baselineScenes = reference.scenes ?? reference.states;
-  const currentScenes = reference.scenes
-    ? current.scenes
-    : current.referenceViews;
+  const baselineScenes = required(reference.scenes ?? reference.states, "Baseline scene evidence is required");
+  const currentScenes = required(reference.scenes ? current.scenes : current.referenceViews, "Current scene evidence is required");
   const comparisons = [
     ...(reference.shell ? [{
       name: "shell",
@@ -620,15 +647,15 @@ async function compareSaturnBaseline(current, reportPath) {
       name === comparison.name);
     comparison.baseline = await sha256(resolve(
       dirname(reportPath),
-      baselineState.file,
+      required(baselineState).file,
     ));
   }
   const baselineDefault = baselineScenes.find(({ name }) => name === "default");
   const currentDefault = currentScenes.find(({ name }) => name === "default");
   const diffFile = "saturn-default-absolute-diff.png";
-  await sharp(resolve(dirname(reportPath), baselineDefault.file))
+  await sharp(resolve(dirname(reportPath), required(baselineDefault).file))
     .composite([{
-      input: resolve(outputRoot, currentDefault.file),
+      input: resolve(outputRoot, required(currentDefault).file),
       blend: "difference",
     }])
     .png()
@@ -650,7 +677,7 @@ async function compareSaturnBaseline(current, reportPath) {
   };
 }
 
-async function prepareContactSheet(captures) {
+async function prepareContactSheet(captures: readonly Capture[]) {
   const cellWidth = 720;
   const cellHeight = 450;
   const labelHeight = 34;
@@ -660,8 +687,8 @@ async function prepareContactSheet(captures) {
   for (let row = 0; row < rows.length; row += 1) {
     for (let column = 0; column < columns.length; column += 1) {
       const capture = captures.find(({ planet }) => planet === columns[column]);
-      const scene = capture.scenes.find(({ name }) => name === rows[row]);
-      const image = await sharp(resolve(outputRoot, scene.file))
+      const scene = required(capture).scenes.find(({ name }) => name === rows[row]);
+      const image = await sharp(resolve(outputRoot, required(scene).file))
         .resize(cellWidth, cellHeight, { fit: "fill" })
         .toBuffer();
       composites.push({
@@ -698,7 +725,7 @@ async function prepareContactSheet(captures) {
   };
 }
 
-async function prepareEarthViewContactSheet(earthCapture) {
+async function prepareEarthViewContactSheet(earthCapture: Capture) {
   const cellWidth = 360;
   const cellHeight = 225;
   const labelHeight = 24;
@@ -707,7 +734,7 @@ async function prepareEarthViewContactSheet(earthCapture) {
   const composites = [];
   for (let row = 0; row < rows.length; row += 1) {
     for (let column = 0; column < columns.length; column += 1) {
-      const view = earthCapture.earthViews.find(({ lens, name }) =>
+      const view = required(earthCapture.earthViews).find(({ lens, name }) =>
         lens === columns[column] && name === rows[row]);
       if (!view) {
         throw new Error(
@@ -750,7 +777,7 @@ async function prepareEarthViewContactSheet(earthCapture) {
   };
 }
 
-async function fingerprints(files) {
+async function fingerprints(files: Record<string,string>) {
   return Object.fromEntries(await Promise.all(
     Object.entries(files).map(async ([name, path]) => [name, {
       path,
@@ -759,22 +786,27 @@ async function fingerprints(files) {
   ));
 }
 
-async function sha256(path) {
+async function sha256(path: string) {
   return createHash("sha256").update(await readFile(path)).digest("hex");
 }
 
-async function settle(page) {
+async function settle(page: Page) {
   await page.evaluate(() => new Promise((resolveFrame) =>
     requestAnimationFrame(() => requestAnimationFrame(resolveFrame))));
 }
 
-async function settleEarthMaterials(page) {
+async function settleEarthMaterials(page: Page) {
   await settle(page);
   await page.waitForFunction(() => {
-    const caches = window.__earth?.renderStats?.textureStats?.materialCaches;
-    if (!caches) return false;
-    return [caches.lighting(), caches.atmosphere()].every((cache) =>
-      cache.pendingRowCount === 0 && cache.appliedRow === cache.desiredRow);
+    function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+
+    const runtime=window.__earth;
+    if (!runtime) return false;
+    const pools=runtime.runtime.resources().pools, materials=runtime.material.state();
+    return ['lighting','atmosphere'].every(id=>{
+      const pool=pools.find(pool=>pool.id===id), material=materials[id];
+      return pool && material && pool.pending===0 && material.appliedRow===material.row;
+    });
   }, null, { timeout: 10_000 });
   await settle(page);
 }

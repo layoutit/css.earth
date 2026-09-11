@@ -2,7 +2,8 @@ import type { resolvePolyTextureLeafGeometry } from '@layoutit/polycss';
 import type {Vector3} from './ellipsoid.mts';
 type TextureGeometry = NonNullable<ReturnType<typeof resolvePolyTextureLeafGeometry>>;
 /** Rescale a projective texture leaf without changing its source coordinates. */
-export function fitTextureGeometry(geometry: TextureGeometry, leafWidth: number, leafHeight: number): TextureGeometry {
+type TextureCoordinates = Pick<TextureGeometry,'matrix'|'leafWidth'|'leafHeight'|'backgroundPosition'|'backgroundSize'>;
+export function fitTextureGeometry<T extends TextureCoordinates>(geometry: T, leafWidth: number, leafHeight: number): Omit<T,keyof TextureCoordinates> & TextureCoordinates {
   const matrix = String(geometry.matrix).split(',').map(Number);
   if (matrix.length !== 16 || matrix.some((value) => !Number.isFinite(value))) {
     throw new Error('Prepared texture matrix is invalid.');

@@ -3,11 +3,11 @@ import { test } from 'node:test';
 import { readFitsPrimary } from '../static-surface/fits-map.mts';
 import { mapFitsObservation } from './observed-fits.mts';
 
-function fitsBytes(bitpix, values, extra = []) {
+function fitsBytes(bitpix: number, values: readonly number[], extra: readonly string[] = []) {
   const bytes = Buffer.alloc(5760, 32), cards = ['SIMPLE  = T', `BITPIX  = ${bitpix}`, 'NAXIS   = 2',
     'NAXIS1  = 4', 'NAXIS2  = 2', ...extra, 'END'];
   cards.forEach((card, i) => bytes.write(card.padEnd(80), i * 80, 'ascii'));
-  values.forEach((v, i) => bitpix === 8 ? bytes.writeUInt8(v, 2880 + i) : bytes.writeFloatBE(v, 2880 + i * 4));
+  values.forEach((v: number, i: number) => bitpix === 8 ? bytes.writeUInt8(v, 2880 + i) : bytes.writeFloatBE(v, 2880 + i * 4));
   return bytes;
 }
 const entry = { width: 4, height: 2 };
@@ -23,7 +23,7 @@ test('FITS preserves unsigned byte samples and existing big endian float values'
 
 test('source FITS rows and east/west longitudes map to the same north-up eastern grid', () => {
   const fits = readFitsPrimary(fitsBytes(8, [1,2,3,4,10,20,30,40]));
-  const gray = p => [...mapFitsObservation(fits, entry, p, 4, 2).rgb].filter((_, i) => i % 3 === 0);
+  const gray = (p: unknown) => [...mapFitsObservation(fits, entry, p, 4, 2).rgb].filter((_, i) => i % 3 === 0);
   assert.deepEqual(gray(policy), [30,40,10,20,3,4,1,2]);
   assert.deepEqual(gray({ ...policy, longitudeDirection: 'west' }), [20,10,40,30,2,1,4,3]);
   assert.deepEqual(gray({ ...policy, rowOrder: 'north-to-south' }), [3,4,1,2,30,40,10,20]);

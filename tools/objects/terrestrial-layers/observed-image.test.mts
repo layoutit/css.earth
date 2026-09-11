@@ -41,16 +41,16 @@ test('byte-map coverage preserves dark observations and rolls longitude without 
     const shifted = await prepareByteObservation(path, entry, { noData: 0, centerLongitude: 0 }, 4, 2);
     assert.deepEqual([...shifted.missing], [0, 0, 1, 0, 0, 0, 0, 0]);
     assert.deepEqual([...shifted.rgb].filter((_, i) => i % 3 === 0), [90, 180, 0, 1, 40, 50, 20, 30]);
-    assert.equal(normal.sourceMissingPixels, 1);
+    assert.ok('sourceMissingPixels' in normal); assert.equal(normal.sourceMissingPixels, 1);
     const unmasked = await prepareByteObservation(path, entry, { noData: null, centerLongitude: 180 }, 4, 2);
-    assert.equal(unmasked.sourceMissingPixels, 0);
+    assert.ok('sourceMissingPixels' in unmasked); assert.equal(unmasked.sourceMissingPixels, 0);
     assert.equal(unmasked.rgb[0], 0, 'Unmasked photographic black is a valid observation');
     const colorPath = join(directory, 'color.png');
     const colors = Buffer.from([0,0,0, 1,20,30, 90,180,20, 30,40,50, 10,11,12, 13,14,15, 16,17,18, 19,20,21]);
     await sharp(colors, {raw:{width:4,height:2,channels:3}}).png().toFile(colorPath);
     const color = await prepareByteObservation(colorPath, entry, {kind:'image-rgb-no-data',noData:null,centerLongitude:180},4,2);
     assert.deepEqual(color.rgb, colors, 'RGB ratios and black pixels survive source preparation');
-    assert.equal(color.sourceMissingPixels,0);
+    assert.ok('sourceMissingPixels' in color); assert.equal(color.sourceMissingPixels,0);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 
@@ -85,7 +85,7 @@ test('a declared compressed gray exterior uses connected coverage without erasin
     const result = await prepareByteObservation(path,entry,policy,4,4);
     assert.deepEqual([...result.missing], [1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0]);
     assert.equal(result.rgb[13*3],78);
-    assert.equal(result.sourceMissingPixels,4);
+    assert.ok('sourceMissingPixels' in result); assert.equal(result.sourceMissingPixels,4);
     await assert.rejects(prepareByteObservation(path,entry,{...policy,connectedEdge:undefined},4,4),/range/);
     await assert.rejects(prepareByteObservation(path,entry,{...policy,connectedFillRange:[81,75]},4,4),/range/);
   } finally { await rm(directory,{recursive:true,force:true}); }
