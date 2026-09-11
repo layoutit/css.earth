@@ -3,7 +3,7 @@ import { pageKey } from "../page-geometry.mts";
 
 import type { PageAddress, CityCoverageJob } from '../contracts.mts';
 import { assertGlobalFaceReceipt, parseCitySource } from '../source-records.mts';
-export function expectedGlobalCityFace(face: PageAddress, jobs: readonly CityCoverageJob[]) {
+export function expectedGlobalCityFace(face: PageAddress, jobs: readonly (Pick<CityCoverageJob, "root" | "lastLevel"> & {window: Pick<CityCoverageJob["window"], "pixels">; sources: readonly Pick<CityCoverageJob["sources"][number], "tile">[]})[]) {
   const ancestors = new Set();
   let finePages = 0;
   for (const job of jobs) {

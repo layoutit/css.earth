@@ -3,7 +3,7 @@ import { pageKey } from "../../../../tools/objects/geographic-pages/page-geometr
 import { prepareCityIndex } from "../../../../tools/objects/geographic-pages/operations/prepare-index.mts";
 import { PREPARED_EARTH_SCENE } from "./prepared-fixture.mts";
 import { parseCitySource } from "../../../../tools/objects/geographic-pages/source-records.mts";
-import { parsePreparedPagePlan } from "../../../../src/renderers/css/paging/capabilities.js";
+import { parsePreparedPagePlan } from "../../../../src/renderers/css/dist/testing.js";
 import { parseCityFixtureManifest, parseCityFixtureDirectory, parseCityFixtureReference, parseCityRaster } from "./city-fixture-schema.mts";
 
 // Test-only filesystem walk. Production must discover directories on demand;
@@ -19,7 +19,8 @@ export async function readCityFixture(overrides: Record<string, unknown> = {}) {
   // This legacy raster fixture carries its own preparation-time configuration.
   // The application's newer WMTS hierarchy has a different topology and density.
   const { pages: preparedPages, proofRoots, ...preparedPlan } = prepared;
-  const plan = parsePreparedPagePlan({ ...preparedPlan, schema: "cssearth-prepared-map-pages@1", assetPath: "/scenes/earth/", ...overrides, roots: index.heads });
+  const checkedPlan = parsePreparedPagePlan({ ...preparedPlan, schema: "cssearth-prepared-map-pages@1", assetPath: "/scenes/earth/", ...overrides, roots: index.heads });
+  const plan = {...checkedPlan, roots: index.heads};
   type Reference = ReturnType<typeof parseCityFixtureReference>;
   type Directory = ReturnType<typeof parseCityFixtureDirectory>;
   const nodes = new Map<string, Directory['nodes'][number] & {directory: Reference}>();

@@ -1,3 +1,7 @@
+import {shape,array,text,number,optional} from '../../../../tools/objects/geographic-pages/source-records.mts';
+import {parseMurReceipt} from '../../../../tools/objects/paged-ellipsoid/source-contract.mts';
+import {earthPreparationConfig as config} from './prepared-fixture.mts';
+import {required} from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import sharp from 'sharp';
@@ -8,19 +12,20 @@ import { readCoraltempAnomaly, anomalyColor } from '../../../../tools/objects/pa
 import { newestCoraltemp, parseEnsoAdvisory } from '../../../../tools/objects/paged-ellipsoid/refresh-earth-enso.mts';
 
 const source = resolve('src/planets/earth/source');
-const config = JSON.parse(await readFile(resolve(source, 'preparation/paged-ellipsoid.json')));
-const map = config.surface.maps.find(map => map.name === 'earth-enso');
+const map=required(config.surface.maps.find(map=>map.name==='earth-enso'));
+const scientific=map.scientific;
+assert.ok(scientific?.kind==='gibs-mur-imagery');
 const coraltempRecipe = {"kind": "coraltemp-anomaly", "filename": "ct5km_ssta_v3.1-clim19912020-v1_20260907.nc", "date": "2026-09-07", "baseline": "1991–2020", "checked": "2026-09-09T03:15:04.081Z", "minimum": -5, "maximum": 5, "palette": [[5, 48, 97], [33, 102, 172], [67, 147, 195], [146, 197, 222], [247, 247, 247], [244, 165, 130], [214, 96, 77], [178, 24, 43], [103, 0, 31]], "missingColor": [62, 68, 73], "advisory": {"date": "13 August 2026", "status": "El Niño Advisory", "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"}};
 
 
 test('latest acquisition crosses years and excludes checksum-only placeholders and future data', () => {
-  const file = day => `ct5km_ssta_v3.1-clim19912020-v1_${day}.nc`;
-  const link = day => `<a href="${file(day)}">${file(day)}</a>`;
+  const file = (day: string) => `ct5km_ssta_v3.1-clim19912020-v1_${day}.nc`;
+  const link = (day: string) => `<a href="${file(day)}">${file(day)}</a>`;
   const listings = [link('20251231'), link('20260101'), link('20260103'),
     `<a href="${file('20260102')}.md5">${file('20260102')}.md5</a>`];
   assert.equal(newestCoraltemp(listings, '2026-01-02').filename, file('20260101'));
   assert.equal(newestCoraltemp(listings, '2025-12-31').filename, file('20251231'));
-  assert.throws(() => newestCoraltemp([listings.at(-1)], '2026-01-02'), /No published NOAA/);
+  assert.throws(() => newestCoraltemp([required(listings.at(-1))], '2026-01-02'), /No published NOAA/);
 });
 
 test('extracts the NOAA issue date and status and preserves their separate source record', async () => {
@@ -30,16 +35,16 @@ test('extracts the NOAA issue date and status and preserves their separate sourc
   const expected = { date: '13 August 2026', status: 'El Niño Advisory',
     url: 'https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml' };
   assert.deepEqual(parseEnsoAdvisory(headline), expected);
-  assert.deepEqual(map.scientific.advisory, expected);
+  assert.deepEqual(scientific.advisory, expected);
   assert.throws(() => parseEnsoAdvisory('new format'), /format changed/);
-  const content = JSON.parse(await readFile(resolve(source, 'content/object.json')));
-  assert.deepEqual(content.lenses.controls.find(lens => lens.id === 'enso'), murEnsoContent(map.scientific));
+  const content = shape({lenses:shape({controls:array(shape({id:text}))})})(JSON.parse((await readFile(resolve(source, 'content/object.json'))).toString('utf8')));
+  assert.deepEqual(content.lenses.controls.find((lens: { id: string; }) => lens.id === 'enso'), murEnsoContent(scientific));
 });
 
 test('NOAA signed anomalies retain orientation, physical units, and the fill mask', async () => {
   const decoded = await readCoraltempAnomaly(resolve(source, 'science/coraltemp-latest.nc'), coraltempRecipe);
   assert.equal(decoded.receipt.valid + decoded.receipt.missing, 7200 * 3600);
-  const pixel = (longitude, latitude) => {
+  const pixel = (longitude: number, latitude: number) => {
     const x = Math.floor((longitude + 180) * 20), y = Math.floor((90 - latitude) * 20);
     return [...decoded.data.subarray((y * 7200 + x) * 3, (y * 7200 + x) * 3 + 3)];
   };
@@ -79,8 +84,8 @@ test('NASA imagery rejects date substitution, future dates, and changed grids', 
 });
 
 test('NASA full coverage, published bins, and independently decoded pixels survive preparation', async () => {
-  const receipt = JSON.parse(await readFile(resolve(source, 'science/mur-gibs-receipt.json')));
-  assert.equal(receipt.date, map.scientific.date); assert.equal(receipt.complete, true);
+  const receipt = parseMurReceipt(JSON.parse((await readFile(resolve(source, 'science/mur-gibs-receipt.json'))).toString('utf8')));
+  assert.equal(receipt.date, scientific.date); assert.equal(receipt.complete, true);
   assert.equal(receipt.tiles.length, 3200);
   assert.equal(new Set(receipt.tiles.map(t => `${t.row}/${t.col}`)).size, 3200);
   for (const tile of receipt.tiles) verifyMurTile(tile.actualTime, tile.actualLayer, receipt.date, tile.empty);
@@ -91,9 +96,9 @@ test('NASA full coverage, published bins, and independently decoded pixels survi
   assert.equal(sha256(bytes), receipt.mosaic.sha256);
   const { data, info } = await sharp(bytes).removeAlpha().raw().toBuffer({ resolveWithObject: true });
   assert.equal(info.width, 16384); assert.equal(info.height, 8192);
-  const witnesses = JSON.parse(await readFile('tests/objects/fixtures/earth-enso/mur-native-witnesses.json'));
+  const witnesses = shape({records:array(shape({outputPixel:array(number),expectedMosaicRgb:array(number),name:text,intervalCelsius:optional(text)}))})(JSON.parse((await readFile('tests/objects/fixtures/earth-enso/mur-native-witnesses.json')).toString('utf8')));
   for (const witness of witnesses.records) {
-    const [x, y] = witness.outputPixel, offset = (y * info.width + x) * 3;
+    const [x, y] = witness.outputPixel, offset: number = (y * info.width + x) * 3;
     assert.deepEqual([...data.subarray(offset, offset + 3)], witness.expectedMosaicRgb, witness.name);
     if (witness.intervalCelsius) assert.ok(colors.entries.some(e => e.range === witness.intervalCelsius && JSON.stringify(e.rgb) === JSON.stringify(witness.expectedMosaicRgb)));
   }
