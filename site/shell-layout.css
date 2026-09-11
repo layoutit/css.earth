@@ -638,9 +638,12 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 
   .planet-search-toolbar { grid-row: 1; grid-column: 1 / -1; }
   .explorer-shell-header .planet-sidebar-search-card {
-    padding-inline-end: var(--explorer-search-height);
+    /* Room for the Settings avatar and the clear button beside it. */
+    padding-inline-end: calc(var(--explorer-search-height) + 32px);
     box-shadow: var(--explorer-float-shadow);
   }
+  /* Clear stays left of the avatar instead of under it. */
+  .explorer-shell-header .planet-sidebar-search-clear { right: 52px; }
 
   /* Settings takes the avatar slot at the end of the search pill; the version
      link below already leads to GitHub. */
