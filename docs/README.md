@@ -11,6 +11,7 @@ For a body's sources, processing, evidence and known problems, read its
 | --- | --- |
 | Galaxies, LMC image lenses and extragalactic datasets | [Galaxies and the nearby universe](galaxies/README.md) |
 | Recording sources and evidence | [Provenance contract](provenance/CONTRACT.md) |
+| Catalog-wide image-to-shape faithfulness review | [Surface-registration review](provenance/surface-registration-review.md) |
 | Decoding images, reducing meshes, mapping UVs and baking atlases | [Image and surface preparation](surface-preparation.md) |
 | Importing Celestia's native illustrative meshes | [Celestia mesh imports](celestia-meshes.md) |
 | Connecting prepared outputs to their inputs | [Prepared object provenance](object-provenance.md) |
