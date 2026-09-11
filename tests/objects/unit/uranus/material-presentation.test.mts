@@ -4,7 +4,7 @@ import sharp from 'sharp';
 import {fileURLToPath} from 'node:url';
 
 test('the retained material resolves the observed oblate limb without expanding its top',async()=>{
- for(const[density,boundaryX]of[[1,28],[2,56]]){
+ for(const[density,boundaryX]of[[1,28],[2,56]] as const){
   const filename=`uranus-fixed-material-normal${density===2?'@2x':''}.webp`;
   const{data,info}=await sharp(fileURLToPath(new URL(`../../../../public/scenes/uranus/${filename}`,import.meta.url))).ensureAlpha().raw().toBuffer({resolveWithObject:true});
   const centerX=256*density,centerY=256*density,boundaryY=29*density;

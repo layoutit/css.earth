@@ -1,3 +1,4 @@
+import {requireRecord} from '../../../../tools/source-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 
@@ -21,7 +22,7 @@ import PREPARED_MERCURY_STARFIELD from "../../../../src/planets/mercury/prepared
 
 // The published registration, parsed the way the runtime parses it
 // (DOMMatrix column order), as a row-major 3x3.
-function parseRegistration(cssTransform) {
+function parseRegistration(cssTransform: string) {
   const values = cssTransform.slice("matrix3d(".length, -1).split(",")
     .map(Number);
   assert.equal(values.length, 16);
@@ -48,8 +49,8 @@ test("the Mercury cube was sampled in the astrometric ICRF frame, not by Euler a
     );
   }
   assert.equal(registration.panorama.anchors.length, 5);
-  assert.ok(registration.panorama.frameCorrection.maximumResidualDegrees === undefined ||
-    registration.panorama.frameCorrection.maximumResidualDegrees < 0.3);
+  const declaredMaximum=requireRecord(registration.panorama.frameCorrection).maximumResidualDegrees;
+  assert.ok(declaredMaximum === undefined || (typeof declaredMaximum === "number" && declaredMaximum < 0.3));
   assert.ok(Object.values(registration.panorama.frameCorrection.residualsDegrees)
     .every((residual) => residual < 0.3));
   assert.match(PREPARED_MERCURY_STARFIELD.qualification, /sampled in ICRF/u);
@@ -113,7 +114,7 @@ test("through the published registration the Milky Way is inclined 60.2 degrees 
   // Longitude about ecliptic north (-y) in the presentation frame, counted
   // the same way as ecliptic longitude (right-handed about the pole: with
   // +x as the first axis the second is (-y) x (+x) = +z).
-  const presentationLongitude = ([x, , z]) =>
+  const presentationLongitude = ([x, , z]:readonly number[]) =>
     Math.atan2(z, x) * 180 / Math.PI;
   const sun = PREPARED_MERCURY_SKY_SUN.localDirection;
   const separation = presentationLongitude(centreScene) -

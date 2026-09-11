@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
@@ -7,11 +8,11 @@ import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/s
 import {readObservation} from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';
 
 const root = new URL('../../../../src/planets/umbriel/source/', import.meta.url).pathname;
-const read = async path => JSON.parse(await readFile(root + path));
+const read = async (path: string) => JSON.parse((await readFile(root + path)).toString('utf8'));
 
 test('Umbriel preserves its original cube inside the pinned source gzip', async () => {
   const {inputs} = await read('manifest.json');
-  const entry = inputs.find(input => input.lensId === 'normal');
+  const entry = inputs.find((input: { lensId: string; }) => input.lensId === 'normal');
   const original = gunzipSync(await readFile(root + entry.path));
   assert.equal(original.length, 1976871);
   assert.equal(createHash('sha256').update(original).digest('hex'),
@@ -21,7 +22,7 @@ test('Umbriel preserves its original cube inside the pinned source gzip', async 
 test('Umbriel registers the original 128-column tiles across the longitude seam', async () => {
   const config = await read('preparation/terrestrial.json');
   const {inputs} = await read('manifest.json');
-  const entry = inputs.find(input => input.lensId === 'normal');
+  const entry = inputs.find((input: { lensId: string; }) => input.lensId === 'normal');
   const policy = config.raster.observations[0].validity;
   const mosaic = await loadScienceSurface(root, {path: entry.path, format: 'isis3', grid: policy.grid, sampling: 'bilinear'});
   // Python struct independently read eight 128x460 tiles (including the final
@@ -33,10 +34,10 @@ test('Umbriel registers the original 128-column tiles across the longitude seam'
     [345.7, -10.8, 649.770441866034], // Kanaloa
     [331.7, -1.8, 326.5726089601968], // Skynd
     [1.8, -30, 548.1517898758885], // Wokolo
-  ]) assert.ok(Math.abs(mosaic.sample(longitude, latitude) - expected) < .000001);
+  ] as const) assert.ok(Math.abs(required(mosaic.sample(longitude, latitude)) - expected) < .000001);
   assert.equal(mosaic.sample(180, 60), null, 'Unobserved north remains missing');
   assert.equal(mosaic.sample(90, 0), null, 'Unobserved equatorial sector remains missing');
-  assert.ok(Math.abs(mosaic.sample(180, -85) - 500.18638675202806) < .000001);
+  assert.ok(Math.abs(required(mosaic.sample(180, -85)) - 500.18638675202806) < .000001);
   assert.equal(mosaic.sample(0, -60), mosaic.sample(360, -60));
 
   const {rgb, missing} = await readObservation(root, entry, policy, 360, 180);
@@ -57,7 +58,7 @@ test('Umbriel context crop preserves observed terrain over its complete footprin
   const descriptor = await read('preparation/navigation.json');
   const {source} = descriptor;
   const {missing} = await readObservation(root, source, source.raster, source.width, source.height);
-  const crop = descriptor.operations.find(operation => operation.type === 'extract');
+  const crop = descriptor.operations.find((operation: { type: string; }) => operation.type === 'extract');
   for (let y = crop.top; y < crop.top + crop.height; y++) {
     for (let x = crop.left; x < crop.left + crop.width; x++) {
       assert.equal(missing[y * source.width + x], 0);

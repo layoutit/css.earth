@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {decodeOsirisReflectance} from '../../../../tools/objects/terrestrial-layers/archived-camera.mts';
 const root='src/planets/steins/source/';
-const camera=JSON.parse(await readFile(root+'observations/osiris-camera.json'));
+const camera=JSON.parse((await readFile(root+'observations/osiris-camera.json')).toString('utf8'));
 const bytes=await readFile(root+'observations/w20080905t183606461id4df17.img');
 test('Steins binds the near-opposition WAC subframe, not NAC pixel conventions',()=>{
   const f=decodeOsirisReflectance(bytes,camera,true);

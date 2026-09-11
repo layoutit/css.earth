@@ -1,9 +1,10 @@
+import {requireRecord} from '../../../../tools/source-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
 const root = new URL('../../../../src/planets/haumea/', import.meta.url);
-const json = async path => JSON.parse(await readFile(new URL(path, root), 'utf8'));
+const json = async (path: string|URL) => JSON.parse(await readFile(new URL(path, root), 'utf8'));
 
 test('Haumea retains its measured triaxial shape and ring within the actual leaf budget', async () => {
   const descriptor = parseAuthoredObjectDescriptor(await json('object.json'));
@@ -15,14 +16,14 @@ test('Haumea retains its measured triaxial shape and ring within the actual leaf
   assert.equal(scene.ringCoverage.preparedTileCount, scene.ringLeaves.length);
   assert.equal(scene.ringLeaves.length, 16);
   const runtime = await json('prepared/runtime.json');
-  assert.equal(runtime.tree.nodes.filter(node => node.tag === 's').length, 1461);
-  assert.ok(runtime.tree.nodes.filter(node => node.tag === 's').length <= 2000);
+  assert.equal(runtime.tree.nodes.filter((node: { tag: string; }) => node.tag === 's').length, 1461);
+  assert.ok(runtime.tree.nodes.filter((node: { tag: string; }) => node.tag === 's').length <= 2000);
   assert.deepEqual([scene.model.ring.innerRadiusKm, scene.model.ring.outerRadiusKm], [2252, 2322]);
 });
 test('the NASA illustration stays evenly lit with an identified model dataset and no shadow control', async () => {
   const runtime = await json('prepared/runtime.json');
   assert.equal(runtime.controls.lenses.defaultLens, 'illustration');
-  assert.deepEqual(runtime.controls.lenses.controls.map(lens => lens.label), ['Illustrative model']);
+  assert.deepEqual(runtime.controls.lenses.controls.map((lens:unknown) => requireRecord(lens).label), ['Illustrative model']);
   const lens = (await json('prepared/lenses.json')).controls[0];
   assert.ok(lens.surfaceUrl && lens.polesUrl);
   assert.equal(lens.surfaceUrl, lens.surface2xUrl);
@@ -34,9 +35,9 @@ test('the NASA illustration stays evenly lit with an identified model dataset an
   assert.equal(images[0].attribution.url, lens.source.url);
   assert.ok((await readFile(new URL('prepared/' + images[0].path, root))).length < 100_000);
   assert.deepEqual(runtime.controls.settings.controls, []);
-  assert.deepEqual(runtime.variants.map(v => v.when), [{ lensId: 'illustration' }]);
-  assert.ok(runtime.assets.entries.some(a => a.key === 'surface'));
-  assert.ok(runtime.assets.entries.every(a => !a.key.includes('lit-')));
+  assert.deepEqual(runtime.variants.map((v:unknown) => requireRecord(v).when), [{ lensId: 'illustration' }]);
+  assert.ok(runtime.assets.entries.some((a: { key: string; }) => a.key === 'surface'));
+  assert.ok(runtime.assets.entries.every((a: { key: string|string[]; }) => !a.key.includes('lit-')));
   const material = runtime.materials[0];
   assert.equal(material.rotation.kind, 'ellipsoid');
   assert.equal(material.rotation.projection.bodyMeshMatrix[0], 852 / 1161);

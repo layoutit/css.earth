@@ -1,17 +1,22 @@
+import {parsePreparedObjectRuntime} from '../../../../src/renderers/css/dist/index.js';
+const runtimeDefinition=parsePreparedObjectRuntime(runtimeSource);
+import {required} from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import runtimeDefinition from "../../../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
-import { resolvePreparedPresentation } from "../../../../src/platform/prepared-presentation.mts";
+import runtimeSource from "../../../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
+import { resolvePreparedPresentation } from "../../../../src/renderers/css/dist/testing.js";
 import { preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
+import type { PreparedMaterialView } from "../../../../src/renderers/css/rendering/prepared-material";
 
 const BILLBOARD_LIGHTING_KEY = "lighting-billboard";
-const rows = (f) => f.residency.stats().pools.find((pool) => pool.id === "lighting");
+const rows = (f: Awaited<ReturnType<typeof preparedSelectionFixture>>) => f.residency.stats().pools.find((pool: { id: string; }) => pool.id === "lighting");
 const lit = { lensId: "normal", speed: 1, shadows: true, orbit: true };
 const geometryView = { sunViewDirection: [1, 0, -1], levelOfDetail: { stage: "geometry", billboardOpacity: 0, markerOpacity: 0, silhouetteDiameter: 400 } };
-const farView = (stage) => ({ ...geometryView, levelOfDetail: { stage, billboardOpacity: 1, markerOpacity: stage === "marker" ? 1 : 0, silhouetteDiameter: 6 } });
-const lightingDemand = (selection, view) => {
-  const plan = resolvePreparedPresentation(runtimeDefinition, { selection, view: { ...view, controlPitch: 0, controlYaw: 0 } });
-  const lighting = (key) => key.startsWith("lighting") || key === "shadowless";
+const farView = (stage: string) => ({ ...geometryView, levelOfDetail: { stage, billboardOpacity: 1, markerOpacity: stage === "marker" ? 1 : 0, silhouetteDiameter: 6 } });
+const lightingDemand = (selection: { lensId: string; speed: number; shadows: boolean; orbit: boolean; }, view: Partial<PreparedMaterialView>) => {
+  const preparedView={ sceneMatrix:"matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)", ...view, sunViewDirection:view.sunViewDirection??null, controlPitch: 0, controlYaw: 0 };
+  const plan = resolvePreparedPresentation(runtimeDefinition, { selection, view:preparedView });
+  const lighting = (key: string) => key.startsWith("lighting") || key === "shadowless";
   return { required: plan.required.filter(lighting), prewarm: plan.prewarm.filter(lighting) };
 };
 
@@ -35,10 +40,10 @@ test("Mercury stops streaming rows from the crossfade on and keeps the phase, th
     f.selection.setView({ ...f.view, ...geometryView, revision: 2 }); await f.settle();
     const near = f.presentation.observe().materials.lighting;
     assert.equal(near.bank, "rows");
-    assert.match(f.selection.state().plan.required.join(" "), /lighting:\d+/u);
+    assert.match(required(f.selection.state().plan).required.join(" "), /lighting:\d+/u);
     assert.equal(f.stage.dataset.lod, "geometry");
     const nearFrame = near.frame;
-    const residentRows = rows(f).keys.length;
+    const residentRows = required(rows(f)).keys.length;
     assert.ok(residentRows > 0);
 
     for (const stage of ["crossfade", "billboard", "marker"]) {
@@ -50,10 +55,10 @@ test("Mercury stops streaming rows from the crossfade on and keeps the phase, th
       assert.equal(far.frame, nearFrame);
       assert.equal(far.appliedFrame, nearFrame);
       assert.equal(far.appliedRow, 0);
-      assert.deepEqual(f.selection.state().plan.required.filter((key) => key.startsWith("lighting")), [BILLBOARD_LIGHTING_KEY]);
+      assert.deepEqual(required(f.selection.state().plan).required.filter((key) => key.startsWith("lighting")), [BILLBOARD_LIGHTING_KEY]);
       // No further rows are requested, and the retained rows stay retained.
-      assert.equal(rows(f).pending, 0);
-      assert.equal(rows(f).keys.length, residentRows);
+      assert.equal(required(rows(f)).pending, 0);
+      assert.equal(required(rows(f)).keys.length, residentRows);
       // The billboard disc fades in on the material root (the stage's second child).
       assert.equal(f.stage.children[1].style.getPropertyValue("--mercury-billboard-opacity"), "1");
     }
@@ -63,7 +68,7 @@ test("Mercury stops streaming rows from the crossfade on and keeps the phase, th
     assert.equal(f.stage.dataset.lod, "geometry");
     assert.equal(back.bank, "rows");
     assert.equal(back.frame, nearFrame);
-    assert.match(f.selection.state().plan.required.join(" "), /lighting:\d+/u);
+    assert.match(required(f.selection.state().plan).required.join(" "), /lighting:\d+/u);
     assert.deepEqual(f.errors, []);
     assert.deepEqual(f.materialErrors, []);
   } finally { f.restore(); }
@@ -72,14 +77,14 @@ test("Mercury stops streaming rows from the crossfade on and keeps the phase, th
 test("the overlay is fitted to the published silhouette, floored to the marker", async () => {
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
-    const fit = runtimeDefinition.viewBindings.find((binding) => binding.kind === "silhouette-fit");
+    const fit = required(runtimeDefinition.viewBindings.find((binding) => binding.kind === "silhouette-fit"));
     const root = f.stage.children[1];
-    const px = (value) => Number(value.toFixed(6)).toString();
-    const silhouette = (radius) => ({ centre: [12, -8], radial: [1, 0], radialSemiAxis: radius, tangentialSemiAxis: radius * 0.5 });
+    const px = (value: number) => Number(value.toFixed(6)).toString();
+    const silhouette = (radius: number) => ({ centre: [12, -8], radial: [1, 0], radialSemiAxis: radius, tangentialSemiAxis: radius * 0.5 });
     f.selection.setView({ ...f.view, ...geometryView, body: { silhouette: silhouette(100) }, revision: 2 }); await f.settle();
-    assert.equal(root.style.transform, `translate(12px, -8px) rotate(0deg) scale(${px(100 * fit.unitScale)}, ${px(50 * fit.unitScale)}) rotate(0deg)`);
-    f.selection.setView({ ...f.view, ...farView("marker"), body: { silhouette: silhouette(fit.minimumRadius / 2) }, revision: 3 }); await f.settle();
-    assert.equal(root.style.transform, `translate(12px, -8px) rotate(0deg) scale(${px(fit.minimumRadius * fit.unitScale)}, ${px(fit.minimumRadius * fit.unitScale)}) rotate(0deg)`);
+    assert.equal(root.style.transform, `translate(12px, -8px) rotate(0deg) scale(${px(100 * required(fit.unitScale))}, ${px(50 * required(fit.unitScale))}) rotate(0deg)`);
+    f.selection.setView({ ...f.view, ...farView("marker"), body: { silhouette: silhouette(required(fit.minimumRadius) / 2) }, revision: 3 }); await f.settle();
+    assert.equal(root.style.transform, `translate(12px, -8px) rotate(0deg) scale(${px(required(fit.minimumRadius) * required(fit.unitScale))}, ${px(required(fit.minimumRadius) * required(fit.unitScale))}) rotate(0deg)`);
     assert.equal(fit.minimumRadius, 0.6);
   } finally { f.restore(); }
 });

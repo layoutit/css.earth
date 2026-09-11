@@ -1,3 +1,4 @@
+import {requireRecord} from '../../../../tools/source-values.mts';
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -29,7 +30,7 @@ test("keeps the prepared NASA Mars record local and identified", () => {
 
 test("retains the complete selected Mars editorial sections", () => {
   assert.match(information.introduction, /fourth planet from the Sun/);
-  assert.deepEqual(information.sections.map(({ heading }) => heading), [
+  assert.deepEqual(information.sections.map((entry:unknown) => requireRecord(entry).heading), [
     "Introduction",
     "Namesake",
     "Potential for Life",
@@ -52,9 +53,9 @@ test("retains the complete selected Mars editorial sections", () => {
   assert.match(section("Moons"), /Phobos and Deimos/);
 });
 
-function section(heading) {
+function section(heading: string) {
   return information.sections
-    .find((candidate) => candidate.heading === heading)
+    .find((candidate: { heading: string; }) => candidate.heading === heading)
     .paragraphs.join(" ");
 }
 

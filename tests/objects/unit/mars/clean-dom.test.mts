@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -21,14 +22,14 @@ test("keeps the Mars scene as one fixed retained PolyCSS tree", async () => {
   try {
     const presentation = mountPreparedPresentation(f.stage, f.context, runtimeDefinition);
     const nodes = f.stage.querySelectorAll("*");
-    const material = nodes.find(node => node.classList.contains("mars-material-plane"));
+    const material = required(nodes.find(node => node.classList.contains("mars-material-plane")));
     const { PREPARED_MARS_CAMERA } = await import("../../unit/mars/prepared-fixture.mts");
     assert.equal(material.style.transform, PREPARED_MARS_CAMERA.materialDepthContract.planeTransform);
     assert.equal(material.children.length, 1);
     assert.equal(material.children[0].tagName, "S");
     assert.equal(nodes.filter(node => ["B", "S", "U"].includes(node.tagName)).length, 517);
-    for (const lens of runtimeDefinition.controls.lenses.controls) {
-      presentation.commitSelection({ selection: { ...initialObjectSelection(runtimeDefinition.controls), lensId: lens.id } });
+    for (const lens of required(runtimeDefinition.controls.lenses).controls) {
+      presentation.commitSelection({ resources:f.resources, selection: { ...initialObjectSelection(runtimeDefinition.controls), lensId: lens.id } });
       assert.deepEqual(f.stage.querySelectorAll("*"), nodes);
     }
     presentation.observe();

@@ -1,3 +1,6 @@
+import {shape,array,number,text,optional,boolean} from '../../../../tools/objects/terrestrial-layers/source-records.mts';
+import {parseObservedSource,parseColorSource} from '../observed-atlas-proof.mts';
+import {required} from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
@@ -12,10 +15,13 @@ import { reprojectSolidBodySurfaceRaster } from "../../../../src/platform/prepar
 const sourceRoot = resolve(import.meta.dirname, "../../../../src/planets/ceres/source");
 const root = resolve(import.meta.dirname, "../../../..");
 const source = await createSourceManifest({ planetId: "ceres", planetName: "Ceres", sourceRoot });
-const prepared = JSON.parse(await readFile(resolve(import.meta.dirname, "../../../../src/planets/ceres/prepared/surfaces.json")));
+const asset=shape({url:text,width:number,height:number,bytes:number,sha256:text});
+const prepared=shape({surfaces:array(shape({id:text,scientific:optional(boolean),map:optional(asset),surface:asset,thumbnail:asset,
+ layout:shape({width:number,height:number,gutter:number,packedWidth:number,bands:array(shape({height:number,y:number,packedY:number}))})}))})(JSON.parse(await readFile(resolve(import.meta.dirname,'../../../../src/planets/ceres/prepared/surfaces.json'),'utf8')));
+const surfaceEntries=source.manifest.inputs.filter(input=>input.consumers.includes('surfaces')).map(value=>shape({path:text,lensId:text})(value));
 
 test("lighting opacity stays inside its fitted disc, without clipped square edges", async () => {
-  const { lighting } = JSON.parse(await readFile(resolve(import.meta.dirname, "../../../../src/planets/ceres/prepared/material.json")));
+  const { lighting } = JSON.parse((await readFile(resolve(import.meta.dirname, "../../../../src/planets/ceres/prepared/material.json"))).toString('utf8'));
   const { data, info } = await sharp(resolve(root, "public", lighting.url.slice(1)))
     .ensureAlpha().raw().toBuffer({ resolveWithObject: true });
   const size = info.width / lighting.columns;
@@ -39,12 +45,12 @@ test("downloaded Dawn rasters match their pinned sources and reject corruption",
 });
 
 test("observed map pixels remain intact, gaps use the shared grid, and bands retain seam gutters", async () => {
-  assert.deepEqual(prepared.surfaces.map(s => s.id), source.manifest.inputs.filter(input => input.lensId).map(s => s.lensId));
+  assert.deepEqual(prepared.surfaces.map(s => s.id), surfaceEntries.map(s=>s.lensId));
   for (const lens of prepared.surfaces.filter(lens => !lens.scientific)) {
-    const entry = source.manifest.inputs.find(input => input.lensId === lens.id);
-    const decoded = {};
-    for (const kind of ["map", "surface", "thumbnail"]) {
-      const asset = lens[kind];
+    const entry = required(surfaceEntries.find(input=>input.lensId===lens.id));
+    const decoded:Record<string,Buffer> = {};
+    for (const kind of ["map", "surface", "thumbnail"] as const) {
+      const asset = required(lens[kind]);
       const bytes = await readFile(resolve(root, "public", asset.url.slice(1)));
       assert.equal(bytes.length, asset.bytes);
       assert.equal(createHash("sha256").update(bytes).digest("hex"), asset.sha256);

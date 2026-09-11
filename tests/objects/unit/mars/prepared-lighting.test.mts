@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
@@ -224,7 +225,7 @@ test("keeps unattended playback on compositor animations", async () => {
     readFile(new URL("../../../../src/renderers/css/styles/mars-surfaces.css", import.meta.url), "utf8"),
   ]);
   const { runtimeDefinition } = await import("../../unit/mars/prepared-fixture.mts");
-  const pool = runtimeDefinition.assets.pools.find(pool => pool.id === "lighting");
+  const pool = required(runtimeDefinition.assets.pools.find(pool => pool.id === "lighting"));
   assert.equal(pool.capacity, PREPARED_MARS_LIGHTING.banks[2].transport.maximumRetainedRowCount);
   assert.equal(pool.reuse, true);
   assert.equal(pool.eviction, "capacity");

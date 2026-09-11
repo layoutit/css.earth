@@ -1,3 +1,5 @@
+import {parseObservedSource,parseColorSource} from '../observed-atlas-proof.mts';
+import {required} from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { readFile } from "node:fs/promises";
@@ -6,14 +8,18 @@ import { fromFile } from "geotiff";
 import {createSourceManifest} from "../../../../src/platform/source-manifest.mts";
 const source = await createSourceManifest({planetId:"europa",planetName:"Europa",sourceRoot:new URL("../../../../src/planets/europa/source/",import.meta.url).pathname});
 const verifyEuropaSourceManifest = () => source.verify();
-const europaSourceInputsFor = consumer => source.inputsFor(consumer);
+function europaSourceInputsFor(consumer:"surfaces"): ReturnType<typeof parseObservedSource>[];
+function europaSourceInputsFor(consumer:"color"): ReturnType<typeof parseColorSource>[];
+function europaSourceInputsFor(consumer:"surfaces"|"color"){return consumer==="surfaces"?source.inputsFor(consumer).map(parseObservedSource):source.inputsFor(consumer).map(parseColorSource);}
 import config from "../../../../src/planets/europa/source/preparation/terrestrial.json" with {type:"json"};
 import {colorPhotometricGain as gain,loadControlledObservationGeometry,matchObservedColorLevels} from "../../../../tools/objects/terrestrial-layers/photometric-observations.mts";
+import type { RgbObservation } from "../../../../tools/objects/terrestrial-layers/contracts.mts";
+import type { ObservationGeometry } from "../../../../tools/objects/terrestrial-layers/contracts.mts";
 const recipe=config.raster.observedColors[0].photometry;
 const COLOR_PHOTOMETRY=recipe.profile;
-const colorPhotometricGain=(normal,geometry,weight)=>gain(normal,geometry,weight,COLOR_PHOTOMETRY);
-const loadColorGeometry=async()=>loadControlledObservationGeometry({sourceDirectory:new URL("../../../../src/planets/europa/source/",import.meta.url).pathname,entries:await source.validateGroup(recipe.consumer),vectors:recipe.vectors});
-const matchEuropaColorLevels=(color,monochrome,size)=>matchObservedColorLevels(color,monochrome,{...size,...recipe.levels});
+const colorPhotometricGain=(normal: readonly number[],geometry: ObservationGeometry,weight: number)=>gain(normal,geometry,weight,COLOR_PHOTOMETRY);
+const loadColorGeometry=async()=>loadControlledObservationGeometry({sourceDirectory:new URL("../../../../src/planets/europa/source/",import.meta.url).pathname,entries:(await source.validateGroup(recipe.consumer)).map(parseColorSource),vectors:recipe.vectors});
+const matchEuropaColorLevels=(color: Pick<{ rgb: Float32Array<ArrayBuffer>; missing: Uint8Array<ArrayBuffer>; owners: Uint8Array<ArrayBuffer>; observationNames: string[]; coverage: Record<string,{ pixels: number; surfacePercent: number; }>; photometry: { observations: Record<string,{ correctedPixels: number; withheldPixels: number; }>; correctedPixels: number; withheldPixels: number; radiusKm: number; maximumIncidenceDegrees: number; maximumEmissionDegrees: number; referenceIncidenceDegrees: number; referenceEmissionDegrees: number; observationWeights: Record<string,number>; }; sourceIds: string[]|undefined; },"rgb"|"observationNames"|"owners">,monochrome: RgbObservation,size: { width: number; height: number; boundaryPixels?: number; luminance?: readonly number[]; })=>matchObservedColorLevels(color,monochrome,{...size,...recipe.levels});
 
 test("observed terrain survives preparation and explicit polar no-data stays marked", async () => {
   await verifyEuropaSourceManifest();
@@ -32,7 +38,7 @@ test("observed terrain survives preparation and explicit polar no-data stays mar
     assert.deepEqual(image.getOrigin().slice(0,2),[-4907750.3455436,2453875.1727718]);
     assert.deepEqual(image.getResolution().slice(0,2),[499.97456657942,-499.97456657942]);
     const entry=europaSourceInputsFor('surfaces').find(e=>e.lensId==='normal');
-    for(const [x,y]of [[700,750],[1500,1024],[2400,900],[3100,1100]]){
+    for(const [x,y]of [[700,750],[1500,1024],[2400,900],[3100,1100]] as const){
       const p=canonicalPoint(x,y,4096,2048),actual=map.sample(p.longitude,p.latitude);
       const value=await expectedMonochromeTexel(image,entry,map.record.layout,actual);
       assertDisplayClose(actual.rgb,[value,value,value],`native source-window anchor ${x},${y}`);
@@ -45,48 +51,48 @@ test("observed terrain survives preparation and explicit polar no-data stays mar
   assert.ok(map.record.missingPixels>0);assert.ok(map.record.missingPixels<4096*2048/10);
   // Retain the independent fallback anchors, including the excluded coarse
   // 28ESGLOCOL01 patches; only terminal WebP codec error is tolerated.
-  for(const [x,y]of [[700,750],[3100,1100],[2048,2047],[2500,400],[2300,500],[1900,750]]){
+  for(const [x,y]of [[700,750],[3100,1100],[2048,2047],[2500,400],[2300,500],[1900,750]] as const){
     const p=canonicalPoint(x,y,4096,2048);
     assertDisplayClose(enhanced.sample(p.longitude,p.latitude).rgb,map.sample(p.longitude,p.latitude).rgb,'Monochrome terrain and true gaps remain outside color coverage');
   }
   const colorPoint=canonicalPoint(1500,700,4096,2048);
   assert.notDeepEqual(enhanced.sample(colorPoint.longitude,colorPoint.latitude).rgb,map.sample(colorPoint.longitude,colorPoint.latitude).rgb,'Observed color overlays the base');
-  assert.ok(enhanced.record.monochromePixels>4096*2048/2);
-  const photometry = metadata.surfaces[1].photometry;
+  assert.ok(required(enhanced.record.monochromePixels)>4096*2048/2);
+  const photometry = required(metadata.surfaces[1].photometry);
   const observations = new Set(europaSourceInputsFor("color").map(image => image.observation));
   assert.deepEqual(new Set(Object.keys(photometry.observations)), observations);
   for (const observation of observations) {
     assert.ok(photometry.observations[observation].correctedPixels > 0, `${observation} receives correction`);
     assert.ok(photometry.observations[observation].withheldPixels > 0, `${observation} withholds unstable angles`);
-    assert.equal(photometry.observations[observation].correctedPixels, metadata.surfaces[1].observationCoverage[observation].pixels);
+    assert.equal(photometry.observations[observation].correctedPixels, required(metadata.surfaces[1].observationCoverage)[observation].pixels);
   }
 });
 
 test("disk normalization preserves its reference and withholds oblique or unlit observations", () => {
   const normal = [1, 0, 0], radius = COLOR_PHOTOMETRY.radiusKm;
-  const position = degrees => [radius + 10000 * Math.cos(degrees * Math.PI / 180), 10000 * Math.sin(degrees * Math.PI / 180), 0];
+  const position = (degrees: number) => [radius + 10000 * Math.cos(degrees * Math.PI / 180), 10000 * Math.sin(degrees * Math.PI / 180), 0];
   for (const weight of [0, 0.5, 1]) {
-    assert.ok(Math.abs(colorPhotometricGain(normal, { sun:position(30), observer:position(0) }, weight) - 1) < 1e-12);
+    assert.ok(Math.abs(required(colorPhotometricGain(normal, { sun:position(30), observer:position(0) }, weight)) - 1) < 1e-12);
     for (const angle of [76, 90, 120, 180]) {
       assert.equal(colorPhotometricGain(normal, { sun:position(angle), observer:position(0) }, weight), null);
       assert.equal(colorPhotometricGain(normal, { sun:position(30), observer:position(angle) }, weight), null);
     }
   }
   const geometry = { sun:position(60), observer:position(0) };
-  const lambert = colorPhotometricGain(normal, geometry, 0), mixed = colorPhotometricGain(normal, geometry, .5);
-  const lommel = colorPhotometricGain(normal, geometry, 1);
+  const lambert = required(colorPhotometricGain(normal, geometry, 0)), mixed = required(colorPhotometricGain(normal, geometry, .5));
+  const lommel = required(colorPhotometricGain(normal, geometry, 1));
   assert.ok(Math.abs(lambert - Math.sqrt(3)) < 1e-12);
   assert.ok(lommel > 1 && lommel < mixed && mixed < lambert);
   assert.ok(.001 * mixed > 0, "Observed dark terrain is scaled, never classified as absent");
-  assert.throws(() => colorPhotometricGain(normal, geometry), /weight/);
+  assert.throws(() => Reflect.apply(colorPhotometricGain,undefined,[normal,geometry]), /weight/);
 });
 
 test("capture vectors match the source geometry in the controlled east-positive frame", async () => {
   const geometry = await loadColorGeometry();
   assert.deepEqual(new Set(geometry.keys()), new Set(europaSourceInputsFor("color").map(image => image.id)),
     "Every color image has source-bound capture geometry");
-  const [, first] = [...geometry].find(([id]) => id.includes("s0440984926"));
-  const coordinates = v => ({ latitude:Math.asin(v[2] / Math.hypot(...v)) * 180 / Math.PI,
+  const [, first] = required([...geometry].find(([id]) => id.includes("s0440984926")));
+  const coordinates = (v: readonly number[]) => ({ latitude:Math.asin(v[2] / Math.hypot(...v)) * 180 / Math.PI,
     longitude:(Math.atan2(v[1], v[0]) * 180 / Math.PI + 360) % 360, distance:Math.hypot(...v) });
   const sun = coordinates(first.sun), observer = coordinates(first.observer);
   // Original Galileo PDS label: Sun 1.399 N / 243.734 W, spacecraft
@@ -102,7 +108,7 @@ test("capture vectors match the source geometry in the controlled east-positive 
 test("color sampling withholds incomplete footprints without erasing observed dark terrain", async () => {
   const { sampleColorBand } = await import("../../../../tools/objects/terrestrial-layers/scientific-raster.mts");
   const band = { noData:0,specialValueMagnitude:1e30,width:2,height:2,origin:[0,2],resolution:[1,-1],data:new Float32Array([.001,.001,.001,.001]) };
-  assert.ok(sampleColorBand(band,1,1) > 0);
+  assert.ok(required(sampleColorBand(band,1,1)) > 0);
   band.data[3] = 0;
   assert.equal(sampleColorBand(band,1,1), null, "A missing contributor cannot be interpolated into color");
   band.data[3] = -3.4028234663852886e38;

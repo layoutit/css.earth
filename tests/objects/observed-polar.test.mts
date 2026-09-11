@@ -11,7 +11,7 @@ test('RGB coverage is measured and checked against authored row bounds',()=>{
  const source={data:Buffer.alloc(8*6*3),info:{width:8,height:6,channels:3}};
  source.data.fill(100,8*3,8*5*3);
  assert.deepEqual(measureRgbCoverage(source,{columnStride:2,minimumMean:3,firstMeasuredRow:1,lastMeasuredRow:4}),{firstMeasuredRow:1,lastMeasuredRow:4});
- assert.throws(()=>measureRgbCoverage(source,{columnStride:0,minimumMean:3}),/sampling/);
+ assert.throws(()=>Reflect.apply(measureRgbCoverage,undefined,[source,{columnStride:0,minimumMean:3}]),/sampling/);
  assert.throws(()=>measureRgbCoverage(source,{columnStride:2,minimumMean:3,firstMeasuredRow:0,lastMeasuredRow:4}),/changed/);
 });
 
@@ -44,7 +44,7 @@ test('measured polar harmonic continuation is bounded and leaves untransitioned 
 test('observation routing uses capabilities and rejects unsafe or unpinned inputs',async()=>{
  assert.equal(parseObservedPolarRecipe(recipe),recipe);
  const synthetic=structuredClone(recipe);synthetic.namespace='synthetic';synthetic.publicPrefix='/scenes/synthetic/';assert.equal(parseObservedPolarRecipe(synthetic),synthetic);
- for(const mutate of [value=>value.lenses[0].operation='jupiter',value=>value.lenses[0].source='../other',value=>value.sourcePins=[],value=>value.lenses[0].coverage.columnStride=0,value=>value.dimensions.width=Infinity]){const invalid=structuredClone(recipe);mutate(invalid);assert.throws(()=>parseObservedPolarRecipe(invalid));}
+ for(const mutate of [(value: { lenses: { operation: string; }[]; })=>value.lenses[0].operation='jupiter',(value: { lenses: { source: string; }[]; })=>value.lenses[0].source='../other',(value: { sourcePins: never[]; })=>value.sourcePins=[],(value: { lenses: { coverage: { columnStride: number; }; }[]; })=>value.lenses[0].coverage.columnStride=0,(value: { dimensions: { width: number; }; })=>value.dimensions.width=Infinity]){const invalid=structuredClone(recipe);mutate(invalid);assert.throws(()=>parseObservedPolarRecipe(invalid));}
  const changed=structuredClone(recipe);changed.sourcePins[0].expectedSha256='0'.repeat(64);
  await assert.rejects(prepareObservedPolarSurfaces({sourceDirectory,publicDirectory:'/unused',config:changed}),/pin mismatch/);
 });

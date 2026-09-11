@@ -1,3 +1,4 @@
+import {required} from '../../../tools/test-values.mts';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -9,14 +10,14 @@ import { ellipsoidParameterMesh } from '../../../tools/objects/terrestrial-layer
 import { preparePlanetarySystem } from '../../../src/platform/prepare-planetary-system.mts';
 import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-presentation-frame.mts';
 
-export function checkGalileoLucy(id) {
+export function checkGalileoLucy(id: Parameters<typeof preparePlanetarySystem>[0]["bodyId"]) {
   const sourceDirectory = resolve('src/planets', id, 'source');
-  const read = async path => JSON.parse(await readFile(resolve(sourceDirectory, path)));
+  const read = async (path: string) => JSON.parse((await readFile(resolve(sourceDirectory, path))).toString('utf8'));
   test(`${id}: source closure and representation are consistent`, async () => {
     const source = await createSourceManifest({ planetId: id, planetName: id, sourceRoot: sourceDirectory });
     await source.verify();
     const config = await read('preparation/terrestrial.json'), model = await read('shape/model.json');
-    const radial = await loadRadialTerrain({ config, sourceDirectory, source });
+    const radial = required(await loadRadialTerrain({ config, sourceDirectory, source }));
     assert.equal(radial.faces.length, id === 'dactyl' ? 512 : id === 'selam' ? 1024 : 1200);
     assert.equal(config.raster.observations.length, 0, 'unregistered photography must not be presented as observed coverage');
     if (id === 'dactyl') {
@@ -34,16 +35,16 @@ export function checkGalileoLucy(id) {
       assert.match(model.meaning, /Authored reconstruction/);
     }
     const content = await read('content/object.json');
-    assert(content.lenses.controls.every(control => control.detail.length <= 7));
+    assert(content.lenses.controls.every((control:{detail:string}) => control.detail.length <= 7));
   });
   if (id !== 'dinkinesh') test(`${id}: parent brightness and approximate placement are complete`, async () => {
     const config = await read('preparation/terrestrial.json');
     const system = await preparePlanetarySystem({ bodyId: id, presentationFrame: prepareEclipticPresentationFrame(id), kilometersPerUnit: config.geometry.radiusKm / config.geometry.radius });
-    const parent = system.bodies.find(body => body.id === (id === 'dactyl' ? 'ida' : 'dinkinesh'));
+    const parent = required(system.bodies.find(body => body.id === (id === 'dactyl' ? 'ida' : 'dinkinesh')));
     assert(parent.pointPresentation.samples.every(Number.isFinite));
     assert.equal(parent.illumination.geometricAlbedo, id === 'dactyl' ? .262 : .27);
-    const world = JSON.parse(await readFile('src/planets/sun/prepared/world-context.json'));
-    const context = world.bodies.find(body => body.id === id);
+    const world = JSON.parse((await readFile('src/planets/sun/prepared/world-context.json')).toString('utf8'));
+    const context = world.bodies.find((body: { id: string; }) => body.id === id);
     assert.equal(context.placement, 'approximate');
     assert.equal(context.orbit.centerBodyId, parent.id);
     assert.match((await read('content/object.json')).panel.introduction, /Approximate orbital placement/);

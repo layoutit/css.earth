@@ -5,16 +5,16 @@ import {createHash} from 'node:crypto';
 import {decodeLlorri,bindSipCamera,sipPixel} from '../../../../tools/objects/terrestrial-layers/llorri-geo.mts';
 import {readFitsPrimary} from '../../../../tools/objects/static-surface/fits-map.mts';
 const root='src/planets/donaldjohanson/source/';
-const camera=JSON.parse(await readFile(root+'observations/llorri-camera.json'));
+const camera=JSON.parse((await readFile(root+'observations/llorri-camera.json')).toString('utf8'));
 const bytes=await readFile(root+'observations/lor_0798443290_04598_00035_1x1_sci_03.fit');
 test('Lucy TAN-SIP agrees with disjoint Astropy coordinates and the published withheld landmark',()=>{
   const f=bindSipCamera(camera);
   for(const a of camera.checks.astropyProjectionAnchors){
     const p=f.projectPoint(a.pointKm);assert.ok(Math.hypot(p[0]-a.pixel[0],p[1]-a.pixel[1])<1e-7);
-    const ideal=sipPixel(camera,p[0],p[1],false),roundtrip=sipPixel(camera,...ideal,true);
+    const ideal=sipPixel(camera,p[0],p[1],false),roundtrip=sipPixel(camera,ideal[0],ideal[1],true);
     assert.ok(Math.hypot(roundtrip[0]-p[0],roundtrip[1]-p[1])<1e-7);
   }
-  const a=camera.checks.anchors.find(a=>a.role==='holdout'),p=f.projectPoint(a.pointKm);
+  const a=camera.checks.anchors.find((a: { role: string; })=>a.role==='holdout'),p=f.projectPoint(a.pointKm);
   assert.equal(a.name,'Narmada');assert.ok(Math.hypot(p[0]-a.pixel[0],p[1]-a.pixel[1])<2);
 });
 test('Lucy preserves calibrated darkness and rejects every nonzero paired quality bit',()=>{

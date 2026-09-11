@@ -1,16 +1,17 @@
+import {required} from '../../../../tools/test-values.mts';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root = new URL('../../../../src/planets/aegaeon/source/', import.meta.url);
-const read = async path => JSON.parse(await readFile(new URL(path, root)));
+const read = async (path: string|URL) => JSON.parse((await readFile(new URL(path, root))).toString('utf8'));
 
 test('Aegaeon preserves the source dimensions as a closed physical surface', async () => {
   const recipe = await read('preparation/terrestrial.json');
   const shape = parsePdsRadiusTable(await readFile(new URL('shape/ellipsoid.tab', root), 'utf8'), recipe.geometry.radialTerrain.grid);
-  for (const [lon, lat, radius] of [[0,0,700.0], [90,0,250.0], [180,0,700.0], [270,0,250.0], [0,90,200.0], [0,-90,200.0]]) {
-    assert.ok(Math.abs(shape.sample(lon,lat)-radius)<.001, `${lon},${lat}`);
+  for (const [lon, lat, radius] of [[0,0,700.0], [90,0,250.0], [180,0,700.0], [270,0,250.0], [0,90,200.0], [0,-90,200.0]] as const) {
+    assert.ok(Math.abs(required(shape.sample(lon,lat))-radius)<.001, `${lon},${lat}`);
   }
   assert.ok(Math.abs(recipe.geometry.radiusKm-Math.cbrt(0.7*0.25*0.2))<1e-10);
   const topology = validateClosedMesh(Uint32Array.from(shape.indices.flat()), shape.positions);

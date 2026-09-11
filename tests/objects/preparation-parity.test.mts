@@ -1,14 +1,17 @@
+import {shape,array,text,number} from '../../tools/objects/terrestrial-layers/source-records.mts';
+import {required} from '../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { readPreparedFixture, projectRoot } from './fixtures.mts';
+const parseAssets=shape({assets:array(shape({filename:text,bytes:number,sha256:text}))});
 
 for (const id of ['mercury', 'venus']) {
   test(`${id} retains every accepted image and chart byte`, async () => {
-    const baseline = JSON.parse(await readFile(new URL(`./compatibility/${id}-assets.json`, import.meta.url), 'utf8'));
-    const manifest = JSON.parse(await readFile(resolve(projectRoot, 'src/planets', id, 'runtime-assets.json'), 'utf8'));
+    const baseline = parseAssets(JSON.parse(await readFile(new URL(`./compatibility/${id}-assets.json`, import.meta.url), 'utf8')));
+    const manifest = parseAssets(JSON.parse(await readFile(resolve(projectRoot, 'src/planets', id, 'runtime-assets.json'), 'utf8')));
     const acceptedNames=new Set(baseline.assets.map(asset=>asset.filename));
     assert.deepEqual(manifest.assets.filter(asset=>acceptedNames.has(asset.filename)).toSorted((a, b) => a.filename.localeCompare(b.filename)),
       baseline.assets.toSorted((a, b) => a.filename.localeCompare(b.filename)));
@@ -21,7 +24,7 @@ for (const id of ['mercury', 'venus']) {
   });
   test(`${id} is authored entirely as data and uses the shared prepared runtime`, async () => {
     const directory = resolve(projectRoot, 'src/planets', id);
-    const visit = async path => {
+    const visit = async (path: string):Promise<void> => {
       for (const entry of await readdir(path, {withFileTypes: true})) {
         if (entry.name.startsWith('.')) continue;
         const child = resolve(path, entry.name);
@@ -45,11 +48,12 @@ for (const id of ['mercury', 'saturn']) {
     const runtime = await readPreparedFixture(id, 'runtime');
     const target = runtime.tree.nodes.findIndex(n => n.className === `polycss-mesh ${id}-cutaway`);
     assert.ok(target >= 0);
-    assert.ok(runtime.tree.nodes[target].properties.some(i => runtime.tree.properties[i].name === 'display' && runtime.tree.properties[i].value === 'none'));
-    assert.ok(runtime.assets.startup.every(key => !key.startsWith('interior:')));
+    assert.ok(runtime.tree.nodes[target].properties.some((i:number) => runtime.tree.properties[i].name === 'display' && runtime.tree.properties[i].value === 'none'));
+    assert.ok(runtime.assets.startup.every((key: string) => !key.startsWith('interior:')));
     for (const variant of runtime.variants) {
-      const interior = variant.writes.some(w => w.name === 'data-view' && w.value === 'interior');
-      assert.equal(variant.writes.find(w => w.target === target && w.name === 'display')?.value, interior ? 'block' : 'none');
+      const interior = variant.writes.some(w => "value" in w && w.name === 'data-view' && w.value === 'interior');
+      const write=required(variant.writes.find(w => w.target === target && w.name === 'display'));assert.ok('value' in write);
+      assert.equal(write.value,interior?'block':'none');
     }
   });
 }

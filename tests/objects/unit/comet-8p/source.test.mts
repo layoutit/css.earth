@@ -1,3 +1,7 @@
+import {createHash} from 'node:crypto';
+import {requireRecord} from '../../../../tools/source-values.mts';
+import {fileURLToPath} from 'node:url';
+import {required} from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
@@ -5,16 +9,16 @@ import { contactEllipsoidMesh, loadContactEllipsoids } from '../../../../tools/o
 import { simplifyRadialShape } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { parseVectors } from '../../../../packages/astronomy/tools/lib/horizons.mts';
 const root = new URL('../../../../src/planets/comet-8p/source/', import.meta.url);
-const json = async path => JSON.parse(await readFile(new URL(path, root), 'utf8'));
-const near = (actual, expected, tolerance) => assert.ok(Math.abs(actual - expected) < tolerance, `${actual} vs ${expected}`);
+const json = async (path: string|URL) => JSON.parse(await readFile(new URL(path, root), 'utf8'));
+const near = (actual: number, expected: number, tolerance: number) => assert.ok(Math.abs(actual - expected) < tolerance, `${actual} vs ${expected}`);
 
 test('each model product binds its own shape source without blending the alternative', async () => {
   const {provenanceProducts} = await import('../../../../tools/objects/provenance-recipes.mts');
   const document=provenanceProducts({id:'comet-8p',
-    recipes:new Map([['terrestrial',{parameters:await json('preparation/terrestrial.json')}]]),
+    recipes:new Map([['terrestrial',{id:'terrestrial',path:'source/preparation/terrestrial.json',sha256:createHash('sha256').update(await readFile(new URL('preparation/terrestrial.json',root))).digest('hex'),parameters:requireRecord(await json('preparation/terrestrial.json'))}]]),
     manifest:await json('manifest.json'),lenses:(await json('content/object.json')).lenses,assets:{}});
-  assert.deepEqual(document.products.find(p=>p.id==='model').inputPaths,['material/neutral.png','shape/model.json']);
-  assert.deepEqual(document.products.find(p=>p.id==='arecibo').inputPaths,['material/arecibo-neutral.png','shape/arecibo.json']);
+  assert.deepEqual(required(document.products.find(p=>p.id==='model')).inputPaths,['material/neutral.png','shape/model.json']);
+  assert.deepEqual(required(document.products.find(p=>p.id==='arecibo')).inputPaths,['material/arecibo-neutral.png','shape/arecibo.json']);
 });
 
 test('Arecibo retains the published dimensions without Spitzer rescaling', async () => {
@@ -23,11 +27,11 @@ test('Arecibo retains the published dimensions without Spitzer rescaling', async
   near(2 * (mesh.axesMeters[0][0] + mesh.axesMeters[1][0]), 10000, 1e-9);
   near(mesh.axesMeters[0][0] / mesh.axesMeters[1][0], 1.35, .01);
   const recipe = await json('preparation/terrestrial.json');
-  const profile = recipe.geometry.radialTerrainAlternatives.find(model => model.lensId === 'arecibo');
-  const source = await loadContactEllipsoids(new URL('shape/arecibo.json', root), profile.grid);
+  const profile = recipe.geometry.radialTerrainAlternatives.find((model: { lensId: string; }) => model.lensId === 'arecibo');
+  const source = await loadContactEllipsoids(fileURLToPath(new URL('shape/arecibo.json', root)), profile.grid);
   const faces = await simplifyRadialShape(source, profile, 1);
   assert.equal(faces.length, 1000);
-  assert.equal(faces.simplification.topology.eulerCharacteristic, 3);
+  assert.equal(requireRecord(required(faces.simplification).topology).eulerCharacteristic, 3);
   assert.ok(faces.some(face => face.vertices.some(p => Math.hypot(p[0]-mesh.contactXMeters,p[1],p[2]) < 1e-5)));
   for (const face of faces) {
     for (const p of [...face.vertices, face.vertices[0].map((_,axis) => face.vertices.reduce((sum,v) => sum+v[axis],0)/3)]) {
@@ -44,12 +48,12 @@ test('both source meshes stay separate in one retained scene', async () => {
   const sourceDirectory = fileURLToPath(root), config = await json('preparation/terrestrial.json');
   const source = await createSourceManifest({ planetId:'comet-8p', planetName:'Tuttle', sourceRoot:sourceDirectory });
   const models = await loadRadialModels({ config, sourceDirectory, source });
-  const scene = combineRadialModels(models, 'comet-8p');
+  const scene = required(combineRadialModels(models, 'comet-8p'));
   assert.equal(scene.leaves.length,2000);
   assert.deepEqual(scene.lensRanges,[{lensId:'model',start:0,count:1000},{lensId:'arecibo',start:1000,count:1000}]);
   assert.deepEqual(scene.faces.slice(0,1000),Array.from(models[0].radial.faces));
   assert.deepEqual(scene.faces.slice(1000),Array.from(models[1].radial.faces));
-  assert.ok(scene.leaves.slice(1000).every(leaf=>leaf.attributes['data-surface-model']==='arecibo'));
+  assert.ok(scene.leaves.slice(1000).every(leaf=>requireRecord(leaf.attributes)['data-surface-model']==='arecibo'));
 });
 
 test('Spitzer area scaling preserves the published HST lobe proportions and volume origin', async () => {
@@ -78,7 +82,7 @@ test('independent Spitzer vectors reproduce both published model aspect angles',
 test('native triangle reduction retains contact and stays within 50 m of the analytic spheres', async () => {
   const model = await json('shape/model.json'), config = await json('preparation/terrestrial.json');
   const analytic = contactEllipsoidMesh(model), profile = config.geometry.radialTerrain;
-  const mesh = await loadContactEllipsoids(new URL('shape/model.json', root), profile.grid);
+  const mesh = await loadContactEllipsoids(fileURLToPath(new URL('shape/model.json', root)), profile.grid);
   const faces = await simplifyRadialShape(mesh, profile, 1);
   assert.ok(faces.length <= 1000);
   assert.ok(faces.some(f => f.vertices.some(v => Math.hypot(v[0]-analytic.contactXMeters,v[1],v[2]) < 1e-5)));
@@ -90,7 +94,7 @@ test('native triangle reduction retains contact and stays within 50 m of the ana
       assert.ok(distance < 50, `analytic surface deviation ${distance} m`);
     }
   }
-  assert.equal(faces.simplification.topology.eulerCharacteristic, 3); // two closed spheres sharing one point
+  assert.equal(requireRecord(required(faces.simplification).topology).eulerCharacteristic, 3); // two closed spheres sharing one point
 });
 
 test('delivered mesh retains the analytic surface and the model pole stays at a fixed phase', async () => {
@@ -98,9 +102,9 @@ test('delivered mesh retains the analytic surface and the model pole stays at a 
   const terrain = JSON.parse(await readFile(new URL('../prepared/terrain.json', root), 'utf8'));
   const model = contactEllipsoidMesh(await json('shape/model.json'));
   const meters = config.geometry.radiusKm * 1000 / config.geometry.radius;
-  const vertices = terrain.faces.flatMap(face => face.vertices.map(p => p.map(n => n * meters)));
+  const vertices = terrain.faces.flatMap((face: { vertices: number[][]; }) => face.vertices.map((p: number[]) => p.map((n: number) => n * meters)));
   assert.equal(terrain.faces.length, 1000);
-  assert.ok(vertices.some(p => Math.hypot(p[0] - model.contactXMeters, p[1], p[2]) < 1e-5));
+  assert.ok(vertices.some((p: number[]) => Math.hypot(p[0] - model.contactXMeters, p[1], p[2]) < 1e-5));
   for (const p of vertices) {
     const distance = Math.min(...model.centersMeters.map((x, i) =>
       Math.abs(Math.hypot(p[0] - x, p[1], p[2]) - model.axesMeters[i][0])));
@@ -108,7 +112,7 @@ test('delivered mesh retains the analytic surface and the model pole stays at a 
   }
   const { readAuthoredRotation } = await import('../../../../tools/objects/authored-rotation.mts');
   const descriptor = JSON.parse(await readFile(new URL('../object.json', root), 'utf8'));
-  const reference = descriptor.properties.recipe.sources.find(s => s.id === 'rotation');
+  const reference = descriptor.properties.recipe.sources.find((s: { id: string; }) => s.id === 'rotation');
   const { fileURLToPath } = await import('node:url');
   const directory = fileURLToPath(new URL('../', root));
   const a = await readAuthoredRotation(directory, reference, 2461286.5);

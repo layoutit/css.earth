@@ -1,22 +1,24 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {readFile} from 'node:fs/promises';
+import {readFile, type FileHandle} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 import {readAuthoredRotation} from '../../../../tools/objects/authored-rotation.mts';
-const read=async p=>JSON.parse(await readFile(p,'utf8'));
-export function testCatalogNucleus(id){
+import type { PathLike } from 'node:fs';
+const read=async (p: PathLike|FileHandle)=>JSON.parse(await readFile(p,'utf8'));
+export function testCatalogNucleus(id: string){
  test(`${id}: retained mesh preserves the native source shape and closed topology`,async()=>{
   const root=resolve('src/planets',id),excerpt=await readFile(`${root}/source/reference/celestia.ssc`,'utf8');
-  const catalogRadiusM=Number(excerpt.match(/^\s*Radius\s+([\d.]+)/m)[1])*1000;
+  const catalogRadiusM=Number(required(excerpt.match(/^\s*Radius\s+([\d.]+)/m))[1])*1000;
   const model=await read(`${root}/source/shape/model.json`),radiusM=model.volumeEquivalentRadiusKm*1000;
   const sourceObj=await readFile(`${root}/source/shape/model.obj`,'utf8');
   const sourceVertices=sourceObj.split('\n').filter(l=>l.startsWith('v ')).map(l=>l.slice(2).split(' ').map(Number));
   const terrain=await read(`${root}/prepared/terrain.json`),config=await read(`${root}/source/preparation/terrestrial.json`);
   assert.equal(terrain.faces.length,800);assert.equal(config.geometry.radiusKm*1000,radiusM);
-  const units=radiusM/config.geometry.radius,vertices=new Set(),edges=new Map();let maxErrorM=0,volume=0;
+  const units=radiusM/config.geometry.radius,vertices=new Set<string>(),edges=new Map<string,{incidents:number;winding:number}>();let maxErrorM=0,volume=0;
   for(const f of terrain.faces){
-   const ps=f.vertices.map(p=>p.map(v=>v*units));
+   const ps=f.vertices.map((p: number[])=>p.map((v: number)=>v*units));
    for(let i=0;i<3;i++){
     const a=ps[i].join(','),b=ps[(i+1)%3].join(','),key=[a,b].sort().join(';');vertices.add(a);
     const e=edges.get(key)??{incidents:0,winding:0};e.incidents++;e.winding+=a<b?1:-1;edges.set(key,e);
@@ -36,10 +38,10 @@ export function testCatalogNucleus(id){
   const root=resolve('src/planets',id),config=await read(`${root}/source/preparation/terrestrial.json`),surfaces=await read(`${root}/prepared/surfaces.json`),content=await read(`${root}/source/content/object.json`);
   assert.equal(surfaces.surfaces.length,1);const s=surfaces.surfaces[0];assert.equal(s.missingPixels,config.raster.width*config.raster.height);assert.match(s.appearance,/no-imagery grid/);assert.equal(s.layout.faceCount,800);
   assert.equal(config.geometry.radialTerrain.sourceLighting.uniformFlood,true);
-  for(const name of ['shadows','orbit'])assert.equal(content.settings.controls.find(c=>c.name===name).checked,false);
+  for(const name of ['shadows','orbit'])assert.equal(content.settings.controls.find((c: { name: string; })=>c.name===name).checked,false);
  });
  test(`${id}: source closure and fixed illustrative attitude`,async()=>{
-  const root=resolve('src/planets',id),descriptor=await read(`${root}/object.json`),ref=descriptor.properties.recipe.sources.find(r=>r.id==='rotation');
+  const root=resolve('src/planets',id),descriptor=await read(`${root}/object.json`),ref=descriptor.properties.recipe.sources.find((r: { id: string; })=>r.id==='rotation');
   const source=await createSourceManifest({planetId:id,planetName:id,sourceRoot:`${root}/source`});await source.verify();
   const a=await readAuthoredRotation(root,ref,2461286.5),b=await readAuthoredRotation(root,ref,2462286.5);assert.deepEqual(a,b);assert.equal(a.spinRateRadPerDay,0);
  });

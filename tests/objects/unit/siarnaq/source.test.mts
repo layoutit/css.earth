@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -6,7 +7,7 @@ import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layer
 import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 
 const root = new URL('../../../../src/planets/siarnaq/source/', import.meta.url);
-const read = async path => JSON.parse(await readFile(new URL(path, root)));
+const read = async (path: string|URL) => JSON.parse((await readFile(new URL(path, root))).toString('utf8'));
 
 test('Siarnaq sampled envelope preserves figure proportions and adopted volume', async () => {
   const recipe = await read('preparation/terrestrial.json');
@@ -25,7 +26,7 @@ test('Siarnaq sampled envelope preserves figure proportions and adopted volume',
   assert.ok(Math.abs(spans[2] / spans[0] - 344 / 465) < 0.015);
   // The adopted projected envelope is asymmetric; a centered ellipsoid cannot
   // substitute for it while preserving this source feature.
-  assert.ok(shape.sample(180, 0) / shape.sample(0, 0) > 1.1);
+  assert.ok(required(shape.sample(180, 0)) / required(shape.sample(0, 0)) > 1.1);
   const adoptedVolume = 4 * Math.PI * 19500 ** 3 / 3;
   assert.ok(Math.abs(topology.signedVolumeCubicMeters / adoptedVolume - 1) < 0.01);
 });

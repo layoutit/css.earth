@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -7,7 +8,7 @@ const root=new URL('../../../../src/planets/sycorax/source/',import.meta.url);
 test('Sycorax radius table preserves independently derived physical-axis anchors',async()=>{
  const config=JSON.parse(await readFile(new URL('preparation/terrestrial.json',root),'utf8'));
  const shape=parsePdsRadiusTable(await readFile(new URL('shape/ellipsoid.tab',root),'utf8'),config.geometry.radialTerrain.grid);
- for(const [lon,lat,metres] of [[0, 0, 84502.51926994204], [90, 0, 75660.57835448168], [0, 90, 75660.57835448168], [0, -90, 75660.57835448168]]) assert.ok(Math.abs(shape.sample(lon,lat)-metres)<.001,`${lon},${lat}`);
+ for(const [lon,lat,metres] of [[0, 0, 84502.51926994204], [90, 0, 75660.57835448168], [0, 90, 75660.57835448168], [0, -90, 75660.57835448168]] as const) assert.ok(Math.abs(required(shape.sample(lon,lat))-metres)<.001,`${lon},${lat}`);
  const topology=validateClosedMesh(Uint32Array.from(shape.indices.flat()),shape.positions);
  assert.equal(topology.eulerCharacteristic,2);assert.equal(topology.components,1);
 });
