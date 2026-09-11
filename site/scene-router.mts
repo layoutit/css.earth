@@ -255,8 +255,9 @@ export function createSceneRouter({
           return mount.destinations!.select(place);
         },
       });
+      shell.setFeatures?.(mount.features ?? null);
       shell.setCamera?.(mount);
-      session.lifetime.onDispose(() => shell.setCamera?.(null));
+      session.lifetime.onDispose(() => { shell.setCamera?.(null); shell.setFeatures?.(null); });
       sceneState = "ready";
       if (mount.datasets) session.lifetime.onDispose(mount.datasets.subscribe(() => {
         if (active !== session || pending || sceneState !== 'ready') return;

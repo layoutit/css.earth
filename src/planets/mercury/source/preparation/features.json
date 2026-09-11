@@ -48,6 +48,27 @@
     "limbCosine": 0.12
   },
   "outline": {
-    "pieces": 64
+    "pieces": 256
+  },
+  "traces": {
+    "directory": "features/tectonic",
+    "archive": "global-tectonic-map.zip",
+    "members": {
+      "shapes": "Combined_Tectonic_Map.shp",
+      "attributes": "Combined_Tectonic_Map.dbf",
+      "projection": "Combined_Tectonic_Map.prj"
+    },
+    "radiusM": 2440000,
+    "classField": "Fault_Type",
+    "classes": {
+      "RU": "Contractional Landform",
+      "DO": "Contractional Landform",
+      "FO": "Extensional Landform"
+    },
+    "paddingDeg": 0.3,
+    "insideFraction": 0.9,
+    "maximumTraces": 6,
+    "minimumLengthShare": 0.25,
+    "maximumVertices": 240
   }
 }

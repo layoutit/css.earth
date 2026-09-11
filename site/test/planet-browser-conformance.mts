@@ -818,6 +818,25 @@ async function proveSurfaceFeatures(browser: Browser, planet: ObjectEntry, profi
     await page.mouse.move(labels.stage.left + 8, labels.stage.top + 8);
     await page.waitForFunction(() => { const tooltip = document.querySelector("[data-feature-tooltip]"); return tooltip instanceof HTMLElement && tooltip.hidden; }, null, { timeout: 5000 });
     assert.equal((await stats(planet.id)).outlinePieces, 0, `${planet.id}: leaving the label retires the outline`);
+    // Clicking a label through the input surface pins it and flies the camera over it; the pin survives the density gate.
+    await page.mouse.click((target.left + target.right) / 2, (target.top + target.bottom) / 2);
+    await page.waitForFunction(id => { const state = window.__cssearthTest.object(id).runtime.surfaceFeatures(); return state?.pinned === id && state.flying === false; }, target.id, { timeout: 15000 });
+    const pinned = await stats(planet.id);
+    assert.ok(pinned.visible >= 1 && pinned.outlinePieces > 0, `${planet.id}: the selected feature keeps its label and outline`);
+    // The sidebar search lists named features and selecting a row flies to it.
+    await page.locator(".planet-sidebar-search").fill(target.text);
+    const row = page.locator(".planet-feature-results li:not([hidden]) button").first();
+    await row.waitFor({ timeout: 10000 });
+    assert.ok((await row.innerText()).includes(target.text), `${planet.id}: the search lists the named feature`);
+    await row.click();
+    await page.waitForFunction(id => { const state = window.__cssearthTest.object(id).runtime.surfaceFeatures(); return state?.pinned === id && state.flying === false; }, target.id, { timeout: 15000 });
+    await page.locator(".planet-sidebar-search").fill("");
+    await page.keyboard.press("Escape");
+    // A plain click on the surface that picks no label clears the selection.
+    const clear = await page.evaluate(() => { const stage = window.__cssearthTest.element(".planet-stage").getBoundingClientRect(); return { x: stage.left + stage.width * 0.62, y: stage.bottom - 60 }; });
+    await page.mouse.click(clear.x, clear.y);
+    await page.waitForFunction(id => window.__cssearthTest.object(id).runtime.surfaceFeatures()?.pinned === null, planet.id, { timeout: 5000 });
+    await page.evaluate(({ id, zoom }) => window.__cssearthTest.object(id).camera.setState({ zoom }), { id: planet.id, zoom: definition.camera.maximumZoom });
     // Labels follow the prepared spin without adding DOM.
     await enableMotion(page, planet.id);
     await page.waitForTimeout(600);

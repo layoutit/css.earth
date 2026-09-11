@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8cc6430abd14ce7b3186bad726b0b7cf93c7eb2b40dd38da19001a8c3ca188b5"
+    "sha256": "09556aea2b4c8b5b9eb5499e0be636bc45764b64fe403d52c9ca601bb91d114b"
   },
   "id": "mercury",
   "properties": {
@@ -99,7 +99,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "42b2b0d2d4930214b40e5715a1c836ff9c263e865713cace07e90ac5ede46311"
+          "sha256": "44c6ae47afafc1446e186fdb253249783c1574a025d34e2c7122ac83678176f5"
         },
         {
           "id": "navigation",
@@ -109,7 +109,7 @@
         {
           "id": "features",
           "path": "source/preparation/features.json",
-          "sha256": "1af490a4216880b35b52d2e47377532313fc59dc8fb1ec53647e02367b8d8fe0"
+          "sha256": "e16079e7a44b9056e02327d8c142109aedd59384dece6c00454f605c754a33b1"
         }
       ],
       "shape": {
@@ -169,7 +169,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cb111bc297eadc59ad3fc9d6de13fd670ade6214972db1c039ddf142552bdb93"
+        "sha256": "5f2eafe44869a3937e8375f5136a095f8f755720c6bf918cf7ce856bc87bdad8"
       }
     },
     "catalog": {

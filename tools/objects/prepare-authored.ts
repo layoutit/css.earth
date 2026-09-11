@@ -174,6 +174,11 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     meshRadiusUnits: solarSource.bodyRadiusUnits / (definition as unknown as { camera: { sceneScale: number } }).camera.sceneScale, tree: (definition as unknown as { tree: Parameters<typeof prepareSurfaceFeatures>[0]['tree'] }).tree,
     declaredLensIds: descriptor.recipe.surfaces.flatMap(surface => surface.lenses.map(lens => lens.id)) }) : null;
   const runtime = features ? { ...(definition as unknown as Record<string, unknown>), features: features.plan } : definition;
+  if (features) {
+    // The shell renders retained search rows for named features when the panel content declares them.
+    const contentPath = resolve(outputDirectory, 'content.json'), contentDocument = record(JSON.parse(await readFile(contentPath, 'utf8')), 'prepared content');
+    await writeFile(contentPath, `${JSON.stringify({ ...contentDocument, features: { searchLabel: 'Named features', description: `${features.plan.catalog.count.toLocaleString('en')} IAU names from the Gazetteer of Planetary Nomenclature` } })}\n`);
+  }
   await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(runtime)}\n`);
   await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
     manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),

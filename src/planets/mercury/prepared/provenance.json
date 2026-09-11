@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "94dd2dcae85163f9c27691c02f1b16f1dcd5b1bef668e8163a2760562bc26cf7"
+    "sha256": "ed88f0380d0c8905363a8c7d6e1c1da6bddf74798c2530d59f1eeb7d3d76e8e3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "aa33d5c45083c7111a12357abed2c6823a3447c20fcafe35fb0d7fc19e80f520"
+    "bindingsSha256": "867672765ca42de37db80c5aeded776c2ec7725b0441ec3ddfd619cd2cb83107"
   },
   "recipes": [
     {
@@ -680,7 +680,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "1af490a4216880b35b52d2e47377532313fc59dc8fb1ec53647e02367b8d8fe0",
+      "sha256": "e16079e7a44b9056e02327d8c142109aedd59384dece6c00454f605c754a33b1",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -731,7 +731,28 @@
           "limbCosine": 0.12
         },
         "outline": {
-          "pieces": 64
+          "pieces": 256
+        },
+        "traces": {
+          "directory": "features/tectonic",
+          "archive": "global-tectonic-map.zip",
+          "members": {
+            "shapes": "Combined_Tectonic_Map.shp",
+            "attributes": "Combined_Tectonic_Map.dbf",
+            "projection": "Combined_Tectonic_Map.prj"
+          },
+          "radiusM": 2440000,
+          "classField": "Fault_Type",
+          "classes": {
+            "RU": "Contractional Landform",
+            "DO": "Contractional Landform",
+            "FO": "Extensional Landform"
+          },
+          "paddingDeg": 0.3,
+          "insideFraction": 0.9,
+          "maximumTraces": 6,
+          "minimumLengthShare": 0.25,
+          "maximumVertices": 240
         }
       }
     }
@@ -1118,6 +1139,65 @@
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mercury-tectonic-traces-source",
+      "path": "features/tectonic/manifest.json",
+      "origin": "Repository-authored pin of the tectonic map snapshot: record page, version, licence evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the tectonic archive."
+      },
+      "sha256": "4e4e306332d4a0f9d907780abb14a52583e9349602407d689c681ffa50dc8cc4",
+      "bytes": 1116,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "klimczak-mercury-global-tectonic-map",
+      "path": "features/tectonic/global-tectonic-map.zip",
+      "origin": "https://data.mendeley.com/public-files/datasets/p43b9wttpj/files/cb3689ee-0937-4010-973c-6a79b053341f/file_downloaded",
+      "credit": "Christian Klimczak, Paul Byrne and Kelsey Crane, A Global Tectonic Map of Mercury, Mendeley Data, DOI 10.17632/p43b9wttpj.2",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "features/tectonic/manifest.json"
+      ],
+      "acquisition": "Downloaded the \"Global tectonic map.zip\" file of version 2 of the Mendeley Data record on 2026-09-11; the archive holds the Combined_Tectonic_Map shapefile members and Esri metadata.",
+      "redistribution": "Committed CC-BY-4.0 snapshot with credit and licence link; the pinned bytes identify the exact version 2 file.",
+      "title": "A Global Tectonic Map of Mercury (Klimczak, Byrne and Crane)",
+      "displayCredit": "Klimczak, Byrne and Crane · Mendeley Data",
+      "sourceUrl": "https://data.mendeley.com/datasets/p43b9wttpj/2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-17632-p43b9wttpj-2",
+            "role": "material",
+            "evidence": "src/planets/mercury/source/features/tectonic/manifest.json@2a491c27cde809cb7b26b95a967b07b949b17d11#/inputs/0"
+          }
+        ]
+      },
+      "sha256": "1df40ad95a5e8de90b6add4cb3d849f61697c78f872e3bf0bf46bb67234c2f7e",
+      "bytes": 6908708,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/tectonic/global-tectonic-map.zip",
+        "url": "https://data.mendeley.com/public-files/datasets/p43b9wttpj/files/cb3689ee-0937-4010-973c-6a79b053341f/file_downloaded"
+      },
       "verificationOperations": []
     }
   ],
@@ -1832,8 +1912,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9421,
-          "sha256": "87f35aa2fc3a3eb8965eac52564e70d9594099495518efe2e38f5954cb732990",
+          "bytes": 9540,
+          "sha256": "15a159286e8a51160ebaf795b7d381986f22813917679e68d90de2389587ce42",
           "verification": "bytes-verified"
         }
       ],
@@ -1900,7 +1980,7 @@
       "recipe": "features",
       "selector": "",
       "parents": [],
-      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh and rank features by diameter.",
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1916,13 +1996,15 @@
       "inputs": [
         "mercury-surface-features-source",
         "usgs-gazetteer-mercury-nomenclature-center-pts",
-        "mercury-surface-minimap-frame"
+        "mercury-surface-minimap-frame",
+        "mercury-tectonic-traces-source",
+        "klimczak-mercury-global-tectonic-map"
       ],
       "outputs": [
         {
           "url": "/scenes/mercury/mercury-features.json",
-          "bytes": 497024,
-          "sha256": "039e46dac74f9ea7888e661778ddaeb729e069dfcfac1583a261dc64b9ee25c8",
+          "bytes": 753870,
+          "sha256": "8d8cee3d6c447996c2732269b939083ae77bdc6228d5e4ba8256495a556fa000",
           "verification": "asset-manifest-pin"
         }
       ],

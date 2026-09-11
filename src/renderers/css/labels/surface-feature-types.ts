@@ -19,12 +19,16 @@ export interface PreparedSurfaceFeaturePlan {
  * or the Gazetteer's published extent as a closed polygon for everything else. */
 export type SurfaceFeatureOutline =
   | { readonly kind: 'circle'; readonly center: readonly [number, number, number]; readonly east: readonly [number, number, number]; readonly north: readonly [number, number, number] }
-  | { readonly kind: 'box'; readonly points: readonly (readonly [number, number, number])[] };
+  | { readonly kind: 'box'; readonly points: readonly (readonly [number, number, number])[] }
+  /** Mapped structural traces associated with the feature: open polylines on the sphere. */
+  | { readonly kind: 'trace'; readonly paths: readonly (readonly (readonly [number, number, number])[])[] };
 export interface PreparedSurfaceFeature {
   readonly id: string; readonly name: string; readonly kind: SurfaceFeatureKind; readonly type: string; readonly code: string;
   readonly diameterKm: number; readonly longitudeDeg: number; readonly latitudeDeg: number;
   readonly anchorUnits: readonly [number, number, number]; readonly normal: readonly [number, number, number]; readonly radiusUnits: number;
   readonly outline: SurfaceFeatureOutline;
+  /** Prepared search keys: the normalised name and clean name, and the normalised type. */
+  readonly searchNames: readonly string[]; readonly searchContext: string;
   readonly origin: string; readonly approved: string; readonly quad: string; readonly link: string;
 }
 export interface PreparedSurfaceFeatureCatalog {
@@ -35,9 +39,17 @@ export interface PreparedSurfaceFeatureCatalog {
 export interface SurfaceFeatureLayerStats {
   readonly loaded: boolean; readonly count: number; readonly visible: number; readonly eligible: number; readonly hovered: string | null; readonly pinned: string | null;
   readonly enabled: boolean; readonly playing: boolean; readonly frames: number; readonly error: string | null;
-  readonly zoomGate: boolean; readonly outlinePieces: number;
+  readonly zoomGate: boolean; readonly outlinePieces: number; readonly flying: boolean;
 }
-export interface SurfaceFeatureLayerRuntime {
+/** The shell-facing surface: the loaded catalogue and selection by feature id (pin, caption, outline, flight). */
+export interface SurfaceFeatureNavigationRuntime {
+  catalog(): PreparedSurfaceFeatureCatalog | null;
+  loaded(): Promise<PreparedSurfaceFeatureCatalog>;
+  select(id: string): Promise<{ completed: boolean }>;
+  selected(): string | null;
+  clear(): void;
+}
+export interface SurfaceFeatureLayerRuntime extends SurfaceFeatureNavigationRuntime {
   readonly root: HTMLElement;
   publish(view: { readonly projection?: import('../rendering/physical-projection.js').PhysicalProjection; readonly levelOfDetail?: { readonly stage: string } | null; readonly zoom?: number }): void;
   setLens(selection: { readonly id: string | null }): void;
