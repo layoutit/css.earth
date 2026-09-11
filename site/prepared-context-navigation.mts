@@ -11,7 +11,7 @@ export type PreparedFocusPresentation = VolumeLensState & {
   selectLens(lensId: string): void;
   setStarsVisible?(enabled: boolean): void;
 };
-interface FocusCallbacks {
+export interface FocusCallbacks {
   onFocusChange?(url: string): void;
   onFlightStart?(): void;
   onFocusContentChange?(record: PreparedCatalogObject | null, sources: readonly SpatialCatalogSource[], presentation: PreparedFocusPresentation | null): void;

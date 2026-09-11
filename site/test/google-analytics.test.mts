@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
 
+import { required } from './navigation-test-values.mts';
 import { googleAnalyticsBootstrap } from "../google-analytics.mts";
 
 test("analytics ignores local visits and loads on css.earth", () => {
@@ -21,16 +22,17 @@ test("analytics ignores local visits and loads on css.earth", () => {
       production.appendedTags[0].src,
       "https://www.googletagmanager.com/gtag/js?id=G-XV72TXWTM5",
     );
-    assert.equal(production.window.dataLayer.length, 2);
+    assert.equal(required(production.window.dataLayer).length, 2);
   }
 });
 
-function runAnalyticsBootstrap(hostname) {
-  const appendedTags = [];
-  const window = { location: { hostname } };
+function runAnalyticsBootstrap(hostname: string) {
+  type Tag = { tagName: string; async?: boolean; src?: string };
+  const appendedTags: Tag[] = [];
+  const window: { location: { hostname: string }; dataLayer?: unknown[]; "ga-disable-G-XV72TXWTM5"?: boolean } = { location: { hostname } };
   const document = {
-    createElement: (tagName) => ({ tagName }),
-    head: { appendChild: (tag) => appendedTags.push(tag) },
+    createElement: (tagName: string): Tag => ({ tagName }),
+    head: { appendChild: (tag: Tag) => appendedTags.push(tag) },
   };
   runInNewContext(googleAnalyticsBootstrap, {
     Date,

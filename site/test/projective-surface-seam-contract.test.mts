@@ -1,23 +1,42 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { SourceEvidence } from "./source-evidence-values.mts";
+import { requireFiniteNumber } from "../../tools/source-values.mts";
 
 import { readFile } from "node:fs/promises";
 import { loadObjectContent } from "./load-object-content.mts";
 import { prepareBandedEllipsoid } from "../../tools/objects/giant-layers/geometry.mts";
 
-const PLANET_SURFACE_SEAMS = {};
+interface SeamContract { model: string; seamBleed: number; presentationOverlap: number; rasterGutter: number; rasterOverscan: number; runtimeEdgeDiscovery: boolean; }
+function readSeam(value: unknown): SeamContract {
+  const evidence = SourceEvidence.parse(value);
+  const runtimeEdgeDiscovery = evidence.field("runtimeEdgeDiscovery");
+  assert.equal(typeof runtimeEdgeDiscovery, "boolean");
+  if (typeof runtimeEdgeDiscovery !== "boolean") throw new TypeError("Invalid seam runtime contract");
+  return { model: evidence.text("model"), runtimeEdgeDiscovery,
+    seamBleed: requireFiniteNumber(evidence.field("seamBleed")),
+    presentationOverlap: requireFiniteNumber(evidence.field("presentationOverlap")),
+    rasterGutter: requireFiniteNumber(evidence.field("rasterGutter")),
+    rasterOverscan: requireFiniteNumber(evidence.field("rasterOverscan")) };
+}
+const PLANET_SURFACE_SEAMS: Record<string, SeamContract> = {};
 for (const id of ["mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune"]) {
-  const scene = JSON.parse(await readFile(new URL("../../src/planets/" + id + "/prepared/scene.json", import.meta.url), "utf8"));
+  const scene = SourceEvidence.parse(JSON.parse(await readFile(new URL("../../src/planets/" + id + "/prepared/scene.json", import.meta.url), "utf8"))).value;
   const loaded = await loadObjectContent(id);
   const geometry = loaded.descriptor.properties.recipe.sources.some(source => source.id === "geometry")
     ? await loaded.source("geometry") : null;
-  if (geometry?.schema === "cssearth-banded-ellipsoid@1") {
+  const recipe = geometry === null ? null : SourceEvidence.parse(geometry);
+  if (recipe?.field("schema") === "cssearth-banded-ellipsoid@1") {
     // The source parameters must generate the accepted retained geometry, not
     // merely declare a seam-policy label beside unrelated prepared transforms.
     const actual = prepareBandedEllipsoid(geometry);
     const { schema, ...prepared } = scene;
     assert.deepEqual(actual, prepared, id + ": seam parameters must generate the actual leaves");
-    const { seamBleed, overlap, gutter, overscan } = geometry.surface;
+    const surface = recipe.child("surface");
+    const seamBleed = requireFiniteNumber(surface.field("seamBleed"));
+    const overlap = requireFiniteNumber(surface.field("overlap"));
+    const gutter = requireFiniteNumber(surface.field("gutter"));
+    const overscan = requireFiniteNumber(surface.field("overscan"));
     PLANET_SURFACE_SEAMS[id] = {
       model: overscan > 0 ? "prepared-zero-seam-bleed-with-matched-raster-and-compositor-overlap"
         : "prepared-zero-seam-bleed-with-compositor-overlap",
@@ -25,7 +44,7 @@ for (const id of ["mercury", "venus", "earth", "mars", "jupiter", "saturn", "ura
       runtimeEdgeDiscovery: false,
     };
   } else {
-    PLANET_SURFACE_SEAMS[id] = (scene.preparedSurface ?? scene.body ?? scene.surface).seamRepair;
+    PLANET_SURFACE_SEAMS[id] = readSeam(SourceEvidence.parse(scene.preparedSurface ?? scene.body ?? scene.surface).field("seamRepair"));
   }
 }
 

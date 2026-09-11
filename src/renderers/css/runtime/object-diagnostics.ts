@@ -19,6 +19,15 @@ export interface ObjectDiagnosticsOptions {
   startupDecodedAssets: number; pageLayers: ReadonlyMap<string, PageLayerRuntime>; getCurrentView(): ObjectRuntimeView | null;
 }
 
+export type ObjectRuntimeDiagnostics = ReturnType<typeof publishObjectDiagnostics>;
+const publishedDiagnostics = new WeakMap<Window, Map<string, ObjectRuntimeDiagnostics>>();
+
+/** Read only diagnostics still owned by the currently published object mount. */
+export function readObjectDiagnostics(target: Window, id: string): ObjectRuntimeDiagnostics | undefined {
+  const diagnostics = publishedDiagnostics.get(target)?.get(id);
+  return diagnostics && Reflect.get(target, `__${id}`) === diagnostics ? diagnostics : undefined;
+}
+
 export function publishObjectDiagnostics({ stage, definition, mounted, orbit, cubicSky, heliocentric, selection, controls, resources, playback, lifetime, context, initialSelection, startupDecodedAssets, pageLayers, getCurrentView }: ObjectDiagnosticsOptions) {
       const target = stage.ownerDocument.defaultView, key = `__${definition.id}`;
       if (!target) throw new Error("Object diagnostics require the mounted window.");
@@ -94,6 +103,14 @@ export function publishObjectDiagnostics({ stage, definition, mounted, orbit, cu
         material: Object.freeze({ state: () => Object.freeze({ ...observe().materials }) }),
       });
       Reflect.set(target, key, diagnostics);
-      context.own(() => { if (Reflect.get(target, key) === diagnostics) Reflect.deleteProperty(target, key); });
+      let entries = publishedDiagnostics.get(target);
+      if (!entries) { entries = new Map(); publishedDiagnostics.set(target, entries); }
+      entries.set(definition.id, diagnostics);
+      context.own(() => {
+        if (Reflect.get(target, key) === diagnostics) Reflect.deleteProperty(target, key);
+        const current = publishedDiagnostics.get(target);
+        if (current?.get(definition.id) === diagnostics) current.delete(definition.id);
+        if (current?.size === 0) publishedDiagnostics.delete(target);
+      });
       return diagnostics;
     }

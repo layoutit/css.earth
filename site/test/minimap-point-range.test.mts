@@ -29,7 +29,7 @@ test('indexed candidates preserve exact 3D visible points across physical scales
     const anchor = prepared.points[Math.floor(random() * prepared.points.length)].positionM;
     const radius = 10 ** (3 + random() * 20);
     const center = anchor.map(v => v + (random() - .5) * radius * 3);
-    const visible = index => Math.hypot(...prepared.points[index].positionM.map((v, i) => v - center[i])) / radius < 1;
+    const visible = (index: number) => Math.hypot(...prepared.points[index].positionM.map((v, i) => v - center[i])) / radius < 1;
     const [first, end] = minimapPointRange(prepared.points, prepared.pointOrderX, center[0], radius);
     const indexed = prepared.pointOrderX.slice(first, end).filter(visible).sort((a, b) => a - b);
     assert.deepEqual(indexed, prepared.points.map((_, i) => i).filter(visible));

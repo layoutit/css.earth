@@ -1,4 +1,18 @@
+import { createTestPage } from './browser-observations.mts';
+import type { Page } from 'playwright';
 import assert from 'node:assert/strict';
+import { OBJECTS } from '../objects.mts';
+import type { ObjectEntry } from '../object-schema.mts';
+import { required } from './navigation-test-values.mts';
+
+type Snapshot = Awaited<ReturnType<typeof read>>;
+type SnapshotName = 'initial' | 'nearRotated' | 'heliosphere' | 'heliosphereRotated' | 'nearStars' | 'transition' | 'distantStars' | 'translated' | 'galaxy' | 'galaxyRotated' | 'returned';
+declare global { interface Window {
+  __environmentFrames: Record<string, ObjectEntry['worldFrame']>;
+  __environmentNodes: Element[];
+  __environmentFrameTimes: number[];
+  __environmentTrackFrames: boolean;
+} }
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
@@ -13,9 +27,10 @@ const opacityProfile = worldContext.volume.opacityProfile;
 const brightnessProfile = worldContext.volume.brightnessProfile;
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: process.env.PLAYWRIGHT_CHANNEL ?? 'chrome', headless: true });
-const errors = [], snapshots = {};
+const errors: string[] = [];
+const snapshots: Partial<Record<SnapshotName, Snapshot>> & { rotationTiming?: Awaited<ReturnType<typeof drag>> } = {};
 try {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  const page = await createTestPage(browser, { viewport: { width: 1440, height: 900 } });
   await page.addInitScript(() => performance.setResourceTimingBufferSize(10000));
   page.on('pageerror', error => errors.push(error.message));
   await page.goto(`${process.argv[2] ?? 'http://127.0.0.1:4210'}${reportedView}`, { waitUntil: 'domcontentloaded' });
@@ -25,10 +40,8 @@ try {
   await page.waitForFunction(() => window.__cssEarth?.activeObjectId === 'sun' && window.__sun?.ready, null, { timeout: 30000 });
   const motion = page.locator('input[name="motion"]');
   if (await motion.isChecked()) await motion.uncheck({ force: true });
-  await page.evaluate(async () => {
-    const { OBJECTS } = await import('/site/objects.mts');
-    window.__environmentFrames = Object.fromEntries(OBJECTS.map(object => [object.id, object.worldFrame]));
-  });
+  await page.evaluate(frames => { window.__environmentFrames = frames; },
+    Object.fromEntries(OBJECTS.map(object => [object.id, object.worldFrame] as const)));
   snapshots.initial = await read(page);
   assert.equal(Number(snapshots.initial.shell.shellOpacity), 0, 'shell is hidden inside the Solar System');
   assert.equal(snapshots.initial.shellFaces, shell.data.faces.length);
@@ -41,7 +54,7 @@ try {
   assert.equal(snapshots.initial.volumeOpacity, 0, 'the nearby view must not composite bright volume haze');
   assert.equal(snapshots.initial.volumeBrightness, brightnessProfile.nearOpacity);
   await page.screenshot({ path: resolve(output, 'mercury-reported.png') });
-  await page.evaluate(() => { window.__environmentNodes = [...document.querySelector('.prepared-universe').querySelectorAll('*')]; });
+  await page.evaluate(() => { window.__environmentNodes = [...window.__cssearthTest.element('.prepared-universe').querySelectorAll('*')]; });
   await drag(page, 190, -95);
   snapshots.nearRotated = await read(page);
   assert.notEqual(snapshots.nearRotated.skyTransform, snapshots.initial.skyTransform, 'NASA sky follows shared drag rotation');
@@ -71,7 +84,7 @@ try {
     ['nearStars', opacityProfile.fadeStartDistanceM / 2000, 0],
     ['transition', Math.sqrt(opacityProfile.fadeStartDistanceM * opacityProfile.fullDistanceM) / 1000, .5],
     ['distantStars', opacityProfile.fullDistanceM * 1.01 / 1000, 1],
-  ]) {
+  ] as const) {
     await scrollTo(page, distance);
     snapshots[name] = await read(page);
     assert.ok(Math.abs(snapshots[name].volumeOpacity - opacity) < 1e-6, `${name}: actual volume opacity follows prepared profile`);
@@ -84,7 +97,7 @@ try {
   }
   await scrollTo(page, Math.max(opacityProfile.fullDistanceM * 2, brightnessProfile.fadeStartDistanceM) / 1000);
   snapshots.translated = await read(page);
-  assertPhysicalTranslation(snapshots.distantStars, snapshots.translated);
+  assertPhysicalTranslation(required(snapshots.distantStars), snapshots.translated);
   await page.screenshot({ path: resolve(output, 'volume-translated.png') });
   await scrollTo(page, 1.2e18);
   await page.waitForTimeout(450);
@@ -111,7 +124,7 @@ try {
   assert.equal(snapshots.returned.roots, 1);
   assert.equal(snapshots.returned.volumeOpacity, 0);
   assert.ok([snapshots.initial, snapshots.transition, snapshots.distantStars, snapshots.returned]
-    .every((snapshot, index) => Math.abs(snapshot.volumeOpacity - [0, .5, 1, 0][index]) < 1e-6), 'native round trip traverses the complete prepared handoff');
+    .every((snapshot, index) => Math.abs(required(snapshot).volumeOpacity - [0, .5, 1, 0][index]) < 1e-6), 'native round trip traverses the complete prepared handoff');
   assert.equal(snapshots.returned.skyVisibility, 'visible');
   assert.equal(snapshots.returned.camera.pose.scene, snapshots.galaxyRotated.camera.pose.scene, 'return preserves shared observer orientation');
   assert.equal(new URL(page.url()).searchParams.has('overview'), false, 'approaching the Sun restores its card');
@@ -124,21 +137,21 @@ try {
   await browser.close();
 }
 
-async function settled(page) {
+async function settled(page: Page) {
   await page.waitForFunction(() => {
-    const state = window[`__${window.__cssEarth.activeObjectId}`].camera.stats().dragInertia;
+    const state = window.__cssearthTest.object().camera.stats().dragInertia;
     return !state.active && !state.wheelZoom.active;
   }, null, { timeout: 6000 });
   await page.waitForTimeout(80);
 }
 
-async function drag(page, dx, dy) {
+async function drag(page: Page, dx: number, dy: number) {
   await page.evaluate(() => {
-    window.__frameTimes = []; window.__trackFrames = true; let previous;
-    const frame = time => {
-      if (previous !== undefined) window.__frameTimes.push(time - previous);
+    window.__environmentFrameTimes = []; window.__environmentTrackFrames = true; let previous: number | undefined;
+    const frame = (time: number) => {
+      if (previous !== undefined) window.__environmentFrameTimes.push(time - previous);
       previous = time;
-      if (window.__trackFrames) requestAnimationFrame(frame);
+      if (window.__environmentTrackFrames) requestAnimationFrame(frame);
     };
     requestAnimationFrame(frame);
   });
@@ -149,25 +162,25 @@ async function drag(page, dx, dy) {
   }
   await page.waitForTimeout(160); await page.mouse.up(); await settled(page);
   return page.evaluate(() => {
-    window.__trackFrames = false;
-    const times = window.__frameTimes.slice(1).sort((a, b) => a - b);
+    window.__environmentTrackFrames = false;
+    const times = window.__environmentFrameTimes.slice(1).sort((a, b) => a - b);
     return { samples: times.length, medianMs: times[Math.floor(times.length / 2)], p95Ms: times[Math.floor(times.length * .95)], maxMs: times.at(-1) };
   });
 }
-async function read(page) {
+async function read(page: Page) {
   return page.evaluate(() => ({
     url: location.href,
-    distanceKm: window[`__${window.__cssEarth.activeObjectId}`].camera.state().distanceKilometers,
-    camera: window[`__${window.__cssEarth.activeObjectId}`].camera.state(),
-    world: window[`__${window.__cssEarth.activeObjectId}`].camera.captureWorldCamera(window.__environmentFrames[window.__cssEarth.activeObjectId]),
+    distanceKm: window.__cssearthTest.object().camera.state().distanceKilometers,
+    camera: window.__cssearthTest.object().camera.state(),
+    world: window.__cssearthTest.object().camera.captureWorldCamera(window.__cssearthTest.required(window.__environmentFrames[window.__cssearthTest.scene().activeObjectId], 'current world frame')),
     roots: document.querySelectorAll('.polycss-camera').length,
-    shell: { ...document.querySelector('.prepared-surface-shell').dataset },
+    shell: { ...window.__cssearthTest.html('.prepared-surface-shell').dataset },
     shellFaces: document.querySelectorAll('[data-shell-face]').length,
-    shellTransform: document.querySelector('.prepared-surface-shell-scene').style.transform,
+    shellTransform: window.__cssearthTest.html('.prepared-surface-shell-scene').style.transform,
     volumeLeaves: document.querySelectorAll('.css-volume-mesh > s:nth-child(3n + 1)').length,
     volumeImages: document.querySelectorAll('.css-volume-mesh > s').length,
     volumeCopiesValid: [...document.querySelectorAll('.css-volume-mesh')].every(mesh => {
-      const images = [...mesh.children];
+      const images = [...mesh.children].map(node => { if (!(node instanceof HTMLElement)) throw new Error('Volume image must be HTML.'); return node; });
       return images.length % 3 === 0 && images.every((node, index) => {
         const copy = index % 3, original = images[index - copy], alpha = Number(node.style.opacity);
         return node.style.transform === original.style.transform && node.style.backgroundImage === original.style.backgroundImage &&
@@ -175,21 +188,21 @@ async function read(page) {
             node.style.opacity === images[copy].style.opacity);
       });
     }),
-    volumeTransform: [...document.querySelectorAll('.css-volume-scene')].map(node => node.style.transform).join('|'),
-    volumeMatrices: [...document.querySelectorAll('.css-volume-scene')].map(node => Array.from(new DOMMatrix(node.style.transform).toFloat64Array())),
-    volumeOpacity: Number(document.querySelector('.prepared-volume-context').dataset.volumeOpacity),
-    volumeCompositeOpacity: Number(getComputedStyle(document.querySelector('.prepared-volume-context')).opacity),
-    volumeBrightness: Number(document.querySelector('.prepared-volume-image').dataset.volumeBrightness),
-    volumeImageOpacity: Number(getComputedStyle(document.querySelector('.prepared-volume-image')).opacity),
+    volumeTransform: [...document.querySelectorAll<HTMLElement>('.css-volume-scene')].map(node => node.style.transform).join('|'),
+    volumeMatrices: [...document.querySelectorAll<HTMLElement>('.css-volume-scene')].map(node => Array.from(new DOMMatrix(node.style.transform).toFloat64Array())),
+    volumeOpacity: Number(window.__cssearthTest.html('.prepared-volume-context').dataset.volumeOpacity),
+    volumeCompositeOpacity: Number(getComputedStyle(window.__cssearthTest.element('.prepared-volume-context')).opacity),
+    volumeBrightness: Number(window.__cssearthTest.html('.prepared-volume-image').dataset.volumeBrightness),
+    volumeImageOpacity: Number(getComputedStyle(window.__cssearthTest.element('.prepared-volume-image')).opacity),
     skyFaces: document.querySelectorAll('[data-sky-face]').length,
-    skyOpacity: Number(getComputedStyle(document.querySelector('.prepared-celestial-sky')).opacity),
-    skyVisibility: getComputedStyle(document.querySelector('.prepared-celestial-sky')).visibility,
-    skyTransform: document.querySelector('.prepared-celestial-sky-scene').style.transform,
+    skyOpacity: Number(getComputedStyle(window.__cssearthTest.element('.prepared-celestial-sky')).opacity),
+    skyVisibility: getComputedStyle(window.__cssearthTest.element('.prepared-celestial-sky')).visibility,
+    skyTransform: window.__cssearthTest.html('.prepared-celestial-sky-scene').style.transform,
     preparedRequests: performance.getEntriesByType('resource').filter(entry => /\/(heliosphere|milky-way)\/prepared\//.test(entry.name)).length,
   }));
 }
 
-function assertPhysicalTranslation(before, after) {
+function assertPhysicalTranslation(before: Snapshot, after: Snapshot) {
   for (const snapshot of [before, after]) {
     assert.equal(snapshot.skyVisibility, 'hidden', 'physical travel check must be entirely volume-owned');
     assert.equal(snapshot.volumeOpacity, 1);
