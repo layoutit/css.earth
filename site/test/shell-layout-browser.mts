@@ -22,16 +22,20 @@ const cases = [
 ];
 const selectors = [
   ".explorer-shell-header", ".explorer-shell-wordmark", ".maps-brand-button",
-  ".explorer-rail", ".explorer-rail-explore", ".planet-sidebar", ".planet-sidebar-search",
+  ".planet-sidebar", ".planet-sidebar-search", ".planet-search-categories",
   ".planet-information-panel", ".planet-information-panel .planet-title", ".planet-information-panel .planet-introduction",
   ".planet-panel-summary", ".planet-lens-icon", ".planet-stage", ".planet-viewport",
 ];
 
 try {
   for (const config of cases) {
+    // Phones and portrait tablets carry the sheet; every other case is the dock.
+    const sheetLayout = config.width <= 820 || config.height >= config.width;
     const page = await createTestPage(browser, {
       viewport: { width: config.width, height: config.height },
       deviceScaleFactor: config.density,
+      hasTouch: sheetLayout,
+      isMobile: sheetLayout,
     });
     await page.goto(`${baseUrl}/jupiter/`);
     await page.waitForFunction(() => document.querySelector(".planet-stage")?.getAttribute("aria-busy") === "false");
@@ -55,253 +59,205 @@ try {
     await page.screenshot({ path: `${output}/${config.name}-${captureBefore ? "before" : "after"}.png` });
     if (!captureBefore) {
       const measure = () => page.evaluate(() => {
-        const bodyStyle = getComputedStyle(document.body);
-        const box = (selector:string) => {const {x,y,width,height,left,top,right,bottom}=window.__cssearthTest.element(selector).getBoundingClientRect();return {x,y,width,height,left,top,right,bottom};};
+        const test = window.__cssearthTest;
+        const box = (selector:string) => {const {x,y,width,height,left,top,right,bottom}=test.element(selector).getBoundingClientRect();return {x,y,width,height,left,top,right,bottom};};
+        const shown = (selector:string) => test.element(selector).getClientRects().length > 0;
         const sidebar = box(".planet-sidebar");
+        const sidebarStyle = getComputedStyle(test.required(test.element(".planet-sidebar"), "sidebar style"));
         return {
           header: box(".explorer-shell-header"), stage: box(".planet-stage"), sidebar,
-          railHidden: window.__cssearthTest.element('.explorer-rail').getClientRects().length === 0,
-          searchInHeader: window.__cssearthTest.element('.planet-sidebar-search').closest('.explorer-shell-header') !== null,
-          searchInToolbar: window.__cssearthTest.element('.planet-sidebar-search').closest('.planet-search-toolbar') !== null,
+          searchInHeader: test.element('.planet-sidebar-search').closest('.explorer-shell-header') !== null,
           sidebarFrame: box(".planet-sidebar-frame"),
           viewport: box(".planet-viewport"), input: box(".planet-input-surface"),
           overlays: box(".planet-scene-overlays"), status: box(".planet-view-readout"),
-          sourcesHidden: window.__cssearthTest.element(".planet-attribution-footer").getClientRects().length === 0,
-          isolated: getComputedStyle(window.__cssearthTest.required(window.__cssearthTest.element('.planet-viewport'), 'computed style element')).isolation === 'isolate',
-          sceneParent: window.__cssearthTest.required(window.__cssearthTest.element('.planet-stage').parentElement,'scene parent').className,
-          uiInScene: window.__cssearthTest.element('.planet-stage').querySelectorAll('.planet-sidebar, .explorer-shell-header, .planet-view-readout, .space-minimap').length,
+          sourcesShown: shown(".planet-attribution-footer"),
+          minimapShown: document.querySelectorAll(".space-minimap").length > 0
+            && getComputedStyle(test.required(test.element(".space-minimap"), "minimap style")).display !== "none",
+          isolated: getComputedStyle(test.required(test.element('.planet-viewport'), 'computed style element')).isolation === 'isolate',
+          sceneParent: test.required(test.element('.planet-stage').parentElement,'scene parent').className,
+          uiInScene: test.element('.planet-stage').querySelectorAll('.planet-sidebar, .explorer-shell-header, .planet-view-readout, .space-minimap').length,
           wordmarkSlot: box(".explorer-shell-wordmark"),
-          wordmark: box(".maps-brand-button"),
-          versionCount: document.querySelectorAll(".planet-wordmark-version").length,
           search: box(".planet-sidebar-search-card"), toolbar: box(".planet-search-toolbar"),
-          github: box(".planet-github-link"), collapse: box(".planet-sidebar-collapse"), reportIssue: box(".planet-report-issue-link"),
-          projectLinks: box(".planet-project-links"), explorerActions: box(".explorer-rail"),
-          codepenCount: document.querySelectorAll(".planet-codepen-link").length,
-          categoryButtons: [...document.querySelectorAll(".planet-search-category")].map(node => node.getBoundingClientRect().toJSON()),
+          categories: box(".planet-search-categories"),
+          categoryCount: document.querySelectorAll(".planet-search-category").length,
+          githubShown: shown(".planet-header-link"), github: box(".planet-header-link"),
+          settings: box(".planet-settings-action"), spacecraft: box(".planet-spacecraft-toggle"),
+          clearShown: shown(".planet-sidebar-search-clear"),
           card: box(".planet-information-panel"),
-          inset: parseFloat(bodyStyle.getPropertyValue("--explorer-content-inset")),
-          titleInset: box(".planet-information-panel .planet-title").left - sidebar.left,
+          // The sheet declares its snap heights; the controller reads the same values.
+          sheetState: document.body.dataset.sheet ?? null,
+          peek: parseFloat(sidebarStyle.getPropertyValue("--sheet-peek")),
+          half: parseFloat(sidebarStyle.getPropertyValue("--sheet-half")),
           mountedLayers: document.querySelectorAll(".planet-stage > .polycss-camera").length,
           overflow: document.documentElement.scrollWidth > innerWidth,
+          pageScrolls: document.documentElement.scrollHeight > innerHeight + 1,
         };
       });
-      const check = (result:Awaited<ReturnType<typeof measure>>, { inset = 20 } = {}) => {
-        const mobile = config.width <= 820 || config.height >= config.width;
+      const check = (result:Awaited<ReturnType<typeof measure>>) => {
         const near = (actual:number, expected:number, label:string) => assert.ok(Math.abs(actual - expected) < 0.08,
           `${config.name}: ${label}: ${actual} != ${expected}`);
-        near(result.header.x, 16, "header left inset");
-        near(result.header.y, 8, "header top inset");
-        near(result.header.height, mobile ? 96 : 44, "header height");
-        near(result.search.y, result.header.y, "search and wordmark share the header row");
-        near(result.search.height, 44, "search field height");
-        near(result.search.right, mobile ? result.sidebar.right : result.sidebarFrame.right, "search ends at the sidebar wrapper edge");
-        assert.equal(result.railHidden, false, `${config.name}: About and Settings are restored`);
-        assert.equal(result.searchInHeader, true, `${config.name}: search belongs to the header`);
+        // The scene owns the whole window in every layout, with the shell over it.
         assert.deepEqual(result.stage, result.viewport, `${config.name}: scene fills its own viewport`);
         assert.deepEqual(result.input, result.viewport, `${config.name}: input uses the rendered viewport`);
         assert.deepEqual(result.overlays, result.viewport, `${config.name}: overlays share the bounded viewport`);
         assert.equal(result.sceneParent, 'planet-viewport');
         assert.equal(result.isolated, true);
         assert.equal(result.uiInScene, 0, `${config.name}: UI stays outside the 3D scene`);
-        near(result.stage.left, 0, "scene extends behind the floating sidebar");
+        near(result.stage.left, 0, "scene starts at the window edge");
         near(result.stage.width, config.width, "scene uses the full viewport width");
-        near(result.wordmarkSlot.x, 16, "wordmark aligns with the panel edge");
-        near(result.wordmarkSlot.y, 8, "wordmark top inset");
-        near(result.wordmarkSlot.height, 44, "wordmark row height");
-        assert.equal(result.searchInToolbar, false, "search is separate from the outside pill bar");
-        near(result.search.left - result.wordmarkSlot.right, 24, "wordmark to search gap");
-        assert.equal(result.codepenCount, 0, "CodePen is removed");
-        near(result.github.left - result.reportIssue.right, 8, "Report issue sits before GitHub");
-        near(result.github.height, 44, "GitHub pill height");
-        near(result.projectLinks.right, config.width - 12, "right pill bar inset");
-        assert.ok(result.projectLinks.left >= 12, "right pill bar stays on screen");
-        near(result.explorerActions.left, result.toolbar.left, "About and Settings start the left toolbar");
-        near(result.collapse.left - result.explorerActions.right, 8, "Collapse is last after Settings");
-        near(result.github.top, result.viewport.top + 8, "GitHub pill follows the viewport top");
-        assert.equal(result.categoryButtons.length, 0, "Category pills are removed");
-        assert.ok(result.toolbar.right <= config.width, "pill bar stays on screen");
-        if (mobile) {
-          near(result.toolbar.left, result.header.left, "pill bar aligns below the wordmark");
-          near(result.toolbar.top, result.search.bottom + 8, "toolbar actions occupy the second row");
+        near(result.stage.top, 0, "scene reaches the top of the window");
+        near(result.stage.bottom, config.height, "scene reaches the bottom of the window");
+        assert.equal(result.searchInHeader, true, `${config.name}: search belongs to the header`);
+        assert.equal(result.categoryCount, 4, `${config.name}: four category filters`);
+        assert.ok(result.search.width > 120, `${config.name}: the search field keeps a usable width`);
+        assert.equal(result.overflow, false, `${config.name}: no page overflow`);
+        assert.equal(result.mountedLayers, 1, `${config.name}: exactly one camera remains mounted`);
+        if (sheetLayout) {
+          // The sheet rests at peek over a scene that fills the screen.
+          assert.equal(result.pageScrolls, false, "the page itself never scrolls");
+          assert.equal(result.sheetState, "peek", "the sheet opens at its peek height");
+          near(result.sidebar.left, 0, "the sheet spans the window");
+          near(result.sidebar.width, config.width, "the sheet spans the window width");
+          near(result.sidebar.top, config.height - result.peek, "peek shows the declared height");
+          assert.ok(result.header.top >= 0 && result.header.bottom <= result.sidebar.top,
+            `${config.name}: the header clears the peeking sheet`);
+          assert.ok(result.categories.top > result.search.bottom, "filters sit under the search field");
+          assert.ok(result.status.bottom <= result.sidebar.top + .1, "the readout rides above the sheet");
+          assert.equal(result.minimapShown, false, "phones leave the scene uncovered");
+          assert.equal(result.sourcesShown, false, "phones carry credits in the card, not a strip");
+          assert.equal(result.githubShown, false, "the version link carries GitHub on phones");
+          assert.ok(result.settings.right <= result.search.right,
+            "Settings sits inside the search pill's end");
         } else {
-          assert.ok(result.toolbar.right + 8 <= result.projectLinks.left, "pill bar leaves room for the project links");
-          near(result.header.width, result.sidebarFrame.width, "header matches the content panel width");
-          near(result.toolbar.left - result.search.right, 8, "pills follow the independent header");
-        }
-        assert.equal(result.versionCount, 0);
-        near(result.sidebar.x, 16, "sidebar left margin");
-        if (!mobile) {
+          near(result.sidebar.x, 12, "panel left margin");
           near(result.sidebarFrame.width, 340, "independent panel width");
           near(result.sidebarFrame.right, result.sidebar.right, "panel has no outer border");
           near(result.card.top, result.sidebar.top, "content starts without an empty search row");
-          near(result.titleInset, inset, "title inset");
-          near(result.sidebarFrame.y, result.header.bottom + 12, "independent panel starts below the header");
-          near(result.sidebarFrame.bottom, result.sidebar.bottom, "panel ends with its content");
-          near(result.sidebar.y, result.header.bottom + 12, "scrolling content starts below the header");
-          assert.ok(result.sidebar.bottom <= config.height - 34 + .1, "panel stays above the footer with space below");
-          near(result.stage.top, 0, "scene uses the space from the hidden source strip");
-          near(result.stage.bottom, config.height, "scene fills the window behind the status overlay");
-          assert.equal(result.sourcesHidden, true, "source strip is hidden");
-          near(result.status.left, 0, "status uses the viewport width");
-        } else {
-          assert.ok(result.stage.top >= result.header.bottom, `${config.name}: scene starts below the header`);
-          assert.ok(result.stage.bottom <= result.sidebar.top + .1, `${config.name}: scene ends before the information panel`);
+          assert.ok(result.sidebar.top >= result.header.bottom, "the panel starts below the header");
+          assert.ok(result.sidebar.bottom <= config.height, "the panel stays inside the window");
+          assert.equal(result.minimapShown, true, "wider layouts keep the minimap");
+          assert.equal(result.sourcesShown, true, "wider layouts print the source credits");
+          assert.equal(result.githubShown, true, "wider layouts show the GitHub link");
+          assert.ok(result.categories.left >= result.search.right,
+            "filters follow the search field across the header");
+          assert.ok(config.height - result.status.bottom < 2, "the readout sits on the bottom strip");
+          assert.ok(result.status.right <= config.width + .1, "the readout stays on screen");
         }
-        assert.equal(result.overflow, false, `${config.name}: no page overflow`);
-        assert.equal(result.mountedLayers, 1, `${config.name}: exactly one camera remains mounted`);
       };
       check(await measure());
       assert.equal(await page.locator('.planet-sidebar-frame .explorer-shell-header').count(), 0, 'header is outside the panel');
-      if (config.width > 820 && config.width > config.height) {
-        assert.deepEqual(await page.locator('.planet-sidebar-frame').evaluate(node => {
-          const style = getComputedStyle(node);
-          return [style.borderRightWidth, style.borderRadius, style.overflow];
-        }), ['0px', '0px', 'hidden']);
-      }
-      assert.equal(await page.locator('.planet-search-toolbar > :last-child').getAttribute('class'), 'planet-sidebar-collapse');
-      assert.deepEqual(await page.locator('.planet-project-links').evaluate(node => {
-        return [...node.querySelectorAll('button:not([hidden]), a')].map(action => action.getAttribute('title') || (action.textContent??'').trim().split(' (')[0]);
-      }), ['Report issue', 'GitHub']);
-      const searchGeometry = await page.locator('.planet-sidebar-search-card').evaluate(node => {
-        const input = window.__cssearthTest.element('.planet-sidebar-search',node);
-        const icon = window.__cssearthTest.element('.planet-sidebar-view-all',node);
-        return { iconInset: icon.getBoundingClientRect().left - input.getBoundingClientRect().left,
-          textInset: getComputedStyle(window.__cssearthTest.required(input, 'computed style element')).paddingLeft };
-      });
-      assert.deepEqual(searchGeometry, { iconInset: 4, textInset: '41px' });
-      assert.equal(await page.locator('.planet-information-panel').evaluate(node => {
-        return window.__cssearthTest.element('.planet-breadcrumbs',node).getBoundingClientRect().top - node.getBoundingClientRect().top;
-      }), 16, 'breadcrumbs have 16px top padding');
-      const collapseBox = required(await page.locator('.planet-sidebar-collapse').boundingBox());
-      assert.equal(collapseBox.width, 44);
-      assert.equal(collapseBox.height, 44);
       const camera = required(await page.locator('.planet-stage > .polycss-camera').elementHandle());
-      for (const name of ['About', 'Settings']) {
-        const action = page.getByRole('button', { name, exact: true });
-        assert.equal(required(await action.boundingBox()).height, 44);
+      const sheetTop = () => page.evaluate(() => Math.round(document.querySelector('.planet-sidebar')!.getBoundingClientRect().top));
+      // A stop is reached once the sheet rests at its declared height, not when
+      // the state flips: the transform is still animating then.
+      const settle = (expected: 'peek' | 'half' | 'full') => page.waitForFunction((state) => {
+          const element = document.querySelector('.planet-sidebar');
+          if (!element || document.body.dataset.sheet !== state) return false;
+          const style = getComputedStyle(element);
+          const visible = state === 'peek' ? parseFloat(style.getPropertyValue('--sheet-peek'))
+            : state === 'half' ? parseFloat(style.getPropertyValue('--sheet-half'))
+            : element.getBoundingClientRect().height;
+          return Math.abs(element.getBoundingClientRect().top - (innerHeight - visible)) < 1.5;
+      }, expected);
+      if (sheetLayout) {
+        // The grabber cycles the sheet from its resting height, and every stop
+        // keeps the scene mounted behind it.
+        const grabber = page.locator('.planet-sheet-handle');
+        await settle('peek');
+        const peekTop = await sheetTop();
+        await grabber.click();
+        await settle('half');
+        const halfTop = await sheetTop();
+        assert.ok(halfTop < peekTop, `${config.name}: half opens further than peek`);
+        await grabber.click();
+        await settle('full');
+        const fullTop = await sheetTop();
+        assert.ok(fullTop < halfTop, `${config.name}: full opens further than half`);
+        assert.ok(fullTop >= 0 && fullTop <= peekTop, `${config.name}: the open sheet stays on screen`);
+        assert.equal(await page.evaluate(() => {
+          const header = document.querySelector('.explorer-shell-header')!.getBoundingClientRect();
+          return document.querySelector('.planet-sidebar')!.getBoundingClientRect().top >= header.top;
+        }), true, `${config.name}: the search row stays reachable above the open sheet`);
+        await page.screenshot({ path: `${output}/${config.name}-sheet.png` });
+        await grabber.click();
+        await settle('peek');
+        assert.ok(Math.abs(await sheetTop() - peekTop) <= 2, `${config.name}: the grabber returns the sheet to peek`);
+        assert.equal(await camera.evaluate(node => node === document.querySelector('.planet-stage > .polycss-camera')), true,
+          `${config.name}: moving the sheet retains the camera`);
       }
       const search = page.locator('.planet-sidebar-search');
-      const searchBox = await search.boundingBox();
       const initialQuery = await search.inputValue();
-      await search.fill('');
-      assert.equal(await search.inputValue(), '');
-      assert.equal(await page.locator('.planet-information-panel').isVisible(), true,
-        `${config.name}: clearing search retains the selected object card`);
-      assert.equal(await page.locator('.planet-object-browser').isVisible(), false);
+      assert.equal(await page.locator('.planet-sidebar-search-clear').isVisible(), initialQuery.length > 0,
+        `${config.name}: clear appears only with a query`);
       await search.fill('Neptune');
       assert.equal(await page.locator('.planet-object-browser').isVisible(), true);
       assert.equal(await page.locator('.planet-information-panel').isVisible(), false);
-      await search.press('Escape');
-      const collapse = () => page.getByRole('button', { name: 'Collapse sidebar', exact: true }).click();
-      const expectExpanded = async () => {
-        assert.equal(await page.locator('.planet-sidebar').evaluate(node => window.__cssearthTest.htmlElement(node).inert), false);
-        assert.equal(await page.getByRole('button', { name: 'Collapse sidebar', exact: true }).getAttribute('aria-expanded'), 'true');
-        assert.equal(await camera.evaluate(node => node === document.querySelector('.planet-stage > .polycss-camera')), true,
-          `${config.name}: toggling retains the camera`);
-      };
-      await collapse();
-      assert.equal(await page.locator('.planet-sidebar').evaluate(node => window.__cssearthTest.htmlElement(node).inert), true);
-      assert.equal(await page.getByRole('button', { name: 'Expand sidebar', exact: true }).getAttribute('aria-expanded'), 'false');
-      assert.deepEqual(await search.boundingBox(), searchBox, `${config.name}: search stays in place`);
-      assert.equal(await search.inputValue(), initialQuery, `${config.name}: collapse preserves the search`);
-      const collapsed = await measure();
-      assert.equal(collapsed.viewport.left, 0);
-      assert.equal(collapsed.viewport.width, config.width);
-      assert.deepEqual(collapsed.input, collapsed.viewport);
-      assert.equal(await page.evaluate(() => document.elementFromPoint(120, 240)?.className), 'planet-input-surface',
-        `${config.name}: the collapsed sidebar does not intercept scene input`);
-      await page.screenshot({ path: `${output}/${config.name}-collapsed.png` });
-      await page.getByRole('button', { name: 'Expand sidebar', exact: true }).click();
-      await expectExpanded();
-      check(await measure());
-      for (const [name, selector] of [['About', '.explorer-about-panel'], ['Settings', '.explorer-settings-panel']]) {
-        await collapse();
-        await page.getByRole('button', { name, exact: true }).click();
-        await expectExpanded();
-        assert.equal(await page.locator(selector).isVisible(), true);
-        assert.equal(await search.isVisible(), true);
-        if (config.width > 820 && config.width > config.height) {
-          const sidebarBox = required(await page.locator('.planet-sidebar').boundingBox());
-          const panelBox = required(await page.locator(selector).boundingBox());
-          assert.ok(sidebarBox.height < config.height - 64, 'short panels do not fill the screen');
-          assert.ok(sidebarBox.height <= panelBox.height + 13, 'sidebar follows the selected panel content');
-        }
-        await page.keyboard.press('Escape');
+      assert.equal(await page.locator('.planet-sidebar-search-clear').isVisible(), true,
+        `${config.name}: a query offers to clear itself`);
+      if (sheetLayout) {
+        assert.equal(await page.evaluate(() => document.body.dataset.sheet), 'full',
+          `${config.name}: searching opens the sheet for its results`);
       }
-      await collapse();
-      await search.fill('Neptune');
-      await expectExpanded();
-      assert.equal(await page.locator('.planet-object-browser').isVisible(), true);
-      await search.press('Escape');
-      await collapse();
-      await page.getByRole('button', { name: 'Planets', exact: true }).click();
-      await expectExpanded();
-      assert.equal(await search.inputValue(), 'Planets');
-      await search.press('Escape');
-      const breadcrumbs = page.locator('.planet-information-panel .planet-breadcrumbs');
-      assert.deepEqual(await breadcrumbs.locator('li').allTextContents(), ['Milky Way', 'Solar System', 'Jupiter']);
-      assert.equal(await breadcrumbs.locator('[aria-current="page"]').textContent(), 'Jupiter');
-      await breadcrumbs.getByRole('button', { name: 'Milky Way', exact: true }).click();
-      assert.equal(await page.locator('[data-galactic-overview]').isVisible(), true);
-      await page.getByRole('link', { name: 'Browse Solar System', exact: true }).click();
-      assert.equal(await page.locator('[data-solar-system-results]').isVisible(), true);
-      await search.press('Escape');
-      // Search-result keyboard navigation skips breadcrumb ancestors.
+      await page.locator('.planet-sidebar-search-clear').click();
+      assert.equal(await search.inputValue(), '');
+      assert.equal(await page.locator('.planet-information-panel').isVisible(), true,
+        `${config.name}: clearing the search restores the selected card`);
+      const breadcrumbs = page.locator('.planet-information-panel .planet-breadcrumbs').first();
+      assert.deepEqual((await breadcrumbs.locator('li').allTextContents()).map(text => text.replace(/[»\s]+/gu, ' ').trim()),
+        ['Milky Way', 'Solar System'], `${config.name}: the card names its ancestors`);
+      assert.equal((await page.locator('.planet-information-panel .planet-title').first().textContent())?.trim(), 'Jupiter');
       await search.fill('Neptune');
       await search.press('ArrowDown');
-      assert.equal(await page.evaluate(() => document.activeElement?.classList.contains('planet-object-link')), true);
+      assert.equal(await page.evaluate(() => document.activeElement?.closest('.planet-object-browser') !== null), true,
+        `${config.name}: the arrow key moves into the results`);
       await search.press('Escape');
+      if (sheetLayout) {
+        await settle('peek');
+        assert.equal(await page.evaluate(() => document.body.dataset.sheet), 'peek',
+          `${config.name}: leaving search returns the sheet over the scene`);
+      }
       assert.equal(await camera.evaluate(node => node === document.querySelector('.planet-stage > .polycss-camera')), true);
       await camera.dispose();
-      const containment = await page.evaluate(() => {
-        const viewport = window.__cssearthTest.element('.planet-viewport');
+      const containment = await page.evaluate((sheetLayout) => {
+        const test = window.__cssearthTest;
+        const viewport = test.element('.planet-viewport');
         const bounds = viewport.getBoundingClientRect();
-        const input = window.__cssearthTest.element('.planet-input-surface');
-        const sidebar = window.__cssearthTest.element('.planet-sidebar');
+        const input = test.element('.planet-input-surface');
+        const sidebar = test.element('.planet-sidebar');
         const sidebarBounds = sidebar.getBoundingClientRect();
         const sceneTarget = document.elementFromPoint(bounds.right - 8, bounds.top + 8);
         const sidebarTarget = document.elementFromPoint(sidebarBounds.left + 30, sidebarBounds.top + 20);
-        const result:{sceneInput:boolean;sidebarInput:boolean;probeVisibleInside?:boolean;probeClippedOutside?:boolean;leftMarginOpen?:boolean;searchAboveScene?:boolean} = { sceneInput: input === sceneTarget, sidebarInput: sidebar.contains(sidebarTarget) };
+        const result:{sceneInput:boolean;sidebarInput:boolean;probeVisibleInside?:boolean;probeClippedOutside?:boolean;searchAboveScene?:boolean;probeHit?:string} = {
+          sceneInput: input === sceneTarget, sidebarInput: sidebar.contains(sidebarTarget) };
         if (bounds.top === 0) {
-          // Even an extreme-Z scene descendant must remain below the entire
-          // floating panel, while the exposed scene stays interactive.
+          // Even an extreme-Z scene descendant must remain below the shell,
+          // while the exposed scene stays interactive.
           const probe = document.createElement('div');
           probe.style.cssText = 'position:absolute;inset:0;pointer-events:auto;transform:translateZ(1000000px);z-index:2147483647';
-          window.__cssearthTest.element('.planet-scene-overlays').append(probe);
+          test.element('.planet-scene-overlays').append(probe);
           try {
-            result.probeVisibleInside = document.elementFromPoint(sidebarBounds.right + 20, sidebarBounds.top + 20) === probe;
+            // The exposed scene lies beside a docked panel, and above a sheet.
+            const headerBounds = test.element('.explorer-shell-header').getBoundingClientRect();
+            const [probeX, probeY] = sheetLayout
+              ? [sidebarBounds.left + sidebarBounds.width / 2, (headerBounds.bottom + sidebarBounds.top) / 2]
+              : [sidebarBounds.right + 20, sidebarBounds.top + 20];
+            const hit = document.elementFromPoint(probeX, probeY);
+            result.probeVisibleInside = hit === probe;
+            result.probeHit = hit === probe ? 'probe' : `${hit?.tagName ?? 'none'}.${String(hit?.className ?? '')} at ${Math.round(probeX)},${Math.round(probeY)}`;
             result.probeClippedOutside = sidebar.contains(document.elementFromPoint(sidebarBounds.left + 30, sidebarBounds.top + 20));
-            result.leftMarginOpen = document.elementFromPoint(5, sidebarBounds.top + 20) === probe;
-            const search = window.__cssearthTest.element('.planet-sidebar-search');
+            const search = test.element('.planet-sidebar-search');
             const searchBounds = search.getBoundingClientRect();
-            result.searchAboveScene = window.__cssearthTest.required(search.closest('.planet-sidebar-search-card'),'search card').contains(document.elementFromPoint(searchBounds.left + 20, searchBounds.top + 20));
+            result.searchAboveScene = test.required(search.closest('.planet-sidebar-search-card'),'search card').contains(document.elementFromPoint(searchBounds.left + 20, searchBounds.top + 5));
           } finally { probe.remove(); }
         }
         return result;
-      });
+      }, sheetLayout);
       assert.equal(containment.sceneInput, true, `${config.name}: scene input owns its region`);
       assert.equal(containment.sidebarInput, true, `${config.name}: sidebar input stays in the sidebar`);
       if (containment.probeVisibleInside !== undefined) {
-        assert.equal(containment.probeVisibleInside, true, `${config.name}: the containment probe really renders`);
-        assert.equal(containment.probeClippedOutside, true, `${config.name}: high-Z scene descendants stay behind the sidebar`);
-        assert.equal(containment.leftMarginOpen, true, `${config.name}: the 16px left margin belongs to the scene`);
+        assert.equal(containment.probeVisibleInside, true, `${config.name}: the containment probe really renders, hit ${containment.probeHit}`);
+        assert.equal(containment.probeClippedOutside, true, `${config.name}: high-Z scene descendants stay behind the panel`);
         assert.equal(containment.searchAboveScene, true, `${config.name}: search stays above the scene`);
-      }
-      if (config.name === "desktop") {
-        const style = await page.locator("body").getAttribute("style");
-        try {
-          for (const settings of [{ inset: 12 }, { inset: 24 }]) {
-            await page.evaluate(({ inset }) => {
-              document.body.style.setProperty("--explorer-content-inset", `${inset}px`);
-            }, settings);
-            check(await measure(), settings);
-          }
-        } finally {
-          await page.evaluate((style) => {
-            if (style === null) document.body.removeAttribute("style");
-            else document.body.setAttribute("style", style);
-          }, style);
-        }
       }
     }
     console.log(`${config.name}: ${captureBefore ? "baseline captured" : "layout and alignment passed"}`);
