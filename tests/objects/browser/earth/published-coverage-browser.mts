@@ -1,20 +1,28 @@
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
-import { chromium } from "playwright";
+import { chromium, type Page } from "playwright";
 import { PREPARED_EARTH_SCENE, runtimeDefinition } from "../../unit/earth/prepared-fixture.mts";
 import { readPublishedCoverage } from "../../../../tools/objects/geographic-pages/operations/published-coverage.mts";
 import { prepareCityPageGeometry } from "../../../../tools/objects/geographic-pages/page-geometry.mts";
 import { prepareLocationCamera } from "../../../../tools/objects/geographic-pages/prepare-location.mts";
 
+import { shape, text, number, optional } from "../../../../tools/objects/geographic-pages/source-records.mts";
+import type { PageLayerStats } from "../../../../src/renderers/css/runtime/object-runtime-types.js";
+declare global { interface Window { __coverageNodes: readonly Element[] } }
+type CoverageState = { stable: boolean; identical: boolean; nodeCount: number; paging: PageLayerStats };
+type CoverageRun = { dpr: number; views: { region: string; sourceWindow: string; zoom: number; state: CoverageState }[]; pageErrors: string[]; indexUrls: string[]; imageUrls: string[]; released?: PageLayerStats };
 const base = (process.argv.slice(2).find(argument => /^https?:\/\//u.test(argument)) ?? "http://127.0.0.1:4210").replace(/\/$/u, "");
 const output = new URL("../../../../output/playwright/published-coverage/", import.meta.url);
 await mkdir(output, { recursive: true });
 const snapshot = await readPublishedCoverage(new URL('../../../../src/planets/earth/source/city/published-coverage.json.gz',import.meta.url));
 // Sample source windows across every integrated region. These are geographic
 // addresses chosen offline, independent of the place catalogue or search UI.
+assert.ok(snapshot, "Published coverage receipt is required");
+const parseProvenance = shape({ id: text, width: number, height: number, nodataPixels: number, absentSource: optional(shape({ pixels: number })) });
 const samples = snapshot.faces.map(receipt => {
-  const valid = p => (p.width * p.height - p.nodataPixels - (p.absentSource?.pixels ?? 0)) / (p.width * p.height);
-  const source = [...receipt.provenance].sort((a, b) => valid(b) - valid(a))[0];
+  const valid = (p: ReturnType<typeof parseProvenance>) => (p.width * p.height - p.nodataPixels - (p.absentSource?.pixels ?? 0)) / (p.width * p.height);
+  const source = receipt.provenance.map(parseProvenance).sort((a, b) => valid(b) - valid(a))[0];
+  assert.ok(source, "Published coverage must include source provenance");
   const [level, x, y] = source.id.replace("global-", "").split("-").map(Number);
   const page = prepareCityPageGeometry({ level, x, y }, PREPARED_EARTH_SCENE);
   const point = page.corners.reduce((sum, corner) => sum.map((v, axis) => v + corner[axis] / 4), [0, 0, 0]);
@@ -22,18 +30,18 @@ const samples = snapshot.faces.map(receipt => {
     camera: prepareLocationCamera(PREPARED_EARTH_SCENE, point, 32,
       { body: PREPARED_EARTH_SCENE.earth, camera: runtimeDefinition.camera }) };
 });
-const report = { capturedAt: new Date().toISOString(), base, mode: "headless", channel: "chrome",
+const report: { capturedAt: string; base: string; mode: string; channel: string; qualification: string; samples: typeof samples; runs: CoverageRun[]; browser?: string; samePagesAcrossDpr?: boolean } = { capturedAt: new Date().toISOString(), base, mode: "headless", channel: "chrome",
   qualification: "Source-window samples in every published region; not exhaustive pixel or alignment proof.", samples, runs: [] };
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 report.browser = browser.version();
 try {
   for (const dpr of [1, 2]) {
     const context = await browser.newContext({ viewport: { width: 1400, height: 1000 }, deviceScaleFactor: dpr });
-    const run = { dpr, views: [], pageErrors: [], indexUrls: [], imageUrls: [] };
+    const run: CoverageRun = { dpr, views: [], pageErrors: [], indexUrls: [], imageUrls: [] };
     report.runs.push(run);
     try {
       const page = await context.newPage();
-      const indexes = new Set(), images = new Set();
+      const indexes = new Set<string>(), images = new Set<string>();
       page.on("pageerror", error => run.pageErrors.push(error.message));
       page.on("request", request => {
         if (/\/city-index-[^/]+\.json$/u.test(request.url())) indexes.add(request.url());
@@ -42,20 +50,29 @@ try {
       await page.goto(`${base}/earth/`);
       await page.waitForFunction(() => window.__earth?.ready);
       await page.evaluate(() => {
-        { const motion = document.querySelector('input[name="motion"]'); if (motion.checked) motion.click(); }
-        window.__coverageNodes = [...document.querySelector(".planet-stage").querySelectorAll("*")];
+        function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+        function requiredInput(value: Element | null): HTMLInputElement { if (!(value instanceof HTMLInputElement)) throw new Error("Expected required HTMLInputElement"); return value; }
+
+        { const motion = requiredInput(document.querySelector('input[name="motion"]')); if (motion.checked) motion.click(); }
+        window.__coverageNodes = [...requiredElement(document.querySelector(".planet-stage")).querySelectorAll<HTMLElement>("*")];
       });
       for (const sample of samples) {
         for (const zoom of [32, 512]) {
-          await page.evaluate(camera => window.__earth.camera.setState(camera), { ...sample.camera, zoom });
+          await page.evaluate(camera => {
+            function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+return requiredDiagnostics(window.__earth).camera.setState(camera); }, { ...sample.camera, zoom });
           await settle(page);
-          const state = await page.evaluate(() => ({
-            stable: window.__earth.assertStableDomIdentity(),
-            identical: [...document.querySelector(".planet-stage").querySelectorAll("*")]
+          const state = await page.evaluate(() => {
+            function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+
+            function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+return ({
+            stable: requiredDiagnostics(window.__earth).assertStableDomIdentity(),
+            identical: [...requiredElement(document.querySelector(".planet-stage")).querySelectorAll<HTMLElement>("*")]
               .every((node, index) => node === window.__coverageNodes[index]),
-            nodeCount: document.querySelector(".planet-stage").querySelectorAll("*").length,
-            paging: window.__earth.runtime.pages().city,
-          }));
+            nodeCount: requiredElement(document.querySelector(".planet-stage")).querySelectorAll<HTMLElement>("*").length,
+            paging: requiredDiagnostics(window.__earth).runtime.pages().city,
+          }); });
           assert.equal(state.stable, true);
           assert.equal(state.identical, true);
           assert.ok(state.paging.retained.length <= state.paging.poolSize);
@@ -65,6 +82,7 @@ try {
           assert.deepEqual(state.paging.errors, []);
           assert.deepEqual(state.paging.index.errors, []);
           assert.ok(state.paging.retained.some(slot => {
+            if (!slot.key) return false;
             const [level, x, y] = slot.key.split("-").map(Number);
             return slot.published && `0-${Math.floor(x / 2 ** level)}-${Math.floor(y / 2 ** level)}` === sample.region;
           }), `${sample.region} at zoom ${zoom} must show its published imagery`);
@@ -75,9 +93,13 @@ try {
         }
         console.log(JSON.stringify({ dpr, region: sample.region, checked: run.views.length }));
       }
-      await page.evaluate(() => window.__earth.camera.setState({ zoom: 1.1 }));
+      await page.evaluate(() => {
+        function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+return requiredDiagnostics(window.__earth).camera.setState({ zoom: 1.1 }); });
       await settle(page);
-      run.released = await page.evaluate(() => window.__earth.runtime.pages().city);
+      run.released = await page.evaluate(() => {
+        function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+return requiredDiagnostics(window.__earth).runtime.pages().city; });
       assert.equal(run.released.retained.length, 0);
       assert.equal(run.released.index.residentDirectories, 0);
       assert.deepEqual(run.pageErrors, []);
@@ -85,7 +107,7 @@ try {
       run.imageUrls = [...images].sort();
     } finally { await context.close(); }
   }
-  const selectedPages = run => run.views.map(view => ({ region: view.region, zoom: view.zoom,
+  const selectedPages = (run: CoverageRun) => run.views.map(view => ({ region: view.region, zoom: view.zoom,
     desired: [...view.state.paging.desired].sort() }));
   assert.deepEqual(selectedPages(report.runs[0]), selectedPages(report.runs[1]),
     "Both display densities must use the same canonical prepared pages");
@@ -96,10 +118,12 @@ try {
 }
 console.log(JSON.stringify({ passed: report.runs.map(run => ({ dpr: run.dpr, views: run.views.length })) }));
 
-async function settle(page) {
+async function settle(page: Page) {
   await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
   await page.waitForFunction(() => {
-    const state = window.__earth.runtime.pages().city;
+    function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+
+    const state = requiredDiagnostics(window.__earth).runtime.pages().city;
     return !state.pendingSelection && state.activeLoads === 0 && state.index.activeLoads === 0;
   }, null, { timeout: 60000 });
 }

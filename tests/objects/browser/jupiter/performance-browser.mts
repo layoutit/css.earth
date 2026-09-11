@@ -1,3 +1,5 @@
+declare global { interface Window { __jupiterLongTasks: number[]; } }
+type MotionSample = { interval: number; pitch: number; zoom: number; appliedFrame: number; desiredFrame: number; pendingRowCount: number; readyRows: readonly string[] };
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
 
@@ -12,7 +14,7 @@ try {
     deviceScaleFactor,
   });
   const page = await context.newPage();
-  const browserProblems = [];
+  const browserProblems: string[] = [];
   page.on("console", (message) => {
     if (["error", "warning"].includes(message.type())) {
       browserProblems.push(`${message.type()}: ${message.text()}`);
@@ -20,7 +22,7 @@ try {
   });
   page.on("pageerror", (error) => browserProblems.push(`pageerror: ${error.message}`));
   const cdp = await context.newCDPSession(page);
-  let layers = [];
+  let layers: { width: number; height: number; backendNodeId?: number }[] = [];
   await cdp.send("LayerTree.enable");
   await cdp.send("Performance.enable");
   cdp.on("LayerTree.layerTreeDidChange", (event) => {
@@ -34,7 +36,7 @@ try {
       );
     }).observe({ type: "longtask", buffered: true });
   });
-  const externalRequests = [];
+  const externalRequests: string[] = [];
   page.on("request", (request) => {
     if (new URL(request.url()).origin !== new URL(baseUrl).origin) {
       externalRequests.push(request.url());
@@ -53,45 +55,56 @@ try {
     throw error;
   }
   await page.waitForTimeout(500);
-  const startup = await page.evaluate(() => ({
+  const startup = await page.evaluate(() => {
+    function requiredDiagnostics<T>(value: T): NonNullable<T> { if (value === undefined || value === null) throw new Error("Expected mounted development diagnostics"); return value; }
+return ({
     longTasks: [...window.__jupiterLongTasks],
-    cache: ({ ...window.__jupiter.material.state().lighting, pool: window.__jupiter.runtime.resources().pools.find(pool => pool.id === "lighting") }),
-    resources: performance.getEntriesByType("resource")
+    cache: ({ ...requiredDiagnostics(window.__jupiter).material.state().lighting, pool: requiredDiagnostics(requiredDiagnostics(window.__jupiter).runtime.resources().pools.find(pool => pool.id === "lighting")) }),
+    resources: performance.getEntriesByType("resource").filter((entry): entry is PerformanceResourceTiming => entry instanceof PerformanceResourceTiming)
       .filter(({ name }) => name.includes("/scenes/jupiter/"))
       .map(({ name, transferSize, decodedBodySize }) => ({
         name,
         transferSize,
         decodedBodySize,
       })),
-  }));
+  }); });
   await page.evaluate(() => {
-    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
+    function requiredDiagnostics<T>(value: T): NonNullable<T> { if (value === undefined || value === null) throw new Error("Expected mounted development diagnostics"); return value; }
+
+    function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+    function requiredInput(value: Element | null): HTMLInputElement { if (!(value instanceof HTMLInputElement)) throw new Error("Expected required HTMLInputElement"); return value; }
+
+    (requiredInput(document.querySelector('input[name="motion"]')).checked && requiredInput(document.querySelector('input[name="motion"]')).click());
     window.__jupiterLongTasks = [];
-    const shadows = document.querySelector('input[name="shadows"]');
+    const shadows = requiredInput(document.querySelector('input[name="shadows"]'));
     if (!shadows.checked) shadows.click();
-    window.__jupiter.setView({ controlPitch: 0, zoom: 0.8 });
+    requiredDiagnostics(window.__jupiter).setView({ controlPitch: 0, zoom: 0.8 });
   });
   await page.waitForFunction(() => {
-    const cache = ({ ...window.__jupiter.material.state().lighting, pool: window.__jupiter.runtime.resources().pools.find(pool => pool.id === "lighting") });
-    return window.__jupiter.runtime.selection().committed.shadows === true && cache.pool.pending === 0 && cache.appliedFrame === cache.frame;
+    function requiredDiagnostics<T>(value: T): NonNullable<T> { if (value === undefined || value === null) throw new Error("Expected mounted development diagnostics"); return value; }
+
+    const cache = ({ ...requiredDiagnostics(window.__jupiter).material.state().lighting, pool: requiredDiagnostics(requiredDiagnostics(window.__jupiter).runtime.resources().pools.find(pool => pool.id === "lighting")) });
+    return requiredDiagnostics(window.__jupiter).runtime.selection().committed?.shadows === true && cache.pool.pending === 0 && cache.appliedFrame === cache.frame;
   });
-  const motion = await page.evaluate(() => new Promise((resolve) => {
-    const samples = [];
+  const motion = await page.evaluate(() => {
+    function requiredDiagnostics<T>(value: T): NonNullable<T> { if (value === undefined || value === null) throw new Error("Expected mounted development diagnostics"); return value; }
+return new Promise<MotionSample[]>((resolve) => {
+    const samples: MotionSample[] = [];
     let previous = performance.now();
-    const tick = (now) => {
+    const tick = (now: number) => {
       const motionFrame = samples.length;
       const progress = motionFrame / 119;
       const pitch = progress <= 0.75
         ? progress / 0.75 * 89
         : (1 - progress) / 0.25 * 89;
       const zoom = 0.8 + Math.sin(progress * Math.PI) * 0.3;
-      window.__jupiter.setView({ controlPitch: pitch, zoom });
-      const cache = ({ ...window.__jupiter.material.state().lighting, pool: window.__jupiter.runtime.resources().pools.find(pool => pool.id === "lighting") });
+      requiredDiagnostics(window.__jupiter).setView({ controlPitch: pitch, zoom });
+      const cache = ({ ...requiredDiagnostics(window.__jupiter).material.state().lighting, pool: requiredDiagnostics(requiredDiagnostics(window.__jupiter).runtime.resources().pools.find(pool => pool.id === "lighting")) });
       samples.push({
         interval: now - previous,
-        pitch: window.__jupiter.view().controlPitch,
-        zoom: window.__jupiter.view().zoom,
-        appliedFrame: cache.appliedFrame,
+        pitch: requiredDiagnostics(window.__jupiter).view().controlPitch,
+        zoom: requiredDiagnostics(window.__jupiter).view().zoom,
+        appliedFrame: requiredDiagnostics(cache.appliedFrame),
         desiredFrame: cache.frame,
         pendingRowCount: cache.pool.pending,
         readyRows: cache.pool.keys,
@@ -101,22 +114,28 @@ try {
       else requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
-  }));
+  }); });
   await page.waitForFunction(() => {
-    const cache = ({ ...window.__jupiter.material.state().lighting, pool: window.__jupiter.runtime.resources().pools.find(pool => pool.id === "lighting") });
-    return window.__jupiter.runtime.selection().committed.shadows === true && cache.pool.pending === 0 && cache.appliedFrame === cache.frame;
+    function requiredDiagnostics<T>(value: T): NonNullable<T> { if (value === undefined || value === null) throw new Error("Expected mounted development diagnostics"); return value; }
+
+    const cache = ({ ...requiredDiagnostics(window.__jupiter).material.state().lighting, pool: requiredDiagnostics(requiredDiagnostics(window.__jupiter).runtime.resources().pools.find(pool => pool.id === "lighting")) });
+    return requiredDiagnostics(window.__jupiter).runtime.selection().committed?.shadows === true && cache.pool.pending === 0 && cache.appliedFrame === cache.frame;
   }, null, { timeout: 10_000 });
-  const runtime = await page.evaluate(() => ({
+  const runtime = await page.evaluate(() => {
+    function requiredDiagnostics<T>(value: T): NonNullable<T> { if (value === undefined || value === null) throw new Error("Expected mounted development diagnostics"); return value; }
+
+    function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+return ({
     longTasks: [...window.__jupiterLongTasks],
-    cache: ({ ...window.__jupiter.material.state().lighting, pool: window.__jupiter.runtime.resources().pools.find(pool => pool.id === "lighting") }),
-    stableDomIdentity: window.__jupiter.assertStableDomIdentity(),
-    retainedLeafCount: window.__jupiter.dom.retainedLeafCount,
-    stageElementCount: document.querySelector(".planet-stage")
-      .querySelectorAll("*").length,
-    runningAnimationCount: document.querySelector(".planet-stage")
+    cache: ({ ...requiredDiagnostics(window.__jupiter).material.state().lighting, pool: requiredDiagnostics(requiredDiagnostics(window.__jupiter).runtime.resources().pools.find(pool => pool.id === "lighting")) }),
+    stableDomIdentity: requiredDiagnostics(window.__jupiter).assertStableDomIdentity(),
+    retainedLeafCount: requiredDiagnostics(window.__jupiter).dom.retainedLeafCount,
+    stageElementCount: requiredElement(document.querySelector(".planet-stage"))
+      .querySelectorAll<HTMLElement>("*").length,
+    runningAnimationCount: requiredElement(document.querySelector(".planet-stage"))
       .getAnimations({ subtree: true })
       .filter(({ playState }) => playState === "running").length,
-  }));
+  }); });
   const metrics = Object.fromEntries(
     (await cdp.send("Performance.getMetrics")).metrics.map(
       ({ name, value }) => [name, value],
@@ -126,7 +145,7 @@ try {
     .sort((left, right) => left - right);
   const lags = motion.map(({ appliedFrame, desiredFrame }) =>
     Math.abs(appliedFrame - desiredFrame)).sort((left, right) => left - right);
-  const maximumCompositorLayer = layers.reduce((maximum, layer) => {
+  const maximumCompositorLayer = layers.reduce<{ area: number; width: number; height: number }>((maximum, layer) => {
     const area = (layer.width ?? 0) * (layer.height ?? 0);
     return area > maximum.area ? {
       width: layer.width ?? 0,
@@ -197,7 +216,7 @@ try {
   await browser.close();
 }
 
-function percentile(sorted, fraction) {
+function percentile(sorted: readonly number[], fraction: number) {
   return sorted[Math.min(
     sorted.length - 1,
     Math.floor(sorted.length * fraction),

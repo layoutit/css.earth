@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir,mkdtemp} from 'node:fs/promises';
-import {resolve} from 'node:path';
+import {resolve, basename} from 'node:path';
+import { required } from '../../../../tools/test-values.mts';
+import { shape, text } from '../../../../tools/objects/terrestrial-layers/source-records.mts';
+import capture from './geology-capture.mts';
 import {createHash} from 'node:crypto';
 import {createServer} from 'node:http';
 import {chromium} from 'playwright';
@@ -12,15 +15,14 @@ await mkdir(out,{recursive:true});
 const files=await runtimeAssets(process.cwd(),['comet-67p']),stage=await mkdtemp(resolve(out,'fresh-assets-'));
 const installation=await installRuntimeAssets(files.map(asset=>({...asset,file:resolve(stage,asset.filename)})));
 assert.equal(installation.installed,files.length);assert.equal(installation.reused,0);
-const pins=new Map(files.map(a=>[a.filename,a])),hash=b=>createHash('sha256').update(b).digest('hex');
+const pins=new Map(files.map(a=>[a.filename,a])),hash=(b: Uint8Array)=>createHash('sha256').update(b).digest('hex');
 const payload=await readFile('src/planets/comet-67p/prepared/object.json');
-const descriptor=JSON.parse(await readFile('src/planets/comet-67p/object.json'));
+const descriptor=shape({prepared:shape({sha256:text})})(JSON.parse(await readFile('src/planets/comet-67p/object.json','utf8')));
 assert.equal(hash(payload),descriptor.prepared.sha256);
 // Reuse the same UI operations as the interactive CLI inspection.
-const capture=Function('return ('+await readFile(new URL('./geology-capture.js',import.meta.url),'utf8')+')')();
-const browser=await chromium.launch({channel:'chrome',headless:true}),reports=[],served=[];
-let server;
-async function run(base,prefix,dprs){
+const browser=await chromium.launch({channel:'chrome',headless:true}),reports: (Awaited<ReturnType<typeof capture>>[number] & { fresh: boolean })[]=[],served: string[]=[];
+let server: ReturnType<typeof createServer> | undefined;
+async function run(base: string,prefix: string,dprs: readonly number[]){
   const page=await browser.newPage();
   try{
     await page.goto(base+'/comet-67p/',{waitUntil:'networkidle'});
@@ -28,7 +30,7 @@ async function run(base,prefix,dprs){
     for(const report of result){
       assert.ok(report.transportedPrepared.some(r=>r.sha256===hash(payload)),'Browser loads exact compiled object bytes');
       for(const view of report.views)for(const a of view.atlases){
-        const pin=pins.get(new URL(a.url).pathname.split('/').at(-1));
+        const pin=required(pins.get(basename(new URL(a.url).pathname)));
         assert.equal(a.sha256,pin.sha256);assert.equal(a.bytes,pin.bytes);
       }
       reports.push({...report,fresh:prefix.includes('fresh')});
@@ -39,9 +41,9 @@ try{
   await run(origin,'67p-geology-production',[1,2]);
   server=createServer(async(req,res)=>{
     try{
-      const url=new URL(req.url,'http://127.0.0.1');
+      const url=new URL(required(req.url),'http://127.0.0.1');
       if(url.pathname.startsWith('/scenes/comet-67p/')){
-        const filename=url.pathname.split('/').at(-1),pin=pins.get(filename);assert.ok(pin);
+        const filename=basename(url.pathname),pin=pins.get(filename);assert.ok(pin);
         const bytes=await readFile(resolve(stage,filename));assert.equal(hash(bytes),pin.sha256);served.push(filename);
         res.writeHead(200,{'Content-Type':'image/webp','Content-Length':bytes.length,'Cache-Control':'no-store'});res.end(bytes);
       }else{
@@ -50,10 +52,12 @@ try{
       }
     }catch(e){res.writeHead(500);res.end(String(e));}
   });
-  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
-  await run('http://127.0.0.1:'+server.address().port,'67p-geology-fresh',[1]);
+  const proxy = server;
+  await new Promise<void>(resolve=>proxy.listen(0,'127.0.0.1',resolve));
+  const address = proxy.address(); assert.ok(address && typeof address === 'object', 'Proxy has a TCP address');
+  await run('http://127.0.0.1:'+address.port,'67p-geology-fresh',[1]);
   for(const id of ['regions','geology'])for(const mode of ['surface','shadow'])assert.ok(served.includes(`comet-67p-${id}-${mode}@2x.webp`));
   const report={capturedAt:new Date().toISOString(),preparedSha256:hash(payload),freshInstallation:{...installation,bytes:files.reduce((s,a)=>s+a.bytes,0)},freshFilesServed:[...new Set(served)].sort(),reports};
   await writeFile(resolve(out,'report.json'),JSON.stringify(report,null,2)+'\n');
   console.log(JSON.stringify({captures:reports.length,freshInstallation:report.freshInstallation,preparedSha256:hash(payload)}));
-}finally{await browser.close();if(server)await new Promise(resolve=>server.close(resolve));}
+}finally{await browser.close();if(server) { const proxy = server; await new Promise<void>((resolve,reject)=>proxy.close(error => error ? reject(error) : resolve())); };}

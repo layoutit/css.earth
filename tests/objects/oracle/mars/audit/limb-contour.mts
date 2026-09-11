@@ -14,18 +14,6 @@ import {
 type CaptureMode = "composite" | "body" | "material";
 type CapturePaths = Record<CaptureMode, string>;
 
-interface MarsAuditRuntime {
-  readonly ready: boolean;
-  setView(view: { readonly pitch: number; readonly zoom: number }): void;
-  view(): { readonly pitch: number };
-  selectLens(id: string): void;
-  readonly dom: { readonly retainedLeafCount: number };
-  assertStableDomIdentity(): boolean;
-  readonly renderStats: { readonly selectedPreparedDensity: number; materialCache(): { readonly pendingRowCount: number; readonly appliedFrame: number; readonly desiredFrame: number; readonly appliedRow: number; readonly desiredRow: number; readonly maximumRetainedRowCount: number; readonly retainedRowCount: number } };
-}
-
-declare global { interface Window { __mars?: MarsAuditRuntime; } }
-
 const CHROME_EXECUTABLE =
   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const VIEWPORT = Object.freeze({ width: 1280, height: 900 });
@@ -65,11 +53,11 @@ try {
     for (const pitch of PITCHES) {
       await page.evaluate(({ pitch }) => {
         if (!window.__mars) throw new Error("Mars runtime is unavailable.");
-        window.__mars.setView({ pitch, zoom: 0.8 });
+        window.__mars.setView({ controlPitch: pitch, zoom: 0.8 });
         for (const animation of document.getAnimations()) animation.pause();
       }, { pitch });
       await page.waitForFunction(
-        ({ pitch }) => window.__mars?.view().pitch === pitch,
+        ({ pitch }) => window.__mars?.view().controlPitch === pitch,
         { pitch },
       );
       await page.waitForTimeout(250);

@@ -1,5 +1,6 @@
+declare global { interface Window { __mercuryProductionNodes: Element[]; } }
 import assert from "node:assert/strict";
-import { chromium } from "playwright";
+import { chromium, type Page } from "playwright";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4310";
 const browser = await chromium.launch({
@@ -15,8 +16,8 @@ try {
       viewport: { width: 1440, height: 900 },
     });
     const page = await context.newPage();
-    const externalRequests = [];
-    const problems = [];
+    const externalRequests: string[] = [];
+    const problems: string[] = [];
     page.on("request", (request) => {
       if (new URL(request.url()).origin !== new URL(baseUrl).origin) {
         externalRequests.push(request.url());
@@ -39,24 +40,27 @@ try {
 
     const stage = page.locator(".planet-stage");
     const initial = await stage.evaluate((element) => {
-      window.__mercuryProductionNodes = [element, ...element.querySelectorAll("*")];
+      function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+      function requiredInput(value: Element | null): HTMLInputElement { if (!(value instanceof HTMLInputElement)) throw new Error("Expected required HTMLInputElement"); return value; }
+
+      window.__mercuryProductionNodes = [element, ...element.querySelectorAll<HTMLElement>("*")];
       return {
         retainedNodes: window.__mercuryProductionNodes.length,
-        canvas: element.querySelectorAll("canvas").length,
-        svg: element.querySelectorAll("svg").length,
-        shadows: document.querySelector('input[name="shadows"]').checked,
-        materialMode: element.querySelector(".mercury-material").getAttribute("data-material-mode"),
+        canvas: element.querySelectorAll<HTMLElement>("canvas").length,
+        svg: element.querySelectorAll<HTMLElement>("svg").length,
+        shadows: requiredInput(document.querySelector('input[name="shadows"]')).checked,
+        materialMode: requiredElement(element.querySelector(".mercury-material")).getAttribute("data-material-mode"),
       };
     });
     assert.equal(initial.canvas, 0);
     assert.equal(initial.svg, 0);
     const assertRetained = async () => assert.equal(await stage.evaluate((element) => {
-      const nodes = [element, ...element.querySelectorAll("*")];
+      const nodes = [element, ...element.querySelectorAll<HTMLElement>("*")];
       return nodes.length === window.__mercuryProductionNodes.length &&
         nodes.every((node, index) => node === window.__mercuryProductionNodes[index]);
     }), true, "Interaction preserves the original scene nodes");
     const startupResources = await page.evaluate(() =>
-      performance.getEntriesByType("resource").map(({ name }) => name));
+      performance.getEntriesByType("resource").filter((entry): entry is PerformanceResourceTiming => entry instanceof PerformanceResourceTiming).map(({ name }) => name));
     assert.equal(startupResources.some((url) =>
       url.includes("/scenes/mercury/mercury-interior-")), true);
     assert.equal(await page.evaluate(() => window.__cssEarth), undefined);
@@ -72,13 +76,15 @@ try {
       'img[src="/scenes/mercury/mercury-no-atmosphere-profile.svg"]',
     ).count(), 0);
     assert.equal(await page.locator("#mercury-lenses").evaluate((details) =>
-      details.open), true);
+      {
+if (!(details instanceof HTMLDetailsElement)) throw new Error("Expected HTMLDetailsElement observation");
+return details.open; }), true);
     for (const lens of ["enhanced", "topography", "interior", "normal"]) {
       await page.locator(`button[name="lens"][value="${lens}"]`).click();
       await page.waitForFunction((id) =>
-        document.querySelector(".planet-stage")?.dataset.view === "interior"
+        document.querySelector<HTMLElement>(".planet-stage")?.dataset.view === "interior"
           ? id === "interior"
-          : (document.querySelector(".planet-stage")?.dataset.lens || "normal") ===
+          : (document.querySelector<HTMLElement>(".planet-stage")?.dataset.lens || "normal") ===
             id, lens);
       assert.equal(await page.locator(
         `button[name="lens"][value="${lens}"]`,
@@ -99,15 +105,19 @@ try {
     await page.mouse.down();
     await page.mouse.up();
     const distance = () => page.locator(".mercury-camera").evaluate((camera) =>
-      parseFloat(getComputedStyle(camera).perspective) -
-      new DOMMatrix(getComputedStyle(camera.querySelector(".mercury-scene")).transform).m43);
+      {
+      function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+return parseFloat(getComputedStyle(camera).perspective) -
+      new DOMMatrix(getComputedStyle(requiredElement(camera.querySelector(".mercury-scene"))).transform).m43; });
     const beforeWheel = await distance();
     assert.ok(Number.isFinite(beforeWheel) && beforeWheel > 0);
     await wheel(page, ".planet-input-surface", -240);
     await page.waitForFunction((before) => {
-      const camera = document.querySelector(".mercury-camera");
+      function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
+      const camera = requiredElement(document.querySelector(".mercury-camera"));
       const depth = parseFloat(getComputedStyle(camera).perspective) -
-        new DOMMatrix(getComputedStyle(camera.querySelector(".mercury-scene")).transform).m43;
+        new DOMMatrix(getComputedStyle(requiredElement(camera.querySelector(".mercury-scene"))).transform).m43;
       return depth > 0 && depth < before;
     }, beforeWheel);
     assert.ok(await distance() < beforeWheel, "Wheel zoom moves the physical camera closer");
@@ -116,12 +126,16 @@ try {
     const speed = page.locator('input[name="speed"][type="range"]');
     assert.equal(await speed.getAttribute("data-state"), "normal");
     await speed.evaluate((input) => {
+if (!(input instanceof HTMLInputElement)) throw new Error("Expected HTMLInputElement observation");
+
       input.value = "2";
       input.dispatchEvent(new Event("input", { bubbles: true }));
     });
     assert.equal(await speed.getAttribute("data-state"), "fast");
     const shadows = page.locator('input[name="shadows"]');
     await shadows.evaluate((input) => {
+if (!(input instanceof HTMLInputElement)) throw new Error("Expected HTMLInputElement observation");
+
       input.checked = false;
       input.dispatchEvent(new Event("change", { bubbles: true }));
     });
@@ -129,7 +143,7 @@ try {
       element.classList.contains("mercury-hide-shadows")), true);
     const shadowlessMaterial = page.locator(".mercury-material");
     assert.equal(await shadowlessMaterial.evaluate((element) =>
-      getComputedStyle(element.parentElement).visibility), "visible");
+      getComputedStyle((() => { const parent = element.parentElement; if (!parent) throw new Error("Material parent missing"); return parent; })()).visibility), "visible");
     assert.equal(await shadowlessMaterial.getAttribute("data-material-mode"),
       "full-phase-curvature");
     assert.match(await shadowlessMaterial.evaluate((element) =>
@@ -163,7 +177,7 @@ try {
       document.documentElement.dataset.ready === "true" &&
       document.documentElement.dataset.playing === "false");
     await page.waitForFunction((mode) =>
-      document.querySelector(".mercury-material")?.getAttribute("data-material-mode") === mode,
+      document.querySelector<HTMLElement>(".mercury-material")?.getAttribute("data-material-mode") === mode,
     initial.materialMode);
     assert.equal(await page.locator(".polycss-camera").count(), 1);
     assert.equal(await speed.getAttribute("data-state"), "normal");
@@ -174,7 +188,7 @@ try {
       initial.materialMode);
 
     const resources = await page.evaluate(() =>
-      performance.getEntriesByType("resource").map((entry) => entry.name));
+      performance.getEntriesByType("resource").filter((entry): entry is PerformanceResourceTiming => entry instanceof PerformanceResourceTiming).map((entry) => entry.name));
     assert.ok(resources.some((url) =>
       url.endsWith("/scenes/mercury/mercury-surface-normal@2x.webp")));
     const expectedLightingDensity = "/scenes/mercury/mercury-lighting-2x-row-";
@@ -211,7 +225,7 @@ try {
   await browser.close();
 }
 
-async function drag(page, selector, deltaX, deltaY) {
+async function drag(page: Page, selector: string, deltaX: number, deltaY: number) {
   const box = await page.locator(selector).boundingBox();
   assert.ok(box);
   const x = box.x + box.width * 0.72;
@@ -224,7 +238,7 @@ async function drag(page, selector, deltaX, deltaY) {
     requestAnimationFrame(() => requestAnimationFrame(resolve))));
 }
 
-async function wheel(page, selector, deltaY) {
+async function wheel(page: Page, selector: string, deltaY: number) {
   const box = await page.locator(selector).boundingBox();
   assert.ok(box);
   await page.mouse.move(box.x + box.width * 0.72, box.y + box.height * 0.5);

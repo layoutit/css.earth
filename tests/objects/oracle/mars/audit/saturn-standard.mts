@@ -8,15 +8,9 @@ import { chromium, type Page } from "playwright";
 import sharp from "sharp";
 
 import { PREPARED_MARS_CAMERA,PREPARED_MARS_LIGHTING,PREPARED_MARS_SCENE } from "../../../unit/mars/prepared-fixture.mts";
-
-interface RuntimeProbe { readonly ready: boolean; readonly dom: { readonly retainedLeafCount: number }; assertStableDomIdentity(): boolean; }
-interface MarsAuditRuntime extends RuntimeProbe { selectLens(id: string): void; setView(view: { readonly pitch: number; readonly zoom: number }): void; view(): { readonly pitch: number }; readonly renderStats: { readonly selectedPreparedDensity: number; materialCache(): { readonly pendingRowCount: number; readonly appliedFrame: number; readonly desiredFrame: number; readonly appliedRow: number; readonly desiredRow: number; readonly maximumRetainedRowCount: number; readonly retainedRowCount: number } }; }
-interface SaturnRuntimeProbe extends RuntimeProbe { readonly camera: { state(): { readonly controlPitch: number; readonly zoom: number }; setState(state: { readonly controlPitch: number; readonly zoom: number }): void }; }
 interface Layer { readonly width?: number; readonly height?: number; }
 interface MaximumLayer { readonly width: number; readonly height: number; readonly area: number; }
 interface View { readonly lens: string; readonly name: string; readonly pitch: number; readonly file: string; readonly sha256: string; }
-
-declare global { interface Window { __mars?: MarsAuditRuntime; __saturn?: SaturnRuntimeProbe; __cssEarth?: { readonly ready: boolean; readonly activeObjectId: string; readonly mountedObjectCount: number; }; } }
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const deviceScaleFactor = Number(process.argv[3] ?? 2);
@@ -239,7 +233,7 @@ async function auditMars() {
       for (const [name, pitch] of marsPitches) {
         await page.evaluate(({ pitch }) => {
           if (!window.__mars) throw new Error("Mars runtime is unavailable.");
-          window.__mars.setView({ pitch, zoom: 0.8 });
+          window.__mars.setView({ controlPitch: pitch, zoom: 0.8 });
         }, { pitch });
         await settleMars(page);
         const file = `mars-${lens}-${name}.png`;
@@ -252,7 +246,7 @@ async function auditMars() {
     await page.evaluate(() => {
       if (!window.__mars) throw new Error("Mars runtime is unavailable.");
       window.__mars.selectLens("normal");
-      window.__mars.setView({ pitch: 18, zoom: 0.8 });
+      window.__mars.setView({ controlPitch: 18, zoom: 0.8 });
     });
     await settleMars(page);
     const responsive: Array<{ readonly width: number; readonly file: string; readonly horizontalOverflow: boolean; readonly labelsInside: boolean }> = [];
@@ -304,7 +298,7 @@ async function auditMars() {
         loadedPreparedAssetUrls: performance.getEntriesByType("resource")
           .map(({ name }) => name)
           .filter((url) => url.includes("/scenes/mars/")),
-        materialCache: window.__mars.renderStats.materialCache(),
+        materialCache: (() => { const runtime = window.__mars; if (!runtime) throw new Error("Mars runtime is unavailable"); const lighting = runtime.material.state().lighting, pool = runtime.runtime.resources().pools.find(pool => pool.id === "lighting"); if (!pool) throw new Error("Mars lighting pool is unavailable"); return { pendingRowCount: pool.pending, appliedFrame: lighting.appliedFrame, desiredFrame: lighting.calculatedFrame, appliedRow: lighting.appliedRow, desiredRow: lighting.row, maximumRetainedRowCount: pool.capacity, retainedRowCount: pool.resident }; })(),
       };
     });
     return Object.freeze({
@@ -377,7 +371,7 @@ function settle(page: Page): Promise<unknown> {
 
 async function settleMars(page: Page): Promise<void> {
   await page.waitForFunction(() => {
-    const cache = window.__mars?.renderStats.materialCache();
+    const cache = (window.__mars ? (() => { const runtime = window.__mars; if (!runtime) throw new Error("Mars runtime is unavailable"); const lighting = runtime.material.state().lighting, pool = runtime.runtime.resources().pools.find(pool => pool.id === "lighting"); if (!pool) throw new Error("Mars lighting pool is unavailable"); return { pendingRowCount: pool.pending, appliedFrame: lighting.appliedFrame, desiredFrame: lighting.calculatedFrame, appliedRow: lighting.appliedRow, desiredRow: lighting.row, maximumRetainedRowCount: pool.capacity, retainedRowCount: pool.resident }; })() : undefined);
     return cache && cache.pendingRowCount === 0 &&
       cache.appliedRow === cache.desiredRow;
   }, null, { timeout: 10_000 });

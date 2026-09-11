@@ -3,22 +3,6 @@ import { resolve } from "node:path";
 
 import { chromium } from "playwright";
 
-interface MarsAuditRuntime {
-  readonly ready: boolean;
-  setView(view: { readonly pitch: number; readonly zoom: number }): void;
-  selectLens(id: string): void;
-  view(): { readonly pitch: number };
-  readonly dom: { readonly retainedLeafCount: number };
-  assertStableDomIdentity(): boolean;
-  readonly renderStats: { readonly selectedPreparedDensity: number; materialCache(): { readonly pendingRowCount: number; readonly appliedFrame: number; readonly desiredFrame: number; readonly appliedRow: number; readonly desiredRow: number; readonly maximumRetainedRowCount: number; readonly retainedRowCount: number } };
-}
-
-declare global {
-  interface Window {
-    __mars?: MarsAuditRuntime;
-  }
-}
-
 const baseUrl = new URL(process.argv[2] ?? "http://127.0.0.1:4210/mars/");
 const framesRoot = resolve(
   process.argv[3] ?? "output/playwright/mars-motion-frames",
@@ -58,11 +42,11 @@ try {
   for (const [index, pitch] of pitches.entries()) {
     await page.evaluate(({ pitch }) => {
       if (!window.__mars) throw new Error("Mars runtime is unavailable.");
-      window.__mars.setView({ pitch, zoom: 0.8 });
+      window.__mars.setView({ controlPitch: pitch, zoom: 0.8 });
     }, { pitch });
     await page.waitForFunction(() => {
       if (!window.__mars) throw new Error("Mars runtime is unavailable.");
-      const cache = window.__mars.renderStats.materialCache();
+      const cache = (() => { const runtime = window.__mars; if (!runtime) throw new Error("Mars runtime is unavailable"); const lighting = runtime.material.state().lighting, pool = runtime.runtime.resources().pools.find(pool => pool.id === "lighting"); if (!pool) throw new Error("Mars lighting pool is unavailable"); return { pendingRowCount: pool.pending, appliedFrame: lighting.appliedFrame, desiredFrame: lighting.calculatedFrame, appliedRow: lighting.appliedRow, desiredRow: lighting.row, maximumRetainedRowCount: pool.capacity, retainedRowCount: pool.resident }; })();
       return cache.pendingRowCount === 0 &&
         cache.appliedFrame === cache.desiredFrame;
     }, null, { timeout: 10_000 });

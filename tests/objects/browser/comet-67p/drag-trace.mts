@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+declare global { interface Window { __cometTraceNodes: HTMLElement[]; __cometRaf: number[]; __cometRafActive: boolean; } }
 // Uses the same Chrome CDP categories and 60-step vertical drag path as the
 // Saturn audit. This narrower workload excludes its wheel and moon controls.
 import assert from 'node:assert/strict';
@@ -10,6 +11,7 @@ import { execFileSync } from 'node:child_process';
 import { chromium } from 'playwright';
 import { OBJECTS } from '../../../../site/objects.mts';
 import { traceDurationEvents } from '../comets/trace-events.mts';
+import { parseChromeTrace, hasFrameReporter, type ChromeTraceEvent } from '../comets/chrome-trace-values.mts';
 const origin = process.argv[2] ?? 'http://127.0.0.1:4257';
 const dpr = Number(process.argv[3] ?? 1);
 assert.ok([1, 2].includes(dpr));
@@ -25,7 +27,7 @@ const viewport = { width: 1440, height: 900 };
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 try {
   const context = await browser.newContext({ viewport, deviceScaleFactor: dpr });
-  const page = await context.newPage(), errors = [], requests = [], loaded = [], responseTasks = [];
+  const page = await context.newPage(), errors: string[] = [], requests: string[] = [], loaded: { url: string; bytes: number; sha256: string }[] = [], responseTasks: Promise<unknown>[] = [];
   page.on('response', response => {
     // Vite can redirect module URLs; only the final successful response owns bytes.
     if (!response.ok()) return;
@@ -41,11 +43,13 @@ try {
   const viewUrl = new URL(`/${id}/`, origin);
   if (viewToken) viewUrl.searchParams.set('v', viewToken);
   await page.goto(viewUrl.href, { waitUntil: 'networkidle' });
-  await page.waitForFunction(id => document.documentElement.dataset.ready === 'true' &&
-    document.querySelector('.planet-stage').dataset.objectId === id, id);
+  await page.waitForFunction(id => {
+    function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+return document.documentElement.dataset.ready === 'true' &&
+    requiredElement(document.querySelector('.planet-stage')).dataset.objectId === id; }, id);
   if (lensId) {
     await page.locator(`button[name="lens"][value="${lensId}"]`).click();
-    await page.waitForFunction(lens => document.querySelector(`button[name="lens"][value="${lens}"]`)?.getAttribute('aria-pressed') === 'true', lensId);
+    await page.waitForFunction(lens => document.querySelector<HTMLButtonElement>(`button[name="lens"][value="${lens}"]`)?.getAttribute('aria-pressed') === 'true', lensId);
   }
   if (!await page.locator('input[name="shadows"]').isChecked()) {
     await page.getByRole('button', { name: 'Settings', exact: true }).click();
@@ -57,14 +61,16 @@ try {
   await Promise.all(responseTasks);
   await page.waitForTimeout(1000);
   const initial = await page.evaluate(id => {
-    const root = document.querySelector('.planet-stage');
-    window.__cometTraceNodes = [root, ...root.querySelectorAll('*')];
-    const visibleLeaves = [...document.querySelectorAll(`.${id}-body > u`)].filter(node => getComputedStyle(node).display !== 'none');
+    function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
+    const root = requiredElement(document.querySelector('.planet-stage'));
+    window.__cometTraceNodes = [root, ...root.querySelectorAll<HTMLElement>('*')];
+    const visibleLeaves = [...document.querySelectorAll<HTMLElement>(`.${id}-body > u`)].filter(node => getComputedStyle(node).display !== 'none');
     const atlasUrls = [...new Set(visibleLeaves.map(node => getComputedStyle(node).backgroundImage))].sort();
-    return { sceneTransform: getComputedStyle(document.querySelector('.polycss-scene')).transform,
-      nodes: window.__cometTraceNodes.length, bodyLeaves: document.querySelectorAll(`.${id}-body > u`).length,
+    return { sceneTransform: getComputedStyle(requiredElement(document.querySelector('.polycss-scene'))).transform,
+      nodes: window.__cometTraceNodes.length, bodyLeaves: document.querySelectorAll<HTMLElement>(`.${id}-body > u`).length,
       visibleBodyLeaves: visibleLeaves.length,
-      atlasUrls, diagnosticsAvailable: !!window[`__${id}`] };
+      atlasUrls, diagnosticsAvailable: Boolean(Reflect.get(window, `__${id}`)) };
   }, id);
   assert.ok(initial.atlasUrls.length && initial.atlasUrls.every(url => /@2x\.webp/.test(url)));
   if (lensId) assert.ok(initial.atlasUrls.every(url => url.includes(`-${lensId}-`)), 'Trace must load the selected lens atlas.');
@@ -79,7 +85,7 @@ try {
   await page.evaluate(() => {
     performance.mark('comet-trace-interaction-start');
     window.__cometRaf = []; window.__cometRafActive = true;
-    const tick = t => { if (window.__cometRafActive) { window.__cometRaf.push(t); requestAnimationFrame(tick); } }; requestAnimationFrame(tick);
+    const tick = (t: number) => { if (window.__cometRafActive) { window.__cometRaf.push(t); requestAnimationFrame(tick); } }; requestAnimationFrame(tick);
   });
   for (let cycle = 0; cycle < 3; cycle++) {
     await page.mouse.move(viewport.width * .6, viewport.height * .485);
@@ -91,36 +97,38 @@ try {
   const raf = await page.evaluate(() => { window.__cometRafActive = false; performance.mark('comet-trace-interaction-end'); return window.__cometRaf; });
   await page.waitForTimeout(2000);
   await page.evaluate(() => performance.mark('comet-trace-end'));
-  const complete = new Promise(accept => cdp.once('Tracing.tracingComplete', accept));
-  await cdp.send('Tracing.end'); const { stream } = await complete;
+  const complete = new Promise<string>((accept, reject) => cdp.once('Tracing.tracingComplete', event => event.stream ? accept(event.stream) : reject(new Error('Chrome trace stream missing'))));
+  await cdp.send('Tracing.end'); const stream = await complete;
   let text = '';
   for (;;) { const part = await cdp.send('IO.read', { handle: stream }); text += part.base64Encoded ? Buffer.from(part.data, 'base64').toString() : part.data; if (part.eof) break; }
   await cdp.send('IO.close', { handle: stream });
   const final = await page.evaluate(id => {
-    const root = document.querySelector('.planet-stage'), nodes = [root, ...root.querySelectorAll('*')];
-    return { sceneTransform: getComputedStyle(document.querySelector('.polycss-scene')).transform,
+    function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
+    const root = requiredElement(document.querySelector('.planet-stage')), nodes = [root, ...root.querySelectorAll<HTMLElement>('*')];
+    return { sceneTransform: getComputedStyle(requiredElement(document.querySelector('.polycss-scene'))).transform,
       nodes: nodes.length, retainedIdentity: nodes.length === window.__cometTraceNodes.length && nodes.every((node, i) => node === window.__cometTraceNodes[i]),
-      atlasUrls: [...new Set([...document.querySelectorAll(`.${id}-body > u`)].filter(node => getComputedStyle(node).display !== 'none').map(node => getComputedStyle(node).backgroundImage))].sort() };
+      atlasUrls: [...new Set([...document.querySelectorAll<HTMLElement>(`.${id}-body > u`)].filter(node => getComputedStyle(node).display !== 'none').map(node => getComputedStyle(node).backgroundImage))].sort() };
   }, id);
   await page.screenshot({ path: resolve(output, 'after.png') });
-  const trace = JSON.parse(text), marks = new Map(trace.traceEvents.filter(e => e.name.startsWith('comet-trace-')).map(e => [e.name, e]));
+  const trace = parseChromeTrace(JSON.parse(text)), marks = new Map(trace.traceEvents.filter(e => e.name?.startsWith('comet-trace-')).map(e => [e.name, e]));
   const start = marks.get('comet-trace-interaction-start'), end = marks.get('comet-trace-interaction-end');
   assert.ok(start && end, 'trace must bind the exact interaction window');
   const events = trace.traceEvents.filter(e => e.ts >= start.ts && e.ts < end.ts);
-  const spans = traceDurationEvents(trace.traceEvents, start.ts, end.ts);
+  const spans = traceDurationEvents(trace.traceEvents.map(event => ({ ...event, name: event.name ?? '' })), start.ts, end.ts);
   const main = spans.filter(e => e.pid === start.pid && e.tid === start.tid);
-  const selected = pattern => stats(main.filter(e => pattern.test(e.name)).map(e => e.dur / 1000));
+  const selected = (pattern: RegExp) => stats(main.filter(e => pattern.test(e.name)).map(e => e.dur / 1000));
   const draws = events.filter(e => e.name === 'DrawFrame' && (e.ph === 'I' || e.ph === 'X'));
-  const drawing = new Map();
-  for (const e of draws) { const k = `${e.pid}:${e.tid}`; if (!drawing.has(k)) drawing.set(k, []); drawing.get(k).push(e); }
-  const durations = {}, relevant = /Draw|Swap|SubmitCompositorFrame|RasterTask|PipelineReporter/;
+  const drawing = new Map<string, ChromeTraceEvent[]>();
+  for (const e of draws) { const k = `${e.pid}:${e.tid}`; const rows = drawing.get(k) ?? []; rows.push(e); drawing.set(k, rows); }
+  const durations: Record<string, number[]> = {}, relevant = /Draw|Swap|SubmitCompositorFrame|RasterTask|PipelineReporter/;
   for (const e of spans) if (relevant.test(e.name)) (durations[e.name] ??= []).push(e.dur / 1000);
-  const pipeline = events.filter(e => e.pid === start.pid && e.name === 'PipelineReporter' && e.ph === 'b' && e.args?.frame_reporter);
-  const sequences = new Map();
-  for (const e of pipeline) { const r = e.args.frame_reporter, k = `${r.frame_source}:${r.frame_sequence}`; if (!sequences.has(k)) sequences.set(k, new Set()); sequences.get(k).add(r.state); }
+  const pipeline = events.filter(hasFrameReporter).filter(e => e.pid === start.pid && e.name === 'PipelineReporter' && e.ph === 'b');
+  const sequences = new Map<string, Set<string | undefined>>();
+  for (const e of pipeline) { const r = e.args.frame_reporter, k = `${r.frame_source}:${r.frame_sequence}`; const states = sequences.get(k) ?? new Set<string | undefined>(); states.add(r.state); sequences.set(k, states); }
   const compressed = gzipSync(text, { level: 9 });
   const pinPaths = ['prepared/object.json', 'prepared/runtime.json', 'runtime-assets.json', 'prepared/terrain.json'].map(path => `src/planets/${id}/${path}`);
-  const prepared = {};
+  const prepared: Record<string, { bytes: number; sha256: string }> = {};
   for (const path of pinPaths) { const b = await readFile(path); prepared[path] = { bytes: b.length, sha256: hash(b) }; }
   const report = { schema: 'cssearth-comet-drag-trace@1', capturedAt: new Date().toISOString(),
     codeRevision: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
@@ -144,9 +152,9 @@ try {
   assert.deepEqual(report.interactionRequests, []); assert.deepEqual(final.atlasUrls, initial.atlasUrls);
   assert.notEqual(final.sceneTransform, initial.sceneTransform);
 } finally { await browser.close(); }
-function hash(b) { return createHash('sha256').update(b).digest('hex'); }
-function stats(values) {
+function hash(b: Uint8Array) { return createHash('sha256').update(b).digest('hex'); }
+function stats(values: readonly number[]) {
   values = values.filter(Number.isFinite).sort((a,b) => a-b);
-  const round = x => Math.round(x * 1000) / 1000;
+  const round = (x: number) => Math.round(x * 1000) / 1000;
   return { count: values.length, totalMs: round(values.reduce((a,b) => a+b,0)), medianMs: round(values[Math.floor(values.length*.5)] ?? 0), p95Ms: round(values[Math.floor(values.length*.95)] ?? 0), maxMs: round(values.at(-1) ?? 0), over33ms: values.filter(x=>x>33.4).length, over50ms: values.filter(x=>x>=50).length };
 }

@@ -11,7 +11,7 @@ const selected=OBJECTS.filter(o=>candidates.some(c=>c.id===o.id));
 assert.equal(selected.length,20);
 await mkdir(output,{recursive:true});
 const browser=await chromium.launch({channel:'chrome',headless:true});
-const results=[],errors=[];
+const results=[],errors: string[]=[];
 try {
   for(const dpr of [1,2]) {
     const page=await browser.newPage({viewport:{width:1440,height:1000},deviceScaleFactor:dpr});
@@ -19,15 +19,24 @@ try {
     for(const {id} of selected) {
       await page.goto(`${origin}/sun/?overview=solar-system`);
       await page.waitForFunction(()=>window.__cssEarth?.ready);
-      await page.evaluate(id=>document.querySelector(`.planet-object-link[data-object-id="${id}"]`).click(),id);
-      await page.waitForFunction(id=>window.__cssEarth?.activeObjectId===id&&window.__cssEarth.ready,id,{timeout:30000});
-      const state=await page.evaluate(()=>({
-        scenes:document.querySelectorAll('.planet-stage > .polycss-camera').length,
-        error:window.__cssEarth.error,
-        shadows:document.querySelector('input[name="shadows"]').checked,
-        orbit:document.querySelector('input[name="orbit"]').checked,
-        datasets:[...document.querySelectorAll('button[name="lens"]')].map(b=>b.textContent.trim()),
-      }));
+      await page.evaluate(id=>{
+        function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+return requiredElement(document.querySelector(`.planet-object-link[data-object-id="${id}"]`)).click(); },id);
+      await page.waitForFunction(id=>{
+        function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+return window.__cssEarth?.activeObjectId===id&&requiredDiagnostics(window.__cssEarth).ready; },id,{timeout:30000});
+      const state=await page.evaluate(()=>{
+        function requiredDiagnostics<T>(value: T | undefined): T { if (value === undefined) throw new Error("Expected mounted development diagnostics"); return value; }
+
+        function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+        function requiredInput(value: Element | null): HTMLInputElement { if (!(value instanceof HTMLInputElement)) throw new Error("Expected required HTMLInputElement"); return value; }
+return ({
+        scenes:document.querySelectorAll<HTMLElement>('.planet-stage > .polycss-camera').length,
+        error:requiredDiagnostics(window.__cssEarth).error,
+        shadows:requiredInput(document.querySelector('input[name="shadows"]')).checked,
+        orbit:requiredInput(document.querySelector('input[name="orbit"]')).checked,
+        datasets:[...document.querySelectorAll<HTMLButtonElement>('button[name="lens"]')].map(b=>b.textContent.trim()),
+      }); });
       assert.equal(state.scenes,1,`${id}: one mounted detailed scene`);
       assert.equal(state.error,null,`${id}: successful generic handoff`);
       assert.equal(state.shadows,false,`${id}: Shadows off`);

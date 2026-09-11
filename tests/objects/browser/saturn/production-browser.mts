@@ -1,5 +1,6 @@
+declare global { interface Window { __saturnProductionRetained: { nodes: Element[]; parents: (ParentNode | null)[] }; __saturnProductionPageShows: boolean[]; } }
 import assert from "node:assert/strict";
-import { chromium } from "playwright";
+import { chromium, type Page } from "playwright";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4310";
 const densities = process.argv[3] ? [Number(process.argv[3])] : [1, 2];
@@ -19,8 +20,8 @@ try {
       deviceScaleFactor,
     });
     const page = await context.newPage();
-    const problems = [];
-    const externalRequests = [];
+    const problems: string[] = [];
+    const externalRequests: string[] = [];
     page.on("console", (message) => {
       if (["error", "warning"].includes(message.type())) {
         problems.push(`${message.type()}: ${message.text()}`);
@@ -46,21 +47,23 @@ try {
       assert.equal(response?.status(), 200);
       await waitForReady(page);
       const initial = await page.evaluate(() => {
-        const stage = document.querySelector(".planet-stage");
-        const nodes = [stage, ...stage.querySelectorAll("*")];
+        function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
+        const stage = requiredElement(document.querySelector(".planet-stage"));
+        const nodes = [stage, ...stage.querySelectorAll<HTMLElement>("*")];
         window.__saturnProductionRetained = {
           nodes,
           parents: nodes.map((node) => node.parentNode),
         };
         return {
           title: document.title,
-          descendants: stage.querySelectorAll("*").length,
-          leaves: stage.querySelectorAll("b, s, u").length,
-          canvas: stage.querySelectorAll("canvas").length,
-          sceneSvg: stage.querySelectorAll(".polycss-scene svg").length,
-          cutaways: stage.querySelectorAll(".saturn-cutaway").length,
-          minorMoons: stage.querySelectorAll(".saturn-minor-moons > b").length,
-          renderRoots: stage.querySelectorAll(":scope > .planet-render-root")
+          descendants: stage.querySelectorAll<HTMLElement>("*").length,
+          leaves: stage.querySelectorAll<HTMLElement>("b, s, u").length,
+          canvas: stage.querySelectorAll<HTMLElement>("canvas").length,
+          sceneSvg: stage.querySelectorAll<HTMLElement>(".polycss-scene svg").length,
+          cutaways: stage.querySelectorAll<HTMLElement>(".saturn-cutaway").length,
+          minorMoons: stage.querySelectorAll<HTMLElement>(".saturn-minor-moons > b").length,
+          renderRoots: stage.querySelectorAll<HTMLElement>(":scope > .planet-render-root")
             .length,
         };
       });
@@ -86,14 +89,16 @@ try {
       for (const id of ["ultraviolet", "cross-section", "thermal", "cross-section", "cross-section", "normal"]) {
         await page.locator(`button[name="lens"][value="${id}"]`).click();
         await page.waitForFunction((lensId) => {
-          const stage = document.querySelector(".planet-stage");
-          const pressed = [...document.querySelectorAll('button[name="lens"][aria-pressed="true"]')];
+          function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
+          const stage = requiredElement(document.querySelector(".planet-stage"));
+          const pressed = [...document.querySelectorAll<HTMLButtonElement>('button[name="lens"][aria-pressed="true"]')];
           return pressed.length === 1 && pressed[0].value === lensId &&
             (stage.dataset.view ?? null) === (lensId === "cross-section" ? "interior" : null) &&
             (stage.dataset.lens ?? null) === (["normal", "cross-section"].includes(lensId) ? null : lensId);
         }, id);
         assert.deepEqual(await page.locator('button[name="lens"][aria-pressed="true"]')
-          .evaluateAll(buttons => buttons.map(button => button.value)), [id]);
+          .evaluateAll(buttons => buttons.map(button => { if (!(button instanceof HTMLButtonElement)) throw new Error("Expected lens button"); return button.value; })), [id]);
       }
 
       for (const [name, className] of [
@@ -104,24 +109,28 @@ try {
         const initialChecked = await control.isChecked();
         for (const checked of [false, true, initialChecked]) {
           await control.evaluate((element, expected) => {
+if (!(element instanceof HTMLInputElement)) throw new Error("Expected HTMLInputElement observation");
+
             if (element.checked !== expected) element.click();
           }, checked);
           await page.waitForFunction(({ name, className, checked }) =>
-            document.querySelector(`input[name="${name}"]`)?.checked === checked &&
-            document.querySelector(".planet-stage")?.classList.contains(className) === !checked,
+            document.querySelector<HTMLInputElement>(`input[name="${name}"]`)?.checked === checked &&
+            document.querySelector<HTMLElement>(".planet-stage")?.classList.contains(className) === !checked,
           { name, className, checked });
         }
       }
 
       const after = await page.evaluate(() => {
-        const stage = document.querySelector(".planet-stage");
+        function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
+        const stage = requiredElement(document.querySelector(".planet-stage"));
         const retained = window.__saturnProductionRetained;
         return {
-          descendants: stage.querySelectorAll("*").length,
-          leaves: stage.querySelectorAll("b, s, u").length,
+          descendants: stage.querySelectorAll<HTMLElement>("*").length,
+          leaves: stage.querySelectorAll<HTMLElement>("b, s, u").length,
           stable: retained.nodes.every((node, index) =>
             node.isConnected && node.parentNode === retained.parents[index]),
-          resources: performance.getEntriesByType("resource")
+          resources: performance.getEntriesByType("resource").filter((entry): entry is PerformanceResourceTiming => entry instanceof PerformanceResourceTiming)
             .map(({ name }) => name)
             .filter((name) => name.includes("/scenes/saturn/")),
         };
@@ -146,12 +155,11 @@ try {
       const restored = await page.evaluate(() => ({
         path: location.pathname,
         persistedPageShow: window.__saturnProductionPageShows.at(-1),
-        notRestoredReasons: performance.getEntriesByType("navigation")[0]
-          ?.notRestoredReasons ?? null,
-        descendants: document.querySelector(".planet-stage")
-          ?.querySelectorAll("*").length,
-        leaves: document.querySelector(".planet-stage")
-          ?.querySelectorAll("b, s, u").length,
+        notRestoredReasons: (() => { const entry = performance.getEntriesByType("navigation").find(entry => entry instanceof PerformanceNavigationTiming); return entry && "notRestoredReasons" in entry ? entry.notRestoredReasons : null; })(),
+        descendants: document.querySelector<HTMLElement>(".planet-stage")
+          ?.querySelectorAll<HTMLElement>("*").length,
+        leaves: document.querySelector<HTMLElement>(".planet-stage")
+          ?.querySelectorAll<HTMLElement>("b, s, u").length,
       }));
       assert.deepEqual(restored, {
         path: "/saturn/",
@@ -186,9 +194,9 @@ console.log(JSON.stringify({
   reports,
 }, null, 2));
 
-async function waitForReady(page) {
+async function waitForReady(page: Page) {
   await page.waitForFunction(() =>
     document.documentElement.dataset.ready === "true" &&
-    document.querySelector(".planet-stage")?.getAttribute("aria-busy") ===
+    document.querySelector<HTMLElement>(".planet-stage")?.getAttribute("aria-busy") ===
       "false");
 }
