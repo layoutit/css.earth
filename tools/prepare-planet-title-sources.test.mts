@@ -1,3 +1,4 @@
+import { hasErrorCode, isRecord, requireString } from "./source-values.mts";
 import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -11,13 +12,16 @@ import { PLANET_TITLE_RECIPE } from
 import { createPreparedTitleLayout, sha256 } from "../src/platform/prepared-title.mts";
 import { createPlanetTitleSource, preparePlanetTitleSources } from
   "./prepare-planet-title-sources.mts";
+import type { PathLike } from "node:fs";
 
 const projectRoot = resolve(import.meta.dirname, "..");
 
 test("Hiʻiaka preserves its okina using a real glyph in the pinned title font", async () => {
   const fontPath = resolve(projectRoot, PLANET_TITLE_RECIPE.checkedFontPath);
   assert.equal(sha256(await readFile(fontPath)), PLANET_TITLE_RECIPE.sourceSha256);
-  const font = fontkit.openSync(fontPath).getVariation({
+  const opened = fontkit.openSync(fontPath);
+  assert.ok("getVariation" in opened);
+  const font = opened.getVariation({
     wght: PLANET_TITLE_RECIPE.weight,
     opsz: PLANET_TITLE_RECIPE.opticalSize,
   });
@@ -72,8 +76,8 @@ test("regenerates every planet title from one pinned Saturn recipe", async () =>
         `${planet.id}: title must have a checked source or prepared output`);
       const preparedModule = await import(pathToFileURL(preparedTitlePath).href);
       const preparedTitle = Object.values(preparedModule).find(value =>
-        value && typeof value === "object" && value.label === planet.name);
-      assert.ok(preparedTitle, `${planet.id}: prepared title export`);
+        isRecord(value) && value.label === planet.name);
+      assert.ok(isRecord(preparedTitle), `${planet.id}: prepared title export`);
       for (const [field, value] of Object.entries(source)) {
         assert.deepEqual(preparedTitle[field], value,
           `${planet.id}: prepared title source field ${field}`);
@@ -86,18 +90,18 @@ test("regenerates every planet title from one pinned Saturn recipe", async () =>
       );
       assert.equal(preparedTitle.inputSha256, PLANET_TITLE_RECIPE.sourceSha256,
         `${planet.id}: prepared title input pin`);
-      assert.match(preparedTitle.generator, /prepare-content\.mjs$/u,
+      assert.match(requireString(preparedTitle.generator), /prepare-content\.mjs$/u,
         `${planet.id}: prepared title generator`);
     }
   }
 });
 
-async function exists(path) {
+async function exists(path: PathLike) {
   try {
     await access(path);
     return true;
   } catch (error) {
-    if (error?.code === "ENOENT") return false;
+    if (hasErrorCode(error,"ENOENT")) return false;
     throw error;
   }
 }

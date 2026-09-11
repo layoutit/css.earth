@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { accumulateRadianceRow, finishRadianceGrid, nightLightColor, validateNightLightGrid } from './night-lights.mts';
 
 const missing = Math.fround(-999.9);
-function aggregate(rows, grid, target) {
+function aggregate(rows: number[][], grid: Parameters<typeof accumulateRadianceRow>[2], target: Parameters<typeof accumulateRadianceRow>[3]) {
   const sums = new Float64Array(target.width * target.height), weights = new Float64Array(sums.length);
-  rows.forEach((row, y) => accumulateRadianceRow(Float32Array.from(row), y, grid, target, sums, weights));
+  rows.forEach((row: Iterable<number>, y: number) => accumulateRadianceRow(Float32Array.from(row), y, grid, target, sums, weights));
   return finishRadianceGrid(sums, weights, grid, target);
 }
 
@@ -49,9 +49,9 @@ test('georeferencing must match the actual pixel-area EPSG:4326 mosaic', () => {
     getSamplesPerPixel: () => 1, getGDALNoData: () => missing,
     getGeoKeys: () => ({ GeographicTypeGeoKey: 4326, GTRasterTypeGeoKey: 1 }) };
   assert.doesNotThrow(() => validateNightLightGrid(image, recipe));
-  assert.throws(() => validateNightLightGrid({ ...image, getBoundingBox: () => [-180, -70, 180, 80] }, recipe), /coordinates/);
-  assert.throws(() => validateNightLightGrid({ ...image, getGeoKeys: () => ({ GeographicTypeGeoKey: 3857 }) }, recipe), /coordinates/);
-  assert.throws(() => validateNightLightGrid({ ...image, getGDALNoData: () => 0 }, recipe), /missing/);
+  assert.throws(() => Reflect.apply(validateNightLightGrid, undefined, [{ ...image, getBoundingBox: () => [-180, -70, 180, 80] }, recipe]), /coordinates/);
+  assert.throws(() => Reflect.apply(validateNightLightGrid, undefined, [{ ...image, getGeoKeys: () => ({ GeographicTypeGeoKey: 3857 }) }, recipe]), /coordinates/);
+  assert.throws(() => Reflect.apply(validateNightLightGrid, undefined, [{ ...image, getGDALNoData: () => 0 }, recipe]), /missing/);
 });
 
 test('the shared globe and legend transfer distinguishes darkness, missingness and saturation', () => {

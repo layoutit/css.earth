@@ -115,7 +115,7 @@ try {
       atlasUrls: [...new Set([...document.querySelectorAll(`.${id}-body > u`)].map(node => getComputedStyle(node).backgroundImage))].sort() };
   }, id);
   await page.screenshot({ path: resolve(output, 'after.png') });
-  const traceEvents = readTrace(text), marks = new Map<string, TraceEvent>(traceEvents.filter(event => event.name.startsWith('comet-trace-')).map(event => [event.name, event]));
+  const traceEvents = readTrace(text), marks = new Map<string, TraceEvent>(traceEvents.flatMap(event => event.name?.startsWith('comet-trace-') ? [[event.name, event] as const] : []));
   const start = marks.get('comet-trace-interaction-start'), end = marks.get('comet-trace-interaction-end');
   assert.ok(start && end, 'trace must bind the exact interaction window');
   const events = traceEvents.filter(event => event.ts >= start.ts && event.ts < end.ts);

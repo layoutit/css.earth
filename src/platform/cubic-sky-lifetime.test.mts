@@ -52,7 +52,7 @@ test("drag destruction releases listeners and capture even if interaction comple
     controls.destroy();
     controls.update({ drag: true });
     // The fixture exposes only style mutation methods; this reads its tested cursor field.
-    assert.equal((surface.style as CSSStyleDeclaration & { cursor?: string }).cursor, undefined);
+    assert.equal(surface.style.cursor, undefined);
   } finally { globalThis.HTMLElement = previous; }
 });
 

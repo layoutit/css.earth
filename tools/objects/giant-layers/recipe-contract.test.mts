@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import test from 'node:test';
-import {parse} from '../material-composition/data-schema.mts';
+import {type Guard, parse} from '../material-composition/data-schema.mts';
 import {layeredRecipe} from '../material-composition/layered-recipe.mts';
 import {radialMotionRecipe} from '../material-composition/radial-motion-recipe.mts';
 import {spectralRecipe} from '../material-composition/spectral-recipe.mts';
@@ -13,15 +13,15 @@ import {normalizedPresentationRecipe} from './normalized-presentation-contract.m
 import {parseRadialLayerRecipe} from './index.mts';
 import {parseObservedSurfaceRecipe} from './observations.mts';
 import {parseEllipsoidMaterialRecipe} from './materials.mts';
-const read = async (body, file) => JSON.parse(await readFile(new URL(`../../../src/planets/${body}/source/preparation/${file}.json`, import.meta.url), 'utf8'));
+const read = async (body: string, file: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../../src/planets/${body}/source/preparation/${file}.json`, import.meta.url), 'utf8'));
 
 test('all existing giant preparation recipes satisfy the operator-owned structural contracts', async () => {
-  const fixtures = [
+  const fixtures: [string, string, Guard<unknown>][] = [
     ['saturn', 'geometry', layeredRecipe], ['saturn', 'radial-motion', radialMotionRecipe],
     ['saturn', 'surface', spectralRecipe], ['saturn', 'presentation', oblatePresentation],
     ['jupiter', 'materials', photometricRecipe], ['jupiter', 'presentation', normalizedPresentationRecipe],
-    ...['jupiter', 'uranus', 'neptune'].map(body => [body, 'geometry', bandedGeometryRecipe]),
-    ...['uranus', 'neptune'].map(body => [body, 'presentation', layeredPresentationRecipe]),
+    ...['jupiter', 'uranus', 'neptune'].map((body): [string, string, Guard<unknown>] => [body, 'geometry', bandedGeometryRecipe]),
+    ...['uranus', 'neptune'].map((body): [string, string, Guard<unknown>] => [body, 'presentation', layeredPresentationRecipe]),
   ];
   for (const [body, file, guard] of fixtures) {
     const input = await read(body, file);
@@ -35,13 +35,14 @@ test('all existing giant preparation recipes satisfy the operator-owned structur
 });
 
 test('nested malformed scalar, buffer-channel and rotation facts cannot cross typed recipe boundaries', async () => {
-  const radial = await read('saturn', 'rings');
-  radial.layers[0].interior.baseAlpha = '0.25';
+  const radial = parseRadialLayerRecipe(await read('saturn', 'rings'));
+  assert.ok('interior' in radial.layers[0]);
+  Object.assign(radial.layers[0].interior, {baseAlpha: '0.25'});
   assert.throws(() => parseRadialLayerRecipe(radial), /structure/);
-  const observed = await read('neptune', 'observations');
-  observed.lenses[0].decode.channels = 5;
+  const observed = parseObservedSurfaceRecipe(await read('neptune', 'observations'));
+  Object.assign(observed.lenses[0].decode, {channels: 5});
   assert.throws(() => parseObservedSurfaceRecipe(observed), /structure/);
-  const material = await read('uranus', 'materials');
-  material.raster.view.rotations[0].axis = 'w';
+  const material = parseEllipsoidMaterialRecipe(await read('uranus', 'materials'));
+  Object.assign(material.raster.view.rotations[0], {axis: 'w'});
   assert.throws(() => parseEllipsoidMaterialRecipe(material), /structure/);
 });

@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { decodeGiottoFrame, loadPinned } from './objects/comet-1p/inspect-giotto.mts';
 
-function fixture(extra = []) {
+function fixture(extra: string[][] = []): [Buffer, Buffer, Buffer] {
   const cards = [
     ['SIMPLE', 'T'], ['BITPIX', '16'], ['NAXIS', '2'], ['NAXIS1', '2'], ['NAXIS2', '3'],
     ['FILTER', "'CLEAR   '"], ...extra,
@@ -32,7 +32,7 @@ test('IHW decoder preserves signed radiance, independent validity, bottom-up row
 
 test('IHW decoder rejects unsupported calibration and ambiguous or incomplete headers', () => {
   for (const extra of [[['BSCALE', '2']], [['BZERO', '100']], [['FILTER', "'RED'"]], [['NAXIS1', '4']]]) {
-    assert.throws(() => decodeGiottoFrame(...fixture(extra)));
+    assert.throws(() => Reflect.apply(decodeGiottoFrame, undefined, [...fixture(extra)]));
   }
   const noEnd = fixture(); noEnd[0].fill(32, noEnd[0].indexOf('END'), noEnd[0].indexOf('END') + 3);
   assert.throws(() => decodeGiottoFrame(...noEnd), /Unsupported/);
@@ -53,12 +53,12 @@ test('intake refuses modified cached sources without silently replacing them', a
   const directory = await mkdtemp(join(tmpdir(), 'halley-giotto-test-'));
   try {
     const data = Buffer.from('pinned source');
-    const entry = { file: 'source.img', bytes: data.length, sha256: createHash('sha256').update(data).digest('hex') };
+    const entry = { url: 'https://example.invalid/source.img', file: 'source.img', bytes: data.length, sha256: createHash('sha256').update(data).digest('hex') };
     await writeFile(join(directory, entry.file), data);
     assert.deepEqual(await loadPinned(directory, entry), data);
     const changed = Buffer.from('changed data!');
     await writeFile(join(directory, entry.file), changed);
-    await assert.rejects(loadPinned(directory, entry, true), /Source pin mismatch/);
+    await assert.rejects(Reflect.apply(loadPinned, undefined, [directory, entry, true]), /Source pin mismatch/);
     assert.deepEqual(await readFile(join(directory, entry.file)), changed);
   } finally { await rm(directory, { recursive: true }); }
 });

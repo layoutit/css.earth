@@ -1,3 +1,4 @@
+import { required, fixtureRecord } from '../../test-values.mts';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -18,12 +19,12 @@ test('Giotto preparation reproduces the reviewed image and lossless footprint', 
     assert.equal(isGap, result.validity[i] === 0);
   }
   assert.ok(result.report.coverage.sampledSurfacePercent > 4 && result.report.coverage.sampledSurfacePercent < 5);
-  assert.equal(result.report.camera.cameraPoseWasFittedToOutline, false);
-  assert.equal(result.report.camera.modelWasDeformed, false);
+  assert.equal(fixtureRecord(result.report.camera).cameraPoseWasFittedToOutline, false);
+  assert.equal(fixtureRecord(result.report.camera).modelWasDeformed, false);
 });
 
 test('Source darkness does not remove an otherwise visible photographic sample', async () => {
-  const registration = JSON.parse(await readFile(resolve(source, 'reference/giotto-registration.json')));
+  const registration = JSON.parse(await readFile(resolve(source, 'reference/giotto-registration.json'), 'utf8'));
   const mesh = parsePdsRadiusTable(await readFile(resolve(source, 'shape/1682q1halley.tab'), 'utf8'), {
     stepDegrees:5, longitudeDirection:'east-positive', metersPerUnit:1000, expectedVertices:2522, expectedFaces:5040,
   });
@@ -36,7 +37,7 @@ test('Source darkness does not remove an otherwise visible photographic sample',
     const point = [0,1,2].map(k => vertices.reduce((sum,v) => sum+v[k]/3,0));
     const a = black(point,id), b = white(point,id);
     assert.equal(Boolean(a), Boolean(b));
-    if (a) { observed++; assert.deepEqual(a.color,[1,1,1]); assert.deepEqual(b.color,[255,255,255]); }
+    if (a) { observed++; assert.deepEqual(a.color,[1,1,1]); assert.deepEqual(required(b).color,[255,255,255]); }
     else missing++;
   }
   assert.ok(observed > 0 && missing > observed);

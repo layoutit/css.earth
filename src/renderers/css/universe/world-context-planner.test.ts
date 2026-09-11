@@ -32,7 +32,7 @@ test('complete context frames cross a structured-clone boundary without mutating
   expect(first.projectedBodies.some(body => body.transforms.length > 0)).toBe(true);
   for (const distance of [5, 50, 5000, 20]) {
     const next = structuredClone(input);
-    next.world.pose.positionM[2] = distance * 149597870700;
+    Object.assign(next.world.pose, { positionM: [next.world.pose.positionM[0], next.world.pose.positionM[1], distance * 149597870700] });
     next.selectedId = 'saturn'; next.overview = false;
     next.bodies[0].hovered = true;
     const packet = structuredClone(calculate(freeze(next)));

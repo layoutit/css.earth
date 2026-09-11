@@ -2,23 +2,8 @@ import { useSyncExternalStore } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createControlStore } from '../utils/control-store';
 
-export type CloudPartKind = 'extended' | 'diffuse' | 'compact';
-
-export interface CloudPart {
-  id: string;
-  label: string;
-  kind: CloudPartKind;
-  signalFraction: number;
-  defaultEnabled: boolean;
-}
-
-export interface CloudSelection { contextId: string; enabledIds: string[]; }
-export interface CloudBrightness { overall: number; x: number; y: number; z: number; }
-export interface CloudContext {
-  id: string;
-  parts: CloudPart[];
-  selection?: CloudSelection | readonly string[];
-}
+import type { CloudPartKind, CloudPart, CloudSelection, CloudBrightness, CloudContext } from '../viewer/cloud-types';
+export type { CloudPartKind, CloudPart, CloudSelection, CloudBrightness, CloudContext } from '../viewer/cloud-types';
 
 interface SavedValue { enabledIds: string[]; brightness: CloudBrightness; }
 interface BrightnessSpec { key: keyof CloudBrightness; label: string; }

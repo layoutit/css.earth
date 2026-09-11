@@ -1,3 +1,4 @@
+import { required } from '../../test-values.mts';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {sampleEncounterFootprint,validateEncounterImageReference} from './encounter-surface.mts';
@@ -14,33 +15,33 @@ test('a bilinear footprint retains calibrated darkness and checks every contribu
 test('detector edges never interpolate missing contributors',()=>{
  const {frame,plane}=sample();
  for(const p of [[-.1,.5,10],[1,.5,10],[.5,1,10]])assert.equal(sampleEncounterFootprint(frame,{project:()=>p},plane,[0,0,0],{maximumSeparationMeters:2}).reason,'outside-detector');
- assert.equal(sampleEncounterFootprint(frame,{project:()=>null},plane,[0,0,0],{}).reason,'behind-camera');
+ assert.equal(sampleEncounterFootprint(frame,{project:()=>null},plane,[0,0,0],{maximumSeparationMeters:2}).reason,'behind-camera');
 });
 test('registration recomputes holdouts and cannot be approved by changing declared RMS',()=>{
- const camera={project:p=>[p[0],p[1],10],report:{nominalPixelScaleMeters:1}};
+ const camera={project:(p: readonly number[])=>[p[0],p[1],10],report:{nominalPixelScaleMeters:1}};
  const controls=Array.from({length:12},(_,i)=>({id:String(i),partition:i<6?'fit':'holdout',sourcePointMeters:[i,i%3,0],sourcePixel:[i,i%3]}));
  const r={method:'source-topography-feature-translation',sourceShapeSha256:'a'.repeat(64),controls,maximumRmsMeters:1,maximumResidualMeters:2,nominalPixelScaleMeters:1,limitations:'Image feature residuals; no absolute geodetic accuracy claim.'};
- assert.equal(validateEncounterRegistration(camera,r,r.sourceShapeSha256).holdout.rmsPixels,0);
- r.holdout={rmsPixels:0,maximumPixels:0};r.controls[11].sourcePixel[0]+=20;
- assert.throws(()=>validateEncounterRegistration(camera,r,r.sourceShapeSha256),/budget/);
- assert.throws(()=>validateEncounterRegistration(camera,r,'b'.repeat(64)),/source-bound/);
+ assert.equal(required(validateEncounterRegistration(camera,r,r.sourceShapeSha256).holdout).rmsPixels,0);
+ Object.assign(r,{holdout:{rmsPixels:0,maximumPixels:0}});r.controls[11].sourcePixel[0]+=20;
+ assert.throws(()=>Reflect.apply(validateEncounterRegistration, undefined, [camera, r, r.sourceShapeSha256]),/budget/);
+ assert.throws(()=>Reflect.apply(validateEncounterRegistration, undefined, [camera, r, 'b'.repeat(64)]),/source-bound/);
 });
 test('image overlap controls require the pinned earlier reference and visible source points',()=>{
- const sha='a'.repeat(64),reference={id:'reference',imageSha256:sha,controlSha256:sha,camera:{positionMeters:[0,0,10],project:p=>[p[0],p[1],10]},sampleSource:()=>({radiance:1})};
+ const sha='a'.repeat(64),reference={id:'reference',imageSha256:sha,controlSha256:sha,camera:{positionMeters:[0,0,10],project:(p: readonly number[])=>[p[0],p[1],10]},sampleSource:()=>({radiance:1,separationMeters:0,gain:1,maximumEmissionDegrees:0})};
  const control={registration:{method:'registered-image-feature-translation',reference:{id:'reference',imageSha256:sha,controlSha256:sha},controls:[{referencePixel:[0,0],sourcePointMeters:[0,0,0]}]}};
  const mesh={intersect:()=>({radius:10})};
  validateEncounterImageReference(control,reference,mesh);
- assert.throws(()=>validateEncounterImageReference(control,undefined,mesh),/earlier qualified/);
- assert.throws(()=>validateEncounterImageReference(control,{...reference,controlSha256:'b'.repeat(64)},mesh),/source hashes/);
- assert.throws(()=>validateEncounterImageReference(control,{...reference,sampleSource:()=>({reason:'bad-source-pixel'})},mesh),/qualified reference pixel/);
- assert.throws(()=>validateEncounterImageReference(control,reference,{intersect:()=>({radius:5})}),/occluded/);
+ assert.throws(()=>Reflect.apply(validateEncounterImageReference, undefined, [control, undefined, mesh]),/earlier qualified/);
+ assert.throws(()=>Reflect.apply(validateEncounterImageReference, undefined, [control, {...reference,controlSha256:'b'.repeat(64)}, mesh]),/source hashes/);
+ assert.throws(()=>Reflect.apply(validateEncounterImageReference, undefined, [control, {...reference,sampleSource:()=>({reason:'bad-source-pixel'})}, mesh]),/qualified reference pixel/);
+ assert.throws(()=>Reflect.apply(validateEncounterImageReference, undefined, [control, reference, {intersect:()=>({radius:5})}]),/occluded/);
  control.registration.controls[0].referencePixel=[3,4];
- assert.throws(()=>validateEncounterImageReference(control,reference,mesh),/qualified reference pixel/);
+ assert.throws(()=>Reflect.apply(validateEncounterImageReference, undefined, [control, reference, mesh]),/qualified reference pixel/);
 });
 test('EPOXI north and east map to the documented detector axes',()=>{
  const h={GEOMSTAT:'OK',GEOMQUAL:'RECONSTRUCTED',DNAXIS1:'RIGHT, +Xinstr',DNAXIS2:'UP, -Yinstr',TARSCRX:-10,TARSCRY:0,TARSCRZ:0,TARSUNRX:100,TARSUNRY:0,TARSUNRZ:0,BORERA:0,BOREDEC:0,CELESTN:0,TARSCR:10,PXLSCALE:100,NAXIS1:8,NAXIS2:8};
  const c=encounterCamera(h,{bodyToJ2000:[[1,0,0],[0,1,0],[0,0,1]],offsetPixels:[0,0],maximumOffsetPixels:0});
- const actual=c.project([0,100,200]);assert.ok(Math.abs(actual[0]-2.5)<1e-10);assert.ok(Math.abs(actual[1]-5.5)<1e-10);
+ const actual=c.project([0,100,200]);assert.ok(Math.abs(required(actual)[0]-2.5)<1e-10);assert.ok(Math.abs(required(actual)[1]-5.5)<1e-10);
  assert.equal(c.report.nominalPixelScaleMeters,100);
 });
 test('observed shadowed terrain remains eligible when the source camera can see it',async()=>{
@@ -51,6 +52,6 @@ test('observed shadowed terrain remains eligible when the source camera can see 
  const recipe={photometry:{model:'observed',maximumGain:1},transfer:{maximumEmissionDegrees:75}};
  const plane=buildEncounterBackplane(frame,camera,mesh,recipe);
  assert.deepEqual([...plane.accepted],[1,1,1,1]);assert.equal(plane.report.acceptedPixels,4);
- mesh.faceProvenance=[1];
+ Object.assign(mesh,{faceProvenance:[1]});
  assert.equal(buildEncounterBackplane(frame,camera,mesh,recipe).report.acceptedPixels,0);
 });

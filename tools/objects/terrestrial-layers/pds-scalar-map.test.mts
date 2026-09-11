@@ -1,3 +1,4 @@
+import { required } from '../../test-values.mts';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -14,7 +15,7 @@ const lens = { path: 'science/AL01_GLB_M006_M006_V01.TAB', labelPath: 'science/a
 const label = await readFile(new URL('../../../src/planets/comet-67p/source/science/al01_glb_m006_m006_v01.lbl', import.meta.url), 'utf8');
 const records = Buffer.from(Array.from({ length: 259200 }, (_, i) => [90 - Math.floor(i / 720) * .5, i % 720 * .5, .2]
   .map(n => n.toFixed(4).padStart(9)).join(',') + '\r\n').join(''));
-const withValue = (bytes, row, value) => bytes.write(value.toFixed(4).padStart(9), row * 31 + 20, 'ascii');
+const withValue = (bytes: Buffer<ArrayBuffer>, row: number, value: number) => bytes.write(value.toFixed(4).padStart(9), row * 31 + 20, 'ascii');
 
 test('PDS scalar records preserve zero, sentinel, physical rejection and source-unit conversion separately', () => {
   const bytes = Buffer.from(records);
@@ -49,8 +50,8 @@ test('source-point transfer honors distance, missing data and valid zero without
   const data = new Float64Array(259200).fill(NaN), index = scalarMapIndex(0, 0, grid);
   data[index] = 0;
   const sampler = createScalarMapSampler(data, lens, mesh, mesh);
-  assert.equal(sampler.samplePoint([2.1, 0, 0]).value, 0);
-  assert.equal(sampler.samplePoint([2.1, 0, 0]).sourceCell, index);
+  assert.equal(required(sampler.samplePoint([2.1, 0, 0])).value, 0);
+  assert.equal(required(sampler.samplePoint([2.1, 0, 0])).sourceCell, index);
   assert.equal(sampler.samplePoint([2.3, 0, 0]), null);
   assert.equal(sampler.sample(1, 0), null);
 });
@@ -70,6 +71,6 @@ test('all radial branches are withheld on either mesh, including cell-edge ambig
   assert.equal(sampler.sample(0,0), null);
   assert.equal(sampler.sample(180,0), .2);
   assert.equal(createScalarMapSampler(data, lens, mesh, nonconvex).samplePoint([2,0,0]), null);
-  const edgeAmbiguity = { hit: (lon, lat) => lon === .25 && lat === .25 ? null : mesh.hit(lon, lat, true) };
+  const edgeAmbiguity = { ...mesh, hit: (lon: number, lat: number) => lon === .25 && lat === .25 ? null : mesh.hit(lon, lat, true) };
   assert.equal(createScalarMapSampler(data, lens, mesh, edgeAmbiguity).sample(0,0), null);
 });

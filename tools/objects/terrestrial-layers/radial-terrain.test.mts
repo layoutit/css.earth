@@ -1,3 +1,6 @@
+import { required, fixtureRecord } from '../../test-values.mts';
+import { fixtureSource } from '../test-source-fixture.mts';
+import { createIndexedShape } from './obj-shape.mts';
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { mkdtemp, writeFile, rm } from 'node:fs/promises';
@@ -12,24 +15,24 @@ test('source topology preserves translated inward-facing facets and welds duplic
   const tetrahedron = [0,1,2,0,3,1,1,3,2,2,3,0];
   const positions = tetrahedron.map(index => vertices[index].map((v, i) => v + (i === 0 ? 4 : 0)));
   const indices = Array.from({length: 4}, (_, i) => [i * 3, i * 3 + 1, i * 3 + 2]);
-  const faces = await simplifyRadialShape({positions, indices}, {faceBudget: 4,
+  const faces = await simplifyRadialShape(createIndexedShape(positions, indices,{metersPerUnit:1,expectedVertices:positions.length,expectedFaces:indices.length}), {faceBudget: 4,
     simplification: {method: 'source-meshoptimizer', targetFaces: 4, maximumErrorMeters: .001}}, 1);
   assert.equal(faces.length, 4);
   assert.ok(faces.some(face => face.normal.reduce((sum, n, i) => sum + n * face.vertices[0][i], 0) < 0),
     'A valid outward face may point toward the coordinate origin');
-  assert.equal(faces.simplification.topology.eulerCharacteristic, 2);
-  assert.equal(faces.simplification.topology.components, 1);
-  assert.ok(faces.simplification.weldedVertices < positions.length);
+  assert.equal(fixtureRecord(faces.simplification,"topology").eulerCharacteristic, 2);
+  assert.equal(fixtureRecord(faces.simplification,"topology").components, 1);
+  assert.ok(Number(fixtureRecord(faces.simplification).weldedVertices) < positions.length);
   assert.equal(validateClosedMesh(tetrahedron, vertices).components, 1);
   assert.throws(() => validateClosedMesh(tetrahedron.slice(3), vertices), /not closed/);
   assert.throws(() => validateClosedMesh([1,0,2,...tetrahedron.slice(3)], vertices), /not closed/);
   assert.deepEqual([...removeOppositeFacePairs(Uint32Array.from([...tetrahedron, 0,1,4,4,1,0]))], tetrahedron);
-  assert.throws(() => removeOppositeFacePairs([0,1,2,1,2,0]), /ambiguous duplicate/);
+  assert.throws(() => Reflect.apply(removeOppositeFacePairs, undefined, [[0,1,2,1,2,0]]), /ambiguous duplicate/);
 });
 
 test('radial geometry retains independently specified ellipsoid axes and rejects missing radii', () => {
   const profile = { latitudeSegments: 12, longitudeSegments: 24, faceBudget: 1000 };
-  const sample = (longitude, latitude) => {
+  const sample = (longitude: number, latitude: number) => {
     const lon = longitude * Math.PI / 180, lat = latitude * Math.PI / 180;
     return 1 / Math.hypot(Math.cos(lat) * Math.cos(lon) / 3, Math.cos(lat) * Math.sin(lon) / 2, Math.sin(lat));
   };
@@ -96,11 +99,12 @@ test('two-sided radial preparation retains exact source geometry and atlas layou
         grid: { metersPerUnit: 1, expectedVertices: 4, expectedFaces: 4 }, faceBudget: 4,
         simplification: { method: 'source-meshoptimizer', targetFaces: 4, maximumErrorMeters: .001 } } } };
     let validations = 0;
-    const source = { manifest: { inputs: [] }, async validatePath(path) { assert.equal(path, 'shape.obj'); validations++; } };
-    const prepare = async value => {
+    const pinned=await fixtureSource(directory,[{id:'shape',path:'shape.obj',consumers:['geometry']}]);
+    const source = {...pinned,async validatePath(path:string){assert.equal(path,'shape.obj');validations++;return pinned.validatePath(path);}};
+    const prepare = async (value: unknown) => {
       const profile = structuredClone(config);
-      if (value !== undefined) profile.geometry.radialTerrain.backfaceVisible = value;
-      return loadRadialTerrain({ config: profile, sourceDirectory: directory, source });
+      if (value !== undefined) Object.assign(profile.geometry.radialTerrain,{backfaceVisible:value});
+      return required(await loadRadialTerrain({ config: profile, sourceDirectory: directory, source }));
     };
     const baseline = await prepare(undefined), explicitDefault = await prepare(false), twoSided = await prepare(true);
     const { grid: baselineGrid, ...baselineOutput } = baseline;
@@ -108,10 +112,10 @@ test('two-sided radial preparation retains exact source geometry and atlas layou
     assert.deepEqual(explicitOutput, baselineOutput, 'omission and false preserve existing outputs');
     assert.deepEqual(explicitGrid.positions, baselineGrid.positions);
     assert.deepEqual(explicitGrid.indices, baselineGrid.indices);
-    assert.deepEqual(twoSided.faces, baseline.faces);
-    assert.deepEqual(twoSided.plans, baseline.plans);
-    assert.equal(twoSided.leaves.length, baseline.leaves.length);
-    assert.deepEqual(twoSided.leaves.map(leaf => ({ ...leaf, style: leaf.style.replace(';backface-visibility:visible', '') })), baseline.leaves);
+    assert.deepEqual(required(twoSided).faces, required(baseline).faces);
+    assert.deepEqual(required(twoSided).plans, required(baseline).plans);
+    assert.equal(required(twoSided).leaves.length, required(baseline).leaves.length);
+    assert.deepEqual(required(twoSided).leaves.map(leaf => ({ ...leaf, style: leaf.style.replace(';backface-visibility:visible', '') })), required(baseline).leaves);
     assert.equal(validations, 3, 'all valid variants still validate the owned mesh source');
     for (const value of ['true', 1, null]) await assert.rejects(prepare(value), /backface visibility must be boolean/);
     assert.equal(validations, 3, 'invalid coverage policy is rejected before source loading');

@@ -14,7 +14,8 @@ import { cloudCompositeOpacity } from '../../../../labs/nebula/src/viewer/cloud-
 class FakeElement {
   readonly children: FakeElement[] = []; readonly style: Record<string, string> = {}; readonly dataset: Record<string, string> = {};
   parentNode: FakeElement | null = null; className = ''; hidden = false; clientWidth = 400; clientHeight = 300;
-  constructor(readonly ownerDocument: FakeDocument) {
+  readonly ownerDocument: FakeDocument;
+  constructor(ownerDocument: FakeDocument) { this.ownerDocument = ownerDocument;
     Object.defineProperty(this.style, 'setProperty', { value: (name: string, value: string) => { this.style[name] = value; } });
   }
   append(child: FakeElement): void { this.insertBefore(child, null); }

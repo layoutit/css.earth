@@ -19,7 +19,8 @@ function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => 
     dataset: Record<string, string> = {};
     isConnected = true;
     ownerDocument: any;
-    constructor(readonly x = 0) { super(); }
+    readonly x: number;
+    constructor(x = 0) { super(); this.x = x; }
     getBoundingClientRect() { return { x: this.x, y: 0, left: this.x, top: 0, width: 1600, height: 900 }; }
   }
   const view = Object.assign(new EventTarget(), { getComputedStyle: () => ({ perspective: '1000px', perspectiveOrigin: '800px 450px' }),

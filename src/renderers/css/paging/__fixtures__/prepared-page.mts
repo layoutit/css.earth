@@ -1,3 +1,4 @@
+import {parsePreparedPagePlan} from '../capabilities.js';
 import {requireRecord} from '../../../../../tools/source-values.mts';
 import {requireObjectRuntimeDefinition} from '../../../../../tools/object-runtime-contract.mts';
 import { readFile } from 'node:fs/promises';
@@ -13,7 +14,7 @@ const pageLayers = await Promise.all(['pages', 'noise'].map(async (name, index) 
   const lensIds = index ? ['topography'] : ['normal', 'clouds'];
   return { id: index ? 'noise' : 'city', carrier, system, lensIds,
     className: 'earth-city-page', textureClassName: 'earth-api-texture',
-    plan: { ...await read(name), schema: 'cssearth-prepared-map-pages@1', assetPath: '/scenes/earth/', lensIds } };
+    plan: parsePreparedPagePlan({ ...await read(name), schema: 'cssearth-prepared-map-pages@1', assetPath: '/scenes/earth/', lensIds }) };
 }));
 
 export const preparedPagingFixture = {...runtime,pageLayers};

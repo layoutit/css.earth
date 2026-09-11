@@ -97,7 +97,7 @@ test('actual PolyCSS matrices map triangular PNG coverage onto each source trian
     assert.equal(face.materialTransforms?.length, 6);
     assert.deepEqual(face.vertexIndices, triangle);
     for (let order = 0; order < 6; order++) {
-    const matrix = face.materialTransforms![order]!.slice('matrix3d('.length, -1).split(',').map(Number);
+    const matrix: number[] = face.materialTransforms![order]!.slice('matrix3d('.length, -1).split(',').map(Number);
     assert.equal(matrix.length, 16); assert(matrix.every(Number.isFinite));
     for (const [corner, u, v] of [[0, 0, 0], [1, 1, 0], [2, 0, 1]] as const) {
       const inset = data.atlas.triangleInsetPixels ?? 0;

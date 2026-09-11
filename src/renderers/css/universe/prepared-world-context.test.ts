@@ -1,3 +1,6 @@
+import type { OrientationXyzw, PhysicalCameraPose } from '@cssearth/engine';
+import type { WorldCameraPose } from '../navigation/world-camera.js';
+import { required } from '../../../../tools/test-values.mts';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { expect, test, vi } from 'vitest';
@@ -18,7 +21,9 @@ class FakeElement extends EventTarget {
   readonly dataset: Record<string, string> = {};
   parentNode: FakeElement | null = null;
   className = ''; textContent = ''; hidden = false; clientWidth = 0; clientHeight = 0;
-  constructor(readonly ownerDocument: FakeDocument, readonly tagName: string) { super(); }
+  readonly ownerDocument: FakeDocument;
+  readonly tagName: string;
+  constructor(ownerDocument: FakeDocument, tagName: string) { super(); this.ownerDocument = ownerDocument; this.tagName = tagName; }
   measurements = 0;
   getBoundingClientRect() { this.measurements++; return { width: this.textContent.length * 6, height: 14 }; }
   setAttribute(): void {}
@@ -70,6 +75,7 @@ test('approximate orbit cues stay on retained groups through selection and publi
   expect(all(root).length).toBe(count);
   layer.destroy();
 });
+const contextPriorityByClassification: Readonly<Partial<Record<(typeof OBJECTS)[number]['classification'], number>>> = CONTEXT_ANNOTATION_PRIORITY;
 const sprite = { url: '/marker.png', index: 0, count: 1, size: 16 };
 const presentation = {
   projection: { model: 'css-perspective-shared-with-sky', cssPerspective: '86.60254037844386cqw' },
@@ -105,7 +111,7 @@ function mount(scale: number, requestPublication?: () => boolean) {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: plan(scale), sprites: { sun: sprite, mercury: sprite, venus: sprite }, requestPublication });
-  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1_000].map(value => value * scale), orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [30, -20] });
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1_000 * scale], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [30, -20] });
   mounted.set(layer.root as unknown as FakeElement, layer);
   return layer.root as unknown as FakeElement;
 }
@@ -476,11 +482,11 @@ test.each([...SYSTEM_VIEWS.keys()].filter(id => id !== 'sun'))('%s moon orbits s
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
   const viewport = { focalPixels: 1100, framingRadiusPixels: 200, principalOffsetPixels: [0, 0] as const,
-    widthPixels: 1280, heightPixels: 720 };
+    widthPixels: 1280, heightPixels: 720, visibleRect: null, detailHandoffDiameterPixels: 20 };
   const frame = OBJECTS.find(object => object.id === planet)!.worldFrame;
-  const target = systemViewTarget({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
+  const target = systemViewTarget({ referenceFrame: required(frame).referenceFrame, epochJdTt: required(frame).epochJdTt,
     pose: { positionM: [0, 0, 1e15], orientationXyzw: [0, 0, 0, 1] } },
-    frame, viewport, SYSTEM_VIEWS.get(planet), systemFramingRect(viewport, {}));
+    required(frame), viewport, required(SYSTEM_VIEWS.get(planet)), systemFramingRect(viewport));
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])) });
   const memberIds = new Set(context.bodies.filter(body => body.orbit?.centerBodyId === planet).map(body => body.id));
@@ -490,7 +496,7 @@ test.each([...SYSTEM_VIEWS.keys()].filter(id => id !== 'sun'))('%s moon orbits s
   layer.publish(target, viewport);
   for (const zoom of [.8, 1, 1.4]) {
     layer.publish({ ...target, pose: { ...target.pose,
-      positionM: target.pose.positionM.map((value, axis) => frame.originM[axis] + (value - frame.originM[axis]) * zoom) as [number, number, number],
+      positionM: target.pose.positionM.map((value, axis) => required(frame).originM[axis] + (value - required(frame).originM[axis]) * zoom) as [number, number, number],
     } }, viewport);
     for (const selection of [null, planet, [...memberIds][0], undefined]) {
       layer.previewSelection(selection);
@@ -515,14 +521,14 @@ test('initial Jupiter system framing makes the four large moons and their labels
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
   const viewport = { focalPixels: 1100, framingRadiusPixels: 200, principalOffsetPixels: [0, 0] as const,
-    widthPixels: 1280, heightPixels: 720 };
+    widthPixels: 1280, heightPixels: 720, visibleRect: null, detailHandoffDiameterPixels: 20 };
   const frame = OBJECTS.find(object => object.id === 'jupiter')!.worldFrame;
-  const target = systemViewTarget({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
+  const target = systemViewTarget({ referenceFrame: required(frame).referenceFrame, epochJdTt: required(frame).epochJdTt,
     pose: { positionM: [0, 0, 1e15], orientationXyzw: [0, 0, 0, 1] } },
-    frame, viewport, SYSTEM_VIEWS.get('jupiter'), systemFramingRect(viewport, {}));
+    required(frame), viewport, required(SYSTEM_VIEWS.get('jupiter')), systemFramingRect(viewport));
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])),
-    annotationPriorities: Object.fromEntries(OBJECTS.map(object => [object.id, CONTEXT_ANNOTATION_PRIORITY[object.classification] ?? 0])),
+    annotationPriorities: Object.fromEntries(OBJECTS.map(object => [object.id, contextPriorityByClassification[object.classification] ?? 0])),
   });
   layer.selectObject('jupiter');
   layer.publish(target, viewport); document.defaultView.advance(200);
@@ -835,7 +841,7 @@ test.each([
   })) });
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: Object.fromEntries(['sun', ...objects.map(object => object.id)].map(id => [id, sprite])),
-    annotationPriorities: Object.fromEntries(objects.map(object => [object.id, CONTEXT_ANNOTATION_PRIORITY[object.classification]])),
+    annotationPriorities: Object.fromEntries(objects.map(object => [object.id, contextPriorityByClassification[object.classification] ?? 0])),
   });
   layer.setOverview(true);
   const root = layer.root as unknown as FakeElement, nodes = all(root);
@@ -943,7 +949,7 @@ test('retired bodies stop receiving zoom writes and resume with current picking 
 
 test('retired depth groups defer rotation and selection writes until same-pose re-entry', () => {
   const root = mount(1), layer = mounted.get(root)!, nodes = all(root);
-  const publish = (z: number, orientationXyzw = [0, 0, 0, 1]) => layer.publish({
+  const publish = (z: number, orientationXyzw: OrientationXyzw = [0, 0, 0, 1]) => layer.publish({
     referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, z], orientationXyzw },
   }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
   publish(1e31); root.ownerDocument.defaultView.advance(200);
@@ -953,7 +959,7 @@ test('retired depth groups defer rotation and selection writes until same-pose r
     let zIndex = style.zIndex;
     Object.defineProperty(style, 'zIndex', { get: () => zIndex, set: value => { writes++; zIndex = value; } });
   }
-  const halfTurn = [0, 1, 0, 0];
+  const halfTurn: OrientationXyzw = [0, 1, 0, 0];
   publish(-1e31, halfTurn);
   layer.selectObject('venus'); publish(-2e31, halfTurn);
   expect(writes).toBe(0);
@@ -978,7 +984,7 @@ test('dolly motion leaves depth styles untouched while selection and rotation st
     let zIndex = style.zIndex;
     Object.defineProperty(style, 'zIndex', { get: () => zIndex, set: value => { writes++; zIndex = value; } });
   }
-  const publish = (distance: number, orientationXyzw = [0, 0, 0, 1]) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+  const publish = (distance: number, orientationXyzw: OrientationXyzw = [0, 0, 0, 1]) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, distance], orientationXyzw } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
   for (const distance of [200, 2000, 1e8, 2e8]) publish(distance);
   expect(writes).toBe(0);
@@ -999,7 +1005,7 @@ test('selection transfers the detail handoff to the destination while retaining 
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: plan(1), sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   const root = layer.root as unknown as FakeElement, nodes = all(root);
-  const camera = { referenceFrame: 'sun-icrf', epochJdTt: 1,
+  const camera: WorldCameraPose = { referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [100, 0, 20], orientationXyzw: [0, 0, 0, 1] } } as const;
   const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] } as const;
   layer.publish(camera, viewport);
@@ -1313,7 +1319,7 @@ test('one retained focus label and locator survive system retirement at their ph
   expect(label.parentNode).not.toBe(root);
   expect(all(host).filter(node => node.dataset.contextLabel === 'anchor')).toEqual([label]);
   const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
-  const camera = (distance: number) => ({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
+  const camera = (distance: number): {referenceFrame: string; epochJdTt: number; pose: {positionM: [number, number, number]; orientationXyzw: OrientationXyzw}} => ({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
     pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } });
   // The caption remains visible when the intermediate orbit crosses it.
   for (const [distance, locatorOpacity, captionVisible] of [[50, 0, false], [Math.sqrt(1000 * 10000), 1, true], [8000, 1, true], [1e21, 1, true], [50, 0, false]] as const) {
@@ -1342,10 +1348,11 @@ test('one retained focus label and locator survive system retirement at their ph
   distant.pose.orientationXyzw = [0, 0, Math.SQRT1_2, Math.SQRT1_2];
   layer.publish(distant, viewport);
   expect(locator.style.transform).not.toBe('translate(70px,-40px) translate(-50%,-50%)');
-  for (const pose of [
+  const poses: PhysicalCameraPose[] = [
     { ...camera(1e21).pose, orientationXyzw: [0, 1, 0, 0] },
     { ...camera(1e21).pose, positionM: [-2e21, 0, 1e21] },
-  ]) {
+  ];
+  for (const pose of poses) {
     layer.publish({ ...distant, pose }, viewport);
     expect(locator.style.visibility).toBe('hidden'); expect(label.style.visibility).toBe('hidden');
     expect(locator.style.pointerEvents).toBe('none'); expect(label.style.pointerEvents).toBe('none');
@@ -1353,7 +1360,7 @@ test('one retained focus label and locator survive system retirement at their ph
   }
   layer.destroy(); expect(host.children).toEqual([before]);
   label.dispatchEvent(new Event('click')); expect(selections).toEqual(['anchor']);
-  expect(label.measurements).toBe(1, 'camera publication must never remeasure label layout');
+  expect(label.measurements, 'camera publication must never remeasure label layout').toBe(1);
 });
 
 test('readable satellite orbits show labels even with an unresolved parent, then fade at system distance', () => {
@@ -1369,7 +1376,7 @@ test('readable satellite orbits show labels even with an unresolved parent, then
   const child = layer.inspect().find(body => body.id === satellite.id)!;
   const marker = child.marker as unknown as FakeElement, label = child.label as unknown as FakeElement;
   const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const };
-  const camera = (z: number) => ({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
+  const camera = (z: number): WorldCameraPose => ({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
     pose: { positionM: [100, 0, z], orientationXyzw: [0, 0, 0, 1] } });
   layer.publish(camera(1000), viewport);
   document.defaultView.advance(200);
@@ -1424,7 +1431,7 @@ test('a moon label tries the other side when its first position overlaps the sel
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: {sun: sprite, mercury: sprite, venus: sprite} });
   layer.selectObject(parent.id);
-  const camera = { referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
+  const camera: WorldCameraPose = { referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
     pose: {positionM: [400, 0, 400], orientationXyzw: [0, 0, 0, 1]} };
   const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const };
   for (let frame = 0; frame < 3; frame++) {
@@ -1444,7 +1451,7 @@ test('a background star label inside the orbit footprint is excluded even outsid
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: plan(1), sprites: { sun: sprite, mercury: sprite, venus: sprite } });
-  const camera = { referenceFrame: 'sun-icrf', epochJdTt: 1,
+  const camera: WorldCameraPose = { referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } };
   const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const };
   layer.publish(camera, viewport);

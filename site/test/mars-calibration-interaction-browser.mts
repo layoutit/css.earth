@@ -1,3 +1,8 @@
+import type { ObjectRuntimeDiagnostics } from '../env.d.ts';
+import { required } from '../../tools/test-values.mts';
+import { parseAtlasManifest, parseCalibrationManifest, parseBrowserRegistration, parseNativeRegistration, parseNativeTraining, type NativeCamera, type Crop, type BrowserRegistration, type RegistrationCapture, atlas } from './mars-calibration-values.mts';
+import { createTestPage } from './browser-observations.mts';
+import type { Page, Browser, CDPSession } from 'playwright';
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
@@ -9,6 +14,17 @@ import sharp from "sharp";
 import { browserInteractionScenarios } from
   "./mars-calibration-interaction-driver.mts";
 
+type ScenarioInput=Awaited<ReturnType<typeof browserInteractionScenarios>>[number];
+type FrameBinding={repeat:number;tracePath:string;traceSha256:string;frameCount:number};
+type Scenario=ScenarioInput & {nativeQualification:ReturnType<typeof parseNativeTraining>['scenarioQualifications'][number];nativeFrameBindings:readonly FrameBinding[]};
+type Frame={timestamp:number;camera:ReturnType<ObjectRuntimeDiagnostics['view']>;sceneTransform:string;sceneMatrix:number[];skyboxTransform:string;skyboxMatrix:number[];activeMode:string};
+type InputEvent={type:string;timeStamp:number;clientX:number;clientY:number;button:number;buttons:number;detail:number;deltaY:number|null};
+type LongTask={startTime:number;duration:number};
+interface MotionState {active:boolean;frames:Frame[];events:InputEvent[];longTasks:LongTask[];nodes:Element[];parents:(ParentNode|null)[];initialNodeCount:number;longTaskObserverInstalled:boolean;}
+declare global {interface Window {
+ __marsBrowserMotionOracle:MotionState;__marsBrowserMotionStart():number;
+ __marsBrowserMotionStop():Pick<MotionState,'frames'|'events'|'longTasks'|'longTaskObserverInstalled'>;
+}}
 const ROOT = resolve(import.meta.dirname, "../..");
 const EVIDENCE_ROOT = resolve(
   ROOT,
@@ -26,7 +42,7 @@ const BROWSER_REGISTRATION_PATH = resolve(
 const virtualSurfaceUrl = "/__cssmars_oracle/mars-calibration-surface@2x.png";
 const virtualPolesUrl = "/__cssmars_oracle/mars-calibration-poles@2x.png";
 
-export async function captureMarsBrowserInteractionCorpus(args) {
+export async function captureMarsBrowserInteractionCorpus(args:readonly string[]) {
   const options = parseArguments(args);
   if (options.set !== "training" || options.repeat !== 3 || !options.trace) {
     throw new Error(
@@ -39,10 +55,10 @@ export async function captureMarsBrowserInteractionCorpus(args) {
   }
   const [nativeReport, registration, calibrationManifest, atlasManifest] =
     await Promise.all([
-      readJson(NATIVE_REPORT_PATH),
-      readJson(BROWSER_REGISTRATION_PATH),
-      readJson(resolve(CALIBRATION_ROOT, "manifest.json")),
-      readJson(resolve(CALIBRATION_ROOT, "css-earth/manifest.json")),
+      readJson(NATIVE_REPORT_PATH).then(parseNativeTraining),
+      readJson(BROWSER_REGISTRATION_PATH).then(parseBrowserRegistration),
+      readJson(resolve(CALIBRATION_ROOT, "manifest.json")).then(parseCalibrationManifest),
+      readJson(resolve(CALIBRATION_ROOT, "css-earth/manifest.json")).then(parseAtlasManifest),
     ]);
   assert.equal(
     nativeReport.qualification,
@@ -80,7 +96,7 @@ export async function captureMarsBrowserInteractionCorpus(args) {
   assert.equal(sha256(surfaceBytes), surfaceAtlas.encodedSha256);
   assert.equal(sha256(polesBytes), polesAtlas.encodedSha256);
 
-  const geometryFor = (scenario) => {
+  const geometryFor = (scenario:ScenarioInput["scenario"]) => {
     const registrationCapture = density.captures.find(({ nativeCamera }) =>
       sameCamera(nativeCamera, scenario.startCamera));
     assert.ok(registrationCapture, `${scenario.id}: missing browser registration`);
@@ -97,7 +113,7 @@ export async function captureMarsBrowserInteractionCorpus(args) {
   const scenarios = allScenarios.filter(({ scenario }) =>
     validIds.has(scenario.id)).map((entry) => Object.freeze({
     ...entry,
-    nativeQualification: nativeQualificationById.get(entry.scenario.id),
+    nativeQualification: required(nativeQualificationById.get(entry.scenario.id)),
     nativeFrameBindings: Object.freeze(nativeReport.runs.map((run) => {
       const nativeScenario = run.scenarios.find(
         ({ id }) => id === entry.scenario.id,
@@ -235,7 +251,7 @@ async function captureRepeat({
   scenarios,
   surfaceBytes,
   polesBytes,
-}) {
+}: {browser:Browser;repeat:number;outputRoot:string;options:ReturnType<typeof parseArguments>;registration:BrowserRegistration;density:BrowserRegistration["densities"][number];scenarios:readonly Scenario[];surfaceBytes:Buffer;polesBytes:Buffer}) {
   const runRoot = resolve(outputRoot, `repeat-${pad(repeat)}`);
   await mkdir(runRoot, { recursive: true });
   const context = await browser.newContext({
@@ -243,11 +259,11 @@ async function captureRepeat({
     deviceScaleFactor: 1,
     colorScheme: "dark",
   });
-  const page = await context.newPage();
+  const page = await createTestPage(context);
   const cdp = await context.newCDPSession(page);
-  const browserFailures = [];
-  const browserWarnings = [];
-  const externalRequests = [];
+  const browserFailures:string[] = [];
+  const browserWarnings:string[] = [];
+  const externalRequests:string[] = [];
   page.on("console", (message) => {
     if (message.type() === "error") {
       browserFailures.push(`console error: ${message.text()}`);
@@ -295,21 +311,21 @@ async function captureRepeat({
     await waitForMars(page);
     await installOracleStyleSheet(cdp);
     await page.evaluate(async ({ surfaceUrl, polesUrl }) => {
-      const decode = (source) => {
+      const decode = (source:string) => {
         const image = new Image();
         image.decoding = "sync";
         image.src = source;
         return image.decode();
       };
       await Promise.all([decode(surfaceUrl), decode(polesUrl)]);
-      { const motion = document.querySelector(".planet-motion-setting"); if (motion.checked) motion.click(); }
+      { const motion = window.__cssearthTest.input(".planet-motion-setting"); if (motion.checked) window.__cssearthTest.htmlElement(motion).click(); }
       for (const animation of document.getAnimations()) {
         animation.currentTime = 0;
         animation.pause();
       }
-      const stage = document.querySelector(".planet-stage");
+      const stage = window.__cssearthTest.element(".planet-stage");
       const nodes = [...stage.querySelectorAll("*")];
-      const state = {
+      const state:MotionState = {
         active: false,
         frames: [],
         events: [],
@@ -319,17 +335,13 @@ async function captureRepeat({
         initialNodeCount: nodes.length,
         longTaskObserverInstalled: false,
       };
-      const matrix = (value) => Array.from(new DOMMatrix(value || undefined)
+      const matrix = (value:string) => Array.from(new DOMMatrix(value || undefined)
         .toFloat64Array());
-      const sample = (timestamp) => {
+      const sample = (timestamp:number) => {
         if (!state.active) return;
-        const camera = window.__mars.view();
-        const sceneTransform = document.querySelector(
-          ".polycss-scene",
-        ).style.transform;
-        const skyboxTransform = document.querySelector(
-          ".planet-cubic-sky-orientation",
-        ).style.transform;
+        const camera = window.__cssearthTest.object('mars').view();
+        const sceneTransform = window.__cssearthTest.html(".polycss-scene").style.transform;
+        const skyboxTransform = window.__cssearthTest.html(".planet-cubic-sky-orientation").style.transform;
         state.frames.push({
           timestamp,
           camera,
@@ -337,7 +349,7 @@ async function captureRepeat({
           sceneMatrix: matrix(sceneTransform),
           skyboxTransform,
           skyboxMatrix: matrix(skyboxTransform),
-          activeMode: window.__mars.camera.stats().dragInertia.activeMode,
+          activeMode: window.__cssearthTest.object('mars').camera.stats().dragInertia.activeMode,
         });
         requestAnimationFrame(sample);
       };
@@ -345,6 +357,7 @@ async function captureRepeat({
         "pointercancel", "wheel", "dblclick"]) {
         stage.addEventListener(type, (event) => {
           if (!state.active) return;
+          if (!(event instanceof MouseEvent)) throw new Error("Expected captured mouse, pointer or wheel input");
           state.events.push({
             type,
             timeStamp: event.timeStamp,
@@ -353,7 +366,7 @@ async function captureRepeat({
             button: event.button,
             buttons: event.buttons,
             detail: event.detail,
-            deltaY: event.deltaY ?? null,
+            deltaY: event instanceof WheelEvent ? event.deltaY : null,
           });
         }, true);
       }
@@ -426,12 +439,12 @@ async function captureRepeat({
     const trace = await stopTracing(cdp, tracePath);
     const retained = await page.evaluate(() => {
       const state = window.__marsBrowserMotionOracle;
-      const stage = document.querySelector(".planet-stage");
+      const stage = window.__cssearthTest.element(".planet-stage");
       return {
         identityStable: state.nodes.every((node, index) =>
           node.isConnected && node.parentNode === state.parents[index]),
         domGrowth: stage.querySelectorAll("*").length - state.initialNodeCount,
-        stableDomAssertion: window.__mars.assertStableDomIdentity(),
+        stableDomAssertion: window.__cssearthTest.object('mars').assertStableDomIdentity(),
       };
     });
     const longTasks = entries.flatMap(({ longTasks: values }) => values);
@@ -476,18 +489,18 @@ async function captureScenario({
   entry,
   registrationCapture,
   crop,
-}) {
+}: {page:Page;cdp:CDPSession;repeat:number;runRoot:string;entry:Scenario;registrationCapture:RegistrationCapture;crop:Crop}) {
   const scenarioRoot = resolve(runRoot, entry.scenario.id);
   await mkdir(scenarioRoot, { recursive: true });
   await page.evaluate(({ endpoint, zoom }) => {
-    window.__mars.setView({
+    window.__cssearthTest.object('mars').setView({
       controlPitch: endpoint.controlPitch,
       controlYaw: endpoint.controlYaw,
       zoom,
     });
     const roll = endpoint.screenRollDegrees ?? 0;
-    document.querySelector(".polycss-camera").style.rotate = `${roll}deg`;
-    document.querySelector(".planet-cubic-sky-orientation").style.rotate =
+    window.__cssearthTest.html(".polycss-camera").style.rotate = `${roll}deg`;
+    window.__cssearthTest.html(".planet-cubic-sky-orientation").style.rotate =
       `${roll}deg`;
   }, {
     endpoint: registrationCapture.browserEndpoint,
@@ -515,7 +528,7 @@ async function captureScenario({
         x: event.x,
         y: event.y,
         deltaX: 0,
-        deltaY: event.deltaY,
+        deltaY: required(event.deltaY),
         modifiers: 0,
         timestamp,
       });
@@ -551,12 +564,12 @@ async function captureScenario({
     }));
   }
   await page.waitForFunction(() =>
-    window.__mars.camera.stats().dragInertia.activeMotionCount === 0,
+    window.__cssearthTest.object('mars').camera.stats().dragInertia.activeMotionCount === 0,
   null, { timeout: 15_000 });
   await twoFrames(page);
   const captured = await page.evaluate(() => window.__marsBrowserMotionStop());
-  const finalCamera = await page.evaluate(() => window.__mars.view());
-  const stats = await page.evaluate(() => window.__mars.camera.stats());
+  const finalCamera = await page.evaluate(() => window.__cssearthTest.object('mars').view());
+  const stats = await page.evaluate(() => window.__cssearthTest.object('mars').camera.stats());
   const finalPath = resolve(scenarioRoot, "settled.png");
   await captureCrop(page, crop, finalPath);
   const result = Object.freeze({
@@ -564,9 +577,9 @@ async function captureScenario({
     startCamera: entry.scenario.startCamera,
     tags: entry.scenario.tags,
     nativeQualification: entry.nativeQualification,
-    nativeFrameBinding: entry.nativeFrameBindings.find(
+    nativeFrameBinding: required(entry.nativeFrameBindings.find(
       ({ repeat: nativeRepeat }) => nativeRepeat === repeat,
-    ),
+    )),
     input: Object.freeze({
       requestedCount: entry.events.length,
       dispatchedCount: dispatches.length,
@@ -593,11 +606,11 @@ async function captureScenario({
   return result;
 }
 
-function qualifyRepeatability(runs, scenarios) {
+function qualifyRepeatability(runs:readonly Awaited<ReturnType<typeof captureRepeat>>[], scenarios:readonly Scenario[]) {
   return scenarios.map(({ scenario }) => {
-    const entries = runs.map((run) => run.scenarios.find(
+    const entries = runs.map((run) => required(run.scenarios.find(
       ({ id }) => id === scenario.id,
-    ));
+    )));
     const pitch = spread(entries.map(({ finalCamera }) =>
       finalCamera.controlPitch));
     const yaw = circularSpread(entries.map(({ finalCamera }) =>
@@ -618,7 +631,7 @@ function qualifyRepeatability(runs, scenarios) {
   });
 }
 
-async function installOracleStyleSheet(cdp) {
+async function installOracleStyleSheet(cdp:CDPSession) {
   await Promise.all([
     cdp.send("DOM.enable"),
     cdp.send("CSS.enable"),
@@ -652,38 +665,41 @@ async function installOracleStyleSheet(cdp) {
   });
 }
 
-async function performanceMetrics(cdp) {
+async function performanceMetrics(cdp:CDPSession) {
   return (await cdp.send("Performance.getMetrics")).metrics;
 }
 
-function metric(metrics, name) {
+function metric(metrics:readonly {name:string;value:number}[], name:string) {
   return metrics.find((entry) => entry.name === name)?.value ?? NaN;
 }
 
-async function stopTracing(cdp, path) {
-  const complete = new Promise((accept) =>
-    cdp.once("Tracing.tracingComplete", accept));
+async function stopTracing(cdp:CDPSession, path:string) {
+  const complete = new Promise<string>((accept,reject) =>
+    cdp.once("Tracing.tracingComplete", event => {
+      if (typeof event.stream !== "string") reject(new Error("Chrome trace stream missing"));
+      else accept(event.stream);
+    }));
   await cdp.send("Tracing.end");
-  const { stream } = await complete;
+  const stream = await complete;
   const chunks = [];
   while (true) {
-    const result = await cdp.send("IO.read", { handle: stream });
+    const result = await cdp.send("IO.read", { handle: required(stream) });
     chunks.push(Buffer.from(result.data, result.base64Encoded
       ? "base64" : "utf8"));
     if (result.eof) break;
   }
-  await cdp.send("IO.close", { handle: stream });
+  await cdp.send("IO.close", { handle: required(stream) });
   const bytes = Buffer.concat(chunks);
   await writeFile(path, bytes);
   return Object.freeze({ path, bytes: bytes.length, sha256: sha256(bytes) });
 }
 
-async function captureCrop(page, crop, path) {
+async function captureCrop(page: Page, crop:Crop, path:string) {
   const full = await page.screenshot({ type: "png" });
   await sharp(full).extract(crop).png().toFile(path);
 }
 
-async function waitForMars(page) {
+async function waitForMars(page: Page) {
   await page.waitForFunction(() =>
     window.__mars?.ready === true &&
     document.documentElement.dataset.ready === "true" &&
@@ -692,14 +708,14 @@ async function waitForMars(page) {
   );
 }
 
-async function twoFrames(page) {
-  await page.evaluate(() => new Promise((accept) =>
+async function twoFrames(page: Page) {
+  await page.evaluate(() => new Promise<number>((accept) =>
     requestAnimationFrame(() => requestAnimationFrame(accept))));
 }
 
-function parseArguments(args) {
+function parseArguments(args:readonly string[]) {
   const parsed = {
-    set: null,
+    set: "",
     repeat: 0,
     trace: false,
     output:
@@ -719,18 +735,18 @@ function parseArguments(args) {
   return Object.freeze(parsed);
 }
 
-function sameCamera(first, second) {
+function sameCamera(first:NativeCamera, second:NativeCamera) {
   return first.latitude === second.latitude &&
     first.longitude === second.longitude &&
     first.distance === second.distance && first.tilt === second.tilt &&
     first.azimuth === second.azimuth;
 }
 
-function spread(values) {
+function spread(values:readonly number[]) {
   return Math.max(...values) - Math.min(...values);
 }
 
-function circularSpread(values) {
+function circularSpread(values:readonly number[]) {
   let maximum = 0;
   for (const first of values) {
     for (const second of values) {
@@ -743,18 +759,18 @@ function circularSpread(values) {
   return maximum;
 }
 
-function pad(value) {
+function pad(value:number) {
   return String(value).padStart(2, "0");
 }
 
-function delay(milliseconds) {
+function delay(milliseconds:number) {
   return new Promise((accept) => setTimeout(accept, milliseconds));
 }
 
-function sha256(bytes) {
+function sha256(bytes:Uint8Array) {
   return createHash("sha256").update(bytes).digest("hex");
 }
 
-async function readJson(path) {
+async function readJson(path:string):Promise<unknown> {
   return JSON.parse(await readFile(path, "utf8"));
 }
