@@ -29,6 +29,7 @@ import {prepareLayeredSurfacePresentation} from './presentation.mts';
 import {preparePhotometricDisc} from './photometric-disc.mts';
 import {prepareNormalizedDiscPresentation} from './normalized-disc-presentation.mts';
 import {prepareObservedPolarSurfaces} from '../giant-observations/index.mts';
+import {appendFocusedHeliocentricPresentation, prepareFocusedHeliocentricPresentation} from '../focused-heliocentric.mts';
 
 const hash=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
 const readJson=async (path:string):Promise<unknown>=>JSON.parse(await readFile(path,'utf8'));
@@ -95,7 +96,10 @@ export async function prepareLayeredGiantObject({objectDirectory,publicDirectory
   const material=normalizedDisc?await preparePhotometricDisc({sourceDirectory,config:materialConfig,publicDirectory,write:true}):await prepareEllipsoidMaterials({config:materialConfig,maps:observed.maps,radialLayer,publicDirectory,write:true});
   const celestial=await prepareSharedCelestial({sourceDirectory,publicDirectory,config:celestialConfig});
   const content=await prepareContent({sourceDirectory,publicDirectory,outputDirectory,config:{contentPath:relative(sourceDirectory,requiredSource('content').path),chartsPath:relative(sourceDirectory,requiredSource('charts').path)}});
-  const presentation=await (normalizedDisc?prepareNormalizedDiscPresentation:prepareLayeredSurfacePresentation)({config:presentationConfig,geometryConfig,geometry,observationConfig,materialConfig,sky:celestial.sky,sun:celestial.sun});
+  const rawPresentation=await (normalizedDisc?prepareNormalizedDiscPresentation:prepareLayeredSurfacePresentation)({config:presentationConfig,geometryConfig,geometry,observationConfig,materialConfig,sky:celestial.sky,sun:celestial.sun});
+  const focus=await prepareFocusedHeliocentricPresentation({bodyId:descriptor.id,publicDirectory,publicBase:`/scenes/${descriptor.id}/`,
+    bodyRadiusUnits:geometryConfig.shape.equatorialRadius,bodyRadiusKilometers:descriptor.recipe.shape.radiusKm,sky:celestial.sky,sun:celestial.sun});
+  const presentation=appendFocusedHeliocentricPresentation(rawPresentation,focus);
   requirePreparedPresentation(presentation,{controls:content.controls});
   const definition={...presentation,schema:'cssearth-object-runtime@4',id:descriptor.id,controls:content.controls};
   const assetIdentity=<T extends {data?:Uint8Array;filename:string}>({data,...asset}:T)=>({...asset,url:`/scenes/${descriptor.id}/${asset.filename}`});

@@ -28,6 +28,8 @@ import {prepareRadialMotionAndShadow} from './radial-motion.mts';
 import {prepareSpectralMaterialVariants} from './spectral-variants.mts';
 import {prepareLayeredLeafLayouts} from './leaf-layouts.mts';
 import {prepareLayeredOblatePresentation} from './presentation.mts';
+import {appendFocusedHeliocentricPresentation, prepareFocusedHeliocentricPresentation} from '../focused-heliocentric.mts';
+import {validatePreparedCubicSky} from '../../../src/platform/cubic-sky-contract.mts';
 
 const hash=(bytes:string|Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
 const json=async (path:string):Promise<unknown>=>JSON.parse(await readFile(path,'utf8'));
@@ -85,7 +87,11 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   const stylesheet=await readFile(stylesheetPath,'utf8');
   const layouts=prepareLayeredLeafLayouts({scene,stylesheet,config:presentationConfig});
   const raw=await prepareLayeredOblatePresentation({publicDirectory,config:presentationConfig,plan:scene,layouts,lenses:materialLenses,views,sky,sun});
-  const presentation={...raw,materials:prepareMaterialTracks(raw),variants:raw.variants.map(variant=>({...variant,materials:variant.materials.map(material=>({...material,mode:material.mode==='default-pose'?'frames':material.mode}))}))};
+  const normalizedPresentation={...raw,materials:prepareMaterialTracks(raw),variants:raw.variants.map(variant=>({...variant,materials:variant.materials.map(material=>({...material,mode:material.mode==='default-pose'?'frames':material.mode}))}))};
+  const focus=await prepareFocusedHeliocentricPresentation({bodyId:descriptor.id,publicDirectory,publicBase:`/scenes/${descriptor.id}/`,
+    bodyRadiusUnits:scene.fixedMaterialPlane.interactionProjection.equatorialRadius,
+    bodyRadiusKilometers:descriptor.recipe.shape.radiusKm,sky:validatePreparedCubicSky(sky,{requireSun:false}),sun});
+  const presentation=appendFocusedHeliocentricPresentation(normalizedPresentation,focus);
   requirePreparedPresentation(presentation,{controls});
   const definition={...presentation,schema:'cssearth-object-runtime@4',id:descriptor.id,controls};
   // Only consumer-used scene data is published. Dormant moon/orbit generators,

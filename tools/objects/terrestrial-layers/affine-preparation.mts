@@ -14,6 +14,7 @@ import {prepareAffineLenses} from './affine-lenses.mts';
 import {prepareAffineCamera} from './affine-camera.mts';
 import {prepareRowMaterial} from './row-material.mts';
 import {prepareAffinePresentation} from './affine-presentation.mts';
+import {appendFocusedHeliocentricPresentation, prepareFocusedHeliocentricPresentation} from '../focused-heliocentric.mts';
 
 export async function prepareAffineLayers(context: {config:unknown;source:Awaited<ReturnType<typeof createSourceManifest>>;sourceDirectory:string;publicDirectory:string;outputDirectory:string;prepareContent:typeof prepareObjectContentAssets}) {
  const {source:sourceManifest,sourceDirectory,publicDirectory,outputDirectory,prepareContent}=context;
@@ -34,7 +35,11 @@ export async function prepareAffineLayers(context: {config:unknown;source:Awaite
  const content=await prepareContent({...args,config:{contentPath:'content/object.json'}});
  // Scientific lens plans stay separate from the shared shell's lenses.json.
  await writeFile(resolve(outputDirectory,'surface-lenses.json'),JSON.stringify(lenses)+'\n');
- const definition=await prepareAffinePresentation({...args,scene,camera,lighting,lenses,sun:celestial.sun,controls:requireObjectControls(content.controls,config.namespace)});
+ const controls=requireObjectControls(content.controls,config.namespace);
+ const rawDefinition=await prepareAffinePresentation({...args,scene,camera,lighting,lenses,sun:celestial.sun,controls});
+ const focus=await prepareFocusedHeliocentricPresentation({bodyId:config.namespace,publicDirectory,publicBase:config.publicBase,
+   bodyRadiusUnits:geometry.equatorialRadius,bodyRadiusKilometers:shape.equatorialRadiusKm,sky:celestial.sky,sun:celestial.sun});
+ const definition=appendFocusedHeliocentricPresentation(rawDefinition,focus);
  await writeFile(resolve(outputDirectory,'runtime.json'),JSON.stringify(definition)+'\n');
  return {raster:{assets,lenses,lighting},celestial,scene:scenePlan,definition,content};
 }
