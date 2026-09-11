@@ -1,3 +1,9 @@
+import type {ObjectRuntimeDiagnostics} from '../env.d.ts';
+type ResourceState=ReturnType<ObjectRuntimeDiagnostics['runtime']['resources']>;
+declare global {interface Window {__decodedImages:{url:string;time:number}[];__firstMaterial?:{required:readonly string[];pools:ResourceState['pools']};}}
+
+import { required } from '../../tools/test-values.mts';
+import { createTestPage } from './browser-observations.mts';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
@@ -7,31 +13,33 @@ const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const output = 'output/playwright/navigation-resources';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const results = [], errors = [];
+const results = [], errors:string[] = [];
 try {
   for (const dpr of [1, 2]) {
-    const page = await browser.newPage({ viewport: { width: 1280, height: 900 }, deviceScaleFactor: dpr });
+    const page = await createTestPage(browser, { viewport: { width: 1280, height: 900 }, deviceScaleFactor: dpr });
     page.on('pageerror', error => errors.push(error.message));
     // Every registered body exercises the preflight address resolver against
     // its real mounted camera, including default, rotated and coarse views.
     for (const object of OBJECTS) {
       await page.goto(`${origin}/${object.id}/`);
-      await page.waitForFunction(id => window.__cssEarth?.ready && window[`__${id}`]?.ready, object.id);
+      await page.waitForFunction(id => window.__cssEarth?.ready && window.__cssEarth?.object(id)?.ready, object.id);
       const checks = await page.evaluate(async ({ id, frame }) => {
-        const { createObjectViewDemand, resolvePreparedPresentation, initialObjectSelection } =
-          await import('/src/renderers/css/dist/testing.js');
-        const definition = (await (await fetch(`/src/planets/${id}/prepared/object.json`)).json()).data;
-        const demand = createObjectViewDemand(definition, frame), owner = window[`__${id}`];
+        const testingUrl='/src/renderers/css/dist/testing.js',rendererUrl='/src/renderers/css/dist/index.js';
+        const { createObjectViewDemand, resolvePreparedPresentation, initialObjectSelection }:typeof import('../../src/renderers/css/dist/testing.js') = await import(testingUrl);
+        const {parsePreparedObjectRuntime}:typeof import('../../src/renderers/css/dist/index.js')=await import(rendererUrl);
+        const payload:unknown=await (await fetch(`/src/planets/${id}/prepared/object.json`)).json();
+        const definition = parsePreparedObjectRuntime(window.__cssearthTest.record(payload,'prepared object').data);
+        const demand = createObjectViewDemand(definition, window.__cssearthTest.required(frame,"world frame")), owner = window.__cssearthTest.object(id);
         const checks = [];
         for (const [pitch, yaw, scale] of [[0, 0, 1], [47, 123, 1], [-76, -215, .001]]) {
           const state = owner.camera.state();
           owner.camera.setState({ controlPitch: definition.camera.defaultControlPitchDegrees + pitch,
             controlYaw: definition.camera.defaultControlYawDegrees + yaw, zoom: state.zoom * scale });
-          const world = owner.camera.captureWorldCamera(frame);
+          const world = owner.camera.captureWorldCamera(window.__cssearthTest.required(frame,"world frame"));
           // Navigation applies this same physical pose across object owners.
-          owner.camera.applyWorldCamera(world, frame);
-          const view = owner.runtime.view();
-          const predicted = demand({ world, viewport: { focalPixels: view.focal, principalOffsetPixels: view.principalOffset } });
+          owner.camera.applyWorldCamera(world, window.__cssearthTest.required(frame,"world frame"));
+          const view = window.__cssearthTest.required(owner.runtime.view(),"published view");
+          const predicted = demand({ world, viewport: { focalPixels: window.__cssearthTest.number(view.focal,"focal length"), principalOffsetPixels: [window.__cssearthTest.number(view.principalOffset?.[0],"principal x"),window.__cssearthTest.number(view.principalOffset?.[1],"principal y")] } });
           const actual = resolvePreparedPresentation(definition, { selection: initialObjectSelection(definition.controls), view });
           checks.push({ pitch, yaw, scale, predicted, actual });
         }
@@ -54,25 +62,30 @@ try {
             return value;
           });
         };
-        let diagnostic;
+        let diagnostic:ObjectRuntimeDiagnostics|undefined;
+        delete window.__firstMaterial;
         Object.defineProperty(window, `__${id}`, { configurable: true,
-          get: () => diagnostic, set(value) {
+          get: () => diagnostic, set(value:ObjectRuntimeDiagnostics|undefined) {
             diagnostic = value;
             if (value && !window.__firstMaterial) window.__firstMaterial = {
-              required: value.runtime.selection().plan.required,
+              required: window.__cssearthTest.required(value.runtime.selection().plan,"initial material plan").required,
               pools: value.runtime.resources().pools,
             };
           } });
       }, id);
-      await page.locator('.planet-sidebar-search').fill(OBJECTS.find(object => object.id === id).name);
+      await page.locator('.planet-sidebar-search').fill(required(OBJECTS.find(object => object.id === id)).name);
       await page.locator(`.planet-object-link[data-object-id="${id}"]`).click();
-      await page.waitForFunction(id => window.__cssEarth?.ready && window.__cssEarth.activeObjectId === id, id);
+      await page.waitForFunction(id => window.__cssEarth?.ready && window.__cssearthTest.scene().activeObjectId === id, id);
       const preparation = await page.evaluate(async id => {
-        const definition = (await (await fetch(`/src/planets/${id}/prepared/object.json`)).json()).data;
-        const handoff = performance.getEntriesByType('mark').findLast(entry => entry.name.endsWith(':handoff')).startTime;
-        return { handoff, pools: window.__firstMaterial.pools,
-          resources: window.__firstMaterial.required.map(key => {
-            const url = new URL(definition.assets.entries.find(entry => entry.key === key).url, location.origin).href;
+        const rendererUrl="/src/renderers/css/dist/index.js";
+        const {parsePreparedObjectRuntime}:typeof import("../../src/renderers/css/dist/index.js")=await import(rendererUrl);
+        const payload:unknown=await (await fetch(`/src/planets/${id}/prepared/object.json`)).json();
+        const definition = parsePreparedObjectRuntime(window.__cssearthTest.record(payload,'prepared object').data);
+        const handoff = window.__cssearthTest.required(performance.getEntriesByType('mark').findLast(entry => entry.name.endsWith(':handoff')),'handoff mark').startTime;
+        const material=window.__cssearthTest.required(window.__firstMaterial,"first material");
+        return { handoff, pools: material.pools,
+          resources: material.required.map(key => {
+            const url = new URL(window.__cssearthTest.required(definition.assets.entries.find(entry => entry.key === key),"required asset").url, location.origin).href;
             const decoded = window.__decodedImages.find(entry => entry.url === url);
             return { key, url, decoded: decoded?.time ?? null };
           }) };
@@ -81,7 +94,7 @@ try {
       for (const resource of preparation.resources) assert.ok(resource.decoded !== null && resource.decoded <= preparation.handoff,
         `${id} DPR ${dpr}: ${resource.key} must decode before handoff`);
       for (const pool of preparation.pools) assert.ok(pool.resident <= pool.capacity, `${id}: bounded ${pool.id}`);
-      assert.equal(await page.evaluate(() => window.__cssEarth.mountedObjectCount), 1);
+      assert.equal(await page.evaluate(() => window.__cssearthTest.scene().mountedObjectCount), 1);
       results.push({ id, dpr, handoff: preparation });
       console.log(`${id} DPR ${dpr}: all ${preparation.resources.length} initial resources decoded before handoff`);
     }

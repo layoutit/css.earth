@@ -1,3 +1,8 @@
+interface StressReport {seed:number;dpr:number;hops:number;start:string;head:string;browser:string;actions:Record<string,unknown>[];errors:string[];documents:string[];documentsBeforeChain?:number;timeOrigin?:number;misses?:number;failure?:string;final?:unknown;}
+declare global {interface Window {__stressIdentity:()=>boolean;__stressSelections:{id:string;at:number}[];}}
+
+import { required } from '../../tools/test-values.mts';
+import { createTestPage } from './browser-observations.mts';
 // Replayable native-input stress journey. One page, no diagnostic camera writes.
 import assert from 'node:assert/strict';
 import { mkdir, open, writeFile } from 'node:fs/promises';
@@ -8,16 +13,16 @@ import { OBJECTS } from '../objects.mts';
 const seed = Number(process.env.SEED ?? 9072026) >>> 0;
 let randomState = seed;
 const random = () => { randomState ^= randomState << 13; randomState ^= randomState >>> 17; randomState ^= randomState << 5; return (randomState >>> 0) / 4294967296; };
-const choose = values => values[Math.floor(random() * values.length)];
+const choose = <T,>(values:readonly T[]):T => required(values[Math.floor(random() * values.length)]);
 const dpr = Number(process.env.DPR ?? 1), hops = Number(process.env.HOPS ?? 20);
 const origin = process.env.ORIGIN ?? 'http://127.0.0.1:4221';
 const output = process.env.OUTPUT ?? `output/playwright/navigation-stress/${seed}-dpr${dpr}`;
 const start = choose(OBJECTS.filter(object => object.classification === 'planet'));
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ headless: true, executablePath: process.env.CHROME_EXECUTABLE ?? '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary' });
-const page = await browser.newPage({ viewport: { width: 1995, height: 1236 }, deviceScaleFactor: dpr });
+const page = await createTestPage(browser, { viewport: { width: 1995, height: 1236 }, deviceScaleFactor: dpr });
 const cdp = await page.context().newCDPSession(page);
-const report = { seed, dpr, hops, start: start.id, head: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), browser: browser.version(), actions: [], errors: [], documents: [] };
+const report:StressReport = { seed, dpr, hops, start: start.id, head: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), browser: browser.version(), actions: [], errors: [], documents: [] };
 page.on('requestfailed', request => {
   const reason = request.failure()?.errorText;
   if (reason !== 'net::ERR_ABORTED') report.errors.push(`${reason} ${request.url()}`);
@@ -28,13 +33,13 @@ page.on('response', response => { if (response.status() >= 400) report.errors.pu
 const state = () => page.evaluate(() => {
   const app = window.__cssEarth;
   if (!app) return { initialized: false };
-  const camera = window[`__${app.activeObjectId}`]?.camera;
+  const camera = window.__cssEarth?.object(app.activeObjectId)?.camera;
   const cameraState = camera?.state();
   return { active: app.activeObjectId, selected: app.selectedObjectId, ready: app.ready, error: app.error,
     overview: app.overview, distanceKm: cameraState?.distanceKilometers, camera: cameraState, url: location.href,
     scenes: document.querySelectorAll('.planet-stage > .polycss-camera').length };
 });
-async function mark(kind, detail = {}) {
+async function mark(kind:string, detail:Record<string,unknown> = {}) {
   const entry = { kind, ...detail, state: await state() }; report.actions.push(entry);
   await page.evaluate(({ index, kind }) => performance.mark(`cssEarth:stress:${index}:${kind}`), { index: report.actions.length - 1, kind });
   console.log(JSON.stringify(entry));
@@ -56,26 +61,26 @@ async function drag(duration = 1200) {
   }
   await page.mouse.up(); await mark('drag-end', { elapsedMs: performance.now() - started });
 }
-async function wheel(delta) {
+async function wheel(delta:number) {
   await mark('wheel', { delta }); await page.mouse.move(1350, 570); await page.mouse.wheel(0, delta); await page.waitForTimeout(450);
 }
-async function candidates(preferOrbit) {
+async function candidates(preferOrbit:boolean) {
   // Geometry reads locate native input targets only; mark them separately from
   // the flight/drag intervals used for timing. Runtime picking remains guarded.
   await page.evaluate(() => performance.mark('cssEarth:stress:target-probe:start'));
   const result = await page.evaluate(({ preferOrbit, salt }) => {
-    const active = window.__cssEarth.selectedObjectId;
+    const active = window.__cssearthTest.scene().selectedObjectId;
     const annotations = [...document.querySelectorAll('[data-context-label], [data-context-indicator], [data-context-body]')];
     const chords = preferOrbit ? [...document.querySelectorAll('.context-orbit s, .context-orbit b')]
-      .filter(node => node.style.display !== 'none').filter((_, index) => index % 23 === salt % 23).slice(0, 80) : [];
+      .filter(node => window.__cssearthTest.htmlElement(node).style.display !== 'none').filter((_, index) => index % 23 === salt % 23).slice(0, 80) : [];
     return [...chords, ...annotations].flatMap(node => {
       const target = node.closest('[data-object-navigate]');
-      if (!target || target.ariaDisabled === 'true' || target.dataset.objectNavigate === active ||
+      if (!target || target.ariaDisabled === 'true' || window.__cssearthTest.htmlElement(target).dataset.objectNavigate === active ||
           !node.checkVisibility({ opacityProperty: true, visibilityProperty: true })) return [];
       const box = node.getBoundingClientRect(), x = box.x + box.width / 2, y = box.y + box.height / 2;
       if (!box.width || !box.height || x < 380 || x > innerWidth - 35 || y < 65 || y > innerHeight - 55 ||
           !document.elementFromPoint(x, y)?.closest('.planet-input-surface')) return [];
-      return [{ id: target.dataset.objectNavigate, x, y, kind: target.classList.contains('context-orbit') ? 'orbit' : node.hasAttribute('data-context-label') ? 'label' : 'marker' }];
+      return [{ id: window.__cssearthTest.required(window.__cssearthTest.htmlElement(target).dataset.objectNavigate,"navigation target ID"), x, y, kind: target.classList.contains('context-orbit') ? 'orbit' as const : node.hasAttribute('data-context-label') ? 'label' as const : 'marker' as const }];
     });
   }, { preferOrbit, salt: Math.floor(random() * 1000) });
   await page.evaluate(() => performance.mark('cssEarth:stress:target-probe:end'));
@@ -89,26 +94,26 @@ async function precisionWheel() {
   for (const delta of deltas) { await page.mouse.wheel(0, delta); await page.waitForTimeout(12); }
   await mark('precision-wheel-end');
 }
-async function sidebarPick(id) {
+async function sidebarPick(id:string) {
   await page.locator('.planet-sidebar-search').fill(id);
   await page.locator(`.planet-object-link[data-object-id="${id}"]:visible`).first().click();
 }
 async function changeDataset() {
   if (!await page.locator('.planet-information-panel').isVisible()) return;
-  const ids = await page.locator('.planet-information-panel button[name="lens"]').evaluateAll(nodes => nodes.filter(node => !node.disabled && node.getAttribute('aria-pressed') !== 'true').map(node => node.value));
+  const ids = await page.locator('.planet-information-panel button[name="lens"]').evaluateAll(nodes => nodes.map(node=>{if(!(node instanceof HTMLButtonElement))throw new Error("Expected dataset button");return node;}).filter(node => !node.disabled && node.getAttribute('aria-pressed') !== 'true').map(node => node.value));
   if (!ids.length) return;
   const id = choose(ids), button = page.locator(`.planet-information-panel button[name="lens"][value="${id}"]`);
   const details = button.locator('xpath=ancestor::details[1]');
-  if (await details.count() && !await details.evaluate(node => node.open)) await details.locator('summary').first().click();
+  if (await details.count() && !await details.evaluate(node => window.__cssearthTest.detailsElement(node).open)) await details.locator('summary').first().click();
   await mark('dataset-pick', { id }); await button.click();
   await page.waitForFunction(id => {
-    const runtime = window[`__${window.__cssEarth.activeObjectId}`];
+    const runtime = window.__cssEarth?.object();
     const selection = runtime?.runtime.selection();
-    return runtime?.lenses?.state().id === id && selection?.committed?.lensId === id && !selection.pending;
+    return runtime?.lenses?.state().id === id && selection?.committed?.lensId === id && !selection?.pending;
   }, id, { timeout: 30000 });
   await mark('dataset-ready', { id });
 }
-async function pickTarget(hop) {
+async function pickTarget(hop:number) {
   for (let attempt = 0; attempt < 8; attempt++) {
     const visible = await candidates(hop % 4 === 0);
     const orbits = visible.filter(target => target.kind === 'orbit');
@@ -119,18 +124,23 @@ async function pickTarget(hop) {
   // A real sidebar choice is allowed when the current projection has no body
   // targets; record it explicitly rather than pretending it was a scene pick.
   const current = (await state()).selected;
-  return { id: choose(OBJECTS.filter(object => object.id !== current)).id, kind: 'sidebar' };
+  return { id: choose(OBJECTS.filter(object => object.id !== current)).id, kind: 'sidebar' as const };
 }
 let tracing = false;
 try {
   await page.goto(`${origin}${start.route}`); await ready();
   await page.evaluate(() => {
-    window.__cssEarthRecorder.start();
-    const roots = ['.planet-stage', '.planet-input-surface', '.prepared-universe'].map(selector => document.querySelector(selector));
+    window.__cssearthTest.required(window.__cssEarthRecorder,"diagnostic recorder").start();
+    const roots = ['.planet-stage', '.planet-input-surface', '.prepared-universe'].map(selector => window.__cssearthTest.element(selector));
     const leaves = [...roots[2].querySelectorAll('*')];
     window.__stressIdentity = () => roots.every(node => node.isConnected) && leaves.every(node => node.isConnected);
     window.__stressSelections = [];
-    document.addEventListener('objectnavigate', event => window.__stressSelections.push({ id: event.detail.objectId, at: performance.now() }), { capture: true });
+    document.addEventListener('objectnavigate', event => {
+      if(!(event instanceof CustomEvent))throw new Error('Expected navigation event');
+      const id=window.__cssearthTest.record(event.detail,'navigation detail').objectId;
+      if(typeof id !== 'string')throw new Error('Expected navigation object ID');
+      window.__stressSelections.push({ id, at: performance.now() });
+    }, { capture: true });
     document.elementsFromPoint = () => { throw new Error('Runtime picking forced DOM hit testing'); };
   });
   await cdp.send('Tracing.start', { categories: 'devtools.timeline,blink.user_timing,disabled-by-default-devtools.timeline.frame,toplevel,viz', transferMode: 'ReturnAsStream' }); tracing = true;
@@ -163,7 +173,7 @@ try {
       hop--; continue;
     }
     await mark('selection', { hop, intended: target.id, requested: requested[0].id });
-    await page.waitForFunction(() => !window.__cssEarth.ready, null, { timeout: 1500 }).catch(() => {});
+    await page.waitForFunction(() => !window.__cssearthTest.scene().ready, null, { timeout: 1500 }).catch(() => {});
     const interrupt = hop % 6 === 3;
     const supersede = hop % 6 === 1;
     // Inertia can move intersecting orbits beneath the pointer between the
@@ -195,11 +205,11 @@ try {
   }
   assert.equal(report.documents.length, report.documentsBeforeChain, 'The entire chain stays in one document');
   assert.equal(await page.evaluate(() => performance.timeOrigin), report.timeOrigin, 'Navigation preserves the document time origin');
-} catch (error) { report.failure = error.stack; }
+} catch (error) { report.failure = error instanceof Error ? error.stack ?? error.message : String(error); }
 finally {
   if (tracing) {
-    const done = new Promise(resolve => cdp.once('Tracing.tracingComplete', resolve)); await cdp.send('Tracing.end');
-    const { stream } = await done, file = await open(`${output}/trace.json`, 'w');
+    const done = new Promise<string>((resolve,reject) => cdp.once('Tracing.tracingComplete', event=>{if(typeof event.stream === 'string')resolve(event.stream);else reject(new Error('Trace stream unavailable'));})); await cdp.send('Tracing.end');
+    const stream = await done, file = await open(`${output}/trace.json`, 'w');
     try { for (;;) { const part = await cdp.send('IO.read', { handle: stream }); await file.write(part.data); if (part.eof) break; } }
     finally { await file.close(); await cdp.send('IO.close', { handle: stream }); }
   }
