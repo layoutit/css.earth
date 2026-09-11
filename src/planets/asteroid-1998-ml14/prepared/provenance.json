@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b793a64fc31dc46ef6545d9f71beb64bf491a0b733c51164142bd7ca03e06737"
+    "sha256": "5cf9629f213c302d057d93567bcf013c6590c75a7d418bd5d505c2115c68ab00"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -148,7 +148,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d4350bce0df08dc6bd56cabf1a9055b7c4ded95e8e1ae96078dbbae056cc4bda",
+      "sha256": "12fb6d249c110ce694c19d4c0df195d30fb88e9fc1e45875d2be28398e26017b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -196,10 +196,10 @@
               "source": {
                 "url": "https://mpbulletin.org/issues/MPB_41-2.pdf",
                 "label": "Warner (2014), 2013 photometry",
-                "path": "source/reference/warner-2014.pdf",
+                "path": "source/reference/model-properties.json",
                 "checked": "2026-09-08",
                 "catalogueId": "source-asteroid-1998-ml14-asteroid-1998-ml14-warner-2014",
-                "locator": "Warner (2014), 2013 photometry"
+                "locator": "/photometricPeriodHours and /photometricPeriodUncertaintyHours; Warner (2014), 2013 photometry"
               }
             }
           ],
@@ -371,8 +371,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d4350bce0df08dc6bd56cabf1a9055b7c4ded95e8e1ae96078dbbae056cc4bda",
-      "bytes": 10087,
+      "sha256": "12fb6d249c110ce694c19d4c0df195d30fb88e9fc1e45875d2be28398e26017b",
+      "bytes": 10157,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -480,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6824,
-          "sha256": "bfe5a9967574a36f837899f8c30b6aaa33a0d3395acf58dd7c3544b70a8174e8",
+          "bytes": 6894,
+          "sha256": "3576bdd0bd3b112b27b92a0b60b967e0f0df518aa16e1ca3070e1d6f8a585031",
           "verification": "bytes-verified"
         }
       ],

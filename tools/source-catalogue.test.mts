@@ -181,6 +181,9 @@ test('changed fact evidence and stale displayed facts leave both published catal
   t.after(() => rm(root, { recursive: true, force: true }));
   const outputs = ['site/prepared-sources.json', 'site/prepared-spacecraft.json'];
   // Only the compiler's declared inputs are needed; no body assets or downloads.
+  const records = new Set((await promisify(execFile)('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z'], { maxBuffer: 16 * 1024 * 1024 })).stdout.split('\0'));
+  assert.deepEqual(Object.keys(prepared.closure).filter(path => !records.has(path) && path !== 'site/prepared-object-catalog.mts'), [],
+    'Sources must not depend on ignored downloads; the object catalogue is generated');
   for (const path of [...Object.keys(prepared.closure), ...outputs]) {
     const target = join(root, path);
     await mkdir(join(target, '..'), { recursive: true });
