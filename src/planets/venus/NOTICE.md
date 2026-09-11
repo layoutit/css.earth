@@ -29,3 +29,5 @@ Source-product false color, fixed lighting, atmosphere shading, accelerated
 rotation, camera orientation, polar presentation, retained topology, and
 PolyCSS projection are documented presentation choices. They do not claim
 measured natural color, physical time, or an ephemeris view.
+
+Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.

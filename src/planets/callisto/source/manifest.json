@@ -140,7 +140,7 @@
       "licenseEvidence": [
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
-      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
+      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter\u2019s navigation recipe.",
       "redistribution": "Credited prepared observational image; source binary excluded from Git.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -165,7 +165,8 @@
       "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
       "consumers": [
         "lenses",
-        "presentation"
+        "presentation",
+        "features"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -372,6 +373,72 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-callisto-nomenclature-center-pts",
+      "path": "features/CALLISTO_nomenclature_center_pts.zip",
+      "expectedBytes": 440686,
+      "expectedSha256": "5b21b56d6f25193cfec648a3a1e41451bd3e2db9c50c64f11c4c415c0b5379a0",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/CALLISTO_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Callisto on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Callisto centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/CALLISTO/target",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-callisto-usgs-gazetteer-nomenclature-center-pts",
+            "role": "material",
+            "evidence": "src/planets/callisto/source/features/manifest.json@01bd7bd566517f8b80cc21bd138e7f5901bca24e#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "callisto-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1015,
+      "expectedSha256": "52311c85b8f74f23269fc72c6c1162ff26750b25a3bd132ea60a329656f89f9d",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "callisto-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1147,
+      "expectedSha256": "166aa9f73da624dfd40f21656cd01861ff23231823a865a50be303b67401893f",
+      "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -420,8 +487,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3338,
-      "expectedSha256": "da96933fb20410aa403d21ab545a19f7e15dac62637763285beb95508ea4c8a8"
+      "expectedBytes": 3596,
+      "expectedSha256": "0b1c9d0f301792db9d95fd1911e1b29b7acff81965284cc250f3f9b69764dd3a"
     },
     {
       "path": "editorial/factsheet-review.json",

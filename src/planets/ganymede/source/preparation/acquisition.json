@@ -73,6 +73,14 @@
       "headers": {
         "Accept": "application/vnd.github.raw+json"
       }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/GANYMEDE_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/GANYMEDE_nomenclature_center_pts.zip"
     }
   ]
 }

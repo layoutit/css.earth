@@ -18,6 +18,8 @@
 
 ## Known problems
 
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Ganymede (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries, and the readout longitude counts from the map’s left edge, 180° from the Gazetteer origin. The map edge was fixed by cropping the source raster at a landmark’s Gazetteer centre under both hypotheses (see the pull request that added the feature).
+
 - **Photographic views:** Neither is presented as unlit calibrated albedo or natural eye color.
 
 - **Color coverage:** In the 210–250° west sector, Voyager measurements supplied green/blue while red was synthesized. This package conservatively uses the observed monochrome base throughout that sector (110–150° east), without claiming its synthesized red as measured color. The shared neutral cartographic grid appears only where no valid surface observation remains.

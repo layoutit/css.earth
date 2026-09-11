@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6adb7af144ea890a94debedf1dd684c3b8537946226d7440d708387b8f3e3c99"
+    "sha256": "642f1254053c1e78a3a7df3803acb52466194db6fd857a60ab7fccd3afd97550"
   },
   "id": "ganymede",
   "properties": {
@@ -44,6 +44,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -113,9 +114,18 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "2ff31beb903ee65c63b4d741196b45b918b05380c51138478e1d817fa87a36ee"
+          "sha256": "1226fc64477bf1e22d8518c602c09e4fc37f5736f0845d6e120457ca5673c55f"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "293d07f933ef719cde5f6580f31fa1f1e396f660bd0d612b721a0bdc9a79d92c"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2500
+      }
     },
     "page": {
       "stylesheets": [
@@ -123,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6d7458cdfdcc19e015ccc47c8767027bd266524fcea9bdae4c4d4434fd2fcbe4"
+        "sha256": "69a61cc86c3a9f78b6656a3eb9ce6625e0693c8e9c92aed5fd4282c1e408fecf"
       }
     },
     "catalog": {

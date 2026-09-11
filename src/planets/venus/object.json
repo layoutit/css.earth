@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "57538f69ab9e3761f04dfae6312cb616fb0eafd05644429670a6d304fe9ad35c"
+    "sha256": "9cf2b7e2e2880eeb9e3686bc5d81330d035c10e0f524a83ae223b43ffd16316f"
   },
   "id": "venus",
   "properties": {
@@ -14,6 +14,7 @@
         "title",
         "assets",
         "charts",
+        "features",
         "panel-content",
         "surface-gallery",
         "lenses",
@@ -99,12 +100,17 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "e7823986cd2e74825b769fc5e22147b61a4e7f2aa132ead6dce9c36043176c42"
+          "sha256": "ca20b765e5e6af71573132f5def73bbd5685d3fa5cf2cd97f303bd4a10dc4c49"
         },
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
           "sha256": "9b2a5130c2d04973ea519c39c40a764c6c6f746e3f684b8791df1f3a8abaffb7"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "3f140d0bc1ef7508cb9d2c4298166a109cce90d979f390b78d8f44f716aef61c"
         }
       ],
       "shape": {
@@ -145,6 +151,10 @@
       "atmosphere": {
         "source": "raster",
         "material": "lighting"
+      },
+      "features": {
+        "source": "features",
+        "maxEntries": 2500
       }
     },
     "page": {
@@ -153,7 +163,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "be86d635b5a27dd9270a7a5e683904158e3c68d95398de9070e59e26c40b02c9"
+        "sha256": "07e06f2975b2515412b5ed96f5e09042846320cb84268d69a8af2b8bce49d15a"
       }
     },
     "catalog": {

@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ba99c6a727706fe047d9a94dc36cf0e8c0ef1fcebd36c872b017aea770f117f3"
+    "sha256": "c9d9b02e5e72eed0fb580be9088492f4e8aa8a94eaed0e1277f199ed1926a5c8"
   },
   "id": "ceres",
   "properties": {
@@ -44,6 +44,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -108,9 +109,18 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "bbd89c12f8573468cdd8f6ccc3e010e88480841ab53f84189df01e59a20720d8"
+          "sha256": "19dc30473b1f818b604a3e5b6d8dcc39681523042db06f381b47192c796411a2"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "9e095ff1e471fcb93329b4e3b41d6cb182c626b74368fc07f5fef4c3cb5a87f1"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2500
+      }
     },
     "page": {
       "stylesheets": [
@@ -118,7 +128,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cb75761ab768d5da0f0dbe63f92663054e7f35351a8d8ddded9496e7f34525fc"
+        "sha256": "eb3cca46a3db50ebda0f4d61162d03592beb53d6c27457a3e65ba8c5814d0985"
       }
     },
     "catalog": {
