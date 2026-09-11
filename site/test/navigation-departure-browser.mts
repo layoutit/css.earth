@@ -1,3 +1,12 @@
+import { requireRecord } from '../../tools/source-values.mts';
+import { parsePreparedObjectRuntime } from '../../src/renderers/css/dist/index.js';
+interface DepartingBody {diameter:number|null;centre:number[]|null;intersectsViewport:boolean;sceneHidden:boolean;sceneOpacity:number;publishedDiameter:number;}
+interface DepartureFrame {time:number;id:string|undefined;source:DepartingBody|null;stageOpacity:number;skies:number;scenes:number;previousMarker:unknown;}
+interface DepartureProof {start:number;frames:DepartureFrame[];raf:number;}
+declare global {interface Window {__departureProof:DepartureProof;}}
+
+import { required } from '../../tools/test-values.mts';
+import { createTestPage } from './browser-observations.mts';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
@@ -10,10 +19,10 @@ const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const reports = [];
 try {
   for (const [from, to] of [['mercury', 'venus'], ['venus', 'mercury']]) {
-    const definition = JSON.parse(await readFile(`src/planets/${from}/prepared/object.json`, 'utf8')).data;
-    const lod = definition.camera.levelOfDetail;
-    const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
-    const errors = []; page.on('pageerror', error => errors.push(error.message));
+    const definition = parsePreparedObjectRuntime(requireRecord(JSON.parse(await readFile(`src/planets/${from}/prepared/object.json`, 'utf8'))).data);
+    const lod = required(definition.camera.levelOfDetail);
+    const page = await createTestPage(browser, { viewport: { width: 1440, height: 1000 } });
+    const errors:string[] = []; page.on('pageerror', error => errors.push(error.message));
     if (unlimitedDeparture) await page.route('**/site/prepared-world-navigation.mts*', async route => {
       const response = await route.fetch(), source = await response.text();
       const guarded = 'advanceSelectionFlightInto(flight, anchors, elapsedS, requestedElapsedS, sample)';
@@ -21,19 +30,19 @@ try {
       await route.fulfill({ response, body: source.replace(guarded, 'requestedElapsedS') });
     });
     await page.goto(`${origin}/${from}/`, { waitUntil: 'networkidle' });
-    await page.waitForFunction(id => window.__cssEarth?.ready && window.__cssEarth.activeObjectId === id, from);
+    await page.waitForFunction(id => window.__cssEarth?.ready && window.__cssearthTest.scene().activeObjectId === id, from);
     await page.evaluate(({ from, to, radiusUnits }) => {
-      const proof = window.__departureProof = { start: performance.now(), frames: [] };
-      const stage = document.querySelector('.planet-stage');
-      function sample(time) {
-        const id = stage.dataset.objectId, diagnostics = window[`__${id}`];
+      const proof:DepartureProof = window.__departureProof = { start: performance.now(), frames: [],raf:0 };
+      const stage = window.__cssearthTest.html('.planet-stage');
+      function sample(time:number) {
+        const id = window.__cssearthTest.htmlElement(stage).dataset.objectId, diagnostics = window.__cssEarth?.object(id);
         const camera = stage.querySelector('.polycss-camera'), scene = stage.querySelector('.polycss-scene');
         let source = null;
         if (id === from && camera && scene && diagnostics) {
           // Measure the actual CSS-transformed sphere. The prepared radius and
           // native perspective determine its painted ellipse; no flight sample
           // or timing helper is used as this browser test's oracle.
-          const matrix = new DOMMatrix(scene.style.transform), cameraStyle = getComputedStyle(camera);
+          const matrix = new DOMMatrix(window.__cssearthTest.htmlElement(scene).style.transform), cameraStyle = getComputedStyle(camera);
           const bounds = camera.getBoundingClientRect();
           const focal = Number.parseFloat(cameraStyle.perspective);
           const [originX, originY] = cameraStyle.perspectiveOrigin.split(' ').map(Number.parseFloat);
@@ -46,26 +55,27 @@ try {
             bounds.y + bounds.height / 2 + oy + focal * y * depth / denominator] : null;
           const radialRadius = denominator > 0 ? focal * radius * Math.sqrt(x * x + y * y + denominator) / denominator : null;
           const radialLength = Math.hypot(x, y), ux = radialLength ? x / radialLength : 1, uy = radialLength ? y / radialLength : 0;
-          const halfWidth = Math.hypot(radialRadius * ux, diameter / 2 * uy);
-          const halfHeight = Math.hypot(radialRadius * uy, diameter / 2 * ux);
+          const halfWidth = radialRadius === null || diameter === null ? 0 : Math.hypot(radialRadius * ux, diameter / 2 * uy);
+          const halfHeight = radialRadius === null || diameter === null ? 0 : Math.hypot(radialRadius * uy, diameter / 2 * ux);
           const intersectsViewport = centre !== null && centre[0] + halfWidth > 0 && centre[0] - halfWidth < innerWidth &&
             centre[1] + halfHeight > 0 && centre[1] - halfHeight < innerHeight;
           const publication = diagnostics.runtime.view();
-          source = { diameter, centre, intersectsViewport, sceneHidden: scene.hidden,
+          source = { diameter, centre, intersectsViewport, sceneHidden: window.__cssearthTest.htmlElement(scene).hidden,
             sceneOpacity: Number(getComputedStyle(scene).opacity),
-            publishedDiameter: publication.body.silhouetteDiameter };
+            publishedDiameter: window.__cssearthTest.required(window.__cssearthTest.required(publication,"published view").body,"published body").silhouetteDiameter };
         }
-        proof.frames.push({ time, id, source, stageOpacity: Number(getComputedStyle(stage).opacity),
+        proof.frames.push({ time, id, source, stageOpacity: Number(getComputedStyle(window.__cssearthTest.required(stage, 'computed style element')).opacity),
           skies: stage.querySelectorAll('.planet-cubic-sky').length, scenes: stage.querySelectorAll('.polycss-scene').length,
-          previousMarker: id === to ? diagnostics?.sky.state().planetarySystem?.bodies.find(body => body.id === from) : null });
+          previousMarker: id === to ? diagnostics?.sky.state()?.planetarySystem?.bodies?.find(body => body.id === from) : null });
         proof.raf = requestAnimationFrame(sample);
       }
       proof.raf = requestAnimationFrame(sample);
     }, { from, to, radiusUnits: definition.camera.logicalBodyDiameter / (2 * definition.camera.sceneScale) });
     await page.locator(`a.scale-stop[href="/${to}/"]`).click();
-    await page.waitForFunction(id => window.__cssEarth?.ready && window.__cssEarth.activeObjectId === id, to, { timeout: 60000 });
+    await page.waitForFunction(id => window.__cssEarth?.ready && window.__cssearthTest.scene().activeObjectId === id, to, { timeout: 60000 });
     const frames = await page.evaluate(() => { cancelAnimationFrame(window.__departureProof.raf); return window.__departureProof.frames; });
-    const sourceFrames = frames.filter(frame => frame.source);
+    const sourceFrames = frames.flatMap(frame => frame.source ? [{...frame,source:{...frame.source,diameter:required(frame.source.diameter),centre:required(frame.source.centre)}}] : []);
+    assert.ok(sourceFrames.length);
     const full = lod.billboardFullDiscPixels, fade = lod.billboardFadeStartDiscPixels;
     // The user requests visible recession, an explicit improvement over the
     // reference's near-surface time jump. One paint must not skip the whole

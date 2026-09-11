@@ -1,3 +1,10 @@
+declare global {interface Window {
+__dblNavigations:{id:string;time:number}[];__dblInput:Element|null;__dblSamples:{id:string|undefined;time:number;count:number;starts:number}[];__dblSampling:boolean;
+}}
+
+import { required } from '../../tools/test-values.mts';
+import { createTestPage } from './browser-observations.mts';
+import type { Page } from 'playwright';
 // Real native pointer gestures exercise the shared input owner in both directions.
 // Diagnostics arrange the wide view and measure poses; they never trigger picking.
 import assert from 'node:assert/strict';
@@ -8,18 +15,21 @@ const origin = process.env.CSSEARTH_TEST_ORIGIN ?? 'http://127.0.0.1:4210';
 const output = '.local/navigation-picking-browser';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const report = [], errors = [];
+const report = [], errors:string[] = [];
 try {
   for (const [from, to] of [['mercury', 'venus'], ['venus', 'mercury']]) {
-    const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+    const page = await createTestPage(browser, { viewport: { width: 1440, height: 1000 } });
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(`${origin}/${from}/`, { waitUntil: 'networkidle' });
     await ready(page, from);
     await page.evaluate(id => {
-      window[`__${id}`].camera.setState({ distance: 2e7 });
+      window.__cssearthTest.object(id).camera.setState({ distance: 2e7 });
       window.__dblNavigations = [];
       document.addEventListener('objectnavigate', event => {
-        window.__dblNavigations.push({ id: event.detail.objectId, time: performance.now() });
+        if (!(event instanceof CustomEvent)) throw new Error("Expected navigation event");
+        const id=window.__cssearthTest.record(event.detail,"navigation detail").objectId;
+        if(typeof id !== "string") throw new Error("Expected navigation object ID");
+        window.__dblNavigations.push({ id, time: performance.now() });
       }, { capture: true });
       window.__dblInput = document.querySelector('.planet-input-surface');
     }, from);
@@ -27,18 +37,18 @@ try {
     const blanks = [];
     for (const offset of [60, 330]) {
       const point = await page.evaluate(({ id, offset }) => {
-        const bounds = document.querySelector('.polycss-camera').getBoundingClientRect();
+        const bounds = window.__cssearthTest.element('.polycss-camera').getBoundingClientRect();
         for (const dy of [10, 40, -40, 100, -100]) {
           const x = bounds.x + bounds.width / 2 + offset, y = bounds.y + bounds.height / 2 + dy;
           if (!document.elementFromPoint(x, y)?.closest('.planet-input-surface')) continue;
           if (document.elementsFromPoint(x, y).some(element =>
-            element.dataset?.objectNavigate && element.style.pointerEvents === 'auto')) continue;
-          return { x, y, offset, radius: window[`__${id}`].camera.state().silhouetteRadius };
+            window.__cssearthTest.htmlElement(element).dataset?.objectNavigate && window.__cssearthTest.htmlElement(element).style.pointerEvents === 'auto')) continue;
+          return { x, y, offset, radius: window.__cssearthTest.object(id).camera.state().silhouetteRadius };
         }
         return null;
       }, { id: from, offset });
       assert.ok(point, 'blank test point on native input');
-      assert.ok(point.radius < 10, 'wide view body is physically tiny');
+      assert.ok(required(point.radius) < 10, 'wide view body is physically tiny');
       const before = await snapshot(page, from);
       await page.mouse.dblclick(point.x, point.y, { delay: 65 });
       await page.waitForTimeout(700);
@@ -57,7 +67,7 @@ try {
         const id = window.__cssEarth?.activeObjectId;
         window.__dblSamples.push({
           id, time: performance.now(), count: document.querySelectorAll('.polycss-camera').length,
-          starts: window[`__${id}`]?.camera.stats().dragInertia.surfaceFlyTo?.starts ?? 0,
+          starts: window.__cssEarth?.object(id)?.camera.stats().dragInertia.surfaceFlyTo?.starts ?? 0,
         });
         requestAnimationFrame(sample);
       };
@@ -70,7 +80,7 @@ try {
       window.__dblSampling = false;
       return {
         events: window.__dblNavigations, samples: window.__dblSamples, path: location.pathname,
-        sameInput: window.__dblInput === document.querySelector('.planet-input-surface'), ready: window.__cssEarth.ready,
+        sameInput: window.__dblInput === document.querySelector('.planet-input-surface'), ready: window.__cssearthTest.scene().ready,
         count: document.querySelectorAll('.polycss-camera').length,
       };
     });
@@ -108,14 +118,14 @@ try {
   await browser.close();
 }
 
-async function ready(page, id) {
-  await page.waitForFunction(id => window.__cssEarth?.ready && window.__cssEarth.activeObjectId === id,
+async function ready(page: Page, id:string) {
+  await page.waitForFunction(id => window.__cssEarth?.ready && window.__cssearthTest.scene().activeObjectId === id,
     id, { timeout: 30000 });
 }
 
-async function snapshot(page, id) {
+async function snapshot(page: Page, id:string) {
   return page.evaluate(id => {
-    const camera = window[`__${id}`].camera, state = camera.state();
+    const camera = window.__cssearthTest.object(id).camera, state = camera.state();
     return {
       scene: state.pose.scene, distance: state.distanceKilometers, bodyCenter: state.bodyCenterKilometers ?? null,
       starts: camera.stats().dragInertia.surfaceFlyTo?.starts ?? 0,
@@ -124,14 +134,14 @@ async function snapshot(page, id) {
   }, id);
 }
 
-async function visibleMarker(page, from, to) {
+async function visibleMarker(page: Page, from:string, to:string) {
   for (const distance of [5e6, 1e7, 2e7, 5e7]) for (let yaw = 0; yaw < 360; yaw += 30) {
     const result = await page.evaluate(({ from, to, distance, yaw }) => {
-      window[`__${from}`].camera.setState({ distance,
+      window.__cssearthTest.object(from).camera.setState({ distance,
         pose: { schema: 'cssearth-camera-pose@2',
           scene: new DOMMatrix().rotateAxisAngle(1, 0, 0, 35).rotateAxisAngle(0, 1, 0, yaw).toString() } });
       const target = document.querySelector(`.planet-heliocentric-body-target[data-body="${to}"]`);
-      if (!target || target.hidden || target.style.pointerEvents === 'none') return null;
+      if (!target || window.__cssearthTest.htmlElement(target).hidden || window.__cssearthTest.htmlElement(target).style.pointerEvents === 'none') return null;
       const bounds = target.getBoundingClientRect(), x = bounds.x + bounds.width / 2, y = bounds.y + bounds.height / 2;
       if (x < 380 || x > innerWidth - 50 || y < 80 || y > innerHeight - 100 ||
         !document.elementFromPoint(x, y)?.closest('.planet-input-surface')) return null;
