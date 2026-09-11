@@ -100,8 +100,8 @@ test("updates wheel and touch policy without replacing controls", () => {
   assert.deepEqual(updates, [{ wheel: true }]);
   assert.equal(policy.mobile, false);
   mediaQuery.setMatches(true);
-  assert.deepEqual(updates.at(-1), { wheel: false });
-  assert.equal(inputSurface.style.touchAction, "pan-y");
+  assert.deepEqual(updates.at(-1), { wheel: true });
+  assert.equal(inputSurface.style.touchAction, "none");
   mediaQuery.setMatches(false);
   assert.deepEqual(updates.at(-1), { wheel: true });
   assert.equal(inputSurface.style.touchAction, "");

@@ -25,6 +25,7 @@ import { createViewReadout } from "./view-readout.mts";
 import { createSurfaceMapReader } from "./surface-map-context.mts";
 import { mountDiagnosticRecorder } from './diagnostic-recorder.mts';
 import { bodyCardViewAtCamera, overviewScopeAtCamera } from './overview-context.mts';
+import { MOBILE_SHEET_POLICY, MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
 
 export function mountPlanetShell({
   objectId,
@@ -48,6 +49,7 @@ export function mountPlanetShell({
   }
   const lifetime = createSceneLifetime();
   let informationTabs: ReturnType<typeof createInformationTabsController>;
+  let sheet: ReturnType<typeof createSheetController>;
   let settingsController: ReturnType<typeof createSettingsController>, objectBrowser: ReturnType<typeof createObjectBrowserController>, contentLifetime: SceneLifetime | null, minimapController: ReturnType<typeof createSurfaceMinimap>, viewReadout: ReturnType<typeof createViewReadout>;
   let selectionPreview: SelectionPreview | null = null;
   let cardNavigation: { view: 'detail' | 'overview' } | null = null;
@@ -79,7 +81,7 @@ export function mountPlanetShell({
   try {
     if (DIAGNOSTICS_ENABLED) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
     objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, onCategoryChange));
-    own(createSheetController(drawer, windowTarget, lifetime));
+    sheet = own(createSheetController(documentTarget, windowTarget, lifetime));
     own(createExplorerRailController(documentTarget, windowTarget, {
       onOpenSolarSystem: () => objectBrowser.showSolarSystem(),
     }));
@@ -124,6 +126,7 @@ export function mountPlanetShell({
       return preview.restore;
     },
     beginObjectSelection(object: ObjectEntry) {
+      sheet.showSelection();
       selectionPreview?.restore();
       if (object.id === cardObjectId) {
         const restoreBrowser = objectBrowser.previewObject(object.name);
@@ -859,108 +862,209 @@ function createChartSwitcherController(drawer: HTMLElement, windowTarget: Browse
   });
 }
 
-function createSheetController(drawer: HTMLElement, windowTarget: BrowserWindow, lifetime: SceneLifetime) {
-  const handle = drawer.querySelector<HTMLElement>(".planet-sheet-handle");
-  if (!(handle instanceof windowTarget.HTMLButtonElement)) {
-    throw new Error("Planet shell sheet handle is missing.");
-  }
+type SheetState = typeof MOBILE_SHEET_POLICY.states[number];
+type SheetStops = Readonly<Record<SheetState, number>>;
+interface SheetGesture {
+  pointerId: number; x: number; y: number; start: number; offset: number; stops: SheetStops;
+  fromHandle: boolean; active: boolean; lastY: number; lastTime: number; velocity: number;
+}
 
-  let startY = 0;
-  let startOffset = 0;
-  let offset = 0;
-  let startTime = 0;
-  let moved = false;
-  let tracking = false;
-  let draggedAt = -Infinity;
+// Phones show information in a bottom sheet that snaps between the heights
+// declared in shell-layout.css. Wider layouts ignore every sheet gesture.
+function createSheetController(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime) {
+  const sheet = documentTarget.querySelector(".planet-sidebar");
+  const handle = documentTarget.querySelector(".planet-sheet-handle");
+  const search = documentTarget.querySelector(".planet-sidebar-search");
+  if (!(sheet instanceof windowTarget.HTMLElement) ||
+      !(handle instanceof windowTarget.HTMLButtonElement) ||
+      !(search instanceof windowTarget.HTMLInputElement)) {
+    throw new Error("Planet shell sheet is incomplete.");
+  }
+  const { body } = documentTarget;
+  const { states, dragSlopPixels, flingPixelsPerMillisecond, flingFreshnessMilliseconds,
+    overdragPixels, overdragResistance } = MOBILE_SHEET_POLICY;
+  const mobile = windowTarget.matchMedia(MOBILE_VIEWPORT_QUERY);
+  const events = new AbortController();
+  const { signal } = events;
+  lifetime.onDispose(() => events.abort());
+  let state: SheetState = "peek";
+  // Search opens the whole sheet; leaving search returns to the earlier height.
+  let searchReturn: SheetState | null = null;
+  let gesture: SheetGesture | null = null;
+  let dragged = false;
   let snapFrame = 0;
   lifetime.onDispose(() => {
     if (snapFrame) windowTarget.cancelAnimationFrame(snapFrame);
     snapFrame = 0;
   });
-  const events = new AbortController();
-  lifetime.onDispose(() => events.abort());
-  const limit = () => Math.max(0, windowTarget.innerHeight * 0.35 - 56);
-  const expanded = () => drawer.classList.contains("is-expanded");
-  const currentOffset = () => {
-    const transform = windowTarget.getComputedStyle(drawer).transform;
-    return transform === "none"
-      ? 0
-      : new windowTarget.DOMMatrixReadOnly(transform).m42;
+
+  // Distances from the fully open sheet down to each snap state.
+  const stops = (): SheetStops => {
+    const style = windowTarget.getComputedStyle(sheet);
+    const peek = Number.parseFloat(style.getPropertyValue("--sheet-peek"));
+    const half = Number.parseFloat(style.getPropertyValue("--sheet-half"));
+    if (!Number.isFinite(peek) || !Number.isFinite(half)) {
+      throw new Error("Planet shell sheet heights are missing.");
+    }
+    const height = sheet.offsetHeight;
+    return { peek: Math.max(0, height - peek), half: Math.max(0, height - half), full: 0 };
   };
-  const snap = (next: boolean, speed = 0) => {
-    const range = Math.max(1, limit());
-    const destination = next ? -range : 0;
-    const distance = Math.min(1,
-      Math.abs(destination - currentOffset()) / range);
+  const currentOffset = () => {
+    const transform = windowTarget.getComputedStyle(sheet).transform;
+    return transform === "none" ? 0 : new windowTarget.DOMMatrixReadOnly(transform).m42;
+  };
+  const nearest = (offset: number, points: SheetStops, candidates: readonly SheetState[] = states) =>
+    candidates.reduce((best, next) =>
+      Math.abs(points[next] - offset) < Math.abs(points[best] - offset) ? next : best);
+  const settle = (next: SheetState, speed = 0) => {
+    const points = stops();
+    const distance = Math.min(1, Math.abs(points[next] - currentOffset()) / Math.max(1, points.peek));
     const velocity = Math.min(1, Math.abs(speed) / 1.2);
-    const duration = Math.round(Math.max(180,
-      Math.min(340, 220 + 120 * distance - 60 * velocity)));
-    drawer.style.setProperty("--sheet-snap-duration", `${duration}ms`);
-    drawer.classList.toggle("is-expanded", next);
-    handle.ariaExpanded = String(next);
-    drawer.classList.remove("is-dragging");
+    const duration = Math.round(Math.max(180, Math.min(340, 220 + 120 * distance - 60 * velocity)));
+    sheet.style.setProperty("--sheet-snap-duration", `${duration}ms`);
+    if (next !== "full") sheet.scrollTop = 0;
+    state = next;
+    body.dataset.sheet = next;
+    handle.ariaExpanded = String(next !== "peek");
+    sheet.classList.remove("is-dragging");
     if (snapFrame) windowTarget.cancelAnimationFrame(snapFrame);
     snapFrame = windowTarget.requestAnimationFrame(() => {
       snapFrame = 0;
-      if (!lifetime.disposed) drawer.style.removeProperty("transform");
+      if (!lifetime.disposed) sheet.style.removeProperty("transform");
     });
   };
+  // Scrolled content keeps its own drags until it returns to the top.
+  const scrolled = (target: EventTarget | null) => {
+    for (let node = target instanceof windowTarget.Element ? target : null; node; node = node.parentElement) {
+      if (node.scrollTop > 0) return true;
+      if (node === sheet) return false;
+    }
+    return false;
+  };
+  const ownsGesture = (target: EventTarget | null) => target instanceof windowTarget.Element &&
+    target.closest("input, select, textarea, [data-surface-minimap]") !== null;
 
-  handle.addEventListener("pointerdown", (event) => {
-    if (!event.isPrimary || event.button > 0) return;
-    startOffset = currentOffset();
-    offset = startOffset;
-    startY = event.clientY;
-    startTime = event.timeStamp;
-    moved = false;
-    tracking = true;
-    drawer.style.transform = `translate3d(0, ${offset}px, 0)`;
-    drawer.classList.add("is-dragging");
-    handle.setPointerCapture(event.pointerId);
-  }, { signal: events.signal });
+  sheet.addEventListener("pointerdown", (event) => {
+    dragged = false;
+    if (!mobile.matches || !event.isPrimary || event.button > 0 || ownsGesture(event.target)) return;
+    const fromHandle = event.target instanceof windowTarget.Node && handle.contains(event.target);
+    if (state === "full" && !fromHandle && scrolled(event.target)) return;
+    const start = currentOffset();
+    gesture = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, start, offset: start,
+      stops: stops(), fromHandle, active: false, lastY: event.clientY, lastTime: event.timeStamp, velocity: 0 };
+  }, { signal });
 
-  handle.addEventListener("pointermove", (event) => {
-    if (!tracking) return;
-    const delta = event.clientY - startY;
-    moved ||= Math.abs(delta) > 3;
-    const range = limit();
-    const raw = startOffset + delta;
-    offset = raw > 0
-      ? Math.min(24, raw * 0.18)
-      : raw < -range
-        ? -range - Math.min(24, (-range - raw) * 0.18)
-        : raw;
-    drawer.style.transform = `translate3d(0, ${offset}px, 0)`;
-  }, { signal: events.signal });
+  // A quick pointer can leave the sheet before the drag captures it, so the
+  // gesture follows the document until it becomes a drag.
+  documentTarget.addEventListener("pointermove", (event) => {
+    const drag = gesture;
+    if (drag === null || event.pointerId !== drag.pointerId) return;
+    const dx = event.clientX - drag.x;
+    const dy = event.clientY - drag.y;
+    if (!drag.active) {
+      if (Math.hypot(dx, dy) < dragSlopPixels) return;
+      // Sideways swipes belong to carousels; pulling up an open sheet scrolls it.
+      if (Math.abs(dx) > Math.abs(dy) || (state === "full" && !drag.fromHandle && dy < 0)) {
+        gesture = null;
+        return;
+      }
+      drag.active = true;
+      sheet.setPointerCapture(event.pointerId);
+      sheet.classList.add("is-dragging");
+    }
+    const raw = drag.start + dy;
+    const overdrag = (distance: number) => Math.min(overdragPixels, distance * overdragResistance);
+    drag.offset = raw < 0 ? -overdrag(-raw)
+      : raw > drag.stops.peek ? drag.stops.peek + overdrag(raw - drag.stops.peek) : raw;
+    const elapsed = event.timeStamp - drag.lastTime;
+    if (elapsed > 0) drag.velocity = 0.8 * (event.clientY - drag.lastY) / elapsed + 0.2 * drag.velocity;
+    drag.lastY = event.clientY;
+    drag.lastTime = event.timeStamp;
+    sheet.style.transform = `translate3d(0, ${drag.offset}px, 0)`;
+  }, { signal });
 
-  handle.addEventListener("pointerup", (event) => {
-    if (!tracking) return;
-    tracking = false;
-    if (!moved) {
-      drawer.classList.remove("is-dragging");
-      drawer.style.removeProperty("transform");
+  const release = (event: PointerEvent) => {
+    const drag = gesture;
+    if (drag === null || event.pointerId !== drag.pointerId) return;
+    gesture = null;
+    if (!drag.active) return;
+    dragged = true;
+    searchReturn = null;
+    if (event.type === "pointercancel") {
+      settle(state);
       return;
     }
-    draggedAt = event.timeStamp;
-    const speed = (event.clientY - startY) /
-      Math.max(1, event.timeStamp - startTime);
-    snap(Math.abs(speed) > 0.35 ? speed < 0 : offset < -limit() / 2, speed);
-  }, { signal: events.signal });
+    // A pause before release places the sheet; a flick carries it to the next stop.
+    const velocity = event.timeStamp - drag.lastTime > flingFreshnessMilliseconds ? 0 : drag.velocity;
+    const ahead = states.filter((candidate) => velocity < 0
+      ? drag.stops[candidate] < drag.offset - 1
+      : drag.stops[candidate] > drag.offset + 1);
+    settle(Math.abs(velocity) >= flingPixelsPerMillisecond && ahead.length > 0
+      ? nearest(drag.offset, drag.stops, ahead)
+      : nearest(drag.offset, drag.stops), velocity);
+  };
+  documentTarget.addEventListener("pointerup", release, { signal });
+  documentTarget.addEventListener("pointercancel", release, { signal });
+  // Once the sheet follows a finger, native scrolling must not claim the touch.
+  sheet.addEventListener("touchmove", (event) => {
+    if (gesture?.active) event.preventDefault();
+  }, { passive: false, signal });
+  sheet.addEventListener("click", (event) => {
+    if (!dragged) return;
+    dragged = false;
+    event.preventDefault();
+    event.stopPropagation();
+  }, { capture: true, signal });
 
-  handle.addEventListener("pointercancel", () => {
-    tracking = false;
-    snap(expanded());
-  }, { signal: events.signal });
+  handle.addEventListener("click", () => {
+    if (!mobile.matches) return;
+    searchReturn = null;
+    settle(state === "peek" ? "half" : state === "half" ? "full" : "peek");
+  }, { signal });
+  handle.addEventListener("keydown", (event) => {
+    const step = event.key === "ArrowUp" ? 1 : event.key === "ArrowDown" ? -1 : 0;
+    if (step === 0 || !mobile.matches) return;
+    event.preventDefault();
+    settle(states[Math.max(0, Math.min(states.length - 1, states.indexOf(state) + step))] ?? state);
+  }, { signal });
 
-  handle.addEventListener("click", (event) => {
-    if (event.timeStamp - draggedAt > 100) snap(!expanded());
-  }, { signal: events.signal });
+  const openSearch = () => {
+    if (!mobile.matches || state === "full") return;
+    searchReturn = state;
+    settle("full");
+  };
+  const closeSearch = (event: KeyboardEvent) => {
+    if (event.key !== "Escape" || searchReturn === null) return;
+    const previous = searchReturn;
+    searchReturn = null;
+    settle(previous);
+  };
+  search.addEventListener("focus", openSearch, { signal });
+  search.addEventListener("input", openSearch, { signal });
+  search.addEventListener("keydown", closeSearch, { signal });
+  sheet.addEventListener("keydown", closeSearch, { signal });
+  mobile.addEventListener("change", () => {
+    gesture = null;
+    sheet.classList.remove("is-dragging");
+    sheet.style.removeProperty("transform");
+  }, { signal });
 
+  body.dataset.sheet = state;
+  handle.ariaExpanded = "false";
   return Object.freeze({
+    // A choice from search reveals its card over the scene.
+    showSelection() {
+      if (!mobile.matches || state !== "full") return;
+      searchReturn = null;
+      settle("peek");
+    },
     destroy() {
       events.abort();
-      drawer.classList.remove("is-expanded", "is-dragging");
-      drawer.style.removeProperty("transform");
+      gesture = null;
+      sheet.classList.remove("is-dragging");
+      sheet.style.removeProperty("transform");
+      sheet.style.removeProperty("--sheet-snap-duration");
+      delete body.dataset.sheet;
       handle.ariaExpanded = "false";
     },
   });
