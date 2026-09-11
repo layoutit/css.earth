@@ -172,6 +172,8 @@ src/planets/*/source/**/*.bpc
 /site/prepared-sources.json
 /site/prepared-spacecraft.json
 /site/prepared-object-catalog.mts
+/site/prepared-feature-index.json
+/public/features/
 /packages/astronomy/src/data/generated/
 /site/prepared-navigation-markers.mjs
 /src/platform/solar-geometry.mts

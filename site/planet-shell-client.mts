@@ -547,7 +547,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   });
   lifetime.onDispose(() => destinations?.destroy());
   const features = createFeatureBrowser({
-    documentTarget,
+    documentTarget, objectId: documentTarget.body.dataset.objectShell ?? '',
     onResults(count) { empty.hidden = visibleObjects + count > 0; },
     onSelected() { render(false); search.blur(); },
   });

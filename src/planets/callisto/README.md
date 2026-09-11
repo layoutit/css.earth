@@ -16,6 +16,8 @@
 
 ## Known problems
 
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Callisto (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 0° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries, and the readout longitude counts from the map’s left edge, which here coincides with the Gazetteer origin. The map edge was fixed by cropping the source raster at a landmark’s Gazetteer centre under both hypotheses (see the pull request that added the feature).
+
 - Original observations range from 400 m to 60 km per pixel. Coarse observed patches are retained; a fine grid spacing does not make those patches high resolution.
 
 - **Galileo color:** These are published processed colors, not calibrated I/F, reflectance ratios or measured albedo. An explicit 65° emission limit retains **28.735%** of the sphere; unseen, grazing and nonopaque source regions remain missing.

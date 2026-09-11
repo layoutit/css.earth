@@ -24,3 +24,5 @@ Rasmus Andersson, under the SIL Open Font License 1.1.
 Elevation: DLR / Dawn Team, distributed by USGS Astrogeology, HAMO global DTM
 (2016). Retain this scientific-data credit with the derived map. The source
 record preserves the reference sphere, units, and withheld polar coverage.
+
+Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.

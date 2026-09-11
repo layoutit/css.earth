@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d743130a86ae4752a691c779b6160b74313c2972b7227c8b380dd05eb1cf7b98"
+    "sha256": "72df7077d4908d32d5568b8ac080f226f45770b469be3a77780baaba7730357c"
   },
   "id": "callisto",
   "properties": {
@@ -44,6 +44,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -108,9 +109,18 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "da96933fb20410aa403d21ab545a19f7e15dac62637763285beb95508ea4c8a8"
+          "sha256": "0b1c9d0f301792db9d95fd1911e1b29b7acff81965284cc250f3f9b69764dd3a"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "166aa9f73da624dfd40f21656cd01861ff23231823a865a50be303b67401893f"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2500
+      }
     },
     "page": {
       "stylesheets": [
@@ -118,7 +128,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5d47262c34ecabac2da88f139f4f971aec3f7d72fa2f2ea0f96e784cbb86fd17"
+        "sha256": "d6f99a1ec3ce5b1544b3a5ef1542e7975749c1e29c0b48cbdbabf1d640ca2323"
       }
     },
     "catalog": {

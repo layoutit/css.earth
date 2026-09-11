@@ -139,7 +139,7 @@
       "licenseEvidence": [
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
-      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
+      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter\u2019s navigation recipe.",
       "redistribution": "Credited prepared observational image; source binary excluded from Git.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -1584,7 +1584,8 @@
       "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
       "consumers": [
         "lenses",
-        "presentation"
+        "presentation",
+        "features"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -1840,6 +1841,72 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-europa-nomenclature-center-pts",
+      "path": "features/EUROPA_nomenclature_center_pts.zip",
+      "expectedBytes": 375144,
+      "expectedSha256": "8405401201f42dca7e05fa205d8473f5e774845776fc1acd9b6c7e70de648d4a",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/EUROPA_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Europa on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Europa centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/EUROPA/target",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-gazetteer-nomenclature-center-pts",
+            "role": "material",
+            "evidence": "src/planets/europa/source/features/manifest.json@01bd7bd566517f8b80cc21bd138e7f5901bca24e#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "europa-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1005,
+      "expectedSha256": "b48ce7e198ad858dbc6ee2c2f8b26de2943c45cbfa06bdaad7491ad61094e698",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "europa-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1165,
+      "expectedSha256": "d2ed477e3a9208e38bf6477ccba1fc7c683cdf82ccab78153777ad1804debb28",
+      "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -1882,7 +1949,7 @@
       "kind": "source-document",
       "title": "JPL Horizons Sun vectors relative to Europa",
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&CENTER=%27500%40502%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272450902.3086344404%0A2450902.3087347527%0A2450902.3088350655%0A2450902.308935366%0A2450902.309035679%0A2450902.3091367553%0A2450902.3092370676%0A2450902.3093373803%0A2450902.309437681%0A2450902.3095379937%0A2450902.3104407713%0A2450902.310541084%0A2450902.3106413847%0A2450262.572702988%0A2450262.5729048634%0A2450262.5730051757%0A2450798.738217853%0A2450798.738420399%0A2450798.7385207117%0A2450798.738819705%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
-      "credit": "NASA/JPL Solar System Dynamics — Horizons",
+      "credit": "NASA/JPL Solar System Dynamics \u2014 Horizons",
       "acquisition": "JPL Horizons request and JSON response saved together on 2026-09-06; the local JSON wrapper is not the original HTTP response bytes.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -1903,7 +1970,7 @@
       "kind": "source-document",
       "title": "JPL Horizons Galileo vectors relative to Europa",
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27-77%27&CENTER=%27500%40502%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272450902.3086344404%0A2450902.3087347527%0A2450902.3088350655%0A2450902.308935366%0A2450902.309035679%0A2450902.3091367553%0A2450902.3092370676%0A2450902.3093373803%0A2450902.309437681%0A2450902.3095379937%0A2450902.3104407713%0A2450902.310541084%0A2450902.3106413847%0A2450262.572702988%0A2450262.5729048634%0A2450262.5730051757%0A2450798.738217853%0A2450798.738420399%0A2450798.7385207117%0A2450798.738819705%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
-      "credit": "NASA/JPL Solar System Dynamics — Horizons",
+      "credit": "NASA/JPL Solar System Dynamics \u2014 Horizons",
       "acquisition": "JPL Horizons request and JSON response saved together on 2026-09-06; the local JSON wrapper is not the original HTTP response bytes.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -1942,8 +2009,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 18556,
-      "expectedSha256": "b0154c84662fa90ce2fcc10046dba1a5b6f09b1527682d7f81ee3344ccfcb3c0"
+      "expectedBytes": 18810,
+      "expectedSha256": "94cec47f070ff5ecd4418e1bb74ddc91bd58eb5d1b04339555e7443f81ba9cb3"
     },
     {
       "path": "editorial/factsheet-review.json",
