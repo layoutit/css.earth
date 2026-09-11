@@ -76,6 +76,8 @@ export interface PreparedWorldContext {
   readonly focus: PreparedContextFocus;
   readonly bodies: readonly PreparedContextBody[];
   readonly orbitCenters?: Readonly<Record<string, PreparedOrbitCenter>>;
+  /** Each classification framed by its members' prepared positions. */
+  readonly classificationViews?: Readonly<Record<string, NonNullable<PreparedContextBody['systemView']>>>;
   readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number;
     readonly presentation: PreparedContextCameraPresentation };
   readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number;
@@ -118,6 +120,22 @@ function parseSystemView(value: unknown): PreparedContextBody['systemView'] {
   });
   if (!candidates.length) throw new TypeError('System view must include candidate views.');
   return Object.freeze({ memberIds: Object.freeze(memberIds), memberRadiiM: Object.freeze(memberRadiiM), candidates: Object.freeze(candidates) });
+}
+/** Classification views frame prepared bodies by position; members must match those bodies. */
+function parseClassificationViews(value: unknown, bodies: readonly PreparedContextBody[]) {
+  if (value === undefined) return undefined;
+  if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Classification views must be a record.');
+  const byId = new Map(bodies.map(body => [body.id, body]));
+  const entries = Object.entries(value).map(([classification, input]) => {
+    const view = parseSystemView(input);
+    if (!/^[a-z][a-z0-9-]*$/.test(classification) || !view) throw new TypeError('Invalid classification view.');
+    for (const [index, id] of view.memberIds.entries()) {
+      if (byId.get(id)?.radiusM !== view.memberRadiiM[index]) throw new TypeError('Classification view members must match their prepared bodies.');
+    }
+    return [classification, view] as const;
+  });
+  if (!entries.length) throw new TypeError('Classification views must name a classification.');
+  return Object.freeze(Object.fromEntries(entries));
 }
 function focusPoint(value: unknown): PreparedContextFocus {
   const input = record(value, 'context focus', ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView']);
@@ -179,7 +197,7 @@ function parsePresentation(value: unknown): PreparedContextCameraPresentation {
     orbitLineFade: Object.freeze({ visibleBelowDiscHeightShare, hiddenAboveDiscHeightShare }), drag: Object.freeze({ model: drag.model }) });
 }
 export function parsePreparedWorldContext(value: unknown): PreparedWorldContext {
-  const input = record(value, 'world context', ['schema', 'frame', 'focus', 'bodies', 'orbitCenters', 'camera', 'volume', 'stars', 'system', 'sky']);
+  const input = record(value, 'world context', ['schema', 'frame', 'focus', 'bodies', 'orbitCenters', 'classificationViews', 'camera', 'volume', 'stars', 'system', 'sky']);
   if (input.schema !== 'cssearth-world-context@1') throw new TypeError('Unsupported prepared world context.');
   const frame = parsePreparedWorldCameraFrame(input.frame);
   if (!frame) throw new TypeError('World context requires its prepared frame.');
@@ -254,6 +272,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
     if (moon.radiusM !== body.systemView!.memberRadiiM[index]) throw new TypeError('System view radii must match their prepared members.');
   }
   const orbitCenters = parsePreparedOrbitCenters(input.orbitCenters, focus, bodies);
+  const classificationViews = parseClassificationViews(input.classificationViews, bodies);
   const camera = record(input.camera, 'context camera', ['minimumDistanceM', 'maximumDistanceM', 'framingReferenceZoom', 'presentation']);
   const volume = record(input.volume, 'context volume', ['objectId', 'fadeStartDistanceM', 'fullDistanceM', 'opacityProfile', 'brightnessProfile']);
   const stars = record(input.stars, 'context stars', ['objectId', 'fadeStartDistanceM', 'fullDistanceM']);
@@ -280,6 +299,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
   if (!/^[a-z][a-z0-9-]*$/.test(objectId)) throw new TypeError('Invalid context volume identity.');
   return Object.freeze({ schema: 'cssearth-world-context@1', frame, focus, bodies: Object.freeze(bodies),
     ...(input.orbitCenters === undefined ? {} : { orbitCenters }),
+    ...(classificationViews ? { classificationViews } : {}),
     camera: Object.freeze({ minimumDistanceM, maximumDistanceM, framingReferenceZoom, presentation }),
     volume: Object.freeze({ objectId, fadeStartDistanceM, fullDistanceM,
       ...(volume.opacityProfile === undefined ? {} : { opacityProfile: parseVolumeOpacityProfile(volume.opacityProfile) }),
@@ -370,7 +390,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites, request
       indicatorPick: null as ScreenPickTarget | null,
       orbitAppearance: { width: CONTEXT_LINE_WIDTH, opacity: 1 },
       orbitNavigable: false,
-      orbitHidden: false, labelHidden: false,
+      orbitHidden: false, labelHidden: false, highlighted: false,
       orbitClip: null as { segments: readonly OrbitSegment[]; x: number; y: number } | null,
       publishedEmphasis: undefined as string | null | undefined,
       hovered: false, groupHovered: false,
@@ -488,8 +508,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites, request
       return { world, viewport: { ...viewport,
         widthPixels: viewport.widthPixels ?? host.clientWidth, heightPixels: viewport.heightPixels ?? host.clientHeight },
         selectedId, overview, selectionPreview, navigationInFlight, anchorOnly: publishingBodies === anchorOnly,
-        bodies: bodies.map(({ hovered, orbitHidden, labelHidden, labelSize, labelShown, labelPlacement,
-          indicatorShown, indicatorRadius, orbitAppearance }) => ({ hovered, orbitHidden, labelHidden, labelSize,
+        bodies: bodies.map(({ hovered, orbitHidden, labelHidden, highlighted, labelSize, labelShown, labelPlacement,
+          indicatorShown, indicatorRadius, orbitAppearance }) => ({ hovered, orbitHidden, labelHidden, highlighted, labelSize,
           labelShown, labelPlacement, indicatorShown, indicatorRadius, orbitAppearance })) };
   };
   const layer = Object.freeze({ root,
@@ -546,6 +566,20 @@ export function mountPreparedWorldContext({ host, before, plan, sprites, request
         const next = hidden.has(entry.body.id);
         if (entry.labelHidden !== next) { entry.labelHidden = next; changed = true; }
       }
+      if (changed) { presentationRevision++; refresh(); }
+    },
+    /** Emphasize a set of bodies, such as one classification, on the retained nodes. */
+    setHighlighted(ids: readonly string[]) {
+      if (destroyed) return;
+      const highlighted = new Set(ids);
+      let changed = false;
+      for (const entry of bodies) {
+        const next = highlighted.has(entry.body.id);
+        if (entry.highlighted === next) continue;
+        entry.highlighted = next; changed = true;
+        if (next) entry.group.dataset.contextHighlight = 'true'; else delete entry.group.dataset.contextHighlight;
+      }
+      if (bodies.some(entry => entry.highlighted)) root.dataset.contextHighlighting = 'true'; else delete root.dataset.contextHighlighting;
       if (changed) { presentationRevision++; refresh(); }
     },
     inspect() {
@@ -677,7 +711,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites, request
             shape: { kind: 'segments', segments, halfWidth: lineWidth / 2 + 7 } } : null;
           if (entry.orbitPick) pickTargets.push(entry.orbitPick);
         }
-        const labelOpacity = hovered ? 1 : entry.orbitHidden ? opacity * (body.id === selectedId ? lod.billboardOpacity : 1) : markerOpacity;
+        const labelOpacity = hovered || entry.highlighted ? 1 : entry.orbitHidden ? opacity * (body.id === selectedId ? lod.billboardOpacity : 1) : markerOpacity;
         fade(entry.fade, entry.labelShown ? labelOpacity : 0, !inFrame || !annotationVisible);
         // Flight visibility is separate from the ongoing label fade, as on main.
         // Publishing zero lets the authored CSS transition own the visual change.

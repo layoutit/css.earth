@@ -18,14 +18,14 @@ interface FlightCheckpoint {world: WorldCamera; elapsedS: number; time?: number;
 interface WorldFlightRequest {owner: Pick<ObjectWorldNavigation, 'apply'>; from: WorldCamera; flight: Flight; anchors: FlightAnchors; signal: AbortSignal; reducedMotion?: boolean; startElapsedS?: number; endElapsedS?: number; startTime?: number | null; limitElapsedS?: () => number; windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame'>; documentTarget: Pick<Document, 'addEventListener' | 'removeEventListener'>; onPaint?: (world: WorldCamera) => void; stopWhen?: (elapsedS: number) => boolean;}
 
 import { CENTER_SELECTION_DURATION_SECONDS } from './runtime-policy.mts';
-import { SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, GALACTIC_VOLUME, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
+import { SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, CLASSIFICATION_VIEWS, GALACTIC_VOLUME, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
 import { bodyCardViewAtCamera } from './overview-context.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
 import { createWorldSelectionTarget, worldCameraFromCenteredPresentation, savedWorldCamera, parseSharedView, presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
 
 /** Application routing over prepared physical frames. The CSS scene owns every camera write. */
 export function createPreparedWorldNavigation({ objects, windowTarget = window, documentTarget = document,
-  systemRadii = SYSTEM_FRAMING_RADII, systemViews = SYSTEM_VIEWS }: {objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; windowTarget?: Window; documentTarget?: Document; systemRadii?: typeof SYSTEM_FRAMING_RADII; systemViews?: typeof SYSTEM_VIEWS}) {
+  systemRadii = SYSTEM_FRAMING_RADII, systemViews = SYSTEM_VIEWS, classificationViews = CLASSIFICATION_VIEWS }: {objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; windowTarget?: Window; documentTarget?: Document; systemRadii?: typeof SYSTEM_FRAMING_RADII; systemViews?: typeof SYSTEM_VIEWS; classificationViews?: typeof CLASSIFICATION_VIEWS}) {
   const frames = new Map(objects.map(object => [object.id, object.worldFrame]));
   let lastCamera: WorldCamera | null = null, lastOptics: Optics | null = null;
   const supports = (from: string, to: string) => {
@@ -59,6 +59,13 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       if (!from || !optics) return null;
       return volumeZoomTarget(from, GALACTIC_VOLUME, optics, systemFramingRect(optics, documentTarget),
         (owner?.frame ?? frames.get(fromId))!.originM);
+    },
+    /** Fit every body of one classification around the root system, keeping the camera angle. */
+    classificationTarget({ classification, objectId, mount }: TargetRequest & {classification: string}) {
+      const view = classificationViews.get(classification), owner = mount?.navigation, frame = frames.get(objectId);
+      const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
+      if (!view || !from || !optics || !frame) return null;
+      return { world: systemViewTarget(from, frame, optics, view, systemFramingRect(optics, documentTarget)), focusPositionM: frame.originM };
     },
     systemTarget({ objectId, fromId, mount, force = false }: TargetRequest) {
       const owner = mount?.navigation, frame = frames.get(objectId);
