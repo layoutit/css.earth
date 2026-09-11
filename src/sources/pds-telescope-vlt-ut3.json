@@ -1,0 +1,30 @@
+{
+  "id": "pds-telescope-vlt-ut3",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Very Large Telescope (VLT) Unit Telescope 3 (UT3) Melipal, 8.2-m Telescope",
+  "identifiers": [
+    {
+      "type": "PDS4 LID",
+      "value": "urn:nasa:pds:context:telescope:eso-paranal.vlt_melipal_8m2_ut3"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://pds.nasa.gov/data/pds4/context-pds4/telescope/eso-paranal.vlt_melipal_8m2_ut3_1.2.xml",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://pds.nasa.gov/data/pds4/context-pds4/telescope/eso-paranal.vlt_melipal_8m2_ut3_1.2.xml",
+      "checkedOn": "2026-09-11",
+      "locator": "Telescope/Instrument_Host title, type, aperture and geodetic coordinates"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "NASA Planetary Data System",
+  "version": "1.2"
+}
