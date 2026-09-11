@@ -33,6 +33,16 @@
       "path": "shape/bacchus.obj",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj",
       "credit": "Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "goldstone-dss14",
+            "missionId": "goldstone-solar-system-radar",
+            "evidence": "The preserved credit for this input reads: Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy"
+          }
+        ]
+      },
       "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -95,6 +105,16 @@
       "path": "reference/bacchus.pdf",
       "origin": "https://echo.jpl.nasa.gov/asteroids/benner.etal.1999.bacchus.pdf",
       "credit": "Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "goldstone-dss14",
+            "missionId": "goldstone-solar-system-radar",
+            "evidence": "The preserved credit for this input reads: Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy"
+          }
+        ]
+      },
       "license": "Original scientific article; source publisher copyright retained.",
       "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
       "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
