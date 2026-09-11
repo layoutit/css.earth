@@ -10,7 +10,7 @@ function declarations(stylesheet: string, selector: string): Record<string,strin
 }
 
 /** Complete projective leaf layout from the actual scoped renderer stylesheet. */
-export function prepareLayeredLeafLayouts({scene,stylesheet,config}: {scene: {interior: {shells: readonly {className:string}[]}}; stylesheet: string; config: LayeredPresentationRecipe}) {
+export function prepareLayeredLeafLayouts({scene,stylesheet,config}: {scene: {interior: {shells: readonly {className:string}[]}}; stylesheet: string; config: Pick<LayeredPresentationRecipe,'namespace'|'stylesheet'>}) {
   const bytes=Buffer.from(stylesheet),sha256=createHash('sha256').update(bytes).digest('hex');
   if(bytes.length!==config.stylesheet.bytes||sha256!==config.stylesheet.sha256)throw new Error('Prepared leaf stylesheet pin changed.');
   const pixelLength=/^\d+(?:\.\d+)?px$/;

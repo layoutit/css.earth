@@ -5,6 +5,7 @@ import {join} from 'node:path';
 import test from 'node:test';
 import sharp from 'sharp';
 import {prepareObservationLenses, observationRaster} from './raster.mts';
+import type { RasterInfo } from './contracts.mts';
 
 async function fixture() {
   const root=await mkdtemp(join(tmpdir(),'cssearth-scientific-display-'));
@@ -31,13 +32,13 @@ async function fixture() {
   await sharp(image,{raw:{width:16,height:8,channels:3}}).png().toFile(join(sourceDirectory,'image.png'));
   const numeric={id:'numeric',input:'grid.img',output:'numeric',scientific:policy};
   const crust={id:'crust',input:'image.png',output:'crust'};
-  const config={schema:'cssearth-static-surface-raster@1',kind:'observation-lenses',width:32,height:16,latitudeSegments:4,
+  const config: Parameters<typeof prepareObservationLenses>[0]["config"]={schema:'cssearth-static-surface-raster@1',kind:'observation-lenses',width:32,height:16,latitudeSegments:4,
     polarTile:16,densities:[1,2],surfaceProjection:'oriented-bands',thumbnail:'source-center-crop',
     material:{frameSize:8,limbFloor:.52,radiusScale:.505,output:'curvature'},lenses:[numeric,crust]};
   return {root,sourceDirectory,numeric,crust,config};
 }
 
-function expectedPoles(data,{width,height,channels},tileSize,boundary) {
+function expectedPoles(data: number[]|Buffer<ArrayBufferLike>,{width,height,channels}: RasterInfo,tileSize: number,boundary: number) {
   const output=Buffer.alloc(tileSize*4*tileSize*4);
   for(let tile=0;tile<4;tile++)for(let y=0;y<tileSize;y++)for(let x=0;x<tileSize;x++){
     const ux=(x+.5)*2/tileSize-1,uy=(y+.5)*2/tileSize-1,radius=Math.hypot(ux,uy);
@@ -53,8 +54,8 @@ function expectedPoles(data,{width,height,channels},tileSize,boundary) {
   return output;
 }
 
-const rgbSet=(data,channels)=>{
-  const set=new Set();for(let i=0;i<data.length;i+=channels)if(channels===3||data[i+3])set.add(data.subarray(i,i+3).join(','));return set;
+const rgbSet=(data: Uint8Array,channels: number)=>{
+  const set=new Set<string>();for(let i=0;i<data.length;i+=channels)if(channels===3||data[i+3])set.add(data.subarray(i,i+3).join(','));return set;
 };
 
 test('scientific display preserves exact palette and missing texels through encoded bands, poles and thumbnails',async()=>{
@@ -94,8 +95,8 @@ test('adding a numeric nearest lens preserves every image-lens output byte',asyn
 test('unsupported numeric display sampling and interpolating atlas routes fail closed',async()=>{
   const f=await fixture();
   const bad={...f.numeric,scientific:{...f.numeric.scientific,displaySampling:'bilinear'}};
-  await assert.rejects(prepareObservationLenses({...f,publicDirectory:join(f.root,'bad'),config:{...f.config,lenses:[bad]}}),/Unsupported scientific display sampling/);
-  await assert.rejects(prepareObservationLenses({...f,publicDirectory:join(f.root,'inverse'),geometry:{rasterAtlas:{}},surfaceRasterCells:[{}],config:{...f.config,surfaceProjection:'inverse-homography',lenses:[f.numeric]}}),/requires oriented bands/);
+  await assert.rejects(Reflect.apply(prepareObservationLenses, undefined, [{...f,publicDirectory:join(f.root,'bad'),config:{...f.config,lenses:[bad]}}]),/Unsupported scientific display sampling/);
+  await assert.rejects(Reflect.apply(prepareObservationLenses, undefined, [{...f,publicDirectory:join(f.root,'inverse'),geometry:{rasterAtlas:{}},surfaceRasterCells:[{}],config:{...f.config,surfaceProjection:'inverse-homography',lenses:[f.numeric]}}]),/requires oriented bands/);
 });
 
 test('categorical static-map legend contains discrete units without requiring a numeric scale',async()=>{
@@ -103,7 +104,7 @@ test('categorical static-map legend contains discrete units without requiring a 
   const scientific={...f.numeric.scientific,categories:[
     {value:'A',label:'Unit A',color:'#f00000'}, {value:'B',label:'Unit B',color:'#00f000'},
   ]};
-  delete scientific.minimum;delete scientific.maximum;delete scientific.colors;
+  Reflect.deleteProperty(scientific,'minimum');Reflect.deleteProperty(scientific,'maximum');Reflect.deleteProperty(scientific,'colors');
   const plan={...f.numeric,scientific};
   await prepareObservationLenses({...f,publicDirectory,config:{...f.config,lenses:[plan]}});
   const legend=await sharp(join(publicDirectory,'numeric-legend.webp')).raw().toBuffer();
@@ -134,5 +135,5 @@ test('denser selected material keeps other lenses and pole atlas sizing unchange
     const pole=await sharp(join(after,`numeric-poles${suffix}.webp`)).metadata();
     assert.deepEqual([pole.width,pole.height],[64*density,16*density]);
   }
-  for(const rasterScale of [0,-1,1.5])await assert.rejects(prepareObservationLenses({...f,publicDirectory:after,config:{...f.config,lenses:[{...numeric,rasterScale}]}}),/Lens raster scale/);
+  for(const rasterScale of [0,-1,1.5])await assert.rejects(Reflect.apply(prepareObservationLenses, undefined, [{...f,publicDirectory:after,config:{...f.config,lenses:[{...numeric,rasterScale}]}}]),/Lens raster scale/);
 });

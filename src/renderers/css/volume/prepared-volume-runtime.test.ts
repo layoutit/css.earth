@@ -13,7 +13,9 @@ class FakeElement {
   readonly dataset: Record<string, string> = {};
   parentNode: FakeElement | null = null; className = '';
   readonly propertyWrites: string[] = [];
-  constructor(readonly ownerDocument: FakeDocument, readonly tagName: string) { Object.defineProperty(this.style, 'setProperty', { value: (name: string, value: string) => { this.style[name] = value; } }); }
+  readonly ownerDocument: FakeDocument;
+  readonly tagName: string;
+  constructor(ownerDocument: FakeDocument, tagName: string) { this.ownerDocument = ownerDocument; this.tagName = tagName; Object.defineProperty(this.style, 'setProperty', { value: (name: string, value: string) => { this.style[name] = value; } }); }
   setAttribute(name: string, value: string): void { this.dataset[name.slice(5).replace(/-([a-z])/gu, (_, letter: string) => letter.toUpperCase())] = value; }
   append(child: FakeElement): void { this.insertBefore(child, null); }
   insertBefore(child: FakeElement, before: FakeElement | null): void { child.remove(); child.parentNode = this; this.children.splice(before === null ? this.children.length : this.children.indexOf(before), 0, child); }

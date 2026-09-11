@@ -13,7 +13,8 @@ class Window {
 class Element extends EventTarget {
   children: Element[] = []; parent: Element | null = null; style: Record<string, string> = {}; dataset: Record<string, string> = {};
   textContent = ''; clientWidth = 800; clientHeight = 600;
-  constructor(readonly ownerDocument: Document) { super(); }
+  readonly ownerDocument: Document;
+  constructor(ownerDocument: Document) { super(); this.ownerDocument = ownerDocument; }
   get offsetWidth() { return this.textContent.length * 6; } get offsetHeight() { return 14; }
   setAttribute() {}
   append(...children: Element[]) { for (const child of children) this.insertBefore(child, null); }
@@ -59,7 +60,7 @@ test('one retained catalogue combines both classes; cluster fades, source-aware 
   document.defaultView.advance(400); expect(Number(label.style.opacity)).toBeGreaterThan(0); expect(Number(label.style.opacity)).toBeLessThan(.425);
   runtime.publish(shifted, viewport, 1, [], 1); document.defaultView.advance(600);
   expect(Number(label.style.opacity)).toBe(.85); label.dispatchEvent(new Event('dblclick'));
-  expect(onSelect).toHaveBeenCalledWith(object); expect(runtime.resolve(object.id)?.kind).toBe('galaxy-cluster');
+  expect(onSelect).toHaveBeenCalledWith(object); expect(runtime.resolve(object.id)).toMatchObject({kind: 'galaxy-cluster'});
   expect(document.count).toBe(nodes);
   runtime.publish({ ...pose, pose: { ...pose.pose, positionM: [object.positionM[0], object.positionM[1], object.positionM[2] - object.aperture.comovingRadiusM * 4] } }, viewport, 1, [], 1);
   document.defaultView.advance(800); expect(Number(label.style.opacity)).toBe(0); expect(Number(aperture.style.opacity)).toBe(0);

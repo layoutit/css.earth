@@ -5,7 +5,7 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {chromium} from 'playwright';
 import {conformanceBrowserLaunch} from '../../../site/test/conformance-browser-launch.mts';
-declare global { interface Window { __cssEarth?: unknown; } }
+declare global { interface Window {  } }
 interface MarkerTarget { r: ReturnType<DOMRect['toJSON']>; visibility: string; opacity: string; tag: string; }
 interface FinalReport { worldMarker?: {from: string; to: string; input: string; target: MarkerTarget}; searchAliases?: string[]; optInControls?: {shadows: boolean; bodyPixelsChanged: boolean; orbit: boolean}; mobile?: {id: string; position: string; viewport: ReturnType<DOMRect['toJSON']>; cardTop: number; overflow: boolean; diagnostics: boolean}[]; errors?: string[]; }
 const out='output/playwright/distant-worlds/final';await mkdir(out,{recursive:true});

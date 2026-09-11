@@ -1,3 +1,4 @@
+import { required } from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
@@ -29,7 +30,7 @@ function preparedFrame(id: 'mercury' | 'venus', radiusM: number, radiusUnits: nu
     bodyRadiusM: radiusM, metersPerUnit: radiusM / radiusUnits };
 }
 const mercury = preparedFrame('mercury', plan.units.bodyRadiusKilometers * 1000, plan.units.bodyRadiusUnits);
-const venus = preparedFrame('venus', venusBody.radiusKilometers * 1000, venusDefinition.camera.logicalBodyDiameter / 2);
+const venus = preparedFrame('venus', required(venusBody).radiusKilometers * 1000, venusDefinition.camera.logicalBodyDiameter / 2);
 // Measured from installed Chrome with the actual Mercury shell at 1440 x1000.
 const viewport: WorldCameraViewport = { focalPixels: 1247.08, principalOffsetPixels: [-170, 0] };
 const initialDistance = 1250.2459507895273;
@@ -68,8 +69,8 @@ test('actual Mercury centred pose round-trips with its principal point, physical
     close(result.centerPixels!, [0, 0], 3e-9);
     assert.ok(Math.abs(result.distanceM - initialDistance * mercury.metersPerUnit) < 3e-5);
     close([result.silhouette!.tangentialSemiAxis, result.silhouette!.radialSemiAxis],
-      [oracle.body.silhouette.tangentialSemiAxis, oracle.body.silhouette.radialSemiAxis], 1e-9);
-    close(result.silhouette!.centre, oracle.body.silhouette.centre, 3e-9);
+      [required(oracle.body.silhouette).tangentialSemiAxis, required(oracle.body.silhouette).radialSemiAxis], 1e-9);
+    close(result.silhouette!.centre, required(oracle.body.silhouette).centre, 3e-9);
     const again = worldCameraFromPresentation(result, mercury);
     close(again.pose.positionM, world.pose.positionM, 3e-5);
     close(again.pose.orientationXyzw, world.pose.orientationXyzw, 1e-15);

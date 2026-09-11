@@ -37,7 +37,8 @@ const viewport = { focalPixels: 600, principalOffsetPixels: [17, -11] } as const
 class FakeElement {
   readonly children: FakeElement[] = []; readonly style: Record<string, string> = {}; readonly dataset: Record<string, string> = {};
   parentNode: FakeElement | null = null; className = ''; textContent = ''; clientWidth = 800; clientHeight = 600;
-  constructor(readonly ownerDocument: FakeDocument) { Object.defineProperty(this.style, 'setProperty', { value: (name: string, value: string) => { this.style[name] = value; } }); }
+  readonly ownerDocument: FakeDocument;
+  constructor(ownerDocument: FakeDocument) { this.ownerDocument = ownerDocument; Object.defineProperty(this.style, 'setProperty', { value: (name: string, value: string) => { this.style[name] = value; } }); }
   get firstChild(): FakeElement | null { return this.children[0] ?? null; }
   get offsetWidth(): number { return this.textContent.length * 7; }
   get offsetHeight(): number { return 14; }

@@ -6,13 +6,14 @@ import { dirname, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import test from 'node:test';
 import { readObjectPreparation, resolveObjectPreparation, runObjectPreparation } from './object-preparation.mts';
+import type { PreparationCommand } from '../src/platform/preparation-runner.mts';
 
 const projectRoot = resolve(import.meta.dirname, '..');
 const expectedRecipes = {mercury: true, venus: true};
-async function descriptor(id) {
+async function descriptor(id: string) {
   return JSON.parse(await readFile(resolve(projectRoot, 'src/planets', id, 'object.json'), 'utf8'));
 }
-function expectedSteps(id) {
+function expectedSteps(id: string) {
   return [['../../../../tools/objects/dist/prepare-authored.js', id, '--write']];
 }
 
@@ -21,7 +22,7 @@ for (const id of Object.keys(expectedRecipes)) {
     const plan = await readObjectPreparation(resolve(projectRoot, 'src/planets', id, 'object.json'));
     assert.deepEqual(plan.steps, expectedSteps(id));
     assert.equal(plan.objectName, id[0].toUpperCase() + id.slice(1));
-    const calls = [];
+    const calls: PreparationCommand[] = [];
     await runObjectPreparation(resolve(projectRoot, 'src/planets', id, 'object.json'), {
       runCommand: async call => { calls.push(call); },
     });
@@ -66,7 +67,7 @@ test('recipe data cannot supply executable paths, arguments or unsupported types
 });
 
 test('a failed producer stops before subsequent recipe capabilities', async () => {
-  const calls = [];
+  const calls: string[] = [];
   await assert.rejects(runObjectPreparation(resolve(projectRoot, 'src/planets/venus/object.json'), {
     async runCommand({ script }) {
       calls.push(script);

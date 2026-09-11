@@ -37,7 +37,7 @@ test('one paint activates only its prepared batch, including the final shorter b
   let settled = false;
   ready.then(() => { settled = true; });
   await Promise.resolve();
-  expect(settled).toBe(false, 'The continuation cannot share the final batch publication frame');
+  expect(settled, 'The continuation cannot share the final batch publication frame').toBe(false);
   f.paint();
   await ready;
   expect(f.callbacks.size).toBe(0);

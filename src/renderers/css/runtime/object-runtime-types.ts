@@ -23,8 +23,9 @@ export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition 
   readonly surfaceHit?: PreparedSurfaceHit;
 }
 export interface ObjectRuntimeView extends OrbitPublication { readonly reference: OrbitPublication; readonly previous: OrbitPublication | null; readonly revision: number; }
+export type PageLayerStats = ReturnType<ReturnType<typeof import('../paging/city-pages.js').mountPreparedMapPages>['stats']>;
 export interface PageLayerRuntime {
-  setPlaying(value: boolean): void; setLens(selection: { id: string | null }): void; publish(view: ObjectRuntimeView): void; stats(): unknown;
+  setPlaying(value: boolean): void; setLens(selection: { id: string | null }): void; publish(view: ObjectRuntimeView): void; stats(): PageLayerStats;
 }
 export interface PreparedDestinationRuntime {
   load(signal?: AbortSignal): Promise<unknown>;

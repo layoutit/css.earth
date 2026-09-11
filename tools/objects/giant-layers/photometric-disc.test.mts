@@ -1,3 +1,4 @@
+import { fixtureRecord } from '../../test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import{readFile,mkdtemp,readdir,rm}from'node:fs/promises';
@@ -10,12 +11,21 @@ test('linear-light attenuation retains exact endpoints and declared light azimut
  for(const z of[-1,-.5,0,.5,1]){const direction=phaseLightDirection(z,[.3,-.4,.5]);assert.equal(direction[2],z);assert.ok(Math.abs(Math.hypot(...direction)-1)<1e-12);}
 });
 test('hypothetical Minnaert overlays preserve coverage and do not replace source colour',()=>{
- const config={shape:{equatorialRadius:7,polarRadius:6},frameSize:16,scenePitchDegrees:30,systemRotationXDegrees:5,rasterSurfaceRadius:6,presentationScale:1.002,contentScale:.992,referenceLightDirection:[.3,-.4,.866],referenceChannel:160,ambientIntensity:.05,terminatorSmoothstep:[0,.1],minnaertChannels:[.8,.9,1]};
+ const config: Parameters<typeof rasterPhotometricDisc>[0]={
+ schema:'cssearth-photometric-disc@1',namespace:'fixture',urlPrefix:'/fixture',sources:[],minnaertSource:'fixture',minnaertSourceChannels:['r','g','b'],presentationSize:16,pixelDensity:1,
+ bank:{frames:3,framesPerRow:3,columns:3,gutter:1,maximumRetainedRows:1},rowOutput:'row-{row}.webp',shadowlessOutput:'shadowless.webp',encoding:{lossless:true,effort:0,alphaQuality:100},qualification:'synthetic analytic fixture',shapePrecisionDigits:6,
+ shape:{equatorialRadius:7,polarRadius:6},frameSize:16,scenePitchDegrees:30,systemRotationXDegrees:5,rasterSurfaceRadius:6,presentationScale:1.002,contentScale:.992,referenceLightDirection:[.3,-.4,.866],referenceChannel:160,ambientIntensity:.05,terminatorSmoothstep:[0,.1],minnaertChannels:[.8,.9,1]};
  const day=rasterPhotometricDisc(config,1),night=rasterPhotometricDisc(config,-1);assert.equal(day.data[3],0);assert.equal(night.data[3],0);
- assert.ok(night.data[(8*16+8)*4+3]>day.data[(8*16+8)*4+3]);assert.throws(()=>rasterPhotometricDisc(config,2),/phase/);
+ assert.ok(night.data[(8*16+8)*4+3]>day.data[(8*16+8)*4+3]);assert.throws(()=>Reflect.apply(rasterPhotometricDisc, undefined, [config, 2]),/phase/);
 });
 test('invalid photometric recipes and altered source pins fail before writing',async()=>{
- const sourceDirectory=new URL('../../../src/planets/jupiter/source/',import.meta.url).pathname,config=JSON.parse(await readFile(join(sourceDirectory,'preparation/materials.json'),'utf8'));
- for(const change of[c=>c.rowOutput='../escape-{row}.webp',c=>c.shape.polarRadius=0,c=>c.terminatorSmoothstep=[1,0],c=>c.bank.frames=1,c=>c.shapePrecisionDigits=99]){const invalid=structuredClone(config);change(invalid);assert.throws(()=>parsePhotometricDiscRecipe(invalid));}
- const directory=await mkdtemp(join(tmpdir(),'photometric-pin-failure-'));try{config.sources[0].expectedSha256='0'.repeat(64);await assert.rejects(preparePhotometricDisc({sourceDirectory,publicDirectory:directory,config,write:true}),/pin mismatch/);assert.deepEqual(await readdir(directory),[]);}finally{await rm(directory,{recursive:true,force:true});}
+ const sourceDirectory=new URL('../../../src/planets/jupiter/source/',import.meta.url).pathname,config=parsePhotometricDiscRecipe(JSON.parse(await readFile(join(sourceDirectory,'preparation/materials.json'),'utf8')));
+ for(const change of[
+ (c: unknown)=>fixtureRecord(c).rowOutput='../escape-{row}.webp',
+ (c: unknown)=>fixtureRecord(c,'shape').polarRadius=0,
+ (c: unknown)=>fixtureRecord(c).terminatorSmoothstep=[1,0],
+ (c: unknown)=>fixtureRecord(c,'bank').frames=1,
+ (c: unknown)=>fixtureRecord(c).shapePrecisionDigits=99
+]){const invalid=structuredClone(config);change(invalid);assert.throws(()=>parsePhotometricDiscRecipe(invalid));}
+ const directory=await mkdtemp(join(tmpdir(),'photometric-pin-failure-'));try{Object.assign(config.sources[0],{expectedSha256:'0'.repeat(64)});await assert.rejects(preparePhotometricDisc({sourceDirectory,publicDirectory:directory,config,write:true}),/pin mismatch/);assert.deepEqual(await readdir(directory),[]);}finally{await rm(directory,{recursive:true,force:true});}
 });

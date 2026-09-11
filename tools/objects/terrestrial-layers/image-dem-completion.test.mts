@@ -1,3 +1,4 @@
+import { required } from '../../test-values.mts';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { completeImageDem } from './image-dem-completion.mts';
@@ -5,11 +6,11 @@ import { validateClosedMesh } from './radial-terrain.mts';
 import { createIndexedShape } from './obj-shape.mts';
 
 const recipe = { method: 'outline-depth-envelope', depthMeters: 3, faceBudget: 100 };
-function closedMesh(front, added) {
-  const positions = [], known = new Map();
+function closedMesh(front: { vertices: number[][]; }[], added: { vertices: (readonly number[])[]; normal: number[]; estimated: boolean; }[]) {
+  const positions: number[][] = [], known = new Map();
   const triangles = [...front, ...added].map(f => f.vertices.map(p => {
     const key = p.join(',');
-    if (!known.has(key)) { known.set(key, positions.length); positions.push(p); }
+    if (!known.has(key)) { known.set(key, positions.length); positions.push([...p]); }
     return known.get(key);
   }));
   const topology = validateClosedMesh(triangles.flat(), positions);
@@ -25,8 +26,8 @@ test('closes a boundary-only diagonal without moving the observation or pinching
   assert.deepEqual(front, original);
   assert.ok(completion.faces.every(f => f.estimated));
   const mesh = closedMesh(front, completion.faces);
-  assert.equal(mesh.intersect([0,0,10], [0,0,-1]).radius, 9);
-  assert.equal(mesh.intersect([0,0,-10], [0,0,1]).radius, 8);
+  assert.equal(required(mesh.intersect([0,0,10], [0,0,-1])).radius, 9);
+  assert.equal(required(mesh.intersect([0,0,-10], [0,0,1])).radius, 8);
   assert.equal(mesh.intersect([3,0,10], [0,0,-1]), null);
 });
 
@@ -36,6 +37,6 @@ test('fills an internal gap as estimated while preserving its observed rim', () 
   const completion = completeImageDem(front, recipe, 1);
   assert.equal(completion.report.gapFaces, 2);
   assert.equal(completion.report.boundaryVertices, 4);
-  assert.equal(closedMesh(front, completion.faces).intersect([0,0,10], [0,0,-1]).radius, 9);
+  assert.equal(required(closedMesh(front, completion.faces).intersect([0,0,10], [0,0,-1])).radius, 9);
   assert.throws(() => completeImageDem(front, { ...recipe, faceBudget: 4 }, 1), /budget/);
 });

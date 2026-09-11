@@ -1,3 +1,4 @@
+import { required } from '../../test-values.mts';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { parseObjShape } from './obj-shape.mts';
@@ -16,12 +17,12 @@ const lens = { grid: { bitpix: -32, width: 2, height: 2, flipV: false }, samplin
 
 test('source UV barycentrics preserve island identity and declared image orientation', () => {
   const sample = createObjUvFitsSampler(mesh, mapping, fits, lens);
-  assert.equal(sample.samplePoint([-1,-1,1]).value, 10);
-  assert.equal(sample.samplePoint([0,-1,1]).value, 15);
-  assert.equal(sample.samplePoint([-1,0,1]).value, 20);
-  assert.equal(sample.samplePoint([-1,-1,2]).value, 40);
+  assert.equal(required(sample.samplePoint([-1,-1,1])).value, 10);
+  assert.equal(required(sample.samplePoint([0,-1,1])).value, 15);
+  assert.equal(required(sample.samplePoint([-1,0,1])).value, 20);
+  assert.equal(required(sample.samplePoint([-1,-1,2])).value, 40);
   assert.equal(sample.samplePoint([-1,-1,1.5]), null);
-  assert.equal(createObjUvFitsSampler(mesh, mapping, fits, { ...lens, grid: {...lens.grid, flipV:true} }).samplePoint([-1,-1,1]).value, 30);
+  assert.equal(required(createObjUvFitsSampler(mesh, mapping, fits, { ...lens, grid: {...lens.grid, flipV:true} }).samplePoint([-1,-1,1])).value, 30);
   assert.equal(sample.sample(225, 80), null, 'a radial preview must withhold ambiguous layers');
 });
 

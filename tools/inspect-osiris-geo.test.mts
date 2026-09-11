@@ -1,3 +1,4 @@
+import { required } from './test-values.mts';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, lommelSeeligerGain, fitCamera, project, sampleGeo, PLANE_NAMES, GEO_SHAPE_MODEL, osirisRadianceFactorScale, phaseGain, observationGain } from './objects/terrestrial-layers/osiris-geo.mts';
@@ -12,10 +13,10 @@ test('radiance factor uses calibrated solar flux and squared distance without no
 });
 
 test('source phase terms have analytic anchors and leave disk limits independent', () => {
-  const phase = { asymmetry: 0, amplitude: 1, width: 1, minimumDegrees: 0, maximumDegrees: 90, referenceDegrees: 0, maximumGain: 2 };
+  const phase = { model: 'hapke-2012-hg-shadow-hiding', asymmetry: 0, amplitude: 1, width: 1, minimumDegrees: 0, maximumDegrees: 90, referenceDegrees: 0, maximumGain: 2 };
   assert.equal(phaseGain(0, phase), 1);
   // Isotropic HG is one: the shadow term falls from 2 at 0 degrees to 1.5 at 90.
-  assert.ok(Math.abs(phaseGain(Math.PI / 2, phase) - 4 / 3) < 1e-12);
+  assert.ok(Math.abs(required(phaseGain(Math.PI / 2, phase)) - 4 / 3) < 1e-12);
   assert.equal(phaseGain(NaN, phase), null);
   assert.equal(phaseGain(Math.PI, phase), null);
   assert.equal(phaseGain(Math.PI / 2, { ...phase, maximumGain: 1.1 }), null);
@@ -23,7 +24,7 @@ test('source phase terms have analytic anchors and leave disk limits independent
   assert.equal(observationGain(80 * Math.PI / 180, 0, disk, 0), null);
 });
 
-function fixture({ replace = text => text } = {}) {
+function fixture({ replace = (text: string) => text } = {}) {
   let label = `PDS_VERSION_ID = PDS3\nRECORD_TYPE = FIXED_LENGTH\nRECORD_BYTES = 512\nFILE_RECORDS = 18\nLABEL_RECORDS = 8\nINSTRUMENT_ID = "OSINAC"\nIMAGE_ID = "12000700"\nSOFTWARE_VERSION_ID = "2.9.0"\nSTART_TIME = 2014-08-05T19:44:22.918\nFILTER_NAME = "FFP-Vis_Orange"\n`;
   for (const [i, name] of PLANE_NAMES.entries()) label += `^${name} = ${10 + i}\n`;
   for (const name of PLANE_NAMES) label += `OBJECT = ${name}\nLINE_SAMPLES = 2\nLINES = 2\nSAMPLE_BITS = 32\nSAMPLE_TYPE = ${name === 'FACET_INDEX_IMAGE' ? 'LSB_INTEGER' : 'PC_REAL'}\nBANDS = 1\nFIRST_LINE = 1\nFIRST_LINE_SAMPLE = 1\nLINE_DISPLAY_DIRECTION = DOWN\nSAMPLE_DISPLAY_DIRECTION = LEFT\nUNIT = "${name === 'IMAGE' ? 'W/M**2/SR/NM' : name === 'FACET_INDEX_IMAGE' ? 'INTEGER' : name.includes('ANGLE') ? 'RAD' : 'KM'}"\nEND_OBJECT = ${name}\n`;
@@ -71,8 +72,8 @@ test('quality map requires positive VALID and exact companion identity/radiance'
   assert.deepEqual([...quality.flags].map(q => acceptOsirisQuality(q, true)), [true, true, false, false]);
   assert.equal(acceptOsirisQuality(9, false), false);
   for (const bit of [2, 4, 16, 32, 64, 128]) assert.equal(acceptOsirisQuality(1 | bit, true), false);
-  frame.quality = { ...quality, allowLossy: true };
-  assert.equal(sampleGeo(frame, [[1, 0, 0, .5], [0, 1, 0, .5], [0, 0, 1, 1]], [0, 0, 0], { maximumSeparationMeters: 20, maximumEmissionDegrees: 80 }).reason, 'quality');
+  const qualifiedFrame = { ...frame, quality: { ...quality, allowLossy: true } };
+  assert.equal(sampleGeo(qualifiedFrame, [[1, 0, 0, .5], [0, 1, 0, .5], [0, 0, 1, 1]], [0, 0, 0], { maximumSeparationMeters: 20, maximumEmissionDegrees: 80 }).reason, 'quality');
   const wrongImage = Buffer.from(bytes); wrongImage.writeFloatLE(0, 2048);
   assert.throws(() => decodeOsirisQuality(wrongImage, frame), /radiance differs/);
   const wrongDate = Buffer.from(bytes); wrongDate.write('2015', wrongDate.indexOf('2014'));
@@ -81,17 +82,17 @@ test('quality map requires positive VALID and exact companion identity/radiance'
 
 test('bounded disk normalization precedes interpolation and preserves signed radiance', () => {
   const photometry = { maximumIncidenceDegrees: 80, maximumEmissionDegrees: 80, maximumGain: 3 };
-  assert.ok(Math.abs(lommelSeeligerGain(Math.PI / 3, 0, photometry) - 1.5) < 1e-12);
-  assert.ok(Math.abs(lommelSeeligerGain(0, Math.PI / 3, photometry) - .75) < 1e-12);
+  assert.ok(Math.abs(required(lommelSeeligerGain(Math.PI / 3, 0, photometry)) - 1.5) < 1e-12);
+  assert.ok(Math.abs(required(lommelSeeligerGain(0, Math.PI / 3, photometry)) - .75) < 1e-12);
   assert.equal(lommelSeeligerGain(80 * Math.PI / 180, 0, photometry), null);
   assert.equal(lommelSeeligerGain(Math.PI / 2, 0, photometry), null);
   const frame = decodeOsirisGeo(fixture());
   frame.planes.INCIDENCE_ANGLE_IMAGE.set([0, Math.PI / 3, 0, Math.PI / 3]);
   frame.planes.EMISSION_ANGLE_IMAGE.fill(0); frame.planes.IMAGE.fill(2);
   const matrix = [[1, 0, 0, .5], [0, 1, 0, .5], [0, 0, 1, 1]], policy = { maximumSeparationMeters: 20, maximumEmissionDegrees: 80, photometry };
-  assert.ok(Math.abs(sampleGeo(frame, matrix, [0, 0, 0], policy).radiance - 2.5) < 1e-6);
+  assert.ok(Math.abs(required(sampleGeo(frame, matrix, [0, 0, 0], policy).radiance) - 2.5) < 1e-6);
   frame.planes.IMAGE.fill(-2);
-  assert.ok(Math.abs(sampleGeo(frame, matrix, [0, 0, 0], policy).radiance + 2.5) < 1e-6);
+  assert.ok(Math.abs(required(sampleGeo(frame, matrix, [0, 0, 0], policy).radiance) + 2.5) < 1e-6);
 });
 
 test('OSIRIS rejects truncated, overlapping, differently oriented or unreliable GEO data', () => {

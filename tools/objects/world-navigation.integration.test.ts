@@ -1,3 +1,7 @@
+import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
+import { parsePreparedObjectRuntime } from '../../src/renderers/css/validation/index.js';
+import { requireRecord, requireArray, requireFiniteNumber, hasErrorCode } from '../source-values.mts';
+import { required } from '../test-values.mts';
 import { readFile, readdir, mkdir, mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -9,17 +13,22 @@ import { rotation, transform } from './world-navigation.js';
 import { chain } from './world-navigation-sources.js';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
-const read = async (path: string) => JSON.parse(await readFile(path, 'utf8'));
+const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(path, 'utf8'));
+function descriptorFixture(value: unknown) {
+  const raw = requireRecord(value), properties = requireRecord(raw.properties);
+  const descriptor = parseAuthoredObjectDescriptor(raw);
+  return {...raw, id: descriptor.id, properties: {...properties, recipe: descriptor.recipe, worldFrame: requireRecord(properties.worldFrame)}};
+}
 const directories = (await readdir(resolve(root, 'src/planets'), { withFileTypes: true })).filter(entry => entry.isDirectory());
-const objects = [];
+const objects: {directory: string; descriptor: ReturnType<typeof descriptorFixture>}[] = [];
 for (const entry of directories) {
   const directory = resolve(root, 'src/planets', entry.name);
-  try { objects.push({ directory, descriptor: await read(resolve(directory, 'object.json')) }); }
-  catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error; }
+  try { objects.push({ directory, descriptor: descriptorFixture(await read(resolve(directory, 'object.json'))) }); }
+  catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
 }
 
 for (const { directory, descriptor } of objects) it(`${descriptor.id}: source-pinned finalization is idempotent and preserves detailed assets/geometry`, async () => {
-  const definition = await read(resolve(directory, 'prepared/runtime.json'));
+  const definition = parsePreparedObjectRuntime(await read(resolve(directory, 'prepared/runtime.json')));
   const first = await prepareWorldNavigationDefinition({ objectDirectory: directory, definition, projectRoot: root });
   const second = await prepareWorldNavigationDefinition({ objectDirectory: directory, definition: first.definition, projectRoot: root });
   assert.deepEqual(second, first);
@@ -27,10 +36,14 @@ for (const { directory, descriptor } of objects) it(`${descriptor.id}: source-pi
   // A saved frame may come from another platform's math library. The repeated
   // run above must still match exactly; this comparison permits only roundoff.
   for (const key of ['originM', 'presentationToReference', 'orbitUpReference'] as const) {
-    if (!first.frame[key] || !expectedFrame[key]) { assert.deepEqual(first.frame[key], expectedFrame[key]); continue; }
-    const scale = Math.max(1, ...first.frame[key].map(Math.abs), ...expectedFrame[key].map(Math.abs));
+    const actual = requireRecord(first.frame)[key], expected = expectedFrame[key];
+    if (actual === undefined || expected === undefined) { assert.deepEqual(actual, expected); continue; }
+    const values = requireArray(actual).map(value => requireFiniteNumber(value));
+    const reference = requireArray(expected).map(value => requireFiniteNumber(value));
+    assert.equal(values.length, reference.length);
+    const scale = Math.max(1, ...values.map(Math.abs), ...reference.map(Math.abs));
     const tolerance = Math.max(key === 'originM' ? 0.001 : 0, 8 * Number.EPSILON * scale);
-    first.frame[key].forEach((value, axis) => assert.ok(Math.abs(value - expectedFrame[key][axis]) <= tolerance,
+    values.forEach((value, axis) => assert.ok(Math.abs(value - reference[axis]) <= tolerance,
       `${descriptor.id} ${key}[${axis}] differs beyond coordinate roundoff.`));
   }
   const metadata = (frame: object) => Object.fromEntries(Object.entries(frame)
@@ -56,14 +69,14 @@ for (const { directory, descriptor } of objects) it(`${descriptor.id}: source-pi
       .some(className => className === `${descriptor.id}-body` || className === 'shape-model-body'));
     assert.ok(index >= 0, 'Retained surface carrier is missing.');
     const transforms: string[] = [];
-    const retainedTransform = (node: any): string => node.properties.map((propertyIndex: number) => definition.tree.properties[propertyIndex])
-      .find((entry: { name: string }) => entry.name === 'transform')?.value ?? node.style.match(/(?:^|;)transform:([^;]+)/u)?.[1] ?? '';
+    const retainedTransform = (node: typeof nodes[number]): string => node.properties.map((propertyIndex: number) => definition.tree.properties[propertyIndex])
+      .find((entry: { name: string }) => entry.name === 'transform')?.value ?? (node.style ?? '').match(/(?:^|;)transform:([^;]+)/u)?.[1] ?? '';
     const physicalSource = descriptor.properties.recipe.sources.find((source: { id: string }) => source.id === 'solar-system');
     if (physicalSource) {
       // The physical observation capability anchors Sun, orbit and sky to its
       // prepared system. Its local surface/cutaway spin is a visual longitude
       // phase, not a second inertial reference frame. It must preserve the pole.
-      assert.equal((await read(resolve(directory, physicalSource.path))).schema, 'cssearth-solar-system-preparation@1');
+      assert.equal(requireRecord(await read(resolve(directory, physicalSource.path))).schema, 'cssearth-solar-system-preparation@1');
       const pole = transform(chain(retainedTransform(nodes[index])), [0, 0, 1]);
       pole.forEach((value, axis) => assert.ok(Math.abs(value - Number(axis === 2)) < 1e-12));
       index = nodes[index].parent;
@@ -87,7 +100,7 @@ it('descriptor discovery covers every authored object rather than a navigation-m
 });
 
 it('changed authored bytes fail the finalizer source pin before publication', async () => {
-  const object = objects.find(({ descriptor }) => descriptor.properties.recipe.sources.some((source: { id: string }) => source.id === 'paged-ellipsoid'))!;
+  const object = required(objects.find(({ descriptor }) => descriptor.properties.recipe.sources.some(source => source.id === 'paged-ellipsoid')));
   const temporary = await mkdtemp(resolve(tmpdir(), 'physical-source-pin-'));
   try {
     await writeFile(resolve(temporary, 'object.json'), JSON.stringify(object.descriptor));
@@ -95,7 +108,7 @@ it('changed authored bytes fail the finalizer source pin before publication', as
     const target = resolve(temporary, source.path);
     await mkdir(dirname(target), { recursive: true });
     await writeFile(target, `${await readFile(resolve(object.directory, source.path), 'utf8')} `);
-    const definition = await read(resolve(object.directory, 'prepared/runtime.json'));
+    const definition = parsePreparedObjectRuntime(await read(resolve(object.directory, 'prepared/runtime.json')));
     await assert.rejects(prepareWorldNavigationDefinition({ objectDirectory: temporary, definition, projectRoot: root }), /Navigation source pin differs/);
   } finally { await rm(temporary, { recursive: true, force: true }); }
 });

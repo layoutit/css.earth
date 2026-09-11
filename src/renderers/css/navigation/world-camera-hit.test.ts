@@ -10,13 +10,13 @@ it('near-surface off-axis picking follows forward sphere rays even when no bound
   const viewport = { focalPixels: 1000, principalOffsetPixels: [-170,0] as const };
   const view = presentWorldCamera(world, frame, viewport);
   expect(view.silhouette).toBeNull();
-  const body = { visible: false, silhouette: null, translate: view.translateCssPixels } as Parameters<typeof hitsProjectedBody>[2];
+  const body = { visible: false, silhouette: null, translate: view.translateCssPixels } satisfies Parameters<typeof hitsProjectedBody>[2];
   const bounds = { x: 170, y: 0, width: 1440, height: 900 };
   const physical = { ...viewport, bodyRadiusUnits: frame.bodyRadiusM };
   // At the image's optical centre a forward ray intersects the near body.
   expect(hitsProjectedBody(720, 450, body, bounds, null, physical)).toBe(true);
   // The opposite side looks past its horizon into empty sky.
   expect(hitsProjectedBody(0, 450, body, bounds, null, physical)).toBe(false);
-  const behind = { ...body, translate: [90,0,1100] } as typeof body;
+  const behind = { ...body, translate: [90,0,1100] as const };
   expect(hitsProjectedBody(720, 450, behind, bounds, null, physical)).toBe(false);
 });

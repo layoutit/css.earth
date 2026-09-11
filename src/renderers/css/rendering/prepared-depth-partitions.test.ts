@@ -5,10 +5,10 @@ import { physicalProjectionFromCamera } from './physical-projection.js';
 test('camera publication preserves carriers and changes prepared ordering only across a separating plane', () => {
   const writes: string[] = [];
   const nodes = Array.from({ length: 5 }, (_, i) => {
-    const values: Record<string, string> = {};
-    return { hidden: false, style: new Proxy(values, { set(target, key: string, value) {
-      writes.push(`${i}:${key}:${value}`); target[key] = value; return true;
-    } }) } as HTMLElement;
+    const values = {transform: '', zIndex: ''};
+    return { hidden: false, style: new Proxy(values, { set(target, key: string, value: string) {
+      writes.push(`${i}:${key}:${value}`); Reflect.set(target, key, value); return true;
+    } }) };
   });
   const publish = createPreparedDepthPartitions({ groups: [{ root: 1, scene: 2 }, { root: 3, scene: 4 }],
     order: { plane: [1,0,0,0], back: { group: 0 }, front: { group: 1 } } }, nodes, nodes[0]);
@@ -28,7 +28,7 @@ test('camera publication preserves carriers and changes prepared ordering only a
 });
 
 test('fixed prepared priorities are applied once while camera transforms keep publishing', () => {
-  const nodes = Array.from({ length: 5 }, () => ({ style: {}, hidden: false }) as HTMLElement);
+  const nodes = Array.from({ length: 5 }, () => ({ style: {transform: '', zIndex: ''}, hidden: false }));
   const publish = createPreparedDepthPartitions({ groups: [{ root: 1, scene: 2 }, { root: 3, scene: 4 }],
     order: { sequence: [{ group: 1 }, { group: 0 }] } }, nodes, nodes[0]);
   const projection = physicalProjectionFromCamera([1,0,0,0,1,0,0,0,1], [0,0,-100], 1,

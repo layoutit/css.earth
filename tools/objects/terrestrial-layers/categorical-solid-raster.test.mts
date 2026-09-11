@@ -1,3 +1,6 @@
+import { required } from '../../test-values.mts';
+import { fixtureSource } from '../test-source-fixture.mts';
+import { requireRecord, requireString } from '../../source-values.mts';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {mkdtemp, writeFile, readFile, rm} from 'node:fs/promises';
@@ -8,7 +11,7 @@ import {prepareSolidRasters, prepareSolidMaterial} from './solid-raster.mts';
 import {reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster} from '../../../src/platform/prepare-solid-body-surface.mts';
 
 const colors=['#ff0000','#00ff00'], rgb=colors.map(c=>[1,3,5].map(i=>parseInt(c.slice(i,i+2),16)));
-function assertPalette(bytes, message) {
+function assertPalette(bytes: Uint8Array, message: string) {
   let opaque=0;
   for(let i=0;i<bytes.length;i+=4) {
     if (!bytes[i+3]) continue;
@@ -48,7 +51,7 @@ test('category nearest is explicit while default solid and pole sampling stays b
   assert.deepEqual(reprojectSolidBodySurfaceRaster(bytes,surface),reprojectSolidBodySurfaceRaster(bytes,{...surface,sampling:'bilinear'}));
   assert.deepEqual(prepareSolidBodyPoleRaster(bytes,pole),prepareSolidBodyPoleRaster(bytes,{...pole,sampling:'bilinear'}));
   assert.notDeepEqual(reprojectSolidBodySurfaceRaster(bytes,surface),reprojectSolidBodySurfaceRaster(bytes,{...surface,sampling:'nearest'}));
-  assert.throws(()=>reprojectSolidBodySurfaceRaster(bytes,{...surface,sampling:'cubic'}),TypeError);
+  assert.throws(()=>Reflect.apply(reprojectSolidBodySurfaceRaster, undefined, [bytes, {...surface,sampling:'cubic'}]),TypeError);
 });
 
 test('actual category pack, encoded atlases, poles, legend and thumbnail retain only source palette colors',async()=>{
@@ -60,15 +63,16 @@ test('actual category pack, encoded atlases, poles, legend and thumbnail retain 
       categories:colors.map((color,i)=>({value:i?'B':'A',label:i?'B':'A',color})),
       grid:{attributePath:'units.dbf',projectionPath:'units.prj',coordinateSystem:'GCS_Fixture',referenceRadiusMeters:1,longitudeDirection:'east-positive',latitudeType:'planetocentric',longitudeDomain:[-180,180],expectedRecords:2,expectedBounds:[-180,-90,180,90],field:'Unit',unknownValues:[],withheldDegenerateRings:[]}};
     const entries=['units.shp','units.dbf','units.prj'].map(path=>({path,id:path,consumers:['geology']}));
-    const source={manifest:{inputs:entries,documents:[]},validateGroup:async consumer=>{assert.equal(consumer,'geology');return entries}};
+    const pinned = await fixtureSource(root, entries);
+    const source = {...pinned, async validateGroup(consumer: string) { assert.equal(consumer, 'geology'); return pinned.validateGroup(consumer); }};
     const config={namespace:'fixture',publicBase:'/scenes/fixture/',raster:{width:64,height:32,bandCount:8,gutter:1,poleSize:16,surfaceQuality:5,observations:[],scientific:[lens]},
       lighting:{frameSize:4,columns:1,frameCount:2,logicalSize:4,terminatorWidth:.1,directionalAmbient:.12,fullPhaseAmbient:.12,fullPhaseDiffuse:.88,maximumOpacity:1}};
     const surfaces=await prepareSolidRasters({sourceDirectory:root,publicDirectory:root,outputDirectory:root,config,source});
     await prepareSolidMaterial({surfaces,publicDirectory:root,outputDirectory:root,config});
     const surface=surfaces[0];assert.equal(surface.categorical,true);assert.equal(surface.missingPixels,0);
-    for(const url of [surface.map.url,surface.surface.url,surface.thumbnail.url,surface.legend.url,surface.polesUrl]){
-      const bytes=await sharp(await readFile(join(root,url.split('/').at(-1)))).ensureAlpha().raw().toBuffer();
-      assertPalette(bytes,url);
+    for(const url of [surface.map.url,surface.surface.url,surface.thumbnail.url,requireString(requireRecord(surface.legend).url),surface.polesUrl]){
+      const bytes=await sharp(await readFile(join(root,required(required(url).split('/').at(-1))))).ensureAlpha().raw().toBuffer();
+      assertPalette(bytes,required(url));
     }
   } finally {await rm(root,{recursive:true,force:true})}
 });
@@ -89,18 +93,18 @@ test('explicit nearest numeric display preserves missing-cell colors through enc
     const label=Object.entries(fields).map(([key,value])=>`${key} = ${typeof value==='string'?JSON.stringify(value):value}`).join('\n');
     await Promise.all([writeFile(join(root,'grid.img'),bytes),writeFile(join(root,'grid.lbl'),label)]);
     const entries=['grid.img','grid.lbl'].map(path=>({path,id:path,consumers:['science']}));
-    const source={manifest:{inputs:entries,documents:[]},validateGroup:async()=>entries};
+    const source = await fixtureSource(root, entries);
     const config={namespace:'fixture',publicBase:'/scenes/fixture/',raster:{width:64,height:32,bandCount:8,gutter:1,poleSize:16,surfaceQuality:5,observations:[],scientific:[lens]},
       lighting:{frameSize:4,columns:1,frameCount:2,logicalSize:4,terminatorWidth:.1,directionalAmbient:.12,fullPhaseAmbient:.12,fullPhaseDiffuse:.88,maximumOpacity:1}};
     const surfaces=await prepareSolidRasters({sourceDirectory:root,publicDirectory:root,outputDirectory:root,config,source});
     await prepareSolidMaterial({surfaces,publicDirectory:root,outputDirectory:root,config});
     const surface=surfaces[0];assert.equal(surface.displaySampling,'nearest');assert.equal(surface.categorical,undefined);assert.equal(surface.missingPixels,1024);
-    const readRaster=async url=>sharp(await readFile(join(root,url.split('/').at(-1)))).ensureAlpha().raw().toBuffer();
+    const readRaster=async (url: string)=>sharp(await readFile(join(root,required(required(url).split('/').at(-1))))).ensureAlpha().raw().toBuffer();
     const map=await readRaster(surface.map.url),allowed=new Set();
     for(let i=0;i<map.length;i+=4)allowed.add([...map.subarray(i,i+3)].join(','));
     assert.ok(allowed.size>1,'Source includes both valid red and missing coverage');
     for(const url of [surface.surface.url,surface.thumbnail.url,surface.polesUrl]) {
-      const output=await readRaster(url);
+      const output=await readRaster(required(url));
       for(let i=0;i<output.length;i+=4)if(output[i+3])assert.ok(allowed.has([...output.subarray(i,i+3)].join(',')),'Unsupported mixed coverage at '+url+': '+i/4);
     }
   } finally {await rm(root,{recursive:true,force:true})}

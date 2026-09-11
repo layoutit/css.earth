@@ -1,3 +1,5 @@
+import { fixtureSource } from '../test-source-fixture.mts';
+import { required } from '../../test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import sharp from 'sharp';
@@ -36,7 +38,7 @@ test('PDS comet plates preserve zero-indexed connectivity, units and every sourc
 test('plate coverage preserves observed black and grids both ellipsoid and joining plates', async () => {
   const recipe = { kind: 'plate-coverage', width: 64, height: 32, observedColor: '#000000' };
   const mesh = { indices: [[0, 1, 2], [0, 2, 3], [0, 3, 1]], faceProvenance: [0, 1, 2],
-    hit: longitude => ({ faceId: Math.floor(longitude / 120) }) };
+    hit: (longitude: number) => ({ faceId: Math.floor(longitude / 120) }) };
   const { data, info } = await sharp(await preparePdsConstraintMap(mesh, recipe)).raw().toBuffer({ resolveWithObject: true });
   const sharedGrid = paintMissingCoverage(Buffer.alloc(data.length), info, new Uint8Array(info.width * info.height).fill(1));
   for (let y = 0; y < info.height; y++) for (const x of [10, 32, 53]) {
@@ -50,7 +52,7 @@ test('constraint colors wrap east longitude and retain source pole flags without
   const mesh = parsePdsPlanetocentricShape(table, profile);
   const recipe = { width: 16, height: 8, stepDegrees: 90, colors: { 1: '#ff0000', 2: '#00ff00', 3: '#0000ff' } };
   const { data, info } = await sharp(await preparePdsConstraintMap(mesh, recipe)).raw().toBuffer({ resolveWithObject: true });
-  const at = (x, y) => [...data.subarray((y * info.width + x) * 3, (y * info.width + x + 1) * 3)];
+  const at = (x: number, y: number) => [...data.subarray((y * info.width + x) * 3, (y * info.width + x + 1) * 3)];
   assert.deepEqual(at(0, 0), [0, 255, 0]);
   assert.deepEqual(at(0, 7), [0, 0, 255]);
   assert.deepEqual(at(0, 3), [255, 0, 0]);
@@ -66,7 +68,7 @@ test('a source-selected constraint grid preserves stereo and limb categories eve
     colors: { 1: '#000000', 2: '#000000', 3: '#000000' } };
   const { data, info } = await sharp(await preparePdsConstraintMap(mesh, recipe)).raw().toBuffer({ resolveWithObject: true });
   const grid = paintMissingCoverage(Buffer.alloc(data.length), info, new Uint8Array(info.width * info.height).fill(1));
-  const at = (buffer, x, y) => buffer.subarray((y * info.width + x) * 3, (y * info.width + x + 1) * 3);
+  const at = (buffer: Buffer<ArrayBuffer>, x: number, y: number) => buffer.subarray((y * info.width + x) * 3, (y * info.width + x + 1) * 3);
   for (const [x, y] of [[0, 0], [0, 15], [16, 15], [63, 15]]) assert.deepEqual(at(data, x, y), Buffer.alloc(3));
   for (const [x, y] of [[0, 31], [32, 15]]) assert.deepEqual(at(data, x, y), at(grid, x, y));
   await assert.rejects(preparePdsConstraintMap(mesh, { ...recipe, gridFlags: [4] }), /Invalid PDS constraint map/);
@@ -87,9 +89,12 @@ test('terrain preparation verifies categorical output pins named by either histo
     faceBudget:8,tileSize:4,atlasColumns:4,simplification:{method:'source-meshoptimizer',targetFaces:8,maximumErrorMeters:.1}}}};
   for(const extension of ['mjs','mts']) {
     let verified=0;
-    const entry={generator:`tools/objects/terrestrial-layers/pds-constraint-map.${extension}`,recipe};
-    const source={manifest:{inputs:[entry]},validatePath:async path=>assert.equal(path,'source.tab'),
-      assertBytes(pin,bytes){assert.equal(pin,entry);assert.deepEqual(bytes,expected);verified++;}};
+    await writeFile(join(directory,'constraint.png'),expected);
+    const pinned=await fixtureSource(directory,[{id:'shape',path:'source.tab',consumers:['geometry']},
+      {id:'constraint',path:'constraint.png',consumers:['geometry'],generator:`tools/objects/terrestrial-layers/pds-constraint-map.${extension}`,recipe}]);
+    const entry=required(pinned.manifest.inputs.find(input=>input.id==='constraint'));
+    const source={...pinned,async validatePath(path:string){assert.equal(path,'source.tab');return pinned.validatePath(path);},
+      assertBytes(...args:Parameters<typeof pinned.assertBytes>){const [pin,bytes]=args;assert.equal(pin,entry);assert.deepEqual(bytes,expected);verified++;return pinned.assertBytes(...args);}};
     await loadRadialTerrain({sourceDirectory:directory,config,source});
     assert.equal(verified,1,`${extension} must not silently skip its producer pin`);
     await assert.rejects(loadRadialTerrain({sourceDirectory:directory,config,source:{...source,assertBytes(){throw new Error('Changed categorical source bytes');}}}),/Changed categorical source bytes/);

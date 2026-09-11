@@ -26,7 +26,7 @@ test('accepts the direct prepared CSS volume payload and all three stacks', () =
 
 test('rejects a runtime URL in authored leaf style', () => {
   const value = valid();
-  value.stacks[0]!.leaves[0]!.style = { ...value.stacks[0]!.leaves[0]!.style, transform: 'url(/runtime.png)' };
+  Object.assign(value.stacks[0]!.leaves[0]!, { style: { ...value.stacks[0]!.leaves[0]!.style, transform: 'url(/runtime.png)' } });
   expect(() => validatePreparedCssVolume(value)).toThrow('URL-free');
 });
 

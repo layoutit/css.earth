@@ -1,3 +1,4 @@
+import { isRecord } from './source-values.mts';
 import assert from 'node:assert/strict';
 import { readFile, readdir, realpath } from 'node:fs/promises';
 import path from 'node:path';
@@ -5,12 +6,13 @@ import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { ESLint } from 'eslint';
 import { parse } from '@typescript-eslint/parser';
+import type { PathLike } from 'node:fs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const eslint = new ESLint({ cwd: root });
 const packageNames = ['astronomy', 'catalog', 'engine', 'objects'];
 
-async function sourceFiles(directory) {
+async function sourceFiles(directory: string): Promise<string[]> {
   const entries = await readdir(directory, { withFileTypes: true });
   const files = await Promise.all(entries.map(entry => {
     const location = path.join(directory, entry.name);
@@ -19,10 +21,10 @@ async function sourceFiles(directory) {
   return files.flat();
 }
 
-function imports(node, result = []) {
-  if (!node || typeof node !== 'object') return result;
-  if (['ImportDeclaration', 'ExportNamedDeclaration', 'ExportAllDeclaration', 'ImportExpression'].includes(node.type)) {
-    if (typeof node.source?.value === 'string') result.push(node.source.value);
+function imports(node: unknown, result: string[] = []): string[] {
+  if (!isRecord(node)) return result;
+  if (['ImportDeclaration', 'ExportNamedDeclaration', 'ExportAllDeclaration', 'ImportExpression'].includes(String(node.type))) {
+    if (isRecord(node.source) && typeof node.source.value === 'string') result.push(node.source.value);
   }
   for (const [key, value] of Object.entries(node)) {
     if (['parent', 'tokens', 'comments', 'loc', 'range'].includes(key)) continue;
@@ -32,7 +34,7 @@ function imports(node, result = []) {
   return result;
 }
 
-function forbiddenImport(owner, file, specifier) {
+function forbiddenImport(owner: string, file: string, specifier: string) {
   if (specifier === '@layoutit/polycss') return true;
   if (specifier.startsWith('node:')) return !file.endsWith('.test.ts');
   if (owner === 'engine' && specifier.startsWith('@cssearth/objects')) return true;

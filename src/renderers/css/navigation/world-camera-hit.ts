@@ -4,7 +4,7 @@ type Bounds = Pick<DOMRect, 'x' | 'y' | 'width' | 'height'>;
 export interface PhysicalBodyHit { focalPixels: number; principalOffsetPixels: readonly [number, number]; bodyRadiusUnits: number; }
 
 /** Pick the drawn physical silhouette, independently of the larger drag sphere. */
-export function hitsProjectedBody(clientX: number, clientY: number, body: BodyProjection,
+export function hitsProjectedBody(clientX: number, clientY: number, body: Pick<BodyProjection, 'visible' | 'silhouette' | 'translate'>,
   cameraBounds: Bounds, markerBounds: Bounds | null = null, physical?: PhysicalBodyHit): boolean {
   // A nearby body may cross the eye plane and project an unbounded conic.
   // Its visible surface still has an exact forward-ray test.
