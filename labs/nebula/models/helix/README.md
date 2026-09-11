@@ -1,6 +1,6 @@
 # Helix: observation alignment and shape inference
 
-**Current step:** align the three wider ESO observations and inspect native star removal in **Alignment**. The [Structure map](../../docs/nebula-compiler.md) and **Volume** views still show the earlier cropped Hubble experiment; the new sources have no structure extraction or 3D hypotheses yet.
+**Current step:** inspect and filter 2D structures from the three aligned ESO observations. **Alignment** retains Original / Without stars / Residual for source checks. The [structure workflow](../../docs/nebula-compiler.md) precedes human review and depth hypotheses; **Volume** remains the earlier cropped Hubble experiment.
 
 **Initial visual verdict: neither baseline is accepted.** The one-axis fit reproduces the photograph but becomes a box from the side. The disk/ring prior has finite curved components, but is too smooth, cuts off outer emission and changes brightness under rotation. These are deliberately visible comparisons, not production nebula assets.
 
@@ -8,7 +8,7 @@
 
 The current Hubble/CTIO **photograph itself clips the wider nebula**. Retaining its full frame in the inspector does not repair that missing observation. The separate disk/ring prior also drops signal within that frame; both limits must be fixed before accepting a volume.
 
-Open **Source candidates** in either Helix experiment, or `/reconstruction?subject=helix-model-prior&inspection=sources`. These are unprocessed, full-photograph publisher previews, independently fitted to the viewport—not registered overlays. Field sizes describe angular coverage, not the size of the image on screen. Their native originals remain separate links; a small preview must never become the processing input. Current baked results and source pins remain unchanged.
+Historical publisher previews remain in **Helix · symmetry baseline → Source candidates**, or `/reconstruction?subject=helix-single-axis&inspection=sources`. These are unprocessed full photographs independently fitted to the viewport, not registered overlays. Use **Helix → Alignment** for current source comparison at a shared sky scale. Field sizes describe angular coverage; a small preview must never become the processing input.
 
 | Observation | Native pixels | Publisher field | Inspection result |
 | --- | --- | --- | --- |
@@ -36,7 +36,7 @@ The [observation recipe](observations.json) pins the three complete native ESO T
 
 Both checks span all four quadrants and a broad overlap. The 1024 × 1024 reference frame spans 60′ square; one frame pixel is 3.515625″. Field stars verify relative registration in the common observed area. Absolute astrometry remains publisher metadata, and regions beyond the common overlap use that WCS plus the fitted correction. No physical depth, common emission strength or stellar membership is inferred.
 
-All three full-native NOX separations completed: approximately 52.6 s for VISTA, 51.9 s for WFI and 36.9 s for the wider ESO image. Native dimensions, tile coverage and source = diffuse + residual accounting passed. The nine 2048-pixel-or-smaller inspection images preserve full aspect/coverage and have recorded hashes. **Bright stellar cores/halos remain in places; some compact nebular knot light enters the residual.** These are inspectable first removals, not accepted structure-extraction inputs. Optical/infrared differences are also real band differences, not evidence of misregistration.
+All three full-native NOX separations completed: approximately 52.6 s for VISTA, 51.9 s for WFI and 36.9 s for the wider ESO image. Native dimensions, tile coverage and source = diffuse + residual accounting passed. The nine 2048-pixel-or-smaller inspection images preserve full aspect/coverage and have recorded hashes. **Bright stellar cores/halos remain in places; some compact nebular knot light enters the residual.** The user authorized a first structure-inspection pass using these inputs; their contamination must remain visible as uncertainty. Optical/infrared differences are also real band differences, not evidence of misregistration.
 
 To recreate this step from the repository root with Node, pnpm and Python 3.9–3.12 installed:
 
@@ -55,7 +55,7 @@ The first preparation command acquires/verifies native originals and alignment w
 
 Browser verification passed for all nine real layers, identical transforms and retained image nodes, full footprints, matched markers, pan/zoom, reload, saved manual adjustments/copy, and navigation among the density/symmetry/inference examples. Helix inspection issued no processing requests and loaded Alignment without a baked volume. A cache-only replay retained every completed layer and launched no inference. Removing the AVM offset path and the no-processing guard each makes a focused test fail. These checks establish registration/display/replay behavior, not star-removal quality or physical depth.
 
-**Stop here for visual acceptance.** The older Structure map and Volume views still refer to the cropped Hubble source. Do not extract structures from the new observations until alignment and residual inspection are accepted. Do not interpret matching stars as proof of the nebula's 3D form.
+**Next gate: review the structures before fitting a volume.** The user authorized extraction of the new observations on 2026-09-11. Keep the old Hubble volume distinct. Neither matching stars nor keeping a projected feature establishes the nebula's 3D form.
 
 ## Difficulty and scientific basis
 

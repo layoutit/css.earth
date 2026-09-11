@@ -102,10 +102,10 @@
     "emissionExperiment": {
       "directory": ".local/nebula-lab/planetary/helix-model-prior",
       "structureDirectory": ".local/nebula-lab/planetary/helix-structures",
+      "observationStructures": ".local/nebula-lab/observations/helix/structures/catalogue.json",
       "modeled": true,
       "methodUrl": "https://doi.org/10.1086/424621",
-      "statusNote": "Rough prior: outer emission omitted; side detail unresolved.",
-      "sourceCatalogue": "labs/nebula/models/helix/source-candidates.json"
+      "statusNote": "Previous Hubble baseline: outer emission omitted; side detail unresolved. Not fitted from the ESO structure candidates."
     },
     "sourcePageUrl": "https://esahubble.org/images/opo0432b/",
     "credit": "NASA, ESA, C.R. O'Dell (Vanderbilt University), and M. Meixner, P. McCullough, and G. Bacon (Space Telescope Science Institute).",

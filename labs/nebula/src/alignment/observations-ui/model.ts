@@ -15,6 +15,7 @@ export interface Observations {
   images: Observation[];
 }
 export interface Adjustment { x: number; y: number; rotation: number; scale: number }
+type RegisteredImage = { imageToFrame: Matrix; source: { width: number; height: number } };
 export const unchanged: Adjustment = { x: 0, y: 0, rotation: 0, scale: 1 };
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 const finite = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value);
@@ -51,7 +52,7 @@ export function readObservations(value: unknown): Observations {
 }
 export function transform(m: Matrix, p: Point): Point { return [m[0] * p[0] + m[2] * p[1] + m[4], m[1] * p[0] + m[3] * p[1] + m[5]]; }
 /** A local inspection fit follows measured registration; it never replaces it. */
-export function adjustedMatrix(image: Observation, frame: Observations['frame'], fit: Adjustment): Matrix {
+export function adjustedMatrix(image: RegisteredImage, frame: Observations['frame'], fit: Adjustment): Matrix {
   const m = image.imageToFrame, center = transform(m, [image.source.width / 2, image.source.height / 2]);
   const angle = fit.rotation * Math.PI / 180, c = Math.cos(angle) * fit.scale, s = Math.sin(angle) * fit.scale;
   const tx = center[0] + fit.x * frame.width / frame.fieldArcminutes[0] - c * center[0] + s * center[1];
@@ -62,6 +63,10 @@ export function readAdjustment(value: unknown): Adjustment {
   if (!record(value) || !finite(value.x) || !finite(value.y) || !finite(value.rotation) || !positive(value.scale) || value.scale > 100 || Math.abs(value.x) > 1000 || Math.abs(value.y) > 1000 || Math.abs(value.rotation) > 360) return { ...unchanged };
   return { x: value.x, y: value.y, rotation: value.rotation, scale: value.scale };
 }
-export function imageCorners(image: Observation, matrix: Matrix): Point[] {
+export function imageCorners(image: RegisteredImage, matrix: Matrix): Point[] {
   return [[0, 0], [image.source.width, 0], [0, image.source.height], [image.source.width, image.source.height]].map(([x, y]) => transform(matrix, [x!, y!]));
+}
+export const observationFitStorageKey = (path: string, image: { id: string; source: { sha256: string } }) => `nebula-observation-fit@1:${path}:${image.id}:${image.source.sha256}`;
+export function savedObservationFit(path: string, image: { id: string; source: { sha256: string } }): Adjustment {
+  try { return readAdjustment(JSON.parse(localStorage.getItem(observationFitStorageKey(path, image)) ?? 'null')); } catch { return { ...unchanged }; }
 }

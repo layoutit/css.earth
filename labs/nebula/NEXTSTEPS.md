@@ -2,7 +2,7 @@
 
 Updated 2026-09-11. Research sources and method status are in [RESEARCH.md](RESEARCH.md). The current reproducible pipeline is in [METHOD.md](METHOD.md).
 
-**Active next decision:** inspect the three wider ESO Helix images together in **Alignment**, then compare Original / Without stars / Residual. Verify common angular scale, orientation, field-star alignment and full source coverage. Their structure extraction is deliberately deferred until this visible step is accepted. The [existing structure map](docs/nebula-compiler.md) uses the older cropped Hubble image and remains a historical method baseline; it has not been applied to the new observations.
+**Active next decision:** inspect and filter the 2D structure candidates from the three aligned ESO Helix observations. Mark useful, uncertain and rejected evidence, and compare suspicious compact features with Original / Without stars / Residual in **Alignment**. The user authorized this stage on 2026-09-11. The [compiler notes](docs/nebula-compiler.md) separate the current observation stage from the historical cropped Hubble benchmark and describe the later physics constraints. No new volume is accepted or fitted by reviewing candidates.
 
 **M2–9 baseline:** the [image-to-volume experiment](models/m2-9/README.md) remains available. Front/oblique/side views show connected lobes, with remaining ring artifacts, background and color/brightness differences. It is not promoted; see [planetary-nebulae.md](docs/planetary-nebulae.md).
 

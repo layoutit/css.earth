@@ -1,4 +1,4 @@
-/** Actual generated Helix maps, stable scene, and refresh; no processing requests. */
+/** Historical Hubble baseline only; current ESO maps use browser-observation-structures. */
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
@@ -11,7 +11,7 @@ const errors: string[] = [], writes: string[] = [];
 page.on('pageerror', error => errors.push(error.message));
 page.on('request', request => { if (request.method() !== 'GET') writes.push(request.url()); });
 try {
-  await page.goto('http://127.0.0.1:4331/reconstruction?subject=helix-model-prior');
+  await page.goto('http://127.0.0.1:4331/reconstruction?subject=helix-single-axis');
   await page.locator('#viewer[data-ready="true"]').waitFor();
   const mesh = await page.locator('.css-volume-mesh').first().elementHandle();
   assert.ok(mesh);
@@ -45,7 +45,7 @@ try {
   await page.reload();
   await page.locator('.emission-structure-map img').waitFor();
   await page.locator('.emission-structure-map img').evaluate(async (node: HTMLImageElement) => node.decode());
-  await page.goto('http://127.0.0.1:4331/reconstruction?subject=helix-model-prior&inspection=sources');
+  await page.goto('http://127.0.0.1:4331/reconstruction?subject=helix-single-axis&inspection=sources');
   await page.getByRole('figure', { name: 'Source coverage preview' }).locator('img').waitFor();
   await page.getByRole('figure', { name: 'Source coverage preview' }).locator('img').evaluate(async (node: HTMLImageElement) => node.decode());
   assert.deepEqual(errors, []); assert.deepEqual(writes, []);

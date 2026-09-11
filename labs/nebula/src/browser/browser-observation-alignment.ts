@@ -71,6 +71,7 @@ try {
   await page.getByRole('button', { name: 'Reset alignment', exact: true }).click();
   assert.deepEqual(await matrices(), originalMatrices);
   await page.getByRole('tab', { name: 'Reconstruction', exact: true }).click();
+  await page.getByRole('button', { name: 'Volume', exact: true }).click();
   await page.locator('#viewer[data-ready="true"]').waitFor();
   const mesh = await page.locator('.css-volume-mesh').first().elementHandle(); assert.ok(mesh);
   await page.getByRole('tab', { name: 'Alignment', exact: true }).click();

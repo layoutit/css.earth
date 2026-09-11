@@ -46,7 +46,7 @@ export interface LabSubjectRecord {
   modelNote?: string;
   framingRadiusUnits?: number;
   hasDetail?: boolean;
-  emissionExperiment?: { directory: string; modeled?: boolean; methodUrl?: string; statusNote?: string; structureDirectory?: string; sourceCatalogue?: string };
+  emissionExperiment?: { directory: string; modeled?: boolean; methodUrl?: string; statusNote?: string; structureDirectory?: string; sourceCatalogue?: string; observationStructures?: string };
   comparisonGroup?: string;
   reconstructionImage?: { group: string; label: string; note: string };
   referenceProjectionScale?: number;
@@ -68,6 +68,9 @@ function prepareSubjectRecord(record: LabSubjectRecord) {
   if (record.workflow !== undefined) readLabWorkflow(record.workflow);
   if (record.observationAlignment && (!relativePath(record.observationAlignment.manifest) || !relativePath(record.observationAlignment.recipe)))
     throw new TypeError(`Lab subject ${record.id} has invalid observation alignment paths.`);
+  if (record.emissionExperiment?.observationStructures !== undefined &&
+      (!record.observationAlignment || !relativePath(record.emissionExperiment.observationStructures)))
+    throw new TypeError(`Lab subject ${record.id} requires registered observations for its structure catalogue.`);
   const sharedDensity = record.density && subjectRecords.filter(item => item.density?.directory === record.density!.directory);
   const configuredRadii = sharedDensity?.flatMap(item => item.density?.referenceFramingRadiusUnits === undefined ? [] : [item.density.referenceFramingRadiusUnits]) ?? [];
   if (configuredRadii.some(value => !Number.isFinite(value) || value <= 0) || new Set(configuredRadii).size > 1)

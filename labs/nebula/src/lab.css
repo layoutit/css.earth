@@ -201,13 +201,32 @@ a.reconstruction-image-detail { display: inline-block; }
 .workspace-content:has(.observation-alignment) > #inspection-panel,
 .workspace-content:has(.observation-alignment) > #image-overlay-panel,
 .workspace-content:has(.observation-alignment) > #cloud-adjustment-panel { visibility: hidden; }
+.observation-structures-workspace { position: absolute; inset: 0; z-index: 1; background: #000; }
+.observation-structures-panel { width: 310px; }
+.observation-structure-frame, .observation-structure-plane { position: absolute; left: 0; top: 0; transform-origin: 0 0; pointer-events: none; }
+.observation-structure-plane img { position: absolute; left: 0; top: 0; max-width: none; user-select: none; }
+.structure-region { position: absolute; overflow: hidden; pointer-events: auto; border: 0; border-radius: 0; padding: 0; background: transparent; opacity: .7; }
+.structure-region:not(:disabled):hover { background: transparent; opacity: 1; }
+.structure-region[data-selected="true"] { outline: 1px solid #fff; outline-offset: 1px; opacity: 1; }
+.structure-region img { pointer-events: none; }
+.structure-morphologies { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; font-size: 11px; }
+.structure-morphologies label { display: flex; align-items: center; gap: 4px; }
+.structure-filter { display: grid; grid-template-columns: 1fr 112px; align-items: center; gap: 8px; margin: 7px 0; font-size: 12px; }
+.structure-filter input, .structure-filter select { width: 100%; min-width: 0; padding: 5px 7px; color: inherit; background: #202124; border: 1px solid #393b3f; border-radius: 4px; }
+.structure-selection { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--divider); }
+.structure-review-navigation, .structure-decisions { display: flex; gap: 6px; margin-top: 8px; }
+.structure-review-navigation button, .structure-decisions button { flex: 1; padding: 6px 5px; font-size: 11px; }
+.structure-decisions button[aria-pressed="true"] { border-color: #a9acb5; background: #35373b; }
+.workspace-content:has(.observation-structures-workspace) > #inspection-panel { visibility: hidden; }
 @media (max-width: 1000px) {
   .observation-camera { width: 190px; padding: 12px; }
   .observation-images { width: 260px; padding: 12px; }
+  .observation-structures-panel { width: 260px; padding: 12px; }
   .observation-sky { left: 218px; right: 288px; }
 }
 @media (max-width: 700px) {
   .observation-camera { width: calc(50% - 21px); max-height: 180px; }
   .observation-images { width: calc(50% - 21px); max-height: 180px; }
+  .observation-structures-panel { width: calc(50% - 21px); max-height: 180px; }
   .observation-sky { inset: 210px 0 0; }
 }

@@ -1,0 +1,189 @@
+import { memo, useCallback, useEffect, useMemo, useRef, useState, type PointerEvent } from 'react';
+import { createPortal } from 'react-dom';
+import { localFile } from '../viewer/viewer';
+import { adjustedMatrix, imageCorners, savedObservationFit, unchanged, type Adjustment, type Matrix } from '../alignment/observations-ui/model';
+import { decisions, morphologies, readDecisions, readReviewMap, readStructureCatalogue, reviewStorageKey,
+  type Decision, type Morphology, type ReviewMap, type StructureCatalogue, type StructureImage, type StructureLayer } from '../alignment/observations-ui/structures-model';
+
+type Camera = { x: number; y: number; zoom: number };
+type Filters = { scale: number; area: number; contrast: number; elongation: number; morphology: Record<Morphology, boolean>; review: string };
+const defaults: Filters = { scale: 2, area: 12, contrast: 0, elongation: 1, morphology: { compact: true, elongated: true, diffuse: true }, review: 'all' };
+const emptyIds = new Set<string>();
+const title = (value: string) => value.charAt(0).toUpperCase() + value.slice(1);
+const registered = (image: StructureImage) => ({ imageToFrame: image.imageToFrame, source: { width: image.nativeWidth, height: image.nativeHeight } });
+const identity = (image: StructureImage) => ({ id: image.id, source: { sha256: image.sourceSha256 } });
+const asset = (image: StructureImage, file: string, hash = image.mapSha256) => `${localFile(`${image.directory}/${file}`)}?v=${hash}`;
+
+const StructurePlane = memo(function StructurePlane({ image, map, matrix, active, layer, visibleIds, selectedId, highlights, onSelect, onError }: {
+  image: StructureImage; map: ReviewMap; matrix: Matrix; active: boolean; layer: StructureLayer; visibleIds: Set<string>; selectedId: string;
+  highlights: boolean; onSelect(id: string): void; onError(id: string): void;
+}) {
+  const panel = map.panels.find(item => item.id === layer);
+  const sx = image.nativeWidth / image.width, sy = image.nativeHeight / image.height;
+  const workingMatrix = [matrix[0] * sx, matrix[1] * sx, matrix[2] * sy, matrix[3] * sy, matrix[4], matrix[5]];
+  return <div className="observation-structure-plane" data-structure-image={image.id} aria-hidden={!active}
+    style={{ width: image.width, height: image.height, visibility: active ? 'visible' : 'hidden', transform: `matrix(${workingMatrix.join(',')})` }}>
+    {panel && <img className="structure-evidence-image" src={asset(image, panel.file)} width={image.width} height={image.height}
+      alt={`${image.label}: ${panel.label}. Full registered source frame.`} draggable={false} onError={() => onError(image.id)} />}
+    {map.regions.map(region => {
+      const atlas = map.atlases[region.atlas.index]; if (!atlas) return null;
+      return <button type="button" className="structure-region" key={region.id} data-region-id={region.id} data-selected={selectedId === region.id}
+        aria-label={`Select ${region.morphology} region ${region.id}`} aria-pressed={selectedId === region.id} tabIndex={-1}
+        hidden={!active || !highlights || !visibleIds.has(region.id)}
+        style={{ left: region.bounds.x, top: region.bounds.y, width: region.bounds.width, height: region.bounds.height }}
+        onClick={() => onSelect(region.id)}>
+        <img src={asset(image, atlas.file, atlas.sha256)} alt="" draggable={false} aria-hidden="true"
+          style={{ left: -region.atlas.x, top: -region.atlas.y, width: atlas.width, height: atlas.height }} onError={() => onError(image.id)} />
+      </button>;
+    })}
+  </div>;
+});
+
+/** Human review of prepared 2D support. Filters and decisions never start processing. */
+export function ObservationStructures({ cataloguePath, observationManifest }: { cataloguePath: string; observationManifest?: string }) {
+  const [data, setData] = useState<StructureCatalogue | null>(null), [error, setError] = useState('');
+  const [maps, setMaps] = useState<Record<string, ReviewMap>>({}), [mapErrors, setMapErrors] = useState<Record<string, string>>({});
+  const [selected, setSelected] = useState(''), [layer, setLayer] = useState<StructureLayer>('source'), [regionId, setRegionId] = useState('');
+  const [filters, setFilters] = useState<Filters>(defaults), [highlights, setHighlights] = useState(true);
+  const [fits, setFits] = useState<Record<string, Adjustment>>({}), [reviews, setReviews] = useState<Record<string, Record<string, Decision>>>({});
+  const [storageError, setStorageError] = useState(''), [host, setHost] = useState<Element | null>(null);
+  const [camera, setCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 }), cameraRef = useRef(camera), initialFit = useRef(false);
+  const [extent, setExtent] = useState({ width: 0, height: 0 });
+  const viewport = useRef<HTMLDivElement>(null), drag = useRef<{ id: number; x: number; y: number; camera: Camera; regionId?: string } | null>(null);
+  cameraRef.current = camera;
+  useEffect(() => { setHost(document.querySelector('.workspace-content')); }, []);
+  useEffect(() => {
+    const controller = new AbortController(); initialFit.current = false;
+    setData(null); setMaps({}); setMapErrors({}); setError(''); setRegionId('');
+    void fetch(localFile(cataloguePath), { signal: controller.signal, cache: 'no-store' }).then(async response => {
+      if (!response.ok) throw new Error(`Structures unavailable (${response.status}).`);
+      const next = readStructureCatalogue(await response.json()); if (controller.signal.aborted) return;
+      setFits(Object.fromEntries(next.images.map(image => [image.id, observationManifest ? savedObservationFit(observationManifest, identity(image)) : { ...unchanged }])));
+      setReviews(Object.fromEntries(next.images.map(image => {
+        try { return [image.id, readDecisions(JSON.parse(localStorage.getItem(reviewStorageKey(cataloguePath, image)) ?? 'null'))]; }
+        catch { return [image.id, {}]; }
+      })));
+      setSelected(next.images[0]?.id ?? ''); setData(next);
+      for (const image of next.images) void fetch(asset(image, 'map.json'), { signal: controller.signal, cache: 'no-store' }).then(async result => {
+        if (!result.ok) throw new Error(`Prepared map unavailable (${result.status}).`);
+        const bytes = await result.arrayBuffer();
+        const digest = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)), value => value.toString(16).padStart(2, '0')).join('');
+        if (digest !== image.mapSha256) throw new Error('Prepared map identity changed; reload the catalogue.');
+        const map = readReviewMap(JSON.parse(new TextDecoder().decode(bytes)), image);
+        if (!controller.signal.aborted) setMaps(current => ({ ...current, [image.id]: map }));
+      }).catch((reason: unknown) => { if (!controller.signal.aborted) setMapErrors(current => ({ ...current, [image.id]: reason instanceof Error ? reason.message : 'Prepared map unavailable.' })); });
+    }).catch((reason: unknown) => { if (!controller.signal.aborted) setError(reason instanceof Error ? reason.message : 'Structures unavailable.'); });
+    return () => controller.abort();
+  }, [cataloguePath, observationManifest]);
+  const matrices = useMemo(() => Object.fromEntries(data?.images.map(image => [image.id, adjustedMatrix(registered(image), data.frame, fits[image.id] ?? unchanged)]) ?? []), [data, fits]);
+  const fitAll = useCallback(() => {
+    if (!data || extent.width <= 40 || extent.height <= 40) return;
+    const corners = data.images.flatMap(image => imageCorners(registered(image), matrices[image.id] ?? image.imageToFrame));
+    const xs = corners.map(point => point[0]), ys = corners.map(point => point[1]);
+    const left = Math.min(...xs), top = Math.min(...ys), width = Math.max(...xs) - left, height = Math.max(...ys) - top;
+    const zoom = Math.min((extent.width - 36) / width, (extent.height - 36) / height);
+    setCamera({ zoom, x: extent.width / 2 - (left + width / 2) * zoom, y: extent.height / 2 - (top + height / 2) * zoom });
+  }, [data, extent, matrices]);
+  useEffect(() => { if (data && extent.width > 40 && extent.height > 40 && !initialFit.current) { fitAll(); initialFit.current = true; } }, [data, extent, fitAll]);
+  useEffect(() => {
+    const element = viewport.current; if (!element) return;
+    const observer = new ResizeObserver(([entry]) => { if (entry) setExtent({ width: entry.contentRect.width, height: entry.contentRect.height }); });
+    observer.observe(element);
+    const wheel = (event: WheelEvent) => {
+      event.preventDefault(); const bounds = element.getBoundingClientRect(), old = cameraRef.current;
+      const zoom = Math.min(12, Math.max(.015, old.zoom * Math.exp(-event.deltaY * .0015)));
+      const x = event.clientX - bounds.left, y = event.clientY - bounds.top;
+      setCamera({ zoom, x: x - (x - old.x) * zoom / old.zoom, y: y - (y - old.y) * zoom / old.zoom });
+    };
+    element.addEventListener('wheel', wheel, { passive: false });
+    return () => { observer.disconnect(); element.removeEventListener('wheel', wheel); };
+  }, [host]);
+  const image = data?.images.find(item => item.id === selected), map = maps[selected], review = reviews[selected];
+  const visibleRegions = useMemo(() => map?.regions.filter(region => filters.morphology[region.morphology] && (filters.scale < 0 || region.scale === filters.scale) &&
+    region.areaPixels >= filters.area && region.contrast >= filters.contrast && region.elongation >= filters.elongation &&
+    (filters.review === 'all' || (review?.[region.id] ?? 'unreviewed') === filters.review)) ?? [], [map, filters, review]);
+  const visibleIds = useMemo(() => new Set(visibleRegions.map(region => region.id)), [visibleRegions]);
+  const selectedRegion = visibleRegions.find(region => region.id === regionId) ?? visibleRegions[0];
+  const selectedIndex = selectedRegion ? visibleRegions.indexOf(selectedRegion) : -1;
+  const scales = useMemo(() => [...new Set(map?.regions.map(region => region.scale) ?? [])].sort((a, b) => a - b), [map]);
+  const imageError = useCallback((id: string) => setMapErrors(current => current[id] ? current : { ...current, [id]: 'Prepared image or support atlas unavailable.' }), []);
+  function decide(value: Decision | 'unreviewed') {
+    if (!image || !selectedRegion) return;
+    const next = { ...review }; if (value === 'unreviewed') delete next[selectedRegion.id]; else next[selectedRegion.id] = value;
+    setReviews(current => ({ ...current, [image.id]: next }));
+    try { localStorage.setItem(reviewStorageKey(cataloguePath, image), JSON.stringify(next)); setStorageError(''); } catch { setStorageError('Review saved for this session only.'); }
+  }
+  function pointerDown(event: PointerEvent<HTMLDivElement>) {
+    if (event.button !== 0) return; event.currentTarget.setPointerCapture(event.pointerId);
+    const region = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-region-id]') : null;
+    drag.current = { id: event.pointerId, x: event.clientX, y: event.clientY, camera: cameraRef.current, regionId: region?.dataset.regionId };
+  }
+  function pointerMove(event: PointerEvent<HTMLDivElement>) {
+    const start = drag.current; if (start?.id === event.pointerId) setCamera({ ...start.camera, x: start.camera.x + event.clientX - start.x, y: start.camera.y + event.clientY - start.y });
+  }
+  const fit = fits[selected] ?? unchanged, manuallyAdjusted = fit.x !== 0 || fit.y !== 0 || fit.rotation !== 0 || fit.scale !== 1;
+  const status = error || mapErrors[selected] || (!data ? 'Loading structure catalogue…' : !map ? 'Loading prepared support…' : '');
+  return <fieldset className="observation-structures">
+    <legend>Structure review</legend>
+    <label className="field-label" htmlFor="structure-image">Image</label>
+    <select id="structure-image" disabled={!data} value={selected} onChange={event => { setSelected(event.target.value); setRegionId(''); }}>
+      {data?.images.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}
+    </select>
+    <div className="emission-layer-buttons" role="group" aria-label="Structure layer">
+      {map?.panels.map(panel => <button key={panel.id} type="button" title={panel.description} aria-pressed={layer === panel.id} onClick={() => setLayer(panel.id)}>{panel.label}</button>)}
+    </div>
+    <div className="structure-morphologies" role="group" aria-label="Morphology filters">{morphologies.map(kind => <label key={kind}>
+      <input type="checkbox" checked={filters.morphology[kind]} onChange={event => setFilters(current => ({ ...current, morphology: { ...current.morphology, [kind]: event.target.checked } }))} />{title(kind)}
+    </label>)}</div>
+    <div className="structure-filter"><label htmlFor="structure-scale">Scale</label><select id="structure-scale" value={filters.scale} onChange={event => setFilters(current => ({ ...current, scale: Number(event.target.value) }))}>
+      <option value={-1}>All scales</option>{scales.map(scale => <option key={scale} value={scale}>Scale {scale + 1}</option>)}
+    </select></div>
+    {([{ key: 'area', label: 'Area ≥ (px²)', min: 0, step: 1, tip: 'Support area in the prepared working image, not physical size.' },
+      { key: 'contrast', label: 'Contrast ≥', min: 0, step: .001, tip: 'Prepared wavelet contrast; this is an inspection filter.' },
+      { key: 'elongation', label: 'Elongation ≥', min: 1, step: .1, tip: 'Major/minor axis ratio. Elongation is not a coherence measurement.' }] as const).map(control =>
+      <div className="structure-filter" key={control.key}><label htmlFor={`structure-${control.key}`} title={control.tip}>{control.label}</label>
+        <input id={`structure-${control.key}`} type="number" min={control.min} step={control.step} value={filters[control.key]} onChange={event => { const value = event.target.valueAsNumber;
+          if (Number.isFinite(value) && value >= control.min) setFilters(current => ({ ...current, [control.key]: value })); }} />
+      </div>)}
+    <div className="structure-filter"><label htmlFor="structure-review-filter">Review</label><select id="structure-review-filter" value={filters.review} onChange={event => setFilters(current => ({ ...current, review: event.target.value }))}>
+      {['all', 'unreviewed', ...decisions].map(value => <option key={value} value={value}>{title(value)}</option>)}
+    </select></div>
+    <label className="observation-check"><input type="checkbox" checked={highlights} onChange={event => setHighlights(event.target.checked)} /> Show filtered support</label>
+    <p className="interaction-hint" role="status">{visibleRegions.length.toLocaleString()} / {map?.regions.length.toLocaleString() ?? '—'} regions</p>
+    <section className="structure-selection" aria-label="Selected region">
+      <div className="structure-review-navigation"><button type="button" disabled={selectedIndex <= 0} onClick={() => setRegionId(visibleRegions[selectedIndex - 1]?.id ?? '')}>Previous region</button>
+        <button type="button" disabled={selectedIndex < 0 || selectedIndex >= visibleRegions.length - 1} onClick={() => setRegionId(visibleRegions[selectedIndex + 1]?.id ?? '')}>Next region</button></div>
+      {selectedRegion ? <>
+        <p className="interaction-hint" data-selected-region={selectedRegion.id}>{selectedRegion.id} · {title(selectedRegion.morphology)} · scale {selectedRegion.scale + 1}</p>
+        <p className="interaction-hint">{selectedRegion.areaPixels} px² · contrast {selectedRegion.contrast.toPrecision(3)} · elongation {selectedRegion.elongation.toFixed(1)}×</p>
+        <div className="structure-decisions" role="group" aria-label="Region decision">{decisions.map(value => <button type="button" key={value} aria-pressed={review?.[selectedRegion.id] === value} onClick={() => decide(value)}>{title(value)}</button>)}</div>
+        <button type="button" className="text-button" disabled={!review?.[selectedRegion.id]} onClick={() => decide('unreviewed')}>Reset to unreviewed</button>
+      </> : <p className="interaction-hint">No regions match these filters.</p>}
+    </section>
+    {map && <p className="interaction-hint" title={`Maximum additive reconstruction error ${map.metrics.reconstructionMaxError}. Unassigned signal and imperfect star-removal residuals remain. Decisions indicate human review, never depth or physical membership.`}>
+      {map.metrics.reconstructionMaxError < 1e-5 ? 'All input accounted for' : 'Inspect accounting error'} · {(map.metrics.unassignedFraction * 100).toFixed(1)}% unassigned</p>}
+    {image && <p className="interaction-hint"><a href={image.page} target="_blank" rel="noreferrer" title={image.credit}>Source & credit ↗</a></p>}
+    {(status || storageError) && <p className="interaction-hint emission-structure-status" role={error || mapErrors[selected] ? 'alert' : 'status'} data-error={Boolean(error || mapErrors[selected])}>{status || storageError}</p>}
+    {host && createPortal(<section className="observation-structures-workspace" aria-label="Registered structure inspection">
+      <div ref={viewport} className="observation-sky" aria-label="Structure inspection sky" tabIndex={0} onPointerDown={pointerDown} onPointerMove={pointerMove}
+        onPointerUp={event => { const start = drag.current; drag.current = null;
+          if (start?.id === event.pointerId && start.regionId && Math.hypot(event.clientX - start.x, event.clientY - start.y) < 4) setRegionId(start.regionId);
+        }} onPointerCancel={() => { drag.current = null; }} onDoubleClick={fitAll}
+        onKeyDown={event => { if (event.key === 'Home' || event.key === '0') { event.preventDefault(); fitAll(); } }}>
+        <div className="observation-structure-frame" style={{ transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.zoom})` }}>
+          {data?.images.map(item => { const prepared = maps[item.id], matrix = matrices[item.id]; return prepared && matrix ? <StructurePlane key={item.id} image={item} map={prepared} matrix={matrix}
+            active={item.id === selected} layer={layer} visibleIds={item.id === selected ? visibleIds : emptyIds} selectedId={item.id === selected ? selectedRegion?.id ?? '' : ''}
+            highlights={highlights} onSelect={setRegionId} onError={imageError} /> : null; })}
+        </div>
+        <div className="observation-compass">N ↑ · E ←</div>
+        {status && <p className="observation-loading">{status}</p>}
+      </div>
+      <aside className="floating-panel observation-camera" aria-label="Structure camera"><fieldset><legend>Sky view</legend>
+        <button type="button" onClick={fitAll} disabled={!data}>Fit all images</button>
+        <p className="interaction-hint">Drag to pan. Scroll to zoom.</p>
+        <p className="interaction-hint" title="Same full native footprints and common sky frame as Alignment. Image selection never changes the camera.">Full field · north up · 2D</p>
+        <p className="interaction-hint" title="Fine adjustments saved in Alignment are applied only for inspection; measured registration is unchanged.">{manuallyAdjusted ? 'Manual inspection adjustment' : 'Registered positioning'}</p>
+      </fieldset></aside>
+    </section>, host)}
+  </fieldset>;
+}

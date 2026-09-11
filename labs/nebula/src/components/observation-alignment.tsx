@@ -1,14 +1,10 @@
 import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import { localFile } from '../viewer/viewer';
-import { adjustedMatrix, imageCorners, readAdjustment, readObservations, transform, unchanged,
+import { adjustedMatrix, imageCorners, observationFitStorageKey, savedObservationFit, readAdjustment, readObservations, transform, unchanged,
   type Adjustment, type LayerId, type Observation, type Observations } from '../alignment/observations-ui/model';
 
 type Camera = { x: number; y: number; zoom: number };
 const layers = [{ id: 'original', label: 'Original', symbol: '▧' }, { id: 'diffuse', label: 'Without stars', symbol: '☁' }, { id: 'stars', label: 'Residual', symbol: '✧' }] as const;
-const storageKey = (path: string, image: Observation) => `nebula-observation-fit@1:${path}:${image.id}:${image.source.sha256}`;
-function savedFit(path: string, image: Observation): Adjustment {
-  try { return readAdjustment(JSON.parse(localStorage.getItem(storageKey(path, image)) ?? 'null')); } catch { return { ...unchanged }; }
-}
 
 /** Common astrometric canvas. Inspection never launches image processing. */
 export function ObservationAlignment({ manifestPath }: { manifestPath: string }) {
@@ -35,7 +31,7 @@ export function ObservationAlignment({ manifestPath }: { manifestPath: string })
       const prior = loadedManifest.current;
       setFits(previous => Object.fromEntries(next.images.map(image => [image.id,
         refreshing && prior?.images.some(old => old.id === image.id && old.source.sha256 === image.source.sha256)
-          ? previous[image.id] ?? savedFit(manifestPath, image) : savedFit(manifestPath, image)])));
+          ? previous[image.id] ?? savedObservationFit(manifestPath, image) : savedObservationFit(manifestPath, image)])));
       setSelected(refreshing && next.images.some(item => item.id === selected) ? selected : next.images[0]!.id);
       if (!refreshing) setLayer('original');
       loadedPath.current = manifestPath; loadedManifest.current = next; setData(next);
@@ -71,7 +67,7 @@ export function ObservationAlignment({ manifestPath }: { manifestPath: string })
   const visible = (item: Observation) => item.id === selected;
   function changeFit(partial: Partial<Adjustment>) {
     if (!image) return; const next = readAdjustment({ ...fit, ...partial }); setFits(previous => ({ ...previous, [image.id]: next })); setCopyStatus('');
-    try { localStorage.setItem(storageKey(manifestPath, image), JSON.stringify(next)); setStorageError(''); } catch { setStorageError('Fit saved for this session only.'); }
+    try { localStorage.setItem(observationFitStorageKey(manifestPath, image), JSON.stringify(next)); setStorageError(''); } catch { setStorageError('Fit saved for this session only.'); }
   }
   async function copyFit() {
     if (!data || !image) return; const revision = sourceRevision.current, imageId = image.id;

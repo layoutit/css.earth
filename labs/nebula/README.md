@@ -2,7 +2,7 @@
 
 Local React tooling for aligning photographs, removing stars and comparing baked 3D clouds. The retained PolyCSS renderer stays in plain TypeScript. The lab is separate from the production website; current objects are **LMC and SMC**, plus the [M2–9](models/m2-9/README.md) and [Helix](models/helix/README.md) image-to-volume experiments. The experiments have explicit preparation commands and unmeasured-depth assumptions.
 
-The [Helix experiment](models/helix/README.md) currently aligns three wider observations and compares native star removal. The earlier [structure inspector](docs/nebula-compiler.md) and volume baselines remain available for comparison; they have not been recomputed from the new sources.
+The [Helix experiment](models/helix/README.md) aligns three wider observations, compares native star removal and provides [2D structure inspection](docs/nebula-compiler.md) before depth inference. Its older Hubble-based volume baselines remain available for comparison; they are not results of the new observation stage.
 
 The shell is shared across three configured methods: **Density model** (LMC/SMC), **Symmetry** (M2–9), and **Constrained inference** (Helix). New objects select a method and supply recipes; shared registration, star separation and viewing tools remain object-agnostic. The current Helix step is **Alignment + star removal** for three wider ESO observations. Structure extraction on those new observations waits for visual acceptance. See [the staged workflow](docs/workflows.md#image-driven-methods).
 

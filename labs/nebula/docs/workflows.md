@@ -37,6 +37,8 @@ The object configuration selects the available depth evidence; it never selects 
 
 Advance in visible steps: **alignment → inspect star removal → approve structure extraction → inspect structures → compare depth hypotheses**. Selecting an image or a prepared layer starts no processing. The planetary observation command currently prepares inputs offline; LMC's existing removal and reconstruction job buttons retain their own workflow. No new Helix structure map or volume is inferred automatically. Infrared and optical emission are allowed to differ after their stars align.
 
+For the current Helix observations, **Reconstruction → Structure map** is the next inspection stage. Choose the ESO image, filter candidate morphology/scale/area/contrast/elongation, and mark individual regions **Keep / Unsure / Reject**. The prepared support overlay shows the detected pixels; it is not a proposed 3D object. Reviews persist per source/extraction, and filters start no processing. **Volume** explicitly loads the older Hubble baseline. See [the extraction command, limits and physics plan](nebula-compiler.md).
+
 ## 2. Remove stars
 
 1. Optionally run **Quick preview** for native crops.

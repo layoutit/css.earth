@@ -5,6 +5,7 @@
 - [Next steps](../NEXTSTEPS.md): current extragalactic handoff and the next bounded reconstruction experiment.
 - [Research and papers](../RESEARCH.md): implemented method, novelty assessment and objects without a simulation.
 - [Workflow](workflows.md): Alignment → automatic star removal → explicit Preview → compare saved reconstructions.
+- [Structure review and nebula compiler](nebula-compiler.md): aligned Helix evidence, human filtering, and the physical constraints for later shape hypotheses.
 - [Bake command](baking.md): recreate the accepted lenses from pinned inputs and saved settings without browser state.
 - [Reconstruction](reconstruction.md): source selection, cache/jobs, exact current bake and depth limits.
 - [Slice stability](slice-stability.md): shared density/stars and measured XYZ calibration.

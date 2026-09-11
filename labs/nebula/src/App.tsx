@@ -46,7 +46,9 @@ export function App() {
           <div id="render-panel" role="tabpanel" aria-labelledby={shell.view === "alignment" ? "density-tab" : "render-tab"}>
             <div id="viewer" aria-label="Interactive prepared object" tabIndex={0}></div>
           </div>
-          {emission && shell.view === 'reconstruction' && <EmissionComparison {...emission} credit={selectedSubject?.credit} />}
+          {emission && shell.view === 'reconstruction' && <EmissionComparison key={selectedSubject?.id} {...emission} credit={selectedSubject?.credit}
+            observationManifest={selectedSubject?.observationAlignment?.manifest}
+            onModeChange={mode => void controller.current?.selectEmissionInspection(mode)} />}
           {selectedSubject?.observationAlignment && shell.view === 'alignment' && <ObservationAlignment key={selectedSubject.observationAlignment.manifest} manifestPath={selectedSubject.observationAlignment.manifest} />}
           <aside id="inspection-panel" className="floating-panel density-adjustment-panel" aria-label="Camera and density adjustments">
             <fieldset id="render-controls" disabled>
