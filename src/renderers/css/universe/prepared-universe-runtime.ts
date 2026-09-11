@@ -174,6 +174,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
           setNavigationInFlight(active: boolean) { spatial!.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },
           setHiddenOrbits(ids: readonly string[]) { spatial!.setHiddenOrbits(ids); },
           setHiddenLabels(ids: readonly string[]) { spatial!.setHiddenLabels(ids); },
+          setHighlighted(ids: readonly string[]) { spatial!.setHighlighted(ids); },
           inspect() {
             return Object.freeze({ stars: pointField!.inspect(), bodies: spatial!.inspect(), environmentLabels: environmentLabels!.inspect(), galaxies: galaxyCatalog?.inspect(),
               foregroundLabelExclusions: [...spatial!.backgroundExclusionRects(), ...environmentLabels!.labelExclusionRects()] });

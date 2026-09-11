@@ -1,4 +1,4 @@
-import { prepareSystemView } from './system-view.js';
+import { prepareGroupView, prepareSystemView } from './system-view.js';
 import type { PreparedSystemView, SystemViewPolicy } from './system-view.js';
 import { M_PER_AU } from '@cssearth/astronomy';
 import { prepareHyperbolicPath } from '../platform/prepare-hyperbolic-path.mts';
@@ -79,6 +79,8 @@ export interface PreparedWorldContext {
   readonly sky: { readonly sceneRegistration: string };
   readonly frame: PreparedWorldCameraFrame;
   readonly focus: WorldContextFocus & { readonly positionM: Vector3; readonly radiusM: number; readonly systemView?: PreparedSystemView };
+  /** Each classification framed by its members' prepared positions, keyed by classification. */
+  readonly classificationViews?: Readonly<Record<string, PreparedSystemView>>;
   readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly positionM: Vector3; readonly radiusM: number;
     readonly systemView?: PreparedSystemView;
     readonly placement?: 'approximate';
@@ -208,13 +210,26 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
   });
   const focus = { ...source.focus, positionM: copy(source.frame.originM), radiusM: source.frame.bodyRadiusM };
   // The root system frames its major planets, including the smaller terrestrial planets.
-  const focusView = systemViewPolicy === undefined ? undefined : prepareSystemView(focus,
-    bodies.filter(body => facts[body.id]?.classification === 'planet'), states,
+  const planets = bodies.filter(body => facts[body.id]?.classification === 'planet');
+  const focusView = systemViewPolicy === undefined ? undefined : prepareSystemView(focus, planets, states,
     { ...systemViewPolicy, minimumRadiusShare: 0 });
+  // Each classification frames the nearest 90% of its members from the root system's candidate
+  // angles, so a few distant outliers cannot shrink the rest. Every member is still highlighted.
+  const framedShare = .9, distance = (body: (typeof bodies)[number]) =>
+    Math.hypot(...body.positionM.map((value, axis) => value - focus.positionM[axis]!));
+  const classifications = [...new Set(bodies.flatMap(body => facts[body.id]?.classification ?? []))].sort();
+  const classificationViews = systemViewPolicy === undefined ? {} : Object.fromEntries(classifications.flatMap(classification => {
+    const members = bodies.filter(body => facts[body.id]?.classification === classification)
+      .sort((a, b) => distance(a) - distance(b) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+    const view = prepareGroupView(focus, planets, members.slice(0, Math.ceil(members.length * framedShare)), states,
+      { ...systemViewPolicy, minimumRadiusShare: 0 });
+    return view ? [[classification, view] as const] : [];
+  }));
   return freeze({ schema: 'cssearth-world-context@1',
     ...(Object.keys(orbitCenters).length ? { orbitCenters: freeze(Object.fromEntries(Object.entries(orbitCenters).map(([id, center]) =>
       [id, freeze({ positionM: copy(center.positionM), centerBodyId: center.centerBodyId })]))) } : {}),
     sky: prepareSkyRegistration(source.sky), frame: source.frame, focus: freeze({ ...focus, ...(focusView ? { systemView: focusView } : {}) }),
+    ...(Object.keys(classificationViews).length ? { classificationViews: freeze(classificationViews) } : {}),
     bodies: freeze(bodies.map(body => {
       const systemView = systemViewPolicy === undefined ? undefined : prepareSystemView(body, bodies, states, systemViewPolicy);
       return systemView ? freeze({ ...body, systemView }) : body;

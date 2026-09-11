@@ -72,6 +72,8 @@ export interface WorldBodyPresentation {
   hovered: boolean;
   orbitHidden: boolean;
   labelHidden: boolean;
+  /** Part of an emphasized set, such as one classification. */
+  highlighted?: boolean;
   labelSize: { width: number; height: number };
   labelShown: boolean;
   labelPlacement: number;
@@ -157,7 +159,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const annotationVisible = isAnchor ? inFrame && !(selectedId !== body.id &&
           focusDiameter >= plan.camera.presentation.levelOfDetail.markerFullDiscPixels &&
           rayHitsSphereBefore(eye, selectedEye, selected.radiusM)) : visible;
-        const hovered = entry.hovered;
+        const hovered = entry.hovered, highlighted = entry.highlighted === true;
         // Satellites keep the complete, uniform path from the shared policy,
         // including selection previews and hover during navigation.
         const satellite = entry.parent !== null && entry.parent.id !== plan.focus.id;
@@ -186,9 +188,10 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const orbitVisibility = entry.orbitHidden && !hovered ? 0 : appearance.opacity * orbitOpacity * opacity;
         if (entry.orbit && orbitVisibility > 0) anchorLineWidth = Math.max(anchorLineWidth, appearance.width);
         const indicatorOpacity = isAnchor && overview ? 1 :
-          bodyLod.markerOpacity * (isAnchor ? 1 : entry.orbitHidden || !entry.orbit ? opacity : orbitVisibility);
+          // A highlighted circle follows the system fade, not its orbit's.
+          bodyLod.markerOpacity * (isAnchor ? 1 : entry.orbitHidden || highlighted || !entry.orbit ? opacity : orbitVisibility);
         const primary = !entry.orbit || entry.orbit.centerBodyId === plan.focus.id;
-        const priority = (isAnchor ? 4e6 : 0) + (hovered ? 16e6 : 0) + (body.id === emphasizedId ? 6e6 : isSelected ? 1e6 : 0) + (annotationPriorities[body.id] ?? 0) * 1e4 + (primary ? 1000 : 0) + Math.min(99, diameter);
+        const priority = (isAnchor ? 4e6 : 0) + (hovered ? 16e6 : 0) + (highlighted ? 8e6 : 0) + (body.id === emphasizedId ? 6e6 : isSelected ? 1e6 : 0) + (annotationPriorities[body.id] ?? 0) * 1e4 + (primary ? 1000 : 0) + Math.min(99, diameter);
         if (annotationVisible && indicatorOpacity > 0) {
           const radius = BODY_INDICATOR_DIAMETER / 2, padding = entry.indicatorShown ? 0 : 2;
           indicators.add({ owner: 0, id: body.id, priority: priority + (entry.indicatorShown ? 100 : 0),
@@ -218,21 +221,29 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const { body, labelSize: size } = entry;
         const satellite = entry.parent !== null && entry.parent.id !== plan.focus.id;
         const resolvedDisc = diameter >= plan.camera.presentation.levelOfDetail.markerFadeStartDiscPixels;
-        const labelOpacity = hovered ? 1 : entry.orbitHidden ? opacity * (body.id === selectedId ? lod.billboardOpacity : 1) : markerOpacity;
-        if (!annotationVisible || size.width === 0 || (!hovered &&
+        // A highlighted set shows its labels despite default hiding, and keeps a label whose
+        // circle lost a collision; label collisions still decide placement.
+        const highlighted = entry.highlighted === true;
+        const labelOpacity = hovered || highlighted ? 1 : entry.orbitHidden ? opacity * (body.id === selectedId ? lod.billboardOpacity : 1) : markerOpacity;
+        if (!annotationVisible || size.width === 0 || (!hovered && !highlighted &&
             ((entry.labelHidden && body.id !== emphasizedId) || labelOpacity <= 0.5 ||
             (!resolvedDisc && body.id !== emphasizedId && entry.orbit && !entry.orbitHidden && orbitVisibility <= 0.5) ||
             (indicatorOpacity > 0 && !entry.indicatorShown)))) continue;
         const gap = Math.max(5, diameter / 2, entry.indicatorShown ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
+        // Right, left, above and below; a highlighted set may also use the four diagonals,
+        // so more names fit around a crowded point such as a moon family.
         const positions = [[x + gap, y - size.height / 2], [x - gap - size.width, y - size.height / 2],
-          [x - size.width / 2, y - gap - size.height], [x - size.width / 2, y + gap]];
+          [x - size.width / 2, y - gap - size.height], [x - size.width / 2, y + gap],
+          [x + gap, y - gap - size.height], [x + gap, y + gap],
+          [x - gap - size.width, y - gap - size.height], [x - gap - size.width, y + gap]];
+        const sides = highlighted ? [0, 1, 2, 3, 4, 5, 6, 7] : [0, 1, 2, 3];
         const padding = entry.labelShown ? 0 : 2;
         const labelRect = (lx: number, ly: number) => ({ left: lx - padding, top: ly - padding,
           right: lx + size.width + padding, bottom: ly + size.height + padding });
         // Keep a clear placement stable; try other sides before hiding a label.
         const placements = body.id === plan.focus.id ? [3] :
           diameter >= plan.camera.presentation.levelOfDetail.billboardFullDiscPixels ? [3, 2, 0, 1] :
-          [entry.labelPlacement, ...[0, 1, 2, 3].filter(index => index !== entry.labelPlacement)];
+          [...(sides.includes(entry.labelPlacement) ? [entry.labelPlacement] : []), ...sides.filter(index => index !== entry.labelPlacement)];
         const withinViewport = (index: number) => {
           const [lx, ly] = positions[index];
           return lx >= -width / 2 + 4 && lx + size.width <= width / 2 - 4 &&

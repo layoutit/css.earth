@@ -4,7 +4,7 @@ import type { OverviewScope } from './overview-context.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { BrowserWindow } from './browser-types.mts';
 import { record } from './browser-types.mts';
-export interface NavigationOptions { history?: 'push' | 'pop' | 'replace'; entry?: string; url?: string; overview?: boolean; overviewScope?: OverviewScope; recenter?: boolean; sceneSelection?: boolean; centerSelection?: boolean; preserveView?: boolean; targetWorldCamera?: WorldCameraPose; targetFocusPositionM?: PositionM; }
+export interface NavigationOptions { history?: 'push' | 'pop' | 'replace'; entry?: string; url?: string; overview?: boolean; overviewScope?: OverviewScope; classification?: string; recenter?: boolean; sceneSelection?: boolean; centerSelection?: boolean; preserveView?: boolean; targetWorldCamera?: WorldCameraPose; targetFocusPositionM?: PositionM; }
 type Navigate = (id: string, options: NavigationOptions) => unknown;
 interface NavigationAnchor { href: string; target?: string; hasAttribute(name: string): boolean; }
 function closestAnchor(target: EventTarget | null): NavigationAnchor | null {
@@ -15,6 +15,7 @@ function closestAnchor(target: EventTarget | null): NavigationAnchor | null {
 }
 const navigationId = (event: Event): unknown => 'detail' in event && record(event.detail) ? event.detail.objectId : undefined;
 import { overviewScopeFromUrl } from './navigation-scope.mts';
+import { solarSystemFocus } from './overview-selection.mts';
 
 /** Preserve exact departed views while object selections create history entries. */
 export function createNavigationHistory({ windowTarget, objects, capture, navigate, onError = () => {} }: { windowTarget: Window; objects: readonly ObjectEntry[]; capture(): string | null; navigate: Navigate; onError?(error: unknown): void }) {
@@ -85,12 +86,21 @@ export function bindNavigationLinks({ documentTarget, windowTarget, objects, sup
       : url.search || url.hash ? { url: url.href } : { sceneSelection: true };
     Promise.resolve(navigate(object.id, options)).catch(onError);
   };
+  // A category pill frames its whole classification around the Solar System.
+  const category = (event: Event) => {
+    const classification = 'detail' in event && record(event.detail) ? event.detail.classification : undefined;
+    const focusId = solarSystemFocus(objects)?.id;
+    if (typeof classification !== 'string' || !available(focusId)) return;
+    Promise.resolve(navigate(focusId, { overview: true, classification })).catch(onError);
+  };
   documentTarget.addEventListener('click', click);
   documentTarget.addEventListener('objectnavigate', select);
   documentTarget.addEventListener('objectnavigationquery', query);
+  documentTarget.addEventListener('categorynavigate', category);
   return () => {
     documentTarget.removeEventListener('click', click);
     documentTarget.removeEventListener('objectnavigate', select);
     documentTarget.removeEventListener('objectnavigationquery', query);
+    documentTarget.removeEventListener('categorynavigate', category);
   };
 }

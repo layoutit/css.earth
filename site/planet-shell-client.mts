@@ -10,7 +10,7 @@ import type { OverviewScope } from './overview-context.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { createNavigationContent } from './navigation-content.mts';
 export type NavigationContent = Awaited<ReturnType<ReturnType<typeof createNavigationContent>['load']>>;
-export interface ShellOptions { highContrastSky?: boolean; onSkyContrastChange?(enabled: boolean): void; objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; asteroidOrbitsEnabled?: boolean; onAsteroidOrbitsChange?(enabled: boolean): void; asteroidLabelsEnabled?: boolean; onAsteroidLabelsChange?(enabled: boolean): void; }
+export interface ShellOptions { highContrastSky?: boolean; onSkyContrastChange?(enabled: boolean): void; objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; asteroidOrbitsEnabled?: boolean; onAsteroidOrbitsChange?(enabled: boolean): void; asteroidLabelsEnabled?: boolean; onAsteroidLabelsChange?(enabled: boolean): void; onCategoryChange?(classification: string | null): void; }
 interface SelectionPreview { id: string | null; frame?: PreparedWorldCameraFrame | null; commit?(): void; restore(): void; }
 type Panel = readonly [string, HTMLDetailsElement];
 import { objectCategory, matchesObjectCategory, objectCategoryCount } from "./object-categories.mts";
@@ -40,6 +40,7 @@ export function mountPlanetShell({
   onAsteroidOrbitsChange = () => {},
   asteroidLabelsEnabled = false,
   onAsteroidLabelsChange = () => {},
+  onCategoryChange = () => {},
 }: ShellOptions) {
   const drawer = requiredElement(documentTarget, ".planet-drawer-content");
   if (!(drawer instanceof windowTarget.HTMLElement)) {
@@ -77,7 +78,7 @@ export function mountPlanetShell({
   }
   try {
     if (DIAGNOSTICS_ENABLED) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
-    objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime));
+    objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, onCategoryChange));
     own(createSheetController(drawer, windowTarget, lifetime));
     own(createExplorerRailController(documentTarget, windowTarget, {
       onOpenSolarSystem: () => objectBrowser.showSolarSystem(),
@@ -442,7 +443,8 @@ function createSettingsController(
   });
 }
 
-function createObjectBrowserController(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime) {
+function createObjectBrowserController(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime,
+  onCategoryChange: (classification: string | null) => void = () => {}) {
   const setPanelHidden = (panel: HTMLElement, hidden: boolean) => {
     if (panel.hidden !== hidden) panel.hidden = hidden;
     const inert = hidden || panel.ariaBusy === 'true';
@@ -546,10 +548,22 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   let open = false;
   let browsing = false;
   const categoryButtons = [...documentTarget.querySelectorAll<HTMLElement>('.planet-search-category')];
+  // A pill's classification highlights its bodies in the scene; other searches clear it.
+  // Filtering resets then re-marks the category, so report only the settled value.
+  let reportedCategory: string | null = null, pendingCategory: string | null = null, reportQueued = false;
   const markCategory = (classification: string | null | undefined = null) => {
     for (const button of categoryButtons) {
       button.ariaPressed = String(button.dataset.searchClassification === classification);
     }
+    pendingCategory = categoryButtons.some(button => button.dataset.searchClassification === classification) ? classification ?? null : null;
+    if (reportQueued) return;
+    reportQueued = true;
+    queueMicrotask(() => {
+      reportQueued = false;
+      if (pendingCategory === reportedCategory || lifetime.disposed) return;
+      reportedCategory = pendingCategory;
+      onCategoryChange(reportedCategory);
+    });
   };
   const filter = (resetScroll = true) => {
     if (resetScroll) resetResultsScroll();
@@ -637,6 +651,9 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       search.value = button.dataset.searchQuery ?? "";
       search.dispatchEvent(new windowTarget.Event('input', { bubbles: true }));
       requiredElement(documentTarget, '.planet-sidebar').scrollTop = 0;
+      // Frame every body of this classification; the router owns the camera flight.
+      button.dispatchEvent(new windowTarget.CustomEvent('categorynavigate', { bubbles: true,
+        detail: { classification: button.dataset.searchClassification } }));
     }, { signal: events.signal });
     button.addEventListener('keydown', event => {
       if (event.key !== 'Escape') return;
