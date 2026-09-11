@@ -33,6 +33,27 @@
       "path": "shape/2008ev5.obj",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/2008ev5.obj",
       "credit": "Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "missionId": "arecibo-planetary-radar",
+            "evidence": "The preserved credit for this input reads: Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive"
+          },
+          {
+            "kind": "machine",
+            "machineId": "goldstone-dss14",
+            "missionId": "goldstone-solar-system-radar",
+            "evidence": "The preserved credit for this input reads: Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive"
+          },
+          {
+            "kind": "machine",
+            "machineId": "vlba",
+            "evidence": "The preserved credit for this input reads: Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive"
+          }
+        ]
+      },
       "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -95,6 +116,27 @@
       "path": "reference/2008ev5.pdf",
       "origin": "https://echo.jpl.nasa.gov/asteroids/2008EV5/busch.etal.2011.2008ev5.pdf",
       "credit": "Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "missionId": "arecibo-planetary-radar",
+            "evidence": "The preserved credit for this input reads: Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive"
+          },
+          {
+            "kind": "machine",
+            "machineId": "goldstone-dss14",
+            "missionId": "goldstone-solar-system-radar",
+            "evidence": "The preserved credit for this input reads: Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive"
+          },
+          {
+            "kind": "machine",
+            "machineId": "vlba",
+            "evidence": "The preserved credit for this input reads: Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive"
+          }
+        ]
+      },
       "license": "Original scientific article; source publisher copyright retained.",
       "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
       "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",

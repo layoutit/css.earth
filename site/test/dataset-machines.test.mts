@@ -92,7 +92,14 @@ test('schematic and synthetic views do not inherit observations from their outer
   const saturn = await graphFor('saturn');
   for (const lens of ['cross-section', 'thermal']) assert.deepEqual(ids(saturn, lens), []);
   assert.deepEqual(ids(await graphFor('earth'), 'buenos-aires-noise'), []);
-  for (const object of ['juno', 'adrastea', 'pallas']) assert.deepEqual((await graphFor(object)).datasets, []);
+  // Adrastea's shape is an authored IAU ellipsoid stand-in, so it stays empty.
+  assert.deepEqual((await graphFor('adrastea')).datasets, []);
+  // Juno and Pallas do carry a real VLT/SPHERE shape, and the asteroid Juno's
+  // observations never mix with the identically named spacecraft's.
+  for (const object of ['juno', 'pallas']) {
+    assert.deepEqual(ids(await graphFor(object), 'elevation', 'machine'), ['vlt-ut3'],
+      `${object} credits the telescope that produced its shape`);
+  }
 });
 
 test('agency choices count individual missions and preserve joint credits', () => {

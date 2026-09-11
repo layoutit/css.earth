@@ -33,6 +33,21 @@
       "path": "shape/ce26.obj",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/ce26.obj",
       "credit": "Shepard et al. (2006), Icarus 184, 198–210; Arecibo radar, NASA IRTF and NASA/JPL",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "missionId": "arecibo-planetary-radar",
+            "evidence": "The preserved credit for this input reads: Shepard et al. (2006), Icarus 184, 198–210; Arecibo radar, NASA IRTF and NASA/JPL"
+          },
+          {
+            "kind": "machine",
+            "machineId": "irtf",
+            "evidence": "The preserved credit for this input reads: Shepard et al. (2006), Icarus 184, 198–210; Arecibo radar, NASA IRTF and NASA/JPL"
+          }
+        ]
+      },
       "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -95,6 +110,21 @@
       "path": "reference/ce26.pdf",
       "origin": "https://echo.jpl.nasa.gov/asteroids/2002CE26/shepard.etal.2006.2002ce26.pdf",
       "credit": "Shepard et al. (2006), Icarus 184, 198–210; Arecibo radar, NASA IRTF and NASA/JPL",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "missionId": "arecibo-planetary-radar",
+            "evidence": "The preserved credit for this input reads: Shepard et al. (2006), Icarus 184, 198–210; Arecibo radar, NASA IRTF and NASA/JPL"
+          },
+          {
+            "kind": "machine",
+            "machineId": "irtf",
+            "evidence": "The preserved credit for this input reads: Shepard et al. (2006), Icarus 184, 198–210; Arecibo radar, NASA IRTF and NASA/JPL"
+          }
+        ]
+      },
       "license": "Original scientific article; source publisher copyright retained.",
       "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
       "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
