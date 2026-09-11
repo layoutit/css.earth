@@ -22,6 +22,8 @@ The 2001 radar reconstruction did not determine an inertial pole and fitted 14.8
 
 The existing display-orientation schema assigns a fixed arbitrary frame, with no observed inertial pole and zero propagated spin. Positive X is displayed zero longitude. Optional directional shading is illustrative. No viewing longitude or date should be read as a reconstructed current rotational phase.
 
+The adopted photometric period and uncertainty are retained in the tracked [numerical extract](source/reference/model-properties.json).
+
 No calibrated registered optical mosaic, composition map or independent topographic raster was acquired. This is a bounded source disposition, not proof that no other data exist. No generic regolith texture is substituted. The updated numeric reconstruction remains an explicit future replacement candidate.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
