@@ -1,3 +1,5 @@
+import type {createSurfaceMinimap} from "../surface-minimap.mts";
+declare global {interface Window {__lazyPreviewMinimap:ReturnType<typeof createSurfaceMinimap>;}}
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
 
@@ -6,7 +8,7 @@ const browser = await chromium.launch({ channel: 'chrome', headless: true });
 try {
   for (const deviceScaleFactor of [1, 2]) {
     const page = await browser.newPage({ deviceScaleFactor });
-    const requested = [];
+    const requested:string[] = [];
     await page.route('**/__preview-*.png', route => {
       requested.push(new URL(route.request().url()).pathname);
       return route.fulfill({ contentType: 'image/png', body: Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII=', 'base64') });
@@ -19,21 +21,21 @@ try {
         `<div data-lens-details ${id === 'b' ? 'hidden' : ''}><div class="planet-surface-minimap">
           <img data-surface-preview-src="/__preview-${id}.png" width="200" height="100" alt="Prepared surface">
           <span class="planet-minimap-viewport"></span></div></div>`).join('')}</details>`;
-      window.minimap = createSurfaceMinimap({ drawer: document.body, documentTarget: document, windowTarget: window });
+      window.__lazyPreviewMinimap = createSurfaceMinimap({ drawer: document.body, documentTarget: document, windowTarget: window, onInteraction(){} });
     });
     await page.waitForTimeout(100);
-    assert.deepEqual(requested, [], 'Closed accordion must not request either preview');
+    assert.equal(requested.length, 0, 'Closed accordion must not request either preview');
     assert.equal(await page.locator('img[src]').count(), 0);
     await page.locator('summary').click();
-    await page.waitForFunction(() => document.querySelector('img[src]')?.complete);
+    await page.waitForFunction(() => document.querySelector<HTMLImageElement>('img[src]')?.complete);
     assert.deepEqual(requested, ['/__preview-a.png']);
     await page.locator('summary').click(); await page.locator('summary').click();
     await page.waitForTimeout(100);
     assert.deepEqual(requested, ['/__preview-a.png'], 'Reopening reuses the same image');
-    await page.evaluate(() => { for (const panel of document.querySelectorAll('[data-lens-details]')) panel.hidden = !panel.hidden; });
+    await page.evaluate(() => { for (const panel of document.querySelectorAll<HTMLElement>('[data-lens-details]')) panel.hidden = !panel.hidden; });
     await page.waitForFunction(() => document.querySelectorAll('img[src]').length === 2);
     assert.deepEqual(requested, ['/__preview-a.png', '/__preview-b.png']);
-    await page.evaluate(() => window.minimap.destroy());
+    await page.evaluate(() => window.__lazyPreviewMinimap.destroy());
     await page.close();
   }
 } finally { await browser.close(); }
