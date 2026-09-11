@@ -9,6 +9,7 @@ export type StructureLayer = typeof structureLayers[number];
 export interface StructureImage {
   id: string; label: string; sourceSha256: string; nativeWidth: number; nativeHeight: number; width: number; height: number;
   imageToFrame: Matrix; directory: string; mapSha256: string; credit: string; page: string;
+  geometry?: { file: string; sha256: string };
 }
 export interface StructureCatalogue { frame: Observations['frame']; images: StructureImage[] }
 export interface ReviewRegion {
@@ -41,8 +42,14 @@ export function readStructureCatalogue(value: unknown): StructureCatalogue {
     if (!record(item) || !text(item.id) || !text(item.label) || !hash(item.sourceSha256) || !hash(item.mapSha256) || !path(item.directory) ||
         !integer(item.nativeWidth, 1) || !integer(item.nativeHeight, 1) || !integer(item.width, 1) || !integer(item.height, 1) || !matrix(item.imageToFrame) ||
         !text(item.credit) || !text(item.page) || !item.page.startsWith('https://')) throw new Error('Invalid structure source.');
+    let geometry: StructureImage['geometry'];
+    if (item.geometry !== undefined) {
+      if (!record(item.geometry) || !path(item.geometry.file) || !hash(item.geometry.sha256)) throw new Error('Invalid prepared geometry reference.');
+      geometry = { file: item.geometry.file, sha256: item.geometry.sha256 };
+    }
     return { id: item.id, label: item.label, sourceSha256: item.sourceSha256, nativeWidth: item.nativeWidth, nativeHeight: item.nativeHeight,
-      width: item.width, height: item.height, imageToFrame: item.imageToFrame, directory: item.directory, mapSha256: item.mapSha256, credit: item.credit, page: item.page };
+      width: item.width, height: item.height, imageToFrame: item.imageToFrame, directory: item.directory, mapSha256: item.mapSha256, credit: item.credit, page: item.page,
+      ...(geometry === undefined ? {} : { geometry }) };
   });
   if (new Set(images.map(image => image.id)).size !== images.length) throw new Error('Duplicate structure source.');
   return { frame: { width: f.width, height: f.height, fieldArcminutes: f.fieldArcminutes, centerIcrsDegrees: f.centerIcrsDegrees, northUp: true }, images };

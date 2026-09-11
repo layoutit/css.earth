@@ -1,6 +1,6 @@
 # Helix: observation alignment and shape inference
 
-**Current step:** inspect and filter 2D structures from the three aligned ESO observations. **Alignment** retains Original / Without stars / Residual for source checks. The [structure workflow](../../docs/nebula-compiler.md) precedes human review and depth hypotheses; **Volume** remains the earlier cropped Hubble experiment.
+**Current step:** inspect 2D structures and automatically fitted projected geometric candidates from the three aligned ESO observations. **Alignment** retains Original / Without stars / Residual for source checks. The [structure workflow](../../docs/nebula-compiler.md) precedes human review and depth hypotheses; **Volume** remains the earlier cropped Hubble experiment.
 
 **Initial visual verdict: neither baseline is accepted.** The one-axis fit reproduces the photograph but becomes a box from the side. The disk/ring prior has finite curved components, but is too smooth, cuts off outer emission and changes brightness under rotation. These are deliberately visible comparisons, not production nebula assets.
 
@@ -55,7 +55,7 @@ The first preparation command acquires/verifies native originals and alignment w
 
 Browser verification passed for all nine real layers, identical transforms and retained image nodes, full footprints, matched markers, pan/zoom, reload, saved manual adjustments/copy, and navigation among the density/symmetry/inference examples. Helix inspection issued no processing requests and loaded Alignment without a baked volume. A cache-only replay retained every completed layer and launched no inference. Removing the AVM offset path and the no-processing guard each makes a focused test fail. These checks establish registration/display/replay behavior, not star-removal quality or physical depth.
 
-**Next gate: review the structures before fitting a volume.** The user authorized extraction of the new observations on 2026-09-11. Keep the old Hubble volume distinct. Neither matching stars nor keeping a projected feature establishes the nebula's 3D form.
+**Next gate: review automatically detected arcs/ellipses and their support before fitting a volume.** The user authorized extraction of the new observations on 2026-09-11. Keep the old Hubble volume distinct. Neither matching stars nor keeping a projected feature establishes the nebula's 3D form.
 
 ## Difficulty and scientific basis
 

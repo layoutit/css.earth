@@ -1,8 +1,8 @@
 # Continue from here
 
-Updated 2026-09-11. Research sources and method status are in [RESEARCH.md](RESEARCH.md). The current reproducible pipeline is in [METHOD.md](METHOD.md).
+Updated 2026-09-12. Research sources and method status are in [RESEARCH.md](RESEARCH.md). The current reproducible pipeline is in [METHOD.md](METHOD.md).
 
-**Active next decision:** inspect and filter the 2D structure candidates from the three aligned ESO Helix observations. Mark useful, uncertain and rejected evidence, and compare suspicious compact features with Original / Without stars / Residual in **Alignment**. The user authorized this stage on 2026-09-11. The [compiler notes](docs/nebula-compiler.md) separate the current observation stage from the historical cropped Hubble benchmark and describe the later physics constraints. No new volume is accepted or fitted by reviewing candidates.
+**Active next decision:** inspect automatically fitted projected arcs/ellipses and shared-center candidates alongside the 2D structures from the three aligned ESO Helix observations. Solid support and dashed extrapolation must make the fit evidence visible; no new 3D volume is inferred by this stage. Mark useful, uncertain and rejected evidence, and compare suspicious compact features with Original / Without stars / Residual in **Alignment**. The user authorized this stage on 2026-09-11. The [compiler notes](docs/nebula-compiler.md) separate the current observation stage from the historical cropped Hubble benchmark and describe the later physics constraints. No new volume is accepted or fitted by reviewing candidates.
 
 **M2–9 baseline:** the [image-to-volume experiment](models/m2-9/README.md) remains available. Front/oblique/side views show connected lobes, with remaining ring artifacts, background and color/brightness differences. It is not promoted; see [planetary-nebulae.md](docs/planetary-nebulae.md).
 

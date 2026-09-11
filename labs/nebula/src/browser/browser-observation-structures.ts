@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { readStructureCatalogue, reviewStorageKey } from '../alignment/observations-ui/structures-model';
+import { checkObservationGeometry } from './check-observation-geometry';
 
 const cataloguePath = '.local/nebula-lab/observations/helix/structures/catalogue.json';
 const catalogue = readStructureCatalogue(JSON.parse(await readFile(cataloguePath, 'utf8')));
@@ -51,12 +52,13 @@ try {
   await page.locator('.structure-region').first().waitFor({ state: 'attached' });
   const sceneCamera = await page.locator('.observation-structure-frame').getAttribute('style');
   const sourceNodes = await page.locator('[data-structure-image]').elementHandles();
-  const sourceChecks = [];
+  const sourceChecks = [], geometryChecks = [];
   for (const image of catalogue.images) {
     await page.locator('#structure-image').selectOption(image.id);
     const plane = page.locator(`[data-structure-image="${image.id}"]`);
     await plane.locator('.structure-evidence-image').evaluate(async (node: HTMLImageElement) => node.decode());
     assert.equal(await page.locator('.observation-structure-frame').getAttribute('style'), sceneCamera, 'Source selection changed the camera.');
+    if (image.geometry) geometryChecks.push(await checkObservationGeometry(page, image, directory));
     const regionNode = await plane.locator('[data-region-id]').first().elementHandle(); assert.ok(regionNode);
     const registration = await plane.getAttribute('style');
     const candidates = plane.locator('[data-region-id]:not([hidden])');
@@ -111,6 +113,7 @@ try {
   for (const node of sourceNodes) assert.equal(await node.evaluate(element => element.isConnected), true);
   await page.reload();
   await page.locator('#structure-image').waitFor();
+  if (catalogue.images.some(image => image.geometry)) await page.getByRole('group', { name: 'Structure inspection mode' }).getByRole('button', { name: 'Regions', exact: true }).click();
   for (const checked of sourceChecks) {
     await page.locator('#structure-image').selectOption(checked.id);
     await page.locator(`[data-structure-image="${checked.id}"]`).waitFor();
@@ -123,7 +126,7 @@ try {
   assert.deepEqual(errors, []);
   assert.deepEqual(writes, [], 'Viewing or filtering structure evidence must never start processing.');
   await writeFile(`${directory}/result.json`, JSON.stringify({ passed: true, browser: browser.version(),
-    viewport: { width: 1600, height: 1000 }, cataloguePath, sourceChecks,
+    viewport: { width: 1600, height: 1000 }, cataloguePath, sourceChecks, geometryChecks,
     checks: ['structure inspection without historical volume', 'same Alignment registration and saved manual fit', 'three source switches keep camera',
       '18 full-frame evidence images decode', 'area/contrast/elongation/scale/morphology/review filters affect actual supports',
       'retained support nodes', 'drag-to-pan across highlighted regions', 'decisions restore for every source after refresh', 'no processing on inspection'], errors, writes, volumeRequests }, null, 2));

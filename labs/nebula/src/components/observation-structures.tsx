@@ -1,6 +1,8 @@
 import { memo, useCallback, useEffect, useMemo, useRef, useState, type PointerEvent } from 'react';
 import { createPortal } from 'react-dom';
 import { localFile } from '../viewer/viewer';
+import { GeometryControls, GeometryOverlay } from './observation-geometry';
+import { readGeometryMap, type GeometryMap } from '../alignment/observations-ui/geometry-model';
 import { adjustedMatrix, imageCorners, savedObservationFit, unchanged, type Adjustment, type Matrix } from '../alignment/observations-ui/model';
 import { decisions, morphologies, readDecisions, readReviewMap, readStructureCatalogue, reviewStorageKey,
   type Decision, type Morphology, type ReviewMap, type StructureCatalogue, type StructureImage, type StructureLayer } from '../alignment/observations-ui/structures-model';
@@ -14,9 +16,11 @@ const registered = (image: StructureImage) => ({ imageToFrame: image.imageToFram
 const identity = (image: StructureImage) => ({ id: image.id, source: { sha256: image.sourceSha256 } });
 const asset = (image: StructureImage, file: string, hash = image.mapSha256) => `${localFile(`${image.directory}/${file}`)}?v=${hash}`;
 
-const StructurePlane = memo(function StructurePlane({ image, map, matrix, active, layer, visibleIds, selectedId, highlights, onSelect, onError }: {
+const StructurePlane = memo(function StructurePlane({ image, map, matrix, active, layer, visibleIds, selectedId, highlights, onSelect, onError,
+  geometry, shapes, shapeIds, selectedShapeId, onSelectShape }: {
   image: StructureImage; map: ReviewMap; matrix: Matrix; active: boolean; layer: StructureLayer; visibleIds: Set<string>; selectedId: string;
   highlights: boolean; onSelect(id: string): void; onError(id: string): void;
+  geometry?: GeometryMap; shapes: boolean; shapeIds: Set<string>; selectedShapeId: string; onSelectShape(id: string): void;
 }) {
   const panel = map.panels.find(item => item.id === layer);
   const sx = image.nativeWidth / image.width, sy = image.nativeHeight / image.height;
@@ -36,6 +40,7 @@ const StructurePlane = memo(function StructurePlane({ image, map, matrix, active
           style={{ left: -region.atlas.x, top: -region.atlas.y, width: atlas.width, height: atlas.height }} onError={() => onError(image.id)} />
       </button>;
     })}
+    {geometry && <GeometryOverlay geometry={geometry} active={active && shapes} visibleIds={shapeIds} selectedId={selectedShapeId} onSelect={onSelectShape} />}
   </div>;
 });
 
@@ -43,18 +48,22 @@ const StructurePlane = memo(function StructurePlane({ image, map, matrix, active
 export function ObservationStructures({ cataloguePath, observationManifest }: { cataloguePath: string; observationManifest?: string }) {
   const [data, setData] = useState<StructureCatalogue | null>(null), [error, setError] = useState('');
   const [maps, setMaps] = useState<Record<string, ReviewMap>>({}), [mapErrors, setMapErrors] = useState<Record<string, string>>({});
+  const [geometries, setGeometries] = useState<Record<string, GeometryMap>>({}), [geometryErrors, setGeometryErrors] = useState<Record<string, string>>({});
+  const [mode, setMode] = useState<'shapes' | 'regions'>('shapes'), [shapeId, setShapeId] = useState('');
+  const [shapeScore, setShapeScore] = useState(0), [showAllShapes, setShowAllShapes] = useState(true);
   const [selected, setSelected] = useState(''), [layer, setLayer] = useState<StructureLayer>('source'), [regionId, setRegionId] = useState('');
   const [filters, setFilters] = useState<Filters>(defaults), [highlights, setHighlights] = useState(true);
   const [fits, setFits] = useState<Record<string, Adjustment>>({}), [reviews, setReviews] = useState<Record<string, Record<string, Decision>>>({});
   const [storageError, setStorageError] = useState(''), [host, setHost] = useState<Element | null>(null);
   const [camera, setCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 }), cameraRef = useRef(camera), initialFit = useRef(false);
   const [extent, setExtent] = useState({ width: 0, height: 0 });
-  const viewport = useRef<HTMLDivElement>(null), drag = useRef<{ id: number; x: number; y: number; camera: Camera; regionId?: string } | null>(null);
+  const viewport = useRef<HTMLDivElement>(null), drag = useRef<{ id: number; x: number; y: number; camera: Camera; regionId?: string; shapeId?: string } | null>(null);
   cameraRef.current = camera;
   useEffect(() => { setHost(document.querySelector('.workspace-content')); }, []);
   useEffect(() => {
     const controller = new AbortController(); initialFit.current = false;
     setData(null); setMaps({}); setMapErrors({}); setError(''); setRegionId('');
+    setGeometries({}); setGeometryErrors({}); setShapeId(''); setMode('shapes');
     void fetch(localFile(cataloguePath), { signal: controller.signal, cache: 'no-store' }).then(async response => {
       if (!response.ok) throw new Error(`Structures unavailable (${response.status}).`);
       const next = readStructureCatalogue(await response.json()); if (controller.signal.aborted) return;
@@ -64,7 +73,16 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
         catch { return [image.id, {}]; }
       })));
       setSelected(next.images[0]?.id ?? ''); setData(next);
-      for (const image of next.images) void fetch(asset(image, 'map.json'), { signal: controller.signal, cache: 'no-store' }).then(async result => {
+      for (const image of next.images) {
+        if (image.geometry) void fetch(asset(image, image.geometry.file, image.geometry.sha256), { signal: controller.signal, cache: 'no-store' }).then(async result => {
+          if (!result.ok) throw new Error(`Prepared shapes unavailable (${result.status}).`);
+          const bytes = await result.arrayBuffer();
+          const digest = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)), value => value.toString(16).padStart(2, '0')).join('');
+          if (digest !== image.geometry?.sha256) throw new Error('Prepared shape identity changed; reload the catalogue.');
+          const geometry = readGeometryMap(JSON.parse(new TextDecoder().decode(bytes)), image);
+          if (!controller.signal.aborted) setGeometries(current => ({ ...current, [image.id]: geometry }));
+        }).catch((reason: unknown) => { if (!controller.signal.aborted) setGeometryErrors(current => ({ ...current, [image.id]: reason instanceof Error ? reason.message : 'Prepared shapes unavailable.' })); });
+        void fetch(asset(image, 'map.json'), { signal: controller.signal, cache: 'no-store' }).then(async result => {
         if (!result.ok) throw new Error(`Prepared map unavailable (${result.status}).`);
         const bytes = await result.arrayBuffer();
         const digest = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)), value => value.toString(16).padStart(2, '0')).join('');
@@ -72,6 +90,7 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
         const map = readReviewMap(JSON.parse(new TextDecoder().decode(bytes)), image);
         if (!controller.signal.aborted) setMaps(current => ({ ...current, [image.id]: map }));
       }).catch((reason: unknown) => { if (!controller.signal.aborted) setMapErrors(current => ({ ...current, [image.id]: reason instanceof Error ? reason.message : 'Prepared map unavailable.' })); });
+      }
     }).catch((reason: unknown) => { if (!controller.signal.aborted) setError(reason instanceof Error ? reason.message : 'Structures unavailable.'); });
     return () => controller.abort();
   }, [cataloguePath, observationManifest]);
@@ -99,6 +118,10 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
     return () => { observer.disconnect(); element.removeEventListener('wheel', wheel); };
   }, [host]);
   const image = data?.images.find(item => item.id === selected), map = maps[selected], review = reviews[selected];
+  const geometry = geometries[selected], shapes = mode === 'shapes' && Boolean(image?.geometry);
+  const candidateShapes = useMemo(() => geometry?.candidates.filter(candidate => candidate.score >= shapeScore) ?? [], [geometry, shapeScore]);
+  const selectedShape = candidateShapes.find(candidate => candidate.id === shapeId) ?? candidateShapes[0];
+  const shapeIds = useMemo(() => new Set((showAllShapes ? candidateShapes : selectedShape ? [selectedShape] : []).map(candidate => candidate.id)), [candidateShapes, selectedShape, showAllShapes]);
   const visibleRegions = useMemo(() => map?.regions.filter(region => filters.morphology[region.morphology] && (filters.scale < 0 || region.scale === filters.scale) &&
     region.areaPixels >= filters.area && region.contrast >= filters.contrast && region.elongation >= filters.elongation &&
     (filters.review === 'all' || (review?.[region.id] ?? 'unreviewed') === filters.review)) ?? [], [map, filters, review]);
@@ -121,22 +144,30 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
   function pointerDown(event: PointerEvent<HTMLDivElement>) {
     if (event.button !== 0) return; event.currentTarget.setPointerCapture(event.pointerId);
     const region = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-region-id]') : null;
-    drag.current = { id: event.pointerId, x: event.clientX, y: event.clientY, camera: cameraRef.current, regionId: region?.dataset.regionId };
+    const shape = event.target instanceof Element ? event.target.closest('[data-shape-id]') : null;
+    drag.current = { id: event.pointerId, x: event.clientX, y: event.clientY, camera: cameraRef.current, regionId: region?.dataset.regionId, shapeId: shape?.getAttribute('data-shape-id') ?? undefined };
   }
   function pointerMove(event: PointerEvent<HTMLDivElement>) {
     const start = drag.current; if (start?.id === event.pointerId) setCamera({ ...start.camera, x: start.camera.x + event.clientX - start.x, y: start.camera.y + event.clientY - start.y });
   }
   const fit = fits[selected] ?? unchanged, manuallyAdjusted = fit.x !== 0 || fit.y !== 0 || fit.rotation !== 0 || fit.scale !== 1;
-  const status = error || mapErrors[selected] || (!data ? 'Loading structure catalogue…' : !map ? 'Loading prepared support…' : '');
+  const status = error || mapErrors[selected] || (shapes ? geometryErrors[selected] : '') || (!data ? 'Loading structure catalogue…' : !map ? 'Loading prepared support…' : shapes && !geometry ? 'Loading detected shapes…' : '');
   return <fieldset className="observation-structures">
     <legend>Structure review</legend>
     <label className="field-label" htmlFor="structure-image">Image</label>
-    <select id="structure-image" disabled={!data} value={selected} onChange={event => { setSelected(event.target.value); setRegionId(''); }}>
+    <select id="structure-image" disabled={!data} value={selected} onChange={event => { setSelected(event.target.value); setRegionId(''); setShapeId(''); }}>
       {data?.images.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}
     </select>
     <div className="emission-layer-buttons" role="group" aria-label="Structure layer">
       {map?.panels.map(panel => <button key={panel.id} type="button" title={panel.description} aria-pressed={layer === panel.id} onClick={() => setLayer(panel.id)}>{panel.label}</button>)}
     </div>
+    {image?.geometry && <div className="emission-layer-buttons" role="group" aria-label="Structure inspection mode">
+      <button type="button" aria-pressed={shapes} onClick={() => setMode('shapes')}>Shapes</button>
+      <button type="button" aria-pressed={!shapes} onClick={() => setMode('regions')}>Regions</button>
+    </div>}
+    <div hidden={!shapes}><GeometryControls geometry={geometry} candidates={candidateShapes} selected={selectedShape} score={shapeScore}
+      showAll={showAllShapes} onScore={setShapeScore} onShowAll={setShowAllShapes} onSelect={setShapeId} /></div>
+    <div hidden={shapes}>
     <div className="structure-morphologies" role="group" aria-label="Morphology filters">{morphologies.map(kind => <label key={kind}>
       <input type="checkbox" checked={filters.morphology[kind]} onChange={event => setFilters(current => ({ ...current, morphology: { ...current.morphology, [kind]: event.target.checked } }))} />{title(kind)}
     </label>)}</div>
@@ -173,20 +204,24 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
         <button type="button" className="text-button" disabled={!review?.[selectedRegion.id]} onClick={() => decide('unreviewed')}>Reset to unreviewed</button>
       </> : <p className="interaction-hint">No regions match these filters.</p>}
     </section>
+    </div>
     {map && <p className="interaction-hint" title={`Maximum additive reconstruction error ${map.metrics.reconstructionMaxError}. Unassigned signal and imperfect star-removal residuals remain. Decisions indicate human review, never depth or physical membership.`}>
       {map.metrics.reconstructionMaxError < 1e-5 ? 'All input accounted for' : 'Inspect accounting error'} · {(map.metrics.unassignedFraction * 100).toFixed(1)}% unassigned</p>}
     {image && <p className="interaction-hint"><a href={image.page} target="_blank" rel="noreferrer" title={image.credit}>Source & credit ↗</a></p>}
-    {(status || storageError) && <p className="interaction-hint emission-structure-status" role={error || mapErrors[selected] ? 'alert' : 'status'} data-error={Boolean(error || mapErrors[selected])}>{status || storageError}</p>}
+    {(status || storageError) && <p className="interaction-hint emission-structure-status" role={error || mapErrors[selected] || (shapes && geometryErrors[selected]) ? 'alert' : 'status'} data-error={Boolean(error || mapErrors[selected] || (shapes && geometryErrors[selected]))}>{status || storageError}</p>}
     {host && createPortal(<section className="observation-structures-workspace" aria-label="Registered structure inspection">
       <div ref={viewport} className="observation-sky" aria-label="Structure inspection sky" tabIndex={0} onPointerDown={pointerDown} onPointerMove={pointerMove}
         onPointerUp={event => { const start = drag.current; drag.current = null;
           if (start?.id === event.pointerId && start.regionId && Math.hypot(event.clientX - start.x, event.clientY - start.y) < 4) setRegionId(start.regionId);
+          if (start?.id === event.pointerId && start.shapeId && Math.hypot(event.clientX - start.x, event.clientY - start.y) < 4) setShapeId(start.shapeId);
         }} onPointerCancel={() => { drag.current = null; }} onDoubleClick={fitAll}
         onKeyDown={event => { if (event.key === 'Home' || event.key === '0') { event.preventDefault(); fitAll(); } }}>
         <div className="observation-structure-frame" style={{ transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.zoom})` }}>
           {data?.images.map(item => { const prepared = maps[item.id], matrix = matrices[item.id]; return prepared && matrix ? <StructurePlane key={item.id} image={item} map={prepared} matrix={matrix}
             active={item.id === selected} layer={layer} visibleIds={item.id === selected ? visibleIds : emptyIds} selectedId={item.id === selected ? selectedRegion?.id ?? '' : ''}
-            highlights={highlights} onSelect={setRegionId} onError={imageError} /> : null; })}
+            highlights={highlights && !shapes} onSelect={setRegionId} onError={imageError}
+            geometry={geometries[item.id]} shapes={shapes} shapeIds={item.id === selected ? shapeIds : emptyIds}
+            selectedShapeId={item.id === selected ? selectedShape?.id ?? '' : ''} onSelectShape={setShapeId} /> : null; })}
         </div>
         <div className="observation-compass">N ↑ · E ←</div>
         {status && <p className="observation-loading">{status}</p>}
