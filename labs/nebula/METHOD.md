@@ -4,6 +4,8 @@ This is the repeatable workflow for bringing observed images into the lab, separ
 
 **Without an existing density model:** the separate [planetary-nebula experiment](docs/planetary-nebulae.md) fits a plausible emission field from an image plus symmetry assumptions before baking. Its M2–9 recipe is not a replacement for the fixed LMC density workflow described below.
 
+**Choose the method from the evidence:** `density` uses an independent spatial prior; `symmetry` declares an axis/inclination; `inference` preserves image evidence and compares alternative geometry. All methods share the lab shell and source-registration/separation utilities. Helix currently stops at aligning the three wider ESO images and inspecting native star removal; the user must inspect that result before their structure extraction. Observation colors and shapes can differ by wavelength even when field stars align correctly.
+
 **Current stage:** VISTA, Horálek and WISE have completed native NOX removal and separate 3D comparison bakes. Alignment imports/inspects sources; Reconstruction selects a completed native starless image and runs an explicit **Preview** job. Other catalogue images remain available for comparison/removal without being automatically selected for reconstruction. The comparison repaints the Alignment density cloud; it does not recover measured gas depth.
 
 ## Order of operations

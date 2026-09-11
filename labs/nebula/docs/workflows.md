@@ -23,6 +23,20 @@ Do not restart an already running server to switch views. Legacy `?subject=…&t
 
 The full neutral fields contain all imported LMC/SMC stellar particles. They are simulated stellar mass, not observed gas or dust. A photograph's boundary is its coverage limit, not the density cloud's boundary.
 
+## Image-driven methods
+
+The object configuration selects the available depth evidence; it never selects a private app or source-specific algorithm.
+
+| Method | Depth evidence | Initial example |
+| --- | --- | --- |
+| Density model | Independently supplied simulation or reconstruction; images only paint it | LMC / SMC |
+| Symmetry | Explicit axis, inclination and symmetry assumptions | M2–9 |
+| Constrained inference | Registered observations, then competing shape assumptions and external constraints | Helix |
+
+**For Helix, start at `/alignment?subject=helix-model-prior`.** The observation workspace shares one north-up angular frame across ESO WFI optical, the wider ESO field and VISTA infrared. It does not require a prepared volume. Compare a reference and overlay, or all observations, on the same scale; zoom into distributed stars rather than matching only the central ring. Native source pixel transforms remain fixed across Original / Without stars / Residual. Manual nudges are saved separately from the measured registration.
+
+Advance in visible steps: **alignment → inspect star removal → approve structure extraction → inspect structures → compare depth hypotheses**. Selecting an image or a prepared layer starts no processing. The planetary observation command currently prepares inputs offline; LMC's existing removal and reconstruction job buttons retain their own workflow. No new Helix structure map or volume is inferred automatically. Infrared and optical emission are allowed to differ after their stars align.
+
 ## 2. Remove stars
 
 1. Optionally run **Quick preview** for native crops.

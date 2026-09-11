@@ -29,7 +29,9 @@
         "sha256": "d2213aeb75b7b0a9084a482a6baa361834360599320044c0b18e248043066d12"
       }
     },
-    "imagePath": "labs/nebula/models/lmc/candidates/prepared/vista-infrared.webp"
+    "imagePath": "labs/nebula/models/lmc/candidates/prepared/vista-infrared.webp",
+    "menuLabel": "LMC",
+    "workflow": "density"
   },
   {
     "id": "smc-particles",
@@ -46,7 +48,9 @@
       "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
       "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
       "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure."
-    }
+    },
+    "menuLabel": "SMC",
+    "workflow": "density"
   },
   {
     "id": "m2-9-inferred",
@@ -60,7 +64,9 @@
     "credit": "Hubble: Balick, Icke, Mellema & NASA. Independent implementation of Wenger, Lorenz & Magnor (2013).",
     "modelNote": "Experimental emission inferred from one image and approximate axial symmetry. Unmeasured depth and scale; four point sources masked. Not gas mass density.",
     "framingRadiusUnits": 5,
-    "hasDetail": false
+    "hasDetail": false,
+    "menuLabel": "M2–9",
+    "workflow": "symmetry"
   },
   {
     "id": "helix-single-axis",
@@ -80,7 +86,13 @@
     "modelNote": "Experimental relative emission: geometry and depths remain assumptions. Hubble/CTIO native image, NOX separation.",
     "comparisonGroup": "helix-emission-comparison",
     "framingRadiusUnits": 5,
-    "hasDetail": false
+    "hasDetail": false,
+    "menuLabel": "Helix · symmetry baseline",
+    "workflow": "symmetry",
+    "observationAlignment": {
+      "manifest": ".local/nebula-lab/observations/helix/observations.json",
+      "recipe": "labs/nebula/models/helix/observations.json"
+    }
   },
   {
     "id": "helix-model-prior",
@@ -100,6 +112,12 @@
     "modelNote": "Experimental relative emission: geometry and depths remain assumptions. Hubble/CTIO native image, NOX separation.",
     "comparisonGroup": "helix-emission-comparison",
     "framingRadiusUnits": 5,
-    "hasDetail": false
+    "hasDetail": false,
+    "menuLabel": "Helix",
+    "workflow": "inference",
+    "observationAlignment": {
+      "manifest": ".local/nebula-lab/observations/helix/observations.json",
+      "recipe": "labs/nebula/models/helix/observations.json"
+    }
   }
 ]

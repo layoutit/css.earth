@@ -3,6 +3,8 @@ import { labObjects, mountNebulaLab, type LabShellState } from './main';
 import { labView } from './viewer/lab-routing';
 import { subjects } from './viewer/viewer';
 import { EmissionComparison } from './components/emission-comparison';
+import { labWorkflows, readLabWorkflow } from './utils/lab-workflows';
+import { ObservationAlignment } from './components/observation-alignment';
 
 type Controller = Awaited<ReturnType<typeof mountNebulaLab>>;
 export function App() {
@@ -26,11 +28,13 @@ export function App() {
   const alignment = shell.alignment;
   const selectedSubject = subjects.find(item => item.id === shell.objectId);
   const emission = selectedSubject?.emissionExperiment;
+  const workflow = selectedSubject?.workflow ? labWorkflows[readLabWorkflow(selectedSubject.workflow)] : undefined;
   const updateAlignment = (partial: Partial<NonNullable<LabShellState['alignment']>>) => setShell(value => value.alignment ? { ...value, alignment: { ...value.alignment, ...partial } } : value);
   return <>
     <header className="lab-header">
       <h1>Nebula Lab</h1>
       <div className="subject-field"><label htmlFor="subject">Object</label><select id="subject" value={shell.objectId} disabled={shell.busy} onChange={event => void controller.current?.changeObject(event.target.value)}>{labObjects.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}</select></div>
+      {workflow && <span className="interaction-hint" title={workflow.description}>{workflow.label}</span>}
       <div role="tablist" aria-label="View" ref={navigation}>
         <button id="density-tab" type="button" role="tab" aria-selected={shell.view === "alignment"} aria-controls="render-panel" tabIndex={shell.view === "alignment" ? 0 : -1} disabled={shell.busy || !shell.alignmentAvailable} onClick={() => void controller.current?.selectView("alignment")} onKeyDown={event => navigateKey(event, 0)}>Alignment</button>
         <button id="render-tab" type="button" role="tab" aria-selected={shell.view === "reconstruction"} aria-controls="render-panel" tabIndex={shell.view === "reconstruction" ? 0 : -1} disabled={shell.busy} onClick={() => void controller.current?.selectView("reconstruction")} onKeyDown={event => navigateKey(event, 1)}>Reconstruction</button>
@@ -43,6 +47,7 @@ export function App() {
             <div id="viewer" aria-label="Interactive prepared object" tabIndex={0}></div>
           </div>
           {emission && shell.view === 'reconstruction' && <EmissionComparison {...emission} credit={selectedSubject?.credit} />}
+          {selectedSubject?.observationAlignment && shell.view === 'alignment' && <ObservationAlignment key={selectedSubject.observationAlignment.manifest} manifestPath={selectedSubject.observationAlignment.manifest} />}
           <aside id="inspection-panel" className="floating-panel density-adjustment-panel" aria-label="Camera and density adjustments">
             <fieldset id="render-controls" disabled>
               <legend>Camera</legend>

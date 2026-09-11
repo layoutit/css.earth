@@ -1,5 +1,6 @@
 import type { AppliedStarLayers } from '../star-removal/star-removal-types';
 import records from '../subjects.json';
+import { readLabWorkflow } from '../utils/lab-workflows';
 import { parseOverlayVariants, variantsForImage, type ImageLayer, type OverlayVariant } from './overlay-variants';
 import sourceCatalog from '../../sources/index.json';
 import { defaultOverlayPlacement, updateOverlayPlacement, overlayPlacementTransform, type OverlayPlacement } from '../alignment/overlay-placement';
@@ -30,6 +31,9 @@ declare const __NEBULA_REPO_ROOT__: string;
 export interface LabSubjectRecord {
   id: string;
   name: string;
+  menuLabel?: string;
+  workflow?: string;
+  observationAlignment?: { manifest: string; recipe: string };
   directory: string;
   /** Comparison image relative to directory, or imagePath relative to the repository. */
   image?: string;
@@ -61,6 +65,9 @@ export const localFile = (path: string) => `/@fs${__NEBULA_REPO_ROOT__.replace(/
 const recipes = import.meta.glob('../../../../src/objects/*/source/recipe.json', { eager: true, import: 'default' }) as
   Record<string, { source: { publisherUrl: string; credit: string }; geometry: { supportRadiusKpc: number } }>;
 function prepareSubjectRecord(record: LabSubjectRecord) {
+  if (record.workflow !== undefined) readLabWorkflow(record.workflow);
+  if (record.observationAlignment && (!relativePath(record.observationAlignment.manifest) || !relativePath(record.observationAlignment.recipe)))
+    throw new TypeError(`Lab subject ${record.id} has invalid observation alignment paths.`);
   const sharedDensity = record.density && subjectRecords.filter(item => item.density?.directory === record.density!.directory);
   const configuredRadii = sharedDensity?.flatMap(item => item.density?.referenceFramingRadiusUnits === undefined ? [] : [item.density.referenceFramingRadiusUnits]) ?? [];
   if (configuredRadii.some(value => !Number.isFinite(value) || value <= 0) || new Set(configuredRadii).size > 1)
@@ -632,10 +639,14 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       cloudFilter = valid; starLayer?.setCloudSupport(cloudFilter, cloud.selection()); publish();
     }
   }
-  async function setSubject(id: string, cameraOverride: ReturnType<typeof retainCamera> | null = null) {
+  async function setSubject(id: string, cameraOverride: ReturnType<typeof retainCamera> | null = null, requestedMode?: ViewerMode) {
     const next = subjects.find(item => item.id === id);
     if (!next) throw new TypeError(`Unknown lab subject: ${id}`);
     rememberDensityCamera();
+    if (requestedMode !== undefined) {
+      if (requestedMode !== 'photo' && requestedMode !== 'density') throw new TypeError('Unknown viewer mode.');
+      currentMode = requestedMode;
+    }
     const retain = currentMode === 'density' ? densityCameras.get(next.density?.directory ?? '') :
       cameraOverride ?? (subject.id !== next.id && subject.comparisonGroup !== undefined && subject.comparisonGroup === next.comparisonGroup ? retainCamera() : null);
     const directory = currentMode === 'density' ? next.density?.directory : next.directory;

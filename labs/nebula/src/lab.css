@@ -182,3 +182,33 @@ a.reconstruction-image-detail { display: inline-block; }
 .emission-structure-map img { display: block; width: 100%; height: 100%; object-fit: contain; min-height: 0; }
 .emission-structure-map figcaption { text-align: center; }
 .workspace-content:has(.emission-structure-map) > #inspection-panel { visibility: hidden; }
+
+/* Shared observation alignment: photographs retain their native sky footprint. */
+.observation-alignment { position: absolute; inset: 0; z-index: 3; background: #000; }
+.observation-sky { position: absolute; inset: 0 338px 0 258px; overflow: hidden; touch-action: none; cursor: grab; outline-offset: -3px; }
+.observation-sky:active { cursor: grabbing; }
+.observation-frame { position: absolute; left: 0; top: 0; transform-origin: 0 0; pointer-events: none; }
+.observation-frame img { position: absolute; left: 0; top: 0; max-width: none; transform-origin: 0 0; user-select: none; }
+.observation-camera { left: 14px; width: 230px; }
+.observation-images { width: 310px; }
+.observation-layers { margin-top: 13px; }
+.observation-check { display: flex; align-items: center; gap: 7px; margin: 12px 0; font-size: 12px; color: var(--text-secondary); }
+.observation-checks { display: flex; flex-wrap: wrap; gap: 0 14px; }
+.observation-images .placement-control { grid-template-columns: 78px minmax(20px, 1fr) 62px; }
+.observation-compass { position: absolute; left: 12px; bottom: 12px; color: var(--text-muted); font-size: 11px; pointer-events: none; }
+.observation-star { position: absolute; border: 1px solid #fff; border-radius: 50%; transform: translate(-50%, -50%); }
+.observation-star.overlay-star { border-color: #f2b95f; }
+.observation-loading { position: absolute; left: 15px; top: 20px; color: var(--text-muted); }
+.workspace-content:has(.observation-alignment) > #inspection-panel,
+.workspace-content:has(.observation-alignment) > #image-overlay-panel,
+.workspace-content:has(.observation-alignment) > #cloud-adjustment-panel { visibility: hidden; }
+@media (max-width: 1000px) {
+  .observation-camera { width: 190px; padding: 12px; }
+  .observation-images { width: 260px; padding: 12px; }
+  .observation-sky { left: 218px; right: 288px; }
+}
+@media (max-width: 700px) {
+  .observation-camera { width: calc(50% - 21px); max-height: 180px; }
+  .observation-images { width: calc(50% - 21px); max-height: 180px; }
+  .observation-sky { inset: 210px 0 0; }
+}

@@ -32,6 +32,8 @@ models/
 ```
 
 - React owns UI markup, control state and interaction. The PolyCSS renderer remains a plain TypeScript library mounted through a stable element/ref. UI rerenders must not recreate the cloud scene.
+- Keep one reusable lab shell, selected by object configuration: `density` paints an independent model; `symmetry` fits an explicitly symmetric emission prior; `inference` compares unconstrained image evidence and authored shape hypotheses. These are methods, not separate apps named after LMC, M2–9 or Helix. Shared observation alignment and star separation precede any image-driven method. Alignment must be usable before a volume exists.
+- Observation alignment uses a common north-up sky frame and the exact same native-pixel transform for Original / Without stars / Residual. Publisher astrometry is an initial registration, not a passed star-match check. Keep full native footprints, independent matched-star residuals, and manual inspection adjustments distinct. No structure extraction or volume fit until the current alignment/removal stage has been inspected and approved.
 - Reuse css.earth's existing visual language and input policy. Keep the lab a compact tool: visible controls, brief status, longer interpretation in tooltips/popovers or docs.
 - Keep image/object choices in data. Shared algorithms must not gain per-image branches. Tests live beside the module; browser checks live in `browser/`.
 - Source originals and large native/intermediate outputs stay in the ignored local cache. Keep credits, source hashes, registration evidence and reproducible recipes with the model. No copies of large assets just to rearrange folders.

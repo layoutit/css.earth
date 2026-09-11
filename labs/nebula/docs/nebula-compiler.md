@@ -58,7 +58,7 @@ The first prepare command restores the existing comparison volume needed by the 
 
 ## Next experiment, after inspecting this map
 
-First resolve the [source-footprint problem and wider candidates](../models/helix/README.md#wider-source-candidates). The complete downloaded Hubble frame is not the complete nebula. Source inspection must precede star separation, structure extraction and hypothesis fitting on a replacement; no new candidate has been processed yet.
+First inspect the [aligned wider observations and native star removal](../models/helix/README.md#current-step-aligned-observations-and-native-star-removal). The complete downloaded Hubble frame is not the complete nebula. The three wider ESO sources now have measured relative registration and native separation; their structure extraction and hypothesis fitting await the user's visual acceptance. The numerical map above still describes the old Hubble source.
 
 1. Review the arcs and compact candidates against the input, especially the faint outer regions and possible NOX damage. The prototype allows at most two adjustments; one has been used. If candidate relationships remain unreliable, stop at image evidence and identify the extraction limitation.
 2. Compare three coarse interpretations: a deformed shell, a barrel-like shell, and a bipolar structure, each with a separately represented outer component. Derive projected landmarks from accepted image evidence. Bound depth and orientation using published alternatives. Do not silently inflate rings or extrude the full rectangular image.
