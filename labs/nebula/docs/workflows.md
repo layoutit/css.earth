@@ -39,6 +39,8 @@ Advance in visible steps: **alignment → inspect star removal → approve struc
 
 For the current Helix observations, **Reconstruction → Structure map** is the next inspection stage. Choose the ESO image, filter candidate morphology/scale/area/contrast/elongation, and mark individual regions **Keep / Unsure / Reject**. The prepared support overlay shows the detected pixels; it is not a proposed 3D object. Reviews persist per source/extraction, and filters start no processing. **Volume** explicitly loads the older Hubble baseline. See [the extraction command, limits and physics plan](nebula-compiler.md).
 
+Scale, area, contrast and elongation use sliders with visible values. Area and elongation use logarithmic travel, and contrast gives finer control near zero. The values remain the actual filter thresholds; the slider spacing changes only how they are adjusted.
+
 ## 2. Remove stars
 
 1. Optionally run **Quick preview** for native crops.

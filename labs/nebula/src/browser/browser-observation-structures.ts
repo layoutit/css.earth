@@ -67,15 +67,23 @@ try {
     assert.notEqual(await page.locator('.observation-structure-frame').getAttribute('style'), sceneCamera, 'Highlighted regions blocked drag-to-pan.');
     await page.getByRole('button', { name: 'Fit all images', exact: true }).click();
     assert.equal(await page.locator('.observation-structure-frame').getAttribute('style'), sceneCamera);
-    for (const [filter, value, original] of [['area', '1000000', '12'], ['contrast', '10', '0'], ['elongation', '1000000', '1']]) {
-      await page.locator(`#structure-${filter}`).fill(value!);
+    for (const filter of ['area', 'contrast', 'elongation']) {
+      const slider = page.locator(`#structure-${filter}`), original = await slider.inputValue();
+      assert.equal(await slider.getAttribute('type'), 'range');
+      await slider.press('End');
       assert.equal(await candidates.count(), 0, `${filter} did not filter candidates.`);
-      await page.locator(`#structure-${filter}`).fill(original!);
+      await slider.evaluate((node: HTMLInputElement, value) => {
+        Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')!.set!.call(node, value);
+        node.dispatchEvent(new Event('input', { bubbles: true }));
+      }, original);
       assert.equal(await candidates.count(), count, 'Restoring filter lost candidates.');
     }
-    await page.locator('#structure-scale').selectOption('5');
+    const scaleSlider = page.locator('#structure-scale');
+    assert.equal(await scaleSlider.getAttribute('type'), 'range');
+    await scaleSlider.press('End');
     for (const id of await candidates.evaluateAll(nodes => nodes.map(node => node.getAttribute('data-region-id')))) assert.match(id!, /^s5-/);
-    await page.locator('#structure-scale').selectOption('2');
+    await scaleSlider.press('Home');
+    for (let step = 0; step < 3; step++) await scaleSlider.press('ArrowRight');
     for (const label of ['Compact', 'Elongated', 'Diffuse']) await page.getByRole('group', { name: 'Morphology filters' }).getByRole('checkbox', { name: label, exact: true }).uncheck();
     assert.equal(await candidates.count(), 0);
     for (const label of ['Compact', 'Elongated', 'Diffuse']) await page.getByRole('group', { name: 'Morphology filters' }).getByRole('checkbox', { name: label, exact: true }).check();

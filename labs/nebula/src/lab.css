@@ -213,6 +213,9 @@ a.reconstruction-image-detail { display: inline-block; }
 .structure-morphologies label { display: flex; align-items: center; gap: 4px; }
 .structure-filter { display: grid; grid-template-columns: 1fr 112px; align-items: center; gap: 8px; margin: 7px 0; font-size: 12px; }
 .structure-filter input, .structure-filter select { width: 100%; min-width: 0; padding: 5px 7px; color: inherit; background: #202124; border: 1px solid #393b3f; border-radius: 4px; }
+.structure-slider { display: grid; grid-template-columns: 1fr auto; gap: 3px 10px; align-items: center; margin: 10px 0; font-size: 12px; }
+.structure-slider output { color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.structure-slider input[type="range"] { grid-column: 1 / -1; margin: 2px 0; }
 .structure-selection { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--divider); }
 .structure-review-navigation, .structure-decisions { display: flex; gap: 6px; margin-top: 8px; }
 .structure-review-navigation button, .structure-decisions button { flex: 1; padding: 6px 5px; font-size: 11px; }

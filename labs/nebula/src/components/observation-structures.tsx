@@ -106,6 +106,11 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
   const selectedRegion = visibleRegions.find(region => region.id === regionId) ?? visibleRegions[0];
   const selectedIndex = selectedRegion ? visibleRegions.indexOf(selectedRegion) : -1;
   const scales = useMemo(() => [...new Set(map?.regions.map(region => region.scale) ?? [])].sort((a, b) => a - b), [map]);
+  const elongationLimit = useMemo(() => {
+    let maximum = 32;
+    for (const prepared of Object.values(maps)) for (const region of prepared.regions) maximum = Math.max(maximum, region.elongation + 1);
+    return Math.ceil(Math.log2(maximum));
+  }, [maps]);
   const imageError = useCallback((id: string) => setMapErrors(current => current[id] ? current : { ...current, [id]: 'Prepared image or support atlas unavailable.' }), []);
   function decide(value: Decision | 'unreviewed') {
     if (!image || !selectedRegion) return;
@@ -135,15 +140,23 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
     <div className="structure-morphologies" role="group" aria-label="Morphology filters">{morphologies.map(kind => <label key={kind}>
       <input type="checkbox" checked={filters.morphology[kind]} onChange={event => setFilters(current => ({ ...current, morphology: { ...current.morphology, [kind]: event.target.checked } }))} />{title(kind)}
     </label>)}</div>
-    <div className="structure-filter"><label htmlFor="structure-scale">Scale</label><select id="structure-scale" value={filters.scale} onChange={event => setFilters(current => ({ ...current, scale: Number(event.target.value) }))}>
-      <option value={-1}>All scales</option>{scales.map(scale => <option key={scale} value={scale}>Scale {scale + 1}</option>)}
-    </select></div>
-    {([{ key: 'area', label: 'Area ≥ (px²)', min: 0, step: 1, tip: 'Support area in the prepared working image, not physical size.' },
-      { key: 'contrast', label: 'Contrast ≥', min: 0, step: .001, tip: 'Prepared wavelet contrast; this is an inspection filter.' },
-      { key: 'elongation', label: 'Elongation ≥', min: 1, step: .1, tip: 'Major/minor axis ratio. Elongation is not a coherence measurement.' }] as const).map(control =>
-      <div className="structure-filter" key={control.key}><label htmlFor={`structure-${control.key}`} title={control.tip}>{control.label}</label>
-        <input id={`structure-${control.key}`} type="number" min={control.min} step={control.step} value={filters[control.key]} onChange={event => { const value = event.target.valueAsNumber;
-          if (Number.isFinite(value) && value >= control.min) setFilters(current => ({ ...current, [control.key]: value })); }} />
+    <div className="structure-slider"><label htmlFor="structure-scale">Scale</label>
+      <output htmlFor="structure-scale">{filters.scale < 0 ? 'All' : filters.scale + 1}</output>
+      <input id="structure-scale" type="range" min={-1} max={Math.max(2, ...scales)} step={1} value={filters.scale} disabled={!map}
+        aria-valuetext={filters.scale < 0 ? 'All scales' : `Scale ${filters.scale + 1}`}
+        onChange={event => setFilters(current => ({ ...current, scale: event.target.valueAsNumber }))} />
+    </div>
+    {([{ key: 'area', label: 'Area ≥', max: 20, value: Math.log2(filters.area + 1), read: (value: number) => Math.round(2 ** value - 1),
+        display: `${filters.area.toLocaleString()} px²`, tip: 'Support area in the working image. Logarithmic slider for fine control of small regions; not physical size.' },
+      { key: 'contrast', label: 'Contrast ≥', max: 1, value: Math.sqrt(filters.contrast), read: (value: number) => value ** 2,
+        display: filters.contrast.toPrecision(3), tip: 'Prepared wavelet contrast. Finer control near zero; no image processing.' },
+      { key: 'elongation', label: 'Elongation ≥', max: elongationLimit, value: Math.log2(filters.elongation), read: (value: number) => 2 ** value,
+        display: `${filters.elongation.toFixed(2)}×`, tip: 'Major/minor axis ratio. Logarithmic slider; not a coherence measurement.' }] as const).map(control =>
+      <div className="structure-slider" key={control.key}><label htmlFor={`structure-${control.key}`} title={control.tip}>{control.label}</label>
+        <output htmlFor={`structure-${control.key}`}>{control.display}</output>
+        <input id={`structure-${control.key}`} type="range" min={0} max={control.max} step={control.key === 'contrast' ? .001 : .01}
+          value={control.value} aria-valuetext={control.display} disabled={!map}
+          onChange={event => setFilters(current => ({ ...current, [control.key]: control.read(event.target.valueAsNumber) }))} />
       </div>)}
     <div className="structure-filter"><label htmlFor="structure-review-filter">Review</label><select id="structure-review-filter" value={filters.review} onChange={event => setFilters(current => ({ ...current, review: event.target.value }))}>
       {['all', 'unreviewed', ...decisions].map(value => <option key={value} value={value}>{title(value)}</option>)}
