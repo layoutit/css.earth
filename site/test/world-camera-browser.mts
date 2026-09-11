@@ -4,11 +4,11 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 import type { Page } from 'playwright';
-import type { WorldCameraPose } from './world-camera.ts';
-import { parsePreparedWorldCameraFrame } from '../dist/navigation.js';
-import { createTestPage } from '../../../../site/test/browser-observations.mts';
-import { required } from '../../../../tools/test-values.mts';
-import PREPARED_MERCURY_SCENE from '../../../../src/planets/mercury/prepared/scene.json' with { type: 'json' };
+import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.ts';
+import { parsePreparedWorldCameraFrame } from '../../src/renderers/css/dist/navigation.js';
+import { createTestPage } from './browser-observations.mts';
+import { required } from '../../tools/test-values.mts';
+import PREPARED_MERCURY_SCENE from '../../src/planets/mercury/prepared/scene.json' with { type: 'json' };
 
 const base = process.argv[2] ?? 'http://127.0.0.1:4211';
 const directory = resolve('.local/world-camera-owner');

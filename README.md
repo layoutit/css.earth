@@ -35,8 +35,10 @@ To build all routes for production, run `pnpm setup:assets`, `pnpm build`, then
 
 ## Checks
 
-`pnpm check:ci` runs the command steps from the GitHub workflow locally using
-Node 22 and the pinned pnpm version. It installs dependencies, prepares required
+With Node 22 and the pinned pnpm version, first run
+`pnpm install --frozen-lockfile --ignore-scripts` in a fresh checkout. Then
+`pnpm check:ci` runs the command steps from the GitHub workflow locally.
+It verifies the dependency installation, prepares required
 inputs, and stops at the first failed check. `pnpm check:ci --list` shows the
 exact commands. It uses your current checkout; GitHub still verifies Ubuntu.
 
