@@ -2,6 +2,7 @@ import type { ObjectRuntimeCapabilities } from '../runtime/object-runtime-types.
 import type { PreparedPagePlan } from './types.js';
 import { mountPreparedMapPages } from './city-pages.js';
 import { isPreparedAssetPath, normalizeCityAssetOrigin } from './city-asset-url.js';
+import { mountSurfaceFeatureLabels } from '../labels/surface-feature-labels.js';
 
 function object(value: unknown, label: string): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`Invalid prepared ${label}.`);
@@ -108,4 +109,5 @@ export const preparedObjectCapabilities: ObjectRuntimeCapabilities = Object.free
       reset() { if (!lifetime.disposed) return reset(); },
     });
   },
+  mountSurfaceFeatures(options) { return mountSurfaceFeatureLabels(options); },
 });

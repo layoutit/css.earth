@@ -12,4 +12,6 @@ The photographic full-sky panorama is ESO `eso0932a`, credited to ESO/S. Brunier
 
 The prepared cubic sky also uses the locally retained Google Maps Sun presentation asset as a visual-oracle input. Google redistribution permission has not been verified. The exact source identity, local-use qualification, and repository-authored measurements are recorded in `source/manifest.json` and `source/sun/google-maps-sun-oracle.json`.
 
+Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.
+
 Inter is Copyright 2016 The Inter Project Authors and is used as the declared source of the committed prepared title vector under the SIL Open Font License 1.1.
