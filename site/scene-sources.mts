@@ -112,6 +112,34 @@ export function sceneSources(resources: readonly SceneSource[] = []) {
   return [...result.values()];
 }
 
+export interface SceneSourceGroup { provider: string; members: readonly (SceneSource & { part: string })[]; }
+
+/** Print a shared provider name once. Grouping reads the authored labels only: entries
+ * whose label starts with the same name join one group, and each keeps its own link.
+ * A member is named by the rest of its label, or by its role when the label is just the provider. */
+export function sceneSourceGroups(sources: readonly SceneSource[]): readonly SceneSourceGroup[] {
+  const provider = (source: SceneSource) => source.label.split(/[ /]/u)[0] ?? source.label;
+  const counts = new Map<string, number>();
+  for (const source of sources) counts.set(provider(source), (counts.get(provider(source)) ?? 0) + 1);
+  const groups: SceneSourceGroup[] = [];
+  for (const source of sources) {
+    const name = provider(source);
+    if ((counts.get(name) ?? 0) < 2) { groups.push({ provider: "", members: [{ ...source, part: source.label }] }); continue; }
+    const part = source.label.slice(name.length).replace(/^[ /]+/u, "").trim() || source.role;
+    const group = groups.find(group => group.provider === name);
+    if (group) group.members = [...group.members, { ...source, part }];
+    else groups.push({ provider: name, members: [{ ...source, part }] });
+  }
+  // Two pages can share a label, such as the surface and sky views of one archive.
+  // Their roles tell them apart; the label alone would print the same name twice.
+  for (const group of groups) {
+    const parts = new Map<string, number>();
+    for (const member of group.members) parts.set(member.part, (parts.get(member.part) ?? 0) + 1);
+    group.members = group.members.map(member => (parts.get(member.part) ?? 0) > 1 ? { ...member, part: member.role } : member);
+  }
+  return groups;
+}
+
 function isSupersededPanorama(href: string) {
   const url = new URL(href);
   return url.hostname.replace(/^www\./u, '') === 'eso.org' &&

@@ -1071,6 +1071,23 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 
 .planet-attribution-separator {
   color: var(--shell-text-muted);
+  /* The comma hugs the provider before it; the footer gap opens the next one. */
+  margin-left: -8px;
+}
+
+/* Sources that share a provider name print it once, then their own parts. The
+   comma inside a group reads tighter than the dot between providers. */
+.planet-attribution-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+.planet-attribution-provider { color: var(--shell-text-secondary); }
+/* The comma hugs the name before it; the group gap then separates the next one. */
+.planet-attribution-group-separator {
+  color: var(--shell-text-muted);
+  margin-left: -4px;
 }
 
 .planet-attribution-link:hover {
