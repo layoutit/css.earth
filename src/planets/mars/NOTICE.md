@@ -29,3 +29,5 @@ This adapter combines prepared material derived from the following sources:
 
 NASA, ESA/Hubble, and USGS names and source credits do not imply endorsement.
 NASA and ESA/Hubble logos are not reused.
+
+Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.

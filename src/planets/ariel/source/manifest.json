@@ -179,6 +179,84 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-ariel-nomenclature-center-pts",
+      "path": "features/ARIEL_nomenclature_center_pts.zip",
+      "expectedBytes": 105258,
+      "expectedSha256": "888421dd560af82e394a36241795dc5a751eca6267cd7b00255bc61424164923",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/ARIEL_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Ariel on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Ariel centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/ARIEL/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "ariel-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1000,
+      "expectedSha256": "c3d77603c5fa77cff3567e76151f8c8d320f2b328f1af08c3dcd16668ee77d73",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "ariel-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1113,
+      "expectedSha256": "cbc9965117b82d23e1e57e7857ae55ea058dba84454d94c7f8b218ad7a369bb2",
+      "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "ariel-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 152,
+      "expectedSha256": "2cf793e4c2668bf456a4aa356ff01d593571943d37a020272c2a68f768c593f8",
+      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -195,8 +273,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1067,
-      "expectedSha256": "27f06730160eb35e1e73917009ae14f1ad9b21de163cf54ed9d115f7a1d2e2df"
+      "expectedBytes": 1319,
+      "expectedSha256": "f03d3eaca0cdf89bfe4a4d121473fa083e23eb55ee1285d3bda118506d6fe286"
     },
     {
       "path": "content/object.json",

@@ -376,6 +376,14 @@
       ],
       "path": "science/geology-2026/Miranda map 1.gdb.zip",
       "url": "https://zenodo.org/api/records/20817533/files/Miranda%20map%201.gdb.zip/content"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/MIRANDA_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MIRANDA_nomenclature_center_pts.zip"
     }
   ]
 }

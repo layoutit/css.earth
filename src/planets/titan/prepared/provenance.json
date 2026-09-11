@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "titan",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8a21afd035585609ade587a4b5b3abd1e7265f07dfaa8635a757e816fe412972"
+    "sha256": "b1fb16b8da82cb5944c125997476beefae06043922b18b957b7045fa2d232c4f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -724,6 +724,67 @@
           }
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "98cd85fa596c81addf6200d057a0074e19d44d96af58ddc2bb43eec809c58347",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "TITAN_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "TITAN_nomenclature_center_pts.dbf",
+          "projection": "TITAN_nomenclature_center_pts.prj",
+          "metadata": "metadata_nomenclature_points_TITAN.xml"
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "titan-features.json",
+        "publicBase": "/scenes/titan/",
+        "target": {
+          "className": "titan-body"
+        },
+        "lensIds": [
+          "normal",
+          "radar",
+          "topography",
+          "interpolated",
+          "coverage-distance",
+          "geology"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 1,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 48,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        }
+      }
     }
   ],
   "sources": [
@@ -789,7 +850,7 @@
       "sha256": "5b17af4c230f5f2434497d77621dbe6503458ac15d54557a946c1e1ca9562cb2",
       "bytes": 73480116,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -839,7 +900,7 @@
       "sha256": "5b44136c10b8541fb59b4b9c26a24c96f91ec3ca0669c263f40acd6e899909ad",
       "bytes": 550734,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -892,7 +953,7 @@
       "sha256": "7abb589cfa572cb6a837d2f814ae7d1b8ccaa8f25edbaf56bd20b2728b6a50af",
       "bytes": 532494,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -945,7 +1006,7 @@
       "sha256": "90efa690c9a7841449e9cae5b100343b6272c8b4dba3731c184efee3f3a02546",
       "bytes": 7422253,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -998,7 +1059,7 @@
       "sha256": "380daf4e4ca7b8856bc69ea4eb228bce5b1c34bee69aac01b315f2b8fc582034",
       "bytes": 7393466,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1051,7 +1112,7 @@
       "sha256": "10b62eed2a4fbe9c6b7746e1124780e43b260276930c0af86fdc7274e10f1c34",
       "bytes": 6386495,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1104,7 +1165,7 @@
       "sha256": "da614365c1a04d766dc8ea13f8c673128e632904b02ad210df7266e4e5f06b8b",
       "bytes": 6529382,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1160,7 +1221,7 @@
       "sha256": "815d7afab1d8e401714a3a141595d161e962ef98421632c77b8fe6002945fb9b",
       "bytes": 192457,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1209,7 +1270,7 @@
       "sha256": "23adb939bf8076fae0fcdf98a7c910fcebe36ffd066cfb3c48cdb0324a8bd770",
       "bytes": 21088532,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1265,7 +1326,7 @@
       "sha256": "d10b9a8b48a7a7c9045b54986412caf03d84319649a436aaefb46c71f8ca2cc6",
       "bytes": 21369517,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1292,7 +1353,80 @@
       "sha256": "43c125f9645ade91773e56b14f8c96c5f9433a6c905436bcaa50c9a50a19037c",
       "bytes": 14736,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "titan-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "sha256": "63e6b5923ec2daa9e0ef87482a458cd9dbb34f3a5b4120d2b4c5eaf3ca5e6eae",
+      "bytes": 1000,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-titan-nomenclature-center-pts",
+      "path": "features/TITAN_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/TITAN_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Titan on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Titan centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/TITAN/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      },
+      "sha256": "f4b6b33c557178e5b6d79c4689020f6bab38d4f9ff13eba81357e389aa3f4ae1",
+      "bytes": 833929,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/TITAN_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/TITAN_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "titan-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "sha256": "30032741c351451501695e88e48dbd885e1881bb1586aa26bef6a82eb088f17f",
+      "bytes": 152,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1329,19 +1463,19 @@
           "url": "/scenes/titan/titan-normal-thumbnail.webp",
           "bytes": 3350,
           "sha256": "b5ca1c63585418f45d7c2885cf8403bb378af9f1a957f8e325cbca06d4670a4d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-normal-surface@2x.webp",
           "bytes": 3697816,
           "sha256": "48ee934a5939311625fb8c6823d2ca0a51968a3f32fcceaa0570b5cac7f9a8e7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-normal-poles@2x.webp",
           "bytes": 131418,
           "sha256": "58bde3bf90508c1101990cc7a01316c6b4eedb63faf75e7d776fefd7c8bcaf39",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1379,25 +1513,25 @@
           "url": "/scenes/titan/titan-topography-thumbnail.webp",
           "bytes": 976,
           "sha256": "d9ec8bcb3d8b4e03fec330baa7b1a4ef86e82214397e2636de5a560c5584f8e3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-topography-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-topography-surface@2x.webp",
           "bytes": 1026758,
           "sha256": "bd4593a4e39fd462e87bb62800895bd43c7dd124c0931945d6c5f3ddf42944f8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-topography-poles@2x.webp",
           "bytes": 146774,
           "sha256": "bc4dc60eb638fa675050cd554a0defc11f3f184bbef3bebd5c61ecd034cc9658",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1435,25 +1569,25 @@
           "url": "/scenes/titan/titan-interpolated-thumbnail.webp",
           "bytes": 4142,
           "sha256": "b0d2ac9fc90349eb08ec41e08694c61143a55e7944a8ce958fad962d8dd5b44e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-interpolated-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-interpolated-surface@2x.webp",
           "bytes": 3126600,
           "sha256": "0f82f3c5bd1a75c7237b919e66fc35e0433f441539f31958b6400c83eebe1860",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-interpolated-poles@2x.webp",
           "bytes": 348004,
           "sha256": "7c5454efbf874194a81f27e4c4452f537893df64878149e9da84a14cdf3e4e9e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1491,25 +1625,25 @@
           "url": "/scenes/titan/titan-coverage-distance-thumbnail.webp",
           "bytes": 6046,
           "sha256": "03b8f86dce22c5c3f9c35b48c6ed30b9b59532db07b0ca6b6c037cd1bf90bffe",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-coverage-distance-legend.webp",
           "bytes": 210,
           "sha256": "b2cc45c008b3baecb631091dc59b6f57df3e0c5d6852754337ff1cb0aba6a5ee",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-coverage-distance-surface@2x.webp",
           "bytes": 3707608,
           "sha256": "d33c99869f88bc7bd40b84114f286ea75f3bb1a2c393db48c56dd0bf479b3682",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-coverage-distance-poles@2x.webp",
           "bytes": 232152,
           "sha256": "6a3f9d35e9fba589141de8a1e3e890994b9bfbd80c95091292a857299715b455",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1542,19 +1676,19 @@
           "url": "/scenes/titan/titan-geology-thumbnail.webp",
           "bytes": 790,
           "sha256": "6572f71554e0b7acbc4fc52d3210acc6ccff400af619178926ef436e1cbed7f5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-geology-surface@2x.webp",
           "bytes": 107002,
           "sha256": "ddd22fd59853e2694d28d248578d9e5943882f0e1265957b251abdb33bae1dae",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-geology-poles@2x.webp",
           "bytes": 7042,
           "sha256": "bd1eda644cb6ca4017b3a078458247c0864f79a75bf7c39f3184507357b82bfa",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1587,19 +1721,19 @@
           "url": "/scenes/titan/titan-radar-thumbnail.webp",
           "bytes": 4840,
           "sha256": "1724a27e59d4503297fb48fc081d249518d1bffdc93c3c1c84e993be15b48f0f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-radar-surface@2x.webp",
           "bytes": 12715084,
           "sha256": "4f3c472ed60fb71a7da3e28ebf59b694ca32a9966d3198cb8ae266d20b45ef4d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-radar-poles@2x.webp",
           "bytes": 533952,
           "sha256": "2a2b28c423272d1436f49d445e0e0c39209fbd4c31f925f3da6bb8809ddbb5f3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1622,8 +1756,42 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5597,
-          "sha256": "6e16fd30a2c2d1e15199920a6d6cb6edec5924eab8d0ba96d8e70c4e6e899c34",
+          "bytes": 5716,
+          "sha256": "b2446dd49b57fe91f88472abfcfe10bba863fa180ffcd8fe9be98c2b0820ac67",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "titan-surface-features-source",
+        "usgs-gazetteer-titan-nomenclature-center-pts",
+        "titan-surface-map-frame"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/titan/titan-features.json",
+          "bytes": 2044586,
+          "sha256": "4d8deca12005d384bfd23d77081c8848815234b16c169cba851597a68085a0f0",
           "verification": "bytes-verified"
         }
       ],

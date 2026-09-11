@@ -1402,7 +1402,7 @@
         "geology-surfaces"
       ],
       "acquisition": "Checked-in derived categorical grid. Reproduce with tools/objects/prepare-geologic-categories.py source/preparation/geology-conversion.json using the pinned original GIS and registration.",
-      "coverage": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+      "coverage": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3\u20133.3\u00b0 (5\u201314 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1412,6 +1412,84 @@
             "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/47"
           }
         ]
+      }
+    },
+    {
+      "id": "usgs-gazetteer-miranda-nomenclature-center-pts",
+      "path": "features/MIRANDA_nomenclature_center_pts.zip",
+      "expectedBytes": 84340,
+      "expectedSha256": "73f639b9b84aa49c1ef399f004ab4e1cc4444e24926c862709d626ff90e5b91e",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MIRANDA_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Miranda on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Miranda centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/MIRANDA/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "miranda-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1009,
+      "expectedSha256": "d83314002237aa5455b78d1d7db03f1904dea4c05c48c7db516c486b6c067bf4",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "miranda-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1142,
+      "expectedSha256": "a9cd3054c658c1826d1479ab3f3596ec21f15ee55565a99a6c785768e2a71315",
+      "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "miranda-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 154,
+      "expectedSha256": "6c31c6d7afd537b7e6e13475b1268b018ac9e6698013c0d48e23a3ef0bb0cfc3",
+      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
       }
     }
   ],
@@ -1429,8 +1507,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 11402,
-      "expectedSha256": "a1b70b01e4044cf710c7e13e6a8ed3577d3f9923722beae328907b9ada6aa84d"
+      "expectedBytes": 11658,
+      "expectedSha256": "b8601ac3d56112bde7186d5ce564699896ee54078a8243e97c0dd368f7a614c4"
     },
     {
       "path": "content/object.json",

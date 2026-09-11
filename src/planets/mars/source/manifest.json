@@ -224,16 +224,16 @@
     {
       "id": "usgs-mola-pseudocolor",
       "path": "lenses/mola-pseudocolor-z3.png",
-      "expectedSha256": "25a0b3ade0d01fc28bb04e452ed8780f023d9ac76092d60d47be81b7f6af9e2d",
+      "expectedSha256": "16b9b65eebe6512bf625fdb82b87a51d92e9a6e74c5d98ebbac3c66251bcac7c",
       "origin": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}",
       "credit": "USGS Astrogeology, NASA Mars Global Surveyor MOLA",
       "license": "NASA/PDS United States government data",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 16 by 8 level-3 TMS snapshot",
+      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 16 by 8 level-3 TMS snapshot Re-stitched on 2026-09-11 with the same tile recipe because the tile server no longer reproduced the earlier pinned bytes; the pinned identity is this refreshed mosaic.",
       "redistribution": "checked prepared government-data mosaic without logos",
       "consumers": [
         "lenses"
       ],
-      "expectedBytes": 18716720,
+      "expectedBytes": 18438219,
       "title": "MOLA global color shaded relief",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_global_color_shaded_relief_463m",
       "capture": {
@@ -260,16 +260,16 @@
     {
       "id": "usgs-themis-ir-day",
       "path": "lenses/themis-ir-day-z3.png",
-      "expectedSha256": "e31b41a6e44547f882b86ca1c8c12efe80a1c4b320d06a7aee41304eb74387d1",
+      "expectedSha256": "374bf7e567c53449cd1b7f8072f9ab64cf7c9863e29dc9a7db1bf8c1e2b3127c",
       "origin": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}",
       "credit": "USGS Astrogeology, Arizona State University, NASA Mars Odyssey THEMIS",
       "license": "NASA/PDS United States government data",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 14 by 7 level-3 TMS snapshot",
+      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 14 by 7 level-3 TMS snapshot Re-stitched on 2026-09-11 with the same tile recipe because the tile server no longer reproduced the earlier pinned bytes; the pinned identity is this refreshed mosaic.",
       "redistribution": "checked prepared government-data mosaic without logos",
       "consumers": [
         "lenses"
       ],
-      "expectedBytes": 7267744,
+      "expectedBytes": 8031340,
       "title": "THEMIS daytime infrared mosaic",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_odyssey_themis_ir_day_global_mosaic_100m_v12",
       "capture": {
@@ -514,6 +514,84 @@
         "kind": "local",
         "reason": "Project-recorded measurements of Google Maps Sun presentation. The measurement file records the observed route and date; the referenced Sun image is a separate input."
       }
+    },
+    {
+      "id": "usgs-gazetteer-mars-nomenclature-center-pts",
+      "path": "features/MARS_nomenclature_center_pts.zip",
+      "expectedBytes": 5413387,
+      "expectedSha256": "58136a4ad15b287d1a01058d659974b44dfc67a65f2a53569d7654987d308e54",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MARS_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Mars on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Mars centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/MARS/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "mars-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 996,
+      "expectedSha256": "069f3952e2409ba3fd4e0f2fa496a4a89de4a916b56a79ece7a3a61d83530f24",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "mars-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1121,
+      "expectedSha256": "ba5861a3d68659b0f35174b97842558585f36d4c87d5bf611d74dfd51e41246b",
+      "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "mars-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 151,
+      "expectedSha256": "395ac1d7241546d565cf84ca7b7a103454faaf9cea88270afb940057ab3029c3",
+      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -576,8 +654,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 4757,
-      "expectedSha256": "a84ca43388d33a4db02ef6bc983deb6d60b48e9aab83f69420e723b05e7a3790"
+      "expectedBytes": 5007,
+      "expectedSha256": "746c72762e009ef03813a10f2835473d2dcec9caecdc02421e569582ebbc649f"
     },
     {
       "path": "preparation/material-delivery.json",

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "mars",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ea462cb51fc8b1618f5577766667ea4ad428413964ad2e2e98b80734034a7a93"
+    "sha256": "07772288c943a31eb459781b532e5a4c63be354439ea768a9124fba612976ed8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -628,6 +628,64 @@
           }
         ]
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "ba5861a3d68659b0f35174b97842558585f36d4c87d5bf611d74dfd51e41246b",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "MARS_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "MARS_nomenclature_center_pts.dbf",
+          "projection": "MARS_nomenclature_center_pts.prj",
+          "metadata": "metadata_nomenclature_points_MARS.xml"
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 180,
+        "output": "mars-features.json",
+        "publicBase": "/scenes/mars/",
+        "target": {
+          "className": "mars-body"
+        },
+        "lensIds": [
+          "normal",
+          "elevation",
+          "thermal"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 1,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 48,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        }
+      }
     }
   ],
   "sources": [
@@ -663,7 +721,7 @@
       "sha256": "fdfcd335559c3dc67052b7e8a9565d850e336ac0d1f3ea7f5eb7826ffb44ecb2",
       "bytes": 36708552,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -681,7 +739,7 @@
       "origin": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}",
       "credit": "USGS Astrogeology, NASA Mars Global Surveyor MOLA",
       "license": "NASA/PDS United States government data",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 16 by 8 level-3 TMS snapshot",
+      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 16 by 8 level-3 TMS snapshot Re-stitched on 2026-09-11 with the same tile recipe because the tile server no longer reproduced the earlier pinned bytes; the pinned identity is this refreshed mosaic.",
       "redistribution": "checked prepared government-data mosaic without logos",
       "title": "MOLA global color shaded relief",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_global_color_shaded_relief_463m",
@@ -705,10 +763,10 @@
           }
         ]
       },
-      "sha256": "25a0b3ade0d01fc28bb04e452ed8780f023d9ac76092d60d47be81b7f6af9e2d",
-      "bytes": 18716720,
+      "sha256": "16b9b65eebe6512bf625fdb82b87a51d92e9a6e74c5d98ebbac3c66251bcac7c",
+      "bytes": 18438219,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "tile-mosaic",
         "groups": [
@@ -744,7 +802,7 @@
       "sha256": "a21e86fe560a46396cea1568b44a757be8b258b9ef40277b5261ef11c380d768",
       "bytes": 622,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -764,7 +822,7 @@
       "sha256": "672ce4a68c97c9d005f3721aad971b8e0b2bdb24eca1d6d863e14ed08bf41acb",
       "bytes": 918,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -775,7 +833,7 @@
       "origin": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}",
       "credit": "USGS Astrogeology, Arizona State University, NASA Mars Odyssey THEMIS",
       "license": "NASA/PDS United States government data",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 14 by 7 level-3 TMS snapshot",
+      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 14 by 7 level-3 TMS snapshot Re-stitched on 2026-09-11 with the same tile recipe because the tile server no longer reproduced the earlier pinned bytes; the pinned identity is this refreshed mosaic.",
       "redistribution": "checked prepared government-data mosaic without logos",
       "title": "THEMIS daytime infrared mosaic",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_odyssey_themis_ir_day_global_mosaic_100m_v12",
@@ -799,10 +857,10 @@
           }
         ]
       },
-      "sha256": "e31b41a6e44547f882b86ca1c8c12efe80a1c4b320d06a7aee41304eb74387d1",
-      "bytes": 7267744,
+      "sha256": "374bf7e567c53449cd1b7f8072f9ab64cf7c9863e29dc9a7db1bf8c1e2b3127c",
+      "bytes": 8031340,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "tile-mosaic",
         "groups": [
@@ -838,7 +896,7 @@
       "sha256": "3157f4357e1c6e128d6feaac4e618bed81012fb1584eb2b829f65409de106cc8",
       "bytes": 13979,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -864,7 +922,7 @@
       "sha256": "da649c1b783a9390697db2f49a25667b518b5c923ddb7ac426037c97c08f8dde",
       "bytes": 11093,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "request-download",
         "groups": [
@@ -907,7 +965,7 @@
       "dependencies": [
         "nasa-psg-mars-configuration"
       ],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "request-download",
         "groups": [
@@ -922,6 +980,79 @@
         },
         "fileSource": "atmosphere/psg-mars-20260829.cfg"
       },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mars-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "sha256": "069f3952e2409ba3fd4e0f2fa496a4a89de4a916b56a79ece7a3a61d83530f24",
+      "bytes": 996,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-mars-nomenclature-center-pts",
+      "path": "features/MARS_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MARS_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Mars on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Mars centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/MARS/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      },
+      "sha256": "58136a4ad15b287d1a01058d659974b44dfc67a65f2a53569d7654987d308e54",
+      "bytes": 5413387,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/MARS_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MARS_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mars-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "sha256": "395ac1d7241546d565cf84ca7b7a103454faaf9cea88270afb940057ab3029c3",
+      "bytes": 151,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
       "verificationOperations": []
     }
   ],
@@ -950,31 +1081,31 @@
           "url": "/scenes/mars/mars-lens-normal.webp",
           "bytes": 1468,
           "sha256": "570cefe5ff8b7a0970239c632112ca53043926be6b9e13b40b56dd39e9418b05",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-surface.webp",
           "bytes": 539510,
           "sha256": "86dccb0cb024a6336a9d34b0c34e30280137edfc95a0bb99441d108970bd8a6d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-surface@2x.webp",
           "bytes": 1946518,
           "sha256": "d405ce2aff269634726df4024ac0f3c43826c1350d2a18b71d8d03baf3331fcc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-poles.webp",
           "bytes": 15934,
           "sha256": "4fe45fe781cabdafa707a5f134a661563c7385be3c657e73b9ac2308619c97e1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-poles@2x.webp",
           "bytes": 23740,
           "sha256": "95b778864eaef15cd51c93c9a6929146f16cc4f318ad4224dd6b0e7f991d7f0d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1003,33 +1134,33 @@
       "outputs": [
         {
           "url": "/scenes/mars/mars-lens-elevation-thumbnail.webp",
-          "bytes": 2810,
-          "sha256": "80b76415381db53aadb5795558e911811f09607fccc4968861b1fe35a15fb4ab",
-          "verification": "asset-manifest-pin"
+          "bytes": 3500,
+          "sha256": "1048c87be3613aa5da270b23094b17cc6cd42b43480cc20572405c5999c71d3e",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-lens-elevation.webp",
-          "bytes": 1185898,
-          "sha256": "6b24df16babf88bd8ac9e40707ad5d8ee9f41bec6dc61a9b54dc2436f06b6de4",
-          "verification": "asset-manifest-pin"
+          "bytes": 1183000,
+          "sha256": "683e9d0687acae7cd2f388a7789c8ec811f96ad6d936a20b73f1c47e09fce34f",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-lens-elevation@2x.webp",
-          "bytes": 5040992,
-          "sha256": "5a217ac3f501cff189b2016a6a5dd0afe615d0171b5defdca880c1b9a1b098db",
-          "verification": "asset-manifest-pin"
+          "bytes": 4853782,
+          "sha256": "bb625a3f2d4d5717fd66f98043e82e877afe9b4fa49d5790cc5dd13c46ecba46",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-lens-elevation-poles.webp",
-          "bytes": 14958,
-          "sha256": "6d38f48a53f9b6867cc79662424ba6912711d0252349c064df635d6161eeebf8",
-          "verification": "asset-manifest-pin"
+          "bytes": 11726,
+          "sha256": "968f2598fc0ea77adca85e3d18316e16e81b7e9cbd23b215f21efdc2b9ec319a",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-lens-elevation-poles@2x.webp",
-          "bytes": 27420,
-          "sha256": "3b0b553c409715f852d7df689b4263cdcf6fb895018c700b7a630308294ea9b6",
-          "verification": "asset-manifest-pin"
+          "bytes": 15948,
+          "sha256": "1622f478a04d6bb91e71e167fc28dc87693208f57db9552da032961c6b635e8b",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1058,33 +1189,33 @@
       "outputs": [
         {
           "url": "/scenes/mars/mars-lens-thermal-thumbnail.webp",
-          "bytes": 418,
-          "sha256": "df00772596b8afe26c67e8e65dbf5a15535d9c27e9bb75104c1043eb8f5cee75",
-          "verification": "asset-manifest-pin"
+          "bytes": 438,
+          "sha256": "b76dba9e8251c494bb43c30e2c603b80ee3f67c23f8fbff7c76f381427dca502",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-lens-thermal.webp",
-          "bytes": 718016,
-          "sha256": "88bc4f75a9f0a6f30624e9dedd24c5b5f9bb79b7cae15de9a064b3d1ddfd680c",
-          "verification": "asset-manifest-pin"
+          "bytes": 931718,
+          "sha256": "d35f7e00223f39811b3afc5a7746d9b989110fbd730e520048df2fb61c1e4bd7",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-lens-thermal@2x.webp",
-          "bytes": 3001650,
-          "sha256": "ef8f980f1938c0b6279874c69b5ba1bb74409ab23fa948281a16d733b52d85dd",
-          "verification": "asset-manifest-pin"
+          "bytes": 3410846,
+          "sha256": "201aceee7d5a21801b270ab8b5a17fa90d7139dcad47c883858568e60fcbfb92",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-lens-thermal-poles.webp",
-          "bytes": 10426,
-          "sha256": "98f4a1d8c7168db97782c9712f1c170a7a1604215dd844f1393d5a9a61b0e147",
-          "verification": "asset-manifest-pin"
+          "bytes": 9676,
+          "sha256": "1b569d80df6e1dcf5668fb2bc34eb03041d1344537e3061a89bb864971ea3bfc",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mars/mars-lens-thermal-poles@2x.webp",
-          "bytes": 13724,
-          "sha256": "444453a60fcf427fba0d0101cc09420e7c80d783daee41fcb72ce846791593b0",
-          "verification": "asset-manifest-pin"
+          "bytes": 11598,
+          "sha256": "f6327879e24d82f79adfe147fb5e9e80b934d9a0db1e6e7dcf05dc771e73c7d6",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1107,8 +1238,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8695,
-          "sha256": "7f63ab459dd9b77c45beecb56107ec902cb9d5fcf3d645d622085093a18af823",
+          "bytes": 8816,
+          "sha256": "7de769d855925aeb14d3a77ff1750d0cadcfe5ef10f3ab78d879cc9efe994bc7",
           "verification": "bytes-verified"
         }
       ],
@@ -1137,7 +1268,7 @@
           "url": "/scenes/mars/mars-reflectance-spectrum.svg",
           "bytes": 5843,
           "sha256": "6140a667a2b109fbfbb8907bf7e058607e98c464688031d033d9d3187ed35811",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1165,7 +1296,7 @@
           "url": "/scenes/mars/mars-temperature-pressure-profile.svg",
           "bytes": 2423,
           "sha256": "3b4ae81fbfe5f6ffc2ab534b00a869387cad3376e1c3a3fa2a5e56c3204a875d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1192,10 +1323,44 @@
           "url": "/scenes/mars/mars-photometric-phase-curve.svg",
           "bytes": 4492,
           "sha256": "46b2aacc1daa5c632189cce9d04879611096e471c652410ed30a68c8c4538752",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "authored-recipe"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 180,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "mars-surface-features-source",
+        "usgs-gazetteer-mars-nomenclature-center-pts",
+        "mars-surface-map-frame"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/mars/mars-features.json",
+          "bytes": 5646766,
+          "sha256": "6edc23cbc3a483e1872b8644223aa33daae8e4dd3fe038a4247df0e0cb908c18",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
     },
     {
       "id": "preview:normal",
@@ -1239,8 +1404,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/elevation.webp",
-          "bytes": 73946,
-          "sha256": "2ecb75763a99d406c7c3d6c9a603ab24374796be3734487eb4ec15d3fb8bbdc2",
+          "bytes": 74850,
+          "sha256": "2bede6ca722c3b281683d7572916e21bb72c7ad20541b30da4a278cd2ae6df77",
           "verification": "bytes-verified"
         }
       ]
@@ -1263,8 +1428,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/thermal.webp",
-          "bytes": 35544,
-          "sha256": "0829341175f80929f9a8566d3fb2c4f22d92029624e0fa838aeb89f40f3bf6f5",
+          "bytes": 49046,
+          "sha256": "06f568d53de950d898841a243f140ae2941fbbf524673d0c67821f8628bacb9f",
           "verification": "bytes-verified"
         }
       ]

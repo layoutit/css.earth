@@ -14,6 +14,8 @@ Kachina Chasmata's Gazetteer centre has mosaic imagery but no valid DEM sample, 
 
 ## Known problems
 
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Ariel (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge was fixed by drawing Gazetteer rims under both edge hypotheses and keeping the one where Kachina Chasmata and the named craters on the prepared minimap (±180° cylindrical cube) coincide with the imagery.
+
 Only source-valid samples are interpolated. ISIS special pixels become the shared neutral grid. Low intensity is not by itself a missing-data rule. The northern region unseen by Voyager is not reconstructed, mirrored, or filled with another body's texture. The paper discusses faint Uranus-shine observations of northern terrain; their existence is not treated as global mapped coverage.
 
 The DEM contains sparse curved limb-profile tracks outside the denser image-derived terrain coverage; those are real source-valid samples, not continuous regional coverage. They remain visible without filling their surroundings.

@@ -11,7 +11,7 @@ import { prepareObjectContentAssets } from './content/prepare.js';
 import { loadGeometryAdapters } from './geometry-adapters.js';
 import { prepareRuntimeManifest } from './operations.js';
 import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.js';
-import { prepareSurfaceFeatures } from './surface-features/index.js';
+import { attachSurfaceFeatures, writeFeatureContent } from './surface-features/attach.js';
 
 export interface AuthoredPreparationContext { readonly objectDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string; readonly write?: boolean; }
 export interface VerifiedSource { readonly reference: SourceReference; readonly path: string; readonly value: unknown; }
@@ -51,30 +51,6 @@ async function writePreparedObject(id: string, definition: Record<string, unknow
   const write = module.writeObjectJson;
   if (typeof write !== 'function') throw new TypeError('Prepared object writer is missing.');
   await (write as (objectId: string, runtime: Record<string, unknown>) => Promise<unknown>)(id, definition);
-}
-
-/** Prepare the optional named-feature catalogue for a lane whose definition carries the shared camera plan and node tree.
- * Each lane names its mesh radius in raw units; when the definition carries a prepared hit mesh, its vertices must agree.
- * Returns the definition with the `features` plan attached and records the shell's search rows in the prepared content. */
-async function attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition, meshRadiusUnits }: {
-  descriptor: AuthoredObjectDescriptor; sources: ReadonlyMap<string, VerifiedSource>; sourceDirectory: string; publicDirectory: string; outputDirectory: string; definition: Record<string, unknown>; meshRadiusUnits: number;
-}): Promise<Record<string, unknown>> {
-  const featuresRecipe = descriptor.recipe.features;
-  if (!featuresRecipe) return definition;
-  if (!Number.isFinite(meshRadiusUnits) || !(meshRadiusUnits > 0)) throw new TypeError('Surface features need the prepared mesh radius.');
-  const hit = definition.surfaceHit as { triangles?: readonly (readonly (readonly number[])[])[] } | undefined;
-  if (hit?.triangles?.length) {
-    const vertexRadius = Math.max(...hit.triangles.flat().map(point => Math.hypot(point[0]!, point[1]!, point[2]!)));
-    if (Math.abs(vertexRadius - meshRadiusUnits) > 0.01 * meshRadiusUnits) throw new TypeError(`Surface feature mesh radius ${meshRadiusUnits} disagrees with the prepared hit mesh (${vertexRadius}).`);
-  }
-  const features = await prepareSurfaceFeatures({ objectId: descriptor.id, sourceDirectory, publicDirectory, outputDirectory,
-    config: required(sources, featuresRecipe.source).value, maxEntries: featuresRecipe.maxEntries, radiusKm: descriptor.recipe.shape.radiusKm, meshRadiusUnits,
-    tree: definition.tree as Parameters<typeof prepareSurfaceFeatures>[0]['tree'],
-    declaredLensIds: descriptor.recipe.surfaces.flatMap(surface => surface.lenses.map(lens => lens.id)) });
-  // The shell renders retained search rows for named features when the panel content declares them.
-  const contentPath = resolve(outputDirectory, 'content.json'), contentDocument = record(JSON.parse(await readFile(contentPath, 'utf8')), 'prepared content');
-  await writeFile(contentPath, `${JSON.stringify({ ...contentDocument, features: { searchLabel: 'Named features', description: `${features.plan.catalog.count.toLocaleString('en')} IAU names from the Gazetteer of Planetary Nomenclature` } })}\n`);
-  return { ...definition, features: features.plan };
 }
 
 /** Verify authored source pins, then prepare each available generic capability lane. */
@@ -128,7 +104,6 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   // Nomenclature labels ride the generic sphere lane; other lanes declare no mesh anchor frame yet.
   const genericLaneOnly = () => { if (descriptor.recipe.features) throw new TypeError('Surface features are prepared by the generic authored lane only.'); };
   if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-static-surface-geometry@1') {
-    genericLaneOnly();
     const { prepareStaticSurfaceObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/static-surface/index.mts')).href) as typeof import('./static-surface/index.mts');
     return prepareStaticSurfaceObject({ objectDirectory, publicDirectory, outputDirectory, write });
   }
@@ -173,12 +148,12 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const { prepareTerrestrialLayers } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/terrestrial-layers/index.mts')).href) as typeof import('./terrestrial-layers/index.mts');
     const terrestrialPrepared = await prepareTerrestrialLayers({ sourceDirectory, publicDirectory, outputDirectory,
       config: terrestrial, prepareContent: prepareObjectContentAssets });
-    const terrestrialCamera = record((terrestrialPrepared.definition as unknown as Record<string, unknown>).camera, 'terrestrial camera');
-    const terrestrialRuntime = await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory,
-      definition: terrestrialPrepared.definition as unknown as Record<string, unknown>,
-      meshRadiusUnits: Number(terrestrialCamera.logicalBodyDiameter) / 2 / Number(terrestrialCamera.sceneScale) });
-    if ((terrestrialRuntime as unknown) !== (terrestrialPrepared.definition as unknown)) await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(terrestrialRuntime)}\n`);
-    const prepared = { ...terrestrialPrepared, definition: terrestrialRuntime as typeof terrestrialPrepared.definition };
+    const terrestrialAttached = await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: terrestrialPrepared.definition as unknown as Record<string, unknown> });
+    if (terrestrialAttached.features) {
+      await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(terrestrialAttached.definition)}\n`);
+      await writeFeatureContent(outputDirectory, terrestrialAttached.features);
+    }
+    const prepared = { ...terrestrialPrepared, definition: terrestrialAttached.definition as typeof terrestrialPrepared.definition };
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
       manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),
       allowPreparationArtifacts: true,
@@ -196,9 +171,9 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   validateCapabilityComposition(descriptor, rasterConfig as unknown as Record<string, unknown>, geometryConfig as unknown as Record<string, unknown>, solarSource, content.lenses);
   const presentation = parsePresentationProfile(required(sources, 'presentation').value);
   const definition = await prepareCssPresentation({ namespace: presentation.namespace, mode: presentation.mode, scene: scene as unknown as PresentationInputs['scene'], assets: raster as unknown as PresentationInputs['assets'], lenses: content.lenses as unknown as PresentationInputs['lenses'], sun: celestial.sun as unknown as PresentationInputs['sun'], markers: celestial.markers, solarSource: solarSource as unknown as PresentationInputs['solarSource'], controls: content.controls as unknown as PresentationInputs['controls'] });
-  const runtime = await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory,
-    definition: definition as unknown as Record<string, unknown>, meshRadiusUnits: solarSource.bodyRadiusUnits / (definition as unknown as { camera: { sceneScale: number } }).camera.sceneScale });
-  const features = (runtime as unknown) !== (definition as unknown);
+  const attached = await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: definition as unknown as Record<string, unknown> });
+  const runtime = attached.definition, features = attached.features !== null;
+  if (attached.features) await writeFeatureContent(outputDirectory, attached.features);
   await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(runtime)}\n`);
   await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
     manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),

@@ -1,0 +1,48 @@
+{
+  "id": "source-umbriel-usgs-gazetteer-nomenclature-center-pts",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Gazetteer of Planetary Nomenclature · Umbriel centre points",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://planetarynames.wr.usgs.gov/Page/UMBRIEL/target",
+      "label": "Source"
+    },
+    {
+      "role": "archive",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/UMBRIEL_nomenclature_center_pts.zip",
+      "label": "Shapefile archive"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/umbriel/source/features/manifest.json",
+      "revision": "242d916803ea0526ad7d04fc2f4fd9bf6408a9cf",
+      "sha256": "ce6ec0240a2da3b25cdf0b31d1e2478974c78e7d3c2b8e76c2f89d4130cb8829",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature.",
+      "scope": "Feature names, centres, diameters, extents and name origins.",
+      "evidence": "metadata_nomenclature_points_UMBRIEL.xml inside the pinned archive (datacred)."
+    },
+    {
+      "kind": "rights",
+      "text": "Public domain United States Government work.",
+      "scope": "The archived shapefile export and its metadata.",
+      "evidence": "metadata_nomenclature_points_UMBRIEL.xml inside the pinned archive (useconst: Public domain.)."
+    },
+    {
+      "kind": "limitation",
+      "text": "Centre points, diameters and latitude–longitude extents only; the Gazetteer publishes no feature outlines, and the export is regenerated weekly.",
+      "scope": "Prepared labels and outlines.",
+      "evidence": "planetarynames.wr.usgs.gov/GIS_Downloads lists centre-point files only; the archive metadata declares weekly updates."
+    }
+  ]
+}
