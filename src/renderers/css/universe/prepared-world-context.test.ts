@@ -404,6 +404,24 @@ test('camera publication consumes interaction changes without polling retained D
   expect(hoverReads).toBe(3); expect(focusReads).toBe(3);
 });
 
+function expectAlignedContextOrigin(actual: readonly number[], expected: readonly number[], label: string): void {
+  expect(actual).toHaveLength(3); expect(expected).toHaveLength(3);
+  // Match preparation's positionToleranceM policy: saved frames and freshly
+  // reconstructed matrix products differ by millimetres across V8 platforms.
+  const toleranceM = Math.max(.001, 8 * Number.EPSILON * Math.max(...actual.map(Math.abs), ...expected.map(Math.abs)));
+  const separationM = Math.hypot(...actual.map((value, axis) => value - required(expected[axis])));
+  expect(separationM, label).toBeLessThanOrEqual(toleranceM);
+}
+
+test('context alignment accepts observed Linux roundoff but rejects detached origins', () => {
+  const saved = [4464323069020.515, 219850064405.67654, -21150265923.520695] as const;
+  const linux = [4464323069020.515, 219850064405.67706, -21150265923.520573] as const;
+  expect(() => expectAlignedContextOrigin(linux, saved, 'observed Neptune reconstruction')).not.toThrow();
+  expect(() => expectAlignedContextOrigin([linux[0] + 1, linux[1], linux[2]], saved, 'one metre drift')).toThrow();
+  expect(() => expectAlignedContextOrigin([0, .0005, 0], [0, 0, 0], 'near-origin roundoff')).not.toThrow();
+  expect(() => expectAlignedContextOrigin([0, .002, 0], [0, 0, 0], 'near-origin displacement')).toThrow();
+});
+
 test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
   const { readCatalog } = await import('../../../../tools/prepare-catalog.mts');
@@ -413,7 +431,7 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
   for (const body of parsePreparedWorldContext(source).bodies) {
     const frame = OBJECTS.find(object => object.id === body.id)!.worldFrame!;
     expect(body.radiusM, `${body.id} context must match the selectable detail radius`).toBe(frame.bodyRadiusM);
-    expect(body.positionM, `${body.id} context must match the selectable detail origin`).toEqual(frame.originM);
+    expectAlignedContextOrigin(body.positionM, frame.originM, `${body.id} context must match the selectable detail origin`);
     expect(body.orbit?.bounds, `${body.id} orbit bounds are owned by preparation`).toBeDefined();
     expect(body.orbit?.activeChords).toEqual(body.orbit?.trail.flatMap((weight, index) => weight > 0 ? [index] : []));
     expect([...(body.orbit?.extentChords ?? [])].sort((a, b) => a - b)).toEqual(body.orbit?.activeChords);
