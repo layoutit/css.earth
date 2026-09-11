@@ -9,6 +9,8 @@ import { inferEmission, projectEmission, type InferenceGrid, type SymmetryPrior 
 import { bakeMasterVolumeSlices } from '../reconstruction/master-slices.js';
 import { compileCssVolume } from '../../../../src/renderers/css/preparation/volume.js';
 import { validatePreparedCssVolume } from '../../../../src/renderers/css/volume/validation.js';
+import { geometricDepth, conditionEmission, type ShapePrior } from '../reconstruction/emission-inference/shape-prior.js';
+import { nativeStarless, type NativeRemoval } from '../reconstruction/emission-inference/native-source.js';
 
 interface Recipe {
   schema: 'cssearth-emission-inference@1'; id: string;
@@ -17,6 +19,9 @@ interface Recipe {
   pointMasks: { x: number; y: number; radius: number }[];
   grid: InferenceGrid; prior: SymmetryPrior; tau: number; iterations: number;
   blackLevel: number; displayExposure: number; slices: number; assumptions: string[];
+  nativeRemoval?: NativeRemoval;
+  shapePrior?: ShapePrior;
+  modelReference?: { paper: string };
 }
 const hash = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
 const json = async (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
@@ -42,7 +47,9 @@ if (hash(source) !== recipe.source.sha256) throw new Error('Cached source hash d
 const native = await sharp(source).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
 if (native.info.width !== recipe.source.width || native.info.height !== recipe.source.height || native.info.channels !== 3)
   throw new Error('Source dimensions differ from recipe.');
-const diffuse = Buffer.from(native.data);
+const removed = recipe.nativeRemoval ? await nativeStarless(source, [recipe.source.width, recipe.source.height], recipe.nativeRemoval) : undefined;
+const diffuse = Buffer.from(removed?.pixels ?? native.data);
+if (recipe.nativeRemoval && recipe.pointMasks.length) throw new TypeError('Do not remove point sources again after native NOX separation.');
 // Explicitly recorded point masks, bounded by nearby light. Not a detector or a
 // replacement for NOX: this baseline preserves bright extended nebular knots.
 for (const mask of recipe.pointMasks) {
@@ -70,7 +77,8 @@ const resized = await sharp(diffuse, { raw: native.info }).extract(recipe.crop)
 const input = Array.from({ length: 3 }, (_, c) => Float32Array.from({ length: pixels }, (_, p) =>
   Math.max(0, (resized[p * 3 + c]! / 255 - recipe.blackLevel) / (1 - recipe.blackLevel))));
 const start = performance.now();
-const results = input.map((image, channel) => inferEmission({ grid, image, prior: recipe.prior,
+const depthPrior = recipe.shapePrior ? geometricDepth(grid, recipe.prior.center, recipe.shapePrior) : null;
+const results = input.map((image, channel) => depthPrior ? conditionEmission(image, depthPrior, grid) : inferEmission({ grid, image, prior: recipe.prior,
   tau: recipe.tau, iterations: recipe.iterations, onIteration(report) {
     if (report.iteration % 20 === 0) console.log(`EMISSION_FIT RGB${channel + 1} ${report.iteration}/${recipe.iterations} error=${report.relativeProjectionError.toFixed(4)}`);
   } }));
@@ -93,11 +101,15 @@ await sharp(diffuse, { raw: native.info }).extract(recipe.crop).png().toFile(res
 const voxelSize = 10 / grid.width;
 const bounds = { min: [-grid.width * voxelSize / 2, -grid.height * voxelSize / 2, -grid.depth * voxelSize / 2] as [number, number, number],
   max: [grid.width * voxelSize / 2, grid.height * voxelSize / 2, grid.depth * voxelSize / 2] as [number, number, number] };
-const provenance = { method: 'Wenger, Lorenz & Magnor 2013, equations 1–7; independent TypeScript implementation',
-  doi: 'https://doi.org/10.1111/cgf.12216', recipePath, recipeSha256: hash(recipeBytes), recipe,
+const provenance = { method: depthPrior ? 'Image-conditioned emission in an authored geometric prior; no image-only depth inference' : 'Wenger, Lorenz & Magnor 2013, equations 1–7; independent TypeScript implementation',
+  doi: depthPrior ? recipe.modelReference?.paper : 'https://doi.org/10.1111/cgf.12216', recipePath, recipeSha256: hash(recipeBytes), recipe,
   implementation: await Promise.all(['labs/nebula/src/reconstruction/emission-inference/solver.ts',
     'labs/nebula/src/cli/prepare-emission.ts', 'labs/nebula/src/reconstruction/master-slices.ts',
-    'src/renderers/css/preparation/volume.ts'].map(async path => ({ path, sha256: hash(await readFile(path)) }))),
+    'src/renderers/css/preparation/volume.ts', 'labs/nebula/src/reconstruction/emission-inference/shape-prior.ts',
+    'labs/nebula/src/reconstruction/emission-inference/native-source.ts'].map(async path => ({ path, sha256: hash(await readFile(path)) }))),
+  nativeRemoval: removed?.provenance,
+  ...(depthPrior ? { uncoveredSignalFractions: results.map(result => 'uncoveredSignalFraction' in result ? result.uncoveredSignalFraction : 0),
+    projectionCaveat: 'Agreement on supported rays is imposed by normalization and does not validate depth geometry.' } : {}),
   coordinateMeaning: 'Image x right, y up in display; dimensionless units. No measured gas density, scale, distance or sky registration.',
   reports: results.map(result => result.report) };
 const preparedDirectory = resolve(staging, 'prepared');

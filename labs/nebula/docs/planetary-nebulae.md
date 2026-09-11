@@ -22,6 +22,10 @@ The first run uses a small outreach image and explicit compact-source masks to t
 
 ## After the first visual decision
 
+The active follow-up is the [nebula compiler structure inspector](nebula-compiler.md). It preserves and decomposes the full observed field before any new depth assignment. It does not yet replace the failed Helix volumes below.
+
+Helix is now an additional stress test: [observation, registration, recipes and comparison results](../models/helix/README.md). The one-axis method fits its front but produces a box-like side volume. A separately authored disk/ring prior produces curved components but fails on detailed structure and outer-emission coverage. Both remain visible and unaccepted. This is a concrete example of why good reprojection alone cannot establish 3D quality.
+
 1. Decide whether the reconstructed side structure is useful. Keep an initial baseline and at most two controlled adjustments; compare identical camera poses and fixed exposure.
 2. Acquire a larger, unannotated observation with documented band mapping. Reuse the existing native NOX pipeline; check that compact nebular knots and the central engine are not mistaken for foreground stars. Pin the selected diffuse image before inference.
 3. Constrain axis inclination and physical extent with independent morphological/kinematic literature. An image alone does not supply this information. Record alternative priors as alternatives.

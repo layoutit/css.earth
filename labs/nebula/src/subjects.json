@@ -50,13 +50,53 @@
   },
   {
     "id": "m2-9-inferred",
-    "emissionExperiment": { "directory": ".local/nebula-lab/planetary/m2-9-inferred" },
+    "emissionExperiment": {
+      "directory": ".local/nebula-lab/planetary/m2-9-inferred"
+    },
     "name": "M2–9 · inferred emission",
     "directory": ".local/nebula-lab/planetary/m2-9-inferred",
     "imagePath": ".local/nebula-lab/planetary/m2-9-inferred/input.png",
     "sourcePageUrl": "https://apod.nasa.gov/apod/ap040201.html",
     "credit": "Hubble: Balick, Icke, Mellema & NASA. Independent implementation of Wenger, Lorenz & Magnor (2013).",
     "modelNote": "Experimental emission inferred from one image and approximate axial symmetry. Unmeasured depth and scale; four point sources masked. Not gas mass density.",
+    "framingRadiusUnits": 5,
+    "hasDetail": false
+  },
+  {
+    "id": "helix-single-axis",
+    "name": "Helix · one-axis fit",
+    "directory": ".local/nebula-lab/planetary/helix-single-axis",
+    "imagePath": ".local/nebula-lab/planetary/helix-single-axis/input.png",
+    "emissionExperiment": {
+      "directory": ".local/nebula-lab/planetary/helix-single-axis",
+      "structureDirectory": ".local/nebula-lab/planetary/helix-structures",
+      "modeled": false,
+      "methodUrl": "https://doi.org/10.1111/cgf.12216",
+      "statusNote": "Control: front fits; side geometry fails."
+    },
+    "sourcePageUrl": "https://esahubble.org/images/opo0432b/",
+    "credit": "NASA, ESA, C.R. O'Dell (Vanderbilt University), and M. Meixner, P. McCullough, and G. Bacon (Space Telescope Science Institute).",
+    "modelNote": "Experimental relative emission: geometry and depths remain assumptions. Hubble/CTIO native image, NOX separation.",
+    "comparisonGroup": "helix-emission-comparison",
+    "framingRadiusUnits": 5,
+    "hasDetail": false
+  },
+  {
+    "id": "helix-model-prior",
+    "name": "Helix · disk/ring prior",
+    "directory": ".local/nebula-lab/planetary/helix-model-prior",
+    "imagePath": ".local/nebula-lab/planetary/helix-model-prior/input.png",
+    "emissionExperiment": {
+      "directory": ".local/nebula-lab/planetary/helix-model-prior",
+      "structureDirectory": ".local/nebula-lab/planetary/helix-structures",
+      "modeled": true,
+      "methodUrl": "https://doi.org/10.1086/424621",
+      "statusNote": "Rough prior: outer emission omitted; side detail unresolved."
+    },
+    "sourcePageUrl": "https://esahubble.org/images/opo0432b/",
+    "credit": "NASA, ESA, C.R. O'Dell (Vanderbilt University), and M. Meixner, P. McCullough, and G. Bacon (Space Telescope Science Institute).",
+    "modelNote": "Experimental relative emission: geometry and depths remain assumptions. Hubble/CTIO native image, NOX separation.",
+    "comparisonGroup": "helix-emission-comparison",
     "framingRadiusUnits": 5,
     "hasDetail": false
   }

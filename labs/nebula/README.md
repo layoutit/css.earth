@@ -1,6 +1,8 @@
 # Nebula Lab
 
-Local React tooling for aligning photographs, removing stars and comparing baked 3D clouds. The retained PolyCSS renderer stays in plain TypeScript. The lab is separate from the production website; current objects are **LMC and SMC**, plus the [M2–9 image-to-volume experiment](models/m2-9/README.md). The experiment has its own explicit preparation command and inferred-depth assumptions.
+Local React tooling for aligning photographs, removing stars and comparing baked 3D clouds. The retained PolyCSS renderer stays in plain TypeScript. The lab is separate from the production website; current objects are **LMC and SMC**, plus the [M2–9](models/m2-9/README.md) and [Helix](models/helix/README.md) image-to-volume experiments. The experiments have explicit preparation commands and unmeasured-depth assumptions.
+
+The [Helix structure inspector](docs/nebula-compiler.md) is the first stage of the nebula compiler experiment. It separates full-frame image evidence before trying new 3D hypotheses; the prior volumes remain available for comparison.
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts

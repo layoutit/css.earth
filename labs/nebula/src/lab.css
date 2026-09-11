@@ -165,3 +165,20 @@ a.reconstruction-image-detail { display: inline-block; }
 .reconstruction-actions button { flex: 1; font-size: 12px; padding: 7px 10px; }
 #reconstruction-progress { width: 100%; height: 9px; margin: 9px 0; accent-color: #c2ccd8; }
 #reconstruction-processing > .text-button { margin-top: 8px; }
+
+.emission-view-buttons, .emission-layer-buttons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin-bottom: 16px; }
+.emission-view-buttons button, .emission-layer-buttons button { padding: 6px 8px; font-size: 12px; }
+.emission-view-buttons button[aria-pressed="true"], .emission-layer-buttons button[aria-pressed="true"] { border-color: #a9acb5; background: #35373b; }
+.emission-layer-buttons { margin: 12px 0; }
+.emission-legend { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 10px; color: var(--text-secondary); }
+.emission-legend span::before { content: ''; display: inline-block; width: 7px; height: 7px; margin-right: 5px; background: var(--layer-color); }
+.emission-legend [data-layer="diffuse"] { --layer-color: #ad78e8; }
+.emission-legend [data-layer="arcs"] { --layer-color: #58d3e5; }
+.emission-legend [data-layer="knots"] { --layer-color: #edc35d; }
+.emission-legend [data-layer="unassigned"] { --layer-color: #ed6b66; }
+.emission-structure-status:empty { display: none; }
+.emission-structure-status[data-error="true"] { color: #f0a49e; }
+.emission-structure-map { position: absolute; inset: 0; z-index: 1; display: grid; grid-template-rows: minmax(0, 1fr) auto; margin: 0; padding: 16px calc(min(340px, 50% - 21px) + 28px) 16px 16px; background: #000; }
+.emission-structure-map img { display: block; width: 100%; height: 100%; object-fit: contain; min-height: 0; }
+.emission-structure-map figcaption { text-align: center; }
+.workspace-content:has(.emission-structure-map) > #inspection-panel { visibility: hidden; }

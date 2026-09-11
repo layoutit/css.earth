@@ -2,7 +2,11 @@
 
 Updated 2026-09-11. Research sources and method status are in [RESEARCH.md](RESEARCH.md). The current reproducible pipeline is in [METHOD.md](METHOD.md).
 
-**Active next decision:** inspect the [M2–9 image-to-volume baseline](models/m2-9/README.md) in the lab. The 2013 group-sparsity solver now produces a rotatable PolyCSS volume in about seven seconds at the small baseline resolution. Front/oblique/side views have been inspected: connected lobes remain, but ring artifacts, residual background and color/brightness differences remain. Do not promote it yet. Improve source separation and inference discretization only after judging this direction; see [planetary-nebulae.md](docs/planetary-nebulae.md).
+**Active next decision:** inspect the [Helix compiler structure map](docs/nebula-compiler.md): full-frame diffuse, arcs, compact candidates and unassigned signal. It reuses native NOX and preserves all working RGB. No new 3D hypotheses have been baked from it. Check the decomposition before assigning depths; one of at most two extraction adjustments has been used.
+
+**M2–9 baseline:** the [image-to-volume experiment](models/m2-9/README.md) remains available. Front/oblique/side views show connected lobes, with remaining ring artifacts, background and color/brightness differences. It is not promoted; see [planetary-nebulae.md](docs/planetary-nebulae.md).
+
+**Helix comparison:** [two completed trial recipes](models/helix/README.md) share one full-native Hubble/CTIO image and NOX separation. One-axis fitting fails from the side; the published-diameter/orientation disk/ring prior gives distinct components but is oversimplified and omits outer signal. Neither passes visual acceptance. Next, constrain the component thicknesses and halo or test a joint component fit; higher image resolution alone cannot fix the current depth assumptions.
 
 ## Completed handoff: LMC into the extragalactic app
 

@@ -1,0 +1,15 @@
+{
+  "schema": "cssearth-nebula-structure-recipe@1",
+  "id": "helix-structures",
+  "sourceRecipe": "labs/nebula/models/helix/model-prior.json",
+  "workingWidth": 768,
+  "wavelets": {
+    "scales": 6,
+    "significanceSigma": 2,
+    "compactMaxScale": 1,
+    "elongatedAxisRatio": 2.5,
+    "minRegionPixels": 5,
+    "connectivity": 8
+  },
+  "interpretation": "Full-frame display-emission decomposition only. Wavelet scale and ridge direction supply image evidence, never measured depth. Native NOX is reused; no new masks or clipping."
+}

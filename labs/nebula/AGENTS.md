@@ -1,6 +1,6 @@
 # Nebula Lab
 
-Local development tooling, separate from the production website. Current objects: LMC and SMC, plus the explicitly scoped M2–9 planetary-nebula experiment. Keep cleanup and UI work within this lab unless a task explicitly requires a shared dependency or another location.
+Local development tooling, separate from the production website. Current objects: LMC and SMC, plus the explicitly scoped M2–9 and Helix planetary-nebula experiments. Keep cleanup and UI work within this lab unless a task explicitly requires a shared dependency or another location.
 
 ## Usage
 
@@ -42,6 +42,8 @@ models/
 ## Processing boundaries
 
 - M2–9 is a separate image-to-emission experiment: [method and limits](docs/planetary-nebulae.md), [recipe and command](models/m2-9/README.md). Its authored symmetry prior infers relative display emission; it never changes the LMC/SMC fixed-density rules below. Keep its inferred dimensions distinct from measured gas density or physical size. Do not import the paper authors' restricted model volumes into app assets. Processing remains an explicit offline command until visual direction is accepted.
+- Helix compares that single-axis fit with image-conditioned emission in an authored disk/ring prior. Use the same pinned full-native NOX source and image registration for both; [source, recipes and failed visual gates](models/helix/README.md). Ring radii/axes from a paper do not make authored thicknesses measured density. Projection agreement imposed by ray normalization cannot validate the prior. Keep these experimental geometries separate from the LMC/SMC model.
+- The [nebula compiler inspector](docs/nebula-compiler.md) adds full-frame image evidence before depth inference. Preserve the per-band additive partition and unassigned signal. Scale-plane regions, ridge tangents and image overlap must never become measured depth or physical membership. Structure/Volume inspection loads prepared outputs only; the old Helix volume remains a separate failed baseline until new hypotheses are actually baked and assessed.
 
 - Browsing/importing/alignment does not authorize expensive processing. A user's instruction for named candidates, or their explicit Quick preview / Remove stars / Preview click, authorizes that operation. Do not ask again for work already authorized.
 - Source registration and the user's image-to-density fit are different. Preserve both. The visual fit is not measured distance, size, or correspondence between simulated and observed stars.

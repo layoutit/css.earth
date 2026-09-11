@@ -17,6 +17,8 @@ export const labObjects = [
   { id: 'lmc-clouds', name: 'LMC' },
   { id: 'smc-particles', name: 'SMC' },
   { id: 'm2-9-inferred', name: 'M2–9 · experiment' },
+  { id: 'helix-single-axis', name: 'Helix · one-axis fit' },
+  { id: 'helix-model-prior', name: 'Helix · disk/ring prior' },
 ] as const;
 export interface AlignmentState {
   images: { id: string; label: string }[]; imageId: string; layer: ImageLayer; layers: ImageLayer[];

@@ -15,6 +15,8 @@ Updated 2026-09-11. Start with [NEXTSTEPS.md](NEXTSTEPS.md) to continue the work
 
 ## Name and novelty
 
+The active planetary-nebula direction is an evidence-preserving **nebula compiler**: structure extraction, alternative depth hypotheses, observation fitting, then offline delivery. Its first [Helix structure inspector](docs/nebula-compiler.md) now runs using starlets and directional curvature, retaining the complete observed frame and explicit unassigned signal. This has not supplied new depths yet; the older Helix volumes still fail visual acceptance.
+
 A descriptive name is **image-based volumetric visualization guided by a density model**. It combines established image registration, projective material mapping, volume rendering and catalogue visualization techniques. The CSS/DOM delivery, repeatable baking and integrated authoring workflow are potentially distinctive engineering; no research-novelty or world-first claim has been established.
 
 ## Reading list
