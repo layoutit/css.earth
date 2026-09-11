@@ -9,7 +9,7 @@ export function createDatasetContextController(drawer: HTMLElement, documentTarg
   const dock = documentTarget.querySelector<HTMLElement>('.planet-dataset-context-dock');
   if (!card || !template || !rail || !dock) return { destroy() {} };
   // The retained header toggle outlives object mounts, so a dismissed card stays dismissed.
-  const toggleNode = documentTarget.querySelector('.planet-spacecraft-toggle');
+  const toggleNode = documentTarget.querySelector('.planet-machine-toggle');
   const toggle = toggleNode && toggleNode instanceof windowTarget.HTMLButtonElement ? toggleNode : null;
   rail.replaceChildren(documentTarget.importNode(template.content, true));
   const contexts = [...rail.querySelectorAll<HTMLElement>('[data-dataset-context]')];

@@ -54,8 +54,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "near-shoemaker",
+            "kind": "machine",
+            "machineId": "near-shoemaker",
             "missionId": "near-shoemaker",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab"
           }
@@ -100,8 +100,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "near-shoemaker",
+            "kind": "machine",
+            "machineId": "near-shoemaker",
             "missionId": "near-shoemaker",
             "evidence": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics"
           }
@@ -146,8 +146,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "near-shoemaker",
+            "kind": "machine",
+            "machineId": "near-shoemaker",
             "missionId": "near-shoemaker",
             "evidence": "NEAR MSI filter 4 (950 nm); pinned eros_nearmsi_filter4.lbl and PDS4 XML in the Golish 2023 archive."
           }

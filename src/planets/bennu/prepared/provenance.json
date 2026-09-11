@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dbf69514714ab1ff1f9ac4201705ae2456929002f658ae02e2944116a12aa955"
+    "sha256": "e3d9fd7b9e28868adefdb9c40b1f9bfe20038eed49fe1dc5ee2df165c520962a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -438,8 +438,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "osiris-rex",
+            "kind": "machine",
+            "machineId": "osiris-rex",
             "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_ShapeV20_GndControl_ROLOphase_ALBEDO_8bit_v6.tif",
             "missionId": "osiris-rex"
           }
@@ -491,8 +491,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "osiris-rex",
+            "kind": "machine",
+            "machineId": "osiris-rex",
             "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/g_00880mm_alt_ptm_0000n00000_v020.obj",
             "missionId": "osiris-rex"
           }
@@ -547,8 +547,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "osiris-rex",
+            "kind": "machine",
+            "machineId": "osiris-rex",
             "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_FB34_FB56_ShapeV28_GndControl_MinnaertPhase30_PAN_8bit.tif",
             "missionId": "osiris-rex"
           }
@@ -603,8 +603,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "osiris-rex",
+            "kind": "machine",
+            "machineId": "osiris-rex",
             "evidence": "OSIRIS-REx OCAMS MapCam composite; pinned USGS ISIS label and DellaGiustina et al. (2020), Figure 1A.",
             "missionId": "osiris-rex"
           }

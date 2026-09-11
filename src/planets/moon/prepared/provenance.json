@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d5b1e3d570bfbbf0816ee556a369ce53ccdce91bb527dc447c4567bc65ba7ce4"
+    "sha256": "29b7f55efda4c8a1dd61cdac43f4e681a6a1d5ef7a788d0766ec5b54987939dc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1356,8 +1356,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "lro",
+            "kind": "machine",
+            "machineId": "lro",
             "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg",
             "missionId": "lro"
           }
@@ -1508,8 +1508,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "lro",
+            "kind": "machine",
+            "machineId": "lro",
             "evidence": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml",
             "missionId": "lro"
           }
