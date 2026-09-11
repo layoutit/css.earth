@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-spacecraft-render-library@2",
+  "schema": "cssearth-machine-render-library@3",
   "background": "#0d0d0d",
   "format": "webp",
   "quality": 90,
@@ -49,7 +49,7 @@
     {
       "id": "cassini",
       "path": "images/cassini.webp",
-      "url": "/shell/spacecraft-renders/cassini.webp",
+      "url": "/shell/machine-renders/cassini.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -90,7 +90,7 @@
           {
             "catalogueId": "artwork-render-cassini",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/0"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/0"
           }
         ]
       }
@@ -98,7 +98,7 @@
     {
       "id": "dawn",
       "path": "images/dawn.webp",
-      "url": "/shell/spacecraft-renders/dawn.webp",
+      "url": "/shell/machine-renders/dawn.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -139,7 +139,7 @@
           {
             "catalogueId": "artwork-render-dawn",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/1"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/1"
           }
         ]
       }
@@ -147,7 +147,7 @@
     {
       "id": "galileo",
       "path": "images/galileo.webp",
-      "url": "/shell/spacecraft-renders/galileo.webp",
+      "url": "/shell/machine-renders/galileo.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -244,7 +244,7 @@
           {
             "catalogueId": "artwork-render-galileo",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/2"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/2"
           }
         ]
       }
@@ -252,7 +252,7 @@
     {
       "id": "grail",
       "path": "images/grail.webp",
-      "url": "/shell/spacecraft-renders/grail.webp",
+      "url": "/shell/machine-renders/grail.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -343,7 +343,7 @@
           {
             "catalogueId": "artwork-render-grail",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/3"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/3"
           }
         ]
       }
@@ -351,7 +351,7 @@
     {
       "id": "hayabusa",
       "path": "images/hayabusa.webp",
-      "url": "/shell/spacecraft-renders/hayabusa.webp",
+      "url": "/shell/machine-renders/hayabusa.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -379,7 +379,7 @@
           {
             "catalogueId": "artwork-render-hayabusa",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/4"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/4"
           }
         ]
       }
@@ -387,7 +387,7 @@
     {
       "id": "hayabusa2",
       "path": "images/hayabusa2.webp",
-      "url": "/shell/spacecraft-renders/hayabusa2.webp",
+      "url": "/shell/machine-renders/hayabusa2.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -415,7 +415,7 @@
           {
             "catalogueId": "artwork-render-hayabusa2",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/5"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/5"
           }
         ]
       }
@@ -423,7 +423,7 @@
     {
       "id": "hubble",
       "path": "images/hubble.webp",
-      "url": "/shell/spacecraft-renders/hubble.webp",
+      "url": "/shell/machine-renders/hubble.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -465,7 +465,7 @@
           {
             "catalogueId": "artwork-render-hubble",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/6"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/6"
           }
         ]
       }
@@ -473,7 +473,7 @@
     {
       "id": "juno",
       "path": "images/juno.webp",
-      "url": "/shell/spacecraft-renders/juno.webp",
+      "url": "/shell/machine-renders/juno.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -514,7 +514,7 @@
           {
             "catalogueId": "artwork-render-juno",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/7"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/7"
           }
         ]
       }
@@ -522,7 +522,7 @@
     {
       "id": "lro",
       "path": "images/lro.webp",
-      "url": "/shell/spacecraft-renders/lro.webp",
+      "url": "/shell/machine-renders/lro.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -563,7 +563,7 @@
           {
             "catalogueId": "artwork-render-lro",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/8"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/8"
           }
         ]
       }
@@ -571,7 +571,7 @@
     {
       "id": "magellan",
       "path": "images/magellan.webp",
-      "url": "/shell/spacecraft-renders/magellan.webp",
+      "url": "/shell/machine-renders/magellan.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -612,7 +612,7 @@
           {
             "catalogueId": "artwork-render-magellan",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/9"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/9"
           }
         ]
       }
@@ -620,7 +620,7 @@
     {
       "id": "mars-global-surveyor",
       "path": "images/mars-global-surveyor.webp",
-      "url": "/shell/spacecraft-renders/mars-global-surveyor.webp",
+      "url": "/shell/machine-renders/mars-global-surveyor.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -661,7 +661,7 @@
           {
             "catalogueId": "artwork-render-mars-global-surveyor",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/10"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/10"
           }
         ]
       }
@@ -669,7 +669,7 @@
     {
       "id": "messenger",
       "path": "images/messenger.webp",
-      "url": "/shell/spacecraft-renders/messenger.webp",
+      "url": "/shell/machine-renders/messenger.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -710,7 +710,7 @@
           {
             "catalogueId": "artwork-render-messenger",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/11"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/11"
           }
         ]
       }
@@ -718,7 +718,7 @@
     {
       "id": "mro",
       "path": "images/mro.webp",
-      "url": "/shell/spacecraft-renders/mro.webp",
+      "url": "/shell/machine-renders/mro.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -759,7 +759,7 @@
           {
             "catalogueId": "artwork-render-mro",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/12"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/12"
           }
         ]
       }
@@ -767,7 +767,7 @@
     {
       "id": "near-shoemaker",
       "path": "images/near-shoemaker.webp",
-      "url": "/shell/spacecraft-renders/near-shoemaker.webp",
+      "url": "/shell/machine-renders/near-shoemaker.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -808,7 +808,7 @@
           {
             "catalogueId": "artwork-render-near-shoemaker",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/13"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/13"
           }
         ]
       }
@@ -816,7 +816,7 @@
     {
       "id": "new-horizons",
       "path": "images/new-horizons.webp",
-      "url": "/shell/spacecraft-renders/new-horizons.webp",
+      "url": "/shell/machine-renders/new-horizons.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -857,7 +857,7 @@
           {
             "catalogueId": "artwork-render-new-horizons",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/14"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/14"
           }
         ]
       }
@@ -865,7 +865,7 @@
     {
       "id": "odyssey",
       "path": "images/odyssey.webp",
-      "url": "/shell/spacecraft-renders/odyssey.webp",
+      "url": "/shell/machine-renders/odyssey.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -906,7 +906,7 @@
           {
             "catalogueId": "artwork-render-odyssey",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/15"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/15"
           }
         ]
       }
@@ -914,7 +914,7 @@
     {
       "id": "osiris-rex",
       "path": "images/osiris-rex.webp",
-      "url": "/shell/spacecraft-renders/osiris-rex.webp",
+      "url": "/shell/machine-renders/osiris-rex.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -955,7 +955,7 @@
           {
             "catalogueId": "artwork-render-osiris-rex",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/16"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/16"
           }
         ]
       }
@@ -963,7 +963,7 @@
     {
       "id": "rosetta",
       "path": "images/rosetta.webp",
-      "url": "/shell/spacecraft-renders/rosetta.webp",
+      "url": "/shell/machine-renders/rosetta.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1060,7 +1060,7 @@
           {
             "catalogueId": "artwork-render-rosetta",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/17"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/17"
           }
         ]
       }
@@ -1068,7 +1068,7 @@
     {
       "id": "sdo",
       "path": "images/sdo.webp",
-      "url": "/shell/spacecraft-renders/sdo.webp",
+      "url": "/shell/machine-renders/sdo.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1109,7 +1109,7 @@
           {
             "catalogueId": "artwork-render-sdo",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/18"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/18"
           }
         ]
       }
@@ -1117,7 +1117,7 @@
     {
       "id": "suomi-npp",
       "path": "images/suomi-npp.webp",
-      "url": "/shell/spacecraft-renders/suomi-npp.webp",
+      "url": "/shell/machine-renders/suomi-npp.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1158,7 +1158,7 @@
           {
             "catalogueId": "artwork-render-suomi-npp",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/19"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/19"
           }
         ]
       }
@@ -1166,7 +1166,7 @@
     {
       "id": "terra",
       "path": "images/terra.webp",
-      "url": "/shell/spacecraft-renders/terra.webp",
+      "url": "/shell/machine-renders/terra.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1207,7 +1207,7 @@
           {
             "catalogueId": "artwork-render-terra",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/20"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/20"
           }
         ]
       }
@@ -1215,7 +1215,7 @@
     {
       "id": "viking",
       "path": "images/viking.webp",
-      "url": "/shell/spacecraft-renders/viking.webp",
+      "url": "/shell/machine-renders/viking.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1243,7 +1243,7 @@
           {
             "catalogueId": "artwork-render-viking",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/21"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/21"
           }
         ]
       }
@@ -1251,7 +1251,7 @@
     {
       "id": "voyager-1",
       "path": "images/voyager-1.webp",
-      "url": "/shell/spacecraft-renders/voyager-1.webp",
+      "url": "/shell/machine-renders/voyager-1.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1301,7 +1301,7 @@
           {
             "catalogueId": "artwork-render-voyager-1",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/22"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/22"
           }
         ]
       }
@@ -1309,7 +1309,7 @@
     {
       "id": "voyager-2",
       "path": "images/voyager-2.webp",
-      "url": "/shell/spacecraft-renders/voyager-2.webp",
+      "url": "/shell/machine-renders/voyager-2.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1359,7 +1359,7 @@
           {
             "catalogueId": "artwork-render-voyager-2",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/23"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/23"
           }
         ]
       }

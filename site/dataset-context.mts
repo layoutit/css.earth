@@ -17,8 +17,8 @@ export function datasetContext(objectId: string, lensId: string, provenance: Pro
     .filter(edge => edge.lensIds.includes(lensId));
   const missionIds = new Set(edges.flatMap(({ attribution }) =>
     attribution.kind !== 'unresolved' && attribution.missionId ? [attribution.missionId] : []));
-  const spacecraftIds = new Set(edges.flatMap(({ attribution }) =>
-    attribution.kind === 'spacecraft' && !attribution.missionId ? [attribution.spacecraftId] : []));
+  const machineIds = new Set(edges.flatMap(({ attribution }) =>
+    attribution.kind === 'machine' && !attribution.missionId ? [attribution.machineId] : []));
   const notes = [...new Set(edges.flatMap(({ attribution }) =>
     attribution.kind === 'unresolved' ? [attribution.reason] : []))];
   const local = new Map(provenance?.sources.map(source => [source.id, source]));
@@ -45,7 +45,7 @@ export function datasetContext(objectId: string, lensId: string, provenance: Pro
   }
   return {
     missions: catalog.missions.filter(mission => missionIds.has(mission.id)),
-    spacecraft: catalog.spacecraft.filter(vehicle => spacecraftIds.has(vehicle.id)),
+    machines: catalog.machines.filter(vehicle => machineIds.has(vehicle.id)),
     notes,
     sources: [...groups.values()],
   };

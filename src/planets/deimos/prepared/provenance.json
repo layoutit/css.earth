@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7a7c9ed97431e20c1713e1e9f9f1cba7defbc1159a0183bd8e5080c7b5db6328"
+    "sha256": "7c10f56a82d3a68501bd2aa7bd6883f96849a35e1b2a9a0951793f466f43dadf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -535,8 +535,8 @@
             "reason": "The preserved source credits Viking collectively and does not identify which individual orbiter supplied these observations."
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "mro",
+            "kind": "machine",
+            "machineId": "mro",
             "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/m2deimos/deimos_cyl_viking_mro.jpg",
             "missionId": "mro"
           }

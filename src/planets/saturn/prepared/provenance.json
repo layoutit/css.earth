@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f59c07dad8deeae7b36db143791f61197436da934affef379b0937b8bae7f3f1"
+    "sha256": "d6b39c6deb88d5e384e3c5b008114331ed2bf5ddb5670d4d1dab9ab30e4da112"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1904,8 +1904,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hubble",
+            "kind": "machine",
+            "machineId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
             "missionId": "hubble"
           }
@@ -1947,8 +1947,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hubble",
+            "kind": "machine",
+            "machineId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits",
             "missionId": "hubble"
           }
@@ -2032,8 +2032,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/",
             "missionId": "cassini"
           }
@@ -2200,8 +2200,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hubble",
+            "kind": "machine",
+            "machineId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
             "missionId": "hubble"
           }
@@ -2243,8 +2243,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hubble",
+            "kind": "machine",
+            "machineId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits",
             "missionId": "hubble"
           }

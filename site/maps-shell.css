@@ -513,7 +513,7 @@
   padding-inline: var(--explorer-card-padding-inline-start) var(--explorer-card-padding-inline-end);
   border-top: var(--explorer-divider-width) solid var(--explorer-divider);
 }
-.planet-card-tabpanel :is(.planet-surface-minimap, .planet-lens-legend-panel, .planet-spacecraft-preview) + .planet-lens-details-copy { margin-top: 12px; margin-inline-end: 0; }
+.planet-card-tabpanel :is(.planet-surface-minimap, .planet-lens-legend-panel, .planet-machine-preview) + .planet-lens-details-copy { margin-top: 12px; margin-inline-end: 0; }
 .planet-card-tabpanel .planet-lens-legend-panel { width: 100%; min-height: 28px; }
 .planet-card-tabpanel .planet-lens-legend-labels {
   display: grid;
@@ -560,40 +560,40 @@
 .planet-card-tabpanel .planet-lens-search { text-align: left; }
 .planet-card-tabpanel:focus-visible { outline: 0; box-shadow: inset 0 -1px var(--shell-focus); }
 
-.planet-dataset-spacecraft { margin-top: 16px; border-top: var(--explorer-divider-width) solid var(--explorer-divider); padding-top: 16px; }
-.planet-card-tabpanel > .planet-dataset-spacecraft,
-.planet-mission-details > .planet-dataset-spacecraft { margin-top: 0; border-top: 0; padding-top: 0; }
+.planet-dataset-machines { margin-top: 16px; border-top: var(--explorer-divider-width) solid var(--explorer-divider); padding-top: 16px; }
+.planet-card-tabpanel > .planet-dataset-machines,
+.planet-mission-details > .planet-dataset-machines { margin-top: 0; border-top: 0; padding-top: 0; }
 .planet-card-tabpanel .planet-mission-agency-control:has(.planet-lens-detail):not(:has(.planet-agency-logo)) {
   grid-template-columns: minmax(0, max-content) minmax(8px, 1fr) max-content;
 }
 .planet-lens-icon.planet-agency-logo { object-fit: contain; }
 .planet-card-tabpanel .planet-mission-agency-control:focus-visible { outline: 1px solid var(--shell-focus); outline-offset: -1px; }
 .planet-missions-empty { margin: 0; color: var(--shell-text-muted); font: 400 15px/20px var(--shell-ui-font); }
-.planet-spacecraft { margin: 0; }
-.planet-spacecraft[hidden] { display: none; }
-.planet-spacecraft:not([hidden]) ~ .planet-spacecraft:not([hidden]) { margin-top: 20px; }
-.planet-spacecraft-preview { position: relative; }
-.planet-spacecraft-preview > .planet-spacecraft-heading { position: absolute; inset: 0 0 auto; z-index: 1; pointer-events: none; }
-.planet-spacecraft-heading .planet-lens-details-title { margin-bottom: 0; }
-.planet-spacecraft-heading .planet-selected-content-meta { display: block; }
-.planet-spacecraft, .planet-capture-notes { font: 400 13px/18px var(--shell-ui-font); }
-.planet-spacecraft a, .planet-capture-notes a { color: inherit; text-underline-offset: 3px; }
-.planet-spacecraft a:hover, .planet-capture-notes a:hover { color: var(--shell-text); }
-.planet-spacecraft :is(a, summary):focus-visible, .planet-capture-notes :is(a, summary):focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 3px; }
-.planet-spacecraft h4, .planet-capture-notes h4 { margin: 16px 0 8px; font-size: 12px; font-weight: 600; }
+.planet-machine { margin: 0; }
+.planet-machine[hidden] { display: none; }
+.planet-machine:not([hidden]) ~ .planet-machine:not([hidden]) { margin-top: 20px; }
+.planet-machine-preview { position: relative; }
+.planet-machine-preview > .planet-machine-heading { position: absolute; inset: 0 0 auto; z-index: 1; pointer-events: none; }
+.planet-machine-heading .planet-lens-details-title { margin-bottom: 0; }
+.planet-machine-heading .planet-selected-content-meta { display: block; }
+.planet-machine, .planet-capture-notes { font: 400 13px/18px var(--shell-ui-font); }
+.planet-machine a, .planet-capture-notes a { color: inherit; text-underline-offset: 3px; }
+.planet-machine a:hover, .planet-capture-notes a:hover { color: var(--shell-text); }
+.planet-machine :is(a, summary):focus-visible, .planet-capture-notes :is(a, summary):focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 3px; }
+.planet-machine h4, .planet-capture-notes h4 { margin: 16px 0 8px; font-size: 12px; font-weight: 600; }
 .planet-mission-datasets { margin: 8px 0 16px; padding-inline-start: 16px; }
 .planet-mission-datasets li { margin: 6px 0; }
-.planet-spacecraft-details { padding: 10px 0; border-top: var(--explorer-divider-width) solid var(--explorer-divider); }
-.planet-spacecraft-details summary, .planet-mission-references summary { cursor: pointer; }
-.planet-spacecraft-details small { display: block; margin: 4px 0 0 14px; opacity: .7; }
-.planet-spacecraft-details > p { margin: 10px 0; }
-.planet-spacecraft-details .planet-spacecraft-image { height: auto; }
+.planet-machine-details { padding: 10px 0; border-top: var(--explorer-divider-width) solid var(--explorer-divider); }
+.planet-machine-details summary, .planet-mission-references summary { cursor: pointer; }
+.planet-machine-details small { display: block; margin: 4px 0 0 14px; opacity: .7; }
+.planet-machine-details > p { margin: 10px 0; }
+.planet-machine-details .planet-machine-image { height: auto; }
 .planet-mission-references { margin-top: 12px; font-size: 11px; }
-.planet-mission-status, .planet-spacecraft-facts { font-size: 11px; }
+.planet-mission-status, .planet-machine-facts { font-size: 11px; }
 .planet-capture-notes { margin-top: 18px; }
 [data-dataset-notice] { margin: 12px 0; font-size: 12px; }
-.planet-spacecraft-image-link { display: block; width: 100%; aspect-ratio: 2 / 1; background: var(--explorer-panel-background); }
-.planet-spacecraft-image { display: block; width: 100%; height: 100%; object-fit: contain; }
-.planet-spacecraft-emblem { position: absolute; left: 8px; bottom: 8px; display: block; width: 64px; height: 64px; }
-.planet-spacecraft-emblem img { display: block; width: 100%; height: 100%; object-fit: contain; }
-.planet-spacecraft a:focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 4px; }
+.planet-machine-image-link { display: block; width: 100%; aspect-ratio: 2 / 1; background: var(--explorer-panel-background); }
+.planet-machine-image { display: block; width: 100%; height: 100%; object-fit: contain; }
+.planet-machine-emblem { position: absolute; left: 8px; bottom: 8px; display: block; width: 64px; height: 64px; }
+.planet-machine-emblem img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.planet-machine a:focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 4px; }

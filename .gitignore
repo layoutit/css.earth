@@ -170,7 +170,7 @@ src/planets/*/source/**/*.bpc
 
 # Combined catalogues and navigation are rebuilt from individual body records.
 /site/prepared-sources.json
-/site/prepared-spacecraft.json
+/site/prepared-machines.json
 /site/prepared-object-catalog.mts
 /packages/astronomy/src/data/generated/
 /site/prepared-navigation-markers.mjs

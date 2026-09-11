@@ -24,10 +24,10 @@ import { writePreparedSet } from './write-prepared-set.mts';
 import { restoreFactsheetEvidence } from './restore-factsheet-evidence.mts';
 import type { FactsheetSourceTransport } from './restore-factsheet-evidence.mts';
 export const explorationCompilerClosure = [
-  'tools/prepare-spacecraft.mts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
+  'tools/prepare-machines.mts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
   'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'site/objects.mts', 'site/object-schema.mts',
   'site/object-catalog.mts', 'site/prepared-object-catalog.mts', 'tools/prepare-catalog.mts',
-  'site/source/spacecraft/catalog.json', 'site/source/spacecraft/render-library.json', 'site/source/spacecraft/emblem-library.json',
+  'site/source/machines/catalog.json', 'site/source/machines/render-library.json', 'site/source/machines/emblem-library.json',
   'site/source/agency-logos.json', 'tools/read-source-catalogue.mts',
   'src/platform/source-catalog.mts', 'src/platform/source-usage.mts', 'src/platform/source-manifest.mts',
   'src/platform/prepared-sources.mts', 'tools/source-catalogue-inputs.mts',
@@ -40,7 +40,7 @@ export const explorationCompilerClosure = [
 const digest = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
 interface Options { root?: string; publish?: boolean; provenance?: ReadonlyMap<string, ProvenanceDocument>; sourceTransport?: FactsheetSourceTransport; }
 /** Compile evidenced links and reuse approved artwork, restoring only missing cited evidence. */
-export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '..'), publish = true, provenance = new Map(), sourceTransport }: Options = {}) {
+export async function prepareMachines({ root = resolve(import.meta.dirname, '..'), publish = true, provenance = new Map(), sourceTransport }: Options = {}) {
   const closure: Record<string, string> = {};
   const input = async (path: string) => {
     const bytes = await readFile(resolve(root, path)); closure[path] = digest(bytes); return bytes;
@@ -49,8 +49,8 @@ export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '.
   for (const path of explorationCompilerClosure) await input(path);
   const agencies = parseAgencies(await json('site/source/agency-logos.json'));
   const sourceCatalog = await readSourceCatalog(root, input), sources = sourceResolver(sourceCatalog);
-  const catalog = parseExplorationCatalog(await json('site/source/spacecraft/catalog.json'), agencies, sources);
-  const metadata: SourceUse[] = metadataCitations(catalog, 'site/source/spacecraft/catalog.json', sources);
+  const catalog = parseExplorationCatalog(await json('site/source/machines/catalog.json'), agencies, sources);
+  const metadata: SourceUse[] = metadataCitations(catalog, 'site/source/machines/catalog.json', sources);
   const inventory: SourceInventoryEntry[] = [];
   for (const path of explorationCompilerClosure.filter(path => path.startsWith('src/objects/'))) {
     const owner = explorationRecord(await json(path)), display = explorationRecord(owner.catalogueDisplay);
@@ -63,7 +63,7 @@ export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '.
   }
   async function artwork(file: string, emblem: boolean) {
     const library = explorationRecord(await json(file));
-    if (library.schema !== (emblem ? 'cssearth-spacecraft-emblems@2' : 'cssearth-spacecraft-render-library@2')) throw new TypeError('Unsupported artwork library.');
+    if (library.schema !== (emblem ? 'cssearth-machine-emblems@3' : 'cssearth-machine-render-library@3')) throw new TypeError('Unsupported artwork library.');
     const entries = explorationArray(library.entries, explorationRecord).map((image, index) => {
       const source = explorationRecord(image.source);
       const binding = parseSourceBinding(image.sourceBinding, sources), id = explorationText(image.id);
@@ -83,8 +83,8 @@ export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '.
     }
     return entries;
   }
-  const images: readonly ExplorationImage[] = await artwork('site/source/spacecraft/render-library.json', false);
-  const emblems: readonly ExplorationImage[] = await artwork('site/source/spacecraft/emblem-library.json', true);
+  const images: readonly ExplorationImage[] = await artwork('site/source/machines/render-library.json', false);
+  const emblems: readonly ExplorationImage[] = await artwork('site/source/machines/emblem-library.json', true);
   for (const agency of Object.values(agencies)) if (agency.src) {
     const bytes = await input(`public${agency.src}`);
     if (digest(bytes) !== agency.sha256 || bytes.length !== agency.bytes) throw new Error(`Agency logo identity changed: ${agency.name}.`);
@@ -136,10 +136,10 @@ export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '.
   const sourcePayload = {schema:'cssearth-prepared-sources@1',catalog:sourceCatalog,catalogSha256:sourceCatalogDigest(sourceCatalog),
     usage:compileSourceUsage(objects,sources,metadata),inventory,closure};
   const preparedSources = parsePreparedSources(sourcePayload);
-  const payload = { schema: 'cssearth-prepared-exploration@2', catalog, agencies, images, emblems,
+  const payload = { schema: 'cssearth-prepared-exploration@3', catalog, agencies, images, emblems,
     sourceCatalogSha256:preparedSources.catalogSha256,graph: compileContributions(objects, catalog), closure };
   const prepared = parsePreparedExploration(payload,sources);
-  const output = { path: resolve(root, 'site/prepared-spacecraft.json'), text: JSON.stringify(payload, null, 2) + '\n' };
+  const output = { path: resolve(root, 'site/prepared-machines.json'), text: JSON.stringify(payload, null, 2) + '\n' };
   const sourcesOutput = {path:resolve(root,'site/prepared-sources.json'),text:JSON.stringify(sourcePayload,null,2)+'\n'};
   const outputs = [sourcesOutput,output];
   if (publish) await writePreparedSet(outputs);
@@ -147,7 +147,7 @@ export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '.
 
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const { prepared, factsheets } = await prepareSpacecraft();
-  console.log(`Prepared ${prepared.catalog.missions.length} missions, ${prepared.catalog.spacecraft.length} spacecraft and ${prepared.graph.datasets.length} dataset destinations.`);
+  const { prepared, factsheets } = await prepareMachines();
+  console.log(`Prepared ${prepared.catalog.missions.length} missions, ${prepared.catalog.machines.length} machines and ${prepared.graph.datasets.length} dataset destinations.`);
   console.log(`Factsheets: ${factsheets.cited}/${factsheets.facts} facts have individual citations; ${factsheets.uncited.length} do not.`);
 }

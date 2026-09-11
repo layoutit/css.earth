@@ -149,7 +149,7 @@ try {
   assert.equal(await rail.isVisible(), true);
   cases.push({ name: 'responsive panels remain accessible and return to the right dock' });
 
-  assert.equal([...requests].some(path => /prepared-(?:spacecraft|sources)\.json|src\/sources|source\/spacecraft\/catalog\.json|prepared\/provenance\.json|prepare-(?:spacecraft|sources)/.test(path)), false,
+  assert.equal([...requests].some(path => /prepared-(?:machines|sources)\.json|src\/sources|source\/machines\/catalog\.json|prepared\/provenance\.json|prepare-(?:machines|sources)/.test(path)), false,
     'The production browser must not fetch the catalogue, compiler or provenance graph');
   assert.deepEqual(errors, [], 'No browser application errors');
   assert.deepEqual(failedResponses, [], 'All requested production assets are installed');

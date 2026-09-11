@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "632d6003d6279c7ea20b329c96a44f4a050ee7a1ca5a3372ac0c9598eacce1d3"
+    "sha256": "ecfb099791cd3dd1668ac634114fa51eef93e7c4a5b9aa146952b0200b32d281"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -392,8 +392,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-2",
+            "kind": "machine",
+            "machineId": "voyager-2",
             "evidence": "https://www.lpi.usra.edu/icy_moons/images/tnmap-cyl-KH.jpg",
             "missionId": "voyager-2"
           }
@@ -500,8 +500,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-2",
+            "kind": "machine",
+            "machineId": "voyager-2",
             "evidence": "https://www.sciencebase.gov/catalog/file/get/6515fe80d34e469cabfce1bb?f=__disk__9c%2F3f%2F3a%2F9c3f3acb71a18cd818ce74c4703f23ca940b4594",
             "missionId": "voyager-2"
           }

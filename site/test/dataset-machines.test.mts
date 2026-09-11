@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { OBJECTS } from '../objects.mts';
-import { spacecraftAgencies } from '../dataset-spacecraft.mts';
+import { machineAgencies } from '../dataset-machines.mts';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import { parsePreparedExploration } from '../../src/platform/prepared-exploration.mts';
 import { compileContributions, contributionViews, parseContributionGraph } from '../../src/platform/exploration-contributions.mts';
@@ -17,7 +17,7 @@ import type { ExplorationImage } from '../../src/platform/prepared-exploration.m
 
 const json = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
 const { sources } = parsePreparedSources(await json('../prepared-sources.json'));
-const prepared = parsePreparedExploration(await json('../prepared-spacecraft.json'), sources);
+const prepared = parsePreparedExploration(await json('../prepared-machines.json'), sources);
 const catalog = prepared.catalog;
 const provenance = async (id: string): Promise<ProvenanceDocument> => validateObjectProvenance(await json(`../../src/planets/${id}/prepared/provenance.json`), id);
 const missions = Object.fromEntries(catalog.missions.map(mission => [mission.id, mission]));
@@ -30,7 +30,7 @@ const positiveInteger = (value: unknown, label: string): number => {
 };
 const artworkLibrary = (value: unknown, emblem: boolean): readonly ArtworkEntry[] => {
   const library = explorationRecord(value);
-  const schema = emblem ? 'cssearth-spacecraft-emblems@2' : 'cssearth-spacecraft-render-library@2';
+  const schema = emblem ? 'cssearth-machine-emblems@3' : 'cssearth-machine-render-library@3';
   if (library.schema !== schema) throw new TypeError('Unsupported artwork library.');
   return explorationArray(library.entries, raw => {
     const image = explorationRecord(raw), source = explorationRecord(image.source);
@@ -58,10 +58,10 @@ async function objectInput(id: string, document: ProvenanceDocument | null = nul
   return { id, name: object.name, route: object.route, controls: page.controls.lenses?.controls ?? [], provenance: document ?? await provenance(id) };
 }
 async function graphFor(id: string, document: ProvenanceDocument | null = null): Promise<ContributionGraph> { return compileContributions([await objectInput(id, document)], catalog); }
-const ids = (graph: ContributionGraph, lens: string, domain: 'mission' | 'spacecraft' = 'mission'): string[] => [...new Set(graph.edges.filter(edge => edge.lensIds.includes(lens)).flatMap(edge => {
+const ids = (graph: ContributionGraph, lens: string, domain: 'mission' | 'machine' = 'mission'): string[] => [...new Set(graph.edges.filter(edge => edge.lensIds.includes(lens)).flatMap(edge => {
   const a = edge.attribution;
   if (domain === 'mission') return a.kind !== 'unresolved' && a.missionId ? [a.missionId] : [];
-  return a.kind === 'spacecraft' ? [a.spacecraftId] : [];
+  return a.kind === 'machine' ? [a.machineId] : [];
 }))];
 
 test('capture attribution follows the selected dataset, including derived maps', async () => {
@@ -69,7 +69,7 @@ test('capture attribution follows the selected dataset, including derived maps',
   for (const lens of ['normal', 'enhanced', 'topography']) assert.deepEqual(ids(mercury, lens), ['messenger']);
   for (const lens of ['surface', 'topography']) assert.deepEqual(ids(moon, lens), ['lro']);
   assert.deepEqual(ids(moon, 'crust'), ['grail']);
-  assert.deepEqual(ids(moon, 'crust', 'spacecraft'), [], 'mission attribution must not imply a vehicle observation');
+  assert.deepEqual(ids(moon, 'crust', 'machine'), [], 'mission attribution must not imply a vehicle observation');
   assert.deepEqual(ids(mars, 'normal'), []);
   assert.ok(mars.edges.some(edge => edge.lensIds.includes('normal') && edge.attribution.kind === 'unresolved' && edge.attribution.label === 'Viking orbiters'));
   assert.deepEqual(ids(mars, 'elevation'), ['mars-global-surveyor']);
@@ -97,12 +97,12 @@ test('schematic and synthetic views do not inherit observations from their outer
 
 test('agency choices count individual missions and preserve joint credits', () => {
   const values = [missions.hubble, missions.juno, missions.hubble];
-  assert.deepEqual(spacecraftAgencies(values).map(group => [group.name, group.missions.map(mission => mission.id)]), [
+  assert.deepEqual(machineAgencies(values).map(group => [group.name, group.missions.map(mission => mission.id)]), [
     ['NASA', ['hubble', 'juno']], ['ESA', ['hubble']],
   ]);
-  assert.deepEqual(spacecraftAgencies([missions.cassini]).map(group => group.name), ['NASA', 'ESA', 'ASI']);
-  assert.equal(spacecraftAgencies([missions['viking-1'], missions['viking-2']])[0].missions.length, 2);
-  assert.deepEqual(spacecraftAgencies([]), []);
+  assert.deepEqual(machineAgencies([missions.cassini]).map(group => group.name), ['NASA', 'ESA', 'ASI']);
+  assert.equal(machineAgencies([missions['viking-1'], missions['viking-2']])[0].missions.length, 2);
+  assert.deepEqual(machineAgencies([]), []);
 });
 
 test('every migrated capture stays bound to its source; the full prepared graph is deterministic', async () => {
@@ -124,10 +124,10 @@ test('every migrated capture stays bound to its source; the full prepared graph 
   const graph = compileContributions(objects, catalog);
   assert.deepEqual(graph, prepared.graph);
   assert.deepEqual(compileContributions(objects, catalog), graph);
-  for (const [id, edgeIds] of Object.entries(graph.bySpacecraft)) {
+  for (const [id, edgeIds] of Object.entries(graph.byMachine)) {
     assert.ok(edgeIds.every(index => {
       const attribution = graph.edges[index]?.attribution;
-      return attribution?.kind === 'spacecraft' && attribution.spacecraftId === id;
+      return attribution?.kind === 'machine' && attribution.machineId === id;
     }));
     const views = contributionViews(graph, edgeIds);
     for (const view of views) assert.ok(graph.byObject[view.objectId].some(index => edgeIds.includes(index) && graph.edges[index].lensIds.includes(view.lensId)));
@@ -137,16 +137,16 @@ test('every migrated capture stays bound to its source; the full prepared graph 
 test('OSIRIS-REx retains Bennu observations and successor participation creates no APEX observations', () => {
   assert.ok(prepared.graph.byMission['osiris-rex'].length);
   assert.equal(prepared.graph.byMission['osiris-apex'], undefined);
-  assert.deepEqual(catalog.missions.filter(mission => mission.participants.some(member => member.spacecraftId === 'osiris-rex')).map(mission => mission.id), ['osiris-rex', 'osiris-apex']);
-  assert.ok(contributionViews(prepared.graph, prepared.graph.bySpacecraft['osiris-rex']).every(view => view.objectId === 'bennu'));
-  assert.equal(prepared.graph.bySpacecraft.huygens, undefined);
-  assert.equal(prepared.graph.bySpacecraft['galileo-probe'], undefined);
+  assert.deepEqual(catalog.missions.filter(mission => mission.participants.some(member => member.machineId === 'osiris-rex')).map(mission => mission.id), ['osiris-rex', 'osiris-apex']);
+  assert.ok(contributionViews(prepared.graph, prepared.graph.byMachine['osiris-rex']).every(view => view.objectId === 'bennu'));
+  assert.equal(prepared.graph.byMachine.huygens, undefined);
+  assert.equal(prepared.graph.byMachine['galileo-probe'], undefined);
 });
 
 test('approved artwork and emblems retain source bytes, dimensions and transparency', async () => {
   const libraries: readonly [string, Readonly<Record<string, ExplorationImage>>][] = [['render-library', prepared.images], ['emblem-library', prepared.emblems]];
   for (const [file, images] of libraries) {
-    const library = artworkLibrary(await json(`../source/spacecraft/${file}.json`), file === 'emblem-library');
+    const library = artworkLibrary(await json(`../source/machines/${file}.json`), file === 'emblem-library');
     assert.deepEqual(Object.keys(images), library.map(image => image.id));
     for (const approved of library) {
       const image = images[approved.id], bytes = await readFile(new URL(`../../public${image.src}`, import.meta.url));
@@ -168,15 +168,15 @@ test('approved artwork and emblems retain source bytes, dimensions and transpare
         }
         assert.ok(transparent > info.width * info.height * .03); assert.ok(opaque > info.width * info.height * .1);
         assert.ok(approved.source.localSource); assert.ok(approved.source.inputSha256);
-        const source = await readFile(new URL(`../source/spacecraft/emblems/${approved.source.localSource}`, import.meta.url));
+        const source = await readFile(new URL(`../source/machines/emblems/${approved.source.localSource}`, import.meta.url));
         assert.equal(createHash('sha256').update(source).digest('hex'), approved.source.inputSha256);
       }
     }
   }
   for (const id of ['grail-a', 'grail-b', 'viking-1-lander', 'viking-2-lander']) {
-    const spacecraft = catalog.spacecraft.find(vehicle => vehicle.id === id);
-    assert.ok(spacecraft);
-    assert.equal(spacecraft.imageId, undefined);
+    const machine = catalog.machines.find(machine => machine.id === id);
+    assert.ok(machine);
+    assert.equal(machine.imageId, undefined);
   }
 });
 
@@ -186,16 +186,16 @@ test('unknown identities, impossible capture pairs, stale lenses and damaged ind
   assert.deepEqual(ids(await graphFor('mercury', document), 'normal'), []);
   const source = document.sources.find(source => source.id === 'usgs-messenger-bdr-global-z3');
   assert.ok(source);
-  const unknownCapture: Capture = { attributions: [{ kind: 'spacecraft', spacecraftId: 'unknown-probe', evidence: source.origin }] };
+  const unknownCapture: Capture = { attributions: [{ kind: 'machine', machineId: 'unknown-probe', evidence: source.origin }] };
   Reflect.set(source, 'capture', unknownCapture);
-  await assert.rejects(graphFor('mercury', document), /Unknown capture spacecraft/);
-  const impossibleCapture: Capture = { attributions: [{ kind: 'spacecraft', spacecraftId: 'messenger', missionId: 'juno', evidence: source.origin }] };
+  await assert.rejects(graphFor('mercury', document), /Unknown capture machine/);
+  const impossibleCapture: Capture = { attributions: [{ kind: 'machine', machineId: 'messenger', missionId: 'juno', evidence: source.origin }] };
   Reflect.set(source, 'capture', impossibleCapture);
   await assert.rejects(graphFor('mercury', document), /participating pair/);
   const duplicateCapture: Capture = { attributions: [impossibleCapture.attributions[0]!, impossibleCapture.attributions[0]!] };
   Reflect.set(source, 'capture', duplicateCapture); assert.throws(() => validateObjectProvenance(document));
   const object = await objectInput('mercury'); Reflect.set(object, 'controls', []);
   assert.throws(() => compileContributions([object], catalog), /Unknown prepared dataset/);
-  const graph = structuredClone(prepared.graph); Reflect.set(graph.bySpacecraft, 'messenger', []);
+  const graph = structuredClone(prepared.graph); Reflect.set(graph.byMachine, 'messenger', []);
   assert.throws(() => parseContributionGraph(graph, catalog), /Inconsistent contribution index/);
 });
