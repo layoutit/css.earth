@@ -210,6 +210,36 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   opacity: 1;
 }
 
+/* Clear sits in the pill's right padding and shows only while there is a query. */
+.explorer-shell-header .planet-sidebar-search-clear {
+  appearance: none;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--explorer-control-text);
+  transform: translateY(-50%);
+  cursor: pointer;
+  pointer-events: auto;
+}
+.explorer-shell-header .planet-sidebar-search-clear .material-symbol { flex-basis: 18px; width: 18px; height: 18px; }
+.explorer-shell-header .planet-sidebar-search-clear:is(:hover, :focus-visible) {
+  color: var(--shell-text);
+  background: var(--explorer-header-control-hover);
+}
+.explorer-shell-header .planet-sidebar-search-clear:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 1px; }
+.explorer-shell-header .planet-sidebar-search-card:has(.planet-sidebar-search:placeholder-shown) .planet-sidebar-search-clear { display: none; }
+/* The custom clear replaces the browser's own search cancel control. */
+.explorer-shell-header .planet-sidebar-search::-webkit-search-cancel-button { appearance: none; display: none; }
+
 .explorer-shell-header .planet-sidebar-search-card:focus-within .planet-sidebar-search-icon {
   color: var(--shell-text);
 }
@@ -349,6 +379,13 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 .planet-search-category[aria-pressed="true"] { background: var(--explorer-header-control-selected); }
 .planet-search-category:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
 .planet-search-category .material-symbol { flex-basis: 18px; width: 18px; height: 18px; }
+/* GitHub is an icon-only circle, like the panel toggles. */
+.planet-header-link {
+  display: inline-grid;
+  place-items: center;
+  width: var(--explorer-category-height);
+  padding: 0;
+}
 
 /* Round icon toggles for shell panels: transparent when off, filled when on. */
 .planet-header-actions {
@@ -577,9 +614,6 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 
   .explorer-brand-row { grid-row: 1; grid-column: 1; }
   .planet-header-actions { grid-row: 1; grid-column: 3; }
-  /* Phones keep the top row inside 375px by showing only the GitHub mark. */
-  .planet-header-link { width: var(--explorer-category-height); padding: 0; }
-  .planet-header-link > span { display: none; }
   .planet-search-toolbar {
     grid-row: 2;
     grid-column: 1 / -1;
