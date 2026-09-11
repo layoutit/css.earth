@@ -614,7 +614,9 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
     --explorer-header-height: calc(var(--explorer-search-height) + var(--explorer-header-row-gap) + var(--explorer-category-height));
     --explorer-float-shadow: 0 1px 4px rgb(0 0 0 / 55%);
     /* The open sheet stops below the filters, so they stay in reach while searching. */
-    --sheet-height: calc(100dvh - var(--explorer-controls-top));
+    /* An on-screen keyboard covers the bottom of the layout viewport without
+       shrinking it, so the sheet gives up that much room. */
+    --sheet-height: calc(100dvh - var(--explorer-controls-top) - var(--sheet-keyboard, 0px));
     --sheet-peek: calc(152px + var(--explorer-safe-bottom));
     --sheet-half: 50dvh;
     --sheet-radius: 16px;
@@ -703,7 +705,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   .planet-sidebar {
     position: fixed;
     z-index: 200;
-    inset: auto 0 0;
+    inset: auto 0 var(--sheet-keyboard, 0px);
     box-sizing: border-box;
     width: 100%;
     height: var(--sheet-height);
