@@ -23,7 +23,23 @@ export const MOBILE_SHEET_POLICY = Object.freeze({
   flingFreshnessMilliseconds: 80,
   overdragPixels: 24,
   overdragResistance: 0.18,
+  // A browser toolbar sliding away shrinks the visual viewport too; only a
+  // covering this deep is treated as a keyboard.
+  keyboardMinimumPixels: 80,
 });
+
+/**
+ * Pixels of the layout viewport that an on-screen keyboard covers. Phones keep
+ * the sheet above it: the layout viewport does not shrink for a keyboard, so
+ * the visual viewport is what says how much room is left.
+ */
+export function mobileSheetKeyboardInset({ layoutHeight, visualHeight, offsetTop = 0 }: {
+  layoutHeight: number; visualHeight: number; offsetTop?: number;
+}): number {
+  if (![layoutHeight, visualHeight, offsetTop].every(value => Number.isFinite(value))) return 0;
+  const covered = layoutHeight - visualHeight - offsetTop;
+  return covered >= MOBILE_SHEET_POLICY.keyboardMinimumPixels ? Math.round(covered) : 0;
+}
 
 export const CONTEXT_ANNOTATION_PRIORITY = Object.freeze({
   planet: 3,
