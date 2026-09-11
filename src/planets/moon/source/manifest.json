@@ -670,6 +670,84 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-moon-nomenclature-center-pts",
+      "path": "features/MOON_nomenclature_center_pts.zip",
+      "expectedBytes": 23842450,
+      "expectedSha256": "3cf4d02e87f7ab896f668acb8caed93ea9f36136a756c6e6c69b01b20e6e2671",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MOON_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for the Moon on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: the Moon centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/MOON/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "moon-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1001,
+      "expectedSha256": "84ebaac0d933fe026ec361a5a4e1da024ec72c35c7d08bda0360a576778c4171",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "moon-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1495,
+      "expectedSha256": "706e2452fc08417821f4be857cb3c6552099bcd157f065badf3e60f31ff37482",
+      "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "moon-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 151,
+      "expectedSha256": "59bd7a28b740a273bfa4e1a643dfc7a84f426f7bcbc0b5eace30e275f7763d6a",
+      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -717,8 +795,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 5151,
-      "expectedSha256": "6b5ca65f263838194f6c28b2f5096dabf34b2aa93ccbb39d637d3babf2094c45"
+      "expectedBytes": 5398,
+      "expectedSha256": "4b5f0037859de0fe24e5d5e3c504623d1d779870fa643312952db571658f0310"
     },
     {
       "path": "preparation/physical.json",

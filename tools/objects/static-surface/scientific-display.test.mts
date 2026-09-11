@@ -107,9 +107,8 @@ test('categorical static-map legend contains discrete units without requiring a 
   Reflect.deleteProperty(scientific,'minimum');Reflect.deleteProperty(scientific,'maximum');Reflect.deleteProperty(scientific,'colors');
   const plan={...f.numeric,scientific};
   await prepareObservationLenses({...f,publicDirectory,config:{...f.config,lenses:[plan]}});
-  const legend=await sharp(join(publicDirectory,'numeric-legend.webp')).raw().toBuffer();
-  for(let y=0;y<16;y++)for(let x=0;x<256;x++)
-    assert.deepEqual([...legend.subarray((y*256+x)*3,(y*256+x)*3+3)],x<128?[240,0,0]:[0,240,0]);
+  // Categorical lenses carry swatch legends in the controls, so no ramp image may be staged for the asset closure.
+  await assert.rejects(readFile(join(publicDirectory,'numeric-legend.webp')),{code:'ENOENT'});
   const map=await observationRaster({input:join(f.sourceDirectory,'grid.img'),plan,width:32,height:16});
   const allowed=rgbSet(map.data,3);
   for(const color of rgbSet(await sharp(join(publicDirectory,'numeric.webp')).raw().toBuffer(),3))

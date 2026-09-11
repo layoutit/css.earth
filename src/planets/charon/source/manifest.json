@@ -280,6 +280,84 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-charon-nomenclature-center-pts",
+      "path": "features/CHARON_nomenclature_center_pts.zip",
+      "expectedBytes": 76458,
+      "expectedSha256": "f4dbc26dd073cbfb0266ccfac7324e4fa982bfb978bcf5d0af8e6c81d5870382",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/CHARON_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Charon on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Charon centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/CHARON/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "charon-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1004,
+      "expectedSha256": "bccf79b8dd338107720151a034eb60cd27a3b16c52c0f22182a24d71cf9b8251",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "charon-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1156,
+      "expectedSha256": "c7de15df6b8049ea6f9e99252bb927b916f6d9eb840337cdc5cc04ff162c8ed9",
+      "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "charon-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 153,
+      "expectedSha256": "d8712c5634f5b486dd8afdb44f234205d0e0819de974220ae2fed4d93d2cb61b",
+      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
     }
   ],
   "documents": [
@@ -299,8 +377,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1776,
-      "expectedSha256": "326ce205234a4666cd6968f7eb49053baf4821796048fbbed94dc6eaf2bf2b8f"
+      "expectedBytes": 2030,
+      "expectedSha256": "04535fa6cc3feaf1fad37c65c23e3ffe52bbc0c67dd4989f65d155d5beb76d14"
     },
     {
       "path": "preparation/navigation.json",

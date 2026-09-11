@@ -56,6 +56,14 @@
       "groups": [
         "mapped-science"
       ]
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/CHARON_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/CHARON_nomenclature_center_pts.zip"
     }
   ]
 }

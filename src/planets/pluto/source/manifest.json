@@ -277,6 +277,84 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-pluto-nomenclature-center-pts",
+      "path": "features/PLUTO_nomenclature_center_pts.zip",
+      "expectedBytes": 228401,
+      "expectedSha256": "8d5260b74c48515765a6981532d89168a88e0c797752c1d6d21b4a0a83baa916",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/PLUTO_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Pluto on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Pluto centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/PLUTO/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "pluto-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1000,
+      "expectedSha256": "ed793e267093321adfc265114b968db229e5010c7a541695b27be8431a6e9e39",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "pluto-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1175,
+      "expectedSha256": "1e43643e5b4079fccd6ea159f1f7866b4f76abd75e9ab3c9bfb191f7403df1e4",
+      "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "pluto-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 152,
+      "expectedSha256": "3fbd8649a9ae4e41027a8fb1f52cdc0cadd18b61d39f77a3f17147336e146c7f",
+      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -324,8 +402,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1017,
-      "expectedSha256": "58d733528f1f1602e1aa3f9e1bccefc4f10b2847e4111b655a2b76cf9d9a5160"
+      "expectedBytes": 1269,
+      "expectedSha256": "5e0ef5f318b20f4a662c4b17783f9bb073df019dde58d3c3171d7fb4fa30aba1"
     },
     {
       "path": "preparation/physical.json",

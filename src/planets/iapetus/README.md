@@ -7,6 +7,7 @@
 | Monochrome | [USGS Cassini/Voyager mosaic](https://astrogeology.usgs.gov/search/map/iapetus_cassini_voyager_global_mosaic_803m), May 2008; about 803 m per source pixel. |
 | Enhanced color | [JPL PIA18436](https://www.jpl.nasa.gov/images/pia18436-color-maps-of-iapetus-2014/), 2014; calibrated and photometrically corrected Cassini ultraviolet/infrared imagery. |
 | Infrared and Ice absorption | [Nantes Cassini VIMS archive](https://vims.univ-nantes.fr/), three observations from 10 September 2007. Infrared maps near-2.02/1.59/1.28 µm channels to false color; Ice absorption measures the near-2.02 µm feature relative to its continuum. |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/IAPETUS/target) Iapetus centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
 
@@ -15,6 +16,8 @@ The [B9 qualification report](https://github.com/layoutit/cssEarth/blob/86664627
 The [Iapetus visual review](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b9-cassini-ice-surfaces/VISUAL-REVIEW-IAPETUS.md#final-main-integration-review) covers six serial captures of the normal, infrared and ice views at DPR 1 and 2, reviewed on 2026-09-10. [Reports and images](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b9-cassini-ice-surfaces/evidence/README.md) identify capture base `80e19c51349f713c9a9a64b8ef1cbb78917f0fc7` plus the then-modified source, prepared and served-file pins. The same qualification report records failed broader suites and an incomplete full build.
 
 ## Known problems
+
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Iapetus (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge was fixed by drawing Gazetteer rims under both edge hypotheses and keeping the one where Turgis and Engelier rims on the Cassini/Voyager mosaic coincide with the imagery.
 
 - Both VIMS maps cover about 23.4% of reference-sphere solid angle, not measured physical surface area. Native scan gaps stay missing. Infrared bilinear/WebP sampling can soften mask edges.
 - The independent USGS comparison supports gross VIMS framing; precise local absolute registration remains unqualified.

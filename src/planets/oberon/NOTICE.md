@@ -7,3 +7,5 @@
 - Title: Inter by Rasmus Andersson, SIL Open Font License 1.1; shared pinned font recipe.
 
 Exact source hashes, transformation notes, credits and restoration paths are recorded in `source/manifest.json` and `source/preparation/acquisition.json`.
+
+Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.

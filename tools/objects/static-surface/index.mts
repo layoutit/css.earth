@@ -1,3 +1,4 @@
+import { attachSurfaceFeatures } from '../dist/surface-features/attach.js';
 import { isRecord, readJsonSource, requireRecord } from '../../source-values.mts';
 import type { CameraPlan } from '../../../src/renderers/css/navigation/types.ts';
 import { parsePreparedWorldContext } from '../../../src/renderers/css/dist/index.js';
@@ -103,8 +104,10 @@ export async function prepareStaticSurfaceObject({ objectDirectory, publicDirect
   };
   const {scene, presentation} = await preparePresentation();
   requirePreparedPresentation(presentation, { controls });
-  const definition = { ...presentation, schema: 'cssearth-object-runtime@4', id: descriptor.id, controls };
-  const values = { scene, lenses, sky, sun, controls, content, title, panel, runtime: definition, ...(band?.surfaceRasterCells.length ? { 'surface-raster-plan': band.surfaceRasterCells } : {}) };
+  const attached = await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: { ...presentation, schema: 'cssearth-object-runtime@4', id: descriptor.id, controls } });
+  const definition = attached.definition as typeof presentation & { schema: string; id: string; controls: typeof controls };
+  const contentDocument = attached.features ? { ...content, features: attached.features } : content;
+  const values = { scene, lenses, sky, sun, controls, content: contentDocument, title, panel, runtime: definition, ...(band?.surfaceRasterCells.length ? { 'surface-raster-plan': band.surfaceRasterCells } : {}) };
   for (const [name, value] of Object.entries(values)) await writeJson(resolve(outputDirectory, `${name}.json`), value);
   const urls = collectSceneUrls(descriptor.id, values);
   const manifest = await prepareRuntimeAssetManifest({ planetId: descriptor.id, urls, publicRoot: publicDirectory, manifestPath: pathToFileURL(resolve(outputDirectory, 'runtime-assets.json')) });

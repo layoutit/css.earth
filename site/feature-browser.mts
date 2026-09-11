@@ -67,7 +67,9 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
       index ??= await pending;
       if (destroyed || request !== revision) return;
       const names = new Map(index.objects.map(object => [object.id, object.name]));
-      matches = searchDestinations(index.features.map(feature => ({ feature, names: feature.searchNames, searchContext: `${feature.searchContext} ${names.get(feature.objectId)?.toLocaleLowerCase('en') ?? ''}` })), value, buttons.length).map(match => match.feature);
+      // The mounted body's own matches list first; other bodies follow in search order.
+      const ranked = searchDestinations(index.features.map(feature => ({ feature, names: feature.searchNames, searchContext: `${feature.searchContext} ${names.get(feature.objectId)?.toLocaleLowerCase('en') ?? ''}` })), value, buttons.length).map(match => match.feature);
+      matches = [...ranked.filter(feature => feature.objectId === objectId), ...ranked.filter(feature => feature.objectId !== objectId)];
       for (const [row, button] of buttons.entries()) {
         const feature = matches[row];
         button.parentElement!.hidden = !feature;

@@ -10,6 +10,7 @@ Mars uses Viking visible imagery, MOLA relief, THEMIS infrared observations, and
 | Elevation display | MOLA color relief from the [pinned OpenSpace tile source](source/manifest.json) |
 | Infrared display | Mars Odyssey THEMIS daytime infrared mosaic, from the [pinned OpenSpace tile source](source/manifest.json) |
 | Dimensions, placement and charts | USGS, OpenSpace, JPL and NASA PSG records below |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MARS/target) Mars centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
 
@@ -17,7 +18,10 @@ The camera section describes 201 independent reference samples. No dated test or
 
 ## Known problems
 
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Mars (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge was fixed by drawing Gazetteer rims under both edge hypotheses and keeping the one where Olympus Mons and Hellas Planitia on the Viking MDIM mosaic coincide with the imagery.
+
 - THEMIS shows qualitative infrared response, not calibrated temperature or one observation date.
+- The MOLA and THEMIS lens mosaics were re-stitched from the OpenSpace tile server on 2026-09-11 with the pinned tile recipe because the server no longer reproduced the bytes pinned earlier; the source manifest pins the refreshed mosaics.
 - Zero-valued edge fill is detected by a heuristic without an independent instrument mask. Gaps remain visible.
 - Atmosphere lighting and the fixed camera/Sun reference are presentation models, not an epoch-specific observation.
 - Phobos and Deimos are source archives here; Mars does not render them as embedded moons.
