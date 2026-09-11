@@ -33,6 +33,7 @@ try {
   await page.getByRole('tab', { name: 'Reconstruction', exact: true }).click();
   await page.locator('#structure-image').waitFor();
   assert.equal(await page.locator('#structure-image option').count(), catalogue.images.length);
+  await page.getByRole('group', { name: 'Structure inspection mode' }).getByRole('button', { name: 'Regions', exact: true }).click();
 
   await page.locator('#structure-image').selectOption('eso-vista');
   const activePlane = () => page.locator(`[data-structure-image="${catalogue.images.find(image => image.id === 'eso-vista')!.id}"]`);
@@ -50,6 +51,7 @@ try {
   await page.getByRole('button', { name: 'Reset alignment', exact: true }).click();
   await page.getByRole('tab', { name: 'Reconstruction', exact: true }).click();
   await page.locator('.structure-region').first().waitFor({ state: 'attached' });
+  await page.getByRole('group', { name: 'Structure inspection mode' }).getByRole('button', { name: 'Regions', exact: true }).click();
   const sceneCamera = await page.locator('.observation-structure-frame').getAttribute('style');
   const sourceNodes = await page.locator('[data-structure-image]').elementHandles();
   const sourceChecks = [], geometryChecks = [];

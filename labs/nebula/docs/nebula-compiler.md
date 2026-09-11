@@ -1,6 +1,6 @@
 # Nebula compiler: first inspect the evidence
 
-Updated 2026-09-12. **Current stage: automatically fit projected geometric candidates to the three aligned ESO observations, then inspect their support.** New 3D hypotheses remain a later stage, after these image-space fits are useful. The prior Hubble-based Helix volumes remain failed comparison baselines; this step does not repair or replace them.
+Updated 2026-09-12. **Current stage: compare an automatically initialized shape cloud against each aligned ESO observation.** Detected image contours seed editable ellipsoidal emission hypotheses; the model can be viewed beside, above or painted with the source. This is an inspection prototype, not a validated reconstruction. The prior Hubble-based Helix volumes remain failed comparison baselines.
 
 ## Intended contract
 
@@ -62,7 +62,27 @@ The [geometry recipe](../models/helix/observation-geometry.json) controls the de
 
 Each output is an immutable `geometry-{identity}.json` beside its exact source map. The identity includes recipe bytes, source/map/panel hashes, detector settings and TypeScript implementation hashes. Wall-clock timings appear only in the command log. Geometry attachments are excluded from the canonical input-catalogue hash so a replay can reproduce identical bytes. The catalogue gains references only after every source completes; previous map/image bytes and browser region-review identities remain unchanged. Generated outputs stay ignored. The stage performs no new volume inference or bake.
 
-A useful checkpoint follows actual nebular arcs without requiring hand-drawn guides and makes unsupported continuations obvious. Some candidates may be false positives or alternative fits to the same rim; they should remain visible as uncertainty. Assess these overlays before adding 3D primitives, cross-band physical association or a density generator. Rotating an eventual hypothesis will not by itself establish its true depth.
+A useful projected checkpoint follows actual nebular arcs without requiring hand-drawn guides and makes unsupported continuations obvious. Some candidates may be false positives or alternative fits to the same rim; they should remain visible as uncertainty. The shape-cloud comparison below exposes their volumetric effect; it does not establish cross-band physical association or true depth.
+
+## Shape-cloud comparison
+
+Open **Shapes** in the structure inspector; **Cloud preview** returns from the detected-line inspector to the cloud workbench. Automatic initialization merges nearby compatible ellipse boundaries with complete-link grouping: every member must remain compatible, so a chain of adjacent contours cannot merge separate shells. Each merged component retains its detected member IDs and projected-center group. The weighted average fit seeds a hollow ellipsoid; wall thickness, falloff, emission weight and line-of-sight extent are explicit assumptions. No manually supplied Helix center or radius is required.
+
+| Large mode button | Comparison |
+| --- | --- |
+| **Compare** | Registered source with optional guides beside the untextured cloud, with linked framing |
+| **Overlay** | The same neutral cloud above the source, with adjustable overlay opacity |
+| **Textured** | Source chromaticity painted onto the same prepared geometry and alpha |
+
+Start in locked **Earth view**. Hover guides for component/weight information and click a line to select it. **All / Group / Selected** scopes edit weight, thickness, softness, assumed depth, position, radii and rotation. **Enabled / Solo** isolate contributions; exposure is global. **Reset to detected** restores the automatic settings. Unlock rotation to inspect oblique/side views, then return to Earth view for registered comparison. Display modes preserve the cloud's framing and baked exposure.
+
+Edits immediately update guides and a saved draft; they do not mutate the last completed cloud. The pending-changes status directs the operator to **Preview / Update preview**. That explicit action prepares both materials with progress and cancellation. Refresh reconnects to the server-owned job. Drafts, jobs and completed results retain exact source/map/geometry identities; processing identities also include settings and implementation hashes. Changing an image never silently reuses another image's draft or result.
+
+The baker evaluates one neutral continuous emission field into 24 slabs per XYZ axis at 192px master width. It preserves the entire image window and all finite shell support, without transparent cropping. Raster x-right/y-down coordinates map once into x-right/y-up dimensionless model units; the comparison applies the same registered image transform as the structure inspector. It does not normalize each source ray to the photograph. The textured bank samples the pinned working starless source for chromaticity, preserving every neutral alpha byte and every quad. Uncovered and zero-RGB samples remain neutral. Shared alpha hashes, source pins and a front-emission PNG accompany the prepared PolyCSS volumes; generated data stays under the ignored local cache.
+
+Focused core checks exercise duplicate merging, control validation, asymmetric placement and raster handedness, meaningful weight/thickness/softness/depth changes, actual XYZ baking, equal neutral/textured geometry and alpha, exposure, empty states and cancellation. Removing the raster-to-world rotation sign fails the placement test. These checks validate the implementation, not Helix's physical geometry or the quality of its automatic contours.
+
+Current limits: this is a sum of soft ellipsoidal shells, not a fitted barrel/lobe family, hydrodynamic model or measured gas-density recovery. It does not automatically explain faint outer emission, infer front/back, optimize the 3D hypotheses jointly against images, or produce a model residual. Compare neutral emission before texture: painting can conceal a wrong shape. Preserve the original image evidence while investigating mismatches.
 
 ## Shared extractor and historical Hubble benchmark
 
@@ -146,15 +166,15 @@ pnpm exec vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 
 
 The first prepare command restores the existing comparison volume needed by the current viewer; it does not create a new inferred geometry. The second generates the structure map. Open `/reconstruction?subject=helix-model-prior`. If the lab already runs, keep it alive and omit the server command. All generated images, float fields, graph output and native caches remain ignored under `.local/nebula-lab/`; track the recipe and TypeScript implementation only.
 
-## Next experiment, after inspecting this map
+## Next experiment, after inspecting the shape cloud
 
-The user authorized structure inspection of the [aligned wider observations](../models/helix/README.md#current-step-aligned-observations-and-native-star-removal) on 2026-09-11. The next acceptance gate is the usefulness of the automatically fitted projected curves alongside those candidates and filters, before fitting 3D hypotheses. The complete downloaded Hubble frame is not the complete nebula; the numerical benchmark above still describes that historical source.
+The user authorized structure inspection of the [aligned wider observations](../models/helix/README.md#current-step-aligned-observations-and-native-star-removal) on 2026-09-11, then the editable shape-cloud comparison. The next acceptance gate is whether the neutral model explains the main projected features and which unsupported emission needs another model family. The complete downloaded Hubble frame is not the complete nebula; its numerical benchmark above remains historical.
 
-1. Inspect automatically fitted arcs/ellipses over each image and existing structure evidence, especially faint outer regions and possible NOX damage. Assess supported intervals rather than accepting full extrapolated ellipses. If relationships remain unreliable after the bounded prototype adjustments, stop at projected evidence and identify the detector limitation.
+1. Inspect automatically fitted arcs/ellipses and their neutral cloud contribution, especially faint outer regions and possible NOX damage. Use scope controls and Solo to distinguish duplicate contours from missing components. Assess supported intervals rather than accepting full extrapolated ellipses. If relationships remain unreliable after the bounded prototype adjustments, identify the detector limitation instead of hiding it with texture.
 2. Compare three coarse interpretations: a deformed shell, a barrel-like shell, and a bipolar structure, each with a separately represented outer component. Derive projected landmarks from accepted image evidence. Bound depth and orientation using published alternatives. Do not silently inflate rings or extrude the full rectangular image.
 3. Fit band emission, feature positions and widths; retain all unexplained signal in a residual map. Penalize unsupported complexity and discontinuous structure using explicitly authored priors. Front agreement cannot validate the assumed depths or rank indistinguishable solutions by scientific accuracy.
 4. Compare identical front/oblique/side camera poses at fixed exposure. Keep assumptions and uncertainty attached to each candidate. A known synthetic volume can test algorithmic recovery, but cannot validate Helix's true depth.
-5. Once a small volume is accepted, reuse the existing baker and job infrastructure. Preserve explicit processing, progress, cancellation, recipes and source hashes. Do not build a new job framework first.
+5. Once a small volume is accepted, retain its recipe and evidence for deliberate promotion. The preview already reuses the existing baker and job infrastructure; keep explicit processing, progress, cancellation and pinned outputs as models improve.
 
 ## Related work
 

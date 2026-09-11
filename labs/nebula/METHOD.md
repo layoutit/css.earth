@@ -4,9 +4,9 @@ This is the repeatable workflow for bringing observed images into the lab, separ
 
 **Without an existing density model:** the separate [planetary-nebula experiment](docs/planetary-nebulae.md) fits a plausible emission field from an image plus symmetry assumptions before baking. Its M2–9 recipe is not a replacement for the fixed LMC density workflow described below.
 
-**Choose the method from the evidence:** `density` uses an independent spatial prior; `symmetry` declares an axis/inclination; `inference` preserves image evidence and compares alternative geometry. All methods share the lab shell and source-registration/separation utilities. Helix's current stage automatically proposes projected arc/ellipse fits alongside the 2D structure evidence from the three aligned ESO images, using their existing native star removal. Human inspection accepts or rejects proposed fits; it does not require authoring primitives first. Review candidates before fitting any new depth hypothesis. Observation colors and shapes can differ by wavelength even when field stars align correctly.
+**Choose the method from the evidence:** `density` uses an independent spatial prior; `symmetry` declares an axis/inclination; `inference` preserves image evidence and compares alternative geometry. All methods share the lab shell and source-registration/separation utilities. Helix automatically proposes projected arc/ellipse fits from the three aligned ESO images, then groups nearby duplicate contours to initialize editable ellipsoidal emission hypotheses. This needs no hand-drawn primitives. The new shape-cloud comparison is an experiment, not an accepted replacement for the historical volumes. Observation colors and shapes can differ by wavelength even when field stars align correctly.
 
-**Current stage:** VISTA, Horálek and WISE have completed native NOX removal and separate 3D comparison bakes. Alignment imports/inspects sources; Reconstruction selects a completed native starless image and runs an explicit **Preview** job. Other catalogue images remain available for comparison/removal without being automatically selected for reconstruction. The comparison repaints the Alignment density cloud; it does not recover measured gas depth.
+**Current density stage:** VISTA, Horálek and WISE have completed native NOX removal and separate 3D comparison bakes. Alignment imports/inspects sources; Reconstruction selects a completed native starless image and runs an explicit **Preview** job. Other catalogue images remain available for comparison/removal without being automatically selected for reconstruction. The comparison repaints the Alignment density cloud; it does not recover measured gas depth.
 
 ## Order of operations
 
@@ -99,6 +99,17 @@ In **Reconstruction**, choose a completed source and press **Preview**. The sour
 - Verify the actual output against Alignment: every quad, every alpha byte, source/frame hashes, same stars across materials, and source switching at a retained camera. Keep the existing density source and saved browser placements untouched.
 
 Original-image inspection uses up to 2048px within four million pixels. The cloud has simulated stellar density and modeled display colors/depths, not measured gas geometry. Rotation artifacts of the inherited density bank remain a separate rendering concern.
+
+## Shape-cloud inference preview
+
+For an `inference` subject, use the [shape-cloud workbench](docs/nebula-compiler.md#shape-cloud-comparison) after inspecting aligned, separated image evidence. Its large **Compare / Overlay / Textured** buttons show one prepared model: source beside neutral emission, neutral emission above the source, or source chromaticity on the same emission. Earth view preserves registration and linked framing; unlock rotation to inspect an assumed depth.
+
+- Detected contours initialize the components automatically. Nearby duplicate brightness boundaries share one shell; distinct projected-center groups remain selectable. No hidden photo-column normalization makes the model match the image.
+- Hover a guide for its component/weight and click to select it. **All / Group / Selected** scopes expose weight, thickness, softness, depth, position, size, rotation and enable controls; exposure is global. **Solo** isolates a component; **Reset to detected** restores the automatic initialization.
+- Edits update saved drafts and guides. Press **Preview / Update preview** to prepare the volume; mode switches and sliders alone never process it. Pending edits remain distinguishable from the last completed cloud. Progress, Cancel and refresh reconnection use the server-owned job.
+- Neutral and textured outputs share all geometry and every decoded alpha byte. Painting uses the pinned working source and its exact pixel projection; uncovered/black pixels retain neutral material. Source, structure, geometry, settings and implementation identities bind results and drafts to their evidence.
+
+This preview models relative emission, not measured gas density. Depth and wall shape are authored assumptions; unsupported arcs, asymmetries and outer emission still need better hypotheses. The photo texture must not conceal a poor neutral fit.
 
 ## Selected LMC inputs
 

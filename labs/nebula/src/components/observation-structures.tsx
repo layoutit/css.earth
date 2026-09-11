@@ -2,6 +2,7 @@ import { memo, useCallback, useEffect, useMemo, useRef, useState, type PointerEv
 import { createPortal } from 'react-dom';
 import { localFile } from '../viewer/viewer';
 import { GeometryControls, GeometryOverlay } from './observation-geometry';
+import { ShapeCloudWorkbench } from './shape-cloud-workbench';
 import { readGeometryMap, type GeometryMap } from '../alignment/observations-ui/geometry-model';
 import { adjustedMatrix, imageCorners, savedObservationFit, unchanged, type Adjustment, type Matrix } from '../alignment/observations-ui/model';
 import { decisions, morphologies, readDecisions, readReviewMap, readStructureCatalogue, reviewStorageKey,
@@ -50,6 +51,7 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
   const [maps, setMaps] = useState<Record<string, ReviewMap>>({}), [mapErrors, setMapErrors] = useState<Record<string, string>>({});
   const [geometries, setGeometries] = useState<Record<string, GeometryMap>>({}), [geometryErrors, setGeometryErrors] = useState<Record<string, string>>({});
   const [mode, setMode] = useState<'shapes' | 'regions'>('shapes'), [shapeId, setShapeId] = useState('');
+  const [cloudEditor, setCloudEditor] = useState(true);
   const [shapeScore, setShapeScore] = useState(0), [showAllShapes, setShowAllShapes] = useState(true);
   const [selected, setSelected] = useState(''), [layer, setLayer] = useState<StructureLayer>('source'), [regionId, setRegionId] = useState('');
   const [filters, setFilters] = useState<Filters>(defaults), [highlights, setHighlights] = useState(true);
@@ -119,6 +121,7 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
   }, [host]);
   const image = data?.images.find(item => item.id === selected), map = maps[selected], review = reviews[selected];
   const geometry = geometries[selected], shapes = mode === 'shapes' && Boolean(image?.geometry);
+  const cloudActive = Boolean(shapes && cloudEditor && geometry && image);
   const candidateShapes = useMemo(() => geometry?.candidates.filter(candidate => candidate.score >= shapeScore) ?? [], [geometry, shapeScore]);
   const selectedShape = candidateShapes.find(candidate => candidate.id === shapeId) ?? candidateShapes[0];
   const shapeIds = useMemo(() => new Set((showAllShapes ? candidateShapes : selectedShape ? [selectedShape] : []).map(candidate => candidate.id)), [candidateShapes, selectedShape, showAllShapes]);
@@ -158,15 +161,18 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
     <select id="structure-image" disabled={!data} value={selected} onChange={event => { setSelected(event.target.value); setRegionId(''); setShapeId(''); }}>
       {data?.images.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}
     </select>
-    <div className="emission-layer-buttons" role="group" aria-label="Structure layer">
+    <div className="emission-layer-buttons" role="group" aria-label="Structure layer" hidden={cloudActive}>
       {map?.panels.map(panel => <button key={panel.id} type="button" title={panel.description} aria-pressed={layer === panel.id} onClick={() => setLayer(panel.id)}>{panel.label}</button>)}
     </div>
     {image?.geometry && <div className="emission-layer-buttons" role="group" aria-label="Structure inspection mode">
       <button type="button" aria-pressed={shapes} onClick={() => setMode('shapes')}>Shapes</button>
       <button type="button" aria-pressed={!shapes} onClick={() => setMode('regions')}>Regions</button>
     </div>}
-    <div hidden={!shapes}><GeometryControls geometry={geometry} candidates={candidateShapes} selected={selectedShape} score={shapeScore}
+    <div hidden={!shapes || cloudActive}><GeometryControls geometry={geometry} candidates={candidateShapes} selected={selectedShape} score={shapeScore}
       showAll={showAllShapes} onScore={setShapeScore} onShowAll={setShowAllShapes} onSelect={setShapeId} /></div>
+    {shapes && !cloudEditor && <button type="button" onClick={() => setCloudEditor(true)}>Cloud preview</button>}
+    {cloudActive && image && geometry && data && <ShapeCloudWorkbench image={image} geometry={geometry} cataloguePath={cataloguePath} host={host}
+      matrix={matrices[image.id] ?? image.imageToFrame} frame={data.frame} onDetected={() => setCloudEditor(false)} />}
     <div hidden={shapes}>
     <div className="structure-morphologies" role="group" aria-label="Morphology filters">{morphologies.map(kind => <label key={kind}>
       <input type="checkbox" checked={filters.morphology[kind]} onChange={event => setFilters(current => ({ ...current, morphology: { ...current.morphology, [kind]: event.target.checked } }))} />{title(kind)}
@@ -209,7 +215,7 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
       {map.metrics.reconstructionMaxError < 1e-5 ? 'All input accounted for' : 'Inspect accounting error'} · {(map.metrics.unassignedFraction * 100).toFixed(1)}% unassigned</p>}
     {image && <p className="interaction-hint"><a href={image.page} target="_blank" rel="noreferrer" title={image.credit}>Source & credit ↗</a></p>}
     {(status || storageError) && <p className="interaction-hint emission-structure-status" role={error || mapErrors[selected] || (shapes && geometryErrors[selected]) ? 'alert' : 'status'} data-error={Boolean(error || mapErrors[selected] || (shapes && geometryErrors[selected]))}>{status || storageError}</p>}
-    {host && createPortal(<section className="observation-structures-workspace" aria-label="Registered structure inspection">
+    {host && createPortal(<section className="observation-structures-workspace" aria-label="Registered structure inspection" data-cloud-active={cloudActive}>
       <div ref={viewport} className="observation-sky" aria-label="Structure inspection sky" tabIndex={0} onPointerDown={pointerDown} onPointerMove={pointerMove}
         onPointerUp={event => { const start = drag.current; drag.current = null;
           if (start?.id === event.pointerId && start.regionId && Math.hypot(event.clientX - start.x, event.clientY - start.y) < 4) setRegionId(start.regionId);

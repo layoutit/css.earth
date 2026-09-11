@@ -11,6 +11,8 @@ export async function checkObservationGeometry(page: Page, image: StructureImage
   const plane = page.locator(`[data-structure-image="${image.id}"]`);
   const modes = page.getByRole('group', { name: 'Structure inspection mode' });
   await modes.getByRole('button', { name: 'Shapes', exact: true }).click();
+  const detectedLines = page.getByRole('button', { name: 'Detected lines', exact: true });
+  if (await detectedLines.isVisible()) await detectedLines.click();
   const svg = plane.locator('.structure-geometry'); await svg.waitFor();
   const shape = svg.locator('[data-shape-id]').first(); await shape.waitFor({ state: 'attached' });
   const node = await shape.elementHandle(); assert.ok(node);

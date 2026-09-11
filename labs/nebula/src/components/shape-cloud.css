@@ -1,0 +1,53 @@
+.shape-cloud-modes { margin: 6px 0 12px; gap: 8px; }
+.observation-structures > .emission-layer-buttons[hidden] { display: none; }
+.shape-cloud-modes button { min-height: 70px; font-size: 12px; padding: 10px 4px; border-radius: 6px; }
+.shape-cloud-modes button > span:first-child { font-size: 30px; }
+.shape-cloud-modes button[aria-pressed="true"] { background: #292c30; }
+.shape-cloud-modes button:not(:disabled):hover { background: #22252a; }
+.shape-cloud-job-actions, .shape-cloud-camera-actions, .shape-cloud-component-actions, .shape-cloud-scope { display: flex; gap: 6px; align-items: center; }
+.shape-cloud-job-actions button:first-child { flex: 1; min-height: 37px; }
+.shape-cloud-workbench progress { width: 100%; margin-top: 8px; height: 5px; accent-color: #aec7cf; }
+.shape-cloud-status { margin: 7px 0 12px; min-height: 13px; }
+.shape-cloud-status[data-unapplied="true"] { color: #e5c795; }
+.shape-cloud-error { color: #f2b8ae; }
+.shape-cloud-camera-actions button { flex: 1; font-size: 11px; }
+.shape-cloud-editing { border-top: 1px solid var(--divider); margin-top: 12px; padding-top: 12px; }
+.shape-cloud-scope { margin-bottom: 12px; }
+.shape-cloud-scope button { flex: 1; padding: 6px 4px; }
+.shape-cloud-scope button[aria-pressed="true"] { background: #34383d; border-color: #788792; }
+.shape-cloud-component-actions { justify-content: space-between; margin: 8px 0; }
+.shape-cloud-component-actions button { font-size: 11px; padding: 5px 9px; }
+.shape-cloud-component-actions .observation-check { margin: 0; }
+.shape-cloud-slider { margin-top: 10px; }
+.shape-cloud-foot { display: flex; justify-content: space-between; align-items: center; gap: 6px; margin-top: 15px; }
+.shape-cloud-foot .interaction-hint { margin: 0; }
+.shape-cloud-workspace { position: absolute; inset: 0; z-index: 1; background: #000; }
+.shape-cloud-stage { position: absolute; inset: 0 338px 30px 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; min-width: 0; }
+.shape-cloud-stage[data-mode="overlay"], .shape-cloud-stage[data-mode="textured"] { grid-template-columns: 1fr; }
+.shape-cloud-source-slot, .shape-cloud-output-slot { min-width: 0; min-height: 0; }
+.shape-cloud-source-slot[hidden] { display: none; }
+.shape-cloud-pane { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.shape-cloud-pane-label { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); z-index: 2; color: #b5bac1; font-size: 11px; white-space: nowrap; pointer-events: none; }
+.shape-cloud-viewport { position: absolute; inset: 38px 0 0; overflow: hidden; touch-action: none; cursor: grab; }
+.shape-cloud-viewport:active { cursor: grabbing; }
+.shape-cloud-frame, .shape-cloud-image-plane { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
+.shape-cloud-source, .shape-cloud-render-host, .shape-cloud-guides { position: absolute; top: 0; left: 0; }
+.shape-cloud-source { display: block; max-width: none; pointer-events: none; user-select: none; }
+.shape-cloud-render-host { overflow: visible; pointer-events: none; }
+.shape-cloud-guides { overflow: visible; pointer-events: none; }
+.shape-cloud-guides g { cursor: pointer; }
+.cloud-guide-line { fill: none; stroke: #79c3d6; stroke-width: 1.2px; stroke-opacity: .8; }
+.cloud-guide-hit { fill: none; stroke: transparent; stroke-width: 14px; pointer-events: stroke; }
+.shape-cloud-guides g[data-enabled="false"] .cloud-guide-line { stroke-dasharray: 3 5; stroke-opacity: .4; }
+.shape-cloud-guides g[data-selected="true"] .cloud-guide-line { stroke: #f1c68b; stroke-width: 2px; stroke-opacity: 1; }
+.shape-cloud-guides g:hover .cloud-guide-line { stroke: #fff; stroke-width: 3px; stroke-opacity: 1; }
+.structure-geometry g:hover .geometry-support, .structure-geometry g:hover .geometry-gap { stroke: #fff; stroke-width: 3px; opacity: 1; }
+.shape-cloud-empty { position: absolute; bottom: 10%; left: 10%; right: 10%; text-align: center; color: #a7adb5; font-size: 12px; pointer-events: none; }
+.shape-cloud-camera-hint { position: absolute; bottom: 10px; left: 10px; right: 338px; color: #9299a1; font-size: 11px; text-align: center; pointer-events: none; }
+.workspace-content:has(.shape-cloud-workspace) > #inspection-panel { visibility: hidden; }
+.observation-structures-workspace[data-cloud-active="true"] { visibility: hidden; pointer-events: none; }
+@media (max-width: 1100px) { .shape-cloud-stage { right: 288px; } .shape-cloud-camera-hint { right: 288px; } }
+@media (max-width: 760px) {
+  .shape-cloud-stage { inset: 220px 0 30px; gap: 0; }
+  .shape-cloud-camera-hint { right: 0; }
+}
