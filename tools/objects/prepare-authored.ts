@@ -11,6 +11,7 @@ import { prepareObjectContentAssets } from './content/prepare.js';
 import { loadGeometryAdapters } from './geometry-adapters.js';
 import { prepareRuntimeManifest } from './operations.js';
 import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.js';
+import { prepareSurfaceFeatures } from './surface-features/index.js';
 
 export interface AuthoredPreparationContext { readonly objectDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string; readonly write?: boolean; }
 export interface VerifiedSource { readonly reference: SourceReference; readonly path: string; readonly value: unknown; }
@@ -100,17 +101,22 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   const descriptor = parseAuthoredObjectDescriptor(JSON.parse(await readFile(descriptorPath, 'utf8')) as unknown);
   const entries = await Promise.all(descriptor.recipe.sources.map(reference => verifiedSource(objectDirectory, reference)));
   const sources = new Map(entries.map(entry => [entry.reference.id, entry]));
+  // Nomenclature labels ride the generic sphere lane; other lanes declare no mesh anchor frame yet.
+  const genericLaneOnly = () => { if (descriptor.recipe.features) throw new TypeError('Surface features are prepared by the generic authored lane only.'); };
   if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-static-surface-geometry@1') {
+    genericLaneOnly();
     const { prepareStaticSurfaceObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/static-surface/index.mts')).href) as typeof import('./static-surface/index.mts');
     return prepareStaticSurfaceObject({ objectDirectory, publicDirectory, outputDirectory, write });
   }
   await mkdir(outputDirectory, { recursive: true });
   const sourceDirectory = resolve(objectDirectory, 'source');
   if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-layered-oblate-preparation@1') {
+    genericLaneOnly();
     const { prepareLayeredOblateObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/material-composition/index.mts')).href) as typeof import('./material-composition/index.mts');
     return prepareLayeredOblateObject({ objectDirectory, publicDirectory, outputDirectory, write, prepareContent: prepareObjectContentAssets });
   }
   if (source(sources, 'paged-ellipsoid')) {
+    genericLaneOnly();
     const { preparePagedEllipsoidObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/paged-ellipsoid/index.mts')).href) as typeof import('./paged-ellipsoid/index.mts');
     const prepared = await preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
@@ -121,6 +127,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     return Object.freeze({ ...prepared });
   }
   if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-banded-ellipsoid@1') {
+    genericLaneOnly();
     const { prepareLayeredGiantObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/giant-layers/object.mts')).href) as typeof import('./giant-layers/object.mts');
     const prepared = await prepareLayeredGiantObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
@@ -130,12 +137,14 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     return Object.freeze({ ...prepared });
   }
   if (source(sources, 'shape-model')) {
+    genericLaneOnly();
     const { prepareShapeModel } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/shape-model/index.mts')).href) as typeof import('./shape-model/index.mts');
     const prepared = await prepareShapeModel({ descriptor, sources, objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory, manifestPath: resolve(outputDirectory, 'runtime-assets.json'), allowPreparationArtifacts: true, values: [prepared.definition, prepared.content] });
     return Object.freeze({ descriptor, sources, ...prepared });
   }
   if (source(sources, 'terrestrial')) {
+    genericLaneOnly();
     const terrestrial = record(required(sources, 'terrestrial').value, 'terrestrial');
     if (Boolean(terrestrial.rings) !== Boolean(descriptor.recipe.rings)) throw new TypeError('Prepared terrestrial rings must match the authored capability.');
     const { prepareTerrestrialLayers } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/terrestrial-layers/index.mts')).href) as typeof import('./terrestrial-layers/index.mts');
@@ -158,18 +167,25 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   validateCapabilityComposition(descriptor, rasterConfig as unknown as Record<string, unknown>, geometryConfig as unknown as Record<string, unknown>, solarSource, content.lenses);
   const presentation = parsePresentationProfile(required(sources, 'presentation').value);
   const definition = await prepareCssPresentation({ namespace: presentation.namespace, mode: presentation.mode, scene: scene as unknown as PresentationInputs['scene'], assets: raster as unknown as PresentationInputs['assets'], lenses: content.lenses as unknown as PresentationInputs['lenses'], sun: celestial.sun as unknown as PresentationInputs['sun'], markers: celestial.markers, solarSource: solarSource as unknown as PresentationInputs['solarSource'], controls: content.controls as unknown as PresentationInputs['controls'] });
-  await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(definition)}\n`);
+  const featuresRecipe = descriptor.recipe.features;
+  const features = featuresRecipe ? await prepareSurfaceFeatures({ objectId: descriptor.id, sourceDirectory, publicDirectory, outputDirectory,
+    config: required(sources, featuresRecipe.source).value, maxEntries: featuresRecipe.maxEntries, radiusKm: descriptor.recipe.shape.radiusKm,
+    // Anchors live in the mesh's raw coordinates: the camera's scene scale maps them to the rendered body radius.
+    meshRadiusUnits: solarSource.bodyRadiusUnits / (definition as unknown as { camera: { sceneScale: number } }).camera.sceneScale, tree: (definition as unknown as { tree: Parameters<typeof prepareSurfaceFeatures>[0]['tree'] }).tree,
+    declaredLensIds: descriptor.recipe.surfaces.flatMap(surface => surface.lenses.map(lens => lens.id)) }) : null;
+  const runtime = features ? { ...(definition as unknown as Record<string, unknown>), features: features.plan } : definition;
+  await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(runtime)}\n`);
   await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
     manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),
-    values: [raster, celestial, scene, definition, content] });
+    values: [raster, celestial, scene, runtime, content] });
   if (write) {
     const descriptorData = record(JSON.parse(await readFile(descriptorPath, 'utf8')) as unknown, 'descriptor');
     const properties = record(descriptorData.properties, 'descriptor.properties');
     await writeFile(descriptorPath, `${JSON.stringify({ ...descriptorData, properties: { ...properties, worldFrame: scene.worldFrame } }, null, 2)}\n`);
-    await writePreparedObject(descriptor.id, definition as unknown as Record<string, unknown>);
+    await writePreparedObject(descriptor.id, runtime as unknown as Record<string, unknown>);
   }
-  const result = Object.freeze({ descriptor, sources, raster, celestial, scene, definition });
-  await writeFile(resolve(outputDirectory, 'authored-preparation.json'), `${JSON.stringify({ schema: 'cssearth-authored-preparation@1', id: descriptor.id, sources: entries.map(entry => entry.reference), lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true } })}\n`);
+  const result = Object.freeze({ descriptor, sources, raster, celestial, scene, definition: runtime });
+  await writeFile(resolve(outputDirectory, 'authored-preparation.json'), `${JSON.stringify({ schema: 'cssearth-authored-preparation@1', id: descriptor.id, sources: entries.map(entry => entry.reference), lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true, ...(features ? { features: true } : {}) } })}\n`);
   return result;
 }
 

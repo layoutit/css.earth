@@ -42,7 +42,7 @@
         "scene"
       ],
       "title": "MESSENGER MDIS monochrome mosaic",
-      "displayCredit": "USGS · NASA/MESSENGER",
+      "displayCredit": "USGS \u00b7 NASA/MESSENGER",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products",
       "attributionGroup": {
         "id": "messenger-mdis-global-maps",
@@ -89,7 +89,7 @@
         "scene"
       ],
       "title": "MESSENGER MDIS enhanced-color mosaic",
-      "displayCredit": "USGS · NASA/MESSENGER",
+      "displayCredit": "USGS \u00b7 NASA/MESSENGER",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m",
       "attributionGroup": {
         "id": "messenger-mdis-global-maps",
@@ -137,7 +137,7 @@
         "scene"
       ],
       "title": "MESSENGER global shaded relief",
-      "displayCredit": "USGS · NASA/MESSENGER",
+      "displayCredit": "USGS \u00b7 NASA/MESSENGER",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km",
       "attributionGroup": {
         "id": "messenger-mdis-global-maps",
@@ -505,7 +505,7 @@
         "charts"
       ],
       "title": "MESSENGER MASCS spectral cube",
-      "displayCredit": "M. D’Amore · DLR · NASA/MESSENGER",
+      "displayCredit": "M. D\u2019Amore \u00b7 DLR \u00b7 NASA/MESSENGER",
       "sourceUrl": "https://doi.org/10.5281/zenodo.7433033",
       "sourceBinding": {
         "kind": "catalogued",
@@ -740,8 +740,8 @@
     {
       "id": "mercury-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedSha256": "1e9217f574286a21b1e4da04b284aeabd8d241b9407cafa935feaa60cdadbf56",
-      "expectedBytes": 6481,
+      "expectedSha256": "42b2b0d2d4930214b40e5715a1c836ff9c263e865713cace07e90ac5ede46311",
+      "expectedBytes": 6737,
       "origin": "Repository-authored Mercury acquisition and qualification recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -863,11 +863,78 @@
       "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
       "consumers": [
         "lenses",
-        "presentation"
+        "presentation",
+        "features"
       ],
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored texture axes and CSS surface selector."
+      }
+    },
+    {
+      "id": "usgs-gazetteer-mercury-nomenclature-center-pts",
+      "path": "features/MERCURY_nomenclature_center_pts.zip",
+      "expectedBytes": 1643245,
+      "expectedSha256": "cd5c44d20ce0a9e167620c7b6799d0adaf228a418539c09e71ac27caa6cdf506",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MERCURY_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Mercury on 2026-09-11 from the USGS Astrogeology GIS downloads page; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Mercury centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/MERCURY/target",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-usgs-gazetteer-nomenclature-center-pts",
+            "role": "material",
+            "evidence": "src/planets/mercury/source/features/manifest.json@d1df0e9439e71dcf03fec387859d2817ca5285f1#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mercury-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1013,
+      "expectedSha256": "098425552904c728f661ba20bc94cb7236a133d174a8aeceae74cb5078cc4eb1",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "mercury-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1143,
+      "expectedSha256": "1af490a4216880b35b52d2e47377532313fc59dc8fb1ec53647e02367b8d8fe0",
+      "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other Mercury preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
       }
     }
   ],

@@ -1945,3 +1945,90 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     display: none;
   }
 }
+
+/* Prepared nomenclature labels. The renderer positions each retained span and
+   the shared tooltip; typography and the card belong to the shell. */
+.prepared-surface-features [data-feature-label] {
+  color: var(--shell-text);
+  font: 500 12px/14px var(--shell-ui-font);
+  letter-spacing: 0.01em;
+  text-shadow: 0 0 2px rgb(0 0 0 / 95%), 0 1px 3px rgb(0 0 0 / 80%);
+  transition: color 120ms ease;
+}
+
+.prepared-surface-features [data-feature-kind="point"]::before {
+  position: absolute;
+  top: 50%;
+  left: -11px;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 70%);
+  content: "";
+}
+
+.prepared-surface-features [data-feature-kind="linear"] {
+  font-style: italic;
+  color: var(--shell-text-secondary);
+}
+
+.prepared-surface-features [data-feature-kind="region"] {
+  font: 600 11px/14px var(--shell-ui-font);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--shell-text-secondary);
+}
+
+.prepared-surface-features [data-feature-label][data-object-hovered="true"] {
+  color: #fff;
+}
+
+.prepared-surface-features [data-feature-tooltip] {
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 280px;
+  margin-top: -14px;
+  padding: 10px 12px 11px;
+  border-radius: 8px;
+  color: var(--shell-text);
+  background: rgb(32 33 36 / 94%);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 55%), 0 0 0 1px rgb(255 255 255 / 8%);
+  font: 400 12px/16px var(--shell-ui-font);
+  text-align: left;
+  white-space: normal;
+}
+
+.prepared-surface-features [data-feature-tooltip][hidden] {
+  display: none;
+}
+
+.prepared-surface-features [data-feature-tooltip-name] {
+  display: block;
+  font: 600 14px/18px var(--shell-ui-font);
+  color: #fff;
+}
+
+.prepared-surface-features [data-feature-tooltip-detail] {
+  display: block;
+  color: var(--shell-text-secondary);
+}
+
+.prepared-surface-features [data-feature-tooltip-origin] {
+  margin: 6px 0 0;
+  color: var(--shell-text-secondary);
+}
+
+.prepared-surface-features [data-feature-tooltip-origin]:empty {
+  display: none;
+}
+
+/* The hovered feature's published diameter, traced as retained screen chords
+   like the orbit lines. The stroke is a shell size in CSS pixels. */
+.prepared-surface-features [data-feature-outline-piece] {
+  height: 1.5px;
+  margin-top: -0.75px;
+  background: rgb(255 255 255 / 85%);
+  box-shadow: 0 0 2px rgb(0 0 0 / 60%);
+}
