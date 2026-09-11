@@ -107,7 +107,8 @@ test('the pinned Mercury Gazetteer archive prepares anchored IAU features on the
     assert.equal(enterprise?.kind, 'linear'); assert.equal(enterprise?.outline.kind, 'box');
     // The published extent runs 66.16–84.03° E, 38.47–28.67° S: the first polygon vertex is the south-west corner.
     const corner = surfaceDirection(66.1641, -38.4737, axes, 180);
-    assert.ok(enterprise?.outline.kind === 'box' && corner.every((n, i) => Math.abs(n * 11500 - enterprise.outline.points[0]![i]!) < 1), JSON.stringify(enterprise?.outline.kind === 'box' && enterprise.outline.points[0]));
+    const enterprisePoints = enterprise?.outline.kind === 'box' ? enterprise.outline.points : null;
+    assert.ok(enterprisePoints && corner.every((n, i) => Math.abs(n * 11500 - enterprisePoints[0]![i]!) < 1), JSON.stringify(enterprisePoints?.[0]));
     await assert.rejects(prepareSurfaceFeatures({ objectId: 'mercury', sourceDirectory: mercurySource, publicDirectory: resolve(directory, 'p2'), outputDirectory: resolve(directory, 'o2'),
       config, maxEntries: 10, radiusKm: 2439.7, meshRadiusUnits: 11500, tree, declaredLensIds: ['normal', 'enhanced', 'topography'] }), /exceed the authored capability/u);
     await assert.rejects(prepareSurfaceFeatures({ objectId: 'mercury', sourceDirectory: mercurySource, publicDirectory: resolve(directory, 'p3'), outputDirectory: resolve(directory, 'o3'),
