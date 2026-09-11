@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "10c4fe33ddea1155ffa78a8366a799f917274fd6d4ddcd1d4ae0f1f36d105c08"
+    "sha256": "94dd2dcae85163f9c27691c02f1b16f1dcd5b1bef668e8163a2760562bc26cf7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
+    "bindingsSha256": "aa33d5c45083c7111a12357abed2c6823a3447c20fcafe35fb0d7fc19e80f520"
   },
   "recipes": [
     {
@@ -676,6 +676,64 @@
           }
         ]
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "1af490a4216880b35b52d2e47377532313fc59dc8fb1ec53647e02367b8d8fe0",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "MERCURY_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "MERCURY_nomenclature_center_pts.dbf",
+          "projection": "MERCURY_nomenclature_center_pts.prj",
+          "metadata": "metadata_nomenclature_points_MERCURY.xml"
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 180,
+        "output": "mercury-features.json",
+        "publicBase": "/scenes/mercury/",
+        "target": {
+          "className": "mercury-body"
+        },
+        "lensIds": [
+          "normal",
+          "enhanced",
+          "topography"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 1,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 48,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 64
+        }
+      }
     }
   ],
   "sources": [
@@ -978,6 +1036,85 @@
       },
       "sha256": "b1aaec4f4361318c40d4f4cbc10c798baca0dbfb309cdab41152d6f83925d756",
       "bytes": 13609,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mercury-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "sha256": "098425552904c728f661ba20bc94cb7236a133d174a8aeceae74cb5078cc4eb1",
+      "bytes": 1013,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-mercury-nomenclature-center-pts",
+      "path": "features/MERCURY_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MERCURY_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Mercury on 2026-09-11 from the USGS Astrogeology GIS downloads page; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Mercury centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/MERCURY/target",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-usgs-gazetteer-nomenclature-center-pts",
+            "role": "material",
+            "evidence": "src/planets/mercury/source/features/manifest.json@d1df0e9439e71dcf03fec387859d2817ca5285f1#/inputs/0"
+          }
+        ]
+      },
+      "sha256": "cd5c44d20ce0a9e167620c7b6799d0adaf228a418539c09e71ac27caa6cdf506",
+      "bytes": 1643245,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/MERCURY_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MERCURY_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mercury-surface-minimap-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation metadata",
+      "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
+      "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored texture axes and CSS surface selector."
+      },
+      "sha256": "b6f9051b9d032fe0dab9d5f5303171052b6390066d43fc7f29aebf83cb829669",
+      "bytes": 154,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1696,7 +1833,7 @@
         {
           "url": "object:prepared/content.json",
           "bytes": 9421,
-          "sha256": "cca587f32eb122d38dfed7cf6bd0c5c6b3f380bbbcb37eca479158d9b7724b33",
+          "sha256": "87f35aa2fc3a3eb8965eac52564e70d9594099495518efe2e38f5954cb732990",
           "verification": "bytes-verified"
         }
       ],
@@ -1756,6 +1893,40 @@
         }
       ],
       "inputBasis": "authored-recipe"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh and rank features by diameter.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 180,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "mercury-surface-features-source",
+        "usgs-gazetteer-mercury-nomenclature-center-pts",
+        "mercury-surface-minimap-frame"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/mercury/mercury-features.json",
+          "bytes": 497024,
+          "sha256": "039e46dac74f9ea7888e661778ddaeb729e069dfcfac1583a261dc64b9ee25c8",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
     },
     {
       "id": "preview:normal",

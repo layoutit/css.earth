@@ -6,6 +6,7 @@ import type { RetainedHeliocentricView } from "../solar-system/heliocentric-view
 import type { ObjectWorldNavigation, ObjectWorldNavigationListener } from './world-navigation-types.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { ObjectDatasets } from './deferred-object-mount.js';
+import type { SurfaceFeatureLayerRuntime } from '../labels/surface-feature-types.js';
 import { errorMessage } from "../navigation/types.js";
 import { publishObjectDiagnostics } from "./object-diagnostics.js";
 export type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView } from "./object-runtime-types.js";
@@ -46,6 +47,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     }
     if (definition.destinations && !capabilities.createDestinations) throw new TypeError("Prepared destinations require an injected runtime capability.");
     if (definition.pageLayers?.length && !capabilities.mountPages) throw new TypeError("Prepared pages require an injected runtime capability.");
+    if (definition.features && !capabilities.mountSurfaceFeatures) throw new TypeError("Prepared surface features require an injected runtime capability.");
     const lifetime = environment.createLifetime();
     let readyPublished = false, settled = false;
     let resolveReady!: () => void, rejectReady!: (error: unknown) => void;
@@ -56,6 +58,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     let currentView: ObjectRuntimeView | null = null, reference: OrbitPublication | null = null, previousPublication: OrbitPublication | null = null;
     let heliocentric: RetainedHeliocentricView | null = null;
     const pageLayers = new Map<string, PageLayerRuntime>();
+    let surfaceFeatures: SurfaceFeatureLayerRuntime | null = null;
     let allowed = false, navigatedLens: string | null = null, maximumZoom = definition.camera.maximumZoom;
     const cameraPlan = Object.freeze({ ...definition.camera, get maximumZoom() { return maximumZoom; } });
     let startupDecodedAssets = 0;
@@ -206,6 +209,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     function syncPagePlayback() {
       const running = allowed && (selection?.state().committed?.speed ?? initialSelection.speed ?? 1) !== 0;
       for (const layer of pageLayers.values()) layer.setPlaying(running);
+      surfaceFeatures?.setPlaying(running);
     }
     function setAllowed(value: boolean) { allowed = value; playback.setAllowed(value); syncPagePlayback(); }
     function stopMotion() { onMotionRequest(false); setAllowed(false); }
@@ -255,6 +259,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       previousPublication = publication;
       selection?.setView(currentView);
       for (const layer of pageLayers.values()) layer.publish(currentView);
+      surfaceFeatures?.publish(currentView);
       if (worldFrame && publication.focal !== undefined && publication.principalOffset &&
           publication.principalOffset.length === 2) {
         latestWorldPublication = publication;
@@ -353,10 +358,19 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         onCommit: next => {
           playback.setSelection(next);
           for (const layer of pageLayers.values()) { layer.setLens({ id: next.lensId }); layer.setPlaying(allowed && (next.speed ?? 1) !== 0); }
+          surfaceFeatures?.setLens({ id: next.lensId }); surfaceFeatures?.setPlaying(allowed && (next.speed ?? 1) !== 0);
         }, onFatalError: fatal,
         onChange: state => publishSelection(state),
         onMaterialError: error => console.error(error) });
       context.own(() => selection?.destroy());
+      if (definition.features) {
+        if (!capabilities.mountSurfaceFeatures || !mounted.featureTarget) throw new TypeError("Prepared surface features require an injected runtime capability.");
+        surfaceFeatures = capabilities.mountSurfaceFeatures({ host: stage, plan: definition.features, objectId: definition.id, target: mounted.featureTarget,
+          scene: mounted.sceneElement, zoomRange: () => ({ minimum: definition.camera.minimumZoom, maximum: cameraPlan.maximumZoom }),
+          lifetime, pickingHost: stage, onError: error => console.error(error) });
+        context.own(() => surfaceFeatures?.destroy());
+        surfaceFeatures.setLens({ id: initialSelection.lensId });
+      }
       orbit = environment.createOrbit({ stage, inputSurface, runtimePolicy, cameraElement: mounted.cameraElement, sceneElement: mounted.sceneElement,
         cubicSky, skyPlan: definition.sky, directionalSun, directionalSunPlan: definition.sun ?? null, heliocentric, worldContext: orbitWorldContext,
         cameraPlan, viewport, framePresenter, objectId: definition.id, requireSun: false, preparedSurfaceHitTest: mounted.surfaceHitTest,
@@ -382,7 +396,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (lifetime.disposed) return;
       controls.setReady();
       readyPublished = true;
-      if (diagnostics) publishObjectDiagnostics({ stage, definition, mounted, orbit, cubicSky, heliocentric, selection, controls, resources, playback, lifetime, context, initialSelection, startupDecodedAssets, pageLayers, getCurrentView: () => currentView });
+      if (diagnostics) publishObjectDiagnostics({ stage, definition, mounted, orbit, cubicSky, heliocentric, selection, controls, resources, playback, lifetime, context, initialSelection, startupDecodedAssets, pageLayers, surfaceFeatures, getCurrentView: () => currentView });
       settled = true;
       resolveReady();
       // First paint owns the small prepared bank. Refinement uses the same

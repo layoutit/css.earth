@@ -221,5 +221,14 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       label: text(plan.title ?? plan.kind), urls: [prefix + plan.output], lensIds: [],
       interpretation: { kind: plan.kind, qualification: maybeRecord(plan.metadata)?.qualification },
     }));
+  const features = recipe('features');
+  if (features?.schema === 'cssearth-surface-features@1') {
+    const directory = text(features.directory);
+    add('features', 'features', '', [`${directory}/manifest.json`, `${directory}/${text(features.archive)}`, text(features.surfaceMap)],
+      'Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh and rank features by diameter.', {
+        label: 'Named features', urls: [prefix + text(features.output)], lensIds: [],
+        interpretation: { kind: 'nomenclature-centre-points', mapLeftEdgeLongitudeDeg: features.mapLeftEdgeLongitudeDeg, excludedTypeCodes: features.excludedTypeCodes },
+      });
+  }
   return { products, unresolved };
 }
