@@ -609,7 +609,8 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     }
     setPanelHidden(browser, false);
     for (const item of items) {
-      const match = classification === "dwarf-planet" || classification === "star" ? item.dataset.objectClassification === classification
+      // A class search stays exact inside grouped tabs; only Planets deliberately includes dwarf planets.
+      const match = classification && classification !== "planet" ? item.dataset.objectClassification === classification
         : showAll || classification || (systemName
         ? item.dataset.objectSystemName === systemName
         : (item.dataset.objectName ?? "").includes(query));
@@ -646,6 +647,12 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   }, {
     signal: events.signal,
   });
+  // Clearing empties the query and returns to the selected card, like Escape.
+  documentTarget.querySelector<HTMLElement>('.planet-sidebar-search-clear')?.addEventListener('click', () => {
+    search.value = "";
+    render(false);
+    search.focus();
+  }, { signal: events.signal });
   for (const button of categoryButtons) {
     button.addEventListener('click', () => {
       search.value = button.dataset.searchQuery ?? "";
