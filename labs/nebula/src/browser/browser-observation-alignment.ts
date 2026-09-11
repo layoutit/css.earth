@@ -26,33 +26,27 @@ page.on('request', request => {
   if (checkInitialLoads && request.url().includes('/planetary/helix-model-prior/')) initialVolumes.push(request.url());
 });
 const matrices = async () => page.locator('.observation-frame img').evaluateAll(nodes => nodes.map(node => [node.getAttribute('data-observation'), (node as HTMLElement).style.transform]));
-async function selectComparison() {
-  await page.locator('#observation-reference').selectOption('eso-wfi');
-  await page.locator('#observation-image').selectOption('eso-vista');
-}
 try {
   await page.goto('http://127.0.0.1:4331/alignment?subject=helix-model-prior');
   await page.locator('.observation-frame img').first().waitFor();
-  await selectComparison();
   assert.equal(await page.locator('#observation-image option').count(), 3);
-  assert.match(await page.locator('#observation-image option[value="eso-wfi"]').innerText(), /reference/);
-  await page.locator('#observation-image').selectOption('eso-wfi');
-  assert.equal(await page.locator('#observation-reference').inputValue(), 'eso-vista');
-  assert.equal(await page.locator('#observation-image').inputValue(), 'eso-wfi');
-  await selectComparison();
-  await page.getByRole('checkbox', { name: 'Show all images', exact: true }).check();
+  assert.equal(await page.locator('#observation-reference').count(), 0);
   assert.deepEqual(initialVolumes, [], 'Observation alignment must not require a baked volume.');
   checkInitialLoads = false;
   const originalMatrices = await matrices();
   const nodes = await page.locator('.observation-frame img').elementHandles();
-  for (const label of alignmentOnly ? ['Original'] : ['Original', 'Without stars', 'Residual']) {
+  const switchingCamera = await page.locator('.observation-frame').getAttribute('style');
+  for (const image of data.images) for (const label of alignmentOnly ? ['Original'] : ['Original', 'Without stars', 'Residual']) {
+    await page.locator('#observation-image').selectOption(image.id);
     await page.getByRole('group', { name: 'Observation image layer' }).getByRole('button', { name: label, exact: true }).click();
     await page.locator('.observation-frame img').evaluateAll(async elements => { await Promise.all(elements.map(node => (node as HTMLImageElement).decode())); });
-    assert.equal(await page.locator('.observation-frame img').evaluateAll(elements => elements.filter(node => getComputedStyle(node).visibility === 'visible').length), 3);
+    assert.deepEqual(await page.locator('.observation-frame img').evaluateAll(elements => elements.filter(node => getComputedStyle(node).visibility === 'visible').map(node => node.getAttribute('data-observation'))), [image.id]);
+    assert.equal(await page.locator('.observation-frame').getAttribute('style'), switchingCamera, 'Image switching must keep the shared camera.');
     assert.deepEqual(await matrices(), originalMatrices, 'All prepared layers must use identical registration.');
     for (const node of nodes) assert.equal(await node.evaluate(element => element.isConnected), true);
-    await page.screenshot({ path: `${directory}/${label.toLowerCase().replaceAll(' ', '-')}.png` });
+    await page.screenshot({ path: `${directory}/${image.id}-${label.toLowerCase().replaceAll(' ', '-')}.png` });
   }
+  await page.locator('#observation-image').selectOption('eso-vista');
   await page.getByRole('group', { name: 'Observation image layer' }).getByRole('button', { name: 'Original', exact: true }).click();
   await page.getByRole('checkbox', { name: 'Matched stars', exact: true }).check();
   const initialCamera = await page.locator('.observation-frame').getAttribute('style');
@@ -72,7 +66,7 @@ try {
   assert.equal(copied.imageId, 'eso-vista'); assert.equal(copied.adjustment.x, .15);
   await page.reload();
   await page.locator('.observation-frame img').first().waitFor();
-  await selectComparison();
+  await page.locator('#observation-image').selectOption('eso-vista');
   assert.equal(await page.locator('#observation-fit-x').inputValue(), '0.15');
   await page.getByRole('button', { name: 'Reset alignment', exact: true }).click();
   assert.deepEqual(await matrices(), originalMatrices);
@@ -95,7 +89,7 @@ try {
   assert.equal(await page.getByRole('tab', { name: 'Reconstruction', exact: true }).getAttribute('aria-selected'), 'true');
   assert.deepEqual(errors, []);
   await writeFile(`${directory}/result.json`, JSON.stringify({ passed: true, browser: browser.version(), viewport: { width: 1600, height: 1000 },
-    checks: ['alignment without a prepared volume', 'three aligned native footprints', alignmentOnly ? 'three original layers decode' : 'all nine prepared layers decode', 'identical layer registration and retained images',
+    checks: ['alignment without a prepared volume', 'one visible image at a time', 'switch images at an unchanged shared camera', 'three aligned native footprints', alignmentOnly ? 'three original layers decode' : 'all nine prepared layers decode', 'identical layer registration and retained images',
       'matched-star overlay', 'zoom and refresh retention', 'saved manual adjustments and copy', 'unchanged measured registration', 'shared density/symmetry/inference navigation'], errors, writes, densityOverviewRequests }, null, 2));
   console.log('NEBULA_OBSERVATION_BROWSER_PASS');
 } finally { await browser.close(); }

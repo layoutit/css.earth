@@ -13,10 +13,9 @@ function savedFit(path: string, image: Observation): Adjustment {
 /** Common astrometric canvas. Inspection never launches image processing. */
 export function ObservationAlignment({ manifestPath }: { manifestPath: string }) {
   const [data, setData] = useState<Observations | null>(null), [error, setError] = useState('');
-  const [reference, setReference] = useState(''), [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState('');
   const [layer, setLayer] = useState<LayerId>('original');
-  const [showReference, setShowReference] = useState(true), [showOverlay, setShowOverlay] = useState(true), [showAll, setShowAll] = useState(false);
-  const [opacity, setOpacity] = useState(.5), [showMatches, setShowMatches] = useState(false);
+  const [showMatches, setShowMatches] = useState(false);
   const [fits, setFits] = useState<Record<string, Adjustment>>({}), [copyStatus, setCopyStatus] = useState(''), [storageError, setStorageError] = useState('');
   const [camera, setCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 }), cameraRef = useRef(camera);
   const [extent, setExtent] = useState({ width: 1000, height: 700 });
@@ -37,9 +36,7 @@ export function ObservationAlignment({ manifestPath }: { manifestPath: string })
       setFits(previous => Object.fromEntries(next.images.map(image => [image.id,
         refreshing && prior?.images.some(old => old.id === image.id && old.source.sha256 === image.source.sha256)
           ? previous[image.id] ?? savedFit(manifestPath, image) : savedFit(manifestPath, image)])));
-      const nextReference = refreshing && next.images.some(item => item.id === reference) ? reference : next.images[0]!.id;
-      setReference(nextReference);
-      setSelected(refreshing && next.images.some(item => item.id === selected && item.id !== nextReference) ? selected : next.images.find(item => item.id !== nextReference)!.id);
+      setSelected(refreshing && next.images.some(item => item.id === selected) ? selected : next.images[0]!.id);
       if (!refreshing) setLayer('original');
       loadedPath.current = manifestPath; loadedManifest.current = next; setData(next);
     }).catch((reason: unknown) => { if (!controller.signal.aborted) setError(reason instanceof Error ? reason.message : 'Aligned images unavailable.'); })
@@ -71,8 +68,7 @@ export function ObservationAlignment({ manifestPath }: { manifestPath: string })
     element.addEventListener('wheel', wheel, { passive: false }); return () => element.removeEventListener('wheel', wheel);
   }, []);
   const image = data?.images.find(item => item.id === selected), fit = fits[selected] ?? unchanged;
-  const visible = (item: Observation) => item.id === reference ? showReference : showAll || (showOverlay && item.id === selected);
-  const ordered = data ? [...data.images.filter(item => item.id === reference), ...data.images.filter(item => item.id !== reference)] : [];
+  const visible = (item: Observation) => item.id === selected;
   function changeFit(partial: Partial<Adjustment>) {
     if (!image) return; const next = readAdjustment({ ...fit, ...partial }); setFits(previous => ({ ...previous, [image.id]: next })); setCopyStatus('');
     try { localStorage.setItem(storageKey(manifestPath, image), JSON.stringify(next)); setStorageError(''); } catch { setStorageError('Fit saved for this session only.'); }
@@ -101,11 +97,11 @@ export function ObservationAlignment({ manifestPath }: { manifestPath: string })
       onKeyDown={event => { if (event.key === 'Home' || event.key === '0') { event.preventDefault(); fitImages(); } }}>
       <div className="observation-frame" data-frame-width={data?.frame.width} data-frame-height={data?.frame.height}
         style={{ transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.zoom})` }}>
-        {data && ordered.map(item => {
+        {data && data.images.map(item => {
           const matrix = adjustedMatrix(item, data.frame, fits[item.id] ?? unchanged), prepared = item.layers[layer];
-          return <img key={item.id} data-observation={item.id} data-layer={layer} src={localFile((prepared ?? item.layers.original).path)} alt={item.label} draggable={false}
+          return <img key={item.id} data-observation={item.id} data-layer={layer} src={localFile((prepared ?? item.layers.original).path)} alt={item.label} aria-hidden={!visible(item)} draggable={false}
             style={{ width: item.source.width, height: item.source.height, transform: `matrix(${matrix.join(',')})`,
-              opacity: item.id === reference ? 1 : opacity, visibility: visible(item) && prepared ? 'visible' : 'hidden' }}
+              visibility: visible(item) && prepared ? 'visible' : 'hidden' }}
             onLoad={() => setImageErrors(current => { if (!current[item.id]) return current; const next = { ...current }; delete next[item.id]; return next; })}
             onError={() => setImageErrors(current => ({ ...current, [item.id]: `${item.label}: image unavailable.` }))} />;
         })}
@@ -124,13 +120,6 @@ export function ObservationAlignment({ manifestPath }: { manifestPath: string })
     </div>
     <aside className="floating-panel observation-camera" aria-label="Alignment camera">
       <fieldset disabled={!data}><legend>Sky alignment</legend>
-        <label className="field-label" htmlFor="observation-reference">Reference</label>
-        <select id="observation-reference" value={reference} onChange={event => {
-          const id = event.target.value; setReference(id);
-          if (id === selected) setSelected(data?.images.find(item => item.id !== id)?.id ?? '');
-          setCopyStatus('');
-        }}>{data?.images.map(item => <option value={item.id} key={item.id}>{item.label}</option>)}</select>
-        <label className="observation-check"><input type="checkbox" checked={showReference} onChange={event => setShowReference(event.target.checked)} /> Show reference</label>
         <div className="camera-actions"><button type="button" onClick={fitImages} title="Fit every full image edge in the common north-up sky frame.">Earth view · fit all</button></div>
         <p className="interaction-hint">Drag to pan · scroll to zoom</p>
         <p className="interaction-hint" title="Images share one celestial coordinate frame. This is not a 3D depth model.">{data?.frame.fieldArcminutes.join(' × ')}′ sky frame</p>
@@ -138,13 +127,13 @@ export function ObservationAlignment({ manifestPath }: { manifestPath: string })
     </aside>
     <aside className="image-overlay-panel observation-images" aria-label="Observation images">
       <fieldset disabled={!data}><legend>Images</legend>
-        <label className="field-label" htmlFor="observation-image">Overlay</label>
-        <select id="observation-image" value={selected} title="All images are available. Choosing the reference swaps the two comparison images." onChange={event => {
+        <label className="field-label" htmlFor="observation-image">Image</label>
+        <select id="observation-image" value={selected} title="Switch aligned images without moving the camera or changing their sky scale." onChange={event => {
           const id = event.target.value;
-          if (id === reference) setReference(selected);
+          if (!data?.images.find(item => item.id === id)?.layers[layer]) setLayer('original');
           setSelected(id); setCopyStatus('');
         }}>
-          {data?.images.map(item => <option value={item.id} key={item.id}>{item.label}{item.id === reference ? ' · reference' : ''}</option>)}
+          {data?.images.map(item => <option value={item.id} key={item.id}>{item.label}</option>)}
         </select>
         <div className="image-layer-buttons observation-layers" role="group" aria-label="Observation image layer">{layers.map(item => {
           const missing = data?.images.filter(visible).filter(candidate => !candidate.layers[item.id]) ?? [];
@@ -152,11 +141,6 @@ export function ObservationAlignment({ manifestPath }: { manifestPath: string })
             title={missing.length ? `Not prepared: ${missing.map(candidate => candidate.label).join(', ')}` : `${item.label} · prepared inspection only`}
             onClick={() => setLayer(item.id)}><span aria-hidden="true">{item.symbol}</span><span>{item.label}</span></button>;
         })}</div>
-        <div className="observation-checks">
-          <label className="observation-check"><input type="checkbox" checked={showOverlay} disabled={showAll} onChange={event => setShowOverlay(event.target.checked)} /> Show overlay</label>
-          <label className="observation-check"><input type="checkbox" checked={showAll} onChange={event => setShowAll(event.target.checked)} /> Show all images</label>
-        </div>
-        <div className="cloud-brightness-control"><label htmlFor="observation-opacity">Opacity</label><input id="observation-opacity" type="range" min="0" max="100" step="1" value={Math.round(opacity * 100)} onChange={event => setOpacity(event.target.valueAsNumber / 100)} /><output>{Math.round(opacity * 100)}%</output></div>
         {image && <>
           <p className="overlay-detail" role="status" title="RMS is measured in common-frame pixels on held-out original stars, not native image pixels. Removal layers keep the identical pixel grid and transformation.">{image.registration.status === 'verified' ? `${image.registration.matchedStars} matched stars · ${image.registration.rmsPixels.toFixed(2)} frame px RMS` : 'Publisher coordinates · not star-verified'}{fitted ? ' · manual adjustment' : ''}</p>
           {image.registration.matches.length > 0 && <label className="observation-check" title="White: reference star. Amber: this image’s predicted star; the circles should share a center."><input type="checkbox" checked={showMatches} onChange={event => setShowMatches(event.target.checked)} /> Matched stars</label>}
