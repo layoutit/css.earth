@@ -34,6 +34,12 @@ try {
   await page.goto('http://127.0.0.1:4331/alignment?subject=helix-model-prior');
   await page.locator('.observation-frame img').first().waitFor();
   await selectComparison();
+  assert.equal(await page.locator('#observation-image option').count(), 3);
+  assert.match(await page.locator('#observation-image option[value="eso-wfi"]').innerText(), /reference/);
+  await page.locator('#observation-image').selectOption('eso-wfi');
+  assert.equal(await page.locator('#observation-reference').inputValue(), 'eso-vista');
+  assert.equal(await page.locator('#observation-image').inputValue(), 'eso-wfi');
+  await selectComparison();
   await page.getByRole('checkbox', { name: 'Show all images', exact: true }).check();
   assert.deepEqual(initialVolumes, [], 'Observation alignment must not require a baked volume.');
   checkInitialLoads = false;

@@ -139,8 +139,12 @@ export function ObservationAlignment({ manifestPath }: { manifestPath: string })
     <aside className="image-overlay-panel observation-images" aria-label="Observation images">
       <fieldset disabled={!data}><legend>Images</legend>
         <label className="field-label" htmlFor="observation-image">Overlay</label>
-        <select id="observation-image" value={selected} onChange={event => { setSelected(event.target.value); setCopyStatus(''); }}>
-          {data?.images.filter(item => item.id !== reference).map(item => <option value={item.id} key={item.id}>{item.label}</option>)}
+        <select id="observation-image" value={selected} title="All images are available. Choosing the reference swaps the two comparison images." onChange={event => {
+          const id = event.target.value;
+          if (id === reference) setReference(selected);
+          setSelected(id); setCopyStatus('');
+        }}>
+          {data?.images.map(item => <option value={item.id} key={item.id}>{item.label}{item.id === reference ? ' · reference' : ''}</option>)}
         </select>
         <div className="image-layer-buttons observation-layers" role="group" aria-label="Observation image layer">{layers.map(item => {
           const missing = data?.images.filter(visible).filter(candidate => !candidate.layers[item.id]) ?? [];
