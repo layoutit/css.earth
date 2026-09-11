@@ -1,3 +1,8 @@
+interface PoolProbe {blocks:HTMLElement[];leaves:Element[];parents:(ParentNode|null)[];navigations:string[];maximumScenes:number;sampling:boolean;dormant:HTMLElement[];}
+declare global {interface Window {__poolProof:PoolProbe;}}
+
+import {required} from '../../tools/test-values.mts';
+import { createTestPage } from './browser-observations.mts';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
@@ -9,10 +14,10 @@ const output = 'output/playwright/retained-leaf-pool';
 const overview = '/sun/?overview=solar-system&v=QMY-Wp0Ui2g9eAAAAAAAAAAAwhaDLpsLNZhBQsczQAAAAD_WST4rO1jov9dbC19kads_3S3JdnPBsgABAAAAAAAAAAA';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const results = [], errors = [];
+const results = [], errors:string[] = [];
 try {
   for (const dpr of [1, 2]) {
-    const page = await browser.newPage({ viewport: { width: 1995, height: 1236 }, deviceScaleFactor: dpr });
+    const page = await createTestPage(browser, { viewport: { width: 1995, height: 1236 }, deviceScaleFactor: dpr });
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(origin + overview);
     await page.waitForFunction(() => window.__cssEarth?.ready);
@@ -20,11 +25,11 @@ try {
     if (await motion.isChecked()) await motion.uncheck({ force: true });
     await page.waitForTimeout(700);
     const before = await page.evaluate(() => {
-      const blocks = [...document.querySelectorAll('.context-orbit-block, .prepared-point-field-block')];
+      const blocks = [...document.querySelectorAll('.context-orbit-block, .prepared-point-field-block')].map(node=>window.__cssearthTest.htmlElement(node));
       window.__poolProof = {
         blocks, leaves: blocks.flatMap(block => [...block.children]),
         parents: blocks.flatMap(block => [...block.children].map(leaf => leaf.parentNode)),
-        navigations: [], maximumScenes: 0, sampling: true,
+        navigations: [], maximumScenes: 0, sampling: true,dormant:[],
       };
       const sample = () => {
         const t = window.__poolProof;
@@ -32,8 +37,8 @@ try {
         if (t.sampling) requestAnimationFrame(sample);
       };
       requestAnimationFrame(sample);
-      document.addEventListener('objectnavigate', event => window.__poolProof.navigations.push(event.detail.objectId));
-      return { blocks: blocks.length, dormant: blocks.filter(b => b.style.display === 'none').length,
+      document.addEventListener('objectnavigate',event=>{if(!(event instanceof CustomEvent))throw new Error('Expected navigation event');const id=window.__cssearthTest.record(event.detail,'navigation detail').objectId;if(typeof id!=='string')throw new Error('Expected object ID');window.__poolProof.navigations.push(id);});
+      return { blocks: blocks.length, dormant: blocks.filter(b => window.__cssearthTest.htmlElement(b).style.display === 'none').length,
         leaves: window.__poolProof.leaves.length };
     });
     assert.ok(before.dormant > 20);
@@ -51,12 +56,12 @@ try {
     assert.equal(changed, 0, 'Dormant subtree exclusion must preserve the exact rendered image');
 
     const pick = await page.evaluate(() => {
-      const stage = document.querySelector('.planet-stage').getBoundingClientRect();
+      const stage = window.__cssearthTest.element('.planet-stage').getBoundingClientRect();
       for (const orbit of document.querySelectorAll('[data-context-orbit="neptune"]')) {
-        const indicator = document.querySelector(`[data-context-indicator="${orbit.dataset.contextOrbit}"]`);
+        const indicator = document.querySelector(`[data-context-indicator="${window.__cssearthTest.htmlElement(orbit).dataset.contextOrbit}"]`);
         if (!indicator || orbit.ariaDisabled === 'true' || getComputedStyle(indicator).visibility === 'hidden') continue;
         for (const piece of orbit.querySelectorAll('s')) {
-          if (Number(piece.style.opacity || 1) <= .1 || getComputedStyle(piece).visibility === 'hidden' || piece.parentNode.style.display === 'none') continue;
+          if (Number(piece.style.opacity || 1) <= .1 || getComputedStyle(piece).visibility === 'hidden' || window.__cssearthTest.htmlElement(piece.parentElement).style.display === 'none') continue;
           const m = new DOMMatrix(piece.style.transform);
           // Three pixels beside the visible line, inside its existing hit corridor.
           const x = stage.x + stage.width / 2 + m.m41 + m.m11 / 2 + m.m21 * 3;
@@ -65,7 +70,7 @@ try {
           if (Math.hypot(x - innerWidth / 2, y - innerHeight / 2) < 220) continue;
           if (document.elementFromPoint(x, y) !== document.querySelector('.planet-input-surface')) continue;
           if (getComputedStyle(piece, '::before').content !== 'none') throw new Error('Redundant orbit hit box');
-          return { id: orbit.dataset.contextOrbit, x, y, indicatorWidth: indicator.getBoundingClientRect().width };
+          return { id: window.__cssearthTest.htmlElement(orbit).dataset.contextOrbit, x, y, indicatorWidth: indicator.getBoundingClientRect().width };
         }
       }
       return null;
@@ -74,26 +79,26 @@ try {
     await page.mouse.move(pick.x, pick.y);
     await page.waitForTimeout(200);
     const hover = await page.evaluate(id => {
-      const indicator = document.querySelector(`[data-context-indicator="${id}"]`);
-      return { hovered: indicator.closest('[data-context-group]').dataset.objectHovered,
+      const indicator = window.__cssearthTest.html(`[data-context-indicator="${id}"]`);
+      return { hovered: window.__cssearthTest.htmlElement(indicator.closest('[data-context-group]')).dataset.objectHovered,
         width: indicator.getBoundingClientRect().width,
-        cursor: getComputedStyle(document.querySelector('.planet-input-surface')).cursor };
+        cursor: getComputedStyle(window.__cssearthTest.required(document.querySelector('.planet-input-surface'), 'computed style element')).cursor };
     }, pick.id);
     console.log(JSON.stringify({dpr,pick,hover}));
     assert.equal(hover.hovered, 'true'); assert.equal(hover.cursor, 'pointer');
     assert.ok(hover.width >= pick.indicatorWidth + 3.5, 'Orbit hover still expands the indicator');
     await page.mouse.click(pick.x, pick.y);
-    await page.waitForFunction(id => window.__cssEarth?.ready && window.__cssEarth.activeObjectId === id &&
+    await page.waitForFunction(id => window.__cssEarth?.ready && window.__cssearthTest.scene().activeObjectId === id &&
       performance.getEntriesByName('cssEarth:navigation:finished').length > 0, pick.id);
     await page.goBack();
-    await page.waitForFunction(() => window.__cssEarth?.ready && window.__cssEarth.activeObjectId === 'sun' &&
+    await page.waitForFunction(() => window.__cssEarth?.ready && window.__cssearthTest.scene().activeObjectId === 'sun' &&
       new URL(location.href).searchParams.get('overview') === 'solar-system');
     await page.waitForTimeout(500);
     const after = await page.evaluate(() => {
       const t = window.__poolProof; t.sampling = false;
       return { stable: t.leaves.every((leaf, index) => leaf.isConnected && leaf.parentNode === t.parents[index]),
         correctBlocks: t.blocks.every(block => (block.style.display === 'none') ===
-          [...block.children].every(leaf => leaf.style.visibility === 'hidden')),
+          [...block.children].every(leaf => window.__cssearthTest.htmlElement(leaf).style.visibility === 'hidden')),
         maximumScenes: t.maximumScenes, navigations: t.navigations };
     });
     assert.equal(after.stable, true); assert.equal(after.correctBlocks, true);
