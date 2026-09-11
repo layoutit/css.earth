@@ -6,3 +6,5 @@ declare module '@cesium/engine/Source/Core/CullingVolume.js' { export { CullingV
 declare module '@cesium/engine/Source/Core/Ellipsoid.js' { export { Ellipsoid as default } from '@cesium/engine'; }
 declare module '@cesium/engine/Source/Core/IntersectionTests.js' { export { IntersectionTests as default } from '@cesium/engine'; }
 declare module '@cesium/engine/Source/Core/Ray.js' { export { Ray as default } from '@cesium/engine'; }
+declare module '@cesium/engine/Source/Scene/Camera.js' { export { Camera as default } from '@cesium/engine'; }
+declare module '@cesium/engine/Source/Core/Rectangle.js' { export { Rectangle as default } from '@cesium/engine'; }

@@ -27,7 +27,7 @@ test("names arbitrary lens IDs without changing source data or assuming a fixed 
     ["Thermal infrared", "Thermal, source-informed model"],
     ["Ice thickness", "Topography is used to estimate ice thickness"],
   ]);
-  const withoutNames = lenses => ({ ...lenses, controls: lenses.controls.map(({ label, ...data }) => data) });
+  const withoutNames = (lenses: typeof source) => ({ ...lenses, controls: lenses.controls.map(({ label, ...data }) => data) });
   assert.deepEqual(withoutNames(result), withoutNames(source));
   assert.deepEqual(source, original);
 });

@@ -1,3 +1,4 @@
+import { createTestPage } from './browser-observations.mts';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
@@ -5,57 +6,69 @@ import { PNG } from 'pngjs';
 import pixelmatch from 'pixelmatch';
 import { OBJECTS } from '../objects.mts';
 
+import { parsePreparedObjectRuntime } from '../../src/renderers/css/dist/index.js';
+import { requireRecord } from '../../tools/source-values.mts';
+import type { ObjectRuntimeDefinition } from '../../src/renderers/css/runtime/object-runtime-types.ts';
+type BoundAnimation = Animation & { effect: KeyframeEffect & { target: HTMLElement } };
+interface BindingProbe { nodes: HTMLElement[]; definition: ObjectRuntimeDefinition & { motion: NonNullable<ObjectRuntimeDefinition["motion"]>; facing: NonNullable<ObjectRuntimeDefinition["facing"]> }; handles: BoundAnimation[]; visibility: string[]; motion: BoundAnimation[]; }
+declare global { interface Window { __preparedBindingTest: BindingProbe; } }
+interface BindingCase { id: string; dpr: number; motion: number; facing: number;
+  views: { pitch: number; yaw: number; hidden: number; changed: number }[];
+  initial?: { id: string; css: boolean; state: AnimationPlayState; target: string; name?: string }[];
+}
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const ids = process.argv[3] ? process.argv[3].split(',') : undefined;
 const output = process.argv[4] ?? 'output/playwright/prepared-bindings';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const report = { browser: browser.version(), cases: [], errors: [] };
+const report: { browser: string; cases: BindingCase[]; errors: string[]; error?: string } = { browser: browser.version(), cases: [], errors: [] };
 try {
   for (const object of OBJECTS.filter(object => !ids || ids.includes(object.id))) {
-    const definition = JSON.parse(await readFile(`src/planets/${object.id}/prepared/object.json`, 'utf8')).data;
+    const plan = parsePreparedObjectRuntime(requireRecord(JSON.parse(await readFile(`src/planets/${object.id}/prepared/object.json`, 'utf8')), 'prepared object').data);
+    assert.ok(plan.motion && plan.facing, 'Prepared binding plans must declare their motion and facing arrays.');
+    const definition = { ...plan, motion: plan.motion, facing: plan.facing };
     for (const dpr of [1, 2]) {
-      const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: dpr });
+      const page = await createTestPage(browser, { viewport: { width: 1440, height: 1000 }, deviceScaleFactor: dpr });
       // Keep the sampled document stable when another local task triggers Vite
       // HMR. Application transport uses HTTP and workers, not WebSockets.
       await page.routeWebSocket('**', () => {});
       page.on('pageerror', error => report.errors.push(error.message));
       page.on('console', message => { if (message.type() === 'error') report.errors.push(message.text()); });
       await page.goto(origin + object.route);
-      await page.waitForFunction(id => window.__cssEarth?.ready && window[`__${id}`]?.ready, object.id);
+      await page.waitForFunction(id => window.__cssEarth?.ready && window.__cssEarth?.object(id)?.ready, object.id);
       await page.evaluate(definition => {
-        const stage = document.querySelector('.planet-stage');
+        const stage = window.__cssearthTest.element('.planet-stage');
         const roots = [...stage.children].filter(node => node.classList.contains('planet-render-root'));
-        const nodes = [], cursors = new Map();
+        const nodes: HTMLElement[] = [], cursors = new Map<number, number>();
         for (const record of definition.tree.nodes) {
           const siblings = record.parent < 0 ? roots : [...nodes[record.parent].children];
           const cursor = cursors.get(record.parent) ?? 0;
           const node = siblings[cursor];
           if (!node || node.tagName.toLowerCase() !== record.tag || (record.className ?? '').split(' ').filter(Boolean).some(name => !node.classList.contains(name))) throw Error(`Prepared node ${nodes.length} identity differs: ${node?.outerHTML.slice(0, 160)}`);
-          nodes.push(node); cursors.set(record.parent, cursor + 1);
+          nodes.push(window.__cssearthTest.htmlElement(node)); cursors.set(record.parent, cursor + 1);
         }
-        window.__preparedBindingTest = { nodes, definition };
+        window.__preparedBindingTest = { nodes, definition, handles: [], visibility: [], motion: [] };
       }, definition);
-      const record = { id: object.id, dpr, motion: definition.motion.length, facing: definition.facing.length, views: [] };
+      const record: BindingCase = { id: object.id, dpr, motion: definition.motion.length, facing: definition.facing.length, views: [] };
       report.cases.push(record);
       // Original nodes and native animation handles must survive every camera change.
       const initial = await page.evaluate(() => {
         const { nodes } = window.__preparedBindingTest;
-        const handles = document.querySelector('.planet-stage').getAnimations({ subtree: true }).filter(animation => nodes.includes(animation.effect.target));
+        const handles = window.__cssearthTest.element('.planet-stage').getAnimations({ subtree: true }).filter((animation): animation is BoundAnimation => animation.effect instanceof KeyframeEffect && animation.effect.target instanceof HTMLElement && nodes.includes(animation.effect.target));
         window.__preparedBindingTest.handles = handles;
         return handles.map(animation => ({ id: animation.id, css: animation instanceof CSSAnimation, state: animation.playState,
-          target: animation.effect.target.className, name: animation.animationName }));
+          target: animation.effect.target.className, name: animation instanceof CSSAnimation ? animation.animationName : undefined }));
       });
       record.initial = initial;
       assert.ok(initial.every(animation => !animation.css && animation.state === 'paused'));
       assert.equal(initial.length, definition.motion.length + definition.animations.length);
       for (const [pitch, yaw] of [[0, 0], [31, 87], [-49, -132], [83, 178]]) {
-        await page.evaluate(({ id, pitch, yaw }) => window[`__${id}`].camera.setState({ controlPitch: pitch, controlYaw: yaw }), { id: object.id, pitch, yaw });
+        await page.evaluate(({ id, pitch, yaw }) => window.__cssearthTest.object(id).camera.setState({ controlPitch: pitch, controlYaw: yaw }), { id: object.id, pitch, yaw });
         await page.waitForTimeout(220);
         const hidden = await page.evaluate(() => {
           const { nodes, definition, handles } = window.__preparedBindingTest;
           if (!nodes.every(node => node.isConnected)) throw Error('Camera replaced prepared nodes');
-          const current = document.querySelector('.planet-stage').getAnimations({ subtree: true }).filter(animation => nodes.includes(animation.effect.target));
+          const current = window.__cssearthTest.element('.planet-stage').getAnimations({ subtree: true }).filter((animation): animation is BoundAnimation => animation.effect instanceof KeyframeEffect && animation.effect.target instanceof HTMLElement && nodes.includes(animation.effect.target));
           if (current.length !== handles.length || !handles.every(handle => current.includes(handle))) throw Error('Camera replaced animation handles');
           return definition.facing.filter(plan => nodes[plan.target].style.visibility === 'hidden').length;
         });
@@ -105,11 +118,11 @@ try {
         const handles = await page.evaluate(() => {
           const { definition, handles } = window.__preparedBindingTest;
           window.__preparedBindingTest.motion = handles.filter(animation => definition.motion.some(plan => plan.id === animation.id));
-          return window.__preparedBindingTest.motion.map(animation => animation.currentTime);
+          return window.__preparedBindingTest.motion.map(animation => window.__cssearthTest.number(animation.currentTime, 'motion clock'));
         });
-        await page.locator('.planet-motion-setting').evaluate(input => input.click());
-        await page.waitForFunction(before => window.__preparedBindingTest.motion.some((animation, i) => animation.currentTime > before[i] + 20), handles);
-        await page.locator('.planet-motion-setting').evaluate(input => input.click());
+        await page.locator('.planet-motion-setting').evaluate(input => window.__cssearthTest.htmlElement(input).click());
+        await page.waitForFunction(before => window.__preparedBindingTest.motion.some((animation, i) => typeof animation.currentTime === "number" && animation.currentTime > before[i] + 20), handles);
+        await page.locator('.planet-motion-setting').evaluate(input => window.__cssearthTest.htmlElement(input).click());
         await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
         const times = await page.evaluate(() => window.__preparedBindingTest.motion.map(animation => animation.currentTime));
         await page.waitForTimeout(100);
@@ -120,6 +133,6 @@ try {
     }
   }
   assert.deepEqual(report.errors, []);
-} catch (error) { report.error = error.stack; process.exitCode = 1; }
+} catch (error) { report.error = error instanceof Error ? error.stack ?? error.message : String(error); process.exitCode = 1; }
 finally { await browser.close(); await writeFile(`${output}/report.json`, JSON.stringify(report, null, 2)); }
 console.log(JSON.stringify({ cases: report.cases.length, error: report.error ?? null }));

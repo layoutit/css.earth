@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import test, { type TestContext } from "node:test";
+import { required } from "./navigation-test-values.mts";
 import { mkdtemp, mkdir, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
@@ -14,7 +15,7 @@ import {
   resolvePlanetCommand,
 } from "../../tools/run-implemented-planets.mts";
 
-const loadScene = async () => () => {};
+const loadScene = async () => () => { throw new Error('Registry fixture does not mount a scene.'); };
 const fixture = Object.freeze({
   id: "fixture",
   name: "Fixture",
@@ -55,7 +56,7 @@ test('world-frame capability is validated and copied at the registry boundary', 
   assert.deepEqual(value.worldFrame, parsePreparedWorldCameraFrame(frame));
   assert.notEqual(value.worldFrame, frame);
   assert.ok(Object.isFrozen(value.worldFrame));
-  assert.ok(Object.isFrozen(value.worldFrame.originM));
+  assert.ok(Object.isFrozen(required(value.worldFrame).originM));
   for (const changed of [{ ...frame, originM: [1, 2] }, { ...frame, epochJdTt: NaN },
     { ...frame, metersPerUnit: 0 }, { ...frame, bodyRadiusM: -1 },
     { ...frame, presentationToReference: [2, 0, 0, 0, 1, 0, 0, 0, 1] },
@@ -64,18 +65,20 @@ test('world-frame capability is validated and copied at the registry boundary', 
     assert.throws(() => defineObject({ ...fixture, worldFrame: changed }));
   }
   frame.originM[0] = 999;
-  assert.equal(value.worldFrame.originM[0], 1);
+  assert.equal(required(value.worldFrame).originM[0], 1);
   for (const object of OBJECTS) assert.deepEqual(object.worldFrame, parsePreparedWorldCameraFrame(object.worldFrame));
 });
 
 test("rejects invalid object definitions and renderer-specific fields", () => {
   for (const classification of ["Planet", "planets", "dwarf-plannet", "", undefined]) {
-    assert.throws(() => defineObject({ ...fixture, classification }), /Invalid object definition/);
+    assert.throws(() => Reflect.apply(defineObject, undefined, [{ ...fixture, classification }]), /Invalid object definition/);
   }
   for (const classification of OBJECT_CLASSIFICATIONS) {
-    assert.equal(defineObject({ ...fixture, classification }).classification, classification);
+    const value: unknown = Reflect.apply(defineObject, undefined, [{ ...fixture, classification }]);
+    assert.ok(value && typeof value === "object" && "classification" in value);
+    assert.equal(value.classification, classification);
   }
-  assert.throws(() => defineObject(null), /must be an object/);
+  assert.throws(() => Reflect.apply(defineObject, undefined, [null]), /must be an object/);
   assert.throws(() => defineObject({ ...fixture, id: "Saturn" }),
     /Invalid object definition/);
   assert.throws(() => defineObject({ ...fixture, color: "tan" }),
@@ -84,7 +87,7 @@ test("rejects invalid object definitions and renderer-specific fields", () => {
     /Invalid object definition/);
   assert.throws(() => defineObject({ ...fixture, route: "/wrong/" }),
     /Invalid object definition/);
-  assert.throws(() => defineObject({ ...fixture, loadScene: true }),
+  assert.throws(() => Reflect.apply(defineObject, undefined, [{ ...fixture, loadScene: true }]),
     /Invalid object definition/);
   assert.throws(() => defineObject({ ...fixture, systemName: "" }),
     /Invalid object definition/);
@@ -113,7 +116,7 @@ test("keeps one open-ended object registry with unique ids and routes", () => {
   assert.throws(() => requireObject("missing"), /Unknown cssEarth object/);
 });
 
-async function authoredFixture(context) {
+async function authoredFixture(context: TestContext) {
   const root = await mkdtemp(resolve(tmpdir(), "cssearth-discovery-"));
   context.after(() => rm(root, { recursive: true, force: true }));
   const directory = resolve(root, "src/planets/fixture");
@@ -154,7 +157,7 @@ test("derives shared preparation and external browser scripts from the descripto
     ["prepare", "tools/objects/dist/prepare-authored.js"],
     ["browser", "site/test/dom-cleanliness-browser.mts"],
     ["assemble", "tools/objects/dist/operations.js"],
-  ]) {
+  ] as const) {
     const expected = resolve(projectRoot, suffix);
     assert.equal(await resolvePlanetCommand("fixture", mode, {
       projectRoot, accessFile: async path => assert.equal(path, expected),
@@ -163,6 +166,6 @@ test("derives shared preparation and external browser scripts from the descripto
       projectRoot, accessFile: async () => { throw new Error("ENOENT"); },
     }), new RegExp(mode + " script is missing"));
   }
-  await assert.rejects(resolvePlanetCommand("fixture", "unknown", { projectRoot }),
+  await assert.rejects(Reflect.apply(resolvePlanetCommand, undefined, ["fixture", "unknown", { projectRoot }]),
     /Unknown planet command mode/);
 });

@@ -8,10 +8,10 @@ import type { BrowserPage, CameraField } from './browser-profile-types.mts';
 import objectControls from '../../src/planets/moon/prepared/controls.json' with { type: 'json' };
 
 const state = { pitch: 37, controlPitch: 37, controlYaw: -92, zoom: 1.4 };
-function nativePage(id: string): BrowserPage {
+function nativePage(id: string, cameraState: unknown = state): BrowserPage {
   return { evaluate(fn: { toString(): string }, payload: unknown) {
     return structuredClone(runInNewContext(`(${fn.toString()})(payload)`, {
-      payload, window: { [`__${id}`]: { camera: { state: () => state, setState: (value: unknown) => value } } },
+      payload, window: { [`__${id}`]: { camera: { state: () => cameraState, setState: (value: unknown) => value } } },
     }));
   } } as unknown as BrowserPage;
 }
@@ -106,4 +106,12 @@ test('the actual Saturn profile observes one exclusive lens and rejects the form
   assert.deepEqual(selected, ['cross-section', 'cross-section', 'ultraviolet', 'normal']);
   pressed.splice(0, pressed.length, 'ultraviolet', 'cross-section');
   await assert.rejects(profile.pressedLens(page), /exclusive.*multiple pressed buttons/);
+});
+
+
+test('camera observations reject missing or non-finite required coordinates', () => {
+  const profile = createObjectBrowserProfile({ id: 'moon', controls: objectControls });
+  for (const invalid of [{ pitch: 37 }, { zoom: 1 }, { pitch: NaN, zoom: 1 }, { pitch: 0, zoom: Infinity }]) {
+    assert.throws(() => profile.camera(nativePage('moon', invalid)), /finite pitch and zoom/);
+  }
 });

@@ -5,6 +5,8 @@ import test from "node:test";
 import { auditObjectRuntimeOwnership } from "../../tools/check-object-runtime-ownership.mts";
 import { loadObjectContent } from "./load-object-content.mts";
 import { OBJECTS } from "../objects.mts";
+import { required } from './navigation-test-values.mts';
+import { SourceEvidence } from './source-evidence-values.mts';
 import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../runtime-policy.mts";
 
 test("every object mounts one canonical high-density image bank", async () => {
@@ -14,18 +16,20 @@ test("every object mounts one canonical high-density image bank", async () => {
   const head = await readFile(new URL("../components/PreparedObjectHead.astro", import.meta.url), "utf8");
   assert.doesNotMatch(head, /imagesrcset|devicePixelRatio/u);
   for (const { id } of OBJECTS) {
-    const entry = ownership.entries.find(entry => entry.id === id);
+    const entry = required(ownership.entries.find(entry => entry.id === id));
     assert.equal(entry.factoryCalls, 1, id + ": actual loader must have one runtime factory");
-    assert.equal(entry.presentation.format, "json", id + ": runtime consumes prepared data");
+    assert.equal(required(entry.presentation).format, "json", id + ": runtime consumes prepared data");
     const { object } = await loadObjectContent(id);
-    const startupKeys = new Set(object.data.assets.startup);
-    const startupUrls = object.data.assets.entries.filter(asset => startupKeys.has(asset.key))
+    const data = SourceEvidence.parse(object.data), assets = data.child('assets');
+    const entries = assets.rows('entries').map(asset => ({ key: asset.text('key'), url: asset.text('url') }));
+    const startupKeys = new Set(assets.strings('startup'));
+    const startupUrls = entries.filter(asset => startupKeys.has(asset.key))
       .map(asset => asset.url).filter(url => typeof url === "string");
     assert.ok(startupUrls.some(url => url.includes("@2x")), id + ": high-density startup assets");
     const availableFiles = new Set(await readdir(new URL("../../public/scenes/" + id + "/", import.meta.url)));
-    for (const { url } of object.data.assets.entries) {
+    for (const { url } of entries) {
       if (typeof url !== "string" || !url.startsWith("/scenes/" + id + "/") || url.includes("@2x")) continue;
-      const file = url.split("/").at(-1);
+      const file = required(url.split("/").at(-1));
       assert.equal(availableFiles.has(file.replace(/(\.[^.]+)$/u, "@2x$1")), false,
         id + ": runtime must not select " + file + " when its high-density bank exists");
     }

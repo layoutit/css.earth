@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { required } from './navigation-test-values.mts';
+import type { MotionInput, MotionHistory, MotionEvent } from './rendered-motion-steps.mts';
 import { renderedMotionSteps } from "./rendered-motion-steps.mts";
 
 function fixture() {
@@ -10,7 +12,7 @@ function fixture() {
     {t:100.07,clock:10.07,length:3,average:[1,0]},
     {t:100.09,clock:10.09,length:3,average:[1,0]},
   ].map(h=>({...h,object:0,history:[[0,0,10.001]]}));
-  const native={frames,consumedGesture:[
+  const native: MotionInput<MotionEvent, typeof frames[number]> & { consumedGesture: MotionEvent[]; frames: typeof frames; consumedInputEvidence: { clockOffsetSeconds: number; launch: MotionHistory; gestures?: { events: MotionEvent[]; launch: MotionHistory | null }[] } }={frames,consumedGesture:[
     {kind:'down',atMilliseconds:1},
     {kind:'drag',atMilliseconds:20},
     {kind:'drag',atMilliseconds:21},
@@ -171,6 +173,6 @@ test('pairs a source-consumed drag and following stop click',()=>{
   const steps=renderedMotionSteps(f.native,f.history,f.timing);
   assert.deepEqual(steps.flatMap(step=>step.events).map(event=>event.kind),
     ['down','drag','drag','up','down','up']);
-  assert.ok(steps.at(-1).events.every(event=>event.afterTick));
-  assert.equal(steps.at(-1).launched,false);
+  assert.ok(required(steps.at(-1)).events.every(event=>event.afterTick));
+  assert.equal(required(steps.at(-1)).launched,false);
 });

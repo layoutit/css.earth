@@ -1,3 +1,6 @@
+import { createTestPage } from './browser-observations.mts';
+import { required } from './navigation-test-values.mts';
+import type { Locator } from 'playwright';
 import assert from "node:assert/strict";
 import { mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -9,7 +12,7 @@ const output = process.argv[3] ? resolve(process.argv[3]) : null;
 if (output) await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 console.log(`Chrome ${browser.version()} (channel chrome, headless); ${baseUrl}`);
-const cases = [
+const cases: { label: string; route: string; width: number; height: number; density: number; mobile?: boolean }[] = [
   ...OBJECTS.map(({ id, route }) => ({
     label: `${id}-desktop`, route, width: 1440, height: 960, density: 1,
   })),
@@ -23,13 +26,13 @@ const cases = [
 
 try {
   for (const config of cases.filter(({ label }) => !process.env.CSSEARTH_RAIL_CASE || label === process.env.CSSEARTH_RAIL_CASE)) {
-    const page = await browser.newPage({
+    const page = await createTestPage(browser, {
       viewport: { width: config.width, height: config.height },
       deviceScaleFactor: config.density,
       hasTouch: Boolean(config.mobile),
       isMobile: Boolean(config.mobile),
     });
-    const errors = [];
+    const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
     await page.goto(new URL(config.route, baseUrl).href);
     await page.waitForFunction(() => document.querySelector(".planet-stage")?.getAttribute("aria-busy") === "false");
@@ -41,7 +44,7 @@ try {
     const about = rail.getByRole("button", { name: "About", exact: true });
     const explore = rail.getByRole("button", { name: "Planet information", exact: true });
     const search = page.locator(".planet-sidebar-search");
-    const assertActiveTreatment = async (button) => {
+    const assertActiveTreatment = async (button: Locator) => {
       const actual = await button.evaluate((node) => {
         const style = getComputedStyle(node);
         return { background: style.backgroundColor, opacity: style.opacity };
@@ -53,7 +56,7 @@ try {
     const panel = page.locator(".explorer-about-panel");
     const sidebar = page.locator(".planet-sidebar");
     const drawer = page.locator(".planet-drawer-content");
-    const cardTreatment = (locator) => locator.evaluate((node) => {
+    const cardTreatment = (locator: Locator) => locator.evaluate((node) => {
       const style = getComputedStyle(node);
       return {
         padding: style.padding,
@@ -68,13 +71,13 @@ try {
     const roots = await page.locator(".planet-stage > .planet-render-root").elementHandles();
     assert.ok(roots.length > 0, `${config.label}: mounted scene layers`);
     const rootCount = roots.length;
-    const activeObject = OBJECTS.find(object => object.route === config.route);
+    const activeObject = required(OBJECTS.find(object => object.route === config.route));
     const systemTag = page.locator(".planet-system-tag");
     const classificationTag = page.locator(".planet-classification-tag");
     const tagLabel = await classificationTag.innerText();
     assert.equal(await page.locator('[data-fact-id="classification"]').count(), 0);
-    const tagBox = await classificationTag.boundingBox();
-    const titleBox = await page.locator(".planet-title").boundingBox();
+    const tagBox = required(await classificationTag.boundingBox());
+    const titleBox = required(await page.locator(".planet-title").boundingBox());
     assert.ok(tagBox.x >= titleBox.x + titleBox.width && tagBox.y >= titleBox.y &&
       tagBox.y + tagBox.height <= titleBox.y + titleBox.height + 1,
       `${config.label}: classification tag fits beside the title`);
@@ -106,8 +109,8 @@ try {
     assert.equal(await search.inputValue(), activeObject.name);
     assert.ok((await Promise.all(roots.map(root => root.evaluate(node => node.isConnected)))).every(Boolean),
       "badge browsing retains the current scene");
-    const railBox = await rail.boundingBox();
-    const headerBox = await page.locator(".explorer-shell-header").boundingBox();
+    const railBox = required(await rail.boundingBox());
+    const headerBox = required(await page.locator(".explorer-shell-header").boundingBox());
     assert.ok(railBox, `${config.label}: visible rail`);
     assert.ok(headerBox, `${config.label}: visible header`);
     assert.equal(railBox.width, 120);
@@ -117,8 +120,8 @@ try {
     assert.equal(await rail.evaluate((node) => getComputedStyle(node).borderRadius), "12px");
     const wordmark = page.locator(".explorer-shell-wordmark");
     const wordmarkLink = wordmark.locator(".maps-brand-button");
-    const wordmarkBox = await wordmark.boundingBox();
-    const wordmarkLinkBox = await wordmarkLink.boundingBox();
+    const wordmarkBox = required(await wordmark.boundingBox());
+    const wordmarkLinkBox = required(await wordmarkLink.boundingBox());
     assert.equal(wordmarkBox.x, 16);
     assert.equal(wordmarkBox.y, railBox.y);
     assert.equal(wordmarkBox.height, railBox.height);
@@ -128,7 +131,7 @@ try {
       `${config.label}: the header controls stay inside the viewport`);
     assert.ok(Math.abs(wordmarkLinkBox.x - 16) < 0.1,
       "the cssEarth wordmark starts 16px from the viewport left");
-    const sidebarBox = await sidebar.boundingBox();
+    const sidebarBox = required(await sidebar.boundingBox());
     assert.equal(sidebarBox.x, 12);
     assert.equal(await page.locator(".planet-sidebar-search").evaluate((node) =>
       getComputedStyle(node).borderRadius), "12px");
@@ -136,11 +139,11 @@ try {
       getComputedStyle(node).borderRadius), "8px");
     if (!config.mobile) {
       assert.equal(sidebarBox.y, 0, "search starts at the top of the information rail");
-      assert.equal((await page.locator(".planet-sidebar-search-card").boundingBox()).y, 68,
+      assert.equal((required(await page.locator(".planet-sidebar-search-card").boundingBox())).y, 68,
         "search follows the 48px header by 12px");
       assert.ok(sidebarBox.y + sidebarBox.height <= config.height - 16,
         "the information panel leaves a bottom gap");
-      assert.equal((await page.locator(".planet-stage").boundingBox()).x, 0,
+      assert.equal((required(await page.locator(".planet-stage").boundingBox())).x, 0,
         "the floating shell does not reserve scene space");
     }
     assert.equal(await page.locator(".planet-sidebar-toggle, .planetary-navigation-toggle, .explorer-rail-menu").count(), 0);
@@ -148,14 +151,14 @@ try {
     const factsheetSummary = factsheetPanel.locator(":scope > .planet-factsheet-header");
     const factsheetIcon = factsheetSummary.locator('.planet-panel-icon[data-panel-icon="facts"]');
     assert.equal(await factsheetIcon.evaluate((node) => node.tagName), "IMG");
-    assert.match(await factsheetIcon.getAttribute("src"), /\/shell\/icon-facts\.svg$/u);
-    const factsheetInitiallyOpen = await factsheetPanel.evaluate((node) => node.open);
+    assert.match(required(await factsheetIcon.getAttribute("src")), /\/shell\/icon-facts\.svg$/u);
+    const factsheetInitiallyOpen = await factsheetPanel.evaluate((node) => window.__cssearthTest.detailsElement(node).open);
     assert.equal(factsheetInitiallyOpen, false,
       `${config.label}: Factsheet starts collapsed`);
     assert.equal(await factsheetPanel.evaluate((node) => getComputedStyle(node).paddingBottom), "0px",
       `${config.label}: collapsed Factsheet leaves no empty bottom gap`);
     await factsheetSummary.click();
-    assert.equal(await factsheetPanel.evaluate((node) => node.open), !factsheetInitiallyOpen,
+    assert.equal(await factsheetPanel.evaluate((node) => window.__cssearthTest.detailsElement(node).open), !factsheetInitiallyOpen,
       `${config.label}: Factsheet header toggles the whole panel`);
     assert.equal(await factsheetPanel.evaluate((node) => getComputedStyle(node).paddingBottom), "16px",
       `${config.label}: expanded Factsheet restores its content spacing`);
@@ -163,15 +166,15 @@ try {
       `${config.label}: Factsheet previews four facts`);
     const factsOverflow = factsheetPanel.locator(".planet-facts-overflow");
     const factsToggle = factsOverflow.locator(":scope > .planet-facts-toggle");
-    assert.equal(await factsOverflow.evaluate((node) => node.open), false,
+    assert.equal(await factsOverflow.evaluate((node) => window.__cssearthTest.detailsElement(node).open), false,
       `${config.label}: remaining facts start hidden`);
     assert.equal(await factsToggle.innerText(), "View more");
     await factsToggle.click();
-    assert.equal(await factsOverflow.evaluate((node) => node.open), true,
+    assert.equal(await factsOverflow.evaluate((node) => window.__cssearthTest.detailsElement(node).open), true,
       `${config.label}: View more reveals remaining facts`);
     assert.equal(await factsToggle.innerText(), "View less");
     await factsheetSummary.click();
-    assert.equal(await factsheetPanel.evaluate((node) => node.open), factsheetInitiallyOpen,
+    assert.equal(await factsheetPanel.evaluate((node) => window.__cssearthTest.detailsElement(node).open), factsheetInitiallyOpen,
       `${config.label}: Factsheet returns to its initial state`);
     const chartSwitcher = page.locator(".planet-chart-switcher");
     if (await chartSwitcher.count() > 0) {
@@ -186,16 +189,16 @@ try {
     const lensPanel = page.locator(".planet-lenses");
     if (await lensPanel.count() > 0) {
       const lensHeading = lensPanel.locator(":scope > .planet-lens-browser-header .planet-panel-heading");
-      assert.equal(await lensPanel.evaluate((node) => node.open), true,
+      assert.equal(await lensPanel.evaluate((node) => window.__cssearthTest.detailsElement(node).open), true,
         `${config.label}: Dataset starts open`);
       await lensHeading.click();
-      assert.equal(await lensPanel.evaluate((node) => node.open), false,
+      assert.equal(await lensPanel.evaluate((node) => window.__cssearthTest.detailsElement(node).open), false,
         `${config.label}: Dataset title collapses the list`);
       await lensHeading.click();
-      assert.equal(await lensPanel.evaluate((node) => node.open), true,
+      assert.equal(await lensPanel.evaluate((node) => window.__cssearthTest.detailsElement(node).open), true,
         `${config.label}: Dataset title expands the list`);
       await lensPanel.locator(".planet-lens-search").click();
-      assert.equal(await lensPanel.evaluate((node) => node.open), true,
+      assert.equal(await lensPanel.evaluate((node) => window.__cssearthTest.detailsElement(node).open), true,
         `${config.label}: focusing lens search does not collapse its panel`);
       if (config.label === "mercury-desktop") {
         const legend = page.locator('[data-lens-legend="topography"]');
@@ -256,11 +259,11 @@ try {
     assert.equal(await rail.locator(".maps-brand-button").count(), 0);
     assert.equal(await page.locator(".planet-brand-footer").count(), 0);
     assert.equal(await page.locator(".planet-wordmark-version").count(), 0);
-    assert.equal(await rail.locator("button").evaluateAll((nodes) => nodes.every((node) => node.innerText.trim() === "")), true);
+    assert.equal(await rail.locator("button").evaluateAll((nodes) => nodes.every((node) => window.__cssearthTest.htmlElement(node).innerText.trim() === "")), true);
     assert.equal(await page.locator(".explorer-rail-saved, .explorer-saved-panel").count(), 0);
     assert.equal(await page.locator(".explorer-milky-way-panel").count(), 0);
     for (const button of [settings, about, explore]) {
-      const box = await button.boundingBox();
+      const box = required(await button.boundingBox());
       assert.ok(box.width >= 40 && box.height >= 44, "compact horizontal target");
     }
     const previousUrl = page.url();
@@ -277,7 +280,7 @@ try {
     assert.equal(await search.isVisible(), false);
     assert.equal(await about.getAttribute("aria-pressed"), "true");
     await assertActiveTreatment(about);
-    const aboutBox = await panel.boundingBox();
+    const aboutBox = required(await panel.boundingBox());
     assert.deepEqual(await cardTreatment(panel), planetCardTreatment,
       `${config.label}: About uses the Planet card treatment`);
     await about.click();
@@ -313,11 +316,11 @@ try {
     assert.equal(await settings.getAttribute("aria-pressed"), "true");
     await assertActiveTreatment(settings);
     assert.equal(await about.getAttribute("aria-pressed"), "false");
-    assert.equal(await settingsPanel.evaluate((node) => node.parentElement.matches(".planet-sidebar")), true);
-    const settingsBox = await settingsPanel.boundingBox();
+    assert.equal(await settingsPanel.evaluate((node) => window.__cssearthTest.required(node.parentElement, 'panel parent').matches(".planet-sidebar")), true);
+    const settingsBox = required(await settingsPanel.boundingBox());
     assert.deepEqual(await cardTreatment(settingsPanel), planetCardTreatment,
       `${config.label}: Settings uses the Planet card treatment`);
-    for (const dimension of ["x", "width"]) {
+    for (const dimension of ["x", "width"] as const) {
       assert.ok(Math.abs(settingsBox[dimension] - aboutBox[dimension]) < 1,
         `${config.label}: Settings and About share panel ${dimension}`);
     }
@@ -343,14 +346,14 @@ try {
     const toggleAlignment = await toggleRows.evaluateAll((rows) => rows.map((row) => {
       const label = row.querySelector(".planet-setting-text");
       const control = row.querySelector(".planet-setting-switch");
-      const labelBox = label.getBoundingClientRect();
-      const controlBox = control.getBoundingClientRect();
+      const labelBox = window.__cssearthTest.required(label, 'toggle label').getBoundingClientRect();
+      const controlBox = window.__cssearthTest.required(control, 'toggle control').getBoundingClientRect();
       return {
         delta: Math.abs(
           labelBox.top + labelBox.height / 2 -
           (controlBox.top + controlBox.height / 2),
         ),
-        textTransform: getComputedStyle(label).textTransform,
+        textTransform: getComputedStyle(window.__cssearthTest.required(label, 'computed style element')).textTransform,
       };
     }));
     assert.equal(toggleAlignment.every(({ delta }) => delta < 1), true,
@@ -361,7 +364,7 @@ try {
     const speedControl = settingsPanel.locator(".planet-speed-setting-control");
     const speed = speedControl.locator('.planet-speed-setting[type="range"]');
     assert.equal(await settingsPanel.locator(".planet-motion-setting-control").evaluate((node) =>
-      getComputedStyle(node.querySelector(".planet-setting-text")).opacity), "1",
+      getComputedStyle(window.__cssearthTest.required(node.querySelector(".planet-setting-text"), 'computed style element')).opacity), "1",
     `${config.label}: enabled setting labels use full opacity`);
     if (await speedControl.count() > 0) {
       assert.ok(Number(await speedControl.evaluate((node) => getComputedStyle(node).opacity)) < 1,

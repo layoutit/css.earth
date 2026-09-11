@@ -1,3 +1,4 @@
+import { createTestPage } from './browser-observations.mts';
 // Real compositor frames with the prepared diagnostic atlas, never pose replay.
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
@@ -9,7 +10,7 @@ import sharp from "sharp";
 import { BASE_TILE } from "@layoutit/polycss";
 import { PREPARED_MARS_CAMERA, PREPARED_MARS_SCENE } from "../../tests/objects/unit/mars/prepared-fixture.mts";
 import { decodeNativeMotionTrace } from "../../tests/objects/oracle/mars/google-earth-pro/native-motion-trace-reader.mts";
-import { renderedMotionSteps } from "./rendered-motion-steps.mts";
+import { renderedMotionSteps, parseMotionHistory, parseMotionEvidence } from "./rendered-motion-steps.mts";
 import { assertMotionOnlyReference } from "../../tests/objects/oracle/mars/google-earth-pro/interaction-suite-analysis.mts";
 
 type TimingMode = "paired" | "normal" | "motion-only" | "frame-locked";
@@ -64,17 +65,12 @@ interface NativeReport {
   readonly initialFrame?: string;
   readonly presentHz?: number;
   readonly nativeFrameClock?: readonly { readonly atMilliseconds: number; readonly periodMilliseconds: number }[];
-  readonly consumedInputEvidence: { readonly historyPath: string; readonly timingPath: string; readonly qualification?: string };
+  readonly consumedInputEvidence: import("./rendered-motion-steps.mts").MotionEvidence<NativeGestureEvent> & { readonly historyPath: string; readonly timingPath: string; readonly qualification?: string };
 }
 
-interface MarsPose { schema: string; scene: string; skybox: string; sunView: string; }
+type MarsPose = ReturnType<MarsRuntime["view"]>["pose"];
 interface MarsView { readonly pose: MarsPose; readonly zoom: number; readonly [key: string]: unknown; }
-interface MarsRuntime {
-  readonly ready: boolean;
-  view(): MarsView;
-  setView(view: { readonly controlPitch?: number; readonly controlYaw?: number; readonly zoom?: number; readonly pose?: Partial<MarsPose> }): void;
-  readonly camera: { stats(): { readonly dragInertia: { readonly activeMotionCount: number; readonly wheelZoom: { readonly active: boolean }; readonly [key: string]: unknown } } };
-}
+type MarsRuntime = ReturnType<typeof import("../../src/renderers/css/runtime/object-diagnostics.ts").publishObjectDiagnostics>;
 interface MotionSample { readonly timestamp: number; readonly callbackTimestamp: number | null; readonly sampleKind: string; readonly pose: MarsPose; readonly zoom: number; readonly interaction: ReturnType<MarsRuntime["camera"]["stats"]>["dragInertia"]; }
 interface ReceivedInput { readonly type: string; readonly x: number; readonly y: number; readonly timestamp: number; readonly trusted: boolean; }
 interface NativeFrameClock { readonly atMilliseconds: number; readonly periodMilliseconds: number; }
@@ -83,7 +79,6 @@ interface MotionStep { readonly presentSeconds: number; readonly callbackMillise
 
 declare global {
   interface Window {
-    __mars: MarsRuntime;
     __motionFrameObserved?: (timestamp: number) => void;
     __motionClockTimestamp?: number;
     __lockMotionFrames(): void;
@@ -130,6 +125,7 @@ const firstNativeFrame = native.frames[0];
 assert.ok(firstNativeFrame, "Native report contains no captured frames.");
 const nativeStart = nativeTrace.frames.find(f => f.frameSequence === firstNativeFrame.presentIndex);
 assert.ok(nativeStart?.matricesCaptured);
+assert.ok(typeof PREPARED_MARS_SCENE.geometry.equatorialRadius === "number" && Number.isFinite(PREPARED_MARS_SCENE.geometry.equatorialRadius));
 const nativeStartPerspective = -nativeStart.modelViewMatrix[14] *
   PREPARED_MARS_SCENE.geometry.equatorialRadius * BASE_TILE;
 const out = resolve(outputPath);
@@ -215,8 +211,8 @@ try {
             clientX:x,clientY:y,button:['up','down'].includes(event.kind)?0:-1,buttons:event.kind==='up'?0:1});
           Object.defineProperty(input,'timeStamp',{value:epoch+event.atMilliseconds-performance.timeOrigin});
           const before=performance.timeOrigin+performance.now()-epoch;
-          document.querySelector<HTMLElement>('.planet-stage')!.dispatchEvent(input);
-          if(event.kind==='up'&&event.clickCount===2)document.querySelector<HTMLElement>('.planet-stage')!.dispatchEvent(new MouseEvent('dblclick',{
+          window.__cssearthTest.html('.planet-stage').dispatchEvent(input);
+          if(event.kind==='up'&&event.clickCount===2)window.__cssearthTest.html('.planet-stage').dispatchEvent(new MouseEvent('dblclick',{
             bubbles:true,cancelable:true,clientX:x,clientY:y,button:0,detail:2}));
           log.push({...event,x,y,before,returned:performance.timeOrigin+performance.now()-epoch});
         }
@@ -240,7 +236,7 @@ try {
     window.requestAnimationFrame=callback=>{const key=++id;pending.set(key,callback);schedule();return key;};
     window.cancelAnimationFrame=key=>{pending.delete(key);if(!pending.size&&handle!==null){cancel(handle);handle=null;}};
   });
-  const page = await context.newPage();
+  const page = await createTestPage(context);
   page.on("response", response => {
     if (!/javascript/.test(response.headers()["content-type"] ?? "")) return;
     codeWrites.push(response.body().then(bytes => { codeResources.push({
@@ -310,13 +306,14 @@ try {
   }, { surface, poles });
   const setView = async (zoom: number) => {
     await page.evaluate(({ endpoint, zoom }) => {
-      window.__mars.setView({ controlPitch: endpoint.controlPitch, controlYaw: endpoint.controlYaw, zoom });
-      const original = window.__mars.view().pose;
+      window.__cssearthTest.object('mars').setView({ controlPitch: endpoint.controlPitch, controlYaw: endpoint.controlYaw, zoom });
+      const original = window.__cssearthTest.object('mars').view().pose;
       const roll = new DOMMatrix().rotateAxisAngle(0, 0, 1, endpoint.screenRollDegrees);
-      const pose: Partial<MarsPose> = { schema:original.schema };
-      for (const key of ["scene", "skybox", "sunView"] as const) pose[key] =
-        roll.multiply(new DOMMatrix(original[key])).toString();
-      window.__mars.setView({ pose });
+      const rotate = (matrix: string) => roll.multiply(new DOMMatrix(matrix)).toString();
+      const pose: MarsPose = original.schema === 'cssearth-camera-pose@1'
+        ? { ...original, scene: rotate(original.scene), skybox: rotate(original.skybox), sunView: rotate(original.sunView) }
+        : { ...original, scene: rotate(original.scene) };
+      window.__cssearthTest.object('mars').setView({ pose });
     }, { endpoint, zoom });
     await page.evaluate(() => new Promise(done => requestAnimationFrame(() => requestAnimationFrame(done))));
   };
@@ -330,7 +327,7 @@ try {
     const measured = await page.evaluate(async plan => {
       const cameraLayoutModule = '/src/platform/camera-layout.mts';
       const { measureRetainedPlanetTrackball } = await import(cameraLayoutModule);
-      return measureRetainedPlanetTrackball({ stage:document.querySelector<HTMLElement>('.planet-stage')!,
+      return measureRetainedPlanetTrackball({ stage:window.__cssearthTest.html('.planet-stage'),
         cameraElement:document.querySelector<HTMLElement>('.polycss-camera')!,
         logicalBodyDiameter:plan.logicalBodyDiameter,sceneScale:plan.sceneScale });
     }, PREPARED_MARS_CAMERA);
@@ -342,7 +339,7 @@ try {
   const initial = await page.screenshot();
   await sharp(initial).extract(browserCrop).png().toFile(resolve(out, "initial.png"));
   const stateBase = await page.evaluate(() => ({
-    camera: window.__mars.view(), stats: window.__mars.camera.stats(),
+    camera: window.__cssearthTest.object('mars').view(), stats: window.__cssearthTest.object('mars').camera.stats(),
     projection: {
       perspective: Number.parseFloat(getComputedStyle(
         document.querySelector<HTMLElement>(".polycss-camera")!
@@ -351,10 +348,10 @@ try {
         document.querySelector<HTMLElement>(".polycss-scene")!
       ).transform,
     },
-    pose: window.__mars.view().pose,
+    pose: window.__cssearthTest.object('mars').view().pose,
     surface: getComputedStyle(document.querySelector<HTMLElement>(".mars-body > s")!).backgroundImage,
     poles: getComputedStyle(document.querySelector<HTMLElement>(".mars-pole")!).backgroundImage,
-    nodes: document.querySelector<HTMLElement>(".planet-stage")!.querySelectorAll("*").length,
+    nodes: window.__cssearthTest.html(".planet-stage").querySelectorAll("*").length,
     projectiveFrames: [...document.querySelectorAll(".mars-body > s")].map(leaf => ({
       transformStyle: getComputedStyle(leaf).transformStyle,
       nestedTexture: Boolean(leaf.querySelector(".polycss-projective-texture")) })),
@@ -364,10 +361,10 @@ try {
     const inertiaModule = '/src/platform/google-earth-drag-inertia.mts';
     const { measureRetainedPlanetTrackball } = await import(cameraLayoutModule);
     const { googleEarthInteractionTrackball } = await import(inertiaModule);
-    return googleEarthInteractionTrackball(measureRetainedPlanetTrackball({stage:document.querySelector<HTMLElement>('.planet-stage')!,
+    return googleEarthInteractionTrackball(measureRetainedPlanetTrackball({stage:window.__cssearthTest.html('.planet-stage'),
       cameraElement:document.querySelector<HTMLElement>('.polycss-camera')!,
       logicalBodyDiameter:plan.logicalBodyDiameter,sceneScale:plan.sceneScale,
-      zoom:window.__mars.view().zoom,defaultZoom:plan.defaultZoom}));
+      zoom:window.__cssearthTest.object('mars').view().zoom,defaultZoom:plan.defaultZoom}));
   }, PREPARED_MARS_CAMERA);
   const state = { ...stateBase, trackball };
   assert.ok(state.projectiveFrames.length > 0);
@@ -379,7 +376,7 @@ try {
     "Comparison body center drifted vertically from the native viewport");
   if (timingMode === "frame-locked") {
     const steps: readonly MotionStep[] = renderedMotionSteps(native,
-      (await readFile(native.consumedInputEvidence.historyPath,"utf8")).trim().split("\n").map(line => JSON.parse(line) as unknown),
+      (await readFile(native.consumedInputEvidence.historyPath,"utf8")).trim().split("\n").map(line => parseMotionHistory(JSON.parse(line))),
       (await readFile(native.consumedInputEvidence.timingPath,"utf8")).trim().split("\n").map(l=>l.split("\t").map(Number)));
     const epoch = Date.now();
     const base = await page.evaluate(() => {
@@ -393,7 +390,7 @@ try {
       window.__frameMarker=marker;
       window.__frameReceivedInputs=[];
       for(const type of ['pointerdown','pointerup','pointermove','mousedown','dblclick'])
-        document.querySelector<HTMLElement>('.planet-stage')!.addEventListener(type,e=>{
+        window.__cssearthTest.html('.planet-stage').addEventListener(type,e=>{
           if(e.isTrusted && window.__frameInputTimestamp!==undefined)
             Object.defineProperty(e,'timeStamp',{value:window.__frameInputTimestamp});
           const pointer = e as PointerEvent;
@@ -414,7 +411,7 @@ try {
             bubbles:true,cancelable:true,pointerId:1,isPrimary:true,pointerType:'mouse',
             clientX:x,clientY:y,button:-1,buttons:1});
           Object.defineProperty(input,'timeStamp',{value:timestamp});
-          document.querySelector<HTMLElement>('.planet-stage')!.dispatchEvent(input);
+          window.__cssearthTest.html('.planet-stage').dispatchEvent(input);
         },{x,y,timestamp:base+(event.callbackMilliseconds??event.atMilliseconds),event});
         dispatches.push({...event,x,y,presentSeconds:step.presentSeconds});
     };
@@ -431,11 +428,11 @@ try {
         const id=frames.length+1;
         const before=await page.evaluate(id=>{
           for(let bit=0;bit<16;bit++)(window.__frameMarker.children[bit] as HTMLElement).style.background=(id>>bit)&1?'white':'black';
-          const view=window.__mars.view();return{pose:view.pose,zoom:view.zoom,
-            interaction:window.__mars.camera.stats().dragInertia};
+          const view=window.__cssearthTest.object('mars').view();return{pose:view.pose,zoom:view.zoom,
+            interaction:window.__cssearthTest.object('mars').camera.stats().dragInertia};
         },id);
         const bytes=await page.screenshot();
-        const after=await page.evaluate(()=>({pose:window.__mars.view().pose,zoom:window.__mars.view().zoom}));
+        const after=await page.evaluate(()=>({pose:window.__cssearthTest.object('mars').view().pose,zoom:window.__cssearthTest.object('mars').view().zoom}));
         assert.deepEqual(after,{pose:before.pose,zoom:before.zoom},'Camera changed during capture');
         const raster=await sharp(bytes).removeAlpha().raw().toBuffer({resolveWithObject:true});
         const dpr=native.viewport.deviceScaleFactor;
@@ -473,23 +470,23 @@ try {
       calibration,nativeDisc,
       projectionBinding:{nativeModelView:nativeStart.modelViewMatrix,nativeProjection:nativeStart.projectionMatrix,
         scope:'native reference matrices; body size, offset and orientation registered; browser retains its prepared lens; no pose replay'},
-      final:await page.evaluate(()=>{const v=window.__mars.view();return{...v,pose:v.pose};}),
+      final:await page.evaluate(()=>{const v=window.__cssearthTest.object('mars').view();return{...v,pose:v.pose};}),
     },null,2));
     console.log(JSON.stringify({out,frames:frames.length,failures,qualification:'input-step rendering, not realtime timing'}));
     assert.deepEqual(failures, [], "Browser capture contains runtime errors");
   } else {
   await page.evaluate(() => {
     window.__renderedMotionEvents = [];
-    for (const type of ["pointerdown", "pointermove", "pointerup", "wheel", "dblclick"]) document.querySelector<HTMLElement>(".planet-stage")!.addEventListener(type,
+    for (const type of ["pointerdown", "pointermove", "pointerup", "wheel", "dblclick"]) window.__cssearthTest.html(".planet-stage").addEventListener(type,
       e => {
-        const before = window.__mars.view();
+        const before = window.__cssearthTest.object('mars').view();
         const pointer = e as PointerEvent;
         const record: { type: string; x: number; y: number; receivedAt: number; eventTimestamp: number; before: { scene: string; zoom: number }; after?: { scene: string; zoom: number } } = { type, x:pointer.clientX, y:pointer.clientY,
           receivedAt:performance.now(), eventTimestamp:e.timeStamp,
           before: { scene: before.pose.scene, zoom: before.zoom } };
         window.__renderedMotionEvents.push(record);
         queueMicrotask(() => {
-          const after = window.__mars.view();
+          const after = window.__cssearthTest.object('mars').view();
           record.after = { scene: after.pose.scene, zoom: after.zoom };
         });
       }, true);
@@ -509,10 +506,10 @@ try {
     if(recordedClock) {
       window.__motionFrameObserved=(timestamp: number)=>{
         if(!window.__motionSampling)return;
-        const view=window.__mars.view();
+        const view=window.__cssearthTest.object('mars').view();
         window.__motionSamples.push({timestamp:window.__motionClockTimestamp??performance.timeOrigin+timestamp,
           callbackTimestamp:timestamp,sampleKind:'animation',pose:view.pose,zoom:view.zoom,
-          interaction:window.__mars.camera.stats().dragInertia});
+          interaction:window.__cssearthTest.object('mars').camera.stats().dragInertia});
       };
       return;
     }
@@ -522,12 +519,12 @@ try {
       // previous pose from a sampler queued ahead of the inertia callback.
       setTimeout(()=>{
         if(window.__motionSampling) {
-          const view=window.__mars.view();
+          const view=window.__cssearthTest.object('mars').view();
           const observedTimestamp = window.__motionClockTimestamp ??
             performance.timeOrigin + performance.now();
           window.__motionSamples.push({timestamp:observedTimestamp,callbackTimestamp:timestamp,
             sampleKind:'animation',pose:view.pose,zoom:view.zoom,
-            interaction:window.__mars.camera.stats().dragInertia});
+            interaction:window.__cssearthTest.object('mars').camera.stats().dragInertia});
         }
       },0);
       requestAnimationFrame(sample);
@@ -580,17 +577,17 @@ try {
             buttons:event.kind==='up'?0:1});
           Object.defineProperty(input,'timeStamp',{value:epoch+event.atMilliseconds-performance.timeOrigin});
           const before=performance.timeOrigin+performance.now()-epoch;
-          document.querySelector<HTMLElement>('.planet-stage')!.dispatchEvent(input);
+          window.__cssearthTest.html('.planet-stage').dispatchEvent(input);
           if(event.kind==='up'&&event.clickCount===2)
-            document.querySelector<HTMLElement>('.planet-stage')!.dispatchEvent(new MouseEvent('dblclick',{
+            window.__cssearthTest.html('.planet-stage').dispatchEvent(new MouseEvent('dblclick',{
               bubbles:true,cancelable:true,clientX:x,clientY:y,button:0,detail:2}));
           if(window.__motionSampling) {
-            const view=window.__mars.view();
+            const view=window.__cssearthTest.object('mars').view();
             window.__motionSamples.push({
               timestamp:performance.timeOrigin+performance.now(),
               callbackTimestamp:null,sampleKind:'input',pose:view.pose,
               zoom:view.zoom,
-              interaction:window.__mars.camera.stats().dragInertia,
+              interaction:window.__cssearthTest.object('mars').camera.stats().dragInertia,
             });
           }
           log.push({...event,x,y,before,returned:performance.timeOrigin+performance.now()-epoch});
@@ -662,7 +659,7 @@ try {
       scope:"native reference matrices; body size, offset and orientation registered; browser retains its prepared lens; no pose replay" },
     calibration, nativeDisc, state, clock, epoch, dispatches, inputs, frames, failures, motionSamples,
     viewport:browserViewport,crop:browserCrop,cameraOffset,
-    final:await page.evaluate(() => { const view=window.__mars.view();return {...view,pose:view.pose}; }), finalNodes,
+    final:await page.evaluate(() => { const view=window.__cssearthTest.object('mars').view();return {...view,pose:view.pose}; }), finalNodes,
   }, null, 2));
   console.log(JSON.stringify({ out, frames:frames.length, zoom, failures }));
   }
@@ -761,7 +758,7 @@ function parseNativeReport(value: unknown): NativeReport {
     startCamera: { latitude: number(startCamera.latitude, "Native report.startCamera.latitude"), longitude: number(startCamera.longitude, "Native report.startCamera.longitude") },
     initialFrame: optionalString(report.initialFrame, "Native report.initialFrame"), presentHz: optionalNumber(report.presentHz, "Native report.presentHz"),
     nativeFrameClock: report.nativeFrameClock === undefined ? undefined : array(report.nativeFrameClock, "Native report.nativeFrameClock").map((value, index) => { const frame = record(value, `Native report.nativeFrameClock[${index}]`); return { atMilliseconds: number(frame.atMilliseconds, `Native report.nativeFrameClock[${index}].atMilliseconds`), periodMilliseconds: number(frame.periodMilliseconds, `Native report.nativeFrameClock[${index}].periodMilliseconds`) }; }),
-    consumedInputEvidence: { historyPath: string(evidence.historyPath, "Native report.consumedInputEvidence.historyPath"), timingPath: string(evidence.timingPath, "Native report.consumedInputEvidence.timingPath"), qualification: optionalString(evidence.qualification, "Native report.consumedInputEvidence.qualification") },
+    consumedInputEvidence: { ...parseMotionEvidence(evidence, value => parseNativeGesture(value, "consumed gesture")), historyPath: string(evidence.historyPath, "Native report.consumedInputEvidence.historyPath"), timingPath: string(evidence.timingPath, "Native report.consumedInputEvidence.timingPath"), qualification: optionalString(evidence.qualification, "Native report.consumedInputEvidence.qualification") },
   };
 }
 

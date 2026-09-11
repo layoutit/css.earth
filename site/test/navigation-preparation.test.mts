@@ -52,7 +52,7 @@ test('metadata-only preparation does not replace or remove images', async contex
   const files = ['body-sun.webp', 'body-sun@2x.webp'];
   for (const file of files) await copyFile(resolve(projectRoot, 'public/navigation', file), resolve(root, file));
   await writeFile(resolve(root, 'sun-context.webp'), 'unrelated existing context');
-  const before = new Map(await Promise.all((await readdir(root)).map(async file => [file, await readFile(resolve(root, file))])));
+  const before = new Map(await Promise.all((await readdir(root)).map(async file => [file, await readFile(resolve(root, file))] as const)));
   const presentationPath = resolve(root, 'presentation.mjs');
   await prepareNavigation({ projectRoot, outputRoot: root, planets: OBJECTS.filter(body => body.id === 'sun'), presentationPath, catalogOnly: true });
   for (const [file, bytes] of before) assert.deepEqual(await readFile(resolve(root, file)), bytes, file);
@@ -96,7 +96,7 @@ test("reproduces the checked-in body images and utility markers", async (context
       bytes = await readFile(path);
       context.diagnostic(`${filename}: checked terminal Q75 publication bytes`);
     }
-    const sha=buffer=>createHash('sha256').update(buffer).digest('hex');
+    const sha=(buffer: Uint8Array)=>createHash('sha256').update(buffer).digest('hex');
     assert.ok(bytes.equals(accepted), `${filename}: generated ${bytes.length} bytes ${sha(bytes)}; accepted ${accepted.length} bytes ${sha(accepted)}`);
   }
   for (const filename of transparentMarkerFiles) {
@@ -134,15 +134,15 @@ for (const failure of ["object source", "late utility source", "publication", "r
       }
     }
     const outputRoot = resolve(root, "public/navigation");
-    const previous = new Map([
-      ...expectedOutputFiles.filter((filename) => filename !== "download-marker@2x.webp").map((filename) => [resolve(outputRoot, filename), `accepted ${filename}`]),
+    const previous = new Map<string, string>([
+      ...expectedOutputFiles.filter((filename) => filename !== "download-marker@2x.webp").map((filename) => [resolve(outputRoot, filename), `accepted ${filename}`] as const),
       [resolve(outputRoot, "new-body.webp"), "accepted legacy marker"],
       [resolve(outputRoot, "unrelated.txt"), "unrelated output"],
       [resolve(root, "site/prepared-navigation-markers.mjs"), "accepted presentation"],
     ]);
     for (const [path, bytes] of previous) await writeFile(path, bytes);
     const filenames = (await readdir(outputRoot)).sort();
-    const options = { projectRoot: root, planets: [{ id: "new-body" }] };
+    const options: NonNullable<Parameters<typeof prepareNavigation>[0]> = { projectRoot: root, planets: [{ id: "new-body", classification: "planet" }] };
     // A missing presentation parent fails after all staged images are installed.
     if (["publication", "rollback"].includes(failure)) options.presentationPath = resolve(root, "missing/presentation.mjs");
     if (failure === "rollback") {
@@ -150,7 +150,7 @@ for (const failure of ["object source", "late utility source", "publication", "r
         if (source.endsWith("/backup-0")) throw new Error("injected rollback failure");
         await moveNavigationFile(source, target);
       };
-      await assert.rejects(prepareNavigation(options), (error) => error instanceof AggregateError && /rollback failed/.test(error.message) && error.errors.some((entry) => /injected rollback/.test(entry.message)));
+      await assert.rejects(prepareNavigation(options), (error) => error instanceof AggregateError && /rollback failed/.test(error.message) && error.errors.some((entry: unknown) => entry instanceof Error && /injected rollback/.test(entry.message)));
       const cache = resolve(root, "node_modules/.cache");
       const [recovery] = await readdir(cache);
       assert.match(recovery, /^navigation-prepare-/u);

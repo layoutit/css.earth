@@ -4,43 +4,50 @@ import { createExplorerRailController } from "../explorer-rail.mts";
 import { MOBILE_VIEWPORT_QUERY } from "../runtime-policy.mts";
 
 function fixture({ mobile = false } = {}) {
-  const documentTarget = new EventTarget();
+  const documentTarget: EventTarget & { activeElement: Element | null; querySelector(selector: string): Element | null } =
+    Object.assign(new EventTarget(), { activeElement: null, querySelector: (_selector: string): Element | null => null });
   class Element extends EventTarget {
     hidden = false;
+    ariaPressed: string | null = null;
+    ariaLabel: string | null = null;
+    scrollTop = 0;
     focus() { documentTarget.activeElement = this; }
     click() { this.dispatchEvent(new Event("click")); }
   }
   class Button extends Element {}
   class Input extends Element {}
-  const nodes = Object.fromEntries([
-    ["about", ".explorer-rail-about", new Button()],
-    ["explore", ".explorer-rail-explore", new Button()],
-    ["panel", ".explorer-about-panel", new Element()],
-    ["drawer", ".planet-drawer-content", new Element()],
-    ["search", ".planet-sidebar-search-card", new Element()],
-    ["searchInput", ".planet-sidebar-search", new Input()],
-    ["settings", ".planet-settings-action", new Button()],
-    ["settingsPanel", ".planet-settings-panel", new Element()],
-    ["aside", ".planet-sidebar", new Element()],
-  ].map(([key, selector, node]) => [key, { selector, node }]));
-  documentTarget.querySelector = (selector) =>
-    Object.values(nodes).find((entry) => entry.selector === selector)?.node;
-  const scrolls = [];
+  const nodes = {
+    about: { selector: '.explorer-rail-about', node: new Button() },
+    explore: { selector: '.explorer-rail-explore', node: new Button() },
+    panel: { selector: '.explorer-about-panel', node: new Element() },
+    drawer: { selector: '.planet-drawer-content', node: new Element() },
+    search: { selector: '.planet-sidebar-search-card', node: new Element() },
+    searchInput: { selector: '.planet-sidebar-search', node: new Input() },
+    settings: { selector: '.planet-settings-action', node: new Button() },
+    settingsPanel: { selector: '.planet-settings-panel', node: new Element() },
+    aside: { selector: '.planet-sidebar', node: new Element() },
+  };
+  documentTarget.querySelector = (selector: string) =>
+    Object.values(nodes).find((entry) => entry.selector === selector)?.node ?? null;
+  const scrolls: ScrollToOptions[] = [];
   const windowTarget = {
     HTMLElement: Element,
     HTMLButtonElement: Button,
     HTMLInputElement: Input,
-    matchMedia(query) {
+    matchMedia(query: string) {
       assert.equal(query, MOBILE_VIEWPORT_QUERY);
       return { matches: mobile };
     },
-    scrollTo(options) { scrolls.push(options); },
+    scrollTo(options: ScrollToOptions) { scrolls.push(options); },
   };
-  const solarSystemRequests = [];
-  const mount = () => createExplorerRailController(documentTarget, windowTarget, {
+  const solarSystemRequests: string[] = [];
+  // The controller uses only the retained elements, focus, event and viewport seams represented here.
+  const mount = () => createExplorerRailController(documentTarget as unknown as Document, windowTarget as unknown as import("../browser-types.mts").BrowserWindow, {
     onOpenSolarSystem() { solarSystemRequests.push("solar-system"); },
   });
-  const elements = Object.fromEntries(Object.entries(nodes).map(([key, { node }]) => [key, node]));
+  const elements = { about: nodes.about.node, explore: nodes.explore.node, panel: nodes.panel.node,
+    drawer: nodes.drawer.node, search: nodes.search.node, searchInput: nodes.searchInput.node,
+    settings: nodes.settings.node, settingsPanel: nodes.settingsPanel.node, aside: nodes.aside.node };
   const escape = () => {
     const event = new Event("keydown", { cancelable: true });
     Object.defineProperty(event, "key", { value: "Escape" });

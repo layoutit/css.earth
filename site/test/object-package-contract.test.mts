@@ -5,6 +5,8 @@ import { mkdtemp, mkdir, readFile, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, resolve } from "node:path";
 
+import { required } from './navigation-test-values.mts';
+import { SourceEvidence } from './source-evidence-values.mts';
 import { OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
 import { planetInformationSource, validatePlanetEditorial } from "../../tools/planet-information-sources.mts";
@@ -25,8 +27,8 @@ test("accepts a complete non-NASA package and still rejects corrupt or undeclare
   for (const file of paths.requiredFiles) { await mkdir(dirname(file), { recursive: true }); await writeFile(file, "fixture\n"); }
   const bytes = Buffer.from("owned prepared bytes");
   const hash = createHash("sha256").update(bytes).digest("hex");
-  const fixture = authoredObjectFixture(object.id, { path: "source/local-data.bin", sha256: hash });
-  fixture.properties.page = { stylesheets: ["src/body.css"] };
+  const body = authoredObjectFixture(object.id, { path: "source/local-data.bin", sha256: hash });
+  const fixture = { ...body, properties: { ...body.properties, page: { stylesheets: ["src/body.css"] } } };
   await writeFile(resolve(paths.root, "object.json"), JSON.stringify(fixture));
   for (const path of ["src/body.css", "site/planet-shell.css"]) { await mkdir(dirname(resolve(projectRoot,path)), {recursive:true}); await writeFile(resolve(projectRoot,path), ""); }
   await mkdir(paths.publicAssets, { recursive: true });
@@ -70,12 +72,13 @@ test("derives the complete owned file contract from planet identity", () => {
 test("requires every registered object package file", async () => {
   for (const planet of implemented) {
     await validateObjectPackageFiles(planet);
-    const { lenses } = JSON.parse(await readFile(new URL(`../../src/planets/${planet.id}/prepared/controls.json`, import.meta.url), 'utf8'));
-    assert.ok(lenses?.controls.length > 0, `${planet.id}: the displayed surface needs an identified dataset`);
+    const controls = SourceEvidence.parse(JSON.parse(await readFile(new URL(`../../src/planets/${planet.id}/prepared/controls.json`, import.meta.url), 'utf8')));
+    assert.ok(controls.child('lenses').rows('controls').length > 0, `${planet.id}: the displayed surface needs an identified dataset`);
   }
   await assert.rejects(
     validateObjectPackageFiles(implemented[0], {
       accessFile: async (file) => {
+        assert.ok(typeof file === "string", "Package validator passes filesystem paths");
         if (file.endsWith("prepared/runtime.json")) throw new Error("ENOENT");
       },
     }),
@@ -84,6 +87,7 @@ test("requires every registered object package file", async () => {
   await assert.rejects(
     validateObjectPackageFiles(implemented[0], {
       accessFile: async (file) => {
+        assert.ok(typeof file === "string", "Package validator passes filesystem paths");
         if (file.endsWith("prepared/content.json")) throw new Error("ENOENT");
       },
     }),
@@ -92,8 +96,8 @@ test("requires every registered object package file", async () => {
 });
 
 test("validates local editorial identity and provenance", () => {
-  const planet = implemented.find(object => object.id === "sun");
-  const source = planetInformationSource(planet.id);
+  const planet = required(implemented.find(object => object.id === "sun"));
+  const source = required(planetInformationSource(planet.id));
   const valid = {
     schemaVersion: 1,
     id: planet.id,
