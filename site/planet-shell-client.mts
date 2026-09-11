@@ -18,6 +18,8 @@ import { createDatasetContextController } from './dataset-context-controller.mts
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { createChartPixelAlignmentController } from "./chart-pixel-alignment.mts";
 import { createDestinationBrowser } from "./destination-browser.mts";
+import { createFeatureBrowser } from "./feature-browser.mts";
+import type { SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import { createSceneLifetime } from "@cssearth/engine";
 import { createExplorerRailController } from "./explorer-rail.mts";
 import { createSurfaceMinimap, loadSurfacePreview } from "./surface-minimap.mts";
@@ -189,6 +191,7 @@ export function mountPlanetShell({
       mountContent(content.id, motion, contrast);
     },
     setDestinations(provider: PreparedDestinationRuntime | null | undefined) { if (!lifetime.disposed) objectBrowser.setDestinations(provider); },
+    setFeatures(provider: SurfaceFeatureNavigationRuntime | null | undefined) { if (!lifetime.disposed) objectBrowser.setFeatures(provider); },
     setPreparedFocus(record: PreparedCatalogObject | null, sources: readonly SpatialCatalogSource[] = [], presentation: PreparedFocusPresentation | null = null) {
       if (lifetime.disposed) return;
       preparedFocus = record; focusCard.set(record, sources, presentation);
@@ -543,6 +546,12 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     onReset() { render(false); },
   });
   lifetime.onDispose(() => destinations?.destroy());
+  const features = createFeatureBrowser({
+    documentTarget,
+    onResults(count) { empty.hidden = visibleObjects + count > 0; },
+    onSelected() { render(false); search.blur(); },
+  });
+  lifetime.onDispose(() => features?.destroy());
   let open = false;
   let browsing = false;
   const categoryButtons = [...documentTarget.querySelectorAll<HTMLElement>('.planet-search-category')];
@@ -568,13 +577,13 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     if (focused && preparedFocus) {
       browser.ariaLabel = preparedFocus.name;
       setPanelHidden(browser, false); empty.hidden = true; visibleObjects = 1;
-      void destinations?.search('');
+      void destinations?.search(''); void features?.search('');
       return;
     }
     browser.ariaLabel = galactic ? 'Milky Way' : 'Solar System objects';
     if (galactic) {
       setPanelHidden(browser, false); empty.hidden = true; visibleObjects = 1;
-      void destinations?.search('');
+      void destinations?.search(''); void features?.search('');
       return;
     }
     const showAll = query === "all objects";
@@ -587,6 +596,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       query === item.dataset.objectSystemName)?.dataset.objectSystemName;
     visibleObjects = 0;
     void destinations?.search(classification || systemName || showAll ? "" : query);
+    void features?.search(classification || systemName || showAll ? "" : query);
     if (query.length === 0) {
       for (const item of items) item.hidden = true;
       empty.hidden = true;
@@ -610,7 +620,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       : showAll ? 'all' : matches.some(item => matchesObjectCategory(item.dataset.objectClassification, activeCategory))
         ? activeCategory : objectCategory(matches[0]?.dataset.objectClassification) ?? activeCategory;
     selectTab(nextCategory, { resetScroll: false });
-    empty.hidden = visibleObjects !== 0 || Boolean(destinations && !classification && !showAll);
+    empty.hidden = visibleObjects !== 0 || Boolean((destinations || features) && !classification && !showAll);
   };
   const render = (next: boolean, { resetQuery = false } = {}) => {
     resetResultsScroll();
@@ -745,7 +755,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       overview = enabled;
       overviewScope = scope;
       markSelection();
-      if (enabled) destinations?.bind(null);
+      if (enabled) { destinations?.bind(null); features?.bind(null); }
       render(editing);
     },
     setObject(name: string) {
@@ -756,10 +766,11 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       preparedFocus = null;
       selectedObjectName = name;
       markSelection();
-      destinations?.bind(null);
+      destinations?.bind(null); features?.bind(null);
       render(editing);
     },
     setDestinations(provider: PreparedDestinationRuntime | null | undefined) { destinations?.bind(provider); },
+    setFeatures(provider: SurfaceFeatureNavigationRuntime | null | undefined) { features?.bind(provider); },
     setPreparedFocus(record: PreparedCatalogObject | null) {
       if (preparedFocus === record) return;
       const editing = browsing;

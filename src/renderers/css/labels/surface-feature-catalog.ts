@@ -30,6 +30,17 @@ function parseOutline(value: unknown, plan: PreparedSurfaceFeaturePlan): Surface
     const points = outline.points.map(point => { const p = vector(point, 'feature extent point'); if (Math.abs(Math.hypot(...p) - plan.meshRadiusUnits) > 1e-3 * plan.meshRadiusUnits) throw new TypeError('Surface feature extent is not on the prepared body.'); return p; });
     return Object.freeze({ kind: 'box', points: Object.freeze(points) });
   }
+  if (outline.kind === 'trace') {
+    if (!Array.isArray(outline.paths) || !outline.paths.length) throw new TypeError('Surface feature trace has no paths.');
+    let vertices = 0;
+    const paths = outline.paths.map(path => {
+      if (!Array.isArray(path) || path.length < 2) throw new TypeError('Surface feature trace path is too short.');
+      vertices += path.length;
+      return Object.freeze(path.map(point => { const p = vector(point, 'feature trace point'); if (Math.abs(Math.hypot(...p) - plan.meshRadiusUnits) > 1e-3 * plan.meshRadiusUnits) throw new TypeError('Surface feature trace is not on the prepared body.'); return p; }));
+    });
+    if (vertices > plan.outline.pieces) throw new TypeError('Surface feature trace exceeds the outline pool.');
+    return Object.freeze({ kind: 'trace', paths: Object.freeze(paths) });
+  }
   throw new TypeError('Surface feature outline kind is unknown.');
 }
 
@@ -50,10 +61,12 @@ export function parsePreparedSurfaceFeatureCatalog(value: unknown, plan: Prepare
         Math.abs(Math.hypot(...normal) - 1) > 1e-3) throw new TypeError('Surface feature geometry is not on the prepared body.');
     const outline = parseOutline(feature.outline, plan);
     const name = text(feature.name, 'feature name'), link = text(feature.link, 'feature link');
+    if (!Array.isArray(feature.searchNames) || !feature.searchNames.length || !feature.searchNames.every(value => typeof value === 'string' && value.length > 0)) throw new TypeError('Surface feature search names are invalid.');
+    const searchNames = Object.freeze([...feature.searchNames as string[]]), searchContext = text(feature.searchContext, 'feature search context');
     if (!name.trim() || !link.startsWith('https://')) throw new TypeError('Surface feature caption is invalid.');
     return Object.freeze({ id, name, kind: kind as SurfaceFeatureKind, type: text(feature.type, 'feature type'), code: text(feature.code, 'feature code'),
       diameterKm, longitudeDeg: finite(feature.longitudeDeg, 'feature longitude'), latitudeDeg: finite(feature.latitudeDeg, 'feature latitude'),
-      anchorUnits, normal, radiusUnits, outline, origin: text(feature.origin, 'feature origin'), approved: text(feature.approved, 'feature approval'),
+      anchorUnits, normal, radiusUnits, outline, searchNames, searchContext, origin: text(feature.origin, 'feature origin'), approved: text(feature.approved, 'feature approval'),
       quad: text(feature.quad, 'feature quad'), link });
   });
   return Object.freeze({ schema: 'cssearth-prepared-surface-features@1', objectId, source: text(catalog.source, 'catalogue source'),

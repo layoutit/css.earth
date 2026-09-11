@@ -100,6 +100,7 @@ export interface Props {
   navigation?: boolean;
   objectId: string;
   destinations?: { searchLabel: string; description: string; };
+  features?: { searchLabel: string; description: string; };
   title: PlanetTitle;
   introduction?: string;
   facts?: Fact[];

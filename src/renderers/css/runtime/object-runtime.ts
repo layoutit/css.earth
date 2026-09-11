@@ -185,7 +185,14 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         return () => { datasetListeners.delete(listener); };
       },
     }) : undefined;
-    const controller = Object.freeze({ ready, sharedView, ...(datasets ? { datasets } : {}), ...(destinations ? { destinations } : {}), ...(navigation ? { navigation } : {}),
+    const features: import('../labels/surface-feature-types.js').SurfaceFeatureNavigationRuntime | undefined = definition.features ? Object.freeze({
+      catalog: () => surfaceFeatures?.catalog() ?? null,
+      loaded: () => ready.then(() => { if (!surfaceFeatures) throw new Error('Surface features are not mounted.'); return surfaceFeatures.loaded(); }),
+      select: (id: string) => ready.then(() => surfaceFeatures?.select(id) ?? { completed: false }),
+      selected: () => surfaceFeatures?.selected() ?? null,
+      clear: () => surfaceFeatures?.clear(),
+    }) : undefined;
+    const controller = Object.freeze({ ready, sharedView, ...(datasets ? { datasets } : {}), ...(destinations ? { destinations } : {}), ...(features ? { features } : {}), ...(navigation ? { navigation } : {}),
       refineTextures() { if (!lifetime.disposed) guarded(() => selection?.refineTextures()); },
       pause() { if (!lifetime.disposed) guarded(() => setAllowed(false)); },
       resume() { if (!lifetime.disposed) guarded(() => setAllowed(true)); },
@@ -367,7 +374,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         if (!capabilities.mountSurfaceFeatures || !mounted.featureTarget) throw new TypeError("Prepared surface features require an injected runtime capability.");
         surfaceFeatures = capabilities.mountSurfaceFeatures({ host: stage, plan: definition.features, objectId: definition.id, target: mounted.featureTarget,
           scene: mounted.sceneElement, zoomRange: () => ({ minimum: definition.camera.minimumZoom, maximum: cameraPlan.maximumZoom }),
-          lifetime, pickingHost: stage, onError: error => console.error(error) });
+          ...(navigation && worldFrame ? { navigation, flightLimits: () => ({ minimumDistanceM: (definition.camera.dolly?.minimumDistanceRadii ?? 1.2) * worldFrame.bodyRadiusM }),
+            onFlight: () => { stopMotion(); } } : {}),
+          lifetime, pickingHost: stage, inputSurface, onError: error => console.error(error) });
         context.own(() => surfaceFeatures?.destroy());
         surfaceFeatures.setLens({ id: initialSelection.lensId });
       }

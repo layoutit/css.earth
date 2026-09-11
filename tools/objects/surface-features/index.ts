@@ -3,6 +3,7 @@ import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { parseDbf } from './dbf.js';
+import { parseShpPolylines } from './shp.js';
 
 /** Prepared nomenclature catalogue: IAU/USGS Gazetteer centre points anchored to the body mesh.
  * Preparation resolves every surface anchor, priority, label kind and tooltip text; runtime
@@ -14,7 +15,15 @@ export const PREPARED_SURFACE_FEATURES_SCHEMA = 'cssearth-prepared-surface-featu
 export type SurfaceFeatureKind = 'point' | 'linear' | 'region';
 export type SurfaceFeatureOutline =
   | { readonly kind: 'circle'; readonly center: readonly [number, number, number]; readonly east: readonly [number, number, number]; readonly north: readonly [number, number, number] }
-  | { readonly kind: 'box'; readonly points: readonly (readonly [number, number, number])[] };
+  | { readonly kind: 'box'; readonly points: readonly (readonly [number, number, number])[] }
+  /** Mapped structural traces associated with the feature: open polylines on the sphere, in mesh units. */
+  | { readonly kind: 'trace'; readonly paths: readonly (readonly (readonly [number, number, number])[])[] };
+export interface SurfaceFeatureTracesConfig {
+  readonly directory: string; readonly archive: string;
+  readonly members: { readonly shapes: string; readonly attributes: string; readonly projection: string };
+  readonly radiusM: number; readonly classField: string; readonly classes: Readonly<Record<string, string>>;
+  readonly paddingDeg: number; readonly insideFraction: number; readonly maximumTraces: number; readonly minimumLengthShare: number; readonly maximumVertices: number;
+}
 export interface SurfaceFeatureAxes { readonly prime: readonly [number, number, number]; readonly east: readonly [number, number, number]; readonly north: readonly [number, number, number]; }
 export interface SurfaceFeaturePolicy { readonly minimumZoomShare: number; readonly minimumDiameterPixels: number; readonly alwaysVisibleCount: number; readonly maximumVisible: number; readonly limbCosine: number; }
 export interface SurfaceFeaturesConfig {
@@ -30,6 +39,8 @@ export interface SurfaceFeaturesConfig {
   readonly labelPolicy: SurfaceFeaturePolicy;
   /** Retained screen-space line pieces that trace the hovered feature's published diameter. */
   readonly outline: { readonly pieces: number };
+  /** Optional mapped-structure archive whose traces replace extent boxes for the listed type codes. */
+  readonly traces?: SurfaceFeatureTracesConfig;
 }
 export interface SurfaceFeaturesSourceManifest {
   readonly schema: typeof SURFACE_FEATURES_SOURCE_SCHEMA;
@@ -44,6 +55,7 @@ export interface PreparedSurfaceFeature {
   /** Circular features trace their published diameter as a small circle of the sphere, rim(φ) = center + east·cos φ + north·sin φ;
    * other features trace the Gazetteer's published latitude/longitude extent as a closed polygon on the sphere. Mesh units. */
   readonly outline: SurfaceFeatureOutline;
+  readonly searchNames: readonly string[]; readonly searchContext: string;
   readonly origin: string; readonly approved: string; readonly quad: string; readonly link: string;
 }
 export interface PreparedSurfaceFeatureCatalog {
@@ -51,6 +63,8 @@ export interface PreparedSurfaceFeatureCatalog {
   readonly source: string; readonly snapshotDate: string; readonly sourcePage: string; readonly license: string; readonly qualification: string;
   readonly datum: { readonly name: string; readonly radiusM: number; readonly longitude: string };
   readonly excluded: Readonly<Record<string, { readonly count: number; readonly reason: string }>>;
+  /** Mapped-structure traces associated with named features, when a trace archive is declared. */
+  readonly traces?: TraceSummary;
   /** Rows the export repeats for one feature identity; the first row's centre is kept. */
   readonly duplicates: { readonly features: number; readonly rows: number; readonly maxSeparationDeg: number; readonly maxDiameterDifferenceKm: number };
   readonly features: readonly PreparedSurfaceFeature[];
@@ -106,6 +120,7 @@ export function parseSurfaceFeaturesConfig(value: unknown): SurfaceFeaturesConfi
   if (!(policy.minimumDiameterPixels > 0) || policy.minimumZoomShare < 0 || policy.minimumZoomShare > 1 || policy.limbCosine < 0 || policy.limbCosine >= 1) throw new TypeError('features label policy is out of range.');
   const outline = { pieces: integer(record(input.outline, 'features recipe outline').pieces, 'outline.pieces', 8) };
   if (outline.pieces > 512) throw new TypeError('features outline pool is too large.');
+  const traces = input.traces === undefined ? undefined : parseTracesConfig(input.traces, outline.pieces, all);
   const publicBase = text(input.publicBase, 'features recipe publicBase');
   if (!/^\/scenes\/[a-z][a-z0-9-]*\/$/u.test(publicBase)) throw new TypeError('features recipe publicBase must be a scene directory.');
   const output = text(input.output, 'features recipe output');
@@ -117,8 +132,22 @@ export function parseSurfaceFeaturesConfig(value: unknown): SurfaceFeaturesConfi
     surfaceMap: relativePath(input.surfaceMap, 'features recipe surfaceMap'), mapLeftEdgeLongitudeDeg: finite(input.mapLeftEdgeLongitudeDeg, 'features recipe mapLeftEdgeLongitudeDeg'),
     output, publicBase, target: { className: text(target.className, 'target.className') },
     lensIds: Object.freeze([...lensIds as string[]]), kinds: Object.freeze(kinds), excludedTypeCodes: Object.freeze({ ...excluded as Record<string, string> }), labelPolicy: Object.freeze(policy),
-    outline: Object.freeze(outline),
+    outline: Object.freeze(outline), ...(traces ? { traces } : {}),
   });
+}
+
+function parseTracesConfig(value: unknown, pieces: number, labelledCodes: readonly string[]): SurfaceFeatureTracesConfig {
+  const input = record(value, 'features recipe traces'), members = record(input.members, 'traces.members'), classes = record(input.classes, 'traces.classes');
+  for (const [code, className] of Object.entries(classes)) { if (!labelledCodes.includes(code)) throw new TypeError(`traces.classes.${code} is not a labelled type code.`); text(className, `traces.classes.${code}`); }
+  const config: SurfaceFeatureTracesConfig = {
+    directory: relativePath(input.directory, 'traces.directory'), archive: relativePath(input.archive, 'traces.archive'),
+    members: { shapes: relativePath(members.shapes, 'traces.members.shapes'), attributes: relativePath(members.attributes, 'traces.members.attributes'), projection: relativePath(members.projection, 'traces.members.projection') },
+    radiusM: finite(input.radiusM, 'traces.radiusM'), classField: text(input.classField, 'traces.classField'), classes: Object.freeze({ ...classes as Record<string, string> }),
+    paddingDeg: finite(input.paddingDeg, 'traces.paddingDeg'), insideFraction: finite(input.insideFraction, 'traces.insideFraction'),
+    maximumTraces: integer(input.maximumTraces, 'traces.maximumTraces', 1), minimumLengthShare: finite(input.minimumLengthShare, 'traces.minimumLengthShare'), maximumVertices: integer(input.maximumVertices, 'traces.maximumVertices', 4),
+  };
+  if (!(config.radiusM > 0) || config.paddingDeg < 0 || config.insideFraction <= 0 || config.insideFraction > 1 || config.minimumLengthShare < 0 || config.minimumLengthShare > 1 || config.maximumVertices > pieces) throw new TypeError('features recipe traces are out of range.');
+  return Object.freeze(config);
 }
 
 export function parseSurfaceFeaturesSourceManifest(value: unknown): SurfaceFeaturesSourceManifest {
@@ -155,6 +184,10 @@ export function surfaceDirection(longitudeDeg: number, latitudeDeg: number, axes
 }
 
 const round = (value: number, digits = 6) => Number(value.toFixed(digits));
+/** Same folding as the shell's destination search: lower case, no diacritics, single spaces. */
+export function normalizeSearchText(value: string): string {
+  return value.normalize('NFD').replace(/[\u0300-\u036f]/gu, '').toLocaleLowerCase('en').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+}
 type Vector3 = readonly [number, number, number];
 const cross = (a: Vector3, b: Vector3): Vector3 => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
 const scaled = (v: Vector3, s: number, digits = 3): Vector3 => [round(v[0] * s, digits), round(v[1] * s, digits), round(v[2] * s, digits)];
@@ -213,6 +246,72 @@ function nodeIndex(tree: SurfaceFeaturePreparationContext['tree'], className: st
   throw new TypeError('Surface feature target must belong to the prepared scene.');
 }
 
+interface LoadedTrace { readonly className: string; readonly lengthM: number; readonly parts: readonly (readonly (readonly [number, number])[])[]; }
+interface TraceSummary { readonly source: string; readonly sourcePage: string; readonly license: string; readonly snapshotDate: string; readonly traces: number; readonly matched: number; readonly byCode: Readonly<Record<string, number>>; readonly unmatched: readonly string[]; readonly maximumVertices: number; }
+
+/** Read the pinned tectonic archive: Plate Carrée metres on the declared sphere become east longitude and latitude. */
+async function loadTraces(sourceDirectory: string, config: SurfaceFeatureTracesConfig): Promise<{ manifest: SurfaceFeaturesSourceManifest; traces: readonly LoadedTrace[] }> {
+  const directory = resolve(sourceDirectory, config.directory);
+  if (relative(sourceDirectory, directory).startsWith('..')) throw new TypeError('Trace directory escapes the source tree.');
+  const manifest = parseSurfaceFeaturesSourceManifest(JSON.parse(await readFile(resolve(directory, 'manifest.json'), 'utf8')));
+  for (const entry of manifest.inputs) {
+    const bytes = await readFile(resolve(directory, entry.path));
+    if (bytes.length !== entry.bytes || sha256(bytes) !== entry.sha256) throw new Error(`Trace source snapshot drifted: ${entry.path}`);
+  }
+  if (!manifest.inputs.some(entry => entry.path === config.archive)) throw new TypeError('Trace archive is not pinned by its source manifest.');
+  const archive = resolve(directory, config.archive);
+  const projection = new TextDecoder().decode(unzipMember(archive, config.members.projection));
+  const spheroid = /SPHEROID\["([^"]+)",([0-9.]+),([0-9.]+)\]/u.exec(projection);
+  if (!/PROJECTION\["Plate_Carree"\]/u.test(projection) || !/UNIT\["Meter",1\.0\]/u.test(projection) || !spheroid || Math.abs(Number(spheroid[2]) - config.radiusM) > 1) throw new TypeError('Trace projection is not the declared Plate Carrée metre grid.');
+  const central = /PARAMETER\["central_meridian",([0-9.-]+)\]/u.exec(projection);
+  if (!central || Number(central[1]) !== 0) throw new TypeError('Trace projection must use a zero central meridian.');
+  const table = parseDbf(unzipMember(archive, config.members.attributes));
+  const shapes = parseShpPolylines(unzipMember(archive, config.members.shapes));
+  if (shapes.records.length !== table.rows.length) throw new TypeError('Trace shapes and attributes disagree in count.');
+  const metresPerDegree = config.radiusM * Math.PI / 180;
+  const traces: LoadedTrace[] = [];
+  shapes.records.forEach((shape, index) => {
+    if (!shape) return;
+    const row = table.rows[index]!, className = row[config.classField];
+    if (typeof className !== 'string') throw new TypeError(`Trace attribute ${config.classField} is missing.`);
+    const parts = shape.parts.map(part => part.map(([x, y]) => [x / metresPerDegree, y / metresPerDegree] as const));
+    let lengthM = 0;
+    for (const part of shape.parts) for (let i = 1; i < part.length; i++) lengthM += Math.hypot(part[i]![0] - part[i - 1]![0], part[i]![1] - part[i - 1]![1]);
+    traces.push({ className, lengthM, parts });
+  });
+  return { manifest, traces };
+}
+
+/** Traces whose vertices lie inside the padded published extent, longest first, trimmed to the recipe's budget. */
+export function selectTraces(traces: readonly LoadedTrace[], className: string, extent: { minLon: number; maxLon: number; minLat: number; maxLat: number }, config: Pick<SurfaceFeatureTracesConfig, 'paddingDeg' | 'insideFraction' | 'maximumTraces' | 'minimumLengthShare'>): LoadedTrace[] {
+  const pad = config.paddingDeg;
+  const inside = ([lon, lat]: readonly [number, number]) => lat >= extent.minLat - pad && lat <= extent.maxLat + pad &&
+    [-360, 0, 360, 720].some(shift => lon + shift >= extent.minLon - pad && lon + shift <= extent.maxLon + pad);
+  const candidates = traces.filter(trace => {
+    if (trace.className !== className) return false;
+    const points = trace.parts.flat();
+    return points.filter(inside).length >= config.insideFraction * points.length;
+  }).sort((a, b) => b.lengthM - a.lengthM);
+  const leader = candidates[0]?.lengthM ?? 0;
+  return candidates.filter(trace => trace.lengthM >= config.minimumLengthShare * leader).slice(0, config.maximumTraces);
+}
+
+/** Keep endpoints and evenly spaced interior vertices so every selected trace fits the retained chord pool. */
+export function budgetTracePaths(paths: readonly (readonly (readonly [number, number])[])[], maximumVertices: number): (readonly [number, number])[][] {
+  // Too many short parts for the pool: keep the longest parts by vertex count first.
+  const kept = 2 * paths.length > maximumVertices ? [...paths].sort((a, b) => b.length - a.length).slice(0, Math.floor(maximumVertices / 2)) : paths;
+  const total = kept.reduce((sum, path) => sum + path.length, 0);
+  if (total <= maximumVertices) return kept.map(path => [...path]);
+  const spare = maximumVertices - 2 * kept.length;
+  return kept.map(path => {
+    const interior = Math.max(0, Math.floor(spare * (path.length - 2) / Math.max(1, total - 2 * kept.length)));
+    const keep: (readonly [number, number])[] = [path[0]!];
+    for (let step = 1; step <= interior; step++) keep.push(path[Math.round(step * (path.length - 1) / (interior + 1))]!);
+    keep.push(path[path.length - 1]!);
+    return keep;
+  });
+}
+
 /** Decode the pinned Gazetteer archive into the prepared catalogue and runtime plan. */
 export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationContext): Promise<{ plan: PreparedSurfaceFeaturePlan; descriptor: Record<string, unknown>; catalog: PreparedSurfaceFeatureCatalog }> {
   const config = parseSurfaceFeaturesConfig(context.config);
@@ -226,6 +325,8 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   if (!manifest.inputs.some(entry => entry.path === config.archive)) throw new TypeError('Surface feature archive is not pinned by its source manifest.');
   for (const id of config.lensIds) if (!context.declaredLensIds.includes(id)) throw new TypeError(`Surface feature lens ${id} is not declared by the object.`);
   const axes = parseSurfaceAxes(JSON.parse(await readFile(resolve(context.sourceDirectory, config.surfaceMap), 'utf8')));
+  const loadedTraces = config.traces ? await loadTraces(context.sourceDirectory, config.traces) : null;
+  const traceStats = { matched: 0, byCode: {} as Record<string, number>, unmatched: [] as string[] };
   const archive = resolve(directory, config.archive);
   const projection = new TextDecoder().decode(unzipMember(archive, config.members.projection));
   const spheroid = /SPHEROID\["([^"]+)",([0-9.]+),([0-9.]+)\]/u.exec(projection);
@@ -282,13 +383,23 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     if (Math.abs(extent.maxLat) > 90 || Math.abs(extent.minLat) > 90) throw new TypeError(`Gazetteer extent latitude is out of range for ${row.name}.`);
     // Craters and faculae are circular: their diameter is the rim. Other features report a nominal size,
     // so their published extent box is the honest shape.
-    const outline = kind === 'point' ? rimVectors(direction, axes.north, context.meshRadiusUnits, radiusUnits)
+    let outline: SurfaceFeatureOutline = kind === 'point' ? rimVectors(direction, axes.north, context.meshRadiusUnits, radiusUnits)
       : extentPolygon(extent, axes, config.mapLeftEdgeLongitudeDeg, context.meshRadiusUnits, config.outline.pieces);
+    if (loadedTraces && config.traces && Object.hasOwn(config.traces.classes, code)) {
+      const selected = selectTraces(loadedTraces.traces, config.traces.classes[code]!, extent, config.traces);
+      if (selected.length) {
+        const paths = budgetTracePaths(selected.flatMap(trace => trace.parts), config.traces.maximumVertices)
+          .map(path => path.map(([lon, lat]) => scaled(surfaceDirection(lon, lat, axes, config.mapLeftEdgeLongitudeDeg), context.meshRadiusUnits)));
+        outline = { kind: 'trace', paths };
+        traceStats.matched++; traceStats.byCode[code] = (traceStats.byCode[code] ?? 0) + 1;
+      } else traceStats.unmatched.push(row.name!);
+    }
     const feature: PreparedSurfaceFeature = {
       id, name: row.name!, kind, type: row.type!.split(',')[0]!.trim(), code, diameterKm, longitudeDeg, latitudeDeg,
       anchorUnits: [round(direction[0] * context.meshRadiusUnits, 3), round(direction[1] * context.meshRadiusUnits, 3), round(direction[2] * context.meshRadiusUnits, 3)],
       normal: [round(direction[0]), round(direction[1]), round(direction[2])],
       radiusUnits: round(radiusUnits, 4), outline,
+      searchNames: [...new Set([row.name!, row.clean_name!].map(normalizeSearchText).filter(Boolean))], searchContext: normalizeSearchText(row.type!.split(',')[0]!),
       origin: row.origin!, approved: `${approved[1]}-${approved[2]}-${approved[3]}`, quad: row.quad_code!, link: row.link!.replace(/^http:\/\//u, 'https://'),
     };
     ids.set(id, feature);
@@ -302,7 +413,10 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     schema: PREPARED_SURFACE_FEATURES_SCHEMA, objectId: context.objectId,
     source: manifest.source, snapshotDate: manifest.snapshotDate, sourcePage: manifest.sourcePage, license: manifest.license, qualification: manifest.qualification,
     datum: { name: datumName, radiusM, longitude: 'positive-east-0-360' },
-    excluded, duplicates: { features: duplicateIds.size, rows: duplicateRows, maxSeparationDeg: round(maxSeparationDeg, 4), maxDiameterDifferenceKm: round(maxDiameterDifferenceKm, 4) }, features,
+    excluded, duplicates: { features: duplicateIds.size, rows: duplicateRows, maxSeparationDeg: round(maxSeparationDeg, 4), maxDiameterDifferenceKm: round(maxDiameterDifferenceKm, 4) },
+    ...(loadedTraces && config.traces ? { traces: { source: loadedTraces.manifest.source, sourcePage: loadedTraces.manifest.sourcePage, license: loadedTraces.manifest.license, snapshotDate: loadedTraces.manifest.snapshotDate,
+      traces: loadedTraces.traces.length, matched: traceStats.matched, byCode: traceStats.byCode, unmatched: traceStats.unmatched, maximumVertices: config.traces.maximumVertices } } : {}),
+    features,
   };
   const bytes = Buffer.from(`${JSON.stringify(catalog)}\n`);
   await mkdir(context.publicDirectory, { recursive: true });
@@ -314,7 +428,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     outline: config.outline,
   };
   const descriptor = { schema: 'cssearth-prepared-features@1', objectId: context.objectId, ...plan.catalog, source: manifest.source, sourcePage: manifest.sourcePage,
-    license: manifest.license, snapshotDate: manifest.snapshotDate, mapLeftEdgeLongitudeDeg: config.mapLeftEdgeLongitudeDeg, excluded, duplicates: catalog.duplicates };
+    license: manifest.license, snapshotDate: manifest.snapshotDate, mapLeftEdgeLongitudeDeg: config.mapLeftEdgeLongitudeDeg, excluded, duplicates: catalog.duplicates, ...(catalog.traces ? { traces: catalog.traces } : {}) };
   await writeFile(resolve(context.outputDirectory, 'features.json'), `${JSON.stringify(descriptor)}\n`);
   return { plan, descriptor, catalog };
 }

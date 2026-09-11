@@ -4,7 +4,8 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { parseDbf } from './dbf.js';
-import { extentPolygon, normalizeExtent, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, rimVectors, surfaceDirection } from './index.js';
+import { budgetTracePaths, extentPolygon, normalizeExtent, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, rimVectors, selectTraces, surfaceDirection } from './index.js';
+import { parseShpPolylines } from './shp.js';
 
 const root = process.cwd();
 const mercurySource = resolve(root, 'src/planets/mercury/source');
@@ -52,6 +53,29 @@ test('extents wrap the meridian around their feature and become closed polygons 
   assert.ok(first.every((n, i) => Math.abs(n * 11500 - polygon.points[0]![i]!) < 0.01) && sixteenth.every((n, i) => Math.abs(n * 11500 - polygon.points[16]![i]!) < 0.01));
 });
 
+test('shapefile polylines decode, traces select by class inside the padded extent, and budgets keep endpoints', () => {
+  // One record: two parts of a polyline in a hand-built shapefile.
+  const parts = [[[0, 0], [1, 1], [2, 0]], [[5, 5], [6, 6]]] as const;
+  const pointCount = 5, content = 44 + 4 * 2 + 16 * pointCount, file = Buffer.alloc(100 + 8 + content);
+  file.writeInt32BE(9994, 0); file.writeInt32BE((100 + 8 + content) / 2, 24); file.writeInt32LE(1000, 28); file.writeInt32LE(3, 32);
+  file.writeInt32BE(1, 100); file.writeInt32BE(content / 2, 104);
+  const start = 108; file.writeInt32LE(3, start); file.writeInt32LE(2, start + 36); file.writeInt32LE(pointCount, start + 40);
+  file.writeInt32LE(0, start + 44); file.writeInt32LE(3, start + 48);
+  parts.flat().forEach(([x, y], index) => { file.writeDoubleLE(x, start + 52 + 16 * index); file.writeDoubleLE(y, start + 60 + 16 * index); });
+  const decoded = parseShpPolylines(new Uint8Array(file));
+  assert.deepEqual(decoded.records[0]?.parts, parts);
+  const traces = [
+    { className: 'Contractional Landform', lengthM: 100, parts: [[[10, 10], [11, 11]]] },
+    { className: 'Contractional Landform', lengthM: 20, parts: [[[10.5, 10.5], [10.6, 10.6]]] },
+    { className: 'Contractional Landform', lengthM: 60, parts: [[[10, 10], [30, 30]]] },
+    { className: 'Extensional Landform', lengthM: 500, parts: [[[10, 10], [11, 11]]] },
+  ] as const;
+  const selected = selectTraces(traces, 'Contractional Landform', { minLon: 9, maxLon: 12, minLat: 9, maxLat: 12 }, { paddingDeg: 0.3, insideFraction: 0.9, maximumTraces: 6, minimumLengthShare: 0.25 });
+  assert.deepEqual(selected.map(trace => trace.lengthM), [100], 'the short trace is under the share and the long one leaves the extent');
+  const budget = budgetTracePaths([[[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0]], [[9, 9], [9, 8]]], 6);
+  assert.deepEqual(budget, [[[0, 0], [2, 0], [3, 0], [5, 0]], [[9, 9], [9, 8]]]);
+});
+
 test('the Mercury recipe parses and rejects overlapping or excluded label kinds', async () => {
   const config = JSON.parse(await readFile(resolve(mercurySource, 'preparation/features.json'), 'utf8'));
   const parsed = parseSurfaceFeaturesConfig(config);
@@ -68,7 +92,7 @@ test('the pinned Mercury Gazetteer archive prepares anchored IAU features on the
     const tree = { scene: 1, nodes: [{ className: 'polycss-camera', parent: -1 }, { className: 'polycss-scene', parent: 0 }, { className: 'polycss-mesh mercury-system', parent: 1 }, { className: 'polycss-mesh mercury-body', parent: 2 }, { className: 'mercury-polar', parent: 3 }] };
     const { plan, catalog } = await prepareSurfaceFeatures({ objectId: 'mercury', sourceDirectory: mercurySource, publicDirectory: resolve(directory, 'public'), outputDirectory: resolve(directory, 'prepared'),
       config, maxEntries: 1000, radiusKm: 2439.7, meshRadiusUnits: 11500, tree, declaredLensIds: ['normal', 'enhanced', 'topography', 'interior'] });
-    assert.deepEqual(plan.outline, { pieces: 64 });
+    assert.deepEqual(plan.outline, { pieces: 256 });
     assert.equal(plan.policy.minimumZoomShare, 1);
     assert.equal(plan.target, 3);
     assert.equal(catalog.features.length + 32 + catalog.duplicates.rows, 613);
@@ -88,10 +112,15 @@ test('the pinned Mercury Gazetteer archive prepares anchored IAU features on the
         assert.ok(Math.abs(Math.hypot(...center) ** 2 + Math.hypot(...east) ** 2 - 11500 ** 2) < 11500 * 0.5, feature.name);
         assert.ok(Math.abs(Math.hypot(...east) - Math.hypot(...north)) < 0.05 && Math.abs(dot(center, east)) < 50 && Math.abs(dot(center, north)) < 50 && Math.abs(dot(east, north)) < 50, feature.name);
         assert.equal(feature.kind, 'point', feature.name);
-      } else {
-        assert.equal(feature.outline.points.length, 64, feature.name);
+      } else if (feature.outline.kind === 'box') {
+        assert.equal(feature.outline.points.length, 256, feature.name);
         assert.ok(feature.outline.points.every(point => Math.abs(Math.hypot(...point) - 11500) < 0.01), feature.name);
         assert.notEqual(feature.kind, 'point', feature.name);
+      } else {
+        const vertices = feature.outline.paths.reduce((sum, path) => sum + path.length, 0);
+        assert.ok(feature.outline.paths.length >= 1 && vertices <= 240, feature.name);
+        assert.ok(feature.outline.paths.every(path => path.length >= 2 && path.every(point => Math.abs(Math.hypot(...point) - 11500) < 0.01)), feature.name);
+        assert.ok(['RU', 'DO', 'FO'].includes(feature.code), feature.name);
       }
       assert.ok(feature.radiusUnits > 0 && feature.diameterKm > 0, feature.name);
       assert.match(feature.link, /^https:\/\/planetarynames\.wr\.usgs\.gov\/Feature\/\d+$/u);
@@ -104,11 +133,14 @@ test('the pinned Mercury Gazetteer archive prepares anchored IAU features on the
     assert.ok(expected.every((n, i) => Math.abs(n * 11500 - caloris.anchorUnits[i]!) < 1e-2));
     assert.equal(catalog.features.find(feature => feature.name === 'Rembrandt')?.outline.kind, 'circle');
     const enterprise = catalog.features.find(feature => feature.name === 'Enterprise Rupes');
-    assert.equal(enterprise?.kind, 'linear'); assert.equal(enterprise?.outline.kind, 'box');
-    // The published extent runs 66.16–84.03° E, 38.47–28.67° S: the first polygon vertex is the south-west corner.
-    const corner = surfaceDirection(66.1641, -38.4737, axes, 180);
-    const enterprisePoints = enterprise?.outline.kind === 'box' ? enterprise.outline.points : null;
-    assert.ok(enterprisePoints && corner.every((n, i) => Math.abs(n * 11500 - enterprisePoints[0]![i]!) < 1), JSON.stringify(enterprisePoints?.[0]));
+    assert.equal(enterprise?.kind, 'linear'); assert.equal(enterprise?.outline.kind, 'trace', 'the mapped scarp replaces the extent box');
+    // Angkor Vallis is not a tectonic structure: it keeps its published extent, whose first vertex is the south-west corner.
+    const angkor = catalog.features.find(feature => feature.name === 'Angkor Vallis');
+    const corner = surfaceDirection(112.5, 55.9952, axes, 180);
+    const angkorPoints = angkor?.outline.kind === 'box' ? angkor.outline.points : null;
+    assert.ok(angkorPoints && corner.every((n, i) => Math.abs(n * 11500 - angkorPoints[0]![i]!) < 1), JSON.stringify(angkorPoints?.[0]));
+    assert.ok(catalog.traces && catalog.traces.traces === 18451 && catalog.traces.matched === 66 && catalog.traces.unmatched.length === 9, JSON.stringify(catalog.traces));
+    assert.ok(catalog.traces.unmatched.includes('Astrolabe Rupes'));
     await assert.rejects(prepareSurfaceFeatures({ objectId: 'mercury', sourceDirectory: mercurySource, publicDirectory: resolve(directory, 'p2'), outputDirectory: resolve(directory, 'o2'),
       config, maxEntries: 10, radiusKm: 2439.7, meshRadiusUnits: 11500, tree, declaredLensIds: ['normal', 'enhanced', 'topography'] }), /exceed the authored capability/u);
     await assert.rejects(prepareSurfaceFeatures({ objectId: 'mercury', sourceDirectory: mercurySource, publicDirectory: resolve(directory, 'p3'), outputDirectory: resolve(directory, 'o3'),
