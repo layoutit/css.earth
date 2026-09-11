@@ -1,3 +1,5 @@
+declare global { interface Window { __earthLongTasks: number[]; } }
+type MotionSample = number;
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
 import { CANONICAL_PREPARED_IMAGE_DENSITY } from
@@ -17,7 +19,7 @@ try {
   });
   const page = await context.newPage();
   const session = await context.newCDPSession(page);
-  let layers = [];
+  let layers: { width: number; height: number; backendNodeId?: number }[] = [];
   await session.send("LayerTree.enable");
   await session.send("Performance.enable");
   session.on("LayerTree.layerTreeDidChange", (event) => {
@@ -31,8 +33,8 @@ try {
       }
     }).observe({ type: "longtask", buffered: true });
   });
-  const external = [];
-  const requestedAssets = [];
+  const external: string[] = [];
+  const requestedAssets: string[] = [];
   page.on("request", (request) => {
     if (new URL(request.url()).origin !== new URL(baseUrl).origin) {
       external.push(request.url());
@@ -45,10 +47,12 @@ try {
   });
   await page.waitForFunction(() => window.__earth?.ready === true);
   await page.waitForTimeout(1200);
-  const startup = await page.evaluate(() => ({
+  const startup = await page.evaluate(() => {
+    function requiredDiagnostics<T>(value: T): NonNullable<T> { if (value === undefined || value === null) throw new Error("Expected mounted development diagnostics"); return value; }
+return ({
     retainedImageCount:
-      window.__earth.renderStats.textureStats.retainedInteractiveImageCount,
-    resources: performance.getEntriesByType("resource")
+      requiredDiagnostics(window.__earth).renderStats.textureStats.retainedInteractiveImageCount,
+    resources: performance.getEntriesByType("resource").filter((entry): entry is PerformanceResourceTiming => entry instanceof PerformanceResourceTiming)
       .filter(({ name }) => name.includes("/scenes/earth/"))
       .map(({ name, transferSize, decodedBodySize }) => ({
         name,
@@ -56,16 +60,18 @@ try {
         decodedBodySize,
       })),
     longTasks: [...window.__earthLongTasks],
-  }));
+  }); });
   await page.evaluate(() => { window.__earthLongTasks = []; });
-  const frameIntervals = await page.evaluate(() => new Promise((resolve) => {
-    const samples = [];
+  const frameIntervals = await page.evaluate(() => {
+    function requiredDiagnostics<T>(value: T): NonNullable<T> { if (value === undefined || value === null) throw new Error("Expected mounted development diagnostics"); return value; }
+return new Promise<MotionSample[]>((resolve) => {
+    const samples: MotionSample[] = [];
     let previous = performance.now();
-    const sample = (now) => {
+    const sample = (now: number) => {
       samples.push(now - previous);
       previous = now;
       const motionFrame = samples.length - 1;
-      window.__earth.camera.setState({
+      requiredDiagnostics(window.__earth).camera.setState({
         controlPitch: motionFrame % 90,
         zoom: 0.85 + (motionFrame % 31) / 100,
       });
@@ -73,22 +79,26 @@ try {
       else requestAnimationFrame(sample);
     };
     requestAnimationFrame(sample);
-  }));
+  }); });
   await page.waitForFunction(() => {
-    const runtime = window.__earth.runtime, selected = runtime.selection();
+    function requiredDiagnostics<T>(value: T): NonNullable<T> { if (value === undefined || value === null) throw new Error("Expected mounted development diagnostics"); return value; }
+
+    const runtime = requiredDiagnostics(window.__earth).runtime, selected = runtime.selection();
     return !selected.pending && !selected.loadingMaterial && runtime.resources().pools
       .filter(pool => ["lighting", "atmosphere"].includes(pool.id)).every(pool => pool.pending === 0);
   }, null, { timeout: 10_000 });
   const runtime = await page.evaluate(() => {
-    const resources = performance.getEntriesByType("resource")
+    function requiredDiagnostics<T>(value: T): NonNullable<T> { if (value === undefined || value === null) throw new Error("Expected mounted development diagnostics"); return value; }
+
+    const resources = performance.getEntriesByType("resource").filter((entry): entry is PerformanceResourceTiming => entry instanceof PerformanceResourceTiming)
       .filter(({ name }) => name.includes("/scenes/earth/"));
     return {
-      elementCount: document.querySelectorAll("*").length,
-      retainedLeafCount: window.__earth.dom.retainedLeafCount,
+      elementCount: document.querySelectorAll<HTMLElement>("*").length,
+      retainedLeafCount: requiredDiagnostics(window.__earth).dom.retainedLeafCount,
       retainedImageCount:
-        window.__earth.renderStats.textureStats.retainedInteractiveImageCount,
+        requiredDiagnostics(window.__earth).renderStats.textureStats.retainedInteractiveImageCount,
       selectedPreparedDensity:
-        window.__earth.renderStats.textureStats.selectedPreparedDensity,
+        requiredDiagnostics(window.__earth).renderStats.textureStats.selectedPreparedDensity,
       runningAnimationCount: document.getAnimations()
         .filter(({ playState }) => playState === "running").length,
       longTasks: window.__earthLongTasks,
@@ -101,29 +111,34 @@ try {
         0,
       ),
       resourceCount: resources.length,
-      cameraStats: window.__earth.camera.stats(),
-      materials: window.__earth.material.state(),
-      materialCaches: Object.fromEntries(window.__earth.runtime.resources().pools
+      cameraStats: requiredDiagnostics(window.__earth).camera.stats(),
+      materials: requiredDiagnostics(window.__earth).material.state(),
+      materialCaches: Object.fromEntries(requiredDiagnostics(window.__earth).runtime.resources().pools
         .filter(pool => ["lighting", "atmosphere"].includes(pool.id)).map(pool => [pool.id, pool])),
-      selection: window.__earth.runtime.selection(),
+      selection: requiredDiagnostics(window.__earth).runtime.selection(),
       embeddedMoonElementCount:
-        document.querySelectorAll('[class*="earth-moon"]').length,
+        document.querySelectorAll<HTMLElement>('[class*="earth-moon"]').length,
     };
   });
   const hiddenAtmosphereTransport = await page.evaluate(async () => {
-    const input = document.querySelector(
+    function requiredDiagnostics<T>(value: T): NonNullable<T> { if (value === undefined || value === null) throw new Error("Expected mounted development diagnostics"); return value; }
+
+    function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+    function requiredInput(value: Element | null): HTMLInputElement { if (!(value instanceof HTMLInputElement)) throw new Error("Expected required HTMLInputElement"); return value; }
+
+    const input = requiredInput(document.querySelector(
       'input[name="atmosphere"][type="checkbox"]',
-    );
+    ));
     if (!(input instanceof HTMLInputElement)) return null;
     if (input.checked) input.click();
-    const stats = () => ({ pool: window.__earth.runtime.resources().pools.find(pool => pool.id === "atmosphere"),
-      decodes: window.__earth.runtime.resources().decodes, selection: window.__earth.runtime.selection() });
+    const stats = () => ({ pool: requiredDiagnostics(requiredDiagnostics(window.__earth).runtime.resources().pools.find(pool => pool.id === "atmosphere")),
+      decodes: requiredDiagnostics(window.__earth).runtime.resources().decodes, selection: requiredDiagnostics(window.__earth).runtime.selection() });
     while (stats().pool.pending !== 0 || stats().selection.pending) {
       await new Promise((resolve) => requestAnimationFrame(resolve));
     }
     const before = stats();
     for (let controlPitch = 0; controlPitch < 90; controlPitch += 1) {
-      window.__earth.camera.setState({ controlPitch });
+      requiredDiagnostics(window.__earth).camera.setState({ controlPitch });
     }
     await new Promise((resolve) => requestAnimationFrame(() =>
       requestAnimationFrame(resolve)));
@@ -135,7 +150,10 @@ try {
       ({ name, value }) => [name, value],
     ),
   );
-  await page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
+  await page.evaluate(() => {
+    function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+    function requiredInput(value: Element | null): HTMLInputElement { if (!(value instanceof HTMLInputElement)) throw new Error("Expected required HTMLInputElement"); return value; }
+return (requiredInput(document.querySelector('input[name="motion"]')).checked && requiredInput(document.querySelector('input[name="motion"]')).click()); });
   const describedLayers = await Promise.all(layers.map(async (layer) => {
     let className = "";
     if (layer.backendNodeId) {
@@ -152,7 +170,7 @@ try {
     }
     return { ...layer, className };
   }));
-  const maximumLayer = layers.reduce((maximum, layer) => {
+  const maximumLayer = layers.reduce<{ area: number; width: number; height: number }>((maximum, layer) => {
     const area = (layer.width ?? 0) * (layer.height ?? 0);
     return area > maximum.area
       ? { area, width: layer.width ?? 0, height: layer.height ?? 0 }
@@ -161,7 +179,7 @@ try {
   const maximumSceneLayer = describedLayers
     .filter(({ className }) => !className.split(/\s+/u)
       .includes("earth-input-surface"))
-    .reduce((maximum, layer) => {
+    .reduce<{ area: number; width: number; height: number }>((maximum, layer) => {
       const area = (layer.width ?? 0) * (layer.height ?? 0);
       return area > maximum.area
         ? { area, width: layer.width ?? 0, height: layer.height ?? 0 }
@@ -220,6 +238,8 @@ try {
     assert.ok(cache.nativeSlots <= 3, JSON.stringify(cache));
     assert.equal(cache.pending, 0);
   }
+  assert.ok(report.selection.committed);
+  assert.ok(report.selection.plan);
   assert.equal(report.selection.committed.shadows, false);
   assert.equal(report.materialCaches.lighting.resident, 0);
   assert.ok(!report.selection.plan.required.some(key => key.startsWith("lighting:")));
@@ -230,6 +250,7 @@ try {
   assert.ok(report.materialRowRequests.atmosphere.length <= 24,
     JSON.stringify(report.materialRowRequests.atmosphere));
   assert.ok(report.hiddenAtmosphereTransport);
+  assert.ok(report.hiddenAtmosphereTransport.before.selection.committed);
   assert.equal(report.hiddenAtmosphereTransport.before.selection.committed.atmosphere, false);
   assert.deepEqual(report.hiddenAtmosphereTransport.after.pool.keys, report.hiddenAtmosphereTransport.before.pool.keys);
   assert.equal(

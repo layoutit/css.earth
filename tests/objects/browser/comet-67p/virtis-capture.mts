@@ -1,20 +1,25 @@
+declare global { interface Window { __virtisProof: { body: HTMLElement; nodes: HTMLElement[]; changes: MutationRecord[]; observer: MutationObserver }; } }
+import type { Page } from 'playwright';
 // Playwright CLI run-code input. Open the built local 67P route in a named
 // Chrome session, then run this file. Captures and results stay local.
-async page => {
+export default async (page: Page) => {
   const origin = await page.evaluate(() => ({ hostname: location.hostname, pathname: location.pathname, href: location.href }));
   if (origin.hostname !== '127.0.0.1' || origin.pathname !== '/comet-67p/') throw new Error('Open the local built 67P viewer first.');
   const browser = page.context().browser(), results = [];
+  if (!browser) throw new Error("Capture requires a connected browser");
   for (const dpr of [1, 2]) {
     const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: dpr });
     try {
-      const p = await context.newPage(), errors = [], requests = [];
+      const p = await context.newPage(), errors: string[] = [], requests: string[] = [];
       p.on('pageerror', e => errors.push(String(e)));
       p.on('response', r => { if (r.status() >= 400) errors.push(`${r.status()} ${r.url()}`); });
       p.on('request', r => requests.push(r.url()));
       await p.goto(origin.href, { waitUntil: 'networkidle' });
       await p.waitForFunction(() => document.documentElement.dataset.ready === 'true');
       await p.evaluate(() => {
-        const body = document.querySelector('.comet-67p-body'), nodes = [...body.querySelectorAll('*')], changes = [];
+        function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
+        const body = requiredElement(document.querySelector('.comet-67p-body')), nodes = [...body.querySelectorAll<HTMLElement>('*')], changes: MutationRecord[] = [];
         const observer = new MutationObserver(records => changes.push(...records)); observer.observe(body, { subtree: true, childList: true });
         window.__virtisProof = { body, nodes, changes, observer };
       });
@@ -24,20 +29,25 @@ async page => {
       const views = [];
       for (const id of ['albedo', 'slope', 'absorption', 'ice']) {
         await p.locator(`button[name="lens"][value="${id}"]`).click();
-        await p.waitForFunction(id => document.querySelector(`button[name="lens"][value="${id}"]`).getAttribute('aria-pressed') === 'true', id);
+        await p.waitForFunction(id => {
+          function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+          function requiredInput(value: Element | null): HTMLButtonElement { if (!(value instanceof HTMLButtonElement)) throw new Error("Expected required HTMLButtonElement"); return value; }
+return requiredInput(document.querySelector(`button[name="lens"][value="${id}"]`)).getAttribute('aria-pressed') === 'true'; }, id);
         await p.waitForLoadState('networkidle');
         const image = p.locator(`img[src*="comet-67p-${id}-legend.webp"]`);
         if (await image.count() !== 1 || !await image.isVisible()) throw new Error(`Missing visible ${id} legend`);
         const panel = p.locator(`[data-lens-details="${id}"]`);
         const facts = await panel.locator('.planet-facts li').allTextContents();
         if ((facts.length < 2 || facts.length > 3) || !facts.some(text => text.includes('Aug–Sep 2014'))) throw new Error(`Missing ${id} factsheet`);
-        const factLayout = await panel.locator('.planet-facts li').evaluateAll(rows => rows.map(row => {
-          const value = row.querySelector('.planet-fact-value'), range = document.createRange();
+        const factLayout = await panel.locator('.planet-facts li').evaluateAll(rows => {
+          function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+return rows.map(row => {
+          const value = requiredElement(row.querySelector('.planet-fact-value')), range = document.createRange();
           range.selectNodeContents(value);
           return { text: value.textContent, valueWidth: value.getBoundingClientRect().width,
             textWidth: range.getBoundingClientRect().width, height: value.getBoundingClientRect().height,
             leaderWidth: parseFloat(getComputedStyle(row, '::before').width) };
-        }));
+        }); });
         if (factLayout.some(row => row.height <= 20 && Math.abs(row.valueWidth - row.textWidth) > 1)) throw new Error(`Unused value-column space in ${id} facts`);
         const dataset = await p.locator(`button[name="lens"][value="${id}"]`).innerText();
         if (!dataset.includes('VIRTIS') || /2014|Aug|Sep/.test(dataset)) throw new Error(`Verbose ${id} dataset row`);
@@ -47,7 +57,7 @@ async page => {
         const footerTop = await p.locator('footer').evaluate(node => { const rect = node.getBoundingClientRect(); return rect.height ? Math.min(innerHeight, rect.top) : innerHeight; });
         if (!legendBounds || legendBounds.y < 0 || legendBounds.y + legendBounds.height > footerTop) throw new Error(`Clipped ${id} legend`);
         const atlases = await p.evaluate(async () => {
-          const urls = [...new Set([...document.querySelectorAll('.comet-67p-body > u')].map(n => getComputedStyle(n).backgroundImage.match(/^url\("?([^"\)]+)"?\)$/)?.[1]))];
+          const urls = [...new Set([...document.querySelectorAll<HTMLElement>('.comet-67p-body > u')].map(n => getComputedStyle(n).backgroundImage.match(/^url\("?([^"\)]+)"?\)$/)?.[1]))];
           return Promise.all(urls.map(async url => {
             if (!url) throw new Error('Missing retained atlas'); const response = await fetch(url), bytes = await response.arrayBuffer();
             if (!response.ok) throw new Error('Atlas readback failed');
@@ -63,12 +73,14 @@ async page => {
       await p.waitForLoadState('networkidle');
       await p.screenshot({ path: `output/playwright/67p-virtis-dpr${dpr}-ice-shadows.png` });
       const readback = await p.evaluate(() => {
+        function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
         const probe = window.__virtisProof; probe.changes.push(...probe.observer.takeRecords()); probe.observer.disconnect();
-        const body = document.querySelector('.comet-67p-body'), nodes = [...body.querySelectorAll('*')];
-        return { devicePixelRatio, leaves: body.querySelectorAll(':scope > u').length,
+        const body = requiredElement(document.querySelector('.comet-67p-body')), nodes = [...body.querySelectorAll<HTMLElement>('*')];
+        return { devicePixelRatio, leaves: body.querySelectorAll<HTMLElement>(':scope > u').length,
           retained: body === probe.body && nodes.length === probe.nodes.length && nodes.every((n, i) => n === probe.nodes[i]),
-          treeMutations: probe.changes.length, sceneCount: document.querySelectorAll('.polycss-scene').length,
-          forbiddenElements: body.querySelectorAll('canvas,svg').length,
+          treeMutations: probe.changes.length, sceneCount: document.querySelectorAll<HTMLElement>('.polycss-scene').length,
+          forbiddenElements: body.querySelectorAll<HTMLElement>('canvas,svg').length,
           forbiddenStyles: nodes.some(n => { const s = getComputedStyle(n); return s.clipPath !== 'none' || s.filter !== 'none' || s.maskImage !== 'none' || s.mixBlendMode !== 'normal' || /gradient\(/.test(s.backgroundImage); }) };
       });
       const forbiddenRequests = requests.filter(url => /\.(?:tab|wrl)(?:\?|$)|source-index\.json/.test(url));

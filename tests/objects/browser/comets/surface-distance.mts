@@ -1,8 +1,10 @@
+type Face = { vertices: readonly (readonly number[])[]; minimum: number[]; maximum: number[] };
+type DistanceNode = { minimum: number[]; maximum: number[] } & ({ faces: Face[] } | { children: [DistanceNode, DistanceNode] });
 // Independent preparation diagnostics: closest surface distance, not ray depth.
-const dot = (a, b) => a.reduce((sum, v, i) => sum + v * b[i], 0);
-const sub = (a, b) => a.map((v, i) => v - b[i]);
-const squared = v => dot(v, v);
-export function triangleDistanceSquared(point, [a, b, c]) {
+const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, v, i) => sum + v * b[i], 0);
+const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - b[i]);
+const squared = (v: readonly number[]) => dot(v, v);
+export function triangleDistanceSquared(point: readonly number[], [a, b, c]: readonly (readonly number[])[]) {
   const ab = sub(b, a), ac = sub(c, a), ap = sub(point, a);
   const aa = squared(ab), cc = squared(ac), cross = dot(ab, ac);
   const denominator = aa * cc - cross * cross;
@@ -18,13 +20,13 @@ export function triangleDistanceSquared(point, [a, b, c]) {
   }));
 }
 
-export function surfaceDistanceIndex(positions, indices) {
+export function surfaceDistanceIndex(positions: readonly (readonly number[])[], indices: readonly (readonly number[])[]) {
   const faces = indices.map(face => {
     const vertices = face.map(i => positions[i]);
     return { vertices, minimum: [0, 1, 2].map(i => Math.min(...vertices.map(v => v[i]))),
       maximum: [0, 1, 2].map(i => Math.max(...vertices.map(v => v[i]))) };
   });
-  function build(faces) {
+  function build(faces: Face[]): DistanceNode {
     const minimum = [Infinity, Infinity, Infinity], maximum = [-Infinity, -Infinity, -Infinity];
     for (const face of faces) for (let i = 0; i < 3; i++) {
       minimum[i] = Math.min(minimum[i], face.minimum[i]); maximum[i] = Math.max(maximum[i], face.maximum[i]);
@@ -36,13 +38,13 @@ export function surfaceDistanceIndex(positions, indices) {
     return { minimum, maximum, children: [build(faces.slice(0, middle)), build(faces.slice(middle))] };
   }
   const root = build(faces);
-  return point => {
+  return (point: readonly number[]) => {
     let nearest = Infinity;
-    const bound = node => point.reduce((sum, value, i) => sum +
+    const bound = (node: DistanceNode) => point.reduce((sum, value, i) => sum +
       Math.max(node.minimum[i] - value, 0, value - node.maximum[i]) ** 2, 0);
-    function visit(node) {
+    function visit(node: DistanceNode) {
       if (bound(node) > nearest) return;
-      if (node.faces) {
+      if ("faces" in node) {
         for (const face of node.faces) nearest = Math.min(nearest, triangleDistanceSquared(point, face.vertices));
       } else {
         const [a, b] = node.children;

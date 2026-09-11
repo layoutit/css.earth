@@ -6,50 +6,60 @@ import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {chromium} from 'playwright';
 import {stripTypeScriptTypes} from 'node:module';
+import { parsePreparedObjectRuntime } from '../../../../src/renderers/css/dist/index.js';
 const pickerBytes=await readFile('src/renderers/css/navigation/prepared-surface-hit.ts');
 const pickerModule='data:text/javascript;base64,'+Buffer.from(stripTypeScriptTypes(pickerBytes.toString())).toString('base64');
 const origin=process.argv[2]??'http://127.0.0.1:4257', id=process.argv[3]??'comet-81p';
-const bytes=await readFile(`src/planets/${id}/prepared/runtime.json`),plan=JSON.parse(bytes).surfaceHit;
+const bytes=await readFile(`src/planets/${id}/prepared/runtime.json`),plan=parsePreparedObjectRuntime(JSON.parse(bytes.toString('utf8'))).surfaceHit;
 assert.ok(plan?.triangles?.length,'Surface qualification requires a prepared mesh.');
 // Derive closure from the selected bank's physical edges; a front-face picking
 // rule also applies to closed completed meshes and does not prove openness.
 const selectedLens=process.argv[4], range=plan.lensRanges?.find(r=>r.lensId===(selectedLens??'micas'));
-const edges=new Map();
+const edges=new Map<string,number>();
 for(const triangle of plan.triangles.slice(range?.start??0,range?range.start+range.count:undefined))for(let i=0;i<3;i++){
  const key=[triangle[i].join(','),triangle[(i+1)%3].join(',')].sort().join('|');edges.set(key,(edges.get(key)??0)+1);
 }
 const openMesh=[...edges.values()].some(count=>count===1);
-const browser=await chromium.launch({channel:'chrome',headless:true}),reports=[],errors=[];
+const browser=await chromium.launch({channel:'chrome',headless:true}),reports=[],errors: string[]=[];
 try{
  for(const dpr of [1,2]){
   const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFactor:dpr});
   page.on('pageerror',e=>errors.push(e.message));page.on('console',e=>{if(e.type()==='error')errors.push(e.text())});
   await page.goto(`${origin}/${id}/`,{waitUntil:'networkidle'});
-  await page.waitForFunction(id=>document.documentElement.dataset.ready==='true'&&document.querySelector('.planet-stage').dataset.objectId===id,id);
+  await page.waitForFunction(id=>{
+    function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+return document.documentElement.dataset.ready==='true'&&requiredElement(document.querySelector('.planet-stage')).dataset.objectId===id; },id);
   const lens=process.argv[4];
   if(lens){await page.locator(`button[name="lens"][value="${lens}"]`).click();await page.waitForLoadState('networkidle');}
-  const views=[];
+  const views: {nativeLeaves:number;nativeFrontHits:number;clearMisses:number;backfaceOnlyMisses:number;boundarySkipped:number;rasterEdgeSamples:{x:number;y:number;distanceCssPixels:number;kind:string}[];mismatches:{x:number;y:number;expected:string;nativeFaces?:number[];distanceCssPixels?:number}[];sceneTransform:string}[]=[];
   for(let view=0;view<6;view++){
    if(view){await page.mouse.move(950,450);await page.mouse.down();await page.mouse.move(1200,450,{steps:30});await page.mouse.up();await page.waitForTimeout(700);}
    views.push(await page.evaluate(async({id,plan,pickerModule})=>{
-    const {bindPreparedSurfaceHit}=await import(pickerModule);
-    const body=document.querySelector(`.${id}-body`),scene=document.querySelector('.polycss-scene'),camera=document.querySelector('.polycss-camera');
-    const pick=bindPreparedSurfaceHit(plan,body,scene,camera,()=>document.querySelector('.planet-stage').dataset.lens),bounds=camera.getBoundingClientRect(),style=getComputedStyle(camera);
+     function requiredElement(value: Element | null): HTMLElement { if (!(value instanceof HTMLElement)) throw new Error("Expected required HTML observation element"); return value; }
+
+    const module: unknown=await import(pickerModule);
+    if(!module||typeof module!=='object'||!('bindPreparedSurfaceHit' in module)||typeof module.bindPreparedSurfaceHit!=='function')throw new Error('Prepared picker export is missing');
+    const bindPreparedSurfaceHit=module.bindPreparedSurfaceHit;
+    const body=requiredElement(document.querySelector(`.${id}-body`)),scene=requiredElement(document.querySelector('.polycss-scene')),camera=requiredElement(document.querySelector('.polycss-camera'));
+    const picker: unknown=bindPreparedSurfaceHit(plan,body,scene,camera,()=>document.querySelector<HTMLElement>('.planet-stage')?.dataset.lens);
+    if(typeof picker!=='function')throw new Error('Prepared picker was not bound');
+    const pick=(x:number,y:number)=>{const hit: unknown=picker(x,y);if(typeof hit!=='boolean')throw new Error('Prepared picker must report a boolean hit');return hit;};
+    const bounds=camera.getBoundingClientRect(),style=getComputedStyle(camera);
     const focal=parseFloat(style.perspective),principal=style.perspectiveOrigin.split(' ').map(parseFloat),offset=[principal[0]-bounds.width/2,principal[1]-bounds.height/2];
-    const leaves=[...body.querySelectorAll(':scope > u')].map((leaf,index)=>{
+    const leaves=[...body.querySelectorAll<HTMLElement>(':scope > u')].map((leaf,index)=>{
      const style=getComputedStyle(leaf);if(style.display==='none')return null;if(style.backfaceVisibility!=='hidden')throw Error('Open source leaf paints its backface.');
-     let m=new DOMMatrix(),node=leaf;
+     let m=new DOMMatrix(),node: Element | null=leaf;
      while(node&&node!==camera){m=new DOMMatrix(getComputedStyle(node).transform).multiply(m);node=node.parentElement;}
      if(node!==camera)throw Error('Native leaf is detached from the camera.');
      const inv=m.inverse(),eye=inv.transformPoint(new DOMPoint(offset[0],offset[1],focal));
      return {index,inv,eye,w:parseFloat(style.width),h:parseFloat(style.height)};
-    }).filter(Boolean);
-    let bodyMatrix=new DOMMatrix(),ancestor=body;
+    }).filter(leaf=>leaf!==null);
+    let bodyMatrix=new DOMMatrix(),ancestor: Element | null=body;
     while(ancestor&&ancestor!==camera){bodyMatrix=new DOMMatrix(getComputedStyle(ancestor).transform).multiply(bodyMatrix);ancestor=ancestor.parentElement;}
     const projected=plan.triangles.map(triangle=>triangle.map(v=>{const p=bodyMatrix.transformPoint(new DOMPoint(...v)),scale=focal/(focal-p.z);return [bounds.x+principal[0]+(p.x-offset[0])*scale,bounds.y+principal[1]+(p.y-offset[1])*scale]}));
-    const edgeDistance=(x,y,faces)=>Math.min(...faces.flatMap(i=>projected[i].map((a,j)=>{const b=projected[i][(j+1)%3],dx=b[0]-a[0],dy=b[1]-a[1],t=Math.max(0,Math.min(1,((x-a[0])*dx+(y-a[1])*dy)/(dx*dx+dy*dy)));return Math.hypot(x-a[0]-t*dx,y-a[1]-t*dy)})));
-    const insideFace=(x,y,index)=>{
-      const [a,b,c]=projected[index], cross=(a,b,p)=>(b[0]-a[0])*(p[1]-a[1])-(b[1]-a[1])*(p[0]-a[0]);
+    const edgeDistance=(x:number,y:number,faces:readonly number[])=>Math.min(...faces.flatMap(i=>projected[i].map((a,j)=>{const b=projected[i][(j+1)%3],dx=b[0]-a[0],dy=b[1]-a[1],t=Math.max(0,Math.min(1,((x-a[0])*dx+(y-a[1])*dy)/(dx*dx+dy*dy)));return Math.hypot(x-a[0]-t*dx,y-a[1]-t*dy)})));
+    const insideFace=(x:number,y:number,index:number)=>{
+      const [a,b,c]=projected[index], cross=(a:readonly number[],b:readonly number[],p:readonly number[])=>(b[0]-a[0])*(p[1]-a[1])-(b[1]-a[1])*(p[0]-a[0]);
       const sides=[cross(a,b,[x,y]),cross(b,c,[x,y]),cross(c,a,[x,y])];
       return sides.every(v=>v>=0)||sides.every(v=>v<=0);
     };
