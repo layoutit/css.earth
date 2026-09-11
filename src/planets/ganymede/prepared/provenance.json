@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fb924ebe8785f2853bc53c198f0565c5de9716a80f25a27a16fe96bd76bbaec9"
+    "sha256": "3bd45cb36f598f4e7d82b975f1caee89a16fb89230ce5f619df54bd519315e73"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1052,6 +1052,16 @@
       "path": "muse/ganymede/577.3nm_band-night-1.tif",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+            "missionId": "eso-muse-galilean-moons"
+          }
+        ]
+      },
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.11402374",
@@ -1102,6 +1112,16 @@
       "path": "muse/ganymede/577.3nm_band-night-2.tif",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+            "missionId": "eso-muse-galilean-moons"
+          }
+        ]
+      },
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.11402374",
@@ -1152,6 +1172,16 @@
       "path": "muse/ganymede/577.3nm_band-night-3.tif",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+            "missionId": "eso-muse-galilean-moons"
+          }
+        ]
+      },
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.11402374",

@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b6ab40e1d0dc565aa84ba47adb8b163edea9fe467999053c559020434692f19d"
+    "sha256": "6e14e3b62278bfa030a4f98276cd538811bb75a470899966eaaafe826f57aec1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -314,6 +314,16 @@
       "path": "shape/golevka.obj",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/golevka.obj",
       "credit": "Hudson et al. (2000), Icarus 148, 37–51; Goldstone radar, optical light curves and NASA/JPL",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "goldstone-dss14",
+            "evidence": "The preserved credit for this input reads: Hudson et al. (2000), Icarus 148, 37–51; Goldstone radar, optical light curves and NASA/JPL",
+            "missionId": "goldstone-solar-system-radar"
+          }
+        ]
+      },
       "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",

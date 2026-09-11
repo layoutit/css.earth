@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9d878023bfd768eed13762168c23bf5198772b071bb0237db104f538046dfe94"
+    "sha256": "432635503ad16e909830643b2d46c3d998038852cf20812d8b77ac6d0a404b5b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -310,6 +310,16 @@
       "path": "shape/15_Eunomia_mpcd.obj",
       "origin": "https://observations.lam.fr/astero/3Dshape/15_Eunomia_mpcd.obj",
       "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
       "license": "Public scientific model from the authors’ release accompanying CC-BY-4.0 research; retain source credit and citations.",
       "acquisition": "Restore the unmodified OBJ through source/preparation/acquisition.json; the public-site cookie is recorded there.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",

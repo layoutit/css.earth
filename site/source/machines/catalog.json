@@ -2159,6 +2159,115 @@
           }
         ]
       }
+    },
+    {
+      "id": "herschel",
+      "name": {
+        "value": "Herschel",
+        "citations": [
+          {
+            "catalogueId": "reference-herschel",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Herschel Space Observatory",
+          "citations": [
+            {
+              "catalogueId": "reference-herschel",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "An ESA far-infrared and submillimetre observatory with a 3.5-m primary mirror, covering roughly 55 to 671 microns. Alongside star and galaxy formation it observed asteroids and comets in the solar system.",
+        "citations": [
+          {
+            "catalogueId": "reference-herschel",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "kind": {
+        "value": "observatory",
+        "citations": [
+          {
+            "catalogueId": "reference-herschel",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-herschel",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "launch": {
+        "value": "2009-05-14",
+        "citations": [
+          {
+            "catalogueId": "reference-herschel",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vlba",
+      "name": {
+        "value": "VLBA",
+        "citations": [
+          {
+            "catalogueId": "reference-vlba",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Very Long Baseline Array",
+          "citations": [
+            {
+              "catalogueId": "reference-vlba",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "A radio astronomy array operated by the NSF National Radio Astronomy Observatory under cooperative agreement by Associated Universities, Inc.",
+        "citations": [
+          {
+            "catalogueId": "reference-vlba",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "kind": {
+        "value": "radio-telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-vlba",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "reference-vlba",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      }
     }
   ],
   "missions": [
@@ -4005,6 +4114,242 @@
           }
         ]
       }
+    },
+    {
+      "id": "arecibo-planetary-radar",
+      "name": {
+        "value": "Arecibo planetary radar",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "description": {
+        "value": "Solar system radar observations from the Arecibo 305-m antenna, transmitting at 430 MHz and later 2380 MHz. The programme ended with the antenna in 2020.",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NSF"
+        ],
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "participants": [
+        {
+          "machineId": "arecibo-305m",
+          "role": "radar-telescope",
+          "citations": [
+            {
+              "catalogueId": "pds-telescope-arecibo-305m",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "started": {
+        "value": "1963",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "ended": {
+        "value": "2020",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "status": {
+        "value": {
+          "value": "completed",
+          "asOf": "2026-09-11"
+        },
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "goldstone-solar-system-radar",
+      "name": {
+        "value": "Goldstone Solar System Radar",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "description": {
+        "value": "Planetary radar from the Deep Space Network antenna DSS-14 at Goldstone, which transmits as well as receives.",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "participants": [
+        {
+          "machineId": "goldstone-dss14",
+          "role": "radar-telescope",
+          "citations": [
+            {
+              "catalogueId": "pds-telescope-goldstone-dss14",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "started": {
+        "value": "1964",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eso-sphere-asteroid-survey",
+      "name": {
+        "value": "ESO large programme 199.C-0074",
+        "citations": [
+          {
+            "catalogueId": "vernazza-2021-survey",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "description": {
+        "value": "A VLT/SPHERE survey that imaged large main-belt asteroids and reconstructed their shapes, published by Vernazza and colleagues in 2021.",
+        "citations": [
+          {
+            "catalogueId": "vernazza-2021-survey",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "ESO"
+        ],
+        "citations": [
+          {
+            "catalogueId": "vernazza-2021-survey",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "participants": [
+        {
+          "machineId": "vlt-ut3",
+          "role": "optical-telescope",
+          "citations": [
+            {
+              "catalogueId": "vernazza-2021-survey",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "ended": {
+        "value": "2021",
+        "citations": [
+          {
+            "catalogueId": "vernazza-2021-survey",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "status": {
+        "value": {
+          "value": "completed",
+          "asOf": "2026-09-11"
+        },
+        "citations": [
+          {
+            "catalogueId": "vernazza-2021-survey",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eso-muse-galilean-moons",
+      "name": {
+        "value": "ESO programme 0103.C-0769(A)",
+        "citations": [
+          {
+            "catalogueId": "source-io-io-muse-original-485nm-slope-2",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "description": {
+        "value": "VLT/MUSE integral-field spectroscopy of the Galilean moons, mapping their surfaces in reflectance.",
+        "citations": [
+          {
+            "catalogueId": "source-io-io-muse-original-485nm-slope-2",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "ESO"
+        ],
+        "citations": [
+          {
+            "catalogueId": "source-io-io-muse-original-485nm-slope-2",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "participants": [
+        {
+          "machineId": "vlt-ut3",
+          "role": "optical-telescope",
+          "citations": [
+            {
+              "catalogueId": "source-io-io-muse-original-485nm-slope-2",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

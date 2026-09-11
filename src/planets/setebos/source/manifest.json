@@ -62,6 +62,20 @@
       "expectedSha256": "8a781a3200973ab9666de1be6039ccc0bf5edda43971a6dc0b24ca5ae2907e29",
       "origin": "https://arxiv.org/pdf/1706.06837",
       "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "spitzer",
+            "evidence": "The preserved credit for this input reads: Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
+          },
+          {
+            "kind": "machine",
+            "machineId": "herschel",
+            "evidence": "The preserved credit for this input reads: Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
+          }
+        ]
+      },
       "license": "MIT authored approximation from published numerical scientific facts",
       "licenseEvidence": [
         "https://arxiv.org/pdf/1706.06837"
@@ -95,6 +109,20 @@
       "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://arxiv.org/pdf/1706.06837",
       "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "spitzer",
+            "evidence": "The preserved credit for this input reads: Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
+          },
+          {
+            "kind": "machine",
+            "machineId": "herschel",
+            "evidence": "The preserved credit for this input reads: Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
+          }
+        ]
+      },
       "license": "MIT authored approximation from published numerical scientific facts",
       "licenseEvidence": [
         "https://arxiv.org/pdf/1706.06837"

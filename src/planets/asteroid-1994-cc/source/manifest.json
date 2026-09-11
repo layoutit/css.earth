@@ -33,6 +33,22 @@
       "path": "shape/1994CC_nominal.mod.wf",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/1994CC_nominal.mod.wf",
       "credit": "Brozović et al. (2011), Icarus 216, 241–256; Goldstone, Arecibo and NASA/JPL",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "missionId": "arecibo-planetary-radar",
+            "evidence": "The preserved credit for this input reads: Brozović et al. (2011), Icarus 216, 241–256; Goldstone, Arecibo and NASA/JPL"
+          },
+          {
+            "kind": "machine",
+            "machineId": "goldstone-dss14",
+            "missionId": "goldstone-solar-system-radar",
+            "evidence": "The preserved credit for this input reads: Brozović et al. (2011), Icarus 216, 241–256; Goldstone, Arecibo and NASA/JPL"
+          }
+        ]
+      },
       "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -95,6 +111,22 @@
       "path": "reference/cc1994.pdf",
       "origin": "https://echo.jpl.nasa.gov/asteroids/1994CC/brozovic.etal.2011.1994cc.pdf",
       "credit": "Brozović et al. (2011), Icarus 216, 241–256; Goldstone, Arecibo and NASA/JPL",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "missionId": "arecibo-planetary-radar",
+            "evidence": "The preserved credit for this input reads: Brozović et al. (2011), Icarus 216, 241–256; Goldstone, Arecibo and NASA/JPL"
+          },
+          {
+            "kind": "machine",
+            "machineId": "goldstone-dss14",
+            "missionId": "goldstone-solar-system-radar",
+            "evidence": "The preserved credit for this input reads: Brozović et al. (2011), Icarus 216, 241–256; Goldstone, Arecibo and NASA/JPL"
+          }
+        ]
+      },
       "license": "Original scientific article; source publisher copyright retained.",
       "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
       "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
