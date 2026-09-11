@@ -70,6 +70,8 @@ class FixtureWindow extends Element {
   clearTimeout: (id: number) => void = () => {};
   requestAnimationFrame: (callback: FrameRequestCallback) => number = () => { throw new Error('Frame fixture is not installed.'); };
   cancelAnimationFrame: (id: number) => void = () => {};
+  // The fixture is a wide layout, so phone-only sheet gestures stay idle.
+  matchMedia = (_query: string) => Object.assign(new EventTarget(), { matches: false });
   IntersectionObserver?: new (callback: IntersectionObserverCallback, options?: IntersectionObserverInit) => VisibilityObserver;
   MutationObserver?: new (callback: MutationCallback) => { observe(target: Node): void; disconnect(): void };
 }

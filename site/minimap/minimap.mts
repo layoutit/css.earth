@@ -4,6 +4,7 @@ import prepared from './prepared.json' with { type: 'json' };
 import { worldRotationFromQuaternion } from '../../src/renderers/css/dist/navigation.js';
 import { minimapPointRange } from './point-range.mts';
 import { minimapPointCovered } from './point-coverage.mts';
+import { MOBILE_VIEWPORT_QUERY } from '../runtime-policy.mts';
 
 // Spatial overview, published by the same camera as the main world.
 // No second scene/camera, navigation writes, ephemeris work, or runtime geometry.
@@ -40,10 +41,12 @@ export function mountSpaceMinimap(documentTarget: Document) {
   let viewportKey = '', coverageGuard = Infinity;
   let focus: {positionM: readonly number[]; radiusM: number} = prepared.defaultFocus;
   let lastView = '', lastGridTransform = '', destroyed = false;
+  // Phones hide the minimap, so its points are never worth projecting there.
+  const phone = documentTarget.defaultView!.matchMedia(MOBILE_VIEWPORT_QUERY);
   return {
     selectObject(frame: PreparedWorldCameraFrame) { focus = { positionM: frame.originM, radiusM: frame.bodyRadiusM }; lastView = ''; },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport) {
-      if (destroyed) return;
+      if (destroyed || phone.matches) return;
       const compatible = world.referenceFrame === prepared.referenceFrame && world.epochJdTt === prepared.epochJdTt;
       root.hidden = !compatible;
       if (!compatible) return;
