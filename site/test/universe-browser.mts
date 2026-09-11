@@ -1,3 +1,7 @@
+import { required } from '../../tools/test-values.mts';
+declare global { interface Window { __universeNodes:Element[]; } }
+import { createTestPage } from './browser-observations.mts';
+import type { Page } from 'playwright';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -10,10 +14,10 @@ const base = process.argv[2] ?? 'http://127.0.0.1:4210';
 const output = resolve('.local/milky-way-integration');
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: process.env.PLAYWRIGHT_CHANNEL ?? 'chrome', headless: true });
-const errors = [], checks = [], snapshots = {};
-const check = (name, value) => { checks.push({ name, passed: Boolean(value) }); assert.ok(value, name); };
+const errors:string[] = [], checks:{name:string;passed:boolean}[] = [], snapshots:Record<string,Awaited<ReturnType<typeof read>>> = {};
+const check = (name:string, value:unknown) => { checks.push({ name, passed: Boolean(value) }); assert.ok(value, name); };
 try {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  const page = await createTestPage(browser, { viewport: { width: 1440, height: 900 } });
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
   await page.goto(`${base}/sun/`, { waitUntil: 'domcontentloaded' });
@@ -25,12 +29,12 @@ try {
   check('one selected object with all prepared volume leaves ready', snapshots.initial.roots === 1 &&
     snapshots.initial.slices === preparedVolume.data.stacks.flatMap(stack => stack.leaves).length * 3 && snapshots.initial.stable);
   check('detailed object and contextual layers share the same rendered focal length', await page.evaluate(() => {
-    const root = document.querySelector('.polycss-camera');
-    const cssFocal = parseFloat(getComputedStyle(root).perspective);
+    const root = window.__cssearthTest.html('.polycss-camera');
+    const cssFocal = parseFloat(getComputedStyle(window.__cssearthTest.required(root, 'computed style element')).perspective);
     const renderedFocal = cssFocal * root.getBoundingClientRect().width / root.offsetWidth;
-    return Math.abs(renderedFocal - window.__sun.camera.state().focal) < 0.01;
+    return Math.abs(renderedFocal - window.__cssearthTest.physicalCamera('sun').focal) < 0.01;
   }));
-  await page.evaluate(() => { window.__universeNodes = [...document.querySelector('.planet-stage').querySelectorAll('*')]; });
+  await page.evaluate(() => { window.__universeNodes = [...window.__cssearthTest.element('.planet-stage').querySelectorAll('*')]; });
   const initialDistance = snapshots.initial.camera.distanceKilometers;
   const loadedBefore = await volumeRequests(page);
   await page.mouse.move(1010, 460);
@@ -39,13 +43,13 @@ try {
   await page.screenshot({ path: resolve(output, 'solar-system-integrated.png') });
   check('scroll exposes real prepared solar-system orbits', snapshots.system.visibleOrbits > 100 && snapshots.system.scale === 'system');
   const objectLabels = await page.locator('[data-context-label]').evaluateAll(nodes => nodes.map(node => ({
-    id: node.dataset.contextLabel, visible: getComputedStyle(node).visibility !== 'hidden' && Number(getComputedStyle(node).opacity) > 0,
+    id: window.__cssearthTest.htmlElement(node).dataset.contextLabel, visible: getComputedStyle(node).visibility !== 'hidden' && Number(getComputedStyle(node).opacity) > 0,
   })));
   check('scene labels belong to prepared objects and remain visible at solar-system scale',
     objectLabels.some(label => label.visible) && objectLabels.every(label => OBJECTS.some(object => object.id === label.id)));
   check('contextual Sun overlaps the detailed object coordinate centre', await page.evaluate(() => {
-    const body = document.querySelector('.polycss-camera').getBoundingClientRect();
-    const marker = document.querySelector('[data-context-body="sun"]').getBoundingClientRect();
+    const body = window.__cssearthTest.element('.polycss-camera').getBoundingClientRect();
+    const marker = window.__cssearthTest.element('[data-context-body="sun"]').getBoundingClientRect();
     return Math.hypot(marker.x + marker.width / 2 - body.x - body.width / 2,
       marker.y + marker.height / 2 - body.y - body.height / 2) < 0.1;
   }));
@@ -77,15 +81,15 @@ try {
   check('galaxy textures were ready before the first scroll', await volumeRequests(page) === loadedBefore);
   check('volume uses accepted 3D CSS transforms', snapshots.galaxy.volumeTransforms.every(value => value.startsWith('matrix3d(')));
   check('prepared galactic Sun anchor shares the same physical projection', await page.evaluate(anchor => {
-    const camera = document.querySelector('.css-volume-camera'), scene = document.querySelector('.css-volume-scene');
-    const style = getComputedStyle(camera), rect = camera.getBoundingClientRect();
+    const camera = window.__cssearthTest.html('.css-volume-camera'), scene = window.__cssearthTest.html('.css-volume-scene');
+    const style = getComputedStyle(window.__cssearthTest.required(camera, 'computed style element')), rect = camera.getBoundingClientRect();
     const focal = parseFloat(style.perspective), [originX, originY] = style.perspectiveOrigin.split(' ').map(parseFloat);
-    const point = new DOMPoint(anchor[1] * 50, anchor[0] * 50, anchor[2] * 50).matrixTransform(new DOMMatrix(getComputedStyle(scene).transform));
+    const point = new DOMPoint(anchor[1] * 50, anchor[0] * 50, anchor[2] * 50).matrixTransform(new DOMMatrix(getComputedStyle(window.__cssearthTest.required(scene, 'computed style element')).transform));
     const x = rect.x + originX + focal * (rect.width / 2 + point.x - originX) / (focal - point.z);
     const y = rect.y + originY + focal * (rect.height / 2 + point.y - originY) / (focal - point.z);
-    const body = document.querySelector('.polycss-camera').getBoundingClientRect();
+    const body = window.__cssearthTest.element('.polycss-camera').getBoundingClientRect();
     return Math.hypot(x - body.x - body.width / 2, y - body.y - body.height / 2) < 0.1;
-  }, preparedVolume.data.anchors.find(anchor => anchor.id === 'sun').positionUnits));
+  }, required(preparedVolume.data.anchors.find(anchor => anchor.id === 'sun')).positionUnits));
 
   const beforeEmpty = JSON.stringify(snapshots.galaxy.camera);
   await page.mouse.dblclick(1280, 180);
@@ -104,7 +108,7 @@ try {
   check('compact URL restores galactic distance and rotation',
     close(snapshots.restored.camera.distanceKilometers, saved.camera.distanceKilometers) &&
     snapshots.restored.camera.pose.scene === saved.camera.pose.scene && snapshots.restored.volumeOpacity === 1);
-  check('URL remains compact', new URL(savedUrl).searchParams.get('v').length <= 150);
+  check('URL remains compact', required(new URL(savedUrl).searchParams.get('v')).length <= 150);
   await page.mouse.move(1010, 460);
   await scrollTo(page, initialDistance);
   snapshots.returned = await read(page);
@@ -117,10 +121,10 @@ try {
   await writeFile(resolve(output, 'universe-report.json'), JSON.stringify({ checks, errors, snapshots }, null, 2));
 }
 
-async function ready(page) {
-  await page.waitForFunction(() => window.__sun?.ready && window.__cssEarth?.ready && window.__cssEarth.activeObjectId === 'sun', null, { timeout: 25000 });
+async function ready(page: Page) {
+  await page.waitForFunction(() => window.__sun?.ready && window.__cssEarth?.ready && window.__cssearthTest.scene().activeObjectId === 'sun', null, { timeout: 25000 });
 }
-async function settled(page) {
+async function settled(page: Page) {
   await page.waitForFunction(() => {
     const state = window.__sun?.camera.stats().dragInertia;
     return state && !state.active && !state.wheelZoom.active;
@@ -128,30 +132,30 @@ async function settled(page) {
   await page.waitForTimeout(80);
 }
 
-function close(a, b) { return Math.abs(a / b - 1) < 1e-6; }
-async function volumeRequests(page) {
+function close(a:number, b:number) { return Math.abs(a / b - 1) < 1e-6; }
+async function volumeRequests(page: Page) {
   return page.evaluate(() => performance.getEntriesByType('resource').filter(entry => entry.name.includes('/milky-way/prepared/slices/')).length);
 }
-async function starRequests(page) {
+async function starRequests(page: Page) {
   return page.evaluate(() => performance.getEntriesByType('resource').filter(entry => entry.name.includes('/stellar-neighbourhood/prepared/')).length);
 }
-async function starPositions(page) {
-  return page.evaluate(() => Object.fromEntries(window.__cssEarthUniverse.inspect().stars.points
+async function starPositions(page: Page) {
+  return page.evaluate(() => Object.fromEntries(window.__cssearthTest.universe().inspect().stars.points
     .filter(({ element, reference }) => reference && element.style.visibility !== 'hidden')
     .map(({ element, reference }) => [reference, element.style.transform])));
 }
-async function read(page) {
+async function read(page: Page) {
   return page.evaluate(() => ({
-    camera: window.__sun.camera.state(),
-    scale: document.querySelector('.planet-stage').dataset.contextScale,
+    camera: window.__cssearthTest.physicalCamera('sun'),
+    scale: window.__cssearthTest.html('.planet-stage').dataset.contextScale,
     roots: document.querySelectorAll('.polycss-camera').length,
     slices: document.querySelectorAll('.css-volume-mesh > s').length,
-    stable: window.__sun.assertStableDomIdentity(),
-    starField: (({ points, ...stats }) => stats)(window.__cssEarthUniverse.inspect().stars),
+    stable: window.__cssearthTest.object('sun').assertStableDomIdentity(),
+    starField: (({ points, ...stats }) => stats)(window.__cssearthTest.universe().inspect().stars),
     starSlots: document.querySelectorAll('.prepared-point-field-block > s').length,
-    volumeOpacity: Number(document.querySelector('.prepared-volume-context').dataset.volumeOpacity),
-    skyVisible: getComputedStyle(document.querySelector('.prepared-celestial-sky')).visibility === 'visible',
+    volumeOpacity: Number(window.__cssearthTest.html('.prepared-volume-context').dataset.volumeOpacity),
+    skyVisible: getComputedStyle(window.__cssearthTest.required(document.querySelector('.prepared-celestial-sky'), 'computed style element')).visibility === 'visible',
     volumeTransforms: [...document.querySelectorAll('.css-volume-scene')].map(node => getComputedStyle(node).transform),
-    visibleOrbits: window.__cssEarthUniverse.inspect().bodies.flatMap(body => body.orbit).filter(node => getComputedStyle(node).visibility !== 'hidden').length,
+    visibleOrbits: window.__cssearthTest.universe().inspect().bodies.flatMap(body => body.orbit).filter(node => getComputedStyle(node).visibility !== 'hidden').length,
   }));
 }

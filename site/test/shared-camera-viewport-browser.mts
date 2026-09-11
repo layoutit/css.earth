@@ -1,3 +1,9 @@
+declare global {interface Window {
+ __cameraMountReads:{operation:string;className:string;stack:string|undefined}[];
+ __mountedInput:Element|null;__mountedRegions:{selector:string;node:Element|null}[];
+ __restoreCameraReadProbes():void;__wheelCameraReads:number;__restoreWheelProbe():void;
+}}
+import { createTestPage } from './browser-observations.mts';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
@@ -6,10 +12,10 @@ const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const output = 'output/playwright/shared-camera-viewport';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const results = [], errors = [];
+const results = [], errors:string[] = [];
 try {
   for (const dpr of [1, 2]) {
-    const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: dpr });
+    const page = await createTestPage(browser, { viewport: { width: 1440, height: 1000 }, deviceScaleFactor: dpr });
     page.on('pageerror', error => errors.push(error.message));
     page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
     await page.goto(`${origin}/sun/?overview=solar-system&v=QMY-Wp0Ui2g9eAAAAAAAAAAAwhaDLpsLNZhBQsczQAAAAD_WST4rO1jov9dbC19kads_3S3JdnPBsgABAAAAAAAAAAA`);
@@ -24,22 +30,22 @@ try {
           .map(selector => ({ selector, node: document.querySelector(selector) }));
         const read = Element.prototype.getBoundingClientRect, style = window.getComputedStyle;
         window.__restoreCameraReadProbes = () => { Element.prototype.getBoundingClientRect = read; window.getComputedStyle = style; };
-        const record = (element, operation) => {
+        const record = (element:Element, operation:string) => {
           const requested = performance.getEntriesByName('cssEarth:navigation:requested').at(-1);
           const handoff = performance.getEntriesByName('cssEarth:navigation:handoff').at(-1);
           const attaching = requested && handoff && handoff.startTime >= requested.startTime;
-          const projectionProbe = attaching && element.parentElement?.matches('.planet-stage') && element.style.perspective;
+          const projectionProbe = attaching && element instanceof HTMLElement && element.parentElement?.matches('.planet-stage') && element.style.perspective;
           if ((projectionProbe || element.matches?.('.polycss-camera, .planet-cubic-sky, .planet-chart')) && !window.__cssEarth?.ready)
             if (window.__cameraMountReads.length < 3) window.__cameraMountReads.push({ operation, className: element.className, stack: new Error().stack });
         };
         Element.prototype.getBoundingClientRect = function () { record(this, 'bounds'); return read.call(this); };
         window.getComputedStyle = function (element, pseudo) { record(element, 'style'); return style.call(this, element, pseudo); };
       });
-      await page.evaluate(id => document.querySelector(`.planet-object-link[data-object-id="${id}"]`).click(), id);
+      await page.evaluate(id => window.__cssearthTest.htmlElement(document.querySelector(`.planet-object-link[data-object-id="${id}"]`)).click(), id);
       await page.waitForFunction(id => location.pathname === `/${id}/` && window.__cssEarth?.ready, id, { timeout: 30000 });
       const mounted = await page.evaluate(id => {
         window.__restoreCameraReadProbes();
-        const root = document.querySelector('.planet-stage');
+        const root = window.__cssearthTest.element('.planet-stage');
         return { id, reads: window.__cameraMountReads, scenes: root.querySelectorAll('.polycss-camera').length,
           inputRetained: window.__mountedInput === document.querySelector('.planet-input-surface'),
           regionsRetained: window.__mountedRegions.every(({selector, node}) => node && node === document.querySelector(selector)) };
@@ -51,10 +57,10 @@ try {
         await page.setViewportSize(size);
         await page.waitForTimeout(200);
         const measured = await page.evaluate(id => {
-          const stage = document.querySelector('.planet-stage'), camera = stage.querySelector('.polycss-camera');
+          const stage = window.__cssearthTest.element('.planet-stage'), camera = window.__cssearthTest.element('.polycss-camera',stage);
           const bounds = camera.getBoundingClientRect(), actual = stage.getBoundingClientRect();
-          const expected = parseFloat(getComputedStyle(camera).perspective);
-          const runtime = window[`__${id}`].camera.state();
+          const expected = parseFloat(getComputedStyle(window.__cssearthTest.required(camera, 'computed style element')).perspective);
+          const runtime = window.__cssearthTest.physicalCamera(id);
           return { focal: runtime.focal, expected, camera: [bounds.x,bounds.y,bounds.width,bounds.height],
             stage: [actual.x,actual.y,actual.width,actual.height] };
         }, id);
