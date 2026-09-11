@@ -53,6 +53,30 @@ async function writePreparedObject(id: string, definition: Record<string, unknow
   await (write as (objectId: string, runtime: Record<string, unknown>) => Promise<unknown>)(id, definition);
 }
 
+/** Prepare the optional named-feature catalogue for a lane whose definition carries the shared camera plan and node tree.
+ * Each lane names its mesh radius in raw units; when the definition carries a prepared hit mesh, its vertices must agree.
+ * Returns the definition with the `features` plan attached and records the shell's search rows in the prepared content. */
+async function attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition, meshRadiusUnits }: {
+  descriptor: AuthoredObjectDescriptor; sources: ReadonlyMap<string, VerifiedSource>; sourceDirectory: string; publicDirectory: string; outputDirectory: string; definition: Record<string, unknown>; meshRadiusUnits: number;
+}): Promise<Record<string, unknown>> {
+  const featuresRecipe = descriptor.recipe.features;
+  if (!featuresRecipe) return definition;
+  if (!Number.isFinite(meshRadiusUnits) || !(meshRadiusUnits > 0)) throw new TypeError('Surface features need the prepared mesh radius.');
+  const hit = definition.surfaceHit as { triangles?: readonly (readonly (readonly number[])[])[] } | undefined;
+  if (hit?.triangles?.length) {
+    const vertexRadius = Math.max(...hit.triangles.flat().map(point => Math.hypot(point[0]!, point[1]!, point[2]!)));
+    if (Math.abs(vertexRadius - meshRadiusUnits) > 0.01 * meshRadiusUnits) throw new TypeError(`Surface feature mesh radius ${meshRadiusUnits} disagrees with the prepared hit mesh (${vertexRadius}).`);
+  }
+  const features = await prepareSurfaceFeatures({ objectId: descriptor.id, sourceDirectory, publicDirectory, outputDirectory,
+    config: required(sources, featuresRecipe.source).value, maxEntries: featuresRecipe.maxEntries, radiusKm: descriptor.recipe.shape.radiusKm, meshRadiusUnits,
+    tree: definition.tree as Parameters<typeof prepareSurfaceFeatures>[0]['tree'],
+    declaredLensIds: descriptor.recipe.surfaces.flatMap(surface => surface.lenses.map(lens => lens.id)) });
+  // The shell renders retained search rows for named features when the panel content declares them.
+  const contentPath = resolve(outputDirectory, 'content.json'), contentDocument = record(JSON.parse(await readFile(contentPath, 'utf8')), 'prepared content');
+  await writeFile(contentPath, `${JSON.stringify({ ...contentDocument, features: { searchLabel: 'Named features', description: `${features.plan.catalog.count.toLocaleString('en')} IAU names from the Gazetteer of Planetary Nomenclature` } })}\n`);
+  return { ...definition, features: features.plan };
+}
+
 /** Verify authored source pins, then prepare each available generic capability lane. */
 export async function prepareAuthoredObject({ objectDirectory, publicDirectory, outputDirectory, write = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
   const result = await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write });
@@ -144,12 +168,17 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     return Object.freeze({ descriptor, sources, ...prepared });
   }
   if (source(sources, 'terrestrial')) {
-    genericLaneOnly();
     const terrestrial = record(required(sources, 'terrestrial').value, 'terrestrial');
     if (Boolean(terrestrial.rings) !== Boolean(descriptor.recipe.rings)) throw new TypeError('Prepared terrestrial rings must match the authored capability.');
     const { prepareTerrestrialLayers } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/terrestrial-layers/index.mts')).href) as typeof import('./terrestrial-layers/index.mts');
-    const prepared = await prepareTerrestrialLayers({ sourceDirectory, publicDirectory, outputDirectory,
+    const terrestrialPrepared = await prepareTerrestrialLayers({ sourceDirectory, publicDirectory, outputDirectory,
       config: terrestrial, prepareContent: prepareObjectContentAssets });
+    const terrestrialCamera = record((terrestrialPrepared.definition as unknown as Record<string, unknown>).camera, 'terrestrial camera');
+    const terrestrialRuntime = await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory,
+      definition: terrestrialPrepared.definition as unknown as Record<string, unknown>,
+      meshRadiusUnits: Number(terrestrialCamera.logicalBodyDiameter) / 2 / Number(terrestrialCamera.sceneScale) });
+    if ((terrestrialRuntime as unknown) !== (terrestrialPrepared.definition as unknown)) await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(terrestrialRuntime)}\n`);
+    const prepared = { ...terrestrialPrepared, definition: terrestrialRuntime as typeof terrestrialPrepared.definition };
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
       manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),
       allowPreparationArtifacts: true,
@@ -167,18 +196,9 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   validateCapabilityComposition(descriptor, rasterConfig as unknown as Record<string, unknown>, geometryConfig as unknown as Record<string, unknown>, solarSource, content.lenses);
   const presentation = parsePresentationProfile(required(sources, 'presentation').value);
   const definition = await prepareCssPresentation({ namespace: presentation.namespace, mode: presentation.mode, scene: scene as unknown as PresentationInputs['scene'], assets: raster as unknown as PresentationInputs['assets'], lenses: content.lenses as unknown as PresentationInputs['lenses'], sun: celestial.sun as unknown as PresentationInputs['sun'], markers: celestial.markers, solarSource: solarSource as unknown as PresentationInputs['solarSource'], controls: content.controls as unknown as PresentationInputs['controls'] });
-  const featuresRecipe = descriptor.recipe.features;
-  const features = featuresRecipe ? await prepareSurfaceFeatures({ objectId: descriptor.id, sourceDirectory, publicDirectory, outputDirectory,
-    config: required(sources, featuresRecipe.source).value, maxEntries: featuresRecipe.maxEntries, radiusKm: descriptor.recipe.shape.radiusKm,
-    // Anchors live in the mesh's raw coordinates: the camera's scene scale maps them to the rendered body radius.
-    meshRadiusUnits: solarSource.bodyRadiusUnits / (definition as unknown as { camera: { sceneScale: number } }).camera.sceneScale, tree: (definition as unknown as { tree: Parameters<typeof prepareSurfaceFeatures>[0]['tree'] }).tree,
-    declaredLensIds: descriptor.recipe.surfaces.flatMap(surface => surface.lenses.map(lens => lens.id)) }) : null;
-  const runtime = features ? { ...(definition as unknown as Record<string, unknown>), features: features.plan } : definition;
-  if (features) {
-    // The shell renders retained search rows for named features when the panel content declares them.
-    const contentPath = resolve(outputDirectory, 'content.json'), contentDocument = record(JSON.parse(await readFile(contentPath, 'utf8')), 'prepared content');
-    await writeFile(contentPath, `${JSON.stringify({ ...contentDocument, features: { searchLabel: 'Named features', description: `${features.plan.catalog.count.toLocaleString('en')} IAU names from the Gazetteer of Planetary Nomenclature` } })}\n`);
-  }
+  const runtime = await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory,
+    definition: definition as unknown as Record<string, unknown>, meshRadiusUnits: solarSource.bodyRadiusUnits / (definition as unknown as { camera: { sceneScale: number } }).camera.sceneScale });
+  const features = (runtime as unknown) !== (definition as unknown);
   await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(runtime)}\n`);
   await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
     manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),

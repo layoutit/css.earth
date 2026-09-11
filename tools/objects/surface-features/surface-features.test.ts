@@ -144,6 +144,6 @@ test('the pinned Mercury Gazetteer archive prepares anchored IAU features on the
     await assert.rejects(prepareSurfaceFeatures({ objectId: 'mercury', sourceDirectory: mercurySource, publicDirectory: resolve(directory, 'p2'), outputDirectory: resolve(directory, 'o2'),
       config, maxEntries: 10, radiusKm: 2439.7, meshRadiusUnits: 11500, tree, declaredLensIds: ['normal', 'enhanced', 'topography'] }), /exceed the authored capability/u);
     await assert.rejects(prepareSurfaceFeatures({ objectId: 'mercury', sourceDirectory: mercurySource, publicDirectory: resolve(directory, 'p3'), outputDirectory: resolve(directory, 'o3'),
-      config, maxEntries: 1000, radiusKm: 2440.5, meshRadiusUnits: 11500, tree, declaredLensIds: ['normal', 'enhanced', 'topography'] }), /datum radius/u);
+      config, maxEntries: 1000, radiusKm: 2600, meshRadiusUnits: 11500, tree, declaredLensIds: ['normal', 'enhanced', 'topography'] }), /datum radius/u);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });

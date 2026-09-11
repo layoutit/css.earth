@@ -10,12 +10,15 @@ Venus shows a cloud map, Magellan radar and elevation displays, modeled atmosphe
 | Radar and elevation | [USGS Magellan radar mosaic](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m) and [colorized topography](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_colorized_topographic_mosaic_6600m) |
 | Surface photographs | [PDS Venera collection](https://pds-geosciences.wustl.edu/missions/venera/) |
 | Atmosphere charts | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) model |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/VENUS/target) Venus centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
 
 The sky section records camera-fit comparisons. No dated test or browser-run report is cited.
 
 ## Known problems
+
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Venus (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries, and the readout longitude counts from the map’s left edge, 180° from the Gazetteer origin. The map edge was fixed by cropping the source raster at a landmark’s Gazetteer centre under both hypotheses (see the pull request that added the feature).
 
 - Magellan colors are synthetic; they are not natural-color views.
 - The atmosphere is a display approximation, and rotation is accelerated.

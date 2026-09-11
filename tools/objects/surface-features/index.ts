@@ -13,6 +13,13 @@ export const SURFACE_FEATURES_SOURCE_SCHEMA = 'cssearth-surface-features-source@
 export const PREPARED_SURFACE_FEATURES_SCHEMA = 'cssearth-prepared-surface-features@1';
 
 export type SurfaceFeatureKind = 'point' | 'linear' | 'region';
+/** Gazetteer descriptor-term codes and the label kind their geometry suggests: compact landforms get a point
+ * marker and rim circle, elongated ones a linear label, extended terrains a region label. Recipes may override. */
+export const DEFAULT_TYPE_KINDS: Readonly<Record<string, SurfaceFeatureKind>> = Object.freeze({
+  AA: 'point', AS: 'point', CB: 'point', ER: 'point', FA: 'point', FR: 'point', LF: 'point', MA: 'point', PE: 'point', PU: 'point', SF: 'point', SA: 'point', TH: 'point',
+  MN: 'region', CH: 'region', AR: 'linear', CA: 'linear', CM: 'linear', DO: 'linear', FE: 'linear', FO: 'linear', FT: 'linear', LI: 'linear', RI: 'linear', RU: 'linear', SC: 'linear', SE: 'linear', SU: 'linear', VA: 'linear', VI: 'linear',
+  CO: 'region', CR: 'region', FL: 'region', IN: 'region', LA: 'region', LB: 'region', LG: 'region', LC: 'region', LN: 'region', MR: 'region', ME: 'region', MO: 'region', OC: 'region', PA: 'region', PL: 'region', PM: 'region', PR: 'region', RE: 'region', SI: 'region', TA: 'region', TE: 'region', UN: 'region', VS: 'region',
+});
 export type SurfaceFeatureOutline =
   | { readonly kind: 'circle'; readonly center: readonly [number, number, number]; readonly east: readonly [number, number, number]; readonly north: readonly [number, number, number] }
   | { readonly kind: 'box'; readonly points: readonly (readonly [number, number, number])[] }
@@ -61,8 +68,12 @@ export interface PreparedSurfaceFeature {
 export interface PreparedSurfaceFeatureCatalog {
   readonly schema: typeof PREPARED_SURFACE_FEATURES_SCHEMA; readonly objectId: string;
   readonly source: string; readonly snapshotDate: string; readonly sourcePage: string; readonly license: string; readonly qualification: string;
-  readonly datum: { readonly name: string; readonly radiusM: number; readonly longitude: string };
+  readonly datum: { readonly name: string; readonly radiusM: number; readonly authoredRadiusM: number; readonly longitude: string };
   readonly excluded: Readonly<Record<string, { readonly count: number; readonly reason: string }>>;
+  /** Rows left out for a reason other than an excluded type: not adopted, no label kind, or no diameter. */
+  readonly skipped: Readonly<Record<string, { readonly count: number; readonly reason: string }>>;
+  /** Type codes outside the kind table, labelled as regions, and features whose empty extent fell back to a circle. */
+  readonly assumed: { readonly regionTypes: Readonly<Record<string, number>>; readonly extentFallbacks: number };
   /** Mapped-structure traces associated with named features, when a trace archive is declared. */
   readonly traces?: TraceSummary;
   /** Rows the export repeats for one feature identity; the first row's centre is kept. */
@@ -333,15 +344,20 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   const datumName = /GEOGCS\["([^"]+)"/u.exec(projection)?.[1];
   if (!spheroid || !datumName) throw new TypeError('Gazetteer projection file does not declare a spheroid.');
   const radiusM = Number(spheroid[2]);
-  if (Math.abs(radiusM - context.radiusKm * 1000) > 1) throw new TypeError(`Gazetteer datum radius ${radiusM} m differs from the authored ${context.radiusKm} km body.`);
+  // Gazetteer spheres and authored mean radii differ by up to a few kilometres between bodies; anchors are directions, so the
+  // difference only rescales nothing. Anything beyond one percent would mean a different body or datum.
+  if (Math.abs(radiusM - context.radiusKm * 1000) > 0.01 * context.radiusKm * 1000) throw new TypeError(`Gazetteer datum radius ${radiusM} m differs from the authored ${context.radiusKm} km body.`);
   const metadata = new TextDecoder().decode(unzipMember(archive, config.members.metadata));
   if (!/<useconst>\s*Public domain\.?\s*<\/useconst>/iu.test(metadata)) throw new TypeError('Gazetteer metadata no longer declares public-domain use constraints.');
   const table = parseDbf(unzipMember(archive, config.members.attributes));
   for (const name of ['name', 'clean_name', 'approvaldt', 'origin', 'diameter', 'center_lon', 'center_lat', 'type', 'code', 'approval', 'quad_code', 'link', 'min_lon', 'max_lon', 'min_lat', 'max_lat']) {
     if (!table.fields.some(field => field.name === name)) throw new TypeError(`Gazetteer table lacks the ${name} field.`);
   }
-  const kindOf = new Map<string, SurfaceFeatureKind>();
+  const kindOf = new Map<string, SurfaceFeatureKind>(Object.entries(DEFAULT_TYPE_KINDS));
   for (const kind of ['point', 'linear', 'region'] as const) for (const code of config.kinds[kind]) kindOf.set(code, kind);
+  const skipped: Record<string, { count: number; reason: string }> = {}, assumed: Record<string, number> = {};
+  let extentFallbacks = 0;
+  const skip = (key: string, reason: string) => { skipped[key] = { count: (skipped[key]?.count ?? 0) + 1, reason }; };
   const excluded: Record<string, { count: number; reason: string }> = {};
   if (!(context.meshRadiusUnits > 0) || !Number.isFinite(context.meshRadiusUnits)) throw new TypeError('Surface features need the prepared mesh radius.');
   const scale = context.meshRadiusUnits / context.radiusKm;
@@ -350,17 +366,19 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   const duplicateIds = new Set<string>();
   let duplicateRows = 0, maxSeparationDeg = 0, maxDiameterDifferenceKm = 0;
   for (const row of table.rows) {
-    if (row.approval !== 'Adopted by IAU') throw new TypeError(`Unexpected approval status for ${row.name}: ${row.approval}.`);
     const code = row.code!;
+    if (row.approval !== 'Adopted by IAU') { skip(`approval:${row.approval}`, 'Only names adopted by the IAU are labelled.'); continue; }
     if (Object.hasOwn(config.excludedTypeCodes, code)) {
       excluded[code] = { count: (excluded[code]?.count ?? 0) + 1, reason: config.excludedTypeCodes[code]! };
       continue;
     }
-    const kind = kindOf.get(code);
-    if (!kind) throw new TypeError(`Gazetteer type code ${code} (${row.type}) has no label kind.`);
-    const longitudeDeg = Number(row.center_lon), latitudeDeg = Number(row.center_lat), diameterKm = Number(row.diameter);
-    if (!Number.isFinite(longitudeDeg) || !Number.isFinite(latitudeDeg) || longitudeDeg < 0 || longitudeDeg >= 360 || Math.abs(latitudeDeg) > 90) throw new TypeError(`Gazetteer centre is out of range for ${row.name}.`);
-    if (!(diameterKm > 0)) throw new TypeError(`Gazetteer diameter is missing for ${row.name}.`);
+    let kind = kindOf.get(code);
+    if (!kind) { kind = 'region'; assumed[code] = (assumed[code] ?? 0) + 1; }
+    const rawLongitude = Number(row.center_lon), latitudeDeg = Number(row.center_lat), diameterKm = Number(row.diameter);
+    if (!Number.isFinite(rawLongitude) || !Number.isFinite(latitudeDeg) || Math.abs(latitudeDeg) > 90) throw new TypeError(`Gazetteer centre is out of range for ${row.name}.`);
+    // Some exports write centres just below 0° or at 360° and beyond; the catalogue keeps positive-east 0–360°.
+    const longitudeDeg = ((rawLongitude % 360) + 360) % 360;
+    if (!(diameterKm > 0)) { skip(`diameter:${code}`, 'Features without a published diameter cannot be ranked or outlined.'); continue; }
     const id = /\/Feature\/(\d+)$/u.exec(row.link!)?.[1];
     if (!id) throw new TypeError(`Gazetteer feature identity is missing for ${row.name}.`);
     const first = ids.get(id);
@@ -378,14 +396,16 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     const direction = surfaceDirection(longitudeDeg, latitudeDeg, axes, config.mapLeftEdgeLongitudeDeg);
     const radiusUnits = diameterKm / 2 * scale;
     const extentInput = { minLon: Number(row.min_lon), maxLon: Number(row.max_lon), minLat: Number(row.min_lat), maxLat: Number(row.max_lat) };
-    if (Object.values(extentInput).some(value => !Number.isFinite(value))) throw new TypeError(`Gazetteer extent is missing for ${row.name}.`);
-    const extent = normalizeExtent(extentInput, longitudeDeg);
-    if (Math.abs(extent.maxLat) > 90 || Math.abs(extent.minLat) > 90) throw new TypeError(`Gazetteer extent latitude is out of range for ${row.name}.`);
+    // Some exports leave the extent empty or degenerate: those features fall back to their diameter circle.
+    const hasExtent = [row.min_lon, row.max_lon, row.min_lat, row.max_lat].every(value => value !== '') && Object.values(extentInput).every(Number.isFinite) && extentInput.maxLat >= extentInput.minLat && (extentInput.maxLon !== extentInput.minLon || extentInput.maxLat !== extentInput.minLat);
+    const extent = hasExtent ? normalizeExtent(extentInput, longitudeDeg) : null;
+    if (extent && (Math.abs(extent.maxLat) > 90 || Math.abs(extent.minLat) > 90)) throw new TypeError(`Gazetteer extent latitude is out of range for ${row.name}.`);
+    if (!extent) extentFallbacks++;
     // Craters and faculae are circular: their diameter is the rim. Other features report a nominal size,
     // so their published extent box is the honest shape.
-    let outline: SurfaceFeatureOutline = kind === 'point' ? rimVectors(direction, axes.north, context.meshRadiusUnits, radiusUnits)
+    let outline: SurfaceFeatureOutline = kind === 'point' || !extent ? rimVectors(direction, axes.north, context.meshRadiusUnits, radiusUnits)
       : extentPolygon(extent, axes, config.mapLeftEdgeLongitudeDeg, context.meshRadiusUnits, config.outline.pieces);
-    if (loadedTraces && config.traces && Object.hasOwn(config.traces.classes, code)) {
+    if (extent && loadedTraces && config.traces && Object.hasOwn(config.traces.classes, code)) {
       const selected = selectTraces(loadedTraces.traces, config.traces.classes[code]!, extent, config.traces);
       if (selected.length) {
         const paths = budgetTracePaths(selected.flatMap(trace => trace.parts), config.traces.maximumVertices)
@@ -412,8 +432,8 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   const catalog: PreparedSurfaceFeatureCatalog = {
     schema: PREPARED_SURFACE_FEATURES_SCHEMA, objectId: context.objectId,
     source: manifest.source, snapshotDate: manifest.snapshotDate, sourcePage: manifest.sourcePage, license: manifest.license, qualification: manifest.qualification,
-    datum: { name: datumName, radiusM, longitude: 'positive-east-0-360' },
-    excluded, duplicates: { features: duplicateIds.size, rows: duplicateRows, maxSeparationDeg: round(maxSeparationDeg, 4), maxDiameterDifferenceKm: round(maxDiameterDifferenceKm, 4) },
+    datum: { name: datumName, radiusM, authoredRadiusM: context.radiusKm * 1000, longitude: 'positive-east-0-360' },
+    excluded, skipped, assumed: { regionTypes: assumed, extentFallbacks }, duplicates: { features: duplicateIds.size, rows: duplicateRows, maxSeparationDeg: round(maxSeparationDeg, 4), maxDiameterDifferenceKm: round(maxDiameterDifferenceKm, 4) },
     ...(loadedTraces && config.traces ? { traces: { source: loadedTraces.manifest.source, sourcePage: loadedTraces.manifest.sourcePage, license: loadedTraces.manifest.license, snapshotDate: loadedTraces.manifest.snapshotDate,
       traces: loadedTraces.traces.length, matched: traceStats.matched, byCode: traceStats.byCode, unmatched: traceStats.unmatched, maximumVertices: config.traces.maximumVertices } } : {}),
     features,
@@ -428,7 +448,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     outline: config.outline,
   };
   const descriptor = { schema: 'cssearth-prepared-features@1', objectId: context.objectId, ...plan.catalog, source: manifest.source, sourcePage: manifest.sourcePage,
-    license: manifest.license, snapshotDate: manifest.snapshotDate, mapLeftEdgeLongitudeDeg: config.mapLeftEdgeLongitudeDeg, excluded, duplicates: catalog.duplicates, ...(catalog.traces ? { traces: catalog.traces } : {}) };
+    license: manifest.license, snapshotDate: manifest.snapshotDate, mapLeftEdgeLongitudeDeg: config.mapLeftEdgeLongitudeDeg, excluded, skipped, assumed: catalog.assumed, duplicates: catalog.duplicates, ...(catalog.traces ? { traces: catalog.traces } : {}) };
   await writeFile(resolve(context.outputDirectory, 'features.json'), `${JSON.stringify(descriptor)}\n`);
   return { plan, descriptor, catalog };
 }

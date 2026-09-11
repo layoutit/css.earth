@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ganymede",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "301d3ec96e1e0479ef42d94326445b2c71d082690d0ebb2d633fd2b0ab29ab2c"
+    "sha256": "d17c96d36ee42750c353b5135b0b106c76e606052633406d8179f4abddf1de77"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -781,6 +781,65 @@
           }
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "293d07f933ef719cde5f6580f31fa1f1e396f660bd0d612b721a0bdc9a79d92c",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "GANYMEDE_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "GANYMEDE_nomenclature_center_pts.dbf",
+          "projection": "GANYMEDE_nomenclature_center_pts.prj",
+          "metadata": "metadata_nomenclature_points_GANYMEDE.xml"
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 180,
+        "output": "ganymede-features.json",
+        "publicBase": "/scenes/ganymede/",
+        "target": {
+          "className": "ganymede-body"
+        },
+        "lensIds": [
+          "normal",
+          "enhanced",
+          "geology",
+          "oxygen-signature"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 1,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 48,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        }
+      }
     }
   ],
   "sources": [
@@ -850,7 +909,7 @@
       "sha256": "c2c8d9506b8cf8f7a0a90d823d9052e91c8d9885cf7267fdce8de8216f4df888",
       "bytes": 136844537,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -927,7 +986,7 @@
       "sha256": "da47087e75bc530456d8206d5100ad3c687706353700b0cb44a8400957005a33",
       "bytes": 199204541,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -982,7 +1041,7 @@
       "sha256": "67251406577abdb683e3f58616572cf4544aef9334406b48deade61a38ba7740",
       "bytes": 2282348,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1012,7 +1071,7 @@
       "sha256": "253e766034de1e6d8b7fe179506e237cfea6454be6948fad0e1f4862a97580a1",
       "bytes": 387036,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1042,7 +1101,7 @@
       "sha256": "627995c07e5d5c303e6ddb64e5e75c50938c4f5b6a39dc79e2e2128248c3bd83",
       "bytes": 167,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1092,7 +1151,7 @@
       "sha256": "c70ba9a513711fe715f44e26ff174d171e8fd60b1ae081c86e9fcfc849d6924f",
       "bytes": 10416,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1142,7 +1201,7 @@
       "sha256": "b5e2ecac431126c5d531e7b37945dbfd9abf5b30b2c632befb5f02e764d81efa",
       "bytes": 10400,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1192,7 +1251,7 @@
       "sha256": "f9eb0690f659507fdcfe7e124f29702dfd22a08000c8283136c2c7f49e12351a",
       "bytes": 10304,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1212,7 +1271,86 @@
       "sha256": "f3ab4fb8d629419275f0a15edf9e1cc75eee1699f1fc54471f033ce906ce13cc",
       "bytes": 18669,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ganymede-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "sha256": "aa68afb9c4bf6afd5099ffabc503b92228a890bef38c59646986e4d430cbaac6",
+      "bytes": 1015,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-ganymede-nomenclature-center-pts",
+      "path": "features/GANYMEDE_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/GANYMEDE_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Ganymede on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Ganymede centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/GANYMEDE/target",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ganymede-usgs-gazetteer-nomenclature-center-pts",
+            "role": "material",
+            "evidence": "src/planets/ganymede/source/features/manifest.json@01bd7bd566517f8b80cc21bd138e7f5901bca24e#/inputs/0"
+          }
+        ]
+      },
+      "sha256": "75e6f837380cab4635d939ba9205f7832f85e10772878140197a67c2d082f561",
+      "bytes": 550727,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/GANYMEDE_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/GANYMEDE_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ganymede-surface-minimap-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation metadata",
+      "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
+      "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored texture axes and CSS surface selector."
+      },
+      "sha256": "1b91f014b73e4bdccb005166cccafe56179fd32de486ae7795d120b021d3868d",
+      "bytes": 155,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1252,19 +1390,19 @@
           "url": "/scenes/ganymede/ganymede-normal-thumbnail.webp",
           "bytes": 3172,
           "sha256": "639999164186b8fe56726b0a0c2d71494212f1f9a9ab0b018987c80e7170b53e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-normal-surface@2x.webp",
           "bytes": 6411262,
           "sha256": "eee2ba73dd90d85f32681f6da6d151a60bbfe6dfb7ff2edd373e93d5a2894005",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-normal-poles@2x.webp",
           "bytes": 176358,
           "sha256": "2318592ae6bb16349c87e22c8a0910403e9641d2118b8086783d41f9be28e820",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1309,19 +1447,19 @@
           "url": "/scenes/ganymede/ganymede-enhanced-thumbnail.webp",
           "bytes": 5628,
           "sha256": "bb1d5515bc0a443f9208479c9a0e4db9404eb1267edc77490138b8d06959bc4c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-enhanced-surface@2x.webp",
           "bytes": 7029694,
           "sha256": "90553d4fd9a4bd0140b4054c5bf002862fa102439617c76a413c9900cfa3dc8c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-enhanced-poles@2x.webp",
           "bytes": 208766,
           "sha256": "88bfbe684db157327e55611e9b3764e67714a13a9c391cd3088e3723a576997d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1356,19 +1494,19 @@
           "url": "/scenes/ganymede/ganymede-geology-thumbnail.webp",
           "bytes": 1662,
           "sha256": "beb8f0d50137dd11ad57ba5fab690c57467dd40fa711933616bb0c43a09b7c29",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-geology-surface@2x.webp",
           "bytes": 522684,
           "sha256": "4d8ca3b202ba6ba3ca28c3dc80d69bac45851895ae5bafa4dc2b6220552b8742",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-geology-poles@2x.webp",
           "bytes": 24730,
           "sha256": "e602a37e250e60775046ac77bb668649d1edf5c7b700929601faa1b1955af546",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1403,25 +1541,25 @@
           "url": "/scenes/ganymede/ganymede-oxygen-signature-thumbnail.webp",
           "bytes": 4908,
           "sha256": "a03346786873c42aa08e03bb4598e1e12d6d08909b0cff103d000c62a4ed6bfd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-oxygen-signature-legend.webp",
           "bytes": 246,
           "sha256": "44c343edd4c6e8fa80bec50e998d4b0369ed7224017adc103a7d09a95ec02166",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-oxygen-signature-surface@2x.webp",
           "bytes": 46646,
           "sha256": "d6ac93704969b11c0bea1a541275f2d6d1c2a7ca5d11002d26bfbc5c3d5bf7e2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-oxygen-signature-poles@2x.webp",
           "bytes": 1728,
           "sha256": "070a63e7aa4182c1403f153aa9aeca56c1a91e843f65f5d82f62f3850fa7c709",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1444,8 +1582,42 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8596,
-          "sha256": "79506806a56a97f2bd14340b21f5a865d79bc16bd5887ded9635e973bf9b08b4",
+          "bytes": 8715,
+          "sha256": "a1a1fdaa8e5cfa9cd87be545b654f83cb0dbbc7f88f3a91b51a25ee15539e970",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 180,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "ganymede-surface-features-source",
+        "usgs-gazetteer-ganymede-nomenclature-center-pts",
+        "ganymede-surface-minimap-frame"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ganymede/ganymede-features.json",
+          "bytes": 476288,
+          "sha256": "4bc3589c976dd7143b10708fbef694842973c0007349b97cfab03bdf6e1be568",
           "verification": "bytes-verified"
         }
       ],

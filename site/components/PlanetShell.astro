@@ -22,6 +22,7 @@ import overviewFacts from '../source/overview-facts.json';
 import planetarySystems from '../source/planetary-systems.json';
 import { PREPARED_NAVIGATION_MARKERS } from '../prepared-navigation-markers.mjs';
 import { temperatureColor } from '../../src/preparation/stars/color.ts';
+import featureIndex from '../prepared-feature-index.json' with { type: 'json' };
 
 declare const __CSSEARTH_VERSION__: string;
 
@@ -190,7 +191,7 @@ const searchPlaceholder = `Search ${OBJECTS.length} planets, moons, comets, aste
         </PlanetCardHeader>
         <PlanetObjectResults activeObjectId={objectId} />
       </PlanetCard>
-      {features && <section class="planet-feature-results" aria-label={features.searchLabel} hidden>
+      <section class="planet-feature-results" aria-label={features?.searchLabel ?? 'Named features'} data-feature-index={JSON.stringify(featureIndex)} hidden>
         <p class="planet-feature-hint planet-destination-hint" role="status"></p>
         <ul class="planet-destination-list">
           {Array.from({ length: 8 }, () => <li hidden>
@@ -200,7 +201,7 @@ const searchPlaceholder = `Search ${OBJECTS.length} planets, moons, comets, aste
             </button>
           </li>)}
         </ul>
-      </section>}
+      </section>
       {destinations && <section class="planet-destination-results" aria-label="Cities" hidden>
         <p class="planet-destination-hint" role="status"></p>
         <ul class="planet-destination-list">
