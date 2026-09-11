@@ -649,6 +649,13 @@ details:not([open]) > .planet-panel-summary .planet-panel-icon {
 .planet-breadcrumbs :is(a, button):hover { color: var(--shell-text); text-decoration: underline; }
 .planet-breadcrumbs :is(a, button):focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 3px; }
 .planet-breadcrumbs [aria-current="page"] { color: var(--shell-text-secondary); }
+/* Mission headings overlay their artwork without taking input; keep the trail usable. */
+.planet-spacecraft-heading > .planet-breadcrumbs { pointer-events: auto; }
+/* Missions titled by a short name open their description with the full name. */
+.planet-lens-details-lead { color: var(--shell-text); font-weight: 500; }
+/* Mission and spacecraft names title their cards at the shell's panel heading size,
+   outranking the shared tab-panel text scale. */
+.planet-card-tabpanel .planet-spacecraft .planet-lens-details-title { font: 500 22px/28px var(--shell-ui-font); }
 
 .planet-introduction {
   width: 100%;
@@ -1522,19 +1529,6 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     background-position: center;
     background-size: 48px 48px;
     background-repeat: no-repeat;
-  }
-
-  .planet-settings-action {
-    top: 0;
-    height: 59px;
-  }
-
-  .planet-settings-action .planet-action-marker {
-    top: 7px;
-    left: 6px;
-    width: 36px;
-    height: 36px;
-    background-size: 36px 36px;
   }
 
   .planet-drawer-content {
