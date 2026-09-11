@@ -42,7 +42,7 @@ export interface LabSubjectRecord {
   modelNote?: string;
   framingRadiusUnits?: number;
   hasDetail?: boolean;
-  emissionExperiment?: { directory: string; modeled?: boolean; methodUrl?: string; statusNote?: string; structureDirectory?: string };
+  emissionExperiment?: { directory: string; modeled?: boolean; methodUrl?: string; statusNote?: string; structureDirectory?: string; sourceCatalogue?: string };
   comparisonGroup?: string;
   reconstructionImage?: { group: string; label: string; note: string };
   referenceProjectionScale?: number;

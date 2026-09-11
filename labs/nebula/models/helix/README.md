@@ -4,6 +4,25 @@
 
 **Initial visual verdict: neither baseline is accepted.** The one-axis fit reproduces the photograph but becomes a box from the side. The disk/ring prior has finite curved components, but is too smooth, cuts off outer emission and changes brightness under rotation. These are deliberately visible comparisons, not production nebula assets.
 
+## Wider source candidates
+
+The current Hubble/CTIO **photograph itself clips the wider nebula**. Retaining its full frame in the inspector does not repair that missing observation. The separate disk/ring prior also drops signal within that frame; both limits must be fixed before accepting a volume.
+
+Open **Source candidates** in either Helix experiment, or `/reconstruction?subject=helix-model-prior&inspection=sources`. These are unprocessed, full-photograph publisher previews, independently fitted to the viewport—not registered overlays. Field sizes describe angular coverage, not the size of the image on screen. Their native originals remain separate links; a small preview must never become the processing input. Current baked results and source pins remain unchanged.
+
+| Observation | Native pixels | Publisher field | Inspection result |
+| --- | --- | --- | --- |
+| [Hubble / CTIO · current](https://esahubble.org/images/opo0432b/) | 4731 × 3129 | 20.96′ × 13.86′ | Crops the outer nebula. Keep for central detail and comparison. |
+| [ESO WFI · optical B/V/R](https://www.eso.org/public/images/eso0907a/) | 7059 × 6535 | 28.02′ × 25.94′ | Sharp main ring and northeast arc; still tight for faint outer structures. |
+| [ESO 3.6 m · wider field](https://www.eso.org/public/images/helix/) | 6850 × 4759 | 48.82′ × 33.92′ | More surrounding sky, but softer, weaker outer emission and visible artifacts. Filters are not listed by the publisher. |
+| [ESO VISTA · near-infrared Y/J/K](https://www.eso.org/public/images/eso1205a/) | 6592 × 6592 | 37.51′ × 37.51′ | Best coverage/detail compromise of these wider previews; different emission and colors from optical. |
+
+The recommendation is to inspect VISTA for extended structure and retain WFI as an optical detail candidate. This is a visual judgment, not a claim of complete all-band coverage. [Zhang, Hsia & Kwok (2012)](https://arxiv.org/abs/1207.4606) report a roughly 40′ halo at 12 μm; even VISTA's wider frame cannot establish that the entire halo is included. A sufficiently large field and sufficient sensitivity to the intended emission are separate requirements.
+
+[Source-candidates metadata](source-candidates.json) records preview URLs, exact preview byte hashes, native links, field sizes, credits and terms. Previews use the ignored local cache when available, otherwise the publisher URL; no image processing is launched by selection. Before processing a chosen replacement: acquire/hash its native original, verify sky orientation and central-star registration, inspect the intended outer boundary, then explicitly remove stars and recompute evidence. Do not reuse the cropped source's pixel coordinates or NOX cache identity.
+
+Other inspected references: the [CFHT/Coelum optical composite](https://www.cfht.hawaii.edu/HawaiianStarlight/AIOM/English/CFHT-Coelum-AIOM-Mar2017.html) still clips its upper extended structures; its public high-resolution version requires a request. [Chatzifrantzis's 2025 APOD](https://apod.nasa.gov/apod/ap250729.html) shows strong optical outer structure, but the published image is watermarked and has no supplied astrometric registration; it is credited to the photographer, not a NASA observation. Neither is a processing input.
+
 ## Difficulty and scientific basis
 
 Helix is not wholly asymmetric. [O'Dell, McCullough & Meixner (2004)](https://doi.org/10.1086/424621) propose a 499″ inner disk and 742″ outer ring, with different inclinations and axes. We inspected sections 3.1 and 4.6 directly. Their inner and outer inclinations to the sightline are 23° and 53°, with near-side position angles 288° and 168°.
