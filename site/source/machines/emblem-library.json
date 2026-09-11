@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-spacecraft-emblems@2",
+  "schema": "cssearth-machine-emblems@3",
   "normalBuildPolicy": "Reuse committed PNGs; preparation and acquisition are explicit maintenance only.",
   "entries": [
     {
       "id": "messenger",
-      "src": "/shell/spacecraft-emblems/messenger.png",
+      "src": "/shell/machine-emblems/messenger.png",
       "width": 288,
       "height": 288,
       "bytes": 114715,
@@ -39,14 +39,14 @@
           {
             "catalogueId": "artwork-emblem-messenger",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/0"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/0"
           }
         ]
       }
     },
     {
       "id": "dawn",
-      "src": "/shell/spacecraft-emblems/dawn.png",
+      "src": "/shell/machine-emblems/dawn.png",
       "width": 288,
       "height": 288,
       "bytes": 172837,
@@ -81,14 +81,14 @@
           {
             "catalogueId": "artwork-emblem-dawn",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/1"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/1"
           }
         ]
       }
     },
     {
       "id": "galileo",
-      "src": "/shell/spacecraft-emblems/galileo.png",
+      "src": "/shell/machine-emblems/galileo.png",
       "width": 288,
       "height": 288,
       "bytes": 84024,
@@ -123,14 +123,14 @@
           {
             "catalogueId": "artwork-emblem-galileo",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/2"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/2"
           }
         ]
       }
     },
     {
       "id": "juno",
-      "src": "/shell/spacecraft-emblems/juno.png",
+      "src": "/shell/machine-emblems/juno.png",
       "width": 288,
       "height": 288,
       "bytes": 21831,
@@ -167,14 +167,14 @@
           {
             "catalogueId": "artwork-emblem-juno",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/3"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/3"
           }
         ]
       }
     },
     {
       "id": "new-horizons",
-      "src": "/shell/spacecraft-emblems/new-horizons.png",
+      "src": "/shell/machine-emblems/new-horizons.png",
       "width": 288,
       "height": 288,
       "bytes": 158395,
@@ -209,14 +209,14 @@
           {
             "catalogueId": "artwork-emblem-new-horizons",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/4"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/4"
           }
         ]
       }
     },
     {
       "id": "sdo",
-      "src": "/shell/spacecraft-emblems/sdo.png",
+      "src": "/shell/machine-emblems/sdo.png",
       "width": 288,
       "height": 288,
       "bytes": 124647,
@@ -251,14 +251,14 @@
           {
             "catalogueId": "artwork-emblem-sdo",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/5"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/5"
           }
         ]
       }
     },
     {
       "id": "voyager-1",
-      "src": "/shell/spacecraft-emblems/voyager-1.png",
+      "src": "/shell/machine-emblems/voyager-1.png",
       "width": 288,
       "height": 288,
       "bytes": 43452,
@@ -293,14 +293,14 @@
           {
             "catalogueId": "artwork-emblem-voyager-1",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/6"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/6"
           }
         ]
       }
     },
     {
       "id": "voyager-2",
-      "src": "/shell/spacecraft-emblems/voyager-2.png",
+      "src": "/shell/machine-emblems/voyager-2.png",
       "width": 288,
       "height": 288,
       "bytes": 43452,
@@ -335,14 +335,14 @@
           {
             "catalogueId": "artwork-emblem-voyager-2",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/7"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/7"
           }
         ]
       }
     },
     {
       "id": "lro",
-      "src": "/shell/spacecraft-emblems/lro.png",
+      "src": "/shell/machine-emblems/lro.png",
       "width": 288,
       "height": 288,
       "bytes": 123377,
@@ -378,14 +378,14 @@
           {
             "catalogueId": "artwork-emblem-lro",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/8"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/8"
           }
         ]
       }
     },
     {
       "id": "grail",
-      "src": "/shell/spacecraft-emblems/grail.png",
+      "src": "/shell/machine-emblems/grail.png",
       "width": 288,
       "height": 288,
       "bytes": 80312,
@@ -421,14 +421,14 @@
           {
             "catalogueId": "artwork-emblem-grail",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/9"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/9"
           }
         ]
       }
     },
     {
       "id": "viking",
-      "src": "/shell/spacecraft-emblems/viking.png",
+      "src": "/shell/machine-emblems/viking.png",
       "width": 288,
       "height": 288,
       "bytes": 150681,
@@ -464,14 +464,14 @@
           {
             "catalogueId": "artwork-emblem-viking",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/10"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/10"
           }
         ]
       }
     },
     {
       "id": "mro",
-      "src": "/shell/spacecraft-emblems/mro.png",
+      "src": "/shell/machine-emblems/mro.png",
       "width": 288,
       "height": 288,
       "bytes": 54128,
@@ -506,14 +506,14 @@
           {
             "catalogueId": "artwork-emblem-mro",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/11"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/11"
           }
         ]
       }
     },
     {
       "id": "osiris-rex",
-      "src": "/shell/spacecraft-emblems/osiris-rex.png",
+      "src": "/shell/machine-emblems/osiris-rex.png",
       "width": 288,
       "height": 288,
       "bytes": 80651,
@@ -548,14 +548,14 @@
           {
             "catalogueId": "artwork-emblem-osiris-rex",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/12"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/12"
           }
         ]
       }
     },
     {
       "id": "terra",
-      "src": "/shell/spacecraft-emblems/terra.png",
+      "src": "/shell/machine-emblems/terra.png",
       "width": 288,
       "height": 288,
       "bytes": 112836,
@@ -591,14 +591,14 @@
           {
             "catalogueId": "artwork-emblem-terra",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/13"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/13"
           }
         ]
       }
     },
     {
       "id": "cassini",
-      "src": "/shell/spacecraft-emblems/cassini.png",
+      "src": "/shell/machine-emblems/cassini.png",
       "width": 288,
       "height": 288,
       "bytes": 126628,
@@ -636,14 +636,14 @@
           {
             "catalogueId": "artwork-emblem-cassini",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/14"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/14"
           }
         ]
       }
     },
     {
       "id": "magellan",
-      "src": "/shell/spacecraft-emblems/magellan.png",
+      "src": "/shell/machine-emblems/magellan.png",
       "width": 288,
       "height": 288,
       "bytes": 59106,
@@ -680,14 +680,14 @@
           {
             "catalogueId": "artwork-emblem-magellan",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/15"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/15"
           }
         ]
       }
     },
     {
       "id": "odyssey",
-      "src": "/shell/spacecraft-emblems/odyssey.png",
+      "src": "/shell/machine-emblems/odyssey.png",
       "width": 288,
       "height": 288,
       "bytes": 81390,
@@ -724,14 +724,14 @@
           {
             "catalogueId": "artwork-emblem-odyssey",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/16"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/16"
           }
         ]
       }
     },
     {
       "id": "near-shoemaker",
-      "src": "/shell/spacecraft-emblems/near-shoemaker.png",
+      "src": "/shell/machine-emblems/near-shoemaker.png",
       "width": 288,
       "height": 288,
       "bytes": 98803,
@@ -768,14 +768,14 @@
           {
             "catalogueId": "artwork-emblem-near-shoemaker",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/17"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/17"
           }
         ]
       }
     },
     {
       "id": "mars-global-surveyor",
-      "src": "/shell/spacecraft-emblems/mars-global-surveyor.png",
+      "src": "/shell/machine-emblems/mars-global-surveyor.png",
       "width": 288,
       "height": 288,
       "bytes": 96861,
@@ -812,14 +812,14 @@
           {
             "catalogueId": "artwork-emblem-mars-global-surveyor",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/18"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/18"
           }
         ]
       }
     },
     {
       "id": "suomi-npp",
-      "src": "/shell/spacecraft-emblems/suomi-npp.png",
+      "src": "/shell/machine-emblems/suomi-npp.png",
       "width": 288,
       "height": 288,
       "bytes": 113711,
@@ -856,14 +856,14 @@
           {
             "catalogueId": "artwork-emblem-suomi-npp",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/19"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/19"
           }
         ]
       }
     },
     {
       "id": "hubble",
-      "src": "/shell/spacecraft-emblems/hubble.png",
+      "src": "/shell/machine-emblems/hubble.png",
       "width": 288,
       "height": 288,
       "bytes": 58343,
@@ -901,14 +901,14 @@
           {
             "catalogueId": "artwork-emblem-hubble",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/20"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/20"
           }
         ]
       }
     },
     {
       "id": "hayabusa",
-      "src": "/shell/spacecraft-emblems/hayabusa.png",
+      "src": "/shell/machine-emblems/hayabusa.png",
       "width": 288,
       "height": 288,
       "bytes": 104923,
@@ -944,14 +944,14 @@
           {
             "catalogueId": "artwork-emblem-hayabusa",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/21"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/21"
           }
         ]
       }
     },
     {
       "id": "hayabusa2",
-      "src": "/shell/spacecraft-emblems/hayabusa2.png",
+      "src": "/shell/machine-emblems/hayabusa2.png",
       "width": 288,
       "height": 288,
       "bytes": 78493,
@@ -988,14 +988,14 @@
           {
             "catalogueId": "artwork-emblem-hayabusa2",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/22"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/22"
           }
         ]
       }
     },
     {
       "id": "rosetta",
-      "src": "/shell/spacecraft-emblems/rosetta.png",
+      "src": "/shell/machine-emblems/rosetta.png",
       "width": 288,
       "height": 288,
       "bytes": 54550,
@@ -1031,7 +1031,7 @@
           {
             "catalogueId": "artwork-emblem-rosetta",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/23"
+            "evidence": "site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/23"
           }
         ]
       }

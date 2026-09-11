@@ -3,8 +3,8 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from './source-values.mts';
-const root=path.resolve(import.meta.dirname,'../site/source/spacecraft/emblems');
-const output=path.resolve(import.meta.dirname,'../public/shell/spacecraft-emblems');
+const root=path.resolve(import.meta.dirname,'../site/source/machines/emblems');
+const output=path.resolve(import.meta.dirname,'../public/shell/machine-emblems');
 const sha=(b: Uint8Array)=>createHash('sha256').update(b).digest('hex');
 const records=requireArray(JSON.parse(await fs.readFile(path.join(root,'source-records.json'),'utf8'))).map(value=>{const entry=requireRecord(value);return {...entry,id:requireString(entry.id),localSource:requireString(entry.localSource),inputSha256:entry.inputSha256,sourceSha256:entry.sourceSha256};});
 await fs.mkdir(output,{recursive:true});
@@ -41,12 +41,12 @@ for(const e of records){
  if(transparent<288*288*.03)throw Error('Missing actual transparency: '+e.id);
  for(let y=0;y<288;y++)for(let x=0;x<288;x++)if(x===0||y===0||x===287||y===287)if(raw[(y*288+x)*4+3]!==0)throw Error('Opaque frame edge: '+e.id);
  await fs.writeFile(path.join(output,e.id+'.png'),png);
- entries.push({id:e.id,src:'/shell/spacecraft-emblems/'+e.id+'.png',width:288,height:288,bytes:png.length,sha256:sha(png),source:{...e,inputSha256:sha(input),inputBytes:input.length},preparation:{method:e.id==='juno'?'Rasterize source vector over a white circle to retain the original raster badge appearance; exterior remains transparent.':removed?'Remove only edge-connected white background; preserve original artwork RGB.':'Preserve source transparency.',removedBackgroundPixels:removed,crop:{left,top,width:right-left+1,height:bottom-top+1},outputPadding:2,transparentPixels:transparent}});
+ entries.push({id:e.id,src:'/shell/machine-emblems/'+e.id+'.png',width:288,height:288,bytes:png.length,sha256:sha(png),source:{...e,inputSha256:sha(input),inputBytes:input.length},preparation:{method:e.id==='juno'?'Rasterize source vector over a white circle to retain the original raster badge appearance; exterior remains transparent.':removed?'Remove only edge-connected white background; preserve original artwork RGB.':'Preserve source transparency.',removedBackgroundPixels:removed,crop:{left,top,width:right-left+1,height:bottom-top+1},outputPadding:2,transparentPixels:transparent}});
  const index=entries.length-1,x=index%6*160,y=Math.floor(index/6)*186;
  layers.push({input:await sharp(png).resize(128,128).png().toBuffer(),left:x+16,top:y+8});
  layers.push({input:Buffer.from(`<svg width="160" height="28"><text x="8" y="18" fill="#ccc" font-family="Arial" font-size="12">${e.id}</text></svg>`),left:x,top:y+147});
  console.log(e.id,removed?'removed '+removed+' exterior pixels':'native alpha',png.length);
 }
 if(entries.length!==24||new Set(entries.map(e=>e.id)).size!==24)throw Error('Expected all 24');
-await fs.writeFile(path.join(root,'../emblem-library.json'),JSON.stringify({schema:'cssearth-spacecraft-emblems@1',normalBuildPolicy:'Reuse committed PNGs; preparation and acquisition are explicit maintenance only.',entries},null,2)+'\n');
+await fs.writeFile(path.join(root,'../emblem-library.json'),JSON.stringify({schema:'cssearth-machine-emblems@1',normalBuildPolicy:'Reuse committed PNGs; preparation and acquisition are explicit maintenance only.',entries},null,2)+'\n');
 if(process.argv[2])await sharp({create:{width:960,height:744,channels:3,background:'#0d0d0d'}}).composite(layers).png().toFile(path.resolve(process.argv[2]));

@@ -1,6 +1,6 @@
 {
-  "schema": "cssearth-spacecraft-catalog@3",
-  "spacecraft": [
+  "schema": "cssearth-machine-catalog@4",
+  "machines": [
     {
       "id": "messenger",
       "name": {
@@ -1483,7 +1483,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "messenger",
+          "machineId": "messenger",
           "role": "orbiter",
           "citations": [
             {
@@ -1549,7 +1549,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "cassini",
+          "machineId": "cassini",
           "role": "orbiter",
           "citations": [
             {
@@ -1559,7 +1559,7 @@
           ]
         },
         {
-          "spacecraftId": "huygens",
+          "machineId": "huygens",
           "role": "probe",
           "citations": [
             {
@@ -1623,7 +1623,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "dawn",
+          "machineId": "dawn",
           "role": "orbiter",
           "citations": [
             {
@@ -1687,7 +1687,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "galileo",
+          "machineId": "galileo",
           "role": "orbiter",
           "citations": [
             {
@@ -1697,7 +1697,7 @@
           ]
         },
         {
-          "spacecraftId": "galileo-probe",
+          "machineId": "galileo-probe",
           "role": "probe",
           "citations": [
             {
@@ -1762,7 +1762,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "hubble",
+          "machineId": "hubble",
           "role": "observatory",
           "citations": [
             {
@@ -1829,7 +1829,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "juno",
+          "machineId": "juno",
           "role": "orbiter",
           "citations": [
             {
@@ -1896,7 +1896,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "new-horizons",
+          "machineId": "new-horizons",
           "role": "flyby",
           "citations": [
             {
@@ -1972,7 +1972,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "sdo",
+          "machineId": "sdo",
           "role": "observatory",
           "citations": [
             {
@@ -2039,7 +2039,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "voyager-1",
+          "machineId": "voyager-1",
           "role": "flyby",
           "citations": [
             {
@@ -2106,7 +2106,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "voyager-2",
+          "machineId": "voyager-2",
           "role": "flyby",
           "citations": [
             {
@@ -2182,7 +2182,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "lro",
+          "machineId": "lro",
           "role": "orbiter",
           "citations": [
             {
@@ -2258,7 +2258,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "mro",
+          "machineId": "mro",
           "role": "orbiter",
           "citations": [
             {
@@ -2334,7 +2334,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "odyssey",
+          "machineId": "odyssey",
           "role": "orbiter",
           "citations": [
             {
@@ -2401,7 +2401,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "near-shoemaker",
+          "machineId": "near-shoemaker",
           "role": "orbiter",
           "citations": [
             {
@@ -2465,7 +2465,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "osiris-rex",
+          "machineId": "osiris-rex",
           "role": "sample-return",
           "citations": [
             {
@@ -2529,7 +2529,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "hayabusa2",
+          "machineId": "hayabusa2",
           "role": "sample-return",
           "citations": [
             {
@@ -2539,7 +2539,7 @@
           ]
         },
         {
-          "spacecraftId": "minerva-ii-1a",
+          "machineId": "minerva-ii-1a",
           "role": "rover",
           "citations": [
             {
@@ -2549,7 +2549,7 @@
           ]
         },
         {
-          "spacecraftId": "minerva-ii-1b",
+          "machineId": "minerva-ii-1b",
           "role": "rover",
           "citations": [
             {
@@ -2559,7 +2559,7 @@
           ]
         },
         {
-          "spacecraftId": "minerva-ii-2",
+          "machineId": "minerva-ii-2",
           "role": "rover",
           "citations": [
             {
@@ -2569,7 +2569,7 @@
           ]
         },
         {
-          "spacecraftId": "mascot",
+          "machineId": "mascot",
           "role": "lander",
           "citations": [
             {
@@ -2636,7 +2636,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "hayabusa",
+          "machineId": "hayabusa",
           "role": "sample-return",
           "citations": [
             {
@@ -2646,7 +2646,7 @@
           ]
         },
         {
-          "spacecraftId": "minerva",
+          "machineId": "minerva",
           "role": "rover",
           "citations": [
             {
@@ -2710,7 +2710,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "rosetta",
+          "machineId": "rosetta",
           "role": "orbiter",
           "citations": [
             {
@@ -2720,7 +2720,7 @@
           ]
         },
         {
-          "spacecraftId": "philae",
+          "machineId": "philae",
           "role": "lander",
           "citations": [
             {
@@ -2784,7 +2784,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "terra",
+          "machineId": "terra",
           "role": "observatory",
           "citations": [
             {
@@ -2852,7 +2852,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "suomi-npp",
+          "machineId": "suomi-npp",
           "role": "observatory",
           "citations": [
             {
@@ -2919,7 +2919,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "magellan",
+          "machineId": "magellan",
           "role": "orbiter",
           "citations": [
             {
@@ -2992,7 +2992,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "mars-global-surveyor",
+          "machineId": "mars-global-surveyor",
           "role": "orbiter",
           "citations": [
             {
@@ -3056,7 +3056,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "viking-1-orbiter",
+          "machineId": "viking-1-orbiter",
           "role": "orbiter",
           "citations": [
             {
@@ -3066,7 +3066,7 @@
           ]
         },
         {
-          "spacecraftId": "viking-1-lander",
+          "machineId": "viking-1-lander",
           "role": "lander",
           "citations": [
             {
@@ -3128,7 +3128,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "viking-2-orbiter",
+          "machineId": "viking-2-orbiter",
           "role": "orbiter",
           "citations": [
             {
@@ -3138,7 +3138,7 @@
           ]
         },
         {
-          "spacecraftId": "viking-2-lander",
+          "machineId": "viking-2-lander",
           "role": "lander",
           "citations": [
             {
@@ -3200,7 +3200,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "grail-a",
+          "machineId": "grail-a",
           "role": "orbiter",
           "citations": [
             {
@@ -3210,7 +3210,7 @@
           ]
         },
         {
-          "spacecraftId": "grail-b",
+          "machineId": "grail-b",
           "role": "orbiter",
           "citations": [
             {
@@ -3274,7 +3274,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "osiris-rex",
+          "machineId": "osiris-rex",
           "role": "probe",
           "citations": [
             {
