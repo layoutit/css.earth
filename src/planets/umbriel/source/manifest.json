@@ -117,6 +117,84 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-umbriel-nomenclature-center-pts",
+      "path": "features/UMBRIEL_nomenclature_center_pts.zip",
+      "expectedBytes": 71240,
+      "expectedSha256": "c6d2161559c8367f574b327beec7adb7127b52eff8463a4490ff30c9427634b4",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/UMBRIEL_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Umbriel on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Umbriel centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/UMBRIEL/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "umbriel-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1009,
+      "expectedSha256": "ce6ec0240a2da3b25cdf0b31d1e2478974c78e7d3c2b8e76c2f89d4130cb8829",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "umbriel-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1110,
+      "expectedSha256": "3eff3915b3122d3d8639e319e9aa3ecb240597ddec026028c24dfbbccb506e69",
+      "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "umbriel-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 154,
+      "expectedSha256": "8681d65321dceaef734f4ca6f53126f8c273af81b5a3abff3c62c5729b093bff",
+      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -133,8 +211,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 776,
-      "expectedSha256": "b31912981d1322cf8f5464e1fe4cf4cbffca185778573f8ddb563b5e83a02bf3"
+      "expectedBytes": 1032,
+      "expectedSha256": "831114299ba525bd094243d6d4d2d8a615f7d315e0eabfb10260f22211666b19"
     },
     {
       "path": "content/object.json",

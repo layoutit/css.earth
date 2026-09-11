@@ -9,12 +9,15 @@ Titania uses Voyager 2 mosaics and terrain reconstruction, plus digitized histor
 | Monochrome and elevation | [Schenk's 2020 mosaics and DEMs](https://repository.hou.usra.edu/handle/20.500.11753/1687), described by [Schenk and Moore (2020)](https://doi.org/10.1098/rsta.2020.0102) |
 | Geologic categories | [Thomson and Baynham (2026)](https://zenodo.org/records/20819132), digitized Voyager-era interpretations |
 | Physical placement and spin | JPL satellite elements and IAU/NAIF rotation |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/TITANIA/target) Titania centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
 
 The [retained source inspection](source/observations/source-inspection.json) provides independent NumPy coordinate and value samples. Geology registration uses held-out crater checks. These address numeric registration and coverage; no dated browser acceptance is cited.
 
 ## Known problems
+
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Titania (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge was fixed by drawing Gazetteer rims under both edge hypotheses and keeping the one where Gertrude and Messina Chasmata on the prepared minimap (±180° cylindrical cube) coincide with the imagery.
 
 - Approximate source coverage is 44.8% for monochrome and 27.7% for elevation before interpolation; the unobserved north stays missing.
 - Monochrome processing depends on an unavailable photometric parameter file. DN values are not calibrated albedo.

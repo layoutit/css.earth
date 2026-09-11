@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { parseDbf } from './dbf.js';
-import { budgetTracePaths, extentPolygon, normalizeExtent, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, rimVectors, selectTraces, surfaceDirection } from './index.js';
+import { budgetTracePaths, extentPolygon, nodeIndex as nodeIndexForTest, normalizeExtent, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, rimVectors, selectTraces, surfaceDirection } from './index.js';
 import { parseShpPolylines } from './shp.js';
 
 const root = process.cwd();
@@ -83,6 +83,16 @@ test('the Mercury recipe parses and rejects overlapping or excluded label kinds'
   assert.throws(() => parseSurfaceFeaturesConfig({ ...config, kinds: { ...config.kinds, region: [...config.kinds.region, 'AA'] } }), /one label kind/u);
   assert.throws(() => parseSurfaceFeaturesConfig({ ...config, excludedTypeCodes: { AA: 'no' } }), /must not also be labelled/u);
   assert.throws(() => parseSurfaceFeaturesConfig({ ...config, labelPolicy: { ...config.labelPolicy, limbCosine: 1 } }), /out of range/u);
+});
+
+test('a banded body resolves to the first band when every band shares one frame', () => {
+  const band = (extra = '') => ({ className: `polycss-mesh pluto-body${extra}`, parent: 2, style: 'transform:rotateZ(180deg);animation-duration:84s' });
+  const tree = { scene: 1, nodes: [{ className: 'polycss-camera', parent: -1 }, { className: 'polycss-scene', parent: 1 }, { className: 'polycss-mesh pluto-system', parent: 1 }, band(' pluto-body-polar'), band(), band(), band(' pluto-body-polar')] };
+  assert.equal(nodeIndexForTest(tree, { className: 'pluto-body', withoutClassName: 'pluto-body-polar' }), 4);
+  assert.equal(nodeIndexForTest(tree, { className: 'pluto-body', withoutClassName: null }), 3);
+  const skewed = { ...tree, nodes: [...tree.nodes.slice(0, 5), { ...band(), style: 'transform:rotateZ(90deg)' }, tree.nodes[6]!] };
+  assert.throws(() => nodeIndexForTest(skewed, { className: 'pluto-body', withoutClassName: 'pluto-body-polar' }), /do not share one frame/u);
+  assert.throws(() => nodeIndexForTest(tree, { className: 'pluto-core', withoutClassName: null }), /must name a prepared node/u);
 });
 
 test('the pinned Mercury Gazetteer archive prepares anchored IAU features on the body mesh', async () => {

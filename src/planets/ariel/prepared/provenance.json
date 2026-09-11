@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ariel",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1efcd01e2b88f9e131d2500e9d6e45d4ffdeb87769c36e29e7cfed5c1a9f27d8"
+    "sha256": "a098741aa77696681d5692b262cabf79907b55026045e767b5ccdc070f81f04f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -352,6 +352,63 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "cbc9965117b82d23e1e57e7857ae55ea058dba84454d94c7f8b218ad7a369bb2",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "ARIEL_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "ARIEL_nomenclature_center_pts.dbf",
+          "projection": "ARIEL_nomenclature_center_pts.prj",
+          "metadata": "metadata_nomenclature_points_ARIEL.xml"
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 180,
+        "output": "ariel-features.json",
+        "publicBase": "/scenes/ariel/",
+        "target": {
+          "className": "ariel-body"
+        },
+        "lensIds": [
+          "normal",
+          "elevation"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 1,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 48,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        }
+      }
     }
   ],
   "sources": [
@@ -415,7 +472,7 @@
       "sha256": "2e616ac7f472dfbca4226d58f24d8810e8f431b50059bfca4ce29258925328b9",
       "bytes": 12992353,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -486,7 +543,7 @@
       "sha256": "2f2568538e310cf26388a99ca59e43ea09f12e66b8208ca84f3466e048e8dc69",
       "bytes": 7759355,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -513,7 +570,80 @@
       "sha256": "e7fd70a48468c97a3159353edd4d9f8e7af6a0175e3d8f952db40aca62ea7765",
       "bytes": 7907,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ariel-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "sha256": "c3d77603c5fa77cff3567e76151f8c8d320f2b328f1af08c3dcd16668ee77d73",
+      "bytes": 1000,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-ariel-nomenclature-center-pts",
+      "path": "features/ARIEL_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/ARIEL_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Ariel on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Ariel centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/ARIEL/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      },
+      "sha256": "888421dd560af82e394a36241795dc5a751eca6267cd7b00255bc61424164923",
+      "bytes": 105258,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/ARIEL_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/ARIEL_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ariel-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "sha256": "2cf793e4c2668bf456a4aa356ff01d593571943d37a020272c2a68f768c593f8",
+      "bytes": 152,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -570,19 +700,19 @@
           "url": "/scenes/ariel/ariel-normal-thumbnail.webp",
           "bytes": 2652,
           "sha256": "ad6246d284f817fd5a0a2891fbce4a14f0962ebd9343d43840f142e4c6e98d4b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ariel/ariel-normal-surface@2x.webp",
           "bytes": 1732534,
           "sha256": "eb57f4b28f9ea9c2bb9d73ff97bd67fec36756574037df8a760ffdc8353b8377",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ariel/ariel-normal-poles@2x.webp",
           "bytes": 63314,
           "sha256": "8a54b16a8b31aab7add9c6ed42ed42fa9ce5747da52797b67ea083570bd49965",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -615,25 +745,25 @@
           "url": "/scenes/ariel/ariel-elevation-thumbnail.webp",
           "bytes": 3376,
           "sha256": "c3f33c7a6b9e55023729656ee1d0eccec635ba47b05f0f31d1102e377f8e7521",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ariel/ariel-elevation-legend.webp",
           "bytes": 180,
           "sha256": "a61050d5ca54e9972808c8df55940f212c48dfa1bce97d6adb9ea43969a40362",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ariel/ariel-elevation-surface@2x.webp",
           "bytes": 1842112,
           "sha256": "c757f0e953da47442d332de6437b43c15760d39820927d003e1c14b176ddbb59",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ariel/ariel-elevation-poles@2x.webp",
           "bytes": 137524,
           "sha256": "34c262469bf4a6d24d0a2afe5ab93eee86657854dc3873cf0c99734d44b424c6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -656,8 +786,42 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4349,
-          "sha256": "967beb83cd204faad6cdb89809cf0537315158cca6cf03f1b591dede6a1decf4",
+          "bytes": 4467,
+          "sha256": "3660e460990e7c9fda06befa9260214b97e6528c9f09614656a8599be3383ca7",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 180,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "ariel-surface-features-source",
+        "usgs-gazetteer-ariel-nomenclature-center-pts",
+        "ariel-surface-map-frame"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ariel/ariel-features.json",
+          "bytes": 84230,
+          "sha256": "f23cc90b2e3328a762d6eb014a4569d682fe58440bb594cbe5e7499db3694f91",
           "verification": "bytes-verified"
         }
       ],

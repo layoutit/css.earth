@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "miranda",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bb4ba2db6f1ed1ee6444327f7df9a1c7dd615574139b5f94267eff305a139db2"
+    "sha256": "d2918d4a498040bef63f06114835da0965fdde72e3cbfbb9601ad60fb8778c2e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -612,6 +612,64 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "a9cd3054c658c1826d1479ab3f3596ec21f15ee55565a99a6c785768e2a71315",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "MIRANDA_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "MIRANDA_nomenclature_center_pts.dbf",
+          "projection": "MIRANDA_nomenclature_center_pts.prj",
+          "metadata": "metadata_nomenclature_points_MIRANDA.xml"
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 180,
+        "output": "miranda-features.json",
+        "publicBase": "/scenes/miranda/",
+        "target": {
+          "className": "miranda-body"
+        },
+        "lensIds": [
+          "normal",
+          "elevation",
+          "geology"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 1,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 48,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        }
+      }
     }
   ],
   "sources": [
@@ -675,7 +733,7 @@
       "sha256": "70e1c06a87dbedf5c59d6f714626947b606c41a19cc659e66367e80b57b48a0c",
       "bytes": 33170078,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -746,7 +804,7 @@
       "sha256": "45149e3a69211d3199be6986734a6827663cff73b559b7104e9f864efbbba570",
       "bytes": 31117604,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -785,7 +843,7 @@
       "sha256": "29af000760d36c23883e88f4a5de39acbc45a9ed0c69a3e8747794b327a50fd8",
       "bytes": 35464,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -805,7 +863,80 @@
       "sha256": "ec2b46771b7c2a2425e67e634690a7d9db95b86d9b5b4f3c6504343a76b18077",
       "bytes": 15099,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "miranda-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "sha256": "d83314002237aa5455b78d1d7db03f1904dea4c05c48c7db516c486b6c067bf4",
+      "bytes": 1009,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-miranda-nomenclature-center-pts",
+      "path": "features/MIRANDA_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MIRANDA_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Miranda on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Miranda centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/MIRANDA/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      },
+      "sha256": "73f639b9b84aa49c1ef399f004ab4e1cc4444e24926c862709d626ff90e5b91e",
+      "bytes": 84340,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/MIRANDA_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MIRANDA_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "miranda-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "sha256": "6c31c6d7afd537b7e6e13475b1268b018ac9e6698013c0d48e23a3ef0bb0cfc3",
+      "bytes": 154,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -862,19 +993,19 @@
           "url": "/scenes/miranda/miranda-normal-thumbnail.webp",
           "bytes": 2732,
           "sha256": "5ad3ad0c4f2633a4ea648e34a702be25e4782d3b97de558d2593e2d60d2b7c5d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/miranda/miranda-normal-surface@2x.webp",
           "bytes": 2683924,
           "sha256": "7d497d404ae0b876d14547f382681cfd6bdaf0898cb0168ef6a88ebfef0fc711",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/miranda/miranda-normal-poles@2x.webp",
           "bytes": 101248,
           "sha256": "aa0122ac2e363919a43ad59922c9fa7a46e072c79f58b2e5e71380e5111d5f2e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -907,25 +1038,25 @@
           "url": "/scenes/miranda/miranda-elevation-thumbnail.webp",
           "bytes": 4690,
           "sha256": "8142242bde81c47cb0e0f841fc05b55d3fda3d1bbafa5251748deca610316dc9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/miranda/miranda-elevation-legend.webp",
           "bytes": 180,
           "sha256": "a61050d5ca54e9972808c8df55940f212c48dfa1bce97d6adb9ea43969a40362",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/miranda/miranda-elevation-surface@2x.webp",
           "bytes": 3374940,
           "sha256": "c275fb7465b05d6e71767521d9d75b40e76eca4bc45cd724a02916e56d926ba4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/miranda/miranda-elevation-poles@2x.webp",
           "bytes": 268828,
           "sha256": "ceb1348181eeb52e2e2c3147a90212064ad429cce957d2498619662d6ffacf2b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -958,19 +1089,19 @@
           "url": "/scenes/miranda/miranda-geology-thumbnail.webp",
           "bytes": 644,
           "sha256": "34573f97bdd52456deafda8918e8dfafc8f51a526a565dad88df97528ebd3217",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/miranda/miranda-geology-surface@2x.webp",
           "bytes": 84622,
           "sha256": "8e7e97616ad5546a0b51238b78bde7e249242448be052e6df64c501586cd92dd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/miranda/miranda-geology-poles@2x.webp",
           "bytes": 29738,
           "sha256": "214b12df33cf63e23940d096040be2e987c3bd3c87b73d74b892495463131227",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -993,8 +1124,42 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7118,
-          "sha256": "341849227b30854244ef2fbc37631854357cab4178396b84be5a8b9fe90fce43",
+          "bytes": 7236,
+          "sha256": "9ffe5c0c0e68b83cbc806215bc6f99417303643ec9accd863bca8e93b19e78b4",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 180,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "miranda-surface-features-source",
+        "usgs-gazetteer-miranda-nomenclature-center-pts",
+        "miranda-surface-map-frame"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/miranda/miranda-features.json",
+          "bytes": 72333,
+          "sha256": "d8627c6ec92641cbdc6cdbdccae70180d5a286c750ceb97e5a174aab0034ded0",
           "verification": "bytes-verified"
         }
       ],

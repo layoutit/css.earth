@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-surface-features@1",
+  "directory": "features",
+  "archive": "MOON_nomenclature_center_pts.zip",
+  "members": {
+    "attributes": "MOON_nomenclature_center_pts.dbf",
+    "projection": "MOON_nomenclature_center_pts.prj",
+    "metadata": "metadata_nomenclature_points_MOON.xml"
+  },
+  "surfaceMap": "presentation/surface-map.json",
+  "mapLeftEdgeLongitudeDeg": 180,
+  "output": "moon-features.json",
+  "publicBase": "/scenes/moon/",
+  "target": {
+    "className": "moon-body",
+    "withoutClassName": "moon-body-polar"
+  },
+  "lensIds": [
+    "surface",
+    "midnight-temperature",
+    "heat-anomalies",
+    "rock-abundance",
+    "topography",
+    "crust",
+    "silicate-signature",
+    "geology"
+  ],
+  "kinds": {
+    "point": [
+      "AA",
+      "FA"
+    ],
+    "linear": [
+      "RU",
+      "DO",
+      "VA",
+      "CA",
+      "FO"
+    ],
+    "region": [
+      "PL",
+      "PM",
+      "MO"
+    ]
+  },
+  "excludedTypeCodes": {
+    "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms.",
+    "SF": "Lettered satellite craters (7,063 rows such as “Tycho A”) repeat their parent crater’s name with a letter; the label layer keeps the parent names and leaves the lettered satellites to the Gazetteer."
+  },
+  "labelPolicy": {
+    "minimumZoomShare": 1,
+    "minimumDiameterPixels": 40,
+    "alwaysVisibleCount": 0,
+    "maximumVisible": 48,
+    "limbCosine": 0.12
+  },
+  "outline": {
+    "pieces": 256
+  }
+}

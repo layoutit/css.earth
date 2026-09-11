@@ -317,7 +317,7 @@
       "width": 1440,
       "height": 1440,
       "units": "Kilometres to nearest input measurement",
-      "coverage": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
+      "coverage": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument\u2019s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "west-positive",
@@ -358,7 +358,7 @@
       "width": 1440,
       "height": 1440,
       "units": "Kilometres to nearest input measurement",
-      "coverage": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
+      "coverage": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument\u2019s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "west-positive",
@@ -399,7 +399,7 @@
       "width": 1440,
       "height": 1440,
       "units": "Metres above 2575.0 km sphere",
-      "coverage": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
+      "coverage": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125\u00b0 (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "west-positive",
@@ -440,7 +440,7 @@
       "width": 1440,
       "height": 1440,
       "units": "Metres above 2575.0 km sphere",
-      "coverage": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
+      "coverage": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125\u00b0 (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "west-positive",
@@ -1679,6 +1679,84 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-titan-nomenclature-center-pts",
+      "path": "features/TITAN_nomenclature_center_pts.zip",
+      "expectedBytes": 833929,
+      "expectedSha256": "f4b6b33c557178e5b6d79c4689020f6bab38d4f9ff13eba81357e389aa3f4ae1",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/TITAN_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Titan on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Titan centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/TITAN/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "titan-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1000,
+      "expectedSha256": "63e6b5923ec2daa9e0ef87482a458cd9dbb34f3a5b4120d2b4c5eaf3ca5e6eae",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "titan-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1185,
+      "expectedSha256": "98cd85fa596c81addf6200d057a0074e19d44d96af58ddc2bb43eec809c58347",
+      "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "titan-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 152,
+      "expectedSha256": "30032741c351451501695e88e48dbd885e1881bb1586aa26bef6a82eb088f17f",
+      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -1722,8 +1800,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 18519,
-      "expectedSha256": "8b24b84b948b215263deb57ad0f22dab71d3a62c8cbbb6ccd6540eb653051c18"
+      "expectedBytes": 18771,
+      "expectedSha256": "ea46750b1a654aa2b999009928056505793a36b3b6cc30bee1265b251d82f94c"
     },
     {
       "path": "presentation/title-mark.json",

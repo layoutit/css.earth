@@ -24,6 +24,10 @@ No dated test report is cited in the existing source notes.
 
 ## Known problems
 
+- The Gazetteer shapefile export for Triton publishes a diameter for only 4 of its 63 adopted names (the four craters); the other 59 rows carry neither a diameter nor a usable extent in the export, so preparation tallies them as skipped (`prepared/features.json`) and only the four craters are labelled until the export carries sizes.
+
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Triton (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge was fixed by drawing Gazetteer rims under both edge hypotheses and keeping the one where Bubembe Regio, Boynne Sulci and the named cavi all falling inside the Voyager coverage of the cylindrical mosaic coincide with the imagery.
+
 The original unannotated LPI map runs from 180° W to 180° E, north at the top.
 Preparation rolls it to the shared 0–360° east-positive globe convention.
 The source's black northern region was not illuminated by Voyager. Exact black

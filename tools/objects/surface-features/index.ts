@@ -16,8 +16,8 @@ export type SurfaceFeatureKind = 'point' | 'linear' | 'region';
 /** Gazetteer descriptor-term codes and the label kind their geometry suggests: compact landforms get a point
  * marker and rim circle, elongated ones a linear label, extended terrains a region label. Recipes may override. */
 export const DEFAULT_TYPE_KINDS: Readonly<Record<string, SurfaceFeatureKind>> = Object.freeze({
-  AA: 'point', AS: 'point', CB: 'point', ER: 'point', FA: 'point', FR: 'point', LF: 'point', MA: 'point', PE: 'point', PU: 'point', SF: 'point', SA: 'point', TH: 'point',
-  MN: 'region', CH: 'region', AR: 'linear', CA: 'linear', CM: 'linear', DO: 'linear', FE: 'linear', FO: 'linear', FT: 'linear', LI: 'linear', RI: 'linear', RU: 'linear', SC: 'linear', SE: 'linear', SU: 'linear', VA: 'linear', VI: 'linear',
+  AA: 'point', AS: 'point', CB: 'point', ER: 'point', FA: 'point', FR: 'point', LF: 'point', MA: 'point', PE: 'point', PU: 'point', SF: 'point', SA: 'point', ST: 'point', TH: 'point',
+  MN: 'region', CH: 'region', LU: 'region', AR: 'linear', CA: 'linear', CM: 'linear', DO: 'linear', FE: 'linear', FM: 'linear', FO: 'linear', FT: 'linear', LI: 'linear', RI: 'linear', RU: 'linear', SC: 'linear', SE: 'linear', SU: 'linear', VA: 'linear', VI: 'linear',
   CO: 'region', CR: 'region', FL: 'region', IN: 'region', LA: 'region', LB: 'region', LG: 'region', LC: 'region', LN: 'region', MR: 'region', ME: 'region', MO: 'region', OC: 'region', PA: 'region', PL: 'region', PM: 'region', PR: 'region', RE: 'region', SI: 'region', TA: 'region', TE: 'region', UN: 'region', VS: 'region',
 });
 export type SurfaceFeatureOutline =
@@ -39,7 +39,7 @@ export interface SurfaceFeaturesConfig {
   readonly members: { readonly attributes: string; readonly projection: string; readonly metadata: string };
   readonly surfaceMap: string; readonly mapLeftEdgeLongitudeDeg: number;
   readonly output: string; readonly publicBase: string;
-  readonly target: { readonly className: string };
+  readonly target: { readonly className: string; readonly withoutClassName: string | null };
   readonly lensIds: readonly string[];
   readonly kinds: Readonly<Record<SurfaceFeatureKind, readonly string[]>>;
   readonly excludedTypeCodes: Readonly<Record<string, string>>;
@@ -141,7 +141,7 @@ export function parseSurfaceFeaturesConfig(value: unknown): SurfaceFeaturesConfi
     directory: relativePath(input.directory, 'features recipe directory'), archive: relativePath(input.archive, 'features recipe archive'),
     members: { attributes: relativePath(members.attributes, 'members.attributes'), projection: relativePath(members.projection, 'members.projection'), metadata: relativePath(members.metadata, 'members.metadata') },
     surfaceMap: relativePath(input.surfaceMap, 'features recipe surfaceMap'), mapLeftEdgeLongitudeDeg: finite(input.mapLeftEdgeLongitudeDeg, 'features recipe mapLeftEdgeLongitudeDeg'),
-    output, publicBase, target: { className: text(target.className, 'target.className') },
+    output, publicBase, target: { className: text(target.className, 'target.className'), withoutClassName: target.withoutClassName === undefined ? null : text(target.withoutClassName, 'target.withoutClassName') },
     lensIds: Object.freeze([...lensIds as string[]]), kinds: Object.freeze(kinds), excludedTypeCodes: Object.freeze({ ...excluded as Record<string, string> }), labelPolicy: Object.freeze(policy),
     outline: Object.freeze(outline), ...(traces ? { traces } : {}),
   });
@@ -242,7 +242,7 @@ const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest(
 export interface SurfaceFeaturePreparationContext {
   readonly objectId: string; readonly sourceDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string;
   readonly config: unknown; readonly maxEntries: number; readonly radiusKm: number; readonly meshRadiusUnits: number;
-  readonly tree: { readonly nodes: readonly { readonly className: string | null; readonly parent: number }[]; readonly scene: number };
+  readonly tree: { readonly nodes: readonly { readonly className: string | null; readonly parent: number; readonly style?: string }[]; readonly scene: number };
   readonly declaredLensIds: readonly string[];
 }
 
@@ -250,9 +250,17 @@ function unzipMember(archive: string, member: string): Uint8Array {
   return execFileSync('unzip', ['-p', archive, member], { maxBuffer: 64 * 1024 * 1024 });
 }
 
-function nodeIndex(tree: SurfaceFeaturePreparationContext['tree'], className: string): number {
-  const matches = tree.nodes.flatMap((node, index) => (node.className ?? '').split(/\s+/u).includes(className) ? [index] : []);
-  if (matches.length !== 1) throw new TypeError(`Surface feature target ${className} must name exactly one prepared node.`);
+export function nodeIndex(tree: SurfaceFeaturePreparationContext['tree'], { className, withoutClassName }: SurfaceFeaturesConfig['target']): number {
+  const matches = tree.nodes.flatMap((node, index) => { const classes = (node.className ?? '').split(/\s+/u); return classes.includes(className) && !(withoutClassName !== null && classes.includes(withoutClassName)) ? [index] : []; });
+  const label = `${className}${withoutClassName === null ? '' : ` without ${withoutClassName}`}`;
+  if (matches.length === 0) throw new TypeError(`Surface feature target ${label} must name a prepared node.`);
+  // A banded sphere splits one surface across sibling meshes that share a parent and an inline
+  // frame (the static lane's latitude bands); their common frame is read from the first band.
+  const first = tree.nodes[matches[0]!]!;
+  for (const index of matches.slice(1)) {
+    const node = tree.nodes[index]!;
+    if (node.parent !== first.parent || (node.style ?? '') !== (first.style ?? '')) throw new TypeError(`Surface feature target ${label} names ${matches.length} prepared nodes that do not share one frame.`);
+  }
   for (let index: number = matches[0]!; index !== -1; index = tree.nodes[index]!.parent) if (index === tree.scene) return matches[0]!;
   throw new TypeError('Surface feature target must belong to the prepared scene.');
 }
@@ -444,7 +452,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   await writeFile(resolve(context.publicDirectory, config.output), bytes);
   const plan: PreparedSurfaceFeaturePlan = {
     catalog: { url: `${config.publicBase}${config.output}`, bytes: bytes.length, sha256: sha256(bytes), count: features.length },
-    target: nodeIndex(context.tree, config.target.className), lensIds: config.lensIds, meshRadiusUnits: context.meshRadiusUnits, policy: config.labelPolicy,
+    target: nodeIndex(context.tree, config.target), lensIds: config.lensIds, meshRadiusUnits: context.meshRadiusUnits, policy: config.labelPolicy,
     outline: config.outline,
   };
   const descriptor = { schema: 'cssearth-prepared-features@1', objectId: context.objectId, ...plan.catalog, source: manifest.source, sourcePage: manifest.sourcePage,

@@ -10,12 +10,15 @@ Charon combines New Horizons monochrome and enhanced-color mosaics, a terrain mo
 | Enhanced color | [PDS nh_charon_color_mosaic::1.0](https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx) |
 | Bond albedo | [PDS nh_charon_bond::1.0](https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.lblx) |
 | Physical placement | JPL Horizons PLU060 and NAIF pck00011 |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/CHARON/target) Charon centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
 
 [Independent color-source inspection](source/validation/color-source-inspection.json) records numeric and missing-value anchors. It found about 60% area-weighted RGB coverage before interpolation. No dated test or browser run is cited.
 
 ## Known problems
+
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Charon (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge was fixed by drawing Gazetteer rims under both edge hypotheses and keeping the one where Dorothy, Nasreddin and the Mandjet/Argo chasmata rims on the New Horizons mosaic coincide with the imagery.
 
 - Monochrome values are relative brightness. Enhanced color is false color, with mixed resolution and no per-pixel uncertainty array.
 - Terrain post spacing of 300 m is not a 300 m accuracy claim. Missing areas remain gridded.

@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "eb5e099df1cdc80ee84fa3667b7073602702a70af9a9c3538885f508f147c4d6"
+    "sha256": "68948b8ca805a62055912561efd39ddb918f3097aa732b8f492acd78d3e77472"
   },
   "id": "moon",
   "properties": {
@@ -17,6 +17,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -56,12 +57,17 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "6b5ca65f263838194f6c28b2f5096dabf34b2aa93ccbb39d637d3babf2094c45"
+          "sha256": "4b5f0037859de0fe24e5d5e3c504623d1d779870fa643312952db571658f0310"
         },
         {
           "id": "physical",
           "path": "source/preparation/physical.json",
           "sha256": "8b653becc8e1cdbda5b2c87b0e3e4b53b9af1095c263aeca982383e6f3e76966"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "706e2452fc08417821f4be857cb3c6552099bcd157f065badf3e60f31ff37482"
         }
       ],
       "shape": {
@@ -123,7 +129,11 @@
           "source": "raster",
           "model": "lit"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 12000
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -158,7 +168,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "21760c73cd2158d26d8d19e72a39f53fba797a16b63c78a82aafe37dd503062f"
+        "sha256": "bcc7c646cc8fcc051c160aa9755cb86e8cc784205ad756b0957eb5e380ec70c0"
       }
     },
     "catalog": {

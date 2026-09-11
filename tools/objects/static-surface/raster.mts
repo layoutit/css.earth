@@ -38,7 +38,8 @@ export async function prepareObservationLenses({ sourceDirectory, publicDirector
     const elevation = plan.elevation ? decodeElevationGrid(await readFile(input), plan.elevation) : null;
     const scientific = plan.scientific ? await loadScienceSurface(dirname(input), {...plan.scientific, path: basename(input)}) : null;
     if (plan.scientific && (plan.elevation || plan.coverage || plan.presentation)) throw new Error('Scientific rasters require a single numeric interpretation.');
-    if (plan.elevation || plan.scientific) {
+    // Categorical lenses declare swatch legends in the controls; only numeric scales need a ramp image.
+    if (plan.elevation || (plan.scientific && !plan.scientific.categories)) {
       const width = 256, height = 16, data = Buffer.alloc(width * height * 3);
       for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
         let color: readonly number[];

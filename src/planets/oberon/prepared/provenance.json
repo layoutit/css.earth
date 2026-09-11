@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "oberon",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ec11a11c45e542aedc9dc92f72102b12e2e39943b5e4637ce4564671b4aab78e"
+    "sha256": "07255324753c99da49997f91b577588baff6372d0481a9bca01aad37efff96fe"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -268,6 +268,62 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "46761f0950fa1cdab91ab340e885b3f954362fb3be945e60fbe1a9dfce5074fb",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "OBERON_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "OBERON_nomenclature_center_pts.dbf",
+          "projection": "OBERON_nomenclature_center_pts.prj",
+          "metadata": "metadata_nomenclature_points_OBERON.xml"
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 180,
+        "output": "oberon-features.json",
+        "publicBase": "/scenes/oberon/",
+        "target": {
+          "className": "oberon-body"
+        },
+        "lensIds": [
+          "normal"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 1,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 48,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        }
+      }
     }
   ],
   "sources": [
@@ -331,7 +387,7 @@
       "sha256": "31699c5761b5b57e6e7e8eb7ff3da85293c5ffb2ea8aa6b60f3a795d8dbcc7e1",
       "bytes": 687286,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -358,7 +414,80 @@
       "sha256": "cd2fb8b0e5a1f7f2f12b6b10dd1ab7365be24b737a22ee58aeb13e8aecb81c4f",
       "bytes": 8168,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "oberon-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "sha256": "97db2fbece629a5b1d00e950c5a7504f3a3126c190f24f4c8f114ee9416bbf0e",
+      "bytes": 1004,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-oberon-nomenclature-center-pts",
+      "path": "features/OBERON_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/OBERON_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Oberon on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Oberon centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/OBERON/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      },
+      "sha256": "73ede2c87ccc1d2a9c478a9a638e8eeca338b0e99efdba38f9c6f6ce101c3217",
+      "bytes": 63359,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/OBERON_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/OBERON_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "oberon-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "sha256": "a7f7b2f1ea4265e5926348deb7ab8bf1a5736d6b1feb76d42ad3e77c0a15e183",
+      "bytes": 153,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -415,19 +544,19 @@
           "url": "/scenes/oberon/oberon-normal-thumbnail.webp",
           "bytes": 2024,
           "sha256": "932626e748e2d4a13041e28b569d68b3e6b22b784bfcf4f6eaa5145a3705340c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/oberon/oberon-normal-surface@2x.webp",
           "bytes": 692024,
           "sha256": "889a24ef1df21da317d41eefb8395aa3b1c41819d9a00b2b2dfe88a710d3f35a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/oberon/oberon-normal-poles@2x.webp",
           "bytes": 39620,
           "sha256": "d7b5a3da4779ed70c3aca89ddfd939a38dc7bb12bb051d36d56c809a4111b420",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -450,8 +579,42 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5947,
-          "sha256": "6d68c52559a0823764906a5365bc11a087574f118486bd9a27ffad6ef0b49758",
+          "bytes": 6065,
+          "sha256": "bc2f9693a6932df27d93d437fe3d25c3c330df90287a94fa839bda38d0718a5c",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 180,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "oberon-surface-features-source",
+        "usgs-gazetteer-oberon-nomenclature-center-pts",
+        "oberon-surface-map-frame"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/oberon/oberon-features.json",
+          "bytes": 14431,
+          "sha256": "462e183a8227206789d7c26f8db2d0dd11636d94b0cf03dcce1a07efc4145c70",
           "verification": "bytes-verified"
         }
       ],

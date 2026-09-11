@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0531ae9ff7fd6c902408b96c6881fec33e91266120832dd02d37979fc32abc77"
+    "sha256": "91de61f443b4600c4bda03e49e182c148851fb007e9f3b8ae5ac48dc23c71f49"
   },
   "id": "mars",
   "properties": {
@@ -17,6 +17,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -61,7 +62,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "a84ca43388d33a4db02ef6bc983deb6d60b48e9aab83f69420e723b05e7a3790"
+          "sha256": "746c72762e009ef03813a10f2835473d2dcec9caecdc02421e569582ebbc649f"
         },
         {
           "id": "material-delivery",
@@ -72,6 +73,11 @@
           "id": "retired-delivery",
           "path": "source/preparation/retired-delivery.json",
           "sha256": "702386b207e2023e88a60464d62d3a0181b929f5f2decede44a86814a5e7ac93"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "ba5861a3d68659b0f35174b97842558585f36d4c87d5bf611d74dfd51e41246b"
         }
       ],
       "shape": {
@@ -113,6 +119,10 @@
       "atmosphere": {
         "source": "atmosphere",
         "material": "lighting"
+      },
+      "features": {
+        "source": "features",
+        "maxEntries": 12000
       }
     },
     "worldFrame": {
@@ -148,7 +158,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6118b7bff28544c5ceca021a864993ab592ded89cae9657f6f623bb317fa23de"
+        "sha256": "aabb91beb3467ce99a6b2590968278753a1cb602cfd40d183dc8b4c72ccdc413"
       }
     },
     "catalog": {
