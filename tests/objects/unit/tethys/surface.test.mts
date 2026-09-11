@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import {observation} from '../observation.mts';
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
@@ -10,7 +11,7 @@ const root = new URL('../../../../', import.meta.url);
 const sourceRoot = new URL('src/planets/tethys/source/', root).pathname;
 
 test('Tethys elevation preserves source radius values and hemisphere orientation across three projections', async () => {
-  const config = JSON.parse(await readFile(`${sourceRoot}/preparation/terrestrial.json`));
+  const config = JSON.parse((await readFile(`${sourceRoot}/preparation/terrestrial.json`)).toString('utf8'));
   const elevation = await loadScienceSurface(sourceRoot, config.raster.scientific[0]);
   for (const region of ['eq', 'np', 'sp']) {
     const file = await fromFile(`${sourceRoot}/observations/tethys_${region}radius_g.tif`);
@@ -29,7 +30,7 @@ test('Tethys elevation preserves source radius values and hemisphere orientation
           latitude = sign * (90 - 2 * Math.atan(Math.hypot(easting, northing) / 1062000) * 180 / Math.PI);
         }
         const [values] = await image.readRasters({window: [x,y,x+1,y+1]});
-        assert.ok(Math.abs(elevation.sample(longitude, latitude) - (values[0] - 531000) / 1000) < 1e-8, `${region} cell ${x},${y}`);
+        assert.ok(Math.abs(required(elevation.sample(longitude, latitude)) - (values[0] - 531000) / 1000) < 1e-8, `${region} cell ${x},${y}`);
       }
     } finally {await file.close();}
   }
@@ -48,7 +49,7 @@ test('Tethys photographic maps retain their different source longitude origins a
   const monochrome = await sharp(`${sourceRoot}/observations/Tethys_Cassini_mosaic_global_293m.tif`)
     .greyscale().resize(width,height,{fit:'fill',kernel:'lanczos3'}).raw().toBuffer({resolveWithObject:true});
   const map = (await observation('tethys', 'normal', width, height)).data;
-  for (const [lat, lon] of [[30,230],[-14,353.9],[60,90],[-60,90],[0,180]]) {
+  for (const [lat, lon] of [[30,230],[-14,353.9],[60,90],[-60,90],[0,180]] as const) {
     const x = Math.floor(lon/360*width), y = Math.floor((90-lat)/180*height), sx = (x+width/2)%width;
     const gray = monochrome.data[(y*width+sx)*monochrome.info.channels];
     assert.ok(gray > 0, 'Comparison lies inside observed coverage');

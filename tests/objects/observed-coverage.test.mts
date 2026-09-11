@@ -34,7 +34,7 @@ test('interpolation with a missing contributor produces a neutral gap rather tha
 test('both polar projection conventions preserve unavailable poles instead of extending the observed boundary',()=>{
  const info={width:64,height:32,channels:3},data=Buffer.alloc(64*32*3,220),missing=new Uint8Array(64*32);
  missing.fill(1,0,64*4);missing.fill(1,64*28);
- for(const projection of ['latitude-linear','orthographic']){
+ for(const projection of ['latitude-linear','orthographic'] as const){
   const polar=prepareMeasuredPolarAtlas({data,info,missing},32,{projection,boundaryLatitudeDegrees:80,overlap:1.035});
   for(const pole of [0,1]){
    const o=(16*64+pole*32+16)*4;assert.ok([...polar.data.subarray(o,o+3)].every(v=>v>=80&&v<=116));assert.equal(polar.data[o+3],255);

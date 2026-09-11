@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import { runtimeDefinition } from "../../unit/mars/prepared-fixture.mts";
 import { objectControls } from "../../unit/mars/prepared-fixture.mts";
@@ -50,10 +51,10 @@ test("keeps Mars content free of Saturn and invented feature UI", () => {
 });
 
 test("wires every prepared Mars lens and only supported settings", () => {
-  assert.deepEqual(JSON.parse(panel).settings.controls,objectControls.settings.controls);
-  assert.deepEqual(objectControls.lenses.controls.map(({ id }) => id), PREPARED_MARS_LENSES.controls.map(({ id }) => id));
+  assert.deepEqual(JSON.parse(panel).settings.controls,required(objectControls.settings).controls);
+  assert.deepEqual(required(objectControls.lenses).controls.map(({ id }) => id), PREPARED_MARS_LENSES.controls.map(({ id }) => id));
   assert.equal(PREPARED_MARS_LENSES.controls.length, 3);
-  assert.deepEqual(objectControls.settings.controls.map(({ name }) => name), ["speed", "shadows"]);
+  assert.deepEqual(required(objectControls.settings).controls.map(({ name }) => name), ["speed", "shadows"]);
   assert.deepEqual(runtimeDefinition.controls, objectControls);
   assert.doesNotMatch(client, /querySelector\([^\n]*\.mars-(?:header|lenses|options|settings)/u);
   assert.equal(PLANET_SPEED_STATES.at(-1)?.label, "superfast");

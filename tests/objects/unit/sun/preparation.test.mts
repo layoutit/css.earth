@@ -1,3 +1,4 @@
+import {shape,array,text,number,optional,dictionary} from '../../../../tools/objects/terrestrial-layers/source-records.mts';
 import { readPreparedFixture } from '../../fixtures.mts';
 const PREPARED_SUN_LENSES = await readPreparedFixture('sun', 'lenses');
 const PREPARED_SUN_SCENE = await readPreparedFixture('sun', 'scene');
@@ -24,16 +25,16 @@ test("binds the exact Sun source and runtime closures", async () => {
     documentCount: 9,
   });
   const [manifest, review] = await Promise.all([
-    readFile(new URL("../../../../src/planets/sun/source/manifest.json", import.meta.url), "utf8").then(JSON.parse),
-    readFile(new URL("../../../../src/planets/sun/source/editorial/factsheet-review.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../../../../src/planets/sun/source/manifest.json", import.meta.url), "utf8").then(text=>JSON.parse(text)),
+    readFile(new URL("../../../../src/planets/sun/source/editorial/factsheet-review.json", import.meta.url), "utf8").then(text=>JSON.parse(text)),
   ]);
-  assert.ok(manifest.documents.some(({ path }) => path === "editorial/factsheet-review.json"));
+  assert.ok(shape({documents:array(shape({path:text}))})(manifest).documents.some(({path})=>path==="editorial/factsheet-review.json"));
   assert.equal(review.schema, "cssearth-factsheet-source-review@1");
   assert.equal(review.objectId, "sun");
   const factsUrl = "https://science.nasa.gov/sun/facts/";
   const cyclesUrl = "https://science.nasa.gov/heliophysics/focus-areas/solar-science/";
-  assert.equal(review.references.find(({ url }) => url === factsUrl)?.values["rotation-period"], "About 25 days");
-  const cycles = review.references.find(({ url }) => url === cyclesUrl);
+  assert.equal(shape({references:array(shape({url:text,values:optional(dictionary(text))}))})(review).references.find(({url})=>url===factsUrl)?.values?.["rotation-period"], "About 25 days");
+  const cycles=shape({references:array(shape({url:text,activityCycleYears:optional(number),magneticCycleYears:optional(number)}))})(review).references.find(({url})=>url===cyclesUrl);
   assert.equal(cycles?.activityCycleYears, 11);
   assert.equal(cycles?.magneticCycleYears, 22);
   const facts = [...PREPARED_SUN_PANEL.facts, ...PREPARED_SUN_PANEL.moreFacts];
@@ -41,7 +42,7 @@ test("binds the exact Sun source and runtime closures", async () => {
     ["rotation-period", "Equatorial rotation", "About 25 days", factsUrl],
     ["activity-cycle", "Activity cycle", "About 11 years", cyclesUrl],
     ["magnetic-cycle", "Magnetic cycle", "About 22 years", cyclesUrl],
-  ]) {
+  ] as const) {
     const fact = facts.find((entry) => entry.id === id);
     assert.equal(fact?.label, label);
     assert.equal(fact?.value, value);
@@ -97,7 +98,7 @@ test("publishes prepared Sun content, lenses, and scene", async () => {
   assert.deepEqual(context.focus.positionM, context.frame.originM);
   assert.equal(context.focus.radiusM, context.frame.bodyRadiusM);
   const sourceContext = JSON.parse(await readFile(new URL("../../../../src/planets/sun/source/navigation/universe.json", import.meta.url), "utf8"));
-  assert.deepEqual(context.bodies.map(body => body.id), sourceContext.bodies.map(body => body.id));
+  assert.deepEqual(shape({bodies:array(shape({id:text}))})(context).bodies.map(body=>body.id),shape({bodies:array(shape({id:text}))})(sourceContext).bodies.map(body=>body.id));
   assert.equal(context.camera.presentation.projection.model, "css-perspective-shared-with-sky");
   const descriptor = JSON.parse(await readFile(new URL("../../../../src/planets/sun/object.json", import.meta.url), "utf8"));
   assert.deepEqual(descriptor.properties.worldFrame, context.frame);

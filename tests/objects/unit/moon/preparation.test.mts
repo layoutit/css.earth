@@ -56,7 +56,7 @@ test("prepares sourced surface, numeric LOLA, preserved GRAIL, and Diviner lense
       [lens.polesUrl, 512, 128],
       [lens.poles2xUrl, 1024, 256],
       [lens.thumbnailUrl, 96, 96],
-    ]) {
+    ] as const) {
       const path = fileURLToPath(new URL(`../../../../public${url}`,
         import.meta.url));
       const metadata = await sharp(path).metadata();
@@ -65,14 +65,14 @@ test("prepares sourced surface, numeric LOLA, preserved GRAIL, and Diviner lense
   }
   const controls = JSON.parse(await readFile(new URL("../../../../src/planets/moon/prepared/controls.json", import.meta.url), "utf8"));
   for (const id of ["topography", "midnight-temperature", "heat-anomalies", "rock-abundance", "silicate-signature"]) {
-    const legend = controls.lenses.controls.find(lens => lens.id === id).legend;
+    const legend = controls.lenses.controls.find((lens: { id: string; }) => lens.id === id).legend;
     const metadata = await sharp(fileURLToPath(new URL(`../../../../public${legend.src}`, import.meta.url))).metadata();
     assert.deepEqual([metadata.width, metadata.height], [256, 16]);
   }
   for (const [url, width] of [
     [PREPARED_MOON_LENSES.material.one, 512],
     [PREPARED_MOON_LENSES.material.two, 1024],
-  ]) {
+  ] as const) {
     const path = fileURLToPath(new URL(`../../../../public${url}`,
       import.meta.url));
     const metadata = await sharp(path).metadata();

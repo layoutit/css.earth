@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -28,7 +29,7 @@ test("prepares only the three source-backed Mars lenses", () => {
 test("ships complete DPR surfaces, poles, thumbnails, and qualification",
   async () => {
     for (const lens of PREPARED_MARS_LENSES.controls) {
-      const assets = [
+      const assets: [string,number,number][] = [
         [lens.surfaceUrl, 2_080, 1_504],
         [lens.surface2xUrl, 4_160, 3_008],
         [lens.polesUrl, 512, 256],
@@ -37,7 +38,7 @@ test("ships complete DPR surfaces, poles, thumbnails, and qualification",
       ];
       for (const [url, width, height] of assets) {
         const assetPath = fileURLToPath(
-          new URL(url.split("/").at(-1), publicRoot),
+          new URL(required(url.split("/").at(-1)), publicRoot),
         );
         const metadata = await sharp(assetPath).metadata();
         assert.equal(metadata.width, width, `${url} width`);
@@ -55,12 +56,14 @@ test("declares MOLA false color and qualified THEMIS coverage", () => {
   const thermal = PREPARED_MARS_LENSES.controls.find(
     ({ id }) => id === "thermal",
   );
+  assert.ok(elevation); assert.ok(thermal);
   assert.equal(elevation.falseColor, true);
   assert.match(elevation.qualification, /MOLA elevation/u);
   assert.equal(thermal.falseColor, false);
   assert.match(thermal.qualification, /not a calibrated temperature retrieval/u);
-  assert.match(thermal.coveragePreparation, /no Viking gap fill/u);
+  assert.match(required(thermal.coveragePreparation), /no Viking gap fill/u);
   for (const lens of [elevation, thermal]) {
+    assert.ok(lens.polarPreparation);
     assert.equal(lens.polarPreparation.boundaryLatitudeDegrees, 87.1875);
     assert.equal(
       lens.polarPreparation.singularityStabilization.model,
@@ -76,7 +79,7 @@ test("switches prepared lenses without filters, canvas, or DOM growth", async ()
     readFile(new URL("../../../../src/renderers/css/styles/mars-surfaces.css", import.meta.url), "utf8"),
   ]);
   const { runtimeDefinition } = await import("../../unit/mars/prepared-fixture.mts");
-  assert.equal(runtimeDefinition.controls.lenses.defaultLens, PREPARED_MARS_LENSES.defaultLens);
+  assert.equal(required(runtimeDefinition.controls.lenses).defaultLens, PREPARED_MARS_LENSES.defaultLens);
   for (const lens of PREPARED_MARS_LENSES.controls) {
     const plan = resolvePreparedPresentation(runtimeDefinition, { selection: { ...initialObjectSelection(runtimeDefinition.controls), lensId: lens.id }, view: { sunViewDirection: [0,0,1],sceneMatrix:'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)' } });
     assert.ok(plan.required.includes(`surface:${lens.id}`));

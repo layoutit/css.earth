@@ -9,7 +9,7 @@ test('Titan keeps the dark northern seas at their independently mapped east long
   // A mirrored or half-turned globe loses this landmark contrast.
   const {data, info} = await observation('titan', 'normal');
   const {width, height} = info;
-  async function mean(latitude, longitude) {
+  async function mean(latitude: number, longitude: number) {
     const pixels = await sharp(data, {raw: info}).extract({
       left: Math.round(longitude / 360 * width) - 8,
       top: Math.round((90 - latitude) / 180 * height) - 8, width: 16, height: 16,

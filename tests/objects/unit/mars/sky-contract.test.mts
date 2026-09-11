@@ -97,7 +97,7 @@ test("prepares a separate clean-room Sun without Google image bytes", async () =
     PREPARED_MARS_SKY_SUN.distanceScaling
       .physicalDiskViewportWidthShare - 0.00529924054830196,
   ) < 1e-15);
-  for (const density of [1, 2]) {
+  for (const density of [1, 2] as const) {
     const descriptor = PREPARED_MARS_SKY_SUN.asset[`density${density}`];
     const bytes = await readFile(new URL(
       `../../../../public${descriptor.url}`,

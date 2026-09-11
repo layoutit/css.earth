@@ -11,19 +11,19 @@ import {prepareLayeredOblateObject,isLayeredOblateRecipe} from '../../tools/obje
 const objectDirectory=new URL('../../src/planets/saturn/',import.meta.url).pathname;
 
 test('oblate ray arithmetic preserves facing and positive-root conventions without body dispatch',()=>{
- for(const arithmetic of ['division','reciprocal'])for(const rootSelection of ['facing','positive']){
+ for(const arithmetic of ['division','reciprocal'] as const)for(const rootSelection of ['facing','positive'] as const){
   const options={equatorialRadius:3,polarRadius:2,arithmetic,rootSelection,includeDistance:true};
   assert.deepEqual(intersectViewRayWithEllipsoid([0,0,0],[0,0,1],options),{position:[0,0,2],normal:[0,0,1],distance:2,visibility:1});
   assert.equal(intersectViewRayWithEllipsoid([10,10,0],[0,0,1],options),null);
   assert.equal(intersectViewRayWithEllipsoid([0,0,0],[0,0,0],options),null);
  }
- assert.throws(()=>intersectViewRayWithEllipsoid([0,0,0],[0,0,1],{equatorialRadius:3,polarRadius:2,arithmetic:'body-name'}),/Unknown/);
+ assert.throws(()=>Reflect.apply(intersectViewRayWithEllipsoid,undefined,[[0,0,0],[0,0,1],{equatorialRadius:3,polarRadius:2,arithmetic:'body-name'}]),/Unknown/);
 });
 
 test('authored rotation order and pole winding remain explicit',()=>{
  const value=rotateSequence([1,0,0],[{axis:'z',degrees:90},{axis:'x',degrees:90}]);
  assert.ok(Math.abs(value[0])<1e-15&&Math.abs(value[1])<1e-15&&value[2]===1);
- assert.throws(()=>rotateSequence([0,0,1],[{axis:'w',degrees:0}]),/Invalid/);
+ assert.throws(()=>Reflect.apply(rotateSequence,undefined,[[0,0,1],[{axis:'w',degrees:0}]]),/Invalid/);
  const north=polarQuad({pole:'north',radius:2,z:3}),south=polarQuad({pole:'south',radius:2,z:-3});
  assert.deepEqual(north.vertices[0],[-2,-2,3]);assert.deepEqual(south.vertices[0],[-2,2,-3]);
  assert.deepEqual(north.uvs[0],[0,0]);assert.deepEqual(south.uvs[0],[0,1]);
@@ -31,7 +31,7 @@ test('authored rotation order and pole winding remain explicit',()=>{
 
 test('texture fitting preserves projected extent and does not mutate input',()=>{
  const matrix='1,0,0,0,0,1,0,0,0,0,1,0,7,8,9,1';
- const input={matrix,leafWidth:128,leafHeight:32,backgroundPosition:[-4,-6],backgroundSize:[512,256]};
+ const input: Parameters<typeof fitTextureGeometry>[0]={matrix,leafWidth:128,leafHeight:32,backgroundPosition:[-4,-6],backgroundSize:[512,256]};
  const result=fitTextureGeometry(input,64,64);
  assert.equal(result.matrix,'2,0,0,0,0,0.5,0,0,0,0,1,0,7,8,9,1');
  assert.deepEqual(result.backgroundPosition,[-2,-12]);assert.deepEqual(result.backgroundSize,[256,512]);assert.equal(input.matrix,matrix);
@@ -69,7 +69,7 @@ test('projective leaf layout is derived from pinned scoped CSS',()=>{
  const config={namespace:'demo',stylesheet:{path:'scoped.css',scope:'.scope ',bytes:Buffer.byteLength(stylesheet),sha256:createHash('sha256').update(stylesheet).digest('hex')}};
  const result=prepareLayeredLeafLayouts({scene:{interior:{shells:[{className:'shell'}]}},stylesheet,config});
  assert.deepEqual(result.classes.shell,{width:'64px',height:'64px',backgroundSize:'1024px 512px'});
- assert.throws(()=>prepareLayeredLeafLayouts({scene:{},stylesheet:stylesheet+' ',config}),/pin changed/);
+ assert.throws(()=>Reflect.apply(prepareLayeredLeafLayouts,undefined,[{scene:{},stylesheet:stylesheet+' ',config}]),/pin changed/);
 });
 
 test('full entry rejects canonical comparison output before any raster writes',async()=>{

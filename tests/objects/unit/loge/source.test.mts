@@ -13,7 +13,7 @@ test('Loge preserves the selected lower-limit elongation and explicit volume sca
   const config = irregularSatelliteConfig(await read('preparation/terrestrial.json'));
   const shape = parsePdsRadiusTable(await readFile(new URL('shape/ellipsoid.tab', root), 'utf8'), config.geometry.radialTerrain.grid);
   // Independent principal-axis anchors for the authored approximation (metres).
-  for (const [lon, lat, expected] of [[0,0,2463.5807461182167], [180,0,2463.5807461182167], [90,0,2368.8276404982857], [270,0,2368.8276404982857], [0,90,2368.8276404982857], [0,-90,2368.8276404982857]]) {
+  for (const [lon, lat, expected] of [[0,0,2463.5807461182167], [180,0,2463.5807461182167], [90,0,2368.8276404982857], [270,0,2368.8276404982857], [0,90,2368.8276404982857], [0,-90,2368.8276404982857]] as const) {
     assert.ok(Math.abs(requireFiniteNumber(shape.sample(lon, lat)) - expected) < .001, `${lon},${lat}`);
   }
   const major = requireFiniteNumber(shape.sample(0,0)), minor = requireFiniteNumber(shape.sample(90,0)), polar = requireFiniteNumber(shape.sample(0,90));

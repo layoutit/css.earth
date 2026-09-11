@@ -1,11 +1,12 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { runtimeDefinition } from "./prepared-fixture.mts";
 import { mountPreparedPresentation, resolvePreparedPresentation } from "../../../../src/renderers/css/dist/testing.js";
 import { preparedSelectionFixture, retainedPresentationFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 
-const pool = (f, id) => f.residency.stats().pools.find(pool => pool.id === id);
-async function directional(f) {
+const pool = (f:Awaited<ReturnType<typeof preparedSelectionFixture>>, id: string) => required(f.residency.stats().pools.find((pool: { id: string; }) => pool.id === id));
+async function directional(f:Awaited<ReturnType<typeof preparedSelectionFixture>>) {
   const enable = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true });
   await f.settle(); await enable;
   const view = { ...f.view, controlPitch: 63, sunViewDirection: [0, 0, 1], revision: 2 };
@@ -42,7 +43,7 @@ test("Neptune waits for the current camera row before committing a delayed lens"
     for (const job of firstJobs) { job.done = true; job.resolve(); } await f.flush();
     assert.equal(f.stage.dataset.lens, "normal");
     await f.settle(); assert.equal(await request, true);
-    const facts = resolvePreparedPresentation(runtimeDefinition, { selection: f.selection.state().committed, view }).materials.lighting;
+    const facts = resolvePreparedPresentation(runtimeDefinition, { selection: required(f.selection.state().committed), view }).materials.lighting;
     assert.equal(f.presentation.observe().materials.lighting.appliedRow, facts.row);
     assert.ok(f.residency.resources.has(`lighting:methane:${facts.row}`));
     assert.ok(pool(f, "lighting").nativeSlots <= 3);
@@ -58,7 +59,7 @@ test("Neptune A/B/A supersession retains active and latest pending assets only",
     const b = f.selection.dispatch({ kind: "lens", id: "near-infrared" }); await f.flush();
     const winner = f.selection.dispatch({ kind: "lens", id: "methane" }); await f.flush();
     assert.equal(pool(f, "variant").resident, 8);
-    assert.ok(pool(f, "variant").keys.every(key => key.endsWith(":normal") || key.endsWith(":methane")));
+    assert.ok(pool(f, "variant").keys.every((key: string) => key.endsWith(":normal") || key.endsWith(":methane")));
     await f.settle(); assert.deepEqual(await Promise.all([a, b, winner]), [false, false, true]);
     assert.equal(pool(f, "variant").resident, 4); assert.equal(f.stage.dataset.lens, "methane");
     assert.ok(pool(f, "lighting").nativeSlots <= 3); assert.deepEqual(f.errors, []);
@@ -109,8 +110,8 @@ test("Neptune fatal native publication cannot promote a partially applied select
 test("Neptune one native image cleanup failure cannot retain sibling owners", async () => {
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
-    const entry = runtimeDefinition.assets.entries.find(entry => entry.key === pool(f, "variant").keys[0]);
-    f.jobs.find(job => job.url === entry.url).image.removeAttribute = () => { throw new Error("native release failed"); };
+    const entry = required(runtimeDefinition.assets.entries.find(entry => entry.key === pool(f, "variant").keys[0]));
+    required(f.jobs.find(job => job.url === entry.url)).image.removeAttribute = () => { throw new Error("native release failed"); };
     const errors = f.lifetime.destroy(); assert.equal(errors.length, 1);
     assert.equal(f.residency.stats().images.entries.length, 0); assert.equal(f.listenerCount(), 0);
   } finally { f.restore(); }

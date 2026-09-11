@@ -7,7 +7,7 @@ import {loadPdsPlateShape} from '../../../../tools/objects/terrestrial-layers/ob
 const source = resolve(import.meta.dirname, '../../../../src/planets/hyperion/source');
 
 test('Hyperion released plate mesh preserves PDS units, axes and vertex indices', async () => {
-  const recipe = JSON.parse(await readFile(resolve(source, 'preparation/terrestrial.json')));
+  const recipe = JSON.parse((await readFile(resolve(source, 'preparation/terrestrial.json'))).toString('utf8'));
   const terrain = recipe.geometry.radialTerrain;
   const mesh = await loadPdsPlateShape(resolve(source, terrain.path), terrain.grid);
   // Independent NumPy reference: project every released triangle onto the plane
@@ -20,7 +20,7 @@ test('Hyperion released plate mesh preserves PDS units, axes and vertex indices'
     [270, 0, 123378.417948],
     [0, 90, 158242.000000],
     [0, -90, 159708.000000],
-  ]) {
+  ] as const) {
     const actual = mesh.sample(longitude, latitude);
     assert.ok(actual !== null && Math.abs(actual - expected) < 0.001,
       `${longitude}E ${latitude}N: expected ${expected}m, received ${actual}m`);

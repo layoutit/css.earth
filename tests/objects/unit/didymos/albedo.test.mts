@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
@@ -7,10 +8,10 @@ import { decodeFitsFacetField } from '../../../../tools/objects/terrestrial-laye
 
 const root = resolve(import.meta.dirname, '../../../../src/planets/didymos/source');
 const config = JSON.parse(await readFile(resolve(root, 'preparation/terrestrial.json'), 'utf8'));
-const lens = config.raster.scientific.find(lens => lens.id === 'albedo');
+const lens = config.raster.scientific.find((lens: { id: string; }) => lens.id === 'albedo');
 const mesh = await loadObjShape(resolve(root, lens.path), lens.grid);
 const bytes = await readFile(resolve(root, lens.facetField.path));
-const decode = input => decodeFitsFacetField(input, mesh, lens.facetField, lens.path);
+const decode = (input: Buffer<ArrayBufferLike>) => decodeFitsFacetField(input, mesh, lens.facetField, lens.path);
 
 test('DART facet values match independent binary-table and source-centroid anchors', () => {
   const field = decode(bytes);
@@ -22,7 +23,7 @@ test('DART facet values match independent binary-table and source-centroid ancho
   assert.equal(field.values[35000], 1.0044039487838745);
   assert.equal(field.values[49151], 1.0014300346374512);
   const sampler = createShapeSurfaceSampler(mesh, lens, undefined, field.values);
-  assert.equal(sampler.samplePoint([33.4933331857125, -338.809996843338, 18.386666973431932]).value, field.values[35000]);
+  assert.equal(required(sampler.samplePoint([33.4933331857125, -338.809996843338, 18.386666973431932])).value, field.values[35000]);
   assert.equal(sampler.samplePoint([53.223333011070906, 326.4099955558777, 177.906667192777]), null);
   assert.equal(sampler.samplePoint([10000, 0, 0]), null);
 });

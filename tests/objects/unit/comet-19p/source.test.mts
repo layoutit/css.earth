@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
@@ -25,17 +26,17 @@ test('MICAS original XYZ cubes register every reviewed USGS terrain post indepen
   let accepted = 0;
   for (let i = 0; i < mesh.positions.length; i += 53) {
     const sample = surface.samplePoint(mesh.positions[i].map(v => v * ratio));
-    if (sample.reason) continue;
+    if (sample.reason !== undefined) continue;
     accepted++;
     assert.equal(sample.gain, 1);
     assert.ok(sample.color.every(Number.isFinite));
-    assert.ok(sample.radiance >= .0007 && sample.radiance <= .018);
+    assert.ok(required(sample.radiance) >= .0007 && required(sample.radiance) <= .018);
   }
   assert.ok(accepted > 1000);
 });
 
 test('Borrelly height keeps its arbitrary plane datum after recentering the display', async () => {
-  const lens = config.raster.scientific.find(lens => lens.quantity === 'height');
+  const lens = config.raster.scientific.find((lens: { quantity: string; }) => lens.quantity === 'height');
   const surface = await loadImageDemScience(root, lens, mesh);
   const lowest = mesh.positions.reduce((a, b) => a[2] < b[2] ? a : b);
   const sample = surface.samplePoint(lowest);
@@ -48,7 +49,7 @@ test('USGS minus DLR sign, metres-to-kilometres and registered plane match indep
   // Independent NumPy inverse-affine and grid-triangle interpolation of the
   // released text tables, with the documented vertical offset applied once.
   const anchors = [{"sourcePoint":[1416,712,1501.2771],"dlrCoordinates":[141.00171038229865,91.22684647905024],"dlrHeight":1938.7599803153494,"differenceKm":-0.40000292977217017},{"sourcePoint":[200,1464,967.5896],"dlrCoordinates":[119.39760669149997,78.02012017492311],"dlrHeight":1005.0550022683456,"differenceKm":0.000014548274833671826},{"sourcePoint":[-2232,-3464,3914.161621],"dlrCoordinates":[76.77750614650347,165.5173078611534],"dlrHeight":3551.7436741046886,"differenceKm":0.3998978974384908}];
-  const surface = await loadImageDemScience(root, config.raster.scientific.find(l => l.id === 'difference'), mesh);
+  const surface = await loadImageDemScience(root, config.raster.scientific.find((l: { id: string; }) => l.id === 'difference'), mesh);
   for (const anchor of anchors) {
     const p = [...anchor.sourcePoint]; p[2] += mesh.imageGrid.zOffsetMeters;
     const actual = surface.samplePoint(p);

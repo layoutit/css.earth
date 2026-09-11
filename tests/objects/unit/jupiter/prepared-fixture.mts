@@ -1,1 +1,3 @@
-export {default as runtimeDefinition} from "../../../../src/planets/jupiter/prepared/runtime.json" with {type:"json"};
+import source from "../../../../src/planets/jupiter/prepared/runtime.json" with {type:"json"};
+import {parsePreparedObjectRuntime} from '../../../../src/renderers/css/dist/index.js';
+export const runtimeDefinition = parsePreparedObjectRuntime(source);

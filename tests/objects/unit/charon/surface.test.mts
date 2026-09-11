@@ -6,10 +6,10 @@ import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/s
 
 const root = new URL('../../../../src/planets/charon/source/', import.meta.url).pathname;
 test('Charon maps source longitude correctly and preserves observation and elevation gaps', async () => {
-  const config = JSON.parse(await readFile(`${root}/preparation/terrestrial.json`));
-  const manifest = JSON.parse(await readFile(`${root}/manifest.json`));
+  const config = JSON.parse((await readFile(`${root}/preparation/terrestrial.json`)).toString('utf8'));
+  const manifest = JSON.parse((await readFile(`${root}/manifest.json`)).toString('utf8'));
   const width = 360, height = 180;
-  const observation = await readObservation(root, manifest.inputs.find(x => x.lensId === 'normal'), config.raster.observations[0].validity, width, height);
+  const observation = await readObservation(root, manifest.inputs.find((x: { lensId: string; }) => x.lensId === 'normal'), config.raster.observations[0].validity, width, height);
   assert.equal(observation.missing[70 * width], 0, 'Encounter hemisphere at 0.5 E, 19.5 N is observed');
   assert.equal(observation.missing[170 * width], 1, 'Unobserved southern cap stays missing');
   assert.ok(observation.rgb[70 * width * 3] > 0);

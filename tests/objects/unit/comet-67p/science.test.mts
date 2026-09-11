@@ -1,3 +1,5 @@
+import {parseScalarMapLens,shape,text,number} from '../../../../tools/objects/terrestrial-layers/source-records.mts';
+import {required} from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
@@ -8,13 +10,14 @@ import { parseScalarMap, scalarMapIndex } from '../../../../tools/objects/terres
 import { colorForValue } from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 const root = new URL('../../../../', import.meta.url);
 const body = new URL('src/planets/comet-67p/', root);
-const json = async path => JSON.parse(await readFile(new URL(path, body)));
+const json = async (path: string|URL) => JSON.parse((await readFile(new URL(path, body))).toString('utf8'));
 const config = await json('source/preparation/terrestrial.json');
-const parsed = new Map();
-async function map(lens) {
+const parsed = new Map<string,ReturnType<typeof parseScalarMap>>();
+async function map(value: unknown) {
+  const lens={...parseScalarMapLens(value),...shape({id:text})(value)};
   if (!parsed.has(lens.id)) parsed.set(lens.id, parseScalarMap(await readFile(new URL('source/' + lens.path, body)),
     await readFile(new URL('source/' + lens.labelPath, body), 'utf8'), lens));
-  return parsed.get(lens.id);
+  return required(parsed.get(lens.id));
 }
 
 test('67P numeric units and orientation agree with independent published control points', async () => {
@@ -26,12 +29,12 @@ test('67P numeric units and orientation agree with independent published control
     ['albedo',16.5,24.5,.051,.0005], ['albedo',56,-12.5,.063,.0005], ['albedo',115,-11,.053,.0005],
     ['slope',16.5,24.5,17.99,.5], ['slope',115,-11,20.04,.5],
     ['absorption',56,-12.5,6.9,.05],
-  ];
+  ] as const;
   for (const [id, lon, lat, expected, tolerance] of anchors) {
-    const lens = config.raster.scientific.find(l => l.id === id), { data } = await map(lens);
+    const lens = config.raster.scientific.find((l: { id: string|number; }) => l.id === id), { data } = await map(lens);
     assert.ok(Math.abs(data[scalarMapIndex(lon, lat, lens.grid)] - expected) <= tolerance, `${id} ${lon},${lat}: published numeric anchor`);
   }
-  const ice = config.raster.scientific.find(l => l.id === 'ice'), { data, report } = await map(ice);
+  const ice = config.raster.scientific.find((l: { id: string; }) => l.id === 'ice'), { data, report } = await map(ice);
   assert.equal(ice.grid.latitudeFirst, -90);
   assert.equal(report.validZeroRows, 70957);
   assert.equal(report.maximum, 4, 'archive optical mixture fraction converts to percent, not 0.04 percent');
@@ -41,9 +44,9 @@ test('67P numeric units and orientation agree with independent published control
 test('67P VIRTIS atlases retain exact numeric colours and a hash-bound original-row index outside runtime', async () => {
   const { surfaces } = await json('prepared/surfaces.json'), runtime = await readFile(new URL('prepared/object.json', body), 'utf8');
   const assets = await json('runtime-assets.json');
-  for (const lens of config.raster.scientific.filter(lens => lens.format === 'pds3-scalar-map')) {
-    const surface = surfaces.find(s => s.id === lens.id), ref = surface.scalarMap.sampleSources;
-    const bytes = await readFile(new URL('prepared/' + ref.file, body)), index = JSON.parse(bytes);
+  for (const lens of config.raster.scientific.filter((lens: { format: string; }) => lens.format === 'pds3-scalar-map')) {
+    const surface = surfaces.find((s:{id:string}) => s.id === lens.id), ref = surface.scalarMap.sampleSources;
+    const bytes = await readFile(new URL('prepared/' + ref.file, body)), index = JSON.parse((bytes).toString('utf8'));
     assert.equal(bytes.length, ref.bytes); assert.equal(createHash('sha256').update(bytes).digest('hex'), ref.sha256);
     assert.equal(index.schema, 'cssearth-atlas-scalar-index@1'); assert.equal(index.encoding, 'gzip-u32le-base64');
     assert.equal(index.source.sha256, surface.source.sha256);
@@ -68,7 +71,7 @@ test('67P VIRTIS atlases retain exact numeric colours and a hash-bound original-
     assert.equal(accepted, transfer.sampledTexels - transfer.withheldTexels);
     assert.ok(compared > 200); assert.ok(transfer.withheldTriangleInteriorTexels > 0);
     if (lens.id === 'ice') assert.ok(zero > 1000, 'valid zero-ice cells remain visible');
-    assert.ok(!runtime.includes(index.data)); assert.ok(!assets.assets.some(a => a.filename === ref.file));
+    assert.ok(!runtime.includes(index.data)); assert.ok(!assets.assets.some((a:{filename:string}) => a.filename === ref.file));
     assert.equal(transfer.maximumAcceptedDistanceMeters, 50); assert.ok(transfer.maximumDistanceMeters <= 50);
   }
 });

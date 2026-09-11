@@ -1,9 +1,10 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import sharp from 'sharp';
 import { readPreparedFixture } from '../../fixtures.mts';
-const [scene, runtime] = await Promise.all(['scene', 'runtime'].map(name => readPreparedFixture('saturn', name)));
+const [scene, runtime] = await Promise.all([readPreparedFixture('saturn','scene'),readPreparedFixture('saturn','runtime')]);
 const css = await readFile(new URL('../../../../src/renderers/css/styles/saturn-surfaces.css', import.meta.url), 'utf8');
 
 test('retains all source longitudes without the unused visibility-bank machinery', () => {
@@ -14,8 +15,8 @@ test('retains all source longitudes without the unused visibility-bank machinery
     assert.equal(band.leaves.length, index === 0 || index === 15 ? 2 : 32);
     for (const leaf of band.leaves) {
       assert.equal(leaf.tag, 's');
-      assert.equal(leaf.projectiveTextureLayer.rasterScale, 2);
-      assert.match(leaf.projectiveTextureLayer.frameMatrix, /^[-\d.,e]+$/);
+      assert.equal(required(leaf.projectiveTextureLayer).rasterScale, 2);
+      assert.match(required(leaf.projectiveTextureLayer).frameMatrix, /^[-\d.,e]+$/);
     }
   }
   assert.equal(scene.bodyBands.flatMap(band => band.leaves).length, 452);
@@ -53,9 +54,9 @@ test('keeps axial tilt and latitude-band phase independent from camera input', (
 });
 
 test('uses the shared material track with prepared dense orbit addresses', () => {
-  const exterior = runtime.materials.find(track => track.id === 'exterior');
+  const exterior = required(runtime.materials.find((track: { id: string; }) => track.id === 'exterior'));
   assert.equal(exterior.frame.count, 256);
-  assert.equal(exterior.rotation.kind, 'ellipsoid');
+  assert.equal(required(exterior.rotation).kind, 'ellipsoid');
   assert.ok(exterior.banks.every(bank => bank.frames.length === 256));
   assert.doesNotMatch(JSON.stringify(runtime), /weatherPlayer|publishAtlas|publishFrame|createElement/);
   assert.match(css, /\.saturn-body\s*\{[^}]*animation-name:\s*saturn-body-spin;/su);

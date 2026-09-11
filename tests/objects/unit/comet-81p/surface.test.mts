@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
@@ -6,12 +7,12 @@ import { loadPdsPlateShape } from '../../../../tools/objects/terrestrial-layers/
 import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { preparePdsConstraintMap } from '../../../../tools/objects/terrestrial-layers/pds-constraint-map.mts';
 const root = resolve(import.meta.dirname, '../../../../src/planets/comet-81p');
-const json = async path => JSON.parse(await readFile(resolve(root, path)));
+const json = async (path: string) => JSON.parse((await readFile(resolve(root, path))).toString('utf8'));
 
 test('Wild 2 coverage material reproduces from plate flags and registers every source plate center', async () => {
   const profile = (await json('source/preparation/terrestrial.json')).geometry.radialTerrain;
   const mesh = await loadPdsPlateShape(resolve(root, 'source', profile.path), profile.grid);
-  const material = (await json('source/manifest.json')).inputs.find(input => input.id === 'model-surface');
+  const material = (await json('source/manifest.json')).inputs.find((input: { id: string; }) => input.id === 'model-surface');
   assert.equal(material.recipe.kind, 'plate-coverage');
   assert.deepEqual(await preparePdsConstraintMap(mesh, material.recipe), await readFile(resolve(root, 'source', material.path)));
   for (const [i, triangle] of mesh.indices.entries()) {
@@ -20,7 +21,7 @@ test('Wild 2 coverage material reproduces from plate flags and registers every s
     const latitude = Math.atan2(center[2], Math.hypot(center[0], center[1])) * 180 / Math.PI;
     const hit = mesh.hit(longitude, latitude);
     assert.ok(hit);
-    assert.equal(mesh.faceProvenance[hit.faceId] === 0, mesh.faceProvenance[i] === 0,
+    assert.equal(required(mesh.faceProvenance)[hit.faceId] === 0, required(mesh.faceProvenance)[i] === 0,
       'radial material projection must not exchange observed terrain and estimated plates at source centers');
   }
 });
@@ -33,8 +34,9 @@ test('Wild 2 closes the nucleus using published completion vertices and retains 
   });
   const terrain = await json('prepared/terrain.json');
   const meters = config.geometry.radiusKm * 1000 / config.geometry.radius;
-  const key = point => point.map(n => n.toFixed(4)).join(',');
+  const key = (point: number[]) => point.map((n: number) => n.toFixed(4)).join(',');
   const lookup = new Map(source.positions.map((point, i) => [key(point), i]));
+  assert.ok("vertexProvenance" in source && "coverage" in source);
   const fullObserved = source.positions.filter((_, i) => source.vertexProvenance[i] === 0);
   const matches = new Set();
   for (const point of observed.positions) {
@@ -53,8 +55,8 @@ test('Wild 2 closes the nucleus using published completion vertices and retains 
     model: 'pds-observed-ellipsoid-flags', sourceVertices: 8761, sourceFaces: 17518,
     observedVertices: 6432, ellipsoidVertices: 2329, observedFaces: 12364, ellipsoidFaces: 4338, connectingFaces: 816,
   });
-  const indices = terrain.faces.flatMap(face => face.vertices.map(vertex => {
-    const index = lookup.get(key(vertex.map(n => n * meters)));
+  const indices = terrain.faces.flatMap((face: { vertices: number[][]; }) => face.vertices.map((vertex: number[]) => {
+    const index = lookup.get(key(vertex.map((n: number) => n * meters)));
     assert.notEqual(index, undefined, 'every retained position belongs to the published full model');
     return index;
   }));

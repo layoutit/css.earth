@@ -1,3 +1,4 @@
+import {required} from '../../../../tools/test-values.mts';
 import { readPreparedFixture } from '../../fixtures.mts';
 const runtimeDefinition = await readPreparedFixture('moon', 'runtime');
 import assert from "node:assert/strict";
@@ -14,7 +15,7 @@ test("Moon keeps finite retained bands across every sourced lens", () => {
   try {
     const presentation = mountPreparedPresentation(f.stage, f.context, runtimeDefinition);
     const nodes = f.stage.querySelectorAll("*");
-    for (const lens of runtimeDefinition.controls.lenses.controls) {
+    for (const lens of required(runtimeDefinition.controls.lenses).controls) {
       const selection = { ...initialObjectSelection(runtimeDefinition.controls), lensId: lens.id };
       presentation.commitSelection({ selection, resources: f.resources });
       assert.equal(f.stage.dataset.lens, lens.id);
@@ -42,7 +43,7 @@ test("Moon presentation disposal preserves a replacement and continues through n
       mountPreparedPresentation(f.stage, f.context, runtimeDefinition);
       if (replacement) {
         f.stage.replaceChildren(f.document.createElement("div")); f.stage.dataset.lens = "replacement";
-      } else f.stage.dataset = new Proxy(f.stage.dataset, { deleteProperty() { throw new Error("metadata failed"); } });
+      } else Object.defineProperty(f.stage, "dataset", {value: new Proxy(f.stage.dataset, { deleteProperty() { throw new Error("metadata failed"); } })});
       const errors = f.lifetime.destroy();
       assert.equal(errors.length, replacement ? 0 : 1);
       assert.equal(f.stage.children.length, replacement ? 1 : 0);

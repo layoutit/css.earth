@@ -50,7 +50,7 @@ test("prepares complete DPR 1 and DPR 2 opaque surface texels", async () => {
     ["mars-surface@2x.webp", PREPARED_MARS_SCENE.assets.surface2x],
     ["mars-poles.webp", PREPARED_MARS_SCENE.assets.poles],
     ["mars-poles@2x.webp", PREPARED_MARS_SCENE.assets.poles2x],
-  ];
+  ] as const;
   for (const [name, descriptor] of pairs) {
     const bytes = await readFile(new URL(`../../../../public/scenes/mars/${name}`, import.meta.url));
     const metadata = await sharp(bytes).metadata();
