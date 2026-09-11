@@ -3,7 +3,7 @@ import test from "node:test";
 import { assertHomepageReachability } from "./seo-discovery.mts";
 
 const home = "http://127.0.0.1:4267/";
-const page = (route, links) => ({ url: new URL(route, home).href, links });
+const page = (route: string, links: string[]) => ({ url: new URL(route, home).href, links });
 
 test("discovers objects through multiple pages and resolves relative links at their source", () => {
   assert.doesNotThrow(() => assertHomepageReachability([
