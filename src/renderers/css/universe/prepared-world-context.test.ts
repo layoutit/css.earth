@@ -350,6 +350,25 @@ test('hidden labels keep circles pickable and hover reveals only that label and 
   expect(clock.frames.size).toBe(0);
 });
 
+test('a highlighted set reveals hidden labels and marks its retained groups until cleared', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  const group = find(root, 'contextGroup', 'mercury'), label = find(root, 'contextLabel', 'mercury');
+  const clock = root.ownerDocument.defaultView;
+  const nodes = all(root);
+  layer.setHiddenLabels(['mercury']); clock.advance(16); clock.advance(200);
+  expect(label.style.visibility).toBe('hidden');
+  layer.setHighlighted(['mercury']); clock.advance(16); clock.advance(200);
+  expect(label.style.visibility).toBe('');
+  expect(group.dataset.contextHighlight).toBe('true');
+  expect(root.dataset.contextHighlighting).toBe('true');
+  layer.setHighlighted([]); clock.advance(16); clock.advance(200);
+  expect(label.style.visibility).toBe('hidden');
+  expect(group.dataset.contextHighlight).toBeUndefined();
+  expect(root.dataset.contextHighlighting).toBeUndefined();
+  expect(all(root)).toEqual(nodes);
+  layer.destroy();
+});
+
 test('keyboard focus also reveals a hidden label and orbit, then retires them on blur', () => {
   const root = mount(1), layer = mounted.get(root)!, host = root.parentNode!;
   const circle = find(root, 'contextIndicator', 'mercury'), label = find(root, 'contextLabel', 'mercury');
