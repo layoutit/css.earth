@@ -200,10 +200,11 @@ test('the active band has enough retained copies and remains continuous across g
 
 test('rotation keeps geometry and texture resources stable while publishing leaf opacity', () => {
   const { runtime, document, meshes, resolver, host, before, camera } = mount(payload(3));
-  const leaves = meshes.flatMap(mesh => mesh.children), count = document.count, styles = leaves.map(leaf => { const { opacity, ...staticStyle } = leaf.style; return staticStyle; });
+  // Opacity and a zero-alpha copy's display are published presentation, not geometry.
+  const leaves = meshes.flatMap(mesh => mesh.children), count = document.count, styles = leaves.map(leaf => { const { opacity, display, ...staticStyle } = leaf.style; return staticStyle; });
   for (const direction of [[0, 0, 1], [1, 1, 1], [-1, .2, .5]] as const) runtime.publish(publication(direction));
   expect(document.count).toBe(count); expect(meshes.flatMap(mesh => mesh.children)).toEqual(leaves);
-  expect(leaves.map(leaf => { const { opacity, ...staticStyle } = leaf.style; return staticStyle; })).toEqual(styles); expect(resolver).toHaveBeenCalledTimes(9);
+  expect(leaves.map(leaf => { const { opacity, display, ...staticStyle } = leaf.style; return staticStyle; })).toEqual(styles); expect(resolver).toHaveBeenCalledTimes(9);
   expect(camera.style.perspectiveOrigin).toBe('calc(50% + 17px) calc(50% + -11px)');
   runtime.destroy(); runtime.destroy(); expect(host.children).toEqual([before]);
   runtime.publish(publication([1, 0, 0])); expect(document.count).toBe(count);

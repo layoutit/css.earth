@@ -5,8 +5,8 @@ import { required } from '../../tools/test-values.mts';
 import { createTestPage } from './browser-observations.mts';
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
+import type { Page } from 'playwright';
 import { mkdir, writeFile } from 'node:fs/promises';
-import { OBJECTS } from '../objects.mts';
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const output = 'output/playwright/navigation-selection';
 await mkdir(output, { recursive: true });
@@ -20,6 +20,14 @@ async function requireHeldRequest(observed:Promise<void>) {
     })]);
   } finally { clearTimeout(timer); }
 }
+// The shell's fragment cache is the only card source; poll it through the page's own module.
+async function requirePrefetchedFragment(page:Page, id:string) {
+  const deadline = Date.now() + 10000;
+  while (!(await page.evaluate(async id => (await import('/site/navigation-fragments.mts')).navigationFragments(window).peek(id) !== null, id))) {
+    if (Date.now() > deadline) throw new Error(`Intent did not prefetch the ${id} fragment.`);
+    await page.waitForTimeout(20);
+  }
+}
 try {
   for (const dpr of [1, 2]) {
     const context = await browser.newContext({ viewport: { width: 1280, height: 900 }, deviceScaleFactor: dpr });
@@ -27,13 +35,24 @@ try {
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(`${origin}/sun/`);
     await page.waitForFunction(() => window.__cssEarth?.ready);
-    assert.equal(await page.locator('template[data-object-card]').count(), OBJECTS.length);
+    assert.equal(await page.locator('template[data-object-card]').count(), 0, 'Routes ship no resident card bank');
+    assert.equal(await page.locator('template[data-object-card-preview]').count(), 1);
+    const fragmentRequests = new Map<string, number>();
+    page.on('request', request => {
+      const id = /^\/navigation\/([a-z0-9-]+)\/$/u.exec(new URL(request.url()).pathname)?.[1];
+      if (id) fragmentRequests.set(id, (fragmentRequests.get(id) ?? 0) + 1);
+    });
     let ceresHits=0;
     let sawCeres:(()=>void)|undefined,release:(()=>void)|undefined;
     const ceresRequested=new Promise<void>(resolve=>{sawCeres=resolve;});
     const hold=new Promise<void>(resolve=>{release=resolve;});
     await page.route('**/objects/ceres/*.json', async route => { ceresHits++; required(sawCeres)(); await hold; await route.continue(); });
     await page.locator('.planet-sidebar-search').fill('Ceres');
+    // Hover intent fetches the destination fragment before the click.
+    const hoverStarted = Date.now();
+    await page.locator('.planet-object-link[data-object-id="ceres"]').hover();
+    await requirePrefetchedFragment(page, 'ceres');
+    const prefetchMs = Date.now() - hoverStarted;
     await page.evaluate(() => {
       const panel = window.__cssearthTest.html('.planet-information-panel');
       window.__originalCard = [...panel.childNodes];
@@ -71,15 +90,34 @@ try {
     assert.equal(await page.locator('.planet-information-panel').evaluate(node => window.__cssearthTest.htmlElement(node).inert), false);
     assert.equal(await page.locator('.planet-stage').count(), 1);
     assert.equal(await page.evaluate(() => window.__cssearthTest.scene().mountedObjectCount), 1);
+    assert.equal(fragmentRequests.get('ceres'), 1, 'Preview and destination content share one fragment request');
     // Interrupted navigation restores the retained source card, not a stale destination.
     let venusHits=0;
     let sawVenus:(()=>void)|undefined,releaseVenus:(()=>void)|undefined;
     const venusRequested=new Promise<void>(resolve=>{sawVenus=resolve;});
     const holdVenus=new Promise<void>(resolve=>{releaseVenus=resolve;});
     await page.route('**/objects/venus/*.json', async route => { venusHits++; required(sawVenus)(); await holdVenus; await route.continue(); });
+    // A click without intent time shows registry facts at once; the card follows its fragment.
+    let releaseVenusCard:(()=>void)|undefined;
+    const holdVenusCard=new Promise<void>(resolve=>{releaseVenusCard=resolve;});
+    await page.route('**/navigation/venus/', async route => { await holdVenusCard; await route.continue(); });
     await page.locator('.planet-sidebar-search').fill('Venus');
     await page.locator('.planet-object-link[data-object-id="venus"]').click();
     assert.equal(await page.locator('.planet-information-panel .planet-title').first().getAttribute('aria-label'), 'Venus');
+    const registryCard = await page.evaluate(() => {
+      const panel = window.__cssearthTest.html('.planet-information-panel');
+      return { previews: panel.querySelectorAll(':scope > [data-card-preview]').length, visible: window.__cssearthTest.htmlElement(panel).checkVisibility(),
+        classification: panel.querySelector('[data-card-preview-classification]')?.textContent,
+        description: panel.querySelector('[data-card-preview-description]')?.textContent?.length ?? 0 };
+    });
+    assert.deepEqual({ ...registryCard, description: registryCard.description > 20 }, { previews: 1, visible: true, classification: 'Planet', description: true });
+    required(releaseVenusCard)();
+    await page.waitForFunction(() => {
+      const panel = window.__cssearthTest.html('.planet-information-panel');
+      return !panel.querySelector(':scope > [data-card-preview]') && panel.querySelector('button[name="lens"]') !== null
+        && panel.querySelector('.planet-title')?.getAttribute('aria-label') === 'Venus';
+    });
+    assert.equal(fragmentRequests.get('venus'), 1, 'The late card and destination content share one fragment request');
     await requireHeldRequest(venusRequested);
     assert.equal(venusHits, 1, 'Interrupted navigation also holds the actual scene request');
     await page.mouse.move(900, 450); await page.mouse.wheel(0, 40);
@@ -87,7 +125,7 @@ try {
     assert.equal(await page.locator('.planet-information-panel .planet-title').first().getAttribute('aria-label'), 'Ceres');
     assert.equal(await page.evaluate(() => [...window.__cssearthTest.html('.planet-information-panel').childNodes].every((node, i) => node === window.__selectedCard[i])), true);
     required(releaseVenus)();
-    results.push({ dpr, immediate, cardSwaps: 1 });
+    results.push({ dpr, immediate, cardSwaps: 1, prefetchMs, registryCard });
     await context.close();
   }
   assert.deepEqual(errors, []);

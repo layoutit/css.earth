@@ -10,6 +10,7 @@ import { worldRotationCss } from '../navigation/world-camera-math.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 import { createPreparedUniverse } from '../universe/prepared-universe-runtime.js';
 import { logarithmicFade } from '../universe/prepared-world-context.js';
+import { readCanonicalPointField } from '../preparation/stars/canonical-point-field-fixture.js';
 
 const starPublish = vi.hoisted(() => vi.fn());
 const spatialPublish = vi.hoisted(() => vi.fn());
@@ -19,7 +20,7 @@ const foregroundRects = vi.hoisted(() => [{ left: 100, top: 100, right: 150, bot
 vi.mock('../stars/prepared-point-field-runtime.js', () => ({ mountPreparedCssPointField: () => ({ publish: starPublish, inspect: () => ({}), setOccluder() {}, destroy() {} }) }));
 vi.mock('../universe/world-context-point-source.js', () => ({ mountWorldContextPointSource: () => null }));
 vi.mock('../universe/prepared-world-context.js', async importOriginal => ({ ...await importOriginal<typeof import('../universe/prepared-world-context.js')>(),
-  mountPreparedWorldContext: () => ({ publish: spatialPublish, inspect: () => [], selectObject() {}, backgroundExclusionRects: () => foregroundRects, destroy() {} }) }));
+  mountPreparedWorldContext: () => ({ publish: spatialPublish, inspect: () => [], opacityStats: () => ({}), publicationStats: () => ({}), selectObject() {}, backgroundExclusionRects: () => foregroundRects, destroy() {} }) }));
 
 const bases = [
   ['px', [1, 0, 0], [0, -1, 0], [0, 0, 1]], ['nx', [-1, 0, 0], [0, 1, 0], [0, 0, 1]],
@@ -125,7 +126,7 @@ test.each([
   const data = { ...volumeWithoutSky, ...(withSky ? { sky } : {}), resources: [
     ...volume.resources.filter(resource => !resource.path.startsWith('sky/')), ...(withSky ? resources : []),
   ] };
-  const stars = JSON.parse(readFileSync(new URL('objects/stellar-neighbourhood/prepared/stars.json', base), 'utf8')).data;
+  const stars = readCanonicalPointField();
   const document = new FakeDocument(), stage = document.createElement(), detail = document.createElement(); stage.appendChild(detail);
   const universe = createPreparedUniverse({ context, volume: data, stars, resolveResource: path => `/volume/${path}`, resolveStarResource: path => `/stars/${path}`, sprites: {} });
   const skyAssets = universe.assets.entries.filter(entry => entry.key.includes(':sky/'));

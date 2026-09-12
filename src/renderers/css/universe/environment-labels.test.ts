@@ -76,8 +76,13 @@ test('retained environment captions keep fixed 3D anchors while visibility, phys
   expect(nodes['outer-shell']!.textContent).toBe('Outer Shell');
   expect(nodes['deep-cloud']!.style.cssText).toContain('font:11px system-ui;color:#c2ccd8');
 
-  const measurements = Object.values(nodes).reduce((sum, node) => sum + (node as unknown as FakeElement).measurements, 0);
+  // Captions measure themselves when first shown, never at mount: measuring
+  // there flushed the whole starting page's layout for far-out labels.
+  const measured = () => Object.values(nodes).reduce((sum, node) => sum + (node as unknown as FakeElement).measurements, 0);
+  expect(measured()).toBe(0);
   const first = labels.publish({ world: world([0, 0, 300]), viewport, shellStats: [stats(.4), stats(.6)] });
+  const measurements = measured();
+  expect(measurements, 'Each shown caption reads its own width and height once').toBe(Object.keys(nodes).length * 2);
   expect(first).toHaveLength(3);
   expect(nodes['deep-cloud']!.style.transform).toBe('translate(0px,-33px) translate(-50%,-100%)');
   expect(nodes['deep-cloud']!.style.opacity).toBe('0');
@@ -95,7 +100,9 @@ test('retained environment captions keep fixed 3D anchors while visibility, phys
   clock.frame(100); expect(Number(nodes['deep-cloud']!.style.opacity)).toBeCloseTo(.75, 12);
   clock.frame(100); expect(Number(nodes['deep-cloud']!.style.opacity)).toBeCloseTo(.5, 12);
   labels.publish({ world: world([0, 0, 50]), viewport, shellStats: [stats(.4), stats(.6)] });
-  expect(nodes['deep-cloud']!.style.transform).toBe('translate(0px,-158px) translate(-50%,-100%)');
+  // Inside the volume the caption fades to nothing, so it keeps the last anchor
+  // it committed instead of tracking one it will not show.
+  expect(nodes['deep-cloud']!.style.transform).toBe('translate(0px,-58px) translate(-50%,-100%)');
   clock.frame(100); expect(Number(nodes['deep-cloud']!.style.opacity)).toBeCloseTo(.25, 12);
   expect(nodes['deep-cloud']!.style.visibility).toBe('');
   labels.publish({ world: world([0, 0, 150]), viewport, shellStats: [stats(.4), stats(.6)] });

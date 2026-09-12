@@ -2,14 +2,24 @@ import { expect, it } from 'vitest';
 import { createPerspectiveDolly, levelOfDetailFor } from './perspective-dolly.js';
 import scene from '../../../planets/mercury/prepared/scene.json';
 
-  it('crossfades geometry, billboard and marker without hiding the finer stage early', () => {
-    const lod = { model: 'silhouette-diameter-crossfade', billboardFadeStartDiscPixels: 20,
-      billboardFullDiscPixels: 14, markerFadeStartDiscPixels: 8, markerFullDiscPixels: 4.5 };
-    const samples = [40, 17, 13, 7, 4].map(diameter => levelOfDetailFor(lod, diameter));
-    expect(samples.map(sample => sample.stage)).toEqual(['geometry', 'crossfade', 'billboard', 'billboard', 'marker']);
-    expect(samples[1].billboardOpacity).toBe(.5);
-    for (const sample of samples) if (sample.markerOpacity > 0) expect(sample.billboardOpacity).toBe(1);
-  });
+it('crossfades mesh and marker in two stages, drawing no billboard disc', () => {
+  const lod = { model: 'silhouette-diameter-crossfade', billboardFadeStartDiscPixels: 20,
+    billboardFullDiscPixels: 14, markerFadeStartDiscPixels: 8, markerFullDiscPixels: 4.5 };
+  const samples = [40, 17, 13, 7, 4.5, 4].map(diameter => levelOfDetailFor(lod, diameter));
+  // A resolving body goes from its marker straight to its mesh: the marker fades
+  // in over the mesh, which stays painted until the marker is opaque.
+  expect(samples.map(sample => sample.stage)).toEqual(['geometry', 'geometry', 'geometry', 'geometry', 'marker', 'marker']);
+  // No billboard disc is drawn at any size.
+  expect(samples.map(sample => sample.billboardOpacity)).toEqual([0, 0, 0, 0, 0, 0]);
+  expect(samples.map(sample => sample.markerOpacity)).toEqual([0, 0, 0, 1 / 3.5, 1, 1]);
+  // The prepared billboard band only times the selected navigation marker's
+  // fade over the mesh, so it is complete well before the mesh hides.
+  expect(samples.map(sample => sample.proxyOpacity)).toEqual([0, .5, 1, 1, 1, 1]);
+  for (const sample of samples) {
+    expect(sample.stage).toBe(sample.markerOpacity >= 1 ? 'marker' : 'geometry');
+    if (sample.markerOpacity > 0) expect(sample.proxyOpacity).toBe(1);
+  }
+});
 
 
 it('publishes physical scene coordinates without CSS perspective-origin or focal shims', () => {
@@ -120,7 +130,7 @@ it('overview centering preserves the current view and only converges while dolly
 });
 
 
-it('retires only unresolved detail after its enclosing context ends, and restores the same scene', () => {
+it('draws the mesh only once it outgrows its proxy, and restores the same scene', () => {
   const view = { getComputedStyle: () => ({ perspective: '1247px', perspectiveOrigin: '720px 450px' }) };
   const make = () => ({ style: {}, ownerDocument: { defaultView: view },
     getBoundingClientRect: () => ({ width: 1440, height: 900, x: 0, y: 0, left: 0, top: 0 }) });
@@ -131,18 +141,20 @@ it('retires only unresolved detail after its enclosing context ends, and restore
     presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1, bodyRadiusM: 100 };
   const create = (originM: number[]) => createPerspectiveDolly({ cameraPlan: scene.camera, heliocentric: null,
     worldContext: { frame: { ...frame, originM }, bodyRadiusUnits: 100, kilometersPerUnit: .001,
-      maximumExtentUnits: 1e9, detailRetirement: { originM: frame.originM, distanceM: 1e7 } },
+      maximumExtentUnits: 1e9 },
     cameraElement: make(), skyElement: make(), stage: make(), sceneElement: element,
   } as unknown as Parameters<typeof createPerspectiveDolly>[0]);
   const dolly = create(frame.originM);
   const identity = { m11: 1, m21: 0, m31: 0, m12: 0, m22: 1, m32: 0, m13: 0, m23: 0, m33: 1 } as DOMMatrix;
-  dolly.setBodyCenter([0, 0, -1e6]);
-  expect(dolly.publish(identity, 'rotateZ(0deg)').levelOfDetail!.stage).toBe('marker');
-  expect(hidden, 'Marker LOD is not proof of a complete proxy').toBe(false);
+  dolly.setBodyCenter([0, 0, -1e5]);
+  const near = dolly.publish(identity, 'rotateZ(0deg)').levelOfDetail!;
+  expect(near.stage).toBe('marker');
+  expect(near.silhouetteDiameter).toBeGreaterThan(1.25);
+  expect(hidden, 'The opaque proxy stands for a marker-stage body').toBe(true);
+  expect(visibilityWrites).toBe(1);
   dolly.setBodyCenter([0, 0, -1e7]);
   const far = dolly.publish(identity, 'rotateZ(0deg)');
   expect(hidden).toBe(true);
-  expect(visibilityWrites).toBe(1);
   const firstTransform = element.style.transform;
   dolly.setBodyCenter([0, 0, -2e7]);
   const further = dolly.publish(identity, 'rotateZ(0deg)');
@@ -150,12 +162,7 @@ it('retires only unresolved detail after its enclosing context ends, and restore
   expect(further.projection.eyeFromScene[14]).toBe(-2e7);
   expect(far.projection.eyeFromScene[14]).toBe(-1e7);
   expect(visibilityWrites, 'Hidden camera publication does not churn visibility').toBe(1);
-  dolly.setBodyCenter([0, 0, -1e6]);
-  dolly.publish(identity, 'rotateZ(0deg)');
-  expect(hidden).toBe(false);
-  expect(visibilityWrites).toBe(2);
-  // An object outside this context's extent can still fill the viewport.
-  // Its local detail must not be retired just because the focus is far away.
+  // A resolved mesh returns, also outside the enclosing context's extent.
   const outside = create([1e10, 0, 0]);
   outside.setBodyCenter([0, 0, -1200]);
   expect(outside.publish(identity, 'rotateZ(0deg)').levelOfDetail!.stage).toBe('geometry');

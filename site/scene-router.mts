@@ -52,6 +52,7 @@ export function createSceneRouter({
   let motionEnabled = false;
   let heliosphereEnabled = false;
   let highContrastSky = false;
+  let asteroidBodiesEnabled = false;
   let asteroidOrbitsEnabled = false;
   let asteroidLabelsEnabled = false;
   let highlightedClassification: string | null = null;
@@ -127,7 +128,7 @@ export function createSceneRouter({
       if (!shellOwner) {
         const owner: { shell: Shell | null } = { shell: null };
         shellOwner = owner;
-        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, highContrastSky, heliosphereEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
+        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, highContrastSky, heliosphereEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
           onMotionChange(next) { if (shellOwner === owner && active) {
             motionEnabled = next === true; syncPlayback(); active?.viewUrl?.schedule();
           } },
@@ -138,6 +139,10 @@ export function createSceneRouter({
           onHeliosphereChange(next) { if (shellOwner === owner && active) {
             heliosphereEnabled = next === true;
             worldContextMount?.setHeliosphereEnabled?.(heliosphereEnabled);
+          } },
+          onAsteroidBodiesChange(next) { if (shellOwner === owner && active) {
+            asteroidBodiesEnabled = next === true;
+            worldContextMount?.setAsteroidBodiesEnabled?.(asteroidBodiesEnabled);
           } },
           onAsteroidOrbitsChange(next) { if (shellOwner === owner && active) {
             asteroidOrbitsEnabled = next === true;
@@ -158,6 +163,14 @@ export function createSceneRouter({
       if (content) shell.setObject(content);
       shell.setOverview?.(request ? Boolean(overviewScopeFromUrl(request.url)) : overview);
       if (active !== session) return;
+      if (content && request) {
+        // The prepared sidebar swap and the detail mount each restyle and lay out
+        // hundreds of nodes. Let the swap render in its own frame first, so an
+        // arriving flight does not drop a frame for both at once.
+        const rendered = await session.lifetime.wait(new Promise<void>(resolve =>
+          windowTarget.requestAnimationFrame(() => windowTarget.setTimeout(resolve, 0))));
+        if (rendered.cancelled || active !== session) return;
+      }
       publishSceneState();
       if (worldContextOwner) {
         const contextual = await session.lifetime.wait(ensureWorldContext());
@@ -440,7 +453,7 @@ export function createSceneRouter({
         preserveView: request.options.preserveView,
         cameraViewport: worldContextMount?.viewport,
         timing: request.timing,
-        presentWorld: worldContextMount ? (world, viewport) => worldContextMount?.publish(world, viewport) : null,
+        presentWorld: worldContextMount ? (world, viewport, options) => worldContextMount?.present(world, viewport, options) : null,
       });
       const loaded = await request.lifetime.wait(Promise.all([factoryTask, contentTask, preparationTask]));
       if (loaded.cancelled || pending !== request) return false;
@@ -613,6 +626,7 @@ export function createSceneRouter({
         worldContextMount = value;
         value.setHighContrastSky?.(highContrastSky);
         value.setHeliosphereEnabled?.(heliosphereEnabled);
+        value.setAsteroidBodiesEnabled?.(asteroidBodiesEnabled);
         value.setAsteroidOrbitsEnabled?.(asteroidOrbitsEnabled);
         value.setAsteroidLabelsEnabled?.(asteroidLabelsEnabled);
         value.setHighlightedClassification?.(highlightedClassification);

@@ -3,7 +3,6 @@
   display: block;
   width: 40px;
   height: 34px;
-  color: var(--planet-color);
 }
 
 .planet-navigation-marker > i {
@@ -11,27 +10,16 @@
   top: 50%;
   left: 50%;
   display: block;
-  width: var(--planet-size);
-  height: var(--planet-size);
   border-radius: 50%;
-  background: var(--planet-marker-url)
-    var(--planet-marker-position) center /
-    calc(var(--planet-marker-count) * 100%) 100% no-repeat;
+  background: 0 center / 100% 100% no-repeat;
   transform: translate(-50%, -50%);
 }
 
-.planet-navigation-marker.ringed::before {
+.planet-navigation-ring {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: calc(var(--planet-size) + var(--planet-ring-extra));
-  height: var(--planet-ring-height);
   box-sizing: border-box;
-  border: 1px solid var(--planet-ring-color, currentColor);
-  outline: var(--planet-ring-outline, none);
-  outline-offset: var(--planet-ring-outline-offset, 0);
+  border: 1px solid currentColor;
   border-radius: 50%;
-  opacity: var(--planet-ring-opacity, 0.65);
-  transform: translate(-50%, -50%) rotate(var(--planet-ring-angle));
-  content: "";
 }

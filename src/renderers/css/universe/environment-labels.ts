@@ -4,6 +4,7 @@ import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
+import type { OpacityClock } from '../stars/opacity-clock.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
 import type { PreparedSurfaceShellStats } from '../shell/prepared-shell-runtime.js';
 import type { PreparedCssSurfaceShell } from '../shell/types.js';
@@ -22,17 +23,20 @@ export interface EnvironmentLabelPublication {
 export interface EnvironmentLabelsRuntime {
   readonly root: HTMLElement;
   publish(publication: EnvironmentLabelPublication): readonly LabelScreenRect[];
+  /** Caption an optional shell mounted after startup. */
+  addShell(shell: PreparedCssSurfaceShell): void;
   labelExclusionRects(): readonly LabelScreenRect[];
   inspect(): Readonly<Record<string, HTMLElement>>;
   destroy(): void;
 }
 
 /** Retained captions for prepared environment geometry; this does not own a scene or navigation. */
-export function mountEnvironmentLabels({ host, before, volume, shells, names = {} }: {
+export function mountEnvironmentLabels({ host, before, volume, shells, names = {}, opacityClock }: {
   readonly host: HTMLElement;
   readonly before: Element;
   readonly volume: PreparedCssVolume;
   readonly shells: readonly PreparedCssSurfaceShell[];
+  readonly opacityClock?: OpacityClock;
   readonly names?: Readonly<Record<string, string>>;
 }): EnvironmentLabelsRuntime {
   if (!host?.ownerDocument || before?.parentNode !== host) throw new TypeError('Environment labels need a host and child insertion point.');
@@ -40,32 +44,33 @@ export function mountEnvironmentLabels({ host, before, volume, shells, names = {
   root.className = 'prepared-environment-labels';
   root.ariaHidden = 'true';
   root.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0';
-  const shellEntries = shells.map(shell => createEntry(document, 'shell', shell.id, authoredName(names[shell.id]) ?? humanizeId(shell.id), shell.frame));
+  const shellList = [...shells];
+  const shellEntries = shellList.map(shell => createEntry(document, 'shell', shell.id, authoredName(names[shell.id]) ?? humanizeId(shell.id), shell.frame));
   const volumeEntry = createEntry(document, 'volume', volume.id, authoredName(names[volume.id]) ?? humanizeId(volume.id), volume.frame);
   const entries = [...shellEntries, volumeEntry];
   for (const entry of entries) root.appendChild(entry.element);
   host.insertBefore(root, before);
   let destroyed = false, accepted: readonly LabelScreenRect[] = Object.freeze([]);
-  const fader = createOpacityFader(host.ownerDocument.defaultView!);
-  const measure = () => { if (!destroyed) for (const entry of entries) { entry.width = entry.element.offsetWidth; entry.height = entry.element.offsetHeight; } };
-  measure();
+  const fader = createOpacityFader(host.ownerDocument.defaultView!, opacityClock);
+  // Captions are measured when first shown, not at mount: reading their size
+  // then forced a layout of the whole starting page for labels drawn far out.
+  const measure = () => { for (const entry of entries) entry.measured = false; };
   const fonts = host.ownerDocument.fonts;
   fonts?.addEventListener('loadingdone', measure);
-  void fonts?.ready.then(measure);
   return Object.freeze({ root,
     publish(publication: EnvironmentLabelPublication) {
       if (destroyed) return accepted;
-      if ([volume.frame, ...shells.map(shell => shell.frame)].some(frame => publication.world.referenceFrame !== frame.referenceFrame ||
+      if ([volume.frame, ...shellList.map(shell => shell.frame)].some(frame => publication.world.referenceFrame !== frame.referenceFrame ||
           publication.world.epochJdTt !== frame.epochJdTt)) throw new TypeError('Environment labels and world camera use different prepared frames.');
       if (!(publication.viewport.focalPixels > 0) || publication.viewport.principalOffsetPixels.length !== 2 ||
           !publication.viewport.principalOffsetPixels.every(Number.isFinite)) throw new TypeError('Environment label viewport is invalid.');
       const width = publication.viewport.widthPixels ?? host.clientWidth;
       const height = publication.viewport.heightPixels ?? host.clientHeight;
       if (!(width > 0) || !(height > 0)) { accepted = hideAll(entries, fader); return accepted; }
-      if (publication.shellStats.length !== shells.length) throw new TypeError('Environment label shell statistics must align with prepared shells.');
+      if (publication.shellStats.length !== shellList.length) throw new TypeError('Environment label shell statistics must align with prepared shells.');
       const blockers = publication.blockerRects ?? [], next: LabelScreenRect[] = [];
-      for (let index = 0; index < shells.length; index++) {
-        const shell = shells[index]!, stats = publication.shellStats[index]!;
+      for (let index = 0; index < shellList.length; index++) {
+        const shell = shellList[index]!, stats = publication.shellStats[index]!;
         const visible = stats.visible && stats.opacity > 0 && stats.distanceM > shell.visibility.hiddenInsideM && stats.distanceM < shell.visibility.hiddenBeyondM;
         admit(shellEntries[index]!, visible ? stats.opacity : 0, publication, width, height, [...blockers, ...next], next, fader);
       }
@@ -76,6 +81,12 @@ export function mountEnvironmentLabels({ host, before, volume, shells, names = {
       admit(volumeEntry, volumeOpacity, publication, width, height, [...blockers, ...next], next, fader);
       accepted = Object.freeze(next);
       return accepted;
+    },
+    addShell(shell: PreparedCssSurfaceShell) {
+      if (destroyed) return;
+      const entry = createEntry(document, 'shell', shell.id, authoredName(names[shell.id]) ?? humanizeId(shell.id), shell.frame);
+      shellList.push(shell); shellEntries.push(entry); entries.push(entry);
+      root.insertBefore(entry.element, volumeEntry.element);
     },
     labelExclusionRects: () => accepted,
     inspect: () => Object.freeze(Object.fromEntries(entries.map(entry => [entry.id, entry.element]))),
@@ -89,7 +100,7 @@ export function mountEnvironmentLabels({ host, before, volume, shells, names = {
 }
 
 interface Entry { readonly kind: 'shell' | 'volume'; readonly id: string; readonly element: HTMLElement; readonly frame: DensityVolumeFrame;
-  width: number; height: number; targetOpacity: number; hideTimer: ReturnType<typeof setTimeout> | null; }
+  width: number; height: number; measured: boolean; targetOpacity: number; hideTimer: ReturnType<typeof setTimeout> | null; }
 
 function createEntry(document: Document, kind: Entry['kind'], id: string, name: string, frame: DensityVolumeFrame): Entry {
   const element = document.createElement('span');
@@ -98,13 +109,15 @@ function createEntry(document: Document, kind: Entry['kind'], id: string, name: 
   element.textContent = name;
   element.style.cssText = 'position:absolute;left:50%;top:50%;font:11px system-ui;color:#c2ccd8;white-space:nowrap;visibility:hidden;opacity:0;pointer-events:none';
   element.style.visibility = 'hidden'; element.style.opacity = '0';
-  return { kind, id, element, frame, width: 0, height: 0, targetOpacity: 0, hideTimer: null };
+  return { kind, id, element, frame, width: 0, height: 0, measured: false, targetOpacity: 0, hideTimer: null };
 }
 
 function admit(entry: Entry, opacity: number, publication: EnvironmentLabelPublication, width: number, height: number,
   blockers: readonly LabelScreenRect[], accepted: LabelScreenRect[], fader: ReturnType<typeof createOpacityFader>): void {
   const point = projectAnchor(entry, publication.world, publication.viewport, height);
   if (!point) { hideNow(entry, fader); return; }
+  if (!(opacity > 0)) { fadeTo(entry, 0, fader); return; }
+  if (!entry.measured) { entry.width = entry.element.offsetWidth; entry.height = entry.element.offsetHeight; entry.measured = true; }
   const [x, y] = point, bottom = y - LABEL_GAP_PX;
   const rect: LabelScreenRect = { left: x - entry.width / 2, right: x + entry.width / 2, top: bottom - entry.height, bottom };
   entry.element.style.transform = `translate(${format(x)}px,${format(bottom)}px) translate(-50%,-100%)`;

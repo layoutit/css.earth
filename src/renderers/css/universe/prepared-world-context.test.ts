@@ -7,27 +7,34 @@ import { expect, test, vi } from 'vitest';
 import { mountPreparedWorldContext, parsePreparedWorldContext, preparedVolumeOpacity } from './prepared-world-context.js';
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import { screenPicking } from '../navigation/screen-picking.js';
-import { createWorldContextPlanner } from './world-context-planner.js';
+import { createWorldContextFrameEncoder } from './world-context-frame.js';
+import { createWorldContextPlanner, CONTEXT_LINE_WIDTH } from './world-context-planner.js';
 import { OBJECTS } from '../../../../site/objects.mts';
 import { CONTEXT_ANNOTATION_PRIORITY } from '../../../../site/runtime-policy.mts';
 import { SYSTEM_VIEWS, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mts';
 
 class FakeElement extends EventTarget {
   readonly children: FakeElement[] = [];
-  readonly style = Object.assign({ opacity: '' } as Record<string, string>, {
+  styleWrites = 0;
+  readonly style = new Proxy(Object.assign({ opacity: '' } as Record<string, string>, {
     getPropertyValue: (name: string) => this.style[name] ?? '',
     setProperty: (name: string, value: string) => { this.style[name] = value; },
+  }), { set: (target, key, value) => { this.styleWrites++; Reflect.set(target, key, value); return true; } });
+  attributeWrites = 0;
+  readonly dataset: Record<string, string> = new Proxy({}, {
+    set: (target, key, value) => { this.attributeWrites++; Reflect.set(target, key, value); return true; },
   });
-  readonly dataset: Record<string, string> = {};
   parentNode: FakeElement | null = null;
   className = ''; textContent = ''; hidden = false; clientWidth = 0; clientHeight = 0;
   readonly ownerDocument: FakeDocument;
   readonly tagName: string;
   constructor(ownerDocument: FakeDocument, tagName: string) { super(); this.ownerDocument = ownerDocument; this.tagName = tagName; }
   measurements = 0;
-  getBoundingClientRect() { this.measurements++; return { width: this.textContent.length * 6, height: 14 }; }
-  setAttribute(): void {}
-  removeAttribute(): void {}
+  getBoundingClientRect() { this.measurements++; return { width: this.dataset.contextName.length * 6, height: 14 }; }
+  readonly attributes = new Map<string, string>();
+  setAttribute(name: string, value: string): void { this.attributes.set(name, value); }
+  getAttribute(name: string): string | null { return this.attributes.get(name) ?? null; }
+  removeAttribute(name: string): void { this.attributes.delete(name); }
   append(...entries: FakeElement[]): void { for (const entry of entries) this.insertBefore(entry, null); }
   appendChild(entry: FakeElement): FakeElement { this.append(entry); return entry; }
   insertBefore(entry: FakeElement, before: FakeElement | null): void {
@@ -37,9 +44,13 @@ class FakeElement extends EventTarget {
   }
   remove(): void { if (this.parentNode) { const index = this.parentNode.children.indexOf(this); if (index >= 0) this.parentNode.children.splice(index, 1); this.parentNode = null; } }
 }
-class Clock {
+class Clock extends EventTarget {
   now = 0; next = 0; frames = new Map<number, (time: number) => void>(); timers = new Map<number, { at: number; callback: () => void }>();
   performance = { now: () => this.now };
+  getComputedStyle = (element: FakeElement, pseudo: string) => {
+    expect(pseudo).toBe('::after'); element.measurements++;
+    return { width: `${element.dataset.contextName.length * 6}px`, height: '14px' };
+  };
   requestAnimationFrame = (callback: (time: number) => void) => { const id = ++this.next; this.frames.set(id, callback); return id; };
   cancelAnimationFrame = (id: number) => { this.frames.delete(id); };
   setTimeout = (callback: () => void, milliseconds: number) => { const id = ++this.next; this.timers.set(id, { at: this.now + milliseconds, callback }); return id; };
@@ -50,7 +61,11 @@ class Clock {
     for (const [id, timer] of [...this.timers]) if (timer.at <= this.now) { this.timers.delete(id); timer.callback(); }
   }
 }
-class FakeDocument { defaultView = new Clock(); createElement(tagName: string): FakeElement { return new FakeElement(this, tagName); } }
+class FakeDocument {
+  defaultView = new Clock();
+  createElement(tagName: string): FakeElement { return new FakeElement(this, tagName); }
+  createElementNS(_namespace: string, tagName: string): FakeElement { return this.createElement(tagName); }
+}
 
 const mounted = new WeakMap<FakeElement, ReturnType<typeof mountPreparedWorldContext>>();
 
@@ -66,11 +81,16 @@ test('approximate orbit cues stay on retained groups through selection and publi
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: prepared, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   const root = layer.root as unknown as FakeElement;
+  const world = { referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } } as const;
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] } as const;
+  // Orbit leaf blocks are built on first use and then retained.
+  layer.publish(world, viewport);
   const group = find(root, 'contextGroup', 'mercury'), count = all(root).length;
   layer.selectObject('mercury');
-  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  layer.publish(world, viewport);
   expect(group.dataset.contextPlacement).toBe('approximate');
-  expect(find(root, 'contextLabel', 'mercury').textContent).toBe('Mercury (approx)');
+  expect(find(root, 'contextLabel', 'mercury').dataset.contextName).toBe('Mercury (approx)');
+  expect(find(root, 'contextOrbit', 'mercury').dataset.contextPlacement).toBe('approximate');
   expect(find(root, 'contextGroup', 'venus').dataset.contextPlacement).toBeUndefined();
   expect(all(root).length).toBe(count);
   layer.destroy();
@@ -106,7 +126,60 @@ function find(root: FakeElement, key: string, value: string): FakeElement {
   const found = [root, ...all(root)].find(element => element.dataset[key] === value);
   if (!found) throw new Error(`Missing ${key}=${value}`); return found;
 }
+// Orbit leaf blocks are built on first use and then retained. Every earlier node
+// survives in order, and only orbit leaf blocks or their leaves may be added.
+function expectRetained(root: FakeElement, nodes: readonly FakeElement[]) {
+  const known = new Set(nodes), now = all(root), kept = now.filter(node => known.has(node));
+  expect(kept.length === nodes.length && kept.every((node, index) => node === nodes[index]), 'every retained node survives in order').toBe(true);
+  expect(now.every(node => known.has(node) || node.className === 'context-orbit-block' || node.parentNode?.className === 'context-orbit-block'),
+    'only orbit leaf blocks are added').toBe(true);
+}
+function captionName(element: { dataset: { contextName?: string } }): string {
+  const name = element.dataset.contextName;
+  if (name === undefined) throw new Error('A shown caption has no name.');
+  return name;
+}
+test('validated immutable context is shared, while modified transport still gets validated', () => {
+  const prepared = plan(1);
+  expect(parsePreparedWorldContext(prepared)).toBe(prepared);
+  expect(() => { Object.assign(prepared.bodies[0]!.orbit!.verticesM[0]!, { 0: 0 }); }).toThrow();
+  const transport = structuredClone(prepared);
+  const validated = parsePreparedWorldContext(transport);
+  expect(validated).not.toBe(transport);
+  expect(validated).toEqual(prepared);
+  Object.assign(transport.bodies[0]!.orbit!.verticesM[0]!, { 0: 0 });
+  expect(() => parsePreparedWorldContext(transport)).toThrow('align');
+  expect(parsePreparedWorldContext(validated)).toBe(validated);
+});
 function all(root: FakeElement): FakeElement[] { return root.children.flatMap(child => [child, ...all(child)]); }
+// Inspect the one real element's pseudo state and composed transform. These
+// helpers return values, never pretend the pseudos are independent DOM nodes.
+function annotationVisibility(element: HTMLElement | FakeElement, part: 'label' | 'indicator') {
+  return element.style.visibility !== 'hidden' && element.dataset[part === 'label' ? 'contextLabelVisible' : 'contextIndicatorVisible'] === 'true' ? '' : 'hidden';
+}
+// Per-frame motion and paint order belong to the bare mover that wraps each
+// marker. The marker keeps its stable style, attributes and two pseudos, so
+// every transform or z-index expectation reads the mover instead.
+function mover(element: HTMLElement | FakeElement): FakeElement {
+  const parent = (element as FakeElement).parentNode;
+  if (!parent) throw new Error('A marker outside its mover has no transform owner.');
+  return parent;
+}
+function billboardCenter(element: HTMLElement | FakeElement): number[] {
+  const moved = mover(element);
+  const [x, y] = moved.style.transform.match(/-?[\d.]+/g)!.map(Number);
+  const host = moved.parentNode!.parentNode!;
+  return [x - host.clientWidth / 2, y - host.clientHeight / 2];
+}
+function captionPosition(element: HTMLElement | FakeElement): number[] {
+  const [x, y] = billboardCenter(element);
+  const dx = Number(element.dataset.contextLabelX?.replace('px', ''));
+  const dy = Number(element.dataset.contextLabelY?.replace('px', ''));
+  return [x + dx, y + dy];
+}
+const paintedOrbitLeaf = (piece: HTMLElement | SVGPathElement) => piece.getAttribute('stroke-opacity') !== null
+  ? Boolean(piece.getAttribute('d')) : piece.style.visibility === '';
+const orbitLeafWeight = (piece: HTMLElement | SVGPathElement) => Number(piece.getAttribute('stroke-opacity') ?? piece.style.opacity);
 function mount(scale: number, requestPublication?: () => boolean) {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
@@ -180,10 +253,12 @@ test('inactive annotations retain emphasis until their reveal publication', () =
   layer.publish(world, viewport);
   clock.advance(1000);
   layer.publish(world, viewport);
-  const shown = layer.inspect().filter(body => body.indicator.style.visibility !== 'hidden');
+  const shown = layer.inspect().filter(body => body.billboard.style.visibility !== 'hidden');
   expect(shown.length).toBeGreaterThan(0);
-  for (const body of shown) expect(find(root, 'contextGroup', body.id).dataset.contextSelected).toBe('overview');
-  expect(all(root)).toEqual(nodes);
+  // Emphasis is two-state. The overview emphasizes nobody, so the Sun that was
+  // selected before the bodies were culled must publish 'false' on its reveal.
+  for (const body of shown) expect(find(root, 'contextGroup', body.id).dataset.contextSelected).toBe('false');
+  expectRetained(root, nodes);
   layer.destroy();
 });
 
@@ -195,15 +270,21 @@ test('a culled indicator with retained alpha is dormant, then gets current empha
     pose: { positionM: [0, 0, 1000] as const, orientationXyzw: [0, 0, 0, 1] as const } };
   const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const,
     widthPixels: 1, heightPixels: 1 };
+  // Emphasis is two-state, so the body has to be the emphasized one before it
+  // is culled for a dormant value to be distinguishable from a current one.
+  layer.selectObject('mercury');
+  layer.publish(world, { ...viewport, widthPixels: 800, heightPixels: 600 });
+  expect(group.dataset.contextSelected).toBe('true');
   layer.publish(world, viewport); clock.advance(1000);
-  expect(mercury.indicator.style.visibility).toBe('hidden');
-  expect(Number.parseFloat(mercury.indicator.style.opacity.slice(5))).toBeGreaterThan(0);
+  expect(mercury.billboard.style.visibility).toBe('hidden');
+  expect(Number(mercury.billboard.style.opacity)).toBe(0);
   const retained = group.dataset.contextSelected;
+  expect(retained).toBe('true');
   layer.setOverview(true); layer.publish(world, viewport);
   expect(group.dataset.contextSelected).toBe(retained);
   layer.publish(world, { ...viewport, widthPixels: 800, heightPixels: 600 });
-  expect(mercury.indicator.style.visibility).toBe('');
-  expect(group.dataset.contextSelected).toBe('overview');
+  expect(mercury.billboard.style.visibility).toBe('');
+  expect(group.dataset.contextSelected).toBe('false');
   layer.destroy();
 });
 
@@ -214,7 +295,7 @@ test('a resolved background sprite does not pick through its transparent square 
     pose: { positionM: [0, 0, 100], orientationXyzw: [0, 0, 0, 1] } },
   { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600 });
   const registry = screenPicking(root.parentNode! as unknown as HTMLElement);
-  const sun = layer.inspect().find(body => body.id === 'sun')!.marker;
+  const sun = layer.inspect().find(body => body.id === 'sun')!.billboard;
   expect(registry.pick(0, 0)).toBe(sun);
   expect(registry.pick(35, 35)).not.toBe(sun);
   layer.destroy();
@@ -232,13 +313,13 @@ test('camera viewport snapshots drive clipping and resize without reading host l
     pose: { positionM: [0, 0, 1_000], orientationXyzw: [0, 0, 0, 1] },
   }, { focalPixels: 400, principalOffsetPixels: [30, -20], widthPixels, heightPixels });
   publish(800, 600);
-  expect(mercury.indicator.style.visibility).toBe('');
+  expect(mercury.billboard.style.visibility).toBe('');
   publish(40, 600);
-  expect(mercury.indicator.style.visibility).toBe('hidden');
+  expect(mercury.billboard.style.visibility).toBe('hidden');
   publish(800, 600);
-  expect(mercury.indicator.style.visibility).toBe('');
+  expect(mercury.billboard.style.visibility).toBe('');
   publish(800, 10);
-  expect(mercury.indicator.style.visibility).toBe('hidden');
+  expect(mercury.billboard.style.visibility).toBe('hidden');
   layer.destroy();
 });
 
@@ -246,16 +327,16 @@ test('hidden orbit selection leaves other orbits intact and retains the same bod
   const root = mount(1), layer = mounted.get(root)!, nodes = all(root);
   const target = find(root, 'contextOrbit', 'mercury'), other = find(root, 'contextOrbit', 'venus');
   const visibleTarget = target.style.opacity, visibleOther = other.style.opacity;
-  expect(visibleTarget).not.toBe('calc(0 * var(--context-line-opacity, 1))');
+  expect(visibleTarget).not.toBe('0');
   layer.setHiddenOrbits(['mercury']);
   root.ownerDocument.defaultView.advance(200);
-  expect(target.style.opacity).toBe('calc(0 * var(--context-line-opacity, 1))');
+  expect(target.style.opacity).toBe('0');
   expect(target.style.pointerEvents).toBe('none');
   expect(target.dataset.objectNavigate).toBeUndefined();
   expect(other.style.opacity).toBe(visibleOther);
   expect(find(root, 'contextLabel', 'mercury').style.visibility).toBe('');
-  expect(find(root, 'contextIndicator', 'mercury').style.visibility).toBe('');
-  expect(all(root)).toEqual(nodes);
+  expect(find(root, 'contextBody', 'mercury').style.visibility).toBe('');
+  expectRetained(root, nodes);
   layer.setNavigationInFlight(true);
   layer.setHiddenOrbits([]);
   expect(target.style.opacity).toBe(visibleTarget);
@@ -264,7 +345,7 @@ test('hidden orbit selection leaves other orbits intact and retains the same bod
   expect(target.style.opacity).toBe(visibleTarget);
   expect(target.dataset.objectNavigate).toBe('mercury');
   expect(other.style.opacity).toBe(visibleOther);
-  expect(all(root)).toEqual(nodes);
+  expectRetained(root, nodes);
   layer.destroy();
 });
 
@@ -282,32 +363,36 @@ test('hover-only trails reveal the full orbit and keep their circle and label be
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600 });
   const root = layer.root as unknown as FakeElement, nodes = all(root);
-  const circle = find(root, 'contextIndicator', 'mercury'), label = find(root, 'contextLabel', 'mercury');
+  const circle = find(root, 'contextBody', 'mercury'), label = find(root, 'contextLabel', 'mercury');
   const orbit = find(root, 'contextOrbit', 'mercury'), other = find(root, 'contextOrbit', 'venus');
   for (const hovered of [false, true, false]) {
     circle.dataset.objectHovered = String(hovered);
     host.dispatchEvent(new Event('objecthoverchange'));
     document.defaultView.advance(16); document.defaultView.advance(200);
-    expect(circle.style.visibility).toBe('');
-    expect(label.style.visibility).toBe('');
-    expect(orbit.style.opacity === 'calc(0 * var(--context-line-opacity, 1))').toBe(!hovered);
+    expect(annotationVisibility(circle, 'indicator')).toBe('');
+    expect(annotationVisibility(label, 'label')).toBe('');
+    expect(orbit.style.opacity === '0').toBe(!hovered);
     if (hovered) {
       const visiblePieces = layer.inspect().find(body => body.id === 'mercury')!.orbit.filter(piece => piece.style.visibility === '');
       expect(visiblePieces.length).toBeGreaterThan(5);
       expect(visiblePieces.every(piece => Number(piece.style.opacity) === 1)).toBe(true);
     }
     expect(orbit.dataset.objectNavigate).toBeUndefined();
-    expect(orbit.style.pointerEvents).toBe('none');
-    expect(other.style.opacity).toBe('calc(0 * var(--context-line-opacity, 1))');
+    // The stage picker owns every hit. A paint node that was never navigable
+    // keeps only the inert pointer policy it declared when it was mounted.
+    expect(orbit.style.cssText).toContain('pointer-events:none');
+    expect(orbit.style.pointerEvents ?? 'none').toBe('none');
+    expect(other.style.opacity).toBe('0');
   }
-  expect(all(root)).toEqual(nodes);
+  // Hover builds the full orbit's leaf blocks on first use.
+  expectRetained(root, nodes);
   layer.destroy();
 });
 
 test('hidden labels keep circles pickable and hover reveals only that label and orbit without camera movement', () => {
   const root = mount(1), layer = mounted.get(root)!, nodes = all(root);
   const clock = root.ownerDocument.defaultView, host = root.parentNode!;
-  const circle = find(root, 'contextIndicator', 'mercury');
+  const circle = find(root, 'contextBody', 'mercury');
   const label = find(root, 'contextLabel', 'mercury');
   const orbit = find(root, 'contextOrbit', 'mercury');
   const other = find(root, 'contextOrbit', 'venus');
@@ -315,36 +400,36 @@ test('hidden labels keep circles pickable and hover reveals only that label and 
   layer.setHiddenOrbits(['mercury', 'venus']);
   layer.setHiddenLabels(['mercury', 'venus']);
   clock.advance(200);
-  expect(label.style.visibility).toBe('hidden');
-  expect(circle.style.visibility).toBe('');
+  expect(annotationVisibility(label, 'label')).toBe('hidden');
+  expect(annotationVisibility(circle, 'indicator')).toBe('');
   expect(circle.dataset.objectNavigate).toBe('mercury');
-  expect(sunLabel.style.visibility).toBe('');
+  expect(annotationVisibility(sunLabel, 'label')).toBe('');
   circle.dataset.objectHovered = 'true';
   host.dispatchEvent(new Event('objecthoverchange'));
   clock.advance(16); clock.advance(200);
-  expect(label.style.visibility).toBe('');
+  expect(annotationVisibility(label, 'label')).toBe('');
   expect(label.dataset.objectNavigate).toBe('mercury');
-  expect(orbit.style.opacity).not.toBe('calc(0 * var(--context-line-opacity, 1))');
+  expect(orbit.style.opacity).not.toBe('0');
   expect(all(orbit).some(piece => piece.tagName === 's' && piece.style.visibility === '' &&
     piece.parentNode?.style.display === 'contents')).toBe(true);
   // A temporarily revealed orbit cannot keep itself hovered after leaving the circle.
   expect(orbit.dataset.objectNavigate).toBeUndefined();
   expect(orbit.style.pointerEvents).toBe('none');
-  expect(other.style.opacity).toBe('calc(0 * var(--context-line-opacity, 1))');
+  expect(other.style.opacity).toBe('0');
   delete circle.dataset.objectHovered;
   host.dispatchEvent(new Event('objecthoverchange'));
   clock.advance(16); clock.advance(200);
-  expect(label.style.visibility).toBe('hidden');
-  expect(orbit.style.opacity).toBe('calc(0 * var(--context-line-opacity, 1))');
+  expect(annotationVisibility(label, 'label')).toBe('hidden');
+  expect(orbit.style.opacity).toBe('0');
   expect(circle.dataset.objectNavigate).toBe('mercury');
   layer.setHiddenLabels([]); clock.advance(200);
-  expect(label.style.visibility).toBe('');
-  expect(orbit.style.opacity).toBe('calc(0 * var(--context-line-opacity, 1))');
+  expect(annotationVisibility(label, 'label')).toBe('');
+  expect(orbit.style.opacity).toBe('0');
   layer.setHiddenOrbits([]);
   layer.setHiddenLabels(['mercury']); clock.advance(200);
-  expect(label.style.visibility).toBe('hidden');
+  expect(annotationVisibility(label, 'label')).toBe('hidden');
   expect(orbit.dataset.objectNavigate).toBe('mercury');
-  expect(all(root)).toEqual(nodes);
+  expectRetained(root, nodes);
   layer.destroy();
   host.dispatchEvent(new Event('objecthoverchange'));
   expect(clock.frames.size).toBe(0);
@@ -355,14 +440,16 @@ test('a highlighted set reveals hidden labels and marks its retained groups unti
   const group = find(root, 'contextGroup', 'mercury'), label = find(root, 'contextLabel', 'mercury');
   const clock = root.ownerDocument.defaultView;
   const nodes = all(root);
+  // The caption is this marker's own pseudo-element, so its visibility is the
+  // published attribute the style reads, not a style property of a label node.
   layer.setHiddenLabels(['mercury']); clock.advance(16); clock.advance(200);
-  expect(label.style.visibility).toBe('hidden');
+  expect(label.dataset.contextLabelVisible).toBe('false');
   layer.setHighlighted(['mercury']); clock.advance(16); clock.advance(200);
-  expect(label.style.visibility).toBe('');
+  expect(label.dataset.contextLabelVisible).toBe('true');
   expect(group.dataset.contextHighlight).toBe('true');
   expect(root.dataset.contextHighlighting).toBe('true');
   layer.setHighlighted([]); clock.advance(16); clock.advance(200);
-  expect(label.style.visibility).toBe('hidden');
+  expect(label.dataset.contextLabelVisible).toBe('false');
   expect(group.dataset.contextHighlight).toBeUndefined();
   expect(root.dataset.contextHighlighting).toBeUndefined();
   expect(all(root)).toEqual(nodes);
@@ -371,15 +458,15 @@ test('a highlighted set reveals hidden labels and marks its retained groups unti
 
 test('keyboard focus also reveals a hidden label and orbit, then retires them on blur', () => {
   const root = mount(1), layer = mounted.get(root)!, host = root.parentNode!;
-  const circle = find(root, 'contextIndicator', 'mercury'), label = find(root, 'contextLabel', 'mercury');
+  const circle = find(root, 'contextBody', 'mercury'), label = find(root, 'contextLabel', 'mercury');
   const clock = root.ownerDocument.defaultView;
   layer.setHiddenOrbits(['mercury']); layer.setHiddenLabels(['mercury']);
   Object.assign(root.ownerDocument, { activeElement: circle });
   host.dispatchEvent(new Event('focusin')); clock.advance(16); clock.advance(200);
-  expect(label.style.visibility).toBe('');
+  expect(annotationVisibility(label, 'label')).toBe('');
   Object.assign(root.ownerDocument, { activeElement: null });
   host.dispatchEvent(new Event('focusout')); clock.advance(16); clock.advance(200);
-  expect(label.style.visibility).toBe('hidden');
+  expect(annotationVisibility(label, 'label')).toBe('hidden');
   layer.destroy();
 });
 
@@ -387,7 +474,7 @@ test('camera publication consumes interaction changes without polling retained D
   const root = mount(1), layer = mounted.get(root)!, host = root.parentNode!;
   const group = find(root, 'contextGroup', 'mercury');
   const label = find(root, 'contextLabel', 'mercury');
-  const circle = find(root, 'contextIndicator', 'mercury');
+  const circle = find(root, 'contextBody', 'mercury');
   let hovered: string | undefined, focused: FakeElement | null = null;
   let hoverReads = 0, focusReads = 0;
   Object.defineProperty(group.dataset, 'objectHovered', { get() { hoverReads++; return hovered; } });
@@ -402,7 +489,7 @@ test('camera publication consumes interaction changes without polling retained D
   host.dispatchEvent(new Event('objecthoverchange'));
   // A camera sample can arrive before the scheduled annotation callback.
   publish();
-  expect(label.style.visibility).toBe('');
+  expect(annotationVisibility(label, 'label')).toBe('');
   expect(hoverReads).toBe(1); expect(focusReads).toBe(1);
   root.ownerDocument.defaultView.advance(16);
   expect(hoverReads).toBe(1); expect(focusReads).toBe(1);
@@ -411,11 +498,11 @@ test('camera publication consumes interaction changes without polling retained D
   host.dispatchEvent(new Event('objecthoverchange'));
   host.dispatchEvent(new Event('focusin'));
   publish(1e31); publish();
-  expect(label.style.visibility).toBe('');
+  expect(annotationVisibility(label, 'label')).toBe('');
   expect(hoverReads).toBe(2); expect(focusReads).toBe(2);
   focused = null; host.dispatchEvent(new Event('focusout'));
   publish(); root.ownerDocument.defaultView.advance(200);
-  expect(label.style.visibility).toBe('hidden');
+  expect(annotationVisibility(label, 'label')).toBe('hidden');
   expect(hoverReads).toBe(3); expect(focusReads).toBe(3);
   layer.destroy();
   host.dispatchEvent(new Event('objecthoverchange'));
@@ -503,13 +590,14 @@ test('prepared planetary systems retain moon orbits with a small selected planet
     const publish = (radii: number) => layer.publish({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
       pose: { positionM: [body.positionM[0], body.positionM[1], body.positionM[2] + radii * body.radiusM], orientationXyzw: [0, 0, 0, 1] } },
       { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600 });
-    const orbit = layer.inspect().find(body => body.id === moon)!.orbit;
+    // Orbit leaves are built on first use, so read the retained leaves after each publication.
+    const orbit = () => layer.inspect().find(body => body.id === moon)!.orbit;
     // The planet spans about 20px, or 3.3% of this viewport: the moon system is readable.
     publish(40);
-    expect(orbit.some(piece => piece.style.visibility === ''), `${planet} moon system at overview distance`).toBe(true);
+    expect(orbit().some(paintedOrbitLeaf), `${planet} moon system at overview distance`).toBe(true);
     // A close-up still retires orbit lines when the selected planet fills the screen.
     publish(2);
-    expect(orbit.every(piece => piece.style.visibility === 'hidden'), `${planet} close-up`).toBe(true);
+    expect(orbit().every(piece => !paintedOrbitLeaf(piece)), `${planet} close-up`).toBe(true);
   }
   layer.destroy();
 });
@@ -539,17 +627,17 @@ test.each([...SYSTEM_VIEWS.keys()].filter(id => id !== 'sun'))('%s moon orbits s
       layer.previewSelection(selection);
       for (const active of [true, false]) {
         layer.setNavigationInFlight(active);
-        const circle = find(root, 'contextIndicator', [...memberIds][0]!);
+        const circle = find(root, 'contextBody', [...memberIds][0]!);
         circle.dataset.objectHovered = String(active);
         host.dispatchEvent(new Event('objecthoverchange'));
         document.defaultView.advance(16);
-        const pieces = moons.flatMap(moon => moon.orbit.filter(piece => piece.style.visibility === ''));
+        const pieces = moons.flatMap(moon => moon.orbit.filter(paintedOrbitLeaf));
         expect(pieces.length).toBeGreaterThan(0);
-        expect(pieces.every(piece => Number(piece.style.opacity) === 1)).toBe(true);
+        expect(pieces.every(piece => orbitLeafWeight(piece) === 1)).toBe(true);
       }
     }
   }
-  expect(all(root)).toEqual(nodes);
+  expectRetained(root, nodes);
   layer.destroy();
 });
 
@@ -571,9 +659,9 @@ test('initial Jupiter system framing makes the four large moons and their labels
   layer.publish(target, viewport); document.defaultView.advance(200);
   for (const id of ['io', 'europa', 'ganymede', 'callisto']) {
     const moon = layer.inspect().find(body => body.id === id)!;
-    expect(moon.indicator.style.visibility, `${id} circle`).toBe('');
-    expect(moon.label.style.visibility, `${id} label`).toBe('');
-    expect(moon.orbit.some(piece => piece.style.visibility === ''), `${id} orbit`).toBe(true);
+    expect(moon.billboard.style.visibility, `${id} circle`).toBe('');
+    expect(moon.billboard.style.visibility, `${id} label`).toBe('');
+    expect(moon.orbit.some(paintedOrbitLeaf), `${id} orbit`).toBe(true);
   }
   layer.destroy();
 });
@@ -634,7 +722,7 @@ test('a prepared object outside the navigation menu renders and selects using it
     { focalPixels: 400, principalOffsetPixels: [0, 0] });
   expect(find(root, 'contextBody', 'new-object').dataset.objectNavigate).toBe('new-object');
   layer.selectObject('new-object');
-  expect(all(root)).toEqual(nodes);
+  expectRetained(root, nodes);
   layer.destroy();
 });
 
@@ -655,7 +743,7 @@ test('an orbitless prepared object renders and navigates without manufacturing o
   marker.dispatchEvent(new Event('click'));
   expect(selections).toEqual(['future-object']);
   layer.selectObject('future-object');
-  expect(all(root)).toEqual(nodes);
+  expectRetained(root, nodes);
   expect(layer.inspect().every(body => body.orbit.length === 0)).toBe(true);
   for (const orbit of [null, {}, { runtimeEphemeris: true }]) {
     expect(() => parsePreparedWorldContext({ ...source, bodies: [{ ...body, orbit }] })).toThrow();
@@ -676,7 +764,7 @@ test('an orbit may centre on an orbitless prepared parent while remaining acycli
 test('projects retained markers, culls focus-occluded bodies, and keeps physical scale invariant', () => {
   const near = mount(1), far = mount(1e12);
   const nearSun = find(near, 'contextBody', 'sun'), nearMercury = find(near, 'contextBody', 'mercury'), nearVenus = find(near, 'contextBody', 'venus');
-  expect(nearSun.style.transform).toContain('translate(30px,-20px)');
+  expect(mover(nearSun).style.transform).toContain('translate(430px,280px)');
   expect(nearMercury.style.visibility).toBe('');
   expect(nearVenus.style.visibility).toBe('hidden');
   const nearOrbit = mounted.get(near)!.inspect().find(body => body.id === 'mercury')!.orbit.filter(element => element.style.visibility === '');
@@ -686,21 +774,22 @@ test('projects retained markers, culls focus-occluded bodies, and keeps physical
     expect(Math.abs(values[4]!)).toBeLessThanOrEqual(400);
     expect(Math.abs(values[5]!)).toBeLessThanOrEqual(300);
   }
-  expect(nearMercury.style.transform).toBe(find(far, 'contextBody', 'mercury').style.transform);
+  expect(mover(nearMercury).style.transform).toBe(mover(find(far, 'contextBody', 'mercury')).style.transform);
   expect(nearOrbit.length).toBe(mounted.get(far)!.inspect().find(body => body.id === 'mercury')!.orbit.filter(element => element.style.visibility === '').length);
 });
 
 test('camera updates retain fixed stroke styles and only publish changed orbit picking policy', () => {
   const root = mount(1), layer = mounted.get(root)!;
   const orbit = find(root, 'contextOrbit', 'mercury');
-  const indicator = find(root, 'contextIndicator', 'mercury');
+  const indicator = find(root, 'contextBody', 'mercury');
   const orbitWrites = vi.spyOn(orbit.style, 'setProperty');
   const indicatorWrites = vi.spyOn(indicator.style, 'setProperty');
   const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [30, -20] });
   publish(1100); publish(1200);
-  expect(orbitWrites).not.toHaveBeenCalled(); expect(indicatorWrites).not.toHaveBeenCalled();
+  expect(orbitWrites).not.toHaveBeenCalled();
+  expect(indicatorWrites).not.toHaveBeenCalled();
   expect(orbit.dataset.objectNavigate).toBe('mercury');
   layer.setHiddenOrbits(['mercury']);
   expect(orbitWrites).not.toHaveBeenCalled();
@@ -722,10 +811,10 @@ test('orbit chords stop at the circular indicator on both sides of the centered 
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [30, -20] });
   const mercury = layer.inspect().find(body => body.id === 'mercury')!;
-  expect(mercury.indicator.style.visibility).toBe('');
-  expect(mercury.indicator.style.width).toBe('16px');
-  expect(mercury.indicator.style.transform).toBe('translate(70px,-20px) translate(-50%,-50%)');
-  expect(mercury.marker.style.transform).toContain('translate(70px,-20px)');
+  expect(mercury.billboard.style.visibility).toBe('');
+  expect(mercury.billboard.style.width).toBe('16px');
+  expect(mercury.center).toEqual([70, -20]);
+  expect(mover(mercury.billboard).style.transform).toContain('translate(470px,280px)');
   const edges: number[][] = [];
   for (const piece of mercury.orbit.filter(piece => piece.style.visibility === '')) {
     const [dx, dy, , , x, y] = piece.style.transform.slice(7, -1).split(',').map(Number);
@@ -737,30 +826,31 @@ test('orbit chords stop at the circular indicator on both sides of the centered 
   }
   expect(edges.some(([, y]) => y > -20)).toBe(true);
   expect(edges.some(([, y]) => y < -20)).toBe(true);
-  expect(find(root, 'contextIndicator', 'venus').style.visibility).toBe('hidden');
+  expect(find(root, 'contextBody', 'venus').style.visibility).toBe('hidden');
   layer.destroy();
 });
 
 test('body circles fade with apparent size, remain clickable, and reuse their nodes', () => {
   const root = mount(1), layer = mounted.get(root)!, nodes = all(root);
-  const indicator = find(root, 'contextIndicator', 'mercury');
+  const indicator = find(root, 'contextBody', 'mercury');
   const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [100, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [0, 0] });
   publish(100);
-  expect(indicator.style.visibility).toBe('hidden');
+  expect(annotationVisibility(indicator, 'indicator')).toBe('hidden');
   expect(indicator.style.pointerEvents).toBe('none');
   publish(140);
-  expect(parseFloat(indicator.style.opacity.replace('calc(', ''))).toBeGreaterThan(0);
-  expect(parseFloat(indicator.style.opacity.replace('calc(', ''))).toBeLessThan(1);
+  expect(Number(indicator.style.opacity)).toBeGreaterThan(0);
+  expect(Number(indicator.style.opacity)).toBeLessThan(1);
   publish(200);
-  expect(parseFloat(indicator.style.opacity.replace('calc(', ''))).toBeGreaterThan(0.98);
+  expect(Number(indicator.style.opacity)).toBeGreaterThan(0.98 * .75);
+  expect(Number(indicator.style.opacity)).toBeLessThanOrEqual(.75);
   expect(indicator.dataset.objectNavigate).toBe('mercury');
   const selections: string[] = [];
   root.parentNode!.addEventListener('objectnavigate', event => selections.push((event as CustomEvent<{ objectId: string }>).detail.objectId));
   indicator.dispatchEvent(new Event('click'));
   expect(selections).toEqual(['mercury']);
-  expect(all(root)).toEqual(nodes);
+  expectRetained(root, nodes);
   layer.destroy();
 });
 
@@ -772,17 +862,19 @@ test('orbit and circle keep a one-pixel stroke across zoom and physical system s
         pose: { positionM: [0, 0, 80000 / extent * scale], orientationXyzw: [0, 0, 0, 1] } },
         { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 5000, heightPixels: 5000 });
       const mercury = layer.inspect().find(body => body.id === 'mercury')!;
-      const width = (mercury.indicator as unknown as FakeElement).style['--context-line-width'];
-      expect((mercury.orbit[0].parentNode as unknown as FakeElement).parentNode!.style['--context-line-width']).toBe(width);
-      expect(find(root, 'contextIndicator', 'sun').style['--context-line-width']).toBe(width);
-      return parseFloat(width);
+      const marker = mercury.billboard as unknown as FakeElement;
+      const orbitRoot = (mercury.orbit[0].parentNode as unknown as FakeElement).parentNode!;
+      expect(marker.style['--context-line-width']).toBeUndefined();
+      expect(orbitRoot.style['--context-line-width']).toBeUndefined();
+      expect(find(root, 'contextBody', 'sun').style['--context-line-width']).toBeUndefined();
+      return CONTEXT_LINE_WIDTH;
     };
     expect(strokeAt(512)).toBe(1);
     expect(strokeAt(Math.sqrt(64 * 512))).toBe(1);
     expect(strokeAt(64)).toBeCloseTo(1);
     expect(strokeAt(24)).toBe(1);
     const crowded = layer.inspect().find(body => body.id === 'mercury')!;
-    expect(crowded.indicator.style.visibility).toBe('hidden');
+    expect(crowded.indicatorShown).toBe(false);
     expect(crowded.orbit.some(piece => piece.style.visibility === '')).toBe(true);
     expect(strokeAt(8)).toBe(1);
     expect(layer.inspect().find(body => body.id === 'mercury')!.orbit.every(piece => piece.style.visibility === 'hidden')).toBe(true);
@@ -795,13 +887,13 @@ test('planet labels remain visible when their placement crosses an orbit', () =>
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [30, -20] });
-  const visible = layer.inspect().filter(body => body.label.style.visibility === '');
+  const visible = layer.inspect().filter(body => body.labelShown);
   const lines = layer.inspect().flatMap(body => body.orbit).filter(line => line.style.visibility === '');
   expect(visible.length).toBeGreaterThan(0);
   let crossings = 0;
-  for (const { label } of visible) {
-    const [lx, ly] = label.style.transform.match(/-?[\d.]+/g)!.map(Number);
-    const width = label.textContent!.length * 6, height = 14;
+  for (const { billboard: label } of visible) {
+    const [lx, ly] = captionPosition(label);
+    const width = captionName(label).length * 6, height = 14;
     for (const line of lines) {
       const [dx, dy, , , x, y] = line.style.transform.slice(7, -1).split(',').map(Number);
       let enter = 0, leave = 1;
@@ -829,18 +921,18 @@ test('overlapping circles retain selection priority and reappear when separated'
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   const root = layer.root as unknown as FakeElement, nodes = all(root);
-  const mercury = find(root, 'contextIndicator', 'mercury'), venus = find(root, 'contextIndicator', 'venus');
+  const mercury = find(root, 'contextBody', 'mercury'), venus = find(root, 'contextBody', 'venus');
   const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [0, 0] });
   publish(2000);
   expect(mercury.style.visibility).toBe('');
-  expect(venus.style.visibility).toBe('hidden');
+  expect(annotationVisibility(venus, 'indicator')).toBe('hidden');
   expect(venus.style.pointerEvents).toBe('none');
   const venusMarker = find(root, 'contextBody', 'venus');
   expect(venusMarker.style.visibility).toBe(''); // Decluttering only hides annotations.
   let writes = 0;
-  for (const node of [venus, venusMarker]) {
+  for (const node of [mover(venusMarker)]) {
     let transform = node.style.transform;
     Object.defineProperty(node.style, 'transform', {
       get: () => transform, set: value => { writes++; transform = value; },
@@ -849,15 +941,15 @@ test('overlapping circles retain selection priority and reappear when separated'
   publish(2200); publish(2500);
   expect(writes).toBe(2); // The visible physical sprite follows both camera samples.
   layer.selectObject('venus'); publish(2000);
-  expect(writes).toBe(4);
-  expect(venus.style.transform).toContain('translate(82px,0px)');
-  expect(venusMarker.style.transform).toContain('translate(82px,0px)');
+  expect(writes).toBe(3);
+  expect(billboardCenter(venus)).toEqual([82, 0]);
+  expect(venusMarker).toBe(venus);
   expect(venus.style.visibility).toBe('');
-  expect(mercury.style.visibility).toBe('hidden');
+  expect(annotationVisibility(mercury, 'indicator')).toBe('hidden');
   publish(160);
   expect(mercury.style.visibility).toBe('');
   expect(venus.style.visibility).toBe('');
-  expect(all(root)).toEqual(nodes);
+  expectRetained(root, nodes);
   layer.destroy();
 });
 
@@ -891,34 +983,34 @@ test.each([
   };
   // Selection initially gives the lower class the retained visibility bonus.
   layer.previewSelection(objects[0].id); publish(1000);
-  expect(minor.indicator.style.visibility).toBe('');
+  expect(annotationVisibility(minor.billboard, 'indicator')).toBe('');
   layer.previewSelection(null);
   const distances = Array.from({ length: 61 }, (_, index) => 400 + index * 20);
   for (const distance of [...distances, ...distances.toReversed()]) {
     publish(distance);
-    expect(major.indicator.style.visibility).toBe('');
-    expect(major.label.style.visibility).toBe('');
+    expect(major.billboard.style.visibility).toBe('');
+    expect(major.billboard.style.visibility).toBe('');
     for (const body of [minor, major]) {
-      expect(body.marker.style.visibility).toBe('');
+      expect(body.billboard.style.visibility).toBe('');
       expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(true);
-      expect(find(root, 'contextOrbit', body.id).style.opacity).toBe('calc(1 * var(--context-line-opacity, 1))');
+      expect(find(root, 'contextOrbit', body.id).style.opacity).toBe('0.65');
     }
   }
   publish(1000);
-  expect(minor.indicator.style.visibility).toBe('hidden');
+  expect(annotationVisibility(minor.billboard, 'indicator')).toBe('hidden');
   // Direct interaction can still reveal a lower-priority body and its label.
-  (minor.marker as unknown as FakeElement).dataset.objectHovered = 'true';
+  (minor.billboard as unknown as FakeElement).dataset.objectHovered = 'true';
   host.dispatchEvent(new Event('objecthoverchange')); publish(1000);
-  expect(minor.indicator.style.visibility).toBe('');
-  expect(minor.label.style.visibility).toBe('');
-  delete (minor.marker as unknown as FakeElement).dataset.objectHovered;
+  expect(annotationVisibility(minor.billboard, 'indicator')).toBe('');
+  expect(annotationVisibility(minor.billboard, 'indicator')).toBe('');
+  delete (minor.billboard as unknown as FakeElement).dataset.objectHovered;
   host.dispatchEvent(new Event('objecthoverchange'));
   layer.previewSelection(objects[0].id); publish(1000);
-  expect(minor.indicator.style.visibility).toBe('');
-  expect(minor.label.style.visibility).toBe('');
+  expect(annotationVisibility(minor.billboard, 'indicator')).toBe('');
+  expect(annotationVisibility(minor.billboard, 'indicator')).toBe('');
   layer.previewSelection(null); publish(1000);
-  expect(major.indicator.style.visibility).toBe('');
-  expect(all(root)).toEqual(nodes);
+  expect(major.billboard.style.visibility).toBe('');
+  expectRetained(root, nodes);
   layer.destroy();
 });
 
@@ -936,15 +1028,15 @@ test('the Sun circle and label remain visible after all planetary context fades 
       pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
       { focalPixels: 400, principalOffsetPixels: [30, -20] });
     expect(root.hidden).toBe(false);
-    expect(find(root, 'contextIndicator', 'sun').style.visibility).toBe('');
-    expect(find(root, 'contextIndicator', 'sun').style.opacity).toBe('calc(1 * var(--context-line-opacity, 1))');
+    expect(find(root, 'contextBody', 'sun').style.visibility).toBe('');
+    expect(find(root, 'contextBody', 'sun').style.opacity).toBe('1');
     expect(find(root, 'contextLabel', 'sun').style.visibility).toBe('');
     expect(find(root, 'contextLabel', 'sun').dataset.objectNavigate).toBe('sun');
-    expect(find(root, 'contextIndicator', 'mercury').style.visibility).toBe('hidden');
+    expect(find(root, 'contextBody', 'mercury').style.visibility).toBe('hidden');
     expect(find(root, 'contextLabel', 'mercury').style.visibility).toBe('hidden');
     expect(layer.inspect().flatMap(body => body.orbit).every(piece => piece.style.visibility === 'hidden')).toBe(true);
   }
-  expect(all(root)).toEqual(nodes);
+  expectRetained(root, nodes);
   layer.destroy();
 });
 
@@ -957,7 +1049,7 @@ test('retired bodies stop receiving zoom writes and resume with current picking 
   publish(1e31); root.ownerDocument.defaultView.advance(200);
   const writes: string[] = [];
   const group = find(root, 'contextGroup', 'mercury');
-  for (const node of [group, ...all(group)]) for (const key of Object.keys(node.style)) {
+  for (const node of [mover(group), group, ...all(group)]) for (const key of Object.keys(node.style)) {
     let value = node.style[key];
     if (typeof value !== 'string') continue;
     Object.defineProperty(node.style, key, { get: () => value, set: next => { writes.push(key); value = next; }, configurable: true });
@@ -965,22 +1057,25 @@ test('retired bodies stop receiving zoom writes and resume with current picking 
   publish(2e31); publish(3e31);
   expect(writes).toEqual([]);
   expect(find(root, 'contextLabel', 'sun').dataset.objectNavigate).toBe('sun');
-  expect(mercury.indicator.dataset.objectNavigate).toBeUndefined();
+  expect(mercury.billboard.dataset.objectNavigate).toBeUndefined();
   expect(layer.backgroundExclusionRects()).toEqual(layer.labelExclusionRects());
   publish(1000);
   expect(writes.length).toBeGreaterThan(0);
-  expect(mercury.indicator.dataset.objectNavigate).toBe('mercury');
+  expect(mercury.billboard.dataset.objectNavigate).toBe('mercury');
   expect(mercury.orbit.some(piece => piece.style.visibility === '')).toBe(true);
   // Hiding overlays before retirement must not restore their old visible state
   // when the controls are re-enabled at galaxy distance.
   layer.setNavigationInFlight(true); publish(1e31); publish(2e31);
   layer.setNavigationInFlight(false);
-  expect(mercury.indicator.style.visibility).toBe('hidden');
+  expect(mercury.billboard.style.visibility).toBe('hidden');
   expect(mercury.orbit.every(piece => piece.style.visibility === 'hidden')).toBe(true);
-  expect(mercury.label.dataset.objectNavigate).toBeUndefined();
+  // A flight holds keyboard and accessibility state instead of disabling and
+  // restoring every body, so the retired marker keeps the target it committed
+  // while it was drawn; its hidden visibility keeps it out of the tab order.
+  expect(mercury.billboard.dataset.objectNavigate).toBe('mercury');
   publish(1000);
-  expect(mercury.indicator.dataset.objectNavigate).toBe('mercury');
-  expect(all(root)).toEqual(nodes);
+  expect(mercury.billboard.dataset.objectNavigate).toBe('mercury');
+  expectRetained(root, nodes);
   layer.destroy();
 });
 
@@ -992,7 +1087,7 @@ test('retired depth groups defer rotation and selection writes until same-pose r
   publish(1e31); root.ownerDocument.defaultView.advance(200);
   let writes = 0;
   for (const id of ['mercury', 'venus']) {
-    const style = find(root, 'contextGroup', id).style;
+    const style = mover(find(root, 'contextGroup', id)).style;
     let zIndex = style.zIndex;
     Object.defineProperty(style, 'zIndex', { get: () => zIndex, set: value => { writes++; zIndex = value; } });
   }
@@ -1000,7 +1095,7 @@ test('retired depth groups defer rotation and selection writes until same-pose r
   publish(-1e31, halfTurn);
   layer.selectObject('venus'); publish(-2e31, halfTurn);
   expect(writes).toBe(0);
-  const depth = (id: string) => Number(find(root, 'contextGroup', id).style.zIndex);
+  const depth = (id: string) => Number(mover(find(root, 'contextGroup', id)).style.zIndex);
   expect(depth('sun')).toBeLessThan(0);
   // Distance alone resumes the system; the cached orientation/selection are
   // unchanged, so re-entry itself must invalidate the depth publication scope.
@@ -1009,7 +1104,7 @@ test('retired depth groups defer rotation and selection writes until same-pose r
   expect(depth('venus')).toBe(0);
   expect(depth('mercury')).toBeGreaterThan(depth('sun'));
   expect(depth('mercury')).toBeLessThan(0);
-  expect(all(root)).toEqual(nodes);
+  expectRetained(root, nodes);
   layer.destroy();
 });
 
@@ -1017,7 +1112,7 @@ test('dolly motion leaves depth styles untouched while selection and rotation st
   const root = mount(1), layer = mounted.get(root)!;
   let writes = 0;
   for (const id of ['sun', 'mercury', 'venus']) {
-    const style = find(root, 'contextGroup', id).style;
+    const style = mover(find(root, 'contextGroup', id)).style;
     let zIndex = style.zIndex;
     Object.defineProperty(style, 'zIndex', { get: () => zIndex, set: value => { writes++; zIndex = value; } });
   }
@@ -1027,12 +1122,15 @@ test('dolly motion leaves depth styles untouched while selection and rotation st
   expect(writes).toBe(0);
   layer.selectObject('venus'); publish(2000);
   expect(writes).toBeGreaterThan(0);
-  expect(find(root, 'contextGroup', 'venus').style.zIndex).toBe('0');
-  expect(Number(find(root, 'contextGroup', 'sun').style.zIndex)).toBeGreaterThan(3);
+  // Venus is occluded here. Its depth style is deferred until it can draw.
+  expect(find(root, 'contextGroup', 'venus').style.visibility).toBe('hidden');
+  expect(Number(mover(find(root, 'contextGroup', 'sun')).style.zIndex)).toBeGreaterThan(3);
   writes = 0; publish(3000); expect(writes).toBe(0);
   publish(-3000, [0, 1, 0, 0]);
   expect(writes).toBeGreaterThan(0);
-  expect(Number(find(root, 'contextGroup', 'sun').style.zIndex)).toBeLessThan(0);
+  expect(mover(find(root, 'contextGroup', 'venus')).style.zIndex).toBe('0');
+  expect(Number(mover(find(root, 'contextGroup', 'mercury')).style.zIndex)).toBeLessThan(0);
+  expect(find(root, 'contextGroup', 'sun').style.visibility).toBe('hidden');
   layer.destroy();
 });
 
@@ -1058,7 +1156,7 @@ test('selection transfers the detail handoff to the destination while retaining 
   expect(marker.style.pointerEvents).toBe('none');
   marker.dispatchEvent(new Event('click'));
   expect(selections).toEqual(['mercury']);
-  expect(all(root)).toEqual(nodes);
+  expectRetained(root, nodes);
   expect(() => layer.selectObject('unprepared')).toThrow('unavailable');
   layer.selectObject('sun'); layer.publish(camera, viewport);
   expect(marker.style.visibility).toBe('');
@@ -1078,12 +1176,14 @@ test('crowded labels keep selection and hover priority, disable hidden targets, 
   const mercury = find(root, 'contextLabel', 'mercury'), venus = find(root, 'contextLabel', 'venus');
   const publish = (focalPixels = 400) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [400, 0, 2000], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels, principalOffsetPixels: [0, 0] });
-  const shown = () => [mercury, venus].filter(label => label.style.visibility === '').map(label => label.textContent);
+  const shown = () => [mercury, venus].filter(label => annotationVisibility(label, 'label') === '').map(label => label.dataset.contextName);
   publish(); expect(shown()).toEqual(['Mercury']);
   expect(venus.style.pointerEvents).toBe('none');
   const selections: string[] = [];
   host.addEventListener('objectnavigate', event => selections.push((event as CustomEvent<{ objectId: string }>).detail.objectId));
-  venus.dispatchEvent(new Event('click')); expect(selections).toEqual([]);
+  // The hidden caption has no hit rectangle; the visible physical dot still navigates.
+  expect(layer.inspect().find(body => body.id === 'venus')!.labelRect).toBeNull();
+  venus.dispatchEvent(new Event('click')); expect(selections).toEqual(['venus']);
   layer.selectObject('venus'); publish(); expect(shown()).toEqual(['Venus']);
   find(root, 'contextBody', 'mercury').dataset.objectHovered = 'true';
   host.dispatchEvent(new Event('objecthoverchange'));
@@ -1097,7 +1197,7 @@ test('crowded labels keep selection and hover priority, disable hidden targets, 
   publish(8800); expect(shown()).toEqual(['Mercury']);
   publish(9200); expect(shown()).toEqual(['Mercury']);
   expect(mercury.measurements).toBe(1); expect(venus.measurements).toBe(1);
-  expect(all(root)).toEqual(nodes);
+  expectRetained(root, nodes);
   layer.destroy();
 });
 
@@ -1119,19 +1219,19 @@ test.each(['pointer', 'keyboard'])('a small moon circle reveals its label on %s 
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [0, 0] });
   const root = layer.root as unknown as FakeElement, nodes = all(root);
-  const circle = find(root, 'contextIndicator', 'venus'), label = find(root, 'contextLabel', 'venus');
-  expect(circle.style.visibility).toBe('');
-  expect(label.style.visibility).toBe('hidden');
+  const circle = find(root, 'contextBody', 'venus'), label = find(root, 'contextLabel', 'venus');
+  expect(annotationVisibility(circle, 'indicator')).toBe('');
+  expect(annotationVisibility(label, 'label')).toBe('hidden');
   for (const active of [true, false]) {
     if (interaction === 'pointer') circle.dataset.objectHovered = String(active);
     else Object.assign(document, { activeElement: active ? circle : null });
     host.dispatchEvent(new Event(interaction === 'pointer' ? 'objecthoverchange' : active ? 'focusin' : 'focusout'));
     document.defaultView.advance(16); document.defaultView.advance(200);
-    expect(circle.style.visibility).toBe('');
-    expect(label.style.visibility).toBe(active ? '' : 'hidden');
-    if (active) expect(label.style.opacity).toBe('calc(1 * var(--context-label-opacity, 1))');
+    expect(annotationVisibility(circle, 'indicator')).toBe('');
+    expect(annotationVisibility(label, 'label')).toBe(active ? '' : 'hidden');
+    if (active) expect(label.dataset.contextIndicatorHovered).toBe('true');
   }
-  expect(all(root)).toEqual(nodes);
+  expectRetained(root, nodes);
   layer.destroy();
 });
 
@@ -1147,15 +1247,15 @@ test('hover keeps a circle label inside the viewport when every normal placement
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [0, 0] });
   const root = layer.root as unknown as FakeElement;
-  const circle = find(root, 'contextIndicator', 'mercury'), label = find(root, 'contextLabel', 'mercury');
-  expect(circle.style.visibility).toBe('');
-  expect(label.style.visibility).toBe('hidden');
+  const circle = find(root, 'contextBody', 'mercury'), label = find(root, 'contextLabel', 'mercury');
+  expect(annotationVisibility(circle, 'indicator')).toBe('');
+  expect(annotationVisibility(label, 'label')).toBe('hidden');
   circle.dataset.objectHovered = 'true';
   host.dispatchEvent(new Event('objecthoverchange'));
   document.defaultView.advance(16); document.defaultView.advance(200);
-  expect(label.style.visibility).toBe('');
-  const [x, y] = label.style.transform.match(/-?[\d.]+/g)!.map(Number);
-  expect(x).toBeGreaterThanOrEqual(-396); expect(x + label.textContent.length * 6).toBeLessThanOrEqual(396);
+  expect(annotationVisibility(label, 'label')).toBe('');
+  const [x, y] = captionPosition(label);
+  expect(x).toBeGreaterThanOrEqual(-396); expect(x + label.dataset.contextName.length * 6).toBeLessThanOrEqual(396);
   expect(y).toBeGreaterThanOrEqual(-296); expect(y + 14).toBeLessThanOrEqual(296);
   layer.destroy();
 });
@@ -1167,15 +1267,15 @@ test('the Sun caption stays below its marker as orbit strokes cross during zoom'
     pose: {positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1]} },
     {focalPixels: 400, principalOffsetPixels: [0, 0]});
   publish(1200);
-  expect(label.style.visibility).toBe('');
+  expect(annotationVisibility(label, 'label')).toBe('');
   publish(4000);
-  expect(label.style.visibility).toBe('');
-  expect(label.style.transform).toBe('translate(-9px,12px)');
+  expect(annotationVisibility(label, 'label')).toBe('');
+  expect(captionPosition(label)).toEqual([-9, 12]);
   publish(1200);
-  expect(label.style.visibility).toBe('');
+  expect(annotationVisibility(label, 'label')).toBe('');
   publish(8000);
-  expect(label.style.visibility).toBe('');
-  expect(label.style.transform).toBe('translate(-9px,12px)');
+  expect(annotationVisibility(label, 'label')).toBe('');
+  expect(captionPosition(label)).toEqual([-9, 12]);
   layer.destroy();
 });
 
@@ -1200,9 +1300,9 @@ test.each([
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [0, 0] });
   const label = find(layer.root as unknown as FakeElement, 'contextLabel', 'sun');
-  expect(label.style.visibility).toBe(shown ? '' : 'hidden');
-  expect(label.style.pointerEvents).toBe(shown ? 'auto' : 'none');
-  if (shown) expect(label.style.transform).toBe('translate(-9px,12px)');
+  expect(annotationVisibility(label, 'label')).toBe(shown ? '' : 'hidden');
+  expect(label.style.pointerEvents).toBe('none');
+  if (shown) expect(captionPosition(label)).toEqual([-9, 12]);
   layer.destroy();
 });
 
@@ -1212,14 +1312,14 @@ test('switching to the Solar System card immediately reveals the Sun ring withou
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: {positionM: [0, 0, 500], orientationXyzw: [0, 0, 0, 1]} },
     {focalPixels: 400, principalOffsetPixels: [0, 0]});
-  const ring = find(root, 'contextIndicator', 'sun');
-  expect(ring.style.visibility).toBe('hidden');
+  const ring = find(root, 'contextBody', 'sun');
+  expect(annotationVisibility(ring, 'indicator')).toBe('hidden');
   layer.setOverview(true);
-  expect(ring.style.visibility).toBe('');
+  expect(annotationVisibility(ring, 'indicator')).toBe('');
   expect(ring.dataset.objectNavigate).toBe('sun');
-  expect(ring.style.opacity).toBe('calc(1 * var(--context-line-opacity, 1))');
+  expect(ring.style.opacity).toBe('1');
   layer.setOverview(false);
-  expect(ring.style.visibility).toBe('hidden');
+  expect(annotationVisibility(ring, 'indicator')).toBe('hidden');
   layer.destroy();
 });
 
@@ -1241,26 +1341,24 @@ test.each([true, false])('circle crowding leaves physical bodies and orbits visi
     pose: {positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1]}}, {focalPixels: 400, principalOffsetPixels: [0, 0]});
   publish(2000);
   const entries = layer.inspect();
-  expect(entries[0].indicator.style.visibility).toBe('');
+  expect(entries[0].billboard.style.visibility).toBe('');
   for (const body of entries.slice(1)) {
-    for (const element of [body.indicator, body.label]) {
-      expect(element.style.visibility).toBe('hidden');
-      expect(element.style.pointerEvents).toBe('none');
-    }
-    expect(body.marker.style.visibility).toBe('');
-    expect(body.marker.style.pointerEvents).toBe('auto');
+    expect(body.indicatorShown).toBe(false);
+    expect(body.labelShown).toBe(false);
+    expect(body.billboard.style.visibility).toBe('');
+    expect(body.billboard.style.pointerEvents).toBe('none');
     expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(true);
   }
   publish(100);
   for (const body of entries.slice(1)) {
-    expect(body.marker.style.visibility).toBe('');
-    expect(body.indicator.style.visibility).toBe('');
+    expect(body.billboard.style.visibility).toBe('');
+    expect(body.billboard.style.visibility).toBe('');
     expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(true);
   }
   layer.destroy();
 });
 
-test.each([true, false])('rings and trails share their circle fade across zoom in both directions (closed=%s)', closed => {
+test.each([true, false])('shared billboard alpha retains ring visibility and independent orbit alpha across zoom (closed=%s)', closed => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 5000; host.clientHeight = 5000; host.append(before);
   const source = plan(1);
@@ -1281,12 +1379,12 @@ test.each([true, false])('rings and trails share their circle fade across zoom i
       pose: {positionM: [0, 0, 40000 / extent], orientationXyzw: [0, 0, 0, 1]}},
       {focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 5000, heightPixels: 5000});
     // Culled indicators retain their last paint values; visible fades still match exactly.
-    if (extent > 12) expect(body.indicator.style.opacity).toBe(orbitRoot.style.opacity);
+    expect(Number(body.billboard.style.opacity)).toBeGreaterThanOrEqual(Number(orbitRoot.style.opacity));
     expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(extent > 12);
-    expect(body.indicator.style.visibility).toBe(extent > 12 ? '' : 'hidden');
-    expect(body.indicator.style.pointerEvents).toBe(extent > 12 ? 'auto' : 'none');
+    expect(body.indicatorShown).toBe(extent > 12);
+    expect(body.billboard.style.pointerEvents).toBe('none');
   }
-  expect(all(layer.root as unknown as FakeElement)).toEqual(nodes);
+  expectRetained(layer.root as unknown as FakeElement, nodes);
   layer.destroy();
 });
 
@@ -1307,8 +1405,8 @@ test('a trail remains visible when its body is outside the viewport', () => {
     pose: {positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1]}},
     {focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600});
   const body = layer.inspect().find(entry => entry.id === 'mercury')!;
-  expect(body.indicator.style.visibility).toBe('hidden');
-  expect(body.marker.style.visibility).toBe('hidden');
+  expect(body.billboard.style.visibility).toBe('hidden');
+  expect(body.billboard.style.visibility).toBe('hidden');
   expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(true);
   layer.destroy();
 });
@@ -1325,12 +1423,12 @@ test('a label cannot cover a neighbouring circle even when the two labels fit', 
   layer.publish({referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: {positionM: [0, 0, 400], orientationXyzw: [0, 0, 0, 1]}}, {focalPixels: 400, principalOffsetPixels: [0, 0]});
   const entries = layer.inspect();
-  expect(entries.filter(body => body.label.style.visibility === '').length).toBeGreaterThan(1);
-  for (const body of entries.filter(body => body.label.style.visibility === '')) {
-    const [x, y] = body.label.style.transform.match(/-?[\d.]+/g)!.map(Number);
-    const width = body.label.textContent!.length * 6;
-    for (const other of entries.filter(other => other !== body && other.indicator.style.visibility === '')) {
-      const [cx, cy] = other.indicator.style.transform.match(/-?[\d.]+/g)!.map(Number);
+  expect(entries.filter(body => body.labelShown).length).toBeGreaterThan(1);
+  for (const body of entries.filter(body => body.labelShown)) {
+    const [x, y] = captionPosition(body.billboard);
+    const width = captionName(body.billboard).length * 6;
+    for (const other of entries.filter(other => other !== body && other.indicatorShown)) {
+      const [cx, cy] = other.center;
       expect(Math.hypot(Math.max(x, Math.min(x + width, cx)) - cx,
         Math.max(y, Math.min(y + 14, cy)) - cy)).toBeGreaterThanOrEqual(12);
     }
@@ -1350,10 +1448,12 @@ test('one retained focus label and locator survive system retirement at their ph
     plan: context, sprites: { anchor: sprite, mercury: sprite, venus: sprite } });
   const root = layer.root as unknown as FakeElement;
   const focus = layer.inspect().find(body => body.id === 'anchor')!;
-  const label = focus.label as unknown as FakeElement, locator = focus.indicator as unknown as FakeElement;
+  const label = focus.billboard as unknown as FakeElement, locator = focus.billboard as unknown as FakeElement;
   const retained = all(host);
-  expect(label.textContent).toBe('Anchor');
-  expect(label.parentNode).not.toBe(root);
+  expect(label.dataset.contextName).toBe('Anchor');
+  expect(mover(label).parentNode).toBe(root);
+  expect(mover(label).children).toEqual([label]);
+  expect(label.children).toHaveLength(0); expect(label).toBe(locator);
   expect(all(host).filter(node => node.dataset.contextLabel === 'anchor')).toEqual([label]);
   const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
   const camera = (distance: number): {referenceFrame: string; epochJdTt: number; pose: {positionM: [number, number, number]; orientationXyzw: OrientationXyzw}} => ({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
@@ -1362,21 +1462,21 @@ test('one retained focus label and locator survive system retirement at their ph
   for (const [distance, locatorOpacity, captionVisible] of [[50, 0, false], [Math.sqrt(1000 * 10000), 1, true], [8000, 1, true], [1e21, 1, true], [50, 0, false]] as const) {
     layer.publish(camera(distance!), viewport);
     document.defaultView.advance(200);
-    if (locatorOpacity) expect(locator.style.opacity).toBe('calc(1 * var(--context-line-opacity, 1))');
-    expect(locator.style.visibility).toBe(locatorOpacity! > 0 ? '' : 'hidden');
-    expect(label.style.visibility).toBe(captionVisible ? '' : 'hidden');
-    expect(all(host)).toEqual(retained);
+    if (locatorOpacity) expect(Number(locator.style.opacity)).toBeCloseTo(1);
+    expect(annotationVisibility(locator, 'indicator')).toBe(locatorOpacity! > 0 ? '' : 'hidden');
+    expect(annotationVisibility(label, 'label')).toBe(captionVisible ? '' : 'hidden');
+    expectRetained(host, retained);
   }
   const distant = camera(1e21);
   distant.pose.positionM = [-1e20, 5e19, 1e21];
   layer.publish(distant, viewport);
   document.defaultView.advance(200);
-  expect(layer.inspect().filter(body => body.id !== 'anchor').every(body => body.marker.style.visibility === 'hidden')).toBe(true);
-  expect(label.parentNode!.hidden).toBe(false);
-  expect(label.style.visibility).toBe(''); expect(label.style.opacity).toBe('calc(1 * var(--context-label-opacity, 1))');
-  expect(locator.style.visibility).toBe(''); expect(locator.style.opacity).toBe('calc(1 * var(--context-line-opacity, 1))');
-  expect(locator.style.transform).toBe('translate(70px,-40px) translate(-50%,-50%)');
-  expect(label.style.transform).toBe('translate(52px,-28px)');
+  expect(layer.inspect().filter(body => body.id !== 'anchor').every(body => body.billboard.style.visibility === 'hidden')).toBe(true);
+  expect(mover(label).hidden).toBe(false); expect(mover(label).parentNode!.hidden).toBe(false);
+  expect(annotationVisibility(label, 'label')).toBe(''); expect(Number(label.style.opacity)).toBeCloseTo(1);
+  expect(annotationVisibility(locator, 'indicator')).toBe(''); expect(Number(locator.style.opacity)).toBeCloseTo(1);
+  expect(billboardCenter(locator)).toEqual([70, -40]);
+  expect(captionPosition(label)).toEqual([52, -28]);
   expect(locator.dataset.objectNavigate).toBe('anchor');
   const selections: string[] = [];
   host.addEventListener('objectnavigate', event => selections.push((event as CustomEvent<{ objectId: string }>).detail.objectId));
@@ -1384,14 +1484,14 @@ test('one retained focus label and locator survive system retirement at their ph
   // Roll moves the physical projected location; a reversed view must cull it.
   distant.pose.orientationXyzw = [0, 0, Math.SQRT1_2, Math.SQRT1_2];
   layer.publish(distant, viewport);
-  expect(locator.style.transform).not.toBe('translate(70px,-40px) translate(-50%,-50%)');
+  expect(billboardCenter(locator)).not.toEqual([70, -40]);
   const poses: PhysicalCameraPose[] = [
     { ...camera(1e21).pose, orientationXyzw: [0, 1, 0, 0] },
     { ...camera(1e21).pose, positionM: [-2e21, 0, 1e21] },
   ];
   for (const pose of poses) {
     layer.publish({ ...distant, pose }, viewport);
-    expect(locator.style.visibility).toBe('hidden'); expect(label.style.visibility).toBe('hidden');
+    expect(annotationVisibility(locator, 'indicator')).toBe('hidden'); expect(annotationVisibility(label, 'label')).toBe('hidden');
     expect(locator.style.pointerEvents).toBe('none'); expect(label.style.pointerEvents).toBe('none');
     label.dispatchEvent(new Event('click')); expect(selections).toEqual(['anchor']);
   }
@@ -1411,25 +1511,28 @@ test('readable satellite orbits show labels even with an unresolved parent, then
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   const child = layer.inspect().find(body => body.id === satellite.id)!;
-  const marker = child.marker as unknown as FakeElement, label = child.label as unknown as FakeElement;
+  const marker = child.billboard as unknown as FakeElement, label = child.billboard as unknown as FakeElement;
   const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const };
   const camera = (z: number): WorldCameraPose => ({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
     pose: { positionM: [100, 0, z], orientationXyzw: [0, 0, 0, 1] } });
   layer.publish(camera(1000), viewport);
   document.defaultView.advance(200);
-  expect(marker.style.visibility).toBe(''); expect(label.style.visibility).toBe('');
-  expect(label.style.pointerEvents).toBe('auto');
+  expect(marker.style.visibility).toBe(''); expect(annotationVisibility(label, 'label')).toBe('');
+  expect(label.style.pointerEvents).toBe('none');
   layer.publish(camera(180), viewport);
-  expect(marker.style.visibility).toBe(''); expect(label.style.visibility).toBe('');
-  expect(label.dataset.objectNavigateActivation).toBe('click'); expect(label.style.pointerEvents).toBe('auto');
-  const [left, top] = label.style.transform.match(/-?[\d.]+/g)!.map(Number);
-  expect(layer.labelExclusionRects()).toContainEqual({ left, top, right: left + label.textContent.length * 6, bottom: top + 14 });
+  expect(marker.style.visibility).toBe(''); expect(annotationVisibility(label, 'label')).toBe('');
+  expect(label.dataset.objectNavigateActivation).toBe('click'); expect(label.style.pointerEvents).toBe('none');
+  const [left, top] = captionPosition(label);
+  const rect = child.labelRect!;
+  expect(rect.left).toBeCloseTo(left, 5); expect(rect.top).toBeCloseTo(top, 5);
+  expect(rect.right - rect.left).toBe(label.dataset.contextName.length * 6);
+  expect(layer.labelExclusionRects()).toContainEqual(rect);
   layer.publish(camera(1000), viewport);
   document.defaultView.advance(200);
-  expect(marker.style.visibility).toBe(''); expect(label.style.visibility).toBe('');
+  expect(marker.style.visibility).toBe(''); expect(annotationVisibility(label, 'label')).toBe('');
   layer.publish(camera(12000), viewport);
   document.defaultView.advance(200);
-  expect(label.style.visibility).toBe('hidden');
+  expect(annotationVisibility(label, 'label')).toBe('hidden');
   expect(label.style.pointerEvents).toBe('none'); expect(label.measurements).toBe(1);
   layer.destroy(); expect(layer.labelExclusionRects()).toEqual([]);
 });
@@ -1446,11 +1549,11 @@ test('resolved body labels remain visible when close-up framing hides orbit line
     pose: { positionM: [0, 0, 40], orientationXyzw: [0, 0, 0, 1] } },
   { focalPixels: 400, principalOffsetPixels: [0, 0] });
   const body = layer.inspect().find(body => body.id === 'mercury')!;
-  expect(body.marker.style.visibility).toBe('');
+  expect(body.billboard.style.visibility).toBe('');
   expect(body.orbit.every(piece => piece.style.visibility === 'hidden')).toBe(true);
-  expect(body.label.style.visibility).toBe('');
-  expect(body.label.dataset.objectNavigate).toBe('mercury');
-  const [labelX, labelY] = body.label.style.transform.match(/-?[\d.]+/g)!.map(Number);
+  expect(body.billboard.style.visibility).toBe('');
+  expect(body.billboard.dataset.objectNavigate).toBe('mercury');
+  const [labelX, labelY] = captionPosition(body.billboard);
   expect(labelX + 'Mercury'.length * 6 / 2).toBeCloseTo(140);
   expect(labelY).toBeGreaterThan(32);
   layer.destroy();
@@ -1473,9 +1576,9 @@ test('a moon label tries the other side when its first position overlaps the sel
   const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const };
   for (let frame = 0; frame < 3; frame++) {
     layer.publish(camera, viewport); document.defaultView.advance(200);
-    const label = layer.inspect().find(body => body.id === moon.id)!.label;
-    expect(label.style.visibility).toBe('');
-    expect(Number(label.style.transform.match(/translate\(([-\d.]+)/)![1])).toBeLessThan(-74);
+    const label = layer.inspect().find(body => body.id === moon.id)!.billboard;
+    expect(annotationVisibility(label, 'label')).toBe('');
+    expect(captionPosition(label)[0]).toBeLessThan(-74);
     const rects = layer.labelExclusionRects();
     expect(rects).toHaveLength(2);
     expect(labelRectsOverlap(rects[0], rects[1], 4)).toBe(false);
@@ -1495,71 +1598,59 @@ test('a background star label inside the orbit footprint is excluded even outsid
   const backgroundText = { left: -10, top: -30, right: 10, bottom: -20 };
   expect(layer.labelExclusionRects().every(rect => !labelRectsOverlap(backgroundText, rect))).toBe(true);
   expect(layer.backgroundExclusionRects().some(rect => labelRectsOverlap(backgroundText, rect))).toBe(true);
-  expect(layer.inspect().find(body => body.id === 'sun')!.label.style.visibility).toBe('');
+  expect(layer.inspect().find(body => body.id === 'sun')!.billboard.style.visibility).toBe('');
   // Close orbits clip the viewport; they must not claim the entire background.
   layer.publish({ ...camera, pose: { ...camera.pose, positionM: [0, 0, 50] } }, viewport);
   expect(layer.backgroundExclusionRects()).toEqual(layer.labelExclusionRects());
   layer.destroy();
 });
 
-test('solar text fades through system retirement, reverses continuously, and disables fading targets immediately', () => {
-  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
-  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
-  const base = plan(1);
-  const context = parsePreparedWorldContext({ ...base, system: { fadeOutStartDistanceM: 1e10, hiddenDistanceM: 1e11 },
-    bodies: base.bodies.map(({ orbit: _orbit, ...body }) => body) });
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
-    plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
-  const label = layer.inspect().find(body => body.id === 'mercury')!.label as unknown as FakeElement;
-  const nodes = all(host), clock = document.defaultView;
-  const alpha = () => Number.parseFloat(label.style.opacity.replace('calc(', ''));
+test('billboard zoom alpha owns dot, circle and caption without per-label clocks', () => {
+  const root = mount(1), layer = mounted.get(root)!, clock = root.ownerDocument.defaultView;
+  const body = layer.inspect().find(body => body.id === 'mercury')!, element = body.billboard as unknown as FakeElement;
+  const nodes = all(root);
   const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
-  publish(1000); expect(alpha()).toBe(0);
-  clock.advance(100); expect(alpha()).toBeCloseTo(.5, 12);
-  clock.advance(100); expect(alpha()).toBe(1);
-  publish(1e21);
-  expect(label.style.visibility).toBe(''); expect(alpha()).toBe(1);
-  expect(label.style.pointerEvents).toBe('none');
-  clock.advance(100); expect(alpha()).toBeCloseTo(.5, 12);
-  publish(1000); expect(alpha()).toBeCloseTo(.5, 12);
-  expect(clock.timers.size).toBe(0);
-  clock.advance(100); expect(alpha()).toBeCloseTo(.75, 12);
-  clock.advance(100); expect(alpha()).toBe(1);
-  publish(1e21); clock.advance(200);
-  expect(label.style.visibility).toBe('hidden'); expect(alpha()).toBe(0);
-  publish(1000); clock.advance(100); publish(1e21);
-  expect(clock.timers.size).toBeGreaterThan(0); expect(clock.frames.size).toBeGreaterThan(0);
-  expect(all(host)).toEqual(nodes);
-  layer.destroy(); expect(clock.frames.size).toBe(0); expect(clock.timers.size).toBe(0);
+  publish(1000);
+  expect(element.children).toHaveLength(0); expect(element.textContent).toBe('');
+  expect(element.dataset.contextName).toBe('Mercury');
+  expect(element.dataset.contextLabelVisible).toBe('true');
+  expect(Number(element.style.opacity)).toBeGreaterThan(0);
+  expect(clock.timers.size).toBe(0); expect(layer.opacityStats().active).toBe(0);
+  publish(1e31);
+  expect(element.style.visibility).toBe('hidden');
+  expect(element.dataset.objectNavigate).toBeUndefined();
+  publish(1000);
+  expect(element.style.visibility).toBe('');
+  expect(element.dataset.objectNavigate).toBe('mercury');
+  expect(clock.timers.size).toBe(0); expectRetained(root, nodes);
+  layer.destroy();
 });
 
-test('flight annotations fade correctly even when a label fade is in progress', () => {
-  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
-  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
-    plan: parsePreparedWorldContext({ ...plan(1), bodies: plan(1).bodies.map(({ orbit: _orbit, ...body }) => body) }), sprites: { sun: sprite, mercury: sprite, venus: sprite } });
-  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
-    pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
-  const label = layer.inspect().find(body => body.id === 'mercury')!.label;
-  document.defaultView.advance(100);
-  const partialAlpha = Number.parseFloat(label.style.opacity.slice(5));
-  expect(partialAlpha).toBeGreaterThan(0); expect(partialAlpha).toBeLessThan(1);
+test('label suppression and flight independently target pseudo opacity without timers or losing the dot', () => {
+  const root = mount(1), layer = mounted.get(root)!, clock = root.ownerDocument.defaultView;
+  const element = layer.inspect().find(body => body.id === 'mercury')!.billboard;
+  const opacity = element.style.opacity;
+  layer.setSuppressedLabels(['mercury']);
+  expect(annotationVisibility(element, 'label')).toBe('hidden');
+  expect(annotationVisibility(element, 'indicator')).toBe('');
+  expect(element.style.opacity).toBe(opacity); expect(clock.timers.size).toBe(0);
+  layer.setSuppressedLabels([]);
+  expect(annotationVisibility(element, 'label')).toBe('');
+  layer.previewSelection('venus');
   layer.setNavigationInFlight(true);
-  document.defaultView.advance(400);
-  expect(Number.parseFloat(label.style.opacity.slice(5))).toBe(0);
+  expect(annotationVisibility(element, 'label')).toBe('hidden');
+  expect(annotationVisibility(element, 'indicator')).toBe('hidden');
+  // The stage picker, cleared for the flight, owns every pointer hit. The
+  // keyboard target is held rather than disabled and restored on every body.
+  expect(element.style.visibility).toBe(''); expect(element.dataset.objectNavigate).toBe('mercury');
+  expect(screenPicking(root.parentNode! as unknown as HTMLElement).pick(70, -20)).toBeNull();
   layer.setNavigationInFlight(false);
-  document.defaultView.advance(200);
-  expect(Number.parseFloat(label.style.opacity.slice(5))).toBeCloseTo(partialAlpha * 2);
-  layer.setHiddenLabels(['mercury']);
-  expect(document.defaultView.timers.size).toBeGreaterThan(0);
-  document.defaultView.advance(50);
-  layer.setNavigationInFlight(true);
-  document.defaultView.advance(400);
-  expect(Number.parseFloat(label.style.opacity.slice(5))).toBe(0);
-  layer.setNavigationInFlight(false);
-  document.defaultView.advance(200);
-  expect(Number.parseFloat(label.style.opacity.slice(5))).toBe(0);
+  expect(annotationVisibility(element, 'label')).toBe('');
+  expect(annotationVisibility(element, 'indicator')).toBe('');
+  expect(element.dataset.objectNavigate).toBe('mercury');
+  expect(screenPicking(root.parentNode! as unknown as HTMLElement).pick(70, -20)).toBe(element);
+  expect(clock.timers.size).toBe(0);
   layer.destroy();
 });
 
@@ -1574,8 +1665,8 @@ test('the Sun locator stays visible across galactic observer rotations while res
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, uranus: sprite } });
   layer.selectObject('uranus');
-  const focus = layer.inspect().find(body => body.id === 'sun')!, label = focus.label as unknown as FakeElement;
-  const locator = focus.indicator as unknown as FakeElement;
+  const focus = layer.inspect().find(body => body.id === 'sun')!, label = focus.billboard as unknown as FakeElement;
+  const locator = focus.billboard as unknown as FakeElement;
   const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const };
   for (let degrees = 0; degrees < 360; degrees++) {
     const angle = degrees * Math.PI / 180;
@@ -1584,15 +1675,15 @@ test('the Sun locator stays visible across galactic observer rotations while res
       orientationXyzw: [0, Math.sin(angle / 2), 0, Math.cos(angle / 2)],
     } }, viewport);
     document.defaultView.advance(200);
-    expect(label.style.visibility, `${degrees} degrees`).toBe(''); expect(label.style.opacity).toBe('calc(1 * var(--context-label-opacity, 1))');
-    expect(locator.style.visibility, `${degrees} degrees`).toBe(''); expect(locator.style.opacity).toBe('calc(1 * var(--context-line-opacity, 1))');
+    expect(annotationVisibility(label, 'label'), `${degrees} degrees`).toBe(''); expect(Number(label.style.opacity)).toBeCloseTo(.75);
+    expect(annotationVisibility(locator, 'indicator'), `${degrees} degrees`).toBe(''); expect(Number(locator.style.opacity)).toBeCloseTo(.75);
   }
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: {
     positionM: [3e12 + 1e8, 0, 0], orientationXyzw: [0, Math.SQRT1_2, 0, Math.SQRT1_2],
   } }, viewport);
   expect(label.style.pointerEvents).toBe('none');
   document.defaultView.advance(200);
-  expect(label.style.visibility).toBe('hidden'); expect(label.style.opacity).toBe('calc(0 * var(--context-label-opacity, 1))');
+  expect(annotationVisibility(label, 'label')).toBe('hidden'); expect(label.style.visibility).toBe('hidden');
   layer.destroy();
 });
 
@@ -1607,13 +1698,15 @@ test('billboards straddle the selected detail in camera-depth order without repl
   const root = layer.root as unknown as FakeElement, nodes = all(root);
   // The container must not trap foreground children behind the detailed body.
   expect(root.style.cssText).not.toContain('z-index');
-  const depth = (id: string) => Number(find(root, 'contextGroup', id).style.zIndex);
+  const depth = (id: string) => Number(mover(find(root, 'contextGroup', id)).style.zIndex);
   const publish = (z: number, orientationXyzw: [number, number, number, number]) => layer.publish({
     referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, z], orientationXyzw },
   }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
   publish(100, [0, 0, 0, 1]);
   expect(depth('venus')).toBeLessThan(0);
-  expect(depth('sun')).toBe(0);
+  // At this distance the selected Sun is detailed geometry, so its hidden
+  // billboard does not need a z-index; the visible bodies still straddle it.
+  expect(find(root, 'contextGroup', 'sun').style.visibility).toBe('hidden');
   expect(depth('mercury')).toBeGreaterThan(3);
   publish(-100, [0, 1, 0, 0]);
   expect(depth('mercury')).toBeLessThan(0);
@@ -1623,42 +1716,56 @@ test('billboards straddle the selected detail in camera-depth order without repl
   expect(depth('venus')).toBe(0);
   expect(depth('mercury')).toBeLessThan(depth('sun'));
   expect(depth('sun')).toBeLessThan(0);
-  expect(all(root)).toEqual(nodes);
+  expectRetained(root, nodes);
   layer.destroy();
 });
 
-test('orbit endpoints follow the rendered circle through growth and shrink without camera publication', () => {
-  let notify: ResizeObserverCallback;
-  let disconnected = false;
-  vi.stubGlobal('ResizeObserver', class {
-    constructor(callback: ResizeObserverCallback) { notify = callback; }
-    observe() {}
-    disconnect() { disconnected = true; }
-  });
-  let layer: ReturnType<typeof mountPreparedWorldContext> | undefined;
+test('hover changes the orbit gap once per endpoint without measuring the ring', () => {
+  const observer = vi.fn();
+  vi.stubGlobal('ResizeObserver', observer);
+  const root = mount(1), layer = mounted.get(root)!;
   try {
-    const root = mount(1);
-    layer = mounted.get(root)!;
     const body = layer.inspect().find(entry => entry.id === 'mercury')!;
-    const nodes = [...body.orbit];
-    const [cx, cy] = body.indicator.style.transform.match(/-?[\d.]+/g)!.map(Number);
+    const indicator = body.billboard as unknown as FakeElement;
+    const group = find(root, 'contextGroup', 'mercury');
+    const nodes = all(root);
+    const clock = root.ownerDocument.defaultView;
+    const [cx, cy] = body.center;
     const gap = () => Math.min(...body.orbit.filter(line => line.style.visibility === '').flatMap(line => {
       const [dx, dy, , , x, y] = line.style.transform.slice(7, -1).split(',').map(Number);
       return [Math.hypot(x - cx, y - cy), Math.hypot(x + dx - cx, y + dy - cy)];
     }));
-    const measurements = all(root).reduce((sum, element) => sum + element.measurements, 0);
+    const measurements = nodes.reduce((sum, element) => sum + element.measurements, 0);
+    const hover = (active: boolean) => {
+      group.dataset.objectHovered = String(active);
+      root.parentNode!.dispatchEvent(new Event('objecthoverchange'));
+      clock.advance(16);
+    };
+    const finishShrink = () => {
+      const event = new Event('transitionend');
+      Object.defineProperties(event, { propertyName: { value: 'transform' }, target: { value: indicator } });
+      root.dispatchEvent(event); clock.advance(16);
+    };
     expect(gap()).toBeCloseTo(8, 3);
-    for (const diameter of [18, 20, 19, 16]) {
-      notify!([{ target: body.indicator, borderBoxSize: [{ inlineSize: diameter, blockSize: diameter }] } as unknown as ResizeObserverEntry], {} as ResizeObserver);
-      expect(gap()).toBeCloseTo(diameter / 2, 3);
-      expect(layer.inspect().find(entry => entry.id === 'mercury')!.orbit).toEqual(nodes);
-    }
-    expect(all(root).reduce((sum, element) => sum + element.measurements, 0)).toBe(measurements);
-    layer.destroy();
-    expect(disconnected).toBe(true);
+    hover(true);
+    expect(indicator.dataset.contextIndicatorHovered).toBe('true');
+    expect(gap()).toBeCloseTo(10, 3);
+    const writes = body.orbit.map(node => (node as unknown as FakeElement).styleWrites);
+    clock.advance(180);
+    expect(body.orbit.map(node => (node as unknown as FakeElement).styleWrites)).toEqual(writes);
+    hover(false);
+    expect(indicator.dataset.contextIndicatorHovered).toBe('false');
+    expect(gap()).toBeCloseTo(10, 3); // Do not cut through a ring still shrinking.
+    hover(true);
+    finishShrink(); // A reversed transition cannot close the hover gap.
+    expect(gap()).toBeCloseTo(10, 3);
+    hover(false); finishShrink();
+    expect(gap()).toBeCloseTo(8, 3);
+    expectRetained(root, nodes);
+    expect(nodes.reduce((sum, element) => sum + element.measurements, 0)).toBe(measurements);
+    expect(observer).not.toHaveBeenCalled();
   } finally {
-    layer?.destroy();
-    vi.unstubAllGlobals();
+    layer.destroy(); vi.unstubAllGlobals();
   }
 });
 
@@ -1667,33 +1774,35 @@ test('flights keep orbit projection live, fade unrelated annotations and retain 
   const mercury = layer.inspect().find(entry => entry.id === 'mercury')!;
   const sun = layer.inspect().find(entry => entry.id === 'sun')!;
   const nodes = all(root), orbit = mercury.orbit.map(node => ({ ...node.style }));
-  const markerTransform = mercury.marker.style.transform;
+  const markerTransform = mover(mercury.billboard).style.transform;
   layer.setOverview(true);
   layer.previewSelection('mercury');
   layer.setNavigationInFlight(true);
   root.ownerDocument.defaultView.advance(200);
   const measurements = nodes.reduce((sum, node) => sum + node.measurements, 0);
-  expect(Number.parseFloat(sun.label.style.opacity.slice(5))).toBe(0);
-  expect(sun.indicator.style.opacity).toBe('calc(0 * var(--context-line-opacity, 1))');
-  expect(Number.parseFloat(mercury.label.style.opacity.slice(5))).toBeGreaterThan(0);
-  expect(mercury.indicator.style.opacity).not.toBe('calc(0 * var(--context-line-opacity, 1))');
+  expect(annotationVisibility(sun.billboard, 'label')).toBe('hidden');
+  expect(annotationVisibility(sun.billboard, 'indicator')).toBe('hidden');
+  expect(Number(mercury.billboard.style.opacity)).toBeGreaterThan(0);
+  expect(mercury.billboard.style.opacity).not.toBe('0');
   const orbitRoot = find(root, 'contextOrbit', 'mercury');
   expect(orbitRoot.style.opacity).not.toBe('0');
-  expect(orbitRoot.dataset.objectNavigate).toBeUndefined();
+  // Keyboard targets hold through the flight; only the stage picker is cleared.
+  expect(orbitRoot.dataset.objectNavigate).toBe('mercury');
+  expect(screenPicking(root.parentNode! as unknown as HTMLElement).pick(70, -20)).toBeNull();
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [50, 0, 1_000], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [30, -20], widthPixels: 800, heightPixels: 600 });
   expect(nodes.reduce((sum, node) => sum + node.measurements, 0)).toBe(measurements);
-  expect(mercury.marker.style.transform).not.toBe(markerTransform);
+  expect(mover(mercury.billboard).style.transform).not.toBe(markerTransform);
   expect(mercury.orbit.map(node => ({ ...node.style }))).not.toEqual(orbit);
-  expect(mercury.indicator.style.transform).toContain('50px');
-  expect(orbitRoot.style.opacity).not.toBe('calc(0 * var(--context-line-opacity, 1))');
+  expect(mover(mercury.billboard).style.transform).toContain('50px');
+  expect(orbitRoot.style.opacity).not.toBe('0');
   layer.setNavigationInFlight(false);
   root.ownerDocument.defaultView.advance(200);
-  expect(Number.parseFloat(sun.label.style.opacity.slice(5))).toBeGreaterThan(0);
-  expect(sun.indicator.style.opacity).not.toBe('calc(0 * var(--context-line-opacity, 1))');
+  expect(Number(sun.billboard.style.opacity)).toBeGreaterThan(0);
+  expect(sun.billboard.style.opacity).not.toBe('0');
   expect(orbitRoot.dataset.objectNavigate).toBe('mercury');
-  expect(all(root)).toEqual(nodes);
+  expectRetained(root, nodes);
   layer.destroy();
 });
 
@@ -1701,19 +1810,26 @@ test('overview flights retain system annotations and orbit cutouts without enabl
   const root = mount(1), layer = mounted.get(root)!;
   const nodes = all(root);
   layer.previewSelection(null);
-  const before = layer.inspect().map(entry => ({ id: entry.id, label: entry.label.style.opacity,
-    indicator: entry.indicator.style.opacity, orbit: entry.orbit.map(node => ({ ...node.style })) }));
+  const picking = screenPicking(root.parentNode! as unknown as HTMLElement);
+  const before = layer.inspect().map(entry => ({ id: entry.id, label: entry.billboard.style.opacity,
+    indicator: entry.billboard.style.opacity, orbit: entry.orbit.map(node => ({ ...node.style })),
+    navigate: entry.billboard.dataset.objectNavigate }));
+  expect(picking.pick(30, -20)).not.toBeNull();
   layer.setNavigationInFlight(true);
   for (const previous of before) {
     const entry = layer.inspect().find(entry => entry.id === previous.id)!;
-    expect(entry.label.style.opacity).toBe(previous.label);
-    expect(entry.indicator.style.opacity).toBe(previous.indicator);
+    expect(entry.billboard.style.opacity).toBe(previous.label);
+    expect(entry.billboard.style.opacity).toBe(previous.label);
     expect(entry.orbit.map(node => ({ ...node.style }))).toEqual(previous.orbit);
-    expect(entry.indicator.dataset.objectNavigate).toBeUndefined();
+    // Keyboard state holds through the flight; the stage picker owns every hit
+    // and is the one thing the flight clears, so nothing becomes pickable.
+    expect(entry.billboard.dataset.objectNavigate).toBe(previous.navigate);
   }
+  expect(picking.pick(30, -20)).toBeNull();
+  expect(picking.pick(70, -20)).toBeNull();
   layer.setOverview(true);
   layer.setNavigationInFlight(false);
-  expect(all(root)).toEqual(nodes);
+  expectRetained(root, nodes);
   layer.destroy();
 });
 
@@ -1724,8 +1840,10 @@ test('selection emphasis previews immediately without changing the detailed occl
   expect(mercury.dataset.contextSelected).toBe('true');
   expect(sun.dataset.contextSelected).toBe('false');
   layer.previewSelection(null);
-  expect(mercury.dataset.contextSelected).toBe('overview');
-  expect(sun.dataset.contextSelected).toBe('overview');
+  // Only the emphasized body is distinguished. With nobody emphasized both
+  // markers publish the shared unselected value instead of a third state.
+  expect(mercury.dataset.contextSelected).toBe('false');
+  expect(sun.dataset.contextSelected).toBe('false');
   layer.previewSelection();
   expect(sun.dataset.contextSelected).toBe('true');
   expect(mercury.dataset.contextSelected).toBe('false');
@@ -1738,17 +1856,21 @@ test('the Solar System overview has no body selection until the Sun is explicitl
   const sun = find(root, 'contextGroup', 'sun');
   const mercury = find(root, 'contextGroup', 'mercury');
   const sprite = find(root, 'contextBody', 'mercury');
+  // An overview emphasizes nobody, and styles distinguish only the emphasized
+  // body, so every marker shares the same unselected value.
   const neutral = () => {
-    expect([sun, mercury].map(body => body.dataset.contextSelected)).toEqual(['overview', 'overview']);
+    expect([sun, mercury].map(body => body.dataset.contextSelected)).toEqual(['false', 'false']);
   };
 
   layer.setOverview(true);
+  root.ownerDocument.defaultView.advance(200);
   neutral();
   const normalOpacity = Number(sprite.style.opacity);
   expect(normalOpacity).toBeGreaterThan(0);
 
-  // The selection preview updates the frame state and peer opacity together.
+  // Selection changes immediately; the authored 120 ms emphasis fade settles on the shared clock.
   layer.previewSelection('sun');
+  root.ownerDocument.defaultView.advance(120);
   expect(sun.dataset.contextSelected).toBe('true');
   expect(mercury.dataset.contextSelected).toBe('false');
   expect(Number(sprite.style.opacity)).toBeCloseTo(normalOpacity * .75);
@@ -1757,8 +1879,9 @@ test('the Solar System overview has no body selection until the Sun is explicitl
   expect(sun.dataset.contextSelected).toBe('true');
   expect(Number(sprite.style.opacity)).toBeCloseTo(normalOpacity * .75);
 
-  // Returning to the overview clears both effects before recentering completes.
+  // Returning to the overview restores the neutral weight through the same fade.
   layer.previewSelection(null);
+  root.ownerDocument.defaultView.advance(120);
   neutral();
   expect(Number(sprite.style.opacity)).toBeCloseTo(normalOpacity);
   layer.setOverview(true);
@@ -1772,7 +1895,7 @@ test('the Solar System overview has no body selection until the Sun is explicitl
   layer.previewSelection();
   neutral();
   expect(Number(sprite.style.opacity)).toBeCloseTo(normalOpacity);
-  expect(all(root)).toEqual(nodes);
+  expectRetained(root, nodes);
   layer.destroy();
 });
 
@@ -1811,4 +1934,239 @@ test('rejects malformed, detached, duplicate or cyclic non-rendered orbit centre
     { patroclus: { ...center, centerBodyId: 'second' }, second: { ...center, centerBodyId: 'patroclus' } },
     { patroclus: { ...center, radiusM: 1 } },
   ]) expect(() => parse(orbitCenters)).toThrow();
+});
+
+test('world presentation leaves the detail scope while retaining its input registry and focus updates', () => {
+  const document = new FakeDocument(), host = document.createElement('main'), presentationHost = document.createElement('section');
+  presentationHost.append(host);
+  const request = vi.fn(() => true);
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, presentationHost: presentationHost as unknown as HTMLElement,
+    before: host as unknown as Element, plan: plan(1), sprites: { sun: sprite, mercury: sprite, venus: sprite }, requestPublication: request });
+  const world: WorldCameraPose = { referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } };
+  const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const, widthPixels: 800, heightPixels: 600 };
+  layer.publish(world, viewport);
+  expect(host.children).toHaveLength(0);
+  expect((layer.root as unknown as FakeElement).parentNode).toBe(presentationHost);
+  expect(screenPicking(host as unknown as HTMLElement).pick(30, -20)).not.toBeNull();
+  expect(screenPicking(presentationHost as unknown as HTMLElement).pick(30, -20)).toBeNull();
+  const stale = layer.captureFrame(world, viewport);
+  presentationHost.dispatchEvent(new Event('focusin'));
+  document.defaultView.advance(16);
+  expect(stale.current()).toBe(false);
+  expect(request).toHaveBeenCalledOnce();
+  layer.destroy();
+  presentationHost.dispatchEvent(new Event('focusin'));
+  document.defaultView.advance(16);
+  expect(request).toHaveBeenCalledOnce();
+  expect(presentationHost.children).toEqual([host]);
+});
+
+test('opacity-only ticks do not reproject, republish picking or measure retained annotations', () => {
+  const request = vi.fn(() => true), root = mount(1, request), layer = mounted.get(root)!;
+  const clock = root.ownerDocument.defaultView;
+  const nodes = all(root), measurements = nodes.map(node => node.measurements);
+  const transforms = nodes.map(node => node.style.transform);
+  const picking = screenPicking(root.parentNode! as unknown as HTMLElement);
+  const pick = vi.spyOn(picking, 'publish');
+  expect(layer.opacityStats().active).toBe(0); // Pseudo fades no longer schedule JS frames.
+  clock.advance(100); clock.advance(100);
+  expect(request).not.toHaveBeenCalled(); expect(pick).not.toHaveBeenCalled();
+  expect(nodes.map(node => node.measurements)).toEqual(measurements);
+  expect(nodes.map(node => node.style.transform)).toEqual(transforms);
+  expectRetained(root, nodes);
+  expect(layer.opacityStats().active).toBe(0); expect(clock.frames.size).toBe(0);
+  const writes = nodes.map(node => node.style.opacity);
+  clock.advance(1000); expect(nodes.map(node => node.style.opacity)).toEqual(writes);
+  layer.destroy();
+});
+
+
+test('delta publication matches full frames through navigation, hover, fades and orbit retirement', () => {
+  const root = mount(1, () => true), deltaRoot = mount(1, () => true);
+  const full = mounted.get(root)!, incremental = mounted.get(deltaRoot)!;
+  const calculate = createWorldContextPlanner(plan(1)), encode = createWorldContextFrameEncoder();
+  const world = { referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000] as [number, number, number], orientationXyzw: [0, 0, 0, 1] as const } };
+  const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const, widthPixels: 800, heightPixels: 600 };
+  const drawing = (node: FakeElement) => all(node).map(node => ({ style: { ...node.style }, dataset: { ...node.dataset } }));
+  let id = 0;
+  const publish = () => {
+    const a = full.captureFrame(world, viewport), b = incremental.captureFrame(world, viewport);
+    const frame = structuredClone(calculate(a.view));
+    full.publish(world, viewport, frame);
+    incremental.publish(world, viewport, structuredClone(encode(++id, b.view.contextCommittedId ?? 0, frame)));
+    root.ownerDocument.defaultView.advance(50); deltaRoot.ownerDocument.defaultView.advance(50);
+    // Methods in the fake style object close over different owners.
+    expect(JSON.stringify(drawing(deltaRoot))).toBe(JSON.stringify(drawing(root)));
+    expect(incremental.labelExclusionRects()).toEqual(full.labelExclusionRects());
+    expect(incremental.backgroundExclusionRects()).toEqual(full.backgroundExclusionRects());
+    for (let x = -400; x < 400; x += 40) for (let y = -300; y < 300; y += 40) {
+      const pick = (node: FakeElement) => screenPicking(node.parentNode as unknown as HTMLElement).pick(x, y)?.dataset;
+      expect(pick(deltaRoot)).toEqual(pick(root));
+    }
+  };
+  for (const distance of [1000, 1000, 900, 500, 50, 500, 1000]) { world.pose.positionM[2] = distance; publish(); }
+  for (const layer of [full, incremental]) { layer.setOverview(true); layer.setHiddenOrbits(['mercury']); }
+  publish();
+  for (const node of [root, deltaRoot]) {
+    find(node, 'contextGroup', 'mercury').dataset.objectHovered = 'true';
+    node.parentNode!.dispatchEvent(new Event('objecthoverchange'));
+  }
+  publish();
+  for (const layer of [full, incremental]) { layer.setNavigationInFlight(true); layer.previewSelection('mercury'); }
+  publish();
+  for (const layer of [full, incremental]) { layer.selectObject('mercury'); layer.setNavigationInFlight(false); layer.setHiddenOrbits([]); }
+  publish();
+  // A resize changes the absolute transform origin even when a body stays
+  // at the same projected coordinates and the worker has no geometry delta.
+  viewport.widthPixels = 1000; viewport.heightPixels = 700; publish();
+  viewport.widthPixels = 800; viewport.heightPixels = 600; publish();
+  for (let i = 0; i < 12; i++) publish();
+  const writes = all(deltaRoot).reduce((sum, node) => sum + node.styleWrites, 0);
+  const before = incremental.publicationStats();
+  publish();
+  expect(all(deltaRoot).reduce((sum, node) => sum + node.styleWrites, 0) - writes).toBe(0);
+  expect(incremental.publicationStats()).toEqual({ ...before, skippedPublications: before.skippedPublications + 1 });
+  full.destroy(); incremental.destroy();
+});
+
+test('rotation makes annotations immediate without arming visibility transitions on release', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  const marker = find(root, 'contextBody', 'mercury');
+  const camera = { referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000] as [number, number, number], orientationXyzw: [0, 0, 0, 1] as [number, number, number, number] } };
+  const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
+  layer.publish(camera, viewport);
+  layer.setRotationActive(true);
+  expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
+  // A rotation holds the committed annotation set, so a suppression arriving
+  // mid-drag cannot make the caption blink; the release applies it in one go.
+  layer.setSuppressedLabels(['mercury']);
+  expect(marker.dataset.contextLabelVisible).toBe('true');
+  for (const angle of [.05, .1, 0]) {
+    camera.pose.orientationXyzw = [0, Math.sin(angle / 2), 0, Math.cos(angle / 2)];
+    layer.publish(camera, viewport);
+    expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
+    expect(marker.dataset.contextLabelVisible).toBe('true');
+    expect(layer.opacityStats().active).toBe(0);
+  }
+  layer.setRotationActive(false);
+  expect(marker.dataset.contextLabelVisible).toBe('false');
+  layer.setSuppressedLabels([]);
+  expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
+  expect(marker.dataset.contextLabelVisible).toBe('true');
+  layer.destroy();
+});
+
+test('hidden billboards settle without pseudo fades or depth writes and catch up before re-entry', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  const marker = find(root, 'contextBody', 'mercury');
+  const camera = { referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000] as [number, number, number], orientationXyzw: [0, 0, 0, 1] as [number, number, number, number] } };
+  const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
+  layer.publish(camera, viewport);
+  expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
+  layer.setHiddenBodies(['sun', 'mercury', 'venus']);
+  root.ownerDocument.defaultView.advance(1000);
+  expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
+  const counts = all(root).map(node => [node.styleWrites, node.attributeWrites]);
+  const publications = layer.publicationStats();
+  for (const angle of [.05, .1, -.1, 0]) {
+    camera.pose.orientationXyzw = [0, Math.sin(angle / 2), 0, Math.cos(angle / 2)];
+    layer.publish(camera, viewport);
+  }
+  expect(all(root).map(node => [node.styleWrites, node.attributeWrites])).toEqual(counts);
+  expect(layer.publicationStats()).toEqual(publications);
+  layer.selectObject('mercury');
+  layer.setHiddenBodies([]);
+  expect(marker.style.visibility).toBe('');
+  expect(mover(marker).style.zIndex).toBe('0');
+  expect(marker.dataset.contextSelected).toBe('true');
+  expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
+  layer.publish(camera, viewport);
+  expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
+  layer.destroy();
+});
+
+test('only interactive stationary hover arms transitions; every camera axis and flight cancels them', () => {
+  const root = mount(1), layer = mounted.get(root)!, clock = root.ownerDocument.defaultView;
+  const host = root.parentNode!, marker = find(root, 'contextBody', 'mercury');
+  const camera = { referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000] as [number, number, number], orientationXyzw: [0, 0, 0, 1] as [number, number, number, number] } };
+  const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as [number, number], widthPixels: 800, heightPixels: 600 };
+  const hover = (value: boolean, interactive = true) => {
+    marker.dataset.objectHovered = String(value);
+    host.dispatchEvent(new CustomEvent('objecthoverchange', { detail: { interactive } }));
+    clock.advance(16);
+  };
+  layer.publish(camera, viewport);
+  hover(true, false);
+  expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
+  hover(false, false);
+  for (const move of [
+    () => { camera.pose.positionM[2] += 50; },
+    () => { camera.pose.positionM[0] += 5; },
+    () => { camera.pose.orientationXyzw = [0, Math.sin(.01), 0, Math.cos(.01)]; },
+    () => { viewport.focalPixels += 5; },
+    () => { viewport.widthPixels += 5; },
+    () => { viewport.principalOffsetPixels[0] += 5; },
+    () => { layer.setNavigationInFlight(true); },
+  ]) {
+    hover(true);
+    expect(marker.dataset.contextAnnotationsAnimate).toBe('true');
+    move(); layer.publish(camera, viewport);
+    expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
+    expect(layer.opacityStats().active).toBe(0);
+    layer.setNavigationInFlight(false); hover(false, false);
+  }
+  hover(true);
+  expect(marker.dataset.contextAnnotationsAnimate).toBe('true');
+  // A press cancels in the input event, before a worker or animation frame can
+  // publish the hover-out state captured by the preceding pointer movement.
+  clock.dispatchEvent(new Event('pointerdown'));
+  expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
+  expect(layer.opacityStats().active).toBe(0);
+  hover(false, false); hover(true);
+  layer.setSuppressedLabels(['mercury']);
+  expect(marker.dataset.contextLabelVisible).toBe('false');
+  hover(false, false);
+  expect(marker.dataset.contextLabelVisible).toBe('false');
+  expect(marker.dataset.contextAnnotationsAnimate).toBe('false');
+  layer.destroy();
+});
+
+test('switching selection leaves an unrelated visible billboard selection attribute untouched', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  const sun = find(root, 'contextBody', 'sun');
+  layer.previewSelection('mercury');
+  expect(sun.dataset.contextSelected).toBe('false');
+  const writes = sun.attributeWrites;
+  layer.previewSelection('venus');
+  expect(sun.dataset.contextSelected).toBe('false');
+  expect(sun.attributeWrites).toBe(writes);
+  layer.destroy();
+});
+
+test('CSSOM transform serialization cannot turn an unchanged publication into another setter call', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  const marker = find(root, 'contextBody', 'mercury'), orbit = find(root, 'contextOrbit', 'mercury');
+  let writes = 0;
+  for (const element of [mover(marker), orbit]) {
+    let transform = element.style.transform;
+    Object.defineProperty(element.style, 'transform', {
+      get: () => transform.replace(/,\s*/g, ', '),
+      set: (value: string) => { transform = value; writes++; },
+    });
+  }
+  const world = { referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000] as const, orientationXyzw: [0, 0, 0, 1] as const } };
+  const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const, widthPixels: 800, heightPixels: 600 };
+  for (let i = 0; i < 10; i++) layer.publish(world, viewport);
+  expect(writes).toBe(0);
+  viewport.widthPixels = 900;
+  layer.publish(world, viewport);
+  expect(writes).toBe(2);
+  layer.publish(world, viewport);
+  expect(writes).toBe(2);
+  layer.destroy();
 });

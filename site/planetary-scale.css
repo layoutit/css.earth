@@ -1,6 +1,5 @@
 .planetary-navigation {
   display: none;
-  --planet-min-size: 6px;
   position: fixed;
   z-index: 190;
   inset: var(--explorer-header-top) 20px auto auto;
@@ -23,23 +22,23 @@
   list-style: none;
 }
 
-.scale-stops::before {
+.scale-track {
+  display: block;
   position: absolute;
   top: 24px;
   right: 0;
-  left: var(--planet-track-start);
+  left: 0;
   height: 1px;
   background: rgb(223 223 223 / 16%);
   content: "";
+  pointer-events: none;
 }
 
 .scale-planet {
   position: absolute;
   top: 0;
-  left: var(--planet-offset);
   width: 0;
   height: 64px;
-  color: var(--planet-color);
 }
 
 .scale-stop {
@@ -57,11 +56,6 @@
   transform: translateX(-50%);
   touch-action: manipulation;
   pointer-events: auto;
-}
-
-.scale-stop .planet-navigation-marker > i {
-  width: max(var(--planet-min-size), var(--planet-size));
-  height: max(var(--planet-min-size), var(--planet-size));
 }
 
 .scale-stop:focus-visible {
