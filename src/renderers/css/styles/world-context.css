@@ -110,6 +110,22 @@
   height: 1px;
   margin-top: -.5px;
 }
+
+/* A highlighted classification brightens its circles and labels while the
+   others recede. Orbits keep their normal strength; hovering still reveals.
+   The ring and the caption are this marker's own pseudo-elements, so the
+   emphasis multiplies each one's prepared alpha instead of a shared property. */
+.prepared-world-context[data-context-highlighting] [data-context-body]:not([data-context-highlight], [data-context-indicator-hovered="true"])::before {
+  opacity: calc(attr(data-context-line-alpha type(<number>), .65) * .3);
+}
+.prepared-world-context[data-context-highlighting] [data-context-body]:not([data-context-highlight], [data-context-indicator-hovered="true"])::after {
+  opacity: calc(attr(data-context-label-alpha type(<number>), .65) * .3);
+}
+.prepared-world-context [data-context-body][data-context-highlight]::before,
+.prepared-world-context [data-context-body][data-context-highlight]::after {
+  opacity: 1;
+}
+
 /* Alternate the paint on retained chords. Fractional unit-bar widths can
    round back to solid strokes before the browser scales their projection. */
 .prepared-world-context .context-orbit[data-context-placement="approximate"] s:nth-child(even) {

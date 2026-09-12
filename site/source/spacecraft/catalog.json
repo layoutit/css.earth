@@ -1933,11 +1933,20 @@
     {
       "id": "sdo",
       "name": {
+        "value": "Solar Dynamics Observatory",
+        "citations": [
+          {
+            "catalogueId": "reference-sdo",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "shortName": {
         "value": "SDO",
         "citations": [
           {
             "catalogueId": "reference-sdo",
-            "checkedOn": "2026-09-08"
+            "checkedOn": "2026-09-11"
           }
         ]
       },
@@ -2142,6 +2151,15 @@
           }
         ]
       },
+      "shortName": {
+        "value": "LRO",
+        "citations": [
+          {
+            "catalogueId": "reference-lro",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
       "description": {
         "value": "Maps the Moon’s terrain and measures its temperature, composition, and radiation environment. The observations help identify landing sites and locate resources near the lunar south pole.",
         "citations": [
@@ -2209,6 +2227,15 @@
           }
         ]
       },
+      "shortName": {
+        "value": "MRO",
+        "citations": [
+          {
+            "catalogueId": "reference-mro",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
       "description": {
         "value": "Examines the history of water on Mars using close surface images, mineral measurements, and subsurface observations. It also monitors the atmosphere and helps identify potential landing sites.",
         "citations": [
@@ -2268,11 +2295,20 @@
     {
       "id": "odyssey",
       "name": {
+        "value": "2001 Mars Odyssey",
+        "citations": [
+          {
+            "catalogueId": "reference-odyssey",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "shortName": {
         "value": "Mars Odyssey",
         "citations": [
           {
             "catalogueId": "reference-odyssey",
-            "checkedOn": "2026-09-08"
+            "checkedOn": "2026-09-11"
           }
         ]
       },
@@ -2922,6 +2958,15 @@
           {
             "catalogueId": "reference-mars-global-surveyor",
             "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "shortName": {
+        "value": "MGS",
+        "citations": [
+          {
+            "catalogueId": "reference-mars-global-surveyor",
+            "checkedOn": "2026-09-11"
           }
         ]
       },

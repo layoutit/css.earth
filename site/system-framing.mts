@@ -40,6 +40,8 @@ export function systemFramingRadii(plan: Pick<PreparedWorldContext, 'focus' | 'b
 
 export const SYSTEM_FRAMING_RADII = systemFramingRadii(context);
 export const SYSTEM_VIEWS = new Map([context.focus, ...context.bodies].filter(body => body.systemView).map(body => [body.id, body.systemView]));
+/** Each classification's prepared view around the Sun, for the header category pills. */
+export const CLASSIFICATION_VIEWS = new Map(Object.entries(context.classificationViews ?? {}));
 export const GALACTIC_VOLUME = parseDensityVolumeFrame(galaxy.properties.volume);
 
 /** Zoom along the current viewing ray, keeping its anchor and orientation. */

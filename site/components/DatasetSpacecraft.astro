@@ -16,9 +16,9 @@ const contributors = (missionId: string) => new Set((EXPLORATION.graph.byMission
     const image = mission.imageId ? EXPLORATION.images[mission.imageId] : null;
     const emblem = mission.emblemId ? EXPLORATION.emblems[mission.emblemId] : null;
     const vehicles = contributors(mission.id);
-    const references = uniqueCitations([mission.name, mission.description, mission.agencyIds, ...(mission.started ? [mission.started] : []), ...(mission.ended ? [mission.ended] : []), ...(mission.status ? [mission.status] : [])].flatMap(field => field.citations).concat(mission.participants.flatMap(member => member.citations)));
+    const references = uniqueCitations([mission.name, ...(mission.shortName ? [mission.shortName] : []), mission.description, mission.agencyIds, ...(mission.started ? [mission.started] : []), ...(mission.ended ? [mission.ended] : []), ...(mission.status ? [mission.status] : [])].flatMap(field => field.citations).concat(mission.participants.flatMap(member => member.citations)));
     return <article class="planet-spacecraft" data-mission={mission.id} hidden={visibleMissionIds && !visibleMissionIds.includes(mission.id)}>
-      <SelectedContent title={mission.name.value} metadata={dateRange(mission)} description={mission.description.value} href={referenceUrl(mission.description)}>
+      <SelectedContent title={mission.shortName?.value ?? mission.name.value} lead={mission.shortName && mission.name.value} metadata={dateRange(mission)} description={mission.description.value} href={referenceUrl(mission.description)}>
         {(image || emblem) && <div class="planet-spacecraft-preview">
           {image && <a class="planet-spacecraft-image-link" href={image.sourceUrl} target="_blank" rel="noreferrer" aria-label={`${mission.name.value} mission artwork — ${image.credit}`}>
             <img class="planet-spacecraft-image" src={image.src} width={image.width} height={image.height} alt={`${mission.name.value} mission illustration`} loading="lazy" decoding="async" />

@@ -9,7 +9,7 @@ export interface SpacecraftRecord {
 }
 export interface Participant { readonly spacecraftId: string; readonly role: VehicleKind; readonly citations: readonly SourceCitation[]; }
 export interface MissionRecord {
-  readonly id: string; readonly name: Cited<string>; readonly description: Cited<string>;
+  readonly id: string; readonly name: Cited<string>; readonly shortName?: Cited<string>; readonly description: Cited<string>;
   readonly agencyIds: Cited<readonly string[]>; readonly participants: readonly Participant[];
   readonly started?: Cited<string>; readonly ended?: Cited<string>;
   readonly status?: Cited<{ readonly value: 'active' | 'completed' | 'planned' | 'lost'; readonly asOf: string }>;
@@ -111,7 +111,7 @@ export function parseExplorationCatalog(input: unknown, agencies: Readonly<Recor
   unique(spacecraft.map(record => record.id), 'spacecraft ID');
   const spacecraftIds = new Set(spacecraft.map(record => record.id));
   const missions = explorationArray(value.missions, raw => {
-    const record = explorationRecord(raw, ['id', 'name', 'description', 'agencyIds', 'participants', 'started', 'ended', 'status', 'imageId', 'emblemId']);
+    const record = explorationRecord(raw, ['id', 'name', 'shortName', 'description', 'agencyIds', 'participants', 'started', 'ended', 'status', 'imageId', 'emblemId']);
     const participants = explorationArray(record.participants, raw => {
       const member = explorationRecord(raw, ['spacecraftId', 'role', 'citations']);
       const spacecraftId = explorationId(member.spacecraftId);
@@ -133,7 +133,11 @@ export function parseExplorationCatalog(input: unknown, agencies: Readonly<Recor
       return Object.freeze({ value: enumeration(status.value, ['active', 'completed', 'planned', 'lost'] as const), asOf: explorationDate(status.asOf, true) });
     });
     if (ended && status?.value.value === 'active' && dateBounds(ended.value)[1] < dateBounds(status.value.asOf)[0]) throw new TypeError('Active status contradicts mission end.');
-    return Object.freeze({ id: explorationId(record.id), name: cited(record.name, explorationText), description: cited(record.description, explorationText), agencyIds, participants,
+    const name = cited(record.name, explorationText);
+    // A short name titles the mission's cards; its full name then leads the description.
+    const shortName = record.shortName === undefined ? undefined : cited(record.shortName, explorationText);
+    if (shortName && shortName.value.length >= name.value.length) throw new TypeError('A mission short name must be shorter than its name.');
+    return Object.freeze({ id: explorationId(record.id), name, ...(shortName ? { shortName } : {}), description: cited(record.description, explorationText), agencyIds, participants,
       ...(started ? { started } : {}), ...(ended ? { ended } : {}), ...(status ? { status } : {}),
       ...(record.imageId === undefined ? {} : { imageId: explorationId(record.imageId) }),
       ...(record.emblemId === undefined ? {} : { emblemId: explorationId(record.emblemId) }) });

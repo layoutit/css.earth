@@ -62,6 +62,7 @@ class FixtureDocument extends Element {
 interface VisibilityObserver { observed: globalThis.Element[]; disconnected: boolean; options?: IntersectionObserverInit; observe(node: globalThis.Element): void; disconnect(): void; }
 class FixtureWindow extends Element {
   Event = Event;
+  CustomEvent = CustomEvent;
   HTMLElement = Element; HTMLButtonElement = Element; HTMLInputElement = Element; HTMLDetailsElement = Element; HTMLLIElement = Element;
   performance = { now: () => 0 };
   localStorage = { getItem: (_key?: string): string | null => null };
@@ -69,6 +70,8 @@ class FixtureWindow extends Element {
   clearTimeout: (id: number) => void = () => {};
   requestAnimationFrame: (callback: FrameRequestCallback) => number = () => { throw new Error('Frame fixture is not installed.'); };
   cancelAnimationFrame: (id: number) => void = () => {};
+  // The fixture is a wide layout, so phone-only sheet gestures stay idle.
+  matchMedia = (_query: string) => Object.assign(new EventTarget(), { matches: false });
   IntersectionObserver?: new (callback: IntersectionObserverCallback, options?: IntersectionObserverInit) => VisibilityObserver;
   MutationObserver?: new (callback: MutationCallback) => { observe(target: Node): void; disconnect(): void };
 }
@@ -651,6 +654,15 @@ test('category pills reuse search, retain the query through navigation, and dism
   const search = f.selectors.element('.planet-sidebar-search');
   const shell = f.mount();
   shell.setObject({ id: 'earth', name: 'Earth', apply() {}, dispose() {} });
+  // Observe the router request without adding a listener the shell's leak check would count.
+  const navigations: unknown[] = [];
+  for (const button of buttons) {
+    const dispatch = button.dispatchEvent.bind(button);
+    button.dispatchEvent = (event: Event) => {
+      if (event.type === 'categorynavigate' && event instanceof CustomEvent) navigations.push((event.detail as { classification?: unknown }).classification);
+      return dispatch(event);
+    };
+  }
   buttons.forEach((button, index) => {
     button.dispatchEvent(new Event('click'));
     assert.equal(search.value, categories[index].label);
@@ -661,6 +673,7 @@ test('category pills reuse search, retain the query through navigation, and dism
       i !== index && !(index === 0 && item === dwarf)));
     assert.deepEqual(buttons.map(item => item.ariaPressed), buttons.map((_, i) => String(i === index)));
   });
+  assert.deepEqual(navigations, categories.map(category => category.type), 'each pill asks the router to frame its classification');
   for (const query of ['planet', 'planets']) {
     search.value = query; search.dispatchEvent(new Event('input'));
     assert.deepEqual(items.map(item => item.hidden), [false, true, true, false]);

@@ -5,16 +5,24 @@ body[data-object-shell] {
   --explorer-panel-left: 12px;
   --explorer-panel-width: 340px;
   --explorer-logo-size: 36px;
-  --explorer-wordmark-size: 38px;
+  --explorer-wordmark-size: 32px;
   --explorer-content-inset: 20px;
   --explorer-categories-sidebar-gap: 12px;
   --explorer-panel-padding: 0px;
   --explorer-status-height: 18px;
   --explorer-footer-height: var(--explorer-status-height);
   --explorer-minimap-size: 190px;
-  --explorer-header-top: 8px;
+  --explorer-header-top: 0px;
   --explorer-panel-block-padding: 0px;
-  --explorer-search-height: 44px;
+  --explorer-search-height: 48px;
+  --explorer-header-bar-height: calc(var(--explorer-search-height) + 12px);
+  --explorer-header-control-background: var(--explorer-surface-background);
+  --explorer-header-control-hover: #242424;
+  --explorer-header-control-selected: #2e2e2e;
+  --explorer-category-height: var(--explorer-search-height);
+  /* Fully rounded, like Google Maps' search box and chips. */
+  --explorer-control-radius: calc(var(--explorer-search-height) / 2);
+  --explorer-card-radius: 12px;
   --explorer-header-width: var(--explorer-panel-width);
   --explorer-header-row-gap: 7px;
   --explorer-header-height: calc(2 * var(--explorer-search-height) + var(--explorer-header-row-gap));
@@ -38,7 +46,7 @@ body[data-object-shell] {
 :is(
   .planet-card,
   .explorer-about-panel,
-  .planet-sidebar > .explorer-settings-panel
+  .planet-dataset-context-dock > .explorer-settings-panel
 ) {
   --explorer-card-padding-inline-start: var(--explorer-card-padding-left, 20px);
   --explorer-card-padding-inline-end: var(--explorer-card-padding-inline-start);
@@ -50,7 +58,7 @@ body[data-object-shell] {
   padding-inline: 0;
   overflow: hidden;
   border: 0;
-  border-radius: 0;
+  border-radius: var(--explorer-card-radius);
   color: var(--shell-text-secondary);
   background: var(--explorer-panel-background);
   box-shadow: none;
@@ -75,8 +83,7 @@ body[data-object-shell] {
 }
 
 .planet-search-toolbar .planet-sidebar-collapse,
-.planet-search-toolbar .planet-toolbar-action,
-.planet-project-links .planet-toolbar-action {
+.planet-search-toolbar .planet-toolbar-action {
   position: static;
   opacity: 1;
   height: var(--explorer-search-height);
@@ -84,14 +91,11 @@ body[data-object-shell] {
   padding-inline: 0;
   pointer-events: auto;
 }
-.planet-sidebar-collapse[aria-expanded="true"] [data-material-symbol="left_panel_open"],
-.planet-sidebar-collapse[aria-expanded="false"] [data-material-symbol="left_panel_close"] { display: none; }
-
 body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 
 .explorer-shell-header {
   --explorer-header-control-gap: 4px;
-  --explorer-wordmark-size: 38px;
+  --explorer-wordmark-size: 32px;
   position: fixed;
   z-index: 220;
   inset: var(--explorer-header-top) auto auto var(--explorer-panel-left);
@@ -106,52 +110,69 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
     calc(100vw - var(--explorer-rail-left) - 8px)
   );
   height: var(--explorer-header-height);
+  /* The header floats over the scene; only its controls take input. */
+  pointer-events: none;
 }
 
 .explorer-brand-row {
-  /* Preserve the wordmark's position using its prepared 16.27/22 em ink height. */
+  /* Center the wordmark's lowercase band, 10.055/22 em below its prepared ink top, on the
+     row, level with the search text. */
   box-sizing: border-box;
   display: flex;
   align-items: baseline;
   justify-content: flex-start;
   gap: 8px;
   height: var(--explorer-search-height);
-  padding-top: calc((var(--explorer-search-height) - 16.27 * var(--explorer-wordmark-size) / 22) / 2 - 1px);
+  padding-top: calc(var(--explorer-search-height) / 2 - 10.055 * var(--explorer-wordmark-size) / 22);
+  pointer-events: auto;
 }
 
 .explorer-shell-wordmark {
   display: block;
   flex: 0 0 auto;
   width: max-content;
-  /* Let the rounded leading c slightly overhang the card's text edge. */
-  margin-inline-start: calc(var(--explorer-content-inset) - 4px);
-  margin-inline-end: 0;
+  margin: 0;
 }
 
 .explorer-shell-wordmark .maps-brand-button {
   display: block;
 }
 
+/* The version shares the wordmark's baseline. */
+.explorer-brand-version {
+  color: var(--shell-text-muted);
+  font: 400 13px/18px var(--shell-ui-font);
+  text-decoration: none;
+}
+.explorer-brand-version:is(:hover, :focus-visible) { color: var(--shell-text); }
+.explorer-brand-version:focus-visible {
+  outline: 1px solid var(--shell-focus);
+  outline-offset: 2px;
+}
+
 .explorer-shell-header .planet-sidebar-search-card {
   display: grid;
-  grid-template-columns: 20px minmax(0, max-content);
+  grid-template-columns: 20px minmax(max-content, 1fr);
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   column-gap: 8px;
   flex: 1 1 auto;
+  box-sizing: border-box;
   width: 100%;
   min-width: 0;
   max-width: 100%;
-  background: transparent;
-  font: 400 18px/20px var(--shell-ui-font);
+  padding-inline: 16px 40px;
+  border: 0;
+  border-radius: var(--explorer-control-radius);
+  background: var(--explorer-header-control-background);
+  font: 400 15px/20px var(--shell-ui-font);
   letter-spacing: 0.1px;
 }
 
-/* Size the centered group from its prompt, keeping it steady while typing. */
+/* Size the field from its prompt, so it stays steady while typing. */
 .explorer-shell-header .planet-sidebar-search-card::before {
   content: attr(data-search-prompt);
   grid-area: 1 / 2;
-  min-width: 0;
   visibility: hidden;
   white-space: pre;
   pointer-events: none;
@@ -165,7 +186,9 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 
 .explorer-shell-header .planet-sidebar-search {
   grid-area: 1 / 2;
-  min-width: 0;
+  /* The prompt sizes the column; the field fills it. */
+  width: 0;
+  min-width: 100%;
   padding-block: 11px;
   padding-inline: 0;
   font: inherit;
@@ -179,6 +202,42 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 .explorer-shell-header .planet-sidebar-search-icon {
   color: var(--explorer-control-text);
 }
+
+/* The prompt reads like the pill labels beside it. */
+.explorer-shell-header .planet-sidebar-search::placeholder {
+  color: var(--explorer-control-text);
+  opacity: 1;
+}
+
+/* Clear sits in the pill's right padding and shows only while there is a query. */
+.explorer-shell-header .planet-sidebar-search-clear {
+  appearance: none;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--explorer-control-text);
+  transform: translateY(-50%);
+  cursor: pointer;
+  pointer-events: auto;
+}
+.explorer-shell-header .planet-sidebar-search-clear .material-symbol { flex-basis: 18px; width: 18px; height: 18px; }
+.explorer-shell-header .planet-sidebar-search-clear:is(:hover, :focus-visible) {
+  color: var(--shell-text);
+  background: var(--explorer-header-control-hover);
+}
+.explorer-shell-header .planet-sidebar-search-clear:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 1px; }
+.explorer-shell-header .planet-sidebar-search-card:has(.planet-sidebar-search:placeholder-shown) .planet-sidebar-search-clear { display: none; }
+/* The custom clear replaces the browser's own search cancel control. */
+.explorer-shell-header .planet-sidebar-search::-webkit-search-cancel-button { appearance: none; display: none; }
 
 .explorer-shell-header .planet-sidebar-search-card:focus-within .planet-sidebar-search-icon {
   color: var(--shell-text);
@@ -212,18 +271,22 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   height: var(--explorer-search-height);
   overflow-x: auto;
   scrollbar-width: none;
+  pointer-events: auto;
 }
 
 .planet-search-categories {
   display: flex;
-  flex: 0 0 auto;
   align-items: center;
-  gap: var(--explorer-header-control-gap);
+  gap: 8px;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  pointer-events: auto;
 }
 
 .planet-search-category,
+.planet-header-link,
 .planet-report-issue-link,
-.planet-github-link,
 .planet-sidebar-collapse,
 .planet-toolbar-action {
   appearance: none;
@@ -246,8 +309,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   touch-action: manipulation;
 }
 
-.explorer-shell-header .material-symbol,
-.planet-project-links .material-symbol {
+.explorer-shell-header .material-symbol {
   display: block;
   flex: 0 0 20px;
   width: 20px;
@@ -278,17 +340,8 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   border: 0;
 }
 
-.planet-project-links :is(
-  .planet-report-issue-link,
-  .planet-github-link,
-  .planet-toolbar-action
-) {
-  border: 0;
-}
-
 .explorer-shell-header .planet-sidebar-search-card:hover .planet-sidebar-search,
 .planet-search-category:hover,
-.planet-github-link:hover,
 .planet-report-issue-link:hover,
 .planet-sidebar-collapse:hover,
 .planet-toolbar-action:hover {
@@ -298,7 +351,6 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 
 .explorer-shell-header .planet-sidebar-search-card:focus-within .planet-sidebar-search,
 .planet-search-category:focus-visible,
-.planet-github-link:focus-visible,
 .planet-report-issue-link:focus-visible,
 .planet-sidebar-collapse:focus-visible,
 .planet-toolbar-action:focus-visible {
@@ -306,32 +358,77 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   outline: none;
 }
 
-.planet-project-links {
-  position: static;
-  display: flex;
-  align-items: baseline;
-  gap: 2px;
-  width: max-content;
-  max-width: calc(100% - 24px);
-  pointer-events: auto;
+/* Category filters are filled pills, like the search field. */
+.planet-search-category,
+.planet-header-link {
+  box-sizing: border-box;
+  height: var(--explorer-category-height);
+  padding-inline: 12px 16px;
+  border: 0;
+  border-radius: var(--explorer-control-radius);
+  background: var(--explorer-header-control-background);
+  font-size: 14px;
+}
+.planet-search-category:hover { background: var(--explorer-header-control-hover); }
+/* Project links share the pill look without joining the search filters. */
+.planet-header-link { text-decoration: none; pointer-events: auto; }
+.planet-header-link:hover { color: var(--shell-text); background: var(--explorer-header-control-hover); }
+.planet-header-link:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
+.planet-search-category[aria-pressed="true"] { background: var(--explorer-header-control-selected); }
+.planet-search-category:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
+.planet-search-category .material-symbol { flex-basis: 18px; width: 18px; height: 18px; }
+/* GitHub is an icon-only circle, like the panel toggles. */
+.planet-header-link {
+  display: inline-grid;
+  place-items: center;
+  width: var(--explorer-category-height);
+  padding: 0;
 }
 
-.planet-github-link,
+/* Round icon toggles for shell panels: transparent when off, filled when on. */
+.planet-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: auto;
+}
+.planet-header-action {
+  appearance: none;
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: var(--explorer-category-height);
+  height: var(--explorer-category-height);
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+  border-radius: var(--explorer-control-radius);
+  background: var(--explorer-header-control-background);
+  color: var(--explorer-control-text);
+  cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+.planet-header-action:hover { color: var(--shell-text); background: var(--explorer-header-control-hover); }
+.planet-header-action[aria-pressed="true"] {
+  color: var(--shell-text);
+  background: var(--explorer-header-control-selected);
+}
+.planet-header-action:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
+.planet-header-action:disabled {
+  opacity: var(--shell-disabled-opacity);
+  cursor: default;
+  color: var(--explorer-control-text);
+  background: var(--explorer-header-control-background);
+}
+
 .planet-report-issue-link {
   box-sizing: border-box;
+  width: var(--explorer-report-issue-width);
   text-decoration: none;
   pointer-events: auto;
 }
-.planet-github-link {
-  align-items: baseline;
-  transform: translateY(-1px);
-  width: auto;
-  height: auto;
-  padding: 0;
-  color: var(--shell-text-muted);
-  font: 400 13px/18px var(--shell-ui-font);
-}
-.planet-report-issue-link { width: var(--explorer-report-issue-width); }
 
 .explorer-rail {
   gap: var(--explorer-header-control-gap);
@@ -386,9 +483,12 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 .planet-dataset-context-card .planet-card-tabpanel { padding-top: 0; }
 
 @media (min-width: 821px) and (orientation: landscape) {
-  .planet-dataset-context-rail {
+  /* Settings and the spacecraft card take turns in this slot. */
+  .planet-dataset-context-rail,
+  .planet-dataset-context-dock > .planet-settings-panel {
     --dataset-context-top: var(--explorer-controls-top);
     position: fixed;
+    margin: 0;
     width: var(--explorer-panel-width);
     top: var(--dataset-context-top);
     right: var(--explorer-panel-left);
@@ -400,7 +500,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 
 @media (min-width: 821px) and (orientation: landscape) {
   body[data-object-shell] {
-    --explorer-header-height: var(--explorer-search-height);
+    --explorer-header-height: var(--explorer-header-bar-height);
   }
 
   .planet-ui-layer {
@@ -426,29 +526,33 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
     min-height: 0;
     overflow: hidden;
     border: 0;
-    border-radius: 0;
+    border-radius: var(--explorer-card-radius);
     background: var(--explorer-panel-background);
     pointer-events: auto;
     isolation: isolate;
   }
 
+  /* Full-width row over the scene; inline padding keeps its controls on the panel edges. */
   .explorer-shell-header {
     position: relative;
     inset: auto;
-    margin: var(--explorer-header-top) 0 var(--explorer-header-panel-gap);
-    pointer-events: none;
+    margin: var(--explorer-header-top) calc(-1 * var(--explorer-panel-left)) var(--explorer-header-panel-gap);
     display: grid;
-    grid-template-columns: minmax(0, 1fr) max(440px, 33.333vw) minmax(0, 1fr);
-    grid-template-rows: var(--explorer-search-height);
-    column-gap: 0;
+    /* The wordmark column takes the free space (margin-right: auto), so the other siblings pack right. */
+    grid-template-columns: minmax(max-content, 1fr) max-content minmax(0, max-content) max-content;
+    grid-template-rows: var(--explorer-header-height);
+    /* One gap between every header control, matching the gap inside the pill groups. */
+    column-gap: 8px;
     box-sizing: border-box;
-    padding-inline-end: 0;
-    width: calc(100vw - 2 * var(--explorer-panel-left));
+    padding-inline: var(--explorer-panel-left);
+    width: 100vw;
     max-width: none;
   }
 
-  .explorer-brand-row { justify-self: start; pointer-events: auto; }
+  .explorer-brand-row { grid-column: 1; justify-self: start; pointer-events: auto; }
   .planet-search-toolbar { grid-column: 2; pointer-events: auto; }
+  .planet-search-categories { grid-column: 3; }
+  .planet-header-actions { grid-column: 4; }
 
   .planet-sidebar {
     --explorer-card-padding-left: calc(var(--explorer-content-inset) - var(--explorer-panel-padding));
@@ -476,79 +580,207 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   body[data-object-shell] {
     --explorer-header-height: calc(2 * var(--explorer-search-height) + var(--explorer-header-row-gap));
   }
-  .explorer-shell-header { grid-template-rows: repeat(2, var(--explorer-search-height)); }
-  .explorer-brand-row { grid-column: 1 / -1; }
-  .planet-search-toolbar { grid-row: 2; }
+  .explorer-shell-header {
+    grid-template-columns: max-content minmax(0, 1fr) minmax(0, max-content);
+    grid-template-rows: repeat(2, var(--explorer-search-height));
+  }
+  .explorer-brand-row { grid-row: 1; grid-column: 1; }
+  .planet-header-actions { grid-row: 1; grid-column: 3; justify-self: end; }
+  .planet-search-toolbar { grid-row: 2; grid-column: 1 / 3; }
+  .planet-search-categories { grid-row: 2; grid-column: 3; }
 }
 
 @media (min-width: 821px) and (orientation: landscape) {
   body[data-sidebar-collapsed="true"] .planet-sidebar-frame { display: none; }
-  body[data-sidebar-collapsed="true"] .explorer-shell-header { pointer-events: auto; }
   body[data-sidebar-collapsed="true"] .planet-viewport { left: 0; }
 }
 
-/* Preserve the scene-above-information flow on phones and portrait tablets. */
+/* Phones and portrait tablets use the map-app pattern: the scene fills the
+   screen, search and filters float at the top, and information rises from a
+   bottom sheet that snaps between peek, half and full. Registered lengths let
+   the sheet controller read the resolved snap heights. */
+@property --sheet-peek { syntax: "<length>"; inherits: true; initial-value: 0px; }
+@property --sheet-half { syntax: "<length>"; inherits: true; initial-value: 0px; }
+
 @media (max-width: 820px), (orientation: portrait) {
-  .explorer-shell-header {
-    position: absolute;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: repeat(2, var(--explorer-search-height));
-    width: calc(100vw - var(--explorer-panel-left) - 8px);
-    gap: var(--explorer-header-row-gap);
-    height: var(--explorer-header-height);
+  body[data-object-shell] {
+    --explorer-category-height: 36px;
+    --explorer-safe-top: env(safe-area-inset-top, 0px);
+    --explorer-safe-bottom: env(safe-area-inset-bottom, 0px);
+    --explorer-header-top: calc(8px + var(--explorer-safe-top));
+    --explorer-header-row-gap: 8px;
+    --explorer-header-height: calc(var(--explorer-search-height) + var(--explorer-header-row-gap) + var(--explorer-category-height));
+    --explorer-float-shadow: 0 1px 4px rgb(0 0 0 / 55%);
+    /* The open sheet stops below the filters, so they stay in reach while searching. */
+    /* An on-screen keyboard covers the bottom of the layout viewport without
+       shrinking it, so the sheet gives up that much room. */
+    --sheet-height: calc(100dvh - var(--explorer-controls-top) - var(--sheet-keyboard, 0px));
+    --sheet-peek: calc(152px + var(--explorer-safe-bottom));
+    --sheet-half: 50dvh;
+    --sheet-radius: 16px;
+    --sheet-shadow: 0 -1px 0 rgb(255 255 255 / 8%), 0 -8px 24px rgb(0 0 0 / 55%);
+    /* Map chrome rides just above the peeking sheet. */
+    --sheet-chrome-bottom: calc(var(--sheet-peek) + 8px);
   }
 
-  .planet-search-toolbar {
+  .explorer-shell-header {
+    position: fixed;
+    inset: var(--explorer-header-top) 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--explorer-search-height);
+    grid-template-rows: var(--explorer-search-height) var(--explorer-category-height) var(--explorer-search-height);
+    gap: var(--explorer-header-row-gap);
+    box-sizing: border-box;
+    width: 100vw;
+    height: auto;
+    padding: 0 var(--explorer-panel-left);
+  }
+
+  .planet-search-toolbar { grid-row: 1; grid-column: 1 / -1; }
+  .explorer-shell-header .planet-sidebar-search-card {
+    /* Room for the Settings avatar and the clear button beside it. */
+    padding-inline-end: calc(var(--explorer-search-height) + 32px);
+    box-shadow: var(--explorer-float-shadow);
+  }
+  /* Clear stays left of the avatar instead of under it. */
+  .explorer-shell-header .planet-sidebar-search-clear { right: 52px; }
+
+  /* Settings takes the avatar slot at the end of the search pill; the version
+     link below already leads to GitHub. */
+  .planet-header-actions { display: contents; }
+  .planet-header-link { display: none; }
+  .planet-settings-action {
+    /* Paint over the positioned search field that shares its row. */
+    position: relative;
+    z-index: 1;
+    grid-row: 1;
+    grid-column: 2;
+    justify-self: end;
+    width: 40px;
+    height: 40px;
+    margin-inline-end: 4px;
+    background: transparent;
+  }
+
+  /* Filters scroll edge to edge; the padding keeps their shadows unclipped. */
+  .planet-search-categories {
     grid-row: 2;
     grid-column: 1 / -1;
+    margin: -4px calc(-1 * var(--explorer-panel-left));
+    padding: 4px var(--explorer-panel-left);
   }
-  html:root,
-  body[data-object-shell] {
+  .planet-search-category { padding-inline: 10px 14px; box-shadow: var(--explorer-float-shadow); }
+
+  /* Spacecraft opens like a map's layers button. */
+  .planet-spacecraft-toggle {
+    grid-row: 3;
+    grid-column: 2;
+    width: var(--explorer-search-height);
+    height: var(--explorer-search-height);
+    box-shadow: var(--explorer-float-shadow);
+  }
+  .planet-spacecraft-toggle:disabled { visibility: hidden; }
+
+  /* The wordmark sits over the scene like a map watermark. */
+  .explorer-brand-row {
+    --explorer-wordmark-size: 22px;
+    position: fixed;
+    left: var(--explorer-panel-left);
+    bottom: calc(var(--sheet-chrome-bottom) + var(--explorer-status-height) + 4px);
     height: auto;
-    min-height: 100%;
-    overflow: hidden auto;
+    padding: 0;
   }
 
-  body[data-object-shell] {
-    --explorer-footer-height: calc(2 * var(--explorer-status-height));
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 0;
-  }
-
-  /* Body packages may emit site.css later; keep this responsive override stronger. */
-  body[data-object-shell] .planet-viewport {
-    position: relative;
-    inset: auto;
-    order: 0;
-    flex: 0 0 35svh;
-    width: 100%;
-    height: 35svh;
-    margin-top: var(--explorer-controls-top);
+  .explorer-brand-row,
+  .planet-spacecraft-toggle { transition: opacity 160ms ease, visibility 0s; }
+  body:is([data-sheet="half"], [data-sheet="full"]) .explorer-brand-row,
+  body[data-sheet="full"] .planet-spacecraft-toggle {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 160ms ease, visibility 0s 160ms;
   }
 
   .planet-sidebar {
-    position: relative;
-    z-index: 100;
-    inset: auto;
-    order: 1;
-    width: calc(100% - var(--explorer-panel-left) - 8px);
-    height: auto;
+    position: fixed;
+    z-index: 200;
+    inset: auto 0 var(--sheet-keyboard, 0px);
+    box-sizing: border-box;
+    width: 100%;
+    height: var(--sheet-height);
     max-height: none;
-    margin: 0 8px 0 var(--explorer-panel-left);
-    padding: 0;
+    margin: 0;
+    padding: 0 0 var(--explorer-safe-bottom);
     overflow: hidden;
     border: 0;
-    border-radius: 0;
-    background: var(--shell-surface);
+    border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
+    background: var(--explorer-panel-background);
+    box-shadow: var(--sheet-shadow);
+    transform: translate3d(0, calc(var(--sheet-height) - var(--sheet-peek)), 0);
+    transition: transform var(--sheet-snap-duration, 280ms) cubic-bezier(.2, .9, .3, 1);
+    /* Vertical drags move the sheet; sideways swipes stay with carousels. */
+    touch-action: pan-x;
+    will-change: transform;
   }
-}
+  body[data-sheet="half"] .planet-sidebar {
+    transform: translate3d(0, calc(var(--sheet-height) - var(--sheet-half)), 0);
+  }
+  body[data-sheet="full"] .planet-sidebar {
+    transform: none;
+    overflow-y: auto;
+    touch-action: pan-y;
+  }
+  .planet-sidebar.is-dragging { transition: none; }
+  .planet-sidebar .planet-card { border-radius: 0; }
 
-@media (max-width: 820px), (orientation: portrait) {
-  body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
-  body[data-sidebar-collapsed="true"] .planet-viewport {
-    flex-basis: calc(100svh - var(--explorer-controls-top));
-    height: calc(100svh - var(--explorer-controls-top));
+  /* Scale and altitude sit above the sheet, like a map's scale bar. */
+  body[data-object-shell] .planet-footer {
+    z-index: 150;
+    inset: auto var(--explorer-panel-left) var(--sheet-chrome-bottom);
+    height: var(--explorer-status-height);
+    background: transparent;
+    pointer-events: none;
+  }
+  body[data-object-shell] .planet-attribution-footer { display: none; }
+
+  /* A phone on its side has little height: the filters join the search row and
+     the sheet peeks less, so the scene keeps a usable band. */
+  @media (max-height: 480px) {
+    body[data-object-shell] {
+      --explorer-header-height: var(--explorer-search-height);
+      --sheet-peek: calc(104px + var(--explorer-safe-bottom));
+      --sheet-half: 62dvh;
+    }
+
+    .explorer-shell-header {
+      grid-template-columns: minmax(160px, 1fr) var(--explorer-search-height) minmax(0, 1.1fr);
+      grid-template-rows: var(--explorer-search-height) var(--explorer-search-height);
+    }
+
+    .planet-search-toolbar { grid-column: 1; }
+    .planet-search-categories {
+      grid-row: 1;
+      grid-column: 3;
+      margin-inline: 0 calc(-1 * var(--explorer-panel-left));
+      padding-inline: 0 var(--explorer-panel-left);
+    }
+    .planet-spacecraft-toggle { grid-row: 2; }
+  }
+
+  /* Settings opens as a secondary sheet over the information. The spacecraft
+     card needs no rule here: phones move it into the sheet's own flow. */
+  .planet-dataset-context-dock > .planet-settings-panel {
+    position: fixed;
+    z-index: 230;
+    inset: auto 0 0;
+    box-sizing: border-box;
+    width: 100%;
+    max-height: min(70dvh, var(--sheet-height));
+    margin: 0;
+    padding-bottom: var(--explorer-safe-bottom);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
+    background: var(--explorer-panel-background);
+    box-shadow: var(--sheet-shadow);
   }
 }
