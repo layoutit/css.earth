@@ -62,11 +62,11 @@ test('an alternative model owns its observation mesh, transfer limit, and sample
   assert.equal(alternativeRadial.observationSurfaces?.get('osiris'), observation);
 });
 
-test('DRACO geometry cubes bind their PDS4 label to an unfiltered, lossless I/F frame within the mesh transfer bound', async () => {
+test('PDS4 geometry cubes declare their planes and identity and bind a lossless, labelled frame within the mesh transfer bound', async () => {
  const profile = await read('dimorphos');
- assert.equal(fixtureRecord(parseTerrestrialProfile(profile),'raster','surfaceObservations',0).format, 'draco-geo');
+ assert.equal(fixtureRecord(parseTerrestrialProfile(profile),'raster','surfaceObservations',0).format, 'pds4-geometry-cube');
  for (const alter of [(p: unknown) => fixtureRecord(p)["labelPath"] = undefined, (p: unknown) => fixtureRecord(p)["qualityPath"] = 'observations/quality.fits',
-(p: unknown) => fixtureRecord(p)["allowLossy"] = true, (p: unknown) => fixtureRecord(p)["filter"] = 'V', (p: unknown) => fixtureRecord(p)["cameraPath"] = 'observations/camera.json',
+(p: unknown) => fixtureRecord(p)["allowLossy"] = true, (p: unknown) => fixtureRecord(p)["cube"] = undefined, (p: unknown) => fixtureRecord(p)["cameraPath"] = 'observations/camera.json',
 (p: unknown) => fixtureRecord(p,"transfer")["maximumSourceDistanceMeters"] = 3]) {
   const changed = structuredClone(profile); alter(changed.raster.surfaceObservations[0]);
   assert.throws(() => parseTerrestrialProfile(changed), /source-bound/);
@@ -80,4 +80,10 @@ test('a mosaic may rank frames in recipe order when one viewing direction ties t
  assert.doesNotThrow(() => parseTerrestrialProfile(profile));
  recipe.selection = 'nearest-frame';
  assert.throws(() => parseTerrestrialProfile(profile), /mosaic/);
+});
+
+test('a cube declaration belongs only to the geometry-cube format', async () => {
+ const profile = await read('comet-67p');
+ profile.raster.surfaceObservations[0].cube = { collection: 'urn:x', target: 'x', observingSystem: [], quantity: 'x', planes: { image: 'a', x: 'b', y: 'c', z: 'd', incidence: 'e', emission: 'f', phase: 'g' } };
+ assert.throws(() => parseTerrestrialProfile(profile), /source-bound/);
 });
