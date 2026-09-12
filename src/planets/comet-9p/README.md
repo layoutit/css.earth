@@ -24,7 +24,7 @@ Both use the original [NASA PDS imagery](https://pdssbn.astro.umd.edu/holdings/d
 
 ## Evidence
 
-- **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../tests/objects/unit/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
+- **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../tests/objects/unit/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. The 68 catalog and terrain checks passed at `2c24ca749`, after merging main's photographic updates. The [browser capture](evidence/terrain-places/whole-body-2c24ca749.jpg), taken in the in-app browser at 1280 × 720, shows S2 and the Deep Impact site without a selected place at whole-body framing on the NExT lens. Rotating at the same distance also revealed S1. The label change preserves coordinates, captions, mesh, imagery and screen-size admission.
 
 - The [close-up comparison and browser record](evidence/closeups/README.md) show the eight-image result at the same camera and at DPR 1 and 2.
 
