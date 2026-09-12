@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { OBJECTS } from '../objects.mts';
+import { browserObjects } from './browser-objects.mts';
 
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const output = 'output/playwright/flight-registry';
@@ -14,7 +15,7 @@ try {
   for (const dpr of [1, 2]) {
     const page = await createTestPage(browser, { viewport: { width: 1440, height: 1000 }, deviceScaleFactor: dpr });
     page.on('pageerror', error => errors.push(error.message));
-    for (const { id } of OBJECTS) {
+    for (const { id } of browserObjects()) {
       await page.goto(start);
       await page.waitForFunction(() => window.__cssEarth?.ready);
       await page.evaluate(id => window.__cssearthTest.htmlElement(document.querySelector(`.planet-object-link[data-object-id="${id}"]`)).click(), id);

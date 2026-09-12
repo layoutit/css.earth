@@ -1110,10 +1110,10 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
   // Clearing the query leaves the results behind, exactly as Escape does.
   documentTarget.querySelector(".planet-sidebar-search-clear")
     ?.addEventListener("click", leaveSearch, { signal });
-  // The spacecraft card sits inside the sheet, so opening it has to show it.
-  const spacecraft = documentTarget.querySelector(".planet-spacecraft-toggle");
-  spacecraft?.addEventListener("click", () => {
-    if (mobile.matches && state === "peek" && spacecraft.getAttribute("aria-pressed") === "true") settle("half");
+  // The machine card sits inside the sheet, so opening it has to show it.
+  const machineToggle = documentTarget.querySelector(".planet-machine-toggle");
+  machineToggle?.addEventListener("click", () => {
+    if (mobile.matches && state === "peek" && machineToggle.getAttribute("aria-pressed") === "true") settle("half");
   }, { signal });
   mobile.addEventListener("change", () => {
     gesture = null;

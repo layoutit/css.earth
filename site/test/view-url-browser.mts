@@ -180,7 +180,7 @@ async function read(page: Page) {
     const api = window.__cssearthTest.object("mercury"), camera = window.__cssearthTest.physicalCamera("mercury"), playback = api.runtime.playback();
     const sky = api.sky.state(), lighting = window.__cssearthTest.record(api.material.state().lighting, "lighting material");
     const matrix = (selector: string) => Array.from(new DOMMatrix(window.__cssearthTest.html(selector).style.transform).toFloat64Array());
-    const sun = window.__cssearthTest.html(".mercury-sun"), material = window.__cssearthTest.html(".mercury-material");
+    const sun = window.__cssearthTest.html(".mercury-directional-sun"), material = window.__cssearthTest.html(".mercury-material");
     return { camera: { controlPitch: camera.controlPitch, controlYaw: camera.controlYaw, zoom: camera.zoom,
       distanceKilometers: camera.distanceKilometers, pose: camera.pose },
     derivedSky: window.__cssearthTest.required(api.runtime.view(), "published view").skyboxMatrix,

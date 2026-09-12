@@ -9,10 +9,10 @@ import { dirname, resolve } from "node:path";
 import sharp from "sharp";
 
 import { packProjectiveSurfaceRaster } from
-  "../../../../../src/platform/projective-surface-raster.mts";
-import shape from "../../../../../src/planets/mars/source/preparation/ellipsoid.json" with {type:'json'};
-import {createEllipsoidGeometry} from "../../../../../tools/objects/terrestrial-layers/ellipsoid-geometry.mts";
-import {preparePolarAtlas} from "../../../../../tools/objects/terrestrial-layers/polar-stabilization.mts";
+  "../../../../src/platform/projective-surface-raster.mts";
+import shape from "../../../../src/planets/mars/source/preparation/ellipsoid.json" with {type:'json'};
+import {createEllipsoidGeometry} from "../../../objects/terrestrial-layers/ellipsoid-geometry.mts";
+import {preparePolarAtlas} from "../../../objects/terrestrial-layers/polar-stabilization.mts";
 const MARS_BODY_LATITUDE_BOUNDS_DEGREES=shape.latitudeBoundsDegrees;
 const marsBodyRasterBands=createEllipsoidGeometry(shape).rasterBands;
 const prepareMarsPolarAtlas=(source: Parameters<typeof preparePolarAtlas>[0],size: number,options: Partial<Parameters<typeof preparePolarAtlas>[2]>)=>preparePolarAtlas(source,size,{...shape.polar,...options});
@@ -72,7 +72,7 @@ const manifest = Object.freeze({
   qualification: "DETERMINISTIC_UNLIT_REGISTRATION_SOURCE",
   generator: Object.freeze({
     version: GENERATOR_VERSION,
-    path: "tests/objects/oracle/mars/google-earth-pro/prepare-calibration-surface.mts",
+    path: "tools/oracles/mars/google-earth-pro/prepare-calibration-surface.mts",
     sha256: sha256(generatorBytes),
   }),
   source: sourceDescriptor,

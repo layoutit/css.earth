@@ -3,6 +3,7 @@ import { createTestPage } from './browser-observations.mts';
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
 import { OBJECTS } from "../objects.mts";
+import { browserObjects } from './browser-objects.mts';
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 // Playwright normally disables BFCache. Allow Chrome to make a real admission
@@ -11,7 +12,7 @@ const browser = await chromium.launch({ channel: "chrome", headless: true,
   ignoreDefaultArgs: ["--disable-back-forward-cache"] });
 const report:{browser:string;capturedAt:string;cases:unknown[]} = { browser: browser.version(), capturedAt: new Date().toISOString(), cases: [] };
 try {
-  for (const object of OBJECTS) {
+  for (const object of browserObjects()) {
     const context = await browser.newContext({ viewport: { width: 1200, height: 800 } });
     try {
       const page = await createTestPage(context);
