@@ -2,6 +2,7 @@ import { sourceResolver, parseSourceBinding } from '../src/platform/source-catal
 import { compileSourceUsage } from '../src/platform/source-usage.mts';
 import type { SourceUse } from '../src/platform/source-usage.mts';
 import { parsePreparedSources, sourceCatalogDigest } from '../src/platform/prepared-sources.mts';
+import { observationEvidenceOutputMatches, parsePreparedObservationEvidence } from '../src/platform/observation-evidence.mts';
 import { readSourceCatalog } from './read-source-catalogue.mts';
 import { sourceInventory, metadataCitations, factsheetCitations } from './source-catalogue-inputs.mts';
 import { parseFactsheet, verifyFactsheetSources } from './factsheet-sources.mts';
@@ -30,7 +31,7 @@ export const explorationCompilerClosure = [
   'site/source/machines/catalog.json', 'site/source/machines/render-library.json', 'site/source/machines/emblem-library.json',
   'site/source/agency-logos.json', 'tools/read-source-catalogue.mts',
   'src/platform/source-catalog.mts', 'src/platform/source-usage.mts', 'src/platform/source-manifest.mts',
-  'src/platform/prepared-sources.mts', 'tools/source-catalogue-inputs.mts',
+  'src/platform/prepared-sources.mts', 'src/platform/observation-evidence.mts', 'tools/source-catalogue-inputs.mts',
   'tools/factsheet-sources.mts', 'site/fact-order.mts', 'tools/restore-factsheet-evidence.mts',
   'tools/source-values.mts', 'tools/objects/operations.ts', 'tools/objects/operations-acquisition.ts',
   'src/objects/milky-way/source/sky/provenance.json', 'src/objects/milky-way/source/provenance.json',
@@ -131,6 +132,43 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
     if (document) closure[path] = digest(JSON.stringify(document, null, 2) + '\n');
     else document = validateObjectProvenance(await json(path), object.id);
     if (document.manifest.sha256 !== closure[`${base}/source/manifest.json`]) throw new Error(`Stale provenance for ${object.id}; run pnpm prepare:provenance.`);
+    // This optional prepared report is UI-facing evidence, so its presence and
+    // bytes must remain closed over by the source catalogue.  It is declared
+    // as a local product output by provenance; neither a new file nor a stale
+    // output pin can silently become a source of displayed claims.
+    const observationPath = `${base}/prepared/observations.json`;
+    const declaredObservations = document.products.flatMap(product => product.outputs
+      .filter(output => output.url === 'object:prepared/observations.json'));
+    const observationBytes = await readFile(resolve(root, observationPath)).catch((error: unknown) => {
+      if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null;
+      throw error;
+    });
+    const report = observationBytes === null ? null : parsePreparedObservationEvidence(JSON.parse(observationBytes.toString('utf8')));
+    if (report && (report.objectId !== object.id || report.sourceManifestSha256 !== document.manifest.sha256))
+      throw new Error(`Stale provenance for ${object.id}; prepared observations have a different object or source manifest.`);
+    // The report pins the producer closure. Include it in the same
+    // closure so a decoder or reporting algorithm cannot drift behind a still
+    // byte-identical report during direct catalogue compilation.
+    if (report) {
+      for (const generator of [report.generator, ...report.generator.dependencies]) {
+        const bytes = await input(generator.path);
+        if (digest(bytes) !== generator.sha256)
+          throw new Error(`Stale provenance for ${object.id}; observation generator changed. Run pnpm prepare:provenance.`);
+      }
+      for (const dataset of report.datasets) {
+        const products = document.products.filter(product => product.lensIds?.includes(dataset.lensId));
+        const recipe = document.recipes.find(recipe => recipe.id === dataset.recipe.id);
+        if (products.length !== 1 || products[0].recipe !== dataset.recipe.id || !recipe || recipe.sha256 !== dataset.recipe.sha256)
+          throw new Error(`Stale provenance for ${object.id}; observation recipe changed. Run pnpm prepare:provenance.`);
+        const bytes = await input(`${base}/${sourcePath(recipe.path)}`);
+        if (digest(bytes) !== recipe.sha256)
+          throw new Error(`Stale provenance for ${object.id}; observation recipe changed. Run pnpm prepare:provenance.`);
+      }
+    }
+    const actualObservation = observationBytes === null ? null : { bytes: observationBytes.length, sha256: digest(observationBytes) };
+    if (!observationEvidenceOutputMatches(declaredObservations, actualObservation))
+      throw new Error(`Stale provenance for ${object.id}; prepared observations changed or are missing. Run pnpm prepare:provenance.`);
+    if (actualObservation) closure[observationPath] = actualObservation.sha256;
     inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(document.sources.map(source => source.path))));
     objects.push({ id: object.id, name: object.name, route: object.route, controls: lenses, provenance: document });
   }

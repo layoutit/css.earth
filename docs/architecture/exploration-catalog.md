@@ -136,6 +136,12 @@ hidden in overview, Factsheet and Moons views; on narrow screens it follows the
 body card. The detail and overview Moons tabs share the same prepared orbit-parent
 list and normal object navigation.
 
+Datasets may also carry prepared [observation evidence](observations.md): the
+actual source frames, acquisition metadata and measured terrain-registration
+results. This is attached to the existing provenance product and shown only
+with its selected dataset. Mission participation and a successful source
+download cannot establish an observation's surface coverage.
+
 ## Dataset navigation
 
 A dataset view has a normal body URL, such as `/moon/#dataset=crust`. The fragment

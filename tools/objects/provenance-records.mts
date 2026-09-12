@@ -1,6 +1,7 @@
 import {requireArray, requireRecord, requireString, requireFiniteNumber} from '../source-values.mts';
 import { parseCapture } from '../../src/platform/exploration-catalog.mts';
 import { parseSourceBinding } from '../../src/platform/source-catalog.mts';
+import type { ObservationEvidence } from '../../src/platform/observation-evidence.mts';
 
 export {requireRecord as record, requireString as text};
 export const records = (value: unknown) => requireArray(value).map(item => requireRecord(item));
@@ -33,6 +34,7 @@ export interface ProvenanceRecipeSource {id: string; path: string; sha256: strin
 export interface ProductBinding {
   id: string; label: string; recipe: string; selector: string; inputPaths: string[]; parents: string[]; urls: string[];
   process: string; limitations: string[]; lensIds: string[]; recipeDependencies: string[]; interpretation?: Record<string, unknown>;
+  observationEvidence?: readonly ObservationEvidence[];
 }
 export interface ProvenanceGap {product: string; output?: string; reason: string;}
 export interface GeographicProvenance {noise?: {pin: Record<string, unknown>; prepared: Record<string, unknown>; directory: string};}

@@ -13,6 +13,8 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { OBJECT_PROVENANCE_SCHEMA, validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import { provenanceProducts } from './provenance-recipes.mts';
+import { parsePreparedObservationEvidence } from '../../src/platform/observation-evidence.mts';
+import type { PreparedObservationEvidence } from '../../src/platform/observation-evidence.mts';
 
 const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const json = async (path: string) => record(JSON.parse(await readFile(path, 'utf8')));
@@ -31,6 +33,14 @@ function assertIdentity(actual: Identity, expected: Identity, path: string) {
   if (actual.sha256 !== expected.sha256 || actual.bytes !== expected.bytes) throw new Error(`Provenance identity mismatch: ${path}.`);
 }
 
+/** The report identifies its preparer only when the checked-in generator bytes match. */
+export async function verifyObservationEvidenceGenerator(report: PreparedObservationEvidence, projectRoot: string) {
+  for (const entry of [report.generator, ...report.generator.dependencies]) {
+    const actual = sha256(await readFile(contained(projectRoot, entry.path)));
+    if (actual !== entry.sha256) throw new Error(`Observation evidence generator differs from its pinned bytes: ${entry.path}.`);
+  }
+}
+
 /**
  * Finalize lineage beside the prepared object, after its asset inventory exists.
  * Recovered records bind existing recipe/asset pins but never claim a new run.
@@ -45,6 +55,7 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid provenance object identity.');
   const manifestBytes = await readFile(resolve(sourceDirectory, 'manifest.json'));
   const manifest = provenanceManifest(JSON.parse(manifestBytes.toString('utf8')));
+  const manifestSources = new Map(manifest.inputs.map(source => [text(source.id), source]));
   const recipes = new Map<string, ProvenanceRecipeSource>();
   for (const input of records(record(record(descriptor.properties).recipe).sources)) {
     const reference = Object.assign({}, input, {id: text(input.id), path: text(input.path), sha256: text(input.sha256)});
@@ -71,10 +82,11 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
   }
   const contentEntry = contentPath === undefined ? undefined : byPath.get(contentPath);
   if (contentEntry) contentEntry.kind = 'authored-content';
-  const [lenses, assets, stagedInventory, acquisition, minimaps] = await Promise.all([
+  const [lenses, assets, stagedInventory, acquisition, minimaps, preparedObservations] = await Promise.all([
     optionalJson(resolve(outputDirectory, 'lenses.json')), optionalJson(resolve(outputDirectory, 'assets.json')),
     optionalJson(resolve(outputDirectory, 'runtime-assets.json')), optionalJson(resolve(sourceDirectory, 'preparation/acquisition.json')),
     optionalJson(resolve(outputDirectory, 'minimaps.json')),
+    optionalJson(resolve(outputDirectory, 'observations.json')),
   ]);
   const inventory = stagedInventory ?? await json(resolve(objectDirectory, 'runtime-assets.json'));
   const outputPins = new Map<string, Identity>(records(inventory.assets).map(asset => [`/scenes/${id}/${text(asset.filename)}`, identity(asset)]));
@@ -152,6 +164,30 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
     const { inputPaths, urls, ...product } = binding;
     products.push({ ...product, inputs: [...new Set(inputs)], outputs,
       inputBasis: inputs.length || product.parents.length ? 'bound-inputs' : 'authored-recipe' });
+  }
+  if (preparedObservations) {
+    const report = parsePreparedObservationEvidence(preparedObservations);
+    if (report.objectId !== id) throw new TypeError(`Observation evidence belongs to ${report.objectId}, not ${id}.`);
+    if (report.sourceManifestSha256 !== sha256(manifestBytes)) throw new Error(`Observation evidence uses a stale source manifest: ${id}.`);
+    await verifyObservationEvidenceGenerator(report, resolve(objectDirectory, '../../..'));
+    const reportInputs = new Map(report.inputs.map(input => [input.id, input.sha256]));
+    for (const input of report.inputs) {
+      const source = manifestSources.get(input.id);
+      if (!source || input.sha256 !== text(source.expectedSha256)) throw new Error(`Observation evidence input differs from its pinned source: ${id}/${input.id}.`);
+    }
+    const reportOutput = { url: 'object:prepared/observations.json', ...(await fileIdentity(resolve(outputDirectory, 'observations.json'))), verification: 'bytes-verified' };
+    for (const dataset of report.datasets) {
+      const matches = products.filter(product => product.lensIds.includes(dataset.lensId));
+      if (matches.length !== 1) throw new TypeError(`Observation evidence needs exactly one prepared lens product: ${dataset.lensId}.`);
+      const recipe = recipes.get(dataset.recipe.id);
+      if (!recipe || matches[0].recipe !== dataset.recipe.id || recipe.sha256 !== dataset.recipe.sha256)
+        throw new TypeError(`Observation evidence uses a stale selected recipe: ${dataset.lensId}.`);
+      const referenced = new Set(dataset.observations.flatMap(observation => [...observation.sourceImageIds, ...observation.cameraSourceIds,
+        ...observation.shapeSourceIds, observation.registration.sourceId]));
+      if ([...referenced].some(sourceId => !reportInputs.has(sourceId))) throw new TypeError(`Observation evidence omits a referenced input: ${dataset.lensId}.`);
+      matches[0].observationEvidence = dataset.observations;
+      matches[0].outputs.push(reportOutput);
+    }
   }
   // Minimap previews have their own outputs, but inherit the interpretation and
   // inputs of the source product. They never acquire provenance by URL matching.

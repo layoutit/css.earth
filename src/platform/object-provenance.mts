@@ -1,6 +1,8 @@
 import { isArray } from './is-array.mts';
 import { parseCapture } from './exploration-catalog.mts';
 import type { Capture } from './exploration-catalog.mts';
+import { parseObservationEvidence } from './observation-evidence.mts';
+import type { ObservationEvidence } from './observation-evidence.mts';
 import { parseSourceBinding } from './source-catalog.mts';
 import type { SourceBinding } from './source-catalog.mts';
 export type ProvenanceJson = null | boolean | number | string | readonly ProvenanceJson[] | { readonly [key: string]: ProvenanceJson };
@@ -25,6 +27,8 @@ export interface ProvenanceProduct {
   readonly recipeDependencies: readonly string[]; readonly inputs: readonly string[]; readonly parents: readonly string[];
   readonly interpretation?: { readonly kind?: string; readonly sourceKind?: string };
   readonly outputs: readonly ProvenanceOutput[]; readonly limitations?: readonly string[]; readonly lensIds?: readonly string[];
+  /** Source-frame evidence shown with this prepared dataset; never scene runtime state. */
+  readonly observationEvidence?: readonly ObservationEvidence[];
 }
 export interface ProvenanceDocument {
   readonly schema: string; readonly objectId: string; readonly basis: string;
@@ -93,6 +97,7 @@ function productShape(value: unknown): value is ProvenanceProduct {
   return record(value) && ['id','label','process','recipe','selector'].every(key => typeof value[key] === 'string')
     && ['recipeDependencies','inputs','parents'].every(key => strings(value[key]))
     && ['limitations','lensIds'].every(key => value[key] === undefined || strings(value[key]))
+    && (value.observationEvidence === undefined || isArray(value.observationEvidence) && value.observationEvidence.every(entry => { try { parseObservationEvidence(entry); return true; } catch { return false; } }))
     && (value.interpretation === undefined || record(value.interpretation) && optionalString(value.interpretation.kind) && optionalString(value.interpretation.sourceKind))
     && isArray(value.outputs) && value.outputs.every(outputShape);
 }
@@ -155,6 +160,18 @@ export function validateObjectProvenance(input: unknown, objectId?: string): Pro
       throw new TypeError(`Unbound provenance product: ${product.id}.`);
     unique(product.inputs, 'product input');
     unique(product.parents, 'product parent');
+    if (product.observationEvidence !== undefined) {
+      const evidence = product.observationEvidence.map(parseObservationEvidence);
+      unique(evidence.map(item => item.id), 'observation evidence');
+      if (!product.lensIds?.length) throw new TypeError('Observation evidence needs a prepared dataset.');
+      const lineage = new Set(productSourceIds(value, product.id));
+      const outputs = new Set(product.outputs.map(output => output.url));
+      for (const item of evidence) {
+        const ids = [...item.sourceImageIds, ...item.cameraSourceIds, ...item.shapeSourceIds, item.registration.sourceId];
+        if (ids.some(id => !lineage.has(id))) throw new TypeError(`Observation evidence names an input outside product lineage: ${item.id}.`);
+        if (item.thumbnail && !outputs.has(item.thumbnail.url)) throw new TypeError(`Observation evidence thumbnail is not a product output: ${item.id}.`);
+      }
+    }
     for (const output of product.outputs) {
       if (!nonempty(output.url) || !digest(output.sha256) || !Number.isSafeInteger(output.bytes) || output.bytes < 0)
         throw new TypeError(`Unpinned provenance output: ${product.id}.`);

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {parseTerrestrialProfile} from './index.mts';
+import {radialModelForLens} from './radial-models.mts';
 const read = async (id: string) => JSON.parse(await readFile(new URL(`../../../src/planets/${id}/source/preparation/terrestrial.json`,import.meta.url), 'utf8'));
 test('authored scientific body profiles dispatch without body-named executable recipes',async()=>{
  for(const id of ['mars','ceres','io','europa','ganymede','callisto'])assert.equal(parseTerrestrialProfile(await read(id)).namespace,id);
@@ -43,4 +44,24 @@ test('georeferenced photographs bind quality, physical distances and bounded dis
   const changed = structuredClone(profile); alter(changed.raster.surfaceObservations[0]);
   assert.throws(() => parseTerrestrialProfile(changed), /source-bound/);
  }
+});
+
+test('an alternative model owns its observation mesh, transfer limit, and sampler state', async () => {
+  const profile = await read('comet-67p');
+  const alternative = structuredClone(profile.geometry.radialTerrain);
+  profile.geometry.radialTerrain.simplification.maximumErrorMeters = 49;
+  profile.geometry.radialTerrainAlternatives = [{ ...alternative, lensId: 'osiris' }];
+  assert.doesNotThrow(() => parseTerrestrialProfile(profile), 'OSIRIS transfer limit belongs to its declared alternative mesh');
+  profile.geometry.radialTerrainAlternatives[0].simplification.maximumErrorMeters = 49;
+  assert.throws(() => parseTerrestrialProfile(profile), /source-bound/, 'the alternative mesh enforces the transfer limit');
+
+  const observation = { samplePoint() { return null; } };
+  const base: {observationSurfaces?: Map<string, typeof observation>} = {};
+  const alternativeRadial: {observationSurfaces?: Map<string, typeof observation>} = {};
+  const selected = radialModelForLens([{ lensIds: ['model'], radial: base }, { lensIds: ['osiris'], radial: alternativeRadial }], 'osiris');
+  selected.radial.observationSurfaces ??= new Map();
+  selected.radial.observationSurfaces.set('osiris', observation);
+  assert.equal(selected.radial, alternativeRadial);
+  assert.equal('observationSurfaces' in base, false);
+  assert.equal(alternativeRadial.observationSurfaces?.get('osiris'), observation);
 });

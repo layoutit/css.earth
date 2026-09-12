@@ -3,6 +3,7 @@ import type { ExplorationCatalog } from '../src/platform/exploration-catalog.mts
 import type { ProvenanceDocument } from '../src/platform/object-provenance.mts';
 import type { SourceUsage } from '../src/platform/source-usage.mts';
 import { sourceCitationUrl, type SourceResolver } from '../src/platform/source-catalog.mts';
+import type { ObservationEvidence } from '../src/platform/observation-evidence.mts';
 import { objectSources } from './object-sources.mts';
 
 interface SourceGroup {
@@ -10,6 +11,14 @@ interface SourceGroup {
   /** The dataset's own inputs, ahead of the labels and format notes they need. */
   links: { id: string; title: string; href: string }[];
   supporting: { id: string; title: string; href: string }[];
+}
+
+interface ObservationSourceLink { id: string; title: string; href: string; }
+export interface DatasetObservation extends ObservationEvidence {
+  readonly images: readonly ObservationSourceLink[];
+  readonly cameras: readonly ObservationSourceLink[];
+  readonly shapes: readonly ObservationSourceLink[];
+  readonly registrationSource: ObservationSourceLink;
 }
 
 /** Build-time presentation of the prepared dataset's actual contribution edges. */
@@ -26,6 +35,21 @@ export function datasetContext(objectId: string, lensId: string, provenance: Pro
   const notes = [...new Map(edges.flatMap(({ attribution }) =>
     attribution.kind === 'unresolved' ? [[attribution.label, { label: attribution.label, reason: attribution.reason }] as const] : [])).values()];
   const local = new Map(provenance?.sources.map(source => [source.id, source]));
+  const observationSource = (id: string): ObservationSourceLink => {
+    const source = local.get(id);
+    if (!source) throw new TypeError(`Observation evidence names unavailable source: ${id}.`);
+    const catalogue = source.sourceBinding?.kind === 'catalogued' ? sources[source.sourceBinding.references[0]?.catalogueId] : undefined;
+    return { id, title: source.title ?? source.label ?? catalogue?.title ?? id,
+      href: catalogue ? sourceCitationUrl(catalogue) : source.sourceUrl ?? source.origin };
+  };
+  const observations: DatasetObservation[] = [];
+  for (const product of provenance?.products ?? []) if (product.lensIds?.includes(lensId)) {
+    for (const observation of product.observationEvidence ?? []) {
+      observations.push({ ...observation, images: observation.sourceImageIds.map(observationSource),
+        cameras: observation.cameraSourceIds.map(observationSource), shapes: observation.shapeSourceIds.map(observationSource),
+        registrationSource: observationSource(observation.registration.sourceId) });
+    }
+  }
   const groups = new Map<string, SourceGroup>();
   const seen = new Set<string>();
   const pending: { credit: string; link: SourceGroup['links'][number]; lensId?: string }[] = [];
@@ -60,5 +84,6 @@ export function datasetContext(objectId: string, lensId: string, provenance: Pro
     machines: catalog.machines.filter(vehicle => machineIds.has(vehicle.id)),
     notes,
     sources: [...groups.values()],
+    observations,
   };
 }

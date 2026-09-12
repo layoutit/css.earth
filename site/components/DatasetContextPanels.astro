@@ -93,6 +93,26 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
           </article>
         </div>)}
       </PlanetCard>)}
+      {context.observations.length > 0 && <PlanetCard class="planet-dataset-context-card" role="region" aria-label="Observations used">
+        <div class="planet-card-tabpanel">
+          <h2 class="planet-lens-details-title">Observations used</h2>
+          {context.observations.map(observation => <details class="planet-lens-facts" data-observation-evidence={observation.id}>
+            <summary>{observation.title}{observation.observedAt && <> · {observation.observedAt}</>}</summary>
+            {observation.thumbnail && <img class="planet-lens-texture" src={observation.thumbnail.url} width={observation.thumbnail.width}
+              height={observation.thumbnail.height} alt={observation.thumbnail.alt} loading="lazy" decoding="async" />}
+            <ul class="planet-facts" aria-label={`${observation.title} observation evidence`}>
+              {observation.instrument && <li><span class="planet-fact-label">Instrument</span> <span class="planet-fact-value">{observation.instrument}</span></li>}
+              {observation.quantity && <li><span class="planet-fact-label">Quantity</span> <span class="planet-fact-value">{observation.quantity}</span></li>}
+              <li><span class="planet-fact-label">Terrain registration</span> <span class="planet-fact-value">Archived controls · {observation.registration.method} · {observation.registration.validatedControlCount} validated controls{observation.registration.maximumResidualMeters !== undefined && ` · max residual ${observation.registration.maximumResidualMeters} m`}{observation.registration.maximumResidualPixels !== undefined && ` · max residual ${observation.registration.maximumResidualPixels} px`}</span></li>
+              {observation.coverage && <li><span class="planet-fact-label">Measured coverage</span> <span class="planet-fact-value">{observation.coverage.surfacePercent !== undefined && `${observation.coverage.surfacePercent}% surface`}{observation.coverage.qualifiedPixels !== undefined && `${observation.coverage.surfacePercent !== undefined ? ' · ' : ''}${observation.coverage.qualifiedPixels} qualified pixels`}{observation.coverage.withheldPixels !== undefined && `${observation.coverage.surfacePercent !== undefined || observation.coverage.qualifiedPixels !== undefined ? ' · ' : ''}${observation.coverage.withheldPixels} withheld pixels`}</span></li>}
+            </ul>
+            <p class="planet-dataset-caption">Images: {observation.images.map((source, index) => <>{index > 0 && ', '}<a href={source.href} target="_blank" rel="noreferrer">{source.title}</a></>)}</p>
+            <p class="planet-dataset-caption">Camera: {observation.cameras.map((source, index) => <>{index > 0 && ', '}<a href={source.href} target="_blank" rel="noreferrer">{source.title}</a></>)}</p>
+            <p class="planet-dataset-caption">Shape: {observation.shapes.map((source, index) => <>{index > 0 && ', '}<a href={source.href} target="_blank" rel="noreferrer">{source.title}</a></>)}</p>
+            <p class="planet-dataset-caption">Registration input: <a href={observation.registrationSource.href} target="_blank" rel="noreferrer">{observation.registrationSource.title}</a></p>
+          </details>)}
+        </div>
+      </PlanetCard>}
       {context.sources.length > 0 && <PlanetCard class="planet-dataset-context-card" role="region" aria-label="Sources">
         <div class="planet-card-tabpanel">
           <h2 class="planet-lens-details-title">Sources</h2>
