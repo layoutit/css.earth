@@ -211,8 +211,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "mars-global-surveyor",
+            "kind": "machine",
+            "machineId": "mars-global-surveyor",
             "missionId": "mars-global-surveyor",
             "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}"
           }
@@ -249,8 +249,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "odyssey",
+            "kind": "machine",
+            "machineId": "odyssey",
             "missionId": "odyssey",
             "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}"
           }

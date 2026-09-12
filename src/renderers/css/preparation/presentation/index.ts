@@ -2,13 +2,16 @@ import { parsePreparedObjectRuntime } from '../../validation/index.js';
 import { loadPresentationAdapters } from './adapters.js';
 import { prepareRowBankCutaway } from './row-bank-cutaway.js';
 import { prepareComposite } from './composite.js';
-import type { PresentationInputs } from './types.js';
+import type { PresentationInputs, TextureLevelProfile } from './types.js';
+import { parseTextureLevelProfile } from './surface-texture-levels.js';
 import { prepareActivationGroups } from '../../../../../tools/prepared-activation-groups.mts';
 export type { PresentationInputs } from './types.js';
 
 export interface PresentationProfile {
   schema: 'cssearth-css-presentation-profile@1'; namespace: string;
   mode: PresentationInputs['mode'];
+  /** Prepared surface levels chosen by projected silhouette; row-bank cutaway only. */
+  textureLevels?: TextureLevelProfile;
 }
 export function parsePresentationProfile(value: unknown): PresentationProfile {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Presentation profile must be an object.');
@@ -17,11 +20,16 @@ export function parsePresentationProfile(value: unknown): PresentationProfile {
       !/^[a-z][a-z0-9-]*$/.test(input.namespace) || !['row-bank-cutaway', 'composite'].includes(String(input.mode))) {
     throw new TypeError('Unsupported CSS presentation profile.');
   }
+  if (input.textureLevels !== undefined) {
+    if (input.mode !== 'row-bank-cutaway') throw new TypeError('Surface texture levels require the row-bank cutaway presentation.');
+    parseTextureLevelProfile(input.textureLevels);
+  }
   return input as unknown as PresentationProfile;
 }
 /** Compile capabilities into a retained CSS tree; the runtime accepts only validated data. */
 export async function prepareCssPresentation(input: PresentationInputs) {
   if (input.namespace !== input.solarSource.bodyId) throw new TypeError('Presentation and physical source identities disagree.');
+  if (input.textureLevels !== undefined && input.mode !== 'row-bank-cutaway') throw new TypeError('Surface texture levels require the row-bank cutaway presentation.');
   const adapters = await loadPresentationAdapters();
   const compile = input.mode === 'row-bank-cutaway' ? prepareRowBankCutaway : input.mode === 'composite' ? prepareComposite : null;
   if (!compile) throw new TypeError('Unsupported material composition.');

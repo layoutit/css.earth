@@ -32,7 +32,7 @@ export function sourceInventory(manifest: unknown, ownerPath: string, sources: S
 /** Read claim-local citations recursively; metadata never supplies lens or observation edges. */
 export function metadataCitations(raw: unknown, ownerPath: string, sources: SourceResolver): SourceUse[] {
   const edges: SourceUse[] = [], catalog = sourceObject(raw);
-  for (const [collection,consumerKind] of [['missions','mission'],['spacecraft','spacecraft']] as const) {
+  for (const [collection,consumerKind] of [['missions','mission'],['machines','machine']] as const) {
     for (const [entityIndex,entity] of sourceArray(catalog[collection],sourceObject).entries()) {
       const consumerId = sourceText(entity.id), consumerLabel = sourceText(sourceObject(entity.name).value);
       const walk = (value: unknown, locator: string) => {

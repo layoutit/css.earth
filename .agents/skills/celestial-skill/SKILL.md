@@ -209,6 +209,34 @@ or registration errors in preparation and regenerate affected companion assets.
 Show useful visual results while continuing the authorized work; a preview is
 not an automatic stop for approval.
 
+## 4a. Review every object before a faithfulness PR
+
+When a faithfulness change spans the catalog, inventory every registered
+`object.json` and `source/manifest.json` first, plus README-only stubs. Classify
+each package as a controlled source map/camera, a source product with a pending
+shape transfer, a scientific or model-derived field, an insufficiently
+registered photographic lens, or a shape/elevation-only scene. Record the
+counts and complete IDs in a maintained shared review document; do not infer
+coverage from the number of files or from the existence of a texture.
+
+Accept a producer map only when its body-fixed coordinate frame, shape/map
+reference surface and missing-data convention are documented. Accept a source
+camera when the release supplies the shape/body frame and either distributed
+surface correspondences with disjoint holdouts or an equivalent measured
+camera record. A limb/terminator-only fit, generic sphere, approximate orbit or
+attitude, visual similarity, or same-renderer screenshot does not establish
+image-to-shape registration. Keep an honest model or coarse pointing view, mark
+the photographic lens deferred, and preserve the source gaps.
+
+Treat model transfer as its own gate: a map registered to one shape cannot be
+draped onto another shape until their frame and surface correspondence are
+shown. Do not delete a candidate before checking the source release or paper;
+document the unresolved transfer and retain useful non-photographic products.
+Scientific maps, thermal/radar/albedo fields and geology must be labeled by
+quantity and must never be presented as direct photographs merely because they
+are raster data. A catalog faithfulness PR changes package evidence and
+metadata only; it does not change the shared renderer or geometry architecture.
+
 ## 5. Finish delivery
 
 Use [qualification](references/qualification.md) for the relevant checks,

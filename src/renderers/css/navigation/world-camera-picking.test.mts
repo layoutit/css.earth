@@ -152,8 +152,7 @@ function secondClick(f: Fixture): void {
 }
 
 function cursor(surface: FakeSurface): string | undefined {
-  const fallback = /var\(--object-hover-cursor, (\w+)\)/.exec(surface.style.cursor ?? '');
-  return fallback ? surface.style['--object-hover-cursor'] ?? fallback[1] : surface.style.cursor;
+  return surface.style.cursor;
 }
 
 test('physical hit uses the actual translated ellipse and visible marker, never the enlarged drag radius', () => {
@@ -264,8 +263,7 @@ test('hover uses the same retained target as picking and restores the input curs
   f.fire('pointermove', 40, { buttons: 0 }); f.tick(41);
   f.destroy();
   assert.equal(f.target.dataset.objectHovered, undefined);
-  assert.equal(f.surface.style.cursor, undefined);
-  assert.equal(f.surface.style['--object-hover-cursor'], undefined);
+  assert.equal(f.surface.style.cursor, '');
   assert.equal(getEventListeners(f.surface, 'pointerleave').length, 0);
   assert.equal(getEventListeners(f.window, 'blur').length, 0);
 });
@@ -358,6 +356,8 @@ test('faded orbit chords and empty orbit groups cannot select a body', () => {
 
 test('hover coalesces pointer events and follows the latest published targets while stationary', () => {
   const f = fixture();
+  const intents: unknown[] = [];
+  f.host.addEventListener('objecthoverchange', event => { intents.push(event instanceof CustomEvent ? event.detail.interactive : event); });
   const pick = vi.spyOn(f.registry, 'pick');
   f.document.targets = [f.target];
   f.fire('pointermove', 1, { buttons: 0 });
@@ -370,6 +370,7 @@ test('hover coalesces pointer events and follows the latest published targets wh
   f.document.targets = [];
   f.tick(32);
   assert.equal(f.target.dataset.objectHovered, undefined);
+  assert.deepEqual(intents, [true, false], 'camera repicking is not a new pointer hover');
   f.destroy();
 });
 

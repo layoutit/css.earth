@@ -26,9 +26,10 @@ try {
     await page.evaluate(async () => {
       const api = await import('/src/renderers/css/dist/testing.js');
       const { worldRotationFromQuaternion } = await import('/src/renderers/css/dist/navigation.js');
-      const {parsePreparedCssPointField}=await import('/src/renderers/css/dist/index.js');
-      const source:unknown=await (await fetch('/src/objects/stellar-neighbourhood/prepared/stars.json')).json();
-      const payload=parsePreparedCssPointField(window.__cssearthTest.record(source,'prepared stars').data);
+      const {loadPreparedCssPointField}=await import('/src/renderers/css/dist/index.js');
+      const base='/src/objects/stellar-neighbourhood/';
+      const payload=await loadPreparedCssPointField(await (await fetch(`${base}object.json`)).json(),{async read(path){
+        const response=await fetch(base+path);if(!response.ok)throw new Error(`Prepared stars request failed: ${response.status}.`);return response.arrayBuffer();}});
       const NativeWorker = window.Worker;
       let created = 0, retired = 0, posted = 0;
       window.Worker = class extends NativeWorker {

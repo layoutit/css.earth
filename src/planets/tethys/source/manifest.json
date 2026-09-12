@@ -35,8 +35,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "missionId": "cassini",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Tethys_Cassini_mosaic_global_293m.tif"
           }
@@ -86,8 +86,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "missionId": "cassini",
             "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18439.jpg"
           }
@@ -138,8 +138,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "missionId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_eqradius_g.tif"
           }
@@ -188,8 +188,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "missionId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_npradius_g.tif"
           }
@@ -238,8 +238,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "missionId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_spradius_g.tif"
           }
@@ -342,6 +342,16 @@
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
@@ -377,6 +387,16 @@
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
@@ -412,6 +432,16 @@
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
@@ -1262,8 +1292,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "missionId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1807469104_1"
           }
@@ -1314,8 +1344,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "missionId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1807469104_1"
           }

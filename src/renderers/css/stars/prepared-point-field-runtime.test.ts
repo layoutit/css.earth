@@ -3,9 +3,10 @@ import { fileURLToPath } from 'node:url';
 import { afterEach, expect, test, vi } from 'vitest';
 import { mountPreparedCssPointField, pointPhotometry, projectPreparedPoint } from './prepared-point-field-runtime.js';
 import { createPointFieldSelection } from './point-field-selection.js';
-import { parsePreparedCssPointField } from './validation.js';
+import { readCanonicalPointField } from '../preparation/stars/canonical-point-field-fixture.js';
 import type { PreparedCssPointField } from './types.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
+import { createPointFramePlanner, createPointFrameReceiver, pointFrameTransfers, pointId } from './point-field-frame.js';
 
 class FakeElement {
   writes = 0;
@@ -59,10 +60,10 @@ function fixture():PreparedCssPointField {
     policy:{activeSlots:4,transitionSlots:4,maxErrorPx:2,transitionMs:180},resources:[{path:'points.png',sha256:'0'.repeat(64),bytes:1,width:32,height:32}],provenance:{},
   };
 }
-function mount(payload=fixture(), showLabels = true) {
+function mount(payload=fixture(), showLabels = true, framePlanned = false, requestPublication?: () => boolean) {
   const document=new FakeDocument(),host=document.createElement(),before=document.createElement();host.appendChild(before);
   const resolveResource=vi.fn((path:string)=>`/prepared/${path}`);
-  const layer=mountPreparedCssPointField({host:host as unknown as HTMLElement,before:before as unknown as Element,payload,resolveResource,showLabels});
+  const layer=mountPreparedCssPointField({host:host as unknown as HTMLElement,before:before as unknown as Element,payload,resolveResource,showLabels,framePlanned,requestPublication});
   return {document,host,before,layer,root:layer.root as unknown as FakeElement,resolveResource};
 }
 function leaves(root: FakeElement): FakeElement[] {
@@ -99,6 +100,98 @@ function center(element:FakeElement):readonly [number,number] {
   const half=Number(match[3])*32/2;return [Number(match[1])+half,Number(match[2])+half];
 }
 afterEach(()=>vi.useRealTimers());
+
+test('worker point publication matches synchronous projection, occlusion and fades on retained nodes', () => {
+  vi.useFakeTimers();
+  const direct = mount(fixture(), false), worker = mount(fixture(), false, true);
+  const plan = createPointFramePlanner(fixture());
+  const measured = { ...viewport, widthPixels: 800, heightPixels: 600 };
+  const drawing = (mounted: ReturnType<typeof mount>) => mounted.layer.inspect().points.map(({ element, reference }) => ({
+    reference, transform: element.style.transform, alpha: element.style.opacity,
+    shown: element.style.visibility, atlas: element.style.backgroundPosition,
+  }));
+  direct.layer.publish(world(), measured, 1); worker.layer.publish(world(), measured, 1);
+  const slots = leaves(worker.root), mainProjections = worker.layer.inspect().projectedPoints;
+  let occluder: { positionM: readonly [number, number, number]; radiusM: number } | undefined;
+  const poses = [world(-10), world(5), world(5, 0, [0, 0, Math.SQRT1_2, Math.SQRT1_2]), world(5), world(-50), world(0)];
+  for (const [index, pose] of poses.entries()) {
+    if (index === 4) {
+      occluder = { positionM: [0, 0, -50 * parsec], radiusM: parsec * 30 };
+      direct.layer.setOccluder(occluder); worker.layer.setOccluder(occluder);
+    }
+    const snapshot = worker.layer.captureFrame();
+    const packet = plan(index + 1, structuredClone(snapshot.state), pose, measured, occluder);
+    const transported = structuredClone(packet, { transfer: pointFrameTransfers(packet) });
+    expect(snapshot.current()).toBe(true);
+    direct.layer.publish(pose, measured, 1);
+    worker.layer.publish(pose, measured, 1, [], transported);
+    expect(drawing(worker)).toEqual(drawing(direct));
+    direct.document.frame(40); worker.document.frame(40);
+    expect(drawing(worker)).toEqual(drawing(direct));
+  }
+  expect(worker.layer.inspect().projectedPoints).toBe(mainProjections);
+  expect(worker.layer.inspect().workerPublications).toBe(poses.length);
+  expect(leaves(worker.root)).toEqual(slots);
+  direct.layer.destroy(); worker.layer.destroy();
+});
+
+test('point deltas acknowledge only committed state and repair after a discarded response', () => {
+  const data = fixture(), plan = createPointFramePlanner(data), receiver = createPointFrameReceiver();
+  const measured = { ...viewport, widthPixels: 800, heightPixels: 600 };
+  const selected = createPointFieldSelection(data)({ eyeUnits: [0,0,0], viewRotation: [1,0,0,0,1,0,0,0,1],
+    focalPx: 400, viewportHalfWidthPx: 430, viewportHalfHeightPx: 320 });
+  const state = () => ({ committedId: receiver.committedId, active: Uint32Array.from(selected.representatives.map(pointId)), outgoing: new Uint32Array(), select: false });
+  const first = plan(1, state(), world(), measured); receiver.accept(structuredClone(first));
+  expect(first.indices.length).toBe(first.retained.length);
+  const unchanged = plan(2, state(), world(), measured);
+  expect(unchanged.baseId).toBe(1); expect(unchanged.indices.length).toBe(0);
+  receiver.accept(unchanged);
+  const discarded = plan(3, state(), world(50), measured);
+  expect(discarded.baseId).toBe(2); // No receiver acknowledgement: camera owner discarded it.
+  const repaired = plan(4, state(), world(), measured);
+  expect(repaired.baseId).toBe(0); expect(repaired.indices.length).toBe(repaired.retained.length);
+  receiver.accept(repaired);
+  for (const id of first.retained) expect(receiver.get(id)).toEqual({ shown: first.shown[first.indices.indexOf(id)] !== 0,
+    transform: first.transforms[first.indices.indexOf(id)], alpha: first.alphas[first.indices.indexOf(id)] });
+  expect(() => receiver.accept(discarded)).toThrow('baseline');
+  const stale = receiver.committedId;
+  expect(() => receiver.accept({ ...repaired, transforms: [] })).toThrow('lengths');
+  expect(receiver.committedId).toBe(stale);
+});
+
+test('selection and occluder changes invalidate captured point state before publication', () => {
+  const { layer } = mount(fixture(), false, true);
+  layer.publish(world(), viewport, 1);
+  const snapshot = layer.captureFrame();
+  layer.setOccluder({ positionM: [0, 0, 0], radiusM: 1 });
+  expect(snapshot.current()).toBe(false);
+  const latest = layer.captureFrame(); layer.destroy(); expect(latest.current()).toBe(false);
+});
+
+test('a fade deadline retires outgoing leaves without discarding the valid in-flight camera', () => {
+  vi.useFakeTimers();
+  const refresh = vi.fn(() => true), { layer } = mount(fixture(), false, true, refresh);
+  const measured = { ...viewport, widthPixels: 800, heightPixels: 600 };
+  const plan = createPointFramePlanner(fixture());
+  layer.publish(world(), measured, 1);
+  const first = plan(1, layer.captureFrame().state, world(-10), measured);
+  layer.publish(world(-10), measured, 1, [], first);
+  const snapshot = layer.captureFrame();
+  expect(snapshot.state.select).toBe(false);
+  const pending = plan(2, snapshot.state, world(-5), measured);
+  const mainProjections = layer.inspect().projectedPoints;
+  vi.advanceTimersByTime(180);
+  expect(snapshot.current()).toBe(true);
+  expect(layer.captureFrame().state.outgoing.length).toBe(0);
+  expect(refresh).toHaveBeenCalledTimes(1);
+  layer.publish(world(-5), measured, 1, [], pending);
+  expect(refresh).toHaveBeenCalledTimes(2);
+  expect(layer.inspect().projectedPoints).toBe(mainProjections);
+  const next = layer.captureFrame();
+  expect(next.state.select).toBe(true);
+  layer.publish(world(-5), measured, 1, [], plan(3, next.state, world(-5), measured));
+  layer.destroy();
+});
 
 test('an unchanged camera and surviving identities do not rewrite retained star DOM', () => {
   vi.useFakeTimers();
@@ -197,8 +290,7 @@ test('reused outgoing slots start a fresh fade without retaining the previous op
 });
 
 test('canonical catalogue mounts only its fixed pool and preserves its full coverage during navigation',async()=>{
-  const envelope=JSON.parse(await readFile(fileURLToPath(new URL('../../../objects/stellar-neighbourhood/prepared/stars.json',import.meta.url)),'utf8')) as {data:unknown};
-  const payload=parsePreparedCssPointField(envelope.data),{layer,root}=mount(payload),slots=[...leaves(root)];
+  const payload=readCanonicalPointField(),{layer,root}=mount(payload),slots=[...leaves(root)];
   expect(payload.stars.length).toBe(109389);expect(slots.length).toBe(4098);
   expect(layer.inspect().points).toHaveLength(4096);expect(layer.inspect().points.every(point=>Object.keys(point.element.dataset).length===0)).toBe(true);
   layer.publish(world(),viewport,1);expect(layer.inspect().coveredCount).toBe(109389);expect(layer.inspect().drawnCount).toBeGreaterThan(0);expect(layer.inspect().points.filter(point=>point.element.style.visibility!=='hidden' && point.reference).every(point=>point.reference!.startsWith('star:'))).toBe(true);

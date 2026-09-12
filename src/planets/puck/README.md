@@ -22,6 +22,8 @@
 
 - Its approximate shape and limited resolution remain registration uncertainties; this is not a new photogrammetric shape solution.
 
+- **Faithfulness status:** The Monochrome image is retained as coarse limb-pointed evidence only. No surface landmarks establish image-to-shape registration, and the analytic sphere remains an approximation.
+
 - Browser results are not recorded in this source account.
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

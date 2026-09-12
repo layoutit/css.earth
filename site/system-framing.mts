@@ -2,7 +2,6 @@ import type { WorldRotation } from '../src/renderers/css/navigation/world-camera
 import type { PositionM } from '@cssearth/engine';
 import type { PreparedWorldCameraFrame, WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
-import { parsePreparedWorldContext } from '../src/renderers/css/dist/index.js';
 import type { PreparedWorldContext } from '../src/renderers/css/universe/prepared-world-context.js';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
 import type { DensityVolumeFrame } from '@cssearth/objects';
@@ -12,12 +11,10 @@ type FramingFrame = Pick<PreparedWorldCameraFrame, 'referenceFrame' | 'epochJdTt
 interface FramingCandidate { originM?: PositionM; minimumM: PositionM; maximumM: PositionM; cameraToReference: readonly number[]; }
 interface SystemView { readonly candidates: readonly FramingCandidate[]; }
 const tuple = (map: (axis: number) => number): PositionM => [map(0), map(1), map(2)];
-import contextInput from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 import galaxy from '../src/objects/milky-way/object.json' with { type: 'json' };
 import { SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_PADDING_PIXELS } from './runtime-policy.mts';
 import { rotateWorldPosition, worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
-
-const context = parsePreparedWorldContext(contextInput);
+import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
 
 /** Camera framing consumes the prepared orbit bounds, never orbit vertices. */
 export function systemFramingRadii(plan: Pick<PreparedWorldContext, 'focus' | 'bodies'>) {
@@ -43,6 +40,8 @@ export function systemFramingRadii(plan: Pick<PreparedWorldContext, 'focus' | 'b
 
 export const SYSTEM_FRAMING_RADII = systemFramingRadii(context);
 export const SYSTEM_VIEWS = new Map([context.focus, ...context.bodies].filter(body => body.systemView).map(body => [body.id, body.systemView]));
+/** Each classification's prepared view around the Sun, for the header category pills. */
+export const CLASSIFICATION_VIEWS = new Map(Object.entries(context.classificationViews ?? {}));
 export const GALACTIC_VOLUME = parseDensityVolumeFrame(galaxy.properties.volume);
 
 /** Zoom along the current viewing ray, keeping its anchor and orientation. */

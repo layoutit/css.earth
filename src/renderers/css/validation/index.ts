@@ -1,5 +1,5 @@
 import type { ObjectRuntimeDefinition } from '../runtime/object-runtime-types.js';
-import { choice, fail, record, requireJsonData, text } from './guards.js';
+import { choice, fail, parsedJsonNumbersFinite, record, requireJsonData, text } from './guards.js';
 import { requireAssets, requireTree } from './resources-tree.js';
 import { requireCamera, requireControls } from './camera-controls.js';
 import { requireSky, requireSun } from './sky.js';
@@ -8,13 +8,15 @@ import { requireMaterials } from './materials.js';
 import { requireAnimations, requireFacing, requireOptionalPresentation, requireVariants, requireViewBindings, requireTextureLevels } from './presentation.js';
 import { requireDepthPartitions } from './depth-partitions.js';
 
-/** Validate external prepared JSON before any DOM, image, or animation is created. */
-export function parsePreparedObjectRuntime(value: unknown): ObjectRuntimeDefinition {
-  requireDefinition(value);
+/** Validate external prepared JSON before any DOM, image, or animation is created.
+ * `parsedJson` marks a direct JSON.parse result: only its numbers need the
+ * plain-data check, and the labelled walk runs only to report a failure. */
+export function parsePreparedObjectRuntime(value: unknown, { parsedJson = false }: { parsedJson?: boolean } = {}): ObjectRuntimeDefinition {
+  requireDefinition(value, parsedJson);
   return value;
 }
-function requireDefinition(value: unknown): asserts value is ObjectRuntimeDefinition {
-  requireJsonData(value);
+function requireDefinition(value: unknown, parsedJson: boolean): asserts value is ObjectRuntimeDefinition {
+  if (!parsedJson || !parsedJsonNumbersFinite(value)) requireJsonData(value);
   const plan = record(value, 'runtime plan', ['schema', 'id', 'controls', 'camera', 'sky', 'sun', 'assets', 'tree', 'variants', 'materials',
     'viewBindings', 'animations', 'motion', 'facing', 'depthPartitions', 'resourceOrder', 'destinations', 'motionFrame', 'pageLayers', 'heliocentricView', 'surfaceHit', 'textureLevels', 'features']);
   if (plan.schema !== 'cssearth-object-runtime@4') fail('runtime schema is incompatible');

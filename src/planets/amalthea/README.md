@@ -18,6 +18,8 @@ Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point sh
 
 - This is approximate registration, not a new photogrammetric solution. The closest observation withholds five source pixels next to known sky/invalid boundaries to reflect that uncertainty; valid lower-resolution imagery supplies overlap.
 
+- **Faithfulness status:** The Monochrome lens is retained as a coarse observation and pointing aid, not as a feature-registered photographic surface. The existing shape and Elevation view remain the supported measured/model views.
+
 - **Shape and elevation:** It describes overall shape, not altimetry or height above a geoid; unresolved/modelled regions and potentially exaggerated facets/depressions remain source limitations.
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

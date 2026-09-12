@@ -47,6 +47,8 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
         const weight = weights[bank.axis];
         bank.projection.style.opacity = String(weight);
         bank.projection.style.visibility = weight > 0 ? 'visible' : 'hidden';
+        // A zero-weight axis contributes nothing; its 3D leaves leave compositing.
+        bank.projection.style.display = weight > 0 ? '' : 'none';
       }
     },
     destroy() { if (destroyed) return; destroyed = true; root.remove(); },

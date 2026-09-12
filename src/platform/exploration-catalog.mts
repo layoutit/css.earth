@@ -2,14 +2,22 @@ import { parseSourceCitation } from './source-catalog.mts';
 import type { SourceCitation, SourceResolver } from './source-catalog.mts';
 /** Shared runtime validation for the authored and prepared exploration catalogues. */
 export interface Cited<T> { readonly value: T; readonly citations: readonly SourceCitation[]; }
-export type VehicleKind = 'orbiter' | 'lander' | 'rover' | 'probe' | 'observatory' | 'flyby' | 'sample-return';
-export interface SpacecraftRecord {
+export type MachineKind = 'orbiter' | 'lander' | 'rover' | 'probe' | 'observatory' | 'flyby' | 'sample-return'
+  | 'radar-telescope' | 'radio-telescope' | 'optical-telescope';
+/** Where the machine observes from. Ground machines are sited and never launched. */
+export type MachineSetting = 'space' | 'ground';
+export interface MachineSite { readonly latitude: number; readonly longitude: number; readonly altitude?: number; }
+export interface MachineRecord {
   readonly id: string; readonly name: Cited<string>; readonly aliases: readonly Cited<string>[];
-  readonly description: Cited<string>; readonly kind: Cited<VehicleKind>; readonly launch?: Cited<string>; readonly imageId?: string;
+  readonly description: Cited<string>; readonly kind: Cited<MachineKind>; readonly setting: Cited<MachineSetting>;
+  /** The part of the spectrum this machine works in, as its source states it. */
+  readonly band?: Cited<string>;
+  readonly launch?: Cited<string>; readonly commissioned?: Cited<string>; readonly retired?: Cited<string>;
+  readonly site?: Cited<MachineSite>; readonly imageId?: string;
 }
-export interface Participant { readonly spacecraftId: string; readonly role: VehicleKind; readonly citations: readonly SourceCitation[]; }
+export interface Participant { readonly machineId: string; readonly role: MachineKind; readonly citations: readonly SourceCitation[]; }
 export interface MissionRecord {
-  readonly id: string; readonly name: Cited<string>; readonly description: Cited<string>;
+  readonly id: string; readonly name: Cited<string>; readonly shortName?: Cited<string>; readonly description: Cited<string>;
   readonly agencyIds: Cited<readonly string[]>; readonly participants: readonly Participant[];
   readonly started?: Cited<string>; readonly ended?: Cited<string>;
   readonly status?: Cited<{ readonly value: 'active' | 'completed' | 'planned' | 'lost'; readonly asOf: string }>;
@@ -17,11 +25,11 @@ export interface MissionRecord {
 }
 export interface Agency { readonly name: string; readonly sourceUrl: string; readonly src?: string; readonly assetUrl?: string; readonly sha256?: string; readonly bytes?: number; }
 export interface ExplorationCatalog {
-  readonly schema: 'cssearth-spacecraft-catalog@3';
-  readonly spacecraft: readonly SpacecraftRecord[]; readonly missions: readonly MissionRecord[];
+  readonly schema: 'cssearth-machine-catalog@4';
+  readonly machines: readonly MachineRecord[]; readonly missions: readonly MissionRecord[];
 }
 export type CaptureAttribution =
-  | { readonly kind: 'spacecraft'; readonly spacecraftId: string; readonly missionId?: string; readonly evidence: string }
+  | { readonly kind: 'machine'; readonly machineId: string; readonly missionId?: string; readonly evidence: string }
   | { readonly kind: 'mission'; readonly missionId: string; readonly evidence: string }
   | { readonly kind: 'unresolved'; readonly label: string; readonly evidence: string; readonly reason: string };
 export interface Capture { readonly attributions: readonly CaptureAttribution[]; }
@@ -58,7 +66,19 @@ function enumeration<T extends string>(input: unknown, values: readonly T[]): T 
   if (!found) throw new TypeError(`Unsupported exploration value: ${value}.`);
   return found;
 }
-const vehicleKind = (input: unknown) => enumeration(input, ['orbiter', 'lander', 'rover', 'probe', 'observatory', 'flyby', 'sample-return'] as const);
+const machineKind = (input: unknown) => enumeration(input, ['orbiter', 'lander', 'rover', 'probe', 'observatory', 'flyby', 'sample-return', 'radar-telescope', 'radio-telescope', 'optical-telescope'] as const);
+const machineSetting = (input: unknown) => enumeration(input, ['space', 'ground'] as const);
+/** Geodetic siting for a ground machine, in the degrees/metres its context product publishes. */
+function machineSite(input: unknown): MachineSite {
+  const record = explorationRecord(input, ['latitude', 'longitude', 'altitude']);
+  const degrees = (raw: unknown, limit: number) => {
+    if (typeof raw !== 'number' || !Number.isFinite(raw) || Math.abs(raw) > limit) throw new TypeError('Invalid machine site coordinate.');
+    return raw;
+  };
+  if (record.altitude !== undefined && (typeof record.altitude !== 'number' || !Number.isFinite(record.altitude))) throw new TypeError('Invalid machine site altitude.');
+  return Object.freeze({ latitude: degrees(record.latitude, 90), longitude: degrees(record.longitude, 360),
+    ...(record.altitude === undefined ? {} : { altitude: record.altitude as number }) });
+}
 /** Validate calendar dates without expanding a source's year/month precision. */
 export function explorationDate(input: unknown, full = false): string {
   const value = explorationText(input);
@@ -87,8 +107,8 @@ export function parseAgencies(input: unknown): Readonly<Record<string, Agency>> 
   })));
 }
 export function parseExplorationCatalog(input: unknown, agencies: Readonly<Record<string, Agency>>, sources: SourceResolver): ExplorationCatalog {
-  const value = explorationRecord(input, ['schema', 'spacecraft', 'missions']);
-  if (value.schema !== 'cssearth-spacecraft-catalog@3') throw new TypeError('Unsupported spacecraft catalogue schema.');
+  const value = explorationRecord(input, ['schema', 'machines', 'missions']);
+  if (value.schema !== 'cssearth-machine-catalog@4') throw new TypeError('Unsupported machine catalogue schema.');
   const refs = (raw: unknown) => {
     const citations = explorationArray(raw, value => parseSourceCitation(value, sources));
     unique(citations.map(citation => JSON.stringify(citation)), 'citation');
@@ -99,27 +119,39 @@ export function parseExplorationCatalog(input: unknown, agencies: Readonly<Recor
     const record = explorationRecord(raw, ['value', 'citations']);
     return Object.freeze({ value: parse(record.value), citations: refs(record.citations) });
   };
-  const spacecraft = explorationArray(value.spacecraft, raw => {
-    const record = explorationRecord(raw, ['id', 'name', 'aliases', 'description', 'kind', 'launch', 'imageId']);
+  const machines = explorationArray(value.machines, raw => {
+    const record = explorationRecord(raw, ['id', 'name', 'aliases', 'description', 'kind', 'setting', 'band', 'launch', 'commissioned', 'retired', 'site', 'imageId']);
     const aliases = explorationArray(record.aliases, alias => cited(alias, explorationText));
-    unique(aliases.map(alias => alias.value), 'spacecraft alias');
+    unique(aliases.map(alias => alias.value), 'machine alias');
+    const setting = cited(record.setting, machineSetting);
+    // A machine observes from orbit or from the ground, never both. Keeping the
+    // launched and sited fields apart stops a ground record inheriting a launch.
+    const grounded = ['commissioned', 'retired', 'site'].filter(key => record[key] !== undefined);
+    if (setting.value === 'space' && grounded.length) throw new TypeError('A space machine cannot be sited or commissioned on the ground.');
+    if (setting.value === 'ground' && record.launch !== undefined) throw new TypeError('A ground machine cannot be launched.');
+    const commissioned = record.commissioned === undefined ? undefined : cited(record.commissioned, explorationDate);
+    const retired = record.retired === undefined ? undefined : cited(record.retired, explorationDate);
+    if (commissioned && retired && dateBounds(commissioned.value)[0] > dateBounds(retired.value)[1]) throw new TypeError('Machine retired before it was commissioned.');
     return Object.freeze({ id: explorationId(record.id), name: cited(record.name, explorationText), aliases,
-      description: cited(record.description, explorationText), kind: cited(record.kind, vehicleKind),
+      description: cited(record.description, explorationText), kind: cited(record.kind, machineKind), setting,
+      ...(record.band === undefined ? {} : { band: cited(record.band, explorationText) }),
       ...(record.launch === undefined ? {} : { launch: cited(record.launch, explorationDate) }),
+      ...(commissioned ? { commissioned } : {}), ...(retired ? { retired } : {}),
+      ...(record.site === undefined ? {} : { site: cited(record.site, machineSite) }),
       ...(record.imageId === undefined ? {} : { imageId: explorationId(record.imageId) }) });
   });
-  unique(spacecraft.map(record => record.id), 'spacecraft ID');
-  const spacecraftIds = new Set(spacecraft.map(record => record.id));
+  unique(machines.map(record => record.id), 'machine ID');
+  const machineIds = new Set(machines.map(record => record.id));
   const missions = explorationArray(value.missions, raw => {
-    const record = explorationRecord(raw, ['id', 'name', 'description', 'agencyIds', 'participants', 'started', 'ended', 'status', 'imageId', 'emblemId']);
+    const record = explorationRecord(raw, ['id', 'name', 'shortName', 'description', 'agencyIds', 'participants', 'started', 'ended', 'status', 'imageId', 'emblemId']);
     const participants = explorationArray(record.participants, raw => {
-      const member = explorationRecord(raw, ['spacecraftId', 'role', 'citations']);
-      const spacecraftId = explorationId(member.spacecraftId);
-      if (!spacecraftIds.has(spacecraftId)) throw new TypeError(`Unknown participating spacecraft: ${spacecraftId}.`);
-      return Object.freeze({ spacecraftId, role: vehicleKind(member.role), citations: refs(member.citations) });
+      const member = explorationRecord(raw, ['machineId', 'role', 'citations']);
+      const machineId = explorationId(member.machineId);
+      if (!machineIds.has(machineId)) throw new TypeError(`Unknown participating machine: ${machineId}.`);
+      return Object.freeze({ machineId, role: machineKind(member.role), citations: refs(member.citations) });
     });
-    unique(participants.map(member => member.spacecraftId), 'mission participant');
-    if (!participants.length) throw new TypeError('A spacecraft mission needs a participant.');
+    unique(participants.map(member => member.machineId), 'mission participant');
+    if (!participants.length) throw new TypeError('A mission needs a participant.');
     const agencyIds = cited(record.agencyIds, raw => {
       const ids = explorationArray(raw, explorationText); unique(ids, 'mission agency');
       if (!ids.length || ids.some(id => !Object.hasOwn(agencies, id))) throw new TypeError('Unknown mission agency.');
@@ -133,13 +165,17 @@ export function parseExplorationCatalog(input: unknown, agencies: Readonly<Recor
       return Object.freeze({ value: enumeration(status.value, ['active', 'completed', 'planned', 'lost'] as const), asOf: explorationDate(status.asOf, true) });
     });
     if (ended && status?.value.value === 'active' && dateBounds(ended.value)[1] < dateBounds(status.value.asOf)[0]) throw new TypeError('Active status contradicts mission end.');
-    return Object.freeze({ id: explorationId(record.id), name: cited(record.name, explorationText), description: cited(record.description, explorationText), agencyIds, participants,
+    const name = cited(record.name, explorationText);
+    // A short name titles the mission's cards; its full name then leads the description.
+    const shortName = record.shortName === undefined ? undefined : cited(record.shortName, explorationText);
+    if (shortName && shortName.value.length >= name.value.length) throw new TypeError('A mission short name must be shorter than its name.');
+    return Object.freeze({ id: explorationId(record.id), name, ...(shortName ? { shortName } : {}), description: cited(record.description, explorationText), agencyIds, participants,
       ...(started ? { started } : {}), ...(ended ? { ended } : {}), ...(status ? { status } : {}),
       ...(record.imageId === undefined ? {} : { imageId: explorationId(record.imageId) }),
       ...(record.emblemId === undefined ? {} : { emblemId: explorationId(record.emblemId) }) });
   });
   unique(missions.map(record => record.id), 'mission ID');
-  return Object.freeze({ schema: 'cssearth-spacecraft-catalog@3', spacecraft, missions });
+  return Object.freeze({ schema: 'cssearth-machine-catalog@4', machines, missions });
 }
 
 export function parseCapture(input: unknown): Capture {
@@ -147,9 +183,9 @@ export function parseCapture(input: unknown): Capture {
   const attributions = explorationArray(capture.attributions, (raw): CaptureAttribution => {
     const record = explorationRecord(raw);
     const evidence = explorationText(record.evidence);
-    if (record.kind === 'spacecraft') {
-      explorationRecord(raw, ['kind', 'spacecraftId', 'missionId', 'evidence']);
-      return Object.freeze({ kind: 'spacecraft', spacecraftId: explorationId(record.spacecraftId), evidence,
+    if (record.kind === 'machine') {
+      explorationRecord(raw, ['kind', 'machineId', 'missionId', 'evidence']);
+      return Object.freeze({ kind: 'machine', machineId: explorationId(record.machineId), evidence,
         ...(record.missionId === undefined ? {} : { missionId: explorationId(record.missionId) }) });
     }
     if (record.kind === 'mission') {
@@ -163,7 +199,7 @@ export function parseCapture(input: unknown): Capture {
     throw new TypeError('Unknown capture attribution kind.');
   });
   if (!attributions.length) throw new TypeError('Capture needs an attribution.');
-  unique(attributions.map(item => item.kind === 'unresolved' ? `unresolved:${item.label}` : item.kind === 'mission' ? `mission:${item.missionId}` : `spacecraft:${item.spacecraftId}:${item.missionId ?? ''}`), 'capture attribution');
+  unique(attributions.map(item => item.kind === 'unresolved' ? `unresolved:${item.label}` : item.kind === 'mission' ? `mission:${item.missionId}` : `machine:${item.machineId}:${item.missionId ?? ''}`), 'capture attribution');
   return Object.freeze({ attributions });
 }
 export function validateCapture(capture: Capture, catalog: ExplorationCatalog): void {
@@ -171,9 +207,9 @@ export function validateCapture(capture: Capture, catalog: ExplorationCatalog): 
     if (attribution.kind === 'unresolved') continue;
     const mission = attribution.missionId === undefined ? undefined : catalog.missions.find(mission => mission.id === attribution.missionId);
     if (attribution.missionId !== undefined && !mission) throw new TypeError(`Unknown capture mission: ${attribution.missionId}.`);
-    if (attribution.kind === 'spacecraft') {
-      if (!catalog.spacecraft.some(spacecraft => spacecraft.id === attribution.spacecraftId)) throw new TypeError(`Unknown capture spacecraft: ${attribution.spacecraftId}.`);
-      if (mission && !mission.participants.some(member => member.spacecraftId === attribution.spacecraftId)) throw new TypeError('Capture mission and spacecraft are not a participating pair.');
+    if (attribution.kind === 'machine') {
+      if (!catalog.machines.some(machine => machine.id === attribution.machineId)) throw new TypeError(`Unknown capture machine: ${attribution.machineId}.`);
+      if (mission && !mission.participants.some(member => member.machineId === attribution.machineId)) throw new TypeError('Capture mission and machine are not a participating pair.');
     }
   }
 }

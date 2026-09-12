@@ -16,11 +16,31 @@
 
 - Focused checks are defined in the [unit tests](../../../tests/objects/unit/ceres) and [browser profile](../../../tests/objects/browser/ceres/browser-profile.mts).
 
+## Registration and coverage
+
+The Dawn FC2 global mosaic is an orthorectified, body-fixed product. The
+[PDS dataset record](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=DAWN-A-FC2-5-CERESMOSAIC-V1.0)
+records that its bundle-block adjustment uses the Dawn orbit and
+attitude, the high-resolution Ceres shape model for ray intersections, and the
+same Kait-anchored longitude system used by the Dawn shape/topography work.
+The selected 140 m mosaic therefore has a documented image-to-Ceres frame; it
+does not depend on a visual crater match performed by cssEarth. The DTM is a
+separate derived product and is described as elevation, not as photographic
+texture. The false-color PIA19977 image is retained as a distinct map
+interpretation rather than being presented as calibrated monochrome.
+
+This closes the registration finding for the normal Dawn FC2 mosaic. PIA19977
+retains its published equirectangular map frame, but this review does not assert
+a pixel-for-pixel pairing with the DTM; it remains a separate false-color
+interpretation.
+It does not imply complete coverage: the PDS release states that the extreme
+south pole was not illuminated and that the mosaics contain gaps. The existing
+gray-grid treatment remains the explicit missing-coverage signal. Published
+shadows and mosaic seams remain visible.
+
 ## Known problems
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Ceres (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 0° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries, and the readout longitude counts from the map’s left edge, which here coincides with the Gazetteer origin. The map edge was fixed by cropping the source raster at a landmark’s Gazetteer centre under both hypotheses (see the pull request that added the feature).
-
-- Their large craters align visually; this is not a surveyed co-registration. Published shadows and seams are retained.
 
 - Coverage decision: both pinned rasters have three color channels and no alpha or accompanying validity mask. Southern-edge-connected exact black is used as a conservative indication of fill in each of these map images. This is a heuristic, not a surveyed coverage boundary.
 

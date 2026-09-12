@@ -24,6 +24,8 @@ Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point sh
 
 - The gray grid marks absent observation coverage, rather than treating all dark pixels as missing. A cast shadow cannot be inverted to recover terrain.
 
+- **Faithfulness status:** The Monochrome lens is retained as a coarse observation, but its two-dimensional center translation and illuminated-outline fit do not establish surface-feature registration. Elevation remains the supported shape-derived view.
+
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
