@@ -112,20 +112,21 @@
   background-image: url("/scenes/mercury/mercury-interior-section@2x.webp");
 }
 
+/* The combined pole atlas is prepared at rasterScale 4: six 1024 px tiles (normal, enhanced, topography; north then south). */
 .planet-stage[data-lens="enhanced"] .mercury-polar-north {
-  --mercury-pole-position: -512px 0px !important;
+  --mercury-pole-position: -2048px 0px !important;
 }
 
 .planet-stage[data-lens="enhanced"] .mercury-polar-south {
-  --mercury-pole-position: -768px 0px !important;
+  --mercury-pole-position: -3072px 0px !important;
 }
 
 .planet-stage[data-lens="topography"] .mercury-polar-north {
-  --mercury-pole-position: -1024px 0px !important;
+  --mercury-pole-position: -4096px 0px !important;
 }
 
 .planet-stage[data-lens="topography"] .mercury-polar-south {
-  --mercury-pole-position: -1280px 0px !important;
+  --mercury-pole-position: -5120px 0px !important;
 }
 
 /* The terminator overlay follows the body's silhouette: the runtime writes
