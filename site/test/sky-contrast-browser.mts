@@ -10,6 +10,8 @@ import { scrollToDistance as scrollTo } from './wheel-zoom-distance.mts';
 import contextInput from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 
 const worldContext=parsePreparedWorldContext(contextInput);
+const opacityProfile = worldContext.volume.opacityProfile;
+assert.ok(opacityProfile, 'the prepared world context carries a volume opacity profile');
 const baseUrl = process.argv[2] ?? 'http://127.0.0.1:4210';
 const objects = process.env.SKY_CONTRAST_OBJECT ? [process.env.SKY_CONTRAST_OBJECT] : ['mercury', 'venus', 'ceres', 'europa'];
 const dprs = process.env.SKY_CONTRAST_DPR ? [Number(process.env.SKY_CONTRAST_DPR)] : [1, 2];
@@ -25,14 +27,17 @@ try {
     page.on('pageerror', error => errors.push(error.message));
     for (const id of objects) {
       await page.goto(new URL(`/${id}/`, baseUrl).href, { waitUntil: 'networkidle' });
-      await page.waitForFunction(() => window.__cssEarth?.ready && document.querySelector('[data-sky-stars]'));
+      // The retained star layer is the subject of the contrast setting; [data-sky-stars] never existed in the shipped renderer.
+      await page.waitForFunction(() => window.__cssEarth?.ready && document.querySelector('.prepared-point-field-stars'));
       const motion = page.locator('input[name="motion"]');
       if (await motion.isChecked()) await motion.uncheck({ force: true });
       await checkContrast(page, id, dpr, 'near', 0);
       await page.mouse.move(1010, 460);
-      await scrollTo(page, Math.sqrt(worldContext.volume.fadeStartDistanceM * worldContext.volume.fullDistanceM) / 1000);
+      // The rendered crossfade follows the prepared opacity profile, which is logarithmic in
+      // distance, so its geometric midpoint is where the volume reaches half opacity.
+      await scrollTo(page, Math.sqrt(opacityProfile.fadeStartDistanceM * opacityProfile.fullDistanceM) / 1000);
       await checkContrast(page, id, dpr, 'transition', .5);
-      await scrollTo(page, worldContext.volume.fullDistanceM * 1.01 / 1000);
+      await scrollTo(page, opacityProfile.fullDistanceM * 1.01 / 1000);
       await checkContrast(page, id, dpr, 'galaxy', 1);
     }
     assert.deepEqual(errors, []);
@@ -54,7 +59,10 @@ async function checkContrast(page: Page, id:string, dpr:number, view:"near"|"tra
   assert.equal(before.imageOpacity, 1);
   assert.ok(before.preparedGlow < 1, 'This view must exercise the brightness override');
   assert.equal(before.roots, 1);
-  if (view === 'near') assert.ok(before.stars.length > 0, 'The visible shared star field must be checked');
+  // Stars near the Sun are baked into the near sky cube since #144; the point field
+  // draws only beyond the stellar band, so the near view checks the baked cube.
+  if (view === 'near') assert.equal(await page.evaluate(() => getComputedStyle(window.__cssearthTest.element('.prepared-celestial-sky-near')).visibility),
+    'visible', 'the baked neighbourhood stars must be on screen');
   assert.equal(before.sky.visibility, view === 'galaxy' ? 'hidden' : 'visible');
   await page.evaluate(() => { window.__contrastNodes = [...window.__cssearthTest.element('.planet-stage').querySelectorAll('*')]; });
   await page.screenshot({ path: resolve(output, `${id}-${view}-standard-dpr${dpr}.png`) });
@@ -88,8 +96,8 @@ async function checkContrast(page: Page, id:string, dpr:number, view:"near"|"tra
 
 function read(page: Page) {
   return page.evaluate(() => {
-    const layer = document.querySelector('[data-sky-stars]');
-    const starNodes = [...document.querySelectorAll('[data-sky-stars]')];
+    const layer = document.querySelector('.prepared-point-field-stars');
+    const starNodes = [...document.querySelectorAll('.prepared-point-field-stars')];
     return {
       mode: document.body.dataset.skyContrast,
       scene: document.querySelector('.polycss-scene')?.getAttribute('style'),

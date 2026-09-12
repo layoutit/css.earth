@@ -67,10 +67,16 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
   if (!ownWorldFrame(branch.test) || named(contextual.arguments[0]) !== adapter.params[0].name ||
       !(ownWorldFrame(frameArgument) || validatedFrame) || named(plain.arguments[0]) !== adapter.params[0].name) fail();
   if (validatedFrame && bindings.get('parsePreparedWorldCameraFrame')?.source !== '../src/renderers/css/dist/navigation.js') fail();
-  const contextImport = ast.body.find(statement => statement.type === 'ImportDeclaration' && statement.specifiers.length === 1 &&
-    statement.specifiers[0].type === 'ImportDefaultSpecifier' && statement.source.value === '../src/planets/sun/prepared/world-context.json' &&
+  // The adapter must forward the application's own prepared world context. The
+  // shell fetches and validates it in world-context-plan.mts so only the parsed
+  // plan stays resident; a bundled JSON module kept a second copy on the heap.
+  const contextName = named(contextual.arguments[1]);
+  const contextBinding = bindings.get(contextName);
+  const contextJsonImport = ast.body.some(statement => statement.type === 'ImportDeclaration' && statement.specifiers.length === 1 &&
+    statement.specifiers[0].type === 'ImportDefaultSpecifier' && statement.specifiers[0].local.name === contextName &&
+    statement.source.value === '../src/planets/sun/prepared/world-context.json' &&
     statement.attributes?.length === 1 && propertyKey(statement.attributes[0].key) === 'type' && statement.attributes[0].value.value === 'json');
-  if (contextImport?.type !== 'ImportDeclaration' || named(contextual.arguments[1]) !== contextImport.specifiers[0].local.name) fail();
+  if (!contextJsonImport && !(contextBinding?.source === './world-context-plan.mts' && contextBinding.name === 'APPLICATION_WORLD_CONTEXT')) fail();
   const plainBinding = functions.get('bindPackagedObject');
   if (!plainBinding || plainBinding.params.length !== 2 || plainBinding.params[0].type !== 'Identifier') fail();
   const defaultMount = kind(plainBinding.params[1], 'AssignmentPattern');
@@ -80,10 +86,16 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
   const plainCall = call(plainMount.body, mountIdentifier.name, 2);
   if (plainMount.params.length !== 2 || plainMount.params.some(param => param.type !== 'Identifier') || named(plainCall.arguments[0]) !== named(plainMount.params[0]) || plainCall.arguments[1].type !== 'ObjectExpression') fail();
   const bind = functions.get('bindContextualObject');
-  if (!bind || bind.params.length !== 3 || bind.params[0].type !== 'Identifier' || bind.params[1].type !== 'Identifier' || bind.body.body.length !== 2) fail();
+  // The context parameter may carry the application context as its default, so
+  // a caller that omits it still mounts against the same validated plan.
+  const contextParam = bind?.params[1];
+  const contextParamName = contextParam?.type === 'Identifier' ? contextParam.name
+    : contextParam?.type === 'AssignmentPattern' && contextParam.left.type === 'Identifier'
+      && bindings.get(named(contextParam.right))?.name === 'APPLICATION_WORLD_CONTEXT' ? contextParam.left.name : null;
+  if (!bind || bind.params.length !== 3 || bind.params[0].type !== 'Identifier' || contextParamName === null || bind.body.body.length !== 2) fail();
   const frameParameter = kind(bind.params[2], 'AssignmentPattern'), frameDefault = kind(frameParameter.right, 'MemberExpression');
   if (frameParameter.left.type !== 'Identifier' || frameDefault.computed || named(frameDefault.property) !== 'frame') fail();
-  const contextParameter = bind.params[1].name;
+  const contextParameter = contextParamName;
   const contextParser = frameDefault.object.type === 'CallExpression' ? frameDefault.object : null;
   if (contextParser) {
     if (named(contextParser.callee) !== 'parsePreparedWorldContext' || contextParser.arguments.length !== 1 || named(contextParser.arguments[0]) !== contextParameter || bindings.get('parsePreparedWorldContext')?.source !== '../src/renderers/css/dist/index.js') fail();
@@ -99,10 +111,14 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
   if (named(assignMember.object) !== 'Object' || named(assignMember.property) !== 'assign' || named(assignment.arguments[0]) !== mountId.name) fail();
   const rendererBinding = bindings.get('createWorldContextObjectRuntime');
   if (!rendererBinding || rendererBinding.name !== 'createWorldContextObjectRuntime' || bindings.get('createNavigableObjectMount')?.source !== rendererBinding.source || bindings.get(named(defaultFactory.callee))?.source !== rendererBinding.source) fail();
+  // The transport carries the pinned prepared read, and may carry the shared
+  // bank reader and its immutable base URL beside it; nothing else belongs here.
   const transport = transportObject.properties;
-  if (transport.length !== 1 || transport[0].type !== 'Property' || transport[0].computed || transport[0].kind !== 'init' ||
-      propertyKey(transport[0].key) !== 'read' || !transport[0].method) fail();
-  const method = kind(transport[0].value, 'FunctionExpression');
+  if (transport.some(property => property.type !== 'Property' || property.computed || property.kind !== 'init' ||
+      !['read', 'readShared', 'sharedUrl'].includes(String(propertyKey(property.key))))) fail();
+  const readProperty = transport.find(property => property.type === 'Property' && propertyKey(property.key) === 'read');
+  if (!readProperty || readProperty.type !== 'Property' || !readProperty.method) fail();
+  const method = kind(readProperty.value, 'FunctionExpression');
   if (!method.async || method.params.length !== 2 || method.params.some(param => param.type !== 'Identifier')) fail();
   const reference = named(method.params[0]), signal = named(method.params[1]), nodes: Node[] = [];
   const walk = (node: Node) => { nodes.push(node); for (const value of Object.values(node as unknown as Record<string, unknown>)) if (isArray(value)) value.forEach(child => { if (isRecord(child) && typeof child.type === 'string') walk(child as unknown as Node); }); else if (isRecord(value) && typeof value.type === 'string') walk(value as unknown as Node); };
