@@ -177,9 +177,9 @@ function captionPosition(element: HTMLElement | FakeElement): number[] {
   const dy = Number(element.dataset.contextLabelY?.replace('px', ''));
   return [x + dx, y + dy];
 }
-const paintedOrbitLeaf = (piece: HTMLElement | SVGPathElement) => piece.getAttribute('stroke-opacity') !== null
+const paintedOrbitLeaf = (piece: HTMLElement | SVGElement) => piece.getAttribute('stroke-opacity') !== null
   ? Boolean(piece.getAttribute('d')) : piece.style.visibility === '';
-const orbitLeafWeight = (piece: HTMLElement | SVGPathElement) => Number(piece.getAttribute('stroke-opacity') ?? piece.style.opacity);
+const orbitLeafWeight = (piece: HTMLElement | SVGElement) => Number(piece.getAttribute('stroke-opacity') ?? piece.style.opacity);
 function mount(scale: number, requestPublication?: () => boolean) {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);

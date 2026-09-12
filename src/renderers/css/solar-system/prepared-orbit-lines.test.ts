@@ -5,7 +5,8 @@ import type { OrbitSegment } from './heliocentric-view.js';
 class FakeElement {
   readonly children: FakeElement[] = []; readonly style: Record<string, string> = {}; readonly dataset: Record<string, string> = {};
   readonly attributes = new Map<string, string>(); className = ''; parentNode: FakeElement | null = null;
-  constructor(readonly ownerDocument: FakeDocument, readonly tagName: string) {}
+  readonly ownerDocument: FakeDocument; readonly tagName: string;
+  constructor(ownerDocument: FakeDocument, tagName: string) { this.ownerDocument = ownerDocument; this.tagName = tagName; }
   get parentElement() { return this.parentNode; }
   get isConnected() { return true; }
   appendChild(child: FakeElement) { child.parentNode = this; this.children.push(child); }

@@ -197,6 +197,63 @@
         "kind": "local",
         "reason": "Catalogued once the shared source record cites this manifest revision."
       }
+    },
+    {
+      "id": "draco-0401930040-12262-geo",
+      "path": "observations/dart_0401930040_12262_01_geo.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930040_12262_01_geo.fits",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930040_12262_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "consumers": [
+        "draco-observation"
+      ],
+      "expectedBytes": 67132800,
+      "expectedSha256": "280764106bd4a2eb43fd614a5f70a5008b3820b0ef22d3f75bfea8875300edd2",
+      "observationDate": "2022-09-26T23:14:12.737Z",
+      "width": 1024,
+      "height": 1024,
+      "interpretation": "Calibrated DRACO I/F with SPICE geometric backplanes: pixel-centre surface intercepts on dimorphos_g_00243mm_spc_0000n00000_v004.bds, latitude, longitude, radius, incidence, emission, phase, pixel scales, slope, elevation and gravity.",
+      "coverage": "One approach frame started 2022-09-26T23:14:12.737Z; on-body pixels are bounded by the readout window and the terminal-approach footprint.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-draco-0401930040-12262-geo",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@264978a37b9d6699d429166f6c835f3daee4e9a6#/inputs/7"
+          }
+        ]
+      }
+    },
+    {
+      "id": "draco-0401930040-12262-label",
+      "path": "observations/dart_0401930040_12262_01_geo.xml",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930040_12262_01_geo.xml",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930040_12262_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "consumers": [
+        "draco-observation"
+      ],
+      "expectedBytes": 40081,
+      "expectedSha256": "3b417f2952fb40a01ff395e6b55c81fbe7d1b150a61fb47a0118e8b4bff48890",
+      "observationDate": "2022-09-26T23:14:12.737Z",
+      "interpretation": "PDS4 label defining the cube planes, byte offsets, units, special constants and the SPICE kernels used for the backplanes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-draco-0401930040-12262-label",
+            "role": "material",
+            "evidence": "src/planets/dimorphos/source/manifest.json@264978a37b9d6699d429166f6c835f3daee4e9a6#/inputs/8"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -229,8 +286,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 13422,
-      "expectedSha256": "3bc06226f6b0f40911fd374884cb90e83240655234998dbda0c847740bb3fdf0",
+      "expectedBytes": 15111,
+      "expectedSha256": "0f4ac1a0365de8455d889f20449e977414ba0e9da9a8019a06faefdd33f484ce",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
@@ -238,8 +295,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2425,
-      "expectedSha256": "23e725f0efedf0fadfefa45d6f86087e1193940064f3398ed9a6a4634c4dc4c3"
+      "expectedBytes": 2989,
+      "expectedSha256": "181b594c22afbc5801a441dcabf91b857ad3b9914c8afb5dd39918f91caaf95f"
     },
     {
       "path": "preparation/navigation.json",
@@ -253,8 +310,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5570,
-      "expectedSha256": "02535109d6f9ee4ad87707f89db30843eb0da3c1e1ebd326e34aeef119d1c335"
+      "expectedBytes": 8758,
+      "expectedSha256": "0f0a02c055da9d1e62184cd92e5f4e63a85d1db97d463a3d45eaedc4d5aff453"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -313,7 +370,7 @@
       "expectedBytes": 7093,
       "expectedSha256": "a8878f757d6fdced9a914db22b90ae7be18080e17113e42d6c6427e78c5de297",
       "kind": "source-document",
-      "title": "Dimorphos global slope relative to gravity, model v004 — PDS4 label",
+      "title": "Dimorphos global slope relative to gravity, model v004 \u2014 PDS4 label",
       "credit": "NASA/Johns Hopkins APL/DART; ASI/LICIACube; DART shape-model team",
       "acquisition": "Unmodified PDS4 product label; restored through source/preparation/acquisition.json.",
       "productId": "urn:nasa:pds:dart_shapemodel:data_derived_dimorphos_model_v004:dimorphos_g_0972mm_spc_slp_0000n00000_v004::1.0",

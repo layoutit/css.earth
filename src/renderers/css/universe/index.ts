@@ -3,7 +3,7 @@ export { createPreparedUniverse } from './prepared-universe-runtime.js';
 export { createWorldFrameQueue } from '../navigation/world-frame-queue.js';
 export type { QueuedRequest } from '../navigation/world-frame-queue.js';
 export { loadPreparedCssVolume } from '../volume/loader.js';
-export { loadPreparedCssPointField } from '../stars/loader.js';
+export { loadPreparedPointAppearance } from '../stars/loader.js';
 export { loadPreparedCssSurfaceShell } from '../shell/loader.js';
 export { loadPreparedCssImageLayers } from '../image-layers/loader.js';
 export { createPreparedVolumeLenses, loadPreparedVolumeLenses, validatePreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';

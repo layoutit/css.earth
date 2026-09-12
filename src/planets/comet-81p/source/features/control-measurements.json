@@ -1,0 +1,1234 @@
+{
+  "schema": "cssearth-image-control-measurements@1",
+  "source": "NASA PIA06285 and its Figure 1 diagram; original zero-based pixel coordinates",
+  "method": "Diagram controls select interior linework, with three fit and three withheld controls. Photo controls use local correlation on a fixed checkerboard partition, before fitting. Weak or ambiguous matches are excluded by image correlation, not by fit residual.",
+  "photo": {
+    "policy": {
+      "patchRadius": 9,
+      "searchRadius": 6,
+      "gridStride": 24,
+      "gridOrigin": 16,
+      "targetSmoothingSigma": 0.35,
+      "minimumCorrelation": 0.9,
+      "minimumPeakMargin": 0.02,
+      "minimumJointValidFraction": 0.98
+    },
+    "crop": {
+      "left": 275,
+      "bottom": 445,
+      "width": 335,
+      "height": 335
+    },
+    "seed": [
+      0.2997536842105262,
+      0.2998136842105263,
+      -0.025579999999999985,
+      633.3460526315786,
+      445.5499999999996
+    ],
+    "controls": [
+      {
+        "id": "patch-1-4",
+        "partition": "holdout",
+        "figurePixel": [
+          804.7402850624617,
+          200.2418823876697
+        ],
+        "nativePixel": [
+          386.95314422221804,
+          484.800328663564
+        ],
+        "correlation": 0.980068509648022,
+        "peakMargin": 0.23174621366854276,
+        "residualPixels": 0.4001511619891202
+      },
+      {
+        "id": "patch-1-6",
+        "partition": "holdout",
+        "figurePixel": [
+          645.7662825954686,
+          186.67827539683537
+        ],
+        "nativePixel": [
+          435.1402749159859,
+          484.9436032871626
+        ],
+        "correlation": 0.947685649438732,
+        "peakMargin": 0.33456449337366156,
+        "residualPixels": 0.3726910975856216
+      },
+      {
+        "id": "patch-1-7",
+        "partition": "fit",
+        "figurePixel": [
+          572.3380478401455,
+          187.08421335553567
+        ],
+        "nativePixel": [
+          459.2003494321734,
+          484.5189377023799
+        ],
+        "correlation": 0.9343357454965503,
+        "peakMargin": 0.08034883230581535,
+        "residualPixels": 2.81515443032016
+      },
+      {
+        "id": "patch-1-8",
+        "partition": "holdout",
+        "figurePixel": [
+          486.79228012847557,
+          173.1146684060011
+        ],
+        "nativePixel": [
+          482.8692869587943,
+          485.01606391164125
+        ],
+        "correlation": 0.9713972872631238,
+        "peakMargin": 0.1015171991197037,
+        "residualPixels": 0.6537652068205869
+      },
+      {
+        "id": "patch-2-3",
+        "partition": "holdout",
+        "figurePixel": [
+          877.4454828005412,
+          286.49477983707885
+        ],
+        "nativePixel": [
+          362.77905235210665,
+          508.7506812224661
+        ],
+        "correlation": 0.9839835290282081,
+        "peakMargin": 0.1415592620413786,
+        "residualPixels": 0.4578819840816201
+      },
+      {
+        "id": "patch-2-4",
+        "partition": "fit",
+        "figurePixel": [
+          797.9584815670446,
+          279.7129763416617
+        ],
+        "nativePixel": [
+          387.06920978444373,
+          508.8896209994622
+        ],
+        "correlation": 0.951126752985446,
+        "peakMargin": 0.20421894806656993,
+        "residualPixels": 0.3291309200703367
+      },
+      {
+        "id": "patch-2-5",
+        "partition": "holdout",
+        "figurePixel": [
+          718.4714803335481,
+          272.9311728462445
+        ],
+        "nativePixel": [
+          410.5546858830362,
+          508.7930649518376
+        ],
+        "correlation": 0.9639553048374698,
+        "peakMargin": 0.2928804509679921,
+        "residualPixels": 0.7466519913208054
+      },
+      {
+        "id": "patch-2-8",
+        "partition": "fit",
+        "figurePixel": [
+          480.0104766330584,
+          252.5857623599931
+        ],
+        "nativePixel": [
+          483.1190715357897,
+          508.8440918940679
+        ],
+        "correlation": 0.9001672160845984,
+        "peakMargin": 0.44804330876841236,
+        "residualPixels": 0.30856303714166244
+      },
+      {
+        "id": "patch-2-9",
+        "partition": "holdout",
+        "figurePixel": [
+          400.52347539956185,
+          245.80395886457595
+        ],
+        "nativePixel": [
+          507.3178272028461,
+          509.0742617836904
+        ],
+        "correlation": 0.9622807682983197,
+        "peakMargin": 0.12991304379219948,
+        "residualPixels": 0.30698026445060583
+      },
+      {
+        "id": "patch-3-3",
+        "partition": "fit",
+        "figurePixel": [
+          870.663679305124,
+          365.96587379107086
+        ],
+        "nativePixel": [
+          363.02350844296063,
+          532.8762858133546
+        ],
+        "correlation": 0.9504332393869475,
+        "peakMargin": 0.19962195992167442,
+        "residualPixels": 0.2997408074471297
+      },
+      {
+        "id": "patch-3-4",
+        "partition": "holdout",
+        "figurePixel": [
+          791.1766780716274,
+          359.1840702956537
+        ],
+        "nativePixel": [
+          386.877020846577,
+          532.7757404567511
+        ],
+        "correlation": 0.9593414457085335,
+        "peakMargin": 0.22799919551629577,
+        "residualPixels": 0.3526250134519604
+      },
+      {
+        "id": "patch-3-5",
+        "partition": "fit",
+        "figurePixel": [
+          711.6896768381309,
+          352.4022668002366
+        ],
+        "nativePixel": [
+          411.0072944616427,
+          532.8988673748222
+        ],
+        "correlation": 0.9652541904113281,
+        "peakMargin": 0.23578322645485394,
+        "residualPixels": 0.3213637271386081
+      },
+      {
+        "id": "patch-3-6",
+        "partition": "holdout",
+        "figurePixel": [
+          632.2026756046344,
+          345.62046330481945
+        ],
+        "nativePixel": [
+          435.0171941258566,
+          532.870937642291
+        ],
+        "correlation": 0.9592598266807425,
+        "peakMargin": 0.23048569272364272,
+        "residualPixels": 0.3113369099493159
+      },
+      {
+        "id": "patch-3-7",
+        "partition": "fit",
+        "figurePixel": [
+          552.7156743711379,
+          338.8386598094023
+        ],
+        "nativePixel": [
+          459.0473190566582,
+          532.8847776153054
+        ],
+        "correlation": 0.9288122857112403,
+        "peakMargin": 0.38918121698467256,
+        "residualPixels": 0.3127812788013199
+      },
+      {
+        "id": "patch-3-8",
+        "partition": "holdout",
+        "figurePixel": [
+          473.22867313764124,
+          332.0568563139852
+        ],
+        "nativePixel": [
+          483.18485394194767,
+          532.9342819589165
+        ],
+        "correlation": 0.9293802371771527,
+        "peakMargin": 0.2180164040975976,
+        "residualPixels": 0.2347819856051663
+      },
+      {
+        "id": "patch-3-9",
+        "partition": "fit",
+        "figurePixel": [
+          393.7416719041447,
+          325.275052818568
+        ],
+        "nativePixel": [
+          507.09043672311844,
+          532.9397659043373
+        ],
+        "correlation": 0.9271199126245729,
+        "peakMargin": 0.3914048058476176,
+        "residualPixels": 0.3464124614378624
+      },
+      {
+        "id": "patch-3-10",
+        "partition": "holdout",
+        "figurePixel": [
+          314.25467067064824,
+          318.49324932315085
+        ],
+        "nativePixel": [
+          531.1507034512973,
+          532.9522313225136
+        ],
+        "correlation": 0.9534331822202076,
+        "peakMargin": 0.2519462217793773,
+        "residualPixels": 0.32333328404987444
+      },
+      {
+        "id": "patch-4-2",
+        "partition": "fit",
+        "figurePixel": [
+          943.3688770432035,
+          452.21877124048007
+        ],
+        "nativePixel": [
+          339.0855497290694,
+          556.7332165645031
+        ],
+        "correlation": 0.9768200527833519,
+        "peakMargin": 0.04582179472153458,
+        "residualPixels": 0.12216991555341516
+      },
+      {
+        "id": "patch-4-4",
+        "partition": "fit",
+        "figurePixel": [
+          784.3948745762103,
+          438.6551642496458
+        ],
+        "nativePixel": [
+          387.23102093541064,
+          556.6053674900795
+        ],
+        "correlation": 0.9601557479390247,
+        "peakMargin": 0.14700103179119717,
+        "residualPixels": 0.10353597161724606
+      },
+      {
+        "id": "patch-4-5",
+        "partition": "holdout",
+        "figurePixel": [
+          704.9078733427137,
+          431.8733607542286
+        ],
+        "nativePixel": [
+          411.0383298991667,
+          556.9149985586712
+        ],
+        "correlation": 0.9623542905552346,
+        "peakMargin": 0.22693801274307868,
+        "residualPixels": 0.25632489127993907
+      },
+      {
+        "id": "patch-4-6",
+        "partition": "fit",
+        "figurePixel": [
+          625.4208721092172,
+          425.09155725881146
+        ],
+        "nativePixel": [
+          435.25766873522366,
+          556.8149527584992
+        ],
+        "correlation": 0.9016225722243187,
+        "peakMargin": 0.15671409240292733,
+        "residualPixels": 0.050677634722648794
+      },
+      {
+        "id": "patch-4-7",
+        "partition": "holdout",
+        "figurePixel": [
+          545.9338708757207,
+          418.3097537633943
+        ],
+        "nativePixel": [
+          459.1107269650794,
+          556.9322384365157
+        ],
+        "correlation": 0.9350777516662289,
+        "peakMargin": 0.303987432915263,
+        "residualPixels": 0.22774726907796128
+      },
+      {
+        "id": "patch-4-11",
+        "partition": "holdout",
+        "figurePixel": [
+          237.92174109592153,
+          392.03026521865286
+        ],
+        "nativePixel": [
+          555.4902208664616,
+          557.0063634120961
+        ],
+        "correlation": 0.9491386772170881,
+        "peakMargin": 0.039702968312976816,
+        "residualPixels": 3.025114685605836
+      },
+      {
+        "id": "patch-5-2",
+        "partition": "holdout",
+        "figurePixel": [
+          936.5870735477863,
+          531.6898651944721
+        ],
+        "nativePixel": [
+          339.1431267169269,
+          580.8844842026278
+        ],
+        "correlation": 0.9806447263504544,
+        "peakMargin": 0.04930109224643886,
+        "residualPixels": 0.25500923876605286
+      },
+      {
+        "id": "patch-5-3",
+        "partition": "fit",
+        "figurePixel": [
+          860.1294555533765,
+          528.5019324261136
+        ],
+        "nativePixel": [
+          363.4716750291195,
+          581.0696491364088
+        ],
+        "correlation": 0.9404906184464481,
+        "peakMargin": 0.04627344751151652,
+        "residualPixels": 1.5193895405029632
+      },
+      {
+        "id": "patch-5-4",
+        "partition": "holdout",
+        "figurePixel": [
+          777.6130710807931,
+          518.1262582036378
+        ],
+        "nativePixel": [
+          387.2842061379092,
+          581.2744855123948
+        ],
+        "correlation": 0.9249091332408261,
+        "peakMargin": 0.20511920113330395,
+        "residualPixels": 0.5694516075895164
+      },
+      {
+        "id": "patch-5-5",
+        "partition": "fit",
+        "figurePixel": [
+          698.1260698472967,
+          511.3444547082206
+        ],
+        "nativePixel": [
+          411.0442045196467,
+          580.8738147945163
+        ],
+        "correlation": 0.9480553591848323,
+        "peakMargin": 0.1777361378050012,
+        "residualPixels": 0.1694051871150194
+      },
+      {
+        "id": "patch-5-7",
+        "partition": "fit",
+        "figurePixel": [
+          539.1520673803036,
+          497.78084771738634
+        ],
+        "nativePixel": [
+          459.0149375577342,
+          580.9332951446179
+        ],
+        "correlation": 0.9098049956396262,
+        "peakMargin": 0.5214117682987458,
+        "residualPixels": 0.2619363661747994
+      },
+      {
+        "id": "patch-5-8",
+        "partition": "holdout",
+        "figurePixel": [
+          459.665066146807,
+          490.99904422196914
+        ],
+        "nativePixel": [
+          483.09708621224206,
+          580.8577252225912
+        ],
+        "correlation": 0.9299370755674299,
+        "peakMargin": 0.3222253412563112,
+        "residualPixels": 0.20743088750571542
+      },
+      {
+        "id": "patch-5-11",
+        "partition": "fit",
+        "figurePixel": [
+          221.20406244631735,
+          470.6536337357178
+        ],
+        "nativePixel": [
+          555.2064495499296,
+          581.0436304355708
+        ],
+        "correlation": 0.9189960061438829,
+        "peakMargin": 0.194663963361688,
+        "residualPixels": 0.23195430100973252
+      },
+      {
+        "id": "patch-6-2",
+        "partition": "fit",
+        "figurePixel": [
+          929.8052700523692,
+          611.1609591484641
+        ],
+        "nativePixel": [
+          338.9270869840717,
+          605.0841302214176
+        ],
+        "correlation": 0.9783322287416718,
+        "peakMargin": 0.03733896991508634,
+        "residualPixels": 0.40386626104747586
+      },
+      {
+        "id": "patch-6-4",
+        "partition": "fit",
+        "figurePixel": [
+          770.831267585376,
+          597.5973521576298
+        ],
+        "nativePixel": [
+          387.09401651687836,
+          604.8011550989519
+        ],
+        "correlation": 0.9046168402676952,
+        "peakMargin": 0.26791897986670277,
+        "residualPixels": 0.036513501409861926
+      },
+      {
+        "id": "patch-6-5",
+        "partition": "holdout",
+        "figurePixel": [
+          691.3442663518795,
+          590.8155486622127
+        ],
+        "nativePixel": [
+          410.9420178496648,
+          605.0330303222347
+        ],
+        "correlation": 0.975438129502793,
+        "peakMargin": 0.18441842721535862,
+        "residualPixels": 0.3007430726349575
+      },
+      {
+        "id": "patch-6-6",
+        "partition": "fit",
+        "figurePixel": [
+          611.857265118383,
+          584.0337451667955
+        ],
+        "nativePixel": [
+          435.08830052944506,
+          604.8339585335136
+        ],
+        "correlation": 0.9530301201930133,
+        "peakMargin": 0.3498370111036382,
+        "residualPixels": 0.09097885497624589
+      },
+      {
+        "id": "patch-6-8",
+        "partition": "fit",
+        "figurePixel": [
+          452.8832626513898,
+          570.4701381759612
+        ],
+        "nativePixel": [
+          482.9440595553751,
+          605.0105802742987
+        ],
+        "correlation": 0.9037749410454303,
+        "peakMargin": 0.26915068689978117,
+        "residualPixels": 0.3345060422612336
+      },
+      {
+        "id": "patch-6-9",
+        "partition": "holdout",
+        "figurePixel": [
+          373.3962614178933,
+          563.688334680544
+        ],
+        "nativePixel": [
+          507.1032571953963,
+          604.99215039952
+        ],
+        "correlation": 0.9115187032335295,
+        "peakMargin": 0.17190101986302786,
+        "residualPixels": 0.20858246334051148
+      },
+      {
+        "id": "patch-6-10",
+        "partition": "fit",
+        "figurePixel": [
+          293.90926018439677,
+          556.9065311851269
+        ],
+        "nativePixel": [
+          531.2648066755974,
+          604.8332917621841
+        ],
+        "correlation": 0.9494911368082593,
+        "peakMargin": 0.23970347690181348,
+        "residualPixels": 0.18331161822775507
+      },
+      {
+        "id": "patch-6-11",
+        "partition": "holdout",
+        "figurePixel": [
+          214.4222589509002,
+          550.1247276897097
+        ],
+        "nativePixel": [
+          555.2655521402417,
+          604.8643505080144
+        ],
+        "correlation": 0.9548617841854643,
+        "peakMargin": 0.2910227850604895,
+        "residualPixels": 0.2126297393643581
+      },
+      {
+        "id": "patch-7-2",
+        "partition": "holdout",
+        "figurePixel": [
+          923.023466556952,
+          690.6320531024561
+        ],
+        "nativePixel": [
+          338.92050607893395,
+          629.1124261177498
+        ],
+        "correlation": 0.9740385978721889,
+        "peakMargin": 0.2104365765722933,
+        "residualPixels": 0.38883088757195955
+      },
+      {
+        "id": "patch-7-3",
+        "partition": "fit",
+        "figurePixel": [
+          843.5364653234553,
+          683.8502496070389
+        ],
+        "nativePixel": [
+          362.93489133308015,
+          629.1671237928535
+        ],
+        "correlation": 0.979390430134396,
+        "peakMargin": 0.14481953863392938,
+        "residualPixels": 0.4094920104787877
+      },
+      {
+        "id": "patch-7-4",
+        "partition": "holdout",
+        "figurePixel": [
+          764.0494640899587,
+          677.0684461116218
+        ],
+        "nativePixel": [
+          386.99424206519944,
+          629.0502098984357
+        ],
+        "correlation": 0.9521364351166728,
+        "peakMargin": 0.17058680750136623,
+        "residualPixels": 0.2543284185244048
+      },
+      {
+        "id": "patch-7-5",
+        "partition": "fit",
+        "figurePixel": [
+          684.5624628564624,
+          670.2866426162046
+        ],
+        "nativePixel": [
+          411.0099236855812,
+          629.0445452352966
+        ],
+        "correlation": 0.9580016696157242,
+        "peakMargin": 0.2446155169405927,
+        "residualPixels": 0.22129874159291898
+      },
+      {
+        "id": "patch-7-6",
+        "partition": "holdout",
+        "figurePixel": [
+          605.0754616229658,
+          663.5048391207874
+        ],
+        "nativePixel": [
+          435.016095913719,
+          628.9345087883407
+        ],
+        "correlation": 0.9693473868314617,
+        "peakMargin": 0.1612082360948922,
+        "residualPixels": 0.13644907826955122
+      },
+      {
+        "id": "patch-7-7",
+        "partition": "fit",
+        "figurePixel": [
+          525.5884603894693,
+          656.7230356253704
+        ],
+        "nativePixel": [
+          459.10132987172744,
+          629.0024779578188
+        ],
+        "correlation": 0.9554269750965529,
+        "peakMargin": 0.09297970578471282,
+        "residualPixels": 0.11837058018449392
+      },
+      {
+        "id": "patch-7-8",
+        "partition": "holdout",
+        "figurePixel": [
+          446.1014591559727,
+          649.9412321299532
+        ],
+        "nativePixel": [
+          482.99463003747906,
+          628.9920307553826
+        ],
+        "correlation": 0.9319777071089116,
+        "peakMargin": 0.3149736475971875,
+        "residualPixels": 0.23565904426208648
+      },
+      {
+        "id": "patch-7-9",
+        "partition": "fit",
+        "figurePixel": [
+          366.61445792247616,
+          643.159428634536
+        ],
+        "nativePixel": [
+          507.2259446899203,
+          629.0409263202497
+        ],
+        "correlation": 0.9747397178513869,
+        "peakMargin": 0.16931397780068058,
+        "residualPixels": 0.06442255618729938
+      },
+      {
+        "id": "patch-7-11",
+        "partition": "fit",
+        "figurePixel": [
+          207.64045545548302,
+          629.5958216437018
+        ],
+        "nativePixel": [
+          555.1013650078739,
+          628.9238410098766
+        ],
+        "correlation": 0.9643428673408426,
+        "peakMargin": 0.04134094912970343,
+        "residualPixels": 0.2954137458102417
+      },
+      {
+        "id": "patch-8-1",
+        "partition": "holdout",
+        "figurePixel": [
+          992.1341307646599,
+          779.9136709876392
+        ],
+        "nativePixel": [
+          314.53211254997865,
+          652.5033876011107
+        ],
+        "correlation": 0.937488781330852,
+        "peakMargin": 0.11151276950057598,
+        "residualPixels": 1.8276922987403734
+      },
+      {
+        "id": "patch-8-2",
+        "partition": "fit",
+        "figurePixel": [
+          916.241663061535,
+          770.1031470564482
+        ],
+        "nativePixel": [
+          339.4715303516564,
+          652.517175278977
+        ],
+        "correlation": 0.9538432186753251,
+        "peakMargin": 0.16207540633483053,
+        "residualPixels": 0.5953606024032699
+      },
+      {
+        "id": "patch-8-4",
+        "partition": "fit",
+        "figurePixel": [
+          757.2676605945417,
+          756.5395400656139
+        ],
+        "nativePixel": [
+          386.93903103089076,
+          653.0671447306668
+        ],
+        "correlation": 0.9703285625627626,
+        "peakMargin": 0.19368845586062267,
+        "residualPixels": 0.23852523210694346
+      },
+      {
+        "id": "patch-8-5",
+        "partition": "holdout",
+        "figurePixel": [
+          677.7806593610452,
+          749.7577365701968
+        ],
+        "nativePixel": [
+          411.1433181508969,
+          652.9463456041185
+        ],
+        "correlation": 0.9228498998655191,
+        "peakMargin": 0.1782687617735189,
+        "residualPixels": 0.10659825764404642
+      },
+      {
+        "id": "patch-8-6",
+        "partition": "fit",
+        "figurePixel": [
+          598.2936581275486,
+          742.9759330747795
+        ],
+        "nativePixel": [
+          435.0170935799066,
+          653.0585444395848
+        ],
+        "correlation": 0.9758973596447205,
+        "peakMargin": 0.1637780758668268,
+        "residualPixels": 0.16461037145672133
+      },
+      {
+        "id": "patch-8-8",
+        "partition": "fit",
+        "figurePixel": [
+          439.31965566055555,
+          729.4123260839452
+        ],
+        "nativePixel": [
+          482.97199229454503,
+          652.974124412113
+        ],
+        "correlation": 0.9389299430010783,
+        "peakMargin": 0.1828318710051724,
+        "residualPixels": 0.21867540137005284
+      },
+      {
+        "id": "patch-8-9",
+        "partition": "holdout",
+        "figurePixel": [
+          359.832654427059,
+          722.6305225885282
+        ],
+        "nativePixel": [
+          507.1569632459257,
+          653.0012101778868
+        ],
+        "correlation": 0.9279930037537713,
+        "peakMargin": 0.36812491167584505,
+        "residualPixels": 0.0824197761457754
+      },
+      {
+        "id": "patch-8-11",
+        "partition": "holdout",
+        "figurePixel": [
+          204.4531854904373,
+          706.0381951619198
+        ],
+        "nativePixel": [
+          554.7855539047707,
+          653.477235381316
+        ],
+        "correlation": 0.9001494883156258,
+        "peakMargin": 0.16900729923711355,
+        "residualPixels": 1.447791394791275
+      },
+      {
+        "id": "patch-9-2",
+        "partition": "holdout",
+        "figurePixel": [
+          909.4598595661176,
+          849.57424101044
+        ],
+        "nativePixel": [
+          338.92093526303773,
+          676.9994753147573
+        ],
+        "correlation": 0.9764453957652668,
+        "peakMargin": 0.08815696345586832,
+        "residualPixels": 0.1980952021764837
+      },
+      {
+        "id": "patch-9-4",
+        "partition": "holdout",
+        "figurePixel": [
+          750.4858570991245,
+          836.0106340196057
+        ],
+        "nativePixel": [
+          387.23103564954704,
+          676.8360227173473
+        ],
+        "correlation": 0.9657117241228588,
+        "peakMargin": 0.09076867921284937,
+        "residualPixels": 0.2560621636642191
+      },
+      {
+        "id": "patch-9-5",
+        "partition": "fit",
+        "figurePixel": [
+          670.998855865628,
+          829.2288305241887
+        ],
+        "nativePixel": [
+          411.10975510152764,
+          677.0446145214382
+        ],
+        "correlation": 0.973251024307442,
+        "peakMargin": 0.152441880803027,
+        "residualPixels": 0.15370004697195477
+      },
+      {
+        "id": "patch-9-6",
+        "partition": "holdout",
+        "figurePixel": [
+          591.5118546321315,
+          822.4470270287716
+        ],
+        "nativePixel": [
+          435.05973541687683,
+          677.0183900042795
+        ],
+        "correlation": 0.9396287044480464,
+        "peakMargin": 0.1557589598163609,
+        "residualPixels": 0.0619255220142241
+      },
+      {
+        "id": "patch-9-7",
+        "partition": "fit",
+        "figurePixel": [
+          512.024853398635,
+          815.6652235333544
+        ],
+        "nativePixel": [
+          458.9713594764787,
+          676.9845448588137
+        ],
+        "correlation": 0.9437890497388055,
+        "peakMargin": 0.149274477814355,
+        "residualPixels": 0.1375763565460545
+      },
+      {
+        "id": "patch-9-8",
+        "partition": "holdout",
+        "figurePixel": [
+          432.53785216513836,
+          808.8834200379373
+        ],
+        "nativePixel": [
+          483.1066883719566,
+          677.0569365931925
+        ],
+        "correlation": 0.9337281013183802,
+        "peakMargin": 0.13519550065666064,
+        "residualPixels": 0.050895364492738876
+      },
+      {
+        "id": "patch-9-9",
+        "partition": "fit",
+        "figurePixel": [
+          353.05085093164183,
+          802.10161654252
+        ],
+        "nativePixel": [
+          507.04885785202146,
+          676.810289376713
+        ],
+        "correlation": 0.960978370351302,
+        "peakMargin": 0.027032260559919252,
+        "residualPixels": 0.2994626641512469
+      },
+      {
+        "id": "patch-10-3",
+        "partition": "holdout",
+        "figurePixel": [
+          823.191054837204,
+          922.2635314690151
+        ],
+        "nativePixel": [
+          363.4642548177867,
+          700.5389046117193
+        ],
+        "correlation": 0.9336458184490362,
+        "peakMargin": 0.1746633040513912,
+        "residualPixels": 0.6614809231491025
+      },
+      {
+        "id": "patch-10-5",
+        "partition": "holdout",
+        "figurePixel": [
+          664.2170523702109,
+          908.6999244781808
+        ],
+        "nativePixel": [
+          410.9250992227312,
+          701.0295414155912
+        ],
+        "correlation": 0.9506683724666641,
+        "peakMargin": 0.19541145065430277,
+        "residualPixels": 0.09363224218513239
+      },
+      {
+        "id": "patch-10-6",
+        "partition": "fit",
+        "figurePixel": [
+          584.7300511367143,
+          901.9181209827638
+        ],
+        "nativePixel": [
+          434.9401011873041,
+          701.09145813051
+        ],
+        "correlation": 0.944689745834997,
+        "peakMargin": 0.15900386021794344,
+        "residualPixels": 0.12995332037625115
+      },
+      {
+        "id": "patch-10-7",
+        "partition": "holdout",
+        "figurePixel": [
+          505.2430499032178,
+          895.1363174873464
+        ],
+        "nativePixel": [
+          459.10352397438703,
+          700.9560421626198
+        ],
+        "correlation": 0.9483904863737954,
+        "peakMargin": 0.27286106819297573,
+        "residualPixels": 0.08414857269214443
+      },
+      {
+        "id": "patch-10-8",
+        "partition": "fit",
+        "figurePixel": [
+          425.7560486697212,
+          888.3545139919294
+        ],
+        "nativePixel": [
+          483.10709105562364,
+          701.1332869601938
+        ],
+        "correlation": 0.9246633613465872,
+        "peakMargin": 0.4093424575739687,
+        "residualPixels": 0.06184951802408253
+      },
+      {
+        "id": "patch-11-4",
+        "partition": "holdout",
+        "figurePixel": [
+          740.5167836386618,
+          991.9241014918159
+        ],
+        "nativePixel": [
+          386.51046720087675,
+          725.4776055925641
+        ],
+        "correlation": 0.9606429028462684,
+        "peakMargin": 0.08032364284518667,
+        "residualPixels": 1.6404818490967366
+      },
+      {
+        "id": "patch-11-5",
+        "partition": "fit",
+        "figurePixel": [
+          657.4352488747937,
+          988.1710184321728
+        ],
+        "nativePixel": [
+          411.05335364589877,
+          725.1965555307024
+        ],
+        "correlation": 0.9653403596315138,
+        "peakMargin": 0.2818772896663617,
+        "residualPixels": 0.22794450340283753
+      },
+      {
+        "id": "patch-11-6",
+        "partition": "holdout",
+        "figurePixel": [
+          577.9482476412971,
+          981.3892149367557
+        ],
+        "nativePixel": [
+          434.85778617859904,
+          725.119689223028
+        ],
+        "correlation": 0.973391887337395,
+        "peakMargin": 0.220952450549333,
+        "residualPixels": 0.15731533937976921
+      },
+      {
+        "id": "patch-11-7",
+        "partition": "fit",
+        "figurePixel": [
+          498.4612464078007,
+          974.6074114413385
+        ],
+        "nativePixel": [
+          459.00391681020085,
+          725.2067786205434
+        ],
+        "correlation": 0.9752684198801618,
+        "peakMargin": 0.23567582140849852,
+        "residualPixels": 0.13785567650777708
+      }
+    ]
+  },
+  "diagram": {
+    "fitControls": [
+      {
+        "id": "north-ridge-junction",
+        "diagramPx": [
+          545,
+          196
+        ],
+        "piaPx": [
+          545,
+          197
+        ],
+        "meaning": "Interior branching ridge/shadow junction, away from the silhouette and labels."
+      },
+      {
+        "id": "north-east-isolated-rim",
+        "diagramPx": [
+          717,
+          250
+        ],
+        "piaPx": [
+          716,
+          251
+        ],
+        "meaning": "Small isolated enclosed rim beside the upper-right depression complex."
+      },
+      {
+        "id": "central-lower-rim-junction",
+        "diagramPx": [
+          608,
+          636
+        ],
+        "piaPx": [
+          609,
+          636
+        ],
+        "meaning": "Interior junction at the lower end of the central depression/ridge network."
+      }
+    ],
+    "holdoutControls": [
+      {
+        "id": "central-west-polygon-corner",
+        "diagramPx": [
+          471,
+          483
+        ],
+        "piaPx": [
+          471,
+          483
+        ],
+        "predictedPiaPx": [
+          471.1,
+          482.87
+        ],
+        "residualPx": 0.16,
+        "meaning": "Corner of an interior polygonal depression, not a limb control."
+      },
+      {
+        "id": "central-elongate-pit-north-tip",
+        "diagramPx": [
+          681,
+          385
+        ],
+        "piaPx": [
+          681,
+          386
+        ],
+        "predictedPiaPx": [
+          680.76,
+          385.76
+        ],
+        "residualPx": 0.34,
+        "meaning": "Northern tip of the central narrow pit/rim."
+      },
+      {
+        "id": "lower-central-oval-rim",
+        "diagramPx": [
+          711,
+          598
+        ],
+        "piaPx": [
+          710,
+          598
+        ],
+        "predictedPiaPx": [
+          710.07,
+          598.22
+        ],
+        "residualPx": 0.23,
+        "meaning": "East edge of the lower central oval depression."
+      }
+    ]
+  },
+  "anchors": [
+    {
+      "name": "Mayo",
+      "diagramPixel": [
+        288,
+        637
+      ],
+      "selection": "Point at the published arrow tip, within about twelve diagram pixels; an approximate location, not a surveyed centre."
+    },
+    {
+      "name": "Left Foot",
+      "diagramPixel": [
+        900,
+        510
+      ],
+      "selection": "Point at the published arrow tip, within about twelve diagram pixels; an approximate location, not a surveyed centre."
+    },
+    {
+      "name": "Right Foot",
+      "diagramPixel": [
+        862,
+        852
+      ],
+      "selection": "Point at the published arrow tip, within about twelve diagram pixels; an approximate location, not a surveyed centre."
+    }
+  ],
+  "exclusions": [
+    {
+      "name": "Shoemaker Basin",
+      "reason": "Callout projects to estimated ellipsoid terrain, not the observed mesh."
+    },
+    {
+      "name": "Walker",
+      "reason": "Limb callout projects to estimated terrain and has missing neighboring ray hits."
+    },
+    {
+      "name": "Hemenway",
+      "reason": "Shallow viewing angle and about 436 m sampled placement sensitivity; not promoted."
+    },
+    {
+      "name": "Rahe",
+      "reason": "About 742 m sampled placement sensitivity for the callout; not promoted."
+    }
+  ]
+}

@@ -17,7 +17,9 @@ export const ORBIT_RENDERER_LOD_PIXELS: Readonly<Record<OrbitRenderer, number>> 
 /** What carries an orbit's presentation: its opacity fades, selection cue and visibility. */
 export interface OrbitPresentation extends FadeTarget { readonly dataset: DOMStringMap }
 export interface PreparedOrbitLines {
-  readonly elements: readonly (Element | undefined)[];
+  /** Stroke runs are SVG polylines and bars are retained HTML leaves; both carry the
+   * style an inspector reads, so neither narrows to a bare Element. */
+  readonly elements: readonly (HTMLElement | SVGElement | undefined)[];
   /** The host itself for bars; for strokes an adapter that keeps group opacity out of
    * the compositor by writing it as `stroke-opacity` on every polyline. */
   readonly presentation: OrbitPresentation;

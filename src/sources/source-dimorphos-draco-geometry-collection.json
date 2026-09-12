@@ -1,0 +1,72 @@
+{
+  "id": "source-dimorphos-draco-geometry-collection",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "DART DRACO calibrated images with geometric backplanes",
+  "version": "1.0",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.26007/QAAN-F992"
+    },
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:dart:data_dracoddp::1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds.nasa.gov/api/search/1/products/urn%3Anasa%3Apds%3Adart%3Adata_dracoddp",
+      "label": "PDS registry record"
+    },
+    {
+      "role": "archive",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/",
+      "label": "Small Bodies Node holdings"
+    },
+    {
+      "role": "original",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:document_draco-v3.0/jhuapl_dart_draco_uncalibrated_calibrated_sis_v3.pdf",
+      "label": "DRACO data product SIS v3"
+    }
+  ],
+  "creators": [
+    "Carolyn M. Ernst",
+    "R. Terik Daly",
+    "Olivier S. Barnouin",
+    "Ray Espiritu",
+    "Dany Waller"
+  ],
+  "publisher": "NASA Planetary Data System, Small Bodies Node",
+  "publicationDate": "2023-11-02",
+  "evidence": [
+    {
+      "path": "src/planets/dimorphos/source/manifest.json",
+      "revision": "264978a37b9d6699d429166f6c835f3daee4e9a6",
+      "sha256": "4485b0f96874dda3f8950d82d31f8542f35f44a8200b0f631d0bac515e1b260b",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Ernst, C., Daly, T., Barnouin, O., Espiritu, R. and Waller, D. (2023), DART Spacecraft Bundle, Calibrated Images with Geometric Backplanes, NASA Planetary Data System, DOI 10.26007/QAAN-F992.",
+      "scope": "Every DRACO frame and backplane cube used for the Dimorphos mosaic.",
+      "evidence": "Citation_Information of the collection label in the PDS registry."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA public scientific data; retain the dataset citation and source notices.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "PDS Small Bodies Node data policy."
+    },
+    {
+      "kind": "limitation",
+      "text": "Backplanes are SPICE intersections with the 0.243 m v004 DSK; the I/F plane keeps the acquisition illumination and the 512 by 512 terminal readout window.",
+      "scope": "Geometry and radiometry of each cube.",
+      "evidence": "Product labels: geom:SPICE_Kernel_Identification and dart:DRACO_Instrument_Attributes."
+    }
+  ]
+}

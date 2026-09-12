@@ -1,0 +1,48 @@
+{
+  "id": "nasa-pia06285",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Wild 2 close look and named-feature diagram",
+  "identifiers": [
+    {
+      "type": "Photojournal",
+      "value": "PIA06285"
+    }
+  ],
+  "publisher": "NASA/JPL-Caltech",
+  "publicationDate": "2004-06-17",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://science.nasa.gov/photojournal/wild-2-close-look/",
+      "label": "Photojournal PIA06285"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.jpl.nasa.gov/jpl-image-use-policy/",
+      "label": "JPL image-use policy"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://science.nasa.gov/photojournal/wild-2-close-look/",
+      "checkedOn": "2026-09-12",
+      "locator": "PIA06285 credit, image date and description of Figure 1 and Stardust-team feature names"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Courtesy NASA/JPL-Caltech",
+      "scope": "Photograph and named-feature diagram",
+      "evidence": "PIA06285 credit line"
+    },
+    {
+      "kind": "limitation",
+      "text": "Mission-team names; basin does not imply an impact origin.",
+      "scope": "Named features",
+      "evidence": "PIA06285 description"
+    }
+  ]
+}

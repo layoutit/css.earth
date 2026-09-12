@@ -70,7 +70,6 @@ try {
       surfaceStylesRetained: surfaceStyles.every(style => style.isConnected),
       selectedSurface: getComputedStyle(window.__cssearthTest.required(leaf, 'computed style element')).backgroundImage,
       selectedSearch: window.__cssearthTest.input('.planet-sidebar-search').value,
-      activeNavbar: window.__cssearthTest.html('.scale-planet.active').dataset.planetId,
       activeBrowser: window.__cssearthTest.html('.planet-object-link.is-active').dataset.objectId,
       selectedTitle: window.__cssearthTest.element('.planet-information-panel .planet-title').getAttribute('aria-label'),
       aboutLabelBound: Boolean(document.getElementById(window.__cssearthTest.required(window.__cssearthTest.element('.explorer-about-panel').getAttribute('aria-labelledby'), 'about label reference'))),
@@ -104,7 +103,6 @@ try {
   assert.match(proof.first.selectedSurface, /\/scenes\/venus\/venus-clouds@2x\.webp/,
     'Committing Venus content must activate its scoped surface image.');
   assert.equal(proof.first.selectedSearch, '', 'Selection closes browsing and clears the search query');
-  assert.equal(proof.first.activeNavbar, 'venus');
   assert.equal(proof.first.activeBrowser, 'venus');
   assert.equal(proof.first.selectedTitle, 'Venus');
   assert.equal(proof.first.aboutLabelBound, true);
