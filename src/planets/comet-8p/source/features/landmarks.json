@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-surface-landmarks@1",
+  "source": "Groussin et al. (2019), Table 3 and Section 5.3; Hubble contact-sphere model scaled by Spitzer",
+  "frame": "Hubble/Spitzer inferred-model Cartesian metres. X joins the two lobe centres; the origin is the assumed equal-density volume centroid, and the meridian and rotation phase are arbitrary. These are model anatomy anchors, not terrain coordinates.",
+  "entries": [
+    {
+      "id": "82000000",
+      "name": "Large lobe",
+      "kind": "point",
+      "type": "Model anatomy",
+      "position": {
+        "pointMeters": [
+          -2933.226197215643,
+          0,
+          0
+        ],
+        "maximumDistanceMeters": 50
+      },
+      "minimumZoomShare": 0.4,
+      "description": "Outward point on the larger analytic sphere in the Hubble/Spitzer model.",
+      "qualification": "An inferred-model anatomy anchor, not observed terrain or a geographic feature. The published rounded radius is 2.7 ± 0.1 km.",
+      "reference": {
+        "title": "Groussin et al. (2019), Hubble/Spitzer contact-sphere model, Table 3 and Section 5.3",
+        "url": "https://arxiv.org/abs/1911.04897",
+        "credit": "Hubble/Spitzer inferred model · Groussin et al., 2019"
+      }
+    },
+    {
+      "id": "82000001",
+      "name": "Small lobe",
+      "kind": "point",
+      "type": "Model anatomy",
+      "position": {
+        "pointMeters": [
+          4656.240187188469,
+          0,
+          0
+        ],
+        "maximumDistanceMeters": 50
+      },
+      "minimumZoomShare": 0.4,
+      "description": "Outward point on the smaller analytic sphere in the Hubble/Spitzer model.",
+      "qualification": "An inferred-model anatomy anchor, not observed terrain or a geographic feature. The published rounded radius is 1.1 ± 0.1 km.",
+      "reference": {
+        "title": "Groussin et al. (2019), Hubble/Spitzer contact-sphere model, Table 3 and Section 5.3",
+        "url": "https://arxiv.org/abs/1911.04897",
+        "credit": "Hubble/Spitzer inferred model · Groussin et al., 2019"
+      }
+    }
+  ]
+}
