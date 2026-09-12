@@ -1,5 +1,5 @@
 import { shape, array, text, number, optional } from '../../tools/objects/terrestrial-layers/source-records.mts';
-import { parseNativeView, parseCalibrationManifest } from '../../tests/objects/oracle/mars/google-earth-pro/native-capture-values.mts';
+import { parseNativeView, parseCalibrationManifest } from '../../tools/oracles/mars/google-earth-pro/native-capture-values.mts';
 export { parseNativeView, parseCalibrationManifest };
 export const crop = shape({left:number,top:number,width:number,height:number});
 export const disc = shape({centerX:number,centerY:number,width:number,height:number});

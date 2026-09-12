@@ -109,7 +109,8 @@ const wheelEvent = (input: Partial<WheelInput> & Pick<WheelInput, 'deltaY'>): Wh
 test("only discrete wheels are released into the shared glide", () => {
   assert.deepEqual([...WHEEL_ZOOM_INERTIA_INPUT_KINDS], ["wheel"]);
   assert.equal(wheelZoomInputKind(wheelEvent({ deltaY: 100 })), "wheel");
-  assert.ok(!WHEEL_ZOOM_INERTIA_INPUT_KINDS.includes(wheelZoomInputKind(wheelEvent({ deltaY: 4 }))));
+  const inertiaKinds: readonly string[] = WHEEL_ZOOM_INERTIA_INPUT_KINDS;
+  assert.ok(!inertiaKinds.includes(wheelZoomInputKind(wheelEvent({ deltaY: 4 }))));
 });
 
 test("scroll input classification preserves accelerated precision gestures and permits device changes", () => {

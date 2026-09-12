@@ -7,7 +7,7 @@ import { resolve } from "node:path";
 import { chromium, type Page } from "playwright";
 import sharp from "sharp";
 
-import { PREPARED_MARS_CAMERA,PREPARED_MARS_LIGHTING,PREPARED_MARS_SCENE } from "../../../unit/mars/prepared-fixture.mts";
+import { PREPARED_MARS_CAMERA,PREPARED_MARS_LIGHTING,PREPARED_MARS_SCENE } from "../../../../tests/objects/unit/mars/prepared-fixture.mts";
 interface Layer { readonly width?: number; readonly height?: number; }
 interface MaximumLayer { readonly width: number; readonly height: number; readonly area: number; }
 interface View { readonly lens: string; readonly name: string; readonly pitch: number; readonly file: string; readonly sha256: string; }

@@ -4,9 +4,9 @@ import { readFile } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
 import { decodeNativeMotionTrace } from "./native-motion-trace-reader.mts";
 import { multiply3, relativeOrientation3, orientationErrorDegrees } from
-  "../../../../../site/test/interaction-orientation.mts";
+  "../../../../site/test/interaction-orientation.mts";
 
-import type { Matrix3 } from '../../../../../site/test/interaction-orientation.mts';
+import type { Matrix3 } from '../../../../site/test/interaction-orientation.mts';
 import { object, finite } from './oracle-values.mts';
 import { json, records, cameraMatrix as matrix, nativeReport, browserReport, frameBoundReport, gestureReport, deliveryRecords } from './interaction-analysis-records.mts';
 export { json } from './interaction-analysis-records.mts';

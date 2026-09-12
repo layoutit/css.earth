@@ -1,5 +1,5 @@
 import {requireObjectRuntimeDefinition} from '../../tools/object-runtime-contract.mts';
-import {shape,array,text,number} from '../../tools/objects/terrestrial-layers/source-records.mts';
+import {shape,array,text,number,optional} from '../../tools/objects/terrestrial-layers/source-records.mts';
 import {required} from '../../tools/test-values.mts';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -12,7 +12,8 @@ const input=async (id: string)=>{
   const root=`../../src/planets/${id}/`;
   return {descriptor:parseAuthoredObjectDescriptor(await readJson(`${root}object.json`)),
     material:await readJson(`${root}source/preparation/materials.json`),
-    presentation:shape({resources:shape({rowPool:text,pools:array(shape({id:text,options:shape({capacity:number})}))})})(await readJson(`${root}source/preparation/presentation.json`)),
+    // Row resource pools are optional since the focused heliocentric views (#123); the tool checks them only when declared.
+    presentation:shape({resources:optional(shape({rowPool:text,pools:array(shape({id:text,options:shape({capacity:optional(number)})}))}))})(await readJson(`${root}source/preparation/presentation.json`)),
     runtime:requireObjectRuntimeDefinition(await readJson(`${root}prepared/runtime.json`))};
 };
 
@@ -35,7 +36,7 @@ test('frame, row and residency drift fail capability composition before preparat
     const changed={...descriptor,recipe:{...descriptor.recipe,frameBanks:required(descriptor.recipe.frameBanks).map((bank,i)=>i===0?{...bank,[field]:value}:bank)}};
     assert.throws(()=>assertLayeredGiantFrameBank(changed,material,presentation),/Authored frame bank/);
   }
-  const changed=structuredClone(presentation);
-  required(changed.resources.pools.find(pool=>pool.id===changed.resources.rowPool)).options.capacity=3;
+  // A declared row pool must still match the resident rows; Uranus declares none today, so exercise the check with one.
+  const changed={...presentation,resources:{rowPool:'rows',pools:[{id:'rows',options:{capacity:3}}]}};
   assert.throws(()=>assertLayeredGiantFrameBank(descriptor,material,changed),/row resource pool/);
 });
