@@ -1,32 +1,29 @@
 ---
 import { OBJECTS } from '../objects.mts';
+import { contextLocatorImages } from '../../src/navigation/context-locator.mts';
 
-// Resolve provenance-bearing swatches during the page build. Only CSS colors
-// reach the browser; existing retained groups own geometry and interaction.
+// Resolve provenance-bearing swatches during the page build. Colors and
+// locator images are published as ordinary CSS rules; the retained scene does
+// not carry a custom-property graph at runtime.
 const swatches = import.meta.glob<{ hex: string; display?: { hex: string } }>('../../src/planets/*/swatch.json', {
   eager: true,
   import: 'default',
 });
-const styles = OBJECTS.flatMap(({ id }) => {
+const styles = OBJECTS.map(({ id }) => {
   const swatch = swatches[`../../src/planets/${id}/swatch.json`];
-  if (!swatch) return [];
+  if (!swatch) return '';
   const hex = swatch.display?.hex ?? swatch.hex;
   if (!/^#[0-9a-f]{6}$/i.test(hex)) throw new Error(`Invalid ${id} swatch.`);
   const group = `.prepared-world-context [data-context-group="${id}"]`;
-  return [`${group} { --shell-text: ${hex}; }`];
+  const orbit = `.prepared-world-context [data-context-orbit="${id}"]`;
+  const [locator, hover] = contextLocatorImages(hex);
+  return `${group}, ${orbit} { color: ${hex}; }\n${group}[data-context-selected="true"]::before { background-image: ${locator}; }\n${group}[data-context-selected="true"][data-context-indicator-hovered="true"]::before { background-image: ${hover}; }`;
 }).join('\n');
+const defaults = '.prepared-world-context { color: #dfdfdf; }';
 const majorBodyLabelStyles = OBJECTS
   .filter(({ classification }) => classification === 'star' || classification === 'planet')
   .map(({ id }) => `.prepared-world-context [data-context-label="${id}"] { text-transform: uppercase; }`)
   .join('\n');
-const minorBodyOrbitStyles = OBJECTS
-  .filter(({ classification }) => ['satellite', 'dwarf-planet', 'asteroid', 'trans-neptunian', 'comet', 'interstellar'].includes(classification))
-  .map(({ id, classification }) => `:where(.prepared-world-context) [data-context-group="${id}"] { --context-base-line-opacity: ${classification === 'asteroid' ? .35 : .5}; }`)
-  .join('\n');
-const minorBodyLabelStyles = OBJECTS
-  .filter(({ classification }) => ['dwarf-planet', 'comet', 'trans-neptunian', 'interstellar'].includes(classification))
-  .map(({ id }) => `:where(.prepared-world-context) [data-context-group="${id}"] { --context-base-label-opacity: .5; }`)
-  .join('\n');
 ---
 
-<style is:inline set:html={[styles, majorBodyLabelStyles, minorBodyOrbitStyles, minorBodyLabelStyles].join('\n')}></style>
+<style is:inline set:html={[defaults, styles, majorBodyLabelStyles].join('\n')}></style>

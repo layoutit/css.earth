@@ -1,9 +1,20 @@
 import type { AtmosphericRasterConfig, LambertRasterConfig, CutawayAngles, InteriorPalette } from '@cssearth/objects';
+/** Delivered surface map encoding. Absent means the lossy WebP default. */
+export interface SurfaceEncoding {
+    format: 'jpeg';
+    /** libjpeg: sharp's libjpeg-compatible defaults; mozjpeg: its trellis preset. */
+    encoder: 'libjpeg' | 'mozjpeg';
+    progressive: boolean;
+    quality: number;
+    grayscale?: boolean;
+    chromaSubsampling?: '4:2:0' | '4:4:4';
+}
 export interface SurfaceRasterRecipe {
     id: string;
     source: string;
     falseColor: boolean;
     output: string;
+    encoding?: SurfaceEncoding;
     thumbnail: string;
     sharpen?: number[];
     exposure?: number[];

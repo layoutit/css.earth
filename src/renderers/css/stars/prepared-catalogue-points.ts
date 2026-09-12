@@ -2,7 +2,6 @@ import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { transposeWorldRotation, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
-import { projectPreparedPoint } from './point-field-projection.js';
 import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
 
 export interface PreparedCataloguePoint {
@@ -64,6 +63,7 @@ export function mountPreparedCataloguePoints({ host, before, payload }: {
   root.dataset.pointCount = String(data.points.length);
   Object.assign(root.style, { position: 'absolute', inset: '0', pointerEvents: 'none', overflow: 'hidden', zIndex: '1' });
   let presentation = data, materials = data.points, destroyed = false, latest: VolumeCameraPublication | null = null;
+  const shownState = new Uint8Array(data.points.length), writtenTransform: string[] = new Array(data.points.length).fill('');
   const nodes = data.points.map(point => {
     const node = document.createElement('s'); node.dataset.catalogueSource = point.id;
     Object.assign(node.style, { position: 'absolute', left: '50%', top: '50%', display: 'block',
@@ -94,18 +94,25 @@ export function mountPreparedCataloguePoints({ host, before, payload }: {
     const local = presentPhysicalPoseInVolume(world.pose, data.frame);
     const rotation = transposeWorldRotation(worldRotationFromQuaternion(local.orientationXyzw));
     let visible = 0;
-    data.points.forEach((point, index) => {
-      const node = nodes[index], size = materials[index].sizePx;
-      const projected = projectPreparedPoint(point.positionUnits, local.positionUnits, rotation, viewport.focalPixels, ox, oy);
-      const shown = materials[index].opacity > 0 && projected.depth > 0 &&
-        Math.abs(projected.x) < width / 2 + size && Math.abs(projected.y) < height / 2 + size;
-      node.style.visibility = shown ? 'visible' : 'hidden';
+    // The projectPreparedPoint arithmetic, inlined: no object per point, and only
+    // changed visibility and transforms are written to the retained nodes.
+    const [ex, ey, ez] = local.positionUnits, focal = viewport.focalPixels;
+    const [r0, r1, r2, r3, r4, r5, r6, r7, r8] = rotation;
+    for (let index = 0; index < data.points.length; index++) {
+      const position = data.points[index].positionUnits, node = nodes[index], size = materials[index].sizePx;
+      const x = position[0] - ex, y = position[1] - ey, z = position[2] - ez;
+      const depth = -(r6 * x + r7 * y + r8 * z);
+      const px = ox + focal * (r0 * x + r1 * y + r2 * z) / depth, py = oy + focal * (r3 * x + r4 * y + r5 * z) / depth;
+      const shown = materials[index].opacity > 0 && depth > 0 && Math.abs(px) < width / 2 + size && Math.abs(py) < height / 2 + size;
+      if (shownState[index] !== Number(shown)) { node.style.visibility = shown ? 'visible' : 'hidden'; shownState[index] = Number(shown); }
       if (shown) {
         visible++;
-        node.style.transform = `translate(${projected.x - size / 2}px,${projected.y - size / 2}px)`;
+        const transform = `translate(${px - size / 2}px,${py - size / 2}px)`;
+        if (writtenTransform[index] !== transform) { node.style.transform = transform; writtenTransform[index] = transform; }
       }
-    });
-    root.dataset.visiblePoints = String(visible);
+    }
+    const visiblePoints = String(visible);
+    if (root.dataset.visiblePoints !== visiblePoints) root.dataset.visiblePoints = visiblePoints;
   };
   applyPresentation(); host.insertBefore(root, before);
   return Object.freeze({ root, publish,

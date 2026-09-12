@@ -67,3 +67,22 @@ export function requireJsonData(value: unknown, label = 'data', seen = new Set<o
   }
   seen.delete(value);
 }
+/** The requireJsonData check for a direct JSON.parse result. JSON.parse builds
+ * only acyclic plain objects, dense arrays and data properties; an overflowing
+ * literal can still yield an infinite number, the one value left to reject. */
+export function parsedJsonNumbersFinite(value: unknown): boolean {
+  if (typeof value === 'number') return Number.isFinite(value);
+  if (value === null || typeof value !== 'object') return true;
+  if (Array.isArray(value)) {
+    for (let index = 0; index < value.length; index++) {
+      const item: unknown = value[index];
+      if ((typeof item === 'number' || typeof item === 'object') && !parsedJsonNumbersFinite(item)) return false;
+    }
+    return true;
+  }
+  for (const key in value) {
+    const item: unknown = (value as Record<string, unknown>)[key];
+    if ((typeof item === 'number' || typeof item === 'object') && !parsedJsonNumbersFinite(item)) return false;
+  }
+  return true;
+}

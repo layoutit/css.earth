@@ -4,13 +4,13 @@ import test, { type TestContext } from "node:test";
 import { measureRetainedPlanetTrackball, measureRetainedPlanetFlyToDisc, retainedPlanetUniformScale } from "./camera-layout.mts";
 import { createUnboundedMatrixDragControls } from "./camera-input.mts";
 import {
-  createGoogleEarthDragHistory,
-  recordGoogleEarthDragSample,
-  estimateGoogleEarthDragThrow,
-  advanceGoogleEarthDragThrow,
-  projectGoogleEarthTrackballDelta,
-  googleEarthInteractionTrackball,
-} from "./google-earth-drag-inertia.mts";
+  createDragHistory,
+  recordDragSample,
+  estimateDragThrow,
+  advanceDragThrow,
+  projectTrackballDelta,
+  interactionTrackball,
+} from "./trackball-drag-inertia.mts";
 import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity } from "@cssearth/engine";
 import { mountRetainedCubicSky } from "./cubic-sky-runtime.mts";
 import type { CubicSkyMountOptions, RetainedCubicSky } from "./cubic-sky-runtime.mts";
@@ -193,7 +193,7 @@ test("release publishes both launch steps once and leaves no idle clock", (t) =>
     trackballMetrics:() => { metricsReads += 1; return { ...trackball }; },
     rotate:value => publications.push(value) });
   const tick = (time: number) => { const callbacks=[...pending.values()]; pending.clear(); callbacks.forEach(callback=>callback(time)); };
-  const history = createGoogleEarthDragHistory();
+  const history = createDragHistory();
   let yaw = 0, previousX = 330;
   for (const [index, [x, time]] of [[330,0],[338,35],[350,70],[368,105],[394,140]].entries()) {
     surface.emit(index === 0 ? "pointerdown" : "pointermove", x, time);
@@ -203,15 +203,15 @@ test("release publishes both launch steps once and leaves no idle clock", (t) =>
         previousX, previousY:300, currentX:x, currentY:300 });
       lastPublication(publications).rotation?.forEach((v,i)=>assert.ok(Math.abs(v-expected[i])<1e-12));
     }
-    yaw += projectGoogleEarthTrackballDelta({ ...trackball,
+    yaw += projectTrackballDelta({ ...trackball,
       previousX, previousY:300, currentX:x, currentY:300 }).yawDegrees;
-    recordGoogleEarthDragSample(history,{ x,y:300,timestamp:time,pitch:0,yaw });
+    recordDragSample(history,{ x,y:300,timestamp:time,pitch:0,yaw });
     previousX=x;
     assert.equal(pending.size,1);
   }
-  const launch = requiredThrow(estimateGoogleEarthDragThrow({ history,trackball,
+  const launch = requiredThrow(estimateDragThrow({ history,trackball,
     releaseTimestamp:140.1,frameMilliseconds:35 }));
-  const first = advanceGoogleEarthDragThrow({ ...launch,elapsedMilliseconds:35 });
+  const first = advanceDragThrow({ ...launch,elapsedMilliseconds:35 });
   const before = publications.length;
   surface.emit("pointerup",394,140.1);
   assert.equal(publications.length,before+1);
@@ -219,7 +219,7 @@ test("release publishes both launch steps once and leaves no idle clock", (t) =>
     35*Math.hypot(first.pitchDegreesPerMillisecond,first.yawDegreesPerMillisecond)/launch.initialSpeedDegreesPerMillisecond),launch.launchRotation);
   lastPublication(publications).rotation?.forEach((value,index)=>assert.ok(Math.abs(value-expected[index])<1e-12));
   tick(175);
-  const second = advanceGoogleEarthDragThrow({ ...launch,
+  const second = advanceDragThrow({ ...launch,
     pitchDegreesPerMillisecond:first.pitchDegreesPerMillisecond,
     yawDegreesPerMillisecond:first.yawDegreesPerMillisecond,elapsedMilliseconds:35 });
   assert.ok(Math.abs(lastPublication(publications).controlYawDelta-second.yawDeltaDegrees)<1e-12);
@@ -636,12 +636,12 @@ test("camera scaling keeps input rays on the prepared projection at every zoom",
   }
 });
 
-test("Google Earth interaction rays use the viewport FOV without changing prepared rendering", () => {
+test("Trackball interaction rays use the viewport FOV without changing prepared rendering", () => {
   for (const renderFocalLength of [600, 12000, 20000]) {
     const measured = { viewportWidth: 693, focalLength: renderFocalLength,
       centerX:553.5, centerY:300, opticalCenterX:553.5, opticalCenterY:300,
       surfaceRadius:145, radius:140 };
-    const interaction = googleEarthInteractionTrackball(measured);
+    const interaction = interactionTrackball(measured);
     assert.ok(Math.abs(interaction.focalLength - 600.1556396484375) < .00005,
       "input projection must match the observed native 693px viewport");
     assert.equal(interaction.renderFocalLength, renderFocalLength);
