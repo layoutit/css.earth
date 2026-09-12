@@ -4,6 +4,7 @@ import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseAuthoredObjectDescriptor, type AuthoredObjectDescriptor, type SourceReference } from '@cssearth/objects';
 import { parseRasterRecipe, prepareRasterAssets } from '../../src/preparation/raster/index.js';
+import type { ObservationInterpretation } from '../../src/preparation/raster/index.js';
 import { parseGeometryProfile, prepareGeometryScene, type GeometrySceneAssets, type SolarSceneSource } from '../../src/renderers/css/preparation/scene/index.js';
 import { parsePresentationProfile, prepareCssPresentation, type PresentationInputs } from '../../src/renderers/css/preparation/presentation/index.js';
 import { prepareCelestialAssets } from './celestial/index.js';
@@ -161,7 +162,18 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     if (write) await writePreparedObject(descriptor.id, prepared.definition);
     return Object.freeze({ descriptor, sources, ...prepared });
   }
-  const raster = await prepareRasterAssets({ sourceDirectory, publicDirectory, outputDirectory, config: parseRasterRecipe(required(sources, 'raster').value) });
+  // Scientific surfaces are interpreted by the shared observation decoders (numeric grids, palettes, tonal
+  // presentation, missing-coverage grid) before the raster lane packs them; src never imports tools.
+  const { observationRaster } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/static-surface/raster.mts')).href) as typeof import('./static-surface/raster.mts');
+  const { parseObservationPreviewLens } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/static-surface/source-contract.mts')).href) as typeof import('./static-surface/source-contract.mts');
+  const interpret: ObservationInterpretation = async (surface, width, height) => {
+    const plan = parseObservationPreviewLens({ id: surface.id, input: surface.source, ...surface.science });
+    const { data, info } = await observationRaster({ input: resolve(sourceDirectory, surface.source), plan, width, height });
+    if (![1, 2, 3, 4].includes(info.channels)) throw new TypeError(`Interpreted surface ${surface.id} has ${info.channels} channels.`);
+    const scientific = surface.science.scientific as { displaySampling?: unknown; categories?: unknown } | undefined;
+    return { data, channels: info.channels as 1 | 2 | 3 | 4, nearest: scientific?.displaySampling === 'nearest' || Array.isArray(scientific?.categories) };
+  };
+  const raster = await prepareRasterAssets({ sourceDirectory, publicDirectory, outputDirectory, config: parseRasterRecipe(required(sources, 'raster').value), interpret });
   const celestial = await prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, config: required(sources, 'celestial').value });
   const rasterConfig = parseRasterRecipe(required(sources, 'raster').value), geometryConfig = parseGeometryProfile(required(sources, 'geometry').value);
   const solarSource = physicalSolarSource(required(sources, 'solar-system').value);

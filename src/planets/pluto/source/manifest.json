@@ -355,6 +355,159 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       }
+    },
+    {
+      "id": "pluto-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedSha256": "ef3df7c9ba745d79d866f20f01f5b311e2ae492af013dbf03519d24e40e2a640",
+      "expectedBytes": 1574,
+      "origin": "Repository-authored physical scene recipe; mean radius 1188.3 km from the pinned JPL record and the shared camera plan (defaultZoom 1.1, initial pitch 40\u00b0) carried over from the retired static-surface geometry",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked source recipe authored from the retired static camera plan and the shared Mercury/Venus/Mars marker layout",
+      "redistribution": "Factual physical parameters and synthetic marker colours; no imagery",
+      "consumers": [
+        "scene",
+        "sky-sun",
+        "system-markers",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored camera scale and marker layout using the cited solar-system geometry."
+      }
+    },
+    {
+      "id": "pluto-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedSha256": "181b7135d2c028eeda0c57a6970798f1dc5f3244241e8f226ef7339e40af96ac",
+      "expectedBytes": 3368,
+      "origin": "Repository-authored Pluto raster preparation recipe (generic sphere lane) carrying the science interpretation blocks of the retired static recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared raster assets.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored image sampling, science painting, packing and lighting-bank settings."
+      }
+    },
+    {
+      "id": "pluto-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedSha256": "35ad4db7a77e961ead346fa0223d45c78974fdcae2a4f3176f858e852d0207ef",
+      "expectedBytes": 1420,
+      "origin": "Repository-authored Pluto CSS geometry recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared CSS scene geometry.",
+      "consumers": [
+        "scene",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored CSS geometry, UV sampling and seam settings."
+      }
+    },
+    {
+      "id": "pluto-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedSha256": "a510ef9ffb0f65da272702eb8351bae713b0e4056d24f5926378b12424b6d8f6",
+      "expectedBytes": 222,
+      "origin": "Repository-authored Pluto sky, sun, and marker recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared celestial assets.",
+      "consumers": [
+        "sky-sun",
+        "starfield",
+        "system-markers"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored sky, Sun and marker preparation settings."
+      }
+    },
+    {
+      "id": "pluto-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedSha256": "a38367a5b81d5a7d41cfb9a6ad6b30164549d30bdf106d8c4040d32e5d5f686e",
+      "expectedBytes": 101,
+      "origin": "Repository-authored Pluto presentation capability recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared CSS presentation capabilities.",
+      "consumers": [
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored scene composition and supported views."
+      }
+    },
+    {
+      "id": "pluto-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedSha256": "2c2d7a33e27e26f044fce5e94163aafbaa167976b95b4cff890e0c6e92a0ce84",
+      "expectedBytes": 1136,
+      "origin": "Repository-authored Pluto navigation asset recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared navigation asset.",
+      "consumers": [
+        "navigation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored marker, caption and camera settings."
+      }
+    },
+    {
+      "id": "pluto-preparation-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedSha256": "5e0ef5f318b20f4a662c4b17783f9bb073df019dde58d3c3171d7fb4fa30aba1",
+      "expectedBytes": 1269,
+      "origin": "Repository-authored Pluto acquisition recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Preparation provenance and reproducibility.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored requests and extraction steps for restoring source files."
+      }
+    },
+    {
+      "id": "pluto-object-content",
+      "path": "content/object.json",
+      "expectedSha256": "924a299604725b552468ce335eb075a2d15b99c94c30082f2329ded994c6f599",
+      "expectedBytes": 11761,
+      "origin": "Repository-authored Pluto panel, lens, legend and provenance data (replaces content/static.json)",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked source JSON maintained beside the inputs.",
+      "redistribution": "Prepared shell content with source provenance.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -370,45 +523,6 @@
       "expectedBytes": 1395,
       "expectedSha256": "2148f82d076d4b11a3e25be02fe4f9414df6d43f8f6461ff88f7eadf2cb08af1",
       "purpose": "Checked provider metadata or license notice; acquisition date 2026-09-04"
-    },
-    {
-      "path": "preparation/raster.json",
-      "expectedBytes": 1946,
-      "expectedSha256": "15d16c2b012ada865c77c3996b73cd2f1f28454358dce98dcbe485e4721cd010"
-    },
-    {
-      "path": "preparation/geometry.json",
-      "expectedBytes": 3331,
-      "expectedSha256": "b95a195119f9b51ec660482150a35d8e70ccba428bf6e43011275bd694fc2df6"
-    },
-    {
-      "path": "preparation/celestial.json",
-      "expectedBytes": 203,
-      "expectedSha256": "c9218698f561b18c3d94e28614ed56c2e10aedd06702f27e21664493979394ba"
-    },
-    {
-      "path": "content/static.json",
-      "expectedBytes": 11555,
-      "expectedSha256": "9ede7bc869b0ef857d53914fa143681dfcfb1d701dabf3e2045c222bde6e436d",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
-      }
-    },
-    {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 1136,
-      "expectedSha256": "2c2d7a33e27e26f044fce5e94163aafbaa167976b95b4cff890e0c6e92a0ce84"
-    },
-    {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 1269,
-      "expectedSha256": "5e0ef5f318b20f4a662c4b17783f9bb073df019dde58d3c3171d7fb4fa30aba1"
-    },
-    {
-      "path": "preparation/physical.json",
-      "expectedBytes": 1482,
-      "expectedSha256": "a31a4d007e2447f6ab924af3a5dbafc854260f675b52a937755f9901c2e7442c"
     },
     {
       "path": "editorial/factsheet-review.json",

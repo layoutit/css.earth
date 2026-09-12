@@ -1,5 +1,30 @@
 import { clamp, mix, modulo, angularDistance } from "./math.js";
-export function createPolarSprite(map: Uint8Array, width: number, height: number, tileSize: number, latitudeBands: number) {
+export interface PolarSpriteOptions { sampling?: 'bilinear' | 'nearest'; }
+/** Numeric and categorical maps keep one source cell per sprite pixel: no supersampling, no bilinear mix, no pole blend. */
+function createNearestPolarSprite(map: Uint8Array, width: number, height: number, tileSize: number, latitudeBands: number) {
+    const output = new Uint8Array(tileSize * tileSize * 2 * 4);
+    const boundaryLatitude = Math.PI / 2 - Math.PI / latitudeBands;
+    for (let poleIndex = 0; poleIndex < 2; poleIndex += 1) {
+        const north = poleIndex === 0;
+        for (let y = 0; y < tileSize; y += 1) {
+            for (let x = 0; x < tileSize; x += 1) {
+                const unitX = (x + 0.5) / tileSize * 2 - 1, unitY = (y + 0.5) / tileSize * 2 - 1;
+                const radius = Math.hypot(unitX, unitY);
+                if (radius > 1) continue;
+                const longitude = modulo(Math.atan2(unitY, unitX), Math.PI * 2);
+                const latitudeMagnitude = Math.acos(Math.min(1, radius * Math.cos(boundaryLatitude)));
+                const latitude = north ? latitudeMagnitude : -latitudeMagnitude;
+                const sourceX = modulo(Math.floor(longitude / (Math.PI * 2) * width), width);
+                const sourceY = clamp(Math.floor((Math.PI / 2 - latitude) / Math.PI * height), 0, height - 1);
+                const sourceOffset = (sourceY * width + sourceX) * 4, targetOffset = (y * tileSize * 2 + poleIndex * tileSize + x) * 4;
+                output.set(map.subarray(sourceOffset, sourceOffset + 4), targetOffset);
+            }
+        }
+    }
+    return output;
+}
+export function createPolarSprite(map: Uint8Array, width: number, height: number, tileSize: number, latitudeBands: number, { sampling = 'bilinear' }: PolarSpriteOptions = {}) {
+    if (sampling === 'nearest') return createNearestPolarSprite(map, width, height, tileSize, latitudeBands);
     const output = new Uint8Array(tileSize * tileSize * 2 * 4);
     const sampleCount = 4;
     const boundaryLatitude = Math.PI / 2 - Math.PI / latitudeBands;

@@ -8,6 +8,8 @@
   .mercury-material-root,
   .venus-material-composite,
   .mars-material-composite,
+  .moon-material-composite,
+  .pluto-material-composite,
   .polycss-camera
 )) {
   position: absolute;
@@ -454,6 +456,270 @@
 }
 
 .planet-stage[data-object-id="mars"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+/* MOON */
+.planet-stage[data-object-id="moon"] > :is(.polycss-camera, .moon-material-composite) {
+  --moon-scene-side-padding: 16px;
+  --moon-reference-width: 1920px;
+  --moon-reference-height: 1080px;
+  --moon-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--moon-scene-side-padding) - var(--moon-scene-side-padding)) /
+        var(--moon-reference-width)
+    ),
+    calc(100cqh / var(--moon-reference-height))
+  );
+}
+
+.planet-stage[data-object-id="moon"] .polycss-camera,
+.planet-stage[data-object-id="moon"] .moon-material-composite {
+  z-index: 1;
+}
+
+.planet-stage[data-object-id="moon"] .moon-body {
+  transform-style: preserve-3d;
+  animation-name: moon-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.planet-stage[data-object-id="moon"] .polycss-scene s,
+.planet-stage[data-object-id="moon"] .moon-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.planet-stage[data-object-id="moon"] .polycss-scene s:not(.moon-polar) {
+  background-image: url("/scenes/moon/moon-surface@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="moon"] .polycss-scene s.moon-polar {
+  background-image: url("/scenes/moon/moon-poles-surface@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="moon"][data-lens="midnight-temperature"] .polycss-scene s:not(.moon-polar) {
+  background-image: url("/scenes/moon/moon-midnight-temperature@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="moon"][data-lens="midnight-temperature"] .polycss-scene s.moon-polar {
+  background-image: url("/scenes/moon/moon-poles-midnight-temperature@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="moon"][data-lens="heat-anomalies"] .polycss-scene s:not(.moon-polar) {
+  background-image: url("/scenes/moon/moon-heat-anomalies@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="moon"][data-lens="heat-anomalies"] .polycss-scene s.moon-polar {
+  background-image: url("/scenes/moon/moon-poles-heat-anomalies@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="moon"][data-lens="rock-abundance"] .polycss-scene s:not(.moon-polar) {
+  background-image: url("/scenes/moon/moon-rock-abundance@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="moon"][data-lens="rock-abundance"] .polycss-scene s.moon-polar {
+  background-image: url("/scenes/moon/moon-poles-rock-abundance@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="moon"][data-lens="topography"] .polycss-scene s:not(.moon-polar) {
+  background-image: url("/scenes/moon/moon-topography@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="moon"][data-lens="topography"] .polycss-scene s.moon-polar {
+  background-image: url("/scenes/moon/moon-poles-topography@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="moon"][data-lens="crust"] .polycss-scene s:not(.moon-polar) {
+  background-image: url("/scenes/moon/moon-crust@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="moon"][data-lens="crust"] .polycss-scene s.moon-polar {
+  background-image: url("/scenes/moon/moon-poles-crust@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="moon"][data-lens="silicate-signature"] .polycss-scene s:not(.moon-polar) {
+  background-image: url("/scenes/moon/moon-silicate-signature@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="moon"][data-lens="silicate-signature"] .polycss-scene s.moon-polar {
+  background-image: url("/scenes/moon/moon-poles-silicate-signature@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="moon"][data-lens="geology"] .polycss-scene s:not(.moon-polar) {
+  background-image: url("/scenes/moon/moon-geology@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="moon"][data-lens="geology"] .polycss-scene s.moon-polar {
+  background-image: url("/scenes/moon/moon-poles-geology@2x.webp") !important;
+}
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.planet-stage[data-object-id="moon"] .moon-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--moon-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.planet-stage[data-object-id="moon"].moon-hide-shadows .moon-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+.planet-stage[data-object-id="moon"].moon-hide-stars .moon-skybox {
+  visibility: hidden;
+}
+
+@keyframes moon-body-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(-360deg); }
+}
+
+.planet-stage[data-object-id="moon"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.planet-stage[data-object-id="moon"] .polycss-scene {
+  will-change: transform;
+}
+
+.planet-stage[data-object-id="moon"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+/* PLUTO */
+.planet-stage[data-object-id="pluto"] > :is(.polycss-camera, .pluto-material-composite) {
+  --pluto-scene-side-padding: 16px;
+  --pluto-reference-width: 1920px;
+  --pluto-reference-height: 1080px;
+  --pluto-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--pluto-scene-side-padding) - var(--pluto-scene-side-padding)) /
+        var(--pluto-reference-width)
+    ),
+    calc(100cqh / var(--pluto-reference-height))
+  );
+}
+
+.planet-stage[data-object-id="pluto"] .polycss-camera,
+.planet-stage[data-object-id="pluto"] .pluto-material-composite {
+  z-index: 1;
+}
+
+.planet-stage[data-object-id="pluto"] .pluto-body {
+  transform-style: preserve-3d;
+  animation-name: pluto-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.planet-stage[data-object-id="pluto"] .polycss-scene s,
+.planet-stage[data-object-id="pluto"] .pluto-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.planet-stage[data-object-id="pluto"] .polycss-scene s:not(.pluto-polar) {
+  background-image: url("/scenes/pluto/pluto-surface@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="pluto"] .polycss-scene s.pluto-polar {
+  background-image: url("/scenes/pluto/pluto-poles-surface@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="pluto"][data-lens="topography"] .polycss-scene s:not(.pluto-polar) {
+  background-image: url("/scenes/pluto/pluto-topography@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="pluto"][data-lens="topography"] .polycss-scene s.pluto-polar {
+  background-image: url("/scenes/pluto/pluto-poles-topography@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="pluto"][data-lens="monochrome"] .polycss-scene s:not(.pluto-polar) {
+  background-image: url("/scenes/pluto/pluto-monochrome@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="pluto"][data-lens="monochrome"] .polycss-scene s.pluto-polar {
+  background-image: url("/scenes/pluto/pluto-poles-monochrome@2x.webp") !important;
+}
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.planet-stage[data-object-id="pluto"] .pluto-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--pluto-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.planet-stage[data-object-id="pluto"].pluto-hide-shadows .pluto-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+.planet-stage[data-object-id="pluto"].pluto-hide-stars .pluto-skybox {
+  visibility: hidden;
+}
+
+@keyframes pluto-body-spin {
+  from { transform: rotateZ(180deg); }
+  to { transform: rotateZ(540deg); }
+}
+
+.planet-stage[data-object-id="pluto"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.planet-stage[data-object-id="pluto"] .polycss-scene {
+  will-change: transform;
+}
+
+.planet-stage[data-object-id="pluto"] .polycss-scene s {
   width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
   height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
   transform-style: preserve-3d;

@@ -12,6 +12,8 @@
 
 ## Evidence
 
+Lane change (this PR): the static-surface lane was retired for Pluto; the same pinned inputs and observation interpretation (coverage grid, signed DEM decoding, relief) now feed the shared raster lane used by Mercury, Venus and Mars. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request.
+
 The retained notes point to [unit checks](../../../tests/objects/unit/pluto) and [browser checks](../../../tests/objects/browser/pluto), and mentions separate capture/Saturn reports. They do not identify a dated report here; test definitions are not passing-run evidence.
 
 [Source test definitions](../../../tests/objects/unit/pluto/source.test.mts).
@@ -22,12 +24,18 @@ Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point sh
 
 The mosaics and DEM have incomplete, uneven coverage. A gray grid marks identified gaps. The color JPEG uses only exactly-black pixels connected to the southern border, so a dark boundary fringe can remain. Nonzero dark pixels are preserved; no terrain is filled.
 
-The sphere uses a 16 × 32 retained grid with 452 leaves. Display radius, camera,
-full-phase curvature shading, initial longitude, and 84-second rotation are
-authored presentation choices. Rotation is retrograde. The display axis uses
-NASA's 57° description; it is not a solved IAU orientation at an observation
-epoch. Sky orientation and the Sun are contextual, not a New Horizons camera
-solution. All these choices are prepared; the browser only transports state.
+The sphere is the shared raster-lane mesh: 230 units, 16 latitude bands and 32
+longitude segments, 450 leaves, the 50-pixel tile and 0.005 seam overlap.
+Display radius, camera, spin origin (180°, keeping the Sputnik Planitia face of
+the retired lane) and the 84-second retrograde visual rotation are authored
+presentation choices. The pole, prime meridian and Sun direction at the shared
+epoch now come from the IAU/WGCCRE rotation model in
+`src/platform/solar-geometry.mts`; the body record carries the NSSDC obliquity
+of 119.51° (`source/editorial/factsheet-review.json`) rather than the retired
+lane's rounded 57° display tilt. Lighting is the Mercury-style Lambert bank
+(Shadows toggle) with no atmosphere material; Pluto's real haze layers are not
+modelled. Sky orientation is contextual, not a New Horizons camera solution.
+All these choices are prepared; the browser only transports state.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
@@ -52,17 +60,13 @@ The provider pages and labels are checked in alongside the data.
 **Observation limits and authored choices**
 
 The full 2:1 maps use north-to-south latitude rows and a common 0–360° longitude
-domain. Each retained face's south-to-north coordinate is mapped into the
-continuous source image before interpolation, including at latitude-band edges.
-Polar leaves are resampled at prepare time. Regular-face projective warps are baked
-into RGBA atlas cells; the browser retains affine frames and flat child textures.
-This avoids Chrome's triangular projective-child flattening artifacts without
-changing the shared renderer or deriving geometry at runtime.
-Overlapping faces use matching expanded source coordinates. Each warped face
-has a one-pixel source-sampled apron so its antialiased edge is covered by its
-neighbor. These RGBA atlases use lossless WebP: lossy chroma subsampling produced
-colored tile seams even with correct geometry and alpha. Map resolution and the
-source-derived missing-coverage grid are unchanged.
+domain. The shared raster lane paints each lens at 2,048 × 1,024 (DPR 1) and
+4,096 × 2,048 (DPR 2), packs 16 latitude bands with a 16-texel gutter and
+prepares 256-pixel orthographic polar tiles; the retained faces are the shared
+projective sphere leaves used by Mercury, Venus and Mars. The retired lane's
+inverse-homography RGBA atlas and its lossless seam treatment are gone with it.
+The source-derived missing-coverage grid is unchanged and is painted before
+packing, so no gap is interpolated.
 The DEM uses nearest source samples before this atlas conversion. Its authored
 blue/tan/red palette is linear at −8/0/+8 km and clips outside that range.
 Terrain shading is derived from that same signed DEM using latitude-corrected spacing on its 1,188,300 m reference sphere. A fixed northwest light at 45° elevation and 25% ambient reveals slopes, with no vertical exaggeration. Where a neighbouring elevation is missing, no slope is invented. Color encodes height; brightness encodes terrain relief. The blue/tan/red endpoints use stronger contrast while keeping the same −8/0/+8 km scale. This does not displace geometry or represent surface color.
