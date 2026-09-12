@@ -40,7 +40,9 @@ test('unresolved capture attribution stays unresolved, without guessing a missio
   const visible = await context('mars', 'normal');
   assert.deepEqual(visible.missions, []);
   assert.equal(visible.notes.length, 1);
-  assert.match(visible.notes[0], /Viking/);
+  // The label names the credited group; only the individual orbiter is unknown.
+  assert.equal(visible.notes[0].label, 'Viking orbiters');
+  assert.match(visible.notes[0].reason, /does not identify which individual orbiter/);
   assert.deepEqual(ids(visible), ['source-mars-usgs-viking-mdim21-color']);
 });
 
