@@ -3,8 +3,8 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import type { AuthoredObjectDescriptor, SourceReference } from '@cssearth/objects';
 import { parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures } from './index.js';
-import type { SurfaceFeaturePreparationContext } from './index.js';
-import { parseEllipsoidSemiAxes, renderedEllipsoidSampler } from './ellipsoid.js';
+import type { SurfaceFeaturePreparationContext, SurfaceFeaturesConfig } from './index.js';
+import { ellipsoidSurfaceCast, parseEllipsoidSemiAxes, renderedEllipsoidSampler } from './ellipsoid.js';
 import type { SurfaceSampler } from './ellipsoid.js';
 import type { GeographicScene } from '../geographic-pages/contracts.mts';
 import { authoredPresentationBasis } from '../world-navigation-sources.js';
@@ -41,10 +41,11 @@ export async function attachSurfaceFeatures({ descriptor, sources, sourceDirecto
   // catalogue positions anchor where its leaf frames draw them, checked against the authored reference ellipsoid.
   const paged = parsed.get('paged-ellipsoid');
   const surface = paged && descriptor.recipe.shape.kind === 'ellipsoid'
-    ? await pagedEllipsoidSurface({ descriptor, paged, config: config.value, sourceDirectory, outputDirectory, meshRadiusUnits }) : undefined;
-  const context: SurfaceFeaturePreparationContext & { readonly surface?: SurfaceSampler } = { objectId: descriptor.id, sourceDirectory, publicDirectory, outputDirectory,
+    ? await pagedEllipsoidSurface({ descriptor, paged, recipe: parseSurfaceFeaturesConfig(config.value), sourceDirectory, outputDirectory, meshRadiusUnits }) : undefined;
+  if (hitMesh && surface) throw new TypeError('Surface features anchor on one surface model: a hit mesh or an ellipsoid.');
+  const context: SurfaceFeaturePreparationContext & { readonly surface?: ReturnType<typeof ellipsoidSurfaceCast> } = { objectId: descriptor.id, sourceDirectory, publicDirectory, outputDirectory,
     config: config.value, maxEntries: featuresRecipe.maxEntries, radiusKm: descriptor.recipe.shape.radiusKm, meshRadiusUnits,
-    tree: definition.tree as Parameters<typeof prepareSurfaceFeatures>[0]['tree'], ...(hitMesh ? { hitMesh } : {}), ...(surface ? { surface } : {}),
+    tree: definition.tree as Parameters<typeof prepareSurfaceFeatures>[0]['tree'], ...(hitMesh ? { hitMesh } : {}), ...(surface ? { surface: surface.cast } : {}),
     declaredLensIds: descriptor.recipe.surfaces.flatMap(surface => surface.lenses.map(lens => lens.id)) };
   const features = await prepareSurfaceFeatures(context);
   return { definition: { ...definition, features: features.plan },
@@ -53,23 +54,24 @@ export async function attachSurfaceFeatures({ descriptor, sources, sourceDirecto
 
 /** The paged lane's own geodetic mapping (the one its city destinations use) becomes the feature sampler. The lane
  * writes `scene.json` before the presentation, so its leaf frames are read from the output directory. */
-async function pagedEllipsoidSurface({ descriptor, paged, config, sourceDirectory, outputDirectory, meshRadiusUnits }: {
-  descriptor: AuthoredObjectDescriptor; paged: Record<string, unknown>; config: unknown; sourceDirectory: string; outputDirectory: string; meshRadiusUnits: number;
-}): Promise<SurfaceSampler> {
+export async function pagedEllipsoidSurface({ descriptor, paged, recipe, sourceDirectory, outputDirectory, meshRadiusUnits }: {
+  descriptor: AuthoredObjectDescriptor; paged: Record<string, unknown>; recipe: Pick<SurfaceFeaturesConfig, 'surfaceMap' | 'mapLeftEdgeLongitudeDeg'>;
+  sourceDirectory: string; outputDirectory: string; meshRadiusUnits: number;
+}): Promise<{ sampler: SurfaceSampler; cast: ReturnType<typeof ellipsoidSurfaceCast> }> {
   const shape = descriptor.recipe.shape;
   if (shape.polarRadiusKm === undefined || shape.secondaryRadiusKm !== undefined) throw new TypeError('Paged ellipsoid surface features need an oblate authored shape.');
   if (paged.equatorialRadiusKm !== shape.radiusKm || paged.polarRadiusKm !== shape.polarRadiusKm) throw new TypeError('Authored ellipsoid radii differ from the paged lane profile.');
   const semiAxes = parseEllipsoidSemiAxes({ equatorial: meshRadiusUnits, polar: meshRadiusUnits * shape.polarRadiusKm / shape.radiusKm });
-  const recipe = parseSurfaceFeaturesConfig(config);
   const axes = parseSurfaceAxes(JSON.parse(await readFile(resolve(sourceDirectory, recipe.surfaceMap), 'utf8')));
   const scene = geographicScene(JSON.parse(await readFile(resolve(outputDirectory, 'scene.json'), 'utf8')));
   const { prepareLocationPoint } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/geographic-pages/prepare-location.mts')).href) as typeof import('../geographic-pages/prepare-location.mts');
-  return renderedEllipsoidSampler(axes, recipe.mapLeftEdgeLongitudeDeg, semiAxes, (longitudeDeg, latitudeDeg) => {
+  const sampler = renderedEllipsoidSampler(axes, recipe.mapLeftEdgeLongitudeDeg, semiAxes, (longitudeDeg, latitudeDeg) => {
     // The lane maps signed longitudes; the catalogue keeps positive-east 0–360°.
     const point = prepareLocationPoint(scene, longitudeDeg > 180 ? longitudeDeg - 360 : longitudeDeg, latitudeDeg);
     if (point.length !== 3) throw new TypeError('Paged ellipsoid location is not a mesh point.');
     return [point[0]!, point[1]!, point[2]!];
   });
+  return { sampler, cast: ellipsoidSurfaceCast(sampler, axes, recipe.mapLeftEdgeLongitudeDeg) };
 }
 
 /** The prepared scene facts the lane's location mapping reads: latitude bands of leaves with their frames. */

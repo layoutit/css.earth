@@ -1,0 +1,117 @@
+{
+  "id": "spacecraft-landing-sites",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Spacecraft landing, touchdown and impact sites and traverses · compiled from NASA NSSDCA, PDS, LROC and cited publications",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+      "label": "NSSDCA table of anthropogenic impacts and spacecraft on the Moon"
+    },
+    {
+      "role": "original",
+      "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html",
+      "label": "NSSDCA Apollo landing site coordinates"
+    },
+    {
+      "role": "original",
+      "url": "https://pds-geosciences.wustl.edu/missions/msl/places.htm",
+      "label": "PDS PLACES rover localisation tables"
+    },
+    {
+      "role": "original",
+      "url": "https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_APOLLO_11",
+      "label": "LROC Apollo traverse shapefiles"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "label": "NASA media usage guidelines (content not subject to copyright)"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/bennu/source/features/sites.json",
+      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
+      "sha256": "593a9885578080b1e8512aa67688dd1839c2b2e6a4e5a523c0fa28e9b50d05db",
+      "locator": "/sites"
+    },
+    {
+      "path": "src/planets/comet-67p/source/features/sites.json",
+      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
+      "sha256": "82872a1dc96d6d97fcd9ffef2c480ef39feafb4a50db2fc19d3a4db852d3999b",
+      "locator": "/sites"
+    },
+    {
+      "path": "src/planets/dimorphos/source/features/sites.json",
+      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
+      "sha256": "609602bd18bbf589de8d86c3a374a6f0f5bfe73a86bb790053ccfbc4223ad0a2",
+      "locator": "/sites"
+    },
+    {
+      "path": "src/planets/eros/source/features/sites.json",
+      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
+      "sha256": "e91a00f6e8313ec4c2dfbe9841584f47c5299479d7c66c03f16a5bdf511f6ab9",
+      "locator": "/sites"
+    },
+    {
+      "path": "src/planets/mars/source/features/sites.json",
+      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
+      "sha256": "a14285fa6b38fd1dd403119fee66b3d285eac41851e5ca57972df6285dd1921c",
+      "locator": "/sites"
+    },
+    {
+      "path": "src/planets/mercury/source/features/sites.json",
+      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
+      "sha256": "4568f15244d6886ab3f1c11c39ee64f05f8c5ec7ab91a3971e6af34bf0b82858",
+      "locator": "/sites"
+    },
+    {
+      "path": "src/planets/moon/source/features/sites.json",
+      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
+      "sha256": "9c85d21238be3cbf1186a964d9eff8718dff93f934dbfdb7aa71076d19b39cc2",
+      "locator": "/sites"
+    },
+    {
+      "path": "src/planets/ryugu/source/features/sites.json",
+      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
+      "sha256": "8e7cb7fc9b9912414263cb5bb6095f0693ec4a671c8f7ece0f787627f5e0b641",
+      "locator": "/sites"
+    },
+    {
+      "path": "src/planets/titan/source/features/sites.json",
+      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
+      "sha256": "9f2dd6d9f490b4c8b775ad1764699d27cd6899e65065cc93604f8a187d59d27f",
+      "locator": "/sites"
+    },
+    {
+      "path": "src/planets/venus/source/features/sites.json",
+      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
+      "sha256": "54cc7c82a696f47dca88aa7d4e7e4679fbc3012394628b357b9eb12715883d04",
+      "locator": "/sites"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA NSSDCA (D. R. Williams), NASA PDS Cartography and Imaging Sciences Node, NASA/GSFC/Arizona State University LROC, ESA, JAXA and the cited authors.",
+      "scope": "Site coordinates, dates and traverse paths.",
+      "evidence": "Each site in every sites.json records its source page, publisher, rights statement and the verbatim sentence or table row."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA content is not subject to copyright; ESA, JAXA and journal pages are cited for facts only and nothing from them is reproduced beyond a short quotation.",
+      "scope": "The compiled coordinates and quotations.",
+      "evidence": "Rights statement and evidence URL recorded per source inside each sites.json."
+    },
+    {
+      "kind": "limitation",
+      "text": "Coordinates are stated in the frame each page uses (latitude kind and longitude convention recorded per site); 19 sites without published numbers are left out and listed in the working notes; traverses cover Apollo 11 and 12 EVAs, Curiosity and Perseverance only.",
+      "scope": "Prepared site labels and traces.",
+      "evidence": "tools/objects/surface-features/sites.ts validates every document."
+    }
+  ]
+}

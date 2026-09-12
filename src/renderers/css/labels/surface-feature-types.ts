@@ -35,8 +35,14 @@ export interface PreparedSurfaceFeature {
   /** Prepared search keys: the normalised name and clean name, and the normalised type. */
   readonly searchNames: readonly string[]; readonly searchContext: string;
   readonly origin: string; readonly approved: string; readonly quad: string; readonly link: string;
-  /** A source-backed caption note (an English Wikipedia lead summary, CC BY-SA 4.0) with its article. */
-  readonly note: { readonly text: string; readonly title: string; readonly url: string } | null;
+  /** Who published the name or site and when, for the caption's credit line. */
+  readonly credit: string;
+  /** A source-backed caption note (a Wikipedia lead summary or a site's quoted source sentence) with its page and credit. */
+  readonly note: { readonly text: string; readonly title: string; readonly url: string; readonly credit: string } | null;
+  /** The machines-catalogue id of the spacecraft at a site, when catalogued. */
+  readonly machineId: string | null;
+  /** Discovery tier: the share of the zoom range (0 whole body, 1 closest) from which this name competes for a label. */
+  readonly minimumZoomShare: number;
 }
 export interface PreparedSurfaceFeatureCatalog {
   readonly schema: 'cssearth-prepared-surface-features@1'; readonly objectId: string;

@@ -5,7 +5,7 @@ import type { ScreenPickTarget } from '../navigation/screen-picking.js';
 import { orbitSegmentTransform } from '../solar-system/orbit-segment-presentation.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
 import type { LabelScreenRect } from './screen-label-layout.js';
-import { admitSurfaceFeatureLabels, passesZoomGate, projectSurfaceFeature, projectSurfaceOutline, POINT_LABEL_GAP_PX } from './surface-feature-layout.js';
+import { admitSurfaceFeatureLabels, passesZoomGate, projectSurfaceFeature, projectSurfaceOutline, zoomShare, POINT_LABEL_GAP_PX } from './surface-feature-layout.js';
 import type { SurfaceLabelCandidate } from './surface-feature-layout.js';
 import { loadPreparedSurfaceFeatureCatalog } from './surface-feature-catalog.js';
 import { flyToSurfaceDirection } from './surface-feature-flight.js';
@@ -50,6 +50,8 @@ const kilometres = new Intl.NumberFormat('en', { maximumFractionDigits: 0 });
  * registry; the layer owns no pointer listeners. */
 /** Feature framing on arrival: the published diameter spans this share of the shorter viewport side. */
 const ARRIVAL_DIAMETER_SHARE = 0.45;
+/** Spacecraft sites and traverses have no size to report. */
+const SITE_CODES = new Set(['LS', 'IM', 'SS', 'RT']);
 const MINIMUM_FRAMED_RADIUS_M = 25_000;
 
 const CLICK_SLOP_PIXELS = 5;
@@ -192,6 +194,8 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     const projection = view?.projection;
     const range = zoomRange();
     zoomGate = passesZoomGate(view?.zoom, range.minimum, range.maximum, plan.policy);
+    // Each name carries its own discovery tier; names whose tier lies beyond the current zoom share wait for the camera.
+    const currentShare = view?.zoom === undefined ? 0 : zoomShare(view.zoom, range.minimum, range.maximum);
     // The selected feature stays labelled at any zoom; the density gate applies to the rest.
     if (!loaded || !enabled || !projection || (!zoomGate && pinnedIndex === null) || (view?.levelOfDetail && view.levelOfDetail.stage !== 'geometry')) { hideAll(); return; }
     requirePhysicalProjection(projection);
@@ -204,13 +208,15 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     const candidates: SurfaceLabelCandidate[] = [];
     for (let index = 0; index < entries.length; index++) {
       const entry = entries[index]!, feature = entry.feature;
-      if (!feature || (!zoomGate && index !== pinnedIndex)) continue;
+      if (!feature || ((!zoomGate || feature.minimumZoomShare > currentShare + 1e-6) && index !== pinnedIndex)) continue;
       const projected = projectSurfaceFeature(feature, matrix, projection.focalPixels, projection.principalOffsetPixels);
       if (!projected) continue;
       entry.x = projected.x; entry.y = projected.y;
       candidates.push({ index, kind: feature.kind, projected, width: entry.width, height: entry.height });
     }
-    const admitted = admitSurfaceFeatureLabels(candidates, plan.policy, { width, height }, visible, [], pinnedIndex);
+    // The label budget grows with the zoom: a whole body carries a third of the prepared maximum, the closest view all of it.
+    const budget = { ...plan.policy, maximumVisible: Math.max(4, Math.round(plan.policy.maximumVisible * (0.3 + 0.7 * currentShare))) };
+    const admitted = admitSurfaceFeatureLabels(candidates, budget, { width, height }, visible, [], pinnedIndex);
     const next = new Set<number>(), nextRects = new Map<string, LabelScreenRect>(), targets: ScreenPickTarget[] = [];
     for (const { index, rect, opacity } of admitted.accepted) {
       const entry = entries[index]!;
@@ -235,10 +241,10 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     const entry = entries[index]!, feature = entry.feature!;
     if (shownIndex !== index) {
       tooltipName.textContent = feature.name;
-      tooltipDetail.textContent = feature.diameterKm > 0 ? `${feature.type} · ${kilometres.format(feature.diameterKm)} km` : `${feature.type} · size unpublished`;
-      tooltipOrigin.textContent = feature.origin ? `Named for ${feature.origin.charAt(0).toLowerCase() === feature.origin.charAt(0) ? feature.origin : feature.origin.charAt(0).toLowerCase() + feature.origin.slice(1)}` : '';
+      tooltipDetail.textContent = feature.diameterKm > 0 ? `${feature.type} · ${kilometres.format(feature.diameterKm)} km` : SITE_CODES.has(feature.code) ? feature.type : `${feature.type} · size unpublished`;
+      tooltipOrigin.textContent = feature.origin;
       tooltipNote.textContent = feature.note?.text ?? '';
-      tooltipCredit.textContent = `IAU name, ${feature.approved.slice(0, 4)}${feature.note ? ` · Wikipedia, CC BY-SA` : ''}`;
+      tooltipCredit.textContent = feature.note?.credit ? `${feature.credit} · ${feature.note.credit}` : feature.credit;
       tooltip.dataset.featureTooltipFor = feature.id;
       root.dataset.featureOutlineFor = feature.id;
       tooltip.hidden = false;
