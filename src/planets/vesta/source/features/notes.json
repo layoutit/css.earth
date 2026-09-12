@@ -1,0 +1,82 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "14877",
+      "item": "Q5129120",
+      "title": "Claudia (crater)",
+      "url": "https://en.wikipedia.org/wiki/Claudia_(crater)",
+      "revision": "1352941663",
+      "extract": "Claudia is a small crater that formerly defined the prime meridian of the asteroid 4 Vesta. The convention of defining Vesta's prime meridian from Claudia is informally referred to as the Claudia coordinate system."
+    },
+    {
+      "id": "14886",
+      "item": "Q2631008",
+      "title": "Rheasilvia",
+      "url": "https://en.wikipedia.org/wiki/Rheasilvia",
+      "revision": "1353676465",
+      "extract": "Rheasilvia is the largest impact crater on the asteroid Vesta. It is 505 km (314 mi) in diameter, which is 90% the diameter of Vesta itself, and is 95% the mean diameter of Vesta, 529 km (329 mi). However, the mean is affected by the crater itself."
+    },
+    {
+      "id": "14909",
+      "item": "Q7686578",
+      "title": "Tarpeia (crater)",
+      "url": "https://en.wikipedia.org/wiki/Tarpeia_(crater)",
+      "revision": "1330086263",
+      "extract": "Tarpeia is an impact crater on the asteroid 4 Vesta. It is named after the Roman Vestal Virgin Tarpeia, who, according to legend, betrayed the city of Rome to the Sabines. The name Tarpeia was officially approved by the International Astronomical Union (IAU) on 27 December 2011."
+    },
+    {
+      "id": "14910",
+      "item": "Q7924611",
+      "title": "Vibidia (crater)",
+      "url": "https://en.wikipedia.org/wiki/Vibidia_(crater)",
+      "revision": "1369084381",
+      "extract": "9°W.1 km. There is a distinctive ray-like pattern of bright and dark material, with the bright rays extending circularly for 15 km around Vibidia, and the dark rays mostly restricted to within the crater and on the rim. The rays cut across older craters, whereas a few younger craters have formed on top of them."
+    },
+    {
+      "id": "14911",
+      "item": "Q5283815",
+      "title": "Divalia Fossae",
+      "url": "https://en.wikipedia.org/wiki/Divalia_Fossae",
+      "revision": "1346629662",
+      "extract": "Divalia Fossae is the large series of parallel equatorial troughs on the giant asteroid 4 Vesta. It is one of the longest chasms in the Solar System, stretching across roughly two-thirds of Vesta's equator."
+    },
+    {
+      "id": "14912",
+      "item": "Q7426824",
+      "title": "Saturnalia Fossae",
+      "url": "https://en.wikipedia.org/wiki/Saturnalia_Fossae",
+      "revision": "1330084903",
+      "extract": "Saturnalia Fossae is a series of parallel Veneneian troughs in the northern hemisphere of the giant asteroid 4 Vesta. It is thought to be a shock fractures resulting from the impact that created Veneneia crater, which it is concentric with. It is one of the longer chasms in the Solar System."
+    },
+    {
+      "id": "14914",
+      "item": "Q25909238",
+      "title": "Vestalia Terra",
+      "url": "https://en.wikipedia.org/wiki/Vestalia_Terra",
+      "revision": "1337260931",
+      "extract": "Vestalia Terra is a large highland plateau on the giant asteroid Vesta. Situated in Vesta's eastern hemisphere, Vestalia Terra is located near the equator and hosts the tallest point on Vesta. One of the largest named features on Vesta, it contains some of the most ancient terrain known on the asteroid."
+    },
+    {
+      "id": "14915",
+      "item": "Q16556697",
+      "title": "Feralia Planitia",
+      "url": "https://en.wikipedia.org/wiki/Feralia_Planitia",
+      "revision": "1347290978",
+      "extract": "Feralia Planitia is an elongated, rugged basin on the asteroid Vesta. It is the asteroid's third-largest known impact structure, after Rheasilvia and Veneneia. It is one of several old, degraded impact basins that predate the Rheasilvia basin that now dominates Vesta."
+    },
+    {
+      "id": "14949",
+      "item": "Q275341",
+      "title": "Veneneia (crater)",
+      "url": "https://en.wikipedia.org/wiki/Veneneia_(crater)",
+      "revision": "1353675557",
+      "extract": "Veneneia is the second-largest impact crater on the asteroid Vesta, at 52°S latitude. 395 kilometres (245 mi) in diameter, it is 70% of the equatorial diameter of the asteroid, and one of the largest craters in the Solar System.2 billion years."
+    }
+  ]
+}

@@ -1,0 +1,362 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "27",
+      "item": "Q25908805",
+      "title": "Acala Fluctus",
+      "url": "https://en.wikipedia.org/wiki/Acala_Fluctus",
+      "revision": "1303951722",
+      "extract": "Acala Fluctus is a volcano with a diameter of 415.36 kilometers located on the moon Io, the most volcanic moon in the solar system orbiting Jupiter. It is the site of sporadic fire fountaining activity with variable high temperatures."
+    },
+    {
+      "id": "96",
+      "item": "Q2827394",
+      "title": "Ah Peku Patera",
+      "url": "https://en.wikipedia.org/wiki/Ah_Peku_Patera",
+      "revision": "1263827467",
+      "extract": "Ah Peku Patera is a patera, or a complex crater with scalloped edges, on Jupiter's moon Io.3°N 107°W. It is named after the Mayan thunder god Ah Peku. Its name was adopted by the International Astronomical Union in 2006. Ah Peku Patera is located on the south end of Monan Mons, north of which is Monan Patera."
+    },
+    {
+      "id": "216",
+      "item": "Q2841341",
+      "title": "Amaterasu Patera",
+      "url": "https://en.wikipedia.org/wiki/Amaterasu_Patera",
+      "revision": "1358337588",
+      "extract": "Amaterasu Patera is a patera, a complex crater with scalloped edges, on Jupiter's moon Io. It is one of the darkest features on Io, and the measurement of its thermal spectrum helped to support an anticorrelation between albedo and temperature for Ionian hotspots."
+    },
+    {
+      "id": "234",
+      "item": "Q2843520",
+      "title": "Amirani (volcano)",
+      "url": "https://en.wikipedia.org/wiki/Amirani_(volcano)",
+      "revision": "1374333622",
+      "extract": "Amirani is an active volcano on Jupiter's moon Io, the inner-most of the Galilean Moons. It is located on Io's leading hemisphere at 24.46°N 114.68°W. The volcano is responsible for the largest active lava flow in the entire Solar System, with recent flows dwarfing those of even other volcanos on Io."
+    },
+    {
+      "id": "421",
+      "item": "Q2866478",
+      "title": "Asha Patera",
+      "url": "https://en.wikipedia.org/wiki/Asha_Patera",
+      "revision": "1263827789",
+      "extract": "Asha Patera is a patera, or a complex crater with scalloped edges, on Jupiter's moon Io.69°W. It is named after asha, the Zoroastrian principle of Truth. Its name was adopted by the International Astronomical Union in 1979. Reiden Patera and Kami-Nari Patera can both be found to the west."
+    },
+    {
+      "id": "534",
+      "item": "Q2877795",
+      "title": "Babbar Patera",
+      "url": "https://en.wikipedia.org/wiki/Babbar_Patera",
+      "revision": "1353101496",
+      "extract": "Babbar Patera is a patera, or a complex crater with scalloped edges, on Jupiter's moon Io.8°S 272°W. It is named after a Sumerian sun god, and its name was approved by the International Astronomical Union in 1979. Some scarps near Babbar Patera may represent faults."
+    },
+    {
+      "id": "854",
+      "item": "Q18002964",
+      "title": "Boösaule Montes",
+      "url": "https://en.wikipedia.org/wiki/Bo%C3%B6saule_Montes",
+      "revision": "1327855097",
+      "extract": "South Boösaule Mons, the highest mountain of Jupiter's moon Io, is one of the tallest mountains in the Solar System. It is located just northwest of the volcano Pele, in the Boösaule Montes."
+    },
+    {
+      "id": "1407",
+      "item": "Q3015753",
+      "title": "Danube Planum",
+      "url": "https://en.wikipedia.org/wiki/Danube_Planum",
+      "revision": "1263829362",
+      "extract": "Danube Planum is a rifted mesa on the surface of Jupiter's moon Io.44°W.5 km tall. The mountain is bisected by a 15-to-25-kilometer-wide, northeast–southwest-trending canyon, splitting the mountain into two main east and west mountains, with several additional blocks at the southern end of the fracture."
+    },
+    {
+      "id": "1433",
+      "item": "Q3019403",
+      "title": "Dazhbog Patera",
+      "url": "https://en.wikipedia.org/wiki/Dazhbog_Patera",
+      "revision": "1374050032",
+      "extract": "Dazhbog Patera is a patera on Jupiter's moon Io.52°W. This volcano is difficult to differentiate from the other volcanoes and geological features in some images of Io. In images from the Voyager spacecraft, this caldera is quite prominent with its dark reddish floor with a darkish halo around the caldera."
+    },
+    {
+      "id": "1733",
+      "item": "Q5348327",
+      "title": "Egypt Mons",
+      "url": "https://en.wikipedia.org/wiki/Egypt_Mons",
+      "revision": "1263827524",
+      "extract": "Egypt Mons is a mountain on Jupiter's moon Io. It is 10 kilometers in height, making it the 11th tallest mountain on Io, and taller than Mount Everest.S.0 kilometers. It is a Flatiron Massif mountain, meaning it has a rugged, irregular appearance and complex surface morphology.6°W. It has a steep, north-facing scarp."
+    },
+    {
+      "id": "1851",
+      "item": "Q3058845",
+      "title": "Estan Patera",
+      "url": "https://en.wikipedia.org/wiki/Estan_Patera",
+      "revision": "1263827680",
+      "extract": "Estan Patera is a patera, or a complex crater with scalloped edges, on Jupiter's moon Io.59°W. It is named after the Hittite sun god Estan. Its name was adopted by the International Astronomical Union in 2006. It is located at the northern base of the 11-kilometer mountain Gish Bar Mons."
+    },
+    {
+      "id": "1857",
+      "item": "Q25909104",
+      "title": "List of mountains on Io",
+      "url": "https://en.wikipedia.org/wiki/List_of_mountains_on_Io",
+      "revision": "1347273338",
+      "extract": "More than 135 mountains have been identified on the surface of Jupiter's moon Io. Despite the extensive active volcanism taking place on Io, most mountains on Io are formed through tectonic processes.9 ± 1 mi) at South Boösaule Montes."
+    },
+    {
+      "id": "1859",
+      "item": "Q16509686",
+      "title": "Euboea Montes",
+      "url": "https://en.wikipedia.org/wiki/Euboea_Montes",
+      "revision": "1249588435",
+      "extract": "Euboea Montes is a mountain on Io, a moon of Jupiter. Its coordinates are at 48.89°S 338.77°W. It is about 10.5±1 km high, and was formed by tilting of a crustal block, with subsequent modification by a very large landslide."
+    },
+    {
+      "id": "2034",
+      "item": "Q3090500",
+      "title": "Fuchi Patera",
+      "url": "https://en.wikipedia.org/wiki/Fuchi_Patera",
+      "revision": "1263826566",
+      "extract": "Fuchi Patera is a patera, or a complex crater with scalloped edges, on Jupiter's moon Io.6°W. It is named after the Ainu fire goddess, Kamuy Fuchi. Its name was adopted by the International Astronomical Union in 1979. Manua Patera is located north-northeast, and Amaterasu Patera is located northeast."
+    },
+    {
+      "id": "2179",
+      "item": "Q3107788",
+      "title": "Gish Bar Patera",
+      "url": "https://en.wikipedia.org/wiki/Gish_Bar_Patera",
+      "revision": "1263829231",
+      "extract": "Gish Bar Patera is a patera, or a complex crater with scalloped edges, on Jupiter's moon Io.0 kilometers and 9,600 km2 in area.26°W. It is named after the Babylonian sun god Gish Bar. Its name was approved by the International Astronomical Union in 1997."
+    },
+    {
+      "id": "2907",
+      "item": "Q3192416",
+      "title": "Kami-Nari Patera",
+      "url": "https://en.wikipedia.org/wiki/Kami-Nari_Patera",
+      "revision": "1263827804",
+      "extract": "Kami-Nari Patera is a patera, or a complex crater with scalloped edges, on Jupiter's moon Io.08°W. It is named after the Japanese god of rolling thunder, Kami-Nari. Its name was adopted by the International Astronomical Union in 2000. Reiden Patera can be found to the south, and Asha Patera can be found to the east."
+    },
+    {
+      "id": "2916",
+      "item": "Q17079539",
+      "title": "Kanehekili Fluctus",
+      "url": "https://en.wikipedia.org/wiki/Kanehekili_Fluctus",
+      "revision": "1369305082",
+      "extract": "Kanehekili Fluctus is a lava flow field on Jupiter's moon, Io.56°W as shown in the picture on the right.6°W. This lava field covers roughly 34,500 square kilometres (13,300 mi2). The hotspot was detected by the Galileo Solid State Imaging experiment (SSI) on orbits by Galileo."
+    },
+    {
+      "id": "3041",
+      "item": "Q3197148",
+      "title": "Kinich Ahau Patera",
+      "url": "https://en.wikipedia.org/wiki/Kinich_Ahau_Patera",
+      "revision": "1263827600",
+      "extract": "Kinich Ahau Patera is a patera, or a complex crater with scalloped edges, on Jupiter's moon Io.25°W. It is named after the Mayan sun god Kinich Ahau. Dazhbog Patera is located northeast, Amaterasu Patera is located south-southeast, and Manua Patera can be found southwest."
+    },
+    {
+      "id": "3459",
+      "item": "Q765048",
+      "title": "Loki Patera",
+      "url": "https://en.wikipedia.org/wiki/Loki_Patera",
+      "revision": "1356725376",
+      "extract": "Loki Patera is the largest volcanic depression on Jupiter's moon Io, 202 kilometres (126 mi) in diameter. It contains an active lava lake, with an episodically overturning crust. The level of activity seen is similar to a superfast spreading mid-ocean ridge on Earth."
+    },
+    {
+      "id": "3643",
+      "item": "Q3286723",
+      "title": "Manua Patera",
+      "url": "https://en.wikipedia.org/wiki/Manua_Patera",
+      "revision": "1263826582",
+      "extract": "Manua Patera is a patera, or a complex crater with scalloped edges, on Jupiter's moon Io.73°W. It is named after the Hawaiian sun god Manua. Its name was adopted by the International Astronomical Union in 1979. To the southwest is Fuchi Patera, and to the east is Amaterasu Patera."
+    },
+    {
+      "id": "3744",
+      "item": "Q3042964",
+      "title": "Masubi (volcano)",
+      "url": "https://en.wikipedia.org/wiki/Masubi_(volcano)",
+      "revision": "1369156579",
+      "extract": "Masubi is an active volcano on Jupiter's moon Io.18°W within a bright terrain region named Tarsus Regio. A volcanic plume has been observed at Masubi by various spacecraft starting with Voyager 1 in 1979, though it has not been persistent like similar Ionian volcanoes Amirani and Prometheus."
+    },
+    {
+      "id": "3754",
+      "item": "Q3300165",
+      "title": "Maui Patera",
+      "url": "https://en.wikipedia.org/wiki/Maui_Patera",
+      "revision": "1263827817",
+      "extract": "Maui Patera is a patera, or a complex crater with scalloped edges, on Jupiter's moon Io.23°W. It is named after Māui, a Hawaiian demigod that sought fire from Mafuike. Its name was approved by the International Astronomical Union in 1979."
+    },
+    {
+      "id": "3933",
+      "item": "Q6881655",
+      "title": "Mithra Patera",
+      "url": "https://en.wikipedia.org/wiki/Mithra_Patera",
+      "revision": "1263826604",
+      "extract": "Mithra Patera is a patera, or a complex crater with scalloped edges, on Jupiter's moon Io.48°W. It is named after the Persian god of light, Mithra. Its name was adopted by the International Astronomical Union in 1985. To the north is Silpian Mons, and to the east is Pyerun Patera. Located southwest is Viracocha Patera."
+    },
+    {
+      "id": "3963",
+      "item": "Q6897949",
+      "title": "Monan Patera",
+      "url": "https://en.wikipedia.org/wiki/Monan_Patera",
+      "revision": "1263827477",
+      "extract": "Monan Patera is a patera, or a complex crater with scalloped edges, on Jupiter's moon Io.81°W. It is named after Monan, a god in Brazilian mythology that destroyed the world with fire and floods. Its name was adopted by the International Astronomical Union in 1997."
+    },
+    {
+      "id": "4638",
+      "item": "Q1320267",
+      "title": "Pele (volcano)",
+      "url": "https://en.wikipedia.org/wiki/Pele_(volcano)",
+      "revision": "1370471876",
+      "extract": "Pele is an active volcano on the surface of Jupiter's moon Io. A large, 300-kilometer (190 mi) tall volcanic plume has been observed at Pele by various spacecraft starting with Voyager 1 in 1979, though it has not been persistent."
+    },
+    {
+      "id": "4729",
+      "item": "Q3388445",
+      "title": "Pillan Patera",
+      "url": "https://en.wikipedia.org/wiki/Pillan_Patera",
+      "revision": "1332271181",
+      "extract": "Pillan Patera is a patera, or a complex crater with scalloped edges, on Jupiter's moon Io. It is located at 12.34°S 243.25°W, south of Pillan Mons and west of Reiden Patera. It is named after the Araucanian thunder, fire, and volcano god. Its name was approved by the International Astronomical Union in 1997."
+    },
+    {
+      "id": "4836",
+      "item": "Q1751428",
+      "title": "Prometheus (volcano)",
+      "url": "https://en.wikipedia.org/wiki/Prometheus_(volcano)",
+      "revision": "1356904696",
+      "extract": "Prometheus is an active volcano on Jupiter's moon Io. It is located on Io's hemisphere facing away from Jupiter at 1.52°S 153.94°W."
+    },
+    {
+      "id": "4880",
+      "item": "Q7262981",
+      "title": "Pyerun Patera",
+      "url": "https://en.wikipedia.org/wiki/Pyerun_Patera",
+      "revision": "1263827879",
+      "extract": "Pyerun Patera is a patera, or a complex crater with scalloped edges, on Jupiter's moon Io.06°W. It is named after the Slavonic god of thunder, Pyerun. The name was adopted by the International Astronomical Union in 1985. West of Pyerun Patera is Mithra Patera, and to the east is the mesa Epaphus Mensa."
+    },
+    {
+      "id": "4907",
+      "item": "Q2124774",
+      "title": "Ra Patera",
+      "url": "https://en.wikipedia.org/wiki/Ra_Patera",
+      "revision": "1263827715",
+      "extract": "Ra Patera is an extraterrestrial volcano located on Io, one of the four Galilean moons of Jupiter. An active volcano, it was first studied in 1979 via Voyager stereo imagery to determine its geology, topography, and the source of its eruptions."
+    },
+    {
+      "id": "4982",
+      "item": "Q7310040",
+      "title": "Reiden Patera",
+      "url": "https://en.wikipedia.org/wiki/Reiden_Patera",
+      "revision": "1263827437",
+      "extract": "Reiden Patera is a volcanic feature on Jupiter's moon Io. It was first detected by the Galileo SSI Team during the spacecraft Galileo's first orbit around Jupiter, initially detected as a hotspot."
+    },
+    {
+      "id": "5467",
+      "item": "Q7488562",
+      "title": "Shango Patera",
+      "url": "https://en.wikipedia.org/wiki/Shango_Patera",
+      "revision": "1263827384",
+      "extract": "Shango Patera is a patera, or a complex crater with scalloped edges, on Jupiter's moon Io.52°W. It is named after the Yoruba thunder god Shango. Its name was approved by the International Astronomical Union in 2000. It is located north of Skythia Mons."
+    },
+    {
+      "id": "5535",
+      "item": "Q7515568",
+      "title": "Silpium Mons",
+      "url": "https://en.wikipedia.org/wiki/Silpium_Mons",
+      "revision": "1322408081",
+      "extract": "Silpium Mons is a mountain on Jupiter's moon Io.7 kilometers in width. It covers an area of 7073 km2. It is a striated ridge, meaning it is an elevated structure dominated by one or more prominent linear or arcuate rises. It is named after a location in Greece where the mythological Io died of grief."
+    },
+    {
+      "id": "5770",
+      "item": "Q3391975",
+      "title": "Surt (volcano)",
+      "url": "https://en.wikipedia.org/wiki/Surt_(volcano)",
+      "revision": "1356906189",
+      "extract": "Surt is an active volcano on Jupiter's moon Io. It is located on Io's Jupiter-facing hemisphere at. Surt consists of an oblong volcanic pit, 75 by 40 kilometres in diameter, surrounded by reddish sulfur and bright sulfur dioxide deposits to its south and east."
+    },
+    {
+      "id": "5781",
+      "item": "Q7651686",
+      "title": "Svarog Patera",
+      "url": "https://en.wikipedia.org/wiki/Svarog_Patera",
+      "revision": "1322497302",
+      "extract": "Svarog Patera is a patera, or a complex crater with scalloped edges, on Jupiter's moon Io.74°W. It is named after the Russian smith god Svarog. Its name was approved by the International Astronomical Union in 1979. Svarog Patera is a Voyager spacecraft-detected hot spot."
+    },
+    {
+      "id": "5886",
+      "item": "Q7689271",
+      "title": "Tawhaki Patera",
+      "url": "https://en.wikipedia.org/wiki/Tawhaki_Patera",
+      "revision": "1369507469",
+      "extract": "Tawhaki Patera is an active volcano on Jupiter's moon Io. It is located on Io's leading hemisphere at 3.32°N 76.18°W within the equatorial plains of western Media Regio. Tawhaki is an Ionian patera, a type of volcanic crater similar to a caldera, 49.8 kilometers (30.9 mi) wide and 550 meters (1,800 ft) deep."
+    },
+    {
+      "id": "5887",
+      "item": "Q3391982",
+      "title": "Tawhaki Vallis",
+      "url": "https://en.wikipedia.org/wiki/Tawhaki_Vallis",
+      "revision": "1374462609",
+      "extract": "Tawhaki Vallis is a shallow valley on Jupiter's moon Io.8°W.5 to 6 km wide, and 40 to 65 meters deep."
+    },
+    {
+      "id": "5975",
+      "item": "Q7786773",
+      "title": "Thomagata Patera",
+      "url": "https://en.wikipedia.org/wiki/Thomagata_Patera",
+      "revision": "1188001562",
+      "extract": "Thomagata Patera is a volcano on Jupiter's moon Io.94°W, to the east of the nearby active volcanoes Volund and Zamama.0 mi) deep."
+    },
+    {
+      "id": "5978",
+      "item": "Q3391954",
+      "title": "Thor (volcano)",
+      "url": "https://en.wikipedia.org/wiki/Thor_(volcano)",
+      "revision": "1370504420",
+      "extract": "Thor is an active volcano on Jupiter's moon Io. It is located on Io's anti-Jupiter hemisphere at. A major eruption with high thermal emission and a large, volcanic plume was observed during a Galileo flyby on August 6, 2001, when the spacecraft flew through the outer portions of the plume allowing for direct sampling."
+    },
+    {
+      "id": "6043",
+      "item": "Q3375694",
+      "title": "Tohil Mons",
+      "url": "https://en.wikipedia.org/wiki/Tohil_Mons",
+      "revision": "1313215335",
+      "extract": "Tohil Mons is a mountain on Io, one of Jupiter's moons. It stands at 5400 m and is located in the Culann–Tohil region of Io's antijovian hemisphere. It was named after the Mayan weather god Tohil."
+    },
+    {
+      "id": "6135",
+      "item": "Q1478289",
+      "title": "Tupan Patera",
+      "url": "https://en.wikipedia.org/wiki/Tupan_Patera",
+      "revision": "1346799924",
+      "extract": "Tupan Patera is an active volcano on Jupiter's moon Io.13°W. Tupan consists of a volcanic crater, known as a patera, 79 kilometers across and 900 meters deep."
+    },
+    {
+      "id": "6398",
+      "item": "Q7933570",
+      "title": "Viracocha Patera",
+      "url": "https://en.wikipedia.org/wiki/Viracocha_Patera",
+      "revision": "1263827354",
+      "extract": "Viracocha Patera is a patera, or a complex crater with scalloped edges, on Jupiter's moon Io.07°W. It is named after the Quechua creator god Viracocha. The name was adopted by the International Astronomical Union in 1979. Viracocha Patera is a Voyager spacecraft-detected hot spot."
+    },
+    {
+      "id": "6697",
+      "item": "Q20745247",
+      "title": "Zamama (volcano)",
+      "url": "https://en.wikipedia.org/wiki/Zamama_(volcano)",
+      "revision": "1353484135",
+      "extract": "Zamama is an active volcanic center on Jupiter's moon Io. This volcanic center erupted after the Voyager 1 flyby in 1979, making it one of the few planetary volcanoes known to have activated during this generation's lifetime."
+    },
+    {
+      "id": "14131",
+      "item": "Q1140202",
+      "title": "Tvashtar Paterae",
+      "url": "https://en.wikipedia.org/wiki/Tvashtar_Paterae",
+      "revision": "1365875436",
+      "extract": "Tvashtar Paterae compose an active volcanic region of Jupiter's moon Io located near its north pole. It is a series of paterae, or volcanic craters. It is named after Tvashtar, the Hindu god of blacksmiths. Tvashtar was discovered in IRTF images on November 26, 1999, several hours after a Galileo flyby."
+    },
+    {
+      "id": "16182",
+      "item": "Q123653387",
+      "title": "Kanlaon Patera",
+      "url": "https://en.wikipedia.org/wiki/Kanlaon_Patera",
+      "revision": "1343112493",
+      "extract": "Kanlaon Patera is an active volcano on Io, the most volcanically active body in the Solar System, and the third largest moon of the planet Jupiter. Kanlaon Patera is approximately 94 km (58 mi) in diameter."
+    }
+  ]
+}

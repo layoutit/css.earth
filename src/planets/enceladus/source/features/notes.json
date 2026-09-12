@@ -1,0 +1,354 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "98",
+      "item": "Q1400643",
+      "title": "Ahmad (crater)",
+      "url": "https://en.wikipedia.org/wiki/Ahmad_(crater)",
+      "revision": "1328882067",
+      "extract": "Ahmad is a crater in the northern hemisphere of Saturn's moon Enceladus. Ahmad was first discovered in Voyager 2 images but was seen at much higher resolution, though near the terminator, by Cassini.7 kilometers across."
+    },
+    {
+      "id": "154",
+      "item": "Q1398987",
+      "title": "Aladdin (crater)",
+      "url": "https://en.wikipedia.org/wiki/Aladdin_(crater)",
+      "revision": "1328743240",
+      "extract": "Aladdin is a crater in the northern hemisphere of Saturn's moon Enceladus. Aladdin was first discovered in Voyager 2 images.4 kilometers across. It is located near the craters Ali Baba and Samad. Aladdin has a large dome in its interior, suggesting the crater has undergone some viscous relaxation."
+    },
+    {
+      "id": "184",
+      "item": "Q4724690",
+      "title": "Ali Baba (crater)",
+      "url": "https://en.wikipedia.org/wiki/Ali_Baba_(crater)",
+      "revision": "1328749172",
+      "extract": "Ali Baba is a large crater in the northern hemisphere of Saturn's moon Enceladus. Ali Baba was first discovered in Voyager 2 images.2 kilometers across. It is located near the craters Aladdin and Samad. Ali Baba has a large dome in its interior, suggesting the crater has undergone viscous relaxation."
+    },
+    {
+      "id": "631",
+      "item": "Q2501223",
+      "title": "Bassorah Fossa",
+      "url": "https://en.wikipedia.org/wiki/Bassorah_Fossa",
+      "revision": "1313215598",
+      "extract": "Bassorah Fossa is a trough south of Ali Baba crater on Saturn's moon Enceladus. Bassorah Fossa was first seen in Voyager 2 images. It is located at 45.4° north, 6.3° west, and is 131 kilometers long."
+    },
+    {
+      "id": "1391",
+      "item": "Q5210995",
+      "title": "Dalilah (crater)",
+      "url": "https://en.wikipedia.org/wiki/Dalilah_(crater)",
+      "revision": "1263804722",
+      "extract": "Dalilah is a crater in the northern hemisphere of Saturn's moon Enceladus. Dalilah was first discovered in Voyager 2 images but was seen at much higher resolution by Cassini.54°W and is 16 kilometers across. Fractures have deformed the south-eastern side of Dalilah as well as the dome at the center of the crater."
+    },
+    {
+      "id": "1419",
+      "item": "Q2268216",
+      "title": "Daryabar Fossa",
+      "url": "https://en.wikipedia.org/wiki/Daryabar_Fossa",
+      "revision": "1342943375",
+      "extract": "Daryabar Fossa is an east–west trending trough on Saturn's moon Enceladus. Daryabar Fossa was first seen in Voyager 2 images, though a small section was seen at much higher resolution by Cassini.1° West Longitude and is approximately 201 kilometers long."
+    },
+    {
+      "id": "1553",
+      "item": "Q2036171",
+      "title": "Diyar Planitia",
+      "url": "https://en.wikipedia.org/wiki/Diyar_Planitia",
+      "revision": "1321248888",
+      "extract": "Diyar Planitia is a region of relatively un-cratered terrain on Saturn's moon Enceladus. Its location is 0.5° North Latitude, 239.7° West Longitude while its being approximately 311 km across."
+    },
+    {
+      "id": "1652",
+      "item": "Q5310641",
+      "title": "Duban (crater)",
+      "url": "https://en.wikipedia.org/wiki/Duban_(crater)",
+      "revision": "1263804989",
+      "extract": "Duban is a crater in the northern hemisphere of Saturn's moon Enceladus. Duban was first seen in Voyager 2 images, though the crater has also been seen in much higher resolution Cassini images.91°W and is 19 kilometers across."
+    },
+    {
+      "id": "1669",
+      "item": "Q5315819",
+      "title": "Dunyazad (crater)",
+      "url": "https://en.wikipedia.org/wiki/Dunyazad_(crater)",
+      "revision": "1328537588",
+      "extract": "Dunyazad is a large crater on Saturn's moon Enceladus first discovered by the Voyager 2 spacecraft. It is named after Dunyazad, the sister of Scheherazade in The Book of One Thousand and One Nights."
+    },
+    {
+      "id": "2153",
+      "item": "Q5555734",
+      "title": "Gharib (crater)",
+      "url": "https://en.wikipedia.org/wiki/Gharib_(crater)",
+      "revision": "1328756939",
+      "extract": "Gharib is a crater near the north pole of Saturn's moon Enceladus. Gharib was first seen in Voyager 2 images.2° West Longitude and is 26 kilometers across. A large, dome-like structure occupies the interior of the crater, suggesting the crater has undergone significant viscous relaxation."
+    },
+    {
+      "id": "2373",
+      "item": "Q2654434",
+      "title": "Harran Sulci",
+      "url": "https://en.wikipedia.org/wiki/Harran_Sulci",
+      "revision": "1223401668",
+      "extract": "Harran Sulci is a region of grooved terrain on the surface of Saturn's moon Enceladus. The feature is centered at 26.7° North Latitude, 237.6° West Longitude and is approximately 276 kilometers long. Harran Sulci bounds Diyar Planitia to the north and east."
+    },
+    {
+      "id": "2727",
+      "item": "Q2267142",
+      "title": "Isbanir Fossa",
+      "url": "https://en.wikipedia.org/wiki/Isbanir_Fossa",
+      "revision": "1333357749",
+      "extract": "Isbanir Fossa is a north-south trending escarpment on Saturn's moon Enceladus. Isbanir Fossa was first seen in Voyager 2 images, though a small section was seen at much higher resolution by Cassini.0° West Longitude and is approximately 132 kilometres long."
+    },
+    {
+      "id": "2860",
+      "item": "Q6310371",
+      "title": "Julnar (crater)",
+      "url": "https://en.wikipedia.org/wiki/Julnar_(crater)",
+      "revision": "1328757941",
+      "extract": "Julnar is a crater in the northern hemisphere of Saturn's moon Enceladus. Julnar was first discovered in Voyager 2 and has only been seen at comparable resolution by Cassini. It is located at 52.8° North Latitude, 350.0° West Longitude and is approximately 19 kilometers across."
+    },
+    {
+      "id": "4077",
+      "item": "Q6939888",
+      "title": "Musa (crater)",
+      "url": "https://en.wikipedia.org/wiki/Musa_(crater)",
+      "revision": "1328880367",
+      "extract": "Musa is a crater in the northern hemisphere of Saturn's moon Enceladus. Musa was first seen in Voyager 2 images.6° West Longitude and is 25 kilometers across. Musa is located North of Aladdin."
+    },
+    {
+      "id": "4658",
+      "item": "Q7168339",
+      "title": "Peri-Banu (crater)",
+      "url": "https://en.wikipedia.org/wiki/Peri-Banu_(crater)",
+      "revision": "1328884491",
+      "extract": "Peri-Banu is a crater in the northern hemisphere of Saturn's moon Enceladus. Peri-Banu was first discovered in Voyager 2 images but was seen at much higher resolution, though near the terminator, by Cassini.9° West Longitude and is 18 kilometers across."
+    },
+    {
+      "id": "5282",
+      "item": "Q7404485",
+      "title": "Salih (crater)",
+      "url": "https://en.wikipedia.org/wiki/Salih_(crater)",
+      "revision": "1328760185",
+      "extract": "Salih is a small crater near the sub-Saturnian point of Saturn's moon Enceladus. Salih was first discovered in images taken by the Voyager 2 spacecraft.5° South Latitude, 0° West Longitude and is 4 kilometers across."
+    },
+    {
+      "id": "5288",
+      "item": "Q7408428",
+      "title": "Samad (crater)",
+      "url": "https://en.wikipedia.org/wiki/Samad_(crater)",
+      "revision": "1322396472",
+      "extract": "Samad is a crater in the northern hemisphere of Saturn's geologically active moon Enceladus. Samad was first discovered in Voyager 2 images.1 mi) across."
+    },
+    {
+      "id": "5291",
+      "item": "Q2434399",
+      "title": "Samarkand Sulci",
+      "url": "https://en.wikipedia.org/wiki/Samarkand_Sulci",
+      "revision": "1274158227",
+      "extract": "Samarkand Sulci is a region of grooved terrain on the surface of Saturn's moon Enceladus.8° West Longitude, and is approximately 383 kilometers long. Samarkand Sulci consists of three parts. The southern and eastern extensions bound Sarandib Planitia on its western and northern sides, respectively."
+    },
+    {
+      "id": "5323",
+      "item": "Q2112117",
+      "title": "Sarandib Planitia",
+      "url": "https://en.wikipedia.org/wiki/Sarandib_Planitia",
+      "revision": "1274158192",
+      "extract": "Sarandib Planitia is a region of relatively un-cratered terrain on Saturn's moon Enceladus.0° West Longitude and is approximately 200 km across. From Voyager images, Sarandib Planitia is considered part of either the ridged plains unit or smooth plains unit of Enceladus, thought to be the youngest terrain on Enceladus."
+    },
+    {
+      "id": "5452",
+      "item": "Q13560932",
+      "title": "Shahrazad (crater)",
+      "url": "https://en.wikipedia.org/wiki/Shahrazad_(crater)",
+      "revision": "1328527784",
+      "extract": "Shahrazad is a large crater on Saturn's moon Enceladus first discovered by the Voyager 2 spacecraft.7° West Longitude and is approximately 20 kilometers across. Shahrazad is the middle crater of a prominent crater triplet on Enceladus' anti-Saturnian hemisphere."
+    },
+    {
+      "id": "5453",
+      "item": "Q7462299",
+      "title": "Shahryar (crater)",
+      "url": "https://en.wikipedia.org/wiki/Shahryar_(crater)",
+      "revision": "1328760247",
+      "extract": "Shahryar is a crater in the northern hemisphere of Saturn's moon Enceladus. Shahryar was first seen in Voyager 2 images, but was seen at much higher resolution by the Cassini spacecraft.5° West Longitude and is 24 kilometres (15 mi) across."
+    },
+    {
+      "id": "5554",
+      "item": "Q7522117",
+      "title": "Sindbad (crater)",
+      "url": "https://en.wikipedia.org/wiki/Sindbad_(crater)",
+      "revision": "1328881081",
+      "extract": "Sindbad is a crater in the northern hemisphere of Saturn's moon Enceladus. Sindbad was first seen in Voyager 2 images, though the southern rim has been seen by Cassini.1 kilometers across."
+    },
+    {
+      "id": "14222",
+      "item": "Q4702263",
+      "title": "Al-Bakbuk",
+      "url": "https://en.wikipedia.org/wiki/Al-Bakbuk",
+      "revision": "1279852315",
+      "extract": "Al-Bakbuk is an impact crater in the northern hemisphere of Saturn's moon Enceladus. Al-Bakbuk was first observed in Cassini images during that mission's March 2005 flyby of Enceladus.19°W and is 9 kilometers across."
+    },
+    {
+      "id": "14223",
+      "item": "Q7490468",
+      "title": "Sharrkan (crater)",
+      "url": "https://en.wikipedia.org/wiki/Sharrkan_(crater)",
+      "revision": "1328881067",
+      "extract": "Sharrkan is an impact crater in the northern hemisphere of Saturn's moon Enceladus. Sharrkan was first observed in Cassini images during that mission's February 2005 flyby of Enceladus.3° West Longitude."
+    },
+    {
+      "id": "14224",
+      "item": "Q4702439",
+      "title": "Al-Haddar",
+      "url": "https://en.wikipedia.org/wiki/Al-Haddar",
+      "revision": "1328749131",
+      "extract": "Al-Haddar is an impact crater on Saturn's moon Enceladus, first discovered by the Voyager spacecraft. It is named after Al-Haddar, one of the barber's six brothers in \"The Hunchback's Tale\" from The Book of One Thousand and One Nights."
+    },
+    {
+      "id": "14225",
+      "item": "Q4702725",
+      "title": "Al-Kuz",
+      "url": "https://en.wikipedia.org/wiki/Al-Kuz",
+      "revision": "1263815985",
+      "extract": "Al-Kuz is an impact crater on the anti-Saturn hemisphere of Saturn's moon Enceladus. Al-Kuz was first observed in Cassini images during that mission's March 2005 flyby of Enceladus.3 kilometers across."
+    },
+    {
+      "id": "14226",
+      "item": "Q4702978",
+      "title": "Al-Mustazi",
+      "url": "https://en.wikipedia.org/wiki/Al-Mustazi",
+      "revision": "1328882082",
+      "extract": "Al-Mustazi is an impact crater located on the anti-Saturn hemisphere of Saturn's moon Enceladus. Al-Mustazi was first observed in Cassini images during that mission's March 2005 flyby of Enceladus.3 kilometers across."
+    },
+    {
+      "id": "14227",
+      "item": "Q4831928",
+      "title": "Ayyub (crater)",
+      "url": "https://en.wikipedia.org/wiki/Ayyub_(crater)",
+      "revision": "1263831569",
+      "extract": "Ayyub is an impact crater in the northern hemisphere of Saturn's moon Enceladus. Ayyub was first observed in Cassini images during that mission's February 2005 flyby of Enceladus.7° West Longitude and is 18 kilometers across."
+    },
+    {
+      "id": "14229",
+      "item": "Q7299419",
+      "title": "Rayya (crater)",
+      "url": "https://en.wikipedia.org/wiki/Rayya_(crater)",
+      "revision": "1328880792",
+      "extract": "Rayya is an impact crater on the southern hemisphere of Saturn's moon Enceladus. Rayya was first observed in Cassini images during that mission's March 2005 flyby of Enceladus.4° West Longitude, and is 9 kilometers across."
+    },
+    {
+      "id": "14230",
+      "item": "Q5455456",
+      "title": "Fitnah (crater)",
+      "url": "https://en.wikipedia.org/wiki/Fitnah_(crater)",
+      "revision": "1263822051",
+      "extract": "Fitnah is an impact crater in the northern hemisphere of Saturn's moon Enceladus. Fitnah was first observed in Cassini–Huygens images during that mission's February 2005 flyby of Enceladus.5 kilometers across."
+    },
+    {
+      "id": "14231",
+      "item": "Q5555576",
+      "title": "Ghanim (crater)",
+      "url": "https://en.wikipedia.org/wiki/Ghanim_(crater)",
+      "revision": "1263831802",
+      "extract": "Ghanim is an impact crater in the northern hemisphere of Saturn's moon Enceladus. Ghanim was first observed in Cassini images during that mission's February 2005 flyby of Enceladus.9 kilometers across."
+    },
+    {
+      "id": "14232",
+      "item": "Q5679511",
+      "title": "Hassan (crater)",
+      "url": "https://en.wikipedia.org/wiki/Hassan_(crater)",
+      "revision": "1263804957",
+      "extract": "Hassan is an impact crater on the southern hemisphere of Saturn's moon Enceladus. Hassan was first observed in Cassini images during that mission's March 2005 flyby of Enceladus.5 kilometers across. Numerous criss-crossing fractures cut across Hassan, breaking up the regolith on the crater floor."
+    },
+    {
+      "id": "14233",
+      "item": "Q6155549",
+      "title": "Jansha (crater)",
+      "url": "https://en.wikipedia.org/wiki/Jansha_(crater)",
+      "revision": "1329156670",
+      "extract": "Jansha is an impact crater on the southern hemisphere of Saturn's moon Enceladus. Jansha was first observed in Cassini images during that mission's March 2005 flyby of Enceladus.8 kilometers across."
+    },
+    {
+      "id": "14234",
+      "item": "Q6403215",
+      "title": "Khusrau (crater)",
+      "url": "https://en.wikipedia.org/wiki/Khusrau_(crater)",
+      "revision": "1263815372",
+      "extract": "Khusrau is an impact crater on the anti-Saturn hemisphere of Saturn's moon Enceladus. Khusrau was first observed in Cassini images during that mission's March 2005 flyby of Enceladus.3 kilometers across."
+    },
+    {
+      "id": "14235",
+      "item": "Q6766181",
+      "title": "Marjanah (crater)",
+      "url": "https://en.wikipedia.org/wiki/Marjanah_(crater)",
+      "revision": "1263831438",
+      "extract": "Marjanah is an impact crater in the northern hemisphere of Saturn's moon Enceladus. Marjanah was first observed in Cassini images during that mission's February 2005 flyby of Enceladus.5 kilometers across."
+    },
+    {
+      "id": "14237",
+      "item": "Q7108487",
+      "title": "Otbah (crater)",
+      "url": "https://en.wikipedia.org/wiki/Otbah_(crater)",
+      "revision": "1328880545",
+      "extract": "Otbah is an impact crater on the southern hemisphere of Saturn's moon Enceladus. Otbah was first observed in Cassini images during that mission's March 2005 flyby of Enceladus.4 kilometers across."
+    },
+    {
+      "id": "14238",
+      "item": "Q4880976",
+      "title": "Behram (crater)",
+      "url": "https://en.wikipedia.org/wiki/Behram_(crater)",
+      "revision": "1263815293",
+      "extract": "Behram is an impact crater on the anti-Saturn hemisphere of Saturn's moon Enceladus. Behram was first observed in Cassini images during that mission's March 2005 flyby of Enceladus.7 kilometers across. Behram's rim overlaps that of Shakashik, suggesting that Behram formed after Shakashik."
+    },
+    {
+      "id": "14239",
+      "item": "Q7462558",
+      "title": "Shakashik (crater)",
+      "url": "https://en.wikipedia.org/wiki/Shakashik_(crater)",
+      "revision": "1328888645",
+      "extract": "Shakashik is an impact crater on the anti-Saturn hemisphere of Saturn's moon Enceladus. Shakashik was first observed in Cassini images during that mission's March 2005 flyby of Enceladus.5 kilometers across."
+    },
+    {
+      "id": "14240",
+      "item": "Q7498585",
+      "title": "Shirin (crater)",
+      "url": "https://en.wikipedia.org/wiki/Shirin_(crater)",
+      "revision": "1263831589",
+      "extract": "Shirin is an impact crater located on the anti-Saturn hemisphere of Saturn's moon Enceladus. Shirin was first observed in Cassini images during that mission's March 2005 flyby of Enceladus.7 kilometers across."
+    },
+    {
+      "id": "14241",
+      "item": "Q4702370",
+      "title": "Al-Fakik",
+      "url": "https://en.wikipedia.org/wiki/Al-Fakik",
+      "revision": "1263815972",
+      "extract": "Al-Fakik is an impact crater in the northern hemisphere of Saturn's moon Enceladus. Al-Fakik was first observed in Cassini images during that mission's February 2005 flyby of Enceladus.5 kilometers across."
+    },
+    {
+      "id": "14242",
+      "item": "Q8075264",
+      "title": "Zumurrud (crater)",
+      "url": "https://en.wikipedia.org/wiki/Zumurrud_(crater)",
+      "revision": "1350704420",
+      "extract": "Zumurrud is a large impact crater on the anti-Saturn hemisphere of Saturn's moon Enceladus. Zumurrud was first observed in Cassini images during that mission's March 2005 flyby of Enceladus. It is located at 21.9° South Latitude, 181.6° West Longitude, and is 21 kilometers across."
+    },
+    {
+      "id": "14243",
+      "item": "Q4243234",
+      "title": "Cufa Dorsa",
+      "url": "https://en.wikipedia.org/wiki/Cufa_Dorsa",
+      "revision": "1347280795",
+      "extract": "Cufa Dorsa is a dorsum or prominent tectonic ridge on Enceladus, a moon of Saturn. The crater was named after the Cufa, the eponymous city in the Tale of Kamar Al-Zaman, an Arabian fairy tale. The name \"Cufa Dorsa\" was officially approved by the International Astronomical Union (IAU) on 7 November 2006."
+    },
+    {
+      "id": "14254",
+      "item": "Q2946707",
+      "title": "Labtayt Sulci",
+      "url": "https://en.wikipedia.org/wiki/Labtayt_Sulci",
+      "revision": "1330074433",
+      "extract": "Labtayt Sulci is a system of deep fractures on Saturn's moon Enceladus. Labtayt Sulci was first seen in low-resolution Voyager 1 images, but was observed in much more detail by the Cassini spacecraft during its February 2005 flyby of Enceladus."
+    }
+  ]
+}
