@@ -161,15 +161,18 @@ bits are instrument-specific; source identity, geometry qualification and
 provenance are transferable requirements. 67P's distances, angles, sample counts,
 photometric model and gain limits are evidence for that dataset, not defaults.
 
-The Dimorphos DRACO view uses the same seam with a PDS4 product that carries the
-image and its geometry in one cube: `format: "draco-geo"` in
-`src/planets/dimorphos/source/preparation/terrestrial.json` pairs each cube with
-its PDS4 label, and `tools/objects/terrestrial-layers/draco-geo.mts` decodes
-planes, units, special constants and acquisition identity from the label and
-the FITS header together. The camera is recovered from the archived intercepts
-by the shared fit above; no pointing file or camera model is read. Frames that
-share one viewing direction use `selection: "recipe-order"`, finest footprint
-first, because lowest-emission selection cannot separate them. The
+Archives that ship an image with its geometric backplanes as one PDS4 cube use
+the same seam through `format: "pds4-geometry-cube"`: the recipe's `cube` block
+names the label planes that carry the image, the X/Y/Z intercepts and the
+angles, the collection, target, observing system and DSK to bind, and optional
+FITS header expectations. `tools/objects/terrestrial-layers/pds4-geometry-cube.mts`
+validates all of it against the label (offsets, units, special constants) and
+the header, converts units, and recovers nothing else; the camera comes from the
+shared fit above. Dimorphos's DART DRACO view
+(`src/planets/dimorphos/source/preparation/terrestrial.json`) is the first
+instance; a second archive needs a recipe, not a decoder. Frames that share one
+viewing direction use `selection: "recipe-order"`, finest footprint first,
+because lowest-emission selection cannot separate them. The
 [Dimorphos README](../../../../src/planets/dimorphos/README.md) records the
 measured residuals, transfer distances and the archive's pixel-scale unit slip.
 
