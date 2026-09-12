@@ -59,7 +59,7 @@ test("Tempel 1 publishes all five source-qualified landmarks with their captions
   for (const feature of catalog.features.slice(1)) {
     assert.equal(feature.kind, "region");
     assert.equal(feature.type, "Mapped terrain");
-    assert.equal(feature.minimumZoomShare, .45);
+    assert.ok(feature.minimumZoomShare <= .25, "broad terrain regions are discoverable while the whole nucleus fits on screen");
     assert.match(feature.note?.text ?? "", /Approximate location from the published map/u);
     assert.match(feature.note?.url ?? "", /^https:\/\/ntrs\.nasa\.gov\/api\/citations\/20140010174\/downloads\/20140010174\.pdf$/u);
   }

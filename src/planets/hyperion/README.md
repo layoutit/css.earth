@@ -22,6 +22,11 @@ Feature notes: 1 of the labelled names carry a caption note, the lead summary of
 
 Named features run of 2026-09-12 (this version): the catalogue labels 5 IAU names on the hit mesh (nothing skipped; 5 of them without a published diameter); `tests/objects/unit/surface-features.test.mts` verifies the pinned bytes, the body-frame anchors and the hit-mesh radius band, and a headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page, selected every lens and pinned Bahloo from the sidebar search with no console errors or failed requests.
 
+The label-discovery update restores the current Gazetteer ZIP and records its
+new byte pin. Its prepared names, coordinates, notes and mesh anchors match the
+previous catalogue exactly. All five names become eligible while the whole moon
+fits on screen; facing and overlap still control display.
+
 - The well-observed 2005 sector has reported relative uncertainty below 1 km; relative errors on the opposite side reach 6 km. Small craters are not reliably represented in the shape itself. Missing or unstable observation geometry remains visibly unavailable rather than filled with invented terrain.
 
 - The model uses the spin frame observed during Cassini's September 26, 2005 flyby and retains Bahloo at 196°W. Hyperion has no IAU-approved modern rotation solution. Its source record therefore requests an explicitly arbitrary display orientation with no simulated constant spin. Orbital position comes from the shared astronomy package; the surface attitude is not a prediction for that epoch.
