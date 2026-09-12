@@ -8,6 +8,12 @@
 
 - The [PDS Tempel 1 shape-model release, version 2.0](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=DIF-C-HRIV%2FITS%2FMRI-5-TEMPEL1-SHAPE-V2.0) records the Deep Impact site at about 16° east, 28° south in its `TEMPEL1_2012_PLAN` frame.
 
+## Surface places
+
+The Deep Impact site and four smooth regions, S1–S4, are searchable places. S1–S4 are representative interiors read from the simple-cylindrical, east-longitude/latitude map in [Thomas et al. (2013), Fig. 2b](https://ntrs.nasa.gov/api/citations/20140010174/downloads/20140010174.pdf). The retained PDF hash is `33cc898a17b33c68a83bd451f901d11220ec3bb1fae4d17690787e8717849429`.
+
+The paper is the cited source of the PDS V2 shape model and uses its pole and reference-crater prime meridian, so these coordinates are in the displayed `TEMPEL1_2012_PLAN` frame. They are manually selected map interiors, not named centres or boundaries. Fig. 2b samples about 0.42° per pixel. S1 and S2 fall on locally weak PDS shape cells (100–300 m radial uncertainty); S3 and S4 fall on stereo-controlled cells (under 60 m). Those shape bounds do not make the broad terrain-map placements precise surveys.
+
 ## Photographic views
 
 **Deep Impact** combines eight archived ITS photographs from the 2005 approach. Three cropped close-ups add finer ridges and depressions within the existing view; source sampling reaches 3.1 m/pixel in a small patch. They improve detail over about 6.6 km² of the displayed surface. Total photographic coverage remains around 31%.
@@ -30,11 +36,22 @@ Both use the original [NASA PDS imagery](https://pdssbn.astro.umd.edu/holdings/d
   its qualified caption. [Browser capture](evidence/surface-places.png).
   The published catalog passed a fresh byte-count and SHA-256 check.
 
+- **S1–S4 terrain places, 2026-09-12:** three focused checks reproduce the map
+  coordinates and validate all five catalog entries against the retained mesh.
+  Browser searches selected all four new places; S1 was inspected with the
+  constraint grid, and S2–S4 with the 2011 photographs. This uses base
+  `ca704866` plus the terrain additions. Photographic and mesh asset pins are
+  unchanged; their previous preparation is reused. A full source verification
+  could not run because the original PDS shape table is unavailable locally
+  and its archive is unreachable over HTTPS.
+
 ## Known problems
 
 - Close-up registration measures alignment with an earlier photograph. Absolute placement still inherits the limb anchor and coarse shape model’s uncertainty; this is not a precise survey of the impact site.
 
 - The Deep Impact label is one approximate point, not a surveyed crater centre or boundary. Its 16° east, 28° south position follows the PDS 2012 shape model's east-positive, planetocentric frame; it is not transferred between the photographic views.
+
+- S1–S4 are broad interpreted units. Their captions preserve the authors' qualified flow interpretation; no separate scarp point is claimed because the paper does not publish one in this frame.
 
 - The default Source constraints lens uses solid gray for stereo control, blue for limb silhouettes, and the shared gray grid for poorly constrained regions. The grid means poorly constrained by those methods, not necessarily wholly unobserved. Neither view claims observed albedo.
 
