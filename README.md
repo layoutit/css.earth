@@ -56,7 +56,10 @@ body preparation tests too and needs the restored sources.
 `pnpm test:browser:all` starts a dev server and runs every browser suite under
 `site/test/` against it in sequence, reporting pass, fail or skip per suite
 (`--origin=<url>` reuses a running server, `--only=<name>` selects suites,
-`--list` shows them). It needs Chromium through Playwright.
+`--list` shows them). Suites that walk objects use a representative sample:
+the Sun, every planet, the Moon and one member of each other classification;
+`--objects=all` (or `CSSEARTH_TEST_OBJECTS=all`) walks the whole registry and
+`--objects=earth,titan` selects objects. It needs Chromium through Playwright.
 
 `pnpm test:browser` uses the existing server on **4210** for the shared body
 and navigation checks at DPR 1 and DPR 2. It never starts a server or saves a

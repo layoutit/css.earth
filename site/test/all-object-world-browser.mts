@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { OBJECTS } from '../objects.mts';
+import { browserObjects } from './browser-objects.mts';
 import { wheelWithReceipt } from './wheel-zoom-distance.mts';
 
 import { parsePreparedWorldContext } from '../../src/renderers/css/dist/index.js';
@@ -73,8 +74,10 @@ const expected: Record<string, ExpectedObject> = Object.fromEntries(OBJECTS.map(
   frame: worldFrame, ...presentations[id], point,
   lenses: controls[id].lenses?.controls.map(lens => lens.id) ?? [], defaultLens: controls[id].lenses?.defaultLens ?? null,
 } ] as const; }));
+// The flight walk covers the representative sample; CSSEARTH_TEST_OBJECTS=all flies every object.
+const walk = browserObjects();
 const report: WorldReport = { schema: 'cssearth-all-object-world-browser@1', startedAt: new Date().toISOString(),
-  objects: OBJECTS.map(object => object.id), preflightMissingFrameMutation: true,
+  objects: walk.map(object => object.id), preflightMissingFrameMutation: true,
   arrivals: [], flights: [], refocuses: [], zooms: [], errors: [], documentRequests: [] };
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: process.env.PLAYWRIGHT_CHANNEL ?? 'chrome', headless: true });
@@ -83,7 +86,7 @@ try {
   await page.addInitScript(() => performance.setResourceTimingBufferSize(10000));
   page.on('pageerror', error => report.errors.push(error.message));
   page.on('request', request => { if (request.isNavigationRequest() && request.frame() === page.mainFrame()) report.documentRequests.push(request.url()); });
-  const initial = OBJECTS[0];
+  const initial = walk[0];
   const response = await page.goto(new URL(initial.route, origin).href, { waitUntil: 'domcontentloaded' });
   assert.ok(response?.ok(), 'Initial object document loads successfully.');
   await ready(page, initial.id);
@@ -137,13 +140,13 @@ try {
   report.arrivals.push(await proveArrival(initial.id));
   // Start at the first route, then visit every other route and return through
   // the first native navbar entry: every current object is a flight destination.
-  for (const object of [...OBJECTS.slice(1), initial]) {
+  for (const object of [...walk.slice(1), initial]) {
     const sampledWorlds = await flight(object.id);
     if (object.id === 'earth') await savedWorldRoundTrip(object.id, sampledWorlds);
     if (['earth', 'jupiter'].includes(object.id)) await refocus(object.id);
     if (['earth', 'saturn'].includes(object.id)) await galaxyRoundTrip(object.id, initialBackground);
   }
-  assert.deepEqual(new Set(report.flights.map(flight => flight.to)), new Set(OBJECTS.map(object => object.id)));
+  assert.deepEqual(new Set(report.flights.map(flight => flight.to)), new Set(walk.map(object => object.id)));
   assert.ok(report.flights.some(flight => (flight.orbitProjection?.pieces ?? 0) > 0), 'Actual midflight orbit segments were measured.');
   assert.equal(report.documentRequests.length, 1, 'Every navbar flight and same-route focus retains one document.');
   assert.deepEqual(report.errors, [], 'No browser exceptions across all current objects.');
