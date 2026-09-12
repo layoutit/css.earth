@@ -14,6 +14,14 @@ Charon combines New Horizons monochrome and enhanced-color mosaics, a terrain mo
 
 ## Evidence
 
+Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite remains 512 × 256 pixels at density 1 and 1024 × 512 at density 2; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
+
+| View | Both prepared levels, before → current |
+| --- | --- |
+| normal | 145.6 → 159.1 kB |
+
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/charon/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+
 Lane change (this PR): the terrestrial solid-observation lane was retired for Charon; the same pinned inputs and the same decoders (`terrestrial-observation`, `terrestrial-scientific` through the raster lane's `science` adapter) now feed the shared raster lane used by Mercury, Venus, Mars, the Moon and Pluto. The sphere is the shared 16 × 32 mesh (450 leaves, 230 units, 50-pixel tile, 0.005 overlap) with the 256-frame Lambert lighting bank and no atmosphere. Surfaces are painted at 6400 × 3200 (DPR 1) and 12800 × 6400 (DPR 2) — retired 12800 × 6400 atlas; native 300 m mosaic 12,693 px wide. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the nomenclature recipe and map edge are unchanged and the labels were re-drawn against the new atlas. No new science review is claimed.
 
 Run of 2026-09-12 (this version): `node tools/objects/dist/prepare-authored.js charon --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/charon/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
@@ -74,9 +82,11 @@ height gradients, spherical pixel spacing and unit vertical scale; ambient is
 mapping artifacts; 300 m post spacing is not a claim of 300 m terrain accuracy.
 Gaps remain the shared neutral grid, with no invented neighboring heights.
 
-The shared solid-body recipe prepares a 12,800 × 6,400 map and 1,024 px polar
-tiles. Terminal WebP encoding is q90; lossless intermediate maps are preparation
-inputs, not globe downloads. One generic object adapter owns runtime behavior.
+The shared solid-body recipe retains its 12,800 × 6,400 latitude-band layout and
+1,024 px polar tiles. The normal photographic polar sprites sample the pinned
+source grid directly at their final coordinates with a 2 × 2 footprint and lossless WebP
+encoding; the latitude bands retain their existing preparation. Lossless maps
+are preparation inputs, not globe downloads. One generic object adapter owns runtime behavior.
 The resolved context billboard has a dedicated 512 px image from the same
 observed navigation crop, rather than enlarging the 32 px UI icon. Prepared
 35% ambient / 65% diffuse full-phase shading rounds its circular silhouette;

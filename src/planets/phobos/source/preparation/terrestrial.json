@@ -31,6 +31,10 @@
           ],
           "wrapLongitude": true,
           "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       }
     ],
@@ -63,7 +67,7 @@
           "#f8eee1"
         ],
         "relief": {
-          "referenceRadiusMeters": 11080.0,
+          "referenceRadiusMeters": 11080,
           "heightToMeters": 1000,
           "lightDirection": [
             -0.5,

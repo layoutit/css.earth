@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cce45d430369f068016c3ec93f384d75e26d169bf82a63e3f9e29ffb7857e066"
+    "sha256": "a18c6ba6642fa756b69a5dde387ce346e323220b0964c25357727c222eadf7a5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "adc92d1680c0b857589f58eed3f53427735baf55d1e0d3c34c06d17485af20f2",
+      "sha256": "80d4ea346ca435f14e7d6c1b07887649d5813884f8b8caf8cc35e8ce02c0e865",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -41,6 +41,10 @@
                 "noData": 0,
                 "centerLongitude": 0,
                 "resolutionMeters": 153.53443263638
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             {
@@ -49,6 +53,10 @@
                 "kind": "image-rgb-no-data",
                 "noData": null,
                 "centerLongitude": 180
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             {
@@ -851,7 +859,7 @@
           "refresh"
         ],
         "path": "observations/Dione_Cassini_Voyager_mosaic_global_154m.tif",
-        "url": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif"
+        "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif"
       },
       "verificationOperations": []
     },
@@ -1548,7 +1556,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "USGS Cassini/Voyager mosaic, about 154 m per source pixel, downsampled to the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
       ],
@@ -1566,6 +1574,10 @@
           "noData": 0,
           "centerLongitude": 0,
           "resolutionMeters": 153.53443263638
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -1581,8 +1593,8 @@
         },
         {
           "url": "/scenes/dione/dione-normal-surface@2x.webp",
-          "bytes": 9528006,
-          "sha256": "538bef027dea266add82922a0d4ed720b71cc65da443c51eab5cccdbaa995f87",
+          "bytes": 12038078,
+          "sha256": "f6729f8681603d812304e23cf1ee63c072e9dc4eb243824da18b4a7da48f3f76",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -1594,7 +1606,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/1",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "Published 2014 enhanced-color composite, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Source resolution varies; seams and residual photographed shading remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
       ],
@@ -1609,6 +1621,10 @@
           "kind": "image-rgb-no-data",
           "noData": null,
           "centerLongitude": 180
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -1624,8 +1640,8 @@
         },
         {
           "url": "/scenes/dione/dione-enhanced-surface@2x.webp",
-          "bytes": 7963588,
-          "sha256": "307caf835d40f77d20bd3df9d036bd4f21cf23892ec00ea5e27af49bf157255b",
+          "bytes": 11353038,
+          "sha256": "8ef948d87ecbbb2a1008336fe0fef175cca4bf72f2c7f53b8d293db51283a4db",
           "verification": "asset-manifest-pin"
         }
       ],

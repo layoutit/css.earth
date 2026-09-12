@@ -1,11 +1,13 @@
 import {requireRecord} from '../../source-values.mts';
 import {shape,number,text,optional,boolean,array,dictionary,parseSciencePalette} from './source-records.mts';
+import {parseNativePhotographicSampling} from './native-photograph.mts';
 
 const texture = {textureScale:optional(number),monochromeBase:optional(text),
   previewGrid:optional(shape({width:number,height:number})),displaySampling:optional(text)};
 const identity = {id:text,consumer:text,metadata:optional(requireRecord)};
 const sourcePath = shape({path:text});
 export const parseSolidObservation = shape({id:text,...texture,validity:shape({kind:text,labelPath:optional(text),resampling:optional(text)}),
+  nativePhotographicSampling:optional(parseNativePhotographicSampling),
   projection:optional(requireRecord),metadata:optional(requireRecord),reportComposition:optional(boolean)});
 export function parseSolidScience(value: unknown) {
   return Object.assign({}, requireRecord(value), parseSciencePalette(value), shape({...identity,...texture,path:text,format:text,label:text,

@@ -37,6 +37,10 @@
           "kind": "image-monochrome-no-data",
           "noData": 0,
           "centerLongitude": 180
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       }
     },

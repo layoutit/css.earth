@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e9f98d88d6655ce027eb4e4276bc6f4c54a0d2e1ad574f1b9802af8d73e10ec4"
+    "sha256": "f3c4dfd8a269e32f20d6d1afaf63ebe2b468a0aeaf4ea2a7619719d560cc5c3d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "eb11bca8bd5eca99bd8df57aef4d7c0e19582bfeeb6bb5545f15a1347c32cccb",
+      "sha256": "be586369fca14d6a6ed74d3c15218f673842c58f40a3117c4b976c51b9159079",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/europa/",
@@ -56,6 +56,10 @@
                 "noData": 0,
                 "centerLongitude": 180,
                 "resampling": "source-georeferenced-bilinear"
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             "resolutionScale": 2
@@ -1286,7 +1290,7 @@
       "recipe": "raster",
       "selector": "/surfaces/0",
       "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
         "USGS Voyager/Galileo mosaic. Source resolution varies from about 200 m to 20 km per pixel. Gray grid marks documented no-data and its resampled boundary. Original image shading remains; globe lighting is approximate."
       ],
@@ -1297,7 +1301,8 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false
+        "falseColor": false,
+        "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
         "usgs-voyager-galileo-global-500m"
@@ -1323,14 +1328,14 @@
         },
         {
           "url": "/scenes/europa/europa-poles-normal.webp",
-          "bytes": 43912,
-          "sha256": "d65a0dfbaee75fef3ffe24e6f6a6ec049e7cf63d766d806b993055fa08390b37",
+          "bytes": 45126,
+          "sha256": "ea90a7fe35170100a478351bc5e434bd55c941ae193808fb2dcc42948c06001e",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/europa/europa-poles-normal@2x.webp",
-          "bytes": 131284,
-          "sha256": "ac1f6fcc6023daabb208d8f491b2cb8c56a8d156707debdaeffac329e8a5520a",
+          "bytes": 132918,
+          "sha256": "7e22840665ef366b82653d4455c55e113a84a963f4d36041969e4604d8a973a8",
           "verification": "asset-manifest-pin"
         }
       ],

@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "55096c24b9fd78b83323e4f71e7142eabae2b94a3335ecaeec39d2b9982402f2"
+    "sha256": "b95731a08754730eccbc158b1b7f88bcd191fd3c1c3ae952a0f18b9ca0ffec17"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "88b98d77c72aeca435ff56ad1922ef1bca54f7aa727024fb3a87d2da80dd7eca",
+      "sha256": "2f83ffda8775a8ad59e8a506e179f4b2ef96ed6f337ef567dc7b54b6aac74562",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/charon/",
@@ -66,6 +66,10 @@
                   255
                 ],
                 "specialValueMagnitude": 256
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           },
@@ -1012,7 +1016,7 @@
       "recipe": "raster",
       "selector": "/surfaces/0",
       "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
         "New Horizons observed terrain; southern darkness remains unavailable. Native detail varies across the map. The source already applies Lunar-Lambert photometric correction; local photographed terrain shadows remain."
       ],
@@ -1023,7 +1027,8 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false
+        "falseColor": false,
+        "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
         "new-horizons-charon-monochrome"
@@ -1049,14 +1054,14 @@
         },
         {
           "url": "/scenes/charon/charon-poles-normal.webp",
-          "bytes": 37982,
-          "sha256": "1519f59e6cf25afedb41e1d81a00f063c901c3ab0896b35780d70cd92ff029af",
+          "bytes": 41860,
+          "sha256": "6c0ba923b5d663449f172249df04d7e9a50b0842c956ff8624b8712e713d88a7",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-poles-normal@2x.webp",
-          "bytes": 107570,
-          "sha256": "8cb04930f365b547351992ff89f78377a6d41030c87a0d775e16566236b3a040",
+          "bytes": 117244,
+          "sha256": "92933b9ff45c544a8242faa4a984cfb7fa9549a88a278ec041d6a29f7a59c810",
           "verification": "asset-manifest-pin"
         }
       ],

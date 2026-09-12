@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "746229dc243d108c8ee00fa8898b7a5a9de5170c3ca1ee03a5796743e4eabf87"
+    "sha256": "ff030f44d50bc0028b5a50f839a65e36b2c75cbff8d70c1d96756e62b731a530"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "03556b50a85d653a36a4921eaad797d91c266243956be4a4d3fd8b178135e02e",
+      "sha256": "13ff29595f573384132dfc5b75978de019f15085d501aac457c3df1df3794744",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/ceres/",
@@ -53,6 +53,10 @@
               "id": "normal",
               "validity": {
                 "kind": "south-connected-black"
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           },
@@ -68,6 +72,10 @@
               "id": "enhanced",
               "validity": {
                 "kind": "south-connected-black"
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           },
@@ -790,7 +798,7 @@
       "recipe": "raster",
       "selector": "/surfaces/0",
       "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
         "Dawn visible-light mosaic. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved."
       ],
@@ -801,7 +809,8 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false
+        "falseColor": false,
+        "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
         "usgs-dawn-fc-global-140m"
@@ -827,14 +836,14 @@
         },
         {
           "url": "/scenes/ceres/ceres-poles-normal.webp",
-          "bytes": 80074,
-          "sha256": "6e0b9ff5c9408bff90c7e6bd233c1ac595373609fffd8ae421e692adb24e9db5",
+          "bytes": 81982,
+          "sha256": "395f7d174468b6097607a4a5decd0a81ad016078d6acf12e1415ea7918e6a098",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ceres/ceres-poles-normal@2x.webp",
-          "bytes": 285164,
-          "sha256": "6e709df29ff25a6d77505478a4fc2ab6f7cc7f5ba9e681276474b17613e8dc2c",
+          "bytes": 275922,
+          "sha256": "0cef3bc6a828145f6da8c873de894d9a1134b1f7f907d591ca03e1366ce8698d",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -846,7 +855,7 @@
       "recipe": "raster",
       "selector": "/surfaces/1",
       "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
         "Dawn PIA19977, 920 / 750 / 440 nm false color. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved."
       ],
@@ -857,7 +866,8 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false
+        "falseColor": false,
+        "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
         "nasa-dawn-fc-pia19977"
@@ -883,14 +893,14 @@
         },
         {
           "url": "/scenes/ceres/ceres-poles-enhanced.webp",
-          "bytes": 172672,
-          "sha256": "53153c214932d4e3131bfdd64876e419f4fa78694ced6cecb3026fd65938628b",
+          "bytes": 170872,
+          "sha256": "37cf743993e1c1403ef926b06c5f90f6bd46443872827053c4ee5b60eb91730a",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ceres/ceres-poles-enhanced@2x.webp",
-          "bytes": 512080,
-          "sha256": "e4d7cddcbeec30391b252ebdf2ec8f796113292ce9e98b8be9250bad406a2708",
+          "bytes": 500466,
+          "sha256": "7ff53068d31fdcef38ed724ca545cbfa03dc166fd6bd6784bbb054926270ff40",
           "verification": "asset-manifest-pin"
         }
       ],

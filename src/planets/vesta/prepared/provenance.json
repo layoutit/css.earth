@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e32140031552650bd7b0ab4f481d26d6fdd5de81405bd5b11a601db77d5e63f7"
+    "sha256": "bc5f4f8f890d493473d2de17f422976cefef064dba76cef6e192f6706cd98ddb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "64d768d3e600631fe01c6b32e517ce1efc719fad24c9b283cbc582f70339dca9",
+      "sha256": "37a62563a7c3c2401a93341dbb63a33e8aad0e17153281ebbb8443498089fe91",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -42,6 +42,10 @@
                   "sampleOffset": 13351,
                   "lineOffset": 6675
                 }
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             {
@@ -728,7 +732,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "DLR natural-color composite from Dawn’s 650, 550, and 430 nm filters, calibrated and photometrically corrected. Very bright terrain is clipped to white in the published image. Gray grid marks identified missing coverage; local shadows and channel-registration artifacts may remain."
       ],
@@ -748,6 +752,10 @@
             "sampleOffset": 13351,
             "lineOffset": 6675
           }
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -763,8 +771,8 @@
         },
         {
           "url": "/scenes/vesta/vesta-normal-surface@2x.webp",
-          "bytes": 2401754,
-          "sha256": "0ed66aec44e88697a15410b37affcbae9a7fb7641cb2d528d82b09f6e9a7d5a6",
+          "bytes": 4293850,
+          "sha256": "88e8e4861d21c6efbc87bd9fde61bf9d8a1f2e1fb4764286bcb13fb6712eacc5",
           "verification": "asset-manifest-pin"
         }
       ],

@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dd7ba5d47e17d138b856acdac40a7edc3539bb914be99165e7096efc600b9bd1"
+    "sha256": "2190633ba87092f602891554e60996e32732807ed23a2bea044f83c6f5c1c87b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fa644763a02ddd161801ac5ec17d89494220d2f437e0860de78cca6c54459f9c",
+      "sha256": "474742a81253cf44def05af1f313f657374b1ed758556fa76c29df4f883694af",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -47,6 +47,10 @@
                   255
                 ],
                 "specialValueMagnitude": 1e+30
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             {
@@ -65,6 +69,10 @@
                   255
                 ],
                 "specialValueMagnitude": 1e+30
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             {
@@ -856,7 +864,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "The low-phase PolyCam mosaic is normalized with the ROLO phase function and Lommel–Seeliger disk function. Its 6.25 cm source sampling covers approximately ±55° latitude. The publisher’s 8-bit stretch maps 0.002–0.007 to 1–254. Gray grid marks source NoData, including the polar gaps."
       ],
@@ -881,6 +889,10 @@
             255
           ],
           "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -896,8 +908,8 @@
         },
         {
           "url": "/scenes/bennu/bennu-normal-surface@2x.webp",
-          "bytes": 4836700,
-          "sha256": "f48e56950870b2f67ea5a0f21fefbf9e28a9f3529e1c5536a7d60518ee1e8e1c",
+          "bytes": 5785660,
+          "sha256": "120b3a40a9df725de19c6e1dbe4affc337fa08f3ce8cf15d80a5fdea1231e26a",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -909,7 +921,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/1",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "The 5 cm global image basemap retains surface texture and photographed shading. It was normalized to 30° phase and registered to the SPC v28 control shape; small differences from the OLA v20 display mesh remain. This is a separate observed image view; it does not silently fill the albedo view’s missing poles."
       ],
@@ -934,6 +946,10 @@
             255
           ],
           "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -949,8 +965,8 @@
         },
         {
           "url": "/scenes/bennu/bennu-surface-surface@2x.webp",
-          "bytes": 7419092,
-          "sha256": "e22c354a68e7e15677967a7c1fbd1287b66d503e12e2180f45a251dbf88f71f8",
+          "bytes": 8305220,
+          "sha256": "4eb704e0b0b1851da98769de1ab7a5f9c4a53f521d8bbf47181a41e733470e26",
           "verification": "asset-manifest-pin"
         }
       ],

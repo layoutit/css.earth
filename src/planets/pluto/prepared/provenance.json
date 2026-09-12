@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b27f12ca3527ba4dad6a4661c184e896301cdbded751f0903bb234e48314720e"
+    "sha256": "ef907b9920defd1a538f6ea0ca9049dedfe8c2bd46d35529d345d0313b6c1a6c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "181b7135d2c028eeda0c57a6970798f1dc5f3244241e8f226ef7339e40af96ac",
+      "sha256": "7521e019234efcf9286f841c3dbe382389efe580b2a00d1ab8d882a9185ab776",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/pluto/",
@@ -52,7 +52,8 @@
                 "kind": "black-fill",
                 "southConnected": true
               }
-            }
+            },
+            "nativeSourcePoles": true
           },
           {
             "id": "topography",
@@ -104,7 +105,8 @@
                 "kind": "black-fill",
                 "southConnected": false
               }
-            }
+            },
+            "nativeSourcePoles": true
           }
         ],
         "lighting": {
@@ -788,7 +790,7 @@
       "recipe": "raster",
       "selector": "/surfaces/0",
       "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
         "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
         "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset"
@@ -800,7 +802,8 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false
+        "falseColor": false,
+        "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
         "surface-pluto-color-mosaic-jpg"
@@ -826,14 +829,14 @@
         },
         {
           "url": "/scenes/pluto/pluto-poles-surface.webp",
-          "bytes": 55514,
-          "sha256": "9c42511cfdb5f981dae02140ff3d4a70a4b94b4773087f70f199da1570ec041b",
+          "bytes": 58470,
+          "sha256": "701247cd4934354ee4bb623df9bf63138e994797fd36eb9fb1f1bca7e1fa0a17",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pluto/pluto-poles-surface@2x.webp",
-          "bytes": 151696,
-          "sha256": "28e59ceb02811aa299364df9933819faceeeafc9f92130e71d94498d7bb11230",
+          "bytes": 151138,
+          "sha256": "e32b634381aca26977e5d7d89efca35201d4d7c54deb0de107ba17b330e83a6d",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -902,7 +905,7 @@
       "recipe": "raster",
       "selector": "/surfaces/2",
       "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
         "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
         "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset"
@@ -914,7 +917,8 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false
+        "falseColor": false,
+        "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
         "lenses-pluto-monochrome-tif"
@@ -940,14 +944,14 @@
         },
         {
           "url": "/scenes/pluto/pluto-poles-monochrome.webp",
-          "bytes": 37098,
-          "sha256": "4153802fe8b9d80980668b602aef1c6e1430657a018d270714655255d157d4f6",
+          "bytes": 44610,
+          "sha256": "7a1aced5c8fb670c4b1bf9694039a24318ac518c19f9d0c40059a793ca9eae7a",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pluto/pluto-poles-monochrome@2x.webp",
-          "bytes": 110260,
-          "sha256": "eb142df5c2aea4f05bb704a2da6fcb5aa94c0b8a80e36e3a3cf78a9858a5fe65",
+          "bytes": 128206,
+          "sha256": "6b58d987a1553a0ec8c172f281a9e4f52984b724119e76595764a0153bda5be4",
           "verification": "asset-manifest-pin"
         }
       ],

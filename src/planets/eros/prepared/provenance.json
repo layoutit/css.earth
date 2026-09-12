@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "be422b0fdefe1456e3403b723f8513f41db9e8c297c99bff2a3e6f5de3fe61a7"
+    "sha256": "28c973d5742ae6b45370fa196288d30b7798e55e05e4800b6c2fca768c2b9847"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "cb49e648ed0f8dd7258e22991e522cdc61b8d953a07048e27cae875c8ad21bdc",
+      "sha256": "0632d7d5fc200365ac4b1e683410d466b9c254b5e7173f521dccf3c64c1cf1fc",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -47,6 +47,10 @@
                   0.4
                 ],
                 "specialValueMagnitude": 1e+30
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             {
@@ -65,6 +69,10 @@
                   0.4
                 ],
                 "specialValueMagnitude": 1e+30
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           ],
@@ -753,7 +761,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "Photometrically normalized 550 nm albedo from the 2023 deblurred NEAR MSI release. Display brightness is stretched from 0.05–0.40; this is a monochrome observation, not natural color. The source is registered to the Gaskell shape. Local residual shading may remain."
       ],
@@ -778,6 +786,10 @@
             0.4
           ],
           "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -793,8 +805,8 @@
         },
         {
           "url": "/scenes/eros/eros-normal-surface@2x.webp",
-          "bytes": 2693140,
-          "sha256": "62a13d42ba65f6d9058d3b907c62a2aaade7fcb202963c6789412448c1bc25f1",
+          "bytes": 3749508,
+          "sha256": "89bf8f7305a3a51835dcc1d312dd4d24804bf9d04d838896fbfe9f676e4285b1",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -806,7 +818,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/1",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05–0.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid."
       ],
@@ -831,6 +843,10 @@
             0.4
           ],
           "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -846,8 +862,8 @@
         },
         {
           "url": "/scenes/eros/eros-infrared-surface@2x.webp",
-          "bytes": 4196638,
-          "sha256": "81a72e39736dd03315608e461010a856e9e69d1fcc684fa22bb0efe6a523be0a",
+          "bytes": 5190968,
+          "sha256": "90da7b2f956bd6fbf590487389080b93269dabf526feb5a797e6f7fdf1b0e859",
           "verification": "asset-manifest-pin"
         }
       ],

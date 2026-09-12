@@ -41,7 +41,11 @@
           "zeroValidity": "any-channel",
           "resampling": "source-georeferenced-bilinear"
         },
-        "reportComposition": true
+        "reportComposition": true,
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
+        }
       }
     },
     {
@@ -67,7 +71,11 @@
           "resampling": "source-georeferenced-bilinear"
         },
         "monochromeBase": "normal",
-        "reportComposition": true
+        "reportComposition": true,
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
+        }
       }
     },
     {

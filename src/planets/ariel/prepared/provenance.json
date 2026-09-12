@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9bab92481d1850f25becad283ed59241399ce7f15d24548d3bf4dfe1001a488e"
+    "sha256": "cd34088a1d36cf6699dcb7e6f5305838fe9a0996b3f9126bf356fdef0ea0e362"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "5a2657a3271c4c6e082cae9fda2b3ba3802eb263b3488ab3912c8a2af7fb72cd",
+      "sha256": "7a953c407170a5deb2652171dee904c25bec3ed01f9d2c605124a876d239c950",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/ariel/",
@@ -75,6 +75,10 @@
                   0,
                   3000
                 ]
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           },
@@ -734,7 +738,7 @@
       "recipe": "raster",
       "selector": "/surfaces/0",
       "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
         "Voyager 2 mosaic with source photometric correction. Detail varies and local shadows, seams, and processing marks remain. Gray grid marks missing observations; this is not a true albedo map."
       ],
@@ -745,7 +749,8 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false
+        "falseColor": false,
+        "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
         "schenk-2020-ariel-normal"
@@ -771,14 +776,14 @@
         },
         {
           "url": "/scenes/ariel/ariel-poles-normal.webp",
-          "bytes": 34014,
-          "sha256": "7f212c601f43010cb47b0ee51340f0af77484deefc5df4a74601285fb8dd4142",
+          "bytes": 38500,
+          "sha256": "66ac5dcf2496c25749f46bb590df22906d2771e8da47406d146084eea6b0f41f",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ariel/ariel-poles-normal@2x.webp",
-          "bytes": 85842,
-          "sha256": "4fbf8b348f7ea196137aed6a9bc6414ea3bf5adb6861c23e34e6f056461dd1f0",
+          "bytes": 94324,
+          "sha256": "54cbb006902df678ed61da7ef82bdfde6b43565d4d7dd68be750981e9811cd09",
           "verification": "asset-manifest-pin"
         }
       ],

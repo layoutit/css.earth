@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a244286079ad59143a7a4ce7ea1ce1352e010a1f26c10861f029113103b84b7a"
+    "sha256": "dcbe81bd9892a4bafeef087cbd9757079f3a2fa448dc105ba4d785e575552411"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "56670beb6685f74c48a6baa1e24ad1af3dc138c1663ba4164e62062c57a5a21b",
+      "sha256": "78ad29379b71276396f26f6b1acbebb77db0ceda04005140c8c790c7e0db9163",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/callisto/",
@@ -55,6 +55,10 @@
                 "kind": "geotiff-monochrome-alpha",
                 "noData": 0,
                 "centerLongitude": 180
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           },
@@ -75,6 +79,10 @@
                 "channels": "rgb",
                 "zeroValidity": "all-channels",
                 "resampling": "source-georeferenced-bilinear"
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           },
@@ -778,7 +786,7 @@
       "recipe": "raster",
       "selector": "/surfaces/0",
       "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
         "USGS mosaic on a 1 km grid; original image resolution varies from 400 m to 60 km per pixel. USGS normalized broad illumination and matched overlapping images. Photographed relief, coarse patches and some seams remain. Gray grid marks documented no-data and its resampled boundary. Added globe lighting is approximate."
       ],
@@ -789,7 +797,8 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false
+        "falseColor": false,
+        "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
         "usgs-voyager-galileo-global-1km"
@@ -815,14 +824,14 @@
         },
         {
           "url": "/scenes/callisto/callisto-poles-normal.webp",
-          "bytes": 50694,
-          "sha256": "d3013ac828f26be38d5b48f00cbab12bd615fba4c7d8ca3d542bf3ad261e9373",
+          "bytes": 53652,
+          "sha256": "f773d7cdbadeb6dc54ef7118a251aac4425459cf030a68b6cc25534b77e5f67b",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/callisto/callisto-poles-normal@2x.webp",
-          "bytes": 166236,
-          "sha256": "826ce7a4a948f2a2c2aad78aaae1b4ad99a6ca8b31efd98315c5e113b1b2737e",
+          "bytes": 173746,
+          "sha256": "0dafa105f028c8892e6bc511122150407eeb1fd614b1597b22eff97cbb88de11",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -834,7 +843,7 @@
       "recipe": "raster",
       "selector": "/surfaces/1",
       "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
         "Published NASA/JPL/DLR processed color from Galileo in May 2001, registered to the controlled USGS map. About 8 km per source pixel near the disk center; detail becomes coarser toward the edge. This is display color, not calibrated I/F or albedo. Only views within 65° of the surface normal are retained; gray grid marks the rest of the globe. Photographed shading and color fringes remain; added globe lighting is approximate."
       ],
@@ -845,7 +854,8 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": true
+        "falseColor": true,
+        "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
         "galileo-pia03456-registered-color"
@@ -871,14 +881,14 @@
         },
         {
           "url": "/scenes/callisto/callisto-poles-enhanced.webp",
-          "bytes": 5634,
-          "sha256": "9161ff961e6c9ba8dfba055598c824148e60528228f1dff5e927ef986c7f3678",
+          "bytes": 7144,
+          "sha256": "9466e742acb8ae1ca53c934b3f689686c21238f61a19359f6bc6de92b221d53a",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/callisto/callisto-poles-enhanced@2x.webp",
-          "bytes": 12102,
-          "sha256": "ce3aaf8e507130b2f9d2c9a603d10a4eb16e2fa2014476c37c5181e21d50bcd6",
+          "bytes": 16758,
+          "sha256": "7a1fc2bf2c067a42f9edf2a3c92b36ac2fd370d3412c31ca56aea86ce3bc1add",
           "verification": "asset-manifest-pin"
         }
       ],

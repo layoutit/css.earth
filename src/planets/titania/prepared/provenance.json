@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "16ec4f9eca1af5839a6e0f86feb1b964dcdf14cbbef98cd7c152df576151fe5e"
+    "sha256": "c129db950c943408cfe872ec1043be15c3cc3a7cec477c2644afca69b9fc742e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "484762bee69d0195d3e7dadc828f707a852fd961b00feba1a0520ff2c4f393fd",
+      "sha256": "c74f37a13717642ff1d2d66464ddc5e904776c5822053dc0e0201baf993c5a30",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/titania/",
@@ -75,6 +75,10 @@
                   0,
                   3000
                 ]
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           },
@@ -955,7 +959,7 @@
       "recipe": "raster",
       "selector": "/surfaces/0",
       "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
         "Voyager 2 monochrome mosaic with source photometric correction. Native detail is about 2.9 km per pixel at best; photographed shadows and image seams remain. Gray grid marks missing observations."
       ],
@@ -966,7 +970,8 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false
+        "falseColor": false,
+        "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
         "schenk-2020-titania-normal"
@@ -992,14 +997,14 @@
         },
         {
           "url": "/scenes/titania/titania-poles-normal.webp",
-          "bytes": 27286,
-          "sha256": "9607beda591becf92761eb50b22b0dcaad455a7b211d08d913cfeabaf34fe677",
+          "bytes": 30182,
+          "sha256": "96d53fb902d2597a1c3b600895d7645926b408b186be4e41ea9e650caeb3468e",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titania/titania-poles-normal@2x.webp",
-          "bytes": 70804,
-          "sha256": "0ba30037e83d0612d90989acda3fd8cd3ee31745afe35f9c5c913616e149e510",
+          "bytes": 76534,
+          "sha256": "35085d439b6c609c4f69f16252f17fad3a7667c7fb7ad599643be090ac58a289",
           "verification": "asset-manifest-pin"
         }
       ],
