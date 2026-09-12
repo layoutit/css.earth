@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b65ad5a46f3b9e5c1b2cbf9e233355adbbb994e1a6923b631b6df3c75f187246"
+    "sha256": "ed573d5b7a6e657adcae2680dfe6481f194f00a75476a6398ccc601cd400e179"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2f790316c36dbf6d0ee62a91326f6dbb68ce9817d3dd96bfc734124ef69067e1",
+      "sha256": "13729ca09fc84ceb4d7ca76c1270ae38629aba1bd7e5af106150a66de56cc9d6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -103,7 +103,7 @@
               ],
               "metadata": {
                 "label": "Stardust photographs",
-                "coverage": "Three Stardust photographs fitted to the measured part of the nucleus. Original shadows and some seams remain. The gray grid marks gaps; surface placement is approximate."
+                "coverage": "Four Stardust photographs fitted to the measured part of the nucleus. Original shadows and some seams remain. The gray grid marks gaps; surface placement is approximate."
               }
             }
           ]
@@ -341,6 +341,64 @@
             "path": "../reference/dataset.cat",
             "credit": "Farnham, Duxbury and Li (2005)"
           }
+        }
+      }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "c90e0a8305626621917a8178e5b5ed60299d827fb878716195a515d138f05228",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": null,
+        "members": null,
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "comet-81p-features.json",
+        "publicBase": "/scenes/comet-81p/",
+        "target": {
+          "className": "comet-81p-body"
+        },
+        "lensIds": [
+          "model",
+          "navcam"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "IM"
+          ],
+          "linear": [
+            "RU"
+          ],
+          "region": [
+            "RE"
+          ]
+        },
+        "excludedTypeCodes": {},
+        "labelPolicy": {
+          "minimumZoomShare": 0,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 20,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 32
+        },
+        "landmarks": {
+          "document": "landmarks.json",
+          "inputs": [
+            "features/PIA06285.jpg",
+            "features/PIA06285_fig1.jpg",
+            "photography/navcam/n2073we02_rr.fit",
+            "photography/navcam/n2073we02_rr.json",
+            "shape/wild2_cart_full.tab",
+            "features/image-registration.json",
+            "features/control-measurements.json",
+            "features/evidence/image-landmarks.json"
+          ]
         }
       }
     }
@@ -822,6 +880,198 @@
       "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-81p-features-manifest",
+      "path": "features/manifest.json",
+      "origin": "Authored surface-place records with publication references and placement limits.",
+      "credit": "cssEarth contributors; Stardust science team",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
+      "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored surface-place records with publication references and placement limits."
+      },
+      "sha256": "734010530578b2fc8f17f8097f0a25ed10c9dc7c6399c8c929b9cd2457f8aa8d",
+      "bytes": 2072,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-81p-presentation-surface-map",
+      "path": "presentation/surface-map.json",
+      "origin": "Authored surface-place records with publication references and placement limits.",
+      "credit": "cssEarth contributors; Stardust science team",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
+      "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored surface-place records with publication references and placement limits."
+      },
+      "sha256": "639417c83ce7e5633db6ad3efc825e8ebce675647b014c26a7700b3dfe9ede26",
+      "bytes": 156,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-81p-features-landmarks",
+      "path": "features/landmarks.json",
+      "origin": "Authored surface-place records with publication references and placement limits.",
+      "credit": "cssEarth contributors; Stardust science team",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
+      "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored surface-place records with publication references and placement limits."
+      },
+      "sha256": "6fbbfb50780b3a9f160ae8c6818a56302b64d8f5b173e13ae0f77a4eb54fd3eb",
+      "bytes": 2832,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-81p-features-PIA06285-jpg",
+      "path": "features/PIA06285.jpg",
+      "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia06/pia06285/PIA06285.jpg?w=1159&h=1172&fit=clip&crop=faces%2Cfocalpoint",
+      "credit": "Courtesy NASA/JPL-Caltech",
+      "license": "JPL image-use policy",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Exact NASA dynamic-image JPEG rendition, verified against a fresh pinned download; presentation imagery, not raw detector data.",
+      "redistribution": "JPL permits reuse with attribution; no endorsement implied.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-pia06285",
+            "role": "material",
+            "evidence": "NASA PIA06285 image and accompanying Figure 1 carry the Stardust-team feature names."
+          }
+        ]
+      },
+      "sha256": "af3ffcc32ea0b7aae918a7098cda99aea3157483789401b256f9551a4fd2f757",
+      "bytes": 80948,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/PIA06285.jpg",
+        "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia06/pia06285/PIA06285.jpg?w=1159&h=1172&fit=clip&crop=faces%2Cfocalpoint"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-81p-features-PIA06285_fig1-jpg",
+      "path": "features/PIA06285_fig1.jpg",
+      "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia06/pia06285/figures/PIA06285_fig1.jpg",
+      "credit": "Courtesy NASA/JPL-Caltech",
+      "license": "JPL image-use policy",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Exact NASA dynamic-image JPEG rendition, verified against a fresh pinned download; presentation imagery, not raw detector data.",
+      "redistribution": "JPL permits reuse with attribution; no endorsement implied.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-pia06285",
+            "role": "material",
+            "evidence": "NASA PIA06285 image and accompanying Figure 1 carry the Stardust-team feature names."
+          }
+        ]
+      },
+      "sha256": "334808909722bbaeb4695b274c3294859dc796eee4ed1fe5e374bcc57501efb5",
+      "bytes": 129708,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/PIA06285_fig1.jpg",
+        "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia06/pia06285/figures/PIA06285_fig1.jpg"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-81p-features-image-registration-json",
+      "path": "features/image-registration.json",
+      "origin": "Measured image correspondences and explicit source-camera projection recipe.",
+      "credit": "cssEarth contributors; Stardust science team",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
+      "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measured image correspondences and explicit source-camera projection recipe."
+      },
+      "sha256": "cd1a3ac28dc85860607a39e3382957bdcd0ee0ae0d0fa5a1021660a1d452ef21",
+      "bytes": 25845,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-81p-features-control-measurements-json",
+      "path": "features/control-measurements.json",
+      "origin": "Local image-correlation measurements, manual diagram controls and recorded selection limits.",
+      "credit": "cssEarth contributors; Stardust science team",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
+      "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Local image-correlation measurements, manual diagram controls and recorded selection limits."
+      },
+      "sha256": "903d15943d50d47e8a910b0e0081a78421d2a3ad2221924a9a90dffedb276f48",
+      "bytes": 32040,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-81p-features-evidence-image-landmarks-json",
+      "path": "features/evidence/image-landmarks.json",
+      "origin": "Generated residuals and source-mesh placement evidence.",
+      "credit": "cssEarth contributors; Stardust science team",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
+      "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated residuals and source-mesh placement evidence."
+      },
+      "sha256": "d47718db28bbc567b689b36c07e08e55fe85d18824d69dd7cb2371dc34b439c9",
+      "bytes": 39090,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -936,9 +1186,49 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3938,
-          "sha256": "bf4fcd5c9602a0ba786e69fc89330c65d09b000b717c5aedaea1a130b98a14f3",
+          "bytes": 4051,
+          "sha256": "2085178eb1d6077eacc058604f32941c6f1e1b74b39e50eb7f74183dee31e6ca",
           "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned mission geography and coordinates; select region-interior points on the unchanged display mesh using the released categorical surface, or project cited coordinates onto that mesh. Retain source frames, placement limits and mission naming credits.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {}
+      },
+      "inputs": [
+        "comet-81p-features-manifest",
+        "comet-81p-presentation-surface-map",
+        "comet-81p-features-landmarks",
+        "comet-81p-features-PIA06285-jpg",
+        "comet-81p-features-PIA06285_fig1-jpg",
+        "n2073we02-rr-path",
+        "n2073we02-rr-controlPath",
+        "pds-shape",
+        "comet-81p-features-image-registration-json",
+        "comet-81p-features-control-measurements-json",
+        "comet-81p-features-evidence-image-landmarks-json"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-81p/comet-81p-features.json",
+          "bytes": 4415,
+          "sha256": "1a953df931967f383bbeb978cf8b39fdae7c95425f109edb468c0fc55ee9b7e2",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
