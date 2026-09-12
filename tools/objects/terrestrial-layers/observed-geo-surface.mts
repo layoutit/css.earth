@@ -14,14 +14,19 @@ import { decodeAmicaGeo } from './amica-geo.mts';
 import { decodeOsirisReflectance, attachSourceGeometry } from './archived-camera.mts';
 import { decodeLlorri } from './llorri-geo.mts';
 import { decodePds4GeometryCube, PDS4_GEOMETRY_CUBE_FORMAT } from './pds4-geometry-cube.mts';
+import { decodeSpiceCameraFrame, SPICE_CAMERA_FORMAT, ABERRATIONS } from './spice-camera.mts';
+import { loadKernelSet } from '../../spice/kernel-set.mts';
 
 const safePath = (path: unknown) => typeof path === 'string' && path.length > 0 && !path.startsWith('/') && !path.split(/[\\/]/).includes('..');
 const positive = (value: number) => Number.isFinite(value) && value > 0;
 const archivedCamera = (recipe: {format:string}) => ['osiris-camera', 'llorri-camera'].includes(recipe.format);
+const kernelCamera = (recipe: {format:string}) => recipe.format === SPICE_CAMERA_FORMAT;
 const cubeDeclaration = (recipe: Pick<GeoRecipe,'cube'>) => { if (!recipe.cube) throw new TypeError('Geometry cube recipes declare their planes and identity.'); return recipe.cube; };
-const framePaths = (recipe: Pick<GeoRecipe,"format"|"path"|"labelPath"|"originalPath"|"flatPath"|"cameraPath"|"qualityPath">): string[] => ( recipe.format === 'amica-gaskell'
+const spiceDeclaration = (recipe: Pick<GeoRecipe,'spice'>) => { if (!recipe.spice) throw new TypeError('SPICE camera recipes declare their kernels, bodies, instrument and pixel axes.'); return recipe.spice; };
+const framePaths = (recipe: Pick<GeoRecipe,"format"|"path"|"labelPath"|"originalPath"|"flatPath"|"cameraPath"|"qualityPath"|"spice">): string[] => ( recipe.format === 'amica-gaskell'
   ? [recipe.path, recipe.labelPath, recipe.originalPath, recipe.flatPath]
   : recipe.format === PDS4_GEOMETRY_CUBE_FORMAT ? [recipe.path, recipe.labelPath]
+  : kernelCamera(recipe) ? [recipe.path, ...spiceDeclaration(recipe).kernels]
   : archivedCamera(recipe) ? [recipe.path, recipe.cameraPath] : [recipe.path, recipe.qualityPath]).map(path=>requireString(path,'source-bound observation path'));
 export function validateGeoSurfaceRecipe(value: unknown, sourceGeometry: unknown) {
   const format=requireRecord(value).format;
@@ -55,16 +60,24 @@ export function validateGeoSurfaceRecipe(value: unknown, sourceGeometry: unknown
       !positive(phase.minimumDegrees) || !(phase.maximumDegrees > phase.minimumDegrees) || phase.maximumDegrees >= 90 ||
       !(phase.referenceDegrees >= phase.minimumDegrees && phase.referenceDegrees <= phase.maximumDegrees) ||
       !positive(phase.maximumGain) || phase.maximumGain < 1 || phase.maximumGain > 1.5)) throw new TypeError('Invalid observation phase correction.');
-  const paths = framePaths(recipe), amica = recipe.format === 'amica-gaskell', cube = recipe.format === PDS4_GEOMETRY_CUBE_FORMAT, controlled = archivedCamera(recipe);
+  const paths = framePaths(recipe), amica = recipe.format === 'amica-gaskell', cube = recipe.format === PDS4_GEOMETRY_CUBE_FORMAT, controlled = archivedCamera(recipe), kernels = kernelCamera(recipe);
+  const spice = recipe.spice;
+  if (kernels !== (spice !== undefined)) throw new TypeError('Only SPICE camera recipes declare a spice block.');
+  if (spice && (spice.kernels.length < 2 || spice.kernels.length > 32 || !Number.isInteger(spice.observer) || !Number.isInteger(spice.target) || spice.observer === spice.target ||
+      !Number.isInteger(spice.instrument) || !Number.isInteger(spice.clock.spacecraft) || !spice.clock.header || !spice.bodyFrame || !ABERRATIONS.includes(spice.aberration as typeof ABERRATIONS[number]) ||
+      spice.pixels.focalLength.unit !== 'mm' || !['micrometre', 'mm'].includes(spice.pixels.pixelPitch.unit) || ![0, 1].includes(spice.pixels.origin) ||
+      !['X', '-X', 'Y', '-Y', 'Z', '-Z'].includes(spice.pixels.column) || !['X', '-X', 'Y', '-Y', 'Z', '-Z'].includes(spice.pixels.row) || spice.pixels.column.replace('-', '') === spice.pixels.row.replace('-', '') ||
+      (spice.image.plane !== undefined && (!Number.isInteger(spice.image.plane) || spice.image.plane < 1)) || !spice.image.quantity)) throw new TypeError('Invalid SPICE camera declaration.');
   const validPhotometry = photometry && (photometry.model === 'lommel-seeliger' ||
     (recipe.format === 'osiris-camera' && photometry.model === 'minnaert' &&
       Number.isFinite(photometry.coefficient) && photometry.coefficient !== undefined && photometry.coefficient >= .5 && photometry.coefficient <= 1 &&
       Number.isFinite(photometry.phaseCoefficientPerDegree) && photometry.phaseCoefficientPerDegree !== undefined && photometry.phaseCoefficientPerDegree >= 0 && photometry.phaseCoefficientPerDegree <= .01) ||
-    (controlled && photometry.model === 'retained-observation' && photometry.maximumGain === 1));
-  if (!['osiris-geo', 'amica-gaskell', 'osiris-camera', 'llorri-camera', PDS4_GEOMETRY_CUBE_FORMAT].includes(recipe.format) || !/^[a-z][a-z0-9-]*$/.test(recipe.id) || !/^[a-z][a-z0-9-]*$/.test(recipe.consumer) ||
+    ((controlled || kernels) && photometry.model === 'retained-observation' && photometry.maximumGain === 1));
+  if (!['osiris-geo', 'amica-gaskell', 'osiris-camera', 'llorri-camera', PDS4_GEOMETRY_CUBE_FORMAT, SPICE_CAMERA_FORMAT].includes(recipe.format) || !/^[a-z][a-z0-9-]*$/.test(recipe.id) || !/^[a-z][a-z0-9-]*$/.test(recipe.consumer) ||
       !paths.every(safePath) || new Set(paths).size !== paths.length ||
       (amica ? recipe.qualityPath !== undefined || recipe.allowLossy !== true || recipe.filter !== 'V'
         : cube ? recipe.cube === undefined || recipe.qualityPath !== undefined || recipe.originalPath !== undefined || recipe.flatPath !== undefined || recipe.allowLossy !== false
+        : kernels ? recipe.qualityPath !== undefined || recipe.labelPath !== undefined || recipe.originalPath !== undefined || recipe.flatPath !== undefined || recipe.cameraPath !== undefined || recipe.allowLossy !== false
         : recipe.labelPath !== undefined || recipe.originalPath !== undefined || recipe.flatPath !== undefined) ||
       (!cube && recipe.cube !== undefined) ||
       (controlled ? recipe.qualityPath !== undefined : recipe.cameraPath !== undefined) ||
@@ -125,6 +138,8 @@ async function loadSingleGeoObservationSurface({ sourceDirectory, source, recipe
   const frame: GeoObservationFrame = camera ? attachSourceGeometry(recipe.format === 'llorri-camera'
     ? decodeLlorri(await read(recipe.path), camera)
     : decodeOsirisReflectance(await read(recipe.path), camera, recipe.allowLossy), radial.grid)
+    : kernelCamera(recipe) ? attachSourceGeometry(decodeSpiceCameraFrame(await read(recipe.path),
+      await loadKernelSet(spiceDeclaration(recipe).kernels.map(path => resolve(sourceDirectory, path))), spiceDeclaration(recipe), recipe.filter), radial.grid)
     : recipe.format === PDS4_GEOMETRY_CUBE_FORMAT ? decodePds4GeometryCube(await read(recipe.path), (await read(recipe.labelPath)).toString('utf8'),
       { fileName: basename(requireString(recipe.path)), cube: cubeDeclaration(recipe), filter: recipe.filter })
     : recipe.format === 'amica-gaskell' ? decodeAmicaGeo(await read(recipe.path),
@@ -160,7 +175,7 @@ export function prepareGeoFrameSurface({ frame, recipe:value, radial, config, en
       : 'D=2*cos(i)/(cos(i)+cos(e)); linear radiance divided by D before interpolation; reference D(0,0)=1.',
     applicationLighting: recipe.photometry.model === 'retained-observation'
       ? 'Uniform flood displays the acquisition illumination; Shadows applies the existing fixed-epoch Sun bank.'
-      : recipe.format === 'osiris-camera' ? 'Uniform flood displays the prepared observation; Shadows applies the existing fixed-epoch Sun bank.'
+      : recipe.format === 'osiris-camera' || kernelCamera(recipe) ? 'Uniform flood displays the prepared observation; Shadows applies the existing fixed-epoch Sun bank.'
       : 'Uniform flood displays normalized imagery; Shadows applies the existing fixed-epoch Sun bank.',
     limitations: recipe.photometry.phaseCorrection
       ? 'Approximate single-scattering phase normalization; no Hapke roughness, multiple-scattering correction or cast-shadow recovery. Relative display brightness, not measured albedo.'
@@ -170,6 +185,7 @@ export function prepareGeoFrameSurface({ frame, recipe:value, radial, config, en
       : recipe.format === 'llorri-camera' ? 'relative DN/s with original illumination; linear grayscale display'
       : recipe.format === 'osiris-camera' ? 'relative disk-normalized I/F; linear grayscale display'
       : recipe.format === PDS4_GEOMETRY_CUBE_FORMAT ? `relative disk-normalized ${cubeDeclaration(recipe).quantity}; linear grayscale display`
+      : kernelCamera(recipe) ? `relative ${recipe.photometry.model === 'retained-observation' ? '' : 'disk-normalized '}${spiceDeclaration(recipe).image.quantity}${recipe.photometry.model === 'retained-observation' ? ' with original illumination' : ''}; linear grayscale display`
       : frame.radianceFactor ? 'relative disk- and phase-normalized I/F; linear grayscale display' : 'relative disk-normalized radiance; linear grayscale display' },
     sourceIds: entries.map(e => ({ id: e.id, sha256: e.expectedSha256 })),
     previewPolicy: 'Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D.' };
