@@ -130,8 +130,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 5306,
-      "sha256": "50328f1e86a645cd9784f36b5a024b31899403688dc1232cdb3530dffa0ada19",
+      "bytes": 6280,
+      "sha256": "2da3c46f3a63ec5b26109939d2e346cc761223a559f4b125d11e20c47379280e",
       "source": {
         "kind": "model-render",
         "id": "cassini",
@@ -165,6 +165,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/0"
           }
         ]
+      },
+      "subject": {
+        "left": 246,
+        "top": 16,
+        "width": 228,
+        "height": 264
       }
     },
     {
@@ -179,8 +185,8 @@
         "scale": 1,
         "offsetXCssPixels": 13
       },
-      "bytes": 4432,
-      "sha256": "1f2da1c40a9c944722b37b9a6fbd04e53b1045a883d9396a8390e1fcb89e6062",
+      "bytes": 5206,
+      "sha256": "a34eec837d839c64f9be7f16b18837226a6d9611ff6f871f30c15a6232f962df",
       "source": {
         "kind": "model-render",
         "id": "dawn",
@@ -214,6 +220,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/1"
           }
         ]
+      },
+      "subject": {
+        "left": 64,
+        "top": 83,
+        "width": 516,
+        "height": 130
       }
     },
     {
@@ -228,8 +240,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 6886,
-      "sha256": "40959f00347e14c2e091bad552b7d9eaaffaa201136bb72c20190abbcd8592df",
+      "bytes": 8566,
+      "sha256": "c571b5c59b281f026c5fa320b2419a9c210eefd020e0a4f4921a12cf3ebee417",
       "source": {
         "kind": "model-render",
         "id": "galileo-v2",
@@ -319,6 +331,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/2"
           }
         ]
+      },
+      "subject": {
+        "left": 146,
+        "top": 16,
+        "width": 428,
+        "height": 264
       }
     },
     {
@@ -369,8 +387,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 11480,
-      "sha256": "47a4438275531df9b17b0db12698e7b36f0ffb76300a8870f8d044384193042e",
+      "bytes": 12874,
+      "sha256": "285782d727866443e7e5c80931295f4b8c63f34b532e755a798cda4ae4f254ee",
       "source": {
         "kind": "model-render",
         "id": "grail",
@@ -454,6 +472,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/3"
           }
         ]
+      },
+      "subject": {
+        "left": 225,
+        "top": 16,
+        "width": 271,
+        "height": 264
       }
     },
     {
@@ -468,8 +492,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 13848,
-      "sha256": "13e162278cdd796bf05bae8ed52cea1bd0a9b9965685069361572b47e64711f9",
+      "bytes": 14674,
+      "sha256": "68eb248179af4a37cb7239263909d85c1e4b7f4f95ef9b51a76e7daf838b4c68",
       "source": {
         "id": "hayabusa",
         "url": "https://science.nasa.gov/wp-content/uploads/2023/05/hayabusa_1.png",
@@ -490,6 +514,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/4"
           }
         ]
+      },
+      "subject": {
+        "left": 185,
+        "top": 40,
+        "width": 350,
+        "height": 216
       }
     },
     {
@@ -504,8 +534,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 11214,
-      "sha256": "845aa46eeee91142a5e0b15a8a019de6c9c6ed3767226b8eba3c1165f90fe733",
+      "bytes": 11906,
+      "sha256": "00e9187c83de1c977e7c6561cffc1576dfb34855bbca58c1aedb6e8ff4dcb3eb",
       "source": {
         "id": "hayabusa2",
         "url": "https://science.nasa.gov/wp-content/uploads/2023/05/hayabusa_2.png",
@@ -526,6 +556,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/5"
           }
         ]
+      },
+      "subject": {
+        "left": 241,
+        "top": 16,
+        "width": 239,
+        "height": 263
       }
     },
     {
@@ -576,8 +612,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 11962,
-      "sha256": "ad78576337ae26e29a60006dff8de8adb9ee8b6f981eabe2aa8b9400676da240",
+      "bytes": 12980,
+      "sha256": "ac76d87a942faa21bfd9648bb32e9bc9ff495f9346a78393f209b2d29fd8ff26",
       "source": {
         "kind": "model-render",
         "id": "hubble-v2",
@@ -612,6 +648,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/6"
           }
         ]
+      },
+      "subject": {
+        "left": 179,
+        "top": 16,
+        "width": 362,
+        "height": 264
       }
     },
     {
@@ -662,8 +704,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 5498,
-      "sha256": "feea10a55946cc103ec91f2180b1b7aa8d1e46d062de24d7507f6531b09c88d2",
+      "bytes": 6470,
+      "sha256": "1f53c9672aef2917e0caf69539df685d25b9d826bfe3120edbb647b5c8ec7c4d",
       "source": {
         "kind": "model-render",
         "id": "juno",
@@ -697,6 +739,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/7"
           }
         ]
+      },
+      "subject": {
+        "left": 235,
+        "top": 16,
+        "width": 250,
+        "height": 264
       }
     },
     {
@@ -711,8 +759,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 13138,
-      "sha256": "be68108b5a6bf1b6486899f50fd5edece3e69ebe1571fa87783647764a48b61f",
+      "bytes": 14292,
+      "sha256": "f178d28c7c19786e25152e51ccdcdc2a2533f558dd61b068e36529b17847360b",
       "source": {
         "kind": "model-render",
         "id": "lro",
@@ -746,6 +794,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/8"
           }
         ]
+      },
+      "subject": {
+        "left": 154,
+        "top": 16,
+        "width": 412,
+        "height": 264
       }
     },
     {
@@ -760,8 +814,8 @@
         "scale": 1,
         "offsetXCssPixels": 21.5
       },
-      "bytes": 11620,
-      "sha256": "8979695c0bf847e9d5536d1777f2d6c89a6226dc173eac0bb9dc04c1a288b2a8",
+      "bytes": 13368,
+      "sha256": "2fd71b46da3689e4a2e624f2a89fceb8a6d77d373af6edc380859e7ca3007f71",
       "source": {
         "kind": "model-render",
         "id": "magellan",
@@ -795,6 +849,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/9"
           }
         ]
+      },
+      "subject": {
+        "left": 98,
+        "top": 16,
+        "width": 482,
+        "height": 264
       }
     },
     {
@@ -809,8 +869,8 @@
         "scale": 1,
         "offsetXCssPixels": 20.5
       },
-      "bytes": 12098,
-      "sha256": "dee33e9a4b065ae24958967617c4299ed9bfe44699948c4fe2856f1b0a215705",
+      "bytes": 13460,
+      "sha256": "15599eaf440d759a366c591453a1962324bdaefb765f1f840755a4a8588d2eca",
       "source": {
         "kind": "model-render",
         "id": "mars-global-surveyor",
@@ -844,6 +904,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/10"
           }
         ]
+      },
+      "subject": {
+        "left": 94,
+        "top": 15,
+        "width": 486,
+        "height": 266
       }
     },
     {
@@ -858,8 +924,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 8022,
-      "sha256": "e17b17ec7a9897fde0d12d98673b9eca0c30aff9f5d8f80bc44b44d828cd46a8",
+      "bytes": 9340,
+      "sha256": "2daebf31f243548d35fe6f9448b7af476b56ad2ab170fe16c6ace3bd43ad4946",
       "source": {
         "kind": "model-render",
         "id": "messenger",
@@ -893,6 +959,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/11"
           }
         ]
+      },
+      "subject": {
+        "left": 158,
+        "top": 16,
+        "width": 404,
+        "height": 264
       }
     },
     {
@@ -907,8 +979,8 @@
         "scale": 1,
         "offsetXCssPixels": 24.5
       },
-      "bytes": 12650,
-      "sha256": "b6ebd5a83740dd5a08cafd2d7e4b31fcea5503944bc54efa18aea4ddfb6d0b97",
+      "bytes": 13956,
+      "sha256": "162a39ca85c234906234e1725565d8b14b3ae621c141b84d5a2c3c0ee922b826",
       "source": {
         "kind": "model-render",
         "id": "mro",
@@ -942,6 +1014,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/12"
           }
         ]
+      },
+      "subject": {
+        "left": 110,
+        "top": 16,
+        "width": 470,
+        "height": 264
       }
     },
     {
@@ -956,8 +1034,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 8578,
-      "sha256": "6e0a5bb99ada3c3d520cffd8ffb2797e27475c311f176d62a9687c24a3ae9f3b",
+      "bytes": 9612,
+      "sha256": "74795b0c803c88a28f9f2c92a92d3f33900db6050d7d828849e8523a5d8a76bb",
       "source": {
         "kind": "model-render",
         "id": "near-shoemaker",
@@ -991,6 +1069,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/13"
           }
         ]
+      },
+      "subject": {
+        "left": 191,
+        "top": 16,
+        "width": 339,
+        "height": 264
       }
     },
     {
@@ -1005,8 +1089,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 10060,
-      "sha256": "742f4d07938227c448ad60884bc3de786c8fc0b1cb2190fc2421c35f12d9873c",
+      "bytes": 10832,
+      "sha256": "de359b67985a4b524f18d072cbe8e3c0da77d25772fd86bfb992615f3f73bb37",
       "source": {
         "kind": "model-render",
         "id": "new-horizons",
@@ -1040,6 +1124,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/14"
           }
         ]
+      },
+      "subject": {
+        "left": 245,
+        "top": 15,
+        "width": 230,
+        "height": 265
       }
     },
     {
@@ -1054,8 +1144,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 6106,
-      "sha256": "b974eaae8997f51738f8b8de1bf13b1b3152b9058aad73b7010bc9ae5175c305",
+      "bytes": 7136,
+      "sha256": "a070e425e815a82de54c019567f6652c4e9a56a02480c512ca5c662bda501b6b",
       "source": {
         "kind": "model-render",
         "id": "odyssey",
@@ -1089,6 +1179,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/15"
           }
         ]
+      },
+      "subject": {
+        "left": 191,
+        "top": 16,
+        "width": 338,
+        "height": 264
       }
     },
     {
@@ -1103,8 +1199,8 @@
         "scale": 1,
         "offsetXCssPixels": 24.5
       },
-      "bytes": 13170,
-      "sha256": "fc638ce13aa23be3b5648bbce53aaf5d1096ecf21ebe30f8afb574d637931347",
+      "bytes": 15194,
+      "sha256": "0b3a3f683b7cdbe0416b09e4e96b9d35e95f0a4eac6c02d858a19212d9878653",
       "source": {
         "kind": "model-render",
         "id": "osiris-rex",
@@ -1138,6 +1234,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/16"
           }
         ]
+      },
+      "subject": {
+        "left": 110,
+        "top": 16,
+        "width": 470,
+        "height": 264
       }
     },
     {
@@ -1152,8 +1254,8 @@
         "scale": 1,
         "offsetXCssPixels": 13
       },
-      "bytes": 4258,
-      "sha256": "783007d89940ded7679397859749744d110ea9238231d56bec2ff38ee194202a",
+      "bytes": 4970,
+      "sha256": "28f2aefc0c1c4c9e3a8c1707ee2cc73b3740db59ea030e3ce12f4dc5487db4f9",
       "source": {
         "kind": "model-render",
         "id": "rosetta-v2",
@@ -1243,6 +1345,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/17"
           }
         ]
+      },
+      "subject": {
+        "left": 64,
+        "top": 84,
+        "width": 516,
+        "height": 128
       }
     },
     {
@@ -1257,8 +1365,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 7220,
-      "sha256": "ea3fb89c81c366e6c4856ce9ddb0cec725456f0bd542780d6f0f58b2eff89c96",
+      "bytes": 8080,
+      "sha256": "914f2123ec867790a64a4405e54889cf227cecf973fe3e8a9fbf6658bdcd2610",
       "source": {
         "kind": "model-render",
         "id": "sdo",
@@ -1292,6 +1400,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/18"
           }
         ]
+      },
+      "subject": {
+        "left": 230,
+        "top": 16,
+        "width": 260,
+        "height": 264
       }
     },
     {
@@ -1342,8 +1456,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 7812,
-      "sha256": "d8247cd4e8da874bcc1b2569a03c3dd0685294233de876fb2855abe5310ec8b4",
+      "bytes": 8508,
+      "sha256": "2089948529c1f9f5acf8b5a813ad9ffce78af0aeca053ab5796224f3eda21c9e",
       "source": {
         "kind": "model-render",
         "id": "suomi-npp",
@@ -1377,6 +1491,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/19"
           }
         ]
+      },
+      "subject": {
+        "left": 180,
+        "top": 15,
+        "width": 361,
+        "height": 265
       }
     },
     {
@@ -1391,8 +1511,8 @@
         "scale": 1,
         "offsetXCssPixels": 15.5
       },
-      "bytes": 11432,
-      "sha256": "7cb7ef720bc81d51dabeaf4a51318f2d383eb804bc8a7bea53190cd9f663d6c4",
+      "bytes": 13062,
+      "sha256": "b0d61c866c51aa65444e9339fdcd41c554ac762f5c1c815f4c06bb3737c3a08a",
       "source": {
         "kind": "model-render",
         "id": "terra",
@@ -1426,6 +1546,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/20"
           }
         ]
+      },
+      "subject": {
+        "left": 74,
+        "top": 15,
+        "width": 506,
+        "height": 265
       }
     },
     {
@@ -1440,8 +1566,8 @@
         "scale": 1,
         "offsetXCssPixels": 19
       },
-      "bytes": 12344,
-      "sha256": "14c280a93514dad0cce7934b445444f68bc4fbcc8d94f9173dcb6d6402014f1d",
+      "bytes": 14206,
+      "sha256": "078a4c633f2384cc4332ae09e20bd4f3eb3c391edbd87035fc124f145ed2f2ae",
       "source": {
         "id": "viking",
         "url": "https://science.nasa.gov/wp-content/uploads/2023/10/Viking_Orbiter-2.png",
@@ -1462,6 +1588,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/21"
           }
         ]
+      },
+      "subject": {
+        "left": 89,
+        "top": 16,
+        "width": 491,
+        "height": 264
       }
     },
     {
@@ -1548,8 +1680,8 @@
         "scale": 1,
         "offsetXCssPixels": 25
       },
-      "bytes": 8386,
-      "sha256": "8d7a95dc953819466479834502e1644e065bf19fc686c8529e7cb9adaba3ab1b",
+      "bytes": 9994,
+      "sha256": "aec2d8218eb24347f6529e5274e2fe292a940c2dda80c21254e9756ddf87226f",
       "source": {
         "kind": "model-render",
         "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/v/Voyager.usdz",
@@ -1592,6 +1724,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/22"
           }
         ]
+      },
+      "subject": {
+        "left": 111,
+        "top": 16,
+        "width": 469,
+        "height": 264
       }
     },
     {
@@ -1606,8 +1744,8 @@
         "scale": 1,
         "offsetXCssPixels": 25
       },
-      "bytes": 8386,
-      "sha256": "8d7a95dc953819466479834502e1644e065bf19fc686c8529e7cb9adaba3ab1b",
+      "bytes": 9994,
+      "sha256": "aec2d8218eb24347f6529e5274e2fe292a940c2dda80c21254e9756ddf87226f",
       "source": {
         "kind": "model-render",
         "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/v/Voyager.usdz",
@@ -1650,6 +1788,12 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/23"
           }
         ]
+      },
+      "subject": {
+        "left": 111,
+        "top": 16,
+        "width": 469,
+        "height": 264
       }
     }
   ]

@@ -573,7 +573,10 @@
 .planet-machine[hidden] { display: none; }
 .planet-machine:not([hidden]) ~ .planet-machine:not([hidden]) { margin-top: 20px; }
 .planet-machine-preview { position: relative; }
-.planet-machine-preview > .planet-machine-heading { position: absolute; inset: 0 0 auto; z-index: 1; pointer-events: none; }
+/* A photograph fills its frame, so its title sits over it. A render is
+   transparent and cropped to the machine, leaving nothing to sit on, so its
+   title keeps the normal flow above the artwork. */
+.planet-machine-preview-overlay > .planet-machine-heading { position: absolute; inset: 0 0 auto; z-index: 1; pointer-events: none; }
 .planet-machine-heading .planet-lens-details-title { margin-bottom: 0; }
 /* A model render arrives on the sidebar's own near-black, so its title needs no
    help. A published photograph is bright and busy, so the heading takes a light
@@ -599,7 +602,22 @@
 .planet-capture-notes { margin-top: 18px; }
 [data-dataset-notice] { margin: 12px 0; font-size: 12px; }
 .planet-machine-image-link { display: block; width: 100%; aspect-ratio: 2 / 1; background: var(--explorer-panel-background); }
+/* A render is transparent apart from its machine, so the card shows the region
+   the machine actually occupies instead of the empty frame around it. */
+.planet-machine-image-crop { position: relative; overflow: hidden; aspect-ratio: var(--subject-w) / var(--subject-h); }
+.planet-machine-image-crop > .planet-machine-image {
+  position: absolute; object-fit: fill;
+  width: calc(var(--frame-w) / var(--subject-w) * 100%);
+  height: calc(var(--frame-h) / var(--subject-h) * 100%);
+  left: calc(var(--subject-x) / var(--subject-w) * -100%);
+  top: calc(var(--subject-y) / var(--subject-h) * -100%);
+}
 .planet-machine-image { display: block; width: 100%; height: 100%; object-fit: contain; }
 .planet-machine-emblem { position: absolute; left: 8px; bottom: 8px; display: block; width: 64px; height: 64px; }
 .planet-machine-emblem img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .planet-machine a:focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 4px; }
+/* Labels, format notes and bibliographies are needed to read a dataset but are
+   not the dataset, so they fold away under the source that requires them. */
+.planet-resource-supporting { margin-top: 6px; font-size: 11px; }
+.planet-resource-supporting summary { cursor: pointer; color: var(--shell-text-muted); }
+.planet-resource-supporting .planet-resource-label { display: block; margin-top: 4px; }
