@@ -179,7 +179,13 @@ export const parseControlledMetadata = shape({IsisCube:shape({BandBin:shape({Fil
 
 export const geoFramePathFields = {path:optional(text),qualityPath:optional(text),labelPath:optional(text),originalPath:optional(text),flatPath:optional(text),cameraPath:optional(text),startTime:optional(text)};
 export const parsePhasePhotometry = shape({model:text,asymmetry:number,amplitude:number,width:number,minimumDegrees:number,maximumDegrees:number,referenceDegrees:number,maximumGain:number});
-export const parseGeoRecipe = shape({...surfaceIdentityFields,...geoFramePathFields,filter:text,allowLossy:boolean,radiometry:optional(text),
+/** A PDS4 product whose Array_2D_Image planes carry an image with its geometric backplanes. The recipe names the planes by
+ * their label identifiers, the archive identity and DSK to bind, and optional FITS header expectations. */
+export const parseGeometryCube = shape({collection:text,target:text,observingSystem:array(text),shapeKernel:optional(text),quantity:text,
+  planes:shape({image:text,x:text,y:text,z:text,incidence:text,emission:text,phase:text,pixelScale:optional(array(text))}),
+  header:optional(dictionary(text)),headerTime:optional(text),headerPlaneNames:optional(shape({prefix:text,names:dictionary(text)}))});
+export type GeometryCubeDeclaration = ReturnType<typeof parseGeometryCube>;
+export const parseGeoRecipe = shape({...surfaceIdentityFields,...geoFramePathFields,filter:text,allowLossy:boolean,radiometry:optional(text),cube:optional(parseGeometryCube),
  frames:optional(array(shape({id:text,...geoFramePathFields}))),selection:optional(text),levelMatching:optional(parseLevelMatching),
  transfer:surfaceTransfer,photometry:shape({model:text,phaseCorrection:optional(parsePhasePhotometry),coefficient:optional(number),phaseCoefficientPerDegree:optional(number),
  referenceIncidenceDegrees:number,referenceEmissionDegrees:number,maximumIncidenceDegrees:number,maximumEmissionDegrees:number,maximumGain:number}),displayPercentiles:array(number)});
