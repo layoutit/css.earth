@@ -2,7 +2,7 @@
   "tool": "pixelmatch",
   "version": "7.2.0",
   "settings": {
-    "threshold": 0,
+    "threshold": 0.1,
     "includeAA": true,
     "alpha": 0.2,
     "diffColor": [
@@ -23,18 +23,13 @@
   },
   "diff": {
     "path": "sampling-diff.png",
-    "bytes": 97634,
-    "sha256": "6ae53b05c6e5aeb124b93e3185798c9c5ff90ebd31075321ca36c26aa5be1f8c"
+    "bytes": 116932,
+    "sha256": "21ff21acfa7dbf2aa9ba289c502fd6118f6dc7a6a1f7526d87efe6ec4014df61"
   },
   "width": 520,
   "height": 480,
   "comparedPixels": 249600,
-  "mismatchedPixels": 177539,
-  "mismatchPercent": 71.12940705128206,
-  "perceptualSummary": {
-    "threshold": 0.1,
-    "includeAA": true,
-    "mismatchedPixels": 19
-  },
+  "mismatchedPixels": 19,
+  "mismatchPercent": 0.007612179487179488,
   "exclusions": "None; every supplied pixel is compared, including anti-aliasing."
 }

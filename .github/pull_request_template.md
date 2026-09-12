@@ -38,7 +38,7 @@ differences, including uncommitted changes.
 Explain why reused evidence still applies and what added evidence or unusually large files support.
 Do not repeat source inventories or paste run logs here.
 For images, use GitHub attachments or repository URLs pinned to a commit.
-For matched visual comparisons, link the retained inputs, Pixelmatch diff and
+For matched visual comparisons, link the retained inputs, Pixelmatch diff at threshold 0.1 and
 recorded settings/results required by the provenance contract.
 A relative link does not resolve in a PR body; pin repository links to a commit too.
 Reload the published PR and inspect every image and link; fix broken ones before handoff.

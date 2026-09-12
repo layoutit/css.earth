@@ -36,17 +36,18 @@ on the merge of `e0487eff5` with main `c13f3643b`, whose renderer and scene are
 retained. [Capture settings and byte pins](evidence/native-pixelmatch/capture.json)
 identify the exact previous-main atlas and the encoding-only control.
 
-| Comparison | Exact changed pixels / 249,600 | At threshold 0.1 |
-| --- | ---: | ---: |
-| [Independent unchanged repeat](evidence/native-pixelmatch/repeat.json) | 1 | 0 |
-| [Previous atlas → native sampling](evidence/native-pixelmatch/change.json) | 193,769 | 20 |
-| [Quality-95 control → native sampling](evidence/native-pixelmatch/sampling.json) | 177,539 | 19 |
+Pixelmatch 7.2.0 uses threshold **0.1**, including anti-aliasing, without masks.
 
-Both settings include anti-aliasing, without masks. The repeat differs by one
-8-bit value in three channels of one pixel, after waiting for label fades.
-The exact diffs locate many small brightness changes; the 0.1 threshold shows
-that few are large. Inspection shows finer fracture texture, not a large
-contrast change. These counts do not measure sharpness or registration accuracy.
+| Comparison | Mismatched pixels / 249,600 |
+| --- | ---: |
+| [Independent unchanged repeat](evidence/native-pixelmatch/repeat.json) | 0 |
+| [Previous atlas → native sampling](evidence/native-pixelmatch/change.json) | 20 |
+| [Quality-95 control → native sampling](evidence/native-pixelmatch/sampling.json) | 19 |
+
+The repeat has zero mismatches after waiting for label fades. Only a few pixels
+exceed the threshold; most photographic changes are subtle. Inspection shows
+finer fracture texture. These counts do not measure sharpness or registration
+accuracy.
 The four input crops and three diffs are retained beside their reports. Reproduce
 a comparison with `node tools/compare-visual-evidence.mts <reference.png>
 <result.png> <diff.png> <report.json>` from the repository root.
