@@ -140,7 +140,7 @@
       "licenseEvidence": [
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
-      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter\u2019s navigation recipe.",
+      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
       "redistribution": "Credited prepared observational image; source binary excluded from Git.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -381,7 +381,7 @@
       "expectedSha256": "5b21b56d6f25193cfec648a3a1e41451bd3e2db9c50c64f11c4c415c0b5379a0",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/CALLISTO_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -439,16 +439,217 @@
         "kind": "local",
         "reason": "Project-authored preparation parameters."
       }
+    },
+    {
+      "id": "hyg-registration-field",
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 851,
+      "expectedSha256": "89c25f19bea74aed2e06d654b503d0c0b937b8d9d8a3edca31a28c37df5dcc93",
+      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
+      "credit": "David Nash",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
+      ],
+      "acquisition": "checked prepared registration field from HYG v4.1",
+      "redistribution": "CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hyg-v41",
+            "role": "material",
+            "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
+    },
+    {
+      "id": "callisto-title-mark",
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4130,
+      "expectedSha256": "21dc4663b57b1fc34278f405e23e70d0869ed510a9e3ef1a76b4b89e1ab32847",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "deterministically generated Callisto title path from the repository-pinned Inter font",
+      "redistribution": "generated outline under the Inter license",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/callisto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
+    },
+    {
+      "id": "callisto-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 1623,
+      "expectedSha256": "de57dcd7de843dddfab06f175881491789e77ce0dc71e604f6168bab03b37d24",
+      "origin": "Repository-authored Callisto solar-system recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "sky-sun",
+        "system-markers",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored camera scale and marker layout using the cited solar-system geometry."
+      }
+    },
+    {
+      "id": "callisto-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 3661,
+      "expectedSha256": "56670beb6685f74c48a6baa1e24ad1af3dc138c1663ba4164e62062c57a5a21b",
+      "origin": "Repository-authored Callisto raster recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored image sampling, science painting, packing and lighting-bank settings."
+      }
+    },
+    {
+      "id": "callisto-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1429,
+      "expectedSha256": "8b641c41ec4eccc4f45e16315ff86aaa663c4ba3a2db934d6846c3e0da55b878",
+      "origin": "Repository-authored Callisto geometry recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored CSS geometry, UV sampling and seam settings."
+      }
+    },
+    {
+      "id": "callisto-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 225,
+      "expectedSha256": "2ba4089e45fe97b2b8d8fa0ea0c413b7d135b8d93d02026fe1e061c9ef078daf",
+      "origin": "Repository-authored Callisto celestial recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "sky-sun",
+        "starfield",
+        "system-markers"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored sky, Sun and marker preparation settings."
+      }
+    },
+    {
+      "id": "callisto-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 337,
+      "expectedSha256": "c863edb7d5f8cc2afd1d7e49bb8e6d82251c4ce995f4d051073b24222714bb71",
+      "origin": "Repository-authored Callisto presentation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored scene composition and supported views."
+      }
+    },
+    {
+      "id": "callisto-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1943,
+      "expectedSha256": "07bc4bcf33c4aeea29bdc791545be5e52f852884848b2eea2c78671d275d99b8",
+      "origin": "Repository-authored Callisto navigation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "navigation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored marker, caption and camera settings."
+      }
+    },
+    {
+      "id": "callisto-preparation-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 3596,
+      "expectedSha256": "0b1c9d0f301792db9d95fd1911e1b29b7acff81965284cc250f3f9b69764dd3a",
+      "origin": "Repository-authored Callisto acquisition recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored requests and extraction steps for restoring source files."
+      }
+    },
+    {
+      "id": "callisto-object-content",
+      "path": "content/object.json",
+      "expectedBytes": 12032,
+      "expectedSha256": "738d0e5ba469fc6423d8e5c4dce18a31bb9fcd8267f93b8fcfdb3945fa111195",
+      "origin": "Repository-authored Callisto object recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+      }
     }
   ],
   "generatedIntermediates": [],
   "documents": [
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 851,
-      "expectedSha256": "89c25f19bea74aed2e06d654b503d0c0b937b8d9d8a3edca31a28c37df5dcc93",
-      "purpose": "Shared astrometric sky source and licensing."
-    },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
@@ -460,35 +661,6 @@
       "expectedBytes": 598,
       "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
       "purpose": "Shared astrometric sky source and licensing."
-    },
-    {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 3035,
-      "expectedSha256": "a266f5135c2bf1976fcce2f5611b641e551e8dbbed898ba88c03bde744169473"
-    },
-    {
-      "path": "content/object.json",
-      "expectedBytes": 12140,
-      "expectedSha256": "5bd9dc1809c605ad455b0209d3977a91cc6ba7413cca5b9b0ce5fec5c1764161",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
-      }
-    },
-    {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4130,
-      "expectedSha256": "21dc4663b57b1fc34278f405e23e70d0869ed510a9e3ef1a76b4b89e1ab32847"
-    },
-    {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 1943,
-      "expectedSha256": "07bc4bcf33c4aeea29bdc791545be5e52f852884848b2eea2c78671d275d99b8"
-    },
-    {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 3596,
-      "expectedSha256": "0b1c9d0f301792db9d95fd1911e1b29b7acff81965284cc250f3f9b69764dd3a"
     },
     {
       "path": "editorial/factsheet-review.json",

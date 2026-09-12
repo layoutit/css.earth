@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "72df7077d4908d32d5568b8ac080f226f45770b469be3a77780baaba7730357c"
+    "sha256": "5ac0652c5ad1ec13acabf0a3155c410897e5e77413495fec09d1e4de22eadb67"
   },
   "id": "callisto",
   "properties": {
@@ -38,13 +38,17 @@
       "label": "Callisto",
       "steps": [
         "verify-sources",
+        "title",
         "assets",
+        "features",
+        "panel-content",
+        "lenses",
         "starfield",
         "sky-sun",
+        "system-markers",
         "scene",
         "controls",
         "presentation",
-        "features",
         "runtime-assets"
       ]
     },
@@ -52,7 +56,7 @@
       "surfaces": [
         {
           "id": "body",
-          "source": "terrestrial",
+          "source": "geometry",
           "projection": "equirectangular",
           "lenses": [
             {
@@ -81,20 +85,40 @@
       "materials": [
         {
           "id": "lighting",
-          "source": "terrestrial",
+          "source": "raster",
           "model": "lit"
         }
       ],
       "sources": [
         {
-          "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "a266f5135c2bf1976fcce2f5611b641e551e8dbbed898ba88c03bde744169473"
+          "id": "raster",
+          "path": "source/preparation/raster.json",
+          "sha256": "56670beb6685f74c48a6baa1e24ad1af3dc138c1663ba4164e62062c57a5a21b"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json",
+          "sha256": "8b641c41ec4eccc4f45e16315ff86aaa663c4ba3a2db934d6846c3e0da55b878"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "2ba4089e45fe97b2b8d8fa0ea0c413b7d135b8d93d02026fe1e061c9ef078daf"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "c863edb7d5f8cc2afd1d7e49bb8e6d82251c4ce995f4d051073b24222714bb71"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "5bd9dc1809c605ad455b0209d3977a91cc6ba7413cca5b9b0ce5fec5c1764161"
+          "sha256": "738d0e5ba469fc6423d8e5c4dce18a31bb9fcd8267f93b8fcfdb3945fa111195"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json",
+          "sha256": "de57dcd7de843dddfab06f175881491789e77ce0dc71e604f6168bab03b37d24"
         },
         {
           "id": "title",
@@ -124,11 +148,11 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/callisto-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d6f99a1ec3ce5b1544b3a5ef1542e7975749c1e29c0b48cbdbabf1d640ca2323"
+        "sha256": "0f9f692981e7739cc74c9ccac1ac566f21f418e0c98352b9ecc028521631d73a"
       }
     },
     "catalog": {

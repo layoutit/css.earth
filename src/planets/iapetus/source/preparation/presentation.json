@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-css-presentation-profile@1",
+  "namespace": "iapetus",
+  "mode": "composite",
+  "lensFocus": {
+    "infrared": {
+      "longitudeDegrees": 123.92578,
+      "latitudeDegrees": -5.44922,
+      "zoom": 1.15
+    },
+    "ice-absorption": {
+      "longitudeDegrees": 123.92578,
+      "latitudeDegrees": -5.44922,
+      "zoom": 1.15
+    }
+  }
+}

@@ -209,7 +209,7 @@
       "licenseEvidence": [
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
-      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter\u2019s navigation recipe.",
+      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
       "redistribution": "Credited prepared observational image; source binary excluded from Git.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -927,7 +927,7 @@
       "expectedSha256": "be1afafaa7adb0492cef2cfc8dc7ec8dc063f23e386fe9bdebf6d5a3ca2ac37c",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/IO_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -985,16 +985,217 @@
         "kind": "local",
         "reason": "Project-authored preparation parameters."
       }
+    },
+    {
+      "id": "hyg-registration-field",
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 845,
+      "expectedSha256": "69c384abcd20037adbb5ef192c070836650f36c400b61a0d0ea87976cccad11e",
+      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
+      "credit": "David Nash",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
+      ],
+      "acquisition": "checked prepared registration field from HYG v4.1",
+      "redistribution": "CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hyg-v41",
+            "role": "material",
+            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/24"
+          }
+        ]
+      }
+    },
+    {
+      "id": "io-title-mark",
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 1189,
+      "expectedSha256": "dc54a69cf29cfe5422459c9af3767cc132a99cb062e32d5ded43a9f7b430b235",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "deterministically generated Io title path from the repository-pinned Inter font",
+      "redistribution": "generated outline under the Inter license",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/25"
+          }
+        ]
+      }
+    },
+    {
+      "id": "io-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 1570,
+      "expectedSha256": "49d2308bd4d28ae21c042d35693552c2625a3ff310624a1cf4e55dae87669335",
+      "origin": "Repository-authored Io solar-system recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "sky-sun",
+        "system-markers",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored camera scale and marker layout using the cited solar-system geometry."
+      }
+    },
+    {
+      "id": "io-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 12295,
+      "expectedSha256": "b937065debfbcd62352c9e6b5189f1febe5fffb604d3a94fc96821d964aa2d77",
+      "origin": "Repository-authored Io raster recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored image sampling, science painting, packing and lighting-bank settings."
+      }
+    },
+    {
+      "id": "io-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1386,
+      "expectedSha256": "7edfa226f8fdf6d490553e3e1e67866282d9cb28b4de2b72e68fa8dc690b7e02",
+      "origin": "Repository-authored Io geometry recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored CSS geometry, UV sampling and seam settings."
+      }
+    },
+    {
+      "id": "io-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 219,
+      "expectedSha256": "6966d1cb5f5bb4a7dbddec153bf0ef7feb763647e5bc0a953709358c8018f225",
+      "origin": "Repository-authored Io celestial recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "sky-sun",
+        "starfield",
+        "system-markers"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored sky, Sun and marker preparation settings."
+      }
+    },
+    {
+      "id": "io-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 337,
+      "expectedSha256": "8fbc994711fc3f155f07356751e52734dcf6536ccd5242289c9bd051f6cb48a6",
+      "origin": "Repository-authored Io presentation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored scene composition and supported views."
+      }
+    },
+    {
+      "id": "io-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1640,
+      "expectedSha256": "592ef3e1de50621e805707176f0ac5ecf73f0d73962cfa09d81a2fe3beebdd52",
+      "origin": "Repository-authored Io navigation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "navigation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored marker, caption and camera settings."
+      }
+    },
+    {
+      "id": "io-preparation-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 3659,
+      "expectedSha256": "2e25ed6dc5192919b35ecb97436edea3e2c83439608a2d90ec6ac2712ef00976",
+      "origin": "Repository-authored Io acquisition recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored requests and extraction steps for restoring source files."
+      }
+    },
+    {
+      "id": "io-object-content",
+      "path": "content/object.json",
+      "expectedBytes": 15662,
+      "expectedSha256": "633b7683b64c3b503cdd339edb27922cbeb62894ebb3873e4bc98cf32c52308e",
+      "origin": "Repository-authored Io object recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+      }
     }
   ],
   "generatedIntermediates": [],
   "documents": [
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 845,
-      "expectedSha256": "69c384abcd20037adbb5ef192c070836650f36c400b61a0d0ea87976cccad11e",
-      "purpose": "Shared astrometric sky source and licensing."
-    },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2162,
@@ -1006,35 +1207,6 @@
       "expectedBytes": 592,
       "expectedSha256": "0c4fb5173f68c690a47956dfff9674c1eb85a4ed39e1ad0766bfd22c498437e4",
       "purpose": "Shared astrometric sky source and licensing."
-    },
-    {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 11298,
-      "expectedSha256": "a2ca8a5abc1cbb507b93a10f8898661c5ce400ddacdb8687b083b47565c1152a"
-    },
-    {
-      "path": "content/object.json",
-      "expectedBytes": 14930,
-      "expectedSha256": "8824b8518243eb3ea9ddca8707730cfa75514c5ce5c506e2afc13d76c30e8f28",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
-      }
-    },
-    {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 1189,
-      "expectedSha256": "dc54a69cf29cfe5422459c9af3767cc132a99cb062e32d5ded43a9f7b430b235"
-    },
-    {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 1640,
-      "expectedSha256": "592ef3e1de50621e805707176f0ac5ecf73f0d73962cfa09d81a2fe3beebdd52"
-    },
-    {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 3659,
-      "expectedSha256": "2e25ed6dc5192919b35ecb97436edea3e2c83439608a2d90ec6ac2712ef00976"
     },
     {
       "path": "editorial/factsheet-review.json",

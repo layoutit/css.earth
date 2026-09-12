@@ -84,9 +84,9 @@
         "description": "Voyager 2 mosaic with source photometric correction. Native detail varies; local cast shadows and image seams remain. Gray grid marks missing observations.",
         "title": "Monochrome mosaic",
         "detail": "Corrected mosaic",
-        "thumbnail": "/scenes/miranda/miranda-normal-thumbnail.webp",
-        "surface": "miranda-normal-surface@2x.webp",
-        "poles": "miranda-normal-poles@2x.webp",
+        "thumbnail": "miranda-lens-normal.webp",
+        "surface": "miranda-normal.webp",
+        "poles": "miranda-poles-normal.webp",
         "source": {
           "id": "schenk-2020-miranda-normal",
           "path": "../manifest.json",
@@ -100,9 +100,9 @@
         "description": "Stereogrammetry and photoclinometry, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 240 m grid spacing is not uniform effective resolution.",
         "title": "Stereo and shading terrain model",
         "detail": "Shaded relief",
-        "thumbnail": "/scenes/miranda/miranda-elevation-thumbnail.webp",
-        "surface": "miranda-elevation-surface@2x.webp",
-        "poles": "miranda-elevation-poles@2x.webp",
+        "thumbnail": "miranda-lens-elevation.webp",
+        "surface": "miranda-elevation.webp",
+        "poles": "miranda-poles-elevation.webp",
         "source": {
           "id": "schenk-2020-miranda-elevation",
           "path": "../manifest.json",
@@ -111,8 +111,6 @@
         "legend": {
           "kind": "scale",
           "title": "Elevation",
-          "width": 256,
-          "height": 16,
           "labels": [
             "−6",
             "0.5",
@@ -120,7 +118,30 @@
           ],
           "meta": "km",
           "sourceUrl": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
-          "image": "/scenes/miranda/miranda-elevation-legend.webp"
+          "recipe": {
+            "palette": [
+              [
+                28,
+                85,
+                153
+              ],
+              [
+                187,
+                171,
+                128
+              ],
+              [
+                170,
+                62,
+                36
+              ]
+            ],
+            "labels": [
+              "−6",
+              "0.5",
+              "7"
+            ]
+          }
         },
         "summary": "Height from stereo images and shading, relative to the source ellipsoid. Detail varies; gray grid: no measurements."
       },
@@ -131,9 +152,9 @@
         "description": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
         "title": "Geologic map",
         "summary": "Historical interpreted units; degree-scale registration limits. Gray grid: unmapped or conflicting units.",
-        "thumbnail": "/scenes/miranda/miranda-geology-thumbnail.webp",
-        "surface": "miranda-geology-surface@2x.webp",
-        "poles": "miranda-geology-poles@2x.webp",
+        "thumbnail": "miranda-lens-geology.webp",
+        "surface": "miranda-geology.webp",
+        "poles": "miranda-poles-geology.webp",
         "falseColor": true,
         "source": {
           "id": "geology-2026-categories",
@@ -269,8 +290,8 @@
       },
       {
         "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
+        "name": "stars",
+        "label": "Stars",
         "checked": true
       }
     ]

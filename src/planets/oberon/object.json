@@ -8,13 +8,17 @@
       "label": "Oberon",
       "steps": [
         "verify-sources",
+        "title",
         "assets",
+        "features",
+        "panel-content",
+        "lenses",
         "starfield",
         "sky-sun",
+        "system-markers",
         "scene",
         "controls",
         "presentation",
-        "features",
         "runtime-assets"
       ]
     },
@@ -22,14 +26,34 @@
       "schema": "cssearth-authored-object@1",
       "sources": [
         {
-          "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "efb77e160705b1e37cc0cb741bd509100d822ff3046aa68d308f74aceb32510e"
+          "id": "raster",
+          "path": "source/preparation/raster.json",
+          "sha256": "2ae31450aa38b421536f4ec42ea1cc01f919d780d4db76671c23a2ffccf71621"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json",
+          "sha256": "9fa75c3779e97562e33729602f95873856e406e1a1b0b7675cf7c510a6bfa390"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "2188314cc2aea6379cb2a84f00b8906fb056360faed850ad1a2515b316c8d36e"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "7867a5978b0a647f9d4205b2f2427f22e12734bd2fbbe611d4db817f089dbed8"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "cd2fb8b0e5a1f7f2f12b6b10dd1ab7365be24b737a22ee58aeb13e8aecb81c4f"
+          "sha256": "3e47b5cd546cc90ee38740673d64a03658f53206c12585b07136634792a99ed3"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json",
+          "sha256": "9a89c86955f0ba084f7902bedf0f405b12a0fe83a0f1248c8f959f75bd9bccb9"
         },
         {
           "id": "title",
@@ -59,7 +83,7 @@
       "surfaces": [
         {
           "id": "body",
-          "source": "terrestrial",
+          "source": "geometry",
           "projection": "equirectangular",
           "lenses": [
             {
@@ -73,7 +97,7 @@
       "materials": [
         {
           "id": "lighting",
-          "source": "terrestrial",
+          "source": "raster",
           "model": "lit"
         }
       ],
@@ -111,11 +135,11 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/oberon-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c09146b83348d4e433f23620c1aee65e65ab10bd97d029cc4e05496be180906e"
+        "sha256": "48a372cf509095e9657f0332810864ddf2e4b535e11828c8cd2a5b164cc537bf"
       }
     },
     "catalog": {
@@ -134,6 +158,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e7f0f084989828c9b54729f7566ece447038ea898c0760288ccf02fb1f25c7f6"
+    "sha256": "db275f54cbb5f1e05e8942064469a8b7e506009c922c369fa5b72cc561d64886"
   }
 }

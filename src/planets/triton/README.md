@@ -20,6 +20,14 @@ enhanced contrast. Color resolution varies across observations.
 
 ## Evidence
 
+Lane change (this PR): the terrestrial solid-observation lane was retired for Triton; the same pinned inputs and the same decoders (`terrestrial-mosaic`, `terrestrial-observation` through the raster lane's `science` adapter) now feed the shared raster lane used by Mercury, Venus, Mars, the Moon and Pluto. The sphere is the shared 16 × 32 mesh (450 leaves, 230 units, 50-pixel tile, 0.005 overlap) with the 256-frame Lambert lighting bank and no atmosphere. Surfaces are painted at 7168 × 3584 (DPR 1) and 14336 × 7168 (DPR 2) — retired 14336 × 7168 atlas from the controlled orthographic mosaic. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the nomenclature recipe and map edge are unchanged and the labels were re-drawn against the new atlas. No new science review is claimed.
+
+Run of 2026-09-12 (this version): `node tools/objects/dist/prepare-authored.js triton --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/triton/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
+
+A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, enhanced) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 16356).
+
+Gazetteer rims drawn over the prepared equirectangular minimap at both candidate map edges (`output/edge-markers.mjs`) agree with the declared `mapLeftEdgeLongitudeDeg` in `source/preparation/features.json`.
+
 No dated test report is cited in the existing source notes.
 
 ## Known problems
@@ -90,5 +98,12 @@ the shared gray coverage grid. Runtime surfaces use WebP q90 with lossless
 alpha; poles and 640-pixel previews are prepared separately. Previews center
 longitude zero so the observed region is continuous; globe coordinates stay
 unchanged. Both datasets retain the app's flood and directional lighting.
+
+</details>
+
+<details>
+<summary>Shape, rotation and camera on the shared raster lane</summary>
+
+The recipe declares a sphere of 1352.6 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 5.8770-day retrograde rotation (synchronous with the retrograde orbit; IAU pole) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 0.08° initial pitch, 84.34° yaw, taken from the retired lane's camera). The heliocentric view keeps the orbit around Neptune and the parent marker now comes from the shared navigation atlas.
 
 </details>

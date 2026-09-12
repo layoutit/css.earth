@@ -4,35 +4,52 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "97de885624bcada51ac83a299c8fc329646d6fc37898ff29e922905e3539f875"
+    "sha256": "bace6ae1f3536c12f5ded472d24cc52b08f3935d5b43438b0812f6bd59a64b81"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "867672765ca42de37db80c5aeded776c2ec7725b0441ec3ddfd619cd2cb83107"
+    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
   },
   "recipes": [
     {
-      "id": "terrestrial",
-      "path": "source/preparation/terrestrial.json",
-      "sha256": "baad0759b526300aab67e29d536eee12aead0e301e773ef5ca1ad85dad7d771e",
+      "id": "raster",
+      "path": "source/preparation/raster.json",
+      "sha256": "cb192954b5fc3c697e0601173ea85d67a32d3aa646c425d6f8b414a9f79d9cd2",
       "parameters": {
-        "schema": "cssearth-terrestrial-preparation@1",
-        "kind": "solid-observation-body",
-        "namespace": "titan",
-        "displayName": "Titan",
+        "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/titan/",
-        "distanceAu": 9.58,
-        "raster": {
-          "width": 8192,
-          "height": 4096,
-          "bandCount": 16,
-          "gutter": 64,
-          "poleSize": 1024,
-          "surfaceQuality": 90,
-          "reportMissingPixels": true,
-          "observations": [
-            {
+        "sourceWidth": 8192,
+        "sourceHeight": 4096,
+        "width": 4096,
+        "height": 2048,
+        "latitudeBands": 16,
+        "polarTile": 256,
+        "densities": [
+          1,
+          2
+        ],
+        "resample": "density-before-pack",
+        "polarProjection": "orthographic-bilinear",
+        "polesCombined": false,
+        "polesOutput": "titan-poles-{id}{suffix}.webp",
+        "surfaceMetadata": {
+          "schema": "csstitan-prepared-assets@1"
+        },
+        "thumbnail": {
+          "size": 64,
+          "quality": 88
+        },
+        "surfaces": [
+          {
+            "id": "normal",
+            "output": "titan-{id}{suffix}.webp",
+            "thumbnail": "titan-lens-{id}.webp",
+            "source": "observations/titan-iss-2026.png",
+            "falseColor": false,
+            "science": {
+              "kind": "terrestrial-observation",
+              "input": "usgs-cassini-iss-2026-938nm",
               "id": "normal",
               "validity": {
                 "kind": "image-monochrome-no-data",
@@ -40,9 +57,40 @@
                 "centerLongitude": 180
               }
             }
-          ],
-          "scientific": [
-            {
+          },
+          {
+            "id": "radar",
+            "output": "titan-{id}{suffix}.webp",
+            "thumbnail": "titan-lens-{id}.webp",
+            "source": "radar/MIBEF00N090_T126S00_V01.IMG.gz",
+            "falseColor": false,
+            "science": {
+              "kind": "terrestrial-mosaic",
+              "id": "radar",
+              "consumer": "radar",
+              "format": "pds3-byte-equirectangular",
+              "metadata": {
+                "label": "Radar",
+                "falseColor": false,
+                "coverage": "Observed SAR and HiSAR swaths only; gray grid marks exact source no-data.",
+                "projection": {
+                  "type": "Equirectangular",
+                  "longitudeDirection": "east",
+                  "latitudeType": "planetocentric",
+                  "referenceRadiusMeters": 2575000
+                },
+                "interpretation": "Incidence-normalized Ku-band backscatter. Brightness reflects roughness, slopes and material properties; globe lighting is approximate."
+              }
+            }
+          },
+          {
+            "id": "topography",
+            "output": "titan-{id}{suffix}.webp",
+            "thumbnail": "titan-lens-{id}.webp",
+            "source": "science/b2-intake/GTFED00N090_T126_V01.IMG.gz",
+            "falseColor": true,
+            "science": {
+              "kind": "terrestrial-scientific",
               "id": "topography",
               "label": "Measured height",
               "format": "pds3-float-map",
@@ -111,8 +159,16 @@
                 }
               ],
               "displaySampling": "nearest"
-            },
-            {
+            }
+          },
+          {
+            "id": "interpolated",
+            "output": "titan-{id}{suffix}.webp",
+            "thumbnail": "titan-lens-{id}.webp",
+            "source": "science/b2-intake/GTIED00N090_T126_V01.IMG.gz",
+            "falseColor": true,
+            "science": {
+              "kind": "terrestrial-scientific",
               "id": "interpolated",
               "label": "Interpolated height",
               "format": "pds3-float-map",
@@ -181,8 +237,16 @@
                 }
               ],
               "displaySampling": "nearest"
-            },
-            {
+            }
+          },
+          {
+            "id": "coverage-distance",
+            "output": "titan-{id}{suffix}.webp",
+            "thumbnail": "titan-lens-{id}.webp",
+            "source": "science/b2-intake/GTDED00N090_T126_V01.IMG.gz",
+            "falseColor": true,
+            "science": {
+              "kind": "terrestrial-scientific",
               "id": "coverage-distance",
               "label": "Distance to data",
               "format": "pds3-float-map",
@@ -251,8 +315,16 @@
                 }
               ],
               "displaySampling": "nearest"
-            },
-            {
+            }
+          },
+          {
+            "id": "geology",
+            "output": "titan-{id}{suffix}.webp",
+            "thumbnail": "titan-lens-{id}.webp",
+            "source": "geology/titan-geologic-units.tif",
+            "falseColor": true,
+            "science": {
+              "kind": "terrestrial-scientific",
               "id": "geology",
               "label": "Geology",
               "format": "geotiff",
@@ -323,67 +395,55 @@
                 "#ff6666"
               ]
             }
-          ],
-          "observedColors": [],
-          "mosaics": [
-            {
-              "id": "radar",
-              "consumer": "radar",
-              "format": "pds3-byte-equirectangular",
-              "metadata": {
-                "label": "Radar",
-                "falseColor": false,
-                "coverage": "Observed SAR and HiSAR swaths only; gray grid marks exact source no-data.",
-                "projection": {
-                  "type": "Equirectangular",
-                  "longitudeDirection": "east",
-                  "latitudeType": "planetocentric",
-                  "referenceRadiusMeters": 2575000
-                },
-                "interpretation": "Incidence-normalized Ku-band backscatter. Brightness reflects roughness, slopes and material properties; globe lighting is approximate."
-              }
-            }
-          ]
-        },
+          }
+        ],
         "lighting": {
           "frameSize": 512,
           "columns": 8,
-          "frameCount": 128,
-          "logicalSize": 460,
-          "terminatorWidth": 0.1,
-          "directionalAmbient": 0.05,
-          "fullPhaseAmbient": 0.35,
-          "fullPhaseDiffuse": 0.65,
-          "maximumOpacity": 0.95
-        },
-        "geometry": {
-          "radius": 230,
-          "radiusKm": 2575.5,
-          "camera": {
-            "initialScenePitchDegrees": 40,
-            "defaultControlYawDegrees": 0
-          },
-          "mapUrl": "/scenes/titan/titan-normal-surface@2x.webp",
-          "polesUrl": "/scenes/titan/titan-normal-poles@2x.webp"
-        },
-        "celestial": {
-          "sunSource": "JPL Titan orbit and VSOP87 Saturn position, with IAU/WGCCRE rotation"
-        },
-        "presentation": {
-          "defaultLens": "normal",
-          "pointColor": [
-            190,
-            160,
-            101
+          "presentationSize": 460,
+          "defaultFrame": 230,
+          "billboardFrameSize": 24,
+          "billboardColumns": 16,
+          "rowOutput": "titan-lighting-{density}x-row-{row}.webp",
+          "billboardOutput": "titan-lighting-{density}x-billboard.webp",
+          "minimumLightViewZ": -1,
+          "maximumLightViewZ": 1,
+          "frameCount": 256,
+          "shadowlessFloodLimbFloor": 0.35,
+          "ambientIntensity": 0.05,
+          "radiusScale": 0.505,
+          "terminator": [
+            0,
+            0.1
           ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "maximumAlpha": 0.95,
+          "bankSchema": "csstitan-prepared-lighting-bank@1",
+          "billboardSchema": "csstitan-prepared-lighting-billboard@1",
+          "metadata": {
+            "schema": "csstitan-prepared-lighting@1",
+            "storageModel": "prepared-full-resolution-density-row-shards",
+            "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+            "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+            "ambientIntensity": 0.05,
+            "shadowlessFloodLimbFloor": 0.35,
+            "orenNayarRoughness": 0,
+            "terminatorSmoothstep": [
+              0,
+              0.1
+            ],
+            "minimumLightViewZ": -1,
+            "maximumLightViewZ": 1,
+            "baseLightAzimuthDegrees": 0,
+            "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+            "runtimeRasterization": false
+          }
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "43c125f9645ade91773e56b14f8c96c5f9433a6c905436bcaa50c9a50a19037c",
+      "sha256": "fc03cf7c708181b9b3d29b199160edc74232bfe1bff00d22651c25b701f73a53",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -481,9 +541,9 @@
               "label": "Near-infrared",
               "description": "USGS 2026 controlled mosaic. Infrared reveals surface features through the haze. Image brightness is display-stretched; source haze, clouds, variable resolution and seams remain. Gray grid marks missing observations. Added globe lighting is approximate.",
               "title": "Controlled infrared mosaic",
-              "thumbnail": "/scenes/titan/titan-normal-thumbnail.webp",
-              "surface": "titan-normal-surface@2x.webp",
-              "poles": "titan-normal-poles@2x.webp",
+              "thumbnail": "titan-lens-normal.webp",
+              "surface": "titan-normal.webp",
+              "poles": "titan-poles-normal.webp",
               "source": {
                 "id": "usgs-cassini-iss-2026-938nm",
                 "path": "../manifest.json"
@@ -495,9 +555,9 @@
               "label": "Radar",
               "description": "Cassini RADAR Team mosaic through T126. Brightness shows radar backscatter, not visible color or elevation. Gray grid marks missing measurements. The 1.4 km archive grid is prepared at 1.98 km per equatorial texel; native observation resolution varies. Shared globe Shadows remain an approximate visualization.",
               "title": "RADAR global mosaic through T126",
-              "thumbnail": "/scenes/titan/titan-radar-thumbnail.webp",
-              "surface": "titan-radar-surface@2x.webp",
-              "poles": "titan-radar-poles@2x.webp",
+              "thumbnail": "titan-lens-radar.webp",
+              "surface": "titan-radar.webp",
+              "poles": "titan-poles-radar.webp",
               "source": {
                 "id": "cassini-radar-midr",
                 "path": "../manifest.json"
@@ -509,9 +569,9 @@
               "label": "Measured height",
               "description": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
               "title": "GTDR measured heights",
-              "thumbnail": "/scenes/titan/titan-topography-thumbnail.webp",
-              "surface": "titan-topography-surface@2x.webp",
-              "poles": "titan-topography-poles@2x.webp",
+              "thumbnail": "titan-lens-topography.webp",
+              "surface": "titan-topography.webp",
+              "poles": "titan-poles-topography.webp",
               "source": {
                 "id": "cassini-gtdr-2019-gtfed00n090_t126_v01",
                 "path": "../manifest.json"
@@ -519,8 +579,6 @@
               "legend": {
                 "kind": "scale",
                 "title": "Measured height",
-                "width": 256,
-                "height": 16,
                 "labels": [
                   "−2500",
                   "0",
@@ -528,7 +586,40 @@
                 ],
                 "meta": "m",
                 "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
-                "image": "/scenes/titan/titan-topography-legend.webp"
+                "recipe": {
+                  "palette": [
+                    [
+                      33,
+                      102,
+                      172
+                    ],
+                    [
+                      146,
+                      197,
+                      222
+                    ],
+                    [
+                      247,
+                      247,
+                      247
+                    ],
+                    [
+                      244,
+                      165,
+                      130
+                    ],
+                    [
+                      179,
+                      88,
+                      6
+                    ]
+                  ],
+                  "labels": [
+                    "−2500",
+                    "0",
+                    "+2500"
+                  ]
+                }
               }
             },
             {
@@ -536,9 +627,9 @@
               "label": "Interpolated height",
               "description": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere.",
               "title": "GTDR interpolated topography",
-              "thumbnail": "/scenes/titan/titan-interpolated-thumbnail.webp",
-              "surface": "titan-interpolated-surface@2x.webp",
-              "poles": "titan-interpolated-poles@2x.webp",
+              "thumbnail": "titan-lens-interpolated.webp",
+              "surface": "titan-interpolated.webp",
+              "poles": "titan-poles-interpolated.webp",
               "source": {
                 "id": "cassini-gtdr-2019-gtied00n090_t126_v01",
                 "path": "../manifest.json"
@@ -546,8 +637,6 @@
               "legend": {
                 "kind": "scale",
                 "title": "Interpolated height",
-                "width": 256,
-                "height": 16,
                 "labels": [
                   "−2500",
                   "0",
@@ -555,7 +644,40 @@
                 ],
                 "meta": "m",
                 "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
-                "image": "/scenes/titan/titan-interpolated-legend.webp"
+                "recipe": {
+                  "palette": [
+                    [
+                      33,
+                      102,
+                      172
+                    ],
+                    [
+                      146,
+                      197,
+                      222
+                    ],
+                    [
+                      247,
+                      247,
+                      247
+                    ],
+                    [
+                      244,
+                      165,
+                      130
+                    ],
+                    [
+                      179,
+                      88,
+                      6
+                    ]
+                  ],
+                  "labels": [
+                    "−2500",
+                    "0",
+                    "+2500"
+                  ]
+                }
               }
             },
             {
@@ -563,9 +685,9 @@
               "label": "Distance to data",
               "description": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
               "title": "GTDR distance to measurements",
-              "thumbnail": "/scenes/titan/titan-coverage-distance-thumbnail.webp",
-              "surface": "titan-coverage-distance-surface@2x.webp",
-              "poles": "titan-coverage-distance-poles@2x.webp",
+              "thumbnail": "titan-lens-coverage-distance.webp",
+              "surface": "titan-coverage-distance.webp",
+              "poles": "titan-poles-coverage-distance.webp",
               "source": {
                 "id": "cassini-gtdr-2019-gtded00n090_t126_v01",
                 "path": "../manifest.json"
@@ -573,8 +695,6 @@
               "legend": {
                 "kind": "scale",
                 "title": "Distance to data",
-                "width": 256,
-                "height": 16,
                 "labels": [
                   "0",
                   "500",
@@ -582,7 +702,40 @@
                 ],
                 "meta": "km",
                 "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
-                "image": "/scenes/titan/titan-coverage-distance-legend.webp"
+                "recipe": {
+                  "palette": [
+                    [
+                      37,
+                      52,
+                      148
+                    ],
+                    [
+                      44,
+                      127,
+                      184
+                    ],
+                    [
+                      127,
+                      205,
+                      187
+                    ],
+                    [
+                      237,
+                      248,
+                      177
+                    ],
+                    [
+                      255,
+                      255,
+                      217
+                    ]
+                  ],
+                  "labels": [
+                    "0",
+                    "500",
+                    "1000"
+                  ]
+                }
               }
             },
             {
@@ -591,9 +744,9 @@
               "description": "Six interpreted terrain classes from Cassini radar and infrared mapping: plains, dunes, hummocky terrain, lakes and basins, labyrinth terrain, and craters. Dataset correlations extend the interpretation beyond direct radar coverage. Colors identify terrains; they do not show visible color, liquid depth or age. Gray grid preserves small gaps and conflicting polygons.",
               "summary": "Explore Titan’s dunes, plains, highlands and lake basins in the global Cassini interpretation.",
               "title": "Cassini global geomorphology · Lopes et al. (2020)",
-              "thumbnail": "/scenes/titan/titan-geology-thumbnail.webp",
-              "surface": "titan-geology-surface@2x.webp",
-              "poles": "titan-geology-poles@2x.webp",
+              "thumbnail": "titan-lens-geology.webp",
+              "surface": "titan-geology.webp",
+              "poles": "titan-poles-geology.webp",
               "source": {
                 "id": "titan-global-geomorphology-grid",
                 "path": "../manifest.json",
@@ -659,8 +812,8 @@
             },
             {
               "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
+              "name": "stars",
+              "label": "Stars",
               "checked": true
             }
           ]
@@ -858,6 +1011,62 @@
         ],
         "path": "observations/titan-iss-2026.png",
         "url": "https://www.sciencebase.gov/catalog/file/get/68a5107ad4be02198e361c35?f=__disk__40%2Ffc%2F6b%2F40fc6b3d12f9356149245c46522fc4aca6cb9d5f"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "cassini-radar-midr-090",
+      "path": "radar/MIBEF00N090_T126S00_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz",
+      "credit": "NASA/JPL-Caltech/ASI; Cassini RADAR Team; USGS R. L. Kirk",
+      "license": "Public NASA mission data",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/citation/policy.shtml"
+      ],
+      "acquisition": "Download the original gzip PDS3 MIDR image; preparation reads its attached label.",
+      "redistribution": "Prepared observation derivatives retain NASA/JPL-Caltech/ASI and USGS credits.",
+      "width": 5760,
+      "height": 5760,
+      "projection": {
+        "type": "Equirectangular",
+        "referenceRadiusMeters": 2575000,
+        "longitudeDirection": "west",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "SAR and HiSAR through T126. MISSING_CONSTANT=0 in the attached PDS3 label; valid dark observations start at 1.",
+      "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-titan-cassini-radar-midr-090",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
+      "sha256": "23adb939bf8076fae0fcdf98a7c910fcebe36ffd066cfb3c48cdb0324a8bd770",
+      "bytes": 21088532,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "radar/MIBEF00N090_T126S00_V01.IMG.gz",
+        "url": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz"
       },
       "verificationOperations": []
     },
@@ -1286,132 +1495,20 @@
       "verificationOperations": []
     },
     {
-      "kind": "source-input",
-      "id": "cassini-radar-midr-090",
-      "path": "radar/MIBEF00N090_T126S00_V01.IMG.gz",
-      "origin": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz",
-      "credit": "NASA/JPL-Caltech/ASI; Cassini RADAR Team; USGS R. L. Kirk",
-      "license": "Public NASA mission data",
-      "licenseEvidence": [
-        "https://pds.nasa.gov/citation/policy.shtml"
-      ],
-      "acquisition": "Download the original gzip PDS3 MIDR image; preparation reads its attached label.",
-      "redistribution": "Prepared observation derivatives retain NASA/JPL-Caltech/ASI and USGS credits.",
-      "width": 5760,
-      "height": 5760,
-      "projection": {
-        "type": "Equirectangular",
-        "referenceRadiusMeters": 2575000,
-        "longitudeDirection": "west",
-        "latitudeType": "planetocentric"
-      },
-      "coverage": "SAR and HiSAR through T126. MISSING_CONSTANT=0 in the attached PDS3 label; valid dark observations start at 1.",
-      "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-titan-cassini-radar-midr-090",
-            "role": "material",
-            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
-          }
-        ]
-      },
-      "sha256": "23adb939bf8076fae0fcdf98a7c910fcebe36ffd066cfb3c48cdb0324a8bd770",
-      "bytes": 21088532,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "radar/MIBEF00N090_T126S00_V01.IMG.gz",
-        "url": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "cassini-radar-midr-270",
-      "path": "radar/MIBEF00N270_T126S00_V01.IMG.gz",
-      "origin": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz",
-      "credit": "NASA/JPL-Caltech/ASI; Cassini RADAR Team; USGS R. L. Kirk",
-      "license": "Public NASA mission data",
-      "licenseEvidence": [
-        "https://pds.nasa.gov/citation/policy.shtml"
-      ],
-      "acquisition": "Download the original gzip PDS3 MIDR image; preparation reads its attached label.",
-      "redistribution": "Prepared observation derivatives retain NASA/JPL-Caltech/ASI and USGS credits.",
-      "width": 5760,
-      "height": 5760,
-      "projection": {
-        "type": "Equirectangular",
-        "referenceRadiusMeters": 2575000,
-        "longitudeDirection": "west",
-        "latitudeType": "planetocentric"
-      },
-      "coverage": "SAR and HiSAR through T126. MISSING_CONSTANT=0 in the attached PDS3 label; valid dark observations start at 1.",
-      "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-titan-cassini-radar-midr-270",
-            "role": "material",
-            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
-          }
-        ]
-      },
-      "sha256": "d10b9a8b48a7a7c9045b54986412caf03d84319649a436aaefb46c71f8ca2cc6",
-      "bytes": 21369517,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "radar/MIBEF00N270_T126S00_V01.IMG.gz",
-        "url": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz"
-      },
-      "verificationOperations": []
-    },
-    {
+      "kind": "authored-content",
+      "id": "titan-object-content",
       "path": "content/object.json",
+      "origin": "Repository-authored Titan object recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored page text, factsheet, view descriptions and legends."
       },
-      "id": "authored-document:content/object.json",
-      "kind": "authored-content",
-      "origin": "object:source/content/object.json",
-      "title": "content/object.json",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored, pinned object-package document.",
-      "upstreamLineage": "not-recorded",
-      "sha256": "43c125f9645ade91773e56b14f8c96c5f9433a6c905436bcaa50c9a50a19037c",
-      "bytes": 14736,
+      "sha256": "fc03cf7c708181b9b3d29b199160edc74232bfe1bff00d22651c25b701f73a53",
+      "bytes": 16133,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1495,10 +1592,10 @@
     {
       "id": "normal",
       "label": "Near infrared",
-      "recipe": "terrestrial",
-      "selector": "/raster/observations/0",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
         "USGS 2026 controlled mosaic. Infrared reveals surface features through the haze. Image brightness is display-stretched; source haze, clouds, variable resolution and seams remain. Gray grid marks missing observations. Added globe lighting is approximate."
       ],
@@ -1506,248 +1603,43 @@
         "normal"
       ],
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "interpretation": {
-        "validity": {
-          "kind": "image-monochrome-no-data",
-          "noData": 0,
-          "centerLongitude": 180
-        }
+        "falseColor": false
       },
       "inputs": [
         "usgs-cassini-iss-2026-938nm"
       ],
       "outputs": [
         {
-          "url": "/scenes/titan/titan-normal-thumbnail.webp",
-          "bytes": 3350,
-          "sha256": "b5ca1c63585418f45d7c2885cf8403bb378af9f1a957f8e325cbca06d4670a4d",
+          "url": "/scenes/titan/titan-normal.webp",
+          "bytes": 958590,
+          "sha256": "0b83619ef97af44517462d56235ec2bf55ec812c113ced5e95f7199f35fa1184",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/titan/titan-normal-surface@2x.webp",
-          "bytes": 3697816,
-          "sha256": "48ee934a5939311625fb8c6823d2ca0a51968a3f32fcceaa0570b5cac7f9a8e7",
+          "url": "/scenes/titan/titan-normal@2x.webp",
+          "bytes": 3477388,
+          "sha256": "0b22e5f53ac8ff0f293460bba1a5eebe795690796cf7983b87bb076b942c8655",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/titan/titan-normal-poles@2x.webp",
-          "bytes": 131418,
-          "sha256": "58bde3bf90508c1101990cc7a01316c6b4eedb63faf75e7d776fefd7c8bcaf39",
-          "verification": "asset-manifest-pin"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "topography",
-      "label": "Measured height",
-      "recipe": "terrestrial",
-      "selector": "/raster/scientific/0",
-      "parents": [],
-      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere."
-      ],
-      "lensIds": [
-        "topography"
-      ],
-      "recipeDependencies": [
-        "terrestrial"
-      ],
-      "interpretation": {
-        "kind": "scientific",
-        "qualification": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere."
-      },
-      "inputs": [
-        "cassini-gtdr-2019-gtfed00n090_t126_v01",
-        "cassini-gtdr-2019-gtfed00n270_t126_v01",
-        "cassini-gtdr-2019-gtied00n090_t126_v01",
-        "cassini-gtdr-2019-gtied00n270_t126_v01",
-        "cassini-gtdr-2019-gtded00n090_t126_v01",
-        "cassini-gtdr-2019-gtded00n270_t126_v01"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/titan/titan-topography-thumbnail.webp",
-          "bytes": 976,
-          "sha256": "d9ec8bcb3d8b4e03fec330baa7b1a4ef86e82214397e2636de5a560c5584f8e3",
+          "url": "/scenes/titan/titan-lens-normal.webp",
+          "bytes": 1060,
+          "sha256": "4e9c0e25bfd152607e19a9b4c54eb0e4e8decdcdd841f1da5bbc43810cbba335",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/titan/titan-topography-legend.webp",
-          "bytes": 240,
-          "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
+          "url": "/scenes/titan/titan-poles-normal.webp",
+          "bytes": 49282,
+          "sha256": "8df87aa252c210f9de3865c5aaabcf56452fd105bf70bd5fc43eb811729d6119",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/titan/titan-topography-surface@2x.webp",
-          "bytes": 1026758,
-          "sha256": "bd4593a4e39fd462e87bb62800895bd43c7dd124c0931945d6c5f3ddf42944f8",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/titan/titan-topography-poles@2x.webp",
-          "bytes": 146774,
-          "sha256": "bc4dc60eb638fa675050cd554a0defc11f3f184bbef3bebd5c61ecd034cc9658",
-          "verification": "asset-manifest-pin"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "interpolated",
-      "label": "Interpolated height",
-      "recipe": "terrestrial",
-      "selector": "/raster/scientific/1",
-      "parents": [],
-      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere."
-      ],
-      "lensIds": [
-        "interpolated"
-      ],
-      "recipeDependencies": [
-        "terrestrial"
-      ],
-      "interpretation": {
-        "kind": "scientific",
-        "qualification": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere."
-      },
-      "inputs": [
-        "cassini-gtdr-2019-gtied00n090_t126_v01",
-        "cassini-gtdr-2019-gtied00n270_t126_v01",
-        "cassini-gtdr-2019-gtded00n090_t126_v01",
-        "cassini-gtdr-2019-gtded00n270_t126_v01",
-        "cassini-gtdr-2019-gtfed00n090_t126_v01",
-        "cassini-gtdr-2019-gtfed00n270_t126_v01"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/titan/titan-interpolated-thumbnail.webp",
-          "bytes": 4142,
-          "sha256": "b0d2ac9fc90349eb08ec41e08694c61143a55e7944a8ce958fad962d8dd5b44e",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/titan/titan-interpolated-legend.webp",
-          "bytes": 240,
-          "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/titan/titan-interpolated-surface@2x.webp",
-          "bytes": 3126600,
-          "sha256": "0f82f3c5bd1a75c7237b919e66fc35e0433f441539f31958b6400c83eebe1860",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/titan/titan-interpolated-poles@2x.webp",
-          "bytes": 348004,
-          "sha256": "7c5454efbf874194a81f27e4c4452f537893df64878149e9da84a14cdf3e4e9e",
-          "verification": "asset-manifest-pin"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "coverage-distance",
-      "label": "Distance to data",
-      "recipe": "terrestrial",
-      "selector": "/raster/scientific/2",
-      "parents": [],
-      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero."
-      ],
-      "lensIds": [
-        "coverage-distance"
-      ],
-      "recipeDependencies": [
-        "terrestrial"
-      ],
-      "interpretation": {
-        "kind": "scientific",
-        "qualification": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero."
-      },
-      "inputs": [
-        "cassini-gtdr-2019-gtded00n090_t126_v01",
-        "cassini-gtdr-2019-gtded00n270_t126_v01",
-        "cassini-gtdr-2019-gtied00n090_t126_v01",
-        "cassini-gtdr-2019-gtied00n270_t126_v01",
-        "cassini-gtdr-2019-gtfed00n090_t126_v01",
-        "cassini-gtdr-2019-gtfed00n270_t126_v01"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/titan/titan-coverage-distance-thumbnail.webp",
-          "bytes": 6046,
-          "sha256": "03b8f86dce22c5c3f9c35b48c6ed30b9b59532db07b0ca6b6c037cd1bf90bffe",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/titan/titan-coverage-distance-legend.webp",
-          "bytes": 210,
-          "sha256": "b2cc45c008b3baecb631091dc59b6f57df3e0c5d6852754337ff1cb0aba6a5ee",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/titan/titan-coverage-distance-surface@2x.webp",
-          "bytes": 3707608,
-          "sha256": "d33c99869f88bc7bd40b84114f286ea75f3bb1a2c393db48c56dd0bf479b3682",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/titan/titan-coverage-distance-poles@2x.webp",
-          "bytes": 232152,
-          "sha256": "6a3f9d35e9fba589141de8a1e3e890994b9bfbd80c95091292a857299715b455",
-          "verification": "asset-manifest-pin"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "geology",
-      "label": "Geology",
-      "recipe": "terrestrial",
-      "selector": "/raster/scientific/3",
-      "parents": [],
-      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Six interpreted terrain classes from Cassini radar and infrared mapping: plains, dunes, hummocky terrain, lakes and basins, labyrinth terrain, and craters. Dataset correlations extend the interpretation beyond direct radar coverage. Colors identify terrains; they do not show visible color, liquid depth or age. Gray grid preserves small gaps and conflicting polygons."
-      ],
-      "lensIds": [
-        "geology"
-      ],
-      "recipeDependencies": [
-        "terrestrial"
-      ],
-      "interpretation": {
-        "kind": "scientific",
-        "qualification": "Cassini global geomorphology · Lopes et al. (2020)"
-      },
-      "inputs": [
-        "titan-global-geomorphology-grid"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/titan/titan-geology-thumbnail.webp",
-          "bytes": 790,
-          "sha256": "6572f71554e0b7acbc4fc52d3210acc6ccff400af619178926ef436e1cbed7f5",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/titan/titan-geology-surface@2x.webp",
-          "bytes": 107002,
-          "sha256": "ddd22fd59853e2694d28d248578d9e5943882f0e1265957b251abdb33bae1dae",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/titan/titan-geology-poles@2x.webp",
-          "bytes": 7042,
-          "sha256": "bd1eda644cb6ca4017b3a078458247c0864f79a75bf7c39f3184507357b82bfa",
+          "url": "/scenes/titan/titan-poles-normal@2x.webp",
+          "bytes": 171240,
+          "sha256": "cb250f80fc9e6285b0666d0b87a5a94c58976ceb34a96a34623ff66d95bcd869",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -1756,10 +1648,10 @@
     {
       "id": "radar",
       "label": "Radar",
-      "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "recipe": "raster",
+      "selector": "/surfaces/1",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
         "Cassini RADAR Team mosaic through T126. Brightness shows radar backscatter, not visible color or elevation. Gray grid marks missing measurements. The 1.4 km archive grid is prepared at 1.98 km per equatorial texel; native observation resolution varies. Shared globe Shadows remain an approximate visualization."
       ],
@@ -1767,36 +1659,690 @@
         "radar"
       ],
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "falseColor": false
       },
       "inputs": [
-        "cassini-radar-midr-090",
-        "cassini-radar-midr-270"
+        "cassini-radar-midr-090"
       ],
       "outputs": [
         {
-          "url": "/scenes/titan/titan-radar-thumbnail.webp",
-          "bytes": 4840,
-          "sha256": "1724a27e59d4503297fb48fc081d249518d1bffdc93c3c1c84e993be15b48f0f",
+          "url": "/scenes/titan/titan-radar.webp",
+          "bytes": 3256744,
+          "sha256": "556bc3b13ff720ccfb4c0900ccaf8bbe43559fc819413da8830ebfead77e1628",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/titan/titan-radar-surface@2x.webp",
-          "bytes": 12715084,
-          "sha256": "4f3c472ed60fb71a7da3e28ebf59b694ca32a9966d3198cb8ae266d20b45ef4d",
+          "url": "/scenes/titan/titan-radar@2x.webp",
+          "bytes": 13254156,
+          "sha256": "fe7cd89a697af4edfaefebe12907cc7f6db381bf1530f26c44de0d1e29ba74f0",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/titan/titan-radar-poles@2x.webp",
-          "bytes": 533952,
-          "sha256": "2a2b28c423272d1436f49d445e0e0c39209fbd4c31f925f3da6bb8809ddbb5f3",
+          "url": "/scenes/titan/titan-lens-radar.webp",
+          "bytes": 1572,
+          "sha256": "b7f18cea26c004b33e8a5949fef2873cef0a2ce7a685e0855ecd9e7920eca589",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-poles-radar.webp",
+          "bytes": 74746,
+          "sha256": "c1bfd79eef57d7e7b4be2ea20eacd857ff9338f43f056986e08f606662f07f72",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-poles-radar@2x.webp",
+          "bytes": 286340,
+          "sha256": "f71a2d97094ae55c9c28bfa8910a0385c864dc517c3aa2e0f78ca6520b985855",
           "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "topography",
+      "label": "Measured height",
+      "recipe": "raster",
+      "selector": "/surfaces/2",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere."
+      ],
+      "lensIds": [
+        "topography"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true
+      },
+      "inputs": [
+        "cassini-gtdr-2019-gtfed00n090_t126_v01",
+        "cassini-gtdr-2019-gtfed00n270_t126_v01"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/titan/titan-topography.webp",
+          "bytes": 719210,
+          "sha256": "641ed4f4d2cc5fb607f2dc9df582e31e29341e948ea5797aa4b7f6d73376f637",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-topography@2x.webp",
+          "bytes": 935566,
+          "sha256": "967933b9a5361088458b98aae2816b3b95370ed6ba17a99064aadc25315ae9f9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lens-topography.webp",
+          "bytes": 832,
+          "sha256": "829b0dc4a86440fbc84bc89aca71619dbbb4fba6970fd1387ae1361e6b5fa2ec",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-poles-topography.webp",
+          "bytes": 17168,
+          "sha256": "538750b29d73ffb94606cd5f748129cc0b044f3e4a80229e9f2882e9b09adf0d",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-poles-topography@2x.webp",
+          "bytes": 66374,
+          "sha256": "67ae1c5bad15c442362428bbbe8b3b243040fbcbfb6049887e804b772dd81123",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "interpolated",
+      "label": "Interpolated height",
+      "recipe": "raster",
+      "selector": "/surfaces/3",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere."
+      ],
+      "lensIds": [
+        "interpolated"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true
+      },
+      "inputs": [
+        "cassini-gtdr-2019-gtied00n090_t126_v01",
+        "cassini-gtdr-2019-gtied00n270_t126_v01"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/titan/titan-interpolated.webp",
+          "bytes": 2066546,
+          "sha256": "bdcfe42804d23e08ffebfd5761d05e135536a76cfa20c79394a158ceb9c6c7a9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-interpolated@2x.webp",
+          "bytes": 2586200,
+          "sha256": "83ef20208fce6b9cd16f5d9641bbbda18007243d4731de72bcee5f0241a0489b",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lens-interpolated.webp",
+          "bytes": 3154,
+          "sha256": "69bca0e7fba303cef688facd7278fcd3c7a810587213f40bde18433d91f6f881",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-poles-interpolated.webp",
+          "bytes": 44416,
+          "sha256": "84062aa9cc3a67e52f220b10f1ce644da97e556be2d5112496c784eaaa2cd384",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-poles-interpolated@2x.webp",
+          "bytes": 118052,
+          "sha256": "bdfd3d10e1eb0c67b5320383940fb1c28f2a449e5b17d33146cbd4550a753a47",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "coverage-distance",
+      "label": "Distance to data",
+      "recipe": "raster",
+      "selector": "/surfaces/4",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero."
+      ],
+      "lensIds": [
+        "coverage-distance"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true
+      },
+      "inputs": [
+        "cassini-gtdr-2019-gtded00n090_t126_v01",
+        "cassini-gtdr-2019-gtded00n270_t126_v01"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/titan/titan-coverage-distance.webp",
+          "bytes": 2085294,
+          "sha256": "c9ed0a4c8490c5d783e69804f67196e536d27d2f4f65c8a987cc18d271b93ef5",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-coverage-distance@2x.webp",
+          "bytes": 2782608,
+          "sha256": "94fdd4f83358cde0861646f6644b65685f4b16c8e4e99f739f7ae6ed831bcbde",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lens-coverage-distance.webp",
+          "bytes": 3370,
+          "sha256": "a686a72884a53b603c1895ed0fb56c9e545fbf58cec368f3cd81ee460cc26e47",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-poles-coverage-distance.webp",
+          "bytes": 34416,
+          "sha256": "c2ed9cf6a1af8c28f2a531833536b7b1f93d388c3400c52668ebd04e7176e743",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-poles-coverage-distance@2x.webp",
+          "bytes": 89272,
+          "sha256": "a0ffe240da5de811a844574cfabd69b53eaf299675aed6a4bce7d154507dfef7",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "geology",
+      "label": "Geology",
+      "recipe": "raster",
+      "selector": "/surfaces/5",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "Six interpreted terrain classes from Cassini radar and infrared mapping: plains, dunes, hummocky terrain, lakes and basins, labyrinth terrain, and craters. Dataset correlations extend the interpretation beyond direct radar coverage. Colors identify terrains; they do not show visible color, liquid depth or age. Gray grid preserves small gaps and conflicting polygons."
+      ],
+      "lensIds": [
+        "geology"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true
+      },
+      "inputs": [
+        "titan-global-geomorphology-grid"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/titan/titan-geology.webp",
+          "bytes": 175700,
+          "sha256": "dc3a66d1cb34960e87c576795c3448a33df59e11776d8a05963e16893fafb008",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-geology@2x.webp",
+          "bytes": 208544,
+          "sha256": "d069dfb5f8c1135e05e26dcbeafe498dee5822eb59c2640477d640865c576b4b",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lens-geology.webp",
+          "bytes": 658,
+          "sha256": "3778e00814ea5d17fd8a7a9d20efdf5d3061c291dc7494cfde40086a564a1a6e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-poles-geology.webp",
+          "bytes": 6980,
+          "sha256": "a65d8df9d7afdfd373d40616d137605af03ba768e6eff6aba07fbcb498ed6f7d",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-poles-geology@2x.webp",
+          "bytes": 16728,
+          "sha256": "2cdabb1e7d2355b546e0cf0258b061957b7c729f33a1d13f4f09117126dc2442",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "lighting",
+      "label": "lighting",
+      "recipe": "raster",
+      "selector": "/lighting",
+      "parents": [],
+      "process": "Evaluate the declared surface-lighting model into phase banks.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "kind": "rendering-model"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "url": "/scenes/titan/titan-lighting-1x-billboard.webp",
+          "bytes": 40826,
+          "sha256": "d5afd022eccb5ca3f7d03aecaf43d97bac06b3cf4378ee32bcabde5736ce8608",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-00.webp",
+          "bytes": 14922,
+          "sha256": "4ca06eb5cb7ee649c468604e7a6ad66127b7ae7d53d4b687c293fd277e932874",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-01.webp",
+          "bytes": 27532,
+          "sha256": "a4f51f9ffa31e80bb651eeeeb102f0dfe8e06db2811393260ca739f6c97c88d7",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-02.webp",
+          "bytes": 34558,
+          "sha256": "8a64a7ab3f92017dcc3beb3642c20331131234e5147af2df79e0a1c59015802e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-03.webp",
+          "bytes": 40648,
+          "sha256": "cb30a655aec4439c256b4233b9310b5b2437a5072d5381b7452a1799552d22b7",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-04.webp",
+          "bytes": 45092,
+          "sha256": "72e02f2f08b9bc290d6afbd06237fa8f7d3287a7aa7fa41d4871862aa2dc28ef",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-05.webp",
+          "bytes": 49044,
+          "sha256": "2c1a6e8c58b6d490313fd050a1b59c8545b06765082a6df44b153c7b7852b87b",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-06.webp",
+          "bytes": 52968,
+          "sha256": "3a63e0850d915ff4b2af1c642ff659f2f22cba88e14886135e2a15b06e6b7911",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-07.webp",
+          "bytes": 56198,
+          "sha256": "fa55950da032cece57a101406113fdc9ee7c83adc47feecf6011d1d817412193",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-08.webp",
+          "bytes": 59392,
+          "sha256": "a771538491ff5738da4841937108fccaeb197784ed9fbd45c261a229711b357d",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-09.webp",
+          "bytes": 61906,
+          "sha256": "982edea82c81c59427fec1e33b93c5e446c2164e5173c119e99f1cf2d3214653",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-10.webp",
+          "bytes": 62672,
+          "sha256": "03a295b2c895d7582cc31b79b85cfcb91c7d31f049124f9d21bb09bbeb8599f6",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-11.webp",
+          "bytes": 61062,
+          "sha256": "9c13ab791a488f4d1b7d8089410ecb5a53872a484cb0bba6245b4aaf9abc52b2",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-12.webp",
+          "bytes": 59454,
+          "sha256": "337dde459f14ccd5878aed9313c0c2cda7892a5679ca8cf44b262c66e28f1a46",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-13.webp",
+          "bytes": 52762,
+          "sha256": "820c4e14882c9942374378fa77135553a541806dd0ca93a73b5fd96dbb47b2dd",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-14.webp",
+          "bytes": 42196,
+          "sha256": "975b1c3c1809afb9e91b7dbd251ef16be5444d373d9e97643df3df992da15957",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-15.webp",
+          "bytes": 23242,
+          "sha256": "225fc2a90a34aafe74bc343c605f65e3e419da8bd70d9e309bbd2a9a27030009",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-16.webp",
+          "bytes": 28714,
+          "sha256": "a963ed733360af10da40ba94a81dd0b0cbf5bf620fe927aa0b130e5dde546b85",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-17.webp",
+          "bytes": 52870,
+          "sha256": "1dc0304a2c686f0fa0b221f5a619de5f780346ad7964df05e6bb77b6970f7b35",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-18.webp",
+          "bytes": 65644,
+          "sha256": "bfb746fa624b9994c78a28696f82cf9466e9245611208a3329bb4cbd6e782520",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-19.webp",
+          "bytes": 76630,
+          "sha256": "a13a9a62b069b3d0c6df11b6a581b48bfb59b81209a60f6932e04021aa15dc3d",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-20.webp",
+          "bytes": 85368,
+          "sha256": "098f39e8feaf5730286970b145a26c4d14f8572f56ea4147654ae5e6c47449ef",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-21.webp",
+          "bytes": 93744,
+          "sha256": "481146af42921688b6b7df4abc9a8c26bf3025ff66445e04e14ac639bdaa898a",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-22.webp",
+          "bytes": 99970,
+          "sha256": "380e210d04989c5dd12aa61dd2840e4ddc5953ca5477a6310112d1105a4929d1",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-23.webp",
+          "bytes": 107422,
+          "sha256": "ff0e1dd7c3ccc79b5711ac6798ea4f3544f662957886741d7f7483a05c5ed05f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-24.webp",
+          "bytes": 112788,
+          "sha256": "2a32c4146a4ac3a59ee0a9a4dced1e65294f3927b9f44f51a07ba54d607939e1",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-25.webp",
+          "bytes": 122328,
+          "sha256": "de08da9f53565707dab0aba3b62eb85bc4f1ff8fdb35b864fea7de2364034a75",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-26.webp",
+          "bytes": 130124,
+          "sha256": "21932a1e7a096edadcc1e2db43a72830533febb4e3ad6736c13c3ff21cb40346",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-27.webp",
+          "bytes": 137048,
+          "sha256": "3e4f6148e58885b0a2a1c9698bddb6e3ddbbaf2e21d36dcfaea6535d810a260e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-28.webp",
+          "bytes": 148122,
+          "sha256": "c076ee045f18ce285c00b62466a3b3d69a58401c774b6da41d278f7fd0fa30ae",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-29.webp",
+          "bytes": 157328,
+          "sha256": "b71a7728343b3787367084c545db3c75ace893d03c2de5573f94d4c5b3c9de66",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-30.webp",
+          "bytes": 167218,
+          "sha256": "a4fd0b6e52d657614777c5af19586e279afda7de3d6afe578811e84afe615be4",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-1x-row-31.webp",
+          "bytes": 182238,
+          "sha256": "4dc4d8bcf1832f28af5af706a5f48427b104cf4aef23f56a7f181420ca60db0e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-billboard.webp",
+          "bytes": 115740,
+          "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-00.webp",
+          "bytes": 37672,
+          "sha256": "ec6ee915f55a668fc95dacfef1499a42bd118a4aac16f3777b66e819ee31e2f2",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-01.webp",
+          "bytes": 70898,
+          "sha256": "e4b9d197c7d62aecdae0144b33895e7f55dd005c84a96ca6409b0f5869700fbc",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-02.webp",
+          "bytes": 92030,
+          "sha256": "5c752b1be40564aaba7d9ccadc0edba838ecaf4cc8fe5794efe58b404d4f6556",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-03.webp",
+          "bytes": 106840,
+          "sha256": "11824e8fda78b665117d9d40d63495cb36f768377d768b62c383a369ed40758c",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-04.webp",
+          "bytes": 120584,
+          "sha256": "55b22230f6aef465a46c3a66b00ab246dc223b080ca3d97412e2667f37deb66f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-05.webp",
+          "bytes": 132094,
+          "sha256": "a4cb1a4c54322a74ec9bcecd3b0ed4bb5ef9773db946a3a8d7aed8ef33f34d20",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-06.webp",
+          "bytes": 143228,
+          "sha256": "2586ccfe25f6bbd21d438a5b97551031e9a7b9b6d87f04872aacfc6ffe6cb39c",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-07.webp",
+          "bytes": 153142,
+          "sha256": "65482bb8de64f684ee6587ccc0f7ed0e7f0b3a6494b1dfa6510ed8c9dff79632",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-08.webp",
+          "bytes": 163984,
+          "sha256": "0f13d5d4cf8a8591660f47e32deae93a3006e18b3aa10bc4b96942beadc14600",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-09.webp",
+          "bytes": 172632,
+          "sha256": "b3bdd0776903940bc8c77ce34918ff6a6a0638dfe47ebb1896a3d2050f3ab1a3",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-10.webp",
+          "bytes": 177128,
+          "sha256": "1ad6e95b79025596c3ae11e928658923be4408dbd611f58e22475436812594e2",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-11.webp",
+          "bytes": 179144,
+          "sha256": "4920b80933238f45a83133c2c04c73b9f37f9bfefdf16afca4a1e1af9edcfbab",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-12.webp",
+          "bytes": 173518,
+          "sha256": "c1e8fb56dbb734572cfcace301f7b373cb03743d4245cfad6f3059451d43e3af",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-13.webp",
+          "bytes": 161150,
+          "sha256": "47d37733690f0de2136da2515f561e7f1cb520e5c9eaf8c38e06944ef0b25f91",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-14.webp",
+          "bytes": 132038,
+          "sha256": "07b759240df293f70fba1d761088cbff06844fdbc0cfbb4f50bde670b60ad583",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-15.webp",
+          "bytes": 69930,
+          "sha256": "2990c3e0953a66fbc2f1f7fff4006abbc014742c34d6ccc6f58e1f69750e8bac",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-16.webp",
+          "bytes": 74522,
+          "sha256": "4cd554323a5b4c4d7d302fd75f077ee0829bd995f69028cdeed09cb71430a95d",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-17.webp",
+          "bytes": 143520,
+          "sha256": "2ecca046c7a3ccfc32431f93ca3bfc1da1eed02c8faee885a51d32103ad550d4",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-18.webp",
+          "bytes": 185628,
+          "sha256": "659839c1f5c68b28b73226c72861311cc2e223face47af04284f01c58462da9a",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-19.webp",
+          "bytes": 218252,
+          "sha256": "0032b3cb244f0ef0d03e4176f2cca51a5efc25c6dac0a928fd70073c39a27e01",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-20.webp",
+          "bytes": 245184,
+          "sha256": "dee7965558ba47853e80d02af052eb3d8d96c2cb0f9ea6ece30b8604af899ad6",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-21.webp",
+          "bytes": 269836,
+          "sha256": "160e8c89beb6880cca9d1c4c49c1d7ae8d42be1f1f1bac790bcc1ae098809f41",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-22.webp",
+          "bytes": 291326,
+          "sha256": "64714cc753f56a2a794c09926acd4f589c69ebedc97b7636576aa2e8a8391318",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-23.webp",
+          "bytes": 312110,
+          "sha256": "f1fc46cc87683bce654494f74cb30e03e7490b8fcc50c00a1acda54ce7b014f2",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-24.webp",
+          "bytes": 333302,
+          "sha256": "866d79248222db2db636fade29aa0ca9009fba80fab506c1858e0b515bc23520",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-25.webp",
+          "bytes": 355976,
+          "sha256": "ae19b305ce1eeb00a4a9318a2be187734482bcd93f2d992d236fbf813072766c",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-26.webp",
+          "bytes": 377782,
+          "sha256": "c981f9f2abc41afe63dcacee618425a422b37f88579dc7cb294919bfc03062d1",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-27.webp",
+          "bytes": 403282,
+          "sha256": "cc34f5b92eeb1ae06c753ba286c86b36e5e9b91b06ff7b1d8f8aaa124bfa56e8",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-28.webp",
+          "bytes": 429004,
+          "sha256": "e0dbc0c14c173d8ae855d6cbd9b240ce8e4b43383e01c49701f3628415b1704e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-29.webp",
+          "bytes": 456570,
+          "sha256": "2859562bb82812c38c6c6adcf748be8d5afc47ce68e6a3091255f24e489016cf",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-30.webp",
+          "bytes": 481914,
+          "sha256": "e82ae2b58ba24928ad234c6aed182dc48c900ac0c04a61509519f93562d8b2b9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-lighting-2x-row-31.webp",
+          "bytes": 526556,
+          "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "authored-recipe"
     },
     {
       "id": "content",
@@ -1811,7 +2357,7 @@
         "content"
       ],
       "inputs": [
-        "authored-document:content/object.json"
+        "titan-object-content"
       ],
       "outputs": [
         {
@@ -1850,8 +2396,8 @@
       "outputs": [
         {
           "url": "/scenes/titan/titan-features.json",
-          "bytes": 2044586,
-          "sha256": "4d8deca12005d384bfd23d77081c8848815234b16c169cba851597a68085a0f0",
+          "bytes": 2044601,
+          "sha256": "27478e7bda2da5bde6f5c20d45283a2dfc1e3793409601735bd38cc35327d14e",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -1860,10 +2406,10 @@
     {
       "id": "preview:normal",
       "label": "Near infrared preview",
-      "recipe": "terrestrial",
-      "selector": "/raster/observations/0",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "inputs": [],
       "parents": [
@@ -1875,8 +2421,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 35326,
-          "sha256": "2d838521ea96a13218193f17cbf4d81cdeb35e68b75c5f899709d6733eb0c17d",
+          "bytes": 35334,
+          "sha256": "0be02fc7774ae698454cd63779b105df81b3e4f7867ff6c1a90c2bbcc6b39304",
           "verification": "bytes-verified"
         }
       ]
@@ -1884,10 +2430,10 @@
     {
       "id": "preview:radar",
       "label": "Radar preview",
-      "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "recipe": "raster",
+      "selector": "/surfaces/1",
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "inputs": [],
       "parents": [
@@ -1899,8 +2445,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/radar.webp",
-          "bytes": 63060,
-          "sha256": "8c7f1e5df34515bca7f5f8008ed1bed0890ce5190d20091e58e15e8f707af5a8",
+          "bytes": 62860,
+          "sha256": "c292f6473e5d31b0a791917014488fa255faf69a2f4d6a2f3b73962ca0967657",
           "verification": "bytes-verified"
         }
       ]
@@ -1908,10 +2454,10 @@
     {
       "id": "preview:topography",
       "label": "Measured height preview",
-      "recipe": "terrestrial",
-      "selector": "/raster/scientific/0",
+      "recipe": "raster",
+      "selector": "/surfaces/2",
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "inputs": [],
       "parents": [
@@ -1923,8 +2469,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/topography.webp",
-          "bytes": 80772,
-          "sha256": "e42042b63b59d6dda48c6467f49dc5bbe1e980059763fc846be98442b3109eae",
+          "bytes": 28858,
+          "sha256": "021eacffa56f78c080cc7aea48d34c0208613c2e2bdbe83c8d9ec7c11516a9b0",
           "verification": "bytes-verified"
         }
       ]
@@ -1932,10 +2478,10 @@
     {
       "id": "preview:interpolated",
       "label": "Interpolated height preview",
-      "recipe": "terrestrial",
-      "selector": "/raster/scientific/1",
+      "recipe": "raster",
+      "selector": "/surfaces/3",
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "inputs": [],
       "parents": [
@@ -1947,8 +2493,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/interpolated.webp",
-          "bytes": 115488,
-          "sha256": "b703153ea1a9efbe2a8f096abe790010326146d9a7fd699903a04a62b832fd86",
+          "bytes": 98706,
+          "sha256": "75cb71124e59598dcb7b3ebee497e9162bd16f77bc674dccaee49fc1eb07b48f",
           "verification": "bytes-verified"
         }
       ]
@@ -1956,10 +2502,10 @@
     {
       "id": "preview:coverage-distance",
       "label": "Distance to data preview",
-      "recipe": "terrestrial",
-      "selector": "/raster/scientific/2",
+      "recipe": "raster",
+      "selector": "/surfaces/4",
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "inputs": [],
       "parents": [
@@ -1971,8 +2517,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/coverage-distance.webp",
-          "bytes": 124248,
-          "sha256": "62333318820929f7f7d4a46cf7d7d9d347ba894d95781424942a579ab45506c9",
+          "bytes": 113364,
+          "sha256": "c6360f58fd99398928dbdfd160e6c139e66f02bbd72c28750ab4ba42081df636",
           "verification": "bytes-verified"
         }
       ]
@@ -1980,10 +2526,10 @@
     {
       "id": "preview:geology",
       "label": "Geology preview",
-      "recipe": "terrestrial",
-      "selector": "/raster/scientific/3",
+      "recipe": "raster",
+      "selector": "/surfaces/5",
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "inputs": [],
       "parents": [
@@ -1995,8 +2541,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/geology.webp",
-          "bytes": 110490,
-          "sha256": "285673926bce187677e93b9149e27dd9168b0762a8a4eb65b33afc7bf61ab871",
+          "bytes": 17072,
+          "sha256": "6a81435b14fe109d10dab706861c714258efe7197b7c85c84771294fbbbd10c7",
           "verification": "bytes-verified"
         }
       ]

@@ -4,34 +4,52 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d1764f79b60f6008228c44e3543abadf74906afdad73cedbe8b9b2258c2fd7e0"
+    "sha256": "7e5017e5e6c69c73b7fa1d6cc1f9a89795ac094a443b7b53131209273e511714"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "867672765ca42de37db80c5aeded776c2ec7725b0441ec3ddfd619cd2cb83107"
+    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
   },
   "recipes": [
     {
-      "id": "terrestrial",
-      "path": "source/preparation/terrestrial.json",
-      "sha256": "8e8e832aefcefcab28c76a8c9c4eadb7eb31d5c8ff234a834d31967f83f73184",
+      "id": "raster",
+      "path": "source/preparation/raster.json",
+      "sha256": "25e96b1b046456eb88af3903bdf0bb4543addffedf61a1db8b0e7679171cd7c2",
       "parameters": {
-        "schema": "cssearth-terrestrial-preparation@1",
-        "kind": "solid-observation-body",
-        "namespace": "europa",
-        "displayName": "Europa",
+        "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/europa/",
-        "distanceAu": 5.2,
-        "raster": {
-          "width": 4096,
-          "height": 2048,
-          "bandCount": 16,
-          "gutter": 32,
-          "poleSize": 512,
-          "reportMissingPixels": true,
-          "observations": [
-            {
+        "sourceWidth": 4096,
+        "sourceHeight": 2048,
+        "width": 2048,
+        "height": 1024,
+        "latitudeBands": 16,
+        "polarTile": 256,
+        "densities": [
+          1,
+          2
+        ],
+        "resample": "density-before-pack",
+        "polarProjection": "orthographic-bilinear",
+        "polesCombined": false,
+        "polesOutput": "europa-poles-{id}{suffix}.webp",
+        "surfaceMetadata": {
+          "schema": "csseuropa-prepared-assets@1"
+        },
+        "thumbnail": {
+          "size": 64,
+          "quality": 88
+        },
+        "surfaces": [
+          {
+            "id": "normal",
+            "output": "europa-{id}{suffix}.webp",
+            "thumbnail": "europa-lens-{id}.webp",
+            "source": "europa-global-500m.tif",
+            "falseColor": false,
+            "science": {
+              "kind": "terrestrial-observation",
+              "input": "usgs-voyager-galileo-global-500m",
               "id": "normal",
               "validity": {
                 "kind": "geotiff-monochrome-alpha",
@@ -39,27 +57,91 @@
                 "centerLongitude": 180,
                 "resampling": "source-georeferenced-bilinear"
               }
-            },
-            {
-              "id": "infrared",
-              "validity": {
-                "kind": "geotiff-rgb-alpha",
+            }
+          },
+          {
+            "id": "enhanced",
+            "output": "europa-{id}{suffix}.webp",
+            "thumbnail": "europa-lens-{id}.webp",
+            "source": "color/s0349875152.equi.photr.tif",
+            "falseColor": true,
+            "science": {
+              "kind": "terrestrial-observed-color",
+              "id": "enhanced",
+              "consumer": "color",
+              "monochromeBase": "normal",
+              "profile": {
+                "referenceRadiusMeters": 1560800,
+                "centerLongitude": 180,
+                "standardParallel": 0,
+                "sampleFormat": 3,
+                "sampleBytes": 4,
                 "noData": 0,
-                "centerLongitude": 0,
-                "channels": "rgb",
-                "zeroValidity": "all-channels",
-                "resampling": "source-georeferenced-bilinear"
+                "specialValueMagnitude": 1e+30,
+                "filters": [
+                  "IR-7560",
+                  "GREEN",
+                  "VIOLET"
+                ],
+                "gamma": 2.2
               },
-              "textureScale": 0.5,
-              "focus": {
-                "longitudeDegrees": 155,
-                "latitudeDegrees": 0,
-                "zoom": 1.1
+              "metadata": {
+                "label": "Enhanced color",
+                "falseColor": true,
+                "projection": {
+                  "type": "equirectangular",
+                  "longitudeDegrees": [
+                    0,
+                    360
+                  ],
+                  "latitudeDegrees": [
+                    90,
+                    -90
+                  ],
+                  "longitudeDirection": "east-positive",
+                  "referenceRadiusMeters": 1560800
+                },
+                "coverage": "Valid infrared/green/violet observations over the observed monochrome base. Gray grid only where neither source has imagery."
+              },
+              "photometry": {
+                "consumer": "photometry",
+                "vectors": {
+                  "sun": "photometry/horizons-sun.json",
+                  "observer": "photometry/horizons-galileo.json"
+                },
+                "profile": {
+                  "model": "Lunar-Lambert",
+                  "observationWeights": {
+                    "14ESGLOCOL01": 1,
+                    "12ESGLOCOL01": 0.5,
+                    "G1ESGLOBAL01": 0.5
+                  },
+                  "referenceIncidenceDegrees": 30,
+                  "referenceEmissionDegrees": 0,
+                  "maximumIncidenceDegrees": 75,
+                  "maximumEmissionDegrees": 75,
+                  "phaseNormalization": false,
+                  "radiusKm": 1560.8
+                },
+                "levels": {
+                  "boundaryPixels": 4,
+                  "luminance": [
+                    0.2126,
+                    0.7152,
+                    0.0722
+                  ]
+                }
               }
             }
-          ],
-          "scientific": [
-            {
+          },
+          {
+            "id": "elevation",
+            "output": "europa-{id}{suffix}.webp",
+            "thumbnail": "europa-lens-{id}.webp",
+            "source": "science/controlled-dtms/Agenor/Agenor.tif",
+            "falseColor": true,
+            "science": {
+              "kind": "terrestrial-scientific",
               "id": "elevation",
               "label": "Elevation",
               "format": "geotiff",
@@ -111,14 +193,17 @@
                   0.7071067811865476
                 ],
                 "ambient": 0.35
-              },
-              "focus": {
-                "longitudeDegrees": 142,
-                "latitudeDegrees": -43.7,
-                "zoom": 4
               }
-            },
-            {
+            }
+          },
+          {
+            "id": "geology",
+            "output": "europa-{id}{suffix}.webp",
+            "thumbnail": "europa-lens-{id}.webp",
+            "source": "geology/europa-geologic-units.tif",
+            "falseColor": true,
+            "science": {
+              "kind": "terrestrial-scientific",
               "id": "geology",
               "label": "Geology",
               "format": "geotiff",
@@ -213,155 +298,76 @@
                 "#ebffff"
               ]
             }
-          ],
-          "observedColors": [
-            {
-              "id": "enhanced",
-              "consumer": "color",
-              "monochromeBase": "normal",
-              "profile": {
-                "referenceRadiusMeters": 1560800,
-                "centerLongitude": 180,
-                "standardParallel": 0,
-                "sampleFormat": 3,
-                "sampleBytes": 4,
+          },
+          {
+            "id": "infrared",
+            "output": "europa-{id}{suffix}.webp",
+            "thumbnail": "europa-lens-{id}.webp",
+            "source": "nims/europa-nims-composite.tif",
+            "falseColor": true,
+            "science": {
+              "kind": "terrestrial-observation",
+              "input": "europa-registered-nims-composite",
+              "id": "infrared",
+              "validity": {
+                "kind": "geotiff-rgb-alpha",
                 "noData": 0,
-                "specialValueMagnitude": 1e+30,
-                "filters": [
-                  "IR-7560",
-                  "GREEN",
-                  "VIOLET"
-                ],
-                "gamma": 2.2
+                "centerLongitude": 0,
+                "channels": "rgb",
+                "zeroValidity": "all-channels",
+                "resampling": "source-georeferenced-bilinear"
               },
-              "metadata": {
-                "label": "Enhanced color",
-                "falseColor": true,
-                "projection": {
-                  "type": "equirectangular",
-                  "longitudeDegrees": [
-                    0,
-                    360
-                  ],
-                  "latitudeDegrees": [
-                    90,
-                    -90
-                  ],
-                  "longitudeDirection": "east-positive",
-                  "referenceRadiusMeters": 1560800
-                },
-                "coverage": "Valid infrared/green/violet observations over the observed monochrome base. Gray grid only where neither source has imagery."
-              },
-              "photometry": {
-                "consumer": "photometry",
-                "vectors": {
-                  "sun": "photometry/horizons-sun.json",
-                  "observer": "photometry/horizons-galileo.json"
-                },
-                "profile": {
-                  "model": "Lunar-Lambert",
-                  "observationWeights": {
-                    "14ESGLOCOL01": 1,
-                    "12ESGLOCOL01": 0.5,
-                    "G1ESGLOBAL01": 0.5
-                  },
-                  "referenceIncidenceDegrees": 30,
-                  "referenceEmissionDegrees": 0,
-                  "maximumIncidenceDegrees": 75,
-                  "maximumEmissionDegrees": 75,
-                  "phaseNormalization": false,
-                  "radiusKm": 1560.8
-                },
-                "levels": {
-                  "boundaryPixels": 4,
-                  "luminance": [
-                    0.2126,
-                    0.7152,
-                    0.0722
-                  ]
-                }
-              }
+              "textureScale": 0.5
             }
-          ],
-          "surfaceQuality": 90
-        },
+          }
+        ],
         "lighting": {
           "frameSize": 512,
           "columns": 8,
-          "frameCount": 128,
-          "logicalSize": 460,
-          "terminatorWidth": 0.1,
-          "directionalAmbient": 0.05,
-          "fullPhaseAmbient": 0.35,
-          "fullPhaseDiffuse": 0.65,
-          "maximumOpacity": 0.95
-        },
-        "geometry": {
-          "radius": 230,
-          "radiusKm": 1560.8,
-          "camera": {
-            "initialScenePitchDegrees": 40,
-            "defaultControlYawDegrees": 0
-          },
-          "mapUrl": "/scenes/europa/europa-normal-surface@2x.webp",
-          "polesUrl": "/scenes/europa/europa-normal-poles@2x.webp"
-        },
-        "celestial": {
-          "sunSource": "JPL parent-relative satellite orbit plus VSOP87 Jupiter position, with IAU/WGCCRE rotation"
-        },
-        "presentation": {
-          "defaultLens": "normal",
-          "pointColor": [
-            180,
-            180,
-            180
+          "presentationSize": 460,
+          "defaultFrame": 230,
+          "billboardFrameSize": 24,
+          "billboardColumns": 16,
+          "rowOutput": "europa-lighting-{density}x-row-{row}.webp",
+          "billboardOutput": "europa-lighting-{density}x-billboard.webp",
+          "minimumLightViewZ": -1,
+          "maximumLightViewZ": 1,
+          "frameCount": 256,
+          "shadowlessFloodLimbFloor": 0.35,
+          "ambientIntensity": 0.05,
+          "radiusScale": 0.505,
+          "terminator": [
+            0,
+            0.1
           ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
-        },
-        "parentMarker": {
-          "consumer": "parent-marker",
-          "tileSize": 1024,
-          "size": 512,
-          "operations": [
-            {
-              "type": "rotate"
-            },
-            {
-              "type": "extract",
-              "left": 122,
-              "top": 150,
-              "width": 1079,
-              "height": 1019
-            },
-            {
-              "type": "resize",
-              "width": "tile",
-              "height": "tile",
-              "fit": "cover",
-              "position": "centre",
-              "kernel": "lanczos3"
-            },
-            {
-              "type": "ensure-alpha"
-            },
-            {
-              "type": "ellipse-mask",
-              "cx": 0.5,
-              "cy": 0.5,
-              "rx": 0.5,
-              "ry": 0.5
-            },
-            {
-              "type": "png"
-            }
-          ]
+          "maximumAlpha": 0.95,
+          "bankSchema": "csseuropa-prepared-lighting-bank@1",
+          "billboardSchema": "csseuropa-prepared-lighting-billboard@1",
+          "metadata": {
+            "schema": "csseuropa-prepared-lighting@1",
+            "storageModel": "prepared-full-resolution-density-row-shards",
+            "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+            "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+            "ambientIntensity": 0.05,
+            "shadowlessFloodLimbFloor": 0.35,
+            "orenNayarRoughness": 0,
+            "terminatorSmoothstep": [
+              0,
+              0.1
+            ],
+            "minimumLightViewZ": -1,
+            "maximumLightViewZ": 1,
+            "baseLightAzimuthDegrees": 0,
+            "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+            "runtimeRasterization": false
+          }
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c07b3a4a304f992e6b46500b051a3838d80967e131556f0fcabf96c103ff18ee",
+      "sha256": "adea0fe714df61db29809426fc78d414766723e35b1cca490aae48371373a85d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -475,9 +481,9 @@
               "label": "Monochrome",
               "description": "USGS Voyager/Galileo mosaic. Source resolution varies from about 200 m to 20 km per pixel. Gray grid marks documented no-data and its resampled boundary. Original image shading remains; globe lighting is approximate.",
               "title": "Global image mosaic",
-              "thumbnail": "/scenes/europa/europa-normal-thumbnail.webp",
-              "surface": "europa-normal-surface@2x.webp",
-              "poles": "europa-normal-poles@2x.webp",
+              "thumbnail": "europa-lens-normal.webp",
+              "surface": "europa-normal.webp",
+              "poles": "europa-poles-normal.webp",
               "source": {
                 "id": "usgs-voyager-galileo-global-500m",
                 "path": "../manifest.json"
@@ -490,9 +496,9 @@
               "label": "Enhanced color",
               "description": "Galileo enhanced color: 756 nm → red, 559 nm → green, 404 nm → blue, at 1.4–1.6 km per pixel. Color covers part of the surface. A correction for each observation reduces broad photographed shading; oblique views retain observed monochrome. Overall brightness is matched to the monochrome base, preserving color ratios. Photographed shadows and seams can remain; added globe lighting is approximate. Gray grid marks gaps in both sources.",
               "title": "SSI enhanced-color mosaic",
-              "thumbnail": "/scenes/europa/europa-enhanced-thumbnail.webp",
-              "surface": "europa-enhanced-surface@2x.webp",
-              "poles": "europa-enhanced-poles@2x.webp",
+              "thumbnail": "europa-lens-enhanced.webp",
+              "surface": "europa-enhanced.webp",
+              "poles": "europa-poles-enhanced.webp",
               "source": {
                 "id": "observed-color",
                 "path": "../manifest.json"
@@ -506,9 +512,9 @@
               "detail": "Agenor · relative",
               "description": "Agenor Linea only, near 142°E and 44°S. Colors encode the released local stereo heights in meters; their relative datum is not a global reference level. Effective detail is about 3 km. Fixed northwest cartographic relief shows slopes; it is not part of the numeric scale. Gray grid preserves the DTM’s finite/no-data footprint. The archive’s duplicated, cubic-resampled quality products are excluded; colors imply no quality class or pointwise accuracy.",
               "title": "Agenor Linea stereo terrain model",
-              "thumbnail": "/scenes/europa/europa-elevation-thumbnail.webp",
-              "surface": "europa-elevation-surface@2x.webp",
-              "poles": "europa-elevation-poles@2x.webp",
+              "thumbnail": "europa-lens-elevation.webp",
+              "surface": "europa-elevation.webp",
+              "poles": "europa-poles-elevation.webp",
               "falseColor": true,
               "source": {
                 "id": "usgs-agenor-controlled-dtm",
@@ -545,16 +551,42 @@
               "legend": {
                 "kind": "scale",
                 "title": "Agenor local height (m)",
-                "image": "europa-elevation-legend.webp",
-                "width": 256,
-                "height": 16,
                 "labels": [
                   "−700",
                   "−200",
                   "300"
                 ],
                 "meta": "m",
-                "sourceUrl": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/"
+                "sourceUrl": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
+                "recipe": {
+                  "palette": [
+                    [
+                      37,
+                      76,
+                      137
+                    ],
+                    [
+                      108,
+                      156,
+                      172
+                    ],
+                    [
+                      211,
+                      200,
+                      143
+                    ],
+                    [
+                      155,
+                      79,
+                      50
+                    ]
+                  ],
+                  "labels": [
+                    "−700",
+                    "−200",
+                    "300"
+                  ]
+                }
               }
             },
             {
@@ -562,9 +594,9 @@
               "label": "Geology",
               "description": "USGS interpreted regional plains, bands, chaos terrains and crater deposits (2024; 1:15,000,000). Colors identify map units, not measured surface color. Gray grid marks no-data polygons. Fine line and point features are not represented by this polygon view.",
               "title": "USGS global geology (2024 SIM 3513)",
-              "thumbnail": "/scenes/europa/europa-geology-thumbnail.webp",
-              "surface": "europa-geology-surface@2x.webp",
-              "poles": "europa-geology-poles@2x.webp",
+              "thumbnail": "europa-lens-geology.webp",
+              "surface": "europa-geology.webp",
+              "poles": "europa-poles-geology.webp",
               "source": {
                 "id": "usgs-europa-geologic-units-grid",
                 "path": "../manifest.json",
@@ -635,9 +667,9 @@
               "label": "Infrared",
               "description": "Galileo NIMS observations assign red, green and blue to 1.50, 1.34 and 0.73–0.74 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band.",
               "title": "Galileo NIMS spectral color",
-              "thumbnail": "/scenes/europa/europa-infrared-thumbnail.webp",
-              "surface": "europa-infrared-surface@2x.webp",
-              "poles": "europa-infrared-poles@2x.webp",
+              "thumbnail": "europa-lens-infrared.webp",
+              "surface": "europa-infrared.webp",
+              "poles": "europa-poles-infrared.webp",
               "source": {
                 "id": "europa-registered-nims-composite",
                 "path": "../manifest.json",
@@ -659,8 +691,8 @@
             },
             {
               "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
+              "name": "stars",
+              "label": "Stars",
               "checked": true
             }
           ]
@@ -848,43 +880,28 @@
     },
     {
       "kind": "source-input",
-      "id": "europa-registered-nims-composite",
-      "path": "nims/europa-nims-composite.tif",
-      "origin": "https://doi.org/10.17189/4sz4-5024",
-      "credit": "NASA/JPL Galileo NIMS team; Malaska et al., USGS/PDS registered archive",
-      "license": "Public NASA mission data; preserve producer and PDS citation",
+      "id": "usgs-s0349875152.equi",
+      "path": "color/s0349875152.equi.photr.tif",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875152/s0349875152.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
       "licenseEvidence": [
-        "https://pds.nasa.gov/datastandards/citing/",
-        "https://doi.org/10.17189/4sz4-5024"
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
       ],
-      "acquisition": "Checked-in compact derived RGB map. Reproduce with tools/objects/acquisition/nims-composite.py and nims/prepare-composite.json from pinned original registered cubes and wavelength tables.",
-      "redistribution": "Credited derived scientific visualization; authored channel display stretches are documented.",
-      "lensId": "infrared",
-      "label": "Infrared",
-      "falseColor": true,
-      "width": 2048,
-      "height": 1024,
-      "projection": {
-        "type": "equirectangular",
-        "longitudeDegrees": [
-          -180,
-          180
-        ],
-        "latitudeDegrees": [
-          90,
-          -90
-        ],
-        "longitudeDirection": "east-positive",
-        "referenceRadiusMeters": 1564130
-      },
-      "coverage": "Intersection of valid samples in all three selected bands; no-data and ISIS special values remain missing. Earlier listed observation has priority; no blending or gap fill.",
-      "photometry": "Archive Minnaert-corrected I/F; fixed RGB display ranges, no independent frame normalization.",
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "observation": "G1ESGLOBAL01",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.559,
+      "observedAt": "1996-06-28T01:43:39.354000Z",
+      "width": 3248,
+      "height": 1317,
       "capture": {
         "attributions": [
           {
             "kind": "machine",
             "machineId": "galileo",
-            "evidence": "https://doi.org/10.17189/4sz4-5024",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875152/s0349875152.equi.photr.tif",
             "missionId": "galileo"
           }
         ]
@@ -893,14 +910,75 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "doi-10-17189-4sz4-5024",
-            "role": "method",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/47"
+            "catalogueId": "source-europa-usgs-s0349875152-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
           }
         ]
       },
-      "sha256": "01f3ec428dae8907f29701e4bac1aecab8bb800fea488991332e60d65b9d5287",
-      "bytes": 351656,
+      "sha256": "3b44296107ab39a8ba575fc83248ae127d39693f4ce2e6889aff29e8eddcb88a",
+      "bytes": 7287787,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "color/s0349875152.equi.photr.tif",
+        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875152/s0349875152.equi.photr.tif"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "photometry/horizons-sun.json",
+      "purpose": "JPL Horizons geometric ICRF position vectors relative to Europa at the controlled image capture times. Full request and response captured 2026-09-06; units km, epochs JDTDB.",
+      "kind": "source-document",
+      "title": "JPL Horizons Sun vectors relative to Europa",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&CENTER=%27500%40502%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272450902.3086344404%0A2450902.3087347527%0A2450902.3088350655%0A2450902.308935366%0A2450902.309035679%0A2450902.3091367553%0A2450902.3092370676%0A2450902.3093373803%0A2450902.309437681%0A2450902.3095379937%0A2450902.3104407713%0A2450902.310541084%0A2450902.3106413847%0A2450262.572702988%0A2450262.5729048634%0A2450262.5730051757%0A2450798.738217853%0A2450798.738420399%0A2450798.7385207117%0A2450798.738819705%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
+      "credit": "NASA/JPL Solar System Dynamics — Horizons",
+      "acquisition": "JPL Horizons request and JSON response saved together on 2026-09-06; the local JSON wrapper is not the original HTTP response bytes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-horizons",
+            "role": "material",
+            "evidence": "Horizons vector response; the input URL records target, observer, epochs, ICRF frame, units and correction settings. The local response hash identifies the returned bytes."
+          }
+        ]
+      },
+      "id": "source-document:photometry/horizons-sun.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "0af0a446aa73341e382d3d006a8c9c1a0e6de8c1b2f0f81d33c2dd69bbac7cf1",
+      "bytes": 9158,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "photometry/horizons-galileo.json",
+      "purpose": "JPL Horizons geometric ICRF position vectors relative to Europa at the controlled image capture times. Full request and response captured 2026-09-06; units km, epochs JDTDB.",
+      "kind": "source-document",
+      "title": "JPL Horizons Galileo vectors relative to Europa",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27-77%27&CENTER=%27500%40502%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272450902.3086344404%0A2450902.3087347527%0A2450902.3088350655%0A2450902.308935366%0A2450902.309035679%0A2450902.3091367553%0A2450902.3092370676%0A2450902.3093373803%0A2450902.309437681%0A2450902.3095379937%0A2450902.3104407713%0A2450902.310541084%0A2450902.3106413847%0A2450262.572702988%0A2450262.5729048634%0A2450262.5730051757%0A2450798.738217853%0A2450798.738420399%0A2450798.7385207117%0A2450798.738819705%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
+      "credit": "NASA/JPL Solar System Dynamics — Horizons",
+      "acquisition": "JPL Horizons request and JSON response saved together on 2026-09-06; the local JSON wrapper is not the original HTTP response bytes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-horizons",
+            "role": "material",
+            "evidence": "Horizons vector response; the input URL records target, observer, epochs, ICRF frame, units and correction settings. The local response hash identifies the returned bytes."
+          }
+        ]
+      },
+      "id": "source-document:photometry/horizons-galileo.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "0a4ca5c56c9a50be0a206701773b2b35715d4aad3120f587b3dffabf5d710113",
+      "bytes": 9721,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1012,1114 +1090,80 @@
       "verificationOperations": []
     },
     {
-      "path": "photometry/horizons-sun.json",
-      "purpose": "JPL Horizons geometric ICRF position vectors relative to Europa at the controlled image capture times. Full request and response captured 2026-09-06; units km, epochs JDTDB.",
-      "kind": "source-document",
-      "title": "JPL Horizons Sun vectors relative to Europa",
-      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&CENTER=%27500%40502%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272450902.3086344404%0A2450902.3087347527%0A2450902.3088350655%0A2450902.308935366%0A2450902.309035679%0A2450902.3091367553%0A2450902.3092370676%0A2450902.3093373803%0A2450902.309437681%0A2450902.3095379937%0A2450902.3104407713%0A2450902.310541084%0A2450902.3106413847%0A2450262.572702988%0A2450262.5729048634%0A2450262.5730051757%0A2450798.738217853%0A2450798.738420399%0A2450798.7385207117%0A2450798.738819705%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
-      "credit": "NASA/JPL Solar System Dynamics — Horizons",
-      "acquisition": "JPL Horizons request and JSON response saved together on 2026-09-06; the local JSON wrapper is not the original HTTP response bytes.",
+      "kind": "source-input",
+      "id": "europa-registered-nims-composite",
+      "path": "nims/europa-nims-composite.tif",
+      "origin": "https://doi.org/10.17189/4sz4-5024",
+      "credit": "NASA/JPL Galileo NIMS team; Malaska et al., USGS/PDS registered archive",
+      "license": "Public NASA mission data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://doi.org/10.17189/4sz4-5024"
+      ],
+      "acquisition": "Checked-in compact derived RGB map. Reproduce with tools/objects/acquisition/nims-composite.py and nims/prepare-composite.json from pinned original registered cubes and wavelength tables.",
+      "redistribution": "Credited derived scientific visualization; authored channel display stretches are documented.",
+      "lensId": "infrared",
+      "label": "Infrared",
+      "falseColor": true,
+      "width": 2048,
+      "height": 1024,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 1564130
+      },
+      "coverage": "Intersection of valid samples in all three selected bands; no-data and ISIS special values remain missing. Earlier listed observation has priority; no blending or gap fill.",
+      "photometry": "Archive Minnaert-corrected I/F; fixed RGB display ranges, no independent frame normalization.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "evidence": "https://doi.org/10.17189/4sz4-5024",
+            "missionId": "galileo"
+          }
+        ]
+      },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "jpl-horizons",
-            "role": "material",
-            "evidence": "Horizons vector response; the input URL records target, observer, epochs, ICRF frame, units and correction settings. The local response hash identifies the returned bytes."
+            "catalogueId": "doi-10-17189-4sz4-5024",
+            "role": "method",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/47"
           }
         ]
       },
-      "id": "source-document:photometry/horizons-sun.json",
-      "upstreamLineage": "not-recorded",
-      "sha256": "0af0a446aa73341e382d3d006a8c9c1a0e6de8c1b2f0f81d33c2dd69bbac7cf1",
-      "bytes": 9158,
+      "sha256": "01f3ec428dae8907f29701e4bac1aecab8bb800fea488991332e60d65b9d5287",
+      "bytes": 351656,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
-      "path": "photometry/horizons-galileo.json",
-      "purpose": "JPL Horizons geometric ICRF position vectors relative to Europa at the controlled image capture times. Full request and response captured 2026-09-06; units km, epochs JDTDB.",
-      "kind": "source-document",
-      "title": "JPL Horizons Galileo vectors relative to Europa",
-      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27-77%27&CENTER=%27500%40502%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272450902.3086344404%0A2450902.3087347527%0A2450902.3088350655%0A2450902.308935366%0A2450902.309035679%0A2450902.3091367553%0A2450902.3092370676%0A2450902.3093373803%0A2450902.309437681%0A2450902.3095379937%0A2450902.3104407713%0A2450902.310541084%0A2450902.3106413847%0A2450262.572702988%0A2450262.5729048634%0A2450262.5730051757%0A2450798.738217853%0A2450798.738420399%0A2450798.7385207117%0A2450798.738819705%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
-      "credit": "NASA/JPL Solar System Dynamics — Horizons",
-      "acquisition": "JPL Horizons request and JSON response saved together on 2026-09-06; the local JSON wrapper is not the original HTTP response bytes.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jpl-horizons",
-            "role": "material",
-            "evidence": "Horizons vector response; the input URL records target, observer, epochs, ICRF frame, units and correction settings. The local response hash identifies the returned bytes."
-          }
-        ]
-      },
-      "id": "source-document:photometry/horizons-galileo.json",
-      "upstreamLineage": "not-recorded",
-      "sha256": "0a4ca5c56c9a50be0a206701773b2b35715d4aad3120f587b3dffabf5d710113",
-      "bytes": 9721,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0349875152.equi",
-      "path": "color/s0349875152.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875152/s0349875152.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "G1ESGLOBAL01",
-      "filter": "GREEN",
-      "wavelengthMicrometers": 0.559,
-      "observedAt": "1996-06-28T01:43:39.354000Z",
-      "width": 3248,
-      "height": 1317,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875152/s0349875152.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0349875152-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
-          }
-        ]
-      },
-      "sha256": "3b44296107ab39a8ba575fc83248ae127d39693f4ce2e6889aff29e8eddcb88a",
-      "bytes": 7287787,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0349875152.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875152/s0349875152.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0349875178.equi",
-      "path": "color/s0349875178.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875178/s0349875178.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "G1ESGLOBAL01",
-      "filter": "VIOLET",
-      "wavelengthMicrometers": 0.404,
-      "observedAt": "1996-06-28T01:43:56.796000Z",
-      "width": 3196,
-      "height": 1321,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875178/s0349875178.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0349875178-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
-          }
-        ]
-      },
-      "sha256": "b03385ff0a4eb81bb5ab6755b3c3aa2054a7c85570db78cc7ff6818e1f6a84f9",
-      "bytes": 7406122,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0349875178.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875178/s0349875178.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0349875200.equi",
-      "path": "color/s0349875200.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875200/s0349875200.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "G1ESGLOBAL01",
-      "filter": "IR-7560",
-      "wavelengthMicrometers": 0.756,
-      "observedAt": "1996-06-28T01:44:05.463000Z",
-      "width": 3356,
-      "height": 1320,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875200/s0349875200.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0349875200-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
-          }
-        ]
-      },
-      "sha256": "8f0799310d32a88c91aca062f21591435717044ba44c267bb79361962136feee",
-      "bytes": 7169272,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0349875200.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875200/s0349875200.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0426234600.equi",
-      "path": "color/s0426234600.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234600/s0426234600.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "12ESGLOCOL01",
-      "filter": "GREEN",
-      "wavelengthMicrometers": 0.559,
-      "observedAt": "1997-12-16T05:41:58.839000Z",
-      "width": 1766,
-      "height": 1419,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234600/s0426234600.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0426234600-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
-          }
-        ]
-      },
-      "sha256": "0d8988fa285cc918da5d896b4606bd2da5e5deb3fe23921656552bef14943a71",
-      "bytes": 3657909,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0426234600.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234600/s0426234600.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0426234626.equi",
-      "path": "color/s0426234626.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234626/s0426234626.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "12ESGLOCOL01",
-      "filter": "VIOLET",
-      "wavelengthMicrometers": 0.404,
-      "observedAt": "1997-12-16T05:42:16.339000Z",
-      "width": 1760,
-      "height": 1421,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234626/s0426234626.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0426234626-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
-          }
-        ]
-      },
-      "sha256": "4d687142eefa0d10f95c1ff4559df295f4e0051fc6ee8d17f1bc0e30bde6c806",
-      "bytes": 3664881,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0426234626.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234626/s0426234626.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0426234639.equi",
-      "path": "color/s0426234639.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234639/s0426234639.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "12ESGLOCOL01",
-      "filter": "IR-7560",
-      "wavelengthMicrometers": 0.756,
-      "observedAt": "1997-12-16T05:42:25.006000Z",
-      "width": 1772,
-      "height": 1449,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234639/s0426234639.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0426234639-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
-          }
-        ]
-      },
-      "sha256": "b7e528a4269e9fc8a9b633f5620dbf96cd899c2395c0e8a8cdf787ae3c06230a",
-      "bytes": 3534165,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0426234639.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234639/s0426234639.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0426234678.equi",
-      "path": "color/s0426234678.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234678/s0426234678.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "12ESGLOCOL01",
-      "filter": "GREEN",
-      "wavelengthMicrometers": 0.559,
-      "observedAt": "1997-12-16T05:42:50.839000Z",
-      "width": 1010,
-      "height": 844,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234678/s0426234678.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0426234678-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
-          }
-        ]
-      },
-      "sha256": "a6872d1ae78f572cf64050ec6b74c1092e9eb5c70c25bca322252535c0a77006",
-      "bytes": 1390887,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0426234678.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234678/s0426234678.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0440984852.equi",
-      "path": "color/s0440984852.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984852/s0440984852.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "14ESGLOCOL01",
-      "filter": "GREEN",
-      "wavelengthMicrometers": 0.559,
-      "observedAt": "1998-03-29T19:23:22.830000Z",
-      "width": 3289,
-      "height": 1332,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984852/s0440984852.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0440984852-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
-          }
-        ]
-      },
-      "sha256": "f6d2610583d7ee0895f67cea72c8ef8e8ba44e4db215e389dde7bc1b0b13077a",
-      "bytes": 7107148,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0440984852.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984852/s0440984852.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0440984865.equi",
-      "path": "color/s0440984865.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984865/s0440984865.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "14ESGLOCOL01",
-      "filter": "GREEN",
-      "wavelengthMicrometers": 0.559,
-      "observedAt": "1998-03-29T19:23:31.497000Z",
-      "width": 900,
-      "height": 833,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984865/s0440984865.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0440984865-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
-          }
-        ]
-      },
-      "sha256": "c0744bed1cb9c059dc4033634109bb9c47904a59f0b60eda03c3f176a823da30",
-      "bytes": 3324947,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0440984865.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984865/s0440984865.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0440984878.equi",
-      "path": "color/s0440984878.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984878/s0440984878.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "14ESGLOCOL01",
-      "filter": "GREEN",
-      "wavelengthMicrometers": 0.559,
-      "observedAt": "1998-03-29T19:23:40.164000Z",
-      "width": 3324,
-      "height": 1325,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984878/s0440984878.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0440984878-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
-          }
-        ]
-      },
-      "sha256": "7897b822a9be1c518341eb6e6eafc40d19f51eb05041764fae5270c845b91d07",
-      "bytes": 7607954,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0440984878.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984878/s0440984878.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0440984901_00.equi",
-      "path": "color/s0440984901_00.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984901_00/s0440984901_00.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "14ESGLOCOL01",
-      "filter": "GREEN",
-      "wavelengthMicrometers": 0.559,
-      "observedAt": "1998-03-29T19:23:48.830000Z",
-      "width": 1186,
-      "height": 994,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984901_00/s0440984901_00.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0440984901-00-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
-          }
-        ]
-      },
-      "sha256": "435576dcf72b93380df88d2e09e528cc3a640228c53ddfcb18a16804244df933",
-      "bytes": 4278616,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0440984901_00.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984901_00/s0440984901_00.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0440984914_13.equi",
-      "path": "color/s0440984914_13.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984914_13/s0440984914_13.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "14ESGLOCOL01",
-      "filter": "GREEN",
-      "wavelengthMicrometers": 0.559,
-      "observedAt": "1998-03-29T19:23:57.497000Z",
-      "width": 1247,
-      "height": 847,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984914_13/s0440984914_13.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0440984914-13-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
-          }
-        ]
-      },
-      "sha256": "9b5b2069c177f81792ee7b46c88f82546475eb85d9d157245f8af88a000a3b93",
-      "bytes": 5048470,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0440984914_13.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984914_13/s0440984914_13.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0440984926.equi",
-      "path": "color/s0440984926.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984926/s0440984926.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "14ESGLOCOL01",
-      "filter": "VIOLET",
-      "wavelengthMicrometers": 0.404,
-      "observedAt": "1998-03-29T19:24:06.230000Z",
-      "width": 3305,
-      "height": 1337,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984926/s0440984926.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0440984926-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
-          }
-        ]
-      },
-      "sha256": "0d2442d2ccc906e6790e64291b602dff0e983b0f9eec23f827b594926347bc98",
-      "bytes": 5870772,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0440984926.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984926/s0440984926.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0440984939.equi",
-      "path": "color/s0440984939.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984939/s0440984939.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "14ESGLOCOL01",
-      "filter": "VIOLET",
-      "wavelengthMicrometers": 0.404,
-      "observedAt": "1998-03-29T19:24:14.897000Z",
-      "width": 903,
-      "height": 834,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984939/s0440984939.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0440984939-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
-          }
-        ]
-      },
-      "sha256": "4c48daf581fbab988311b3258209fd143fec5fa1d09951d7bd121aedeb4e4003",
-      "bytes": 2571253,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0440984939.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984939/s0440984939.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0440984952.equi",
-      "path": "color/s0440984952.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984952/s0440984952.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "14ESGLOCOL01",
-      "filter": "VIOLET",
-      "wavelengthMicrometers": 0.404,
-      "observedAt": "1998-03-29T19:24:23.564000Z",
-      "width": 3314,
-      "height": 1324,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984952/s0440984952.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0440984952-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
-          }
-        ]
-      },
-      "sha256": "5623a2fce8ff8eec29b9b1ec522b186871256fd55cda8c23a272e2c593504181",
-      "bytes": 5551570,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0440984952.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984952/s0440984952.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0440984965.equi",
-      "path": "color/s0440984965.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984965/s0440984965.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "14ESGLOCOL01",
-      "filter": "VIOLET",
-      "wavelengthMicrometers": 0.404,
-      "observedAt": "1998-03-29T19:24:32.230000Z",
-      "width": 1153,
-      "height": 977,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984965/s0440984965.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0440984965-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
-          }
-        ]
-      },
-      "sha256": "03bbda32b885b93bf860f6de9c748668fd0e1da7c5f30ff6ff51f03d17f1cf61",
-      "bytes": 4115365,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0440984965.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984965/s0440984965.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0440984978.equi",
-      "path": "color/s0440984978.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984978/s0440984978.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "14ESGLOCOL01",
-      "filter": "VIOLET",
-      "wavelengthMicrometers": 0.404,
-      "observedAt": "1998-03-29T19:24:40.897000Z",
-      "width": 1264,
-      "height": 847,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984978/s0440984978.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0440984978-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
-          }
-        ]
-      },
-      "sha256": "6e92d6d3e0d281fddef59f7b15be45da38d95192087b5f7d2777bef3cbe58027",
-      "bytes": 5191247,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0440984978.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984978/s0440984978.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0440985113.equi",
-      "path": "color/s0440985113.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985113/s0440985113.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "14ESGLOCOL01",
-      "filter": "IR-7560",
-      "wavelengthMicrometers": 0.756,
-      "observedAt": "1998-03-29T19:25:58.897000Z",
-      "width": 1287,
-      "height": 1082,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985113/s0440985113.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0440985113-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
-          }
-        ]
-      },
-      "sha256": "e92576a0b9e6196bd97b000f1ffa0e0fb73c27d8ec35feb464127d4341718bd3",
-      "bytes": 5017172,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0440985113.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985113/s0440985113.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0440985126.equi",
-      "path": "color/s0440985126.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985126/s0440985126.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "14ESGLOCOL01",
-      "filter": "IR-7560",
-      "wavelengthMicrometers": 0.756,
-      "observedAt": "1998-03-29T19:26:07.564000Z",
-      "width": 910,
-      "height": 839,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985126/s0440985126.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0440985126-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22"
-          }
-        ]
-      },
-      "sha256": "78c8a8af4cea5a266dde8cee21f728799c2af6f65268b49692b04476777eff59",
-      "bytes": 2764409,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0440985126.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985126/s0440985126.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-s0440985139.equi",
-      "path": "color/s0440985139.equi.photr.tif",
-      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985139/s0440985139.equi.photr.tif",
-      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
-      "license": "CC0-1.0",
-      "licenseEvidence": [
-        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
-      ],
-      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
-      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
-      "observation": "14ESGLOCOL01",
-      "filter": "IR-7560",
-      "wavelengthMicrometers": 0.756,
-      "observedAt": "1998-03-29T19:26:16.230000Z",
-      "width": 3316,
-      "height": 1322,
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985139/s0440985139.equi.photr.tif",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-europa-usgs-s0440985139-equi",
-            "role": "material",
-            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
-          }
-        ]
-      },
-      "sha256": "95eb88fc84a49a91d2bd54faf1d6e5d964b5651a3c065a2e92fe87be03b4de67",
-      "bytes": 6152531,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "color/s0440985139.equi.photr.tif",
-        "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985139/s0440985139.equi.photr.tif"
-      },
-      "verificationOperations": []
-    },
-    {
+      "kind": "authored-content",
+      "id": "europa-object-content",
       "path": "content/object.json",
+      "origin": "Repository-authored Europa object recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored page text, factsheet, view descriptions and legends."
       },
-      "id": "authored-document:content/object.json",
-      "kind": "authored-content",
-      "origin": "object:source/content/object.json",
-      "title": "content/object.json",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored, pinned object-package document.",
-      "upstreamLineage": "not-recorded",
-      "sha256": "c07b3a4a304f992e6b46500b051a3838d80967e131556f0fcabf96c103ff18ee",
-      "bytes": 15905,
+      "sha256": "adea0fe714df61db29809426fc78d414766723e35b1cca490aae48371373a85d",
+      "bytes": 16192,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -2209,10 +1253,10 @@
     {
       "id": "normal",
       "label": "Monochrome",
-      "recipe": "terrestrial",
-      "selector": "/raster/observations/0",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
         "USGS Voyager/Galileo mosaic. Source resolution varies from about 200 m to 20 km per pixel. Gray grid marks documented no-data and its resampled boundary. Original image shading remains; globe lighting is approximate."
       ],
@@ -2220,183 +1264,43 @@
         "normal"
       ],
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "interpretation": {
-        "validity": {
-          "kind": "geotiff-monochrome-alpha",
-          "noData": 0,
-          "centerLongitude": 180,
-          "resampling": "source-georeferenced-bilinear"
-        }
+        "falseColor": false
       },
       "inputs": [
         "usgs-voyager-galileo-global-500m"
       ],
       "outputs": [
         {
-          "url": "/scenes/europa/europa-normal-thumbnail.webp",
-          "bytes": 2898,
-          "sha256": "de3049fc5d85511eb8cbf21bd17fdc5c544110395bd081c13677ea3b05065abb",
+          "url": "/scenes/europa/europa-normal.webp",
+          "bytes": 860398,
+          "sha256": "0e8be41c04906b71944d537847891c9c4d17d5eb613a423fadff9d262e10aab1",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/europa/europa-normal-surface@2x.webp",
-          "bytes": 2393474,
-          "sha256": "2a268d580c1a7909066688eaee0222171762f03562d922199b34f4270d8d82b6",
+          "url": "/scenes/europa/europa-normal@2x.webp",
+          "bytes": 2634642,
+          "sha256": "8df05d1f567bebdf65d76c45d44117f342147b0b2c7255da7aaf9513b465e956",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/europa/europa-normal-poles@2x.webp",
-          "bytes": 50426,
-          "sha256": "58a079ec75e35c9326e81d18b49886f5b4bab5405fb147a6a2988e0c2e974184",
-          "verification": "asset-manifest-pin"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "infrared",
-      "label": "Infrared",
-      "recipe": "terrestrial",
-      "selector": "/raster/observations/1",
-      "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Galileo NIMS observations assign red, green and blue to 1.50, 1.34 and 0.73–0.74 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band."
-      ],
-      "lensIds": [
-        "infrared"
-      ],
-      "recipeDependencies": [
-        "terrestrial"
-      ],
-      "interpretation": {
-        "validity": {
-          "kind": "geotiff-rgb-alpha",
-          "noData": 0,
-          "centerLongitude": 0,
-          "channels": "rgb",
-          "zeroValidity": "all-channels",
-          "resampling": "source-georeferenced-bilinear"
-        }
-      },
-      "inputs": [
-        "europa-registered-nims-composite"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/europa/europa-infrared-thumbnail.webp",
-          "bytes": 4988,
-          "sha256": "f904becd83dfd47423212b95e4d408dffb7e74f96622973a38292e3ec5c2e045",
+          "url": "/scenes/europa/europa-lens-normal.webp",
+          "bytes": 986,
+          "sha256": "a7dba882c0d16fed21862bb63cadd085515330542e7e7fd659a0a2e5714a219c",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/europa/europa-infrared-surface@2x.webp",
-          "bytes": 135446,
-          "sha256": "4b9aaed008800306b597fdb0710fe32b56c89556dc0ec61f13db30a2033f486b",
+          "url": "/scenes/europa/europa-poles-normal.webp",
+          "bytes": 42728,
+          "sha256": "c5a83828db8d14fb4f3e6e0004ea4b0343516e8a5f66f1c55573498455bb4151",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/europa/europa-infrared-poles@2x.webp",
-          "bytes": 9082,
-          "sha256": "fa89a9b84bfbe95307bf8a7211ed7fd1f76b53acbc6b3282c26a120857c88550",
-          "verification": "asset-manifest-pin"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "elevation",
-      "label": "Elevation",
-      "recipe": "terrestrial",
-      "selector": "/raster/scientific/0",
-      "parents": [],
-      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Agenor Linea only, near 142°E and 44°S. Colors encode the released local stereo heights in meters; their relative datum is not a global reference level. Effective detail is about 3 km. Fixed northwest cartographic relief shows slopes; it is not part of the numeric scale. Gray grid preserves the DTM’s finite/no-data footprint. The archive’s duplicated, cubic-resampled quality products are excluded; colors imply no quality class or pointwise accuracy."
-      ],
-      "lensIds": [
-        "elevation"
-      ],
-      "recipeDependencies": [
-        "terrestrial"
-      ],
-      "interpretation": {
-        "kind": "scientific",
-        "qualification": "Released relative heights of Agenor Linea; independent local stereo datum, not elevation above a global reference sphere."
-      },
-      "inputs": [
-        "usgs-agenor-controlled-dtm"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/europa/europa-elevation-thumbnail.webp",
-          "bytes": 234,
-          "sha256": "41cb4721d67eced371ef087e99cf32710ee0b9dae47b9001c918fbb3b599ce4d",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-elevation-legend.webp",
-          "bytes": 232,
-          "sha256": "f38863733ca579d9738b556dec11eb3e318932eefaf6b5d3cffcda2b915871c3",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-elevation-surface@2x.webp",
-          "bytes": 47940,
-          "sha256": "7b2cd09d4632f30a83fdb816d79093c8bfd084285b8ae66fc7caa9517835952b",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-elevation-poles@2x.webp",
-          "bytes": 9366,
-          "sha256": "bb3993ff36192399ed1dac66a7402b9d9000672ef9db4c2c4e931331a04b0632",
-          "verification": "asset-manifest-pin"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "geology",
-      "label": "Geology",
-      "recipe": "terrestrial",
-      "selector": "/raster/scientific/1",
-      "parents": [],
-      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "USGS interpreted regional plains, bands, chaos terrains and crater deposits (2024; 1:15,000,000). Colors identify map units, not measured surface color. Gray grid marks no-data polygons. Fine line and point features are not represented by this polygon view."
-      ],
-      "lensIds": [
-        "geology"
-      ],
-      "recipeDependencies": [
-        "terrestrial"
-      ],
-      "interpretation": {
-        "kind": "scientific",
-        "qualification": "USGS global geology (2024 SIM 3513)"
-      },
-      "inputs": [
-        "usgs-europa-geologic-units-grid"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/europa/europa-geology-thumbnail.webp",
-          "bytes": 918,
-          "sha256": "e2186f77bea7b30cec1ef3c966106bb03f1f1dd5bd74a03aa811c2ecf362780f",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-geology-surface@2x.webp",
-          "bytes": 43646,
-          "sha256": "0dfe30d132ad5e7a4b28e52a73d31efc9072b85afa70d9d7dce5b7f30a0bdd0d",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-geology-poles@2x.webp",
-          "bytes": 5808,
-          "sha256": "de33bb1dd40652adcfc0e343687c60ac0d3956765d38de6e1110e82e7d00e502",
+          "url": "/scenes/europa/europa-poles-normal@2x.webp",
+          "bytes": 128444,
+          "sha256": "8b54d17d5e7777a5c74472fd77d70e125a350f7655567529a8f465d41e0501c3",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -2405,12 +1309,10 @@
     {
       "id": "enhanced",
       "label": "Enhanced color",
-      "recipe": "terrestrial",
-      "selector": "/raster/observedColors/0",
-      "parents": [
-        "normal"
-      ],
-      "process": "Prepare the observedColors recipe with its declared sampling, registration and display policy.",
+      "recipe": "raster",
+      "selector": "/surfaces/1",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
         "Galileo enhanced color: 756 nm → red, 559 nm → green, 404 nm → blue, at 1.4–1.6 km per pixel. Color covers part of the surface. A correction for each observation reduces broad photographed shading; oblique views retain observed monochrome. Overall brightness is matched to the monochrome base, preserving color ratios. Photographed shadows and seams can remain; added globe lighting is approximate. Gray grid marks gaps in both sources."
       ],
@@ -2418,56 +1320,633 @@
         "enhanced"
       ],
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "interpretation": {
-        "kind": "observedColors"
+        "falseColor": true
       },
       "inputs": [
-        "source-document:photometry/horizons-sun.json",
-        "source-document:photometry/horizons-galileo.json",
         "usgs-s0349875152.equi",
-        "usgs-s0349875178.equi",
-        "usgs-s0349875200.equi",
-        "usgs-s0426234600.equi",
-        "usgs-s0426234626.equi",
-        "usgs-s0426234639.equi",
-        "usgs-s0426234678.equi",
-        "usgs-s0440984852.equi",
-        "usgs-s0440984865.equi",
-        "usgs-s0440984878.equi",
-        "usgs-s0440984901_00.equi",
-        "usgs-s0440984914_13.equi",
-        "usgs-s0440984926.equi",
-        "usgs-s0440984939.equi",
-        "usgs-s0440984952.equi",
-        "usgs-s0440984965.equi",
-        "usgs-s0440984978.equi",
-        "usgs-s0440985113.equi",
-        "usgs-s0440985126.equi",
-        "usgs-s0440985139.equi"
+        "source-document:photometry/horizons-sun.json",
+        "source-document:photometry/horizons-galileo.json"
       ],
       "outputs": [
         {
-          "url": "/scenes/europa/europa-enhanced-thumbnail.webp",
-          "bytes": 3882,
-          "sha256": "d60ccbcc119bbdd4b7bf1dbfed1d31b050bd442ed25e8ac9a8d4871607e85a4c",
+          "url": "/scenes/europa/europa-enhanced.webp",
+          "bytes": 794982,
+          "sha256": "f09c335fd33e2a33a3484d530688f96d8be0c0143a2f75015919115c8dd7b369",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/europa/europa-enhanced-surface@2x.webp",
-          "bytes": 2186518,
-          "sha256": "0c4f1380187aec0a300b12338ea728700f6d9f6e77a0bb582754d3f5aa3a49ef",
+          "url": "/scenes/europa/europa-enhanced@2x.webp",
+          "bytes": 2318986,
+          "sha256": "ece705e5acee7f14bebf24ada58a62973a6bf92b4f1799a27e674aee4c889b40",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/europa/europa-enhanced-poles@2x.webp",
-          "bytes": 50426,
-          "sha256": "58a079ec75e35c9326e81d18b49886f5b4bab5405fb147a6a2988e0c2e974184",
+          "url": "/scenes/europa/europa-lens-enhanced.webp",
+          "bytes": 934,
+          "sha256": "2d6e49a99483eb54f50d18f577e30f7fff7cc92c889bb6f6df6cee2a99fb1234",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-poles-enhanced.webp",
+          "bytes": 42728,
+          "sha256": "c5a83828db8d14fb4f3e6e0004ea4b0343516e8a5f66f1c55573498455bb4151",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-poles-enhanced@2x.webp",
+          "bytes": 128444,
+          "sha256": "8b54d17d5e7777a5c74472fd77d70e125a350f7655567529a8f465d41e0501c3",
           "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "raster",
+      "selector": "/surfaces/2",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "Agenor Linea only, near 142°E and 44°S. Colors encode the released local stereo heights in meters; their relative datum is not a global reference level. Effective detail is about 3 km. Fixed northwest cartographic relief shows slopes; it is not part of the numeric scale. Gray grid preserves the DTM’s finite/no-data footprint. The archive’s duplicated, cubic-resampled quality products are excluded; colors imply no quality class or pointwise accuracy."
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true
+      },
+      "inputs": [
+        "usgs-agenor-controlled-dtm"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/europa/europa-elevation.webp",
+          "bytes": 15924,
+          "sha256": "1002760c5d9e38a9ba1b2507cf260b459c0ca74f0bbe7421d56aa4fed797ea7e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-elevation@2x.webp",
+          "bytes": 47256,
+          "sha256": "e5407450266e800dfafade50ddceae75756150685d9fcc25b7f6694fefc57e08",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lens-elevation.webp",
+          "bytes": 240,
+          "sha256": "7f7eb1f866707be8ae0e57bfcbd9243f9f9b6438c7b33ca8e9f3b7cec345d904",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-poles-elevation.webp",
+          "bytes": 4204,
+          "sha256": "d4c671de63704299c9942a93c339575bbf5c44964824a00c0d65d60f50a984f0",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-poles-elevation@2x.webp",
+          "bytes": 9464,
+          "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "geology",
+      "label": "Geology",
+      "recipe": "raster",
+      "selector": "/surfaces/3",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "USGS interpreted regional plains, bands, chaos terrains and crater deposits (2024; 1:15,000,000). Colors identify map units, not measured surface color. Gray grid marks no-data polygons. Fine line and point features are not represented by this polygon view."
+      ],
+      "lensIds": [
+        "geology"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true
+      },
+      "inputs": [
+        "usgs-europa-geologic-units-grid"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/europa/europa-geology.webp",
+          "bytes": 43076,
+          "sha256": "a5cc473103f9d4775aed9592af0ead1e2a0c929941cec0ae32c948dbab60d45f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-geology@2x.webp",
+          "bytes": 77748,
+          "sha256": "a3fd7b9f836f9d4c5e19c5f35da3da1b73fb7cd9974879ca81dae14dc99113a7",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lens-geology.webp",
+          "bytes": 470,
+          "sha256": "697a5fbba5af0d0a2ea39cd3e0bc2ce3d82c4fd5176e7990a810713767d1558e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-poles-geology.webp",
+          "bytes": 6030,
+          "sha256": "7376b869d45db2f83376a2bb559bfccbd3404a853c8dd3eda497cf25fb04f792",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-poles-geology@2x.webp",
+          "bytes": 12962,
+          "sha256": "88cb0181282a36a3cc302af263ce148031dde2b24c824535233995645a64723d",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "infrared",
+      "label": "Infrared",
+      "recipe": "raster",
+      "selector": "/surfaces/4",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "Galileo NIMS observations assign red, green and blue to 1.50, 1.34 and 0.73–0.74 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band."
+      ],
+      "lensIds": [
+        "infrared"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true
+      },
+      "inputs": [
+        "europa-registered-nims-composite"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/europa/europa-infrared.webp",
+          "bytes": 111272,
+          "sha256": "60a7fdea5d70e4c710b7ac5d156e0d9e475e1202463be3aeeab43e5336c952c0",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-infrared@2x.webp",
+          "bytes": 219612,
+          "sha256": "ba2e605d83c8c8ca54534913934bcb7ce34687e1ec541370595b120504899a3b",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lens-infrared.webp",
+          "bytes": 710,
+          "sha256": "26d66673fa26a82988d34d298d94708f97d3b3d0d34cc637ea0ff9ea38bca538",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-poles-infrared.webp",
+          "bytes": 21526,
+          "sha256": "8613375c4dfc5864d22038eecafe17a10a12fcdefa77eeb9739f7690c4762987",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-poles-infrared@2x.webp",
+          "bytes": 48836,
+          "sha256": "be613fee1b4a2a256f6c079d6476673d292ea9c7a068693eb31e85e99f6fa3e8",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "lighting",
+      "label": "lighting",
+      "recipe": "raster",
+      "selector": "/lighting",
+      "parents": [],
+      "process": "Evaluate the declared surface-lighting model into phase banks.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "kind": "rendering-model"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "url": "/scenes/europa/europa-lighting-1x-billboard.webp",
+          "bytes": 40826,
+          "sha256": "d5afd022eccb5ca3f7d03aecaf43d97bac06b3cf4378ee32bcabde5736ce8608",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-00.webp",
+          "bytes": 14922,
+          "sha256": "4ca06eb5cb7ee649c468604e7a6ad66127b7ae7d53d4b687c293fd277e932874",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-01.webp",
+          "bytes": 27532,
+          "sha256": "a4f51f9ffa31e80bb651eeeeb102f0dfe8e06db2811393260ca739f6c97c88d7",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-02.webp",
+          "bytes": 34558,
+          "sha256": "8a64a7ab3f92017dcc3beb3642c20331131234e5147af2df79e0a1c59015802e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-03.webp",
+          "bytes": 40648,
+          "sha256": "cb30a655aec4439c256b4233b9310b5b2437a5072d5381b7452a1799552d22b7",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-04.webp",
+          "bytes": 45092,
+          "sha256": "72e02f2f08b9bc290d6afbd06237fa8f7d3287a7aa7fa41d4871862aa2dc28ef",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-05.webp",
+          "bytes": 49044,
+          "sha256": "2c1a6e8c58b6d490313fd050a1b59c8545b06765082a6df44b153c7b7852b87b",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-06.webp",
+          "bytes": 52968,
+          "sha256": "3a63e0850d915ff4b2af1c642ff659f2f22cba88e14886135e2a15b06e6b7911",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-07.webp",
+          "bytes": 56198,
+          "sha256": "fa55950da032cece57a101406113fdc9ee7c83adc47feecf6011d1d817412193",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-08.webp",
+          "bytes": 59392,
+          "sha256": "a771538491ff5738da4841937108fccaeb197784ed9fbd45c261a229711b357d",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-09.webp",
+          "bytes": 61906,
+          "sha256": "982edea82c81c59427fec1e33b93c5e446c2164e5173c119e99f1cf2d3214653",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-10.webp",
+          "bytes": 62672,
+          "sha256": "03a295b2c895d7582cc31b79b85cfcb91c7d31f049124f9d21bb09bbeb8599f6",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-11.webp",
+          "bytes": 61062,
+          "sha256": "9c13ab791a488f4d1b7d8089410ecb5a53872a484cb0bba6245b4aaf9abc52b2",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-12.webp",
+          "bytes": 59454,
+          "sha256": "337dde459f14ccd5878aed9313c0c2cda7892a5679ca8cf44b262c66e28f1a46",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-13.webp",
+          "bytes": 52762,
+          "sha256": "820c4e14882c9942374378fa77135553a541806dd0ca93a73b5fd96dbb47b2dd",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-14.webp",
+          "bytes": 42196,
+          "sha256": "975b1c3c1809afb9e91b7dbd251ef16be5444d373d9e97643df3df992da15957",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-15.webp",
+          "bytes": 23242,
+          "sha256": "225fc2a90a34aafe74bc343c605f65e3e419da8bd70d9e309bbd2a9a27030009",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-16.webp",
+          "bytes": 28714,
+          "sha256": "a963ed733360af10da40ba94a81dd0b0cbf5bf620fe927aa0b130e5dde546b85",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-17.webp",
+          "bytes": 52870,
+          "sha256": "1dc0304a2c686f0fa0b221f5a619de5f780346ad7964df05e6bb77b6970f7b35",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-18.webp",
+          "bytes": 65644,
+          "sha256": "bfb746fa624b9994c78a28696f82cf9466e9245611208a3329bb4cbd6e782520",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-19.webp",
+          "bytes": 76630,
+          "sha256": "a13a9a62b069b3d0c6df11b6a581b48bfb59b81209a60f6932e04021aa15dc3d",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-20.webp",
+          "bytes": 85368,
+          "sha256": "098f39e8feaf5730286970b145a26c4d14f8572f56ea4147654ae5e6c47449ef",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-21.webp",
+          "bytes": 93744,
+          "sha256": "481146af42921688b6b7df4abc9a8c26bf3025ff66445e04e14ac639bdaa898a",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-22.webp",
+          "bytes": 99970,
+          "sha256": "380e210d04989c5dd12aa61dd2840e4ddc5953ca5477a6310112d1105a4929d1",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-23.webp",
+          "bytes": 107422,
+          "sha256": "ff0e1dd7c3ccc79b5711ac6798ea4f3544f662957886741d7f7483a05c5ed05f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-24.webp",
+          "bytes": 112788,
+          "sha256": "2a32c4146a4ac3a59ee0a9a4dced1e65294f3927b9f44f51a07ba54d607939e1",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-25.webp",
+          "bytes": 122328,
+          "sha256": "de08da9f53565707dab0aba3b62eb85bc4f1ff8fdb35b864fea7de2364034a75",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-26.webp",
+          "bytes": 130124,
+          "sha256": "21932a1e7a096edadcc1e2db43a72830533febb4e3ad6736c13c3ff21cb40346",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-27.webp",
+          "bytes": 137048,
+          "sha256": "3e4f6148e58885b0a2a1c9698bddb6e3ddbbaf2e21d36dcfaea6535d810a260e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-28.webp",
+          "bytes": 148122,
+          "sha256": "c076ee045f18ce285c00b62466a3b3d69a58401c774b6da41d278f7fd0fa30ae",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-29.webp",
+          "bytes": 157328,
+          "sha256": "b71a7728343b3787367084c545db3c75ace893d03c2de5573f94d4c5b3c9de66",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-30.webp",
+          "bytes": 167218,
+          "sha256": "a4fd0b6e52d657614777c5af19586e279afda7de3d6afe578811e84afe615be4",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-1x-row-31.webp",
+          "bytes": 182238,
+          "sha256": "4dc4d8bcf1832f28af5af706a5f48427b104cf4aef23f56a7f181420ca60db0e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-billboard.webp",
+          "bytes": 115740,
+          "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-00.webp",
+          "bytes": 37672,
+          "sha256": "ec6ee915f55a668fc95dacfef1499a42bd118a4aac16f3777b66e819ee31e2f2",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-01.webp",
+          "bytes": 70898,
+          "sha256": "e4b9d197c7d62aecdae0144b33895e7f55dd005c84a96ca6409b0f5869700fbc",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-02.webp",
+          "bytes": 92030,
+          "sha256": "5c752b1be40564aaba7d9ccadc0edba838ecaf4cc8fe5794efe58b404d4f6556",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-03.webp",
+          "bytes": 106840,
+          "sha256": "11824e8fda78b665117d9d40d63495cb36f768377d768b62c383a369ed40758c",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-04.webp",
+          "bytes": 120584,
+          "sha256": "55b22230f6aef465a46c3a66b00ab246dc223b080ca3d97412e2667f37deb66f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-05.webp",
+          "bytes": 132094,
+          "sha256": "a4cb1a4c54322a74ec9bcecd3b0ed4bb5ef9773db946a3a8d7aed8ef33f34d20",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-06.webp",
+          "bytes": 143228,
+          "sha256": "2586ccfe25f6bbd21d438a5b97551031e9a7b9b6d87f04872aacfc6ffe6cb39c",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-07.webp",
+          "bytes": 153142,
+          "sha256": "65482bb8de64f684ee6587ccc0f7ed0e7f0b3a6494b1dfa6510ed8c9dff79632",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-08.webp",
+          "bytes": 163984,
+          "sha256": "0f13d5d4cf8a8591660f47e32deae93a3006e18b3aa10bc4b96942beadc14600",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-09.webp",
+          "bytes": 172632,
+          "sha256": "b3bdd0776903940bc8c77ce34918ff6a6a0638dfe47ebb1896a3d2050f3ab1a3",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-10.webp",
+          "bytes": 177128,
+          "sha256": "1ad6e95b79025596c3ae11e928658923be4408dbd611f58e22475436812594e2",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-11.webp",
+          "bytes": 179144,
+          "sha256": "4920b80933238f45a83133c2c04c73b9f37f9bfefdf16afca4a1e1af9edcfbab",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-12.webp",
+          "bytes": 173518,
+          "sha256": "c1e8fb56dbb734572cfcace301f7b373cb03743d4245cfad6f3059451d43e3af",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-13.webp",
+          "bytes": 161150,
+          "sha256": "47d37733690f0de2136da2515f561e7f1cb520e5c9eaf8c38e06944ef0b25f91",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-14.webp",
+          "bytes": 132038,
+          "sha256": "07b759240df293f70fba1d761088cbff06844fdbc0cfbb4f50bde670b60ad583",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-15.webp",
+          "bytes": 69930,
+          "sha256": "2990c3e0953a66fbc2f1f7fff4006abbc014742c34d6ccc6f58e1f69750e8bac",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-16.webp",
+          "bytes": 74522,
+          "sha256": "4cd554323a5b4c4d7d302fd75f077ee0829bd995f69028cdeed09cb71430a95d",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-17.webp",
+          "bytes": 143520,
+          "sha256": "2ecca046c7a3ccfc32431f93ca3bfc1da1eed02c8faee885a51d32103ad550d4",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-18.webp",
+          "bytes": 185628,
+          "sha256": "659839c1f5c68b28b73226c72861311cc2e223face47af04284f01c58462da9a",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-19.webp",
+          "bytes": 218252,
+          "sha256": "0032b3cb244f0ef0d03e4176f2cca51a5efc25c6dac0a928fd70073c39a27e01",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-20.webp",
+          "bytes": 245184,
+          "sha256": "dee7965558ba47853e80d02af052eb3d8d96c2cb0f9ea6ece30b8604af899ad6",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-21.webp",
+          "bytes": 269836,
+          "sha256": "160e8c89beb6880cca9d1c4c49c1d7ae8d42be1f1f1bac790bcc1ae098809f41",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-22.webp",
+          "bytes": 291326,
+          "sha256": "64714cc753f56a2a794c09926acd4f589c69ebedc97b7636576aa2e8a8391318",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-23.webp",
+          "bytes": 312110,
+          "sha256": "f1fc46cc87683bce654494f74cb30e03e7490b8fcc50c00a1acda54ce7b014f2",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-24.webp",
+          "bytes": 333302,
+          "sha256": "866d79248222db2db636fade29aa0ca9009fba80fab506c1858e0b515bc23520",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-25.webp",
+          "bytes": 355976,
+          "sha256": "ae19b305ce1eeb00a4a9318a2be187734482bcd93f2d992d236fbf813072766c",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-26.webp",
+          "bytes": 377782,
+          "sha256": "c981f9f2abc41afe63dcacee618425a422b37f88579dc7cb294919bfc03062d1",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-27.webp",
+          "bytes": 403282,
+          "sha256": "cc34f5b92eeb1ae06c753ba286c86b36e5e9b91b06ff7b1d8f8aaa124bfa56e8",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-28.webp",
+          "bytes": 429004,
+          "sha256": "e0dbc0c14c173d8ae855d6cbd9b240ce8e4b43383e01c49701f3628415b1704e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-29.webp",
+          "bytes": 456570,
+          "sha256": "2859562bb82812c38c6c6adcf748be8d5afc47ce68e6a3091255f24e489016cf",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-30.webp",
+          "bytes": 481914,
+          "sha256": "e82ae2b58ba24928ad234c6aed182dc48c900ac0c04a61509519f93562d8b2b9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/europa/europa-lighting-2x-row-31.webp",
+          "bytes": 526556,
+          "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "authored-recipe"
     },
     {
       "id": "content",
@@ -2482,7 +1961,7 @@
         "content"
       ],
       "inputs": [
-        "authored-document:content/object.json"
+        "europa-object-content"
       ],
       "outputs": [
         {
@@ -2521,8 +2000,8 @@
       "outputs": [
         {
           "url": "/scenes/europa/europa-features.json",
-          "bytes": 690192,
-          "sha256": "dc2bf5bd4513ba0fa817e5d6458307910dd6804c31c4a1fc8fccc584c22d3b82",
+          "bytes": 690207,
+          "sha256": "05f8493bcbec60b654f694d1dacdafb870b520916a78184d5cfbca2c81ad9d19",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -2531,10 +2010,10 @@
     {
       "id": "preview:normal",
       "label": "Monochrome preview",
-      "recipe": "terrestrial",
-      "selector": "/raster/observations/0",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "inputs": [],
       "parents": [
@@ -2546,80 +2025,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 51194,
-          "sha256": "2bc38b2dc074ddc97d0259c971ccfbe9a06403ade09846712f95bc0bc4c6b738",
-          "verification": "bytes-verified"
-        }
-      ]
-    },
-    {
-      "id": "preview:infrared",
-      "label": "Infrared preview",
-      "recipe": "terrestrial",
-      "selector": "/raster/observations/1",
-      "recipeDependencies": [
-        "terrestrial"
-      ],
-      "inputs": [],
-      "parents": [
-        "infrared"
-      ],
-      "lensIds": [],
-      "process": "Prepare a small surface preview from the same interpreted dataset.",
-      "limitations": [],
-      "outputs": [
-        {
-          "url": "object:prepared/minimaps/infrared.webp",
-          "bytes": 17462,
-          "sha256": "3d5f51e067738cf28b6c1d7b1a43e8666e1d2df3ff2eb7cb633d7cfd90ffbc06",
-          "verification": "bytes-verified"
-        }
-      ]
-    },
-    {
-      "id": "preview:elevation",
-      "label": "Elevation preview",
-      "recipe": "terrestrial",
-      "selector": "/raster/scientific/0",
-      "recipeDependencies": [
-        "terrestrial"
-      ],
-      "inputs": [],
-      "parents": [
-        "elevation"
-      ],
-      "lensIds": [],
-      "process": "Prepare a small surface preview from the same interpreted dataset.",
-      "limitations": [],
-      "outputs": [
-        {
-          "url": "object:prepared/minimaps/elevation.webp",
-          "bytes": 2470,
-          "sha256": "31bc190cd9a1316e24b9d58b713adf51021c7043a04d8d8d88db0e20872f8e5d",
-          "verification": "bytes-verified"
-        }
-      ]
-    },
-    {
-      "id": "preview:geology",
-      "label": "Geology preview",
-      "recipe": "terrestrial",
-      "selector": "/raster/scientific/1",
-      "recipeDependencies": [
-        "terrestrial"
-      ],
-      "inputs": [],
-      "parents": [
-        "geology"
-      ],
-      "lensIds": [],
-      "process": "Prepare a small surface preview from the same interpreted dataset.",
-      "limitations": [],
-      "outputs": [
-        {
-          "url": "object:prepared/minimaps/geology.webp",
-          "bytes": 65338,
-          "sha256": "db9051ee5a644a5bbcb0e458e9918960bc027ad07f72c0b2c69a295dff702253",
+          "bytes": 54356,
+          "sha256": "ec6c266ba3757e73177910aa0459d040a62259db42151acd32eb4b0bb813d0d7",
           "verification": "bytes-verified"
         }
       ]
@@ -2627,10 +2034,10 @@
     {
       "id": "preview:enhanced",
       "label": "Enhanced color preview",
-      "recipe": "terrestrial",
-      "selector": "/raster/observedColors/0",
+      "recipe": "raster",
+      "selector": "/surfaces/1",
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "inputs": [],
       "parents": [
@@ -2642,8 +2049,80 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/enhanced.webp",
-          "bytes": 49490,
-          "sha256": "5cf3378d6671a46d4d1b42b875686b8cb30c3b53ed8f63fd383206e7c34153e2",
+          "bytes": 52488,
+          "sha256": "840718750608fc2cd24ca5df70e1ca80365f3ea67a92c3fa8cbda7bf714303eb",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "raster",
+      "selector": "/surfaces/2",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 2588,
+          "sha256": "531ed766aa851a6e51399aeb222dd905e05dfe166449076765df816299bd0f59",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:geology",
+      "label": "Geology preview",
+      "recipe": "raster",
+      "selector": "/surfaces/3",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "inputs": [],
+      "parents": [
+        "geology"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/geology.webp",
+          "bytes": 9982,
+          "sha256": "ddbec5c8c1ac6cb588f4c6eb65f50d7ff1f7fc0ccba5824b638ce9ee76d82fc3",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:infrared",
+      "label": "Infrared preview",
+      "recipe": "raster",
+      "selector": "/surfaces/4",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "inputs": [],
+      "parents": [
+        "infrared"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/infrared.webp",
+          "bytes": 18356,
+          "sha256": "1e8cd5deb3ca4d5ead77c5d4bba329f798f7bc477a9478349c745509805d56c1",
           "verification": "bytes-verified"
         }
       ]

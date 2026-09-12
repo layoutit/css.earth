@@ -418,7 +418,7 @@
         "geology-surfaces"
       ],
       "acquisition": "Checked-in derived categorical grid. Reproduce with tools/objects/prepare-geologic-categories.py source/preparation/geology-conversion.json using the pinned original GIS and registration.",
-      "coverage": "Ten historical geologic units digitized from Voyager-era mapping. Registration reconstructed from crater landmarks; four independent checks differ by 0.33\u20130.83\u00b0 (about 4.5\u201311.4 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+      "coverage": "Ten historical geologic units digitized from Voyager-era mapping. Registration reconstructed from crater landmarks; four independent checks differ by 0.33–0.83° (about 4.5–11.4 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
@@ -441,7 +441,7 @@
       "expectedSha256": "3c81644e31444a9576203f2e9956f43bf09e0f670a25885eb19e0581101b6c91",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/TITANIA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -511,39 +511,217 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       }
+    },
+    {
+      "id": "hyg-registration-field",
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 850,
+      "expectedSha256": "4f0dc5b304ec334d693054f2efc387ec680ed84b201d215fcd118bb4137bbb1d",
+      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
+      "credit": "David Nash",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
+      ],
+      "acquisition": "checked prepared registration field from HYG v4.1",
+      "redistribution": "CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hyg-v41",
+            "role": "material",
+            "evidence": "src/planets/titania/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+          }
+        ]
+      }
+    },
+    {
+      "id": "titania-title-mark",
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3820,
+      "expectedSha256": "0801e9d717da2e92db9702fdafc807b3530f0df2e8b292d9b0898dedf6a2c07c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "deterministically generated Titania title path from the repository-pinned Inter font",
+      "redistribution": "generated outline under the Inter license",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/titania/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
+      }
+    },
+    {
+      "id": "titania-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 1647,
+      "expectedSha256": "40d9193d596427b78207511575cd618e869c2b2c344bddc34a1fe12ad0f67bc5",
+      "origin": "Repository-authored Titania solar-system recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "sky-sun",
+        "system-markers",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored camera scale and marker layout using the cited solar-system geometry."
+      }
+    },
+    {
+      "id": "titania-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 7826,
+      "expectedSha256": "484762bee69d0195d3e7dadc828f707a852fd961b00feba1a0520ff2c4f393fd",
+      "origin": "Repository-authored Titania raster recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored image sampling, science painting, packing and lighting-bank settings."
+      }
+    },
+    {
+      "id": "titania-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1421,
+      "expectedSha256": "aef8ddd1671d72a3cdbeb90eba0b0e9410af7795600837c0bfac71a3ee40a5b0",
+      "origin": "Repository-authored Titania geometry recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored CSS geometry, UV sampling and seam settings."
+      }
+    },
+    {
+      "id": "titania-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 224,
+      "expectedSha256": "629b24307889fe022dd188b43161a38d10b8fb4da5d76573b7fc9c26fe59b0ce",
+      "origin": "Repository-authored Titania celestial recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "sky-sun",
+        "starfield",
+        "system-markers"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored sky, Sun and marker preparation settings."
+      }
+    },
+    {
+      "id": "titania-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 103,
+      "expectedSha256": "d2e541e7099a7be54eff4fa45b027bbace1420f56c82c258ffb1dedc1c37b56a",
+      "origin": "Repository-authored Titania presentation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored scene composition and supported views."
+      }
+    },
+    {
+      "id": "titania-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedBytes": 3296,
+      "expectedSha256": "0b65cf876da337da6fa9fe38e3cbca12bb224f99910a8bf263d88fe4cf98a273",
+      "origin": "Repository-authored Titania navigation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "navigation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored marker, caption and camera settings."
+      }
+    },
+    {
+      "id": "titania-preparation-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 3279,
+      "expectedSha256": "51d9b9a6a372bbd685d4fd64d185247561d77d1e2916e563e10409a067771a91",
+      "origin": "Repository-authored Titania acquisition recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored requests and extraction steps for restoring source files."
+      }
+    },
+    {
+      "id": "titania-object-content",
+      "path": "content/object.json",
+      "expectedBytes": 13209,
+      "expectedSha256": "4b276f37299fed0e596a91f6227c33da9e6d079a790e4354c12c28c4e4a2c617",
+      "origin": "Repository-authored Titania object recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+      }
     }
   ],
   "generatedIntermediates": [],
   "documents": [
-    {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 6435,
-      "expectedSha256": "66af3b3720282972302367646b5d22f5f84790c4319c8d7a2da3a112788f5c6f"
-    },
-    {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 3296,
-      "expectedSha256": "0b65cf876da337da6fa9fe38e3cbca12bb224f99910a8bf263d88fe4cf98a273"
-    },
-    {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 3279,
-      "expectedSha256": "51d9b9a6a372bbd685d4fd64d185247561d77d1e2916e563e10409a067771a91"
-    },
-    {
-      "path": "content/object.json",
-      "expectedBytes": 12978,
-      "expectedSha256": "925b96d5f106d5123fa1e7df5ee024e65a1ccd21240e30f4cb2af7daf4c9f8be",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
-      }
-    },
-    {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3820,
-      "expectedSha256": "0801e9d717da2e92db9702fdafc807b3530f0df2e8b292d9b0898dedf6a2c07c"
-    },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
@@ -558,11 +736,6 @@
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
       "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 850,
-      "expectedSha256": "4f0dc5b304ec334d693054f2efc387ec680ed84b201d215fcd118bb4137bbb1d"
     },
     {
       "path": "observations/aaReadMe_uranian_MAP_DEM.txt",

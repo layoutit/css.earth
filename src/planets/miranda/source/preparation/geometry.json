@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-css-geometry-profile@1",
+  "namespace": "miranda",
+  "surface": {
+    "radius": 230,
+    "polarRadius": 230,
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
+    "surface": {
+      "url": "/scenes/miranda/miranda-normal.webp",
+      "width": 3200,
+      "height": 2400
+    },
+    "surfaceLatitudeHeight": 1600,
+    "packedBandGutter": 25,
+    "poles": {
+      "url": "/scenes/miranda/miranda-poles-normal.webp",
+      "width": 512,
+      "height": 256
+    },
+    "polarTileSize": 256,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "cell",
+    "color": "#aaa8a0"
+  },
+  "projection": {
+    "tileSize": 50,
+    "layerElevation": 50,
+    "seamBleed": 0,
+    "interiorSeamBleed": 8,
+    "overlap": 0.005,
+    "fitToSource": false,
+    "rasterScale": 4,
+    "rasterGutter": 25,
+    "rasterOverscan": 0,
+    "positionVariables": false,
+    "projectivePoles": false,
+    "lightColor": "#ffffff",
+    "ambientIntensity": 0.05
+  },
+  "bodyRotationDegrees": 0,
+  "output": {
+    "schema": "cssmiranda-prepared-runtime-scene@1",
+    "materialSchema": "cssmiranda-prepared-view-material@1",
+    "layout": "body-container",
+    "body": {
+      "axialTiltDegrees": 0,
+      "rotationDirection": "prograde",
+      "rotationPeriodEarthDays": 1.413784
+    },
+    "animation": {
+      "cloudsVisualSeconds": 84,
+      "surfaceVisualSeconds": 84,
+      "direction": "prograde"
+    }
+  }
+}

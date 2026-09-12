@@ -1,10 +1,19 @@
-import { browserProfileLensIds, createObjectBrowserProfile } from "../../../../site/test/object-browser-profile.mts";
-import objectControls from "../../../../src/planets/eris/prepared/controls.json" with { type: "json" };
+import { createObjectBrowserProfile } from "../../../../site/test/object-browser-profile.mts";
+import { readPreparedFixture } from "../../fixtures.mts";
+const objectControls = await readPreparedFixture("eris", "controls");
 
-export const browserProfile = createObjectBrowserProfile({ id: "eris", controls: objectControls,
-  audit: {
-    preparedAssetPairs: [{ one: "/scenes/eris/eris-directional-sun.webp", two: "/scenes/eris/eris-directional-sun@2x.webp" }],
-    canonicalPreparedAssets: ["/scenes/eris/surface.webp", "/scenes/eris/poles.webp", "/scenes/eris/lighting.webp"],
-    retained: { lensIds: browserProfileLensIds(objectControls), allowedMountSelectors: [] },
-  },
+export const browserProfile = createObjectBrowserProfile({
+  id: "eris", controls: objectControls,
+  audit: Object.freeze({
+    preparedAssetPairs: Object.freeze([
+      Object.freeze({ one: "/scenes/eris/eris-illustration.webp", two: "/scenes/eris/eris-illustration@2x.webp" }),
+      Object.freeze({ one: "/scenes/eris/eris-poles-illustration.webp", two: "/scenes/eris/eris-poles-illustration@2x.webp" }),
+      Object.freeze({ one: "/scenes/eris/eris-starfield-front.webp", two: "/scenes/eris/eris-starfield-front@2x.webp" }),
+      Object.freeze({ one: "/scenes/eris/eris-directional-sun.webp", two: "/scenes/eris/eris-directional-sun@2x.webp" }),
+    ]),
+    retained: Object.freeze({
+      lensIds: Object.freeze(["illustration"]),
+      allowedMountSelectors: Object.freeze([]),
+    }),
+  }),
 });

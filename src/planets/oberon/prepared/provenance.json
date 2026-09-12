@@ -4,35 +4,52 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "62b2d44f7afbd69d831955db1ef513564fc8907567befbae5a2a1d63baf9f3c7"
+    "sha256": "dca01c4459c2be7da650cb3db6d43f56d5d473951719d8b10c942e89c652c9e0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "867672765ca42de37db80c5aeded776c2ec7725b0441ec3ddfd619cd2cb83107"
+    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
   },
   "recipes": [
     {
-      "id": "terrestrial",
-      "path": "source/preparation/terrestrial.json",
-      "sha256": "efb77e160705b1e37cc0cb741bd509100d822ff3046aa68d308f74aceb32510e",
+      "id": "raster",
+      "path": "source/preparation/raster.json",
+      "sha256": "2ae31450aa38b421536f4ec42ea1cc01f919d780d4db76671c23a2ffccf71621",
       "parameters": {
-        "schema": "cssearth-terrestrial-preparation@1",
-        "kind": "solid-observation-body",
-        "namespace": "oberon",
-        "displayName": "Oberon",
+        "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/oberon/",
-        "distanceAu": 19.2,
-        "raster": {
-          "width": 5760,
-          "height": 2880,
-          "bandCount": 16,
-          "gutter": 64,
-          "poleSize": 1024,
-          "surfaceQuality": 95,
-          "reportMissingPixels": true,
-          "observations": [
-            {
+        "sourceWidth": 5760,
+        "sourceHeight": 2880,
+        "width": 2048,
+        "height": 1024,
+        "latitudeBands": 16,
+        "polarTile": 256,
+        "densities": [
+          1,
+          2
+        ],
+        "resample": "density-before-pack",
+        "polarProjection": "orthographic-bilinear",
+        "polesCombined": false,
+        "polesOutput": "oberon-poles-{id}{suffix}.webp",
+        "surfaceMetadata": {
+          "schema": "cssoberon-prepared-assets@1"
+        },
+        "thumbnail": {
+          "size": 64,
+          "quality": 88
+        },
+        "surfaces": [
+          {
+            "id": "normal",
+            "output": "oberon-{id}{suffix}.webp",
+            "thumbnail": "oberon-lens-{id}.webp",
+            "source": "observations/oumap-cyl-180180.cub.gz",
+            "falseColor": false,
+            "science": {
+              "kind": "terrestrial-observation",
+              "input": "schenk-2020-oberon-normal",
               "id": "normal",
               "validity": {
                 "kind": "isis3-float-monochrome",
@@ -60,49 +77,55 @@
                 ]
               }
             }
-          ],
-          "scientific": [],
-          "observedColors": []
-        },
+          }
+        ],
         "lighting": {
           "frameSize": 512,
           "columns": 8,
-          "frameCount": 128,
-          "logicalSize": 460,
-          "terminatorWidth": 0.1,
-          "directionalAmbient": 0.05,
-          "fullPhaseAmbient": 0.35,
-          "fullPhaseDiffuse": 0.65,
-          "maximumOpacity": 0.95
-        },
-        "geometry": {
-          "radius": 230,
-          "radiusKm": 761.4,
-          "camera": {
-            "initialScenePitchDegrees": 23.16814981911987,
-            "defaultControlYawDegrees": -47.627021476672894
-          },
-          "mapUrl": "/scenes/oberon/oberon-normal-surface@2x.webp",
-          "polesUrl": "/scenes/oberon/oberon-normal-poles@2x.webp"
-        },
-        "celestial": {
-          "sunSource": "Vendored JPL Horizons Uranus satellite elements and IAU/NAIF Oberon rotation at the shared epoch."
-        },
-        "presentation": {
-          "defaultLens": "normal",
-          "pointColor": [
-            159,
-            151,
-            142
+          "presentationSize": 460,
+          "defaultFrame": 230,
+          "billboardFrameSize": 24,
+          "billboardColumns": 16,
+          "rowOutput": "oberon-lighting-{density}x-row-{row}.webp",
+          "billboardOutput": "oberon-lighting-{density}x-billboard.webp",
+          "minimumLightViewZ": -1,
+          "maximumLightViewZ": 1,
+          "frameCount": 256,
+          "shadowlessFloodLimbFloor": 0.35,
+          "ambientIntensity": 0.05,
+          "radiusScale": 0.505,
+          "terminator": [
+            0,
+            0.1
           ],
-          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+          "maximumAlpha": 0.95,
+          "bankSchema": "cssoberon-prepared-lighting-bank@1",
+          "billboardSchema": "cssoberon-prepared-lighting-billboard@1",
+          "metadata": {
+            "schema": "cssoberon-prepared-lighting@1",
+            "storageModel": "prepared-full-resolution-density-row-shards",
+            "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+            "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+            "ambientIntensity": 0.05,
+            "shadowlessFloodLimbFloor": 0.35,
+            "orenNayarRoughness": 0,
+            "terminatorSmoothstep": [
+              0,
+              0.1
+            ],
+            "minimumLightViewZ": -1,
+            "maximumLightViewZ": 1,
+            "baseLightAzimuthDegrees": 0,
+            "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+            "runtimeRasterization": false
+          }
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cd2fb8b0e5a1f7f2f12b6b10dd1ab7365be24b737a22ee58aeb13e8aecb81c4f",
+      "sha256": "3e47b5cd546cc90ee38740673d64a03658f53206c12585b07136634792a99ed3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -187,9 +210,9 @@
               "description": "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo.",
               "title": "Monochrome mosaic",
               "detail": "Corrected mosaic",
-              "thumbnail": "/scenes/oberon/oberon-normal-thumbnail.webp",
-              "surface": "oberon-normal-surface@2x.webp",
-              "poles": "oberon-normal-poles@2x.webp",
+              "thumbnail": "oberon-lens-normal.webp",
+              "surface": "oberon-normal.webp",
+              "poles": "oberon-poles-normal.webp",
               "source": {
                 "id": "schenk-2020-oberon-normal",
                 "path": "../manifest.json",
@@ -210,8 +233,8 @@
             },
             {
               "kind": "toggle",
-              "name": "orbit",
-              "label": "Orbit",
+              "name": "stars",
+              "label": "Stars",
               "checked": true
             }
           ]
@@ -399,20 +422,20 @@
       "verificationOperations": []
     },
     {
+      "kind": "authored-content",
+      "id": "oberon-object-content",
       "path": "content/object.json",
+      "origin": "Repository-authored Oberon object recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored page text, factsheet, view descriptions and legends."
       },
-      "id": "authored-document:content/object.json",
-      "kind": "authored-content",
-      "origin": "object:source/content/object.json",
-      "title": "content/object.json",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored, pinned object-package document.",
-      "upstreamLineage": "not-recorded",
-      "sha256": "cd2fb8b0e5a1f7f2f12b6b10dd1ab7365be24b737a22ee58aeb13e8aecb81c4f",
-      "bytes": 8168,
+      "sha256": "3e47b5cd546cc90ee38740673d64a03658f53206c12585b07136634792a99ed3",
+      "bytes": 8134,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -496,10 +519,10 @@
     {
       "id": "normal",
       "label": "Monochrome",
-      "recipe": "terrestrial",
-      "selector": "/raster/observations/0",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
         "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo."
       ],
@@ -507,59 +530,463 @@
         "normal"
       ],
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "interpretation": {
-        "validity": {
-          "kind": "isis3-float-monochrome",
-          "grid": {
-            "width": 957,
-            "height": 479,
-            "targetName": "Oberon",
-            "centerLongitude": 180,
-            "referenceRadiusMeters": 761400,
-            "polarRadiusMeters": 761400,
-            "origin": [
-              -4785000,
-              1200000
-            ],
-            "resolutionMeters": 5000,
-            "specialValueMagnitude": 1e+30,
-            "longitudeRange": [
-              -180,
-              180
-            ]
-          },
-          "displayRange": [
-            0,
-            2100
-          ]
-        }
+        "falseColor": false
       },
       "inputs": [
         "schenk-2020-oberon-normal"
       ],
       "outputs": [
         {
-          "url": "/scenes/oberon/oberon-normal-thumbnail.webp",
-          "bytes": 2024,
-          "sha256": "932626e748e2d4a13041e28b569d68b3e6b22b784bfcf4f6eaa5145a3705340c",
+          "url": "/scenes/oberon/oberon-normal.webp",
+          "bytes": 110220,
+          "sha256": "5a4c0bd508039c2157b8961b114ad9a64d2ff205ed07b66d429f703a348ac1d4",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/oberon/oberon-normal-surface@2x.webp",
-          "bytes": 692024,
-          "sha256": "889a24ef1df21da317d41eefb8395aa3b1c41819d9a00b2b2dfe88a710d3f35a",
+          "url": "/scenes/oberon/oberon-normal@2x.webp",
+          "bytes": 245300,
+          "sha256": "388e0f51a9a6e973f7ad7a2da0f6c026d16eb0586b052dc05a240ca894b60c7f",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/oberon/oberon-normal-poles@2x.webp",
-          "bytes": 39620,
-          "sha256": "d7b5a3da4779ed70c3aca89ddfd939a38dc7bb12bb051d36d56c809a4111b420",
+          "url": "/scenes/oberon/oberon-lens-normal.webp",
+          "bytes": 368,
+          "sha256": "5db069c3e1735d1c840d0b62cb39b9dde97e281719a0634acde545a2d83d419c",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-poles-normal.webp",
+          "bytes": 23832,
+          "sha256": "51e6ab8ce467031d1e4979ff098519bc32cbccf344c187d4cb1aa41d300052b8",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-poles-normal@2x.webp",
+          "bytes": 63918,
+          "sha256": "990f48461c50ce476c74a415dafbad69025eaad62c21916c9613a561f1037e32",
           "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "lighting",
+      "label": "lighting",
+      "recipe": "raster",
+      "selector": "/lighting",
+      "parents": [],
+      "process": "Evaluate the declared surface-lighting model into phase banks.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "kind": "rendering-model"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-billboard.webp",
+          "bytes": 40826,
+          "sha256": "d5afd022eccb5ca3f7d03aecaf43d97bac06b3cf4378ee32bcabde5736ce8608",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-00.webp",
+          "bytes": 14922,
+          "sha256": "4ca06eb5cb7ee649c468604e7a6ad66127b7ae7d53d4b687c293fd277e932874",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-01.webp",
+          "bytes": 27532,
+          "sha256": "a4f51f9ffa31e80bb651eeeeb102f0dfe8e06db2811393260ca739f6c97c88d7",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-02.webp",
+          "bytes": 34558,
+          "sha256": "8a64a7ab3f92017dcc3beb3642c20331131234e5147af2df79e0a1c59015802e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-03.webp",
+          "bytes": 40648,
+          "sha256": "cb30a655aec4439c256b4233b9310b5b2437a5072d5381b7452a1799552d22b7",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-04.webp",
+          "bytes": 45092,
+          "sha256": "72e02f2f08b9bc290d6afbd06237fa8f7d3287a7aa7fa41d4871862aa2dc28ef",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-05.webp",
+          "bytes": 49044,
+          "sha256": "2c1a6e8c58b6d490313fd050a1b59c8545b06765082a6df44b153c7b7852b87b",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-06.webp",
+          "bytes": 52968,
+          "sha256": "3a63e0850d915ff4b2af1c642ff659f2f22cba88e14886135e2a15b06e6b7911",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-07.webp",
+          "bytes": 56198,
+          "sha256": "fa55950da032cece57a101406113fdc9ee7c83adc47feecf6011d1d817412193",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-08.webp",
+          "bytes": 59392,
+          "sha256": "a771538491ff5738da4841937108fccaeb197784ed9fbd45c261a229711b357d",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-09.webp",
+          "bytes": 61906,
+          "sha256": "982edea82c81c59427fec1e33b93c5e446c2164e5173c119e99f1cf2d3214653",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-10.webp",
+          "bytes": 62672,
+          "sha256": "03a295b2c895d7582cc31b79b85cfcb91c7d31f049124f9d21bb09bbeb8599f6",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-11.webp",
+          "bytes": 61062,
+          "sha256": "9c13ab791a488f4d1b7d8089410ecb5a53872a484cb0bba6245b4aaf9abc52b2",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-12.webp",
+          "bytes": 59454,
+          "sha256": "337dde459f14ccd5878aed9313c0c2cda7892a5679ca8cf44b262c66e28f1a46",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-13.webp",
+          "bytes": 52762,
+          "sha256": "820c4e14882c9942374378fa77135553a541806dd0ca93a73b5fd96dbb47b2dd",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-14.webp",
+          "bytes": 42196,
+          "sha256": "975b1c3c1809afb9e91b7dbd251ef16be5444d373d9e97643df3df992da15957",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-15.webp",
+          "bytes": 23242,
+          "sha256": "225fc2a90a34aafe74bc343c605f65e3e419da8bd70d9e309bbd2a9a27030009",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-16.webp",
+          "bytes": 28714,
+          "sha256": "a963ed733360af10da40ba94a81dd0b0cbf5bf620fe927aa0b130e5dde546b85",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-17.webp",
+          "bytes": 52870,
+          "sha256": "1dc0304a2c686f0fa0b221f5a619de5f780346ad7964df05e6bb77b6970f7b35",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-18.webp",
+          "bytes": 65644,
+          "sha256": "bfb746fa624b9994c78a28696f82cf9466e9245611208a3329bb4cbd6e782520",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-19.webp",
+          "bytes": 76630,
+          "sha256": "a13a9a62b069b3d0c6df11b6a581b48bfb59b81209a60f6932e04021aa15dc3d",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-20.webp",
+          "bytes": 85368,
+          "sha256": "098f39e8feaf5730286970b145a26c4d14f8572f56ea4147654ae5e6c47449ef",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-21.webp",
+          "bytes": 93744,
+          "sha256": "481146af42921688b6b7df4abc9a8c26bf3025ff66445e04e14ac639bdaa898a",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-22.webp",
+          "bytes": 99970,
+          "sha256": "380e210d04989c5dd12aa61dd2840e4ddc5953ca5477a6310112d1105a4929d1",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-23.webp",
+          "bytes": 107422,
+          "sha256": "ff0e1dd7c3ccc79b5711ac6798ea4f3544f662957886741d7f7483a05c5ed05f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-24.webp",
+          "bytes": 112788,
+          "sha256": "2a32c4146a4ac3a59ee0a9a4dced1e65294f3927b9f44f51a07ba54d607939e1",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-25.webp",
+          "bytes": 122328,
+          "sha256": "de08da9f53565707dab0aba3b62eb85bc4f1ff8fdb35b864fea7de2364034a75",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-26.webp",
+          "bytes": 130124,
+          "sha256": "21932a1e7a096edadcc1e2db43a72830533febb4e3ad6736c13c3ff21cb40346",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-27.webp",
+          "bytes": 137048,
+          "sha256": "3e4f6148e58885b0a2a1c9698bddb6e3ddbbaf2e21d36dcfaea6535d810a260e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-28.webp",
+          "bytes": 148122,
+          "sha256": "c076ee045f18ce285c00b62466a3b3d69a58401c774b6da41d278f7fd0fa30ae",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-29.webp",
+          "bytes": 157328,
+          "sha256": "b71a7728343b3787367084c545db3c75ace893d03c2de5573f94d4c5b3c9de66",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-30.webp",
+          "bytes": 167218,
+          "sha256": "a4fd0b6e52d657614777c5af19586e279afda7de3d6afe578811e84afe615be4",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-1x-row-31.webp",
+          "bytes": 182238,
+          "sha256": "4dc4d8bcf1832f28af5af706a5f48427b104cf4aef23f56a7f181420ca60db0e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-billboard.webp",
+          "bytes": 115740,
+          "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-00.webp",
+          "bytes": 37672,
+          "sha256": "ec6ee915f55a668fc95dacfef1499a42bd118a4aac16f3777b66e819ee31e2f2",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-01.webp",
+          "bytes": 70898,
+          "sha256": "e4b9d197c7d62aecdae0144b33895e7f55dd005c84a96ca6409b0f5869700fbc",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-02.webp",
+          "bytes": 92030,
+          "sha256": "5c752b1be40564aaba7d9ccadc0edba838ecaf4cc8fe5794efe58b404d4f6556",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-03.webp",
+          "bytes": 106840,
+          "sha256": "11824e8fda78b665117d9d40d63495cb36f768377d768b62c383a369ed40758c",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-04.webp",
+          "bytes": 120584,
+          "sha256": "55b22230f6aef465a46c3a66b00ab246dc223b080ca3d97412e2667f37deb66f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-05.webp",
+          "bytes": 132094,
+          "sha256": "a4cb1a4c54322a74ec9bcecd3b0ed4bb5ef9773db946a3a8d7aed8ef33f34d20",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-06.webp",
+          "bytes": 143228,
+          "sha256": "2586ccfe25f6bbd21d438a5b97551031e9a7b9b6d87f04872aacfc6ffe6cb39c",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-07.webp",
+          "bytes": 153142,
+          "sha256": "65482bb8de64f684ee6587ccc0f7ed0e7f0b3a6494b1dfa6510ed8c9dff79632",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-08.webp",
+          "bytes": 163984,
+          "sha256": "0f13d5d4cf8a8591660f47e32deae93a3006e18b3aa10bc4b96942beadc14600",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-09.webp",
+          "bytes": 172632,
+          "sha256": "b3bdd0776903940bc8c77ce34918ff6a6a0638dfe47ebb1896a3d2050f3ab1a3",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-10.webp",
+          "bytes": 177128,
+          "sha256": "1ad6e95b79025596c3ae11e928658923be4408dbd611f58e22475436812594e2",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-11.webp",
+          "bytes": 179144,
+          "sha256": "4920b80933238f45a83133c2c04c73b9f37f9bfefdf16afca4a1e1af9edcfbab",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-12.webp",
+          "bytes": 173518,
+          "sha256": "c1e8fb56dbb734572cfcace301f7b373cb03743d4245cfad6f3059451d43e3af",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-13.webp",
+          "bytes": 161150,
+          "sha256": "47d37733690f0de2136da2515f561e7f1cb520e5c9eaf8c38e06944ef0b25f91",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-14.webp",
+          "bytes": 132038,
+          "sha256": "07b759240df293f70fba1d761088cbff06844fdbc0cfbb4f50bde670b60ad583",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-15.webp",
+          "bytes": 69930,
+          "sha256": "2990c3e0953a66fbc2f1f7fff4006abbc014742c34d6ccc6f58e1f69750e8bac",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-16.webp",
+          "bytes": 74522,
+          "sha256": "4cd554323a5b4c4d7d302fd75f077ee0829bd995f69028cdeed09cb71430a95d",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-17.webp",
+          "bytes": 143520,
+          "sha256": "2ecca046c7a3ccfc32431f93ca3bfc1da1eed02c8faee885a51d32103ad550d4",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-18.webp",
+          "bytes": 185628,
+          "sha256": "659839c1f5c68b28b73226c72861311cc2e223face47af04284f01c58462da9a",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-19.webp",
+          "bytes": 218252,
+          "sha256": "0032b3cb244f0ef0d03e4176f2cca51a5efc25c6dac0a928fd70073c39a27e01",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-20.webp",
+          "bytes": 245184,
+          "sha256": "dee7965558ba47853e80d02af052eb3d8d96c2cb0f9ea6ece30b8604af899ad6",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-21.webp",
+          "bytes": 269836,
+          "sha256": "160e8c89beb6880cca9d1c4c49c1d7ae8d42be1f1f1bac790bcc1ae098809f41",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-22.webp",
+          "bytes": 291326,
+          "sha256": "64714cc753f56a2a794c09926acd4f589c69ebedc97b7636576aa2e8a8391318",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-23.webp",
+          "bytes": 312110,
+          "sha256": "f1fc46cc87683bce654494f74cb30e03e7490b8fcc50c00a1acda54ce7b014f2",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-24.webp",
+          "bytes": 333302,
+          "sha256": "866d79248222db2db636fade29aa0ca9009fba80fab506c1858e0b515bc23520",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-25.webp",
+          "bytes": 355976,
+          "sha256": "ae19b305ce1eeb00a4a9318a2be187734482bcd93f2d992d236fbf813072766c",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-26.webp",
+          "bytes": 377782,
+          "sha256": "c981f9f2abc41afe63dcacee618425a422b37f88579dc7cb294919bfc03062d1",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-27.webp",
+          "bytes": 403282,
+          "sha256": "cc34f5b92eeb1ae06c753ba286c86b36e5e9b91b06ff7b1d8f8aaa124bfa56e8",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-28.webp",
+          "bytes": 429004,
+          "sha256": "e0dbc0c14c173d8ae855d6cbd9b240ce8e4b43383e01c49701f3628415b1704e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-29.webp",
+          "bytes": 456570,
+          "sha256": "2859562bb82812c38c6c6adcf748be8d5afc47ce68e6a3091255f24e489016cf",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-30.webp",
+          "bytes": 481914,
+          "sha256": "e82ae2b58ba24928ad234c6aed182dc48c900ac0c04a61509519f93562d8b2b9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/oberon/oberon-lighting-2x-row-31.webp",
+          "bytes": 526556,
+          "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "authored-recipe"
     },
     {
       "id": "content",
@@ -574,7 +1001,7 @@
         "content"
       ],
       "inputs": [
-        "authored-document:content/object.json"
+        "oberon-object-content"
       ],
       "outputs": [
         {
@@ -613,8 +1040,8 @@
       "outputs": [
         {
           "url": "/scenes/oberon/oberon-features.json",
-          "bytes": 14431,
-          "sha256": "462e183a8227206789d7c26f8db2d0dd11636d94b0cf03dcce1a07efc4145c70",
+          "bytes": 14446,
+          "sha256": "1d5604a8623c77d6adc3162ee87a4404d3a9912814253050da7883252d87c13b",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -623,10 +1050,10 @@
     {
       "id": "preview:normal",
       "label": "Monochrome preview",
-      "recipe": "terrestrial",
-      "selector": "/raster/observations/0",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "inputs": [],
       "parents": [
@@ -638,8 +1065,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 20312,
-          "sha256": "f3d15dcf856cfdc4f4cd2a4e0b14933f9a5ef8d833937a60fa2cdc663ca8476f",
+          "bytes": 21538,
+          "sha256": "964f476b12ddde1ed909306855088fa18dacfa07fab413e6c04265c8065e05a3",
           "verification": "bytes-verified"
         }
       ]
