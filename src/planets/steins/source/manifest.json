@@ -92,8 +92,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "rosetta",
+            "kind": "machine",
+            "machineId": "rosetta",
             "missionId": "rosetta",
             "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/2867steins/steins_cylindrical_mosaic.jpg"
           }
@@ -373,6 +373,84 @@
         "kind": "local",
         "reason": "Project-authored camera solution for the source image; the file records the camera parameters and the image it registers."
       }
+    },
+    {
+      "id": "usgs-gazetteer-steins-nomenclature-center-pts",
+      "path": "features/STEINS_nomenclature_center_pts.zip",
+      "expectedBytes": 99707,
+      "expectedSha256": "16001f4727a58377f0482f02f19f38cb1da71930894acbc9c7c7e5f007ffb5e6",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/STEINS_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Steins on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Steins centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/STEINS/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "steins-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1004,
+      "expectedSha256": "987fa5861a1e49485dd57340708cd38ca9b863f1538f09c02e686bb6333243c0",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "steins-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1125,
+      "expectedSha256": "f2bdf5f88e50b1df5c73af5515dd22987c27a0ae7f4cef29098ca41b6f779abf",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "steins-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 153,
+      "expectedSha256": "d3f502433696ef6dfb39d4070fc32ebe84d266034f2857e3d0221508152daf8a",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -415,8 +493,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3155,
-      "expectedSha256": "579ae74993161b67b086e5e37fd8970690dffaec00632ffe03941721fcbbeeca"
+      "expectedBytes": 3409,
+      "expectedSha256": "662232413a8433ecc88007289686dbbb52da14ef3a81998cadde9e4ffcba6e53"
     },
     {
       "path": "preparation/navigation.json",
@@ -430,8 +508,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4914,
-      "expectedSha256": "a42cb22b0187eaf5886b9c829c60459d839be631d04a7ec19f784f5ff30ccb9d"
+      "expectedBytes": 5020,
+      "expectedSha256": "e42ba397654f9b00e06f66c015bda8728b5cfc5120c2bc69bac9708e52b9f909"
     },
     {
       "path": "presentation/title-mark.json",
@@ -522,6 +600,29 @@
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 89772,
       "expectedSha256": "52fe1b607889f667ba3085901b704730d579f0ae5dd925a107b205d3dfaaced1"
+    },
+    {
+      "id": "steins-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 478,
+      "expectedSha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts steins: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

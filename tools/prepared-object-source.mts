@@ -11,6 +11,9 @@ import { requirePreparedControlSource, requirePreparedDefinitionSource, readPrep
 import { PREPARED_OBJECT_RUNTIME_SCHEMA } from '../src/platform/prepared-schema.mts';
 import { requireObjectRuntimeDefinition } from './object-runtime-contract.mts';
 import { requireAuthoredWorldFrame } from './authored-world-frame.mts';
+import { sharedTwinName } from '../src/platform/prepared-shared.mts';
+import { inlineSharedFromBanks } from '../src/platform/prepared-shared-banks.mts';
+import { PREPARED_CSS_OBJECT_FORMAT } from '../src/renderers/css/dist/index.js';
 
 export function requireDescriptorAdapterSource(text: string, exported: string): string {
   const ast = parseRuntimeSource(text, 'site/packaged-object-runtime.mts');
@@ -64,10 +67,16 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
   if (!ownWorldFrame(branch.test) || named(contextual.arguments[0]) !== adapter.params[0].name ||
       !(ownWorldFrame(frameArgument) || validatedFrame) || named(plain.arguments[0]) !== adapter.params[0].name) fail();
   if (validatedFrame && bindings.get('parsePreparedWorldCameraFrame')?.source !== '../src/renderers/css/dist/navigation.js') fail();
-  const contextImport = ast.body.find(statement => statement.type === 'ImportDeclaration' && statement.specifiers.length === 1 &&
-    statement.specifiers[0].type === 'ImportDefaultSpecifier' && statement.source.value === '../src/planets/sun/prepared/world-context.json' &&
+  // The adapter must forward the application's own prepared world context. The
+  // shell fetches and validates it in world-context-plan.mts so only the parsed
+  // plan stays resident; a bundled JSON module kept a second copy on the heap.
+  const contextName = named(contextual.arguments[1]);
+  const contextBinding = bindings.get(contextName);
+  const contextJsonImport = ast.body.some(statement => statement.type === 'ImportDeclaration' && statement.specifiers.length === 1 &&
+    statement.specifiers[0].type === 'ImportDefaultSpecifier' && statement.specifiers[0].local.name === contextName &&
+    statement.source.value === '../src/planets/sun/prepared/world-context.json' &&
     statement.attributes?.length === 1 && propertyKey(statement.attributes[0].key) === 'type' && statement.attributes[0].value.value === 'json');
-  if (contextImport?.type !== 'ImportDeclaration' || named(contextual.arguments[1]) !== contextImport.specifiers[0].local.name) fail();
+  if (!contextJsonImport && !(contextBinding?.source === './world-context-plan.mts' && contextBinding.name === 'APPLICATION_WORLD_CONTEXT')) fail();
   const plainBinding = functions.get('bindPackagedObject');
   if (!plainBinding || plainBinding.params.length !== 2 || plainBinding.params[0].type !== 'Identifier') fail();
   const defaultMount = kind(plainBinding.params[1], 'AssignmentPattern');
@@ -77,10 +86,16 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
   const plainCall = call(plainMount.body, mountIdentifier.name, 2);
   if (plainMount.params.length !== 2 || plainMount.params.some(param => param.type !== 'Identifier') || named(plainCall.arguments[0]) !== named(plainMount.params[0]) || plainCall.arguments[1].type !== 'ObjectExpression') fail();
   const bind = functions.get('bindContextualObject');
-  if (!bind || bind.params.length !== 3 || bind.params[0].type !== 'Identifier' || bind.params[1].type !== 'Identifier' || bind.body.body.length !== 2) fail();
+  // The context parameter may carry the application context as its default, so
+  // a caller that omits it still mounts against the same validated plan.
+  const contextParam = bind?.params[1];
+  const contextParamName = contextParam?.type === 'Identifier' ? contextParam.name
+    : contextParam?.type === 'AssignmentPattern' && contextParam.left.type === 'Identifier'
+      && bindings.get(named(contextParam.right))?.name === 'APPLICATION_WORLD_CONTEXT' ? contextParam.left.name : null;
+  if (!bind || bind.params.length !== 3 || bind.params[0].type !== 'Identifier' || contextParamName === null || bind.body.body.length !== 2) fail();
   const frameParameter = kind(bind.params[2], 'AssignmentPattern'), frameDefault = kind(frameParameter.right, 'MemberExpression');
   if (frameParameter.left.type !== 'Identifier' || frameDefault.computed || named(frameDefault.property) !== 'frame') fail();
-  const contextParameter = bind.params[1].name;
+  const contextParameter = contextParamName;
   const contextParser = frameDefault.object.type === 'CallExpression' ? frameDefault.object : null;
   if (contextParser) {
     if (named(contextParser.callee) !== 'parsePreparedWorldContext' || contextParser.arguments.length !== 1 || named(contextParser.arguments[0]) !== contextParameter || bindings.get('parsePreparedWorldContext')?.source !== '../src/renderers/css/dist/index.js') fail();
@@ -96,10 +111,14 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
   if (named(assignMember.object) !== 'Object' || named(assignMember.property) !== 'assign' || named(assignment.arguments[0]) !== mountId.name) fail();
   const rendererBinding = bindings.get('createWorldContextObjectRuntime');
   if (!rendererBinding || rendererBinding.name !== 'createWorldContextObjectRuntime' || bindings.get('createNavigableObjectMount')?.source !== rendererBinding.source || bindings.get(named(defaultFactory.callee))?.source !== rendererBinding.source) fail();
+  // The transport carries the pinned prepared read, and may carry the shared
+  // bank reader and its immutable base URL beside it; nothing else belongs here.
   const transport = transportObject.properties;
-  if (transport.length !== 1 || transport[0].type !== 'Property' || transport[0].computed || transport[0].kind !== 'init' ||
-      propertyKey(transport[0].key) !== 'read' || !transport[0].method) fail();
-  const method = kind(transport[0].value, 'FunctionExpression');
+  if (transport.some(property => property.type !== 'Property' || property.computed || property.kind !== 'init' ||
+      !['read', 'readShared', 'sharedUrl'].includes(String(propertyKey(property.key))))) fail();
+  const readProperty = transport.find(property => property.type === 'Property' && propertyKey(property.key) === 'read');
+  if (!readProperty || readProperty.type !== 'Property' || !readProperty.method) fail();
+  const method = kind(readProperty.value, 'FunctionExpression');
   if (!method.async || method.params.length !== 2 || method.params.some(param => param.type !== 'Identifier')) fail();
   const reference = named(method.params[0]), signal = named(method.params[1]), nodes: Node[] = [];
   const walk = (node: Node) => { nodes.push(node); for (const value of Object.values(node as unknown as Record<string, unknown>)) if (isArray(value)) value.forEach(child => { if (isRecord(child) && typeof child.type === 'string') walk(child as unknown as Node); }); else if (isRecord(value) && typeof value.type === 'string') walk(value as unknown as Node); };
@@ -234,6 +253,8 @@ async function readAuthoredDefinition({ objectId, descriptor, root, source, clos
   const runtime = requireRecord(JSON.parse(await source(runtimePath)));
   const scene: unknown = JSON.parse(await source(scenePath));
   closure.add(runtimePath); closure.add(scenePath);
+  // The full files are restored from the checked-in twins; ownership follows the twins too.
+  for (const file of ['runtime.json', 'scene.json', 'sky.json']) closure.add(resolve(preparation, sharedTwinName(file)));
   if (runtime.id !== objectId || runtime.schema !== PREPARED_OBJECT_RUNTIME_SCHEMA) throw new TypeError('Authored runtime identity is invalid.');
   await requireAuthoredWorldFrame({ descriptor, scene, runtime, directory, readText: source, closure });
   return requireObjectRuntimeDefinition(runtime, { objectId });
@@ -245,7 +266,7 @@ export async function readDescriptorDefinition({ objectId, descriptorFile, root,
     !descriptor.properties || isArray(descriptor.properties) || typeof descriptor.properties !== 'object' ||
     Object.keys(descriptor).some(key => !['schema', 'id', 'type', 'properties', 'prepared'].includes(key))) throw new TypeError('Registered JSON descriptor identity or shape is invalid.');
   const reference = requireRecord(descriptor.prepared);
-  if (reference?.format !== 'cssearth-css-object@4' || !/^[a-f0-9]{64}$/.test(typeof reference.sha256 === 'string' ? reference.sha256 : '') ||
+  if (reference?.format !== PREPARED_CSS_OBJECT_FORMAT || !/^[a-f0-9]{64}$/.test(typeof reference.sha256 === 'string' ? reference.sha256 : '') ||
     typeof reference.url !== 'string' || Object.keys(reference).some(key => !['format', 'url', 'sha256'].includes(key))) throw new TypeError('JSON descriptor requires its pinned prepared CSS artifact.');
   const descriptorDirectory = dirname(descriptorPath);
   const payloadPath = resolve(descriptorDirectory, reference.url);
@@ -260,7 +281,9 @@ export async function readDescriptorDefinition({ objectId, descriptorFile, root,
   const closure = new Set([descriptorPath, payloadPath]);
   const authored = await readAuthoredDefinition({ objectId, descriptor, root, source, closure });
   if (authored) {
-    if (!isDeepStrictEqual(payload.data, authored)) throw new TypeError('Prepared JSON bytes differ from the checked authored runtime.');
+    // The transport references shared banks; the checked runtime is their inlined form.
+    const transported = await inlineSharedFromBanks(root, payload.data, { read: source, visited: closure });
+    if (!isDeepStrictEqual(transported, authored)) throw new TypeError('Prepared JSON bytes differ from the checked authored runtime.');
     return { plan: authored, definition: authored, closure, payloadPath };
   }
   const directory = resolve(root, `src/planets/${objectId}`);

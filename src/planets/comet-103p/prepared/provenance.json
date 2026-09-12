@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cae4af5ecaba09347adca1a34a3e8f2eb87b91a03744518e0f02ba6448b6c1cb"
+    "sha256": "102a4dca6d5dc43c0bcc4948374589668125f62999a22d80bee49228ddd9c893"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
+    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
   },
   "recipes": [
     {
@@ -392,6 +392,56 @@
             "path": "../reference/dataset.cat",
             "credit": "Farnham & Thomas (2013)"
           }
+        }
+      }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "cc55131be459b1b5a46be89e88c5f09a09d8ecfa665a6c5efb1a1b32faab4f51",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": null,
+        "members": null,
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "comet-103p-features.json",
+        "publicBase": "/scenes/comet-103p/",
+        "target": {
+          "className": "comet-103p-body"
+        },
+        "lensIds": [
+          "model",
+          "constraints",
+          "mri"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "IM"
+          ],
+          "linear": [
+            "RU"
+          ],
+          "region": [
+            "RE"
+          ]
+        },
+        "excludedTypeCodes": {},
+        "labelPolicy": {
+          "minimumZoomShare": 0,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 20,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 32
+        },
+        "landmarks": {
+          "document": "landmarks.json",
+          "inputs": []
         }
       }
     }
@@ -1029,6 +1079,72 @@
       "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-103p-features-manifest",
+      "path": "features/manifest.json",
+      "origin": "Byte pins and source qualifications for the surface-place compilation.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte pins and source qualifications for the surface-place compilation."
+      },
+      "sha256": "fbfeae6a06a209dde8537585a0571945b3188c42aa64149e8df780fc48a9d9f5",
+      "bytes": 984,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-103p-presentation-surface-map",
+      "path": "presentation/surface-map.json",
+      "origin": "Prepared radial mesh mapping from native XYZ to CSS axes.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Prepared radial mesh mapping from native XYZ to CSS axes."
+      },
+      "sha256": "e31a107a6ef7a5ecbebdfada3e1131d2dcbf41716520d9822792db5718ba0a3c",
+      "bytes": 157,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-103p-features-landmarks",
+      "path": "features/landmarks.json",
+      "origin": "Selected mission geography and model anatomy, with per-place publication references, coordinate frames and uncertainty.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-j-icarus-2012-05-034",
+            "role": "material",
+            "evidence": "src/planets/comet-103p/source/features/landmarks.json: per-place coordinates, descriptions and publication references; checked 2026-09-12."
+          }
+        ]
+      },
+      "sha256": "0bfcd6a68c532ca92e29315f0bea24c31ad0284f133d346d5f93a35da03bd71c",
+      "bytes": 2426,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -1189,9 +1305,41 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5500,
-          "sha256": "8ec84379040bab1c2a7bf90087c7f7d706487351a655777a42a31f3de8b3595b",
+          "bytes": 5613,
+          "sha256": "dd81b1ac6a1e742df996a2b11249c939e69ba35d9b19f6723c4301ac5dde7313",
           "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned mission geography and coordinates; select region-interior points on the unchanged display mesh using the released categorical surface, or project cited coordinates onto that mesh. Retain source frames, placement limits and mission naming credits.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {}
+      },
+      "inputs": [
+        "comet-103p-features-manifest",
+        "comet-103p-presentation-surface-map",
+        "comet-103p-features-landmarks"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-103p/comet-103p-features.json",
+          "bytes": 4225,
+          "sha256": "f7b7a099d07438ca341b2eda2ee017b7465323fad2b59242ecdce60e2dbdb38f",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

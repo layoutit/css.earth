@@ -1,12 +1,26 @@
-import { browserProfileLensIds, createObjectBrowserProfile } from "../../../../site/test/object-browser-profile.mts";
-import objectControls from "../../../../src/planets/charon/prepared/controls.json" with {type:"json"};
+import { createObjectBrowserProfile } from "../../../../site/test/object-browser-profile.mts";
+import { readPreparedFixture } from "../../fixtures.mts";
+const objectControls = await readPreparedFixture("charon", "controls");
 
-export const browserProfile = createObjectBrowserProfile({ id: "charon", controls: objectControls,
-  audit: {
-    preparedAssetPairs: [{ one: "/scenes/charon/charon-directional-sun.webp", two: "/scenes/charon/charon-directional-sun@2x.webp" }],
-    canonicalPreparedAssets: ["/scenes/charon/charon-normal-surface@2x.webp", "/scenes/charon/charon-normal-poles@2x.webp", "/scenes/charon/charon-lighting.webp"],
-    lensRace: { defaultId: "normal", slowId: "elevation", winnerId: "normal",
-      slowAsset: "/scenes/charon/charon-elevation-surface@2x.webp", preReadyDisabled: true },
-    retained: { lensIds: browserProfileLensIds(objectControls), allowedMountSelectors: [] },
-  },
+export const browserProfile = createObjectBrowserProfile({
+  id: "charon", controls: objectControls,
+  audit: Object.freeze({
+    preparedAssetPairs: Object.freeze([
+      Object.freeze({ one: "/scenes/charon/charon-normal.webp", two: "/scenes/charon/charon-normal@2x.webp" }),
+      Object.freeze({ one: "/scenes/charon/charon-poles-normal.webp", two: "/scenes/charon/charon-poles-normal@2x.webp" }),
+      Object.freeze({ one: "/scenes/charon/charon-starfield-front.webp", two: "/scenes/charon/charon-starfield-front@2x.webp" }),
+      Object.freeze({ one: "/scenes/charon/charon-directional-sun.webp", two: "/scenes/charon/charon-directional-sun@2x.webp" }),
+    ]),
+    lensRace: Object.freeze({
+      defaultId: "normal",
+      slowId: "enhanced-color",
+      winnerId: "elevation",
+      slowAsset: "/scenes/charon/charon-enhanced-color@2x.webp",
+      preReadyDisabled: true,
+    }),
+    retained: Object.freeze({
+      lensIds: Object.freeze(["normal","enhanced-color","elevation","albedo"]),
+      allowedMountSelectors: Object.freeze([]),
+    }),
+  }),
 });

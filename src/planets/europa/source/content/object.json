@@ -111,9 +111,9 @@
         "label": "Monochrome",
         "description": "USGS Voyager/Galileo mosaic. Source resolution varies from about 200 m to 20 km per pixel. Gray grid marks documented no-data and its resampled boundary. Original image shading remains; globe lighting is approximate.",
         "title": "Global image mosaic",
-        "thumbnail": "/scenes/europa/europa-normal-thumbnail.webp",
-        "surface": "europa-normal-surface@2x.webp",
-        "poles": "europa-normal-poles@2x.webp",
+        "thumbnail": "europa-lens-normal.webp",
+        "surface": "europa-normal.webp",
+        "poles": "europa-poles-normal.webp",
         "source": {
           "id": "usgs-voyager-galileo-global-500m",
           "path": "../manifest.json"
@@ -126,9 +126,9 @@
         "label": "Enhanced color",
         "description": "Galileo enhanced color: 756 nm → red, 559 nm → green, 404 nm → blue, at 1.4–1.6 km per pixel. Color covers part of the surface. A correction for each observation reduces broad photographed shading; oblique views retain observed monochrome. Overall brightness is matched to the monochrome base, preserving color ratios. Photographed shadows and seams can remain; added globe lighting is approximate. Gray grid marks gaps in both sources.",
         "title": "SSI enhanced-color mosaic",
-        "thumbnail": "/scenes/europa/europa-enhanced-thumbnail.webp",
-        "surface": "europa-enhanced-surface@2x.webp",
-        "poles": "europa-enhanced-poles@2x.webp",
+        "thumbnail": "europa-lens-enhanced.webp",
+        "surface": "europa-enhanced.webp",
+        "poles": "europa-poles-enhanced.webp",
         "source": {
           "id": "observed-color",
           "path": "../manifest.json"
@@ -142,9 +142,9 @@
         "detail": "Agenor · relative",
         "description": "Agenor Linea only, near 142°E and 44°S. Colors encode the released local stereo heights in meters; their relative datum is not a global reference level. Effective detail is about 3 km. Fixed northwest cartographic relief shows slopes; it is not part of the numeric scale. Gray grid preserves the DTM’s finite/no-data footprint. The archive’s duplicated, cubic-resampled quality products are excluded; colors imply no quality class or pointwise accuracy.",
         "title": "Agenor Linea stereo terrain model",
-        "thumbnail": "/scenes/europa/europa-elevation-thumbnail.webp",
-        "surface": "europa-elevation-surface@2x.webp",
-        "poles": "europa-elevation-poles@2x.webp",
+        "thumbnail": "europa-lens-elevation.webp",
+        "surface": "europa-elevation.webp",
+        "poles": "europa-poles-elevation.webp",
         "falseColor": true,
         "source": {
           "id": "usgs-agenor-controlled-dtm",
@@ -181,16 +181,42 @@
         "legend": {
           "kind": "scale",
           "title": "Agenor local height (m)",
-          "image": "europa-elevation-legend.webp",
-          "width": 256,
-          "height": 16,
           "labels": [
             "−700",
             "−200",
             "300"
           ],
           "meta": "m",
-          "sourceUrl": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/"
+          "sourceUrl": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
+          "recipe": {
+            "palette": [
+              [
+                37,
+                76,
+                137
+              ],
+              [
+                108,
+                156,
+                172
+              ],
+              [
+                211,
+                200,
+                143
+              ],
+              [
+                155,
+                79,
+                50
+              ]
+            ],
+            "labels": [
+              "−700",
+              "−200",
+              "300"
+            ]
+          }
         }
       },
       {
@@ -198,9 +224,9 @@
         "label": "Geology",
         "description": "USGS interpreted regional plains, bands, chaos terrains and crater deposits (2024; 1:15,000,000). Colors identify map units, not measured surface color. Gray grid marks no-data polygons. Fine line and point features are not represented by this polygon view.",
         "title": "USGS global geology (2024 SIM 3513)",
-        "thumbnail": "/scenes/europa/europa-geology-thumbnail.webp",
-        "surface": "europa-geology-surface@2x.webp",
-        "poles": "europa-geology-poles@2x.webp",
+        "thumbnail": "europa-lens-geology.webp",
+        "surface": "europa-geology.webp",
+        "poles": "europa-poles-geology.webp",
         "source": {
           "id": "usgs-europa-geologic-units-grid",
           "path": "../manifest.json",
@@ -271,9 +297,9 @@
         "label": "Infrared",
         "description": "Galileo NIMS observations assign red, green and blue to 1.50, 1.34 and 0.73–0.74 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band.",
         "title": "Galileo NIMS spectral color",
-        "thumbnail": "/scenes/europa/europa-infrared-thumbnail.webp",
-        "surface": "europa-infrared-surface@2x.webp",
-        "poles": "europa-infrared-poles@2x.webp",
+        "thumbnail": "europa-lens-infrared.webp",
+        "surface": "europa-infrared.webp",
+        "poles": "europa-poles-infrared.webp",
         "source": {
           "id": "europa-registered-nims-composite",
           "path": "../manifest.json",
@@ -295,8 +321,8 @@
       },
       {
         "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
+        "name": "stars",
+        "label": "Stars",
         "checked": true
       }
     ]

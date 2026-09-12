@@ -1,8 +1,8 @@
 {
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "f8b36b6e068923f48eafd73b2a4c32ba19cde167e3ae0dbaee30e97ee5a7d08d"
+    "sha256": "1d35e9ed694161a28484ed80a518de773a088b2c6eb2763e2d0e2328e912d221"
   },
   "id": "itokawa",
   "properties": {
@@ -17,6 +17,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -81,9 +82,18 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "98aa45e3e8f730b14d83493f45e2c3d4f632326d20c13e71f23231375ce1facb"
+          "sha256": "ab1dd51a85ec073e520c4964d4930089bd52ebca02b54182e7d43d76a2608c6c"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "d21cab564d968f0d09ccb139bd6b4f2b24ceabfceebacc20104c52e9dd2a8037"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -118,7 +128,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "19b80c464dfe580ccbebd9075462a675a3bc2c2ee2b21b040a07b688b0670281"
+        "sha256": "e9fcaef60ae6a64dc3de721e750afdb28cb97295b3b6abcd26f4be1daeb8abe7"
       }
     },
     "catalog": {

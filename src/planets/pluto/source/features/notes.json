@@ -1,0 +1,178 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "15668",
+      "item": "Q20669022",
+      "title": "Tombaugh Regio",
+      "url": "https://en.wikipedia.org/wiki/Tombaugh_Regio",
+      "revision": "1367204194",
+      "extract": "Tombaugh Regio, sometimes nicknamed \"Pluto's heart\" after its shape, is the largest bright surface feature of the dwarf planet Pluto. It lies just north of Pluto's equator, to the northeast of Belton Regio and to the northwest of Safronov Regio, which are both dark features."
+    },
+    {
+      "id": "15669",
+      "item": "Q20679593",
+      "title": "Sputnik Planitia",
+      "url": "https://en.wikipedia.org/wiki/Sputnik_Planitia",
+      "revision": "1373684987",
+      "extract": "Sputnik Planitia is a large, partially glaciated basin on Pluto. About 1,400 by 1,200 km in size, Sputnik Planitia is partially submerged in large, bright glaciers of nitrogen ice. Named after Earth's first artificial satellite, Sputnik 1, it constitutes the western lobe of the heart-shaped Tombaugh Regio."
+    },
+    {
+      "id": "15670",
+      "item": "Q20679657",
+      "title": "Tenzing Montes",
+      "url": "https://en.wikipedia.org/wiki/Tenzing_Montes",
+      "revision": "1353975738",
+      "extract": "The Tenzing Montes are a range of icy mountains on Pluto, bordering the southwest region of Sputnik Planitia and the nearby Hillary Montes and Wright Mons. With peaks reaching 6.2 km in height, they are the highest mountain range on Pluto, and also the steepest, with a mean slope of 19.2 degrees."
+    },
+    {
+      "id": "15671",
+      "item": "Q20732502",
+      "title": "Hillary Montes",
+      "url": "https://en.wikipedia.org/wiki/Hillary_Montes",
+      "revision": "1353975714",
+      "extract": "5 km above the surface of the dwarf planet Pluto. They are located northwest of Tenzing Montes in the southwest border area of Sputnik Planitia in the south of Tombaugh Regio. The Hillary Montes were first viewed by the New Horizons spacecraft on 14 July 2015, and announced by NASA on 24 July 2015."
+    },
+    {
+      "id": "15676",
+      "item": "Q21281257",
+      "title": "Adlivun Cavus",
+      "url": "https://en.wikipedia.org/wiki/Adlivun_Cavus",
+      "revision": "1253458201",
+      "extract": "Adlivun Cavus is a small depression on the southern tip of Sputnik Planitia, which is a basin on the dwarf planet Pluto. It was discovered by the New Horizons spacecraft in 2015."
+    },
+    {
+      "id": "15677",
+      "item": "Q20743768",
+      "title": "Hayabusa Terra",
+      "url": "https://en.wikipedia.org/wiki/Hayabusa_Terra",
+      "revision": "1220783698",
+      "extract": "Hayabusa Terra is a surface feature on the dwarf planet Pluto. It was discovered by the New Horizons spacecraft in July 2015. It is named for Hayabusa, the first spacecraft to successfully return a sample of an asteroid to Earth."
+    },
+    {
+      "id": "15678",
+      "item": "Q20743770",
+      "title": "Voyager Terra",
+      "url": "https://en.wikipedia.org/wiki/Voyager_Terra",
+      "revision": "1212835232",
+      "extract": "Voyager Terra is a region on the dwarf planet Pluto, north of Viking Terra and Tombaugh Regio and west of Pioneer Terra, which was discovered in July 2015 by the New Horizons spacecraft."
+    },
+    {
+      "id": "15680",
+      "item": "Q39076522",
+      "title": "Burney (crater)",
+      "url": "https://en.wikipedia.org/wiki/Burney_(crater)",
+      "revision": "1353417900",
+      "extract": "Burney is the second-largest known impact basin on the dwarf planet Pluto. With a diameter of over 290 kilometres, it is the second-largest known impact basin on Pluto, after the Sputnik Planitia basin."
+    },
+    {
+      "id": "15751",
+      "item": "Q52211268",
+      "title": "Baret Montes",
+      "url": "https://en.wikipedia.org/wiki/Baret_Montes",
+      "revision": "1304637887",
+      "extract": "Baret Montes is a chain of mountains on the surface of the dwarf planet Pluto. It is located near the western border of Sputnik Planitia in Tombaugh Regio. These mountains were first viewed by the New Horizons spacecraft. It features large ridges that are formed by the compression of methane and water ice."
+    },
+    {
+      "id": "15834",
+      "item": "Q64769065",
+      "title": "Piccard Mons",
+      "url": "https://en.wikipedia.org/wiki/Piccard_Mons",
+      "revision": "1316720506",
+      "extract": "Piccard Mons is a large, roughly circular mountain and likely cryovolcano on the dwarf planet Pluto. Discovered by the New Horizons spacecraft in 2015, it is located southeast of Wright Mons within the Tombaugh Regio, adjacent to the Safronov Regio and Elcano Montes."
+    },
+    {
+      "id": "15835",
+      "item": "Q29082918",
+      "title": "Wright Mons",
+      "url": "https://en.wikipedia.org/wiki/Wright_Mons",
+      "revision": "1368854785",
+      "extract": "Wright Mons is a large, roughly circular mountain and likely cryovolcano on the dwarf planet Pluto. Discovered by the New Horizons spacecraft in 2015, it is located southwest of Sputnik Planitia within Hyecho Palus, adjacent to the Tenzing Montes and Belton Regio."
+    },
+    {
+      "id": "15838",
+      "item": "Q20743773",
+      "title": "Lowell Regio",
+      "url": "https://en.wikipedia.org/wiki/Lowell_Regio",
+      "revision": "1321464227",
+      "extract": "Lowell Regio is a region on the dwarf planet Pluto. It was discovered by the New Horizons spacecraft in 2015. The region corresponds to the Plutonian northern polar cap. It is named after Percival Lowell who established the observatory where Clyde Tombaugh discovered Pluto."
+    },
+    {
+      "id": "15840",
+      "item": "Q20743769",
+      "title": "Pluto",
+      "url": "https://en.wikipedia.org/wiki/Pluto",
+      "revision": "1373664343",
+      "extract": "Pluto is a dwarf planet in the Kuiper belt, a ring of bodies beyond the orbit of Neptune. It is the ninth-largest and tenth-most-massive known object to directly orbit the Sun. It is the largest known trans-Neptunian object by volume by a small margin, but is less massive than Eris."
+    },
+    {
+      "id": "15968",
+      "item": "Q20743771",
+      "title": "Pluto",
+      "url": "https://en.wikipedia.org/wiki/Pluto",
+      "revision": "1373004566",
+      "extract": "Pluto is a dwarf planet in the Kuiper belt, a ring of bodies beyond the orbit of Neptune. It is the ninth-largest and tenth-most-massive known object to directly orbit the Sun. It is the largest known trans-Neptunian object by volume by a small margin, but is less massive than Eris."
+    },
+    {
+      "id": "15969",
+      "item": "Q21281093",
+      "title": "Pluto",
+      "url": "https://en.wikipedia.org/wiki/Pluto",
+      "revision": "1373664343",
+      "extract": "Pluto is a dwarf planet in the Kuiper belt, a ring of bodies beyond the orbit of Neptune. It is the ninth-largest and tenth-most-massive known object to directly orbit the Sun. It is the largest known trans-Neptunian object by volume by a small margin, but is less massive than Eris."
+    },
+    {
+      "id": "16087",
+      "item": "Q20743774",
+      "title": "Challenger Colles",
+      "url": "https://en.wikipedia.org/wiki/Challenger_Colles",
+      "revision": "1347315778",
+      "extract": "Challenger Colles is a range of hills on Pluto near the eastern edge of Sputnik Planitia. Discovered by the New Horizons team in July 2015, it is named in honor of the Space Shuttle Challenger, which was destroyed with all seven crew lost on January 28, 1986."
+    },
+    {
+      "id": "16193",
+      "item": "Q123694158",
+      "title": "Luna Linea",
+      "url": "https://en.wikipedia.org/wiki/Luna_Linea",
+      "revision": "1349837350",
+      "extract": "Luna Linea is a dark linear feature (linea) on the dwarf planet Pluto. It was discovered by the New Horizons craft in July 2015 and named after the Luna program, a Soviet space exploration program that was the first to visit the Moon."
+    },
+    {
+      "id": "16257",
+      "item": "Q20669611",
+      "title": "Belton Regio",
+      "url": "https://en.wikipedia.org/wiki/Belton_Regio",
+      "revision": "1362071709",
+      "extract": "Belton Regio is a prominent surface feature of the dwarf planet Pluto. It is an elongated dark region along Pluto's equator, 2,990 km (1,860 mi) long and one of the darkest features on its surface."
+    },
+    {
+      "id": "16258",
+      "item": "Q20683919",
+      "title": "Safronov Regio",
+      "url": "https://en.wikipedia.org/wiki/Safronov_Regio",
+      "revision": "1365473878",
+      "extract": "Safronov Regio is the westernmost of the \"Brass Knuckles\", a series of equatorial dark regions on Pluto."
+    },
+    {
+      "id": "16340",
+      "item": "Q20683676",
+      "title": "Harrington Regio",
+      "url": "https://en.wikipedia.org/wiki/Harrington_Regio",
+      "revision": "1245387235",
+      "extract": "Harrington Regio is the largest of the \"Brass Knuckles\", a series of equatorial dark regions on Pluto."
+    },
+    {
+      "id": "16341",
+      "item": "Q20708346",
+      "title": "Sharaf Regio",
+      "url": "https://en.wikipedia.org/wiki/Sharaf_Regio",
+      "revision": "1255929145",
+      "extract": "Sharaf Regio is the smallest of the \"Brass Knuckles\", a series of equatorial dark regions on Pluto. It was initially informally named Ala Macula after Ala \"earth\", the chthonic and most important deity of the Igbo people."
+    }
+  ]
+}

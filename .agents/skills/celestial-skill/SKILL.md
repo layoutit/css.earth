@@ -27,11 +27,28 @@ observations; sharing a body does not require sharing one mesh. Prefer the
 matching published model over forcing imagery onto an incompatible shape.
 Use existing prepared-model selection while keeping one active object scene,
 only the selected model visible, and the shared renderer, camera and shell.
+Bind observation preparation to that selected model as well: camera validation,
+surface sampling, visibility, thumbnails and evidence must use the same mesh
+as the dataset's triangle atlas. Prefer archived per-pixel geometry products
+(the [registered mosaic guidance](references/registered-photographic-mosaics.md)
+and the geometry-cube route in the [implementation map](references/implementation-map.md#registered-photographic-mosaics))
+over pointing files whose pixel conventions the archive does not state.
 A restriction on renderer changes does not by itself freeze prepared geometry;
 respect any explicit geometry or topology restriction in the task's scope.
 Explain meaningful model differences beside the dataset and qualify registration,
 coverage and picking against the selected mesh. The [implementation map](references/implementation-map.md)
 locates the existing support for alternative models.
+
+Surface places also belong to a source frame. Use `source/preparation/features.json`
+and its pinned `landmarks` document for mission-defined regions, paper coordinates,
+or explicitly inferred model anatomy. Keep mission names distinct from IAU names.
+Derive region anchors from the released map and check them against the unchanged
+display mesh; a label point does not establish a region centre, size or boundary.
+For alternative meshes, select the matching prepared `surfaceHit.lensRanges`
+entry and expose those places only on that dataset. A shared body name does not
+make coordinates transferable between models. Keep approximate placement visible
+in the caption. Unresolved photograph-to-shape registration cannot establish a
+terrain landmark; neither can a camera direction alone.
 
 ## Scope for existing moon upgrades
 
@@ -166,12 +183,18 @@ Read the applicable preparation guidance **before** processing those assets:
 | Source or issue | Preparation decision |
 | --- | --- |
 | Photographed shading or mosaic seams | [Photographic observations](references/surface-preparation.md#photographic-observations): corrected source or justified per-observation normalization, then bounded level matching where useful. Preserve shared lighting controls. |
+| Soft photographic textures | [Photographic observations](references/surface-preparation.md#photographic-observations): trace intermediate resizes, sample registered originals at the delivered footprint, and separate sampling gains from encoding quality. |
 | Multiple photographs registered to a surface | [Registered photographic mosaics](references/registered-photographic-mosaics.md): camera holdouts, quality and visibility checks, deterministic selection, overlap levels, provenance and area coverage. |
 | Elevation or another measured scalar | [Scientific maps](references/surface-preparation.md#scientific-maps): datum, palette, readable relief and a truthful legend. |
 | Incomplete coverage | [Coverage](references/surface-preparation.md#coverage): source validity before interpolation; mark real gaps without erasing observed dark terrain. |
 | Irregular terrain or a triangle-mesh budget | [Irregular meshes](references/irregular-meshes.md): choose a representable source shape, simplify before baking, and use PolyCSS native raster triangles. |
 | Unresolved appearance, rings or atmosphere | [Shape and optional layers](references/surface-preparation.md#shape-and-optional-layers): evidence determines the presentation and supported capabilities. |
 | UV banding, edge artifacts or detached lighting | [Registration](references/surface-preparation.md#registration): distinguish source projection, geometry and overlay fit. |
+
+For a photographic resolution refresh on the existing raster lane, use the
+[partial photographic preparer](../../../docs/surface-preparation.md#refresh-photographs-without-rebuilding-geometry).
+Keep geometry and lighting fixed, prepare one body at a time, and compare actual
+close-ups and image delivery size before accepting the larger texture.
 
 Generate the assets actually consumed by each selected view—surface and pole
 atlases, thumbnails, minimaps, markers and legends where applicable—from the
@@ -208,6 +231,34 @@ is not a correction. Check scientific-map shading on its own terms. Fix source
 or registration errors in preparation and regenerate affected companion assets.
 Show useful visual results while continuing the authorized work; a preview is
 not an automatic stop for approval.
+
+## 4a. Review every object before a faithfulness PR
+
+When a faithfulness change spans the catalog, inventory every registered
+`object.json` and `source/manifest.json` first, plus README-only stubs. Classify
+each package as a controlled source map/camera, a source product with a pending
+shape transfer, a scientific or model-derived field, an insufficiently
+registered photographic lens, or a shape/elevation-only scene. Record the
+counts and complete IDs in a maintained shared review document; do not infer
+coverage from the number of files or from the existence of a texture.
+
+Accept a producer map only when its body-fixed coordinate frame, shape/map
+reference surface and missing-data convention are documented. Accept a source
+camera when the release supplies the shape/body frame and either distributed
+surface correspondences with disjoint holdouts or an equivalent measured
+camera record. A limb/terminator-only fit, generic sphere, approximate orbit or
+attitude, visual similarity, or same-renderer screenshot does not establish
+image-to-shape registration. Keep an honest model or coarse pointing view, mark
+the photographic lens deferred, and preserve the source gaps.
+
+Treat model transfer as its own gate: a map registered to one shape cannot be
+draped onto another shape until their frame and surface correspondence are
+shown. Do not delete a candidate before checking the source release or paper;
+document the unresolved transfer and retain useful non-photographic products.
+Scientific maps, thermal/radar/albedo fields and geology must be labeled by
+quantity and must never be presented as direct photographs merely because they
+are raster data. A catalog faithfulness PR changes package evidence and
+metadata only; it does not change the shared renderer or geometry architecture.
 
 ## 5. Finish delivery
 

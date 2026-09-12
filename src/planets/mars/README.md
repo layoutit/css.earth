@@ -1,147 +1,129 @@
 # Mars sources
 
-Mars uses Viking visible imagery, MOLA relief, THEMIS infrared observations, and modeled atmosphere charts.
+Mars shows Viking visible imagery, MOLA relief and THEMIS infrared observations on the shared raster lane used by Mercury and Venus, with modeled atmosphere charts and IAU nomenclature labels.
 
 ## Sources
 
 | View or quantity | Source |
 | --- | --- |
 | Visible surface | [Viking MDIM 2.1](https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg), colorized by NASA Ames |
-| Elevation display | MOLA color relief from the [pinned OpenSpace tile source](source/manifest.json) |
-| Infrared display | Mars Odyssey THEMIS daytime infrared mosaic, from the [pinned OpenSpace tile source](source/manifest.json) |
-| Dimensions, placement and charts | USGS, OpenSpace, JPL and NASA PSG records below |
+| Elevation display | MOLA color shaded relief from the [pinned OpenSpace tile source](source/manifest.json) |
+| Infrared display | Mars Odyssey THEMIS daytime infrared mosaic from the [pinned OpenSpace tile source](source/manifest.json) |
+| Atmosphere material | [OpenSpace Mars RenderableAtmosphere](source/openspace/atmosphere.asset) parameters |
+| Dimensions, placement and charts | USGS, JPL, OpenSpace and NASA PSG records below |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MARS/target) Mars centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
 
-The camera section describes 201 independent reference samples. No dated test or browser-run report is cited; the source and acquisition records identify the inputs to those comparisons.
+Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite remains 512 × 256 pixels at density 1 and 1024 × 512 at density 2; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
+
+| View | Both prepared levels, before → current |
+| --- | --- |
+| normal | 608.1 → 681.8 kB |
+
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/mars/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+
+The lane change was verified with the package, source-closure and browser conformance checks listed in the pull request that made it. No dated oracle report is cited for the new lane; the source and acquisition records identify every input.
 
 ## Known problems
 
-- THEMIS shows qualitative infrared response, not calibrated temperature or one observation date.
-- Zero-valued edge fill is detected by a heuristic without an independent instrument mask. Gaps remain visible.
-- Atmosphere lighting and the fixed camera/Sun reference are presentation models, not an epoch-specific observation.
-- Phobos and Deimos are source archives here; Mars does not render them as embedded moons.
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Mars (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge was fixed by drawing Gazetteer rims under both edge hypotheses and keeping the one where Olympus Mons and Hellas Planitia on the Viking MDIM mosaic coincide with the imagery.
+
+Landing sites: 14 spacecraft landing, touchdown or impact sites and 2 published traverse paths are labelled beside the IAU names (`source/features/sites.json`). Each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from, with the stated latitude kind and longitude convention; sites are unsized points ranked like a 20 km feature and the caption shows the quoted source sentence with its publisher.
+
+Feature notes: 644 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
+
+- THEMIS shows qualitative infrared response, not calibrated temperature or one observation date. The pinned mosaic has exact-zero fill in rows 0–26 (north of about 87.6° N) and rows 1894–2047 (south of about 76.5° S) and 15.6% zero samples overall. The shared raster lane has no source-validity mask, so those bands render black under the shared lighting; they are missing coverage, not dark terrain. The earlier gray grid and polar inpainting were features of the retired affine lane.
+- The MOLA and THEMIS lens mosaics were re-stitched from the OpenSpace tile server on 2026-09-11 with the pinned tile recipe because the server no longer reproduced the bytes pinned earlier; the source manifest pins the refreshed mosaics.
+- The atmosphere is a display approximation from OpenSpace scattering parameters; it is not an epoch-specific observation. The material disc is prepared for a sphere of the equatorial radius; the 0.6% polar flattening of the mesh stays inside the disc’s 0.992 content margin.
+- The camera and background sky do not represent an observer at a stated epoch.
+- Phobos and Deimos are standalone bodies with their own packages; this package keeps only the pinned OpenSpace kernel record.
 
 [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
 
 <details>
-<summary>Measurements, camera and background sources</summary>
+<summary>Shape, rotation and camera</summary>
 
-## Scene measurements
+## Shape and rotation
 
-The adapter pins OpenSpace commit
-`56e29b54b8592084ff1fef47c2e08de0b22ce516` as its scene-configuration
-reference. The checked `globe.asset`, `atmosphere.asset`, and `kernels.asset`
-snapshots record Mars radii, atmosphere parameters, and the MAR097 SPICE
-kernel selection. OpenSpace is a configuration and provenance reference. The
-browser does not load OpenSpace data at runtime.
+The recipe declares an ellipsoid with the IAU-compatible radii published with
+the USGS Viking MDIM product and the JPL physical parameters pinned in
+`source/editorial/factsheet-review.json`: 3,396.19 km equatorial and
+3,376.20 km polar. The prepared mesh uses 230 units at the equator and
+228.646218 units at the poles (the same ratio), 16 latitude bands and 32
+longitude segments, the shared 50-pixel tile and the Mercury seam overlap of
+0.005. The retained mesh is authored 145° around its spin axis; the 25.19°
+axial tilt and the 1.02595676-day sidereal rotation are recorded with the
+body for the presentation, while the world frame, pole and prime meridian at
+the shared epoch come from the IAU/WGCCRE rotation model in the astronomy
+package through `src/platform/solar-geometry.mts`, as for every prepared body.
+The 48-second visual rotation is an accelerated presentation choice.
 
-Mars uses the IAU-compatible equatorial and polar radii published with the
-USGS Viking MDIM product: 3,396.19 km and 3,376.20 km. OpenSpace currently
-renders its globe as a sphere, but its source includes the same commented
-triaxial values. cssEarth retains the observed flattening rather than the
-OpenSpace presentation simplification.
+The pinned OpenSpace `globe.asset` and `kernels.asset` snapshots record the
+source scene radii and the MAR097 SPICE kernel selection. OpenSpace is a
+configuration and provenance reference; the browser never loads OpenSpace data.
 
-## Background sky, Sun, and camera
+## Camera
 
-The retained background uses the generic cubic-sky standard first established
-for Venus. ESO's 6,000 by 3,000 `eso0932a` photographic panorama by S. Brunier
-(CC BY 4.0) is projected during preparation into six 1,024-square faces and six
-2,048-square DPR-2 faces. Each density has one subdued standard presentation
-and one higher-contrast presentation, for 24 prepared files but only six
-retained face elements. The photographic levels and Galactic presentation
-registration remain shared prepared values. Mars's standard bank compensates
-for its narrower native field of view: preparation uses 0.68 diffuse gain and
-0.40 compact-detail gain, selects the 5,000 strongest
-photographic local maxima, and collapses each core to one logical face texel.
-This mirrors Google Earth Pro's measured separate 5,000-point, fixed 4.5-pixel
-catalogue pass without shipping Google catalogue, radial-response, shader, or
-sky-map bytes. The higher-contrast bank preserves the complete 0.65-detail
-photograph. HYG v4.1 remains a coordinate-registration audit; the visible
-standard-bank point positions and colors come from the licensed ESO image.
-
-The camera and Sun behavior are clean-room measurements from 201 headless
-Google Earth Pro Mars samples. They establish a fixed 60-degree horizontal
-field of view, one-to-one inverse sky rotation, zero sky zoom response, and a
-separate fixed-angular-size Sun direction. Google sky, shader, and Sun pixels
-are not shipped. The Sun is a repository-authored prepared raster mounted as a
-separate retained billboard. A fully visible native longitude-50 sample is
-bound to the default cssEarth camera, and the recovered inverse rotation moves
-it thereafter. Its direction also selects and rotates Mars's source-calibrated
-prepared shadow and atmosphere phase bank. The conversion from Google view
-space to the prepared material basis is fixed as `[x, -y, -z]`, preserving the
-screen side of the Sun while converting camera-forward `-z` to visible-surface
-`+z`. This is a fixed oracle anchor, not an epoch-correct Mars observer sky or
-ephemeris claim.
-
-Camera input uses the shared unbounded accumulated `matrix3d` contract. Pointer
-drag may continue through arbitrary pitch, yaw, and diagonal combinations; the
-retained cube applies the inverse rotation. Initial zoom is selected from the
-same continuous viewport-fit contract as Venus and Mercury. The planet
-receives full zoom response. The cube has no zoom response, while the
-separate Sun retains its measured angular size.
+The prepared camera is the shared solar-system camera: default zoom 1.1, a
+40-degree initial scene pitch over the shared 0-through-89-degree control
+orbit, the continuous viewport fit shared with Mercury and Venus, and the
+photographic cubic sky prepared for the same 60-degree horizontal field of
+view. The previous Google Earth Pro-derived camera and material-depth contract
+were retired with the affine lane.
 
 </details>
 
 <details>
-<summary>Visible, elevation and infrared surface processing</summary>
+<summary>Surface lenses and processing</summary>
 
-## Visible surface
+## Raster preparation
 
-The normal-color surface is the USGS Astrogeology Mars Viking MDIM 2.1
-colorized global mosaic at approximately 1 km per pixel. Its product metadata
-identifies NASA Ames color processing over the geometrically controlled Viking
-MDIM 2.1 mosaic. Preparation resamples the checked source into seam-safe DPR 1
-and DPR 2 texels. It does not sharpen or invent local surface structure.
+Each lens is decoded and resampled with Lanczos3 to 2,048 by 1,024 texels for
+DPR 1 and 4,096 by 2,048 for DPR 2 (`density-before-pack`), packed into 16
+latitude bands with a 16-texel gutter, and encoded as WebP. Polar tiles are
+256-pixel orthographic bilinear projections per lens. The 21,339 by 10,670
+Viking mosaic is resampled directly from its checked bytes; the MOLA and THEMIS
+snapshots are already 4,096 by 2,048. No exposure or sharpening curve is
+applied to any Mars lens.
+
+- `Visible color`: USGS Viking MDIM 2.1 colorized global mosaic, about 1 km per
+  pixel, NASA Ames color processing.
+- `Elevation`: USGS MOLA pseudo-color shaded relief (false color) with the
+  published palette legend.
+- `Thermal infrared`: USGS/ASU THEMIS daytime infrared brightness mosaic,
+  shown as a qualified visual representation of daytime thermal response, not
+  a calibrated temperature retrieval. See the coverage limitation above.
 
 The navigation marker uses the 2016 NASA/ESA Hubble
 [full-disc Mars portrait](https://esahubble.org/images/heic1609a/). ESA/Hubble
 publishes the image under
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). cssEarth crops and
 resizes it for the prepared navigation atlas and preserves the full source
-credit in the scene.
-
-## Observation lenses
-
-Mars uses three source-backed surface lenses:
-
-- `Normal`: USGS Viking MDIM 2.1 colorized global mosaic.
-- `Elevation`: USGS MOLA pseudo-color shaded relief, acquired from the pinned
-  OpenSpace TMS source and prepared into one local equirectangular snapshot.
-- `Thermal`: USGS/ASU THEMIS daytime infrared global mosaic, acquired from the
-  pinned OpenSpace TMS source and shown as a qualified visual representation
-  of daytime thermal response, not a calibrated temperature retrieval.
-
-The THEMIS snapshot has opaque alpha, so alpha alone does not identify its
-large black exterior. Its exact-zero fill connected to the north/south map
-edges is conservatively marked unavailable. Isolated black terrain and every
-nonzero dark sample remain; no 64-DN brightness cutoff is used. This is a
-qualified source-fill interpretation, not an instrument validity mask.
-Validity is resolved before resampling. The thermal surface, polar tiles and
-thumbnail show the shared gray grid in gaps, with no Viking substitution,
-blurred coverage transition or polar inpainting. The mosaic combines multiple
-observations and does not depict the scene date or calibrated temperature.
+credit in the scene. It is no longer used as a limb-brightness reference.
 
 There is no Mars cross-section, methane lens, or fabricated interior view.
 
 </details>
 
 <details>
-<summary>Atmosphere model and charts</summary>
+<summary>Atmosphere material, lighting and charts</summary>
 
-## Atmosphere and charts
+## Atmosphere and lighting
 
-The atmosphere presentation is constrained by the checked OpenSpace Mars
-atmosphere configuration and NASA's description of a thin, dusty atmosphere.
-One fixed reference projection uses the same source-radii oblate mesh as the
-retained body. The material uses Saturn's accepted 1.002 coverage
-margin and 0.992 content scale, then clamps its final alpha to a four-sample
-prepared hull of the 32-longitude Mars mesh. The measured Hubble limb therefore
-stays inside the rendered globe silhouette instead of forming an independent
-screen-space halo.
-The prepared material plane is retained inside the body's 3D scene and axial
-frame. Its prepared depth transform and shared camera counter-rotation keep
-the source-calibrated material aligned through arbitrary pitch and yaw.
+The atmosphere material is the shared composite material used by Venus: a
+32-frame phase bank (31 directional frames from light-view Z -0.98 through
+0.98 plus one flood frame) derived from the pinned OpenSpace Mars
+`RenderableAtmosphere` parameters (atmosphere height 76.98 km over a 3,386.19 km
+source radius, Rayleigh and Mie coefficients and scale heights, average ground
+reflectance 0.1). The material uses the accepted 1.002 coverage margin and
+0.992 content scale and a 0-to-0.1 terminator smoothstep. Visible lenses use
+the atmosphere material; the MOLA and THEMIS lenses use the observation
+material, which carries surface lighting and the exterior limb only. The
+material is a separate retained plane fitted to the projected silhouette, not
+a plane inside the 3D scene, so close zoom shows no depth-sorted wedge
+drop-outs. Runtime only selects a prepared phase frame and writes its roll.
+
 The reflectance spectrum and temperature-pressure profile are prepared from a
 pinned NASA GSFC Planetary Spectrum Generator configuration and raw I/F
 response. The charts are static SVG outputs. The browser performs no PSG
@@ -150,63 +132,54 @@ request or scientific calculation.
 </details>
 
 <details>
-<summary>Moon archives and editorial references</summary>
+<summary>Background sky and Sun</summary>
 
-## Phobos and Deimos
+## Background sky
 
-The checked OpenSpace GLB models preserve the irregular source shapes of
-Phobos and Deimos. Their scene axes are cross-checked against OpenSpace's
-planet-owned globe assets. The [JPL satellite tables](https://ssd.jpl.nasa.gov/sats/phys_par/sep.html)
-identify Phobos and Deimos. Mars’s information panel records two moons. The
-OpenSpace scene record pins the MAR097 SPICE kernel used by that source scene.
+The retained background uses the shared cubic-sky standard. ESO's 6,000 by
+3,000 `eso0932a` photographic panorama by S. Brunier (CC BY 4.0) is projected
+during preparation into six 1,024-square faces and six 2,048-square DPR-2
+faces. HYG v4.1 (David Nash / Astronexus, CC BY-SA 4.0) is the pinned
+coordinate-registration subset; the visible stars are the licensed ESO pixels.
+The Sun is a repository-authored prepared raster mounted as a separate
+retained billboard, prepared through the shared directional-sun standard. That
+standard cites the earlier Google Earth Pro Mars measurement record, which is
+retained as a document at `source/sky/google-earth-pro-contract.json`; Mars
+preparation no longer reads it. This is a presentation sky, not an
+epoch-correct Mars observer sky.
 
-These are physical/source records, not rendered satellites in the Mars scene.
-The earlier `mars-moon-billboards.webp` and `mars-moon-billboards@2x.webp`
-outputs had no runtime resource or retained-node consumer. They are omitted
-from the consumer-derived runtime inventory; no satellite rendering is added.
+</details>
+
+<details>
+<summary>Editorial references, runtime boundary and reproduction</summary>
 
 ## Editorial information
 
 Build-time editorial information comes from NASA Science topic `107740` and
 its structured block endpoint. The prepared snapshot is committed at
-`data/planets/mars.json`. The browser never requests or parses NASA editorial
-services.
-
-</details>
-
-<details>
-<summary>Prepared runtime boundary and source restoration</summary>
+`data/planets/mars.json`. Factsheet values cite the JPL references pinned in
+`source/editorial/factsheet-review.json`.
 
 ## Runtime boundary
 
 All browser assets are generated under `public/scenes/mars/` and enumerated by
-`runtime-assets.json`. Authoritative inputs and pinned capability recipes stay
-under `source/`; generated runtime transport and supporting plans stay under
-`prepared/`. The shared `tools/objects/terrestrial-layers/` operators prepare
-affine ellipsoid texels, observed lenses, measured celestial registration,
-source-calibrated atmosphere and bounded material rows. Shell content and
-scientific charts use the common content preparer. The body package contains
-no executable preparation or runtime code. No source-authority request is
-permitted at runtime.
-The material transport retains at most three decoded row shards. During input,
-it publishes the nearest ready prepared state while the exact Sun phase state
-decodes, then settles on the exact state. Runtime only selects a prepared phase
-and publishes its screen roll; it does not rasterize, derive lighting, or add an
-idle JavaScript loop.
+`runtime-assets.json`. Authoritative inputs and pinned recipes stay under
+`source/`; generated runtime transport stays under `prepared/`. The shared
+raster, celestial, geometry, content and presentation lanes in
+`tools/objects/prepare-authored.ts` prepare the package; it contains no
+executable code. No source-authority request is permitted at runtime.
 
-## Reproduction commands
+## Reproduction
 
-The [acquisition plan](source/preparation/acquisition.json) restores pinned
-OpenSpace, USGS and JPL files and tile mosaics, plus the NASA PSG configuration
-and spectrum. Returned products must match their pins before replacing local
-files. Camera/oracle records and coordinate-registration snapshots remain
-checked-in provenance, not live queries.
-
-See the [contributor guide](../README.md) for shared commands. Body checks live
-under `tests/objects/unit/mars/`.
+The [acquisition plan](source/preparation/acquisition.json) restores the pinned
+OpenSpace, USGS and tile-mosaic files, the NASA PSG configuration and spectrum,
+the Gazetteer archive and the sky and Sun inputs. Returned products must match
+their pins before replacing local files. See the
+[contributor guide](../README.md) for shared commands. Body checks live under
+`tests/objects/unit/mars/`.
 
 </details>
 
 ## Catalogue attribution
 
-The visible mosaic retains its collective Viking-orbiter capture credit. The catalogue now distinguishes Viking 1 and Viking 2 and their orbiters and landers, but this pinned image alone does not identify its individual contributors. The Missions tab presents that limit without assigning the mosaic to the landers or guessing individual mission links. See the [shared catalogue contract](../../../docs/architecture/exploration-catalog.md) and this body’s [source manifest](source/manifest.json). Dataset bytes and rendering are unchanged by this metadata migration.
+The visible mosaic retains its collective Viking-orbiter capture credit. The catalogue distinguishes Viking 1 and Viking 2 and their orbiters and landers, but this pinned image alone does not identify its individual contributors. The Missions tab presents that limit without assigning the mosaic to the landers or guessing individual mission links. See the [shared catalogue contract](../../../docs/architecture/exploration-catalog.md) and this body’s [source manifest](source/manifest.json).

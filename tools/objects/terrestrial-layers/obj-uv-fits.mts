@@ -6,7 +6,7 @@ const parseUvTerrain = shape({path:text,format:text,simplification:shape({method
 interface UvFits {bitpix:number;width:number;height:number;values:ArrayLike<number>;scale:number;zero:number}
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readFitsPrimary } from '../static-surface/fits-map.mts';
+import { readFitsPrimary } from '../observation/fits.mts';
 import { closestTrianglePoint } from './obj-shape.mts';
 
 const safePath = (path: unknown) => typeof path === 'string' && path.length > 0 && !path.startsWith('/') && !path.includes('\\') && !path.split('/').includes('..');

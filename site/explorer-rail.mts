@@ -12,30 +12,37 @@ export function createExplorerRailController(documentTarget: Document, windowTar
   const settings = documentTarget.querySelector<HTMLElement>(".planet-settings-action");
   const settingsPanel = documentTarget.querySelector<HTMLElement>(".planet-settings-panel");
   const aside = documentTarget.querySelector<HTMLElement>(".planet-sidebar");
+  const machineToggle = documentTarget.querySelector<HTMLElement>(".planet-machine-toggle");
   if (!(explore instanceof windowTarget.HTMLButtonElement) || !(settings instanceof windowTarget.HTMLButtonElement)
       || (about !== null && !(about instanceof windowTarget.HTMLButtonElement))
       || !(panel instanceof windowTarget.HTMLElement) || !(settingsPanel instanceof windowTarget.HTMLElement)
       || !(drawer instanceof windowTarget.HTMLElement) || !(searchCard instanceof windowTarget.HTMLElement)
-      || !(aside instanceof windowTarget.HTMLElement) || !(search instanceof windowTarget.HTMLInputElement)) {
+      || !(aside instanceof windowTarget.HTMLElement) || !(search instanceof windowTarget.HTMLInputElement)
+      || (machineToggle !== null && !(machineToggle instanceof windowTarget.HTMLButtonElement))) {
     throw new Error("Explorer rail is incomplete.");
   }
 
   const events = new AbortController();
-  let activePanel = "explore";
-  const render = (next: "explore" | "about" | "settings") => {
+  let activePanel: "explore" | "about" = "explore";
+  let settingsOpen = false;
+  // Settings shares the right-hand context slot with the machine card, never the sidebar.
+  const setSettingsOpen = (open: boolean) => {
+    settingsOpen = open;
+    settingsPanel.hidden = !open;
+    settings.ariaPressed = String(open);
+    if (open) documentTarget.body.dataset.contextPanel = "settings";
+    else delete documentTarget.body.dataset.contextPanel;
+  };
+  const render = (next: "explore" | "about") => {
     activePanel = next;
     panel.hidden = next !== "about";
-    settingsPanel.hidden = next !== "settings";
     drawer.hidden = next !== "explore";
     searchCard.hidden = false;
     explore.ariaPressed = String(next === "explore");
     if (about) about.ariaPressed = String(next === "about");
-    settings.ariaPressed = String(next === "settings");
-    aside.ariaLabel = next === "about" ? "About cssEarth"
-      : next === "settings" ? "Settings"
-      : "Planet information";
+    aside.ariaLabel = next === "about" ? "About cssEarth" : "Planet information";
   };
-  const show = (next: "explore" | "about" | "settings") => {
+  const show = (next: "explore" | "about") => {
     onShowPanel();
     render(next);
     aside.scrollTop = 0;
@@ -48,7 +55,14 @@ export function createExplorerRailController(documentTarget: Document, windowTar
     onOpenSolarSystem();
   }, { signal: events.signal });
   about?.addEventListener("click", () => show("about"), { signal: events.signal });
-  settings.addEventListener("click", () => show("settings"), { signal: events.signal });
+  settings.addEventListener("click", () => {
+    setSettingsOpen(!settingsOpen);
+    if (settingsOpen && windowTarget.matchMedia(MOBILE_VIEWPORT_QUERY).matches) {
+      settingsPanel.scrollIntoView({ block: "nearest", behavior: "instant" });
+    }
+  }, { signal: events.signal });
+  // Choosing the machine card hands the context slot back from Settings.
+  machineToggle?.addEventListener("click", () => { if (settingsOpen) setSettingsOpen(false); }, { signal: events.signal });
   const showSearch = () => { if (activePanel !== "explore") show("explore"); };
   search.addEventListener("input", showSearch, { signal: events.signal });
   search.addEventListener("keydown", (event) => {
@@ -56,17 +70,25 @@ export function createExplorerRailController(documentTarget: Document, windowTar
   }, { capture: true, signal: events.signal });
   documentTarget.querySelector<HTMLElement>(".planet-sidebar-view-all")?.addEventListener("click", showSearch, { signal: events.signal });
   documentTarget.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape" || activePanel === "explore") return;
+    if (event.key !== "Escape") return;
+    if (settingsOpen) {
+      event.preventDefault();
+      setSettingsOpen(false);
+      settings.focus();
+      return;
+    }
+    if (activePanel === "explore") return;
     event.preventDefault();
-    const action = activePanel === "settings" ? settings : about;
     show("explore");
-    action?.focus();
+    about?.focus();
   }, { signal: events.signal });
   render("explore");
+  setSettingsOpen(false);
 
   return Object.freeze({
     destroy() {
       events.abort();
+      setSettingsOpen(false);
       render("explore");
     },
   });

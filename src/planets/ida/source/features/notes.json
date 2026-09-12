@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "4557",
+      "item": "Q25909119",
+      "title": "Palisa Regio",
+      "url": "https://en.wikipedia.org/wiki/Palisa_Regio",
+      "revision": "1362287387",
+      "extract": "Palisa Regio is a regio, or a large area with distinct color or albedo, on 243 Ida, a main-belt asteroid. The crater was named after Johann Palisa, an Austrian astronomer, who discovered 243 Ida. The name \"Palisa Regio\" was officially approved by the International Astronomical Union (IAU) in 1997."
+    },
+    {
+      "id": "4778",
+      "item": "Q25909120",
+      "title": "Pola Regio",
+      "url": "https://en.wikipedia.org/wiki/Pola_Regio",
+      "revision": "1346763597",
+      "extract": "Pola Regio is a geological structure on 243 Ida, a main belt asteroid. It was named after Pula (Pola), the place where Austrian astronomer Johann Palisa discovered Ida on 29 September 1884; this name was officially approved by the International Astronomical Union (IAU) in 1997."
+    }
+  ]
+}

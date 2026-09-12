@@ -1,5 +1,5 @@
 import { required } from '../../tools/test-values.mts';
-import { parsePreparedObjectRuntime } from '../../src/renderers/css/index.ts';
+import { parsePreparedObjectRuntime } from '../../src/renderers/css/dist/index.js';
 import { requireRecord, requireString } from '../../tools/source-values.mts';
 import { createTestPage } from './browser-observations.mts';
 import type { Page } from 'playwright';

@@ -12,9 +12,15 @@
 
 ## Known problems
 
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Amalthea (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
+
+Feature notes: 4 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
+
 - The single green frame supplies a monochrome brightness view, not inferred visible color. No flat-field or radiometric calibration is claimed; this is a display of approximate normalized brightness, not measured albedo.
 
 - This is approximate registration, not a new photogrammetric solution. The closest observation withholds five source pixels next to known sky/invalid boundaries to reflect that uncertainty; valid lower-resolution imagery supplies overlap.
+
+- **Faithfulness status:** The Monochrome lens is retained as a coarse observation and pointing aid, not as a feature-registered photographic surface. The existing shape and Elevation view remain the supported measured/model views.
 
 - **Shape and elevation:** It describes overall shape, not altimetry or height above a geoid; unresolved/modelled regions and potentially exaggerated facets/depressions remain source limitations.
 

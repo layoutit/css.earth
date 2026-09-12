@@ -4,142 +4,100 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ea462cb51fc8b1618f5577766667ea4ad428413964ad2e2e98b80734034a7a93"
+    "sha256": "218708b34be7f9195187fb649c13cf2867b87f238fb381a1b6ca3abed134a194"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
-      "id": "terrestrial",
-      "path": "source/preparation/terrestrial.json",
-      "sha256": "d5bbb1f85e50f6fd5ced773093faa5d369179e553df255dd3e659febaa6c2712",
+      "id": "raster",
+      "path": "source/preparation/raster.json",
+      "sha256": "7a4423487c819fb73f49c38002be3f8176ed9bd4d2d38e60d0f4ac629aeb7de8",
       "parameters": {
-        "schema": "cssearth-terrestrial-preparation@1",
-        "kind": "affine-photographic-atmosphere",
-        "namespace": "mars",
-        "displayName": "Mars",
+        "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/mars/",
-        "distanceAu": 1.52,
+        "sourceWidth": 4096,
+        "sourceHeight": 2048,
         "width": 2048,
         "height": 1024,
-        "polarTileSize": 256,
-        "shapePath": "preparation/ellipsoid.json",
-        "atmospherePath": "preparation/atmosphere.json",
-        "source": {
-          "path": "surface/mars-viking-mdim21-color-1km.jpg",
-          "label": "USGS Astrogeology and NASA Viking MDIM 2.1 color mosaic"
+        "latitudeBands": 16,
+        "polarTile": 256,
+        "densities": [
+          1,
+          2
+        ],
+        "resample": "density-before-pack",
+        "polarProjection": "orthographic-bilinear",
+        "polesCombined": false,
+        "polesOutput": "mars-poles-{id}{suffix}.webp",
+        "surfaceMetadata": {
+          "schema": "cssmars-prepared-assets@1"
         },
-        "projection": {
-          "rasterScale": 4,
-          "tileSize": 50,
-          "overlap": 0.005,
-          "seamBleed": 0,
-          "rasterOverscan": 0
+        "thumbnail": {
+          "size": 64,
+          "quality": 88
         },
-        "color": "#b45e3a",
-        "rotationHours": 24.6,
-        "rotationSeconds": 48,
-        "lenses": {
-          "normal": {
+        "surfaces": [
+          {
             "id": "normal",
-            "label": "Normal",
-            "shortLabel": "RGB",
-            "measurement": "Viking MDIM 2.1 visible-color mosaic",
-            "thumbnailUrl": "/scenes/mars/mars-lens-normal.webp",
-            "surfaceUrl": "/scenes/mars/mars-surface.webp",
-            "surface2xUrl": "/scenes/mars/mars-surface@2x.webp",
-            "polesUrl": "/scenes/mars/mars-poles.webp",
-            "poles2xUrl": "/scenes/mars/mars-poles@2x.webp",
+            "source": "surface/mars-viking-mdim21-color-1km.jpg",
             "falseColor": false,
-            "qualification": "USGS Viking MDIM 2.1 colorized global mosaic"
+            "output": "mars-surface-{id}{suffix}.webp",
+            "thumbnail": "mars-lens-{id}.webp",
+            "nativeSourcePoles": true
           },
-          "plans": [
-            {
-              "id": "elevation",
-              "label": "Elevation",
-              "shortLabel": "MOLA",
-              "source": "lenses/mola-pseudocolor-z3.png",
-              "measurement": "MOLA topographic elevation with shaded relief",
-              "falseColor": true,
-              "qualification": "USGS MOLA elevation shown with the source pseudo-color shaded-relief palette",
-              "coveragePreparation": "complete global source mosaic"
-            },
-            {
-              "id": "thermal",
-              "label": "Thermal IR",
-              "shortLabel": "IR",
-              "source": "lenses/themis-ir-day-z3.png",
-              "measurement": "THEMIS daytime thermal infrared response",
-              "falseColor": false,
-              "qualification": "USGS/ASU THEMIS daytime infrared brightness mosaic; gray grid marks unavailable source coverage. No visible-light substitute; not a calibrated temperature retrieval.",
-              "coveragePreparation": "Exact-zero fill connected to the north or south source edge is unavailable; isolated black and all nonzero dark samples are retained. Coverage is resolved before interpolation; no Viking gap fill or polar inpainting.",
-              "coverage": {
-                "kind": "polar-connected-zero"
-              }
-            }
-          ],
-          "polarInpaintRadius": 0.9,
-          "provenance": {
-            "normalAuthority": "USGS Astrogeology Viking MDIM 2.1 colorized global mosaic",
-            "elevationAuthority": "USGS Astrogeology and NASA Mars Global Surveyor MOLA",
-            "thermalAuthority": "USGS Astrogeology, Arizona State University, and NASA Mars Odyssey THEMIS",
-            "runtimeAuthorityRequests": false
+          {
+            "id": "elevation",
+            "source": "lenses/mola-pseudocolor-z3.png",
+            "falseColor": true,
+            "output": "mars-surface-{id}{suffix}.webp",
+            "thumbnail": "mars-lens-{id}.webp"
+          },
+          {
+            "id": "thermal",
+            "source": "lenses/themis-ir-day-z3.png",
+            "falseColor": false,
+            "output": "mars-surface-{id}{suffix}.webp",
+            "thumbnail": "mars-lens-{id}.webp"
           }
-        },
-        "reference": {
-          "path": "sky/google-earth-pro-contract.json",
-          "schema": "cssmars-google-earth-pro-sky-contract@1",
-          "cameraLabel": "Google Earth Pro Mars native render contract",
-          "catalogueLabel": "Google Earth Pro Mars fixed-size catalogue draw contract",
-          "skyQualification": "201 native headless samples; licensed ESO pixels replace Google sky bytes"
-        },
-        "camera": {
-          "minimumControlPitchDegrees": 0,
-          "maximumControlPitchDegrees": 89,
-          "initialScenePitchDegrees": 40,
-          "maximumScenePitchDegrees": 65,
-          "minimumZoom": 0.42,
-          "maximumZoom": 4,
-          "defaultZoom": 1.1,
-          "responsiveFit": {
-            "model": "continuous-aspect-smoothstep",
-            "portraitBaseWidthShare": 0.34,
-            "narrowPortraitWidthShareGain": 0.08,
-            "landscapeWidthShareGain": 0.02,
-            "narrowPortraitAspectRatio": 0.46,
-            "portraitAspectRatio": 0.75,
-            "squareAspectRatio": 1,
-            "maximumHeightShare": 0.61,
-            "maximumMobilePreviewShare": 0.925,
-            "minimumZoom": 0.42,
-            "maximumZoom": 2
-          }
-        },
-        "lighting": {
-          "frameCount": 256,
-          "minimumLightViewZ": -1,
-          "maximumLightViewZ": 1,
-          "pitchDegrees": 40,
-          "frameGutter": 4,
-          "sourcePaths": [
-            "atmosphere/psg-mars-20260829.cfg",
-            "openspace/atmosphere.asset",
-            "presentation/navigation-marker.jpg",
-            "sky/google-earth-pro-contract.json"
+        ],
+        "atmosphere": {
+          "source": "openspace/atmosphere.asset",
+          "tileSize": 256,
+          "logicalSize": 512,
+          "frameCount": 32,
+          "directionalFrameCount": 31,
+          "columns": 8,
+          "rows": 4,
+          "minimumLightViewZ": -0.98,
+          "maximumLightViewZ": 0.98,
+          "bodyRadius": 230,
+          "supersampling": 2,
+          "contentScale": 0.992,
+          "coverageScale": 1.002,
+          "directionalShadowRelease": 0,
+          "floodShadowRelease": 0.3,
+          "sunwardShadowRelease": [
+            0.45,
+            0.92
           ],
-          "atmosphereLabel": "OpenSpace Mars atmosphere parameters and published NASA ESA Hubble full disc",
-          "shadowLabel": "Google Earth Pro measured Sun direction, NASA PSG qualification, and OpenSpace RenderableGlobe lighting model",
-          "deliveryPath": "preparation/material-delivery.json"
+          "terminator": [
+            0,
+            0.1
+          ],
+          "materialOutput": "mars-material{suffix}.webp",
+          "observationOutput": "mars-observation-material{suffix}.webp",
+          "lightingOutput": "mars-lighting{suffix}.webp"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3157f4357e1c6e128d6feaac4e618bed81012fb1584eb2b829f65409de106cc8",
+      "sha256": "c241a9187643b00a8530d30b509ac5dd67067b1fc089131ecb1fddd0caa8ed7a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,8 +121,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "schema": "cssearth-prepared-panel@1",
-          "planetId": "mars",
           "introduction": "Mars is a cold, dusty desert world with a thin atmosphere, polar ice caps, extinct volcanoes, deep canyons, seasons, and weather.",
           "facts": [
             {
@@ -275,21 +231,7 @@
                 "locator": "/references/1; gravity"
               }
             }
-          ],
-          "sources": {
-            "editorial": {
-              "sourceId": 107740,
-              "sourceUrl": "https://science.nasa.gov/mars/facts/",
-              "modified": "2026-07-10T12:04:15",
-              "retrievedAt": "2026-08-30",
-              "credit": "NASA Science"
-            },
-            "renderedMoons": {
-              "count": 2,
-              "physicalParameters": "JPL Solar System Dynamics physical parameters",
-              "meanElements": "JPL MAR099 mean elements at 2000-01-01.5 TDB"
-            }
-          }
+          ]
         },
         "lenses": {
           "titleKey": "lenses",
@@ -300,24 +242,28 @@
               "label": "Visible color",
               "description": "USGS Viking MDIM 2.1 global mosaic, colorized with NASA Ames processing. Source sampling is about 1 km; resolution and photographed lighting vary. This assembled historical map does not depict the scene date.",
               "title": "MDIM 2.1 colorized global mosaic",
-              "thumbnail": "/scenes/mars/mars-lens-normal.webp",
-              "surface": "/scenes/mars/mars-surface.webp",
-              "poles": "/scenes/mars/mars-poles.webp",
+              "thumbnail": "mars-lens-normal.webp",
+              "surface": "mars-surface-normal.webp",
+              "poles": "mars-poles-normal.webp",
               "source": {
                 "id": "normal",
                 "path": "../manifest.json"
               },
               "detail": "Global mosaic",
-              "summary": "Surface detail comes from Viking images with NASA Ames color. Lighting and resolution vary; these are archival observations."
+              "summary": "Surface detail comes from Viking images with NASA Ames color. Lighting and resolution vary; these are archival observations.",
+              "material": "mars-material.webp",
+              "shortLabel": "RGB",
+              "falseColor": false,
+              "qualification": "USGS Viking MDIM 2.1 colorized global mosaic"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Mars Global Surveyor MOLA topography shown with the source pseudo-color shaded-relief palette. Colors indicate relative elevation, with cartographic shading; this is a prepared global display mosaic, not a current photograph or numeric height readout.",
               "title": "MOLA global color shaded relief",
-              "thumbnail": "/scenes/mars/mars-lens-elevation-thumbnail.webp",
-              "surface": "/scenes/mars/mars-lens-elevation.webp",
-              "poles": "/scenes/mars/mars-lens-elevation-poles.webp",
+              "thumbnail": "mars-lens-elevation.webp",
+              "surface": "mars-surface-elevation.webp",
+              "poles": "mars-poles-elevation.webp",
               "legend": {
                 "kind": "scale",
                 "title": "Relative elevation",
@@ -375,22 +321,30 @@
                 "path": "../manifest.json"
               },
               "detail": "Shaded relief",
-              "summary": "Colors describe terrain height and shading reveals slopes. This published relief image does not provide a numeric readout."
+              "summary": "Colors describe terrain height and shading reveals slopes. This published relief image does not provide a numeric readout.",
+              "material": "mars-observation-material.webp",
+              "shortLabel": "MOLA",
+              "falseColor": true,
+              "qualification": "USGS MOLA elevation shown with the source pseudo-color shaded-relief palette"
             },
             {
               "id": "thermal",
               "label": "Thermal infrared",
-              "description": "USGS/ASU THEMIS daytime infrared brightness mosaic from Mars Odyssey. Gray grid marks unavailable source coverage; dark interior samples remain. No Viking imagery fills thermal gaps. Multiple observations are combined; this is not a temperature map or the scene date.",
+              "description": "USGS/ASU THEMIS daytime infrared brightness mosaic from Mars Odyssey. Black areas at the north and south map edges are exact-zero source fill without observations; dark interior samples are real. No Viking imagery fills thermal gaps. Multiple observations are combined; this is not a temperature map or the scene date.",
               "title": "THEMIS daytime infrared mosaic",
-              "thumbnail": "/scenes/mars/mars-lens-thermal-thumbnail.webp",
-              "surface": "/scenes/mars/mars-lens-thermal.webp",
-              "poles": "/scenes/mars/mars-lens-thermal-poles.webp",
+              "thumbnail": "mars-lens-thermal.webp",
+              "surface": "mars-surface-thermal.webp",
+              "poles": "mars-poles-thermal.webp",
               "source": {
                 "id": "thermal",
                 "path": "../manifest.json"
               },
               "detail": "Infrared",
-              "summary": "Brightness records daytime infrared imagery, not a temperature reading. The gray grid marks gaps left unfilled."
+              "summary": "Brightness records daytime infrared intensity from combined observations. Black bands at the map edges are missing source coverage, not measurements.",
+              "material": "mars-observation-material.webp",
+              "shortLabel": "IR",
+              "falseColor": false,
+              "qualification": "USGS/ASU THEMIS daytime infrared brightness mosaic; exact-zero source fill at the map edges stays black. No visible-light substitute; not a calibrated temperature retrieval."
             }
           ]
         },
@@ -408,6 +362,18 @@
               "name": "shadows",
               "label": "Shadows",
               "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "atmosphere",
+              "label": "Atmosphere",
+              "checked": true
+            },
+            {
+              "kind": "toggle",
+              "name": "stars",
+              "label": "Stars",
+              "checked": true
             }
           ]
         },
@@ -419,7 +385,12 @@
             "width": 306,
             "height": 141,
             "alt": "Modeled disk reflectance of Mars from 350 to 998 nanometers.",
-            "titleKey": "reflectance"
+            "titleKey": "reflectance",
+            "source": {
+              "id": "mars-psg",
+              "path": "../atmosphere/psg-mars-20260829.cfg",
+              "url": "https://psg.gsfc.nasa.gov/"
+            }
           },
           {
             "id": "photometric-phase",
@@ -428,7 +399,11 @@
             "width": 306,
             "height": 141,
             "alt": "Mars V-band brightness change across phase angles from zero to 180 degrees.",
-            "titleKey": "photometricPhase"
+            "titleKey": "photometricPhase",
+            "source": {
+              "id": "scientific-charts",
+              "path": "../../../../site/source/scientific-charts/planetary-context.json"
+            }
           },
           {
             "id": "temperature-pressure",
@@ -437,7 +412,12 @@
             "width": 306,
             "height": 141,
             "alt": "Mars atmospheric temperature and pressure through 244 kilometers altitude.",
-            "titleKey": "temperaturePressure"
+            "titleKey": "temperaturePressure",
+            "source": {
+              "id": "mars-psg-profile",
+              "path": "../atmosphere/psg-mars-20260829.cfg",
+              "url": "https://psg.gsfc.nasa.gov/"
+            }
           }
         ],
         "resources": [
@@ -450,8 +430,8 @@
           {
             "label": "USGS",
             "role": "imagery",
-            "description": "Surface & thermal lenses",
-            "href": "https://astrogeology.usgs.gov/"
+            "description": "Surface, elevation & thermal lenses",
+            "href": "https://astrogeology.usgs.gov/search?target=mars"
           },
           {
             "label": "JPL",
@@ -462,13 +442,13 @@
           {
             "label": "OpenSpace",
             "role": "scene",
-            "description": "Atmosphere & moons",
+            "description": "Atmosphere & scene",
             "href": "https://github.com/OpenSpace/OpenSpace"
           },
           {
             "label": "ESA/Hubble",
-            "role": "lighting",
-            "description": "Limb & lighting",
+            "role": "navigation",
+            "description": "Navigation marker portrait",
             "href": "https://esahubble.org/images/heic1609a/"
           },
           {
@@ -476,6 +456,12 @@
             "role": "spectra",
             "description": "Spectrum & profile",
             "href": "https://psg.gsfc.nasa.gov/"
+          },
+          {
+            "label": "ESO/S. Brunier",
+            "role": "sky",
+            "description": "Photographic full sky",
+            "href": "https://www.eso.org/public/images/eso0932a/"
           }
         ],
         "provenance": {
@@ -483,15 +469,17 @@
             "path": "../presentation/title-mark.json"
           },
           "editorial": {
-            "sourceId": 107740,
-            "sourceUrl": "https://science.nasa.gov/mars/facts/",
-            "modified": "2026-07-10T12:04:15",
-            "retrievedAt": "2026-08-30",
+            "path": "../editorial/factsheet-review.json",
+            "url": "https://science.nasa.gov/mars/facts/",
             "credit": "NASA Science"
           },
           "physical": {
             "path": "../manifest.json",
             "credit": "JPL Solar System Dynamics"
+          },
+          "presentation": {
+            "path": "../presentation/solar-system.json",
+            "credit": "Published physical facts and repository-authored presentation"
           }
         }
       }
@@ -628,6 +616,72 @@
           }
         ]
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "945f147e0b32b66861c9bdb643b9c15bfca032e49893286b4ae746e7f8c00ff1",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "MARS_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "MARS_nomenclature_center_pts.dbf",
+          "projection": "MARS_nomenclature_center_pts.prj",
+          "metadata": "metadata_nomenclature_points_MARS.xml"
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 180,
+        "output": "mars-features.json",
+        "publicBase": "/scenes/mars/",
+        "target": {
+          "className": "mars-body"
+        },
+        "lensIds": [
+          "normal",
+          "elevation",
+          "thermal"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 0,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 40,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        },
+        "notes": "notes.json",
+        "sites": {
+          "document": "sites.json",
+          "inputs": [
+            "traverses/msl_localized_pos.csv",
+            "traverses/m2020_best_tactical.csv"
+          ]
+        }
+      }
     }
   ],
   "sources": [
@@ -681,15 +735,15 @@
       "origin": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}",
       "credit": "USGS Astrogeology, NASA Mars Global Surveyor MOLA",
       "license": "NASA/PDS United States government data",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 16 by 8 level-3 TMS snapshot",
+      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 16 by 8 level-3 TMS snapshot Re-stitched on 2026-09-11 with the same tile recipe because the tile server no longer reproduced the earlier pinned bytes; the pinned identity is this refreshed mosaic.",
       "redistribution": "checked prepared government-data mosaic without logos",
       "title": "MOLA global color shaded relief",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_global_color_shaded_relief_463m",
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "mars-global-surveyor",
+            "kind": "machine",
+            "machineId": "mars-global-surveyor",
             "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}",
             "missionId": "mars-global-surveyor"
           }
@@ -705,8 +759,8 @@
           }
         ]
       },
-      "sha256": "25a0b3ade0d01fc28bb04e452ed8780f023d9ac76092d60d47be81b7f6af9e2d",
-      "bytes": 18716720,
+      "sha256": "16b9b65eebe6512bf625fdb82b87a51d92e9a6e74c5d98ebbac3c66251bcac7c",
+      "bytes": 18438219,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": {
@@ -729,61 +783,21 @@
       "verificationOperations": []
     },
     {
-      "path": "preparation/ellipsoid.json",
-      "kind": "authored-document",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored ellipsoid tessellation and display orientation."
-      },
-      "id": "authored-document:preparation/ellipsoid.json",
-      "origin": "object:source/preparation/ellipsoid.json",
-      "title": "preparation/ellipsoid.json",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored, pinned object-package document.",
-      "upstreamLineage": "not-recorded",
-      "sha256": "a21e86fe560a46396cea1568b44a757be8b258b9ef40277b5261ef11c380d768",
-      "bytes": 622,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "path": "preparation/atmosphere.json",
-      "kind": "authored-document",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored atmosphere sampling and display response using the cited PSG model and photographic reference."
-      },
-      "id": "authored-document:preparation/atmosphere.json",
-      "origin": "object:source/preparation/atmosphere.json",
-      "title": "preparation/atmosphere.json",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored, pinned object-package document.",
-      "upstreamLineage": "not-recorded",
-      "sha256": "672ce4a68c97c9d005f3721aad971b8e0b2bdb24eca1d6d863e14ed08bf41acb",
-      "bytes": 918,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
       "kind": "source-input",
       "id": "usgs-themis-ir-day",
       "path": "lenses/themis-ir-day-z3.png",
       "origin": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}",
       "credit": "USGS Astrogeology, Arizona State University, NASA Mars Odyssey THEMIS",
       "license": "NASA/PDS United States government data",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 14 by 7 level-3 TMS snapshot",
+      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 14 by 7 level-3 TMS snapshot Re-stitched on 2026-09-11 with the same tile recipe because the tile server no longer reproduced the earlier pinned bytes; the pinned identity is this refreshed mosaic.",
       "redistribution": "checked prepared government-data mosaic without logos",
       "title": "THEMIS daytime infrared mosaic",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_odyssey_themis_ir_day_global_mosaic_100m_v12",
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "odyssey",
+            "kind": "machine",
+            "machineId": "odyssey",
             "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}",
             "missionId": "odyssey"
           }
@@ -799,8 +813,8 @@
           }
         ]
       },
-      "sha256": "e31b41a6e44547f882b86ca1c8c12efe80a1c4b320d06a7aee41304eb74387d1",
-      "bytes": 7267744,
+      "sha256": "374bf7e567c53449cd1b7f8072f9ab64cf7c9863e29dc9a7db1bf8c1e2b3127c",
+      "bytes": 8031340,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": {
@@ -823,20 +837,56 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "openspace-mars-atmosphere",
+      "path": "openspace/atmosphere.asset",
+      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/atmosphere.asset",
+      "credit": "OpenSpace Team",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/atmosphere.asset"
+      ],
+      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group)",
+      "redistribution": "checked MIT source snapshot",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-openspace-mars-atmosphere",
+            "role": "method",
+            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
+      "sha256": "0850b8906314a8d72072b60ae3a3e0f0eb37525292955d911767310d2ed97ac5",
+      "bytes": 2044,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "openspace/atmosphere.asset",
+        "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/atmosphere.asset"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "authored-content",
+      "id": "mars-object-content",
       "path": "content/object.json",
+      "origin": "Repository-authored Mars panel, lens, chart, and provenance data.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked source JSON maintained beside Mars inputs.",
+      "redistribution": "Prepared shell content with source provenance.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
       },
-      "id": "authored-document:content/object.json",
-      "kind": "authored-content",
-      "origin": "object:source/content/object.json",
-      "title": "content/object.json",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored, pinned object-package document.",
-      "upstreamLineage": "not-recorded",
-      "sha256": "3157f4357e1c6e128d6feaac4e618bed81012fb1584eb2b829f65409de106cc8",
-      "bytes": 13979,
+      "sha256": "c241a9187643b00a8530d30b509ac5dd67067b1fc089131ecb1fddd0caa8ed7a",
+      "bytes": 15140,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -923,57 +973,255 @@
         "fileSource": "atmosphere/psg-mars-20260829.cfg"
       },
       "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mars-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "sha256": "069f3952e2409ba3fd4e0f2fa496a4a89de4a916b56a79ece7a3a61d83530f24",
+      "bytes": 996,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-mars-nomenclature-center-pts",
+      "path": "features/MARS_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MARS_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Mars on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Mars centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/MARS/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      },
+      "sha256": "58136a4ad15b287d1a01058d659974b44dfc67a65f2a53569d7654987d308e54",
+      "bytes": 5413387,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/MARS_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MARS_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mars-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "sha256": "395ac1d7241546d565cf84ca7b7a103454faaf9cea88270afb940057ab3029c3",
+      "bytes": 151,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "mars-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 644 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts mars: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "b2236444ed13365223dca094ead1db1c8a258bc6b8ea7009b0f02e7950919dfd",
+      "bytes": 301501,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "mars-surface-sites",
+      "path": "features/sites.json",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      },
+      "kind": "source-document",
+      "title": "features/sites.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "a14285fa6b38fd1dd403119fee66b3d285eac41851e5ca57972df6285dd1921c",
+      "bytes": 19986,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mars-msl-curiosity-traverse-path",
+      "path": "features/traverses/msl_localized_pos.csv",
+      "origin": "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/",
+      "credit": "NASA PDS",
+      "license": "NASA PDS archive; NASA content not subject to copyright",
+      "licenseEvidence": [
+        "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/.",
+      "redistribution": "NASA data product, credit the publisher",
+      "title": "Curiosity traverse (PLACES localizations)",
+      "displayCredit": "NASA PDS",
+      "sourceUrl": "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this pinned product."
+      },
+      "sha256": "d456ce9025ca71673af8b9f72a78dc508f5d963cbac74fa68eeac88a4c7c3a3b",
+      "bytes": 349568,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "features/traverses/msl_localized_pos.csv",
+        "url": "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/localized_pos.csv"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mars-m2020-perseverance-traverse-path",
+      "path": "features/traverses/m2020_best_tactical.csv",
+      "origin": "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/",
+      "credit": "NASA PDS",
+      "license": "NASA PDS archive; NASA content not subject to copyright",
+      "licenseEvidence": [
+        "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/.",
+      "redistribution": "NASA data product, credit the publisher",
+      "title": "Perseverance traverse (PLACES localizations)",
+      "displayCredit": "NASA PDS",
+      "sourceUrl": "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this pinned product."
+      },
+      "sha256": "9da19e4f70287fe0d33ba716ff2169c10447c30c7a048583f730e4155226cde9",
+      "bytes": 171404,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "features/traverses/m2020_best_tactical.csv",
+        "url": "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/best_tactical.csv"
+      },
+      "verificationOperations": []
     }
   ],
   "products": [
     {
       "id": "normal",
       "label": "Visible color",
-      "recipe": "terrestrial",
-      "selector": "/source",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
       "parents": [],
-      "process": "Prepare the registered visible-color mosaic and affine surface projection.",
+      "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
+        "USGS Viking MDIM 2.1 colorized global mosaic",
         "USGS Viking MDIM 2.1 global mosaic, colorized with NASA Ames processing. Source sampling is about 1 km; resolution and photographed lighting vary. This assembled historical map does not depict the scene date."
       ],
       "lensIds": [
         "normal"
       ],
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
+      "interpretation": {
+        "falseColor": false,
+        "polarSampling": "original-photograph-footprint"
+      },
       "inputs": [
         "usgs-viking-mdim21-color"
       ],
       "outputs": [
         {
+          "url": "/scenes/mars/mars-surface-normal.webp",
+          "bytes": 820510,
+          "sha256": "79d7f0b01fdff2f644f6d965fcbc742dcbc1c44a485ed94acc65d45cbaabd4dd",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/mars/mars-surface-normal@2x.webp",
+          "bytes": 2996430,
+          "sha256": "5cd225ec4de592bb2a9ab199248506eddb71f9149ca823e9cf48a466bfc15c39",
+          "verification": "asset-manifest-pin"
+        },
+        {
           "url": "/scenes/mars/mars-lens-normal.webp",
-          "bytes": 1468,
-          "sha256": "570cefe5ff8b7a0970239c632112ca53043926be6b9e13b40b56dd39e9418b05",
+          "bytes": 664,
+          "sha256": "c18b375dd5e4032d5dc8cc1b5cc75c982ac0b76abf893ef72ed4eed47d349f16",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/mars/mars-surface.webp",
-          "bytes": 539510,
-          "sha256": "86dccb0cb024a6336a9d34b0c34e30280137edfc95a0bb99441d108970bd8a6d",
+          "url": "/scenes/mars/mars-poles-normal.webp",
+          "bytes": 157040,
+          "sha256": "11b16a12f0a8ab21da7e0907575a055ac05e2cf9847876facdb290f899f304f3",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/mars/mars-surface@2x.webp",
-          "bytes": 1946518,
-          "sha256": "d405ce2aff269634726df4024ac0f3c43826c1350d2a18b71d8d03baf3331fcc",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/mars/mars-poles.webp",
-          "bytes": 15934,
-          "sha256": "4fe45fe781cabdafa707a5f134a661563c7385be3c657e73b9ac2308619c97e1",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/mars/mars-poles@2x.webp",
-          "bytes": 23740,
-          "sha256": "95b778864eaef15cd51c93c9a6929146f16cc4f318ad4224dd6b0e7f991d7f0d",
+          "url": "/scenes/mars/mars-poles-normal@2x.webp",
+          "bytes": 524794,
+          "sha256": "384fa36bdb1c4a30c5c6e470489bdc3c9667ba8d1072b556a9b67d118271120c",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -982,53 +1230,55 @@
     {
       "id": "elevation",
       "label": "Elevation",
-      "recipe": "terrestrial",
-      "selector": "/lenses/plans/0",
+      "recipe": "raster",
+      "selector": "/surfaces/1",
       "parents": [],
-      "process": "Prepare the declared registered surface lens and affine atmospheric presentation.",
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
+        "USGS MOLA elevation shown with the source pseudo-color shaded-relief palette",
         "Mars Global Surveyor MOLA topography shown with the source pseudo-color shaded-relief palette. Colors indicate relative elevation, with cartographic shading; this is a prepared global display mosaic, not a current photograph or numeric height readout."
       ],
       "lensIds": [
         "elevation"
       ],
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
+      "interpretation": {
+        "falseColor": true
+      },
       "inputs": [
-        "usgs-mola-pseudocolor",
-        "authored-document:preparation/ellipsoid.json",
-        "authored-document:preparation/atmosphere.json"
+        "usgs-mola-pseudocolor"
       ],
       "outputs": [
         {
-          "url": "/scenes/mars/mars-lens-elevation-thumbnail.webp",
-          "bytes": 2810,
-          "sha256": "80b76415381db53aadb5795558e911811f09607fccc4968861b1fe35a15fb4ab",
+          "url": "/scenes/mars/mars-surface-elevation.webp",
+          "bytes": 1062632,
+          "sha256": "1590d6b06282aea3468ba5c77fbf190da595af97e8b0a57537cb6da8f4c08175",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/mars/mars-surface-elevation@2x.webp",
+          "bytes": 4281926,
+          "sha256": "0a48a7ba0c175bcffad0a85047136b951240ffde2ec25eeaf809d78715d3e095",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-lens-elevation.webp",
-          "bytes": 1185898,
-          "sha256": "6b24df16babf88bd8ac9e40707ad5d8ee9f41bec6dc61a9b54dc2436f06b6de4",
+          "bytes": 1676,
+          "sha256": "ce6671d51d316b7210b0167d90a4f203dd3af569ba9659e09b6a99aa36f78fe5",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/mars/mars-lens-elevation@2x.webp",
-          "bytes": 5040992,
-          "sha256": "5a217ac3f501cff189b2016a6a5dd0afe615d0171b5defdca880c1b9a1b098db",
+          "url": "/scenes/mars/mars-poles-elevation.webp",
+          "bytes": 135846,
+          "sha256": "0001c5f20c2651eb98b98837fd20c5346db2c0fb8f19fd7621128571e8240841",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/mars/mars-lens-elevation-poles.webp",
-          "bytes": 14958,
-          "sha256": "6d38f48a53f9b6867cc79662424ba6912711d0252349c064df635d6161eeebf8",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/mars/mars-lens-elevation-poles@2x.webp",
-          "bytes": 27420,
-          "sha256": "3b0b553c409715f852d7df689b4263cdcf6fb895018c700b7a630308294ea9b6",
+          "url": "/scenes/mars/mars-poles-elevation@2x.webp",
+          "bytes": 473976,
+          "sha256": "5f0d742d7ed99cd208d65d012397ab97cac60619d05378c86201a1ca977957c5",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -1037,53 +1287,110 @@
     {
       "id": "thermal",
       "label": "Thermal infrared",
-      "recipe": "terrestrial",
-      "selector": "/lenses/plans/1",
+      "recipe": "raster",
+      "selector": "/surfaces/2",
       "parents": [],
-      "process": "Prepare the declared registered surface lens and affine atmospheric presentation.",
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "USGS/ASU THEMIS daytime infrared brightness mosaic from Mars Odyssey. Gray grid marks unavailable source coverage; dark interior samples remain. No Viking imagery fills thermal gaps. Multiple observations are combined; this is not a temperature map or the scene date."
+        "USGS/ASU THEMIS daytime infrared brightness mosaic; exact-zero source fill at the map edges stays black. No visible-light substitute; not a calibrated temperature retrieval.",
+        "USGS/ASU THEMIS daytime infrared brightness mosaic from Mars Odyssey. Black areas at the north and south map edges are exact-zero source fill without observations; dark interior samples are real. No Viking imagery fills thermal gaps. Multiple observations are combined; this is not a temperature map or the scene date."
       ],
       "lensIds": [
         "thermal"
       ],
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
+      "interpretation": {
+        "falseColor": false
+      },
       "inputs": [
-        "usgs-themis-ir-day",
-        "authored-document:preparation/ellipsoid.json",
-        "authored-document:preparation/atmosphere.json"
+        "usgs-themis-ir-day"
       ],
       "outputs": [
         {
-          "url": "/scenes/mars/mars-lens-thermal-thumbnail.webp",
-          "bytes": 418,
-          "sha256": "df00772596b8afe26c67e8e65dbf5a15535d9c27e9bb75104c1043eb8f5cee75",
+          "url": "/scenes/mars/mars-surface-thermal.webp",
+          "bytes": 855108,
+          "sha256": "d9116ca62ccbf049cf7dbc036988cd04ac00549e80a3a9b6d4ac6b68598f85d1",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/mars/mars-surface-thermal@2x.webp",
+          "bytes": 3018182,
+          "sha256": "f47ce1a03ab88df4518933e7f4e3625e8dad4238c585e4d549a53c1344b27ce4",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mars/mars-lens-thermal.webp",
-          "bytes": 718016,
-          "sha256": "88bc4f75a9f0a6f30624e9dedd24c5b5f9bb79b7cae15de9a064b3d1ddfd680c",
+          "bytes": 136,
+          "sha256": "13bdf4d31eef7a381d1838bdf0bc273072b2fa4362d69cc3c9a1c911f09e9836",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/mars/mars-lens-thermal@2x.webp",
-          "bytes": 3001650,
-          "sha256": "ef8f980f1938c0b6279874c69b5ba1bb74409ab23fa948281a16d733b52d85dd",
+          "url": "/scenes/mars/mars-poles-thermal.webp",
+          "bytes": 32020,
+          "sha256": "48c69d07f8a9856ed33cc6aa5e34c981facf942e6b8e8906f7b89ed835d5d640",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/mars/mars-lens-thermal-poles.webp",
-          "bytes": 10426,
-          "sha256": "98f4a1d8c7168db97782c9712f1c170a7a1604215dd844f1393d5a9a61b0e147",
+          "url": "/scenes/mars/mars-poles-thermal@2x.webp",
+          "bytes": 104630,
+          "sha256": "b188668830b4628d2a1fd054cf26b097d8fa122911af0be1d539cee5e441d070",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "atmosphere",
+      "label": "atmosphere",
+      "recipe": "raster",
+      "selector": "/atmosphere",
+      "parents": [],
+      "process": "Prepare the declared atmospheric material and observation layers.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "inputs": [
+        "openspace-mars-atmosphere"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/mars/mars-material.webp",
+          "bytes": 404286,
+          "sha256": "afc05aa05f6e967cfdc1a2ce8389316566853cc357ac10cfcc024cce5db9b15a",
           "verification": "asset-manifest-pin"
         },
         {
-          "url": "/scenes/mars/mars-lens-thermal-poles@2x.webp",
-          "bytes": 13724,
-          "sha256": "444453a60fcf427fba0d0101cc09420e7c80d783daee41fcb72ce846791593b0",
+          "url": "/scenes/mars/mars-observation-material.webp",
+          "bytes": 161742,
+          "sha256": "6770d670817c4c3d1f5d52f79ea160126e63b22b16f1c81a03fe3e50ae5ebeaa",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/mars/mars-lighting.webp",
+          "bytes": 61694,
+          "sha256": "d4835d67e068f737dc999f039a0eb1ba8849c2f7c3cd582ba8ac6bfbd2165d70",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/mars/mars-material@2x.webp",
+          "bytes": 1130242,
+          "sha256": "9820c485430e70a6ac0aabe78c1737edd99e9cac2fc10c24bfb7983e2443241e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/mars/mars-observation-material@2x.webp",
+          "bytes": 453296,
+          "sha256": "c1e091a34aff9427840f6a8a27dc920d95d0b54dc68bd4b5faa6b49dd7536bc6",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/mars/mars-lighting@2x.webp",
+          "bytes": 169690,
+          "sha256": "1369a6e9d5f4005a14996ebdafc3051121d9d5ca89c14bec8a7cb00a0e7eb4f7",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -1102,13 +1409,13 @@
         "content"
       ],
       "inputs": [
-        "authored-document:content/object.json"
+        "mars-object-content"
       ],
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8695,
-          "sha256": "7f63ab459dd9b77c45beecb56107ec902cb9d5fcf3d645d622085093a18af823",
+          "bytes": 9414,
+          "sha256": "0e6b6ab5e678dae656e90d089852e5b96f08e1cde278fd58d874cdf85ddf856d",
           "verification": "bytes-verified"
         }
       ],
@@ -1198,12 +1505,50 @@
       "inputBasis": "authored-recipe"
     },
     {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 180,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "mars-surface-features-source",
+        "usgs-gazetteer-mars-nomenclature-center-pts",
+        "mars-surface-map-frame",
+        "mars-surface-feature-notes",
+        "mars-surface-sites",
+        "mars-msl-curiosity-traverse-path",
+        "mars-m2020-perseverance-traverse-path"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/mars/mars-features.json",
+          "bytes": 6046256,
+          "sha256": "bb7c7398fb9e27b63ff774796cf088ceeeac05340b0a71898cd4dd5a82d82cdb",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "preview:normal",
       "label": "Visible color preview",
-      "recipe": "terrestrial",
-      "selector": "/source",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "inputs": [],
       "parents": [
@@ -1215,8 +1560,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 60340,
-          "sha256": "fa51b247f66fa2780d47733c85760189be77b3276295274349ba8066af0b3c24",
+          "bytes": 58950,
+          "sha256": "c8b43c183333d97f4a6c40136b880b317db065f5f535fb12a26254b91c272482",
           "verification": "bytes-verified"
         }
       ]
@@ -1224,10 +1569,10 @@
     {
       "id": "preview:elevation",
       "label": "Elevation preview",
-      "recipe": "terrestrial",
-      "selector": "/lenses/plans/0",
+      "recipe": "raster",
+      "selector": "/surfaces/1",
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "inputs": [],
       "parents": [
@@ -1239,8 +1584,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/elevation.webp",
-          "bytes": 73946,
-          "sha256": "2ecb75763a99d406c7c3d6c9a603ab24374796be3734487eb4ec15d3fb8bbdc2",
+          "bytes": 73408,
+          "sha256": "ca988b7d290aa74a4409fb0f297ba7dea54ceccf85f13fe4adbec4f7138de200",
           "verification": "bytes-verified"
         }
       ]
@@ -1248,10 +1593,10 @@
     {
       "id": "preview:thermal",
       "label": "Thermal infrared preview",
-      "recipe": "terrestrial",
-      "selector": "/lenses/plans/1",
+      "recipe": "raster",
+      "selector": "/surfaces/2",
       "recipeDependencies": [
-        "terrestrial"
+        "raster"
       ],
       "inputs": [],
       "parents": [
@@ -1263,8 +1608,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/thermal.webp",
-          "bytes": 35544,
-          "sha256": "0829341175f80929f9a8566d3fb2c4f22d92029624e0fa838aeb89f40f3bf6f5",
+          "bytes": 46536,
+          "sha256": "e755e42ea4718eec5e9dfc6e98ebd460154fd6209382ce5e453d6900d4fd2d7b",
           "verification": "bytes-verified"
         }
       ]

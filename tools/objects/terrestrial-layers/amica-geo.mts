@@ -1,6 +1,6 @@
 import {requireRecord} from '../../source-values.mts';
 import { gunzipSync } from 'node:zlib';
-import { readFitsPrimary } from '../static-surface/fits-map.mts';
+import { readFitsPrimary } from '../observation/fits.mts';
 
 const field = (label: string, key: string) => {
   const matches = [...label.matchAll(new RegExp(`^\\s*${key}\\s*=\\s*([^\\r\\n]+)`, 'gm'))];

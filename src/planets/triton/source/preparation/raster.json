@@ -1,0 +1,178 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/triton/",
+  "sourceWidth": 14336,
+  "sourceHeight": 7168,
+  "width": 7168,
+  "height": 3584,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "triton-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csstriton-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88
+  },
+  "surfaces": [
+    {
+      "id": "normal",
+      "output": "triton-{id}{suffix}.webp",
+      "thumbnail": "triton-lens-{id}.webp",
+      "source": "observations/fully_processed.zip",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-mosaic",
+        "id": "normal",
+        "format": "controlled-orthographic",
+        "consumer": "monochrome-frames",
+        "directory": "fully_processed",
+        "filter": "CLEAR",
+        "imageIds": [
+          "c1139255",
+          "c1139303",
+          "c1139330",
+          "c1139340",
+          "c1139350",
+          "c1139401",
+          "c1139411",
+          "c1139421",
+          "c1139427",
+          "c1139433",
+          "c1139445",
+          "c1139451",
+          "c1139457",
+          "c1139503",
+          "c1139509",
+          "c1139515",
+          "c1139521",
+          "c1139527",
+          "c1139533",
+          "c1139607",
+          "c1139613",
+          "c1139615",
+          "c1139617",
+          "c1139619",
+          "c1139621",
+          "c1139623",
+          "c1139625",
+          "c1139627",
+          "c1139629"
+        ],
+        "photometry": {
+          "consumer": "photometry",
+          "vectors": {
+            "sun": "photometry/horizons-sun.json",
+            "observer": "photometry/horizons-observer.json"
+          },
+          "model": "Lunar-Lambert",
+          "weight": 0.5,
+          "referenceIncidenceDegrees": 30,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 80,
+          "maximumGain": 6,
+          "radiusKm": 1352.6,
+          "gamma": 1.4,
+          "displayMaximum": 0.9,
+          "phaseNormalization": false,
+          "matchStride": 16,
+          "minimumMatchSamples": 100,
+          "minimumLevel": 0.67,
+          "maximumLevel": 1.5
+        },
+        "metadata": {
+          "label": "Monochrome",
+          "falseColor": false,
+          "coverage": "Native clear-filter Voyager frames, corrected independently using source capture geometry before compositing. Missing and unstable geometry stay unavailable.",
+          "projection": {
+            "type": "equirectangular",
+            "longitudeDegrees": [
+              0,
+              360
+            ],
+            "latitudeDegrees": [
+              90,
+              -90
+            ],
+            "longitudeDirection": "east-positive"
+          },
+          "source": {
+            "id": "usgs-2023-triton-clear-frames",
+            "sha256": "59c2a4133472869afddc42c00b5a9becd7c0dda028ac646490af933ac0ce2fac"
+          }
+        }
+      }
+    },
+    {
+      "id": "enhanced",
+      "output": "triton-{id}{suffix}.webp",
+      "thumbnail": "triton-lens-{id}.webp",
+      "source": "observations/tnmap-cyl-KH.jpg",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "voyager-triton-enhanced-color",
+        "id": "enhanced",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 0,
+          "centerLongitude": 0
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
+        }
+      }
+    }
+  ],
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "billboardFrameSize": 24,
+    "billboardColumns": 16,
+    "rowOutput": "triton-lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "triton-lighting-{density}x-billboard.webp",
+    "minimumLightViewZ": -1,
+    "maximumLightViewZ": 1,
+    "frameCount": 256,
+    "shadowlessFloodLimbFloor": 0.35,
+    "ambientIntensity": 0.05,
+    "radiusScale": 0.505,
+    "terminator": [
+      0,
+      0.1
+    ],
+    "maximumAlpha": 0.95,
+    "bankSchema": "csstriton-prepared-lighting-bank@1",
+    "billboardSchema": "csstriton-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "csstriton-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  }
+}

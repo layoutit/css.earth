@@ -1,8 +1,8 @@
 {
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "85321758aa7a0ee00beda650c61c305ce71056dd11b1f9d7228e0b09523a820e"
+    "sha256": "ddbb6381fcfe5f2535eb2fe963a8f657c852d8ad8cecd3b3f3f1fae8603fbc12"
   },
   "id": "ryugu",
   "properties": {
@@ -17,6 +17,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -61,7 +62,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "eea10abc78d58897604f11365abfec6a05e637ca3a1c79702f3fe0096dc0c8fc"
+          "sha256": "f1a08202ffdc302697a9833ece506c8d005545935b5d20173a96b624e66c0716"
         },
         {
           "id": "rotation",
@@ -86,9 +87,18 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "47f3950584d598f6c40a56454e0b2d7eec685c58619389080ee9082cf45dc6f0"
+          "sha256": "94ed273d5be8c9ece286e9741c26a0a0505f38ab09f4157245aa7a86e1c102bb"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "65a2fe24d6ac8595591651b64c0cf23b76467352e5b13ef7625c1a57eebf5eae"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -123,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5c588985d6183d2ebad60954f557ed696becc66daa6d8626b8eac7a133305607"
+        "sha256": "4f55f58b669ce573b02a12cd96cf6ab369e3b75f6cd388932e551cd08519a643"
       }
     },
     "catalog": {

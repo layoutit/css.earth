@@ -22,7 +22,9 @@ export function sourceInventory(manifest: unknown, ownerPath: string, sources: S
   for (const section of ['inputs','documents','generatedIntermediates']) {
     for (const raw of sourceArray(sourceObject(manifest)[section] ?? [], sourceObject)) {
       if (section !== 'inputs' && !usedPaths.has(sourceText(raw.path))) continue;
-      const binding = parseSourceBinding(raw.sourceBinding, sources), localId = sourceText(raw.id ?? raw.path);
+      const localId = sourceText(raw.id ?? raw.path);
+      if (raw.sourceBinding === undefined) throw new TypeError(`Source entry without a binding: ${ownerPath}#${localId}.`);
+      const binding = parseSourceBinding(raw.sourceBinding, sources);
       if (binding.kind === 'unresolved') throw new TypeError(`Unresolved source: ${ownerPath}#${localId}.`);
       entries.push({ownerPath,localId,binding,used:usedPaths.has(sourceText(raw.path))});
     }
@@ -32,7 +34,7 @@ export function sourceInventory(manifest: unknown, ownerPath: string, sources: S
 /** Read claim-local citations recursively; metadata never supplies lens or observation edges. */
 export function metadataCitations(raw: unknown, ownerPath: string, sources: SourceResolver): SourceUse[] {
   const edges: SourceUse[] = [], catalog = sourceObject(raw);
-  for (const [collection,consumerKind] of [['missions','mission'],['spacecraft','spacecraft']] as const) {
+  for (const [collection,consumerKind] of [['missions','mission'],['machines','machine']] as const) {
     for (const [entityIndex,entity] of sourceArray(catalog[collection],sourceObject).entries()) {
       const consumerId = sourceText(entity.id), consumerLabel = sourceText(sourceObject(entity.name).value);
       const walk = (value: unknown, locator: string) => {

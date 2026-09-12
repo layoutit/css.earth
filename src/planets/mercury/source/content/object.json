@@ -156,7 +156,7 @@
         "description": "MESSENGER at 750 nm",
         "title": "MDIS Global Basemap BDR",
         "thumbnail": "mercury-lens-normal.webp",
-        "surface": "mercury-surface-normal.webp",
+        "surface": "mercury-surface-normal.jpg",
         "source": {
           "id": "messenger-bdr",
           "url": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
@@ -174,7 +174,7 @@
         "description": "Enhanced, NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion false color Missing polar regions use reconstructed color from nearby enhanced imagery with BDR and topographic detail; these are not observed enhanced-color coverage.",
         "title": "MDIS Enhanced Color Mosaic",
         "thumbnail": "mercury-lens-enhanced.webp",
-        "surface": "mercury-surface-enhanced.webp",
+        "surface": "mercury-surface-enhanced.jpg",
         "source": {
           "id": "messenger-enhanced",
           "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m"
@@ -214,7 +214,7 @@
         "description": "MESSENGER shaded relief",
         "title": "MDIS Color Shaded Relief",
         "thumbnail": "mercury-lens-topography.webp",
-        "surface": "mercury-surface-topography.webp",
+        "surface": "mercury-surface-topography.jpg",
         "source": {
           "id": "messenger-topography",
           "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km"

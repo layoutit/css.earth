@@ -1,8 +1,8 @@
 {
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "5aa833c8c69cb8880b88262ab396c07caf56254070b3d0ae255bdfa482f7600c"
+    "sha256": "c032f40a24b454f5faa78abbbefdbc990e65a8dc969d89b9526f49b15badd8f5"
   },
   "id": "mathilde",
   "properties": {
@@ -17,6 +17,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -56,7 +57,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "408085c4d91e5a7bb8968695a4fb99839d8a16be9b9dd63272c6e5955bd5e954"
+          "sha256": "0b727ee76829e037cb2480f9541d5e103965c98c2867e5dcb914133eba0cf453"
         },
         {
           "id": "rotation",
@@ -81,9 +82,18 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "50bc55ef788b3df6bbf93a70b9813b83b6b8eb2a15282458e542be1497ca41ff"
+          "sha256": "202f59b24a7d90dcc1a6848640adc6123b5a9e3aa4b370d9fe6b733d2b4a4c58"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "cf83a84097c1adaaf528f9c29592e8758df3d4c5b4be9c9ee6354862c56b7563"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -118,7 +128,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ac8b37b79cd20f6a79b1a58c86fc1aee78b2cbcc8522ea9a7848b2f8328115a4"
+        "sha256": "05a518793e20cebd0c3eed76eb321991cda7db02f8df20d7e29429009f744749"
       }
     },
     "catalog": {

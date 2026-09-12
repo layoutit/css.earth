@@ -1,0 +1,48 @@
+{
+  "id": "source-titan-usgs-gazetteer-nomenclature-center-pts",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Gazetteer of Planetary Nomenclature · Titan centre points",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://planetarynames.wr.usgs.gov/Page/TITAN/target",
+      "label": "Source"
+    },
+    {
+      "role": "archive",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/TITAN_nomenclature_center_pts.zip",
+      "label": "Shapefile archive"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/titan/source/features/manifest.json",
+      "revision": "242d916803ea0526ad7d04fc2f4fd9bf6408a9cf",
+      "sha256": "63e6b5923ec2daa9e0ef87482a458cd9dbb34f3a5b4120d2b4c5eaf3ca5e6eae",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature.",
+      "scope": "Feature names, centres, diameters, extents and name origins.",
+      "evidence": "metadata_nomenclature_points_TITAN.xml inside the pinned archive (datacred)."
+    },
+    {
+      "kind": "rights",
+      "text": "Public domain United States Government work.",
+      "scope": "The archived shapefile export and its metadata.",
+      "evidence": "metadata_nomenclature_points_TITAN.xml inside the pinned archive (useconst: Public domain.)."
+    },
+    {
+      "kind": "limitation",
+      "text": "Centre points, diameters and latitude–longitude extents only; the Gazetteer publishes no feature outlines, and the export is regenerated weekly.",
+      "scope": "Prepared labels and outlines.",
+      "evidence": "planetarynames.wr.usgs.gov/GIS_Downloads lists centre-point files only; the archive metadata declares weekly updates."
+    }
+  ]
+}

@@ -1,43 +1,21 @@
 import {parseEncounterPolicy} from './source-records.mts';
+import { readFitsHeader } from '../observation/fits.mts';
 // Preparation-only decoding of calibrated Stardust and Deep Impact/EPOXI
 // observations. Detector quality is independent of brightness and display tone.
 const integer = (n: unknown, min: number, max: number): n is number => typeof n === "number" && Number.isSafeInteger(n) && n >= min && n <= max;
-function cardValue(card: string) {
-  const s = card.slice(10).trimStart();
-  if (s[0] === "'") {
-    let out = '';
-    for (let i = 1; i < s.length; i++) {
-      if (s[i] !== "'") { out += s[i]; continue; }
-      if (s[i + 1] === "'") { out += "'"; i++; continue; }
-      return out.trimEnd();
-    }
-    throw new Error('Unterminated FITS string.');
-  }
-  const value = s.split('/')[0].trim();
-  if (value === 'T' || value === 'F') return value === 'T';
-  const n = Number(value.replaceAll('D', 'E'));
-  if (!value || !Number.isFinite(n)) throw new Error('Invalid FITS scalar.');
-  return n;
-}
-
 export function readEncounterHdus(bytes: Buffer) {
   if (!Buffer.isBuffer(bytes) || bytes.length % 2880) throw new Error('Truncated FITS records.');
   const hdus: {name:string;header:Record<string,string|number|boolean>;width:number;height:number;bitpix:number;values:Uint8Array|Float32Array;offset:number}[] = []; let start = 0;
   while (start < bytes.length) {
-    const header: Record<string,string|number|boolean> = {}; let end = -1;
-    for (let offset = start; offset + 80 <= bytes.length && offset < start + 131040; offset += 80) {
-      const card = bytes.toString('ascii', offset, offset + 80), key = card.slice(0, 8).trim();
-      if (key === 'END') { end = offset + 80; break; }
-      if (card[8] !== '=') continue;
-      if (Object.hasOwn(header, key)) throw new Error(`Duplicate FITS field: ${key}`);
-      header[key] = cardValue(card);
-    }
+    let parsed: ReturnType<typeof readFitsHeader> | null = null;
+    try { parsed = readFitsHeader(bytes, start); } catch (error) { if (!(error instanceof Error) || !error.message.includes('no END card')) throw error; }
+    const header = parsed?.header ?? {};
     const width = header.NAXIS1, height = header.NAXIS2, bitpix = header.BITPIX;
-    if (end < 0 || header.NAXIS !== 2 || !integer(width, 1, 4096) || !integer(height, 1, 4096) ||
+    if (!parsed || header.NAXIS !== 2 || !integer(width, 1, 4096) || !integer(height, 1, 4096) ||
         typeof bitpix !== "number" || ![8, -32].includes(bitpix) || (hdus.length ? header.XTENSION !== 'IMAGE' || header.PCOUNT !== 0 || header.GCOUNT !== 1 : header.SIMPLE !== true)) {
       throw new Error('Unsupported encounter FITS layout.');
     }
-    const offset = Math.ceil(end / 2880) * 2880, stride = Math.abs(bitpix) / 8, size = width * height * stride;
+    const offset = parsed.dataOffset, stride = Math.abs(bitpix) / 8, size = width * height * stride;
     if (offset + size > bytes.length || (header.BSCALE ?? 1) !== 1 || (header.BZERO ?? 0) !== 0) throw new Error('Truncated or scaled encounter FITS plane.');
     const name = hdus.length ? header.EXTNAME : 'PRIMARY';
     if (typeof name !== 'string' || hdus.some(hdu => hdu.name === name)) throw new Error('Invalid encounter FITS plane identity.');

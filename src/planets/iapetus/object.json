@@ -8,9 +8,14 @@
       "label": "Iapetus",
       "steps": [
         "verify-sources",
+        "title",
         "assets",
+        "features",
+        "panel-content",
+        "lenses",
         "starfield",
         "sky-sun",
+        "system-markers",
         "scene",
         "controls",
         "presentation",
@@ -21,14 +26,34 @@
       "schema": "cssearth-authored-object@1",
       "sources": [
         {
-          "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "35b99c0e28512e4aac06aef401ee1a5aabdab3a4849c9d61ea9ad51eb5e746ac"
+          "id": "raster",
+          "path": "source/preparation/raster.json",
+          "sha256": "b28387b868c46db8deb7f9ef863e2047258940f02a6d51fa87766903c73925e2"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json",
+          "sha256": "1e23728baafd0cb2f075e5d7ee38ec044caed389c754c379262a4f9fd35ac80b"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "232cb864425d421fad81132343c07a8031f5eb50047cf27e701971c8c5d91def"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "05951987fa610bae8610360ba5054d84ce6b02b56864413630378d3876eee18c"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "817592f68ef992a3001c63b8caca391c67841d46159d04d39ab8d88cef58d61b"
+          "sha256": "9c0d44c1273a05ed51008f0e4c4967af201fcd544a6c0e2251a6d6cf21602748"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json",
+          "sha256": "82662c36ca137110566273a4e0da22eb53f7a01e368dea3fa86495749d8a959c"
         },
         {
           "id": "title",
@@ -43,7 +68,12 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "b90888d93efd823a6626c7cd6da7651e6d3d42bdd773cae31ccb96bc927b6027"
+          "sha256": "58d51e3075b415d3016b0397d5dc9f9c92a5c114c18f24c93808771f5b84bbab"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "095a3d6f8e4fa5b3d095c2f07da5d1fec48824177af43a21cfb9a4bd7ac9c715"
         }
       ],
       "shape": {
@@ -53,7 +83,7 @@
       "surfaces": [
         {
           "id": "body",
-          "source": "terrestrial",
+          "source": "geometry",
           "projection": "equirectangular",
           "lenses": [
             {
@@ -82,10 +112,14 @@
       "materials": [
         {
           "id": "lighting",
-          "source": "terrestrial",
+          "source": "raster",
           "model": "lit"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 12000
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -116,11 +150,11 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/iapetus-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f9ffdfc80bacfd042afacd419247ce79c3576ed16ce315d65606d321f502ac26"
+        "sha256": "1384a11b20b29c20be6a7403f2a671ca10049c073f6f82d00d3b0ca611faeedf"
       }
     },
     "catalog": {
@@ -137,8 +171,8 @@
     }
   },
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "0074ea91314f6877bb696dff2b2b8c85449e3f7d6d637dbc4872da84d9ac1f60"
+    "sha256": "8604a04b635e787ef242e88dc9080f9c569a85f11594bd7e6692ce21d0d3e41f"
   }
 }

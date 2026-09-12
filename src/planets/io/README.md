@@ -12,11 +12,56 @@
 
 ## Evidence
 
+Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite remains 512 × 256 pixels at density 1 and 1024 × 512 at density 2; the 8K latitude-band images from #151, geometry and lighting are retained. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
+
+| View | Both prepared levels, before → current |
+| --- | --- |
+| enhanced | 247.3 → 244.8 kB |
+| normal | 118.5 → 118.9 kB |
+
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/c13f3643b53171523dbf59dc92fc7ce49e9c0e24/src/planets/io/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+
+Photographic refresh, 12 September 2026, on base `3efdf2c9`:
+[monochrome detail](evidence/photographic-detail/monochrome.png) and
+[the Pele hemisphere in enhanced color](evidence/photographic-detail/pele-hemisphere.png)
+were inspected in Chrome, 1280 × 720, with Shadows on/off and DPR 1 and 2.
+The native color mosaic remains soft around Pele; increasing the atlas size
+cannot recover detail absent from the observations.
+
+Preparation build/type checks, source-record generation and unchanged
+scene/geometry checks pass. The feature refresh reproduces 260 names from the
+same Gazetteer snapshot with the corrected map origin. Only the feature
+catalogue pin changes in the runtime definition. The ten photographic files
+total 5.22 MB, previously 2.30 MB; the largest decoded atlas is 195 MiB.
+Three unrelated scientific thumbnails were unavailable locally, and cross-body
+search used a preview index of these three moons. This does not qualify all
+scientific lenses or the aggregate application.
+
+This photographic refresh preserves the source maps, masks, geometry and scene
+structure. It increases photograph sampling to 4096 × 2048 and 8192 × 4096.
+It also corrects the feature catalogue's map origin from 180° to 0° E: the
+photograph decoder already outputs 0–360° E. The previous origin put all 260
+named features on the opposite hemisphere. Pele now selects its red deposit
+at 18.71° S, 104.72° E, consistent with the [Gazetteer](https://planetarynames.wr.usgs.gov/Feature/4638).
+
+Earlier run at base `53b262bd` (12 September 2026): `node tools/objects/dist/prepare-authored.js io --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/io/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
+
+A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, enhanced, geology, spectral-slope, visible-absorption) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 3459).
+
+The earlier map-edge claim was incorrect for Io: it confused the native GeoTIFF edge with the decoded output edge. The current check uses the decoder coordinates and the mounted photographic deposit.
+
 - Six distributed anchors, exact source hashes, hole/seam behavior, and categorical exclusion rules are exercised by the focused geology/source tests.
 
 - Focused checks are defined in the [unit tests](../../../tests/objects/unit/io).
 
 ## Known problems
+
+The existing atlas seams can remain visible at extreme close zoom. This change
+retains the geometry and its packing layout.
+
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Io (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the decoded map’s left edge at 0° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries, and the readout longitude now shares the Gazetteer origin.
+
+Feature notes: 44 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
 - **Enhanced color:** Its colors are enhanced and do not represent a visual true-color measurement. Io changed between the Voyager and Galileo observations; the mosaic is not a single-date snapshot, and spatial/brightness/color boundaries remain visible.
 
@@ -69,7 +114,12 @@ This is a conservative geographic cut based on the published approximate coverag
 
 ## Prepared delivery
 
-The shared `tools/objects/terrestrial-layers/solid-raster.mts` operation produces lossless 4096 × 2048 maps, projective strip atlases and thumbnails; its material operation produces registered pole tiles and the same bounded lighting model used by the accepted shared solid-body path. The output's equatorial spacing is approximately 2.8 km per texel. Source areas coarser than this remain coarse. Canonical assets are selected once per mount, independently of DPR. Runtime only decodes and transports prepared assets.
+The shared raster lane now samples the original 11,445 × 5,723 photographs into
+4,096 × 2,048 and 8,192 × 4,096 maps before packing. The larger map has roughly
+1.4 km equatorial texel spacing; source areas coarser than that remain coarse.
+Pole sprite dimensions, geometry, scientific maps and lighting are unchanged.
+Canonical assets are selected once per mount, independently of DPR. Runtime only
+decodes and transports prepared assets.
 
 The shared source-driven parent-marker operation prepares an independent 1024-pixel Hubble Jupiter image from the source entry in this package, so Io can be installed without Jupiter's surface package. Shared sky inputs are ESO/S. Brunier's Milky Way panorama and the HYG catalogue; their attribution files accompany the source manifest. Inter provides prepared title outlines.
 
@@ -92,5 +142,12 @@ These source discrepancies and the explicit `Pb/Pby`, `Pw/Pbw`, `T/Tb` aliases a
 ## Visible spectral surface views
 
 Every conversion is offline; the scene geometry remains unchanged.
+
+</details>
+
+<details>
+<summary>Shape, rotation and camera on the shared raster lane</summary>
+
+The recipe declares a sphere of 1821.49 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 1.7627-day prograde rotation (synchronous: the astronomy package's orbital mean motion) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 40.00° initial pitch, 0.00° yaw, taken from the retired lane's camera). The heliocentric view keeps the orbit around Jupiter and the parent marker now comes from the shared navigation atlas.
 
 </details>

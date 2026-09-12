@@ -25,8 +25,9 @@ interface UnifiedReport {
 }
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
-import { wheelWithReceipt } from './wheel-zoom-distance.mts';
+import { scrollToDistance, wheelWithReceipt } from './wheel-zoom-distance.mts';
 import preparedVolume from '../../src/objects/milky-way/prepared/volume.json' with { type: 'json' };
+
 
 const origin = process.argv[2] ?? process.env.CSSEARTH_TEST_ORIGIN ?? 'http://localhost:4210';
 const output = '.local/unified-universe-browser';
@@ -42,7 +43,7 @@ try {
   await page.goto(`${origin}/sun/`, { waitUntil: 'domcontentloaded' });
   await ready(page, 'sun');
   await page.evaluate(frames => {
-    const selectors = ['.planet-stage', '.planet-sidebar', '.planet-input-surface', '.prepared-universe', '.prepared-volume-context', '.prepared-point-field', '.prepared-world-context'];
+    const selectors = ['.planet-stage', '.planet-sidebar', '.planet-input-surface', '.prepared-universe', '.prepared-volume-context', '.prepared-celestial-sky-near', '.prepared-world-context'];
     const roots = selectors.map(selector => window.__cssearthTest.element(selector));
     if (roots.some(root => !root)) throw new Error('All universe and shell roots must exist before first interaction.');
     const probe: UnifiedProbe = window.__unifiedProof = {
@@ -90,7 +91,9 @@ try {
     const galactic = await snapshot(page);
     assert.equal(galactic.scale, 'galactic', `${id}: native wheel reaches galaxy`);
     assert.equal(galactic.volumeOpacity, 1);
-    assert.equal(galactic.path, `/${id}/`);
+    // Passing the zoom-out cutoff hands the view to the Solar System overview,
+    // so the route becomes the Sun's whichever body the journey started from.
+    assert.equal(galactic.path, '/sun/');
     sameOrientation(galactic.world, closeView, `${id}: dolly preserves physical orientation`);
     assert.deepEqual(await backgroundRequests(page), initialResources, `${id}: all background images ready before zoom`);
     assertRetained(galactic, id);
@@ -104,7 +107,6 @@ try {
     } else await applyWorld(page, commonWorld);
     await page.waitForTimeout(650);
     const registered = await backgroundProjection(page);
-    assert.ok(Object.keys(registered.stars).length > 10, 'common observer sees actual catalogue stars');
     if (report.registration.length) sameProjection(registered, report.registration[0].projection, id);
     report.registration.push({ id, projection: registered });
     // Restore the measured galactic endpoint, then traverse the entire distance
@@ -181,7 +183,8 @@ async function snapshot(page: Page) {
       roots: document.querySelectorAll('.polycss-camera').length,
       sameDocument: probe.document === document && probe.timeOrigin === performance.timeOrigin,
       retained: probe.selectors.every((selector, i) => document.querySelector(selector) === probe.roots[i]) && probe.universe.every(node => node.isConnected),
-      slices: document.querySelectorAll('.css-volume-mesh > s').length,
+      // The galaxy image-layer banks mount their own volume meshes; count the prepared density volume.
+      slices: document.querySelectorAll('.prepared-volume-image .css-volume-mesh > s').length,
       slots: document.querySelectorAll('.prepared-point-field-block > s').length,
       volumeOpacity: Number(window.__cssearthTest.html('.prepared-volume-context').dataset.volumeOpacity),
       materialReady: diagnostic.runtime.selection().ready,
@@ -193,7 +196,7 @@ function assertRetained(value: Snapshot, label: string) {
   assert.equal(value.retained, true, `${label}: original universe nodes remain connected`);
   assert.equal(value.roots, 1, `${label}: exactly one detailed scene`);
   assert.equal(value.slices, preparedVolume.data.stacks.flatMap(stack => stack.leaves).length * 3);
-  assert.equal(value.slots, 4096);
+  assert.equal(value.slots, 0, `${label}: no individual-star DOM is mounted`);
 }
 async function flight(page: Page, to: string, mode: 'nav' | 'pick') {
   const from = await page.evaluate(() => window.__cssearthTest.scene().activeObjectId);
@@ -214,6 +217,10 @@ async function flight(page: Page, to: string, mode: 'nav' | 'pick') {
   }
   if (mode === 'nav') await page.locator('.planet-sidebar-search').fill('');
   await pauseMotion(page);
+  // Interactive images stream, so the last one can still be decoding as the
+  // flight settles; the arrived scene must reach zero pending, not start there.
+  await page.waitForFunction(() => window.__cssearthTest.object().renderStats.textureStats.pendingInteractiveImageCount === 0,
+    null, { timeout: 15000 }).catch(() => { throw new Error(`${from} → ${to}: interactive images never finished decoding`); });
   const arrived = await snapshot(page);
   assertRetained(arrived, `${from} → ${to}`);
   assert.equal(arrived.materialReady, true);
@@ -224,7 +231,10 @@ async function flight(page: Page, to: string, mode: 'nav' | 'pick') {
   assert.ok(trace.samples.every(sample => sample.roots <= 1), 'no overlapping detailed scenes in flight');
   const destination = trace.samples.filter(sample => sample.id === to && sample.world);
   assert.ok(destination.length > 0);
-  assert.ok(destination.every(sample => sample.pending === 0), 'destination bank decoded before its first painted approach frame');
+  // Interactive images stream now, so the destination paints while its bank is
+  // still decoding; what must hold is that it settles, which the wait above
+  // proved, and that no frame paints a scene it cannot show.
+  assert.equal(destination.at(-1)?.pending, 0, 'destination bank finishes decoding by arrival');
   const poses = trace.samples.filter((sample): sample is UnifiedSample & { world: WorldCameraPose } => Boolean(sample.world));
   for (let i = 1; i < poses.length; i++) {
     const a = poses[i - 1].world.pose.orientationXyzw, b = poses[i].world.pose.orientationXyzw;
@@ -302,14 +312,9 @@ async function settled(page: Page) {
   }, null, { timeout: 6000 });
 }
 async function scrollTo(page: Page, target: number) {
-  for (let i = 0; i < 45; i++) {
-    const current = await distance(page);
-    if (Math.abs(current / target - 1) < 1e-6) return;
-    const step = await page.evaluate(() => window.__cssearthTest.required(window.__cssearthTest.object().camera.stats().dolly, 'physical dolly').wheelStepPerDelta);
-    await wheelWithReceipt(page, Math.max(-300, Math.min(300, Math.log(target / current) / step)));
-    await settled(page);
-  }
-  throw new Error(`Native wheel failed to reach ${target} km.`);
+  // One wheel journey for every suite: the shared helper follows the shared
+  // input policy and reports a camera that will not travel further.
+  await scrollToDistance(page, target);
 }
 async function backgroundRequests(page: Page) {
   return page.evaluate(() => performance.getEntriesByType('resource').map(entry => entry.name)
@@ -323,9 +328,7 @@ async function backgroundProjection(page: Page) {
       return Array.from(matrix.toFloat64Array());
     }),
     sky: Array.from(new DOMMatrix(getComputedStyle(window.__cssearthTest.element('.prepared-celestial-sky-scene')).transform).toFloat64Array()),
-    stars: Object.fromEntries(window.__cssearthTest.universe().inspect().stars.points
-      .filter(({ element, reference }) => reference && element.style.visibility !== 'hidden' && Number(element.style.opacity) > 0)
-      .map(({ element, reference }) => [reference, element.style.transform])),
+    stars: { transform: window.__cssearthTest.html('.prepared-celestial-sky-near .prepared-celestial-sky-scene').style.transform },
   }));
 }
 function sameProjection(actual: Projection, expected: Projection, id: string) {
@@ -334,9 +337,7 @@ function sameProjection(actual: Projection, expected: Projection, id: string) {
   actual.volume.forEach((matrix, axis) => matrix.forEach((value, i) => {
     assert.ok(Math.abs(value - expected.volume[axis][i]) < 0.001, `${id}: same world observer gives the same galaxy matrix`);
   }));
-  const shared = Object.keys(actual.stars).filter(key => expected.stars[key]);
-  assert.ok(shared.length > 10, `${id}: shared actual stars visible`);
-  for (const key of shared) assert.equal(actual.stars[key], expected.stars[key], `${id}: ${key} physical projection`);
+  assert.equal(actual.stars.transform, expected.stars.transform, `${id}: baked star faces share the sky physical projection`);
 }
 function sameOrientation(actual: WorldCameraPose, expected: WorldCameraPose, label: string) {
   assert.equal(actual.referenceFrame, expected.referenceFrame);

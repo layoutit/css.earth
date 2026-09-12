@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "1395",
+      "item": "Q25908276",
+      "title": "Damodar (crater)",
+      "url": "https://en.wikipedia.org/wiki/Damodar_(crater)",
+      "revision": "1373421132",
+      "extract": "Damodar is a crater on the asteroid 253 Mathilde that was discovered via the NEAR Shoemaker spacecraft in c. June 1997. The crater was named after the Damodar Valley, the largest coal basin in India. The name \"Damodar\" was officially approved by the International Astronomical Union (IAU) in the year 2000."
+    },
+    {
+      "id": "2931",
+      "item": "Q15139131",
+      "title": "Karoo (crater)",
+      "url": "https://en.wikipedia.org/wiki/Karoo_(crater)",
+      "revision": "1368850114",
+      "extract": "Karoo is an impact crater on the asteroid 253 Mathilde, named for the Great Karoo Basin, a coal basin in South Africa. It is 33.4 kilometers in diameter and was the most prominent crater seen during NEAR Shoemaker's flyby of the asteroid."
+    },
+    {
+      "id": "3748",
+      "item": "Q6786073",
+      "title": "List of craters on 253 Mathilde",
+      "url": "https://en.wikipedia.org/wiki/List_of_craters_on_253_Mathilde",
+      "revision": "1366799631",
+      "extract": "This is a list of named craters on 253 Mathilde, an asteroid of the asteroid belt, approximately 53 kilometers in diameter. Because Mathilde is a dark, carbonaceous body, all of its craters have been named after famous coalfields from across the world. As of 2017, there are 23 officially named craters on this asteroid."
+    },
+    {
+      "id": "4898",
+      "item": "Q25908288",
+      "title": "Quetta (crater)",
+      "url": "https://en.wikipedia.org/wiki/Quetta_(crater)",
+      "revision": "1330766643",
+      "extract": "Quetta is an impact crater on 253 Mathilde, a minor planet. The crater was named after Quetta, the eponymous coal field in Pakistan. The name \"Quetta\" was officially approved by the International Astronomical Union (IAU) in 2000."
+    }
+  ]
+}

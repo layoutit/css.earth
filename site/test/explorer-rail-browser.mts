@@ -6,6 +6,7 @@ import { mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
 import { OBJECTS } from "../objects.mts";
+import { browserObjects } from './browser-objects.mts';
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const output = process.argv[3] ? resolve(process.argv[3]) : null;
@@ -13,7 +14,7 @@ if (output) await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 console.log(`Chrome ${browser.version()} (channel chrome, headless); ${baseUrl}`);
 const cases: { label: string; route: string; width: number; height: number; density: number; mobile?: boolean }[] = [
-  ...OBJECTS.map(({ id, route }) => ({
+  ...browserObjects().map(({ id, route }) => ({
     label: `${id}-desktop`, route, width: 1440, height: 960, density: 1,
   })),
   { label: "desktop-dpr2", route: "/saturn/", width: 1440, height: 960, density: 2 },
@@ -37,9 +38,8 @@ try {
     await page.goto(new URL(config.route, baseUrl).href);
     await page.waitForFunction(() => document.querySelector(".planet-stage")?.getAttribute("aria-busy") === "false");
     const rail = page.getByRole("navigation", { name: "Explorer", exact: true });
-    const planetaryNavigation = page.locator(".planetary-navigation");
-    assert.equal(await planetaryNavigation.isVisible(), false,
-      `${config.label}: top planet navigation is hidden`);
+    assert.equal(await page.locator(".planetary-navigation").count(), 0,
+      `${config.label}: the retired top planet navigation is not rendered`);
     const settings = rail.locator(".planet-settings-action");
     const about = rail.getByRole("button", { name: "About", exact: true });
     const explore = rail.getByRole("button", { name: "Planet information", exact: true });

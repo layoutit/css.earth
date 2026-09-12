@@ -2,6 +2,27 @@
   "schema": "cssmars-authoritative-sources@2",
   "inputs": [
     {
+      "id": "mars-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedSha256": "dc5bf43aad04eb5e7e60cde51fcb3ac3fa3040a589e8fe4012ff35e079f756ed",
+      "expectedBytes": 1568,
+      "origin": "Repository-authored physical scene recipe; equatorial radius 3396.19 km from the JPL physical parameters pinned in editorial/factsheet-review.json and the USGS Viking MDIM product; pinned solar geometry from VSOP87A and IAU/WGCCRE",
+      "credit": "Published physical facts and repository-authored presentation",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked source recipe authored from the previous Mars camera plan (defaultZoom 1.1, initial pitch 40 degrees) and the shared Mercury/Venus marker layout",
+      "redistribution": "Factual physical parameters and synthetic marker colours; no imagery",
+      "consumers": [
+        "scene",
+        "sky-sun",
+        "system-markers",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored camera scale and marker layout using the cited solar-system geometry."
+      }
+    },
+    {
       "id": "inter-mars-title-vector",
       "path": "presentation/title-mark.json",
       "expectedSha256": "1ba809a2c4ba5abe4ceab7b2464cc174780c7db70eaa80be1166d83a399e8a6c",
@@ -41,9 +62,7 @@
       "acquisition": "checked full-disc Hubble source snapshot",
       "redistribution": "prepared cropped navigation derivative under CC BY 4.0 with the full unaltered source credit and no endorsement claim",
       "consumers": [
-        "navigation",
-        "atmosphere",
-        "lighting"
+        "navigation"
       ],
       "expectedBytes": 139134,
       "sourceBinding": {
@@ -70,7 +89,6 @@
       "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group)",
       "redistribution": "checked MIT source snapshot",
       "consumers": [
-        "body",
         "scene"
       ],
       "expectedBytes": 1753,
@@ -98,8 +116,8 @@
       "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group)",
       "redistribution": "checked MIT source snapshot",
       "consumers": [
-        "atmosphere",
-        "lighting"
+        "scene",
+        "materials"
       ],
       "expectedBytes": 2044,
       "sourceBinding": {
@@ -121,10 +139,9 @@
       "credit": "OpenSpace Team",
       "license": "MIT",
       "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group)",
-      "redistribution": "checked MIT source snapshot",
+      "redistribution": "Retained as scene-configuration provenance for the pinned OpenSpace Mars scene; no preparation step reads it.",
       "consumers": [
-        "scene",
-        "moons"
+        "provenance"
       ],
       "expectedBytes": 600,
       "sourceBinding": {
@@ -139,54 +156,6 @@
       }
     },
     {
-      "id": "openspace-phobos-globe",
-      "path": "openspace/phobos-globe.asset",
-      "expectedSha256": "fdad04aec33f6c977351f1e61a47af84472af8a9e7a76c597b0b70d7078eb6b3",
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/moons/phobos/globe.asset",
-      "credit": "OpenSpace Team",
-      "license": "MIT",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group)",
-      "redistribution": "checked MIT source snapshot",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 912,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mars-openspace-phobos-globe",
-            "role": "method",
-            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-deimos-globe",
-      "path": "openspace/deimos-globe.asset",
-      "expectedSha256": "97d82ac4d3d78a21222601faded261fae7670570f76c6a94b26024f2d34b5f89",
-      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/moons/deimos/globe.asset",
-      "credit": "OpenSpace Team",
-      "license": "MIT",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group)",
-      "redistribution": "checked MIT source snapshot",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 912,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mars-openspace-deimos-globe",
-            "role": "method",
-            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
-          }
-        ]
-      }
-    },
-    {
       "id": "usgs-viking-mdim21-color",
       "path": "surface/mars-viking-mdim21-color-1km.jpg",
       "expectedSha256": "fdfcd335559c3dc67052b7e8a9565d850e336ac0d1f3ea7f5eb7826ffb44ecb2",
@@ -196,8 +165,9 @@
       "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group)",
       "redistribution": "checked government data product without logos",
       "consumers": [
-        "body",
-        "lenses"
+        "assets",
+        "lenses",
+        "scene"
       ],
       "expectedBytes": 36708552,
       "capture": {
@@ -224,23 +194,25 @@
     {
       "id": "usgs-mola-pseudocolor",
       "path": "lenses/mola-pseudocolor-z3.png",
-      "expectedSha256": "25a0b3ade0d01fc28bb04e452ed8780f023d9ac76092d60d47be81b7f6af9e2d",
+      "expectedSha256": "16b9b65eebe6512bf625fdb82b87a51d92e9a6e74c5d98ebbac3c66251bcac7c",
       "origin": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}",
       "credit": "USGS Astrogeology, NASA Mars Global Surveyor MOLA",
       "license": "NASA/PDS United States government data",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 16 by 8 level-3 TMS snapshot",
+      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 16 by 8 level-3 TMS snapshot Re-stitched on 2026-09-11 with the same tile recipe because the tile server no longer reproduced the earlier pinned bytes; the pinned identity is this refreshed mosaic.",
       "redistribution": "checked prepared government-data mosaic without logos",
       "consumers": [
-        "lenses"
+        "assets",
+        "lenses",
+        "scene"
       ],
-      "expectedBytes": 18716720,
+      "expectedBytes": 18438219,
       "title": "MOLA global color shaded relief",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_global_color_shaded_relief_463m",
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "mars-global-surveyor",
+            "kind": "machine",
+            "machineId": "mars-global-surveyor",
             "missionId": "mars-global-surveyor",
             "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}"
           }
@@ -260,23 +232,25 @@
     {
       "id": "usgs-themis-ir-day",
       "path": "lenses/themis-ir-day-z3.png",
-      "expectedSha256": "e31b41a6e44547f882b86ca1c8c12efe80a1c4b320d06a7aee41304eb74387d1",
+      "expectedSha256": "374bf7e567c53449cd1b7f8072f9ab64cf7c9863e29dc9a7db1bf8c1e2b3127c",
       "origin": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}",
       "credit": "USGS Astrogeology, Arizona State University, NASA Mars Odyssey THEMIS",
       "license": "NASA/PDS United States government data",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 14 by 7 level-3 TMS snapshot",
+      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) stitches the complete 14 by 7 level-3 TMS snapshot Re-stitched on 2026-09-11 with the same tile recipe because the tile server no longer reproduced the earlier pinned bytes; the pinned identity is this refreshed mosaic.",
       "redistribution": "checked prepared government-data mosaic without logos",
       "consumers": [
-        "lenses"
+        "assets",
+        "lenses",
+        "scene"
       ],
-      "expectedBytes": 7267744,
+      "expectedBytes": 8031340,
       "title": "THEMIS daytime infrared mosaic",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_odyssey_themis_ir_day_global_mosaic_100m_v12",
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "odyssey",
+            "kind": "machine",
+            "machineId": "odyssey",
             "missionId": "odyssey",
             "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}"
           }
@@ -294,60 +268,6 @@
       }
     },
     {
-      "id": "openspace-phobos-model",
-      "path": "moons/phobos.glb",
-      "expectedSha256": "757712101e4fbcf9527942ee664a3bc6dfe3ab460466b760f4bf51ee85dbd8d3",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/mars/phobos/model/1/Phobos_1_1000.glb",
-      "credit": "OpenSpace Team",
-      "license": "MIT",
-      "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/moons/phobos/model.asset"
-      ],
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group)",
-      "redistribution": "checked MIT model snapshot",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 3855016,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mars-openspace-phobos-model",
-            "role": "material",
-            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
-          }
-        ]
-      }
-    },
-    {
-      "id": "openspace-deimos-model",
-      "path": "moons/deimos.glb",
-      "expectedSha256": "5d5da763970acffe88aac26d3c3bd0fa66c5bef251d1bb4bfe2ae5fd723507e4",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/mars/deimos/model/1/Deimos_1_1000.glb",
-      "credit": "OpenSpace Team",
-      "license": "MIT",
-      "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/moons/deimos/model.asset"
-      ],
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group)",
-      "redistribution": "checked MIT model snapshot",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 1600012,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-mars-openspace-deimos-model",
-            "role": "material",
-            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
-          }
-        ]
-      }
-    },
-    {
       "id": "nasa-psg-mars-configuration",
       "path": "atmosphere/psg-mars-20260829.cfg",
       "expectedSha256": "da649c1b783a9390697db2f49a25667b518b5c923ddb7ac426037c97c08f8dde",
@@ -357,8 +277,8 @@
       "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group) expands a pinned Mars ephemeris seed",
       "redistribution": "checked generated source snapshot",
       "consumers": [
-        "atmosphere",
-        "spectrum"
+        "spectrum",
+        "temperature-pressure-profile"
       ],
       "expectedBytes": 11093,
       "sourceBinding": {
@@ -410,6 +330,7 @@
       "acquisition": "Prepared deterministic coordinate-registration subset from the pinned HYG v4.1 source.",
       "redistribution": "Share-alike prepared subset with attribution and license evidence.",
       "consumers": [
+        "stars",
         "starfield"
       ],
       "sourceBinding": {
@@ -452,28 +373,6 @@
       }
     },
     {
-      "id": "google-earth-pro-mars-sky-behavior-contract",
-      "path": "sky/google-earth-pro-contract.json",
-      "expectedSha256": "360618f1638471e2f3be37907a67c815104af4e9a57e713cf1938159ae9ad8a0",
-      "expectedBytes": 3561,
-      "origin": "Headless local measurements of Google Earth Pro 7.3.7.1327 Mars mode on 2026-09-02",
-      "credit": "Repository-authored clean-room behavioral measurements",
-      "license": "Repository-authored factual measurements; no Google image, texture, or shader bytes",
-      "acquisition": "201 native headless camera trajectories with isolated sky-map, star-catalogue, and Sun draw-state instrumentation.",
-      "redistribution": "Factual equations and residual measurements only.",
-      "consumers": [
-        "starfield",
-        "scene",
-        "lighting",
-        "camera",
-        "sky-sun"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-recorded observations of Google Earth Pro 7.3.7.1327 Mars sky behaviour on 2026-09-02; the file contains the measurement method and limits."
-      }
-    },
-    {
       "id": "google-maps-cubic-sky-sun-oracle-asset",
       "path": "sun/google-maps-sun.png",
       "expectedSha256": "e9c2b33612abd121905845cd19aad83382b977e2a68b68058bc6702292b15e9f",
@@ -484,7 +383,9 @@
       "acquisition": "Exact asset captured during the read-only Google Maps Venus investigation on 2026-08-31 and reused as the source for the generic cubic-sky presentation standard.",
       "redistribution": "Retained for local visual-oracle preparation; redistribution clearance is unverified.",
       "consumers": [
-        "sun-oracle"
+        "starfield",
+        "sun-oracle",
+        "scene"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -508,26 +409,299 @@
       "acquisition": "Read-only browser observation of the canonical Venus route on 2026-08-31, generalized as the shared cubic-sky presentation contract.",
       "redistribution": "Measurements plus a local source-derived prepared reconstruction.",
       "consumers": [
-        "sun-oracle"
+        "starfield",
+        "sun-oracle",
+        "scene",
+        "materials"
       ],
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-recorded measurements of Google Maps Sun presentation. The measurement file records the observed route and date; the referenced Sun image is a separate input."
       }
+    },
+    {
+      "id": "mars-object-content",
+      "path": "content/object.json",
+      "expectedSha256": "c241a9187643b00a8530d30b509ac5dd67067b1fc089131ecb1fddd0caa8ed7a",
+      "expectedBytes": 15140,
+      "origin": "Repository-authored Mars panel, lens, chart, and provenance data.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked source JSON maintained beside Mars inputs.",
+      "redistribution": "Prepared shell content with source provenance.",
+      "consumers": [
+        "panel",
+        "lenses",
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored page text, factsheet and view descriptions."
+      }
+    },
+    {
+      "id": "mars-chart-assets",
+      "path": "content/charts.json",
+      "expectedSha256": "0f880b44549b5c6c7b2a532b65727c7d54fd05fa10c17b33c576ebe3d0f1d541",
+      "expectedBytes": 4247,
+      "origin": "Repository-authored Mars chart asset recipe bound to scientific source records.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked chart recipe maintained beside Mars inputs.",
+      "redistribution": "Prepared source-backed chart SVGs.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored chart layout, scales and labels; each chart names its numerical input."
+      }
+    },
+    {
+      "id": "mars-preparation-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedSha256": "d4e14590f9608d9d88132dc1fcd314c862c00be1c840f462dff0ae5c41709d24",
+      "expectedBytes": 4473,
+      "origin": "Repository-authored Mars acquisition and qualification recipe.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside Mars inputs.",
+      "redistribution": "Preparation provenance and reproducibility.",
+      "consumers": [
+        "assets",
+        "charts",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored requests and extraction steps for restoring source files."
+      }
+    },
+    {
+      "id": "mars-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedSha256": "17ba60da96dbefa063058fcc0974a44b2393fa325a9411a4fcabf12fc31d90e3",
+      "expectedBytes": 903,
+      "origin": "Repository-authored Mars navigation asset recipe.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside Mars inputs.",
+      "redistribution": "Prepared navigation asset.",
+      "consumers": [
+        "navigation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored marker, caption and camera settings."
+      }
+    },
+    {
+      "id": "mars-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedSha256": "ff0a6b9d79f9a9b6faab6fee8f76780eff7314a01331def76be2a599f2dc5c7b",
+      "expectedBytes": 1425,
+      "origin": "Repository-authored Mars CSS geometry recipe.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside Mars inputs.",
+      "redistribution": "Prepared CSS scene geometry.",
+      "consumers": [
+        "scene",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored CSS geometry, UV sampling and seam settings."
+      }
+    },
+    {
+      "id": "mars-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedSha256": "0c5e523e45c2662ed848b43d184f2df7b81c56829b3212ec286455eb03647c7b",
+      "expectedBytes": 221,
+      "origin": "Repository-authored Mars sky, sun, and marker recipe.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside Mars inputs.",
+      "redistribution": "Prepared celestial assets.",
+      "consumers": [
+        "sky-sun",
+        "starfield",
+        "system-markers"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored sky, Sun and marker preparation settings."
+      }
+    },
+    {
+      "id": "mars-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedSha256": "0a33c89e6373f3596ec9ae1bee0c4f7fc63f6cd81deccacfe8685a9e588513c3",
+      "expectedBytes": 100,
+      "origin": "Repository-authored Mars presentation capability recipe.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside Mars inputs.",
+      "redistribution": "Prepared CSS presentation capabilities.",
+      "consumers": [
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored scene composition and supported views."
+      }
+    },
+    {
+      "id": "mars-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedSha256": "7a4423487c819fb73f49c38002be3f8176ed9bd4d2d38e60d0f4ac629aeb7de8",
+      "expectedBytes": 1899,
+      "origin": "Repository-authored Mars raster preparation recipe.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside Mars inputs.",
+      "redistribution": "Prepared raster assets.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored image sampling, packing and atmosphere material settings."
+      }
+    },
+    {
+      "id": "usgs-gazetteer-mars-nomenclature-center-pts",
+      "path": "features/MARS_nomenclature_center_pts.zip",
+      "expectedBytes": 5413387,
+      "expectedSha256": "58136a4ad15b287d1a01058d659974b44dfc67a65f2a53569d7654987d308e54",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MARS_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Mars on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Mars centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/MARS/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "mars-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 996,
+      "expectedSha256": "069f3952e2409ba3fd4e0f2fa496a4a89de4a916b56a79ece7a3a61d83530f24",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "mars-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1299,
+      "expectedSha256": "945f147e0b32b66861c9bdb643b9c15bfca032e49893286b4ae746e7f8c00ff1",
+      "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "mars-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 151,
+      "expectedSha256": "395ac1d7241546d565cf84ca7b7a103454faaf9cea88270afb940057ab3029c3",
+      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "lenses",
+        "presentation",
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
+    },
+    {
+      "id": "mars-msl-curiosity-traverse-path",
+      "path": "features/traverses/msl_localized_pos.csv",
+      "expectedBytes": 349568,
+      "expectedSha256": "d456ce9025ca71673af8b9f72a78dc508f5d963cbac74fa68eeac88a4c7c3a3b",
+      "origin": "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/",
+      "credit": "NASA PDS",
+      "license": "NASA PDS archive; NASA content not subject to copyright",
+      "licenseEvidence": [
+        "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/.",
+      "redistribution": "NASA data product, credit the publisher",
+      "consumers": [
+        "features"
+      ],
+      "title": "Curiosity traverse (PLACES localizations)",
+      "displayCredit": "NASA PDS",
+      "sourceUrl": "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this pinned product."
+      }
+    },
+    {
+      "id": "mars-m2020-perseverance-traverse-path",
+      "path": "features/traverses/m2020_best_tactical.csv",
+      "expectedBytes": 171404,
+      "expectedSha256": "9da19e4f70287fe0d33ba716ff2169c10447c30c7a048583f730e4155226cde9",
+      "origin": "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/",
+      "credit": "NASA PDS",
+      "license": "NASA PDS archive; NASA content not subject to copyright",
+      "licenseEvidence": [
+        "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/.",
+      "redistribution": "NASA data product, credit the publisher",
+      "consumers": [
+        "features"
+      ],
+      "title": "Perseverance traverse (PLACES localizations)",
+      "displayCredit": "NASA PDS",
+      "sourceUrl": "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this pinned product."
+      }
     }
   ],
   "generatedIntermediates": [],
   "documents": [
-    {
-      "path": "preparation/ellipsoid.json",
-      "expectedBytes": 622,
-      "expectedSha256": "a21e86fe560a46396cea1568b44a757be8b258b9ef40277b5261ef11c380d768",
-      "kind": "authored-document",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored ellipsoid tessellation and display orientation."
-      }
-    },
     {
       "path": "stars/LICENSE.md",
       "expectedSha256": "5590879b8df6e808e0c8287a28fe7c1a421b1eca88cb23575b5a82a470c989b2",
@@ -541,62 +715,62 @@
       "purpose": "ESO eso0932a provenance, visible credit, and CC-BY-4.0 license record"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 4511,
-      "expectedSha256": "d5bbb1f85e50f6fd5ced773093faa5d369179e553df255dd3e659febaa6c2712"
-    },
-    {
-      "path": "preparation/atmosphere.json",
-      "expectedBytes": 918,
-      "expectedSha256": "672ce4a68c97c9d005f3721aad971b8e0b2bdb24eca1d6d863e14ed08bf41acb",
-      "kind": "authored-document",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored atmosphere sampling and display response using the cited PSG model and photographic reference."
-      }
-    },
-    {
-      "path": "content/object.json",
-      "expectedBytes": 13979,
-      "expectedSha256": "3157f4357e1c6e128d6feaac4e618bed81012fb1584eb2b829f65409de106cc8",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
-      }
-    },
-    {
-      "path": "content/charts.json",
-      "expectedBytes": 4247,
-      "expectedSha256": "0f880b44549b5c6c7b2a532b65727c7d54fd05fa10c17b33c576ebe3d0f1d541"
-    },
-    {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 903,
-      "expectedSha256": "17ba60da96dbefa063058fcc0974a44b2393fa325a9411a4fcabf12fc31d90e3"
-    },
-    {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 4757,
-      "expectedSha256": "a84ca43388d33a4db02ef6bc983deb6d60b48e9aab83f69420e723b05e7a3790"
-    },
-    {
-      "path": "preparation/material-delivery.json",
-      "expectedBytes": 159845,
-      "expectedSha256": "500b402d2267a038f5e6ef57667338944d54f00556daecc86c4fe73e81f384cb",
-      "purpose": "Accepted immutable row image delivery identity; reusable preparation re-encodes each row and verifies its bytes before retaining the URL."
-    },
-    {
-      "path": "preparation/retired-delivery.json",
-      "expectedBytes": 589,
-      "expectedSha256": "702386b207e2023e88a60464d62d3a0181b929f5f2decede44a86814a5e7ac93",
-      "purpose": "Exact unconsumed historical delivery bytes retained outside production runtime closure."
-    },
-    {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1211,
       "expectedSha256": "7fa4fd761e8d9ae033e9c1e0a6ccdb1ea0ce38239744af0554f8af0d3f50da87"
+    },
+    {
+      "path": "sky/google-earth-pro-contract.json",
+      "expectedBytes": 3561,
+      "expectedSha256": "360618f1638471e2f3be37907a67c815104af4e9a57e713cf1938159ae9ad8a0",
+      "origin": "Headless local measurements of Google Earth Pro 7.3.7.1327 Mars mode on 2026-09-02",
+      "purpose": "Clean-room behavioural measurements retained as evidence for the shared directional-sun presentation standard, which cites this path (src/platform/directional-sun-contract.mts DIRECTIONAL_SUN_PRESENTATION_STANDARD.sourcePath). No Mars preparation step reads it since the generic raster lane replaced the affine lane."
+    },
+    {
+      "id": "mars-surface-sites",
+      "path": "features/sites.json",
+      "expectedBytes": 19986,
+      "expectedSha256": "a14285fa6b38fd1dd403119fee66b3d285eac41851e5ca57972df6285dd1921c",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      }
+    },
+    {
+      "id": "mars-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 301501,
+      "expectedSha256": "b2236444ed13365223dca094ead1db1c8a258bc6b8ea7009b0f02e7950919dfd",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 644 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts mars: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

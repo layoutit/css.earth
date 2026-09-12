@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "895",
+      "item": "Q25907754",
+      "title": "Brownie Chasma",
+      "url": "https://en.wikipedia.org/wiki/Brownie_Chasma",
+      "revision": "1321173836",
+      "extract": "The Brownie Chasma is a chasma located on Ariel. They are named after brownies, which are spirits believed to help with household tasks."
+    },
+    {
+      "id": "1570",
+      "item": "Q25907793",
+      "title": "Domovoy (crater)",
+      "url": "https://en.wikipedia.org/wiki/Domovoy_(crater)",
+      "revision": "1227375064",
+      "extract": "Domovoy is the second-largest known crater on Uranus's Ariel's surface, with a diameter of 71 km. The name comes from Domovoy, a spirit that protects homes in Slavic mythology; this name was approved by the International Astronomical Union in 1988."
+    },
+    {
+      "id": "2879",
+      "item": "Q3191733",
+      "title": "Kachina Chasmata",
+      "url": "https://en.wikipedia.org/wiki/Kachina_Chasmata",
+      "revision": "1321351259",
+      "extract": "The Kachina Chasmata are the longest known canyon or system of canyons on the surface of the Uranian moon Ariel. The name comes from kachina, a spirit in Hopi mythology. The 622 km long and 50 km wide chasmata arise from a system of normal faults running from the north-west to the south-east."
+    },
+    {
+      "id": "2996",
+      "item": "Q25907755",
+      "title": "Kewpie Chasma",
+      "url": "https://en.wikipedia.org/wiki/Kewpie_Chasma",
+      "revision": "1321354095",
+      "extract": "The Kewpie Chasma is a chasma on the surface of Ariel, the fourth largest moon of Uranus."
+    },
+    {
+      "id": "6638",
+      "item": "Q3066929",
+      "title": "Yangoor (crater)",
+      "url": "https://en.wikipedia.org/wiki/Yangoor_(crater)",
+      "revision": "1349539869",
+      "extract": "Yangoor is the largest known impact crater on the surface of the Uranian moon Ariel. A central-peak impact crater, it is about 78 kilometres (48 mi) in diameter and is located approximately 450 kilometres (280 mi) from Ariel's south pole. The northwestern edge of the crater was erased by formation of ridged terrain."
+    }
+  ]
+}

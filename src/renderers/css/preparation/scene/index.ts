@@ -16,7 +16,7 @@ export interface PhysicalScene {
 }
 export interface SolarSceneSource extends Record<string, unknown> { bodyId:string;bodyRadiusUnits:number;bodyRadiusKilometers:number;displayName:string; }
 export interface ScenePreparationAdapters {
- preparePhysicalScene(input:SolarSceneSource & {starfield:Record<string,unknown>;sun:Record<string,unknown>}):Promise<PhysicalScene>;
+ preparePhysicalScene(input:SolarSceneSource & {starfield:Record<string,unknown>;sun:Record<string,unknown>|null;worldContext?:unknown}):Promise<PhysicalScene>;
  bodyFixedSunDirection(id:string):[number,number,number];
  sunReferenceViewDirection(source:SolarSceneSource):readonly number[];
 }
@@ -24,19 +24,24 @@ export interface GeometrySceneAssets {
  lighting?:{frameCount:number;defaultFrame:number};
  interior?:InteriorAssets;
  atmosphere?:{source:AtmosphereSource;model:AtmosphereMaterial};
+ /** An unlit body: source-lit leaves, no lighting bank, stationary off-limb context and limb plate. */
+ emission?:Record<string,unknown>&{offLimbContext:{logicalSize:number};limbMaterial:{logicalSize:number}};
 }
 export interface GeometrySceneOptions {
  profile:GeometryProfile;raster:RasterRecipe;assets:GeometrySceneAssets;solarSource:SolarSceneSource;
- starfield:Record<string,unknown> & {faces:readonly unknown[]};sun:Record<string,unknown>;
+ starfield:Record<string,unknown> & {faces:readonly unknown[]};sun:Record<string,unknown>|null;
+ /** The authored world context (prepared spatial context) of a body the ephemeris tables do not place, such as the Sun. */
+ worldContext?:unknown;
  adapters:ScenePreparationAdapters;outputDirectory:string;
 }
-export async function prepareGeometryScene({profile,raster,assets,solarSource,starfield,sun,adapters,outputDirectory}:GeometrySceneOptions) {
+export async function prepareGeometryScene({profile,raster,assets,solarSource,starfield,sun,worldContext,adapters,outputDirectory}:GeometrySceneOptions) {
  if(profile.surface.radius!==solarSource.bodyRadiusUnits)throw new TypeError('Authored surface radius differs from the physical scene scale.');
- const physical=await adapters.preparePhysicalScene({...solarSource,starfield,sun});
+ const physical=await adapters.preparePhysicalScene({...solarSource,starfield,sun,...(worldContext!==undefined?{worldContext}:{})});
  const polygons=createSurfacePatches(profile.surface,profile.projection.overlap);
  const topology=createSurfacePatches(profile.surface,0);
  const seamEdges=buildSeamBleedPolygonEdges(topology.map(rendererPolygon),{tileSize:profile.projection.tileSize,layerElevation:profile.projection.layerElevation});
- const projector=createLeafProjector(profile,adapters.bodyFixedSunDirection(solarSource.bodyId));
+ // An emissive body's leaves are source-lit; the ephemeris light is not consulted (the Sun has no entry there).
+ const projector=createLeafProjector(profile,assets.emission?[0,0,1]:adapters.bodyFixedSunDirection(solarSource.bodyId));
  const leaves=polygons.map((patch,index)=>projector.surface(patch,index,seamEdges.get(index)));
  const innerPolarLeaves=profile.surface.innerPoles?(['north','south'] as Pole[]).map((pole,index)=>projector.surface(createPolarPatch(profile.surface,pole,true),polygons.length+index)):[];
  const bodyLeaves=[...leaves,...innerPolarLeaves];
@@ -44,7 +49,8 @@ export async function prepareGeometryScene({profile,raster,assets,solarSource,st
  if(Boolean(profile.cutaway)!==Boolean(assets.interior))throw new TypeError('Cutaway geometry and prepared assets must be supplied together.');
  const seamRepair={model:'prepared-zero-seam-bleed-with-compositor-overlap',seamBleed:profile.projection.seamBleed,presentationOverlap:profile.projection.overlap,rasterGutter:profile.projection.rasterGutter,rasterOverscan:profile.projection.rasterOverscan,runtimeEdgeDiscovery:false};
  const material=assets.atmosphere?prepareAtmosphericMaterial(profile,raster,assets.atmosphere.source,assets.atmosphere.model,adapters.sunReferenceViewDirection(solarSource)):
-  assets.lighting?{schema:profile.output.materialSchema,frameCount:assets.lighting.frameCount,logicalDiameter:profile.surface.radius*2,defaultFrame:assets.lighting.defaultFrame,runtimeLighting:false}:undefined;
+  assets.lighting?{schema:profile.output.materialSchema,frameCount:assets.lighting.frameCount,logicalDiameter:profile.surface.radius*2,defaultFrame:assets.lighting.defaultFrame,runtimeLighting:false}:
+  assets.emission?{...assets.emission,schema:profile.output.materialSchema,model:'emissive',lighting:false,shadows:false,runtimeLighting:false}:undefined;
  if(!material)throw new TypeError('The prepared scene needs a declared material capability.');
  const common={schema:profile.output.schema,camera:physical.camera,systemTransform:physical.systemTransform,presentationFrame:physical.presentationFrame,heliocentricView:physical.heliocentricView,worldFrame:physical.worldFrame,material,starfield:physical.starfield};
  const scene=profile.output.layout==='retained'?{

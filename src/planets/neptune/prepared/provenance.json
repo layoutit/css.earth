@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9156fb3d4ace841aeb8bc9b503afc9c32e7d07fa3b738f21a9a5e3411a641dbe"
+    "sha256": "260ee3ea59b5de555759bd9f7e0ee28a462ec1023175a4a915696f2288069d77"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
@@ -1051,8 +1051,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hubble",
+            "kind": "machine",
+            "machineId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
             "missionId": "hubble"
           }
@@ -1135,8 +1135,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hubble",
+            "kind": "machine",
+            "machineId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits",
             "missionId": "hubble"
           }
@@ -1182,8 +1182,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hubble",
+            "kind": "machine",
+            "machineId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits",
             "missionId": "hubble"
           }
@@ -1367,8 +1367,8 @@
         },
         {
           "url": "/scenes/neptune/neptune-poles-normal.webp",
-          "bytes": 4538,
-          "sha256": "39cac48326dacbddae02aceb05ae10078619c80d068a1dd6e2d4a7f669d1bbad",
+          "bytes": 4524,
+          "sha256": "e0779d1a7c0457e2a0ed1ece5ff8fc8c1b3d74c3148221a75884595240f128d2",
           "verification": "asset-manifest-pin"
         },
         {

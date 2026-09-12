@@ -11,6 +11,8 @@ export interface ProvenanceSource {
   readonly dependencies: readonly string[]; readonly verification: string; readonly license?: string;
   readonly redistribution?: string; readonly sourceUrl?: string;
   readonly displayCredit?: string; readonly title?: string; readonly label?: string; readonly attributionGroup?: { readonly id: string };
+  /** Set when the input is a dataset's own source rather than a file supporting it. */
+  readonly lensId?: string;
   readonly capture?: Capture;
   readonly sourceBinding?: SourceBinding;
   readonly acquisitionOperation?: ProvenanceOperation | null;
@@ -68,7 +70,7 @@ function operation(value: unknown): value is ProvenanceOperation {
 function sourceShape(value: unknown): value is ProvenanceSource {
   return record(value) && ['id','path','origin','credit','acquisition','sha256','verification'].every(key => typeof value[key] === 'string')
     && typeof value.bytes === 'number' && strings(value.dependencies)
-    && ['kind','license','redistribution','sourceUrl','displayCredit','title','label'].every(key => optionalString(value[key]))
+    && ['kind','license','redistribution','sourceUrl','displayCredit','title','label','lensId'].every(key => optionalString(value[key]))
     && (value.attributionGroup === undefined || record(value.attributionGroup) && typeof value.attributionGroup.id === 'string')
     && (value.capture === undefined || validCapture(value.capture))
     && (value.sourceBinding === undefined || validSourceBinding(value.sourceBinding))

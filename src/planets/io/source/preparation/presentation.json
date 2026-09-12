@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-css-presentation-profile@1",
+  "namespace": "io",
+  "mode": "composite",
+  "lensFocus": {
+    "spectral-slope": {
+      "longitudeDegrees": 60,
+      "latitudeDegrees": 0,
+      "zoom": 1.1
+    },
+    "visible-absorption": {
+      "longitudeDegrees": 60,
+      "latitudeDegrees": 0,
+      "zoom": 1.1
+    }
+  }
+}

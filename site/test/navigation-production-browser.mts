@@ -2,6 +2,7 @@ import { createTestPage } from './browser-observations.mts';
 import type { Page } from 'playwright';
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
+import { selectObject } from './navigate-object.mts';
 
 const origin = process.env.CSSEARTH_TEST_ORIGIN ?? 'http://127.0.0.1:4212';
 const browser = await chromium.launch({ headless: true, channel: 'chrome' });
@@ -23,15 +24,19 @@ try {
       window.__productionSamples = [];
       const sample = () => {
         const stage = window.__cssearthTest.element('.planet-stage');
+        // The shared world presents beside the detail stage and owns the loading opacity.
+        const world = window.__cssearthTest.element('.planet-world-stage');
         const scene = document.querySelector<HTMLElement>('.planet-stage [class$="-scene"]');
         window.__productionSamples.push({ count: document.querySelectorAll('.polycss-camera').length,
-          transform: scene?.style.transform, opacity: Number(getComputedStyle(window.__cssearthTest.required(stage, 'computed style element')).opacity),
-          universes: stage.querySelectorAll('.prepared-universe').length });
+          transform: scene?.style.transform,
+          opacity: Number(getComputedStyle(window.__cssearthTest.required(stage, 'computed style element')).opacity)
+            * Number(getComputedStyle(window.__cssearthTest.required(world, 'computed style element')).opacity),
+          universes: world?.querySelectorAll('.prepared-universe').length ?? 0 });
         window.__productionFrame = requestAnimationFrame(sample);
       };
       sample();
     });
-    await page.locator(`.scale-planet[data-planet-id="${id}"] a`).click();
+    await selectObject(page, id);
     await ready(page, id);
     const result = await page.evaluate(id => {
       cancelAnimationFrame(window.__productionFrame);

@@ -1,0 +1,37 @@
+{
+  "id": "artwork-photo-herschel",
+  "kind": "artwork",
+  "identityLevel": "work",
+  "title": "herschel photograph",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://commons.wikimedia.org/wiki/File:Maquette_Herschel_salon_du_Bourget_2013_DSC_0217.JPG",
+      "label": "Source"
+    },
+    {
+      "role": "original",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Maquette_Herschel_salon_du_Bourget_2013_DSC_0217.JPG",
+      "label": "Original file"
+    },
+    {
+      "role": "rights",
+      "url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "label": "CC BY-SA 3.0"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Maquette_Herschel_salon_du_Bourget_2013_DSC_0217.JPG",
+      "checkedOn": "2026-09-11",
+      "locator": "File licence, author and original file size"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Wikimedia Commons",
+  "creators": [
+    "Pline"
+  ]
+}

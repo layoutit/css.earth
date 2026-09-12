@@ -57,8 +57,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "dawn",
+            "kind": "machine",
+            "machineId": "dawn",
             "missionId": "dawn",
             "evidence": "https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/truecolor/Vesta_true_color_HAMO-1-2_global.png"
           }
@@ -103,8 +103,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "dawn",
+            "kind": "machine",
+            "machineId": "dawn",
             "missionId": "dawn",
             "evidence": "https://dawngis.dlr.de/data/Vesta/dtm/HAMO/Vesta_HAMO_dtm_global_64.pds.zip"
           }
@@ -149,8 +149,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "dawn",
+            "kind": "machine",
+            "machineId": "dawn",
             "missionId": "dawn",
             "evidence": "Dawn Framing Camera HAMO Clementine ratios; pinned DLR attached label identifies VESTA and the released HAMO archive."
           }
@@ -165,6 +165,84 @@
             "evidence": "src/planets/vesta/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
         ]
+      }
+    },
+    {
+      "id": "usgs-gazetteer-vesta-nomenclature-center-pts",
+      "path": "features/VESTA_nomenclature_center_pts.zip",
+      "expectedBytes": 314564,
+      "expectedSha256": "ee0007931abcecc970a2184b582995f9f6026d630661f0840607aa7c5006269f",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/VESTA_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Vesta on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Vesta centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/VESTA/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "vesta-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1000,
+      "expectedSha256": "547f49cb9b21176885a0d353786d61c74e569340ef97d47d2c83a776f5dd2534",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "vesta-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1119,
+      "expectedSha256": "2e00300733f8a2572e548323aaa05ad8afa6cba2131718cd4cefa3e9a6c47c89",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "vesta-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 152,
+      "expectedSha256": "75f4e502b985c08b6a527b7c6459a3ca268a0bb27ce5da8c518435d647501fa5",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
       }
     }
   ],
@@ -226,8 +304,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1016,
-      "expectedSha256": "2404f692eb9c5c31eb34186683fca69b26b0a23ccba6b144dc811b7816173f99"
+      "expectedBytes": 1268,
+      "expectedSha256": "4602c9eb1f12aba55003b5f38cb46034c7708e9d1f5f82a41f4dc9a0ad4a4149"
     },
     {
       "path": "preparation/navigation.json",
@@ -241,8 +319,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3818,
-      "expectedSha256": "64d768d3e600631fe01c6b32e517ce1efc719fad24c9b283cbc582f70339dca9"
+      "expectedBytes": 3924,
+      "expectedSha256": "37a62563a7c3c2401a93341dbb63a33e8aad0e17153281ebbb8443498089fe91"
     },
     {
       "path": "presentation/title-mark.json",
@@ -272,6 +350,29 @@
       "purpose": "Unmodified publisher metadata for the spectral composite.",
       "expectedBytes": 2177,
       "expectedSha256": "8fd6341b4d9b66445a76883783c323d503cd822ecf3719a4e62bcdc7e7818c53"
+    },
+    {
+      "id": "vesta-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 4724,
+      "expectedSha256": "5f6e1fec30acfda423868511c7219ead5e38998c985d1aa96ecdd28e02f99e03",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 9 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts vesta: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

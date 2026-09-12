@@ -8,6 +8,7 @@ import type { PreparedResources, PreparedResourceDemand } from "./prepared-resid
 import type { PreparedAnimationOptions } from "./prepared-playback.js";
 import { readPreparedStyle, writePreparedStyle } from "./style-access.js";
 import { selectPreparedTextureLevel, type PreparedTextureLevels } from './prepared-texture-levels.js';
+import type { PreparedSurfaceFeaturePlan } from '../labels/surface-feature-types.js';
 export type PreparedSelection = ObjectSelection;
 export interface PreparedView {
   readonly projection?: import('./physical-projection.js').PhysicalProjection;
@@ -48,10 +49,13 @@ export interface PreparedPresentationDefinition {
   /** Authored infinite motion, resolved from source CSS during preparation. */
   motion?: readonly { target: number; id: string; keyframes: { offset: number; transform: string }[]; duration: number; timings: readonly { when: Readonly<Record<string, ObjectSelection[string]>>; duration: number }[] }[];
   facing?: readonly PreparedFacingPlane[];
+  features?: PreparedSurfaceFeaturePlan;
   depthPartitions?: PreparedDepthPartitions;
   surfaceHit?: PreparedSurfaceHit;
 }
-export interface PreparedPresentationPlan extends PreparedResourceDemand { required: string[]; prewarm: string[]; materials: Record<string, PreparedMaterialDemand>; pressedLenses: (string | null)[]; navigation?: PreparedSelectionNavigation; textureLevel?: number; textureResources?: Readonly<Record<string, string>>; }
+export interface PreparedPresentationPlan extends PreparedResourceDemand { required: string[]; prewarm: string[]; materials: Record<string, PreparedMaterialDemand>; pressedLenses: (string | null)[]; navigation?: PreparedSelectionNavigation; textureLevel?: number; textureResources?: Readonly<Record<string, string>>;
+  /** The mesh is not drawn at this level of detail: its textures only warm. */
+  deferredTextures?: boolean; }
 export interface PreparedPresentationContext { own(cleanup: () => void): unknown; registerAnimation(animation: Animation, options: PreparedAnimationOptions): unknown; seekAnimation(animation: Animation, time: number): void; }
 export interface PreparedFramePublication { selection: ObjectSelection; view: PreparedView; resources: PreparedResources; plan?: PreparedPresentationPlan | null; }
 
@@ -72,7 +76,12 @@ export function resolvePreparedPresentation(definition: PreparedPresentationDefi
     view?.levelOfDetail?.silhouetteDiameter, previousPlan?.textureLevel, initial) : undefined;
   const textureResources = textureLevel === undefined ? undefined : definition.textureLevels!.levels[textureLevel].resources;
   const content = variant.required.map(key => textureResources?.[key] ?? key);
-  const required = new Set(definition.resourceOrder === "materials-first" ? [] : content);
+  // An opaque proxy stands for a marker-stage body, so its mesh is not drawn
+  // (see perspective-dolly.ts). Mounting one there decoded a full surface set
+  // for pixels no one sees. Its group is neither required nor warmed until the
+  // camera resolves the body, which re-plans and decodes before it appears.
+  const deferredTextures = (view?.levelOfDetail?.stage ?? "geometry") === "marker";
+  const required = new Set(definition.resourceOrder === "materials-first" || deferredTextures ? [] : content);
   const prewarm = new Set<string>(), materials: Record<string, PreparedMaterialDemand> = {};
   for (const selected of variant.materials) {
     if (!view) throw new TypeError('Prepared material demand requires a view.');
@@ -83,8 +92,9 @@ export function resolvePreparedPresentation(definition: PreparedPresentationDefi
     for (const key of state.prewarm) prewarm.add(key);
     materials[track.id] = state;
   }
-  if (definition.resourceOrder === "materials-first") for (const key of content) required.add(key);
+  if (definition.resourceOrder === "materials-first" && !deferredTextures) for (const key of content) required.add(key);
   return { required: [...required], prewarm: [...prewarm].filter(key => !required.has(key)), materials, pressedLenses: [selection.lensId],
+    ...(deferredTextures ? { deferredTextures } : {}),
     ...(textureLevel === undefined ? {} : { textureLevel, textureResources }),
     ...(variant.navigation ? { navigation: variant.navigation } : {}) };
 }
@@ -132,6 +142,8 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   if (progressiveActivation && !definition.tree.activationGroups) throw new TypeError('Flight activation requires prepared groups.');
   const activate = prepareConnectedActivation(preparedTree && progressiveActivation
     ? (definition.tree.activationGroups ?? []).map(group => group.map(index => nodes[index])) : [], context.own);
+  // The same prepared groups let the camera bring a resolving mesh back in stages.
+  const revealGroups = Object.freeze((definition.tree.activationGroups ?? []).map(group => Object.freeze(group.map(index => nodes[index]))));
   const publishFacing = createPreparedFacing(definition.facing ?? [], nodes);
   const publishDepth = createPreparedDepthPartitions(definition.depthPartitions, nodes, sceneElement);
   if (initialProjection) publishFacing(initialProjection);
@@ -163,9 +175,10 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   const round = (value: number, precision: number | null) => precision === null ? value : Math.round(value * 10 ** precision) / 10 ** precision;
   const formatNumber = (value: number) => Math.abs(value) < 1e-9 ? "0" : Number(value.toFixed(6)).toString();
   const target = (index: number) => index === -1 ? stage : nodes[index];
-  return Object.freeze({ cameraElement, sceneElement, activate,
+  return Object.freeze({ cameraElement, sceneElement, activate, revealGroups,
     ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement, () => stage.dataset.lens) } : {}),
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
+    ...(definition.features ? { featureTarget: nodes[definition.features.target] } : {}),
     ...(definition.pageLayers ? { pageLayers: Object.freeze(definition.pageLayers.map(layer => Object.freeze({ ...layer,
       carrier: nodes[layer.carrier], system: nodes[layer.system] }))) } : {}),
     commitSelection({ selection, resources, plan }: { selection: ObjectSelection; resources: PreparedResources; plan?: PreparedPresentationPlan; view?: PreparedView | null }) {
@@ -174,7 +187,9 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       const writes = variant.writes.map(binding => {
         if (binding.kind !== "texture") return binding;
         const url = binding.resource === null ? null : resources.url(plan?.textureResources?.[binding.resource] ?? binding.resource);
-        if (binding.resource !== null && !url) throw new Error(`Prepared selection texture is not ready: ${binding.resource}`);
+        // A deferred (undrawn) mesh publishes no texture at all; the resolving
+        // camera re-plans and commits the complete group before it is shown.
+        if (binding.resource !== null && !url && !plan?.deferredTextures) throw new Error(`Prepared selection texture is not ready: ${binding.resource}`);
         return { kind: "style" as const, target: binding.target, name: binding.name, value: url === null ? "none" : binding.quoted ? `url(${JSON.stringify(url)})` : `url(${url})` };
       });
       // Texture references belong to the committed dataset. Retire references

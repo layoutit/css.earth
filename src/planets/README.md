@@ -107,6 +107,8 @@ Read the current `package.json` and runner arguments before using commands:
 | Acquire missing pins / verify present sources | `node tools/objects/dist/operations.js acquire <id>` / add `--verify-only` |
 | Prepare one authored package | `pnpm prepare:planets -- --object=<id>` |
 | Update source and mission catalogues | `pnpm prepare:sources` |
+| Refresh document pins after editing a recipe, content or acquisition plan | `pnpm pin:documents <id>` (`--check` only reports) |
+| Bind new pinned inputs to catalogue records, then pin their evidence after committing the manifest | `pnpm author:sources <id>` then `pnpm author:sources <id> --evidence <commit>` |
 | Run body tests | `node --test tests/objects/unit/<id>/*.test.mts` |
 | Run shared package, renderer, platform and shell tests | `pnpm test` |
 | Check source identities, bindings and catalogue generation | `pnpm test:sources` |

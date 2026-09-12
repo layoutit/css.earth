@@ -84,9 +84,9 @@
         "description": "Voyager 2 monochrome mosaic with source photometric correction. Native detail is about 2.9 km per pixel at best; photographed shadows and image seams remain. Gray grid marks missing observations.",
         "title": "Monochrome mosaic",
         "detail": "Corrected mosaic",
-        "thumbnail": "/scenes/titania/titania-normal-thumbnail.webp",
-        "surface": "titania-normal-surface@2x.webp",
-        "poles": "titania-normal-poles@2x.webp",
+        "thumbnail": "titania-lens-normal.webp",
+        "surface": "titania-normal.webp",
+        "poles": "titania-poles-normal.webp",
         "source": {
           "id": "schenk-2020-titania-normal",
           "path": "../manifest.json",
@@ -100,9 +100,9 @@
         "description": "Voyager stereo elevations with published limb-profile data, in kilometres relative to the source reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 2.88 km grid spacing is not uniform effective elevation resolution.",
         "title": "Stereo and limb terrain model",
         "detail": "Stereo shaded relief",
-        "thumbnail": "/scenes/titania/titania-elevation-thumbnail.webp",
-        "surface": "titania-elevation-surface@2x.webp",
-        "poles": "titania-elevation-poles@2x.webp",
+        "thumbnail": "titania-lens-elevation.webp",
+        "surface": "titania-elevation.webp",
+        "poles": "titania-poles-elevation.webp",
         "source": {
           "id": "schenk-2020-titania-elevation",
           "path": "../manifest.json",
@@ -111,8 +111,6 @@
         "legend": {
           "kind": "scale",
           "title": "Elevation",
-          "width": 256,
-          "height": 16,
           "labels": [
             "−8",
             "0",
@@ -120,7 +118,30 @@
           ],
           "meta": "km",
           "sourceUrl": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
-          "image": "/scenes/titania/titania-elevation-legend.webp"
+          "recipe": {
+            "palette": [
+              [
+                28,
+                85,
+                153
+              ],
+              [
+                187,
+                171,
+                128
+              ],
+              [
+                170,
+                62,
+                36
+              ]
+            ],
+            "labels": [
+              "−8",
+              "0",
+              "8"
+            ]
+          }
         },
         "summary": "Voyager stereo and limb heights relative to the source ellipsoid. Detail varies; gray grid: no data."
       },
@@ -131,9 +152,9 @@
         "description": "Ten historical geologic units digitized from Voyager-era mapping. Registration reconstructed from crater landmarks; four independent checks differ by 0.33–0.83° (about 4.5–11.4 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
         "title": "Geologic map",
         "summary": "Historical interpreted units; reconstructed registration. Gray grid: unmapped or conflicting units.",
-        "thumbnail": "/scenes/titania/titania-geology-thumbnail.webp",
-        "surface": "titania-geology-surface@2x.webp",
-        "poles": "titania-geology-poles@2x.webp",
+        "thumbnail": "titania-lens-geology.webp",
+        "surface": "titania-geology.webp",
+        "poles": "titania-poles-geology.webp",
         "falseColor": true,
         "source": {
           "id": "geology-2026-categories",
@@ -229,8 +250,8 @@
       },
       {
         "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
+        "name": "stars",
+        "label": "Stars",
         "checked": true
       }
     ]

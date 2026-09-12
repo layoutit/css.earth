@@ -91,7 +91,8 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   }
   const prepared = prepareWorldContext(source, facts, states, orbitCenters, {
     minimumRadiusShare: SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, ...SYSTEM_FRAMING_ANGLES });
-  const text = `${JSON.stringify(prepared, null, 2)}\n`;
+  // Browser payload: compact JSON. Indentation was 60% of the fetched bytes.
+  const text = `${JSON.stringify(prepared)}\n`;
   try { if (await readFile(options.outputPath, 'utf8') === text) return; }
   catch (error: unknown) { if (!isMissingFile(error)) throw error; }
   await mkdir(dirname(options.outputPath), { recursive: true });

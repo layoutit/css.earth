@@ -14,6 +14,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -43,12 +44,17 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "2b19a56f223fa38db69e30275699579456e5ef36ac429ae232b1933b7dd76027"
+          "sha256": "d66c1de2762c316ddc8e76ca17c209794ab0daeff4e6e6b9924230f31796c13b"
         },
         {
           "id": "rotation",
           "path": "source/preparation/rotation.json",
           "sha256": "5dba43a0956e9dd4b84819ea83d253431569afb4b5126661ef5a9c28c2a39713"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "42cd0c133a0460f95b0a6cc5e3942b2fcac9af3099e069c6673bc9bc0050de35"
         }
       ],
       "shape": {
@@ -100,7 +106,11 @@
           "source": "terrestrial",
           "model": "lit"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -135,7 +145,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "83f97df08e80af0be42e4d704f1f7acc80614634f9b8ee2f70212523ded4438c"
+        "sha256": "7613988beafba72bea997e88948f0d30af96ec960b28179775a6f27af39ff85a"
       }
     },
     "catalog": {
@@ -152,8 +162,8 @@
     }
   },
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "fae27f2737483a9510d32d36c70b1bee2118b5c04d3b305977fe3ae70a922e83"
+    "sha256": "3f4a059e6fb1cdb52829f88772d1d28a11e6410536fd75cf579ce201b07cc22e"
   }
 }

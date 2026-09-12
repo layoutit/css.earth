@@ -20,6 +20,10 @@ export interface PreparedCssSky {
     readonly style: PreparedVolumeLeafStyle;
     readonly boundsCssPixels?: PreparedLeafBounds;
   }[];
+  /** The same cube with a prepared point field baked in, for the observer near
+   * that field's origin; the plain faces take over as it travels away. */
+  readonly nearFaces?: PreparedCssSky['faces'];
+  readonly stars?: { readonly objectId: string; readonly cssPixelsPerDegree: number };
   readonly provenance: unknown;
   readonly approximation: unknown;
 }

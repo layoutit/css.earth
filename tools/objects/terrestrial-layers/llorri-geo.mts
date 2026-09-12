@@ -2,7 +2,7 @@ import {requireRecord} from '../../source-values.mts';
 import type {SipCamera} from './contracts.mts';
 import {parseSipCamera,parseLlorriCamera} from './source-records.mts';
 import { createHash } from 'node:crypto';
-import { readFitsPrimary } from '../static-surface/fits-map.mts';
+import { readFitsPrimary } from '../observation/fits.mts';
 import { project } from './osiris-geo.mts';
 
 const unquote = (s: unknown) => typeof s === 'string' ? s.replace(/^'(.*)'$/, '$1').trim() : undefined;

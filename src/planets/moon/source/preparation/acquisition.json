@@ -76,7 +76,7 @@
     },
     {
       "kind": "download",
-      "url": "https://zenodo.org/api/records/4558194/files/diviner_CF_space_weathering_corrected.tiff/content",
+      "url": "https://zenodo.org/records/4558194/files/diviner_CF_space_weathering_corrected.tiff?download=1",
       "path": "science/diviner_CF_space_weathering_corrected.tiff",
       "groups": [
         "mapped-science"
@@ -84,7 +84,7 @@
     },
     {
       "kind": "download",
-      "url": "https://zenodo.org/api/records/4558194/files/diviner_MI_latitude.tiff/content",
+      "url": "https://zenodo.org/records/4558194/files/diviner_MI_latitude.tiff?download=1",
       "path": "science/diviner_MI_latitude.tiff",
       "groups": [
         "mapped-science"
@@ -92,7 +92,7 @@
     },
     {
       "kind": "download",
-      "url": "https://zenodo.org/api/records/4558194/files/diviner_MI_longitude.tiff/content",
+      "url": "https://zenodo.org/records/4558194/files/diviner_MI_longitude.tiff?download=1",
       "path": "science/diviner_MI_longitude.tiff",
       "groups": [
         "mapped-science"
@@ -145,6 +145,41 @@
       ],
       "path": "science/diviner-ghrm/dghrm_ra_sam_70s70n_img.xml",
       "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_ra_sam_70s70n_img.xml"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/MOON_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MOON_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "refresh-photographs"
+      ],
+      "path": "surface/WAC_GLOBAL_E000N1800_032P.IMG",
+      "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "features/traverses/APOLLO_11.ZIP",
+      "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_11/APOLLO_11.ZIP"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "features/traverses/APOLLO_12.ZIP",
+      "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_12/APOLLO_12.ZIP"
     }
   ]
 }

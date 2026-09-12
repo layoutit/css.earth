@@ -1,11 +1,12 @@
 import type { PositionM } from '@cssearth/engine';
 // Prepared spatial minimap. Rebuild with: pnpm prepare:minimap
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { eclipticJ2000ToIcrf } from '@cssearth/astronomy';
 import { OBJECTS } from '../objects.mts';
 import context from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
-import starField from '../../src/objects/stellar-neighbourhood/prepared/stars.json' with { type: 'json' };
+import starDescriptor from '../../src/objects/stellar-neighbourhood/object.json' with { type: 'json' };
+import { loadPreparedCssPointField } from '../../src/renderers/css/dist/index.js';
 import volume from '../../src/objects/milky-way/prepared/volume.json' with { type: 'json' };
 import slices from '../../src/objects/milky-way/prepared/volume-slices.json' with { type: 'json' };
 import { worldRotationFromQuaternion, rotateWorldPosition } from '../../src/renderers/css/dist/navigation.js';
@@ -13,11 +14,6 @@ import { worldRotationFromQuaternion, rotateWorldPosition } from '../../src/rend
 const radius = 88;
 const registry = new Map(OBJECTS.map(object => [object.id, object]));
 const bodies = [context.focus, ...context.bodies].filter(body => registry.has(body.id));
-// Fixed physical radii across object, system and galactic scales. Runtime only
-// projects these retained circles; it does not re-space them to fit the inset.
-const ringRadiiM = Array.from({ length: 96 }, (_, level) => 149597870700 * 2 ** (level - 40));
-const rings = ringRadiiM.map(radiusM =>
-  `<i class="space-minimap-ring" data-radius-m="${radiusM}" hidden></i>`);
 const rim = `<i class="space-minimap-ring space-minimap-rim" style="width:${2 * radius}px;height:${2 * radius}px"></i>`;
 const spokes = [0, 45, 90, 135].map(angle =>
   `<i class="space-minimap-spoke" style="width:${2 * radius}px;transform:translate(-50%,-50%) rotate(${angle}deg)"></i>`);
@@ -29,7 +25,9 @@ const points = [...bodies].sort((a, b) => order(a) - order(b)).map(body => ({
 }));
 // Bounded preview catalog: nearest stars plus intrinsically bright stars from
 // the existing HYG bank. These are source positions, not synthetic galaxy dots.
-const stars = starField.data;
+// The pinned manifest and binary bank decode through the application loader.
+const starDirectory = new URL('../../src/objects/stellar-neighbourhood/', import.meta.url);
+const stars = await loadPreparedCssPointField(starDescriptor, { read: async path => new Uint8Array(await readFile(new URL(path, starDirectory))).buffer });
 const selectedStars = new Map([
   ...[...stars.stars].sort((a, b) => Math.hypot(...a.positionUnits) - Math.hypot(...b.positionUnits)).slice(0, 1024),
   ...[...stars.stars].sort((a, b) => a.absoluteMagnitude - b.absoluteMagnitude).slice(0, 1024),
@@ -50,16 +48,16 @@ const galaxyAxes = ([[1, 0, 0], [0, -1, 0], [0, 0, -1]] as PositionM[]).map(axis
 await writeFile(new URL('./prepared.json', import.meta.url), JSON.stringify({
   referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
   diagramToReference: [0, 1, 2].flatMap(row => axes.map(axis => axis[row])),
-  radius, ringRadiiM, defaultFocus: { positionM: context.focus.positionM, radiusM: context.focus.radiusM },
+  radius, defaultFocus: { positionM: context.focus.positionM, radiusM: context.focus.radiusM },
   bodyIds: bodies.map(body => body.id), points: allPoints, pointOrderX,
-  gridMarkup: [...rings, ...spokes, rim].join(''), pointMarkup: allPoints.map(markup).join(''),
+  gridMarkup: [...spokes, rim].join(''), pointMarkup: allPoints.filter(point => point.classification !== 'catalog-star').map(markup).join(''),
   galaxy: {
     positionM: volume.data.frame.originM, widthM: 20 * volume.data.frame.metersPerUnit,
     planeToReference: [0, 1, 2].flatMap(row => galaxyAxes.map(axis => axis[row])),
     fadeStartM: context.volume.opacityProfile.fadeStartDistanceM,
     fullM: context.volume.opacityProfile.fullDistanceM,
   },
-}, null, 2) + '\n');
+}) + '\n');
 
 // Prepare a small face-on density projection from the shipped Z slabs. This is
 // a map of the existing volume, not another mounted galaxy scene.

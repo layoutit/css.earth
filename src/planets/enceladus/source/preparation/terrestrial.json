@@ -15,6 +15,10 @@
     "observations": [
       {
         "id": "normal",
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
+        },
         "validity": {
           "kind": "geotiff-float-monochrome",
           "noData": -3.4028226550889045e+38,

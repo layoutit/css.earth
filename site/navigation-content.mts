@@ -1,23 +1,20 @@
 import type { BrowserWindow } from './browser-types.mts';
 import { requiredElement } from './browser-types.mts';
 import type { ObjectEntry } from './object-schema.mts';
+import { navigationFragments, type NavigationFragments } from './navigation-fragments.mts';
 type StyleNode = HTMLStyleElement | HTMLLinkElement;
 interface IncomingStyle { element: StyleNode; media?: string | null; }
 /** Load the static navigation fragment without a second resident card bank. */
-export function createNavigationContent({ documentTarget, windowTarget, fetchPage = windowTarget.fetch.bind(windowTarget) }: { documentTarget: Document; windowTarget: BrowserWindow; fetchPage?: typeof fetch }) {
+export function createNavigationContent({ documentTarget, windowTarget, fragments = navigationFragments(windowTarget) }: { documentTarget: Document; windowTarget: BrowserWindow; fragments?: NavigationFragments }) {
   let styles = [...documentTarget.head.querySelectorAll<StyleNode>('style, link[rel="stylesheet"]')];
-  const key = (element: StyleNode) => element instanceof windowTarget.HTMLLinkElement ? `link:${element.href}`
-    : `style:${element.dataset.viteDevId ?? element.textContent}`;
+  const styleKey = (element: StyleNode) => `style:${element.dataset.viteDevId ?? element.textContent}`;
+  const key = (element: StyleNode) => element instanceof windowTarget.HTMLLinkElement ? `link:${element.href}` : styleKey(element);
 
   return Object.freeze({
     async load(object: ObjectEntry, { signal }: { signal: AbortSignal }) {
-      const response = await fetchPage(`/navigation/${object.id}/`, { signal });
-      if (!response.ok) throw new Error(`Object content request failed: ${response.status}.`);
-      const source = new windowTarget.DOMParser().parseFromString(await response.text(), 'text/html');
-      if (signal.aborted) throw signal.reason;
-      if (source.body.dataset.objectShell !== object.id || source.querySelector<HTMLElement>('.planet-stage')?.dataset.objectId !== object.id) {
-        throw new Error('Object route content does not match its registry identity.');
-      }
+      // Selection intent usually requested this fragment already; reuse it.
+      // The cached document is shared, so its nodes are only read or imported.
+      const source = await fragments.get(object.id, signal);
       const required = ['.planet-sidebar', '.planet-sidebar-search', '.planet-drawer-content',
         '.planet-object-browser', '.planet-information-panel', '.planet-settings-panel'];
       for (const selector of required) if (!source.querySelector(selector) || !documentTarget.querySelector(selector)) {
@@ -30,10 +27,12 @@ export function createNavigationContent({ documentTarget, windowTarget, fetchPag
       signal.addEventListener('abort', dispose, { once: true });
       try {
         for (const element of source.head.querySelectorAll<StyleNode>('style, link[rel="stylesheet"]')) {
-          if (element instanceof windowTarget.HTMLLinkElement) element.href = new URL(element.getAttribute('href') ?? '', new URL(object.route, windowTarget.location.href)).href;
-          const reused = existing.get(key(element));
+          const href = element instanceof windowTarget.HTMLLinkElement
+            ? new URL(element.getAttribute('href') ?? '', new URL(object.route, windowTarget.location.href)).href : null;
+          const reused = existing.get(href === null ? styleKey(element) : `link:${href}`);
           if (reused) { next.push({ element: reused }); continue; }
           const native = documentTarget.importNode(element, true), media = native.getAttribute('media');
+          if (href !== null && native instanceof windowTarget.HTMLLinkElement) native.href = href;
           next.push({ element: native, media }); added.push(native);
           if (native instanceof windowTarget.HTMLLinkElement) {
             native.media = 'not all';
@@ -70,21 +69,10 @@ export function createNavigationContent({ documentTarget, windowTarget, fetchPag
             for (const selector of ['.planet-information-panel', '.planet-settings-panel']) {
               const target = documentTarget.querySelector<HTMLElement>(selector), incoming = source.querySelector<HTMLElement>(selector);
               if (!target || !incoming) throw new Error(`Object shell content disappeared: ${selector}.`);
-              if (preserveSidebar && selector === '.planet-information-panel') {
-                // Preview cards retain their overview and controls. Large detail
-                // sections arrive with the existing destination fragment instead
-                // of being repeated in every inert card on every route.
-                for (const deferred of target.querySelectorAll<HTMLElement>('[data-deferred-detail]')) {
-                  const detail = [...incoming.querySelectorAll<HTMLElement>('[data-prepared-detail]')]
-                    .find(node => node.dataset.preparedDetail === deferred.dataset.preparedDetail);
-                  if (!detail || detail.hasAttribute('data-deferred-detail')) throw new Error('Prepared destination detail is missing.');
-                  const sourceContent = detail instanceof windowTarget.HTMLTemplateElement ? detail.content : detail;
-                  const targetContent = deferred instanceof windowTarget.HTMLTemplateElement ? deferred.content : deferred;
-                  targetContent.replaceChildren(...[...sourceContent.childNodes].map(node => documentTarget.importNode(node, true)));
-                  deferred.removeAttribute('data-deferred-detail');
-                }
-                continue;
-              }
+              // The selection preview was imported from this same fragment and
+              // keeps its retained nodes. Only a registry-only preview, whose
+              // fragment had not arrived, is replaced by the destination card.
+              if (preserveSidebar && selector === '.planet-information-panel' && !target.querySelector(':scope > [data-card-preview]')) continue;
               target.replaceChildren(...[...incoming.childNodes].map(node => documentTarget.importNode(node, true)));
             }
             for (const selector of [...required, '.planet-sidebar-view-all', '.planet-sheet-handle',
@@ -123,13 +111,12 @@ export function createNavigationContent({ documentTarget, windowTarget, fetchPag
             stage.dataset.objectId = object.id;
             stage.setAttribute('aria-label', `Interactive 3D CSS visualization of ${object.name}`);
             input?.setAttribute('aria-label', `Explore ${object.name}`);
-            for (const anchor of documentTarget.querySelectorAll<HTMLAnchorElement>('a.planet-object-link, a.scale-stop')) {
-              const route = new URL(anchor.href, windowTarget.location.href);
-              const selected = route.origin === windowTarget.location.origin && route.pathname === object.route;
+            // Anchors expose their resolved origin and path: ~500 menu links need no URL parse.
+            for (const anchor of documentTarget.querySelectorAll<HTMLAnchorElement>('a.planet-object-link')) {
+              const selected = anchor.origin === windowTarget.location.origin && anchor.pathname === object.route;
               if (selected) anchor.setAttribute('aria-current', 'page');
               else if (anchor.getAttribute('aria-current') === 'page') anchor.removeAttribute('aria-current');
-              if (anchor.classList.contains('planet-object-link')) anchor.classList.toggle('is-active', selected);
-              anchor.closest('.scale-planet')?.classList.toggle('active', selected);
+              anchor.classList.toggle('is-active', selected);
             }
           },
           dispose,

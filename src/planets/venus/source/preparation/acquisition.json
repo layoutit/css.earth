@@ -212,6 +212,14 @@
       ],
       "path": "sun/google-maps-sun.png",
       "url": "https://mw1.google.com/mw-weather/static/sun.png"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/VENUS_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/VENUS_nomenclature_center_pts.zip"
     }
   ]
 }

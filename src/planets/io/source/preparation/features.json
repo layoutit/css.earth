@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-surface-features@1",
+  "directory": "features",
+  "archive": "IO_nomenclature_center_pts.zip",
+  "members": {
+    "attributes": "IO_nomenclature_center_pts.dbf",
+    "projection": "IO_nomenclature_center_pts.prj",
+    "metadata": "metadata_nomenclature_points_IO.xml"
+  },
+  "surfaceMap": "presentation/surface-map.json",
+  "mapLeftEdgeLongitudeDeg": 0,
+  "output": "io-features.json",
+  "publicBase": "/scenes/io/",
+  "target": {
+    "className": "io-body"
+  },
+  "lensIds": [
+    "normal",
+    "enhanced",
+    "geology",
+    "spectral-slope",
+    "visible-absorption"
+  ],
+  "kinds": {
+    "point": [
+      "AA",
+      "FA"
+    ],
+    "linear": [
+      "RU",
+      "DO",
+      "VA",
+      "CA",
+      "FO"
+    ],
+    "region": [
+      "PL",
+      "PM",
+      "MO"
+    ]
+  },
+  "excludedTypeCodes": {
+    "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+  },
+  "labelPolicy": {
+    "minimumZoomShare": 0,
+    "minimumDiameterPixels": 40,
+    "alwaysVisibleCount": 0,
+    "maximumVisible": 40,
+    "limbCosine": 0.12
+  },
+  "outline": {
+    "pieces": 256
+  },
+  "notes": "notes.json"
+}

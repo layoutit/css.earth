@@ -99,9 +99,9 @@
         "label": "Monochrome",
         "description": "Monochrome: Native clear-filter Voyager frames, corrected independently using source capture geometry before compositing. Missing and unstable geometry stay unavailable.",
         "title": "Clear-filter mosaic",
-        "thumbnail": "/scenes/triton/triton-normal-thumbnail.webp",
-        "surface": "triton-normal-surface@2x.webp",
-        "poles": "triton-normal-poles@2x.webp",
+        "thumbnail": "triton-lens-normal.webp",
+        "surface": "triton-normal.webp",
+        "poles": "triton-poles-normal.webp",
         "source": {
           "id": "usgs-2023-triton-clear-frames",
           "path": "../manifest.json",
@@ -115,9 +115,9 @@
         "label": "Enhanced color",
         "description": "Enhanced color: Photometrically corrected 2014 map in orange/green/blue. Northern black background was not illuminated by Voyager; original JPEG fill remains missing. Local source resolution varies.",
         "title": "Enhanced-color map",
-        "thumbnail": "/scenes/triton/triton-enhanced-thumbnail.webp",
-        "surface": "triton-enhanced-surface@2x.webp",
-        "poles": "triton-enhanced-poles@2x.webp",
+        "thumbnail": "triton-lens-enhanced.webp",
+        "surface": "triton-enhanced.webp",
+        "poles": "triton-poles-enhanced.webp",
         "source": {
           "id": "voyager-triton-enhanced-color",
           "path": "../manifest.json",
@@ -139,8 +139,8 @@
       },
       {
         "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
+        "name": "stars",
+        "label": "Stars",
         "checked": true
       }
     ]

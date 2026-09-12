@@ -1,0 +1,75 @@
+{
+  "schema": "cssearth-solar-system-preparation@1",
+  "bodyId": "titania",
+  "displayName": "Titania",
+  "bodyRadiusUnits": 230,
+  "bodyRadiusKilometers": 788.9,
+  "defaultZoom": 1.1,
+  "initialScenePitchDegrees": 30.034983297842686,
+  "defaultControlYawDegrees": -26.722762808544566,
+  "markerAtlasUrl": "/navigation/planet-markers@2x.webp",
+  "captionNames": {
+    "sun": "Sun",
+    "mercury": "Mercury",
+    "venus": "Venus",
+    "earth": "Earth",
+    "mars": "Mars",
+    "jupiter": "Jupiter",
+    "saturn": "Saturn",
+    "uranus": "Uranus",
+    "neptune": "Neptune",
+    "pluto": "Pluto",
+    "ceres": "Ceres",
+    "eris": "Eris",
+    "haumea": "Haumea",
+    "makemake": "Makemake",
+    "titania": "Titania"
+  },
+  "markerStrip": {
+    "schema": "csstitania-prepared-system-markers@1",
+    "provenance": "Flat-colour discs from published visible colours; not imagery. Pluto uses the shell's navigation atlas tile instead.",
+    "tiles": [
+      {
+        "id": "ceres",
+        "color": [
+          110,
+          106,
+          102
+        ],
+        "size": 5
+      },
+      {
+        "id": "eris",
+        "color": [
+          232,
+          230,
+          226
+        ],
+        "size": 6
+      },
+      {
+        "id": "haumea",
+        "color": [
+          217,
+          216,
+          212
+        ],
+        "size": 5
+      },
+      {
+        "id": "makemake",
+        "color": [
+          185,
+          138,
+          106
+        ],
+        "size": 5
+      }
+    ],
+    "urls": {
+      "1": "/scenes/titania/titania-system-markers.webp",
+      "2": "/scenes/titania/titania-system-markers@2x.webp"
+    }
+  },
+  "geometryScale": 1
+}

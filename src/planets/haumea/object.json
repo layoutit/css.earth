@@ -3,9 +3,9 @@
   "id": "haumea",
   "type": "layered-body",
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "65c4609c5b7faa98b569c34c0ed76067af276bd56e155e99ae29256ba2252c88"
+    "sha256": "494aca5f5727776ca9b1b0c697a0e0df26d18d30d98e403bc2511bdfa29a0272"
   },
   "properties": {
     "preparation": {
@@ -120,7 +120,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "561c04c489ebd8a6a16cdcc932822842db38233026f9a710d06e52a769f04f44"
+        "sha256": "34326a1493cff79e00b7cb80bac1fc0717b89122b70aca61a4ad4c3b4df2e62d"
       }
     },
     "catalog": {

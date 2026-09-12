@@ -1,50 +1,95 @@
-import {required} from '../../../../tools/test-values.mts';
+// Draft replacement for the retired terrestrial-lane unit tests of Io
+// (modelled on tests/objects/unit/pluto/runtime-contract.test.mts). Decoder-level tests that only read the
+// source files and tools/objects/terrestrial-layers decoders stay valid and are kept beside this file.
+import { required } from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
-import { test } from "node:test";
-import runtimeDefinition from "../../../../src/planets/io/prepared/runtime.json" with {type:"json"};
-const {id: objectId, controls, ...presentation} = runtimeDefinition;
-const PREPARED_PRESENTATION = {...presentation, schema:PREPARED_PRESENTATION_SCHEMA};
-import { requirePreparedPresentation, PREPARED_PRESENTATION_SCHEMA } from "../../../../src/platform/prepared-presentation-contract.mts";
-import { preparePlanetarySystem } from "../../../../src/platform/prepare-planetary-system.mts";
-import { prepareEclipticPresentationFrame } from "../../../../src/platform/solar-presentation-frame.mts";
-import { prepareHeliocentricView } from "../../../../src/platform/prepare-heliocentric-view.mts";
-import { ASTRONOMICAL_UNIT_KILOMETERS } from "../../../../src/platform/solar-geometry.mts";
+import test from "node:test";
+import runtimeDefinition from "../../../../src/planets/io/prepared/runtime.json" with { type: "json" };
+import assets from "../../../../src/planets/io/prepared/assets.json" with { type: "json" };
+import scene from "../../../../src/planets/io/prepared/scene.json" with { type: "json" };
+import lenses from "../../../../src/planets/io/prepared/lenses.json" with { type: "json" };
+import controls from "../../../../src/planets/io/prepared/controls.json" with { type: "json" };
+import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
+import { OBJECTS } from "../../../../site/objects.mts";
+import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 
-test("Io mounts through the shared prepared object contract", () => {
-  requirePreparedPresentation(PREPARED_PRESENTATION, { controls: runtimeDefinition.controls });
-  assert.equal(runtimeDefinition.id, "io");
-  assert.equal(runtimeDefinition.tree.nodes.filter(node => node.className?.includes("polycss-camera")).length, 1);
-  assert.deepEqual(runtimeDefinition.controls.lenses.controls.map(lens => lens.id), ["normal", "enhanced", "geology", "spectral-slope", "visible-absorption"]);
-  for (const variant of PREPARED_PRESENTATION.variants) {
-    const lighting = required(variant.materials.find(material => material.track === "lighting"));
-    assert.equal(lighting.enabled, true, "Every lens retains the shared lighting control");
-    assert.equal(lighting.mode, variant.when.shadows ? "frames" : "fixed");
+const LENS_IDS = ["normal","enhanced","geology","spectral-slope","visible-absorption"];
+
+objectRuntimePackageTests(runtimeDefinition);
+
+test("Io's actual import closure has only shared runtime owners", async () => {
+  const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "io") });
+  assert.equal(audit.complete, true);
+  for (const name of ["runtime/object-runtime", "rendering/prepared-residency", "rendering/object-selection-runtime", "rendering/object-control-binding", "rendering/prepared-playback", "solar-system/cubic-sky-runtime"]) {
+    assert.ok(audit.sharedClosure.includes(`src/renderers/css/${name}.ts`));
   }
 });
 
-// Independent, deliberately broad NASA distance bounds exercise the parent-relative orbit.
-for (const [id, parent, radius, distanceKm] of [
-  ["io", "jupiter", 1821.49, 422000],
-] as const) {
-  test(`${id}'s orbit surrounds ${parent}, while the Sun keeps its separate position`, async () => {
-    const frame = prepareEclipticPresentationFrame(id), kmPerUnit = radius / 230;
-    const system = await preparePlanetarySystem({ bodyId: id, presentationFrame: frame, kilometersPerUnit: kmPerUnit });
-    const view = prepareHeliocentricView({ bodyId: id, presentationFrame: frame,
-      bodyRadiusUnits: 230, bodyRadiusKilometers: radius,
-      sunSprite: { imagePixels: 512, opaqueCoreDiameterShare: 0.5 }, system });
-    const position = required(system.bodies.find(body => body.id === parent)).position;
-    assert.equal(view.orbit.centerBodyId, parent);
-    // System marker positions are rounded to whole scene units.
-    assert.ok(Math.hypot(...view.orbit.focus.map((value, i) => value - position[i])) <= Math.sqrt(3) / 2);
-    assert.ok(Math.abs(Math.hypot(...position) * kmPerUnit / distanceKm - 1) < 0.08);
-    assert.ok(Math.abs(view.orbit.semiMajorAxisAu * ASTRONOMICAL_UNIT_KILOMETERS / distanceKm - 1) < 0.02);
-    assert.deepEqual(view.orbit.vertices[0], [0, 0, 0]);
-    for (const vertex of view.orbit.vertices) {
-      const distance = Math.hypot(...vertex.map((value, i) => value - position[i])) * kmPerUnit;
-      assert.ok(distance > distanceKm * 0.85 && distance < distanceKm * 1.15);
+test("Io is prepared by the generic raster lane with the source-radius sphere, the Lambert lighting bank and its 5 lenses", () => {
+  assert.equal(scene.schema, "cssio-prepared-runtime-scene@1");
+  assert.equal(scene.runtimeGeometry, false);
+  assert.equal(scene.runtimeRasterization, false);
+  assert.equal(scene.body.equatorialRadius, 230);
+  assert.equal(scene.body.polarRadius, 230);
+  assert.deepEqual([scene.body.latitudeSegments, scene.body.longitudeSegments], [16, 32]);
+  assert.equal(scene.body.leaves.length, 450, "448 band leaves plus two polar caps: the mesh the retired lane already used");
+  assert.equal(scene.body.sourceMapSize[0], 2048);
+  // No atmosphere: the material is the row-sharded Lambert bank, not the atmosphere phase atlas.
+  assert.equal(scene.material.runtimeLighting, false);
+  assert.equal(scene.material.frameCount, 256);
+  assert.equal(assets.atmosphere, undefined);
+  assert.equal(assets.lighting.frameCount, 256);
+  assert.deepEqual(Object.keys(assets.surfaces), LENS_IDS);
+  assert.deepEqual(lenses.controls.map(({ id }) => id), LENS_IDS);
+  assert.equal(lenses.defaultLens, "normal");
+  assert.deepEqual(controls.settings.controls.map(control => control.name), ["shadows","stars"]);
+  // The composite material is a separate silhouette-fitted root, never a plane inside the scene.
+  assert.ok(runtimeDefinition.tree.nodes.some(node => node.className?.includes("io-material-composite")));
+  assert.ok(runtimeDefinition.viewBindings.some(binding => binding.kind === "silhouette-fit"));
+  assert.equal(runtimeDefinition.heliocentricView.plan.orbit.centerBodyId, "jupiter", "the orbit still surrounds the parent while the Sun keeps its own position");
+});
+
+test("Io lenses keep their prepared legends and false-colour declarations", () => {
+  const byId = new Map(controls.lenses.controls.map(control => [control.id, control]));
+  for (const control of lenses.controls) {
+    const shell = required(byId.get(control.id));
+    assert.equal(typeof shell.description, "string");
+    if (shell.legend?.kind === "scale") assert.ok((shell.legend.colors?.length ?? 0) >= 2 && (shell.legend.labels?.length ?? 0) >= 2);
+    if (shell.legend?.kind === "categories") assert.ok((shell.legend.items?.length ?? 0) >= 2);
+  }
+});
+
+test("Io publishes every declared toggle through the shared controls and selection owner", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const nodes = f.stage.querySelectorAll("*");
+    for (const name of ["shadows","stars"]) {
+      const input = required(f.inputs.get(name));
+      input.checked = !input.checked;
+      const listener = required(input.listeners.get("change"));
+      if (typeof listener === "function") listener(new Event("change")); else listener.handleEvent(new Event("change"));
+      await f.settle();
+      assert.equal(required(f.selection.state().committed)[name], input.checked);
+      if (name === "stars") assert.equal(f.stage.classList.contains(`io-hide-stars`), !input.checked);
+      else assert.equal(f.presentation.observe().materials.lighting.rotationEnabled, input.checked);
     }
-    assert.ok(view.sun.distanceAu > (id === "io" ? 4.8 : 0.95));
-    assert.ok(system.bodies.length >= 13);
-    assert.ok(system.bodies.map(body=>String(body.id)).every(bodyId => bodyId !== id));
-  });
-}
+    assert.equal(f.inputs.get("atmosphere"), undefined, "an airless body declares no atmosphere toggle");
+    assert.equal(f.inputs.get("orbit"), undefined, "the retired lane's orbit toggle is gone");
+    assert.deepEqual(f.stage.querySelectorAll("*"), nodes);
+    assert.deepEqual(f.errors, []); f.lifetime.destroy(); assert.equal(f.listenerCount(), 0);
+  } finally { f.restore(); }
+});
+
+test("Io lens selection keeps the retained tree and switches only the surface textures", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const records = f.stage.querySelectorAll("*");
+    for (const id of [...LENS_IDS.slice(1), LENS_IDS[0]]) {
+      const request = f.selection.dispatch({ kind: "lens", id }); await f.settle(); assert.equal(await request, true);
+      assert.equal(required(f.selection.state().committed).lensId, id);
+      assert.deepEqual(f.stage.querySelectorAll("*"), records);
+      assert.equal(f.stage.dataset.lens, id);
+    }
+    assert.deepEqual(f.errors, []);
+  } finally { f.restore(); }
+});

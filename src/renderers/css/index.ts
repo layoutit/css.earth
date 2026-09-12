@@ -15,7 +15,8 @@ export type { PreparedPresentationDefinition, PreparedView, PreparedPresentation
 export type { PreparedAssets } from './rendering/prepared-residency.js';
 export { CANONICAL_PREPARED_IMAGE_DENSITY } from './rendering/prepared-object-assets.js';
 export { loadPreparedCssObject, PREPARED_CSS_OBJECT_FORMAT } from './loader.js';
-export type { PreparedCssTransport } from './loader.js';
+export type { PreparedCssTransport, SharedReference } from './loader.js';
+export { decodeSharedBank } from './loader.js';
 export { parsePreparedObjectRuntime } from './validation/index.js';
 export { createDeferredObjectMount } from './runtime/deferred-object-mount.js';
 export type { ObjectDatasets } from './runtime/deferred-object-mount.js';
@@ -28,17 +29,23 @@ export type { PreparedWorldCameraFrame, WorldCameraPose } from './navigation/wor
 export type { ObjectWorldNavigation, ObjectWorldNavigationListener } from './runtime/world-navigation-types.js';
 export { createWorldSelectionTarget } from './navigation/selection-target.js';
 export { preparedObjectCapabilities } from './paging/capabilities.js';
+export { mountSurfaceFeatureLabels } from './labels/surface-feature-labels.js';
+export { parsePreparedSurfaceFeatureCatalog } from './labels/surface-feature-catalog.js';
+export type { PreparedSurfaceFeaturePlan, PreparedSurfaceFeatureCatalog, PreparedSurfaceFeature, SurfaceFeatureLayerRuntime, SurfaceFeatureLayerStats, SurfaceFeatureNavigationRuntime } from './labels/surface-feature-types.js';
 export { savedWorldCamera } from './navigation/saved-world-camera.js';
 export { mountPreparedCssVolume } from './volume/prepared-volume-runtime.js';
 export { validatePreparedCssVolume } from './volume/validation.js';
 export { loadPreparedCssVolume } from './volume/loader.js';
-export { parsePreparedCssPointField } from './stars/validation.js';
+export { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from './stars/validation.js';
 export { loadPreparedCssPointField } from './stars/loader.js';
-export type { PreparedCssPointField, PreparedPointFieldNode, PreparedPointFieldResource, PreparedPointFieldStar, PointFieldRgb, PointFieldVector } from './stars/types.js';
+export type { PreparedCssPointField, PreparedCssPointFieldManifest, PreparedPointFieldNode, PreparedPointFieldResource, PreparedPointFieldStar, PointFieldRgb, PointFieldVector } from './stars/types.js';
 export { createWorldContextObjectRuntime } from './universe/world-context-runtime.js';
 export { mountWorldContextPointSource, worldContextPointAppearance, worldContextPointSourceFade, worldContextPointSourceGain } from './universe/world-context-point-source.js';
 export type { PointSourcePublication, WorldContextPointAppearance, WorldContextPointSourceGain } from './universe/world-context-point-source.js';
 export { parsePreparedWorldContext } from './universe/prepared-world-context.js';
+// Named so declaration builds of site modules that return world-context handles can reference them.
+export type { WorldBodyPresentation } from './universe/world-context-planner.js';
+export type { QueuedRequest } from './navigation/world-frame-queue.js';
 export type { PreparedContextFocus, PreparedContextPointSource, PreparedWorldContext } from './universe/prepared-world-context.js';
 export type { PreparedCssVolume, PreparedVolumeCameraTransform, PreparedVolumeLeaf, PreparedVolumeLeafStyle, PreparedVolumeMountOptions, PreparedVolumeRuntime, PreparedVolumeStack, VolumeCameraPublication, VolumeAxis } from './volume/types.js';
 export { prepareObjectResources } from './runtime/prepared-resource-lease.js';
