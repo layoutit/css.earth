@@ -2,13 +2,12 @@ import type { PlannedWorldContext } from './world-context-planner.js';
 import type { OrbitSegment } from '../solar-system/heliocentric-view.js';
 
 type Body = PlannedWorldContext['projectedBodies'][number];
-type BodyValues = Omit<Body, 'index' | 'segments' | 'transforms'>;
+type BodyValues = Omit<Body, 'index' | 'segments'>;
 export const ContextChange = { marker: 1, indicator: 2, label: 4, orbit: 8, all: 15 } as const;
 export interface OrbitPatch {
   count: number;
   indices: Uint32Array;
   segments: Float64Array;
-  transforms: string[];
 }
 interface BodyPatch { index: number; values: Partial<BodyValues>; orbit?: OrbitPatch; }
 export interface WorldContextFrame extends Omit<PlannedWorldContext, 'projectedBodies'> {
@@ -26,21 +25,47 @@ function same(a: unknown, b: unknown): boolean {
   return keys.length === Object.keys(b).length && keys.every(key => same(
     (a as Record<string, unknown>)[key], (b as Record<string, unknown>)[key]));
 }
+/** Every transported body field has one comparison here; the type keeps the list
+ * complete, so the encoder never walks keys or allocates a set per body per frame. */
+const sameValue = (a: unknown, b: unknown) => a === b;
+const sameNumbers = (a: readonly number[] | undefined, b: readonly number[] | undefined) =>
+  a === b || (a !== undefined && b !== undefined && a.length === b.length && a.every((value, index) => value === b[index]));
+const sameBounds = (a: Body['orbitBounds'], b: Body['orbitBounds']) =>
+  a === b || (a !== null && b !== null && a.left === b.left && a.top === b.top && a.right === b.right && a.bottom === b.bottom);
+const sameAppearance = (a: Body['orbitAppearance'], b: Body['orbitAppearance']) => a === b || (a.width === b.width && a.opacity === b.opacity);
+const COMPARE: { readonly [K in keyof BodyValues]-?: (a: Body[K], b: Body[K]) => boolean } = {
+  x: sameValue, y: sameValue, diameter: sameValue, markerOpacity: sameValue, visible: sameValue, annotationVisible: sameValue,
+  hovered: sameValue, lineWidth: sameValue, orbitVisibility: sameValue, labelShown: sameValue, labelPlacement: sameValue,
+  indicatorShown: sameValue, indicatorCutout: sameValue, labelPosition: sameNumbers, orbitBounds: sameBounds, orbitAppearance: sameAppearance,
+};
+const VALUE_KEYS = Object.keys(COMPARE) as (keyof BodyValues)[];
+function changedValues(old: Body | undefined, body: Body): Partial<BodyValues> | null {
+  let values: Partial<BodyValues> | null = null;
+  for (const key of VALUE_KEYS) {
+    if (old && (COMPARE[key] as (a: unknown, b: unknown) => boolean)(old[key], body[key])) continue;
+    if (!old && body[key] === undefined) continue;
+    const value = body[key];
+    (values ??= {} as Partial<BodyValues>)[key] = (value && typeof value === 'object' ? structuredClone(value) : value) as never;
+  }
+  return values;
+}
 const markerShown = (b: Body) => (b.visible || (b.annotationVisible && (b.indicatorShown || b.labelShown))) && b.markerOpacity > 0;
-function changedPaint(old: Body | undefined, next: Body): number {
+/** The paint mask of a patch, read before it merges: a field in `values` is one the
+ * encoder found changed, so presence alone decides, and the retained body object is
+ * updated in place instead of being rebuilt every frame. */
+function changedPaint(old: Body | undefined, values: Partial<BodyValues>, orbitPatched: boolean): number {
   if (!old) return ContextChange.all;
+  const has = (key: keyof BodyValues) => key in values;
+  const next = <K extends keyof BodyValues>(key: K): Body[K] => (has(key) ? values[key] : old[key]) as Body[K];
+  const moved = has('x') || has('y');
   let mask = 0;
-  if (old.visible !== next.visible || old.markerOpacity !== next.markerOpacity ||
-      ((markerShown(old) || markerShown(next)) && (old.x !== next.x || old.y !== next.y || old.diameter !== next.diameter))) mask |= ContextChange.marker;
+  const shownBefore = markerShown(old), shownAfter = (next('visible') || (next('annotationVisible') && (next('indicatorShown') || next('labelShown')))) && next('markerOpacity') > 0;
+  if (has('visible') || has('markerOpacity') || ((shownBefore || shownAfter) && (moved || has('diameter')))) mask |= ContextChange.marker;
   // The pseudo consumes resolved visibility; its continuous zoom alpha belongs
   // to the billboard. Eligibility alpha is planner state, not another paint.
-  if (old.indicatorShown !== next.indicatorShown ||
-      ((old.indicatorShown || next.indicatorShown) && (old.x !== next.x || old.y !== next.y))) mask |= ContextChange.indicator;
-  if (old.labelShown !== next.labelShown || old.hovered !== next.hovered ||
-      old.annotationVisible !== next.annotationVisible || old.markerOpacity !== next.markerOpacity ||
-      !same(old.labelPosition, next.labelPosition)) mask |= ContextChange.label;
-  if (old.orbitVisibility !== next.orbitVisibility || old.lineWidth !== next.lineWidth ||
-      old.segments !== next.segments || old.transforms !== next.transforms) mask |= ContextChange.orbit;
+  if (has('indicatorShown') || ((old.indicatorShown || next('indicatorShown')) && moved)) mask |= ContextChange.indicator;
+  if (has('labelShown') || has('hovered') || has('annotationVisible') || has('markerOpacity') || has('labelPosition')) mask |= ContextChange.label;
+  if (has('orbitVisibility') || has('lineWidth') || orbitPatched) mask |= ContextChange.orbit;
   return mask;
 }
 
@@ -48,36 +73,39 @@ function changedPaint(old: Body | undefined, next: Body): number {
  * Deltas name the last acknowledged DOM publication. Discarded work forces a full
  * repair packet; it cannot silently become the next frame's baseline. */
 export function createWorldContextFrameEncoder() {
-  let previousId = 0, previous = new Map<number, Body>();
-  return (id: number, committedId: number, frame: PlannedWorldContext): WorldContextFrame => {
-    const baseId = committedId === previousId ? previousId : 0;
+  // `acknowledgedId` names the frame whose DOM the client actually committed.
+  // The state of an encoded frame stays aside until it is acknowledged, so a
+  // frame the client discards leaves the delta chain intact.
+  let committedId = 0, committed = new Map<number, Body>();
+  let pendingId = 0, pending: Map<number, Body> | null = null;
+  return (id: number, acknowledgedId: number, frame: PlannedWorldContext): WorldContextFrame => {
+    if (pending && acknowledgedId === pendingId) { committed = pending; committedId = pendingId; }
+    pending = null;
+    const baseId = acknowledgedId === committedId ? committedId : 0;
+    const previous = committed;
     const next = new Map<number, Body>(), updates: BodyPatch[] = [];
     for (const body of frame.projectedBodies) {
       const old = baseId ? previous.get(body.index) : undefined;
-      const values: Partial<BodyValues> = {};
-      for (const key of [...new Set([...Object.keys(old ?? {}), ...Object.keys(body)])] as (keyof Body)[]) {
-        if (key === 'index' || key === 'segments' || key === 'transforms') continue;
-        if (!old || !same(old[key], body[key])) {
-          const value = body[key];
-          (values as Record<string, unknown>)[key] = value && typeof value === 'object' ? structuredClone(value) : value;
+      const values = changedValues(old, body);
+      let orbit: OrbitPatch | undefined;
+      if (!old || old.segments.length !== body.segments.length || body.segments.some((segment, i) => !sameNumbers(old.segments[i], segment))) {
+        const indices: number[] = [], segments: number[] = [];
+        for (let i = 0; i < body.segments.length; i++) {
+          if (old && sameNumbers(old.segments[i], body.segments[i])) continue;
+          indices.push(i); segments.push(...body.segments[i]);
         }
+        orbit = { count: body.segments.length, indices: Uint32Array.from(indices), segments: Float64Array.from(segments) };
       }
-      const indices: number[] = [], segments: number[] = [], transforms: string[] = [];
-      for (let i = 0; i < body.segments.length; i++) {
-        if (old && old.transforms[i] === body.transforms[i] && same(old.segments[i], body.segments[i])) continue;
-        indices.push(i); segments.push(...body.segments[i]);
-        transforms.push(body.transforms[i]);
+      if (values || orbit) updates.push({ index: body.index, values: values ?? {}, ...(orbit ? { orbit } : {}) });
+      // An unchanged body keeps its baseline object; only changes copy.
+      let retained = old!;
+      if (!old || values || orbit) {
+        retained = { ...old, ...values, index: body.index } as Body;
+        retained.segments = orbit ? body.segments.map(segment => [...segment] as OrbitSegment) : old!.segments;
       }
-      const orbit = !old || indices.length || old.segments.length !== body.segments.length ? {
-        count: body.segments.length, indices: Uint32Array.from(indices), segments: Float64Array.from(segments), transforms,
-      } : undefined;
-      if (Object.keys(values).length || orbit) updates.push({ index: body.index, values, ...(orbit ? { orbit } : {}) });
-      const retained = { ...old, ...values, index: body.index } as Body;
-      retained.segments = orbit ? body.segments.map(segment => [...segment] as OrbitSegment) : old!.segments;
-      retained.transforms = orbit ? [...body.transforms] : old!.transforms;
       next.set(body.index, retained);
     }
-    previous = next; previousId = id;
+    pending = next; pendingId = id;
     const { projectedBodies, ...header } = frame;
     return { ...header, id, baseId, members: Uint32Array.from(projectedBodies.map(body => body.index)), updates };
   };
@@ -102,10 +130,12 @@ export function createWorldContextFrameReceiver() {
       const changes = new Map<number, number>(), orbits = new Map<number, OrbitPatch>();
       for (const update of packet.updates) {
         const old = bodies.get(update.index);
-        const body = { ...old, ...update.values, index: update.index } as Body;
+        const mask = changedPaint(old, update.values, update.orbit !== undefined);
+        const body = old ?? ({ index: update.index } as Body);
+        Object.assign(body, update.values);
         if (update.orbit) {
           const patch = update.orbit;
-          if (patch.segments.length !== patch.indices.length * 5 || patch.transforms.length !== patch.indices.length) throw new Error('Orbit patch columns have different lengths.');
+          if (patch.segments.length !== patch.indices.length * 5) throw new Error('Orbit patch columns have different lengths.');
           if (!Number.isSafeInteger(patch.count) || patch.count < 0) throw new Error('Orbit patch has an invalid count.');
           const oldCount = old?.segments.length ?? 0;
           let nextNewSlot = oldCount;
@@ -121,7 +151,6 @@ export function createWorldContextFrameReceiver() {
           // every time the shared camera moves. Returned views are borrowed
           // until the next accept, just like the worker's projection bank.
           const segments = old ? old.segments as OrbitSegment[] : [];
-          const transforms = old ? old.transforms : [];
           for (let i = 0; i < patch.indices.length; i++) {
             const slot = patch.indices[i];
             if (slot >= patch.count) throw new Error('Orbit patch exceeds its prepared count.');
@@ -129,13 +158,12 @@ export function createWorldContextFrameReceiver() {
             const target = segment ?? [0, 0, 0, 0, 0];
             for (let column = 0; column < 5; column++) target[column] = patch.segments[i * 5 + column];
             if (!segment) segments[slot] = target as unknown as OrbitSegment;
-            transforms[slot] = patch.transforms[i];
           }
-          segments.length = patch.count; transforms.length = patch.count;
-          body.segments = segments; body.transforms = transforms; orbits.set(update.index, patch);
+          segments.length = patch.count;
+          body.segments = segments; orbits.set(update.index, patch);
         }
-        if (!body.segments || !body.transforms) throw new Error('World context frame omitted an initial orbit bank.');
-        changes.set(update.index, changedPaint(old, body) | (update.orbit ? ContextChange.orbit : 0)); bodies.set(update.index, body);
+        if (!body.segments) throw new Error('World context frame omitted an initial orbit bank.');
+        changes.set(update.index, mask); bodies.set(update.index, body);
       }
       if (members.length !== packet.members.length || members.some((index, i) => index !== packet.members[i])) {
         members = packet.members;

@@ -17,6 +17,7 @@ export function createWorldFrameQueue(prepare: (request: WorldFrameRequest) => P
   let completed: { request: QueuedRequest; frame: PreparedWorldFrame } | null = null;
   let presentationFrame: number | null = null;
   let requested = 0, committed = 0, superseded = 0, discarded = 0;
+  let refreshPending = false;
   const presentCompleted = () => {
     presentationFrame = null;
     const ready = completed; completed = null;
@@ -28,8 +29,14 @@ export function createWorldFrameQueue(prepare: (request: WorldFrameRequest) => P
         discarded++; if (!pending && running !== latest) pending = latest ?? request;
         if (pending !== request) request.cancelled?.();
       }
-      else { frame.commit(request.commit); committed++; request.presented?.(); }
+      else {
+        frame.commit(request.commit); committed++; request.presented?.();
+        // An annotation change that arrived while this frame was planned is
+        // published by one more delta frame, not by discarding this one.
+        if (refreshPending && !pending && latest?.current()) { requested++; pending = latest; }
+      }
     } catch (error) { if (request.current()) request.fail(error); }
+    refreshPending = false;
     void pump();
   };
   const pump = async () => {
@@ -86,7 +93,8 @@ export function createWorldFrameQueue(prepare: (request: WorldFrameRequest) => P
       if (destroyed || !latest?.current()) return false;
       // A changed presentation revision invalidates an in-flight plan. Let it
       // replan the newest input; never replace pending motion with an old eye.
-      if (pending || running === latest || completed?.request === latest) return true;
+      if (pending) return true;
+      if (running === latest || completed?.request === latest) { refreshPending = true; return true; }
       requested++;
       pending = latest; void pump();
       return true;

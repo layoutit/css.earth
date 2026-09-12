@@ -19,7 +19,9 @@ test('loads the checked-in density artifact with its complete fixed asset bank',
   const payload = await loadPreparedCssVolume(descriptor, { read });
   expect(read).toHaveBeenCalledExactlyOnceWith(descriptor.prepared.url);
   const count = Object.values(recipe.bake.sliceCounts).reduce<number>((sum, count) => sum + Number(count), 0);
-  const slices = payload.stacks.flatMap(stack => stack.leaves), sky = payload.sky?.faces ?? [];
+  // A sky with baked stars ships both cubes: the plain faces and the near ones.
+  const slices = payload.stacks.flatMap(stack => stack.leaves);
+  const sky = [...payload.sky?.faces ?? [], ...payload.sky?.nearFaces ?? []];
   expect(Boolean(payload.sky)).toBe(Boolean(recipe.sky));
   expect(baked.quads).toHaveLength(count);
   const nonempty = baked.quads.filter(quad => quad.alphaCoverage !== 0);
