@@ -738,8 +738,8 @@ test('zooming out after first-click system framing restores the overview at the 
   try {
     await h.router.settled;
     // The frame gate and its follow-up run through this test's manual timers.
-    const drain = async (pending: Promise<unknown>) => {
-      let finished = false; pending.then(() => { finished = true; }, () => { finished = true; });
+    const drain = async (pending: Promise<unknown> | null) => {
+      let finished = pending === null; pending?.then(() => { finished = true; }, () => { finished = true; });
       while (!finished) { await flush(); for (const [id, callback] of timers) { timers.delete(id); callback(); } }
       return pending;
     };
