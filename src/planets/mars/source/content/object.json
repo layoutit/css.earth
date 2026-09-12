@@ -21,8 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "schema": "cssearth-prepared-panel@1",
-    "planetId": "mars",
     "introduction": "Mars is a cold, dusty desert world with a thin atmosphere, polar ice caps, extinct volcanoes, deep canyons, seasons, and weather.",
     "facts": [
       {
@@ -133,21 +131,7 @@
           "locator": "/references/1; gravity"
         }
       }
-    ],
-    "sources": {
-      "editorial": {
-        "sourceId": 107740,
-        "sourceUrl": "https://science.nasa.gov/mars/facts/",
-        "modified": "2026-07-10T12:04:15",
-        "retrievedAt": "2026-08-30",
-        "credit": "NASA Science"
-      },
-      "renderedMoons": {
-        "count": 2,
-        "physicalParameters": "JPL Solar System Dynamics physical parameters",
-        "meanElements": "JPL MAR099 mean elements at 2000-01-01.5 TDB"
-      }
-    }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",
@@ -158,24 +142,28 @@
         "label": "Visible color",
         "description": "USGS Viking MDIM 2.1 global mosaic, colorized with NASA Ames processing. Source sampling is about 1 km; resolution and photographed lighting vary. This assembled historical map does not depict the scene date.",
         "title": "MDIM 2.1 colorized global mosaic",
-        "thumbnail": "/scenes/mars/mars-lens-normal.webp",
-        "surface": "/scenes/mars/mars-surface.webp",
-        "poles": "/scenes/mars/mars-poles.webp",
+        "thumbnail": "mars-lens-normal.webp",
+        "surface": "mars-surface-normal.webp",
+        "poles": "mars-poles-normal.webp",
         "source": {
           "id": "normal",
           "path": "../manifest.json"
         },
         "detail": "Global mosaic",
-        "summary": "Surface detail comes from Viking images with NASA Ames color. Lighting and resolution vary; these are archival observations."
+        "summary": "Surface detail comes from Viking images with NASA Ames color. Lighting and resolution vary; these are archival observations.",
+        "material": "mars-material.webp",
+        "shortLabel": "RGB",
+        "falseColor": false,
+        "qualification": "USGS Viking MDIM 2.1 colorized global mosaic"
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Mars Global Surveyor MOLA topography shown with the source pseudo-color shaded-relief palette. Colors indicate relative elevation, with cartographic shading; this is a prepared global display mosaic, not a current photograph or numeric height readout.",
         "title": "MOLA global color shaded relief",
-        "thumbnail": "/scenes/mars/mars-lens-elevation-thumbnail.webp",
-        "surface": "/scenes/mars/mars-lens-elevation.webp",
-        "poles": "/scenes/mars/mars-lens-elevation-poles.webp",
+        "thumbnail": "mars-lens-elevation.webp",
+        "surface": "mars-surface-elevation.webp",
+        "poles": "mars-poles-elevation.webp",
         "legend": {
           "kind": "scale",
           "title": "Relative elevation",
@@ -233,22 +221,30 @@
           "path": "../manifest.json"
         },
         "detail": "Shaded relief",
-        "summary": "Colors describe terrain height and shading reveals slopes. This published relief image does not provide a numeric readout."
+        "summary": "Colors describe terrain height and shading reveals slopes. This published relief image does not provide a numeric readout.",
+        "material": "mars-observation-material.webp",
+        "shortLabel": "MOLA",
+        "falseColor": true,
+        "qualification": "USGS MOLA elevation shown with the source pseudo-color shaded-relief palette"
       },
       {
         "id": "thermal",
         "label": "Thermal infrared",
-        "description": "USGS/ASU THEMIS daytime infrared brightness mosaic from Mars Odyssey. Gray grid marks unavailable source coverage; dark interior samples remain. No Viking imagery fills thermal gaps. Multiple observations are combined; this is not a temperature map or the scene date.",
+        "description": "USGS/ASU THEMIS daytime infrared brightness mosaic from Mars Odyssey. Black areas at the north and south map edges are exact-zero source fill without observations; dark interior samples are real. No Viking imagery fills thermal gaps. Multiple observations are combined; this is not a temperature map or the scene date.",
         "title": "THEMIS daytime infrared mosaic",
-        "thumbnail": "/scenes/mars/mars-lens-thermal-thumbnail.webp",
-        "surface": "/scenes/mars/mars-lens-thermal.webp",
-        "poles": "/scenes/mars/mars-lens-thermal-poles.webp",
+        "thumbnail": "mars-lens-thermal.webp",
+        "surface": "mars-surface-thermal.webp",
+        "poles": "mars-poles-thermal.webp",
         "source": {
           "id": "thermal",
           "path": "../manifest.json"
         },
         "detail": "Infrared",
-        "summary": "Brightness records daytime infrared imagery, not a temperature reading. The gray grid marks gaps left unfilled."
+        "summary": "Brightness records daytime infrared intensity from combined observations. Black bands at the map edges are missing source coverage, not measurements.",
+        "material": "mars-observation-material.webp",
+        "shortLabel": "IR",
+        "falseColor": false,
+        "qualification": "USGS/ASU THEMIS daytime infrared brightness mosaic; exact-zero source fill at the map edges stays black. No visible-light substitute; not a calibrated temperature retrieval."
       }
     ]
   },
@@ -266,6 +262,18 @@
         "name": "shadows",
         "label": "Shadows",
         "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "atmosphere",
+        "label": "Atmosphere",
+        "checked": true
+      },
+      {
+        "kind": "toggle",
+        "name": "stars",
+        "label": "Stars",
+        "checked": true
       }
     ]
   },
@@ -277,7 +285,12 @@
       "width": 306,
       "height": 141,
       "alt": "Modeled disk reflectance of Mars from 350 to 998 nanometers.",
-      "titleKey": "reflectance"
+      "titleKey": "reflectance",
+      "source": {
+        "id": "mars-psg",
+        "path": "../atmosphere/psg-mars-20260829.cfg",
+        "url": "https://psg.gsfc.nasa.gov/"
+      }
     },
     {
       "id": "photometric-phase",
@@ -286,7 +299,11 @@
       "width": 306,
       "height": 141,
       "alt": "Mars V-band brightness change across phase angles from zero to 180 degrees.",
-      "titleKey": "photometricPhase"
+      "titleKey": "photometricPhase",
+      "source": {
+        "id": "scientific-charts",
+        "path": "../../../../site/source/scientific-charts/planetary-context.json"
+      }
     },
     {
       "id": "temperature-pressure",
@@ -295,7 +312,12 @@
       "width": 306,
       "height": 141,
       "alt": "Mars atmospheric temperature and pressure through 244 kilometers altitude.",
-      "titleKey": "temperaturePressure"
+      "titleKey": "temperaturePressure",
+      "source": {
+        "id": "mars-psg-profile",
+        "path": "../atmosphere/psg-mars-20260829.cfg",
+        "url": "https://psg.gsfc.nasa.gov/"
+      }
     }
   ],
   "resources": [
@@ -308,8 +330,8 @@
     {
       "label": "USGS",
       "role": "imagery",
-      "description": "Surface & thermal lenses",
-      "href": "https://astrogeology.usgs.gov/"
+      "description": "Surface, elevation & thermal lenses",
+      "href": "https://astrogeology.usgs.gov/search?target=mars"
     },
     {
       "label": "JPL",
@@ -320,13 +342,13 @@
     {
       "label": "OpenSpace",
       "role": "scene",
-      "description": "Atmosphere & moons",
+      "description": "Atmosphere & scene",
       "href": "https://github.com/OpenSpace/OpenSpace"
     },
     {
       "label": "ESA/Hubble",
-      "role": "lighting",
-      "description": "Limb & lighting",
+      "role": "navigation",
+      "description": "Navigation marker portrait",
       "href": "https://esahubble.org/images/heic1609a/"
     },
     {
@@ -334,6 +356,12 @@
       "role": "spectra",
       "description": "Spectrum & profile",
       "href": "https://psg.gsfc.nasa.gov/"
+    },
+    {
+      "label": "ESO/S. Brunier",
+      "role": "sky",
+      "description": "Photographic full sky",
+      "href": "https://www.eso.org/public/images/eso0932a/"
     }
   ],
   "provenance": {
@@ -341,15 +369,17 @@
       "path": "../presentation/title-mark.json"
     },
     "editorial": {
-      "sourceId": 107740,
-      "sourceUrl": "https://science.nasa.gov/mars/facts/",
-      "modified": "2026-07-10T12:04:15",
-      "retrievedAt": "2026-08-30",
+      "path": "../editorial/factsheet-review.json",
+      "url": "https://science.nasa.gov/mars/facts/",
       "credit": "NASA Science"
     },
     "physical": {
       "path": "../manifest.json",
       "credit": "JPL Solar System Dynamics"
+    },
+    "presentation": {
+      "path": "../presentation/solar-system.json",
+      "credit": "Published physical facts and repository-authored presentation"
     }
   }
 }
