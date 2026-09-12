@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3184b9d0e0fd9650e0cd8fa352e1172881e13447053e0b383874283d4ca6ba54"
+    "sha256": "3644100e9d46656918ddb036117e86c446c5fdbde21f717da465fac26dbda020"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -803,6 +803,16 @@
     {
       "kind": "source-input",
       "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "The preserved credit for this input reads: Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+            "missionId": "cassini"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
@@ -856,6 +866,16 @@
     {
       "kind": "source-input",
       "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "The preserved credit for this input reads: Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+            "missionId": "cassini"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
@@ -909,6 +929,16 @@
     {
       "kind": "source-input",
       "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "The preserved credit for this input reads: Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+            "missionId": "cassini"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
@@ -962,6 +992,16 @@
     {
       "kind": "source-input",
       "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "The preserved credit for this input reads: Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+            "missionId": "cassini"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
@@ -1015,6 +1055,16 @@
     {
       "kind": "source-input",
       "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "The preserved credit for this input reads: Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+            "missionId": "cassini"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
@@ -1068,6 +1118,16 @@
     {
       "kind": "source-input",
       "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "The preserved credit for this input reads: Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+            "missionId": "cassini"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"

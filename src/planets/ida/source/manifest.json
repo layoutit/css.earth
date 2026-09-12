@@ -180,6 +180,16 @@
       "path": "observations/0202561278rcal_gre.fit",
       "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561278rcal_gre.fit",
       "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "The preserved credit for this input reads: NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)"
+          }
+        ]
+      },
       "license": "Public mission scientific data; retain attribution and source notices.",
       "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
       "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",

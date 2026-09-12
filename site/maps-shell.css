@@ -621,3 +621,8 @@
 .planet-resource-supporting { margin-top: 6px; font-size: 11px; }
 .planet-resource-supporting summary { cursor: pointer; color: var(--shell-text-muted); }
 .planet-resource-supporting .planet-resource-label { display: block; margin-top: 4px; }
+
+/* Authored per-lens figures stay available without crowding the selected lens. */
+.planet-lens-facts { margin-top: 10px; font-size: 12px; }
+.planet-lens-facts summary { cursor: pointer; color: var(--shell-text-muted); }
+.planet-lens-facts .planet-facts { margin-top: 6px; }
