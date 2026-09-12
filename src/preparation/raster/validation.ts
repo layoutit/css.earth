@@ -78,6 +78,13 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             throw new TypeError(`surface.output must end in ${extension} for its encoding.`);
         if (surface.exposure !== undefined)
             numbers(surface.exposure, 'surface.exposure', 3);
+        if (surface.science !== undefined) {
+            const science = record(surface.science, 'surface.science');
+            if (recipe.resample === 'source-packed') throw new TypeError('surface.science needs density-before-pack resampling.');
+            if (surface.coverage !== undefined || surface.sharpen !== undefined || surface.exposure !== undefined) throw new TypeError('surface.science replaces coverage, sharpen and exposure.');
+            // Absent kind keeps the static-observation contract; other kinds are validated by their decoder owners in tools.
+            if (science.kind !== undefined) text(science.kind, 'surface.science.kind');
+        }
         if (surface.sharpen !== undefined)
             numbers(surface.sharpen, 'surface.sharpen', 2);
         if (surface.coverage !== undefined) {
@@ -99,6 +106,13 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
         for (const key of ['bankSchema', 'billboardSchema'])
             text(lighting[key], `lighting.${key}`);
         record(lighting.metadata, 'lighting.metadata');
+    }
+    if (recipe.emission !== undefined) {
+        const emission = record(recipe.emission, 'emission');
+        for (const key of ['offLimbSize', 'limbSize', 'bodyDiameter']) finite(emission[key], `emission.${key}`, true);
+        for (const key of ['offLimbOutput', 'limbOutput']) path(emission[key], `emission.${key}`);
+        record(emission.metadata, 'emission.metadata');
+        if (recipe.lighting !== undefined || recipe.atmosphere !== undefined) throw new TypeError('An emissive surface carries no lighting or atmosphere bank.');
     }
     if (recipe.atmosphere !== undefined) {
         const atmosphere = record(recipe.atmosphere, 'atmosphere');

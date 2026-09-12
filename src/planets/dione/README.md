@@ -8,6 +8,7 @@
 | Enhanced color | [PIA18434](https://www.jpl.nasa.gov/images/pia18434-color-maps-of-dione-2014/), 2014. Ultraviolet/infrared colors extend beyond human vision; producer calibration, registration and photometric correction are retained. |
 | Shape and Elevation | [Weirich et al. 2025 SPC V1.0](https://doi.org/10.26033/bxx6-g543); Elevation is radius minus 561.4 km, colored over −7.5 to +7.5 km. |
 | Relative albedo | The same SPC release’s dimensionless brightness field, less validated than topography; not geometric albedo or calibrated reflectance. Its 0.5–1.5 display clips above 1.5. |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/DIONE/target) Dione centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
 
@@ -16,6 +17,10 @@ Independent landmarks: [Palinurus](https://planetarynames.wr.usgs.gov/Feature/45
 Qualification status: source intake and recipe proposal. Final mesh selection (where applicable), restored-source and prepared browser/visual gates remain pending. No readiness is claimed.
 
 ## Known problems
+
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Dione (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
+
+Feature notes: 2 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
 Different control networks, photographed shadows, seams and coarse inserts remain. No inpainting, synthetic color, polar repetition or patch correction is applied. The shared curvature overlay and optional directional Shadows operate on both lenses.
 

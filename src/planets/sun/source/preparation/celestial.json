@@ -1,5 +1,13 @@
 {
-  "schema": "cssearth-static-celestial@1",
-  "id": "sun",
-  "includeSun": false
+  "schema": "cssearth-celestial-preparation@1",
+  "catalogueSchema": "csssun-prepared-star-source@1",
+  "sources": [
+    "presentation/solar-system.json",
+    "stars/eso0932a.tif",
+    "stars/hyg-v41-field.json"
+  ],
+  "directionalSun": false,
+  "sky": {
+    "registration": "world-context-baseline"
+  }
 }

@@ -104,6 +104,14 @@
       ],
       "path": "cassini-ice/raw/v1568157352_4.qub",
       "url": "https://vims.univ-nantes.fr/cube/1568157352_4.qub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/IAPETUS_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/IAPETUS_nomenclature_center_pts.zip"
     }
   ]
 }

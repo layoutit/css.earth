@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-surface-features@1",
+  "directory": "features",
+  "archive": "VENUS_nomenclature_center_pts.zip",
+  "members": {
+    "attributes": "VENUS_nomenclature_center_pts.dbf",
+    "projection": "VENUS_nomenclature_center_pts.prj",
+    "metadata": "metadata_nomenclature_points_VENUS.xml"
+  },
+  "surfaceMap": "presentation/surface-map.json",
+  "mapLeftEdgeLongitudeDeg": 180,
+  "output": "venus-features.json",
+  "publicBase": "/scenes/venus/",
+  "target": {
+    "className": "venus-body"
+  },
+  "lensIds": [
+    "clouds",
+    "radar",
+    "elevation"
+  ],
+  "kinds": {
+    "point": [
+      "AA",
+      "FA"
+    ],
+    "linear": [
+      "RU",
+      "DO",
+      "VA",
+      "CA",
+      "FO"
+    ],
+    "region": [
+      "PL",
+      "PM",
+      "MO"
+    ]
+  },
+  "excludedTypeCodes": {
+    "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+  },
+  "labelPolicy": {
+    "minimumZoomShare": 0,
+    "minimumDiameterPixels": 40,
+    "alwaysVisibleCount": 0,
+    "maximumVisible": 40,
+    "limbCosine": 0.12
+  },
+  "outline": {
+    "pieces": 256
+  },
+  "notes": "notes.json",
+  "sites": {
+    "document": "sites.json",
+    "inputs": []
+  }
+}

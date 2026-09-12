@@ -279,8 +279,17 @@ export function createSceneRouter({
           return mount.destinations!.select(place);
         },
       });
+      shell.setFeatures?.(mount.features ?? null);
       shell.setCamera?.(mount);
-      session.lifetime.onDispose(() => shell.setCamera?.(null));
+      session.lifetime.onDispose(() => { shell.setCamera?.(null); shell.setFeatures?.(null); });
+      // A feature named in the URL is a one-time selection: fly there, then let the view URL take over.
+      const featureUrl = new URL(session.url ?? windowTarget.location?.href ?? 'https://example.test');
+      const featureId = featureUrl.searchParams.get('feature');
+      if (featureId !== null) {
+        featureUrl.searchParams.delete('feature');
+        session.url = featureUrl.href;
+        if (mount.features && /^[0-9]+$/u.test(featureId)) { shell.setMotionEnabled?.(false); session.lifetime.wait(mount.features.select(featureId)).catch(error => { if (active === session) report(error); }); }
+      }
       sceneState = "ready";
       if (mount.datasets) session.lifetime.onDispose(mount.datasets.subscribe(() => {
         if (active !== session || pending || sceneState !== 'ready') return;
@@ -375,6 +384,7 @@ export function createSceneRouter({
       url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('overview'); url.searchParams.delete('focus'); url.searchParams.delete('focusLens');
       url = withDataset(url, null);
       if (options.overview) url.searchParams.set('overview', options.overviewScope ?? 'solar-system');
+      if (options.feature) url.searchParams.set('feature', options.feature);
     }
     const request: Request = { id, cancelledFlight, controller: new AbortController(), lifetime: createSceneLifetime(),
       url: url.href, options: { ...options, history: mode }, timing: createNavigationTiming(windowTarget, objectId, id) };

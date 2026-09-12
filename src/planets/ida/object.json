@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "f3a47f0e78ceb89995aa08c17da787b4c4764b30f4bafcc8a8f368266ca2c023"
+    "sha256": "4973f3cdb2e68bc9fd28d62e2ec83108bed88369756444f4dcd214b2567bb9ec"
   },
   "id": "ida",
   "properties": {
@@ -17,6 +17,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -86,9 +87,18 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "ffcf423e1fa29020819262dd40794339c4de062ae4ee15004ae75f095885fabc"
+          "sha256": "a15f6558ccf59374ea03b736cd6319f4fbfad7429e9624425aa5ded82fca61f3"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "5c97f6239a9bb0f080ee6d2a514130e8a177c89de30bcc0e9f13626fea968e20"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -123,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7aba4a4ef435cbe5048a24c88cd1a7d1bb59b7d3dff6d91c1d4ef10baf1619f3"
+        "sha256": "7f8dcec14a10fa356ca6c958d7b5caeb1a497c2794e7fc8c6ed5d1991bd02dc5"
       }
     },
     "catalog": {

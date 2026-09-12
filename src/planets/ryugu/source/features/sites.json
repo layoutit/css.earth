@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-surface-sites@1",
+  "source": "Spacecraft landing, touchdown and impact sites compiled from NASA NSSDCA, PDS, LROC, mission releases and cited papers; every coordinate quotes its page",
+  "retrievedAt": "2026-09-12",
+  "sites": [
+    {
+      "id": "ryugu-sci-crater",
+      "name": "Omusubi-Kororin crater (Hayabusa2 SCI artificial impact)",
+      "kind": "impact",
+      "date": "2019-04-05",
+      "machineId": "hayabusa2",
+      "latitudeDeg": 7.9,
+      "longitudeDegEast": 301.3,
+      "coordinateNote": "Ryugu body-fixed frame per the PDS Ryugu coordinate-system description (prime meridian through the Catafo mound). The second touchdown (Uchide-no-kozuchi, 2019-07-11) was in proximity of this crater. Latitude as stated: as stated.",
+      "precisionNote": null,
+      "naming": {
+        "name": "Omusubi-Kororin",
+        "authority": "Hayabusa2 project nickname (not an IAU name)"
+      },
+      "source": {
+        "title": "Galiano, A., et al. (2022), NIRS3 spectral analysis of the artificial Omusubi-Kororin crater on Ryugu, MNRAS 514(4), 6173-6187",
+        "url": "https://academic.oup.com/mnras/article/514/4/6173/6618558",
+        "publisher": "Oxford University Press on behalf of the Royal Astronomical Society",
+        "rights": {
+          "statement": "Page states (c) 2022 The Author(s), Published by Oxford University Press on behalf of Royal Astronomical Society. Licence terms were not visible to us; treat as not confirmed open.",
+          "evidenceUrl": "https://academic.oup.com/mnras/article/514/4/6173/6618558"
+        }
+      },
+      "quote": "the artificial crater named as 'Omusubi-Kororin crater', in the northern area the equatorial bulge, at a latitude of 7.9 N and a longitude of 301.3 E."
+    }
+  ],
+  "traverses": []
+}

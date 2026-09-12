@@ -1,107 +1,63 @@
 {
-  "schema": "cssearth-static-surface-geometry@1",
-  "kind": "segmented-poles",
+  "schema": "cssearth-css-geometry-profile@1",
   "namespace": "sun",
-  "parameters": {
+  "surface": {
+    "radius": 248,
+    "polarRadius": 248,
     "latitudeSegments": 16,
     "longitudeSegments": 32,
-    "displayRadius": 248,
-    "tileSize": 50,
-    "surfaceOverlap": 0.008,
-    "projectiveRasterScale": 2,
-    "polarCellSize": 64,
-    "polarInnerLatitudeDegrees": 89,
-    "polarCenterOverlap": 1.05,
-    "color": "#f5a623",
-    "cameraPitch": 34.230769230769226,
-    "cameraYaw": -105,
-    "cameraZoom": 1.25
-  },
-  "surface": {
-    "one": "/scenes/sun/sun-surface-photosphere.webp",
-    "width": 1024,
-    "height": 512
-  },
-  "poles": {
-    "one": "/scenes/sun/sun-poles-photosphere.webp"
-  },
-  "metadata": {
-    "schema": "csssun-prepared-runtime-scene@2",
-    "runtimeGeometry": false,
-    "runtimeRasterization": false,
-    "camera": {
-      "minimumControlPitchDegrees": 0,
-      "maximumControlPitchDegrees": 89,
-      "defaultControlPitchDegrees": 34.230769230769226,
-      "defaultControlYawDegrees": -105,
-      "materialReferenceControlPitchDegrees": 34.230769230769226,
-      "materialReferenceControlYawDegrees": -105,
-      "initialScenePitchDegrees": 40,
-      "maximumScenePitchDegrees": 65,
-      "minimumZoom": 0.42,
-      "maximumZoom": 4,
-      "defaultZoom": 1.25,
-      "sceneScale": 0.025,
-      "logicalBodyDiameter": 496,
-      "cameraModel": "accumulated-matrix3d",
-      "horizontalOrbit": true,
-      "pitchBounded": false,
-      "yawBounded": false,
-      "responsiveFit": {
-        "model": "continuous-aspect-smoothstep",
-        "portraitBaseWidthShare": 0.34,
-        "narrowPortraitWidthShareGain": 0.08,
-        "landscapeWidthShareGain": 0.02,
-        "narrowPortraitAspectRatio": 0.46,
-        "portraitAspectRatio": 0.75,
-        "squareAspectRatio": 1,
-        "maximumHeightShare": 0.61,
-        "maximumMobilePreviewShare": 0.925,
-        "minimumZoom": 0.42,
-        "maximumZoom": 2
-      }
+    "surface": {
+      "url": "/scenes/sun/sun-surface-photosphere.webp",
+      "width": 1024,
+      "height": 768
     },
+    "surfaceLatitudeHeight": 512,
+    "packedBandGutter": 8,
+    "poles": {
+      "url": "/scenes/sun/sun-poles-photosphere.webp",
+      "width": 512,
+      "height": 256
+    },
+    "polarTileSize": 256,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "cell",
+    "color": "#f5a623"
+  },
+  "projection": {
+    "tileSize": 50,
+    "layerElevation": 50,
+    "seamBleed": 24,
+    "interiorSeamBleed": 8,
+    "overlap": 0.008,
+    "fitToSource": false,
+    "rasterScale": 2,
+    "rasterGutter": 8,
+    "rasterOverscan": 0,
+    "positionVariables": false,
+    "projectivePoles": false,
+    "lightColor": "#ffffff",
+    "ambientIntensity": 1
+  },
+  "bodyRotationDegrees": 0,
+  "output": {
+    "schema": "csssun-prepared-runtime-scene@3",
+    "materialSchema": "csssun-prepared-emission@1",
+    "layout": "body-container",
     "body": {
-      "radius": 248,
-      "latitudeSegments": 16,
-      "longitudeSegments": 32,
       "axialTiltDegrees": 7.25,
-      "sourceMapSize": [
-        1024,
-        512
-      ],
+      "rotationDirection": "prograde",
+      "rotationPeriodEarthDays": 25.38,
       "sourceProjection": "source-backed CR2311 continuum mosaic and Carrington full-surface maps normalized to equal-latitude equirectangular projective leaves",
       "continuumPreparation": "daily central-meridian HMI continuum observations blended by Carrington time with source-derived limb normalization",
-      "polarPreparation": "Saturn-standard retained 32-segment polar band plus one center cap per pole, continued from the measured high-latitude boundary; not a polar observation",
+      "polarPreparation": "one flat centre cap per pole above the 78.75-degree band boundary, continued from the measured high-latitude boundary; not a polar observation",
       "sourceRotation": 2311,
       "sourceTimeRange": "2026-05-12 through 2026-06-09"
     },
-    "offLimbContext": {
-      "defaultUrl": "/scenes/sun/sun-corona-photosphere.webp",
-      "defaultUrl2x": "/scenes/sun/sun-corona-photosphere@2x.webp",
-      "logicalSize": 768,
-      "source": "lens-specific pinned CR2311 Earth-facing SDO observation; transparent for continuum and magnetic lenses",
-      "composition": "source-disc-registered prepared off-limb pixels behind the retained Carrington sphere",
-      "rotation": "stationary observed context; never presented as rotating global material",
-      "runtimeAlphaProcessing": false
-    },
-    "limbMaterial": {
-      "defaultUrl": "/scenes/sun/sun-limb-photosphere.webp",
-      "defaultUrl2x": "/scenes/sun/sun-limb-photosphere@2x.webp",
-      "logicalSize": 496,
-      "composition": "body-registered lens-derived rim and continuum source-derived limb-darkening plate over visible retained leaves",
-      "surfaceReplacement": false,
-      "runtimeAlphaProcessing": false
-    },
     "animation": {
-      "rotationVisualSeconds": 72,
-      "model": "retained-global-carrington-surface-longitude-rotation",
-      "flatDiscRotation": false
-    },
-    "counts": {
-      "polygonCount": 514,
-      "textureLeafCount": 514,
-      "polarLeafCount": 66
+      "cloudsVisualSeconds": 72,
+      "surfaceVisualSeconds": 72,
+      "direction": "prograde"
     }
   }
 }

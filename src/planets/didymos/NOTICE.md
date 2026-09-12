@@ -9,3 +9,5 @@ Physical and orbital context: NASA/JPL Horizons. The local source shape's geomet
 ESO/S. Brunier Milky Way panorama: CC BY 4.0; complete notice in `source/stars/ESO-IMAGE-LICENSE.md`. HYG Stellar Database: David Nash/Astronexus, CC BY-SA 4.0; `source/stars/LICENSE.md`. Inter title/font: Inter Project Authors, SIL Open Font License 1.1; `source/presentation/LICENSE.INTER-OFL`.
 
 Context brightness reference: Sunshine et al., Lunar and Planetary Science Conference 2023, NASA NTRS 20230000704. The unchanged abstract is retained as scientific documentation; its global visible geometric albedo is distinct from the grid used by the Shape view.
+
+Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.

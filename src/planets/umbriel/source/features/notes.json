@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "5595",
+      "item": "Q3486466",
+      "title": "Skynd (crater)",
+      "url": "https://en.wikipedia.org/wiki/Skynd_(crater)",
+      "revision": "1322410474",
+      "extract": "Skynd is a crater on the surface of Uranus' moon Umbriel. It is estimated to be between 72 and 110 km in diameter. Its center is located at 1.8°S 331.7°E."
+    },
+    {
+      "id": "6460",
+      "item": "Q3065032",
+      "title": "Vuver (crater)",
+      "url": "https://en.wikipedia.org/wiki/Vuver_(crater)",
+      "revision": "1322519582",
+      "extract": "Vuver is a crater on the surface of Uranus' moon Umbriel. It is estimated to be 98 km in diameter. The longitude and latitude of its center are 311.6° and −4.7°, respectively."
+    },
+    {
+      "id": "6568",
+      "item": "Q25908689",
+      "title": "Wokolo (crater)",
+      "url": "https://en.wikipedia.org/wiki/Wokolo_(crater)",
+      "revision": "1336161985",
+      "extract": "Wokolo is the largest crater on Umbriel, an Uranian Moon"
+    },
+    {
+      "id": "6587",
+      "item": "Q2730338",
+      "title": "Wunda (crater)",
+      "url": "https://en.wikipedia.org/wiki/Wunda_(crater)",
+      "revision": "1322545990",
+      "extract": "Wunda is a large crater on the surface of Uranus' moon Umbriel. It is 131 km in diameter and is located near the equator of Umbriel. The crater is named after Wunda, a dark spirit of Australian aboriginal mythology."
+    }
+  ]
+}

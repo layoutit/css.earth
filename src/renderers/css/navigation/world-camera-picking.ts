@@ -34,7 +34,8 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
     // Context sprites paint behind the selected detailed surface. Their screen
     // bounds can overlap it even when their centres are not occluded. Reuse the
     // detail owner's existing hit contract for both hover and activation.
-    return target && detailOccludes?.(event.clientX, event.clientY) ? null : target;
+    // Targets anchored on the detailed surface itself paint in front of it and opt out.
+    return target && target.dataset.surfacePick !== 'true' && detailOccludes?.(event.clientX, event.clientY) ? null : target;
   };
   let hoveredGroup: HTMLElement | null = null;
   const setHovered = (target: HTMLElement | null, interactive: boolean) => {

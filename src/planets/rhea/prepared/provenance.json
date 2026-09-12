@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "rhea",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c618f9c9b1749f6e491540a937c8ba4a960444d61054a9f4b6740e1c9f6d4715"
+    "sha256": "f516ce539972eb9369862a1674fb3a3a8272c866c8dc0a2ea1aa88e47cfcd669"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -605,6 +605,69 @@
           }
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "0d60851f07e5662ec9d7ae9ac587e9db984cacfcc7d3e68e25c1f754d96e54d9",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "RHEA_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "RHEA_nomenclature_center_pts.dbf",
+          "projection": "RHEA_nomenclature_center_pts.prj",
+          "metadata": "metadata_nomenclature_points_RHEA.xml"
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "rhea-features.json",
+        "publicBase": "/scenes/rhea/",
+        "target": {
+          "className": "rhea-body"
+        },
+        "lensIds": [
+          "normal",
+          "enhanced",
+          "elevation",
+          "relative-albedo",
+          "shape",
+          "infrared",
+          "ice-absorption"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 0,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 40,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        },
+        "notes": "notes.json"
+      }
     }
   ],
   "sources": [
@@ -669,7 +732,7 @@
       "sha256": "ce537c3c93670a0d4ea5a64b99bffb76ff308727eb3eabeee0a38cf9f6f1abc7",
       "bytes": 66401915,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -708,7 +771,7 @@
       "sha256": "e4b25f158adf4b430a145946996f4dbde85f50ca0d3c236084c956733e42beb2",
       "bytes": 17694840,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -770,7 +833,7 @@
       "sha256": "4a3f4c5cca6ec558a6dcd664ee818dd700df527fc07fe623d1c56d4e2ae81bc4",
       "bytes": 10389170,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -836,7 +899,7 @@
       "sha256": "6363e6ba38ca29df67a8dba301ef8db2a45daba0cd29896c2397e4e13b1b46d1",
       "bytes": 48826,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -890,7 +953,7 @@
       "sha256": "a4d49eb12bfe5c0d97513d3d4692c78c7b5dd7179f8c2097203a37a4834bb51d",
       "bytes": 9881887,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -947,7 +1010,7 @@
       "sha256": "f28f37b666d7605a179ee82d8d138cc829bb57a46add484ed423c8fc9cded123",
       "bytes": 9881887,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1003,7 +1066,7 @@
       "sha256": "559e109a8bd3891ed2d7ddbfc9e505694574c6af80547f3c63e0f401aa1ded19",
       "bytes": 133351,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1023,7 +1086,107 @@
       "sha256": "0bd90bb122aa76e11d7a0c698a3a26b3f85244c30fc76e0d2b433843b10fd4d2",
       "bytes": 15135,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "rhea-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "sha256": "3e3dee1d341968b2aba0e30ffbc2759e9d4e25f72277fa7ce2b6ca483ee12db3",
+      "bytes": 995,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-rhea-nomenclature-center-pts",
+      "path": "features/RHEA_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/RHEA_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Rhea on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Rhea centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/RHEA/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      },
+      "sha256": "e483758bc3e1d9b3f38a8ccdc4f73d8e11a68e792249b24a2ea62d1ded1b51c9",
+      "bytes": 414397,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/RHEA_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/RHEA_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "rhea-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "sha256": "3f6b4ebe26f761e0296aa0d8b0eaca7347713080afffbe76a56db94cb0f5c8cc",
+      "bytes": 151,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "rhea-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 4 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts rhea: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "572d392dec7cc44cb7ff4239bdee0dc84271c43610c5213b8f20568e644609dd",
+      "bytes": 2096,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1064,13 +1227,13 @@
           "url": "/scenes/rhea/rhea-normal-thumbnail.webp",
           "bytes": 2772,
           "sha256": "d629d4430b5fcfae757870c697e17b2e6b054b50b984ee52ec706dc0984c8ce9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-normal-surface@2x.webp",
           "bytes": 4933780,
           "sha256": "c1cc0f7903fd00bc594395360d93c61911dcf39e5cb3ef99dda6486afd67c04b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1107,13 +1270,13 @@
           "url": "/scenes/rhea/rhea-enhanced-thumbnail.webp",
           "bytes": 5438,
           "sha256": "b6adc3b37aa5421f9c4cda8d4ed5ea0bf1650cbfa4557e4ef3a103e0734f5aec",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-enhanced-surface@2x.webp",
           "bytes": 11123304,
           "sha256": "4cdc64493a3659fab0412cafe3fc46627792b49b9b1225f5a8be8b12972144f1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1153,13 +1316,13 @@
           "url": "/scenes/rhea/rhea-infrared-thumbnail.webp",
           "bytes": 4220,
           "sha256": "909de69ac8d2b6a13f4999c523a509c4ad13340b2a002013babb9adb69d05d81",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-infrared-surface@2x.webp",
           "bytes": 240274,
           "sha256": "5254a1199767b509f94d44bbffea58b0b234662ee73a3b0bd4572486bb95ac55",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1194,19 +1357,19 @@
           "url": "/scenes/rhea/rhea-elevation-thumbnail.webp",
           "bytes": 7446,
           "sha256": "684b40b3773bfca89f66f1d3cd691991a995372bafc2ba6bbc89427e75d169f4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-elevation-surface@2x.webp",
           "bytes": 3131398,
           "sha256": "bbd7aba7459e9dcd93f5740c8fb873207f9cd89b1464211408361e37d025f921",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1241,19 +1404,19 @@
           "url": "/scenes/rhea/rhea-relative-albedo-thumbnail.webp",
           "bytes": 3668,
           "sha256": "97457e6cd6c860756fafb6b48b372a01a178bd7a28dcb7cb86110ea51cd43dab",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-relative-albedo-legend.webp",
           "bytes": 276,
           "sha256": "f61e0581d01ee4f64e6fdc197976a02ff5d748a017b594b59ba493725548f6f7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-relative-albedo-surface@2x.webp",
-          "bytes": 1744154,
-          "sha256": "07537c6c45c6810003746dc5e09f3b95194d3fbc571e0f17724ab83cea094f8c",
-          "verification": "asset-manifest-pin"
+          "bytes": 19214662,
+          "sha256": "9e90648db0f0cd61e98f09142f0beaeaabe77a1d0f219350fd34be994b2fa15c",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1287,19 +1450,19 @@
           "url": "/scenes/rhea/rhea-ice-absorption-thumbnail.webp",
           "bytes": 3478,
           "sha256": "cb3139d6bf2483ab296243498ed7b56de563ac7713704398b73949d44e329cc8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-ice-absorption-legend.webp",
           "bytes": 162,
           "sha256": "989724748ca27ff3f9100c05b4eeb7b936f787550b41223655a1fbee8c888477",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-ice-absorption-surface@2x.webp",
           "bytes": 180602,
           "sha256": "4715f0187b7834a3738fa5af7ed8038b51c24ea036e1a44fbeacaddb3013fb72",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1331,13 +1494,13 @@
           "url": "/scenes/rhea/rhea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "7cbf01ce5434f5fcede86cd13c94e775de945744f9c116cb76c3a3ba97f3761d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-shape-surface@2x.webp",
           "bytes": 458908,
           "sha256": "130fef512cc41d7778390a2718fb733b6d3de80b32b5208ce049c65224e667b7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1360,8 +1523,43 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6037,
-          "sha256": "c479350b328621f50851498aa3ba4ff7ee1055016a95364cd2752acdce86a861",
+          "bytes": 6156,
+          "sha256": "125634037f6b6371e34821862224488c3afd051baee66c99f850a79d5dd270ed",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "rhea-surface-features-source",
+        "usgs-gazetteer-rhea-nomenclature-center-pts",
+        "rhea-surface-map-frame",
+        "rhea-surface-feature-notes"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/rhea/rhea-features.json",
+          "bytes": 208075,
+          "sha256": "4dd9c879a4238ca17071233b238fc57c2fb915853c07e0792bae6d6f160ca054",
           "verification": "bytes-verified"
         }
       ],

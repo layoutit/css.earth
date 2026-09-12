@@ -1,0 +1,79 @@
+{
+  "schema": "cssearth-surface-features@1",
+  "directory": "features",
+  "archive": "MERCURY_nomenclature_center_pts.zip",
+  "members": {
+    "attributes": "MERCURY_nomenclature_center_pts.dbf",
+    "projection": "MERCURY_nomenclature_center_pts.prj",
+    "metadata": "metadata_nomenclature_points_MERCURY.xml"
+  },
+  "surfaceMap": "presentation/surface-map.json",
+  "mapLeftEdgeLongitudeDeg": 180,
+  "output": "mercury-features.json",
+  "publicBase": "/scenes/mercury/",
+  "target": {
+    "className": "mercury-body"
+  },
+  "lensIds": [
+    "normal",
+    "enhanced",
+    "topography"
+  ],
+  "kinds": {
+    "point": [
+      "AA",
+      "FA"
+    ],
+    "linear": [
+      "RU",
+      "DO",
+      "VA",
+      "CA",
+      "FO"
+    ],
+    "region": [
+      "PL",
+      "PM",
+      "MO"
+    ]
+  },
+  "excludedTypeCodes": {
+    "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+  },
+  "labelPolicy": {
+    "minimumZoomShare": 0,
+    "minimumDiameterPixels": 40,
+    "alwaysVisibleCount": 0,
+    "maximumVisible": 40,
+    "limbCosine": 0.12
+  },
+  "outline": {
+    "pieces": 256
+  },
+  "traces": {
+    "directory": "features/tectonic",
+    "archive": "global-tectonic-map.zip",
+    "members": {
+      "shapes": "Combined_Tectonic_Map.shp",
+      "attributes": "Combined_Tectonic_Map.dbf",
+      "projection": "Combined_Tectonic_Map.prj"
+    },
+    "radiusM": 2440000,
+    "classField": "Fault_Type",
+    "classes": {
+      "RU": "Contractional Landform",
+      "DO": "Contractional Landform",
+      "FO": "Extensional Landform"
+    },
+    "paddingDeg": 0.3,
+    "insideFraction": 0.9,
+    "maximumTraces": 6,
+    "minimumLengthShare": 0.25,
+    "maximumVertices": 240
+  },
+  "notes": "notes.json",
+  "sites": {
+    "document": "sites.json",
+    "inputs": []
+  }
+}

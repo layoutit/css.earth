@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "2340",
+      "item": "Q3235395",
+      "title": "Hamlet (crater)",
+      "url": "https://en.wikipedia.org/wiki/Hamlet_(crater)",
+      "revision": "1330073267",
+      "extract": "Hamlet is the largest crater on the known part of the surface of Uranus' moon Oberon. It has diameter of about 206 km and is named after the title character of the play Hamlet, by William Shakespeare."
+    },
+    {
+      "id": "3958",
+      "item": "Q386018",
+      "title": "Mommur Chasma",
+      "url": "https://en.wikipedia.org/wiki/Mommur_Chasma",
+      "revision": "1330073292",
+      "extract": "Mommur Chasma is the largest 'canyon' on the known part of the surface of Uranus' moon Oberon. This feature probably formed during crustal extension at the early stages of moon's evolution, when the interior of Oberon expanded and its ice crust cracked as a result."
+    }
+  ]
+}

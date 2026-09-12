@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-surface-sites@1",
+  "source": "Spacecraft landing, touchdown and impact sites compiled from NASA NSSDCA, PDS, LROC, mission releases and cited papers; every coordinate quotes its page",
+  "retrievedAt": "2026-09-12",
+  "sites": [
+    {
+      "id": "nightingale",
+      "name": "Nightingale sample site (Hokioi crater)",
+      "kind": "sample-site",
+      "date": "2020-10-20",
+      "machineId": "osiris-rex",
+      "latitudeDeg": 56.0,
+      "longitudeDegEast": 43.0,
+      "coordinateNote": "Mission site header coordinates for the site; the IAU Gazetteer centre of Hokioi crater (feature 15977) is 55.0661 N, 41.7828 E. TAG touched down within 1 m of the target. Latitude as stated: not stated (mission site header).",
+      "precisionNote": null,
+      "naming": {
+        "name": "Nightingale (mission name); Hokioi crater (IAU)",
+        "authority": "OSIRIS-REx mission informal name; IAU crater name",
+        "gazetteerFeatureId": 15977
+      },
+      "source": {
+        "title": "OSIRIS-REx mission site: Candidate sample sites - Nightingale",
+        "url": "https://asteroidmission.org/candidate-sample-sites/nightingale/",
+        "publisher": "University of Arizona (OSIRIS-REx mission), credit NASA/Goddard/University of Arizona",
+        "rights": {
+          "statement": "Page footer: Copyright 2026 (c) Arizona Board of Regents. No open licence stated; used only as the citation for the stated site coordinates.",
+          "evidenceUrl": "https://asteroidmission.org/candidate-sample-sites/nightingale/"
+        }
+      },
+      "quote": "(56, 43) Site Nightingale was selected as the primary sample collection site because it holds the greatest amount of unobstructed fine-grained material. Nightingale is located in a crater (with a 66 ft, or 20 m, diameter) near Bennu's north pole."
+    }
+  ],
+  "traverses": []
+}

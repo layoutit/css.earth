@@ -40,6 +40,14 @@
       ],
       "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip",
       "url": "https://sbmt.jhuapl.edu/shared-files/files/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/PHOBOS_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/PHOBOS_nomenclature_center_pts.zip"
     }
   ]
 }

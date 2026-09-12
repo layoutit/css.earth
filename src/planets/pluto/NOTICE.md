@@ -15,4 +15,8 @@ and attribution conditions. No agency or mission endorsement is implied.
 - Inter title outline: Inter Project Authors, SIL Open Font License 1.1; the
   repository-pinned font and license remain in the shared title preparation inputs.
 
-No OpenSpace code, Google imagery, or live external assets are loaded by Pluto.
+No OpenSpace code, Google imagery, or live external assets are loaded by Pluto. The Lambert lighting bank follows the shared OpenSpace-derived shading model recorded in `source/preparation/raster.json` (MIT-licensed shader reference, no OpenSpace data).
+
+Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.
+
+Feature caption notes: 21 lead summaries from the English Wikipedia (Wikipedia contributors, CC BY-SA 4.0), joined to the Gazetteer through Wikidata (CC0); each note links its article in `source/features/notes.json`.

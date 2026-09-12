@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "dimorphos",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "09a6b99aa8bc13f2f2875de55c36ffaef8b9e0348142a184ea4a2669062d3c32"
+    "sha256": "2529e701368c8949ebe3a51f22d844e28406aad476813c46c3bf12205876daed"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -449,6 +449,70 @@
           }
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "62621f87e15f29b0e0e081826b60c070c30c4c35ad939d802a4a27541d1e2dd6",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "DIMORPHOS_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "DIMORPHOS_nomenclature_center_pts.dbf",
+          "projection": null,
+          "metadata": null
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "dimorphos-features.json",
+        "publicBase": "/scenes/dimorphos/",
+        "target": {
+          "className": "dimorphos-body"
+        },
+        "lensIds": [
+          "shape",
+          "elevation",
+          "albedo",
+          "slope"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 0,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 40,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        },
+        "notes": "notes.json",
+        "sites": {
+          "document": "sites.json",
+          "inputs": []
+        }
+      }
     }
   ],
   "sources": [
@@ -483,7 +547,7 @@
       "sha256": "9633847a16c34faad7590f43ba6b07fed53926fb363da0a72f977f6cf2c61f3e",
       "bytes": 14454228,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -524,7 +588,7 @@
       "sha256": "1328bc2564f09c41d414c55f2b2deaab79bc63f1778610bb2422a2941aab51dd",
       "bytes": 4728960,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -559,7 +623,7 @@
       "sha256": "9d0b0ef96385478ae0a1401107b760112de64b3b74af08dfb5c1140a75c1a59e",
       "bytes": 6781,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -595,7 +659,7 @@
       "sha256": "6bd56d7f107552ef6220b4e629848954f0630f9017f5914eb2c5e140493e66be",
       "bytes": 4726080,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -631,7 +695,7 @@
       "sha256": "a8878f757d6fdced9a914db22b90ae7be18080e17113e42d6c6427e78c5de297",
       "bytes": 7093,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -658,7 +722,136 @@
       "sha256": "3bc06226f6b0f40911fd374884cb90e83240655234998dbda0c847740bb3fdf0",
       "bytes": 13422,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "dimorphos-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "kind": "source-document",
+      "title": "features/manifest.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "0ced0dce2347e266e2393a9e20df4efb6355a7f6749092ba6f08a3080faa8d29",
+      "bytes": 1319,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-dimorphos-nomenclature-center-pts",
+      "path": "features/DIMORPHOS_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DIMORPHOS_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Dimorphos on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Dimorphos centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DIMORPHOS/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      },
+      "sha256": "665b495e7b2841e18d8c362f41ec6775c4399a94d473e975ec936cec99684963",
+      "bytes": 30289,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/DIMORPHOS_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DIMORPHOS_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "id": "dimorphos-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "kind": "source-document",
+      "title": "presentation/surface-map.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "49a8398207a279568f098d9629215d1b3f33dee77c82ac50669540b4837a704d",
+      "bytes": 156,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "dimorphos-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts dimorphos: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
+      "bytes": 478,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "dimorphos-surface-sites",
+      "path": "features/sites.json",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      },
+      "kind": "source-document",
+      "title": "features/sites.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "609602bd18bbf589de8d86c3a374a6f0f5bfe73a86bb790053ccfbc4223ad0a2",
+      "bytes": 1428,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -691,19 +884,19 @@
           "url": "/scenes/dimorphos/dimorphos-elevation-thumbnail.webp",
           "bytes": 4926,
           "sha256": "23fa84b1ad4607a2f9febe182e90a7daaefab0c0905b3377c11d6e78ff2cf82e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-elevation-surface@2x.webp",
           "bytes": 454484,
           "sha256": "c19c0941aa42da697721d9e4aee0290ed8601b68cd0c53b520d2850d870b1239",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -737,19 +930,19 @@
           "url": "/scenes/dimorphos/dimorphos-albedo-thumbnail.webp",
           "bytes": 2054,
           "sha256": "40ae515de84bda9cc14eca9c251833fb6ee7088e35ce956339aa5f74a27c4f7b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-albedo-legend.webp",
           "bytes": 64,
           "sha256": "fbf50802a71d951fd9e6393c53c70993edffbe7d465f76e25428470bac81ac3f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-albedo-surface@2x.webp",
           "bytes": 349196,
           "sha256": "49a700dff7bf86a76887498f08548872d157697cde70c7a688a8f303f6cda7e5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -783,19 +976,19 @@
           "url": "/scenes/dimorphos/dimorphos-slope-thumbnail.webp",
           "bytes": 1122,
           "sha256": "80d0174445c6f14e65521f6926e39e75e663c34f92d710677e4b6999e1d9d9ab",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-slope-legend.webp",
           "bytes": 232,
           "sha256": "280a1b9142a95b4915e78f4dad454eb491ea0e9fbb6ffb6c721dd6fbf4b3b987",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-slope-surface@2x.webp",
           "bytes": 2380766,
           "sha256": "631da1b8ad9eab19cde87f260b6ac14e0a8364e08f3e8bd7df696af0c54b8f1c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -827,13 +1020,13 @@
           "url": "/scenes/dimorphos/dimorphos-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-shape-surface@2x.webp",
           "bytes": 210436,
           "sha256": "768556dbc2cc8e3d6c2b967044ad6977bfdef2fd955e00bc030d8dde1d311bf2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -856,8 +1049,44 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7124,
-          "sha256": "a372601cf71091df4ceaa64dbc073c81b3114e1c6b7f05b7794d07010c261290",
+          "bytes": 7242,
+          "sha256": "922b072f3962b6e160474fb308062b27a93e561afde63b42a329123ebd822dce",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "dimorphos-surface-features-source",
+        "usgs-gazetteer-dimorphos-nomenclature-center-pts",
+        "dimorphos-surface-map-frame",
+        "dimorphos-surface-feature-notes",
+        "dimorphos-surface-sites"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/dimorphos/dimorphos-features.json",
+          "bytes": 9932,
+          "sha256": "79abbe95544a779630a36f76cf52d8006d76769cf8c51d7877b227ff386a0c04",
           "verification": "bytes-verified"
         }
       ],

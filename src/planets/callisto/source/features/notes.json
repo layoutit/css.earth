@@ -1,0 +1,106 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "54",
+      "item": "Q2577126",
+      "title": "Adlinda (crater)",
+      "url": "https://en.wikipedia.org/wiki/Adlinda_(crater)",
+      "revision": "1329313673",
+      "extract": "Adlinda is the third-largest multiring structure on Jupiter's moon Callisto, measuring roughly 1000 km in diameter. It is situated in the southern hemisphere of Callisto. The name is taken from Inuit mythology."
+    },
+    {
+      "id": "349",
+      "item": "Q12762538",
+      "title": "Arcas (crater)",
+      "url": "https://en.wikipedia.org/wiki/Arcas_(crater)",
+      "revision": "1365127733",
+      "extract": "Arcas is a crater on Jupiter's moon Callisto measuring 60 km (37 mi) across. It is an example of a central pit impact crater. A smaller crater near Arcas is called Ginandi. The crater is named after Arcas, the son of Callisto in Greek mythology."
+    },
+    {
+      "id": "420",
+      "item": "Q724438",
+      "title": "Asgard (crater)",
+      "url": "https://en.wikipedia.org/wiki/Asgard_(crater)",
+      "revision": "1359387022",
+      "extract": "Asgard is the second largest multi-ringed basin on Jupiter's moon Callisto. It is named after Asgard, the realm of the gods in Norse mythology. Asgard is located at a latitude of 32° and a longitude of 142°.04. The central part of Asgard is dominated by the domed Doh impact crater."
+    },
+    {
+      "id": "2217",
+      "item": "Q3189798",
+      "title": "Gomul Catena",
+      "url": "https://en.wikipedia.org/wiki/Gomul_Catena",
+      "revision": "1329311142",
+      "extract": "Gomul Catena is a chain of craters on Jupiter's moon, Callisto. It is situated in the northern part of Valhalla multi-ring structure. The craters in the catena seem to have formed from east to west. Such features are thought to originate as secondary craters or due to fragmentation of the impactor."
+    },
+    {
+      "id": "2413",
+      "item": "Q25907856",
+      "title": "Heimdall (crater)",
+      "url": "https://en.wikipedia.org/wiki/Heimdall_(crater)",
+      "revision": "1331703795",
+      "extract": "Heimdall is one of the largest known impact craters on Jupiter's Galilean satellite Callisto, with a diameter of 210 km. It is located near the Callistoan south pole at 63.5°S 3°E. Its existence was first suspected from Voyager images and later confirmed by Galileo."
+    },
+    {
+      "id": "2619",
+      "item": "Q2343849",
+      "title": "Hár (crater)",
+      "url": "https://en.wikipedia.org/wiki/H%C3%A1r_(crater)",
+      "revision": "1350070388",
+      "extract": "Hár is a crater on Jupiter's moon Callisto. Its name is one of the many names of Odin, the supreme god in Norse mythology. This is an example of a central dome impact crater. Its name was adopted by the International Astronomical Union (IAU) in 1979."
+    },
+    {
+      "id": "2789",
+      "item": "Q6126882",
+      "title": "Jalkr",
+      "url": "https://en.wikipedia.org/wiki/Jalkr",
+      "revision": "1330079063",
+      "extract": "Jalkr is a bright crater on Jupiter's moon Callisto measuring 74 km across. This an example of a central dome impact crater. A smaller degraded crater in the upper part of the image is called Audr."
+    },
+    {
+      "id": "2978",
+      "item": "Q6382833",
+      "title": "Keelut (crater)",
+      "url": "https://en.wikipedia.org/wiki/Keelut_(crater)",
+      "revision": "1361847699",
+      "extract": "Keelut is a crater on Jupiter's moon Callisto. It is situated near the south pole and is an example of a central pit impact crater. It measures 47 km across."
+    },
+    {
+      "id": "3451",
+      "item": "Q6666656",
+      "title": "Lofn (crater)",
+      "url": "https://en.wikipedia.org/wiki/Lofn_(crater)",
+      "revision": "1329295303",
+      "extract": "Lofn is a large and relatively young crater on Jupiter's second-largest satellite Callisto. The crater was identified in 1997. Located near the south pole of this moon, Lofn is classified as a flat floored or anomalous dome impact crater."
+    },
+    {
+      "id": "6015",
+      "item": "Q1621149",
+      "title": "Tindr (crater)",
+      "url": "https://en.wikipedia.org/wiki/Tindr_(crater)",
+      "revision": "1263826654",
+      "extract": "Tindr is a crater on Jupiter's moon Callisto. It is named after one of the ancestors of Ottar in Norse mythology. This is an example of a central pit impact crater."
+    },
+    {
+      "id": "6284",
+      "item": "Q598700",
+      "title": "Valhalla (crater)",
+      "url": "https://en.wikipedia.org/wiki/Valhalla_(crater)",
+      "revision": "1353953208",
+      "extract": "Valhalla is a vast multi-ring basin on Callisto, the outermost of the Galilean moons. It is the largest multi-ring impact basin in the Solar System. It is named after Valhalla, the hall where warriors are taken after death in Norse mythology."
+    },
+    {
+      "id": "14135",
+      "item": "Q25908788",
+      "title": "Kol Facula",
+      "url": "https://en.wikipedia.org/wiki/Kol_Facula",
+      "revision": "1364493239",
+      "extract": "Kol Facula is a facula, or bright geological feature, on Callisto, a Galilean moon of Jupiter. The facula was named after Kol, the eponymous jötnar, or frost giant, in Icelandic mythology. The name \"Kol Facula\" was officially approved by the International Astronomical Union (IAU) in 2006."
+    }
+  ]
+}

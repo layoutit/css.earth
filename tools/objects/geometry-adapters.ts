@@ -16,8 +16,20 @@ export async function loadGeometryAdapters(): Promise<ScenePreparationAdapters> 
   const optionalNumber = (value: unknown) => value === undefined ? undefined : requireFiniteNumber(value);
   return {
     async preparePhysicalScene(input) {
-      if (!Object.hasOwn(BODIES, input.bodyId)) throw new TypeError('Physical scene requires a known astronomy body.');
       const starfield = skyContract.validatePreparedCubicSky(input.starfield, { requireSun: false });
+      if (input.worldContext !== undefined) {
+        // A body the ephemeris tables do not place (the Sun) carries an authored world context and star axis.
+        const star = requireRecord(requireRecord(input).star, 'star presentation');
+        if (input.sun !== null) throw new TypeError('A star-centred scene carries no directional Sun.');
+        return scene.prepareStarCentredScene({ bodyId: input.bodyId,
+          bodyRadiusUnits: input.bodyRadiusUnits, bodyRadiusKilometers: input.bodyRadiusKilometers,
+          defaultZoom: requireFiniteNumber(input.defaultZoom), geometryScale: optionalNumber(input.geometryScale),
+          initialScenePitchDegrees: optionalNumber(input.initialScenePitchDegrees), defaultControlYawDegrees: optionalNumber(input.defaultControlYawDegrees),
+          starfield, star: { model: requireString(star.model), systemTransform: requireString(star.systemTransform), axialTiltDegrees: requireFiniteNumber(star.axialTiltDegrees) },
+          context: input.worldContext });
+      }
+      if (!Object.hasOwn(BODIES, input.bodyId)) throw new TypeError('Physical scene requires a known astronomy body.');
+      if (input.sun === null) throw new TypeError('Physical scene requires its prepared directional Sun.');
       const registration = requireRecord(input.starfield.astrometricRegistration);
       return scene.prepareSolarSystemScene({ bodyId: input.bodyId as BodyId,
         bodyRadiusUnits: input.bodyRadiusUnits, bodyRadiusKilometers: input.bodyRadiusKilometers,

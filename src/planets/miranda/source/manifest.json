@@ -1413,39 +1413,295 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-miranda-nomenclature-center-pts",
+      "path": "features/MIRANDA_nomenclature_center_pts.zip",
+      "expectedBytes": 84340,
+      "expectedSha256": "73f639b9b84aa49c1ef399f004ab4e1cc4444e24926c862709d626ff90e5b91e",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MIRANDA_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Miranda on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Miranda centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/MIRANDA/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "miranda-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1009,
+      "expectedSha256": "d83314002237aa5455b78d1d7db03f1904dea4c05c48c7db516c486b6c067bf4",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "miranda-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1167,
+      "expectedSha256": "07c55d3158c4a9cb0270d29ebb8e88e534c5c40b272c09fbcab6009b65f7489f",
+      "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "miranda-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 154,
+      "expectedSha256": "6c31c6d7afd537b7e6e13475b1268b018ac9e6698013c0d48e23a3ef0bb0cfc3",
+      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
+    },
+    {
+      "id": "hyg-registration-field",
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 850,
+      "expectedSha256": "cd34205b7db415dbbfbb54766ba4ee00d25d9386a84369a93f3ceed7ed9d6ea3",
+      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
+      "credit": "David Nash",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
+      ],
+      "acquisition": "checked prepared registration field from HYG v4.1",
+      "redistribution": "CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hyg-v41",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/52"
+          }
+        ]
+      }
+    },
+    {
+      "id": "miranda-title-mark",
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4848,
+      "expectedSha256": "b4e1922ac32d3562695cdcab63f7e24c0e909cebe86e40303e1b042a32129cc3",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "deterministically generated Miranda title path from the repository-pinned Inter font",
+      "redistribution": "generated outline under the Inter license",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/53"
+          }
+        ]
+      }
+    },
+    {
+      "id": "miranda-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 1647,
+      "expectedSha256": "04e06de6bf0f3bc8c05fa0cb4573ec1e09fb0b63b417ec1f063006cef38f8807",
+      "origin": "Repository-authored Miranda solar-system recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "sky-sun",
+        "system-markers",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored camera scale and marker layout using the cited solar-system geometry."
+      }
+    },
+    {
+      "id": "miranda-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 9016,
+      "expectedSha256": "d1bd89ca8b1d8eaaa941debddd1f70715812a94320a1761da07f6c65cbc7e47f",
+      "origin": "Repository-authored Miranda raster recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored image sampling, science painting, packing and lighting-bank settings."
+      }
+    },
+    {
+      "id": "miranda-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1421,
+      "expectedSha256": "6918aff045563afa496224f1ba904381a582e90ae1bb5689eb938893b943cb61",
+      "origin": "Repository-authored Miranda geometry recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored CSS geometry, UV sampling and seam settings."
+      }
+    },
+    {
+      "id": "miranda-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 224,
+      "expectedSha256": "b1102c6415baeff105db4edc465d679e6d6aba4471601a239f2ab03c49d55847",
+      "origin": "Repository-authored Miranda celestial recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "sky-sun",
+        "starfield",
+        "system-markers"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored sky, Sun and marker preparation settings."
+      }
+    },
+    {
+      "id": "miranda-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 103,
+      "expectedSha256": "85bc3fbff8907a8d1c112729f084a0f4c8f1f707dcefa1618d6ea1a092ca61f7",
+      "origin": "Repository-authored Miranda presentation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored scene composition and supported views."
+      }
+    },
+    {
+      "id": "miranda-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedBytes": 3229,
+      "expectedSha256": "d836d9eee1001e4b7a0840530db6d9f21508a0782e81b3c601540ef35f136d29",
+      "origin": "Repository-authored Miranda navigation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "navigation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored marker, caption and camera settings."
+      }
+    },
+    {
+      "id": "miranda-preparation-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 11658,
+      "expectedSha256": "b8601ac3d56112bde7186d5ce564699896ee54078a8243e97c0dd368f7a614c4",
+      "origin": "Repository-authored Miranda acquisition recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored requests and extraction steps for restoring source files."
+      }
+    },
+    {
+      "id": "miranda-object-content",
+      "path": "content/object.json",
+      "expectedBytes": 15332,
+      "expectedSha256": "3e7037e99ecaf6f185da6abb191cef8c435048e3229bf49331eba12f2908164c",
+      "origin": "Repository-authored Miranda object recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+      }
     }
   ],
   "generatedIntermediates": [],
   "documents": [
-    {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 7628,
-      "expectedSha256": "957bfd5b0f4ccf1f91962816fbb70828bedcc6533112e9330a7d8f19c8d2c900"
-    },
-    {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 3229,
-      "expectedSha256": "d836d9eee1001e4b7a0840530db6d9f21508a0782e81b3c601540ef35f136d29"
-    },
-    {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 11402,
-      "expectedSha256": "a1b70b01e4044cf710c7e13e6a8ed3577d3f9923722beae328907b9ada6aa84d"
-    },
-    {
-      "path": "content/object.json",
-      "expectedBytes": 15099,
-      "expectedSha256": "ec2b46771b7c2a2425e67e634690a7d9db95b86d9b5b4f3c6504343a76b18077",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
-      }
-    },
-    {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4848,
-      "expectedSha256": "b4e1922ac32d3562695cdcab63f7e24c0e909cebe86e40303e1b042a32129cc3"
-    },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
@@ -1460,11 +1716,6 @@
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
       "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 850,
-      "expectedSha256": "cd34205b7db415dbbfbb54766ba4ee00d25d9386a84369a93f3ceed7ed9d6ea3"
     },
     {
       "path": "observations/aaReadMe_uranian_MAP_DEM.txt",
@@ -1538,6 +1789,29 @@
       "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
       "expectedBytes": 84340,
       "expectedSha256": "142fe3942fc80c4dfcdbad0258da5259e656c395b273c759594a3c163cd58ecd"
+    },
+    {
+      "id": "miranda-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 1859,
+      "expectedSha256": "127b6efd1f9072786f938acd3f2f302afc4f11f14d3f417c75623294392446c0",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 3 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts miranda: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

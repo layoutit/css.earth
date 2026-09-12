@@ -44,6 +44,10 @@ The linked reports identify their tested sources, prepared files and limitations
 
 ## Known problems
 
+Named features: Earth has no IAU nomenclature, so its labels come from Natural Earth 1:10m vectors (public domain, retrieved 2026-09-12) pinned under `source/features/`: populated places ranked by population, geographic region points and areas, marine areas and river centrelines. Places are unsized points; regions and seas trace their bounding box; rivers trace their centreline. Anchors are cast onto the rendered ellipsoid through the paged lane's own surface sampler (`tools/objects/surface-features/ellipsoid.ts`), and the runtime parser checks every anchor against the ellipsoid band recorded in the plan. Natural Earth's names, ranks and geometry are its editors' choices, not an official gazetteer.
+
+Named features run of 2026-09-12 (this version): `node tools/objects/dist/prepare-authored.js earth --write` anchored 5161 Natural Earth names on the rendered ellipsoid (3,000 populated places ranked by population, 600 river centrelines as traces, and every geographic region, sea and cape as an extent box or point); the plan records the ellipsoid semi-axes and the normalised-radius band every anchor lies within, which the runtime parser checks. A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server and captured the globe with city, ocean and region labels drawn on the imagery (Tokyo, Beijing, Australia, the Indian Ocean); the anchoring proof under `output/earth-features/` casts Quito, Singapore and Reykjavik through the lane's own surface sampler and confirms the marks sit on those places.
+
 - Night-light coverage stops at 75° N and 65° S. The mirror lacks quality bands;
   aurora and transient lights cannot be filtered further.
 - ENSO uses NASA's display colors and clipped anomaly range. Transparent land,

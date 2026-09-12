@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/ceres/",
+  "sourceWidth": 4096,
+  "sourceHeight": 2048,
+  "width": 2048,
+  "height": 1024,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "ceres-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssceres-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88
+  },
+  "surfaces": [
+    {
+      "id": "normal",
+      "output": "ceres-{id}{suffix}.webp",
+      "thumbnail": "ceres-lens-{id}.webp",
+      "source": "ceres-fc-global.png",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "usgs-dawn-fc-global-140m",
+        "id": "normal",
+        "validity": {
+          "kind": "south-connected-black"
+        }
+      }
+    },
+    {
+      "id": "enhanced",
+      "output": "ceres-{id}{suffix}.webp",
+      "thumbnail": "ceres-lens-{id}.webp",
+      "source": "PIA19977.jpg",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "nasa-dawn-fc-pia19977",
+        "id": "enhanced",
+        "validity": {
+          "kind": "south-connected-black"
+        }
+      }
+    },
+    {
+      "id": "elevation",
+      "output": "ceres-{id}{suffix}.webp",
+      "thumbnail": "ceres-lens-{id}.webp",
+      "source": "science/ceres-hamo-dtm.tif",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "elevation",
+        "label": "Elevation",
+        "format": "geotiff",
+        "path": "science/ceres-hamo-dtm.tif",
+        "description": "Dawn stereo model · shaded relief",
+        "title": "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
+        "sourceUrl": "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m",
+        "minimum": -30000,
+        "maximum": 20000,
+        "colors": [
+          "#253494",
+          "#2c7fb8",
+          "#41b6c4",
+          "#ffffcc",
+          "#d95f0e"
+        ],
+        "labels": [
+          "−30",
+          "−5",
+          "20"
+        ],
+        "units": "km",
+        "consumer": "scientific-surfaces",
+        "grid": {
+          "width": 21600,
+          "height": 10800,
+          "centerLongitude": 180,
+          "referenceRadiusMeters": 470000,
+          "noData": -32768,
+          "withholdLatitudeDegrees": 60
+        },
+        "relief": {
+          "referenceRadiusMeters": 470000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.25
+        }
+      }
+    }
+  ],
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "billboardFrameSize": 24,
+    "billboardColumns": 16,
+    "rowOutput": "ceres-lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "ceres-lighting-{density}x-billboard.webp",
+    "minimumLightViewZ": -1,
+    "maximumLightViewZ": 1,
+    "frameCount": 256,
+    "shadowlessFloodLimbFloor": 0.35,
+    "ambientIntensity": 0.05,
+    "radiusScale": 0.505,
+    "terminator": [
+      0,
+      0.1
+    ],
+    "maximumAlpha": 0.95,
+    "bankSchema": "cssceres-prepared-lighting-bank@1",
+    "billboardSchema": "cssceres-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "cssceres-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  }
+}

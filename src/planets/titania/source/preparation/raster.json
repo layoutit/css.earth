@@ -1,0 +1,260 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/titania/",
+  "sourceWidth": 6400,
+  "sourceHeight": 3200,
+  "width": 2048,
+  "height": 1024,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "titania-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csstitania-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88
+  },
+  "surfaces": [
+    {
+      "id": "normal",
+      "output": "titania-{id}{suffix}.webp",
+      "thumbnail": "titania-lens-{id}.webp",
+      "source": "observations/tumap-cyl-180180.cub.gz",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "schenk-2020-titania-normal",
+        "id": "normal",
+        "validity": {
+          "kind": "isis3-float-monochrome",
+          "grid": {
+            "width": 1722,
+            "height": 861,
+            "targetName": "Titania",
+            "centerLongitude": 180,
+            "referenceRadiusMeters": 788900,
+            "polarRadiusMeters": 788900,
+            "origin": [
+              -4959360,
+              1241280
+            ],
+            "resolutionMeters": 2880,
+            "specialValueMagnitude": 1e+30,
+            "longitudeRange": [
+              -180,
+              180
+            ]
+          },
+          "displayRange": [
+            0,
+            3000
+          ]
+        }
+      }
+    },
+    {
+      "id": "elevation",
+      "output": "titania-{id}{suffix}.webp",
+      "thumbnail": "titania-lens-{id}.webp",
+      "source": "science/tudem-ZL-180180.cub.gz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "elevation",
+        "label": "Elevation",
+        "format": "isis3",
+        "path": "science/tudem-ZL-180180.cub.gz",
+        "description": "Voyager stereo terrain model · shaded relief",
+        "title": "Voyager stereo elevations with published limb-profile data, in kilometres relative to the source reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 2.88 km grid spacing is not uniform effective elevation resolution.",
+        "sourceUrl": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
+        "minimum": -8,
+        "maximum": 8,
+        "colors": [
+          "#1c5599",
+          "#bbab80",
+          "#aa3e24"
+        ],
+        "labels": [
+          "−8",
+          "0",
+          "8"
+        ],
+        "units": "km",
+        "consumer": "scientific-surfaces",
+        "sampling": "bilinear",
+        "grid": {
+          "width": 1722,
+          "height": 861,
+          "targetName": "Titania",
+          "centerLongitude": 180,
+          "referenceRadiusMeters": 788900,
+          "polarRadiusMeters": 788900,
+          "origin": [
+            -4959360,
+            1241280
+          ],
+          "resolutionMeters": 2880,
+          "specialValueMagnitude": 1e+30,
+          "longitudeRange": [
+            -180,
+            180
+          ]
+        },
+        "relief": {
+          "referenceRadiusMeters": 788900,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.25
+        }
+      }
+    },
+    {
+      "id": "geology",
+      "output": "titania-{id}{suffix}.webp",
+      "thumbnail": "titania-lens-{id}.webp",
+      "source": "science/geology-2026/categories.tif",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "geology",
+        "label": "Geology",
+        "format": "geotiff",
+        "path": "science/geology-2026/categories.tif",
+        "consumer": "geology-surfaces",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "minimum": 0,
+        "maximum": 9,
+        "colors": [
+          "#000000",
+          "#730000"
+        ],
+        "categories": [
+          {
+            "value": "darkalbedopatches",
+            "label": "Dark Albedo Patches",
+            "color": "#000000"
+          },
+          {
+            "value": "CrCraterslinew_FeatureToPoly1",
+            "label": "Crater rim massifs",
+            "color": "#73b2ff"
+          },
+          {
+            "value": "CrCraterslinew_FeatureToPoly",
+            "label": "Elongate Craters",
+            "color": "#0070ff"
+          },
+          {
+            "value": "c1cratersshp",
+            "label": "Moderately degraded craters",
+            "color": "#e69800"
+          },
+          {
+            "value": "c2cratersshp",
+            "label": "Fresh appearing, no rays",
+            "color": "#cdaa66"
+          },
+          {
+            "value": "C3Craterslinew_FeatureToPoly",
+            "label": "Rayed/bright deposit craters",
+            "color": "#d7c29e"
+          },
+          {
+            "value": "PhLinework_FeatureToPolygon",
+            "label": "Heavily cratered plains",
+            "color": "#895a44"
+          },
+          {
+            "value": "Pm",
+            "label": "Moderately cratered Plains",
+            "color": "#704489"
+          },
+          {
+            "value": "Ps",
+            "label": "Smooth Plains",
+            "color": "#267300"
+          },
+          {
+            "value": "Pb",
+            "label": "Bright Slope Material",
+            "color": "#730000"
+          }
+        ],
+        "description": "Historical interpreted geology · reconstructed registration",
+        "title": "Ten historical geologic units digitized from Voyager-era mapping. Registration reconstructed from crater landmarks; four independent checks differ by 0.33–0.83° (about 4.5–11.4 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+        "sourceUrl": "https://zenodo.org/records/20819132",
+        "grid": {
+          "width": 1440,
+          "height": 720,
+          "projection": "equirectangular",
+          "centerLongitude": 180,
+          "referenceRadiusMeters": 788900,
+          "noData": 65535,
+          "origin": [
+            -2478402.4444169877,
+            1239201.2222084939
+          ],
+          "resolutionMeters": 3442.2256172458165,
+          "latitudeRange": [
+            -90,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "billboardFrameSize": 24,
+    "billboardColumns": 16,
+    "rowOutput": "titania-lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "titania-lighting-{density}x-billboard.webp",
+    "minimumLightViewZ": -1,
+    "maximumLightViewZ": 1,
+    "frameCount": 256,
+    "shadowlessFloodLimbFloor": 0.35,
+    "ambientIntensity": 0.05,
+    "radiusScale": 0.505,
+    "terminator": [
+      0,
+      0.1
+    ],
+    "maximumAlpha": 0.95,
+    "bankSchema": "csstitania-prepared-lighting-bank@1",
+    "billboardSchema": "csstitania-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "csstitania-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  }
+}

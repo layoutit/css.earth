@@ -61,6 +61,14 @@
       ],
       "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
       "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/DIMORPHOS_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DIMORPHOS_nomenclature_center_pts.zip"
     }
   ]
 }

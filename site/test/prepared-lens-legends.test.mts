@@ -80,8 +80,7 @@ test("every object forwards its object-owned legend through the shared shell", a
       const title = parseTitleFixture(rawTitle);
       source.title = title;
     }
-    const controls = source.schema === "cssearth-static-surface-content@1"
-      ? requireRecord(source.controls) : prepareObjectContent(parseObjectContentFixture(source));
+    const controls = prepareObjectContent(parseObjectContentFixture(source));
     const legends = (lenses: unknown) => lenses == null ? [] : requireArray(requireRecord(lenses).controls).map(value => {
       const { id, title, description, legend, summary } = requireRecord(value);
       return { id, title, description, legend, summary };

@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-surface-features@1",
+  "directory": "features",
+  "archive": "MIMAS_nomenclature_center_pts.zip",
+  "members": {
+    "attributes": "MIMAS_nomenclature_center_pts.dbf",
+    "projection": "MIMAS_nomenclature_center_pts.prj",
+    "metadata": "metadata_nomenclature_points_MIMAS.xml"
+  },
+  "surfaceMap": "presentation/surface-map.json",
+  "mapLeftEdgeLongitudeDeg": 0,
+  "output": "mimas-features.json",
+  "publicBase": "/scenes/mimas/",
+  "target": {
+    "className": "mimas-body"
+  },
+  "lensIds": [
+    "normal",
+    "enhanced",
+    "elevation"
+  ],
+  "kinds": {
+    "point": [
+      "AA",
+      "FA"
+    ],
+    "linear": [
+      "RU",
+      "DO",
+      "VA",
+      "CA",
+      "FO"
+    ],
+    "region": [
+      "PL",
+      "PM",
+      "MO"
+    ]
+  },
+  "excludedTypeCodes": {
+    "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+  },
+  "labelPolicy": {
+    "minimumZoomShare": 0,
+    "minimumDiameterPixels": 40,
+    "alwaysVisibleCount": 0,
+    "maximumVisible": 40,
+    "limbCosine": 0.12
+  },
+  "outline": {
+    "pieces": 256
+  },
+  "notes": "notes.json"
+}

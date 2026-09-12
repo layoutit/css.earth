@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "14339",
+      "item": "Q1456715",
+      "title": "Acestes (crater)",
+      "url": "https://en.wikipedia.org/wiki/Acestes_(crater)",
+      "revision": "1330786458",
+      "extract": "Acestes is an impact crater on Dione, a moon of Saturn. The crater was named after Acestes, the eponymous mythological king of Sicily. Like most other craters on Dione, Acestes was named after characters in the poem, Aeneid."
+    },
+    {
+      "id": "14353",
+      "item": "Q25907962",
+      "title": "Evander (crater)",
+      "url": "https://en.wikipedia.org/wiki/Evander_(crater)",
+      "revision": "1360090506",
+      "extract": "Evander is the largest impact basin on Saturn's moon Dione, located near its south polar regions. It is named after the mythological Roman hero Evander of Pallene, son of Hermes. The name \"Evander\" was officially approved by the International Astronomical Union (IAU) on 17 March 2008."
+    }
+  ]
+}

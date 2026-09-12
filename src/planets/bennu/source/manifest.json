@@ -209,6 +209,30 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-bennu-nomenclature-center-pts",
+      "path": "features/BENNU_nomenclature_center_pts.zip",
+      "expectedBytes": 95757,
+      "expectedSha256": "5da9153f28e1551d3285ed76735c5ddd9bb69f1c60354a299d7f5d8f41250c6f",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/BENNU_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Bennu on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Bennu centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/BENNU/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -251,8 +275,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2615,
-      "expectedSha256": "f6520b873d38373f357d5e08de62fd842b1558023ee4d14c7743164c157b06ba"
+      "expectedBytes": 2867,
+      "expectedSha256": "1a6598bcdf5a252189cb74246545630b9f9c7a5489f1fa8e3ad007d9691a70c5"
     },
     {
       "path": "preparation/navigation.json",
@@ -310,6 +334,104 @@
       "purpose": "Unmodified publisher metadata for the spectral composite.",
       "expectedBytes": 452,
       "expectedSha256": "e49d3bd21459402c45596d36c8ec7c0304a69a4900237e389e90c9a5d3ae1d2d"
+    },
+    {
+      "id": "bennu-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1303,
+      "expectedSha256": "8498d3fbaa7ffefbe3c86d25f798de80df044be4973313f2fa8091f6e4344352",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "bennu-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1165,
+      "expectedSha256": "4a0542e5d1aff0f42e631f8e23b71238b49abe15a661d426c8a4e75b4cec0060",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "bennu-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 152,
+      "expectedSha256": "fb29f3953b009b6ddf6555b7b5c4be8996b07f93311d015ff9c94d8fb04c5ea7",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
+    },
+    {
+      "id": "bennu-surface-sites",
+      "path": "features/sites.json",
+      "expectedBytes": 1863,
+      "expectedSha256": "593a9885578080b1e8512aa67688dd1839c2b2e6a4e5a523c0fa28e9b50d05db",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      }
+    },
+    {
+      "id": "bennu-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 478,
+      "expectedSha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts bennu: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

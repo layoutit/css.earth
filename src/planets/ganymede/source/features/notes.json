@@ -1,0 +1,554 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "33",
+      "item": "Q4673597",
+      "title": "Achelous (crater)",
+      "url": "https://en.wikipedia.org/wiki/Achelous_(crater)",
+      "revision": "1367514848",
+      "extract": "Achelous is a relatively young impact crater with bright impact rays on Jupiter's largest moon Ganymede. Located near the similarly sized Gula, both craters are surrounded by a distinct raised pedestal formed from ejecta blasted out by their formative impact events."
+    },
+    {
+      "id": "245",
+      "item": "Q25908071",
+      "title": "Amset (crater)",
+      "url": "https://en.wikipedia.org/wiki/Amset_(crater)",
+      "revision": "1364278881",
+      "extract": "Amset is a small crater located a few kilometers south of the equator of Jupiter's largest moon Ganymede.8 mi). Amset crater is superimposed on both ancient and younger surface features on Ganymede, strongly suggesting that it's a recent crater."
+    },
+    {
+      "id": "251",
+      "item": "Q25908072",
+      "title": "Anat (crater)",
+      "url": "https://en.wikipedia.org/wiki/Anat_(crater)",
+      "revision": "1372562350",
+      "extract": "Anat is a small crater on Ganymede, the largest moon of the planet Jupiter.8 mi) in diameter, it is the smallest named crater on Ganymede. Despite its small size, the crater's center was chosen as the point through which the moon's 128° W meridian passes."
+    },
+    {
+      "id": "290",
+      "item": "Q25909192",
+      "title": "Anshar Sulcus",
+      "url": "https://en.wikipedia.org/wiki/Anshar_Sulcus",
+      "revision": "1366124246",
+      "extract": "Anshar Sulcus is a grooved terrain on Jupiter's largest moon Ganymede. It is a trough that is approximately 1,372 kilometres (853 mi) long. Its surface is younger and brighter than the darker, older material covering the areas that surround it."
+    },
+    {
+      "id": "301",
+      "item": "Q25908075",
+      "title": "Antum (crater)",
+      "url": "https://en.wikipedia.org/wiki/Antum_(crater)",
+      "revision": "1364180137",
+      "extract": "Antum is a crater on the surface of Ganymede, the largest moon of Jupiter. It is a small crater with a diameter of only about 14.75 kilometres (9.17 mi) and a depth of 1.2 kilometres (0.75 mi). The crater exhibits dark rays of ejecta around itself, which is considered rare on Ganymede."
+    },
+    {
+      "id": "303",
+      "item": "Q25908077",
+      "title": "Anubis (crater)",
+      "url": "https://en.wikipedia.org/wiki/Anubis_(crater)",
+      "revision": "1364474275",
+      "extract": "Anubis is a crater near the south pole of Jupiter's largest moon Ganymede. It is a concentric crater with at least two crater rims, with the smaller rim being completely inside the bigger one. The crater has a small dome at its center."
+    },
+    {
+      "id": "309",
+      "item": "Q25908078",
+      "title": "Anzu (crater)",
+      "url": "https://en.wikipedia.org/wiki/Anzu_(crater)",
+      "revision": "1364451859",
+      "extract": "Anzu is a geologically uplifted and disrupted dome crater on Ganymede, the largest moon of Jupiter. It is approximately 210 kilometres (130 mi) wide."
+    },
+    {
+      "id": "345",
+      "item": "Q25909195",
+      "title": "Arbela Sulcus",
+      "url": "https://en.wikipedia.org/wiki/Arbela_Sulcus",
+      "revision": "1371417189",
+      "extract": "Arbela Sulcus is a long, grooved terrain on Jupiter's largest moon Ganymede. It is a major trough that runs for approximately 3,850 kilometres (2,390 mi). Its surface is younger and smoother than the darker materials found in the region that surrounds it."
+    },
+    {
+      "id": "610",
+      "item": "Q12627628",
+      "title": "Barnard Regio",
+      "url": "https://en.wikipedia.org/wiki/Barnard_Regio",
+      "revision": "1370389559",
+      "extract": "Barnard Regio is a dark, surface feature on Jupiter's moon Ganymede. It is an irregular feature composed of several dark, ancient areas crisscrossed by many younger, brighter sulci."
+    },
+    {
+      "id": "904",
+      "item": "Q25909198",
+      "title": "Bubastis Sulci",
+      "url": "https://en.wikipedia.org/wiki/Bubastis_Sulci",
+      "revision": "1374306420",
+      "extract": "Bubastis Sulci is a sprawling, multi-sulci region that extends around the south pole of Jupiter's largest moon Ganymede. This surface feature runs for approximately 2,730 kilometres (1,700 mi) in some areas across the moon's surface."
+    },
+    {
+      "id": "935",
+      "item": "Q25908792",
+      "title": "Buto Facula",
+      "url": "https://en.wikipedia.org/wiki/Buto_Facula",
+      "revision": "1364265018",
+      "extract": "Buto Facula is a palimpsest, or \"ghost crater\", on Ganymede, the largest moon of the planet Jupiter."
+    },
+    {
+      "id": "940",
+      "item": "Q25909199",
+      "title": "Byblus Sulcus",
+      "url": "https://en.wikipedia.org/wiki/Byblus_Sulcus",
+      "revision": "1372027268",
+      "extract": "Byblus Sulcus is a relatively narrow, grooved terrain on Jupiter's moon Ganymede. It is a trough that runs for approximately 645 kilometres (401 mi) across the moon's surface. Its surface is thought to be younger than the darker materials found in other regions elsewhere on the moon."
+    },
+    {
+      "id": "1205",
+      "item": "Q25908087",
+      "title": "Chrysor and Aleyin (craters)",
+      "url": "https://en.wikipedia.org/wiki/Chrysor_and_Aleyin_(craters)",
+      "revision": "1364443363",
+      "extract": "Chrysor and Aleyin are a pair of small craters on Ganymede, the largest moon of Jupiter. Both craters have dark floors and are surrounded by knob-shaped peaks that form their rims."
+    },
+    {
+      "id": "1413",
+      "item": "Q25909200",
+      "title": "Dardanus Sulcus",
+      "url": "https://en.wikipedia.org/wiki/Dardanus_Sulcus",
+      "revision": "1348723956",
+      "extract": "Dardanus Sulcus is a prominent grooved terrain on Jupiter's moon Ganymede. It is a deformed trough that runs for approximately 1,500 kilometres (930 mi) across the moon's surface from north to south. Its surface is thought to be younger than the darker materials found in the regions that surround it."
+    },
+    {
+      "id": "1753",
+      "item": "Q5350683",
+      "title": "El (crater)",
+      "url": "https://en.wikipedia.org/wiki/El_(crater)",
+      "revision": "1364266482",
+      "extract": "El is a crater on Ganymede. It has a small \"pit\" in its center. Craters with such a \"central pit\" are common across Ganymede and are especially intriguing since they may reveal secrets about the structure of the satellite's shallow subsurface."
+    },
+    {
+      "id": "1795",
+      "item": "Q25908096",
+      "title": "En-zu (crater)",
+      "url": "https://en.wikipedia.org/wiki/En-zu_(crater)",
+      "revision": "1364464857",
+      "extract": "En-zu is a small crater located a few kilometers north of the equator of Ganymede, the largest moon of Jupiter.1 mi), making it the second-smallest named crater on Ganymede. Anat is the only named crater smaller than En-zu."
+    },
+    {
+      "id": "1804",
+      "item": "Q5379032",
+      "title": "Enki Catena",
+      "url": "https://en.wikipedia.org/wiki/Enki_Catena",
+      "revision": "1364275347",
+      "extract": "Enki Catena is a crater chain on Ganymede measuring 161.3 kilometres (100.2 mi) long. It is composed of thirteen individual craters that are overlapping each other, forming a line or chain."
+    },
+    {
+      "id": "1805",
+      "item": "Q25908094",
+      "title": "Enkidu (crater)",
+      "url": "https://en.wikipedia.org/wiki/Enkidu_(crater)",
+      "revision": "1364184499",
+      "extract": "Enkidu is a prominent and bright ray crater with a dome on Jupiter's largest moon Ganymede. It has a dome at its center and clearly exhibits rays only in the southeast direction. The crater is 122 kilometres (76 mi) wide."
+    },
+    {
+      "id": "1816",
+      "item": "Q25908097",
+      "title": "Epigeus (crater)",
+      "url": "https://en.wikipedia.org/wiki/Epigeus_(crater)",
+      "revision": "1373687384",
+      "extract": "Epigeus is one of the largest known impact crater on Jupiter's Galilean satellite Ganymede, with a diameter of 343 km. It is about 6.5% of the mean equatorial diameter of Ganymede, which is about 5,270 km (3,270 mi)."
+    },
+    {
+      "id": "1825",
+      "item": "Q25908098",
+      "title": "Erichthonius (crater)",
+      "url": "https://en.wikipedia.org/wiki/Erichthonius_(crater)",
+      "revision": "1364279258",
+      "extract": "Erichthonius is a crater south of the equator of Jupiter's largest moon Ganymede. It is a small crater with a pit at its center and an outer rim with a diameter of approximately 31 kilometres (19 mi)."
+    },
+    {
+      "id": "1845",
+      "item": "Q25908099",
+      "title": "Eshmun (crater)",
+      "url": "https://en.wikipedia.org/wiki/Eshmun_(crater)",
+      "revision": "1364265795",
+      "extract": "Eshmun is a crater on Jupiter's largest moon Ganymede. The crater features a central dome surrounded by a circular trench, with an outer rim approximately 98 kilometres (61 mi) in diameter."
+    },
+    {
+      "id": "2076",
+      "item": "Q2601658",
+      "title": "Galileo Regio",
+      "url": "https://en.wikipedia.org/wiki/Galileo_Regio",
+      "revision": "1370768948",
+      "extract": "Galileo Regio is a large, dark surface feature on Jupiter's moon Ganymede. It is one of most ancient and largest surface feature on Ganymede, spanning as much as 4,500 kilometres (2,800 mi)."
+    },
+    {
+      "id": "2161",
+      "item": "Q25908104",
+      "title": "Gilgamesh (crater)",
+      "url": "https://en.wikipedia.org/wiki/Gilgamesh_(crater)",
+      "revision": "1364482934",
+      "extract": "Gilgamesh is a large multi-ring impact basin on Jupiter's largest moon Ganymede. The impact structure was observed in detail by the Voyager 2 and Galileo missions, enabling its characteristics to be studied in detail."
+    },
+    {
+      "id": "2275",
+      "item": "Q12766523",
+      "title": "Gula (crater)",
+      "url": "https://en.wikipedia.org/wiki/Gula_(crater)",
+      "revision": "1357119204",
+      "extract": "Gula is a pedestal impact crater on Jupiter's moon Ganymede. Located immediately to the north of the similarly sized Achelous, both craters are surrounded by a thick ring of impact ejecta blasted out by their respective impact events."
+    },
+    {
+      "id": "2359",
+      "item": "Q25908109",
+      "title": "Harakhtes (crater)",
+      "url": "https://en.wikipedia.org/wiki/Harakhtes_(crater)",
+      "revision": "1366528805",
+      "extract": "Harakhtes is a major crater on Ganymede, the largest moon of Jupiter. It is a bright dome crater located in the northern part of Ganymede's leading hemisphere. The crater is 108 kilometres (67 mi) in diameter."
+    },
+    {
+      "id": "2371",
+      "item": "Q18734038",
+      "title": "Harpagia Sulcus",
+      "url": "https://en.wikipedia.org/wiki/Harpagia_Sulcus",
+      "revision": "1348723864",
+      "extract": "Harpagia Sulcus is a bright, grooved terrain on Jupiter's moon Ganymede. It is roughly triangular in shape and is about 1,400 kilometres (870 mi) across."
+    },
+    {
+      "id": "2383",
+      "item": "Q25908111",
+      "title": "Hathor (crater)",
+      "url": "https://en.wikipedia.org/wiki/Hathor_(crater)",
+      "revision": "1341138606",
+      "extract": "Hathor is a highly disrupted, dome-shaped penepalimpsest on Ganymede, the largest moon of Jupiter. It is believed that Hathor is a very ancient crater in the process of being completely erased."
+    },
+    {
+      "id": "2480",
+      "item": "Q25908114",
+      "title": "Hershef (crater)",
+      "url": "https://en.wikipedia.org/wiki/Hershef_(crater)",
+      "revision": "1365633837",
+      "extract": "Hershef is a major bright ray crater with a central dome in the northern hemisphere of Ganymede, Jupiter's largest moon. The crater's outer rim measures approximately 120 kilometres (75 mi) in diameter, while its rays extend outward for hundreds of kilometers in all directions."
+    },
+    {
+      "id": "2581",
+      "item": "Q25908115",
+      "title": "Humbaba (crater)",
+      "url": "https://en.wikipedia.org/wiki/Humbaba_(crater)",
+      "revision": "1370208723",
+      "extract": "Humbaba is a crater on Jupiter's moon Ganymede. It is approximately 40 km (25 mi) in diameter and it exhibits a dark ray system, a rare type of feature on Ganymede. This makes Humbaba the largest dark crater on Ganymede."
+    },
+    {
+      "id": "2740",
+      "item": "Q25908121",
+      "title": "Isis (Ganymede crater)",
+      "url": "https://en.wikipedia.org/wiki/Isis_(Ganymede_crater)",
+      "revision": "1364318857",
+      "extract": "Isis is a major crater on Ganymede, the largest moon of Jupiter. It is a bright pit crater that is located slightly more than two-thirds of the distance from the equator of the moon to its south pole."
+    },
+    {
+      "id": "3008",
+      "item": "Q6401310",
+      "title": "Khensu (crater)",
+      "url": "https://en.wikipedia.org/wiki/Khensu_(crater)",
+      "revision": "1364266774",
+      "extract": "Khensu is an impact crater on Ganymede, the largest moon of Jupiter. It is a dark-floored crater with a bright ejecta blanket located in the grooved terrain region called Uruk Sulcus."
+    },
+    {
+      "id": "3058",
+      "item": "Q4180361",
+      "title": "Kittu (crater)",
+      "url": "https://en.wikipedia.org/wiki/Kittu_(crater)",
+      "revision": "1364258133",
+      "extract": "Kittu crater is a small crater on Jupiter's moon Ganymede. It is approximately 15 km (9.3 mi) in diameter and it exhibits a dark ray system which is rare on Ganymede."
+    },
+    {
+      "id": "3510",
+      "item": "Q25908131",
+      "title": "Lugalmeslam (crater)",
+      "url": "https://en.wikipedia.org/wiki/Lugalmeslam_(crater)",
+      "revision": "1370306328",
+      "extract": "Lugalmeslam is a central pit crater on Jupiter's largest moon Ganymede. The crater's outer rim measures approximately 64 kilometres (40 mi) in diameter, although it has been deformed in several areas."
+    },
+    {
+      "id": "3716",
+      "item": "Q16576579",
+      "title": "Marius Regio",
+      "url": "https://en.wikipedia.org/wiki/Marius_Regio",
+      "revision": "1368926379",
+      "extract": "Marius Regio is a major surface feature on Jupiter's moon Ganymede. It is an elongated feature composed of several dark, ancient areas crisscrossed and broken into several lobes by many younger, brighter sulci."
+    },
+    {
+      "id": "3820",
+      "item": "Q25908135",
+      "title": "Melkart (crater)",
+      "url": "https://en.wikipedia.org/wiki/Melkart_(crater)",
+      "revision": "1366021285",
+      "extract": "Melkart is an impact basin on Ganymede, the largest moon of Jupiter. 103 kilometres (64 mi) in size, its center hosts a distinct dome, surrounded by an irregularly-shaped depression and a rugged crater floor."
+    },
+    {
+      "id": "3829",
+      "item": "Q3854522",
+      "title": "Memphis Facula",
+      "url": "https://en.wikipedia.org/wiki/Memphis_Facula",
+      "revision": "1366339405",
+      "extract": "Memphis Facula is a palimpsest, or \"ghost crater\", on Ganymede, the largest of the Jovian satellites. It is a bright, circular surface feature that is about 360 km (220 mi) across, and is considered relatively old."
+    },
+    {
+      "id": "3918",
+      "item": "Q25908138",
+      "title": "Mir (crater)",
+      "url": "https://en.wikipedia.org/wiki/Mir_(crater)",
+      "revision": "1364180245",
+      "extract": "Mir is a small crater on Ganymede, the largest moon of planet Jupiter. Its diameter is only about 8 kilometres (5.0 mi). The floor of Mir crater is very bright, whereas its ray system is dark."
+    },
+    {
+      "id": "4145",
+      "item": "Q17564405",
+      "title": "Nanshe Catena",
+      "url": "https://en.wikipedia.org/wiki/Nanshe_Catena",
+      "revision": "1364258316",
+      "extract": "Nanshe Catena is a crater chain on Ganymede, the largest moon of the planet Jupiter. The crater chain is 103.8 kilometres (64.5 mi) long and about 50 kilometres (31 mi) wide, and it is composed of around seven individual ray craters that are closely overlapping each other, forming a line or chain."
+    },
+    {
+      "id": "4191",
+      "item": "Q25908148",
+      "title": "Nefertum (crater)",
+      "url": "https://en.wikipedia.org/wiki/Nefertum_(crater)",
+      "revision": "1365209404",
+      "extract": "Nefertum is a small, heavily deformed crater on Ganymede, the largest moon of Jupiter. The crater is relatively small with a diameter of only about approximately 29 kilometres (18 mi)."
+    },
+    {
+      "id": "4197",
+      "item": "Q4180497",
+      "title": "Neith (crater)",
+      "url": "https://en.wikipedia.org/wiki/Neith_(crater)",
+      "revision": "1364275149",
+      "extract": "Neith is an ancient impact crater on Ganymede, the largest moon of Jupiter."
+    },
+    {
+      "id": "4215",
+      "item": "Q12772455",
+      "title": "Nergal (crater)",
+      "url": "https://en.wikipedia.org/wiki/Nergal_(crater)",
+      "revision": "1364443502",
+      "extract": "Nergal is a small, dark-ray crater on Ganymede, the largest moon of Jupiter."
+    },
+    {
+      "id": "4250",
+      "item": "Q25336945",
+      "title": "Nicholson Regio",
+      "url": "https://en.wikipedia.org/wiki/Nicholson_Regio",
+      "revision": "1354115270",
+      "extract": "Nicholson Regio is a large, dark, surface feature on Jupiter's moon Ganymede. It is a roughly-oval feature composed of several dark, ancient areas that are dissected or interrupted by younger sulci. According to current geological studies, Nicholson Regio contains the oldest surface of Ganymede."
+    },
+    {
+      "id": "4254",
+      "item": "Q25908150",
+      "title": "Nidaba (crater)",
+      "url": "https://en.wikipedia.org/wiki/Nidaba_(crater)",
+      "revision": "1366137561",
+      "extract": "Nidaba is a penepalimpsest, an ancient crater in the process of disappearing, on Ganymede, the largest moon of the planet Jupiter. The penepalimpsest is approximately 199 kilometres (124 mi) wide, and a smaller, younger, and better-preserved crater lies within it."
+    },
+    {
+      "id": "4296",
+      "item": "Q25908154",
+      "title": "Ninki (crater)",
+      "url": "https://en.wikipedia.org/wiki/Ninki_(crater)",
+      "revision": "1364180567",
+      "extract": "Ninki is a crater on Ganymede, the largest moon of Jupiter. The crater is approximately 194 kilometres (121 mi) wide, including the outer, larger basin."
+    },
+    {
+      "id": "4297",
+      "item": "Q25908155",
+      "title": "List of craters on Ganymede",
+      "url": "https://en.wikipedia.org/wiki/List_of_craters_on_Ganymede",
+      "revision": "1365162294",
+      "extract": "Ganymede is the largest moon in the Solar System, and has a hard surface with many craters. Most of them are named after figures from Egyptian, Mesopotamian, Phoenician, and other ancient Middle Eastern myths. Others are named after relatives of the mythological Trojan prince Ganymede from Greek mythology."
+    },
+    {
+      "id": "4306",
+      "item": "Q18731196",
+      "title": "Nippur Sulcus",
+      "url": "https://en.wikipedia.org/wiki/Nippur_Sulcus",
+      "revision": "1366339784",
+      "extract": "Nippur Sulcus is a grooved terrain on Jupiter's moon Ganymede. It is a trough that runs for approximately 1,425 kilometres (885 mi) across the moon's surface. Its surface is thought to be younger than the darker materials found in other regions elsewhere on the moon."
+    },
+    {
+      "id": "4356",
+      "item": "Q25909214",
+      "title": "Nun Sulci",
+      "url": "https://en.wikipedia.org/wiki/Nun_Sulci",
+      "revision": "1365336094",
+      "extract": "Nun Sulci is a massive, sprawling region of crisscrossing grooved terrain on Jupiter's largest moon Ganymede. It is populated by a handful of craters that were deformed by the tectonic processes that created its sulci."
+    },
+    {
+      "id": "4509",
+      "item": "Q25908159",
+      "title": "Osiris (Ganymede crater)",
+      "url": "https://en.wikipedia.org/wiki/Osiris_(Ganymede_crater)",
+      "revision": "1366021687",
+      "extract": "Osiris is a prominent crater on Jupiter's moon Ganymede. It has two crater rims— a very small one at the center and a larger one that completely surrounds the other. The crater's outer rim approximately 107 kilometres (66 mi) wide.31 mi) high relative to the surrounding depression."
+    },
+    {
+      "id": "4662",
+      "item": "Q25336951",
+      "title": "Perrine Regio",
+      "url": "https://en.wikipedia.org/wiki/Perrine_Regio",
+      "revision": "1370665805",
+      "extract": "Perrine Regio is a large, dark surface feature on Jupiter's moon Ganymede. It is an irregularly-shaped feature composed of several dark, older areas that are frequently dissected or interrupted by lighter, younger features."
+    },
+    {
+      "id": "4858",
+      "item": "Q25908160",
+      "title": "Ptah (crater)",
+      "url": "https://en.wikipedia.org/wiki/Ptah_(crater)",
+      "revision": "1370304032",
+      "extract": "Ptah is a crater on Ganymede, the largest moon in the Jovian system. It is a small crater with a bright and well-defined ray system, making it one of the brightest features on the moon. Ptah is located slightly more than two-thirds of the distance from equator of the moon to its south pole."
+    },
+    {
+      "id": "5286",
+      "item": "Q25908163",
+      "title": "Saltu (crater)",
+      "url": "https://en.wikipedia.org/wiki/Saltu_(crater)",
+      "revision": "1364470668",
+      "extract": "Saltu is a highly deformed crater on the surface of Ganymede, the largest moon of Jupiter. It is a relatively small crater, with a diameter of approximately 40 kilometres (25 mi), and much of it has been disrupted and torn apart by a massive rift produced by tectonic activity."
+    },
+    {
+      "id": "5414",
+      "item": "Q25908168",
+      "title": "Seker (crater)",
+      "url": "https://en.wikipedia.org/wiki/Seker_(crater)",
+      "revision": "1364184417",
+      "extract": "Seker is a bright halo ray crater with a dome at its center on Jupiter's largest moon Ganymede. The crater is 103 kilometres (64 mi) wide."
+    },
+    {
+      "id": "5436",
+      "item": "Q25908170",
+      "title": "Serapis (crater)",
+      "url": "https://en.wikipedia.org/wiki/Serapis_(crater)",
+      "revision": "1366127586",
+      "extract": "Serapis is a very unusually shaped dome impact crater on Ganymede, the largest moon of Jupiter."
+    },
+    {
+      "id": "5503",
+      "item": "Q25908171",
+      "title": "Shu (crater)",
+      "url": "https://en.wikipedia.org/wiki/Shu_(crater)",
+      "revision": "1365375312",
+      "extract": "Shu is a prominent bright ray impact crater in the northern hemisphere of Ganymede, the largest moon of Jupiter. The crater is approximately 44 kilometres (27 mi) in diameter, and its bright ray system extends for several hundred kilometers in all directions."
+    },
+    {
+      "id": "5573",
+      "item": "Q25909220",
+      "title": "Sippar Sulcus",
+      "url": "https://en.wikipedia.org/wiki/Sippar_Sulcus",
+      "revision": "1366037924",
+      "extract": "Sippar Sulcus is a large grooved terrain on Jupiter's largest moon Ganymede. It is a trough that runs for approximately 3,260 kilometres (2,030 mi) across the moon's surface and is likely a result of cryovolcanism. Its surface is believed to be significantly younger than the darker terrain that are close to it."
+    },
+    {
+      "id": "5809",
+      "item": "Q25908176",
+      "title": "Ta-urt (crater)",
+      "url": "https://en.wikipedia.org/wiki/Ta-urt_(crater)",
+      "revision": "1365634928",
+      "extract": "Ta-urt is a major crater in the northern hemisphere of Jupiter's largest moon Ganymede. It is a concentric crater with a pit in the middle and two crater rims, with the smaller rim being completely inside the bigger one."
+    },
+    {
+      "id": "5847",
+      "item": "Q25908173",
+      "title": "Tammuz (crater)",
+      "url": "https://en.wikipedia.org/wiki/Tammuz_(crater)",
+      "revision": "1364180001",
+      "extract": "Tammuz is a crater on Ganymede, the largest moon of planet Jupiter. At about 51 kilometres (32 mi) in diameter, the crater is a very rare type because it has both bright rays and dark rays."
+    },
+    {
+      "id": "5981",
+      "item": "Q25908178",
+      "title": "Thoth (crater)",
+      "url": "https://en.wikipedia.org/wiki/Thoth_(crater)",
+      "revision": "1367569269",
+      "extract": "Thoth is a crater on Ganymede, the largest moon of Jupiter. The crater is approximately 102 kilometres (63 mi) wide and it has a pit at its center which is quite common on Ganymede."
+    },
+    {
+      "id": "5991",
+      "item": "Q25909221",
+      "title": "Tiamat Sulcus",
+      "url": "https://en.wikipedia.org/wiki/Tiamat_Sulcus",
+      "revision": "1366040852",
+      "extract": "Tiamat Sulcus is a bright, grooved terrain, or sulcus, on Ganymede, the largest moon of the planet Jupiter."
+    },
+    {
+      "id": "6091",
+      "item": "Q25908179",
+      "title": "Tros (crater)",
+      "url": "https://en.wikipedia.org/wiki/Tros_(crater)",
+      "revision": "1364253692",
+      "extract": "Tros is a major crater near the equator of Jupiter's moon Ganymede. It is a concentric ray crater with two rims and very bright rays. The crater's outer rim is approximately 92 kilometres (57 mi) to 94 kilometres (58 mi) wide and it encompasses the smaller, inner rim."
+    },
+    {
+      "id": "6246",
+      "item": "Q1112216",
+      "title": "Uruk Sulcus",
+      "url": "https://en.wikipedia.org/wiki/Uruk_Sulcus",
+      "revision": "1373771187",
+      "extract": "Uruk Sulcus is a bright region of grooved terrain on Jupiter's largest moon moon Ganymede. Its length is approximately 2,200 km (1,400 mi) and is thought to be younger than the darker material in nearby Galileo Regio and similar regions elsewhere on the moon."
+    },
+    {
+      "id": "6611",
+      "item": "Q25909223",
+      "title": "Xibalba Sulcus",
+      "url": "https://en.wikipedia.org/wiki/Xibalba_Sulcus",
+      "revision": "1352560964",
+      "extract": "Xibalba Sulcus is a bright, grooved terrain, or sulcus, on Ganymede, the largest moon of the planet Jupiter."
+    },
+    {
+      "id": "6692",
+      "item": "Q25908183",
+      "title": "Zakar (crater)",
+      "url": "https://en.wikipedia.org/wiki/Zakar_(crater)",
+      "revision": "1364177828",
+      "extract": "Zakar is an ancient ghost crater—a heavily degraded crater—on the surface of Ganymede, the largest moon of Jupiter. The crater is about 170 kilometres (110 mi) across, although most of its structure has been thoroughly eroded and degraded, making it extremely difficult to see."
+    },
+    {
+      "id": "6756",
+      "item": "Q25908835",
+      "title": "Zu Fossae",
+      "url": "https://en.wikipedia.org/wiki/Zu_Fossae",
+      "revision": "1362489749",
+      "extract": "Zu Fossae is a sprawling, multi-ring system of furrows on Ganymede, the largest moon of Jupiter. A fossa is a long, narrow depression (trough) on the surface of an extraterrestrial body. It is one of the largest and most complex surface features on Ganymede."
+    },
+    {
+      "id": "14133",
+      "item": "Q25908136",
+      "title": "Menhit (crater)",
+      "url": "https://en.wikipedia.org/wiki/Menhit_(crater)",
+      "revision": "1364182737",
+      "extract": "Menhit is an impact crater on Ganymede, the largest moon of planet Jupiter. Although it is a relatively wide crater, with a diameter of 140 kilometres (87 mi), much of its structure has already been degraded and erased."
+    },
+    {
+      "id": "15302",
+      "item": "Q25908966",
+      "title": "Musa Patera",
+      "url": "https://en.wikipedia.org/wiki/Musa_Patera",
+      "revision": "1364485248",
+      "extract": "Musa Patera is a surface depression on Ganymede, the largest moon of Jupiter. The 69 km (43 mi)–wide depression consists of curvilinear and arcuate cliffs and, based on studies of its structure, is considered a potential cryovolcano caldera."
+    },
+    {
+      "id": "15304",
+      "item": "Q25908967",
+      "title": "Natrun and Rum Paterae",
+      "url": "https://en.wikipedia.org/wiki/Natrun_and_Rum_Paterae",
+      "revision": "1364485374",
+      "extract": "Natrun and Rum Paterae are a pair of surface depressions on Jupiter's largest moon Ganymede. These depressions consist of curvilinear and arcuate cliffs that resemble scalloped-shape lava flows. Both are considered as potential ground-level cryovolcano calderas."
+    },
+    {
+      "id": "15305",
+      "item": "Q25908964",
+      "title": "Hammamat Patera",
+      "url": "https://en.wikipedia.org/wiki/Hammamat_Patera",
+      "revision": "1364456187",
+      "extract": "Hammamat Patera is a small surface depression on Ganymede, the largest moon of Jupiter. At only about 45 km (28 mi) in diameter, this depression is roughly triangular in shape with curvilinear sides and cliffs. It is considered a potential ground-level cryovolcano caldera."
+    }
+  ]
+}

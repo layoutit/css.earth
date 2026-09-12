@@ -57,8 +57,7 @@ export async function prepareFactsheet(objectDirectory:string, { check = false, 
   if (editorial) {
     // Only prose/labels: imagery, legends, numeric data and runtime geometry still
     // belong to full preparation. Use the same label formatter as that owner.
-    const isStatic = source.schema === 'cssearth-static-surface-content@1';
-    const authored = parseLenses(isStatic ? requireRecord(source.controls).lenses : source.lenses);
+    const authored = parseLenses(source.lenses);
     const labeled = authored.labels ? prepareLensLabels(authored, authored.labels) : authored;
     const updateControls = (values:unknown) => {
       const controls=requireArray(values).map(parseLens);
@@ -81,10 +80,8 @@ export async function prepareFactsheet(objectDirectory:string, { check = false, 
     const runtime = await read('prepared/runtime.json');
     await publish('prepared/runtime.json', { ...runtime, controls: { ...requireRecord(runtime.controls),
       lenses: { ...requireRecord(requireRecord(runtime.controls).lenses), controls: updateControls(requireRecord(requireRecord(runtime.controls).lenses).controls) } } });
-    if (!isStatic) {
-      const lenses = await read('prepared/lenses.json');
-      await publish('prepared/lenses.json', { ...lenses, controls: updateControls(lenses.controls) });
-    }
+    const lenses = await read('prepared/lenses.json');
+    await publish('prepared/lenses.json', { ...lenses, controls: updateControls(lenses.controls) });
   }
   for (const path of ['prepared/authored-preparation.json', 'prepared/world-navigation.json']) {
     try {
