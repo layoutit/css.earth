@@ -44,17 +44,35 @@ for (const id of bodies) {
     assert.ok(record(objectDescriptor) && record(objectDescriptor.properties) && record(objectDescriptor.properties.recipe) && record(objectDescriptor.properties.recipe.shape));
     const shaped = objectDescriptor.properties.recipe.shape.kind === "radial-terrain";
     const hit = (runtime as unknown as { surfaceHit?: { target: number; triangles: number[][][] } }).surfaceHit;
-    const band = plan.surfaceRadiusUnits;
-    if (shaped) { assert.ok(hit, `${id} shape body carries a hit mesh`); assert.equal(plan.target, hit!.target); assert.ok(band, `${id} declares its radius band`); }
-    else assert.equal(band, undefined, `${id} sphere declares no radius band`);
+    const band = plan.surfaceRadiusUnits, ellipsoid = plan.surfaceEllipsoidUnits;
+    // An oblate body on the paged lane anchors on its rendered leaf surface around the authored reference ellipsoid.
+    const paged = objectDescriptor.properties.recipe.sources.some((source: unknown) => record(source) && source.id === "paged-ellipsoid");
+    if (shaped) { assert.ok(hit, `${id} shape body carries a hit mesh`); assert.equal(plan.target, hit!.target); assert.ok(band, `${id} declares its radius band`); assert.equal(ellipsoid, undefined); }
+    else if (paged && objectDescriptor.properties.recipe.shape.kind === "ellipsoid") {
+      assert.ok(ellipsoid, `${id} declares its ellipsoid band`); assert.equal(band, undefined);
+      const shape = objectDescriptor.properties.recipe.shape;
+      assert.equal(ellipsoid!.equatorial, plan.meshRadiusUnits);
+      assert.ok(Math.abs(ellipsoid!.polar - plan.meshRadiusUnits * Number(shape.polarRadiusKm) / Number(shape.radiusKm)) < 1e-6, `${id} polar semi-axis follows the authored shape`);
+      assert.deepEqual(ellipsoid!.north, axes.north);
+    } else { assert.equal(band, undefined, `${id} sphere declares no radius band`); assert.equal(ellipsoid, undefined); }
     const ids = new Set<string>();
-    let previous = Number.POSITIVE_INFINITY;
+    let previous = Number.POSITIVE_INFINITY, noted = 0;
     for (const feature of catalog.features) {
       assert.ok(!ids.has(feature.id), `${id}: ${feature.id} repeats`); ids.add(feature.id);
       assert.ok(feature.longitudeDeg >= 0 && feature.longitudeDeg < 360 && Math.abs(feature.latitudeDeg) <= 90, feature.name);
       const u = (((feature.longitudeDeg - Number(edge)) % 360) + 360) % 360 / 360;
       const expected = mapDirection(u, (90 - feature.latitudeDeg) / 180, axes);
-      if (shaped) {
+      if (ellipsoid) {
+        // Longitude is exact on the rendered leaf; latitude may shift by the leaf homography; the radius stays in the declared band.
+        const anchor = feature.anchorUnits, up = anchor[0] * axes.north[0] + anchor[1] * axes.north[1] + anchor[2] * axes.north[2];
+        const share = Math.sqrt(Math.max(0, anchor[0] ** 2 + anchor[1] ** 2 + anchor[2] ** 2 - up * up) / ellipsoid.equatorial ** 2 + up * up / ellipsoid.polar ** 2);
+        assert.ok(share >= ellipsoid.minimumShare * (1 - 1e-3) && share <= ellipsoid.maximumShare * (1 + 1e-3), `${id}: ${feature.name} anchor lies in the ellipsoid band`);
+        const dot = (a: readonly number[], b: readonly number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
+        const longitude = ((Math.atan2(dot(anchor, axes.east), dot(anchor, axes.prime)) * 180 / Math.PI + Number(edge)) % 360 + 360) % 360;
+        const separation = Math.abs(((longitude - feature.longitudeDeg) % 360 + 540) % 360 - 180) * Math.cos(feature.latitudeDeg * Math.PI / 180);
+        assert.ok(separation < 0.05, `${id}: ${feature.name} anchor keeps its longitude (${longitude.toFixed(3)} vs ${feature.longitudeDeg})`);
+        assert.ok(expected.every((n, i) => Math.abs(n - feature.normal[i]!) < 1e-5), `${id}: ${feature.name} normal is the geodetic normal`);
+      } else if (shaped) {
         const length = Math.hypot(...feature.anchorUnits);
         assert.ok(expected.every((n, i) => Math.abs(n * length - feature.anchorUnits[i]) < 1e-2), `${id}: ${feature.name} anchor follows the body frame`);
         assert.ok(length >= band!.minimum * (1 - 1e-3) && length <= band!.maximum * (1 + 1e-3), `${id}: ${feature.name} anchor lies within the hit mesh band`);
@@ -62,6 +80,17 @@ for (const id of bodies) {
       assert.ok(feature.diameterKm <= previous, `${id}: prepared priority is diameter order`);
       previous = feature.diameterKm;
       assert.ok(feature.searchNames.length > 0 && feature.origin.length >= 0, feature.name);
+      // A caption note is a short Wikipedia lead summary pinned with its article; the pinned document is the only source.
+      if (feature.note) { assert.ok(feature.note.text.length <= 321 && feature.note.url.startsWith("https://en.wikipedia.org/wiki/"), `${id}: ${feature.name} note`); noted++; }
     }
+    const rawCatalog: unknown = JSON.parse(bytes.toString("utf8"));
+    assert.ok(record(rawCatalog));
+    if (rawCatalog.notes !== undefined) {
+      assert.ok(record(rawCatalog.notes) && rawCatalog.notes.count === noted && rawCatalog.notes.license === "CC BY-SA 4.0", `${id}: notes provenance`);
+      const pinned: unknown = JSON.parse(await readFile(new URL(`${id}/source/features/notes.json`, roots), "utf8"));
+      assert.ok(record(pinned) && Array.isArray(pinned.entries), `${id}: pinned notes`);
+      const byId = new Map((pinned.entries as { id: string; extract: string; url: string }[]).map(entry => [entry.id, entry]));
+      for (const feature of catalog.features) if (feature.note) assert.deepEqual(feature.note, { text: byId.get(feature.id)!.extract, title: (byId.get(feature.id) as { title: string }).title, url: byId.get(feature.id)!.url }, `${id}: ${feature.name} note matches its pin`);
+    } else assert.equal(noted, 0, `${id}: notes without a pinned document`);
   });
 }

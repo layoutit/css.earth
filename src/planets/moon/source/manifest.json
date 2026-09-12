@@ -678,7 +678,7 @@
       "expectedSha256": "3cf4d02e87f7ab896f668acb8caed93ea9f36136a756c6e6c69b01b20e6e2671",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MOON_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -716,8 +716,8 @@
     {
       "id": "moon-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1452,
-      "expectedSha256": "a24102c8e12b7d9b2fbc5483994b6c439745e404bec65f84bd88bc2336788d8a",
+      "expectedBytes": 1246,
+      "expectedSha256": "9be698dd91e2412cbea30b385ec37b597c33d3aa9519daaa58b6f9d3d0af0f7b",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -754,7 +754,7 @@
       "path": "presentation/solar-system.json",
       "expectedSha256": "118b64ae531350d309ff002299cdc2aed9fa42691d0614bcde65ea71cda423cd",
       "expectedBytes": 1587,
-      "origin": "Repository-authored physical scene recipe; mean radius 1737.4 km from the pinned JPL record and the shared camera plan (defaultZoom 1.1, initial pitch 40\u00b0) carried over from the retired static-surface geometry",
+      "origin": "Repository-authored physical scene recipe; mean radius 1737.4 km from the pinned JPL record and the shared camera plan (defaultZoom 1.1, initial pitch 40°) carried over from the retired static-surface geometry",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked source recipe authored from the retired static camera plan and the shared Mercury/Venus/Mars marker layout",

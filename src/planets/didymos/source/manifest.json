@@ -319,8 +319,8 @@
     {
       "id": "didymos-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1067,
-      "expectedSha256": "1b9ac43c6c098bca9f390bc1089d568f7c12c936530e053db83bdfdea8d759d7",
+      "expectedBytes": 1092,
+      "expectedSha256": "bfdedc81d46e0dd35c5d99417b4c51e795b1b12b618322c415fbebe075e989d0",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -350,6 +350,29 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored map frame."
+      }
+    },
+    {
+      "id": "didymos-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 478,
+      "expectedSha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts didymos: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
       }
     }
   ]

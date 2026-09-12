@@ -106,7 +106,10 @@ export function admitSurfaceFeatureLabels(candidates: readonly SurfaceLabelCandi
   candidates.forEach((candidate, rank) => {
     const { projected } = candidate;
     if (!(projected.facing > policy.limbCosine)) return;
-    if (!(projected.diameterPx >= policy.minimumDiameterPixels) && rank >= policy.alwaysVisibleCount && candidate.index !== pinned) return;
+    // A name without a published size (diameter 0) has no pixel size to gate on: it competes for the remaining slots in
+    // its prepared rank, after every sized feature, whenever the zoom gate is open.
+    const unsized = projected.diameterPx === 0;
+    if (!unsized && !(projected.diameterPx >= policy.minimumDiameterPixels) && rank >= policy.alwaysVisibleCount && candidate.index !== pinned) return;
     if (!(candidate.width > 0) || !(candidate.height > 0)) return;
     const rect = surfaceLabelRect(candidate.kind, projected, candidate.width, candidate.height);
     if (rect.left < -halfWidth + VIEWPORT_MARGIN_PX || rect.right > halfWidth - VIEWPORT_MARGIN_PX ||

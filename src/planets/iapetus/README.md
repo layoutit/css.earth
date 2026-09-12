@@ -27,6 +27,8 @@ The [Iapetus visual review](https://github.com/layoutit/cssEarth/blob/cc01831f59
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Iapetus (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge was fixed by drawing Gazetteer rims under both edge hypotheses and keeping the one where Turgis and Engelier rims on the Cassini/Voyager mosaic coincide with the imagery.
 
+Feature notes: 11 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
+
 - Both VIMS maps cover about 23.4% of reference-sphere solid angle, not measured physical surface area. Native scan gaps stay missing. Infrared bilinear/WebP sampling can soften mask edges.
 - The independent USGS comparison supports gross VIMS framing; precise local absolute registration remains unqualified.
 - VIMS has no photometric correction or cross-observation level matching. Illumination, viewing angle, grain size, noise and archive filtering remain in the signal; neither view measures ice abundance.

@@ -1,7 +1,12 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import type { AuthoredObjectDescriptor, SourceReference } from '@cssearth/objects';
-import { prepareSurfaceFeatures } from './index.js';
+import { parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures } from './index.js';
+import type { SurfaceFeaturePreparationContext } from './index.js';
+import { parseEllipsoidSemiAxes, renderedEllipsoidSampler } from './ellipsoid.js';
+import type { SurfaceSampler } from './ellipsoid.js';
+import type { GeographicScene } from '../geographic-pages/contracts.mts';
 import { authoredPresentationBasis } from '../world-navigation-sources.js';
 
 export interface FeatureContent { readonly searchLabel: string; readonly description: string; }
@@ -32,12 +37,54 @@ export async function attachSurfaceFeatures({ descriptor, sources, sourceDirecto
   // Shape-model bodies anchor on their picking mesh: the sampler's body-fixed frame is the tool's 0° edge with the shared axes.
   if (radialTerrain && !(hit?.triangles?.length && typeof hit.target === 'number')) throw new TypeError('Shape-model surface features need the prepared hit mesh.');
   const hitMesh = radialTerrain && hit?.triangles && typeof hit.target === 'number' ? { target: hit.target, triangles: hit.triangles } : undefined;
-  const features = await prepareSurfaceFeatures({ objectId: descriptor.id, sourceDirectory, publicDirectory, outputDirectory,
+  // The paged ellipsoid lane renders an oblate flat-leaf globe whose equatorial radius is the mesh radius: geodetic
+  // catalogue positions anchor where its leaf frames draw them, checked against the authored reference ellipsoid.
+  const paged = parsed.get('paged-ellipsoid');
+  const surface = paged && descriptor.recipe.shape.kind === 'ellipsoid'
+    ? await pagedEllipsoidSurface({ descriptor, paged, config: config.value, sourceDirectory, outputDirectory, meshRadiusUnits }) : undefined;
+  const context: SurfaceFeaturePreparationContext & { readonly surface?: SurfaceSampler } = { objectId: descriptor.id, sourceDirectory, publicDirectory, outputDirectory,
     config: config.value, maxEntries: featuresRecipe.maxEntries, radiusKm: descriptor.recipe.shape.radiusKm, meshRadiusUnits,
-    tree: definition.tree as Parameters<typeof prepareSurfaceFeatures>[0]['tree'], ...(hitMesh ? { hitMesh } : {}),
-    declaredLensIds: descriptor.recipe.surfaces.flatMap(surface => surface.lenses.map(lens => lens.id)) });
+    tree: definition.tree as Parameters<typeof prepareSurfaceFeatures>[0]['tree'], ...(hitMesh ? { hitMesh } : {}), ...(surface ? { surface } : {}),
+    declaredLensIds: descriptor.recipe.surfaces.flatMap(surface => surface.lenses.map(lens => lens.id)) };
+  const features = await prepareSurfaceFeatures(context);
   return { definition: { ...definition, features: features.plan },
     features: { searchLabel: 'Named features', description: `${features.plan.catalog.count.toLocaleString('en')} IAU names from the Gazetteer of Planetary Nomenclature` } };
+}
+
+/** The paged lane's own geodetic mapping (the one its city destinations use) becomes the feature sampler. The lane
+ * writes `scene.json` before the presentation, so its leaf frames are read from the output directory. */
+async function pagedEllipsoidSurface({ descriptor, paged, config, sourceDirectory, outputDirectory, meshRadiusUnits }: {
+  descriptor: AuthoredObjectDescriptor; paged: Record<string, unknown>; config: unknown; sourceDirectory: string; outputDirectory: string; meshRadiusUnits: number;
+}): Promise<SurfaceSampler> {
+  const shape = descriptor.recipe.shape;
+  if (shape.polarRadiusKm === undefined || shape.secondaryRadiusKm !== undefined) throw new TypeError('Paged ellipsoid surface features need an oblate authored shape.');
+  if (paged.equatorialRadiusKm !== shape.radiusKm || paged.polarRadiusKm !== shape.polarRadiusKm) throw new TypeError('Authored ellipsoid radii differ from the paged lane profile.');
+  const semiAxes = parseEllipsoidSemiAxes({ equatorial: meshRadiusUnits, polar: meshRadiusUnits * shape.polarRadiusKm / shape.radiusKm });
+  const recipe = parseSurfaceFeaturesConfig(config);
+  const axes = parseSurfaceAxes(JSON.parse(await readFile(resolve(sourceDirectory, recipe.surfaceMap), 'utf8')));
+  const scene = geographicScene(JSON.parse(await readFile(resolve(outputDirectory, 'scene.json'), 'utf8')));
+  const { prepareLocationPoint } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/geographic-pages/prepare-location.mts')).href) as typeof import('../geographic-pages/prepare-location.mts');
+  return renderedEllipsoidSampler(axes, recipe.mapLeftEdgeLongitudeDeg, semiAxes, (longitudeDeg, latitudeDeg) => {
+    // The lane maps signed longitudes; the catalogue keeps positive-east 0–360°.
+    const point = prepareLocationPoint(scene, longitudeDeg > 180 ? longitudeDeg - 360 : longitudeDeg, latitudeDeg);
+    if (point.length !== 3) throw new TypeError('Paged ellipsoid location is not a mesh point.');
+    return [point[0]!, point[1]!, point[2]!];
+  });
+}
+
+/** The prepared scene facts the lane's location mapping reads: latitude bands of leaves with their frames. */
+function geographicScene(value: unknown): GeographicScene {
+  const scene = record(value, 'prepared paged scene'), body = record(scene.body, 'prepared paged scene body');
+  if (!Array.isArray(body.bands) || !body.bands.length) throw new TypeError('Prepared paged scene has no latitude bands.');
+  for (const band of body.bands) {
+    const entry = record(band, 'prepared paged scene band');
+    if (!Number.isInteger(entry.latitudeIndex) || !Array.isArray(entry.leaves) || !entry.leaves.length) throw new TypeError('Prepared paged scene band is incomplete.');
+    for (const leaf of entry.leaves) {
+      const item = record(leaf, 'prepared paged scene leaf');
+      if (typeof item.style !== 'string' || typeof item.leafWidth !== 'number' || (item.geographicFrameMatrix !== undefined && typeof item.geographicFrameMatrix !== 'string')) throw new TypeError('Prepared paged scene leaf lacks its frame.');
+    }
+  }
+  return { ...scene, body: { bands: body.bands as GeographicScene['body']['bands'] } };
 }
 
 /** The shell renders retained search rows for named features when the prepared content declares them. */

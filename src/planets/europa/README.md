@@ -30,6 +30,8 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Europa (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 0° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries, and the readout longitude counts from the map’s left edge, which here coincides with the Gazetteer origin. The map edge was fixed by cropping the source raster at a landmark’s Gazetteer centre under both hypotheses (see the pull request that added the feature).
 
+Feature notes: 12 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
+
 - **Enhanced color:** It combines 756 nm infrared, 559 nm green, and 404 nm violet as display red, green, and blue. This is not natural color. After geometric normalization and the angle limits below, about 14.3% of the sphere has usable three-band coverage.
 
 - **Photographic coverage:** Observed monochrome forms the base elsewhere; grayscale does not imply measured neutral color. The gray cartographic grid appears only where both sources lack imagery.

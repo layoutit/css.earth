@@ -3,6 +3,7 @@ import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { parseDbf } from './dbf.js';
+import { parseFeatureNotes, type FeatureNotes } from './notes-schema.js';
 import { parseShpPolylines } from './shp.js';
 
 /** Prepared nomenclature catalogue: IAU/USGS Gazetteer centre points anchored to the body mesh.
@@ -50,6 +51,8 @@ export interface SurfaceFeaturesConfig {
   readonly outline: { readonly pieces: number };
   /** Optional mapped-structure archive whose traces replace extent boxes for the listed type codes. */
   readonly traces?: SurfaceFeatureTracesConfig;
+  /** Optional pinned notes document (inside `directory`): Wikipedia lead summaries keyed by Gazetteer feature id. */
+  readonly notes?: string;
 }
 export interface SurfaceFeaturesSourceManifest {
   readonly schema: typeof SURFACE_FEATURES_SOURCE_SCHEMA;
@@ -66,6 +69,8 @@ export interface PreparedSurfaceFeature {
   readonly outline: SurfaceFeatureOutline;
   readonly searchNames: readonly string[]; readonly searchContext: string;
   readonly origin: string; readonly approved: string; readonly quad: string; readonly link: string;
+  /** A source-backed note for the caption: an English Wikipedia lead summary (CC BY-SA 4.0) with its article. */
+  readonly note?: { readonly text: string; readonly title: string; readonly url: string };
 }
 export interface PreparedSurfaceFeatureCatalog {
   readonly schema: typeof PREPARED_SURFACE_FEATURES_SCHEMA; readonly objectId: string;
@@ -81,6 +86,8 @@ export interface PreparedSurfaceFeatureCatalog {
   readonly traces?: TraceSummary;
   /** Rows the export repeats for one feature identity; the first row's centre is kept. */
   readonly duplicates: { readonly features: number; readonly rows: number; readonly maxSeparationDeg: number; readonly maxDiameterDifferenceKm: number };
+  /** Present when the recipe pins a notes document: its provenance and how many features carry a note. */
+  readonly notes?: { readonly source: string; readonly retrievedAt: string; readonly license: string; readonly licenseUrl: string; readonly count: number };
   readonly features: readonly PreparedSurfaceFeature[];
 }
 export interface SurfaceFeatureCatalogDescriptor { readonly url: string; readonly bytes: number; readonly sha256: string; readonly count: number; }
@@ -148,7 +155,7 @@ export function parseSurfaceFeaturesConfig(value: unknown): SurfaceFeaturesConfi
     surfaceMap: relativePath(input.surfaceMap, 'features recipe surfaceMap'), mapLeftEdgeLongitudeDeg: finite(input.mapLeftEdgeLongitudeDeg, 'features recipe mapLeftEdgeLongitudeDeg'),
     output, publicBase, target: { className: text(target.className, 'target.className'), withoutClassName: target.withoutClassName === undefined ? null : text(target.withoutClassName, 'target.withoutClassName') },
     lensIds: Object.freeze([...lensIds as string[]]), kinds: Object.freeze(kinds), excludedTypeCodes: Object.freeze({ ...excluded as Record<string, string> }), labelPolicy: Object.freeze(policy),
-    outline: Object.freeze(outline), ...(traces ? { traces } : {}),
+    outline: Object.freeze(outline), ...(traces ? { traces } : {}), ...(input.notes === undefined ? {} : { notes: relativePath(input.notes, 'features recipe notes') }),
   });
 }
 
@@ -273,7 +280,7 @@ export function projectRadial(triangles: readonly (readonly (readonly number[])[
   return best;
 }
 
-function unzipMember(archive: string, member: string): Uint8Array {
+export function unzipMember(archive: string, member: string): Uint8Array {
   return execFileSync('unzip', ['-p', archive, member], { maxBuffer: 64 * 1024 * 1024 });
 }
 
@@ -438,6 +445,8 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   // their anchors are cast onto the shape model, so the datum only scales outline sizes and is recorded, not enforced.
   const datumTolerance = context.hitMesh ? 0.15 : 0.01;
   if (Math.abs(radiusM - context.radiusKm * 1000) > datumTolerance * context.radiusKm * 1000) throw new TypeError(`Gazetteer datum radius ${radiusM} m differs from the authored ${context.radiusKm} km body.`);
+  const notes: FeatureNotes | null = config.notes === undefined ? null : parseFeatureNotes(JSON.parse(await readFile(resolve(directory, config.notes), 'utf8')));
+  const noteById = new Map((notes?.entries ?? []).map(entry => [entry.id, entry]));
   if (metadata !== null && !/<useconst>\s*Public domain\.?\s*<\/useconst>/iu.test(metadata)) throw new TypeError('Gazetteer metadata no longer declares public-domain use constraints.');
   const table = parseDbf(unzipMember(archive, config.members.attributes));
   for (const name of ['name', 'clean_name', 'approvaldt', 'origin', 'diameter', 'center_lon', 'center_lat', 'type', 'code', 'approval', 'quad_code', 'link', 'min_lon', 'max_lon', 'min_lat', 'max_lat']) {
@@ -533,6 +542,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
       radiusUnits: round(radiusUnits, 4), outline,
       searchNames: [...new Set([row.name!, row.clean_name!].map(normalizeSearchText).filter(Boolean))], searchContext: normalizeSearchText(row.type!.split(',')[0]!),
       origin: row.origin!, approved: `${approved[1]}-${approved[2]}-${approved[3]}`, quad: row.quad_code!, link: row.link!.replace(/^http:\/\//u, 'https://'),
+      ...(noteById.has(id) ? { note: { text: noteById.get(id)!.extract, title: noteById.get(id)!.title, url: noteById.get(id)!.url } } : {}),
     };
     ids.set(id, feature);
     features.push(feature);
@@ -548,6 +558,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     excluded, skipped, assumed: { regionTypes: assumed, extentFallbacks, meshMisses, unsized }, duplicates: { features: duplicateIds.size, rows: duplicateRows, maxSeparationDeg: round(maxSeparationDeg, 4), maxDiameterDifferenceKm: round(maxDiameterDifferenceKm, 4) },
     ...(loadedTraces && config.traces ? { traces: { source: loadedTraces.manifest.source, sourcePage: loadedTraces.manifest.sourcePage, license: loadedTraces.manifest.license, snapshotDate: loadedTraces.manifest.snapshotDate,
       traces: loadedTraces.traces.length, matched: traceStats.matched, byCode: traceStats.byCode, unmatched: traceStats.unmatched, maximumVertices: config.traces.maximumVertices } } : {}),
+    ...(notes ? { notes: { source: notes.source, retrievedAt: notes.retrievedAt, license: notes.license, licenseUrl: notes.licenseUrl, count: features.filter(feature => feature.note).length } } : {}),
     features,
   };
   const bytes = Buffer.from(`${JSON.stringify(catalog)}\n`);

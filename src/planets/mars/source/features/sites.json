@@ -1,0 +1,380 @@
+{
+  "schema": "cssearth-surface-sites@1",
+  "source": "Spacecraft landing, touchdown and impact sites compiled from NASA NSSDCA, PDS, LROC, mission releases and cited papers; every coordinate quotes its page",
+  "retrievedAt": "2026-09-12",
+  "sites": [
+    {
+      "id": "viking-1",
+      "name": "Viking 1 Lander (Thomas Mutch Memorial Station)",
+      "kind": "lander",
+      "date": "1976-07-20",
+      "machineId": "viking-1-lander",
+      "latitudeDeg": 22.27,
+      "longitudeDegEast": 312.05,
+      "coordinateNote": "NSSDCA states planetocentric; Mars24 gives 312.05E 22.27N from Kuchynka et al. (2014). Latitude as stated: planetocentric.",
+      "precisionNote": null,
+      "naming": {
+        "name": "Thomas Mutch Memorial Station",
+        "authority": "NASA informal (not in the IAU Gazetteer)"
+      },
+      "source": {
+        "title": "NSSDCA: Viking Mission to Mars",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/viking.html",
+        "publisher": "NASA NSSDCA",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "On July 20, 1976 the Viking 1 Lander separated from the Orbiter and touched down at Chryse Planitia (22.27 N, 312.05 E, planetocentric)."
+    },
+    {
+      "id": "viking-2",
+      "name": "Viking 2 Lander (Gerald Soffen Memorial Station)",
+      "kind": "lander",
+      "date": "1976-09-03",
+      "machineId": "viking-2-lander",
+      "latitudeDeg": 47.64,
+      "longitudeDegEast": 134.29,
+      "coordinateNote": "NSSDCA states planetocentric. Mars24 lists 134.28E 48.27N (Kuchynka et al., 2014); the 48.27 value appears to be the planetographic latitude - the NSSDCA planetocentric value is recorded here. Latitude as stated: planetocentric.",
+      "precisionNote": null,
+      "naming": {
+        "name": "Gerald Soffen Memorial Station",
+        "authority": "NASA informal (not in the IAU Gazetteer)"
+      },
+      "source": {
+        "title": "NSSDCA: Viking Mission to Mars",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/viking.html",
+        "publisher": "NASA NSSDCA",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "The Viking 2 Lander touched down at Utopia Planitia (47.64 N, 134.29 E, planetocentric) on September 3, 1976."
+    },
+    {
+      "id": "mars-pathfinder",
+      "name": "Mars Pathfinder (Carl Sagan Memorial Station)",
+      "kind": "lander",
+      "date": "1997-07-04",
+      "machineId": null,
+      "latitudeDeg": 19.33,
+      "longitudeDegEast": 326.45,
+      "coordinateNote": "NSSDCA value converted from west longitude (360 - 33.55). Mars24's Kuchynka et al. value 326.75E 19.47N differs by ~0.3 deg in longitude; both recorded, NSSDCA kept as the primary quote. Latitude as stated: not stated by the NSSDCA page (Mars24: 326.75E 19.47N from Kuchynka et al. 2014, a planetocentric solution).",
+      "precisionNote": null,
+      "naming": {
+        "name": "Carl Sagan Memorial Station",
+        "authority": "NASA informal (not in the IAU Gazetteer)"
+      },
+      "source": {
+        "title": "NSSDCA: Mars Pathfinder Project Information",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/mesur.html",
+        "publisher": "NASA NSSDCA",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "The landing site in the Ares Vallis region is at 19.33 N, 33.55 W, the lander has been named the Carl Sagan Memorial Station."
+    },
+    {
+      "id": "mars-3",
+      "name": "Mars 3 lander (Ptolemaeus crater)",
+      "kind": "lander",
+      "date": "1971-12-02",
+      "machineId": null,
+      "latitudeDeg": -45.0,
+      "longitudeDegEast": 202.0,
+      "coordinateNote": "Approximate; converted from 158 W = 202 E, agreeing with the NASA HiRISE feature. Candidate hardware identified in HiRISE PSP_006154_1345 but not confirmed. Latitude as stated: not stated (approximate).",
+      "precisionNote": "Approximate to about 1 degree; the lander itself has not been confirmed in orbital images.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA Master Catalog: Mars 3 Lander",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-049F",
+        "publisher": "NASA Space Science Data Coordinated Archive (NSSDCA)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "7 m/s at approximately 45 degrees S, 158 degrees W, at 13:50:35 UT. || The predicted landing site was at latitude 45 degrees south, longitude 202 degrees east, in Ptolemaeus Crater."
+    },
+    {
+      "id": "mars-6",
+      "name": "Mars 6 lander impact (Margaritifer Sinus)",
+      "kind": "impact",
+      "date": "1974-03-12",
+      "machineId": null,
+      "latitudeDeg": -23.9,
+      "longitudeDegEast": 340.58,
+      "coordinateNote": "Converted from west longitude (360 - 19.42). Contact lost in direct proximity to the surface. Latitude as stated: not stated.",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NSSDCA Master Catalog: Mars 6",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1973-052A",
+        "publisher": "NASA Space Science Data Coordinated Archive (NSSDCA)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Mars 6 landed at 23.90 S, 19.42 W in the Margaritifer Sinus region of Mars."
+    },
+    {
+      "id": "beagle-2",
+      "name": "Beagle 2 (Isidis Planitia, identified 2015)",
+      "kind": "lander",
+      "date": "2003-12-25",
+      "machineId": null,
+      "latitudeDeg": 11.53,
+      "longitudeDegEast": 90.43,
+      "coordinateNote": "Location of the lander as identified in HiRISE images (Bridges et al. 2017); Mars24 cites the same paper. Latitude as stated: not stated in the abstract (Bridges et al. 2017).",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "Bridges, J. C., et al. (2017), Identification of the Beagle 2 lander on Mars, Royal Society Open Science 4:170785 (PMC5666264)",
+        "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5666264/",
+        "publisher": "The Royal Society / PubMed Central",
+        "rights": {
+          "statement": "Published by the Royal Society under the terms of the Creative Commons Attribution License - Creative Commons Attribution 4.0 International (CC BY 4.0).",
+          "evidenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+        }
+      },
+      "quote": "The 2003 Beagle 2 Mars lander has been identified in Isidis Planitia at 90.43 E, 11.53 N, close to the predicted target of 90.50 E, 11.53 N."
+    },
+    {
+      "id": "spirit",
+      "name": "Spirit (Columbia Memorial Station, Gusev crater)",
+      "kind": "lander",
+      "date": "2004-01-04",
+      "machineId": null,
+      "latitudeDeg": -14.572,
+      "longitudeDegEast": 175.478,
+      "coordinateNote": "NSSDCA sentence; Mars24 gives 175.48E -14.57N. Latitude as stated: not stated by NSSDCA (Mars24 cites Li et al. 2005-2007).",
+      "precisionNote": null,
+      "naming": {
+        "name": "Columbia Memorial Station",
+        "authority": "NASA informal (not in the IAU Gazetteer)"
+      },
+      "source": {
+        "title": "NSSDCA Master Catalog: Spirit (MER-A)",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2003-027A",
+        "publisher": "NASA Space Science Data Coordinated Archive (NSSDCA)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "The landing took place at 04:35 UT on 4 January 2004 (Earth received time), (11:35 p.m. Jan. 3 EST) approximately 2:25 p.m. local time, about one hour before Earth set, in Gusev Crater, at 14.572 S, 175.478 E."
+    },
+    {
+      "id": "opportunity",
+      "name": "Opportunity (Challenger Memorial Station, Eagle crater)",
+      "kind": "lander",
+      "date": "2004-01-25",
+      "machineId": null,
+      "latitudeDeg": -1.946,
+      "longitudeDegEast": 354.473,
+      "coordinateNote": "NSSDCA states IAU 2000 body-centered coordinates. Latitude as stated: planetocentric (IAU 2000 body-centered coordinates, as stated).",
+      "precisionNote": null,
+      "naming": {
+        "name": "Challenger Memorial Station",
+        "authority": "NASA informal (not in the IAU Gazetteer)"
+      },
+      "source": {
+        "title": "NSSDCA Master Catalog: Opportunity (MER-B)",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2003-032A",
+        "publisher": "NASA Space Science Data Coordinated Archive (NSSDCA)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "The spacecraft came to rest in a 20 m diameter crater at 1.946 S and 354.473 E (IAU 2000 body-centered coordinates)"
+    },
+    {
+      "id": "phoenix",
+      "name": "Phoenix (Vastitas Borealis)",
+      "kind": "lander",
+      "date": "2008-05-25",
+      "machineId": null,
+      "latitudeDeg": 68.22,
+      "longitudeDegEast": 234.25,
+      "coordinateNote": "Mars24 value; NSSDCA gives only the pre-landing nominal target 68.15 N, 125.9 W (= 234.1 E). Latitude as stated: not stated (Mars24; coordinates provided by D. Bass).",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NASA GISS: Mars24 Sunclock - Mars Lander Missions (updated 2023-12-09)",
+        "url": "https://www.giss.nasa.gov/tools/mars24/help/landers.html",
+        "publisher": "NASA Goddard Institute for Space Studies",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "NASA Mars Scout stationary probe that landed May 25, 2008, at 234.25E 68.22N in the Vastitas Borealis. || The landing site is in the north polar region between 65 and 72 degrees N, nominally at 68.15 N, 125.9 W"
+    },
+    {
+      "id": "curiosity",
+      "name": "Curiosity (Bradbury Landing, Gale crater)",
+      "kind": "lander",
+      "date": "2012-08-06",
+      "machineId": null,
+      "latitudeDeg": -4.589466996,
+      "longitudeDegEast": 137.441632997,
+      "coordinateNote": "PDS MSL PLACES localized_pos.csv row for SITE 1 (landing site). Mars24: 137.44E 4.59S. Latitude as stated: planetocentric (column planetocentric_latitude; planetodetic_latitude = -4.643738049).",
+      "precisionNote": null,
+      "naming": {
+        "name": "Bradbury Landing",
+        "authority": "NASA informal (not in the IAU Gazetteer)"
+      },
+      "source": {
+        "title": "PDS: MSL Rover PLACES bundle (urn:nasa:pds:msl_places), data_localizations/localized_pos.csv",
+        "url": "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/",
+        "publisher": "NASA Planetary Data System, Cartography and Imaging Sciences Node (JPL)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "SITE,1,-1,-1,0.000,0.000,0.000,-272039.268,8146811.223,-4.589466996,-4.643738049,137.441632997,-4501.040,..."
+    },
+    {
+      "id": "schiaparelli",
+      "name": "Schiaparelli (ExoMars 2016 EDM) impact site",
+      "kind": "impact",
+      "date": "2016-10-19",
+      "machineId": null,
+      "latitudeDeg": -2.07,
+      "longitudeDegEast": 353.79,
+      "coordinateNote": "ESA statement for the two new features seen by MRO CTX (parachute/heat shield and the dark patch interpreted as the module impact, about 1 km apart). Latitude as stated: not stated.",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "ESA: Mars Reconnaissance Orbiter views Schiaparelli landing site",
+        "url": "https://www.esa.int/About_Us/ESAC/Mars_Reconnaissance_Orbiter_views_Schiaparelli_landing_site",
+        "publisher": "European Space Agency",
+        "rights": {
+          "statement": "ESA Terms and conditions: all material published on the ESA website is protected by copyright and owned or controlled by ESA or the credited provider; reproduction requires prior written authorisation. Used here only as the citation for a stated fact.",
+          "evidenceUrl": "https://www.esa.int/Services/Terms_and_conditions"
+        }
+      },
+      "quote": "The two new features are located at 353.79 degrees east longitude, 2.07 degrees south latitude on Mars."
+    },
+    {
+      "id": "insight",
+      "name": "InSight (Elysium Planitia)",
+      "kind": "lander",
+      "date": "2018-11-26",
+      "machineId": null,
+      "latitudeDeg": 4.5,
+      "longitudeDegEast": 135.62,
+      "coordinateNote": "Mars24 value; the NSSDCA capture does not give coordinates. Latitude as stated: not stated (Mars24; coordinates provided by B. Semenov).",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NASA GISS: Mars24 Sunclock - Mars Lander Missions (updated 2023-12-09)",
+        "url": "https://www.giss.nasa.gov/tools/mars24/help/landers.html",
+        "publisher": "NASA Goddard Institute for Space Studies",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "NASA stationary probe that landed Nov. 26, 2018, in Elysium Planitia, at 135.62E 4.50N."
+    },
+    {
+      "id": "perseverance",
+      "name": "Perseverance (Octavia E. Butler Landing, Jezero crater)",
+      "kind": "lander",
+      "date": "2021-02-18",
+      "machineId": null,
+      "latitudeDeg": 18.444571297,
+      "longitudeDegEast": 77.450910771,
+      "coordinateNote": "PDS Mars 2020 PLACES best_tactical.csv row for SITE 1 (landing site). Mars24: 77.45E 18.44N. Latitude as stated: planetocentric (column planetocentric_latitude; planetodetic_latitude = 18.346169209).",
+      "precisionNote": null,
+      "naming": {
+        "name": "Octavia E. Butler Landing",
+        "authority": "NASA informal (not in the IAU Gazetteer)"
+      },
+      "source": {
+        "title": "PDS: Mars 2020 Rover PLACES bundle (urn:nasa:pds:mars2020_rover_places), data_localizations/best_tactical.csv",
+        "url": "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/",
+        "publisher": "NASA Planetary Data System, Geosciences Node (Washington University in St. Louis)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "SITE,1,-1,-1,0.000,0.000,0.000,1093296.385,4354495.494,18.444571297,18.346169209,77.450910771,-2569.721,..."
+    },
+    {
+      "id": "zhurong",
+      "name": "Tianwen-1 lander / Zhurong rover (Utopia Planitia)",
+      "kind": "lander",
+      "date": "2021-05-14",
+      "machineId": null,
+      "latitudeDeg": 25.07,
+      "longitudeDegEast": 109.93,
+      "coordinateNote": "Mars24 value; the figshare RoPeR dataset description independently gives 109.925 E, 25.066 N. Latitude as stated: not stated (Mars24 cites Liu et al. 2022; figshare dataset description gives 109.925E, 25.066N).",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NASA GISS: Mars24 Sunclock - Mars Lander Missions (updated 2023-12-09)",
+        "url": "https://www.giss.nasa.gov/tools/mars24/help/landers.html",
+        "publisher": "NASA Goddard Institute for Space Studies",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "It touched down late May 14, 2021 (UTC) at 109.93E 25.07N in the south of Utopia Planitia || In 2021, China's first Mars rover Zhurong successfully landed on the southern Utopia Planitia (109.925 E, 25.066 N)"
+    }
+  ],
+  "traverses": [
+    {
+      "id": "msl-curiosity-traverse",
+      "name": "Curiosity traverse (PLACES localizations)",
+      "machineId": null,
+      "date": "2012-08-06",
+      "source": {
+        "title": "PDS MSL Rover PLACES bundle, data_localizations (localized_pos.csv = one row per rover stop; localized_interp.csv = interpolated positions)",
+        "url": "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/",
+        "publisher": "NASA PDS",
+        "rights": {
+          "statement": "NASA PDS archive; NASA content not subject to copyright",
+          "evidenceUrl": "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/"
+        }
+      },
+      "path": {
+        "file": "traverses/msl_localized_pos.csv",
+        "format": "places-csv",
+        "latitudeColumn": "planetocentric_latitude",
+        "longitudeColumn": "longitude"
+      }
+    },
+    {
+      "id": "m2020-perseverance-traverse",
+      "name": "Perseverance traverse (PLACES localizations)",
+      "machineId": null,
+      "date": "2021-02-18",
+      "source": {
+        "title": "PDS Mars 2020 Rover PLACES bundle, data_localizations (best_tactical.csv = one row per site/drive; best_interp.csv = interpolated)",
+        "url": "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/",
+        "publisher": "NASA PDS",
+        "rights": {
+          "statement": "NASA PDS archive; NASA content not subject to copyright",
+          "evidenceUrl": "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/"
+        }
+      },
+      "path": {
+        "file": "traverses/m2020_best_tactical.csv",
+        "format": "places-csv",
+        "latitudeColumn": "planetocentric_latitude",
+        "longitudeColumn": "longitude"
+      }
+    }
+  ]
+}

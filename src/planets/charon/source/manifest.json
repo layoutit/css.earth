@@ -336,8 +336,8 @@
     {
       "id": "charon-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1156,
-      "expectedSha256": "c7de15df6b8049ea6f9e99252bb927b916f6d9eb840337cdc5cc04ff162c8ed9",
+      "expectedBytes": 1181,
+      "expectedSha256": "caf04ae02f71d64e3d2df85b24ce720b8c0d519a7f2a2f8af49c6bffe7ef6b73",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -655,6 +655,29 @@
       "path": "science/nh-charon-bond-georeferenced.json",
       "expectedBytes": 557,
       "expectedSha256": "23bac0c15b44cb683ec4c3d55c647fad6c73036b68b56d79c62f8dee44ce0101"
+    },
+    {
+      "id": "charon-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 3655,
+      "expectedSha256": "095a48ea646fb7aaf1b3a7060cfd23cc35a13f432a8dbe253dd2f225ffe9da95",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 7 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts charon: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ],
   "generatedIntermediates": []

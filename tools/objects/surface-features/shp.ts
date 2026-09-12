@@ -1,5 +1,5 @@
-/** Minimal ESRI shapefile reader for polyline records (shape type 3), enough for a pinned
- * tectonic-map archive. Coordinates are returned exactly as stored; callers project them. */
+/** Minimal ESRI shapefile reader: polyline records (shape type 3) for the pinned tectonic-map archive, and point (1) and
+ * polygon (5) records for Natural Earth layers. Coordinates are returned exactly as stored; callers project them. */
 export interface ShpPolyline { readonly index: number; readonly parts: readonly (readonly (readonly [number, number])[])[]; }
 
 const POLYLINE = 3, NULL_SHAPE = 0;
@@ -40,6 +40,60 @@ export function parseShpPolylines(bytes: Uint8Array): { readonly shapeType: numb
         parts.push(points);
       }
       records.push({ index: records.length, parts });
+    }
+    offset = end;
+  }
+  return { shapeType, records };
+}
+
+const POINT = 1, POLYGON = 5;
+export interface ShpPoint { readonly index: number; readonly point: readonly [number, number]; }
+export interface ShpShape { readonly index: number; readonly point: readonly [number, number] | null; readonly parts: readonly (readonly (readonly [number, number])[])[]; readonly box: readonly [number, number, number, number] | null; }
+
+/** Read every record of a point, polyline or polygon layer. Polygons return their rings as parts with the record's
+ * bounding box (min x, min y, max x, max y); points return a single coordinate and no box. */
+export function parseShpRecords(bytes: Uint8Array): { readonly shapeType: number; readonly records: readonly (ShpShape | null)[] } {
+  if (bytes.length < 100) throw new TypeError('Shapefile header is truncated.');
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  if (view.getInt32(0, false) !== 9994) throw new TypeError('Shapefile magic number is invalid.');
+  const fileLength = view.getInt32(24, false) * 2, shapeType = view.getInt32(32, true);
+  if (fileLength > bytes.length) throw new TypeError('Shapefile is truncated.');
+  if (![POINT, POLYLINE, POLYGON].includes(shapeType)) throw new TypeError(`Shapefile type ${shapeType} is not a point, polyline or polygon layer.`);
+  const records: (ShpShape | null)[] = [];
+  let offset = 100;
+  while (offset + 8 <= fileLength) {
+    const contentLength = view.getInt32(offset + 4, false) * 2;
+    const start = offset + 8, end = start + contentLength;
+    if (end > fileLength) throw new TypeError('Shapefile record is truncated.');
+    const type = view.getInt32(start, true);
+    if (type === NULL_SHAPE) records.push(null);
+    else if (type !== shapeType) throw new TypeError('Shapefile mixes shape types.');
+    else if (type === POINT) {
+      const x = view.getFloat64(start + 4, true), y = view.getFloat64(start + 12, true);
+      if (!Number.isFinite(x) || !Number.isFinite(y)) throw new TypeError('Shapefile coordinate is not finite.');
+      records.push({ index: records.length, point: [x, y], parts: [], box: null });
+    } else {
+      const box = [view.getFloat64(start + 4, true), view.getFloat64(start + 12, true), view.getFloat64(start + 20, true), view.getFloat64(start + 28, true)] as const;
+      const partCount = view.getInt32(start + 36, true), pointCount = view.getInt32(start + 40, true);
+      if (partCount < 1 || pointCount < 2) throw new TypeError('Shapefile shape is empty.');
+      const partsOffset = start + 44, pointsOffset = partsOffset + 4 * partCount;
+      if (pointsOffset + 16 * pointCount > end) throw new TypeError('Shapefile shape exceeds its record.');
+      const starts: number[] = [];
+      for (let part = 0; part < partCount; part++) starts.push(view.getInt32(partsOffset + 4 * part, true));
+      const parts: (readonly [number, number])[][] = [];
+      for (let part = 0; part < partCount; part++) {
+        const from = starts[part]!, to = part + 1 < partCount ? starts[part + 1]! : pointCount;
+        if (from < 0 || to > pointCount || to - from < 2) throw new TypeError('Shapefile part bounds are invalid.');
+        const points: (readonly [number, number])[] = [];
+        for (let index = from; index < to; index++) {
+          const x = view.getFloat64(pointsOffset + 16 * index, true), y = view.getFloat64(pointsOffset + 16 * index + 8, true);
+          if (!Number.isFinite(x) || !Number.isFinite(y)) throw new TypeError('Shapefile coordinate is not finite.');
+          points.push([x, y]);
+        }
+        parts.push(points);
+      }
+      if (box.some(value => !Number.isFinite(value))) throw new TypeError('Shapefile bounding box is not finite.');
+      records.push({ index: records.length, point: null, parts, box });
     }
     offset = end;
   }

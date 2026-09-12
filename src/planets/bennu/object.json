@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "305300f481e3d8b69a9d981cd97c1b0106607f4adb562d1ba90a9c2d8bc5ba00"
+    "sha256": "26cc7cbb0afe1899ae8c75f4f09464956881c10487dbfa2c38c1386ccc34fa82"
   },
   "id": "bennu",
   "properties": {
@@ -97,7 +97,7 @@
         {
           "id": "features",
           "path": "source/preparation/features.json",
-          "sha256": "016bbf80dfe888dcba7fb3bdfb024163f25e8dcde1cd1e4c222b5b736d65d88b"
+          "sha256": "4e2d782185756145e9a393f95e9a65f31404ea156ff5e468f26a3008b13647ce"
         }
       ],
       "features": {
@@ -138,7 +138,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8c03e29d5b6ee2934966dfdb506f47ce44d13a650cf9083f70040f6838ff1645"
+        "sha256": "7e8083cfe6e9ed9e9f7ebfb5a2a93eb99d102c8418867691c8bb70d2373a9863"
       }
     },
     "catalog": {
