@@ -27,6 +27,12 @@ observations; sharing a body does not require sharing one mesh. Prefer the
 matching published model over forcing imagery onto an incompatible shape.
 Use existing prepared-model selection while keeping one active object scene,
 only the selected model visible, and the shared renderer, camera and shell.
+Bind observation preparation to that selected model as well: camera validation,
+surface sampling, visibility, thumbnails and evidence must use the same mesh
+as the dataset's triangle atlas. Prefer archived per-pixel geometry products
+(the [registered mosaic guidance](references/registered-photographic-mosaics.md)
+and the DRACO route in the [implementation map](references/implementation-map.md#registered-photographic-mosaics))
+over pointing files whose pixel conventions the archive does not state.
 A restriction on renderer changes does not by itself freeze prepared geometry;
 respect any explicit geometry or topology restriction in the task's scope.
 Explain meaningful model differences beside the dataset and qualify registration,
