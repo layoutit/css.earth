@@ -4,11 +4,15 @@
 export interface InterpretedPlate { readonly data: Uint8Array; readonly size: number; readonly lossless: boolean; }
 export interface InterpretedSurface {
     readonly data: Uint8Array; readonly channels: 1 | 2 | 3 | 4; readonly nearest: boolean;
+    /** Optional direct source sampler for the polar sprite only. The packed latitude bands stay exactly as prepared. */
+    readonly nativePhotograph?: {
+        readonly sample: (longitudeDegrees: number, latitudeDegrees: number, color: number[]) => boolean;
+    };
     /** Emissive bodies: the stationary off-limb context and the limb plate at this density. */
     readonly plates?: { readonly offLimb: InterpretedPlate; readonly limb: InterpretedPlate };
 }
 export interface ObservationInterpretation {
-    (surface: { readonly id: string; readonly source: string; readonly science: Record<string, unknown> }, width: number, height: number, density: number): Promise<InterpretedSurface>;
+    (surface: { readonly id: string; readonly source: string; readonly science: Record<string, unknown>; readonly nativeSourcePoles?: boolean }, width: number, height: number, density: number): Promise<InterpretedSurface>;
 }
 /** Expand interpreted pixels to the RGBA layout the packer and polar sampler read. */
 export function withAlpha(interpreted: InterpretedSurface, width: number, height: number): Uint8Array {

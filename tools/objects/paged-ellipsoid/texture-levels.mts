@@ -6,20 +6,25 @@ import sharp from 'sharp';
 import { createHash } from 'node:crypto';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
-import { surfaceBankInventory } from './surface-banks.mts';
+import { requireSurfacePages, surfaceBankInventory } from './surface-banks.mts';
+
+export interface TextureLevelBank {id: string; urls: readonly string[]}
 
 const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
 /** Downsample the canonical prepared atlas offline. Padding before reduction
  * keeps both axes at exactly the same scale; CSS atlas addresses never change. */
-export async function prepareTextureLevels({ config, plan, lenses, publicDirectory }: {config: {textureLevels?:TextureLevelConfiguration;atlas:{pageSize:number;density:number};camera:{logicalBodyDiameter:number};publicBase:string};plan:SurfaceBankPlan;lenses:SurfaceBankLenses;publicDirectory:string}) {
+export async function prepareTextureLevels({ config, plan, lenses, publicDirectory, banks: selectedBanks }: {config: {textureLevels?:TextureLevelConfiguration;atlas:{pageSize:number;density:number};camera:{logicalBodyDiameter:number};publicBase:string};plan?:SurfaceBankPlan;lenses?:SurfaceBankLenses;publicDirectory:string;banks?:readonly TextureLevelBank[]}) {
   if (!config.textureLevels) return null;
   const { widths, hysteresis, texelsPerCssPixel } = config.textureLevels;
   const canonicalWidth = config.atlas.pageSize;
   if (!Array.isArray(widths) || widths.at(-1) !== canonicalWidth || widths.some((width, i) =>
     !Number.isInteger(width) || width < 1 || canonicalWidth % width || i > 0 && width <= widths[i - 1]) ||
     !(hysteresis >= 0 && hysteresis < 1) || !(texelsPerCssPixel >= 1)) throw new TypeError('Invalid prepared atlas levels.');
-  const banks = surfaceBankInventory(plan, lenses, config.publicBase);
+  const banks = selectedBanks
+    ? selectedBanks.map(bank=>({id:bank.id,urls:requireSurfacePages(bank.urls,`Texture level ${bank.id}`,config.publicBase)}))
+    : plan&&lenses ? surfaceBankInventory(plan,lenses,config.publicBase) : (()=>{throw new TypeError('Texture levels require prepared surface banks.');})();
+  if(!banks.length||new Set(banks.map(bank=>bank.id)).size!==banks.length)throw new TypeError('Texture level banks must be distinct.');
   const entries: (TextureLevelAsset & {key:string;pool:string})[] = [], receipts: TextureLevelReceipt[] = [], levels = widths.map((width, i) => ({
     // The canonical atlas density is relative to the authored logical globe.
     minimumDiameter: i ? config.camera.logicalBodyDiameter * config.atlas.density *

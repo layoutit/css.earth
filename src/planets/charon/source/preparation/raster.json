@@ -48,6 +48,10 @@
             255
           ],
           "specialValueMagnitude": 256
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       }
     },

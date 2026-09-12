@@ -40,6 +40,10 @@
           "noData": 0,
           "centerLongitude": 0,
           "resolutionMeters": 802.85145591739
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       }
     },
@@ -57,6 +61,10 @@
           "kind": "image-rgb-no-data",
           "noData": null,
           "centerLongitude": 180
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       }
     },
