@@ -8,6 +8,8 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 // Nothing ran them together, so they drifted out of every routine check.
 // This runner starts one dev server, runs every suite against it in sequence
 // and reports the outcome per suite, so `pnpm test:browser:all` is one command.
+// site/test/browser-suites.json records which suites a routine run must pass
+// and why the others do not yet; the run fails only when a result differs.
 const root = fileURLToPath(new URL('../', import.meta.url));
 const suiteDirectory = 'site/test';
 
@@ -21,6 +23,17 @@ const OPT_IN: Readonly<Record<string, string>> = Object.freeze({
 });
 
 export interface SuiteResult { readonly suite: string; readonly status: 'passed' | 'failed' | 'skipped'; readonly seconds: number; readonly reason?: string; }
+/** The checked-in expectation per suite: which ones a routine run must pass, and why the others do not yet. */
+export interface SuiteExpectations { readonly [suite: string]: { readonly expect: 'pass' | 'fail'; readonly reason?: string } }
+export async function readSuiteExpectations(): Promise<SuiteExpectations> {
+  const { readFile } = await import('node:fs/promises');
+  const value: unknown = JSON.parse(await readFile(resolve(root, suiteDirectory, 'browser-suites.json'), 'utf8'));
+  if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('browser-suites.json must be a record of suite expectations.');
+  for (const [suite, entry] of Object.entries(value)) {
+    if (!entry || typeof entry !== 'object' || !['pass', 'fail'].includes((entry as { expect?: unknown }).expect as string)) throw new TypeError(`browser-suites.json: ${suite} needs expect: pass | fail.`);
+  }
+  return value as SuiteExpectations;
+}
 
 export async function listBrowserSuites(): Promise<string[]> {
   return (await readdir(resolve(root, suiteDirectory))).filter(name => name.endsWith('-browser.mts')).sort();
@@ -92,11 +105,20 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   if (list) {
     for (const suite of await listBrowserSuites()) console.log(`${suite}${OPT_IN[suite] ? `  (opt-in: ${OPT_IN[suite]})` : ''}`);
   } else {
+    const expectations = await readSuiteExpectations();
     const results = await runBrowserSuites(options);
     console.log('\nBrowser suites:');
-    for (const result of results) console.log(`  ${result.status.padEnd(7)} ${String(result.seconds).padStart(4)}s  ${result.suite}${result.reason ? `  (${result.reason})` : ''}`);
-    const failed = results.filter(result => result.status === 'failed');
-    console.log(`\n${results.filter(r => r.status === 'passed').length} passed, ${failed.length} failed, ${results.filter(r => r.status === 'skipped').length} skipped`);
-    if (failed.length) process.exitCode = 1;
+    const unexpected: string[] = [];
+    for (const result of results) {
+      const expected = expectations[result.suite]?.expect ?? 'pass';
+      const note = result.status === 'failed' && expected === 'fail' ? `known: ${expectations[result.suite]?.reason ?? 'expected failure'}`
+        : result.status === 'passed' && expected === 'fail' ? 'passes now: set expect to pass in browser-suites.json'
+        : result.reason;
+      if ((result.status === 'failed' && expected === 'pass') || (result.status === 'passed' && expected === 'fail')) unexpected.push(result.suite);
+      console.log(`  ${result.status.padEnd(7)} ${String(result.seconds).padStart(4)}s  ${result.suite}${note ? `  (${note})` : ''}`);
+    }
+    const counts = { passed: results.filter(r => r.status === 'passed').length, failed: results.filter(r => r.status === 'failed').length, skipped: results.filter(r => r.status === 'skipped').length };
+    console.log(`\n${counts.passed} passed, ${counts.failed} failed, ${counts.skipped} skipped; ${unexpected.length} differ from browser-suites.json${unexpected.length ? `: ${unexpected.join(', ')}` : ''}`);
+    if (unexpected.length) process.exitCode = 1;
   }
 }

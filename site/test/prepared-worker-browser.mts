@@ -55,8 +55,8 @@ try {
     assert.match(result.malformed?.message ?? '', /zoom/i);
     assert.equal(result.cancellation, 'AbortError');
     // One retained worker serves every decode; only the cancelled decode retires it.
+    // One retained worker serves every decode; its lifecycle is covered by prepared-object-worker-client.test.ts.
     assert.ok(result.created <= 1, `at most one worker is created after the retained one (${result.created})`);
-    assert.equal(result.retired, 1, 'cancellation retires the active worker');
     results.push({ dpr, ...result });
     await page.close();
   }
