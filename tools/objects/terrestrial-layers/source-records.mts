@@ -193,7 +193,9 @@ export const parseSpiceCamera = shape({kernels:array(text),observer:number,targe
   pixels:shape({focalLength:shape({key:text,unit:text}),pixelPitch:shape({key:text,unit:text}),center:text,boresight:text,samples:text,lines:text,frame:text,origin:number,column:text,row:text}),
   image:shape({quantity:text,plane:optional(number),header:optional(dictionary(text)),missingValueKeys:optional(array(text)),saturationKey:optional(text)})});
 export type SpiceCameraDeclaration = ReturnType<typeof parseSpiceCamera>;
-export const parseGeoRecipe = shape({...surfaceIdentityFields,...geoFramePathFields,filter:text,allowLossy:boolean,radiometry:optional(text),cube:optional(parseGeometryCube),spice:optional(parseSpiceCamera),
+/** Pointing refinement of an archived or kernel camera against the retained mesh's lit limb, with its evidence budget. */
+export const parseLimbRefinement = shape({method:text,maximumCorrectionDegrees:number,maximumResidualPixels:number,minimumControls:number,threshold:optional(number),searchPixels:optional(number),maximumControls:optional(number),minimumSharpness:optional(number)});
+export const parseGeoRecipe = shape({...surfaceIdentityFields,...geoFramePathFields,filter:text,allowLossy:boolean,radiometry:optional(text),cube:optional(parseGeometryCube),spice:optional(parseSpiceCamera),refinement:optional(parseLimbRefinement),
  frames:optional(array(shape({id:text,...geoFramePathFields}))),selection:optional(text),levelMatching:optional(parseLevelMatching),
  transfer:surfaceTransfer,photometry:shape({model:text,phaseCorrection:optional(parsePhasePhotometry),coefficient:optional(number),phaseCoefficientPerDegree:optional(number),
  referenceIncidenceDegrees:number,referenceEmissionDegrees:number,maximumIncidenceDegrees:number,maximumEmissionDegrees:number,maximumGain:number}),displayPercentiles:array(number)});
