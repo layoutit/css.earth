@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { completeEnhancedCoverage, completeEnhancedPolarTile, polarTile, createPolarSprite, packLatitudeRaster, applySurfaceExposure } from '@cssearth/objects';
 import type { RasterRecipe } from './config.js';
 import { raster, readRgba, assetPath } from './io.js';
-import { withAlpha, type ObservationInterpretation } from './science.js';
+import { withAlpha, type ObservationInterpretation, type InterpretedPlate } from './science.js';
 export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: string, publicDirectory: string, interpret?: ObservationInterpretation) {
     const decoded = new Map<string, Uint8Array>();
     const metadata: Record<string, unknown> = {};
@@ -35,8 +35,15 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
             let nearest = false, pixels: Uint8Array;
             if (surface.science) {
                 if (!interpret) throw new TypeError(`Surface ${surface.id} declares a scientific interpretation but none was supplied.`);
-                const interpreted = await interpret({ id: surface.id, source: surface.source, science: surface.science }, width, height);
+                const interpreted = await interpret({ id: surface.id, source: surface.source, science: surface.science }, width, height, density);
                 nearest = interpreted.nearest; pixels = withAlpha(interpreted, width, height);
+                if (config.emission) {
+                    const plates = interpreted.plates;
+                    if (!plates) throw new TypeError(`Surface ${surface.id} declares emission but its interpretation returned no plates.`);
+                    const encode = (plate: InterpretedPlate) => plate.lossless ? { lossless: true, effort: 6 } : { quality: 90, alphaQuality: 100, smartSubsample: true, effort: 6 };
+                    await raster(plates.offLimb.data, plates.offLimb.size, plates.offLimb.size).webp(encode(plates.offLimb)).toFile(assetPath(publicDirectory, config.emission.offLimbOutput, density, surface.id));
+                    await raster(plates.limb.data, plates.limb.size, plates.limb.size).webp(encode(plates.limb)).toFile(assetPath(publicDirectory, config.emission.limbOutput, density, surface.id));
+                }
             } else pixels = source ?? await readRgba(resolve(sourceDirectory, surface.source), width, height, true, surface.sharpen?.[density - 1]);
             if (surface.exposure)
                 applySurfaceExposure(pixels, surface.exposure);

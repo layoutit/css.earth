@@ -12,11 +12,6 @@ export interface SolidReplayScene {
  bodyLeaves:readonly (PreparedProjectiveTextureLeaf & {attributes?:Readonly<Record<string,string>>})[];
  heliocentricView:ReturnType<typeof validatePreparedHeliocentricView>;surfaceTriangles?:number[][][];surfaceLensRanges?:readonly {lensId:string;start:number;count:number}[];
 }
-export interface BandReplayScene {
- camera:CameraPlan & {style?:string;sceneStyle:string};body:{systemTransform:string;meshTransform:string;latitudeSegments:number;
- assets:{surface:{one:string;two?:string};poles:{one:string;two?:string}};
- bands:readonly {latitudeIndex:number;visualRotationSeconds:number;leaves:readonly PreparedProjectiveTextureLeaf[]}[]};
-}
 import {requireRecord} from './source-values.mts';
 import {shape,text,number,array,optional,dictionary,boolean} from './objects/terrestrial-layers/source-records.mts';
 import {camera} from './objects/camera-source.mts';
@@ -30,10 +25,6 @@ const matrix=(value:unknown)=>typeof value==='string'?value:array(number)(value)
 const leaf=shape({tag:optional(text),className:optional(text),style:text,attributes:optional(dictionary(text)),
   projectiveTextureLayer:optional(shape({schema:text,rasterScale:optional(number),textureMatrix:matrix,frameMatrix:matrix}))});
 const parseReplayRings:Decoder<ReplayRings>=shape({leaves:array(leaf),resource:shape({key:text,url:text,pool:text}),coverage:requireRecord,qualification:array(shape({id:text,qualification:text}))});
-const texture=shape({one:text,two:optional(text)});
-export const parseBandReplayScene:Decoder<BandReplayScene>=shape({camera:value=>Object.assign({},cameraPlan(value),shape({sceneStyle:text})(value)),
-  body:shape({systemTransform:text,meshTransform:text,latitudeSegments:number,assets:shape({surface:texture,poles:texture}),
-    bands:array(shape({latitudeIndex:number,visualRotationSeconds:number,leaves:array(leaf)}))})});
 const heliocentric=(value:unknown)=>{
   text(requireRecord(value).bodyId);
   // This existing scientific validator checks the numerical plan and its system.

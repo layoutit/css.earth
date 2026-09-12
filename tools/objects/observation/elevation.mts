@@ -1,6 +1,7 @@
-import type { ElevationRecipe, RasterImage } from "./contracts.mts";
+import type { Relief } from '../terrestrial-layers/contracts.mts';
+import type { RasterImage } from './raster.mts';
 import { terrainBrightness } from '../terrestrial-layers/scientific-raster.mts';
-
+export interface ElevationRecipe {noData: number; palette: readonly (readonly number[])[]; rangeMetres: number; relief?: Relief;}
 // USGS's pinned GeoTIFF is uncompressed, signed 16-bit, one strip per row.
 // Reading these samples directly avoids image-library conversion of negative
 // elevations into unsigned display luminance. No-data is not terrain at zero.

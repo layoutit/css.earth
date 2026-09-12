@@ -9,7 +9,7 @@ import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {loadStlShape, loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,loadPdsRadiusTable,parsePdsRadiusTable} from './obj-shape.mts';
 import {parsePdsRadialTable} from './pds-radial-table.mts';
-import {readFitsPrimary} from '../static-surface/fits-map.mts';
+import {readFitsPrimary} from '../observation/fits.mts';
 
 const rad = Math.PI / 180;
 const dot = (a: Vector,b: Vector) => a[0]*b[0]+a[1]*b[1]+a[2]*b[2];

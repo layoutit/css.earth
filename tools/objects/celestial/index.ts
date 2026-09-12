@@ -4,9 +4,15 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { loadCelestialAdapters, type MarkerPlan, type SolarSource, type StarfieldPlan, type SunPlan } from './adapters.js';
 
-export interface CelestialConfig { readonly schema: 'cssearth-celestial-preparation@1'; readonly catalogueSchema: string; readonly sources: readonly string[]; }
+export interface CelestialConfig {
+  readonly schema: 'cssearth-celestial-preparation@1'; readonly catalogueSchema: string; readonly sources: readonly string[];
+  /** False for a star: no directional Sun is prepared and sun.json is written as null. */
+  readonly directionalSun: boolean;
+  /** Astrometric ICRF cube sampling with catalogue stars, or the authored world-context sky baseline (visual only). */
+  readonly sky: { readonly registration: 'astrometric' | 'world-context-baseline' };
+}
 export interface CelestialContext { readonly sourceDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string; readonly config: unknown; }
-export interface CelestialAssets { readonly sky: StarfieldPlan; readonly sun: SunPlan; readonly markers: MarkerPlan; }
+export interface CelestialAssets { readonly sky: StarfieldPlan; readonly sun: SunPlan | null; readonly markers: MarkerPlan; }
 const schema = 'cssearth-celestial-preparation@1';
 const sourceDigest = /^[a-f0-9]{64}$/;
 type Input = Record<string, unknown>;
@@ -16,8 +22,12 @@ function json<T>(value: T): T { return JSON.parse(JSON.stringify(value)) as T; }
 function relativePath(value: unknown, at: string): string { if (typeof value !== 'string' || !value || value.startsWith('/') || value.split('/').includes('..')) throw new TypeError(`${at} must be a relative path.`); return value; }
 function profile(value: unknown): CelestialConfig {
   const input = record(value, 'celestial profile');
-  if (input.schema !== schema || typeof input.catalogueSchema !== 'string' || !input.catalogueSchema || !Array.isArray(input.sources) || !input.sources.length || Object.keys(input).some(key => !['schema', 'catalogueSchema', 'sources'].includes(key))) throw new TypeError('Celestial profile is invalid.');
-  return Object.freeze({ schema, catalogueSchema: input.catalogueSchema, sources: Object.freeze(input.sources.map((source, index) => relativePath(source, `celestial profile.sources[${index}]`))) });
+  if (input.schema !== schema || typeof input.catalogueSchema !== 'string' || !input.catalogueSchema || !Array.isArray(input.sources) || !input.sources.length || Object.keys(input).some(key => !['schema', 'catalogueSchema', 'sources', 'directionalSun', 'sky'].includes(key))) throw new TypeError('Celestial profile is invalid.');
+  if (input.directionalSun !== undefined && typeof input.directionalSun !== 'boolean') throw new TypeError('Celestial profile directionalSun must be boolean.');
+  const sky = input.sky === undefined ? { registration: 'astrometric' } : record(input.sky, 'celestial profile.sky');
+  if (!['astrometric', 'world-context-baseline'].includes(String(sky.registration)) || Object.keys(sky).some(key => key !== 'registration')) throw new TypeError('Celestial profile sky registration is invalid.');
+  return Object.freeze({ schema, catalogueSchema: input.catalogueSchema, sources: Object.freeze(input.sources.map((source, index) => relativePath(source, `celestial profile.sources[${index}]`))),
+    directionalSun: input.directionalSun ?? true, sky: Object.freeze({ registration: sky.registration === 'astrometric' ? 'astrometric' as const : 'world-context-baseline' as const }) });
 }
 async function verifySources(sourceDirectory: string, paths: readonly string[]): Promise<void> {
   const manifest = record(JSON.parse(await readFile(resolve(sourceDirectory, 'manifest.json'), 'utf8')), 'source manifest');
@@ -34,8 +44,10 @@ export async function prepareCelestialAssets({ sourceDirectory, publicDirectory,
   const solar = solarSource(JSON.parse(await readFile(resolve(sourceDirectory, 'presentation/solar-system.json'), 'utf8'))); const api = await loadCelestialAdapters(); const body = api.requireObject(solar.bodyId);
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
   {
-    const sky = json(await api.preparePlanetCubicSky({ objectId: solar.bodyId, sourceRoot: sourceDirectory, publicRoot: publicDirectory, ensureDirectories: () => mkdir(publicDirectory, { recursive: true }), validateSourceGroup: async () => undefined, includeSun: false, cameraContract: api.cubicSkyCamera, pointSourceContract: api.cubicSkyPoints, astrometricSampling: api.prepareAstrometricCubeSampling(), catalogueStars: await api.prepareCatalogueStars({ fovDegrees: api.cubicSkyCamera.horizontalFovDegrees }), sourceSchema: options.catalogueSchema, writeModule: false }));
-    const sun = json(await api.preparePlanetDirectionalSun({ objectId: solar.bodyId, publicRoot: publicDirectory, ensureDirectories: () => mkdir(publicDirectory, { recursive: true }), meanHeliocentricDistanceAu: body.distanceAu, presentation: api.prepareSolarSystemSunPresentation(solar), writeModule: false }));
+    const astrometric = options.sky.registration === 'astrometric';
+    const sky = json(await api.preparePlanetCubicSky({ objectId: solar.bodyId, sourceRoot: sourceDirectory, publicRoot: publicDirectory, ensureDirectories: () => mkdir(publicDirectory, { recursive: true }), validateSourceGroup: async () => undefined, includeSun: false, cameraContract: api.cubicSkyCamera, pointSourceContract: api.cubicSkyPoints, astrometricSampling: astrometric ? api.prepareAstrometricCubeSampling() : null, catalogueStars: astrometric ? await api.prepareCatalogueStars({ fovDegrees: api.cubicSkyCamera.horizontalFovDegrees }) : null, sourceSchema: options.catalogueSchema, writeModule: false }));
+    // A star has no directional Sun; sun.json records null so the runtime contract sees the absence explicitly.
+    const sun = options.directionalSun ? json(await api.preparePlanetDirectionalSun({ objectId: solar.bodyId, publicRoot: publicDirectory, ensureDirectories: () => mkdir(publicDirectory, { recursive: true }), meanHeliocentricDistanceAu: body.distanceAu, presentation: api.prepareSolarSystemSunPresentation(solar), writeModule: false })) : null;
     const preparedMarkers = await api.prepareSolarSystemMarkerStrip(solar.markerStrip), markers = json(preparedMarkers.plan), assets = preparedMarkers.assets; for (const asset of assets) await writeFile(resolve(publicDirectory, asset.url.split('/').at(-1) ?? ''), asset.bytes);
     await Promise.all([writeFile(resolve(outputDirectory, 'sky.json'), `${JSON.stringify(sky)}\n`), writeFile(resolve(outputDirectory, 'sun.json'), `${JSON.stringify(sun)}\n`), writeFile(resolve(outputDirectory, 'markers.json'), `${JSON.stringify(markers)}\n`)]);
     return Object.freeze({ sky, sun, markers });

@@ -1,5 +1,7 @@
-import type { FitsColor, FitsMapRecipe } from "./contracts.mts";
-/** FITS observation decoding and data-defined latitude/longitude/color mapping. */
+/** FITS observation decoding and data-defined latitude/longitude/color mapping (moved from the retired static lane). */
+export type FitsColor = {kind: 'signed-asinh'; palette: readonly (readonly number[])[]; softening: number; maximum: number}
+  | {kind: 'positive-log'; palette: readonly (readonly number[])[]; range: readonly [number, number]};
+export interface FitsMapRecipe {bitpix: number; width: number; height: number; latitude: 'sine-latitude' | 'equirectangular'; reverseLongitude?: boolean; positiveOnly?: boolean; nearestLatitudeLimit: number; color: FitsColor;}
 export function readFitsPrimary(bytes: Buffer) {
   let endCard = -1;
   const header: Record<string, string> = {};

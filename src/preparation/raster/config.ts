@@ -27,6 +27,8 @@ export interface SurfaceRasterRecipe {
      * missing-coverage grid): the static lane's observation fields, applied by an injected adapter. */
     science?: Record<string, unknown>;
 }
+/** An unlit body: per-lens off-limb context and limb plates written by the interpretation instead of a lighting bank. */
+export interface EmissionRecipe { offLimbSize: number; limbSize: number; bodyDiameter: number; offLimbOutput: string; limbOutput: string; metadata: Record<string, unknown>; }
 export interface LightingRecipe extends LambertRasterConfig {
     frameSize: number;
     columns: number;
@@ -124,6 +126,7 @@ export interface RasterRecipe {
         quality: number;
     };
     lighting?: LightingRecipe;
+    emission?: EmissionRecipe;
     atmosphere?: AtmosphereRecipe;
     interior?: InteriorRecipe;
 }
