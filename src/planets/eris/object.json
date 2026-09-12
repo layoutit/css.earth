@@ -3,9 +3,9 @@
   "id": "eris",
   "type": "layered-body",
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "e89f0e168b77c4743a0a7eff7ef7e4f05089ecfcea613002b63513589f597ef7"
+    "sha256": "8ff654a6003569d9de9e8c42babcae287fb67cb52838c0800b79a1cab22d7ab2"
   },
   "properties": {
     "preparation": {
@@ -139,7 +139,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9b9a22ca36455ea66ac98ebcc8218771b2b206b3b794eabffbbdf48e7d1f27f8"
+        "sha256": "0215572bcc04c971ca98d2aca78565835a25de2b877901428e6626fdbd60f7ed"
       }
     },
     "catalog": {

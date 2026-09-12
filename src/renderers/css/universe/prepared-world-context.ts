@@ -14,7 +14,7 @@ import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } f
 import { transposeWorldRotation, validateWorldRotation, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
 import type { LevelOfDetailPlan, OrbitLineFade } from '../navigation/types.js';
 import { applySprite, applySpriteImage } from '../solar-system/heliocentric-sprites.js';
-import { mountPreparedOrbitLines } from '../solar-system/prepared-orbit-lines.js';
+import { mountPreparedOrbitLines, ORBIT_RENDERER_LOD_PIXELS, type OrbitRenderer } from '../solar-system/prepared-orbit-lines.js';
 import type { PreparedOrbitStrokes } from '../solar-system/prepared-orbit-strokes.js';
 import { bindObjectNavigationTarget } from '../solar-system/heliocentric-navigation.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
@@ -23,6 +23,7 @@ import type { OrbitSegment } from '../solar-system/heliocentric-view.js';
 import { compactOrbitFootprint } from './context-label-layout.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
+import { createOpacityClock } from '../stars/opacity-clock.js';
 import type { OpacityClock } from '../stars/opacity-clock.js';
 
 // A fixed leaf carries the prepared image and its two screen-sized pseudos.
@@ -384,8 +385,10 @@ export function preparedVolumeOpacity(distanceM: number, profile?: PreparedVolum
 }
 
 /** Existing retained segment/sprite rendering, driven by the same observer as the detailed body. */
-export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationPriorities = {}, annotationOpacities = {}, opacityClock }: {
+export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationPriorities = {}, annotationOpacities = {}, opacityClock, orbitRenderer: initialOrbitRenderer = 'bars' }: {
   host: HTMLElement; before: Element; plan: PreparedWorldContext; sprites: Readonly<Record<string, SpriteWithUrl>>;
+  /** Which retained paint owner draws the planned orbit chords; switchable at runtime. */
+  orbitRenderer?: OrbitRenderer;
   /** Presentation may live outside the input host's changing CSS scope. */
   presentationHost?: HTMLElement;
   requestPublication?: () => boolean;
@@ -404,6 +407,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   let previousHeader: { emphasizedId: string | null; width: number; height: number } | null = null;
   let pickTargets: ScreenPickTarget[] = [];
   const points = new Map([plan.focus, ...plan.bodies].map(body => [body.id, body]));
+  let orbitRenderer: OrbitRenderer = initialOrbitRenderer, publishCount = 0;
   const bodies = [plan.focus, ...plan.bodies].map((body, index) => {
     const sprite = sprites[body.id];
     if (!sprite) { root.remove(); throw new TypeError(`Missing prepared navigation sprite ${body.id}.`); }
@@ -433,7 +437,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     // with its ring and caption pseudo-elements and attribute rules, keeps a
     // stable style, so motion restyles one plain leaf instead of three nodes.
     const mover = host.ownerDocument.createElement('b');
-    mover.style.cssText = `position:absolute;left:0;top:0;width:${BILLBOARD_SIZE}px;height:${BILLBOARD_SIZE}px;transform-origin:0 0;pointer-events:none`;
+    // A fixed-size box with layout and size containment is a relayout boundary: a
+    // marker's visibility or cue change lays out these three boxes, not the document.
+    mover.style.cssText = `position:absolute;left:0;top:0;width:${BILLBOARD_SIZE}px;height:${BILLBOARD_SIZE}px;transform-origin:0 0;pointer-events:none;contain:layout size`;
     mover.appendChild(marker);
     root.appendChild(mover);
     const orbit = 'orbit' in body ? (body as PreparedContextBody).orbit : null;
@@ -444,7 +450,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     orbitRoot.style.cssText = 'position:absolute;inset:0;width:0;height:0;pointer-events:none';
     if (approximate) orbitRoot.dataset.contextPlacement = 'approximate';
     if (orbit) root.insertBefore(orbitRoot, mover);
-    const piecePool = mountPreparedOrbitLines(orbitRoot, orbit ? orbit.verticesM.length * 2 : 0);
+    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: approximate, capacity: orbit ? orbit.verticesM.length * 2 : 0, id: body.id });
     const pieces = piecePool.elements;
     // The stage picker owns every pointer hit: these leaves stay inert and only
     // carry keyboard and accessibility state, never pointer or cursor styles.
@@ -456,6 +462,12 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       indicatorHovered: false,
       orbitPick: null as ScreenPickTarget | null,
       markerPick: null as ScreenPickTarget | null, labelPick: null as ScreenPickTarget | null,
+      // Retained hit targets, updated in place: none are allocated per frame.
+      markerPickTarget: null as (ScreenPickTarget & { shape: { kind: 'circle'; x: number; y: number; radius: number } }) | null,
+      indicatorPickTarget: null as (ScreenPickTarget & { shape: { kind: 'circle'; x: number; y: number; radius: number } }) | null,
+      orbitPickTarget: null as (ScreenPickTarget & { shape: { kind: 'segments'; segments: readonly OrbitSegment[]; bounds: LabelScreenRect | null; halfWidth: number } }) | null,
+      labelPickTarget: null as (ScreenPickTarget & { shape: { kind: 'rect'; left: number; top: number; right: number; bottom: number } }) | null,
+      labelRectTarget: null as { left: number; top: number; right: number; bottom: number } | null,
       markerShown: undefined as boolean | undefined, markerDiameter: 0, billboardShown: undefined as boolean | undefined, spriteDetail: false,
       center: [0, 0] as [number, number], markerTransform: '', orbitTransform: '', labelOffset: '', inverseScale: 0,
       labelRect: null as LabelScreenRect | null,
@@ -471,7 +483,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   });
   const planWorld = createWorldContextPlanner(plan, annotationPriorities);
   const windowTarget = host.ownerDocument.defaultView!;
-  const fader = createOpacityFader(windowTarget, opacityClock);
+  const ownClock = opacityClock ?? createOpacityClock(windowTarget);
+  const clock = ownClock;
+  const fader = createOpacityFader(windowTarget, clock);
   let labelExclusions: readonly LabelScreenRect[] = [];
   let backgroundExclusions: readonly LabelScreenRect[] = [];
   let destroyed = false;
@@ -528,10 +542,11 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   const refreshAnnotations = (event?: Event) => {
     if (event?.type === 'focusin' || event?.type === 'focusout' ||
         (event?.type === 'objecthoverchange' && (event as CustomEvent<{ interactive?: boolean }>).detail?.interactive !== false)) hoverIntent = true;
-    presentationRevision++;
+    // Hover and focus decide which annotations show, never where bodies project:
+    // the plan in flight stays valid, and the queue replans once it has committed.
     interactionDirty = true;
     if (destroyed || annotationFrame !== null) return;
-    annotationFrame = windowTarget.requestAnimationFrame(() => {
+    annotationFrame = clock.request(() => {
       annotationFrame = null;
       if (!destroyed) refresh();
     });
@@ -569,6 +584,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         widthPixels: viewport.widthPixels ?? host.clientWidth, heightPixels: viewport.heightPixels ?? host.clientHeight },
         contextCommittedId: contextFrames.committedId,
         selectedId, overview, selectionPreview, navigationInFlight, holdAnnotations: rotationActive, anchorOnly: publishingBodies === anchorOnly,
+        orbitLodPixels: ORBIT_RENDERER_LOD_PIXELS[orbitRenderer],
         bodies: bodies.map(({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize, labelShown, labelPlacement,
           indicatorShown, indicatorRadius, orbitAppearance }) => ({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize,
           labelShown, labelPlacement, indicatorShown, indicatorRadius, orbitAppearance })) };
@@ -619,6 +635,18 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         depthOrientation = null;
         presentationRevision++; policyRevision++; refresh();
       }
+    },
+    setOrbitRenderer(renderer: OrbitRenderer) {
+      if (destroyed || orbitRenderer === renderer) return;
+      orbitRenderer = renderer;
+      for (const entry of bodies) {
+        entry.piecePool.destroy();
+        entry.piecePool = mountPreparedOrbitLines(entry.orbitRoot, { renderer, dashed: entry.orbitRoot.dataset.contextPlacement === 'approximate',
+          capacity: entry.orbit ? entry.orbit.verticesM.length * 2 : 0, id: entry.body.id });
+        entry.pieces = entry.piecePool.elements; entry.previousCount = 0;
+      }
+      // The next publication carries every chord again: retained deltas name leaves that no longer exist.
+      contextFrames.invalidate(); presentationRevision++; policyRevision++; refresh();
     },
     setHiddenOrbits(ids: readonly string[]) {
       if (destroyed) return;
@@ -697,7 +725,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         get center() { return entry.center; },
         get labelRect() { return entry.labelRect; },
         // Orbit leaves are built on first use; report the retained leaves now.
-        get orbit() { return Object.freeze(entry.pieces.filter(Boolean)); },
+        get orbit() { return Object.freeze(entry.pieces.filter((piece): piece is Element => piece !== undefined)); },
       })));
     },
     selectObject(id: string) {
@@ -711,6 +739,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       depthOrientation = null;
     },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, preparedFrame?: WorldContextPublication) {
+      // A user-timing mark once a second names the orbit renderer inside any performance trace.
+      if (publishCount++ % 60 === 0) windowTarget.performance?.mark?.(`cssearth-orbit-renderer:${orbitRenderer}`);
       if (destroyed) return;
       fader.batch(() => {
       const cameraChanged = !sameCamera(world, viewport);
@@ -787,7 +817,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       }
       for (const { projected, entry, mask } of projectedBodies) {
         const { x, y, diameter, markerOpacity, visible, annotationVisible,
-          lineWidth, orbitVisibility, segments, transforms, labelPosition, index } = projected;
+          lineWidth, orbitVisibility, segments, labelPosition, index } = projected;
         const { body, marker } = entry;
         if (mask === 0) continue;
         const dimmed = emphasizedId !== null && body.id !== emphasizedId;
@@ -800,7 +830,10 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         if (!billboardShown && entry.billboardShown === false && orbitVisibility === 0 && entry.previousCount === 0) continue;
         bodyPublications++;
         const markerShown = visible && markerOpacity > 0 && !pointSource;
-        const markerDiameter = Math.max(entry.sprite.minimumDiameterPixels ?? 2.4, diameter);
+        // A twentieth of a pixel is below what a scaled sprite shows. Rotation changes
+        // every marker's distance a little each frame; without this step every marker
+        // and its ring and caption pseudo-elements would restyle on every frame.
+        const markerDiameter = Math.round(Math.max(entry.sprite.minimumDiameterPixels ?? 2.4, diameter) * 20) / 20;
         const wasShown = entry.billboardShown === true;
         const hoverChanged = entry.indicatorHovered !== entry.hovered;
         const animateHover = interactiveHover && hoverChanged && wasShown && billboardShown;
@@ -858,23 +891,30 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         if (markerShown && markerOpacity > .1) {
           const radius = entry.indicatorHidden
             ? Math.max(markerDiameter / 2, entry.indicatorRadius + 5) : markerDiameter / 2;
-          entry.markerPick = { element: marker, rank, shape: { kind: 'circle', x, y, radius } };
+          const target = entry.markerPickTarget ??= { element: marker, rank, shape: { kind: 'circle', x, y, radius } };
+          target.rank = rank; target.shape.x = x; target.shape.y = y; target.shape.radius = radius;
+          entry.markerPick = target;
         }
         const indicatorVisible = entry.indicatorShown && annotationsVisible;
         const indicatorState = String(indicatorVisible);
         if (marker.dataset.contextIndicatorVisible !== indicatorState) marker.dataset.contextIndicatorVisible = indicatorState;
-        entry.indicatorPick = indicatorVisible && markerOpacity > .1 ? { element: marker, rank: rank + 2,
-          shape: { kind: 'circle', x, y, radius: entry.indicatorRadius + 5 } } : null;
+        if (indicatorVisible && markerOpacity > .1) {
+          const target = entry.indicatorPickTarget ??= { element: marker, rank: rank + 2, shape: { kind: 'circle', x, y, radius: entry.indicatorRadius + 5 } };
+          target.rank = rank + 2; target.shape.x = x; target.shape.y = y; target.shape.radius = entry.indicatorRadius + 5;
+          entry.indicatorPick = target;
+        } else entry.indicatorPick = null;
         const orbitShown = orbitVisibility > 0 && segments.length > 0;
         const contributesPaint = billboardShown || orbitShown;
         if (paintedBodies.has(entry) !== contributesPaint) {
           if (contributesPaint) paintedBodies.add(entry); else paintedBodies.delete(entry);
           paintMembershipChanged = true;
         }
+        // The paint owner names the node that carries the orbit's presentation.
+        const orbitPaint = entry.piecePool.presentation;
         if (entry.orbit && orbitShown) {
           if (entry.orbitRoot.style.zIndex !== zIndex) entry.orbitRoot.style.zIndex = zIndex;
-          if (entry.orbitRoot.dataset.contextSelected !== selection) entry.orbitRoot.dataset.contextSelected = selection;
-          fader.multiply(entry.orbitRoot, entry.hovered ? 1 : entry.baseAlpha.line * (dimmed ? .75 : 1), animatedAnnotations.has(entry) && entry.previousCount > 0 ? 120 : 0);
+          if (orbitPaint.dataset.contextSelected !== selection) orbitPaint.dataset.contextSelected = selection;
+          fader.multiply(orbitPaint, entry.hovered ? 1 : entry.baseAlpha.line * (dimmed ? .75 : 1), animatedAnnotations.has(entry) && entry.previousCount > 0 ? 120 : 0);
         }
         if (entry.orbit && (mask & ContextChange.orbit)) {
           const orbitTransform = `translate(${width / 2}px,${height / 2}px)`;
@@ -891,15 +931,18 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
             if (entry.orbitRoot.style.pointerEvents !== 'none') entry.orbitRoot.style.pointerEvents = 'none';
             if (entry.orbitRoot.tabIndex !== -1) entry.orbitRoot.tabIndex = -1;
           }
-          fader.visible(entry.orbitRoot, orbitShown);
-          fader.set(entry.orbitRoot, orbitVisibility);
+          fader.visible(orbitPaint, orbitShown);
+          fader.set(orbitPaint, orbitVisibility);
           const patch = delta?.orbits.get(index);
           if (!delta || patch) {
-            entry.piecePool.publish(segments, transforms, patch?.indices);
+            entry.piecePool.publish(segments);
             entry.previousCount = segments.length;
           }
-          entry.orbitPick = orbitVisibility > .1 && !entry.orbitHidden ? { element: entry.orbitRoot, rank,
-            shape: { kind: 'segments', segments, bounds: projected.orbitBounds, halfWidth: lineWidth / 2 + 7 } } : null;
+          if (orbitVisibility > .1 && !entry.orbitHidden) {
+            const target = entry.orbitPickTarget ??= { element: entry.orbitRoot, rank, shape: { kind: 'segments', segments, bounds: projected.orbitBounds, halfWidth: lineWidth / 2 + 7 } };
+            target.rank = rank; target.shape.segments = segments; target.shape.bounds = projected.orbitBounds; target.shape.halfWidth = lineWidth / 2 + 7;
+            entry.orbitPick = target;
+          } else entry.orbitPick = null;
 
         }
         if (mask & (ContextChange.label | ContextChange.marker)) {
@@ -915,9 +958,13 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
               marker.dataset.contextLabelY = `${labelY}px`;
               entry.labelOffset = offset;
             }
-            entry.labelRect = { left: labelPosition[0], top: labelPosition[1],
-              right: labelPosition[0] + entry.labelSize.width, bottom: labelPosition[1] + entry.labelSize.height };
-            entry.labelPick = { element: marker, rank: rank + 1, shape: { kind: 'rect', ...entry.labelRect } };
+            const rect = entry.labelRectTarget ??= { left: 0, top: 0, right: 0, bottom: 0 };
+            rect.left = labelPosition[0]; rect.top = labelPosition[1];
+            rect.right = labelPosition[0] + entry.labelSize.width; rect.bottom = labelPosition[1] + entry.labelSize.height;
+            entry.labelRect = rect;
+            const target = entry.labelPickTarget ??= { element: marker, rank: rank + 1, shape: { kind: 'rect', left: 0, top: 0, right: 0, bottom: 0 } };
+            target.rank = rank + 1; target.shape.left = rect.left; target.shape.top = rect.top; target.shape.right = rect.right; target.shape.bottom = rect.bottom;
+            entry.labelPick = target;
           }
         }
         // Flights and rotations keep keyboard/accessibility targets; they catch up after.
@@ -952,7 +999,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       });
     },
     destroy() { if (!destroyed) { destroyed = true; picking.remove(root);
-      if (annotationFrame !== null) windowTarget.cancelAnimationFrame(annotationFrame);
+      if (annotationFrame !== null) clock.cancel(annotationFrame);
       host.removeEventListener('objecthoverchange', refreshAnnotations);
       windowTarget.removeEventListener('pointerdown', beginCameraInput, { capture: true });
       windowTarget.removeEventListener('wheel', beginCameraInput, { capture: true });

@@ -5,10 +5,12 @@ import { chromium } from 'playwright';
 import { PNG } from 'pngjs';
 import pixelmatch from 'pixelmatch';
 import { OBJECTS } from '../objects.mts';
+import { browserObjects } from './browser-objects.mts';
 
 import { parsePreparedObjectRuntime } from '../../src/renderers/css/dist/index.js';
 import { requireRecord } from '../../tools/source-values.mts';
 import type { ObjectRuntimeDefinition } from '../../src/renderers/css/runtime/object-runtime-types.ts';
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 type BoundAnimation = Animation & { effect: KeyframeEffect & { target: HTMLElement } };
 interface BindingProbe { nodes: HTMLElement[]; definition: ObjectRuntimeDefinition & { motion: NonNullable<ObjectRuntimeDefinition["motion"]>; facing: NonNullable<ObjectRuntimeDefinition["facing"]> }; handles: BoundAnimation[]; visibility: string[]; motion: BoundAnimation[]; }
 declare global { interface Window { __preparedBindingTest: BindingProbe; } }
@@ -23,8 +25,8 @@ await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const report: { browser: string; cases: BindingCase[]; errors: string[]; error?: string } = { browser: browser.version(), cases: [], errors: [] };
 try {
-  for (const object of OBJECTS.filter(object => !ids || ids.includes(object.id))) {
-    const plan = parsePreparedObjectRuntime(requireRecord(JSON.parse(await readFile(`src/planets/${object.id}/prepared/object.json`, 'utf8')), 'prepared object').data);
+  for (const object of browserObjects().filter(object => !ids || ids.includes(object.id))) {
+    const plan = parsePreparedObjectRuntime(await loadObjectTestDefinition(object.id));
     assert.ok(plan.motion && plan.facing, 'Prepared binding plans must declare their motion and facing arrays.');
     const definition = { ...plan, motion: plan.motion, facing: plan.facing };
     for (const dpr of [1, 2]) {

@@ -12,7 +12,12 @@ export interface SkyRecipe {
     shadowFloor?: SkyShadowFloor; webpQuality: number };
   provenance: SkyReference;
   parallax?: SkyParallax;
+  /** Bake a prepared point field into a second face set for the observer near its origin. */
+  stars?: SkyStars;
 }
+/** The point field is a sibling object; its pinned descriptor pins the bank it carries.
+ * Sprite radii are screen pixels, so one authored screen scale fixes their angular size. */
+export interface SkyStars { object: string; sha256: string; cssPixelsPerDegree: number; }
 export function reference(value: unknown): SkyReference {
   const r = record(value, 'sky source reference'), path = text(r.path, 'sky path'), sha256 = text(r.sha256, 'sky digest');
   if (path.startsWith('/') || /[\\\u0000]/u.test(path) || path.split('/').includes('..') || !/^[a-f0-9]{64}$/u.test(sha256)) throw new TypeError('Sky source needs a contained path and SHA256.');
@@ -49,6 +54,12 @@ export function parseSkyRecipe(value: unknown): SkyRecipe {
     parallax = { originM: input.originM.map(n => finite(n, 'sky parallax origin')) as [number, number, number],
       radiusM: positive(input.radiusM, 'sky parallax radius') };
   }
+  let stars: SkyStars | undefined;
+  if (r.stars !== undefined) {
+    const input = record(r.stars, 'sky stars'), object = text(input.object, 'sky stars object'), sha256 = text(input.sha256, 'sky stars digest');
+    if (!/^[a-z][a-z0-9-]*$/u.test(object) || !/^[a-f0-9]{64}$/u.test(sha256) || Object.keys(input).length !== 3) throw new TypeError('Sky stars need a sibling object id, its descriptor digest and a screen scale.');
+    stars = { object, sha256, cssPixelsPerDegree: positive(input.cssPixelsPerDegree, 'sky stars screen scale') };
+  }
   if (b.shadowFloor !== undefined) {
     const floor = record(b.shadowFloor, 'sky shadow floor');
     const blackPoint = finite(floor.blackPoint, 'sky shadow black point');
@@ -60,5 +71,6 @@ export function parseSkyRecipe(value: unknown): SkyRecipe {
   return { schema: r.schema, source: { format: s.format, width, height, decodedSha256, chunks, acquisition: reference(s.acquisition) },
     projection: { frame: p.frame, mapping: p.mapping, centerRaDegrees: 0 },
     bake: { faceSize, exposure: positive(b.exposure, 'sky exposure'), transfer: b.transfer, displayGain,
-      ...(shadowFloor ? { shadowFloor } : {}), webpQuality }, provenance: reference(r.provenance), ...(parallax ? { parallax } : {}) };
+      ...(shadowFloor ? { shadowFloor } : {}), webpQuality }, provenance: reference(r.provenance), ...(parallax ? { parallax } : {}),
+    ...(stars ? { stars } : {}) };
 }

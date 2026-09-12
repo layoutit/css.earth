@@ -51,7 +51,7 @@ test("derives the complete owned file contract from planet identity", () => {
     `/project/src/planets/${planet.id}/prepared/content.json`,
   ));
   assert.ok(paths.requiredFiles.includes(
-    `/project/src/planets/${planet.id}/prepared/runtime.json`,
+    `/project/src/planets/${planet.id}/prepared/runtime.refs.json`,
   ));
   assert.ok(paths.requiredFiles.includes(
     `/project/site/pages/[id].astro`,
@@ -79,10 +79,10 @@ test("requires every registered object package file", async () => {
     validateObjectPackageFiles(implemented[0], {
       accessFile: async (file) => {
         assert.ok(typeof file === "string", "Package validator passes filesystem paths");
-        if (file.endsWith("prepared/runtime.json")) throw new Error("ENOENT");
+        if (file.endsWith("prepared/runtime.refs.json")) throw new Error("ENOENT");
       },
     }),
-    /is missing .*prepared\/runtime\.json/,
+    /is missing .*prepared\/runtime\.refs\.json/,
   );
   await assert.rejects(
     validateObjectPackageFiles(implemented[0], {

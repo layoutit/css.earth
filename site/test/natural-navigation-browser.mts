@@ -122,7 +122,7 @@ finally {
   }
   report.final = await state().catch(() => null);
   const diagnostics = await page.evaluate(() => { window.__cssEarthRecorder?.stop(); return window.__cssEarthRecorder?.lastRecording; }).catch(() => null);
-  await writeFile(`${output}/diagnostics.json`, JSON.stringify(diagnostics));
+  await writeFile(`${output}/diagnostics.json`, JSON.stringify(diagnostics ?? null));
   await page.screenshot({ path: `${output}/final.png` }).catch(() => {});
   await writeFile(`${output}/report.json`, JSON.stringify(report, null, 2));
   await browser.close();

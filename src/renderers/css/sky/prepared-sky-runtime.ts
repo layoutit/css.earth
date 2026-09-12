@@ -5,46 +5,67 @@ import type { PreparedCssVolume } from '../volume/types.js';
 import type { PreparedCssSky } from './types.js';
 import { validatePreparedCssSky, validatePreparedSkyParallax } from './validation.js';
 
-/** Transports retained celestial images through the shared physical observer pose. */
+/** Transports retained celestial images through the shared physical observer pose.
+ * A sky with baked stars carries two cubes: the near one shows at `near` opacity
+ * over the plain one, and whichever cube cannot contribute leaves painting. */
 export function mountPreparedCssSky({ host, before, payload: input, resources, resolveResource }: {
   host: HTMLElement; before: Element; payload: PreparedCssSky; resources: PreparedCssVolume['resources']; resolveResource(path: string): string;
 }) {
   const payload = validatePreparedCssSky(input, resources), document = host.ownerDocument;
-  const root = document.createElement('div'), camera = document.createElement('div'), scene = document.createElement('div');
+  const root = document.createElement('div');
   root.className = 'prepared-celestial-sky'; root.ariaHidden = 'true';
   Object.assign(root.style, { position: 'absolute', inset: '0', pointerEvents: 'none', transformStyle: 'flat', background: '#000', visibility: 'hidden' });
-  camera.className = 'prepared-celestial-sky-camera';
-  Object.assign(camera.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', pointerEvents: 'none', transformStyle: 'preserve-3d', transformOrigin: '0 0' });
-  scene.className = 'prepared-celestial-sky-scene';
-  Object.assign(scene.style, { position: 'absolute', left: '50%', top: '50%', width: '0', height: '0', pointerEvents: 'none', transformStyle: 'preserve-3d', transformOrigin: '0 0' });
-  const boundedFaces: { node: HTMLElement; bounds: PreparedLeafBounds | undefined; shown: boolean }[] = [];
-  for (const face of payload.faces) {
-    const node = document.createElement('s'); node.dataset.skyFace = face.id;
-    Object.assign(node.style, { position: 'absolute', left: '0', top: '0', display: 'block', pointerEvents: 'none', transformOrigin: '0 0',
-      backfaceVisibility: 'visible', backgroundRepeat: 'no-repeat', textDecoration: 'none', ...face.style,
-      backgroundImage: `url("${escapeUrl(resolveResource(face.texturePath))}")` });
-    scene.appendChild(node);
-    boundedFaces.push({ node, bounds: face.boundsCssPixels, shown: true });
-  }
-  camera.appendChild(scene); root.appendChild(camera); host.insertBefore(root, before);
+  const mountCube = (faces: PreparedCssSky['faces'], className: string) => {
+    // Opacity flattens a 3D context, so each cube owns a flat wrapper above its camera.
+    const wrapper = document.createElement('div'), camera = document.createElement('div'), scene = document.createElement('div');
+    wrapper.className = className;
+    Object.assign(wrapper.style, { position: 'absolute', inset: '0', pointerEvents: 'none', transformStyle: 'flat' });
+    camera.className = 'prepared-celestial-sky-camera';
+    Object.assign(camera.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', pointerEvents: 'none', transformStyle: 'preserve-3d', transformOrigin: '0 0' });
+    scene.className = 'prepared-celestial-sky-scene';
+    Object.assign(scene.style, { position: 'absolute', left: '50%', top: '50%', width: '0', height: '0', pointerEvents: 'none', transformStyle: 'preserve-3d', transformOrigin: '0 0' });
+    const boundedFaces: { node: HTMLElement; bounds: PreparedLeafBounds | undefined; shown: boolean }[] = [];
+    for (const face of faces) {
+      const node = document.createElement('s'); node.dataset.skyFace = face.id;
+      Object.assign(node.style, { position: 'absolute', left: '0', top: '0', display: 'block', pointerEvents: 'none', transformOrigin: '0 0',
+        backfaceVisibility: 'visible', backgroundRepeat: 'no-repeat', textDecoration: 'none', ...face.style,
+        backgroundImage: `url("${escapeUrl(resolveResource(face.texturePath))}")` });
+      scene.appendChild(node);
+      boundedFaces.push({ node, bounds: face.boundsCssPixels, shown: true });
+    }
+    camera.appendChild(scene); wrapper.appendChild(camera); root.appendChild(wrapper);
+    return { wrapper, camera, scene, boundedFaces, opacity: 1, shown: true };
+  };
+  const cubes = [mountCube(payload.faces, 'prepared-celestial-sky-far')];
+  if (payload.nearFaces) cubes.push(mountCube(payload.nearFaces, 'prepared-celestial-sky-near'));
+  host.insertBefore(root, before);
   let destroyed = false, previousTransform = '', previousPerspective = '', previousOrigin = '', previousClipView = '';
   return Object.freeze({ root,
-    publish(world: WorldCameraPose, viewport: WorldCameraViewport, visible = true): void {
+    /** `near` is the baked-star cube's opacity: 1 at the field's origin, 0 once its parallax shows. */
+    publish(world: WorldCameraPose, viewport: WorldCameraViewport, visible = true, near = 1): void {
       if (destroyed) return;
       if (world.referenceFrame !== payload.referenceFrame || world.epochJdTt !== payload.epochJdTt) throw new TypeError('Prepared sky and observer reference frames differ.');
       const pose = preparedSkyCameraPose(world, viewport, payload.parallax);
       const transform = skyTransformCss(pose);
       root.style.visibility = visible ? 'visible' : 'hidden';
       if (!visible) return;
+      if (cubes.length === 2) {
+        const nearOpacity = Math.max(0, Math.min(1, near)), far = cubes[0]!, close = cubes[1]!;
+        if (nearOpacity !== close.opacity) { close.opacity = nearOpacity; close.wrapper.style.opacity = nearOpacity === 1 ? '' : String(nearOpacity); }
+        // The opaque near cube covers the far one completely; the far cube only paints during the crossfade.
+        const farShown = nearOpacity < 1, closeShown = nearOpacity > 0;
+        if (farShown !== far.shown) { far.shown = farShown; far.wrapper.style.visibility = farShown ? '' : 'hidden'; }
+        if (closeShown !== close.shown) { close.shown = closeShown; close.wrapper.style.visibility = closeShown ? '' : 'hidden'; }
+      }
       const perspective = `${format(viewport.focalPixels)}px`, origin = `calc(50% + ${format(viewport.principalOffsetPixels[0])}px) calc(50% + ${format(viewport.principalOffsetPixels[1])}px)`;
-      if (perspective !== previousPerspective) { camera.style.perspective = perspective; previousPerspective = perspective; }
-      if (origin !== previousOrigin) { camera.style.perspectiveOrigin = origin; previousOrigin = origin; }
-      if (transform !== previousTransform) { scene.style.transform = transform; previousTransform = transform; }
+      if (perspective !== previousPerspective) { for (const cube of cubes) cube.camera.style.perspective = perspective; previousPerspective = perspective; }
+      if (origin !== previousOrigin) { for (const cube of cubes) cube.camera.style.perspectiveOrigin = origin; previousOrigin = origin; }
+      if (transform !== previousTransform) { for (const cube of cubes) cube.scene.style.transform = transform; previousTransform = transform; }
       const clipView = `${transform}|${perspective}|${origin}|${viewport.widthPixels}|${viewport.heightPixels}`;
       if (clipView !== previousClipView) {
         previousClipView = clipView;
         const planes = createPreparedLeafFrustum(pose.rotation, pose.translation, viewport);
-        for (const face of boundedFaces) {
+        for (const cube of cubes) for (const face of cube.boundedFaces) {
           const shown = preparedLeafMayContribute(face.bounds, planes);
           if (shown === face.shown) continue;
           face.shown = shown;

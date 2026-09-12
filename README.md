@@ -35,7 +35,7 @@ To build all routes for production, run `pnpm setup:assets`, `pnpm build`, then
 
 ## Checks
 
-With Node 22 and the pinned pnpm version, first run
+With Node 22.18+ or Node 24 and the pinned pnpm version, first run
 `pnpm install --frozen-lockfile --ignore-scripts` in a fresh checkout. Then
 `pnpm check:ci` runs the command steps from the GitHub workflow locally.
 It verifies the dependency installation, prepares required
@@ -48,8 +48,18 @@ authored JavaScript and stale migration entries. See the
 [TypeScript ownership policy](docs/architecture/typescript-ownership.md) for the
 remaining backlog and justified JavaScript exceptions.
 
-`pnpm test` runs package, renderer, platform, and shell behavior tests. It does
-not reconstruct bodies or verify the full archive of scientific source files.
+`pnpm test` runs package, renderer, platform, shell and universe-preparation
+behavior tests. It does not reconstruct bodies or verify the full archive of
+scientific source files; `pnpm test:preparation` without `--universe` runs the
+body preparation tests too and needs the restored sources.
+
+`pnpm test:browser:all` starts a dev server and runs every browser suite under
+`site/test/` against it in sequence, reporting pass, fail or skip per suite
+(`--origin=<url>` reuses a running server, `--only=<name>` selects suites,
+`--list` shows them). Suites that walk objects use a representative sample:
+the Sun, every planet, the Moon and one member of each other classification;
+`--objects=all` (or `CSSEARTH_TEST_OBJECTS=all`) walks the whole registry and
+`--objects=earth,titan` selects objects. It needs Chromium through Playwright.
 
 `pnpm test:browser` uses the existing server on **4210** for the shared body
 and navigation checks at DPR 1 and DPR 2. It never starts a server or saves a
@@ -111,6 +121,8 @@ src/planets/<id>/
 ├── object.json                  Pinned capability recipe and transport digest
 ├── source/                      Authored JSON, scientific inputs and provenance
 ├── prepared/                    Baked JSON, committed for clean checkouts
+│   ├── *.refs.json              Runtime, scene and sky with shared banks referenced
+│   ├── runtime.json, scene.json, sky.json   Restored full files (Git-ignored)
 │   └── object.json              Rebuilt runtime payload (Git-ignored)
 ├── runtime-assets.json          Reproducible asset inventory
 ├── README.md                    Sources, processing, evidence and known problems
@@ -141,6 +153,8 @@ maintainers publish their updated inventories with `pnpm publish:runtime-assets`
 (or `--object=earth`) before pushing the code that references them.
 
 `prepare:checkout` restores source bytes and generates `public/scenes/` locally.
+Some restores convert NAIF DSK shape kernels and need Python 3 with `numpy`
+(`CSSEARTH_SPICE_PYTHON` selects the interpreter); the tool says so when it is missing.
 This full-source command still restores Earth's retained 19,632-pack geographic
 release (25.4 GB), although the current globe does not use it. Normal
 `setup:assets` installs only prepared browser assets. The release's earlier

@@ -1,4 +1,5 @@
 import { validateDragControlsOptions } from './camera-input-options.js';
+import { createOpacityClock } from '../stars/opacity-clock.js';
 import type { MatrixDragControlsOptions } from './camera-input-options.js';
 export type { MatrixDragControlsOptions } from './camera-input-options.js';
 import { dragControlDiagnostics } from './camera-input-diagnostics.js';
@@ -89,8 +90,12 @@ export function createUnboundedMatrixDragControls({
   let lastInterruption: { from: ActiveMode; to: InterruptionMode } | null = null;
   const windowTarget = inputSurface.ownerDocument.defaultView;
   if (!windowTarget) throw new Error("Input document has no window.");
-  const requestFrame = (callback: FrameRequestCallback) => windowTarget.requestAnimationFrame(guardNative(callback));
-  const cancelFrame = windowTarget.cancelAnimationFrame.bind(windowTarget);
+  // The document's one frame clock, shared with picking and the world publish:
+  // input resolves before the presentation that reads it, in one browser callback.
+  const frameClock = createOpacityClock(windowTarget);
+  lifetime.onDispose(() => frameClock.destroy());
+  const requestFrame = (callback: FrameRequestCallback) => frameClock.request(guardNative(callback), 'input');
+  const cancelFrame = (id: number) => frameClock.cancel(id);
   let pendingDrag: (CameraDelta & { rotation: Quaternion }) | null = null;
   const flushPendingDrag = () => {
     if (pendingDrag === null) return;

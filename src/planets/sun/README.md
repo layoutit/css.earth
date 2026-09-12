@@ -46,6 +46,13 @@ under Known problems. [Unit tests](../../../tests/objects/unit/sun) and the
 [browser profile](../../../tests/objects/browser/sun/browser-profile.mts) define the
 checks; no dated scientific review is cited for this version.
 
+## Shared banks
+
+`prepared/shared/planet-points/` holds the point photometry table of each planet
+and dwarf planet, one file per body and epoch, and `prepared/shared/heliocentric-labels/`
+the heliocentric label set. Every body's prepared runtime references them by
+content hash instead of repeating them; see [prepared shared banks](../../../docs/prepared-shared-banks.md).
+
 ## Known problems
 
 - Polar silhouette dent: the shared sphere closes each pole with one flat
