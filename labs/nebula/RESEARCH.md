@@ -2,6 +2,8 @@
 
 Updated 2026-09-11. Start with [NEXTSTEPS.md](NEXTSTEPS.md) to continue the work and [METHOD.md](METHOD.md) to reproduce the implemented pipeline.
 
+The [12 September Orion structure/velocity intake](models/m42/physical-structure.md) records why the new image-only M42 depth fails, the published front/shell/flow models and public spectroscopic maps to constrain its replacement. Those measurements have not yet been integrated.
+
 ## What exists today
 
 - The LMC volume starts with stellar particles from the Garver et al. simulation, converted to a density field. It is simulated stellar mass, not an observed gas/dust density map.

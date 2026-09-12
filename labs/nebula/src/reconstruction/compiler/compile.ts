@@ -67,7 +67,7 @@ export async function compileNebula(root: string, request: CompilerRequest, sign
   const field = createEmissionField(fitted.field), model = await save('field.json', Buffer.from(JSON.stringify(fitted.field)));
   pipeline.push({ id: 'field', label: 'Fit 3D emission components', state: 'complete', seconds: (performance.now() - started) / 1000 });
   progress('Placing observed compact lights in the inferred field…', .42); started = performance.now();
-  const stars = await compilerStars(source, fitted.field, recipe.maximumStars);
+  const stars = await compilerStars(source, fitted.field, recipe.maximumStars, sourceData.images);
   pipeline.push({ id: 'stars', label: 'Prepare compact lights', state: 'complete', seconds: (performance.now() - started) / 1000 });
   // Framing is independent of the full registered source grid and never truncates field support.
   const centerX = (field.bounds.min[0] + field.bounds.max[0]) / 2, centerY = (field.bounds.min[1] + field.bounds.max[1]) / 2;
@@ -94,7 +94,7 @@ export async function compileNebula(root: string, request: CompilerRequest, sign
   const [targetPin, projection, residual] = await Promise.all([panel('target.png', target.target), panel('projection.png', fitted.projection), panel('residual.png', fitted.residual, true)]);
   const method = await save('method.json', Buffer.from(JSON.stringify({ version: COMPILER_VERSION, implementation, recipe, recipeSha256: geometrySha(recipeBytes), request,
     inputIdentity: inputs.identity, target: { ...target, target: undefined, coverage: undefined }, scaffoldFit, fieldMetrics: fitted.metrics,
-    assumptions: fitted.field.assumptions, stars: 'Compact points detected from the saved stellar residual, preserving observed xy and relative display brightness. Only columns with fitted emission are included. Depth is a deterministic conditional sample of this field, not a measured stellar distance or confirmed membership.',
+    assumptions: fitted.field.assumptions, stars: 'Compact points detected once from the reference stellar residual. Each lens preserves its own local background-subtracted residual aperture display energy and angular footprint at the same registered xy; absent coverage or residual emits zero light. Only columns with fitted emission are included. Depth is a deterministic conditional field sample, unchanged across lenses, not a measured stellar distance or confirmed membership. Encoded RGB display accounting is not calibrated stellar flux, and stars visible only outside the reference catalogue are not added.',
     materials: 'Independent RGB-only lenses. Every source uses the identical fitted field and every neutral alpha byte. No image ray normalization.',
     pipeline }, null, 2)));
   const m = fitted.metrics;

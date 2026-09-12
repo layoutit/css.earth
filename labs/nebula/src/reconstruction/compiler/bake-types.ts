@@ -10,13 +10,19 @@ export interface CompilerLensVolume {
   volume: CompilerPin;
   coverage: { positiveAlphaTexels: number; recoloredTexels: number; outsideImageTexels: number };
 }
+export interface CompilerStarMaterial { rgb: [number, number, number]; diameterUnits: number; alpha: number }
 export interface PreparedCompilerStar {
   id: string;
   /** Centered west/north/away coordinates in the scene's arcsecond units. */
   positionUnits: EmissionVector3;
   rgb: [number, number, number];
-  widthPx: number;
+  /** Historical fixed-screen markers; newly prepared stars use angular scene units. */
+  widthPx?: number;
+  /** Equivalent residual-light disk diameter in the scene's arcsecond units. */
+  diameterUnits?: number;
   alpha: number;
+  /** Optional on historical preparations; new records contain every configured source lens. */
+  materials?: Record<string, CompilerStarMaterial>;
 }
 export interface CompilerBakeResult {
   schema: 'cssearth-compiler-bake@1';
@@ -43,6 +49,22 @@ const record = (v: unknown): v is Record<string, unknown> => v !== null && typeo
 const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
 const triple = (v: unknown): v is EmissionVector3 => Array.isArray(v) && v.length === 3 && v.every(finite);
 const safeId = (v: unknown): v is string => typeof v === 'string' && /^[a-z0-9][a-z0-9-]{0,95}$/.test(v);
+export function validCompilerStarSize(value: { widthPx?: unknown; diameterUnits?: unknown }): boolean {
+  if (value.diameterUnits !== undefined) return value.widthPx === undefined && finite(value.diameterUnits) && value.diameterUnits > 0 && value.diameterUnits <= 1e8;
+  return finite(value.widthPx) && value.widthPx >= .5 && value.widthPx <= 12;
+}
+export function validCompilerStarMaterials(value: unknown, lensIds: ReadonlySet<string>): boolean {
+  if (value === undefined) return true;
+  if (!record(value) || Object.keys(value).length !== lensIds.size) return false;
+  return Object.entries(value).every(([id, material]) => lensIds.has(id) && record(material) &&
+    Object.keys(material).every(key => ['rgb', 'diameterUnits', 'alpha'].includes(key)) &&
+    Array.isArray(material.rgb) && material.rgb.length === 3 && material.rgb.every(n => Number.isInteger(n) && n >= 0 && n <= 255) &&
+    finite(material.diameterUnits) && validCompilerStarSize(material) && finite(material.alpha) && material.alpha >= 0 && material.alpha <= 1);
+}
+/** Material transport never owns point positions or conditionally sampled depths. */
+export function compilerStarAppearance(star: PreparedCompilerStar, lensId: string | null): Pick<PreparedCompilerStar, 'rgb' | 'alpha' | 'diameterUnits' | 'widthPx'> {
+  return lensId && star.materials ? star.materials[lensId]! : star;
+}
 function pin(v: unknown): v is CompilerPin {
   if (!record(v)) return false;
   return typeof v.path === 'string' && v.path.length > 0 && !v.path.startsWith('/') && !v.path.split('/').includes('..') &&
@@ -101,7 +123,7 @@ export function readCompilerBakeResult(value: unknown): CompilerBakeResult {
   for (const star of value.stars) {
     if (!record(star) || typeof star.id !== 'string' || !star.id || star.id.length > 128 || starIds.has(star.id) || !triple(star.positionUnits) ||
         !Array.isArray(star.rgb) || star.rgb.length !== 3 || !star.rgb.every(n => Number.isInteger(n) && n >= 0 && n <= 255) ||
-        !finite(star.widthPx) || star.widthPx < .5 || star.widthPx > 12 || !finite(star.alpha) || star.alpha < 0 || star.alpha > 1)
+        !validCompilerStarSize(star) || !finite(star.alpha) || star.alpha < 0 || star.alpha > 1 || !validCompilerStarMaterials(star.materials, lensIds))
       throw new TypeError('Invalid prepared compiler star.');
     starIds.add(star.id);
   }

@@ -11,13 +11,13 @@ import { compileCssVolume } from '../../../../../src/renderers/css/preparation/v
 import { validatePreparedCssVolume } from '../../../../../src/renderers/css/volume/validation.js';
 import { recolorCloudSlices } from '../cloud-material.js';
 import { bakeMasterVolumeSlices } from '../master-slices.js';
-import { COMPILER_LONGEST_AXIS_SLICES, readCompilerBakeResult, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar } from './bake-types.js';
+import { COMPILER_LONGEST_AXIS_SLICES, readCompilerBakeResult, validCompilerStarSize, validCompilerStarMaterials, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial } from './bake-types.js';
 import type { EmissionBounds, EmissionVector3, SkyBounds } from './field-types.js';
 
 export type { CompilerBakeResult, CompilerLensVolume, CompilerPin, PreparedCompilerStar } from './bake-types.js';
 export { readCompilerBakeResult } from './bake-types.js';
 export interface CompilerBakeProgress { phase: 'volume' | 'texture' | 'compile'; completed: number; total: number; message: string }
-export interface CompilerStarInput { id: string; positionArcsec: EmissionVector3; rgb: [number, number, number]; widthPx: number; alpha: number }
+export interface CompilerStarInput { id: string; positionArcsec: EmissionVector3; rgb: [number, number, number]; widthPx?: number; diameterUnits?: number; alpha: number; materials?: Record<string, CompilerStarMaterial> }
 export interface CompilerLensInput {
   id: string; label: string;
   /** Registered source chromaticity in absolute west/north arcseconds. False means outside observed coverage. */
@@ -91,10 +91,11 @@ export async function bakeCompiler(options: BakeCompilerOptions): Promise<Compil
   for (const star of options.stars ?? []) {
     if (!star.id || star.id.length > 128 || starIds.has(star.id) || !Array.isArray(star.positionArcsec) || star.positionArcsec.length !== 3 || !star.positionArcsec.every(Number.isFinite) ||
         !Array.isArray(star.rgb) || star.rgb.length !== 3 || !star.rgb.every(n => Number.isInteger(n) && n >= 0 && n <= 255) ||
-        !Number.isFinite(star.widthPx) || star.widthPx < .5 || star.widthPx > 12 || !Number.isFinite(star.alpha) || star.alpha < 0 || star.alpha > 1)
+        !validCompilerStarSize(star) || !Number.isFinite(star.alpha) || star.alpha < 0 || star.alpha > 1 || !validCompilerStarMaterials(star.materials, lensIds))
       throw new TypeError('Invalid compiler star input.');
     starIds.add(star.id); stars.push({ id: star.id, positionUnits: star.positionArcsec.map((n, i) => n - origin[i]!) as EmissionVector3,
-      rgb: [...star.rgb], widthPx: star.widthPx, alpha: star.alpha });
+      rgb: [...star.rgb], ...(star.diameterUnits !== undefined ? { diameterUnits: star.diameterUnits } : { widthPx: star.widthPx }), alpha: star.alpha,
+      ...(star.materials ? { materials: structuredClone(star.materials) } : {}) });
   }
   if (stars.length > 5000) throw new TypeError('Compiler star count exceeds the retained point budget.');
   const spans = boundsArcsec.max.map((n, i) => n - boundsArcsec.min[i]!), pitch = Math.max(...spans) / COMPILER_LONGEST_AXIS_SLICES;

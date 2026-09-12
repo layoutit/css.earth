@@ -34,4 +34,16 @@ The source packet was verified against both image SHA-256 values and decoded TIF
 
 Without spectroscopy or an independent volume, the compiler’s depth is a conditional diffuse prior. Compact lights are detected image features with illustrative depths; they are not a catalog of confirmed members with measured distances.
 
+The [Orion structure and velocity research](physical-structure.md) identifies the current extrusion error, public spectroscopic maps, component-specific physical models and the next constrained experiment. These measurements are not yet wired into the compiler.
+
+## Star photometry correction · 12 September 2026
+
+Compact lights now use local background-subtracted NOX residual aperture light, source color and an equivalent angular disk area. There is no faint-star opacity floor, whitening or brightest-star normalization. Each lens supplies its own appearance at the same 650 reference-catalogue positions and modeled depths. Stars absent from the reference catalogue are not added; missing light/coverage in another lens produces zero light. These are encoded RGB display measurements, not calibrated stellar flux.
+
+The previous optical markers emitted 21.78 times the measured residual aperture display energy at the 1024px reference framing. The revised prepared disks preserve 99.70% for optical and 99.86% for VISTA; peak intensity never exceeds the corresponding original aperture peak. Browser alpha compositing and pixel sampling are separate from this preparation-space accounting.
+
+The exact saved request (Detail 100%, Faint 35%, Depth 1×) was rebuilt as `e94ec60c3b2128e213cb20b041a3726f136d61b6a810670794aca01339605f41`. Against its prior result `287801eff85c5adf01ae298c63fe8b55711fdb746a0ff83cfad2da53fce3ac2b`, the volume field, alpha digest, 650 IDs and XYZ positions are unchanged. The default 65% Detail publication is `7312292273a7cb0f9975fa492a3de85146b911b2857621d1f5d3c8b7d46d4d8d`.
+
+Validation: strict lab TypeScript, lab build and 300 passing tests (two skipped). Restoring the old opacity floor makes the photometry regression fail. Real Chromium inspection of both M42 lenses verified fixed star centers, lens-specific appearance, angular sizing during zoom, rotation, star visibility, original overlay and refresh. Front/oblique images were inspected: excessive star amplification is corrected; diffuse side geometry and optical coverage boundaries remain visible and unresolved.
+
 See [the completed batch assessment and current failures](../inference-candidates/README.md#first-processing-result--2026-09-12), [the compiler method](../../docs/emission-compiler.md) and [workflow](../../docs/workflows.md).

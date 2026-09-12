@@ -1,0 +1,116 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { compilerStars, compilerStarLensPoints, createCompilerStarPhotometer } from './stars';
+import { compilerStarAppearance, validCompilerStarMaterials, validCompilerStarSize, type PreparedCompilerStar } from './bake-types';
+import type { CompilerImage } from './images';
+import type { EmissionFieldModel } from './field-types';
+
+function image(gain = 1, scale = 1, background = 0, centers: [number, number][] = [[16.5, 16.5]]): CompilerImage {
+  const width = 33, height = 33, residual = new Uint8Array(width * height * 3), original = new Uint8Array(residual.length);
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    const light = centers.reduce((sum, p) => sum + Math.floor(10 * Math.exp(-((x + .5 - p[0]) ** 2 + (y + .5 - p[1]) ** 2) / 4)), 0);
+    for (let c = 0; c < 3; c++) {
+      const at = (y * width + x) * 3 + c;
+      residual[at] = background + gain * Math.floor(light * [1, .4, .2][c]!);
+      original[at] = residual[at]! + 20;
+    }
+  }
+  const layer = (data: Uint8Array) => ({ width, height, data, path: 'fixture', sha256: 'fixture' });
+  const sampleOriginal = (x: number, y: number, out: [number, number, number]) => {
+    const px = Math.floor(x / scale), py = Math.floor(-y / scale);
+    if (px < 0 || py < 0 || px >= width || py >= height) return false;
+    for (let c = 0; c < 3; c++) out[c] = original[(py * width + px) * 3 + c]!;
+    return true;
+  };
+  return { id: 'fixture', label: 'fixture', credit: 'fixture', page: 'fixture', matrix: [1, 0, 0, 1, 0, 0], nativeWidth: width, nativeHeight: height,
+    original: layer(original), diffuse: layer(original.map((v, i) => v - residual[i]!)), stars: layer(residual),
+    pixelToSky: (x, y) => [x * scale, -y * scale], sampleOriginal, sampleRgb: sampleOriginal };
+}
+function energy(value: NonNullable<ReturnType<ReturnType<typeof createCompilerStarPhotometer>['measure']>>) {
+  const area = Math.PI * value.diameterUnits ** 2 / 4 / value.measurement.pixelAreaUnitsSquared;
+  return value.rgb.map(channel => area * value.alpha * channel / 255);
+}
+
+test('prepared star display energy matches the observed residual without opacity or color floors', () => {
+  const measured = createCompilerStarPhotometer(image(), [[16.5, 16.5]]).measure(0)!;
+  assert.ok(measured.alpha < .18, 'a faint source must remain fainter than the old 18% opacity floor');
+  assert.ok(measured.rgb[2] < measured.rgb[0] * .25, 'red stars must not acquire a white color floor');
+  const predicted = energy(measured), target = measured.measurement.residualDisplayEnergyRgb;
+  for (let c = 0; c < 3; c++) {
+    assert.ok(predicted[c]! <= target[c]! + 1e-12);
+    assert.ok(target[c]! - predicted[c]! <= Math.max(...target) / 255 + 1e-12);
+    assert.ok(target[c]! <= measured.measurement.originalDisplayEnergyRgb[c]!);
+  }
+});
+
+test('source intensity and angular image scale independently control light and footprint', () => {
+  const a = createCompilerStarPhotometer(image(1), [[16.5, 16.5]]).measure(0)!;
+  const b = createCompilerStarPhotometer(image(2), [[16.5, 16.5]]).measure(0)!;
+  const wide = createCompilerStarPhotometer(image(1, 2), [[16.5, 16.5]]).measure(0)!;
+  assert.equal(b.alpha, a.alpha * 2);
+  assert.ok(Math.abs(b.diameterUnits - a.diameterUnits) < 1e-12);
+  assert.ok(Math.abs(wide.diameterUnits - a.diameterUnits * 2) < 1e-12);
+  assert.deepEqual(energy(wide), energy(a));
+});
+
+test('local smooth residual background is excluded and neighboring apertures do not claim the same pixels', () => {
+  const a = createCompilerStarPhotometer(image(), [[16.5, 16.5]]).measure(0)!;
+  const background = createCompilerStarPhotometer(image(1, 1, 30), [[16.5, 16.5]]).measure(0)!;
+  assert.deepEqual(background.measurement.residualDisplayEnergyRgb, a.measurement.residualDisplayEnergyRgb);
+  const points: [number, number][] = [[14.5, 16.5], [18.5, 16.5]], pair = image(1, 1, 0, points);
+  const owned = createCompilerStarPhotometer(pair, points);
+  const separate = points.map(point => createCompilerStarPhotometer(pair, [point]).measure(0)!);
+  const jointSum = energy(owned.measure(0)!)[0]! + energy(owned.measure(1)!)[0]!;
+  const duplicated = energy(separate[0]!)[0]! + energy(separate[1]!)[0]!;
+  const observed = pair.stars.data.reduce((sum, v, i) => sum + (i % 3 === 0 ? v / 255 : 0), 0);
+  assert.ok(jointSum <= observed + 1e-12);
+  assert.ok(duplicated > jointSum * 1.5);
+});
+
+test('new angular footprints and historical screen footprints stay unambiguous', () => {
+  assert.equal(validCompilerStarSize({ diameterUnits: .1 }), true);
+  assert.equal(validCompilerStarSize({ widthPx: 2 }), true);
+  assert.equal(validCompilerStarSize({ diameterUnits: .1, widthPx: 2 }), false);
+  assert.equal(validCompilerStarSize({ diameterUnits: 0 }), false);
+  assert.equal(validCompilerStarSize({}), false);
+});
+
+test('registered infrared photometry changes appearance while the reference catalogue and XYZ remain fixed', async () => {
+  const reference = { ...image(8, 1, 0, [[10.5, 16.5]]), id: 'optical' };
+  const rotated = image(4, 1, 0, [[16.5, 22.5]]), originalSample = rotated.sampleOriginal;
+  const infrared: CompilerImage = { ...rotated, id: 'infrared', pixelToSky: (x, y) => [33 - y, -x],
+    sampleOriginal: (x, y, out) => originalSample(-y, x - 33, out) };
+  const missing: CompilerImage = { ...infrared, id: 'unobserved', pixelToSky: (x, y) => [1000 + x, 1000 - y] };
+  assert.deepEqual(compilerStarLensPoints(reference, infrared, [[10.5, 16.5]]), [[16.5, 22.5]]);
+  const field: EmissionFieldModel = { schema: 'cssearth-conditional-emission-field@1', identity: 'fixture', controls: { detail: 1, faint: 1, depth: 1 },
+    bounds: { min: [-100, -100, -100], max: [100, 100, 100] }, skyBounds: { min: [-100, -100], max: [100, 100] }, scaffold: null,
+    components: [{ id: 'cloud', basisId: 'cloud', center: [10.5, -16.5, 0], sigma: [20, 20, 20], angleRadians: 0,
+      projectedWeight: 1, depthAssignment: 'halo-diffuse', velocityCovered: false }],
+    assumptions: { kernel: 'fixture', projectionUnits: 'fixture', depth: 'fixture', halo: 'fixture', haloRadiusArcsec: 100,
+      equalNearFarSplit: true, velocityUncoveredComponents: 1 } };
+  const baseline = await compilerStars(reference, field, 10), combined = await compilerStars(reference, field, 10, [reference, infrared, missing]);
+  assert.ok(combined.length > 0);
+  assert.deepEqual(combined.map(s => [s.id, s.positionArcsec]), baseline.map(s => [s.id, s.positionArcsec]));
+  for (const star of combined) {
+    assert.equal(star.materials!.infrared!.alpha, star.materials!.optical!.alpha / 2);
+    assert.ok(Math.abs(star.materials!.infrared!.diameterUnits - star.materials!.optical!.diameterUnits) < 1e-10);
+    assert.equal(star.materials!.unobserved!.alpha, 0);
+    const prepared: PreparedCompilerStar = { ...star, positionUnits: star.positionArcsec }, original = structuredClone(prepared);
+    assert.deepEqual(compilerStarAppearance(prepared, 'infrared'), star.materials!.infrared);
+    assert.deepEqual(compilerStarAppearance(prepared, 'optical'), star.materials!.optical);
+    assert.equal(compilerStarAppearance(prepared, null), prepared);
+    assert.deepEqual(prepared, original);
+  }
+});
+
+test('lens materials require complete known coverage and cannot carry geometry; historical stars remain readable', () => {
+  const ids = new Set(['optical', 'infrared']), appearance = { rgb: [255, 100, 30], alpha: .2, diameterUnits: 10 };
+  assert.equal(validCompilerStarMaterials(undefined, ids), true);
+  assert.equal(validCompilerStarMaterials({ optical: appearance, infrared: { ...appearance, alpha: 0 } }, ids), true);
+  assert.equal(validCompilerStarMaterials({ optical: appearance }, ids), false);
+  assert.equal(validCompilerStarMaterials({ optical: appearance, invented: appearance }, ids), false);
+  assert.equal(validCompilerStarMaterials({ optical: appearance, infrared: { ...appearance, positionUnits: [1, 2, 3] } }, ids), false);
+  assert.equal(validCompilerStarMaterials({ optical: appearance, infrared: { ...appearance, alpha: 2 } }, ids), false);
+  const historical: PreparedCompilerStar = { id: 'legacy', positionUnits: [1, 2, 3], rgb: [255, 255, 255], alpha: .2, widthPx: 1 };
+  assert.equal(compilerStarAppearance(historical, 'infrared'), historical);
+});

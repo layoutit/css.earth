@@ -4,7 +4,7 @@ import { transposeWorldRotation, worldRotationFromQuaternion } from '../../../..
 import { mountPreparedCssVolume } from '../../../../src/renderers/css/volume/prepared-volume-runtime';
 import type { PreparedCssVolume } from '../../../../src/renderers/css/volume/types';
 import { validatePreparedCssVolume } from '../../../../src/renderers/css/volume/validation';
-import { readCompilerBakeResult, type CompilerBakeResult, type CompilerPin } from '../reconstruction/compiler/bake-types';
+import { compilerStarAppearance, readCompilerBakeResult, type CompilerBakeResult, type CompilerPin } from '../reconstruction/compiler/bake-types';
 import { compilerInspectionCamera, type CompilerInspectionFrame } from './compiler-framing';
 import { shapeCloudOrthographicCamera, type ShapeCloudFraming } from './shape-cloud-camera';
 import '../../../../src/renderers/css/styles/volume.css';
@@ -92,7 +92,7 @@ export async function createCompilerViewer({ host, result: input, resolvePath = 
       if (disposed) return;
       if (mode === 'neutral') {
         for (const leaf of leaves) for (const node of leaf.nodes) node.style.backgroundImage = `url("${leaf.neutral}")`;
-        root.dataset.material = 'neutral'; root.dataset.lens = ''; return;
+        root.dataset.material = 'neutral'; root.dataset.lens = ''; stars.setLens(null); publish(); return;
       }
       const lens = result.lenses.find(item => item.id === lensId);
       if (!lens) throw new TypeError('Compiler textured material requires a prepared lens.');
@@ -108,8 +108,9 @@ export async function createCompilerViewer({ host, result: input, resolvePath = 
       } else {
         applyBank(leaves, activeLens.bank); root.dataset.material = 'textured'; root.dataset.lens = lens.id;
       }
+      stars.setLens(lens.id); publish();
     },
-    setStars(value) { stars.setVisible(value); root.dataset.stars = String(value); },
+    setStars(value) { stars.setVisible(value); root.dataset.stars = String(value); publish(); },
     setPose(nextYaw, nextPitch) {
       if (![nextYaw, nextPitch].every(Number.isFinite)) throw new TypeError('Compiler angles must be finite.');
       if (!disposed) { yaw = nextYaw; pitch = nextPitch; publish(); }
@@ -132,10 +133,11 @@ function mountStars(host: HTMLElement, result: CompilerBakeResult) {
   const nodes = result.stars.map(star => {
     const node = host.ownerDocument.createElement('s'); node.dataset.starId = star.id;
     const color = `rgb(${star.rgb[0]} ${star.rgb[1]} ${star.rgb[2]})`;
-    node.style.cssText = `position:absolute;left:50%;top:50%;display:block;width:${star.widthPx}px;height:${star.widthPx}px;border-radius:50%;background:${color};opacity:${star.alpha};visibility:hidden;text-decoration:none`;
+    node.style.cssText = `position:absolute;left:50%;top:50%;display:block;border-radius:50%;background:${color};opacity:${star.alpha};visibility:hidden;text-decoration:none`;
     root.append(node); return node;
   });
-  let visible = true, destroyed = false;
+  let visible = true, destroyed = false, lensId: string | null = null;
+  root.dataset.photometryLens = 'reference';
   return { publish(publication: ReturnType<typeof shapeCloudOrthographicCamera>['publication']) {
     if (destroyed) return;
     const local = presentPhysicalPoseInVolume(publication.world.pose, result.frame);
@@ -146,10 +148,22 @@ function mountStars(host: HTMLElement, result: CompilerBakeResult) {
     let count = 0;
     result.stars.forEach((star, index) => {
       const point = projectPreparedPoint(star.positionUnits, local.positionUnits, rotation, focal, ox, oy), node = nodes[index]!;
-      const shown = visible && point.depth > 0 && Math.abs(point.x) < halfWidth + star.widthPx && Math.abs(point.y) < halfHeight + star.widthPx;
-      node.style.visibility = shown ? '' : 'hidden'; if (shown) { count++; node.style.transform = `translate(${point.x - star.widthPx / 2}px,${point.y - star.widthPx / 2}px)`; }
+      const appearance = compilerStarAppearance(star, lensId);
+      const diameter = appearance.diameterUnits === undefined ? appearance.widthPx! : appearance.diameterUnits * focal / point.depth;
+      const shown = visible && appearance.alpha > 0 && point.depth > 0 && Math.abs(point.x) < halfWidth + diameter && Math.abs(point.y) < halfHeight + diameter;
+      node.style.visibility = shown ? '' : 'hidden'; if (shown) {
+        count++; node.style.width = node.style.height = `${diameter}px`;
+        node.style.transform = `translate(${point.x - diameter / 2}px,${point.y - diameter / 2}px)`;
+      }
     });
     root.dataset.visibleStars = String(count);
+  }, setLens(value: string | null) {
+    lensId = value; root.dataset.photometryLens = value ?? 'reference';
+    result.stars.forEach((star, index) => {
+      const appearance = compilerStarAppearance(star, lensId), node = nodes[index]!;
+      node.style.backgroundColor = `rgb(${appearance.rgb[0]} ${appearance.rgb[1]} ${appearance.rgb[2]})`;
+      node.style.opacity = String(appearance.alpha);
+    });
   }, setVisible(value: boolean) { visible = value; root.style.display = value ? 'block' : 'none'; root.dataset.visibleStars = value ? root.dataset.visibleStars ?? '0' : '0'; },
   destroy() { destroyed = true; root.remove(); } };
 }

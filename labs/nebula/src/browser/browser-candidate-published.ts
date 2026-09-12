@@ -26,6 +26,13 @@ async function material(id: string, mode = 'textured') {
   }, { id, mode }, { timeout: 60000 });
 }
 async function snapshot(name: string) { await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())))); await page.screenshot({ path: `${output}/${name}.png` }); }
+async function starPresentation() {
+  return page.locator('div[data-compiler-stars] s').evaluateAll(items => items.map(item => {
+    const node = item as HTMLElement, rect = node.getBoundingClientRect();
+    return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2, width: rect.width,
+      color: node.style.backgroundColor, alpha: node.style.opacity, visible: getComputedStyle(node).visibility !== 'hidden' };
+  }));
+}
 const receipts: { id: string; result: string; lenses: string[]; stars: number }[] = [];
 try {
   for (const id of candidates) {
@@ -34,8 +41,24 @@ try {
     const lenses = await page.locator('#compiler-lens option').evaluateAll(items => items.map(item => (item as HTMLOptionElement).value));
     assert.ok(lenses.length > 0);
     const stars = await page.locator('div[data-compiler-stars] s').count(); assert.ok(stars > 0);
+    let previousStars: Awaited<ReturnType<typeof starPresentation>> | undefined;
     for (const lens of lenses) {
       await page.locator('#compiler-lens').selectOption(lens); await material(lens); await snapshot(`${id}-${lens}-earth`);
+      const currentStars = await starPresentation();
+      assert.equal(currentStars.length, stars, 'Changing image recreated the stellar catalogue.');
+      if (previousStars && id === 'm42') {
+        let compared = 0;
+        currentStars.forEach((star, i) => {
+          const previous = previousStars![i]!;
+          if (!star.visible || !previous.visible || !star.width || !previous.width) return;
+          compared++;
+          assert.ok(Math.hypot(star.x - previous.x, star.y - previous.y) < .05, 'Photometry changed a star sky position.');
+        });
+        assert.ok(compared > 100, 'Not enough shared stars remained visible for the lens-switch check.');
+        assert.ok(currentStars.some((star, i) => star.color !== previousStars![i]!.color || star.alpha !== previousStars![i]!.alpha),
+          'The infrared lens retained optical star photometry.');
+      }
+      previousStars = currentStars;
     }
     await page.getByRole('button', { name: 'Orbit', exact: true }).click();
     const rect = await page.locator('.compiler-stage .shape-cloud-viewport').boundingBox(); assert.ok(rect);
@@ -47,9 +70,23 @@ try {
       assert.equal(await page.locator('.compiler-stage').getAttribute('data-compiler-pose'), pose);
     }
     await page.getByRole('button', { name: 'Neutral', exact: true }).click(); await material('', 'neutral'); await snapshot(`${id}-neutral-oblique`);
+    if (id === 'm42') {
+      await page.getByRole('button', { name: 'Earth view', exact: true }).click();
+      const beforeZoom = await starPresentation();
+      await page.mouse.move(rect.x + rect.width / 2, rect.y + rect.height / 2);
+      await page.mouse.wheel(0, -220);
+      await page.waitForFunction(() => new Promise<boolean>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve(true)))));
+      const afterZoom = await starPresentation();
+      const ratios = afterZoom.flatMap((star, i) => star.visible && beforeZoom[i]!.visible && beforeZoom[i]!.width > .1 ? [star.width / beforeZoom[i]!.width] : []).sort((a, b) => a - b);
+      assert.ok(ratios.length > 100 && ratios[Math.floor(ratios.length / 2)]! > 1.05, 'Stars retained a fixed screen size while zooming.');
+    }
     await page.getByRole('checkbox', { name: 'Stars', exact: true }).uncheck();
     assert.equal(await page.locator('div[data-compiler-stars]').evaluate(node => getComputedStyle(node).display), 'none');
     await page.getByRole('button', { name: 'Earth view', exact: true }).click();
+    await page.getByRole('checkbox', { name: 'Stars', exact: true }).check();
+    assert.ok((await starPresentation()).filter(star => star.visible && Number(star.alpha) > 0).length > 100,
+      'Re-enabling stars after a camera change left them hidden.');
+    await page.getByRole('checkbox', { name: 'Stars', exact: true }).uncheck();
     await page.getByRole('checkbox', { name: 'Original', exact: true }).check();
     await page.waitForFunction(() => { const image = document.querySelector<HTMLImageElement>('[data-compiler-original-source]'); return image?.complete && image.naturalWidth > 0; });
     await snapshot(`${id}-original`); await page.reload(); await ready();
