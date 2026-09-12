@@ -2,13 +2,13 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { PNG } from "pngjs";
-import { parseReferenceInput, parseCalibrationSampleIds } from "../../oracle/venus/input-validation.mts";
+import { parseReferenceInput, parseCalibrationSampleIds } from "../../../../tools/oracles/venus/input-validation.mts";
 
 import {
   analyzeScenePng,
   compareStarfieldFeatures,
   compareSunPresentations,
-} from "../../oracle/venus/image-analysis.mts";
+} from "../../../../tools/oracles/venus/image-analysis.mts";
 import {
   GOOGLE_MAPS_VENUS_URL,
   deriveBrowserCamera,
@@ -23,7 +23,7 @@ import {
   ORACLE_SCENE_CENTER,
   ORACLE_SCENE_CLIP,
   parseGoogleCameraUrl,
-} from "../../oracle/venus/profile.mts";
+} from "../../../../tools/oracles/venus/profile.mts";
 
 test("Venus oracle pins the canonical Google Maps URL and settled poses", () => {
   assert.equal(GOOGLE_MAPS_VENUS_URL,

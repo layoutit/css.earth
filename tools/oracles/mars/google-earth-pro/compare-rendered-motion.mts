@@ -11,9 +11,9 @@ import { array, object, text, finite, parseJson } from "./oracle-values.mts";
 import { parseRenderedNativeReport, parseRenderedBrowserReport, loadHeldInitialFrame } from "./rendered-motion-records.mts";
 import { cameraMatrix } from "./interaction-analysis-records.mts";
 import type { NativeMotionFrame } from "./native-motion-trace-reader.mts";
-import type { Matrix3 } from "../../../../../site/test/interaction-orientation.mts";
+import type { Matrix3 } from "../../../../site/test/interaction-orientation.mts";
 import { decodeNativeMotionTrace } from "./native-motion-trace-reader.mts";
-import { relativeOrientation3, multiply3, orientationErrorDegrees } from "../../../../../site/test/interaction-orientation.mts";
+import { relativeOrientation3, multiply3, orientationErrorDegrees } from "../../../../site/test/interaction-orientation.mts";
 
 const exec = promisify(execFile);
 const [nativeArgument, browserArgument, outputArgument, visualization = "absolute", thresholdArgument = "0.1"] = process.argv.slice(2);
