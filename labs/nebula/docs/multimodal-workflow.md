@@ -1,11 +1,12 @@
 # Combined image evidence and a measured velocity slit
 
-The `joint-evidence@1` prototype adds two independent inspection views. It does not yet fit the fused map to a 3D cloud, connect it to the saved Helix shape recipe, or infer a unique depth. The next bridge is a connected ridge graph and a small set of shell/lobe hypotheses evaluated against both observations.
+The `joint-evidence@1` prototype keeps combined image evidence and the inner [O III] slit independently inspectable. The [joint-fit experiment](joint-fit.md) now connects a ridge graph to a separate broader HCO+ catalogue and compares two coarse 3D molecular-wall hypotheses. It does not replace the saved Helix shape recipe or infer unique depth.
 
 ## Open the views
 
 - `/reconstruction?subject=helix-model-prior&inspection=combined`: three registered ESO sources, their joint signal and agreement.
 - `/reconstruction?subject=helix-model-prior&inspection=kinematics`: a real [O III] 5007 Å slit compared with an independent expanding shell.
+- `/reconstruction?subject=helix-model-prior&inspection=joint`: image ridges plus broader molecular velocities, with prepared shell/lobe candidates and withheld residuals.
 - `/reconstruction?subject=helix-model-prior&fit=helix-tuned`: the earlier authored coarse 3D fit, retained separately.
 
 Use the existing [lab startup](../README.md) and [Helix preparation](../models/helix/README.md) to restore aligned, star-separated observations. Opening Combined reuses those pinned working rasters; it never downloads new imagery, removes stars again or bakes a volume.
@@ -48,4 +49,4 @@ The combined browser check exercises three-source controls, on-map attribution, 
 
 Validation on 2026-09-12 covers `joint-evidence@1` and slit-recipe SHA-256 `65966387493596b8b9f245538b5310c7cb8f31fb675858bb98d89f4c19bc8f38`: all 252 lab tests passed, including the real three-source grid. Strict source/changed-test TypeScript and the lab build passed. The final browser pass includes resetting a hypothesis during a pending response; that case failed before the status-state fix. Retain these limits when reusing the result for later versions; this is implementation evidence, not validation of the inferred geometry.
 
-Read [multimodal-research.md](multimodal-research.md) for primary papers and verified dataset leads. Prioritize a ridge graph, then compare alternative shell/lobe models with held-out image/slit evidence. The verified ALMA C1 cube and broad-field LVM spectra serve different follow-ups; neither is silently incorporated into this first slit model.
+Read [multimodal-research.md](multimodal-research.md) for primary papers and verified dataset leads, and [joint-fit.md](joint-fit.md) for the implemented ridge/velocity bridge and its coarse-model failures. The verified ALMA C1 cube and broad-field LVM spectra serve different follow-ups; neither is silently incorporated into these models.

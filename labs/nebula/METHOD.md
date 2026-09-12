@@ -118,7 +118,7 @@ This preview models relative emission, not measured gas density. Depth and wall 
 
 ## Multiband evidence and kinematic constraints
 
-The [multimodal inspector](docs/multimodal-workflow.md) combines registered, independently normalized broad/ridge/compact evidence while retaining each source's footprint and attribution. Single-band features survive; compatible repeated support is an additional display, not a membership test. A separate real Helix slit compares observed velocities with an explicitly assumed expanding ellipsoid. It is not yet jointly fitted to the image map or promoted to a volume. See [research and dataset leads](docs/multimodal-research.md) before choosing a depth model.
+The [multimodal inspector](docs/multimodal-workflow.md) combines registered, independently normalized broad/ridge/compact evidence while retaining each source's footprint and attribution. Single-band features survive; compatible repeated support is an additional display, not a membership test. The [joint fit](docs/joint-fit.md) connects projected ridge skeletons to the broader HCO+ catalogue, compares two coarse molecular-wall surfaces and prepares neutral XYZ volumes with withheld-velocity residuals. The inner [O III] slit remains separate. These are conditional shape hypotheses, not a recovered density field; see [research and dataset leads](docs/multimodal-research.md).
 
 ## Selected LMC inputs
 

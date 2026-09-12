@@ -1,12 +1,12 @@
 # Helix: observation alignment and shape inference
 
-**Current step:** inspect the saved, manually tuned coarse shape cloud at `/reconstruction?subject=helix-model-prior&fit=helix-tuned`. It opens **Helix · tuned** on the registered ESO wider-field observation. **Alignment** retains Original / Without stars / Residual; **Volume** remains the earlier cropped Hubble experiment.
+**Current step:** compare the automatic molecular-wall candidates at `/reconstruction?subject=helix-model-prior&inspection=joint`. Image ridges and measured HCO+ velocities jointly constrain a coarse shell or waisted lobe model, with withheld residuals beside the rotatable volume. The earlier manually tuned cloud remains at `fit=helix-tuned`; **Volume** retains the cropped Hubble experiment. None is an accepted physical reconstruction.
 
 **Initial visual verdict: neither baseline is accepted.** The one-axis fit reproduces the photograph but becomes a box from the side. The disk/ring prior has finite curved components, but is too smooth, cuts off outer emission and changes brightness under rotation. These are deliberately visible comparisons, not production nebula assets.
 
 ## Combined observations and measured velocities
 
-Open `/reconstruction?subject=helix-model-prior&inspection=combined` for the three-image evidence map, or `inspection=kinematics` for the measured core slit. [Workflow and limits](../../docs/multimodal-workflow.md) explain the shared sky grid, source weights, saved jobs and independent velocity hypothesis. [kinematics-oiii.json](kinematics-oiii.json) preserves the actual figure-9 digitization and calibration; [research](../../docs/multimodal-research.md) records original-data alternatives. These views do not yet produce a jointly constrained 3D Helix.
+Open `/reconstruction?subject=helix-model-prior&inspection=combined` for the three-image evidence map, or `inspection=kinematics` for the measured core slit. [Workflow and limits](../../docs/multimodal-workflow.md) explain the shared sky grid, source weights and saved jobs. [kinematics-oiii.json](kinematics-oiii.json) preserves the figure-9 digitization; [kinematics-hco.json](kinematics-hco.json) pins the separate Zeigler et al. (2013) molecular component catalogue. The [joint-fit method](../../docs/joint-fit.md) explains the 279 measured components, source-count discrepancy, beam approximation, conditional surfaces and failures. This is a coarse molecular-wall comparison, not a complete Helix reconstruction.
 
 ## Saved coarse fit · 2026-09-12
 
@@ -62,7 +62,10 @@ python3 -m venv .local/open-star-removal/venv
 curl -fL https://github.com/charvey2718/nox/releases/download/v1.1.0/noxGeneratorColor.pb -o .local/open-star-removal/noxGeneratorColor.pb
 node --experimental-strip-types labs/nebula/src/run.ts prepare-observations labs/nebula/models/helix/observations.json --alignment-only
 node --experimental-strip-types labs/nebula/src/run.ts prepare-observations labs/nebula/models/helix/observations.json
+node --experimental-strip-types labs/nebula/src/run.ts prepare-observation-structures labs/nebula/models/helix/observation-structures.json
 node --experimental-strip-types labs/nebula/src/run.ts prepare-kinematics labs/nebula/models/helix/kinematics-oiii.json
+node --experimental-strip-types labs/nebula/src/run.ts molecular-acquire labs/nebula/models/helix/kinematics-hco.json
+node --experimental-strip-types labs/nebula/src/run.ts prepare-joint-fit labs/nebula/models/helix/joint-fit.json .local/nebula-lab/observations/helix/structures/catalogue.json
 pnpm exec vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 --strictPort
 ```
 
@@ -70,7 +73,7 @@ The first preparation command acquires/verifies native originals and alignment w
 
 Browser verification passed for all nine real layers, identical transforms and retained image nodes, full footprints, matched markers, pan/zoom, reload, saved manual adjustments/copy, and navigation among the density/symmetry/inference examples. Helix inspection issued no processing requests and loaded Alignment without a baked volume. A cache-only replay retained every completed layer and launched no inference. Removing the AVM offset path and the no-processing guard each makes a focused test fail. These checks establish registration/display/replay behavior, not star-removal quality or physical depth.
 
-**Next gate: review automatically detected arcs/ellipses and their support before fitting a volume.** The user authorized extraction of the new observations on 2026-09-11. Keep the old Hubble volume distinct. Neither matching stars nor keeping a projected feature establishes the nebula's 3D form.
+The user authorized extraction of the new observations on 2026-09-11 and the subsequent joint-fit experiment on 2026-09-12. Keep the old Hubble volume distinct. Neither matching stars nor keeping a projected feature establishes the nebula's 3D form; the next decision uses the [joint model's residuals](../../docs/joint-fit.md).
 
 ## Difficulty and scientific basis
 
