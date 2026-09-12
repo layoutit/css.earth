@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5cf9629f213c302d057d93567bcf013c6590c75a7d418bd5d505c2115c68ab00"
+    "sha256": "7f053dcbb57428662fbd5dad5fd93ac73cbf3c3cc2c6735af4320c856005e69f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -321,6 +321,22 @@
       "path": "shape/ml14.obj",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/ml14.obj",
       "credit": "Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone, Arecibo and NASA/JPL",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "evidence": "The preserved credit for this input reads: Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone, Arecibo and NASA/JPL",
+            "missionId": "arecibo-planetary-radar"
+          },
+          {
+            "kind": "machine",
+            "machineId": "goldstone-dss14",
+            "evidence": "The preserved credit for this input reads: Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone, Arecibo and NASA/JPL",
+            "missionId": "goldstone-solar-system-radar"
+          }
+        ]
+      },
       "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",

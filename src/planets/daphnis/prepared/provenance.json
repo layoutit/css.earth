@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bbccf12aaf00e9ba94bb5e4d2a015ac0b1fd23677506be2394f7eda4e02d9739"
+    "sha256": "674d5669ecd73d25524c70526e24f8d28e9168e51944be9068858c67fbc088f8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -397,8 +397,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/daphnis_30k_plt.tab",
             "missionId": "cassini"
           }
@@ -451,8 +451,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656997950_1_CALIB.IMG",
             "missionId": "cassini"
           }
@@ -498,8 +498,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656997950_1_CALIB.LBL",
             "missionId": "cassini"
           }
@@ -552,8 +552,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656998640_1_CALIB.IMG",
             "missionId": "cassini"
           }
@@ -599,8 +599,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656998640_1_CALIB.LBL",
             "missionId": "cassini"
           }
@@ -653,8 +653,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2110/data/1863231911_1863269539/N1863267232_1_CALIB.IMG",
             "missionId": "cassini"
           }
@@ -700,8 +700,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2110/data/1863231911_1863269539/N1863267232_1_CALIB.LBL",
             "missionId": "cassini"
           }

@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2a66c192d1031067faa3714c3d1d1764e996be31bfaae6f182c26f9834abcd57"
+    "sha256": "5a80308dfba270cc515c60437f679ca1fd0b867d9d198b49f20d0ab7f515aea0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -310,6 +310,16 @@
       "path": "shape/betulia.obj",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/betulia.obj",
       "credit": "Magri et al. (2007), Icarus 186, 152–177; Arecibo and NASA/JPL radar astronomy",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "evidence": "The preserved credit for this input reads: Magri et al. (2007), Icarus 186, 152–177; Arecibo and NASA/JPL radar astronomy",
+            "missionId": "arecibo-planetary-radar"
+          }
+        ]
+      },
       "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",

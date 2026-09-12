@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "729e80e77e9982e0f506abaf1784e9e791db9c239c11e0f7cb517ee4c3c5ac16"
+    "sha256": "d297f9ca1489f7744150b1ea567edb17659cd6e8104b7649d17fd0a34bf321f6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -312,6 +312,21 @@
       "path": "shape/ce26.obj",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/ce26.obj",
       "credit": "Shepard et al. (2006), Icarus 184, 198–210; Arecibo radar, NASA IRTF and NASA/JPL",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "evidence": "The preserved credit for this input reads: Shepard et al. (2006), Icarus 184, 198–210; Arecibo radar, NASA IRTF and NASA/JPL",
+            "missionId": "arecibo-planetary-radar"
+          },
+          {
+            "kind": "machine",
+            "machineId": "irtf",
+            "evidence": "The preserved credit for this input reads: Shepard et al. (2006), Icarus 184, 198–210; Arecibo radar, NASA IRTF and NASA/JPL"
+          }
+        ]
+      },
       "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",

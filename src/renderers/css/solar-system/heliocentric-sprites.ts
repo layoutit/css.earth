@@ -1,7 +1,10 @@
 import type { OrbitSegment } from './heliocentric-view.js';
 import { formatLineNumber, orbitSegmentTransform } from './orbit-segment-presentation.js';
 export interface Sprite {url?:string;index:number;count:number;size:number;}
-export interface SpriteWithUrl extends Sprite {url:string;}
+export interface SpriteImage {url:string;index:number;count:number;}
+/** `detail` is a larger prepared image of the same marker, drawn from `fromDiameterPixels`. */
+export interface SpriteWithUrl extends Sprite {url:string; minimumDiameterPixels?: number;
+  detail?: SpriteImage & {fromDiameterPixels:number};}
 export interface PhaseAtlas {url:string;columns:number;rowCount:number;frameCount:number;minimumLightViewZ:number;maximumLightViewZ:number;baseLightAzimuthDegrees:number;}
 export interface SystemMarkers {url:string;sun:Sprite;bodies:Readonly<Record<string,Sprite>>;phase:PhaseAtlas;}
 // This writer owns the line styles. Keep the last publication in JS so a
@@ -12,10 +15,12 @@ const pieceStyles = new WeakMap<HTMLElement, { transform: string; opacity: strin
 // offsets are the translation as they are and the segment is the bar's x
 // axis. Pieces beyond the segment count are hidden.
 export function writePieces(pool:readonly HTMLElement[], segments:readonly OrbitSegment[], previousCount:number,
-  setVisible?: (index: number, visible: boolean) => void, transforms?: readonly string[]) {
+  setVisible?: (index: number, visible: boolean) => void, transforms?: readonly string[], changedIndices?: ArrayLike<number>) {
   if (transforms && transforms.length !== segments.length) throw new TypeError('Orbit transforms must match their projected segments.');
   const count = Math.min(segments.length, pool.length);
-  for (let index = 0; index < count; index += 1) {
+  for (let slot = 0; slot < (changedIndices?.length ?? count); slot += 1) {
+    const index = changedIndices ? changedIndices[slot] : slot;
+    if (index >= count) throw new TypeError('Orbit delta exceeds the prepared line pool.');
     const weight = segments[index][4];
     const piece = pool[index];
     let written = pieceStyles.get(piece);
@@ -70,6 +75,10 @@ export function applySprite(element:HTMLElement, sprite:SpriteWithUrl) {
   element.style.width = `${sprite.size}px`;
   element.style.height = `${sprite.size}px`;
   element.style.margin = `${-sprite.size / 2}px 0 0 ${-sprite.size / 2}px`;
+  applySpriteImage(element, sprite);
+}
+
+export function applySpriteImage(element:HTMLElement, sprite:SpriteImage) {
   element.style.backgroundImage = `url("${sprite.url}")`;
   element.style.backgroundPosition = `${(sprite.index /
     Math.max(1, sprite.count - 1) * 100).toFixed(4)}% center`;

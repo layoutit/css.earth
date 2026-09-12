@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3c752dd0bd1dcee202ee89ca191eb3f64d8f705307568109b149ad1cd88d84d3"
+    "sha256": "c3381a67086add7d88d9fd75b93840441c223740b2b5a1e87037a247383e1087"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1467,6 +1467,16 @@
       "path": "science/al01_glb_m006_m006_v01.tab",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/al01_glb_m006_m006_v01.tab",
       "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "rosetta",
+            "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+            "missionId": "rosetta"
+          }
+        ]
+      },
       "license": "ESA PSA public scientific-data release; retain archive and team attribution",
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
@@ -1732,6 +1742,16 @@
       "path": "science/sl01_glb_m006_m006_v01.tab",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/sl01_glb_m006_m006_v01.tab",
       "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "rosetta",
+            "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+            "missionId": "rosetta"
+          }
+        ]
+      },
       "license": "ESA PSA public scientific-data release; retain archive and team attribution",
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
@@ -1817,6 +1837,16 @@
       "path": "science/bd01_glb_m006_m006_v01.tab",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/bd01_glb_m006_m006_v01.tab",
       "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "rosetta",
+            "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+            "missionId": "rosetta"
+          }
+        ]
+      },
       "license": "ESA PSA public scientific-data release; retain archive and team attribution",
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
@@ -1902,6 +1932,16 @@
       "path": "science/wi01_glb_m006_m006_v01.tab",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/wi01_glb_m006_m006_v01.tab",
       "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "rosetta",
+            "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+            "missionId": "rosetta"
+          }
+        ]
+      },
       "license": "ESA PSA public scientific-data release; retain archive and team attribution",
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"

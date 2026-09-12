@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "iapetus",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b1d233a7d563c0943ada3a5fae8905f698aecc45e0754e6284a2ee5270436139"
+    "sha256": "9af54407ff10f93b9cc21ed5a085b9a02ded44e75951abf625cbcf11d01143b2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "867672765ca42de37db80c5aeded776c2ec7725b0441ec3ddfd619cd2cb83107"
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -414,65 +414,6 @@
           }
         }
       }
-    },
-    {
-      "id": "features",
-      "path": "source/preparation/features.json",
-      "sha256": "1ee4e220d8e1de8bf63ad9074141067720a3d66a3e28f883f5c54b97d3070da0",
-      "parameters": {
-        "schema": "cssearth-surface-features@1",
-        "directory": "features",
-        "archive": "IAPETUS_nomenclature_center_pts.zip",
-        "members": {
-          "attributes": "IAPETUS_nomenclature_center_pts.dbf",
-          "projection": "IAPETUS_nomenclature_center_pts.prj",
-          "metadata": "metadata_nomenclature_points_IAPETUS.xml"
-        },
-        "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
-        "output": "iapetus-features.json",
-        "publicBase": "/scenes/iapetus/",
-        "target": {
-          "className": "iapetus-body"
-        },
-        "lensIds": [
-          "normal",
-          "enhanced",
-          "infrared",
-          "ice-absorption"
-        ],
-        "kinds": {
-          "point": [
-            "AA",
-            "FA"
-          ],
-          "linear": [
-            "RU",
-            "DO",
-            "VA",
-            "CA",
-            "FO"
-          ],
-          "region": [
-            "PL",
-            "PM",
-            "MO"
-          ]
-        },
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        },
-        "labelPolicy": {
-          "minimumZoomShare": 1,
-          "minimumDiameterPixels": 40,
-          "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
-          "limbCosine": 0.12
-        },
-        "outline": {
-          "pieces": 256
-        }
-      }
     }
   ],
   "sources": [
@@ -505,20 +446,20 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
             "missionId": "cassini"
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-1",
+            "kind": "machine",
+            "machineId": "voyager-1",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
             "missionId": "voyager-1"
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-2",
+            "kind": "machine",
+            "machineId": "voyager-2",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
             "missionId": "voyager-2"
           }
@@ -537,7 +478,7 @@
       "sha256": "eb8acdbed3af495102b6ec6d3efce1f03dc6bc39bb43323c23231ce590494d6e",
       "bytes": 16612487,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -576,8 +517,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18436.jpg",
             "missionId": "cassini"
           }
@@ -596,7 +537,7 @@
       "sha256": "6e0e1d17a50343d9176912d047392c4f7cd67c48bdb30789918a4ff24d9f683b",
       "bytes": 4989080,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -637,8 +578,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1568129671_1",
             "missionId": "cassini"
           }
@@ -657,7 +598,7 @@
       "sha256": "a3788744172cac6820eaaf39e53d1013ce65612799c107e96a17fbebbcea2e7f",
       "bytes": 144017,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -691,8 +632,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1568129671_1",
             "missionId": "cassini"
           }
@@ -711,7 +652,7 @@
       "sha256": "399a434937605b2d3215a3691fb630435b4957ff8b5eb23334b42bf42f440fdc",
       "bytes": 109434,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -731,80 +672,7 @@
       "sha256": "817592f68ef992a3001c63b8caca391c67841d46159d04d39ab8d88cef58d61b",
       "bytes": 13505,
       "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "iapetus-surface-features-source",
-      "path": "features/manifest.json",
-      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
-      "redistribution": "Repository-authored metadata; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored source pin for the nomenclature archive."
-      },
-      "sha256": "8fccfe65cfd4bf0d3abe455f0efac04e5d59e0a7087225afb3ab095c09c1a49d",
-      "bytes": 1010,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-gazetteer-iapetus-nomenclature-center-pts",
-      "path": "features/IAPETUS_nomenclature_center_pts.zip",
-      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/IAPETUS_nomenclature_center_pts.zip",
-      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
-      "licenseEvidence": [
-        "features/manifest.json"
-      ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Iapetus on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
-      "title": "Gazetteer of Planetary Nomenclature: Iapetus centre points",
-      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
-      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/IAPETUS/target",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Catalogued once the shared source record cites this manifest revision."
-      },
-      "sha256": "46ed90aa5c81481750e7c9a1c4956af7e89e0c536b3f4d52a1227c2386290ff3",
-      "bytes": 220580,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "features/IAPETUS_nomenclature_center_pts.zip",
-        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/IAPETUS_nomenclature_center_pts.zip"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "iapetus-surface-map-frame",
-      "path": "presentation/surface-map.json",
-      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored presentation parameters",
-      "acquisition": "Authored from the shared mesh convention.",
-      "redistribution": "Repository-authored parameters; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored map frame."
-      },
-      "sha256": "85dd8dc31e2301b1f8d901e22972b5ed3f0f93aa3fa347a0c30368cfd8ed3d8e",
-      "bytes": 154,
-      "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -844,19 +712,19 @@
           "url": "/scenes/iapetus/iapetus-normal-thumbnail.webp",
           "bytes": 3272,
           "sha256": "08a31039ae1c61ae8ec62e23af063c3b714401dd5e011fec73d50032094ff125",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iapetus/iapetus-normal-surface@2x.webp",
           "bytes": 5599434,
           "sha256": "cac49dcf9c062fc702a97a3d5dbcaae88da67c7d2be0fc799f02c6d7ea92c14b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iapetus/iapetus-normal-poles@2x.webp",
           "bytes": 66522,
           "sha256": "5fb1afe9c68fe35c7cc9b198e45df62d95782c6bcd98ec4490b3d28697e14df0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -892,19 +760,19 @@
           "url": "/scenes/iapetus/iapetus-enhanced-thumbnail.webp",
           "bytes": 5528,
           "sha256": "8ae7c9f2f827c49ba2ef2d9b6e019803a55d21dfd42d61ebfe031968ebc8c061",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iapetus/iapetus-enhanced-surface@2x.webp",
           "bytes": 5088356,
           "sha256": "5a16eeba8ee8148781d8fbf256e4071d182819010b1311bf5784b46de20cd163",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iapetus/iapetus-enhanced-poles@2x.webp",
           "bytes": 78254,
           "sha256": "23ab4d0e5828186d448bde797f6b00348be8a7e7e23a6a3a3db4f1a3b219f223",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -957,19 +825,19 @@
           "url": "/scenes/iapetus/iapetus-infrared-thumbnail.webp",
           "bytes": 2804,
           "sha256": "c80e178efdeb9b6c81531b06e88bf688e971647453da47c9dd0d2e881d1d6da9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iapetus/iapetus-infrared-surface@2x.webp",
           "bytes": 38724,
           "sha256": "8557d0c4cb21fc54106d369105c4ac2949c9b738507edf7307b49e065a06fd6e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iapetus/iapetus-infrared-poles@2x.webp",
           "bytes": 2398,
           "sha256": "f598c19f08a618951ca07bb0cf35974fdbd8fa41b79afa0192900abde9aefd49",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1002,25 +870,25 @@
           "url": "/scenes/iapetus/iapetus-ice-absorption-thumbnail.webp",
           "bytes": 1420,
           "sha256": "fcebc06a9fd12623b7541e2929ecb2867a2b30d026555a3fb1487a74810f3317",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iapetus/iapetus-ice-absorption-legend.webp",
           "bytes": 146,
           "sha256": "ed82e428e522e7e2d075c9f2d7989d8f3adb9c3ed7989f80445ad69750361b6e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iapetus/iapetus-ice-absorption-surface@2x.webp",
           "bytes": 19840,
           "sha256": "790583b5ed53a39c8d6d81ebf63b75251e5b7e89a9c4d4bedef81679926e52c2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iapetus/iapetus-ice-absorption-poles@2x.webp",
           "bytes": 1728,
           "sha256": "070a63e7aa4182c1403f153aa9aeca56c1a91e843f65f5d82f62f3850fa7c709",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1043,42 +911,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7010,
-          "sha256": "aee8d98e1a35c8604e6cc0aca9d94da6e4be98f68b716cdc8b789a564e849f7f",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "features",
-      "label": "Named features",
-      "recipe": "features",
-      "selector": "",
-      "parents": [],
-      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
-      "limitations": [],
-      "lensIds": [],
-      "recipeDependencies": [
-        "features"
-      ],
-      "interpretation": {
-        "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        }
-      },
-      "inputs": [
-        "iapetus-surface-features-source",
-        "usgs-gazetteer-iapetus-nomenclature-center-pts",
-        "iapetus-surface-map-frame"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/iapetus/iapetus-features.json",
-          "bytes": 107404,
-          "sha256": "a34cda2804f3ed4b12fa7e764a9a97e3bb42eaf3b479ad1d7ed35715d73f1788",
+          "bytes": 6892,
+          "sha256": "96f9ab14fb453ceda2ea4cc37819a9b78df35ca5bdc5c53fa66d982c99e5e93a",
           "verification": "bytes-verified"
         }
       ],

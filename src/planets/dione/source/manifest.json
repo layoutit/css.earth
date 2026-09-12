@@ -35,20 +35,20 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "missionId": "cassini",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif"
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-1",
+            "kind": "machine",
+            "machineId": "voyager-1",
             "missionId": "voyager-1",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif"
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-2",
+            "kind": "machine",
+            "machineId": "voyager-2",
             "missionId": "voyager-2",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif"
           }
@@ -97,8 +97,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "missionId": "cassini",
             "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18434.jpg"
           }
@@ -149,8 +149,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "missionId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_eqradius_g.tif"
           }
@@ -199,8 +199,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "missionId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_npradius_g.tif"
           }
@@ -249,8 +249,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "missionId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_spradius_g.tif"
           }
@@ -353,6 +353,16 @@
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://sbn.psi.edu/pds/resource/weirichdioneshape.html"
@@ -388,6 +398,16 @@
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://sbn.psi.edu/pds/resource/weirichdioneshape.html"
@@ -423,6 +443,16 @@
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://sbn.psi.edu/pds/resource/weirichdioneshape.html"
@@ -771,6 +801,16 @@
       "expectedSha256": "d92f949b03e5446f10f0270ec3d71bfcb9df97d24db3767fa8e54cbbe4226698",
       "origin": "https://doi.org/10.17189/ctqe-ta30",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "The preserved credit for this input reads: Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS"
+          }
+        ]
+      },
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
       "licenseEvidence": [
         "https://doi.org/10.17189/ctqe-ta30",

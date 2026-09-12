@@ -33,6 +33,16 @@
       "path": "shape/324_Bamberga_mpcd.obj",
       "origin": "https://observations.lam.fr/astero/3Dshape/324_Bamberga_mpcd.obj",
       "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
+          }
+        ]
+      },
       "license": "Public scientific model from the authors’ release accompanying CC-BY-4.0 research; retain source credit and citations.",
       "acquisition": "Restore the unmodified OBJ through source/preparation/acquisition.json; the public-site cookie is recorded there.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -95,6 +105,16 @@
       "path": "reference/vernazza-2021.pdf",
       "origin": "https://observations.lam.fr/astero/Papers/Vernazza2021.pdf",
       "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
+          }
+        ]
+      },
       "license": "CC-BY-4.0",
       "acquisition": "Restore the original article through source/preparation/acquisition.json.",
       "redistribution": "CC-BY-4.0 with attribution.",

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "umbriel",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f0c1159d0283956a75a41742ebc6396cbfdfba1375c5328e79de53c65db81377"
+    "sha256": "87776c5753ae1be65fa61ff1ed6a41104aa9b289214501a0fa9de7ca9ba4ce97"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "867672765ca42de37db80c5aeded776c2ec7725b0441ec3ddfd619cd2cb83107"
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -268,62 +268,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         }
       }
-    },
-    {
-      "id": "features",
-      "path": "source/preparation/features.json",
-      "sha256": "3eff3915b3122d3d8639e319e9aa3ecb240597ddec026028c24dfbbccb506e69",
-      "parameters": {
-        "schema": "cssearth-surface-features@1",
-        "directory": "features",
-        "archive": "UMBRIEL_nomenclature_center_pts.zip",
-        "members": {
-          "attributes": "UMBRIEL_nomenclature_center_pts.dbf",
-          "projection": "UMBRIEL_nomenclature_center_pts.prj",
-          "metadata": "metadata_nomenclature_points_UMBRIEL.xml"
-        },
-        "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
-        "output": "umbriel-features.json",
-        "publicBase": "/scenes/umbriel/",
-        "target": {
-          "className": "umbriel-body"
-        },
-        "lensIds": [
-          "normal"
-        ],
-        "kinds": {
-          "point": [
-            "AA",
-            "FA"
-          ],
-          "linear": [
-            "RU",
-            "DO",
-            "VA",
-            "CA",
-            "FO"
-          ],
-          "region": [
-            "PL",
-            "PM",
-            "MO"
-          ]
-        },
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        },
-        "labelPolicy": {
-          "minimumZoomShare": 1,
-          "minimumDiameterPixels": 40,
-          "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
-          "limbCosine": 0.12
-        },
-        "outline": {
-          "pieces": 256
-        }
-      }
     }
   ],
   "sources": [
@@ -367,8 +311,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-2",
+            "kind": "machine",
+            "machineId": "voyager-2",
             "evidence": "https://repository.hou.usra.edu/bitstreams/c98739ae-8739-4065-85a3-8096a5500104/download",
             "missionId": "voyager-2"
           }
@@ -387,7 +331,7 @@
       "sha256": "d20a2962f9343736a2cb82f7b18b746fdc606bbe301bbde9c99fe8cef8da84ad",
       "bytes": 629366,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -414,80 +358,7 @@
       "sha256": "1fefac76013624994caaffff0efb92fe4e5e6e5960a312e6ec316a6e89f879f3",
       "bytes": 7932,
       "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "umbriel-surface-features-source",
-      "path": "features/manifest.json",
-      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
-      "redistribution": "Repository-authored metadata; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored source pin for the nomenclature archive."
-      },
-      "sha256": "ce6ec0240a2da3b25cdf0b31d1e2478974c78e7d3c2b8e76c2f89d4130cb8829",
-      "bytes": 1009,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-gazetteer-umbriel-nomenclature-center-pts",
-      "path": "features/UMBRIEL_nomenclature_center_pts.zip",
-      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/UMBRIEL_nomenclature_center_pts.zip",
-      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
-      "licenseEvidence": [
-        "features/manifest.json"
-      ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Umbriel on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
-      "title": "Gazetteer of Planetary Nomenclature: Umbriel centre points",
-      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
-      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/UMBRIEL/target",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Catalogued once the shared source record cites this manifest revision."
-      },
-      "sha256": "c6d2161559c8367f574b327beec7adb7127b52eff8463a4490ff30c9427634b4",
-      "bytes": 71240,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "features/UMBRIEL_nomenclature_center_pts.zip",
-        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/UMBRIEL_nomenclature_center_pts.zip"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "umbriel-surface-map-frame",
-      "path": "presentation/surface-map.json",
-      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored presentation parameters",
-      "acquisition": "Authored from the shared mesh convention.",
-      "redistribution": "Repository-authored parameters; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored map frame."
-      },
-      "sha256": "8681d65321dceaef734f4ca6f53126f8c273af81b5a3abff3c62c5729b093bff",
-      "bytes": 154,
-      "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -544,19 +415,19 @@
           "url": "/scenes/umbriel/umbriel-normal-thumbnail.webp",
           "bytes": 1652,
           "sha256": "381dc7262914955e220ed1719904bcb9ac4001c761cbb995e99e99953a33f2af",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/umbriel/umbriel-normal-surface@2x.webp",
           "bytes": 580432,
           "sha256": "12d26f5d86c3551f2b5c17fdb7fd239832f5cc243324ab37614984becc54b751",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/umbriel/umbriel-normal-poles@2x.webp",
           "bytes": 32990,
           "sha256": "7a61db2f315c0ee02a27b97f68267e6d8157537dd725653f78fb7b53d9aa0d6f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -579,42 +450,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5823,
-          "sha256": "64a1ea01b9ba0709d871e20726fd9446df0284f2d6e619026dac7dd9e00da1b3",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "features",
-      "label": "Named features",
-      "recipe": "features",
-      "selector": "",
-      "parents": [],
-      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
-      "limitations": [],
-      "lensIds": [],
-      "recipeDependencies": [
-        "features"
-      ],
-      "interpretation": {
-        "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        }
-      },
-      "inputs": [
-        "umbriel-surface-features-source",
-        "usgs-gazetteer-umbriel-nomenclature-center-pts",
-        "umbriel-surface-map-frame"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/umbriel/umbriel-features.json",
-          "bytes": 8305,
-          "sha256": "f604c461c9adc5c2ab6e26f2a84a9edd8a0b8cd5f34eda0b0b39e118603a679a",
+          "bytes": 5705,
+          "sha256": "c6860f59c02e7fc9da9c9e7e6e5100b91d0b3363b7cf79a4b4df984201842f23",
           "verification": "bytes-verified"
         }
       ],

@@ -33,6 +33,16 @@
       "path": "shape/sk.obj",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/sk.obj",
       "credit": "Busch et al. (2006), Icarus 181, 145–155; Goldstone, optical observatories and NASA/JPL radar astronomy",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "goldstone-dss14",
+            "missionId": "goldstone-solar-system-radar",
+            "evidence": "The preserved credit for this input reads: Busch et al. (2006), Icarus 181, 145–155; Goldstone, optical observatories and NASA/JPL radar astronomy"
+          }
+        ]
+      },
       "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -95,6 +105,16 @@
       "path": "reference/sk.pdf",
       "origin": "https://echo.jpl.nasa.gov/asteroids/10115_1992SK/busch.etal.2006.1992sk.pdf",
       "credit": "Busch et al. (2006), Icarus 181, 145–155; Goldstone, optical observatories and NASA/JPL radar astronomy",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "goldstone-dss14",
+            "missionId": "goldstone-solar-system-radar",
+            "evidence": "The preserved credit for this input reads: Busch et al. (2006), Icarus 181, 145–155; Goldstone, optical observatories and NASA/JPL radar astronomy"
+          }
+        ]
+      },
       "license": "Original scientific article; source publisher copyright retained.",
       "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
       "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",

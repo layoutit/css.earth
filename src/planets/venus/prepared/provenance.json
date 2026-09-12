@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "venus",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fcb17ad89dec41ffbc2e578589aaafa3f8757d5895ce765ce63cfa4eff84cab4"
+    "sha256": "05a92f5d90dc463689a74506ff5185ad777a6aaa5a9202dd3bc6ac91cce30610"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "867672765ca42de37db80c5aeded776c2ec7725b0441ec3ddfd619cd2cb83107"
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -697,64 +697,6 @@
           "itemCount": 4
         }
       }
-    },
-    {
-      "id": "features",
-      "path": "source/preparation/features.json",
-      "sha256": "3f140d0bc1ef7508cb9d2c4298166a109cce90d979f390b78d8f44f716aef61c",
-      "parameters": {
-        "schema": "cssearth-surface-features@1",
-        "directory": "features",
-        "archive": "VENUS_nomenclature_center_pts.zip",
-        "members": {
-          "attributes": "VENUS_nomenclature_center_pts.dbf",
-          "projection": "VENUS_nomenclature_center_pts.prj",
-          "metadata": "metadata_nomenclature_points_VENUS.xml"
-        },
-        "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
-        "output": "venus-features.json",
-        "publicBase": "/scenes/venus/",
-        "target": {
-          "className": "venus-body"
-        },
-        "lensIds": [
-          "clouds",
-          "radar",
-          "elevation"
-        ],
-        "kinds": {
-          "point": [
-            "AA",
-            "FA"
-          ],
-          "linear": [
-            "RU",
-            "DO",
-            "VA",
-            "CA",
-            "FO"
-          ],
-          "region": [
-            "PL",
-            "PM",
-            "MO"
-          ]
-        },
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        },
-        "labelPolicy": {
-          "minimumZoomShare": 1,
-          "minimumDiameterPixels": 40,
-          "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
-          "limbCosine": 0.12
-        },
-        "outline": {
-          "pieces": 256
-        }
-      }
     }
   ],
   "sources": [
@@ -783,7 +725,7 @@
       "sha256": "da7f68195e552020a888db1758bb7a87506718971c6c9a455189d7b17ceda321",
       "bytes": 66303,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -810,8 +752,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "magellan",
+            "kind": "machine",
+            "machineId": "magellan",
             "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_color, EPSG:4326, -180,-90,180,90, 2048x1024 PNG",
             "missionId": "magellan"
           }
@@ -830,7 +772,7 @@
       "sha256": "7c818deccd69e99f3e0ebc5030979bbeb50f8b19afbd8f31c97d968a9f591588",
       "bytes": 5399293,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -857,8 +799,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "magellan",
+            "kind": "machine",
+            "machineId": "magellan",
             "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_topography, EPSG:4326, -180,-90,180,90, 2048x1024 PNG",
             "missionId": "magellan"
           }
@@ -877,7 +819,7 @@
       "sha256": "3b25ddd02af9214a64aed694ececd44754c2c3174900d78bbae3856042117974",
       "bytes": 5477203,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -910,7 +852,7 @@
       "sha256": "85d202bbf1d029256ec388da9ea25be45420ba3e5294f401ff1e22268f598b20",
       "bytes": 2142,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -937,7 +879,7 @@
       "sha256": "c37d72b0d97d73041322c7ecd3c5849efe9acba5f426d8166e43acb8ab98dd30",
       "bytes": 17582,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -963,7 +905,7 @@
       "sha256": "6856c59ec48619829305d4896e06c60450e075c37981da2a98890fbcf1fe6a3c",
       "bytes": 12089,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": [
         {
@@ -1006,7 +948,7 @@
       "sha256": "9860b648a57508cf16c14936ffe8926dc380d3bedc234abc80e6d0ffad582ec8",
       "bytes": 26685,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": [
         {
@@ -1026,85 +968,6 @@
           "marker": "<GENERATOR-RANGE1>"
         }
       ]
-    },
-    {
-      "kind": "source-input",
-      "id": "venus-surface-features-source",
-      "path": "features/manifest.json",
-      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
-      "redistribution": "Repository-authored metadata; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored source pin for the nomenclature archive."
-      },
-      "sha256": "235d59a23134f7717dcb4ea21f6c6d11746980cc1df0e53b3acc588b3f094856",
-      "bytes": 1001,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-gazetteer-venus-nomenclature-center-pts",
-      "path": "features/VENUS_nomenclature_center_pts.zip",
-      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/VENUS_nomenclature_center_pts.zip",
-      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
-      "licenseEvidence": [
-        "features/manifest.json"
-      ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Venus on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
-      "title": "Gazetteer of Planetary Nomenclature: Venus centre points",
-      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
-      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/VENUS/target",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-venus-usgs-gazetteer-nomenclature-center-pts",
-            "role": "material",
-            "evidence": "src/planets/venus/source/features/manifest.json@01bd7bd566517f8b80cc21bd138e7f5901bca24e#/inputs/0"
-          }
-        ]
-      },
-      "sha256": "d0a7aa47d482c0b9471fee7a9bd6ef0fecdd2a77aa42b71a8bdafdb65081bd4a",
-      "bytes": 5237841,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "features/VENUS_nomenclature_center_pts.zip",
-        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/VENUS_nomenclature_center_pts.zip"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "venus-surface-minimap-frame",
-      "path": "presentation/surface-map.json",
-      "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored presentation metadata",
-      "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
-      "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored texture axes and CSS surface selector."
-      },
-      "sha256": "b8bd0e06537a48cf52ff4a3e46498add6e3501fc7a19529e2064cdd069ad4d81",
-      "bytes": 152,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
     }
   ],
   "products": [
@@ -1136,31 +999,31 @@
           "url": "/scenes/venus/venus-clouds.webp",
           "bytes": 12928,
           "sha256": "7b8a6cb754caed6b8f60232b098087620bcaa3a65e2a753e8844635220d20945",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/venus/venus-clouds@2x.webp",
           "bytes": 38640,
           "sha256": "c1dd0f9b1e9f7dc12bc4074ebcb66845bd6ab97c1fa21edb59c6468a6ba38a6b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/venus/venus-lens-clouds.webp",
           "bytes": 226,
           "sha256": "ecea3de3aab9b651c81367ea6555df4c8a3219c3c0aca3951aeb28c835225b9d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/venus/venus-poles-clouds.webp",
           "bytes": 30402,
           "sha256": "b0b637150e9061b087b5b45cdeff01b37485c6a5668eb112d097752f9a8d9160",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/venus/venus-poles-clouds@2x.webp",
           "bytes": 79626,
           "sha256": "9559417d1c4b42c9456657bcc1a588294c7f91d15246d8eed51831ae996cc9e6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1193,31 +1056,31 @@
           "url": "/scenes/venus/venus-radar.webp",
           "bytes": 319602,
           "sha256": "2f425091df878e19ea940b2933591cd89041a6974b27010b9f97d4cefbc44f9c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/venus/venus-radar@2x.webp",
           "bytes": 1342124,
           "sha256": "d8a8ab642684a2934b252f69d4a4e84727388a43c2748b0d0945348b302e4783",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/venus/venus-lens-radar.webp",
           "bytes": 1844,
           "sha256": "27afea38c42d0c98f0b75acb78e98d95474a86b0e66e3fc3997b7fdabbec2b63",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/venus/venus-poles-radar.webp",
           "bytes": 120320,
           "sha256": "093b573e7de2bbc5aa711b3d242cb9277424274ce4966a0abe7ca867ca5751bf",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/venus/venus-poles-radar@2x.webp",
           "bytes": 445994,
           "sha256": "ca4c7703ed677382743e628b10a63bd75391a63981c3771aeb319542dd4c123e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1250,31 +1113,31 @@
           "url": "/scenes/venus/venus-elevation.webp",
           "bytes": 342682,
           "sha256": "b55f3ee65a69ef17b0a5b346d2d3fab8369c0aa19b998050ea07b2dc2cb3df78",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/venus/venus-elevation@2x.webp",
           "bytes": 1606002,
           "sha256": "1d1982d1c830adce2434bea697fd2fb961cd87fa50e402178e299c4f851871e2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/venus/venus-lens-elevation.webp",
           "bytes": 2140,
           "sha256": "8057baad5c5ac313504433035423b839b4937687ba0adae19245adf9405c7224",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/venus/venus-poles-elevation.webp",
           "bytes": 132918,
           "sha256": "7e15aad4730e9cb1a94b0106d8ed70dfd59546f50d22f003a5dd1e4eddad96a6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/venus/venus-poles-elevation@2x.webp",
           "bytes": 483058,
           "sha256": "ee34a96c428f8ecd3f028e6d2e08297ebe591c975c42a9545ce7563152a13b7f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1299,37 +1162,37 @@
           "url": "/scenes/venus/venus-material.webp",
           "bytes": 470778,
           "sha256": "283259a1c7265f9d41dda42f7bff17ad3452f091d12844ac50dad690a414d136",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/venus/venus-observation-material.webp",
           "bytes": 184874,
           "sha256": "41a225f88f14b2df869f7be255d3dd06d2715bf1758bbe96157627940319a6a1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/venus/venus-lighting.webp",
           "bytes": 71390,
           "sha256": "f6839f8f0c2fa6b02ba296a74c1154accc9f584d7d3d136b69b9b8c8959642ca",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/venus/venus-material@2x.webp",
           "bytes": 1316794,
           "sha256": "d79bd68b9e8377b99c58da4d37b563cf5d1a4c74313dce1a8e98c1f848ff73b2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/venus/venus-observation-material@2x.webp",
           "bytes": 512540,
           "sha256": "ebe10fb45e26da4eff7848f5b67144b2e22140a915dff38283d2f681f57f23ce",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/venus/venus-lighting@2x.webp",
           "bytes": 211590,
           "sha256": "84011d6e6ec85d2e4699ca3b11f70c8577095fa6e3b41f5af0b546752a4be291",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1352,8 +1215,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 11986,
-          "sha256": "aaeb6baf274474c6cd480b10cde3aa7c4af5d9b5b22176fac45999c89685864c",
+          "bytes": 11865,
+          "sha256": "172eddae9f93b192fdaa87619b49d921acfda71c30b5872fe50db1368c737b11",
           "verification": "bytes-verified"
         }
       ],
@@ -1382,7 +1245,7 @@
           "url": "/scenes/venus/venus-atmosphere-spectrum.svg",
           "bytes": 5691,
           "sha256": "3cb52a3d6aaaf0872cfc8bd13374fbcae7337596a89214d385b73c04a06400ae",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1410,7 +1273,7 @@
           "url": "/scenes/venus/venus-temperature-pressure-profile.svg",
           "bytes": 2927,
           "sha256": "99761b984a7e4af2752a28a318c3235cb656be498d6f5ae244844be5545fbb09",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1437,44 +1300,10 @@
           "url": "/scenes/venus/venus-photometric-phase-curve.svg",
           "bytes": 4365,
           "sha256": "365045846150ad6b201bb6c1ced415463e6b1e2dd4828231e0afebb15852e7bc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "authored-recipe"
-    },
-    {
-      "id": "features",
-      "label": "Named features",
-      "recipe": "features",
-      "selector": "",
-      "parents": [],
-      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
-      "limitations": [],
-      "lensIds": [],
-      "recipeDependencies": [
-        "features"
-      ],
-      "interpretation": {
-        "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        }
-      },
-      "inputs": [
-        "venus-surface-features-source",
-        "usgs-gazetteer-venus-nomenclature-center-pts",
-        "venus-surface-minimap-frame"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/venus/venus-features.json",
-          "bytes": 3778354,
-          "sha256": "72dccb47a822a96289af9a47f034297676585f6743f0587fb64651686552761c",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputBasis": "bound-inputs"
     },
     {
       "id": "preview:clouds",

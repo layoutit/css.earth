@@ -33,6 +33,22 @@
       "path": "shape/Nereus_alt1.mod.wf",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/Nereus_alt1.mod.wf",
       "credit": "Brozović et al. (2009), Icarus 201, 153–166; Arecibo, Goldstone and NASA/JPL radar astronomy",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "missionId": "arecibo-planetary-radar",
+            "evidence": "The preserved credit for this input reads: Brozović et al. (2009), Icarus 201, 153–166; Arecibo, Goldstone and NASA/JPL radar astronomy"
+          },
+          {
+            "kind": "machine",
+            "machineId": "goldstone-dss14",
+            "missionId": "goldstone-solar-system-radar",
+            "evidence": "The preserved credit for this input reads: Brozović et al. (2009), Icarus 201, 153–166; Arecibo, Goldstone and NASA/JPL radar astronomy"
+          }
+        ]
+      },
       "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -95,6 +111,22 @@
       "path": "reference/nereus.pdf",
       "origin": "https://echo.jpl.nasa.gov/asteroids/4660_Nereus/brozovic.etal.2009.nereus.pdf",
       "credit": "Brozović et al. (2009), Icarus 201, 153–166; Arecibo, Goldstone and NASA/JPL radar astronomy",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "missionId": "arecibo-planetary-radar",
+            "evidence": "The preserved credit for this input reads: Brozović et al. (2009), Icarus 201, 153–166; Arecibo, Goldstone and NASA/JPL radar astronomy"
+          },
+          {
+            "kind": "machine",
+            "machineId": "goldstone-dss14",
+            "missionId": "goldstone-solar-system-radar",
+            "evidence": "The preserved credit for this input reads: Brozović et al. (2009), Icarus 201, 153–166; Arecibo, Goldstone and NASA/JPL radar astronomy"
+          }
+        ]
+      },
       "license": "Original scientific article; source publisher copyright retained.",
       "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
       "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",

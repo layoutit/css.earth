@@ -3,7 +3,7 @@ export interface MarkerPresentation {
   ringColorShare?: number; ringOutlineOpacity?: number; ringOutlineOffset?: number;
   scale?: Partial<Omit<MarkerPresentation, "scale">>;
 }
-export interface PreparedNavigationMarker { url: string; url2x: string; presentation: MarkerPresentation; index: number; count: number; context?: { url: string }; }
+export interface PreparedNavigationMarker { url: string; url2x: string; url2xPixels?: number; presentation: MarkerPresentation; index: number; count: number; context?: { url: string; pixels?: number }; }
 // Shared shell presentation; values come only from each object's marker recipe.
 const fields = new Set(["size", "ringAngle", "ringExtra", "ringHeight", "ringOpacity", "ringColorShare", "ringOutlineOpacity", "ringOutlineOffset"]);
 export function validateMarkerPresentation(input: unknown, partial?: false): MarkerPresentation;
@@ -34,31 +34,42 @@ export function markerStyle(marker: PreparedNavigationMarker, { color, scale = 1
   if (!marker) throw new Error("Prepared object marker is missing; run prepare:navigation.");
   const p = view === "scale" ? { ...marker.presentation, ...marker.presentation.scale } : marker.presentation;
   const ringed = p.ringAngle !== undefined;
-  return { ringed, style: [
-    `--planet-color:${color}`,
-    `--planet-size:${p.size * scale}px`,
-    `--planet-marker-url:url("${marker.url2x}")`,
-    `--planet-marker-count:${marker.count}`,
-    `--planet-marker-position:${(marker.index / Math.max(1, marker.count - 1) * 100).toFixed(4)}%`,
-    ...(ringed ? [
-      `--planet-ring-angle:${p.ringAngle}deg`,
-      `--planet-ring-extra:${(p.ringExtra ?? Number.NaN) * scale}px`,
-      `--planet-ring-height:${(p.ringHeight ?? Number.NaN) * scale}px`,
-      `--planet-ring-opacity:${p.ringOpacity ?? 0.65}`,
-      `--planet-ring-color:color-mix(in srgb, currentColor ${p.ringColorShare ?? 100}%, white)`,
-      `--planet-ring-outline:1px solid color-mix(in srgb, currentColor ${p.ringOutlineOpacity ?? 0}%, transparent)`,
-      `--planet-ring-outline-offset:${p.ringOutlineOffset ?? 0}px`,
-    ] : []),
-  ].join(";") };
+  const size = p.size * scale;
+  const position = `${(marker.index / Math.max(1, marker.count - 1) * 100).toFixed(4)}%`;
+  return {
+    ringed,
+    style: `color:${color}`,
+    innerStyle: `width:${size}px;height:${size}px;background-image:url("${marker.url2x}");background-position:${position} center;background-size:${marker.count * 100}% 100%`,
+    ringStyle: ringed ? [
+      `width:${size + (p.ringExtra ?? Number.NaN) * scale}px`,
+      `height:${(p.ringHeight ?? Number.NaN) * scale}px`,
+      `border-color:color-mix(in srgb, currentColor ${p.ringColorShare ?? 100}%, white)`,
+      `opacity:${p.ringOpacity ?? 0.65}`,
+      `transform:translate(-50%, -50%) rotate(${p.ringAngle}deg)`,
+      `outline:${p.ringOutlineOpacity ? `1px solid color-mix(in srgb, currentColor ${p.ringOutlineOpacity}%, transparent)` : "none"}`,
+      `outline-offset:${p.ringOutlineOffset ?? 0}px`,
+    ].join(";") : "",
+  };
 }
 
 // Resolved context uses its prepared native-density image. Layout size is still
 // the same physical proxy basis used by the world camera; DPR never selects it.
+// Most markers are drawn a few pixels wide: they show the prepared @2x tile,
+// two texels per CSS pixel, and switch to the large context image only when
+// drawn wider than that tile can resolve. Neither image is resized at runtime.
 export function contextMarkerSprite(marker: PreparedNavigationMarker) {
+  const tile = { url: marker.url2x, index: marker.index, count: marker.count, size: marker.presentation.size };
+  if (!marker.context) return tile;
+  const detail = { url: marker.context.url, index: 0, count: 1 };
+  if (!(marker.url2xPixels && marker.url2xPixels > 0)) return { ...detail, size: marker.presentation.size };
+  return { ...tile, detail: { ...detail, fromDiameterPixels: marker.url2xPixels / 2 } };
+}
+
+// Existing scene annotation weights, supplied once from the object registry.
+export function contextAnnotationOpacity(classification: string): { line: number; label: number } {
   return {
-    url: marker.context?.url ?? marker.url2x,
-    index: marker.context ? 0 : marker.index,
-    count: marker.context ? 1 : marker.count,
-    size: marker.presentation.size,
+    line: classification === 'asteroid' ? .35
+      : ['satellite', 'dwarf-planet', 'trans-neptunian', 'comet', 'interstellar'].includes(classification) ? .5 : .65,
+    label: ['dwarf-planet', 'comet', 'trans-neptunian', 'interstellar'].includes(classification) ? .5 : .65,
   };
 }

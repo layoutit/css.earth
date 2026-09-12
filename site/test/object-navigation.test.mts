@@ -35,7 +35,10 @@ test("prepared marker addresses and presentation follow packages", async () => {
     const marker = PREPARED_NAVIGATION_MARKERS[descriptor.planetId];
     const { context: _context, ...atlasMarker } = marker;
     assert.deepEqual(atlasMarker, { url: `/navigation/body-${descriptor.planetId}.webp`, url2x: `/navigation/body-${descriptor.planetId}@2x.webp`, index: 0, count: 1, presentation: descriptor.presentation });
-    assert.ok(markerStyle(marker, { color: "#ffffff" }).style.includes('--planet-marker-count:1'));
+    const result = markerStyle(marker, { color: "#ffffff" });
+    assert.ok(result.style.includes("color:#ffffff"));
+    assert.ok(result.innerStyle.includes("background-size:100% 100%"));
+    assert.ok(result.innerStyle.includes(`url("${marker.url2x}")`));
   }
   assert.equal(PREPARED_NAVIGATION_MARKERS.saturn.presentation.scale?.ringExtra, 20);
   assert.equal(PREPARED_NAVIGATION_MARKERS.saturn.presentation.ringExtra, 14);
@@ -65,8 +68,8 @@ test("scale overrides must form a complete presentation after inheritance", () =
   assert.equal(validateMarkerPresentation(presentation), presentation);
   const result = markerStyle({ url: '/navigation/body-test.webp', url2x: '/navigation/body-test@2x.webp', index: 0, count: 1, presentation }, { color: "#ffffff", view: "scale" });
   assert.equal(result.ringed, true);
-  assert.match(result.style, /--planet-ring-extra:20px/);
-  assert.match(result.style, /--planet-ring-height:4px/);
-  assert.doesNotMatch(result.style, /NaN|undefined/);
+  assert.match(result.ringStyle, /width:28px/);
+  assert.match(result.ringStyle, /height:4px/);
+  assert.doesNotMatch(`${result.style};${result.innerStyle};${result.ringStyle}`, /NaN|undefined/);
   assert.doesNotThrow(() => validateMarkerPresentation({ size: 8, scale: { ringAngle: 0, ringExtra: 12, ringHeight: 4 } }));
 });

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ceres",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0fbb9caefafef8d4c3c5e0a804a9c4cf3619975d16d1b92c7cb1ff8e8f71272b"
+    "sha256": "b8a5af99f3934b0c8cb02c3a1499e0881e8edf48332ae8acdd7724563d651a5f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "867672765ca42de37db80c5aeded776c2ec7725b0441ec3ddfd619cd2cb83107"
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -345,64 +345,6 @@
           }
         }
       }
-    },
-    {
-      "id": "features",
-      "path": "source/preparation/features.json",
-      "sha256": "9e095ff1e471fcb93329b4e3b41d6cb182c626b74368fc07f5fef4c3cb5a87f1",
-      "parameters": {
-        "schema": "cssearth-surface-features@1",
-        "directory": "features",
-        "archive": "CERES_nomenclature_center_pts.zip",
-        "members": {
-          "attributes": "CERES_nomenclature_center_pts.dbf",
-          "projection": "CERES_nomenclature_center_pts.prj",
-          "metadata": "metadata_nomenclature_points_CERES.xml"
-        },
-        "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
-        "output": "ceres-features.json",
-        "publicBase": "/scenes/ceres/",
-        "target": {
-          "className": "ceres-body"
-        },
-        "lensIds": [
-          "normal",
-          "enhanced",
-          "elevation"
-        ],
-        "kinds": {
-          "point": [
-            "AA",
-            "FA"
-          ],
-          "linear": [
-            "RU",
-            "DO",
-            "VA",
-            "CA",
-            "FO"
-          ],
-          "region": [
-            "PL",
-            "PM",
-            "MO"
-          ]
-        },
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        },
-        "labelPolicy": {
-          "minimumZoomShare": 1,
-          "minimumDiameterPixels": 40,
-          "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
-          "limbCosine": 0.12
-        },
-        "outline": {
-          "pieces": 256
-        }
-      }
     }
   ],
   "sources": [
@@ -436,12 +378,12 @@
         ],
         "longitudeDirection": "east-positive"
       },
-      "coverage": "Observed pixels, shadows, and mosaic seams are preserved. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting.",
+      "coverage": "Dawn FC2 body-fixed orthorectified global mosaic. The PDS bundle-block adjustment uses Dawn orbit/attitude and the high-resolution Ceres shape model for ray intersections; the Kait-anchored longitude system is shared with the Dawn shape/topography work. Observed pixels, shadows, and mosaic seams are preserved. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting; the extreme south pole and other source gaps remain missing.",
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "dawn",
+            "kind": "machine",
+            "machineId": "dawn",
             "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/asteroid_belt/ceres_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Ceres_FC_global&STYLES=&SRS=EPSG:4326&BBOX=0,-90,360,90&WIDTH=4096&HEIGHT=2048&FORMAT=image/png",
             "missionId": "dawn"
           }
@@ -460,7 +402,7 @@
       "sha256": "44de5317d0989d3e1b05feaf970c21c36f51b193c0972dc19bb678ecd8e89c7c",
       "bytes": 9750062,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -501,12 +443,12 @@
         ],
         "longitudeDirection": "east-positive"
       },
-      "coverage": "Observed pixels, shadows, and mosaic seams are preserved. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting.",
+      "coverage": "Dawn FC2 map-projected false-color image from the PIA19977 release. Its 920/750/440 nm assignments are retained as a separate mapped interpretation; it is not calibrated monochrome. The PDS mosaic family uses the Dawn body-fixed cartographic control, while this public composite retains its source epoch and gaps. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting.",
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "dawn",
+            "kind": "machine",
+            "machineId": "dawn",
             "evidence": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/i/a/1/PIA19977.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1538&w=3078",
             "missionId": "dawn"
           }
@@ -525,7 +467,7 @@
       "sha256": "e974d7e46e9feff4f6910ada38eeffc8ae65b057d576c4bd9d12d710c323a116",
       "bytes": 1033656,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -554,8 +496,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "dawn",
+            "kind": "machine",
+            "machineId": "dawn",
             "evidence": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Ceres_Dawn_FC_HAMO_DTM_DLR_Global_60ppd_Oct2016.tif",
             "missionId": "dawn"
           }
@@ -574,7 +516,7 @@
       "sha256": "81da73151b4353c03d7ca18fa85972d1cb9c8530b3c5496df9ade7cb75af1915",
       "bytes": 466647217,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -601,86 +543,7 @@
       "sha256": "7ce4889f588f2f57bcc0844b117fb4d939e4a24ccca8b69f66c92f33211802a2",
       "bytes": 10040,
       "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "ceres-surface-features-source",
-      "path": "features/manifest.json",
-      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
-      "redistribution": "Repository-authored metadata; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored source pin for the nomenclature archive."
-      },
-      "sha256": "14d0e2248ba34ad2c7d7f89e04a416d7fe081b4eb8b96f186d5bdc39aa32bbb0",
-      "bytes": 1000,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-gazetteer-ceres-nomenclature-center-pts",
-      "path": "features/CERES_nomenclature_center_pts.zip",
-      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/CERES_nomenclature_center_pts.zip",
-      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
-      "licenseEvidence": [
-        "features/manifest.json"
-      ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Ceres on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
-      "title": "Gazetteer of Planetary Nomenclature: Ceres centre points",
-      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
-      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/CERES/target",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-ceres-usgs-gazetteer-nomenclature-center-pts",
-            "role": "material",
-            "evidence": "src/planets/ceres/source/features/manifest.json@01bd7bd566517f8b80cc21bd138e7f5901bca24e#/inputs/0"
-          }
-        ]
-      },
-      "sha256": "a2a803fd75989fc9e3fa562fca48845a2b48de040f30c18e96c5127208b94f61",
-      "bytes": 427515,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "features/CERES_nomenclature_center_pts.zip",
-        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/CERES_nomenclature_center_pts.zip"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "ceres-surface-minimap-frame",
-      "path": "presentation/surface-map.json",
-      "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored presentation metadata",
-      "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
-      "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored texture axes and CSS surface selector."
-      },
-      "sha256": "f200fc2fab0d64481e1bfa2338f8716d47f3bb54986e536c0e181bd50e027047",
-      "bytes": 152,
-      "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -715,19 +578,19 @@
           "url": "/scenes/ceres/ceres-normal-thumbnail.webp",
           "bytes": 3756,
           "sha256": "57e7cb49b24c76096f5df3942cc926e9ae5e0422f6964d4a6c0cbcd6f7a47dd2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ceres/ceres-normal-surface@2x.webp",
           "bytes": 4533902,
           "sha256": "d6d6c665ea67a1742ab7781778c4fe49149c49c693c3dee64e3d6af10144c560",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ceres/ceres-normal-poles@2x.webp",
-          "bytes": 162910,
-          "sha256": "0fc3faf6e77642f2e1bfd04999c7e5910d472a26e470ed8f314f4bba0704bb2c",
-          "verification": "bytes-verified"
+          "bytes": 163390,
+          "sha256": "49c47235bc306821f7cc5924561db009aa459a907624652f85caac2ddec5ce32",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -761,19 +624,19 @@
           "url": "/scenes/ceres/ceres-enhanced-thumbnail.webp",
           "bytes": 9784,
           "sha256": "df339adeaa99dcb0dfce95bfc03e7cc40e8f6cb6b2c2883817273ebaa4356ed6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ceres/ceres-enhanced-surface@2x.webp",
           "bytes": 2584476,
           "sha256": "a16a55ad059afd9c70845cc782e534ac620fc28650ef0042da7fc99af406eebb",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ceres/ceres-enhanced-poles@2x.webp",
-          "bytes": 125404,
-          "sha256": "78581833aea31c798bd9fa12e7a4c783be10a092638e42bbaf3155cec579091f",
-          "verification": "bytes-verified"
+          "bytes": 126134,
+          "sha256": "8d8016973c60d7fb3833267a1edc46a275e04e2d1ff9e8ce830827eb7061b849",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -806,25 +669,25 @@
           "url": "/scenes/ceres/ceres-elevation-thumbnail.webp",
           "bytes": 6496,
           "sha256": "333407659f6bc7b91073dcd7b1e0d6e896baae376c7131d52ca170ba2e96e94b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ceres/ceres-elevation-legend.webp",
           "bytes": 216,
           "sha256": "c1cb75a0ff10d78c262808c8188b385da4e98881290b8dc68bd7aa18ba4bc66f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ceres/ceres-elevation-surface@2x.webp",
           "bytes": 1445458,
           "sha256": "c733b1c283e7cca5b2a07a6cb0e87da224c3d1301e2696f27fa1f0f73c6322e4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ceres/ceres-elevation-poles@2x.webp",
           "bytes": 9906,
           "sha256": "f496d03b0cd8655b0d5ced0abb7271abb3474cab9a5060c0f0fec3fc916cc3ab",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -847,42 +710,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5922,
-          "sha256": "ac5aa42919d1630b5e936b5f859c2ebebd654f6ed7170c52536127db621c1cf3",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "features",
-      "label": "Named features",
-      "recipe": "features",
-      "selector": "",
-      "parents": [],
-      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
-      "limitations": [],
-      "lensIds": [],
-      "recipeDependencies": [
-        "features"
-      ],
-      "interpretation": {
-        "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        }
-      },
-      "inputs": [
-        "ceres-surface-features-source",
-        "usgs-gazetteer-ceres-nomenclature-center-pts",
-        "ceres-surface-minimap-frame"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/ceres/ceres-features.json",
-          "bytes": 235193,
-          "sha256": "7ad994e1b974bf094fb058f584f9b280bb50c8ebbbdb34b40fe5ac8d0cee8c74",
+          "bytes": 5803,
+          "sha256": "d0f7add1beb0f70b6651b50627119750789a33f937754f8ca634469973f0916e",
           "verification": "bytes-verified"
         }
       ],

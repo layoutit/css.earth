@@ -47,6 +47,8 @@ The shape remains the same 1,000 triangles. No shared renderer changes or extra 
 
 - **Historical model** is a neutral shape view. **Giotto + Vega** projects the accepted MPS composite region and two KFKI-processed Vega 2 photographs onto that shape. The photographs retain their original illumination and dust contamination. Mixing visible and near-infrared images does not create a measured albedo or true-colour map.
 
+- **Faithfulness status:** The Giotto + Vega photographic lens is deferred for image-to-shape feature registration. Its held-out silhouette check supports an approximate encounter projection only; the Historical model remains the supported shape view.
+
 - The original local frame is preserved while its attitude in space is explicitly illustrative: the long axis is placed along ICRF +Z (display RA 0°, Dec +90°, meridian 0°) and held fixed. Lighting shows that chosen orientation, not an encounter or current attitude.
 
 - Giotto registration is approximate: published rotation parameters are rounded, the Vega observer position is extrapolated for 148 seconds, and a multi-exposure composite is represented by one incoming-frame camera. Unmapped, uncertain, grazing and occluded regions remain grid. Isolated bright patches and jets are excluded.

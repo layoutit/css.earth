@@ -18,6 +18,7 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
     for (const surface of config.surfaces) {
         let source: Uint8Array | undefined;
         let fallback: Uint8Array | undefined;
+        let thumbnailSource: Buffer | undefined;
         if (config.resample === 'source-packed') {
             source = await load(surface.source);
             if (surface.coverage) {
@@ -38,7 +39,22 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
             let image = raster(packed.data, packed.packedWidth, packed.packedHeight);
             if (source && (packingWidth !== width || packingHeight !== height))
                 image = image.resize(width + height / config.latitudeBands / 2, height + height / 2, { kernel: 'lanczos3' });
-            await image.webp(config.resample === 'source-packed' ? { quality: density === 1 ? 88 : 90, smartSubsample: true } : { quality: 88, smartSubsample: true, effort: 6 }).toFile(assetPath(publicDirectory, surface.output, density, surface.id));
+            const webp = config.resample === 'source-packed' ? { quality: density === 1 ? 88 : 90, smartSubsample: true } : { quality: 88, smartSubsample: true, effort: 6 };
+            const output = assetPath(publicDirectory, surface.output, density, surface.id);
+            if (surface.encoding) {
+                // Chrome decodes these maps faster as JPEG than as lossy WebP,
+                // and baseline faster than progressive. Encode from the same
+                // prepared raster, never the WebP. A grayscale map has one channel.
+                const { encoder, progressive, quality, grayscale = false, chromaSubsampling } = surface.encoding;
+                const pixels = image.clone().removeAlpha();
+                await (grayscale ? pixels.grayscale().toColourspace('b-w') : pixels).jpeg({ quality, mozjpeg: encoder === 'mozjpeg', progressive, ...(chromaSubsampling ? { chromaSubsampling } : {}) }).toFile(output);
+                // Lens thumbnails keep their accepted source: the WebP encoding
+                // of the density-1 map, now held in memory only.
+                if (density === 1 && config.thumbnail.crop)
+                    thumbnailSource = await image.clone().webp(webp).toBuffer();
+            }
+            else
+                await image.webp(webp).toFile(output);
             if (!config.polesCombined) {
                 const polar = createPolarSprite(pixels, width, height, config.polarTile * density, config.latitudeBands);
                 await raster(polar, config.polarTile * density * 2, config.polarTile * density).webp({ lossless: true, effort: 6 }).toFile(assetPath(publicDirectory, config.polesOutput, density, surface.id));
@@ -49,7 +65,7 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
             }
         }
         if (config.thumbnail.crop)
-            await sharp(assetPath(publicDirectory, surface.output, 1, surface.id)).extract(config.thumbnail.crop).resize(config.thumbnail.size, config.thumbnail.size, { kernel: 'lanczos3' }).webp({ quality: config.thumbnail.quality }).toFile(assetPath(publicDirectory, surface.thumbnail, 1, surface.id));
+            await sharp(thumbnailSource ?? assetPath(publicDirectory, surface.output, 1, surface.id)).extract(config.thumbnail.crop).resize(config.thumbnail.size, config.thumbnail.size, { kernel: 'lanczos3' }).webp({ quality: config.thumbnail.quality }).toFile(assetPath(publicDirectory, surface.thumbnail, 1, surface.id));
     }
     if (config.polesCombined)
         for (const density of config.densities) {

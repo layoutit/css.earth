@@ -33,7 +33,7 @@ function fixtureFactory() {
   let current: WorldCameraPose = { referenceFrame: 'world', epochJdTt: 1,
     pose: { positionM: [0,0,10000], orientationXyzw: [0,0,0,1] } };
   const paints: WorldCameraPose[] = [], resources = { destroyed: 0, destroy() { this.destroyed++; } };
-  const windowTarget = { requestAnimationFrame(fn: FrameRequestCallback) { callbacks.set(++next, fn); return next; },
+  const windowTarget = { performance: { now: () => time }, requestAnimationFrame(fn: FrameRequestCallback) { callbacks.set(++next, fn); return next; },
     cancelAnimationFrame(id: number) { callbacks.delete(id); } };
   const navigation: MockNavigation = { ...navigationFixture(frames[0], () => current, () => { throw new Error("optics overridden"); }), frame: frames[0], capture: () => current,
     activePreparedFocus: null,
@@ -402,7 +402,7 @@ test('refocusing the selected object paints one existing owner without reloading
 
 test('the application keeps flying while destination groups activate, then transfers the live pose without a reset', async () => {
   const f = fixtureFactory(), context: WorldCameraPose[] = [];
-  const task = f.start({ presentWorld: world => context.push(world) });
+  const task = f.start({ presentWorld: (world, _viewport, options) => { options?.commit?.(); context.push(world); } });
   const handoff = await drainFrames(f, { task });
   const checkpoint = handoff.mountOptions.initialWorldCamera;
   for (let i=0; i<12; i++) f.step();
@@ -423,13 +423,44 @@ test('the application keeps flying while destination groups activate, then trans
 
 test('cancellation during connected activation stops the application flight and releases its resources', async () => {
   const f = fixtureFactory(), context=[];
-  const handoff = await drainFrames(f,{task:f.start({presentWorld:world=>context.push(world)})});
+  const handoff = await drainFrames(f,{task:f.start({presentWorld:(world, _viewport, options) => { options?.commit?.(); context.push(world); }})});
   f.step(); const count=context.length;
   f.controller.abort(); f.step();
   assert.equal(context.length,count);
   assert.equal(f.pending,0);
   assert.equal(f.resources.destroyed,1);
   for (const name of ['pointerdown','wheel','keydown']) assert.equal(getEventListeners(f.documentTarget,name).length,0);
+});
+
+test('an activating detail waits for its world publication and interruption preserves the last acknowledged pose', async () => {
+  const f = fixtureFactory(), pending: (() => void)[] = [], context: unknown[] = [];
+  const presentWorld: NonNullable<PrepareOptions['presentWorld']> = (world, _viewport, { signal, commit }) => new Promise<boolean>(resolve => {
+    const cancel = () => resolve(false);
+    signal.addEventListener('abort', cancel, { once: true });
+    pending.push(() => {
+      signal.removeEventListener('abort', cancel);
+      if (signal.aborted) { resolve(false); return; }
+      commit?.(); context.push(world); resolve(true);
+    });
+  });
+  const acknowledge = () => { const reply = pending.shift(); assert.ok(reply, 'A world publication is awaiting its reply'); reply(); };
+  const handoff = await drainFrames(f, { task: f.start({ presentWorld }) });
+  const mount = f.mounted(); required(handoff.mountOptions.onNavigationReady)(mount.navigation);
+  const checkpoint = mount.navigation.capture();
+  f.step();
+  for (let i = 0; i < 12; i++) f.step();
+  assert.equal(pending.length, 1, 'Slow planning cannot queue a second unacknowledged flight pose');
+  assert.deepEqual(mount.navigation.capture(), checkpoint, 'Detail cannot move ahead of its surrounding world');
+  acknowledge(); await nextTurn();
+  assert.deepEqual(mount.navigation.capture(), context.at(-1), 'Detail and world commit the same pose');
+  f.step(); acknowledge(); await nextTurn();
+  const drawn = mount.navigation.capture();
+  assert.notDeepEqual(drawn, checkpoint);
+  f.step(); f.controller.abort();
+  acknowledge(); await nextTurn();
+  assert.deepEqual(mount.navigation.capture(), drawn, 'An obsolete worker reply cannot move the interrupted view');
+  assert.equal(f.pending, 0);
+  assert.equal(f.resources.destroyed, 1);
 });
 
 test('real input interrupts a same-object focus at the last painted camera', async () => {
@@ -447,7 +478,7 @@ test('real input interrupts a same-object focus at the last painted camera', asy
 test('replacement departure uses the retained world while its previous detail owner is retired', async () => {
   const f = fixtureFactory(), context: WorldCameraPose[] = [];
   f.navigation.apply({ ...f.navigation.capture(), pose: { positionM: [0, 0, 2e8], orientationXyzw: [0, 0, 0, 1] } });
-  const handoff = await drainFrames(f, { task: f.start({ presentWorld: world => context.push(world) }) });
+  const handoff = await drainFrames(f, { task: f.start({ presentWorld: (world, _viewport, options) => { options?.commit?.(); context.push(world); } }) });
   required(handoff.mountOptions.onNavigationReady)(f.mounted().navigation);
   for (let frame = 0; frame < 12; frame++) f.step();
   const drawn = required(context.at(-1));
@@ -455,7 +486,7 @@ test('replacement departure uses the retained world while its previous detail ow
   const retiredPaintCount = f.paints.length, beforeReplacement = context.length;
   const replacement = new AbortController(), factory = deferred<MockFactory>(), phases: string[] = [];
   const task = f.start({ fromId: '1', toId: '0', fromMount: null, toFactory: factory.promise,
-    signal: replacement.signal, presentWorld: world => context.push(world), timing: { mark: phase => phases.push(phase) } });
+    signal: replacement.signal, presentWorld: (world, _viewport, options) => { options.commit?.(); context.push(world); }, timing: { mark: phase => phases.push(phase) } });
   f.step(); f.step();
   assert.deepEqual(context[beforeReplacement], drawn, 'Replacement starts from the last drawn world pose');
   assert.notDeepEqual(context.at(-1), drawn, 'Retiring detail must not make motion wait for the next factory');

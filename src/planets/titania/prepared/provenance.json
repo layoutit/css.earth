@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "titania",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2b6ebd102cddb44d49592ed0c3d6d00d6e4256533670cf25a8c987c16c689234"
+    "sha256": "a8591d129dedd4ad7889b5102c5df66a663a5a95c4861391864ba24cd606d68a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "867672765ca42de37db80c5aeded776c2ec7725b0441ec3ddfd619cd2cb83107"
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -532,64 +532,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         }
       }
-    },
-    {
-      "id": "features",
-      "path": "source/preparation/features.json",
-      "sha256": "a2a6efa3198ea6c53f40df6c4c54089901090353c1bb1fe4f938af34bee445f9",
-      "parameters": {
-        "schema": "cssearth-surface-features@1",
-        "directory": "features",
-        "archive": "TITANIA_nomenclature_center_pts.zip",
-        "members": {
-          "attributes": "TITANIA_nomenclature_center_pts.dbf",
-          "projection": "TITANIA_nomenclature_center_pts.prj",
-          "metadata": "metadata_nomenclature_points_TITANIA.xml"
-        },
-        "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
-        "output": "titania-features.json",
-        "publicBase": "/scenes/titania/",
-        "target": {
-          "className": "titania-body"
-        },
-        "lensIds": [
-          "normal",
-          "elevation",
-          "geology"
-        ],
-        "kinds": {
-          "point": [
-            "AA",
-            "FA"
-          ],
-          "linear": [
-            "RU",
-            "DO",
-            "VA",
-            "CA",
-            "FO"
-          ],
-          "region": [
-            "PL",
-            "PM",
-            "MO"
-          ]
-        },
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        },
-        "labelPolicy": {
-          "minimumZoomShare": 1,
-          "minimumDiameterPixels": 40,
-          "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
-          "limbCosine": 0.12
-        },
-        "outline": {
-          "pieces": 256
-        }
-      }
     }
   ],
   "sources": [
@@ -633,8 +575,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-2",
+            "kind": "machine",
+            "machineId": "voyager-2",
             "evidence": "https://repository.hou.usra.edu/bitstreams/1fe08644-1988-43d4-9f32-1267246f99a4/download",
             "missionId": "voyager-2"
           }
@@ -653,7 +595,7 @@
       "sha256": "9bafb22e1b0be35212c078d77e9f1364e3ff6b6873d0e98c4073055f29ed91ae",
       "bytes": 2336639,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -704,8 +646,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-2",
+            "kind": "machine",
+            "machineId": "voyager-2",
             "evidence": "https://repository.hou.usra.edu/bitstreams/e17f88cd-db20-4208-912b-7f30074054cc/download",
             "missionId": "voyager-2"
           }
@@ -724,7 +666,7 @@
       "sha256": "3d25b4baaf49050fe2ad37b669c34afa6de607692611d927ecbd9eba90dec25d",
       "bytes": 1807867,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -763,7 +705,7 @@
       "sha256": "fae52df10d453d09be1c98f7d000ff12ae56d0ffa3304190cb45f4fb838f038e",
       "bytes": 25962,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -783,80 +725,7 @@
       "sha256": "925b96d5f106d5123fa1e7df5ee024e65a1ccd21240e30f4cb2af7daf4c9f8be",
       "bytes": 12978,
       "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "titania-surface-features-source",
-      "path": "features/manifest.json",
-      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
-      "redistribution": "Repository-authored metadata; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored source pin for the nomenclature archive."
-      },
-      "sha256": "15a91c8d54eaa400819137b5299b3698eb453a4f355cdeca57c878654edc93cd",
-      "bytes": 1009,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-gazetteer-titania-nomenclature-center-pts",
-      "path": "features/TITANIA_nomenclature_center_pts.zip",
-      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/TITANIA_nomenclature_center_pts.zip",
-      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
-      "licenseEvidence": [
-        "features/manifest.json"
-      ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Titania on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
-      "title": "Gazetteer of Planetary Nomenclature: Titania centre points",
-      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
-      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/TITANIA/target",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Catalogued once the shared source record cites this manifest revision."
-      },
-      "sha256": "3c81644e31444a9576203f2e9956f43bf09e0f670a25885eb19e0581101b6c91",
-      "bytes": 84339,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "features/TITANIA_nomenclature_center_pts.zip",
-        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/TITANIA_nomenclature_center_pts.zip"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "titania-surface-map-frame",
-      "path": "presentation/surface-map.json",
-      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored presentation parameters",
-      "acquisition": "Authored from the shared mesh convention.",
-      "redistribution": "Repository-authored parameters; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored map frame."
-      },
-      "sha256": "c3a1868259bb800ba4489a9b4dad80ce69ccf10e3f523a3e27f11fe0228963a2",
-      "bytes": 154,
-      "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -913,19 +782,19 @@
           "url": "/scenes/titania/titania-normal-thumbnail.webp",
           "bytes": 2376,
           "sha256": "559168c5b6896b45a38cf97216e0f0c1ab347bc86efcf7d3b7cf778426357b74",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titania/titania-normal-surface@2x.webp",
           "bytes": 1169534,
           "sha256": "07e110844224ceca891ba1f43e7bf63abc9b900e56f1252669c81d007d244847",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titania/titania-normal-poles@2x.webp",
           "bytes": 46004,
           "sha256": "07bcdbb611b2c20a11b59ee0e1ddf4e2d71ebbfb5e96e09a3f7b9589f24a379e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -958,25 +827,25 @@
           "url": "/scenes/titania/titania-elevation-thumbnail.webp",
           "bytes": 4100,
           "sha256": "051bec112da850ce605c1ebcda492a30de73f44e634a2a03e37e3924df3d45c4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titania/titania-elevation-legend.webp",
           "bytes": 180,
           "sha256": "a61050d5ca54e9972808c8df55940f212c48dfa1bce97d6adb9ea43969a40362",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titania/titania-elevation-surface@2x.webp",
           "bytes": 1215966,
           "sha256": "d0f73e0dfe9f4e3fd7737d9e0d3525a7a1effd8b251ee77917050bd04a0e6d9c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titania/titania-elevation-poles@2x.webp",
           "bytes": 81140,
           "sha256": "1caa22c354d3dec55797ba078838ce6befb383eea52135727af6babfa1baca07",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1009,19 +878,19 @@
           "url": "/scenes/titania/titania-geology-thumbnail.webp",
           "bytes": 488,
           "sha256": "e1a4882282da1ebf63a240429b18bcda7ba02adf1ef481e4016f4872ae58ea30",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titania/titania-geology-surface@2x.webp",
           "bytes": 67924,
           "sha256": "e50a126ba67b82708f3788bfe35fbe1dd42f258bc7304135933d232c177eb1a0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titania/titania-geology-poles@2x.webp",
           "bytes": 25898,
           "sha256": "8ca1ffeb055a5e396fcff33d74e57fc2fbf33e8d7ba4a06ddad836efd71b3724",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1044,42 +913,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6239,
-          "sha256": "3b9450569a87c1dabfd1be699da314fbf9cad93e2d5663b890bb346e96d93c44",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "features",
-      "label": "Named features",
-      "recipe": "features",
-      "selector": "",
-      "parents": [],
-      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
-      "limitations": [],
-      "lensIds": [],
-      "recipeDependencies": [
-        "features"
-      ],
-      "interpretation": {
-        "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        }
-      },
-      "inputs": [
-        "titania-surface-features-source",
-        "usgs-gazetteer-titania-nomenclature-center-pts",
-        "titania-surface-map-frame"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/titania/titania-features.json",
-          "bytes": 35240,
-          "sha256": "d4cd3bef9e79328d38008d60cf03bc7f12eefa3a9642328d79c303120f468e03",
+          "bytes": 6121,
+          "sha256": "8490136a215720ae1c6fe66c6b59cd734148727746f0d7ad8add1376c26e5a51",
           "verification": "bytes-verified"
         }
       ],

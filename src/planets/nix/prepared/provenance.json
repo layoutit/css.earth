@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6879a1c49f88bb5253c53cd3af4ddcba1cc374262da6fac52b37c1f032d33ce6"
+    "sha256": "e0b77aa78bca1bfe229a610665eace4f7a694fa7f82e3a48deccb53265ddafa3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -306,8 +306,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "new-horizons",
+            "kind": "machine",
+            "machineId": "new-horizons",
             "evidence": "https://ndownloader.figshare.com/files/24176543",
             "missionId": "new-horizons"
           }

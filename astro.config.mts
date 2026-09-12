@@ -3,6 +3,7 @@ import { execSync } from "node:child_process";
 import { defineConfig } from "astro/config";
 import { SITE_ORIGIN } from "./site/seo.mts";
 import { wmtsLocalMirror } from "./tools/objects/geographic-pages/operations/wmts-local-server.mts";
+import { performanceSourceMaps } from "./tools/performance/source-maps.mts";
 
 function cssEarthVersion() {
   try {
@@ -25,7 +26,7 @@ export default defineConfig({
   output: "static",
   devToolbar: { enabled: false },
   vite: {
-    plugins: [wmtsLocalMirror({objectId:"earth"})],
+    plugins: [wmtsLocalMirror({objectId:"earth"}), performanceSourceMaps()],
     define: {
       __CSSEARTH_VERSION__: JSON.stringify(cssEarthVersion()),
     },

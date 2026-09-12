@@ -13,11 +13,18 @@ each body keeps its own input bytes, processing, credits and limits.
 | Body `source/manifest.json` | Local input IDs, paths, hashes, acquisition, credits and `sourceBinding` |
 | Body content recipe, `panel.facts` and `panel.moreFacts` | Citations on individual facts, with the source ID, checked date and evidence location |
 | Body `README.md` | Adopted values, source choices, processing, results and known problems |
-| [Mission and spacecraft catalogue](../site/source/spacecraft/catalog.json) | Citations for individual claims, with checked dates and locators |
-| [Render library](../site/source/spacecraft/render-library.json) and [emblem library](../site/source/spacecraft/emblem-library.json) | Artwork bindings, original credits and file pins |
+| [Mission and machine catalogue](../site/source/machines/catalog.json) | Citations for individual claims, with checked dates and locators |
+| [Render library](../site/source/machines/render-library.json) and [emblem library](../site/source/machines/emblem-library.json) | Artwork bindings, original credits and file pins |
+
+Approved machine artwork is public domain or CC BY, so the repository carries no
+share-alike obligation, with one recorded exception. The Herschel photograph is
+CC BY-SA 3.0: its only public-domain alternative is narrower than the card frame
+and ESA's own images are share-alike. Each render-library entry carries its own
+`license`, so the obligation stays attached to the file it covers. Reusing that
+file elsewhere carries the share-alike terms with it.
 | Shared environment `source/provenance.json` | The source binding and meaning of that environment |
 
-`site/prepared-sources.json` and `site/prepared-spacecraft.json` are generated
+`site/prepared-sources.json` and `site/prepared-machines.json` are generated
 from these records and the existing product lineage. They are ignored build
 outputs; do not edit or commit them.
 The [provenance contract](provenance/CONTRACT.md) governs citations, retained data,
@@ -72,7 +79,7 @@ reads the files in ID order and rejects duplicate identities.
 ## Prepare and check
 
 Run `pnpm prepare:sources` after changing catalogue metadata, bindings or capture
-records. `pnpm prepare:provenance` and `pnpm prepare:spacecraft` are aliases for
+records. `pnpm prepare:provenance` and `pnpm prepare:machines` are aliases for
 this coordinated operation. It validates all prospective object provenance and
 both catalogues before replacing outputs. Astro checks their dependency hashes
 and the source file list, rejecting stale or mixed sets. Missing cited factsheet
@@ -102,7 +109,7 @@ need their body and preparation checks.
 ## Coverage and delivery
 
 The graph covers manifest inputs, used provenance documents/intermediates,
-individual factsheet citations, mission and spacecraft citations, approved artwork
+individual factsheet citations, mission and machine citations, approved artwork
 and shared environments. The compiler checks and pins each cited factsheet
 evidence file. It rejects stale published facts before replacing either catalogue.
 

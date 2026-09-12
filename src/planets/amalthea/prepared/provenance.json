@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "amalthea",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a2f5db4c813b7e48db81fe639616e60503e85759557e9cae8da66723a0c15eb9"
+    "sha256": "79302a5c1d0292f0f3c978d15092c8c787034d7a3075f2678a3d015d3338a3ab"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "867672765ca42de37db80c5aeded776c2ec7725b0441ec3ddfd619cd2cb83107"
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -442,63 +442,6 @@
           }
         }
       }
-    },
-    {
-      "id": "features",
-      "path": "source/preparation/features.json",
-      "sha256": "bd8daca1e7714fa17ab42a4d55e97d21e5460beffd869463e0cdd45c8bd5e239",
-      "parameters": {
-        "schema": "cssearth-surface-features@1",
-        "directory": "features",
-        "archive": "AMALTHEA_nomenclature_center_pts.zip",
-        "members": {
-          "attributes": "AMALTHEA_nomenclature_center_pts.dbf",
-          "projection": "AMALTHEA_nomenclature_center_pts.prj",
-          "metadata": "metadata_nomenclature_points_AMALTHEA.xml"
-        },
-        "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
-        "output": "amalthea-features.json",
-        "publicBase": "/scenes/amalthea/",
-        "target": {
-          "className": "amalthea-body"
-        },
-        "lensIds": [
-          "normal",
-          "elevation"
-        ],
-        "kinds": {
-          "point": [
-            "AA",
-            "FA"
-          ],
-          "linear": [
-            "RU",
-            "DO",
-            "VA",
-            "CA",
-            "FO"
-          ],
-          "region": [
-            "PL",
-            "PM",
-            "MO"
-          ]
-        },
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        },
-        "labelPolicy": {
-          "minimumZoomShare": 1,
-          "minimumDiameterPixels": 40,
-          "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
-          "limbCosine": 0.12
-        },
-        "outline": {
-          "pieces": 256
-        }
-      }
     }
   ],
   "sources": [
@@ -536,7 +479,7 @@
       "sha256": "031ee6036cf67e170d39da24487672cd3d4dd2bbb5e9391cf1e3ad56c67706f1",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -570,8 +513,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.IMG",
             "missionId": "galileo"
           }
@@ -590,7 +533,7 @@
       "sha256": "0c2786700d45f25d74828a2a274ffc1e8b2cd9fdaf049e5c461e44800b7d48ee",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -617,8 +560,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.LBL",
             "missionId": "galileo"
           }
@@ -637,7 +580,7 @@
       "sha256": "498fc2ee6c38eca35f33051a78f5e4b5ae082914e7dd8deee57f643259f02296",
       "bytes": 4754,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -671,8 +614,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.IMG",
             "missionId": "galileo"
           }
@@ -691,7 +634,7 @@
       "sha256": "5183ec1e59c472691fd82c30956f485b37d499154a0ca9fddbc245ccadf25e0a",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -718,8 +661,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.LBL",
             "missionId": "galileo"
           }
@@ -738,7 +681,7 @@
       "sha256": "ba48dd397a1e9dfd94b6dce4c71c07e9c3c9f80f0958fa1140d9b4e67a793a73",
       "bytes": 4842,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -772,8 +715,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420652501R.IMG",
             "missionId": "galileo"
           }
@@ -792,7 +735,7 @@
       "sha256": "ed9310d63df477a715f46349aec4d07eb66466ef7878046f6de8fcc7a8e33495",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -819,8 +762,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420652501R.LBL",
             "missionId": "galileo"
           }
@@ -839,7 +782,7 @@
       "sha256": "ec662262f35a5c10841283d69884888b2ba639bde352826224afd1ae8f35430d",
       "bytes": 5012,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -873,8 +816,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0021/C22/SML_SATS/C0512324200R.IMG",
             "missionId": "galileo"
           }
@@ -893,7 +836,7 @@
       "sha256": "28617d6c3a4e3efe8532db03d6479ed494f79712dd2c24d1ddd0e99964bc5b4f",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -920,8 +863,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0021/C22/SML_SATS/C0512324200R.LBL",
             "missionId": "galileo"
           }
@@ -940,7 +883,7 @@
       "sha256": "2223991ed2b60d11428be5efc996132318c440be0f945ae4fc8f576e10a8dd32",
       "bytes": 5010,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -974,8 +917,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888100R.IMG",
             "missionId": "galileo"
           }
@@ -994,7 +937,7 @@
       "sha256": "a9984536219b37e770cd92036aca30cd53a83b91b9d87e881550ed0de23a01bf",
       "bytes": 840192,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1021,8 +964,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888100R.LBL",
             "missionId": "galileo"
           }
@@ -1041,7 +984,7 @@
       "sha256": "7f3421111331a7dad25384ac63a89eebc4b63e672d34905e977ece5f5dbbe73e",
       "bytes": 5038,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1068,80 +1011,7 @@
       "sha256": "0ce5495fa7995818a8c3b27514b397a15cdccf86b153d2e3afe8f4d3e7c98243",
       "bytes": 5982,
       "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "amalthea-surface-features-source",
-      "path": "features/manifest.json",
-      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
-      "redistribution": "Repository-authored metadata; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored source pin for the nomenclature archive."
-      },
-      "sha256": "13c207f7804b474543fc841279f64ab3c7e6aea5b4270f491e2c4c9534609e4a",
-      "bytes": 1014,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-gazetteer-amalthea-nomenclature-center-pts",
-      "path": "features/AMALTHEA_nomenclature_center_pts.zip",
-      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/AMALTHEA_nomenclature_center_pts.zip",
-      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
-      "licenseEvidence": [
-        "features/manifest.json"
-      ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Amalthea on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
-      "title": "Gazetteer of Planetary Nomenclature: Amalthea centre points",
-      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
-      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/AMALTHEA/target",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Catalogued once the shared source record cites this manifest revision."
-      },
-      "sha256": "6c8c8921eb0929a738207b862d02ee3d5452bcc89f7d8f98714260d7cc1ee8db",
-      "bytes": 47678,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "features/AMALTHEA_nomenclature_center_pts.zip",
-        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/AMALTHEA_nomenclature_center_pts.zip"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "amalthea-surface-map-frame",
-      "path": "presentation/surface-map.json",
-      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored presentation parameters",
-      "acquisition": "Authored from the shared mesh convention.",
-      "redistribution": "Repository-authored parameters; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored map frame."
-      },
-      "sha256": "38f55714f6a719c11d68896d591602df177cddda737cd39b411c23590e06be83",
-      "bytes": 155,
-      "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1174,19 +1044,19 @@
           "url": "/scenes/amalthea/amalthea-elevation-thumbnail.webp",
           "bytes": 6320,
           "sha256": "9d847355902640f4324b2a5a9da0065c1c4bff1df78ae75631a13da2f12d1144",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/amalthea/amalthea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/amalthea/amalthea-elevation-surface@2x.webp",
           "bytes": 235688,
           "sha256": "3628a7e922a59e4ad06bddce33da7c5177431d76e095c250fadae50d9ae57d18",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1228,13 +1098,13 @@
           "url": "/scenes/amalthea/amalthea-normal-thumbnail.webp",
           "bytes": 3642,
           "sha256": "981e03ba4ea6120c914657603ee990e7f850db49f7042f611e24bde026fcaa04",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/amalthea/amalthea-normal-surface@2x.webp",
           "bytes": 153080,
           "sha256": "f2c72c3300ef926550eea6f0370f6cad7bef05bc2196cfbfdf34ca63be6bc7d0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1257,42 +1127,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7365,
-          "sha256": "3624e6280c29c7d19419bbcdd3bc40f49422e07a3986bdcc12c7624c22ccebcd",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "features",
-      "label": "Named features",
-      "recipe": "features",
-      "selector": "",
-      "parents": [],
-      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
-      "limitations": [],
-      "lensIds": [],
-      "recipeDependencies": [
-        "features"
-      ],
-      "interpretation": {
-        "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        }
-      },
-      "inputs": [
-        "amalthea-surface-features-source",
-        "usgs-gazetteer-amalthea-nomenclature-center-pts",
-        "amalthea-surface-map-frame"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/amalthea/amalthea-features.json",
-          "bytes": 3167,
-          "sha256": "684f3413537ecd52e91585eb7fb2740a77b98f9ea5f53e5a2a73d4a173cb0ff7",
+          "bytes": 7248,
+          "sha256": "6593335450e408953b063940412b870e7515b9fcd95b781ef202cd400c660dac",
           "verification": "bytes-verified"
         }
       ],

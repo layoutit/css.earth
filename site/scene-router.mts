@@ -52,8 +52,10 @@ export function createSceneRouter({
   let motionEnabled = false;
   let heliosphereEnabled = false;
   let highContrastSky = false;
+  let asteroidBodiesEnabled = false;
   let asteroidOrbitsEnabled = false;
   let asteroidLabelsEnabled = false;
+  let highlightedClassification: string | null = null;
   let scenePaused = true;
   let sceneError: unknown = null;
   let sceneState: SceneState = "loading";
@@ -126,7 +128,7 @@ export function createSceneRouter({
       if (!shellOwner) {
         const owner: { shell: Shell | null } = { shell: null };
         shellOwner = owner;
-        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, highContrastSky, heliosphereEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
+        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, highContrastSky, heliosphereEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
           onMotionChange(next) { if (shellOwner === owner && active) {
             motionEnabled = next === true; syncPlayback(); active?.viewUrl?.schedule();
           } },
@@ -138,6 +140,10 @@ export function createSceneRouter({
             heliosphereEnabled = next === true;
             worldContextMount?.setHeliosphereEnabled?.(heliosphereEnabled);
           } },
+          onAsteroidBodiesChange(next) { if (shellOwner === owner && active) {
+            asteroidBodiesEnabled = next === true;
+            worldContextMount?.setAsteroidBodiesEnabled?.(asteroidBodiesEnabled);
+          } },
           onAsteroidOrbitsChange(next) { if (shellOwner === owner && active) {
             asteroidOrbitsEnabled = next === true;
             worldContextMount?.setAsteroidOrbitsEnabled?.(asteroidOrbitsEnabled);
@@ -146,6 +152,10 @@ export function createSceneRouter({
             asteroidLabelsEnabled = next === true;
             worldContextMount?.setAsteroidLabelsEnabled?.(asteroidLabelsEnabled);
           } },
+          onCategoryChange(next) { if (shellOwner === owner) {
+            highlightedClassification = next;
+            worldContextMount?.setHighlightedClassification?.(highlightedClassification);
+          } },
         });
       }
       const shell = shellOwner.shell!;
@@ -153,6 +163,14 @@ export function createSceneRouter({
       if (content) shell.setObject(content);
       shell.setOverview?.(request ? Boolean(overviewScopeFromUrl(request.url)) : overview);
       if (active !== session) return;
+      if (content && request) {
+        // The prepared sidebar swap and the detail mount each restyle and lay out
+        // hundreds of nodes. Let the swap render in its own frame first, so an
+        // arriving flight does not drop a frame for both at once.
+        const rendered = await session.lifetime.wait(new Promise<void>(resolve =>
+          windowTarget.requestAnimationFrame(() => windowTarget.setTimeout(resolve, 0))));
+        if (rendered.cancelled || active !== session) return;
+      }
       publishSceneState();
       if (worldContextOwner) {
         const contextual = await session.lifetime.wait(ensureWorldContext());
@@ -328,7 +346,9 @@ export function createSceneRouter({
     const opensOverviewFocus = overview && id === objectId && id === solarSystemFocus(objects)?.id
       && overviewScopeFromUrl(active?.url ?? windowTarget.location.href) === 'solar-system';
     const overviewTarget = options.overviewScope
-      ? navigation.overviewTarget?.({ scope: options.overviewScope, objectId: id, fromId: objectId, mount: active?.mount }) : null;
+      ? navigation.overviewTarget?.({ scope: options.overviewScope, objectId: id, fromId: objectId, mount: active?.mount })
+      : options.classification
+        ? navigation.classificationTarget?.({ classification: options.classification, objectId: id, fromId: objectId, mount: active?.mount }) : null;
     const centerTarget = overviewTarget?.world ?? (options.recenter
       ? navigation.centerTarget?.({ objectId: id, fromId: objectId, mount: active?.mount, force: true })
       : options.sceneSelection && !opensOverviewFocus && id !== centeredObjectId && hasPresented
@@ -368,7 +388,8 @@ export function createSceneRouter({
     request.lifetime.onDispose(() => {
       if (!pending || pending === request) worldContextMount?.previewSelection?.();
     });
-    if ((options.recenter || options.centerSelection) && options.overview) {
+    // A category flight keeps its filtered results instead of the overview card.
+    if ((options.recenter || options.centerSelection) && options.overview && !options.classification) {
       const restoreSelection = shellOwner?.shell?.beginOverviewSelection?.(options.overviewScope ?? 'solar-system');
       if (restoreSelection) request.lifetime.onDispose(restoreSelection);
     } else if (!options.overview) {
@@ -442,7 +463,7 @@ export function createSceneRouter({
         preserveView: request.options.preserveView,
         cameraViewport: worldContextMount?.viewport,
         timing: request.timing,
-        presentWorld: worldContextMount ? (world, viewport) => worldContextMount?.publish(world, viewport) : null,
+        presentWorld: worldContextMount ? (world, viewport, options) => worldContextMount?.present(world, viewport, options) : null,
       });
       const loaded = await request.lifetime.wait(Promise.all([factoryTask, contentTask, preparationTask]));
       if (loaded.cancelled || pending !== request) return false;
@@ -615,8 +636,10 @@ export function createSceneRouter({
         worldContextMount = value;
         value.setHighContrastSky?.(highContrastSky);
         value.setHeliosphereEnabled?.(heliosphereEnabled);
+        value.setAsteroidBodiesEnabled?.(asteroidBodiesEnabled);
         value.setAsteroidOrbitsEnabled?.(asteroidOrbitsEnabled);
         value.setAsteroidLabelsEnabled?.(asteroidLabelsEnabled);
+        value.setHighlightedClassification?.(highlightedClassification);
         return value;
       }).catch(error => {
         if (worldContextAbort === controller) worldContextMountTask = null;

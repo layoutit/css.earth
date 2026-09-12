@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "moon",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c4a7a7262ca1ecbd85d77df1931d5eea7b64e31b7c3bb0cc5508981e5bb65d5d"
+    "sha256": "29b7f55efda4c8a1dd61cdac43f4e681a6a1d5ef7a788d0766ec5b54987939dc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "867672765ca42de37db80c5aeded776c2ec7725b0441ec3ddfd619cd2cb83107"
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -1337,71 +1337,6 @@
           "thermal": "Powell et al. (2023), DOI 10.1029/2022JE007532; PDS GHRM float32 mosaics; author data CC0 DOI 10.25346/S6/LFAVXU"
         }
       }
-    },
-    {
-      "id": "features",
-      "path": "source/preparation/features.json",
-      "sha256": "706e2452fc08417821f4be857cb3c6552099bcd157f065badf3e60f31ff37482",
-      "parameters": {
-        "schema": "cssearth-surface-features@1",
-        "directory": "features",
-        "archive": "MOON_nomenclature_center_pts.zip",
-        "members": {
-          "attributes": "MOON_nomenclature_center_pts.dbf",
-          "projection": "MOON_nomenclature_center_pts.prj",
-          "metadata": "metadata_nomenclature_points_MOON.xml"
-        },
-        "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
-        "output": "moon-features.json",
-        "publicBase": "/scenes/moon/",
-        "target": {
-          "className": "moon-body",
-          "withoutClassName": "moon-body-polar"
-        },
-        "lensIds": [
-          "surface",
-          "midnight-temperature",
-          "heat-anomalies",
-          "rock-abundance",
-          "topography",
-          "crust",
-          "silicate-signature",
-          "geology"
-        ],
-        "kinds": {
-          "point": [
-            "AA",
-            "FA"
-          ],
-          "linear": [
-            "RU",
-            "DO",
-            "VA",
-            "CA",
-            "FO"
-          ],
-          "region": [
-            "PL",
-            "PM",
-            "MO"
-          ]
-        },
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms.",
-          "SF": "Lettered satellite craters (7,063 rows such as “Tycho A”) repeat their parent crater’s name with a letter; the label layer keeps the parent names and leaves the lettered satellites to the Gazetteer."
-        },
-        "labelPolicy": {
-          "minimumZoomShare": 1,
-          "minimumDiameterPixels": 40,
-          "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
-          "limbCosine": 0.12
-        },
-        "outline": {
-          "pieces": 256
-        }
-      }
     }
   ],
   "sources": [
@@ -1421,8 +1356,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "lro",
+            "kind": "machine",
+            "machineId": "lro",
             "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg",
             "missionId": "lro"
           }
@@ -1441,7 +1376,7 @@
       "sha256": "f7130a1822681fa7512d7dcfd40db8c10b9ba4f06777910348698260ed7a2170",
       "bytes": 457942,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1483,7 +1418,7 @@
       "sha256": "63bd05458e3b24d02bebe14dce7345b3b88f07db6233601eccc0f7afecfd6e57",
       "bytes": 9832777,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1518,7 +1453,7 @@
       "sha256": "009a700af3d4b25d3ee7454ea6d97b96eb2e7f513f00081f96f4001b7a50c1c6",
       "bytes": 9522044,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1553,7 +1488,7 @@
       "sha256": "2d87312b2b5cf7caa6a949f2d63e7fe1b0db8d5a7cb57822ba1af89281757ca3",
       "bytes": 9311218,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1573,8 +1508,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "lro",
+            "kind": "machine",
+            "machineId": "lro",
             "evidence": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml",
             "missionId": "lro"
           }
@@ -1593,7 +1528,7 @@
       "sha256": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
       "bytes": 33177600,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1639,7 +1574,7 @@
       "sha256": "d791cb16b0e6ee74bda94ca5bc1577fc9589a9e7d70cdade255ad199f83a5e95",
       "bytes": 300978,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1678,7 +1613,7 @@
       "sha256": "adc63e4654a70093f5c060069f6394311aec52d6bdffd3eec1165173734f6632",
       "bytes": 3801047,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1724,7 +1659,7 @@
       "sha256": "16be1f099526cb91493e6004fa330b850b26f8ed72cd3a40dadcc5c427480bc5",
       "bytes": 430857,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1744,80 +1679,7 @@
       "sha256": "9cbf4a5fdb11412dbacf29e2fba7f9bcc7f748be0867d1a6c93671a73e7bf587",
       "bytes": 31642,
       "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "moon-surface-features-source",
-      "path": "features/manifest.json",
-      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
-      "redistribution": "Repository-authored metadata; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored source pin for the nomenclature archive."
-      },
-      "sha256": "84ebaac0d933fe026ec361a5a4e1da024ec72c35c7d08bda0360a576778c4171",
-      "bytes": 1001,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-gazetteer-moon-nomenclature-center-pts",
-      "path": "features/MOON_nomenclature_center_pts.zip",
-      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MOON_nomenclature_center_pts.zip",
-      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
-      "licenseEvidence": [
-        "features/manifest.json"
-      ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for the Moon on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
-      "title": "Gazetteer of Planetary Nomenclature: the Moon centre points",
-      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
-      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/MOON/target",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Catalogued once the shared source record cites this manifest revision."
-      },
-      "sha256": "3cf4d02e87f7ab896f668acb8caed93ea9f36136a756c6e6c69b01b20e6e2671",
-      "bytes": 23842450,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "features/MOON_nomenclature_center_pts.zip",
-        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MOON_nomenclature_center_pts.zip"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "moon-surface-map-frame",
-      "path": "presentation/surface-map.json",
-      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored presentation parameters",
-      "acquisition": "Authored from the shared mesh convention.",
-      "redistribution": "Repository-authored parameters; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored map frame."
-      },
-      "sha256": "59bd7a28b740a273bfa4e1a643dfc7a84f426f7bcbc0b5eace30e275f7763d6a",
-      "bytes": 151,
-      "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1850,31 +1712,31 @@
           "url": "/scenes/moon/moon-surface-thumbnail.webp",
           "bytes": 2752,
           "sha256": "d781200e2456b17193e6c8f97bacf2fc8b21c095351b524f814cd029c06734b7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-surface.webp",
           "bytes": 139914,
           "sha256": "ba3e8fc8df0eb68c3e35354eceeef55edf09a04bdfd2b0a0341b965b5693ac58",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-surface@2x.webp",
           "bytes": 468882,
           "sha256": "46ca2b9b271f4a0bc628a899f710ac065b5c4fdbd01af38570b090f7c53be7cb",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-surface-poles.webp",
           "bytes": 5624,
           "sha256": "048cf0d10edddc0ed7babcf4364f03b9c18eaa98858999b3e769c3c80f8190d8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-surface-poles@2x.webp",
           "bytes": 14032,
           "sha256": "7a3729490730deab48820f38c4dfd413d33857defb0310775e7308bfaa555c11",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1906,31 +1768,31 @@
           "url": "/scenes/moon/moon-midnight-temperature-thumbnail.webp",
           "bytes": 13280,
           "sha256": "26c2f029c76cecae5fae152a3afeb3b6b66994cc347c0b1bed3973f9346d8b8d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-midnight-temperature.webp",
           "bytes": 2411866,
           "sha256": "67506c857be0dac5e5ce08f578e0f15e7f0d77cf0f9c8259a6d3eba9b9a93301",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-midnight-temperature@2x.webp",
           "bytes": 9038096,
           "sha256": "abd6977a3d5828ccc69fb54d89a6815c79344eef236e8bada5cc942e609ee358",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-midnight-temperature-poles.webp",
           "bytes": 2368,
           "sha256": "6fff761e8fec9544007253daed819459ba686029cf8e829118798e56807c490c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-midnight-temperature-poles@2x.webp",
           "bytes": 5398,
           "sha256": "c2e71dbf8ebe99b8596b884bcb85398f4ebb6bf0cf9307032914acd725ff4e7e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1962,31 +1824,31 @@
           "url": "/scenes/moon/moon-heat-anomalies-thumbnail.webp",
           "bytes": 8198,
           "sha256": "9fa74d00fc465df6e98460ce3a85ca88b73777cdf22cde2551b9a0427db14a12",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-heat-anomalies.webp",
           "bytes": 1545170,
           "sha256": "7416614233efc8c1cb47ce8512950128b0645959879f0018275727f7dc89a1ec",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-heat-anomalies@2x.webp",
           "bytes": 6109446,
           "sha256": "aacace354f0903f84588d6085e4553191e802a5a6de35b817e44666551624f2f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-heat-anomalies-poles.webp",
           "bytes": 2368,
           "sha256": "6fff761e8fec9544007253daed819459ba686029cf8e829118798e56807c490c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-heat-anomalies-poles@2x.webp",
           "bytes": 5398,
           "sha256": "c2e71dbf8ebe99b8596b884bcb85398f4ebb6bf0cf9307032914acd725ff4e7e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2018,31 +1880,31 @@
           "url": "/scenes/moon/moon-rock-abundance-thumbnail.webp",
           "bytes": 7842,
           "sha256": "b0c51e2ef3a0a215a38122a7e8cc519ee73c1388052ae933bba8c3bf74eededc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-rock-abundance.webp",
           "bytes": 1496518,
           "sha256": "41053de2795a8a7a05ea719a3a31d0d6467ff454f0780077be61c96e952978a8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-rock-abundance@2x.webp",
           "bytes": 5929384,
           "sha256": "d6608d573b6cd845f8931d04954f2fdcf4114613c0ffc85e143c2fc28c454b2c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-rock-abundance-poles.webp",
           "bytes": 2368,
           "sha256": "6fff761e8fec9544007253daed819459ba686029cf8e829118798e56807c490c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-rock-abundance-poles@2x.webp",
           "bytes": 5398,
           "sha256": "c2e71dbf8ebe99b8596b884bcb85398f4ebb6bf0cf9307032914acd725ff4e7e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2074,31 +1936,31 @@
           "url": "/scenes/moon/moon-topography-thumbnail.webp",
           "bytes": 8168,
           "sha256": "c0f707fe1ccaddcd07cb6aec66dcbdc25811c20e5f9d3dccbd63d86a4a45c1e6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-topography.webp",
           "bytes": 529956,
           "sha256": "5662a74d505859d319028aed84d58142f6e14552b39f71d47f4031c3f5b5e644",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-topography@2x.webp",
           "bytes": 1763150,
           "sha256": "dd10f4675f70a899a5562feba522886acf6bf9323ca0729a39bdc7f2dc81ffdf",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-topography-poles.webp",
           "bytes": 47866,
           "sha256": "f460a6375079dec50f7d7d7f5c465c619bc6a6958cd20e7a854ffb88d2f01f32",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-topography-poles@2x.webp",
           "bytes": 149512,
           "sha256": "e9f3a061b32a7e394dfed366fc39a4af0366fc1d301863f7fc85e6b6429df1d2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2130,31 +1992,31 @@
           "url": "/scenes/moon/moon-crustal-thickness-thumbnail.webp",
           "bytes": 4676,
           "sha256": "42dd84a4036d4d996c1c98cbb685f25219bfd212dc01cee5c5f408adc172fb3b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-crustal-thickness.webp",
           "bytes": 213074,
           "sha256": "c751f7d4915fca9c2e6f68841318acc39dc9b5794d379519c6373378e9db17ac",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-crustal-thickness@2x.webp",
           "bytes": 476264,
           "sha256": "5c2b146fe3c147075fed83797cee3ae2e0e4197ee40229572c7e71de7731abee",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-crustal-thickness-poles.webp",
           "bytes": 13380,
           "sha256": "fd4ba671d89e385a596b6459a988262d91a6db407870e0f8925afee0c85a2652",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-crustal-thickness-poles@2x.webp",
           "bytes": 35532,
           "sha256": "cd0d657288278f16ce42254b7526f7dacba27a4e45c3b22b862665eed0ff60be",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2186,31 +2048,31 @@
           "url": "/scenes/moon/moon-silicate-signature-thumbnail.webp",
           "bytes": 9240,
           "sha256": "3c9445af0e519012bcb4bda61ed392fd9d9b88eea3f7c43894babca8635a6b44",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-silicate-signature.webp",
           "bytes": 625606,
           "sha256": "f737bd286589ebce877ee049a87ca6865557b3df0d1f0c61e1d2199e2fdb353c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-silicate-signature@2x.webp",
           "bytes": 2414732,
           "sha256": "8114bfa66e4e13a889fc3019963b3f37309c33d2277b1d74600cb5a1848d4974",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-silicate-signature-poles.webp",
           "bytes": 2550,
           "sha256": "f1215e4fc7db45d20e92c5d4ed473143ed495c61ff97deaa9cd58cb5df78831a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-silicate-signature-poles@2x.webp",
           "bytes": 5948,
           "sha256": "d6689a7b30c5d65046d99f50b71f2b2c45620780f553a4b43760cf4f3f947878",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2242,31 +2104,31 @@
           "url": "/scenes/moon/moon-geology-thumbnail.webp",
           "bytes": 3722,
           "sha256": "5ac01ef77302f05ff028fe41b80d6efdb73986cb2345a4cd298816e054973654",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-geology.webp",
           "bytes": 77392,
           "sha256": "08b5df80ad85bc4ea682e75587f0010ee9c6f8f34de344d82a89cd11ef78620c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-geology@2x.webp",
           "bytes": 180188,
           "sha256": "ff32836a3e303e91139c7669fa119e2e7ba72e85ac0cad8845399dee200c82d9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-geology-poles.webp",
           "bytes": 6168,
           "sha256": "40bbc3148d161ffb760894708caffd6386c156a9b5a18414d8265376bbbac85d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-geology-poles@2x.webp",
           "bytes": 13278,
           "sha256": "fd0d6ebbbe045efc6c2ff3b547d3682a0f30eb8993c48453c8677dde6518cd6e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2289,43 +2151,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6098,
-          "sha256": "10626a5e04a839da287ea1ca3c647639009982f5f761cbfe142c55026b49c80c",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "features",
-      "label": "Named features",
-      "recipe": "features",
-      "selector": "",
-      "parents": [],
-      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
-      "limitations": [],
-      "lensIds": [],
-      "recipeDependencies": [
-        "features"
-      ],
-      "interpretation": {
-        "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms.",
-          "SF": "Lettered satellite craters (7,063 rows such as “Tycho A”) repeat their parent crater’s name with a letter; the label layer keeps the parent names and leaves the lettered satellites to the Gazetteer."
-        }
-      },
-      "inputs": [
-        "moon-surface-features-source",
-        "usgs-gazetteer-moon-nomenclature-center-pts",
-        "moon-surface-map-frame"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/moon/moon-features.json",
-          "bytes": 3655961,
-          "sha256": "ab7b99cc97e0737b779cf516c6c5a5f928b1f5888c3c0a9e2df0308d72cddbd2",
+          "bytes": 5942,
+          "sha256": "881dbdb9189f026ad648833d65c526021b3ee8f5639f59781b73bba0abd3f833",
           "verification": "bytes-verified"
         }
       ],
@@ -2349,8 +2176,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/surface.webp",
-          "bytes": 44574,
-          "sha256": "1429bc129ce1251411c861e7520e41649ef18451298d421b4e9048314b52e3c5",
+          "bytes": 44688,
+          "sha256": "88ba77b6c93f0e10155a0bba42eacc8cb1cd59a64f8722595d2aadd331a4fe7c",
           "verification": "bytes-verified"
         }
       ]
@@ -2469,8 +2296,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/crust.webp",
-          "bytes": 92510,
-          "sha256": "805fd1a68a99fb481e342d35677b1b6220913cff8c88770ae006d17dd04c82ea",
+          "bytes": 93594,
+          "sha256": "7e3d5e6137370a3eca0ad5afe8a1833784735cf60f297263342fce761da8ce6e",
           "verification": "bytes-verified"
         }
       ]

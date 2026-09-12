@@ -58,6 +58,24 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             path(surface[key], `surface.${key}`);
         if (typeof surface.falseColor !== 'boolean')
             throw new TypeError('falseColor must be boolean.');
+        if (surface.encoding !== undefined) {
+            const encoding = record(surface.encoding, 'surface.encoding');
+            if (Object.keys(encoding).some(key => !['format', 'encoder', 'progressive', 'quality', 'grayscale', 'chromaSubsampling'].includes(key)) || encoding.format !== 'jpeg' ||
+                (encoding.encoder !== 'libjpeg' && encoding.encoder !== 'mozjpeg') || typeof encoding.progressive !== 'boolean')
+                throw new TypeError('Unsupported surface encoding.');
+            finite(encoding.quality, 'surface.encoding.quality', true);
+            if (!Number.isInteger(encoding.quality) || encoding.quality > 100)
+                throw new TypeError('surface.encoding.quality must be an integer from 1 to 100.');
+            if (encoding.grayscale !== undefined && typeof encoding.grayscale !== 'boolean')
+                throw new TypeError('surface.encoding.grayscale must be boolean.');
+            if (encoding.chromaSubsampling !== undefined && encoding.chromaSubsampling !== '4:2:0' && encoding.chromaSubsampling !== '4:4:4')
+                throw new TypeError('Unknown surface chroma subsampling.');
+            if (encoding.grayscale === true && encoding.chromaSubsampling !== undefined)
+                throw new TypeError('A grayscale surface has no chroma subsampling.');
+        }
+        const extension = surface.encoding === undefined ? '.webp' : '.jpg';
+        if (!String(surface.output).endsWith(extension))
+            throw new TypeError(`surface.output must end in ${extension} for its encoding.`);
         if (surface.exposure !== undefined)
             numbers(surface.exposure, 'surface.exposure', 3);
         if (surface.sharpen !== undefined)

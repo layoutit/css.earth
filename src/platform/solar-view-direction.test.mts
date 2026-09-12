@@ -33,7 +33,7 @@ test("the physical light map returns the CSS scene direction", () => {
   const css = [0.36, -0.48, -0.8];
   const view = cssDirectionToViewDirection(css);
   assert.deepEqual([...viewSunDirectionToPhysicalLightDirection(view)], css);
-  // The presentation map is the deliberate Google Earth full-phase mirror.
+  // The presentation map is the deliberate reference full-phase mirror.
   assert.deepEqual(
     [...viewSunDirectionToPreparedLightDirection(view)],
     [css[0], css[1], -css[2]],
