@@ -1,7 +1,9 @@
 import { createOpacityClock, type OpacityClock, type OpacityWindow } from './opacity-clock.js';
 export type OpacityFaderWindow = OpacityWindow;
 type Track = { from: number; target: number; started: number; duration: number; ease: boolean };
-interface Entry { element: HTMLElement; alpha: Track; multiplier: Track; suppression: Track; visible: boolean; written: number; }
+/** Whatever carries an inline opacity: a DOM element, or an owner's adapter that maps it elsewhere. */
+export interface FadeTarget { readonly style: { opacity: string; visibility: string } }
+interface Entry { element: FadeTarget; alpha: Track; multiplier: Track; suppression: Track; visible: boolean; written: number; }
 const clamp = (value: number) => Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : 0;
 const fixed = (value: number): Track => ({ from: value, target: value, started: 0, duration: 0, ease: false });
 
@@ -27,9 +29,9 @@ const running = (track: Track, time: number) => track.from !== track.target && t
  * one clock, then multiplied once; CSS/WAAPI never re-animate its output. */
 export function createOpacityFader(window: OpacityWindow, sharedClock?: OpacityClock) {
   const clock = sharedClock ?? createOpacityClock(window);
-  const entries = new Map<HTMLElement, Entry>(), pending = new Set<Entry>(), dirty = new Set<Entry>();
+  const entries = new Map<FadeTarget, Entry>(), pending = new Set<Entry>(), dirty = new Set<Entry>();
   let destroyed = false, animationEnabled = true;
-  const entryFor = (element: HTMLElement) => {
+  const entryFor = (element: FadeTarget) => {
     let entry = entries.get(element);
     if (!entry) {
       const initial = clamp(Number.parseFloat(element.style.opacity));
@@ -79,28 +81,28 @@ export function createOpacityFader(window: OpacityWindow, sharedClock?: OpacityC
       }
       clock.changed(flush);
     },
-    current(element: HTMLElement) { const entry = entries.get(element); return entry ? valueAt(entry.alpha, clock.now()) : clamp(Number.parseFloat(element.style.opacity)); },
-    set(element: HTMLElement, alpha: number, durationMs = 0, preserveDeadline = false) {
+    current(element: FadeTarget) { const entry = entries.get(element); return entry ? valueAt(entry.alpha, clock.now()) : clamp(Number.parseFloat(element.style.opacity)); },
+    set(element: FadeTarget, alpha: number, durationMs = 0, preserveDeadline = false) {
       if (destroyed) return;
       const entry = entryFor(element);
       target(entry, entry.alpha, alpha, durationMs, preserveDeadline);
       if (Number.isNaN(entry.written)) changed(entry);
     },
-    multiply(element: HTMLElement, alpha: number, durationMs = 0) {
+    multiply(element: FadeTarget, alpha: number, durationMs = 0) {
       if (destroyed) return;
       const entry = entryFor(element); target(entry, entry.multiplier, alpha, durationMs, false, true);
     },
-    suppress(element: HTMLElement, suppressed: boolean, durationMs = 0) {
+    suppress(element: FadeTarget, suppressed: boolean, durationMs = 0) {
       if (destroyed) return;
       const entry = entryFor(element); target(entry, entry.suppression, suppressed ? 0 : 1, durationMs, false, true);
     },
-    visible(element: HTMLElement, visible: boolean) {
+    visible(element: FadeTarget, visible: boolean) {
       const entry = entries.get(element);
       if (destroyed || !entry || entry.visible === visible) return;
       entry.visible = visible;
       dirty.add(entry); clock.changed(flush);
     },
-    cancel(element: HTMLElement) { const entry = entries.get(element); if (entry) { pending.delete(entry); dirty.delete(entry); } entries.delete(element); if (pending.size === 0 && dirty.size === 0) clock.remove(flush); },
+    cancel(element: FadeTarget) { const entry = entries.get(element); if (entry) { pending.delete(entry); dirty.delete(entry); } entries.delete(element); if (pending.size === 0 && dirty.size === 0) clock.remove(flush); },
     batch: clock.batch,
     stats: () => ({ active: pending.size, retained: entries.size }),
     destroy() { destroyed = true; pending.clear(); dirty.clear(); entries.clear(); clock.remove(flush); if (!sharedClock) clock.destroy(); },

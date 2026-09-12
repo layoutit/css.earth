@@ -68,7 +68,7 @@ class CSSAnimation implements Pick<Animation, "play" | "pause" | "cancel" | "cur
 }
 const runtimePolicy: RuntimePolicy = {
   MOBILE_VIEWPORT_QUERY: "(max-width: 1px)", SKYBOX_DRAG_ENABLED: true, WHEEL_ZOOM_SPEED_MULTIPLIER: 1,
-  WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER: 1, WHEEL_ZOOM_USE_SCROLL_DISTANCE: false,
+  WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER: 1, WHEEL_ZOOM_USE_SCROLL_DISTANCE: false, WHEEL_ZOOM_INERTIA: null, WHEEL_ZOOM_INERTIA_INPUT_KINDS: [],
   sceneCursor: () => "", isOrbitDragStart: () => true, wheelZoomInputKind: () => "wheel",
   bindResponsiveOrbitPolicy: () => ({ mobile: false, destroy() {} }),
 };

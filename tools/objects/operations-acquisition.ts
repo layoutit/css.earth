@@ -70,7 +70,10 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
  const request=async(url:string,init?:RequestInit)=>{const response=await transport.fetch(url,init);if(!response.ok)throw new Error(`Source request failed ${response.status}: ${url}.`);return response;};
  const bytes=async(url:string)=>new Uint8Array(await(await request(url)).arrayBuffer());
  const publish=async(path:string,data:Uint8Array)=>{const entry=[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].find(entry=>entry.path===path);if(!entry)throw new Error(`Undeclared acquisition target: ${path}.`);return publishPinnedSource({sourceRoot,entry,bytes:data});};
+ // Attempt every step so one unreachable host does not hide the others; report all failures together.
+ const failures:{step:(typeof selected)[number];error:unknown}[]=[];
  for(const step of selected){
+  try{
   if(step.kind==='download'){
    if(!step.encoding){
     const entry=[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].find(entry=>entry.path===step.path);if(!entry)throw new Error(`Undeclared acquisition target: ${step.path}.`);
@@ -129,6 +132,9 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
    let image=sharp(stitched).extract({left:0,top:0,width:step.dataWidth,height:step.dataHeight});if(step.dataWidth!==step.width||step.dataHeight!==step.height)image=image.resize(step.width,step.height,{kernel:'lanczos3',fit:'fill'});if(step.forceRgb)image=image.removeAlpha();
    await publish(step.path,await image.png({compressionLevel:9,adaptiveFiltering:true}).toBuffer());
   }
+  }catch(error){failures.push({step,error});}
  }
+ if(failures.length===1)throw failures[0].error;
+ if(failures.length)throw new AggregateError(failures.map(f=>f.error),`${failures.length} acquisition steps failed (every step was attempted):\n`+failures.map(f=>` - ${'path' in f.step?f.step.path:f.step.kind}: ${f.error instanceof Error?f.error.message:String(f.error)}`).join('\n'));
  return {operationCount:selected.length};
 }

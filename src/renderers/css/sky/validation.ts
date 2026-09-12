@@ -6,14 +6,26 @@ const FACE_IDS = ['px', 'nx', 'py', 'ny', 'pz', 'nz'];
 const NUMBER = /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/iu;
 
 export function validatePreparedCssSky(input: unknown, resources: PreparedCssVolume['resources']): PreparedCssSky {
-  const sky = record(input, ['schema', 'referenceFrame', 'epochJdTt', 'radiusUnits', 'faces', 'provenance', 'approximation'], 'sky', ['parallax']);
+  const sky = record(input, ['schema', 'referenceFrame', 'epochJdTt', 'radiusUnits', 'faces', 'provenance', 'approximation'], 'sky', ['parallax', 'nearFaces', 'stars']);
   if (sky.schema !== 'cssearth-css-sky@1' || typeof sky.referenceFrame !== 'string' || !sky.referenceFrame || !finite(sky.epochJdTt) || !positive(sky.radiusUnits)) {
     throw new TypeError('Prepared sky identity or frame is invalid.');
   }
-  if (!Array.isArray(sky.faces) || sky.faces.length !== 6) throw new TypeError('Prepared sky needs six cube faces.');
   if ('parallax' in sky) validatePreparedSkyParallax(sky.parallax);
+  // Baked stars come as a second complete cube beside the plain one, never instead of it.
+  if (('nearFaces' in sky) !== ('stars' in sky)) throw new TypeError('Prepared sky stars and their near faces come together.');
+  if ('stars' in sky) {
+    const stars = record(sky.stars, ['objectId', 'cssPixelsPerDegree'], 'sky stars');
+    if (typeof stars.objectId !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(stars.objectId) || !positive(stars.cssPixelsPerDegree)) throw new TypeError('Prepared sky stars metadata is invalid.');
+  }
+  validateSkyFaces(sky.faces, resources);
+  if ('nearFaces' in sky) validateSkyFaces(sky.nearFaces, resources);
+  return sky as unknown as PreparedCssSky;
+}
+
+function validateSkyFaces(faces: unknown, resources: PreparedCssVolume['resources']) {
+  if (!Array.isArray(faces) || faces.length !== 6) throw new TypeError('Prepared sky needs six cube faces.');
   const ids = new Set<string>();
-  for (const inputFace of sky.faces) {
+  for (const inputFace of faces) {
     const face = record(inputFace, ['id', 'texturePath', 'widthPx', 'heightPx', 'forwardIcrf', 'rightIcrf', 'upIcrf', 'style'], 'sky face', ['boundsCssPixels']);
     if (face.boundsCssPixels !== undefined) validatePreparedLeafBounds(face.boundsCssPixels);
     if (typeof face.id !== 'string' || !FACE_IDS.includes(face.id) || ids.has(face.id) || !imagePath(face.texturePath) ||
@@ -34,7 +46,6 @@ export function validatePreparedCssSky(input: unknown, resources: PreparedCssVol
     if (!dimensions(style.width, 1, true) || !dimensions(style.height, 1, true) || !dimensions(style.backgroundSize, 2, true) ||
         !dimensions(style.backgroundPosition, 2, false) || !matrix(style.transform)) throw new TypeError('Prepared sky styles must be numeric compiled CSS.');
   }
-  return sky as unknown as PreparedCssSky;
 }
 
 export function validatePreparedSkyParallax(input: unknown): NonNullable<PreparedCssSky['parallax']> {

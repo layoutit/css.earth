@@ -8,6 +8,7 @@ import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { OBJECTS } from '../objects.mts';
+import { browserObjects } from './browser-objects.mts';
 
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const output = 'output/playwright/navigation-resources';
@@ -20,15 +21,16 @@ try {
     page.on('pageerror', error => errors.push(error.message));
     // Every registered body exercises the preflight address resolver against
     // its real mounted camera, including default, rotated and coarse views.
-    for (const object of OBJECTS) {
+    for (const object of browserObjects()) {
       await page.goto(`${origin}/${object.id}/`);
       await page.waitForFunction(id => window.__cssEarth?.ready && window.__cssEarth?.object(id)?.ready, object.id);
       const checks = await page.evaluate(async ({ id, frame }) => {
         const testingUrl='/src/renderers/css/dist/testing.js',rendererUrl='/src/renderers/css/dist/index.js';
         const { createObjectViewDemand, resolvePreparedPresentation, initialObjectSelection }:typeof import('../../src/renderers/css/dist/testing.js') = await import(testingUrl);
-        const {parsePreparedObjectRuntime}:typeof import('../../src/renderers/css/dist/index.js')=await import(rendererUrl);
-        const payload:unknown=await (await fetch(`/src/planets/${id}/prepared/object.json`)).json();
-        const definition = parsePreparedObjectRuntime(window.__cssearthTest.record(payload,'prepared object').data);
+        const {loadPreparedCssObject}:typeof import('../../src/renderers/css/dist/index.js')=await import(rendererUrl);
+        // The transport references shared banks; load it the way the application does.
+        const descriptor:unknown=await (await fetch(`/src/planets/${id}/object.json`)).json();
+        const definition = await loadPreparedCssObject(descriptor, { read: async url => (await fetch(`/src/planets/${id}/${url}`)).arrayBuffer(), sharedUrl: '/shared' });
         const demand = createObjectViewDemand(definition, window.__cssearthTest.required(frame,"world frame")), owner = window.__cssearthTest.object(id);
         const checks = [];
         for (const [pitch, yaw, scale] of [[0, 0, 1], [47, 123, 1], [-76, -215, .001]]) {
@@ -78,9 +80,9 @@ try {
       await page.waitForFunction(id => window.__cssEarth?.ready && window.__cssearthTest.scene().activeObjectId === id, id);
       const preparation = await page.evaluate(async id => {
         const rendererUrl="/src/renderers/css/dist/index.js";
-        const {parsePreparedObjectRuntime}:typeof import("../../src/renderers/css/dist/index.js")=await import(rendererUrl);
-        const payload:unknown=await (await fetch(`/src/planets/${id}/prepared/object.json`)).json();
-        const definition = parsePreparedObjectRuntime(window.__cssearthTest.record(payload,'prepared object').data);
+        const {loadPreparedCssObject}:typeof import("../../src/renderers/css/dist/index.js")=await import(rendererUrl);
+        const descriptor:unknown=await (await fetch(`/src/planets/${id}/object.json`)).json();
+        const definition = await loadPreparedCssObject(descriptor, { read: async url => (await fetch(`/src/planets/${id}/${url}`)).arrayBuffer(), sharedUrl: '/shared' });
         const handoff = window.__cssearthTest.required(performance.getEntriesByType('mark').findLast(entry => entry.name.endsWith(':handoff')),'handoff mark').startTime;
         const material=window.__cssearthTest.required(window.__firstMaterial,"first material");
         return { handoff, pools: material.pools,

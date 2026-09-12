@@ -52,7 +52,10 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).hr
  if(args[0]==='--list'){
   console.log(steps.map((step,index)=>`${index+1}. ${step.name}\n${step.run.trim()}`).join('\n\n'));
  }else{
-  if(Number(process.versions.node.split('.')[0])!==22)throw new Error('Use Node 22 to match the CI runner.');
+  // The workflow pins Node 22; the checkout's engines range is what contributors have.
+  const major=Number(process.versions.node.split('.')[0]);
+  if(major<22)throw new Error('Use Node 22.18+ or Node 24 (the CI runner uses Node 22).');
+  if(major!==22)console.log(`NODE ${process.versions.node}: the CI runner uses Node 22; results may differ.`);
   const temporary=await mkdtemp(join(tmpdir(),'cssearth-ci-'));
   try{await runCiSteps(steps,root,temporary);}finally{await rm(temporary,{recursive:true,force:true});}
  }

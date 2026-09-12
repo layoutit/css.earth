@@ -319,7 +319,7 @@ Source entry points in this working tree:
 - [Prepared point field](../../src/renderers/css/stars/prepared-point-field-runtime.ts)
   and [opacity fader](../../src/renderers/css/stars/opacity-fader.ts).
 - [Retained leaf pool](../../src/renderers/css/rendering/retained-leaf-pool.ts).
-- [Existing overview image-bank results](world-context-image-bank.md).
+- Existing overview image-bank results were recorded in local run output, not in a tracked guide.
 
 ## 5. Concrete implementation order and proof
 

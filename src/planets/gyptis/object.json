@@ -89,15 +89,15 @@
         96976475872.63539
       ],
       "presentationToReference": [
-        4.274878420368333e-05,
+        0.00004274878420368333,
         2.7755575615628914e-17,
         -0.9999999990862705,
         0.9174820612308517,
         0.39777715593191365,
-        3.922124268213034e-05,
+        0.00003922124268213034,
         0.39777715556845306,
         -0.9174820620691817,
-        1.7004489800021005e-05
+        0.000017004489800021005
       ],
       "orbitUpReference": [
         -2.7755575615628914e-17,
@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f8ea11a9f879a3c10b6e163453f62b8362c556d8761ee859662451959baad73a"
+        "sha256": "b7eb8900a76affd57cfec9213134908f51ab74a137ded48f1f05f4073be0e789"
       }
     },
     "catalog": {
@@ -132,8 +132,8 @@
   "schema": "cssearth-object@1",
   "type": "layered-body",
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "7c3b3cfbcf18d66b135623aecb28e92edbe5d5efc1b00004534cd9a2f54f4a65"
+    "sha256": "c20e36a58f0e3549ad989b4245de860f9df18514a1d3e9799c36c293c5c897b2"
   }
 }

@@ -107,10 +107,10 @@ smooth. No visual simplification was used to obtain these measurements.
 
 All three final capture components are retained together:
 
-- [Before flight unification](../../output/playwright/navigation-consistency/point-worker-navigation/): recorder `67c8adaf-4922-442a-a65f-713686af60b8`, trace `7314eab5`, 1,880 timestamped video frames.
-- [Final six-flight navigation](../../output/playwright/navigation-consistency/unified-flight-navigation/): recorder `f27a87f1-1063-4d77-a972-cb9e1d385ab3`, trace `d34c95e5`, 1,814 timestamped video frames.
-- [Final galaxy round trips](../../output/playwright/navigation-consistency/unified-flight-galaxy/): recorder `8abb07de-a636-4586-a03e-5509afe519c9`, trace `a884514b`, 408 timestamped video frames.
-- [Comparison chart](../../output/performance/point-frame-publication/comparison.png), [chart source](../../output/performance/point-frame-publication/chart.py), and [machine-readable measurements](../../output/performance/point-frame-publication/comparison.json).
+- Before flight unification (`output/playwright/navigation-consistency/point-worker-navigation/`, local run output, not tracked): recorder `67c8adaf-4922-442a-a65f-713686af60b8`, trace `7314eab5`, 1,880 timestamped video frames.
+- Final six-flight navigation (`output/playwright/navigation-consistency/unified-flight-navigation/`, local run output, not tracked): recorder `f27a87f1-1063-4d77-a972-cb9e1d385ab3`, trace `d34c95e5`, 1,814 timestamped video frames.
+- Final galaxy round trips (`output/playwright/navigation-consistency/unified-flight-galaxy/`, local run output, not tracked): recorder `8abb07de-a636-4586-a03e-5509afe519c9`, trace `a884514b`, 408 timestamped video frames.
+- Comparison chart (`output/performance/point-frame-publication/comparison.png`, local run output, not tracked), chart source (`output/performance/point-frame-publication/chart.py`, local run output, not tracked), and machine-readable measurements (`output/performance/point-frame-publication/comparison.json`, local run output, not tracked).
 
 Final navigation clock drift is 64 microseconds, and maximum video PTS error is
 0.903 ms. Galaxy drift is 74 microseconds with 0.199 ms maximum video PTS error.

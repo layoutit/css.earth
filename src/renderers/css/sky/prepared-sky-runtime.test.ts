@@ -61,7 +61,7 @@ test('retains exactly six prepared images and changes only shared camera present
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.appendChild(before);
   const payload = fixture(), resolveResource = vi.fn((path: string) => `/prepared/${path}`);
   const runtime = mountPreparedCssSky({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload, resources, resolveResource });
-  const root = runtime.root as unknown as FakeElement, camera = root.children[0]!, scene = camera.children[0]!, leaves = [...scene.children];
+  const root = runtime.root as unknown as FakeElement, camera = root.children[0]!.children[0]!, scene = camera.children[0]!, leaves = [...scene.children];
   const count = document.count, styles = leaves.map(leaf => ({ ...leaf.style }));
   expect(leaves.map(leaf => leaf.dataset.skyFace)).toEqual(bases.map(([id]) => id));
   runtime.publish(world(), viewport); const initial = scene.style.transform;
@@ -216,3 +216,25 @@ function completedPixel(host: FakeElement, image: FakeElement, sky: FakeElement 
   const underlay = sky?.style.visibility === 'visible' ? skyValue * Number(sky.style.opacity || '1') : 0;
   return t * g * volumeValue + (1 - foregroundAlpha) * underlay;
 }
+
+test('a near cube with baked stars crossfades over the far cube and only a contributing cube paints', () => {
+  const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.appendChild(before);
+  const nearFaces = fixture().faces.map(face => ({ ...face, texturePath: `sky-near/${face.id}.webp` }));
+  const payload: PreparedCssSky = { ...fixture(), nearFaces, stars: { objectId: 'stellar-neighbourhood', cssPixelsPerDegree: 21.8 } };
+  const nearResources = [...resources, ...nearFaces.map(face => ({ path: face.texturePath, width: face.widthPx, height: face.heightPx, bytes: 100, sha256: 'b'.repeat(64) }))];
+  const { stars: _stars, ...withoutStars } = payload;
+  expect(() => validatePreparedCssSky(withoutStars, nearResources)).toThrow('come together');
+  const runtime = mountPreparedCssSky({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload, resources: nearResources, resolveResource: path => `/prepared/${path}` });
+  const root = runtime.root as unknown as FakeElement, [far, near] = root.children as [FakeElement, FakeElement];
+  const scene = (cube: FakeElement) => cube.children[0]!.children[0]!;
+  expect(scene(near).children.map(leaf => leaf.dataset.skyFace)).toEqual(bases.map(([id]) => id));
+  expect(scene(near).children.map(leaf => leaf.style.backgroundImage)).toEqual(bases.map(([id]) => `url("/prepared/sky-near/${id}.webp")`));
+  runtime.publish(world(), viewport, true, 1);
+  expect(far.style.visibility).toBe('hidden'); expect(near.style.visibility ?? '').toBe(''); expect(near.style.opacity ?? '').toBe('');
+  runtime.publish(world(), viewport, true, .25);
+  expect(far.style.visibility).toBe(''); expect(near.style.opacity).toBe('0.25');
+  runtime.publish(world([0, 0, 0], [0, Math.SQRT1_2, 0, Math.SQRT1_2]), viewport, true, 0);
+  expect(near.style.visibility).toBe('hidden'); expect(far.style.visibility).toBe('');
+  expect(scene(near).style.transform).toBe(scene(far).style.transform);
+  expect(near.children[0]!.style.perspectiveOrigin).toBe(far.children[0]!.style.perspectiveOrigin);
+});

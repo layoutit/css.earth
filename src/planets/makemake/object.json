@@ -3,9 +3,9 @@
   "id": "makemake",
   "type": "layered-body",
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "011a4100a6401ed78cbda01da370a8902ac0c56798b5db0522912243a750f45b"
+    "sha256": "edb8b842d75d97c56d2cdb7695e29849ae401331b8d6d57b6d0952a5b1b6bba8"
   },
   "properties": {
     "preparation": {
@@ -139,7 +139,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f2f59213f867631ce7d371fab8916a0f3777c1e31f6c593170acddaffe44b8d7"
+        "sha256": "26aea367ef95bfa8c076bb35e048edfcd235d24ba109b20b2bf92889876ae0a6"
       }
     },
     "catalog": {

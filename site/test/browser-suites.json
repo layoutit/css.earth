@@ -1,0 +1,194 @@
+{
+  "all-object-world-browser.mts": {
+    "expect": "fail",
+    "reason": "startup asset decode timing changed with the proxy-first mount (#136)"
+  },
+  "dataset-navigation-browser.mts": {
+    "expect": "pass"
+  },
+  "dom-cleanliness-browser.mts": {
+    "expect": "pass"
+  },
+  "explorer-rail-browser.mts": {
+    "expect": "fail",
+    "reason": "classification tag has no bounding box on the sampled routes"
+  },
+  "flight-activation-browser.mts": {
+    "expect": "fail",
+    "reason": "navigation overlays no longer fade during flight as asserted"
+  },
+  "flight-registry-browser.mts": {
+    "expect": "fail",
+    "reason": "overlay owner not restored after a deedee flight"
+  },
+  "galaxy-handoff-browser.mts": {
+    "expect": "fail",
+    "reason": "final correction is not reported as precision input"
+  },
+  "interaction-chain-browser.mts": {
+    "expect": "fail",
+    "reason": "report.failure after the chained interactions"
+  },
+  "lazy-surface-preview-browser.mts": {
+    "expect": "pass"
+  },
+  "natural-navigation-browser.mts": {
+    "expect": "pass"
+  },
+  "navigation-browser.mts": {
+    "expect": "fail",
+    "reason": "a navigation control never became clickable (30 s)"
+  },
+  "navigation-capacity-browser.mts": {
+    "expect": "fail",
+    "reason": "flight samples report more than one mounted scene"
+  },
+  "navigation-content-browser.mts": {
+    "expect": "pass"
+  },
+  "navigation-departure-browser.mts": {
+    "expect": "fail",
+    "reason": "a navigation control never became clickable (30 s)"
+  },
+  "navigation-picking-browser.mts": {
+    "expect": "fail",
+    "reason": "wide-view body reported physically tiny"
+  },
+  "navigation-production-browser.mts": {
+    "expect": "fail",
+    "reason": "a navigation control never became clickable (30 s)"
+  },
+  "navigation-quality-browser.mts": {
+    "expect": "fail",
+    "reason": "a navigation control never became clickable (30 s)"
+  },
+  "navigation-resource-browser.mts": {
+    "expect": "fail",
+    "reason": "Mercury DPR 1 material bank differs from the expected view"
+  },
+  "navigation-selection-browser.mts": {
+    "expect": "pass"
+  },
+  "navigation-stress-browser.mts": {
+    "expect": "fail",
+    "reason": "report.failure during the stress walk"
+  },
+  "navigation-visibility-browser.mts": {
+    "expect": "fail",
+    "reason": "cold startup no longer stays hidden until the first native scene (proxy-first mount)"
+  },
+  "object-navigation-browser.mts": {
+    "expect": "pass"
+  },
+  "overview-selection-browser.mts": {
+    "expect": "fail",
+    "reason": "Solar System card title empty when expected"
+  },
+  "point-field-worker-browser.mts": {
+    "expect": "pass"
+  },
+  "prepared-bindings-browser.mts": {
+    "expect": "fail",
+    "reason": "comet-17p DPR 2 native backface rendering differs by 127 pixels"
+  },
+  "prepared-depth-browser.mts": {
+    "expect": "fail",
+    "reason": "report.failure in the depth walk"
+  },
+  "prepared-depth-visual-browser.mts": {
+    "expect": "fail",
+    "reason": "compares two builds; needs REFERENCE_ORIGIN and ORIGIN servers"
+  },
+  "prepared-worker-browser.mts": {
+    "expect": "pass"
+  },
+  "prepared-worker-production-browser.mts": {
+    "expect": "fail",
+    "reason": "needs a production build; starts astro preview itself"
+  },
+  "prepared-world-navigation-browser.mts": {
+    "expect": "fail",
+    "reason": "no visible marker for the target found in the vault"
+  },
+  "projective-surface-browser.mts": {
+    "expect": "fail",
+    "reason": "readiness wait timed out (30 s)"
+  },
+  "replacement-flight-browser.mts": {
+    "expect": "fail",
+    "reason": "needs a production build (dist/_astro); run pnpm build first"
+  },
+  "retained-leaf-pool-browser.mts": {
+    "expect": "fail",
+    "reason": "no orbit hit corridor available"
+  },
+  "runtime-bfcache-browser.mts": {
+    "expect": "pass"
+  },
+  "runtime-complex-browser.mts": {
+    "expect": "fail",
+    "reason": "assertion in the complex runtime cases"
+  },
+  "runtime-playback-browser.mts": {
+    "expect": "fail",
+    "reason": "assertion in the playback case"
+  },
+  "scene-label-navigation-browser.mts": {
+    "expect": "fail",
+    "reason": "a scene label never appeared (30 s)"
+  },
+  "seo-browser.mts": {
+    "expect": "fail",
+    "reason": "the DeeDee page renders an empty h1 (object name expected)"
+  },
+  "shared-camera-viewport-browser.mts": {
+    "expect": "pass"
+  },
+  "shell-layout-browser.mts": {
+    "expect": "fail",
+    "reason": "expects .planet-viewport, the stage is now .planet-world-stage"
+  },
+  "shell-surface-browser.mts": {
+    "expect": "fail",
+    "reason": "lens details are sections now, the suite expects a <details> element"
+  },
+  "sky-contrast-browser.mts": {
+    "expect": "fail",
+    "reason": "readiness wait timed out (30 s)"
+  },
+  "surface-destination-browser.mts": {
+    "expect": "fail",
+    "reason": "needs the Earth city assets (public/scenes/earth/earth-places.json), not part of setup:assets"
+  },
+  "typescript-owners-browser.mts": {
+    "expect": "pass"
+  },
+  "unified-universe-browser.mts": {
+    "expect": "fail",
+    "reason": "retained node count 2948, expected 1368"
+  },
+  "universe-browser.mts": {
+    "expect": "fail",
+    "reason": "not all prepared volume leaves become ready"
+  },
+  "universe-environments-browser.mts": {
+    "expect": "fail",
+    "reason": ".prepared-surface-shell not observed"
+  },
+  "universe-labels-browser.mts": {
+    "expect": "fail",
+    "reason": "no sun label in the system snapshot"
+  },
+  "view-url-browser.mts": {
+    "expect": "fail",
+    "reason": ".mercury-directional-sun not observed after load"
+  },
+  "volume-culling-browser.mts": {
+    "expect": "fail",
+    "reason": "readiness wait timed out (30 s)"
+  },
+  "world-camera-browser.mts": {
+    "expect": "fail",
+    "reason": "body centre missing until a world camera is applied (proxy-first mount)"
+  }
+}

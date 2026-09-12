@@ -10,17 +10,38 @@ export const MOBILE_TOUCH_ACTION = "none";
 export { CANONICAL_PREPARED_IMAGE_DENSITY } from "../src/renderers/css/rendering/prepared-object-assets.ts";
 export const SKYBOX_DRAG_ENABLED = true;
 export const CENTER_SELECTION_DURATION_SECONDS = 0.35;
-export const WHEEL_ZOOM_SPEED_MULTIPLIER = 4;
+// The traced reference response is one interval of travel per 100 delta units,
+// so a multiplier of 1 puts a device on that reference. A trackpad reports the
+// scroll distance a wheel notch stands for, in the same delta units, and needs
+// no correction: a 100-unit swipe and one notch should travel the same way.
+export const WHEEL_ZOOM_SPEED_MULTIPLIER = 1;
 export const WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER = 1;
 export const WHEEL_ZOOM_USE_SCROLL_DISTANCE = true;
 // A released wheel gesture keeps the rate it commanded and decays it, as a
 // thrown drag does. Damping is shorter than the trackball's: the wheel drives
 // distance directly, so a glide outliving its gesture reads as drift.
+//
+// The decay is applied per frame, so `dampingSeconds` is a time constant: the
+// glide travels `dampingSeconds * (1 - stopRateRatio)` seconds at its released
+// rate, against a commanded interval of PREPARED_WHEEL_ZOOM.intervalMilliseconds.
+// At 0.088 s that coast is a third of the gesture; a longer one doubles it.
 export const WHEEL_ZOOM_INERTIA = Object.freeze({
-  dampingSeconds: 0.25,
-  stopRateRatio: 0.12,
+  dampingSeconds: 0.088,
+  // Where the coast ends. An eye reads distance change per frame, so the floor is
+  // absolute: a third of a percent per 60 Hz frame, about three pixels across a
+  // thousand-pixel orbit, which is where a stop stops reading as a snap. A share
+  // of the released rate would instead snap hardest on the strongest gestures.
+  // At the damping above this adds about a fifteenth of the commanded interval to
+  // the coast's travel; the ratio is only a bound for an extreme fling.
+  stopLogRatePerSecond: 0.2,
+  stopRateRatio: 0.02,
   gain: 1,
 });
+// A precision pointer scrolls with the platform's own momentum, which keeps
+// delivering wheel events long after the fingers lift. Gliding those again
+// would compound two decays, so only discrete wheels, which stop when the
+// notches stop, are released into the glide above.
+export const WHEEL_ZOOM_INERTIA_INPUT_KINDS = Object.freeze(["wheel"] as const);
 
 // Phones present information in a bottom sheet over the scene. Snap heights
 // live in shell-layout.css; these values shape the drag between them.

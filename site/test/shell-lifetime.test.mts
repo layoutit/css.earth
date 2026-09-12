@@ -63,7 +63,7 @@ interface VisibilityObserver { observed: globalThis.Element[]; disconnected: boo
 class FixtureWindow extends Element {
   Event = Event;
   CustomEvent = CustomEvent;
-  HTMLElement = Element; HTMLButtonElement = Element; HTMLInputElement = Element; HTMLDetailsElement = Element; HTMLLIElement = Element;
+  HTMLElement = Element; HTMLButtonElement = Element; HTMLInputElement = Element; HTMLSelectElement = Element; HTMLDetailsElement = Element; HTMLLIElement = Element;
   performance = { now: () => 0 };
   localStorage = { getItem: (_key?: string): string | null => null };
   setTimeout: (callback: () => void, delay?: number) => number = () => { throw new Error('Timer fixture is not installed.'); };
@@ -83,7 +83,7 @@ function fixture(options: Partial<ShellOptions> = {}) {
     ".planet-information-panel", ".planet-object-browser", ".planet-object-empty",
     ".planet-sheet-handle", ".planet-settings-panel", ".planet-settings-action",
     ".explorer-rail-explore", ".explorer-rail-about", ".explorer-about-panel",
-    ".planet-motion-setting", ".planet-sky-contrast-setting", ".planet-heliosphere-setting", ".planet-asteroid-bodies-setting", ".planet-asteroid-orbits-setting", ".planet-asteroid-labels-setting"]) {
+    ".planet-motion-setting", ".planet-sky-contrast-setting", ".planet-heliosphere-setting", ".planet-asteroid-bodies-setting", ".planet-asteroid-orbits-setting", ".planet-asteroid-labels-setting", ".planet-orbit-renderer-setting"]) {
     const element = new Element();
     selectors.set(selector, element); elements.push(element);
   }
@@ -113,7 +113,7 @@ function fixture(options: Partial<ShellOptions> = {}) {
   };
   const windowTarget = new FixtureWindow();
   windowTarget.Event = Event;
-  for (const name of ["HTMLElement", "HTMLButtonElement", "HTMLInputElement", "HTMLDetailsElement", "HTMLLIElement"] as const)
+  for (const name of ["HTMLElement", "HTMLButtonElement", "HTMLInputElement", "HTMLSelectElement", "HTMLDetailsElement", "HTMLLIElement"] as const)
     windowTarget[name] = Element;
   const frames = new Map<number, FrameRequestCallback>(), timers = new Map<number, () => void>();
   windowTarget.performance = { now: () => 0 };
