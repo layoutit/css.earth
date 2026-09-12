@@ -1,13 +1,12 @@
-import type {RasterImage} from './objects/static-surface/contracts.mts';
+import type {RasterImage} from './objects/observation/raster.mts';
 import type {SurfacePreviewDirectories} from './surface-preview-source.mts';
-import {optionalPreviewJson as optionalJson,parsePreviewControls,parseEmissionPreview,parsePolarPreview,parseObservedPreview,parseSpectralPreview,parseGeometryPreview} from './surface-preview-source.mts';
+import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePolarPreview,parseObservedPreview,parseSpectralPreview,parseGeometryPreview} from './surface-preview-source.mts';
 import {parsePagedProfile} from './objects/paged-ellipsoid/profile-source.mts';
 import {requireRecord} from './source-values.mts';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
 import { createProjectiveSurfaceRasterLayout } from '../src/platform/projective-surface-raster.mts';
-import { orientLatitudeBands } from './objects/static-surface/projection.mts';
 import { latitudeRasterBands } from './objects/giant-layers/geometry.mts';
 import { preparePagedSurfaceMap } from './objects/paged-ellipsoid/assets.mts';
 
@@ -37,8 +36,8 @@ export function assertSurfacePreviewCoverage(controls:readonly {id:string}[], im
 /** Small previews for preparation recipes that do not publish surfaces.json. */
 export async function* recipeSurfacePreviews({ objectDirectory, publicDirectory, outputDirectory }:SurfacePreviewDirectories) {
   const config = (name:string) => optionalJson(resolve(objectDirectory, 'source/preparation', `${name}.json`));
-  const [rawRaster, rawObservations, rawPaged, rawSpectral, rawGeometry, rawLenses] = await Promise.all([
-    ...['raster', 'observations', 'paged-ellipsoid', 'surface', 'geometry'].map(config),
+  const [rawObservations, rawPaged, rawSpectral, rawGeometry, rawLenses] = await Promise.all([
+    ...['observations', 'paged-ellipsoid', 'surface', 'geometry'].map(config),
     optionalJson(resolve(outputDirectory, 'lenses.json')),
   ]);
   // One-channel grayscale maps are expanded to sRGB before the RGBA unpacking.
@@ -47,14 +46,6 @@ export async function* recipeSurfacePreviews({ objectDirectory, publicDirectory,
     return (channels < 3 ? image.toColourspace('srgb') : image).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
   };
   const packed = async (file:string, layout:Parameters<typeof createProjectiveSurfaceRasterLayout>[0]) => unpackSurfacePreview(await read(file), layout);
-  if (rawRaster?.kind === 'synoptic-emission') {
-    const raster=parseEmissionPreview(rawRaster);
-    for (const variant of raster.variants) {
-      const image = await read(`${raster.namespace}-surface-${variant.id}@2x.webp`);
-      if (image.info.width !== raster.mapWidth * 2 || image.info.height !== raster.mapHeight * 2) throw new Error('Emission preview dimensions drifted.');
-      yield { id: variant.id, raster: { ...image, data: orientLatitudeBands(image.data, { ...image.info, bandCount: raster.latitudeSegments }) } };
-    }
-  }
   if (rawObservations?.schema === 'cssearth-observed-polar-surfaces@1') {
     const observations=parsePolarPreview(rawObservations);
     const width = observations.dimensions.width * 2, height = observations.dimensions.height * 2;

@@ -58,7 +58,8 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
   const variants: PreparedVariant[]=[];
   const atmospheres: (boolean|null)[]=atmospheric?[false,true]:[null];
   for(const lens of lenses.controls)for(const atmosphere of atmospheres)for(const stars of [false,true])for(const shadows of [false,true]){
-    variants.push({when:{lensId:lens.id,...(atmosphere===null?{}:{atmosphere}),stars,shadows},required:required(lens.id),writes:[
+    const focus=input.lensFocus?.[lens.id];
+    variants.push({...(focus?{navigation:adapters.prepareLensNavigation(solarSystemSource.bodyId,focus,plan.camera)}:{}),when:{lensId:lens.id,...(atmosphere===null?{}:{atmosphere}),stars,shadows},required:required(lens.id),writes:[
       {kind:"attribute",target:-1,name:"data-lens",value:lens.id},{kind:"attribute",target:-1,name:"data-view",value:null},
       ...(atmosphere===null?[]:[{kind:"class",target:-1,name:`${ns}-hide-atmosphere`,value:!atmosphere} as PreparedWrite]),
       {kind:"class",target:-1,name:`${ns}-hide-stars`,value:!stars},

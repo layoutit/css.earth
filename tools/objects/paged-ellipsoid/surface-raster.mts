@@ -1,6 +1,6 @@
 import { isArray } from '../../../src/platform/is-array.mts';
 import type {ProjectiveGeometry} from '../../../src/platform/projective-surface-raster.mts';
-import type {RasterInfo} from '../static-surface/contracts.mts';
+import type {RasterInfo} from '../observation/raster.mts';
 export interface PagedRasterConfiguration {publicBase: string; atlas: {density: number; gutter: number; pageSize: number; sourceWidth: number};}
 export interface PagedSurfacePresentation {packedRect: {x: number; y: number; width: number; height: number}; overscan: number;
   layout: {gutter: number; bands: readonly {y: number; height: number; packedY: number}[]};}

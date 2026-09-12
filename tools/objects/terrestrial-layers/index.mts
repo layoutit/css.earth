@@ -2,6 +2,7 @@ import { validateObjUvFits } from './obj-uv-fits.mts';
 import { validateTerrestrialRings } from './rings.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
 import {parseSolidPreparationSource} from './profile-source.mts';
+import type {parseSolidScience} from './solid-source.mts';
 import {requireRecord,requireFiniteNumber,requireString} from '../../source-values.mts';
 import type {prepareObjectContentAssets} from '../content/prepare.ts';
 import {validatePreparedCubicSky} from '../../../src/platform/cubic-sky-contract.mts';
@@ -36,6 +37,20 @@ import { validateRadialTableProfile } from './pds-radial-table.mts';
 import { validateFitsObservationPolicy } from './observed-fits.mts';
 import { validateGeoSurfaceRecipe } from './observed-geo-surface.mts';
 import { validateFacetFieldRecipe } from './fits-facet-field.mts';
+
+/** A categorical grid is discrete units in a nearest-sampled GeoTIFF with its missing value kept apart from the unit codes;
+ * both the radial-terrain lane and the generic-lane interpreter apply the same rule. */
+export function validateCategoricalGrid(lens: ReturnType<typeof parseSolidScience>) {
+  if (lens.categories && (lens.format !== 'geotiff' || lens.sampling !== 'nearest' ||
+    lens.relief || lens.valueTransform || !isArray(lens.categories) || lens.categories.length < 2 ||
+    lens.minimum !== 0 || lens.maximum !== lens.categories.length - 1 ||
+    lens.categories.some(category => typeof category.value !== 'string' || !category.value ||
+      typeof category.label !== 'string' || !category.label || !/^#[0-9a-f]{6}$/i.test(category.color)) ||
+    new Set(lens.categories.map(category => category.value)).size !== lens.categories.length ||
+    !lens.grid || typeof lens.grid.noData !== 'number' || !Number.isFinite(lens.grid.noData) || lens.grid.noData >= 0 && lens.grid.noData < lens.categories.length)) {
+    throw new TypeError('Categorical scientific grids require discrete units, nearest sampling and separate missing data.');
+  }
+}
 
 export function parseTerrestrialProfile(input:unknown) {
   const header=requireRecord(input);
@@ -76,15 +91,7 @@ export function parseTerrestrialProfile(input:unknown) {
     if (![undefined, 'nearest'].includes(lens.displaySampling)) throw new TypeError('Scientific display sampling must preserve cells with nearest or use the existing default.');
     if (lens.format === 'geologic-shapefile') {validateGeologyProfile(lens); continue;}
     if (lens.format === 'vtk-cell-categories') {validateVtkCategories(lens, value.geometry.radialTerrain); continue;}
-    if (lens.categories && (lens.format !== 'geotiff' || lens.sampling !== 'nearest' ||
-        lens.relief || lens.valueTransform || !isArray(lens.categories) || lens.categories.length < 2 ||
-        lens.minimum !== 0 || lens.maximum !== lens.categories.length - 1 ||
-        lens.categories.some(category => typeof category.value !== 'string' || !category.value ||
-          typeof category.label !== 'string' || !category.label || !/^#[0-9a-f]{6}$/i.test(category.color)) ||
-        new Set(lens.categories.map(category => category.value)).size !== lens.categories.length ||
-        !lens.grid || typeof lens.grid.noData !== 'number' || !Number.isFinite(lens.grid.noData) || lens.grid.noData >= 0 && lens.grid.noData < lens.categories.length)) {
-      throw new TypeError('Categorical scientific grids require discrete units, nearest sampling and separate missing data.');
-    }
+    validateCategoricalGrid(lens);
     const facetTable = lens.format === 'facet-scalars';
     const meshGrid = ['image-plane-dem', 'stl', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(lens.format);
     const tableGrid = lens.format === 'pds-radial-table';

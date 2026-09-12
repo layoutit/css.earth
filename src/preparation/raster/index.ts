@@ -24,7 +24,7 @@ export async function prepareRasterAssets({ sourceDirectory, publicDirectory, ou
     const lighting = config.lighting ? await prepareLighting(config, config.lighting, publicDirectory) : undefined;
     const atmosphere = config.atmosphere ? await prepareAtmosphere(config, config.atmosphere, sourceDirectory, publicDirectory) : undefined;
     const interior = config.interior ? await prepareInterior(config, config.interior, sourceDirectory, publicDirectory) : undefined;
-    const surfaces = Object.fromEntries(config.surfaces.map(surface => [surface.id, { id: surface.id, falseColor: surface.falseColor, url: config.publicBase + outputName(surface.output, 1, surface.id), url2x: config.publicBase + outputName(surface.output, 2, surface.id), ...(config.surfaceMetadata.sourcePositionVariable ? { sourcePositionVariable: config.surfaceMetadata.sourcePositionVariable } : {}), ...(metadata[surface.id] ? { coverageCompletion: metadata[surface.id] } : {}) }]));
+    const surfaces = Object.fromEntries(config.surfaces.map(surface => [surface.id, { id: surface.id, falseColor: surface.falseColor, url: config.publicBase + outputName(surface.output, 1, surface.id), url2x: config.publicBase + outputName(surface.output, 2, surface.id), ...(config.emission ? { coronaUrl: config.publicBase + outputName(config.emission.offLimbOutput, 1, surface.id), coronaUrl2x: config.publicBase + outputName(config.emission.offLimbOutput, 2, surface.id), limbUrl: config.publicBase + outputName(config.emission.limbOutput, 1, surface.id), limbUrl2x: config.publicBase + outputName(config.emission.limbOutput, 2, surface.id) } : {}), ...(config.surfaceMetadata.sourcePositionVariable ? { sourcePositionVariable: config.surfaceMetadata.sourcePositionVariable } : {}), ...(metadata[surface.id] ? { coverageCompletion: metadata[surface.id] } : {}) }]));
     const files = new Set<string>();
     for (const surface of config.surfaces) {
         files.add(outputName(surface.thumbnail, 1, surface.id));
@@ -32,6 +32,9 @@ export async function prepareRasterAssets({ sourceDirectory, publicDirectory, ou
             files.add(outputName(surface.output, density, surface.id));
             if (!config.polesCombined)
                 files.add(outputName(config.polesOutput, density, surface.id));
+            if (config.emission)
+                for (const template of [config.emission.offLimbOutput, config.emission.limbOutput])
+                    files.add(outputName(template, density, surface.id));
         }
     }
     for (const density of config.densities) {
@@ -50,7 +53,7 @@ export async function prepareRasterAssets({ sourceDirectory, publicDirectory, ou
     if (config.interior)
         files.add(outputName(config.interior.thumbnail));
     const hashes = Object.fromEntries(await Promise.all([...files].map(async (file) => [file, await hashFile(resolve(publicDirectory, file))])));
-    const prepared = { schema: config.surfaceMetadata.schema, sourceDimensions: { width: config.sourceWidth, height: config.sourceHeight }, surfaceDimensions: { width: config.width, height: config.height }, surfaces, ...(config.polesCombined ? { poles: { url: config.publicBase + outputName(config.polesOutput), url2x: config.publicBase + outputName(config.polesOutput, 2), tileSize: config.polarTile, tileCount: config.surfaces.length * 2, order: config.surfaces.flatMap(({ id }) => [`${id}-north`, `${id}-south`]) } } : {}), ...(lighting ? { lighting } : {}), ...(atmosphere ? { atmosphere } : {}), ...(interior ? { interior } : {}), hashes };
+    const prepared = { schema: config.surfaceMetadata.schema, ...(config.emission ? { emission: { ...config.emission.metadata, offLimbSize: config.emission.offLimbSize, limbSize: config.emission.limbSize, bodyDiameter: config.emission.bodyDiameter } } : {}), sourceDimensions: { width: config.sourceWidth, height: config.sourceHeight }, surfaceDimensions: { width: config.width, height: config.height }, surfaces, ...(config.polesCombined ? { poles: { url: config.publicBase + outputName(config.polesOutput), url2x: config.publicBase + outputName(config.polesOutput, 2), tileSize: config.polarTile, tileCount: config.surfaces.length * 2, order: config.surfaces.flatMap(({ id }) => [`${id}-north`, `${id}-south`]) } } : {}), ...(lighting ? { lighting } : {}), ...(atmosphere ? { atmosphere } : {}), ...(interior ? { interior } : {}), hashes };
     await writeFile(resolve(outputDirectory, 'assets.json'), JSON.stringify(prepared) + '\n');
     return prepared;
 }

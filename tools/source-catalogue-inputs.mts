@@ -22,7 +22,9 @@ export function sourceInventory(manifest: unknown, ownerPath: string, sources: S
   for (const section of ['inputs','documents','generatedIntermediates']) {
     for (const raw of sourceArray(sourceObject(manifest)[section] ?? [], sourceObject)) {
       if (section !== 'inputs' && !usedPaths.has(sourceText(raw.path))) continue;
-      const binding = parseSourceBinding(raw.sourceBinding, sources), localId = sourceText(raw.id ?? raw.path);
+      const localId = sourceText(raw.id ?? raw.path);
+      if (raw.sourceBinding === undefined) throw new TypeError(`Source entry without a binding: ${ownerPath}#${localId}.`);
+      const binding = parseSourceBinding(raw.sourceBinding, sources);
       if (binding.kind === 'unresolved') throw new TypeError(`Unresolved source: ${ownerPath}#${localId}.`);
       entries.push({ownerPath,localId,binding,used:usedPaths.has(sourceText(raw.path))});
     }
