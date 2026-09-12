@@ -24,7 +24,8 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
         <button class="planet-find-destination" type="button">Find a city</button>
         <p>{destinations.description}</p>
       </section>}
-      <PlanetCardHeader {title} {introduction}>
+      {/* The overview card above carries the page heading; this tabbed card repeats the title. */}
+      <PlanetCardHeader heading={false} {title} {introduction}>
           <PlanetBreadcrumbs {objectId} />
       </PlanetCardHeader>
       <div class="planet-card-tabs" role="tablist" aria-label="Object information">

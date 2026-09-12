@@ -47,7 +47,9 @@ try {
       };
       requestAnimationFrame(sample);
     }, { from, to });
-    await page.locator(`a.scale-stop[href="/${to}/"]`).click();
+    // The planetary scale bar was retired; navigate the way a person does.
+    await page.locator('.planet-sidebar-search').fill(to);
+    await page.locator(`.planet-object-link[data-object-id="${to}"]`).first().click();
     await page.waitForTimeout(1000);
     await page.screenshot({ path: `${directory}/${from}-to-${to}-approach.png` });
     await page.waitForFunction(id => { const app = window.__cssEarth as { ready: boolean; activeObjectId?: string } | undefined; return app?.ready && app.activeObjectId === id; }, to);

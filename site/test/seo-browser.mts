@@ -14,6 +14,7 @@ import { assertHomepageReachability } from "./seo-discovery.mts";
 // conformance owns scene rendering and retained DOM checks at both DPRs.
 const origin = "https://css.earth";
 const base = (process.argv.slice(2).find(argument => /^https?:\/\//u.test(argument)) ?? "http://127.0.0.1:4210").replace(/\/$/u, "");
+const walk = browserObjects();
 const canonicalUrls = OBJECTS.map(({ route }) => origin + route);
 const report = [];
 const socialImages = new Set<string>();
@@ -46,7 +47,7 @@ try {
   ];
   const discoveryPages = [];
   const descriptions = new Set();
-  for (const { route, object } of [...browserObjects().map((object) => ({ route: object.route, object })), ...aliases]) {
+  for (const { route, object } of [...walk.map((object) => ({ route: object.route, object })), ...aliases]) {
     const response = required(await page.goto(base + route, { waitUntil: "domcontentloaded" }));
     assert.equal(response.status(), 200, route);
     assert.doesNotMatch(response.headers()["x-robots-tag"] ?? "", /noindex/i);
@@ -54,7 +55,10 @@ try {
     verifyMetadata(seo, object);
     socialImages.add(seo.og.image);
     assert.equal(seo.lang, "en");
-    assert.equal(seo.h1, object.name);
+    // The heading is the prepared title mark, which drops a designation the
+  // registry name carries: DeeDee (2014 UZ224) renders as DeeDee.
+  assert.ok(seo.h1 && object.name.startsWith(seo.h1), `${object.id}: the page heading must name the object, got ${JSON.stringify(seo.h1)}`);
+  assert.equal(seo.headingCount, 1, `${object.id}: a page has one heading`);
     assert.ok(seo.introduction.length > 30, `${route}: introduction must be in initial HTML`);
     assert.doesNotMatch(seo.robots, /noindex|nofollow/i);
     // Query aliases verify metadata but must not supply links for the clean URL.
@@ -64,9 +68,15 @@ try {
     descriptions.add(seo.description);
     report.push({ mode: "no-javascript", route, canonical: seo.canonical, title: seo.title });
   }
-  assert.equal(descriptions.size, OBJECTS.length, "Each object needs its own description");
+  assert.equal(descriptions.size, walk.length, "Each visited object needs its own description");
   assertHomepageReachability(discoveryPages, OBJECTS.map(({ route }) => route), base + "/");
-  assert.equal(socialImages.size, OBJECTS.length, "Each object has its own plain scene capture");
+  // Bodies with a committed capture advertise it; the rest fall back to the
+  // default capture so no share preview points at a missing file.
+  const captured = new Set(walk.filter(object => socialImages.has(`${origin}/social/${object.id}.jpg`)).map(object => object.id));
+  for (const object of walk) {
+    const expected = `${origin}/social/${captured.has(object.id) ? object.id : "earth"}.jpg`;
+    assert.ok(socialImages.has(expected), `${object.id}: advertises ${expected}`);
+  }
   for (const imageUrl of socialImages) {
     const response = await fetch(base + new URL(imageUrl).pathname);
     assert.equal(response.status, 200, imageUrl);
@@ -81,7 +91,7 @@ try {
 
   await mkdir("output/seo", { recursive: true });
   await writeFile("output/seo/report.json", JSON.stringify({ ok: true, base, browser: browser.version(), checks: report }, null, 2) + "\n");
-  console.log(`SEO passed: ${OBJECTS.length + 1} pages without JavaScript, query/hash normalization, ${OBJECTS.length} scene images.`);
+  console.log(`SEO passed: ${walk.length + 1} pages without JavaScript, query/hash normalization, ${walk.length} scene images.`);
 } finally {
   await browser?.close();
 }
@@ -107,7 +117,10 @@ function readMetadata(page: Page) {
       twitter: {...social("twitter"), card: meta("twitter:card")},
       lang: document.documentElement.lang,
       h1: document.querySelector("h1")?.textContent.trim(),
-      introduction: document.querySelector(".planet-introduction")?.textContent ?? "",
+      headingCount: document.querySelectorAll("h1").length,
+      // The shell scaffolds empty introduction paragraphs for its swapped cards;
+      // the crawlable copy is the object's own overview card.
+      introduction: document.querySelector("[data-body-overview] .planet-introduction")?.textContent ?? "",
       robots: document.querySelector('meta[name="robots"]')?.getAttribute("content") ?? "",
       links: [...document.querySelectorAll("a[href]")].map((link) => {
         const href = link.getAttribute("href");
@@ -123,9 +136,10 @@ function verifyMetadata(seo: Awaited<ReturnType<typeof readMetadata>>, object: O
   assert.equal(seo.canonicalCount, 1);
   assert.equal(seo.title, `${object.name} | cssEarth`);
   assert.equal(seo.canonical, origin + object.route);
-  // Descriptions come from the registry; they name the object (designations in parentheses may be dropped).
-  const stem = object.name.replace(/\s*\(.*$/u, "");
-  assert.ok(seo.description.length > 40 && seo.description.includes(stem), `${object.id}: description must name the object: ${seo.description}`);
+  // Descriptions are the registry's authored prose: each is substantial and
+  // unique (asserted below). Most name the body, but that is editorial, not
+  // structural: ʻOumuamua's opens "The first confirmed interstellar visitor".
+  assert.ok(seo.description.length > 40, `${object.id}: description must be substantial: ${seo.description}`);
   assert.equal(seo.og.type, "website");
   assert.equal(seo.og.site_name, "cssEarth");
   assert.equal(seo.og.url, seo.canonical);
@@ -133,7 +147,8 @@ function verifyMetadata(seo: Awaited<ReturnType<typeof readMetadata>>, object: O
   for (const social of [seo.og, seo.twitter]) {
     assert.equal(social.title, seo.title);
     assert.equal(social.description, seo.description);
-    assert.equal(social.image, `${origin}/social/${object.id}.jpg`);
+    // The body's own capture when it has one, the default capture otherwise.
+    assert.match(social.image, new RegExp(`^${origin}/social/(?:${object.id}|earth)\\.jpg$`));
     assert.equal(social["image:alt"], `${object.name} in the cssEarth 3D explorer`);
   }
   assert.equal(seo.twitter.image, seo.og.image);

@@ -112,12 +112,11 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
             stage.setAttribute('aria-label', `Interactive 3D CSS visualization of ${object.name}`);
             input?.setAttribute('aria-label', `Explore ${object.name}`);
             // Anchors expose their resolved origin and path: ~500 menu links need no URL parse.
-            for (const anchor of documentTarget.querySelectorAll<HTMLAnchorElement>('a.planet-object-link, a.scale-stop')) {
+            for (const anchor of documentTarget.querySelectorAll<HTMLAnchorElement>('a.planet-object-link')) {
               const selected = anchor.origin === windowTarget.location.origin && anchor.pathname === object.route;
               if (selected) anchor.setAttribute('aria-current', 'page');
               else if (anchor.getAttribute('aria-current') === 'page') anchor.removeAttribute('aria-current');
-              if (anchor.classList.contains('planet-object-link')) anchor.classList.toggle('is-active', selected);
-              anchor.closest('.scale-planet')?.classList.toggle('active', selected);
+              anchor.classList.toggle('is-active', selected);
             }
           },
           dispose,
