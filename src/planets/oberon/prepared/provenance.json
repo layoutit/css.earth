@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "842ca73a7e9230dd5aa1a60f6db1c398da8e11f9d3740322bda58b41fb3507cd"
+    "sha256": "830fb459fbd7d20aa66c766f4f9efa57a14bbaa137c2a2904b661bde52690b3a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "2ae31450aa38b421536f4ec42ea1cc01f919d780d4db76671c23a2ffccf71621",
+      "sha256": "2e122c859659be0fd19466cbc6839146f1f9aaecadbc66ab825d0d5050416438",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/oberon/",
@@ -75,6 +75,10 @@
                   0,
                   2100
                 ]
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           }
@@ -550,7 +554,7 @@
       "recipe": "raster",
       "selector": "/surfaces/0",
       "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
         "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo."
       ],
@@ -561,7 +565,8 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false
+        "falseColor": false,
+        "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
         "schenk-2020-oberon-normal"
@@ -587,14 +592,14 @@
         },
         {
           "url": "/scenes/oberon/oberon-poles-normal.webp",
-          "bytes": 23832,
-          "sha256": "51e6ab8ce467031d1e4979ff098519bc32cbccf344c187d4cb1aa41d300052b8",
+          "bytes": 25872,
+          "sha256": "f690282b1c01c5c58ac69af57324d5ac47feb06e72e0a06d4b7b68f0edf9f092",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/oberon/oberon-poles-normal@2x.webp",
-          "bytes": 63918,
-          "sha256": "990f48461c50ce476c74a415dafbad69025eaad62c21916c9613a561f1037e32",
+          "bytes": 67358,
+          "sha256": "4702987c37d9412adf3d92b1c3c256e97dc49750d75c8755fbcda2a76cdf944c",
           "verification": "asset-manifest-pin"
         }
       ],

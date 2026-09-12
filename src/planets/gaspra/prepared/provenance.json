@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d48a4d3285190b20eb96d4caa6b5b62cc0f3bee304f9b94bd1d5ac91527f68c3"
+    "sha256": "26a4ed70215235578cafd4025806ceaa3c412d53613f2c30a19abdc3d1f9f0ff"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "29b08ae5e797e176eaad614198d514adc6e4a2bc658598a359d4cb2a7314d0ed",
+      "sha256": "712e430d5dcabda9120c9e79ddc7b25f04298c6fd4b3f0d528d8c5d1bcf2e363",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -44,6 +44,10 @@
                   0,
                   255
                 ]
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           ],
@@ -1231,7 +1235,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "Galileo’s highest-resolution pair, 107318313 and 107318326, mapped onto the Thomas shape. The source is high-pass filtered and retains photographed illumination; it is not calibrated albedo or natural color. Best original detail is approximately 55 m/pixel and varies greatly. The gray grid marks poor or missing coverage. Shadows adds approximate fixed-epoch Sun lighting."
       ],
@@ -1253,6 +1257,10 @@
             0,
             255
           ]
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -1268,8 +1276,8 @@
         },
         {
           "url": "/scenes/gaspra/gaspra-normal-surface@2x.webp",
-          "bytes": 451108,
-          "sha256": "af3f5db4a9868d9598c62cd5ffce6b97e3bcd7e42bde76ea02df76afe9493723",
+          "bytes": 730366,
+          "sha256": "a6b1a834966a7617971f77026a79091f603d0921bc14b5def2d179ed89dec175",
           "verification": "asset-manifest-pin"
         }
       ],

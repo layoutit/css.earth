@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ce0672d933d907906ad684590311e334607253ac4bf9290e4647d1e821f30ebf"
+    "sha256": "91939d0beba099baf3301b42a2fb8923e34240e0c7e024efa235aab35481d18e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "8a7dc5c07e057ec04a4649e781b5036f3d1285f2f89feb236c7a8cf7cf3f1a73",
+      "sha256": "b01cc2895974945754e13a929f3302e14f0ea6bb5ae787de2bf5c0bf08ae81ce",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/triton/",
@@ -144,6 +144,10 @@
                 "kind": "image-rgb-no-data",
                 "noData": 0,
                 "centerLongitude": 0
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           }
@@ -804,7 +808,7 @@
       "recipe": "raster",
       "selector": "/surfaces/1",
       "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
         "Enhanced color: Photometrically corrected 2014 map in orange/green/blue. Northern black background was not illuminated by Voyager; original JPEG fill remains missing. Local source resolution varies."
       ],
@@ -815,7 +819,8 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false
+        "falseColor": false,
+        "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
         "voyager-triton-enhanced-color"
@@ -841,14 +846,14 @@
         },
         {
           "url": "/scenes/triton/triton-poles-enhanced.webp",
-          "bytes": 42796,
-          "sha256": "c3d9321056492aff1616a828fd6ffe1d2288fa544298e9a2b6b927a82a36f73f",
+          "bytes": 45476,
+          "sha256": "9a8455136952d0ed12cda7b695dad45f58d8660550569ad739ab9a794f8add7e",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/triton/triton-poles-enhanced@2x.webp",
-          "bytes": 117598,
-          "sha256": "45f8ac65aade9c679e28aa3feafd22ff27723a7587958936f2720207111f0994",
+          "bytes": 124272,
+          "sha256": "3e34806da9fe89f396be2b9fca56db8dbef07c8f9beae21266c625a1348a85a1",
           "verification": "asset-manifest-pin"
         }
       ],

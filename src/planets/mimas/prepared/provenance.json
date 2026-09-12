@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9980e8a2d6be85d59e9fa0b1cb82ce052d981beb6ea514ec07feed5b517b2fcb"
+    "sha256": "3b0fdaa7fcba6486c08852d8c3b51689978e8d8fb307c7f99b931541db78c5a3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "05e0f10925f40c390c6c7115a2482adad9c5e3e099e445dd053c2686377ba400",
+      "sha256": "36ff61912771d30b358dff5c52db241335a2277fa5bbb0ffc2f126e8f622e808",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -38,6 +38,10 @@
                 "kind": "image-monochrome-no-data",
                 "noData": null,
                 "centerLongitude": 0
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             {
@@ -46,6 +50,10 @@
                 "kind": "image-rgb-no-data",
                 "noData": null,
                 "centerLongitude": 180
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           ],
@@ -831,7 +839,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "Cassini 2017 monochrome mosaic at 216 m per source pixel. Photographed shadows and variable resolution remain; Directional Shadows add approximate lighting. The surface follows a simplified version of the released 2025 shape model."
       ],
@@ -846,6 +854,10 @@
           "kind": "image-monochrome-no-data",
           "noData": null,
           "centerLongitude": 0
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -861,8 +873,8 @@
         },
         {
           "url": "/scenes/mimas/mimas-normal-surface@2x.webp",
-          "bytes": 5022396,
-          "sha256": "d75ebf0ccac010e33b6af02c79fd708a78978332ec39bfd003c70cbb35f55108",
+          "bytes": 6635886,
+          "sha256": "c2e727a8729b5c1580bc63811cf1a05facbcf583a70759aededbb7ac3e08f311",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -874,7 +886,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/1",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors exceed human vision. Source resolution varies; seams and residual photographed shading remain. The surface follows a simplified version of the released 2025 shape model."
       ],
@@ -889,6 +901,10 @@
           "kind": "image-rgb-no-data",
           "noData": null,
           "centerLongitude": 180
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -904,8 +920,8 @@
         },
         {
           "url": "/scenes/mimas/mimas-enhanced-surface@2x.webp",
-          "bytes": 5763164,
-          "sha256": "7df5425573da46ed36fcd0ff643f2dda2d20ecd1a8c6ee2bbd4cb726e50afdd3",
+          "bytes": 8189424,
+          "sha256": "ffdee2030ac3cce437040c56bccd6b634ce287b6612770addfb4fdb2bebcf3f8",
           "verification": "asset-manifest-pin"
         }
       ],

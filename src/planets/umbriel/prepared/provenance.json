@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "92427747344a5a4ec1af631ed0d45f02fde2103d9a0afa920dd4413cc40efc14"
+    "sha256": "1c57393d4368880f1cf41635639565f35a0b51a5c8e4c09935adef6d09bf2306"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "3ba6f4dc54dabd229baf8edb23ca7dddeb1826f8885a3eea112bbd48daa56959",
+      "sha256": "ff1fe18bde6efe17b5e820a7a7f8969965fc853d59e8bc8b019c9be5c7f425ad",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/umbriel/",
@@ -75,6 +75,10 @@
                   0,
                   1950
                 ]
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           }
@@ -550,7 +554,7 @@
       "recipe": "raster",
       "selector": "/surfaces/0",
       "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
         "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo."
       ],
@@ -561,7 +565,8 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false
+        "falseColor": false,
+        "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
         "schenk-2020-umbriel-normal"
@@ -587,14 +592,14 @@
         },
         {
           "url": "/scenes/umbriel/umbriel-poles-normal.webp",
-          "bytes": 21188,
-          "sha256": "7cbcf7b5b69d628d097ae0b4bf205d4c0d62572737659db8c0bfaed9b224c9d2",
+          "bytes": 24784,
+          "sha256": "d33e12a015b7d6c80264584692cf71b0f89dff9bcde2a60d7c24d23120ebb897",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/umbriel/umbriel-poles-normal@2x.webp",
-          "bytes": 53300,
-          "sha256": "ed802e4992f6d6955c9c6d9edb101793435b0e3b7c87e5a9f489f008e611da70",
+          "bytes": 60180,
+          "sha256": "547035ff47c7a4095eebc352f38d66b9e23c7b55c48f1365a9c9a75aa84b1c4a",
           "verification": "asset-manifest-pin"
         }
       ],

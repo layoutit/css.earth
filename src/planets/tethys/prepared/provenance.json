@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9b0099c04bf07ab48ab91a22db525fd490e96a2b053c018027d2558966324c1d"
+    "sha256": "db9e200a53771a606c4de55779fc78111bbba506ef25a66080c7277899cb5ff5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3360f3d907f96d0acfd84eec99f81a9d58846752ab5cb257c57496b081ea30ab",
+      "sha256": "7c1a3fc890eec415cd8c8600db89b7bcc0e2729521a3c14c4c65d5d327599d1c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -41,6 +41,10 @@
                 "noData": 0,
                 "centerLongitude": 0,
                 "resolutionMeters": 292.50627432643
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             {
@@ -49,6 +53,10 @@
                 "kind": "image-rgb-no-data",
                 "noData": null,
                 "centerLongitude": 180
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             {
@@ -855,7 +863,7 @@
           "refresh"
         ],
         "path": "observations/Tethys_Cassini_mosaic_global_293m.tif",
-        "url": "https://planetarymaps.usgs.gov/mosaic/Tethys_Cassini_mosaic_global_293m.tif"
+        "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Tethys_Cassini_mosaic_global_293m.tif"
       },
       "verificationOperations": []
     },
@@ -1556,7 +1564,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "Cassini 2012 mosaic, 293 m per source pixel, delivered on the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows add approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
       ],
@@ -1574,6 +1582,10 @@
           "noData": 0,
           "centerLongitude": 0,
           "resolutionMeters": 292.50627432643
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -1589,8 +1601,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-normal-surface@2x.webp",
-          "bytes": 7399756,
-          "sha256": "b21714368e32da7f99379635334762c1e02f381169f4e9ddccafd98b660c4ea7",
+          "bytes": 9768182,
+          "sha256": "ea182dc596c5b516c9f1af31ed07206b753342a9ad12b6f83ebd7b61d976eeca",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -1602,7 +1614,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/1",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors extend beyond human vision. Source resolution varies; seams and residual photographed shading remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
       ],
@@ -1617,6 +1629,10 @@
           "kind": "image-rgb-no-data",
           "noData": null,
           "centerLongitude": 180
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -1632,8 +1648,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-enhanced-surface@2x.webp",
-          "bytes": 9546302,
-          "sha256": "b4e5386fecaeebd62c6ecd8e20887f9b012963e8e05598065cc5043633743bfc",
+          "bytes": 13065564,
+          "sha256": "97bb188f33dfb333c7ac99427bd3833f7659bf679aa8ba8a51a50c65715a6808",
           "verification": "asset-manifest-pin"
         }
       ],
