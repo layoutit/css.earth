@@ -109,17 +109,34 @@ counted from their prepared manifests.
 
 **446 bodies write one prepared density.** The shape-model and static raster lanes
 emit only the `@2x` map, with no lower twin on disk, so there is nothing for a
-level to select. Their recipes have to write a second density first. This is where
-the heaviest mounts in the project are: Phoebe warms 568.3 MiB, Mimas 488.3 MiB,
-and Dione, Enceladus, Rhea and Tethys 378.3 MiB each — each one larger than
-anything levelling recovered above. It is also the largest change, because a
-second density is new prepared raster data for 446 packages.
+level to select. This is where the heaviest mounts in the project are: Phoebe warms
+568.3 MiB, Mimas 488.3 MiB, and Dione, Enceladus, Rhea and Tethys 378.3 MiB each —
+each one larger than anything levelling recovered above.
 
-**Uranus and Neptune are levelable today**, worth 32.3 MiB and 51.9 MiB of mount
-decode. Their layered lane paints through texture writes already; what it lacks is
-the density-1 texel width the threshold needs. That width is derivable from the
-observation recipe — the last `resize` that applies before packing, 1920 for Uranus
-and 2880 for Neptune through its lens transform — so this is wiring, not new data.
+A second density there is a preparation change, not wiring, and it is not a matter
+of halving the existing atlas. Each density is packed independently with its own
+gutter, as the giants' recipe shows at 10 and 20 texels, so a density-1 map has to
+be reprojected and repacked with its own integer gutter or the band seams open.
+That needs its own visual acceptance, on a lane whose bodies mostly cannot be
+re-prepared without restoring their pinned science inputs: 46 of the 473 bodies
+pass source closure on a fresh checkout.
+
+**Uranus and Neptune now derive their levels but do not yet carry them.** The
+layered lane reads the density-1 texel width from its own recipe, the last `resize`
+that applies before packing: 1920 for Uranus, and 2880 for Neptune through its lens
+transform. Both level their observed surface, Uranus levels its poles as well, and
+Neptune's single-density poles correctly stay one resource. Their per-body tests
+assert those thresholds and addresses.
+
+Their prepared plans are unchanged, because refreshing either one also re-applies
+shared presentation bindings their accepted runtime predates. That runtime no
+longer reproduces from its own source on an unmodified checkout: its
+`presentation-preparation` test fails at `camera.projection.axis`, and recompiling
+moves the camera from a `cqw` perspective to `1000000px`, changes the dolly
+distance bounds, and swaps the shared planet-marker atlas for per-body markers.
+Those are behavioural changes unrelated to levels, so the two bodies gain their
+levels once that divergence is resolved on its own; the mount decode waiting there
+is 32.3 MiB for Uranus and 51.9 MiB for Neptune.
 
 **Jupiter and Saturn publish no texture writes at all**, so they need the same
 address-ownership move the composite bodies took here before a level can reach one
