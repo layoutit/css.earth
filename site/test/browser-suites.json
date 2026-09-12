@@ -26,8 +26,8 @@
     "reason": "travel requests prepared images after the bank loaded: 1242 requests against 572 at start"
   },
   "interaction-chain-browser.mts": {
-    "expect": "fail",
-    "reason": "a page wait times out after 40 s during the chained interactions"
+    "expect": "intermittent",
+    "reason": "passed 2 of 4 runs on one build; the others timed out on a 40 s page wait in the chained interactions"
   },
   "lazy-surface-preview-browser.mts": {
     "expect": "pass"
@@ -88,8 +88,8 @@
     "expect": "pass"
   },
   "prepared-bindings-browser.mts": {
-    "expect": "fail",
-    "reason": "native backface rendering differs by tens of pixels on some views (Earth DPR 2 on the last run)"
+    "expect": "intermittent",
+    "reason": "passed 2 of 4 runs on one build; the others found 2 to 30 pixels differing from native backface rendering (Earth DPR 2)"
   },
   "prepared-depth-browser.mts": {
     "expect": "fail",
