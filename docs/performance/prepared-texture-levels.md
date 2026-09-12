@@ -99,13 +99,31 @@ those at one density only, so they have no lower twin to level to. A smaller
 density for that bank is the next measurable step and is larger than anything
 levelling recovered on those bodies.
 
-Two other layers stay unlevelled. The composite material plane carries its own
-projection and frame addressing rather than a whole-body map, so it is not one of
-the levelled layers. The ringed giants' surface and poles are levelled by the same
-rule only once their recipe records the density-1 texel width of each map: the
-observation products record a resize transform for some densities and nothing for
-others, so the width the threshold needs is not in the prepared transport yet.
-Uranus and Neptune would recover 32.3 MiB and 51.9 MiB of mount decode.
+The composite material plane carries its own projection and frame addressing
+rather than a whole-body map, so it is not one of the levelled layers.
+
+## What the rest of the registry needs
+
+Levels reach 23 of the 473 prepared bodies. The other 450 fall into three cases,
+counted from their prepared manifests.
+
+**446 bodies write one prepared density.** The shape-model and static raster lanes
+emit only the `@2x` map, with no lower twin on disk, so there is nothing for a
+level to select. Their recipes have to write a second density first. This is where
+the heaviest mounts in the project are: Phoebe warms 568.3 MiB, Mimas 488.3 MiB,
+and Dione, Enceladus, Rhea and Tethys 378.3 MiB each — each one larger than
+anything levelling recovered above. It is also the largest change, because a
+second density is new prepared raster data for 446 packages.
+
+**Uranus and Neptune are levelable today**, worth 32.3 MiB and 51.9 MiB of mount
+decode. Their layered lane paints through texture writes already; what it lacks is
+the density-1 texel width the threshold needs. That width is derivable from the
+observation recipe — the last `resize` that applies before packing, 1920 for Uranus
+and 2880 for Neptune through its lens transform — so this is wiring, not new data.
+
+**Jupiter and Saturn publish no texture writes at all**, so they need the same
+address-ownership move the composite bodies took here before a level can reach one
+of their pixels.
 
 ## How it was applied
 
