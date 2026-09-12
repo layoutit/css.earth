@@ -235,7 +235,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     const entry = entries[index]!, feature = entry.feature!;
     if (shownIndex !== index) {
       tooltipName.textContent = feature.name;
-      tooltipDetail.textContent = `${feature.type} · ${kilometres.format(feature.diameterKm)} km`;
+      tooltipDetail.textContent = feature.diameterKm > 0 ? `${feature.type} · ${kilometres.format(feature.diameterKm)} km` : `${feature.type} · size unpublished`;
       tooltipOrigin.textContent = feature.origin;
       tooltip.dataset.featureTooltipFor = feature.id;
       root.dataset.featureOutlineFor = feature.id;
