@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "thebe",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d21cfc21f6dbe5296b7b73c761212fe91486858b1621cae4f1878ebac9ae6d9e"
+    "sha256": "1e7a8fdbb7cf5ed30da8302b424edd0455584080bd94c74ff5c765bac2d7f4c0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -427,6 +427,63 @@
           }
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "ae87e772c54c51cb32b5035c0e43e2890f830a3f1239305d58993767e324c21e",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "THEBE_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "THEBE_nomenclature_center_pts.dbf",
+          "projection": "THEBE_nomenclature_center_pts.prj",
+          "metadata": "metadata_nomenclature_points_THEBE.xml"
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "thebe-features.json",
+        "publicBase": "/scenes/thebe/",
+        "target": {
+          "className": "thebe-body"
+        },
+        "lensIds": [
+          "normal",
+          "elevation"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 1,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 48,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        }
+      }
     }
   ],
   "sources": [
@@ -464,7 +521,7 @@
       "sha256": "98550f6012a607df74a02f1163b75a53d15de26e7cb7d274044697767454a1da",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -518,7 +575,7 @@
       "sha256": "16802209e6eb0bf3bb5fc028e613d527ce42e12227e7bce5c6b0665b086eb64e",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -565,7 +622,7 @@
       "sha256": "b482751e27d82f27662eeb5d4aa6860698279733690ef1f8373d35999d754569",
       "bytes": 4755,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -619,7 +676,7 @@
       "sha256": "e575aa7f3978b97278c06b632ff6a55c5c0479859b142b81904e92cc508e8311",
       "bytes": 808000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -666,7 +723,7 @@
       "sha256": "1f7acc910ad56a93f93793058469f45f187ba3a58d60523cedd9bab8bef2260c",
       "bytes": 4728,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -720,7 +777,7 @@
       "sha256": "7fde48e5466852592f1b601b5b1d8a2892f8d210740b4f1c244c0df06a8fc662",
       "bytes": 808000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -767,7 +824,7 @@
       "sha256": "bc2c3a5bff07671c02a78b02ef0eb3357fb419b0af053847a7e338bca15b4aff",
       "bytes": 4726,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -821,7 +878,7 @@
       "sha256": "2f24ba6e76e79d0918df85bba62ef6c1b82dfc07f2475b0fc4682f588fa337a9",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -868,7 +925,7 @@
       "sha256": "87433c93a50af1a69e93ca78c69384dfbc162abf53cebb3f9fa92bf2a7a95a2f",
       "bytes": 5008,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -922,7 +979,7 @@
       "sha256": "5c991ac251900b3a731b01a1b48b2ca2e9fec43b4dc68b828b3210b78f056bd6",
       "bytes": 839168,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -969,7 +1026,7 @@
       "sha256": "98ff130c32ced368c35dd93c2ccf00469d0203b34d7cd1ff7b319fc465e521b0",
       "bytes": 5035,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -996,7 +1053,80 @@
       "sha256": "7bfe9b33e0a27a054ec4817f7f74818d325812021871d0842b44b4ea913a04fd",
       "bytes": 5467,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "thebe-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "sha256": "914f7a272375052ca88437344aaae184f5581776d2ab9db4bf5921a18847638d",
+      "bytes": 999,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-thebe-nomenclature-center-pts",
+      "path": "features/THEBE_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/THEBE_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Thebe on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Thebe centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/THEBE/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      },
+      "sha256": "d2be31bf0d2f433219d73345aa7be659964d2c2a0421796728244c45c0846cea",
+      "bytes": 39755,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/THEBE_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/THEBE_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "thebe-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "sha256": "30de8e5aab82a3f87435c58f0169c39fe3a0e47e31f36621c2c0fbaebe7ef797",
+      "bytes": 152,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1029,19 +1159,19 @@
           "url": "/scenes/thebe/thebe-elevation-thumbnail.webp",
           "bytes": 5432,
           "sha256": "e39728ec27aef691e78471760ea0a306423be968d1765857cdb288ecd32b9349",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thebe/thebe-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thebe/thebe-elevation-surface@2x.webp",
           "bytes": 176304,
           "sha256": "a327d2569e5d653ac24bb304f51cb195d314bfe5394862cfb9836b8310056166",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1083,13 +1213,13 @@
           "url": "/scenes/thebe/thebe-normal-thumbnail.webp",
           "bytes": 3250,
           "sha256": "922db4f720ed7fcac5a240c5e1e1cb7f7b651d2a91100cfe2cbe035abeadccd7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thebe/thebe-normal-surface@2x.webp",
           "bytes": 125334,
           "sha256": "9a191fa47d3472757779de68a96428cf8731d1166cce06234c50cbc8c7a5e13e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1112,8 +1242,42 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5011,
-          "sha256": "4ca615a0efd571197b7c06c954db737122f1940b639634edf74799e983767adc",
+          "bytes": 5128,
+          "sha256": "f509a6c1b5783d01776d127f80285fc85466bb97e6fe94bf7dd8466328d4d4e4",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "thebe-surface-features-source",
+        "usgs-gazetteer-thebe-nomenclature-center-pts",
+        "thebe-surface-map-frame"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/thebe/thebe-features.json",
+          "bytes": 1412,
+          "sha256": "9b0dcc61a39955dde3b88ccd70c6480770db70dea7c21cbcf6c40b8ef0c5ca98",
           "verification": "bytes-verified"
         }
       ],

@@ -11,6 +11,7 @@
 | Shape and elevation | [Weirich et al. (2025), v1.0](https://doi.org/10.26033/tqxb-q714) | Shape reduced to 2,000 faces. Color shows modeled height above a 763.5 km reference sphere. |
 | Relative albedo | [Weirich et al. (2025), v1.0](https://doi.org/10.26033/tqxb-q714) | Relative brightness, with no units. Terrain and shadows affect its values; it is not calibrated reflectance. |
 | Infrared and ice absorption | [Scipioni/Combe VIMS collection](https://doi.org/10.17189/ctqe-ta30) | Infrared is false color. Absorption is a spectral indicator, not ice percentage, grain size or temperature. |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/RHEA/target) Rhea centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
 
@@ -29,6 +30,8 @@ Existing reports; no body tests were rerun for this documentation edit.
   [Run results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b7-cassini-atlas/evidence/integration/qualification.json).
 
 ## Known problems
+
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Rhea (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
 
 - Shape simplification removes detail. Image seams, shadows and numeric-map gaps remain.
 - Absolute VIMS registration at fractions of a source pixel is unresolved.

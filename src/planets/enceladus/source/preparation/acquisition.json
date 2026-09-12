@@ -204,6 +204,14 @@
       ],
       "path": "vims-chemistry/native/N1500061170_1_ir.cub",
       "url": "https://vims.univ-nantes.fr/cube/N1500061170_1_ir.cub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/ENCELADUS_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/ENCELADUS_nomenclature_center_pts.zip"
     }
   ]
 }

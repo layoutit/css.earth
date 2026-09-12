@@ -325,7 +325,7 @@
       "consumers": [
         "shape"
       ],
-      "units": "Native Cartesian coordinates in kilometres, +X at 0° longitude and +Z north; no height exaggeration.",
+      "units": "Native Cartesian coordinates in kilometres, +X at 0\u00b0 longitude and +Z north; no height exaggeration.",
       "coverage": "Global Q128 SPC shape, 98,306 vertices and 196,608 faces; source mesh is simplified under a measured preparation error budget. Native image support and accuracy vary.",
       "expectedBytes": 17694840,
       "expectedSha256": "afa8fe486779512d843e645bcb56d088bd9f948553e0b4d26bc25d5d40c20759",
@@ -451,7 +451,7 @@
       "expectedBytes": 572731,
       "expectedSha256": "4b6bee3bfa4f19b51025c326cf7ac207bd4ea48bc35075f5ee83f86400c398ae",
       "origin": "https://vims.univ-nantes.fr/cube/C1807469104_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -480,7 +480,7 @@
       "expectedBytes": 382352,
       "expectedSha256": "55355c71d5b6c921ff7c5f4564e14ce28a0d787fb3d8963b28736a66cd6146f0",
       "origin": "https://vims.univ-nantes.fr/cube/N1807469104_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -509,7 +509,7 @@
       "expectedBytes": 252928,
       "expectedSha256": "be1e54ea809e092370dd8a09f2ed96ee5aa350671241b0e46310c2adf3f4ebdc",
       "origin": "https://vims.univ-nantes.fr/cube/1807469104_1.qub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -538,7 +538,7 @@
       "expectedBytes": 454887,
       "expectedSha256": "4f7935c46b21af2bb0036382658b0e205be274b091f36e76084df6b4096733a6",
       "origin": "https://vims.univ-nantes.fr/cube/C1807456038_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -567,7 +567,7 @@
       "expectedBytes": 312508,
       "expectedSha256": "0dcf493ccef3b5e016d69d636053bb9934960262e3ded3512425895aea5b065c",
       "origin": "https://vims.univ-nantes.fr/cube/N1807456038_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -596,7 +596,7 @@
       "expectedBytes": 195584,
       "expectedSha256": "dc8f4b201a002c900c11314e7c2ad65fdcfab344469f5e14d2f42d0a74d0b732",
       "origin": "https://vims.univ-nantes.fr/cube/1807456038_1.qub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -625,7 +625,7 @@
       "expectedBytes": 446797,
       "expectedSha256": "accd3bed917401cd4ca82558bb2d1f8181e646c27f3272cc18a3f69a1c8c220f",
       "origin": "https://vims.univ-nantes.fr/cube/C1807473499_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -654,7 +654,7 @@
       "expectedBytes": 158730,
       "expectedSha256": "4b2b82f80a99bf4488e301203d62bbf9b7c7c29aed549526bf2952927398d76b",
       "origin": "https://vims.univ-nantes.fr/cube/N1807473499_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -683,7 +683,7 @@
       "expectedBytes": 248320,
       "expectedSha256": "c0e1697c5cc5f72b6fede8ef71a20fb460fe80f083f4587acf2c1f5bd98f62ef",
       "origin": "https://vims.univ-nantes.fr/cube/1807473499_1.qub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -712,7 +712,7 @@
       "expectedBytes": 695517,
       "expectedSha256": "4eeddcbdf2405d627bb186a4bcb5fdd0beae2d5e754ea1081ea16c10fa320795",
       "origin": "https://vims.univ-nantes.fr/cube/C1818547570_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -741,7 +741,7 @@
       "expectedBytes": 183450,
       "expectedSha256": "2b45033ab5cf0450c13bc05b019dcd0dba34ba7f2f39deb7c9aad012052c4aa6",
       "origin": "https://vims.univ-nantes.fr/cube/N1818547570_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -770,7 +770,7 @@
       "expectedBytes": 415232,
       "expectedSha256": "5077a518b0af23d1321cf2d196200793d6d826bade577afe575888d626c72957",
       "origin": "https://vims.univ-nantes.fr/cube/1818547570_1.qub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -799,7 +799,7 @@
       "expectedBytes": 562527,
       "expectedSha256": "918a27b9b76de708dcfb5fb7b8db990b825006b4d71317cbcf87f727da9e3ddb",
       "origin": "https://vims.univ-nantes.fr/cube/C1561668191_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -828,7 +828,7 @@
       "expectedBytes": 170460,
       "expectedSha256": "be6f1d27fbd977f750fb79ed0d9a0758d279435aedbd57cd6020e4348b2e61e5",
       "origin": "https://vims.univ-nantes.fr/cube/N1561668191_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -857,7 +857,7 @@
       "expectedBytes": 326144,
       "expectedSha256": "373d8b8f871879f760a48ba4ca1b3fe405bd93776ac4a6c48383cca952a3599c",
       "origin": "https://vims.univ-nantes.fr/cube/1561668191_1.qub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -886,7 +886,7 @@
       "expectedBytes": 456069,
       "expectedSha256": "d85ed15fae82d390ad395d133615a188ecee84e2aaf9a382a71b99760145b6f9",
       "origin": "https://vims.univ-nantes.fr/cube/C1660463972_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -915,7 +915,7 @@
       "expectedBytes": 168002,
       "expectedSha256": "2cbf9230387dd49ceb4cf142a72cabb50eb49d9e4cda26479c17335cb62df875",
       "origin": "https://vims.univ-nantes.fr/cube/N1660463972_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -944,7 +944,7 @@
       "expectedBytes": 248320,
       "expectedSha256": "8e82a329b1fd42fc243c3f89515466cda86a2f7bd188a61ae74305a207d645a9",
       "origin": "https://vims.univ-nantes.fr/cube/1660463972_1.qub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -973,7 +973,7 @@
       "expectedBytes": 735315,
       "expectedSha256": "7afb633bcb10bfa6def52b2c4fde32d68b7d9c3714c9e70cd922146f922a0042",
       "origin": "https://vims.univ-nantes.fr/cube/C1719613772_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -1002,7 +1002,7 @@
       "expectedBytes": 191248,
       "expectedSha256": "0b780aa84669bb56b24ebfa9f79fc583e3f3b853c6bbe45c050e7787024411f6",
       "origin": "https://vims.univ-nantes.fr/cube/N1719613772_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -1031,7 +1031,7 @@
       "expectedBytes": 439808,
       "expectedSha256": "d599c14f6f0ecbcbe253726b04e9b4a0a03e913b69a554fe050f972fa848d032",
       "origin": "https://vims.univ-nantes.fr/cube/1719613772_1.qub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -1060,7 +1060,7 @@
       "expectedBytes": 730703,
       "expectedSha256": "f1ab5891ca92a4af956643ff3f05df404dfc5369e82eb1e77c1c2d980323be43",
       "origin": "https://vims.univ-nantes.fr/cube/C1719616836_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -1089,7 +1089,7 @@
       "expectedBytes": 186636,
       "expectedSha256": "94cded98862d5d1ff665d627bae87ae5a97d8a9ff2993e23fd4831cefdf7b002",
       "origin": "https://vims.univ-nantes.fr/cube/N1719616836_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -1118,7 +1118,7 @@
       "expectedBytes": 439808,
       "expectedSha256": "137bcba59f43f125cc03f8b5a692b8b531ca9915bf67817e4bb68a65ce9d3766",
       "origin": "https://vims.univ-nantes.fr/cube/1719616836_1.qub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -1147,7 +1147,7 @@
       "expectedBytes": 621243,
       "expectedSha256": "76e99719ab53c5c500a5a607c8de6457a6a4d2f6018a5345422499a988227d91",
       "origin": "https://vims.univ-nantes.fr/cube/C1606213356_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -1176,7 +1176,7 @@
       "expectedBytes": 189176,
       "expectedSha256": "8af91d04b7a71f66c1fb7053fbad38203255a8f09b0da12271210acaa97cf744",
       "origin": "https://vims.univ-nantes.fr/cube/N1606213356_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -1205,7 +1205,7 @@
       "expectedBytes": 360448,
       "expectedSha256": "3aceb080e213415421a130236188f80b02a8bd4e03c1eeea2cca8eb8037c91af",
       "origin": "https://vims.univ-nantes.fr/cube/1606213356_1.qub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -1234,7 +1234,7 @@
       "expectedBytes": 126710,
       "expectedSha256": "d55c543360d7612d68271dea75721766cf484c560c4f4d4f34cae1d813864d6a",
       "origin": "https://vims.univ-nantes.fr/cube/1807469104_1",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9; cssEarth offline detector mapping and display",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -1286,7 +1286,7 @@
       "expectedBytes": 117380,
       "expectedSha256": "620881bff247aa48f0f98e05d06cbccad6a3e43133794f0621ffb0aa1cb4d7bc",
       "origin": "https://vims.univ-nantes.fr/cube/1807469104_1",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9; cssEarth offline detector mapping and display",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -1330,6 +1330,84 @@
             "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/39"
           }
         ]
+      }
+    },
+    {
+      "id": "usgs-gazetteer-tethys-nomenclature-center-pts",
+      "path": "features/TETHYS_nomenclature_center_pts.zip",
+      "expectedBytes": 176019,
+      "expectedSha256": "5592104993c28326db51e3438ad90e98327ab66dbd7ba979f7264561856c9eac",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/TETHYS_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Tethys on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Tethys centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/TETHYS/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "tethys-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1005,
+      "expectedSha256": "00870b543185b5e886cc0e1737d6eebfa786378dc2e434392ba7fe9fd1b99957",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "tethys-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1208,
+      "expectedSha256": "af30db5e19cee994d3b7dfc2d7fa48bd55d84ea25424a0ce9a981b32edfd2e26",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "tethys-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 153,
+      "expectedSha256": "6c2b8a9f7f7b9959adc5b77ec09fd2b22daa182f043bb119bc362e3cc6b2cbd3",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
       }
     }
   ],
@@ -1386,8 +1464,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 13786,
-      "expectedSha256": "fd5d49f206d34e500a332bb555189d41daec9c3c3524197e5e4d985d609f6951"
+      "expectedBytes": 14040,
+      "expectedSha256": "8ccdcca6017d34004b185c8381479a8ae4414db8ebc4f07e9f4c623adeb1b40a"
     },
     {
       "path": "content/object.json",

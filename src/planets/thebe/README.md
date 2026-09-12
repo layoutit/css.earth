@@ -14,6 +14,8 @@
 
 ## Known problems
 
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Thebe (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
+
 - The closest frame is 1.96 km/pixel (about 50–60 pixels across Thebe); other contributors are 5–9 km/pixel. The source is visibly soft/noisy and contains spacecraft compression artifacts.
 
 - **Elevation:** This is the broad shape inferred from Galileo images, including modeled unseen terrain, not a local altimetry survey. The Stooke source itself may exaggerate depressions; its scientific uncertainty exceeds a rendering approximation's numerical precision.

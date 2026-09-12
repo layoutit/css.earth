@@ -7,6 +7,7 @@
 | SSI reflectance | Galileo green-filter [0202561278](source/observations/0202561278rcal_gre.xml) and [0202560500](source/observations/0202560500rcal_gre.xml), 28 August 1993, 111–170 m/pixel. Original I/F and acquisition illumination; fixed display stretch, no fitted gain. |
 | Monochrome and shape | [Thomas PDS release](https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/), [Thomas et al. 1996](https://doi.org/10.1006/icar.1996.0033). The processed mosaic has broader coverage and finer contributing imagery than the I/F pair. |
 | Elevation | Shape radius minus 16 km, false color from −13 to +16 km; not gravitational height. |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/IDA/target) Ida centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
 
@@ -15,6 +16,8 @@
 The broader preparation suite was not green (1,666/1,957 passed); global platform and shell audits were stopped. A later overview/navigation change was outside the tested implementation.
 
 ## Known problems
+
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Ida (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table (this export ships no projection file, so the metadata datum is recorded and the authored radius scales outline sizes), drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
 
 The same-filter survey also tested green images 0202558300 and 0202559400. Their useful projected patches did not establish four spatial checks at the retained tolerance. They are not included. Close clear-filter photographs were identified in the archive inventory but are not mixed into the green-filter reflectance view.
 

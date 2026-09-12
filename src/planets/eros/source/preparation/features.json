@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-surface-features@1",
+  "directory": "features",
+  "archive": "EROS_nomenclature_center_pts.zip",
+  "members": {
+    "attributes": "EROS_nomenclature_center_pts.dbf",
+    "projection": null,
+    "metadata": "metadata_nomenclature_points_EROS.xml"
+  },
+  "surfaceMap": "presentation/surface-map.json",
+  "mapLeftEdgeLongitudeDeg": 0,
+  "output": "eros-features.json",
+  "publicBase": "/scenes/eros/",
+  "target": {
+    "className": "eros-body"
+  },
+  "lensIds": [
+    "normal",
+    "infrared",
+    "elevation"
+  ],
+  "kinds": {
+    "point": [
+      "AA",
+      "FA"
+    ],
+    "linear": [
+      "RU",
+      "DO",
+      "VA",
+      "CA",
+      "FO"
+    ],
+    "region": [
+      "PL",
+      "PM",
+      "MO"
+    ]
+  },
+  "excludedTypeCodes": {
+    "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+  },
+  "labelPolicy": {
+    "minimumZoomShare": 1,
+    "minimumDiameterPixels": 40,
+    "alwaysVisibleCount": 0,
+    "maximumVisible": 48,
+    "limbCosine": 0.12
+  },
+  "outline": {
+    "pieces": 256
+  }
+}

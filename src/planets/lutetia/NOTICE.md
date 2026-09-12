@@ -7,3 +7,5 @@ The Shape view uses the shared grid to mark unavailable surface imagery. Elevati
 Physical and orbital context: NASA/JPL Horizons. Body orientation: L. Jorda and J.-B. Vincent's rotation document accompanying the selected PDS shape.
 
 ESO/S. Brunier Milky Way panorama: CC BY 4.0; complete notice in `source/stars/ESO-IMAGE-LICENSE.md`. HYG Stellar Database: David Nash/Astronexus, CC BY-SA 4.0; `source/stars/LICENSE.md`. Inter title/font: Inter Project Authors, SIL Open Font License 1.1; `source/presentation/LICENSE.INTER-OFL`.
+
+Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.

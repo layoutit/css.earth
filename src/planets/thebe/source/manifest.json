@@ -441,7 +441,7 @@
         "type": "body-centered-radius-grid",
         "longitudeDirection": "west-positive"
       },
-      "coverage": "Radial height above a 49.3 km reference sphere from Stooke’s Galileo-derived shape model. Shows the broad irregular shape, not local altitude above a geoid. The archived 5° grid includes modeled unseen terrain and may exaggerate depressions; it is not a high-resolution terrain survey.",
+      "coverage": "Radial height above a 49.3 km reference sphere from Stooke\u2019s Galileo-derived shape model. Shows the broad irregular shape, not local altitude above a geoid. The archived 5\u00b0 grid includes modeled unseen terrain and may exaggerate depressions; it is not a high-resolution terrain survey.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -505,6 +505,84 @@
             "evidence": "src/planets/thebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
           }
         ]
+      }
+    },
+    {
+      "id": "usgs-gazetteer-thebe-nomenclature-center-pts",
+      "path": "features/THEBE_nomenclature_center_pts.zip",
+      "expectedBytes": 39755,
+      "expectedSha256": "d2be31bf0d2f433219d73345aa7be659964d2c2a0421796728244c45c0846cea",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/THEBE_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Thebe on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Thebe centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/THEBE/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "thebe-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 999,
+      "expectedSha256": "914f7a272375052ca88437344aaae184f5581776d2ab9db4bf5921a18847638d",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "thebe-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1111,
+      "expectedSha256": "ae87e772c54c51cb32b5035c0e43e2890f830a3f1239305d58993767e324c21e",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "thebe-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 152,
+      "expectedSha256": "30de8e5aab82a3f87435c58f0169c39fe3a0e47e31f36621c2c0fbaebe7ef797",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
       }
     }
   ],
@@ -582,8 +660,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3122,
-      "expectedSha256": "b9faf2f45367d12585256480dd7308a175f098464a4e7a4ebd59029d79087726"
+      "expectedBytes": 3374,
+      "expectedSha256": "3caeb0af07e65861f83138a5e002100d0371ca968198b3319ee163e7b32a2e12"
     },
     {
       "path": "preparation/navigation.json",

@@ -12,6 +12,8 @@ export interface PreparedSurfaceFeaturePlan {
   readonly catalog: { readonly url: string; readonly bytes: number; readonly sha256: string; readonly count: number };
   /** Mesh radius in the target node's raw coordinates; anchors sit on this sphere. */
   readonly target: number; readonly lensIds: readonly string[]; readonly meshRadiusUnits: number; readonly policy: SurfaceFeaturePolicy;
+  /** Shape-model bodies: the radius band of the prepared picking mesh that every anchor and outline point lies within. */
+  readonly surfaceRadiusUnits?: { readonly minimum: number; readonly maximum: number };
   /** Retained screen-space line pieces tracing the hovered feature's published diameter. */
   readonly outline: { readonly pieces: number };
 }

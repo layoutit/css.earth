@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "2205f103ba0fadcd2fbed3d3ebd76d137c345c1fb952f2b1a77ecd0bcd50f84c"
+    "sha256": "b798f188104bc17014de90393fbb4bcd2c21419317b80b1f3fdad69c88039b00"
   },
   "id": "gaspra",
   "properties": {
@@ -17,6 +17,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -86,9 +87,18 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "3b35f53dddc60859ca20725d764026dae2a0130e8249da14a2c3639ba2faba90"
+          "sha256": "61c1d0ede16f6b967896ee0649e494fb1f44fde3ef3559f84ee05bb02e104043"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "a8b4d62115de1da00ce1582d98a0ffc6822ec9b0c8948e099030a8ee10f6f64d"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -123,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9bdfaccfe19cebae19402e23c6a03632fc23107ce9e7e958801e4fb85a4524d4"
+        "sha256": "9a8bb77fbfed5be3b130483e8a9c534e5c39bcb1be4548c40e80c76990d853fe"
       }
     },
     "catalog": {

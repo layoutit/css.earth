@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "tethys",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6c06842130406c630fb063d72ed728ff56acf4181406b40294e5b94b3b53da9e"
+    "sha256": "9beeacd8aa45716f96fe5c6ed89574702fc6ced3819e9a6049626cbec43a924f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -733,6 +733,68 @@
           }
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "af30db5e19cee994d3b7dfc2d7fa48bd55d84ea25424a0ce9a981b32edfd2e26",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "TETHYS_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "TETHYS_nomenclature_center_pts.dbf",
+          "projection": "TETHYS_nomenclature_center_pts.prj",
+          "metadata": "metadata_nomenclature_points_TETHYS.xml"
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "tethys-features.json",
+        "publicBase": "/scenes/tethys/",
+        "target": {
+          "className": "tethys-body"
+        },
+        "lensIds": [
+          "normal",
+          "enhanced",
+          "elevation",
+          "relative-albedo",
+          "shape",
+          "infrared",
+          "ice-absorption"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 1,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 48,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        }
+      }
     }
   ],
   "sources": [
@@ -785,7 +847,7 @@
       "sha256": "40723c3ebfaaa52a657827b37309bc84234811db1cf26a21d086e26aba2b3640",
       "bytes": 66401923,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -824,7 +886,7 @@
       "sha256": "afa8fe486779512d843e645bcb56d088bd9f948553e0b4d26bc25d5d40c20759",
       "bytes": 17694840,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -887,7 +949,7 @@
       "sha256": "aa3c249de2432699157638dae11c6f5c5e22c3dda94dd803af8666269f1a3da4",
       "bytes": 10809057,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -948,7 +1010,7 @@
       "sha256": "620881bff247aa48f0f98e05d06cbccad6a3e43133794f0621ffb0aa1cb4d7bc",
       "bytes": 117380,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1002,7 +1064,7 @@
       "sha256": "02b967b03598630765ec61545a7886ee8f4abda45fdae500f5af03358ebf5546",
       "bytes": 6044029,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1064,7 +1126,7 @@
       "sha256": "2770434e4d2473c4febac01cd206ffecde17170f05a082942cd3b841a5724453",
       "bytes": 790789,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1126,7 +1188,7 @@
       "sha256": "2f301f3a334665829a2d8dae8342273f2bc77c6ceac1aa88dbc5ed243e869c74",
       "bytes": 790789,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1173,7 +1235,7 @@
       "sha256": "57e0a23ea94acc47b3eb1d2d62d108a90f4d1a345b38b9b800abf19ebb16b73f",
       "bytes": 6044029,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1220,7 +1282,7 @@
       "sha256": "0047f9474973b09588f5aec6c549d6bc2dd4c70cd06600fab8d3a579aa03c610",
       "bytes": 790789,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1267,7 +1329,7 @@
       "sha256": "f2d4bcf46ea64f2d389e530567a7518da40841d34f88bd68384fafb991ea4808",
       "bytes": 790789,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1331,7 +1393,7 @@
       "sha256": "d55c543360d7612d68271dea75721766cf484c560c4f4d4f34cae1d813864d6a",
       "bytes": 126710,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1351,7 +1413,80 @@
       "sha256": "6dd38ece1b2146204fe804d3aa7fce4560eabae5d714d4390d0f5ec4bd456d43",
       "bytes": 15841,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "tethys-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "sha256": "00870b543185b5e886cc0e1737d6eebfa786378dc2e434392ba7fe9fd1b99957",
+      "bytes": 1005,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-tethys-nomenclature-center-pts",
+      "path": "features/TETHYS_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/TETHYS_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Tethys on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Tethys centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/TETHYS/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      },
+      "sha256": "5592104993c28326db51e3438ad90e98327ab66dbd7ba979f7264561856c9eac",
+      "bytes": 176019,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/TETHYS_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/TETHYS_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "tethys-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "sha256": "6c2b8a9f7f7b9959adc5b77ec09fd2b22daa182f043bb119bc362e3cc6b2cbd3",
+      "bytes": 153,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1392,13 +1527,13 @@
           "url": "/scenes/tethys/tethys-normal-thumbnail.webp",
           "bytes": 3346,
           "sha256": "88d6c15ac8f7f5fc8a32a9e36ab91f5434b9d10e4401f06c1d6faa7c5a294444",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-normal-surface@2x.webp",
           "bytes": 7399756,
           "sha256": "b21714368e32da7f99379635334762c1e02f381169f4e9ddccafd98b660c4ea7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1435,13 +1570,13 @@
           "url": "/scenes/tethys/tethys-enhanced-thumbnail.webp",
           "bytes": 5928,
           "sha256": "2d561a1f874e82ce11a81f420051e4f0194d4ef23326b6697c66d39c8cbe3ebf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-enhanced-surface@2x.webp",
           "bytes": 9546302,
           "sha256": "b4e5386fecaeebd62c6ecd8e20887f9b012963e8e05598065cc5043633743bfc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1495,13 +1630,13 @@
           "url": "/scenes/tethys/tethys-infrared-thumbnail.webp",
           "bytes": 3104,
           "sha256": "9c52a691651e90f2195e6fd5c0722c7420aa87951bc2bc7ecd3b48501a0e52e3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-infrared-surface@2x.webp",
           "bytes": 58586,
           "sha256": "01d161f1def6fca518f4a37db8f18b5891816de11f38c6f517f60ca3aeafeca0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1540,19 +1675,19 @@
           "url": "/scenes/tethys/tethys-elevation-thumbnail.webp",
           "bytes": 7234,
           "sha256": "8521ccff8607bb1fc3c363cfbfb52ec18652c05c44223b75715b67a286b03eca",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-elevation-surface@2x.webp",
           "bytes": 3480644,
           "sha256": "708bf83ed3773a589e2f91fa7f80261f29ae686b1b2d5e53bc40b7975e7b3861",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1591,19 +1726,19 @@
           "url": "/scenes/tethys/tethys-relative-albedo-thumbnail.webp",
           "bytes": 3410,
           "sha256": "293a567b012557e16ed3d24425f3cc28c09369218b8a36805ecf057f66a13d0c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-relative-albedo-legend.webp",
           "bytes": 276,
           "sha256": "f61e0581d01ee4f64e6fdc197976a02ff5d748a017b594b59ba493725548f6f7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-relative-albedo-surface@2x.webp",
-          "bytes": 1604256,
-          "sha256": "95f9495fcdb9f271e52f1c8f4204abd39d8ac588571d3577e3fb105b4c313bad",
-          "verification": "asset-manifest-pin"
+          "bytes": 19324646,
+          "sha256": "9cee634e4a9620ac3df5749aac90d2293085c64035a56f9184319444f99720f0",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1637,19 +1772,19 @@
           "url": "/scenes/tethys/tethys-ice-absorption-thumbnail.webp",
           "bytes": 1572,
           "sha256": "bf86ebcd9abad0f0a7a668ea0620f76b72108ecdffd5f7ee903c09c90b0564c1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-ice-absorption-legend.webp",
           "bytes": 146,
           "sha256": "ed82e428e522e7e2d075c9f2d7989d8f3adb9c3ed7989f80445ad69750361b6e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-ice-absorption-surface@2x.webp",
           "bytes": 67856,
           "sha256": "34597960ea92a99a696e95558b82ffd7fd38d6db40bbe95b7f232ac3436e309b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1681,13 +1816,13 @@
           "url": "/scenes/tethys/tethys-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "7cbf01ce5434f5fcede86cd13c94e775de945744f9c116cb76c3a3ba97f3761d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-shape-surface@2x.webp",
           "bytes": 464516,
           "sha256": "dcaecb1a58a830b5900dd46f9ac1d3529f3fb78ef623e48e2ff65e402b024d67",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1710,8 +1845,42 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6138,
-          "sha256": "05429cc6cc9a6826bb57bc1a194166936e24f679ba239916a29e55711c817456",
+          "bytes": 6256,
+          "sha256": "b5b9bc02aa7b5ba23b880e7ee049466894a40c0f15817a801a8c5f7a99494904",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "tethys-surface-features-source",
+        "usgs-gazetteer-tethys-nomenclature-center-pts",
+        "tethys-surface-map-frame"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/tethys/tethys-features.json",
+          "bytes": 53832,
+          "sha256": "b2fb8aebe2ae0d68a2b315206b09548558d562386642fe916b43082f6258198f",
           "verification": "bytes-verified"
         }
       ],
