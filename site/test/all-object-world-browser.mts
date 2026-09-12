@@ -338,7 +338,7 @@ async function orbitProjection() {
     for (const { point } of Object.values(probe.expected)) {
       if (!point.orbit) continue;
       const vertices = point.orbit.verticesM.map(project);
-      for (const node of window.__cssearthTest.required(window.__cssearthTest.universe().inspect().bodies.find(body => body.id === point.id), `orbit ${point.id}`).orbit) {
+      for (const node of window.__cssearthTest.required(window.__cssearthTest.universe().inspect().bodies.find(body => body.id === point.id), `orbit ${point.id}`).orbit as HTMLElement[]) {
         if (getComputedStyle(node).visibility === 'hidden' || !(Number(node.style.opacity) > 0)) continue;
         const m = new DOMMatrix(node.style.transform), p = [m.e, m.f], q = [m.e + m.a, m.f + m.b];
         let nearest = Infinity;

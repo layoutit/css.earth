@@ -120,6 +120,24 @@
       ],
       "path": "features/MARS_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MARS_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "features/traverses/m2020_best_tactical.csv",
+      "url": "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/best_tactical.csv"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "features/traverses/msl_localized_pos.csv",
+      "url": "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/localized_pos.csv"
     }
   ]
 }

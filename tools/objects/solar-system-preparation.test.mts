@@ -12,20 +12,31 @@ import { pathToFileURL } from "node:url";
 import { prepareSolarSystemCamera, prepareSolarSystemScene, prepareSolarSystemSunPresentation } from "./solar-system-scene.mts";
 import { prepareSolarSystemPresentation } from "./solar-system-presentation.mts";
 import { prepareSolarSystemMarkerStrip } from "./solar-system-markers.mts";
-import mercuryScene from "../../src/planets/mercury/prepared/scene.json" with {type: "json"};
-import mercurySky from "../../src/planets/mercury/prepared/sky.json" with {type: "json"};
-import mercurySun from "../../src/planets/mercury/prepared/sun.json" with {type: "json"};
-import mercuryAssets from "../../src/planets/mercury/prepared/assets.json" with {type: "json"};
-import mercuryStrip from "../../src/planets/mercury/prepared/markers.json" with {type: "json"};
-import mercuryPresentation from "../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
-import venusScene from "../../src/planets/venus/prepared/scene.json" with {type: "json"};
-import venusSky from "../../src/planets/venus/prepared/sky.json" with {type: "json"};
+import { readJsonSource } from '../source-values.mts';
 import { PREPARED_NAVIGATION_MARKERS } from "../../site/prepared-navigation-markers.mjs";
 import { prepareCatalogueStars } from "../../src/platform/prepare-catalogue-stars.mts";
 import { preparePlanetDirectionalSun } from "../../src/platform/prepare-directional-sun.mts";
 import { loadAstronomyPackage } from "../../src/platform/astronomy-package.mts";
 import { SOLAR_GEOMETRY_EPOCH_JD_TT } from "../../src/platform/solar-geometry.mts";
 import type { Vec3 } from "@cssearth/astronomy";
+
+// The prepared fixtures are generated, ignored files: read them at run time so
+// the typecheck does not depend on a prepared checkout. Their shapes are the
+// producers' own return and parameter types, checked further by the comparisons below.
+type SceneConfig = Parameters<typeof prepareSolarSystemScene>[0];
+type PreparedScene = Awaited<ReturnType<typeof prepareSolarSystemScene>> & { body: { leaves: { style: string; polarCap: string | null }[] }; bodyLeaves: { style: string; polar?: unknown }[] };
+type PreparedSun = SceneConfig['sun'] & { distanceScaling: { meanHeliocentricDistanceAu: number }; asset: { generator: string }; provenance: { sourcePath: string } };
+type PhaseAtlas = NonNullable<Parameters<typeof prepareSolarSystemPresentation>[0]['phaseAtlas']>;
+type PreparedAssets = { lighting: { banks: Record<string, { billboard: Omit<PhaseAtlas, 'minimumLightViewZ' | 'maximumLightViewZ' | 'baseLightAzimuthDegrees'> }>;
+  minimumLightViewZ: number; maximumLightViewZ: number; baseLightAzimuthDegrees: number; presentationFrameSize: number } };
+type PreparedStrip = Awaited<ReturnType<typeof prepareSolarSystemMarkerStrip>>['plan'];
+const prepared = async <T,>(id: string, file: string) => requireRecord(await readJsonSource(new URL(`../../src/planets/${id}/prepared/${file}`, import.meta.url))) as T;
+const [mercuryScene, mercurySky, mercurySun, mercuryAssets, mercuryStrip, venusScene, venusSky] = await Promise.all([
+  prepared<PreparedScene>('mercury', 'scene.json'), prepared<SceneConfig['starfield']>('mercury', 'sky.json'), prepared<PreparedSun>('mercury', 'sun.json'),
+  prepared<PreparedAssets>('mercury', 'assets.json'), prepared<PreparedStrip>('mercury', 'markers.json'),
+  prepared<PreparedScene>('venus', 'scene.json'), prepared<SceneConfig['starfield']>('venus', 'sky.json')]);
+const mercuryPresentation = requireObjectRuntimeDefinition(await readJsonSource(new URL('../../src/planets/mercury/prepared/runtime.json', import.meta.url)));
+const mercuryView = required(mercuryPresentation.heliocentricView, 'Mercury heliocentric view');
 
 const mercuryConfig: Parameters<typeof prepareSolarSystemScene>[0] = { bodyId: "mercury", bodyRadiusUnits: 230, bodyRadiusKilometers: 2439.7,
   defaultZoom: 1.1, geometryScale: 1, starfield: mercurySky, sun: mercurySun };
@@ -40,7 +51,7 @@ if (mercuryStrip.model !== 'synthetic-flat-colour-discs') throw new Error('Unexp
 const systemMarkerStrip: NonNullable<Parameters<typeof prepareSolarSystemPresentation>[0]['systemMarkerStrip']> = { ...mercuryStrip, model: mercuryStrip.model };
 const presentationConfig: Parameters<typeof prepareSolarSystemPresentation>[0] = { bodyId: "mercury", plan: mercuryPrepared.heliocentricView,
   navigationMarkers: PREPARED_NAVIGATION_MARKERS, markerAtlasUrl: "/navigation/body-sun@2x.webp",
-  systemMarkerStrip, phaseAtlas, captionNames: mercuryPresentation.heliocentricView.labels.names, catalogue };
+  systemMarkerStrip, phaseAtlas, captionNames: required(mercuryView.labels, 'Mercury view labels').names, catalogue };
 const tiles = [
   { id: "ceres", color: [110, 106, 102], size: 5 },
   { id: "eris", color: [232, 230, 226], size: 6 },
@@ -51,8 +62,8 @@ const tiles = [
 test("Mercury retained leaf mapping and shared delivery remain source-bound and demand driven", () => {
   const presentation = structuredClone(mercuryPresentation);
   assertPreparedProjectiveMappings(presentation, mercuryScene);
-  const view = presentation.heliocentricView;
-  for (const [id, marker] of Object.entries({mercury: view.bodyMarker, sun: view.systemMarkers.sun, ...view.systemMarkers.bodies})) {
+  const view = required(presentation.heliocentricView, 'Mercury heliocentric view'), systemMarkers = required(view.systemMarkers, 'Mercury system markers');
+  for (const [id, marker] of Object.entries({mercury: view.bodyMarker, sun: systemMarkers.sun, ...systemMarkers.bodies})) {
     if (!marker.url?.startsWith('/scenes/')) {
       assert.equal(marker.count, PREPARED_NAVIGATION_MARKERS[id].count, `${id}: body sprite count`);
       assert.equal(marker.index, PREPARED_NAVIGATION_MARKERS[id].index, `${id}: body sprite index`);
@@ -117,11 +128,12 @@ test("shared physical scene reproduces every existing Mercury subplan byte for b
 
 test("shared marker and phase assembly preserves Mercury with only its referenced captions", () => {
   const prepared = prepareSolarSystemPresentation(presentationConfig);
-  const expected = structuredClone(mercuryPresentation.heliocentricView);
-  const ids = ['mercury', 'sun', ...expected.plan.system.bodies.map(body => body.id)];
-  Object.assign(expected.labels, { names: Object.fromEntries([...new Set(ids)].map(id => [id, requireString(requireRecord(expected.labels.names)[id])])) });
+  const expected = structuredClone(mercuryView);
+  const system = required(required(expected.plan, 'Mercury view plan').system, 'Mercury system plan'), labels = required(expected.labels, 'Mercury view labels');
+  const ids = ['mercury', 'sun', ...system.bodies.map(body => body.id)];
+  Object.assign(labels, { names: Object.fromEntries([...new Set(ids)].map(id => [id, requireString(requireRecord(labels.names)[id])])) });
   // The common fallback now names Sun's own sprite; explicit body addresses remain pinned.
-  expected.systemMarkers.url = "/navigation/body-sun@2x.webp";
+  required(expected.systemMarkers, 'Mercury system markers').url = "/navigation/body-sun@2x.webp";
   assert.deepEqual(JSON.parse(JSON.stringify(prepared)), expected);
   assert.equal(prepared.bodyMarker.size, 1.2);
   assert.equal(prepared.labels.stars.records.length, 450);
@@ -144,10 +156,8 @@ test("shared Sun presentation regenerates the original Mercury phase, raster, an
       preparedModulePath: pathToFileURL(join(root, "prepared.mjs")), ensureDirectories: () => mkdir(root, { recursive: true }),
       meanHeliocentricDistanceAu: mercurySun.distanceScaling.meanHeliocentricDistanceAu, presentation });
     const expected = structuredClone(mercurySun);
-    assert.equal(expected.asset.generator, 'src/platform/prepare-directional-sun.mjs');
-    assert.equal(expected.provenance.sourcePath, 'src/platform/solar-geometry.mjs');
-    expected.asset.generator = 'src/platform/prepare-directional-sun.mts';
-    expected.provenance.sourcePath = 'src/platform/solar-geometry.mts';
+    assert.equal(expected.asset.generator, 'src/platform/prepare-directional-sun.mts');
+    assert.equal(expected.provenance.sourcePath, 'src/platform/solar-geometry.mts');
     assert.equal(JSON.stringify(prepared), JSON.stringify(expected));
     for (const density of [prepared.asset.density1, prepared.asset.density2]) {
       const bytes = await readFile(join(root, required(density.url.split('/').at(-1))));
