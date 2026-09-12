@@ -116,3 +116,6 @@ export interface PreparedCssPointFieldManifest extends Omit<PreparedCssPointFiel
   readonly schema: 'cssearth-css-point-field-bank@1';
   readonly bank: PreparedPointFieldBank;
 }
+
+/** Prepared optical appearance used by the Sun marker, without catalogue rows or hierarchy. */
+export type PreparedPointAppearance = Pick<PreparedCssPointField, 'id' | 'frame' | 'atlas' | 'photometry' | 'resources'>;
