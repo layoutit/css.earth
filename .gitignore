@@ -51,6 +51,12 @@ src/planets/*/.prepared/
 
 # Prepared JSON transport rebuilt from checked-in object preparation output.
 /src/planets/*/prepared/object.json
+# Full prepared files restored from their checked-in `*.refs.json` twins and the
+# shared banks (`pnpm prepare:object-json`). The twins reference the planet point
+# photometry, star catalogue and label banks instead of repeating them per body.
+/src/planets/*/prepared/runtime.json
+/src/planets/*/prepared/scene.json
+/src/planets/*/prepared/sky.json
 
 /src/planets/charon/source/observations/*.tif
 /src/planets/charon/source/science/*.tif
@@ -142,14 +148,10 @@ src/planets/*/source/**/*.bpc
 
 # Replayed by the nebula bake recipe; keep source/settings and expected hashes.
 /labs/nebula/models/*/star-separation/prepared/
-/src/objects/lmc/prepared/*/slices/
 
-# Runtime environment rasters and lab inspection panels replay from pinned inputs.
-/src/objects/*/prepared/**/*.webp
-/src/objects/*/prepared/**/*.png
-/src/objects/*/prepared/**/*.jpg
-/src/objects/*/prepared/**/*.jpeg
-/src/objects/*/prepared/**/*.avif
+# Prepared environment rasters under src/objects are committed: lossy WebP
+# encoding is not byte-identical across platforms, so a fresh checkout verifies
+# the accepted bytes instead of replaying them (`--verify-replay` still can).
 /labs/nebula/models/*/candidates/prepared/*.webp
 /labs/nebula/models/*/clouds-observation/source/target.png
 # Reacquirable distant-world paper originals; acquisition recipes pin exact bytes.
@@ -186,3 +188,30 @@ src/planets/*/source/**/*.bpc
 /site/prepared-shell-icons.mjs
 /site/prepared-shell-titles.mjs
 /site/source/branding/wordmark-rail-segments.mjs
+
+# Radial-terrain reports and source-index rasters are preparation output that
+# only the audits read. Comet 67P's are cited as evidence by its README and stay.
+/src/planets/*/prepared/terrain.json
+/src/planets/*/prepared/terrain-*.json
+/src/planets/*/prepared/*-source-index.json
+!/src/planets/comet-67p/prepared/terrain.json
+!/src/planets/comet-67p/prepared/osiris-source-index.json
+
+# Large source inputs with pinned archive downloads; `pnpm prepare:checkout` (or
+# `node tools/objects/dist/operations.js acquire <id>`) restores and verifies them.
+/src/planets/comet-67p/source/geology/shap7-regions.vtk
+/src/planets/dione/source/science/b2-intake/dioneshapeassessment.pdf
+/src/planets/enceladus/source/vims-chemistry/native/C1489049741_1_ir.cub
+/src/planets/enceladus/source/vims-chemistry/native/C1702362997_1_ir.cub
+/src/planets/iapetus/source/cassini-ice/native/C1568129671_1_ir.cub
+/src/planets/iapetus/source/cassini-ice/native/C1568157352_4_ir.cub
+/src/planets/iapetus/source/cassini-ice/raw/v1568129671_1.qub
+/src/planets/iapetus/source/cassini-ice/raw/v1568157352_4.qub
+/src/planets/lutetia/source/shape/lutetia_025k_cart.wrl
+/src/planets/phoebe/source/cassini-ice/native/C1465671822_1_ir.cub
+/src/planets/phoebe/source/science/2023/phoebe_albedo_c.cub
+/src/planets/phoebe/source/science/2023/phoebe_radius_c.cub
+/src/planets/steins/source/shape/steins_cart.wrl
+/src/planets/tethys/source/science/b2-intake/tethysshapeassessment.pdf
+/src/planets/titan/source/science/b2-intake/topo_4PPD.cub
+/src/planets/titan/source/science/b2-intake/topo_4PPD_interp.cub

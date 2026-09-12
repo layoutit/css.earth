@@ -4,7 +4,7 @@ export interface PreparedWorldFrame {
   current(): boolean;
   commit(camera: () => void): void;
 }
-interface QueuedRequest extends WorldFrameRequest { cancelled?(): void; presented?(): void; }
+export interface QueuedRequest extends WorldFrameRequest { cancelled?(): void; presented?(): void; }
 
 /** Complete views cross the worker boundary together. New input replaces only
  * the pending request; normal motion never starves an already planned frame. */

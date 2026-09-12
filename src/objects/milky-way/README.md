@@ -16,7 +16,7 @@ milky-way/
     ├── volume-slices.json      Physical quad and texture intermediates
     ├── slices/{x,y,z}/*.webp    Generated, ignored 256 / 256 / 32 texture bank
     ├── sky/{px,nx,py,ny,pz,nz}.webp  Generated, ignored six celestial cube faces
-    └── sky-near/{px,nx,py,ny,pz,nz}.webp  The same faces with neighbourhood stars baked in
+    └── sky-near/{px,nx,py,ny,pz,nz}.webp  Committed: the same faces with the neighbourhood stars baked in
 ```
 
 App startup restores missing images from the pinned sources via `pnpm prepare:environment-images`, preserving the accepted metadata. See the [shared bake commands](../../../labs/nebula/docs/baking.md).
@@ -181,3 +181,9 @@ dust structures or reproduce physical disocclusion. It avoids copying cloud
 features across independent depth layers. Neither geometry nor imagery is
 generated in the browser. The NASA source epoch stays in provenance; shared
 camera metadata uses the volume's Sun-centered ICRF frame and epoch.
+
+## Shared banks
+
+`prepared/shared/catalogue-stars/<sha256>.json` is the retained star catalogue
+that every body's cubic sky references by content hash instead of repeating it;
+see [prepared shared banks](../../../docs/prepared-shared-banks.md).

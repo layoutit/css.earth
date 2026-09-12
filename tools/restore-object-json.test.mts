@@ -6,12 +6,12 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { restoreObjectJson } from './restore-object-json.mts';
 
-test('restores a missing transport from its pinned runtime without rebaking or repinning', async () => {
+test('restores a missing transport from its pinned runtime twin without rebaking or repinning', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-json-restore-'));
   try {
     const directory = resolve(root, 'src/planets/thetis');
     await mkdir(resolve(directory, 'prepared'), { recursive: true });
-    for (const file of ['object.json', 'prepared/runtime.json']) {
+    for (const file of ['object.json', 'prepared/runtime.refs.json']) {
       await copyFile(new URL(`../src/planets/thetis/${file}`, import.meta.url), resolve(directory, file));
     }
     const descriptorBytes = await readFile(resolve(directory, 'object.json'));
@@ -23,7 +23,7 @@ test('restores a missing transport from its pinned runtime without rebaking or r
     await utimes(target, 1, 1);
     assert.deepEqual(await restoreObjectJson(['thetis'], root), { objects: 1, written: 0, reused: 1 });
     assert.equal((await stat(target)).mtimeMs, 1000);
-    const runtimePath = resolve(directory, 'prepared/runtime.json');
+    const runtimePath = resolve(directory, 'prepared/runtime.refs.json');
     const runtime = JSON.parse(await readFile(runtimePath, 'utf8'));
     await writeFile(runtimePath, JSON.stringify({ ...runtime, changed: true }));
     await assert.rejects(restoreObjectJson(['thetis'], root), /does not reproduce.*pin/);

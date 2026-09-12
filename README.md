@@ -35,7 +35,7 @@ To build all routes for production, run `pnpm setup:assets`, `pnpm build`, then
 
 ## Checks
 
-With Node 22 and the pinned pnpm version, first run
+With Node 22.18+ or Node 24 and the pinned pnpm version, first run
 `pnpm install --frozen-lockfile --ignore-scripts` in a fresh checkout. Then
 `pnpm check:ci` runs the command steps from the GitHub workflow locally.
 It verifies the dependency installation, prepares required
@@ -111,6 +111,8 @@ src/planets/<id>/
 ├── object.json                  Pinned capability recipe and transport digest
 ├── source/                      Authored JSON, scientific inputs and provenance
 ├── prepared/                    Baked JSON, committed for clean checkouts
+│   ├── *.refs.json              Runtime, scene and sky with shared banks referenced
+│   ├── runtime.json, scene.json, sky.json   Restored full files (Git-ignored)
 │   └── object.json              Rebuilt runtime payload (Git-ignored)
 ├── runtime-assets.json          Reproducible asset inventory
 ├── README.md                    Sources, processing, evidence and known problems
@@ -141,6 +143,8 @@ maintainers publish their updated inventories with `pnpm publish:runtime-assets`
 (or `--object=earth`) before pushing the code that references them.
 
 `prepare:checkout` restores source bytes and generates `public/scenes/` locally.
+Some restores convert NAIF DSK shape kernels and need Python 3 with `numpy`
+(`CSSEARTH_SPICE_PYTHON` selects the interpreter); the tool says so when it is missing.
 This full-source command still restores Earth's retained 19,632-pack geographic
 release (25.4 GB), although the current globe does not use it. Normal
 `setup:assets` installs only prepared browser assets. The release's earlier
