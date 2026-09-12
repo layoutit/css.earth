@@ -37,7 +37,9 @@ async function screen(name: string) {
   await page.screenshot({ path: `${directory}/${name}.png` });
 }
 try {
-  await page.goto(`${base}/catalogue?object=m42`); await ready();
+  await page.goto(`${base}/catalogue?object=m42`); await ready(); await recordsReady();
+  assert.equal(await page.getByRole('combobox', {name:'Rank images'}).inputValue(), 'best');
+  assert.equal(await page.locator('.catalogue-archive').count(), 1);
   const objects = page.getByRole('listbox', { name: 'Select Messier object' });
   assert.equal(await objects.getByRole('option').count(), 110);
   assert.equal(await objects.getByRole('option', { selected: true }).getAttribute('data-object-id'), 'm42');
@@ -85,6 +87,7 @@ try {
       const archivePage = (url: URL) => url.pathname.endsWith(`/${available.imagesPath}`);
       await page.route(archivePage, route => route.fulfill({ contentType: 'application/json', body: '{}' }));
       await page.reload(); await ready(); await recordsReady();
+      await page.getByRole('group', {name:'Filter archive'}).getByRole('button', {name:available.provider.toUpperCase(),exact:true}).click();
       const archive = page.getByRole('region', { name: `${available.provider.toUpperCase()} candidates` });
       assert.match(await archive.locator('[role="alert"]').innerText(), /changed since this snapshot/);
       assert.equal(await archive.locator('.catalogue-product-table').count(), 0, 'Unverified records must never render.');
@@ -110,7 +113,7 @@ try {
   assert.ok(recordRequests.every(id => visited.has(id)), `Unselected object records were fetched: ${recordRequests.join(', ')}`);
   await writeFile(`${directory}/result.json`, JSON.stringify({ status: 'passed', actualCache: Boolean(populated), objects: 110,
     inspectedObject: populated?.objectId, missingSnapshot: true, failedSnapshot: true, invalidSnapshot: true, sourceLinks: Boolean(populated),
-    thumbnailsLoaded: true, largestFirst: true, angularUnits: 'arcseconds', urlSelection: true, keyboardSelection: true, storagePreserved: true, selectedRecordsOnly: true,
+    bestImagesAcrossArchives: true, thumbnailsLoaded: true, largestFirst: true, angularUnits: 'arcseconds', urlSelection: true, keyboardSelection: true, storagePreserved: true, selectedRecordsOnly: true,
     hashGuard: Boolean(populated?.queries.some(query => query.imagesPath)), browser: browser.version(), errors, processing, science }, null, 2));
   console.log(`PASS Messier browser: 110 thumbnail cards, largest-first angular sorting, loaded survey preview, URL/keyboard selection, ${populated ? 'actual archive candidates, filters and links, ' : ''}missing/error/invalid snapshots, no processing or science downloads.`);
 } catch (error) { await screen('failure'); throw error; } finally { await browser.close(); }

@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { archiveProviders, readArchiveQuery, readMessierCatalogue, readMessierInventory, type ArchiveImage, type ArchiveProvider,
   type ArchiveQuery, type MessierCatalogue, type MessierInventory, type MessierObject } from './types';
 import { imageSuitability, inventoryStorage } from './selection';
+import { imageLinks } from './image-links';
+import { imageRank, rankImages, type ImageOrder } from './image-ranking';
 import { readMessierPresentation } from './presentation';
 import { arcseconds, CatalogueThumbnail, displayObjectType, ObjectBrowser, objectExtent, orderObjects, type ObjectAppearance, type ObjectSort } from './object-browser';
 import './catalogue.css';
@@ -102,6 +104,7 @@ export function CatalogueView() {
   const [selectedId, setSelectedId] = useState(readObjectId), [objectSearch, setObjectSearch] = useState(''), [objectType, setObjectType] = useState('all');
   const [provider, setProvider] = useState<ArchiveProvider | 'all'>('all'), [band, setBand] = useState<Band>('all');
   const [imageRole, setImageRole] = useState<ImageRole | 'all'>('all');
+  const [imageOrder, setImageOrder] = useState<ImageOrder>('best');
   const [resolution, setResolution] = useState('all'), [productSearch, setProductSearch] = useState('');
   const [reload, setReload] = useState(0), [loading, setLoading] = useState(true), [error, setError] = useState('');
   const [missing, setMissing] = useState(false);
@@ -152,6 +155,11 @@ export function CatalogueView() {
     return () => controller.abort();
   }, [reload]);
   const selected = catalogue?.objects.find(object => object.id === selectedId);
+  const candidateObject = useMemo(() => {
+    if (!selected) return undefined;
+    const extent = objectExtent(selected, appearances.get(selected.id));
+    return { ...selected, majorArcmin: extent.majorArcsec === null ? null : extent.majorArcsec / 60 };
+  }, [selected, appearances]);
   const types = useMemo(() => [...new Set(catalogue?.objects.map(object => displayObjectType(object, appearances.get(object.id))) ?? [])].sort(), [catalogue, appearances]);
   const objects = useMemo(() => {
     const query = objectSearch.trim().toLowerCase().replace(/^m\s+(\d+)$/, 'm$1');
@@ -172,11 +180,11 @@ export function CatalogueView() {
   const filtered = useMemo(() => {
     const query = productSearch.trim().toLowerCase();
     return Object.values(selectedQueries).flatMap(page => page?.query?.images ?? []).filter(image =>
-      matchesBand(image, band) && (imageRole === 'all' || selected && imageSuitability(image, selected).role === imageRole) &&
+      matchesBand(image, band) && (imageRole === 'all' || candidateObject && imageSuitability(image, candidateObject).role === imageRole) &&
       (resolution === 'all' || image.resolutionArcsec !== null && image.resolutionArcsec <= Number(resolution)) &&
       `${image.title} ${image.id} ${image.collection} ${image.facility} ${image.instrument}`.toLowerCase().includes(query));
-  }, [selectedQueries, band, imageRole, selected, resolution, productSearch]);
-  const selectionKey = `${selectedId}:${band}:${imageRole}:${resolution}:${productSearch}`;
+  }, [selectedQueries, band, imageRole, candidateObject, resolution, productSearch]);
+  const selectionKey = `${selectedId}:${band}:${imageRole}:${resolution}:${productSearch}:${imageOrder}:${provider}`;
   return <>
     <header className="lab-header catalogue-header"><h1>Nebula Lab</h1><span className="catalogue-heading">Messier catalogue</span>
       <nav aria-label="Lab navigation"><a href="/alignment" target="_blank" rel="noreferrer">Open lab ↗</a><a href="/catalogue" aria-current="page">Catalogue</a></nav>
@@ -208,6 +216,9 @@ export function CatalogueView() {
               <button type="button" aria-pressed={provider === 'all'} onClick={() => setProvider('all')}>All archives</button>
               {archiveProviders.map(archive => <button key={archive} type="button" aria-pressed={provider === archive} onClick={() => setProvider(archive)}>{names[archive]}</button>)}
             </div>
+            <label className="catalogue-field" title="Metadata triage across the selected archives: usable detail within the field, wider object coverage and combined products. This is not a visual quality measurement.">Rank images<select value={imageOrder} onChange={event => {
+              const value = event.target.value; if (value === 'best' || value === 'resolution' || value === 'coverage') setImageOrder(value);
+            }}><option value="best">Best available first</option><option value="resolution">Finest resolution</option><option value="coverage">Widest field</option></select></label>
             <label className="catalogue-field">Wavelength<select value={band} onChange={event => { const next = Object.keys(bands).find(value => value === event.target.value); if (next) setBand(next as Band); }}>
               {Object.entries(bands).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
             <label className="catalogue-field" title="Provisional role from reported angular resolution and catalogue extent. Close-ups are retained; neither role establishes complete coverage.">Image role<select value={imageRole} onChange={event => {
@@ -218,8 +229,9 @@ export function CatalogueView() {
             <label className="catalogue-field">Find image<input type="search" value={productSearch} onChange={event => setProductSearch(event.target.value)} placeholder="Instrument, collection…" /></label>
           </div>
           <div className="catalogue-candidates">
-            {(provider === 'all' ? archiveProviders : [provider]).map(archive => <ArchiveGroup key={`${selectionKey}:${archive}`} provider={archive}
-              object={selected} query={target?.queries.find(query => query.provider === archive)} page={selectedQueries[archive]} images={filtered.filter(image => image.provider === archive)} />)}
+            {candidateObject && <ArchiveGroup key={selectionKey} provider={provider} object={candidateObject} order={imageOrder}
+              queries={(target?.queries ?? []).filter(query => provider === 'all' || query.provider === provider)}
+              loaded={selectedQueries} images={filtered.filter(image => provider === 'all' || image.provider === provider)} />}
             <p className="catalogue-footer" title={inventory?.policy ?? 'Archive metadata is collected by the explicit catalogue inventory command.'}>
               {candidateCount} candidate records · metadata only · advertised sizes may be incomplete. Preview and data links open separately; browsing starts no processing.
             </p>
@@ -257,39 +269,47 @@ function ObjectHeading({ object, catalogue, appearance }: { object: MessierObjec
     </div>
   </>;
 }
-function ArchiveGroup({ provider, query, page: loaded, images, object }: { provider: ArchiveProvider; query?: ArchiveQuery; page?: LoadedQuery; images: ArchiveImage[]; object: MessierObject }) {
+function ArchiveGroup({ provider, queries, loaded, images, object, order }: {
+  provider: ArchiveProvider | 'all'; queries: ArchiveQuery[]; loaded: Partial<Record<ArchiveProvider, LoadedQuery>>;
+  images: ArchiveImage[]; object: MessierObject; order: ImageOrder;
+}) {
   const [page, setPage] = useState(0), limit = 25;
-  const sorted = useMemo(() => [...images].sort((a, b) => (a.resolutionArcsec ?? Infinity) - (b.resolutionArcsec ?? Infinity) || (b.fieldDegrees ?? 0) - (a.fieldDegrees ?? 0) || a.id.localeCompare(b.id)), [images]);
+  const label = provider === 'all' ? 'All archives' : names[provider];
+  const sorted = useMemo(() => rankImages(images, object, order), [images, object, order]);
   const pages = Math.max(1, Math.ceil(sorted.length / limit)), actualPage = Math.min(page, pages - 1);
   const displayed = sorted.slice(actualPage * limit, (actualPage + 1) * limit);
-  const count = query?.imageCount ?? query?.images.length ?? 0;
-  return <section className="catalogue-archive" aria-label={`${names[provider]} candidates`} aria-busy={loaded?.loading ?? false}>
-    <div className="catalogue-archive-heading"><h3>{names[provider]}</h3>
-      <span className="catalogue-archive-status" data-status={query?.status ?? 'pending'} title={query?.queriedAt ? `Selected metadata query at ${query.queriedAt}. Query complete does not mean every archive holding was searched.` : 'No completed metadata query yet.'}>{queryStatus(query)}</span>
-      {query && <span className="catalogue-archive-status">{images.length} shown / {count} cached{query.matchedCount !== null ? ` / ${query.matchedCount} matched` : ''}</span>}
-      {query && <span className="catalogue-archive-status" title="Archive-advertised size total for matching query records; unknown sizes are excluded, not zero.">Query estimate {bytes(query.matchedEstimatedBytes)}{query.matchedUnknownSizeCount === null ? ' · unknown-size count unreported' : query.matchedUnknownSizeCount ? ` + ${query.matchedUnknownSizeCount} unknown sizes` : ''}</span>}
+  const count = queries.reduce((sum, query) => sum + (query.imageCount ?? query.images.length), 0);
+  const busy = queries.some(query => loaded[query.provider]?.loading);
+  const failed = queries.some(query => loaded[query.provider]?.error || query.status === 'error');
+  return <section className="catalogue-archive" aria-label={`${label} candidates`} aria-busy={busy}>
+    <div className="catalogue-archive-heading"><h3>{label}</h3>
+      <span className="catalogue-archive-status">{images.length} shown / {count} cached · {order === 'best' ? 'Best available first' : order === 'resolution' ? 'Finest resolution' : 'Widest field'}</span>
+      {queries.map(query => <span key={query.provider} className="catalogue-archive-status" data-status={query.status}
+        title="The result limit and missing metadata constrain this ranking; query completion is not exhaustive archive coverage.">{names[query.provider]}: {queryStatus(query)}</span>)}
     </div>
-    {query?.status === 'error' && <p className="catalogue-archive-note" role="alert">{query.error}</p>}
-    {loaded?.loading && <p className="catalogue-archive-note" role="status">Reading image records…</p>}
-    {loaded?.error && <p className="catalogue-archive-note" role="alert">{loaded.error}{loaded.query ? ' Showing the previously verified records.' : ''}</p>}
-    {query?.status === 'truncated' && <p className="catalogue-archive-note">The archive query hit a result limit; this is a partial inventory.</p>}
-    {!displayed.length ? !loaded?.loading && !loaded?.error && <p className="catalogue-empty">{!query || query.status === 'pending' ? 'Awaiting archive query.' : count ? 'No images match these filters.' : query.status === 'error' ? 'No cached image records.' : 'No images returned by this query.'}</p> : <>
-      <table className="catalogue-product-table"><caption className="visually-hidden">{names[provider]} image candidates, ordered by reported angular resolution.</caption>
+    {queries.map(query => {
+      const record = loaded[query.provider], error = record?.error ?? (query.status === 'error' ? query.error : undefined);
+      return error ? <p key={query.provider} className="catalogue-archive-note" role="alert">{names[query.provider]}: {error}{record?.query ? ' Showing previously verified records.' : ''}</p> : null;
+    })}
+    {busy && <p className="catalogue-archive-note" role="status">Reading image records…</p>}
+    {!displayed.length ? !busy && !failed && <p className="catalogue-empty">{!queries.length || queries.every(query => query.status === 'pending') ? 'Awaiting archive query.' : count ? 'No images match these filters.' : 'No images returned by this query.'}</p> : <>
+      <table className="catalogue-product-table"><caption className="visually-hidden">{label} image candidates ordered by {order === 'best' ? 'metadata suitability' : order}.</caption>
         <thead><tr><th scope="col">Image / wavelength</th><th scope="col">Resolution / dimensions</th><th scope="col">Coverage / file size</th><th scope="col">Links</th></tr></thead>
-        <tbody>{displayed.map(image => <ImageRow key={image.id} image={image} object={object} />)}</tbody>
+        <tbody>{displayed.map(image => <ImageRow key={`${image.provider}:${image.id}`} image={image} object={object} />)}</tbody>
       </table>
-      {pages > 1 && <div className="catalogue-pagination"><button type="button" disabled={actualPage === 0} onClick={() => setPage(actualPage - 1)} aria-label={`Previous ${names[provider]} page`}>Previous</button>
-        <span>{actualPage + 1} / {pages}</span><button type="button" disabled={actualPage >= pages - 1} onClick={() => setPage(actualPage + 1)} aria-label={`Next ${names[provider]} page`}>Next</button></div>}
+      {pages > 1 && <div className="catalogue-pagination"><button type="button" disabled={actualPage === 0} onClick={() => setPage(actualPage - 1)} aria-label={`Previous ${label} page`}>Previous</button>
+        <span>{actualPage + 1} / {pages}</span><button type="button" disabled={actualPage >= pages - 1} onClick={() => setPage(actualPage + 1)} aria-label={`Next ${label} page`}>Next</button></div>}
     </>}
   </section>;
 }
 function ImageRow({ image, object }: { image: ArchiveImage; object: MessierObject }) {
-  const suitability = imageSuitability(image, object);
+  const suitability = imageSuitability(image, object), links = imageLinks(image), rank = imageRank(image, object);
   return <tr data-image-id={image.id}>
     <td>{image.previewUrl && <a href={image.previewUrl} target="_blank" rel="noreferrer" className="catalogue-product-preview"><CatalogueThumbnail url={image.previewUrl} alt={`${image.title || image.id} archive preview`} /></a>}
-      <h4 className="catalogue-product-title">{image.title || image.id}</h4><span className="catalogue-product-meta">{[image.collection, image.facility, image.instrument].filter(Boolean).join(' · ')}</span>
+      <h4 className="catalogue-product-title">{image.title || image.id}</h4><span className="catalogue-product-meta">{[names[image.provider], image.collection, image.facility, image.instrument].filter(Boolean).join(' · ')}</span>
       <span className="catalogue-product-meta">{wavelength(image)}{image.exposureSeconds !== null ? ` · ${image.exposureSeconds.toLocaleString()} s` : ''}</span>
-      <span className="catalogue-product-meta" title="Metadata estimate only. Detail compares reported angular resolution with the catalogue extent, not the image's usable structure or accepted quality.">{roleLabels[suitability.role]}</span></td>
+      <span className="catalogue-product-meta" title="Metadata estimate only. Detail compares reported angular resolution with the catalogue extent, not the image's usable structure or accepted quality.">{roleLabels[suitability.role]}</span>
+      <span className="catalogue-product-meta catalogue-rank-reasons" title="Ranking clues from archive metadata; these do not measure image noise, saturation, registration or exact coverage.">{rank.reasons.join(' · ')}</span></td>
     <td>{image.resolutionArcsec === null ? 'Unreported' : `${image.resolutionArcsec.toLocaleString(undefined, { maximumSignificantDigits: 3 })}″`}
       <span className="catalogue-product-meta">{image.width && image.height ? `${image.width.toLocaleString()} × ${image.height.toLocaleString()} px` : 'Pixel dimensions unreported'}</span></td>
     <td title="Reported field diameter and archive-advertised size. Neither establishes complete nebula coverage.">FOV {angle(image.fieldDegrees)}
@@ -297,8 +317,10 @@ function ImageRow({ image, object }: { image: ArchiveImage; object: MessierObjec
       {suitability.fieldRatio !== null && <span className="catalogue-product-meta" title="Reported field diameter divided by the catalogue reference extent. Image centering and full nebula coverage still require inspection.">{suitability.fieldRatio < 1 ? 'Local field' : 'Wider field'} · {suitability.fieldRatio.toFixed(2)}× extent</span>}
       {image.raDegrees !== null && image.decDegrees !== null && <span className="catalogue-product-meta" title="Reported ICRS image center, retained for later sky registration.">{image.raDegrees.toFixed(4)}°, {image.decDegrees.toFixed(4)}°</span>}
       {image.footprint && <span className="catalogue-product-meta" title={image.footprint}>Sky footprint available ⓘ</span>}</td>
-    <td><div className="catalogue-product-links"><a href={image.sourceUrl} target="_blank" rel="noreferrer">Source ↗</a>
-      {image.previewUrl && <a href={image.previewUrl} target="_blank" rel="noreferrer">Preview ↗</a>}
-      {image.accessUrl && <a href={image.accessUrl} target="_blank" rel="noreferrer" title={`Open archive data link; advertised size ${bytes(image.estimatedBytes)}.`}>Data ↗</a>}</div></td>
+    <td><div className="catalogue-product-links"><a href={links.sourceUrl} target="_blank" rel="noreferrer"
+      title={links.sourceIsViewer ? 'Inspect this archive product in the IRSA web viewer.' : 'Open the published archive record.'}>Source ↗</a>
+      {links.viewUrl && links.viewUrl !== links.sourceUrl && <a href={links.viewUrl} target="_blank" rel="noreferrer">View image ↗</a>}
+      {links.filesUrl && links.filesUrl !== links.sourceUrl && <a href={links.filesUrl} target="_blank" rel="noreferrer">Files ↗</a>}
+      {links.downloadUrl && <a href={links.downloadUrl} target="_blank" rel="noreferrer" title={`Download original file; advertised size ${bytes(image.estimatedBytes)}.`}>Download{links.fits ? ' FITS' : ''} ↓</a>}</div></td>
   </tr>;
 }
