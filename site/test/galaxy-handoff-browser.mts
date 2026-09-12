@@ -41,7 +41,10 @@ try {
     const snapshot = {...observation, background:await backgroundSignal(png)};
     samples.push(snapshot);
     assert.equal(snapshot.roots, 1);
-    assert.equal(snapshot.skyFaces, 6);
+    // The baked neighbourhood stars layer over the photograph, so a face has
+    // more than one node; the cube is still six faces.
+    assert.deepEqual(snapshot.skyFaceNames, ['nx', 'ny', 'nz', 'px', 'py', 'pz']);
+    assert.equal(snapshot.skyFaces % 6, 0);
     // Native computed opacity is serialized to fewer digits than the prepared weights.
     assert.ok(Math.abs(snapshot.skyContribution + snapshot.volumeOpacity - 1) < 1e-6,
       'completed-image blend has complementary contributions, without a fade-to-black factor');
@@ -87,6 +90,7 @@ async function read(page: Page) {
       world: window.__cssearthTest.required(window.__cssearthTest.object('sun').camera.captureWorldCamera(window.__handoffFrame), 'shared world pose'),
       roots: document.querySelectorAll('.polycss-camera').length,
       skyFaces: document.querySelectorAll('[data-sky-face]').length,
+      skyFaceNames: [...new Set([...document.querySelectorAll('[data-sky-face]')].map(face => face.getAttribute('data-sky-face')))].sort(),
       skyMatrix: Array.from(new DOMMatrix(window.__cssearthTest.html('.prepared-celestial-sky-scene').style.transform).toFloat64Array()),
       skyContribution: Number(window.__cssearthTest.htmlElement(sky).dataset.skyContribution), skyVisibility: getComputedStyle(window.__cssearthTest.required(sky, 'computed style element')).visibility,
       volumeOpacity: Number(window.__cssearthTest.html('.prepared-volume-context').dataset.volumeOpacity),
