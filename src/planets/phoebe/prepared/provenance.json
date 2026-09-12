@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "phoebe",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "33f4c16259791a0448fc04896be68c0e5cffdfefecf358b4ccdfcb97b8ea27c8"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
@@ -869,7 +869,7 @@
       "sha256": "f22812b0e21b9f448bd83482bd2a664cafe67ea6f8dc23e8c0e205dd0c3e2e8b",
       "bytes": 52468,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -905,7 +905,7 @@
       "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9",
       "bytes": 17787240,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -969,7 +969,7 @@
       "sha256": "c5fe7cfccec2250688ad3a95caa2b1efdda5e0132910bef022b5717e8cdf48c3",
       "bytes": 9941545,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1033,7 +1033,7 @@
       "sha256": "8f37aad2212be8f6c0c602b0c66003f376c6986eee57e52d8e488d317120699d",
       "bytes": 326413,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1097,7 +1097,7 @@
       "sha256": "3abf6f92075031aa15cec23f4e1462ef460e40475a749c0b4a0246402ff09b15",
       "bytes": 326427,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1161,7 +1161,7 @@
       "sha256": "9d30106e1acd7a85ba374b4f6cd8af0da8cf9569efab5ca95439d9975858817d",
       "bytes": 9942047,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1222,7 +1222,7 @@
       "sha256": "d4b6945058358ceb42460ef5966e1ece2a5e1eb6bf481847b25ab42ff835ca1b",
       "bytes": 57492,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1242,7 +1242,7 @@
       "sha256": "dd4648f2620ae6941c904af3938ba21677c41795fd7ebd7dda67c11784a248a3",
       "bytes": 13496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1262,7 +1262,7 @@
       "sha256": "a59fac018757fc0cf8c4a6a792b6f0a1363eee128294f3fac9431fc8b563da26",
       "bytes": 1005,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1288,7 +1288,7 @@
       "sha256": "0e5998039dacbd9301441347a883b8a419782c9f791562c0f610a8507e6450ed",
       "bytes": 102659,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1315,7 +1315,7 @@
       "sha256": "cd6e8b9772febaa12eb1fc6fc3314f8166e31b560f0bc0765a9aeebb9b13ec54",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1342,7 +1342,7 @@
       "sha256": "1a3e6466a0d402adbbc1dc0cdddd215ae471d9ec82599d8deb7afad8912f4419",
       "bytes": 780,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1397,13 +1397,13 @@
           "url": "/scenes/phoebe/phoebe-infrared-thumbnail.webp",
           "bytes": 1200,
           "sha256": "8a348424f96af08e5849410420681d14fc6cc05f67a5c260314f3cd792551bf3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/phoebe/phoebe-infrared-surface@2x.webp",
           "bytes": 293422,
           "sha256": "cc3f4a0439bcbd5ef9c86392817a1e00ed9fa94b9531756a41e1da06ebffd7e8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1439,19 +1439,19 @@
           "url": "/scenes/phoebe/phoebe-normal-thumbnail.webp",
           "bytes": 2690,
           "sha256": "22fd1e7fc37d0c1304e199681e64b898daf1f879701222aef6076377e2509fc0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/phoebe/phoebe-normal-legend.webp",
           "bytes": 64,
           "sha256": "cfcce4825630d19b1fe535df129ca62108704286888e2482065eeb73ded6217a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/phoebe/phoebe-normal-surface@2x.webp",
           "bytes": 6997442,
           "sha256": "e7c05e093131d0885c8b2a3d68d39e0b31124ff3b64c1e64fc166a901f327d13",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1487,19 +1487,19 @@
           "url": "/scenes/phoebe/phoebe-elevation-thumbnail.webp",
           "bytes": 9002,
           "sha256": "3bbbbac756d9d15c0b634dccef99527ddd7b106ea122edc2443b64cf9344f3cc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/phoebe/phoebe-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/phoebe/phoebe-elevation-surface@2x.webp",
           "bytes": 25764046,
           "sha256": "83b434713bda50da8d89caccace7a9aaf6a86e4eb14e5c0f527dee3e272d1cb9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1535,19 +1535,19 @@
           "url": "/scenes/phoebe/phoebe-maplet-resolution-thumbnail.webp",
           "bytes": 626,
           "sha256": "08f676d93b80114b2cc58fd611107418a1d2617bf5d979c81609691a2bcba64d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/phoebe/phoebe-maplet-resolution-legend.webp",
           "bytes": 166,
           "sha256": "075b018d6c1483c9c6626ab6f74ed823a82e2eb39d9df182e036f5d6f19f5522",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/phoebe/phoebe-maplet-resolution-surface@2x.webp",
           "bytes": 368656,
           "sha256": "9ec14c15d1ef5c240fe623068ddab85ba9069d79925cffdd1784f710acaa215c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1583,19 +1583,19 @@
           "url": "/scenes/phoebe/phoebe-image-count-thumbnail.webp",
           "bytes": 3126,
           "sha256": "2e1b82aaea5747fc9aa28ff5433547d6898b267121eb022694f0b37c0e20680a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/phoebe/phoebe-image-count-legend.webp",
           "bytes": 200,
           "sha256": "675054ccb3d587a2dd85173bf42182b89fcdd9a64d75134d64089d68b526aba9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/phoebe/phoebe-image-count-surface@2x.webp",
           "bytes": 2451914,
           "sha256": "4f70881a6295eebec8ba53d133879d6d04f4b16173f59e697151289d9f382735",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1629,19 +1629,19 @@
           "url": "/scenes/phoebe/phoebe-ice-absorption-thumbnail.webp",
           "bytes": 676,
           "sha256": "cbb7f35149f474b801603d8907897f2a5cf630e31e7dc5c0365854a95320153a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/phoebe/phoebe-ice-absorption-legend.webp",
           "bytes": 146,
           "sha256": "ed82e428e522e7e2d075c9f2d7989d8f3adb9c3ed7989f80445ad69750361b6e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/phoebe/phoebe-ice-absorption-surface@2x.webp",
           "bytes": 306326,
           "sha256": "35d4b6c771c85f84d9e7683dd76b1f21bf135ee08f67db20b155909e5f7133a1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1699,9 +1699,9 @@
       "outputs": [
         {
           "url": "/scenes/phoebe/phoebe-features.json",
-          "bytes": 17302,
-          "sha256": "667d8aa2417eb566b9e3011bb8f733d60afd283a329078857871c7637c054b44",
-          "verification": "bytes-verified"
+          "bytes": 17309,
+          "sha256": "d62758dd938dfefad9c055c2a51bab1a0c122a92d77d68f2910f03b5a4b3d78d",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

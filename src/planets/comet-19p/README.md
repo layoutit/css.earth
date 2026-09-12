@@ -12,6 +12,8 @@ Borrelly compares two reconstructions of the Deep Space 1 encounter terrain and 
 
 ## Evidence
 
+- **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../tests/objects/unit/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
+
 The [9 September 2026 browser record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/borrelly/browser.json) covers five datasets, lighting states, DPR 1/2 and a fresh asset installation. The [qualification report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/BORRELLY.md) links source-fit, registration and capture evidence. These are recorded results; they do not establish physical-mobile performance or a fresh unrestricted all-body preparation run.
 
 Four terrain places follow [Britt et al. (2004), Figs. 1 and 4](https://doi.org/10.1016/j.icarus.2003.09.004): Upper Mottled Terrain, Central Mesas, Central Smooth Terrain and Lower Mottled Terrain. Image controls transfer selected interiors from the published unit map to the native MICAS orthophoto and XYZ cubes. The map-to-photo fit has 55 withheld controls (1.41 pixels RMS, 5.43 maximum); the photo-to-orthophoto fit has 32 (1.10 native pixels RMS, 2.19 maximum). These measure image correspondence, not absolute geological accuracy. [Recomputed placements](source/features/evidence/image-landmarks.json) retain both fitted and withheld residuals.
