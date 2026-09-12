@@ -62,13 +62,21 @@ function parseOutline(value: unknown, plan: PreparedSurfaceFeaturePlan): Surface
 }
 
 /** Validate the transported catalogue against its prepared plan before any label text is written. */
+/** A prepared discovery tier in [0, 1]; absent in older catalogues, which then show at every zoom the policy admits. */
+function zoomShare(value: unknown): number {
+  if (value === undefined) return 0;
+  const share = finite(value, 'feature zoom share');
+  if (share < 0 || share > 1) throw new TypeError('Surface feature zoom share is out of range.');
+  return share;
+}
+
 /** An optional caption note: short text with the article it summarises. */
 function parseNote(value: unknown): PreparedSurfaceFeature['note'] {
   if (value === undefined) return null;
   const note = object(value, 'feature note');
-  const noteText = text(note.text, 'feature note text'), title = text(note.title, 'feature note title'), url = text(note.url, 'feature note url');
-  if (!noteText.trim() || noteText.length > 400 || !url.startsWith('https://')) throw new TypeError('Surface feature note is invalid.');
-  return Object.freeze({ text: noteText, title, url });
+  const noteText = text(note.text, 'feature note text'), title = text(note.title, 'feature note title'), url = text(note.url, 'feature note url'), credit = note.credit === '' ? '' : text(note.credit, 'feature note credit');
+  if (!noteText.trim() || noteText.length > 400 || !/^https?:\/\//u.test(url)) throw new TypeError('Surface feature note is invalid.');
+  return Object.freeze({ text: noteText, title, url, credit });
 }
 
 export function parsePreparedSurfaceFeatureCatalog(value: unknown, plan: PreparedSurfaceFeaturePlan, objectId: string): PreparedSurfaceFeatureCatalog {
@@ -90,11 +98,11 @@ export function parsePreparedSurfaceFeatureCatalog(value: unknown, plan: Prepare
     const name = text(feature.name, 'feature name'), link = text(feature.link, 'feature link');
     if (!Array.isArray(feature.searchNames) || !feature.searchNames.length || !feature.searchNames.every(value => typeof value === 'string' && value.length > 0)) throw new TypeError('Surface feature search names are invalid.');
     const searchNames = Object.freeze([...feature.searchNames as string[]]), searchContext = text(feature.searchContext, 'feature search context');
-    if (!name.trim() || !link.startsWith('https://')) throw new TypeError('Surface feature caption is invalid.');
+    if (!name.trim() || !/^https?:\/\//u.test(link)) throw new TypeError('Surface feature caption is invalid.');
     return Object.freeze({ id, name, kind: kind as SurfaceFeatureKind, type: text(feature.type, 'feature type'), code: text(feature.code, 'feature code'),
       diameterKm, longitudeDeg: finite(feature.longitudeDeg, 'feature longitude'), latitudeDeg: finite(feature.latitudeDeg, 'feature latitude'),
       anchorUnits, normal, radiusUnits, outline, searchNames, searchContext, origin: text(feature.origin, 'feature origin'), approved: text(feature.approved, 'feature approval'),
-      quad: text(feature.quad, 'feature quad'), link, note: parseNote(feature.note) });
+      quad: text(feature.quad, 'feature quad'), link, credit: text(feature.credit, 'feature credit'), note: parseNote(feature.note), machineId: feature.machineId === undefined ? null : text(feature.machineId, 'feature machine'), minimumZoomShare: zoomShare(feature.minimumZoomShare) });
   });
   return Object.freeze({ schema: 'cssearth-prepared-surface-features@1', objectId, source: text(catalog.source, 'catalogue source'),
     snapshotDate: text(catalog.snapshotDate, 'catalogue snapshot'), sourcePage: text(catalog.sourcePage, 'catalogue page'),

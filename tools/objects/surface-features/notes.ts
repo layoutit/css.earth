@@ -43,6 +43,7 @@ export async function loadArticleMap(dumpPath: string | null): Promise<Map<strin
 export async function prepareFeatureNotes(objectId: string, articles: Map<string, { item: string; article: string }>, retrievedAt: string): Promise<{ path: string; count: number; candidates: number }> {
   const objectDirectory = resolve('src/planets', objectId), sourceDirectory = resolve(objectDirectory, 'source');
   const config = parseSurfaceFeaturesConfig(JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/features.json'), 'utf8')));
+  if (config.archive === null || config.members === null) throw new TypeError(`${objectId} labels no Gazetteer names; nothing to annotate.`);
   const archive = resolve(sourceDirectory, config.directory, config.archive);
   const table = parseDbf(unzipMember(archive, config.members.attributes));
   const ids = [...new Set(table.rows.map(row => /\/Feature\/(\d+)$/u.exec(row.link ?? '')?.[1]).filter((id): id is string => typeof id === 'string'))];

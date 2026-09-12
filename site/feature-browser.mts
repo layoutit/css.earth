@@ -76,9 +76,9 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
         if (!feature) continue;
         const body = feature.objectId === objectId ? '' : ` · ${names.get(feature.objectId) ?? feature.objectId}`;
         requiredElement(button, '.planet-destination-result-name').textContent = feature.name;
-        const size = feature.diameterKm > 0 ? `${kilometres.format(feature.diameterKm)} km` : 'size unpublished';
-        requiredElement(button, '.planet-destination-result-context').textContent = `${feature.type} · ${size}${body}`;
-        button.ariaLabel = `${feature.name}, ${feature.type}, ${feature.diameterKm > 0 ? `${kilometres.format(feature.diameterKm)} kilometres` : size}${body}`;
+        const size = feature.diameterKm > 0 ? `${kilometres.format(feature.diameterKm)} km` : ['LS', 'IM', 'SS', 'RT'].includes(feature.searchContext) || /site|traverse|position/u.test(feature.type.toLowerCase()) ? '' : 'size unpublished';
+        requiredElement(button, '.planet-destination-result-context').textContent = `${feature.type}${size ? ` · ${size}` : ''}${body}`;
+        button.ariaLabel = `${feature.name}, ${feature.type}${size ? `, ${feature.diameterKm > 0 ? `${kilometres.format(feature.diameterKm)} kilometres` : size}` : ''}${body}`;
       }
       hint.textContent = matches.length ? 'Named features · IAU Gazetteer' : 'No matching named features.';
       onResults(matches.length || 1);

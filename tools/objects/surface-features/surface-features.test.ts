@@ -126,7 +126,12 @@ test('the pinned Mercury Gazetteer archive prepares anchored IAU features on the
     assert.deepEqual(plan.outline, { pieces: 256 });
     assert.equal(plan.policy.minimumZoomShare, 1);
     assert.equal(plan.target, 3);
-    assert.equal(catalog.features.length + 32 + catalog.duplicates.rows, 613);
+    // Every adopted row is accounted for: labelled names, the MESSENGER impact site (unsized, from the pinned sites document), the 32 excluded albedo features and the folded duplicates.
+    assert.equal(catalog.features.length + 32 + catalog.duplicates.rows, 614);
+    assert.deepEqual(catalog.assumed.unsized, { IM: 1 });
+    assert.deepEqual(catalog.sites, { source: catalog.sites?.source ?? '', retrievedAt: '2026-09-12', count: 1 });
+    const impact = catalog.features.find(feature => feature.code === 'IM');
+    assert.ok(impact && impact.diameterKm === 0 && impact.note?.credit && impact.credit.endsWith('2015'), 'the MESSENGER impact carries its cited source');
     assert.deepEqual(catalog.excluded.AL?.count, 32);
     assert.deepEqual(catalog.duplicates, { features: 8, rows: 8, maxSeparationDeg: 0.1632, maxDiameterDifferenceKm: 0.846 });
     assert.equal(new Set(catalog.features.map(feature => feature.id)).size, catalog.features.length);
@@ -153,8 +158,9 @@ test('the pinned Mercury Gazetteer archive prepares anchored IAU features on the
         assert.ok(feature.outline.paths.every(path => path.length >= 2 && path.every(point => Math.abs(Math.hypot(...point) - 11500) < 0.01)), feature.name);
         assert.ok(['RU', 'DO', 'FO'].includes(feature.code), feature.name);
       }
-      assert.ok(feature.radiusUnits > 0 && feature.diameterKm > 0, feature.name);
-      assert.match(feature.link, /^https:\/\/planetarynames\.wr\.usgs\.gov\/Feature\/\d+$/u);
+      assert.ok(feature.diameterKm === 0 ? feature.radiusUnits === 0 : feature.radiusUnits > 0 && feature.diameterKm > 0, feature.name);
+      if (['LS', 'IM', 'SS', 'RT'].includes(feature.code)) assert.match(feature.link, /^https?:\/\//u, feature.name);
+      else assert.match(feature.link, /^https:\/\/planetarynames\.wr\.usgs\.gov\/Feature\/\d+$/u);
     }
     // Prepared priority: the largest features come first.
     assert.equal(catalog.features[0]!.name, 'Borealis Planitia');
@@ -193,6 +199,11 @@ test('ellipsoid samplers put geodetic positions on the reference ellipsoid and c
   assert.deepEqual(normal, surfaceDirection(338.06, 64.15, axes, 180));
   assert.ok(Math.abs(point[2] - semiAxes.polar * Math.sqrt(1 - (Math.hypot(point[0], point[1]) / semiAxes.equatorial) ** 2)) < 1e-6);
   assert.deepEqual(pure.plan(), { ...semiAxes, north: axes.north, minimumShare: 1, maximumShare: 1 });
+  // The shared preparation casts map directions: the cast recovers the geodetic position from its normal and rounds like every mesh coordinate.
+  const { ellipsoidSurfaceCast } = await import('./ellipsoid.js');
+  const cast = ellipsoidSurfaceCast(pure, axes, 180);
+  assert.deepEqual(cast.onSurface(surfaceDirection(338.06, 64.15, axes, 180)), point.map(value => Number(value.toFixed(3))));
+  assert.deepEqual(cast.plan(), pure.plan());
   // A rendered surface that sags below the ellipsoid keeps longitude; the band records how far it sags.
   const sagging = renderedEllipsoidSampler(axes, 180, semiAxes, (lon, lat) => { const p = ellipsoidSurfacePoint(lon, lat, axes, 180, semiAxes); return [p[0] * 0.99, p[1] * 0.99, p[2] * 0.99]; });
   sagging.point(10, 20); sagging.point(200, -50);

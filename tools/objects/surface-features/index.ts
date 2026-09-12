@@ -4,6 +4,10 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { parseDbf } from './dbf.js';
 import { parseFeatureNotes, type FeatureNotes } from './notes-schema.js';
+import { loadNaturalEarthRows, parseNaturalEarthConfig, type NaturalEarthConfig } from './natural-earth.js';
+import { loadSiteRows, parseSurfaceSites, type SiteRow } from './sites.js';
+/** Spacecraft sites are discovered past the whole-body view (which sits near 0.43 of the zoom range), once the camera closes in. */
+const SITE_ZOOM_SHARE = 0.6;
 import { parseShpPolylines } from './shp.js';
 
 /** Prepared nomenclature catalogue: IAU/USGS Gazetteer centre points anchored to the body mesh.
@@ -18,6 +22,7 @@ export type SurfaceFeatureKind = 'point' | 'linear' | 'region';
  * marker and rim circle, elongated ones a linear label, extended terrains a region label. Recipes may override. */
 export const DEFAULT_TYPE_KINDS: Readonly<Record<string, SurfaceFeatureKind>> = Object.freeze({
   AA: 'point', AS: 'point', CB: 'point', ER: 'point', FA: 'point', FR: 'point', LF: 'point', MA: 'point', PE: 'point', PU: 'point', SF: 'point', SA: 'point', ST: 'point', TH: 'point',
+  LS: 'point', IM: 'point', SS: 'point', RT: 'linear',
   MN: 'region', CH: 'region', LU: 'region', AR: 'linear', CA: 'linear', CM: 'linear', DO: 'linear', FE: 'linear', FM: 'linear', FO: 'linear', FT: 'linear', LI: 'linear', RI: 'linear', RU: 'linear', SC: 'linear', SE: 'linear', SU: 'linear', VA: 'linear', VI: 'linear',
   CO: 'region', CL: 'region', LO: 'region', CR: 'region', FL: 'region', IN: 'region', LA: 'region', LB: 'region', LG: 'region', LC: 'region', LN: 'region', MR: 'region', ME: 'region', MO: 'region', OC: 'region', PA: 'region', PL: 'region', PM: 'region', PR: 'region', RE: 'region', SI: 'region', TA: 'region', TE: 'region', UN: 'region', VS: 'region',
 });
@@ -36,10 +41,11 @@ export interface SurfaceFeatureAxes { readonly prime: readonly [number, number, 
 export interface SurfaceFeaturePolicy { readonly minimumZoomShare: number; readonly minimumDiameterPixels: number; readonly alwaysVisibleCount: number; readonly maximumVisible: number; readonly limbCosine: number; }
 export interface SurfaceFeaturesConfig {
   readonly schema: typeof SURFACE_FEATURES_CONFIG_SCHEMA;
-  readonly directory: string; readonly archive: string;
+  /** The Gazetteer archive; absent for a body without nomenclature that labels only spacecraft sites. */
+  readonly directory: string; readonly archive: string | null;
   /** Some small-body exports ship no .prj; their datum then comes from the FGDC metadata (`semiaxis`, `horizdn`). The newest
    * asteroid exports ship neither: the datum is then the authored radius and the pin manifest carries the licence evidence. */
-  readonly members: { readonly attributes: string; readonly projection: string | null; readonly metadata: string | null };
+  readonly members: { readonly attributes: string; readonly projection: string | null; readonly metadata: string | null } | null;
   readonly surfaceMap: string; readonly mapLeftEdgeLongitudeDeg: number;
   readonly output: string; readonly publicBase: string;
   readonly target: { readonly className: string; readonly withoutClassName: string | null };
@@ -53,6 +59,10 @@ export interface SurfaceFeaturesConfig {
   readonly traces?: SurfaceFeatureTracesConfig;
   /** Optional pinned notes document (inside `directory`): Wikipedia lead summaries keyed by Gazetteer feature id. */
   readonly notes?: string;
+  /** Natural Earth layers as the row source instead of a Gazetteer archive (Earth). */
+  readonly naturalEarth?: NaturalEarthConfig;
+  /** Optional landing, impact and sample sites and traverses (inside `directory`): the document and its pinned path files. */
+  readonly sites?: { readonly document: string; readonly inputs: readonly string[] };
 }
 export interface SurfaceFeaturesSourceManifest {
   readonly schema: typeof SURFACE_FEATURES_SOURCE_SCHEMA;
@@ -69,8 +79,14 @@ export interface PreparedSurfaceFeature {
   readonly outline: SurfaceFeatureOutline;
   readonly searchNames: readonly string[]; readonly searchContext: string;
   readonly origin: string; readonly approved: string; readonly quad: string; readonly link: string;
-  /** A source-backed note for the caption: an English Wikipedia lead summary (CC BY-SA 4.0) with its article. */
-  readonly note?: { readonly text: string; readonly title: string; readonly url: string };
+  /** Who published the name or site and when, for the caption's credit line. */
+  readonly credit: string;
+  /** A source-backed note for the caption (a Wikipedia lead summary, or the quoted source sentence of a site) with its page and credit. */
+  readonly note?: { readonly text: string; readonly title: string; readonly url: string; readonly credit: string };
+  /** The machines-catalogue id of the spacecraft at a site, when catalogued. */
+  readonly machineId?: string;
+  /** Discovery tier: the share of the zoom range (0 whole body, 1 closest) from which this name competes for a label. */
+  readonly minimumZoomShare: number;
 }
 export interface PreparedSurfaceFeatureCatalog {
   readonly schema: typeof PREPARED_SURFACE_FEATURES_SCHEMA; readonly objectId: string;
@@ -88,6 +104,8 @@ export interface PreparedSurfaceFeatureCatalog {
   readonly duplicates: { readonly features: number; readonly rows: number; readonly maxSeparationDeg: number; readonly maxDiameterDifferenceKm: number };
   /** Present when the recipe pins a notes document: its provenance and how many features carry a note. */
   readonly notes?: { readonly source: string; readonly retrievedAt: string; readonly license: string; readonly licenseUrl: string; readonly count: number };
+  /** Present when the recipe pins a sites document: its provenance and how many sites and traverses were placed. */
+  readonly sites?: { readonly source: string; readonly retrievedAt: string; readonly count: number };
   readonly features: readonly PreparedSurfaceFeature[];
 }
 export interface SurfaceFeatureCatalogDescriptor { readonly url: string; readonly bytes: number; readonly sha256: string; readonly count: number; }
@@ -97,6 +115,8 @@ export interface PreparedSurfaceFeaturePlan {
   readonly meshRadiusUnits: number; readonly policy: SurfaceFeaturePolicy;
   /** Shape-model bodies: the radius band of the picking mesh, inside which every anchor and outline point lies. */
   readonly surfaceRadiusUnits?: { readonly minimum: number; readonly maximum: number };
+  /** Ellipsoidal bodies: reference semi-axes and polar axis in mesh units, and the normalised-radius band (1 = on the ellipsoid) every prepared point lies within. */
+  readonly surfaceEllipsoidUnits?: { readonly equatorial: number; readonly polar: number; readonly north: Vector3; readonly minimumShare: number; readonly maximumShare: number };
   readonly outline: { readonly pieces: number };
 }
 
@@ -124,7 +144,8 @@ function codes(value: unknown, at: string): readonly string[] {
 export function parseSurfaceFeaturesConfig(value: unknown): SurfaceFeaturesConfig {
   const input = record(value, 'features recipe');
   if (input.schema !== SURFACE_FEATURES_CONFIG_SCHEMA) throw new TypeError('Unsupported surface features recipe schema.');
-  const members = record(input.members, 'features recipe members'), target = record(input.target, 'features recipe target');
+  const members = input.archive === null ? null : record(input.members, 'features recipe members'), target = record(input.target, 'features recipe target');
+  if (input.archive === null && input.sites === undefined && input.naturalEarth === undefined) throw new TypeError('A features recipe without an archive must list sites or Natural Earth layers.');
   const kindsInput = record(input.kinds, 'features recipe kinds'), policyInput = record(input.labelPolicy, 'features label policy');
   const kinds = { point: codes(kindsInput.point, 'kinds.point'), linear: codes(kindsInput.linear, 'kinds.linear'), region: codes(kindsInput.region, 'kinds.region') };
   const all = [...kinds.point, ...kinds.linear, ...kinds.region];
@@ -150,12 +171,12 @@ export function parseSurfaceFeaturesConfig(value: unknown): SurfaceFeaturesConfi
   if (!/^[a-z0-9][a-z0-9@._-]*\.json$/u.test(output)) throw new TypeError('features recipe output must be a safe JSON filename.');
   return Object.freeze({
     schema: SURFACE_FEATURES_CONFIG_SCHEMA,
-    directory: relativePath(input.directory, 'features recipe directory'), archive: relativePath(input.archive, 'features recipe archive'),
-    members: { attributes: relativePath(members.attributes, 'members.attributes'), projection: members.projection === null ? null : relativePath(members.projection, 'members.projection'), metadata: members.metadata === null ? null : relativePath(members.metadata, 'members.metadata') },
+    directory: relativePath(input.directory, 'features recipe directory'), archive: input.archive === null ? null : relativePath(input.archive, 'features recipe archive'),
+    members: members === null ? null : { attributes: relativePath(members.attributes, 'members.attributes'), projection: members.projection === null ? null : relativePath(members.projection, 'members.projection'), metadata: members.metadata === null ? null : relativePath(members.metadata, 'members.metadata') },
     surfaceMap: relativePath(input.surfaceMap, 'features recipe surfaceMap'), mapLeftEdgeLongitudeDeg: finite(input.mapLeftEdgeLongitudeDeg, 'features recipe mapLeftEdgeLongitudeDeg'),
     output, publicBase, target: { className: text(target.className, 'target.className'), withoutClassName: target.withoutClassName === undefined ? null : text(target.withoutClassName, 'target.withoutClassName') },
     lensIds: Object.freeze([...lensIds as string[]]), kinds: Object.freeze(kinds), excludedTypeCodes: Object.freeze({ ...excluded as Record<string, string> }), labelPolicy: Object.freeze(policy),
-    outline: Object.freeze(outline), ...(traces ? { traces } : {}), ...(input.notes === undefined ? {} : { notes: relativePath(input.notes, 'features recipe notes') }),
+    outline: Object.freeze(outline), ...(traces ? { traces } : {}), ...(input.notes === undefined ? {} : { notes: relativePath(input.notes, 'features recipe notes') }), ...(input.naturalEarth === undefined ? {} : { naturalEarth: parseNaturalEarthConfig(input.naturalEarth) }), ...(input.sites === undefined ? {} : { sites: parseSitesRecipe(input.sites) }),
   });
 }
 
@@ -171,6 +192,12 @@ function parseTracesConfig(value: unknown, pieces: number, labelledCodes: readon
   };
   if (!(config.radiusM > 0) || config.paddingDeg < 0 || config.insideFraction <= 0 || config.insideFraction > 1 || config.minimumLengthShare < 0 || config.minimumLengthShare > 1 || config.maximumVertices > pieces) throw new TypeError('features recipe traces are out of range.');
   return Object.freeze(config);
+}
+
+function parseSitesRecipe(value: unknown): { document: string; inputs: string[] } {
+  const input = record(value, 'features recipe sites');
+  if (!Array.isArray(input.inputs)) throw new TypeError('features recipe sites.inputs must be an array.');
+  return { document: relativePath(input.document, 'sites.document'), inputs: input.inputs.map((item, index) => relativePath(item, `sites.inputs[${index}]`)) };
 }
 
 export function parseSurfaceFeaturesSourceManifest(value: unknown): SurfaceFeaturesSourceManifest {
@@ -258,6 +285,8 @@ export interface SurfaceFeaturePreparationContext {
   readonly declaredLensIds: readonly string[];
   /** The prepared picking mesh of a shape-model body: anchors and outline points are cast onto it instead of a reference sphere. */
   readonly hitMesh?: { readonly target: number; readonly triangles: readonly (readonly (readonly number[])[])[] };
+  /** An ellipsoidal body: map directions are cast onto its rendered surface instead of the reference sphere (ellipsoid.ts). */
+  readonly surface?: { readonly onSurface: (direction: Vector3) => Vector3; readonly plan: () => NonNullable<PreparedSurfaceFeaturePlan['surfaceEllipsoidUnits']> };
 }
 
 /** Farthest intersection of the ray from the mesh origin along `direction` with the triangle list (Möller–Trumbore), or null when it misses. */
@@ -412,23 +441,31 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     const bytes = await readFile(resolve(directory, entry.path));
     if (bytes.length !== entry.bytes || sha256(bytes) !== entry.sha256) throw new Error(`Gazetteer source snapshot drifted: ${entry.path}`);
   }
-  if (!manifest.inputs.some(entry => entry.path === config.archive)) throw new TypeError('Surface feature archive is not pinned by its source manifest.');
+  if (config.naturalEarth) { for (const layer of config.naturalEarth.layers) if (!manifest.inputs.some(entry => entry.path === layer.archive)) throw new TypeError(`Natural Earth layer ${layer.id} is not pinned by its source manifest.`); }
+  else if (config.archive !== null && !manifest.inputs.some(entry => entry.path === config.archive)) throw new TypeError('Surface feature archive is not pinned by its source manifest.');
   for (const id of config.lensIds) if (!context.declaredLensIds.includes(id)) throw new TypeError(`Surface feature lens ${id} is not declared by the object.`);
   const axes = parseSurfaceAxes(JSON.parse(await readFile(resolve(context.sourceDirectory, config.surfaceMap), 'utf8')));
   const loadedTraces = config.traces ? await loadTraces(context.sourceDirectory, config.traces) : null;
   const traceStats = { matched: 0, byCode: {} as Record<string, number>, unmatched: [] as string[] };
-  const archive = resolve(directory, config.archive);
-  const metadata = config.members.metadata === null ? null : new TextDecoder().decode(unzipMember(archive, config.members.metadata));
+  const archive = config.archive === null ? null : resolve(directory, config.archive);
+  const metadata = config.naturalEarth || archive === null || config.members === null || config.members.metadata === null ? null : new TextDecoder().decode(unzipMember(archive, config.members.metadata));
   let datumName: string, radiusM: number;
-  if (metadata === null) {
+  if (config.naturalEarth) {
+    // Natural Earth is WGS84 geographic; anchors use the authored body and outline sizes come from the published extents.
+    datumName = 'WGS84 geographic (Natural Earth); authored body radius used'; radiusM = context.radiusKm * 1000;
+  } else if (archive === null || config.members === null) {
+    // Sites only: the coordinates come from the cited pages in the body's own frame; anchors are cast onto the hit mesh.
+    if (!context.hitMesh) throw new TypeError('A sites-only catalogue can only anchor on a prepared hit mesh.');
+    datumName = 'none (sites cite their own frames); authored radius used'; radiusM = context.radiusKm * 1000;
+  } else if (metadata === null) {
     // The newest asteroid exports ship neither a projection file nor an FGDC record: anchors are cast onto the shape model and
     // the authored radius scales outline sizes; the pin manifest names the public-domain evidence outside the archive.
-    if (config.members.projection !== null) throw new TypeError('An export without metadata is expected to ship without a projection file too.');
+    if (config.members!.projection !== null) throw new TypeError('An export without metadata is expected to ship without a projection file too.');
     if (!context.hitMesh) throw new TypeError('An export without a datum can only anchor on a prepared hit mesh.');
     if (!/https?:\/\//u.test(manifest.licenseEvidence)) throw new TypeError('An export without metadata must name its licence evidence by URL in the pin manifest.');
     datumName = 'none in export (no projection file or metadata; authored radius used)'; radiusM = context.radiusKm * 1000;
   } else if (config.members.projection !== null) {
-    const projection = new TextDecoder().decode(unzipMember(archive, config.members.projection));
+    const projection = new TextDecoder().decode(unzipMember(archive!, config.members.projection));
     const spheroid = /SPHEROID\["([^"]+)",\s*([\d.]+)/u.exec(projection), name = /GEOGCS\["([^"]+)"/u.exec(projection)?.[1];
     if (!spheroid || !name) throw new TypeError('Gazetteer projection file does not declare a spheroid.');
     datumName = name; radiusM = Number(spheroid[2]);
@@ -448,8 +485,28 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   const notes: FeatureNotes | null = config.notes === undefined ? null : parseFeatureNotes(JSON.parse(await readFile(resolve(directory, config.notes), 'utf8')));
   const noteById = new Map((notes?.entries ?? []).map(entry => [entry.id, entry]));
   if (metadata !== null && !/<useconst>\s*Public domain\.?\s*<\/useconst>/iu.test(metadata)) throw new TypeError('Gazetteer metadata no longer declares public-domain use constraints.');
-  const table = parseDbf(unzipMember(archive, config.members.attributes));
-  for (const name of ['name', 'clean_name', 'approvaldt', 'origin', 'diameter', 'center_lon', 'center_lat', 'type', 'code', 'approval', 'quad_code', 'link', 'min_lon', 'max_lon', 'min_lat', 'max_lat']) {
+  const naturalEarth = config.naturalEarth ? loadNaturalEarthRows(context.sourceDirectory, config.directory, config.naturalEarth) : null;
+  const zoomShareById = new Map<string, number>();
+  const priorityById = new Map<string, number>(), pathsById = new Map<string, readonly (readonly (readonly [number, number])[])[]>();
+  const approvalLabel = naturalEarth ? 'Natural Earth' : 'Adopted by IAU';
+  const table = naturalEarth ? { fields: [], rows: naturalEarth.map(row => {
+    priorityById.set(row.id, row.priority); zoomShareById.set(row.id, row.zoomShare); if (row.paths) pathsById.set(row.id, row.paths);
+    return { name: row.name, clean_name: row.cleanName, approvaldt: `${manifest.snapshotDate.replaceAll('-', '/')} 00:00:00`, origin: row.origin, diameter: '0',
+      center_lon: String(row.centerLon), center_lat: String(row.centerLat), type: row.type, code: row.code, approval: approvalLabel,
+      min_lon: row.extent ? String(row.extent.minLon) : '', max_lon: row.extent ? String(row.extent.maxLon) : '', min_lat: row.extent ? String(row.extent.minLat) : '', max_lat: row.extent ? String(row.extent.maxLat) : '',
+      quad_code: row.layer, link: `${row.link}#feature-${row.id}` } as Readonly<Record<string, string>>;
+  }) } : archive === null || config.members === null ? { fields: [], rows: [] as Readonly<Record<string, string | undefined>>[] } : parseDbf(unzipMember(archive, config.members.attributes));
+  const creditById = new Map<string, string>(), siteNoteById = new Map<string, NonNullable<PreparedSurfaceFeature['note']>>(), machineById = new Map<string, string>();
+  const siteDocument = config.sites ? parseSurfaceSites(JSON.parse(await readFile(resolve(directory, config.sites.document), 'utf8'))) : null;
+  const siteRows: SiteRow[] = siteDocument ? loadSiteRows(context.sourceDirectory, config.directory, siteDocument) : [];
+  const rows: Readonly<Record<string, string | undefined>>[] = [...table.rows, ...siteRows.map(row => {
+    priorityById.set(row.id, row.priority); zoomShareById.set(row.id, SITE_ZOOM_SHARE); creditById.set(row.id, row.credit); if (row.paths) pathsById.set(row.id, row.paths); if (row.note) siteNoteById.set(row.id, row.note); if (row.machineId) machineById.set(row.id, row.machineId);
+    return { name: row.name, clean_name: row.name, approvaldt: `${row.approved.replaceAll('-', '/')} 00:00:00`, origin: row.origin, diameter: '0', center_lon: String(row.centerLon), center_lat: String(row.centerLat),
+      type: row.type, code: row.code, approval: approvalLabel, min_lon: row.extent ? String(row.extent.minLon) : '', max_lon: row.extent ? String(row.extent.maxLon) : '', min_lat: row.extent ? String(row.extent.minLat) : '', max_lat: row.extent ? String(row.extent.maxLat) : '',
+      quad_code: 'sites', link: `${row.link}#feature-${row.id}` };
+  })];
+  // Synthesised rows (Natural Earth, sites only) carry every field by construction; a Gazetteer table is checked for them.
+  if (table.fields.length) for (const name of ['name', 'clean_name', 'approvaldt', 'origin', 'diameter', 'center_lon', 'center_lat', 'type', 'code', 'approval', 'quad_code', 'link', 'min_lon', 'max_lon', 'min_lat', 'max_lat']) {
     if (!table.fields.some(field => field.name === name)) throw new TypeError(`Gazetteer table lacks the ${name} field.`);
   }
   const kindOf = new Map<string, SurfaceFeatureKind>(Object.entries(DEFAULT_TYPE_KINDS));
@@ -458,11 +515,13 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   let extentFallbacks = 0, meshMisses = 0;
   // On a shape model every surface point is cast through the hit mesh; a miss (a hole in the coarse mesh) keeps the reference radius.
   const onSurface = (direction: Vector3): Vector3 => {
+    if (context.surface) return context.surface.onSurface(direction);
     if (!context.hitMesh) return scaled(direction, context.meshRadiusUnits);
     const distance = projectRadial(context.hitMesh.triangles, direction);
     if (distance === null) { meshMisses++; return scaled(direction, context.meshRadiusUnits); }
     return scaled(direction, distance);
   };
+  const cast = context.hitMesh !== undefined || context.surface !== undefined;
   const skip = (key: string, reason: string) => { skipped[key] = { count: (skipped[key]?.count ?? 0) + 1, reason }; };
   const excluded: Record<string, { count: number; reason: string }> = {};
   if (!(context.meshRadiusUnits > 0) || !Number.isFinite(context.meshRadiusUnits)) throw new TypeError('Surface features need the prepared mesh radius.');
@@ -471,9 +530,9 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   const ids = new Map<string, PreparedSurfaceFeature>();
   const duplicateIds = new Set<string>();
   let duplicateRows = 0, maxSeparationDeg = 0, maxDiameterDifferenceKm = 0;
-  for (const row of table.rows) {
+  for (const row of rows) {
     const code = row.code!;
-    if (row.approval !== 'Adopted by IAU') { skip(`approval:${row.approval}`, 'Only names adopted by the IAU are labelled.'); continue; }
+    if (row.approval !== approvalLabel) { skip(`approval:${row.approval}`, 'Only names adopted by the IAU are labelled.'); continue; }
     if (Object.hasOwn(config.excludedTypeCodes, code)) {
       excluded[code] = { count: (excluded[code]?.count ?? 0) + 1, reason: config.excludedTypeCodes[code]! };
       continue;
@@ -491,7 +550,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     if (!(diameterKm >= 0)) throw new TypeError(`Gazetteer diameter is not a number for ${row.name}.`);
     // A feature without a published diameter is still labelled and searchable; it ranks after every sized feature and draws no rim.
     if (diameterKm === 0) unsized[code] = (unsized[code] ?? 0) + 1;
-    const id = /\/Feature\/(\d+)$/u.exec(row.link!)?.[1];
+    const id = /#feature-(\d+)$/u.exec(row.link!)?.[1] ?? /\/Feature\/(\d+)$/u.exec(row.link!)?.[1];
     if (!id) throw new TypeError(`Gazetteer feature identity is missing for ${row.name}.`);
     const first = ids.get(id);
     if (first) {
@@ -521,10 +580,16 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
       outline = { kind: 'circle', center: [round(anchor[0], 3), round(anchor[1], 3), round(anchor[2], 3)], east: [0, 0, 0], north: [0, 0, 0] };
     } else if (kind === 'point' || !extent) {
       const rim = rimVectors(direction, axes.north, context.meshRadiusUnits, radiusUnits), lift = anchorRadius / context.meshRadiusUnits;
-      outline = context.hitMesh ? { kind: 'circle', center: scaled(rim.center, lift), east: scaled(rim.east, lift), north: scaled(rim.north, lift) } : rim;
+      outline = cast ? { kind: 'circle', center: scaled(rim.center, lift), east: scaled(rim.east, lift), north: scaled(rim.north, lift) } : rim;
     } else {
       const box = extentPolygon(extent, axes, config.mapLeftEdgeLongitudeDeg, context.meshRadiusUnits, config.outline.pieces);
-      outline = context.hitMesh ? { kind: 'box', points: box.points.map(point => onSurface(scaled(point, 1 / context.meshRadiusUnits))) } : box;
+      outline = cast ? { kind: 'box', points: box.points.map(point => onSurface(scaled(point, 1 / context.meshRadiusUnits))) } : box;
+    }
+    const riverPaths = pathsById.get(id);
+    if (riverPaths) {
+      // The runtime draws a trace with one chord per retained piece, so a path budget of one vertex per piece fills the pool exactly.
+      const paths = budgetTracePaths(riverPaths, config.outline.pieces).map(path => path.map(([lon, lat]) => onSurface(surfaceDirection(lon, lat, axes, config.mapLeftEdgeLongitudeDeg))));
+      outline = { kind: 'trace', paths };
     }
     if (extent && loadedTraces && config.traces && Object.hasOwn(config.traces.classes, code)) {
       const selected = selectTraces(loadedTraces.traces, config.traces.classes[code]!, extent, config.traces);
@@ -541,14 +606,28 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
       normal: [round(direction[0]), round(direction[1]), round(direction[2])],
       radiusUnits: round(radiusUnits, 4), outline,
       searchNames: [...new Set([row.name!, row.clean_name!].map(normalizeSearchText).filter(Boolean))], searchContext: normalizeSearchText(row.type!.split(',')[0]!),
-      origin: row.origin!, approved: `${approved[1]}-${approved[2]}-${approved[3]}`, quad: row.quad_code!, link: row.link!.replace(/^http:\/\//u, 'https://'),
-      ...(noteById.has(id) ? { note: { text: noteById.get(id)!.extract, title: noteById.get(id)!.title, url: noteById.get(id)!.url } } : {}),
+      origin: row.origin!, approved: `${approved[1]}-${approved[2]}-${approved[3]}`, quad: row.quad_code!, link: row.link!.replace(/^http:\/\//u, 'https://').replace(/#feature-\d+$/u, ''),
+      credit: creditById.get(id) ?? (naturalEarth ? 'Natural Earth' : `IAU name, ${approved[1]}`),
+      ...(siteNoteById.has(id) ? { note: siteNoteById.get(id)! } : noteById.has(id) ? { note: { text: noteById.get(id)!.extract, title: noteById.get(id)!.title, url: noteById.get(id)!.url, credit: 'Wikipedia, CC BY-SA 4.0' } } : {}),
+      ...(machineById.has(id) ? { machineId: machineById.get(id)! } : {}),
+      minimumZoomShare: 0,
     };
     ids.set(id, feature);
     features.push(feature);
   }
   // Prepared priority: larger features label first; the runtime never re-ranks.
-  features.sort((a, b) => b.diameterKm - a.diameterKm || a.name.localeCompare(b.name, 'en'));
+  const priority = (feature: PreparedSurfaceFeature) => priorityById.get(feature.id) ?? feature.diameterKm;
+  features.sort((a, b) => priority(b) - priority(a) || b.diameterKm - a.diameterKm || a.name.localeCompare(b.name, 'en'));
+  // Discovery tiers: the largest names of a body appear from far away and the rest as the camera closes in. A name's tier
+  // is the logarithm of its prepared rank over the logarithm of the count, so ten names show at the whole body, about a
+  // hundred a quarter of the way in, a thousand at three quarters; a name with an encyclopedia article ranks four
+  // times higher (it is what people look for). Natural Earth names and spacecraft sites carry their own share.
+  // The whole-body view sits near 0.43 of the zoom range, so about ten names show there and the logarithm carries the rest to the closest view.
+  const tierOf = (rank: number, noted: boolean) => features.length <= 1 ? 0 : Math.min(1, Math.log10(1 + (noted ? rank / 4 : rank)) / Math.log10(features.length));
+  features.forEach((feature, rank) => {
+    const share = zoomShareById.get(feature.id) ?? tierOf(rank, feature.note !== undefined && feature.note.credit.startsWith('Wikipedia'));
+    (feature as { minimumZoomShare: number }).minimumZoomShare = round(share, 3);
+  });
   if (!features.length) throw new TypeError('Gazetteer archive produced no labelled features.');
   if (features.length > context.maxEntries) throw new TypeError('Prepared features exceed the authored capability.');
   const catalog: PreparedSurfaceFeatureCatalog = {
@@ -558,7 +637,8 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     excluded, skipped, assumed: { regionTypes: assumed, extentFallbacks, meshMisses, unsized }, duplicates: { features: duplicateIds.size, rows: duplicateRows, maxSeparationDeg: round(maxSeparationDeg, 4), maxDiameterDifferenceKm: round(maxDiameterDifferenceKm, 4) },
     ...(loadedTraces && config.traces ? { traces: { source: loadedTraces.manifest.source, sourcePage: loadedTraces.manifest.sourcePage, license: loadedTraces.manifest.license, snapshotDate: loadedTraces.manifest.snapshotDate,
       traces: loadedTraces.traces.length, matched: traceStats.matched, byCode: traceStats.byCode, unmatched: traceStats.unmatched, maximumVertices: config.traces.maximumVertices } } : {}),
-    ...(notes ? { notes: { source: notes.source, retrievedAt: notes.retrievedAt, license: notes.license, licenseUrl: notes.licenseUrl, count: features.filter(feature => feature.note).length } } : {}),
+    ...(notes ? { notes: { source: notes.source, retrievedAt: notes.retrievedAt, license: notes.license, licenseUrl: notes.licenseUrl, count: features.filter(feature => feature.note && feature.note.credit.startsWith('Wikipedia')).length } } : {}),
+    ...(siteDocument ? { sites: { source: siteDocument.source, retrievedAt: siteDocument.retrievedAt, count: siteRows.length } } : {}),
     features,
   };
   const bytes = Buffer.from(`${JSON.stringify(catalog)}\n`);
@@ -568,7 +648,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   const plan: PreparedSurfaceFeaturePlan = {
     catalog: { url: `${config.publicBase}${config.output}`, bytes: bytes.length, sha256: sha256(bytes), count: features.length },
     target: hitTarget(context, config.target), lensIds: config.lensIds, meshRadiusUnits: context.meshRadiusUnits, policy: config.labelPolicy,
-    ...(context.hitMesh ? { surfaceRadiusUnits: meshRadiusBand(context.hitMesh.triangles) } : {}),
+    ...(context.hitMesh ? { surfaceRadiusUnits: meshRadiusBand(context.hitMesh.triangles) } : {}), ...(context.surface ? { surfaceEllipsoidUnits: context.surface.plan() } : {}),
     outline: config.outline,
   };
   const descriptor = { schema: 'cssearth-prepared-features@1', objectId: context.objectId, ...plan.catalog, source: manifest.source, sourcePage: manifest.sourcePage,
