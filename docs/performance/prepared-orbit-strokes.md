@@ -132,10 +132,10 @@ The comparison chart uses the processor's existing 500 ms rolling average. Only
 Chrome-explicit idle gaps are eligible for exclusion; these two captures had
 zero such exclusions. Real hitches remain in the data and chart.
 
-- [Final chart](../../output/playwright/prepared-orbit-batches/performance-comparison.png)
-- [Processed final comparison](../../output/performance/trace-briefs/orbit-batches-after-final/report.html)
-- [DPR 2 geometry/appearance checks](../../output/playwright/prepared-orbit-batches/final-dpr2/comparison.json)
-- [Actual orbit hover/click check](../../output/playwright/prepared-orbit-batches/orbit-click.json)
+- Final chart (`output/playwright/prepared-orbit-batches/performance-comparison.png`, local run output, not tracked)
+- Processed final comparison (`output/performance/trace-briefs/orbit-batches-after-final/report.html`, local run output, not tracked)
+- DPR 2 geometry/appearance checks (`output/playwright/prepared-orbit-batches/final-dpr2/comparison.json`, local run output, not tracked)
+- Actual orbit hover/click check (`output/playwright/prepared-orbit-batches/orbit-click.json`, local run output, not tracked)
 
 Excluded exploratory captures: `orbit-batches-after-1` used the wrong local
 directory for served-file verification; `orbit-batches-before-2` had a mistyped

@@ -39,7 +39,9 @@ type MockWindow = EventTarget & {readonly location: URL; history: MockHistory; m
 type Harness = { router: ReturnType<typeof createSceneRouter>; windowTarget: MockWindow; documentTarget: MockDocument; media: MockMedia; mounts: MockMount[]; shells: MockShell[]; renders: Set<MockMount>; errors: unknown[]; writes: string[]; entries: { state: Record<string, unknown>; url: string }[]; preparations: MockRequest[]; disposedContent: string[]; maxRendered(): number };
 type HarnessOptions = { prepare?: MockPrepare; focus?: MockFocus; centerTarget?: MockTarget; systemTarget?: MockTarget; overviewTarget?: MockTarget; initialUrl?: string | null; factoryGate?: Deferred | null; contentGate?: Deferred | null; persistentWorldContext?: MockWorldContext | null; withSun?: boolean; worldFrames?: Record<string, PreparedWorldCameraFrame> | null; datasets?: boolean; datasetGate?: Deferred | null };
 
-const flush = (): Promise<void> => new Promise(resolve => setImmediate(resolve));
+// A navigation lets the sidebar swap render in its own frame (a timer, then a
+// zero-delay timer in the harness), so one flush spans three timer turns.
+const flush = async (): Promise<void> => { for (let turn = 0; turn < 3; turn++) await new Promise(resolve => setTimeout(resolve, 0)); };
 function deferred(): Deferred {
   let resolve!: (value: unknown) => void, reject!: (reason?: unknown) => void;
   const promise = new Promise<unknown>((yes, no) => { resolve = yes; reject = no; });
@@ -56,6 +58,9 @@ function harness({ prepare = async () => ({}), focus, centerTarget, systemTarget
   documentTarget.body = { classList: { add() {}, remove() {} } };
   media.matches = false; windowTarget.matchMedia = () => media;
   windowTarget.setTimeout = setTimeout; windowTarget.clearTimeout = clearTimeout; windowTarget.performance = performance;
+  // The router lets the sidebar swap render in its own frame before mounting; a timer stands in for the frame.
+  windowTarget.requestAnimationFrame = callback => windowTarget.setTimeout(() => callback(windowTarget.performance.now()), 0) as number;
+  windowTarget.cancelAnimationFrame = handle => windowTarget.clearTimeout(handle);
   let location = new URL(initialUrl ?? 'https://example.test/mercury/?campaign=test#vault'), index = 0;
   const entries: { state: Record<string, unknown>; url: string }[] = [{ state: { campaign: 'preserved' }, url: location.href }], writes: string[] = [];
   Object.defineProperty(windowTarget, 'location', { get: () => location });
@@ -732,7 +737,13 @@ test('zooming out after first-click system framing restores the overview at the 
   h.windowTarget.clearTimeout = id => { if (typeof id === 'number') timers.delete(id); };
   try {
     await h.router.settled;
-    await h.router.navigate('venus', { sceneSelection: true });
+    // The frame gate and its follow-up run through this test's manual timers.
+    const drain = async (pending: Promise<unknown> | null) => {
+      let finished = pending === null; pending?.then(() => { finished = true; }, () => { finished = true; });
+      while (!finished) { await flush(); for (const [id, callback] of timers) { timers.delete(id); callback(); } }
+      return pending;
+    };
+    assert.equal(await drain(h.router.navigate('venus', { sceneSelection: true })), true);
     const selected = required(h.mounts.at(-1));
     required(selected.publishCamera)(camera(1400));
     assert.equal(timers.size, 0, 'The selected system remains below the existing orbital cutoff');
@@ -743,7 +754,7 @@ test('zooming out after first-click system framing restores the overview at the 
     const zoomedOut = camera(1700);
     required(selected.publishCamera)(zoomedOut);
     for (const [id, callback] of timers) { timers.delete(id); callback(); }
-    await h.router.settled;
+    await drain(h.router.settled);
     assert.equal(h.router.state().activeObjectId, 'sun');
     assert.equal(h.router.state().selectedObjectId, null);
     assert.equal(h.windowTarget.location.searchParams.get('overview'), 'solar-system');
