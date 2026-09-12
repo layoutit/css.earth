@@ -74,6 +74,7 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
     }
   }
   const anyEnabled = selected && componentScope(settings.components, selected, scope).some(item => item.enabled);
+  const previewMessage = state.active || state.dirty ? 'Updating live preview…' : result?.quality === 'draft' ? 'Draft · refining detail…' : result ? 'Live preview · up to date' : 'Preparing live preview…';
   const field = (key: NumericField, label: string, min: number, max: number, title: string, step = .01): ReactNode => selected &&
     <Slider key={key} id={`shape-cloud-${key}`} label={label} value={selected[key]} min={min} max={max} step={step} title={title}
       onChange={value => edit(key, value)} onBegin={state.begin} onSettle={state.settle} />;
@@ -84,17 +85,19 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
         <span aria-hidden="true">{item.symbol}</span><span>{item.label}</span>
       </button>)}
     </div>
-    {state.active && <progress aria-label="Cloud preparation progress" max={state.job?.progress?.total ?? 1} value={state.job?.progress?.current ?? 0} />}
-    <p className="interaction-hint shape-cloud-status" role="status" data-unapplied={state.dirty}>
-      {state.active ? state.job?.progress?.message || 'Updating live preview…' : state.dirty ? 'Updating live preview…' : result?.quality === 'draft' ? 'Draft · refining detail…' : result ? 'Live preview · up to date' : 'Preparing live preview…'}
-    </p>
+    <div className="shape-cloud-feedback" data-active={state.active}>
+      <progress aria-label="Cloud preparation progress" aria-hidden={!state.active}
+        max={state.job?.progress?.total ?? 1} value={state.job?.progress?.current ?? 0} />
+      <p className="interaction-hint shape-cloud-status" role="status" data-unapplied={state.dirty}
+        title={state.active ? state.job?.progress?.message || previewMessage : previewMessage}>{previewMessage}</p>
+    </div>
     {(state.error || state.storageError) && <p className="interaction-hint shape-cloud-error" role="alert">{state.error || state.storageError}</p>}
     {state.error && <button type="button" onClick={state.retry}>Retry preview</button>}
     <div className="shape-cloud-camera-actions"><button type="button" onClick={() => setView(earthCloudView)}>Earth view</button>
       <button type="button" aria-pressed={!view.locked} onClick={() => setView(view.locked ? { ...view, locked: false } : { ...view, locked: true, yaw: 0, pitch: 0 })}>
         {view.locked ? 'Unlock rotation' : 'Lock to Earth'}</button></div>
     <label className="observation-check"><input type="checkbox" checked={outlines} onChange={event => setOutlines(event.target.checked)} /> Shape outlines</label>
-    {mode === 'overlay' && <Slider id="shape-cloud-overlay-opacity" label="Cloud overlay" value={opacity} min={0} max={1}
+    {mode === 'overlay' && <Slider id="shape-cloud-overlay-opacity" label="Cloud" value={opacity} min={0} max={1}
       display={`${Math.round(opacity * 100)}%`} onChange={setOpacity} />}
     <div className="shape-cloud-editing">
       <div className="shape-cloud-scope" role="group" aria-label="Edit scope">{(['all', 'group', 'selected'] as const).map(value =>

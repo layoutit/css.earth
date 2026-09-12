@@ -101,6 +101,7 @@ export function App() {
                 <label id="overlay-enabled-label" htmlFor="overlay-enabled"><input id="overlay-enabled" type="checkbox" checked={alignment?.enabled ?? false} onChange={event => { updateAlignment({ enabled: event.target.checked }); controller.current?.showImage(event.target.checked); }} /> Show image</label>
                 <label htmlFor="overlay-opacity">Opacity</label>
                 <input id="overlay-opacity" type="range" min="0" max="100" value={alignment?.opacity ?? 55} onChange={event => { updateAlignment({ opacity: event.target.valueAsNumber }); controller.current?.setImageOpacity(event.target.valueAsNumber); }} />
+                <output htmlFor="overlay-opacity">{Math.round(alignment?.opacity ?? 55)}%</output>
               </div>
               <div id="image-tone-controls"></div>
               <div id="overlay-options"></div>

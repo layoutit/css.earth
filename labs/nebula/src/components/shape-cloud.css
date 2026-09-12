@@ -6,8 +6,10 @@
 .shape-cloud-modes button:not(:disabled):hover { background: #22252a; }
 .shape-cloud-job-actions, .shape-cloud-camera-actions, .shape-cloud-component-actions, .shape-cloud-scope { display: flex; gap: 6px; align-items: center; }
 .shape-cloud-job-actions button:first-child { flex: 1; min-height: 37px; }
-.shape-cloud-workbench progress { width: 100%; margin-top: 8px; height: 5px; accent-color: #aec7cf; }
-.shape-cloud-status { margin: 7px 0 12px; min-height: 13px; }
+.shape-cloud-feedback { display: grid; grid-template-rows: 5px 16px; gap: 6px; margin: 8px 0 12px; min-width: 0; }
+.shape-cloud-feedback progress { display: block; width: 100%; height: 5px; margin: 0; accent-color: #aec7cf; visibility: hidden; }
+.shape-cloud-feedback[data-active="true"] progress { visibility: visible; }
+.shape-cloud-feedback .shape-cloud-status { margin: 0; line-height: 16px; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .shape-cloud-status[data-unapplied="true"] { color: #e5c795; }
 .shape-cloud-error { color: #f2b8ae; }
 .shape-cloud-camera-actions button { flex: 1; font-size: 11px; }
@@ -18,7 +20,7 @@
 .shape-cloud-component-actions { justify-content: space-between; margin: 8px 0; }
 .shape-cloud-component-actions button { font-size: 11px; padding: 5px 9px; }
 .shape-cloud-component-actions .observation-check { margin: 0; }
-.shape-cloud-slider { margin-top: 10px; }
+.shape-cloud-slider { margin: 7px 0; }
 .shape-cloud-foot { display: flex; justify-content: space-between; align-items: center; gap: 6px; margin-top: 15px; }
 .shape-cloud-foot .interaction-hint { margin: 0; }
 .shape-cloud-workspace { position: absolute; inset: 0; z-index: 1; background: #000; }
