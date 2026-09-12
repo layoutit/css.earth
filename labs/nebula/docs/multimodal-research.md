@@ -25,6 +25,8 @@ candidate families to compare, not extra measured depth samples.
 | --- | --- | --- |
 | [Men’shchikov et al. 2012, getsources](https://arxiv.org/abs/1204.4508) | Combine normalized detection evidence across scales/wavelengths; measure each original band separately. | Best immediate model for fusion. A combined detection score is not physical intensity. |
 | [Men’shchikov 2013, getfilaments](https://arxiv.org/abs/1309.2170); [2021, getsf](https://arxiv.org/abs/2102.11565) | Separate compact sources, elongated structures and diffuse backgrounds before combining detections. | Preserve band-specific detail and unassigned signal. The [existing local getsf experiment](research/getsf.md) timed out before component outputs; do not describe it as a passed benchmark or repeat that expensive run by default. |
+| [Steger, 1996 primary technical report](https://mv.in.tum.de/_media/members/steger/publications/1996/fgbv-96-03-steger.pdf), published in PAMI 1998 | Derivative-based subpixel line positions, widths and linked junctions; models lateral contrast asymmetry that can shift a detected ridge. | Useful refinement of the current ridge maps before fitting geometry. Check line-profile assumptions against stretched composite images. |
+| [Freeman & Adelson 1991, steerable filters](https://people.csail.mit.edu/billf/steerpaper.html) | Synthesize arbitrary oriented filter responses from a small basis instead of evaluating many separate rotations. | Practical offline orientation/tail analysis; filter agreement remains projected evidence. |
 | [Koch & Rosolowsky 2015, FilFinder](https://arxiv.org/abs/1507.02289) | Adaptive thresholds, medial-axis skeletons and graph pruning yield connected filaments and local width/orientation. | Good next increment after ridge maps. Crossings can superpose unrelated material; a skeleton is projected topology. |
 | [Sousbie 2011, DisPerSE](https://arxiv.org/abs/1009.4015) | Persistence of critical points and connecting structures offers principled noise pruning. | Larger implementation cost; defer unless simpler scale persistence and graph pruning fail. Cosmological significance calibration is not automatically valid for stretched RGB. |
 
@@ -47,6 +49,7 @@ above a fixed threshold and compare their unoriented tangents using
 | --- | --- | --- |
 | [Meaburn et al. 2005](https://arxiv.org/abs/astro-ph/0504295), [2008](https://academic.oup.com/mnras/article/384/2/497/1024027) | Papers and measured PV diagrams. No original Helix slit FITS downloaded. | Sparse, spatially located line velocities. Digitized centroids remain digitized measurements with finite sampling/plot uncertainty. They do not form a filled PPV cube. |
 | [SPM catalogue, López et al. 2012 §2](https://arxiv.org/html/1110.4698v1) | Public downloads described as spectral PDFs; calibrated FITS require contacting the catalogue. Listed hosts timed out or failed DNS during this check. | Strong original-slit-data lead, but **not verified direct FITS access**. No email was sent. |
+| [Zeigler et al. 2013, VizieR J/ApJ/778/16](https://vizier.cfa.harvard.edu/viz-bin/VizieR-3?-source=J/ApJ/778/16) | Official machine-readable table metadata checked: 327 rows, angular offsets, intensity, FWHM, VLSR and upper-limit flags. Full table not downloaded. | Published HCO+ line parameters offer a coarse molecular-velocity follow-up. They are not channel spectra or a PPV cube. Preserve missing values/limits; verify offset origin and uncertainty before ingestion. Column density/abundance columns are separate inferred quantities. |
 | [ALMA C1, Andriantsaralaza et al. 2020 §2](https://academic.oup.com/mnras/article/491/1/758/5610231) | Live archive metadata, download manifest, README and complete CO FITS downloaded and decoded. | Genuine measured position-position-frequency emission of **one knot**. Fine velocity structure; no whole-nebula coverage. |
 | [SDSS-V LVM Helix, Sánchez et al. 2026 §§2,4.1,10](https://arxiv.org/html/2602.10072v1) | Original RSS and derived DAP download endpoints return HTTP 200; large files were not downloaded. | Broad main-nebula sampling with 35.5″ fibers and gaps; R≈4000. Useful line-centroid/ionization constraints, not automatically separated front/back components. |
 | [Matsuura et al. 2007, SINFONI §2](https://arxiv.org/html/0709.3065v1) | Paper checked; initial ESO processed-cube query found no product. | One knot at high angular resolution, R=4490/5090. Good excitation/morphology lead; its approximately 60 km/s instrumental resolution is poorly matched to fine knot velocity splitting. |
@@ -82,7 +85,7 @@ tables; do not silently mix them with this paper’s DR19 products.
 
 1. **Now: combined image evidence and the bounded slit experiment.** Preserve the observations and error accounting; assess projected structure without inventing a unified depth field.
 2. **Next: ridge graph and candidate shell/lobe/sweep families.** Fit a few geometric parameters against independent image supports and observed PV samples. [SHAPE](https://arxiv.org/html/1003.2012v1) supplies the useful forward-modelling pattern: construct a hypothesis, simulate the same instrument observations, compare, then optimize a bounded parameter subset.
-3. **Then: LVM centroid coverage or C1 resolved PPV, as separate experiments.** LVM broadens spatial constraints; C1 tests genuine channel structure. Neither substitutes for the other. Full original optical slit FITS remain the best route to a globally resolved velocity model if obtained.
+3. **Then: broaden measured velocity coverage.** Audit the Zeigler table's coarse molecular components, LVM's ionized centroids and C1's resolved channels as separate experiments. Their spatial coverage, tracers and velocity resolution differ. Full original optical slit FITS remain a valuable route to component-resolved constraints across the nebula if obtained.
 4. **Finally: uncertainty ensembles and baked XYZ emission.** A small parameter grid or posterior sampler can retain multiple plausible depth solutions. [RHOCUBE’s Bayesian shell study](https://arxiv.org/html/1611.05259v2) demonstrates parameter uncertainties and multiple fitting density families, on a different object with calibrated radio data; it does not license physical density inference from Helix RGB.
 
 Use `P(x,y,v) = integral emissivity(x,y,z) * lineProfile(v-vz(x,y,z)) dz`,
@@ -99,6 +102,11 @@ while [NGC 2818](https://arxiv.org/abs/2405.00169) combines echelle slits and
 Fabry–Perot cubes with filament/knot components. Their lesson is to test
 velocity and geometry together, not assume every projected arc is a torus.
 
+Allow the ionized core, molecular wall, knots and halo to have distinct
+emissivities and velocity laws. A held-out molecular or optical measurement
+must test the corresponding tracer and footprint, rather than assume that
+different emission phases occupy the same surface.
+
 Do not normalize each image ray to guarantee the source projection and call
 that validation. Hold out real slit/fiber samples or spatial supports; inspect
 residuals, alternate geometry and parameter sensitivity. Inferred emissivity
@@ -107,13 +115,22 @@ model comparison; runtime remains a retained prepared-asset viewer.
 
 ## Research-run status
 
-The first remote-wrapper login check failed before authentication because the
-default display was absent. Updated runner guidance identified the workstation's
-active `:99` display; a second headed remote check passed at 10:40 UTC using an
-isolated profile. Its screenshot independently confirmed the signed-in account
-and project history. The prompt was submitted at 10:41:33 UTC and the research
-plan was accepted at 10:41:58 UTC, with a 45-minute timeout;
-**no completed research report has been captured yet**. Existing
-profiles and cookies were preserved. This note still contains only the direct
-primary-source checks above. The prompt, status and eventual raw report belong
-in `.local/nebula-lab/research/helix-multimodal-2026-09-12.md`.
+The headed remote run **completed at 10:49:44 UTC**, within its 45-minute bound:
+52,191 report characters and six literal URLs were copied back and inspected.
+An initial check failed on the absent default display; updated runner guidance
+enabled the successful isolated-profile run on `:99`. Existing profiles and
+cookies were preserved.
+
+The complete raw text is in ignored
+`.local/nebula-lab/research/helix-multimodal-2026-09-12.md`.
+**Interactive citation anchors were not captured**: the HTML sidecar is empty
+and numbered citations in the raw text are unresolved. Only independently
+checked sources appear in this maintained note. Final checks promoted the
+Steger/Freeman method leads and found the public Zeigler line-parameter table
+that the report omitted. No additional datasets were downloaded.
+
+Report code/examples naming separate `WFI_B` or `VISTA_Y` inputs are proposed
+schemas, not evidence that calibrated filter planes were recovered. The current
+lab owns registered outreach composites. Rank normalization can be tested for
+stretch sensitivity, but does not make derivative-based feature scores fully
+invariant to arbitrary display processing.
