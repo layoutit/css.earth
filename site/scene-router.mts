@@ -54,6 +54,7 @@ export function createSceneRouter({
   let highContrastSky = false;
   let asteroidOrbitsEnabled = false;
   let asteroidLabelsEnabled = false;
+  let highlightedClassification: string | null = null;
   let scenePaused = true;
   let sceneError: unknown = null;
   let sceneState: SceneState = "loading";
@@ -145,6 +146,10 @@ export function createSceneRouter({
           onAsteroidLabelsChange(next) { if (shellOwner === owner && active) {
             asteroidLabelsEnabled = next === true;
             worldContextMount?.setAsteroidLabelsEnabled?.(asteroidLabelsEnabled);
+          } },
+          onCategoryChange(next) { if (shellOwner === owner) {
+            highlightedClassification = next;
+            worldContextMount?.setHighlightedClassification?.(highlightedClassification);
           } },
         });
       }
@@ -327,7 +332,9 @@ export function createSceneRouter({
     const opensOverviewFocus = overview && id === objectId && id === solarSystemFocus(objects)?.id
       && overviewScopeFromUrl(active?.url ?? windowTarget.location.href) === 'solar-system';
     const overviewTarget = options.overviewScope
-      ? navigation.overviewTarget?.({ scope: options.overviewScope, objectId: id, fromId: objectId, mount: active?.mount }) : null;
+      ? navigation.overviewTarget?.({ scope: options.overviewScope, objectId: id, fromId: objectId, mount: active?.mount })
+      : options.classification
+        ? navigation.classificationTarget?.({ classification: options.classification, objectId: id, fromId: objectId, mount: active?.mount }) : null;
     const centerTarget = overviewTarget?.world ?? (options.recenter
       ? navigation.centerTarget?.({ objectId: id, fromId: objectId, mount: active?.mount, force: true })
       : options.sceneSelection && !opensOverviewFocus && id !== centeredObjectId && hasPresented
@@ -366,7 +373,8 @@ export function createSceneRouter({
     request.lifetime.onDispose(() => {
       if (!pending || pending === request) worldContextMount?.previewSelection?.();
     });
-    if ((options.recenter || options.centerSelection) && options.overview) {
+    // A category flight keeps its filtered results instead of the overview card.
+    if ((options.recenter || options.centerSelection) && options.overview && !options.classification) {
       const restoreSelection = shellOwner?.shell?.beginOverviewSelection?.(options.overviewScope ?? 'solar-system');
       if (restoreSelection) request.lifetime.onDispose(restoreSelection);
     } else if (!options.overview) {
@@ -615,6 +623,7 @@ export function createSceneRouter({
         value.setHeliosphereEnabled?.(heliosphereEnabled);
         value.setAsteroidOrbitsEnabled?.(asteroidOrbitsEnabled);
         value.setAsteroidLabelsEnabled?.(asteroidLabelsEnabled);
+        value.setHighlightedClassification?.(highlightedClassification);
         return value;
       }).catch(error => {
         if (worldContextAbort === controller) worldContextMountTask = null;

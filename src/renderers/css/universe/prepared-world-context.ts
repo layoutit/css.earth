@@ -92,6 +92,8 @@ export interface PreparedWorldContext {
   readonly focus: PreparedContextFocus;
   readonly bodies: readonly PreparedContextBody[];
   readonly orbitCenters?: Readonly<Record<string, PreparedOrbitCenter>>;
+  /** Each classification framed by its members' prepared positions. */
+  readonly classificationViews?: Readonly<Record<string, NonNullable<PreparedContextBody['systemView']>>>;
   readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number;
     readonly presentation: PreparedContextCameraPresentation };
   readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number;
@@ -134,6 +136,22 @@ function parseSystemView(value: unknown): PreparedContextBody['systemView'] {
   });
   if (!candidates.length) throw new TypeError('System view must include candidate views.');
   return Object.freeze({ memberIds: Object.freeze(memberIds), memberRadiiM: Object.freeze(memberRadiiM), candidates: Object.freeze(candidates) });
+}
+/** Classification views frame prepared bodies by position; members must match those bodies. */
+function parseClassificationViews(value: unknown, bodies: readonly PreparedContextBody[]) {
+  if (value === undefined) return undefined;
+  if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Classification views must be a record.');
+  const byId = new Map(bodies.map(body => [body.id, body]));
+  const entries = Object.entries(value).map(([classification, input]) => {
+    const view = parseSystemView(input);
+    if (!/^[a-z][a-z0-9-]*$/.test(classification) || !view) throw new TypeError('Invalid classification view.');
+    for (const [index, id] of view.memberIds.entries()) {
+      if (byId.get(id)?.radiusM !== view.memberRadiiM[index]) throw new TypeError('Classification view members must match their prepared bodies.');
+    }
+    return [classification, view] as const;
+  });
+  if (!entries.length) throw new TypeError('Classification views must name a classification.');
+  return Object.freeze(Object.fromEntries(entries));
 }
 function focusPoint(value: unknown): PreparedContextFocus {
   const input = record(value, 'context focus', ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView']);
@@ -199,7 +217,7 @@ function parsePresentation(value: unknown): PreparedContextCameraPresentation {
 const validatedContexts = new WeakSet<object>();
 export function parsePreparedWorldContext(value: unknown): PreparedWorldContext {
   if (value && typeof value === 'object' && validatedContexts.has(value)) return value as PreparedWorldContext;
-  const input = record(value, 'world context', ['schema', 'frame', 'focus', 'bodies', 'orbitCenters', 'camera', 'volume', 'stars', 'system', 'sky']);
+  const input = record(value, 'world context', ['schema', 'frame', 'focus', 'bodies', 'orbitCenters', 'classificationViews', 'camera', 'volume', 'stars', 'system', 'sky']);
   if (input.schema !== 'cssearth-world-context@1') throw new TypeError('Unsupported prepared world context.');
   const frame = parsePreparedWorldCameraFrame(input.frame);
   if (!frame) throw new TypeError('World context requires its prepared frame.');
@@ -311,6 +329,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
     if (moon.radiusM !== body.systemView!.memberRadiiM[index]) throw new TypeError('System view radii must match their prepared members.');
   }
   const orbitCenters = parsePreparedOrbitCenters(input.orbitCenters, focus, bodies);
+  const classificationViews = parseClassificationViews(input.classificationViews, bodies);
   const camera = record(input.camera, 'context camera', ['minimumDistanceM', 'maximumDistanceM', 'framingReferenceZoom', 'presentation']);
   const volume = record(input.volume, 'context volume', ['objectId', 'fadeStartDistanceM', 'fullDistanceM', 'opacityProfile', 'brightnessProfile']);
   const stars = record(input.stars, 'context stars', ['objectId', 'fadeStartDistanceM', 'fullDistanceM']);
@@ -337,6 +356,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
   if (!/^[a-z][a-z0-9-]*$/.test(objectId)) throw new TypeError('Invalid context volume identity.');
   const result: PreparedWorldContext = Object.freeze({ schema: 'cssearth-world-context@1', frame, focus, bodies: Object.freeze(bodies),
     ...(input.orbitCenters === undefined ? {} : { orbitCenters }),
+    ...(classificationViews ? { classificationViews } : {}),
     camera: Object.freeze({ minimumDistanceM, maximumDistanceM, framingReferenceZoom, presentation }),
     volume: Object.freeze({ objectId, fadeStartDistanceM, fullDistanceM,
       ...(volume.opacityProfile === undefined ? {} : { opacityProfile: parseVolumeOpacityProfile(volume.opacityProfile) }),
@@ -444,6 +464,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       orbitAppearance: { width: CONTEXT_LINE_WIDTH, opacity: 1 },
       orbitNavigable: false,
       bodyHidden: false, orbitHidden: false, labelHidden: false, labelSuppressed: false, indicatorHidden: false,
+      highlighted: false,
       baseAlpha,
       hovered: false, groupHovered: false,
       labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, indicatorCutout: false, previousCount: 0 };
@@ -548,8 +569,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         widthPixels: viewport.widthPixels ?? host.clientWidth, heightPixels: viewport.heightPixels ?? host.clientHeight },
         contextCommittedId: contextFrames.committedId,
         selectedId, overview, selectionPreview, navigationInFlight, holdAnnotations: rotationActive, anchorOnly: publishingBodies === anchorOnly,
-        bodies: bodies.map(({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, labelSize, labelShown, labelPlacement,
-          indicatorShown, indicatorRadius, orbitAppearance }) => ({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, labelSize,
+        bodies: bodies.map(({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize, labelShown, labelPlacement,
+          indicatorShown, indicatorRadius, orbitAppearance }) => ({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize,
           labelShown, labelPlacement, indicatorShown, indicatorRadius, orbitAppearance })) };
   };
   const layer = Object.freeze({ root,
@@ -649,6 +670,21 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         if (entry.indicatorHidden !== next) { entry.indicatorHidden = next; changed = true; }
       }
       if (changed) { presentationRevision++; policyRevision++; refresh(); }
+    },
+    /** Emphasize a set of bodies, such as one classification, on the retained nodes.
+     * The marker carries the flag; its ring and caption are its own pseudo-elements. */
+    setHighlighted(ids: readonly string[]) {
+      if (destroyed) return;
+      const highlighted = new Set(ids);
+      let changed = false;
+      for (const entry of bodies) {
+        const next = highlighted.has(entry.body.id);
+        if (entry.highlighted === next) continue;
+        entry.highlighted = next; changed = true;
+        if (next) entry.marker.dataset.contextHighlight = 'true'; else delete entry.marker.dataset.contextHighlight;
+      }
+      if (bodies.some(entry => entry.highlighted)) root.dataset.contextHighlighting = 'true'; else delete root.dataset.contextHighlighting;
+      if (changed) { presentationRevision++; refresh(); }
     },
     opacityStats: fader.stats,
     publicationStats: () => ({ skippedPublications, bodyPublications, depthPublications, paintedBodies: paintedBodies.size }),
