@@ -126,6 +126,10 @@
           "kind": "image-rgb-no-data",
           "noData": 0,
           "centerLongitude": 0
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       }
     }

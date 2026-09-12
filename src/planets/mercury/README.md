@@ -14,6 +14,16 @@
 
 ## Evidence
 
+The lower-resolution maps now resize before latitude bands and gutters are packed. This keeps stored strips separate during filtering. All three canonical @2x JPEGs reproduce their previous hashes exactly; the combined poles and scene are unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
+
+| View | Both prepared levels, before → current |
+| --- | --- |
+| enhanced | 6657.9 → 6656.2 kB |
+| normal | 5021.0 → 5019.0 kB |
+| topography | 5033.2 → 5031.9 kB |
+
+These download sizes refer to the band images. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/mercury/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+
 Named features, 2026-09-11, this version: `tools/objects/surface-features/surface-features.test.ts` decodes the pinned archive and checks every anchor against the shared minimap map convention; `tests/objects/unit/mercury/features.test.mts` pins the prepared catalogue bytes, the spin-node anchor, the diameter ordering and the landmark coordinates (Caloris Planitia, Rembrandt, Enterprise Rupes, Hokusai); `src/renderers/css/labels/surface-feature-layout.test.ts` covers projection, limb fading, the zoom gate, admission and outline chords. `tests/objects/browser/mercury/features-browser.mts` (headless Chrome, 2026-09-11, this version) typed Caloris Planitia, Rembrandt, Enterprise Rupes, Beethoven and Rachmaninoff into the sidebar search from the overview, selected each feature row and waited for the flight: every feature arrived pinned within 50 px of the view centre with its caption naming it and its outline traced (256 chords for the Caloris extent box and the crater rim circles, 154 chords of mapped scarp traces for Enterprise Rupes). In the enhanced-colour lens the Caloris extent box encloses the basin's bright plains and the Rembrandt rim circle follows the basin rim, which fixes the map's left edge at 180° E. The `surface-features` browser conformance case (labels, hover caption, outline chords, spin, lens gate, retained DOM) is written but could not run here: on the development server every Mercury conformance case, including the pre-existing `desktop` case, stops at the shared lens-panel count assertion before loading.
 
 The [presentation compiler test](../../renderers/css/preparation/presentation/presentation.test.ts) checks Mercury's surface texture levels: their thresholds, a startup list with only level 0, and a level-0 mount URL. Regenerating Mercury for that change left every public image byte-identical.
