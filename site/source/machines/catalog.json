@@ -1795,7 +1795,7 @@
         }
       ],
       "description": {
-        "value": "Arecibo Observatory’s primary telescope from 1963 until cable failures destroyed it in 2020. Its fixed spherical reflector used line feeds in suspended carriage houses, and it worked as both a radio telescope and a solar system radar.",
+        "value": "A fixed 305-m spherical reflector that served as both radio telescope and planetary radar, until cable failures destroyed it in 2020.",
         "citations": [
           {
             "catalogueId": "pds-telescope-arecibo-305m",
@@ -1886,7 +1886,7 @@
         }
       ],
       "description": {
-        "value": "A fully steerable parabolic radio and radar antenna in the NASA Deep Space Network. It opened in 1964 at 64 m and was extended to 70 m in 1988; it transmits for solar system radar as well as receiving.",
+        "value": "A steerable 70-m Deep Space Network antenna that transmits as well as receives.",
         "citations": [
           {
             "catalogueId": "pds-telescope-goldstone-dss14",
@@ -1959,7 +1959,7 @@
         }
       ],
       "description": {
-        "value": "Melipal, one of the four 8.2-m Ritchey-Chrétien unit telescopes of ESO’s Very Large Telescope at Paranal in Chile. Its alt-azimuth mount lets it point over the whole sky.",
+        "value": "Melipal, one of the four 8.2-m unit telescopes at ESO's Paranal Observatory in Chile.",
         "citations": [
           {
             "catalogueId": "pds-telescope-vlt-ut3",
@@ -2010,7 +2010,7 @@
         }
       ],
       "description": {
-        "value": "An array of 66 antennas on the Chajnantor plateau in Chile, observing between 0.32 and 3.6 mm. Fifty 12-metre dishes act together as one interferometer, with a compact array alongside them.",
+        "value": "Sixty-six antennas on Chile's Chajnantor plateau, working together as one millimetre-wave interferometer.",
         "citations": [
           {
             "catalogueId": "pds-telescope-alma",
@@ -2074,7 +2074,7 @@
         }
       ],
       "description": {
-        "value": "A 3.2-m Cassegrain telescope on Mauna Kea built to support the Voyager missions and now the United States national facility for infrared astronomy. At least half its observing time goes to planetary science.",
+        "value": "A 3.2-m Mauna Kea telescope built for Voyager, now the US national infrared facility. Half its time goes to planetary science.",
         "citations": [
           {
             "catalogueId": "pds-telescope-irtf",
@@ -2138,7 +2138,7 @@
         }
       ],
       "description": {
-        "value": "A pointing and scanning infrared observatory in an Earth-trailing solar orbit, with an 85-cm aperture and three cryogenically cooled instruments covering the near- to far-infrared.",
+        "value": "An infrared observatory in an Earth-trailing orbit, with an 85-cm mirror and three cryogenically cooled instruments.",
         "citations": [
           {
             "catalogueId": "pds-instrument-host-spitzer",
@@ -2189,7 +2189,7 @@
         }
       ],
       "description": {
-        "value": "An ESA far-infrared and submillimetre observatory with a 3.5-m primary mirror, covering roughly 55 to 671 microns. Alongside star and galaxy formation it observed asteroids and comets in the solar system.",
+        "value": "ESA's far-infrared and submillimetre observatory, with a 3.5-m mirror. It observed comets and asteroids as well as distant galaxies.",
         "citations": [
           {
             "catalogueId": "reference-herschel",
@@ -2248,7 +2248,7 @@
         }
       ],
       "description": {
-        "value": "A radio astronomy array operated by the NSF National Radio Astronomy Observatory under cooperative agreement by Associated Universities, Inc.",
+        "value": "A radio array operated by the NSF National Radio Astronomy Observatory.",
         "citations": [
           {
             "catalogueId": "reference-vlba",
@@ -4143,7 +4143,7 @@
         ]
       },
       "description": {
-        "value": "Solar system radar observations from the Arecibo 305-m antenna, transmitting at 430 MHz and later 2380 MHz. The programme ended with the antenna in 2020.",
+        "value": "Solar system radar from the Arecibo 305-m antenna, at 430 MHz and later 2380 MHz.",
         "citations": [
           {
             "catalogueId": "pds-telescope-arecibo-305m",
@@ -4227,7 +4227,7 @@
         ]
       },
       "description": {
-        "value": "Planetary radar from the Deep Space Network antenna DSS-14 at Goldstone, which transmits as well as receives.",
+        "value": "Planetary radar from DSS-14, the Deep Space Network antenna at Goldstone.",
         "citations": [
           {
             "catalogueId": "pds-telescope-goldstone-dss14",
@@ -4290,7 +4290,7 @@
         ]
       },
       "description": {
-        "value": "A VLT/SPHERE survey that imaged large main-belt asteroids and reconstructed their shapes, published by Vernazza and colleagues in 2021.",
+        "value": "A VLT/SPHERE survey that imaged large main-belt asteroids and reconstructed their shapes.",
         "citations": [
           {
             "catalogueId": "vernazza-2021-survey",
@@ -4365,7 +4365,7 @@
         ]
       },
       "description": {
-        "value": "VLT/MUSE integral-field spectroscopy of the Galilean moons, mapping their surfaces in reflectance.",
+        "value": "VLT/MUSE spectroscopy mapping the Galilean moons in reflectance.",
         "citations": [
           {
             "catalogueId": "source-io-io-muse-original-485nm-slope-2",
