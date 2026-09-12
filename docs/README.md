@@ -22,6 +22,7 @@ For a body's sources, processing, evidence and known problems, read its
 | Loading objects in the browser | [Page navigation transport](page-navigation-transport.md) |
 | Photometry, star and label tables stored once for every body | [Prepared shared banks](prepared-shared-banks.md) |
 | Changing objects and cancelling a flight | [Flight lifecycle](flight-lifecycle.md) |
+| Measured renderer and navigation performance work | [Performance notes](performance/README.md) |
 | TypeScript owners, JavaScript exceptions and checks | [TypeScript ownership](architecture/typescript-ownership.md) |
 | Page titles, descriptions and search indexing | [SEO](seo.md) |
 
