@@ -25,6 +25,12 @@ const contributors = (context: (typeof contexts)[number]) => [
       ? EXPLORATION.catalog.machines.find(machine => machine.id === mission.participants[0].machineId)?.band?.value
       : undefined,
   })),
+  ...context.notes.map(note => ({
+    id: note.label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
+    title: note.label, lead: undefined, description: note.reason, href: undefined,
+    dates: null, image: undefined, emblem: undefined,
+    attribute: { 'data-unresolved': note.label }, band: undefined,
+  })),
   ...context.machines.map(machine => ({
     id: machine.id, title: machine.name.value, lead: undefined, description: machine.description.value,
     href: referenceUrl(machine.description),
@@ -87,11 +93,6 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
           </article>
         </div>)}
       </PlanetCard>)}
-      {context.notes.length > 0 && <PlanetCard class="planet-dataset-context-card">
-        <div class="planet-card-tabpanel">
-          {context.notes.map(note => <p class="planet-resource-description">{note}</p>)}
-        </div>
-      </PlanetCard>}
       {context.sources.length > 0 && <PlanetCard class="planet-dataset-context-card" role="region" aria-label="Sources">
         <div class="planet-card-tabpanel">
           <h2 class="planet-lens-details-title">Sources</h2>
