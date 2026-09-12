@@ -48,7 +48,7 @@
         "units": "kilometers",
         "referenceRadiusMeters": 6100
       },
-      "coverage": "Published complete radial model at 2\u00b0 spacing. Observational constraints vary; unseen regions are uncertain.",
+      "coverage": "Published complete radial model at 2° spacing. Observational constraints vary; unseen regions are uncertain.",
       "expectedBytes": 527072,
       "expectedSha256": "ec751b328485ad20e9625395d7634e7f75c7167c615357b03cb8c94d3d6590b0",
       "capture": {
@@ -456,7 +456,7 @@
       "expectedSha256": "f4f3eb723f28d36a45690f0ff0a5be07b5ae42a4c52d36bc55506a03936a582f",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/GASPRA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -494,8 +494,8 @@
     {
       "id": "gaspra-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1104,
-      "expectedSha256": "a8b4d62115de1da00ce1582d98a0ffc6822ec9b0c8948e099030a8ee10f6f64d",
+      "expectedBytes": 1129,
+      "expectedSha256": "8780519f14e672251fbc600e824398bb345d12d56c0b9b9d159350f6e6d2f5b6",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -699,6 +699,29 @@
       "purpose": "Measured, unfitted registration checks for the added Galileo observation.",
       "expectedBytes": 3923,
       "expectedSha256": "b17c41f60285417a984be45d573d5b4fb1b52592ec72590e19fa31e45283a6fc"
+    },
+    {
+      "id": "gaspra-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 925,
+      "expectedSha256": "2852ee8636662b09f0592a21b1fe443d68903803e5b8ba5a61eb29642f2f826c",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 1 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts gaspra: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

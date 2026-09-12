@@ -1638,6 +1638,12 @@
       "expectedSha256": "72515c37abfd6e66e8cdac6eef3fa85ca2d42c137ba91b6b6f5c670226398cf9"
     },
     {
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 175,
+      "expectedSha256": "83f18034dde03b81602fb84f0cc132b45f45ba75d81d28555cc76f24566c23de",
+      "purpose": "Repository-authored surface map frame: the CSS selector of the leaf mesh and the mesh axes of the texture's left edge (180\u00b0), east and north, verified against the prepared leaf frames and a rendered probe; consumed by the shared minimap and surface-feature anchoring."
+    },
+    {
       "path": "editorial/earth.json",
       "expectedBytes": 10001,
       "expectedSha256": "afd5014507e89812e7ebd6f553324efce7c0dbec55b749dae552d7ba55f0f80d"

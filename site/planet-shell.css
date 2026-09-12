@@ -2012,6 +2012,24 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   display: none;
 }
 
+.prepared-surface-features [data-feature-tooltip-note] {
+  margin: 6px 0 0;
+  color: var(--shell-text);
+}
+
+.prepared-surface-features [data-feature-tooltip-note]:empty {
+  display: none;
+}
+
+.prepared-surface-features [data-feature-tooltip-credit] {
+  display: block;
+  margin-top: 6px;
+  font: 400 10px/13px var(--shell-ui-font);
+  letter-spacing: 0.02em;
+  color: var(--shell-text-secondary);
+  opacity: 0.8;
+}
+
 /* The hovered feature's published diameter, traced as retained screen chords
    like the orbit lines. The stroke is a shell size in CSS pixels. */
 .prepared-surface-features [data-feature-outline-piece] {

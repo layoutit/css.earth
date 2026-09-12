@@ -510,7 +510,7 @@
       "expectedSha256": "0e34dd48b84100fdcac5380daa1351d482d6a3aba6babdec989215eafaeedf3b",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/IDA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -548,8 +548,8 @@
     {
       "id": "ida-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1086,
-      "expectedSha256": "b7b149d9ef66efbc4b50892579a449a36bf39b2edf255db73423046a0801d487",
+      "expectedBytes": 1111,
+      "expectedSha256": "ca7280e12b6ca2abcde80ee2b3b41d91b7557b21ae5cf66ffe56b4854ee18cff",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -725,6 +725,29 @@
       "expectedBytes": 5362,
       "expectedSha256": "1639b5b74d5b4f66ffcf5d8b0ce8c3bb249bc1bd6f27b69cc747f662f38a69ed",
       "purpose": "Ida parent point photometry and the original JPL SBDB response."
+    },
+    {
+      "id": "ida-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 1458,
+      "expectedSha256": "5e082892cc749c1ed62f02f8982494cdc78926ed5b19aa4db2256dc787dcdcca",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 2 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts ida: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

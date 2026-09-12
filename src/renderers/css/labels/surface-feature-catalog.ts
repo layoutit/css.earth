@@ -18,17 +18,27 @@ function vector(value: unknown, label: string): readonly [number, number, number
   return [finite(value[0], label), finite(value[1], label), finite(value[2], label)];
 }
 
-/** Every prepared surface point lies on the reference sphere, or, for a shape model, inside its declared radius band. */
+/** Every prepared surface point lies on the reference sphere, or, for a shape model, inside its declared radius band,
+ * or, for an ellipsoid, inside the declared normalised-radius band of its rendered surface. */
 function onBody(point: readonly [number, number, number], plan: PreparedSurfaceFeaturePlan): boolean {
-  const length = Math.hypot(...point), band = plan.surfaceRadiusUnits;
+  const length = Math.hypot(...point), band = plan.surfaceRadiusUnits, ellipsoid = plan.surfaceEllipsoidUnits;
+  if (ellipsoid) {
+    const up = point[0] * ellipsoid.north[0] + point[1] * ellipsoid.north[1] + point[2] * ellipsoid.north[2];
+    const share = Math.sqrt(Math.max(0, length * length - up * up) / (ellipsoid.equatorial * ellipsoid.equatorial) + (up * up) / (ellipsoid.polar * ellipsoid.polar));
+    return share >= ellipsoid.minimumShare * (1 - 1e-3) && share <= ellipsoid.maximumShare * (1 + 1e-3);
+  }
   return band ? length >= band.minimum * (1 - 1e-3) && length <= band.maximum * (1 + 1e-3) : Math.abs(length - plan.meshRadiusUnits) <= 1e-3 * plan.meshRadiusUnits;
+}
+/** The farthest any prepared point may sit from the centre: the sphere, the hit-mesh band's top, or the ellipsoid band's top on its long axis. */
+function surfaceCeiling(plan: PreparedSurfaceFeaturePlan): number {
+  return plan.surfaceEllipsoidUnits ? plan.surfaceEllipsoidUnits.equatorial * plan.surfaceEllipsoidUnits.maximumShare : plan.surfaceRadiusUnits?.maximum ?? plan.meshRadiusUnits;
 }
 
 function parseOutline(value: unknown, plan: PreparedSurfaceFeaturePlan): SurfaceFeatureOutline {
   const outline = object(value, 'feature outline');
   if (outline.kind === 'circle') {
     const center = vector(outline.center, 'feature rim centre'), east = vector(outline.east, 'feature rim east'), north = vector(outline.north, 'feature rim north');
-    const ceiling = (plan.surfaceRadiusUnits?.maximum ?? plan.meshRadiusUnits) * (1 + 1e-3);
+    const ceiling = surfaceCeiling(plan) * (1 + 1e-3);
     if (Math.hypot(...center) > ceiling || Math.abs(Math.hypot(...east) - Math.hypot(...north)) > 1e-3 * plan.meshRadiusUnits) throw new TypeError('Surface feature rim is not on the prepared body.');
     return Object.freeze({ kind: 'circle', center, east, north });
   }
@@ -52,6 +62,15 @@ function parseOutline(value: unknown, plan: PreparedSurfaceFeaturePlan): Surface
 }
 
 /** Validate the transported catalogue against its prepared plan before any label text is written. */
+/** An optional caption note: short text with the article it summarises. */
+function parseNote(value: unknown): PreparedSurfaceFeature['note'] {
+  if (value === undefined) return null;
+  const note = object(value, 'feature note');
+  const noteText = text(note.text, 'feature note text'), title = text(note.title, 'feature note title'), url = text(note.url, 'feature note url');
+  if (!noteText.trim() || noteText.length > 400 || !url.startsWith('https://')) throw new TypeError('Surface feature note is invalid.');
+  return Object.freeze({ text: noteText, title, url });
+}
+
 export function parsePreparedSurfaceFeatureCatalog(value: unknown, plan: PreparedSurfaceFeaturePlan, objectId: string): PreparedSurfaceFeatureCatalog {
   const catalog = object(value, 'surface feature catalogue');
   if (catalog.schema !== 'cssearth-prepared-surface-features@1' || catalog.objectId !== objectId) throw new TypeError('Surface feature catalogue is incompatible.');
@@ -75,7 +94,7 @@ export function parsePreparedSurfaceFeatureCatalog(value: unknown, plan: Prepare
     return Object.freeze({ id, name, kind: kind as SurfaceFeatureKind, type: text(feature.type, 'feature type'), code: text(feature.code, 'feature code'),
       diameterKm, longitudeDeg: finite(feature.longitudeDeg, 'feature longitude'), latitudeDeg: finite(feature.latitudeDeg, 'feature latitude'),
       anchorUnits, normal, radiusUnits, outline, searchNames, searchContext, origin: text(feature.origin, 'feature origin'), approved: text(feature.approved, 'feature approval'),
-      quad: text(feature.quad, 'feature quad'), link });
+      quad: text(feature.quad, 'feature quad'), link, note: parseNote(feature.note) });
   });
   return Object.freeze({ schema: 'cssearth-prepared-surface-features@1', objectId, source: text(catalog.source, 'catalogue source'),
     snapshotDate: text(catalog.snapshotDate, 'catalogue snapshot'), sourcePage: text(catalog.sourcePage, 'catalogue page'),

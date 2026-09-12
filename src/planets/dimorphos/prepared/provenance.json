@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7eb5a3400a7b4e7f28cbb7addce8c3a77e2af7f74add40d3dc4d0d364db6132f"
+    "sha256": "b19b8690d4a7f2306a14f4f89cb799f677bd90c2046db6e6d1fecebd280120e4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
+    "bindingsSha256": "6d9541e43b2070445aaebb010a9712298a1b4dcf6b04503f9f880cd27b5c05b2"
   },
   "recipes": [
     {
@@ -453,7 +453,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "abe0dca58846b815382b14e2a4037d97d65cfe8c2b5c50c9b6a4ad637446d8bb",
+      "sha256": "bb4efebd1abb8747cb87609aff716cbeea4b76d4ebe93d64a6f3c3dc3fa7b1e8",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -506,7 +506,8 @@
         },
         "outline": {
           "pieces": 256
-        }
+        },
+        "notes": "notes.json"
       }
     }
   ],
@@ -797,6 +798,33 @@
       "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "id": "dimorphos-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts dimorphos: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
+      "bytes": 478,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -1021,13 +1049,14 @@
       "inputs": [
         "dimorphos-surface-features-source",
         "usgs-gazetteer-dimorphos-nomenclature-center-pts",
-        "dimorphos-surface-map-frame"
+        "dimorphos-surface-map-frame",
+        "dimorphos-surface-feature-notes"
       ],
       "outputs": [
         {
           "url": "/scenes/dimorphos/dimorphos-features.json",
-          "bytes": 7936,
-          "sha256": "192f5b8fcc48ac4e9f9c8e62b3f8f21d4ebdd73d37d8461db13fa92a9f683f2c",
+          "bytes": 8196,
+          "sha256": "41670f5a3bdd39808a88ca3d6c66081492167208c9c733dccf42d03f53e824f0",
           "verification": "bytes-verified"
         }
       ],

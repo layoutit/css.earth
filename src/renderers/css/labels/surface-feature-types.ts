@@ -14,6 +14,9 @@ export interface PreparedSurfaceFeaturePlan {
   readonly target: number; readonly lensIds: readonly string[]; readonly meshRadiusUnits: number; readonly policy: SurfaceFeaturePolicy;
   /** Shape-model bodies: the radius band of the prepared picking mesh that every anchor and outline point lies within. */
   readonly surfaceRadiusUnits?: { readonly minimum: number; readonly maximum: number };
+  /** Ellipsoidal bodies: the reference semi-axes in mesh units, the polar axis, and the normalised-radius band
+   * (1 = on the ellipsoid) that every prepared anchor and outline point lies within on the rendered surface. */
+  readonly surfaceEllipsoidUnits?: { readonly equatorial: number; readonly polar: number; readonly north: readonly [number, number, number]; readonly minimumShare: number; readonly maximumShare: number };
   /** Retained screen-space line pieces tracing the hovered feature's published diameter. */
   readonly outline: { readonly pieces: number };
 }
@@ -32,6 +35,8 @@ export interface PreparedSurfaceFeature {
   /** Prepared search keys: the normalised name and clean name, and the normalised type. */
   readonly searchNames: readonly string[]; readonly searchContext: string;
   readonly origin: string; readonly approved: string; readonly quad: string; readonly link: string;
+  /** A source-backed caption note (an English Wikipedia lead summary, CC BY-SA 4.0) with its article. */
+  readonly note: { readonly text: string; readonly title: string; readonly url: string } | null;
 }
 export interface PreparedSurfaceFeatureCatalog {
   readonly schema: 'cssearth-prepared-surface-features@1'; readonly objectId: string;

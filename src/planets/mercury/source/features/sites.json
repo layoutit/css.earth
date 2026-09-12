@@ -1,0 +1,30 @@
+{
+  "schema": "cssearth-surface-sites@1",
+  "source": "Spacecraft landing, touchdown and impact sites compiled from NASA NSSDCA, PDS, LROC, mission releases and cited papers; every coordinate quotes its page",
+  "retrievedAt": "2026-09-12",
+  "sites": [
+    {
+      "id": "messenger-impact",
+      "name": "MESSENGER impact site",
+      "kind": "impact",
+      "date": "2015-04-30",
+      "machineId": "messenger",
+      "latitudeDeg": 54.4398,
+      "longitudeDegEast": 210.1205,
+      "coordinateNote": "Final engineering determination; radius 2438.790 km from the centre of Mercury. Recorded as stated (east longitude); note that IAU Mercury longitudes are positive west. Latitude as stated: not stated.",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NASA Science Photojournal: Best Determination of MESSENGER's Impact Location",
+        "url": "https://science.nasa.gov/photojournal/best-determination-of-messengers-impact-location/",
+        "publisher": "NASA/Johns Hopkins University Applied Physics Laboratory/Carnegie Institution of Washington",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "The final estimate of the impact location is at 54.4398 N, 210.1205 E, and 2438.790 km from the center of Mercury. The final determination of the impact time is 19:26:01.166 UTC on 30 April 2015."
+    }
+  ],
+  "traverses": []
+}

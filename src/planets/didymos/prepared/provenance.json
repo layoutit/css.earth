@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9390980affd0ab9935a7c546fbdab8ce094ebee98f83cea225416e122f0e1a70"
+    "sha256": "4324601c5dd50956d25c9fe057b446a2eaa18a4d114b63c13ee5f8aed19d0343"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
+    "bindingsSha256": "6d9541e43b2070445aaebb010a9712298a1b4dcf6b04503f9f880cd27b5c05b2"
   },
   "recipes": [
     {
@@ -377,7 +377,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "1b9ac43c6c098bca9f390bc1089d568f7c12c936530e053db83bdfdea8d759d7",
+      "sha256": "bfdedc81d46e0dd35c5d99417b4c51e795b1b12b618322c415fbebe075e989d0",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -429,7 +429,8 @@
         },
         "outline": {
           "pieces": 256
-        }
+        },
+        "notes": "notes.json"
       }
     }
   ],
@@ -648,6 +649,33 @@
       "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "id": "didymos-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts didymos: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
+      "bytes": 478,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -826,13 +854,14 @@
       "inputs": [
         "didymos-surface-features-source",
         "usgs-gazetteer-didymos-nomenclature-center-pts",
-        "didymos-surface-map-frame"
+        "didymos-surface-map-frame",
+        "didymos-surface-feature-notes"
       ],
       "outputs": [
         {
           "url": "/scenes/didymos/didymos-features.json",
-          "bytes": 2442,
-          "sha256": "2d0c22639d749eb8e5a75355e14f35f9d26517a508cccfbc68bb07e79c5365c7",
+          "bytes": 2702,
+          "sha256": "9b3726d56eb5b8a4faf9c4f3eb728ed51659a99f6c177892542a285fcd499a8d",
           "verification": "bytes-verified"
         }
       ],

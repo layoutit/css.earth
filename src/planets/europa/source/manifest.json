@@ -1903,8 +1903,8 @@
     {
       "id": "europa-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1165,
-      "expectedSha256": "d2ed477e3a9208e38bf6477ccba1fc7c683cdf82ccab78153777ad1804debb28",
+      "expectedBytes": 1190,
+      "expectedSha256": "4794f1fe7e88534461370221b20f8da6535cd7edb42f1769298a50904a8484b8",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -2453,6 +2453,29 @@
       "purpose": "Published B6 GIS metadata or original map symbols.",
       "expectedBytes": 34411,
       "expectedSha256": "dd3b5237948c13a7c635af1220811e2a7fd4c70ede54edf9d8ce8b9662ed95fd"
+    },
+    {
+      "id": "europa-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 5228,
+      "expectedSha256": "0ef4c7c2a3671e2fd7508ed2037d46b730e075080b8c40d851aa875bacb0e325",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 12 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts europa: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

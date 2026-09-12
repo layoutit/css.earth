@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "rhea",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "69aaf6ce2e1e673d57c42c05d8e4ea545005c4bf6f4dbbc90f338422ed328d51"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
+    "bindingsSha256": "6d9541e43b2070445aaebb010a9712298a1b4dcf6b04503f9f880cd27b5c05b2"
   },
   "recipes": [
     {
@@ -731,7 +731,7 @@
       "sha256": "ce537c3c93670a0d4ea5a64b99bffb76ff308727eb3eabeee0a38cf9f6f1abc7",
       "bytes": 66401915,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -770,7 +770,7 @@
       "sha256": "e4b25f158adf4b430a145946996f4dbde85f50ca0d3c236084c956733e42beb2",
       "bytes": 17694840,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -832,7 +832,7 @@
       "sha256": "4a3f4c5cca6ec558a6dcd664ee818dd700df527fc07fe623d1c56d4e2ae81bc4",
       "bytes": 10389170,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -898,7 +898,7 @@
       "sha256": "6363e6ba38ca29df67a8dba301ef8db2a45daba0cd29896c2397e4e13b1b46d1",
       "bytes": 48826,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -952,7 +952,7 @@
       "sha256": "a4d49eb12bfe5c0d97513d3d4692c78c7b5dd7179f8c2097203a37a4834bb51d",
       "bytes": 9881887,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1009,7 +1009,7 @@
       "sha256": "f28f37b666d7605a179ee82d8d138cc829bb57a46add484ed423c8fc9cded123",
       "bytes": 9881887,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1065,7 +1065,7 @@
       "sha256": "559e109a8bd3891ed2d7ddbfc9e505694574c6af80547f3c63e0f401aa1ded19",
       "bytes": 133351,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1085,7 +1085,7 @@
       "sha256": "0bd90bb122aa76e11d7a0c698a3a26b3f85244c30fc76e0d2b433843b10fd4d2",
       "bytes": 15135,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1105,7 +1105,7 @@
       "sha256": "3e3dee1d341968b2aba0e30ffbc2759e9d4e25f72277fa7ce2b6ca483ee12db3",
       "bytes": 995,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1131,7 +1131,7 @@
       "sha256": "e483758bc3e1d9b3f38a8ccdc4f73d8e11a68e792249b24a2ea62d1ded1b51c9",
       "bytes": 414397,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1158,7 +1158,7 @@
       "sha256": "3f6b4ebe26f761e0296aa0d8b0eaca7347713080afffbe76a56db94cb0f5c8cc",
       "bytes": 151,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1199,13 +1199,13 @@
           "url": "/scenes/rhea/rhea-normal-thumbnail.webp",
           "bytes": 2772,
           "sha256": "d629d4430b5fcfae757870c697e17b2e6b054b50b984ee52ec706dc0984c8ce9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-normal-surface@2x.webp",
           "bytes": 4933780,
           "sha256": "c1cc0f7903fd00bc594395360d93c61911dcf39e5cb3ef99dda6486afd67c04b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1242,13 +1242,13 @@
           "url": "/scenes/rhea/rhea-enhanced-thumbnail.webp",
           "bytes": 5438,
           "sha256": "b6adc3b37aa5421f9c4cda8d4ed5ea0bf1650cbfa4557e4ef3a103e0734f5aec",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-enhanced-surface@2x.webp",
           "bytes": 11123304,
           "sha256": "4cdc64493a3659fab0412cafe3fc46627792b49b9b1225f5a8be8b12972144f1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1288,13 +1288,13 @@
           "url": "/scenes/rhea/rhea-infrared-thumbnail.webp",
           "bytes": 4220,
           "sha256": "909de69ac8d2b6a13f4999c523a509c4ad13340b2a002013babb9adb69d05d81",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-infrared-surface@2x.webp",
           "bytes": 240274,
           "sha256": "5254a1199767b509f94d44bbffea58b0b234662ee73a3b0bd4572486bb95ac55",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1329,19 +1329,19 @@
           "url": "/scenes/rhea/rhea-elevation-thumbnail.webp",
           "bytes": 7446,
           "sha256": "684b40b3773bfca89f66f1d3cd691991a995372bafc2ba6bbc89427e75d169f4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-elevation-surface@2x.webp",
           "bytes": 3131398,
           "sha256": "bbd7aba7459e9dcd93f5740c8fb873207f9cd89b1464211408361e37d025f921",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1376,19 +1376,19 @@
           "url": "/scenes/rhea/rhea-relative-albedo-thumbnail.webp",
           "bytes": 3668,
           "sha256": "97457e6cd6c860756fafb6b48b372a01a178bd7a28dcb7cb86110ea51cd43dab",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-relative-albedo-legend.webp",
           "bytes": 276,
           "sha256": "f61e0581d01ee4f64e6fdc197976a02ff5d748a017b594b59ba493725548f6f7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-relative-albedo-surface@2x.webp",
           "bytes": 19214662,
           "sha256": "9e90648db0f0cd61e98f09142f0beaeaabe77a1d0f219350fd34be994b2fa15c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1422,19 +1422,19 @@
           "url": "/scenes/rhea/rhea-ice-absorption-thumbnail.webp",
           "bytes": 3478,
           "sha256": "cb3139d6bf2483ab296243498ed7b56de563ac7713704398b73949d44e329cc8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-ice-absorption-legend.webp",
           "bytes": 162,
           "sha256": "989724748ca27ff3f9100c05b4eeb7b936f787550b41223655a1fbee8c888477",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-ice-absorption-surface@2x.webp",
           "bytes": 180602,
           "sha256": "4715f0187b7834a3738fa5af7ed8038b51c24ea036e1a44fbeacaddb3013fb72",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1466,13 +1466,13 @@
           "url": "/scenes/rhea/rhea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "7cbf01ce5434f5fcede86cd13c94e775de945744f9c116cb76c3a3ba97f3761d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-shape-surface@2x.webp",
           "bytes": 458908,
           "sha256": "130fef512cc41d7778390a2718fb733b6d3de80b32b5208ce049c65224e667b7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1495,8 +1495,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6155,
-          "sha256": "9a49f4c54fdaf5b74623f21aee1def96d0051d697ea82c8760fdf097d6ff5038",
+          "bytes": 6156,
+          "sha256": "125634037f6b6371e34821862224488c3afd051baee66c99f850a79d5dd270ed",
           "verification": "bytes-verified"
         }
       ],
@@ -1529,9 +1529,9 @@
       "outputs": [
         {
           "url": "/scenes/rhea/rhea-features.json",
-          "bytes": 173613,
-          "sha256": "e4bd78f4e16dbfbeb72a72bc71886bd4b949b76f02cbaef65caeea2355345439",
-          "verification": "asset-manifest-pin"
+          "bytes": 199176,
+          "sha256": "6645f146f0bbfc05f5127ab9f2db4e327a513d1a547f57ec95532b836ef84fde",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

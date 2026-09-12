@@ -86,9 +86,9 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   tooltip.setAttribute('role', 'tooltip');
   tooltip.hidden = true;
   tooltip.style.cssText = 'position:absolute;left:50%;top:50%;pointer-events:none';
-  const tooltipName = document.createElement('b'), tooltipDetail = document.createElement('span'), tooltipOrigin = document.createElement('p');
-  tooltipName.dataset.featureTooltipName = ''; tooltipDetail.dataset.featureTooltipDetail = ''; tooltipOrigin.dataset.featureTooltipOrigin = '';
-  tooltip.append(tooltipName, tooltipDetail, tooltipOrigin);
+  const tooltipName = document.createElement('b'), tooltipDetail = document.createElement('span'), tooltipOrigin = document.createElement('p'), tooltipNote = document.createElement('p'), tooltipCredit = document.createElement('small');
+  tooltipName.dataset.featureTooltipName = ''; tooltipDetail.dataset.featureTooltipDetail = ''; tooltipOrigin.dataset.featureTooltipOrigin = ''; tooltipNote.dataset.featureTooltipNote = ''; tooltipCredit.dataset.featureTooltipCredit = '';
+  tooltip.append(tooltipName, tooltipDetail, tooltipOrigin, tooltipNote, tooltipCredit);
   root.appendChild(tooltip);
   host.appendChild(root);
   const picking = screenPicking(pickingHost);
@@ -236,7 +236,9 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     if (shownIndex !== index) {
       tooltipName.textContent = feature.name;
       tooltipDetail.textContent = feature.diameterKm > 0 ? `${feature.type} · ${kilometres.format(feature.diameterKm)} km` : `${feature.type} · size unpublished`;
-      tooltipOrigin.textContent = feature.origin;
+      tooltipOrigin.textContent = feature.origin ? `Named for ${feature.origin.charAt(0).toLowerCase() === feature.origin.charAt(0) ? feature.origin : feature.origin.charAt(0).toLowerCase() + feature.origin.slice(1)}` : '';
+      tooltipNote.textContent = feature.note?.text ?? '';
+      tooltipCredit.textContent = `IAU name, ${feature.approved.slice(0, 4)}${feature.note ? ` · Wikipedia, CC BY-SA` : ''}`;
       tooltip.dataset.featureTooltipFor = feature.id;
       root.dataset.featureOutlineFor = feature.id;
       tooltip.hidden = false;

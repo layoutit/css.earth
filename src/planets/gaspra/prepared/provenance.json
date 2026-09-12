@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "gaspra",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fcf6798ccf19c800c617d556081d50088a86bbedd1030f9a805d9e09a257565a"
+    "sha256": "b1d061b5bbeecb07d15db6fce9b9116ea318932a97a9590b6558c3391b24abcc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
+    "bindingsSha256": "6d9541e43b2070445aaebb010a9712298a1b4dcf6b04503f9f880cd27b5c05b2"
   },
   "recipes": [
     {
@@ -430,7 +430,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "a8b4d62115de1da00ce1582d98a0ffc6822ec9b0c8948e099030a8ee10f6f64d",
+      "sha256": "8780519f14e672251fbc600e824398bb345d12d56c0b9b9d159350f6e6d2f5b6",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -482,7 +482,8 @@
         },
         "outline": {
           "pieces": 256
-        }
+        },
+        "notes": "notes.json"
       }
     }
   ],
@@ -534,7 +535,7 @@
       "sha256": "7dc37fa0ab91303f1875b2e4293aa420727d67d9479d63fc1e9e680e26ec02e1",
       "bytes": 262080,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -590,7 +591,7 @@
       "sha256": "ec751b328485ad20e9625395d7634e7f75c7167c615357b03cb8c94d3d6590b0",
       "bytes": 527072,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -641,7 +642,7 @@
       "sha256": "5b6a64135b22c8431ec91f0b3cb8f2cb24e6509edcb2ad4df56bcabdfa07ccc6",
       "bytes": 2563200,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -678,7 +679,7 @@
       "sha256": "53ef20427179844ab1bfc6fcc66395ba78e949244cd2b614a482ddf6fe1a3301",
       "bytes": 9633,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -715,7 +716,7 @@
       "sha256": "0cb9e6bccee046cc5838760072410efc2d2a665b39cce142577db4699647bea6",
       "bytes": 1152,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -752,7 +753,7 @@
       "sha256": "d9783210e82979d6f6f4743f653c0c7b50cb5cceeb8927bc34bdf97e5a2fadee",
       "bytes": 8616,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -789,7 +790,7 @@
       "sha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652",
       "bytes": 9964,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -826,7 +827,7 @@
       "sha256": "ec66eee211c1b1f3de267375f976b01517365bacd7b22e4eb9842713c2e9541d",
       "bytes": 645120,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -863,7 +864,7 @@
       "sha256": "dd3e14be6e822c73bd3efbda58e5cb586b0654dfde8da58e9a19c0d306c2e792",
       "bytes": 10480,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -900,7 +901,7 @@
       "sha256": "d38c32fca409f5ceb2c51da96a9bc8fe58e3fcabe7168b52e23886fadcf71654",
       "bytes": 35828,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -937,7 +938,7 @@
       "sha256": "55be9710b892ce9a79464f42cf358bb2bc4e583231affa557e61a818b3ab6dc9",
       "bytes": 9120,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -976,7 +977,7 @@
       "sha256": "33c2768822732f79334f80fba161f86aacc27d3c70de3a4cce2315789b3d9f8e",
       "bytes": 2563200,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1013,7 +1014,7 @@
       "sha256": "cd2bf7b4bee1f6e2896082dfb78eabe574d62b6880d3fef2d8ec85dd3647c59b",
       "bytes": 9633,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1050,7 +1051,7 @@
       "sha256": "89e3fe56ef9eddb0e7a2bd1af0a8be0d0ca6ebf92b661fbdf070283e1b6cab00",
       "bytes": 645120,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1087,7 +1088,7 @@
       "sha256": "f411a08eb9d4a918e4f9feb6a5929366ffd51cee0654c5de3ccc61be184bf9f3",
       "bytes": 10480,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1118,7 +1119,7 @@
       "sha256": "3609f1150269c46ced3e4175b8e19dfeb37b470f0d88e9a7e7a4666b755535cb",
       "bytes": 11333,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1138,7 +1139,7 @@
       "sha256": "61c8b4787b3d0fdd7587690eac12243cdea76018599f898dc2e40c34429d7c78",
       "bytes": 1005,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1164,7 +1165,7 @@
       "sha256": "f4f3eb723f28d36a45690f0ff0a5be07b5ae42a4c52d36bc55506a03936a582f",
       "bytes": 125910,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1191,7 +1192,34 @@
       "sha256": "d7e2f54918ea9f280437edf5ebd10a617c6fd23307f04b1b9670f77b5df71a7d",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "gaspra-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 1 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts gaspra: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "2852ee8636662b09f0592a21b1fe443d68903803e5b8ba5a61eb29642f2f826c",
+      "bytes": 925,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1236,13 +1264,13 @@
           "url": "/scenes/gaspra/gaspra-normal-thumbnail.webp",
           "bytes": 2838,
           "sha256": "9d16c2204a5422ea2e49e280d8cce1a30fe927497a2ecda5636d8fc32f47fe21",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gaspra/gaspra-normal-surface@2x.webp",
           "bytes": 451108,
           "sha256": "af3f5db4a9868d9598c62cd5ffce6b97e3bcd7e42bde76ea02df76afe9493723",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1274,19 +1302,19 @@
           "url": "/scenes/gaspra/gaspra-elevation-thumbnail.webp",
           "bytes": 5142,
           "sha256": "9550dd773d53982d62217e1dc8ab4a917e79c9d97514c42d7778301cc499ceea",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gaspra/gaspra-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gaspra/gaspra-elevation-surface@2x.webp",
           "bytes": 271424,
           "sha256": "6f5395308515087e9da6cd09c692fb85f8383973e59ed6589393823ef51c5a5c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1331,13 +1359,13 @@
           "url": "/scenes/gaspra/gaspra-calibrated-thumbnail.webp",
           "bytes": 1926,
           "sha256": "0220d5c452f7e1f9819f1762e5081f56c02ac0c6c6b6e92ff59558d81ed2e11c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gaspra/gaspra-calibrated-surface@2x.webp",
           "bytes": 242376,
           "sha256": "e935327a81bab8a8eed2cff9ca57657a6fe85819a7c93ce08110378b3fc07ff1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1361,7 +1389,7 @@
         {
           "url": "object:prepared/content.json",
           "bytes": 6806,
-          "sha256": "2811d9440019bd95a9ec3df5363a84c4530302e51d0eeab7e0d7b5a1a9213ee9",
+          "sha256": "be3c52ab01acbf7dc33b8cf65ce85052f89cc7f69ad09576779d901b4930fa15",
           "verification": "bytes-verified"
         }
       ],
@@ -1389,14 +1417,15 @@
       "inputs": [
         "gaspra-surface-features-source",
         "usgs-gazetteer-gaspra-nomenclature-center-pts",
-        "gaspra-surface-map-frame"
+        "gaspra-surface-map-frame",
+        "gaspra-surface-feature-notes"
       ],
       "outputs": [
         {
           "url": "/scenes/gaspra/gaspra-features.json",
-          "bytes": 17809,
-          "sha256": "914a0ca09d3ad622fd500a9362ac500c4a085705d6e30b842db9874ca3d778b7",
-          "verification": "asset-manifest-pin"
+          "bytes": 19897,
+          "sha256": "ddd29cf0bc9f3ab2065f7e64ac0af06e7f8ff91ee8885059b6c19cfb6c9ae905",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
