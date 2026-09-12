@@ -130,7 +130,7 @@ original image. Both states remain available.
 
 All inputs and source documents are pinned in `source/manifest.json`.
 The [contributor guide](../README.md) covers shared commands. The body-specific
-registration audit is under `tests/objects/oracle/comet-19p/registration.py`
+registration audit is under `tools/oracles/comet-19p/registration.py`
 and requires NumPy and SciPy.
 The broader qualification and delivery evidence is in
 [`docs/comets/BORRELLY.md`](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/BORRELLY.md).

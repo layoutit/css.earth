@@ -9,9 +9,9 @@ import { chromium } from "playwright";
 import sharp from "sharp";
 import { BASE_TILE } from "@layoutit/polycss";
 import { PREPARED_MARS_CAMERA, PREPARED_MARS_SCENE } from "../../tests/objects/unit/mars/prepared-fixture.mts";
-import { decodeNativeMotionTrace } from "../../tests/objects/oracle/mars/google-earth-pro/native-motion-trace-reader.mts";
+import { decodeNativeMotionTrace } from "../../tools/oracles/mars/google-earth-pro/native-motion-trace-reader.mts";
 import { renderedMotionSteps, parseMotionHistory, parseMotionEvidence } from "./rendered-motion-steps.mts";
-import { assertMotionOnlyReference } from "../../tests/objects/oracle/mars/google-earth-pro/interaction-suite-analysis.mts";
+import { assertMotionOnlyReference } from "../../tools/oracles/mars/google-earth-pro/interaction-suite-analysis.mts";
 
 type TimingMode = "paired" | "normal" | "motion-only" | "frame-locked";
 type EventKind = "down" | "up" | "drag" | "move" | "wheel";

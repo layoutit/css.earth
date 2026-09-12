@@ -6,15 +6,15 @@ import { fileURLToPath } from 'node:url';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { ClassicLevel } from 'classic-level';
-import { array, object, text, parseJson } from '../../oracle/mars/google-earth-pro/oracle-values.mts';
+import { array, object, text, parseJson } from '../../../../tools/oracles/mars/google-earth-pro/oracle-values.mts';
 import { tmpdir } from 'node:os';
 import { createHash } from 'node:crypto';
 import { PNG } from 'pngjs';
-import { createPixelmatchTriptych } from '../../oracle/mars/google-earth-pro/triptych.mts';
-import { intersectionDiscMask, localLandmarkFlow, maskedColorDelta } from '../../oracle/mars/google-earth-pro/qualify-calibration-metric.mts';
-import { loadHeldInitialFrame, parseRenderedNativeReport } from '../../oracle/mars/google-earth-pro/rendered-motion-records.mts';
-import { parseNativeSnapshot } from '../../oracle/mars/google-earth-pro/render-contract-values.mts';
-import { parseGranularSample } from '../../oracle/mars/google-earth-pro/granular-contract-values.mts';
+import { createPixelmatchTriptych } from '../../../../tools/oracles/mars/google-earth-pro/triptych.mts';
+import { intersectionDiscMask, localLandmarkFlow, maskedColorDelta } from '../../../../tools/oracles/mars/google-earth-pro/qualify-calibration-metric.mts';
+import { loadHeldInitialFrame, parseRenderedNativeReport } from '../../../../tools/oracles/mars/google-earth-pro/rendered-motion-records.mts';
+import { parseNativeSnapshot } from '../../../../tools/oracles/mars/google-earth-pro/render-contract-values.mts';
+import { parseGranularSample } from '../../../../tools/oracles/mars/google-earth-pro/granular-contract-values.mts';
 
 const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
@@ -107,7 +107,7 @@ test('cache export binds a real LevelDB payload to its quadtree address beside t
     const payload = Buffer.alloc(32768, 75), key = Buffer.from('EVLL Mars' + request.toString('base64'));
     await database.put(key, Buffer.concat([Buffer.alloc(20), payload])); await database.close();
     const outputPath = join(root, 'results', 'index.json');
-    const command = fileURLToPath(new URL('../../oracle/mars/google-earth-pro/export-google-imagery-cache.mts', import.meta.url));
+    const command = fileURLToPath(new URL('../../../../tools/oracles/mars/google-earth-pro/export-google-imagery-cache.mts', import.meta.url));
     const result = await promisify(execFile)(process.execPath, ['--experimental-strip-types', command, '--cache-root', cacheRoot, '--output', outputPath]);
     assert.equal(object(parseJson(result.stdout)).ok, true);
     const report = object(parseJson(await readFile(outputPath, 'utf8'))), entries = array(report.entries);
