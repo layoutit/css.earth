@@ -15,7 +15,8 @@
       "acquisition": "Download the original PDS table; verify exact bytes and SHA-256.",
       "redistribution": "Public scientific data; retain dataset identification and author attribution.",
       "consumers": [
-        "shape"
+        "shape",
+        "features"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -162,7 +163,8 @@
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
-        "photographs-navcam"
+        "photographs-navcam",
+        "features"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -216,7 +218,8 @@
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
-        "photographs-navcam"
+        "photographs-navcam",
+        "features"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -501,6 +504,186 @@
         "kind": "local",
         "reason": "Project-measured camera registration controls for n2079we02_rr."
       }
+    },
+    {
+      "id": "comet-81p-features-landmarks",
+      "path": "features/landmarks.json",
+      "expectedBytes": 2832,
+      "expectedSha256": "6fbbfb50780b3a9f160ae8c6818a56302b64d8f5b173e13ae0f77a4eb54fd3eb",
+      "origin": "Authored surface-place records with publication references and placement limits.",
+      "credit": "cssEarth contributors; Stardust science team",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
+      "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored surface-place records with publication references and placement limits."
+      }
+    },
+    {
+      "id": "comet-81p-features-manifest",
+      "path": "features/manifest.json",
+      "expectedBytes": 2072,
+      "expectedSha256": "734010530578b2fc8f17f8097f0a25ed10c9dc7c6399c8c929b9cd2457f8aa8d",
+      "origin": "Authored surface-place records with publication references and placement limits.",
+      "credit": "cssEarth contributors; Stardust science team",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
+      "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored surface-place records with publication references and placement limits."
+      }
+    },
+    {
+      "id": "comet-81p-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1128,
+      "expectedSha256": "c90e0a8305626621917a8178e5b5ed60299d827fb878716195a515d138f05228",
+      "origin": "Authored surface-place records with publication references and placement limits.",
+      "credit": "cssEarth contributors; Stardust science team",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
+      "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored surface-place records with publication references and placement limits."
+      }
+    },
+    {
+      "id": "comet-81p-presentation-surface-map",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 156,
+      "expectedSha256": "639417c83ce7e5633db6ad3efc825e8ebce675647b014c26a7700b3dfe9ede26",
+      "origin": "Authored surface-place records with publication references and placement limits.",
+      "credit": "cssEarth contributors; Stardust science team",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
+      "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored surface-place records with publication references and placement limits."
+      }
+    },
+    {
+      "id": "comet-81p-features-image-registration-json",
+      "path": "features/image-registration.json",
+      "expectedBytes": 25845,
+      "expectedSha256": "cd1a3ac28dc85860607a39e3382957bdcd0ee0ae0d0fa5a1021660a1d452ef21",
+      "origin": "Measured image correspondences and explicit source-camera projection recipe.",
+      "credit": "cssEarth contributors; Stardust science team",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
+      "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measured image correspondences and explicit source-camera projection recipe."
+      }
+    },
+    {
+      "id": "comet-81p-features-control-measurements-json",
+      "path": "features/control-measurements.json",
+      "expectedBytes": 32040,
+      "expectedSha256": "903d15943d50d47e8a910b0e0081a78421d2a3ad2221924a9a90dffedb276f48",
+      "origin": "Local image-correlation measurements, manual diagram controls and recorded selection limits.",
+      "credit": "cssEarth contributors; Stardust science team",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
+      "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Local image-correlation measurements, manual diagram controls and recorded selection limits."
+      }
+    },
+    {
+      "id": "comet-81p-features-evidence-image-landmarks-json",
+      "path": "features/evidence/image-landmarks.json",
+      "expectedBytes": 39090,
+      "expectedSha256": "d47718db28bbc567b689b36c07e08e55fe85d18824d69dd7cb2371dc34b439c9",
+      "origin": "Generated residuals and source-mesh placement evidence.",
+      "credit": "cssEarth contributors; Stardust science team",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
+      "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated residuals and source-mesh placement evidence."
+      }
+    },
+    {
+      "id": "comet-81p-features-PIA06285-jpg",
+      "path": "features/PIA06285.jpg",
+      "expectedBytes": 80948,
+      "expectedSha256": "af3ffcc32ea0b7aae918a7098cda99aea3157483789401b256f9551a4fd2f757",
+      "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia06/pia06285/PIA06285.jpg?w=1159&h=1172&fit=clip&crop=faces%2Cfocalpoint",
+      "credit": "Courtesy NASA/JPL-Caltech",
+      "license": "JPL image-use policy",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Exact NASA dynamic-image JPEG rendition, verified against a fresh pinned download; presentation imagery, not raw detector data.",
+      "redistribution": "JPL permits reuse with attribution; no endorsement implied.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-pia06285",
+            "role": "material",
+            "evidence": "NASA PIA06285 image and accompanying Figure 1 carry the Stardust-team feature names."
+          }
+        ]
+      }
+    },
+    {
+      "id": "comet-81p-features-PIA06285_fig1-jpg",
+      "path": "features/PIA06285_fig1.jpg",
+      "expectedBytes": 129708,
+      "expectedSha256": "334808909722bbaeb4695b274c3294859dc796eee4ed1fe5e374bcc57501efb5",
+      "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia06/pia06285/figures/PIA06285_fig1.jpg",
+      "credit": "Courtesy NASA/JPL-Caltech",
+      "license": "JPL image-use policy",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Exact NASA dynamic-image JPEG rendition, verified against a fresh pinned download; presentation imagery, not raw detector data.",
+      "redistribution": "JPL permits reuse with attribution; no endorsement implied.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-pia06285",
+            "role": "material",
+            "evidence": "NASA PIA06285 image and accompanying Figure 1 carry the Stardust-team feature names."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -548,8 +731,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3584,
-      "expectedSha256": "b7e63348b416d11f18441036970ff197a6de7c0586b8a97dea9687c9a4b5536f"
+      "expectedBytes": 4143,
+      "expectedSha256": "6618077a43d0da70a6a51f3e7986abd6d34801154184f34f99cf4faf353b77e6"
     },
     {
       "path": "preparation/navigation.json",
@@ -563,8 +746,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5405,
-      "expectedSha256": "2f790316c36dbf6d0ee62a91326f6dbb68ce9817d3dd96bfc734124ef69067e1"
+      "expectedBytes": 5404,
+      "expectedSha256": "13729ca09fc84ceb4d7ca76c1270ae38629aba1bd7e5af106150a66de56cc9d6"
     },
     {
       "path": "presentation/minimap.json",

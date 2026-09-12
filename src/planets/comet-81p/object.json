@@ -11,6 +11,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -20,7 +21,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "2f790316c36dbf6d0ee62a91326f6dbb68ce9817d3dd96bfc734124ef69067e1"
+          "sha256": "13729ca09fc84ceb4d7ca76c1270ae38629aba1bd7e5af106150a66de56cc9d6"
         },
         {
           "id": "content",
@@ -40,12 +41,17 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "b7e63348b416d11f18441036970ff197a6de7c0586b8a97dea9687c9a4b5536f"
+          "sha256": "6618077a43d0da70a6a51f3e7986abd6d34801154184f34f99cf4faf353b77e6"
         },
         {
           "id": "rotation",
           "path": "source/preparation/rotation.json",
           "sha256": "cf53beb9dad865374af2ce5cb6c893c2da4774de17cacf2c52bd86c626357738"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "c90e0a8305626621917a8178e5b5ed60299d827fb878716195a515d138f05228"
         }
       ],
       "shape": {
@@ -77,7 +83,11 @@
           "source": "terrestrial",
           "model": "lit"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 100
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -112,7 +122,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2be79a91b908adab3ddd8421e94f68063afef45d0356038119d842ecd7ea7f6c"
+        "sha256": "edbacc7982524eee2ef6ae31e584481abd7c7fe23b1edd5387f439d232917da0"
       }
     },
     "catalog": {
@@ -132,7 +142,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "4ff5bc9b315ca41395580fd19461b29a85e243b460fe19f151346e64109400d4"
+    "sha256": "3a8c87cb378427bf86e828d8e1f4ee636f4702e769f06ab4486bbeeaf4da56a9"
   },
   "type": "layered-body",
   "id": "comet-81p"
