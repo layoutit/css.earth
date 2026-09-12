@@ -45,7 +45,7 @@ export async function runDetectionWorker(root: string, request: DetectionRequest
 export function createDetectionJobs(root: string) {
   let queue = Promise.resolve();
   return createStarRemovalJobs<DetectionRequest>(root, { namespace: 'geometry-detection', label: 'Shape detection', parseRequest: readDetectionRequest,
-    history: { maxRecords: 128, retainPerImage: 4, preferred: () => true },
+    history: { maxRecords: 128, retainPerImage: 4, preferred: request => request.quality !== 'draft' },
     sample(request, signal, progress) {
       const operation = queue.then(() => runDetectionWorker(root, request, signal, progress));
       queue = operation.then(() => {}, () => {}); return operation;

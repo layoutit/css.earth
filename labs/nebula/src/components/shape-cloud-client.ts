@@ -79,6 +79,9 @@ export function createShapeCloudClient(options: {
     },
     resume(job: CloudJob) { activeId = job.id; ready = true; cancelWanted = cancelSent = false; return watch(job); },
     cancel() { cancelWanted = true; },
+    // A replaced geometry cannot contribute to the current cloud. Keep observing only long enough
+    // to cancel after the server acknowledges ownership, including a still-pending POST.
+    supersede() { if (activeId) cancelWanted = true; else controller.abort(); },
     disconnect() { controller.abort(); },
   };
 }

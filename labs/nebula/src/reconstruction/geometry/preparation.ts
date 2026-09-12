@@ -1,4 +1,4 @@
-/** Prepare immutable 2D proposals only. Applying one is a separate, browser-owned choice. */
+/** Prepare immutable 2D fits for the automatic draft/refinement loop. */
 import { readFile, readdir, writeFile, mkdir, link, rm } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import sharp from 'sharp';
@@ -42,13 +42,14 @@ export async function prepareDetection(root: string, value: unknown, progress: (
   if (rgb.info.width !== image.width || rgb.info.height !== image.height || rgb.info.channels !== 3 || rgb.data.length !== image.width * image.height * 3)
     throw new TypeError('Detector raster does not match the complete registered source.');
   progress({ stage: 'detecting', current: 0, total: 1, message: 'Finding connected contours' });
-  const detected = detectShapes(rgb.data, image.width, image.height, request.settings, { onProgress(current, total) {
-    progress({ stage: 'detecting', current, total: Math.max(1, total), message: `Fitting contours ${current}/${total}` });
+  const samplingSettings = request.quality === 'draft' ? { ...request.settings, iterations: Math.min(request.settings.iterations, 3000) } : request.settings;
+  const detected = detectShapes(rgb.data, image.width, image.height, samplingSettings, { onProgress(current, total) {
+    progress({ stage: 'detecting', current, total: Math.max(1, total), message: `Fitting contours ${Math.floor(current)}/${total}` });
   } });
   const geometry = { schema: 'cssearth-observation-geometry@1', imageId: image.id, sourceSha256: image.sourceSha256,
     mapSha256: image.mapSha256, width: image.width, height: image.height, imageToFrame: image.imageToFrame, ...detected,
     provenance: { identity, identitySha256: id, nativeRemovalPerformed: false, structureExtractionPerformed: false, depthInferencePerformed: false,
-      interpretation: 'Inspect projected proposals before applying them. Higher sensitivity may include noise and residual stellar halos. No inferred physical depth.' } };
+      interpretation: 'Projected fits for live inspection. Higher sensitivity may include noise and residual stellar halos. No inferred physical depth.' } };
   readGeometryMap(geometry, image);
   const geometryBytes = Buffer.from(JSON.stringify(geometry, null, 2) + '\n'), file = `geometry-${id}.json`;
   // A changed catalogue/source must not attach a just-finished proposal to replacement evidence.
@@ -57,7 +58,7 @@ export async function prepareDetection(root: string, value: unknown, progress: (
   await immutable(root, `${image.directory}/${file}`, geometryBytes);
   const result: DetectionResult = { schema: 'cssearth-geometry-detection-result@1', id, cataloguePath: request.cataloguePath, imageId: image.id,
     sourceSha256: image.sourceSha256, mapSha256: image.mapSha256, width: image.width, height: image.height,
-    settings: request.settings, geometry: { file, sha256: geometrySha(geometryBytes) } };
+    settings: request.settings, quality: request.quality ?? 'detailed', geometry: { file, sha256: geometrySha(geometryBytes) } };
   await immutable(root, resultPath, Buffer.from(JSON.stringify(result, null, 2) + '\n'));
   progress({ stage: 'ready', current: 1, total: 1, message: `${detected.candidates.length} proposals ready to inspect` });
   return validateDetectionResult(root, result);

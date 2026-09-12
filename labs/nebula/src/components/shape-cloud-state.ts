@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { GeometryMap } from '../alignment/observations-ui/geometry-model';
 import type { StructureImage } from '../alignment/observations-ui/structures-model';
 import { initializeShapeCloud, readShapeCloudSettings } from '../reconstruction/shape-cloud/model';
@@ -29,16 +29,17 @@ const settingsKey = (value: ShapeCloudSettings) => JSON.stringify(value);
 const object = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 
 /** Input schedules bounded drafts; release schedules a detailed result. Mount only observes a saved job before deciding whether work is needed. */
-export function useShapeCloudState(image: StructureImage, geometry: GeometryMap, cataloguePath: string) {
+export function useShapeCloudState(image: StructureImage, geometry: GeometryMap, cataloguePath: string, initialQuality: PreviewQuality = 'detailed') {
   const key = `nebula:shape-cloud:1:${cataloguePath}:${image.id}:${image.sourceSha256}:${image.mapSha256}:${image.geometry?.sha256}`;
-  const initial = useRef(initializeShapeCloud(geometry));
-  const [settings, setSettings] = useState(initial.current), [storageError, setStorageError] = useState('');
+  const initial = useMemo(() => initializeShapeCloud(geometry), [geometry]);
+  const [settings, setSettings] = useState(initial), [storageError, setStorageError] = useState('');
   const [job, setJob] = useState<CloudJob | null>(null), [result, setResult] = useState<ShapeCloudResult | null>(null);
   const [error, setError] = useState(''), [starting, setStarting] = useState(false), [loaded, setLoaded] = useState(false), [revision, setRevision] = useState(0);
   const currentSettings = useRef(settings), scheduler = useRef<Scheduler | null>(null), dragging = useRef(false);
+  const target = useRef({ key, imageId: image.id }); target.current = { key, imageId: image.id };
   useEffect(() => {
     let disposed = false; setError(''); setStarting(false); setLoaded(false);
-    let valid = initial.current;
+    let valid = initial;
     try { const raw = localStorage.getItem(key); if (raw !== null) valid = readShapeCloudSettings(JSON.parse(raw), image.width, image.height); }
     catch (reason) { setStorageError(`Saved edits could not be loaded: ${message(reason)} Use Reset to detected to replace them.`); return; }
     currentSettings.current = valid; setSettings(valid);
@@ -67,7 +68,8 @@ export function useShapeCloudState(image: StructureImage, geometry: GeometryMap,
         saved = await client.get(id);
       }
       if (disposed) return;
-      const queue = createShapeCloudScheduler<ShapeCloudSettings, ShapeCloudResult>({ value: currentSettings.current, key: settingsKey, initiallyDragging: dragging.current,
+      const queue = createShapeCloudScheduler<ShapeCloudSettings, ShapeCloudResult>({ value: currentSettings.current, key: settingsKey,
+        initiallyDragging: dragging.current || initialQuality === 'draft',
         run(ticket) { setStarting(true); setError(''); return client.start(ticket); },
         cancel() { client.cancel(); },
         accept(value, ticket) {
@@ -101,8 +103,11 @@ export function useShapeCloudState(image: StructureImage, geometry: GeometryMap,
       queue.start();
     }
     void connect().catch(reason => { if (!disposed) { setLoaded(true); setError(message(reason)); } });
-    return () => { disposed = true; scheduler.current?.dispose(); scheduler.current = null; client.disconnect(); };
-  }, [key, image, revision]);
+    return () => {
+      disposed = true; scheduler.current?.dispose(); scheduler.current = null;
+      if (target.current.key !== key && target.current.imageId === image.id) client.supersede(); else client.disconnect();
+    };
+  }, [key, image, revision, initialQuality]);
   function edit(next: ShapeCloudSettings, immediate = false) {
     try {
       const valid = readShapeCloudSettings(next, image.width, image.height); currentSettings.current = valid; setSettings(valid); setError('');
@@ -118,9 +123,9 @@ export function useShapeCloudState(image: StructureImage, geometry: GeometryMap,
       setRevision(value => value + 1);
     }
   }
-  return { settings, edit, reset: () => edit(initial.current, true), result, job, error, storageError, loaded, retry,
+  return { settings, edit, reset: () => edit(initial, true), result, job, error, storageError, loaded, retry,
     begin() { dragging.current = true; scheduler.current?.begin(); },
     settle() { dragging.current = false; scheduler.current?.settle(); },
-    active: starting || activeCloudJob(job), dirty: Boolean(result && settingsKey(result.settings) !== settingsKey(settings)),
+    active: starting || activeCloudJob(job), dirty: Boolean(result && (result.geometrySha256 !== image.geometry?.sha256 || settingsKey(result.settings) !== settingsKey(settings))),
   };
 }

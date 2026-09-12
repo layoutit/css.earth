@@ -123,10 +123,10 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
   }, [host]);
   const image = data?.images.find(item => item.id === selected), map = maps[selected], review = reviews[selected];
   const detector = useGeometryDetection(image, geometries[selected], cataloguePath);
-  const geometry = detector.preview ? detector.pendingGeometry : detector.effectiveGeometry;
+  const geometry = detector.effectiveGeometry;
   const shapes = mode === 'shapes' && Boolean(image);
   const cloudMounted = Boolean(shapes && detector.ready && detector.effectiveGeometry && detector.effectiveImage);
-  const cloudActive = Boolean(cloudMounted && cloudEditor && !detector.preview);
+  const cloudActive = Boolean(cloudMounted && cloudEditor);
   const candidateShapes = useMemo(() => geometry?.candidates.filter(candidate => candidate.score >= shapeScore) ?? [], [geometry, shapeScore]);
   const selectedShape = candidateShapes.find(candidate => candidate.id === shapeId) ?? candidateShapes[0];
   const shapeIds = useMemo(() => new Set((showAllShapes ? candidateShapes : selectedShape ? [selectedShape] : []).map(candidate => candidate.id)), [candidateShapes, selectedShape, showAllShapes]);
@@ -173,14 +173,12 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
       <button type="button" aria-pressed={shapes} onClick={() => setMode('shapes')}>Shapes</button>
       <button type="button" aria-pressed={!shapes} onClick={() => setMode('regions')}>Regions</button>
     </div>}
-    {shapes && image && <GeometryDetectionControls detector={detector} image={image}
-      onApply={() => { detector.apply(); setCloudEditor(true); setShapeId(''); }}
-      onRestore={() => { detector.restorePrevious(); setCloudEditor(true); setShapeId(''); }} />}
+    {shapes && image && <GeometryDetectionControls detector={detector} image={image} />}
     <div hidden={!shapes || cloudActive}><GeometryControls geometry={geometry} candidates={candidateShapes} selected={selectedShape} score={shapeScore}
       showAll={showAllShapes} onScore={setShapeScore} onShowAll={setShowAllShapes} onSelect={setShapeId} /></div>
-    {shapes && !cloudEditor && !detector.preview && <button type="button" onClick={() => setCloudEditor(true)}>Cloud preview</button>}
+    {shapes && !cloudEditor && <button type="button" onClick={() => setCloudEditor(true)}>Cloud preview</button>}
     {cloudMounted && detector.effectiveImage && detector.effectiveGeometry && image && data && <ShapeCloudWorkbench visible={cloudActive}
-      image={detector.effectiveImage} geometry={detector.effectiveGeometry} cataloguePath={cataloguePath} host={host}
+      image={detector.effectiveImage} geometry={detector.effectiveGeometry} initialQuality={detector.quality} cataloguePath={cataloguePath} host={host}
       matrix={matrices[image.id] ?? image.imageToFrame} frame={data.frame} onDetected={() => setCloudEditor(false)} />}
     <div hidden={shapes}>
     <div className="structure-morphologies" role="group" aria-label="Morphology filters">{morphologies.map(kind => <label key={kind}>

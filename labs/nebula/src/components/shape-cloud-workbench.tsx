@@ -1,4 +1,4 @@
-import { useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import type { GeometryMap } from '../alignment/observations-ui/geometry-model';
 import type { Matrix } from '../alignment/observations-ui/model';
@@ -15,6 +15,7 @@ interface Props {
   image: StructureImage; geometry: GeometryMap; cataloguePath: string; host: Element | null;
   matrix: Matrix; frame: { width: number; height: number }; onDetected(): void;
   visible?: boolean;
+  initialQuality?: 'draft' | 'detailed';
 }
 const modes = [
   { id: 'compare', label: 'Compare', symbol: '◫', title: 'Source and untextured cloud side by side, with linked framing.' },
@@ -34,10 +35,10 @@ function Slider({ id, label, value, min, max, step = .01, display, title, onChan
       onPointerCancel={onSettle} onKeyUp={onSettle} onBlur={onSettle} />
   </div>;
 }
-function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetected, visible = true, mode, stageMode, setMode, view, setView }: Props & {
+function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetected, visible = true, initialQuality, mode, stageMode, setMode, view, setView }: Props & {
   mode: ShapeCloudMode; stageMode: Exclude<ShapeCloudMode, 'structure'>; setMode(value: ShapeCloudMode): void; view: CloudView; setView(value: CloudView): void;
 }) {
-  const state = useShapeCloudState(image, geometry, cataloguePath), { settings, result } = state;
+  const state = useShapeCloudState(image, geometry, cataloguePath, initialQuality), { settings, result } = state;
   const selectionKey = `nebula:shape-cloud-selection:1:${cataloguePath}:${image.id}:${image.sourceSha256}:${image.mapSha256}:${image.geometry?.sha256}`;
   const [scope, setScope] = useState<EditScope>('selected'), [selectedId, selectId] = useState(() => {
     try { return localStorage.getItem(selectionKey) ?? ''; } catch { return ''; }
@@ -49,6 +50,7 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
   const [hoveredId, setHoveredId] = useState(''), [formula, setFormula] = useState<string | null>(null), [formulaError, setFormulaError] = useState('');
   const [channel, setChannel] = useState<ComparisonChannel>('luminosity'), [level, setLevel] = useState(0);
   const [comparisonView, setComparisonView] = useState(earthComparisonView);
+  useEffect(() => { setBeforeSolo(null); setFormula(null); setFormulaError(''); setHoveredId(''); }, [image.geometry?.sha256]);
   const selected = settings.components.find(item => item.id === selectedId) ?? settings.components[0];
   const workingMatrix = useMemo<Matrix>(() => [matrix[0] * image.nativeWidth / image.width, matrix[1] * image.nativeWidth / image.width,
     matrix[2] * image.nativeHeight / image.height, matrix[3] * image.nativeHeight / image.height, matrix[4], matrix[5]], [matrix, image]);
@@ -176,5 +178,5 @@ export function ShapeCloudWorkbench(props: Props) {
   const [mode, setMode] = useState<ShapeCloudMode>('compare'), [view, setView] = useState<CloudView>(earthCloudView);
   const [stageMode, setStageMode] = useState<Exclude<ShapeCloudMode, 'structure'>>('compare');
   function chooseMode(value: ShapeCloudMode) { setMode(value); if (value !== 'structure') setStageMode(value); }
-  return <Session key={`${props.image.id}:${props.image.geometry?.sha256}`} {...props} mode={mode} stageMode={stageMode} setMode={chooseMode} view={view} setView={setView} />;
+  return <Session key={props.image.id} {...props} mode={mode} stageMode={stageMode} setMode={chooseMode} view={view} setView={setView} />;
 }
