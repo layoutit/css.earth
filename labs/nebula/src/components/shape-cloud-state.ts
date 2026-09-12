@@ -9,7 +9,7 @@ import { SHAPE_CLOUD_PREPARATION_VERSION } from '../reconstruction/shape-cloud/q
 import type { ShapeCloudComponent, ShapeCloudResult, ShapeCloudSettings } from '../reconstruction/shape-cloud/types';
 
 export type EditScope = 'all' | 'group' | 'selected';
-export type NumericField = 'x' | 'y' | 'radiusX' | 'radiusY' | 'rotationDegrees' | 'weight' | 'thickness' | 'softness' | 'depth';
+export type NumericField = 'x' | 'y' | 'radiusX' | 'radiusY' | 'rotationDegrees' | 'weight' | 'thickness' | 'softness' | 'depth' | 'arcCenterDegrees' | 'arcSweepDegrees';
 export function componentScope(components: ShapeCloudComponent[], selected: ShapeCloudComponent, scope: EditScope) {
   return components.filter(item => scope === 'all' || (scope === 'group' ? item.groupId === selected.groupId : item.id === selected.id));
 }
@@ -18,7 +18,7 @@ export function editShapeComponents(settings: ShapeCloudSettings, selected: Shap
   const ids = new Set(componentScope(settings.components, selected, scope).map(item => item.id));
   return { ...settings, components: settings.components.map(item => {
     if (!ids.has(item.id)) return item;
-    const next = field === 'x' || field === 'y' || field === 'rotationDegrees' ? item[field] + value - selected[field] :
+    const next = field === 'x' || field === 'y' || field === 'rotationDegrees' ? (item[field] ?? 0) + value - (selected[field] ?? 0) :
       field === 'radiusX' || field === 'radiusY' ? item[field] * value / selected[field] : value;
     return { ...item, [field]: next };
   }) };
@@ -29,9 +29,9 @@ const settingsKey = (value: ShapeCloudSettings) => JSON.stringify(value);
 const object = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 
 /** Input schedules bounded drafts; release schedules a detailed result. Mount only observes a saved job before deciding whether work is needed. */
-export function useShapeCloudState(image: StructureImage, geometry: GeometryMap, cataloguePath: string, initialQuality: PreviewQuality = 'detailed') {
-  const key = `nebula:shape-cloud:1:${cataloguePath}:${image.id}:${image.sourceSha256}:${image.mapSha256}:${image.geometry?.sha256}`;
-  const initial = useMemo(() => initializeShapeCloud(geometry), [geometry]);
+export function useShapeCloudState(image: StructureImage, geometry: GeometryMap, cataloguePath: string, initialQuality: PreviewQuality = 'detailed', preset?: { id: string; settings: ShapeCloudSettings }) {
+  const key = `nebula:shape-cloud:1:${cataloguePath}:${image.id}:${image.sourceSha256}:${image.mapSha256}:${image.geometry?.sha256}${preset ? `:fit:${preset.id}` : ''}`;
+  const initial = useMemo(() => preset?.settings ?? initializeShapeCloud(geometry), [geometry, preset]);
   const [settings, setSettings] = useState(initial), [storageError, setStorageError] = useState('');
   const [job, setJob] = useState<CloudJob | null>(null), [result, setResult] = useState<ShapeCloudResult | null>(null);
   const [error, setError] = useState(''), [starting, setStarting] = useState(false), [loaded, setLoaded] = useState(false), [revision, setRevision] = useState(0);
@@ -126,6 +126,6 @@ export function useShapeCloudState(image: StructureImage, geometry: GeometryMap,
   return { settings, edit, reset: () => edit(initial, true), result, job, error, storageError, loaded, retry,
     begin() { dragging.current = true; scheduler.current?.begin(); },
     settle() { dragging.current = false; scheduler.current?.settle(); },
-    active: starting || activeCloudJob(job), dirty: Boolean(result && (result.geometrySha256 !== image.geometry?.sha256 || settingsKey(result.settings) !== settingsKey(settings))),
+    active: starting || activeCloudJob(job) || !loaded, dirty: Boolean(result && (result.geometrySha256 !== image.geometry?.sha256 || settingsKey(result.settings) !== settingsKey(settings))),
   };
 }

@@ -1,3 +1,5 @@
+import { shapeCloudPresets } from './shape-cloud-presets';
+import { validateShapeCloudPreset } from '../reconstruction/shape-cloud/presets';
 import { memo, useCallback, useEffect, useMemo, useRef, useState, type PointerEvent } from 'react';
 import { createPortal } from 'react-dom';
 import { localFile } from '../viewer/viewer';
@@ -54,6 +56,8 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
   const [geometries, setGeometries] = useState<Record<string, GeometryMap>>({}), [geometryErrors, setGeometryErrors] = useState<Record<string, string>>({});
   const [mode, setMode] = useState<'shapes' | 'regions'>('shapes'), [shapeId, setShapeId] = useState('');
   const [cloudEditor, setCloudEditor] = useState(true);
+  const [presetId, setPresetId] = useState(() => new URLSearchParams(location.search).get('fit') ?? '');
+  const preset = shapeCloudPresets.find(item => item.id === presetId && item.cataloguePath === cataloguePath);
   const [shapeScore, setShapeScore] = useState(0), [showAllShapes, setShowAllShapes] = useState(true);
   const [selected, setSelected] = useState(''), [layer, setLayer] = useState<StructureLayer>('source'), [regionId, setRegionId] = useState('');
   const [filters, setFilters] = useState<Filters>(defaults), [highlights, setHighlights] = useState(true);
@@ -76,7 +80,7 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
         try { return [image.id, readDecisions(JSON.parse(localStorage.getItem(reviewStorageKey(cataloguePath, image)) ?? 'null'))]; }
         catch { return [image.id, {}]; }
       })));
-      setSelected(next.images[0]?.id ?? ''); setData(next);
+      setSelected(next.images.find(item => item.id === preset?.imageId)?.id ?? next.images[0]?.id ?? ''); setData(next);
       for (const image of next.images) {
         if (image.geometry) void fetch(asset(image, image.geometry.file, image.geometry.sha256), { signal: controller.signal, cache: 'no-store' }).then(async result => {
           if (!result.ok) throw new Error(`Prepared shapes unavailable (${result.status}).`);
@@ -122,10 +126,21 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
     return () => { observer.disconnect(); element.removeEventListener('wheel', wheel); };
   }, [host]);
   const image = data?.images.find(item => item.id === selected), map = maps[selected], review = reviews[selected];
-  const detector = useGeometryDetection(image, geometries[selected], cataloguePath);
-  const geometry = detector.effectiveGeometry;
+  const detector = useGeometryDetection(preset ? undefined : image, geometries[selected], cataloguePath);
+  const geometry = preset ? geometries[selected] : detector.effectiveGeometry;
+  const effectiveImage = preset ? image : detector.effectiveImage;
+  const presetError = useMemo(() => {
+    if (!preset || !image || !geometry) return '';
+    try { validateShapeCloudPreset(preset, image, geometry); return ''; }
+    catch (reason) { return reason instanceof Error ? reason.message : 'Saved fit unavailable.'; }
+  }, [preset, image, geometry]);
+  function selectPreset(id: string) {
+    setPresetId(id); setCloudEditor(true);
+    const url = new URL(location.href); if (id) url.searchParams.set('fit', id); else url.searchParams.delete('fit');
+    history.replaceState(history.state, '', url);
+  }
   const shapes = mode === 'shapes' && Boolean(image);
-  const cloudMounted = Boolean(shapes && detector.ready && detector.effectiveGeometry && detector.effectiveImage);
+  const cloudMounted = Boolean(shapes && (preset || detector.ready) && geometry && effectiveImage && !presetError);
   const cloudActive = Boolean(cloudMounted && cloudEditor);
   const candidateShapes = useMemo(() => geometry?.candidates.filter(candidate => candidate.score >= shapeScore) ?? [], [geometry, shapeScore]);
   const selectedShape = candidateShapes.find(candidate => candidate.id === shapeId) ?? candidateShapes[0];
@@ -163,9 +178,18 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
   return <fieldset className="observation-structures">
     <legend>Structure review</legend>
     <label className="field-label" htmlFor="structure-image">Image</label>
-    <select id="structure-image" disabled={!data} value={selected} onChange={event => { setSelected(event.target.value); setRegionId(''); setShapeId(''); }}>
+    <select id="structure-image" disabled={!data} value={selected} onChange={event => { selectPreset(''); setSelected(event.target.value); setRegionId(''); setShapeId(''); }}>
       {data?.images.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}
     </select>
+    {image && shapeCloudPresets.some(item => item.cataloguePath === cataloguePath && item.imageId === image.id) && <>
+      <label className="field-label" htmlFor="shape-cloud-fit">Fit</label>
+      <select id="shape-cloud-fit" value={preset?.id ?? ''} onChange={event => selectPreset(event.target.value)}>
+        <option value="">Automatic · my edits</option>
+        {shapeCloudPresets.filter(item => item.cataloguePath === cataloguePath && item.imageId === image.id).map(item =>
+          <option key={item.id} value={item.id}>{item.label}</option>)}
+      </select>
+      {presetError && <p className="shape-cloud-error" role="alert">{presetError}</p>}
+    </>}
     <div className="emission-layer-buttons" role="group" aria-label="Structure layer" hidden={cloudActive}>
       {map?.panels.map(panel => <button key={panel.id} type="button" title={panel.description} aria-pressed={layer === panel.id} onClick={() => setLayer(panel.id)}>{panel.label}</button>)}
     </div>
@@ -173,12 +197,12 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
       <button type="button" aria-pressed={shapes} onClick={() => setMode('shapes')}>Shapes</button>
       <button type="button" aria-pressed={!shapes} onClick={() => setMode('regions')}>Regions</button>
     </div>}
-    {shapes && image && <GeometryDetectionControls detector={detector} image={image} />}
+    {shapes && image && !preset && <GeometryDetectionControls detector={detector} image={image} />}
     <div hidden={!shapes || cloudActive}><GeometryControls geometry={geometry} candidates={candidateShapes} selected={selectedShape} score={shapeScore}
       showAll={showAllShapes} onScore={setShapeScore} onShowAll={setShowAllShapes} onSelect={setShapeId} /></div>
     {shapes && !cloudEditor && <button type="button" onClick={() => setCloudEditor(true)}>Cloud preview</button>}
-    {cloudMounted && detector.effectiveImage && detector.effectiveGeometry && image && data && <ShapeCloudWorkbench visible={cloudActive}
-      image={detector.effectiveImage} geometry={detector.effectiveGeometry} initialQuality={detector.quality} cataloguePath={cataloguePath} host={host}
+    {cloudMounted && effectiveImage && geometry && image && data && <ShapeCloudWorkbench visible={cloudActive}
+      image={effectiveImage} geometry={geometry} preset={preset} initialQuality={preset ? 'detailed' : detector.quality} cataloguePath={cataloguePath} host={host}
       matrix={matrices[image.id] ?? image.imageToFrame} frame={data.frame} onDetected={() => setCloudEditor(false)} />}
     <div hidden={shapes}>
     <div className="structure-morphologies" role="group" aria-label="Morphology filters">{morphologies.map(kind => <label key={kind}>

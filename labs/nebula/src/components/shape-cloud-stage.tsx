@@ -3,6 +3,7 @@ import type { Matrix } from '../alignment/observations-ui/model';
 import type { ShapeCloudComponent, ShapeCloudMode, ShapeCloudResult } from '../reconstruction/shape-cloud/types';
 import { createShapeCloudViewer } from '../viewer/shape-cloud-viewer';
 import { shapeCloudPhotoPose } from './shape-cloud-photo-pose';
+import { ellipseArcPath } from '../alignment/observations-ui/geometry-model';
 import { ShapeCloudOrientation } from './shape-cloud-orientation';
 
 export interface CloudView { zoom: number; panX: number; panY: number; yaw: number; pitch: number; locked: boolean }
@@ -101,8 +102,17 @@ function CloudPane({ kind, ...props }: CloudStageProps & { kind: 'source' | 'clo
             {components.map(component => <g key={component.id} data-cloud-component={component.id} data-selected={component.id === selectedId} data-hovered={component.id === hoveredId}
               data-enabled={component.enabled} transform={`translate(${component.x} ${component.y}) rotate(${component.rotationDegrees})`}>
               <title>{component.label} · click to select · weight {component.weight.toFixed(2)}{component.enabled ? '' : ' · disabled'}</title>
-              <ellipse className="cloud-guide-line" rx={component.radiusX} ry={component.radiusY} vectorEffect="non-scaling-stroke" />
-              <ellipse className="cloud-guide-hit" rx={component.radiusX} ry={component.radiusY} vectorEffect="non-scaling-stroke" style={{ pointerEvents: showGuides ? 'stroke' : 'none' }} />
+              {component.shape === 'ring' && (component.arcSweepDegrees ?? 360) < 360 ? <>
+                <path className="cloud-guide-line" d={ellipseArcPath([component.radiusX, component.radiusY],
+                  ((component.arcCenterDegrees ?? 0) - component.arcSweepDegrees! / 2) * Math.PI / 180,
+                  ((component.arcCenterDegrees ?? 0) + component.arcSweepDegrees! / 2) * Math.PI / 180)} vectorEffect="non-scaling-stroke" />
+                <path className="cloud-guide-hit" d={ellipseArcPath([component.radiusX, component.radiusY],
+                  ((component.arcCenterDegrees ?? 0) - component.arcSweepDegrees! / 2) * Math.PI / 180,
+                  ((component.arcCenterDegrees ?? 0) + component.arcSweepDegrees! / 2) * Math.PI / 180)} vectorEffect="non-scaling-stroke" style={{ pointerEvents: showGuides ? 'stroke' : 'none' }} />
+              </> : <>
+                <ellipse className="cloud-guide-line" rx={component.radiusX} ry={component.radiusY} vectorEffect="non-scaling-stroke" />
+                <ellipse className="cloud-guide-hit" rx={component.radiusX} ry={component.radiusY} vectorEffect="non-scaling-stroke" style={{ pointerEvents: showGuides ? 'stroke' : 'none' }} />
+              </> }
             </g>)}
           </svg></div>
         </div>

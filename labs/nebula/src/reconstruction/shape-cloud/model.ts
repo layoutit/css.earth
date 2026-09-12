@@ -18,7 +18,7 @@ export function readShapeCloudSettings(value: unknown, width: number, height: nu
   dimensions(width, height);
   if (!record(value) || Object.keys(value).some(key => key !== 'components' && key !== 'exposure') ||
       !Array.isArray(value.components) || value.components.length > 32) throw new TypeError('Invalid bounded shape cloud settings.');
-  const keys = ['id', 'label', 'memberIds', 'groupId', 'x', 'y', 'radiusX', 'radiusY', 'rotationDegrees', 'weight', 'thickness', 'softness', 'depth', 'enabled', 'shape', 'operation'];
+  const keys = ['id', 'label', 'memberIds', 'groupId', 'x', 'y', 'radiusX', 'radiusY', 'rotationDegrees', 'weight', 'thickness', 'softness', 'depth', 'enabled', 'shape', 'operation', 'arcCenterDegrees', 'arcSweepDegrees'];
   const maximum = Math.max(width, height);
   const components = value.components.map((item: unknown): ShapeCloudComponent => {
     if (!record(item) || Object.keys(item).some(key => !keys.includes(key)) || !text(item.id) || !text(item.label) || !text(item.groupId) ||
@@ -28,6 +28,8 @@ export function readShapeCloudSettings(value: unknown, width: number, height: nu
     if ((shape !== 'shell' && shape !== 'ring' && shape !== 'ellipsoid') ||
         (operation !== 'add' && operation !== 'subtract')) throw new TypeError('Unknown shape primitive or operation.');
     return { id: item.id, label: item.label, groupId: item.groupId, memberIds: [...item.memberIds], enabled: item.enabled, shape, operation,
+      ...(item.arcCenterDegrees === undefined ? {} : { arcCenterDegrees: bounded(item.arcCenterDegrees, 'arc center', -360, 360) }),
+      ...(item.arcSweepDegrees === undefined ? {} : { arcSweepDegrees: bounded(item.arcSweepDegrees, 'arc sweep', 1, 360) }),
       x: bounded(item.x, 'x', -width, 2 * width), y: bounded(item.y, 'y', -height, 2 * height),
       radiusX: bounded(item.radiusX, 'radius X', 2, maximum * 2), radiusY: bounded(item.radiusY, 'radius Y', 2, maximum * 2),
       rotationDegrees: bounded(item.rotationDegrees, 'rotation', -360, 360), weight: bounded(item.weight, 'weight', 0, 5),

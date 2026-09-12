@@ -9,6 +9,7 @@ import { localFile } from '../viewer/viewer';
 import { componentScope, editShapeComponents, useShapeCloudState, type EditScope, type NumericField } from './shape-cloud-state';
 import { ShapeCloudStage, earthCloudView, type CloudView } from './shape-cloud-stage';
 import { ShapeCloudDiagnostics, earthComparisonView, type ComparisonChannel } from './shape-cloud-diagnostics';
+import type { ShapeCloudPreset } from '../reconstruction/shape-cloud/presets';
 import './shape-cloud.css';
 
 interface Props {
@@ -16,6 +17,7 @@ interface Props {
   matrix: Matrix; frame: { width: number; height: number }; onDetected(): void;
   visible?: boolean;
   initialQuality?: 'draft' | 'detailed';
+  preset?: ShapeCloudPreset;
 }
 const modes = [
   { id: 'compare', label: 'Compare', symbol: '◫', title: 'Source and untextured cloud side by side, with linked framing.' },
@@ -35,22 +37,22 @@ function Slider({ id, label, value, min, max, step = .01, display, title, onChan
       onPointerCancel={onSettle} onKeyUp={onSettle} onBlur={onSettle} />
   </div>;
 }
-function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetected, visible = true, initialQuality, mode, stageMode, setMode, view, setView }: Props & {
+function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetected, visible = true, initialQuality, preset, mode, stageMode, setMode, view, setView }: Props & {
   mode: ShapeCloudMode; stageMode: Exclude<ShapeCloudMode, 'structure'>; setMode(value: ShapeCloudMode): void; view: CloudView; setView(value: CloudView): void;
 }) {
-  const state = useShapeCloudState(image, geometry, cataloguePath, initialQuality), { settings, result } = state;
-  const selectionKey = `nebula:shape-cloud-selection:1:${cataloguePath}:${image.id}:${image.sourceSha256}:${image.mapSha256}:${image.geometry?.sha256}`;
+  const state = useShapeCloudState(image, geometry, cataloguePath, initialQuality, preset), { settings, result } = state;
+  const selectionKey = `nebula:shape-cloud-selection:1:${cataloguePath}:${image.id}:${image.sourceSha256}:${image.mapSha256}:${image.geometry?.sha256}${preset ? `:fit:${preset.id}` : ''}`;
   const [scope, setScope] = useState<EditScope>('selected'), [selectedId, selectId] = useState(() => {
     try { return localStorage.getItem(selectionKey) ?? ''; } catch { return ''; }
   });
   function setSelectedId(id: string) {
     selectId(id); try { localStorage.setItem(selectionKey, id); } catch { /* Editing remains available when selection persistence is unavailable. */ }
   }
-  const [outlines, setOutlines] = useState(true), [opacity, setOpacity] = useState(.5), [beforeSolo, setBeforeSolo] = useState<Record<string, boolean> | null>(null);
+  const [outlines, setOutlines] = useState(!preset), [opacity, setOpacity] = useState(.5), [beforeSolo, setBeforeSolo] = useState<Record<string, boolean> | null>(null);
   const [hoveredId, setHoveredId] = useState(''), [formula, setFormula] = useState<string | null>(null), [formulaError, setFormulaError] = useState('');
   const [channel, setChannel] = useState<ComparisonChannel>('luminosity'), [level, setLevel] = useState(0);
   const [comparisonView, setComparisonView] = useState(earthComparisonView);
-  useEffect(() => { setBeforeSolo(null); setFormula(null); setFormulaError(''); setHoveredId(''); }, [image.geometry?.sha256]);
+  useEffect(() => { setBeforeSolo(null); setFormula(null); setFormulaError(''); setHoveredId(''); }, [image.geometry?.sha256, preset?.id]);
   const selected = settings.components.find(item => item.id === selectedId) ?? settings.components[0];
   const workingMatrix = useMemo<Matrix>(() => [matrix[0] * image.nativeWidth / image.width, matrix[1] * image.nativeWidth / image.width,
     matrix[2] * image.nativeHeight / image.height, matrix[3] * image.nativeHeight / image.height, matrix[4], matrix[5]], [matrix, image]);
@@ -83,7 +85,7 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
   const anyEnabled = selected && componentScope(settings.components, selected, scope).some(item => item.enabled);
   const previewMessage = state.active || state.dirty ? 'Updating live preview…' : result?.quality === 'draft' ? 'Draft · refining detail…' : result ? 'Live preview · up to date' : 'Preparing live preview…';
   const field = (key: NumericField, label: string, min: number, max: number, title: string, step = .01): ReactNode => selected &&
-    <Slider key={key} id={`shape-cloud-${key}`} label={label} value={selected[key]} min={min} max={max} step={step} title={title}
+    <Slider key={key} id={`shape-cloud-${key}`} label={label} value={selected[key] ?? (key === 'arcSweepDegrees' ? 360 : 0)} min={min} max={max} step={step} title={title}
       onChange={value => edit(key, value)} onBegin={state.begin} onSettle={state.settle} />;
   return <section className="shape-cloud-workbench" hidden={!visible} aria-label="Shape cloud controls" data-image-id={image.id}
     data-preview-quality={result?.quality ?? ''} data-result-id={result?.id ?? ''} data-preview-active={state.active} data-preview-current={!state.dirty}>
@@ -138,6 +140,10 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
       {field('weight', 'Weight', 0, 5, 'Relative emission of the selected scope. Zero emits no light.')}
       {field('thickness', 'Thickness', .01, .8, 'Relative wall thickness of the inferred shell.')}
       {field('softness', 'Softness', .005, .5, 'Smooth falloff at the inferred shell boundary.', .005)}
+      {selected?.shape === 'ring' && <>
+        {field('arcSweepDegrees', 'Arc length', 1, 360, 'Angular extent of the ring; 360° keeps the complete ring.', 1)}
+        {field('arcCenterDegrees', 'Arc angle', -180, 180, 'Center of the soft-ended arc, clockwise in the ring’s image-local frame.', 1)}
+      </>}
       {field('depth', 'Depth', .05, 2, 'Assumed line-of-sight depth relative to the fitted axes; not a measurement.')}
       {field('x', 'Horizontal', -image.width, image.width * 2, 'Position in source pixels. Bulk moves preserve relative centers.', .1)}
       {field('y', 'Vertical', -image.height, image.height * 2, 'Position in source pixels. Bulk moves preserve relative centers.', .1)}
@@ -151,7 +157,7 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
         onChange={event => { setFormula(event.target.value); setFormulaError(''); }} onBlur={applyFormula}
         onKeyDown={event => { if (event.key === 'Enter') { event.preventDefault(); applyFormula(); } }} />
       {formulaError && <p className="interaction-hint shape-cloud-error" role="alert">{formulaError}</p>}
-      <button type="button" className="text-button" onClick={() => { state.reset(); setBeforeSolo(null); }}>Reset to detected</button>
+      <button type="button" className="text-button" onClick={() => { state.reset(); setBeforeSolo(null); }}>{preset ? 'Reset to saved fit' : 'Reset to detected'}</button>
     </div>
     <div className="shape-cloud-foot"><button type="button" className="text-button" onClick={onDetected}>Detected lines</button>
       <span className="interaction-hint" title="Nearby duplicate contours are merged. Shell depth, thickness and falloff are model assumptions, not physical measurements.">{settings.components.length} inferred components</span></div>
@@ -175,8 +181,8 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
 }
 /** Camera and comparison mode survive source changes; drafts/jobs are isolated by source identity. */
 export function ShapeCloudWorkbench(props: Props) {
-  const [mode, setMode] = useState<ShapeCloudMode>('compare'), [view, setView] = useState<CloudView>(earthCloudView);
-  const [stageMode, setStageMode] = useState<Exclude<ShapeCloudMode, 'structure'>>('compare');
+  const [mode, setMode] = useState<ShapeCloudMode>(props.preset ? 'textured' : 'compare'), [view, setView] = useState<CloudView>(earthCloudView);
+  const [stageMode, setStageMode] = useState<Exclude<ShapeCloudMode, 'structure'>>(props.preset ? 'textured' : 'compare');
   function chooseMode(value: ShapeCloudMode) { setMode(value); if (value !== 'structure') setStageMode(value); }
   return <Session key={props.image.id} {...props} mode={mode} stageMode={stageMode} setMode={chooseMode} view={view} setView={setView} />;
 }

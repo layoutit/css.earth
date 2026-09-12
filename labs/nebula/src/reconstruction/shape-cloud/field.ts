@@ -22,6 +22,8 @@ export function createShapeCloudField(settings: ShapeCloudSettings, width: numbe
     const z = Math.min(a, b) * component.depth, outer = 1 + (component.shape === 'ellipsoid' ? 0 : halfThickness) + component.softness;
     const extentX = Math.hypot(a * c, b * s) * outer, extentY = Math.hypot(a * s, b * c) * outer;
     return { x, y, c, s, a, b, z, outer, extentX, extentY, extentZ: component.shape === 'ring' ? z : z * outer,
+      arcCenter: (component.arcCenterDegrees ?? 0) * Math.PI / 180,
+      arcSweep: (component.arcSweepDegrees ?? 360) * Math.PI / 180,
       shape: component.shape, operation: component.operation, halfThickness, softness: component.softness,
       gain: component.weight * 1.8 / Math.min(a, b) };
   });
@@ -54,8 +56,18 @@ export function createShapeCloudField(settings: ShapeCloudSettings, width: numbe
         ? Math.hypot(radial - 1, z / component.z * (halfThickness + component.softness))
         : component.shape === 'ellipsoid' ? Math.max(0, radius - 1) : Math.abs(radius - 1);
       if (distance >= halfThickness + component.softness) continue;
+      let sectorGain = 1;
+      if (component.shape === 'ring' && component.arcSweep < Math.PI * 2) {
+        // The sector rotates with the 3D ring; no view-dependent masks or image extrusion.
+        const angle = -Math.atan2(localY, localX) - component.arcCenter;
+        const delta = Math.abs(Math.atan2(Math.sin(angle), Math.cos(angle)));
+        const edge = component.arcSweep / 2, feather = Math.min(edge, Math.max(.03, component.softness, component.arcSweep * .2));
+        if (delta >= edge) continue;
+        const fade = Math.max(0, (delta - edge + feather) / feather);
+        sectorGain = 1 - fade * fade * (3 - 2 * fade);
+      }
       const t = Math.max(0, (distance - halfThickness) / component.softness);
-      value += (component.operation === 'subtract' ? -1 : 1) * component.gain * (1 - t * t * (3 - 2 * t));
+      value += (component.operation === 'subtract' ? -1 : 1) * component.gain * sectorGain * (1 - t * t * (3 - 2 * t));
     }
     out[0] = out[1] = out[2] = Math.max(0, value);
   };

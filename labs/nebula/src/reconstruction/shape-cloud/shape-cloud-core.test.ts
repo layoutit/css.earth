@@ -79,7 +79,7 @@ test('weight, thickness, softness and depth alter the field while baking bounds 
 test('anisotropic clouds use one physical slice spacing rather than the same slab count on each axis', () => {
   const bounds = { min: [-2, -1, -.4] as [number, number, number], max: [2, 1, .4] as [number, number, number] };
   const detail = shapeCloudSampling('detailed', bounds), draft = shapeCloudSampling('draft', bounds);
-  assert.equal(detail.slices.x, 64); assert.equal(detail.slices.y, 32); assert.equal(detail.slices.z, 13);
+  assert.equal(detail.slices.x, 128); assert.equal(detail.slices.y, 64); assert.equal(detail.slices.z, 26);
   for (const [span, count] of [[4, detail.slices.x], [2, detail.slices.y], [.8, detail.slices.z]])
     assert.ok(Math.abs(span! / count! / detail.targetPitchUnits - 1) < .03, 'Side/front depth sampling must be comparable.');
   assert.ok(draft.slices.x < detail.slices.x && draft.width < detail.width);

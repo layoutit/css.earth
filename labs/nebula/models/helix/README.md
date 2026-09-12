@@ -1,8 +1,18 @@
 # Helix: observation alignment and shape inference
 
-**Current step:** inspect 2D structures and automatically fitted projected geometric candidates from the three aligned ESO observations. **Alignment** retains Original / Without stars / Residual for source checks. The [structure workflow](../../docs/nebula-compiler.md) precedes human review and depth hypotheses; **Volume** remains the earlier cropped Hubble experiment.
+**Current step:** inspect the saved, manually tuned coarse shape cloud at `/reconstruction?subject=helix-model-prior&fit=helix-tuned`. It opens **Helix · tuned** on the registered ESO wider-field observation. **Alignment** retains Original / Without stars / Residual; **Volume** remains the earlier cropped Hubble experiment.
 
 **Initial visual verdict: neither baseline is accepted.** The one-axis fit reproduces the photograph but becomes a box from the side. The disk/ring prior has finite curved components, but is too smooth, cuts off outer emission and changes brightness under rotation. These are deliberately visible comparisons, not production nebula assets.
+
+## Saved coarse fit · 2026-09-12
+
+[tuned-shape-fit.json](tuned-shape-fit.json) stores the fit adjusted through the running workbench: a main annulus, faint cavity, northwest/southeast rim sectors, diffuse envelope and outer northwest arc. Arc length/angle control finite 3D ring sectors with soft ends. Image registration stays unchanged. The widths, depths, weights and arc extents are authored hypotheses, not measured gas geometry.
+
+**Fit → Automatic · my edits** returns to detector-driven work. Saved-fit edits use a separate browser namespace and survive refresh; **Reset to saved fit** restores the checked-in settings. Loading the fit checks the exact image, map, geometry and source-grid identities before processing. Changed source evidence requires revalidation. Only the recipe is tracked; textures and results remain in the ignored cache.
+
+The actual front, oblique and side renders were inspected with `ring-sectors@2` sampling. The main ring/cavity and uneven rim are represented, but the envelope is smooth, fine filaments are absent, and the textured side view still shows slab structure. This is a coarse fit for further inspection, not an accepted physical reconstruction. The full-frame luminance comparison is 0.569 normalized RMSE, 55.8% missing and 5.6% excess; residual stars and background contribute, so these numbers cannot establish nebular accuracy.
+
+`browser-shape-cloud-fit` verifies direct loading, source identity, completed-result reuse on refresh, independent automatic/preset edits, reset and rotation without processing. Its screenshots and receipt stay in `.local/nebula-lab/helix-tuned/`. The [earlier detector-only trial](../../docs/helix-fitting-trial.md) remains a separate historical failure.
 
 ## Wider source candidates
 

@@ -1,6 +1,6 @@
 import type { ShapeCloudQuality } from './types.js';
 import type { Bounds3 } from '../../../../../src/preparation/volume/config.js';
-export const SHAPE_CLOUD_PREPARATION_VERSION = 'structure-comparison@1';
+export const SHAPE_CLOUD_PREPARATION_VERSION = 'ring-sectors@2';
 
 /** Quality changes sampling only; both passes evaluate the same physical field and exposure. */
 export function readShapeCloudQuality(value: unknown): ShapeCloudQuality {
@@ -11,8 +11,8 @@ export function readShapeCloudQuality(value: unknown): ShapeCloudQuality {
 export function shapeCloudSampling(quality: ShapeCloudQuality, bounds: Bounds3) {
   const spans = bounds.max.map((value, axis) => value - bounds.min[axis]!);
   if (!spans.every(value => Number.isFinite(value) && value > 0)) throw new TypeError('Shape cloud sampling requires finite positive bounds.');
-  const longestCount = quality === 'draft' ? 24 : 64, pitch = Math.max(...spans) / longestCount;
+  const longestCount = quality === 'draft' ? 24 : 128, pitch = Math.max(...spans) / longestCount;
   const counts = spans.map(span => Math.max(4, Math.ceil(span / pitch)));
-  return { width: quality === 'draft' ? 96 : 192, samples: quality === 'draft' ? 2 : 4,
+  return { width: quality === 'draft' ? 96 : 384, samples: quality === 'draft' ? 2 : 4,
     slices: { x: counts[0]!, y: counts[1]!, z: counts[2]! }, targetPitchUnits: pitch };
 }
