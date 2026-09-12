@@ -206,7 +206,11 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       mounted = mountPreparedPresentation(stage, context, definition);
       if (lifetime.disposed) return;
       for (const layer of mounted!.pageLayers ?? []) {
-        const pages = environment.mountPages({ ...layer, stage, scene: mounted!.sceneElement, camera: mounted!.cameraElement,
+        // The mount echoes each layer's plan as opaque transport. The validated
+        // page plan belongs to the definition this runtime already required.
+        const plan = definition.pageLayers?.find(declared => declared.id === layer.id)?.plan;
+        if (!plan) throw new TypeError(`Prepared page layer was not declared: ${layer.id}.`);
+        const pages = environment.mountPages({ ...layer, plan, stage, scene: mounted!.sceneElement, camera: mounted!.cameraElement,
           own: context.own, onError: fatal });
         pageLayers.set(layer.id, pages);
         pages.setLens({ id: initialSelection.lensId });

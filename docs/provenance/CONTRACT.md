@@ -213,6 +213,14 @@ editing prose alone does not invalidate it. For an unrelated failure, record it
 once and continue the checks that can still give useful results. Report omitted
 checks; do not call a focused pass a full-suite pass.
 
+**Group checks by what they prove.** Give a check its own sentence only when its
+result is evidence about this change: a test that fails on `main` and passes here,
+or a measurement the change was made to move. Name the checks that merely passed on
+one line. Collect unrelated failures in a table and state once that they match
+`main`; do not repeat that reasoning for each row. Record a standing environment
+limit, such as a runner that cannot start, in [CONTRIBUTING](../../CONTRIBUTING.md#check-your-change)
+and cite it, rather than explaining it again in each PR.
+
 Each added artifact must support a named claim, explanation or test. Explain
 unusually large additions. Preserve relevant failures and replace needed links
 with exact Git revision links before removing historical reports. A PR does not
@@ -221,9 +229,11 @@ need a separate completion report in `docs/`.
 **Inspect PR images on GitHub.** Use a [GitHub attachment](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files)
 or an image committed at a fixed revision, for example
 `https://github.com/layoutit/css.earth/blob/<commit>/<path>?raw=true`.
-After publishing or editing the PR, reload it with normal repository access and
-inspect every image for loading, legibility, view and revision. File existence
-or HTTP success alone is insufficient. Fix broken embeds; if required images
+A relative link resolves against the PR URL, not the repository root, so pin a
+repository link in the body to a commit as well. After publishing or editing the
+PR, reload it with normal repository access and inspect every image for loading,
+legibility, view and revision, and follow every link. File existence or HTTP
+success alone is insufficient. Fix broken embeds and links; if required images
 are unavailable, keep the PR in draft and identify what is missing.
 
 **PROVENANCE DOCUMENTATION** maintains shared guidance. Contributors update rules

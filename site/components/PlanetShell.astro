@@ -196,6 +196,13 @@ const searchCategories = ([
       <span class="planet-setting-text">Asteroid labels</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>
+    <label class="planet-setting-control">
+      <span class="planet-setting-text">Orbit lines</span>
+      <select class="planet-orbit-renderer-setting planet-setting-select" name="orbitRenderer">
+        <option value="strokes">SVG strokes</option>
+        <option value="bars">CSS chords</option>
+      </select>
+    </label>
     {remainingSettings.map((setting) => setting.kind === "cycle" ? (
       <button class="planet-setting-control" type="button" name={setting.name} data-state={setting.state} aria-label={`${setting.label}: ${setting.state}`}>
         <span class="planet-setting-text">{setting.label}</span>
@@ -372,6 +379,8 @@ const searchCategories = ([
   ))}
 </nav>
     <div class="planet-view-readout" aria-label="View information">
+      {DIAGNOSTICS_ENABLED && <button type="button" class="planet-motion-record" title="Record stage input; press again to stop and copy the recording">Record</button>}
+      {DIAGNOSTICS_ENABLED && <button type="button" class="planet-motion-script" title="Replay the recorded motion for tracing">Do motion</button>}
       {DIAGNOSTICS_ENABLED && <button type="button" class="planet-diagnostic-record" data-diagnostic-record aria-label="Record diagnostic data" aria-pressed="false" hidden>Record</button>}
       <span class="planet-view-date" title="Date of the scene's prepared orbital positions (Terrestrial Time)" hidden>
         <span>Epoch: <span data-view-date></span></span>

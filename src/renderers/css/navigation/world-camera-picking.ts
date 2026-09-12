@@ -1,4 +1,5 @@
 import { screenPicking } from './screen-picking.js';
+import { createOpacityClock } from '../stars/opacity-clock.js';
 import { setHoverCursor } from './cursor-state.js';
 
 /** The transparent input surface owns gestures. The presentation publishes
@@ -54,12 +55,13 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
     hovered = target;
     host.dispatchEvent(new CustomEvent('objecthoverchange', { detail: { interactive } }));
   };
+  const frameClock = createOpacityClock(windowTarget);
   let hoverPoint: PointerEvent | null = null, hoverFrame: number | null = null;
   let hoverInteractive = false;
   const scheduleHover = (interactive = false) => {
     hoverInteractive ||= interactive;
     if (!hoverPoint || hoverFrame !== null) return;
-    hoverFrame = windowTarget.requestAnimationFrame(() => {
+    hoverFrame = frameClock.request(() => {
       hoverFrame = null;
       const interactive = hoverInteractive; hoverInteractive = false;
       setHovered(hoverPoint ? pick(hoverPoint) : null, interactive);
@@ -68,7 +70,7 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
   const unsubscribe = registry.subscribe(scheduleHover);
   const clearHover = (event?: Event) => {
     hoverPoint = null;
-    if (hoverFrame !== null) windowTarget.cancelAnimationFrame(hoverFrame);
+    if (hoverFrame !== null) frameClock.cancel(hoverFrame);
     hoverFrame = null; hoverInteractive = false;
     setHovered(null, event?.type === 'pointerleave');
   };

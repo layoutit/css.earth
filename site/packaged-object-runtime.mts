@@ -9,6 +9,8 @@ import { createObjectRuntime, createNavigableObjectMount, preparedObjectCapabili
 import { APPLICATION_WORLD_CONTEXT } from './world-context-plan.mts';
 import * as runtimePolicy from './runtime-policy.mts';
 
+export const SHARED_BANK_URL = '/shared';
+
 // The application supplies its shell nodes and authoritative input policy.
 // The CSS renderer consumes prepared content; the engine supplies numeric behavior.
 export function bindPackagedObject(definition: ObjectRuntimeDefinition, mount = createObjectRuntime(definition)): SceneFactory {
@@ -42,6 +44,13 @@ export async function loadPackagedObject(input: unknown) {
       const url = `/objects/${descriptorInput.id}/${descriptorInput.prepared.sha256}.json`;
       const response = await fetch(url, { signal });
       if (!response.ok) throw new Error(`Prepared object asset request failed: ${response.status}.`);
+      return response.arrayBuffer();
+    },
+    // Content-addressed banks shared by every object; the decode worker caches each one.
+    sharedUrl: SHARED_BANK_URL,
+    async readShared(reference, signal) {
+      const response = await fetch(`${SHARED_BANK_URL}/${reference.kind}/${reference.sha256}.json`, { signal });
+      if (!response.ok) throw new Error(`Prepared shared bank request failed: ${response.status}.`);
       return response.arrayBuffer();
     },
   }, definition => descriptorInput.properties.worldFrame

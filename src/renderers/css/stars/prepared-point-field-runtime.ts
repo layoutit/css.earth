@@ -1,4 +1,4 @@
-import type { OpacityClock } from './opacity-clock.js';
+import { createOpacityClock, type OpacityClock } from './opacity-clock.js';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import type { PreparedPointFieldInput, PointReference, PreparedPointFieldSelection } from '@cssearth/engine';
 import { transposeWorldRotation, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
@@ -65,7 +65,8 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
   const outgoing = makeSlots(payload.policy.transitionSlots);
   const active = makeSlots(payload.policy.activeSlots);
   let activeIds = new Uint32Array(), outgoingIds = new Uint32Array();
-  const fader = createOpacityFader(host.ownerDocument.defaultView!, opacityClock);
+  const clock = opacityClock ?? createOpacityClock(host.ownerDocument.defaultView!);
+  const fader = createOpacityFader(host.ownerDocument.defaultView!, clock);
   const labels = showLabels ? mountPointFieldLabels(root, payload.labels, opacityClock) : null;
   const selectInitial = createPointFieldSelection(payload);
   let occluderLocal = occluder && presentPhysicalPoseInVolume({ positionM: occluder.positionM,
@@ -77,7 +78,7 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
     if (slot.shown === shown) return;
     slot.shown = shown; slot.setVisible(shown);
   };
-  let latest: Publication | null = null;
+  let latest: Publication | null = null, publishedOpacity = NaN;
   let destroyed = false, initialized = false, selectionHeld = false;
   let heldView: PointFieldView | null = null;
   let selected: PreparedPointFieldSelection | null = null;
@@ -99,7 +100,7 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
     pendingSelection = selection;
     // A regular camera publication consumes this first. If the camera has stopped,
     // publish the completed cut on the next frame using the latest observer pose.
-    if (adoptionFrame === null && timer === null) adoptionFrame = windowTarget.requestAnimationFrame(() => {
+    if (adoptionFrame === null && timer === null) adoptionFrame = clock.request(() => {
       adoptionFrame = null;
       if (!destroyed && latest) { updateSelection(latest); render(latest); }
     });
@@ -129,7 +130,7 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
   }
 
   function updateSelection(publication: Publication) {
-    if (adoptionFrame !== null) { windowTarget.cancelAnimationFrame(adoptionFrame); adoptionFrame = null; }
+    if (adoptionFrame !== null) { clock.cancel(adoptionFrame); adoptionFrame = null; }
     const view = selectionView(publication);
     // Seed the first view synchronously: the ready scene never flashes an empty sky.
     // All subsequent browser selection belongs to the application-lifetime worker.
@@ -335,8 +336,13 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
       labelExclusionRects: readonly LabelScreenRect[] = [], plannedFrame?: PreparedPointFrame) {
       if (destroyed) return;
       fader.batch(() => {
-      root.style.opacity = String(opacity); root.style.visibility = opacity > 0 ? '' : 'hidden';
-      if (opacity <= 0) { latest = null; for (const slot of [...active, ...outgoing]) fader.visible(slot.element, false); return; }
+      // A layer another source carries (baked sky faces) stays hidden for frames on end: no writes then.
+      if (opacity !== publishedOpacity) {
+        root.style.opacity = String(opacity); root.style.visibility = opacity > 0 ? '' : 'hidden';
+        if (opacity <= 0) for (const slot of [...active, ...outgoing]) fader.visible(slot.element, false);
+        publishedOpacity = opacity;
+      }
+      if (opacity <= 0) { latest = null; return; }
       latest = { world, viewport, labelExclusionRects };
       if (plannedFrame) {
         pointFrames.accept(plannedFrame);
@@ -352,7 +358,7 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
       if (destroyed) return; destroyed = true;
       if (timer !== null) clearTimeout(timer);
       selector?.destroy();
-      if (adoptionFrame !== null) windowTarget.cancelAnimationFrame(adoptionFrame);
+      if (adoptionFrame !== null) clock.cancel(adoptionFrame);
       pendingSelection = null;
       fader.destroy();
       labels?.destroy();

@@ -7,6 +7,8 @@ export interface WheelZoomInertia {
   readonly dampingSeconds: number;
   /** The glide ends below this share of the rate it was released with. */
   readonly stopRateRatio: number;
+  /** Log-distance per second below which a glide is no longer visible motion and stops. */
+  readonly stopLogRatePerSecond: number;
   readonly gain: number;
 }
 export interface ResponsiveOrbitPolicyOptions {
@@ -23,6 +25,10 @@ export interface RuntimePolicy {
   readonly WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER: number;
   readonly WHEEL_ZOOM_USE_SCROLL_DISTANCE: boolean;
   readonly WHEEL_ZOOM_INERTIA: WheelZoomInertia | null;
+  /** The input kinds whose released gesture is glided. A precision pointer
+   * carries the platform's own momentum, so gliding it again compounds two
+   * decays; leaving it out lets that gesture stop with its last event. */
+  readonly WHEEL_ZOOM_INERTIA_INPUT_KINDS: readonly WheelInputKind[];
   sceneCursor(state: { surface: boolean; pressed: boolean; enabled: boolean }): string;
   isOrbitDragStart(event: Pick<PointerEvent, 'isPrimary' | 'button'>): boolean;
   wheelZoomInputKind(event: Pick<WheelEvent, 'deltaMode' | 'ctrlKey' | 'deltaX' | 'deltaY' | 'timeStamp'>,
