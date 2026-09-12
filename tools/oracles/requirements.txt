@@ -1,0 +1,5 @@
+# Pinned oracle environment for tools/oracles/*/*.py; created by `pnpm oracles:setup` under .local/oracles/venv.
+# Oracles verify preparation results against reference implementations; they never produce pipeline inputs.
+numpy==2.5.3
+spiceypy==8.2.0
+pds4_tools==1.4

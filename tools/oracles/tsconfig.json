@@ -2,6 +2,8 @@
   "extends": "../../tsconfig.json",
   "include": [
     "venus/**/*.mts",
+    "setup.mts",
+    "spice/*.mts",
     "../../tests/objects/unit/venus/oracle.test.mts"
   ],
   "exclude": []

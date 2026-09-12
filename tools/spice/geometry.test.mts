@@ -29,12 +29,15 @@ test('light time evaluates the target at emission and stellar aberration tilts t
   ]);
   const geometric = ephemeris.state(499, -99, 0).position;
   assert.equal(geometric[0], c * 100);
-  const noAberration = ephemeris.apparent(499, -99, 0, { stellarAberration: false });
+  const noAberration = ephemeris.apparent(499, -99, 0, { stellarAberration: false, converged: true });
   // The converged one-way light time solves lt = (100 c - lt) / c, since the target drifts 1 km/s toward the past.
   const lt = 100 / (1 + 1 / c);
   assert.ok(Math.abs(noAberration.lightTimeSeconds - lt) < 1e-9, `light time ${noAberration.lightTimeSeconds}`);
   assert.ok(Math.abs(noAberration.position[0] - (c * 100 - lt)) < 1e-6, 'target seen where it was one light time earlier');
-  const apparent = ephemeris.apparent(499, -99, 0);
+  // SPICE's plain LT takes one iteration from the geometric light time and reports the light time of the corrected position.
+  const single = ephemeris.apparent(499, -99, 0, { stellarAberration: false });
+  assert.ok(Math.abs(single.position[0] - (c * 100 - 100)) < 1e-6 && Math.abs(single.lightTimeSeconds - (c * 100 - 100) / c) < 1e-12, `one light-time iteration: ${single.position[0]}, ${single.lightTimeSeconds}`);
+  const apparent = ephemeris.apparent(499, -99, 0, { converged: true });
   const angle = Math.atan2(apparent.position[1], apparent.position[0]);
   assert.ok(Math.abs(angle - 30 / c) < 1e-9, `aberration angle ${angle} vs ${30 / c}`);
   assert.ok(Math.abs(Math.hypot(...apparent.position) - Math.hypot(...noAberration.position)) < 1e-6, 'length preserved');
