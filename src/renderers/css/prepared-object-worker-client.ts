@@ -1,6 +1,6 @@
 import type { ObjectRuntimeDefinition } from './runtime/object-runtime-types.js';
 
-export interface PreparedObjectDecodeRequest { descriptor: unknown; bytes: ArrayBuffer; }
+export interface PreparedObjectDecodeRequest { descriptor: unknown; bytes: ArrayBuffer; sharedUrl?: string; }
 export type PreparedObjectDecodeResult = { ok: true; definition: ObjectRuntimeDefinition } |
   { ok: false; name: string; message: string };
 type DecodeWorker = Pick<Worker, 'postMessage' | 'terminate' | 'onmessage' | 'onerror' | 'onmessageerror'>;
