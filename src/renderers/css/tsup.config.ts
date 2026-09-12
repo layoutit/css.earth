@@ -7,6 +7,8 @@ export default {
     'platform/prepared-playback': fileURLToPath(new URL('./rendering/prepared-playback.ts', import.meta.url)),
     'platform/prepared-image-store': fileURLToPath(new URL('./rendering/prepared-image-store.ts', import.meta.url)),
     'platform/object-selection-runtime': fileURLToPath(new URL('./rendering/object-selection-runtime.ts', import.meta.url)),
+    'platform/prepared-presentation': fileURLToPath(new URL('./rendering/prepared-presentation.ts', import.meta.url)),
+    'platform/perspective-dolly': fileURLToPath(new URL('./navigation/perspective-dolly.ts', import.meta.url)),
     'platform/object-control-binding': fileURLToPath(new URL('./rendering/object-control-binding.ts', import.meta.url)),
     'platform/cubic-sky-runtime': fileURLToPath(new URL('./solar-system/cubic-sky-runtime.ts', import.meta.url)),
     'platform/solar-view-direction': fileURLToPath(new URL('./solar-system/solar-view-direction.ts', import.meta.url)),
