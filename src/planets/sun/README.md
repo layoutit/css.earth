@@ -22,6 +22,13 @@ they are not passing results. No body tests were rerun for this documentation ed
 
 The SN263 integration refreshes the prepared universe to 464 selectable bodies. The [integration receipt](https://github.com/layoutit/cssEarth/blob/bbfbf86b5c9b71fc56ef5e6b4759fd00af11d8ec/src/planets/asteroid-2001-sn263/evidence/main-integration.json) binds its registry, marker, minimap and world-context checks. Solar surface data is unchanged; these navigation checks do not establish new scientific or browser qualification of the Sun.
 
+## Shared banks
+
+`prepared/shared/planet-points/` holds the point photometry table of each planet
+and dwarf planet, one file per body and epoch, and `prepared/shared/heliocentric-labels/`
+the heliocentric label set. Every body's prepared runtime references them by
+content hash instead of repeating them; see [prepared shared banks](../../../docs/prepared-shared-banks.md).
+
 ## Known problems
 
 - Unobserved poles and missing samples are continued from nearby values.

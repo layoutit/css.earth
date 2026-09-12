@@ -17,7 +17,7 @@ test('page metadata stays hash-bound to its scene without needing scene bytes du
   controls:{lenses:{defaultLens:'shape',controls:[{id:'shape',label:'Shape'}]},settings:{controls:[{kind:'toggle',name:'shadows',label:'Shadows',checked:false}]}},tree:{nodes:[{tag:'u'}]}};
  const payload=JSON.stringify({schema:'cssearth-prepared-object@1',id:'body',data});
  const hash=createHash('sha256').update(payload).digest('hex'), page=preparePageMetadata('body',hash,data);
- const descriptor={schema:'cssearth-object@1',id:'body',type:'layered-body',properties:{page:{metadata:page.reference}},prepared:{format:'cssearth-css-object@4',url:'prepared/object.json',sha256:createHash('sha256').update(payload).digest('hex')}};
+ const descriptor={schema:'cssearth-object@1',id:'body',type:'layered-body',properties:{page:{metadata:page.reference}},prepared:{format:'cssearth-css-object@5',url:'prepared/object.json',sha256:createHash('sha256').update(payload).digest('hex')}};
  await writeFile(resolve(directory,'object.json'),JSON.stringify(descriptor));
  await writeFile(resolve(directory,'prepared/page.json'),page.text);
  assert.deepEqual(await loadObjectPageData('body',root),{assets:data.assets,controls:data.controls});
