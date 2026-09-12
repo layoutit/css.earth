@@ -1,32 +1,95 @@
-import {required} from '../../../../tools/test-values.mts';
+// Draft replacement for the retired terrestrial-lane unit tests of Callisto
+// (modelled on tests/objects/unit/pluto/runtime-contract.test.mts). Decoder-level tests that only read the
+// source files and tools/objects/terrestrial-layers decoders stay valid and are kept beside this file.
+import { required } from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
-import { test } from "node:test";
-import runtimeDefinition from "../../../../src/planets/callisto/prepared/runtime.json" with {type:"json"};
-const {id: objectId, controls, ...presentation} = runtimeDefinition;
-const PREPARED_PRESENTATION = {...presentation, schema:PREPARED_PRESENTATION_SCHEMA};
-import { requirePreparedPresentation, PREPARED_PRESENTATION_SCHEMA } from "../../../../src/platform/prepared-presentation-contract.mts";
-import { ASTRONOMICAL_UNIT_KILOMETERS } from "../../../../src/platform/solar-geometry.mts";
+import test from "node:test";
+import runtimeDefinition from "../../../../src/planets/callisto/prepared/runtime.json" with { type: "json" };
+import assets from "../../../../src/planets/callisto/prepared/assets.json" with { type: "json" };
+import scene from "../../../../src/planets/callisto/prepared/scene.json" with { type: "json" };
+import lenses from "../../../../src/planets/callisto/prepared/lenses.json" with { type: "json" };
+import controls from "../../../../src/planets/callisto/prepared/controls.json" with { type: "json" };
+import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
+import { OBJECTS } from "../../../../site/objects.mts";
+import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 
-test("Callisto uses one shared scene, sourced lenses and shared shadows", () => {
-  requirePreparedPresentation(PREPARED_PRESENTATION, {controls:runtimeDefinition.controls});
-  assert.equal(runtimeDefinition.id,"callisto");
-  assert.equal(runtimeDefinition.tree.nodes.filter(node => node.className?.includes("polycss-camera")).length,1);
-  assert.deepEqual(runtimeDefinition.controls.lenses.controls.map(lens => lens.id),["normal","enhanced","infrared"]);
-  for (const variant of runtimeDefinition.variants) {
-    const lighting = required(variant.materials.find(material => material.track === "lighting"));
-    assert.equal(lighting.enabled,true);
-    assert.equal(lighting.mode,variant.when.shadows ? "frames" : "fixed");
+const LENS_IDS = ["normal","enhanced","infrared"];
+
+objectRuntimePackageTests(runtimeDefinition);
+
+test("Callisto's actual import closure has only shared runtime owners", async () => {
+  const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "callisto") });
+  assert.equal(audit.complete, true);
+  for (const name of ["runtime/object-runtime", "rendering/prepared-residency", "rendering/object-selection-runtime", "rendering/object-control-binding", "rendering/prepared-playback", "solar-system/cubic-sky-runtime"]) {
+    assert.ok(audit.sharedClosure.includes(`src/renderers/css/${name}.ts`));
   }
 });
 
-test("Callisto's prepared orbit surrounds Jupiter at its physical distance", () => {
-  const view = runtimeDefinition.heliocentricView.plan;
-  const parent = required(view.system.bodies.find(body => body.id === "jupiter"));
-  assert.equal(view.orbit.centerBodyId,"jupiter");
-  assert.ok(Math.abs(view.orbit.semiMajorAxisAu * ASTRONOMICAL_UNIT_KILOMETERS / 1883000 - 1) < .02);
-  assert.ok(Math.hypot(...view.orbit.focus.map((value,i) => value - parent.position[i])) <= Math.sqrt(3)/2);
-  assert.ok(view.sun.distanceAu > 4.8);
-  assert.ok(view.system.bodies.every(body => body.id !== "callisto"));
-  const parentResource = required(runtimeDefinition.assets.entries.find(entry => entry.key === "parent-marker"));
-  assert.equal(parentResource.url,"/scenes/callisto/callisto-parent-jupiter.webp");
+test("Callisto is prepared by the generic raster lane with the source-radius sphere, the Lambert lighting bank and its 3 lenses", () => {
+  assert.equal(scene.schema, "csscallisto-prepared-runtime-scene@1");
+  assert.equal(scene.runtimeGeometry, false);
+  assert.equal(scene.runtimeRasterization, false);
+  assert.equal(scene.body.equatorialRadius, 230);
+  assert.equal(scene.body.polarRadius, 230);
+  assert.deepEqual([scene.body.latitudeSegments, scene.body.longitudeSegments], [16, 32]);
+  assert.equal(scene.body.leaves.length, 450, "448 band leaves plus two polar caps: the mesh the retired lane already used");
+  assert.equal(scene.body.sourceMapSize[0], 4096);
+  // No atmosphere: the material is the row-sharded Lambert bank, not the atmosphere phase atlas.
+  assert.equal(scene.material.runtimeLighting, false);
+  assert.equal(scene.material.frameCount, 256);
+  assert.equal(assets.atmosphere, undefined);
+  assert.equal(assets.lighting.frameCount, 256);
+  assert.deepEqual(Object.keys(assets.surfaces), LENS_IDS);
+  assert.deepEqual(lenses.controls.map(({ id }) => id), LENS_IDS);
+  assert.equal(lenses.defaultLens, "normal");
+  assert.deepEqual(controls.settings.controls.map(control => control.name), ["shadows","stars"]);
+  // The composite material is a separate silhouette-fitted root, never a plane inside the scene.
+  assert.ok(runtimeDefinition.tree.nodes.some(node => node.className?.includes("callisto-material-composite")));
+  assert.ok(runtimeDefinition.viewBindings.some(binding => binding.kind === "silhouette-fit"));
+  assert.equal(runtimeDefinition.heliocentricView.plan.orbit.centerBodyId, "jupiter", "the orbit still surrounds the parent while the Sun keeps its own position");
+});
+
+test("Callisto lenses keep their prepared legends and false-colour declarations", () => {
+  const byId = new Map(controls.lenses.controls.map(control => [control.id, control]));
+  for (const control of lenses.controls) {
+    const shell = required(byId.get(control.id));
+    assert.equal(typeof shell.description, "string");
+    if (shell.legend?.kind === "scale") assert.ok((shell.legend.colors?.length ?? 0) >= 2 && (shell.legend.labels?.length ?? 0) >= 2);
+    if (shell.legend?.kind === "categories") assert.ok((shell.legend.items?.length ?? 0) >= 2);
+  }
+});
+
+test("Callisto publishes every declared toggle through the shared controls and selection owner", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const nodes = f.stage.querySelectorAll("*");
+    for (const name of ["shadows","stars"]) {
+      const input = required(f.inputs.get(name));
+      input.checked = !input.checked;
+      const listener = required(input.listeners.get("change"));
+      if (typeof listener === "function") listener(new Event("change")); else listener.handleEvent(new Event("change"));
+      await f.settle();
+      assert.equal(required(f.selection.state().committed)[name], input.checked);
+      if (name === "stars") assert.equal(f.stage.classList.contains(`callisto-hide-stars`), !input.checked);
+      else assert.equal(f.presentation.observe().materials.lighting.rotationEnabled, input.checked);
+    }
+    assert.equal(f.inputs.get("atmosphere"), undefined, "an airless body declares no atmosphere toggle");
+    assert.equal(f.inputs.get("orbit"), undefined, "the retired lane's orbit toggle is gone");
+    assert.deepEqual(f.stage.querySelectorAll("*"), nodes);
+    assert.deepEqual(f.errors, []); f.lifetime.destroy(); assert.equal(f.listenerCount(), 0);
+  } finally { f.restore(); }
+});
+
+test("Callisto lens selection keeps the retained tree and switches only the surface textures", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const records = f.stage.querySelectorAll("*");
+    for (const id of [...LENS_IDS.slice(1), LENS_IDS[0]]) {
+      const request = f.selection.dispatch({ kind: "lens", id }); await f.settle(); assert.equal(await request, true);
+      assert.equal(required(f.selection.state().committed).lensId, id);
+      assert.deepEqual(f.stage.querySelectorAll("*"), records);
+      assert.equal(f.stage.dataset.lens, id);
+    }
+    assert.deepEqual(f.errors, []);
+  } finally { f.restore(); }
 });

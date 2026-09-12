@@ -82,9 +82,9 @@
         "description": "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo.",
         "title": "Monochrome mosaic",
         "detail": "Corrected mosaic",
-        "thumbnail": "/scenes/oberon/oberon-normal-thumbnail.webp",
-        "surface": "oberon-normal-surface@2x.webp",
-        "poles": "oberon-normal-poles@2x.webp",
+        "thumbnail": "oberon-lens-normal.webp",
+        "surface": "oberon-normal.webp",
+        "poles": "oberon-poles-normal.webp",
         "source": {
           "id": "schenk-2020-oberon-normal",
           "path": "../manifest.json",
@@ -105,8 +105,8 @@
       },
       {
         "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
+        "name": "stars",
+        "label": "Stars",
         "checked": true
       }
     ]

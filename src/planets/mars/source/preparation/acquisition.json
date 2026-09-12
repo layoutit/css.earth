@@ -30,40 +30,8 @@
       "groups": [
         "refresh"
       ],
-      "path": "openspace/phobos-globe.asset",
-      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/moons/phobos/globe.asset"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "openspace/deimos-globe.asset",
-      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/moons/deimos/globe.asset"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
       "path": "surface/mars-viking-mdim21-color-1km.jpg",
       "url": "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "moons/phobos.glb",
-      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/mars/phobos/model/1/Phobos_1_1000.glb"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "moons/deimos.glb",
-      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/mars/deimos/model/1/Deimos_1_1000.glb"
     },
     {
       "kind": "tile-mosaic",
@@ -144,6 +112,14 @@
       ],
       "path": "stars/eso0932a.tif",
       "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/MARS_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MARS_nomenclature_center_pts.zip"
     }
   ]
 }

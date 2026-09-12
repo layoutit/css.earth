@@ -1,0 +1,66 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "3112",
+      "item": "Q3199567",
+      "title": "Kraken Catena",
+      "url": "https://en.wikipedia.org/wiki/Kraken_Catena",
+      "revision": "1330087472",
+      "extract": "Kraken Catena is a pit chain (catena) and likely tectonic fault on Triton, the largest natural satellite of Neptune."
+    },
+    {
+      "id": "3368",
+      "item": "Q3237221",
+      "title": "Leviathan Patera",
+      "url": "https://en.wikipedia.org/wiki/Leviathan_Patera",
+      "revision": "1330088422",
+      "extract": "Leviathan Patera is a major cryovolcanic caldera on Neptune's largest moon Triton. Discovered by the Voyager 2 spacecraft in 1989, Leviathan Patera is located in Monad Regio and within Cipango Planum's western regions."
+    },
+    {
+      "id": "3588",
+      "item": "Q3843416",
+      "title": "Mah Cavus",
+      "url": "https://en.wikipedia.org/wiki/Mah_Cavus",
+      "revision": "1373172765",
+      "extract": "Mah Cavus is a cavi on Triton, a Neptunian moon."
+    },
+    {
+      "id": "5208",
+      "item": "Q3446416",
+      "title": "Ruach Planitia",
+      "url": "https://en.wikipedia.org/wiki/Ruach_Planitia",
+      "revision": "1370946444",
+      "extract": "Ruach Planitia is a roughly circular flat plain and probable cryolava lake on Neptune's moon Triton. It is located in Triton's northern hemisphere within Monad Regio and directly borders the cryovolcanic plains of Cipango Planum to the east and Tuonela Planitia to the west."
+    },
+    {
+      "id": "5439",
+      "item": "Q3480620",
+      "title": "Set Catena",
+      "url": "https://en.wikipedia.org/wiki/Set_Catena",
+      "revision": "1372160983",
+      "extract": "Set Catena is a pit chain (catena) and likely tectonic fault located on Triton, the largest natural satellite of Neptune. It, along with Kraken Catena, is located near Leviathan Patera, a major cryovolcanic feature; as such, Set Catena may have played a role in rift-induced cryovolcanic activity in Leviathan Patera."
+    },
+    {
+      "id": "5598",
+      "item": "Q3486664",
+      "title": "Slidr Sulci",
+      "url": "https://en.wikipedia.org/wiki/Slidr_Sulci",
+      "revision": "1372162291",
+      "extract": "Slidr Sulci is a major tectonic fault on Neptune's largest moon Triton. It crosses a wide variety of terrains on Triton, most prominently the cantaloupe terrain, an unusually textured region resembling the skin of a North American cantaloupe."
+    },
+    {
+      "id": "6134",
+      "item": "Q3542206",
+      "title": "Tuonela Planitia",
+      "url": "https://en.wikipedia.org/wiki/Tuonela_Planitia",
+      "revision": "1370946558",
+      "extract": "Tuonela Planitia is an elongated plain and probable cryolava lake on Neptune's moon Triton. Located in Triton's northern hemisphere within Monad Regio, it overlies part of Triton's unusual cantaloupe terrain."
+    }
+  ]
+}

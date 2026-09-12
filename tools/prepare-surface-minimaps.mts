@@ -2,17 +2,24 @@ import { isArray } from '../src/platform/is-array.mts';
 import type {ResizeOptions,WebpOptions} from 'sharp';
 import type {SurfacePreviewDirectories} from './surface-preview-source.mts';
 import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePreviewSurface} from './surface-preview-source.mts';
-import {parseObservationPreviewLens} from './objects/static-surface/source-contract.mts';
 import {isRecord,requireRecord,requireArray,requireString,requireFiniteNumber} from './source-values.mts';
 import {shape,text,number,array,optional} from './objects/terrestrial-layers/source-records.mts';
-const parseObservationPreview=shape({surfaceProjection:optional(text),densities:array(number),width:number,height:number,latitudeSegments:optional(number),lenses:array(parseObservationPreviewLens)});
 const parseMinimapFraming=shape({centerLongitudeDegrees:optional(number),excludeLenses:optional(array(text))});
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { basename, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { orientLatitudeBands } from './objects/static-surface/projection.mts';
-import { observationRaster } from './objects/static-surface/raster.mts';
+import { createSurfaceInterpreter, parseInterpreterRecipe, type InterpreterRecipe } from './objects/observation/interpret.mts';
+// One interpreter per object so the sidebar map previews a science surface through the decoder that packed it.
+const interpreters = new Map<string, ReturnType<typeof createSurfaceInterpreter>>();
+function interpretFor(objectDirectory: string, objectId: string, recipe: InterpreterRecipe) {
+  let pending = interpreters.get(objectDirectory);
+  if (!pending) {
+    pending = createSurfaceInterpreter({ objectId, displayName: objectId, sourceDirectory: resolve(objectDirectory, 'source'), recipe });
+    interpreters.set(objectDirectory, pending);
+  }
+  return pending;
+}
 import { recipeSurfacePreviews, assertSurfacePreviewCoverage } from './surface-preview-rasters.mts';
 import { OBJECTS } from '../site/objects.mts';
 
@@ -36,6 +43,8 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
   const sourceSurfaces=requireArray(rasterInput?.surfaces ?? []).map(parsePreviewSurface);
   const sourceLenses=requireArray(rasterInput?.lenses ?? []).map(value=>shape({id:text})(value));
   const surfaces = new Map(sourceSurfaces.map(surface => [surface.id, surface] as const));
+  // Raster-lane surfaces with a scientific interpretation preview through the same decoders the lane packs with.
+  const science = new Map(requireArray(rasterInput?.surfaces ?? []).flatMap(value => { const record = requireRecord(value); return isRecord(record.science) ? [[requireString(record.id), record.science] as const] : []; }));
   for (const surface of requireArray(prepared?.surfaces ?? []).map(parsePreviewSurface)) if (surface.map) surfaces.set(surface.id, surface);
   const framingValue=await optionalJson(resolve(objectDirectory, 'source/presentation/minimap.json'));
   const framing=framingValue && parseMinimapFraming(framingValue);
@@ -43,36 +52,6 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
   const excluded = framing?.excludeLenses ?? [];
   if (!isArray(excluded) || excluded.some(id => typeof id !== 'string' ||
       !surfaces.has(id) && !sourceLenses.some(lens => lens.id === id))) throw new Error('Invalid excluded minimap lenses');
-  // These source recipes compile warped face atlases, not reusable flat maps.
-  // Reuse their observation interpretation before projection, including DEM
-  // colors, relief and missing coverage. Never show the raw TIFF or an atlas.
-  if (rasterInput?.kind === 'observation-lenses') {
-    const raster=parseObservationPreview(rasterInput);
-    for (const plan of raster.lenses) {
-      if (excluded.includes(plan.id)) continue;
-      const density = Math.max(...raster.densities);
-      let data, info;
-      if (raster.surfaceProjection === 'oriented-bands') {
-        ({ data, info } = await sharp(resolve(publicDirectory, `${requireString(plan.output)}${density === 2 ? '@2x' : ''}.webp`))
-          .raw().toBuffer({ resolveWithObject: true }));
-        const scale = plan.rasterScale ?? 1;
-        if (info.width !== raster.width * density * scale || info.height !== raster.height * density * scale) throw new Error('Observation preview dimensions drifted.');
-        data = orientLatitudeBands(data, { ...info, bandCount: requireFiniteNumber(raster.latitudeSegments) });
-      } else {
-        ({ data, info } = await observationRaster({
-          input: resolve(objectDirectory, 'source', plan.input), plan,
-          width: raster.width * density, height: raster.height * density,
-        }));
-      }
-      const path = `minimaps/${plan.id}.webp`;
-      await mkdir(resolve(outputDirectory, 'minimaps'), { recursive: true });
-      const nearest = nearestDisplay(plan.scientific, plan);
-      const result = await sharp(data, { raw: info }).resize(minimapResize(nearest))
-        .webp(minimapEncoding(nearest))
-        .toFile(resolve(outputDirectory, path));
-      images.push({ id: plan.id, path, width: result.width, height: result.height });
-    }
-  }
   for (const surface of surfaces.values()) {
     if (excluded.includes(surface.id)) continue;
     const input = surface.map ? resolve(publicDirectory, requireString(surface.map.url.split('/').at(-1)))
@@ -80,8 +59,15 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
     if (!input) continue;
     const path = `minimaps/${surface.id}.webp`;
     await mkdir(resolve(outputDirectory, 'minimaps'), { recursive: true });
-    const nearest = nearestDisplay(surface);
-    let pipeline = sharp(input).resize(minimapResize(nearest));
+    const interpretation = science.get(surface.id);
+    const nearest = nearestDisplay(surface, interpretation?.scientific, interpretation);
+    let pipeline;
+    if (interpretation && typeof surface.source === 'string') {
+      const recipe = requireRecord(rasterInput);
+      const width = requireFiniteNumber(recipe.width), height = requireFiniteNumber(recipe.height);
+      const { data, channels } = await (await interpretFor(objectDirectory, basename(objectDirectory), parseInterpreterRecipe(recipe)))({ id: surface.id, source: surface.source, science: interpretation }, width, height, 1);
+      pipeline = sharp(data, { raw: { width, height, channels } }).resize(minimapResize(nearest));
+    } else pipeline = sharp(input).resize(minimapResize(nearest));
     if (framing?.centerLongitudeDegrees !== undefined) {
       if (!Number.isFinite(framing.centerLongitudeDegrees)) throw new Error('Invalid minimap framing');
       const { data, info } = await pipeline.raw().toBuffer({ resolveWithObject: true });

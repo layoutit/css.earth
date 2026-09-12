@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-surface-features-source@1",
+  "source": "IAU/USGS Gazetteer of Planetary Nomenclature, Mathilde centre points",
+  "snapshotDate": "2026-09-11",
+  "sourcePage": "https://planetarynames.wr.usgs.gov/Page/MATHILDE/target",
+  "license": "Public domain (United States Government work)",
+  "licenseEvidence": "metadata_nomenclature_points_MATHILDE.xml inside the archive declares the use constraint “Public domain.”",
+  "qualification": "IAU-adopted feature names with Gazetteer centre coordinates, diameters and latitude–longitude extents, positive-east longitudes 0–360°. Centre points only: feature outlines are not published, and features without a diameter are not labelled.",
+  "inputs": [
+    {
+      "path": "MATHILDE_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MATHILDE_nomenclature_center_pts.zip",
+      "bytes": 97468,
+      "sha256": "d042bf056ae40cd5a3f0c846412ba7a42c48b0bb1aa9893473b267b80be47bc2"
+    }
+  ]
+}

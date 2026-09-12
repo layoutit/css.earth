@@ -1,6 +1,6 @@
 # Moon source and preparation record
 
-The Moon combines LRO imagery and numeric science products with interpreted geology and a modeled crust-thickness display.
+The Moon combines LRO imagery and numeric science products with interpreted geology and a modeled crust-thickness display, prepared on the shared raster lane used by Mercury, Venus and Mars.
 
 ## Sources
 
@@ -12,19 +12,30 @@ The Moon combines LRO imagery and numeric science products with interpreted geol
 | Geology | [USGS Unified Geologic Map v2 (2020)](https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020), 49 units |
 | Silicate signature | [Lucey et al. (2021)](https://zenodo.org/records/4558194), Christiansen-feature wavelength |
 | Crust thickness | [NASA GRAIL visualization](https://svs.gsfc.nasa.gov/4014/), based on gravity and topography models |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MOON/target) the Moon centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
 
-[The September 2026 lunar thermal review](https://github.com/layoutit/cssEarth/blob/8666462797772dc50bbebecd8618014f5e7bd16c/docs/moons/b10-lunar-thermal/VISUAL-REVIEW.md) records source, reproduction, Chrome, installation and test results. All three numeric grids reproduce exactly; 507 independent original-to-atlas probes and eight separately fetched byte anchors pass. Browser captures cover DPR 1 and 2, close zoom and the narrow selector. The scene geometry and retained tree are unchanged. Aggregate readiness remains limited by the shared audit and missing unrelated build inputs.
+Lane change (this PR): the static-surface lane was retired for the Moon; the same pinned inputs and the same numeric interpretation (`observationRaster`) now feed the shared raster lane. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the three GHRM grids, LOLA, the Christiansen feature and the geology grid were re-anchored at the Copernicus, Tycho and Tsiolkovskiy cells after the lane change. No new science review is claimed.
+
+[The September 2026 lunar thermal review](https://github.com/layoutit/cssEarth/blob/8666462797772dc50bbebecd8618014f5e7bd16c/docs/moons/b10-lunar-thermal/VISUAL-REVIEW.md) records source, reproduction, Chrome, installation and test results. All three numeric grids reproduce exactly; 507 independent original-to-atlas probes and eight separately fetched byte anchors pass. Browser captures cover DPR 1 and 2, close zoom and the narrow selector. The scene geometry and retained tree of that review belong to the retired static lane; the current tree is the shared raster-lane sphere. Aggregate readiness remains limited by the shared audit and missing unrelated build inputs.
 
 [Earlier independent source anchors](source/validation/scientific-source-anchors.json) preserve LOLA and the superseded Diviner GDR L3 decoder evidence; they do not validate the new GHRM values.
 
 ## Known problems
 
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for the Moon (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code and the 7,063 lettered satellite craters (“Tycho A” and the like, which repeat a parent name), folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge was fixed by drawing Gazetteer rims under both edge hypotheses and keeping the one where Tycho and Copernicus on the LROC colour mosaic coincide with the imagery.
+
+Landing sites: 80 spacecraft landing, touchdown or impact sites and 2 published traverse paths are labelled beside the IAU names (`source/features/sites.json`). Each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from, with the stated latitude kind and longitude convention; sites are unsized points ranked like a 20 km feature and the caption shows the quoted source sentence with its publisher.
+
+Feature notes: 1749 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
+
 - LOLA's 0.5 m quantization and map spacing are not terrain-accuracy estimates; geometry stays spherical.
 - Diviner midnight maps combine 2009–2022 observations, not current temperatures. Unobserved polar caps and internal gaps stay neutral. Thermal-model anomalies retain terrain effects and do not establish geothermal activity. Rock abundance estimates area fraction, not boulder counts; values above 2% share the top display color. Per-cell uncertainty is not supplied.
 - Christiansen-feature values are wavelengths, not mineral abundances. Coverage stops at ±70° and residual viewing effects remain.
 - Geology colors are interpretations; the GRAIL display depends on model assumptions.
+- The LROC colour map is a 2,048 × 1,024 source; the DPR-2 atlas is a 2× Lanczos upsample of it, unlike the numeric lenses, which are painted at their native 4,096 × 2,048 grid. A larger CGI Moon Kit colour map is a candidate refresh (see the source survey).
+- The scene now uses the shared physical frame: pole, prime meridian and Sun direction at the shared epoch come from the IAU/WGCCRE rotation model in `src/platform/solar-geometry.mts`, and the Shadows toggle drives a Lambert terminator bank. The retired lane showed limb curvature only.
 
 [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
 
@@ -33,12 +44,16 @@ The Moon combines LRO imagery and numeric science products with interpreted geol
 
 The Moon is a first-class cssEarth object. It is not mounted inside Earth.
 
-Authored geometry, observation-processing parameters, controls, and physical
-source bindings live in `source/preparation/` and `source/content/`, pinned by
-`object.json`. The shared `tools/objects/static-surface/` preparation compiles
-those records into `prepared/*.json`. The numeric scientific lenses are prepared from the original PDS arrays;
-source values and missing coverage are decoded before display color is chosen. Unit and browser
-checks live under `tests/objects/{unit,browser}/moon/`.
+Authored geometry, observation-processing parameters, controls, legends and
+physical source bindings live in `source/preparation/`, `source/presentation/`
+and `source/content/object.json`, pinned by `object.json`. The generic authored
+preparation (`tools/objects/prepare-authored.ts`: raster, celestial, scene,
+content, composite presentation, features) compiles those records into
+`prepared/*.json`. Each numeric scientific lens declares its interpretation in
+the `science` block of `source/preparation/raster.json`; the shared observation
+painter decodes source values and missing coverage before display colour is
+chosen, at both prepared densities. Unit checks live under
+`tests/objects/unit/moon/`; browser checks use the shared conformance suite.
 
 ## Physical and orbital facts
 
@@ -51,12 +66,22 @@ checks live under `tests/objects/{unit,browser}/moon/`.
 
 ## Scene and sky
 
-- The retained globe configuration is checked from OpenSpace commit
-  `56e29b54b8592084ff1fef47c2e08de0b22ce516`.
+- The OpenSpace globe configuration snapshot (commit
+  `56e29b54b8592084ff1fef47c2e08de0b22ce516`) is retained as provenance; no
+  preparation step reads it.
 - The cubic sky is prepared from ESO/S. Brunier's Milky Way panorama under
   CC BY 4.0. HYG v4.1 coordinates are used only for registration auditing.
 - The directional Sun uses the repository's clean-room, retained-billboard
-  preparation standard at a mean heliocentric distance of 1 AU.
+  preparation standard at a mean heliocentric distance of 1 AU. Its direction,
+  the pole and the prime meridian at the shared epoch come from the IAU/WGCCRE
+  rotation model through `src/platform/solar-geometry.mts`, as for every
+  prepared body; the previous static lane claimed no epoch orientation.
+- The prepared mesh is the shared sphere: 230 units, 16 latitude bands and 32
+  longitude segments, the 50-pixel tile, 0.005 seam overlap, spin origin 0°
+  and an 84-second visual rotation (an accelerated presentation choice). The
+  6.68° obliquity and the 27.322-day rotation are recorded with the body from
+  `source/orbit/moon.json`. Lighting is the Mercury-style Lambert bank (256
+  frames, ambient 0.05, terminator smoothstep 0–0.1) with no atmosphere.
 
 </details>
 
@@ -68,9 +93,11 @@ checks live under `tests/objects/{unit,browser}/moon/`.
 - NASA Scientific Visualization Studio CGI Moon Kit colour map, prepared from
   LRO/LROC and LOLA data: <https://svs.gsfc.nasa.gov/4720/>
 - Checked input: `source/surface/lroc-color-2k.jpg`
-- The preparation step packs the equirectangular source into retained
-projective latitude bands and a prepared polar atlas. Runtime performs no
-geometry or raster preparation.
+- The raster lane resamples the source to 2,048 × 1,024 texels for DPR 1 and
+  4,096 × 2,048 for DPR 2 (`density-before-pack`), applies the retained tonal
+  presentation (saturation 0.35, linear gain 0.9, offset −78, sharpen 0.65),
+  packs 16 latitude bands with a 16-texel gutter and prepares 256-pixel
+  orthographic polar tiles. Runtime performs no geometry or raster preparation.
 
 </details>
 
@@ -142,13 +169,14 @@ output-cell checks at USGS/IAU Copernicus, Tycho and Tsiolkovskiy coordinates
 verify the corresponding source values through the numeric painter. These are
 landform alignment anchors, not a claim of subpixel survey accuracy.
 
-Nearest display sampling preserves selected numeric values and gaps: latitude-band
-packing copies pixels, polar tiles use nearest pixel-center samples, and
-thumbnails use nearest resizing. Surface, pole and thumbnail WebPs are lossless.
-This preserves prepared palette colors, not a claim that browser-transformed
-screen pixels are quantitative samples. The three GHRM atlases use 4096 × 2048
-canonical materials; existing visible-color, topography, GRAIL, silicate and
-geology materials keep their previous sizes and image bytes.
+Nearest display sampling preserves selected numeric values and gaps: each
+numeric lens is painted directly at 2,048 × 1,024 and 4,096 × 2,048 from the
+source grid (no image resampling), latitude-band packing copies pixels, polar
+tiles use nearest pixel-center samples, and thumbnails use nearest resizing.
+Surface, pole and thumbnail WebPs of numeric lenses are lossless. This preserves
+prepared palette colors, not a claim that browser-transformed screen pixels
+are quantitative samples. The visible-colour and GRAIL lenses use the ordinary
+Lanczos resampling and lossy WebP of the shared lane.
 Independent B10 checks bind all original, compact and runtime hashes and verify
 507 original-to-texture probes plus eight separately fetched raw-byte anchors.
 The earlier LOLA numerical anchors remain in
@@ -159,8 +187,9 @@ The GRAIL crustal-thickness print remains unchanged at
 [NASA SVS](https://svs.gsfc.nasa.gov/4014/). It is a gravity/topography-derived
 interior model with assumed densities, shown with shaded relief. It has not
 become a new numeric crust grid. The old LOLA press JPEG is no longer an active
-input; its existing local file is not removed. All lenses use the same
-retained projective-band and polar-atlas topology.
+input; its existing local file is not removed. All lenses use the same shared
+sphere mesh and polar-tile topology; every lens legend is declared beside its
+lens in `source/content/object.json` (colour stops, labels and units).
 
 PDS publicly archives these NASA mission scientific products. Preserve the
 named producers, exact product/version, original archive links and [PDS data
@@ -170,9 +199,11 @@ license; this package does not invent one or relicense a journal article.
 
 ## Qualification
 
-The standalone Moon is a source-backed retained-DOM presentation. Its mean
-heliocentric distance is catalogued as 1 AU for navigation. It is not an
-epoch-specific ephemeris and does not claim native camera parity.
+The standalone Moon is a source-backed retained-DOM presentation on the
+shared raster lane. Its mean heliocentric distance is catalogued as 1 AU for
+navigation and its world frame comes from the shared solar geometry at the
+shared epoch. The camera and background sky do not represent an observer at a
+stated epoch, and no native camera parity is claimed.
 
 </details>
 

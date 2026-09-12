@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-surface-features@1",
+  "directory": "features",
+  "archive": "MARS_nomenclature_center_pts.zip",
+  "members": {
+    "attributes": "MARS_nomenclature_center_pts.dbf",
+    "projection": "MARS_nomenclature_center_pts.prj",
+    "metadata": "metadata_nomenclature_points_MARS.xml"
+  },
+  "surfaceMap": "presentation/surface-map.json",
+  "mapLeftEdgeLongitudeDeg": 180,
+  "output": "mars-features.json",
+  "publicBase": "/scenes/mars/",
+  "target": {
+    "className": "mars-body"
+  },
+  "lensIds": [
+    "normal",
+    "elevation",
+    "thermal"
+  ],
+  "kinds": {
+    "point": [
+      "AA",
+      "FA"
+    ],
+    "linear": [
+      "RU",
+      "DO",
+      "VA",
+      "CA",
+      "FO"
+    ],
+    "region": [
+      "PL",
+      "PM",
+      "MO"
+    ]
+  },
+  "excludedTypeCodes": {
+    "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+  },
+  "labelPolicy": {
+    "minimumZoomShare": 0,
+    "minimumDiameterPixels": 40,
+    "alwaysVisibleCount": 0,
+    "maximumVisible": 40,
+    "limbCosine": 0.12
+  },
+  "outline": {
+    "pieces": 256
+  },
+  "notes": "notes.json",
+  "sites": {
+    "document": "sites.json",
+    "inputs": [
+      "traverses/msl_localized_pos.csv",
+      "traverses/m2020_best_tactical.csv"
+    ]
+  }
+}

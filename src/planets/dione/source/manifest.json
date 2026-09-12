@@ -894,6 +894,84 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-dione-nomenclature-center-pts",
+      "path": "features/DIONE_nomenclature_center_pts.zip",
+      "expectedBytes": 293898,
+      "expectedSha256": "36134cefcab7413862b4069f52fa0f98d9ab052a9f35151feb15b243b3f50061",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DIONE_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Dione on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Dione centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DIONE/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "dione-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1000,
+      "expectedSha256": "77348111da79c07a2c685672a33a578e7e464cf4f84d3ec4bc10f0004570b82a",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "dione-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1226,
+      "expectedSha256": "17dec8cd07da353b0dbd4b4ed0664462264038a3da6c8e1bd6757d26bc5dee6a",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "dione-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 152,
+      "expectedSha256": "604b8ba839009129405750184ca9fbcf99209450c6e5f75bd3ae62aa9dc6a180",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
     }
   ],
   "documents": [
@@ -949,8 +1027,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 11324,
-      "expectedSha256": "37b3916975aab68da7f0c3a20a1ec3766e889f8d7ba3f64ce7f96ea4b709333d"
+      "expectedBytes": 11576,
+      "expectedSha256": "75def5b2a710f83781b303f7bb21b2813a67c7b2c4d78d3489ae15b094c9e22e"
     },
     {
       "path": "content/object.json",
@@ -1087,6 +1165,29 @@
       "purpose": "Cassini atlas preparation recipe, source review or conversion receipt.",
       "expectedBytes": 11294,
       "expectedSha256": "a64f9aa64816043325a0eedaf20bbb8c5ec640f1feab0212e9d4ec41ace479fc"
+    },
+    {
+      "id": "dione-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 1412,
+      "expectedSha256": "b0ec3b6f42390fd3745894d0c75a1d62f46a31674f379ff896aacb89dd685591",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 2 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts dione: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ],
   "generatedIntermediates": []

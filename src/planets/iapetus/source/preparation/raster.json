@@ -1,0 +1,191 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/iapetus/",
+  "sourceWidth": 8192,
+  "sourceHeight": 4096,
+  "width": 4096,
+  "height": 2048,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "iapetus-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssiapetus-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88
+  },
+  "surfaces": [
+    {
+      "id": "normal",
+      "output": "iapetus-{id}{suffix}.webp",
+      "thumbnail": "iapetus-lens-{id}.webp",
+      "source": "observations/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "cassini-voyager-2008-iapetus",
+        "id": "normal",
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "channels": "monochrome",
+          "zeroValidity": "all-channels",
+          "noData": 0,
+          "centerLongitude": 0,
+          "resolutionMeters": 802.85145591739
+        }
+      }
+    },
+    {
+      "id": "enhanced",
+      "output": "iapetus-{id}{suffix}.webp",
+      "thumbnail": "iapetus-lens-{id}.webp",
+      "source": "observations/PIA18436.jpg",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "cassini-iss-2014-iapetus-color",
+        "id": "enhanced",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": null,
+          "centerLongitude": 180
+        }
+      }
+    },
+    {
+      "id": "infrared",
+      "output": "iapetus-{id}{suffix}.webp",
+      "thumbnail": "iapetus-lens-{id}.webp",
+      "source": "cassini-ice/iapetus-infrared-display.tif",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "iapetus-cassini-infrared",
+        "id": "infrared",
+        "textureScale": 0.125,
+        "validity": {
+          "kind": "geotiff-rgb-bands",
+          "samples": [
+            0,
+            1,
+            2
+          ],
+          "alphaBand": 3,
+          "sampleBytes": 2,
+          "noData": 0,
+          "centerLongitude": 180,
+          "resolutionMeters": 4516.039439535328,
+          "origin": [
+            -2312212.193042088,
+            1156106.096521044
+          ],
+          "grid": {
+            "pixelsPerDegree": 2.8444444444444446,
+            "sampleOffset": 511.5,
+            "lineOffset": 255.5
+          }
+        }
+      }
+    },
+    {
+      "id": "ice-absorption",
+      "output": "iapetus-{id}{suffix}.webp",
+      "thumbnail": "iapetus-lens-{id}.webp",
+      "source": "cassini-ice/iapetus-ice-absorption.tif",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "ice-absorption",
+        "label": "Ice absorption",
+        "format": "geotiff",
+        "path": "cassini-ice/iapetus-ice-absorption.tif",
+        "consumer": "ice-absorption",
+        "title": "Partial Cassini VIMS water-ice signature",
+        "description": "Near-2.02 µm water-ice absorption in selected Cassini observations; not ice abundance.",
+        "minimum": 0,
+        "maximum": 0.8,
+        "colors": [
+          "#312b66",
+          "#327caf",
+          "#7fcdbb",
+          "#edf8b1"
+        ],
+        "labels": [
+          "0",
+          "0.4",
+          "0.8"
+        ],
+        "units": "band-depth fraction",
+        "sourceUrl": "https://vims.univ-nantes.fr/cube/1568129671_1",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "textureScale": 0.125,
+        "grid": {
+          "width": 1024,
+          "height": 512,
+          "centerLongitude": 0,
+          "referenceRadiusMeters": 736000,
+          "noData": -9999,
+          "origin": [
+            -2312212.193042088,
+            1156106.096521044
+          ],
+          "resolution": [
+            4516.039439535328,
+            -4516.039439535328
+          ],
+          "wrapLongitude": true
+        }
+      }
+    }
+  ],
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "billboardFrameSize": 24,
+    "billboardColumns": 16,
+    "rowOutput": "iapetus-lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "iapetus-lighting-{density}x-billboard.webp",
+    "minimumLightViewZ": -1,
+    "maximumLightViewZ": 1,
+    "frameCount": 256,
+    "shadowlessFloodLimbFloor": 0.35,
+    "ambientIntensity": 0.05,
+    "radiusScale": 0.505,
+    "terminator": [
+      0,
+      0.1
+    ],
+    "maximumAlpha": 0.95,
+    "bankSchema": "cssiapetus-prepared-lighting-bank@1",
+    "billboardSchema": "cssiapetus-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "cssiapetus-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  }
+}

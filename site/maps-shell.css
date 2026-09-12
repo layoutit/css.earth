@@ -222,6 +222,7 @@
 }
 
 .planet-destination-results[hidden],
+.planet-feature-results[hidden],
 .planet-destination-panel[hidden],
 .planet-destination-list > li[hidden] { display: none; }
 .planet-destination-list { margin: 0; padding: 0; list-style: none; }

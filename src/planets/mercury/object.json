@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "21ccbac00dd3c734f4d8764391e6d6c352d5f47b3609991c9aacf99d8c4fca44"
+    "sha256": "50f3e771495081a11fed1e5c0c24739c603f65c92289c2b9cb0edd640e0287e0"
   },
   "id": "mercury",
   "properties": {
@@ -18,6 +18,7 @@
         "sky-sun",
         "lenses",
         "charts",
+        "features",
         "system-markers",
         "scene",
         "controls",
@@ -98,12 +99,17 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "1e9217f574286a21b1e4da04b284aeabd8d241b9407cafa935feaa60cdadbf56"
+          "sha256": "44c6ae47afafc1446e186fdb253249783c1574a025d34e2c7122ac83678176f5"
         },
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
           "sha256": "c986f2e8e412262fb838357f2724842e1878045a8c83ef6b4f43931035c44424"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "f14b49150c5ee8b43e702f874cfa65c13303aad58a94c8ebd0b0c93e71c1e77f"
         }
       ],
       "shape": {
@@ -151,6 +157,10 @@
         "surface": "body",
         "lens": "interior",
         "material": "lighting"
+      },
+      "features": {
+        "source": "features",
+        "maxEntries": 1000
       }
     },
     "page": {
@@ -159,7 +169,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0fafbbd2238aa29f4cd99e0aad0780555cf82b1358b2ec9f682e2e8eef48719f"
+        "sha256": "c09099435742eda3c937fdfe999232d4c742a026ee26f8691f8cf5d19f5cd410"
       }
     },
     "catalog": {

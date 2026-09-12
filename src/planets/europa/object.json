@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "0342eaf0c73de2c4b37dd29b37fee3818d68293bd395210588566bc898b96f16"
+    "sha256": "6e20e4f7a680f8a4f4a9f5818437d69e26b2df77b730c46d54fd80b062f3d3a3"
   },
   "id": "europa",
   "properties": {
@@ -38,9 +38,14 @@
       "label": "Europa",
       "steps": [
         "verify-sources",
+        "title",
         "assets",
+        "features",
+        "panel-content",
+        "lenses",
         "starfield",
         "sky-sun",
+        "system-markers",
         "scene",
         "controls",
         "presentation",
@@ -51,7 +56,7 @@
       "surfaces": [
         {
           "id": "body",
-          "source": "terrestrial",
+          "source": "geometry",
           "projection": "equirectangular",
           "lenses": [
             {
@@ -90,20 +95,40 @@
       "materials": [
         {
           "id": "lighting",
-          "source": "terrestrial",
+          "source": "raster",
           "model": "lit"
         }
       ],
       "sources": [
         {
-          "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "8e8e832aefcefcab28c76a8c9c4eadb7eb31d5c8ff234a834d31967f83f73184"
+          "id": "raster",
+          "path": "source/preparation/raster.json",
+          "sha256": "25e96b1b046456eb88af3903bdf0bb4543addffedf61a1db8b0e7679171cd7c2"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json",
+          "sha256": "da0a452d777481cde1a97248d2b5258d6d409c2bb377d82a0c50f963297abe48"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "f0a89756833f75ca3f2691e5c98461b21289d9e90eeab6afc44113bcc30fe301"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "e688a2fc4afd8b205a34e7769384b9d56c4c7ad13e33befc1384119321d42c41"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "c07b3a4a304f992e6b46500b051a3838d80967e131556f0fcabf96c103ff18ee"
+          "sha256": "adea0fe714df61db29809426fc78d414766723e35b1cca490aae48371373a85d"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json",
+          "sha256": "4f6d21e75d3b88a7cccf2b984c2cee8778ad8f388159444859324ca477b10df6"
         },
         {
           "id": "title",
@@ -118,17 +143,26 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "b0154c84662fa90ce2fcc10046dba1a5b6f09b1527682d7f81ee3344ccfcb3c0"
+          "sha256": "94cec47f070ff5ecd4418e1bb74ddc91bd58eb5d1b04339555e7443f81ba9cb3"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "5ff95fe1d60c55bb3a7c128b05ec43ad079f18078826ed27290c92fea4d936a9"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2500
+      }
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/europa-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6a5b5a517ecc3b87e2beb68c00c2de1631e0a061e2abd0794e6f129b8f21da42"
+        "sha256": "f32916c38a981a00cd8053abd4abb87e32281edd5cfeaf84d36a453081bab7b8"
       }
     },
     "catalog": {

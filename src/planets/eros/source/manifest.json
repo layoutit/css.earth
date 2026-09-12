@@ -163,6 +163,84 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-eros-nomenclature-center-pts",
+      "path": "features/EROS_nomenclature_center_pts.zip",
+      "expectedBytes": 144223,
+      "expectedSha256": "6c42a16f2ee32aea95f5a4bd753d8723b9ec75c68470f8f3c5f8d5de2ad5f9cb",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/EROS_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Eros on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Eros centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/EROS/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "eros-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 995,
+      "expectedSha256": "ceb31a5e361d2d38e47a902c773d9da9d28c03d7f881d35340eecde2d92740c7",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "eros-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1180,
+      "expectedSha256": "3ff3335cfad4cb3e06beec85aabb6215a123609eeb010e1e940630bc4070e25e",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "eros-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 151,
+      "expectedSha256": "60ada4ee5030f75a1b46489f3ea38c55251306c400a700886db709e16e6f447e",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -205,8 +283,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2475,
-      "expectedSha256": "4c680ec90ff29a7ee3c962ea5f55daa44cf5210d7008932934afb118c7dfc7db"
+      "expectedBytes": 2725,
+      "expectedSha256": "0e1f7535b646c906f932e79a57a47a0a53a627dd56966239a5c1971b6b64ab8b"
     },
     {
       "path": "preparation/navigation.json",
@@ -284,6 +362,50 @@
       "purpose": "Unmodified publisher metadata for the 950 nm albedo map.",
       "expectedBytes": 10462,
       "expectedSha256": "5e9c236b5b423104587b9dc0d351896c07fe709e635c35aff74e9c2ab7ab2c97"
+    },
+    {
+      "id": "eros-surface-sites",
+      "path": "features/sites.json",
+      "expectedBytes": 1771,
+      "expectedSha256": "e91a00f6e8313ec4c2dfbe9841584f47c5299479d7c66c03f16a5bdf511f6ab9",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      }
+    },
+    {
+      "id": "eros-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 1269,
+      "expectedSha256": "00a18eafb133828c3a67250ae9b89e4c1b98cedbeebc4a33e2ebbf55d44163e0",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 2 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts eros: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

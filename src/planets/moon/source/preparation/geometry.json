@@ -1,103 +1,58 @@
 {
-  "schema": "cssearth-static-surface-geometry@1",
-  "kind": "disc-poles",
+  "schema": "cssearth-css-geometry-profile@1",
   "namespace": "moon",
-  "parameters": {
+  "surface": {
+    "radius": 230,
+    "polarRadius": 230,
     "latitudeSegments": 16,
     "longitudeSegments": 32,
-    "displayRadius": 230,
+    "surface": {
+      "url": "/scenes/moon/moon-surface.webp",
+      "width": 2048,
+      "height": 1536
+    },
+    "surfaceLatitudeHeight": 1024,
+    "packedBandGutter": 16,
+    "poles": {
+      "url": "/scenes/moon/moon-poles-surface.webp",
+      "width": 512,
+      "height": 256
+    },
+    "polarTileSize": 256,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "cell",
+    "color": "#aaa7a0"
+  },
+  "projection": {
     "tileSize": 50,
-    "surfaceOverlap": 0.008,
-    "projectiveRasterScale": 2,
-    "polarSurfaceOverlap": 1.035,
-    "polarInnerOverlap": 1.05,
-    "polarInnerInset": 2.4,
-    "cameraZoom": 1.1,
-    "cameraPitch": 40,
-    "rotationSeconds": 84
+    "layerElevation": 50,
+    "seamBleed": 0,
+    "interiorSeamBleed": 8,
+    "overlap": 0.005,
+    "fitToSource": false,
+    "rasterScale": 4,
+    "rasterGutter": 16.0,
+    "rasterOverscan": 0,
+    "positionVariables": false,
+    "projectivePoles": false,
+    "lightColor": "#ffffff",
+    "ambientIntensity": 0.05
   },
-  "surface": {
-    "one": "/scenes/moon/moon-surface.webp",
-    "two": "/scenes/moon/moon-surface@2x.webp",
-    "width": 1024,
-    "height": 512,
-    "presentationCellSize": 32
-  },
-  "poles": {
-    "one": "/scenes/moon/moon-surface-poles.webp",
-    "two": "/scenes/moon/moon-surface-poles@2x.webp",
-    "width": 512,
-    "height": 128
-  },
-  "metadata": {
-    "schema": "cssmoon-prepared-retained-scene@1",
-    "camera": {
-      "cameraModel": "accumulated-matrix3d",
-      "minimumControlPitchDegrees": 0,
-      "maximumControlPitchDegrees": 89,
-      "defaultControlPitchDegrees": 34.230769230769226,
-      "defaultControlYawDegrees": 0,
-      "materialReferenceControlPitchDegrees": 34.230769230769226,
-      "materialReferenceControlYawDegrees": 0,
-      "initialScenePitchDegrees": 40,
-      "maximumScenePitchDegrees": 65,
-      "minimumZoom": 0.42,
-      "maximumZoom": 4,
-      "defaultZoom": 1.1,
-      "sceneScale": 0.022,
-      "logicalBodyDiameter": 460,
-      "pitchBounded": false,
-      "yawBounded": false,
-      "style": "perspective:1000000px",
-      "responsiveFit": {
-        "model": "continuous-aspect-smoothstep",
-        "portraitBaseWidthShare": 0.34,
-        "narrowPortraitWidthShareGain": 0.08,
-        "landscapeWidthShareGain": 0.02,
-        "narrowPortraitAspectRatio": 0.46,
-        "portraitAspectRatio": 0.75,
-        "squareAspectRatio": 1,
-        "maximumHeightShare": 0.61,
-        "maximumMobilePreviewShare": 0.925,
-        "minimumZoom": 0.42,
-        "maximumZoom": 2
-      }
-    },
+  "bodyRotationDegrees": 0,
+  "output": {
+    "schema": "cssmoon-prepared-runtime-scene@1",
+    "materialSchema": "cssmoon-prepared-view-material@1",
+    "layout": "body-container",
     "body": {
-      "meanRadiusKm": 1737.4,
-      "meanDensityGPerCm3": 3.344,
-      "orbitalPeriodDays": 27.322,
       "axialTiltDegrees": 6.68,
-      "displayRadius": 230,
-      "rotationSeconds": 84,
-      "systemTransform": "transform:rotateY(-6.68deg)",
-      "meshTransform": "transform:rotateZ(0deg)",
-      "latitudeSegments": 16,
-      "longitudeSegments": 32,
-      "assets": {
-        "surface": {
-          "one": "/scenes/moon/moon-surface.webp",
-          "two": "/scenes/moon/moon-surface@2x.webp",
-          "width": 1024,
-          "height": 512,
-          "presentationCellSize": 32
-        },
-        "poles": {
-          "one": "/scenes/moon/moon-surface-poles.webp",
-          "two": "/scenes/moon/moon-surface-poles@2x.webp",
-          "width": 512,
-          "height": 128
-        }
-      }
+      "rotationDirection": "prograde",
+      "rotationPeriodEarthDays": 27.322
     },
-    "counts": {
-      "retainedLeafCount": 452,
-      "materialLeafCount": 1,
-      "retainedSkyboxFaceCount": 6,
-      "directionalSunLeafCount": 1,
-      "runtimeGeometryPreparation": false,
-      "runtimeRasterization": false
-    },
-    "qualification": "Source-backed standalone Moon presentation; no epoch-specific ephemeris or native camera parity is claimed."
+    "animation": {
+      "cloudsVisualSeconds": 84,
+      "surfaceVisualSeconds": 84,
+      "direction": "prograde"
+    }
   }
 }

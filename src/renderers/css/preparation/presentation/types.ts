@@ -15,6 +15,8 @@ export interface Lens {
   id: string; view?: string; billboardColor: string;
   surfaceUrl: string; surface2xUrl?: string; polesUrl: string; poles2xUrl?: string;
   materialUrl: string; material2xUrl?: string;
+  /** Emissive bodies: the stationary off-limb context and the limb plate of this lens. */
+  coronaUrl?: string; corona2xUrl?: string; limbUrl?: string; limb2xUrl?: string;
 }
 export interface Lenses { defaultLens: string; controls: Lens[]; }
 export interface AtlasAddress { frameIndex: number; rowIndex: number; url: string; backgroundPosition: string; backgroundSize: string; }
@@ -28,6 +30,8 @@ export interface RasterAssets {
   poles: { url: string; url2x?: string };
   lighting: { banks: Record<string, Bank>; frameCount: number; minimumLightViewZ: number; maximumLightViewZ: number; baseLightAzimuthDegrees: number };
   interior: Record<string, string>;
+  /** An unlit body's plate sizes; present instead of a lighting bank. */
+  emission?: { offLimbContext: { logicalSize: number }; limbMaterial: { logicalSize: number } };
 }
 export interface CompositeMaterial {
   lightingUrl: string; lighting2xUrl?: string; backgroundSize: string; backgroundPositions: string[];
@@ -51,15 +55,17 @@ export interface SourceMaterialTrack extends Omit<PreparedMaterialTrack, 'frame'
   demand: {capacity: number; defaultFrame: number}; rotation: PreparedMaterialRotation & {source: string};
 }
 export interface PresentationDraft {
-  schema: string; camera: CameraPlan; sky: Scene['starfield']; sun: DirectionalSunPlan;
+  schema: string; camera: CameraPlan; sky: Scene['starfield']; sun: DirectionalSunPlan | null;
   assets: PreparedAssets; tree: PreparedTree; variants: PreparedVariant[]; materials: SourceMaterialTrack[];
-  resourceOrder?: 'materials-first'; heliocentricView: ObjectRuntimeDefinition['heliocentricView'];
+  resourceOrder?: 'materials-first'; heliocentricView?: ObjectRuntimeDefinition['heliocentricView'];
   viewBindings: PreparedViewBinding[]; animations: ObjectRuntimeDefinition['animations'];
   textureLevels?: PreparedTextureLevels;
 }
 export interface PresentationInputs {
-  namespace: string; mode: 'row-bank-cutaway' | 'composite';
-  scene: Scene; assets: RasterAssets; lenses: Lenses; sun: DirectionalSunPlan;
+  namespace: string; mode: 'row-bank-cutaway' | 'composite' | 'emissive';
+  scene: Scene; assets: RasterAssets; lenses: Lenses; sun: DirectionalSunPlan | null;
   markers?: PreparedMarkers; solarSource: SolarSource; controls: ObjectControls;
   textureLevels?: TextureLevelProfile;
+  /** Authored surface targets (positive-east degrees) a lens selects; composite only. */
+  lensFocus?: Record<string, { longitudeDegrees: number; latitudeDegrees: number; zoom: number }>;
 }

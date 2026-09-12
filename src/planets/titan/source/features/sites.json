@@ -1,0 +1,30 @@
+{
+  "schema": "cssearth-surface-sites@1",
+  "source": "Spacecraft landing, touchdown and impact sites compiled from NASA NSSDCA, PDS, LROC, mission releases and cited papers; every coordinate quotes its page",
+  "retrievedAt": "2026-09-12",
+  "sites": [
+    {
+      "id": "huygens",
+      "name": "Huygens landing site",
+      "kind": "lander",
+      "date": "2005-01-14",
+      "machineId": "huygens",
+      "latitudeDeg": -10.3,
+      "longitudeDegEast": 167.7,
+      "coordinateNote": "Converted from west longitude (360 - 192.3). Titan IAU longitudes are positive west, so 192.3 W is the native value. Latitude as stated: not stated.",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NASA Science: Huygens Landing Site (PIA image caption)",
+        "url": "https://science.nasa.gov/resource/huygens-landing-site/",
+        "publisher": "NASA/JPL/ESA/University of Arizona",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "The landing site, marked by the red X, is located at 192.3 degrees west, 10.3 degrees south (southern hemisphere of Titan)."
+    }
+  ],
+  "traverses": []
+}

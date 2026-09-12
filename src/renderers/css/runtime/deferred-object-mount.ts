@@ -1,5 +1,6 @@
 import { createSceneLifetime } from '@cssearth/engine';
 import type { SharedView } from '../navigation/view-url.js';
+import type { SurfaceFeatureNavigationRuntime } from '../labels/surface-feature-types.js';
 import type { PreparedDestinationRuntime } from './object-runtime-types.js';
 import type { ObjectWorldNavigation } from './world-navigation-types.js';
 
@@ -20,6 +21,8 @@ export interface ObjectSceneLifecycle {
   readonly ready: Promise<void>;
   readonly sharedView: ObjectSharedView;
   readonly destinations?: PreparedDestinationRuntime;
+  /** Prepared named surface features: catalogue and selection, when the object declares them. */
+  readonly features?: SurfaceFeatureNavigationRuntime;
   readonly navigation?: ObjectWorldNavigation;
   readonly datasets?: ObjectDatasets;
   refineTextures?(): void;
@@ -58,6 +61,7 @@ export function createDeferredObjectMount<T, Stage, Options extends DeferredMoun
     const controller: ObjectSceneLifecycle = Object.freeze({
       ready, sharedView,
       get destinations() { return lifetime.disposed ? undefined : mounted?.destinations; },
+      get features() { return lifetime.disposed ? undefined : mounted?.features; },
       get navigation() { return published && !lifetime.disposed ? mounted?.navigation : undefined; },
       get datasets() { return published && !lifetime.disposed ? mounted?.datasets : undefined; },
       refineTextures() { forward(() => mounted?.refineTextures?.()); },

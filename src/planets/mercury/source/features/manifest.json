@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-surface-features-source@1",
+  "source": "IAU/USGS Gazetteer of Planetary Nomenclature, Mercury centre points",
+  "snapshotDate": "2026-09-11",
+  "sourcePage": "https://planetarynames.wr.usgs.gov/Page/MERCURY/target",
+  "license": "Public domain (United States Government work)",
+  "licenseEvidence": "metadata_nomenclature_points_MERCURY.xml inside the archive declares the use constraint “Public domain.”",
+  "qualification": "IAU-adopted feature names with Gazetteer centre coordinates and diameters in the Mercury 2000 datum, positive-east longitudes 0–360°. Centre points only: feature outlines are not included, and the 32 telescopic albedo features carry no diameter.",
+  "inputs": [
+    {
+      "path": "MERCURY_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MERCURY_nomenclature_center_pts.zip",
+      "bytes": 1643245,
+      "sha256": "cd5c44d20ce0a9e167620c7b6799d0adaf228a418539c09e71ac27caa6cdf506"
+    }
+  ]
+}

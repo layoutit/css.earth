@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-surface-features@1",
+  "directory": "features",
+  "archive": "ITOKAWA_nomenclature_center_pts.zip",
+  "members": {
+    "attributes": "ITOKAWA_nomenclature_center_pts.dbf",
+    "projection": null,
+    "metadata": "metadata_nomenclature_points_ITOKAWA.xml"
+  },
+  "surfaceMap": "presentation/surface-map.json",
+  "mapLeftEdgeLongitudeDeg": 0,
+  "output": "itokawa-features.json",
+  "publicBase": "/scenes/itokawa/",
+  "target": {
+    "className": "itokawa-body"
+  },
+  "lensIds": [
+    "amica",
+    "elevation"
+  ],
+  "kinds": {
+    "point": [
+      "AA",
+      "FA"
+    ],
+    "linear": [
+      "RU",
+      "DO",
+      "VA",
+      "CA",
+      "FO"
+    ],
+    "region": [
+      "PL",
+      "PM",
+      "MO"
+    ]
+  },
+  "excludedTypeCodes": {
+    "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+  },
+  "labelPolicy": {
+    "minimumZoomShare": 0,
+    "minimumDiameterPixels": 40,
+    "alwaysVisibleCount": 0,
+    "maximumVisible": 40,
+    "limbCosine": 0.12
+  },
+  "outline": {
+    "pieces": 256
+  },
+  "notes": "notes.json"
+}

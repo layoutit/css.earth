@@ -2,7 +2,7 @@ import { validateObjUvFits } from './obj-uv-fits.mts';
 import { validateTerrestrialRings } from './rings.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
 import {parseSolidPreparationSource} from './profile-source.mts';
-import {parseAffineProfile} from './affine-source.mts';
+import type {parseSolidScience} from './solid-source.mts';
 import {requireRecord,requireFiniteNumber,requireString} from '../../source-values.mts';
 import type {prepareObjectContentAssets} from '../content/prepare.ts';
 import {validatePreparedCubicSky} from '../../../src/platform/cubic-sky-contract.mts';
@@ -33,26 +33,27 @@ import { prepareSolidRasters, prepareSolidMaterial, scientificPreviewGrid, lensT
 import { prepareSolidScene, prepareSolidPresentation } from './solid-scene.mts';
 import { prepareRadialMaterials } from './radial-terrain.mts';
 import { loadRadialModels, combineRadialModels } from './radial-models.mts';
-import { prepareAffineLayers } from './affine-preparation.mts';
 import { validateRadialTableProfile } from './pds-radial-table.mts';
 import { validateFitsObservationPolicy } from './observed-fits.mts';
 import { validateGeoSurfaceRecipe } from './observed-geo-surface.mts';
 import { validateFacetFieldRecipe } from './fits-facet-field.mts';
 
+/** A categorical grid is discrete units in a nearest-sampled GeoTIFF with its missing value kept apart from the unit codes;
+ * both the radial-terrain lane and the generic-lane interpreter apply the same rule. */
+export function validateCategoricalGrid(lens: ReturnType<typeof parseSolidScience>) {
+  if (lens.categories && (lens.format !== 'geotiff' || lens.sampling !== 'nearest' ||
+    lens.relief || lens.valueTransform || !isArray(lens.categories) || lens.categories.length < 2 ||
+    lens.minimum !== 0 || lens.maximum !== lens.categories.length - 1 ||
+    lens.categories.some(category => typeof category.value !== 'string' || !category.value ||
+      typeof category.label !== 'string' || !category.label || !/^#[0-9a-f]{6}$/i.test(category.color)) ||
+    new Set(lens.categories.map(category => category.value)).size !== lens.categories.length ||
+    !lens.grid || typeof lens.grid.noData !== 'number' || !Number.isFinite(lens.grid.noData) || lens.grid.noData >= 0 && lens.grid.noData < lens.categories.length)) {
+    throw new TypeError('Categorical scientific grids require discrete units, nearest sampling and separate missing data.');
+  }
+}
+
 export function parseTerrestrialProfile(input:unknown) {
   const header=requireRecord(input);
-  if (header.schema === 'cssearth-terrestrial-preparation@1' && header.kind === 'affine-photographic-atmosphere') {
-    const value=parseAffineProfile(input);
-
-    if (!/^[a-z][a-z0-9-]*$/.test(value.namespace) || value.publicBase !== `/scenes/${value.namespace}/` ||
-        !(value.distanceAu > 0) || value.width !== value.height * 2 || !Number.isSafeInteger(value.width) || value.width <= 0 ||
-        !Number.isSafeInteger(value.lighting?.frameCount) || value.lighting.frameCount < 2 ||
-        !(value.lighting.minimumLightViewZ < value.lighting.maximumLightViewZ) || !value.lenses?.plans?.length ||
-        [value.shapePath,value.atmospherePath].some(path=>typeof path!=='string'||path.startsWith('/')||path.split('/').includes('..'))) {
-      throw new TypeError('Invalid affine photographic-atmosphere profile.');
-    }
-    return input as typeof value;
-  }
   const value=parseSolidPreparationSource(input);
   if (!value || value.schema !== 'cssearth-terrestrial-preparation@1' || value.kind !== 'solid-observation-body' ||
       !/^[a-z][a-z0-9-]*$/.test(value.namespace) || value.publicBase !== `/scenes/${value.namespace}/` ||
@@ -90,15 +91,7 @@ export function parseTerrestrialProfile(input:unknown) {
     if (![undefined, 'nearest'].includes(lens.displaySampling)) throw new TypeError('Scientific display sampling must preserve cells with nearest or use the existing default.');
     if (lens.format === 'geologic-shapefile') {validateGeologyProfile(lens); continue;}
     if (lens.format === 'vtk-cell-categories') {validateVtkCategories(lens, value.geometry.radialTerrain); continue;}
-    if (lens.categories && (lens.format !== 'geotiff' || lens.sampling !== 'nearest' ||
-        lens.relief || lens.valueTransform || !isArray(lens.categories) || lens.categories.length < 2 ||
-        lens.minimum !== 0 || lens.maximum !== lens.categories.length - 1 ||
-        lens.categories.some(category => typeof category.value !== 'string' || !category.value ||
-          typeof category.label !== 'string' || !category.label || !/^#[0-9a-f]{6}$/i.test(category.color)) ||
-        new Set(lens.categories.map(category => category.value)).size !== lens.categories.length ||
-        !lens.grid || typeof lens.grid.noData !== 'number' || !Number.isFinite(lens.grid.noData) || lens.grid.noData >= 0 && lens.grid.noData < lens.categories.length)) {
-      throw new TypeError('Categorical scientific grids require discrete units, nearest sampling and separate missing data.');
-    }
+    validateCategoricalGrid(lens);
     const facetTable = lens.format === 'facet-scalars';
     const meshGrid = ['image-plane-dem', 'stl', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(lens.format);
     const tableGrid = lens.format === 'pds-radial-table';
@@ -307,7 +300,6 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
   const source = await createSourceManifest({ planetId: config.namespace, planetName: config.displayName, sourceRoot: sourceDirectory });
   await source.verify();
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
-  if (config.kind === 'affine-photographic-atmosphere') return prepareAffineLayers({sourceDirectory, publicDirectory, outputDirectory, config, source, prepareContent});
   const context = { sourceDirectory, publicDirectory, outputDirectory, config, source };
   const models = await loadRadialModels(context);
   const radial = models[0]?.radial ?? null;

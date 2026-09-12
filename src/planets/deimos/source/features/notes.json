@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "5789",
+      "item": "Q1393159",
+      "title": "Swift (Deimian crater)",
+      "url": "https://en.wikipedia.org/wiki/Swift_(Deimian_crater)",
+      "revision": "1322498189",
+      "extract": "Swift is an impact crater on Mars's moon Deimos.9 mi) in diameter. Swift is named after Jonathan Swift, whose 1726 book Gulliver's Travels predicted the existence of two moons of Mars. Swift is one of two named features on Deimos, the other being Voltaire."
+    },
+    {
+      "id": "6431",
+      "item": "Q1392503",
+      "title": "Voltaire (crater)",
+      "url": "https://en.wikipedia.org/wiki/Voltaire_(crater)",
+      "revision": "1322519161",
+      "extract": "9 mi) across. Voltaire crater is named after François-Marie Arouet, a French Enlightenment writer who was better known by the pen name Voltaire, who in his 1752 short story \"Micromégas\" predicted that Mars had two moons. Voltaire crater is one of two named features on Deimos, the other being Swift crater."
+    }
+  ]
+}

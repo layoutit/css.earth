@@ -1,136 +1,73 @@
-import {required} from '../../../../tools/test-values.mts';
-import {viewSunDirectionToPreparedLightDirection} from "../../../../src/platform/directional-sun-coordinate.mts";
+// Draft replacement for the affine-lane Mars unit tests. Modelled on
+// tests/objects/unit/venus/runtime-contract.test.mts and mercury/runtime-contract.test.mts.
+import { required } from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import { mountPreparedPresentation } from "../../../../src/renderers/css/dist/testing.js";
-import { runtimeDefinition } from "../../unit/mars/prepared-fixture.mts";
-import { PREPARED_MARS_LIGHTING } from "../../unit/mars/prepared-fixture.mts";
-import { objectRuntimePackageTests, preparedSelectionFixture, retainedPresentationFixture } from "../../../../src/platform/test/object-runtime-package.mts";
+import runtimeDefinition from "../../../../src/planets/mars/prepared/runtime.json" with { type: "json" };
+import assets from "../../../../src/planets/mars/prepared/assets.json" with { type: "json" };
+import scene from "../../../../src/planets/mars/prepared/scene.json" with { type: "json" };
+import lenses from "../../../../src/planets/mars/prepared/lenses.json" with { type: "json" };
+import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 
 objectRuntimePackageTests(runtimeDefinition);
-test("Mars's actual import closure has no private runtime owner", async () => {
+
+test("Mars's actual import closure has only shared runtime owners", async () => {
   const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "mars") });
   assert.equal(audit.complete, true);
-  for (const source of ["rendering/object-selection-runtime", "rendering/prepared-residency", "rendering/prepared-playback", "rendering/object-control-binding", "solar-system/cubic-sky-runtime"]) {
-    assert.ok(audit.sharedClosure.includes(`src/renderers/css/${source}.ts`));
+  for (const name of ["runtime/object-runtime", "rendering/prepared-residency", "rendering/object-selection-runtime", "rendering/object-control-binding", "rendering/prepared-playback", "solar-system/cubic-sky-runtime"]) {
+    assert.ok(audit.sharedClosure.includes(`src/renderers/css/${name}.ts`));
   }
 });
 
-test("Mars retains a visible fallback through a row miss, recoverable decode failure and retry", async () => {
-  const f = await preparedSelectionFixture(runtimeDefinition);
-  try {
-    assert.equal(required(f.residency.stats().pools.find(pool => pool.id === "lighting")).nativeSlots, 3);
-    // The world-bound reference Sun is independent of the historical standalone
-    // default frame; select its phase from the actual prepared bank's domain.
-    const referencePhase = Math.round((required(f.view.sunViewDirection)[2] - PREPARED_MARS_LIGHTING.minimumLightViewZ) /
-      (PREPARED_MARS_LIGHTING.maximumLightViewZ - PREPARED_MARS_LIGHTING.minimumLightViewZ) *
-      (PREPARED_MARS_LIGHTING.frameCount - 1));
-    assert.equal(f.presentation.observe().materials.lighting.appliedFrame,
-      PREPARED_MARS_LIGHTING.shadowlessFrameOffset + referencePhase);
-    const request = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); assert.equal(await request, true);
-    const previous = f.presentation.observe().materials.lighting.appliedFrame;
-    const view = { ...f.view, sunViewDirection: viewSunDirectionToPreparedLightDirection([0, 0, 1]), revision: 2 };
-    f.selection.setView(view); await f.flush();
-    assert.equal(f.selection.state().loadingMaterial, true);
-    assert.equal(f.presentation.observe().materials.lighting.appliedFrame, previous);
-    const failed = f.jobs.find(job=>!job.done&&job.url===PREPARED_MARS_LIGHTING.banks[2].rows[0].url);
-    assert.ok(failed,'the required phase-zero row must be awaiting decode');
-    failed.done = true; failed.reject(new Error("row decode failed")); await f.flush();
-    assert.equal(f.lifetime.disposed, false); assert.equal(f.materialErrors.length, 1);
-    assert.equal(f.presentation.observe().materials.lighting.appliedFrame, previous);
-    f.selection.setView({ ...view, revision: 3 }); await f.settle();
-    assert.equal(f.presentation.observe().materials.lighting.appliedFrame, 0);
-    const pool = required(f.residency.stats().pools.find(pool => pool.id === "lighting"));
-    assert.ok(pool.resident <= 3); assert.equal(pool.nativeSlots, 3);
-    assert.deepEqual(f.errors, []);
-  } finally { f.restore(); }
+test("Mars is prepared by the generic raster lane with the source-radii ellipsoid and three lenses", () => {
+  assert.equal(scene.schema, "cssmars-prepared-runtime-scene@1");
+  assert.equal(scene.runtimeGeometry, false);
+  assert.equal(scene.body.equatorialRadius, 230);
+  assert.equal(scene.body.polarRadius, 228.646218);
+  assert.deepEqual([scene.body.latitudeSegments, scene.body.longitudeSegments], [16, 32]);
+  assert.equal(scene.body.axialTiltDegrees, 25.19);
+  assert.equal(scene.material.model, "source-parameter-bound-light-terminator-and-atmosphere-phase-bank");
+  assert.equal(scene.material.frameCount, 32);
+  assert.deepEqual(Object.keys(assets.surfaces), ["normal", "elevation", "thermal"]);
+  assert.deepEqual(lenses.controls.map(({ id }) => id), ["normal", "elevation", "thermal"]);
+  assert.equal(lenses.defaultLens, "normal");
+  // The composite material is a separate silhouette-fitted root, never a plane inside the scene.
+  assert.ok(runtimeDefinition.tree.nodes.some(node => node.className?.includes("mars-material-composite")));
+  assert.ok(runtimeDefinition.tree.nodes.every(node => !node.className?.includes("mars-material-plane")));
+  assert.ok(runtimeDefinition.viewBindings.some(binding => binding.kind === "silhouette-fit"));
 });
 
-test("Mars's new lens groups use shared warm receipts without retaining native images", async () => {
+test("Mars publishes every declared toggle through the shared controls and selection owner", async () => {
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     const nodes = f.stage.querySelectorAll("*");
-    for (const id of ["elevation", "thermal", "normal", "thermal"]) {
+    for (const name of ["atmosphere", "stars", "shadows"]) {
+      const input = required(f.inputs.get(name));
+      input.checked = !input.checked;
+      const listener = required(input.listeners.get("change"));
+      if (typeof listener === "function") listener(new Event("change")); else listener.handleEvent(new Event("change"));
+      await f.settle();
+      assert.equal(required(f.selection.state().committed)[name], input.checked);
+      if (name !== "shadows") assert.equal(f.stage.classList.contains(`mars-hide-${name}`), !input.checked);
+      else assert.equal(f.presentation.observe().materials.lighting.rotationEnabled, input.checked);
+    }
+    assert.deepEqual(f.stage.querySelectorAll("*"), nodes);
+    assert.deepEqual(f.errors, []); f.lifetime.destroy(); assert.equal(f.listenerCount(), 0);
+  } finally { f.restore(); }
+});
+
+test("Mars lens selection keeps the retained tree and switches the observation material", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const records = f.stage.querySelectorAll("*");
+    for (const id of ["elevation", "thermal", "normal"]) {
       const request = f.selection.dispatch({ kind: "lens", id }); await f.settle(); assert.equal(await request, true);
       assert.equal(required(f.selection.state().committed).lensId, id);
-      assert.deepEqual(f.stage.querySelectorAll("*"), nodes);
-      assert.equal(required(f.residency.stats().pools.find(pool => pool.id === "warm")).resident, 0);
+      assert.deepEqual(f.stage.querySelectorAll("*"), records);
+      assert.equal(f.stage.dataset.lens, id);
     }
-    const surfaceJobs = f.jobs.filter(job => /mars-(?:elevation|thermal|surface|poles)/.test(job.url));
-    assert.equal(new Set(surfaceJobs.map(job => job.url)).size, surfaceJobs.length);
-    assert.deepEqual(f.errors, []);
-  } finally { f.restore(); }
-});
-
-for (const replacement of [false, true]) test(`Mars retained-root retirement preserves ownership (${replacement})`, () => {
-  const f = retainedPresentationFixture(runtimeDefinition);
-  try {
-    mountPreparedPresentation(f.stage, f.context, runtimeDefinition); f.stage.dataset.lens = "selected";
-    if (replacement) { f.stage.replaceChildren(f.document.createElement("div")); f.stage.dataset.lens = "replacement"; }
-    assert.deepEqual(f.lifetime.destroy(), []);
-    assert.equal(f.stage.dataset.lens, replacement ? "replacement" : undefined);
-    assert.equal(f.stage.children.length, replacement ? 1 : 0);
-  } finally { f.restore(); }
-});
-
-
-test("Mars atmosphere follows every Sun phase in both ground-shadow modes through one publisher", async () => {
-  const f = await preparedSelectionFixture(runtimeDefinition);
-  try {
-    const retained = f.stage.querySelectorAll("*");
-    const cases = [
-      { direction: [0, 0, 1], phase: 0 },
-      { direction: [1, 0, 0], phase: 128 },
-      { direction: [0, 0, -1], phase: 255 },
-      { direction: [-1, 0, 0], phase: 128 },
-    ];
-    let revision = 2;
-    for (const shadows of [false, true, false]) {
-      const request = f.selection.dispatch({ kind: "toggle", name: "shadows", value: shadows });
-      await f.settle(); assert.equal(await request, true);
-      for (const { direction, phase } of cases) {
-        f.selection.setView({ ...f.view, sunViewDirection: viewSunDirectionToPreparedLightDirection(direction), revision: revision++ });
-        await f.settle();
-        const observed = f.presentation.observe();
-        assert.equal(observed.materials.lighting.calculatedFrame, phase);
-        assert.equal(observed.materials.lighting.appliedFrame, phase + (shadows ? 0 : 256));
-        assert.equal(observed.materials.lighting.appliedRow, observed.materials.lighting.appliedFrame);
-        assert.equal(required(f.selection.state().committed).shadows, shadows);
-        assert.equal(observed.materials.lighting.mode, shadows
-          ? "directional-terminator-and-atmosphere" : "directional-atmosphere-without-ground-shadow");
-        if (direction[0] === 1) assert.ok(Math.abs(observed.materials.lighting.lightRollDegrees +
-          PREPARED_MARS_LIGHTING.baseLightAzimuthDegrees) < 1e-9,
-        "disabling ground shadows preserves the directional atmosphere rotation");
-        assert.deepEqual(f.stage.querySelectorAll("*"), retained);
-        assert.equal(required(f.residency.stats().pools.find(pool => pool.id === "lighting")).nativeSlots, 3);
-      }
-    }
-    assert.equal(runtimeDefinition.materials.length, 1);
-    assert.deepEqual(f.errors, []);
-  } finally { f.restore(); }
-});
-
-test("Mars ground-mode changes keep the published image and rotation until the replacement row is decoded", async () => {
-  const f = await preparedSelectionFixture(runtimeDefinition);
-  try {
-    f.selection.setView({ ...f.view, sunViewDirection: viewSunDirectionToPreparedLightDirection([1, 0, 0]), revision: 2 });
-    await f.settle();
-    const leaf = required(f.stage.querySelectorAll("*").find(node => node.tagName === "S" &&
-      node.parentNode?.className === "polycss-mesh mars-material-plane"));
-    const original = { image: leaf.style.backgroundImage, rotate: leaf.style.rotate };
-    assert.equal(f.presentation.observe().materials.lighting.appliedFrame, 384);
-    const request = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true });
-    await f.flush();
-    assert.equal(required(f.selection.state().committed).shadows, false);
-    assert.deepEqual({ image: leaf.style.backgroundImage, rotate: leaf.style.rotate }, original);
-    assert.ok(f.jobs.some(job => !job.done), "the opposite ground-mode row must be awaiting decode");
-    await f.settle(); assert.equal(await request, true);
-    assert.equal(required(f.selection.state().committed).shadows, true);
-    assert.equal(f.presentation.observe().materials.lighting.appliedFrame, 128);
-    assert.notEqual(leaf.style.backgroundImage, original.image);
-    assert.equal(leaf.style.rotate, original.rotate);
     assert.deepEqual(f.errors, []);
   } finally { f.restore(); }
 });

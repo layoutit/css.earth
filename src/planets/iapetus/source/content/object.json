@@ -101,9 +101,9 @@
         "label": "Monochrome",
         "description": "USGS May 2008 Cassini/Voyager mosaic at 803 m per source pixel (5760 × 2880), resampled into the shared texture layout. No additional detail is created. Coarse polar coverage, source seams and photographed shading remain; gray grid marks explicit no-data. Shared Shadows adds approximate globe lighting. Mean-radius sphere: the real equatorial ridge does not change the silhouette.",
         "title": "Multi-mission image mosaic",
-        "thumbnail": "/scenes/iapetus/iapetus-normal-thumbnail.webp",
-        "surface": "iapetus-normal-surface@2x.webp",
-        "poles": "iapetus-normal-poles@2x.webp",
+        "thumbnail": "iapetus-lens-normal.webp",
+        "surface": "iapetus-normal.webp",
+        "poles": "iapetus-poles-normal.webp",
         "source": {
           "id": "cassini-voyager-2008-iapetus",
           "path": "../manifest.json"
@@ -115,9 +115,9 @@
         "label": "Enhanced color",
         "description": "Published 2014 enhanced-color Cassini composite, photometrically corrected by Paul Schenk, with nominal 400 m source pixels. Colors extend into ultraviolet and infrared. The dark leading hemisphere is real surface albedo, not a shadow or missing imagery. All supplied pixels are preserved; coarse patches and residual photographed shading remain. Shared Shadows and globe lighting remain active; shape is approximated by a sphere.",
         "title": "Enhanced-color composite",
-        "thumbnail": "/scenes/iapetus/iapetus-enhanced-thumbnail.webp",
-        "surface": "iapetus-enhanced-surface@2x.webp",
-        "poles": "iapetus-enhanced-poles@2x.webp",
+        "thumbnail": "iapetus-lens-enhanced.webp",
+        "surface": "iapetus-enhanced.webp",
+        "poles": "iapetus-poles-enhanced.webp",
         "source": {
           "id": "cassini-iss-2014-iapetus-color",
           "path": "../manifest.json"
@@ -130,9 +130,9 @@
         "description": "Three Cassini VIMS observations from 10 September 2007. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.45 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps.",
         "summary": "Cassini false color: red 2.02, green 1.59, blue 1.28 µm. Coverage is partial; gray grid marks gaps. Illumination and archive filtering remain in these uncorrected measurements.",
         "title": "Cassini VIMS flyby spectra · 10 September 2007",
-        "thumbnail": "/scenes/iapetus/iapetus-infrared-thumbnail.webp",
-        "surface": "iapetus-infrared-surface@2x.webp",
-        "poles": "iapetus-infrared-poles@2x.webp",
+        "thumbnail": "iapetus-lens-infrared.webp",
+        "surface": "iapetus-infrared.webp",
+        "poles": "iapetus-poles-infrared.webp",
         "source": {
           "id": "iapetus-cassini-infrared",
           "path": "../manifest.json",
@@ -147,9 +147,9 @@
         "description": "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using three Cassini VIMS observations from 10 September 2007. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0–0.8; original numerical values are retained. Gray grid marks unsupported areas and scan gaps.",
         "summary": "Near-2.02 µm water-ice absorption in partial Cassini coverage. Gray grid marks gaps. Viewing angle, grain size, noise and archive filtering affect these uncorrected values; they do not measure ice abundance.",
         "title": "Cassini VIMS flyby water-ice absorption · 10 September 2007",
-        "thumbnail": "/scenes/iapetus/iapetus-ice-absorption-thumbnail.webp",
-        "surface": "iapetus-ice-absorption-surface@2x.webp",
-        "poles": "iapetus-ice-absorption-poles@2x.webp",
+        "thumbnail": "iapetus-lens-ice-absorption.webp",
+        "surface": "iapetus-ice-absorption.webp",
+        "poles": "iapetus-poles-ice-absorption.webp",
         "source": {
           "id": "iapetus-cassini-ice-absorption",
           "path": "../manifest.json",
@@ -160,8 +160,6 @@
         "legend": {
           "kind": "scale",
           "title": "Ice absorption",
-          "width": 256,
-          "height": 16,
           "labels": [
             "0",
             "0.4",
@@ -169,7 +167,35 @@
           ],
           "meta": "band-depth fraction",
           "sourceUrl": "https://vims.univ-nantes.fr/cube/1568157352_4",
-          "image": "/scenes/iapetus/iapetus-ice-absorption-legend.webp"
+          "recipe": {
+            "palette": [
+              [
+                49,
+                43,
+                102
+              ],
+              [
+                50,
+                124,
+                175
+              ],
+              [
+                127,
+                205,
+                187
+              ],
+              [
+                237,
+                248,
+                177
+              ]
+            ],
+            "labels": [
+              "0",
+              "0.4",
+              "0.8"
+            ]
+          }
         }
       }
     ]
@@ -185,8 +211,8 @@
       },
       {
         "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
+        "name": "stars",
+        "label": "Stars",
         "checked": true
       }
     ]

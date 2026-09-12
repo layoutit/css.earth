@@ -45,6 +45,14 @@
       ],
       "path": "science/didymos_g_9309mm_spc_alb_0000n00000_v003.xml",
       "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_alb_0000n00000_v003.xml"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/DIDYMOS_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DIDYMOS_nomenclature_center_pts.zip"
     }
   ]
 }

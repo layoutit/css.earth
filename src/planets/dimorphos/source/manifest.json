@@ -173,6 +173,30 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-dimorphos-nomenclature-center-pts",
+      "path": "features/DIMORPHOS_nomenclature_center_pts.zip",
+      "expectedBytes": 30289,
+      "expectedSha256": "665b495e7b2841e18d8c362f41ec6775c4399a94d473e975ec936cec99684963",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DIMORPHOS_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Dimorphos on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Dimorphos centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DIMORPHOS/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -214,8 +238,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2165,
-      "expectedSha256": "ff9aae8403b1936cbe7f8ceaef2cdfd3795cf538fe69b872b83261f069088cd8"
+      "expectedBytes": 2425,
+      "expectedSha256": "23e725f0efedf0fadfefa45d6f86087e1193940064f3398ed9a6a4634c4dc4c3"
     },
     {
       "path": "preparation/navigation.json",
@@ -303,6 +327,104 @@
             "locator": "Identification_Area and File_Area_Observational/File"
           }
         ]
+      }
+    },
+    {
+      "id": "dimorphos-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1319,
+      "expectedSha256": "0ced0dce2347e266e2393a9e20df4efb6355a7f6749092ba6f08a3080faa8d29",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "dimorphos-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1180,
+      "expectedSha256": "62621f87e15f29b0e0e081826b60c070c30c4c35ad939d802a4a27541d1e2dd6",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "dimorphos-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 156,
+      "expectedSha256": "49a8398207a279568f098d9629215d1b3f33dee77c82ac50669540b4837a704d",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
+    },
+    {
+      "id": "dimorphos-surface-sites",
+      "path": "features/sites.json",
+      "expectedBytes": 1428,
+      "expectedSha256": "609602bd18bbf589de8d86c3a374a6f0f5bfe73a86bb790053ccfbc4223ad0a2",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      }
+    },
+    {
+      "id": "dimorphos-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 478,
+      "expectedSha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts dimorphos: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
       }
     }
   ]

@@ -200,7 +200,8 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
           viewBindings: definition.viewBindings, animations: definition.animations.map(({ id, mode, target }) => ({ id, mode, target })),
           pageLayers: (definition.pageLayers ?? []).map(({ lensIds, plan: layer }) => ({ lensIds, schema: layer.schema,
             roots: 'roots' in layer && isArray(layer.roots) ? layer.roots.length : 0, poolSize: 'poolSize' in layer ? layer.poolSize : null })),
-          destinations: definition.destinations ? { defaultLens: definition.destinations.defaultLens, catalog: definition.destinations.catalog } : null });
+          destinations: definition.destinations ? { defaultLens: definition.destinations.defaultLens, catalog: definition.destinations.catalog } : null,
+          features: definition.features ? { target: definition.features.target, lensIds: definition.features.lensIds, catalog: definition.features.catalog } : null });
         continue;
       }
       const definitionSource = await readText(`${prefix}/runtime/definition.mjs`);

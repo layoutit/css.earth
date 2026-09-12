@@ -61,3 +61,5 @@ Buenos Aires APrA, 2025 daytime noise map, licensed under [CC BY 2.5 Argentina](
 GEBCO Bathymetric Compilation Group 2026 (2026). The GEBCO_2026 Grid — a continuous terrain model for oceans and land at 15 arc-second intervals. NERC EDS British Oceanographic Data Centre NOC. DOI: 10.5285/4f68d5c7-45eb-f999-e063-7086abc036fa.
 
 The GEBCO Grid is public domain, with source acknowledgement required by its published terms. cssEarth samples the numeric grid, applies its own height palette and cartographic relief, and prepares textures. No GEBCO, IHO or IOC endorsement is implied. The grid includes inferred depths and is not for navigation or safety at sea. [Terms and interpretation](https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid).
+
+Place and region names: Natural Earth 1:10m populated places, geographic regions, marine areas and rivers (public domain; Tom Patterson, Nathaniel Vaughn Kelso and contributors); see `source/features/manifest.json`.

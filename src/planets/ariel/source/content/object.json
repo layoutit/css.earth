@@ -83,9 +83,9 @@
         "description": "Voyager 2 mosaic with source photometric correction. Detail varies and local shadows, seams, and processing marks remain. Gray grid marks missing observations; this is not a true albedo map.",
         "title": "Monochrome mosaic",
         "detail": "Corrected mosaic",
-        "thumbnail": "/scenes/ariel/ariel-normal-thumbnail.webp",
-        "surface": "ariel-normal-surface@2x.webp",
-        "poles": "ariel-normal-poles@2x.webp",
+        "thumbnail": "ariel-lens-normal.webp",
+        "surface": "ariel-normal.webp",
+        "poles": "ariel-poles-normal.webp",
         "source": {
           "id": "schenk-2020-ariel-normal",
           "path": "../manifest.json",
@@ -99,9 +99,9 @@
         "description": "Stereo, photoclinometry, and limb terrain model, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 1 km grid spacing is not uniform effective resolution.",
         "title": "Stereo, shading and limb terrain model",
         "detail": "Shaded relief",
-        "thumbnail": "/scenes/ariel/ariel-elevation-thumbnail.webp",
-        "surface": "ariel-elevation-surface@2x.webp",
-        "poles": "ariel-elevation-poles@2x.webp",
+        "thumbnail": "ariel-lens-elevation.webp",
+        "surface": "ariel-elevation.webp",
+        "poles": "ariel-poles-elevation.webp",
         "source": {
           "id": "schenk-2020-ariel-elevation",
           "path": "../manifest.json",
@@ -110,8 +110,6 @@
         "legend": {
           "kind": "scale",
           "title": "Elevation",
-          "width": 256,
-          "height": 16,
           "labels": [
             "−8",
             "−1",
@@ -119,7 +117,30 @@
           ],
           "meta": "km",
           "sourceUrl": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
-          "image": "/scenes/ariel/ariel-elevation-legend.webp"
+          "recipe": {
+            "palette": [
+              [
+                28,
+                85,
+                153
+              ],
+              [
+                187,
+                171,
+                128
+              ],
+              [
+                170,
+                62,
+                36
+              ]
+            ],
+            "labels": [
+              "−8",
+              "−1",
+              "6"
+            ]
+          }
         },
         "summary": "Height from stereo images, shading and limb measurements. Detail varies; the gray grid marks missing elevation data."
       }
@@ -136,8 +157,8 @@
       },
       {
         "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
+        "name": "stars",
+        "label": "Stars",
         "checked": true
       }
     ]

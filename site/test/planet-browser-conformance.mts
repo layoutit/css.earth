@@ -102,6 +102,7 @@ try {
     }
     reports.push(await runCase(planet, "dpr-1", () => provePreparedDensity(browser, planet, profile, 1)));
     reports.push(await runCase(planet, "dpr-2", () => provePreparedDensity(browser, planet, profile, 2)));
+    reports.push(await runCase(planet, "surface-features", () => proveSurfaceFeatures(browser, planet, profile)));
     if ((profile.objectControls.lenses?.controls.length ?? 0) > 1) {
       reports.push(await runCase(planet, "lens-race", () => proveLensRace(browser, planet, profile)));
       reports.push(await runCase(planet, "lens-reacquire", () => proveLensReacquire(browser, planet, profile)));
@@ -740,6 +741,122 @@ async function proveDesktop(browser: Browser, planet: ObjectEntry, profile: Obje
   } finally {
     await page.close();
   }
+}
+
+// Prepared nomenclature labels: every object that declares a feature catalogue
+// must label the visible hemisphere, expose the prepared caption on hover through
+// the shared input surface, follow the prepared spin, and stay retained.
+async function proveSurfaceFeatures(browser: Browser, planet: ObjectEntry, profile: ObjectBrowserProfile) {
+  const definition = parsePreparedObjectRuntime(JSON.parse(await readFile(resolve("src/planets", planet.id, "prepared/runtime.json"), "utf8")));
+  const plan = definition.features;
+  if (!plan) return { id: planet.id, case: "surface-features", skipped: true, reason: "no prepared feature catalogue" };
+  const page = await createTestPage(browser, { viewport: { width: 1440, height: 900 } });
+  const evidence = observePage(page, baseUrl);
+  try {
+    await loadPlanet(page, planet, profile);
+    const stats = (id: string) => page.evaluate(objectId => required(window.__cssearthTest.object(objectId).runtime.surfaceFeatures()), id);
+    await page.waitForFunction(id => { const state = window.__cssearthTest.object(id).runtime.surfaceFeatures(); return state?.loaded === true && state.error === null; }, planet.id, { timeout: 30000 });
+    if (plan.policy.minimumZoomShare > 0) {
+      // Labels belong to the closest zoom: the overview stays clean until the camera reaches it.
+      await page.waitForTimeout(400);
+      const overview = await stats(planet.id);
+      assert.equal(overview.visible, 0, `${planet.id}: the overview shows no feature labels`);
+      assert.equal(overview.zoomGate, false);
+      await page.evaluate(({ id, zoom }) => window.__cssearthTest.object(id).camera.setState({ zoom }), { id: planet.id, zoom: definition.camera.maximumZoom });
+    }
+    await page.waitForFunction(id => { const state = window.__cssearthTest.object(id).runtime.surfaceFeatures(); return state?.zoomGate === true && state.visible > 0; }, planet.id, { timeout: 30000 });
+    const initial = await stats(planet.id);
+    assert.equal(initial.count, plan.catalog.count, `${planet.id}: the layer reports the prepared catalogue size`);
+    assert.equal(initial.enabled, true, `${planet.id}: the default lens shows feature labels`);
+    const read = () => page.evaluate(() => {
+      const stage = window.__cssearthTest.element(".planet-stage").getBoundingClientRect();
+      const labels = [...document.querySelectorAll("[data-feature-label]")];
+      const visible = labels.filter(label => { const style = getComputedStyle(label); return style.visibility !== "hidden" && Number(style.opacity) > .5; });
+      return { total: labels.length, stage: { left: stage.left, top: stage.top, right: stage.right, bottom: stage.bottom },
+        visible: visible.map(label => { const rect = label.getBoundingClientRect(); const element = window.__cssearthTest.htmlElement(label);
+          return { id: element.dataset.featureLabel ?? "", kind: element.dataset.featureKind ?? "", text: element.textContent ?? "", transform: element.style.transform,
+            left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom }; }) };
+    });
+    const labels = await read();
+    assert.equal(labels.total, plan.catalog.count, `${planet.id}: one retained span per prepared feature`);
+    assert.ok(labels.visible.length > 0 && labels.visible.length <= plan.policy.maximumVisible, `${planet.id}: visible labels stay within the prepared cap`);
+    for (const label of labels.visible) {
+      assert.ok(label.text.length > 0 && ["point", "linear", "region"].includes(label.kind), `${planet.id}: ${label.id} carries its prepared caption and kind`);
+      assert.ok(label.left >= labels.stage.left && label.right <= labels.stage.right && label.top >= labels.stage.top && label.bottom <= labels.stage.bottom,
+        `${planet.id}: ${label.text} stays inside the stage`);
+    }
+    for (let i = 0; i < labels.visible.length; i++) for (let j = i + 1; j < labels.visible.length; j++) {
+      const a = labels.visible[i]!, b = labels.visible[j]!;
+      assert.ok(a.right <= b.left || b.right <= a.left || a.bottom <= b.top || b.bottom <= a.top, `${planet.id}: ${a.text} overlaps ${b.text}`);
+    }
+    // Hover through the retained transparent input surface shows the prepared caption card.
+    const target = required(labels.visible[0]);
+    await page.mouse.move((target.left + target.right) / 2, (target.top + target.bottom) / 2);
+    await page.waitForFunction(id => {
+      const tooltip = document.querySelector("[data-feature-tooltip]");
+      return tooltip instanceof HTMLElement && !tooltip.hidden && tooltip.dataset.featureTooltipFor === id;
+    }, target.id, { timeout: 5000 });
+    const tooltip = await page.evaluate(() => {
+      const card = window.__cssearthTest.element("[data-feature-tooltip]"), rect = card.getBoundingClientRect();
+      return { name: window.__cssearthTest.element("[data-feature-tooltip-name]").textContent, detail: window.__cssearthTest.element("[data-feature-tooltip-detail]").textContent,
+        origin: window.__cssearthTest.element("[data-feature-tooltip-origin]").textContent, width: rect.width, height: rect.height };
+    });
+    assert.equal(tooltip.name, target.text, `${planet.id}: the caption names the hovered feature`);
+    assert.match(tooltip.detail ?? "", /km$/u, `${planet.id}: the caption reports the prepared type and diameter`);
+    assert.ok((tooltip.origin ?? "").length > 0 && tooltip.width > 0 && tooltip.height > 0, `${planet.id}: the caption shows the name origin`);
+    assert.equal((await stats(planet.id)).hovered, target.id);
+    const outline = await page.evaluate(() => {
+      const pieces = [...document.querySelectorAll("[data-feature-outline-piece]")];
+      const shown = pieces.filter(piece => getComputedStyle(piece).visibility !== "hidden");
+      const box = shown.map(piece => piece.getBoundingClientRect());
+      return { total: pieces.length, shown: shown.length, forId: window.__cssearthTest.htmlElement(document.querySelector(".prepared-surface-features")).dataset.featureOutlineFor,
+        thickness: shown.length ? Math.max(...box.map(rect => Math.min(rect.width, rect.height))) : 0 };
+    });
+    assert.equal(outline.total, plan.outline.pieces, `${planet.id}: the outline pool is retained at the prepared size`);
+    assert.ok(outline.shown > 0 && outline.forId === target.id, `${planet.id}: hover traces the feature's published diameter as retained chords`);
+    assert.ok(outline.thickness > 0 && outline.thickness < 6, `${planet.id}: the outline stroke stays a shell pixel size`);
+    await page.mouse.move(labels.stage.left + 8, labels.stage.top + 8);
+    await page.waitForFunction(() => { const tooltip = document.querySelector("[data-feature-tooltip]"); return tooltip instanceof HTMLElement && tooltip.hidden; }, null, { timeout: 5000 });
+    assert.equal((await stats(planet.id)).outlinePieces, 0, `${planet.id}: leaving the label retires the outline`);
+    // Clicking a label through the input surface pins it and flies the camera over it; the pin survives the density gate.
+    await page.mouse.click((target.left + target.right) / 2, (target.top + target.bottom) / 2);
+    await page.waitForFunction(id => { const state = window.__cssearthTest.object(id).runtime.surfaceFeatures(); return state?.pinned === id && state.flying === false; }, target.id, { timeout: 15000 });
+    const pinned = await stats(planet.id);
+    assert.ok(pinned.visible >= 1 && pinned.outlinePieces > 0, `${planet.id}: the selected feature keeps its label and outline`);
+    // The sidebar search lists named features and selecting a row flies to it.
+    await page.locator(".planet-sidebar-search").fill(target.text);
+    const row = page.locator(".planet-feature-results li:not([hidden]) button").first();
+    await row.waitFor({ timeout: 10000 });
+    assert.ok((await row.innerText()).includes(target.text), `${planet.id}: the search lists the named feature`);
+    await row.click();
+    await page.waitForFunction(id => { const state = window.__cssearthTest.object(id).runtime.surfaceFeatures(); return state?.pinned === id && state.flying === false; }, target.id, { timeout: 15000 });
+    await page.locator(".planet-sidebar-search").fill("");
+    await page.keyboard.press("Escape");
+    // A plain click on the surface that picks no label clears the selection.
+    const clear = await page.evaluate(() => { const stage = window.__cssearthTest.element(".planet-stage").getBoundingClientRect(); return { x: stage.left + stage.width * 0.62, y: stage.bottom - 60 }; });
+    await page.mouse.click(clear.x, clear.y);
+    await page.waitForFunction(id => window.__cssearthTest.object(id).runtime.surfaceFeatures()?.pinned === null, planet.id, { timeout: 5000 });
+    await page.evaluate(({ id, zoom }) => window.__cssearthTest.object(id).camera.setState({ zoom }), { id: planet.id, zoom: definition.camera.maximumZoom });
+    // Labels follow the prepared spin without adding DOM.
+    await enableMotion(page, planet.id);
+    await page.waitForTimeout(600);
+    const moving = await read();
+    const beforeById = new Map(labels.visible.map(label => [label.id, label.transform]));
+    assert.ok(moving.visible.some(label => beforeById.has(label.id) && beforeById.get(label.id) !== label.transform),
+      `${planet.id}: labels move with the spinning surface`);
+    assert.equal(moving.total, plan.catalog.count);
+    // Lenses outside the prepared declaration hide the layer; declared lenses restore it.
+    const other = definition.controls.lenses?.controls.find(lens => !plan.lensIds.includes(lens.id));
+    if (other) {
+      assert.equal(await page.evaluate(({ id, lens }) => window.__cssearthTest.object(id).selectLens(lens), { id: planet.id, lens: other.id }), true);
+      await page.waitForFunction(id => { const state = window.__cssearthTest.object(id).runtime.surfaceFeatures(); return state?.enabled === false && state.visible === 0; }, planet.id, { timeout: 10000 });
+      assert.equal(await page.evaluate(({ id, lens }) => window.__cssearthTest.object(id).selectLens(lens), { id: planet.id, lens: required(plan.lensIds[0]) }), true);
+      await page.waitForFunction(id => { const state = window.__cssearthTest.object(id).runtime.surfaceFeatures(); return state?.enabled === true && state.visible > 0; }, planet.id, { timeout: 10000 });
+    }
+    assert.equal(await page.evaluate(id => window.__cssearthTest.object(id).assertStableDomIdentity(), planet.id), true, `${planet.id}: feature labels keep the retained DOM`);
+    assertEvidence(evidence, planet.id);
+    return { id: planet.id, case: "surface-features", count: plan.catalog.count, visible: labels.visible.length, hovered: target.text, lensGate: other?.id ?? null };
+  } finally { await page.close(); }
 }
 
 async function surfaceFlyCoordinates(page: Page) {

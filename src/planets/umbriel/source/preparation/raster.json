@@ -1,0 +1,105 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/umbriel/",
+  "sourceWidth": 5760,
+  "sourceHeight": 2880,
+  "width": 2048,
+  "height": 1024,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "umbriel-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssumbriel-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88
+  },
+  "surfaces": [
+    {
+      "id": "normal",
+      "output": "umbriel-{id}{suffix}.webp",
+      "thumbnail": "umbriel-lens-{id}.webp",
+      "source": "observations/uumap-cyl-180180.cub.gz",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "schenk-2020-umbriel-normal",
+        "id": "normal",
+        "validity": {
+          "kind": "isis3-float-monochrome",
+          "grid": {
+            "width": 919,
+            "height": 460,
+            "targetName": "Umbriel",
+            "centerLongitude": 180,
+            "referenceRadiusMeters": 584700,
+            "polarRadiusMeters": 584700,
+            "origin": [
+              -3676000,
+              920000
+            ],
+            "resolutionMeters": 4000,
+            "specialValueMagnitude": 1e+30,
+            "longitudeRange": [
+              -180,
+              180
+            ]
+          },
+          "displayRange": [
+            0,
+            1950
+          ]
+        }
+      }
+    }
+  ],
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "billboardFrameSize": 24,
+    "billboardColumns": 16,
+    "rowOutput": "umbriel-lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "umbriel-lighting-{density}x-billboard.webp",
+    "minimumLightViewZ": -1,
+    "maximumLightViewZ": 1,
+    "frameCount": 256,
+    "shadowlessFloodLimbFloor": 0.35,
+    "ambientIntensity": 0.05,
+    "radiusScale": 0.505,
+    "terminator": [
+      0,
+      0.1
+    ],
+    "maximumAlpha": 0.95,
+    "bankSchema": "cssumbriel-prepared-lighting-bank@1",
+    "billboardSchema": "cssumbriel-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "cssumbriel-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  }
+}

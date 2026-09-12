@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "2805",
+      "item": "Q21659156",
+      "title": "Jarilo (crater)",
+      "url": "https://en.wikipedia.org/wiki/Jarilo_(crater)",
+      "revision": "1330786519",
+      "extract": "Jarilo is a crater on Hyperion, a moon of Saturn. The crater was named after Yarilo, the eponymous East Slavic god of the sun, fertility and love. The name \"Jarilo\" was officially approved by the International Astronomical Union (IAU) in 1982."
+    }
+  ]
+}
