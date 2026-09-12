@@ -5,6 +5,7 @@ import { initializeShapeCloud, readShapeCloudSettings } from '../reconstruction/
 import { createShapeCloudScheduler, type PreviewQuality } from './shape-cloud-scheduler';
 import { createShapeCloudClient, activeCloudJob, type CloudJob } from './shape-cloud-client';
 import { readShapeCloudResult } from '../reconstruction/shape-cloud/result';
+import { SHAPE_CLOUD_PREPARATION_VERSION } from '../reconstruction/shape-cloud/quality';
 import type { ShapeCloudComponent, ShapeCloudResult, ShapeCloudSettings } from '../reconstruction/shape-cloud/types';
 
 export type EditScope = 'all' | 'group' | 'selected';
@@ -82,7 +83,9 @@ export function useShapeCloudState(image: StructureImage, geometry: GeometryMap,
       });
       scheduler.current = queue; setLoaded(true);
       if (saved?.status === 'completed') {
-        const completed = checkResult(saved.result); setResult(completed); setJob(saved); queue.seed(completed.settings, completed.quality);
+        const completed = checkResult(saved.result); setResult(completed); setJob(saved);
+        // Keep the previous scene visible while refreshing old sampling, without discarding authored settings.
+        if (completed.preparationVersion === SHAPE_CLOUD_PREPARATION_VERSION) queue.seed(completed.settings, completed.quality);
       } else if (saved && activeCloudJob(saved)) {
         let priorSettings = currentSettings.current, quality: PreviewQuality = 'detailed';
         const raw = localStorage.getItem(`${key}:request`);

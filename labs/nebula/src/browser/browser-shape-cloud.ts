@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { readStructureCatalogue } from '../alignment/observations-ui/structures-model';
+import { checkShapeCloudLinkedPose } from './check-shape-cloud-linked-pose';
 
 const cataloguePath = '.local/nebula-lab/observations/helix/structures/catalogue.json';
 const catalogue = readStructureCatalogue(JSON.parse(await readFile(cataloguePath, 'utf8')));
@@ -116,6 +117,7 @@ try {
     assert.equal(await page.locator('#shape-cloud-component').inputValue(), hoveredId, 'Hover and click disagree about the selected component.');
     await page.mouse.move(20, 20);
     assert.equal(await page.locator(`.shape-cloud-source-slot [data-cloud-component="${hoveredId}"] .cloud-guide-line`).evaluate(node => getComputedStyle(node).stroke), 'rgb(241, 198, 139)', 'Persistent selection must remain distinct from hover.');
+    await checkShapeCloudLinkedPose(page);
     await page.getByRole('button', { name: 'Unlock rotation', exact: true }).click();
     const bounds = await page.locator('.shape-cloud-output-slot .shape-cloud-viewport').boundingBox(); assert.ok(bounds);
     await page.mouse.move(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2); await page.mouse.down();

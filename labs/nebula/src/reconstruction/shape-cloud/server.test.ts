@@ -27,7 +27,10 @@ test('completed shape result requires both material pins, finite registration an
   assert.equal(readShapeCloudResult(result).unitsPerPixel, 10 / 192);
   assert.equal(readShapeCloudResult(result).quality, 'detailed');
   assert.equal(readShapeCloudResult({ ...result, quality: 'draft' }).quality, 'draft');
+  assert.equal(readShapeCloudResult(result).preparationVersion, undefined, 'Historical receipts remain readable.');
+  assert.equal(readShapeCloudResult({ ...result, preparationVersion: 'tight-support-uniform-pitch@1' }).preparationVersion, 'tight-support-uniform-pitch@1');
   for (const changed of [{ neutral: undefined }, { textured: undefined }, { unitsPerPixel: NaN }, { unitsPerPixel: .5 }, { empty: true },
-    { quality: 'unknown' }, { source: { ...pin, path: '.local/nebula-lab/../../outside.png' } }]) assert.throws(() => readShapeCloudResult({ ...result, ...changed }));
+    { quality: 'unknown' }, { preparationVersion: 1 }, { preparationVersion: 'invalid' },
+    { source: { ...pin, path: '.local/nebula-lab/../../outside.png' } }]) assert.throws(() => readShapeCloudResult({ ...result, ...changed }));
   assert.equal(readShapeCloudResult({ ...result, empty: true, neutral: undefined, textured: undefined }).empty, true);
 });

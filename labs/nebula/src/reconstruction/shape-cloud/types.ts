@@ -16,7 +16,7 @@ export interface ShapeCloudResult {
   schema: 'cssearth-shape-cloud-result@1'; id: string; imageId: string;
   sourceSha256: string; mapSha256: string; geometrySha256: string;
   width: number; height: number; unitsPerPixel: number;
-  settings: ShapeCloudSettings; empty: boolean; quality: ShapeCloudQuality;
+  settings: ShapeCloudSettings; empty: boolean; quality: ShapeCloudQuality; preparationVersion?: string;
   neutral?: ShapeCloudPin; textured?: ShapeCloudPin;
   source: ShapeCloudPin; projection?: ShapeCloudPin;
 }

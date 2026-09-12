@@ -3,7 +3,7 @@ import { validatePreparedCssVolume } from '../../../../src/renderers/css/volume/
 import type { PreparedCssVolume } from '../../../../src/renderers/css/volume/types';
 import type { ShapeCloudPin, ShapeCloudResult } from '../reconstruction/shape-cloud/types';
 import { readShapeCloudResult } from '../reconstruction/shape-cloud/result';
-import { shapeCloudCamera, type ShapeCloudFraming } from './shape-cloud-camera';
+import { shapeCloudOrthographicCamera, type ShapeCloudFraming } from './shape-cloud-camera';
 import '../../../../src/renderers/css/styles/volume.css';
 
 declare const __NEBULA_REPO_ROOT__: string;
@@ -72,6 +72,8 @@ export async function createShapeCloudViewer({ host, result: input, resolvePath 
     resolveResource: path => requiredTexture(banks.neutral, path) });
   let material: Material = 'neutral', yaw = 0, pitch = 0;
   let framing: ShapeCloudFraming = { zoom: 1, panX: 0, panY: 0 };
+  const cameras = [...root.querySelectorAll<HTMLElement>('.css-volume-camera')];
+  const scenes = [...root.querySelectorAll<HTMLElement>('.css-volume-scene')];
   const leaves = mounted.roots.flatMap((axisRoot, index) => {
     const axis = (['x', 'y', 'z'] as const)[index]!;
     const neutralStack = banks.neutral.payload.stacks.find(stack => stack.axis === axis)!;
@@ -83,11 +85,17 @@ export async function createShapeCloudViewer({ host, result: input, resolvePath 
   });
   function publish() {
     if (disposed || !host.clientWidth || !host.clientHeight) return;
-    const publication = shapeCloudCamera(banks.neutral.payload.frame, result, { width: host.clientWidth, height: host.clientHeight }, framing, yaw, pitch);
+    const camera = shapeCloudOrthographicCamera(banks.neutral.payload.frame, result, { width: host.clientWidth, height: host.clientHeight }, framing, yaw, pitch);
+    const { publication } = camera;
     // This host is the registered photo plane, not the outer comparison viewport.
     // Keep bounded prepared leaves beyond the photo edges; the UI clips its viewport.
     mounted.publish({ world: publication.world, viewport: { focalPixels: publication.viewport.focalPixels,
       principalOffsetPixels: publication.viewport.principalOffsetPixels } });
+    // The shared runtime still owns optical axis weighting. The lab's image-space
+    // comparator owns this exact parallel projection, with bounded CSS depths.
+    for (const node of cameras) node.style.perspective = 'none';
+    for (const node of scenes) node.style.transform = camera.transform;
+    root.dataset.projection = 'orthographic';
     root.dataset.pose = `${yaw},${pitch}`;
     root.dataset.framing = JSON.stringify(framing);
   }

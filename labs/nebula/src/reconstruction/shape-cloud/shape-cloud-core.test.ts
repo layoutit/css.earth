@@ -11,6 +11,7 @@ import { initializeShapeCloud, readShapeCloudSettings } from './model.js';
 import { createShapeCloudField, createShapeImageSampler, shapePixelToUnits, shapeUnitsToPixel } from './field.js';
 import { bakeShapeCloud } from './bake.js';
 import type { ShapeCloudSettings } from './types.js';
+import { shapeCloudSampling } from './quality.js';
 
 function candidate(id: string, radius = 50, x = 100, angle = .3): GeometryCandidate {
   return { id, center: [x, 80], radii: [radius, radius * .7], angleRadians: angle,
@@ -57,7 +58,7 @@ test('raster rotations, asymmetric placement and source pixel centers share one 
   assert.deepEqual(out, [...rgb.slice(3 * (23 * 120 + 14), 3 * (23 * 120 + 14) + 3)]);
   assert.equal(sampler(50, 50, 0, out), false);
 });
-test('weight, thickness, softness and depth alter the emitting field while bounds retain the full image and complete support', () => {
+test('weight, thickness, softness and depth alter the field while baking bounds retain complete emission without empty photo margins', () => {
   const data: GeometryMap = { width: 200, height: 200, candidates: [{ ...candidate('a'), center: [160, 100], radii: [55, 30], angleRadians: 0 }], groups: [] };
   const settings = initializeShapeCloud(data);
   const sample = (x: number, y: number, z: number, patch = {}) => {
@@ -71,8 +72,17 @@ test('weight, thickness, softness and depth alter the emitting field while bound
   assert.ok(sample(6.08, 0, 0, { softness: .2 }) > sample(6.08, 0, 0));
   assert.equal(sample(3, 0, 1.5), 0); assert.ok(sample(3, 0, 1.5, { depth: 1 }) > 0);
   const field = createShapeCloudField(settings, 200, 200);
-  assert.ok(field.bounds.min[0] < -5 && field.bounds.max[0] > 6.13, 'Moved shell beyond the original image remains in the bounds.');
-  assert.ok(field.bounds.min[1] < -5 && field.bounds.max[1] > 5);
+  assert.ok(field.bounds.min[0] < -.135 && field.bounds.max[0] > 6.135, 'Moved shell beyond the original image remains in the bounds.');
+  assert.ok(field.bounds.min[1] < -1.71 && field.bounds.max[1] > 1.71);
+  assert.ok(field.bounds.min[1] > -2 && field.bounds.max[1] < 2, 'Empty image margins must not consume finite-depth samples.');
+});
+test('anisotropic clouds use one physical slice spacing rather than the same slab count on each axis', () => {
+  const bounds = { min: [-2, -1, -.4] as [number, number, number], max: [2, 1, .4] as [number, number, number] };
+  const detail = shapeCloudSampling('detailed', bounds), draft = shapeCloudSampling('draft', bounds);
+  assert.equal(detail.slices.x, 64); assert.equal(detail.slices.y, 32); assert.equal(detail.slices.z, 13);
+  for (const [span, count] of [[4, detail.slices.x], [2, detail.slices.y], [.8, detail.slices.z]])
+    assert.ok(Math.abs(span! / count! / detail.targetPitchUnits - 1) < .03, 'Side/front depth sampling must be comparable.');
+  assert.ok(draft.slices.x < detail.slices.x && draft.width < detail.width);
 });
 test('3D rings keep their opening through depth; signed terms carve soft cavities without negative emission', () => {
   const settings = initializeShapeCloud({ width: 200, height: 200, groups: [], candidates: [{ ...candidate('a'), center: [100, 100], radii: [40, 30], angleRadians: 0 }] });

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { shapeCloudCamera } from './shape-cloud-camera.js';
+import { shapeCloudCamera, shapeCloudOrthographicCamera } from './shape-cloud-camera.js';
 import { preparedVolumeCameraTransform } from '../../../../src/renderers/css/volume/prepared-volume-runtime.js';
 import type { PreparedCssVolume, VolumeCameraPublication } from '../../../../src/renderers/css/volume/types.js';
 
@@ -48,4 +48,22 @@ test('posed cloud stays centered, camera orientation is proper, and ordinary-dep
     assert.ok(Math.hypot(offset[0] - front[0], offset[1] - front[1]) < .05);
   }
   assert.throws(() => shapeCloudCamera(frame, image, viewport, { ...framing, zoom: 0 }, 0, 0), /positive extents/);
+});
+
+test('true orthographic CSS transport keeps exact image projection at every depth without large CSS translations', () => {
+  const viewport = { width: 900, height: 650 }, framing = { zoom: 2.5, panX: 21, panY: -17 };
+  const fit = Math.min(viewport.width / image.width, viewport.height / image.height) * .94 * framing.zoom;
+  for (const [yaw, pitch] of [[0, 0], [30, 0], [45, 0], [90, 0], [45, 35], [-60, -35]]) {
+    const camera = shapeCloudOrthographicCamera(frame, image, viewport, framing, yaw!, pitch!);
+    assert.ok(camera.transform.startsWith('translate3d(21px,-17px,0px)'));
+    const cy = Math.cos(yaw! * Math.PI / 180), sy = Math.sin(yaw! * Math.PI / 180);
+    const cx = Math.cos(pitch! * Math.PI / 180), sx = Math.sin(pitch! * Math.PI / 180);
+    for (const z of [-5, 0, 5]) for (const [px, py] of [[0, 0], [768, 534], [213, 421]]) {
+      const x = (px! - image.width / 2) * image.unitsPerPixel, y = (image.height / 2 - py!) * image.unitsPerPixel;
+      const point = [y * 50, x * 50, z * 50], r = camera.rotation;
+      const actual = [0, 1].map(row => (r[row * 3]! * point[0]! + r[row * 3 + 1]! * point[1]! + r[row * 3 + 2]! * point[2]!) * camera.scale);
+      const expected = [(cy * x - sy * z) * fit / image.unitsPerPixel, (sx * sy * x - cx * y + sx * cy * z) * fit / image.unitsPerPixel];
+      assert.ok(Math.hypot(actual[0]! - expected[0]!, actual[1]! - expected[1]!) < 1e-9);
+    }
+  }
 });

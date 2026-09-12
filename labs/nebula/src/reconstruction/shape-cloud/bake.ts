@@ -14,7 +14,7 @@ import { bakeMasterVolumeSlices } from '../master-slices.js';
 import { recolorCloudSlices } from '../cloud-material.js';
 import { createShapeCloudField, createShapeImageSampler } from './field.js';
 import { readShapeCloudSettings } from './model.js';
-import { readShapeCloudQuality, shapeCloudSampling } from './quality.js';
+import { readShapeCloudQuality, shapeCloudSampling, SHAPE_CLOUD_PREPARATION_VERSION } from './quality.js';
 import type { ShapeCloudPin, ShapeCloudResult, ShapeCloudSettings, ShapeCloudQuality } from './types.js';
 
 export const SHAPE_CLOUD_METHOD = 'detected-boundary-signed-emission-shapes@2';
@@ -71,15 +71,17 @@ export async function bakeShapeCloud(input: {
       geometry.width !== image.width || geometry.height !== image.height || image.width * image.height > 1_000_000)
     throw new TypeError('Invalid shape cloud source or output identity.');
   const output = containedPath(root, outputDirectory);
-  const quality = readShapeCloudQuality(input.quality), sampling = shapeCloudSampling(quality), total = sampling.slabs * 3;
+  const quality = readShapeCloudQuality(input.quality);
   const settings = readShapeCloudSettings(input.settings, image.width, image.height);
   const field = createShapeCloudField(settings, image.width, image.height);
+  const sampling = shapeCloudSampling(quality, field.bounds), total = sampling.slices.x + sampling.slices.y + sampling.slices.z;
   cancellation(options.signal);
   const sourceBytes = await verifiedBytes(root, source);
   const { data: rgb, info } = await sharp(sourceBytes).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
   if (info.width !== image.width || info.height !== image.height || info.channels !== 3)
     throw new TypeError('Shape cloud source must retain the complete registered working-image pixels.');
   const result: ShapeCloudResult = { schema: 'cssearth-shape-cloud-result@1', id, imageId: image.id,
+    preparationVersion: SHAPE_CLOUD_PREPARATION_VERSION,
     sourceSha256: image.sourceSha256, mapSha256: image.mapSha256, geometrySha256: input.geometrySha256,
     width: image.width, height: image.height, unitsPerPixel: field.unitsPerPixel, settings, quality, empty: field.empty, source: { ...source } };
   if (field.empty) return result;
@@ -93,14 +95,14 @@ export async function bakeShapeCloud(input: {
     projection: { width: image.width, height: image.height, unitsPerPixel: field.unitsPerPixel,
       pixelEdgeToUnits: ['(x-width/2)*unitsPerPixel', '(height/2-y)*unitsPerPixel', '0'] },
     interpretation: 'Automatically grouped projected boundaries seed editable shells, rings or filled ellipsoids. Nonnegative emission is max(0, sum(add terms) - sum(subtract terms)). Depth, wall thickness, softness and weights are authored assumptions, not recovered gas density. No photograph column normalization.',
-    extent: 'Full image window and all finite shell support retained. Colors do not select support or alter depth.',
+    extent: 'Complete finite emission support retained; empty photo margins are excluded from sampling bounds. Full source registration is unchanged. Colors do not select support or alter depth.',
     coordinateMeaning: 'Image-relative dimensionless display units. No measured distance, physical size or 3D sky orientation.' };
   report('volume', 0, total, 'Preparing the shared neutral shape cloud');
   let samples = 0;
   const { masters } = await bakeMasterVolumeSlices({ sampleEmission(x, y, z, out) {
     if (++samples % 65536 === 0) cancellation(options.signal);
     field.sampleEmission(x, y, z, out);
-  }, boundsKpc: field.bounds, sliceCounts: { x: sampling.slabs, y: sampling.slabs, z: sampling.slabs }, samplesPerSlab: sampling.samples,
+  }, boundsKpc: field.bounds, sliceCounts: sampling.slices, samplesPerSlab: sampling.samples,
   exposureGain: settings.exposure, masterWidth: sampling.width, masterDirectory: neutralDirectory, deliveryBanks: [],
   unitsPerSourceUnit: 1, provenance, cropTransparent: false, allowEmpty: true,
   onProgress: progress => report('volume', progress.completed, progress.total, `Preparing ${progress.axis.toUpperCase()} cloud slabs`) });

@@ -2,6 +2,8 @@ import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import type { Matrix } from '../alignment/observations-ui/model';
 import type { ShapeCloudComponent, ShapeCloudMode, ShapeCloudResult } from '../reconstruction/shape-cloud/types';
 import { createShapeCloudViewer } from '../viewer/shape-cloud-viewer';
+import { shapeCloudPhotoPose } from './shape-cloud-photo-pose';
+import { ShapeCloudOrientation } from './shape-cloud-orientation';
 
 export interface CloudView { zoom: number; panX: number; panY: number; yaw: number; pitch: number; locked: boolean }
 export const earthCloudView: CloudView = { zoom: 1, panX: 0, panY: 0, yaw: 0, pitch: 0, locked: true };
@@ -23,6 +25,8 @@ function CloudPane({ kind, ...props }: CloudStageProps & { kind: 'source' | 'clo
   const sourceVisible = kind === 'source' || mode === 'overlay';
   const scale = Math.min(extent.width / frame.width, extent.height / frame.height) * .94 * view.zoom;
   const scaleRef = useRef(scale); scaleRef.current = scale;
+  const photoPose = `matrix(${shapeCloudPhotoPose(width, height, view.yaw, view.pitch).join(',')})`;
+  const photoStyle = { position: 'absolute' as const, inset: 0, width, height, transform: photoPose, transformOrigin: '0 0' };
   const drag = useRef<{ id: number; x: number; y: number; view: CloudView; pan: boolean; component?: string } | null>(null);
   useEffect(() => {
     const element = viewport.current; if (!element) return;
@@ -67,7 +71,7 @@ function CloudPane({ kind, ...props }: CloudStageProps & { kind: 'source' | 'clo
     const target = event.target instanceof Element ? event.target.closest('[data-cloud-component]') : null;
     event.currentTarget.setPointerCapture(event.pointerId);
     drag.current = { id: event.pointerId, x: event.clientX, y: event.clientY, view: viewRef.current,
-      pan: kind === 'source' || viewRef.current.locked || event.shiftKey, component: target?.getAttribute('data-cloud-component') ?? undefined };
+      pan: viewRef.current.locked || event.shiftKey, component: target?.getAttribute('data-cloud-component') ?? undefined };
   }
   function pointerMove(event: PointerEvent<HTMLDivElement>) {
     const start = drag.current; if (!start || event.pointerId !== start.id) return;
@@ -85,20 +89,22 @@ function CloudPane({ kind, ...props }: CloudStageProps & { kind: 'source' | 'clo
       onKeyDown={event => { if (event.key === 'Home') { event.preventDefault(); onView(earthCloudView); } }}>
       <div className="shape-cloud-frame" style={{ transform: `translate(${extent.width / 2 + (view.panX - frame.width / 2) * scale}px, ${extent.height / 2 + (view.panY - frame.height / 2) * scale}px) scale(${scale})` }}>
         <div className="shape-cloud-image-plane" data-cloud-source-frame={kind} style={{ width, height, transform: `matrix(${matrix.join(',')})` }}>
-          <img className="shape-cloud-source" src={source} alt="Registered source without stars" width={width} height={height}
-            style={{ visibility: sourceVisible ? 'visible' : 'hidden' }} draggable={false} onError={() => setError('Source image could not be loaded.')} />
+          <div className="shape-cloud-photo-pose" data-photo-pose={`${view.yaw},${view.pitch}`} style={{ ...photoStyle, pointerEvents: 'none' }}>
+            <img className="shape-cloud-source" src={source} alt="Registered source without stars" width={width} height={height}
+              style={{ visibility: sourceVisible ? 'visible' : 'hidden' }} draggable={false} onError={() => setError('Source image could not be loaded.')} />
+          </div>
           {kind === 'cloud' && <div className="shape-cloud-render-host" data-cloud-result={visibleResult?.id ?? ''}
             data-cloud-quality={visibleResult?.quality ?? ''} ref={host}
             style={{ width, height, opacity: mode === 'overlay' ? overlayOpacity : 1 }} />}
-          <svg className="shape-cloud-guides" width={width} height={height} viewBox={`0 0 ${width} ${height}`}
+          <div className="shape-cloud-guide-pose" style={{ ...photoStyle, pointerEvents: 'none' }}><svg className="shape-cloud-guides" width={width} height={height} viewBox={`0 0 ${width} ${height}`}
             aria-label="Editable shape cloud guides" style={{ visibility: showGuides ? 'visible' : 'hidden' }}>
             {components.map(component => <g key={component.id} data-cloud-component={component.id} data-selected={component.id === selectedId} data-hovered={component.id === hoveredId}
               data-enabled={component.enabled} transform={`translate(${component.x} ${component.y}) rotate(${component.rotationDegrees})`}>
               <title>{component.label} · click to select · weight {component.weight.toFixed(2)}{component.enabled ? '' : ' · disabled'}</title>
               <ellipse className="cloud-guide-line" rx={component.radiusX} ry={component.radiusY} vectorEffect="non-scaling-stroke" />
-              <ellipse className="cloud-guide-hit" rx={component.radiusX} ry={component.radiusY} vectorEffect="non-scaling-stroke" />
+              <ellipse className="cloud-guide-hit" rx={component.radiusX} ry={component.radiusY} vectorEffect="non-scaling-stroke" style={{ pointerEvents: showGuides ? 'stroke' : 'none' }} />
             </g>)}
-          </svg>
+          </svg></div>
         </div>
       </div>
       {kind === 'cloud' && (error || !ready || visibleResult?.empty) && <p className="shape-cloud-empty" role={error ? 'alert' : 'status'}>
@@ -106,6 +112,7 @@ function CloudPane({ kind, ...props }: CloudStageProps & { kind: 'source' | 'clo
       </p>}
       {kind === 'source' && error && <p className="shape-cloud-empty" role="alert">{error}</p>}
     </div>
+    <ShapeCloudOrientation yaw={view.yaw} pitch={view.pitch} matrix={matrix} />
   </section>;
 }
 export function ShapeCloudStage(props: CloudStageProps) {

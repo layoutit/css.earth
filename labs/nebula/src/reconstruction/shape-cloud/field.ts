@@ -25,7 +25,9 @@ export function createShapeCloudField(settings: ShapeCloudSettings, width: numbe
       shape: component.shape, operation: component.operation, halfThickness, softness: component.softness,
       gain: component.weight * 1.8 / Math.min(a, b) };
   });
-  const bounds: Bounds3 = { min: [-5, -height * unitsPerPixel / 2, -unitsPerPixel], max: [5, height * unitsPerPixel / 2, unitsPerPixel] };
+  // The full photograph remains a separate registered reference. Empty photo margins
+  // must not consume slab samples that belong to the finite 3D emission support.
+  const bounds: Bounds3 = { min: [Infinity, Infinity, Infinity], max: [-Infinity, -Infinity, -Infinity] };
   for (const component of components) {
     if (component.operation === 'subtract') continue; // A cutter cannot create or enlarge emission support.
     bounds.min[0] = Math.min(bounds.min[0], component.x - component.extentX);
@@ -35,6 +37,8 @@ export function createShapeCloudField(settings: ShapeCloudSettings, width: numbe
     bounds.min[2] = Math.min(bounds.min[2], -component.extentZ);
     bounds.max[2] = Math.max(bounds.max[2], component.extentZ);
   }
+  const empty = !components.some(component => component.operation === 'add');
+  if (empty) { bounds.min = [0, 0, 0]; bounds.max = [0, 0, 0]; }
   // One source-pixel guard makes every authored finite-support boundary interior to the bake.
   for (let axis = 0; axis < 3; axis++) { bounds.min[axis]! -= unitsPerPixel; bounds.max[axis]! += unitsPerPixel; }
   const sampleEmission = (x: number, y: number, z: number, out: Vector3) => {
@@ -55,7 +59,7 @@ export function createShapeCloudField(settings: ShapeCloudSettings, width: numbe
     }
     out[0] = out[1] = out[2] = Math.max(0, value);
   };
-  return { bounds, unitsPerPixel, empty: !components.some(component => component.operation === 'add'), sampleEmission };
+  return { bounds, unitsPerPixel, empty, sampleEmission };
 }
 
 /** Pixel-edge convention: a world position at a source texel center samples that texel exactly. */

@@ -1,11 +1,22 @@
 import { worldCameraFromCenteredPresentation } from '../../../../src/renderers/css/navigation/world-camera';
-import { worldRotationFromQuaternion, type WorldRotation } from '../../../../src/renderers/css/navigation/world-camera-math';
+import { worldRotationCss, worldRotationFromQuaternion, type WorldRotation } from '../../../../src/renderers/css/navigation/world-camera-math';
+import { preparedVolumeCameraTransform } from '../../../../src/renderers/css/volume/prepared-volume-runtime';
 import type { PreparedCssVolume, VolumeCameraPublication } from '../../../../src/renderers/css/volume/types';
 
 export interface ShapeCloudFraming { zoom: number; panX: number; panY: number }
 export const SHAPE_CLOUD_FOCAL_PIXELS = 1e7;
 
-/** Same pixel-edge fit as the image comparator, with negligible perspective at ordinary zoom. */
+/** True orthographic CSS3D avoids Chromium's large-depth loss of tilted slices. */
+export function shapeCloudOrthographicCamera(frame: PreparedCssVolume['frame'], image: { width: number; height: number; unitsPerPixel: number },
+  viewport: { width: number; height: number }, framing: ShapeCloudFraming, yawDegrees: number, pitchDegrees: number) {
+  const publication = shapeCloudCamera(frame, image, viewport, framing, yawDegrees, pitchDegrees);
+  const { rotation } = preparedVolumeCameraTransform(publication, frame);
+  const scale = Math.min(viewport.width / image.width, viewport.height / image.height) * .94 * framing.zoom / (50 * image.unitsPerPixel);
+  const transform = `translate3d(${framing.panX}px,${framing.panY}px,0px) scale3d(${scale},${scale},${scale}) ${worldRotationCss(rotation)}`;
+  return { publication, rotation, scale, transform };
+}
+
+/** Physical orientation transport for the shared optical stack policy; CSS placement is orthographic above. */
 export function shapeCloudCamera(frame: PreparedCssVolume['frame'], image: { width: number; height: number; unitsPerPixel: number },
   viewport: { width: number; height: number }, framing: ShapeCloudFraming, yawDegrees: number, pitchDegrees: number): VolumeCameraPublication {
   const { width, height } = viewport;

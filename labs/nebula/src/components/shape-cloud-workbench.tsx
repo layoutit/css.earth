@@ -141,7 +141,7 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
         <span aria-hidden="true">{component.shape === 'ring' ? '◎' : component.shape === 'ellipsoid' ? '●' : '◯'}</span>
         {component.operation === 'subtract' ? '−' : '+'}{component.enabled ? Number(component.weight.toFixed(2)) : 0} S{index + 1}
       </button>)}</div>
-      <div className="shape-cloud-camera-hint">{view.locked ? 'Earth view · drag to pan · scroll to zoom' : 'Drag cloud to rotate · Shift-drag to pan · scroll to zoom'}</div>
+      <div className="shape-cloud-camera-hint">{view.locked ? 'Earth view · drag to pan · scroll to zoom' : 'Drag either pane to rotate · Shift-drag to pan · scroll to zoom'}</div>
     </section>, host)}
   </section>;
 }
