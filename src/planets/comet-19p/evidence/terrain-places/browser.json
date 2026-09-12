@@ -1,0 +1,316 @@
+{
+  "date": "2026-09-12",
+  "testedBase": "e986b92804c786669a30c2bcc104b820e8fa6e3c",
+  "workingTree": "Seven terrain places, the preparation helpers and the opt-in surface normal change recorded by the pins below; runtime renderer and shell match testedBase.",
+  "implementation": [
+    {
+      "path": "tools/objects/surface-features/image-controls.mts",
+      "bytes": 10225,
+      "sha256": "9c6e88c2e6aa948511070dafca4b9f0c088c33ad9f2cc5fa7942ab791cb45a7b"
+    },
+    {
+      "path": "tools/objects/surface-features/project-encounter-landmarks.mts",
+      "bytes": 15647,
+      "sha256": "6df649af63b8b3dbcbbf8dc91e508a9c0ca0d4dc506c7191cfd26664a657e844"
+    },
+    {
+      "path": "tools/objects/surface-features/project-orthophoto-landmarks.mts",
+      "bytes": 11874,
+      "sha256": "b78fe51359ac6fba158c0695e5495b7e9a793d7923c140a651b725a420e5477a"
+    },
+    {
+      "path": "tools/objects/surface-features/landmarks.ts",
+      "bytes": 14206,
+      "sha256": "25550574a86c042b29b37abbe4d896f366b470e145c343e69d5b1de6363681f9"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src/planets/comet-19p/object.json",
+      "bytes": 4509,
+      "sha256": "499c0f08f0a720d20938ae525d0981dcf8dc7e59448541afb8e2a77b43961cfa"
+    },
+    {
+      "path": "src/planets/comet-19p/source/manifest.json",
+      "bytes": 24553,
+      "sha256": "f2b01921b62f0f7c6cc495009a65af3f9a25c5478db3ab36aa6411319af5b032"
+    },
+    {
+      "path": "src/planets/comet-19p/runtime-assets.json",
+      "bytes": 8030,
+      "sha256": "3d4c69674331e3536a8817600076225f442e399bc8e16c0bdf6a3ae2f27ecd0e"
+    }
+  ],
+  "servedFeature": {
+    "path": "public/scenes/comet-19p/comet-19p-features.json",
+    "bytes": 5291,
+    "sha256": "350379377f75c3aea675ea8238276ce480e6ee454e87913774ec9e6e4ae97b7d"
+  },
+  "remoteFeature": {
+    "url": "https://earth-assets.lowpoly.cc/runtime-assets/350379377f75c3aea675ea8238276ce480e6ee454e87913774ec9e6e4ae97b7d/comet-19p-features.json",
+    "status": 200,
+    "bytes": 5291,
+    "sha256": "350379377f75c3aea675ea8238276ce480e6ee454e87913774ec9e6e4ae97b7d"
+  },
+  "surfaceAssets": "79 pre-existing assets across both changed bodies have the same hashes as the base inventories. Only the two feature JSONs are new.",
+  "browser": {
+    "version": "153.0.8010.12",
+    "method": "Playwright CLI in Chrome for Testing. Search each place and await the existing flight; inspect captions and image placement. At a mobile viewport, return the information sheet to peek before capture. Verify Shadows Off and retained first leaf plus leaf count after every selection. Desktop dataset switching checks Borrelly MICAS-only labels and Wild labels on both matching datasets.",
+    "cases": [
+      {
+        "id": "comet-19p",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "dpr": 1,
+        "lens": "micas",
+        "flights": [
+          {
+            "name": "Upper Mottled Terrain",
+            "caption": "Upper Mottled Terrain\nMapped terrain · size unpublished\n\nMottled terrain covers much of this end of the nucleus. It may be older surface material altered by sublimation. Approximate location from Deep Space 1’s published terrain map.\n\nBritt et al. (2004); NASA/JPL/MICAS; USGS",
+            "shadows": false,
+            "retainedLeaves": 2856,
+            "url": "http://127.0.0.1:53136/comet-19p/",
+            "tooltipBox": {
+              "x": 484.67999267578125,
+              "y": 224.73001098632812,
+              "width": 280,
+              "height": 144
+            }
+          },
+          {
+            "name": "Central Smooth Terrain",
+            "caption": "Central Smooth Terrain\nMapped terrain · size unpublished\n\nSmooth terrain lies below the central mesas and may collect debris falling from them. Approximate location from Deep Space 1’s published terrain map.\n\nBritt et al. (2004); NASA/JPL/MICAS; USGS",
+            "shadows": false,
+            "retainedLeaves": 2856,
+            "url": "http://127.0.0.1:53136/comet-19p/",
+            "tooltipBox": {
+              "x": 619.4500122070312,
+              "y": 350.9700012207031,
+              "width": 280,
+              "height": 144
+            }
+          },
+          {
+            "name": "Lower Mottled Terrain",
+            "caption": "Lower Mottled Terrain\nMapped terrain · size unpublished\n\nMottled terrain covers much of the smaller lobe. Sublimation and collapse may have helped produce its rough texture. Approximate location from Deep Space 1’s published terrain map.\n\nBritt et al. (2004); NASA/JPL/MICAS; USGS",
+            "shadows": false,
+            "retainedLeaves": 2856,
+            "url": "http://127.0.0.1:53136/comet-19p/",
+            "tooltipBox": {
+              "x": 707.6099853515625,
+              "y": 340.7900085449219,
+              "width": 280,
+              "height": 160
+            }
+          },
+          {
+            "name": "Central Mesas",
+            "caption": "Central Mesas\nMapped terrain · size unpublished\n\nFlat-topped mesas rise above the surrounding smooth terrain. Their slopes may expose volatile-rich material. Approximate location from Deep Space 1’s published terrain map.\n\nBritt et al. (2004); NASA/JPL/MICAS; USGS",
+            "shadows": false,
+            "retainedLeaves": 2856,
+            "url": "http://127.0.0.1:53136/comet-19p/",
+            "tooltipBox": {
+              "x": 543.0400390625,
+              "y": 255.85000610351562,
+              "width": 280,
+              "height": 160
+            }
+          }
+        ],
+        "alternate": "dlr"
+      },
+      {
+        "id": "comet-19p",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "dpr": 1,
+        "lens": "micas",
+        "flights": [
+          {
+            "name": "Upper Mottled Terrain",
+            "caption": "Upper Mottled Terrain\nMapped terrain · size unpublished\n\nMottled terrain covers much of this end of the nucleus. It may be older surface material altered by sublimation. Approximate location from Deep Space 1’s published terrain map.\n\nBritt et al. (2004); NASA/JPL/MICAS; USGS",
+            "shadows": false,
+            "retainedLeaves": 2856,
+            "url": "http://127.0.0.1:53136/comet-19p/?v=QEa-Vw_NcKPXCj4_IS5N0vGqwDD5aB-olyFBQsczQAAAAD-z8L0MBoXQv8JVaQfgiU2_4m2bo_2mAwAA",
+            "tooltipBox": {
+              "x": 25.3800048828125,
+              "y": 238.3000030517578,
+              "width": 280,
+              "height": 143.99998474121094
+            }
+          },
+          {
+            "name": "Central Smooth Terrain",
+            "caption": "Central Smooth Terrain\nMapped terrain · size unpublished\n\nSmooth terrain lies below the central mesas and may collect debris falling from them. Approximate location from Deep Space 1’s published terrain map.\n\nBritt et al. (2004); NASA/JPL/MICAS; USGS",
+            "shadows": false,
+            "retainedLeaves": 2856,
+            "url": "http://127.0.0.1:53136/comet-19p/?v=QMa-WKnMQYk3TD5U1J_jU_fPwDD5aB73NQxBQsczQAAAAD9fOkM5c6dmv-OUN23cWbY_vAOghnzQAQAA",
+            "tooltipBox": {
+              "x": 67.37000274658203,
+              "y": 277.69000244140625,
+              "width": 279.99999237060547,
+              "height": 144
+            }
+          },
+          {
+            "name": "Lower Mottled Terrain",
+            "caption": "Lower Mottled Terrain\nMapped terrain · size unpublished\n\nMottled terrain covers much of the smaller lobe. Sublimation and collapse may have helped produce its rough texture. Approximate location from Deep Space 1’s published terrain map.\n\nBritt et al. (2004); NASA/JPL/MICAS; USGS",
+            "shadows": false,
+            "retainedLeaves": 2856,
+            "url": "http://127.0.0.1:53136/comet-19p/?v=QMa-QhjKfvnbI75B2nmn752ywDD5aB6WEMdBQsczQAAAAL-ondl-QthGv9eQyy3WRyc_xUFyhjQl2AAA",
+            "tooltipBox": {
+              "x": 94.61000061035156,
+              "y": 263.29998779296875,
+              "width": 279.99998474121094,
+              "height": 160
+            }
+          },
+          {
+            "name": "Central Mesas",
+            "caption": "Central Mesas\nMapped terrain · size unpublished\n\nFlat-topped mesas rise above the surrounding smooth terrain. Their slopes may expose volatile-rich material. Approximate location from Deep Space 1’s published terrain map.\n\nBritt et al. (2004); NASA/JPL/MICAS; USGS",
+            "shadows": false,
+            "retainedLeaves": 2856,
+            "url": "http://127.0.0.1:53136/comet-19p/?v=QMa-Sd4QCDEm6r5eY-ZU_fO3wDD5aB9Dt19BQsczQAAAAL_Uj2OHkr5nv-LrtSPz6R8_zPoTBOK64wAA",
+            "tooltipBox": {
+              "x": 43.47999572753906,
+              "y": 236.8699951171875,
+              "width": 279.99998474121094,
+              "height": 160
+            }
+          }
+        ],
+        "alternate": "dlr"
+      }
+    ],
+    "pageErrors": [],
+    "captures": [
+      {
+        "image": "desktop.png",
+        "bytes": 481557,
+        "sha256": "9ed35b2bd31898c8c32a0ec671ad255263b0c8bf15ecf46fc8e50fdcdf1be513",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "dpr": 1,
+        "lens": "micas",
+        "selectedPlace": "Central Mesas",
+        "shadows": false,
+        "camera": {
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-0.150320122096,0.710613121281,0.687337510075,0,-0.26817870804,0.639860924421,-0.720179267928,0,-0.95156925205,-0.292586720925,0.094387336498,0,0,0,0,1)",
+            "skybox": "matrix3d(-0.927802159984,-0.372799513586,0.014269979228,0,0.131275081709,-0.362035792699,-0.922874162586,0,0.349213224553,-0.854371439255,0.384836889967,0,0,0,0,1)",
+            "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+          },
+          "pitch": 158.2701529791231,
+          "controlPitch": 158.2701529791231,
+          "controlYaw": -112.29187662235131,
+          "zoom": 1.2396521677073904,
+          "distance": 1130.240577414376,
+          "distanceKilometers": 19.656357868076107,
+          "distanceRadii": 4.914089467019027,
+          "levelOfDetail": {
+            "stage": "geometry",
+            "silhouetteDiameter": 518.3999977076719,
+            "billboardOpacity": 0,
+            "markerOpacity": 0,
+            "proxyOpacity": 0
+          },
+          "focal": 1247.08,
+          "principalOffset": [
+            0,
+            0
+          ],
+          "visibleRect": {
+            "left": -720,
+            "right": 720,
+            "top": -450,
+            "bottom": 450
+          },
+          "offAxisDegrees": 0,
+          "silhouetteRadius": 259.19999885383595,
+          "bodyCenterKilometers": [
+            2.6409620659251236e-8,
+            -4.188927402992704e-8,
+            -19.656357868076107
+          ]
+        },
+        "sheet": "sidebar"
+      },
+      {
+        "image": "mobile.png",
+        "bytes": 177285,
+        "sha256": "233cd39d17974652fe3bd108719d50cfba833a655feba99777dff5b8a6762598",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "dpr": 1,
+        "lens": "micas",
+        "selectedPlace": "Central Mesas",
+        "shadows": false,
+        "camera": {
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-0.150320120872,0.710613119314,0.687337512376,0,-0.268178709997,0.639860926275,-0.720179265552,0,-0.951569251692,-0.292586721649,0.094387337866,0,0,0,0,1)",
+            "skybox": "matrix3d(-0.927802159769,-0.372799514078,0.014269980321,0,0.131275079777,-0.362035790092,-0.922874163883,0,0.349213225849,-0.854371440145,0.384836886815,0,0,0,0,1)",
+            "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+          },
+          "pitch": 158.2701529791231,
+          "controlPitch": 158.2701529791231,
+          "controlYaw": -112.29187662235131,
+          "zoom": 0.39168413508585354,
+          "distance": 976.0190904360362,
+          "distanceKilometers": 16.974245051061498,
+          "distanceRadii": 4.2435612627653745,
+          "levelOfDetail": {
+            "stage": "geometry",
+            "silhouetteDiameter": 163.79518376317506,
+            "billboardOpacity": 0,
+            "markerOpacity": 0,
+            "proxyOpacity": 0
+          },
+          "focal": 337.75,
+          "principalOffset": [
+            0,
+            0
+          ],
+          "visibleRect": {
+            "left": -195,
+            "right": 195,
+            "top": -422,
+            "bottom": 422
+          },
+          "offAxisDegrees": 0,
+          "silhouetteRadius": 81.89759188158753,
+          "bodyCenterKilometers": [
+            -3.671893955470296e-8,
+            6.075439068808919e-8,
+            -16.974245051061498
+          ]
+        },
+        "sheet": "peek"
+      }
+    ]
+  },
+  "checks": {
+    "imageRegistrationAndEncounterTests": 10,
+    "landmarkPreparationTests": 4,
+    "changedBodyFeatureTests": 2,
+    "preparationBuild": "passed",
+    "preparationTypecheck": "passed",
+    "coordinateReproduction": "Both generators compare exactly with the checked-in landmark coordinates and residual evidence.",
+    "targetedProvenance": "Both bodies pass with no unresolved inputs.",
+    "aggregateSources": "On base 3efdf2c9, 66 passed and 1 skipped for the absent 1998 ML14 paper. On current main e986b9280, pnpm test:sources stops before tests because Earth, Moon and Mars acquisition recipes changed in be99ac479 without updating object.json recipe pins. These files are untouched by this change."
+  },
+  "limits": [
+    "This checks the two changed comet packages, not all-body browser conformance.",
+    "390 × 844 is a desktop Chrome viewport check, not physical-mobile performance or touch-device qualification.",
+    "Registered places are approximate point callouts. Fit residuals and sampled sensitivity do not establish geological boundaries or absolute location accuracy."
+  ]
+}

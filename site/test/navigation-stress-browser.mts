@@ -3,6 +3,7 @@ declare global {interface Window {__stressIdentity:()=>boolean;__stressSelection
 
 import { required } from '../../tools/test-values.mts';
 import { createTestPage } from './browser-observations.mts';
+import { revealObjectLink } from './navigate-object.mts';
 // Replayable native-input stress journey. One page, no diagnostic camera writes.
 import assert from 'node:assert/strict';
 import { mkdir, open, writeFile } from 'node:fs/promises';
@@ -95,8 +96,8 @@ async function precisionWheel() {
   await mark('precision-wheel-end');
 }
 async function sidebarPick(id:string) {
-  await page.locator('.planet-sidebar-search').fill(id);
-  await page.locator(`.planet-object-link[data-object-id="${id}"]:visible`).first().click();
+  // Search matches display names, so ids such as desdemona-666 never matched a result.
+  await (await revealObjectLink(page, id)).click();
 }
 async function changeDataset() {
   if (!await page.locator('.planet-information-panel').isVisible()) return;

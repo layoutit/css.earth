@@ -161,6 +161,29 @@ bits are instrument-specific; source identity, geometry qualification and
 provenance are transferable requirements. 67P's distances, angles, sample counts,
 photometric model and gain limits are evidence for that dataset, not defaults.
 
+Archives that ship an image with its geometric backplanes as one PDS4 cube use
+the same seam through `format: "pds4-geometry-cube"`: the recipe's `cube` block
+names the label planes that carry the image, the X/Y/Z intercepts and the
+angles, the collection, target, observing system and DSK to bind, and optional
+FITS header expectations. `tools/objects/terrestrial-layers/pds4-geometry-cube.mts`
+validates all of it against the label (offsets, units, special constants) and
+the header, converts units, and recovers nothing else; the camera comes from the
+shared fit above. Dimorphos's DART DRACO view
+(`src/planets/dimorphos/source/preparation/terrestrial.json`) is the first
+instance; a second archive needs a recipe, not a decoder. Frames that share one
+viewing direction use `selection: "recipe-order"`, finest footprint first,
+because lowest-emission selection cannot separate them. The
+[Dimorphos README](../../../../src/planets/dimorphos/README.md) records the
+measured residuals, transfer distances and the archive's pixel-scale unit slip.
+
+The PDS3 routes (OSIRIS GEO, AMICA) stay instrument decoders behind the same
+seam, decided 2026-09-12 after a code review: their archives do not declare
+plane units or semantics the way a PDS4 label does, and about half of each
+decoder is instrument policy (quality-bit polarity and HISTORY radiometry for
+OSIRIS; gzip band reversal and the paired flat for AMICA), so a declaration
+would restate constants while turning validity policy into data. Revisit only
+if a third attached-label, pointer-addressed PDS3 geometry archive appears.
+
 ## Commands and test routing
 
 Read `package.json` for the selected checkout. The commands below have distinct

@@ -98,8 +98,8 @@ matches their palette, not their exact morphology or physical photometry.
 Ordinary-alpha slices approximate RGB extinction and emitted energy. They
 retain finite-slice/axis-handoff artifacts and do not reproduce OpenSpace's
 additive HDR raymarching, stochastic sampling or camera-dependent fade.
-The renderer transports the prepared images and geometry; stars use the
-application's independently prepared star catalog.
+The renderer transports the prepared images and geometry. Background stars are
+baked into the sky cube from the independently prepared star catalogue.
 
 The shared display blends two completed images with complementary weights:
 `t * (B * volume) + (1 - t) * NASA`. The handoff `t` rises smoothly from zero
@@ -109,7 +109,7 @@ clouds present while the incoming image remains faint prevents the previous
 black gap. NASA remains opaque underneath until the handoff completes.
 Without a prepared sky the backdrop remains black. This is a display blend,
 not HDR exposure or photometric calibration; slab transfer, optical correction,
-stars and labels retain their separate behavior.
+and labels retain their separate behavior.
 
 Each retained slab has three coincident CSS image elements sharing one texture.
 Their optical contribution compensates for oblique viewing before isolated axis
@@ -141,9 +141,9 @@ three sRGB channels before quantization without changing source white balance.
 A shared smooth shadow factor suppresses faint image grain: zero below
 transferred display luminance 0.04 and full contribution above 0.12. This
 intentionally removes faint background detail while retaining the separately
-rendered catalogue stars. Alpha stays opaque and source HDR pixels stay unchanged. This is a display fit, not calibrated photometry.
+baked catalogue stars. Alpha stays opaque and source HDR pixels stay unchanged. This is a display fit, not calibrated photometry.
 The NASA Milky Way-only image omits bright Hipparcos/Tycho stars, so the
-application's separately prepared bright stars and labels coexist with it.
+prepared bright stars are composited into the baked faces.
 Faint Gaia stars remain in the image; it is not literally star-free.
 
 ## Neighbourhood stars in the near faces
@@ -155,12 +155,16 @@ of each face: about 17,500 sprites in total, drawn with the same atlas tile,
 photometry table and source-over blend the browser uses, supersampled three times
 per axis. The result is `prepared/sky-near/`, a second complete cube.
 
-The runtime shows the near cube while the observer sits where the field's own
-parallax is invisible, and crossfades to the plain faces over the existing
-stellar band (100 AU to 0.1 pc), which is where that assumption stops holding.
-Inside the band no star is drawn as DOM: the planner selects no star slots and
-the point field writes nothing. Beyond it the prepared point field returns
-unchanged, because parallax is real there.
+The runtime mounts only these six baked faces. They remain the background until
+its existing handoff to the Milky Way volume completes. There is no 100 AU
+handoff to individual DOM stars, star-slot pool, catalogue-selection worker, or
+per-star frame transport. The catalogue stays as a preparation input; the
+application reads only its small appearance manifest and atlas for the Sun's
+single navigation marker, without fetching or decoding the binary star bank.
+
+Individual stellar parallax is no longer rendered when travelling through the
+neighbourhood: stars stay part of the shared cube image. Its existing shared
+camera projection and sky-to-volume blend are preserved.
 
 The baked faces are 1536 px across, so a star's disc is about three times softer
 than the browser's own sprite at device pixel ratio 2, and the sprite radius is

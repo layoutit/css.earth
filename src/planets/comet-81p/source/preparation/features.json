@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-surface-features@1",
+  "directory": "features",
+  "archive": null,
+  "members": null,
+  "surfaceMap": "presentation/surface-map.json",
+  "mapLeftEdgeLongitudeDeg": 0,
+  "output": "comet-81p-features.json",
+  "publicBase": "/scenes/comet-81p/",
+  "target": {
+    "className": "comet-81p-body"
+  },
+  "lensIds": [
+    "model",
+    "navcam"
+  ],
+  "kinds": {
+    "point": [
+      "AA",
+      "IM"
+    ],
+    "linear": [
+      "RU"
+    ],
+    "region": [
+      "RE"
+    ]
+  },
+  "excludedTypeCodes": {},
+  "labelPolicy": {
+    "minimumZoomShare": 0,
+    "minimumDiameterPixels": 40,
+    "alwaysVisibleCount": 0,
+    "maximumVisible": 20,
+    "limbCosine": 0.12
+  },
+  "outline": {
+    "pieces": 32
+  },
+  "landmarks": {
+    "document": "landmarks.json",
+    "inputs": [
+      "features/PIA06285.jpg",
+      "features/PIA06285_fig1.jpg",
+      "photography/navcam/n2073we02_rr.fit",
+      "photography/navcam/n2073we02_rr.json",
+      "shape/wild2_cart_full.tab",
+      "features/image-registration.json",
+      "features/control-measurements.json",
+      "features/evidence/image-landmarks.json"
+    ]
+  }
+}
