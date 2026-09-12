@@ -9,14 +9,15 @@ export function contourField(contour: Contour, width: number, height: number): R
   }
   return { width, height, strength, nx, ny, points: contour.points };
 }
-export function extractContours(rgb: Uint8Array, width: number, height: number, minimumRadius: number): Contour[] {
+export function extractContours(rgb: Uint8Array, width: number, height: number, minimumRadius: number, sensitivity = 1): Contour[] {
+  if (!Number.isFinite(sensitivity) || sensitivity < .25 || sensitivity > 4) throw new TypeError('Contour sensitivity must be between 0.25 and 4.');
   const length = width * height, luminance = new Float32Array(length);
   for (let p = 0; p < length; p++) luminance[p] = (.2126 * rgb[p * 3]! + .7152 * rgb[p * 3 + 1]! + .0722 * rgb[p * 3 + 2]!) / 255;
   const scale = Math.min(width, height) / 768, contours: Contour[] = [];
   for (const sigma of [3, 7, 14].map(n => Math.max(1, n * scale))) {
     const smooth = blur(luminance, width, height, sigma), sorted = Array.from(smooth).sort((a, b) => a - b);
     const background = sorted[Math.floor(length * .2)]!, peak = sorted[Math.floor(length * .995)]!;
-    if (peak - background < .008) continue;
+    if (peak - background < .008 / sensitivity) continue;
     const gradients: number[] = [];
     for (let y = 2; y < height - 2; y++) for (let x = 2; x < width - 2; x++) {
       const p = y * width + x;
@@ -24,10 +25,14 @@ export function extractContours(rgb: Uint8Array, width: number, height: number, 
     }
     gradients.sort((a, b) => a - b);
     const normalizer = Math.max(1e-6, gradients[Math.floor(gradients.length * .99)]!);
-    for (const fraction of [.06, .1, .16, .24, .34, .46, .60, .75]) {
+    const baselineLevels = [.06, .1, .16, .24, .34, .46, .60, .75];
+    // Keep all original bright levels. Sensitivity adds lower levels; it does not
+    // replace the source or introduce a local-background/compactness heuristic.
+    const fractions = sensitivity > 1 ? [...new Set([...baselineLevels, ...baselineLevels.slice(0, 3).map(level => level / sensitivity)])] : baselineLevels;
+    for (const fraction of fractions) {
       // Do not promote quantization/background variations into large connected object contours.
       // This is a display-RGB contrast floor, not a calibrated flux threshold.
-      if ((peak - background) * fraction < .012) continue;
+      if ((peak - background) * fraction < .012 / sensitivity) continue;
       const level = background + (peak - background) * fraction, boundary = new Uint8Array(length), seen = new Uint8Array(length);
       for (let y = 2; y < height - 2; y++) for (let x = 2; x < width - 2; x++) {
         const p = y * width + x;

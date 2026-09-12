@@ -3,6 +3,8 @@ import { createPortal } from 'react-dom';
 import { localFile } from '../viewer/viewer';
 import { GeometryControls, GeometryOverlay } from './observation-geometry';
 import { ShapeCloudWorkbench } from './shape-cloud-workbench';
+import { useGeometryDetection } from './geometry-detection-state';
+import { GeometryDetectionControls } from './geometry-detection-controls';
 import { readGeometryMap, type GeometryMap } from '../alignment/observations-ui/geometry-model';
 import { adjustedMatrix, imageCorners, savedObservationFit, unchanged, type Adjustment, type Matrix } from '../alignment/observations-ui/model';
 import { decisions, morphologies, readDecisions, readReviewMap, readStructureCatalogue, reviewStorageKey,
@@ -120,8 +122,11 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
     return () => { observer.disconnect(); element.removeEventListener('wheel', wheel); };
   }, [host]);
   const image = data?.images.find(item => item.id === selected), map = maps[selected], review = reviews[selected];
-  const geometry = geometries[selected], shapes = mode === 'shapes' && Boolean(image?.geometry);
-  const cloudActive = Boolean(shapes && cloudEditor && geometry && image);
+  const detector = useGeometryDetection(image, geometries[selected], cataloguePath);
+  const geometry = detector.preview ? detector.pendingGeometry : detector.effectiveGeometry;
+  const shapes = mode === 'shapes' && Boolean(image);
+  const cloudMounted = Boolean(shapes && detector.ready && detector.effectiveGeometry && detector.effectiveImage);
+  const cloudActive = Boolean(cloudMounted && cloudEditor && !detector.preview);
   const candidateShapes = useMemo(() => geometry?.candidates.filter(candidate => candidate.score >= shapeScore) ?? [], [geometry, shapeScore]);
   const selectedShape = candidateShapes.find(candidate => candidate.id === shapeId) ?? candidateShapes[0];
   const shapeIds = useMemo(() => new Set((showAllShapes ? candidateShapes : selectedShape ? [selectedShape] : []).map(candidate => candidate.id)), [candidateShapes, selectedShape, showAllShapes]);
@@ -164,14 +169,18 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
     <div className="emission-layer-buttons" role="group" aria-label="Structure layer" hidden={cloudActive}>
       {map?.panels.map(panel => <button key={panel.id} type="button" title={panel.description} aria-pressed={layer === panel.id} onClick={() => setLayer(panel.id)}>{panel.label}</button>)}
     </div>
-    {image?.geometry && <div className="emission-layer-buttons" role="group" aria-label="Structure inspection mode">
+    {image && <div className="emission-layer-buttons" role="group" aria-label="Structure inspection mode">
       <button type="button" aria-pressed={shapes} onClick={() => setMode('shapes')}>Shapes</button>
       <button type="button" aria-pressed={!shapes} onClick={() => setMode('regions')}>Regions</button>
     </div>}
+    {shapes && image && <GeometryDetectionControls detector={detector} image={image}
+      onApply={() => { detector.apply(); setCloudEditor(true); setShapeId(''); }}
+      onRestore={() => { detector.restorePrevious(); setCloudEditor(true); setShapeId(''); }} />}
     <div hidden={!shapes || cloudActive}><GeometryControls geometry={geometry} candidates={candidateShapes} selected={selectedShape} score={shapeScore}
       showAll={showAllShapes} onScore={setShapeScore} onShowAll={setShowAllShapes} onSelect={setShapeId} /></div>
-    {shapes && !cloudEditor && <button type="button" onClick={() => setCloudEditor(true)}>Cloud preview</button>}
-    {cloudActive && image && geometry && data && <ShapeCloudWorkbench image={image} geometry={geometry} cataloguePath={cataloguePath} host={host}
+    {shapes && !cloudEditor && !detector.preview && <button type="button" onClick={() => setCloudEditor(true)}>Cloud preview</button>}
+    {cloudMounted && detector.effectiveImage && detector.effectiveGeometry && image && data && <ShapeCloudWorkbench visible={cloudActive}
+      image={detector.effectiveImage} geometry={detector.effectiveGeometry} cataloguePath={cataloguePath} host={host}
       matrix={matrices[image.id] ?? image.imageToFrame} frame={data.frame} onDetected={() => setCloudEditor(false)} />}
     <div hidden={shapes}>
     <div className="structure-morphologies" role="group" aria-label="Morphology filters">{morphologies.map(kind => <label key={kind}>
@@ -226,7 +235,7 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
           {data?.images.map(item => { const prepared = maps[item.id], matrix = matrices[item.id]; return prepared && matrix ? <StructurePlane key={item.id} image={item} map={prepared} matrix={matrix}
             active={item.id === selected} layer={layer} visibleIds={item.id === selected ? visibleIds : emptyIds} selectedId={item.id === selected ? selectedRegion?.id ?? '' : ''}
             highlights={highlights && !shapes} onSelect={setRegionId} onError={imageError}
-            geometry={geometries[item.id]} shapes={shapes} shapeIds={item.id === selected ? shapeIds : emptyIds}
+            geometry={item.id === selected ? geometry : geometries[item.id]} shapes={shapes} shapeIds={item.id === selected ? shapeIds : emptyIds}
             selectedShapeId={item.id === selected ? selectedShape?.id ?? '' : ''} onSelectShape={setShapeId} /> : null; })}
         </div>
         <div className="observation-compass">N ↑ · E ←</div>

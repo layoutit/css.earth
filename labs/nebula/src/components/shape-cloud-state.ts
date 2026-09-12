@@ -50,7 +50,7 @@ export function useShapeCloudState(image: StructureImage, geometry: GeometryMap,
       return completed;
     }
     const client = createShapeCloudClient({ request: { action: 'apply', imageId: image.id, width: image.width, height: image.height,
-      cataloguePath, geometrySha256: image.geometry?.sha256 ?? '' },
+      cataloguePath, geometrySha256: image.geometry?.sha256 ?? '', geometryFile: image.geometry?.file },
       onJob(next) { if (!disposed) { setStarting(false); setJob(next); } },
       save(id, ticket) {
         try {

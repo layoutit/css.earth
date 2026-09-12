@@ -9,6 +9,7 @@ export interface ShapeCloudSettings { components: ShapeCloudComponent[]; exposur
 export type ShapeCloudQuality = 'draft' | 'detailed';
 export interface ShapeCloudRequest {
   action: 'apply'; imageId: string; cataloguePath: string; geometrySha256: string;
+  geometryFile?: string;
   width: number; height: number; settings: ShapeCloudSettings; quality?: ShapeCloudQuality;
 }
 export interface ShapeCloudPin { path: string; sha256: string }

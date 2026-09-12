@@ -5,8 +5,9 @@ import { resolve, relative, dirname, isAbsolute } from 'node:path';
 import type { Plugin } from 'vite';
 import sharp from 'sharp';
 import { createStarRemovalJobs, starRemovalJobsHandler } from '../../utils/processing-jobs.js';
-import { readStructureCatalogue, readReviewMap } from '../../alignment/observations-ui/structures-model.js';
 import { readGeometryMap } from '../../alignment/observations-ui/geometry-model.js';
+import { readRegisteredGeometrySource } from '../geometry/registered-source.js';
+import { geometryFile } from '../geometry/jobs-model.js';
 import { validatePreparedCssVolume } from '../../../../../src/renderers/css/volume/validation.js';
 import { initializeShapeCloud, readShapeCloudSettings } from './model.js';
 import { bakeShapeCloud } from './bake.js';
@@ -22,12 +23,14 @@ const path = (value: unknown): value is string => typeof value === 'string' && v
 const hash = (value: unknown): value is string => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 const cache = '.local/nebula-lab/shape-clouds';
 export function parseShapeCloudRequest(value: unknown): ShapeCloudRequest {
-  if (!object(value) || Object.keys(value).some(key => !['action', 'imageId', 'cataloguePath', 'geometrySha256', 'width', 'height', 'settings', 'quality'].includes(key)) || value.action !== 'apply' ||
+  if (!object(value) || Object.keys(value).some(key => !['action', 'imageId', 'cataloguePath', 'geometrySha256', 'geometryFile', 'width', 'height', 'settings', 'quality'].includes(key)) || value.action !== 'apply' ||
       typeof value.imageId !== 'string' || !/^[a-z0-9-]+$/.test(value.imageId) || !path(value.cataloguePath) || !hash(value.geometrySha256) ||
       typeof value.width !== 'number' || typeof value.height !== 'number' || !Number.isInteger(value.width) || !Number.isInteger(value.height) ||
-      value.width < 32 || value.height < 32 || value.width * value.height > 1_000_000)
+      value.width < 32 || value.height < 32 || value.width * value.height > 1_000_000 ||
+      (value.geometryFile !== undefined && !geometryFile(value.geometryFile)))
     throw new TypeError('Choose prepared shapes and explicit preview settings.');
   return { action: 'apply', imageId: value.imageId, cataloguePath: value.cataloguePath, geometrySha256: value.geometrySha256,
+    ...(value.geometryFile === undefined ? {} : { geometryFile: value.geometryFile }),
     width: value.width, height: value.height, quality: readShapeCloudQuality(value.quality), settings: readShapeCloudSettings(value.settings, value.width, value.height) };
 }
 async function pinned(root: string, pin: ShapeCloudPin): Promise<Buffer> {
@@ -59,20 +62,12 @@ export function createShapeCloudJobs(root: string) {
   let queue = Promise.resolve();
   const sample = async (request: ShapeCloudRequest, signal: AbortSignal, progress: (p: { type: 'progress'; stage: string; current: number; total: number; message: string }) => void) => {
     signal.throwIfAborted();
-    const registry: unknown = JSON.parse(await readFile(resolve(root, 'labs/nebula/src/subjects.json'), 'utf8'));
-    if (!Array.isArray(registry) || !registry.some(row => object(row) && object(row.emissionExperiment) && row.emissionExperiment.observationStructures === request.cataloguePath))
-      throw new TypeError('The structure catalogue is not configured for a lab object.');
-    const catalogue = readStructureCatalogue(JSON.parse(await readFile(resolve(root, request.cataloguePath), 'utf8')));
-    const image = catalogue.images.find(candidate => candidate.id === request.imageId);
-    if (!image?.geometry || image.geometry.sha256 !== request.geometrySha256 || image.width !== request.width || image.height !== request.height)
+    const { image, source } = await readRegisteredGeometrySource(root, request.cataloguePath, request.imageId);
+    if ((!request.geometryFile && image.geometry?.sha256 !== request.geometrySha256) || image.width !== request.width || image.height !== request.height)
       throw new TypeError('Detected geometry changed; reload this source before preparing.');
-    const mapBytes = await pinned(root, { path: `${image.directory}/map.json`, sha256: image.mapSha256 });
-    const raw: unknown = JSON.parse(mapBytes.toString()); readReviewMap(raw, image);
-    if (!object(raw) || !Array.isArray(raw.panels)) throw new TypeError('Source panel is missing.');
-    const panel = raw.panels.find(item => object(item) && item.id === 'source');
-    if (!object(panel) || typeof panel.file !== 'string' || !hash(panel.sha256)) throw new TypeError('Source panel identity is missing.');
-    const source = { path: `${image.directory}/${panel.file}`, sha256: panel.sha256 }; await pinned(root, source);
-    const geometry = readGeometryMap(JSON.parse((await pinned(root, { path: `${image.directory}/${image.geometry.file}`, sha256: image.geometry.sha256 })).toString()), image);
+    const selectedFile = request.geometryFile ?? image.geometry?.file;
+    if (!selectedFile) throw new TypeError('Choose detected shapes before preparing.');
+    const geometry = readGeometryMap(JSON.parse((await pinned(root, { path: `${image.directory}/${selectedFile}`, sha256: request.geometrySha256 })).toString()), image);
     const settings = readShapeCloudSettings(request.settings, image.width, image.height), detected = initializeShapeCloud(geometry);
     if (settings.components.length !== detected.components.length || settings.components.some(component => {
       const original = detected.components.find(candidate => candidate.id === component.id);
@@ -82,6 +77,8 @@ export function createShapeCloudJobs(root: string) {
     const dependencies = (await readdir(resolve(root, moduleDirectory))).filter(name => name.endsWith('.ts') && !name.endsWith('.test.ts')).map(name => `${moduleDirectory}/${name}`)
       .concat(['labs/nebula/src/reconstruction/master-slices.ts', 'labs/nebula/src/reconstruction/cloud-material.ts', 'labs/nebula/src/reconstruction/cloud-appearance.ts',
         'labs/nebula/src/reconstruction/geometry/ridges.ts',
+        'labs/nebula/src/reconstruction/geometry/registered-source.ts', 'labs/nebula/src/reconstruction/geometry/jobs-model.ts',
+        'labs/nebula/src/reconstruction/geometry/settings.ts',
         'src/renderers/css/preparation/volume.ts', 'src/renderers/css/preparation/volume-order.ts', 'src/renderers/css/preparation/leaf-bounds.ts',
         'src/preparation/volume/raster.ts', 'pnpm-lock.yaml']);
     const implementation = await Promise.all(dependencies.sort().map(async file => ({ path: file, sha256: sha(await readFile(resolve(root, file))) })));

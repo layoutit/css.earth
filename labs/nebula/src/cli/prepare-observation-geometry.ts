@@ -4,7 +4,8 @@ import { readFile, readdir, rename, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import sharp from 'sharp';
 import { readStructureCatalogue, readReviewMap } from '../alignment/observations-ui/structures-model.js';
-import { detectShapes, type DetectionSettings } from '../reconstruction/geometry/detect-shapes.js';
+import { detectShapes } from '../reconstruction/geometry/detect-shapes.js';
+import { readDetectionSettings } from '../reconstruction/geometry/settings.js';
 
 const sha = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const object = (value: unknown): Record<string, unknown> => {
@@ -15,25 +16,11 @@ const text = (value: unknown): string => {
   if (typeof value !== 'string' || !value) throw new TypeError('Expected geometry preparation text.');
   return value;
 };
-function bounded(value: unknown, fallback: number, min: number, max: number, integer = false): number {
-  if (value === undefined) return fallback;
-  if (typeof value !== 'number' || !Number.isFinite(value) || value < min || value > max || (integer && !Number.isInteger(value)))
-    throw new TypeError('Invalid or unbounded geometry detection setting.');
-  return value;
-}
 const [recipePath, extra] = process.argv.slice(2);
 if (!recipePath || extra) throw new TypeError('Usage: prepare-observation-geometry <recipe.json>');
 const recipeBytes = await readFile(recipePath), recipe = object(JSON.parse(recipeBytes.toString()));
 if (recipe.schema !== 'cssearth-observation-geometry-recipe@1') throw new TypeError('Unsupported geometry recipe.');
-const values = recipe.settings === undefined ? {} : object(recipe.settings);
-if (Object.keys(values).some(key => !['iterations', 'seed', 'minRadiusFraction', 'maxCandidates'].includes(key)))
-  throw new TypeError('Unknown geometry detection setting.');
-const settings: DetectionSettings = {
-  iterations: bounded(values.iterations, 24000, 100, 200_000, true),
-  seed: bounded(values.seed, 7293, 0, 0xffffffff, true),
-  minRadiusFraction: bounded(values.minRadiusFraction, .07, .02, .4),
-  maxCandidates: bounded(values.maxCandidates, 12, 1, 32, true),
-};
+const settings = readDetectionSettings(recipe.settings);
 const cataloguePath = resolve(text(recipe.structureCatalogue));
 const catalogueBytes = await readFile(cataloguePath), rawCatalogue = object(JSON.parse(catalogueBytes.toString()));
 const catalogue = readStructureCatalogue(rawCatalogue);

@@ -14,6 +14,7 @@ import './shape-cloud.css';
 interface Props {
   image: StructureImage; geometry: GeometryMap; cataloguePath: string; host: Element | null;
   matrix: Matrix; frame: { width: number; height: number }; onDetected(): void;
+  visible?: boolean;
 }
 const modes = [
   { id: 'compare', label: 'Compare', symbol: '◫', title: 'Source and untextured cloud side by side, with linked framing.' },
@@ -33,7 +34,7 @@ function Slider({ id, label, value, min, max, step = .01, display, title, onChan
       onPointerCancel={onSettle} onKeyUp={onSettle} onBlur={onSettle} />
   </div>;
 }
-function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetected, mode, stageMode, setMode, view, setView }: Props & {
+function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetected, visible = true, mode, stageMode, setMode, view, setView }: Props & {
   mode: ShapeCloudMode; stageMode: Exclude<ShapeCloudMode, 'structure'>; setMode(value: ShapeCloudMode): void; view: CloudView; setView(value: CloudView): void;
 }) {
   const state = useShapeCloudState(image, geometry, cataloguePath), { settings, result } = state;
@@ -82,7 +83,7 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
   const field = (key: NumericField, label: string, min: number, max: number, title: string, step = .01): ReactNode => selected &&
     <Slider key={key} id={`shape-cloud-${key}`} label={label} value={selected[key]} min={min} max={max} step={step} title={title}
       onChange={value => edit(key, value)} onBegin={state.begin} onSettle={state.settle} />;
-  return <section className="shape-cloud-workbench" aria-label="Shape cloud controls" data-image-id={image.id}
+  return <section className="shape-cloud-workbench" hidden={!visible} aria-label="Shape cloud controls" data-image-id={image.id}
     data-preview-quality={result?.quality ?? ''} data-result-id={result?.id ?? ''} data-preview-active={state.active} data-preview-current={!state.dirty}>
     <div className="image-layer-buttons shape-cloud-modes" role="group" aria-label="Cloud comparison mode">
       {modes.map(item => <button type="button" key={item.id} aria-pressed={mode === item.id} title={item.title} onClick={() => setMode(item.id)}>
@@ -152,7 +153,7 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
     </div>
     <div className="shape-cloud-foot"><button type="button" className="text-button" onClick={onDetected}>Detected lines</button>
       <span className="interaction-hint" title="Nearby duplicate contours are merged. Shell depth, thickness and falloff are model assumptions, not physical measurements.">{settings.components.length} inferred components</span></div>
-    {host && createPortal(<section className="shape-cloud-workspace" aria-label="Shape cloud comparison">
+    {host && createPortal(<section className="shape-cloud-workspace" hidden={!visible} aria-label="Shape cloud comparison">
       <div className="shape-cloud-three-d" hidden={mode === 'structure'}>
       <ShapeCloudStage mode={stageMode} result={result} source={source} width={image.width} height={image.height} matrix={workingMatrix} frame={frame}
         components={settings.components} selectedId={selected?.id ?? ''} hoveredId={hoveredId} outlines={outlines} overlayOpacity={opacity} view={view} onView={setView} onSelect={setSelectedId} />

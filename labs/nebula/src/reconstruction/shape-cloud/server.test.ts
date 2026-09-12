@@ -15,7 +15,8 @@ test('shape preview request validates its actual image grid and explicit setting
   assert.equal(parseShapeCloudRequest(input).quality, 'detailed');
   assert.equal(parseShapeCloudRequest({ ...input, quality: 'draft' }).quality, 'draft');
   for (const changed of [{ width: 1 }, { height: Infinity }, { width: 4096, height: 4096 }, { cataloguePath: '../private.json' },
-    { action: 'automatic' }, { quality: 'fastest' }, { geometrySha256: 'changed' }, { mystery: true }]) assert.throws(() => parseShapeCloudRequest({ ...input, ...changed }));
+    { action: 'automatic' }, { quality: 'fastest' }, { geometrySha256: 'changed' }, { geometryFile: '../other.json' }, { mystery: true }]) assert.throws(() => parseShapeCloudRequest({ ...input, ...changed }));
+  assert.equal(parseShapeCloudRequest({ ...input, geometryFile: `geometry-${'b'.repeat(64)}.json` }).geometryFile, `geometry-${'b'.repeat(64)}.json`);
   assert.throws(() => parseShapeCloudRequest({ ...input, settings: { ...input.settings, components: [{ ...input.settings.components[0], x: 1000 }] } }));
 });
 test('completed shape result requires both material pins, finite registration and exact settings', () => {

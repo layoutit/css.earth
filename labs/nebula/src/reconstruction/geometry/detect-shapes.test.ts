@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { detectShapes, groupShapes, type ShapeCandidate } from './detect-shapes.js';
 import { ellipsePoint, fitEllipse, radialError, supportedArcs, tau, type Ellipse } from './ellipse.js';
+import { readDetectionSettings } from './settings.js';
 
 function raster(width: number, height: number, rings: Ellipse[], missing = false, clutter = false) {
   const pixels = new Uint8Array(width * height * 3);
@@ -75,4 +76,31 @@ test('detected shared centers group nested projections without forcing equal ori
 test('geometry boundary rejects mismatched input and unbounded work settings', () => {
   assert.throws(() => detectShapes(new Uint8Array(4), 100, 100));
   assert.throws(() => detectShapes(new Uint8Array(32 * 32 * 3), 32, 32, { iterations: Infinity }));
+});
+
+test('sensitivity reveals faint contours while defaults and explicit 100 percent are identical', () => {
+  const width = 128, expected: Ellipse = { center: [64, 63], radii: [40, 30], angleRadians: .25 };
+  const faint = new Uint8Array(width * width * 3);
+  for (let y = 0; y < width; y++) for (let x = 0; x < width; x++) {
+    const value = Math.round(4 * Math.exp(-.5 * (radialError(expected, [x + .5, y + .5]) / 2) ** 2));
+    faint.fill(value, (y * width + x) * 3, (y * width + x) * 3 + 3);
+  }
+  const baseline = detectShapes(faint, width, width, { iterations: 3000 });
+  assert.equal(baseline.candidates.length, 0);
+  assert.deepEqual(detectShapes(faint, width, width, { iterations: 3000, sensitivity: 1 }), baseline);
+  const progress: number[] = [];
+  const sensitive = detectShapes(faint, width, width, { iterations: 3000, sensitivity: 4 }, { onProgress: (current, total) => progress.push(current / total) });
+  assert.ok(sensitive.candidates.some(candidate => agreement(candidate, expected) < 4), 'Sensitivity must reach the detector, not just change display brightness.');
+  assert.equal(progress.at(-1), 1); assert.ok(progress.some(value => value > 0 && value < 1));
+  assert.equal(detectShapes(new Uint8Array(faint.length), width, width, { sensitivity: 4 }).candidates.length, 0);
+});
+
+test('minimum size and maximum shapes control actual proposals; settings reject invalid input', () => {
+  const rings: Ellipse[] = [{ center: [96, 94], radii: [35, 27], angleRadians: .4 }, { center: [97, 95], radii: [71, 56], angleRadians: .45 }];
+  const rgb = raster(192, 192, rings);
+  assert.equal(detectShapes(rgb, 192, 192, { iterations: 3000, maxCandidates: 1 }).candidates.length, 1);
+  assert.equal(detectShapes(rgb, 192, 192, { iterations: 3000, minRadiusFraction: .4 }).candidates.length, 0);
+  assert.equal(readDetectionSettings({}).sensitivity, 1);
+  for (const changed of [{ sensitivity: 0 }, { sensitivity: 4.1 }, { sensitivity: NaN }, { maxCandidates: 33 }, { maxCandidates: 1.5 },
+    { minRadiusFraction: .01 }, { mystery: true }]) assert.throws(() => readDetectionSettings(changed));
 });
