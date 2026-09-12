@@ -6,6 +6,7 @@
 | --- | --- |
 | AMICA mosaic | Three v-band observations from 24, 26 and 29 September 2005, with [Gaskell-controlled AMICA records](https://sbn.psi.edu/pds/resource/doi/itokawashape_1.1.html), original FITS and preflight flat. Relative detector brightness, not absolute radiance or albedo. |
 | Shape and Elevation | [Gaskell ver128q](https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab), derived from 775 AMICA images. Elevation is source radius minus 165 m; the original black-rock prime meridian is retained. |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/ITOKAWA/target) Itokawa centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
 
@@ -14,6 +15,8 @@ The controlled-camera holdouts reached maximum residuals of 0.00000842/0.0000087
 [Source test definitions](../../../tests/objects/unit/itokawa/source.test.mts).
 
 ## Known problems
+
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Itokawa (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table (this export ships no projection file, so the metadata datum is recorded and the authored radius scales outline sizes), drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
 
 Coverage is partial; the grid marks unavailable terrain. The lossy detector images lack a per-pixel quality plane. Disk normalization is approximate and does not restore stray light, temporal flat changes or shadowed terrain. Residual seams remain. Earlier browser checks found fine triangle-edge artifacts, particularly in Elevation; these are rendering defects, not terrain.
 

@@ -17,7 +17,7 @@ for (const entry of await readdir(roots, { withFileTypes: true })) {
   if (descriptor !== null) bodies.push(entry.name);
 }
 
-test("at least Mercury declares a prepared feature catalogue", () => { assert.ok(bodies.includes("mercury")); assert.ok(bodies.length >= 19, bodies.join(",")); });
+test("at least Mercury declares a prepared feature catalogue", () => { assert.ok(bodies.includes("mercury")); assert.ok(bodies.length >= 37, bodies.join(",")); });
 
 for (const id of bodies) {
   test(`${id}: the prepared feature catalogue is pinned, anchored on its mesh and parses at the runtime boundary`, async () => {
@@ -39,6 +39,14 @@ for (const id of bodies) {
     const map: unknown = JSON.parse(await readFile(new URL(`${id}/source/presentation/surface-map.json`, roots), "utf8"));
     assert.ok(record(map));
     const axes = { prime: map.prime as [number, number, number], east: map.east as [number, number, number], north: map.north as [number, number, number] };
+    // Shape-model bodies anchor on their picking mesh: the anchor keeps the map direction and its radius lies within the mesh.
+    const objectDescriptor: unknown = JSON.parse(await readFile(new URL(`${id}/object.json`, roots), "utf8"));
+    assert.ok(record(objectDescriptor) && record(objectDescriptor.properties) && record(objectDescriptor.properties.recipe) && record(objectDescriptor.properties.recipe.shape));
+    const shaped = objectDescriptor.properties.recipe.shape.kind === "radial-terrain";
+    const hit = (runtime as unknown as { surfaceHit?: { target: number; triangles: number[][][] } }).surfaceHit;
+    const band = plan.surfaceRadiusUnits;
+    if (shaped) { assert.ok(hit, `${id} shape body carries a hit mesh`); assert.equal(plan.target, hit!.target); assert.ok(band, `${id} declares its radius band`); }
+    else assert.equal(band, undefined, `${id} sphere declares no radius band`);
     const ids = new Set<string>();
     let previous = Number.POSITIVE_INFINITY;
     for (const feature of catalog.features) {
@@ -46,7 +54,11 @@ for (const id of bodies) {
       assert.ok(feature.longitudeDeg >= 0 && feature.longitudeDeg < 360 && Math.abs(feature.latitudeDeg) <= 90, feature.name);
       const u = (((feature.longitudeDeg - Number(edge)) % 360) + 360) % 360 / 360;
       const expected = mapDirection(u, (90 - feature.latitudeDeg) / 180, axes);
-      assert.ok(expected.every((n, i) => Math.abs(n * plan.meshRadiusUnits - feature.anchorUnits[i]) < 1e-2), `${id}: ${feature.name} anchor follows the map axes`);
+      if (shaped) {
+        const length = Math.hypot(...feature.anchorUnits);
+        assert.ok(expected.every((n, i) => Math.abs(n * length - feature.anchorUnits[i]) < 1e-2), `${id}: ${feature.name} anchor follows the body frame`);
+        assert.ok(length >= band!.minimum * (1 - 1e-3) && length <= band!.maximum * (1 + 1e-3), `${id}: ${feature.name} anchor lies within the hit mesh band`);
+      } else assert.ok(expected.every((n, i) => Math.abs(n * plan.meshRadiusUnits - feature.anchorUnits[i]) < 1e-2), `${id}: ${feature.name} anchor follows the map axes`);
       assert.ok(feature.diameterKm <= previous, `${id}: prepared priority is diameter order`);
       previous = feature.diameterKm;
       assert.ok(feature.searchNames.length > 0 && feature.origin.length >= 0, feature.name);

@@ -441,7 +441,7 @@
         "type": "body-centered-radius-grid",
         "longitudeDirection": "west-positive"
       },
-      "coverage": "Radial height above an 83.5 km reference sphere from Stooke’s Voyager-derived shape model. This shows the large irregular shape, not surveyed local topography. The 5° grid includes modeled unseen terrain; the archive warns that facets and depressions may be exaggerated.",
+      "coverage": "Radial height above an 83.5 km reference sphere from Stooke\u2019s Voyager-derived shape model. This shows the large irregular shape, not surveyed local topography. The 5\u00b0 grid includes modeled unseen terrain; the archive warns that facets and depressions may be exaggerated.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -505,6 +505,84 @@
             "evidence": "src/planets/amalthea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
           }
         ]
+      }
+    },
+    {
+      "id": "usgs-gazetteer-amalthea-nomenclature-center-pts",
+      "path": "features/AMALTHEA_nomenclature_center_pts.zip",
+      "expectedBytes": 47678,
+      "expectedSha256": "6c8c8921eb0929a738207b862d02ee3d5452bcc89f7d8f98714260d7cc1ee8db",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/AMALTHEA_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Amalthea on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Amalthea centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/AMALTHEA/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "amalthea-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1014,
+      "expectedSha256": "13c207f7804b474543fc841279f64ab3c7e6aea5b4270f491e2c4c9534609e4a",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "amalthea-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1132,
+      "expectedSha256": "bd8daca1e7714fa17ab42a4d55e97d21e5460beffd869463e0cdd45c8bd5e239",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "amalthea-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 155,
+      "expectedSha256": "38f55714f6a719c11d68896d591602df177cddda737cd39b411c23590e06be83",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
       }
     }
   ],
@@ -582,8 +660,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3118,
-      "expectedSha256": "8d8db71ea3da4dac849a559b1df89fa7f05dd439d50cf61a9d33b28c0fb02323"
+      "expectedBytes": 3376,
+      "expectedSha256": "a68c219108489716553c0b2cf1729927e0f944e09709f979c96f5cdd8ec7ac87"
     },
     {
       "path": "preparation/navigation.json",

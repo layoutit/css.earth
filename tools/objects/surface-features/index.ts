@@ -36,7 +36,8 @@ export interface SurfaceFeaturePolicy { readonly minimumZoomShare: number; reado
 export interface SurfaceFeaturesConfig {
   readonly schema: typeof SURFACE_FEATURES_CONFIG_SCHEMA;
   readonly directory: string; readonly archive: string;
-  readonly members: { readonly attributes: string; readonly projection: string; readonly metadata: string };
+  /** Some small-body exports ship no .prj; their datum then comes from the FGDC metadata (`semiaxis`, `horizdn`). */
+  readonly members: { readonly attributes: string; readonly projection: string | null; readonly metadata: string };
   readonly surfaceMap: string; readonly mapLeftEdgeLongitudeDeg: number;
   readonly output: string; readonly publicBase: string;
   readonly target: { readonly className: string; readonly withoutClassName: string | null };
@@ -73,7 +74,7 @@ export interface PreparedSurfaceFeatureCatalog {
   /** Rows left out for a reason other than an excluded type: not adopted, no label kind, or no diameter. */
   readonly skipped: Readonly<Record<string, { readonly count: number; readonly reason: string }>>;
   /** Type codes outside the kind table, labelled as regions, and features whose empty extent fell back to a circle. */
-  readonly assumed: { readonly regionTypes: Readonly<Record<string, number>>; readonly extentFallbacks: number };
+  readonly assumed: { readonly regionTypes: Readonly<Record<string, number>>; readonly extentFallbacks: number; readonly meshMisses: number };
   /** Mapped-structure traces associated with named features, when a trace archive is declared. */
   readonly traces?: TraceSummary;
   /** Rows the export repeats for one feature identity; the first row's centre is kept. */
@@ -85,6 +86,8 @@ export interface PreparedSurfaceFeaturePlan {
   readonly catalog: SurfaceFeatureCatalogDescriptor; readonly target: number; readonly lensIds: readonly string[];
   /** Mesh radius in raw prepared scene coordinates (before the camera's scene scale). */
   readonly meshRadiusUnits: number; readonly policy: SurfaceFeaturePolicy;
+  /** Shape-model bodies: the radius band of the picking mesh, inside which every anchor and outline point lies. */
+  readonly surfaceRadiusUnits?: { readonly minimum: number; readonly maximum: number };
   readonly outline: { readonly pieces: number };
 }
 
@@ -139,7 +142,7 @@ export function parseSurfaceFeaturesConfig(value: unknown): SurfaceFeaturesConfi
   return Object.freeze({
     schema: SURFACE_FEATURES_CONFIG_SCHEMA,
     directory: relativePath(input.directory, 'features recipe directory'), archive: relativePath(input.archive, 'features recipe archive'),
-    members: { attributes: relativePath(members.attributes, 'members.attributes'), projection: relativePath(members.projection, 'members.projection'), metadata: relativePath(members.metadata, 'members.metadata') },
+    members: { attributes: relativePath(members.attributes, 'members.attributes'), projection: members.projection === null ? null : relativePath(members.projection, 'members.projection'), metadata: relativePath(members.metadata, 'members.metadata') },
     surfaceMap: relativePath(input.surfaceMap, 'features recipe surfaceMap'), mapLeftEdgeLongitudeDeg: finite(input.mapLeftEdgeLongitudeDeg, 'features recipe mapLeftEdgeLongitudeDeg'),
     output, publicBase, target: { className: text(target.className, 'target.className'), withoutClassName: target.withoutClassName === undefined ? null : text(target.withoutClassName, 'target.withoutClassName') },
     lensIds: Object.freeze([...lensIds as string[]]), kinds: Object.freeze(kinds), excludedTypeCodes: Object.freeze({ ...excluded as Record<string, string> }), labelPolicy: Object.freeze(policy),
@@ -244,12 +247,71 @@ export interface SurfaceFeaturePreparationContext {
   readonly config: unknown; readonly maxEntries: number; readonly radiusKm: number; readonly meshRadiusUnits: number;
   readonly tree: { readonly nodes: readonly { readonly className: string | null; readonly parent: number; readonly style?: string }[]; readonly scene: number };
   readonly declaredLensIds: readonly string[];
+  /** The prepared picking mesh of a shape-model body: anchors and outline points are cast onto it instead of a reference sphere. */
+  readonly hitMesh?: { readonly target: number; readonly triangles: readonly (readonly (readonly number[])[])[] };
+}
+
+/** Farthest intersection of the ray from the mesh origin along `direction` with the triangle list (Möller–Trumbore), or null when it misses. */
+export function projectRadial(triangles: readonly (readonly (readonly number[])[])[], direction: Vector3): number | null {
+  let best: number | null = null;
+  for (const [a, b, c] of triangles) {
+    const e1 = [b![0]! - a![0]!, b![1]! - a![1]!, b![2]! - a![2]!], e2 = [c![0]! - a![0]!, c![1]! - a![1]!, c![2]! - a![2]!];
+    const p = [direction[1] * e2[2]! - direction[2] * e2[1]!, direction[2] * e2[0]! - direction[0] * e2[2]!, direction[0] * e2[1]! - direction[1] * e2[0]!];
+    const det = e1[0]! * p[0]! + e1[1]! * p[1]! + e1[2]! * p[2]!;
+    if (Math.abs(det) < 1e-12) continue;
+    const inv = 1 / det, t = [-a![0]!, -a![1]!, -a![2]!];
+    const u = (t[0]! * p[0]! + t[1]! * p[1]! + t[2]! * p[2]!) * inv;
+    if (u < 0 || u > 1) continue;
+    const q = [t[1]! * e1[2]! - t[2]! * e1[1]!, t[2]! * e1[0]! - t[0]! * e1[2]!, t[0]! * e1[1]! - t[1]! * e1[0]!];
+    const v = (direction[0] * q[0]! + direction[1] * q[1]! + direction[2] * q[2]!) * inv;
+    if (v < 0 || u + v > 1) continue;
+    const distance = (e2[0]! * q[0]! + e2[1]! * q[1]! + e2[2]! * q[2]!) * inv;
+    if (distance > 0 && (best === null || distance > best)) best = distance;
+  }
+  return best;
 }
 
 function unzipMember(archive: string, member: string): Uint8Array {
   return execFileSync('unzip', ['-p', archive, member], { maxBuffer: 64 * 1024 * 1024 });
 }
 
+/** The radius band every cast point can occupy: the farthest vertex and the nearest point of any face (a flat face sags below its vertices). */
+export function meshRadiusBand(triangles: readonly (readonly (readonly number[])[])[]): { minimum: number; maximum: number } {
+  let minimum = Number.POSITIVE_INFINITY, maximum = 0;
+  for (const [a, b, c] of triangles) {
+    for (const point of [a!, b!, c!]) maximum = Math.max(maximum, Math.hypot(point[0]!, point[1]!, point[2]!));
+    minimum = Math.min(minimum, originToTriangle(a!, b!, c!));
+  }
+  if (!(minimum > 0) || !(maximum >= minimum)) throw new TypeError('Surface hit mesh has no positive radius band.');
+  return { minimum: round(minimum, 3), maximum: round(maximum, 3) };
+}
+/** Distance from the origin to the closest point of triangle abc (Ericson, Real-Time Collision Detection 5.1.5). */
+function originToTriangle(a: readonly number[], b: readonly number[], c: readonly number[]): number {
+  const sub = (p: readonly number[], q: readonly number[]) => [p[0]! - q[0]!, p[1]! - q[1]!, p[2]! - q[2]!];
+  const dot = (p: readonly number[], q: readonly number[]) => p[0]! * q[0]! + p[1]! * q[1]! + p[2]! * q[2]!;
+  const ab = sub(b, a), ac = sub(c, a), ap = [-a[0]!, -a[1]!, -a[2]!];
+  const d1 = dot(ab, ap), d2 = dot(ac, ap);
+  if (d1 <= 0 && d2 <= 0) return Math.hypot(...a);
+  const bp = [-b[0]!, -b[1]!, -b[2]!], d3 = dot(ab, bp), d4 = dot(ac, bp);
+  if (d3 >= 0 && d4 <= d3) return Math.hypot(...b);
+  const vc = d1 * d4 - d3 * d2;
+  if (vc <= 0 && d1 >= 0 && d3 <= 0) { const v = d1 / (d1 - d3); return Math.hypot(a[0]! + v * ab[0]!, a[1]! + v * ab[1]!, a[2]! + v * ab[2]!); }
+  const cp = [-c[0]!, -c[1]!, -c[2]!], d5 = dot(ab, cp), d6 = dot(ac, cp);
+  if (d6 >= 0 && d5 <= d6) return Math.hypot(...c);
+  const vb = d5 * d2 - d1 * d6;
+  if (vb <= 0 && d2 >= 0 && d6 <= 0) { const w = d2 / (d2 - d6); return Math.hypot(a[0]! + w * ac[0]!, a[1]! + w * ac[1]!, a[2]! + w * ac[2]!); }
+  const va = d3 * d6 - d5 * d4;
+  if (va <= 0 && d4 - d3 >= 0 && d5 - d6 >= 0) { const w = (d4 - d3) / ((d4 - d3) + (d5 - d6)); return Math.hypot(b[0]! + w * (c[0]! - b[0]!), b[1]! + w * (c[1]! - b[1]!), b[2]! + w * (c[2]! - b[2]!)); }
+  const denominator = 1 / (va + vb + vc), v = vb * denominator, w = vc * denominator;
+  return Math.hypot(a[0]! + ab[0]! * v + ac[0]! * w, a[1]! + ab[1]! * v + ac[1]! * w, a[2]! + ab[2]! * v + ac[2]! * w);
+}
+/** A shape-model body anchors on the node its picking mesh names; that node must still carry the configured class. */
+function hitTarget(context: SurfaceFeaturePreparationContext, target: SurfaceFeaturesConfig['target']): number {
+  if (!context.hitMesh) return nodeIndex(context.tree, target);
+  const node = context.tree.nodes[context.hitMesh.target];
+  if (!node || !(node.className ?? '').split(/\s+/u).includes(target.className)) throw new TypeError(`Surface hit target ${context.hitMesh.target} does not carry ${target.className}.`);
+  return context.hitMesh.target;
+}
 export function nodeIndex(tree: SurfaceFeaturePreparationContext['tree'], { className, withoutClassName }: SurfaceFeaturesConfig['target']): number {
   const matches = tree.nodes.flatMap((node, index) => { const classes = (node.className ?? '').split(/\s+/u); return classes.includes(className) && !(withoutClassName !== null && classes.includes(withoutClassName)) ? [index] : []; });
   const label = `${className}${withoutClassName === null ? '' : ` without ${withoutClassName}`}`;
@@ -347,15 +409,26 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   const loadedTraces = config.traces ? await loadTraces(context.sourceDirectory, config.traces) : null;
   const traceStats = { matched: 0, byCode: {} as Record<string, number>, unmatched: [] as string[] };
   const archive = resolve(directory, config.archive);
-  const projection = new TextDecoder().decode(unzipMember(archive, config.members.projection));
-  const spheroid = /SPHEROID\["([^"]+)",([0-9.]+),([0-9.]+)\]/u.exec(projection);
-  const datumName = /GEOGCS\["([^"]+)"/u.exec(projection)?.[1];
-  if (!spheroid || !datumName) throw new TypeError('Gazetteer projection file does not declare a spheroid.');
-  const radiusM = Number(spheroid[2]);
+  const metadata = new TextDecoder().decode(unzipMember(archive, config.members.metadata));
+  let datumName: string, radiusM: number;
+  if (config.members.projection !== null) {
+    const projection = new TextDecoder().decode(unzipMember(archive, config.members.projection));
+    const spheroid = /SPHEROID\["([^"]+)",\s*([\d.]+)/u.exec(projection), name = /GEOGCS\["([^"]+)"/u.exec(projection)?.[1];
+    if (!spheroid || !name) throw new TypeError('Gazetteer projection file does not declare a spheroid.');
+    datumName = name; radiusM = Number(spheroid[2]);
+  } else {
+    // Small-body metadata quotes a semi-axis in mixed units rather than a reference sphere, so it is recorded, not checked;
+    // anchors are cast onto the shape model and outline sizes scale by the authored radius.
+    const semiaxis = /<semiaxis>\s*([\d.]+)\s*<\/semiaxis>/u.exec(metadata), horizontal = /<horizdn>\s*([^<]+?)\s*<\/horizdn>/u.exec(metadata);
+    if (!semiaxis || !horizontal) throw new TypeError('Gazetteer metadata does not declare a horizontal datum for an export without a projection file.');
+    datumName = `${horizontal[1]!} (metadata semiaxis ${semiaxis[1]!}, no projection file; authored radius used)`; radiusM = context.radiusKm * 1000;
+  }
   // Gazetteer spheres and authored mean radii differ by up to a few kilometres between bodies; anchors are directions, so the
   // difference only rescales nothing. Anything beyond one percent would mean a different body or datum.
-  if (Math.abs(radiusM - context.radiusKm * 1000) > 0.01 * context.radiusKm * 1000) throw new TypeError(`Gazetteer datum radius ${radiusM} m differs from the authored ${context.radiusKm} km body.`);
-  const metadata = new TextDecoder().decode(unzipMember(archive, config.members.metadata));
+  // Irregular bodies carry a conventional Gazetteer reference sphere that can sit well off the authored mean radius;
+  // their anchors are cast onto the shape model, so the datum only scales outline sizes and is recorded, not enforced.
+  const datumTolerance = context.hitMesh ? 0.15 : 0.01;
+  if (Math.abs(radiusM - context.radiusKm * 1000) > datumTolerance * context.radiusKm * 1000) throw new TypeError(`Gazetteer datum radius ${radiusM} m differs from the authored ${context.radiusKm} km body.`);
   if (!/<useconst>\s*Public domain\.?\s*<\/useconst>/iu.test(metadata)) throw new TypeError('Gazetteer metadata no longer declares public-domain use constraints.');
   const table = parseDbf(unzipMember(archive, config.members.attributes));
   for (const name of ['name', 'clean_name', 'approvaldt', 'origin', 'diameter', 'center_lon', 'center_lat', 'type', 'code', 'approval', 'quad_code', 'link', 'min_lon', 'max_lon', 'min_lat', 'max_lat']) {
@@ -364,7 +437,14 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   const kindOf = new Map<string, SurfaceFeatureKind>(Object.entries(DEFAULT_TYPE_KINDS));
   for (const kind of ['point', 'linear', 'region'] as const) for (const code of config.kinds[kind]) kindOf.set(code, kind);
   const skipped: Record<string, { count: number; reason: string }> = {}, assumed: Record<string, number> = {};
-  let extentFallbacks = 0;
+  let extentFallbacks = 0, meshMisses = 0;
+  // On a shape model every surface point is cast through the hit mesh; a miss (a hole in the coarse mesh) keeps the reference radius.
+  const onSurface = (direction: Vector3): Vector3 => {
+    if (!context.hitMesh) return scaled(direction, context.meshRadiusUnits);
+    const distance = projectRadial(context.hitMesh.triangles, direction);
+    if (distance === null) { meshMisses++; return scaled(direction, context.meshRadiusUnits); }
+    return scaled(direction, distance);
+  };
   const skip = (key: string, reason: string) => { skipped[key] = { count: (skipped[key]?.count ?? 0) + 1, reason }; };
   const excluded: Record<string, { count: number; reason: string }> = {};
   if (!(context.meshRadiusUnits > 0) || !Number.isFinite(context.meshRadiusUnits)) throw new TypeError('Surface features need the prepared mesh radius.');
@@ -411,20 +491,27 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     if (!extent) extentFallbacks++;
     // Craters and faculae are circular: their diameter is the rim. Other features report a nominal size,
     // so their published extent box is the honest shape.
-    let outline: SurfaceFeatureOutline = kind === 'point' || !extent ? rimVectors(direction, axes.north, context.meshRadiusUnits, radiusUnits)
-      : extentPolygon(extent, axes, config.mapLeftEdgeLongitudeDeg, context.meshRadiusUnits, config.outline.pieces);
+    const anchor = onSurface(direction), anchorRadius = Math.hypot(anchor[0], anchor[1], anchor[2]);
+    let outline: SurfaceFeatureOutline;
+    if (kind === 'point' || !extent) {
+      const rim = rimVectors(direction, axes.north, context.meshRadiusUnits, radiusUnits), lift = anchorRadius / context.meshRadiusUnits;
+      outline = context.hitMesh ? { kind: 'circle', center: scaled(rim.center, lift), east: scaled(rim.east, lift), north: scaled(rim.north, lift) } : rim;
+    } else {
+      const box = extentPolygon(extent, axes, config.mapLeftEdgeLongitudeDeg, context.meshRadiusUnits, config.outline.pieces);
+      outline = context.hitMesh ? { kind: 'box', points: box.points.map(point => onSurface(scaled(point, 1 / context.meshRadiusUnits))) } : box;
+    }
     if (extent && loadedTraces && config.traces && Object.hasOwn(config.traces.classes, code)) {
       const selected = selectTraces(loadedTraces.traces, config.traces.classes[code]!, extent, config.traces);
       if (selected.length) {
         const paths = budgetTracePaths(selected.flatMap(trace => trace.parts), config.traces.maximumVertices)
-          .map(path => path.map(([lon, lat]) => scaled(surfaceDirection(lon, lat, axes, config.mapLeftEdgeLongitudeDeg), context.meshRadiusUnits)));
+          .map(path => path.map(([lon, lat]) => onSurface(surfaceDirection(lon, lat, axes, config.mapLeftEdgeLongitudeDeg))));
         outline = { kind: 'trace', paths };
         traceStats.matched++; traceStats.byCode[code] = (traceStats.byCode[code] ?? 0) + 1;
       } else traceStats.unmatched.push(row.name!);
     }
     const feature: PreparedSurfaceFeature = {
       id, name: row.name!, kind, type: row.type!.split(',')[0]!.trim(), code, diameterKm, longitudeDeg, latitudeDeg,
-      anchorUnits: [round(direction[0] * context.meshRadiusUnits, 3), round(direction[1] * context.meshRadiusUnits, 3), round(direction[2] * context.meshRadiusUnits, 3)],
+      anchorUnits: [round(anchor[0], 3), round(anchor[1], 3), round(anchor[2], 3)],
       normal: [round(direction[0]), round(direction[1]), round(direction[2])],
       radiusUnits: round(radiusUnits, 4), outline,
       searchNames: [...new Set([row.name!, row.clean_name!].map(normalizeSearchText).filter(Boolean))], searchContext: normalizeSearchText(row.type!.split(',')[0]!),
@@ -441,7 +528,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     schema: PREPARED_SURFACE_FEATURES_SCHEMA, objectId: context.objectId,
     source: manifest.source, snapshotDate: manifest.snapshotDate, sourcePage: manifest.sourcePage, license: manifest.license, qualification: manifest.qualification,
     datum: { name: datumName, radiusM, authoredRadiusM: context.radiusKm * 1000, longitude: 'positive-east-0-360' },
-    excluded, skipped, assumed: { regionTypes: assumed, extentFallbacks }, duplicates: { features: duplicateIds.size, rows: duplicateRows, maxSeparationDeg: round(maxSeparationDeg, 4), maxDiameterDifferenceKm: round(maxDiameterDifferenceKm, 4) },
+    excluded, skipped, assumed: { regionTypes: assumed, extentFallbacks, meshMisses }, duplicates: { features: duplicateIds.size, rows: duplicateRows, maxSeparationDeg: round(maxSeparationDeg, 4), maxDiameterDifferenceKm: round(maxDiameterDifferenceKm, 4) },
     ...(loadedTraces && config.traces ? { traces: { source: loadedTraces.manifest.source, sourcePage: loadedTraces.manifest.sourcePage, license: loadedTraces.manifest.license, snapshotDate: loadedTraces.manifest.snapshotDate,
       traces: loadedTraces.traces.length, matched: traceStats.matched, byCode: traceStats.byCode, unmatched: traceStats.unmatched, maximumVertices: config.traces.maximumVertices } } : {}),
     features,
@@ -452,7 +539,8 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   await writeFile(resolve(context.publicDirectory, config.output), bytes);
   const plan: PreparedSurfaceFeaturePlan = {
     catalog: { url: `${config.publicBase}${config.output}`, bytes: bytes.length, sha256: sha256(bytes), count: features.length },
-    target: nodeIndex(context.tree, config.target), lensIds: config.lensIds, meshRadiusUnits: context.meshRadiusUnits, policy: config.labelPolicy,
+    target: hitTarget(context, config.target), lensIds: config.lensIds, meshRadiusUnits: context.meshRadiusUnits, policy: config.labelPolicy,
+    ...(context.hitMesh ? { surfaceRadiusUnits: meshRadiusBand(context.hitMesh.triangles) } : {}),
     outline: config.outline,
   };
   const descriptor = { schema: 'cssearth-prepared-features@1', objectId: context.objectId, ...plan.catalog, source: manifest.source, sourcePage: manifest.sourcePage,

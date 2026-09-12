@@ -7,6 +7,7 @@
 | OSIRIS reflectance | WAC OI-filter `W20080905T183606461ID4DF17` and `W20080905T183630497ID4DF17`, 5 September 2008 at 18:36:22.008 and 18:36:46.044 UTC; 129/113 m per pixel. Acquisition illumination retained, with 1.29646 relative display gain. |
 | Monochrome | [Stooke V3 map](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html), a processed photographic visualization with broader coverage; not natural color or albedo. |
 | Shape and Elevation | [Jorda et al. PDS 2013 shape](https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-steins-shape-v1.0/dataset.shtml). Elevation is radius minus 2.58 km, false color over −0.7 to +1.1 km; not gravitational height. |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/STEINS/target) Steins centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
 
@@ -15,6 +16,8 @@
 The broader preparation suite was not green (1,666/1,957 passed); global platform and shell audits were stopped. A later overview/navigation change was outside the tested implementation.
 
 ## Known problems
+
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Steins (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table (this export ships no projection file, so the metadata datum is recorded and the authored radius scales outline sizes), drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
 
 Rosetta imaged about 60% of the body; unseen terrain is less certain. The published shape’s artificial jump between image-derived and lightcurve-derived terrain remains. The two selected photographs span only tens of original pixels and keep gaps as a grid.
 

@@ -18,3 +18,5 @@ as stated on the [Nantes data policy](https://vims.univ-nantes.fr/about).
 cssEarth derives fixed-channel indices, partial geographic maps and display
 textures. Original archive processing, attribution and missing-data limits remain
 documented in `source/vims-chemistry/INTERPRETATION.md`.
+
+Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.

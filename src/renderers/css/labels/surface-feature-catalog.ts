@@ -18,16 +18,23 @@ function vector(value: unknown, label: string): readonly [number, number, number
   return [finite(value[0], label), finite(value[1], label), finite(value[2], label)];
 }
 
+/** Every prepared surface point lies on the reference sphere, or, for a shape model, inside its declared radius band. */
+function onBody(point: readonly [number, number, number], plan: PreparedSurfaceFeaturePlan): boolean {
+  const length = Math.hypot(...point), band = plan.surfaceRadiusUnits;
+  return band ? length >= band.minimum * (1 - 1e-3) && length <= band.maximum * (1 + 1e-3) : Math.abs(length - plan.meshRadiusUnits) <= 1e-3 * plan.meshRadiusUnits;
+}
+
 function parseOutline(value: unknown, plan: PreparedSurfaceFeaturePlan): SurfaceFeatureOutline {
   const outline = object(value, 'feature outline');
   if (outline.kind === 'circle') {
     const center = vector(outline.center, 'feature rim centre'), east = vector(outline.east, 'feature rim east'), north = vector(outline.north, 'feature rim north');
-    if (Math.hypot(...center) > plan.meshRadiusUnits * (1 + 1e-3) || Math.abs(Math.hypot(...east) - Math.hypot(...north)) > 1e-3 * plan.meshRadiusUnits) throw new TypeError('Surface feature rim is not on the prepared body.');
+    const ceiling = (plan.surfaceRadiusUnits?.maximum ?? plan.meshRadiusUnits) * (1 + 1e-3);
+    if (Math.hypot(...center) > ceiling || Math.abs(Math.hypot(...east) - Math.hypot(...north)) > 1e-3 * plan.meshRadiusUnits) throw new TypeError('Surface feature rim is not on the prepared body.');
     return Object.freeze({ kind: 'circle', center, east, north });
   }
   if (outline.kind === 'box') {
     if (!Array.isArray(outline.points) || outline.points.length < 4 || outline.points.length > plan.outline.pieces) throw new TypeError('Surface feature extent polygon is out of range.');
-    const points = outline.points.map(point => { const p = vector(point, 'feature extent point'); if (Math.abs(Math.hypot(...p) - plan.meshRadiusUnits) > 1e-3 * plan.meshRadiusUnits) throw new TypeError('Surface feature extent is not on the prepared body.'); return p; });
+    const points = outline.points.map(point => { const p = vector(point, 'feature extent point'); if (!onBody(p, plan)) throw new TypeError('Surface feature extent is not on the prepared body.'); return p; });
     return Object.freeze({ kind: 'box', points: Object.freeze(points) });
   }
   if (outline.kind === 'trace') {
@@ -36,7 +43,7 @@ function parseOutline(value: unknown, plan: PreparedSurfaceFeaturePlan): Surface
     const paths = outline.paths.map(path => {
       if (!Array.isArray(path) || path.length < 2) throw new TypeError('Surface feature trace path is too short.');
       vertices += path.length;
-      return Object.freeze(path.map(point => { const p = vector(point, 'feature trace point'); if (Math.abs(Math.hypot(...p) - plan.meshRadiusUnits) > 1e-3 * plan.meshRadiusUnits) throw new TypeError('Surface feature trace is not on the prepared body.'); return p; }));
+      return Object.freeze(path.map(point => { const p = vector(point, 'feature trace point'); if (!onBody(p, plan)) throw new TypeError('Surface feature trace is not on the prepared body.'); return p; }));
     });
     if (vertices > plan.outline.pieces) throw new TypeError('Surface feature trace exceeds the outline pool.');
     return Object.freeze({ kind: 'trace', paths: Object.freeze(paths) });
@@ -57,7 +64,7 @@ export function parsePreparedSurfaceFeatureCatalog(value: unknown, plan: Prepare
     ids.add(id);
     const anchorUnits = vector(feature.anchorUnits, 'feature anchor'), normal = vector(feature.normal, 'feature normal');
     const radiusUnits = finite(feature.radiusUnits, 'feature radius'), diameterKm = finite(feature.diameterKm, 'feature diameter');
-    if (!(radiusUnits >= 0) || !(diameterKm > 0) || Math.abs(Math.hypot(...anchorUnits) - plan.meshRadiusUnits) > 1e-3 * plan.meshRadiusUnits ||
+    if (!(radiusUnits >= 0) || !(diameterKm > 0) || !onBody(anchorUnits, plan) ||
         Math.abs(Math.hypot(...normal) - 1) > 1e-3) throw new TypeError('Surface feature geometry is not on the prepared body.');
     const outline = parseOutline(feature.outline, plan);
     const name = text(feature.name, 'feature name'), link = text(feature.link, 'feature link');

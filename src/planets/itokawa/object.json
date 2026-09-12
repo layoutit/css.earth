@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f8b36b6e068923f48eafd73b2a4c32ba19cde167e3ae0dbaee30e97ee5a7d08d"
+    "sha256": "da35db652b24fe1c2d86f3b8fb74a5e318f82ae0e94cb9e6e19f5475ea753278"
   },
   "id": "itokawa",
   "properties": {
@@ -17,6 +17,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -81,9 +82,18 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "98aa45e3e8f730b14d83493f45e2c3d4f632326d20c13e71f23231375ce1facb"
+          "sha256": "ab1dd51a85ec073e520c4964d4930089bd52ebca02b54182e7d43d76a2608c6c"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "fbd470bf52e47ad758b40e3619f3760abd8f178750b24957bd2102779fbd731d"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -118,7 +128,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "19b80c464dfe580ccbebd9075462a675a3bc2c2ee2b21b040a07b688b0670281"
+        "sha256": "a2e1a55ff9253f9e0ec47d7c791a60f2acc34b94c26393ee2bbc660828b50b69"
       }
     },
     "catalog": {

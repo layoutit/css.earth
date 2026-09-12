@@ -274,6 +274,14 @@
       "groups": [
         "cassini-atlas"
       ]
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/RHEA_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/RHEA_nomenclature_center_pts.zip"
     }
   ]
 }

@@ -14,3 +14,5 @@ ESO/S. Brunier panorama and HYG star catalog retain the notices in `source/stars
 Inter title outlines derive from Inter Variable under the SIL Open Font License.
 
 Clementine ratio composite: NASA/JPL-Caltech/UCLA/MPS/DLR/IDA; DLR Institute of Planetary Research. Retain the published scientific attribution and source notices.
+
+Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.
