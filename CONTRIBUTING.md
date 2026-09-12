@@ -34,6 +34,14 @@ which ones you ran and which you did not.
 as a failure with no steps recorded, so no branch has CI evidence and every check
 must be run locally. Cite this section in a PR instead of explaining it again.
 
+**Standing limit: source closure fails until the large inputs are restored.** A
+checkout carries the pinned source records but not the large files they pin, such
+as the shared star panorama, the title font and the mission science cubes. So
+`tests/objects/source-closure.test.mts` fails once per body, and
+`pnpm test:preparation` fails with it. `pnpm prepare:checkout` restores them.
+Where an input cannot be restored, name the body and the input and cite this
+section instead of explaining the failure again.
+
 ## Where things live
 
 | You want to | Read |
