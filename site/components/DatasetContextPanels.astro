@@ -5,7 +5,6 @@ import { EXPLORATION, referenceUrl } from '../exploration-catalog.mts';
 import { SOURCE_CATALOGUE, SOURCES } from '../sources-catalog.mts';
 import PlanetCard from './PlanetCard.astro';
 import SelectedContent from './SelectedContent.astro';
-import PlanetBreadcrumbs from './PlanetBreadcrumbs.astro';
 const { objectId, lenses, provenance, deferMissionContent } = Astro.props;
 const contexts = deferMissionContent ? [] : (lenses?.controls ?? []).map(lens => ({ lens,
   ...datasetContext(objectId, lens.id, provenance, EXPLORATION.graph, EXPLORATION.catalog, SOURCE_CATALOGUE.usage, SOURCES),
@@ -24,8 +23,7 @@ const contexts = deferMissionContent ? [] : (lenses?.controls ?? []).map(lens =>
           <article class="planet-machine" data-mission={mission.id}>
             <SelectedContent {title} lead={mission.shortName && mission.name.value} description={mission.description.value} href={referenceUrl(mission.description)}>
               <div slot="header" class:list={{ 'planet-machine-preview': Boolean(image || emblem) }}>
-                <div class="planet-machine-heading">
-                  <PlanetBreadcrumbs {objectId} includeObject />
+                <div class:list={['planet-machine-heading', image?.kind === 'published-photograph' && 'planet-machine-heading-backdrop']}>
                   <h3 class="planet-lens-details-title">{title}</h3>
                   {dates && <span class="planet-selected-content-meta">{dates}</span>}
                 </div>

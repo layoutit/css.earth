@@ -1775,7 +1775,7 @@
     {
       "id": "arecibo-305m",
       "name": {
-        "value": "Arecibo 305-m antenna",
+        "value": "Arecibo",
         "citations": [
           {
             "catalogueId": "pds-telescope-arecibo-305m",
@@ -1851,7 +1851,8 @@
             "checkedOn": "2026-09-11"
           }
         ]
-      }
+      },
+      "imageId": "arecibo-305m"
     },
     {
       "id": "goldstone-dss14",
@@ -1932,12 +1933,13 @@
             "checkedOn": "2026-09-11"
           }
         ]
-      }
+      },
+      "imageId": "goldstone-dss14"
     },
     {
       "id": "vlt-ut3",
       "name": {
-        "value": "VLT Unit Telescope 3",
+        "value": "VLT UT3",
         "citations": [
           {
             "catalogueId": "pds-telescope-vlt-ut3",
@@ -1982,7 +1984,8 @@
             "checkedOn": "2026-09-11"
           }
         ]
-      }
+      },
+      "imageId": "vlt-ut3"
     },
     {
       "id": "alma",
@@ -2045,12 +2048,13 @@
             "checkedOn": "2026-09-11"
           }
         ]
-      }
+      },
+      "imageId": "alma"
     },
     {
       "id": "irtf",
       "name": {
-        "value": "NASA IRTF",
+        "value": "IRTF",
         "citations": [
           {
             "catalogueId": "pds-telescope-irtf",
@@ -2108,7 +2112,8 @@
             "checkedOn": "2026-09-11"
           }
         ]
-      }
+      },
+      "imageId": "irtf"
     },
     {
       "id": "spitzer",
@@ -2158,7 +2163,8 @@
             "checkedOn": "2026-09-11"
           }
         ]
-      }
+      },
+      "imageId": "spitzer"
     },
     {
       "id": "herschel",
@@ -2267,7 +2273,8 @@
             "checkedOn": "2026-09-11"
           }
         ]
-      }
+      },
+      "imageId": "vlba"
     }
   ],
   "missions": [
@@ -4126,6 +4133,15 @@
           }
         ]
       },
+      "shortName": {
+        "value": "Arecibo radar",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
       "description": {
         "value": "Solar system radar observations from the Arecibo 305-m antenna, transmitting at 430 MHz and later 2380 MHz. The programme ended with the antenna in 2020.",
         "citations": [
@@ -4187,12 +4203,22 @@
             "checkedOn": "2026-09-11"
           }
         ]
-      }
+      },
+      "imageId": "arecibo-305m"
     },
     {
       "id": "goldstone-solar-system-radar",
       "name": {
         "value": "Goldstone Solar System Radar",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "shortName": {
+        "value": "Goldstone radar",
         "citations": [
           {
             "catalogueId": "pds-telescope-goldstone-dss14",
@@ -4240,12 +4266,22 @@
             "checkedOn": "2026-09-11"
           }
         ]
-      }
+      },
+      "imageId": "goldstone-dss14"
     },
     {
       "id": "eso-sphere-asteroid-survey",
       "name": {
         "value": "ESO large programme 199.C-0074",
+        "citations": [
+          {
+            "catalogueId": "vernazza-2021-survey",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "shortName": {
+        "value": "VLT/SPHERE",
         "citations": [
           {
             "catalogueId": "vernazza-2021-survey",
@@ -4305,12 +4341,22 @@
             "checkedOn": "2026-09-11"
           }
         ]
-      }
+      },
+      "imageId": "vlt-ut3"
     },
     {
       "id": "eso-muse-galilean-moons",
       "name": {
         "value": "ESO programme 0103.C-0769(A)",
+        "citations": [
+          {
+            "catalogueId": "source-io-io-muse-original-485nm-slope-2",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "shortName": {
+        "value": "VLT/MUSE",
         "citations": [
           {
             "catalogueId": "source-io-io-muse-original-485nm-slope-2",
@@ -4349,7 +4395,8 @@
             }
           ]
         }
-      ]
+      ],
+      "imageId": "vlt-ut3"
     }
   ]
 }

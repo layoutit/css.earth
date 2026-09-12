@@ -575,6 +575,12 @@
 .planet-machine-preview { position: relative; }
 .planet-machine-preview > .planet-machine-heading { position: absolute; inset: 0 0 auto; z-index: 1; pointer-events: none; }
 .planet-machine-heading .planet-lens-details-title { margin-bottom: 0; }
+/* A model render arrives on the sidebar's own near-black, so its title needs no
+   help. A published photograph is bright and busy, so the heading takes a light
+   wash rather than a runtime gradient over the image. */
+.planet-machine-heading-backdrop { padding: 8px 12px 10px; background: rgb(0 0 0 / .35); }
+/* Over artwork the date reads with the title, not as muted sidebar metadata. */
+.planet-machine-heading-backdrop .planet-selected-content-meta { color: var(--shell-text); }
 .planet-machine-heading .planet-selected-content-meta { display: block; }
 .planet-machine, .planet-capture-notes { font: 400 13px/18px var(--shell-ui-font); }
 .planet-machine a, .planet-capture-notes a { color: inherit; text-underline-offset: 3px; }
