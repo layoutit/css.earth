@@ -4,7 +4,7 @@ import { searchDestinations } from './destination-search.mts';
 
 /** A row of the prepared cross-body feature index: enough to list, navigate and select. */
 export interface IndexedFeature { readonly objectId: string; readonly id: string; readonly name: string; readonly type: string; readonly diameterKm: number; readonly searchNames: readonly string[]; readonly searchContext: string; }
-interface FeatureIndex { readonly objects: readonly { readonly id: string; readonly name: string; readonly route: string; readonly count: number }[]; readonly features: readonly IndexedFeature[]; }
+interface FeatureIndex { readonly objects: readonly { readonly id: string; readonly name: string; readonly route: string; readonly count: number; readonly lensIds?: readonly string[] }[]; readonly features: readonly IndexedFeature[]; }
 interface FeatureIndexPin { readonly url: string; readonly bytes: number; readonly sha256: string; readonly count: number; }
 
 const kilometres = new Intl.NumberFormat('en', { maximumFractionDigits: 0 });
@@ -24,6 +24,7 @@ function parseIndex(value: unknown, pin: FeatureIndexPin): FeatureIndex {
   }
   for (const object of value.objects as unknown[]) {
     if (!record(object) || ['id', 'name', 'route'].some(key => typeof object[key] !== 'string')) throw new TypeError('Feature index object is invalid.');
+    if (object.lensIds !== undefined && (!Array.isArray(object.lensIds) || !object.lensIds.length || !object.lensIds.every(id => typeof id === 'string' && id.length > 0))) throw new TypeError('Feature index datasets are invalid.');
   }
   return value as unknown as FeatureIndex;
 }
@@ -39,6 +40,7 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
   const hint = requiredElement(root, '.planet-feature-hint');
   const buttons = [...root.querySelectorAll('button')];
   const events = new AbortController();
+  const currentObjectId = () => documentTarget.body.dataset.objectShell || objectId;
   let provider: SurfaceFeatureNavigationRuntime | null = null, index: FeatureIndex | null = null, pending: Promise<FeatureIndex> | null = null;
   let matches: IndexedFeature[] = [], query = '', revision = 0, destroyed = false, selecting = false;
   function clearRows() {
@@ -69,18 +71,18 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
       const names = new Map(index.objects.map(object => [object.id, object.name]));
       // The mounted body's own matches list first; other bodies follow in search order.
       const ranked = searchDestinations(index.features.map(feature => ({ feature, names: feature.searchNames, searchContext: `${feature.searchContext} ${names.get(feature.objectId)?.toLocaleLowerCase('en') ?? ''}` })), value, buttons.length).map(match => match.feature);
-      matches = [...ranked.filter(feature => feature.objectId === objectId), ...ranked.filter(feature => feature.objectId !== objectId)];
+      matches = [...ranked.filter(feature => feature.objectId === currentObjectId()), ...ranked.filter(feature => feature.objectId !== currentObjectId())];
       for (const [row, button] of buttons.entries()) {
         const feature = matches[row];
         button.parentElement!.hidden = !feature;
         if (!feature) continue;
-        const body = feature.objectId === objectId ? '' : ` · ${names.get(feature.objectId) ?? feature.objectId}`;
+        const body = feature.objectId === currentObjectId() ? '' : ` · ${names.get(feature.objectId) ?? feature.objectId}`;
         requiredElement(button, '.planet-destination-result-name').textContent = feature.name;
         const size = feature.diameterKm > 0 ? `${kilometres.format(feature.diameterKm)} km` : ['LS', 'IM', 'SS', 'RT'].includes(feature.searchContext) || /site|traverse|position/u.test(feature.type.toLowerCase()) ? '' : 'size unpublished';
         requiredElement(button, '.planet-destination-result-context').textContent = `${feature.type}${size ? ` · ${size}` : ''}${body}`;
         button.ariaLabel = `${feature.name}, ${feature.type}${size ? `, ${feature.diameterKm > 0 ? `${kilometres.format(feature.diameterKm)} kilometres` : size}` : ''}${body}`;
       }
-      hint.textContent = matches.length ? 'Named features · IAU Gazetteer' : 'No matching named features.';
+      hint.textContent = matches.length ? 'Named features' : 'No matching named features.';
       onResults(matches.length || 1);
     } catch {
       if (destroyed || request !== revision) return;
@@ -94,7 +96,18 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
     for (const button of buttons) button.disabled = true;
     try {
       onSelected(feature);
-      if (feature.objectId === objectId && provider) await provider.select(feature.id);
+      if (feature.objectId === currentObjectId() && provider) {
+        const lensIds = index?.objects.find(object => object.id === feature.objectId)?.lensIds;
+        if (lensIds) {
+          const lenses = [...documentTarget.querySelectorAll<HTMLButtonElement>('button[name="lens"]')];
+          if (!lenses.some(button => button.ariaPressed === 'true' && lensIds.includes(button.value))) {
+            const lens = lenses.find(button => lensIds.includes(button.value));
+            if (!lens) throw new Error('The feature source dataset is unavailable.');
+            lens.click();
+          }
+        }
+        await provider.select(feature.id);
+      }
       else documentTarget.dispatchEvent(new CustomEvent('objectnavigate', { bubbles: true, detail: { objectId: feature.objectId, feature: feature.id } }));
     } finally {
       selecting = false;
